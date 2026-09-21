@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "classification": "CONTROLLER_CORR01_VALIDATION__CANDIDATE_ONLY__BOUNDED_PRESENTATION_CORRECTION_REQUIRED",
+  "controllerDisposition": "EVIDENCE_CHAIN_CLOSED__PRESENTATION_PARITY_OPEN_PRODUCT__GENUINE_BROWSER_OPEN_ENVIRONMENT__NO_ACCEPTANCE__NO_PROMOTION",
+  "exactProduct": {
+    "canonicalSourceSha256": "5205d2a3d0db441e030a046bc831549728cc95b9c09ff9d2fa4233ba1672fd66",
+    "canonicalSourceFiles": 272,
+    "normalizedTreeAlgorithm": "CEP-NORMALIZED-TREE-V1__POSIX_PATH_SIZE_SHA256",
+    "normalizedTreeSha256": "d6743fe7b41c39050656ec10d99938f28db88a27a7f5ae3bc8a47d915d6d5d75",
+    "productFiles": 2143,
+    "productBytes": 105549338,
+    "delta": {
+      "changed": 105,
+      "added": 17,
+      "modified": 87,
+      "removed": 1,
+      "removedPath": "assurance/PSC_PERSISTENCE_EVIDENCE/runtime-data/cep.sqlite"
+    },
+    "dependencies": "NO_DEPENDENCY_ADDITION__PACKAGE_LOCK_SHA_UNCHANGED"
+  },
+  "candidatePackage": {
+    "filename": "CEP_R6_CORR01_BALANCED6_CANDIDATE_5205d2a3.zip",
+    "bytes": 58187666,
+    "sha256": "03fa724c20c4b41847f4418bbd9d512e8dd64c152c1e7e28f6f55e04fd23ed4b",
+    "entries": 2143,
+    "crc": "PASS"
+  },
+  "baselinePackage": {
+    "filename": "CEP_WRITER_BASELINE_R6CORR01_BALANCED6_5205d2a3_TREE_29791008_20260921.zip",
+    "bytes": 98202659,
+    "sha256": "275c1c5ecc0ef8d3ced8192a0cee16deac3702ceaf0d3dcbff871dfd3e0430e8",
+    "entries": 2231,
+    "crc": "PASS",
+    "baselineTreeSha256": "297910081b6f07d7b7376cf37f6456d8e795f78434a842222f5f1eabd9daf02d",
+    "manifestedFilesExcludingManifest": 2230,
+    "productByteExactCandidate": true
+  },
+  "controllerCorrectedEvidencePackage": {
+    "filename": "CEP_R6_CORR01_BALANCED6_EVIDENCE_CONTROLLER_CORR01_5205d2a3.zip",
+    "bytes": 8582938,
+    "sha256": "a4974adfb4e4043e71d629d89957b0541d8333af7eb1dc0f4667939d110ae8a1",
+    "entries": 111,
+    "crc": "PASS"
+  },
+  "balanced6": {
+    "profile": "ACCEPTANCE_BALANCED_6",
+    "classification": "LOCAL_DEV_ACCEPTANCE_SEED__DETERMINISTIC__RESETTABLE__NON_PRODUCTION",
+    "exactSeedCount": 6,
+    "focusedTests": {
+      "pass": 32,
+      "fail": 0,
+      "total": 32
+    },
+    "baselineState": {
+      "documents": 6,
+      "revisions": 6,
+      "ftsRows": 6
+    },
+    "idempotency": "PASS__SECOND_SEED_UNCHANGED",
+    "restartReadback": "PASS",
+    "sqliteIntegrity": "ok",
+    "foreignKeyCheck": "PASS__ZERO_ROWS",
+    "schema": "schema-v1__NO_UNAUTHORIZED_MIGRATION",
+    "fts": "PASS__D03_D05_D09__REBUILD_DOES_NOT_MUTATE_COMMITTED_TRUTH",
+    "explicitSave": "PASS",
+    "autosave": "PASS__DRAFT_ONLY",
+    "recovery": "PASS__RECOVERY_ONLY_UNTIL_EXPLICIT_SAVE",
+    "staleSave": "PASS__ATOMIC_REJECTION",
+    "provenance": "PASS",
+    "bidi": "PASS",
+    "negativeGuards": [
+      "7th KU rejected",
+      "wrong ID/title/hash rejected",
+      "no production/canonical relabel",
+      "no UI->SQLite bypass",
+      "Learn does not infer Mastery/grading/lab success",
+      "RQ does not fabricate formal Review",
+      "Visualize local projection remains non-canonical"
+    ]
+  },
+  "independentlyReproducedNonBrowserRegression": {
+    "node": "v22.16.0",
+    "modelTests": {
+      "pass": 210,
+      "fail": 0
+    },
+    "npmCheck": "PASS",
+    "runtimeBuild": "PASS",
+    "xtermBuiltAsset": "PASS__dist/vendor/xterm/xterm.mjs",
+    "runtimeCheck": "PASS",
+    "providerPersistenceFalsification": {
+      "pass": 9,
+      "fail": 0
+    },
+    "section30Targeted": {
+      "pass": 10,
+      "fail": 0
+    },
+    "freshExtractionNonBrowserRegression": "PASS"
+  },
+  "presentation": {
+    "writerScreenshots": 46,
+    "writerManualReviewAcceptedByController": false,
+    "controllerFinding": "R6-PRESENTATION-REFERENCE-PARITY-FAIL__OPEN_PRODUCT",
+    "reason": "Multi-surface state/viewport-matched parity remains materially weaker or unproven across multiple W01/W03/W04/W05 surfaces."
+  },
+  "genuineBrowser": {
+    "status": "OPEN_ENVIRONMENT",
+    "exactCode": "OPEN_ENVIRONMENT__LOOPBACK_BLOCKED_BEFORE_PRODUCT_RECEIPT",
+    "error": "net::ERR_BLOCKED_BY_ADMINISTRATOR",
+    "attemptedHosts": [
+      "127.0.0.1",
+      "localhost",
+      "0.0.0.0",
+      "cep.local"
+    ],
+    "genuineHttpRoutePassClaimed": false,
+    "backForwardPassClaimed": false,
+    "xtermHttpLoadPassClaimed": false,
+    "productArchitectureMutatedToBypassEnvironment": false
+  },
+  "evidenceChain": {
+    "status": "CLOSED_PROVEN_BY_CONTROLLER_CORR01",
+    "priorEvidenceZipSha256": "fb9ecec439f1b3a1fa88fe6a6b351625225748bb34da90048fea6ea434914656",
+    "correctionRecord": "CONTROLLER_EVIDENCE_CHAIN_CORRECTION.json",
+    "closureDocumentsAreExternal": true
+  },
+  "candidateOnly": true,
+  "noGitHubPushPerformed": true,
+  "noProductMutationInThisControllerCorrection": true
+}
