@@ -19,6 +19,8 @@ jobs:
           python-version: '3.13'
       - name: Install dependencies
         run: npm ci
+      - name: Remove validation-only workflow from working-tree manifest view
+        run: rm -rf .github
       - name: Verify normalized repository manifest
         run: python3 cep-writer/tools/verify_repo.py
       - name: Build runtime
@@ -31,5 +33,7 @@ jobs:
         run: npm run runtime:check
       - name: Balanced6 acceptance
         run: npm run test:balanced6
+      - name: R6 correction targeted falsification
+        run: node tools/r6-corr01-targeted-tests.mjs
       - name: Product source remained unchanged
         run: git diff --exit-code -- stack/native-typescript package.json package-lock.json contracts profiles

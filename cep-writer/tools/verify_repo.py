@@ -6,8 +6,12 @@ man=json.loads((root/'cep-writer'/'REPOSITORY_MANIFEST.json').read_text(encoding
 expected={x['path']:(x['size'],x['sha256']) for x in man['entries']}
 actual={}
 for p in root.rglob('*'):
-    if p.is_file() and p.relative_to(root).as_posix()!='cep-writer/REPOSITORY_MANIFEST.json':
-        rel=p.relative_to(root).as_posix(); b=p.read_bytes(); actual[rel]=(len(b),hashlib.sha256(b).hexdigest())
+    if not p.is_file():
+        continue
+    rel=p.relative_to(root).as_posix()
+    if rel=='cep-writer/REPOSITORY_MANIFEST.json' or rel.startswith('.git/') or rel.startswith('node_modules/'):
+        continue
+    b=p.read_bytes(); actual[rel]=(len(b),hashlib.sha256(b).hexdigest())
 if set(actual)!=set(expected):
     print('PATH_SET_MISMATCH',sorted(set(actual)-set(expected))[:10],sorted(set(expected)-set(actual))[:10]);sys.exit(2)
 bad=[k for k,v in expected.items() if actual[k]!=v]
