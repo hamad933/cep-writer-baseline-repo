@@ -1,30 +1,17 @@
-# CEP Writer Baseline - START HERE
+# START HERE - CEP Presentation CORR02 Writer
 
-This `main` branch is the Controller-bound Writer execution baseline, not an active mutation mission and not Product acceptance authority.
+This is a task-bound candidate branch. Product mutation has NOT started.
 
-## Required common reading order
-
-1. repository root `README.md`;
-2. `WRITER_AUTHORITY_BASELINE.md`;
-3. `authority/WRITER_OWNER_DECISIONS.csv`;
-4. `WRITER_INPUT_MANIFEST.json`;
-5. `REPOSITORY_BOUNDARY.md`;
-6. `GIT_WORKFLOW.md`;
-7. exact `references/surface-profiles/`, domain/oracle documents and governed visual-reference images required by the task;
-8. applicable `profiles/`, `contracts/`, Product and tooling paths.
-
-A mission branch adds an exact immutable task overlay. On a mission branch, the task overlay and its applicable Owner-decision snapshot narrow the common baseline.
-
-## Authority clarity
-
-Do NOT blanket-read root `authority/`. It is a mixed traceability/build-test corpus, not the Writer authority entry point. See `authority/README.md` and read only exact root-authority files named by the task/packet/verifier.
-
-Do NOT treat `README_START_HERE_AR.md` as current Writer authority; it is historical lineage.
-
-Before changing a Surface, inspect the actual governed reference image binary, its SurfaceProfile, the applicable domain/oracle truth and current packaged Owner decisions. A visual reference governs Presentation only; it never replaces Surface semantics or data/provider truth.
-
-## Mutation boundary
-
-A Writer mutates only a Controller-bound mission branch created from an exact `main` baseline. Never mutate `main`, never self-merge/release/promote, and never edit `cep-writer/` unless the Controller explicitly updates the packet before execution.
-
-GitHub is the self-contained Writer execution plane. Google Drive remains the live Controller/custody plane.
+1. Work only from a separate manual Git clone of `writer/presentation-corr02-google-ai-studio`; built-in AI Studio main sync is not the mission transport.
+2. Run `python3 cep-writer/tools/verify_repo.py`.
+3. Read repository `README.md`, `GIT_WORKFLOW.md`, `TASK_BINDING.json`, `CURRENT_MISSION.md`.
+4. Read `authority/AUTHORITY_PACKET.md` and `authority/APPLICABLE_OWNER_DECISIONS.csv`.
+5. Verify `PARENT_IDENTITY.json`.
+6. For the ACTIVE batch only, read the exact SurfaceProfiles/domain oracles and OPEN the actual local governed visual-reference image binaries before editing.
+7. Do not blanket-read root `authority/`; use exact task-directed files only.
+8. Inspect Controller findings under `controller-input/`.
+9. Change only authorized genuine Product Presentation/composition owners; never edit `cep-writer/` as the Writer.
+10. Execute CORR02 serially according to the small-batch plan in `CURRENT_MISSION.md`; stop for Owner visual review after each batch.
+11. Before final Owner approval, do not push Product results or final evidence.
+12. After final Owner approval, final Git CLI push may target only the candidate branch; never main.
+13. Return exact candidate HEAD as CANDIDATE_ONLY pending independent Controller audit.
