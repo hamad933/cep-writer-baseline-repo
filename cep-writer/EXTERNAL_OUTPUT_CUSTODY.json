@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "classification": "NORMALIZATION_EXTERNAL_CUSTODY_RECEIPT",
   "sourceRepository": "hamad933/cep-writer-baseline-repo",
   "sourceBootstrapCommit": "44f922e29e02363d00cc31ae6daeeca01dc9081a",
@@ -9,7 +9,12 @@
     "sha256": "c43ef7f3b74db8b58f4f8396e6f2f71987fa7e349dd413dc93ad91906f67f45f",
     "bytes": 98075377
   },
-  "removedFiles": 810,
-  "removedWorkingTreeBytes": 73165801,
-  "truth": "Removed bytes remain preserved in exact Drive package and task lineage; required Writer references stay in Git."
+  "protectedKeptBuildTestInput": {
+    "path": "assurance/R6_OD057_BROWSER/",
+    "files": 48,
+    "reason": "Current npm check and R6 targeted falsification hash/read this evidence set."
+  },
+  "removedFiles": 762,
+  "removedWorkingTreeBytes": 66832543,
+  "truth": "Removed bytes remain preserved in the exact Drive package and/or task lineage. R6_OD057_BROWSER remains in Git because current build/test gates consume it. Required Writer references remain in Git."
 }
