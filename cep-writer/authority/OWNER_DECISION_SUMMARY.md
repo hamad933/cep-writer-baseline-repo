@@ -17,3 +17,4 @@
 - **OD-20260920-060** — No framework/ORM/DB/runtime/dependency expansion; stack is expansion-locked, not frozen.
 - **OD-20260921-061** — Exact R6-correction + Balanced6 lineage is protected; no R6 restart or Balanced6 replay as new work.
 - **OD-20260921-062** — Writer repo is a lean execution package: applicable authority only, never a second live control plane.
+- **OD-20260921-066** — `main` is Controller-bound baseline only; Writer work/push occurs only on the exact mission candidate branch; no direct main push/merge/release; Controller audits branch HEAD before any integration.
