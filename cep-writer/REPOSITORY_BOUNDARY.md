@@ -1,9 +1,3 @@
-# Repository / Product Boundary
+# Repository / Product / Custody Boundary
 
-Repository root contains:
-- the exact Product parent files; and
-- the repo-only `cep-writer/` execution context.
-
-`cep-writer/` MUST NOT be copied into a Product candidate ZIP. Use `cep-writer/tools/export_product.py` to create a clean Product working/export tree. The Product canonical source identity remains derived from `stack/native-typescript/`; repository-only files do not alter that identity.
-
-Do not delete or rewrite Product lineage/evidence files merely because they are old. Their presence is Product-package lineage. Do not treat them as current authority unless the mission explicitly says so.
+GitHub main contains the Writer-complete baseline: Product + build/test inputs + common Writer authority/reference inputs. Mission branches inherit it and add only task overlay, legal Product delta and bounded small handoff/results. Required reference binaries stay in Git when Writers need them. Heavy generated outputs stay in Google Drive with hash-bound branch receipts. `cep-writer/` is excluded from Product candidate exports. Drive remains live Controller authority/custody; Git never self-promotes acceptance.

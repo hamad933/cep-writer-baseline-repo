@@ -1,16 +1,5 @@
 # CORR02 Task-Packet Overlay
 
-This candidate branch is derived exactly from bootstrap baseline commit:
-`44f922e29e02363d00cc31ae6daeeca01dc9081a`.
+This branch inherits validated Writer-complete main exactly from 7c499ba9c042dfc7aad7e7cd62757a6e1c75c243.
 
-The existing `cep-writer/REPOSITORY_MANIFEST.json` remains the immutable manifest for that bootstrap baseline. It is intentionally not rewritten merely because Controller-owned task instructions were corrected after bootstrap.
-
-This branch adds a **Controller task-packet overlay only**:
-- branch workflow under `OD-20260921-066`;
-- corrected repository-mode mission wording;
-- candidate-branch output boundary.
-
-These overlay files are not Product source. Product identity must still be verified through `PARENT_IDENTITY.json` and the exact Product paths. No Product bytes were changed by this task-packet correction.
-
-Current candidate branch:
-`writer/presentation-corr02-google-ai-studio`
+Task-specific additions are limited to CORR02 mission/parent binding, applicable Owner decisions, Controller inputs, Git/AI-Studio launch instructions, bounded output path, and branch-specific manifests. Product/build/test/reference inputs are inherited from main. No Product bytes changed by this rebind. No required Writer input may depend on live Drive.

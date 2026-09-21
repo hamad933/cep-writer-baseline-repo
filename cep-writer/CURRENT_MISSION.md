@@ -1,40 +1,3 @@
-# CEP — CURRENT WRITER MISSION — REPOSITORY EXECUTION BINDING
-
-**Canonical mission:** `MISSION_R6_PRESENTATION_PARITY_CORR02`
-**Canonical mission Drive ID:** `1AFGtiiIvgwZK4nxvnJU3ZC1FuSBGWvoq`
-**Exact Product parent:** `5205d2a3d0db441e030a046bc831549728cc95b9c09ff9d2fa4233ba1672fd66 / 272`
-**Repository authority boundary:** `OD-20260921-062`
-
-## Repository-mode authority resolution
-
-This repository was assembled by the CEP Controller as a **lean self-contained Writer execution package**. The live Controller workspace is intentionally NOT copied into this repository. Do not infer current project acceptance, promotion, release, or readiness from repository contents.
-
-For this mission, satisfy the canonical mission's authority-read requirement from the packaged task authority set in this exact order:
-
-1. `cep-writer/CURRENT_MISSION.md` (this binding + the canonical mission below);
-2. `cep-writer/authority/AUTHORITY_PACKET.md`;
-3. `cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv`;
-4. `cep-writer/references/23_SURFACE_ZERO_LOSS_IDENTITY_REFERENCE_MATRIX.md`;
-5. exact touched `cep-writer/references/surface-profiles/*.json`;
-6. `cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md` and actual binaries under `cep-writer/references/visual/`;
-7. applicable W03/W04/W05 domain oracles and interaction contract;
-8. `cep-writer/controller-input/*`;
-9. exact current Product source in repository root.
-
-If the Controller later declares this packet stale or supplies a newer Owner decision/mission amendment, STOP and use the refreshed packet. Do not fetch or mutate live governance on your own.
-
-## Hard repository boundary
-
-- Repository root is the exact Product parent plus the repo-only `cep-writer/` directory.
-- `cep-writer/` is **not Product source** and MUST be excluded from final Product candidate packaging.
-- Do not edit any file under `cep-writer/authority/` or `cep-writer/references/` as a way to make Product pass.
-- Final Product changes belong only to genuine Product paths.
-- No self-promotion, no GitHub release, no live-governance mutation.
-
----
-
-# Canonical Mission
-
 # CEP — MISSION_R6_PRESENTATION_PARITY_CORR02
 
 **Role:** EXECUTION WRITER — serialized multi-owner Presentation correction only  
@@ -47,37 +10,80 @@ This mission exists because the Independent Controller audit retained the exact 
 The Controller already closed the separate evidence-chain/package defect through `CONTROLLER_EVIDENCE_CORR01`; do not re-open or re-implement that correction.
 
 
-### 0.1 Repository execution binding — OD-20260921-066
+### 0.1 Repository execution binding — OD-20260921-066 / OD-20260921-067
 
-- Repository: `hamad933/cep-writer-baseline-repo`
-- Baseline branch: `main`
-- Exact base commit: `44f922e29e02363d00cc31ae6daeeca01dc9081a`
-- Exact Writer candidate branch: `writer/presentation-corr02-google-ai-studio`
-- Product parent remains `5205d2a3d0db441e030a046bc831549728cc95b9c09ff9d2fa4233ba1672fd66 / 272`
+This mission is now executed in the long-lived Writer repository:
 
-The Writer may commit/push only to the candidate branch above. Never push directly to `main`, merge to `main`, create a release, edit `cep-writer/` authority/reference files, mutate live governance, or self-promote.
+- repository: `hamad933/cep-writer-baseline-repo`;
+- baseline branch: `main`;
+- exact normalized Writer baseline commit: `7c499ba9c042dfc7aad7e7cd62757a6e1c75c243`;
+- normalization validation: GitHub Actions run `35555465695` = `PASS`;
+- baseline repository content tree: `203b356a234a94d752dd4f3de2aa50675ae6dbe746a79ac0c0259729b728193e` / `1,469` manifested files;
+- exact Writer candidate branch: `writer/presentation-corr02-google-ai-studio`;
+- Product parent inside that base remains `5205d2a3d0db441e030a046bc831549728cc95b9c09ff9d2fa4233ba1672fd66 / 272`.
 
-Small textual handoff/evidence may be written only under:
+The Writer MAY commit and push only to `writer/presentation-corr02-google-ai-studio`.
+
+AI Studio branch-safety gate:
+- if AI Studio exposes a branch selector, select `writer/presentation-corr02-google-ai-studio`;
+- if AI Studio does not expose a branch selector and follows the repository default branch, the Owner must temporarily set the repository default branch to `writer/presentation-corr02-google-ai-studio` before import;
+- never permit AI Studio to write to `main`;
+- after Writer handoff and Controller audit, restore the repository default branch to `main`.
+
+The Writer MUST NOT:
+- push directly to `main`;
+- merge/rebase the candidate into `main`;
+- create a release or acceptance tag;
+- edit `cep-writer/` Controller authority/reference files;
+- mutate Drive live governance/accepted-successor custody;
+- self-promote any result.
+
+Small textual mission handoff/evidence may be written only under:
 `writer-output/presentation-corr02/`
 
-The exact branch HEAD is the Writer result identity. Heavy candidate/evidence/baseline ZIP custody is rebuilt by the Controller after independent audit.
+Do not commit candidate/evidence/baseline ZIPs, large screenshot sets, `node_modules`, build caches, or generated dependency trees to GitHub. The exact branch HEAD is the Writer result identity. The Controller will independently audit that HEAD and build final heavy candidate/evidence/baseline custody after review.
 
 
-## 1. Mandatory live reads before mutation
+### 0.2 Writer-input self-containment gate — OD-20260921-067
 
-Read exact current live authority first:
+This mission must execute from a Writer-complete repository snapshot. Required execution inputs are repository content, not live Drive dependencies.
 
-1. `READ_FIRST.md` — Drive `1r6XU0zhlAjdrK3OrzkXzHLA2WknWip6h`
-2. `CURRENT_STATE.md` — Drive `164CDevKZ48ZAXke44oL3jXIVpYQJBmRu`
-3. `CONTROLLER_GOVERNANCE.md` — Drive `1xZSIBmNWcc6DtWuQ30R_5uHLg7AT9hB_`
-4. all applicable ACTIVE / ACTIVE_PLATFORM_GATED rows in `OWNER_DECISION_LIVE_REGISTER.csv` — Drive `1GF70xX-eGWNmp8VaK_gjTRrAAVq0bihh`
-5. `23_SURFACE_ZERO_LOSS_IDENTITY_REFERENCE_MATRIX.md` — Drive `1ODc-0jTWUCoZ-wVPUIpktoRn-taPEI_x`
-6. `FINAL_VISUAL_REFERENCE_REGISTER.md` — Drive `1l97eSpCZ0tsNGDgEhHXmiyjhoCgpuEz4`
-7. `CEP_VIS_001_FINAL_VISUAL_AND_INTERACTION_CONTRACT_v1.0_APPROVED.md` — Drive `1hhnXSpT3usVGjiR9OtkxtMxWFxy41CE_`
-8. exact SurfaceProfiles for every touched Surface and ORACLE-007 / ORACLE-011 / ORACLE-012 where applicable.
-9. Controller-corrected evidence package — Drive `15LmsW_xRPdQEwXtFPqLnC2riK3i-5BM5`.
+Before Product mutation:
+- verify `cep-writer/WRITER_INPUT_MANIFEST.json` (or the Controller-designated successor manifest) resolves every mission-required local input;
+- verify exact hashes for the packaged mission, applicable Owner decisions, affected SurfaceProfiles, domain/oracle/technical references and governed visual-reference images;
+- verify all required reference binaries can be opened directly from the repository;
+- verify no mandatory task read points only to a live Drive file.
 
-Pay special attention to `OD-20260916-044`, `OD-20260918-055`, `OD-20260918-056`, `OD-20260920-059`, `OD-20260920-060`, and `OD-20260921-061`.
+Drive IDs in the packaged task material are provenance/custody identifiers only unless the Controller explicitly classifies an artifact as an external generated-output receipt. If a required Writer input is missing from the repository, STOP with:
+`WRITER_INPUT_INCOMPLETE`.
+
+Reference images/PDFs/fixtures required to perform the mission are valid Git inputs and must not be skipped merely because they are binary or relatively large.
+
+Heavy GENERATED outputs remain external by default. When large result artifacts are placed in Drive, commit only a bounded receipt under `writer-output/presentation-corr02/` containing exact Drive ID/path, filename, bytes, SHA-256, branch/commit identity, Product/source identity and classification.
+
+
+
+## 1. Mandatory packaged reads before mutation
+
+The Controller resolves live authority before branch launch. The Writer must consume the **packaged repository copies** of every required execution input and must not depend on live Drive reads.
+
+Read, from `cep-writer/` and its bound local references:
+1. `START_HERE.md`;
+2. `CURRENT_MISSION.md`;
+3. the exact packaged Authority Packet and applicable Owner-decision snapshot;
+4. `references/23_SURFACE_ZERO_LOSS_IDENTITY_REFERENCE_MATRIX.md`;
+5. `references/FINAL_VISUAL_REFERENCE_REGISTER.md`;
+6. `references/CEP_FINAL_VISUAL_INTERACTION_CONTRACT.md`;
+7. exact local SurfaceProfiles for every touched Surface;
+8. applicable local domain/oracle references, including W03 / W04 / W05 where required;
+9. exact local governed visual-reference images required for every affected Surface/state;
+10. packaged Controller finding/evidence summaries admitted as Writer input.
+
+Drive IDs recorded in these files remain provenance/custody identifiers only; they are not permission to substitute a live Drive lookup for a missing required repository input.
+
+Pay special attention to `OD-20260916-044`, `OD-20260918-055`, `OD-20260918-056`, `OD-20260920-059`, `OD-20260920-060`, `OD-20260921-061`, `OD-20260921-066`, and `OD-20260921-067`.
+
+If any required item above is absent, stale, hash-mismatched, or only available through a live Drive lookup, STOP with `WRITER_INPUT_INCOMPLETE`.
 
 ## 2. Exact Product parent — hard gate
 
@@ -279,7 +285,7 @@ Do not alter Product merely to make a stale harness PASS.
 
 This repository workflow supersedes the earlier requirement for the Writer to manufacture final heavy ZIP custody itself.
 
-The Writer must leave the candidate branch reproducible and produce only bounded text/small-machine-readable handoff files under:
+The Writer must leave the candidate branch in a reproducible state and produce only bounded text/small-machine-readable handoff files under:
 `writer-output/presentation-corr02/`
 
 At minimum include:
@@ -289,18 +295,36 @@ At minimum include:
 - `PRESENTATION_STATE_MATCHED_PARITY_MATRIX.csv` and/or `.json`;
 - `TEST_RESULTS.json`;
 - `FINAL_WRITER_STATUS.json`;
-- paths/hashes for large local artifacts intentionally not committed.
+- paths/hashes for any screenshots or large local artifacts that were generated but intentionally not committed.
 
-Do not commit candidate/evidence/baseline ZIPs, large screenshot sets, `node_modules`, build caches, or generated dependency trees.
+Do not commit:
+- candidate ZIPs;
+- evidence ZIPs;
+- self-contained baseline ZIPs;
+- large 23×2 screenshot sets;
+- `node_modules`;
+- build caches;
+- generated dependency trees.
 
-After handoff, the Controller audits the exact candidate-branch HEAD and regenerates required large evidence/candidate/baseline packages in controlled custody.
+After Writer handoff, the Controller checks out the exact candidate-branch HEAD, independently audits Product/Presentation/runtime/data truth, regenerates required large evidence/candidate/baseline packages in controlled custody, and decides acceptance or bounded correction.
+
+If a later Controller instruction explicitly requests a particular binary artifact in Git, that exact instruction may narrow this rule.
 
 ## 12. Required branch result
 
 The final Writer result must be one exact branch HEAD on:
 `writer/presentation-corr02-google-ai-studio`
 
-The handoff must state the exact base commit, final candidate HEAD SHA, final Product source identity, Product changed paths, dependency diff, executed test results, Presentation parity disposition for all 23 Surfaces, and every blocked/unavailable/environment-limited proof.
+The handoff must state:
+- exact base commit `7c499ba9c042dfc7aad7e7cd62757a6e1c75c243`;
+- final candidate branch HEAD SHA;
+- exact Product source identity after mutation;
+- exact Product changed paths;
+- dependency diff;
+- all executed test/regression results;
+- Presentation parity disposition for all 23 Surfaces;
+- every blocked/unavailable/environment-limited proof without fabricated PASS;
+- `CANDIDATE_ONLY__PENDING_INDEPENDENT_CONTROLLER_AUDIT`.
 
 ## 13. No self-promotion / Git boundary
 

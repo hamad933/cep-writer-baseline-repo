@@ -1,31 +1,7 @@
 # CEP Writer Authority Packet — Presentation CORR02
 
-## Purpose
-This packet is the Controller-distilled execution authority for this repository. It intentionally excludes mutable Controller-only live state. It is sufficient for this exact Writer mission when used with `CURRENT_MISSION.md`, the full applicable Owner-decision rows, SurfaceProfiles, oracles and visual references packaged here.
+Baseline main: 7c499ba9c042dfc7aad7e7cd62757a6e1c75c243. Candidate branch: writer/presentation-corr02-google-ai-studio. Product parent: 5205d2a3... / 272. Normalization validation run 35555465695 PASS. OD-067 requires every mandatory Writer input to resolve locally.
 
-## Authority order inside this repository
-1. `GIT_WORKFLOW.md` + `TASK_PACKET_OVERLAY.md`
-2. `CURRENT_MISSION.md`
-3. `APPLICABLE_OWNER_DECISIONS.csv`
-4. exact SurfaceProfile + matrix row for the Surface being changed
-5. applicable W03/W04/W05 domain oracle
-6. current visual/interaction reference for Presentation only
-7. Controller input findings
-8. existing Product implementation
+Authority order: GIT_WORKFLOW/TASK_BINDING → CURRENT_MISSION → applicable Owner decisions → exact SurfaceProfile/matrix → applicable domain oracle → visual reference for Presentation only → Controller inputs → Product implementation.
 
-## Hard laws
-- Writer Git branch workflow is governed by `OD-20260921-066`: `main` is baseline-only; mutate/push only the bound candidate branch; no merge/self-promotion.
-- `cep-writer/` is Controller-owned read-only task authority. Small Writer handoff text belongs only under `writer-output/presentation-corr02/`.
-- Product parent is exact `5205d2a3... / 272`; do not restart from R6.
-- Presentation correction may improve composition/hierarchy/spacing/density/states/interactions only through existing correct owners/seams.
-- Shared mechanics do not own Surface semantics.
-- Preserve Balanced6, SQLite, Save/Autosave/Recovery, provider truth, runtime/xterm architecture and dependency graph.
-- No framework/ORM/database/runtime/dependency expansion.
-- Reference images are Presentation authority only; never fabricate data or domain state to mimic them.
-- In-memory screenshots can prove Presentation only; genuine HTTP/Back-Forward/xterm route remains OPEN_ENVIRONMENT unless really reproduced.
-- `cep-writer/` is repository-only context; final Product candidate packaging excludes it.
-- Product assurance/history files are evidence/lineage unless the mission explicitly promotes one as a current task input; they do not override this packet.
-- No self-promotion, release, live-governance mutation or GitHub acceptance claim.
-
-## Staleness stop gate
-If the Controller provides a newer mission packet or states that any packaged Owner decision/reference is stale, stop before mutation and refresh.
+Hard laws: no direct main push/merge/release; cep-writer is read-only Controller task authority; no R6 restart; shared Presentation never overwrites Surface semantics; preserve Balanced6/SQLite/Save/runtime/xterm truth and dependency graph; no stack expansion; no fake data/provider truth; no self-promotion.
