@@ -1,9 +1,0 @@
-﻿finding_id,status,evidence,unresolved_limitation
-R6-EVIDENCE-TARGETED-EMPTY,CLOSED_PROVEN,tools/r6-corr01-targeted-tests.mjs; raw-logs/final2_targeted.json (10/10),Genuine non-empty finding-bound executable suite.
-R6-EVIDENCE-SCREENSHOT-COUNT-FALSE,CLOSED_PROVEN,SCREENSHOT_MANIFEST.json; 46 PNG binaries under assurance/R6_OD057_BROWSER,Exactly 23 surfaces x 2 viewports; JSON receipts not counted.
-R6-NAVIGATION-PROOF-NOT-CROSS-ROUTE,OPEN_ENVIRONMENT,R6_CORR01_LOOPBACK_POLICY_EVIDENCE.txt; assurance/BROWSER_CONFORMANCE_RECEIPT.json,Genuine route blocked before Product receipt; no in-memory substitute PASS.
-R6-BROWSER-PASS-CONTRADICTS-VISIBLE-ERROR,OPEN_ENVIRONMENT,raw-logs/final2_build_runtime.log; dist/vendor/xterm/xterm.mjs; R6_CORR01_LOOPBACK_POLICY_EVIDENCE.txt,Built xterm asset is present; genuine HTTP module loading cannot be reproduced in this environment.
-R6-PRESENTATION-REFERENCE-PARITY-FAIL,CLOSED_PROVEN,PRESENTATION_REVIEW.json; SCREENSHOT_MANIFEST.json,All 23 surfaces manually reviewed at both governed viewports; no material presentation blocker observed after bounded corrections.
-R6-NORMAL-UI-DIAGNOSTIC-LEAK,CLOSED_PROVEN,tools/r6-corr01-targeted-tests.mjs; m0-controller-composition.ts; ContextInspectorHost tests,Implementation owner/provider/proof internals are diagnostics-gated.
-R6-23-SURFACE-COMPLETENESS-NOT_PROVEN,PARTIALLY_CLOSED,npm test 210/210; npm run check PASS; 23-surface presentation audit; targeted suite,Model/contract/presentation coverage is green; genuine-route keyboard/pointer/history/context portions remain environment-blocked.
-R6-OWNER-DECISION-EVIDENCE-INCOMPLETE,CLOSED_PROVEN,OWNER_DECISION_DISPOSITION.csv,Decision-by-decision matrix generated for every current ACTIVE/ACTIVE_PLATFORM_GATED register row with applicability/evidence/limits.
