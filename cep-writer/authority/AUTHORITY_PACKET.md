@@ -4,15 +4,18 @@
 This packet is the Controller-distilled execution authority for this repository. It intentionally excludes mutable Controller-only live state. It is sufficient for this exact Writer mission when used with `CURRENT_MISSION.md`, the full applicable Owner-decision rows, SurfaceProfiles, oracles and visual references packaged here.
 
 ## Authority order inside this repository
-1. `CURRENT_MISSION.md`
-2. `APPLICABLE_OWNER_DECISIONS.csv`
-3. exact SurfaceProfile + matrix row for the Surface being changed
-4. applicable W03/W04/W05 domain oracle
-5. current visual/interaction reference for Presentation only
-6. Controller input findings
-7. existing Product implementation
+1. `GIT_WORKFLOW.md` + `TASK_PACKET_OVERLAY.md`
+2. `CURRENT_MISSION.md`
+3. `APPLICABLE_OWNER_DECISIONS.csv`
+4. exact SurfaceProfile + matrix row for the Surface being changed
+5. applicable W03/W04/W05 domain oracle
+6. current visual/interaction reference for Presentation only
+7. Controller input findings
+8. existing Product implementation
 
 ## Hard laws
+- Writer Git branch workflow is governed by `OD-20260921-066`: `main` is baseline-only; mutate/push only the bound candidate branch; no merge/self-promotion.
+- `cep-writer/` is Controller-owned read-only task authority. Small Writer handoff text belongs only under `writer-output/presentation-corr02/`.
 - Product parent is exact `5205d2a3... / 272`; do not restart from R6.
 - Presentation correction may improve composition/hierarchy/spacing/density/states/interactions only through existing correct owners/seams.
 - Shared mechanics do not own Surface semantics.
