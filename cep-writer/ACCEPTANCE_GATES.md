@@ -1,3 +1,3 @@
-# Common Writer Baseline Gates
+# CORR02 Writer Acceptance Gates
 
-A mission launches only after exact main/Product binding, local resolution of every required Writer input, current reference/profile/oracle/decision packaging, explicit writable/read-only/prohibited scope, and a bound candidate branch. Task-specific acceptance and falsification gates belong only to that branch. All Writer results remain CANDIDATE_ONLY pending Controller audit.
+Before handoff prove exact parent binding, state/viewport-matched Presentation parity, all-23 re-falsification, no semantic/provider/data drift, no dependency expansion, exact Product delta, npm test/check/build/runtime, Balanced6, R6 targeted regression, truthful screenshot classification, branch self-containment, and CANDIDATE_ONLY/no self-promotion.
