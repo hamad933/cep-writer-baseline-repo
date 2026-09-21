@@ -3,7 +3,7 @@ You are the CEP EXECUTION WRITER for the existing imported repository.
 FIRST verify you are working on branch:
 `writer/presentation-corr02-google-ai-studio`
 
-Do NOT work directly on `main`.
+If AI Studio does not expose a branch selector, the repository default branch must already have been temporarily set to this candidate branch before import. Do NOT work directly on `main`.
 
 Read, in order:
 1. `cep-writer/GIT_WORKFLOW.md`
