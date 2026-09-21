@@ -1,0 +1,37 @@
+name: CEP Normalization Validation V2
+on:
+  push:
+    branches:
+      - validation/writer-complete-normalization-v2
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.16.0
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install dependencies
+        run: npm ci
+      - name: Verify normalized repository manifest
+        run: |
+          rm -f .github/workflows/normalization-validation-v2.yml
+          python3 cep-writer/tools/verify_repo.py
+      - name: Build runtime
+        run: npm run build:runtime
+      - name: Model tests
+        run: npm test
+      - name: Contract and authority checks
+        run: npm run check
+      - name: Runtime falsification
+        run: npm run runtime:check
+      - name: Balanced6 acceptance
+        run: npm run test:balanced6
+      - name: Product source remained unchanged
+        run: git diff --exit-code -- stack/native-typescript package.json package-lock.json
