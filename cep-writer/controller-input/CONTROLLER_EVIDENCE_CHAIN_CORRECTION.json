@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "classification": "CONTROLLER_BOUNDED_EVIDENCE_CHAIN_CORRECTION__NO_PRODUCT_MUTATION__NO_ACCEPTANCE",
+  "productSourceSha256": "5205d2a3d0db441e030a046bc831549728cc95b9c09ff9d2fa4233ba1672fd66",
+  "candidateZipSha256": "03fa724c20c4b41847f4418bbd9d512e8dd64c152c1e7e28f6f55e04fd23ed4b",
+  "baselineZipSha256": "275c1c5ecc0ef8d3ced8192a0cee16deac3702ceaf0d3dcbff871dfd3e0430e8",
+  "priorEvidenceZipSha256": "fb9ecec439f1b3a1fa88fe6a6b351625225748bb34da90048fea6ea434914656",
+  "defect": {
+    "FINAL_VALIDATION.json": {
+      "priorReceipt": "26b408df080f72971b44900997fbc35554a90ac47b7521b4cb90e043efa2c00e",
+      "actualStandaloneSha256": "8d64a5a084c00a051ab8889469021fbb33c0ce6038bfe8a2d5d6c7e64969efc0"
+    },
+    "FINAL_HANDOFF.md": {
+      "priorReceipt": "f363681617985150d78ab683571061812034703c73bbc0919e807c8609416ee0",
+      "actualStandaloneSha256": "3d277837dd3ab71a47f8935b65cb62b2b273375ffb3a040a9b51722cec686f44"
+    }
+  },
+  "rootCause": "Final external closure documents changed after the evidence package receipts were generated. Embedding receipts for closure documents that themselves bind the evidence ZIP creates an avoidable circular evidence dependency.",
+  "correctionLaw": "Final validation/handoff are external closure documents. The corrected evidence ZIP contains no receipt for those external documents. After the corrected evidence ZIP is finalized, Controller-corrected external validation/handoff bind its exact SHA and receive external companion SHA receipts.",
+  "productMutation": false,
+  "balanced6Mutation": false,
+  "baselineMutation": false,
+  "presentationStatus": "OPEN_PRODUCT__PRESENTATION_PARITY_REQUIRES_SEPARATE_BOUNDED_WRITER_CORRECTION",
+  "browserStatus": "OPEN_ENVIRONMENT__LOOPBACK_BLOCKED_BEFORE_PRODUCT_RECEIPT"
+}

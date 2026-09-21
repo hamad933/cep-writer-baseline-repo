@@ -1,4 +1,4 @@
-name: CEP Normalization Validation
+name: CEP CORR02 Self Containment Validation
 on:
   push:
     branches:
@@ -7,7 +7,7 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -19,10 +19,48 @@ jobs:
           python-version: '3.13'
       - name: Install dependencies
         run: npm ci
-      - name: Remove validation-only workflow from working-tree manifest view
+      - name: Remove validation-only workflow from manifest view
         run: rm -rf .github
-      - name: Verify normalized repository manifest
+      - name: Verify branch repository manifest
         run: python3 cep-writer/tools/verify_repo.py
+      - name: Verify CORR02 self containment
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import csv, json
+          root=Path('.')
+          required=[
+            'cep-writer/CURRENT_MISSION.md',
+            'cep-writer/CANONICAL_MISSION_SOURCE.md',
+            'cep-writer/PARENT_IDENTITY.json',
+            'cep-writer/TASK_BINDING.json',
+            'cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv',
+            'cep-writer/authority/AUTHORITY_PACKET.md',
+            'cep-writer/references/23_SURFACE_ZERO_LOSS_IDENTITY_REFERENCE_MATRIX.md',
+            'cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md',
+            'cep-writer/references/CEP_FINAL_VISUAL_INTERACTION_CONTRACT.md',
+            'cep-writer/controller-input/FINAL_HANDOFF_CONTROLLER_CORR01.md',
+            'cep-writer/controller-input/PRESENTATION_REVIEW.json'
+          ]
+          missing=[p for p in required if not (root/p).is_file()]
+          assert not missing, missing
+          profiles=list((root/'cep-writer/references/surface-profiles').glob('*.json'))
+          assert len(profiles)==23, len(profiles)
+          visuals=list((root/'cep-writer/references/visual').rglob('*.png'))
+          assert len(visuals)>=28, len(visuals)
+          oracles=list((root/'cep-writer/references/domain-oracles').glob('*.md'))
+          assert len(oracles)>=3, len(oracles)
+          mission=(root/'cep-writer/CURRENT_MISSION.md').read_text(encoding='utf-8')
+          assert '7c499ba9c042dfc7aad7e7cd62757a6e1c75c243' in mission
+          assert 'Mandatory packaged reads before mutation' in mission
+          binding=json.loads((root/'cep-writer/TASK_BINDING.json').read_text(encoding='utf-8'))
+          assert binding['noRequiredLiveDriveFetch'] is True
+          rows=list(csv.reader((root/'cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv').open(encoding='utf-8')))
+          ids={r[1] for r in rows[1:] if len(r)>1}
+          assert 'OD-20260921-067' in ids and len(ids)==17, (len(ids),ids)
+          print(json.dumps({'status':'WRITER_SELF_CONTAINMENT_PASS','profiles':len(profiles),'visualPngs':len(visuals),'oracles':len(oracles),'ownerDecisions':len(ids)},indent=2))
+          PY
       - name: Build runtime
         run: npm run build:runtime
       - name: Model tests
@@ -35,5 +73,5 @@ jobs:
         run: npm run test:balanced6
       - name: R6 correction targeted falsification
         run: node tools/r6-corr01-targeted-tests.mjs
-      - name: Product source remained unchanged
-        run: git diff --exit-code -- stack/native-typescript package.json package-lock.json contracts profiles
+      - name: Product source remains unchanged from normalized main
+        run: git diff --exit-code 7c499ba9c042dfc7aad7e7cd62757a6e1c75c243 -- stack/native-typescript package.json package-lock.json contracts profiles
