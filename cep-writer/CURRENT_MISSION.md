@@ -38,13 +38,30 @@ If the Controller later declares this packet stale or supplies a newer Owner dec
 # CEP — MISSION_R6_PRESENTATION_PARITY_CORR02
 
 **Role:** EXECUTION WRITER — serialized multi-owner Presentation correction only  
-**Mode:** MUTATING ISOLATED CANDIDATE / EXACT 5205d2a3 PARENT / PRESENTATION-ONLY PRODUCT CORRECTION / REPACKAGE / CANDIDATE_ONLY / NO SELF-PROMOTION / NO LIVE GOVERNANCE MUTATION / NO GITHUB PUSH / NO R7 / NO STACK FREEZE
+**Mode:** MUTATING ISOLATED CANDIDATE / EXACT 5205d2a3 PARENT / PRESENTATION-ONLY PRODUCT CORRECTION / GITHUB CANDIDATE BRANCH BOUND / CANDIDATE_ONLY / NO SELF-PROMOTION / NO LIVE GOVERNANCE MUTATION / NO DIRECT MAIN PUSH / NO MERGE / NO RELEASE / NO R7 / NO STACK FREEZE
 
 ## 0. Controller binding
 
 This mission exists because the Independent Controller audit retained the exact R6-CORR01 + Balanced6 Product/data/runtime result but reopened `R6-PRESENTATION-REFERENCE-PARITY-FAIL` as `OPEN_PRODUCT / PRESENTATION`.
 
 The Controller already closed the separate evidence-chain/package defect through `CONTROLLER_EVIDENCE_CORR01`; do not re-open or re-implement that correction.
+
+
+### 0.1 Repository execution binding — OD-20260921-066
+
+- Repository: `hamad933/cep-writer-baseline-repo`
+- Baseline branch: `main`
+- Exact base commit: `44f922e29e02363d00cc31ae6daeeca01dc9081a`
+- Exact Writer candidate branch: `writer/presentation-corr02-google-ai-studio`
+- Product parent remains `5205d2a3d0db441e030a046bc831549728cc95b9c09ff9d2fa4233ba1672fd66 / 272`
+
+The Writer may commit/push only to the candidate branch above. Never push directly to `main`, merge to `main`, create a release, edit `cep-writer/` authority/reference files, mutate live governance, or self-promote.
+
+Small textual handoff/evidence may be written only under:
+`writer-output/presentation-corr02/`
+
+The exact branch HEAD is the Writer result identity. Heavy candidate/evidence/baseline ZIP custody is rebuilt by the Controller after independent audit.
+
 
 ## 1. Mandatory live reads before mutation
 
@@ -258,49 +275,44 @@ After Product mutation is complete rerun from a clean extraction:
 
 Do not alter Product merely to make a stale harness PASS.
 
-## 11. Packaging and evidence-chain boundary
+## 11. Repository handoff and Controller packaging boundary
 
-Because Product changes will create a new source identity, regenerate:
+This repository workflow supersedes the earlier requirement for the Writer to manufacture final heavy ZIP custody itself.
 
-- candidate ZIP;
-- source/tree identities;
-- Product delta manifest;
-- evidence ZIP;
-- self-contained baseline whose `product/` is byte-exact to the corrected candidate;
-- baseline manifest/tree verifier;
-- safe Colab bootstrap hard-bound to the new final baseline ZIP SHA.
+The Writer must leave the candidate branch reproducible and produce only bounded text/small-machine-readable handoff files under:
+`writer-output/presentation-corr02/`
 
-Preserve the Controller evidence-chain correction design:
-- final validation and final handoff are external closure documents;
-- do NOT store their SHA receipts inside the Evidence ZIP if those documents bind the finalized Evidence ZIP identity;
-- finalize Evidence ZIP first;
-- then generate external final validation/handoff and external SHA receipts.
-
-## 12. Required outputs
-
-At minimum:
-
-- `CEP_R6_CORR01_BALANCED6_PRESENTATION_CORR02_CANDIDATE_<SOURCE8>.zip`
-- `CEP_R6_CORR01_BALANCED6_PRESENTATION_CORR02_EVIDENCE_<SOURCE8>.zip`
-- `CEP_WRITER_BASELINE_R6CORR01_BALANCED6_PRESENTATION_CORR02_<SOURCE8>_TREE_<TREE8>_20260921.zip`
-- external `.sha256` receipts;
-- `PRESENTATION_STATE_MATCHED_PARITY_MATRIX.csv/json`;
+At minimum include:
+- `WRITER_HANDOFF.md`;
 - `PRODUCT_DELTA_MANIFEST.json`;
 - `DEPENDENCY_DIFF.json`;
-- `SCREENSHOT_MANIFEST.json`;
-- raw regression logs;
-- `FINAL_VALIDATION.json` and `FINAL_HANDOFF.md` generated only after Evidence ZIP finalization;
-- safe Colab bootstrap bound to new baseline SHA.
+- `PRESENTATION_STATE_MATCHED_PARITY_MATRIX.csv` and/or `.json`;
+- `TEST_RESULTS.json`;
+- `FINAL_WRITER_STATUS.json`;
+- paths/hashes for large local artifacts intentionally not committed.
 
-## 13. No self-promotion
+Do not commit candidate/evidence/baseline ZIPs, large screenshot sets, `node_modules`, build caches, or generated dependency trees.
+
+After handoff, the Controller audits the exact candidate-branch HEAD and regenerates required large evidence/candidate/baseline packages in controlled custody.
+
+## 12. Required branch result
+
+The final Writer result must be one exact branch HEAD on:
+`writer/presentation-corr02-google-ai-studio`
+
+The handoff must state the exact base commit, final candidate HEAD SHA, final Product source identity, Product changed paths, dependency diff, executed test results, Presentation parity disposition for all 23 Surfaces, and every blocked/unavailable/environment-limited proof.
+
+## 13. No self-promotion / Git boundary
 
 Even with every Product/Presentation gate green, return only:
 
 `CANDIDATE_ONLY__PENDING_INDEPENDENT_CONTROLLER_AUDIT`
 
-Do not modify live governance, accept/promote a successor, launch R7, freeze stack, create a GitHub repository or push anything.
+The Writer may push commits only to:
+`writer/presentation-corr02-google-ai-studio`
 
-When the full correction is actually packaged and validated, end with:
+Do not push to or merge into `main`. Do not modify live governance, accept/promote a successor, launch R7, freeze stack, create a release, or claim that a Git commit is accepted CEP authority.
 
-`R6_BALANCED6_PRESENTATION_CORR02_CANDIDATE_READY_FOR_CONTROLLER_AUDIT`
+When the branch is complete and validated, end with:
 
+`R6_BALANCED6_PRESENTATION_CORR02_BRANCH_READY_FOR_CONTROLLER_AUDIT`
