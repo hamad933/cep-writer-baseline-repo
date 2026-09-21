@@ -29,3 +29,16 @@ The Writer may NOT:
 ## Result identity
 
 The Writer result is the exact candidate-branch HEAD SHA plus its Product delta and bounded handoff files. The Controller audits that exact HEAD. A rejected result leaves `main` unchanged. Only the Controller may later integrate an accepted Product delta to `main` and refresh `cep-writer/` for the next mission.
+
+
+## Google AI Studio branch-safety rule
+
+Google AI Studio supports GitHub import/sync, but target-branch selection is not treated as guaranteed by this mission.
+
+Before importing into AI Studio:
+- if AI Studio explicitly lets you select `writer/presentation-corr02-google-ai-studio`, select it;
+- if it does not expose a branch selector and uses the repository default branch, temporarily set the GitHub repository default branch to `writer/presentation-corr02-google-ai-studio` **before import**;
+- never let AI Studio write to `main`;
+- after the Writer handoff and Controller audit, restore the repository default branch to `main`.
+
+Changing the repository default branch does not merge branches and does not alter `main` bytes.
