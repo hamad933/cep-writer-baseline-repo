@@ -1,6 +1,6 @@
 {
-  "runtime": "v22.16.0",
-  "measured_at": "2026-09-20T23:30:34.236Z",
+  "runtime": "v22.23.2",
+  "measured_at": "2026-09-21T22:06:30.137Z",
   "scope": "Canonical stack/native-typescript source independently generates dist and dist-ts JavaScript; no generated tree writes back to canonical source.",
   "buildDirection": "stack/native-typescript -> dist + dist-ts",
   "reverseGeneratedToSourceWrites": false,
@@ -15,7 +15,7 @@
       "authority": "CANONICAL_SOURCE_TO_GENERATED_ONLY",
       "source": "stack/native-typescript",
       "destination": "dist",
-      "written": 257,
+      "written": 258,
       "copiedAssets": 2,
       "removedStale": 0
     }
@@ -29,20 +29,20 @@
     "static_types": "Canonical TypeScript source; proof measures erasable-syntax generation parity only.",
     "model_pass": 210,
     "model_fail": 0,
-    "emit_ms": 317.8659640000026,
+    "emit_ms": 256.30860000000257,
     "build": {
       "pass": true,
       "authority": "CANONICAL_SOURCE_TO_GENERATED_ONLY",
       "source": "stack/native-typescript",
       "destination": "dist-ts",
-      "written": 257,
+      "written": 258,
       "copiedAssets": 2,
       "removedStale": 0
     }
   },
   "identical_model_results": true,
-  "A_model_suite_median_ms": 76.41445500000009,
-  "A_model_suite_p95_ms": 93.08744200000001,
+  "A_model_suite_median_ms": 87.53377199999977,
+  "A_model_suite_p95_ms": 109.76926000000003,
   "performance_limit": "One host, warm model workload only; not cold browser startup or representative full product workload.",
   "inventory": [
     {
@@ -71,9 +71,9 @@
     },
     {
       "file": "adapters/balanced6-acceptance-data.js",
-      "source_ts_bytes": 296138,
-      "source_ts_lines": 13,
-      "emitted_bytes": 296138
+      "source_ts_bytes": 296234,
+      "source_ts_lines": 14,
+      "emitted_bytes": 296234
     },
     {
       "file": "adapters/configuration/domain-adapter.js",
@@ -286,6 +286,12 @@
       "emitted_bytes": 15240
     },
     {
+      "file": "adapters/today/acceptance-data.js",
+      "source_ts_bytes": 8359,
+      "source_ts_lines": 229,
+      "emitted_bytes": 8359
+    },
+    {
       "file": "adapters/today/domain.js",
       "source_ts_bytes": 9719,
       "source_ts_lines": 131,
@@ -365,9 +371,9 @@
     },
     {
       "file": "foundation/accepted-runtime.js",
-      "source_ts_bytes": 347794,
-      "source_ts_lines": 728,
-      "emitted_bytes": 347794
+      "source_ts_bytes": 348417,
+      "source_ts_lines": 746,
+      "emitted_bytes": 348417
     },
     {
       "file": "foundation/analytical/compare-host.js",
@@ -695,9 +701,9 @@
     },
     {
       "file": "foundation/spatial.js",
-      "source_ts_bytes": 15694,
+      "source_ts_bytes": 15967,
       "source_ts_lines": 65,
-      "emitted_bytes": 15694
+      "emitted_bytes": 15967
     },
     {
       "file": "foundation/spatial/accessible-navigator.js",
@@ -911,21 +917,21 @@
     },
     {
       "file": "foundation/workspace-host.js",
-      "source_ts_bytes": 29057,
+      "source_ts_bytes": 29132,
       "source_ts_lines": 346,
-      "emitted_bytes": 29057
+      "emitted_bytes": 29132
     },
     {
       "file": "foundation/workspace.js",
-      "source_ts_bytes": 15439,
+      "source_ts_bytes": 15519,
       "source_ts_lines": 51,
-      "emitted_bytes": 15439
+      "emitted_bytes": 15519
     },
     {
       "file": "main.js",
-      "source_ts_bytes": 54829,
-      "source_ts_lines": 248,
-      "emitted_bytes": 54829
+      "source_ts_bytes": 55633,
+      "source_ts_lines": 267,
+      "emitted_bytes": 55633
     },
     {
       "file": "model-tests.js",
@@ -1043,9 +1049,9 @@
     },
     {
       "file": "surfaces/m0-controller-composition.js",
-      "source_ts_bytes": 45054,
+      "source_ts_bytes": 44491,
       "source_ts_lines": 188,
-      "emitted_bytes": 45054
+      "emitted_bytes": 44491
     },
     {
       "file": "surfaces/manual_ai/composition.js",
@@ -1127,9 +1133,9 @@
     },
     {
       "file": "surfaces/today/presentation.js",
-      "source_ts_bytes": 14865,
-      "source_ts_lines": 67,
-      "emitted_bytes": 14865
+      "source_ts_bytes": 31916,
+      "source_ts_lines": 964,
+      "emitted_bytes": 31916
     },
     {
       "file": "surfaces/today/surface.js",

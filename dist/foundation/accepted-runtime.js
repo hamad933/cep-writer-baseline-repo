@@ -3,6 +3,24 @@ import {StructuredActionSurfacePresentationHost} from './structured/action-surfa
 import {createLibraryChromeAdapter} from '../adapters/library-chrome.js';
 
 export function mountAcceptedRuntime(fixtureBundle, extension = {}) {
+if (typeof Node !== 'undefined' && !Node.prototype.closest) {
+  Node.prototype.closest = function(            selector        )                 {
+    let current              = this;
+    while (current) {
+      if (current.nodeType === 1 && typeof (current       ).matches === 'function') {
+        if ((current       ).matches(selector)) {
+          return current           ;
+        }
+      }
+      current = current.parentElement || current.parentNode;
+    }
+    return null;
+  };
+}
+if (typeof Window !== 'undefined' && !Window.prototype.closest) {
+  (Window.prototype       ).closest = function() { return null; };
+}
+
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const clone=o=>JSON.parse(JSON.stringify(o));
