@@ -1,6 +1,5 @@
-# Common Open Truth Ceilings
+# Known Open Gates — CORR02
 
-- `STACK_EXPANSION_LOCKED__STACK_NOT_FROZEN`.
-- Genuine browser/native/platform truth may not be upgraded without exact proof.
-- Candidate presence, Git commits, screenshots and green tests never create acceptance authority.
-- Task-specific blockers belong only to the mission branch overlay.
+Primary Product blocker: R6-PRESENTATION-REFERENCE-PARITY-FAIL__OPEN_PRODUCT__MULTI_SURFACE_MULTI_OWNER_CORRECTION_REQUIRED.
+
+Genuine HTTP remains OPEN_ENVIRONMENT__LOOPBACK_BLOCKED_BEFORE_PRODUCT_RECEIPT unless truly reproduced. Do not convert environment limitation into PASS.
