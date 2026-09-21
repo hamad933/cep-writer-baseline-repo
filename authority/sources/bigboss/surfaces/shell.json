@@ -1,0 +1,240 @@
+{
+  "objects": {
+    "RouteContext": "destinationId + surfaceId + exact objectRef",
+    "NavigationBookmark": "route + selection/scroll/return origin, scoped to actor",
+    "ShellPresentation": "region preferences resolved centrally"
+  },
+  "state_dimensions": {
+    "navigation": [
+      "IDLE",
+      "RESOLVING",
+      "ACTIVE",
+      "NOT_FOUND",
+      "FORBIDDEN",
+      "FAILED"
+    ],
+    "dirtyDeparture": [
+      "NONE",
+      "CHOICE_REQUIRED",
+      "PRESERVED"
+    ]
+  },
+  "read_model": "Router manifest contains exactly five global destinations; AuthContext query supplies authenticated owner/environment; domain screens own their queries.",
+  "persistence": {
+    "RouteContext": "Vue Router history",
+    "NavigationBookmark": "NavigationContext.session",
+    "ShellPresentation": "GlobalPreferenceDomain"
+  },
+  "invariants": [
+    "No sixth primary destination",
+    "Auth owner/environment come from server; never trust local profile as authorization",
+    "Route state is not preference or domain state"
+  ],
+  "epistemic": {
+    "empty": "No recent bookmark: keep five destinations and command discovery visible.",
+    "stale": "Restored object revision removed: resolve an explicit replacement or preserve original failed bookmark.",
+    "unavailable": "Route chunk unavailable: retain old route and offer retry.",
+    "error": "Navigation failure does not clear draft or swap history to failed target."
+  },
+  "operations": [
+    {
+      "name": "navigate",
+      "family": "NavigationCommand",
+      "payload": "routeId:string objectRef:optional_ref returnContext:optional_ref",
+      "before": "navigation=IDLE|ACTIVE",
+      "event": "resolve named destination",
+      "after": "navigation=ACTIVE and heading receives focus",
+      "guard": "One of five destinations; destination read authorization",
+      "oracle": "Back restores exact origin and scroll without duplicating domain stores",
+      "persistence": "VueRouter.history",
+      "method": "LOCAL",
+      "gate": null,
+      "command_id": "shell.navigate",
+      "surface_id": "shell",
+      "semantic_owner": "GlobalShellDomain",
+      "focus_after": "Shared Global Shell active object/control; detached target→shell-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Navigation failure does not clear draft or swap history to failed target.",
+        "503_timeout": "Route chunk unavailable: retain old route and offer retry."
+      },
+      "test_id": "TEST-shell.navigate",
+      "evidence_id": "EVID-shell.navigate",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "recover",
+      "family": "NavigationCommand",
+      "payload": "routeId:string bookmarkId:string",
+      "before": "navigation=FAILED|NOT_FOUND",
+      "event": "restore last resolvable route",
+      "after": "navigation=ACTIVE or explicit NOT_FOUND",
+      "guard": "Bookmark is actor-scoped and contains no secrets",
+      "oracle": "Missing bookmark falls back to destination heading, not fabricated object",
+      "persistence": "NavigationContext.session",
+      "method": "LOCAL",
+      "gate": null,
+      "command_id": "shell.recover",
+      "surface_id": "shell",
+      "semantic_owner": "GlobalShellDomain",
+      "focus_after": "Shared Global Shell active object/control; detached target→shell-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Navigation failure does not clear draft or swap history to failed target.",
+        "503_timeout": "Route chunk unavailable: retain old route and offer retry."
+      },
+      "test_id": "TEST-shell.recover",
+      "evidence_id": "EVID-shell.recover",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "search",
+      "family": "PresentationCommand",
+      "payload": "presentationTarget:string preferredState:string",
+      "before": "palette closed",
+      "event": "open command discovery",
+      "after": "palette open and search focused",
+      "guard": "No active IME composition; remappable binding",
+      "oracle": "Visible trigger and keyboard route open same command registry once",
+      "persistence": "TransientFocusCore",
+      "method": "LOCAL",
+      "gate": null,
+      "command_id": "shell.search",
+      "surface_id": "shell",
+      "semantic_owner": "GlobalShellDomain",
+      "focus_after": "Shared Global Shell active object/control; detached target→shell-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Navigation failure does not clear draft or swap history to failed target.",
+        "503_timeout": "Route chunk unavailable: retain old route and offer retry."
+      },
+      "test_id": "TEST-shell.search",
+      "evidence_id": "EVID-shell.search",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "leaveDirty",
+      "family": "NavigationCommand",
+      "payload": "routeId:string documentRef:ref departure:enum:preserve|save|cancel",
+      "before": "dirtyDeparture=CHOICE_REQUIRED",
+      "event": "resolve departure",
+      "after": "cancel retains route; save awaits owner ACK; preserve retains recovery draft",
+      "guard": "Never discard implicitly; save failure prevents requested save-and-leave",
+      "oracle": "Failed save keeps text and old route; preserve is explicit",
+      "persistence": "DraftOwner + NavigationContext",
+      "method": "LOCAL",
+      "gate": null,
+      "command_id": "shell.leaveDirty",
+      "surface_id": "shell",
+      "semantic_owner": "GlobalShellDomain",
+      "focus_after": "Shared Global Shell active object/control; detached target→shell-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Navigation failure does not clear draft or swap history to failed target.",
+        "503_timeout": "Route chunk unavailable: retain old route and offer retry."
+      },
+      "test_id": "TEST-shell.leaveDirty",
+      "evidence_id": "EVID-shell.leaveDirty",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "shell",
+  "title": "Shared Global Shell",
+  "workspace": "W01",
+  "semantic_owner": "GlobalShellDomain",
+  "archetype": "GlobalShell",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W01-SHL-001",
+    "CAP-W01-SHL-002",
+    "CAP-W01-SHL-003",
+    "CAP-W01-SHL-004",
+    "CAP-W01-SHL-005",
+    "CAP-W01-SHL-006",
+    "CAP-W01-SHL-007",
+    "CAP-W01-SHL-008",
+    "CAP-W01-SHL-009",
+    "CAP-W01-SHL-010",
+    "CAP-W01-SHL-011"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W01-SHL-001",
+        "CAP-W01-SHL-002",
+        "CAP-W01-SHL-003",
+        "CAP-W01-SHL-004",
+        "CAP-W01-SHL-005",
+        "CAP-W01-SHL-006",
+        "CAP-W01-SHL-007",
+        "CAP-W01-SHL-008",
+        "CAP-W01-SHL-009",
+        "CAP-W01-SHL-010",
+        "CAP-W01-SHL-011"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Shared Global Shell",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-001",
+    "NC-003",
+    "NC-004",
+    "NC-034",
+    "NC-036"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore"
+  ],
+  "adapter": "GlobalShellDomainAdapter",
+  "regions": {
+    "TOP": "Shared Global Shell exact identity, local mode, command routes",
+    "LEFT": "typed RouteContext collection/navigation",
+    "CENTER": "GlobalShell primary task",
+    "RIGHT": "one selected RouteContext identity/context inspector",
+    "BOTTOM": "Deep Shared Global Shell diagnostics/history"
+  },
+  "command_ids": [
+    "shell.navigate",
+    "shell.recover",
+    "shell.search",
+    "shell.leaveDirty"
+  ]
+}

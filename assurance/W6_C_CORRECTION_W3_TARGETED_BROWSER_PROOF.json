@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 1,
+  "kind": "W6_C_CORRECTION_W3_TARGETED_BROWSER_PROOF",
+  "status": "PASS",
+  "sourceCanonicalTreeSha256": "864113b667fd34c81d594f70dfabb530250716a169533d25198e5bc95edf68e0",
+  "canonicalSourceFileCount": 112,
+  "summary": {
+    "total": 5,
+    "pass": 5,
+    "fail": 0
+  },
+  "flows": [
+    {
+      "id": "wave3.input-f6-receipt",
+      "owner": "GlobalInputKeymapOwner",
+      "oracle": "truthful F6 receipt",
+      "status": "PASS",
+      "evidence": {
+        "before": {
+          "id": "leftLocalReveal",
+          "insideCenter": true
+        },
+        "active": "rightPane",
+        "receipt": {
+          "sequence": 1,
+          "owner": "GlobalInputKeymapOwner",
+          "policyTag": "declared-available-region-cycle-v1",
+          "from": "CENTER",
+          "to": "RIGHT",
+          "direction": "forward",
+          "reverse": false,
+          "skipped": [],
+          "skippedHidden": [],
+          "skippedUnavailable": [],
+          "focused": true,
+          "moved": true,
+          "noLegalMovement": false
+        },
+        "owner": "GlobalInputKeymapOwner"
+      }
+    },
+    {
+      "id": "wave3.feedback-single-owner",
+      "owner": "AccessibilityFeedbackOwner",
+      "oracle": "single accessibility owner",
+      "status": "PASS",
+      "evidence": {
+        "accepted": true,
+        "owner": "AccessibilityFeedbackOwner",
+        "eventOwner": "AccessibilityFeedbackOwner",
+        "active": 1,
+        "legacyLive": null,
+        "projector": true
+      }
+    },
+    {
+      "id": "wave3.context-two-provider-host",
+      "owner": "ContextInspectorHost",
+      "oracle": "two providers same host",
+      "status": "PASS",
+      "evidence": {
+        "library": {
+          "provider": "library-structured-context",
+          "open": true,
+          "rendered": true
+        },
+        "spatial": {
+          "provider": "spatial-context",
+          "open": true,
+          "rendered": true
+        }
+      }
+    },
+    {
+      "id": "wave3.bottom-provider-convergence",
+      "owner": "BottomDeepWorkOwner",
+      "oracle": "structured/operational bottom convergence",
+      "status": "PASS",
+      "evidence": {
+        "structured": {
+          "snap": {
+            "owner": "BottomDeepWorkOwner",
+            "contract": {
+              "id": "BottomDeepWorkOwner",
+              "version": "1.0.0",
+              "compatibility": "SEMVER",
+              "scope": "GLOBAL_PRESENTATION_ONLY",
+              "policyRevision": "bottom-deep-work-w3d-r1"
+            },
+            "policyRevision": "bottom-deep-work-w3d-r1",
+            "open": true,
+            "activeProviderId": "structured.history-recovery",
+            "activeProvider": {
+              "contract": {
+                "id": "BottomDeepWorkProviderContract",
+                "version": "1.0.0",
+                "compatibility": "SEMVER",
+                "owner": "BottomDeepWorkOwner",
+                "projectionMode": "READ_ONLY_LIVE_PROJECTION"
+              },
+              "id": "structured.history-recovery",
+              "label": "History & recovery",
+              "family": "structured",
+              "contentKind": "history-recovery",
+              "sourceOwner": "StructuredTransactionHistoryRecoveryOwner",
+              "readOnly": true,
+              "ownsCanonicalContent": false
+            },
+            "providerCount": 1,
+            "presentation": {
+              "hidden": false,
+              "inert": false,
+              "interactive": true,
+              "ariaHidden": "false"
+            },
+            "lastTransition": {
+              "sequence": 1,
+              "action": "bottom.open",
+              "owner": "BottomDeepWorkOwner",
+              "policyRevision": "bottom-deep-work-w3d-r1",
+              "open": true,
+              "activeProviderId": "structured.history-recovery",
+              "reason": "bottom-toggle",
+              "focusEntered": false
+            },
+            "actions": [
+              "bottom.open",
+              "bottom.close",
+              "bottom.toggle",
+              "bottom.provider.select"
+            ]
+          },
+          "hidden": false,
+          "inert": false,
+          "source": "StructuredTransactionHistoryRecoveryOwner"
+        },
+        "operational": {
+          "snap": {
+            "owner": "BottomDeepWorkOwner",
+            "contract": {
+              "id": "BottomDeepWorkOwner",
+              "version": "1.0.0",
+              "compatibility": "SEMVER",
+              "scope": "GLOBAL_PRESENTATION_ONLY",
+              "policyRevision": "bottom-deep-work-w3d-r1"
+            },
+            "policyRevision": "bottom-deep-work-w3d-r1",
+            "open": true,
+            "activeProviderId": "operational.runtime-session",
+            "activeProvider": {
+              "contract": {
+                "id": "BottomDeepWorkProviderContract",
+                "version": "1.0.0",
+                "compatibility": "SEMVER",
+                "owner": "BottomDeepWorkOwner",
+                "projectionMode": "READ_ONLY_LIVE_PROJECTION"
+              },
+              "id": "operational.runtime-session",
+              "label": "Runtime evidence",
+              "family": "operational",
+              "contentKind": "runtime-session-evidence",
+              "sourceOwner": "InternalSimulationAdapter",
+              "readOnly": true,
+              "ownsCanonicalContent": false
+            },
+            "providerCount": 2,
+            "presentation": {
+              "hidden": false,
+              "inert": false,
+              "interactive": true,
+              "ariaHidden": "false"
+            },
+            "lastTransition": {
+              "sequence": 1,
+              "action": "bottom.open",
+              "owner": "BottomDeepWorkOwner",
+              "policyRevision": "bottom-deep-work-w3d-r1",
+              "open": true,
+              "activeProviderId": "operational.runtime-session",
+              "reason": "bottom-toggle",
+              "focusEntered": false
+            },
+            "actions": [
+              "bottom.open",
+              "bottom.close",
+              "bottom.toggle",
+              "bottom.provider.select"
+            ]
+          },
+          "source": "InternalSimulationAdapter"
+        }
+      }
+    },
+    {
+      "id": "wave3.ui-scale-central-projection",
+      "owner": "UIScalePolicyOwner",
+      "oracle": "central scale projection",
+      "status": "PASS",
+      "evidence": {
+        "scale": 2,
+        "data": "2",
+        "foundationScale": "2",
+        "control": "64px",
+        "camera": {
+          "x": 30,
+          "y": 155.19662363455808,
+          "zoom": 0.6295928500496525
+        },
+        "pane": {
+          "contract": {
+            "id": "WorkspacePaneStateContract",
+            "version": "1.0.0",
+            "owner": "WorkspacePaneLayoutOwner",
+            "persisted": [
+              "preferredState",
+              "preferredWidth"
+            ],
+            "projectedOnly": [
+              "effectiveState",
+              "mode",
+              "responsiveBand",
+              "resizeAvailability",
+              "focusMode"
+            ]
+          },
+          "responsiveBand": "wide",
+          "viewportWidth": 1440,
+          "focusMode": false,
+          "left": {
+            "side": "left",
+            "preferredState": "open",
+            "effectiveState": "open",
+            "preferred": "open",
+            "effective": "open",
+            "mode": "docked",
+            "preferredWidth": 304,
+            "effectiveWidth": 304,
+            "responsiveSuppressed": false,
+            "resizeAvailability": {
+              "pointer": true,
+              "keyboard": true
+            }
+          },
+          "right": {
+            "side": "right",
+            "preferredState": "open",
+            "effectiveState": "open",
+            "preferred": "open",
+            "effective": "open",
+            "mode": "docked",
+            "preferredWidth": 420,
+            "effectiveWidth": 420,
+            "responsiveSuppressed": false,
+            "resizeAvailability": {
+              "pointer": true,
+              "keyboard": true
+            }
+          }
+        },
+        "zoom": ""
+      }
+    }
+  ]
+}

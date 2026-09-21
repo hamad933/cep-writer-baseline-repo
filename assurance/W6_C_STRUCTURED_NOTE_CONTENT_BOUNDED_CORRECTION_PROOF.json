@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "kind": "W6_C_STRUCTURED_NOTE_CONTENT_ADAPTER_BOUNDED_CORRECTION_PROOF",
+  "classification": "W6_C_CORRECTION_EXECUTION_EVIDENCE_NOT_CONTROLLER_ACCEPTANCE",
+  "status": "PASS",
+  "caseCount": 12,
+  "passCount": 12,
+  "failCount": 0,
+  "cases": [
+    {
+      "id": "01.first-publication-succeeds",
+      "status": "PASS",
+      "evidence": {
+        "documentId": "structured-note-content::corr-first",
+        "countDelta": 1
+      }
+    },
+    {
+      "id": "02.same-note-same-graph-duplicate-rejected-before-publication",
+      "status": "PASS",
+      "evidence": {
+        "message": "DUPLICATE_STRUCTURED_NOTE_CONTENT_ADAPTER:corr-duplicate",
+        "publicationCountUnchanged": true,
+        "canonicalHostStable": true
+      }
+    },
+    {
+      "id": "03.original-adapter-usable-after-duplicate-rejection",
+      "status": "PASS",
+      "evidence": {
+        "historyAdvanced": true,
+        "documentId": "structured-note-content::corr-duplicate-usable"
+      }
+    },
+    {
+      "id": "04.hide-reopen-reuses-first-canonical-adapter",
+      "status": "PASS",
+      "evidence": {
+        "documentId": "structured-note-content::corr-reopen",
+        "sameHost": true,
+        "sameDocumentAdapter": true
+      }
+    },
+    {
+      "id": "05.separate-window-projection-reuses-first-canonical-adapter",
+      "status": "PASS",
+      "evidence": {
+        "sameHost": true,
+        "sameDocumentAdapter": true,
+        "sameBinding": true,
+        "documentId": "structured-note-content::corr-separate"
+      }
+    },
+    {
+      "id": "06.two-distinct-notes-distinct-document-ids-succeed",
+      "status": "PASS",
+      "evidence": {
+        "documents": [
+          "corr-doc-A",
+          "corr-doc-B"
+        ]
+      }
+    },
+    {
+      "id": "07.document-id-collision-rejects-second-publication",
+      "status": "PASS",
+      "evidence": {
+        "message": "STRUCTURED_NOTE_CONTENT_DOCUMENT_ID_COLLISION:corr-SAME-DOCUMENT:corr-collision-A!=corr-collision-B",
+        "publicationCountUnchanged": true,
+        "firstDocumentId": "corr-SAME-DOCUMENT"
+      }
+    },
+    {
+      "id": "08.collision-rejection-does-not-reserve-note-slot",
+      "status": "PASS",
+      "evidence": {
+        "retryDocumentId": "corr-retry-B-legal",
+        "countDeltaAfterRetry": 1
+      }
+    },
+    {
+      "id": "09.malformed-failure-does-not-reserve-publication-slot",
+      "status": "PASS",
+      "evidence": {
+        "validRetry": true
+      }
+    },
+    {
+      "id": "10.independent-canonical-graphs-may-reuse-textual-identities",
+      "status": "PASS",
+      "evidence": {
+        "sameTextualNoteId": true,
+        "sameTextualDocumentId": true,
+        "independentGraphs": true
+      }
+    },
+    {
+      "id": "11.document-collision-does-not-affect-first-adapter-state",
+      "status": "PASS",
+      "evidence": {
+        "firstAdapterUnchanged": true
+      }
+    },
+    {
+      "id": "12.canonical-publication-remains-self-consistent",
+      "status": "PASS",
+      "evidence": {
+        "canonical": true,
+        "documentId": "structured-note-content::corr-self-consistent"
+      }
+    }
+  ],
+  "sourceCanonicalTreeSha256": "fcca03a3ef529e5eda8b3ddddcc1f093ad7054336430d3c08224fac55328c753",
+  "canonicalSourceFileCount": 113,
+  "staticChecks": [
+    {
+      "id": "owner-instance-scoped-composition-registry",
+      "pass": true
+    },
+    {
+      "id": "same-note-duplicate-guard",
+      "pass": true
+    },
+    {
+      "id": "document-id-collision-guard",
+      "pass": true
+    },
+    {
+      "id": "preflight-before-engine-construction",
+      "pass": true
+    },
+    {
+      "id": "publication-after-complete-engine-construction",
+      "pass": true
+    },
+    {
+      "id": "canonical-composition-verifies-publication",
+      "pass": true
+    },
+    {
+      "id": "no-process-global-string-only-set",
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,288 @@
+{
+  "schemaVersion": 1,
+  "classification": "W3A_REPRODUCIBLE_FULL_BROWSER_CONFORMANCE_RECEIPT_NOT_OWNER_ACCEPTANCE",
+  "command": "node tools/w3a-full-browser-conformance.mjs",
+  "sourceFoundationBaseline": "CEP-FOUNDATION-0.2.1c-BROWSER-TRUTHFULNESS-CORRECTED-CANDIDATE",
+  "sourceCandidate": "CANONICAL_SOURCE_TREE_SHA256:4fd00b884dcc3bb44a3284f307c8ef9c1983715c803f7652ab527ee30030c83c",
+  "sourceCanonicalTreeSha256": "4fd00b884dcc3bb44a3284f307c8ef9c1983715c803f7652ab527ee30030c83c",
+  "canonicalSourceFileCount": 41,
+  "currentUse": "EXACT_CURRENT_CANONICAL_SOURCE_EXECUTION_RECEIPT",
+  "executionStatus": "EXECUTED_PASS",
+  "prerequisite": "SATISFIED: Playwright launched a compatible local Chromium executable and completed every declared flow.",
+  "declaredFlows": [
+    "workspace.transient-and-pane-lifecycle",
+    "spatial.selection-connect-canonical-edge",
+    "relation.route-convergence-and-label-scope",
+    "central-change-reuse",
+    "runtime-causal-consequence",
+    "spatial-input-bidi-preference-and-structured-isolation"
+  ],
+  "environment": {
+    "node": "v22.16.0",
+    "engine": "Playwright Chromium",
+    "playwrightResolution": "explicit-environment-override",
+    "packageDeclaredVersion": "1.62.1",
+    "browserExecutableOverride": true,
+    "transport": "in-memory",
+    "viewport": "1440x980",
+    "reducedMotion": true
+  },
+  "summary": {
+    "total": 6,
+    "pass": 6,
+    "fail": 0
+  },
+  "flows": [
+    {
+      "id": "workspace.transient-and-pane-lifecycle",
+      "before": "Golden consumer with visible Foundation chrome",
+      "action": "toggle pane, open and escape command palette, then restore pane",
+      "owner": "WorkspaceFoundationHost + PaneLayoutController + TransientFocusController",
+      "oracle": "pane truth changes, transient reverses, focus returns",
+      "status": "PASS",
+      "evidence": {
+        "collapsed": "collapsed",
+        "restored": "open",
+        "paletteExit": "Escape",
+        "focusReturned": true,
+        "responsive": {
+          "contract": {
+            "id": "WorkspacePaneStateContract",
+            "version": "1.0.0",
+            "owner": "WorkspacePaneLayoutOwner",
+            "persisted": [
+              "preferredState",
+              "preferredWidth"
+            ],
+            "projectedOnly": [
+              "effectiveState",
+              "mode",
+              "responsiveBand",
+              "resizeAvailability",
+              "focusMode"
+            ]
+          },
+          "responsiveBand": "medium",
+          "viewportWidth": 900,
+          "focusMode": false,
+          "left": {
+            "side": "left",
+            "preferredState": "open",
+            "effectiveState": "open",
+            "preferred": "open",
+            "effective": "open",
+            "mode": "docked",
+            "preferredWidth": 304,
+            "effectiveWidth": 304,
+            "responsiveSuppressed": false,
+            "resizeAvailability": {
+              "pointer": true,
+              "keyboard": true
+            }
+          },
+          "right": {
+            "side": "right",
+            "preferredState": "open",
+            "effectiveState": "collapsed",
+            "preferred": "open",
+            "effective": "collapsed",
+            "mode": "collapsed",
+            "preferredWidth": 420,
+            "effectiveWidth": 420,
+            "responsiveSuppressed": true,
+            "resizeAvailability": {
+              "pointer": false,
+              "keyboard": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "spatial.selection-connect-canonical-edge",
+      "before": "Visualize graph with no current selection",
+      "action": "select exactly two objects, use compact Connect, submit composer",
+      "owner": "ActionAvailabilityCore + RelationInteractionOwner + RelationDomainAdapter",
+      "oracle": "one canonical relation is committed and its edge is projected",
+      "status": "PASS",
+      "evidence": {
+        "selectedIds": [
+          "concept-1",
+          "concept-2"
+        ],
+        "before": 30,
+        "after": 31,
+        "relationId": "relation-1",
+        "canonicalVersion": 2,
+        "projectedKind": "domain-projection"
+      }
+    },
+    {
+      "id": "relation.route-convergence-and-label-scope",
+      "before": "Existing canonical Visualize relation edge",
+      "action": "double-click whole edge, double-click label, close, then press F2 on edge",
+      "owner": "RelationInteractionOwner",
+      "oracle": "whole-edge double-click is inert; label and F2 converge on relation.edit",
+      "status": "PASS",
+      "evidence": {
+        "wholeEdgeOpened": false,
+        "convergedReceipts": 2,
+        "owners": [
+          "RelationInteractionOwner"
+        ]
+      }
+    },
+    {
+      "id": "central-change-reuse",
+      "before": "Visualize and Enterprise consumers use different domain adapters",
+      "action": "select two objects on each consumer and inspect selection action policy",
+      "owner": "ActionAvailabilityCore + RelationInteractionOwner",
+      "oracle": "both consumers expose the same policy revision and action owner",
+      "status": "PASS",
+      "evidence": [
+        {
+          "consumer": "visualize",
+          "selectedIds": [
+            "concept-1",
+            "concept-2"
+          ],
+          "policyRevision": "RELATION-CENTRAL-04",
+          "availabilityOwner": "ActionAvailabilityCore",
+          "availability": {
+            "action": "connect",
+            "policyId": "connect",
+            "visible": true,
+            "enabled": true,
+            "reason": "",
+            "code": "AVAILABLE",
+            "selectionCount": 2,
+            "selectedTypes": [
+              "unspecified"
+            ]
+          },
+          "actionOwner": "RelationInteractionOwner"
+        },
+        {
+          "consumer": "enterprise",
+          "selectedIds": [
+            "CTL-WAF-01",
+            "SIM-ATK-01"
+          ],
+          "policyRevision": "RELATION-CENTRAL-04",
+          "availabilityOwner": "ActionAvailabilityCore",
+          "availability": {
+            "action": "connect",
+            "policyId": "connect",
+            "visible": true,
+            "enabled": true,
+            "reason": "",
+            "code": "AVAILABLE",
+            "selectionCount": 2,
+            "selectedTypes": [
+              "Security Control",
+              "Simulation-local Device"
+            ]
+          },
+          "actionOwner": "RelationInteractionOwner"
+        }
+      ]
+    },
+    {
+      "id": "runtime-causal-consequence",
+      "before": "RUN-0042 DEV-WEB-01 is selected and UP",
+      "action": "open terminal through visible command and submit shutdown",
+      "owner": "W03V34RunsAdapter via provider-neutral OperationalView",
+      "oracle": "canonical device, spatial projection, terminal output, event and recorded projection agree",
+      "status": "PASS",
+      "evidence": {
+        "up": false,
+        "nodeStatus": "DOWN",
+        "semanticCommand": "device.shutdown",
+        "eventOutput": "Web Application: interface DOWN (simulation)",
+        "recordedUp": false,
+        "provider": "InternalSimulationAdapter",
+        "terminalVisibleDown": true
+      }
+    },
+    {
+      "id": "spatial-input-bidi-preference-and-structured-isolation",
+      "before": "Visualize canvas and independent Learn structured consumer",
+      "action": "Ctrl+RMB drag, normal RMB, keyboard focus/selection/camera/move, then visible locale preference change in Learn",
+      "owner": "SpatialInteraction + ContextSuppressionGate + ScopedPreferences + StructuredDocumentDomainAdapter",
+      "oracle": "only own context is suppressed; keyboard intents stay distinct; Learn remains Library-free and Bidi-correct",
+      "status": "PASS",
+      "evidence": {
+        "contextSuppression": "own-event-only",
+        "keyboard": {
+          "focusOnly": true,
+          "spaceSelect": true,
+          "altCameraOnly": true,
+          "controlMoveOnly": true
+        },
+        "preference": {
+          "lang": "en",
+          "dir": "ltr"
+        },
+        "structured": {
+          "hostKind": "DONOR_FREE_WORKSPACE_HOST",
+          "domainKind": "learn",
+          "searchCount": 0,
+          "bdi": true,
+          "isolation": true
+        },
+        "libraryParity": {
+          "consumer": "library",
+          "activeDocument": "KU-D05-0021",
+          "blockCount": 6,
+          "editorCore": "UnifiedEditorCore",
+          "donorHost": true
+        }
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "filename": "w3a-full-browser-workspace-pane-context.png",
+      "flowId": "workspace.transient-and-pane-lifecycle",
+      "property": "preferred/effective pane state and shared workspace chrome",
+      "viewport": {
+        "width": 900,
+        "height": 980
+      },
+      "bytes": 99897,
+      "sha256": "10ebecf11b093e4cbb4d25282dbcc328d7cebb3b7b070bee28f0721df0f31e0e",
+      "scope": "EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE"
+    },
+    {
+      "filename": "w3a-full-browser-selection-connect.png",
+      "flowId": "spatial.selection-connect-canonical-edge",
+      "property": "exactly-two central ActionAvailability presentation",
+      "viewport": {
+        "width": 1440,
+        "height": 980
+      },
+      "bytes": 218715,
+      "sha256": "ed728bea4e284222b79a6f4a08ddac703905eb6c2b756b6b8a2692f638d14c47",
+      "scope": "EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE"
+    },
+    {
+      "filename": "w3a-full-browser-operational-shutdown.png",
+      "flowId": "runtime-causal-consequence",
+      "property": "provider-neutral terminal and canonical shutdown consequence",
+      "viewport": {
+        "width": 1440,
+        "height": 980
+      },
+      "bytes": 148372,
+      "sha256": "45d52d4effb6c16a6aa3a04b41a399c823e04a40146bf3431ea8b80364a55b7b",
+      "scope": "EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE"
+    }
+  ],
+  "limitations": [
+    "Headless Chromium only",
+    "Six bounded critical flows; not exhaustive permutation certification",
+    "Internal simulation does not execute host commands",
+    "A missing browser executable is reported as failure and never converted to a pass",
+    "Optional in-memory transport exists for environments that administratively block localhost navigation; it rewrites the same built ESM graph without changing application source"
+  ]
+}

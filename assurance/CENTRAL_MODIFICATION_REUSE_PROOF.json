@@ -1,0 +1,34 @@
+{
+  "gate": "CENTRAL_MODIFICATION_ACCEPTANCE_TEST",
+  "status": "PASS_FOR_CANDIDATE",
+  "policyRevision": "RELATION-CENTRAL-04",
+  "centralImplementation": "dist/foundation/relations.js#RelationInteraction",
+  "semanticMutationOwner": "spatial.relation.commit \u2192 supplied RelationDomainAdapter",
+  "consumers": [
+    {
+      "surface": "visualize",
+      "adapter": "VisualizeDomain.LocalGraph",
+      "receipt": "tools/browser-conformance.mjs#spatial.selection-connect-canonical-edge"
+    },
+    {
+      "surface": "enterprise",
+      "adapter": "W03EnterpriseDomain.LocalDraft",
+      "source": "W03 v3.4 Enterprise exact fixture + extracted validateRelation",
+      "receipt": "tools/browser-conformance.mjs#central-change-reuse"
+    }
+  ],
+  "assertions": [
+    "Both consumers instantiate the same RelationInteraction class",
+    "One central ActionAvailabilityCore and composer layout/viewport/focus/exit policy",
+    "Each adapter owns its canonical relation truth",
+    "Spatial edges refresh only from adapter.project()",
+    "No second composer implementation or command registration",
+    "Learn, Visualize, Enterprise and Runs consume the same WorkspaceFoundationHost; Library compatibility remains an explicit bounded deviation"
+  ],
+  "evidence": [
+    "assurance/BROWSER_CONFORMANCE_RECEIPT.json",
+    "assurance/MODEL_TEST_RESULTS.json",
+    "contracts/MECHANIC_OWNERSHIP_REGISTRY.json",
+    "assurance/DUPLICATE_MECHANIC_SCAN.json"
+  ]
+}

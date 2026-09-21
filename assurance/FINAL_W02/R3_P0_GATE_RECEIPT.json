@@ -1,0 +1,309 @@
+{
+  "schemaVersion": 1,
+  "kind": "FINAL_W02_R3_P0_GATE_RECEIPT",
+  "status": "PASS",
+  "sourceCanonicalTreeSha256": "d6b3fe48f7baddb115597ccb37d819d6b205cbcae94910b87245c18b398477f5",
+  "canonicalSourceFileCount": 144,
+  "requiredP0Ids": [
+    "G01",
+    "G02",
+    "G03",
+    "G04",
+    "G05",
+    "G06",
+    "G07",
+    "G08",
+    "G09",
+    "G10",
+    "G11",
+    "G12",
+    "G14",
+    "G15",
+    "G16",
+    "G17",
+    "G21",
+    "G22",
+    "G23"
+  ],
+  "summary": {
+    "total": 19,
+    "pass": 19,
+    "fail": 0
+  },
+  "results": [
+    {
+      "id": "G01",
+      "law": "GL-01/GL-12",
+      "status": "PASS",
+      "detail": {
+        "mode": "read",
+        "band": "wide",
+        "blocks": 15,
+        "editables": 0,
+        "left": "open",
+        "right": "open",
+        "overflow": false
+      }
+    },
+    {
+      "id": "G02",
+      "law": "GL-02",
+      "status": "PASS",
+      "detail": {
+        "html": "Final gate edit TCP/IP",
+        "tx": {
+          "contract": {
+            "id": "StructuredTransactionHistoryRecoveryOwner",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "owner": "Structured Family",
+            "policyRevision": "structured-transaction-history-recovery-vs04-r1"
+          },
+          "owner": "StructuredTransactionHistoryRecoveryOwner",
+          "policy": {
+            "recoveryRetentionLimit": 5
+          },
+          "documentId": "KU-D05-0021",
+          "workingRevision": 2,
+          "committedRevision": "rev-17",
+          "dirty": true,
+          "historyLength": 2,
+          "historyIndex": 1,
+          "canUndo": true,
+          "canRedo": false,
+          "recoveryCount": 1,
+          "persistedBoundaryConfigured": false
+        },
+        "selected": null
+      }
+    },
+    {
+      "id": "G03",
+      "law": "GL-02/GL-04",
+      "status": "PASS",
+      "detail": {
+        "undo": "يجب أن يربط التطبيق كل طلب بين <bdi dir=\"ltr\">subject_id</bdi> و <bdi dir=\"ltr\">object_id</bdi> والسياق المصرّح به. هذه فقرة طويلة مقصودة لتلتف بصريًا إلى عدة أسطر مع بقائها <strong>Block واحدًا</strong> بهوية بنيوية واحدة.",
+        "redo": "R3 undo redo proof",
+        "before": "يجب أن يربط التطبيق كل طلب بين subject_id و object_id والسياق المصرّح به. هذه فقرة طويلة مقصودة لتلتف بصريًا إلى عدة أسطر مع بقائها Block واحدًا بهوية بنيوية واحدة."
+      }
+    },
+    {
+      "id": "G04",
+      "law": "GL-03",
+      "status": "PASS",
+      "detail": {
+        "selected": [
+          "blk-d05-h1",
+          "blk-d05-p1"
+        ],
+        "cleared": true,
+        "escapeBindingStatic": true
+      }
+    },
+    {
+      "id": "G05",
+      "law": "GL-04",
+      "status": "PASS",
+      "detail": {
+        "before": 6,
+        "after": 7,
+        "owner": "StructuredDocumentDomainAdapter"
+      }
+    },
+    {
+      "id": "G06",
+      "law": "GL-04",
+      "status": "PASS",
+      "detail": {
+        "target": "blk-d05-t1",
+        "undoExact": true,
+        "confirmed": true
+      }
+    },
+    {
+      "id": "G07",
+      "law": "GL-04",
+      "status": "PASS",
+      "detail": {
+        "owner": null,
+        "undoExact": true
+      }
+    },
+    {
+      "id": "G08",
+      "law": "GL-04",
+      "status": "PASS",
+      "detail": {
+        "commitOnDrop": true,
+        "indicator": {
+          "visible": true,
+          "derived": true,
+          "owner": "StructuredDragDropOwner",
+          "valid": true,
+          "code": "AVAILABLE",
+          "reason": "",
+          "targetIdentity": "ROOT::2::0",
+          "target": {
+            "kind": "gap",
+            "parentId": null,
+            "index": 2,
+            "depth": 0,
+            "afterBlockId": "blk-d05-p1",
+            "beforeBlockId": "blk-d05-p-auto-ltr"
+          }
+        },
+        "undoExact": true,
+        "owner": "StructuredDragDropOwner"
+      }
+    },
+    {
+      "id": "G09",
+      "law": "GL-03/GL-05",
+      "status": "PASS",
+      "detail": {
+        "text": "يجب أن يربط التطبيق كل طلب بين subject_id و object_id والسياق المصرّح به. هذه فقرة طويلة مقصودة لتلتف بصريًا إلى عدة أسطر مع بقائها Block واحدًا بهوية بنيوية واحدة.",
+        "selection": true,
+        "toolbar": true
+      }
+    },
+    {
+      "id": "G10",
+      "law": "GL-05",
+      "status": "PASS",
+      "detail": {
+        "before": 6,
+        "after": 5,
+        "result": true,
+        "undoExact": true
+      }
+    },
+    {
+      "id": "G11",
+      "law": "GL-06",
+      "status": "PASS",
+      "detail": {
+        "html": "<strong>ok</strong>x",
+        "changed": true,
+        "safe": true,
+        "violations": [
+          {
+            "code": "ACTIVE_ELEMENT_STRIPPED",
+            "tag": "script"
+          },
+          {
+            "code": "ACTIVE_ATTRIBUTE_STRIPPED",
+            "tag": "strong"
+          },
+          {
+            "code": "TAG_STRIPPED",
+            "tag": "a"
+          },
+          {
+            "code": "TAG_STRIPPED",
+            "tag": "a"
+          }
+        ],
+        "policyRevision": "structured-rich-sanitize-w4c-r1"
+      }
+    },
+    {
+      "id": "G12",
+      "law": "GL-07",
+      "status": "PASS",
+      "detail": {
+        "searchFocused": true,
+        "tabContained": true,
+        "escaped": true
+      }
+    },
+    {
+      "id": "G14",
+      "law": "GL-08",
+      "status": "PASS",
+      "detail": {
+        "collapsed": "collapsed",
+        "resizeBefore": "304",
+        "resizeAfter": "314"
+      }
+    },
+    {
+      "id": "G15",
+      "law": "GL-08",
+      "status": "PASS",
+      "detail": {
+        "focusState": true,
+        "restored": true
+      }
+    },
+    {
+      "id": "G16",
+      "law": "GL-09",
+      "status": "PASS",
+      "detail": {
+        "auto": {
+          "ar": "rtl",
+          "en": "ltr"
+        },
+        "before": null,
+        "mid": "ltr",
+        "undo": null
+      }
+    },
+    {
+      "id": "G17",
+      "law": "GL-10",
+      "status": "PASS",
+      "detail": {
+        "selected": "blk-d05-h1",
+        "context": "blk-d05-h1",
+        "bottom": true
+      }
+    },
+    {
+      "id": "G21",
+      "law": "GL-11",
+      "status": "PASS",
+      "detail": {
+        "stateLabHidden": true,
+        "recoveryVisible": true
+      }
+    },
+    {
+      "id": "G22",
+      "law": "GL-07",
+      "status": "PASS",
+      "detail": {
+        "menuOpened": true,
+        "slashBindingStatic": true,
+        "menuSearchFocused": true,
+        "canonicalEscapeRoute": true,
+        "focusReturned": true
+      }
+    },
+    {
+      "id": "G23",
+      "law": "GL-05",
+      "status": "PASS",
+      "detail": {
+        "failureObserved": {
+          "threw": false
+        },
+        "unchanged": true
+      }
+    }
+  ],
+  "nonP0HistoricalReplay": {
+    "fullReplayStatus": "FAIL",
+    "fullReplayPass": 22,
+    "fullReplayFail": 1,
+    "failedIds": [
+      "G19"
+    ],
+    "resolution": "G19 is P1 in accepted Golden matrix; its historical close assertion is superseded for the current product by SettingsCenterOwner/P02/P07C. Exact-current current-owner Settings gates PASS on real Learn and real Library at 1440 and 1024.",
+    "currentSettingsEvidence": [
+      "assurance/FINAL_W02/LEARN_INTEGRATED_GATES.json",
+      "assurance/FINAL_W02/LIBRARY_SHELL_INTEGRATED_GATES.json"
+    ]
+  },
+  "claim": "ALL_APPLICABLE_R3_P0_SCENARIOS_PASS_EXACT_CURRENT"
+}

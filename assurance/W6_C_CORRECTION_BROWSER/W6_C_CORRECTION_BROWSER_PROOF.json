@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "kind": "W6_C_STRUCTURED_NOTE_CONTENT_BOUNDED_CORRECTION_BROWSER_PROOF",
+  "classification": "W6_C_CORRECTION_EXECUTION_EVIDENCE_NOT_CONTROLLER_ACCEPTANCE",
+  "status": "PASS",
+  "sourceCanonicalTreeSha256": "fcca03a3ef529e5eda8b3ddddcc1f093ad7054336430d3c08224fac55328c753",
+  "canonicalSourceFileCount": 113,
+  "proof": {
+    "status": "PASS",
+    "steps": [
+      {
+        "id": "browser.first-canonical-publication",
+        "status": "PASS",
+        "evidence": {
+          "documentId": "w6c-correction-browser-doc-A"
+        }
+      },
+      {
+        "id": "browser.duplicate-rejected-first-remains-usable",
+        "status": "PASS",
+        "evidence": {
+          "message": "DUPLICATE_STRUCTURED_NOTE_CONTENT_ADAPTER:w6c-correction-browser-A",
+          "publicationCountUnchanged": true
+        }
+      },
+      {
+        "id": "browser.reopen-and-separate-window-reuse-first-adapter",
+        "status": "PASS",
+        "evidence": {
+          "documentId": "w6c-correction-browser-doc-A",
+          "sameHost": true,
+          "sameBinding": true
+        }
+      },
+      {
+        "id": "browser.document-collision-fail-atomic-then-legal-retry",
+        "status": "PASS",
+        "evidence": {
+          "collision": "STRUCTURED_NOTE_CONTENT_DOCUMENT_ID_COLLISION:w6c-correction-browser-doc-A:w6c-correction-browser-A!=w6c-correction-browser-B",
+          "documents": [
+            "w6c-correction-browser-doc-A",
+            "w6c-correction-browser-doc-B"
+          ]
+        }
+      },
+      {
+        "id": "browser.independent-graph-textual-identity-reuse",
+        "status": "PASS",
+        "evidence": {
+          "sameNoteId": true,
+          "sameDocumentId": true,
+          "independentCanonicalOwners": true
+        }
+      }
+    ],
+    "canonicalDocumentId": "w6c-correction-browser-doc-A",
+    "secondDocumentId": "w6c-correction-browser-doc-B"
+  },
+  "pageErrors": [],
+  "screenshot": {
+    "path": "assurance/W6_C_CORRECTION_BROWSER/W6_C_STRUCTURED_NOTE_CONTENT_CORRECTION_BROWSER.png",
+    "bytes": 14171,
+    "sha256": "81d5b2d46dce3948f2184e3d57d1e8a769ed9b97e738ba5b9d107e486fb0c871"
+  }
+}

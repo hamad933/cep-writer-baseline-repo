@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "kind": "W5_B_STRUCTURED_NAVIGATION_CORRECTED2_MICRO3_PROOF",
+  "status": "PASS",
+  "pass": 9,
+  "fail": 0,
+  "cases": [
+    {
+      "id": "w5b.micro3.negative-working-revision-rejected",
+      "status": "PASS",
+      "evidence": {
+        "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+      }
+    },
+    {
+      "id": "w5b.micro3.fractional-working-revision-rejected",
+      "status": "PASS",
+      "evidence": {
+        "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+      }
+    },
+    {
+      "id": "w5b.micro3.previously-invalid-noncanonical-types-remain-rejected",
+      "status": "PASS",
+      "evidence": {
+        "checks": [
+          {
+            "kind": "string",
+            "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+          },
+          {
+            "kind": "number",
+            "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+          },
+          {
+            "kind": "number",
+            "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+          },
+          {
+            "kind": "boolean",
+            "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+          },
+          {
+            "kind": "array",
+            "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+          },
+          {
+            "kind": "object",
+            "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "w5b.micro3.null-working-revision-remains-valid",
+      "status": "PASS",
+      "evidence": {
+        "workingRevision": null
+      }
+    },
+    {
+      "id": "w5b.micro3.valid-safe-integers-accepted-unchanged",
+      "status": "PASS",
+      "evidence": {
+        "values": [
+          0,
+          1,
+          2,
+          42,
+          9007199254740991
+        ]
+      }
+    },
+    {
+      "id": "w5b.micro3.direct-helper-rejects-negative-and-fractional",
+      "status": "PASS",
+      "evidence": {
+        "checks": [
+          {
+            "value": -1,
+            "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+          },
+          {
+            "value": 1.5,
+            "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "w5b.micro3.owner-apis-share-central-negative-validation",
+      "status": "PASS",
+      "evidence": {
+        "checks": [
+          {
+            "api": "outline",
+            "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+          },
+          {
+            "api": "quickJump",
+            "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+          },
+          {
+            "api": "readInspection",
+            "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+          },
+          {
+            "api": "descriptor",
+            "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "w5b.micro3.owner-apis-share-central-fractional-validation",
+      "status": "PASS",
+      "evidence": {
+        "checks": [
+          {
+            "api": "outline",
+            "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+          },
+          {
+            "api": "quickJump",
+            "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+          },
+          {
+            "api": "readInspection",
+            "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+          },
+          {
+            "api": "descriptor",
+            "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "w5b.micro3.valid-owner-provenance-preserved",
+      "status": "PASS",
+      "evidence": {
+        "workingRevision": 7,
+        "outline": {
+          "documentId": "micro3-doc",
+          "committedRevision": "micro3-rev-1",
+          "workingRevision": 7,
+          "identityOwner": "Micro3IdentityOwner"
+        },
+        "quickJump": {
+          "documentId": "micro3-doc",
+          "committedRevision": "micro3-rev-1",
+          "workingRevision": 7,
+          "identityOwner": "Micro3IdentityOwner"
+        },
+        "inspection": {
+          "documentId": "micro3-doc",
+          "committedRevision": "micro3-rev-1",
+          "workingRevision": 7,
+          "identityOwner": "Micro3IdentityOwner"
+        }
+      }
+    }
+  ],
+  "sourceCanonicalTreeSha256": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d",
+  "canonicalSourceFileCount": 99,
+  "regressionSuites": {
+    "original": {
+      "status": "PASS",
+      "pass": 9,
+      "fail": 0
+    },
+    "previousCorrection": {
+      "status": "PASS",
+      "pass": 8,
+      "fail": 0
+    },
+    "postCorrectionDelta": {
+      "status": "PASS",
+      "pass": 18,
+      "fail": 0
+    }
+  },
+  "classification": "LANE_B_CORRECTED2_MICRO_CORRECTION_ONLY_EVIDENCE_NOT_CONTROLLER_ACCEPTANCE"
+}

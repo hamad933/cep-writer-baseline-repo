@@ -1,0 +1,17 @@
+{
+  "version": "1.1",
+  "status": "ACTIVE_SUPPLEMENT",
+  "supersedes": "CEP_CONTROLLER_COLAB_RUNTIME_TEST_LESSONS_SUPPLEMENT_v1.0.json",
+  "source_event": "W01/W02 C025 Colab/runtime/test/Drive-custody + clean-notebook packaging correction 2026-09-09",
+  "new_lessons": [
+    {
+      "lesson_id": "CL-038",
+      "title": "Canonical ZIP reproduction requires canonical package-internal metadata, not only canonical source",
+      "source_event": "CEP_W01_W02_COLAB_CLEAN_PROVEN_PATH_v1.0 CELL 02C reproduced the intended source identity but simplified internal identity/pointer metadata, producing ZIP size 3061166 and SHA d530c9fcc459ba67d8f9b4527e9e97057bbe287b72ac0022c78ebe2010415b73 instead of canonical 3061541 / bdd7343bc2ca34e5ea0785ddce53eaaf7eff0164b93c78b7851d24b3eb6c4626.",
+      "root_cause": "The notebook correctly distinguished source identity from container identity conceptually, but its packaging cell asserted a historical container SHA without reproducing all original package-internal bytes.",
+      "policy_change": "When asserting an existing canonical ZIP SHA, reproduce the exact original packaging recipe: source files, package-internal metadata filenames/content/serialization, package manifest, permissions, member order, timestamps and compression recipe. If any of those intentionally change, assign a new container identity and never silently reuse the historical ZIP SHA.",
+      "scope": "ALL_REPRODUCIBLE_PACKAGING_AND_NOTEBOOKS",
+      "status": "ACTIVE"
+    }
+  ]
+}

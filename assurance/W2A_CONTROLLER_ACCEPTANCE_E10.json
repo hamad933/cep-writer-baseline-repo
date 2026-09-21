@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "classification": "CONTROLLER_ACCEPTANCE_RECEIPT",
+  "mission": "W2-A-GLOBAL-COMMAND-TRANSIENT-PREFERENCES",
+  "parent": {
+    "successorId": "CEP-FR-E09-FW-C-eebd3b8b",
+    "sha256": "eebd3b8b0891b8c4c4d09a671f9bc0f8bad4a3e337eca9d8859b24a5bd5da137",
+    "canonicalSourceSha256": "8f44670ccdfd2aeefe6d0c5321259fb60c9be5ead68b3a338da4a1f9db89ff3f"
+  },
+  "writerCandidate": {
+    "sha256": "9da1da19e3c795fc5d41c2abc3160b2e619f0cf8339ae542a9cbb30a19f77d6f",
+    "canonicalSourceSha256": "6542567d81f81cab3907bca1707202e54237fb82dabf88a3cf9daaef7fff9d57"
+  },
+  "controllerConvergenceCorrection": {
+    "path": "stack/native-typescript/foundation/global/workspace-host-kernel.ts",
+    "change": "stateOwners.transients now truthfully resolves to TRANSIENT_FOCUS_OWNER / TransientFocusOwner; compatibility facade remains delegated only"
+  },
+  "acceptedSource": {
+    "canonicalSourceSha256": "454427ed586a949de6636051f99f529e685e1e482e30dcc212c20fbe8ae10bf9",
+    "files": 34
+  },
+  "independentGates": {
+    "buildRuntime": "PASS",
+    "model": "140/140 PASS",
+    "npmCheck": "PASS",
+    "browserConformance": "6/6 PASS Chromium CDP",
+    "w2aBrowser": "3/3 PASS Chromium CDP",
+    "negativeScan": "16/16 PASS",
+    "centralModification": "PASS exact revert"
+  },
+  "owners": [
+    "SemanticCommandBus",
+    "TransientFocusOwner",
+    "ScopedPreferencesOwner"
+  ],
+  "controllerAccepted": true,
+  "selfPromoted": false,
+  "wave3Started": false,
+  "acceptedAtUtc": "2026-09-11T23:32:10.145312+00:00"
+}

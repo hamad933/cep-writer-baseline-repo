@@ -1,0 +1,253 @@
+{
+  "objects": {
+    "Review": "reviewId + pinned EvidenceRevision + criterion scope",
+    "ReviewerAssignment": "reviewId + actor identity + permission proof ref",
+    "Finding": "findingId + criterion + scope + observation",
+    "Decision": "decisionId + supersedesDecisionRef + exact evidence/criteria basis"
+  },
+  "state_dimensions": {
+    "review": [
+      "REQUESTED",
+      "ASSIGNED",
+      "IN_REVIEW",
+      "DECIDED",
+      "CLOSED"
+    ],
+    "finding": [
+      "IN_SCOPE",
+      "OUT_OF_SCOPE",
+      "RESOLVED"
+    ],
+    "effectiveDecision": [
+      "NONE",
+      "ACCEPT",
+      "REJECT",
+      "QUALIFIED"
+    ],
+    "rereview": [
+      "NONE",
+      "OPEN"
+    ]
+  },
+  "read_model": "FormalReviewReadService serves Review workflow and prior effective decision separately, using analytical compare UI adapters.",
+  "persistence": {
+    "Review": "W04Review.Review",
+    "ReviewerAssignment": "W04Review.Assignment",
+    "Finding": "W04Review.Finding",
+    "Decision": "W04Review.Decision append-only"
+  },
+  "invariants": [
+    "Finding is not Decision",
+    "Open re-review does not erase prior effective Decision",
+    "Actor display label is not institutional reviewer authority",
+    "Review criteria are pinned at request, not latest policy alias"
+  ],
+  "epistemic": {
+    "empty": "No assigned reviews: show request/queue filters, not fabricated reviewer role.",
+    "stale": "Evidence revision changed during review: continue pinned basis or explicit new review request.",
+    "unavailable": "Authority registry unavailable: inspect allowed; decision unavailable with reason.",
+    "error": "Stale expected decision returns conflict and preserves findings."
+  },
+  "operations": [
+    {
+      "name": "review",
+      "family": "ReviewDecisionCommand",
+      "payload": "reviewId:string evidenceRef:ref criterionScope:refs action:enum:request|assign expectedState:enum:ABSENT|REQUESTED reviewerId:string",
+      "before": "review absent/requested",
+      "event": "request or assign",
+      "after": "REQUESTED or ASSIGNED",
+      "guard": "Reviewer actor exists; assignment permission independently checked",
+      "oracle": "Personal owner identity never implies invented institutional authority",
+      "persistence": "W04Review.Review",
+      "method": "POST",
+      "gate": "AUTHORITY_GATED",
+      "command_id": "reviews.review",
+      "surface_id": "reviews",
+      "semantic_owner": "W04ReviewDomain",
+      "focus_after": "Reviews active object/control; detached target→reviews-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Stale expected decision returns conflict and preserves findings.",
+        "503_timeout": "Authority registry unavailable: inspect allowed; decision unavailable with reason."
+      },
+      "test_id": "TEST-reviews.review",
+      "evidence_id": "EVID-reviews.review",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "finding",
+      "family": "ReviewDecisionCommand",
+      "payload": "reviewId:string criterionScope:refs findingId:string action:enum:addFinding expectedState:enum:ASSIGNED|IN_REVIEW observation:string",
+      "before": "review=ASSIGNED|IN_REVIEW",
+      "event": "record scoped finding",
+      "after": "review=IN_REVIEW; new Finding",
+      "guard": "Finding criterion within pinned scope or explicitly out-of-scope",
+      "oracle": "Adding Finding creates no effective Decision",
+      "persistence": "W04Review.Finding",
+      "method": "POST",
+      "gate": null,
+      "command_id": "reviews.finding",
+      "surface_id": "reviews",
+      "semantic_owner": "W04ReviewDomain",
+      "focus_after": "Reviews active object/control; detached target→reviews-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Stale expected decision returns conflict and preserves findings.",
+        "503_timeout": "Authority registry unavailable: inspect allowed; decision unavailable with reason."
+      },
+      "test_id": "TEST-reviews.finding",
+      "evidence_id": "EVID-reviews.finding",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "compare",
+      "family": "AnalyticalCommand",
+      "payload": "leftRef:ref rightRef:ref scope:strings workingAnalysisId:string",
+      "before": "review=IN_REVIEW",
+      "event": "compare prior and proposed Evidence revision",
+      "after": "comparison working state only",
+      "guard": "Exact pair; formal review basis remains pinned",
+      "oracle": "Compare route does not silently replace review EvidenceRef",
+      "persistence": "W04Review.AnalysisSession",
+      "method": "GET",
+      "gate": null,
+      "command_id": "reviews.compare",
+      "surface_id": "reviews",
+      "semantic_owner": "W04ReviewDomain",
+      "focus_after": "Reviews active object/control; detached target→reviews-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Stale expected decision returns conflict and preserves findings.",
+        "503_timeout": "Authority registry unavailable: inspect allowed; decision unavailable with reason."
+      },
+      "test_id": "TEST-reviews.compare",
+      "evidence_id": "EVID-reviews.compare",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "supersede",
+      "family": "ReviewDecisionCommand",
+      "payload": "reviewId:string criterionScope:refs decisionId:string priorDecisionRef:optional_ref action:enum:decide expectedState:enum:IN_REVIEW outcome:enum:ACCEPT|REJECT|QUALIFIED basisRefs:refs",
+      "before": "review=IN_REVIEW; prior Decision may be effective",
+      "event": "append decision and atomically switch effective pointer",
+      "after": "review=DECIDED; old Decision retained",
+      "guard": "Server verifies reviewer authority and exact current effective Decision CAS",
+      "oracle": "Concurrent Decisions cause one conflict; open re-review never clears effective pointer",
+      "persistence": "W04Review.Decision",
+      "method": "POST",
+      "gate": "AUTHORITY_GATED",
+      "command_id": "reviews.supersede",
+      "surface_id": "reviews",
+      "semantic_owner": "W04ReviewDomain",
+      "focus_after": "Reviews active object/control; detached target→reviews-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Stale expected decision returns conflict and preserves findings.",
+        "503_timeout": "Authority registry unavailable: inspect allowed; decision unavailable with reason."
+      },
+      "test_id": "TEST-reviews.supersede",
+      "evidence_id": "EVID-reviews.supersede",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "reviews",
+  "title": "Reviews",
+  "workspace": "W04",
+  "semantic_owner": "W04ReviewDomain",
+  "archetype": "FormalReviewDecisionWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W04-REV-001",
+    "CAP-W04-REV-002",
+    "CAP-W04-REV-003",
+    "CAP-W04-REV-004",
+    "CAP-W04-REV-005",
+    "CAP-W04-REV-006",
+    "CAP-W04-REV-007",
+    "CAP-W04-REV-008",
+    "CAP-W04-REV-009",
+    "CAP-W04-REV-010",
+    "CAP-W04-REV-011"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W04-REV-001",
+        "CAP-W04-REV-002",
+        "CAP-W04-REV-003",
+        "CAP-W04-REV-004",
+        "CAP-W04-REV-005",
+        "CAP-W04-REV-006",
+        "CAP-W04-REV-007",
+        "CAP-W04-REV-008",
+        "CAP-W04-REV-009",
+        "CAP-W04-REV-010",
+        "CAP-W04-REV-011"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Reviews",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-005",
+    "NC-017",
+    "NC-018",
+    "NC-019",
+    "NC-020"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore",
+    "AnalyticalWorkbenchCore"
+  ],
+  "adapter": "W04ReviewDomainAdapter",
+  "regions": {
+    "TOP": "Reviews exact identity, local mode, command routes",
+    "LEFT": "typed Review collection/navigation",
+    "CENTER": "FormalReviewDecisionWorkbench primary task",
+    "RIGHT": "one selected Review identity/context inspector",
+    "BOTTOM": "Deep Reviews diagnostics/history"
+  },
+  "command_ids": [
+    "reviews.review",
+    "reviews.finding",
+    "reviews.compare",
+    "reviews.supersede"
+  ]
+}

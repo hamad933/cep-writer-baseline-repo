@@ -1,0 +1,281 @@
+{
+  "objects": {
+    "KnowledgeObject": "W02 canonical ID + revision",
+    "Representation": "representationId + canonicalObjectRef + viewId + geometry",
+    "KnowledgeRelation": "relationId + semantic type + endpoint refs",
+    "SpatialView": "Tree/Path/Graph/Canvas representation adapter"
+  },
+  "state_dimensions": {
+    "view": [
+      "TREE",
+      "PATH",
+      "GRAPH",
+      "CANVAS"
+    ],
+    "relation": [
+      "DRAFT",
+      "VALIDATED",
+      "REJECTED"
+    ],
+    "selection": [
+      "NONE",
+      "SINGLE",
+      "MULTI"
+    ]
+  },
+  "read_model": "KnowledgeRepresentationReadService joins canonical refs to per-view geometry; shared SpatialInteractionCore receives adapters only.",
+  "persistence": {
+    "KnowledgeRelation": "Knowledge domain relation records",
+    "Representation": "Knowledge representation store",
+    "SpatialView preferences": "GlobalPreferenceDomain"
+  },
+  "invariants": [
+    "representationId differs from canonicalObjectId",
+    "Moving geometry creates no relationship",
+    "All four views support domain-valid editing through same semantic command",
+    "Accessible navigator operates same representation selection"
+  ],
+  "epistemic": {
+    "empty": "Empty view offers add existing object/add draft via explicit command, not phantom nodes.",
+    "stale": "Canonical revision changed: mark representation stale and rebind explicitly.",
+    "unavailable": "Missing canonical object: retain detached representation/anchor and repair route.",
+    "error": "Cycle/type/permission rejection preserves drawing draft without canonical write."
+  },
+  "operations": [
+    {
+      "name": "select",
+      "family": "SpatialViewCommand",
+      "payload": "viewId:string representationIds:strings action:enum:replace|extend|clear",
+      "before": "selection any",
+      "event": "select via canvas or navigator",
+      "after": "same selection set and context reference",
+      "guard": "All representation IDs belong to view",
+      "oracle": "Keyboard navigator and pointer selection yield identical IDs",
+      "persistence": "SpatialInteractionCore.session",
+      "method": "LOCAL",
+      "gate": null,
+      "command_id": "visualize.select",
+      "surface_id": "visualize",
+      "semantic_owner": "VisualizeDomain",
+      "focus_after": "Visualize active object/control; detached target→visualize-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Cycle/type/permission rejection preserves drawing draft without canonical write.",
+        "503_timeout": "Missing canonical object: retain detached representation/anchor and repair route."
+      },
+      "test_id": "TEST-visualize.select",
+      "evidence_id": "EVID-visualize.select",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "link",
+      "family": "SpatialSemanticMutationCommand",
+      "payload": "domainObjectIds:refs relationType:string workingRevision:integer validationContext:object",
+      "before": "relation=DRAFT",
+      "event": "validate and create typed knowledge relationship",
+      "after": "relation=VALIDATED or REJECTED",
+      "guard": "Knowledge adapter validates endpoint types, cycles and authority",
+      "oracle": "Drawing edge without validated relation command causes zero canonical writes",
+      "persistence": "Knowledge.Relation",
+      "method": "POST",
+      "gate": null,
+      "command_id": "visualize.link",
+      "surface_id": "visualize",
+      "semantic_owner": "VisualizeDomain",
+      "focus_after": "Visualize active object/control; detached target→visualize-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Cycle/type/permission rejection preserves drawing draft without canonical write.",
+        "503_timeout": "Missing canonical object: retain detached representation/anchor and repair route."
+      },
+      "test_id": "TEST-visualize.link",
+      "evidence_id": "EVID-visualize.link",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "move",
+      "family": "SpatialViewCommand",
+      "payload": "viewId:string representationIds:strings positions:positions action:enum:move|align|distribute",
+      "before": "view editable",
+      "event": "move representations",
+      "after": "geometry updated in one presentation transaction",
+      "guard": "View membership and finite coordinates",
+      "oracle": "Layout leaves canonical relationship digest identical",
+      "persistence": "Knowledge.Representation",
+      "method": "POST",
+      "gate": null,
+      "command_id": "visualize.move",
+      "surface_id": "visualize",
+      "semantic_owner": "VisualizeDomain",
+      "focus_after": "Visualize active object/control; detached target→visualize-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Cycle/type/permission rejection preserves drawing draft without canonical write.",
+        "503_timeout": "Missing canonical object: retain detached representation/anchor and repair route."
+      },
+      "test_id": "TEST-visualize.move",
+      "evidence_id": "EVID-visualize.move",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "edit",
+      "family": "ContentEditCommand",
+      "payload": "documentId:string workingRevision:integer anchor:string blocks:blocks",
+      "before": "canonical draft selected",
+      "event": "edit content through owner",
+      "after": "canonical working draft changes; representations still reference it",
+      "guard": "Knowledge draft permission",
+      "oracle": "Edit one canonical object updates all representations without cloned content",
+      "persistence": "Knowledge.WorkingDocument",
+      "method": "POST",
+      "gate": null,
+      "command_id": "visualize.edit",
+      "surface_id": "visualize",
+      "semantic_owner": "VisualizeDomain",
+      "focus_after": "Visualize active object/control; detached target→visualize-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Cycle/type/permission rejection preserves drawing draft without canonical write.",
+        "503_timeout": "Missing canonical object: retain detached representation/anchor and repair route."
+      },
+      "test_id": "TEST-visualize.edit",
+      "evidence_id": "EVID-visualize.edit",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "viewport",
+      "family": "SpatialViewCommand",
+      "payload": "viewId:string action:enum:pan|zoom|fit|grid|snap|minimap viewport:viewport",
+      "before": "view loaded",
+      "event": "change viewport affordance",
+      "after": "viewport changes independently of UI scale",
+      "guard": "Finite transform, adapter bounds; browser zoom gesture preserved",
+      "oracle": "Fit and minimap navigation are also keyboard reachable",
+      "persistence": "SpatialInteractionCore.session",
+      "method": "LOCAL",
+      "gate": null,
+      "command_id": "visualize.viewport",
+      "surface_id": "visualize",
+      "semantic_owner": "VisualizeDomain",
+      "focus_after": "Visualize active object/control; detached target→visualize-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Cycle/type/permission rejection preserves drawing draft without canonical write.",
+        "503_timeout": "Missing canonical object: retain detached representation/anchor and repair route."
+      },
+      "test_id": "TEST-visualize.viewport",
+      "evidence_id": "EVID-visualize.viewport",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "visualize",
+  "title": "Visualize",
+  "workspace": "W02",
+  "semantic_owner": "VisualizeDomain",
+  "archetype": "SpatialKnowledgeWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W02-VIS-001",
+    "CAP-W02-VIS-002",
+    "CAP-W02-VIS-003",
+    "CAP-W02-VIS-004",
+    "CAP-W02-VIS-005",
+    "CAP-W02-VIS-006",
+    "CAP-W02-VIS-007",
+    "CAP-W02-VIS-008",
+    "CAP-W02-VIS-009",
+    "CAP-W02-VIS-010",
+    "CAP-W02-VIS-011",
+    "CAP-W02-VIS-012",
+    "CAP-W02-VIS-013"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W02-VIS-001",
+        "CAP-W02-VIS-002",
+        "CAP-W02-VIS-003",
+        "CAP-W02-VIS-004",
+        "CAP-W02-VIS-005",
+        "CAP-W02-VIS-006",
+        "CAP-W02-VIS-007",
+        "CAP-W02-VIS-008",
+        "CAP-W02-VIS-009",
+        "CAP-W02-VIS-010",
+        "CAP-W02-VIS-011",
+        "CAP-W02-VIS-012",
+        "CAP-W02-VIS-013"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Visualize",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-006",
+    "NC-007",
+    "NC-003",
+    "NC-037"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore",
+    "SpatialInteractionCore"
+  ],
+  "adapter": "VisualizeDomainAdapter",
+  "regions": {
+    "TOP": "Visualize exact identity, local mode, command routes",
+    "LEFT": "typed KnowledgeObject collection/navigation",
+    "CENTER": "SpatialKnowledgeWorkbench primary task",
+    "RIGHT": "one selected KnowledgeObject identity/context inspector",
+    "BOTTOM": "Deep Visualize diagnostics/history"
+  },
+  "command_ids": [
+    "visualize.select",
+    "visualize.link",
+    "visualize.move",
+    "visualize.edit",
+    "visualize.viewport"
+  ]
+}

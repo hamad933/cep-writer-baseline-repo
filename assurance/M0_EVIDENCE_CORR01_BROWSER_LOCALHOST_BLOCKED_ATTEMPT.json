@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "classification": "REPRODUCIBLE_BROWSER_CONFORMANCE_RECEIPT_NOT_OWNER_ACCEPTANCE",
+  "command": "npm run browser:test",
+  "sourceFoundationBaseline": "CEP-FR-E18-ANALYTICAL-COMPARE-COMPLETION",
+  "sourceCandidate": "CANONICAL_SOURCE_TREE_SHA256:bba8fbccafa1ffb31088f16821390575a9cebb0fbc2b56e742ee195b8a90fa97",
+  "sourceCanonicalTreeSha256": "bba8fbccafa1ffb31088f16821390575a9cebb0fbc2b56e742ee195b8a90fa97",
+  "canonicalSourceFileCount": 211,
+  "currentUse": "EXACT_CURRENT_CANONICAL_SOURCE_EXECUTION_RECEIPT",
+  "executionStatus": "BLOCKED_OR_FAILED",
+  "prerequisite": "Install the Playwright package and its matching Chromium binary (npx playwright install chromium-headless-shell), or set CEP_BROWSER_EXECUTABLE to a compatible local executable.",
+  "declaredFlows": [
+    "workspace.transient-and-pane-lifecycle",
+    "spatial.selection-connect-canonical-edge",
+    "relation.route-convergence-and-label-scope",
+    "central-change-reuse",
+    "runtime-causal-consequence",
+    "spatial-input-bidi-preference-and-structured-isolation"
+  ],
+  "environment": {
+    "node": "v22.16.0",
+    "engine": "Playwright Chromium",
+    "playwrightResolution": "explicit-environment-override",
+    "packageDeclaredVersion": "1.62.1",
+    "browserExecutableOverride": true,
+    "transport": "localhost-http",
+    "viewport": "1440x980",
+    "reducedMotion": true
+  },
+  "summary": {
+    "total": 6,
+    "pass": 0,
+    "fail": 6
+  },
+  "flows": [
+    {
+      "id": "workspace.transient-and-pane-lifecycle",
+      "before": "Golden consumer with visible Foundation chrome",
+      "action": "toggle pane, open and escape command palette, then restore pane",
+      "owner": "WorkspaceFoundationHost + PaneLayoutController + TransientFocusController",
+      "oracle": "pane truth changes, transient reverses, focus returns",
+      "status": "FAIL",
+      "error": "page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:43173/?surface=golden\nCall log:\n  - navigating to \"http://127.0.0.1:43173/?surface=golden\", waiting until \"networkidle\"\n",
+      "pageErrors": []
+    },
+    {
+      "id": "spatial.selection-connect-canonical-edge",
+      "before": "Visualize graph with no current selection",
+      "action": "select exactly two objects, use compact Connect, submit composer",
+      "owner": "ActionAvailabilityCore + RelationInteractionOwner + RelationDomainAdapter",
+      "oracle": "one canonical relation is committed and its edge is projected",
+      "status": "FAIL",
+      "error": "page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:43173/?surface=visualize\nCall log:\n  - navigating to \"http://127.0.0.1:43173/?surface=visualize\", waiting until \"networkidle\"\n",
+      "pageErrors": []
+    },
+    {
+      "id": "relation.route-convergence-and-label-scope",
+      "before": "Existing canonical Visualize relation edge",
+      "action": "double-click whole edge, double-click label, close, then press F2 on edge",
+      "owner": "RelationInteractionOwner",
+      "oracle": "whole-edge double-click is inert; label and F2 converge on relation.edit",
+      "status": "FAIL",
+      "error": "page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:43173/?surface=visualize\nCall log:\n  - navigating to \"http://127.0.0.1:43173/?surface=visualize\", waiting until \"networkidle\"\n",
+      "pageErrors": []
+    },
+    {
+      "id": "central-change-reuse",
+      "before": "Visualize and Enterprise consumers use different domain adapters",
+      "action": "select two objects on each consumer and inspect selection action policy",
+      "owner": "ActionAvailabilityCore + RelationInteractionOwner",
+      "oracle": "both consumers expose the same policy revision and action owner",
+      "status": "FAIL",
+      "error": "page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:43173/?surface=visualize\nCall log:\n  - navigating to \"http://127.0.0.1:43173/?surface=visualize\", waiting until \"networkidle\"\n",
+      "pageErrors": []
+    },
+    {
+      "id": "runtime-causal-consequence",
+      "before": "RUN-0042 DEV-WEB-01 is selected and UP",
+      "action": "open terminal through visible command and submit shutdown",
+      "owner": "W03V34RunsAdapter via provider-neutral OperationalView",
+      "oracle": "canonical device, spatial projection, terminal output, event and recorded projection agree",
+      "status": "FAIL",
+      "error": "page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:43173/?surface=runs\nCall log:\n  - navigating to \"http://127.0.0.1:43173/?surface=runs\", waiting until \"networkidle\"\n",
+      "pageErrors": []
+    },
+    {
+      "id": "spatial-input-bidi-preference-and-structured-isolation",
+      "before": "Visualize canvas and independent Learn structured consumer",
+      "action": "Ctrl+RMB drag, normal RMB, keyboard focus/selection/camera/move, then canonical locale preference change in Learn",
+      "owner": "SpatialInteraction + ContextSuppressionGate + ScopedPreferences + StructuredDocumentDomainAdapter",
+      "oracle": "only own context is suppressed; keyboard intents stay distinct; Learn remains Library-free and Bidi-correct",
+      "status": "FAIL",
+      "error": "page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:43173/?surface=visualize\nCall log:\n  - navigating to \"http://127.0.0.1:43173/?surface=visualize\", waiting until \"networkidle\"\n",
+      "pageErrors": []
+    }
+  ],
+  "screenshots": [],
+  "limitations": [
+    "Headless Chromium only",
+    "Six bounded critical flows; not exhaustive permutation certification",
+    "Internal simulation does not execute host commands",
+    "A missing browser executable is reported as failure and never converted to a pass",
+    "Optional in-memory transport exists for environments that administratively block localhost navigation; it rewrites the same built ESM graph without changing application source"
+  ],
+  "correctionCapture": {
+    "mission": "M0_BOUNDED_EVIDENCE_PACKAGE_CORRECTION",
+    "capturedFrom": "independent correction rerun log",
+    "truth": "localhost Chromium navigation remained blocked by ERR_BLOCKED_BY_ADMINISTRATOR; no product PASS inferred"
+  }
+}

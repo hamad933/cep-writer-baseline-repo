@@ -1,0 +1,248 @@
+{
+  "objects": {
+    "LabDefinition": "labId; reusable standalone or Scenario module",
+    "LabRevision": "revisionId + exercise/tasks/tools + environment requirements",
+    "LabEnvironment": "definition-local requirements; runtime environment is separate",
+    "LabModuleRef": "scenario phase binding to exact LabRevision"
+  },
+  "state_dimensions": {
+    "definition": [
+      "DRAFT",
+      "DIRTY",
+      "VALIDATED",
+      "PUBLISHED"
+    ],
+    "usage": [
+      "STANDALONE",
+      "SCENARIO_MODULE"
+    ],
+    "toolSupport": [
+      "SUPPORTED",
+      "SIMULATED_ONLY",
+      "UNAVAILABLE"
+    ]
+  },
+  "read_model": "LabDefinitionReadService returns reusable definition, tool declarations and module references; runtime provider capabilities separately observed.",
+  "persistence": {
+    "LabDefinition": "W03Lab.Definition",
+    "LabRevision": "W03Lab.Revision",
+    "LabModuleRef": "Scenario owns reference only"
+  },
+  "invariants": [
+    "Lab definition is not Run instance",
+    "Reset execution creates new runtime state, not source overwrite",
+    "Simulated-only tools labelled explicitly",
+    "Scenario reference does not transfer Lab ownership"
+  ],
+  "epistemic": {
+    "empty": "New Lab exposes environment/exercise/task authoring and no fabricated terminal.",
+    "stale": "Referenced tool provider revision changed: old Lab stays pinned; preflight rechecks compatibility.",
+    "unavailable": "Required tool missing: show tool-level unavailability while definition remains editable.",
+    "error": "Invalid task/dependency reports exact task ID; retain other tasks."
+  },
+  "operations": [
+    {
+      "name": "author",
+      "family": "ContentEditCommand",
+      "payload": "documentId:string workingRevision:integer anchor:string blocks:blocks",
+      "before": "definition=DRAFT|DIRTY",
+      "event": "edit exercise/task structure",
+      "after": "definition=DIRTY",
+      "guard": "Lab adapter validates task IDs and tool references",
+      "oracle": "Same Lab revision reusable in two scenarios without duplicated definition",
+      "persistence": "W03Lab.WorkingDefinition",
+      "method": "POST",
+      "gate": null,
+      "command_id": "labs.author",
+      "surface_id": "labs",
+      "semantic_owner": "W03LabDomain",
+      "focus_after": "Labs active object/control; detached target→labs-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Invalid task/dependency reports exact task ID; retain other tasks.",
+        "503_timeout": "Required tool missing: show tool-level unavailability while definition remains editable."
+      },
+      "test_id": "TEST-labs.author",
+      "evidence_id": "EVID-labs.author",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "preflight",
+      "family": "OperationalCommand",
+      "payload": "labRef:ref environmentRef:ref action:enum:preflight expectedState:enum:PUBLISHED correlationId:string",
+      "before": "definition=PUBLISHED",
+      "event": "check tools/resources/isolation",
+      "after": "preflight READY or BLOCKED",
+      "guard": "Provider reports real capabilities; fixture not production support",
+      "oracle": "Absent terminal adapter blocks only terminal requirement and run start",
+      "persistence": "W03Run.PreflightReport",
+      "method": "POST",
+      "gate": null,
+      "command_id": "labs.preflight",
+      "surface_id": "labs",
+      "semantic_owner": "W03LabDomain",
+      "focus_after": "Labs active object/control; detached target→labs-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Invalid task/dependency reports exact task ID; retain other tasks.",
+        "503_timeout": "Required tool missing: show tool-level unavailability while definition remains editable."
+      },
+      "test_id": "TEST-labs.preflight",
+      "evidence_id": "EVID-labs.preflight",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "handoff",
+      "family": "OperationalCommand",
+      "payload": "labRef:ref environmentRef:ref action:enum:standalone|module expectedState:enum:PUBLISHED correlationId:string",
+      "before": "preflight=READY",
+      "event": "prepare Lab Run input",
+      "after": "frozen Lab input linked to standalone or Scenario context",
+      "guard": "Exact Lab/environment revision identity",
+      "oracle": "Module and standalone executions share definition identity but distinct run IDs",
+      "persistence": "W03Run.InputManifest",
+      "method": "POST",
+      "gate": null,
+      "command_id": "labs.handoff",
+      "surface_id": "labs",
+      "semantic_owner": "W03LabDomain",
+      "focus_after": "Labs active object/control; detached target→labs-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Invalid task/dependency reports exact task ID; retain other tasks.",
+        "503_timeout": "Required tool missing: show tool-level unavailability while definition remains editable."
+      },
+      "test_id": "TEST-labs.handoff",
+      "evidence_id": "EVID-labs.handoff",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "revise",
+      "family": "ContentEditCommand",
+      "payload": "documentId:string workingRevision:integer sourceRef:ref reason:string",
+      "before": "definition=PUBLISHED",
+      "event": "create successor definition",
+      "after": "definition=DRAFT",
+      "guard": "No in-place historical definition update",
+      "oracle": "Old result still resolves original Lab revision",
+      "persistence": "W03Lab.WorkingDefinition",
+      "method": "POST",
+      "gate": null,
+      "command_id": "labs.revise",
+      "surface_id": "labs",
+      "semantic_owner": "W03LabDomain",
+      "focus_after": "Labs active object/control; detached target→labs-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Invalid task/dependency reports exact task ID; retain other tasks.",
+        "503_timeout": "Required tool missing: show tool-level unavailability while definition remains editable."
+      },
+      "test_id": "TEST-labs.revise",
+      "evidence_id": "EVID-labs.revise",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "labs",
+  "title": "Labs",
+  "workspace": "W03",
+  "semantic_owner": "W03LabDomain",
+  "archetype": "SimulationLabAuthoringWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W03-LAB-001",
+    "CAP-W03-LAB-002",
+    "CAP-W03-LAB-003",
+    "CAP-W03-LAB-004",
+    "CAP-W03-LAB-005",
+    "CAP-W03-LAB-006",
+    "CAP-W03-LAB-007",
+    "CAP-W03-LAB-008",
+    "CAP-W03-LAB-009",
+    "CAP-W03-LAB-010",
+    "CAP-W03-LAB-011",
+    "CAP-W03-LAB-012"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W03-LAB-001",
+        "CAP-W03-LAB-002",
+        "CAP-W03-LAB-003",
+        "CAP-W03-LAB-004",
+        "CAP-W03-LAB-005",
+        "CAP-W03-LAB-006",
+        "CAP-W03-LAB-007",
+        "CAP-W03-LAB-008",
+        "CAP-W03-LAB-009",
+        "CAP-W03-LAB-010",
+        "CAP-W03-LAB-011",
+        "CAP-W03-LAB-012"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Labs",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-007",
+    "NC-010",
+    "NC-011"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore",
+    "StructuredContentCore",
+    "TransactionHistoryCore",
+    "ClipboardTrustCore",
+    "SpatialInteractionCore"
+  ],
+  "adapter": "W03LabDomainAdapter",
+  "regions": {
+    "TOP": "Labs exact identity, local mode, command routes",
+    "LEFT": "typed LabDefinition collection/navigation",
+    "CENTER": "SimulationLabAuthoringWorkbench primary task",
+    "RIGHT": "one selected LabDefinition identity/context inspector",
+    "BOTTOM": "Deep Labs diagnostics/history"
+  },
+  "command_ids": [
+    "labs.author",
+    "labs.preflight",
+    "labs.handoff",
+    "labs.revise"
+  ]
+}

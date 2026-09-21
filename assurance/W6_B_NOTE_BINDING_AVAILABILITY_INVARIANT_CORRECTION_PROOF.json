@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "kind": "W6_B_NOTE_BINDING_AVAILABILITY_INVARIANT_CORRECTION_PROOF",
+  "status": "PASS",
+  "pass": 8,
+  "fail": 0,
+  "caseCount": 8,
+  "cases": [
+    {
+      "id": "01.no-source-not-applicable-remains-legal",
+      "status": "PASS",
+      "evidence": {
+        "availability": {
+          "reason": "no-applicable-source",
+          "state": "not-applicable"
+        },
+        "domain": {
+          "kind": "spatial",
+          "surfaceId": "visualize"
+        },
+        "noteId": "note-spatial-na",
+        "owner": "NoteBindingAdapter",
+        "policyRevision": "W6-B-NOTE-BINDING-01",
+        "provenance": {
+          "domainAdapterId": "SpatialNoteBindingInputAdapter",
+          "kind": "EXPLICIT_VALIDATED_BINDING"
+        },
+        "route": "PERSONAL:CEP/visualize",
+        "source": {}
+      }
+    },
+    {
+      "id": "02.controller-repro-not-applicable-no-source-to-available-rejected",
+      "status": "PASS",
+      "evidence": {
+        "message": "SOURCE_IDENTITY_REQUIRED_FOR_AVAILABLE_BINDING",
+        "exactPriorRetained": true,
+        "receiptSequenceUnchanged": true
+      }
+    },
+    {
+      "id": "03.failed-availability-projection-is-exactly-atomic",
+      "status": "PASS",
+      "evidence": {
+        "descriptor": {
+          "availability": {
+            "state": "not-applicable"
+          },
+          "domain": {
+            "kind": "spatial",
+            "surfaceId": "visualize"
+          },
+          "noteId": "note-atomic",
+          "owner": "NoteBindingAdapter",
+          "policyRevision": "W6-B-NOTE-BINDING-01",
+          "provenance": {
+            "domainAdapterId": "SpatialNoteBindingInputAdapter",
+            "kind": "EXPLICIT_VALIDATED_BINDING"
+          },
+          "route": "PERSONAL:CEP/visualize",
+          "source": {}
+        },
+        "exactDescriptorJsonRetained": true,
+        "snapshotRetained": true,
+        "receiptSequenceUnchanged": true
+      }
+    },
+    {
+      "id": "04.no-source-unresolved-to-available-remains-protected",
+      "status": "PASS",
+      "evidence": {
+        "message": "EXPLICIT_SOURCE_REVALIDATION_REQUIRED",
+        "exactPriorRetained": true
+      }
+    },
+    {
+      "id": "05.source-bearing-stale-to-available-still-requires-explicit-source-and-evidence",
+      "status": "PASS",
+      "evidence": {
+        "missingSource": "EXPLICIT_SOURCE_REVALIDATION_REQUIRED",
+        "missingEvidence": "RESOLUTION_EVIDENCE_REQUIRED",
+        "resolved": {
+          "evidence": {
+            "resolver": "back",
+            "validated": true
+          },
+          "state": "available"
+        }
+      }
+    },
+    {
+      "id": "06.legitimate-available-binding-with-canonical-source-remains-legal",
+      "status": "PASS",
+      "evidence": {
+        "availability": {
+          "evidence": {
+            "kind": "ENTITY_PRESENT"
+          },
+          "state": "available"
+        },
+        "domain": {
+          "kind": "spatial",
+          "surfaceId": "visualize"
+        },
+        "noteId": "note-valid",
+        "owner": "NoteBindingAdapter",
+        "policyRevision": "W6-B-NOTE-BINDING-01",
+        "provenance": {
+          "domainAdapterId": "SpatialNoteBindingInputAdapter",
+          "kind": "EXPLICIT_VALIDATED_BINDING"
+        },
+        "route": "PERSONAL:CEP/visualize",
+        "source": {
+          "objectId": "APP-WEB-01"
+        }
+      }
+    },
+    {
+      "id": "07.legitimate-nonviolating-availability-projections-remain-legal",
+      "status": "PASS",
+      "evidence": {
+        "stale": {
+          "reason": "view-unavailable",
+          "state": "stale"
+        },
+        "unresolved": {
+          "reason": "resolver-pending",
+          "state": "unresolved"
+        },
+        "noSourceUnresolved": {
+          "availability": {
+            "reason": "lookup-pending",
+            "state": "unresolved"
+          },
+          "domain": {
+            "kind": "spatial",
+            "surfaceId": "visualize"
+          },
+          "noteId": "note-nosource",
+          "owner": "NoteBindingAdapter",
+          "policyRevision": "W6-B-NOTE-BINDING-01",
+          "provenance": {
+            "domainAdapterId": "SpatialNoteBindingInputAdapter",
+            "kind": "EXPLICIT_VALIDATED_BINDING"
+          },
+          "route": "PERSONAL:CEP/visualize",
+          "source": {}
+        }
+      }
+    },
+    {
+      "id": "08.spatial-shape-stays-non-structured-without-fabricated-document-block-fields",
+      "status": "PASS",
+      "evidence": {
+        "domain": {
+          "kind": "spatial",
+          "surfaceId": "visualize"
+        },
+        "source": {},
+        "availability": {
+          "reason": "entity-resolution-pending",
+          "state": "unresolved"
+        }
+      }
+    }
+  ],
+  "classification": "W6_B_BOUNDED_CORRECTION_EVIDENCE_NOT_CONTROLLER_ACCEPTANCE",
+  "sourceCanonicalTreeSha256": "fcca03a3ef529e5eda8b3ddddcc1f093ad7054336430d3c08224fac55328c753",
+  "canonicalSourceFileCount": 113,
+  "blockingDefect": "AVAILABILITY_PROJECTION_AVAILABLE_WITHOUT_CANONICAL_SOURCE_IDENTITY",
+  "deterministicRejection": "SOURCE_IDENTITY_REQUIRED_FOR_AVAILABLE_BINDING",
+  "failAtomic": true
+}

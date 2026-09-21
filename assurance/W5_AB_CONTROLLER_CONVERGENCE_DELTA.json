@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "kind": "W5_AB_CONTROLLER_CONVERGENCE_DELTA",
+  "generatedAt": "2026-09-12T21:16:19.269712+00:00",
+  "status": "PASS",
+  "classification": "CONTROLLER_CONVERGENCE_EVIDENCE",
+  "parentAuthority": {
+    "successorId": "CEP-FR-E14-W4-7c332f69",
+    "filename": "CEP_FOUNDATION_FORGE_v0.2.1c_W4_FAMILY_INTERACTION_COMPLETION_CONTROLLER_ACCEPTED_SUCCESSOR.zip",
+    "bytes": 9862377,
+    "sha256": "7c332f6998e26eb16c7e432236c102bd65265dd17941d378fe53c740ad2b4714",
+    "canonicalSourceSha256": "b6a4fa72da13a6ce2823eef54cb6a91865cd3c50c4279486bc8e9f238455b957",
+    "canonicalSourceFiles": 84,
+    "contentTreeSha256": "e9c22fee266a39eabec66bbcce3f09a19882ab95e2e1e1c84b5d9588384d7013"
+  },
+  "acceptedLaneInputs": {
+    "A": {
+      "filename": "CEP_FOUNDATION_FORGE_v0.2.1c_W5_A_STRUCTURED_SURFACE_HOST_CORRECTED2_CANDIDATE.zip",
+      "bytes": 14594833,
+      "sha256": "e76a2330c6c7396a9ac6fab1ea189c7b3e1c46b45034cf34063a1d27cc1a8060",
+      "canonicalSourceSha256": "bcaacd4b5cee391a04864272513dcbeab4c2789bb892496399ddf8cc42174e83",
+      "canonicalSourceFiles": 89,
+      "contentTreeSha256": "3e9e7210ac5ee06fad352cb6245176f09ba6c2fc87a4d5ad34506c566358b403"
+    },
+    "B": {
+      "filename": "CEP_FOUNDATION_FORGE_v0.2.1c_W5_B_STRUCTURED_NAVIGATION_DESCRIPTOR_OWNER_CORRECTED3_CANDIDATE.zip",
+      "bytes": 9959593,
+      "sha256": "0d69845b04fb01f30821a1909ce4be3b62a10bd91b23493cef7a974b8845db26",
+      "canonicalSourceSha256": "e7775614fb9bb1665b0f15f6f6a10430ec80665da5e8592c9bb2403d46de5972",
+      "canonicalSourceFiles": 91,
+      "contentTreeSha256": "14d793c97481c4c49ebc7f45456336f252d14a0e080758217c98624195287d82"
+    }
+  },
+  "convergenceOrder": [
+    "A",
+    "B"
+  ],
+  "law": "START_FROM_EXACT_E14_APPLY_LEGAL_CANONICAL_SOURCE_DELTAS_SEQUENTIALLY_NEVER_OVERLAY_SIBLING_ZIPS",
+  "canonicalSourceDeltaVsE14": {
+    "total": 12,
+    "laneA": [
+      "foundation/structured/block-renderer.ts",
+      "foundation/structured/presentation-bridge.ts",
+      "foundation/structured/surface-host.ts",
+      "w5-a-structured-surface-host-browser.ts",
+      "w5-a-structured-surface-host-tests.ts"
+    ],
+    "laneB": [
+      "foundation/structured/outline-descriptor.ts",
+      "foundation/structured/read-inspection.ts",
+      "w5-b-structured-navigation-browser-harness.ts",
+      "w5-b-structured-navigation-correction-tests.ts",
+      "w5-b-structured-navigation-delta2-tests.ts",
+      "w5-b-structured-navigation-micro3-tests.ts",
+      "w5-b-structured-navigation-tests.ts"
+    ],
+    "overlap": [],
+    "semanticCollisionCount": 0,
+    "allChanges": "ADDED_RELATIVE_TO_E14"
+  },
+  "result": {
+    "canonicalSourceSha256": "7da83126305d82b820ea83fa4c9cd3f251f4afcf205c5dc89c14112280c73aa1",
+    "canonicalSourceFiles": 96
+  },
+  "sharedControllerHotspotsModifiedForMerge": false,
+  "completeSiblingZipOverlayUsed": false
+}

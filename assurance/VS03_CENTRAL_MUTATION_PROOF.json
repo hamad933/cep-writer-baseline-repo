@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "project": "CEP",
+  "slice": "VS-03",
+  "status": "PASS",
+  "temporaryChange": {
+    "path": "stack/native-typescript/foundation/structured.ts",
+    "policy": "STRUCTURED_MUTATION_POLICY.moveToGapEnabled",
+    "from": true,
+    "to": false,
+    "shipped": false
+  },
+  "causalEvidence": {
+    "library": {
+      "realComposition": true,
+      "owner": "StructuredMutationKernel",
+      "policyRevision": "structured-mutation-vs03-r1",
+      "observedMoveEnabled": false,
+      "mutationAccepted": false,
+      "treeUnchanged": true
+    },
+    "learn": {
+      "realStructuredConsumer": true,
+      "owner": "StructuredMutationKernel",
+      "policyRevision": "structured-mutation-vs03-r1",
+      "observedMoveEnabled": false,
+      "resultCode": "MOVE_TO_GAP_POLICY_DISABLED",
+      "mutationAccepted": false,
+      "treeUnchanged": true
+    },
+    "consumerSpecificPatchUsed": false
+  },
+  "revertProof": {
+    "structuredTsSha256BeforeTemporaryChange": "6246f4df53fa92a9f6f3b23d1f5d959d4c6ef7beb04e0dd216a51979467a3948",
+    "structuredTsSha256AfterRevert": "6246f4df53fa92a9f6f3b23d1f5d959d4c6ef7beb04e0dd216a51979467a3948",
+    "byteForByteMatch": true,
+    "canonicalSourceTreeSha256BeforeTemporaryChange": "07a5eac2d60a23c55d35a4f8545844db23b44aca0fbead3437ccd0ee6f1b6dea",
+    "canonicalSourceTreeSha256AfterRevert": "07a5eac2d60a23c55d35a4f8545844db23b44aca0fbead3437ccd0ee6f1b6dea",
+    "sourceTreeMatch": true
+  },
+  "temporaryProbeReceipt": "assurance/VS03_CENTRAL_POLICY_PROBE_TEMPORARY.json",
+  "finalPolicyExpected": {
+    "moveToGapEnabled": true
+  }
+}

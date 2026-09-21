@@ -1,0 +1,17 @@
+import {NoteBindingAdapter} from './foundation/notes/note-binding.js';
+import {libraryNoteBindingInput,spatialNoteBindingInput} from './adapters/note-binding-domains.js';
+
+const root=document.querySelector('#w6bBindings'),status=document.querySelector('#proofStatus');
+const steps=[];const assert=(condition,message)=>{if(!condition)throw Error(message)};const stable=value=>JSON.stringify(value);
+const record=(id,evidence)=>steps.push({id,status:'PASS',evidence});
+try{
+  const owner=new NoteBindingAdapter();
+  const binding=owner.bind('note-browser-01',libraryNoteBindingInput({noteId:'note-browser-01',documentId:'KU-D05-0021',blockId:'blk-d05-p1',route:'PERSONAL:CEP/W06/Library',availability:{state:'available',evidence:{kind:'BROWSER_FIXTURE'}},sourceLabel:'API Object-Level Authorization'})).binding;
+  const canonical=stable(binding);record('browser.bind-canonical',binding);
+  const hidden=owner.projectForPresentation('note-browser-01',{presentationId:'sticky-host',windowInstanceId:'window-A',hostKind:'in-page',visibility:'hidden'}),reopened=owner.projectForPresentation('note-browser-01',{presentationId:'sticky-host',windowInstanceId:'window-B',hostKind:'in-page',visibility:'visible'});assert(stable(hidden.binding)===canonical&&stable(reopened.binding)===canonical,'reopen binding drift');record('browser.hide-reopen-stability',{hidden:hidden.presentation,reopened:reopened.presentation});
+  const separate=owner.projectForPresentation('note-browser-01',{presentationId:'popout-host',windowInstanceId:'window-external-9',hostKind:'separate-window',visibility:'visible'});assert(stable(separate.binding)===canonical,'separate window binding drift');record('browser.separate-window-stability',separate.presentation);
+  let injection='';try{owner.projectForPresentation('note-browser-01',{presentationId:'popout-host',windowInstanceId:'KU-D03-0011',hostKind:'separate-window',visibility:'visible',objectId:'APP-WEB-01'})}catch(error){injection=String(error?.message||error)}assert(injection.includes('PRESENTATION_IDENTITY_CANNOT_BECOME_SOURCE_IDENTITY'),'presentation source injection not blocked');assert(stable(owner.descriptor('note-browser-01'))===canonical,'injection altered binding');record('browser.presentation-not-source',{rejected:injection});
+  const spatial=owner.bind('note-browser-spatial',spatialNoteBindingInput({noteId:'note-browser-spatial',objectId:'APP-WEB-01',route:'PERSONAL:CEP/visualize',availability:{state:'available',evidence:{kind:'SPATIAL_BROWSER_FIXTURE'}}})).binding;assert(!('documentId'in spatial.source)&&!('blockId'in spatial.source),'spatial structured fields fabricated');record('browser.non-structured-shape',spatial);
+  root.innerHTML=[binding,spatial].map(item=>`<article class="card"><h2>${item.noteId}</h2><div><b>Domain:</b> ${item.domain.kind} / ${item.domain.surfaceId}</div><div><b>Source:</b> <code>${Object.entries(item.source).map(([k,v])=>`${k}=${typeof v==='string'?v:JSON.stringify(v)}`).join(' · ')}</code></div><div><b>Status:</b> ${item.availability.state}</div><div><b>Owner:</b> ${item.owner}</div></article>`).join('');
+  status.textContent='PASS';status.dataset.status='PASS';globalThis.W6BNoteBindingBrowserProof={status:'PASS',steps,canonicalBinding:binding,separateWindow:separate.presentation,spatialBinding:spatial};
+}catch(error){status.textContent='FAIL';status.dataset.status='FAIL';globalThis.W6BNoteBindingBrowserProof={status:'FAIL',steps,errors:[String(error?.message||error)]};}

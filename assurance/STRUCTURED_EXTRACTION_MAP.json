@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "contract": "StructuredDocumentDomainAdapter@1.1.0",
+  "scope": "MINIMUM_EXECUTABLE_BOUNDARY_NOT_DONOR_REWRITE",
+  "sharedBoundary": "dist/foundation/structured.js",
+  "consumerBinding": "dist/adapters/structured-documents.js",
+  "presentationEngine": "dist/foundation/workspace-host.js for non-Library; accepted donor compatibility runtime for Library only",
+  "library": {
+    "fixtureImport": "dynamic and Library-only in dist/main.js",
+    "workingEngine": "accepted UnifiedEditorCore bound through adapter",
+    "stateAllowed": [
+      "Library search",
+      "Library tree",
+      "KU route",
+      "Library metadata"
+    ]
+  },
+  "learn": {
+    "fixture": "standalone learn-document-trust-boundaries",
+    "host": "WorkspaceFoundationHost@1.0.0",
+    "forbiddenState": [
+      "library",
+      "libraryState",
+      "knowledgeUniverse",
+      "kuTree",
+      "searchState"
+    ],
+    "negativeProof": [
+      "no library-fixtures import",
+      "state.library is undefined",
+      "Library controls removed",
+      "assertDomainIsolation()"
+    ]
+  },
+  "ownedMechanics": [
+    "document identity",
+    "working/committed revision",
+    "block schema and capabilities",
+    "commit/save boundary",
+    "undo/redo/history",
+    "recovery",
+    "notes/source binding",
+    "domain metadata",
+    "command availability",
+    "structured block selection descriptor",
+    "selected structured fragment identity",
+    "domain-neutral copy serialization",
+    "cut/paste canonical mutation boundary",
+    "read-only and schema compatibility gating",
+    "SemanticCommand routes for copy/cut/paste"
+  ],
+  "controllerMaterialMap": "authority/controller/08_DONOR_330_FOUNDATION_EXTRACTION_MAP.csv",
+  "deferred": "Further donor extraction is limited to the active high-value ledger; no broad 330-function rewrite.",
+  "selectionContract": "StructuredSelectionModel@1.0.0",
+  "clipboardContract": "StructuredClipboardContract@1.0.0"
+}

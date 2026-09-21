@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {composeRunsSurface} from '../../../surfaces/runs/index.js';
+const surface=composeRunsSurface({shared:{spatialRelation:{owner:'RelationInteractionOwner'}}});const truth=surface.domain.truth();
+assert.equal(truth.runtimeTruth,'INTERNAL_SIMULATION');assert.equal(truth.pty,false);assert.equal(truth.powershell,false);assert.equal(truth.ssh,false);assert.equal(truth.nativeWindow,false);
+const device=surface.domain.runtime.devices[0];const opened=surface.bus.execute('OPEN_TERMINAL',{deviceId:device.id});assert.equal(opened.runtimeTruth,'INTERNAL_SIMULATION');
+const status=surface.bus.execute('runtime.input',{deviceId:device.id,command:'show status',invocationId:'run-1'});assert.equal(status.changed,false);assert.match(status.output,/UP/);
+const shutdown=surface.bus.execute('runtime.input',{deviceId:device.id,command:'shutdown',invocationId:'run-2'});assert.equal(shutdown.changed,true);assert.match(shutdown.output,/DOWN/);
+const recorded=surface.bus.execute('view.recorded');assert.equal(recorded.runtimeTruth,'INTERNAL_SIMULATION');assert.equal(recorded.pty,false);assert.equal(recorded.powershell,false);assert.equal(recorded.ssh,false);
+surface.bus.execute('runtime.disconnect');const receiptsBefore=surface.bus.receipts.length;const blocked=surface.bus.execute('runtime.input',{deviceId:device.id,command:'show status',invocationId:'run-3'});assert.equal(blocked.ok,false);assert.equal(blocked.code,'PROVIDER_DISCONNECTED');assert.equal(surface.bus.receipts.length,receiptsBefore);
+assert.equal(surface.truthCeiling.realProcessExecution,false);console.log('runs surface: PASS');

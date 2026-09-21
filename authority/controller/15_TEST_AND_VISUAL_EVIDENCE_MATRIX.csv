@@ -1,0 +1,27 @@
+﻿TEST_ID,TEST,TASK_ID,EVIDENCE_TYPE,PASS_CONDITION,SCREENSHOT
+TST-001,W03 authority generator/derived artifact negative+positive scan,FND-RSM-P0-001,AUTOMATED_STATIC,Exact forbidden token and semantic aliases = 0; donor-only status generated.,NO
+TST-002,Deferred value-filter fixture,FND-RSM-P0-002,AUTOMATED_UNIT,Only current+valuable items active; low-value/duplicate/superseded/historical split to exclusion register; zero-loss status absent.,NO
+TST-003,Structured synthetic non-Library adapter edit/save,FND-RSM-P0-003,AUTOMATED_INTEGRATION,Shared Structured host runs without Library fixture/search/tree/KU state.,NO
+TST-004,Structured history/recovery ownership,FND-RSM-P0-003,AUTOMATED_UNIT,Undo/redo/recovery mutate Structured state only; no global cross-family mutable history store.,NO
+TST-005,Library compatibility/parity smoke,FND-RSM-P0-003,AUTOMATED_INTEGRATION,Accepted donor behavior used by Library remains materially preserved.,OPTIONAL_TARGETED
+TST-006,Learn adapter independence,FND-RSM-P0-003,AUTOMATED_INTEGRATION,Learn binds own document/domain state; no cloned Library fixture dependency.,YES_IF_VISIBLE_CHANGE
+TST-007,ActionAvailability matrix,FND-RSM-P1-004,AUTOMATED_UNIT,"0/1/2/>2, mixed types, endpoint incompatibility, domain capability, canonical constraint, destructive policy resolve correctly.",NO
+TST-008,Selection Action Surface + command preflight convergence,FND-RSM-P1-004,AUTOMATED_INTEGRATION,UI visibility/enabled result equals semantic command preflight; Connect exactly-two rule enforced.,YES_TARGETED
+TST-009,Relation create/edit route convergence,FND-RSM-P1-004;FND-RSM-P1-009,AUTOMATED_BROWSER,Double-click label/RMB/F2/Inspector/Palette converge on one relation command owner; canonical edge changes once.,NO
+TST-010,Relation central reuse,FND-RSM-P1-004;FND-RSM-P1-009,AUTOMATED_BROWSER,Visualize and eligible W03 consumer inherit same RelationInteraction behavior.,NO
+TST-011,Pane preferred/effective state,FND-RSM-P1-005,AUTOMATED_UNIT,Preferred state survives responsive override; effective state transforms without overwriting preference.,YES_TARGETED
+TST-012,Global transient/focus lifecycle,FND-RSM-P1-005,AUTOMATED_BROWSER,Close/Escape/pointer transitions dismiss correct transient and restore focus.,NO
+TST-013,Context descriptor reuse,FND-RSM-P1-005,AUTOMATED_INTEGRATION,One inspector presentation consumes at least two domain/family descriptors without field duplication.,YES_TARGETED
+TST-014,Representative non-Library donor-free bootstrap,FND-RSM-P1-005,AUTOMATED_INTEGRATION,Spatial/Operational or synthetic consumer boots shared host without unconditional accepted-runtime mount.,NO
+TST-015,Operational provider descriptor neutrality,FND-RSM-P1-006,AUTOMATED_UNIT,Provider labels/capabilities change only through RuntimeAdapter descriptor; generic Operational code has no InternalSimulation identity hardcode.,YES_IF_VISIBLE_CHANGE
+TST-016,Internal simulation causal shutdown,FND-RSM-P1-006,AUTOMATED_INTEGRATION,Command→RuntimeAdapter→InternalSimulationAdapter→SimulatedDeviceEngine updates same state observed by node/context/telemetry/terminal.,NO
+TST-017,Stable session identity + recorded semantics,FND-RSM-P1-006,AUTOMATED_UNIT,Reopen preserves stable identity; recorded session does not falsely execute live command.,NO
+TST-018,Ctrl+RMB lifecycle regression,FND-RSM-P1-007,AUTOMATED_BROWSER,Ctrl+RMB suppresses own context only; pointerup/cancel/abnormal termination clear suppression; next RMB works.,NO
+TST-019,Semantic spatial keyboard minimum,FND-RSM-P1-007,AUTOMATED_BROWSER,Focus/selection/camera/object move are distinct; activation/context/edit/Escape behave semantically.,OPTIONAL_FOCUS_VISUAL
+TST-020,W03 69/318 disposition truth,FND-RSM-P1-008,AUTOMATED_STATIC,69 section identities and 318 atoms trace to grouped owners; no all-feature conversion; deferred pointers explicit.,NO
+TST-021,Mechanic ownership duplicate guard,FND-RSM-P1-010,AUTOMATED_STATIC,Independent relation/pane/context/session duplicate fixtures are flagged unless approved deviation.,NO
+TST-022,Contract compatible/breaking version fixture,FND-RSM-P1-010,AUTOMATED_UNIT,Compatible extension passes; breaking change lists affected consumers and migration/disposition.,NO
+TST-023,Writer scaffold deterministic smoke,FND-RSM-P1-010,AUTOMATED_STATIC,"Structured/Spatial/Operational target outputs deterministic corrected owners, adapters, tests, valuable deferred only; no GitHub/old Production assumptions.",NO
+TST-024,Existing baseline regression suites,ALL,AUTOMATED,npm test and npm run check remain green after changes; replace stale deferred.zero_loss check with value-filter check.,NO
+TST-025,Central modification inheritance proof,FND-RSM-P1-004 or P1-005,AUTOMATED_INTEGRATION,One shared mechanic change is inherited by at least two applicable consumers without duplicate implementation.,NO
+TST-026,Bidi + responsive preference smoke,FND-RSM-P1-005;FND-RSM-P1-009,AUTOMATED_BROWSER,Language/direction independent; technical LTR tokens robust; preferred/effective responsive state preserved.,OPTIONAL_TARGETED

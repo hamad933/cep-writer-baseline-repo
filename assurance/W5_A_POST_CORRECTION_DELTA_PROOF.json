@@ -1,0 +1,920 @@
+{
+  "schemaVersion": 1,
+  "kind": "W5_A_POST_CORRECTION_DELTA_PROOF",
+  "classification": "LANE_POST_CORRECTION_DELTA_EVIDENCE_NOT_CONTROLLER_ACCEPTANCE",
+  "status": "PASS",
+  "sourceCanonicalTreeSha256": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d",
+  "canonicalSourceFileCount": 99,
+  "deltaCases": [
+    {
+      "id": "w5a.delta.global-owner-different-command-bus-fail-atomic",
+      "status": "PASS",
+      "evidence": {
+        "error": "GLOBAL_INPUT_KEYMAP_COMMAND_BUS_MISMATCH",
+        "rejected": true,
+        "commandBindings": 0,
+        "inputOwner": null,
+        "documentUnchanged": true,
+        "historyUnchanged": true,
+        "selectionUnchanged": true
+      }
+    },
+    {
+      "id": "w5a.delta.fake-same-name-global-owner-rejected",
+      "status": "PASS",
+      "evidence": {
+        "error": "CANONICAL_GLOBAL_INPUT_KEYMAP_OWNER_REQUIRED",
+        "rejected": true,
+        "zeroSideEffects": true
+      }
+    },
+    {
+      "id": "w5a.delta.fake-same-name-semantic-command-bus-rejected",
+      "status": "PASS",
+      "evidence": {
+        "constructorName": "SemanticCommandBus",
+        "error": "CANONICAL_SEMANTIC_COMMAND_BUS_REQUIRED",
+        "rejected": true,
+        "zeroSideEffects": true
+      }
+    },
+    {
+      "id": "w5a.delta.action-owner-post-construction-drift-rejected-before-effect",
+      "status": "PASS",
+      "evidence": {
+        "error": "SECOND_STRUCTURED_ACTION_DESCRIPTOR_OWNER_DETECTED",
+        "fakeCalls": 0,
+        "canonicalUnchanged": true,
+        "historyDelta": 0,
+        "workingRevisionDelta": 0
+      }
+    },
+    {
+      "id": "w5a.delta.drag-owner-post-construction-drift-rejected-before-effect",
+      "status": "PASS",
+      "evidence": {
+        "error": "SECOND_STRUCTURED_DRAG_DROP_OWNER_DETECTED",
+        "fakeCalls": 0,
+        "canonicalUnchanged": true,
+        "historyDelta": 0,
+        "workingRevisionDelta": 0
+      }
+    },
+    {
+      "id": "w5a.delta.selection-owner-post-construction-drift-rejected-before-effect",
+      "status": "PASS",
+      "evidence": {
+        "error": "SECOND_STRUCTURED_CLIPBOARD_OWNER_DETECTED",
+        "fakeCalls": 0,
+        "selectionBefore": "{\"contract\":{\"id\":\"StructuredSelectionKernel\",\"version\":\"1.0.0\",\"compatibility\":\"SEMVER\",\"owner\":\"Structured Family\",\"policyRevision\":\"structured-selection-wave01-b-r1\"},\"owner\":\"StructuredSelectionKernel\",\"policyRevision\":\"structured-selection-wave01-b-r1\",\"policy\":{\"traversal\":\"tree-preorder\",\"rangeEndpoint\":\"inclusive\",\"ancestorRule\":\"ancestor-dominates-descendants-with-explicit-coverage\",\"collapsedToggleRule\":\"descendants-remain-addressable-in-canonical-order\",\"staleIdentity\":\"prune-and-receipt\",\"unknownIdentity\":\"reject\",\"domAuthority\":\"projection-only\"},\"documentId\":\"learn-document-trust-boundaries\",\"workingRevision\":\"1\",\"blockIds\":[],\"coveredBlockIds\":[],\"count\":0,\"coveredCount\":0,\"startIndex\":null,\"endIndex\":null,\"anchorBlockId\":null,\"focusBlockId\":null,\"mode\":\"replace\",\"range\":null,\"inlineRange\":null}",
+        "canonicalUnchanged": true,
+        "historyDelta": 0,
+        "workingRevisionDelta": 0
+      }
+    },
+    {
+      "id": "w5a.delta.fake-same-name-rich-owner-cannot-inject-projection",
+      "status": "PASS",
+      "evidence": {
+        "error": "SECOND_STRUCTURED_RICH_CONTENT_OWNER_DETECTED",
+        "rejected": true,
+        "unsafeProjectionExecuted": false,
+        "zeroSideEffects": true
+      }
+    },
+    {
+      "id": "w5a.delta.fake-same-name-tree-kernel-cannot-alter-path-truth",
+      "status": "PASS",
+      "evidence": {
+        "error": "SECOND_STRUCTURED_TREE_KERNEL_DETECTED",
+        "rejected": true,
+        "fakePathNotProjected": true,
+        "zeroSideEffects": true
+      }
+    },
+    {
+      "id": "w5a.delta.shared-command-binding-drift-rejected-before-execution",
+      "status": "PASS",
+      "evidence": {
+        "error": "STRUCTURED_CANONICAL_COMMAND_BINDING_DRIFT:block.align",
+        "fakeCalls": 0,
+        "canonicalUnchanged": true,
+        "historyDelta": 0,
+        "workingRevisionDelta": 0
+      }
+    },
+    {
+      "id": "w5a.delta.invalid-bridge-constructor-fail-atomic",
+      "status": "PASS",
+      "evidence": {
+        "error": "STRUCTURED_PRESENTATION_BRIDGE_CANONICAL_OWNER_MISMATCH",
+        "inputOwnerUnchanged": true,
+        "commandMapUnchanged": true,
+        "receiptsUnchanged": true,
+        "documentUnchanged": true,
+        "historyUnchanged": true,
+        "selectionUnchanged": true
+      }
+    },
+    {
+      "id": "w5a.delta.invalid-mode-constructor-fail-atomic",
+      "status": "PASS",
+      "evidence": {
+        "error": "INVALID_STRUCTURED_SURFACE_MODE",
+        "inputOwnerUnchanged": true,
+        "commandMapUnchanged": true,
+        "receiptsUnchanged": true,
+        "documentUnchanged": true,
+        "historyUnchanged": true,
+        "selectionUnchanged": true
+      }
+    },
+    {
+      "id": "w5a.delta.paragraph-open-wrong-type-inapplicable-rejected-before-transaction",
+      "status": "PASS",
+      "evidence": {
+        "error": "STRUCTURED_CONTENT_FIELD_NOT_APPLICABLE:paragraph:open",
+        "canonicalUnchanged": true,
+        "historyDelta": 0,
+        "workingRevisionDelta": 0
+      }
+    },
+    {
+      "id": "w5a.delta.paragraph-codeText-inapplicable-rejected-before-transaction",
+      "status": "PASS",
+      "evidence": {
+        "error": "STRUCTURED_CONTENT_FIELD_NOT_APPLICABLE:paragraph:codeText",
+        "canonicalUnchanged": true,
+        "historyDelta": 0,
+        "workingRevisionDelta": 0
+      }
+    },
+    {
+      "id": "w5a.delta.content-field-applicability-type-matrix",
+      "status": "PASS",
+      "evidence": {
+        "invalidAttempts": 10,
+        "errors": [
+          "STRUCTURED_CONTENT_FIELD_NOT_APPLICABLE:toggle:html",
+          "STRUCTURED_TOGGLE_OPEN_BOOLEAN_REQUIRED",
+          "STRUCTURED_TOGGLE_TITLE_STRING_REQUIRED",
+          "STRUCTURED_CONTENT_FIELD_NOT_APPLICABLE:code:html",
+          "STRUCTURED_CONTENT_FIELD_NOT_APPLICABLE:code:title",
+          "STRUCTURED_CODE_TEXT_STRING_REQUIRED",
+          "STRUCTURED_CODE_ANNOTATIONS_ARRAY_REQUIRED",
+          "STRUCTURED_CODE_ANNOTATION_KIND_INVALID",
+          "STRUCTURED_CONTENT_FIELD_NOT_APPLICABLE:paragraph:title",
+          "STRUCTURED_CONTENT_FIELD_NOT_APPLICABLE:paragraph:annotations"
+        ],
+        "invalidHistoryDelta": 0,
+        "invalidWorkingRevisionDelta": 0,
+        "validToggle": "CONTENT_UPDATED_THROUGH_ACCEPTED_TRANSACTION_OWNER",
+        "validCode": "CONTENT_UPDATED_THROUGH_ACCEPTED_TRANSACTION_OWNER"
+      }
+    },
+    {
+      "id": "w5a.delta.toggle-titleHtml-safe-rich-projection-and-plain-fallback",
+      "status": "PASS",
+      "evidence": {
+        "plainFallback": true,
+        "richSource": "titleHtml",
+        "canonicalRetainsRaw": true,
+        "sanitizedUnsafeMarkup": true,
+        "richContentOwner": "StructuredRichContentOwner",
+        "directionOwner": "InputDirectionResolver"
+      }
+    },
+    {
+      "id": "w5a.delta.renderer-policy-runtime-types-reject-atomically",
+      "status": "PASS",
+      "evidence": {
+        "attempts": 6,
+        "errors": [
+          "INVALID_STRUCTURED_RENDERER_BLOCK_GAP_TYPE",
+          "INVALID_STRUCTURED_RENDERER_BLOCK_GAP_TYPE",
+          "INVALID_STRUCTURED_RENDERER_BLOCK_GAP_TYPE",
+          "INVALID_STRUCTURED_RENDERER_INDENT_UNIT_TYPE",
+          "INVALID_STRUCTURED_RENDERER_INDENT_UNIT_TYPE",
+          "INVALID_STRUCTURED_RENDERER_INDENT_UNIT_TYPE"
+        ],
+        "before": {
+          "revision": "structured-block-renderer-w5a-r3",
+          "blockGapPx": 8,
+          "indentUnitPx": 20
+        },
+        "after": {
+          "revision": "structured-block-renderer-w5a-r3",
+          "blockGapPx": 8,
+          "indentUnitPx": 20
+        },
+        "exactUnchanged": true
+      }
+    }
+  ],
+  "browserExecutableDeltaCases": [
+    {
+      "id": "w5a.delta.global-owner-different-command-bus-fail-atomic",
+      "status": "PASS",
+      "evidence": {
+        "error": "GLOBAL_INPUT_KEYMAP_COMMAND_BUS_MISMATCH",
+        "rejected": true,
+        "commandBindings": 0,
+        "inputOwner": null,
+        "documentUnchanged": true,
+        "historyUnchanged": true,
+        "selectionUnchanged": true
+      }
+    },
+    {
+      "id": "w5a.delta.fake-same-name-global-owner-rejected",
+      "status": "PASS",
+      "evidence": {
+        "error": "CANONICAL_GLOBAL_INPUT_KEYMAP_OWNER_REQUIRED",
+        "rejected": true,
+        "zeroSideEffects": true
+      }
+    },
+    {
+      "id": "w5a.delta.fake-same-name-semantic-command-bus-rejected",
+      "status": "PASS",
+      "evidence": {
+        "constructorName": "SemanticCommandBus",
+        "error": "CANONICAL_SEMANTIC_COMMAND_BUS_REQUIRED",
+        "rejected": true,
+        "zeroSideEffects": true
+      }
+    },
+    {
+      "id": "w5a.delta.action-owner-post-construction-drift-rejected-before-effect",
+      "status": "PASS",
+      "evidence": {
+        "error": "SECOND_STRUCTURED_ACTION_DESCRIPTOR_OWNER_DETECTED",
+        "fakeCalls": 0,
+        "canonicalUnchanged": true,
+        "historyDelta": 0,
+        "workingRevisionDelta": 0
+      }
+    },
+    {
+      "id": "w5a.delta.drag-owner-post-construction-drift-rejected-before-effect",
+      "status": "PASS",
+      "evidence": {
+        "error": "SECOND_STRUCTURED_DRAG_DROP_OWNER_DETECTED",
+        "fakeCalls": 0,
+        "canonicalUnchanged": true,
+        "historyDelta": 0,
+        "workingRevisionDelta": 0
+      }
+    },
+    {
+      "id": "w5a.delta.selection-owner-post-construction-drift-rejected-before-effect",
+      "status": "PASS",
+      "evidence": {
+        "error": "SECOND_STRUCTURED_CLIPBOARD_OWNER_DETECTED",
+        "fakeCalls": 0,
+        "selectionBefore": "{\"contract\":{\"id\":\"StructuredSelectionKernel\",\"version\":\"1.0.0\",\"compatibility\":\"SEMVER\",\"owner\":\"Structured Family\",\"policyRevision\":\"structured-selection-wave01-b-r1\"},\"owner\":\"StructuredSelectionKernel\",\"policyRevision\":\"structured-selection-wave01-b-r1\",\"policy\":{\"traversal\":\"tree-preorder\",\"rangeEndpoint\":\"inclusive\",\"ancestorRule\":\"ancestor-dominates-descendants-with-explicit-coverage\",\"collapsedToggleRule\":\"descendants-remain-addressable-in-canonical-order\",\"staleIdentity\":\"prune-and-receipt\",\"unknownIdentity\":\"reject\",\"domAuthority\":\"projection-only\"},\"documentId\":\"learn-document-trust-boundaries\",\"workingRevision\":\"1\",\"blockIds\":[],\"coveredBlockIds\":[],\"count\":0,\"coveredCount\":0,\"startIndex\":null,\"endIndex\":null,\"anchorBlockId\":null,\"focusBlockId\":null,\"mode\":\"replace\",\"range\":null,\"inlineRange\":null}",
+        "canonicalUnchanged": true,
+        "historyDelta": 0,
+        "workingRevisionDelta": 0
+      }
+    },
+    {
+      "id": "w5a.delta.fake-same-name-rich-owner-cannot-inject-projection",
+      "status": "PASS",
+      "evidence": {
+        "error": "SECOND_STRUCTURED_RICH_CONTENT_OWNER_DETECTED",
+        "rejected": true,
+        "unsafeProjectionExecuted": false,
+        "zeroSideEffects": true
+      }
+    },
+    {
+      "id": "w5a.delta.fake-same-name-tree-kernel-cannot-alter-path-truth",
+      "status": "PASS",
+      "evidence": {
+        "error": "SECOND_STRUCTURED_TREE_KERNEL_DETECTED",
+        "rejected": true,
+        "fakePathNotProjected": true,
+        "zeroSideEffects": true
+      }
+    },
+    {
+      "id": "w5a.delta.shared-command-binding-drift-rejected-before-execution",
+      "status": "PASS",
+      "evidence": {
+        "error": "STRUCTURED_CANONICAL_COMMAND_BINDING_DRIFT:block.align",
+        "fakeCalls": 0,
+        "canonicalUnchanged": true,
+        "historyDelta": 0,
+        "workingRevisionDelta": 0
+      }
+    },
+    {
+      "id": "w5a.delta.invalid-bridge-constructor-fail-atomic",
+      "status": "PASS",
+      "evidence": {
+        "error": "STRUCTURED_PRESENTATION_BRIDGE_CANONICAL_OWNER_MISMATCH",
+        "inputOwnerUnchanged": true,
+        "commandMapUnchanged": true,
+        "receiptsUnchanged": true,
+        "documentUnchanged": true,
+        "historyUnchanged": true,
+        "selectionUnchanged": true
+      }
+    },
+    {
+      "id": "w5a.delta.invalid-mode-constructor-fail-atomic",
+      "status": "PASS",
+      "evidence": {
+        "error": "INVALID_STRUCTURED_SURFACE_MODE",
+        "inputOwnerUnchanged": true,
+        "commandMapUnchanged": true,
+        "receiptsUnchanged": true,
+        "documentUnchanged": true,
+        "historyUnchanged": true,
+        "selectionUnchanged": true
+      }
+    },
+    {
+      "id": "w5a.delta.paragraph-open-wrong-type-inapplicable-rejected-before-transaction",
+      "status": "PASS",
+      "evidence": {
+        "error": "STRUCTURED_CONTENT_FIELD_NOT_APPLICABLE:paragraph:open",
+        "canonicalUnchanged": true,
+        "historyDelta": 0,
+        "workingRevisionDelta": 0
+      }
+    },
+    {
+      "id": "w5a.delta.paragraph-codeText-inapplicable-rejected-before-transaction",
+      "status": "PASS",
+      "evidence": {
+        "error": "STRUCTURED_CONTENT_FIELD_NOT_APPLICABLE:paragraph:codeText",
+        "canonicalUnchanged": true,
+        "historyDelta": 0,
+        "workingRevisionDelta": 0
+      }
+    },
+    {
+      "id": "w5a.delta.content-field-applicability-type-matrix",
+      "status": "PASS",
+      "evidence": {
+        "invalidAttempts": 10,
+        "errors": [
+          "STRUCTURED_CONTENT_FIELD_NOT_APPLICABLE:toggle:html",
+          "STRUCTURED_TOGGLE_OPEN_BOOLEAN_REQUIRED",
+          "STRUCTURED_TOGGLE_TITLE_STRING_REQUIRED",
+          "STRUCTURED_CONTENT_FIELD_NOT_APPLICABLE:code:html",
+          "STRUCTURED_CONTENT_FIELD_NOT_APPLICABLE:code:title",
+          "STRUCTURED_CODE_TEXT_STRING_REQUIRED",
+          "STRUCTURED_CODE_ANNOTATIONS_ARRAY_REQUIRED",
+          "STRUCTURED_CODE_ANNOTATION_KIND_INVALID",
+          "STRUCTURED_CONTENT_FIELD_NOT_APPLICABLE:paragraph:title",
+          "STRUCTURED_CONTENT_FIELD_NOT_APPLICABLE:paragraph:annotations"
+        ],
+        "invalidHistoryDelta": 0,
+        "invalidWorkingRevisionDelta": 0,
+        "validToggle": "CONTENT_UPDATED_THROUGH_ACCEPTED_TRANSACTION_OWNER",
+        "validCode": "CONTENT_UPDATED_THROUGH_ACCEPTED_TRANSACTION_OWNER"
+      }
+    },
+    {
+      "id": "w5a.delta.toggle-titleHtml-safe-rich-projection-and-plain-fallback",
+      "status": "PASS",
+      "evidence": {
+        "plainFallback": true,
+        "richSource": "titleHtml",
+        "canonicalRetainsRaw": true,
+        "sanitizedUnsafeMarkup": true,
+        "richContentOwner": "StructuredRichContentOwner",
+        "directionOwner": "InputDirectionResolver"
+      }
+    },
+    {
+      "id": "w5a.delta.renderer-policy-runtime-types-reject-atomically",
+      "status": "PASS",
+      "evidence": {
+        "attempts": 6,
+        "errors": [
+          "INVALID_STRUCTURED_RENDERER_BLOCK_GAP_TYPE",
+          "INVALID_STRUCTURED_RENDERER_BLOCK_GAP_TYPE",
+          "INVALID_STRUCTURED_RENDERER_BLOCK_GAP_TYPE",
+          "INVALID_STRUCTURED_RENDERER_INDENT_UNIT_TYPE",
+          "INVALID_STRUCTURED_RENDERER_INDENT_UNIT_TYPE",
+          "INVALID_STRUCTURED_RENDERER_INDENT_UNIT_TYPE"
+        ],
+        "before": {
+          "revision": "structured-block-renderer-w5a-r3",
+          "blockGapPx": 8,
+          "indentUnitPx": 20
+        },
+        "after": {
+          "revision": "structured-block-renderer-w5a-r3",
+          "blockGapPx": 8,
+          "indentUnitPx": 20
+        },
+        "exactUnchanged": true
+      }
+    }
+  ],
+  "preservedPreviousCorrectionCases": [
+    {
+      "id": "w5a.controller.read-mode-keyboard-reorder-zero-mutation",
+      "status": "PASS",
+      "evidence": {
+        "code": "EDIT_MODE_REQUIRED",
+        "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+        "delegatedOwner": "StructuredDragDropOwner",
+        "historyDelta": 0,
+        "workingRevisionDelta": 0,
+        "canonicalUnchanged": true
+      }
+    },
+    {
+      "id": "w5a.controller.read-mode-pointer-drag-zero-mutation",
+      "status": "PASS",
+      "evidence": {
+        "begin": "EDIT_MODE_REQUIRED",
+        "update": "EDIT_MODE_REQUIRED",
+        "commit": "EDIT_MODE_REQUIRED",
+        "pointerState": null,
+        "historyDelta": 0,
+        "workingRevisionDelta": 0,
+        "canonicalUnchanged": true
+      }
+    },
+    {
+      "id": "w5a.controller.edit-drag-switch-read-commit-zero-mutation",
+      "status": "PASS",
+      "evidence": {
+        "modeReceipt": {
+          "sequence": 2,
+          "kind": "mode.project",
+          "owner": "StructuredSurfaceHost",
+          "policyRevision": "structured-surface-host-w5a-r3",
+          "mode": "read",
+          "canonicalDocumentMutation": false,
+          "cancelledPointerDrag": true
+        },
+        "commit": {
+          "code": "EDIT_MODE_REQUIRED",
+          "changed": false
+        },
+        "historyDelta": 0,
+        "workingRevisionDelta": 0,
+        "canonicalUnchanged": true
+      }
+    },
+    {
+      "id": "w5a.controller.input-owner-exact-instance-reuse",
+      "status": "PASS",
+      "evidence": {
+        "exactInstanceReuse": true,
+        "owner": "StructuredInputKeymapOwner",
+        "commandsSame": true,
+        "globalSame": true
+      }
+    },
+    {
+      "id": "w5a.controller.input-owner-command-global-mismatch-rejected",
+      "status": "PASS",
+      "evidence": {
+        "error": "SECOND_STRUCTURED_INPUT_KEYMAP_OWNER_DETECTED",
+        "rejected": true,
+        "adapterOwnerPreserved": true
+      }
+    },
+    {
+      "id": "w5a.controller.fake-input-owner-rejected",
+      "status": "PASS",
+      "evidence": {
+        "error": "SECOND_STRUCTURED_INPUT_KEYMAP_OWNER_DETECTED",
+        "rejected": true
+      }
+    },
+    {
+      "id": "w5a.controller.renderer-policy-failed-update-atomic",
+      "status": "PASS",
+      "evidence": {
+        "error": "INVALID_STRUCTURED_RENDERER_INDENT_UNIT",
+        "before": {
+          "revision": "structured-block-renderer-w5a-r3",
+          "blockGapPx": 8,
+          "indentUnitPx": 20
+        },
+        "after": {
+          "revision": "structured-block-renderer-w5a-r3",
+          "blockGapPx": 8,
+          "indentUnitPx": 20
+        },
+        "exactUnchanged": true
+      }
+    },
+    {
+      "id": "w5a.controller.fake-presentation-bridge-rejected",
+      "status": "PASS",
+      "evidence": {
+        "fakeError": "STRUCTURED_PRESENTATION_BRIDGE_CANONICAL_OWNER_MISMATCH",
+        "bindingError": "STRUCTURED_PRESENTATION_BRIDGE_CANONICAL_OWNER_MISMATCH",
+        "rejected": true
+      }
+    },
+    {
+      "id": "w5a.controller.no-op-content-update-truthful",
+      "status": "PASS",
+      "evidence": {
+        "code": "NO_CHANGE",
+        "changed": false,
+        "historyDelta": 0,
+        "workingRevisionDelta": 0,
+        "canonicalUnchanged": true
+      }
+    },
+    {
+      "id": "w5a.controller.generic-format-update-cannot-bypass-availability",
+      "status": "PASS",
+      "evidence": {
+        "attempts": [
+          {
+            "code": "FORMAT_UPDATE_REQUIRES_CANONICAL_COMMAND",
+            "rejectedKeys": [
+              "dir"
+            ],
+            "owner": "StructuredCommandAvailabilityOwner"
+          },
+          {
+            "code": "FORMAT_UPDATE_REQUIRES_CANONICAL_COMMAND",
+            "rejectedKeys": [
+              "align"
+            ],
+            "owner": "StructuredCommandAvailabilityOwner"
+          },
+          {
+            "code": "FORMAT_UPDATE_REQUIRES_CANONICAL_COMMAND",
+            "rejectedKeys": [
+              "bg"
+            ],
+            "owner": "StructuredCommandAvailabilityOwner"
+          }
+        ],
+        "canonicalUnchanged": true,
+        "historyDelta": 0,
+        "workingRevisionDelta": 0
+      }
+    },
+    {
+      "id": "w5a.controller.closed-toggle-hides-presented-children",
+      "status": "PASS",
+      "evidence": {
+        "closed": {
+          "collapsed": true,
+          "childrenVisible": false,
+          "canonicalChildRetained": true,
+          "childExposed": false
+        },
+        "opened": {
+          "childVisible": true
+        },
+        "toggleAriaTruth": true
+      }
+    },
+    {
+      "id": "w5a.controller.align-background-projection-both-consumers-exact-revert",
+      "status": "PASS",
+      "evidence": {
+        "consumers": [
+          {
+            "surface": "library",
+            "blockId": "blk-d05-p1",
+            "alignOwner": "StructuredCommandAvailabilityOwner",
+            "backgroundOwner": "StructuredCommandAvailabilityOwner",
+            "changed": true,
+            "exactProjectionRevert": true
+          },
+          {
+            "surface": "learn",
+            "blockId": "learn-p1",
+            "alignOwner": "StructuredCommandAvailabilityOwner",
+            "backgroundOwner": "StructuredCommandAvailabilityOwner",
+            "changed": true,
+            "exactProjectionRevert": true
+          }
+        ]
+      }
+    }
+  ],
+  "preservedOriginalLaneCases": [
+    {
+      "id": "w5a.owner-graph-composition",
+      "status": "PASS",
+      "evidence": {
+        "owner": "StructuredSurfaceHost",
+        "contract": {
+          "id": "StructuredSurfaceHost",
+          "version": "1.0.1",
+          "compatibility": "SEMVER",
+          "owner": "Structured Family Presentation/Orchestration",
+          "policyRevision": "structured-surface-host-w5a-r3",
+          "canonicalTruthOwnership": false
+        },
+        "domainOwner": "LearnDomainAdapter",
+        "domainKind": "learn",
+        "mode": "edit",
+        "canonicalTruthOwnership": false,
+        "commands": "SemanticCommandBus",
+        "globalInputOwner": "GlobalInputKeymapOwner",
+        "treeOwner": "StructuredTreeKernel",
+        "mutationOwner": "StructuredMutationKernel",
+        "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+        "availabilityOwner": "StructuredCommandAvailabilityOwner",
+        "selectionOwner": "StructuredSelectionKernel",
+        "clipboardOwner": "StructuredClipboardTrustOwner",
+        "inputKeymapOwner": "StructuredInputKeymapOwner",
+        "actionOwner": "StructuredActionDescriptorOwner",
+        "directionOwner": "InputDirectionResolver",
+        "richContentOwner": "StructuredRichContentOwner",
+        "dragDropOwner": "StructuredDragDropOwner",
+        "rendererOwner": "StructuredBlockRenderer",
+        "presentationBridgeOwner": "StructuredPresentationBridge",
+        "commandBinding": {
+          "status": "BOUND_BY_ACCEPTED_ADAPTER",
+          "count": 26
+        }
+      }
+    },
+    {
+      "id": "w5a.nested-render-canonical-identity",
+      "status": "PASS",
+      "evidence": {
+        "documentId": "KU-D05-0021",
+        "blockCount": 15,
+        "nested": {
+          "id": "blk-d05-li1a",
+          "parent": "blk-d05-li1",
+          "depth": 2,
+          "path": [
+            "blk-d05-t2",
+            "blk-d05-li1",
+            "blk-d05-li1a"
+          ]
+        },
+        "owners": {
+          "tree": "StructuredBlockRenderer",
+          "rich": "StructuredRichContentOwner",
+          "direction": "InputDirectionResolver"
+        },
+        "canonicalUnchanged": true
+      }
+    },
+    {
+      "id": "w5a.read-edit-projection-no-second-state",
+      "status": "PASS",
+      "evidence": {
+        "editMode": "edit",
+        "readMode": "read",
+        "actionCode": "EDIT_MODE_REQUIRED",
+        "contentCode": "EDIT_MODE_REQUIRED",
+        "commandCode": "EDIT_MODE_REQUIRED",
+        "canonicalUnchanged": true
+      }
+    },
+    {
+      "id": "w5a.content-update-transaction-only",
+      "status": "PASS",
+      "evidence": {
+        "result": {
+          "code": "CONTENT_UPDATED_THROUGH_ACCEPTED_TRANSACTION_OWNER",
+          "delegatedOwner": "StructuredTransactionHistoryRecoveryOwner",
+          "historyFrameDelta": 1
+        },
+        "historyBefore": 1,
+        "historyAfter": 2,
+        "undoExact": true
+      }
+    },
+    {
+      "id": "w5a.pointer-selection-canonical-owner",
+      "status": "PASS",
+      "evidence": {
+        "selectionOwner": "StructuredSelectionKernel",
+        "selected": [
+          "blk-d05-t1-p1"
+        ],
+        "covered": [
+          "blk-d05-t1-p1"
+        ]
+      }
+    },
+    {
+      "id": "w5a.keyboard-input-command-transaction-convergence",
+      "status": "PASS",
+      "evidence": {
+        "globalCode": "INPUT_OWNER_CLAIMS_INTENT",
+        "inputOwner": "StructuredInputKeymapOwner",
+        "command": "block.split",
+        "availabilityOwner": "StructuredCommandAvailabilityOwner",
+        "semanticOwner": "StructuredMutationKernel",
+        "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+        "prevented": true,
+        "undoExact": true
+      }
+    },
+    {
+      "id": "w5a.clipboard-canonical-owner",
+      "status": "PASS",
+      "evidence": {
+        "command": "document.copy",
+        "clipboardOwner": "StructuredClipboardTrustOwner",
+        "busReceiptOwner": "StructuredClipboardTrustOwner",
+        "documentUnchanged": true,
+        "payloadBlocks": [
+          "learn-p1"
+        ]
+      }
+    },
+    {
+      "id": "w5a.action-canonical-owner",
+      "status": "PASS",
+      "evidence": {
+        "actionOwner": "StructuredActionDescriptorOwner",
+        "delegation": {
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "mutationOwner": "StructuredMutationKernel",
+          "transactionOwner": "StructuredTransactionHistoryRecoveryOwner"
+        },
+        "historyDelta": 1,
+        "undoExact": true
+      }
+    },
+    {
+      "id": "w5a.drag-pointer-canonical-owner",
+      "status": "PASS",
+      "evidence": {
+        "dragOwner": "StructuredDragDropOwner",
+        "targetPolicyOwner": "StructuredDropTargetPolicyOwner",
+        "mutationOwner": "StructuredMutationKernel",
+        "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+        "historyBefore": 1,
+        "historyAfter": 2,
+        "undoExact": true
+      }
+    },
+    {
+      "id": "w5a.drag-keyboard-canonical-owner",
+      "status": "PASS",
+      "evidence": {
+        "dragOwner": "StructuredDragDropOwner",
+        "targetPolicyOwner": "StructuredDropTargetPolicyOwner",
+        "targetIdentity": "ROOT::3::0",
+        "undoExact": true
+      }
+    },
+    {
+      "id": "w5a.direction-rich-content-accepted-owners",
+      "status": "PASS",
+      "evidence": {
+        "code": {
+          "id": "blk-d05-code1",
+          "direction": "ltr",
+          "directionOwner": "InputDirectionResolver",
+          "richContentOwner": "StructuredRichContentOwner"
+        },
+        "paragraph": {
+          "id": "blk-d05-p1",
+          "direction": "rtl",
+          "directionOwner": "InputDirectionResolver",
+          "richContentOwner": "StructuredRichContentOwner"
+        }
+      }
+    },
+    {
+      "id": "w5a.real-library-learn-consumer-parity",
+      "status": "PASS",
+      "evidence": {
+        "library": {
+          "documentId": "KU-D05-0021",
+          "blocks": 15,
+          "owners": {
+            "owner": "StructuredSurfaceHost",
+            "contract": {
+              "id": "StructuredSurfaceHost",
+              "version": "1.0.1",
+              "compatibility": "SEMVER",
+              "owner": "Structured Family Presentation/Orchestration",
+              "policyRevision": "structured-surface-host-w5a-r3",
+              "canonicalTruthOwnership": false
+            },
+            "domainOwner": "LibraryDomainAdapter",
+            "domainKind": "library",
+            "mode": "edit",
+            "canonicalTruthOwnership": false,
+            "commands": "SemanticCommandBus",
+            "globalInputOwner": "GlobalInputKeymapOwner",
+            "treeOwner": "StructuredTreeKernel",
+            "mutationOwner": "StructuredMutationKernel",
+            "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+            "availabilityOwner": "StructuredCommandAvailabilityOwner",
+            "selectionOwner": "StructuredSelectionKernel",
+            "clipboardOwner": "StructuredClipboardTrustOwner",
+            "inputKeymapOwner": "StructuredInputKeymapOwner",
+            "actionOwner": "StructuredActionDescriptorOwner",
+            "directionOwner": "InputDirectionResolver",
+            "richContentOwner": "StructuredRichContentOwner",
+            "dragDropOwner": "StructuredDragDropOwner",
+            "rendererOwner": "StructuredBlockRenderer",
+            "presentationBridgeOwner": "StructuredPresentationBridge",
+            "commandBinding": {
+              "status": "BOUND_BY_ACCEPTED_ADAPTER",
+              "count": 26
+            }
+          }
+        },
+        "learn": {
+          "documentId": "learn-document-trust-boundaries",
+          "blocks": 3,
+          "owners": {
+            "owner": "StructuredSurfaceHost",
+            "contract": {
+              "id": "StructuredSurfaceHost",
+              "version": "1.0.1",
+              "compatibility": "SEMVER",
+              "owner": "Structured Family Presentation/Orchestration",
+              "policyRevision": "structured-surface-host-w5a-r3",
+              "canonicalTruthOwnership": false
+            },
+            "domainOwner": "LearnDomainAdapter",
+            "domainKind": "learn",
+            "mode": "edit",
+            "canonicalTruthOwnership": false,
+            "commands": "SemanticCommandBus",
+            "globalInputOwner": "GlobalInputKeymapOwner",
+            "treeOwner": "StructuredTreeKernel",
+            "mutationOwner": "StructuredMutationKernel",
+            "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+            "availabilityOwner": "StructuredCommandAvailabilityOwner",
+            "selectionOwner": "StructuredSelectionKernel",
+            "clipboardOwner": "StructuredClipboardTrustOwner",
+            "inputKeymapOwner": "StructuredInputKeymapOwner",
+            "actionOwner": "StructuredActionDescriptorOwner",
+            "directionOwner": "InputDirectionResolver",
+            "richContentOwner": "StructuredRichContentOwner",
+            "dragDropOwner": "StructuredDragDropOwner",
+            "rendererOwner": "StructuredBlockRenderer",
+            "presentationBridgeOwner": "StructuredPresentationBridge",
+            "commandBinding": {
+              "status": "BOUND_BY_ACCEPTED_ADAPTER",
+              "count": 26
+            }
+          },
+          "domainIsolation": true
+        }
+      }
+    },
+    {
+      "id": "w5a.central-renderer-change-both-consumers-exact-revert",
+      "status": "PASS",
+      "evidence": {
+        "policyBefore": {
+          "revision": "structured-block-renderer-w5a-r3",
+          "blockGapPx": 8,
+          "indentUnitPx": 20
+        },
+        "policyChanged": {
+          "revision": "structured-block-renderer-w5a-r3",
+          "blockGapPx": 13,
+          "indentUnitPx": 20
+        },
+        "policyReverted": {
+          "revision": "structured-block-renderer-w5a-r3",
+          "blockGapPx": 8,
+          "indentUnitPx": 20
+        },
+        "libraryReached": true,
+        "learnReached": true,
+        "libraryExactRevert": true,
+        "learnExactRevert": true,
+        "canonicalTruthUnchanged": true
+      }
+    },
+    {
+      "id": "w5a.duplicate-command-owner-negative-fixture",
+      "status": "PASS",
+      "evidence": {
+        "attemptedOwner": "FakeSecondStructuredOwner",
+        "error": "DUPLICATE_COMMAND_OWNER:block.insert",
+        "detected": true
+      }
+    }
+  ],
+  "checks": {
+    "allSixteenDeltaCasesPass": true,
+    "allSixteenDeltaCasesPassInsideBrowserProof": true,
+    "allPreviousTwelveCorrectionCasesRemainPass": true,
+    "previousCorrectionReceiptRemainsPass": true,
+    "allOriginalFourteenLaneCasesRemainPass": true,
+    "browserAndExecutableBoundToSameSource": true,
+    "fullLaneExecutablePass": true
+  },
+  "statusCeiling": "CANDIDATE_READY_FOR_CONTROLLER_REVIEW_ONLY_NO_SELF_PROMOTION"
+}

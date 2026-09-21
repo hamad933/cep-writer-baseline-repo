@@ -1,0 +1,193 @@
+{
+  "objects": {
+    "ValidationRequest": "requestId + artifactRef + validatorVersion + ruleSetRef",
+    "ValidationResult": "resultId + exact input digest + rule outcomes",
+    "TechnicalFinding": "ruleId + locator + observed/expected; not W04 Finding"
+  },
+  "state_dimensions": {
+    "validation": [
+      "QUEUED",
+      "RUNNING",
+      "TECHNICALLY_VALID",
+      "TECHNICALLY_INVALID",
+      "ERROR",
+      "UNAVAILABLE"
+    ]
+  },
+  "read_model": "ValidationReadService exposes technical checks bound to exact artifact/rules/version and excludes acceptance state.",
+  "persistence": {
+    "ValidationRequest": "Platform.ValidationRequest",
+    "ValidationResult": "Platform.ValidationResult immutable",
+    "TechnicalFinding": "Platform.ValidationFinding"
+  },
+  "invariants": [
+    "Technical validity is not admission/review/mastery",
+    "Validation findings not formal Review Findings",
+    "Missing validator is unavailable, never PASS"
+  ],
+  "epistemic": {
+    "empty": "No validation for artifact: NOT_RUN, not technically valid.",
+    "stale": "Result for previous digest shown as stale relative to selected artifact.",
+    "unavailable": "Validator/rules unavailable: report missing dependency exactly.",
+    "error": "Validator exception is ERROR, distinct from schema nonconformance."
+  },
+  "operations": [
+    {
+      "name": "validate",
+      "family": "OperationalCommand",
+      "payload": "artifactRef:ref rulesRef:ref validatorVersion:string action:enum:validate expectedState:enum:NOT_RUN correlationId:string",
+      "before": "validation not run",
+      "event": "enqueue exact technical validation",
+      "after": "QUEUED→RUNNING→technical outcome",
+      "guard": "Pinned digest/rules and deterministic validator identity",
+      "oracle": "Result for artifact A cannot satisfy changed artifact B",
+      "persistence": "Platform.ValidationResult",
+      "method": "POST",
+      "gate": null,
+      "command_id": "validation.validate",
+      "surface_id": "validation",
+      "semantic_owner": "W05ValidationDomain",
+      "focus_after": "Validation active object/control; detached target→validation-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Validator exception is ERROR, distinct from schema nonconformance.",
+        "503_timeout": "Validator/rules unavailable: report missing dependency exactly."
+      },
+      "test_id": "TEST-validation.validate",
+      "evidence_id": "EVID-validation.validate",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "inspect",
+      "family": "NavigationCommand",
+      "payload": "routeId:string validationRef:ref",
+      "before": "validation terminal",
+      "event": "read technical result",
+      "after": "exact input and limitations shown",
+      "guard": "Read exact result",
+      "oracle": "TECHNICALLY_VALID leaves acceptance field absent",
+      "persistence": "Platform.ValidationReadProjection",
+      "method": "GET",
+      "gate": null,
+      "command_id": "validation.inspect",
+      "surface_id": "validation",
+      "semantic_owner": "W05ValidationDomain",
+      "focus_after": "Validation active object/control; detached target→validation-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Validator exception is ERROR, distinct from schema nonconformance.",
+        "503_timeout": "Validator/rules unavailable: report missing dependency exactly."
+      },
+      "test_id": "TEST-validation.inspect",
+      "evidence_id": "EVID-validation.inspect",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "findings",
+      "family": "AnalyticalCommand",
+      "payload": "leftRef:ref rightRef:ref scope:strings workingAnalysisId:string",
+      "before": "validation=TECHNICALLY_INVALID",
+      "event": "inspect rule/locator differences",
+      "after": "technical findings table",
+      "guard": "Rules and source locators immutable",
+      "oracle": "Inspect technical finding creates no W04 Finding",
+      "persistence": "Platform.ValidationReadProjection",
+      "method": "GET",
+      "gate": null,
+      "command_id": "validation.findings",
+      "surface_id": "validation",
+      "semantic_owner": "W05ValidationDomain",
+      "focus_after": "Validation active object/control; detached target→validation-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Validator exception is ERROR, distinct from schema nonconformance.",
+        "503_timeout": "Validator/rules unavailable: report missing dependency exactly."
+      },
+      "test_id": "TEST-validation.findings",
+      "evidence_id": "EVID-validation.findings",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "validation",
+  "title": "Validation",
+  "workspace": "W05",
+  "semantic_owner": "W05ValidationDomain",
+  "archetype": "TechnicalValidationWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W05-VAL-001",
+    "CAP-W05-VAL-002",
+    "CAP-W05-VAL-003",
+    "CAP-W05-VAL-004",
+    "CAP-W05-VAL-005",
+    "CAP-W05-VAL-006",
+    "CAP-W05-VAL-007"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W05-VAL-001",
+        "CAP-W05-VAL-002",
+        "CAP-W05-VAL-003",
+        "CAP-W05-VAL-004",
+        "CAP-W05-VAL-005",
+        "CAP-W05-VAL-006",
+        "CAP-W05-VAL-007"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Validation",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-016",
+    "NC-026",
+    "NC-032"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore"
+  ],
+  "adapter": "W05ValidationDomainAdapter",
+  "regions": {
+    "TOP": "Validation exact identity, local mode, command routes",
+    "LEFT": "typed ValidationRequest collection/navigation",
+    "CENTER": "TechnicalValidationWorkbench primary task",
+    "RIGHT": "one selected ValidationRequest identity/context inspector",
+    "BOTTOM": "Deep Validation diagnostics/history"
+  },
+  "command_ids": [
+    "validation.validate",
+    "validation.inspect",
+    "validation.findings"
+  ]
+}

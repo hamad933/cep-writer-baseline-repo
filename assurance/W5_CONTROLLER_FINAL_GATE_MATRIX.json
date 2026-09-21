@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "kind": "W5_CONTROLLER_FINAL_GATE_MATRIX",
+  "generatedAt": "2026-09-12T22:46:38.662660+00:00",
+  "status": "PASS",
+  "gates": {
+    "canonicalSource": {
+      "status": "PASS",
+      "sha256": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d",
+      "files": 99
+    },
+    "laneC": {
+      "status": "PASS",
+      "cases": "26/26"
+    },
+    "donorValidator": {
+      "status": "PASS",
+      "retireReady": 1,
+      "keep": 45
+    },
+    "laneA": {
+      "status": "PASS",
+      "executable": "42/42",
+      "previousCorrection": "12/12",
+      "postCorrectionDelta": "16/16"
+    },
+    "laneB": {
+      "status": "PASS",
+      "original": "9/9",
+      "previousCorrection": "8/8",
+      "postCorrectionDelta": "18/18",
+      "microCorrection": "9/9"
+    },
+    "model": {
+      "status": "PASS",
+      "pass": 210,
+      "fail": 0
+    },
+    "contracts": {
+      "status": "PASS",
+      "pass": 168,
+      "fail": 0
+    },
+    "legacyBrowser": {
+      "status": "PASS",
+      "summary": {
+        "total": 6,
+        "pass": 6,
+        "fail": 0
+      },
+      "source": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d",
+      "baseline": "CEP-FR-E15-W5-STRUCTURED-FAMILY-COMPLETION"
+    },
+    "wave3Browser": {
+      "status": "PASS",
+      "summary": {
+        "total": 5,
+        "pass": 5,
+        "fail": 0
+      },
+      "source": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d"
+    },
+    "wave4Browser": {
+      "status": "PASS",
+      "summary": {
+        "total": 5,
+        "pass": 5,
+        "fail": 0
+      },
+      "source": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d"
+    },
+    "wave5CBrowser": {
+      "status": "PASS",
+      "steps": 9,
+      "source": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d"
+    },
+    "npmRunCheck": {
+      "status": "PASS",
+      "postFinalCompile": true
+    },
+    "generatorIdempotence": {
+      "status": "PASS",
+      "buildWriterTrackedChangedOnSecondRun": 0,
+      "compileTrackedChangedOnSecondRun": 0
+    },
+    "stalePendingScan": {
+      "status": "PASS",
+      "findings": 0
+    }
+  },
+  "hardTruthCeilings": {
+    "stack": "STACK_NOT_FROZEN",
+    "OperationalSessionOwner": "BOUNDED_BELOW_M6_SECOND_REAL_PROVIDER_NOT_PROVEN",
+    "EpistemicStateContract": "CONTRACT_ONLY_NO_GENERIC_ASYNC_ENGINE",
+    "surfaceBuild": "BLOCKED",
+    "wave6": "NOT_STARTED"
+  }
+}

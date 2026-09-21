@@ -1,0 +1,242 @@
+{
+  "objects": {
+    "ReleaseCandidate": "candidateId + commitSHA + treeSHA + artifactDigest",
+    "Readiness": "candidate-bound technical evidence projection",
+    "ReleaseAuthorization": "explicit authority record bound to same candidate",
+    "DeploymentObservation": "actual deployment state separate from authorization"
+  },
+  "state_dimensions": {
+    "candidate": [
+      "ASSEMBLED",
+      "TECHNICALLY_READY",
+      "NOT_READY"
+    ],
+    "authorization": [
+      "NONE",
+      "REQUESTED",
+      "GRANTED",
+      "REVOKED"
+    ],
+    "deployment": [
+      "NOT_DEPLOYED",
+      "IN_PROGRESS",
+      "DEPLOYED",
+      "FAILED",
+      "UNKNOWN"
+    ]
+  },
+  "read_model": "ReleaseReadService exposes exact candidate/evidence/authorization/deployment axes; ReleaseReadiness is a technical contributor only.",
+  "persistence": {
+    "ReleaseCandidate": "Platform.ReleaseCandidate",
+    "Readiness": "Platform.ReleaseReadiness",
+    "ReleaseAuthorization": "Parent-controlled authority store",
+    "DeploymentObservation": "deployment provider read model"
+  },
+  "invariants": [
+    "PUSH/CI PASS is not acceptance",
+    "Authorization is not deployment",
+    "Candidate A evidence cannot authorize B",
+    "No release/deploy execution authorized by this design packet"
+  ],
+  "epistemic": {
+    "empty": "No candidate: show assembly requirements, not green release readiness.",
+    "stale": "Head moved: selected exact candidate remains pinned; evidence mismatch explicit.",
+    "unavailable": "Deployment provider unavailable: UNKNOWN, not NOT_DEPLOYED or DEPLOYED.",
+    "error": "Artifact/commit/tree mismatch blocks readiness attribution."
+  },
+  "operations": [
+    {
+      "name": "inspect",
+      "family": "NavigationCommand",
+      "payload": "routeId:string candidateRef:ref",
+      "before": "candidate any",
+      "event": "inspect exact candidate evidence",
+      "after": "separate readiness/authority/deployment",
+      "guard": "Exact candidate ID/hash",
+      "oracle": "CI pass does not change authorization or deployment",
+      "persistence": "Platform.ReleaseReadProjection",
+      "method": "GET",
+      "gate": null,
+      "command_id": "releases.inspect",
+      "surface_id": "releases",
+      "semantic_owner": "W05ReleaseDomain",
+      "focus_after": "Releases active object/control; detached target→releases-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Artifact/commit/tree mismatch blocks readiness attribution.",
+        "503_timeout": "Deployment provider unavailable: UNKNOWN, not NOT_DEPLOYED or DEPLOYED."
+      },
+      "test_id": "TEST-releases.inspect",
+      "evidence_id": "EVID-releases.inspect",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "compare",
+      "family": "AnalyticalCommand",
+      "payload": "leftRef:ref rightRef:ref scope:strings workingAnalysisId:string",
+      "before": "two candidates selected",
+      "event": "compare trees/artifacts/evidence",
+      "after": "exact pair delta",
+      "guard": "Both identities resolved before diff",
+      "oracle": "Latest alias mutation cannot change comparison pair",
+      "persistence": "Platform.ReleaseReadProjection",
+      "method": "GET",
+      "gate": null,
+      "command_id": "releases.compare",
+      "surface_id": "releases",
+      "semantic_owner": "W05ReleaseDomain",
+      "focus_after": "Releases active object/control; detached target→releases-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Artifact/commit/tree mismatch blocks readiness attribution.",
+        "503_timeout": "Deployment provider unavailable: UNKNOWN, not NOT_DEPLOYED or DEPLOYED."
+      },
+      "test_id": "TEST-releases.compare",
+      "evidence_id": "EVID-releases.compare",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "plan",
+      "family": "ReleaseSafetyCommand",
+      "payload": "candidateSHA:digest40 treeSHA:digest40 artifactRef:ref action:enum:plan authorityContext:authority evidenceRefs:refs",
+      "before": "candidate=ASSEMBLED|TECHNICALLY_READY",
+      "event": "prepare release readiness plan",
+      "after": "readiness record only",
+      "guard": "Evidence binds exact candidate and method",
+      "oracle": "Technical plan creates no authorization/deployment",
+      "persistence": "Platform.ReleasePlan",
+      "method": "POST",
+      "gate": null,
+      "command_id": "releases.plan",
+      "surface_id": "releases",
+      "semantic_owner": "W05ReleaseDomain",
+      "focus_after": "Releases active object/control; detached target→releases-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Artifact/commit/tree mismatch blocks readiness attribution.",
+        "503_timeout": "Deployment provider unavailable: UNKNOWN, not NOT_DEPLOYED or DEPLOYED."
+      },
+      "test_id": "TEST-releases.plan",
+      "evidence_id": "EVID-releases.plan",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "requestAuthorization",
+      "family": "ReleaseSafetyCommand",
+      "payload": "candidateSHA:digest40 treeSHA:digest40 artifactRef:ref action:enum:requestAuthorization authorityContext:authority evidenceRefs:refs",
+      "before": "candidate=TECHNICALLY_READY and authorization=NONE",
+      "event": "request explicit authority decision",
+      "after": "authorization=REQUESTED",
+      "guard": "Real Parent/Owner path; no inferred approval",
+      "oracle": "Request receipt leaves deployment=NOT_DEPLOYED",
+      "persistence": "Parent.ReleaseAuthorization",
+      "method": "POST",
+      "gate": "AUTHORITY_GATED",
+      "command_id": "releases.requestAuthorization",
+      "surface_id": "releases",
+      "semantic_owner": "W05ReleaseDomain",
+      "focus_after": "Releases active object/control; detached target→releases-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Artifact/commit/tree mismatch blocks readiness attribution.",
+        "503_timeout": "Deployment provider unavailable: UNKNOWN, not NOT_DEPLOYED or DEPLOYED."
+      },
+      "test_id": "TEST-releases.requestAuthorization",
+      "evidence_id": "EVID-releases.requestAuthorization",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "releases",
+  "title": "Releases",
+  "workspace": "W05",
+  "semantic_owner": "W05ReleaseDomain",
+  "archetype": "ReleaseGovernanceWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W05-REL-001",
+    "CAP-W05-REL-002",
+    "CAP-W05-REL-003",
+    "CAP-W05-REL-004",
+    "CAP-W05-REL-005",
+    "CAP-W05-REL-006",
+    "CAP-W05-REL-007",
+    "CAP-W05-REL-008",
+    "CAP-W05-REL-009"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W05-REL-001",
+        "CAP-W05-REL-002",
+        "CAP-W05-REL-003",
+        "CAP-W05-REL-004",
+        "CAP-W05-REL-005",
+        "CAP-W05-REL-006",
+        "CAP-W05-REL-007",
+        "CAP-W05-REL-008",
+        "CAP-W05-REL-009"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Releases",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-030",
+    "NC-031",
+    "NC-032"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore"
+  ],
+  "adapter": "W05ReleaseDomainAdapter",
+  "regions": {
+    "TOP": "Releases exact identity, local mode, command routes",
+    "LEFT": "typed ReleaseCandidate collection/navigation",
+    "CENTER": "ReleaseGovernanceWorkbench primary task",
+    "RIGHT": "one selected ReleaseCandidate identity/context inspector",
+    "BOTTOM": "Deep Releases diagnostics/history"
+  },
+  "command_ids": [
+    "releases.inspect",
+    "releases.compare",
+    "releases.plan",
+    "releases.requestAuthorization"
+  ]
+}

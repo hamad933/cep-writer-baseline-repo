@@ -1,0 +1,235 @@
+{
+  "objects": {
+    "Portfolio": "portfolioId + owner",
+    "Membership": "membershipId + exact Evidence/Mastery/project ref",
+    "GroupingRef": "approved registry ID; not invented taxonomy",
+    "CurationPresentation": "order/caption/filter separate from source truth"
+  },
+  "state_dimensions": {
+    "member": [
+      "RESOLVABLE",
+      "SOURCE_SUPERSEDED",
+      "SOURCE_WITHDRAWN",
+      "UNAVAILABLE"
+    ],
+    "grouping": [
+      "UNGROUPED",
+      "REGISTRY_BOUND",
+      "AUTHORITY_PENDING"
+    ]
+  },
+  "read_model": "PortfolioReadService resolves membership references to owner projections; grouping registry read only until authority resolves.",
+  "persistence": {
+    "Portfolio": "W04Portfolio.Collection",
+    "Membership": "W04Portfolio.Membership references only",
+    "CurationPresentation": "W04Portfolio.Curation"
+  },
+  "invariants": [
+    "Removing membership never deletes Evidence/Mastery",
+    "No invented Project/Learning Objective registry",
+    "Export binds refs and source disposition, not duplicate canonical authority"
+  ],
+  "epistemic": {
+    "empty": "Empty portfolio supports adding authorized references without invented achievements.",
+    "stale": "Source superseded: display pinned historical member and explicit update choice.",
+    "unavailable": "Missing source renders unavailable member retaining original ref.",
+    "error": "Unauthorized grouping selection rejected; ungrouped membership remains usable."
+  },
+  "operations": [
+    {
+      "name": "curate",
+      "family": "PortfolioCurationCommand",
+      "payload": "portfolioId:string memberRef:ref action:enum:add|remove|reorder order:integer",
+      "before": "portfolio exists",
+      "event": "change membership only",
+      "after": "membership updated; source unchanged",
+      "guard": "Read source and write portfolio permission; version check via envelope",
+      "oracle": "Removing membership preserves canonical source digest and row count",
+      "persistence": "W04Portfolio.Membership",
+      "method": "POST",
+      "gate": null,
+      "command_id": "portfolio.curate",
+      "surface_id": "portfolio",
+      "semantic_owner": "W04PortfolioDomain",
+      "focus_after": "Portfolio active object/control; detached target→portfolio-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Unauthorized grouping selection rejected; ungrouped membership remains usable.",
+        "503_timeout": "Missing source renders unavailable member retaining original ref."
+      },
+      "test_id": "TEST-portfolio.curate",
+      "evidence_id": "EVID-portfolio.curate",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "filter",
+      "family": "PresentationCommand",
+      "payload": "presentationTarget:string preferredState:strings",
+      "before": "members visible",
+      "event": "apply kind/disposition filter",
+      "after": "filtered membership projection",
+      "guard": "Use known source types; registry grouping stays gated",
+      "oracle": "No filter creates taxonomy or modifies member source",
+      "persistence": "GlobalPreferenceDomain",
+      "method": "LOCAL",
+      "gate": null,
+      "command_id": "portfolio.filter",
+      "surface_id": "portfolio",
+      "semantic_owner": "W04PortfolioDomain",
+      "focus_after": "Portfolio active object/control; detached target→portfolio-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Unauthorized grouping selection rejected; ungrouped membership remains usable.",
+        "503_timeout": "Missing source renders unavailable member retaining original ref."
+      },
+      "test_id": "TEST-portfolio.filter",
+      "evidence_id": "EVID-portfolio.filter",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "export",
+      "family": "PortfolioCurationCommand",
+      "payload": "portfolioId:string memberRef:ref action:enum:export",
+      "before": "members resolvable or explicitly missing",
+      "event": "export curated projection manifest",
+      "after": "export receipt with pinned refs and limitations",
+      "guard": "No undisclosed source or authority claim",
+      "oracle": "Exported stale/unavailable members retain status and provenance",
+      "persistence": "W04Portfolio.ExportReceipt",
+      "method": "POST",
+      "gate": null,
+      "command_id": "portfolio.export",
+      "surface_id": "portfolio",
+      "semantic_owner": "W04PortfolioDomain",
+      "focus_after": "Portfolio active object/control; detached target→portfolio-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Unauthorized grouping selection rejected; ungrouped membership remains usable.",
+        "503_timeout": "Missing source renders unavailable member retaining original ref."
+      },
+      "test_id": "TEST-portfolio.export",
+      "evidence_id": "EVID-portfolio.export",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "group",
+      "family": "PortfolioCurationCommand",
+      "payload": "portfolioId:string memberRef:ref groupRef:ref action:enum:group",
+      "before": "grouping=REGISTRY_BOUND",
+      "event": "assign approved group reference",
+      "after": "membership grouped",
+      "guard": "Exact approved registry and grouping authority required",
+      "oracle": "Unknown example label never becomes canonical group ID",
+      "persistence": "W04Portfolio.Membership",
+      "method": "POST",
+      "gate": "AUTHORITY_GATED",
+      "command_id": "portfolio.group",
+      "surface_id": "portfolio",
+      "semantic_owner": "W04PortfolioDomain",
+      "focus_after": "Portfolio active object/control; detached target→portfolio-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Unauthorized grouping selection rejected; ungrouped membership remains usable.",
+        "503_timeout": "Missing source renders unavailable member retaining original ref."
+      },
+      "test_id": "TEST-portfolio.group",
+      "evidence_id": "EVID-portfolio.group",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "portfolio",
+  "title": "Portfolio",
+  "workspace": "W04",
+  "semantic_owner": "W04PortfolioDomain",
+  "archetype": "CurationProjectionWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W04-POR-001",
+    "CAP-W04-POR-002",
+    "CAP-W04-POR-003",
+    "CAP-W04-POR-004",
+    "CAP-W04-POR-005",
+    "CAP-W04-POR-006",
+    "CAP-W04-POR-007",
+    "CAP-W04-POR-008",
+    "CAP-W04-POR-009",
+    "CAP-W04-POR-010"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W04-POR-001",
+        "CAP-W04-POR-002",
+        "CAP-W04-POR-003",
+        "CAP-W04-POR-004",
+        "CAP-W04-POR-005",
+        "CAP-W04-POR-006",
+        "CAP-W04-POR-007",
+        "CAP-W04-POR-008",
+        "CAP-W04-POR-009",
+        "CAP-W04-POR-010"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Portfolio",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-022",
+    "NC-033"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore",
+    "AnalyticalWorkbenchCore"
+  ],
+  "adapter": "W04PortfolioDomainAdapter",
+  "regions": {
+    "TOP": "Portfolio exact identity, local mode, command routes",
+    "LEFT": "typed Portfolio collection/navigation",
+    "CENTER": "CurationProjectionWorkbench primary task",
+    "RIGHT": "one selected Portfolio identity/context inspector",
+    "BOTTOM": "Deep Portfolio diagnostics/history"
+  },
+  "command_ids": [
+    "portfolio.curate",
+    "portfolio.filter",
+    "portfolio.export",
+    "portfolio.group"
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "status": "PASS",
+  "mission": "FW-C-SPATIAL-SELECTION-NAVIGATION",
+  "probe": {
+    "temporaryCopyOnly": true,
+    "change": "SPATIAL_NEIGHBOR_POLICY noNeighbor stay -> wrap-canonical; revision FW-C-NEIGHBOR-01 -> FW-C-NEIGHBOR-PROBE",
+    "build": {
+      "pass": true,
+      "authority": "CANONICAL_SOURCE_TO_GENERATED_ONLY",
+      "source": "../../../../tmp/cep-fw-c-policy-9VGwMC/stack/native-typescript",
+      "destination": "../../../../tmp/cep-fw-c-policy-9VGwMC/dist",
+      "written": 30,
+      "removedStale": 0
+    }
+  },
+  "candidateSource": {
+    "before": "8f44670ccdfd2aeefe6d0c5321259fb60c9be5ead68b3a338da4a1f9db89ff3f",
+    "after": "8f44670ccdfd2aeefe6d0c5321259fb60c9be5ead68b3a338da4a1f9db89ff3f",
+    "unchanged": true
+  },
+  "baseline": {
+    "visualize": {
+      "current": "concept-6",
+      "receipt": {
+        "schema": "SpatialSelectionReceipt@1",
+        "ownerId": "SpatialSelectionNavigationKernel",
+        "contractVersion": "1.0.0",
+        "projectionId": "SpatialModelProjection",
+        "projectionOwner": "SpatialModelCompatibilityProjection",
+        "activeMode": "author",
+        "policyRevision": "FW-C-NEIGHBOR-01",
+        "revision": 2,
+        "action": "probe-neighbor",
+        "selectedIds": [],
+        "selectionCount": 0,
+        "focusId": "concept-6",
+        "anchorId": "concept-1",
+        "targetId": "concept-6",
+        "fromId": "concept-6",
+        "direction": "ArrowRight",
+        "navigation": "STAY"
+      },
+      "domainBefore": "30d1956e6467922c387e71dd3b9efe22ca61d21f9278ba66d1a7fcfb9dd9a9ca",
+      "domainAfter": "30d1956e6467922c387e71dd3b9efe22ca61d21f9278ba66d1a7fcfb9dd9a9ca"
+    },
+    "enterprise": {
+      "current": "SIM-ATK-01",
+      "receipt": {
+        "schema": "SpatialSelectionReceipt@1",
+        "ownerId": "SpatialSelectionNavigationKernel",
+        "contractVersion": "1.0.0",
+        "projectionId": "SpatialModelProjection",
+        "projectionOwner": "SpatialModelCompatibilityProjection",
+        "activeMode": "author",
+        "policyRevision": "FW-C-NEIGHBOR-01",
+        "revision": 2,
+        "action": "probe-neighbor",
+        "selectedIds": [],
+        "selectionCount": 0,
+        "focusId": "SIM-ATK-01",
+        "anchorId": "APP-WEB-01",
+        "targetId": "SIM-ATK-01",
+        "fromId": "SIM-ATK-01",
+        "direction": "ArrowRight",
+        "navigation": "STAY"
+      },
+      "domainBefore": "cb794c6cc0dc380119708e88a0e35b64a46f3dadae3badaadb8268cc56deb273",
+      "domainAfter": "cb794c6cc0dc380119708e88a0e35b64a46f3dadae3badaadb8268cc56deb273"
+    },
+    "runs": {
+      "current": "DEV-SIEM-01",
+      "receipt": {
+        "schema": "SpatialSelectionReceipt@1",
+        "ownerId": "SpatialSelectionNavigationKernel",
+        "contractVersion": "1.0.0",
+        "projectionId": "SpatialModelProjection",
+        "projectionOwner": "SpatialModelCompatibilityProjection",
+        "activeMode": "live",
+        "policyRevision": "FW-C-NEIGHBOR-01",
+        "revision": 2,
+        "action": "probe-neighbor",
+        "selectedIds": [],
+        "selectionCount": 0,
+        "focusId": "DEV-SIEM-01",
+        "anchorId": "DEV-WEB-01",
+        "targetId": "DEV-SIEM-01",
+        "fromId": "DEV-SIEM-01",
+        "direction": "ArrowRight",
+        "navigation": "STAY"
+      },
+      "runtimeBefore": "dd5d6005b743f7fcc3bad4c07c8cea7437d6f48fba542608198634aab5245c8b",
+      "runtimeAfter": "dd5d6005b743f7fcc3bad4c07c8cea7437d6f48fba542608198634aab5245c8b"
+    },
+    "label": "baseline"
+  },
+  "mutated": {
+    "visualize": {
+      "current": "concept-6",
+      "receipt": {
+        "schema": "SpatialSelectionReceipt@1",
+        "ownerId": "SpatialSelectionNavigationKernel",
+        "contractVersion": "1.0.0",
+        "projectionId": "SpatialModelProjection",
+        "projectionOwner": "SpatialModelCompatibilityProjection",
+        "activeMode": "author",
+        "policyRevision": "FW-C-NEIGHBOR-PROBE",
+        "revision": 2,
+        "action": "probe-neighbor",
+        "selectedIds": [],
+        "selectionCount": 0,
+        "focusId": "concept-1",
+        "anchorId": "concept-1",
+        "targetId": "concept-1",
+        "fromId": "concept-6",
+        "direction": "ArrowRight",
+        "navigation": "WRAP_CANONICAL"
+      },
+      "domainBefore": "30d1956e6467922c387e71dd3b9efe22ca61d21f9278ba66d1a7fcfb9dd9a9ca",
+      "domainAfter": "30d1956e6467922c387e71dd3b9efe22ca61d21f9278ba66d1a7fcfb9dd9a9ca"
+    },
+    "enterprise": {
+      "current": "SIM-ATK-01",
+      "receipt": {
+        "schema": "SpatialSelectionReceipt@1",
+        "ownerId": "SpatialSelectionNavigationKernel",
+        "contractVersion": "1.0.0",
+        "projectionId": "SpatialModelProjection",
+        "projectionOwner": "SpatialModelCompatibilityProjection",
+        "activeMode": "author",
+        "policyRevision": "FW-C-NEIGHBOR-PROBE",
+        "revision": 2,
+        "action": "probe-neighbor",
+        "selectedIds": [],
+        "selectionCount": 0,
+        "focusId": "APP-WEB-01",
+        "anchorId": "APP-WEB-01",
+        "targetId": "APP-WEB-01",
+        "fromId": "SIM-ATK-01",
+        "direction": "ArrowRight",
+        "navigation": "WRAP_CANONICAL"
+      },
+      "domainBefore": "cb794c6cc0dc380119708e88a0e35b64a46f3dadae3badaadb8268cc56deb273",
+      "domainAfter": "cb794c6cc0dc380119708e88a0e35b64a46f3dadae3badaadb8268cc56deb273"
+    },
+    "runs": {
+      "current": "DEV-SIEM-01",
+      "receipt": {
+        "schema": "SpatialSelectionReceipt@1",
+        "ownerId": "SpatialSelectionNavigationKernel",
+        "contractVersion": "1.0.0",
+        "projectionId": "SpatialModelProjection",
+        "projectionOwner": "SpatialModelCompatibilityProjection",
+        "activeMode": "live",
+        "policyRevision": "FW-C-NEIGHBOR-PROBE",
+        "revision": 2,
+        "action": "probe-neighbor",
+        "selectedIds": [],
+        "selectionCount": 0,
+        "focusId": "DEV-WEB-01",
+        "anchorId": "DEV-WEB-01",
+        "targetId": "DEV-WEB-01",
+        "fromId": "DEV-SIEM-01",
+        "direction": "ArrowRight",
+        "navigation": "WRAP_CANONICAL"
+      },
+      "runtimeBefore": "dd5d6005b743f7fcc3bad4c07c8cea7437d6f48fba542608198634aab5245c8b",
+      "runtimeAfter": "dd5d6005b743f7fcc3bad4c07c8cea7437d6f48fba542608198634aab5245c8b"
+    },
+    "label": "mutated-temp-copy"
+  },
+  "assertions": {
+    "visualizeChangedTogether": true,
+    "enterpriseChangedTogether": true,
+    "runsChangedTogether": true,
+    "relationAndRuntimeHashesUnchanged": true,
+    "noProbeResidueInCandidate": true
+  }
+}

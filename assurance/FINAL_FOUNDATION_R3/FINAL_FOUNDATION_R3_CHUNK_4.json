@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "kind": "FINAL_FOUNDATION_R3_23_SCENARIO_REPLAY",
+  "classification": "CONTROLLER_FINAL_FOUNDATION_GATE_EVIDENCE",
+  "status": "PASS",
+  "sourceCanonicalTreeSha256": "5dcc401a95f6b7b38bbd2f64d9140c29182eb459042dc6e3dd7be5460c6bca5f",
+  "canonicalSourceFileCount": 113,
+  "scenarioCount": 5,
+  "pass": 5,
+  "fail": 0,
+  "results": [
+    {
+      "id": "G19",
+      "law": "GL-07/GL-11",
+      "status": "PASS",
+      "detail": {
+        "settingsOwner": "SettingsCenterOwner",
+        "settingsFocused": true,
+        "settingsEscapeBindingStatic": true,
+        "shortcutFocusContained": true,
+        "canonicalEscapeRoute": true
+      }
+    },
+    {
+      "id": "G20",
+      "law": "GL-12",
+      "status": "PASS",
+      "detail": {
+        "mid": {
+          "band": "medium",
+          "overlay": "",
+          "w": 1100,
+          "c": 1100
+        },
+        "small": {
+          "band": "narrow",
+          "overlay": "",
+          "w": 720,
+          "c": 720,
+          "left": "collapsed",
+          "right": "collapsed"
+        }
+      }
+    },
+    {
+      "id": "G21",
+      "law": "GL-11",
+      "status": "PASS",
+      "detail": {
+        "stateLabHidden": true,
+        "recoveryVisible": true
+      }
+    },
+    {
+      "id": "G22",
+      "law": "GL-07",
+      "status": "PASS",
+      "detail": {
+        "menuOpened": true,
+        "slashBindingStatic": true,
+        "menuSearchFocused": true,
+        "canonicalEscapeRoute": true,
+        "focusReturned": true
+      }
+    },
+    {
+      "id": "G23",
+      "law": "GL-05",
+      "status": "PASS",
+      "detail": {
+        "failureObserved": {
+          "threw": false
+        },
+        "unchanged": true
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "assurance/FINAL_FOUNDATION_R3/G20_final_responsive.png",
+      "bytes": 74706,
+      "sha256": "1b76172d75de7b663e9f18c575906275d2e43fcb6e2a023ad1a7646ab0befe0e"
+    }
+  ],
+  "r3LawCoverage": [
+    "GL-05",
+    "GL-07",
+    "GL-07/GL-11",
+    "GL-11",
+    "GL-12"
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "project": "CEP",
+  "slice": "VS-03",
+  "status": "PASS",
+  "parent": {
+    "filename": "CEP_FOUNDATION_FORGE_v0.2.1c_VS01_STRUCTURED_TREE_KERNEL_CONTROLLER_ACCEPTED_SUCCESSOR.zip",
+    "bytes": 3616068,
+    "sha256": "5e599300142f3ba53cf1f27b5ff375acd5c939315648fcb53acc4a6356a5a1d5",
+    "successorId": "CEP-FR-E03-VS01-5e599300",
+    "controlEpoch": "CEP-FR-EXEC-20260911-E03"
+  },
+  "canonicalOwner": {
+    "symbol": "StructuredMutationKernel",
+    "singleton": "STRUCTURED_MUTATION_KERNEL",
+    "source": "stack/native-typescript/foundation/structured.ts",
+    "generated": [
+      "dist/foundation/structured.js",
+      "dist-ts/foundation/structured.js"
+    ],
+    "treeDependency": "StructuredTreeKernel",
+    "policyRevision": "structured-mutation-vs03-r1"
+  },
+  "admittedMechanics": [
+    "insert/replace structural position",
+    "duplicate subtree with explicit identity allocator",
+    "remove/delete subtree",
+    "sibling move and edge move",
+    "move-to-gap validation+mutation",
+    "structural/local indent and outdent",
+    "data split/merge",
+    "block convert/plain-text promotion"
+  ],
+  "atomicContract": "All decisions run on a cloned next-tree; rejected/invalid/no-change outcomes return without mutating caller input; post-mutation tree and identity validation occur before APPLIED.",
+  "libraryCompatibilityRule": "accepted-runtime remains presentation/history compatibility shell and delegates admitted structural mutations to STRUCTURED_MUTATION_KERNEL.",
+  "sourceCensus": {
+    "acceptedRuntimeDirectSpliceCount": 0,
+    "duplicateMechanicScan": "PASS",
+    "structuredMutationNegativeFixture": {
+      "id": "duplicate.structured-mutation",
+      "status": "PASS",
+      "expected": "POSSIBLE_DUPLICATE_SHARED_MECHANIC",
+      "mechanicId": "structured.mutation"
+    }
+  },
+  "realConsumers": [
+    "library",
+    "learn"
+  ],
+  "proofs": [
+    "assurance/VS03_R3_TARGETED_BROWSER_REPLAY.json",
+    "assurance/VS03_TARGETED_MUTATION_TEST_RECEIPT.json",
+    "assurance/VS03_CENTRAL_MUTATION_PROOF.json"
+  ]
+}

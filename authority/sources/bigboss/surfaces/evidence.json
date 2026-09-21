@@ -1,0 +1,287 @@
+{
+  "objects": {
+    "CandidateEvidence": "candidateId + exact source refs + digest + limitations",
+    "EvidenceRevision": "evidenceId + revision + immutable source facts",
+    "Amendment": "candidate successor referencing prior EvidenceRevision",
+    "SourceSupersessionChoice": "update/retain historical with reason/withdraw"
+  },
+  "state_dimensions": {
+    "candidate": [
+      "PREPARED",
+      "VALIDATED",
+      "REJECTED",
+      "ADMITTED"
+    ],
+    "evidence": [
+      "ACTIVE",
+      "SOURCE_SUPERSEDED",
+      "WITHDRAWN"
+    ],
+    "reviewStatus": [
+      "NONE",
+      "REQUESTED",
+      "IN_REVIEW",
+      "CLOSED"
+    ],
+    "effectiveDecision": [
+      "NONE",
+      "ACCEPT",
+      "REJECT",
+      "QUALIFIED"
+    ]
+  },
+  "read_model": "EvidenceReadService exposes candidate/admission/evidence lineage and independent review/decision projections.",
+  "persistence": {
+    "CandidateEvidence": "Evidence.Candidate",
+    "EvidenceRevision": "Evidence.Revision append-only",
+    "Amendment": "Evidence.Candidate references baseRevision",
+    "SourceSupersessionChoice": "Evidence.SourceDisposition"
+  },
+  "invariants": [
+    "Admission is not acceptance or Mastery",
+    "Evidence lifecycle, Review status and effective Decision are independent",
+    "ImportedEvidenceRecord pending_review is legacy flow, not full new admission state machine",
+    "Source facts never overwritten by user explanation"
+  ],
+  "epistemic": {
+    "empty": "No candidates: import/handoff route available; no evidence success implied.",
+    "stale": "Source superseded: show update, retain historical with justification, withdraw choices.",
+    "unavailable": "Missing source bytes blocks dependent admission; preserve candidate for repair.",
+    "error": "Digest/schema rejection records reason; no partial canonical Evidence revision."
+  },
+  "operations": [
+    {
+      "name": "inspect",
+      "family": "NavigationCommand",
+      "payload": "routeId:string evidenceRef:ref",
+      "before": "evidence any",
+      "event": "inspect pinned source facts",
+      "after": "provenance and independent review dimensions shown",
+      "guard": "Read authority and exact revision",
+      "oracle": "Source-superseded Evidence retains prior effective Decision visibly",
+      "persistence": "Evidence.ReadProjection",
+      "method": "GET",
+      "gate": null,
+      "command_id": "evidence.inspect",
+      "surface_id": "evidence",
+      "semantic_owner": "W04EvidenceDomain",
+      "focus_after": "Evidence active object/control; detached target→evidence-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Digest/schema rejection records reason; no partial canonical Evidence revision.",
+        "503_timeout": "Missing source bytes blocks dependent admission; preserve candidate for repair."
+      },
+      "test_id": "TEST-evidence.inspect",
+      "evidence_id": "EVID-evidence.inspect",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "import",
+      "family": "EvidenceCommand",
+      "payload": "candidateRef:ref sourceRefs:refs action:enum:prepare expectedLifecycle:enum:ABSENT limitations:strings",
+      "before": "candidate absent",
+      "event": "validate candidate envelope",
+      "after": "candidate=PREPARED or REJECTED",
+      "guard": "Actor-bound source identity/digest; package validation separate",
+      "oracle": "Import creates candidate, never auto-accepted Evidence",
+      "persistence": "Evidence.Candidate",
+      "method": "POST",
+      "gate": null,
+      "command_id": "evidence.import",
+      "surface_id": "evidence",
+      "semantic_owner": "W04EvidenceDomain",
+      "focus_after": "Evidence active object/control; detached target→evidence-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Digest/schema rejection records reason; no partial canonical Evidence revision.",
+        "503_timeout": "Missing source bytes blocks dependent admission; preserve candidate for repair."
+      },
+      "test_id": "TEST-evidence.import",
+      "evidence_id": "EVID-evidence.import",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "amend",
+      "family": "EvidenceCommand",
+      "payload": "evidenceRef:ref candidateRef:ref sourceRefs:refs action:enum:amend expectedLifecycle:enum:ACTIVE|SOURCE_SUPERSEDED reason:string",
+      "before": "evidence active/superseded",
+      "event": "prepare successor Candidate",
+      "after": "candidate=PREPARED with base Evidence revision",
+      "guard": "No prior fact mutation; exact base CAS",
+      "oracle": "Evidence N unchanged until admission creates N+1",
+      "persistence": "Evidence.Candidate",
+      "method": "POST",
+      "gate": null,
+      "command_id": "evidence.amend",
+      "surface_id": "evidence",
+      "semantic_owner": "W04EvidenceDomain",
+      "focus_after": "Evidence active object/control; detached target→evidence-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Digest/schema rejection records reason; no partial canonical Evidence revision.",
+        "503_timeout": "Missing source bytes blocks dependent admission; preserve candidate for repair."
+      },
+      "test_id": "TEST-evidence.amend",
+      "evidence_id": "EVID-evidence.amend",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "admit",
+      "family": "EvidenceCommand",
+      "payload": "candidateRef:ref evidenceRef:optional_ref sourceRefs:refs action:enum:admit expectedLifecycle:enum:VALIDATED",
+      "before": "candidate=VALIDATED",
+      "event": "atomic admission",
+      "after": "candidate=ADMITTED plus new immutable EvidenceRevision",
+      "guard": "Real admission authority; source checks; expected prior revision",
+      "oracle": "Two concurrent admissions cannot create duplicate Evidence revision; no Review Decision created",
+      "persistence": "Evidence.Revision",
+      "method": "POST",
+      "gate": "SCHEMA_DEPENDENCY",
+      "command_id": "evidence.admit",
+      "surface_id": "evidence",
+      "semantic_owner": "W04EvidenceDomain",
+      "focus_after": "Evidence active object/control; detached target→evidence-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Digest/schema rejection records reason; no partial canonical Evidence revision.",
+        "503_timeout": "Missing source bytes blocks dependent admission; preserve candidate for repair."
+      },
+      "test_id": "TEST-evidence.admit",
+      "evidence_id": "EVID-evidence.admit",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "sourceChoice",
+      "family": "EvidenceCommand",
+      "payload": "evidenceRef:ref sourceRefs:refs action:enum:update|retainHistorical|withdraw expectedLifecycle:enum:SOURCE_SUPERSEDED reason:string",
+      "before": "evidence=SOURCE_SUPERSEDED",
+      "event": "record explicit source disposition",
+      "after": "update→Amendment; retain→historical flag; withdraw→WITHDRAWN",
+      "guard": "Retain requires reason; all branches preserve source facts",
+      "oracle": "Withdraw does not delete history or mutate prior Decision",
+      "persistence": "Evidence.SourceDisposition",
+      "method": "POST",
+      "gate": null,
+      "command_id": "evidence.sourceChoice",
+      "surface_id": "evidence",
+      "semantic_owner": "W04EvidenceDomain",
+      "focus_after": "Evidence active object/control; detached target→evidence-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Digest/schema rejection records reason; no partial canonical Evidence revision.",
+        "503_timeout": "Missing source bytes blocks dependent admission; preserve candidate for repair."
+      },
+      "test_id": "TEST-evidence.sourceChoice",
+      "evidence_id": "EVID-evidence.sourceChoice",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "evidence",
+  "title": "Evidence",
+  "workspace": "W04",
+  "semantic_owner": "W04EvidenceDomain",
+  "archetype": "GovernedEvidenceWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W04-EVD-001",
+    "CAP-W04-EVD-002",
+    "CAP-W04-EVD-003",
+    "CAP-W04-EVD-004",
+    "CAP-W04-EVD-005",
+    "CAP-W04-EVD-006",
+    "CAP-W04-EVD-007",
+    "CAP-W04-EVD-008",
+    "CAP-W04-EVD-009",
+    "CAP-W04-EVD-010",
+    "CAP-W04-EVD-011"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W04-EVD-001",
+        "CAP-W04-EVD-002",
+        "CAP-W04-EVD-003",
+        "CAP-W04-EVD-004",
+        "CAP-W04-EVD-005",
+        "CAP-W04-EVD-006",
+        "CAP-W04-EVD-007",
+        "CAP-W04-EVD-008",
+        "CAP-W04-EVD-009",
+        "CAP-W04-EVD-010",
+        "CAP-W04-EVD-011"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Evidence",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-015",
+    "NC-016",
+    "NC-017",
+    "NC-018",
+    "NC-020",
+    "NC-033"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore",
+    "AnalyticalWorkbenchCore"
+  ],
+  "adapter": "W04EvidenceDomainAdapter",
+  "regions": {
+    "TOP": "Evidence exact identity, local mode, command routes",
+    "LEFT": "typed CandidateEvidence collection/navigation",
+    "CENTER": "GovernedEvidenceWorkbench primary task",
+    "RIGHT": "one selected CandidateEvidence identity/context inspector",
+    "BOTTOM": "Deep Evidence diagnostics/history"
+  },
+  "command_ids": [
+    "evidence.inspect",
+    "evidence.import",
+    "evidence.amend",
+    "evidence.admit",
+    "evidence.sourceChoice"
+  ]
+}

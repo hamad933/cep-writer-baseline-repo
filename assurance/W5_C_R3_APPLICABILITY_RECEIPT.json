@@ -1,0 +1,277 @@
+{
+  "schemaVersion": 1,
+  "kind": "W5_C_R3_APPLICABILITY_RECEIPT",
+  "status": "PASS",
+  "sourceCanonicalTreeSha256": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d",
+  "canonicalSourceFileCount": 99,
+  "controllerParentCanonicalSourceSha256": "7da83126305d82b820ea83fa4c9cd3f251f4afcf205c5dc89c14112280c73aa1",
+  "classification": "CURRENT_APPLICABLE_LAWS_GREEN; LEGACY_GOLDEN_UI_ORACLE_DIVERGENCES_REPRODUCED_ON_UNMODIFIED_CONTROLLER_PARENT",
+  "legacyGoldenCurrentAttempts": {
+    "VS03": {
+      "status": "FAIL",
+      "source": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d",
+      "cases": [
+        {
+          "id": "G05",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G06",
+          "status": "FAIL",
+          "error": "delete confirmation not shown"
+        },
+        {
+          "id": "G07",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G08",
+          "status": "PASS",
+          "error": null
+        }
+      ]
+    },
+    "VS04": {
+      "status": "FAIL",
+      "source": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d",
+      "cases": [
+        {
+          "id": "G02",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G03",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G05",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G06",
+          "status": "FAIL",
+          "error": "locator.click: Timeout 7000ms exceeded.\nCall log:\n  - waiting for locator('[data-delete-confirm=\"confirm\"]')\n    - locator resolved to <button data-delete-confirm=\"confirm\" class=\"btn danger compact-delete\">حذف</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    13 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n"
+        },
+        {
+          "id": "G07",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G16",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G17",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G21",
+          "status": "PASS",
+          "error": null
+        }
+      ]
+    },
+    "VS05": {
+      "status": "FAIL",
+      "source": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d",
+      "cases": [
+        {
+          "id": "G03",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G05",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G06",
+          "status": "FAIL",
+          "error": "structural confirmation missing"
+        },
+        {
+          "id": "G07",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G12",
+          "status": "FAIL",
+          "error": "palette did not close on Escape"
+        },
+        {
+          "id": "G22",
+          "status": "FAIL",
+          "error": "page.waitForFunction: Timeout 8000ms exceeded."
+        }
+      ]
+    }
+  },
+  "sameOracleOutcomesOnExactControllerParent": {
+    "VS03": {
+      "status": "FAIL",
+      "source": "7da83126305d82b820ea83fa4c9cd3f251f4afcf205c5dc89c14112280c73aa1",
+      "cases": [
+        {
+          "id": "G05",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G06",
+          "status": "FAIL",
+          "error": "delete confirmation not shown"
+        },
+        {
+          "id": "G07",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G08",
+          "status": "PASS",
+          "error": null
+        }
+      ]
+    },
+    "VS04": {
+      "status": "FAIL",
+      "source": "7da83126305d82b820ea83fa4c9cd3f251f4afcf205c5dc89c14112280c73aa1",
+      "cases": [
+        {
+          "id": "G02",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G03",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G05",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G06",
+          "status": "FAIL",
+          "error": "locator.click: Timeout 7000ms exceeded.\nCall log:\n  - waiting for locator('[data-delete-confirm=\"confirm\"]')\n    - locator resolved to <button data-delete-confirm=\"confirm\" class=\"btn danger compact-delete\">حذف</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    13 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n"
+        },
+        {
+          "id": "G07",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G16",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G17",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G21",
+          "status": "PASS",
+          "error": null
+        }
+      ]
+    },
+    "VS05": {
+      "status": "FAIL",
+      "source": "7da83126305d82b820ea83fa4c9cd3f251f4afcf205c5dc89c14112280c73aa1",
+      "cases": [
+        {
+          "id": "G03",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G05",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G06",
+          "status": "FAIL",
+          "error": "structural confirmation missing"
+        },
+        {
+          "id": "G07",
+          "status": "PASS",
+          "error": null
+        },
+        {
+          "id": "G12",
+          "status": "FAIL",
+          "error": "palette did not close on Escape"
+        },
+        {
+          "id": "G22",
+          "status": "FAIL",
+          "error": "page.waitForFunction: Timeout 8000ms exceeded."
+        }
+      ]
+    }
+  },
+  "outcomesIdenticalParentVsLaneC": {
+    "VS03": true,
+    "VS04": true,
+    "VS05": true
+  },
+  "currentApplicableEquivalentProofs": [
+    {
+      "law": "Legacy critical browser flows including command-palette Escape/focus",
+      "evidence": "BROWSER_CONFORMANCE_RECEIPT.json",
+      "result": {
+        "total": 6,
+        "pass": 6,
+        "fail": 0
+      },
+      "status": "PASS"
+    },
+    {
+      "law": "Wave 3 current browser laws",
+      "evidence": "W3_CONTROLLER_ASSEMBLY_BROWSER_PROOF.json",
+      "result": {
+        "total": 5,
+        "pass": 5,
+        "fail": 0
+      },
+      "status": "PASS"
+    },
+    {
+      "law": "Wave 4 current Structured confirmation/drag/input laws",
+      "evidence": "W4_CONTROLLER_CONVERGENCE_BROWSER_PROOF.json",
+      "result": {
+        "total": 5,
+        "pass": 5,
+        "fail": 0
+      },
+      "status": "PASS"
+    },
+    {
+      "law": "Lane C same-engine read/edit/selection/clipboard/action/direction/rich/drag/navigation laws",
+      "evidence": "W5_C_STRUCTURED_CONSUMER_PARITY_PROOF.json",
+      "result": {
+        "pass": 26,
+        "fail": 0
+      },
+      "status": "PASS"
+    }
+  ],
+  "decision": "Do not mutate accepted product or shared hotspots to satisfy pre-existing superseded donor-presentation oracles. Preserve current accepted Controller browser laws and record the historical golden divergences truthfully.",
+  "productRegressionAttributedToLaneC": false
+}

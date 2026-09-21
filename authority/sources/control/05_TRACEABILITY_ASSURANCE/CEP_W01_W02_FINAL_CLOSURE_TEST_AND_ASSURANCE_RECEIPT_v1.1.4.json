@@ -1,0 +1,144 @@
+{
+  "artifact": "CEP W01/W02 Writer-B v1.1.4 Final Closure Hardened Assurance Receipt",
+  "classification": "WRITER_EVIDENCE / NOT_CONTROLLER_ACCEPTED / NOT_OWNER_ACCEPTED / NOT_FROZEN / NOT_MERGED / NOT_RELEASED / NOT_DEPLOYED",
+  "lineage": {
+    "writer_baseline": "v1.1.1",
+    "writer_baseline_zip_sha256": "4c463c6c9f1a1f9fbd3513f1fc94aeb50e51a79eed146776646d44865668bb75",
+    "controller_traceability": "v1.1.2_CONTROLLER_ADJUDICATED",
+    "github_main_read_only_sha": "2d8a711fa538234d51bef3b005355cccfd82b5f5",
+    "writer_version": "v1.1.4_FINAL_CLOSURE_HARDENED",
+    "writer_source_tree_sha": "acd14514dddbd5e45aeb2fc25fed22560511d8ca",
+    "source_manifest_sha256": "b5de82d4cb83534bab55de52cf7b2f64fec952e9b97062a294338ed21691edf5",
+    "source_file_count": 583
+  },
+  "traceability": {
+    "admitted_rows": 80,
+    "unique_rows": 80,
+    "controller_implementation_universe": 67,
+    "implementation_rows_source_handled": 67,
+    "missing_rows_after_writer": 0,
+    "mapping_counts": {
+      "EXACT_CURRENT_OWNER_OR_GOVERNANCE_ROW": 64,
+      "EXACT_BOUNDARY_GATED": 7,
+      "EXACT_PLANNED_OWNER_CONTROLLER_ADJUDICATED": 9
+    },
+    "verdict_counts_all_80": {
+      "NOT_APPLICABLE_JUSTIFIED": 4,
+      "RUNTIME_UNPROVEN": 38,
+      "TRANSFERRED_WITH_PRODUCTION_ADAPTATION": 15,
+      "AUTHORITY_GATED": 7,
+      "VISUAL_UNPROVEN": 13,
+      "PARTIAL": 3
+    },
+    "verdict_counts_67": {
+      "RUNTIME_UNPROVEN": 38,
+      "TRANSFERRED_WITH_PRODUCTION_ADAPTATION": 13,
+      "VISUAL_UNPROVEN": 13,
+      "PARTIAL": 3
+    },
+    "partial_contract_rows": [
+      "LIB-026",
+      "LIB-037",
+      "W03-LIB-008"
+    ],
+    "all_required_row_fields_explicit": true,
+    "controller_architecture_fields_changed": 0,
+    "production_path_refs_checked": 296,
+    "production_path_refs_missing": 0
+  },
+  "change_scope": {
+    "changed_files_vs_v1_1_1": 18,
+    "changed_files_inside_mapped_or_assurance_scope": 18,
+    "unscoped_changed_files": []
+  },
+  "executed_checks": [
+    {
+      "check": "Node semantic harness",
+      "result": "PASS",
+      "detail": "34/34 PASS including note same-ID popout URL, invalid-ID rejection, storage synchronization, binding/pin/move/resize/reopen, structured tree reuse."
+    },
+    {
+      "check": "Strict TypeScript shared cores",
+      "result": "PASS",
+      "detail": "No diagnostics."
+    },
+    {
+      "check": "Strict TypeScript changed Vue SFC scripts",
+      "result": "PASS",
+      "detail": "No diagnostics in isolated script extraction."
+    },
+    {
+      "check": "ProductionForgeCore.spec.ts source typecheck",
+      "result": "PASS",
+      "detail": "No diagnostics."
+    },
+    {
+      "check": "PHP syntax",
+      "result": "PASS",
+      "detail": "211/211 PHP files parsed."
+    },
+    {
+      "check": "workbench-bootstrap.js syntax",
+      "result": "PASS",
+      "detail": "Node syntax check passed."
+    },
+    {
+      "check": "Source manifest",
+      "result": "PASS",
+      "detail": "583/583 files, size/SHA exact."
+    },
+    {
+      "check": "Traceability production paths",
+      "result": "PASS",
+      "detail": "296/296 referenced production paths exist."
+    },
+    {
+      "check": "Changed-file scope",
+      "result": "PASS",
+      "detail": "18/18 changed files mapped to Controller rows or assurance scope."
+    },
+    {
+      "check": "Diff whitespace check",
+      "result": "PASS",
+      "detail": "git diff --no-index --check produced no diagnostics; rc=1 denotes differences, not whitespace errors."
+    }
+  ],
+  "environment_gates": {
+    "node": {
+      "current": "v22.16.0",
+      "project_required": "24.18.0",
+      "status": "MISMATCH"
+    },
+    "npm": {
+      "current": "10.9.2",
+      "project_required": "11.16.0",
+      "status": "MISMATCH"
+    },
+    "npm_ci": "TIMED_OUT_OR_INCOMPLETE_AFTER_EBADENGINE; NOT_FULL_SUITE_PROOF",
+    "php_cli": "8.4.23",
+    "composer": "UNAVAILABLE",
+    "postgresql": "UNAVAILABLE",
+    "docker": "UNAVAILABLE",
+    "chromium": "144 installed; minimal headless smoke timed out RC=124; no screenshot proof",
+    "exact_route_browser": "UNPROVEN",
+    "candidate_visual": "UNPROVEN",
+    "browser_200_percent": "UNPROVEN",
+    "assistive_technology": "UNPROVEN",
+    "mixed_bidi_runtime": "UNPROVEN"
+  },
+  "remote_mutation": {
+    "github_product_mutation": "NO",
+    "governed_drive_product_mutation": "NO",
+    "merge": "NO",
+    "release": "NO",
+    "deploy": "NO",
+    "self_acceptance": "NO"
+  },
+  "notes": [
+    "ZERO_ORPHAN PASS remains destination-mapping completeness, not capability acceptance.",
+    "All source work authorized by the 67-row packet is handled without alternative architecture.",
+    "Remaining PARTIAL rows are explicit canonical range-style contract gates, not silent missing implementations.",
+    "Durable Notes and OS topmost remain authority/platform gated.",
+    "Historical C024 remains outside the current 67-row packet and requires separate Controller dispatch."
+  ]
+}

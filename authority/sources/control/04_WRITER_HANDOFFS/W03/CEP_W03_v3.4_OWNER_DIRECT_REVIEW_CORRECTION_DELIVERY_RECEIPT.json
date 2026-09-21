@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-09-09T06:41:05.433705+00:00",
+  "classification": "WRITER_DELIVERY_RECEIPT / CANDIDATE_ONLY / NOT_CONTROLLER_ACCEPTED / NOT_OWNER_ACCEPTED / NOT_FROZEN",
+  "baseline": {
+    "file": "CEP_W03_UNIFIED_EXECUTABLE_BLUEPRINT_SYSTEM_v3.3.1_CONTROLLER_BOUNDED_CORRECTION_CANDIDATE.zip",
+    "sha256": "269401aa20a982be8e8e399959be37c5fbdd21de1a0b137fba4044deb8d90cc5"
+  },
+  "candidate": {
+    "file": "CEP_W03_UNIFIED_EXECUTABLE_BLUEPRINT_SYSTEM_v3.4_OWNER_DIRECT_REVIEW_CORRECTED_CANDIDATE.zip",
+    "bytes": 14356658,
+    "sha256": "23b66696a9cc72cb343c74e70f380ccb248e1fbc378d8ce7839ba74111a3d716",
+    "source_tree_identity_sha256": "ef52b5ea91261d35aa3e9f58c212401c246725f8533ddf73f60376d73d8960c0"
+  },
+  "evidence_bundle": {
+    "file": "CEP_W03_v3.4_OWNER_DIRECT_REVIEW_VISUAL_AND_INTERACTION_EVIDENCE.zip",
+    "bytes": 3242514,
+    "sha256": "eddef57ae83d53ff8f8c63885edc65a6fc21bfbdc75a22b9d3728ff56eee4fbc"
+  },
+  "writer_test_summary": {
+    "interaction_matrix": "38/38 PASS",
+    "extra_interaction": "1/1 PASS",
+    "all_five_extra_parity": "10/10 PASS",
+    "all_five_toolbar_parity": "5/5 PASS",
+    "original_logic": "18/18 PASS",
+    "D001_D026": "26/26 PASS",
+    "static_syntax": "5/5 PASS",
+    "screenshots": 21,
+    "screenshot_console_errors": 0,
+    "exact_route": "15/15 BLOCKED_BY_ENVIRONMENT / no route proof claimed"
+  },
+  "hard_stop": {
+    "blueprint_to_production_traceability_factory": "NOT_EXECUTED",
+    "production_implementation": "NO",
+    "github_mutation": "NO",
+    "governed_drive_product_mutation": "NO",
+    "merge_release_deploy": "NO",
+    "self_acceptance": "NO"
+  },
+  "next_gate": "INDEPENDENT_CONTROLLER_INTERACTION_REVIEW -> OWNER_CONTROLLER_DESIGN_ADJUDICATION"
+}

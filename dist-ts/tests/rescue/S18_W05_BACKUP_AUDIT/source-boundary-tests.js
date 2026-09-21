@@ -1,0 +1,11 @@
+import {readFileSync} from 'node:fs';
+import {resolve} from 'node:path';
+const root=resolve(import.meta.dirname,'../../../..');
+const read=p=>readFileSync(resolve(root,p),'utf8');
+const tests      =[];const run=(name,fn)=>{try{fn();tests.push({name,status:'PASS'})}catch(e){tests.push({name,status:'FAIL',error:String(e?.message||e)})}};const assert=(v,m)=>{if(!v)throw Error(m)};
+run('audit-source-does-not-use-command-receipts-as-domain-provider',()=>{const s=read('stack/native-typescript/adapters/audit.ts');assert(s.includes("authorityRef:'W05AuditDomain.events'"),'missing AuditEvent authority');assert(!s.includes("authorityRef:'SemanticCommandBus.receipts'"),'command receipts still canonical');});
+run('backup-source-has-no-live-restore-endpoint',()=>{const s=read('stack/native-typescript/adapters/backup-runtime.ts');assert(!/\/v1\/backup\/(restore|activate-live|apply)/.test(s),'live restore endpoint introduced');assert(s.includes("'/v1/backup/activation-request'"),'activation request boundary missing');});
+run('backup-source-does-not-import-persistence-owner',()=>{const s=read('stack/native-typescript/adapters/backup-runtime.ts');assert(!/adapters\/persistence|SqlitePersistence|PersistenceProvider/.test(s),'persistence owner mutated/owned');});
+run('audit-annotation-does-not-write-audit-event',()=>{const s=read('stack/native-typescript/adapters/audit.ts'),body=s.slice(s.indexOf('annotate({eventId'));const segment=body.slice(0,body.indexOf('truth(){'));assert(!segment.includes('this.append('),'annotation appends AuditEvent');});
+run('writable-files-only-own-s18-domain',()=>{const audit=read('stack/native-typescript/surfaces/audit/index.ts'),backup=read('stack/native-typescript/surfaces/backup/index.ts');assert(audit.includes('AuditTraceWorkbench')&&backup.includes('RecoverySafetyWorkbench'),'surface identity missing');});
+console.log(JSON.stringify({lane:'S18_W05_BACKUP_AUDIT',suite:'source-boundary',pass:tests.filter(x=>x.status==='PASS').length,fail:tests.filter(x=>x.status==='FAIL').length,tests},null,2));if(tests.some(x=>x.status==='FAIL'))process.exitCode=1;

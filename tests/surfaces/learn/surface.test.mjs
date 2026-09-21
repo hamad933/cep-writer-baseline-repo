@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {CommandRegistry} from '../../../dist/foundation/models.js';
+import {createLearnRuntimeComposition} from '../../../dist/adapters/learn.js';
+import {bindLearnSurface} from '../../../dist/surfaces/learn/surface.js';
+const {learn,structured}=createLearnRuntimeComposition();
+const commands=new CommandRegistry();const bound=bindLearnSurface({commands,learn,structured});
+assert.equal(bound.owner,'LearnDomainAdapter');
+assert.equal(bound.transactionOwner,'StructuredTransactionHistoryRecoveryOwner');
+const practice=commands.execute('learn.practice',{});
+assert.equal(practice.masteryWrite,false);
+learn.submit('Boundary crossed at the request parser.');
+const review=commands.execute('learn.review',{});
+assert.equal(review.masteryWrite,false);
+assert.equal(review.progress.mastery,'NOT_INFERRED');
+assert.equal(review.assessment.gradingProvider,'UNAVAILABLE');
+assert.equal(bound.labRuntimeCreated,false);
+console.log(JSON.stringify({surface:'learn',status:'PASS',cases:8,masteryWrite:false}));

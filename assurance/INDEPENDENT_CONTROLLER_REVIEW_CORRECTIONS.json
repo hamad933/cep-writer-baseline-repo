@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "reviewType": "INDEPENDENT_CONTROLLER_DEEP_REVIEW_AND_BOUNDED_SELF_CORRECTION",
+  "lineageBaseline": {
+    "filename": "CEP_FOUNDATION_FORGE_v0.2.1a_REVIEW_HARDENED_CANDIDATE.zip",
+    "bytes": 3565020,
+    "sha256": "73bf918b38269af05b28f0b263959ac61a639655f95e0141ad9401396907dc0e",
+    "candidateId": "f9697f3439f379cc31b812b4d3a1ec16eee34f62aa6cd24ef8d3a1dd411f990c"
+  },
+  "decision": "SMALL_SPECIFIED_CORRECTIONS_SAFE_TO_APPLY_WITHOUT_NEW_WRITER",
+  "scopeGuard": [
+    "NO_UI_REDESIGN",
+    "NO_SURFACE_BUILD",
+    "NO_DEFERRED_FEATURE_IMPLEMENTATION",
+    "NO_STACK_FREEZE",
+    "NO_GITHUB_OR_OLD_PRODUCTION_ARCHAEOLOGY",
+    "NO_318_REATOMIZATION"
+  ],
+  "corrections": [
+    {
+      "id": "ICR-001",
+      "area": "W03 semantic ownership",
+      "status": "PASS",
+      "detail": "Corrected 24 independently confirmed high-risk semantic misroutes in the existing 318-row map; retained all 69 sections/318 atom identities and historical admission provenance. Cumulative semantic rows different from v0.2.1 baseline: 242. Truth ceiling remains SEMANTIC_ADJUDICATION_PARTIAL."
+    },
+    {
+      "id": "ICR-002",
+      "area": "W03 WORK_ADMISSION semantics",
+      "status": "PASS",
+      "detail": "Added explicit policy: WORK_ADMISSION and ADMITTED_TASK_ID are historical pre-v0.2.1 Controller provenance only, not current backlog/task selectors. Current deferred truth remains HIGH_VALUE_DEFERRED_LEDGER.json."
+    },
+    {
+      "id": "ICR-003",
+      "area": "ActionAvailability declared capability semantics",
+      "status": "PASS",
+      "detail": "A policy that explicitly names domainCapability now requires explicit true; missing/undefined is denied. ActionAvailability bumped to 1.2.1 as a compatible bugfix; current relation consumers already declare relationAuthoring explicitly."
+    },
+    {
+      "id": "ICR-004",
+      "area": "Controller package provenance separation",
+      "status": "PASS",
+      "detail": "Preserved exact original Chat-C copied-input identities separately from the intentionally corrected working W03 compilation so future regeneration cannot blur provenance."
+    }
+  ],
+  "notChanged": [
+    "Structured selection/clipboard implementation",
+    "Writer deferred relevance filtering behavior",
+    "Operational provider neutrality",
+    "InternalSimulation causal path",
+    "Spatial input semantics",
+    "23 Surface profiles",
+    "high-value deferred set",
+    "dropped/superseded set",
+    "accepted Library donor bytes",
+    "W03 v3.4 donor role"
+  ],
+  "finalClassification": "STRONG_CONTROLLER_REVIEW_CORRECTED_FOUNDATION_CANDIDATE / READY_FOR_CONTROLLER_SUCCESSION_INPUT / NOT_OWNER_ACCEPTED / STACK_NOT_FROZEN"
+}

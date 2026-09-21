@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "source": {
+    "sha256": "cc9191b66e03285e7311ea924b599b249aca551146acc45116bb7c9b39b57d82",
+    "files": 132
+  },
+  "npmTest": {
+    "status": "PASS",
+    "expectedMinimum": "210/210",
+    "observed": "210/210",
+    "log": "assurance/TASK_A/logs/npm-test-final.log",
+    "deliveryGateLog": "assurance/TASK_A/logs/npm-test-delivery-gate.log"
+  },
+  "npmCheck": {
+    "status": "PASS",
+    "exitCode": 0,
+    "log": "assurance/TASK_A/logs/npm-check-delivery-gate.log",
+    "deliveryGate": "PASS"
+  },
+  "genericBrowser": {
+    "status": "PASS",
+    "flows": "6/6",
+    "receipt": "assurance/TASK_A/browser/GENERIC_BROWSER_CONFORMANCE_RECEIPT.json"
+  },
+  "focused": {
+    "PW05": "6/6 PASS",
+    "PW08": "8/8 PASS",
+    "StickyNote": "8/8 at 1440x1000 and 1024x900",
+    "NoteTitleIME": "PASS both viewports"
+  }
+}

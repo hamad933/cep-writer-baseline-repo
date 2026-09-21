@@ -1,0 +1,206 @@
+{
+  "objects": {
+    "MasteryJudgment": "subject + capability + policyRef + evaluation basis digest",
+    "MasteryFreshness": "freshness status independent from judgment",
+    "EvaluationBasis": "effective Decision refs + Evidence refs + policy revision",
+    "MasteryHistory": "append-only evaluations; one canonical publisher"
+  },
+  "state_dimensions": {
+    "judgment": [
+      "NOT_EVALUATED",
+      "NOT_MASTERED",
+      "MASTERED",
+      "CONFLICTED"
+    ],
+    "freshness": [
+      "CURRENT",
+      "STALE",
+      "REVALIDATION_REQUIRED",
+      "UNKNOWN"
+    ]
+  },
+  "read_model": "W04MasteryReadService projects one canonical evaluation publisher. Existing Learning.MasteryState physical location may remain behind semantic owner adapter.",
+  "persistence": {
+    "MasteryJudgment": "single existing MasteryState owner retained through adapter",
+    "MasteryFreshness": "separate projection field/record under same W04 owner",
+    "MasteryHistory": "W04Mastery.EvaluationHistory"
+  },
+  "invariants": [
+    "Do not create competing Mastery table because current namespace is Learning",
+    "Completion percentage never recomputes canonical mastery",
+    "MASTERED and REVALIDATION_REQUIRED may coexist",
+    "No institutional authority inferred from personal evaluation"
+  ],
+  "epistemic": {
+    "empty": "No evaluation: NOT_EVALUATED with missing basis explanation.",
+    "stale": "Mastered basis became old: judgment preserved; freshness changes independently.",
+    "unavailable": "Policy/evidence unavailable: explain missing basis and do not fabricate judgment.",
+    "error": "Conflicting effective decisions render CONFLICTED; retain last evaluation history."
+  },
+  "operations": [
+    {
+      "name": "inspect",
+      "family": "MasteryInspectionCommand",
+      "payload": "subjectId:string policyRef:ref effectiveDecisionRefs:refs action:enum:inspect",
+      "before": "any judgment/freshness",
+      "event": "read canonical projection",
+      "after": "judgment and freshness shown independently",
+      "guard": "Exact subject and policy authorization",
+      "oracle": "MASTERED + REVALIDATION_REQUIRED renders without coercion",
+      "persistence": "W04Mastery.ReadProjection",
+      "method": "GET",
+      "gate": null,
+      "command_id": "mastery.inspect",
+      "surface_id": "mastery",
+      "semantic_owner": "W04MasteryDomain",
+      "focus_after": "Mastery active object/control; detached target→mastery-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Conflicting effective decisions render CONFLICTED; retain last evaluation history.",
+        "503_timeout": "Policy/evidence unavailable: explain missing basis and do not fabricate judgment."
+      },
+      "test_id": "TEST-mastery.inspect",
+      "evidence_id": "EVID-mastery.inspect",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "explain",
+      "family": "MasteryInspectionCommand",
+      "payload": "subjectId:string policyRef:ref effectiveDecisionRefs:refs action:enum:explain",
+      "before": "evaluation exists",
+      "event": "traverse evaluation basis",
+      "after": "Policy→criteria/findings→Decision→Evidence trace",
+      "guard": "No local score substitution",
+      "oracle": "Missing one Evidence shows exact missing ref, not recomputed score",
+      "persistence": "W04Mastery.ReadProjection",
+      "method": "GET",
+      "gate": null,
+      "command_id": "mastery.explain",
+      "surface_id": "mastery",
+      "semantic_owner": "W04MasteryDomain",
+      "focus_after": "Mastery active object/control; detached target→mastery-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Conflicting effective decisions render CONFLICTED; retain last evaluation history.",
+        "503_timeout": "Policy/evidence unavailable: explain missing basis and do not fabricate judgment."
+      },
+      "test_id": "TEST-mastery.explain",
+      "evidence_id": "EVID-mastery.explain",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "reevaluate",
+      "family": "MasteryInspectionCommand",
+      "payload": "subjectId:string policyRef:ref effectiveDecisionRefs:refs action:enum:inspectRevalidation",
+      "before": "freshness=REVALIDATION_REQUIRED",
+      "event": "inspect revalidation requirements",
+      "after": "read-only requirements; no judgment write",
+      "guard": "This command deliberately has no evaluation mutation authority",
+      "oracle": "Predecessor reevaluate affordance becomes inspect/request route; zero local Mastery writes",
+      "persistence": "W04Mastery.ReadProjection",
+      "method": "GET",
+      "gate": null,
+      "command_id": "mastery.reevaluate",
+      "surface_id": "mastery",
+      "semantic_owner": "W04MasteryDomain",
+      "focus_after": "Mastery active object/control; detached target→mastery-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Conflicting effective decisions render CONFLICTED; retain last evaluation history.",
+        "503_timeout": "Policy/evidence unavailable: explain missing basis and do not fabricate judgment."
+      },
+      "test_id": "TEST-mastery.reevaluate",
+      "evidence_id": "EVID-mastery.reevaluate",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "mastery",
+  "title": "Mastery",
+  "workspace": "W04",
+  "semantic_owner": "W04MasteryDomain",
+  "archetype": "ExplainabilityProjectionWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W04-MAS-001",
+    "CAP-W04-MAS-002",
+    "CAP-W04-MAS-003",
+    "CAP-W04-MAS-004",
+    "CAP-W04-MAS-005",
+    "CAP-W04-MAS-006",
+    "CAP-W04-MAS-007",
+    "CAP-W04-MAS-008",
+    "CAP-W04-MAS-009",
+    "CAP-W04-MAS-010"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W04-MAS-001",
+        "CAP-W04-MAS-002",
+        "CAP-W04-MAS-003",
+        "CAP-W04-MAS-004",
+        "CAP-W04-MAS-005",
+        "CAP-W04-MAS-006",
+        "CAP-W04-MAS-007",
+        "CAP-W04-MAS-008",
+        "CAP-W04-MAS-009",
+        "CAP-W04-MAS-010"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Mastery",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-002",
+    "NC-016",
+    "NC-021"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore",
+    "AnalyticalWorkbenchCore"
+  ],
+  "adapter": "W04MasteryDomainAdapter",
+  "regions": {
+    "TOP": "Mastery exact identity, local mode, command routes",
+    "LEFT": "typed MasteryJudgment collection/navigation",
+    "CENTER": "ExplainabilityProjectionWorkbench primary task",
+    "RIGHT": "one selected MasteryJudgment identity/context inspector",
+    "BOTTOM": "Deep Mastery diagnostics/history"
+  },
+  "command_ids": [
+    "mastery.inspect",
+    "mastery.explain",
+    "mastery.reevaluate"
+  ]
+}

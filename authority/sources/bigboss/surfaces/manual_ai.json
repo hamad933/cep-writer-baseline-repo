@@ -1,0 +1,237 @@
+{
+  "objects": {
+    "ManualProposal": "proposalId + revision + sourceDigest + provenance",
+    "HumanDisposition": "ACCEPT/EDIT/REJECT/DEFER/REQUEST_EVIDENCE with actor/reason",
+    "DraftLink": "proposal revision → Knowledge working draft"
+  },
+  "state_dimensions": {
+    "proposal": [
+      "PREPARED",
+      "EXPORTED",
+      "IMPORTED",
+      "PROVENANCE_INVALID",
+      "DEFERRED",
+      "REJECTED",
+      "ACCEPTED_AS_DRAFT"
+    ],
+    "draft": [
+      "ABSENT",
+      "CREATED",
+      "CONFLICT"
+    ]
+  },
+  "read_model": "ManualAiBridgeReadService displays manual package/proposal lifecycle. AiDraftCreationService.create delegates to LessonRevisionWorkflow.createDraft.",
+  "persistence": {
+    "ManualProposal": "ManualAiBridge proposal records",
+    "HumanDisposition": "ManualAiBridge decision/audit",
+    "DraftLink": "Knowledge draft ID reference"
+  },
+  "invariants": [
+    "MANUAL_ONLY / PROVIDER_NEUTRAL",
+    "No provider keys/API/polling/embeddings",
+    "Accept creates draft only",
+    "Invalid provenance fails closed for draft creation"
+  ],
+  "epistemic": {
+    "empty": "No proposal: prepare manual packet; no automatic generation indicator.",
+    "stale": "Source revision changed: retain original provenance and require review of stale proposal.",
+    "unavailable": "Missing source digest: cannot accept; retain proposal for evidence request.",
+    "error": "Malformed proposal quarantined as PROVENANCE_INVALID; no canonical write."
+  },
+  "operations": [
+    {
+      "name": "draft",
+      "family": "ContentEditCommand",
+      "payload": "documentId:string workingRevision:integer anchor:string blocks:blocks",
+      "before": "proposal=PREPARED",
+      "event": "edit manual request/proposal working content",
+      "after": "proposal=PREPARED dirty",
+      "guard": "Manual data only; no outbound provider invocation",
+      "oracle": "Editing request emits zero external provider network requests",
+      "persistence": "ManualAiBridge.WorkingProposal",
+      "method": "POST",
+      "gate": null,
+      "command_id": "manual_ai.draft",
+      "surface_id": "manual_ai",
+      "semantic_owner": "W05AIBDomain",
+      "focus_after": "Manual AI Bridge active object/control; detached target→manual_ai-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Malformed proposal quarantined as PROVENANCE_INVALID; no canonical write.",
+        "503_timeout": "Missing source digest: cannot accept; retain proposal for evidence request."
+      },
+      "test_id": "TEST-manual_ai.draft",
+      "evidence_id": "EVID-manual_ai.draft",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "export",
+      "family": "AnalyticalCommand",
+      "payload": "leftRef:ref rightRef:ref scope:strings workingAnalysisId:string",
+      "before": "proposal=PREPARED",
+      "event": "export manual package",
+      "after": "proposal=EXPORTED with digest",
+      "guard": "Allowlisted source refs; no credentials",
+      "oracle": "Export contains provenance/digest and no secret fields",
+      "persistence": "ManualAiBridge.PackageReceipt",
+      "method": "POST",
+      "gate": null,
+      "command_id": "manual_ai.export",
+      "surface_id": "manual_ai",
+      "semantic_owner": "W05AIBDomain",
+      "focus_after": "Manual AI Bridge active object/control; detached target→manual_ai-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Malformed proposal quarantined as PROVENANCE_INVALID; no canonical write.",
+        "503_timeout": "Missing source digest: cannot accept; retain proposal for evidence request."
+      },
+      "test_id": "TEST-manual_ai.export",
+      "evidence_id": "EVID-manual_ai.export",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "import",
+      "family": "AnalyticalCommand",
+      "payload": "leftRef:ref rightRef:ref scope:strings workingAnalysisId:string proposalBlocks:blocks",
+      "before": "proposal=EXPORTED",
+      "event": "manual import and provenance validation",
+      "after": "IMPORTED or PROVENANCE_INVALID",
+      "guard": "Source/revision/digest must match declared request",
+      "oracle": "Mismatched source blocks draft creation without deleting proposal",
+      "persistence": "ManualAiBridge.Proposal",
+      "method": "POST",
+      "gate": null,
+      "command_id": "manual_ai.import",
+      "surface_id": "manual_ai",
+      "semantic_owner": "W05AIBDomain",
+      "focus_after": "Manual AI Bridge active object/control; detached target→manual_ai-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Malformed proposal quarantined as PROVENANCE_INVALID; no canonical write.",
+        "503_timeout": "Missing source digest: cannot accept; retain proposal for evidence request."
+      },
+      "test_id": "TEST-manual_ai.import",
+      "evidence_id": "EVID-manual_ai.import",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "review",
+      "family": "OperationalCommand",
+      "payload": "proposalRef:ref action:enum:ACCEPT|EDIT|REJECT|DEFER|REQUEST_EVIDENCE expectedState:enum:IMPORTED correlationId:string reason:string",
+      "before": "proposal=IMPORTED",
+      "event": "record human disposition",
+      "after": "ACCEPT→ACCEPTED_AS_DRAFT; others retain explicit branch",
+      "guard": "Actor authorized; ACCEPT revalidates provenance and creates draft idempotently",
+      "oracle": "ACCEPT returns draft ID, leaves published revision unchanged",
+      "persistence": "ManualAiBridge.Disposition + Knowledge.Draft",
+      "method": "POST",
+      "gate": null,
+      "command_id": "manual_ai.review",
+      "surface_id": "manual_ai",
+      "semantic_owner": "W05AIBDomain",
+      "focus_after": "Manual AI Bridge active object/control; detached target→manual_ai-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Malformed proposal quarantined as PROVENANCE_INVALID; no canonical write.",
+        "503_timeout": "Missing source digest: cannot accept; retain proposal for evidence request."
+      },
+      "test_id": "TEST-manual_ai.review",
+      "evidence_id": "EVID-manual_ai.review",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "manual_ai",
+  "title": "Manual AI Bridge",
+  "workspace": "W05",
+  "semantic_owner": "W05AIBDomain",
+  "archetype": "ManualProposalAdjudicationWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W05-AIB-001",
+    "CAP-W05-AIB-002",
+    "CAP-W05-AIB-003",
+    "CAP-W05-AIB-004",
+    "CAP-W05-AIB-005",
+    "CAP-W05-AIB-006",
+    "CAP-W05-AIB-007",
+    "CAP-W05-AIB-008",
+    "CAP-W05-AIB-009",
+    "CAP-W05-AIB-010"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W05-AIB-001",
+        "CAP-W05-AIB-002",
+        "CAP-W05-AIB-003",
+        "CAP-W05-AIB-004",
+        "CAP-W05-AIB-005",
+        "CAP-W05-AIB-006",
+        "CAP-W05-AIB-007",
+        "CAP-W05-AIB-008",
+        "CAP-W05-AIB-009",
+        "CAP-W05-AIB-010"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Manual AI Bridge",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-028",
+    "NC-035"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore"
+  ],
+  "adapter": "W05AIBDomainAdapter",
+  "regions": {
+    "TOP": "Manual AI Bridge exact identity, local mode, command routes",
+    "LEFT": "typed ManualProposal collection/navigation",
+    "CENTER": "ManualProposalAdjudicationWorkbench primary task",
+    "RIGHT": "one selected ManualProposal identity/context inspector",
+    "BOTTOM": "Deep Manual AI Bridge diagnostics/history"
+  },
+  "command_ids": [
+    "manual_ai.draft",
+    "manual_ai.export",
+    "manual_ai.import",
+    "manual_ai.review"
+  ]
+}

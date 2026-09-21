@@ -1,0 +1,196 @@
+{
+  "version": "1.0",
+  "status": "ACTIVE_SUPPLEMENT",
+  "source_event": "W01/W02 C025 Colab runtime/test/Drive-custody campaign 2026-09-09",
+  "lessons": [
+    {
+      "lesson_id": "CL-017",
+      "title": "Drive File ID is execution authority; FUSE is convenience",
+      "source_event": "Existing-runtime bundle pattern and W01/W02 v1.1.5.2 custody incident",
+      "root_cause": "Mounted-path visibility was treated too close to server custody",
+      "policy_change": "For existing Drive inputs use File ID authority; FUSE only as optional fast path and always SHA verify",
+      "scope": "ALL_COLAB_DRIVE_EXECUTION",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-018",
+      "title": "FUSE read-back does not prove a new Drive object exists",
+      "source_event": "v1.1.5.2 mounted copy had exact SHA while Drive API listed only v1.1.5.1",
+      "root_cause": "Local/FUSE cache visibility was conflated with Drive server object creation",
+      "policy_change": "New artifact is staged only after Drive File ID + API re-download + SHA/parent verification",
+      "scope": "ALL_DRIVE_OUTPUT_CUSTODY",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-019",
+      "title": "Drive warnings and write failures must be classified differently",
+      "source_event": "httplib2 timeout warning coexisted with successful auth; userRateLimitExceeded blocked create",
+      "root_cause": "Warnings/errors were not initially separated by effect",
+      "policy_change": "Ignore harmless timeout warning only when operation succeeds; treat userRateLimitExceeded as material write failure",
+      "scope": "ALL_DRIVE_API",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-020",
+      "title": "Resume from last proven gate; do not restart successful Colab phases",
+      "source_event": "CELL02 failures occurred after CELL00/CELL01 had passed",
+      "root_cause": "Failure encouraged unnecessary restart risk",
+      "policy_change": "Preserve prior receipts and rerun only smallest affected phase",
+      "scope": "ALL_GOVERNED_EXECUTION",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-021",
+      "title": "A failing test is not automatically a Product defect",
+      "source_event": "CELL02 mixed orchestration, ordering, Product, stale-test and envelope failures",
+      "root_cause": "Failure class was initially ambiguous",
+      "policy_change": "Directly inspect implementation/test/log and classify before mutation",
+      "scope": "ALL_RUNTIME_ASSURANCE",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-022",
+      "title": "PostgreSQL database lifecycle commands must be isolated",
+      "source_event": "CELL02 combined DROP/CREATE DATABASE in one psql -c and failed",
+      "root_cause": "Database lifecycle commands conflicted with transaction context",
+      "policy_change": "Separate terminate/drop/create role/DB calls and add authenticated connection probes",
+      "scope": "ALL_POSTGRES_COLAB",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-023",
+      "title": "Expected hash gates themselves require independent verification",
+      "source_event": "Literal hotfix produced da9e28... while expected hash was for a differently formatted local patch",
+      "root_cause": "Control hash was not computed from the exact user-visible patch",
+      "policy_change": "Reproduce literal patch bytes; use old/new hash + semantic markers + compile",
+      "scope": "ALL_BOUNDED_PATCHING",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-024",
+      "title": "Build prerequisites must precede tests that render built assets",
+      "source_event": "Laravel tests failed because Vite manifest did not exist; npm build later passed",
+      "root_cause": "Test execution order ignored generated asset dependency",
+      "policy_change": "Build before page-render suites and verify manifest presence",
+      "scope": "ALL_WEBAPP_TESTING",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-025",
+      "title": "Typecheck failures can mix Product defects and stale test fixtures",
+      "source_event": "Three TypeScript errors spanned two Product files and one test fixture",
+      "root_cause": "Typecheck output was treated as one class",
+      "policy_change": "Classify each failing file against current contract before patching",
+      "scope": "ALL_TYPESCRIPT",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-026",
+      "title": "Do not degrade correct Product semantics to satisfy stale tests",
+      "source_event": "toggle->paragraph, slash-menu and VS001 tests encoded older assumptions",
+      "root_cause": "Tests outlived contract/UI evolution",
+      "policy_change": "Verify current direct contract then align test when Product is correct",
+      "scope": "ALL_TEST_ALIGNMENT",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-027",
+      "title": "Async UI tests must await application state settlement",
+      "source_event": "RQ pin click completed trigger before Promise.all detail fetch settled",
+      "root_cause": "Event dispatch completion confused with workflow completion",
+      "policy_change": "Use flushPromises/equivalent and assert final application state",
+      "scope": "ALL_ASYNC_UI_TESTS",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-028",
+      "title": "Positional DOM selectors are brittle in compositional shells",
+      "source_event": "Workspace presentation select shifted RQ source select positions",
+      "root_cause": "Tests targeted order instead of semantic identity",
+      "policy_change": "Select controls by stable semantic contract/labels/options and assert exact cardinality",
+      "scope": "ALL_UI_TESTS",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-029",
+      "title": "Test fixtures must satisfy the current validation contract",
+      "source_event": "VS001/VS002 fixtures omitted required block depth",
+      "root_cause": "Historical payload fixtures were retained",
+      "policy_change": "Regenerate/align fixtures from current validation/public contract",
+      "scope": "ALL_CONTRACT_TESTS",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-030",
+      "title": "Hard-coded inventory counts must be verified against exact universe",
+      "source_event": "Migration lifecycle expected 12 while candidate had 13",
+      "root_cause": "Static count drift",
+      "policy_change": "Count exact governed inventory first, then align expectation or replace with invariant when appropriate",
+      "scope": "ALL_INVENTORY_TESTS",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-031",
+      "title": "Repository-envelope test failures are distinct from portable Product failures",
+      "source_event": "Architecture suite expected review-packets, parent AGENTS.md and git root absent from candidate",
+      "root_cause": "Suite assumed full repository envelope",
+      "policy_change": "Classify envelope dependency separately and run in intended repository context",
+      "scope": "ALL_ARCHITECTURE_TESTS",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-032",
+      "title": "Preserve real findings inside partially environment-bound suites",
+      "source_event": "Module boundary finding appeared alongside RepositorySafety envelope failures",
+      "root_cause": "Broad environmental dismissal could hide real Product issue",
+      "policy_change": "Adjudicate each architecture failure independently",
+      "scope": "ALL_ARCHITECTURE_TESTS",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-033",
+      "title": "Runtime-discovered corrections create a new candidate lineage identity",
+      "source_event": "C025 corrections were applied to disposable v1.1.5.1 source",
+      "root_cause": "Old candidate could be incorrectly used for browser proof",
+      "policy_change": "Package a bounded successor and bind all later evidence to successor identity",
+      "scope": "ALL_RUNTIME_DISCOVERED_CORRECTIONS",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-034",
+      "title": "Build successors from clean predecessor plus exact admitted overlay",
+      "source_event": "v1.1.5.2 was reconstructed from clean v1.1.5.1 and exactly nine changed files",
+      "root_cause": "Packaging mutated working tree could include generated/unintended changes",
+      "policy_change": "Re-extract predecessor, reproduce tree, overlay admitted files, prove exact delta",
+      "scope": "ALL_SUCCESSOR_PACKAGING",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-035",
+      "title": "Source identity and ZIP container identity are different but both matter",
+      "source_event": "Repacking identical source produced same source tree/manifest but a different ZIP SHA",
+      "root_cause": "Compression/runtime can vary container bytes",
+      "policy_change": "Use tree+source manifest for content identity and exact ZIP SHA+File ID for execution custody; never silently substitute containers",
+      "scope": "ALL_ARTIFACT_IDENTITY",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-036",
+      "title": "No browser evidence on a disposable mutated predecessor",
+      "source_event": "C025 passed on corrected working source before successor Drive custody existed",
+      "root_cause": "Browser could have become bound to non-governed bytes",
+      "policy_change": "Block browser until exact successor is packaged, Drive-custodied, freshly bootstrapped and reverified",
+      "scope": "ALL_BROWSER_ASSURANCE",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-037",
+      "title": "One cell at a time is a governance control, not a convenience",
+      "source_event": "C025 required several bounded diagnostics/corrections",
+      "root_cause": "Run-all would blur causal evidence and repeat successful work",
+      "policy_change": "Execute phased cells and inspect receipts/logs between gates",
+      "scope": "ALL_COLAB_FINAL_ASSURANCE",
+      "status": "ACTIVE"
+    }
+  ]
+}

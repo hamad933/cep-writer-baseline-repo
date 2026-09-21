@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "kind": "W5_CONTROLLER_GENERATOR_IDEMPOTENCE",
+  "generatedAt": "2026-09-12T22:46:38.662660+00:00",
+  "status": "PASS",
+  "reconcileGenerator": {
+    "path": "tools/reconcile-current-owner-registries.py",
+    "finalBaseline": "CEP-FR-E15-W5-STRUCTURED-FAMILY-COMPLETION",
+    "wave5Pending": false,
+    "failSafeUsedByCompileGenerator": true
+  },
+  "buildWriterContracts": {
+    "path": "tools/build-writer-contracts.py",
+    "executedTwice": true,
+    "exitCodeEach": 0,
+    "trackedCurrentFiles": 11,
+    "secondRunChangedFiles": 0,
+    "endsWithCurrentOwnerReconciliation": true
+  },
+  "compileContracts": {
+    "path": "tools/compile-contracts.py",
+    "externalAuthorityLayoutReconstructedFromPackagePreservedSourceCopies": true,
+    "executedSuccessfully": true,
+    "exitCode": 0,
+    "donorFunctionsCompiled": 330,
+    "surfaces": 23,
+    "matrixRows": 1403,
+    "requirements": 187,
+    "secondSuccessfulRun": true,
+    "trackedGeneratedRegistryAndProfileFiles": 34,
+    "secondRunChangedFiles": 0,
+    "endsWithCurrentOwnerReconciliation": true,
+    "failureSafety": "atexit current-owner reconciliation prevents partial base generation from leaving stale current-owner registry truth"
+  },
+  "compilerCorrections": [
+    "Donor census resolution now accepts functions/methods/aliases extracted to current Structured implementation instead of requiring all 330 as function declarations in accepted-runtime.js.",
+    "Spatial family profile/component alias is consistently SpatialInteraction, matching current scaffold family mapping.",
+    "Successful final reconciliation call uses ROOT; failure exit also restores current owner truth."
+  ],
+  "currentGeneratedStalePendingCount": 0,
+  "currentGeneratedStalePendingFindings": []
+}

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "classification": "VS03_CORRECTION_BROWSER_EVIDENCE",
+  "status": "PASS",
+  "canonicalSourceTreeSha256": "11c56e165be51ac25c4beafea4b1cb141e18a8c3752b05ffb7d610643119819b",
+  "fullBrowser": {
+    "receipt": "assurance/BROWSER_CONFORMANCE_RECEIPT.json",
+    "summary": {
+      "total": 6,
+      "pass": 6,
+      "fail": 0
+    },
+    "executionStatus": "EXECUTED_PASS",
+    "transport": "in-memory",
+    "playwrightResolution": "explicit-environment-override"
+  },
+  "r3Targeted": {
+    "receipt": "assurance/VS03_R3_TARGETED_BROWSER_REPLAY.json",
+    "scenarios": [
+      {
+        "id": "G05",
+        "status": "PASS"
+      },
+      {
+        "id": "G06",
+        "status": "PASS"
+      },
+      {
+        "id": "G07",
+        "status": "PASS"
+      },
+      {
+        "id": "G08",
+        "status": "PASS"
+      }
+    ],
+    "libraryRealCallPath": {
+      "consumer": "library",
+      "mutationOwner": "StructuredMutationKernel",
+      "mutationPolicyRevision": "structured-mutation-vs03-r1",
+      "treeOwner": "StructuredTreeKernel",
+      "sharedWithAdapter": true,
+      "adapterOwner": "StructuredMutationKernel"
+    },
+    "secondConsumer": {
+      "consumer": "learn",
+      "owner": "StructuredMutationKernel",
+      "resultOwner": "StructuredMutationKernel"
+    }
+  },
+  "note": "Browser evidence is bound to the corrected current canonical source. No historical VS-03 receipt is used as final truth."
+}

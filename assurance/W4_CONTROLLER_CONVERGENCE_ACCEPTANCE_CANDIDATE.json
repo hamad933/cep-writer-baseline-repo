@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "kind": "W4_CONTROLLER_CONVERGENCE_ACCEPTANCE_CANDIDATE",
+  "status": "READY_FOR_FINAL_PACKAGE_AND_FRESH_EXTRACTION_NOT_YET_PROMOTED",
+  "parent": {
+    "successorId": "CEP-FR-E13-W3-355df690",
+    "bytes": 9642408,
+    "sha256": "355df690d2d984a13cabcca98de9985aaa3b8195f957094413fbfb5035b5383b",
+    "canonicalSourceSha256": "050089b82d0f77866c86bd91a395ce7834894d3e80428ffd0f0fd20e6780e8c4"
+  },
+  "candidates": [
+    {
+      "lane": "A",
+      "name": "CEP_FOUNDATION_FORGE_v0.2.1c_W4_A_STRUCTURED_INPUT_KEYMAP_CONTROLLER_CANDIDATE.zip",
+      "bytes": 9760634,
+      "sha256": "f4f6699ecf2c2f66f0f2fd074692d7449bf08eec7128676a16f44aec5516e166"
+    },
+    {
+      "lane": "B",
+      "name": "CEP_FOUNDATION_FORGE_v0.2.1c_W4_B_STRUCTURED_ACTION_DESCRIPTOR_CANDIDATE.zip",
+      "bytes": 9796872,
+      "sha256": "16bc3de8170ceb54fb94b4654e2f15d5ad4f73480552d25da019c1704bf0b1bf"
+    },
+    {
+      "lane": "C",
+      "name": "CEP_FOUNDATION_FORGE_v0.2.1c_W4_C_DIRECTION_RICH_CONTENT_WRITER_CORRECTED_CANDIDATE.zip",
+      "bytes": 10056293,
+      "sha256": "eee9415decaf9501dbf08eb1398a4f864817e507edf0c3149dea0ed583b88055"
+    },
+    {
+      "lane": "D",
+      "name": "CEP_FOUNDATION_FORGE_v0.2.1c_W4_D_STRUCTURED_DRAG_DROP_CANDIDATE.zip",
+      "bytes": 9676073,
+      "sha256": "5e11294bd72a7ee887630627ac28c2fbf536c34d7c9125c43eafc3c04b155852"
+    },
+    {
+      "lane": "E",
+      "name": "CEP_FOUNDATION_FORGE_v0.2.1c_W4_E_SETTINGS_CENTER_OWNER_WRITER_CORRECTED_CANDIDATE.zip",
+      "bytes": 9696775,
+      "sha256": "57828f03e92b1b3e2e567dd16d4a2a62ca19a6d14dbdb0d08cab91714ec71669"
+    },
+    {
+      "lane": "F",
+      "name": "CEP_FOUNDATION_FORGE_v0.2.1c_W4_F_OPERATIONAL_SESSION_BOUNDARY_CANDIDATE.zip",
+      "bytes": 10004981,
+      "sha256": "9823342d25db36a405505d2e2a6383c73f4a1be1fcbe6c5ddf3ae169d5ba5125"
+    },
+    {
+      "lane": "G",
+      "name": "CEP_FOUNDATION_FORGE_v0.2.1c_W4_G_EPISTEMIC_STATE_CONTRACT_CONFIRMATION_SAFETY_CORRECTED_CANDIDATE.zip",
+      "bytes": 9757619,
+      "sha256": "b3c583d90f3f5ad33635e16adb3bf7e7cd99b44df36447de26d9093d06b9edad"
+    }
+  ],
+  "convergenceOrder": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G"
+  ],
+  "canonicalSource": {
+    "sha256": "c1426384377efb35b54bf8ef59f6fcb58cab997e09009b64721eb2ab5c40525d",
+    "files": 84
+  },
+  "controllerIntegration": {
+    "structuredTsManualUnion": true,
+    "acceptedRuntimeOwnerFirstRoutes": true,
+    "mainWave4Composition": true,
+    "compositionSemanticOwner": false,
+    "wave5StructuredSurfaceHostPending": true
+  },
+  "controllerCorrections": [
+    "Structured container Enter/Backspace parity through StructuredInputKeymapOwner",
+    "Settings Escape transient+DOM convergence",
+    "Operational session attachment accepts real RuntimeAdapter session-id strings",
+    "Legacy Settings browser oracle migrated to SettingsCenterOwner semantics"
+  ],
+  "gates": {
+    "model": {
+      "pass": 210,
+      "fail": 0
+    },
+    "contracts": {
+      "pass": 163,
+      "fail": 0
+    },
+    "legacyBrowser": {
+      "total": 6,
+      "pass": 6,
+      "fail": 0
+    },
+    "wave3Browser": {
+      "total": 5,
+      "pass": 5,
+      "fail": 0
+    },
+    "wave4Browser": {
+      "total": 5,
+      "pass": 5,
+      "fail": 0
+    },
+    "npmRunCheck": "PASS",
+    "duplicateMechanics": "PASS"
+  },
+  "maturityTruth": {
+    "StructuredSubordinateOwners": "M6",
+    "SettingsCenterOwner": "M6",
+    "InputDirectionResolver": "M6",
+    "OperationalSessionOwner": "BOUNDED_BELOW_M6_SECOND_REAL_PROVIDER_NOT_PROVEN",
+    "EpistemicStateContract": "M4_CONTRACT_IMPLEMENT_ON_DEMAND",
+    "stack": "NOT_FROZEN"
+  },
+  "promotionRule": "Do not promote until final manifest ZIP and fresh-extraction gates pass."
+}

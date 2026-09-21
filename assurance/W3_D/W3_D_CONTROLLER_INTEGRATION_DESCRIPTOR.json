@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "mission": "W3-D-BOTTOM-DEEP-WORK",
+  "status": "READY_FOR_CONTROLLER_INTEGRATION",
+  "candidateOwner": "BottomDeepWorkOwner",
+  "ownerModule": "stack/native-typescript/foundation/global/bottom-shelf.ts",
+  "providerContractModule": "stack/native-typescript/foundation/global/bottom-provider-contract.ts",
+  "providers": [
+    {
+      "id": "structured.history-recovery",
+      "family": "structured",
+      "module": "stack/native-typescript/adapters/structured-bottom-provider.ts",
+      "canonicalSourceOwner": "StructuredTransactionHistoryRecoveryOwner",
+      "mode": "READ_ONLY_LIVE_PROJECTION"
+    },
+    {
+      "id": "operational.runtime-session",
+      "family": "operational",
+      "module": "stack/native-typescript/adapters/operational-bottom-provider.ts",
+      "canonicalSourceOwner": "existing runtime/session adapter owner",
+      "mode": "READ_ONLY_LIVE_PROJECTION"
+    }
+  ],
+  "controllerConvergenceSteps": [
+    "Instantiate exactly one BottomDeepWorkOwner in the shared Global host.",
+    "Register the Structured and Operational providers without copying provider content into Global state.",
+    "Rebind the existing foundation.bottom/open-close entry points to BottomDeepWorkOwner bounded actions.",
+    "Derive shared bottom DOM hidden/inert/aria-hidden/interactive state from owner.presentationState().",
+    "Render active provider content from readActiveProvider() as a live projection; do not cache canonical provider data in the Global owner.",
+    "Apply interactive DOM state before owner focus-entry bridge is invoked; wire close to focus return.",
+    "Retire/rebind direct local bottomOpen presentation ownership only during Controller convergence while preserving provider/domain truth.",
+    "Keep Structured history/recovery and Operational runtime/session/event truth in their existing canonical owners/adapters.",
+    "Do not introduce a second Structured transaction/history owner or Operational session/runtime owner."
+  ],
+  "sharedFilesReservedForControllerOnly": [
+    "stack/native-typescript/main.ts",
+    "stack/native-typescript/foundation/workspace.ts",
+    "stack/native-typescript/foundation/workspace-host.ts",
+    "stack/native-typescript/foundation/accepted-runtime.ts",
+    "dist/index.html",
+    "stack/native-typescript/foundation/donor.css"
+  ],
+  "laneMutationOfSharedFiles": false,
+  "integrationTargetsObservedButNotEdited": [
+    {
+      "path": "stack/native-typescript/main.ts",
+      "reason": "existing foundation.bottom and local bottomOpen presentation binding"
+    },
+    {
+      "path": "stack/native-typescript/foundation/workspace-host.ts",
+      "reason": "existing shared bottom host/render lifecycle"
+    },
+    {
+      "path": "stack/native-typescript/foundation/accepted-runtime.ts",
+      "reason": "existing bottomOpen projection"
+    }
+  ],
+  "truthCeiling": "Descriptor only. Controller owns shared host/DOM/bootstrap convergence."
+}

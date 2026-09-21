@@ -1,0 +1,331 @@
+{
+  "objects": {
+    "RunInputManifest": "runInputId + manifestDigest + exact Enterprise/Twin/Scenario/Lab/rules/provider/environment refs + seed",
+    "Run": "runId + lifecycleVersion; exclusively runtime",
+    "PreflightReport": "reportId + inputDigest + checks + observedAt + expiry",
+    "TerminalSession": "sessionId + runId + device/tool + lease epoch",
+    "RunEvent": "runId + stream + sequence + causal parents + payload digest"
+  },
+  "state_dimensions": {
+    "run": [
+      "PREPARING",
+      "BLOCKED",
+      "READY",
+      "STARTING",
+      "RUNNING",
+      "PAUSE_REQUESTED",
+      "PAUSED",
+      "RESUME_REQUESTED",
+      "STOP_REQUESTED",
+      "STOPPED",
+      "COMPLETED",
+      "FAILED"
+    ],
+    "provider": [
+      "CONNECTED",
+      "DISCONNECTED",
+      "RECONCILING"
+    ],
+    "input": [
+      "FROZEN",
+      "INVALID"
+    ]
+  },
+  "read_model": "RunReadService/RunModeController read runtime lifecycle, immutable input and provider observations. TerminalSessionManager owns session leases; OperationalSurfaceManager composes views.",
+  "persistence": {
+    "RunInputManifest": "Simulator.RunInputManifest append-only",
+    "Run": "Simulator.Run aggregate versioned",
+    "TerminalSession": "Simulator.SessionLease",
+    "RunEvent": "Simulator.EventStore append-only"
+  },
+  "invariants": [
+    "Run never writes authored definitions",
+    "Request states require provider ACK before terminal lifecycle change",
+    "Retries use invocation digest and expected aggregate version",
+    "Provider loss is not Run completion",
+    "Preflight READY expires when input or provider epoch changes"
+  ],
+  "epistemic": {
+    "empty": "No Run selected: show preflight/start affordance; no active runtime asserted.",
+    "stale": "Telemetry beyond freshness window remains historical last sample with lag; controls recheck lifecycle.",
+    "unavailable": "Terminal provider absent is explicit PLATFORM_GATED; no fake command execution.",
+    "error": "Start timeout queries idempotency receipt; never dispatch second start with new key."
+  },
+  "operations": [
+    {
+      "name": "prepare",
+      "family": "OperationalCommand",
+      "payload": "inputRefs:refs inputDigest:digest action:enum:prepare expectedState:enum:PREPARING correlationId:string",
+      "before": "run=PREPARING",
+      "event": "freeze inputs and evaluate preflight",
+      "after": "READY or BLOCKED",
+      "guard": "Canonical deterministic manifest encoding and all dependency digests",
+      "oracle": "Changing source latest cannot alter frozen manifest; mismatch blocks start",
+      "persistence": "Simulator.RunInputManifest",
+      "method": "POST",
+      "gate": null,
+      "command_id": "runs.prepare",
+      "surface_id": "runs",
+      "semantic_owner": "W03RunDomain",
+      "focus_after": "Runs active object/control; detached target→runs-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Start timeout queries idempotency receipt; never dispatch second start with new key.",
+        "503_timeout": "Terminal provider absent is explicit PLATFORM_GATED; no fake command execution."
+      },
+      "test_id": "TEST-runs.prepare",
+      "evidence_id": "EVID-runs.prepare",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY",
+        "PROVIDER_ACK_AND_RECONNECT"
+      ]
+    },
+    {
+      "name": "start",
+      "family": "OperationalCommand",
+      "payload": "runRef:ref preflightRef:ref inputDigest:digest providerEpoch:integer action:enum:start expectedState:enum:READY correlationId:string",
+      "before": "run=READY",
+      "event": "persist start request then provider ACK",
+      "after": "STARTING then RUNNING only with ACK",
+      "guard": "Unexpired preflight bound to inputDigest/providerEpoch; unique invocation",
+      "oracle": "Duplicate start returns same run; changed payload same key yields 409",
+      "persistence": "Simulator.Run",
+      "method": "POST",
+      "gate": "PLATFORM_GATED",
+      "command_id": "runs.start",
+      "surface_id": "runs",
+      "semantic_owner": "W03RunDomain",
+      "focus_after": "Runs active object/control; detached target→runs-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Start timeout queries idempotency receipt; never dispatch second start with new key.",
+        "503_timeout": "Terminal provider absent is explicit PLATFORM_GATED; no fake command execution."
+      },
+      "test_id": "TEST-runs.start",
+      "evidence_id": "EVID-runs.start",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY",
+        "PROVIDER_ACK_AND_RECONNECT"
+      ]
+    },
+    {
+      "name": "operate",
+      "family": "OperationalCommand",
+      "payload": "runRef:ref sessionRef:ref action:enum:pause|resume|stop expectedState:enum:RUNNING|PAUSED correlationId:string reason:string",
+      "before": "run=RUNNING|PAUSED",
+      "event": "request lifecycle operation",
+      "after": "pause→PAUSE_REQUESTED; resume→RESUME_REQUESTED; stop→STOP_REQUESTED; ACK decides resulting state",
+      "guard": "Provider capability supports operation and session lease current",
+      "oracle": "Stop request without provider ACK never reports STOPPED",
+      "persistence": "Simulator.Run",
+      "method": "POST",
+      "gate": "PLATFORM_GATED",
+      "command_id": "runs.operate",
+      "surface_id": "runs",
+      "semantic_owner": "W03RunDomain",
+      "focus_after": "Runs active object/control; detached target→runs-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Start timeout queries idempotency receipt; never dispatch second start with new key.",
+        "503_timeout": "Terminal provider absent is explicit PLATFORM_GATED; no fake command execution."
+      },
+      "test_id": "TEST-runs.operate",
+      "evidence_id": "EVID-runs.operate",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY",
+        "PROVIDER_ACK_AND_RECONNECT"
+      ]
+    },
+    {
+      "name": "terminal",
+      "family": "OperationalCommand",
+      "payload": "runRef:ref sessionRef:ref deviceRef:ref action:enum:attach|input|detach expectedState:enum:RUNNING correlationId:string inputBytes:string leaseEpoch:integer",
+      "before": "run=RUNNING and provider=CONNECTED",
+      "event": "bind terminal IO to scoped lease",
+      "after": "session IO receipts and causal event refs",
+      "guard": "Server authenticates actor/run/device and lease; input bytes not executable by browser host",
+      "oracle": "Expired lease rejects input; detach does not terminate whole run",
+      "persistence": "Simulator.SessionLease",
+      "method": "POST",
+      "gate": "PLATFORM_GATED",
+      "command_id": "runs.terminal",
+      "surface_id": "runs",
+      "semantic_owner": "W03RunDomain",
+      "focus_after": "Runs active object/control; detached target→runs-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Start timeout queries idempotency receipt; never dispatch second start with new key.",
+        "503_timeout": "Terminal provider absent is explicit PLATFORM_GATED; no fake command execution."
+      },
+      "test_id": "TEST-runs.terminal",
+      "evidence_id": "EVID-runs.terminal",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY",
+        "PROVIDER_ACK_AND_RECONNECT"
+      ]
+    },
+    {
+      "name": "inspect",
+      "family": "NavigationCommand",
+      "payload": "routeId:string runRef:ref eventCursor:string",
+      "before": "any run state",
+      "event": "read paged correlated events",
+      "after": "observed trace and gap markers",
+      "guard": "Actor can read run; cursor belongs to run",
+      "oracle": "Out-of-order/gapped stream visible; no invented causal sequence",
+      "persistence": "Simulator.EventStore",
+      "method": "GET",
+      "gate": null,
+      "command_id": "runs.inspect",
+      "surface_id": "runs",
+      "semantic_owner": "W03RunDomain",
+      "focus_after": "Runs active object/control; detached target→runs-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Start timeout queries idempotency receipt; never dispatch second start with new key.",
+        "503_timeout": "Terminal provider absent is explicit PLATFORM_GATED; no fake command execution."
+      },
+      "test_id": "TEST-runs.inspect",
+      "evidence_id": "EVID-runs.inspect",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY",
+        "PROVIDER_ACK_AND_RECONNECT"
+      ]
+    },
+    {
+      "name": "seal",
+      "family": "OperationalCommand",
+      "payload": "runRef:ref eventHighWatermarks:object action:enum:seal expectedState:enum:STOPPED|COMPLETED|FAILED correlationId:string",
+      "before": "run terminal and streams reconciled",
+      "event": "seal result manifest from persisted facts",
+      "after": "immutable Result identity with terminal outcome and completeness flag",
+      "guard": "No pending output hidden; gap declaration explicit; idempotent result per run revision",
+      "oracle": "Repeated seal returns same Result; late data uses declared supplement revision, never rewrite",
+      "persistence": "Simulator.ResultManifest",
+      "method": "POST",
+      "gate": null,
+      "command_id": "runs.seal",
+      "surface_id": "runs",
+      "semantic_owner": "W03RunDomain",
+      "focus_after": "Runs active object/control; detached target→runs-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Start timeout queries idempotency receipt; never dispatch second start with new key.",
+        "503_timeout": "Terminal provider absent is explicit PLATFORM_GATED; no fake command execution."
+      },
+      "test_id": "TEST-runs.seal",
+      "evidence_id": "EVID-runs.seal",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY",
+        "PROVIDER_ACK_AND_RECONNECT"
+      ]
+    }
+  ],
+  "surface_id": "runs",
+  "title": "Runs",
+  "workspace": "W03",
+  "semantic_owner": "W03RunDomain",
+  "archetype": "OperationalRuntimeWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W03-RUN-001",
+    "CAP-W03-RUN-002",
+    "CAP-W03-RUN-003",
+    "CAP-W03-RUN-004",
+    "CAP-W03-RUN-005",
+    "CAP-W03-RUN-006",
+    "CAP-W03-RUN-007",
+    "CAP-W03-RUN-008",
+    "CAP-W03-RUN-009",
+    "CAP-W03-RUN-010",
+    "CAP-W03-RUN-011",
+    "CAP-W03-RUN-012",
+    "CAP-W03-RUN-013",
+    "CAP-W03-RUN-014"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W03-RUN-001",
+        "CAP-W03-RUN-002",
+        "CAP-W03-RUN-003",
+        "CAP-W03-RUN-004",
+        "CAP-W03-RUN-005",
+        "CAP-W03-RUN-006",
+        "CAP-W03-RUN-007",
+        "CAP-W03-RUN-008",
+        "CAP-W03-RUN-009",
+        "CAP-W03-RUN-010",
+        "CAP-W03-RUN-011",
+        "CAP-W03-RUN-012",
+        "CAP-W03-RUN-013",
+        "CAP-W03-RUN-014"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Runs",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-011",
+    "NC-012",
+    "NC-024",
+    "NC-025"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore",
+    "SpatialInteractionCore"
+  ],
+  "adapter": "W03RunDomainAdapter",
+  "regions": {
+    "TOP": "Runs exact identity, local mode, command routes",
+    "LEFT": "typed RunInputManifest collection/navigation",
+    "CENTER": "OperationalRuntimeWorkbench primary task",
+    "RIGHT": "one selected RunInputManifest identity/context inspector",
+    "BOTTOM": "Runtime telemetry/session diagnostics"
+  },
+  "command_ids": [
+    "runs.prepare",
+    "runs.start",
+    "runs.operate",
+    "runs.terminal",
+    "runs.inspect",
+    "runs.seal"
+  ]
+}

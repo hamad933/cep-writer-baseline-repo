@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "mission": "W3-A-GLOBAL-INPUT-KEYMAP-BOUNDED-CORRECTION",
+  "classification": "FOCUSED_DEFECT_REPRODUCTION_AND_CORRECTION_PROOF_NOT_CONTROLLER_ACCEPTANCE",
+  "defect": "F6 focus moved correctly but region-cycle receipt read the active region after focus movement, causing false from == to",
+  "correctionBase": {
+    "filename": "CEP_FOUNDATION_FORGE_v0.2.1c_W3_A_GLOBAL_INPUT_KEYMAP_WRITER_CANDIDATE.zip",
+    "bytes": 7578071,
+    "sha256": "f18df21ddb824c9c3717529f733f00260d7689d8ffa898e0d328d8d9b99bc693",
+    "canonicalSourceSha256": "9a9bc55d6ab93aa2da65505e78ac6dec89d4b472d9bba230c22293bbce1dcba9"
+  },
+  "beforeReproduction": {
+    "initial": "CENTER",
+    "activeAfter": "RIGHT",
+    "receipt": {
+      "sequence": 1,
+      "owner": "GlobalInputKeymapOwner",
+      "policyTag": "declared-available-region-cycle-v1",
+      "from": "RIGHT",
+      "to": "RIGHT",
+      "reverse": false,
+      "focused": true
+    },
+    "code": "REGION_CYCLED",
+    "regionId": "RIGHT"
+  },
+  "correction": {
+    "source": "stack/native-typescript/foundation/global/region-cycle.ts",
+    "method": "Capture source region and eligibility snapshot before destination focus; build receipt from that pre-transition snapshot; preserve existing focus call and routing owner."
+  },
+  "after": {
+    "forward": {
+      "initial": "CENTER",
+      "activeAfter": "RIGHT",
+      "regionId": "RIGHT",
+      "receipt": {
+        "sequence": 1,
+        "owner": "GlobalInputKeymapOwner",
+        "policyTag": "declared-available-region-cycle-v1",
+        "from": "CENTER",
+        "to": "RIGHT",
+        "direction": "forward",
+        "reverse": false,
+        "skipped": [],
+        "skippedHidden": [],
+        "skippedUnavailable": [],
+        "focused": true,
+        "moved": true,
+        "noLegalMovement": false
+      }
+    },
+    "reverse": {
+      "initial": "RIGHT",
+      "activeAfter": "CENTER",
+      "regionId": "CENTER",
+      "receipt": {
+        "sequence": 1,
+        "owner": "GlobalInputKeymapOwner",
+        "policyTag": "declared-available-region-cycle-v1",
+        "from": "RIGHT",
+        "to": "CENTER",
+        "direction": "reverse",
+        "reverse": true,
+        "skipped": [],
+        "skippedHidden": [],
+        "skippedUnavailable": [],
+        "focused": true,
+        "moved": true,
+        "noLegalMovement": false
+      }
+    },
+    "hiddenSkip": {
+      "initial": "CENTER",
+      "activeAfter": "BOTTOM",
+      "regionId": "BOTTOM",
+      "receipt": {
+        "sequence": 1,
+        "owner": "GlobalInputKeymapOwner",
+        "policyTag": "declared-available-region-cycle-v1",
+        "from": "CENTER",
+        "to": "BOTTOM",
+        "direction": "forward",
+        "reverse": false,
+        "skipped": [
+          {
+            "id": "RIGHT",
+            "reasons": [
+              "hidden"
+            ]
+          }
+        ],
+        "skippedHidden": [
+          "RIGHT"
+        ],
+        "skippedUnavailable": [],
+        "focused": true,
+        "moved": true,
+        "noLegalMovement": false
+      }
+    },
+    "unavailableSkip": {
+      "initial": "CENTER",
+      "activeAfter": "BOTTOM",
+      "regionId": "BOTTOM",
+      "receipt": {
+        "sequence": 1,
+        "owner": "GlobalInputKeymapOwner",
+        "policyTag": "declared-available-region-cycle-v1",
+        "from": "CENTER",
+        "to": "BOTTOM",
+        "direction": "forward",
+        "reverse": false,
+        "skipped": [
+          {
+            "id": "RIGHT",
+            "reasons": [
+              "unavailable"
+            ]
+          }
+        ],
+        "skippedHidden": [],
+        "skippedUnavailable": [
+          "RIGHT"
+        ],
+        "focused": true,
+        "moved": true,
+        "noLegalMovement": false
+      }
+    },
+    "wrap": {
+      "initial": "RIGHT",
+      "activeAfter": "CENTER",
+      "regionId": "CENTER",
+      "receipt": {
+        "sequence": 1,
+        "owner": "GlobalInputKeymapOwner",
+        "policyTag": "declared-available-region-cycle-v1",
+        "from": "RIGHT",
+        "to": "CENTER",
+        "direction": "forward",
+        "reverse": false,
+        "skipped": [],
+        "skippedHidden": [],
+        "skippedUnavailable": [],
+        "focused": true,
+        "moved": true,
+        "noLegalMovement": false
+      }
+    },
+    "noLegalMovement": {
+      "initial": "CENTER",
+      "activeAfter": "CENTER",
+      "regionId": "CENTER",
+      "receipt": {
+        "sequence": 1,
+        "owner": "GlobalInputKeymapOwner",
+        "policyTag": "declared-available-region-cycle-v1",
+        "from": "CENTER",
+        "to": "CENTER",
+        "direction": "forward",
+        "reverse": false,
+        "skipped": [
+          {
+            "id": "RIGHT",
+            "reasons": [
+              "hidden"
+            ]
+          }
+        ],
+        "skippedHidden": [
+          "RIGHT"
+        ],
+        "skippedUnavailable": [],
+        "focused": true,
+        "moved": false,
+        "noLegalMovement": true
+      }
+    }
+  },
+  "assertions": {
+    "forwardTruth": true,
+    "reverseTruth": true,
+    "hiddenSkipTruth": true,
+    "unavailableSkipTruth": true,
+    "wrapTruth": true,
+    "sourceEqualsDestinationOnlyNoLegalMovement": true,
+    "focusMovementPreserved": true
+  },
+  "verdict": "PASS"
+}

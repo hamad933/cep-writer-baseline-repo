@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "kind": "VS05_FULL_REGRESSION_BUILD_BROWSER_RECEIPT",
+  "status": "PASS",
+  "generatedAt": "2026-09-11T18:06:57.845921+00:00",
+  "canonicalSourceTreeSha256": "1c14a1b5074b63212d91f571f58b650690169526255bc1172b1f3ee0b04f117b",
+  "model": {
+    "command": "npm test",
+    "pass": 101,
+    "fail": 0
+  },
+  "check": {
+    "command": "npm run check",
+    "status": "PASS",
+    "contracts": {
+      "pass": 151,
+      "fail": 0
+    },
+    "vs05OwnershipGate": "PASS",
+    "duplicateMechanicGate": "PASS"
+  },
+  "buildAuthority": {
+    "command": "npm run check:build-authority",
+    "status": "PASS",
+    "authority": "stack/native-typescript/ -> dist/ + dist-ts/",
+    "canonicalFiles": 20,
+    "dist": 20,
+    "distTs": 20,
+    "reverseGeneratedToSourceWrites": false,
+    "suspiciousCanonicalWriters": []
+  },
+  "browser": {
+    "command": "npm run browser:test",
+    "summary": {
+      "total": 6,
+      "pass": 6,
+      "fail": 0
+    },
+    "executionStatus": "EXECUTED_PASS",
+    "transport": "in-memory",
+    "playwrightResolution": "explicit-environment-override",
+    "browserExecutableOverride": true
+  },
+  "r3Vs05": {
+    "status": "PASS",
+    "requiredIds": [
+      "G03",
+      "G05",
+      "G06",
+      "G07",
+      "G12",
+      "G22"
+    ],
+    "pass": 6,
+    "fail": 0
+  },
+  "vs04Regression": {
+    "status": "PASS",
+    "requiredIds": [
+      "G02",
+      "G03",
+      "G05",
+      "G06",
+      "G07",
+      "G16",
+      "G17",
+      "G21"
+    ],
+    "pass": 8,
+    "fail": 0
+  },
+  "vs03Regression": {
+    "duplicateMutationOwnershipGate": "PASS",
+    "mutationOwnerPreserved": true
+  },
+  "centralAvailabilityRevert": "PASS",
+  "artificialProbeAbsentFromCanonical": true,
+  "browserReceiptBoundToCurrentCanonicalSource": true
+}

@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "classification": "CANDIDATE_ONLY_PACKAGE_RUNTIME_MANIFEST",
+  "requiredNode": "22.16.0",
+  "observedNode": "v22.16.0",
+  "sqlite": {
+    "selectedConvergenceDriver": "node:sqlite",
+    "productionDrivers": [
+      "node:sqlite"
+    ],
+    "betterSqlite3Disposition": "MEASURED_PASS_NOT_SELECTED_FOR_CONVERGENCE",
+    "schemaVersion": 1,
+    "semanticOwner": "StructuredTransactionHistoryRecoveryOwner",
+    "role": "DURABLE_STORAGE_PROVIDER_NOT_SEMANTIC_OWNER"
+  },
+  "runtimeBoundary": {
+    "host": "127.0.0.1",
+    "arbitraryHostBinding": false,
+    "shell": false,
+    "processExecution": false,
+    "ssh": false,
+    "docker": false,
+    "vmWsl": false,
+    "pty": false,
+    "powerShell": false,
+    "nativeWindow": false,
+    "osAlwaysOnTop": false,
+    "activeKeyboardSource": false
+  },
+  "package": {
+    "name": "cep-foundation-forge",
+    "version": "0.2.1c",
+    "private": true,
+    "type": "module",
+    "scripts": {
+      "dev": "node tools/serve.mjs",
+      "build:runtime": "python3 tools/extract_donor.py && node tools/build-runtime.mjs",
+      "test": "node tools/test-models.mjs",
+      "check": "node tools/check-build-authority.mjs && node tools/check-duplicate-mechanics.mjs && node tools/test-writer-scaffold.mjs && python3 tools/check-w03-semantic-ownership.py && node tools/check-authority-intake.mjs && node tools/check-deferred-boundary.mjs && node tools/check-contracts.mjs && node tools/vs05-read-mode-matrix.mjs && node tools/check-vs05-command-ownership.mjs",
+      "browser:test": "node tools/browser-conformance.mjs",
+      "scaffold": "node tools/generate-writer-scaffold.mjs",
+      "check:build-authority": "node tools/check-build-authority.mjs",
+      "check:vs05-command-ownership": "node tools/check-vs05-command-ownership.mjs",
+      "check:vs05-read-mode": "node tools/vs05-read-mode-matrix.mjs",
+      "runtime:local": "node stack/local-runtime/server.mjs",
+      "runtime:check": "node tools/psc-runtime-falsification.mjs"
+    },
+    "devDependencies": {
+      "playwright": "1.62.1"
+    },
+    "engines": {
+      "node": "22.16.0"
+    }
+  },
+  "dependenciesTruth": {
+    "runtimeDependencies": {},
+    "devDependencies": {
+      "playwright": "1.62.1"
+    },
+    "betterSqlite3Present": false,
+    "sqlite3PackagePresent": false
+  },
+  "saveSemantics": {
+    "explicitSave": "durable success only after DB commit",
+    "autosave": "working draft only; not explicit save",
+    "recovery": "separate durable recovery points",
+    "staleBase": "atomic refusal",
+    "failedCommit": "dirty state preserved"
+  },
+  "backupImportExport": {
+    "backup": "node:sqlite online backup to bounded staging root",
+    "export": "staged only",
+    "import": "checksum+identity validation staged only; no automatic canonical publication"
+  }
+}

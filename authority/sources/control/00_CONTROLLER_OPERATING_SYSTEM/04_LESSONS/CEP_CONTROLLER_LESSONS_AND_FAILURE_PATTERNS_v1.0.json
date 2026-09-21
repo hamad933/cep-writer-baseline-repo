@@ -1,0 +1,150 @@
+{
+  "version": "1.0",
+  "status": "ACTIVE",
+  "lessons": [
+    {
+      "lesson_id": "CL-001",
+      "title": "Controller is adjudicator, not Writer relay",
+      "source_event": "Repeated Writer PASS claims later reopened by independent/Owner review",
+      "root_cause": "Writer evidence was accepted too semantically",
+      "policy_change": "Independent Controller review mandatory before promotion",
+      "scope": "ALL",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-002",
+      "title": "Handler presence is not interaction completeness",
+      "source_event": "W03 Runs/Structure tabs and other controls selected without meaningful view change",
+      "root_cause": "tests asserted selectors/handlers instead of state transitions",
+      "policy_change": "Before/action/after + negative stale-state oracle",
+      "scope": "ALL_USER_FACING_INTERACTIONS",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-003",
+      "title": "Mapping PASS is not implementation completion",
+      "source_event": "W01/W02 ZERO_ORPHAN PASS coexisted with PARTIAL/MISSING/runtime-unproven rows",
+      "root_cause": "destination completeness confused with capability completion",
+      "policy_change": "Report mapping/source/runtime/acceptance dimensions separately",
+      "scope": "ALL_BLUEPRINT_TO_PRODUCTION",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-004",
+      "title": "Source-handled is not production-proven",
+      "source_event": "Writer-B 67/67 source-handled while runtime/browser/DB evidence remained open",
+      "root_cause": "source mutation count interpreted as end-to-end completion",
+      "policy_change": "Evidence-class non-collapse and precise completion wording",
+      "scope": "ALL_PRODUCTION_WRITERS",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-005",
+      "title": "High-value source preserved does not mean micro-details enforced",
+      "source_event": "W03 world-class proposal remained in Library but some terminal/workbench details were not in current acceptance rows",
+      "root_cause": "proposal distilled to macro decisions without full current reconciliation",
+      "policy_change": "Proposal/donor denominator + explicit disposition reconciliation",
+      "scope": "ALL_HIGH_VALUE_PROPOSALS_DONORS",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-006",
+      "title": "Direct donor/source required for behavioral inheritance",
+      "source_event": "Accepted Library summary/crosswalk did not ensure full W03 interaction inheritance",
+      "root_cause": "summaries substituted for executable donor mechanics",
+      "policy_change": "Read direct bytes/source for behavior-sensitive decisions",
+      "scope": "ALL_DONOR_INHERITANCE",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-007",
+      "title": "Global mechanics must be checked across all surfaces",
+      "source_event": "Guidance, spatial, shell and other mechanics appeared inconsistently across W03 surfaces",
+      "root_cause": "surface-local fixes for shared mechanics",
+      "policy_change": "All-surface completeness law + N/A justification",
+      "scope": "ALL_SURFACES",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-008",
+      "title": "Current Git branch topology is part of source truth",
+      "source_event": "W03 mapping initially risked using main while Work3/Work4/surface branches carried current value",
+      "root_cause": "conceptual roadmap treated as physical destination truth",
+      "policy_change": "Fresh branch/SHA reconciliation before Production mapping",
+      "scope": "ALL_PRODUCTION_MAPPING",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-009",
+      "title": "Net-new Production owner is Controller decision",
+      "source_event": "Linked Sticky Notes rows correctly stopped when exact destination owner was absent",
+      "root_cause": "Writer otherwise would invent architecture",
+      "policy_change": "Destination Owner Resolution protocol",
+      "scope": "ALL_PRODUCTION_MAPPING",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-010",
+      "title": "Exact-route block does not end visual assurance",
+      "source_event": "ERR_BLOCKED_BY_ADMINISTRATOR on W03 routes",
+      "root_cause": "route proof and candidate-bound visual proof were previously conflated",
+      "policy_change": "Keep route blocked; continue hash-bound fallback visual review",
+      "scope": "ALL_FRONTEND",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-011",
+      "title": "Owner hands-on review can reopen a passing Blueprint",
+      "source_event": "W03 v3.3.1 manual review exposed theme, Runs, Shell, relation and inheritance gaps",
+      "root_cause": "automated suites lacked professional workflow oracles",
+      "policy_change": "Owner review observations become formal findings/tests before design adjudication",
+      "scope": "ALL_HIGH_VALUE_UI",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-012",
+      "title": "Do not restart strong lineage because new gaps appear",
+      "source_event": "W03 v3.3/v3.3.1 retained significant verified value while requiring correction",
+      "root_cause": "risk of broad rewrite losing verified fixes",
+      "policy_change": "Same-lineage bounded successor correction unless conflict proves restart necessary",
+      "scope": "ALL",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-013",
+      "title": "Colab/runtime should come after safe source-contract exhaustion",
+      "source_event": "W01/W02 still had resolvable C024/range-style contracts before runtime evidence",
+      "root_cause": "expensive environment testing can expose issues that could be resolved statically first",
+      "policy_change": "PRE_COLAB_SOURCE_CONTRACT_EXHAUSTED gate",
+      "scope": "ALL_FINAL_RUNTIME_ASSURANCE",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-014",
+      "title": "Fake provider/runtime output is forbidden",
+      "source_event": "W03 shell realism and provider boundaries",
+      "root_cause": "visual prototypes can appear operational without causal backend",
+      "policy_change": "Blueprint proves UX/session/provider boundary; Production proves real I/O causality",
+      "scope": "W03_AND_PROVIDER_BACKED_TOOLS",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-015",
+      "title": "Controller handoff must contain decisions + lessons, not only current files",
+      "source_event": "W03 recovery handoff strong but workspace-specific and historical",
+      "root_cause": "future Controller can recover state yet miss generalized governance lessons",
+      "policy_change": "Handoff v2 requires source map, decision register, lessons, gates, evidence limits, exact next actions",
+      "scope": "ALL_CONTROLLERS",
+      "status": "ACTIVE"
+    },
+    {
+      "lesson_id": "CL-016",
+      "title": "A contract migration must retire stale product-truth denials",
+      "source_event": "Writer-B v1.1.5 implemented V4 inline range styles while BlockContextMenu still said those styles were not admitted",
+      "root_cause": "source-contract tests proved the new owner but did not scan user-facing legacy denial copy",
+      "policy_change": "Every contract supersession must run stale-denial/deprecated-truth search and reconcile visible disabled controls/messages",
+      "scope": "ALL_CONTRACT_MIGRATIONS_AND_FRONTEND",
+      "status": "ACTIVE"
+    }
+  ]
+}

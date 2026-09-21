@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "kind": "W3_B_NEGATIVE_SEMANTIC_OWNER_SCAN",
+  "status": "PASS",
+  "canonicalOwnerDeclarations": [
+    {
+      "path": "foundation/global/feedback.ts",
+      "name": "AccessibilityFeedbackOwner"
+    }
+  ],
+  "conflictingOwnerDeclarations": [],
+  "legacyPresentationSinks": [
+    {
+      "path": "foundation/accepted-runtime.ts",
+      "sink": "announce",
+      "classification": "CONTROLLER_INTEGRATION_TARGET_EXISTING_E12_NOT_MODIFIED"
+    },
+    {
+      "path": "foundation/accepted-runtime.ts",
+      "sink": "toast",
+      "classification": "CONTROLLER_INTEGRATION_TARGET_EXISTING_E12_NOT_MODIFIED"
+    }
+  ],
+  "interpretation": "Legacy E12 announce/toast sinks are existing Controller integration targets, not new semantic owner declarations. Lane B leaves them byte-identical and emits a convergence descriptor rather than editing shared runtime.",
+  "forbiddenCanonicalOwnershipMoved": false,
+  "duplicateSemanticOwner": false
+}

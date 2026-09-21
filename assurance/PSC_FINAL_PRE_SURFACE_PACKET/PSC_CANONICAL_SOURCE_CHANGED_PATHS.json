@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "mission": "MISSION_PSC_FINAL_PRE_SURFACE_SEMANTIC_CONVERGENCE",
+  "classification": "CANDIDATE_ONLY_EXACT_CANONICAL_SOURCE_DIFF",
+  "generatedAtUtc": "2026-09-16T23:30:06.895401+00:00",
+  "parent": {
+    "driveId": "1-1GUNh7JeYLxnH5HnANnqQQF0SlrL_R3",
+    "sourceSha256": "f7643a4bb9e0010e431d4a4f064c526fa36911430f4fbf4867d2c26a707c2837",
+    "files": 144
+  },
+  "candidate": {
+    "sourceSha256": "8b16e96795d3fa8815f310e62901c8e3957f072c9a8e11e377e353b315447084",
+    "files": 147
+  },
+  "changedPaths": [
+    {
+      "path": "stack/native-typescript/adapters/persistence/local-persistence-client.ts",
+      "change": "ADDED",
+      "parentSha256": null,
+      "candidateSha256": "9eceb0aa4b5be34741e7f1a046d236a720365833a7739bb26320e86fa02625ee",
+      "candidateBytes": 4069,
+      "authorization": "PSC_L06_PS05_PERSISTENCE_CONVERGENCE"
+    },
+    {
+      "path": "stack/native-typescript/adapters/structured-documents.ts",
+      "change": "MODIFIED",
+      "parentSha256": "dc88d75e2912efbc453549b58b0c1b94857cf74e97869863e2f72c563ade01db",
+      "candidateSha256": "01b84abb2069af21880e46a1bda08cd191725dce0911bc3d3e126065b1d9bee7",
+      "parentBytes": 2044,
+      "candidateBytes": 5296,
+      "authorization": "PSC_PERSISTENCE_BINDING_TO_EXISTING_SEMANTIC_OWNER"
+    },
+    {
+      "path": "stack/native-typescript/foundation/extensions.css",
+      "change": "MODIFIED",
+      "parentSha256": "e7c821af9f044a3b5cfa060b8576b8e21c3cfa6f5477158acbc6b6c3a32eae3c",
+      "candidateSha256": "a8ea962ed61e4180a52d9705c14a0f0b1f5b83625d60c09a3d25927beabd8cfc",
+      "parentBytes": 31957,
+      "candidateBytes": 32231,
+      "authorization": "PS01_REPLAY_PLUS_PS04_BOUNDED_CONTEXT_VISIBILITY_CORRECTION"
+    },
+    {
+      "path": "stack/native-typescript/foundation/global/shell/destination-registry.ts",
+      "change": "ADDED",
+      "parentSha256": null,
+      "candidateSha256": "c8496fa06839cefb5517b6833b4f8547466a5d83d69ac60df963cce404665d02",
+      "candidateBytes": 4149,
+      "authorization": "PS01_APPROVED_DELTA"
+    },
+    {
+      "path": "stack/native-typescript/foundation/global/shell/navigation.ts",
+      "change": "MODIFIED",
+      "parentSha256": "6dd1a00dd67cda417f3f70055dc36d3cf91ea82a66013c5ca5d2569ae2900292",
+      "candidateSha256": "1f49364ca99028a6e9c71dada06118eecd8e7989cd50c8b16e59360b99906b2c",
+      "parentBytes": 21541,
+      "candidateBytes": 21547,
+      "authorization": "PS01_APPROVED_DELTA"
+    },
+    {
+      "path": "stack/native-typescript/foundation/global/transient-focus.ts",
+      "change": "MODIFIED",
+      "parentSha256": "acb0a53e800e7a3d14ba8520d8e46c2e5da5ff7e6a52afa77ea60915dbdcc0f2",
+      "candidateSha256": "5b6b93be0f00af3e2f5caf5a8ec2a6a9f723961a370b89b23e866f367ef55581",
+      "parentBytes": 7033,
+      "candidateBytes": 8524,
+      "authorization": "PS01_APPROVED_DELTA"
+    },
+    {
+      "path": "stack/native-typescript/foundation/operational/session-owner.ts",
+      "change": "MODIFIED",
+      "parentSha256": "dc1b1b10b48f0bc2fa54079f302ef206294144a023f586918748fa96f735fa19",
+      "candidateSha256": "99d93b7d9ce38a14a20b65efa4976729879bf29b3f1c5f92ed2b5675a208efe2",
+      "parentBytes": 11097,
+      "candidateBytes": 12972,
+      "authorization": "PS04_APPROVED_OPERATIONAL_DELTA"
+    },
+    {
+      "path": "stack/native-typescript/foundation/operational/terminal-host.ts",
+      "change": "MODIFIED",
+      "parentSha256": "9547bbc061277a4cd0cb3d498fa19b45c3c47e8125647f51e41075a42efaf706",
+      "candidateSha256": "2183e07ae253c51be9e31644736c893e1c33de414d419e5bbe6fd5b6eac1968e",
+      "parentBytes": 7286,
+      "candidateBytes": 14118,
+      "authorization": "PS04_APPROVED_OPERATIONAL_DELTA"
+    },
+    {
+      "path": "stack/native-typescript/foundation/spatial/interaction-kernel.ts",
+      "change": "MODIFIED",
+      "parentSha256": "dfd272d508574fd4008cb1803c703b29a5114972aa2d1ff73439ede3d8195e9a",
+      "candidateSha256": "856c2d55845c4b46c2707eb0dd303430d10dfb753692aa5c4940b0e4ca5c1591",
+      "parentBytes": 6070,
+      "candidateBytes": 10011,
+      "authorization": "PS02_APPROVED_DELTA_PLUS_CHECKPOINT_FAIL_ATOMIC_HARDENING"
+    },
+    {
+      "path": "stack/native-typescript/foundation/structured.ts",
+      "change": "MODIFIED",
+      "parentSha256": "b45a71007591d05975c58bbf8c619c23a3a4691a319ed8bc59e44862de755cac",
+      "candidateSha256": "20c7e120e32e5474ae7a27b17951ca0b673db354777a635126338fee25fcf8d1",
+      "parentBytes": 77673,
+      "candidateBytes": 79331,
+      "authorization": "PSC_ASYNC_EXPLICIT_SAVE_DURABILITY_BOUNDARY"
+    },
+    {
+      "path": "stack/native-typescript/main.ts",
+      "change": "MODIFIED",
+      "parentSha256": "d9611bbde44f8e9b47038bfa506cd05fdabdfe49ca0e48e70cd077a71e2524e7",
+      "candidateSha256": "3a2c251628b64de62a4b2005ce595d02a27870c116a01860c8c0fb74c7c4cdd3",
+      "parentBytes": 35889,
+      "candidateBytes": 45730,
+      "authorization": "PS04_AUTHORIZED_RUNS_REGION_PLUS_PERSISTENCE_COMPOSITION"
+    },
+    {
+      "path": "stack/native-typescript/ps02-spatial-finite-atomicity-tests.ts",
+      "change": "ADDED",
+      "parentSha256": null,
+      "candidateSha256": "f01e12d9b789daae14ff04ea2b07b939c034572d82a624ad91a444843fcfc9db",
+      "candidateBytes": 10308,
+      "authorization": "PS02_DEDICATED_TEST"
+    }
+  ],
+  "summary": {
+    "changed": 12,
+    "added": 3,
+    "modified": 9,
+    "deleted": 0,
+    "unauthorized": 0
+  },
+  "result": "PASS"
+}

@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 2,
+  "baseline": "v0.2.1",
+  "successor": "v0.2.1a",
+  "successorBaselineId": "CEP-FOUNDATION-0.2.1a-REVIEW-HARDENED-CANDIDATE",
+  "corrections": [
+    {
+      "id": 1,
+      "name": "W03 semantic ownership map",
+      "status": "PASS",
+      "receipt": "assurance/W03_SEMANTIC_OWNERSHIP_CORRECTION_RECEIPT.json",
+      "proof": "69/318 preserved; bounded semantic routing corrected"
+    },
+    {
+      "id": 2,
+      "name": "Structured selection + clipboard seam",
+      "status": "PASS",
+      "receipt": "assurance/STRUCTURED_SELECTION_CLIPBOARD_EXTRACTION_MAP.json",
+      "proof": "model Structured selection/clipboard and isolation tests"
+    },
+    {
+      "id": 3,
+      "name": "Generic ActionAvailability",
+      "status": "PASS",
+      "receipt": "assurance/ACTION_AVAILABILITY_POLICY_RECEIPT.json",
+      "proof": "generic policy + presentation/preflight convergence"
+    },
+    {
+      "id": 4,
+      "name": "Writer scaffold relevance filter",
+      "status": "PASS",
+      "receipt": "assurance/WRITER_RELEVANCE_FILTER_RECEIPT.json",
+      "proof": "38/38 including positive and negative relevance fixtures"
+    },
+    {
+      "id": 5,
+      "name": "Portable browser conformance",
+      "status": "PASS",
+      "receipt": "assurance/BROWSER_PORTABILITY_BOOTSTRAP_RECEIPT.json",
+      "proof": "6/6 bounded flows; package-local default; no mandatory Codex path"
+    },
+    {
+      "id": 6,
+      "name": "Current authority / historical isolation",
+      "status": "PASS",
+      "receipt": "assurance/CURRENT_AUTHORITY_ISOLATION_RECEIPT.json",
+      "proof": "5/5 intake guard; old stack/Production authority excluded"
+    }
+  ],
+  "deferredSetCount": 10,
+  "deferredSetPreserved": true,
+  "stackStatus": "STACK_NOT_FROZEN",
+  "ownerAccepted": false,
+  "frozen": false,
+  "status": "READY_FOR_INDEPENDENT_FOUNDATION_REVIEW"
+}

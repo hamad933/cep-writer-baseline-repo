@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "kind": "VS04_DUPLICATE_HISTORY_RECOVERY_OWNER_GATE_PROOF",
+  "status": "PASS",
+  "canonicalSourceTreeSha256": "55645c1f89fc1d2af0653ec2eec00bb7dd2f779f7769bcffa2ea8981cd3f2be2",
+  "scanStatus": "PASS",
+  "historyRecoveryGuards": [
+    {
+      "id": "structured.history.canonical-owner",
+      "status": "PASS"
+    },
+    {
+      "id": "structured.history.adapter-delegates",
+      "status": "PASS"
+    },
+    {
+      "id": "structured.history.no-fake-save",
+      "status": "PASS"
+    },
+    {
+      "id": "structured.history.one-frame-owner",
+      "status": "PASS"
+    },
+    {
+      "id": "library.history.projects-canonical",
+      "status": "PASS"
+    },
+    {
+      "id": "library.recovery-delegates-canonical",
+      "status": "PASS"
+    },
+    {
+      "id": "library.no-direct-working-bump",
+      "status": "PASS"
+    },
+    {
+      "id": "library.save-truth",
+      "status": "PASS"
+    }
+  ],
+  "negativeFixture": {
+    "id": "structured.history-recovery-negative-fixture",
+    "status": "PASS",
+    "expected": "ALL_HISTORY_RECOVERY_OWNERSHIP_GUARDS_FAIL",
+    "observed": [
+      {
+        "id": "structured.history.canonical-owner",
+        "status": "FAIL"
+      },
+      {
+        "id": "structured.history.adapter-delegates",
+        "status": "FAIL"
+      },
+      {
+        "id": "structured.history.no-fake-save",
+        "status": "FAIL"
+      },
+      {
+        "id": "structured.history.one-frame-owner",
+        "status": "FAIL"
+      },
+      {
+        "id": "library.history.projects-canonical",
+        "status": "FAIL"
+      },
+      {
+        "id": "library.recovery-delegates-canonical",
+        "status": "FAIL"
+      },
+      {
+        "id": "library.no-direct-working-bump",
+        "status": "FAIL"
+      },
+      {
+        "id": "library.save-truth",
+        "status": "FAIL"
+      }
+    ]
+  },
+  "legacyVS03OwnershipGuards": [
+    {
+      "id": "structured.compat.insert-canonical",
+      "status": "PASS",
+      "method": "insertBlock"
+    },
+    {
+      "id": "structured.compat.remove-canonical",
+      "status": "PASS",
+      "method": "removeBlock"
+    },
+    {
+      "id": "structured.compat.update-nonstructural-only",
+      "status": "PASS",
+      "method": "updateBlock"
+    }
+  ],
+  "legacyFixture": {
+    "id": "structured.compatibility-bypass-fixture",
+    "status": "PASS",
+    "expected": "ALL_THREE_BYPASSES_DETECTED",
+    "observed": [
+      {
+        "id": "structured.compat.insert-canonical",
+        "status": "FAIL",
+        "method": "insertBlock"
+      },
+      {
+        "id": "structured.compat.remove-canonical",
+        "status": "FAIL",
+        "method": "removeBlock"
+      },
+      {
+        "id": "structured.compat.update-nonstructural-only",
+        "status": "FAIL",
+        "method": "updateBlock"
+      }
+    ]
+  },
+  "interpretation": "The positive candidate has one semantic main-document transaction/history/recovery owner. The deliberate negative fixture reintroduces local donor history/recovery/fake-save behavior and is detected."
+}

@@ -1,0 +1,13 @@
+{
+  "providerId": "cep-win32-sidecar",
+  "providerVersion": "1.0.0",
+  "target": "windows-x64",
+  "implementation": "C++17 direct Win32 APIs",
+  "channels": {
+    "PlatformWindowCapability": "persistent stdio request/response; installed Edge app-mode detached CEP content",
+    "PlatformInputDirectionCapability": "foreground-thread HKL -> rtl|ltr|unknown",
+    "TerminalRuntimeCapability": "ConPTY raw stdin/stdout + separate loopback TCP control and raw-input channels; no command parsing or executable allowlist"
+  },
+  "semanticOwnership": false,
+  "stackFreeze": false
+}

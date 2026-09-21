@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "kind": "W6_C_FULL_GATE_MATRIX",
+  "classification": "W6_C_LANE_EXECUTION_EVIDENCE_NOT_CONTROLLER_ACCEPTANCE",
+  "status": "PASS",
+  "sourceCanonicalTreeSha256": "7def4c3adbfc07336caed5b9373f6702da296f4db26ccd04ba8ba57ab0680cf4",
+  "canonicalSourceFileCount": 110,
+  "gates": [
+    {
+      "id": "W6_C_EXECUTABLE",
+      "status": "PASS",
+      "detail": "40/40 PASS"
+    },
+    {
+      "id": "W6_C_NEGATIVE_BOUNDARY_SCAN",
+      "status": "PASS",
+      "detail": "10/10 PASS"
+    },
+    {
+      "id": "W6_A_CORRECTION",
+      "status": "PASS",
+      "detail": "5/5 PASS"
+    },
+    {
+      "id": "W6_A_EXECUTABLE",
+      "status": "PASS",
+      "detail": "24/24 PASS"
+    },
+    {
+      "id": "W6_A_OPERATIONAL",
+      "status": "PASS",
+      "detail": "15/15 PASS"
+    },
+    {
+      "id": "W6_B_CORRECTION",
+      "status": "PASS",
+      "detail": "8/8 PASS"
+    },
+    {
+      "id": "W6_B_EXECUTABLE",
+      "status": "PASS",
+      "detail": "27/27 PASS"
+    },
+    {
+      "id": "W6_B_STATIC",
+      "status": "PASS",
+      "detail": "8/8 PASS"
+    },
+    {
+      "id": "MODEL",
+      "status": "PASS",
+      "detail": "210/210 PASS"
+    },
+    {
+      "id": "CONTRACTS",
+      "status": "PASS",
+      "detail": "168/168 PASS"
+    },
+    {
+      "id": "LEGACY_BROWSER",
+      "status": "PASS",
+      "detail": "6/6 PASS"
+    },
+    {
+      "id": "WAVE3_BROWSER",
+      "status": "PASS",
+      "detail": "5/5 PASS"
+    },
+    {
+      "id": "WAVE4_BROWSER",
+      "status": "PASS",
+      "detail": "5/5 PASS"
+    },
+    {
+      "id": "WAVE5_C_BROWSER",
+      "status": "PASS",
+      "detail": "9 steps / 26 executable cases PASS"
+    },
+    {
+      "id": "W6_A_BROWSER",
+      "status": "PASS",
+      "detail": "6/6 steps PASS"
+    },
+    {
+      "id": "W6_B_BROWSER",
+      "status": "PASS",
+      "detail": "5/5 steps PASS"
+    },
+    {
+      "id": "W6_C_BROWSER",
+      "status": "PASS",
+      "detail": "8/8 steps PASS"
+    },
+    {
+      "id": "NPM_RUN_CHECK",
+      "status": "PASS",
+      "detail": "current-source npm run check exit 0 after current browser receipts"
+    },
+    {
+      "id": "SOURCE_DIST_DIST_TS_PARITY",
+      "status": "PASS",
+      "detail": "stack-proof parity=true; dist/dist-ts generated from canonical source; model 210/210 in both"
+    },
+    {
+      "id": "PROTECTED_HOTSPOTS_UNCHANGED",
+      "status": "PASS",
+      "detail": "7/7 protected paths byte-identical to W6 A+B parent"
+    }
+  ],
+  "hardCeilings": {
+    "stack": "STACK_NOT_FROZEN",
+    "operationalSession": "BOUNDED_BELOW_M6_SECOND_REAL_PROVIDER_NOT_PROVEN",
+    "epistemicState": "CONTRACT_ONLY_NO_GENERIC_ASYNC_ENGINE",
+    "nativeAlwaysOnTop": "CAPABILITY_BRIDGE_ONLY_NO_FABRICATION",
+    "notePersistence": "UNPROVEN_NO_OWNER",
+    "surfaceBuild": "BLOCKED"
+  }
+}

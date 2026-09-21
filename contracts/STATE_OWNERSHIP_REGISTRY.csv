@@ -1,0 +1,36 @@
+state,owner,persistence,forbidden_write
+presentation preferences,ScopedPreferencesOwner,versioned localStorage/export,domain runtime configuration
+preferred pane state,ScopedPreferencesOwner,versioned localStorage/export,responsive effective projection
+effective pane geometry,WorkspacePaneLayoutOwner,derived only,preferred value overwrite
+global transient/focus lifecycle,TransientFocusOwner,session only,domain family selection/history/session state
+context inspector content,ContextDescriptorProvider,derived from family/domain canonical state,parallel inspector domain store
+structured working document,StructuredDocumentDomainAdapter,adapter commit/recovery boundary,published canonical revision
+Library compatibility editor state,LibraryDomainAdapter + accepted donor compatibility host,Library adapter boundary,shared Structured engine ownership
+representation nodes/edges/camera,SpatialModel,session memory,canonical relationship mutation
+provider runtime state,RuntimeAdapter implementation (InternalSimulationAdapter active here),provider-defined,authored baseline or presentation-owned duplicate truth
+session identity/output,RuntimeAdapter stable session boundary,provider-defined,renderer-owned duplicate sessions
+session geometry/tabs,SessionPresentation + WindowMotion,session memory,provider lifecycle inferred from hide/close
+recorded result,detached snapshot,session memory,live execution
+learning attempt/progress,LearnAdapter,session fixture,Mastery write
+canonical domain truth,typed Structured/Relation/Runtime adapters,adapter-defined,shared universal domain store
+global input routing and region-cycle receipts,GlobalInputKeymapOwner,session/derived only,Structured caret semantics; Spatial geometry semantics; domain mutation
+accessibility feedback presentation,AccessibilityFeedbackOwner,transient presentation only,canonical save/error/relation/runtime/status truth invention
+context inspector presentation lifecycle,ContextInspectorHost,session presentation only,document/relation/runtime/selection canonical truth
+bottom deep-work presentation lifecycle,BottomDeepWorkOwner,session presentation only,Structured history content; runtime/session canonical truth
+application chrome UI scale projection,UIScalePolicyOwner,derived from ScopedPreferencesOwner scale value,document zoom; Spatial/canvas zoom; density; responsive breakpoints
+settings center disclosure/search presentation,SettingsCenterOwner,session presentation only,preference values/persistence; command semantics; family keyboard semantics; domain configuration
+transient input direction hint,InputDirectionResolver,derived/transient only,persisted content direction; semantic language inference; domain language truth
+structured editor key/caret/composition state,StructuredInputKeymapOwner,composition/caret transient state only,canonical document mutation; global shortcut routing; canonical selection truth
+structured action descriptor truth,StructuredActionDescriptorOwner,derived descriptors only,canonical mutation; global transient lifecycle; domain state
+structured rich/code/bidi presentation policy,StructuredRichContentOwner,derived presentation/safe portable representation only,clipboard trust ownership; canonical document truth; domain language truth
+structured drag/drop intent and target projection,StructuredDragDropOwner,pointer/drag transient state only,canonical document mutation; canonical selection; DOM identity as block identity
+operational session presentation attachment,OperationalSessionOwner,session presentation only; BELOW_M6_SECOND_REAL_PROVIDER_NOT_PROVEN,RuntimeAdapter causal runtime/device/session truth; command interpretation; fabricated output
+epistemic state descriptor vocabulary,EpistemicStateContract,contract/derived descriptor only,domain cause/status/copy; async lifecycle engine; invented truth
+confirmation presentation lifecycle,ConfirmationSafetyHost,transient presentation only,destructive-risk meaning; action semantics; mutation ownership
+structured surface presentation orchestration,StructuredSurfaceHost,derived/presentation only,canonical document; mutation; selection; history; domain truth
+structured read-navigation descriptor truth,StructuredNavigationDescriptorOwner,derived descriptors only,DOM scroll/focus; canonical document; domain-reference mutation; transaction history
+sticky note presentation/window lifecycle,StickyNoteWindowOwner,session/presentation only; no note/source persistence claim,Structured content/history; source binding; source deletion; OS always-on-top without capability bridge
+note source/domain binding truth,NoteBindingAdapter,descriptor/provenance truth only; storage/persistence external,note content mutation; window geometry; source/domain mutation; fabricated source identity
+structured note content working document,StructuredNoteContentAdapter over StructuredDocumentDomainAdapter,Structured working-document/history boundary only; no durable storage claim,note binding truth; window lifecycle; second editor engine; source mutation
+analytical compare pair/session/result projection,AnalyticalCompareOwner,session/derived only; canonical provider records remain domain-owned,provider records; Review decisions; Mastery judgments; Evidence admission; Audit mutation; generic persistence
+analytical compare presentation focus/filter state,AnalyticalCompareHost,presentation/session only,canonical comparison result or provider domain truth

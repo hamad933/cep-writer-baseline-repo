@@ -1,0 +1,22 @@
+import {SemanticCommandBus} from '../../foundation/global/commands.js';
+import {W03RunDomain} from '../../adapters/runs/domain.js';
+export const RUNS_SURFACE_CONTRACT=Object.freeze({id:'runs',workspace:'W03',owner:'W03RunDomain + InternalSimulationAdapter',families:['SpatialInteraction','OperationalSurface'],centralWiring:'CONTROLLER_CONVERGENCE_REQUIRED',runtimeTruth:'INTERNAL_SIMULATION',interactionModel:'WORKSPACE_FIRST'});
+const disabled=(owner,code,reason)=>({enabled:false,code,reason,availabilityOwner:owner});
+export function composeRunsSurface({domain=new W03RunDomain(),bus=new SemanticCommandBus(),shared={}}={}){
+ if(!shared.spatialRelation)throw Error('RUNS_SHARED_SPATIAL_REQUIRED');
+ const r=(id,label,run,available=()=>true)=>bus.registerCommand(id,domain.owner,label,run,available);
+ r('runs.preflight','Run no-write preflight',p=>domain.preflight(p));
+ r('runs.prepare','Prepare immutable Run Manifest',p=>domain.prepare(p),()=>['PREPARING','BLOCKED','READY'].includes(domain.runtime.run.lifecycle)?true:disabled(domain.owner,'RUN_ALREADY_ACTIVE','Prepare is available before the active Run starts.'));
+ r('runs.start','Start prepared Run',p=>domain.start(p),()=>domain.runtime.run.lifecycle==='READY'?true:disabled(domain.owner,'RUN_NOT_READY','Run must be READY and have a current preflight before start.'));
+ r('OPEN_TERMINAL','Open simulated terminal',p=>domain.openTerminal(p),p=>domain.runtime.run.lifecycle==='RUNNING'&&domain.runtime.capable(p?.deviceId)?true:disabled('InternalSimulationAdapter',domain.runtime.run.lifecycle==='RUNNING'?'CAPABILITY_UNAVAILABLE':'RUN_NOT_RUNNING',domain.runtime.run.lifecycle==='RUNNING'?'Selected simulated device has no terminal capability.':'Terminal input is available only while the Run is RUNNING.'));
+ r('runtime.input','Send InternalSimulation input',p=>domain.input(p),()=>domain.runtime.run.lifecycle!=='RUNNING'?disabled(domain.owner,'RUN_NOT_RUNNING','Runtime input is accepted only while the Run is RUNNING.'):domain.runtime.connected?true:disabled('InternalSimulationAdapter','PROVIDER_DISCONNECTED','InternalSimulationAdapter is disconnected.'));
+ r('runtime.disconnect','Disconnect InternalSimulation provider',()=>domain.disconnect(),()=>domain.runtime.connected?true:disabled('InternalSimulationAdapter','PROVIDER_ALREADY_DISCONNECTED','InternalSimulationAdapter is already disconnected.'));
+ r('runtime.reconnect','Reconnect InternalSimulation provider',p=>domain.reconnect(p),()=>!domain.runtime.connected?true:disabled('InternalSimulationAdapter','PROVIDER_ALREADY_CONNECTED','InternalSimulationAdapter is already connected.'));
+ r('runs.pause','Pause Run',p=>domain.pause(p),()=>domain.runtime.run.lifecycle==='RUNNING'?true:disabled(domain.owner,'RUN_NOT_RUNNING','Run must be RUNNING before pause.'));
+ r('runs.resume','Resume Run',p=>domain.resume(p),()=>domain.runtime.run.lifecycle==='PAUSED'?true:disabled(domain.owner,'RUN_NOT_PAUSED','Run must be PAUSED before resume.'));
+ r('runs.stop','Stop Run',p=>domain.stop(p),()=>['RUNNING','PAUSED'].includes(domain.runtime.run.lifecycle)?true:disabled(domain.owner,'RUN_NOT_ACTIVE','Run must be RUNNING or PAUSED before stop.'));
+ r('runs.inspect','Inspect observed Run stream',()=>domain.inspect());
+ r('runs.seal','Create idempotent Run seal handoff preview',()=>domain.sealPreview(),()=>['STOPPED','COMPLETED','FAILED'].includes(domain.runtime.run.lifecycle)&&!domain.runtime.run.pending?true:disabled(domain.owner,'RUN_NOT_RECONCILED_TERMINAL','Run must be in a confirmed terminal state with reconciled streams before seal handoff.'));
+ r('view.recorded','View recorded simulation truth',()=>domain.recorded());
+ return Object.freeze({contract:RUNS_SURFACE_CONTRACT,domain,bus,shared,slots:Object.freeze({TOP:'Run identity + lifecycle actions',LEFT:'typed Run structure / task / telemetry navigation',CENTER:'OperationalRuntimeWorkbench primary task',RIGHT:'selected Run fact + provider/provenance context',BOTTOM:'OperationalSessionOwner + OperationalTerminalHost temporary deep work',TOOLBAR:'shared toolbar presentation of Runs semantic commands',TRANSIENT:'shared transient owner'}),ownerBindings:Object.freeze(['WorkspaceFoundation','SpatialInteractionKernel','OperationalSessionOwner','OperationalTerminalHost','RuntimeAdapter','InternalSimulationAdapter','SemanticCommandBus','ContextInspectorHost']),truthCeiling:Object.freeze({pty:false,powershell:false,ssh:false,nativeWindow:false,osAlwaysOnTop:false,realProcessExecution:false,windowsConptyProof:'UNVERIFIED_PLATFORM_GATE'})})
+}

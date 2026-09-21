@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "mission": "PS01_GLOBAL_SHELL_FOCUS_LAYERING_CONVERGENCE",
+  "classification": "PS01_TARGETED_MODEL_AND_GENERATED_RUNTIME_PROOF",
+  "pass": 5,
+  "fail": 0,
+  "tests": [
+    {
+      "id": "ps01.registry-default-five-current-routes",
+      "status": "PASS",
+      "detail": {
+        "defaultCount": 5,
+        "fallback": "library"
+      }
+    },
+    {
+      "id": "ps01.registry-more-than-five-without-shell-mechanics-edit",
+      "status": "PASS",
+      "detail": {
+        "owner": "GlobalShellDestinationRegistry",
+        "defaultId": "library",
+        "count": 7,
+        "destinations": [
+          {
+            "id": "library",
+            "area": "W02"
+          },
+          {
+            "id": "learn",
+            "area": "W02"
+          },
+          {
+            "id": "visualize",
+            "area": "W02"
+          },
+          {
+            "id": "runs",
+            "area": "W03"
+          },
+          {
+            "id": "enterprise",
+            "area": "W03"
+          },
+          {
+            "id": "fixture-alpha",
+            "area": "W04"
+          },
+          {
+            "id": "fixture-beta",
+            "area": "W05"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ps01.registry-rejects-fake-harness-admission",
+      "status": "PASS",
+      "detail": "golden remains harness-only"
+    },
+    {
+      "id": "ps01.transient-rebinds-disconnected-invoker",
+      "status": "PASS",
+      "detail": {
+        "id": "global.settings-center",
+        "reason": "escape",
+        "restored": true,
+        "focusTargetKind": "invoker-rebound",
+        "owner": "TransientFocusOwner",
+        "policyTag": "topmost-first-v2"
+      }
+    },
+    {
+      "id": "ps01.sticky-layering-above-pane-reveal",
+      "status": "PASS",
+      "detail": {
+        "paneRevealStack": 214,
+        "stickyHostStack": 215,
+        "shellStack": 220
+      }
+    }
+  ]
+}

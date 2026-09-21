@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "kind": "VS04_RECOVERY_ISOLATION_RESTORE_PROOF",
+  "status": "PASS",
+  "canonicalSourceTreeSha256": "55645c1f89fc1d2af0653ec2eec00bb7dd2f779f7769bcffa2ea8981cd3f2be2",
+  "policy": {
+    "owner": "StructuredTransactionHistoryRecoveryOwner",
+    "retentionLimitFinal": 5,
+    "documentScoped": true
+  },
+  "modelTests": {
+    "structured.recovery-retention-isolation": "PASS",
+    "structured.recovery-restore-as-new-preserves-history": "PASS"
+  },
+  "libraryRecoveryProjectionOwner": "StructuredTransactionHistoryRecoveryOwner",
+  "donorMainRecoveryStorePresent": false,
+  "restoreLaw": "Historical/recovery content is recorded as a new working transaction; existing frame identity/history is retained."
+}

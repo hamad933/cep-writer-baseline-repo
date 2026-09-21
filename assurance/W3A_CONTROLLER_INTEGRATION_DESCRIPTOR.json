@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "mission": "W3-A-GLOBAL-INPUT-KEYMAP",
+  "classification": "CONTROLLER_CONVERGENCE_INTEGRATION_DESCRIPTOR_NOT_EXECUTED_IN_LANE",
+  "owner": "GlobalInputKeymapOwner",
+  "canonicalModules": [
+    "stack/native-typescript/foundation/global/input-keymap.ts",
+    "stack/native-typescript/foundation/global/region-cycle.ts",
+    "stack/native-typescript/foundation/global/input-ownership-contract.ts"
+  ],
+  "controllerIntegration": [
+    "Instantiate exactly one GlobalInputKeymapOwner with the promoted SemanticCommandBus and TransientFocusOwner.",
+    "Declare workspace region descriptors in canonical focus order and supply them to WorkspaceRegionCycle.",
+    "Bind exactly one host/document keydown listener in Controller-owned integration code; forward each event plus current region, input-ownership and family keymap context to handleKeydown().",
+    "Structured editors must supply explicit inputOwnership descriptors; the global owner must not implement caret, shorthand, mutation, or editor history semantics.",
+    "Family contexts may supply createFamilyKeymapDescriptor() descriptors; semantics remain owned by their command owners and execute only through SemanticCommandBus.",
+    "Do not infer shortcut authority from visibility of shortcut UI/panels; every executable binding requires explicit allow policy.",
+    "Do not add a second Escape/transient stack owner; Escape delegates to TransientFocusOwner first.",
+    "Do not add a second global keydown semantic owner."
+  ],
+  "listenerOwnership": "ControllerIntegrationHost",
+  "laneBindingPerformed": false,
+  "forbiddenIntegrationPathsPreserved": [
+    "stack/native-typescript/main.ts",
+    "stack/native-typescript/foundation/workspace.ts",
+    "stack/native-typescript/foundation/workspace-host.ts",
+    "stack/native-typescript/foundation/accepted-runtime.ts",
+    "stack/native-typescript/index.html",
+    "stack/native-typescript/foundation/donor.css"
+  ],
+  "convergenceOrder": "A input -> B feedback -> C context -> D bottom -> E scale"
+}

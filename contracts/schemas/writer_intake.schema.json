@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cep://contracts/writer-intake.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "foundationBaseline",
+    "targetSurface",
+    "surfaceProfile",
+    "inheritedGlobalComponents",
+    "familyEngines",
+    "domainAdapter",
+    "registeredCommands",
+    "applicablePreferences",
+    "forbiddenDuplicateMechanics",
+    "valuableDeferredRequirements",
+    "allowedDeviations",
+    "ownerDeltas",
+    "requiredProof"
+  ],
+  "properties": {
+    "foundationBaseline": {
+      "type": "string",
+      "const": "CEP-FR-E18-ANALYTICAL-COMPARE-COMPLETION"
+    },
+    "targetSurface": {
+      "type": "string",
+      "minLength": 1
+    },
+    "surfaceProfile": {
+      "type": "string",
+      "pattern": "^profiles/[a-z_]+\\.json$"
+    },
+    "inheritedGlobalComponents": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "familyEngines": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Structured",
+          "SpatialRelation",
+          "OperationalTerminal",
+          "AnalyticalCompare"
+        ]
+      }
+    },
+    "domainAdapter": {
+      "type": "object"
+    },
+    "registeredCommands": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "applicablePreferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "forbiddenDuplicateMechanics": {
+      "type": "array"
+    },
+    "valuableDeferredRequirements": {
+      "type": "array"
+    },
+    "allowedDeviations": {
+      "type": "array"
+    },
+    "ownerDeltas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requiredProof": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "before",
+          "action",
+          "owner",
+          "after",
+          "visible",
+          "negative"
+        ]
+      }
+    },
+    "wave4StructuredSubordinateOwners": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "wave4OperationalBoundary": {
+      "type": "object"
+    },
+    "wave5Requirement": {
+      "type": "string"
+    },
+    "wave5StructuredOwners": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "wave5Status": {
+      "type": "string"
+    },
+    "wave5NoteContentCompatibility": {
+      "type": "string"
+    },
+    "wave6Requirement": {
+      "type": "string"
+    },
+    "wave6NotesOwners": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "wave6Status": {
+      "type": "string"
+    },
+    "wave6HardCeilings": {
+      "type": "object"
+    },
+    "analyticalCompareRequirement": {
+      "type": "string"
+    },
+    "analyticalCompareOwners": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "analyticalCompareStatus": {
+      "type": "string"
+    },
+    "analyticalCompareHardCeilings": {
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CEPInteractionTestCase",
+  "type": "object",
+  "required": [
+    "id",
+    "before",
+    "action",
+    "owner",
+    "after",
+    "visible_change",
+    "negative_assertions"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "before": {},
+    "action": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "after": {},
+    "visible_change": {
+      "type": "string"
+    },
+    "negative_assertions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "pointer_route": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "keyboard_route": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "viewport": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "locale_direction": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

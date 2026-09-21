@@ -1,0 +1,56 @@
+PASS workspace.transient-and-pane-lifecycle
+PASS spatial.selection-connect-canonical-edge
+PASS relation.route-convergence-and-label-scope
+PASS central-change-reuse
+PASS runtime-causal-consequence
+PASS spatial-input-bidi-preference-and-structured-isolation
+{
+  "summary": {
+    "total": 6,
+    "pass": 6,
+    "fail": 0
+  },
+  "source": {
+    "sha256": "557d9f617ee614d7bd21e2b7d76ffad318c476727dd48c2dbf5b84923f30eb1e",
+    "files": 271
+  },
+  "shots": [
+    {
+      "filename": "browser-workspace-pane-context.png",
+      "bytes": 72625,
+      "sha256": "cbba6ca18e17d59a98c1823a3b8f6597c1594abe7937fe3ef78111f66d6cc13e",
+      "flowId": "workspace.transient-and-pane-lifecycle",
+      "property": "preferred/effective pane state and shared workspace chrome",
+      "viewport": {
+        "width": 900,
+        "height": 980
+      },
+      "scope": "EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE"
+    },
+    {
+      "filename": "browser-selection-connect.png",
+      "bytes": 219440,
+      "sha256": "930780e8b416d728d05d30a4f93aa68fd20de4f49cb2296bdac843d6c1b1a311",
+      "flowId": "spatial.selection-connect-canonical-edge",
+      "property": "exactly-two central ActionAvailability presentation",
+      "viewport": {
+        "width": 1440,
+        "height": 980
+      },
+      "scope": "EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE"
+    },
+    {
+      "filename": "browser-operational-shutdown.png",
+      "bytes": 164800,
+      "sha256": "069ae5198163e6842856b50342452d751bfce24a8958ff440332ae8f07cb39fd",
+      "flowId": "runtime-causal-consequence",
+      "property": "provider-neutral terminal and canonical shutdown consequence",
+      "viewport": {
+        "width": 1440,
+        "height": 980
+      },
+      "scope": "EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE"
+    }
+  ],
+  "failures": []
+}

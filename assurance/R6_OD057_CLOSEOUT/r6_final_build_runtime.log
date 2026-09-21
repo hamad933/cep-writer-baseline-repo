@@ -1,0 +1,47 @@
+
+> cep-foundation-forge@0.2.1c build:runtime
+> python3 tools/extract_donor.py && node tools/build-runtime.mjs && node stack/native-typescript/foundation/operational/xterm-runtime-assets.mjs
+
+{
+  "pass": true,
+  "policy": "IMMUTABLE_ACCEPTED_DONOR_TO_ZERO_DELTA_CARRIER_OUTPUTS",
+  "input": {
+    "path": "stack/native-typescript/foundation/presentation-carrier/CEP_LIBRARY_EDITOR_EXECUTABLE_BLUEPRINT_v1.2.17_ACCEPTED_DESIGN_REFERENCE.html",
+    "bytes": 672893,
+    "sha256": "ea66b58ef122bf2f8ca23fd0aa9e461b07da11ea7390c451902e4b1592d396fd",
+    "classification": "IMMUTABLE_ACCEPTED_DONOR_INPUT"
+  },
+  "outputs": [
+    {
+      "path": "foundation/donor.css",
+      "bytes": 217819,
+      "sha256": "bb3b29f51beda272d5118b9329a44250c896c0143d7ea593ec59419b02d93689",
+      "classification": "GOVERNED_GENERATED_DERIVATION"
+    },
+    {
+      "path": "index.html",
+      "bytes": 131035,
+      "sha256": "da0d1bf40e9a33cb097c8595ae1f81f3f605374b75b43cc074aa7fc6e897dfff",
+      "classification": "GOVERNED_GENERATED_DERIVATION"
+    },
+    {
+      "path": "reference/CEP_LIBRARY_EDITOR_EXECUTABLE_BLUEPRINT_v1.2.17_ACCEPTED_DESIGN_REFERENCE.html",
+      "bytes": 672893,
+      "sha256": "ea66b58ef122bf2f8ca23fd0aa9e461b07da11ea7390c451902e4b1592d396fd",
+      "classification": "GOVERNED_GENERATED_DERIVATION"
+    }
+  ],
+  "dist_inputs": []
+}
+{
+  "pass": true,
+  "authority": "CANONICAL_SOURCE_TO_GENERATED_ONLY",
+  "source": "stack/native-typescript",
+  "destination": "dist",
+  "written": 256,
+  "copiedAssets": 2,
+  "removedStale": 0
+}
+(node:9581) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"pass":true,"source":"managed-vendored-xterm","destination":"dist/vendor/xterm","assets":["xterm.mjs","xterm.css","LICENSE","package.json"]}

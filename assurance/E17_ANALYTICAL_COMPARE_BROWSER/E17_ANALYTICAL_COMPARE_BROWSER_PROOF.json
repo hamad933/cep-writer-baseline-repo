@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "kind": "E17_ANALYTICAL_COMPARE_BROWSER_PROOF",
+  "status": "PASS",
+  "executionStatus": "EXECUTED_PASS",
+  "candidateOnly": true,
+  "acceptanceAuthority": false,
+  "canonicalSourceSha256": "252d822f82954f090578714b754185c90c79cd8713bf84354504be17c146ae5f",
+  "canonicalSourceFiles": 121,
+  "browser": {
+    "engine": "chromium",
+    "executable": "/usr/bin/chromium",
+    "transport": "PLAYWRIGHT_ROUTE_INTERCEPT_EXACT_ESM"
+  },
+  "summary": {
+    "total": 21,
+    "pass": 21,
+    "fail": 0
+  },
+  "checks": [
+    {
+      "id": "browser.transport-route-intercept",
+      "status": "PASS",
+      "detail": "exact ESM modules served by Playwright route interception; localhost not used"
+    },
+    {
+      "id": "browser.same-host-owner-rq",
+      "status": "PASS",
+      "detail": "same reusable host mounted for RQ"
+    },
+    {
+      "id": "browser.rtl-chrome",
+      "status": "PASS",
+      "detail": "root dir=rtl"
+    },
+    {
+      "id": "browser.ltr-technical-isolation",
+      "status": "PASS",
+      "detail": "bdi count=15"
+    },
+    {
+      "id": "browser.rq-different-state",
+      "status": "PASS",
+      "detail": "RQ state DIFFERENT"
+    },
+    {
+      "id": "browser.rq-pinned-left-right",
+      "status": "PASS",
+      "detail": "canonical collision-safe pinned RQ identities visible and exact refs remain r1/r2"
+    },
+    {
+      "id": "browser.rq-typed-differences",
+      "status": "PASS",
+      "detail": "rows=3"
+    },
+    {
+      "id": "browser.rq-successor-hint",
+      "status": "PASS",
+      "detail": "successor hint visible separately"
+    },
+    {
+      "id": "browser.rq-successor-no-pair-mutation",
+      "status": "PASS",
+      "detail": "pinned=r1"
+    },
+    {
+      "id": "browser.filter-derived-only",
+      "status": "PASS",
+      "detail": "filtered=1, base=3->3"
+    },
+    {
+      "id": "browser.keyboard-navigation-visible-focus",
+      "status": "PASS",
+      "detail": "abstract->quality"
+    },
+    {
+      "id": "browser.visible-focus-style",
+      "status": "PASS",
+      "detail": "host contains explicit :focus-visible outline rule"
+    },
+    {
+      "id": "browser.same-host-owner-results",
+      "status": "PASS",
+      "detail": "same host after Results switch"
+    },
+    {
+      "id": "browser.results-valid-different",
+      "status": "PASS",
+      "detail": "Results valid comparison rendered"
+    },
+    {
+      "id": "browser.results-no-execution-effects",
+      "status": "PASS",
+      "detail": "{\"replay\": 0, \"simulator\": 0, \"determinism\": 0, \"evidence\": 0}"
+    },
+    {
+      "id": "browser.historical-bytes-inert",
+      "status": "PASS",
+      "detail": "historical terminal script text did not execute"
+    },
+    {
+      "id": "browser.results-incompatible",
+      "status": "PASS",
+      "detail": "Results incompatible state"
+    },
+    {
+      "id": "browser.results-incompatible-reason",
+      "status": "PASS",
+      "detail": "explicit incompatibility reason visible"
+    },
+    {
+      "id": "browser.results-missing-side",
+      "status": "PASS",
+      "detail": "missing-right presented truthfully"
+    },
+    {
+      "id": "browser.domain-records-unchanged",
+      "status": "PASS",
+      "detail": "{\"rq\": true, \"results\": true}"
+    },
+    {
+      "id": "browser.no-authority-controls",
+      "status": "PASS",
+      "detail": "[]"
+    }
+  ],
+  "screenshots": [
+    {
+      "filename": "rq-different.png",
+      "bytes": 144700,
+      "sha256": "620ce2441333607560a66d7fd990e03fbe6b83e7cb95d9b57910ea02002f53a5"
+    },
+    {
+      "filename": "results-incompatible.png",
+      "bytes": 51022,
+      "sha256": "64cf55ecdb946effa431ecf5ae5682ed57c97632526f0e2052c4ba631dcff933"
+    }
+  ],
+  "authorityBoundary": "NO_REVIEW_DECISION_MASTERY_EVIDENCE_ADMISSION_CONTROLS"
+}

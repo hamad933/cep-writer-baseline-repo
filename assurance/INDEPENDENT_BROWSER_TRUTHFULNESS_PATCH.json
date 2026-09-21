@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "status": "BOUNDED_TRUTHFULNESS_PATCH_COMPLETE",
+  "lineageBaseline": {
+    "filename": "CEP_FOUNDATION_FORGE_v0.2.1b_CONTROLLER_REVIEW_CORRECTED_CANDIDATE.zip",
+    "bytes": 3593683,
+    "sha256": "787d886903099fc0cc0cb66c2ca9299217f9b19363e632f2a5ed8c2193d514aa",
+    "candidateId": "5cb323107f2c826cfb61abe56901a6ea0347357c6b702968db5d935b2a71854d"
+  },
+  "scope": "v0.2.1b -> v0.2.1c; browser evidence provenance/contract truthfulness only; no product runtime or visual behavior mutation",
+  "defect": "check-contracts.mjs labeled an inherited v0.2.1a browser receipt as browser.executed_pass without distinguishing lineage execution from a fresh current-candidate rerun.",
+  "corrections": [
+    "BROWSER_CONFORMANCE_RECEIPT.json now names the exact source baseline/candidate of the inherited 6/6 execution.",
+    "browser-conformance.mjs now writes the runtime baseline ID into every future browser receipt.",
+    "contract checks distinguish lineage receipt validity from current-candidate fresh-rerun truth.",
+    "INDEPENDENT_BROWSER_REVALIDATION.json explicitly records current candidate and fresh-rerun status."
+  ],
+  "runtimeApplicationCodeChanged": false,
+  "stackStatus": "STACK_NOT_FROZEN",
+  "ownerAccepted": false
+}

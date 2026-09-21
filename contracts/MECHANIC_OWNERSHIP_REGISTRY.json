@@ -1,0 +1,554 @@
+{
+  "schemaVersion": 2,
+  "baselineId": "CEP-FR-E18-ANALYTICAL-COMPARE-COMPLETION",
+  "statuses": [
+    "FOUNDATION_OWNER",
+    "FAMILY_OWNER",
+    "DOMAIN_ADAPTER",
+    "SURFACE_COMPOSITION",
+    "APPROVED_DEVIATION",
+    "POSSIBLE_DUPLICATE_SHARED_MECHANIC"
+  ],
+  "records": [
+    {
+      "mechanicId": "workspace.panes",
+      "status": "FOUNDATION_OWNER",
+      "familyOwner": "WorkspacePaneLayoutOwner",
+      "semanticCommandOwner": "foundation.workspace",
+      "canonicalStateOwner": "ScopedPreferences preferred state + PaneLayoutController effective projection",
+      "applicableFamilies": [
+        "Structured",
+        "SpatialRelation",
+        "OperationalTerminal"
+      ],
+      "requiredAdapter": null,
+      "approvedDeviations": [
+        "DEV-LIBRARY-COMPAT-HOST-001"
+      ],
+      "implementation": [
+        "dist/foundation/workspace-host.js"
+      ]
+    },
+    {
+      "mechanicId": "workspace.transient-focus",
+      "status": "FOUNDATION_OWNER",
+      "familyOwner": "TransientFocusOwner",
+      "semanticCommandOwner": "WorkspaceFoundation",
+      "canonicalStateOwner": "TransientFocusOwner",
+      "applicableFamilies": [
+        "Structured",
+        "SpatialRelation",
+        "OperationalTerminal"
+      ],
+      "requiredAdapter": null,
+      "approvedDeviations": [
+        "DEV-LIBRARY-COMPAT-HOST-001"
+      ],
+      "implementation": [
+        "dist/foundation/workspace-host.js",
+        "dist/foundation/workspace.js"
+      ]
+    },
+    {
+      "mechanicId": "workspace.context-inspector",
+      "status": "FOUNDATION_OWNER",
+      "familyOwner": "ContextInspectorHost",
+      "semanticCommandOwner": "ContextInspectorHost host actions only",
+      "canonicalStateOwner": "Domain/family ContextDescriptorProvider payload; host owns presentation lifecycle only",
+      "applicableFamilies": [
+        "Structured",
+        "SpatialRelation",
+        "OperationalTerminal"
+      ],
+      "requiredAdapter": "ContextDescriptorProvider",
+      "approvedDeviations": [
+        "DEV-LIBRARY-COMPAT-HOST-001"
+      ],
+      "implementation": [
+        "dist/foundation/global/context-inspector.js"
+      ]
+    },
+    {
+      "mechanicId": "action.availability",
+      "status": "FOUNDATION_OWNER",
+      "familyOwner": "ActionAvailabilityCore",
+      "semanticCommandOwner": "registered SemanticCommand owner; policy preflight via ActionAvailabilityCore",
+      "canonicalStateOwner": "Derived policy result only; domain canonical state remains adapter-owned",
+      "applicableFamilies": [
+        "Structured",
+        "SpatialRelation",
+        "OperationalTerminal"
+      ],
+      "requiredAdapter": "capability/domain predicate only when declared by policy",
+      "approvedDeviations": [],
+      "implementation": [
+        "dist/foundation/models.js"
+      ]
+    },
+    {
+      "mechanicId": "structured.document",
+      "status": "FAMILY_OWNER",
+      "familyOwner": "StructuredDocumentDomainAdapter + StructuredSurfaceHost",
+      "semanticCommandOwner": "StructuredDocumentDomainAdapter",
+      "canonicalStateOwner": "StructuredDocumentDomainAdapter working document",
+      "applicableFamilies": [
+        "Structured"
+      ],
+      "requiredAdapter": "StructuredDocumentDomainAdapter",
+      "approvedDeviations": [
+        "DEV-LIBRARY-COMPAT-HOST-001"
+      ],
+      "implementation": [
+        "dist/foundation/structured.js",
+        "dist/foundation/workspace-host.js"
+      ]
+    },
+    {
+      "mechanicId": "structured.selection-clipboard",
+      "status": "FAMILY_OWNER",
+      "familyOwner": "StructuredSelectionModel + StructuredClipboardContract",
+      "semanticCommandOwner": "StructuredDocumentDomainAdapter (document.copy/document.cut/document.paste)",
+      "canonicalStateOwner": "StructuredDocumentDomainAdapter working document; selection is family-local derived/session state",
+      "applicableFamilies": [
+        "Structured"
+      ],
+      "requiredAdapter": "StructuredDocumentDomainAdapter",
+      "approvedDeviations": [
+        "DEV-LIBRARY-COMPAT-HOST-001"
+      ],
+      "implementation": [
+        "dist/foundation/structured.js"
+      ]
+    },
+    {
+      "mechanicId": "spatial.selection-actions",
+      "status": "FAMILY_OWNER",
+      "familyOwner": "RelationInteraction consuming ActionAvailabilityCore",
+      "semanticCommandOwner": "RelationInteractionOwner",
+      "canonicalStateOwner": "SpatialModel.selection + RelationDomainAdapter; eligibility derived by ActionAvailabilityCore",
+      "applicableFamilies": [
+        "SpatialRelation"
+      ],
+      "requiredAdapter": "RelationDomainAdapter",
+      "approvedDeviations": [],
+      "implementation": [
+        "dist/foundation/relations.js"
+      ]
+    },
+    {
+      "mechanicId": "relation.edit",
+      "status": "FAMILY_OWNER",
+      "familyOwner": "RelationInteractionOwner",
+      "semanticCommandOwner": "relation.edit / spatial.relation.commit",
+      "canonicalStateOwner": "RelationDomainAdapter",
+      "applicableFamilies": [
+        "SpatialRelation"
+      ],
+      "requiredAdapter": "RelationDomainAdapter",
+      "approvedDeviations": [],
+      "implementation": [
+        "dist/foundation/relations.js"
+      ]
+    },
+    {
+      "mechanicId": "spatial.input",
+      "status": "FAMILY_OWNER",
+      "familyOwner": "SpatialInteractionKernel + SpatialSelectionNavigationKernel",
+      "semanticCommandOwner": "SpatialInteractionKernel",
+      "canonicalStateOwner": "SpatialModel focus/selection/camera/model state",
+      "applicableFamilies": [
+        "SpatialRelation"
+      ],
+      "requiredAdapter": null,
+      "approvedDeviations": [],
+      "implementation": [
+        "dist/foundation/spatial.js"
+      ]
+    },
+    {
+      "mechanicId": "operational.sessions",
+      "status": "BOUNDED_BELOW_M6",
+      "familyOwner": "OperationalSessionOwner",
+      "semanticCommandOwner": "RuntimeAdapter provider owns input meaning; session owner owns presentation routes only",
+      "canonicalStateOwner": "RuntimeAdapter owns causal session/device/output truth; OperationalSessionOwner owns presentation/attachment identity",
+      "applicableFamilies": [
+        "OperationalTerminal"
+      ],
+      "requiredAdapter": "RuntimeAdapter",
+      "approvedDeviations": [],
+      "implementation": [
+        "dist/foundation/operational/session-owner.js",
+        "dist/foundation/operational/terminal-host.js",
+        "dist/foundation/contracts/runtime-adapter.js"
+      ],
+      "maturityBoundary": "SECOND_REAL_PROVIDER_NOT_PROVEN"
+    },
+    {
+      "mechanicId": "runtime.internal-simulation",
+      "status": "DOMAIN_ADAPTER",
+      "familyOwner": "InternalSimulationAdapter",
+      "semanticCommandOwner": "InternalSimulationAdapter",
+      "canonicalStateOwner": "SimulatedDeviceEngine",
+      "applicableFamilies": [
+        "OperationalTerminal"
+      ],
+      "requiredAdapter": "RuntimeAdapter",
+      "approvedDeviations": [],
+      "implementation": [
+        "dist/adapters/simulation.js"
+      ]
+    },
+    {
+      "mechanicId": "global.input-keymap",
+      "status": "FOUNDATION_OWNER",
+      "familyOwner": "GlobalInputKeymapOwner",
+      "semanticCommandOwner": "SemanticCommandBus for dispatched global commands",
+      "canonicalStateOwner": "GlobalInputKeymapOwner transient input context/receipts only",
+      "applicableFamilies": [
+        "Structured",
+        "SpatialRelation",
+        "OperationalTerminal"
+      ],
+      "requiredAdapter": "family input-ownership descriptor only",
+      "approvedDeviations": [
+        "DEV-LIBRARY-COMPAT-HOST-001"
+      ],
+      "implementation": [
+        "dist/foundation/global/input-keymap.js",
+        "dist/foundation/global/region-cycle.js"
+      ]
+    },
+    {
+      "mechanicId": "global.accessibility-feedback",
+      "status": "FOUNDATION_OWNER",
+      "familyOwner": "AccessibilityFeedbackOwner",
+      "semanticCommandOwner": "supplying command/domain owner; feedback only projects",
+      "canonicalStateOwner": "supplying source truth; AccessibilityFeedbackOwner owns no domain truth",
+      "applicableFamilies": [
+        "Structured",
+        "SpatialRelation",
+        "OperationalTerminal"
+      ],
+      "requiredAdapter": null,
+      "approvedDeviations": [
+        "DEV-LIBRARY-COMPAT-HOST-001"
+      ],
+      "implementation": [
+        "dist/foundation/global/feedback.js"
+      ]
+    },
+    {
+      "mechanicId": "workspace.bottom-deep-work",
+      "status": "FOUNDATION_OWNER",
+      "familyOwner": "BottomDeepWorkOwner",
+      "semanticCommandOwner": "BottomDeepWorkOwner bounded bottom lifecycle actions",
+      "canonicalStateOwner": "provider-owned content; owner holds presentation lifecycle only",
+      "applicableFamilies": [
+        "Structured",
+        "OperationalTerminal",
+        "SpatialRelation"
+      ],
+      "requiredAdapter": "BottomDeepWorkProviderContract",
+      "approvedDeviations": [
+        "DEV-LIBRARY-COMPAT-HOST-001"
+      ],
+      "implementation": [
+        "dist/foundation/global/bottom-shelf.js"
+      ]
+    },
+    {
+      "mechanicId": "global.ui-scale",
+      "status": "FOUNDATION_OWNER",
+      "familyOwner": "UIScalePolicyOwner",
+      "semanticCommandOwner": "ScopedPreferencesOwner remains preference value/persistence authority",
+      "canonicalStateOwner": "derived chrome token/geometry projection only",
+      "applicableFamilies": [
+        "Structured",
+        "SpatialRelation",
+        "OperationalTerminal"
+      ],
+      "requiredAdapter": null,
+      "approvedDeviations": [],
+      "implementation": [
+        "dist/foundation/global/preferences/ui-scale.js",
+        "dist/foundation/global/tokens/scale.css"
+      ]
+    },
+    {
+      "mechanicId": "structured.input-keymap",
+      "status": "FAMILY_OWNER",
+      "familyOwner": "StructuredInputKeymapOwner",
+      "semanticCommandOwner": "StructuredInputKeymapOwner delegates commands through SemanticCommandBus/accepted Structured owners",
+      "canonicalStateOwner": "StructuredInputKeymapOwner transient caret/composition only; StructuredSelectionKernel/document owners retain canonical state",
+      "applicableFamilies": [
+        "Structured"
+      ],
+      "requiredAdapter": "StructuredDocumentDomainAdapter",
+      "approvedDeviations": [
+        "DEV-LIBRARY-COMPAT-HOST-001"
+      ],
+      "implementation": [
+        "dist/foundation/structured/input-keymap.js",
+        "dist/foundation/structured/caret-bridge.js",
+        "dist/foundation/structured/shorthand.js"
+      ]
+    },
+    {
+      "mechanicId": "structured.action-descriptors",
+      "status": "FAMILY_OWNER",
+      "familyOwner": "StructuredActionDescriptorOwner",
+      "semanticCommandOwner": "StructuredCommandAvailabilityOwner + StructuredMutationKernel/transaction owner for execution",
+      "canonicalStateOwner": "Derived descriptors only",
+      "applicableFamilies": [
+        "Structured"
+      ],
+      "requiredAdapter": "StructuredDocumentDomainAdapter",
+      "approvedDeviations": [
+        "DEV-LIBRARY-COMPAT-HOST-001"
+      ],
+      "implementation": [
+        "dist/foundation/structured/action-descriptors.js",
+        "dist/foundation/structured/insertion-targets.js"
+      ]
+    },
+    {
+      "mechanicId": "global.input-direction",
+      "status": "FOUNDATION_OWNER",
+      "familyOwner": "InputDirectionResolver",
+      "semanticCommandOwner": "none",
+      "canonicalStateOwner": "Transient input-direction hint only; persisted direction stays content-owned",
+      "applicableFamilies": [
+        "Structured",
+        "Notes"
+      ],
+      "requiredAdapter": "optional PlatformInputDirectionBridge",
+      "approvedDeviations": [],
+      "implementation": [
+        "dist/foundation/global/input-direction.js",
+        "dist/foundation/contracts/platform-input-direction-bridge.js"
+      ]
+    },
+    {
+      "mechanicId": "structured.rich-content",
+      "status": "FAMILY_OWNER",
+      "familyOwner": "StructuredRichContentOwner",
+      "semanticCommandOwner": "Structured family commands; ClipboardTrust remains clipboard owner",
+      "canonicalStateOwner": "Derived safe rich/code/bidi representation only",
+      "applicableFamilies": [
+        "Structured"
+      ],
+      "requiredAdapter": "StructuredDocumentDomainAdapter",
+      "approvedDeviations": [
+        "DEV-LIBRARY-COMPAT-HOST-001"
+      ],
+      "implementation": [
+        "dist/foundation/structured/rich-content.js",
+        "dist/foundation/structured/code-block.js",
+        "dist/foundation/structured/sanitization-policy.js",
+        "dist/foundation/structured/direction-adapter.js"
+      ]
+    },
+    {
+      "mechanicId": "structured.drag-drop",
+      "status": "FAMILY_OWNER",
+      "familyOwner": "StructuredDragDropOwner",
+      "semanticCommandOwner": "StructuredMutationKernel + StructuredTransactionHistoryRecoveryOwner for actual reorder",
+      "canonicalStateOwner": "StructuredDragDropOwner transient intent/target; selection/document truth external",
+      "applicableFamilies": [
+        "Structured"
+      ],
+      "requiredAdapter": "StructuredDocumentDomainAdapter + thin DOM geometry bridge",
+      "approvedDeviations": [
+        "DEV-LIBRARY-COMPAT-HOST-001"
+      ],
+      "implementation": [
+        "dist/foundation/structured/drag-drop.js",
+        "dist/foundation/structured/drop-target.js"
+      ]
+    },
+    {
+      "mechanicId": "global.settings-center",
+      "status": "FOUNDATION_OWNER",
+      "familyOwner": "SettingsCenterOwner",
+      "semanticCommandOwner": "SemanticCommandBus; ScopedPreferencesOwner owns values/persistence",
+      "canonicalStateOwner": "Settings presentation/disclosure/search only",
+      "applicableFamilies": [
+        "Structured",
+        "SpatialRelation",
+        "OperationalTerminal"
+      ],
+      "requiredAdapter": "profile/family descriptor applicability",
+      "approvedDeviations": [],
+      "implementation": [
+        "dist/foundation/global/settings/center.js",
+        "dist/foundation/global/settings/sections.js",
+        "dist/foundation/global/settings/search.js"
+      ]
+    },
+    {
+      "mechanicId": "global.epistemic-state-contract",
+      "status": "CONTRACT_M4",
+      "familyOwner": "EpistemicStateContract",
+      "semanticCommandOwner": "none",
+      "canonicalStateOwner": "Domain supplies truth; contract validates vocabulary/contradictions only",
+      "applicableFamilies": [
+        "Structured",
+        "SpatialRelation",
+        "OperationalTerminal"
+      ],
+      "requiredAdapter": "domain epistemic descriptor source",
+      "approvedDeviations": [],
+      "implementation": [
+        "dist/foundation/contracts/epistemic-state.js"
+      ]
+    },
+    {
+      "mechanicId": "global.confirmation-safety",
+      "status": "FOUNDATION_OWNER",
+      "familyOwner": "ConfirmationSafetyHost",
+      "semanticCommandOwner": "Supplying family/domain action descriptor owns destructive-risk meaning",
+      "canonicalStateOwner": "Transient confirmation presentation only",
+      "applicableFamilies": [
+        "Structured",
+        "OperationalTerminal"
+      ],
+      "requiredAdapter": "explicit destructive-risk descriptor",
+      "approvedDeviations": [],
+      "implementation": [
+        "dist/foundation/global/confirmation-host.js"
+      ]
+    },
+    {
+      "mechanicId": "structured.surface-host",
+      "status": "FAMILY_HOST",
+      "familyOwner": "StructuredSurfaceHost",
+      "semanticCommandOwner": "SemanticCommandBus + accepted Structured semantic owners",
+      "canonicalStateOwner": "StructuredDocumentDomainAdapter + accepted subordinate Structured owners; host owns no canonical document truth",
+      "applicableFamilies": [
+        "Structured"
+      ],
+      "requiredAdapter": "StructuredDocumentDomainAdapter",
+      "approvedDeviations": [
+        "DEV-LIBRARY-COMPAT-HOST-001"
+      ],
+      "implementation": [
+        "dist/foundation/structured/surface-host.js",
+        "dist/foundation/structured/block-renderer.js",
+        "dist/foundation/structured/presentation-bridge.js"
+      ]
+    },
+    {
+      "mechanicId": "structured.navigation-descriptors",
+      "status": "FAMILY_DESCRIPTOR_OWNER",
+      "familyOwner": "StructuredNavigationDescriptorOwner",
+      "semanticCommandOwner": "none; presentation/descriptor derivation only",
+      "canonicalStateOwner": "Derived descriptor truth only; canonical document/tree/identity remain supplying Structured owners",
+      "applicableFamilies": [
+        "Structured"
+      ],
+      "requiredAdapter": "StructuredDocumentDomainAdapter",
+      "approvedDeviations": [
+        "DEV-LIBRARY-COMPAT-HOST-001"
+      ],
+      "implementation": [
+        "dist/foundation/structured/read-inspection.js",
+        "dist/foundation/structured/outline-descriptor.js"
+      ]
+    },
+    {
+      "mechanicId": "notes.window-lifecycle",
+      "status": "NOTES_FAMILY_OWNER",
+      "familyOwner": "StickyNoteWindowOwner",
+      "semanticCommandOwner": "StickyNoteWindowOwner bounded note-window actions; global key semantics remain GlobalInputKeymapOwner",
+      "canonicalStateOwner": "StickyNoteWindowOwner presentation/window state; WindowMotion generic geometry mechanic",
+      "applicableFamilies": [
+        "Notes"
+      ],
+      "requiredAdapter": null,
+      "approvedDeviations": [
+        "DEV-LIBRARY-COMPAT-HOST-001"
+      ],
+      "implementation": [
+        "dist/foundation/notes/sticky-note-window.js",
+        "dist/foundation/window-motion.js"
+      ]
+    },
+    {
+      "mechanicId": "notes.binding",
+      "status": "NOTES_FAMILY_OWNER",
+      "familyOwner": "NoteBindingAdapter",
+      "semanticCommandOwner": "none; canonical descriptor/provenance owner",
+      "canonicalStateOwner": "NoteBindingAdapter",
+      "applicableFamilies": [
+        "Notes"
+      ],
+      "requiredAdapter": "per-domain note binding input adapter",
+      "approvedDeviations": [],
+      "implementation": [
+        "dist/foundation/notes/note-binding.js",
+        "dist/adapters/note-binding-domains.js"
+      ]
+    },
+    {
+      "mechanicId": "notes.structured-content",
+      "status": "NOTES_FAMILY_ADAPTER",
+      "familyOwner": "StructuredNoteContentAdapter consuming StructuredSurfaceHost + StructuredDocumentDomainAdapter",
+      "semanticCommandOwner": "accepted Structured semantic owners through same SemanticCommandBus routes",
+      "canonicalStateOwner": "StructuredDocumentDomainAdapter working document/history; final adapter only binds note identity/composition",
+      "applicableFamilies": [
+        "Notes",
+        "Structured"
+      ],
+      "requiredAdapter": "NoteBindingAdapter + StructuredDocumentDomainAdapter",
+      "approvedDeviations": [
+        "DEV-LIBRARY-COMPAT-HOST-001"
+      ],
+      "implementation": [
+        "dist/adapters/structured-note-content.js",
+        "dist/foundation/structured.js",
+        "dist/foundation/structured/surface-host.js"
+      ]
+    },
+    {
+      "mechanicId": "notes.library-runtime-composition",
+      "status": "INTEGRATION_GLUE",
+      "familyOwner": "NONE_SEMANTIC",
+      "semanticCommandOwner": "delegated to NoteBindingAdapter + StickyNoteWindowOwner + StructuredNoteContentAdapter",
+      "canonicalStateOwner": "accepted Wave6 owners; donor mirrors projection only",
+      "applicableFamilies": [
+        "Notes",
+        "Structured"
+      ],
+      "requiredAdapter": "Wave6 Notes owner graph",
+      "approvedDeviations": [
+        "DEV-LIBRARY-COMPAT-HOST-001"
+      ],
+      "implementation": [
+        "dist/adapters/library-note-runtime-composition.js",
+        "dist/foundation/accepted-runtime.js",
+        "dist/main.js"
+      ]
+    },
+    {
+      "mechanicId": "analytical.compare",
+      "status": "FAMILY_OWNER",
+      "familyOwner": "AnalyticalCompareOwner + AnalyticalCompareHost",
+      "semanticCore": "SC-032",
+      "semanticCommandOwner": "AnalyticalCompareOwner for compare/session/filter/inspection mechanics only",
+      "canonicalStateOwner": "Provider/domain adapters own canonical records; AnalyticalCompareOwner owns exact pinned derived compare/session result only",
+      "applicableFamilies": [
+        "AnalyticalCompare"
+      ],
+      "requiredAdapter": "AnalysisProviderContract",
+      "approvedDeviations": [],
+      "implementation": [
+        "dist/foundation/contracts/analysis-provider.js",
+        "dist/foundation/analytical/compare.js",
+        "dist/foundation/analytical/compare-host.js",
+        "dist/adapters/analytical/rq-compare-provider.js",
+        "dist/adapters/analytical/results-compare-provider.js"
+      ]
+    }
+  ],
+  "duplicateScan": "tools/check-duplicate-mechanics.mjs"
+}

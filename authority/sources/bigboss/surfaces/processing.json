@@ -1,0 +1,251 @@
+{
+  "objects": {
+    "ProcessingRequest": "requestId + inputDigest + invocation identity",
+    "Job": "jobId + requestId + lifecycleVersion",
+    "Attempt": "attemptId + jobId + number + lease + outcome",
+    "CancellationRequest": "requestId + provider ACK state"
+  },
+  "state_dimensions": {
+    "job": [
+      "PENDING",
+      "RUNNING",
+      "RETRY_WAIT",
+      "TIMED_OUT",
+      "CANCEL_REQUESTED",
+      "CANCELLED",
+      "COMPLETED",
+      "FAILED"
+    ],
+    "attempt": [
+      "QUEUED",
+      "LEASED",
+      "RUNNING",
+      "FAILED",
+      "SUCCEEDED",
+      "TIMED_OUT"
+    ],
+    "validationHandoff": [
+      "NONE",
+      "PENDING",
+      "ACKNOWLEDGED",
+      "FAILED"
+    ]
+  },
+  "read_model": "ProcessingReadService joins request/job/attempt and outbox status; existing ProcessingRun transitionTo is narrower and needs an adapter/schema upgrade.",
+  "persistence": {
+    "ProcessingRequest": "Platform.ProcessingRequest",
+    "Job": "Platform.ProcessingRun adapted",
+    "Attempt": "Platform.ProcessingAttempt",
+    "CancellationRequest": "Platform.OperationRequest"
+  },
+  "invariants": [
+    "cancel_requested differs from cancelled",
+    "Retry creates new Attempt, not overwriting failed attempt",
+    "Input/correlation/request/job/attempt IDs distinct",
+    "Validation handoff waits for actual consumer receipt"
+  ],
+  "epistemic": {
+    "empty": "Successful query without jobs is empty, not worker proof.",
+    "stale": "Worker lease expired: display timed_out/reconciling observation without assuming process exit.",
+    "unavailable": "Queue backend unavailable leaves job status last-known and stale.",
+    "error": "Idempotency collision or retry ceiling produces explicit reason and no new attempt."
+  },
+  "operations": [
+    {
+      "name": "inspect",
+      "family": "NavigationCommand",
+      "payload": "routeId:string jobRef:ref",
+      "before": "job any",
+      "event": "inspect request/job/attempt lineage",
+      "after": "attempt history and correlation visible",
+      "guard": "Read authorization",
+      "oracle": "Two retries display three distinct attempts",
+      "persistence": "Platform.ProcessingReadProjection",
+      "method": "GET",
+      "gate": null,
+      "command_id": "processing.inspect",
+      "surface_id": "processing",
+      "semantic_owner": "W05ProcessingDomain",
+      "focus_after": "Processing active object/control; detached target→processing-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Idempotency collision or retry ceiling produces explicit reason and no new attempt.",
+        "503_timeout": "Queue backend unavailable leaves job status last-known and stale."
+      },
+      "test_id": "TEST-processing.inspect",
+      "evidence_id": "EVID-processing.inspect",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "retry",
+      "family": "OperationalCommand",
+      "payload": "jobRef:ref attemptRef:ref action:enum:retry expectedState:enum:FAILED|TIMED_OUT|RETRY_WAIT correlationId:string reason:string",
+      "before": "job=FAILED|TIMED_OUT|RETRY_WAIT",
+      "event": "schedule new attempt after backoff",
+      "after": "job=RETRY_WAIT then RUNNING on new lease",
+      "guard": "Retry ceiling/backoff and same input digest; idempotent request",
+      "oracle": "Repeated retry key yields one attempt; failed attempt immutable",
+      "persistence": "Platform.ProcessingAttempt",
+      "method": "POST",
+      "gate": "SCHEMA_DEPENDENCY",
+      "command_id": "processing.retry",
+      "surface_id": "processing",
+      "semantic_owner": "W05ProcessingDomain",
+      "focus_after": "Processing active object/control; detached target→processing-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Idempotency collision or retry ceiling produces explicit reason and no new attempt.",
+        "503_timeout": "Queue backend unavailable leaves job status last-known and stale."
+      },
+      "test_id": "TEST-processing.retry",
+      "evidence_id": "EVID-processing.retry",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "requestCancel",
+      "family": "OperationalCommand",
+      "payload": "jobRef:ref attemptRef:ref action:enum:requestCancel expectedState:enum:PENDING|RUNNING|RETRY_WAIT correlationId:string reason:string",
+      "before": "job active",
+      "event": "persist cancellation request",
+      "after": "job=CANCEL_REQUESTED; CANCELLED only after ACK or proven no running lease",
+      "guard": "Server/provider confirms actual stop semantics",
+      "oracle": "No ACK means no cancelled_at claim",
+      "persistence": "Platform.OperationRequest",
+      "method": "POST",
+      "gate": "SCHEMA_DEPENDENCY",
+      "command_id": "processing.requestCancel",
+      "surface_id": "processing",
+      "semantic_owner": "W05ProcessingDomain",
+      "focus_after": "Processing active object/control; detached target→processing-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Idempotency collision or retry ceiling produces explicit reason and no new attempt.",
+        "503_timeout": "Queue backend unavailable leaves job status last-known and stale."
+      },
+      "test_id": "TEST-processing.requestCancel",
+      "evidence_id": "EVID-processing.requestCancel",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "validationHandoff",
+      "family": "OperationalCommand",
+      "payload": "jobRef:ref artifactRef:ref action:enum:requestValidation expectedState:enum:COMPLETED correlationId:string",
+      "before": "job=COMPLETED",
+      "event": "emit transactional outbox request",
+      "after": "validationHandoff=PENDING then ACKNOWLEDGED",
+      "guard": "Artifact digest bound and consumer deduplicates",
+      "oracle": "Consumer outage retains pending outbox and never says technically valid",
+      "persistence": "Platform.Outbox",
+      "method": "POST",
+      "gate": null,
+      "command_id": "processing.validationHandoff",
+      "surface_id": "processing",
+      "semantic_owner": "W05ProcessingDomain",
+      "focus_after": "Processing active object/control; detached target→processing-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Idempotency collision or retry ceiling produces explicit reason and no new attempt.",
+        "503_timeout": "Queue backend unavailable leaves job status last-known and stale."
+      },
+      "test_id": "TEST-processing.validationHandoff",
+      "evidence_id": "EVID-processing.validationHandoff",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "processing",
+  "title": "Processing",
+  "workspace": "W05",
+  "semantic_owner": "W05ProcessingDomain",
+  "archetype": "PipelineLifecycleWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W05-PRC-001",
+    "CAP-W05-PRC-002",
+    "CAP-W05-PRC-003",
+    "CAP-W05-PRC-004",
+    "CAP-W05-PRC-005",
+    "CAP-W05-PRC-006",
+    "CAP-W05-PRC-007",
+    "CAP-W05-PRC-008",
+    "CAP-W05-PRC-009",
+    "CAP-W05-PRC-010"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W05-PRC-001",
+        "CAP-W05-PRC-002",
+        "CAP-W05-PRC-003",
+        "CAP-W05-PRC-004",
+        "CAP-W05-PRC-005",
+        "CAP-W05-PRC-006",
+        "CAP-W05-PRC-007",
+        "CAP-W05-PRC-008",
+        "CAP-W05-PRC-009",
+        "CAP-W05-PRC-010"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Processing",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-023",
+    "NC-024",
+    "NC-025",
+    "NC-026"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore"
+  ],
+  "adapter": "W05ProcessingDomainAdapter",
+  "regions": {
+    "TOP": "Processing exact identity, local mode, command routes",
+    "LEFT": "typed ProcessingRequest collection/navigation",
+    "CENTER": "PipelineLifecycleWorkbench primary task",
+    "RIGHT": "one selected ProcessingRequest identity/context inspector",
+    "BOTTOM": "Deep Processing diagnostics/history"
+  },
+  "command_ids": [
+    "processing.inspect",
+    "processing.retry",
+    "processing.requestCancel",
+    "processing.validationHandoff"
+  ]
+}

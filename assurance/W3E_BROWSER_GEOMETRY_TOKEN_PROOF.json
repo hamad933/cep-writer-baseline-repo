@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "mission": "W3-E-UI-SCALE-POLICY",
+  "status": "PASS",
+  "browser": "Python Playwright set_content + system Chromium; token projection from compiled UIScalePolicyOwner",
+  "fixture": "tools/w3e-ui-scale-browser-fixture.html",
+  "scales": [
+    0.8,
+    1.0,
+    2.0
+  ],
+  "runs": [
+    {
+      "status": "PASS",
+      "scale": 0.8,
+      "owner": "UIScalePolicyOwner",
+      "consumerOwners": [
+        "UIScalePolicyOwner",
+        "UIScalePolicyOwner"
+      ],
+      "tokenEqual": true,
+      "geometry": {
+        "library": {
+          "toolbarHeight": 35.1875,
+          "controlHeight": 25.59375,
+          "paneWidth": 243.1875,
+          "fontSize": 11.2
+        },
+        "visualize": {
+          "toolbarHeight": 35.1875,
+          "controlHeight": 25.59375,
+          "paneWidth": 243.1875,
+          "fontSize": 11.2
+        },
+        "visualViewportScale": 1,
+        "cssZoom": "1"
+      },
+      "panes": {
+        "responsiveBand": "wide",
+        "leftPreferred": "open",
+        "leftEffective": "open",
+        "baseWidth": 304,
+        "scaledWidth": 243.2
+      },
+      "exclusions": {
+        "documentZoom": 1,
+        "spatialCameraZoom": 1,
+        "density": "comfortable",
+        "browserVisualViewportScale": 1,
+        "cssZoom": "1"
+      },
+      "cssVariables": {
+        "--cep-ui-scale": "0.8",
+        "--cep-ui-control-height": "25.6px",
+        "--cep-ui-toolbar-height": "35.2px",
+        "--cep-ui-gap": "6.4px",
+        "--cep-ui-inline-padding": "9.6px",
+        "--cep-ui-block-padding": "8px",
+        "--cep-ui-radius": "6.4px",
+        "--cep-ui-font-size": "11.2px",
+        "--cep-ui-icon-size": "14.4px",
+        "--cep-ui-pane-gutter": "9.6px",
+        "--cep-ui-pane-resize-handle": "4.8px"
+      },
+      "persistenceOwner": "ScopedPreferencesOwner",
+      "screenshot": "assurance/W3E_BROWSER_SCALE_0_8.png",
+      "screenshotBytes": 131711
+    },
+    {
+      "status": "PASS",
+      "scale": 1,
+      "owner": "UIScalePolicyOwner",
+      "consumerOwners": [
+        "UIScalePolicyOwner",
+        "UIScalePolicyOwner"
+      ],
+      "tokenEqual": true,
+      "geometry": {
+        "library": {
+          "toolbarHeight": 44,
+          "controlHeight": 32,
+          "paneWidth": 304,
+          "fontSize": 14
+        },
+        "visualize": {
+          "toolbarHeight": 44,
+          "controlHeight": 32,
+          "paneWidth": 304,
+          "fontSize": 14
+        },
+        "visualViewportScale": 1,
+        "cssZoom": "1"
+      },
+      "panes": {
+        "responsiveBand": "wide",
+        "leftPreferred": "open",
+        "leftEffective": "open",
+        "baseWidth": 304,
+        "scaledWidth": 304
+      },
+      "exclusions": {
+        "documentZoom": 1,
+        "spatialCameraZoom": 1,
+        "density": "comfortable",
+        "browserVisualViewportScale": 1,
+        "cssZoom": "1"
+      },
+      "cssVariables": {
+        "--cep-ui-scale": "1",
+        "--cep-ui-control-height": "32px",
+        "--cep-ui-toolbar-height": "44px",
+        "--cep-ui-gap": "8px",
+        "--cep-ui-inline-padding": "12px",
+        "--cep-ui-block-padding": "10px",
+        "--cep-ui-radius": "8px",
+        "--cep-ui-font-size": "14px",
+        "--cep-ui-icon-size": "18px",
+        "--cep-ui-pane-gutter": "12px",
+        "--cep-ui-pane-resize-handle": "6px"
+      },
+      "persistenceOwner": "ScopedPreferencesOwner",
+      "screenshot": "assurance/W3E_BROWSER_SCALE_1_0.png",
+      "screenshotBytes": 134940
+    },
+    {
+      "status": "PASS",
+      "scale": 2,
+      "owner": "UIScalePolicyOwner",
+      "consumerOwners": [
+        "UIScalePolicyOwner",
+        "UIScalePolicyOwner"
+      ],
+      "tokenEqual": true,
+      "geometry": {
+        "library": {
+          "toolbarHeight": 88,
+          "controlHeight": 64,
+          "paneWidth": 608,
+          "fontSize": 28
+        },
+        "visualize": {
+          "toolbarHeight": 88,
+          "controlHeight": 64,
+          "paneWidth": 608,
+          "fontSize": 28
+        },
+        "visualViewportScale": 1,
+        "cssZoom": "1"
+      },
+      "panes": {
+        "responsiveBand": "wide",
+        "leftPreferred": "open",
+        "leftEffective": "open",
+        "baseWidth": 304,
+        "scaledWidth": 608
+      },
+      "exclusions": {
+        "documentZoom": 1,
+        "spatialCameraZoom": 1,
+        "density": "comfortable",
+        "browserVisualViewportScale": 1,
+        "cssZoom": "1"
+      },
+      "cssVariables": {
+        "--cep-ui-scale": "2",
+        "--cep-ui-control-height": "64px",
+        "--cep-ui-toolbar-height": "88px",
+        "--cep-ui-gap": "16px",
+        "--cep-ui-inline-padding": "24px",
+        "--cep-ui-block-padding": "20px",
+        "--cep-ui-radius": "16px",
+        "--cep-ui-font-size": "28px",
+        "--cep-ui-icon-size": "36px",
+        "--cep-ui-pane-gutter": "24px",
+        "--cep-ui-pane-resize-handle": "12px"
+      },
+      "persistenceOwner": "ScopedPreferencesOwner",
+      "screenshot": "assurance/W3E_BROWSER_SCALE_2_0.png",
+      "screenshotBytes": 168127
+    }
+  ],
+  "deterministicGeometry": true,
+  "sharedOwner": true,
+  "excludedStateStable": true,
+  "responsiveSemanticsStable": true
+}

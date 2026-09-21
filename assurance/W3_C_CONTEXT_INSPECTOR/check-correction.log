@@ -1,0 +1,1514 @@
+
+> cep-foundation-forge@0.2.1c check
+> node tools/check-build-authority.mjs && node tools/check-duplicate-mechanics.mjs && node tools/test-writer-scaffold.mjs && python3 tools/check-w03-semantic-ownership.py && node tools/check-authority-intake.mjs && node tools/check-deferred-boundary.mjs && node tools/check-contracts.mjs && node tools/vs05-read-mode-matrix.mjs && node tools/check-vs05-command-ownership.mjs
+
+{
+  "pass": true,
+  "authority": "stack/native-typescript -> dist + dist-ts",
+  "canonicalSourceHashBefore": "f8a861f31fe89b3ebb2810523b1ccdf37f9932134eb1666130860afca223412a",
+  "canonicalSourceHashAfterBuildRuntime": "f8a861f31fe89b3ebb2810523b1ccdf37f9932134eb1666130860afca223412a",
+  "canonicalSourceHashAfterStackProof": "f8a861f31fe89b3ebb2810523b1ccdf37f9932134eb1666130860afca223412a",
+  "canonicalSourceFiles": 42,
+  "generatedJsInventory": {
+    "expected": 42,
+    "dist": 42,
+    "distTs": 42,
+    "missingFromDist": [],
+    "extraInDist": [],
+    "missingFromDistTs": [],
+    "extraInDistTs": []
+  },
+  "inspectedPackageCommands": [
+    "build:runtime",
+    "test",
+    "check",
+    "browser:test"
+  ],
+  "referencedTools": [
+    "tools/browser-conformance.mjs",
+    "tools/build-runtime.mjs",
+    "tools/check-authority-intake.mjs",
+    "tools/check-build-authority.mjs",
+    "tools/check-contracts.mjs",
+    "tools/check-deferred-boundary.mjs",
+    "tools/check-duplicate-mechanics.mjs",
+    "tools/check-vs05-command-ownership.mjs",
+    "tools/check-w03-semantic-ownership.py",
+    "tools/stack-proof.mjs",
+    "tools/test-models.mjs",
+    "tools/test-writer-scaffold.mjs",
+    "tools/vs05-read-mode-matrix.mjs"
+  ],
+  "suspiciousCanonicalWriters": [],
+  "buildRuntimeOutput": "{\n  \"pass\": true,\n  \"authority\": \"CANONICAL_SOURCE_TO_GENERATED_ONLY\",\n  \"source\": \"stack/native-typescript\",\n  \"destination\": \"dist\",\n  \"written\": 42,\n  \"removedStale\": 0\n}",
+  "stackProofOutput": "{\"parity\":true,\"source\":\"stack/native-typescript\",\"generated\":[\"dist\",\"dist-ts\"],\"reverseGeneratedToSourceWrites\":false,\"js_tests\":{\"generatedTree\":\"dist\",\"runtime_dependencies\":0,\"build_steps\":1,\"model_pass\":177,\"model_fail\":0,\"build\":{\"pass\":true,\"authority\":\"CANONICAL_SOURCE_TO_GENERATED_ONLY\",\"source\":\"stack/native-typescript\",\"destination\":\"dist\",\"written\":42,\"removedStale\":0}},\"ts_tests\":{\"generatedTree\":\"dist-ts\",\"runtime_dependencies\":0,\"development_tool\":\"Node built-in stripTypeScriptTypes\",\"build_steps\":1,\"type_checking\":\"NOT_AVAILABLE_NOT_CLAIMED\",\"static_types\":\"Canonical TypeScript source; proof measures erasable-syntax generation parity only.\",\"model_pass\":177,\"model_fail\":0,\"emit_ms\":88.92907600000001,\"build\":{\"pass\":true,\"authority\":\"CANONICAL_SOURCE_TO_GENERATED_ONLY\",\"source\":\"stack/native-typescript\",\"destination\":\"dist-ts\",\"written\":42,\"removedStale\":0}},\"files\":42}"
+}
+{
+  "schemaVersion": 4,
+  "status": "PASS",
+  "filesScanned": 41,
+  "rules": [
+    {
+      "mechanicId": "relation.edit",
+      "approvedOwners": [
+        "foundation/relations.js"
+      ]
+    },
+    {
+      "mechanicId": "action.availability",
+      "approvedOwners": [
+        "foundation/models.js"
+      ]
+    },
+    {
+      "mechanicId": "spatial.context-suppression",
+      "approvedOwners": [
+        "foundation/spatial.js"
+      ]
+    },
+    {
+      "mechanicId": "workspace.panes",
+      "approvedOwners": [
+        "foundation/workspace-host.js"
+      ]
+    },
+    {
+      "mechanicId": "workspace.context-inspector",
+      "approvedOwners": [
+        "foundation/workspace.js"
+      ]
+    },
+    {
+      "mechanicId": "operational.sessions",
+      "approvedOwners": [
+        "foundation/operational.js",
+        "foundation/models.js"
+      ]
+    },
+    {
+      "mechanicId": "structured.document",
+      "approvedOwners": [
+        "foundation/structured.js"
+      ]
+    },
+    {
+      "mechanicId": "structured.mutation",
+      "approvedOwners": [
+        "foundation/structured.js"
+      ]
+    },
+    {
+      "mechanicId": "structured.selection-clipboard",
+      "approvedOwners": [
+        "foundation/structured.js"
+      ]
+    },
+    {
+      "mechanicId": "structured.transaction-history-recovery",
+      "approvedOwners": [
+        "foundation/structured.js"
+      ]
+    }
+  ],
+  "findings": [],
+  "fixtureTests": [
+    {
+      "id": "duplicate.relation",
+      "status": "PASS",
+      "expected": "POSSIBLE_DUPLICATE_SHARED_MECHANIC",
+      "mechanicId": "relation.edit"
+    },
+    {
+      "id": "duplicate.pane",
+      "status": "PASS",
+      "expected": "POSSIBLE_DUPLICATE_SHARED_MECHANIC",
+      "mechanicId": "workspace.panes"
+    },
+    {
+      "id": "duplicate.context",
+      "status": "PASS",
+      "expected": "POSSIBLE_DUPLICATE_SHARED_MECHANIC",
+      "mechanicId": "workspace.context-inspector"
+    },
+    {
+      "id": "duplicate.session",
+      "status": "PASS",
+      "expected": "POSSIBLE_DUPLICATE_SHARED_MECHANIC",
+      "mechanicId": "operational.sessions"
+    },
+    {
+      "id": "duplicate.structured-mutation",
+      "status": "PASS",
+      "expected": "POSSIBLE_DUPLICATE_SHARED_MECHANIC",
+      "mechanicId": "structured.mutation"
+    }
+  ],
+  "ownershipGuards": [
+    {
+      "id": "structured.compat.insert-canonical",
+      "status": "PASS",
+      "method": "insertBlock"
+    },
+    {
+      "id": "structured.compat.remove-canonical",
+      "status": "PASS",
+      "method": "removeBlock"
+    },
+    {
+      "id": "structured.compat.update-nonstructural-only",
+      "status": "PASS",
+      "method": "updateBlock"
+    }
+  ],
+  "ownershipFixture": {
+    "id": "structured.compatibility-bypass-fixture",
+    "status": "PASS",
+    "expected": "ALL_THREE_BYPASSES_DETECTED",
+    "observed": [
+      {
+        "id": "structured.compat.insert-canonical",
+        "status": "FAIL",
+        "method": "insertBlock"
+      },
+      {
+        "id": "structured.compat.remove-canonical",
+        "status": "FAIL",
+        "method": "removeBlock"
+      },
+      {
+        "id": "structured.compat.update-nonstructural-only",
+        "status": "FAIL",
+        "method": "updateBlock"
+      }
+    ]
+  },
+  "historyRecoveryGuards": [
+    {
+      "id": "structured.history.canonical-owner",
+      "status": "PASS"
+    },
+    {
+      "id": "structured.history.adapter-delegates",
+      "status": "PASS"
+    },
+    {
+      "id": "structured.history.no-fake-save",
+      "status": "PASS"
+    },
+    {
+      "id": "structured.history.one-frame-owner",
+      "status": "PASS"
+    },
+    {
+      "id": "library.history.projects-canonical",
+      "status": "PASS"
+    },
+    {
+      "id": "library.recovery-delegates-canonical",
+      "status": "PASS"
+    },
+    {
+      "id": "library.no-direct-working-bump",
+      "status": "PASS"
+    },
+    {
+      "id": "library.save-truth",
+      "status": "PASS"
+    }
+  ],
+  "historyRecoveryNegativeFixture": {
+    "id": "structured.history-recovery-negative-fixture",
+    "status": "PASS",
+    "expected": "ALL_HISTORY_RECOVERY_OWNERSHIP_GUARDS_FAIL",
+    "observed": [
+      {
+        "id": "structured.history.canonical-owner",
+        "status": "FAIL"
+      },
+      {
+        "id": "structured.history.adapter-delegates",
+        "status": "FAIL"
+      },
+      {
+        "id": "structured.history.no-fake-save",
+        "status": "FAIL"
+      },
+      {
+        "id": "structured.history.one-frame-owner",
+        "status": "FAIL"
+      },
+      {
+        "id": "library.history.projects-canonical",
+        "status": "FAIL"
+      },
+      {
+        "id": "library.recovery-delegates-canonical",
+        "status": "FAIL"
+      },
+      {
+        "id": "library.no-direct-working-bump",
+        "status": "FAIL"
+      },
+      {
+        "id": "library.save-truth",
+        "status": "FAIL"
+      }
+    ]
+  },
+  "deferredExceptions": [],
+  "limits": "Deterministic symbol/registration heuristic plus executable Structured mutation and transaction/history/recovery semantic ownership gates with deliberate negative fixtures; novel naming still requires semantic review."
+}
+{
+  "schemaVersion": 3,
+  "pass": 38,
+  "fail": 0,
+  "tests": [
+    {
+      "id": "scaffold.deterministic.learn",
+      "status": "PASS",
+      "detail": "two generations are byte-identical"
+    },
+    {
+      "id": "scaffold.profile.learn",
+      "status": "PASS",
+      "detail": "surface and profile are bound"
+    },
+    {
+      "id": "scaffold.deferred-positive.learn",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "DEF-HV-001",
+          "DEF-HV-004",
+          "DEF-HV-007",
+          "DEF-HV-010"
+        ],
+        "actual": [
+          "DEF-HV-001",
+          "DEF-HV-004",
+          "DEF-HV-007",
+          "DEF-HV-010"
+        ]
+      }
+    },
+    {
+      "id": "scaffold.deferred-metadata.learn",
+      "status": "PASS",
+      "detail": "every emitted deferred obligation has explicit applicability"
+    },
+    {
+      "id": "scaffold.scope.learn",
+      "status": "PASS",
+      "detail": "historical stack cannot be promoted through scaffold"
+    },
+    {
+      "id": "scaffold.deterministic.library",
+      "status": "PASS",
+      "detail": "two generations are byte-identical"
+    },
+    {
+      "id": "scaffold.profile.library",
+      "status": "PASS",
+      "detail": "surface and profile are bound"
+    },
+    {
+      "id": "scaffold.deferred-positive.library",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "DEF-HV-001",
+          "DEF-HV-004",
+          "DEF-HV-007",
+          "DEF-HV-010"
+        ],
+        "actual": [
+          "DEF-HV-001",
+          "DEF-HV-004",
+          "DEF-HV-007",
+          "DEF-HV-010"
+        ]
+      }
+    },
+    {
+      "id": "scaffold.deferred-metadata.library",
+      "status": "PASS",
+      "detail": "every emitted deferred obligation has explicit applicability"
+    },
+    {
+      "id": "scaffold.scope.library",
+      "status": "PASS",
+      "detail": "historical stack cannot be promoted through scaffold"
+    },
+    {
+      "id": "scaffold.deterministic.visualize",
+      "status": "PASS",
+      "detail": "two generations are byte-identical"
+    },
+    {
+      "id": "scaffold.profile.visualize",
+      "status": "PASS",
+      "detail": "surface and profile are bound"
+    },
+    {
+      "id": "scaffold.deferred-positive.visualize",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "DEF-HV-001",
+          "DEF-HV-004",
+          "DEF-HV-007",
+          "DEF-HV-010"
+        ],
+        "actual": [
+          "DEF-HV-001",
+          "DEF-HV-004",
+          "DEF-HV-007",
+          "DEF-HV-010"
+        ]
+      }
+    },
+    {
+      "id": "scaffold.deferred-metadata.visualize",
+      "status": "PASS",
+      "detail": "every emitted deferred obligation has explicit applicability"
+    },
+    {
+      "id": "scaffold.scope.visualize",
+      "status": "PASS",
+      "detail": "historical stack cannot be promoted through scaffold"
+    },
+    {
+      "id": "scaffold.deterministic.enterprise",
+      "status": "PASS",
+      "detail": "two generations are byte-identical"
+    },
+    {
+      "id": "scaffold.profile.enterprise",
+      "status": "PASS",
+      "detail": "surface and profile are bound"
+    },
+    {
+      "id": "scaffold.deferred-positive.enterprise",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "DEF-HV-001",
+          "DEF-HV-004",
+          "DEF-HV-007",
+          "DEF-HV-010"
+        ],
+        "actual": [
+          "DEF-HV-001",
+          "DEF-HV-004",
+          "DEF-HV-007",
+          "DEF-HV-010"
+        ]
+      }
+    },
+    {
+      "id": "scaffold.deferred-metadata.enterprise",
+      "status": "PASS",
+      "detail": "every emitted deferred obligation has explicit applicability"
+    },
+    {
+      "id": "scaffold.scope.enterprise",
+      "status": "PASS",
+      "detail": "historical stack cannot be promoted through scaffold"
+    },
+    {
+      "id": "scaffold.deterministic.runs",
+      "status": "PASS",
+      "detail": "two generations are byte-identical"
+    },
+    {
+      "id": "scaffold.profile.runs",
+      "status": "PASS",
+      "detail": "surface and profile are bound"
+    },
+    {
+      "id": "scaffold.deferred-positive.runs",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "DEF-HV-001",
+          "DEF-HV-002",
+          "DEF-HV-003",
+          "DEF-HV-004",
+          "DEF-HV-007",
+          "DEF-HV-009",
+          "DEF-HV-010"
+        ],
+        "actual": [
+          "DEF-HV-001",
+          "DEF-HV-002",
+          "DEF-HV-003",
+          "DEF-HV-004",
+          "DEF-HV-007",
+          "DEF-HV-009",
+          "DEF-HV-010"
+        ]
+      }
+    },
+    {
+      "id": "scaffold.deferred-metadata.runs",
+      "status": "PASS",
+      "detail": "every emitted deferred obligation has explicit applicability"
+    },
+    {
+      "id": "scaffold.scope.runs",
+      "status": "PASS",
+      "detail": "historical stack cannot be promoted through scaffold"
+    },
+    {
+      "id": "scaffold.deterministic.results",
+      "status": "PASS",
+      "detail": "two generations are byte-identical"
+    },
+    {
+      "id": "scaffold.profile.results",
+      "status": "PASS",
+      "detail": "surface and profile are bound"
+    },
+    {
+      "id": "scaffold.deferred-positive.results",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "DEF-HV-001",
+          "DEF-HV-004",
+          "DEF-HV-005",
+          "DEF-HV-007",
+          "DEF-HV-008",
+          "DEF-HV-010"
+        ],
+        "actual": [
+          "DEF-HV-001",
+          "DEF-HV-004",
+          "DEF-HV-005",
+          "DEF-HV-007",
+          "DEF-HV-008",
+          "DEF-HV-010"
+        ]
+      }
+    },
+    {
+      "id": "scaffold.deferred-metadata.results",
+      "status": "PASS",
+      "detail": "every emitted deferred obligation has explicit applicability"
+    },
+    {
+      "id": "scaffold.scope.results",
+      "status": "PASS",
+      "detail": "historical stack cannot be promoted through scaffold"
+    },
+    {
+      "id": "scaffold.deterministic.reviews",
+      "status": "PASS",
+      "detail": "two generations are byte-identical"
+    },
+    {
+      "id": "scaffold.profile.reviews",
+      "status": "PASS",
+      "detail": "surface and profile are bound"
+    },
+    {
+      "id": "scaffold.deferred-positive.reviews",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          "DEF-HV-004",
+          "DEF-HV-005",
+          "DEF-HV-006",
+          "DEF-HV-007",
+          "DEF-HV-008",
+          "DEF-HV-010"
+        ],
+        "actual": [
+          "DEF-HV-004",
+          "DEF-HV-005",
+          "DEF-HV-006",
+          "DEF-HV-007",
+          "DEF-HV-008",
+          "DEF-HV-010"
+        ]
+      }
+    },
+    {
+      "id": "scaffold.deferred-metadata.reviews",
+      "status": "PASS",
+      "detail": "every emitted deferred obligation has explicit applicability"
+    },
+    {
+      "id": "scaffold.scope.reviews",
+      "status": "PASS",
+      "detail": "historical stack cannot be promoted through scaffold"
+    },
+    {
+      "id": "scaffold.deferred-negative.visualize-review",
+      "status": "PASS",
+      "detail": "Visualize excludes Review/Audit and external-runtime obligations"
+    },
+    {
+      "id": "scaffold.deferred-negative.library-runtime",
+      "status": "PASS",
+      "detail": "Library excludes Operational attachment/session/external-runtime obligations"
+    },
+    {
+      "id": "scaffold.deferred-positive.runs-operational",
+      "status": "PASS",
+      "detail": "Runs inherits Operational/runtime deferred work"
+    }
+  ]
+}
+W03_SEMANTIC_OWNER_VALIDATION: PASS 60/60 (69/318; cumulativeChanged=242; reviewPatch=24)
+{
+  "schemaVersion": 1,
+  "pass": 5,
+  "fail": 0,
+  "tests": [
+    {
+      "id": "authority.all-classified",
+      "status": "PASS",
+      "detail": "164 retained sources explicitly intake-classified"
+    },
+    {
+      "id": "authority.old-production-not-implementation",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "id": "authority.current-or-retained-not-ambiguous",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "id": "authority.stack-forbidden",
+      "status": "PASS",
+      "detail": "old stack tokens are explicit non-authority"
+    },
+    {
+      "id": "authority.w03-role",
+      "status": "PASS",
+      "detail": "W03 v3.4 remains donor-only"
+    }
+  ]
+}
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "pass": 5,
+  "fail": 0,
+  "checks": [
+    {
+      "id": "deferred.exact-ten-ids",
+      "detail": [
+        "DEF-HV-001",
+        "DEF-HV-002",
+        "DEF-HV-003",
+        "DEF-HV-004",
+        "DEF-HV-005",
+        "DEF-HV-006",
+        "DEF-HV-007",
+        "DEF-HV-008",
+        "DEF-HV-009",
+        "DEF-HV-010"
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "deferred.all-active",
+      "detail": {
+        "items": 10,
+        "classifications": {
+          "DEFER_HIGH_VALUE": 4,
+          "DEFER_TO_FAMILY_BUILD": 5,
+          "DEFER_TO_SURFACE_BUILD": 1
+        },
+        "activeFutureObligations": 10
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "deferred.applicability-metadata",
+      "detail": "routing metadata exists for each deferred obligation",
+      "status": "PASS"
+    },
+    {
+      "id": "deferred.named-implementations-absent",
+      "detail": [],
+      "status": "PASS"
+    },
+    {
+      "id": "deferred.stack-remains-unfrozen",
+      "detail": "STACK_NOT_FROZEN",
+      "status": "PASS"
+    }
+  ],
+  "truthCeiling": "Named deferred implementation owners are absent from executable source; small interface hooks/metadata do not count as implementation."
+}
+{
+  "date": "2026-09-12T01:43:23.562Z",
+  "pass": 149,
+  "fail": 2,
+  "tests": [
+    {
+      "id": "profiles.count",
+      "status": "PASS",
+      "detail": 23
+    },
+    {
+      "id": "profile.audit",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.audit",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.audit",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.backup",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.backup",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.backup",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.configuration",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.configuration",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.configuration",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.enterprise",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.enterprise",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.enterprise",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.evidence",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.evidence",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.evidence",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.health",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.health",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.health",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.labs",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.labs",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.labs",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.learn",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.learn",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.learn",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.library",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.library",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.library",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.manual_ai",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.manual_ai",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.manual_ai",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.mastery",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.mastery",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.mastery",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.portfolio",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.portfolio",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.portfolio",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.processing",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.processing",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.processing",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.releases",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.releases",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.releases",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.results",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.results",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.results",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.reviews",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.reviews",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.reviews",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.rq",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.rq",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.rq",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.runs",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.runs",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.runs",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.scenarios",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.scenarios",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.scenarios",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.shell",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.shell",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.shell",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.today",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.today",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.today",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.validation",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.validation",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.validation",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.visualize",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.visualize",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.visualize",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "commands.unique",
+      "status": "PASS",
+      "detail": 68
+    },
+    {
+      "id": "commands.schema",
+      "status": "PASS",
+      "detail": "required command fields"
+    },
+    {
+      "id": "preferences.schema",
+      "status": "PASS",
+      "detail": 42
+    },
+    {
+      "id": "donor.identity",
+      "status": "PASS",
+      "detail": "exact accepted donor bytes/hash"
+    },
+    {
+      "id": "donor.census",
+      "status": "PASS",
+      "detail": "330 preserved named function dispositions"
+    },
+    {
+      "id": "matrix.complete",
+      "status": "PASS",
+      "detail": "23 × (40 conceptual owners + 21 executable component families)"
+    },
+    {
+      "id": "syntax.dist/main.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/model-tests.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/foundation/models.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/foundation/workspace.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/foundation/workspace-host.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/foundation/spatial.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/foundation/relations.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/foundation/operational.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/foundation/accepted-runtime.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/foundation/window-motion.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/foundation/structured.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/adapters/simulation.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/adapters/structured-documents.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/adapters/learn.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/adapters/w03-enterprise.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/adapters/w03-runs.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/adapters/w03-v34/domain-kernel.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/adapters/w03-v34/runs-fixture.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/adapters/w03-v34/enterprise-fixture.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "runtime.no_host_provider",
+      "status": "PASS",
+      "detail": "simulation source has no host/network execution integration"
+    },
+    {
+      "id": "operational.provider_neutral",
+      "status": "PASS",
+      "detail": "shared Operational presentation consumes only the RuntimeAdapter contract"
+    },
+    {
+      "id": "structured.boundary",
+      "status": "PASS",
+      "detail": "executable structured ownership boundary is explicit"
+    },
+    {
+      "id": "structured.non_library_isolation",
+      "status": "PASS",
+      "detail": "Learn path has no Library fixture import/state/search dependency"
+    },
+    {
+      "id": "structured.contract_version",
+      "status": "PASS",
+      "detail": "Structured contract plus selection/clipboard seam are versioned"
+    },
+    {
+      "id": "workspace.donor_free_bootstrap",
+      "status": "PASS",
+      "detail": "accepted runtime is conditionally imported for Library only"
+    },
+    {
+      "id": "workspace.host_owners",
+      "status": "PASS",
+      "detail": "pane, transient/focus and context descriptor owners are executable"
+    },
+    {
+      "id": "registries.current_owner_consistency",
+      "status": "PASS",
+      "detail": "CSV registries name the same current executable owners as the JSON runtime registry"
+    },
+    {
+      "id": "generators.current_owner_consistency",
+      "status": "PASS",
+      "detail": "both active registry generators preserve the corrected host/state owners"
+    },
+    {
+      "id": "generators.deferred_applicability_preserved",
+      "status": "PASS",
+      "detail": "active registry generator preserves target-relevance metadata instead of regenerating a global-only deferred ledger"
+    },
+    {
+      "id": "runtime.baseline",
+      "status": "PASS",
+      "detail": "CEP-FOUNDATION-0.2.1c-BROWSER-TRUTHFULNESS-CORRECTED-CANDIDATE"
+    },
+    {
+      "id": "controller.identity_and_copies",
+      "status": "PASS",
+      "detail": {
+        "package": {
+          "identity": "CEP_FOUNDATION_PRE_WORK_RESUME_CONTROLLER_PACKET_v2.0.zip",
+          "bytes": 122721,
+          "sha256": "0bbb013cc767d9d7047a5a5f24fe67865f0ee4e75f9522978e6bd2ceafee406b"
+        },
+        "intentionalWorkingCompilationCorrection": "07_W03_69_REQUIREMENT_REUSE_MAP.csv",
+        "originalPackageIdentityPreserved": true
+      }
+    },
+    {
+      "id": "runtime.component_owners",
+      "status": "PASS",
+      "detail": "runtime component owners are unique and complete"
+    },
+    {
+      "id": "runtime.capability_owners",
+      "status": "PASS",
+      "detail": "capability owners are unique"
+    },
+    {
+      "id": "runtime.action_surface_owners",
+      "status": "PASS",
+      "detail": "action surfaces have owner, routes and exits"
+    },
+    {
+      "id": "runtime.action_commands",
+      "status": "PASS",
+      "detail": "every declared action command is registered"
+    },
+    {
+      "id": "contracts.versioned",
+      "status": "PASS",
+      "detail": [
+        "WorkspaceFoundationHost@1.0.0",
+        "ContextDescriptorProvider@1.0.0",
+        "RelationDomainAdapter@1.1.0",
+        "StructuredDocumentDomainAdapter@1.1.0",
+        "RuntimeAdapter@1.0.0",
+        "ActionAvailability@1.2.1",
+        "SurfaceProfile@1.0.0",
+        "SemanticCommand@1.0.0"
+      ]
+    },
+    {
+      "id": "contracts.breaking_gate",
+      "status": "PASS",
+      "detail": "ENFORCED_BY_CONTRACT_CHECK"
+    },
+    {
+      "id": "contracts.version_fixtures",
+      "status": "PASS",
+      "detail": {
+        "compatible": {
+          "change": "add optional descriptor field",
+          "result": "PASS"
+        },
+        "breaking": {
+          "change": "rename required canonical state field",
+          "required": [
+            "affectedConsumers",
+            "migrationPlan",
+            "disposition",
+            "conformanceProof"
+          ],
+          "result": "REQUIRES_MIGRATION"
+        }
+      }
+    },
+    {
+      "id": "mechanics.registry",
+      "status": "PASS",
+      "detail": 14
+    },
+    {
+      "id": "mechanics.duplicate_scan",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "deviations.explained",
+      "status": "PASS",
+      "detail": "no unexplained Foundation deviation"
+    },
+    {
+      "id": "deferred.value_filter",
+      "status": "PASS",
+      "detail": {
+        "items": 10,
+        "classifications": {
+          "DEFER_HIGH_VALUE": 4,
+          "DEFER_TO_FAMILY_BUILD": 5,
+          "DEFER_TO_SURFACE_BUILD": 1
+        },
+        "activeFutureObligations": 10
+      }
+    },
+    {
+      "id": "deferred.exclusion_traceability",
+      "status": "PASS",
+      "detail": {
+        "items": 15,
+        "classifications": {
+          "SUPERSEDED": 5,
+          "HISTORICAL_ONLY": 1,
+          "DROP_LOW_VALUE": 7,
+          "DROP_DUPLICATE": 2
+        },
+        "activeFutureObligations": 0
+      }
+    },
+    {
+      "id": "deferred.stale_active_status_absent",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "id": "w03.identity",
+      "status": "PASS",
+      "detail": "exact v3.4 evidence donor identity, five sources and corrected authority"
+    },
+    {
+      "id": "w03.reference.ENTERPRISE",
+      "status": "PASS",
+      "detail": "dist/reference/w03-v34/W03_ENTERPRISE_EXECUTABLE_BLUEPRINT_v3.0_SUCCESSOR_CANDIDATE.html"
+    },
+    {
+      "id": "w03.reference.SCENARIOS",
+      "status": "PASS",
+      "detail": "dist/reference/w03-v34/W03_SCENARIOS_EXECUTABLE_BLUEPRINT_v3.0_SUCCESSOR_CANDIDATE.html"
+    },
+    {
+      "id": "w03.reference.LABS",
+      "status": "PASS",
+      "detail": "dist/reference/w03-v34/W03_LABS_EXECUTABLE_BLUEPRINT_v3.0_SUCCESSOR_CANDIDATE.html"
+    },
+    {
+      "id": "w03.reference.RUNS",
+      "status": "PASS",
+      "detail": "dist/reference/w03-v34/W03_RUNS_EXECUTABLE_BLUEPRINT_v3.0_SUCCESSOR_CANDIDATE.html"
+    },
+    {
+      "id": "w03.reference.RESULTS",
+      "status": "PASS",
+      "detail": "dist/reference/w03-v34/W03_RESULTS_EXECUTABLE_BLUEPRINT_v3.0_SUCCESSOR_CANDIDATE.html"
+    },
+    {
+      "id": "w03.dispositions_69_318",
+      "status": "PASS",
+      "detail": {
+        "PARTIALLY_RECONCILED": 22,
+        "DEFERRED_TO_NAMED_FUTURE_OWNER": 19,
+        "RECONCILED_CURRENT": 28
+      }
+    },
+    {
+      "id": "w03.no_atom_task_expansion",
+      "status": "PASS",
+      "detail": "318 atoms remain grouped under admitted task owners"
+    },
+    {
+      "id": "w03.truth_ceiling",
+      "status": "PASS",
+      "detail": "SEMANTIC_ADJUDICATION_PARTIAL; HIGH_RISK_SEMANTIC_MISROUTES_CORRECTED; map is advisory/reusable-ownership evidence, not W03 design or implementation authority."
+    },
+    {
+      "id": "w03.work_admission_provenance_only",
+      "status": "PASS",
+      "detail": "HISTORICAL_PRE_V0_2_1_CONTROLLER_ADMISSION_PROVENANCE_ONLY"
+    },
+    {
+      "id": "w03.generated_historical_fields",
+      "status": "PASS",
+      "detail": "raw admissions remain provenance only"
+    },
+    {
+      "id": "w03.old_authority_zero_active",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "id": "w03.semantic_authority_alias_zero",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "id": "writer.intake",
+      "status": "PASS",
+      "detail": "lintable Writer intake matches current Foundation baseline"
+    },
+    {
+      "id": "writer.scaffold",
+      "status": "PASS",
+      "detail": "38/0"
+    },
+    {
+      "id": "resume.exact_ten_completed",
+      "status": "PASS",
+      "detail": "ALL_10_COMPLETED_FOR_BOUNDED_CANDIDATE"
+    },
+    {
+      "id": "relations.central_reuse",
+      "status": "PASS",
+      "detail": "one extracted RelationInteractionOwner policy serves Visualize and Enterprise"
+    },
+    {
+      "id": "relations.availability_inputs",
+      "status": "PASS",
+      "detail": "central resolver covers selection, domain, command, canonical and destructive inputs"
+    },
+    {
+      "id": "relations.route_scope",
+      "status": "PASS",
+      "detail": "relation double-click is label-scoped"
+    },
+    {
+      "id": "spatial.context_lifecycle",
+      "status": "PASS",
+      "detail": "context suppression clears on cancel and abnormal lifecycle"
+    },
+    {
+      "id": "spatial.keyboard_semantics",
+      "status": "PASS",
+      "detail": "distinct focus/selection/camera/move/context/edit/reverse semantics"
+    },
+    {
+      "id": "ownership.single_relation_commands",
+      "status": "PASS",
+      "detail": "one relation commit registration in RelationInteractionOwner; main only declares action route and relations facade registers none"
+    },
+    {
+      "id": "ownership.single_open_terminal",
+      "status": "PASS",
+      "detail": "one OPEN_TERMINAL semantic owner"
+    },
+    {
+      "id": "browser.suite_definition",
+      "status": "PASS",
+      "detail": "six deterministic critical browser flows are rerunnable"
+    },
+    {
+      "id": "browser.portable_resolution",
+      "status": "PASS",
+      "detail": "package-local Playwright first; explicit environment override only"
+    },
+    {
+      "id": "browser.lineage_receipt_truthful",
+      "status": "FAIL",
+      "detail": {
+        "sourceFoundationBaseline": "CEP-FOUNDATION-0.2.1c-BROWSER-TRUTHFULNESS-CORRECTED-CANDIDATE",
+        "sourceCanonicalTreeSha256": "52f3f3e5d6d669595fa57cbd2da7aa8cbd7a577c0ae6cc90c33a82d1b6597250",
+        "currentCanonicalTreeSha256": "b5288b779e17e80e15bdcbbe0f999772fad856d7c971c5693b478c2569553f6e",
+        "executionStatus": "EXECUTED_PASS",
+        "summary": {
+          "total": 6,
+          "pass": 6,
+          "fail": 0
+        }
+      }
+    },
+    {
+      "id": "browser.current_candidate_claim_truthful",
+      "status": "FAIL",
+      "detail": {
+        "currentUse": "EXACT_CURRENT_CANONICAL_SOURCE_EXECUTION_RECEIPT",
+        "sourceCandidate": "CANONICAL_SOURCE_TREE_SHA256:52f3f3e5d6d669595fa57cbd2da7aa8cbd7a577c0ae6cc90c33a82d1b6597250",
+        "canonicalSourceFileCount": 38
+      }
+    },
+    {
+      "id": "browser.targeted_visual_evidence",
+      "status": "PASS",
+      "detail": "3 hash-bound screenshots (maximum 4)"
+    },
+    {
+      "id": "model.required_regressions",
+      "status": "PASS",
+      "detail": "177/0"
+    },
+    {
+      "id": "authority.intake_guard",
+      "status": "PASS",
+      "detail": {
+        "schemaVersion": 1,
+        "pass": 5,
+        "fail": 0,
+        "tests": [
+          {
+            "id": "authority.all-classified",
+            "status": "PASS",
+            "detail": "164 retained sources explicitly intake-classified"
+          },
+          {
+            "id": "authority.old-production-not-implementation",
+            "status": "PASS",
+            "detail": []
+          },
+          {
+            "id": "authority.current-or-retained-not-ambiguous",
+            "status": "PASS",
+            "detail": []
+          },
+          {
+            "id": "authority.stack-forbidden",
+            "status": "PASS",
+            "detail": "old stack tokens are explicit non-authority"
+          },
+          {
+            "id": "authority.w03-role",
+            "status": "PASS",
+            "detail": "W03 v3.4 remains donor-only"
+          }
+        ]
+      }
+    },
+    {
+      "id": "w03.semantic_review_318",
+      "status": "PASS",
+      "detail": {
+        "rowsReviewed": 318,
+        "rowsChanged": 242,
+        "unchangedRows": 76,
+        "method": "Bounded semantic-owner hardening of the existing 318-row compilation; v0.2.1a mappings were independently reviewed and only confirmed high-risk misroutes were corrected. No historical W03 archaeology or re-atomization."
+      }
+    }
+  ],
+  "limits": "Bounded structural/model/browser receipt validation; no Owner acceptance or final-product completeness claim."
+}

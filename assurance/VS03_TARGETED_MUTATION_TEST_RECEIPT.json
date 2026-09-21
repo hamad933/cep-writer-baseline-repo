@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "project": "CEP",
+  "slice": "VS-03",
+  "status": "PASS",
+  "total": 11,
+  "pass": 11,
+  "fail": 0,
+  "modelSuite": {
+    "pass": 74,
+    "fail": 0
+  },
+  "tests": [
+    {
+      "id": "structured.mutation-contract-real-consumers",
+      "before": "real Library accepted fixture adapter and real Learn adapter",
+      "action": "inspect canonical mutation ownership",
+      "owner": "StructuredMutationKernel",
+      "oracle": "both real Structured consumers bind the exact same executable mutation owner and policy revision",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-insert-nested",
+      "before": "valid root plus Toggle container",
+      "action": "insert paragraph at explicit nested gap",
+      "owner": "StructuredMutationKernel",
+      "oracle": "exact structural position is used and unrelated identities are preserved",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-duplicate-subtree",
+      "before": "nested Toggle subtree",
+      "action": "duplicate through explicit identity provider",
+      "owner": "StructuredMutationKernel",
+      "oracle": "every duplicated node receives a unique new identity while shape/content are preserved",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-remove-subtree",
+      "before": "Toggle with two descendants plus unaffected sibling",
+      "action": "remove the Toggle",
+      "owner": "StructuredMutationKernel",
+      "oracle": "whole subtree is removed atomically while non-target sibling identity survives",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-reorder-identity",
+      "before": "three root siblings",
+      "action": "move middle down then to start",
+      "owner": "StructuredMutationKernel",
+      "oracle": "reorder changes only position; subtree identity stays byte-stable",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-move-gap-atomic",
+      "before": "root subtree and independent Toggle destination",
+      "action": "move root paragraph into Toggle then try moving Toggle into itself",
+      "owner": "StructuredMutationKernel",
+      "oracle": "legal move commits once; self-descendant target rejects with exact unchanged input",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-indent-outdent",
+      "before": "paragraph after Toggle sibling",
+      "action": "indent then outdent same subtree",
+      "owner": "StructuredMutationKernel",
+      "oracle": "canonical owner performs structural nesting and restores root order without changing IDs",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-split-merge-convert",
+      "before": "splittable paragraph and target block types",
+      "action": "split, merge and convert through canonical data operations",
+      "owner": "StructuredMutationKernel",
+      "oracle": "data mutations preserve source identity, use supplied new identity, and obey conversion containment",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-invalid-atomicity",
+      "before": "valid tree with Bullet and deep Toggle branch",
+      "action": "attempt illegal child insert, duplicate identity and over-depth move",
+      "owner": "StructuredMutationKernel",
+      "oracle": "every invalid mutation returns rejection and leaves caller input byte-identical",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-learn-route",
+      "before": "real Learn StructuredDocumentDomainAdapter state",
+      "action": "execute insert and move-to-gap through mutateStructure",
+      "owner": "StructuredDocumentDomainAdapter + StructuredMutationKernel",
+      "oracle": "second consumer mutates real document state through canonical owner and emits canonical owner receipt",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-second-owner-rejected",
+      "before": "real Learn adapter with a deliberately injected alternate kernel",
+      "action": "invoke adapter descriptor/mutation ownership guard",
+      "owner": "StructuredDocumentDomainAdapter",
+      "oracle": "composition detects and rejects a second Structured mutation semantic owner",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    }
+  ]
+}

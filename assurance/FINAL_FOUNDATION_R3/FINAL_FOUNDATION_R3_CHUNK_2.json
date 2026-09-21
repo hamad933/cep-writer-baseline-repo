@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "kind": "FINAL_FOUNDATION_R3_23_SCENARIO_REPLAY",
+  "classification": "CONTROLLER_FINAL_FOUNDATION_GATE_EVIDENCE",
+  "status": "PASS",
+  "sourceCanonicalTreeSha256": "5dcc401a95f6b7b38bbd2f64d9140c29182eb459042dc6e3dd7be5460c6bca5f",
+  "canonicalSourceFileCount": 113,
+  "scenarioCount": 6,
+  "pass": 6,
+  "fail": 0,
+  "results": [
+    {
+      "id": "G07",
+      "law": "GL-04",
+      "status": "PASS",
+      "detail": {
+        "owner": null,
+        "undoExact": true
+      }
+    },
+    {
+      "id": "G08",
+      "law": "GL-04",
+      "status": "PASS",
+      "detail": {
+        "commitOnDrop": true,
+        "indicator": {
+          "visible": true,
+          "derived": true,
+          "owner": "StructuredDragDropOwner",
+          "valid": true,
+          "code": "AVAILABLE",
+          "reason": "",
+          "targetIdentity": "ROOT::2::0",
+          "target": {
+            "kind": "gap",
+            "parentId": null,
+            "index": 2,
+            "depth": 0,
+            "afterBlockId": "blk-d05-p1",
+            "beforeBlockId": "blk-d05-p-auto-ltr"
+          }
+        },
+        "undoExact": true,
+        "owner": "StructuredDragDropOwner"
+      }
+    },
+    {
+      "id": "G09",
+      "law": "GL-03/GL-05",
+      "status": "PASS",
+      "detail": {
+        "text": "يجب أن يربط التطبيق كل طلب بين subject_id و object_id والسياق المصرّح به. هذه فقرة طويلة مقصودة لتلتف بصريًا إلى عدة أسطر مع بقائها Block واحدًا بهوية بنيوية واحدة.",
+        "selection": true,
+        "toolbar": true
+      }
+    },
+    {
+      "id": "G10",
+      "law": "GL-05",
+      "status": "PASS",
+      "detail": {
+        "before": 6,
+        "after": 5,
+        "result": true,
+        "undoExact": true
+      }
+    },
+    {
+      "id": "G11",
+      "law": "GL-06",
+      "status": "PASS",
+      "detail": {
+        "html": "<strong>ok</strong>x",
+        "changed": true,
+        "safe": true,
+        "violations": [
+          {
+            "code": "ACTIVE_ELEMENT_STRIPPED",
+            "tag": "script"
+          },
+          {
+            "code": "ACTIVE_ATTRIBUTE_STRIPPED",
+            "tag": "strong"
+          },
+          {
+            "code": "TAG_STRIPPED",
+            "tag": "a"
+          },
+          {
+            "code": "TAG_STRIPPED",
+            "tag": "a"
+          }
+        ],
+        "policyRevision": "structured-rich-sanitize-w4c-r1"
+      }
+    },
+    {
+      "id": "G12",
+      "law": "GL-07",
+      "status": "PASS",
+      "detail": {
+        "searchFocused": true,
+        "tabContained": true,
+        "escaped": true
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "assurance/FINAL_FOUNDATION_R3/G12_final_command_palette.png",
+      "bytes": 221724,
+      "sha256": "99fb2f25cf49c4fce59b4fcaf1db9a3af86846224ffaa65a6320c9f8486fded1"
+    }
+  ],
+  "r3LawCoverage": [
+    "GL-03/GL-05",
+    "GL-04",
+    "GL-05",
+    "GL-06",
+    "GL-07"
+  ]
+}

@@ -1,0 +1,477 @@
+{
+  "mission": "W3-C-CONTEXT-INSPECTOR-HOST",
+  "status": "PASS",
+  "owner": "ContextInspectorHost",
+  "checks": [
+    {
+      "id": "one-host-owner",
+      "status": "PASS",
+      "evidence": {
+        "hostOwner": "ContextInspectorHost",
+        "providerIds": [
+          "library-structured-context",
+          "spatial-context"
+        ]
+      }
+    },
+    {
+      "id": "genuine-library-provider",
+      "status": "PASS",
+      "evidence": {
+        "providerOwner": "LibraryStructuredContextDescriptorProvider",
+        "domainOwner": "LibraryDomainAdapter",
+        "adapterOwner": "LibraryDomainAdapter"
+      }
+    },
+    {
+      "id": "genuine-spatial-provider",
+      "status": "PASS",
+      "evidence": {
+        "providerOwner": "SpatialContextDescriptorProvider",
+        "domainOwner": "SpatialSelectionNavigationKernel + W03EnterpriseDomain.LocalDraft",
+        "relationOwner": "W03EnterpriseDomain.LocalDraft"
+      }
+    },
+    {
+      "id": "same-host-renders-both",
+      "status": "PASS",
+      "evidence": {
+        "libraryHtmlHash": "c347bd65b747a2a979cf4a977f0afa0dcff49d819d09f04f37fff0975db841d7",
+        "spatialHtmlHash": "ec26743d92e1c113dfc656c80846fb731f59bd5a7f8319775e842ae1fd5f2f5b"
+      }
+    },
+    {
+      "id": "explicit-descriptor-identity",
+      "status": "PASS",
+      "evidence": {
+        "libraryDescriptorId": "library:KU-D05-0021",
+        "spatialDescriptor1": "spatial:APP-WEB-01",
+        "spatialDescriptor2": "spatial:APP-WEB-01+CTL-WAF-01"
+      }
+    },
+    {
+      "id": "selection-context-refresh",
+      "status": "PASS",
+      "evidence": {
+        "firstId": "APP-WEB-01",
+        "secondId": "CTL-WAF-01",
+        "lastTransition": "project"
+      }
+    },
+    {
+      "id": "projection-readonly",
+      "status": "PASS",
+      "evidence": {
+        "note": "External Spatial selection change is intentionally canonical; Library/relation truth remains unchanged during projection.",
+        "documentBefore": "3da3fa8c19be6052afdb509b9a0c31e2da4a49008d75b5852613f89e28a02ed5",
+        "documentAfter": "3da3fa8c19be6052afdb509b9a0c31e2da4a49008d75b5852613f89e28a02ed5",
+        "relationsBefore": "cb794c6cc0dc380119708e88a0e35b64a46f3dadae3badaadb8268cc56deb273",
+        "relationsAfter": "cb794c6cc0dc380119708e88a0e35b64a46f3dadae3badaadb8268cc56deb273",
+        "runtimeBefore": "1e3e28b5fc88ada29e78cd73c8883144ec3eeb246656dd15314c9e27f3020278",
+        "runtimeAfter": "1e3e28b5fc88ada29e78cd73c8883144ec3eeb246656dd15314c9e27f3020278"
+      }
+    },
+    {
+      "id": "inspector-actions-no-domain-mutation",
+      "status": "PASS",
+      "evidence": {
+        "before": "8717adf309d416a482b59f4b08e21e0d8f17b70a3cb62a03a77175bb217cd683",
+        "after": "8717adf309d416a482b59f4b08e21e0d8f17b70a3cb62a03a77175bb217cd683"
+      }
+    },
+    {
+      "id": "host-state-presentation-only",
+      "status": "PASS",
+      "evidence": {
+        "state": {
+          "ownerId": "ContextInspectorHost",
+          "open": true,
+          "activeProviderId": "spatial-context",
+          "activeDescriptorId": "spatial:APP-WEB-01+CTL-WAF-01",
+          "activeLensId": "relations",
+          "activeTabId": "linked",
+          "pinned": true,
+          "lastTransition": "project",
+          "policyTag": "density=comfortable;owner=1;revision=1;empty=—"
+        }
+      }
+    },
+    {
+      "id": "invalid-inapplicable-safe",
+      "status": "PASS",
+      "evidence": {
+        "invalidResult": {
+          "ok": false,
+          "code": "INVALID_DESCRIPTOR",
+          "providerId": "w3c-invalid-proof",
+          "error": "CONTEXT_DESCRIPTOR_LENS_REQUIRED"
+        },
+        "inapplicableResult": {
+          "ok": false,
+          "code": "DESCRIPTOR_INAPPLICABLE",
+          "providerId": "spatial-context"
+        },
+        "statePreserved": true
+      }
+    },
+    {
+      "id": "transient-focus-return",
+      "status": "PASS",
+      "evidence": {
+        "focusCount": 1,
+        "lastDismissal": {
+          "id": "context-inspector-host",
+          "reason": "w3c-focus-proof",
+          "restored": true,
+          "focusTargetKind": "invoker",
+          "owner": "TransientFocusOwner",
+          "policyTag": "topmost-first-v1"
+        }
+      }
+    },
+    {
+      "id": "central-policy-reaches-both",
+      "status": "PASS",
+      "evidence": {
+        "libraryBefore": "87e5a2210d7fe707e3011ce1ce8e0903324ac391f744e8832e7b85a1d03c0ae7",
+        "libraryChanged": "243aa100d715191bc4c7dd1e28fd64b4fb0c194e98e86670f82ca4c029e43070",
+        "spatialBefore": "061024cc97add34ea5cc8b13f61df8c98527c3496012f236258a083f1e1ea2eb",
+        "spatialChanged": "18f43fcc4d97bacba7fe46f34e6eaec7f366c49b5c85f7364ab6a9f8093d07f5"
+      }
+    },
+    {
+      "id": "central-policy-exact-revert",
+      "status": "PASS",
+      "evidence": {
+        "libraryReverted": "87e5a2210d7fe707e3011ce1ce8e0903324ac391f744e8832e7b85a1d03c0ae7",
+        "spatialReverted": "061024cc97add34ea5cc8b13f61df8c98527c3496012f236258a083f1e1ea2eb",
+        "policy": {
+          "density": "comfortable",
+          "showDomainOwner": true,
+          "showRevision": true,
+          "emptyValue": "—"
+        }
+      }
+    },
+    {
+      "id": "stale-context-deterministic",
+      "status": "PASS",
+      "evidence": {
+        "result": {
+          "ok": false,
+          "code": "DESCRIPTOR_INAPPLICABLE",
+          "providerId": "spatial-context",
+          "reconciled": true,
+          "reconciliation": "CLOSED_NO_REPLACEMENT",
+          "reason": "descriptor-inapplicable",
+          "hostState": {
+            "ownerId": "ContextInspectorHost",
+            "open": false,
+            "activeProviderId": null,
+            "activeDescriptorId": null,
+            "activeLensId": null,
+            "activeTabId": null,
+            "pinned": false,
+            "lastTransition": "reconcile:project:descriptor-inapplicable:closed",
+            "policyTag": "density=comfortable;owner=1;revision=1;empty=—"
+          },
+          "transientActive": false,
+          "focusReturn": {
+            "id": "context-inspector-host",
+            "reason": "context-reconcile:descriptor-inapplicable",
+            "restored": true,
+            "focusTargetKind": "invoker",
+            "owner": "TransientFocusOwner",
+            "policyTag": "topmost-first-v1"
+          }
+        },
+        "state": {
+          "ownerId": "ContextInspectorHost",
+          "open": false,
+          "activeProviderId": null,
+          "activeDescriptorId": null,
+          "activeLensId": null,
+          "activeTabId": null,
+          "pinned": false,
+          "lastTransition": "reconcile:project:descriptor-inapplicable:closed",
+          "policyTag": "density=comfortable;owner=1;revision=1;empty=—"
+        },
+        "focus": {
+          "owner": "TransientFocusOwner",
+          "active": [],
+          "top": null,
+          "modal": false,
+          "lastDismissal": {
+            "id": "context-inspector-host",
+            "reason": "context-reconcile:descriptor-inapplicable",
+            "restored": true,
+            "focusTargetKind": "invoker",
+            "owner": "TransientFocusOwner",
+            "policyTag": "topmost-first-v1"
+          }
+        },
+        "staleFocusCount": 1
+      }
+    },
+    {
+      "id": "reopen-after-invalidation",
+      "status": "PASS",
+      "evidence": {
+        "reopened": {
+          "ok": true,
+          "code": "ACTIVE",
+          "descriptorId": "library:KU-D05-0021",
+          "providerId": "library-structured-context",
+          "lensId": "document",
+          "tabId": "overview",
+          "open": true
+        },
+        "state": {
+          "ownerId": "ContextInspectorHost",
+          "open": true,
+          "activeProviderId": "library-structured-context",
+          "activeDescriptorId": "library:KU-D05-0021",
+          "activeLensId": "document",
+          "activeTabId": "overview",
+          "pinned": false,
+          "lastTransition": "open",
+          "policyTag": "density=comfortable;owner=1;revision=1;empty=—"
+        },
+        "focus": {
+          "owner": "TransientFocusOwner",
+          "active": [
+            "context-inspector-host"
+          ],
+          "top": "context-inspector-host",
+          "modal": false,
+          "lastDismissal": {
+            "id": "context-inspector-host",
+            "reason": "context-reconcile:descriptor-inapplicable",
+            "restored": true,
+            "focusTargetKind": "invoker",
+            "owner": "TransientFocusOwner",
+            "policyTag": "topmost-first-v1"
+          }
+        }
+      }
+    },
+    {
+      "id": "provider-removal-while-open",
+      "status": "PASS",
+      "evidence": {
+        "removed": true,
+        "state": {
+          "ownerId": "ContextInspectorHost",
+          "open": false,
+          "activeProviderId": null,
+          "activeDescriptorId": null,
+          "activeLensId": null,
+          "activeTabId": null,
+          "pinned": false,
+          "lastTransition": "reconcile:unregister:provider-unregistered:closed",
+          "policyTag": "density=comfortable;owner=1;revision=1;empty=—"
+        },
+        "focus": {
+          "owner": "TransientFocusOwner",
+          "active": [],
+          "top": null,
+          "modal": false,
+          "lastDismissal": {
+            "id": "context-inspector-host",
+            "reason": "context-reconcile:provider-unregistered",
+            "restored": true,
+            "focusTargetKind": "invoker",
+            "owner": "TransientFocusOwner",
+            "policyTag": "topmost-first-v1"
+          }
+        },
+        "removalFocusCount": 1
+      }
+    },
+    {
+      "id": "invalid-descriptor-active-closes",
+      "status": "PASS",
+      "evidence": {
+        "result": {
+          "ok": false,
+          "code": "INVALID_DESCRIPTOR",
+          "providerId": "w3c-malformed-active",
+          "error": "CONTEXT_DESCRIPTOR_LENS_REQUIRED",
+          "reconciled": true,
+          "reconciliation": "CLOSED_NO_REPLACEMENT",
+          "reason": "invalid-descriptor",
+          "hostState": {
+            "ownerId": "ContextInspectorHost",
+            "open": false,
+            "activeProviderId": null,
+            "activeDescriptorId": null,
+            "activeLensId": null,
+            "activeTabId": null,
+            "pinned": false,
+            "lastTransition": "reconcile:project:invalid-descriptor:closed",
+            "policyTag": "density=comfortable;owner=1;revision=1;empty=—"
+          },
+          "transientActive": false,
+          "focusReturn": {
+            "id": "context-inspector-host",
+            "reason": "context-reconcile:invalid-descriptor",
+            "restored": true,
+            "focusTargetKind": "invoker",
+            "owner": "TransientFocusOwner",
+            "policyTag": "topmost-first-v1"
+          }
+        },
+        "state": {
+          "ownerId": "ContextInspectorHost",
+          "open": false,
+          "activeProviderId": null,
+          "activeDescriptorId": null,
+          "activeLensId": null,
+          "activeTabId": null,
+          "pinned": false,
+          "lastTransition": "reconcile:project:invalid-descriptor:closed",
+          "policyTag": "density=comfortable;owner=1;revision=1;empty=—"
+        },
+        "focus": {
+          "owner": "TransientFocusOwner",
+          "active": [],
+          "top": null,
+          "modal": false,
+          "lastDismissal": {
+            "id": "context-inspector-host",
+            "reason": "context-reconcile:invalid-descriptor",
+            "restored": true,
+            "focusTargetKind": "invoker",
+            "owner": "TransientFocusOwner",
+            "policyTag": "topmost-first-v1"
+          }
+        },
+        "malformedFocusCount": 1
+      }
+    },
+    {
+      "id": "switch-valid-provider-remains-open",
+      "status": "PASS",
+      "evidence": {
+        "switchReceipt": {
+          "ok": true,
+          "code": "ACTIVE",
+          "descriptorId": "spatial:APP-WEB-01",
+          "providerId": "spatial-context",
+          "lensId": "selection",
+          "tabId": "objects"
+        },
+        "state": {
+          "ownerId": "ContextInspectorHost",
+          "open": true,
+          "activeProviderId": "spatial-context",
+          "activeDescriptorId": "spatial:APP-WEB-01",
+          "activeLensId": "selection",
+          "activeTabId": "objects",
+          "pinned": false,
+          "lastTransition": "activate",
+          "policyTag": "density=comfortable;owner=1;revision=1;empty=—"
+        },
+        "focus": {
+          "owner": "TransientFocusOwner",
+          "active": [
+            "context-inspector-host"
+          ],
+          "top": "context-inspector-host",
+          "modal": false,
+          "lastDismissal": null
+        }
+      }
+    },
+    {
+      "id": "no-domain-mutation-routes",
+      "status": "PASS",
+      "evidence": {
+        "mutationTokensChecked": [
+          ".commit(",
+          ".createRelation(",
+          ".updateBlock(",
+          ".mutateStructure(",
+          ".undo(",
+          ".redo(",
+          ".move(",
+          ".align(",
+          ".distribute(",
+          ".shutdown(",
+          ".save("
+        ],
+        "hits": []
+      }
+    },
+    {
+      "id": "no-runtime-device-provider-import",
+      "status": "PASS",
+      "evidence": {
+        "hits": []
+      }
+    },
+    {
+      "id": "no-duplicate-context-semantic-owner",
+      "status": "PASS",
+      "evidence": {
+        "hostClassCount": 1,
+        "hostOwnerDefinitionCount": 1,
+        "providerOwners": [
+          "LibraryStructuredContextDescriptorProvider",
+          "SpatialContextDescriptorProvider"
+        ]
+      }
+    }
+  ],
+  "providerProof": {
+    "library": {
+      "id": "library-structured-context",
+      "owner": "LibraryStructuredContextDescriptorProvider",
+      "domainOwner": "LibraryDomainAdapter"
+    },
+    "spatial": {
+      "id": "spatial-context",
+      "owner": "SpatialContextDescriptorProvider",
+      "relationDomainOwner": "W03EnterpriseDomain.LocalDraft"
+    }
+  },
+  "projectionEvidence": {
+    "libraryOpen": {
+      "ok": true,
+      "code": "ACTIVE",
+      "descriptorId": "library:KU-D05-0021",
+      "providerId": "library-structured-context",
+      "lensId": "document",
+      "tabId": "overview",
+      "open": true
+    },
+    "libraryDescriptorId": "library:KU-D05-0021",
+    "libraryState": {
+      "ownerId": "ContextInspectorHost",
+      "open": true,
+      "activeProviderId": "library-structured-context",
+      "activeDescriptorId": "library:KU-D05-0021",
+      "activeLensId": "document",
+      "activeTabId": "selection",
+      "pinned": false,
+      "lastTransition": "project",
+      "policyTag": "density=comfortable;owner=1;revision=1;empty=—"
+    },
+    "spatialDescriptor1": "spatial:APP-WEB-01",
+    "spatialDescriptor2": "spatial:APP-WEB-01+CTL-WAF-01",
+    "librarySelectionHtmlHash": "3f50fe255689f8e2b9f7e535796235844bfb4904222b7394d989437abb4d1ffb"
+  },
+  "canonicalTruthHashes": {
+    "initial": "32d76a3d37b19b1bbb6f0b7b59d84c377f5939cb24610b94a387b491bbcd6e8a",
+    "postExternalSelection": "8717adf309d416a482b59f4b08e21e0d8f17b70a3cb62a03a77175bb217cd683",
+    "preInspectorActions": "8717adf309d416a482b59f4b08e21e0d8f17b70a3cb62a03a77175bb217cd683",
+    "postInspectorActions": "8717adf309d416a482b59f4b08e21e0d8f17b70a3cb62a03a77175bb217cd683"
+  },
+  "sourceScan": {
+    "providerMutationHits": [],
+    "runtimeImports": [],
+    "hostClassCount": 1,
+    "hostOwnerDefinitionCount": 1
+  },
+  "note": "External canonical selection changes are performed only by the accepted family owner in the proof harness; ContextInspectorHost then re-projects them without taking selection ownership."
+}

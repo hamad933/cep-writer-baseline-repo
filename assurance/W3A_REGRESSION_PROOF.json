@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 2,
+  "mission": "W3-A-GLOBAL-INPUT-KEYMAP-BOUNDED-CORRECTION",
+  "classification": "ISOLATED_VALIDATION_CLONE_REGRESSION_RECEIPT_NOT_CONTROLLER_ACCEPTANCE",
+  "canonicalSourceSha256": "4fd00b884dcc3bb44a3284f307c8ef9c1983715c803f7652ab527ee30030c83c",
+  "validationClone": "isolated copy of corrected W3-A candidate",
+  "candidateSourceWasNotMutatedByRegression": true,
+  "fullCheck": {
+    "status": "PASS",
+    "method": "npm run check on validation clone after projecting the current W3A full-browser receipt/manifest into inherited generic receipt names in that clone only",
+    "model": {
+      "pass": 178,
+      "fail": 0
+    },
+    "contracts": {
+      "pass": 151,
+      "fail": 0
+    },
+    "writerScaffold": {
+      "pass": 38,
+      "fail": 0
+    },
+    "duplicateMechanicScan": "PASS"
+  },
+  "fullBrowser": {
+    "total": 6,
+    "pass": 6,
+    "fail": 0,
+    "transport": "in-memory"
+  },
+  "wave1": {
+    "laneAWorkspacePanes": "PASS (fw-a-workspace-panes + fw-a-browser-proof)",
+    "laneBStructuredSelection": "PASS (range probe + ownership gates + selection browser + correction browser)",
+    "laneCSpatialSelectionNavigation": "PASS (consumer + negative + Recorded correction + central policy + browser proof)"
+  },
+  "wave2": {
+    "laneA": {
+      "browser": {
+        "total": 3,
+        "pass": 3,
+        "fail": 0
+      },
+      "negative": {
+        "total": 16,
+        "pass": 16,
+        "fail": 0
+      },
+      "centralModificationRevert": "PASS",
+      "sourceRestoredExactly": true
+    },
+    "laneBStructuredClipboard": {
+      "modelTests": 12,
+      "allPass": true
+    },
+    "laneCSpatialInteractionRelation": {
+      "modelTests": 13,
+      "allPass": true,
+      "fullCurrentBrowserCoversSpatialRelation": true
+    }
+  },
+  "acceptedStructuredTargetedBrowser": {
+    "vs03": "PASS",
+    "vs04": "PASS",
+    "vs05": "PASS",
+    "vs05ReadModeCorrection": "PASS"
+  },
+  "sourceExactAfterCentralAndTargetedRegressions": true,
+  "verdict": "PASS"
+}

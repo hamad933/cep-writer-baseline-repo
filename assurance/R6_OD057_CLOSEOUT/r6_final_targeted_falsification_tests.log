@@ -1,0 +1,266 @@
+TAP version 13
+# CG3_CONTROLLER_CORR01_LEARN_RQ_TRUTH: PASS
+# Subtest: dist/tests/rescue/CG3_CONTROLLER_CORR01_LEARN_RQ_TRUTH/controller-corr01.test.js
+ok 1 - dist/tests/rescue/CG3_CONTROLLER_CORR01_LEARN_RQ_TRUTH/controller-corr01.test.js
+  ---
+  duration_ms: 70.218121
+  type: 'test'
+  ...
+# CG4_CONTROLLER_CORR01_W03_LIFECYCLE_TRUTH: PASS
+# Subtest: dist/tests/rescue/CG4_W03_COVERAGE/controller-corr01-w03-lifecycle-truth.test.js
+ok 2 - dist/tests/rescue/CG4_W03_COVERAGE/controller-corr01-w03-lifecycle-truth.test.js
+  ---
+  duration_ms: 74.218459
+  type: 'test'
+  ...
+# {"lane":"CG5_W04_COVERAGE","pass":true,"providers":["w04.evidence.analysis","w04.mastery.analysis","w04.portfolio.analysis","w04.reviews.analysis"],"routeWiring":"R6_REQUIRED","grouping":"AUTHORITY_DECISION_REQUIRED"}
+# Subtest: dist/tests/rescue/CG5_W04_COVERAGE/w04-convergence.test.js
+ok 3 - dist/tests/rescue/CG5_W04_COVERAGE/w04-convergence.test.js
+  ---
+  duration_ms: 85.747795
+  type: 'test'
+  ...
+# {
+#   "status": "PASS",
+#   "summary": {
+#     "total": 3,
+#     "pass": 3,
+#     "fail": 0
+#   },
+#   "results": [
+#     {
+#       "id": "manual-ai.review-requires-imported-provenance-equal-result",
+#       "status": "PASS"
+#     },
+#     {
+#       "id": "backup.schema-conflict-is-visible-and-stage-unavailable",
+#       "status": "PASS"
+#     },
+#     {
+#       "id": "backup.drill-requires-stage-for-exact-selected-package",
+#       "status": "PASS"
+#     }
+#   ]
+# }
+# Subtest: dist/tests/rescue/CG6_W05_COVERAGE/controller-corr01-w05-truth.test.js
+ok 4 - dist/tests/rescue/CG6_W05_COVERAGE/controller-corr01-w05-truth.test.js
+  ---
+  duration_ms: 42.171779
+  type: 'test'
+  ...
+# Subtest: existing audit adapter remains compatible without granting W05 AuditEvent authority
+ok 5 - existing audit adapter remains compatible without granting W05 AuditEvent authority
+  ---
+  duration_ms: 7.757639
+  type: 'test'
+  ...
+# Subtest: existing validation adapter keeps TechnicalFinding outside formal review authority
+ok 6 - existing validation adapter keeps TechnicalFinding outside formal review authority
+  ---
+  duration_ms: 2.344558
+  type: 'test'
+  ...
+# {"pass":true,"lane":"S14_W04_EVIDENCE_REVIEWS","evidenceRevisions":3,"reviewDecisionHistory":1,"centralCompareOwner":"AnalyticalCompareOwner"}
+# Subtest: dist/tests/rescue/S14_W04_EVIDENCE_REVIEWS/domain-lifecycle.test.js
+ok 6 - dist/tests/rescue/S14_W04_EVIDENCE_REVIEWS/domain-lifecycle.test.js
+  ---
+  duration_ms: 83.236757
+  type: 'test'
+  ...
+# {
+#   "lane": "S15_W04_MASTERY_PORTFOLIO",
+#   "pass": true,
+#   "mastery": {
+#     "localWrites": 0,
+#     "evaluatorRequests": 1,
+#     "missingRefs": [
+#       "ev-missing@r9"
+#     ]
+#   },
+#   "portfolio": {
+#     "canonicalSourceWrites": 0,
+#     "unresolvedGrouping": "AUTHORITY_DECISION_REQUIRED",
+#     "authorizedGrouping": "r7"
+#   },
+#   "sharedConsumers": {
+#     "collection": true,
+#     "analyticalCompare": true,
+#     "auditProvenance": true,
+#     "context": true
+#   }
+# }
+# Subtest: dist/tests/rescue/S15_W04_MASTERY_PORTFOLIO/domain-authority.test.js
+ok 7 - dist/tests/rescue/S15_W04_MASTERY_PORTFOLIO/domain-authority.test.js
+  ---
+  duration_ms: 73.117575
+  type: 'test'
+  ...
+# {
+#   "lane": "S17_W05_VALIDATION_MANUAL_AI",
+#   "pass": 12,
+#   "fail": 0,
+#   "tests": [
+#     {
+#       "name": "manual-ai.no-hidden-provider-execution",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "manual-ai.export-binds-exact-source-revision-digest",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "manual-ai.import-mismatch-fails-closed-and-preserves-request",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "manual-ai.import-equality-is-required",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "manual-ai.unknown-import-cannot-create-authority",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "manual-ai.accept-creates-idempotent-draft-only",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "manual-ai.shared-collection-and-context-remain-bound",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "validation.exact-identities-produce-technical-valid-only",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "validation.changed-artifact-cannot-reuse-result",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "validation.missing-validator-is-unavailable-never-pass",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "validation.technical-finding-never-becomes-w04-finding",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "validation.shared-collection-is-real-technical-finding-projection",
+#       "status": "PASS"
+#     }
+#   ]
+# }
+# Subtest: dist/tests/rescue/S17_W05_VALIDATION_MANUAL_AI/s17-tests.js
+ok 8 - dist/tests/rescue/S17_W05_VALIDATION_MANUAL_AI/s17-tests.js
+  ---
+  duration_ms: 78.870791
+  type: 'test'
+  ...
+# {
+#   "lane": "S18_W05_BACKUP_AUDIT",
+#   "pass": 13,
+#   "fail": 0,
+#   "tests": [
+#     {
+#       "name": "audit.sha256-portable-known-vector",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "audit.hash-chain-valid-and-not-encryption",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "audit.tamper-yields-first-invalid-sequence",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "audit.search-does-not-mutate-event-count-or-hash",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "audit.annotation-separate-and-record-hash-unchanged",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "audit.provider-is-auditevent-domain-not-command-receipts",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "backup.plan-preview-stage-perform-zero-provider-writes",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "backup.drill-requires-stage",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "backup.drill-isolated-and-not-live-restored",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "backup.activation-request-is-authority-pending-not-restore",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "backup.no-persistence-owner-mutation",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "backup.durable-failure-gap-remains-truthful",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "backup.profile-command-identities-preserved",
+#       "status": "PASS"
+#     }
+#   ]
+# }
+# Subtest: dist/tests/rescue/S18_W05_BACKUP_AUDIT/domain-tests.js
+ok 9 - dist/tests/rescue/S18_W05_BACKUP_AUDIT/domain-tests.js
+  ---
+  duration_ms: 46.5178
+  type: 'test'
+  ...
+# {
+#   "lane": "S18_W05_BACKUP_AUDIT",
+#   "suite": "source-boundary",
+#   "pass": 5,
+#   "fail": 0,
+#   "tests": [
+#     {
+#       "name": "audit-source-does-not-use-command-receipts-as-domain-provider",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "backup-source-has-no-live-restore-endpoint",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "backup-source-does-not-import-persistence-owner",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "audit-annotation-does-not-write-audit-event",
+#       "status": "PASS"
+#     },
+#     {
+#       "name": "writable-files-only-own-s18-domain",
+#       "status": "PASS"
+#     }
+#   ]
+# }
+# Subtest: dist/tests/rescue/S18_W05_BACKUP_AUDIT/source-boundary-tests.js
+ok 10 - dist/tests/rescue/S18_W05_BACKUP_AUDIT/source-boundary-tests.js
+  ---
+  duration_ms: 30.548072
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 248.446935

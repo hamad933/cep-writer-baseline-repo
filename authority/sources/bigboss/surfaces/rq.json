@@ -1,0 +1,254 @@
+{
+  "objects": {
+    "SourceRevision": "sourceId + revision + digest + locator",
+    "Claim": "claimId + revision + scope",
+    "ClaimSourceRelation": "relationId + exact endpoints + inclusion/exclusion",
+    "AnalysisSession": "analysisId + pair + filters + working notes",
+    "WorkingConflict": "conflictId + classification + rationale; not formal Review"
+  },
+  "state_dimensions": {
+    "mode": [
+      "CLAIMS",
+      "COMPARE",
+      "PROVENANCE",
+      "REVISION",
+      "HISTORY",
+      "CONFLICTS"
+    ],
+    "pair": [
+      "EXACT",
+      "INCOMPATIBLE",
+      "MISSING_SIDE"
+    ],
+    "analysis": [
+      "WORKING",
+      "SAVED",
+      "STALE"
+    ]
+  },
+  "read_model": "ResearchQualityReadService returns source/claim relations and revision graphs; analysis working state has separate persistence.",
+  "persistence": {
+    "SourceRevision": "SourceGovernance.Source",
+    "Claim": "SourceGovernance.SourceClaim",
+    "ClaimSourceRelation": "SourceGovernance relations",
+    "AnalysisSession": "ResearchQuality.Analysis",
+    "WorkingConflict": "ResearchQuality.Conflict"
+  },
+  "invariants": [
+    "Working review does not assign W04 reviewer authority",
+    "Compare pair pins both revisions",
+    "Rationale is analysis; source authority is source metadata",
+    "979/431 rows remain derived claims outside this packet"
+  ],
+  "epistemic": {
+    "empty": "No claims in scope: explain exclusions and offer scope change.",
+    "stale": "One compared source superseded: keep pinned pair and disclose successor; no silent refresh.",
+    "unavailable": "Unresolvable locator shown separately from absent source; keep exact source ID.",
+    "error": "Diff/schema mismatch produces incompatible pair, not zero differences."
+  },
+  "operations": [
+    {
+      "name": "search",
+      "family": "AnalyticalCommand",
+      "payload": "leftRef:ref rightRef:ref scope:strings filters:object workingAnalysisId:string",
+      "before": "mode=CLAIMS",
+      "event": "query scoped claims and sources",
+      "after": "filtered relation table with inclusion reasons",
+      "guard": "Filter schema/domain collation validated",
+      "oracle": "Excluded source remains traceable and can be included explicitly",
+      "persistence": "ResearchQuality.Analysis",
+      "method": "GET",
+      "gate": null,
+      "command_id": "rq.search",
+      "surface_id": "rq",
+      "semantic_owner": "ResearchQualityDomain",
+      "focus_after": "Research & Quality active object/control; detached target→rq-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Diff/schema mismatch produces incompatible pair, not zero differences.",
+        "503_timeout": "Unresolvable locator shown separately from absent source; keep exact source ID."
+      },
+      "test_id": "TEST-rq.search",
+      "evidence_id": "EVID-rq.search",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "compare",
+      "family": "AnalyticalCommand",
+      "payload": "leftRef:ref rightRef:ref scope:strings workingAnalysisId:string",
+      "before": "pair=EXACT",
+      "event": "compute working structured diff",
+      "after": "comparison shows content and relation deltas",
+      "guard": "Both revisions available and type-compatible",
+      "oracle": "Swapping pair reverses direction labels without rewriting either source",
+      "persistence": "ResearchQuality.Analysis",
+      "method": "GET",
+      "gate": null,
+      "command_id": "rq.compare",
+      "surface_id": "rq",
+      "semantic_owner": "ResearchQualityDomain",
+      "focus_after": "Research & Quality active object/control; detached target→rq-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Diff/schema mismatch produces incompatible pair, not zero differences.",
+        "503_timeout": "Unresolvable locator shown separately from absent source; keep exact source ID."
+      },
+      "test_id": "TEST-rq.compare",
+      "evidence_id": "EVID-rq.compare",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "review",
+      "family": "AnalyticalCommand",
+      "payload": "leftRef:ref rightRef:ref scope:strings workingAnalysisId:string conflictId:string classification:string rationale:string",
+      "before": "analysis=WORKING",
+      "event": "classify conflict in analytical queue",
+      "after": "working conflict saved with author and revision",
+      "guard": "Research analysis write permission; never ReviewDecisionCommand",
+      "oracle": "Save conflict creates zero EvidenceDecision rows",
+      "persistence": "ResearchQuality.Conflict",
+      "method": "POST",
+      "gate": null,
+      "command_id": "rq.review",
+      "surface_id": "rq",
+      "semantic_owner": "ResearchQualityDomain",
+      "focus_after": "Research & Quality active object/control; detached target→rq-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Diff/schema mismatch produces incompatible pair, not zero differences.",
+        "503_timeout": "Unresolvable locator shown separately from absent source; keep exact source ID."
+      },
+      "test_id": "TEST-rq.review",
+      "evidence_id": "EVID-rq.review",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "provenance",
+      "family": "AnalyticalCommand",
+      "payload": "leftRef:ref rightRef:ref scope:strings workingAnalysisId:string locator:string",
+      "before": "mode any",
+      "event": "inspect provenance chain",
+      "after": "source, authority, locator and revision displayed",
+      "guard": "Exact source identity; mark derived versus original",
+      "oracle": "Missing original bytes yields DERIVED_ONLY, never original-hash assertion",
+      "persistence": "SourceGovernance.readProjection",
+      "method": "GET",
+      "gate": null,
+      "command_id": "rq.provenance",
+      "surface_id": "rq",
+      "semantic_owner": "ResearchQualityDomain",
+      "focus_after": "Research & Quality active object/control; detached target→rq-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Diff/schema mismatch produces incompatible pair, not zero differences.",
+        "503_timeout": "Unresolvable locator shown separately from absent source; keep exact source ID."
+      },
+      "test_id": "TEST-rq.provenance",
+      "evidence_id": "EVID-rq.provenance",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "rq",
+  "title": "Research & Quality",
+  "workspace": "W02",
+  "semantic_owner": "ResearchQualityDomain",
+  "archetype": "AnalyticalResearchWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W02-RQ-001",
+    "CAP-W02-RQ-002",
+    "CAP-W02-RQ-003",
+    "CAP-W02-RQ-004",
+    "CAP-W02-RQ-005",
+    "CAP-W02-RQ-006",
+    "CAP-W02-RQ-007",
+    "CAP-W02-RQ-008",
+    "CAP-W02-RQ-009",
+    "CAP-W02-RQ-010",
+    "CAP-W02-RQ-011",
+    "CAP-W02-RQ-012",
+    "CAP-W02-RQ-013"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W02-RQ-001",
+        "CAP-W02-RQ-002",
+        "CAP-W02-RQ-003",
+        "CAP-W02-RQ-004",
+        "CAP-W02-RQ-005",
+        "CAP-W02-RQ-006",
+        "CAP-W02-RQ-007",
+        "CAP-W02-RQ-008",
+        "CAP-W02-RQ-009",
+        "CAP-W02-RQ-010",
+        "CAP-W02-RQ-011",
+        "CAP-W02-RQ-012",
+        "CAP-W02-RQ-013"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Research & Quality",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-005",
+    "NC-014",
+    "NC-019",
+    "NC-035"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore",
+    "AnalyticalWorkbenchCore"
+  ],
+  "adapter": "ResearchQualityDomainAdapter",
+  "regions": {
+    "TOP": "Research & Quality exact identity, local mode, command routes",
+    "LEFT": "typed SourceRevision collection/navigation",
+    "CENTER": "AnalyticalResearchWorkbench primary task",
+    "RIGHT": "one selected SourceRevision identity/context inspector",
+    "BOTTOM": "Deep Research & Quality diagnostics/history"
+  },
+  "command_ids": [
+    "rq.search",
+    "rq.compare",
+    "rq.review",
+    "rq.provenance"
+  ]
+}

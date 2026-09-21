@@ -1,0 +1,2401 @@
+PROJECT:
+Cybersecurity Education Platform — CEP
+
+WORKSPACE:
+W03 — Simulation & Enterprise / Results & Analytics
+
+MISSION:
+DESIGN / RECONSTRUCT THE COMPLETE W03 PROFESSIONAL SIMULATION WORKBENCH EXPERIENCE
+
+ROLE:
+WORLD-CLASS CYBER-SIMULATION PRODUCT ARCHITECT
+/ NETWORK + ENTERPRISE SIMULATION UX ARCHITECT
+/ PROFESSIONAL WORKBENCH DESIGNER
+/ DEVICE-INTERACTION + TERMINAL EXPERIENCE ARCHITECT
+/ SPATIAL + NON-SPATIAL INTERACTION SYSTEM DESIGNER
+/ EXTREME-CUSTOMIZATION WORKSPACE ARCHITECT
+/ ACCESSIBILITY + KEYBOARD + POINTER INTERACTION ARCHITECT
+/ RESPONSIVE + RTL/BIDI UX ARCHITECT
+/ HIGH-FIDELITY SIMULATION EXPERIENCE DESIGNER
+/ PRODUCTION-MAPPABLE INTERACTION ARCHITECT
+
+RESPOND IN ARABIC FOR DESIGN / EXPLANATION.
+Technical names, component names, schemas, commands, IDs and interaction terms
+may remain English.
+
+====================================================================
+0. CORE PRODUCT THESIS
+====================================================================
+
+W03 MUST FEEL LIKE A COMPLETE PROFESSIONAL CYBER-SIMULATION WORKSTATION.
+
+Do NOT design W03 as:
+
+- a graph editor;
+- a collection of cards;
+- five disconnected pages;
+- a topology viewer;
+- a dashboard;
+- a fake terminal shell;
+- a node-and-edge drawing application;
+- a visual-only prototype;
+- static devices connected by decorative lines.
+
+The experience should feel conceptually closer to the strongest qualities of:
+
+GNS3
+Cisco Packet Tracer
+Cisco Modeling Labs
+EVE-NG
+professional IDEs/workbenches such as VS Code
+professional terminal managers
+packet-analysis and cyber-operation workstations
+
+but W03 should NOT blindly clone any one product.
+
+The North Star is:
+
+"I can build a complete simulated environment, bring it alive, interact with
+its devices and services as if they were meaningful operational systems,
+operate multiple terminals/tools simultaneously, observe causality and
+telemetry, troubleshoot the environment, execute training scenarios/labs,
+and later replay and analyze exactly what happened — while remaining inside
+one coherent customizable professional workspace."
+
+====================================================================
+1. THE MOST IMPORTANT PRODUCT PRINCIPLE
+====================================================================
+
+W03 is ONE CONTINUOUS WORKBENCH.
+
+The five conceptual surfaces are:
+
+ENTERPRISE
+SCENARIOS
+LABS
+RUNS
+RESULTS
+
+but do NOT make them psychologically feel like five unrelated applications.
+
+They should participate in a continuous workflow:
+
+BUILD / MODEL
+→ PREPARE
+→ RUN / OPERATE
+→ OBSERVE
+→ REPLAY / ANALYZE
+
+Preserve as much spatial, object, selection and operational context as possible
+while moving between these stages.
+
+Example:
+
+The user builds a network/environment.
+They select "Run".
+The environment does NOT disappear and get replaced with an unrelated dashboard.
+
+Instead:
+
+- the same or equivalent topology becomes the Runtime projection;
+- device states become alive;
+- links show runtime state;
+- operational tools become available;
+- commands produce state changes;
+- telemetry/events appear;
+- tasks/scenario progression activates;
+- the user remains oriented inside the same environment.
+
+When the Run ends:
+
+- Results / Replay should retain device identity;
+- topology context should remain recognizable;
+- selecting an historical event may highlight the exact device/link/service;
+- historical tools become read-only historical views where appropriate.
+
+====================================================================
+2. BUILD MODE != RUN MODE, BUT THEY SHOULD FEEL CONTINUOUS
+====================================================================
+
+Separate authored truth from runtime truth.
+
+BUILD MODE:
+- edit definitions;
+- add/remove devices;
+- connect interfaces;
+- configure intended properties;
+- design Digital Twin;
+- define Scenario;
+- define Lab;
+- configure initial state.
+
+RUN MODE:
+- operate a frozen runtime projection;
+- interact with devices;
+- issue simulated commands;
+- observe runtime state;
+- generate events;
+- inspect telemetry;
+- execute tasks;
+- pause/resume/stop;
+- troubleshoot.
+
+Never silently let a Run mutate the authored source definition.
+
+Possible future professional command:
+
+PROMOTE_RUNTIME_CHANGE_TO_NEW_DRAFT
+
+but this should be explicit.
+
+The UI should make the mode clear without making the user feel they entered
+a completely different application.
+
+====================================================================
+3. W03 IS NOT THE VISUALIZE ENGINE
+====================================================================
+
+Maintain a strict conceptual separation.
+
+VISUALIZE / SPATIAL ENGINE can provide generic mechanics:
+
+- viewport;
+- pan;
+- zoom;
+- fit;
+- minimap;
+- node representation;
+- generic edges;
+- drag;
+- multi-select;
+- marquee;
+- keyboard spatial navigation;
+- group movement;
+- snapping;
+- grid;
+- alignment;
+- distribution;
+- layering;
+- canvas object placement;
+- representation positioning;
+- viewport persistence.
+
+W03 owns meaning:
+
+- Device identity;
+- Device type;
+- Device behavior;
+- interfaces/ports;
+- network semantics;
+- Enterprise relationships;
+- Digital Twin semantics;
+- Scenario semantics;
+- Lab semantics;
+- runtime state;
+- Run identity;
+- simulated command semantics;
+- causal effects;
+- events;
+- telemetry;
+- validation;
+- tasks;
+- Results truth.
+
+The spatial engine draws/manipulates representations.
+
+W03 owns what those representations actually MEAN.
+
+A visual connection must NOT automatically become a canonical network
+relationship unless the W03 semantic command accepts it.
+
+====================================================================
+4. GLOBAL W03 WORKBENCH STRUCTURE
+====================================================================
+
+Design W03 around a configurable professional shell.
+
+Possible regions:
+
+TOP BAR
+LEFT SIDEBAR
+CENTER WORKSPACE
+RIGHT INSPECTOR
+BOTTOM / SESSION SHELF
+FLOATING OPERATIONAL LAYER
+COMMAND PALETTE
+CONTEXT MENUS
+STATUS / NOTIFICATION LAYER
+
+These are NOT required to remain visible simultaneously.
+
+CENTER is always the current primary work.
+
+Support:
+
+- dock;
+- undock;
+- resize;
+- collapse;
+- hide;
+- overlay;
+- move;
+- tab;
+- split;
+- restore;
+- save layout.
+
+Avoid permanent visual overload.
+
+Do not create:
+
+Topology + Terminal + SIEM + Timeline + Events + Inspector + Task + Logs
+
+all simultaneously competing as permanent primary centers.
+
+Use progressive disclosure.
+
+====================================================================
+5. OPERATIONAL SURFACE MANAGER — CRITICAL
+====================================================================
+
+One of the strongest W03 systems should be a professional:
+
+OPERATIONAL SURFACE MANAGER
+
+This manages interaction surfaces associated with devices/services.
+
+Examples:
+
+Terminal
+Shell
+Browser
+SIEM
+Event Viewer
+File System
+Database Console
+Packet Capture
+Network Interface Inspector
+Service Console
+Application UI
+Device GUI
+future specialized tools
+
+These must NOT behave like ordinary modal dialogs.
+
+Think of them as movable professional operational windows.
+
+Possible presentation states:
+
+FLOATING
+NODE_ANCHORED
+VIEWPORT_PINNED
+DOCKED_BOTTOM
+DOCKED_LEFT
+DOCKED_RIGHT
+CENTER_TAB
+TAB_GROUP
+SPLIT_HORIZONTAL
+SPLIT_VERTICAL
+MULTI_PANE
+MAXIMIZED
+ZEN
+MINIMIZED_TO_SESSION_SHELF
+POP_OUT_WINDOW
+
+The system should choose sensible defaults but allow user freedom.
+
+Each Operational Surface should support, when applicable:
+
+- drag;
+- resize;
+- snap;
+- dock;
+- undock;
+- pin;
+- unpin;
+- minimize;
+- maximize;
+- restore;
+- close;
+- reopen;
+- focus;
+- move-to-pane;
+- move-to-tab-group;
+- split;
+- merge;
+- reorder;
+- keyboard move;
+- keyboard resize;
+- session status;
+- device identity;
+- Run identity;
+- tool identity.
+
+====================================================================
+6. TWO DIFFERENT KINDS OF PINNING
+====================================================================
+
+Evaluate and preferably support both concepts:
+
+PIN_TO_VIEWPORT
+
+The terminal/window stays in the same screen position while the canvas
+pans/zooms behind it.
+
+ANCHOR_TO_DEVICE
+
+The terminal/window remains associated spatially with the device/node.
+
+Example:
+
+A tiny terminal can appear near Router-01.
+
+If the topology moves/pans, the shell follows Router-01.
+
+The user may convert:
+
+ANCHOR_TO_DEVICE
+→ PIN_TO_VIEWPORT
+→ DOCKED
+→ CENTER_TAB
+
+without destroying the session.
+
+====================================================================
+7. STICKY-NOTE FREEDOM, BUT PROFESSIONAL SESSION SEMANTICS
+====================================================================
+
+Floating shells may borrow UX qualities from Sticky Notes:
+
+- free movement;
+- pinning;
+- resizable frame;
+- always-visible option;
+- spatial memory.
+
+But they are NOT Sticky Notes.
+
+An Operational Surface has:
+
+- session lifecycle;
+- active I/O;
+- device association;
+- runtime association;
+- reconnect behavior;
+- accessibility semantics;
+- focus semantics;
+- command history;
+- status;
+- possibly authentication/context identity.
+
+The shell must feel like a first-class professional tool.
+
+====================================================================
+8. DEVICE INTERACTION GRAMMAR
+====================================================================
+
+Provide many input routes, but one semantic command system.
+
+Possible interaction routes:
+
+- double click;
+- context menu;
+- keyboard shortcut;
+- command palette;
+- quick-action button;
+- device inspector;
+- device list;
+- action ring;
+- multi-select actions.
+
+These routes should call shared semantic commands such as:
+
+OPEN_PRIMARY_DEVICE_TOOL
+OPEN_TERMINAL
+OPEN_BROWSER
+OPEN_EVENT_VIEWER
+OPEN_SIEM
+OPEN_FILE_SYSTEM
+OPEN_DATABASE_CONSOLE
+OPEN_PACKET_CAPTURE
+FOCUS_DEVICE
+INSPECT_DEVICE
+START_DEVICE
+PAUSE_DEVICE
+STOP_DEVICE
+RESTART_DEVICE
+OPEN_INTERFACE_VIEW
+OPEN_SERVICE_VIEW
+
+Do NOT implement different logic for each click route.
+
+====================================================================
+9. DOUBLE-CLICK BEHAVIOR
+====================================================================
+
+Design double click intelligently.
+
+A strong model may be:
+
+BUILD MODE:
+Double-click → Inspect/Edit/Focus device.
+
+RUN MODE:
+Double-click → Open primary operational tool.
+
+For a router/firewall:
+primary tool may be Terminal.
+
+For a server:
+Terminal or service view.
+
+For SIEM appliance:
+SIEM UI.
+
+For endpoint:
+Shell / desktop / event viewer depending on capability.
+
+Allow user preference:
+
+DOUBLE_CLICK_ACTION = configurable.
+
+====================================================================
+10. TERMINAL / SHELL EXPERIENCE
+====================================================================
+
+The Terminal is one of the most important W03 experiences.
+
+It should feel like a real professional terminal, NOT an HTML text box.
+
+Design for:
+
+- true session identity;
+- device hostname;
+- prompt;
+- command history;
+- autocomplete if device behavior supports it;
+- scrollback;
+- selection;
+- copy;
+- paste;
+- find;
+- clear;
+- command navigation;
+- resize;
+- persistent scroll;
+- terminal tabs;
+- split terminal;
+- multiple sessions per device where supported;
+- reconnect;
+- connection state;
+- pause state;
+- stale state;
+- ended-run state;
+- historical replay/read-only mode.
+
+Provide customization:
+
+- font family;
+- font size;
+- line height;
+- cursor style;
+- cursor blink;
+- scrollback size;
+- contrast;
+- terminal theme;
+- padding;
+- opacity/transparency where appropriate;
+- audible/visual bell;
+- shell profile;
+- keyboard mapping.
+
+The Terminal should support:
+
+FLOATING
+DOCKED
+TABBED
+SPLIT
+MAXIMIZED
+ZEN
+POPOUT
+
+without starting a new session every time the presentation changes.
+
+====================================================================
+11. TERMINAL REALISM
+====================================================================
+
+Never generate decorative shell output.
+
+Expected causal chain:
+
+USER COMMAND
+→ COMMAND PARSER / DEVICE CAPABILITY
+→ BEHAVIOR RULE
+→ SIMULATION STATE CHANGE
+→ NETWORK / SERVICE CONSEQUENCE
+→ EVENT
+→ TELEMETRY
+→ TASK / VALIDATION CONSEQUENCE
+→ VISIBLE OUTPUT
+
+Example:
+
+User disables interface.
+
+Do NOT merely print:
+
+"Interface disabled."
+
+The simulation should also be capable of producing:
+
+- interface state change;
+- route impact;
+- reachability change;
+- dependent service impact;
+- event;
+- telemetry;
+- Scenario/Lab validation effect.
+
+This is what makes W03 a simulation platform.
+
+====================================================================
+12. MULTI-DEVICE OPERATION
+====================================================================
+
+Design professional simultaneous device work.
+
+Examples:
+
+Router A Terminal | Router B Terminal
+
+Attacker Terminal | Target Event Viewer
+
+Firewall CLI | Packet Capture
+
+SIEM | Endpoint Terminal
+
+Database Console | Application Logs
+
+Allow:
+
+- multiple sessions;
+- fast switching;
+- tabs;
+- split panes;
+- session groups;
+- session shelf;
+- quick switcher;
+- search sessions;
+- keyboard next/previous session;
+- close/reopen;
+- session restoration.
+
+Potential 2x2 multi-console layout.
+
+Do not allow multi-session work to become visual chaos.
+
+====================================================================
+13. SESSION SHELF
+====================================================================
+
+Consider a persistent but compact:
+
+SESSION SHELF
+
+showing open operational tools.
+
+Example:
+
+R1 — Terminal
+R2 — Terminal
+WIN-DC01 — Event Viewer
+SIEM-01 — SIEM
+PCAP — eth0
+
+Each item may show:
+
+- active;
+- idle;
+- warning;
+- disconnected;
+- paused;
+- ended;
+- historical.
+
+User can:
+
+- focus;
+- restore;
+- close;
+- pin;
+- move;
+- group.
+
+====================================================================
+14. ENTERPRISE SURFACE
+====================================================================
+
+Enterprise should feel like a professional DIGITAL ENVIRONMENT BUILDER.
+
+Primary purposes:
+
+- define the organization/environment;
+- define systems;
+- devices;
+- networks;
+- services;
+- applications;
+- identities;
+- controls;
+- dependencies;
+- relationships;
+- Digital Twins;
+- Baselines.
+
+Possible major components:
+
+LEFT:
+- asset/device palette;
+- Enterprise object catalog;
+- layers;
+- search;
+- saved views.
+
+CENTER:
+- topology / Digital Twin canvas;
+- flexible spatial modeling;
+- devices;
+- networks;
+- groups;
+- zones;
+- relationships.
+
+RIGHT:
+context-sensitive inspector.
+
+Examples:
+
+Device selected:
+- identity;
+- type;
+- interfaces;
+- capabilities;
+- properties;
+- simulation behavior;
+- associated services;
+- source;
+- revision.
+
+Link selected:
+- endpoints;
+- interfaces;
+- link type;
+- bandwidth;
+- status;
+- semantics.
+
+Zone selected:
+- name;
+- network;
+- trust;
+- segmentation;
+- members.
+
+Provide:
+
+- drag/drop;
+- quick add;
+- duplicate;
+- multi-select;
+- group;
+- align;
+- distribute;
+- copy/paste;
+- keyboard move;
+- undo/redo;
+- snapping;
+- grid;
+- zoom;
+- minimap;
+- search-to-focus.
+
+Connections should be port/interface aware.
+
+Do not connect generic center-point node → node only.
+
+Connection workflow may be:
+
+device
+→ interface
+→ compatible target interface
+→ connection semantics.
+
+Show incompatible interfaces clearly.
+
+====================================================================
+15. ENTERPRISE — DEVICE LIBRARY
+====================================================================
+
+Design a rich device/object palette.
+
+Potential categories:
+
+Routers
+Switches
+Firewalls
+Servers
+Endpoints
+Identity Systems
+Security Appliances
+SIEM
+Databases
+Web Services
+Applications
+Network Services
+Cloud-like simulated components
+Simulation-only components
+
+Support:
+
+- search;
+- favorites;
+- recently used;
+- categories;
+- filters;
+- custom templates;
+- saved device presets.
+
+Do NOT hard-code real-vendor dependency.
+
+====================================================================
+16. DIGITAL TWIN EXPERIENCE
+====================================================================
+
+Digital Twin should represent an interactive simulated operational model.
+
+Support:
+
+- Draft;
+- Revision;
+- Validate;
+- Publish Revision;
+- Clone Revision;
+- Compare Revision;
+- Create Baseline.
+
+Show clearly:
+
+ENTERPRISE DEFINITION
+vs
+TWIN SIMULATION PROPERTIES
+vs
+RUN STATE.
+
+Potential per-device Twin properties:
+
+- initial state;
+- capabilities;
+- behavior;
+- service state;
+- control behavior;
+- telemetry generation;
+- event rules;
+- reset rules.
+
+====================================================================
+17. SCENARIOS SURFACE
+====================================================================
+
+Scenarios should feel like a professional SCENARIO ORCHESTRATION STUDIO.
+
+Do NOT reduce Scenario to a simple vertical list of phases.
+
+Support:
+
+- scenario identity;
+- purpose;
+- learning/operational objective;
+- phases;
+- branches;
+- tasks;
+- conditions;
+- triggers;
+- roles;
+- teams;
+- environment contract;
+- Lab module references;
+- success/failure paths;
+- injects;
+- events;
+- timing;
+- dependencies;
+- checkpoints;
+- scoring/validation logic where appropriate.
+
+Potential representations:
+
+TIMELINE
+PHASE LANES
+FLOW
+DEPENDENCY GRAPH
+OUTLINE
+PROPERTY INSPECTOR
+
+Allow switching representations without duplicating truth.
+
+====================================================================
+18. SCENARIO AUTHORING INTERACTIONS
+====================================================================
+
+Support:
+
+- add phase;
+- reorder phase;
+- create branch;
+- connect condition;
+- add task;
+- assign role;
+- reference Lab;
+- define trigger;
+- define completion condition;
+- attach event/inject;
+- set timing;
+- duplicate component;
+- group;
+- collapse;
+- expand;
+- filter;
+- search;
+- validate.
+
+Scenario links are semantic.
+
+Do not let arbitrary visual edge creation silently define execution logic.
+
+====================================================================
+19. SCENARIO RUNTIME CONTINUITY
+====================================================================
+
+During Run:
+
+Scenario authoring representation can transition to:
+
+CURRENT PHASE
+CURRENT TASK
+COMPLETED TASKS
+BLOCKED TASKS
+NEXT POSSIBLE TRANSITIONS
+ACTIVE INJECTS
+EVENTS
+ROLE ACTIVITY
+
+The same scenario should become alive rather than replaced by a generic
+Run dashboard.
+
+====================================================================
+20. LABS SURFACE
+====================================================================
+
+Labs should feel like a professional reusable PRACTICAL EXERCISE BUILDER.
+
+A Lab may contain:
+
+- metadata;
+- objectives;
+- instructions;
+- environment requirements;
+- devices;
+- services;
+- tasks;
+- exercises;
+- validation;
+- hints;
+- artifacts;
+- telemetry expectations;
+- simulated outcomes;
+- assessment points.
+
+Do NOT reduce Labs to JSON forms or a linear step list.
+
+Possible views:
+
+LAB OVERVIEW
+ENVIRONMENT
+TASK GRAPH
+EXERCISES
+VALIDATION
+EXPECTED TELEMETRY
+RESULT MODEL
+
+====================================================================
+21. LAB TASK EXPERIENCE
+====================================================================
+
+Lab tasks may support:
+
+- ordered;
+- unordered;
+- dependency-bound;
+- branching;
+- conditional;
+- optional;
+- hidden-until-triggered.
+
+Tasks should be able to connect to:
+
+device
+service
+event
+telemetry
+command result
+state
+artifact
+validation condition.
+
+Allow professional authoring plus learner/runtime projection.
+
+====================================================================
+22. LAB RUNTIME EXPERIENCE
+====================================================================
+
+When running a Lab:
+
+- environment becomes operational;
+- task panel becomes context-sensitive;
+- operational tools open directly from devices;
+- validation can observe state;
+- hints may be available depending policy;
+- progress should never fake completion;
+- user actions should drive state.
+
+The user should not feel they left the Lab environment to go to a generic
+Run page.
+
+====================================================================
+23. RUNS SURFACE
+====================================================================
+
+Runs represent operational execution context.
+
+Design:
+
+PREPARING
+READY
+RUNNING
+PAUSED
+COMPLETED
+STOPPED
+FAILED
+
+Preflight may inspect:
+
+- required environment;
+- required devices;
+- configuration validity;
+- capabilities;
+- Scenario/Lab compatibility;
+- unresolved dependencies;
+- simulation readiness.
+
+RUNNING state should feel alive.
+
+Possible runtime information:
+
+- current task;
+- current phase;
+- device states;
+- link states;
+- alerts;
+- events;
+- telemetry;
+- active sessions;
+- operational surfaces;
+- runtime topology;
+- task progression;
+- snapshots;
+- checkpoints where appropriate;
+- elapsed time;
+- pause/resume.
+
+But avoid converting Run into a dashboard wall.
+
+The topology/work area remains central.
+
+====================================================================
+24. RUN START EXPERIENCE
+====================================================================
+
+Starting a Run should be a deliberate transition.
+
+Potential workflow:
+
+START RUN
+→ Preflight
+→ environment freeze / runtime projection
+→ device preparation
+→ READY
+→ RUNNING
+
+Visual transition may communicate:
+
+"BUILD MODE"
+→
+"RUN MODE"
+
+without losing the workspace.
+
+For example:
+
+- canvas remains;
+- authored editing controls become locked/disabled;
+- runtime status appears;
+- device state badges activate;
+- operational tool actions become prominent;
+- runtime toolbar appears.
+
+====================================================================
+25. RUN TOOLBAR
+====================================================================
+
+Potential actions:
+
+START
+PAUSE
+RESUME
+STOP
+RESET if explicitly supported
+FIT TO ACTIVE OBJECT
+OPEN CURRENT TASK
+OPEN EVENTS
+OPEN TELEMETRY
+OPEN SESSION SHELF
+OPEN TIMELINE
+OPEN COMMAND PALETTE
+
+Avoid oversized permanent control bars.
+
+====================================================================
+26. DEVICE STATES
+====================================================================
+
+Design strong visual and non-visual state representation.
+
+Possible states:
+
+OFFLINE
+STARTING
+READY
+RUNNING
+DEGRADED
+ERROR
+PAUSED
+STOPPED
+UNREACHABLE
+UNKNOWN
+
+Never rely on color alone.
+
+Use:
+
+icon
+label
+shape/badge
+accessible text
+tooltip
+screen-reader announcement where appropriate.
+
+====================================================================
+27. LINKS / CONNECTIONS DURING RUN
+====================================================================
+
+Runtime links may communicate:
+
+UP
+DOWN
+DEGRADED
+BLOCKED
+FILTERED
+UNKNOWN
+
+Potential overlays:
+
+traffic activity
+packet capture
+security event
+dependency impact
+
+But avoid visual noise.
+
+Allow user controls:
+
+SHOW_LINK_STATE
+SHOW_TRAFFIC
+SHOW_LABELS
+SHOW_INTERFACES
+SHOW_SECURITY_EVENTS
+
+====================================================================
+28. PACKET / NETWORK INTERACTION
+====================================================================
+
+Consider first-class network operations:
+
+- inspect interface;
+- packet capture;
+- protocol summary;
+- link statistics;
+- flow history;
+- connection state;
+- route view;
+- ARP/table-like simulated views;
+- firewall policy effect;
+- connectivity testing.
+
+If supported by simulation semantics.
+
+Do not fake unsupported protocol depth.
+
+====================================================================
+29. RESULTS SURFACE
+====================================================================
+
+Results should feel like an analytical continuation of the Run.
+
+Primary capabilities:
+
+RESULT SUMMARY
+REPLAY
+AAR
+COMPARE
+CANDIDATE EVIDENCE HANDOFF
+
+Do NOT reduce Results to metric cards.
+
+Preserve exact Run identity.
+
+====================================================================
+30. REPLAY EXPERIENCE
+====================================================================
+
+Replay should feel like historical navigation through the real Run.
+
+Potential model:
+
+TIMELINE
++
+TOPOLOGY
++
+EVENTS
++
+DEVICE STATE
++
+ARTIFACTS
+
+Selecting timeline point:
+
+- highlight relevant devices;
+- show historical state;
+- update event context;
+- allow historical terminal/tool output where preserved;
+- expose artifacts/snapshots.
+
+Historical view must never accidentally mutate history.
+
+====================================================================
+31. REPLAY TOOL MODE
+====================================================================
+
+Operational surfaces during Replay may become:
+
+READ_ONLY_HISTORICAL_TERMINAL
+READ_ONLY_EVENT_VIEWER
+READ_ONLY_SIEM_STATE
+HISTORICAL_PACKET_CAPTURE
+
+Clearly mark historical mode.
+
+Do not make them look writable.
+
+====================================================================
+32. AFTER-ACTION REVIEW — AAR
+====================================================================
+
+AAR is analytical interpretation.
+
+It must remain separate from historical truth.
+
+Support:
+
+- annotations;
+- observations;
+- findings;
+- bookmarks;
+- lessons;
+- event commentary;
+- device commentary;
+- timeline notes;
+- tags;
+- linked evidence candidates.
+
+AAR annotations should never rewrite Run history.
+
+====================================================================
+33. COMPARE RUNS
+====================================================================
+
+Design professional comparison.
+
+Compare exact Run identities.
+
+Possible dimensions:
+
+- outcomes;
+- task timing;
+- event sequence;
+- telemetry;
+- device state;
+- user actions;
+- alerts;
+- selected timeline milestones;
+- artifacts.
+
+Possible side-by-side model:
+
+RUN A | RUN B
+
+Allow synchronized timeline where meaningful.
+
+====================================================================
+34. GLOBAL INSPECTOR SYSTEM
+====================================================================
+
+RIGHT inspector should be CONTEXT-SENSITIVE.
+
+It should change based on selection:
+
+Device
+Link
+Network
+Service
+Scenario phase
+Task
+Lab exercise
+Run event
+Telemetry event
+Result
+AAR annotation
+
+Avoid generic inspector content unrelated to selection.
+
+Allow:
+
+PIN_INSPECTOR_CONTEXT
+
+if user wants to keep one context while selecting another.
+
+====================================================================
+35. COMMAND PALETTE
+====================================================================
+
+Provide a professional command system.
+
+Examples:
+
+Add Device
+Open Terminal
+Open Primary Tool
+Focus Device
+Run Scenario
+Start Lab
+Open Current Task
+Toggle Inspector
+Toggle Session Shelf
+Move Surface Left
+Move Surface Right
+Split Terminal
+Close All Sessions
+Fit Topology
+Save Layout
+Switch Layout Profile
+Show Events
+Open Replay
+Compare Run
+
+All keyboard/pointer routes should converge into the same semantic command
+registry.
+
+====================================================================
+36. KEYBOARD SYSTEM
+====================================================================
+
+W03 must be fully usable without mouse.
+
+Provide keyboard paths for:
+
+- navigate devices;
+- select device;
+- multi-select;
+- focus canvas;
+- move device;
+- open device;
+- open terminal;
+- context actions;
+- open command palette;
+- switch sessions;
+- switch tabs;
+- switch panes;
+- resize pane;
+- move floating window;
+- resize floating window;
+- dock/undock;
+- close;
+- restore;
+- search;
+- fit;
+- zoom;
+- inspect;
+- start/pause Run.
+
+Consider a workspace-region cycling command similar to professional IDEs.
+
+====================================================================
+37. POINTER / MOUSE SYSTEM
+====================================================================
+
+Support professional pointer interactions:
+
+single click
+double click
+right click
+drag
+marquee
+multi-select modifier
+drag-to-connect
+resize handles
+dock target
+snap target
+hover quick actions
+wheel zoom
+pan gesture
+
+Avoid hidden mouse-only functionality.
+
+Every critical action needs keyboard equivalent.
+
+====================================================================
+38. ACCESSIBILITY — FIRST-CLASS
+====================================================================
+
+Accessibility is not a later checklist.
+
+Design for:
+
+- keyboard-only operation;
+- screen readers;
+- focus visibility;
+- logical tab order;
+- region navigation;
+- focus return;
+- no focus loss under floating surfaces;
+- high contrast;
+- reduced motion;
+- zoom;
+- color-independent statuses;
+- status announcements;
+- accessible modal behavior;
+- accessible terminal;
+- accessible canvas alternative.
+
+Provide a NON-SPATIAL TOPOLOGY REPRESENTATION.
+
+Example:
+
+tree / list:
+
+Network Zone
+  Router R1
+    eth0 → Switch SW1
+    eth1 → Firewall FW1
+
+This allows users who cannot rely on the visual canvas to navigate and
+operate the same semantic objects.
+
+====================================================================
+39. TERMINAL ACCESSIBILITY
+====================================================================
+
+Provide:
+
+- accessible terminal buffer;
+- screen-reader mode;
+- command/output navigation;
+- copy output;
+- jump to previous command;
+- jump to next command;
+- announce connection state;
+- distinguish input/output;
+- avoid keyboard traps;
+- configurable Tab-key behavior;
+- visible focus;
+- high contrast;
+- text scaling.
+
+====================================================================
+40. RTL / BIDI
+====================================================================
+
+Arabic interface chrome may use RTL.
+
+Technical content must remain correct.
+
+Isolate as LTR:
+
+commands
+shell output
+IP addresses
+MAC addresses
+paths
+hashes
+IDs
+hostnames
+interface names
+protocols
+logs
+
+Terminal content should generally behave LTR.
+
+Do NOT apply RTL blindly to terminal text.
+
+Test mixed lines such as:
+
+"تم الاتصال بـ Router-01 عبر interface GigabitEthernet0/1"
+
+without destroying technical readability.
+
+====================================================================
+41. EXTREME CUSTOMIZATION
+====================================================================
+
+The user should feel ownership over the workspace.
+
+Allow customization of:
+
+- left pane location;
+- right pane location;
+- bottom panel location;
+- widths;
+- heights;
+- hidden/visible regions;
+- terminal placement;
+- session shelf location;
+- floating surface size;
+- floating surface position;
+- preferred dock target;
+- split layouts;
+- tab ordering;
+- toolbar buttons;
+- icon density;
+- label density;
+- topology grid;
+- snapping;
+- minimap;
+- link detail;
+- inspector behavior;
+- terminal font;
+- terminal theme;
+- keybindings;
+- double-click action;
+- animation level;
+- display density;
+- themes;
+- high contrast.
+
+====================================================================
+42. LAYOUT PROFILES
+====================================================================
+
+Support saved workspace layouts.
+
+Possible examples:
+
+NETWORK_BUILD
+DUAL_CONSOLE
+FOUR_CONSOLE
+TROUBLESHOOTING
+INCIDENT_RESPONSE
+PACKET_ANALYSIS
+SCENARIO_AUTHORING
+LAB_AUTHORING
+REPLAY_ANALYSIS
+MINIMAL
+TEACHING_PRESENTATION
+
+Profiles are examples, not mandatory fixed presets.
+
+Allow:
+
+SAVE CURRENT LAYOUT
+DUPLICATE LAYOUT
+RESET LAYOUT
+EXPORT/IMPORT LAYOUT where appropriate.
+
+====================================================================
+43. STATE OWNERSHIP FOR CUSTOMIZATION
+====================================================================
+
+Separate:
+
+DOMAIN_STATE
+RUN_STATE
+USER_PREFERENCE
+WORKSPACE_LAYOUT_STATE
+TRANSIENT_WINDOW_STATE
+
+Moving a terminal window must NOT modify Device state.
+
+Moving a Device in a saved topology MAY be domain/presentation state depending
+the exact model.
+
+Be explicit.
+
+====================================================================
+44. CONTEXT MENUS
+====================================================================
+
+Context menus should be meaningful.
+
+Device context menu may include:
+
+Open Primary Tool
+Open Terminal
+Open Browser
+Inspect
+Focus
+Start
+Stop
+Restart
+Packet Capture
+Interfaces
+Services
+Duplicate
+Remove from Draft
+Properties
+
+Only show actions applicable to the current mode/device.
+
+No giant universal menu.
+
+====================================================================
+45. EMPTY / FAILURE / DEGRADED STATES
+====================================================================
+
+Design explicitly for:
+
+no devices
+no Scenario
+no Lab
+no Run
+device not started
+device starting
+tool unsupported
+connection failed
+reconnecting
+runtime paused
+runtime stopped
+Run ended
+stale session
+no telemetry
+no capture support
+invalid link
+invalid Scenario
+validation failed
+simulation error
+large topology performance degradation
+external runtime unavailable in future
+
+Never hide failure behind fake output.
+
+====================================================================
+46. RESPONSIVE DESIGN
+====================================================================
+
+Primary professional target:
+
+large desktop.
+
+Also design intentionally for:
+
+1440+
+standard desktop
+~1024
+compact/narrow fallback.
+
+Do NOT simply shrink everything.
+
+At medium widths:
+
+- side panes may become overlay;
+- splits may collapse to tabs;
+- floating sessions may snap into manageable layouts;
+- Session Shelf may become compact;
+- inspector may become drawer.
+
+At very narrow widths:
+
+the goal may be VIEW/OPERATE fallback rather than full topology authoring.
+
+Preserve recoverability:
+the user must always be able to reopen hidden regions.
+
+====================================================================
+47. PERFORMANCE / SCALE
+====================================================================
+
+Design for large environments.
+
+Avoid mounting hundreds of heavy terminal/UI instances simply because
+hundreds of devices exist.
+
+Consider:
+
+lazy session creation
+suspended background sessions
+canvas virtualization
+progressive rendering
+telemetry batching
+event streaming
+terminal buffer limits
+large topology LOD
+selective animation
+visibility-aware updates
+
+Maintain state integrity.
+
+====================================================================
+48. DEVICE RUNTIME ABSTRACTION
+====================================================================
+
+Do not hard-wire the W03 UX to one runtime technology.
+
+Conceptually allow:
+
+DEVICE_RUNTIME_ADAPTER
+
+Possible future adapters may include:
+
+InternalSimulationAdapter
+ContainerAdapter
+VMAdapter
+RemoteRangeAdapter
+RealDeviceAdapter
+
+These are examples.
+
+The key requirement:
+
+Changing backend runtime in the future should NOT require redesigning W03 UX.
+
+V1 can remain fully internal simulation.
+
+====================================================================
+49. FUTURE REAL RUNTIME
+====================================================================
+
+If one day Router-01 is backed by:
+
+Docker
+QEMU
+VM
+Remote Lab
+real appliance
+
+the user interaction should still conceptually be:
+
+select device
+→ open Terminal
+→ operate device.
+
+The runtime implementation changes underneath.
+
+The workspace remains consistent.
+
+====================================================================
+50. EDUCATIONAL SUPERPOWERS
+====================================================================
+
+W03 should be better than generic infrastructure tools because it understands
+learning.
+
+Possible capabilities:
+
+- explain why action caused outcome;
+- inspect causal chain;
+- reveal telemetry;
+- compare expected vs actual;
+- timeline learning markers;
+- task guidance;
+- hints under policy;
+- replay user decisions;
+- show security-control effect;
+- instructor annotations;
+- AAR;
+- exact evidence candidates.
+
+Do not let education turn the simulation into an arcade game.
+
+Maintain professional realism.
+
+====================================================================
+51. USE CASES — EXHAUSTIVE COVERAGE
+====================================================================
+
+The design MUST work for cases such as:
+
+UC-01
+Build a network by dragging Router, Switch, Firewall, Server and Endpoint.
+
+UC-02
+Connect exact interfaces.
+
+UC-03
+Detect invalid port connection.
+
+UC-04
+Configure device properties.
+
+UC-05
+Create Digital Twin revision.
+
+UC-06
+Validate environment.
+
+UC-07
+Create baseline.
+
+UC-08
+Build Scenario phases.
+
+UC-09
+Add conditional branch.
+
+UC-10
+Attach reusable Lab module.
+
+UC-11
+Build Lab task dependency graph.
+
+UC-12
+Run standalone Lab.
+
+UC-13
+Run Scenario.
+
+UC-14
+Preflight catches missing capability.
+
+UC-15
+Run transitions to RUNNING without destroying canvas context.
+
+UC-16
+Double-click router → Terminal.
+
+UC-17
+Open two router terminals side by side.
+
+UC-18
+Open attacker terminal + victim Event Viewer.
+
+UC-19
+Float terminal beside selected node.
+
+UC-20
+Anchor terminal to device.
+
+UC-21
+Pin terminal to viewport.
+
+UC-22
+Convert floating terminal to docked pane.
+
+UC-23
+Convert pane to tab.
+
+UC-24
+Maximize terminal.
+
+UC-25
+Enter Zen mode.
+
+UC-26
+Minimize terminal to Session Shelf.
+
+UC-27
+Restore terminal.
+
+UC-28
+Reconnect disconnected terminal.
+
+UC-29
+Issue command that changes interface state.
+
+UC-30
+Observe topology consequence.
+
+UC-31
+Observe telemetry consequence.
+
+UC-32
+Observe Scenario task consequence.
+
+UC-33
+Pause Run.
+
+UC-34
+Inspect state while paused.
+
+UC-35
+Resume Run.
+
+UC-36
+Open packet capture.
+
+UC-37
+Search and focus a device in large topology.
+
+UC-38
+Use complete workflow without mouse.
+
+UC-39
+Use screen reader topology list.
+
+UC-40
+Operate Arabic UI with English terminal output.
+
+UC-41
+Save custom layout.
+
+UC-42
+Restore custom layout.
+
+UC-43
+Use four-console troubleshooting layout.
+
+UC-44
+Run ends; sessions become historical/read-only where appropriate.
+
+UC-45
+Replay timeline.
+
+UC-46
+Click event → highlight affected device.
+
+UC-47
+Open historical terminal output.
+
+UC-48
+Annotate AAR without changing history.
+
+UC-49
+Compare Run A vs Run B.
+
+UC-50
+Hand off selected Result evidence candidate.
+
+Expand this ledger substantially.
+
+Do not stop at 50 if meaningful professional cases remain.
+
+====================================================================
+52. VISUAL DESIGN QUALITY
+====================================================================
+
+Aim for a professional workstation aesthetic.
+
+Avoid:
+
+toy-like cards
+huge rounded boxes everywhere
+excessive gradients
+meaningless glass effects
+oversized headers
+dashboard KPI obsession
+empty decorative space
+
+Prefer:
+
+high information density
+clear hierarchy
+precise spacing
+professional typography
+subtle elevation
+strong focus indication
+functional toolbars
+compact technical controls
+clear state
+predictable interaction
+
+The product may look visually refined,
+but functionality and workflow must drive the design.
+
+====================================================================
+53. DEVICE VISUAL LANGUAGE
+====================================================================
+
+Devices should be immediately recognizable.
+
+Provide:
+
+icon
+name
+type
+status
+critical badges only
+
+Avoid turning each node into a large dashboard card.
+
+Allow density settings:
+
+COMPACT
+STANDARD
+DETAILED
+
+====================================================================
+54. LINK VISUAL LANGUAGE
+====================================================================
+
+Links should communicate real semantics.
+
+Possible information:
+
+interface names
+link state
+network
+relationship
+traffic/state overlays
+
+Allow clutter reduction.
+
+At zoomed-out levels:
+simplify.
+
+At zoomed-in levels:
+show details.
+
+====================================================================
+55. SELECTION MODEL
+====================================================================
+
+Support:
+
+single selection
+multi-selection
+marquee
+keyboard selection
+select connected
+select group
+select by type
+select by status
+
+Actions can operate over multi-selection:
+
+move
+start
+stop
+align
+group
+inspect
+open consoles where meaningful.
+
+====================================================================
+56. SEARCH
+====================================================================
+
+Global workspace search should find:
+
+devices
+services
+Scenario phases
+tasks
+Labs
+Runs
+Results
+events
+sessions
+
+Selecting a result should navigate/focus exact context.
+
+====================================================================
+57. UNDO / REDO
+====================================================================
+
+Build/authoring actions should have professional undo/redo.
+
+Runtime actions should NOT be treated like visual editor undo.
+
+Do not allow Ctrl+Z to magically undo historical simulation truth.
+
+====================================================================
+58. NOTIFICATIONS
+====================================================================
+
+Use notifications carefully.
+
+Distinguish:
+
+info
+warning
+error
+success
+runtime event
+
+Do not turn every simulation event into a toast.
+
+High-frequency events belong in event/telemetry systems.
+
+====================================================================
+59. HISTORY / RECOVERY
+====================================================================
+
+Consider recovery of:
+
+workspace layout
+open tabs
+open sessions where logically valid
+selection
+viewport
+last working context
+
+But never reconnect stale runtime sessions to the wrong Run identity.
+
+====================================================================
+60. CROSS-SURFACE CONTINUITY
+====================================================================
+
+Enterprise → Scenario:
+
+select/reference existing environment without copying it.
+
+Scenario → Lab:
+
+reference reusable Lab definition.
+
+Lab/Scenario → Run:
+
+Run freezes exact inputs.
+
+Run → Results:
+
+Results preserves exact identity and history.
+
+Results → Enterprise/Scenario/Lab:
+
+allow navigation back to definitions without rewriting historical result.
+
+====================================================================
+61. PRODUCTION-MAPPABLE DESIGN
+====================================================================
+
+Every major UI capability should map to production concepts.
+
+For each component record:
+
+component name
+semantic owner
+state owner
+inputs
+outputs
+commands
+events
+persistence
+runtime dependencies
+accessibility behavior
+responsive behavior
+failure states.
+
+Do not build interaction that cannot be mapped to production architecture.
+
+====================================================================
+62. DO NOT BUILD — ANTI-PATTERNS
+====================================================================
+
+Explicitly avoid:
+
+- fake terminals;
+- decorative nodes;
+- decorative links;
+- generic dashboards replacing simulation;
+- five disconnected mini-applications;
+- permanent panels everywhere;
+- mouse-only canvas;
+- color-only state;
+- unrestricted visual edge creation becoming semantic truth;
+- runtime silently editing authored definitions;
+- replay mutating history;
+- Writer-only success labels pretending acceptance;
+- device tools opening as tiny modal popups only;
+- fixed pane positions;
+- fixed terminal position;
+- no customization;
+- no keyboard control;
+- blanket RTL on technical content;
+- one-device-only workflow;
+- terminal session recreated when moved/docked;
+- losing topology context when starting Run;
+- losing Run context when opening Results;
+- giant card UI instead of a professional workbench.
+
+====================================================================
+63. EXPECTED DESIGN OUTPUT PER SURFACE
+====================================================================
+
+For EACH of:
+
+ENTERPRISE
+SCENARIOS
+LABS
+RUNS
+RESULTS
+
+produce:
+
+1. product purpose;
+2. primary user goals;
+3. information architecture;
+4. main regions;
+5. primary components;
+6. secondary components;
+7. contextual components;
+8. menus;
+9. toolbars;
+10. context menus;
+11. commands;
+12. mouse/pointer interactions;
+13. keyboard interactions;
+14. accessibility model;
+15. responsive behavior;
+16. customization;
+17. empty states;
+18. loading states;
+19. error states;
+20. degraded states;
+21. data/state ownership;
+22. runtime interactions;
+23. relationship to Visualize engine;
+24. relationship to other W03 surfaces;
+25. saved workspace behavior;
+26. production mapping;
+27. concrete end-to-end use cases;
+28. interaction edge cases;
+29. visual-density rules;
+30. "what this surface must NEVER become".
+
+====================================================================
+64. SHARED SYSTEM OUTPUTS
+====================================================================
+
+Also define W03-wide shared systems:
+
+W03_WORKBENCH_SHELL
+
+SPATIAL_ENGINE_ADAPTER
+
+OPERATIONAL_SURFACE_MANAGER
+
+TERMINAL_SESSION_MANAGER
+
+SESSION_SHELF
+
+COMMAND_REGISTRY
+
+KEYMAP_MANAGER
+
+LAYOUT_MANAGER
+
+PREFERENCE_MANAGER
+
+CONTEXT_INSPECTOR
+
+RUN_MODE_CONTROLLER
+
+REPLAY_CONTEXT_MANAGER
+
+ACCESSIBILITY_NAVIGATION_MODEL
+
+RTL_BIDI_TECHNICAL_TEXT_MODEL
+
+DEVICE_RUNTIME_ADAPTER
+
+NOTIFICATION_SYSTEM
+
+SEARCH / QUICK_NAVIGATION
+
+====================================================================
+65. DETAIL LEVEL
+====================================================================
+
+Do not stop at high-level architecture.
+
+Go down to interaction details.
+
+Example:
+
+Do not merely say:
+
+"Terminal supports docking."
+
+Specify:
+
+- how docking begins;
+- available drop targets;
+- visual preview;
+- keyboard equivalent;
+- what happens to size;
+- whether session survives;
+- focus destination;
+- how undock works;
+- how layout persistence behaves;
+- how narrow viewport changes behavior;
+- screen-reader announcement.
+
+Apply this depth to all high-value interactions.
+
+====================================================================
+66. FREEDOM TO IMPROVE THIS SPEC
+====================================================================
+
+This document is a rich design brief, NOT a command to preserve every proposed
+mechanic blindly.
+
+If a described mechanic has a demonstrably stronger professional alternative:
+
+- identify the issue;
+- preserve the underlying user need;
+- propose the better model;
+- explain why.
+
+Do NOT simplify W03 merely because implementation would be easier.
+
+Also do NOT add complexity without a real workflow benefit.
+
+====================================================================
+67. FINAL NORTH STAR
+====================================================================
+
+The completed W03 design should make the following experience possible:
+
+The user opens W03.
+
+They see a professional, customizable cyber-simulation workstation.
+
+They build an environment with real semantic devices and relationships.
+
+They create or select a Scenario/Lab.
+
+They start a Run.
+
+The same environment comes alive.
+
+Devices boot/change state.
+
+Links become operational.
+
+They double-click a router.
+
+A realistic terminal opens.
+
+They drag the terminal beside the router.
+
+They anchor it to the device.
+
+They open another terminal and split the workspace.
+
+They open an Event Viewer for another system.
+
+They issue commands.
+
+The simulation state changes.
+
+Other devices react.
+
+Events and telemetry appear.
+
+Tasks progress because of actual simulated state, not button clicks.
+
+They pause the Run and inspect the environment.
+
+They resume.
+
+They finish.
+
+Results opens without destroying their mental context.
+
+They scrub the timeline.
+
+The affected devices highlight.
+
+They inspect historical terminal output.
+
+They write AAR notes without modifying history.
+
+They compare another Run.
+
+Throughout all of this:
+
+- the workspace remains theirs;
+- panes can be moved;
+- terminals can float/dock/tab/split;
+- layouts can be saved;
+- keyboard-only operation is possible;
+- screen reader users have a semantic non-spatial route;
+- Arabic chrome and technical English remain readable;
+- the experience feels like one coherent professional application.
+
+THAT is W03.
+
+====================================================================
+68. FINAL REQUIRED DELIVERABLE
+====================================================================
+
+Create a complete:
+
+W03_WORLD_CLASS_COMPLETE_WORKBENCH_DESIGN_SPEC
+
+including:
+
+A. Product North Star
+B. Shared Workbench Architecture
+C. Enterprise Full Design
+D. Scenarios Full Design
+E. Labs Full Design
+F. Runs Full Design
+G. Results Full Design
+H. Build → Run → Replay Continuity
+I. Operational Surface Manager
+J. Terminal/Shell System
+K. Multi-Device Session System
+L. Visualize/Spatial Integration
+M. Device Runtime Model
+N. Command/Interaction Grammar
+O. Pointer System
+P. Keyboard System
+Q. Accessibility System
+R. RTL/Bidi System
+S. Responsive System
+T. Customization System
+U. Layout Profile System
+V. State Ownership
+W. Failure/Degraded States
+X. Performance/Scale
+Y. Complete Use-Case Ledger
+Z. Production Component Mapping
+AA. Cross-Surface Interaction Map
+AB. Anti-Pattern / Do-Not-Build Ledger
+AC. Open Decisions / Alternatives
+AD. Recommended Ideal End-State
+
+Do NOT finish with only concepts.
+
+Describe the product down to the level where a future designer, Blueprint
+writer and implementation engineer could understand exactly what professional
+experience W03 is trying to become.

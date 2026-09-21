@@ -1,0 +1,35 @@
+# CEP EXECUTION CONTROL CENTER — CURRENT MANIFEST v1.6
+
+STATUS: CURRENT  
+SUPERSEDES: v1.5 for new Controller/Writer/Reviewer intake.
+
+## READ FIRST — mandatory order
+1. `CEP_NEXT_PARALLEL_WAVE_CURRENT_CONTROL.txt`
+2. `CEP_CONTROLLER_OPERATING_SYSTEM_READ_FIRST_v1.0.md`
+3. `CEP_CONTROLLER_OPERATING_SYSTEM_MANIFEST_v1.0.md`
+4. `CEP_CURRENT_CONTROLLER_STATE_v1.3.md`
+5. `CEP_EXECUTION_CONTROL_CENTER_README_v2.0.md`
+6. `CEP_GLOBAL_OWNER_WRITER_RULES_v1.0.md`
+7. `CEP_OWNER_GLOBAL_SPATIAL_AND_VIEW_INTERACTION_ADDENDUM_v1.0.md`
+8. `CEP_OWNER_BLUEPRINT_TO_PRODUCTION_TRACEABILITY_FACTORY_CONFIRMATION_v1.0.md`
+9. `CEP_PRODUCTION_DESTINATION_OWNER_RESOLUTION_PROTOCOL_v1.0.md`
+
+## W03
+Baseline unchanged: W03 v3.3.1 SHA `269401aa20a982be8e8e399959be37c5fbdd21de1a0b137fba4044deb8d90cc5`.
+
+State:
+`OWNER_DIRECT_REVIEW_MATERIAL_CORRECTION_REQUIRED / WORLD_CLASS_PROPOSAL_ZERO_LOSS_RECONCILIATION_REQUIRED / TRACEABILITY_PAUSED`
+
+Current Writer-A packet:
+`CEP_WRITER_A_W03_v3.3.1_OWNER_DIRECT_REVIEW_CORRECTION_PACKET_v1.1_ZERO_LOSS_HARDENED.md`
+
+The v1.0 packet is superseded for new execution intake.
+
+## W01/W02
+Baseline/packet unchanged from v1.5:
+Writer-B v1.1.4 SHA `5954e55db93411293cacb28b4082f54cf53fe8fc3950e9e56ad36cf97b82d636`.
+Current packet: `CEP_WRITER_B_W01_W02_PRE_COLAB_FINAL_SOURCE_COMPLETION_PACKET_v1.0.md`.
+Colab remains deferred until source-contract exhaustion and independent Controller review.
+
+## Global governance upgrade
+Controller OS v1.0 is now mandatory for every Controller/successor Controller. New lessons/decisions/open gates must be registered before wave close.

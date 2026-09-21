@@ -1,0 +1,337 @@
+{
+  "schemaVersion": 1,
+  "kind": "E17_ANALYTICAL_COMPARE_EXECUTABLE_PROOF",
+  "status": "PASS",
+  "candidateOnly": true,
+  "acceptanceAuthority": false,
+  "ownerToken": "AnalyticalCompare",
+  "semanticCore": "SC-032 / AnalyticalWorkbenchCore",
+  "canonicalSourceSha256": "252d822f82954f090578714b754185c90c79cd8713bf84354504be17c146ae5f",
+  "canonicalSourceFiles": 121,
+  "summary": {
+    "total": 56,
+    "pass": 56,
+    "fail": 0
+  },
+  "tests": [
+    {
+      "id": "owner.single-semantic-owner",
+      "status": "PASS",
+      "detail": {
+        "id": "AnalyticalCompareOwner",
+        "token": "AnalyticalCompare",
+        "semanticCore": "SC-032 / AnalyticalWorkbenchCore",
+        "providerContract": {
+          "id": "AnalyticalCompareProvider",
+          "version": "1.0.0",
+          "compatibility": "EXACT_MAJOR",
+          "owner": "AnalyticalCompareOwner",
+          "semanticCore": "SC-032 / AnalyticalWorkbenchCore",
+          "authority": "DOMAIN_SEMANTICS_REMAIN_PROVIDER_OWNED"
+        },
+        "authority": "REUSABLE_COMPARE_INSPECTION_MECHANIC_ONLY"
+      }
+    },
+    {
+      "id": "owner.sc032-declaration",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "provider.rq-accepted",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "provider.results-accepted",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "provider.fake-rejected",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "provider.duplicate-id-rejected",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "provider.registration-fail-atomic",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "pair.malformed-rq-ref-rejected",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "pair.latest-alias-rejected",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "pair.cross-provider-rejected",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "pair.rq-cannot-consume-results-ref",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "pair.results-cannot-consume-rq-ref",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "availability.cross-provider-truthful",
+      "status": "PASS",
+      "detail": {
+        "action": "analytical.compare",
+        "policyId": "analytical.compare",
+        "visible": true,
+        "enabled": false,
+        "reason": "Cross-provider comparison requires an explicit compatibility contract; none is declared.",
+        "code": "CROSS_PROVIDER_COMPARISON_REJECTED",
+        "selectionCount": 2,
+        "selectedTypes": [
+          "analytical-ref"
+        ]
+      }
+    },
+    {
+      "id": "rq.exact-no-diff",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "rq.changed-diff",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "rq.added-diff",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "rq.removed-diff",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "rq.incompatible-before-diff",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "rq.missing-side",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "rq.unresolvable-distinct-from-absent",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "rq.superseded-remains-pinned",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "rq.working-conflict-not-w04",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "rq.records-unchanged",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "rq.digest-revision-contradiction-rejected",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "results.exact-no-diff",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "results.changed-diff",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "results.schema-incompatible",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "results.comparator-incompatible",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "results.missing-left",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "results.missing-right",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "results.never-replay",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "results.never-simulator-run",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "results.never-determinism-verification",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "results.never-evidence-admission",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "results.aar-not-rewritten",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "results.historical-terminal-inert",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "results.records-unchanged",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "results.digest-revision-contradiction-rejected",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "core.deterministic-ordering",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "core.deterministic-filter",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "core.filter-does-not-mutate-base",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "core.inspection-does-not-mutate-base",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "core.base-result-deep-frozen",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "core.receipt-identities",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "core.provider-mismatch-rejected",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "core.provider-exception-fail-atomic",
+      "status": "PASS",
+      "detail": "PROVIDER_EXPLODED"
+    },
+    {
+      "id": "second-consumer.same-owner-rq-results",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "second-consumer.central-ordering-change-reaches-both",
+      "status": "PASS",
+      "detail": {
+        "rq": [
+          "Title",
+          "Quality",
+          "Abstract"
+        ],
+        "results": [
+          "Terminal bytes",
+          "Score"
+        ]
+      }
+    },
+    {
+      "id": "second-consumer.domain-schemas-independent",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "second-consumer.provider-identity-no-leak",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "session.two-pairs-isolated",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "session.focus-isolated",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "identity.exact-pinned-pair",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "identity.dom-not-canonical",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "authority.no-review-mastery-audit-inference",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "authority.no-persistence-owner",
+      "status": "PASS",
+      "detail": "PASS"
+    }
+  ],
+  "limits": [
+    "NO_SURFACE_READINESS_CLAIM",
+    "NO_CONTROLLER_ACCEPTANCE_CLAIM",
+    "NO_REGISTRY_MUTATION"
+  ]
+}

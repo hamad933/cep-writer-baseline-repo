@@ -1,0 +1,887 @@
+{
+  "schemaVersion": 1,
+  "kind": "PS02_SPATIAL_FINITE_INPUT_ATOMICITY_TESTS",
+  "summary": {
+    "total": 101,
+    "pass": 101,
+    "fail": 0
+  },
+  "coverage": {
+    "nonFinite": [
+      "NaN",
+      "+Infinity",
+      "-Infinity"
+    ],
+    "boundaries": [
+      "move",
+      "pan",
+      "zoomAt",
+      "fit",
+      "world",
+      "marquee",
+      "restore",
+      "beginPointerGesture",
+      "advancePointerGesture",
+      "snapSelection",
+      "finalizeMoveGesture",
+      "undo",
+      "redo"
+    ],
+    "atomicState": [
+      "nodes",
+      "camera",
+      "selection",
+      "selectionRevision",
+      "history",
+      "future",
+      "modelRevision",
+      "relations/edges",
+      "domain",
+      "provider"
+    ],
+    "positive": [
+      "move",
+      "snap",
+      "undo",
+      "redo",
+      "world",
+      "pan",
+      "zoomAt",
+      "fit",
+      "marquee",
+      "restore",
+      "pointer",
+      "recorded-mode-refusal"
+    ]
+  },
+  "cases": [
+    {
+      "id": "move.dx.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "move.dy.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "pan.dx.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "pan.dy.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "zoom.factor.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "zoom.anchor-x.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "zoom.anchor-y.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "fit.width.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "fit.height.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "world.x.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "world.y.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "marquee.a-x.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "marquee.a-y.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "marquee.b-x.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "marquee.b-y.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "fit.node-x.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "fit.node-y.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "move.existing-node-x.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "move.existing-node-y.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "restore.camera-x.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "restore.camera-y.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "restore.camera-zoom.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "restore.node-x.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "restore.node-y.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "pointer.begin.start-x.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "pointer.begin.start-y.NaN",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "pointer.advance.point.NaN",
+      "status": "PASS",
+      "detail": {
+        "gestureUnchanged": true,
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "move.dx.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "move.dy.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "pan.dx.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "pan.dy.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "zoom.factor.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "zoom.anchor-x.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "zoom.anchor-y.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "fit.width.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "fit.height.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "world.x.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "world.y.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "marquee.a-x.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "marquee.a-y.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "marquee.b-x.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "marquee.b-y.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "fit.node-x.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "fit.node-y.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "move.existing-node-x.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "move.existing-node-y.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "restore.camera-x.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "restore.camera-y.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "restore.camera-zoom.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "restore.node-x.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "restore.node-y.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "pointer.begin.start-x.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "pointer.begin.start-y.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "pointer.advance.point.+Infinity",
+      "status": "PASS",
+      "detail": {
+        "gestureUnchanged": true,
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "move.dx.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "move.dy.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "pan.dx.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "pan.dy.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "zoom.factor.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "zoom.anchor-x.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "zoom.anchor-y.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "fit.width.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "fit.height.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "world.x.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "world.y.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "marquee.a-x.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "marquee.a-y.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "marquee.b-x.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "marquee.b-y.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "fit.node-x.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "fit.node-y.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "move.existing-node-x.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "move.existing-node-y.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "restore.camera-x.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "restore.camera-y.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "restore.camera-zoom.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "restore.node-x.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "restore.node-y.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "pointer.begin.start-x.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "pointer.begin.start-y.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "pointer.advance.point.-Infinity",
+      "status": "PASS",
+      "detail": {
+        "gestureUnchanged": true,
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "move.finite-overflow",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "pan.finite-overflow",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "marquee.invalid-existing-node",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "world.invalid-camera",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "pan.invalid-camera",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "zoom.invalid-camera",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "fit.invalid-camera",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "snap.nonfinite-grid",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "restore.malformed-missing-camera",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "finalize.invalid-before",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "undo.invalid-history-frame",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "redo.invalid-future-frame",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "positive.move-snap-undo-redo",
+      "status": "PASS",
+      "detail": {
+        "node": {
+          "id": "a",
+          "x": 40,
+          "y": 20
+        },
+        "history": 1,
+        "future": 0
+      }
+    },
+    {
+      "id": "positive.camera-world-pan-zoom-fit",
+      "status": "PASS",
+      "detail": {
+        "camera": {
+          "x": 30.000000000000057,
+          "y": 175.5521472392638,
+          "zoom": 1.4417177914110428
+        },
+        "world": {
+          "x": 106,
+          "y": 59
+        }
+      }
+    },
+    {
+      "id": "positive.marquee",
+      "status": "PASS",
+      "detail": {
+        "selectedIds": [
+          "a"
+        ],
+        "revision": 2
+      }
+    },
+    {
+      "id": "positive.restore",
+      "status": "PASS",
+      "detail": {
+        "returnContract": "undefined",
+        "node": {
+          "id": "a",
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": "positive.pointer",
+      "status": "PASS",
+      "detail": {
+        "dx": 10,
+        "dy": 0,
+        "becamePan": true,
+        "kind": "pan",
+        "moved": true
+      }
+    },
+    {
+      "id": "positive.recorded-mutation-refusal",
+      "status": "PASS",
+      "detail": {
+        "activeMode": "recorded"
+      }
+    },
+    {
+      "id": "checkpoint-corrupt-prestate.align-stops-before-mutation-history",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "checkpoint-corrupt-prestate.distribute-stops-before-mutation-history",
+      "status": "PASS",
+      "detail": {
+        "result": "false",
+        "stateUnchanged": true
+      }
+    }
+  ]
+}

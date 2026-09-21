@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "kind": "W6_B_NOTE_BINDING_BROWSER_PROOF",
+  "classification": "W6_B_LANE_EXECUTION_EVIDENCE_NOT_CONTROLLER_ACCEPTANCE",
+  "status": "PASS",
+  "sourceCanonicalTreeSha256": "fcca03a3ef529e5eda8b3ddddcc1f093ad7054336430d3c08224fac55328c753",
+  "canonicalSourceFileCount": 113,
+  "environment": {
+    "engine": "Python Playwright Chromium",
+    "executable": "/usr/bin/chromium",
+    "transport": "in-memory-built-esm",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  "proof": {
+    "status": "PASS",
+    "steps": [
+      {
+        "id": "browser.bind-canonical",
+        "status": "PASS",
+        "evidence": {
+          "availability": {
+            "evidence": {
+              "kind": "BROWSER_FIXTURE"
+            },
+            "state": "available"
+          },
+          "domain": {
+            "kind": "library",
+            "surfaceId": "library"
+          },
+          "noteId": "note-browser-01",
+          "owner": "NoteBindingAdapter",
+          "policyRevision": "W6-B-NOTE-BINDING-01",
+          "provenance": {
+            "domainAdapterId": "LibraryNoteBindingInputAdapter",
+            "kind": "EXPLICIT_VALIDATED_BINDING"
+          },
+          "route": "PERSONAL:CEP/W06/Library",
+          "source": {
+            "blockId": "blk-d05-p1",
+            "documentId": "KU-D05-0021"
+          },
+          "sourceLabel": "API Object-Level Authorization"
+        }
+      },
+      {
+        "id": "browser.hide-reopen-stability",
+        "status": "PASS",
+        "evidence": {
+          "hidden": {
+            "hostKind": "in-page",
+            "presentationId": "sticky-host",
+            "visibility": "hidden",
+            "windowInstanceId": "window-A"
+          },
+          "reopened": {
+            "hostKind": "in-page",
+            "presentationId": "sticky-host",
+            "visibility": "visible",
+            "windowInstanceId": "window-B"
+          }
+        }
+      },
+      {
+        "id": "browser.separate-window-stability",
+        "status": "PASS",
+        "evidence": {
+          "hostKind": "separate-window",
+          "presentationId": "popout-host",
+          "visibility": "visible",
+          "windowInstanceId": "window-external-9"
+        }
+      },
+      {
+        "id": "browser.presentation-not-source",
+        "status": "PASS",
+        "evidence": {
+          "rejected": "PRESENTATION_IDENTITY_CANNOT_BECOME_SOURCE_IDENTITY:objectId"
+        }
+      },
+      {
+        "id": "browser.non-structured-shape",
+        "status": "PASS",
+        "evidence": {
+          "availability": {
+            "evidence": {
+              "kind": "SPATIAL_BROWSER_FIXTURE"
+            },
+            "state": "available"
+          },
+          "domain": {
+            "kind": "spatial",
+            "surfaceId": "visualize"
+          },
+          "noteId": "note-browser-spatial",
+          "owner": "NoteBindingAdapter",
+          "policyRevision": "W6-B-NOTE-BINDING-01",
+          "provenance": {
+            "domainAdapterId": "SpatialNoteBindingInputAdapter",
+            "kind": "EXPLICIT_VALIDATED_BINDING"
+          },
+          "route": "PERSONAL:CEP/visualize",
+          "source": {
+            "objectId": "APP-WEB-01"
+          }
+        }
+      }
+    ],
+    "canonicalBinding": {
+      "availability": {
+        "evidence": {
+          "kind": "BROWSER_FIXTURE"
+        },
+        "state": "available"
+      },
+      "domain": {
+        "kind": "library",
+        "surfaceId": "library"
+      },
+      "noteId": "note-browser-01",
+      "owner": "NoteBindingAdapter",
+      "policyRevision": "W6-B-NOTE-BINDING-01",
+      "provenance": {
+        "domainAdapterId": "LibraryNoteBindingInputAdapter",
+        "kind": "EXPLICIT_VALIDATED_BINDING"
+      },
+      "route": "PERSONAL:CEP/W06/Library",
+      "source": {
+        "blockId": "blk-d05-p1",
+        "documentId": "KU-D05-0021"
+      },
+      "sourceLabel": "API Object-Level Authorization"
+    },
+    "separateWindow": {
+      "hostKind": "separate-window",
+      "presentationId": "popout-host",
+      "visibility": "visible",
+      "windowInstanceId": "window-external-9"
+    },
+    "spatialBinding": {
+      "availability": {
+        "evidence": {
+          "kind": "SPATIAL_BROWSER_FIXTURE"
+        },
+        "state": "available"
+      },
+      "domain": {
+        "kind": "spatial",
+        "surfaceId": "visualize"
+      },
+      "noteId": "note-browser-spatial",
+      "owner": "NoteBindingAdapter",
+      "policyRevision": "W6-B-NOTE-BINDING-01",
+      "provenance": {
+        "domainAdapterId": "SpatialNoteBindingInputAdapter",
+        "kind": "EXPLICIT_VALIDATED_BINDING"
+      },
+      "route": "PERSONAL:CEP/visualize",
+      "source": {
+        "objectId": "APP-WEB-01"
+      }
+    }
+  },
+  "pageErrors": [],
+  "coverage": {
+    "hideReopen": true,
+    "separateWindow": true,
+    "presentationCannotBecomeSource": true,
+    "nonStructuredShape": true
+  },
+  "artifacts": {
+    "screenshot": {
+      "path": "assurance/W6_B_BROWSER/W6_B_NOTE_BINDING_BROWSER.png",
+      "bytes": 35857,
+      "sha256": "13a41e03d16902d43fbb5fa6dc7f6f7defe346c645da07aa8bccf2b78ade1c7e"
+    },
+    "dom": {
+      "path": "assurance/W6_B_BROWSER/W6_B_NOTE_BINDING_BROWSER_DOM.html",
+      "bytes": 48116,
+      "sha256": "5f5bd5e9787e8fc49114a058182508ed39917ff455ce27cf9982f1b78afed613"
+    }
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "classification": "WAVE2_LANE_A_NEGATIVE_GHOST_OWNER_SCAN_NOT_CONTROLLER_ACCEPTANCE",
+  "sourceCanonicalTreeSha256": "52f3f3e5d6d669595fa57cbd2da7aa8cbd7a577c0ae6cc90c33a82d1b6597250",
+  "sourceFiles": 38,
+  "summary": {
+    "total": 16,
+    "pass": 16,
+    "fail": 0
+  },
+  "checks": [
+    {
+      "id": "owner.command.single-canonical-class",
+      "status": "PASS",
+      "detail": [
+        {
+          "file": "foundation/global/commands.ts",
+          "index": 1009,
+          "match": "class SemanticCommandBus"
+        }
+      ]
+    },
+    {
+      "id": "owner.command.compatibility-facade-single",
+      "status": "PASS",
+      "detail": [
+        {
+          "file": "foundation/models.ts",
+          "index": 1274,
+          "match": "class CommandRegistry"
+        }
+      ]
+    },
+    {
+      "id": "owner.command.single-execution-sink",
+      "status": "PASS",
+      "detail": [
+        {
+          "file": "foundation/global/commands.ts",
+          "index": 2186,
+          "match": "command.run(payload)"
+        }
+      ]
+    },
+    {
+      "id": "owner.transient.single-canonical-class",
+      "status": "PASS",
+      "detail": [
+        {
+          "file": "foundation/global/transient-focus.ts",
+          "index": 486,
+          "match": "class TransientFocusOwner"
+        }
+      ]
+    },
+    {
+      "id": "owner.transient.compatibility-facade-delegates",
+      "status": "PASS",
+      "detail": [
+        {
+          "file": "foundation/workspace-host.ts",
+          "index": 1552,
+          "match": "class TransientFocusController extends TransientFocusOwner"
+        }
+      ]
+    },
+    {
+      "id": "owner.preferences.single-canonical-class",
+      "status": "PASS",
+      "detail": [
+        {
+          "file": "foundation/global/preferences/store.ts",
+          "index": 686,
+          "match": "class ScopedPreferencesOwner"
+        }
+      ]
+    },
+    {
+      "id": "owner.preferences.compatibility-facade-delegates",
+      "status": "PASS",
+      "detail": [
+        {
+          "file": "foundation/models.ts",
+          "index": 8509,
+          "match": "class ScopedPreferences extends ScopedPreferencesOwner"
+        }
+      ]
+    },
+    {
+      "id": "command.duplicate-identity-rejected",
+      "status": "PASS",
+      "detail": {
+        "duplicateRejected": true
+      }
+    },
+    {
+      "id": "command.unknown-truth-no-effect-no-receipt",
+      "status": "PASS",
+      "detail": {
+        "unknown": {
+          "ok": false,
+          "id": "ghost",
+          "owner": null,
+          "commandOwner": null,
+          "availabilityOwner": "SemanticCommandBus",
+          "enabled": false,
+          "reason": "Unknown command",
+          "code": "UNKNOWN_COMMAND"
+        },
+        "afterUnknown": {
+          "effects": 0,
+          "receipts": 0
+        }
+      }
+    },
+    {
+      "id": "command.denied-direct-cannot-bypass",
+      "status": "PASS",
+      "detail": {
+        "denied": {
+          "ok": false,
+          "id": "denied",
+          "owner": "FamilyOwner",
+          "commandOwner": "FamilyOwner",
+          "code": "POLICY_DENIED",
+          "reason": "denied",
+          "availabilityOwner": "FamilyAvailabilityOwner",
+          "enabled": false
+        },
+        "afterDenied": {
+          "effects": 0,
+          "receipts": 0
+        }
+      }
+    },
+    {
+      "id": "command.accepted-exactly-one-receipt",
+      "status": "PASS",
+      "detail": {
+        "allowed": 1,
+        "afterAllowed": {
+          "effects": 1,
+          "receipts": 1,
+          "last": {
+            "sequence": 1,
+            "id": "allowed",
+            "owner": "FamilyOwner",
+            "commandOwner": "FamilyOwner",
+            "availabilityOwner": "FamilyOwner",
+            "route": "toolbar",
+            "policyTag": "semantic-command-v1"
+          }
+        }
+      }
+    },
+    {
+      "id": "transient.topmost-precedence",
+      "status": "PASS",
+      "detail": {
+        "blockedBottom": false,
+        "closedTop": true,
+        "closedBottom": true
+      }
+    },
+    {
+      "id": "transient.outside-policy-cannot-bypass",
+      "status": "PASS",
+      "detail": {
+        "blockedOutside": false
+      }
+    },
+    {
+      "id": "transient.invalid-invoker-fallback-deterministic",
+      "status": "PASS",
+      "detail": {
+        "fallbackFocused": true,
+        "lastDismissal": {
+          "id": "bottom",
+          "reason": "escape",
+          "restored": true,
+          "focusTargetKind": "invoker",
+          "owner": "TransientFocusOwner",
+          "policyTag": "topmost-first-v1"
+        }
+      }
+    },
+    {
+      "id": "preferences.inapplicable-write-rejected",
+      "status": "PASS",
+      "detail": {
+        "inapplicableRejected": true
+      }
+    },
+    {
+      "id": "preferences.storage-unavailable-truthful",
+      "status": "PASS",
+      "detail": {
+        "available": false,
+        "durable": false,
+        "lastOperation": "load",
+        "error": "STORAGE_UNAVAILABLE"
+      }
+    }
+  ],
+  "verdict": "PASS"
+}

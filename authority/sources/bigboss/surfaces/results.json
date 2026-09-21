@@ -1,0 +1,327 @@
+{
+  "objects": {
+    "Result": "resultId + revisionId + manifestDigest + source RunInputRef",
+    "RecordedEvent": "stream + sequence + eventId + causal refs",
+    "ReplayContext": "result/revision + cursor; presentation only",
+    "AAR": "analysisId + revision + anchored event refs",
+    "ComparePair": "left ResultRef + right ResultRef + comparator version"
+  },
+  "state_dimensions": {
+    "result": [
+      "SEALED_COMPLETE",
+      "SEALED_PARTIAL",
+      "SOURCE_UNAVAILABLE"
+    ],
+    "replay": [
+      "IDLE",
+      "PLAYING",
+      "PAUSED",
+      "GAP"
+    ],
+    "compare": [
+      "EXACT",
+      "INCOMPATIBLE",
+      "MISSING_LEFT",
+      "MISSING_RIGHT"
+    ],
+    "aar": [
+      "DRAFT",
+      "SAVED",
+      "CONFLICT"
+    ]
+  },
+  "read_model": "ResultReadService serves immutable events/checkpoints and manifest; ReplayContextManager navigates recorded facts; comparison adapter reads exact pair.",
+  "persistence": {
+    "Result": "Simulator.ResultManifest",
+    "RecordedEvent": "Simulator.EventStore immutable read",
+    "ReplayContext": "session only",
+    "AAR": "W03Results.AarRevision",
+    "ComparePair": "W03Results.AnalysisSession"
+  },
+  "invariants": [
+    "Replay does not execute simulator",
+    "Determinism verification is a separate new execution linked to original",
+    "AAR cannot rewrite fact store",
+    "Candidate Evidence handoff does not perform W04 admission",
+    "Historical terminal bytes render as inert text"
+  ],
+  "epistemic": {
+    "empty": "Sealed result with zero recorded events explicitly says no recorded events; do not invent timeline.",
+    "stale": "AAR source revision superseded: preserve original anchor and offer relink revision.",
+    "unavailable": "Missing event segment renders gap with exact range; replay cannot synthesize it.",
+    "error": "Incompatible schema/comparator reports reason before diff; never zero differences."
+  },
+  "operations": [
+    {
+      "name": "replay",
+      "family": "ReplayCommand",
+      "payload": "resultId:string revisionId:string eventCursor:string action:enum:play|pause|seek",
+      "before": "replay=IDLE|PAUSED|PLAYING",
+      "event": "navigate recorded cursor",
+      "after": "same immutable result, new cursor",
+      "guard": "Cursor belongs to exact result revision",
+      "oracle": "Simulator execute invocation count remains zero during replay",
+      "persistence": "ReplayContextManager.session",
+      "method": "LOCAL",
+      "gate": null,
+      "command_id": "results.replay",
+      "surface_id": "results",
+      "semantic_owner": "W03ResultsDomain",
+      "focus_after": "exact event row replay; missing row→Results timeline heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Incompatible schema/comparator reports reason before diff; never zero differences.",
+        "503_timeout": "Missing event segment renders gap with exact range; replay cannot synthesize it."
+      },
+      "test_id": "TEST-results.replay",
+      "evidence_id": "EVID-results.replay",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "step",
+      "family": "ReplayCommand",
+      "payload": "resultId:string revisionId:string eventCursor:string action:enum:next|previous",
+      "before": "replay=PAUSED|GAP",
+      "event": "step recorded order",
+      "after": "next recorded event or explicit gap",
+      "guard": "Sequence defined by recorded stream; do not infer causality from wall clock",
+      "oracle": "Gap cannot be silently bridged with reconstructed event",
+      "persistence": "ReplayContextManager.session",
+      "method": "LOCAL",
+      "gate": null,
+      "command_id": "results.step",
+      "surface_id": "results",
+      "semantic_owner": "W03ResultsDomain",
+      "focus_after": "exact event row step; missing row→Results timeline heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Incompatible schema/comparator reports reason before diff; never zero differences.",
+        "503_timeout": "Missing event segment renders gap with exact range; replay cannot synthesize it."
+      },
+      "test_id": "TEST-results.step",
+      "evidence_id": "EVID-results.step",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "compare",
+      "family": "AnalyticalCommand",
+      "payload": "leftRef:ref rightRef:ref scope:strings workingAnalysisId:string comparatorVersion:string",
+      "before": "compare=EXACT",
+      "event": "compare compatible result projections",
+      "after": "diff + excluded/missing schema facts",
+      "guard": "Exact refs and comparator compatibility",
+      "oracle": "Changing latest result alias leaves selected pair unchanged",
+      "persistence": "W03Results.AnalysisSession",
+      "method": "GET",
+      "gate": null,
+      "command_id": "results.compare",
+      "surface_id": "results",
+      "semantic_owner": "W03ResultsDomain",
+      "focus_after": "exact event row compare; missing row→Results timeline heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Incompatible schema/comparator reports reason before diff; never zero differences.",
+        "503_timeout": "Missing event segment renders gap with exact range; replay cannot synthesize it."
+      },
+      "test_id": "TEST-results.compare",
+      "evidence_id": "EVID-results.compare",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "annotate",
+      "family": "AnalyticalCommand",
+      "payload": "leftRef:ref rightRef:ref scope:strings workingAnalysisId:string eventRefs:refs noteBlocks:blocks analysisVersion:integer",
+      "before": "aar=DRAFT|SAVED",
+      "event": "save AAR revision",
+      "after": "aar=SAVED or CONFLICT",
+      "guard": "Event refs immutable; expected analysis version CAS",
+      "oracle": "AAR edit changes analysis digest only; result/event digest identical",
+      "persistence": "W03Results.AarRevision",
+      "method": "POST",
+      "gate": null,
+      "command_id": "results.annotate",
+      "surface_id": "results",
+      "semantic_owner": "W03ResultsDomain",
+      "focus_after": "exact event row annotate; missing row→Results timeline heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Incompatible schema/comparator reports reason before diff; never zero differences.",
+        "503_timeout": "Missing event segment renders gap with exact range; replay cannot synthesize it."
+      },
+      "test_id": "TEST-results.annotate",
+      "evidence_id": "EVID-results.annotate",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "handoff",
+      "family": "EvidenceCommand",
+      "payload": "candidateRef:ref sourceRefs:refs action:enum:createCandidate expectedLifecycle:enum:ABSENT limitations:strings",
+      "before": "result=SEALED_COMPLETE|SEALED_PARTIAL",
+      "event": "produce candidate Evidence handoff envelope",
+      "after": "handoff envelope available; W04 intake and admission remain distinct",
+      "guard": "Source refs/digests and limitations complete",
+      "oracle": "W04 Evidence row count unchanged until explicit intake/admission",
+      "persistence": "W03Results.CandidateHandoff",
+      "method": "POST",
+      "gate": null,
+      "command_id": "results.handoff",
+      "surface_id": "results",
+      "semantic_owner": "W03ResultsDomain",
+      "focus_after": "exact event row handoff; missing row→Results timeline heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Incompatible schema/comparator reports reason before diff; never zero differences.",
+        "503_timeout": "Missing event segment renders gap with exact range; replay cannot synthesize it."
+      },
+      "test_id": "TEST-results.handoff",
+      "evidence_id": "EVID-results.handoff",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "verifyDeterminism",
+      "family": "OperationalCommand",
+      "payload": "originalRunRef:ref inputDigest:digest action:enum:verifyDeterminism expectedState:enum:COMPLETED correlationId:string",
+      "before": "result sealed",
+      "event": "request distinct deterministic verification run",
+      "after": "new verification run and comparison record",
+      "guard": "Pinned rules/input retained; explicit execution capability",
+      "oracle": "Original historical replay remains read-only; new run ID distinct",
+      "persistence": "Simulator.VerificationRun",
+      "method": "POST",
+      "gate": "PLATFORM_GATED",
+      "command_id": "results.verifyDeterminism",
+      "surface_id": "results",
+      "semantic_owner": "W03ResultsDomain",
+      "focus_after": "exact event row verifyDeterminism; missing row→Results timeline heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Incompatible schema/comparator reports reason before diff; never zero differences.",
+        "503_timeout": "Missing event segment renders gap with exact range; replay cannot synthesize it."
+      },
+      "test_id": "TEST-results.verifyDeterminism",
+      "evidence_id": "EVID-results.verifyDeterminism",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "results",
+  "title": "Results",
+  "workspace": "W03",
+  "semantic_owner": "W03ResultsDomain",
+  "archetype": "HistoricalAnalysisWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W03-RES-001",
+    "CAP-W03-RES-002",
+    "CAP-W03-RES-003",
+    "CAP-W03-RES-004",
+    "CAP-W03-RES-005",
+    "CAP-W03-RES-006",
+    "CAP-W03-RES-007",
+    "CAP-W03-RES-008",
+    "CAP-W03-RES-009",
+    "CAP-W03-RES-010",
+    "CAP-W03-RES-011",
+    "CAP-W03-RES-012",
+    "CAP-W03-RES-013",
+    "CAP-W03-RES-014"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W03-RES-001",
+        "CAP-W03-RES-002",
+        "CAP-W03-RES-003",
+        "CAP-W03-RES-004",
+        "CAP-W03-RES-005",
+        "CAP-W03-RES-006",
+        "CAP-W03-RES-007",
+        "CAP-W03-RES-008",
+        "CAP-W03-RES-009",
+        "CAP-W03-RES-010",
+        "CAP-W03-RES-011",
+        "CAP-W03-RES-012",
+        "CAP-W03-RES-013",
+        "CAP-W03-RES-014"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Results",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-011",
+    "NC-012",
+    "NC-013",
+    "NC-014",
+    "NC-015"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore",
+    "SpatialInteractionCore",
+    "AnalyticalWorkbenchCore"
+  ],
+  "adapter": "W03ResultsDomainAdapter",
+  "regions": {
+    "TOP": "Results exact identity, local mode, command routes",
+    "LEFT": "typed Result collection/navigation",
+    "CENTER": "HistoricalAnalysisWorkbench primary task",
+    "RIGHT": "one selected Result identity/context inspector",
+    "BOTTOM": "Recorded event/AAR source inspection"
+  },
+  "command_ids": [
+    "results.replay",
+    "results.step",
+    "results.compare",
+    "results.annotate",
+    "results.handoff",
+    "results.verifyDeterminism"
+  ]
+}

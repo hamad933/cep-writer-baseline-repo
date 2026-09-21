@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 14,
+  "classification": "FOUNDATION_WAVE03_LANE_B_ACCESSIBILITY_FEEDBACK_CORRECTED_CANDIDATE",
+  "status": "CORRECTED_CANDIDATE_READY_FOR_CONTROLLER_REVIEW",
+  "controlEpochParent": "CEP-FR-EXEC-20260912-E12-W3",
+  "mission": "W3-B-ACCESSIBILITY-FEEDBACK",
+  "correctionMission": "SOURCE_TRUTH_CONTRADICTION_BOUNDARY_HARDENING",
+  "candidateId": "ca1a177456189ca786ced13744f7cf6fffdea042a1b7b32c9fe1f825fb1a8838",
+  "candidateIdMethod": "sha256(canonical JSON of bounded correction basis; archive identity remains external to avoid self-reference)",
+  "correctionBase": {
+    "name": "CEP_FOUNDATION_FORGE_v0.2.1c_W3_B_ACCESSIBILITY_FEEDBACK_CANDIDATE.zip",
+    "bytes": 7485965,
+    "sha256": "99ba07d05f269b84a6b09f83fb2c69c8b26ba3d8f95b68e42e5f049e70190257",
+    "canonicalSourceSha256": "a85cbbef56fedfac5f2e3ee5ab758ec2e3dca57d6fd238110020eea209e32c39"
+  },
+  "legalLineageParent": {
+    "successorId": "CEP-FR-E12-W2C-2e4b6f8e",
+    "bytes": 6990771,
+    "sha256": "2e4b6f8e149824b84e59101f10c70e39e17871f9049386d1b6792553090b6216",
+    "canonicalSourceSha256": "52f3f3e5d6d669595fa57cbd2da7aa8cbd7a577c0ae6cc90c33a82d1b6597250"
+  },
+  "primaryOwner": "AccessibilityFeedbackOwner",
+  "canonicalSource": {
+    "path": "stack/native-typescript",
+    "sha256": "0dc0c3b28a728a776ddbc49203cfb2c132ace7d09f501925fd2b28682c93d309",
+    "files": 40
+  },
+  "contractVersion": "1.0.1",
+  "policyRevision": "w3b-accessibility-feedback-v1",
+  "boundedCanonicalSourceChangesFromCorrectionBase": [
+    "stack/native-typescript/foundation/global/feedback-contract.ts",
+    "stack/native-typescript/model-tests.ts"
+  ],
+  "sourceTruthBoundary": {
+    "contradictionPolicy": "REFUSE_WITHOUT_CANONICAL_RESOLUTION",
+    "contradictionCodePrefix": "FEEDBACK_SOURCE_TRUTH_CONTRADICTION",
+    "presentationIntentMismatch": "REFUSE",
+    "canonicalValueInvented": false
+  },
+  "proof": {
+    "model": "175/175 PASS",
+    "contracts": "151/151 PASS",
+    "writerScaffold": "38/38 PASS",
+    "focusedContradiction": "PASS",
+    "fullBrowser": "6/6 PASS",
+    "laneBrowser": "PASS",
+    "realConsumers": "Library + Learn PASS",
+    "centralPolicyModificationAndExactRevert": "PASS",
+    "negativeBoundary": "PASS",
+    "freshExtraction": "PASS"
+  },
+  "ownershipBoundary": {
+    "presentationOnly": true,
+    "canonicalDomainTruth": false,
+    "structuredErrorTruth": false,
+    "relationTruth": false,
+    "runtimeDeviceTruth": false,
+    "savePersistenceTruth": false,
+    "commandAvailabilityTruth": false,
+    "domainStatusMeaning": false,
+    "focusOwnership": false,
+    "transientStackOwnership": false
+  },
+  "controllerIntegrationDeferred": true,
+  "sharedIntegrationHotspotsModified": false,
+  "controllerAccepted": false,
+  "ownerAccepted": false,
+  "selfPromoted": false,
+  "currentControlUpdated": false,
+  "acceptedSuccessorWritten": false,
+  "githubWritten": false,
+  "wave4Started": false,
+  "surfaceConstructionStarted": false,
+  "foundation_frozen": false,
+  "stack_frozen": false,
+  "deployed": false,
+  "released": false
+}

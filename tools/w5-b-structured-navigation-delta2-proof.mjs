@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+import {runW5BStructuredNavigationProof} from '../dist/w5-b-structured-navigation-tests.js';
+import {runW5BStructuredNavigationCorrectionProof} from '../dist/w5-b-structured-navigation-correction-tests.js';
+import {runW5BStructuredNavigationDelta2Proof} from '../dist/w5-b-structured-navigation-delta2-tests.js';
+import {canonicalSourceIdentity} from './source-tree-identity.mjs';
+const root=new URL('../',import.meta.url),original=runW5BStructuredNavigationProof(),previousCorrection=runW5BStructuredNavigationCorrectionProof(),delta=runW5BStructuredNavigationDelta2Proof(),identity=await canonicalSourceIdentity(root);
+const output={...delta,sourceCanonicalTreeSha256:identity.sha256,canonicalSourceFileCount:identity.files,regressionSuites:{original:{status:original.status,pass:original.pass,fail:original.fail},previousCorrection:{status:previousCorrection.status,pass:previousCorrection.pass,fail:previousCorrection.fail}},classification:'LANE_B_POST_CORRECTION_DELTA_ONLY_EVIDENCE_NOT_CONTROLLER_ACCEPTANCE'};
+fs.mkdirSync(new URL('../assurance/',import.meta.url),{recursive:true});
+fs.writeFileSync(new URL('../assurance/W5_B_POST_CORRECTION_DELTA2_PROOF.json',import.meta.url),JSON.stringify(output,null,2)+'\n');
+console.log(JSON.stringify({status:output.status,pass:output.pass,fail:output.fail,original:output.regressionSuites.original,previousCorrection:output.regressionSuites.previousCorrection,sourceCanonicalTreeSha256:identity.sha256,canonicalSourceFileCount:identity.files},null,2));
+if(output.fail||original.fail||previousCorrection.fail)process.exit(1);

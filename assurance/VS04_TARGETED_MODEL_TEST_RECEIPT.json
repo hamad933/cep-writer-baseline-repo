@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "kind": "VS04_TARGETED_MODEL_TEST_RECEIPT",
+  "status": "PASS",
+  "canonicalSourceTreeSha256": "55645c1f89fc1d2af0653ec2eec00bb7dd2f779f7769bcffa2ea8981cd3f2be2",
+  "fullModel": {
+    "pass": 90,
+    "fail": 0,
+    "date": "2026-09-11T16:57:58.727Z"
+  },
+  "targeted": [
+    {
+      "id": "structured.transaction-owner-real-consumers",
+      "status": "PASS",
+      "before": "real Library accepted fixture adapter and real Learn adapter",
+      "action": "inspect transaction/history/recovery owner",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "both real Structured consumers use the same executable owner class and shared policy revision"
+    },
+    {
+      "id": "structured.transaction-one-intent-one-frame",
+      "status": "PASS",
+      "before": "Learn canonical document with baseline frame",
+      "action": "one accepted content edit",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "exactly one working revision and one history frame are added"
+    },
+    {
+      "id": "structured.transaction-rejected-zero-frame",
+      "status": "PASS",
+      "before": "Learn valid tree",
+      "action": "rejected duplicate-ID mutation",
+      "owner": "StructuredMutationKernel + StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "rejection is atomic and history/revision remain unchanged"
+    },
+    {
+      "id": "structured.transaction-undo-redo-exact",
+      "status": "PASS",
+      "before": "title plus nested Structured tree",
+      "action": "edit title and nested block then undo/redo each",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "undo and redo restore exact canonical snapshots without adding frames"
+    },
+    {
+      "id": "structured.transaction-redo-truncation",
+      "status": "PASS",
+      "before": "two edits then one undo",
+      "action": "make a new edit after undo",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "redo branch is deterministically truncated"
+    },
+    {
+      "id": "structured.transaction-dirty-working-revision",
+      "status": "PASS",
+      "before": "clean Learn document",
+      "action": "edit then undo to committed baseline",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "working revision advances while dirty truth derives only from canonical committed snapshot"
+    },
+    {
+      "id": "structured.recovery-retention-isolation",
+      "status": "PASS",
+      "before": "two Library KU documents under one owner",
+      "action": "capture beyond retention in first KU then capture in second",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "retention is bounded and recovery metadata never crosses document IDs"
+    },
+    {
+      "id": "structured.recovery-restore-as-new-preserves-history",
+      "status": "PASS",
+      "before": "Learn edit captured in recovery then newer edit",
+      "action": "restore old recovery point",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "restore appends a new working frame and preserves earlier history identity"
+    },
+    {
+      "id": "structured.save-no-boundary-truth",
+      "status": "PASS",
+      "before": "dirty Learn document without persistence boundary",
+      "action": "explicit commit",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "no boundary returns NOT persisted and cannot clear dirty or advance committed revision"
+    },
+    {
+      "id": "structured.save-boundary-success-truth",
+      "status": "PASS",
+      "before": "Structured document with explicit successful boundary",
+      "action": "edit then commit",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "persisted success is claimed only after configured boundary executes"
+    },
+    {
+      "id": "structured.save-boundary-failure-safe",
+      "status": "PASS",
+      "before": "Structured document with rejecting boundary",
+      "action": "edit then commit",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "failed boundary leaves dirty state and durable revision unchanged"
+    },
+    {
+      "id": "structured.save-stale-revision-atomic",
+      "status": "PASS",
+      "before": "dirty canonical document",
+      "action": "commit with stale expected working revision",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "stale expected revision rejects without state change"
+    },
+    {
+      "id": "structured.transaction-second-owner-rejected",
+      "status": "PASS",
+      "before": "real Learn adapter with deliberately replaced transaction owner",
+      "action": "invoke descriptor ownership guard",
+      "owner": "StructuredDocumentDomainAdapter",
+      "oracle": "composition detects a second main-document history/recovery owner"
+    }
+  ],
+  "targetedCount": 13
+}

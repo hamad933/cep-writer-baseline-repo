@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "policy": "VALUE_FILTERED_DEFERRED_WORK",
+  "activeClasses": [
+    "DEFER_HIGH_VALUE",
+    "DEFER_TO_FAMILY_BUILD",
+    "DEFER_TO_SURFACE_BUILD"
+  ],
+  "excludedClasses": [
+    "DROP_LOW_VALUE",
+    "DROP_DUPLICATE",
+    "SUPERSEDED",
+    "HISTORICAL_ONLY"
+  ],
+  "fixture": {
+    "input": [
+      {
+        "id": "valuable",
+        "classification": "DEFER_HIGH_VALUE"
+      },
+      {
+        "id": "low",
+        "classification": "DROP_LOW_VALUE"
+      },
+      {
+        "id": "duplicate",
+        "classification": "DROP_DUPLICATE"
+      },
+      {
+        "id": "superseded",
+        "classification": "SUPERSEDED"
+      },
+      {
+        "id": "historical",
+        "classification": "HISTORICAL_ONLY"
+      }
+    ],
+    "expectedActiveIds": [
+      "valuable"
+    ],
+    "expectedExcludedIds": [
+      "low",
+      "duplicate",
+      "superseded",
+      "historical"
+    ]
+  }
+}

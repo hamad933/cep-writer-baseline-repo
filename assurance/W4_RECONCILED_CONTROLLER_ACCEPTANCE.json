@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "classification": "WAVE4_RECONCILED_CONTROLLER_ACCEPTANCE_EVIDENCE",
+  "generatedAt": "2026-09-12T17:42:15.132838+00:00",
+  "parentAuthority": {
+    "successorId": "CEP-FR-E13-W3-355df690",
+    "sha256": "355df690d2d984a13cabcca98de9985aaa3b8195f957094413fbfb5035b5383b"
+  },
+  "reconciliation": {
+    "stagedE14Preserved": true,
+    "preservedDonorHooks": [
+      "StructuredActionDescriptorOwner",
+      "InputDirectionResolver",
+      "StructuredRichContentOwner",
+      "StructuredDragDropOwner"
+    ],
+    "addedCrossLaneFixes": [
+      "StructuredInputKeymapOwner stored by StructuredDocumentDomainAdapter",
+      "Settings editor shortcuts derived from StructuredInputKeymapOwner descriptor",
+      "Structured clipboard semantic commands registered on shared SemanticCommandBus",
+      "Settings TransientFocus close synchronizes DOM projection"
+    ]
+  },
+  "acceptedOwners": [
+    "StructuredInputKeymapOwner",
+    "StructuredActionDescriptorOwner",
+    "InputDirectionResolver",
+    "StructuredRichContentOwner",
+    "StructuredDragDropOwner",
+    "SettingsCenterOwner",
+    "ConfirmationSafetyHost"
+  ],
+  "boundedOwners": [
+    {
+      "owner": "OperationalSessionOwner",
+      "maturity": "BOUNDED_BELOW_M6_SECOND_REAL_PROVIDER_NOT_PROVEN"
+    },
+    {
+      "owner": "EpistemicStateContract",
+      "maturity": "CONTRACT_ONLY_NO_GENERIC_ASYNC_ENGINE"
+    }
+  ],
+  "canonicalSource": {
+    "sha256": "b6a4fa72da13a6ce2823eef54cb6a91865cd3c50c4279486bc8e9f238455b957",
+    "files": 84
+  },
+  "gates": {
+    "model": "210/210 PASS",
+    "contracts": "163/163 PASS",
+    "legacyBrowser": "6/6 PASS",
+    "wave3Browser": "5/5 PASS",
+    "wave4Browser": "5/5 PASS",
+    "npmCheck": "PASS",
+    "payloadManifestValidation": "PASS 939/939 0 missing 0 extra 0 mismatch",
+    "freshExtractionFunctionalValidation": "PASS"
+  },
+  "runtimeTruth": {
+    "stackStatus": "STACK_NOT_FROZEN",
+    "wave4Status": "CONTROLLER_ACCEPTED_AND_CLOSED_WAVE5_PENDING"
+  },
+  "acceptanceStatus": "CONTROLLER_ACCEPTED_WAVE4_SUCCESSOR_CONTENT"
+}

@@ -1,0 +1,110 @@
+{
+  "foundationBaseline": "CEP-FR-E18-ANALYTICAL-COMPARE-COMPLETION",
+  "targetSurface": "<surface>",
+  "surfaceProfile": "profiles/<surface>.json",
+  "inheritedGlobalComponents": [
+    "WorkspaceFrame",
+    "ContextInspector",
+    "SemanticCommandRegistry",
+    "CapabilityRegistry",
+    "ActionSurfaceRegistry",
+    "GlobalInputKeymap",
+    "AccessibilityFeedback",
+    "BottomDeepWork",
+    "UIScalePolicy",
+    "SettingsCenter",
+    "InputDirectionResolver",
+    "EpistemicStateContract",
+    "ConfirmationSafetyHost"
+  ],
+  "familyEngines": [
+    "<Structured|SpatialRelation|OperationalTerminal when profile requires>"
+  ],
+  "domainAdapter": {
+    "contract": "<registry contract id>",
+    "implementation": "<thin adapter file>",
+    "canonicalStateOwner": "<one domain owner>",
+    "commands": [
+      "<registered command ids>"
+    ],
+    "capabilities": [
+      "<registered capability ids>"
+    ]
+  },
+  "registeredCommands": [
+    "<registered command ids>"
+  ],
+  "applicablePreferences": [
+    "<preference keys>"
+  ],
+  "forbiddenDuplicateMechanics": [
+    "<registry mechanic IDs>"
+  ],
+  "valuableDeferredRequirements": [
+    "<only applicable active high-value deferred IDs>"
+  ],
+  "allowedDeviations": [
+    "<approved deviation IDs only; otherwise empty>"
+  ],
+  "ownerDeltas": [
+    "<active Owner decision IDs>"
+  ],
+  "requiredProof": [
+    {
+      "before": "<observable before>",
+      "action": "<actual pointer/keyboard action>",
+      "owner": "<semantic command/state owner>",
+      "after": "<canonical after>",
+      "visible": "<visible correct change>",
+      "negative": "<stale/duplicate/fake state absent>"
+    }
+  ],
+  "wave4StructuredSubordinateOwners": [
+    "StructuredInputKeymapOwner",
+    "StructuredActionDescriptorOwner",
+    "StructuredRichContentOwner",
+    "StructuredDragDropOwner"
+  ],
+  "wave4OperationalBoundary": {
+    "owner": "OperationalSessionOwner",
+    "status": "BOUNDED_BELOW_M6",
+    "secondRealProviderProven": false
+  },
+  "wave5Requirement": "SATISFIED_CONTROLLER_ACCEPTED: StructuredSurfaceHost + StructuredNavigationDescriptorOwner + Library/Learn/Note-content compatibility; Wave 6 Sticky Notes/window work remains separate.",
+  "wave5StructuredOwners": [
+    "StructuredSurfaceHost",
+    "StructuredNavigationDescriptorOwner"
+  ],
+  "wave5Status": "CONTROLLER_ACCEPTED_AND_CLOSED",
+  "wave5NoteContentCompatibility": "CONTENT_ONLY_PROVEN_NO_STICKY_NOTE_WINDOW_OWNER",
+  "wave6Requirement": "SATISFIED_CONTROLLER_ACCEPTED: StickyNoteWindowOwner + NoteBindingAdapter + final StructuredNoteContentAdapter + Controller Library note composition.",
+  "wave6NotesOwners": [
+    "StickyNoteWindowOwner",
+    "NoteBindingAdapter",
+    "StructuredNoteContentAdapter"
+  ],
+  "wave6Status": "CONTROLLER_ACCEPTED_AND_CLOSED",
+  "wave6HardCeilings": {
+    "stack": "STACK_NOT_FROZEN",
+    "operationalSessionOwner": "BOUNDED_BELOW_M6_SECOND_REAL_PROVIDER_NOT_PROVEN",
+    "notePersistence": "NO_DURABLE_PERSISTENCE_OWNER_CLAIM",
+    "nativeAlwaysOnTop": "UNAVAILABLE_UNLESS_EXPLICIT_PLATFORM_CAPABILITY_BRIDGE",
+    "secondStructuredEditorEngine": false
+  },
+  "analyticalCompareRequirement": "SATISFIED_CONTROLLER_ACCEPTED: AnalyticalCompareOwner + AnalyticalCompareHost + AnalysisProviderContract with RQ and Results real-provider proof.",
+  "analyticalCompareOwners": [
+    "AnalyticalCompareOwner",
+    "AnalyticalCompareHost",
+    "AnalysisProviderContract"
+  ],
+  "analyticalCompareStatus": "CONTROLLER_ACCEPTED_EXECUTABLE_OWNER",
+  "analyticalCompareHardCeilings": {
+    "crossProviderComparison": "REJECTED_BY_DEFAULT",
+    "domainCanonicalStateOwner": "PROVIDER_DOMAIN_ADAPTER",
+    "reviewDecisionOwned": false,
+    "masteryOwned": false,
+    "evidenceAdmissionOwned": false,
+    "auditMutationOwned": false,
+    "persistenceOwned": false
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "classification": "CANDIDATE_ONLY_REPLAY_PROVENANCE",
+  "parent": {
+    "name": "CEP-FR-W02-FINAL-CONVERGENCE-CONTROLLER-ACCEPTED-f7643a4b",
+    "driveId": "1-1GUNh7JeYLxnH5HnANnqQQF0SlrL_R3",
+    "canonicalSourceSha256": "f7643a4bb9e0010e431d4a4f064c526fa36911430f4fbf4867d2c26a707c2837",
+    "zipSha256": "be5f4ff49821a78405a7ac7b62d3c0afbd863f98bc439a370a9d7dfe9ca9ec5c",
+    "zipBytes": 42343991
+  },
+  "replays": [
+    {
+      "lane": "PS01",
+      "sourceDriveId": "1UjtyI2Sf2M0kKE4yad3KUF5RhwFffIaS",
+      "mode": "SEMANTIC_DELTA_REPLAY_ONLY",
+      "paths": [
+        "foundation/extensions.css",
+        "foundation/global/shell/destination-registry.ts",
+        "foundation/global/shell/navigation.ts",
+        "foundation/global/transient-focus.ts"
+      ]
+    },
+    {
+      "lane": "PS02",
+      "sourceDriveId": "1fbHHGN7eNSWGfnwMYsiXK02q47Y9Ssvj",
+      "mode": "SEMANTIC_DELTA_REPLAY_PLUS_BOUNDED_CONTROLLER_HARDENING",
+      "paths": [
+        "foundation/spatial/interaction-kernel.ts",
+        "ps02-spatial-finite-atomicity-tests.ts"
+      ],
+      "hardening": "align()/distribute() return before mutation/history when checkpoint() rejects corrupted pre-state"
+    },
+    {
+      "lane": "PS04",
+      "sourceDiffDriveId": "18HSj6l4JM_geUZ6MG7LX7ssRwdq6JR_v",
+      "candidateEvidenceDriveId": "18NDIlIIBx81V_xY295MbhyLA6tNYEVak",
+      "mode": "OPERATIONAL_DELTA_SALVAGE_REPLAY_PLUS_BOUNDED_CSS_CORRECTION",
+      "paths": [
+        "foundation/operational/session-owner.ts",
+        "foundation/operational/terminal-host.ts",
+        "authorized Runs/Operational region of main.ts"
+      ],
+      "boundedCorrection": "Runs right pane permits canonical #wave3ContextInspectorHost while legacy #domainContext remains hidden and Visualize behavior remains unchanged"
+    }
+  ],
+  "explicitExclusions": [
+    {
+      "lane": "PS03",
+      "disposition": "PROHIBITED_NOT_REPLAYED"
+    },
+    {
+      "lane": "PS05",
+      "disposition": "EVIDENCE_ONLY_NOT_PRODUCT_OVERLAY",
+      "controllerReviewDriveId": "1Jlj4VTNFezd-2wBXbLphVVaob-aR9X3W"
+    }
+  ],
+  "overlayUsed": false,
+  "result": "PASS"
+}

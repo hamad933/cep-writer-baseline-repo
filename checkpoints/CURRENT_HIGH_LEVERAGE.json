@@ -1,0 +1,58 @@
+{
+  "baseline": "CEP-FOUNDATION-0.2.1c-BROWSER-TRUTHFULNESS-CORRECTED-CANDIDATE",
+  "scope": "BOUNDED_INDEPENDENT_CONTROLLER_REVIEW_CORRECTION_ONLY",
+  "status": "READY_FOR_CONTROLLER_SUCCESSION_INPUT_NOT_OWNER_ACCEPTED_NOT_FROZEN",
+  "outcomes": [
+    "V0_2_1A_VALUE_PRESERVED",
+    "W03_HIGH_RISK_SEMANTIC_MISROUTES_CORRECTED",
+    "W03_WORK_ADMISSION_PROVENANCE_ONLY",
+    "ACTION_AVAILABILITY_DECLARED_CAPABILITY_STRICT",
+    "CONTROLLER_INPUT_PROVENANCE_SEPARATED",
+    "HIGH_VALUE_DEFERRED_SET_PRESERVED",
+    "OLD_PRODUCTION_AUTHORITY_EXCLUDED",
+    "STACK_NOT_FROZEN",
+    "NOT_OWNER_ACCEPTED",
+    "NOT_FROZEN"
+  ],
+  "proof": {
+    "model": {
+      "pass": 58,
+      "fail": 0
+    },
+    "contract": {
+      "pass": 151,
+      "fail": 0
+    },
+    "writerScaffold": {
+      "pass": 38,
+      "fail": 0
+    },
+    "w03Semantic": {
+      "passed": 60,
+      "failed": 0,
+      "total": 60,
+      "sections": 69,
+      "atoms": 318,
+      "rowsChanged": 242,
+      "independentReviewCorrections": 24
+    },
+    "authority": {
+      "pass": 5,
+      "fail": 0
+    },
+    "deferredBoundary": {
+      "pass": 5,
+      "fail": 0
+    },
+    "browserLineage": {
+      "source": "v0.2.1a",
+      "pass": 6,
+      "fail": 0,
+      "freshV0_2_1bRerun": false
+    }
+  },
+  "owner_accepted": false,
+  "stack_frozen": false,
+  "deployed": false,
+  "released": false
+}

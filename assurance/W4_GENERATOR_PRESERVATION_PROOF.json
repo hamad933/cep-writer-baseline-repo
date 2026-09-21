@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "kind": "W4_GENERATOR_PRESERVATION_PROOF",
+  "status": "PASS_WITH_EXPLICIT_COMPILER_ENVIRONMENT_LIMIT",
+  "buildWriterContractsProbe": {
+    "executed": true,
+    "status": "PASS",
+    "probeTree": "isolated copy",
+    "canonicalSourceUnchanged": true,
+    "preserved": [
+      "CEP-FR-E14-W4-FAMILY-INTERACTION baseline",
+      "Wave4 closed / Wave5 pending",
+      "StructuredInputKeymapOwner",
+      "SettingsCenterOwner",
+      "OperationalSessionOwner BELOW_M6",
+      "EpistemicStateContract M4"
+    ]
+  },
+  "compileContracts": {
+    "staticReconciliationHookPresent": true,
+    "directStandaloneExecution": "NOT_APPLICABLE_IN_PACKAGED_RUNTIME",
+    "reason": "compile-contracts.py requires legacy sibling expanded/control-source inputs not included in the accepted successor package; this is an existing compiler-environment dependency, not a product/runtime gate.",
+    "truthClaim": "No fabricated execution PASS."
+  },
+  "activeRuntimeGate": "npm run check PASS after registry reconciliation and exact browser receipts."
+}

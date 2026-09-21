@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS_WITH_RESOLVED_RASTER_NONDETERMINISM",
+  "source": {
+    "sha256": "cc9191b66e03285e7311ea924b599b249aca551146acc45116bb7c9b39b57d82",
+    "files": 132
+  },
+  "functionalFlows": "5/5 PASS",
+  "comparisons": [
+    {
+      "viewport": "1440x1000",
+      "pixels": 1440000,
+      "changedPixels": 15,
+      "changedRatio": 1.0416666666666666e-05,
+      "maxChannelDelta": 8,
+      "sumChannelDelta": 59,
+      "bbox": null,
+      "classification": "NON_MATERIAL_BROWSER_RASTERIZATION_NONDETERMINISM",
+      "geometryOrContentRegressionFound": false
+    },
+    {
+      "viewport": "1024x900",
+      "pixels": 921600,
+      "changedPixels": 0,
+      "exactPixelIdentity": true,
+      "classification": "EXACT_MATCH"
+    }
+  ],
+  "adjudication": "15 low-delta raster pixels in a fixed badge do not indicate geometry/content/interaction loss; direct functional owner checks and 1024 exact pixel identity pass. Raw strict comparator is preserved as evidence and superseded only for this rendering-noise finding."
+}

@@ -1,0 +1,1256 @@
+[
+  {
+    "id": "note.new",
+    "owner": "StructuredNoteBindingSeam",
+    "intent": "New linked note",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "foundation.palette",
+    "owner": "foundation.commands",
+    "intent": "Commands / الأوامر",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "foundation.settings",
+    "owner": "SettingsCenterOwner",
+    "intent": "Settings / التفضيلات",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Opens the single SettingsCenterOwner presentation; preference values/persistence remain ScopedPreferencesOwner-owned",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "foundation.focus",
+    "owner": "foundation.focus",
+    "intent": "Focus / التركيز",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "foundation.left",
+    "owner": "foundation.workspace",
+    "intent": "Structure pane / البنية",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "foundation.right",
+    "owner": "foundation.workspace",
+    "intent": "Context pane / السياق",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "foundation.bottom",
+    "owner": "foundation.workspace",
+    "intent": "History shelf / السجل",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "foundation.note",
+    "owner": "foundation.notes",
+    "intent": "New linked note / ملاحظة مرتبطة",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "note.open",
+    "owner": "NotesWorkingState",
+    "intent": "Open existing note",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "foundation.notes",
+    "owner": "foundation.notes",
+    "intent": "Linked notes",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "foundation.theme",
+    "owner": "foundation.preferences",
+    "intent": "Cycle theme",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "foundation.guidance",
+    "owner": "foundation.preferences",
+    "intent": "Guidance / الإرشادات",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "foundation.context",
+    "owner": "foundation.actions",
+    "intent": "Context Actions",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "learn.start",
+    "owner": "LearnAdapter",
+    "intent": "Start practice",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "learn.submit",
+    "owner": "LearnAdapter",
+    "intent": "Submit answer",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "learn.assessment",
+    "owner": "LearnAdapter",
+    "intent": "Open assessment",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "learn.lab",
+    "owner": "LearnAdapter",
+    "intent": "Open lab brief",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "spatial.fit",
+    "owner": "SpatialInteractionKernel",
+    "intent": "Fit",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "spatial.zoomIn",
+    "owner": "SpatialInteractionKernel",
+    "intent": "＋",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "spatial.zoomOut",
+    "owner": "SpatialInteractionKernel",
+    "intent": "−",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "spatial.align",
+    "owner": "SpatialInteractionKernel",
+    "intent": "Align",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "spatial.distribute",
+    "owner": "SpatialInteractionKernel",
+    "intent": "Distribute",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "spatial.undo",
+    "owner": "SpatialInteractionKernel",
+    "intent": "Undo view change",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "spatial.redo",
+    "owner": "SpatialInteractionKernel",
+    "intent": "Redo view change",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "spatial.connect",
+    "owner": "RelationInteractionOwner",
+    "intent": "Connect",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "SELECTION_ACTION_SURFACE",
+      "RELATION_COMPOSER",
+      "CONTEXT_MENU",
+      "INSPECTOR",
+      "COMMAND_PALETTE",
+      "KEYBOARD"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "relation.edit",
+    "owner": "RelationInteractionOwner",
+    "intent": "Edit Relationship",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "SELECTION_ACTION_SURFACE",
+      "RELATION_COMPOSER",
+      "CONTEXT_MENU",
+      "INSPECTOR",
+      "COMMAND_PALETTE",
+      "KEYBOARD"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "spatial.relation.commit",
+    "owner": "RelationDomainAdapter",
+    "intent": "Apply relationship",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "SELECTION_ACTION_SURFACE",
+      "RELATION_COMPOSER",
+      "CONTEXT_MENU",
+      "INSPECTOR",
+      "COMMAND_PALETTE",
+      "KEYBOARD"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "relation.undo",
+    "owner": "RelationDomainAdapter",
+    "intent": "Undo relationship",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "SELECTION_ACTION_SURFACE",
+      "RELATION_COMPOSER",
+      "CONTEXT_MENU",
+      "INSPECTOR",
+      "COMMAND_PALETTE",
+      "KEYBOARD"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "relation.redo",
+    "owner": "RelationDomainAdapter",
+    "intent": "Redo relationship",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "SELECTION_ACTION_SURFACE",
+      "RELATION_COMPOSER",
+      "CONTEXT_MENU",
+      "INSPECTOR",
+      "COMMAND_PALETTE",
+      "KEYBOARD"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "session.select",
+    "owner": "SessionPresentation",
+    "intent": "Select session",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "session.detach",
+    "owner": "SessionPresentation",
+    "intent": "Close visible tab",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "document.copy",
+    "owner": "StructuredDocumentDomainAdapter",
+    "intent": "Copy structured selection",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "STRUCTURED_SELECTION_ACTION_SURFACE",
+      "CONTEXT_MENU",
+      "COMMAND_PALETTE",
+      "KEYBOARD"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "StructuredDocumentDomainAdapter canonical mutation; copy may be non-mutating in read-only contexts"
+  },
+  {
+    "id": "document.cut",
+    "owner": "StructuredDocumentDomainAdapter",
+    "intent": "Cut structured selection",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "STRUCTURED_SELECTION_ACTION_SURFACE",
+      "CONTEXT_MENU",
+      "COMMAND_PALETTE",
+      "KEYBOARD"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "StructuredDocumentDomainAdapter canonical mutation; copy may be non-mutating in read-only contexts"
+  },
+  {
+    "id": "document.paste",
+    "owner": "StructuredDocumentDomainAdapter",
+    "intent": "Paste structured fragment",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "STRUCTURED_SELECTION_ACTION_SURFACE",
+      "CONTEXT_MENU",
+      "COMMAND_PALETTE",
+      "KEYBOARD"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "StructuredDocumentDomainAdapter canonical mutation; copy may be non-mutating in read-only contexts"
+  },
+  {
+    "id": "OPEN_TERMINAL",
+    "owner": "InternalSimulationAdapter",
+    "intent": "Open terminal",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Provider-neutral RuntimeAdapter command ownership; InternalSimulationAdapter is the current bounded default adapter, not the Operational family owner"
+  },
+  {
+    "id": "runtime.disconnect",
+    "owner": "InternalSimulationAdapter",
+    "intent": "Disconnect provider",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Provider-neutral RuntimeAdapter command ownership; InternalSimulationAdapter is the current bounded default adapter, not the Operational family owner"
+  },
+  {
+    "id": "runtime.reconnect",
+    "owner": "InternalSimulationAdapter",
+    "intent": "Reconnect session",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Provider-neutral RuntimeAdapter command ownership; InternalSimulationAdapter is the current bounded default adapter, not the Operational family owner"
+  },
+  {
+    "id": "runtime.input",
+    "owner": "InternalSimulationAdapter",
+    "intent": "Send simulation command",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Provider-neutral RuntimeAdapter command ownership; InternalSimulationAdapter is the current bounded default adapter, not the Operational family owner"
+  },
+  {
+    "id": "session.dock",
+    "owner": "SessionPresentation",
+    "intent": "dock",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Changes presentation only; RuntimeAdapter session identity is retained",
+    "entry_surfaces": [
+      "OPERATIONAL_HEADER",
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "session.float",
+    "owner": "SessionPresentation",
+    "intent": "float",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Changes presentation only; RuntimeAdapter session identity is retained",
+    "entry_surfaces": [
+      "OPERATIONAL_HEADER",
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "session.split",
+    "owner": "SessionPresentation",
+    "intent": "split",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Changes presentation only; RuntimeAdapter session identity is retained",
+    "entry_surfaces": [
+      "OPERATIONAL_HEADER",
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "session.minimize",
+    "owner": "SessionPresentation",
+    "intent": "minimize",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Changes presentation only; RuntimeAdapter session identity is retained",
+    "entry_surfaces": [
+      "OPERATIONAL_HEADER",
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "session.close",
+    "owner": "SessionPresentation",
+    "intent": "close",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Changes presentation only; RuntimeAdapter session identity is retained",
+    "entry_surfaces": [
+      "OPERATIONAL_HEADER",
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "session.tab-left",
+    "owner": "SessionPresentation",
+    "intent": "tab-left",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Changes presentation only; RuntimeAdapter session identity is retained",
+    "entry_surfaces": [
+      "OPERATIONAL_HEADER",
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "session.tab-right",
+    "owner": "SessionPresentation",
+    "intent": "tab-right",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Changes presentation only; RuntimeAdapter session identity is retained",
+    "entry_surfaces": [
+      "OPERATIONAL_HEADER",
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "session.geometry",
+    "owner": "SessionPresentation",
+    "intent": "geometry",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Changes presentation only; RuntimeAdapter session identity is retained",
+    "entry_surfaces": [
+      "OPERATIONAL_HEADER",
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "view.topology",
+    "owner": "WorkspaceView",
+    "intent": "Open topology view",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "LEFT_NAV",
+      "CENTER_VIEW_BAR",
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "view.table",
+    "owner": "WorkspaceView",
+    "intent": "Open table view",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "LEFT_NAV",
+      "CENTER_VIEW_BAR",
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "view.history",
+    "owner": "WorkspaceView",
+    "intent": "Open history view",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "LEFT_NAV",
+      "CENTER_VIEW_BAR",
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "view.recorded",
+    "owner": "WorkspaceView",
+    "intent": "Open recorded view",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Delegates through the single registered semantic owner",
+    "entry_surfaces": [
+      "LEFT_NAV",
+      "CENTER_VIEW_BAR",
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "runs.pause",
+    "owner": "W03V34RunsAdapter",
+    "intent": "pause RUN-0042",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Runs v3.4 request → acknowledge → complete lifecycle guard",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "runs.resume",
+    "owner": "W03V34RunsAdapter",
+    "intent": "resume RUN-0042",
+    "availability": "Live registry availability(context); refusal returns a reason and creates no receipt",
+    "effect": "Runs v3.4 request → acknowledge → complete lifecycle guard",
+    "entry_surfaces": [
+      "COMMAND_PALETTE"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Presentation routes do not become domain truth owners"
+  },
+  {
+    "id": "history.undo",
+    "owner": "accepted-runtime.Commands",
+    "intent": "history.undo",
+    "availability": "commandAvailability + accepted donor dispatcher",
+    "effect": "Original accepted structured-editor implementation",
+    "entry_surfaces": [
+      "COMMAND_PALETTE",
+      "TOOLBAR",
+      "KEYBOARD",
+      "CONTEXT_MENU"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Accepted Library working-document semantics"
+  },
+  {
+    "id": "history.redo",
+    "owner": "accepted-runtime.Commands",
+    "intent": "history.redo",
+    "availability": "commandAvailability + accepted donor dispatcher",
+    "effect": "Original accepted structured-editor implementation",
+    "entry_surfaces": [
+      "COMMAND_PALETTE",
+      "TOOLBAR",
+      "KEYBOARD",
+      "CONTEXT_MENU"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Accepted Library working-document semantics"
+  },
+  {
+    "id": "block.insert",
+    "owner": "accepted-runtime.Commands",
+    "intent": "block.insert",
+    "availability": "commandAvailability + accepted donor dispatcher",
+    "effect": "Original accepted structured-editor implementation",
+    "entry_surfaces": [
+      "COMMAND_PALETTE",
+      "TOOLBAR",
+      "KEYBOARD",
+      "CONTEXT_MENU"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Accepted Library working-document semantics"
+  },
+  {
+    "id": "block.duplicate",
+    "owner": "accepted-runtime.Commands",
+    "intent": "block.duplicate",
+    "availability": "commandAvailability + accepted donor dispatcher",
+    "effect": "Original accepted structured-editor implementation",
+    "entry_surfaces": [
+      "COMMAND_PALETTE",
+      "TOOLBAR",
+      "KEYBOARD",
+      "CONTEXT_MENU"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Accepted Library working-document semantics"
+  },
+  {
+    "id": "block.delete",
+    "owner": "accepted-runtime.Commands",
+    "intent": "block.delete",
+    "availability": "commandAvailability + accepted donor dispatcher",
+    "effect": "Original accepted structured-editor implementation",
+    "entry_surfaces": [
+      "COMMAND_PALETTE",
+      "TOOLBAR",
+      "KEYBOARD",
+      "CONTEXT_MENU"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Accepted Library working-document semantics"
+  },
+  {
+    "id": "block.moveUp",
+    "owner": "accepted-runtime.Commands",
+    "intent": "block.moveUp",
+    "availability": "commandAvailability + accepted donor dispatcher",
+    "effect": "Original accepted structured-editor implementation",
+    "entry_surfaces": [
+      "COMMAND_PALETTE",
+      "TOOLBAR",
+      "KEYBOARD",
+      "CONTEXT_MENU"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Accepted Library working-document semantics"
+  },
+  {
+    "id": "block.moveDown",
+    "owner": "accepted-runtime.Commands",
+    "intent": "block.moveDown",
+    "availability": "commandAvailability + accepted donor dispatcher",
+    "effect": "Original accepted structured-editor implementation",
+    "entry_surfaces": [
+      "COMMAND_PALETTE",
+      "TOOLBAR",
+      "KEYBOARD",
+      "CONTEXT_MENU"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Accepted Library working-document semantics"
+  },
+  {
+    "id": "block.moveStart",
+    "owner": "accepted-runtime.Commands",
+    "intent": "block.moveStart",
+    "availability": "commandAvailability + accepted donor dispatcher",
+    "effect": "Original accepted structured-editor implementation",
+    "entry_surfaces": [
+      "COMMAND_PALETTE",
+      "TOOLBAR",
+      "KEYBOARD",
+      "CONTEXT_MENU"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Accepted Library working-document semantics"
+  },
+  {
+    "id": "block.moveEnd",
+    "owner": "accepted-runtime.Commands",
+    "intent": "block.moveEnd",
+    "availability": "commandAvailability + accepted donor dispatcher",
+    "effect": "Original accepted structured-editor implementation",
+    "entry_surfaces": [
+      "COMMAND_PALETTE",
+      "TOOLBAR",
+      "KEYBOARD",
+      "CONTEXT_MENU"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Accepted Library working-document semantics"
+  },
+  {
+    "id": "block.indent",
+    "owner": "accepted-runtime.Commands",
+    "intent": "block.indent",
+    "availability": "commandAvailability + accepted donor dispatcher",
+    "effect": "Original accepted structured-editor implementation",
+    "entry_surfaces": [
+      "COMMAND_PALETTE",
+      "TOOLBAR",
+      "KEYBOARD",
+      "CONTEXT_MENU"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Accepted Library working-document semantics"
+  },
+  {
+    "id": "block.outdent",
+    "owner": "accepted-runtime.Commands",
+    "intent": "block.outdent",
+    "availability": "commandAvailability + accepted donor dispatcher",
+    "effect": "Original accepted structured-editor implementation",
+    "entry_surfaces": [
+      "COMMAND_PALETTE",
+      "TOOLBAR",
+      "KEYBOARD",
+      "CONTEXT_MENU"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Accepted Library working-document semantics"
+  },
+  {
+    "id": "block.convert",
+    "owner": "accepted-runtime.Commands",
+    "intent": "block.convert",
+    "availability": "commandAvailability + accepted donor dispatcher",
+    "effect": "Original accepted structured-editor implementation",
+    "entry_surfaces": [
+      "COMMAND_PALETTE",
+      "TOOLBAR",
+      "KEYBOARD",
+      "CONTEXT_MENU"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Accepted Library working-document semantics"
+  },
+  {
+    "id": "block.plainText",
+    "owner": "accepted-runtime.Commands",
+    "intent": "block.plainText",
+    "availability": "commandAvailability + accepted donor dispatcher",
+    "effect": "Original accepted structured-editor implementation",
+    "entry_surfaces": [
+      "COMMAND_PALETTE",
+      "TOOLBAR",
+      "KEYBOARD",
+      "CONTEXT_MENU"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Accepted Library working-document semantics"
+  },
+  {
+    "id": "block.align",
+    "owner": "accepted-runtime.Commands",
+    "intent": "block.align",
+    "availability": "commandAvailability + accepted donor dispatcher",
+    "effect": "Original accepted structured-editor implementation",
+    "entry_surfaces": [
+      "COMMAND_PALETTE",
+      "TOOLBAR",
+      "KEYBOARD",
+      "CONTEXT_MENU"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Accepted Library working-document semantics"
+  },
+  {
+    "id": "block.direction",
+    "owner": "accepted-runtime.Commands",
+    "intent": "block.direction",
+    "availability": "commandAvailability + accepted donor dispatcher",
+    "effect": "Original accepted structured-editor implementation",
+    "entry_surfaces": [
+      "COMMAND_PALETTE",
+      "TOOLBAR",
+      "KEYBOARD",
+      "CONTEXT_MENU"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Accepted Library working-document semantics"
+  },
+  {
+    "id": "block.background",
+    "owner": "accepted-runtime.Commands",
+    "intent": "block.background",
+    "availability": "commandAvailability + accepted donor dispatcher",
+    "effect": "Original accepted structured-editor implementation",
+    "entry_surfaces": [
+      "COMMAND_PALETTE",
+      "TOOLBAR",
+      "KEYBOARD",
+      "CONTEXT_MENU"
+    ],
+    "focus_result": "Return or preserve the invoking context as defined by the registered action surface",
+    "negative_assertions": [
+      "No duplicate semantic owner",
+      "No unavailable mutation",
+      "No representation-only domain mutation"
+    ],
+    "domain_boundary": "Accepted Library working-document semantics"
+  }
+]

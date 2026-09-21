@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "classification": "CONTROLLER_ACCEPTANCE_RECEIPT",
+  "mission": "W2-B-STRUCTURED-CLIPBOARD-TRUST",
+  "parent": {
+    "successorId": "CEP-FR-E10-W2A-8dfd619c",
+    "sha256": "8dfd619c3ffd5d432d89f373af5350632d58d15f8250f32f58e73e1a5150a87a",
+    "canonicalSourceSha256": "454427ed586a949de6636051f99f529e685e1e482e30dcc212c20fbe8ae10bf9"
+  },
+  "writerCandidate": {
+    "sha256": "f96b43bf5efd1697fec57af82f3debbf10a587997a12c1f5b2210c6843ebc498",
+    "canonicalSourceSha256": "d7705b5c36d49bc71271ff868e3f532e84402216e3f471a1d53907eebccb0ad9"
+  },
+  "rebase": {
+    "base": "E09",
+    "onto": "E10",
+    "sourceDelta": [
+      "foundation/structured.ts",
+      "foundation/structured/clipboard-contract.ts",
+      "foundation/structured/clipboard-owner.ts",
+      "model-tests.ts"
+    ],
+    "mergeConflicts": 0
+  },
+  "controllerConvergenceCorrections": [
+    "MECHANIC_OWNERSHIP_REGISTRY split structured.selection and structured.clipboard",
+    "current duplicate-mechanic/VS05 tools no longer classify clipboard as VS-07 deferred; historical receipts retained unchanged"
+  ],
+  "acceptedSource": {
+    "canonicalSourceSha256": "60fd549b1a6f4662600f6fece9bde3df8e7985da30a58cd8df9248b70393d9dc",
+    "files": 36
+  },
+  "independentGates": {
+    "buildRuntime": "PASS",
+    "model": "151/151 PASS",
+    "npmCheck": "PASS",
+    "browserConformance": "6/6 PASS Chromium CDP",
+    "clipboardBrowser": "PASS Library+Learn Chromium CDP",
+    "duplicateMechanic": "PASS",
+    "vs05Ownership": "PASS"
+  },
+  "owner": "StructuredClipboardTrustOwner",
+  "controllerAccepted": true,
+  "selfPromoted": false,
+  "wave3Started": false,
+  "acceptedAtUtc": "2026-09-11T23:42:51.772006+00:00"
+}

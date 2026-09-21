@@ -1,0 +1,83 @@
+{
+  "executedAt": "2026-09-12T00:59:52.716Z",
+  "total": 172,
+  "pass": 172,
+  "fail": 0,
+  "laneTotal": 8,
+  "lanePass": 8,
+  "laneFail": 0,
+  "lane": [
+    {
+      "id": "w3e.ui-scale-owner-contract",
+      "before": "accepted ScopedPreferencesOwner with global scale preference",
+      "action": "construct reusable UI scale owner",
+      "owner": "UIScalePolicyOwner",
+      "oracle": "one owner declares application-chrome scope and explicit exclusions from document/canvas/browser zoom, density and responsive breakpoints",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3e.ui-scale-deterministic-values",
+      "before": "central scale token bases",
+      "action": "project 0.8, 1.0 and 2.0",
+      "owner": "UIScalePolicyOwner",
+      "oracle": "all three scales deterministically project the same central geometry/token set",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3e.ui-scale-normalization",
+      "before": "arbitrary low/high/in-between scale inputs",
+      "action": "normalize against one governed range and step",
+      "owner": "UIScalePolicyOwner",
+      "oracle": "clamp and step normalization is deterministic",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3e.ui-scale-shared-library-visualize-consumers",
+      "before": "real Library Structured adapter and SpatialModel with independent domain state",
+      "action": "project both consumer chrome fixtures through the same central owner",
+      "owner": "UIScalePolicyOwner",
+      "oracle": "both families receive identical central scale tokens while domain/document/camera state remains byte-identical",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3e.ui-scale-scoped-preferences-authority",
+      "before": "shared durable storage and structured context",
+      "action": "set scale through UI scale policy then reload as Spatial context",
+      "owner": "ScopedPreferencesOwner + UIScalePolicyOwner",
+      "oracle": "value persists only through accepted preference storage and remains globally applicable",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3e.ui-scale-pane-responsive-separation",
+      "before": "open pane preferences at compact viewport",
+      "action": "project application-chrome geometry at low/default/high scale",
+      "owner": "UIScalePolicyOwner + WorkspacePaneLayoutOwner",
+      "oracle": "scaled widths change while preferred/effective pane state and responsive band remain unchanged",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3e.ui-scale-no-surface-local-policy",
+      "before": "central owner and two family descriptors",
+      "action": "attempt consumer-local scale/token overrides",
+      "owner": "UIScalePolicyOwner",
+      "oracle": "consumer descriptors cannot introduce competing local scale policy",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3e.ui-scale-style-projection",
+      "before": "fake DOM style target and pane owner",
+      "action": "apply central CSS-variable projection",
+      "owner": "UIScalePolicyOwner",
+      "oracle": "geometry variables are emitted without CSS zoom/transform semantics",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    }
+  ]
+}

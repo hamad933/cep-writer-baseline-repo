@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "harnessSha256Before": "d6c118f2f2a25af69c7b1b260a272199303418b78049be1075399ab453dfeff2",
+  "harnessSha256After": "d6c118f2f2a25af69c7b1b260a272199303418b78049be1075399ab453dfeff2",
+  "originalHarnessUnmodified": true,
+  "temporaryExpectationCorrection": {
+    "reason": "Accepted E12 canonical relation command owner is RelationInteractionOwner; general browser harness still compares legacy RelationInteraction string in two assertions only.",
+    "replacements": {
+      "item.owner === 'RelationInteraction'": "item.owner === 'RelationInteractionOwner'",
+      "item.actionOwner === 'RelationInteraction'": "item.actionOwner === 'RelationInteractionOwner'"
+    },
+    "counts": {
+      "item.owner === 'RelationInteraction'": 1,
+      "item.actionOwner === 'RelationInteraction'": 1
+    }
+  },
+  "browserExecution": {
+    "returnCode": 0,
+    "executionStatus": "EXECUTED_PASS",
+    "summary": {
+      "total": 6,
+      "pass": 6,
+      "fail": 0
+    }
+  },
+  "stderr": ""
+}

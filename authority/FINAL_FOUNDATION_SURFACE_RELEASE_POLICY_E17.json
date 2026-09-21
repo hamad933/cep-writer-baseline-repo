@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "kind": "FINAL_FOUNDATION_SURFACE_RELEASE_POLICY",
+  "baselineId": "CEP-FR-E17-FINAL-FOUNDATION-INTAKE-GATE",
+  "classification": "PER_SURFACE_READINESS_ONLY",
+  "stackStatus": "STACK_NOT_FROZEN",
+  "readySurfaces": [
+    "backup",
+    "configuration",
+    "enterprise",
+    "health",
+    "labs",
+    "learn",
+    "library",
+    "manual_ai",
+    "processing",
+    "releases",
+    "runs",
+    "scenarios",
+    "shell",
+    "today",
+    "validation",
+    "visualize"
+  ],
+  "blockedSurfaces": [
+    {
+      "surface": "audit",
+      "blockers": [
+        {
+          "dimension": "SC-032",
+          "code": "BLOCKED_MISSING_ANALYTICAL_COMPARE_EXECUTABLE_OWNER",
+          "reason": "AnalyticalCompare remains OPEN_NOT_IMPLEMENTED; surfaces that require it via INHERIT_AND_BIND are not releasable."
+        },
+        {
+          "dimension": "FAMILY:AnalyticalCompare",
+          "code": "BLOCKED_MISSING_ANALYTICAL_COMPARE_EXECUTABLE_OWNER",
+          "reason": "Profile requires AnalyticalCompare but no accepted executable family owner exists."
+        }
+      ]
+    },
+    {
+      "surface": "evidence",
+      "blockers": [
+        {
+          "dimension": "SC-032",
+          "code": "BLOCKED_MISSING_ANALYTICAL_COMPARE_EXECUTABLE_OWNER",
+          "reason": "AnalyticalCompare remains OPEN_NOT_IMPLEMENTED; surfaces that require it via INHERIT_AND_BIND are not releasable."
+        },
+        {
+          "dimension": "FAMILY:AnalyticalCompare",
+          "code": "BLOCKED_MISSING_ANALYTICAL_COMPARE_EXECUTABLE_OWNER",
+          "reason": "Profile requires AnalyticalCompare but no accepted executable family owner exists."
+        }
+      ]
+    },
+    {
+      "surface": "mastery",
+      "blockers": [
+        {
+          "dimension": "SC-032",
+          "code": "BLOCKED_MISSING_ANALYTICAL_COMPARE_EXECUTABLE_OWNER",
+          "reason": "AnalyticalCompare remains OPEN_NOT_IMPLEMENTED; surfaces that require it via INHERIT_AND_BIND are not releasable."
+        },
+        {
+          "dimension": "FAMILY:AnalyticalCompare",
+          "code": "BLOCKED_MISSING_ANALYTICAL_COMPARE_EXECUTABLE_OWNER",
+          "reason": "Profile requires AnalyticalCompare but no accepted executable family owner exists."
+        }
+      ]
+    },
+    {
+      "surface": "portfolio",
+      "blockers": [
+        {
+          "dimension": "SC-032",
+          "code": "BLOCKED_MISSING_ANALYTICAL_COMPARE_EXECUTABLE_OWNER",
+          "reason": "AnalyticalCompare remains OPEN_NOT_IMPLEMENTED; surfaces that require it via INHERIT_AND_BIND are not releasable."
+        },
+        {
+          "dimension": "FAMILY:AnalyticalCompare",
+          "code": "BLOCKED_MISSING_ANALYTICAL_COMPARE_EXECUTABLE_OWNER",
+          "reason": "Profile requires AnalyticalCompare but no accepted executable family owner exists."
+        }
+      ]
+    },
+    {
+      "surface": "results",
+      "blockers": [
+        {
+          "dimension": "SC-032",
+          "code": "BLOCKED_MISSING_ANALYTICAL_COMPARE_EXECUTABLE_OWNER",
+          "reason": "AnalyticalCompare remains OPEN_NOT_IMPLEMENTED; surfaces that require it via INHERIT_AND_BIND are not releasable."
+        },
+        {
+          "dimension": "FAMILY:AnalyticalCompare",
+          "code": "BLOCKED_MISSING_ANALYTICAL_COMPARE_EXECUTABLE_OWNER",
+          "reason": "Profile requires AnalyticalCompare but no accepted executable family owner exists."
+        }
+      ]
+    },
+    {
+      "surface": "reviews",
+      "blockers": [
+        {
+          "dimension": "SC-032",
+          "code": "BLOCKED_MISSING_ANALYTICAL_COMPARE_EXECUTABLE_OWNER",
+          "reason": "AnalyticalCompare remains OPEN_NOT_IMPLEMENTED; surfaces that require it via INHERIT_AND_BIND are not releasable."
+        },
+        {
+          "dimension": "FAMILY:AnalyticalCompare",
+          "code": "BLOCKED_MISSING_ANALYTICAL_COMPARE_EXECUTABLE_OWNER",
+          "reason": "Profile requires AnalyticalCompare but no accepted executable family owner exists."
+        }
+      ]
+    },
+    {
+      "surface": "rq",
+      "blockers": [
+        {
+          "dimension": "SC-032",
+          "code": "BLOCKED_MISSING_ANALYTICAL_COMPARE_EXECUTABLE_OWNER",
+          "reason": "AnalyticalCompare remains OPEN_NOT_IMPLEMENTED; surfaces that require it via INHERIT_AND_BIND are not releasable."
+        },
+        {
+          "dimension": "FAMILY:AnalyticalCompare",
+          "code": "BLOCKED_MISSING_ANALYTICAL_COMPARE_EXECUTABLE_OWNER",
+          "reason": "Profile requires AnalyticalCompare but no accepted executable family owner exists."
+        }
+      ]
+    }
+  ],
+  "releaseLaw": {
+    "ready": "Surface Writer may start only from a Controller-generated exact-authority intake whose readiness.overall is READY.",
+    "blocked": "Blocked surfaces receive zero writable scope and may not start.",
+    "sharedFoundation": "Read-only to Surface Writers; any reusable missing mechanic returns to Controller/Foundation work.",
+    "promotion": "Surface Writers are candidate-only; Controller retains promotion authority."
+  },
+  "missingReusableOwner": {
+    "id": "AnalyticalCompare",
+    "status": "OPEN_NOT_IMPLEMENTED",
+    "blocks": [
+      "audit",
+      "evidence",
+      "mastery",
+      "portfolio",
+      "results",
+      "reviews",
+      "rq"
+    ]
+  },
+  "surfaceReleaseRequiresExactExternalControllerAuthority": true
+}

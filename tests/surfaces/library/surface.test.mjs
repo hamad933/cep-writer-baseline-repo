@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {CommandRegistry} from '../../../dist/foundation/models.js';
+import {createStructuredConsumerAdapter} from '../../../dist/adapters/structured-documents.js';
+import {bindLibrarySurface} from '../../../dist/surfaces/library/surface.js';
+const bundle={initialDocumentId:'lib-1',FIXTURES:{'lib-1':{id:'lib-1',revision:'r1',title:'Library',tags:[],blocks:[{id:'p1',type:'paragraph',html:'A'}],sources:[]}}};
+const structured=createStructuredConsumerAdapter('library',bundle);
+const commands=new CommandRegistry();const bound=bindLibrarySurface({commands,structured});
+assert.equal(bound.owner,'LibraryDomainAdapter');
+assert.equal(bound.transactionOwner,'StructuredTransactionHistoryRecoveryOwner');
+commands.execute('library.revise',{title:'Library revised'});
+assert.equal(structured.snapshot().title,'Library revised');
+const save=commands.execute('library.save',{});
+assert.equal(save.status,'SAVE_BOUNDARY_UNAVAILABLE');
+assert.equal(save.persisted,false);
+assert.equal(commands.execute('library.history',{}).owner,'StructuredTransactionHistoryRecoveryOwner');
+console.log(JSON.stringify({surface:'library',status:'PASS',cases:7,duplicateTransactionOwner:false}));

@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "kind": "VS05_COMMAND_AVAILABILITY_ROUTE_DISPOSITION_CENSUS",
+  "status": "PASS",
+  "canonicalSourceTreeSha256": "1c14a1b5074b63212d91f571f58b650690169526255bc1172b1f3ee0b04f117b",
+  "rows": [
+    {
+      "symbolOrRoute": "commandAvailability",
+      "source": "foundation/accepted-runtime.ts",
+      "classification": "PRESENTATION_ONLY_PROJECTION_OF_CANONICAL_TRUTH",
+      "disposition": "Canonical VS-05 shared IDs delegate to extension/CommandRegistry -> StructuredCommandAvailabilityOwner; local decisions retained only for non-admitted presentation/domain/deferred cases."
+    },
+    {
+      "symbolOrRoute": "commandEnabled",
+      "source": "foundation/accepted-runtime.ts",
+      "classification": "PRESENTATION_ONLY_PROJECTION_OF_CANONICAL_TRUTH",
+      "disposition": "Thin enabled projection of commandAvailability; no separate semantic eligibility owner."
+    },
+    {
+      "symbolOrRoute": "Commands.execute",
+      "source": "foundation/accepted-runtime.ts",
+      "classification": "COMPATIBILITY_PRESENTATION_DISPATCHER",
+      "disposition": "Admitted main-document semantic IDs converge on extension.execute/CommandRegistry; UI-only/donor presentation actions remain local."
+    },
+    {
+      "symbolOrRoute": "Toolbar Undo/Redo",
+      "source": "foundation/accepted-runtime.ts",
+      "classification": "PRESENTATION_ONLY_PROJECTION_OF_CANONICAL_TRUTH",
+      "disposition": "disabled/code/reason derive from registry availability; execution uses canonical history.undo/history.redo."
+    },
+    {
+      "symbolOrRoute": "Block menu duplicate/move/indent/outdent/delete/format",
+      "source": "foundation/accepted-runtime.ts",
+      "classification": "PRESENTATION_ONLY_PROJECTION_OF_CANONICAL_TRUTH",
+      "disposition": "Menu enabled state comes from canonical command availability; execution converges on canonical command IDs. Delete confirmation remains presentation safety glue."
+    },
+    {
+      "symbolOrRoute": "Library command palette",
+      "source": "foundation/accepted-runtime.ts",
+      "classification": "PRESENTATION_ONLY_PROJECTION_OF_CANONICAL_TRUTH",
+      "disposition": "Canonical shared IDs replace donor aliases for admitted commands; disabled reason/code project canonical availability; UI-only items remain local."
+    },
+    {
+      "symbolOrRoute": "Save / Autosave",
+      "source": "foundation/accepted-runtime.ts",
+      "classification": "REMOVED_REPLACED_BY_CANONICAL_OWNER",
+      "disposition": "Both use document.commit through registry; VS-04 save-boundary truth remains semantic authority."
+    },
+    {
+      "symbolOrRoute": "Recovery restore-as-new",
+      "source": "foundation/accepted-runtime.ts",
+      "classification": "REMOVED_REPLACED_BY_CANONICAL_OWNER",
+      "disposition": "Uses document.recoverAsNew through registry; VS-04 recovery owner remains semantic authority."
+    },
+    {
+      "symbolOrRoute": "Keyboard mapping",
+      "source": "foundation/accepted-runtime.ts",
+      "classification": "EXPLICITLY_DEFERRED",
+      "disposition": "Mapping unchanged (VS-09); where existing mapping invokes admitted semantic commands, execution converges on canonical command route."
+    },
+    {
+      "symbolOrRoute": "selection multi-delete removeMany",
+      "source": "foundation/accepted-runtime.ts",
+      "classification": "EXPLICITLY_DEFERRED",
+      "disposition": "Selection-owned direct main mutation remains isolated for VS-06; not counted as VS-05 command ownership."
+    },
+    {
+      "symbolOrRoute": "clipboard cut/copy/paste mechanics",
+      "source": "foundation/accepted-runtime.ts + foundation/structured.ts",
+      "classification": "EXPLICITLY_DEFERRED",
+      "disposition": "VS-07 owns clipboard cutover/sanitization/transport; not migrated here."
+    },
+    {
+      "symbolOrRoute": "Note-window history/mutation commands",
+      "source": "foundation/accepted-runtime.ts",
+      "classification": "DOMAIN_SPECIFIC_LEGITIMATELY_RETAINED",
+      "disposition": "Explicitly outside VS-04 main-document ownership and outside VS-05 shared Structured main-document command convergence."
+    },
+    {
+      "symbolOrRoute": "Learn Workspace command palette",
+      "source": "foundation/workspace-host.ts",
+      "classification": "CANONICAL_CONSUMER",
+      "disposition": "commands.items(context) projects same availability; click executes CommandRegistry with same context."
+    }
+  ],
+  "deferred": [
+    {
+      "mechanic": "selection.multi-delete",
+      "route": "applyStructuredMutation('main',{type:'removeMany'",
+      "targetSlice": "VS-06",
+      "status": "EXPLICITLY_DEFERRED"
+    },
+    {
+      "mechanic": "clipboard",
+      "targetSlice": "VS-07",
+      "status": "EXPLICITLY_DEFERRED"
+    },
+    {
+      "mechanic": "keyboard-mapping",
+      "targetSlice": "VS-09",
+      "status": "MAPPING_UNCHANGED_SEMANTIC_ROUTES_CONVERGED"
+    }
+  ]
+}

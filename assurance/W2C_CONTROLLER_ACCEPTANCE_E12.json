@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "classification": "CONTROLLER_ACCEPTANCE_RECEIPT",
+  "mission": "W2-C-SPATIAL-INTERACTION-RELATION",
+  "parent": {
+    "successorId": "CEP-FR-E11-W2B-099171a6",
+    "sha256": "099171a6c4b925d9b32d1959a17017a50774ff96afa35098d83bdcb4ae6fd61b",
+    "canonicalSourceSha256": "60fd549b1a6f4662600f6fece9bde3df8e7985da30a58cd8df9248b70393d9dc"
+  },
+  "writerCandidate": {
+    "sha256": "49d3920c41346c90c810795b8cbc4ad108888e5e5a2acb954704ea27ff21505e",
+    "canonicalSourceSha256": "c73977467f65301301cf8ea2e0d5b0bde1b23367fda3132893baf57db7998742",
+    "bytes": 6990295
+  },
+  "rebase": {
+    "base": "E09",
+    "onto": "E11",
+    "writerCanonicalDelta": [
+      "foundation/models.ts",
+      "foundation/relations.ts",
+      "foundation/spatial.ts",
+      "foundation/spatial/interaction-kernel.ts",
+      "foundation/spatial/relation-interaction.ts",
+      "model-tests.ts"
+    ],
+    "mergeConflicts": {
+      "models.ts": "single import-union conflict resolved by retaining E11 Global imports plus SpatialInteractionKernel import",
+      "others": 0
+    }
+  },
+  "controllerConvergenceCorrections": [
+    "Updated two stale physical-location assertions in tools/check-contracts.mjs to validate RelationInteractionOwner at foundation/spatial/relation-interaction.js.",
+    "Corrected semantic command-owner receipt identity from SpatialInteraction alias to SpatialInteractionKernel and from RelationInteraction alias to RelationInteractionOwner; this required a bounded main.ts registration-owner correction.",
+    "Reconciled current Controller-owned runtime/mechanic/state/component/command registries and active generators with accepted Wave 2 owner identities; historical assurance receipts were not rewritten."
+  ],
+  "acceptedSource": {
+    "canonicalSourceSha256": "52f3f3e5d6d669595fa57cbd2da7aa8cbd7a577c0ae6cc90c33a82d1b6597250",
+    "files": 38
+  },
+  "acceptedOwners": [
+    "SpatialInteractionKernel",
+    "RelationInteractionOwner"
+  ],
+  "preservedOwners": [
+    "SemanticCommandBus",
+    "TransientFocusOwner",
+    "ScopedPreferencesOwner",
+    "StructuredClipboardTrustOwner",
+    "SpatialSelectionNavigationKernel",
+    "RelationDomainAdapter"
+  ],
+  "independentGates": {
+    "buildRuntime": "PASS",
+    "model": "164/164 PASS",
+    "contracts": "151/151 PASS",
+    "npmCheck": "PASS",
+    "browserConformance": "6/6 PASS Chromium CDP",
+    "w2cRealConsumerBrowser": "PASS Visualize+Enterprise+Runs Recorded",
+    "w2aBrowser": "3/3 PASS",
+    "w2aNegative": "16/16 PASS",
+    "w2aCentralModification": "PASS exact revert",
+    "w2bClipboardBrowser": "PASS Library+Learn",
+    "recordedMode": "geometry/relation/runtime mutation refused; selection/navigation preserved",
+    "registryTruth": "reconciled current outputs + active generators"
+  },
+  "controllerAccepted": true,
+  "selfPromoted": false,
+  "wave3Started": false,
+  "acceptedAtUtc": "2026-09-12T00:09:43.744800+00:00"
+}

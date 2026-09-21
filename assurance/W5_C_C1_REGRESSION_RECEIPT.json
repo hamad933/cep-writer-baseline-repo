@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "kind": "W5_C_C1_REGRESSION_RECEIPT",
+  "status": "PASS",
+  "sourceCanonicalTreeSha256": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d",
+  "canonicalSourceFileCount": 99,
+  "runs": [
+    {"id":"lane-a-executable","status":"PASS","detail":"42/42 PASS"},
+    {"id":"lane-a-controller-correction","status":"PASS","detail":"12/12 PASS + browser mutation cases preserved"},
+    {"id":"lane-a-post-correction-delta","status":"PASS","detail":"16/16 PASS + browser delta cases preserved"},
+    {"id":"lane-a-browser","status":"PASS","detail":"7 steps + 42 executable cases"},
+    {"id":"lane-a-current-regression-browser","status":"PASS","detail":"6/6 PASS"},
+    {"id":"lane-b-original","status":"PASS","detail":"9/9 PASS"},
+    {"id":"lane-b-correction","status":"PASS","detail":"8/8 PASS"},
+    {"id":"lane-b-post-correction-delta","status":"PASS","detail":"18/18 PASS"},
+    {"id":"lane-b-micro-correction","status":"PASS","detail":"9/9 PASS"},
+    {"id":"lane-b-browser","status":"PASS","detail":"3/3 PASS"},
+    {"id":"lane-c-executable","status":"PASS","detail":"26/26 PASS"},
+    {"id":"lane-c-browser","status":"PASS","detail":"9 steps + 26 executable cases"},
+    {"id":"donor-inventory-generator","status":"PASS","detail":"46 branches; corrected fail-closed adjudication"},
+    {"id":"donor-inventory-truth-validator","status":"PASS","detail":"12/12 mandatory checks; negative fixtures PASS"},
+    {"id":"model","status":"PASS","detail":"210/210 PASS"},
+    {"id":"npm-run-check","status":"PASS","detail":"PASS"},
+    {"id":"source-dist-dist-ts-parity","status":"PASS","detail":"98 JS files in dist and 98 in dist-ts; model 210/210 in each generated tree"},
+    {"id":"legacy-browser-controller-method","status":"PASS","detail":"6/6 PASS through bounded Python/in-memory controller harness"},
+    {"id":"wave3-browser-current-laws","status":"PASS","detail":"5/5 PASS; isolated rerun completed on exact source hash"},
+    {"id":"wave4-browser","status":"PASS","detail":"5/5 PASS"}
+  ],
+  "toolingClassification": {
+    "directNodeLegacyHarness": "ENVIRONMENT_LIMITATION_PLAYWRIGHT_NPM_MODULE_UNAVAILABLE",
+    "adjudication": "NOT_PRODUCT_DEFECT",
+    "boundedAcceptedMethod": "controller-wave3-browser.py / Python Playwright in-memory built ESM",
+    "boundedAcceptedMethodResult": "Legacy 6/6 PASS + Wave3 5/5 PASS"
+  },
+  "r3LegacyOracleClassificationPreserved": true,
+  "productSourceModifiedForCorrection": false
+}

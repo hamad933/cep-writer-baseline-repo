@@ -1,0 +1,11 @@
+import {writeFile,readFile,readdir} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {runAnalyticalCompareTests} from '../dist/analytical-compare-tests.js';
+import {canonicalSourceIdentity} from './source-tree-identity.mjs';
+const root=new URL('../',import.meta.url);
+const tests=runAnalyticalCompareTests();
+const source=await canonicalSourceIdentity(root);
+const report={schemaVersion:1,kind:'E17_ANALYTICAL_COMPARE_EXECUTABLE_PROOF',status:tests.fail===0?'PASS':'FAIL',candidateOnly:true,acceptanceAuthority:false,ownerToken:'AnalyticalCompare',semanticCore:'SC-032 / AnalyticalWorkbenchCore',canonicalSourceSha256:source.sha256,canonicalSourceFiles:source.files,summary:{total:tests.total,pass:tests.pass,fail:tests.fail},tests:tests.tests,limits:['NO_SURFACE_READINESS_CLAIM','NO_CONTROLLER_ACCEPTANCE_CLAIM','NO_REGISTRY_MUTATION']};
+await writeFile(new URL('../assurance/E17_ANALYTICAL_COMPARE_EXECUTABLE_PROOF.json',import.meta.url),JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify({status:report.status,canonicalSourceSha256:source.sha256,canonicalSourceFiles:source.files,summary:report.summary},null,2));
+if(tests.fail)process.exitCode=1;

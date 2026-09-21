@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "W5_A_CENTRAL_RENDERER_CHANGE_EXACT_REVERT_PROOF",
+  "classification": "LANE_EXECUTION_EVIDENCE_NOT_CONTROLLER_ACCEPTANCE",
+  "sourceCanonicalTreeSha256": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d",
+  "status": "PASS",
+  "case": {
+    "id": "w5a.central-renderer-change-both-consumers-exact-revert",
+    "status": "PASS",
+    "evidence": {
+      "policyBefore": {
+        "revision": "structured-block-renderer-w5a-r3",
+        "blockGapPx": 8,
+        "indentUnitPx": 20
+      },
+      "policyChanged": {
+        "revision": "structured-block-renderer-w5a-r3",
+        "blockGapPx": 13,
+        "indentUnitPx": 20
+      },
+      "policyReverted": {
+        "revision": "structured-block-renderer-w5a-r3",
+        "blockGapPx": 8,
+        "indentUnitPx": 20
+      },
+      "libraryReached": true,
+      "learnReached": true,
+      "libraryExactRevert": true,
+      "learnExactRevert": true,
+      "canonicalTruthUnchanged": true
+    }
+  }
+}

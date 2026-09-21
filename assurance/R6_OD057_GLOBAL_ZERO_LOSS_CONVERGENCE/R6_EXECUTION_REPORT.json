@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "mission": "MISSION_R6_OD057_GLOBAL_ZERO_LOSS_CONVERGENCE",
+  "classification": "CANDIDATE_ONLY__NO_SELF_PROMOTION",
+  "status": "R6_EXECUTION_COMPLETE_PENDING_PACKAGE_UPLOAD_READBACK",
+  "source": {
+    "sha256": "557d9f617ee614d7bd21e2b7d76ffad318c476727dd48c2dbf5b84923f30eb1e",
+    "files": 271
+  },
+  "replayPathApplications": 172,
+  "r6CentralChangedPaths": 13,
+  "surfaceRoutes": {
+    "count": 23,
+    "pass": 23
+  },
+  "criticalBrowser": {
+    "pass": 6,
+    "fail": 0
+  },
+  "navigationContext": "PASS",
+  "tests": {
+    "modelPass": 210,
+    "modelFail": 0,
+    "buildRuntime": "PASS",
+    "check": "PASS",
+    "runtimeCheck": "PASS"
+  },
+  "scope": {
+    "candidateOnly": true,
+    "governanceMutation": false,
+    "acceptedSuccessorMutation": false,
+    "balanced6Mutation": false,
+    "windowsPlatformSourceMutation": false
+  },
+  "truthCeilings": {
+    "WindowsTargetPass": false,
+    "StackFrozen": false,
+    "Balanced6Executed": false,
+    "AcceptedSuccessor": false
+  },
+  "notes": [
+    "CG2 mission canonical-source receipt mismatch independently disclosed; bound ZIP/tree and legal delta path hashes match and replayed cleanly.",
+    "Old browser harness failures are superseded by exact-current final receipts after correcting proof transport/wait behavior; Product source was not changed to fabricate those PASSes."
+  ]
+}

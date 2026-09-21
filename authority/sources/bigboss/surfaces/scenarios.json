@@ -1,0 +1,249 @@
+{
+  "objects": {
+    "ScenarioDefinition": "scenarioId; portable authoring aggregate",
+    "ScenarioRevision": "revisionId + environmentContractDigest + module refs",
+    "EnvironmentContract": "versioned requirements/capabilities/network/identities/resource limits; bindings separate",
+    "ScenarioPhase": "phaseId + ordered module/task references"
+  },
+  "state_dimensions": {
+    "definition": [
+      "DRAFT",
+      "DIRTY",
+      "VALIDATION_FAILED",
+      "VALIDATED",
+      "PUBLISHED"
+    ],
+    "binding": [
+      "UNBOUND",
+      "COMPATIBLE",
+      "INCOMPATIBLE"
+    ]
+  },
+  "read_model": "ScenarioReadService serves definition and revision; EnvironmentCompatibilityService resolves supplied Enterprise/Twin/Lab refs without mutating definition.",
+  "persistence": {
+    "ScenarioDefinition": "Simulator.Scenario",
+    "ScenarioRevision": "Simulator.ScenarioRevision",
+    "EnvironmentContract": "Scenario-owned immutable contract per revision",
+    "ScenarioPhase": "Scenario draft structure"
+  },
+  "invariants": [
+    "Scenario is portable, not an Enterprise copy",
+    "Lab reference pins reusable definition revision",
+    "Environment requirements are distinct from resolved deployment binding",
+    "Published revision source remains unchanged by Run"
+  ],
+  "epistemic": {
+    "empty": "Empty draft allows phase/module insertion with explicit requirements.",
+    "stale": "Lab revision superseded: keep original pinned module until explicit upgrade.",
+    "unavailable": "Referenced Lab inaccessible: affected module unavailable; unrelated phases editable.",
+    "error": "Environment mismatch reports requirement path, expected capability and observed binding."
+  },
+  "operations": [
+    {
+      "name": "author",
+      "family": "ContentEditCommand",
+      "payload": "documentId:string workingRevision:integer anchor:string blocks:blocks",
+      "before": "definition=DRAFT|DIRTY",
+      "event": "insert/reorder phase or module",
+      "after": "definition=DIRTY",
+      "guard": "Scenario adapter checks module/task shape; no learning lock semantics",
+      "oracle": "Reorder preserves stable phase/module IDs and portable Lab refs",
+      "persistence": "Simulator.ScenarioDraft",
+      "method": "POST",
+      "gate": null,
+      "command_id": "scenarios.author",
+      "surface_id": "scenarios",
+      "semantic_owner": "W03ScenarioDomain",
+      "focus_after": "Scenarios active object/control; detached target→scenarios-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Environment mismatch reports requirement path, expected capability and observed binding.",
+        "503_timeout": "Referenced Lab inaccessible: affected module unavailable; unrelated phases editable."
+      },
+      "test_id": "TEST-scenarios.author",
+      "evidence_id": "EVID-scenarios.author",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "validate",
+      "family": "OperationalCommand",
+      "payload": "scenarioRef:ref environmentRef:ref action:enum:validate expectedState:enum:DRAFT|VALIDATED correlationId:string",
+      "before": "binding=UNBOUND",
+      "event": "evaluate Environment Contract",
+      "after": "COMPATIBLE or INCOMPATIBLE with requirement-level results",
+      "guard": "Validate exact contract digest; no runtime provisioning",
+      "oracle": "Missing required network capability yields explicit blocker, not generic failed status",
+      "persistence": "W03Run.PreflightReport",
+      "method": "POST",
+      "gate": null,
+      "command_id": "scenarios.validate",
+      "surface_id": "scenarios",
+      "semantic_owner": "W03ScenarioDomain",
+      "focus_after": "Scenarios active object/control; detached target→scenarios-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Environment mismatch reports requirement path, expected capability and observed binding.",
+        "503_timeout": "Referenced Lab inaccessible: affected module unavailable; unrelated phases editable."
+      },
+      "test_id": "TEST-scenarios.validate",
+      "evidence_id": "EVID-scenarios.validate",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "revise",
+      "family": "ContentEditCommand",
+      "payload": "documentId:string workingRevision:integer sourceRef:ref reason:string",
+      "before": "definition=PUBLISHED",
+      "event": "create successor draft",
+      "after": "definition=DRAFT with source lineage",
+      "guard": "Exact source revision and mutable successor",
+      "oracle": "Published Scenario digest unchanged",
+      "persistence": "Simulator.ScenarioDraft",
+      "method": "POST",
+      "gate": null,
+      "command_id": "scenarios.revise",
+      "surface_id": "scenarios",
+      "semantic_owner": "W03ScenarioDomain",
+      "focus_after": "Scenarios active object/control; detached target→scenarios-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Environment mismatch reports requirement path, expected capability and observed binding.",
+        "503_timeout": "Referenced Lab inaccessible: affected module unavailable; unrelated phases editable."
+      },
+      "test_id": "TEST-scenarios.revise",
+      "evidence_id": "EVID-scenarios.revise",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "prepare",
+      "family": "OperationalCommand",
+      "payload": "scenarioRef:ref environmentRef:ref labRefs:refs action:enum:prepare expectedState:enum:PUBLISHED correlationId:string",
+      "before": "definition=PUBLISHED and binding=COMPATIBLE",
+      "event": "freeze all resolved inputs",
+      "after": "preparation receipt with immutable input manifest",
+      "guard": "All nested Lab refs exact; contract and binding compatibility current",
+      "oracle": "Changing Lab latest after prepare does not change prepared input",
+      "persistence": "W03Run.InputManifest",
+      "method": "POST",
+      "gate": null,
+      "command_id": "scenarios.prepare",
+      "surface_id": "scenarios",
+      "semantic_owner": "W03ScenarioDomain",
+      "focus_after": "Scenarios active object/control; detached target→scenarios-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Environment mismatch reports requirement path, expected capability and observed binding.",
+        "503_timeout": "Referenced Lab inaccessible: affected module unavailable; unrelated phases editable."
+      },
+      "test_id": "TEST-scenarios.prepare",
+      "evidence_id": "EVID-scenarios.prepare",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "scenarios",
+  "title": "Scenarios",
+  "workspace": "W03",
+  "semantic_owner": "W03ScenarioDomain",
+  "archetype": "ScenarioAuthoringWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W03-SCN-001",
+    "CAP-W03-SCN-002",
+    "CAP-W03-SCN-003",
+    "CAP-W03-SCN-004",
+    "CAP-W03-SCN-005",
+    "CAP-W03-SCN-006",
+    "CAP-W03-SCN-007",
+    "CAP-W03-SCN-008",
+    "CAP-W03-SCN-009",
+    "CAP-W03-SCN-010",
+    "CAP-W03-SCN-011",
+    "CAP-W03-SCN-012",
+    "CAP-W03-SCN-013"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W03-SCN-001",
+        "CAP-W03-SCN-002",
+        "CAP-W03-SCN-003",
+        "CAP-W03-SCN-004",
+        "CAP-W03-SCN-005",
+        "CAP-W03-SCN-006",
+        "CAP-W03-SCN-007",
+        "CAP-W03-SCN-008",
+        "CAP-W03-SCN-009",
+        "CAP-W03-SCN-010",
+        "CAP-W03-SCN-011",
+        "CAP-W03-SCN-012",
+        "CAP-W03-SCN-013"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Scenarios",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-007",
+    "NC-009",
+    "NC-010",
+    "NC-011"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore",
+    "StructuredContentCore",
+    "TransactionHistoryCore",
+    "ClipboardTrustCore",
+    "SpatialInteractionCore"
+  ],
+  "adapter": "W03ScenarioDomainAdapter",
+  "regions": {
+    "TOP": "Scenarios exact identity, local mode, command routes",
+    "LEFT": "typed ScenarioDefinition collection/navigation",
+    "CENTER": "ScenarioAuthoringWorkbench primary task",
+    "RIGHT": "one selected ScenarioDefinition identity/context inspector",
+    "BOTTOM": "Deep Scenarios diagnostics/history"
+  },
+  "command_ids": [
+    "scenarios.author",
+    "scenarios.validate",
+    "scenarios.revise",
+    "scenarios.prepare"
+  ]
+}

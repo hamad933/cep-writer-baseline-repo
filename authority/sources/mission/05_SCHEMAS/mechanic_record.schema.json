@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CEPMechanicRecord",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "family",
+    "source_refs",
+    "state_owner",
+    "disposition"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "family": {
+      "type": "string"
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "visual_contract": {
+      "type": [
+        "string",
+        "object"
+      ]
+    },
+    "slot_contract": {
+      "type": [
+        "string",
+        "object"
+      ]
+    },
+    "state_owner": {
+      "type": "string"
+    },
+    "command_owner": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "pointer_routes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "keyboard_routes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "focus_lifecycle": {
+      "type": "string"
+    },
+    "dismissal_reopen": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "responsive": {
+      "type": [
+        "string",
+        "object"
+      ]
+    },
+    "customization": {
+      "type": [
+        "string",
+        "object"
+      ]
+    },
+    "a11y_bidi": {
+      "type": [
+        "string",
+        "object"
+      ]
+    },
+    "owner_supersessions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "disposition": {
+      "enum": [
+        "FOUNDATION_REUSE",
+        "FAMILY_ENGINE",
+        "DOMAIN_ONLY",
+        "PRESERVE_AS_IS",
+        "PRESERVE_AND_IMPROVE",
+        "NOT_APPLICABLE",
+        "DEFECT_DO_NOT_INHERIT",
+        "OPEN"
+      ]
+    },
+    "tests": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

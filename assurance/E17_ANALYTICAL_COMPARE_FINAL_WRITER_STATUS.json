@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "E17_ANALYTICAL_COMPARE_FINAL_WRITER_STATUS",
+  "generatedAt": "2026-09-13T05:47:59.094423+00:00",
+  "status": "CANDIDATE_BLOCKED_BY_EXECUTABLE_EVIDENCE",
+  "candidateOnly": true,
+  "acceptanceAuthority": false,
+  "executableOwnerEvidence": "PASS_56_OF_56",
+  "dedicatedBrowserEvidence": "PASS_21_OF_21",
+  "modelRegression": "PASS_210_OF_210",
+  "blockingRequirements": [
+    {
+      "id": 51,
+      "requirement": "existing Contracts suite remains green under unchanged E17 registry truth",
+      "observed": "166/168",
+      "failureIds": [
+        "browser.lineage_receipt_truthful",
+        "browser.current_candidate_claim_truthful"
+      ]
+    },
+    {
+      "id": 54,
+      "requirement": "npm run check remains green",
+      "observed": "NONZERO_AT_CHECK_CONTRACTS",
+      "sameFailureIds": [
+        "browser.lineage_receipt_truthful",
+        "browser.current_candidate_claim_truthful"
+      ]
+    }
+  ],
+  "rootCause": "The immutable historical E17 browser conformance receipt is correctly bound to canonical source 5dcc401a.../113 files. This Candidate is dffaa8d.../120 files. Rebinding/replacing that historical acceptance evidence is explicitly outside Writer authority, and check-contracts.mjs is also outside writable scope.",
+  "controllerFollowUp": "Controller may independently accept/correct the owner and then regenerate/reconcile current candidate lineage evidence and registries under Controller authority. No surface readiness claim is made."
+}

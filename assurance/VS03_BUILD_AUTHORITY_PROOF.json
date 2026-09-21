@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "command": "npm run check:build-authority",
+  "receipt": {
+    "pass": true,
+    "authority": "stack/native-typescript -> dist + dist-ts",
+    "canonicalSourceHashBefore": "1b7e4c4407554c07c74c5f0797c1226c7f90efe76095315122747a57a909c7cc",
+    "canonicalSourceHashAfterBuildRuntime": "1b7e4c4407554c07c74c5f0797c1226c7f90efe76095315122747a57a909c7cc",
+    "canonicalSourceHashAfterStackProof": "1b7e4c4407554c07c74c5f0797c1226c7f90efe76095315122747a57a909c7cc",
+    "canonicalSourceFiles": 20,
+    "generatedJsInventory": {
+      "expected": 20,
+      "dist": 20,
+      "distTs": 20,
+      "missingFromDist": [],
+      "extraInDist": [],
+      "missingFromDistTs": [],
+      "extraInDistTs": []
+    },
+    "inspectedPackageCommands": [
+      "build:runtime",
+      "test",
+      "check",
+      "browser:test"
+    ],
+    "referencedTools": [
+      "tools/browser-conformance.mjs",
+      "tools/build-runtime.mjs",
+      "tools/check-authority-intake.mjs",
+      "tools/check-build-authority.mjs",
+      "tools/check-contracts.mjs",
+      "tools/check-deferred-boundary.mjs",
+      "tools/check-duplicate-mechanics.mjs",
+      "tools/check-w03-semantic-ownership.py",
+      "tools/stack-proof.mjs",
+      "tools/test-models.mjs",
+      "tools/test-writer-scaffold.mjs"
+    ],
+    "suspiciousCanonicalWriters": [],
+    "buildRuntimeOutput": "{\n  \"pass\": true,\n  \"authority\": \"CANONICAL_SOURCE_TO_GENERATED_ONLY\",\n  \"source\": \"stack/native-typescript\",\n  \"destination\": \"dist\",\n  \"written\": 20,\n  \"removedStale\": 0\n}",
+    "stackProofOutput": "{\"parity\":true,\"source\":\"stack/native-typescript\",\"generated\":[\"dist\",\"dist-ts\"],\"reverseGeneratedToSourceWrites\":false,\"js_tests\":{\"generatedTree\":\"dist\",\"runtime_dependencies\":0,\"build_steps\":1,\"model_pass\":74,\"model_fail\":0,\"build\":{\"pass\":true,\"authority\":\"CANONICAL_SOURCE_TO_GENERATED_ONLY\",\"source\":\"stack/native-typescript\",\"destination\":\"dist\",\"written\":20,\"removedStale\":0}},\"ts_tests\":{\"generatedTree\":\"dist-ts\",\"runtime_dependencies\":0,\"development_tool\":\"Node built-in stripTypeScriptTypes\",\"build_steps\":1,\"type_checking\":\"NOT_AVAILABLE_NOT_CLAIMED\",\"static_types\":\"Canonical TypeScript source; proof measures erasable-syntax generation parity only.\",\"model_pass\":74,\"model_fail\":0,\"emit_ms\":80.2747770000002,\"build\":{\"pass\":true,\"authority\":\"CANONICAL_SOURCE_TO_GENERATED_ONLY\",\"source\":\"stack/native-typescript\",\"destination\":\"dist-ts\",\"written\":20,\"removedStale\":0}},\"files\":20}"
+  }
+}

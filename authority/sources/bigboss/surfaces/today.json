@@ -1,0 +1,241 @@
+{
+  "objects": {
+    "TodayProjection": "actorId + projectionVersion; derived from provider observations",
+    "ContinuationRef": "destination + exact object reference + resume bookmark",
+    "Recommendation": "sourceRef + reasonCode + observedAt; no canonical judgment"
+  },
+  "state_dimensions": {
+    "projection": [
+      "FETCHING",
+      "AVAILABLE_DATA",
+      "AVAILABLE_EMPTY",
+      "PARTIAL",
+      "STALE",
+      "UNAVAILABLE",
+      "ERROR"
+    ],
+    "continuation": [
+      "RESOLVABLE",
+      "TARGET_REMOVED",
+      "TARGET_FORBIDDEN"
+    ]
+  },
+  "read_model": "TodayReadService composes per-provider Observation<T>; DailyQueueService.forActor is a partial recommendation contributor, not the entire Today provider.",
+  "persistence": {
+    "TodayProjection": "request cache only",
+    "ContinuationRef": "NavigationContext session; source activity remains Learning/Run owned"
+  },
+  "invariants": [
+    "No Today canonical domain writes",
+    "Progress is a projection; Mastery is W04-owned",
+    "Recommendations never grant or deny access"
+  ],
+  "epistemic": {
+    "empty": "All requested providers returned successfully with zero recommendations; show explicit Explore navigation.",
+    "stale": "Show each provider observedAt and refresh path; retained cards carry stale badge.",
+    "unavailable": "Provider missing/auth unavailable is a source-specific unavailable card, never zero progress.",
+    "error": "Keep last successful projection and safe correlation reference; do not replace error with empty."
+  },
+  "operations": [
+    {
+      "name": "resume",
+      "family": "NavigationCommand",
+      "payload": "routeId:string objectRef:ref bookmark:string",
+      "before": "continuation=RESOLVABLE",
+      "event": "resolve exact target and navigate",
+      "after": "target route active; origin context retained",
+      "guard": "Target exists and actor can read target; do not test progress",
+      "oracle": "Opening incomplete future activity preserves progress and return bookmark",
+      "persistence": "NavigationContext.session",
+      "method": "LOCAL",
+      "gate": null,
+      "command_id": "today.resume",
+      "surface_id": "today",
+      "semantic_owner": "TodayOrchestration",
+      "focus_after": "Today active object/control; detached target→today-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Keep last successful projection and safe correlation reference; do not replace error with empty.",
+        "503_timeout": "Provider missing/auth unavailable is a source-specific unavailable card, never zero progress."
+      },
+      "test_id": "TEST-today.resume",
+      "evidence_id": "EVID-today.resume",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "refresh",
+      "family": "NavigationCommand",
+      "payload": "routeId:string providerIds:strings",
+      "before": "projection any",
+      "event": "fetch selected provider observations",
+      "after": "projection merges successful and failed observations independently",
+      "guard": "Authenticated actor injected by server",
+      "oracle": "Failed queue provider and successful recent provider produce PARTIAL, not EMPTY",
+      "persistence": "TodayReadService.cache",
+      "method": "GET",
+      "gate": null,
+      "command_id": "today.refresh",
+      "surface_id": "today",
+      "semantic_owner": "TodayOrchestration",
+      "focus_after": "Today active object/control; detached target→today-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Keep last successful projection and safe correlation reference; do not replace error with empty.",
+        "503_timeout": "Provider missing/auth unavailable is a source-specific unavailable card, never zero progress."
+      },
+      "test_id": "TEST-today.refresh",
+      "evidence_id": "EVID-today.refresh",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "filter",
+      "family": "PresentationCommand",
+      "payload": "presentationTarget:string preferredState:strings",
+      "before": "cards visible",
+      "event": "apply kind filter",
+      "after": "filtered projection with total and visible counts",
+      "guard": "Filter only recognized projection kinds",
+      "oracle": "Filter hiding all cards reports filtered-empty; source totals unchanged",
+      "persistence": "GlobalPreferenceDomain",
+      "method": "LOCAL",
+      "gate": null,
+      "command_id": "today.filter",
+      "surface_id": "today",
+      "semantic_owner": "TodayOrchestration",
+      "focus_after": "Today active object/control; detached target→today-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Keep last successful projection and safe correlation reference; do not replace error with empty.",
+        "503_timeout": "Provider missing/auth unavailable is a source-specific unavailable card, never zero progress."
+      },
+      "test_id": "TEST-today.filter",
+      "evidence_id": "EVID-today.filter",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "why",
+      "family": "NavigationCommand",
+      "payload": "routeId:string recommendationRef:ref",
+      "before": "recommendation selected",
+      "event": "inspect rationale and source",
+      "after": "source/rationale panel open",
+      "guard": "Exact recommendation version still resolvable",
+      "oracle": "Missing rationale renders unavailable and never fabricates unlock logic",
+      "persistence": "TodayReadService.cache",
+      "method": "GET",
+      "gate": null,
+      "command_id": "today.why",
+      "surface_id": "today",
+      "semantic_owner": "TodayOrchestration",
+      "focus_after": "Today active object/control; detached target→today-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Keep last successful projection and safe correlation reference; do not replace error with empty.",
+        "503_timeout": "Provider missing/auth unavailable is a source-specific unavailable card, never zero progress."
+      },
+      "test_id": "TEST-today.why",
+      "evidence_id": "EVID-today.why",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "today",
+  "title": "Today",
+  "workspace": "W01",
+  "semantic_owner": "TodayOrchestration",
+  "archetype": "OrchestrationProjectionWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W01-TOD-001",
+    "CAP-W01-TOD-002",
+    "CAP-W01-TOD-003",
+    "CAP-W01-TOD-004",
+    "CAP-W01-TOD-005",
+    "CAP-W01-TOD-006",
+    "CAP-W01-TOD-007",
+    "CAP-W01-TOD-008",
+    "CAP-W01-TOD-009",
+    "CAP-W01-TOD-010",
+    "CAP-W01-TOD-011",
+    "CAP-W01-TOD-012"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W01-TOD-001",
+        "CAP-W01-TOD-002",
+        "CAP-W01-TOD-003",
+        "CAP-W01-TOD-004",
+        "CAP-W01-TOD-005",
+        "CAP-W01-TOD-006",
+        "CAP-W01-TOD-007",
+        "CAP-W01-TOD-008",
+        "CAP-W01-TOD-009",
+        "CAP-W01-TOD-010",
+        "CAP-W01-TOD-011",
+        "CAP-W01-TOD-012"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Today",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-001",
+    "NC-002",
+    "NC-023",
+    "NC-024"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore"
+  ],
+  "adapter": "TodayOrchestrationAdapter",
+  "regions": {
+    "TOP": "Today exact identity, local mode, command routes",
+    "LEFT": "typed TodayProjection collection/navigation",
+    "CENTER": "OrchestrationProjectionWorkbench primary task",
+    "RIGHT": "one selected TodayProjection identity/context inspector",
+    "BOTTOM": "Deep Today diagnostics/history"
+  },
+  "command_ids": [
+    "today.resume",
+    "today.refresh",
+    "today.filter",
+    "today.why"
+  ]
+}

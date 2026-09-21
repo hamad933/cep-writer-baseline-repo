@@ -1,0 +1,475 @@
+{
+  "schemaVersion": 1,
+  "kind": "FINAL_FOUNDATION_FALSIFICATION",
+  "sourceCanonicalTreeSha256": "252d822f82954f090578714b754185c90c79cd8713bf84354504be17c146ae5f",
+  "canonicalSourceFileCount": 121,
+  "status": "PASS",
+  "pass": 16,
+  "fail": 0,
+  "readySurfaces": [
+    "audit",
+    "backup",
+    "configuration",
+    "enterprise",
+    "evidence",
+    "health",
+    "labs",
+    "learn",
+    "library",
+    "manual_ai",
+    "mastery",
+    "portfolio",
+    "processing",
+    "releases",
+    "results",
+    "reviews",
+    "rq",
+    "runs",
+    "scenarios",
+    "shell",
+    "today",
+    "validation",
+    "visualize"
+  ],
+  "blockedSurfaces": [],
+  "tests": [
+    {
+      "id": "r3.23-of-23",
+      "status": "PASS",
+      "detail": {
+        "pass": 23,
+        "fail": 0,
+        "source": {
+          "sha256": "5dcc401a95f6b7b38bbd2f64d9140c29182eb459042dc6e3dd7be5460c6bca5f",
+          "files": 113
+        }
+      }
+    },
+    {
+      "id": "r3.accepted-parent-lineage",
+      "status": "PASS",
+      "detail": {
+        "current": {
+          "sha256": "252d822f82954f090578714b754185c90c79cd8713bf84354504be17c146ae5f",
+          "files": 121
+        },
+        "acceptedE17Receipt": {
+          "sha256": "5dcc401a95f6b7b38bbd2f64d9140c29182eb459042dc6e3dd7be5460c6bca5f",
+          "files": 113
+        },
+        "postFinalAddition": "AnalyticalCompare only"
+      }
+    },
+    {
+      "id": "surface.readiness-counts",
+      "status": "PASS",
+      "detail": {
+        "ready": [
+          "audit",
+          "backup",
+          "configuration",
+          "enterprise",
+          "evidence",
+          "health",
+          "labs",
+          "learn",
+          "library",
+          "manual_ai",
+          "mastery",
+          "portfolio",
+          "processing",
+          "releases",
+          "results",
+          "reviews",
+          "rq",
+          "runs",
+          "scenarios",
+          "shell",
+          "today",
+          "validation",
+          "visualize"
+        ],
+        "blocked": []
+      }
+    },
+    {
+      "id": "surface.analytical-blocker-cleared",
+      "status": "PASS",
+      "detail": {
+        "blocked": []
+      }
+    },
+    {
+      "id": "surface.no-unresolved-domain-decisions",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "id": "surface.persistence-truth",
+      "status": "PASS",
+      "detail": {
+        "audit": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "backup": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "configuration": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "enterprise": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "evidence": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "health": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "labs": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "learn": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "library": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "manual_ai": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "mastery": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "portfolio": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "processing": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "releases": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "results": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "reviews": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "rq": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "runs": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "scenarios": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "shell": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "today": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "validation": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER",
+        "visualize": "UNAVAILABLE_UNTIL_SURFACE_DOMAIN_ADAPTER_PROVES_PROVIDER"
+      }
+    },
+    {
+      "id": "analytical.controller-accepted-executable",
+      "status": "PASS",
+      "detail": {
+        "component_id": "AnalyticalCompare",
+        "semantic_core": "SC-032",
+        "implementation": "dist/foundation/analytical/compare.js + dist/foundation/analytical/compare-host.js + dist/foundation/contracts/analysis-provider.js + dist/adapters/analytical/rq-compare-provider.js + dist/adapters/analytical/results-compare-provider.js",
+        "slots": [
+          "CENTER",
+          "BOTTOM"
+        ],
+        "status": "CONTROLLER_ACCEPTED_EXECUTABLE_ANALYTICAL_COMPARE_E18",
+        "duplicate_policy": "ONE_ANALYTICAL_COMPARE_OWNER; exact pinned identity only; domain meaning stays in typed AnalysisProvider adapters; no Review/Mastery/Audit authority transfer"
+      }
+    },
+    {
+      "id": "registry.physical-paths-current",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "id": "ownership.duplicate-scan",
+      "status": "PASS",
+      "detail": {
+        "schemaVersion": 4,
+        "status": "PASS",
+        "filesScanned": 119,
+        "rules": [
+          {
+            "mechanicId": "relation.edit",
+            "approvedOwners": [
+              "foundation/relations.js"
+            ]
+          },
+          {
+            "mechanicId": "action.availability",
+            "approvedOwners": [
+              "foundation/models.js"
+            ]
+          },
+          {
+            "mechanicId": "spatial.context-suppression",
+            "approvedOwners": [
+              "foundation/spatial.js"
+            ]
+          },
+          {
+            "mechanicId": "workspace.panes",
+            "approvedOwners": [
+              "foundation/workspace-host.js"
+            ]
+          },
+          {
+            "mechanicId": "workspace.context-inspector",
+            "approvedOwners": [
+              "foundation/global/context-inspector.js"
+            ]
+          },
+          {
+            "mechanicId": "global.input-keymap",
+            "approvedOwners": [
+              "foundation/global/input-keymap.js"
+            ]
+          },
+          {
+            "mechanicId": "global.accessibility-feedback",
+            "approvedOwners": [
+              "foundation/global/feedback.js"
+            ]
+          },
+          {
+            "mechanicId": "workspace.bottom-deep-work",
+            "approvedOwners": [
+              "foundation/global/bottom-shelf.js"
+            ]
+          },
+          {
+            "mechanicId": "global.ui-scale",
+            "approvedOwners": [
+              "foundation/global/preferences/ui-scale.js"
+            ]
+          },
+          {
+            "mechanicId": "operational.sessions",
+            "approvedOwners": [
+              "foundation/operational.js",
+              "foundation/models.js"
+            ]
+          },
+          {
+            "mechanicId": "structured.document",
+            "approvedOwners": [
+              "foundation/structured.js"
+            ]
+          },
+          {
+            "mechanicId": "structured.mutation",
+            "approvedOwners": [
+              "foundation/structured.js"
+            ]
+          },
+          {
+            "mechanicId": "structured.selection-clipboard",
+            "approvedOwners": [
+              "foundation/structured.js"
+            ]
+          },
+          {
+            "mechanicId": "structured.transaction-history-recovery",
+            "approvedOwners": [
+              "foundation/structured.js"
+            ]
+          }
+        ],
+        "findings": [],
+        "fixtureTests": [
+          {
+            "id": "duplicate.relation",
+            "status": "PASS",
+            "expected": "POSSIBLE_DUPLICATE_SHARED_MECHANIC",
+            "mechanicId": "relation.edit"
+          },
+          {
+            "id": "duplicate.pane",
+            "status": "PASS",
+            "expected": "POSSIBLE_DUPLICATE_SHARED_MECHANIC",
+            "mechanicId": "workspace.panes"
+          },
+          {
+            "id": "duplicate.context",
+            "status": "PASS",
+            "expected": "POSSIBLE_DUPLICATE_SHARED_MECHANIC",
+            "mechanicId": "workspace.context-inspector"
+          },
+          {
+            "id": "duplicate.session",
+            "status": "PASS",
+            "expected": "POSSIBLE_DUPLICATE_SHARED_MECHANIC",
+            "mechanicId": "operational.sessions"
+          },
+          {
+            "id": "duplicate.structured-mutation",
+            "status": "PASS",
+            "expected": "POSSIBLE_DUPLICATE_SHARED_MECHANIC",
+            "mechanicId": "structured.mutation"
+          }
+        ],
+        "ownershipGuards": [
+          {
+            "id": "structured.compat.insert-canonical",
+            "status": "PASS",
+            "method": "insertBlock"
+          },
+          {
+            "id": "structured.compat.remove-canonical",
+            "status": "PASS",
+            "method": "removeBlock"
+          },
+          {
+            "id": "structured.compat.update-nonstructural-only",
+            "status": "PASS",
+            "method": "updateBlock"
+          }
+        ],
+        "ownershipFixture": {
+          "id": "structured.compatibility-bypass-fixture",
+          "status": "PASS",
+          "expected": "ALL_THREE_BYPASSES_DETECTED",
+          "observed": [
+            {
+              "id": "structured.compat.insert-canonical",
+              "status": "FAIL",
+              "method": "insertBlock"
+            },
+            {
+              "id": "structured.compat.remove-canonical",
+              "status": "FAIL",
+              "method": "removeBlock"
+            },
+            {
+              "id": "structured.compat.update-nonstructural-only",
+              "status": "FAIL",
+              "method": "updateBlock"
+            }
+          ]
+        },
+        "historyRecoveryGuards": [
+          {
+            "id": "structured.history.canonical-owner",
+            "status": "PASS"
+          },
+          {
+            "id": "structured.history.adapter-delegates",
+            "status": "PASS"
+          },
+          {
+            "id": "structured.history.no-fake-save",
+            "status": "PASS"
+          },
+          {
+            "id": "structured.history.one-frame-owner",
+            "status": "PASS"
+          },
+          {
+            "id": "library.history.projects-canonical",
+            "status": "PASS"
+          },
+          {
+            "id": "library.recovery-delegates-canonical",
+            "status": "PASS"
+          },
+          {
+            "id": "library.no-direct-working-bump",
+            "status": "PASS"
+          },
+          {
+            "id": "library.save-truth",
+            "status": "PASS"
+          }
+        ],
+        "historyRecoveryNegativeFixture": {
+          "id": "structured.history-recovery-negative-fixture",
+          "status": "PASS",
+          "expected": "ALL_HISTORY_RECOVERY_OWNERSHIP_GUARDS_FAIL",
+          "observed": [
+            {
+              "id": "structured.history.canonical-owner",
+              "status": "FAIL"
+            },
+            {
+              "id": "structured.history.adapter-delegates",
+              "status": "FAIL"
+            },
+            {
+              "id": "structured.history.no-fake-save",
+              "status": "FAIL"
+            },
+            {
+              "id": "structured.history.one-frame-owner",
+              "status": "FAIL"
+            },
+            {
+              "id": "library.history.projects-canonical",
+              "status": "FAIL"
+            },
+            {
+              "id": "library.recovery-delegates-canonical",
+              "status": "FAIL"
+            },
+            {
+              "id": "library.no-direct-working-bump",
+              "status": "FAIL"
+            },
+            {
+              "id": "library.save-truth",
+              "status": "FAIL"
+            }
+          ]
+        },
+        "deferredExceptions": [],
+        "limits": "Deterministic symbol/registration heuristic plus executable Structured mutation and transaction/history/recovery semantic ownership gates with deliberate negative fixtures; novel naming still requires semantic review."
+      }
+    },
+    {
+      "id": "writer.intake-all-23",
+      "status": "PASS",
+      "detail": {
+        "pass": 164,
+        "fail": 0,
+        "profiles": 23
+      }
+    },
+    {
+      "id": "writer.blocked-zero-writable",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "id": "writer.ready-surface-only-writable",
+      "status": "PASS",
+      "detail": {
+        "count": 23
+      }
+    },
+    {
+      "id": "unavailable.browser-atomicity",
+      "status": "PASS",
+      "detail": {
+        "id": "G23",
+        "law": "GL-05",
+        "status": "PASS",
+        "detail": {
+          "failureObserved": {
+            "threw": false
+          },
+          "unchanged": true
+        }
+      }
+    },
+    {
+      "id": "unavailable.structured-zero-mutation",
+      "status": "PASS",
+      "detail": {
+        "readCases": 0
+      }
+    },
+    {
+      "id": "model.210-of-210",
+      "status": "PASS",
+      "detail": {
+        "stdoutTail": " at low/default/high scale\",\n      \"owner\": \"UIScalePolicyOwner + WorkspacePaneLayoutOwner\",\n      \"oracle\": \"scaled widths change while preferred/effective pane state and responsive band remain unchanged\",\n      \"status\": \"PASS\",\n      \"kind\": \"MODEL_NOT_BROWSER\"\n    },\n    {\n      \"id\": \"w3e.ui-scale-no-surface-local-policy\",\n      \"before\": \"central owner and two family descriptors\",\n      \"action\": \"attempt consumer-local scale/token overrides\",\n      \"owner\": \"UIScalePolicyOwner\",\n      \"oracle\": \"consumer descriptors cannot introduce competing local scale policy\",\n      \"status\": \"PASS\",\n      \"kind\": \"MODEL_NOT_BROWSER\"\n    },\n    {\n      \"id\": \"w3e.ui-scale-style-projection\",\n      \"before\": \"fake DOM style target and pane owner\",\n      \"action\": \"apply central CSS-variable projection\",\n      \"owner\": \"UIScalePolicyOwner\",\n      \"oracle\": \"geometry variables are emitted without CSS zoom/transform semantics\",\n      \"status\": \"PASS\",\n      \"kind\": \"MODEL_NOT_BROWSER\"\n    }\n  ]\n}\n",
+        "stderrTail": ""
+      }
+    },
+    {
+      "id": "browser.current-lineage",
+      "status": "PASS",
+      "detail": {
+        "receiptSource": "252d822f82954f090578714b754185c90c79cd8713bf84354504be17c146ae5f",
+        "current": {
+          "sha256": "252d822f82954f090578714b754185c90c79cd8713bf84354504be17c146ae5f",
+          "files": 121
+        },
+        "summary": {
+          "total": 6,
+          "pass": 6,
+          "fail": 0
+        }
+      }
+    }
+  ],
+  "truthCeilings": [
+    "STACK_NOT_FROZEN",
+    "OperationalSessionOwner=BOUNDED_BELOW_M6_SECOND_REAL_PROVIDER_NOT_PROVEN",
+    "EpistemicStateContract=CONTRACT_ONLY_NO_GENERIC_ASYNC_ENGINE",
+    "NO_FABRICATED_PERSISTENCE",
+    "NO_FABRICATED_NATIVE_ALWAYS_ON_TOP",
+    "NO_SECOND_STRUCTURED_EDITOR_ENGINE"
+  ]
+}

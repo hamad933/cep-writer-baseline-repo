@@ -1,0 +1,11 @@
+import {readFile,writeFile} from 'node:fs/promises';
+const root=new URL('../',import.meta.url),registry=JSON.parse(await readFile(new URL('authority/CURRENT_AUTHORITY_REGISTRY.json',root),'utf8')),policy=JSON.parse(await readFile(new URL('authority/CURRENT_FOUNDATION_AUTHORITY_INTAKE_POLICY.json',root),'utf8')),tests=[];
+const check=(id,ok,detail)=>tests.push({id,status:ok?'PASS':'FAIL',detail});
+check('authority.all-classified',registry.every(r=>r.foundation_intake_status&&r.foundation_implementation_authority==='false'),`${registry.length} retained sources explicitly intake-classified`);
+const oldImpl=registry.filter(r=>/PRODUCTION_KNOWLEDGE_WORKBENCH|github|laravel|postgresql|inertia|tailwind|vue/i.test(`${r.source_name} ${r.catalog_classification} ${r.canonical_authority_class}`)&&r.foundation_implementation_authority!=='false');
+check('authority.old-production-not-implementation',oldImpl.length===0,oldImpl.map(r=>r.source_name));
+const broad=registry.filter(r=>r.currentness==='CURRENT_OR_RETAINED'&&!['CURRENT_GOVERNANCE_ONLY_NO_IMPLEMENTATION_PROMOTION','METHOD_ONLY','HISTORICAL_ONLY','SUPPORTING_EVIDENCE_NOT_IMPLEMENTATION_AUTHORITY','EXACT_LOOKUP_ONLY','ACCEPTED_DESIGN_DONOR','VALUE_DOMAIN_REQUIREMENT_EVIDENCE_DONOR_ONLY'].includes(r.foundation_intake_status));
+check('authority.current-or-retained-not-ambiguous',broad.length===0,broad.map(r=>r.source_name));
+check('authority.stack-forbidden',policy.stackStatus==='STACK_NOT_FROZEN'&&['Laravel','PostgreSQL','Inertia','Tailwind'].every(x=>policy.forbiddenAutoPromotion.includes(x)),'old stack tokens are explicit non-authority');
+check('authority.w03-role',policy.w03Role==='VALUE_DOMAIN_REQUIREMENT_EVIDENCE_DONOR_ONLY','W03 v3.4 remains donor-only');
+const report={schemaVersion:1,pass:tests.filter(t=>t.status==='PASS').length,fail:tests.filter(t=>t.status==='FAIL').length,tests};await writeFile(new URL('assurance/CURRENT_AUTHORITY_ISOLATION_RECEIPT.json',root),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));if(report.fail)process.exitCode=1;

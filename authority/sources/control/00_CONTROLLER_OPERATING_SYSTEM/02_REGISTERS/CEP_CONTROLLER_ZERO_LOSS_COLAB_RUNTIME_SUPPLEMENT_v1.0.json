@@ -1,0 +1,271 @@
+{
+  "version": "1.0",
+  "status": "ACTIVE_SUPPLEMENT",
+  "rule": "No material Colab/runtime/test/Drive-custody knowledge may exist only in chat.",
+  "entries": [
+    {
+      "knowledge_id": "CL-017",
+      "kind": "LESSON",
+      "title": "Drive File ID is execution authority; FUSE is convenience",
+      "scope": "ALL_COLAB_DRIVE_EXECUTION",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-018",
+      "kind": "LESSON",
+      "title": "FUSE read-back does not prove a new Drive object exists",
+      "scope": "ALL_DRIVE_OUTPUT_CUSTODY",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-019",
+      "kind": "LESSON",
+      "title": "Drive warnings and write failures must be classified differently",
+      "scope": "ALL_DRIVE_API",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-020",
+      "kind": "LESSON",
+      "title": "Resume from last proven gate; do not restart successful Colab phases",
+      "scope": "ALL_GOVERNED_EXECUTION",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-021",
+      "kind": "LESSON",
+      "title": "A failing test is not automatically a Product defect",
+      "scope": "ALL_RUNTIME_ASSURANCE",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-022",
+      "kind": "LESSON",
+      "title": "PostgreSQL database lifecycle commands must be isolated",
+      "scope": "ALL_POSTGRES_COLAB",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-023",
+      "kind": "LESSON",
+      "title": "Expected hash gates themselves require independent verification",
+      "scope": "ALL_BOUNDED_PATCHING",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-024",
+      "kind": "LESSON",
+      "title": "Build prerequisites must precede tests that render built assets",
+      "scope": "ALL_WEBAPP_TESTING",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-025",
+      "kind": "LESSON",
+      "title": "Typecheck failures can mix Product defects and stale test fixtures",
+      "scope": "ALL_TYPESCRIPT",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-026",
+      "kind": "LESSON",
+      "title": "Do not degrade correct Product semantics to satisfy stale tests",
+      "scope": "ALL_TEST_ALIGNMENT",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-027",
+      "kind": "LESSON",
+      "title": "Async UI tests must await application state settlement",
+      "scope": "ALL_ASYNC_UI_TESTS",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-028",
+      "kind": "LESSON",
+      "title": "Positional DOM selectors are brittle in compositional shells",
+      "scope": "ALL_UI_TESTS",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-029",
+      "kind": "LESSON",
+      "title": "Test fixtures must satisfy the current validation contract",
+      "scope": "ALL_CONTRACT_TESTS",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-030",
+      "kind": "LESSON",
+      "title": "Hard-coded inventory counts must be verified against exact universe",
+      "scope": "ALL_INVENTORY_TESTS",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-031",
+      "kind": "LESSON",
+      "title": "Repository-envelope test failures are distinct from portable Product failures",
+      "scope": "ALL_ARCHITECTURE_TESTS",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-032",
+      "kind": "LESSON",
+      "title": "Preserve real findings inside partially environment-bound suites",
+      "scope": "ALL_ARCHITECTURE_TESTS",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-033",
+      "kind": "LESSON",
+      "title": "Runtime-discovered corrections create a new candidate lineage identity",
+      "scope": "ALL_RUNTIME_DISCOVERED_CORRECTIONS",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-034",
+      "kind": "LESSON",
+      "title": "Build successors from clean predecessor plus exact admitted overlay",
+      "scope": "ALL_SUCCESSOR_PACKAGING",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-035",
+      "kind": "LESSON",
+      "title": "Source identity and ZIP container identity are different but both matter",
+      "scope": "ALL_ARTIFACT_IDENTITY",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-036",
+      "kind": "LESSON",
+      "title": "No browser evidence on a disposable mutated predecessor",
+      "scope": "ALL_BROWSER_ASSURANCE",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CL-037",
+      "kind": "LESSON",
+      "title": "One cell at a time is a governance control, not a convenience",
+      "scope": "ALL_COLAB_FINAL_ASSURANCE",
+      "authority": "CONTROLLER_NORMALIZED_FROM_OBSERVED_EXECUTION",
+      "source_basis": "CEP_W01_W02_C025_FORENSIC_EXECUTION_REPORT_v1.0.md",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "CEP_COLAB_DRIVE_CUSTODY_AND_EXECUTION_STANDARD_v1.0.md + CEP_RUNTIME_DISCOVERED_DEFECT_TRIAGE_AND_TEST_ALIGNMENT_PLAYBOOK_v1.0.md + reusable checklist",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CK-025",
+      "kind": "W01_W02_CONTROL",
+      "title": "C025 core and PHP Integration pass on corrected successor content",
+      "scope": "W01_W02",
+      "authority": "OWNER_EXECUTED_CONTROLLER_ADJUDICATED",
+      "source_basis": "Wave-3 final receipt + preserved Wave-2/1 evidence",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "Controller state v1.7 + C025 forensic report",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CK-026",
+      "kind": "W01_W02_CONTROL",
+      "title": "v1.1.5.2 successor exact source identity",
+      "scope": "W01_W02",
+      "authority": "CONTROLLER_OBSERVED",
+      "source_basis": "Clean predecessor rebuild + exact nine-file overlay",
+      "current_disposition": "ACTIVE_CONTROL_KNOWLEDGE",
+      "operationalized_in": "Controller state v1.7",
+      "silent_loss_allowed": false
+    },
+    {
+      "knowledge_id": "CK-027",
+      "kind": "W01_W02_OPEN_GATE",
+      "title": "Drive server object/File-ID custody for canonical v1.1.5.2 is not yet proven",
+      "scope": "W01_W02",
+      "authority": "CONTROLLER_CURRENT",
+      "source_basis": "FUSE exact readback + Drive API create 403 + API folder listing without v1.1.5.2",
+      "current_disposition": "CURRENT_OPEN_GATE",
+      "operationalized_in": "Current handoff + next action",
+      "silent_loss_allowed": false
+    }
+  ]
+}

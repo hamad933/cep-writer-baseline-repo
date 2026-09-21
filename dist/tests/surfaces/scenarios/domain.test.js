@@ -1,0 +1,7 @@
+import assert from 'node:assert/strict';
+import {W03ScenarioDomain} from '../../../adapters/scenarios/domain.js';
+import {composeScenariosSurface} from '../../../surfaces/scenarios/index.js';
+const definition={id:'SC-1',revision:'2',title:'استجابة / Response',environment:{capabilities:['SIM_NET']},phases:[{id:'P1',name:'Observe',elements:[{id:'E1',kind:'lab',title:'Lab module',labRef:{id:'LAB-1',revision:'3'}},{id:'E2',kind:'decision',title:'Decision',condition:'signal=true'}]}]};
+const domain=new W03ScenarioDomain({definition});const surface=composeScenariosSurface({domain,shared:{structuredHost:{owner:'StructuredSurfaceHost'},spatialRelation:{owner:'RelationInteractionOwner'}}});
+const ctx={availableCapabilities:['SIM_NET'],resolveLab:ref=>ref.id==='LAB-1'&&ref.revision==='3'};assert.equal(surface.bus.execute('scenarios.validate',ctx).ok,true);const prepared=surface.bus.execute('scenarios.prepare',ctx);assert.equal(prepared.ok,true);assert.equal(prepared.runStarted,false);assert.equal(prepared.deploymentMutated,false);assert.deepEqual(prepared.labRefs,[{id:'LAB-1',revision:'3'}]);
+const versionBefore=domain.version;const bad=surface.bus.execute('scenarios.prepare',{availableCapabilities:[],resolveLab:()=>false});assert.equal(bad.ok,false);assert.equal(bad.code,'SCENARIO_VALIDATION_FAILED');assert.equal(domain.version,versionBefore);assert.equal(domain.snapshot().persistence.status,'UNAVAILABLE');console.log('scenarios surface: PASS');

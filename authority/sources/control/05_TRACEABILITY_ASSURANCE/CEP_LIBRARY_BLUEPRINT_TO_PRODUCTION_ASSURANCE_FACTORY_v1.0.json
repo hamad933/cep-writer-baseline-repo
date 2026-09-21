@@ -1,0 +1,37 @@
+{
+  "classification": "W01_W02_PRODUCTION_CONVERSION_CANDIDATE / DEEP_AUDIT_COMPLETE / CORRECTION_REQUIRED / NOT_READY_FOR_W03_PROMOTION",
+  "blueprint": {
+    "file": "CEP_LIBRARY_EDITOR_EXECUTABLE_BLUEPRINT_v1.2.17_ACCEPTED_DESIGN_REFERENCE.html",
+    "bytes": 672893,
+    "sha256": "ea66b58ef122bf2f8ca23fd0aa9e461b07da11ea7390c451902e4b1592d396fd"
+  },
+  "candidate": {
+    "file": "CEP_W01_W02_PRODUCTION_KNOWLEDGE_WORKBENCH_FORGE_v1.0_CANDIDATE.zip",
+    "bytes": 3196405,
+    "sha256": "1b23417a09201979f690bae32b2a36a2fb5724053348de31205011302c34d1d8"
+  },
+  "github": {
+    "main_sha": "2d8a711fa538234d51bef3b005355cccfd82b5f5",
+    "drift_vs_inherited_pre_astra_main": "NONE_OBSERVED",
+    "candidate_source_is_merged_commit": false
+  },
+  "matrix_rows": 60,
+  "verdict_counts": {
+    "TRANSFERRED_WITH_PRODUCTION_ADAPTATION": 12,
+    "PARTIAL": 32,
+    "MISSING": 16
+  },
+  "severity_counts": {
+    "P1": 52,
+    "P0": 3,
+    "P2": 5
+  },
+  "decision": "SEQUENCE_B",
+  "first_bounded_lane": [
+    "C001",
+    "C002",
+    "C003"
+  ],
+  "source_mutation_performed": false,
+  "w03_blocked": true
+}

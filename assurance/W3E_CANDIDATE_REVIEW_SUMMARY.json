@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "mission": "W3-E-UI-SCALE-POLICY",
+  "status": "CANDIDATE_READY_FOR_CONTROLLER_REVIEW",
+  "parent": {
+    "successorId": "CEP-FR-E12-W2C-2e4b6f8e",
+    "zipBytes": 6990771,
+    "zipSha256": "2e4b6f8e149824b84e59101f10c70e39e17871f9049386d1b6792553090b6216",
+    "canonicalSourceSha256": "52f3f3e5d6d669595fa57cbd2da7aa8cbd7a577c0ae6cc90c33a82d1b6597250"
+  },
+  "candidateCanonicalSourceSha256": "fbf9dcc8d31332624c62499068ee4251e877415fa81a3b52561862a4987fc25e",
+  "candidateCanonicalSourceFiles": 40,
+  "model": {
+    "pass": 172,
+    "fail": 0,
+    "lanePass": 8,
+    "laneTotal": 8
+  },
+  "browserScaleProof": "PASS",
+  "centralModificationRevert": "PASS",
+  "realConsumers": "PASS",
+  "negativeBoundary": "PASS",
+  "prohibitedHotspots": "PASS",
+  "e12Regression": "PASS_WITH_INHERITED_E12_ORACLE_EXCEPTION",
+  "e12RegressionNote": "Both exact E12 and the Lane E candidate fail the same two browser assertions because the current harness expects RelationInteraction while runtime receipts truthfully identify RelationInteractionOwner.",
+  "selfPromoted": false,
+  "controllerAccepted": false,
+  "currentControlModified": false,
+  "githubWritten": false,
+  "surfaceConstructionStarted": false
+}

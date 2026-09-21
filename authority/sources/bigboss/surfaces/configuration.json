@@ -1,0 +1,272 @@
+{
+  "objects": {
+    "ConfigObservation": "whitelisted key + presentVersion + redacted value + source/observedAt + restart requirement",
+    "ConfigProposal": "key + baseVersion + proposed safe value + validation result",
+    "ConfigAuthority": "explicit newer authority for apply; separate from settings"
+  },
+  "state_dimensions": {
+    "observation": [
+      "AVAILABLE",
+      "STALE",
+      "UNAVAILABLE",
+      "ERROR"
+    ],
+    "proposal": [
+      "DRAFT",
+      "VALIDATED",
+      "INVALID",
+      "AUTHORITY_PENDING"
+    ],
+    "application": [
+      "NOT_APPLIED",
+      "APPLY_REQUESTED",
+      "APPLIED",
+      "RESTART_REQUIRED"
+    ]
+  },
+  "read_model": "OperationalConfigReadService returns explicit safe allowlist; never serialize raw config files or secret fields.",
+  "persistence": {
+    "ConfigObservation": "Platform operational config source read model",
+    "ConfigProposal": "Platform.ConfigChangeProposal",
+    "ConfigAuthority": "Parent-governed config authority"
+  },
+  "invariants": [
+    "UI preferences never modify operational configuration",
+    "Present value is not approved value",
+    "Default is observation/proposal until newer mutation authority exists",
+    "Reset means discard proposal/reveal present value, not factory-reset production"
+  ],
+  "epistemic": {
+    "empty": "Whitelist has no visible keys: explicit empty scope, not all-config dump.",
+    "stale": "Source changed since proposal: version conflict and refreshed diff.",
+    "unavailable": "Config source inaccessible: unknown value; never substitute defaults as observed fact.",
+    "error": "Sensitive/unknown key rejected before storage/logging; safe reason only."
+  },
+  "operations": [
+    {
+      "name": "edit",
+      "family": "OperationalConfigCommand",
+      "payload": "configKey:string presentVersion:integer proposedValue:safeValue authorityContext:authority action:enum:prepare",
+      "before": "proposal absent|DRAFT",
+      "event": "prepare change proposal only",
+      "after": "proposal=DRAFT; application=NOT_APPLIED",
+      "guard": "Key allowlisted; secrets excluded; no apply authority implied",
+      "oracle": "Edit proposal causes zero operational config writes",
+      "persistence": "Platform.ConfigChangeProposal",
+      "method": "POST",
+      "gate": null,
+      "command_id": "configuration.edit",
+      "surface_id": "configuration",
+      "semantic_owner": "W05ConfigurationDomain",
+      "focus_after": "Configuration active object/control; detached target→configuration-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Sensitive/unknown key rejected before storage/logging; safe reason only.",
+        "503_timeout": "Config source inaccessible: unknown value; never substitute defaults as observed fact."
+      },
+      "test_id": "TEST-configuration.edit",
+      "evidence_id": "EVID-configuration.edit",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "diff",
+      "family": "AnalyticalCommand",
+      "payload": "leftRef:ref rightRef:ref scope:strings workingAnalysisId:string",
+      "before": "proposal=DRAFT",
+      "event": "compare observed base and proposal",
+      "after": "safe redacted diff with source/restart flags",
+      "guard": "Redaction applies to diff, logs and exports",
+      "oracle": "Secret marker never replaced by plaintext in diff",
+      "persistence": "Platform.ConfigChangeProposal",
+      "method": "GET",
+      "gate": null,
+      "command_id": "configuration.diff",
+      "surface_id": "configuration",
+      "semantic_owner": "W05ConfigurationDomain",
+      "focus_after": "Configuration active object/control; detached target→configuration-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Sensitive/unknown key rejected before storage/logging; safe reason only.",
+        "503_timeout": "Config source inaccessible: unknown value; never substitute defaults as observed fact."
+      },
+      "test_id": "TEST-configuration.diff",
+      "evidence_id": "EVID-configuration.diff",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "validate",
+      "family": "OperationalConfigCommand",
+      "payload": "configKey:string presentVersion:integer proposedValue:safeValue authorityContext:authority action:enum:validate",
+      "before": "proposal=DRAFT",
+      "event": "validate allowed value and dependency",
+      "after": "VALIDATED or INVALID; application=NOT_APPLIED",
+      "guard": "Exact present version; configuration owner validators",
+      "oracle": "Validation success does not apply config or authorize restart",
+      "persistence": "Platform.ConfigChangeProposal",
+      "method": "POST",
+      "gate": null,
+      "command_id": "configuration.validate",
+      "surface_id": "configuration",
+      "semantic_owner": "W05ConfigurationDomain",
+      "focus_after": "Configuration active object/control; detached target→configuration-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Sensitive/unknown key rejected before storage/logging; safe reason only.",
+        "503_timeout": "Config source inaccessible: unknown value; never substitute defaults as observed fact."
+      },
+      "test_id": "TEST-configuration.validate",
+      "evidence_id": "EVID-configuration.validate",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "reset",
+      "family": "OperationalConfigCommand",
+      "payload": "configKey:string presentVersion:integer proposedValue:safeValue authorityContext:authority action:enum:discardProposal",
+      "before": "proposal=DRAFT|VALIDATED|INVALID",
+      "event": "discard proposal and show inherited observed source",
+      "after": "proposal absent; application unchanged",
+      "guard": "Only proposal removal; present value never changed",
+      "oracle": "Reset preserves live config digest",
+      "persistence": "Platform.ConfigChangeProposal",
+      "method": "POST",
+      "gate": null,
+      "command_id": "configuration.reset",
+      "surface_id": "configuration",
+      "semantic_owner": "W05ConfigurationDomain",
+      "focus_after": "Configuration active object/control; detached target→configuration-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Sensitive/unknown key rejected before storage/logging; safe reason only.",
+        "503_timeout": "Config source inaccessible: unknown value; never substitute defaults as observed fact."
+      },
+      "test_id": "TEST-configuration.reset",
+      "evidence_id": "EVID-configuration.reset",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "requestApply",
+      "family": "OperationalConfigCommand",
+      "payload": "configKey:string presentVersion:integer proposedValue:safeValue authorityContext:authority action:enum:requestApply",
+      "before": "proposal=VALIDATED",
+      "event": "request actual config authority",
+      "after": "proposal=AUTHORITY_PENDING",
+      "guard": "Explicit newer authority required to go beyond request",
+      "oracle": "UI Settings cannot dispatch this family or manufacture authority",
+      "persistence": "Parent.ConfigAuthority",
+      "method": "POST",
+      "gate": "AUTHORITY_GATED",
+      "command_id": "configuration.requestApply",
+      "surface_id": "configuration",
+      "semantic_owner": "W05ConfigurationDomain",
+      "focus_after": "Configuration active object/control; detached target→configuration-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Sensitive/unknown key rejected before storage/logging; safe reason only.",
+        "503_timeout": "Config source inaccessible: unknown value; never substitute defaults as observed fact."
+      },
+      "test_id": "TEST-configuration.requestApply",
+      "evidence_id": "EVID-configuration.requestApply",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "configuration",
+  "title": "Configuration",
+  "workspace": "W05",
+  "semantic_owner": "W05ConfigurationDomain",
+  "archetype": "OperationalConfigInspectionWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W05-CFG-001",
+    "CAP-W05-CFG-002",
+    "CAP-W05-CFG-003",
+    "CAP-W05-CFG-004",
+    "CAP-W05-CFG-005",
+    "CAP-W05-CFG-006",
+    "CAP-W05-CFG-007",
+    "CAP-W05-CFG-008",
+    "CAP-W05-CFG-009"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W05-CFG-001",
+        "CAP-W05-CFG-002",
+        "CAP-W05-CFG-003",
+        "CAP-W05-CFG-004",
+        "CAP-W05-CFG-005",
+        "CAP-W05-CFG-006",
+        "CAP-W05-CFG-007",
+        "CAP-W05-CFG-008",
+        "CAP-W05-CFG-009"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Configuration",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-003",
+    "NC-004",
+    "NC-036"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore"
+  ],
+  "adapter": "W05ConfigurationDomainAdapter",
+  "regions": {
+    "TOP": "Configuration exact identity, local mode, command routes",
+    "LEFT": "typed ConfigObservation collection/navigation",
+    "CENTER": "OperationalConfigInspectionWorkbench primary task",
+    "RIGHT": "one selected ConfigObservation identity/context inspector",
+    "BOTTOM": "Deep Configuration diagnostics/history"
+  },
+  "command_ids": [
+    "configuration.edit",
+    "configuration.diff",
+    "configuration.validate",
+    "configuration.reset",
+    "configuration.requestApply"
+  ]
+}

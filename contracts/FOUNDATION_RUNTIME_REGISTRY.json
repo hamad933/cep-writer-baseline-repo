@@ -1,0 +1,757 @@
+{
+  "schemaVersion": 5,
+  "baselineId": "CEP-FR-E18-ANALYTICAL-COMPARE-COMPLETION",
+  "status": "CONTROLLER_ACCEPTED_POST_FINAL_GATE_FOUNDATION_SUCCESSOR_CONTENT",
+  "architectureLaw": [
+    "GLOBAL_EXECUTABLE_FOUNDATION",
+    "SURFACE_FAMILY_ENGINE",
+    "THIN_DOMAIN_ADAPTER",
+    "SURFACE_COMPOSITION"
+  ],
+  "stackStatus": "STACK_NOT_FROZEN",
+  "acceptedDonor": {
+    "path": "dist/reference/CEP_LIBRARY_EDITOR_EXECUTABLE_BLUEPRINT_v1.2.17_ACCEPTED_DESIGN_REFERENCE.html",
+    "bytes": 672893,
+    "sha256": "ea66b58ef122bf2f8ca23fd0aa9e461b07da11ea7390c451902e4b1592d396fd"
+  },
+  "w03Baseline": {
+    "identity": "CEP_W03_UNIFIED_EXECUTABLE_BLUEPRINT_SYSTEM_v3.4_OWNER_DIRECT_REVIEW_CORRECTED_CANDIDATE.zip",
+    "sha256": "23b66696a9cc72cb343c74e70f380ccb248e1fbc378d8ce7839ba74111a3d716",
+    "authority": "W03_V3_4_SAME_LINEAGE_VALUE_DOMAIN_REQUIREMENT_EVIDENCE_DONOR_NOT_AUTHORITY",
+    "intake": "authority/W03_V34_TARGETED_INTAKE.json"
+  },
+  "controllerDelta": {
+    "identity": "CEP_FOUNDATION_PRE_WORK_RESUME_CONTROLLER_PACKET_v2.0.zip",
+    "bytes": 122721,
+    "sha256": "0bbb013cc767d9d7047a5a5f24fe67865f0ee4e75f9522978e6bd2ceafee406b"
+  },
+  "registries": {
+    "conceptualComponents": "contracts/COMPONENT_REGISTRY.json",
+    "commands": "contracts/COMMAND_REGISTRY.seed.json",
+    "preferences": "contracts/PREFERENCE_REGISTRY.seed.json",
+    "surfaceProfiles": "profiles/<surface>.json",
+    "inheritanceMatrix": "contracts/23_SURFACE_INHERITANCE_MATRIX.json",
+    "deviations": "contracts/DEVIATION_REGISTER.json",
+    "newAbstractionAdmission": "authority/controller/10_NEW_ABSTRACTION_ADMISSION_REGISTER.csv",
+    "controllerResumeDelta": "authority/controller/17_MASTER_WORK_RESUME_DELTA.md",
+    "activeDeferred": "assurance/HIGH_VALUE_DEFERRED_LEDGER.json",
+    "excludedTraceability": "assurance/DROPPED_SUPERSEDED_LOW_VALUE_TRACEABILITY.json",
+    "wave3ControllerAssemblyProof": "assurance/W3_CONTROLLER_ASSEMBLY_BROWSER_PROOF.json",
+    "wave4ControllerConvergenceProof": "assurance/W4_CONTROLLER_CONVERGENCE_BROWSER_PROOF.json",
+    "wave5ControllerFinalAcceptanceProof": "assurance/W5_CONTROLLER_FINAL_ACCEPTANCE.json",
+    "wave6ControllerFinalAcceptanceProof": "assurance/W6_CONTROLLER_FINAL_ACCEPTANCE.json",
+    "analyticalCompareControllerAcceptanceProof": "assurance/E18_ANALYTICAL_COMPARE_CONTROLLER_ACCEPTANCE.json"
+  },
+  "components": [
+    {
+      "id": "WorkspaceFrame",
+      "presentationOwner": "WorkspaceFoundation",
+      "stateOwner": "WorkspacePaneLayoutOwner + TransientFocusOwner",
+      "implementation": [
+        "dist/foundation/workspace-host.js",
+        "dist/foundation/workspace.js"
+      ],
+      "duplicatePolicy": "FORBID_SURFACE_LOCAL_PANE_CONTEXT_TRANSIENT_OWNER"
+    },
+    {
+      "id": "ContextInspector",
+      "presentationOwner": "ContextInspectorHost",
+      "stateOwner": "Active descriptor/lens presentation only; descriptor payload remains provider/domain-owned",
+      "implementation": [
+        "dist/foundation/global/context-inspector.js",
+        "dist/foundation/global/context-descriptor-contract.js",
+        "dist/adapters/context-library-structured.js",
+        "dist/adapters/context-spatial.js"
+      ],
+      "duplicatePolicy": "ONE_CONTEXT_INSPECTOR_HOST; DOMAIN_FIELDS_VIA_DESCRIPTOR_ONLY"
+    },
+    {
+      "id": "SemanticCommandRegistry",
+      "presentationOwner": null,
+      "stateOwner": "SemanticCommandBus",
+      "implementation": [
+        "dist/foundation/models.js"
+      ],
+      "duplicatePolicy": "ONE_ID_ONE_OWNER"
+    },
+    {
+      "id": "CapabilityRegistry",
+      "presentationOwner": null,
+      "stateOwner": "CapabilityRegistry",
+      "implementation": [
+        "dist/foundation/models.js"
+      ],
+      "duplicatePolicy": "ONE_CAPABILITY_ONE_RESOLVER"
+    },
+    {
+      "id": "ActionSurfaceRegistry",
+      "presentationOwner": "WorkspaceFoundation / RelationInteractionOwner",
+      "stateOwner": "ActionSurfaceRegistry",
+      "implementation": [
+        "dist/foundation/models.js",
+        "dist/foundation/workspace.js",
+        "dist/foundation/relations.js"
+      ],
+      "duplicatePolicy": "ONE_SURFACE_ID_ONE_PRESENTATION_OWNER"
+    },
+    {
+      "id": "UnifiedEditor",
+      "presentationOwner": "StructuredSurfaceHost + StructuredNavigationDescriptorOwner; accepted donor integration for Library compatibility only",
+      "stateOwner": "StructuredDocumentDomainAdapter bound working document",
+      "implementation": [
+        "dist/foundation/structured.js",
+        "dist/foundation/structured/surface-host.js",
+        "dist/foundation/structured/block-renderer.js",
+        "dist/foundation/structured/presentation-bridge.js",
+        "dist/foundation/structured/read-inspection.js",
+        "dist/foundation/structured/outline-descriptor.js",
+        "dist/foundation/workspace-host.js",
+        "dist/adapters/structured-documents.js",
+        "dist/foundation/accepted-runtime.js"
+      ],
+      "duplicatePolicy": "CONSUME_FINAL_STRUCTURED_FAMILY_BOUNDARY; LIBRARY_DONOR_INTEGRATION_ONLY_BY_APPROVED_DEVIATION"
+    },
+    {
+      "id": "StructuredDocumentDomainAdapter",
+      "presentationOwner": null,
+      "stateOwner": "StructuredDocumentDomainAdapter identity/revision/commit/recovery boundary",
+      "implementation": [
+        "dist/foundation/structured.js",
+        "dist/adapters/structured-documents.js"
+      ],
+      "duplicatePolicy": "ONE_DOCUMENT_DOMAIN_OWNER_PER_STRUCTURED_CONSUMER"
+    },
+    {
+      "id": "SpatialEngine",
+      "presentationOwner": "SpatialView",
+      "stateOwner": "SpatialModel representation state",
+      "implementation": [
+        "dist/foundation/spatial.js",
+        "dist/foundation/models.js"
+      ],
+      "duplicatePolicy": "ONE_POINTER_CAMERA_SELECTION_OWNER"
+    },
+    {
+      "id": "RelationEngine",
+      "presentationOwner": "RelationInteractionOwner",
+      "stateOwner": "RelationDomainAdapter",
+      "implementation": [
+        "dist/foundation/relations.js"
+      ],
+      "duplicatePolicy": "NEVER_MUTATE_ONLY_RENDERED_EDGE"
+    },
+    {
+      "id": "ActionAvailabilityResolver",
+      "presentationOwner": null,
+      "stateOwner": "Derived result; no canonical store",
+      "implementation": [
+        "dist/foundation/models.js",
+        "dist/foundation/relations.js"
+      ],
+      "duplicatePolicy": "NO_SURFACE_LOCAL_SELECTION_ACTION_ELIGIBILITY"
+    },
+    {
+      "id": "OperationalSurfaceManager",
+      "presentationOwner": "OperationalView",
+      "stateOwner": "SessionPresentation + RuntimeProviderDescriptor",
+      "implementation": [
+        "dist/foundation/operational.js",
+        "dist/foundation/models.js"
+      ],
+      "duplicatePolicy": "PRESENTATION_NEVER_PARSES_COMMAND_OR_NAMES_PROVIDER"
+    },
+    {
+      "id": "TerminalRendererAdapter",
+      "presentationOwner": "DomTerminalRendererAdapter",
+      "stateOwner": "RuntimeAdapter session lines",
+      "implementation": [
+        "dist/foundation/operational.js"
+      ],
+      "duplicatePolicy": "RENDERER_NEVER_BECOMES_RUNTIME"
+    },
+    {
+      "id": "SimulatedDeviceEngine",
+      "presentationOwner": null,
+      "stateOwner": "SimulatedDeviceEngine.devices",
+      "implementation": [
+        "dist/adapters/simulation.js"
+      ],
+      "duplicatePolicy": "ONE_CANONICAL_SIMULATED_DEVICE_TRUTH_OWNER"
+    },
+    {
+      "id": "InternalSimulationAdapter",
+      "presentationOwner": null,
+      "stateOwner": "InternalSimulationAdapter parser/sessions/events/receipts",
+      "implementation": [
+        "dist/adapters/simulation.js"
+      ],
+      "duplicatePolicy": "ONE_RUNTIME_ADAPTER_PER_PROVIDER"
+    },
+    {
+      "id": "StructuredNoteBindingSeam",
+      "presentationOwner": "Structured hosts",
+      "stateOwner": "Structured adapter/domain note binding",
+      "implementation": [
+        "dist/foundation/structured.js",
+        "dist/foundation/workspace-host.js"
+      ],
+      "duplicatePolicy": "FULL_CROSS_FAMILY_NOTES_CORE_DEFERRED"
+    },
+    {
+      "id": "GlobalInputKeymap",
+      "presentationOwner": null,
+      "stateOwner": "GlobalInputKeymapOwner active global keymap context + region-cycle receipts",
+      "implementation": [
+        "dist/foundation/global/input-keymap.js",
+        "dist/foundation/global/region-cycle.js",
+        "dist/foundation/global/input-ownership-contract.js"
+      ],
+      "duplicatePolicy": "ONE_GLOBAL_KEYDOWN_SEMANTIC_OWNER; FAMILY_KEYMAPS_KEEP_FAMILY_SEMANTICS"
+    },
+    {
+      "id": "AccessibilityFeedback",
+      "presentationOwner": "AccessibilityFeedbackOwner",
+      "stateOwner": "Transient feedback presentation only; source truth remains supplying owner",
+      "implementation": [
+        "dist/foundation/global/feedback.js",
+        "dist/foundation/global/feedback-contract.js"
+      ],
+      "duplicatePolicy": "ONE_ACCESSIBLE_FEEDBACK_PROJECTOR; NO_CANONICAL_STATUS_INVENTION"
+    },
+    {
+      "id": "BottomDeepWork",
+      "presentationOwner": "BottomDeepWorkOwner",
+      "stateOwner": "Open/closed/inert/focus/provider presentation lifecycle only",
+      "implementation": [
+        "dist/foundation/global/bottom-shelf.js",
+        "dist/foundation/global/bottom-provider-contract.js",
+        "dist/adapters/structured-bottom-provider.js",
+        "dist/adapters/operational-bottom-provider.js"
+      ],
+      "duplicatePolicy": "ONE_BOTTOM_LIFECYCLE_OWNER; PROVIDER_CONTENT_REMAINS_EXTERNAL"
+    },
+    {
+      "id": "UIScalePolicy",
+      "presentationOwner": "UIScalePolicyOwner",
+      "stateOwner": "Derived application-chrome scale projection; value/persistence owned by ScopedPreferencesOwner",
+      "implementation": [
+        "dist/foundation/global/preferences/ui-scale.js",
+        "dist/foundation/global/tokens/scale.css"
+      ],
+      "duplicatePolicy": "ONE_UI_SCALE_POLICY; NEVER_ALIAS_TO_DOCUMENT_OR_CANVAS_ZOOM_OR_DENSITY"
+    },
+    {
+      "id": "Wave3GlobalAssembly",
+      "presentationOwner": "ControllerIntegrationHost composition only",
+      "stateOwner": "NONE_SEMANTIC; composes accepted owners",
+      "implementation": [
+        "dist/foundation/wave3-assembly.js",
+        "dist/main.js"
+      ],
+      "duplicatePolicy": "COMPOSITION_ONLY_NOT_A_PARALLEL_SEMANTIC_OWNER"
+    },
+    {
+      "id": "SettingsCenter",
+      "presentationOwner": "SettingsCenterOwner",
+      "stateOwner": "Presentation/disclosure/search only; ScopedPreferencesOwner owns values/persistence",
+      "implementation": [
+        "dist/foundation/global/settings/center.js",
+        "dist/foundation/global/settings/sections.js",
+        "dist/foundation/global/settings/search.js"
+      ],
+      "duplicatePolicy": "ONE_SETTINGS_CENTER; EXPLICIT_PROFILE_APPLICABILITY; NO_SECOND_PREFERENCE_STORE"
+    },
+    {
+      "id": "InputDirectionResolver",
+      "presentationOwner": "InputDirectionResolver",
+      "stateOwner": "Transient direction hint only; persisted content direction remains content-owned",
+      "implementation": [
+        "dist/foundation/global/input-direction.js",
+        "dist/foundation/contracts/platform-input-direction-bridge.js"
+      ],
+      "duplicatePolicy": "ONE_DIRECTION_POLICY; INVALID_HINTS_USE_TRUTHFUL_POLICY_FALLBACK; NO_LANGUAGE_INFERENCE"
+    },
+    {
+      "id": "StructuredInputKeymap",
+      "presentationOwner": "StructuredInputKeymapOwner",
+      "stateOwner": "Composition/caret transient behavior only",
+      "implementation": [
+        "dist/foundation/structured/input-keymap.js",
+        "dist/foundation/structured/caret-bridge.js",
+        "dist/foundation/structured/shorthand.js"
+      ],
+      "duplicatePolicy": "ONE_STRUCTURED_KEY_SEMANTIC_OWNER; GLOBAL_KEYS_REMAIN_GLOBAL"
+    },
+    {
+      "id": "StructuredActionDescriptors",
+      "presentationOwner": "StructuredActionDescriptorOwner",
+      "stateOwner": "Derived insertion/action/confirmation descriptors only",
+      "implementation": [
+        "dist/foundation/structured/action-descriptors.js",
+        "dist/foundation/structured/insertion-targets.js"
+      ],
+      "duplicatePolicy": "ONE_STRUCTURED_ACTION_DESCRIPTOR_TRUTH; MUTATION_DELEGATED"
+    },
+    {
+      "id": "StructuredRichContent",
+      "presentationOwner": "StructuredRichContentOwner",
+      "stateOwner": "Safe rich/code/bidi projection only",
+      "implementation": [
+        "dist/foundation/structured/rich-content.js",
+        "dist/foundation/structured/code-block.js",
+        "dist/foundation/structured/sanitization-policy.js",
+        "dist/foundation/structured/direction-adapter.js"
+      ],
+      "duplicatePolicy": "ONE_STRUCTURED_RICH_POLICY; CLIPBOARD_TRUST_AND_DOCUMENT_TRUTH_EXTERNAL"
+    },
+    {
+      "id": "StructuredDragDrop",
+      "presentationOwner": "StructuredDragDropOwner",
+      "stateOwner": "Drag intent/target/autoscroll transient projection only",
+      "implementation": [
+        "dist/foundation/structured/drag-drop.js",
+        "dist/foundation/structured/drop-target.js"
+      ],
+      "duplicatePolicy": "ONE_STRUCTURED_DROP_TARGET_POLICY; ACTUAL_MUTATION_DELEGATED"
+    },
+    {
+      "id": "OperationalSessionBoundary",
+      "presentationOwner": "OperationalSessionOwner",
+      "stateOwner": "Provider-neutral session presentation + provider attachment identity only; BELOW M6",
+      "implementation": [
+        "dist/foundation/operational/session-owner.js",
+        "dist/foundation/operational/terminal-host.js",
+        "dist/foundation/contracts/runtime-adapter.js"
+      ],
+      "duplicatePolicy": "SECOND_REAL_PROVIDER_NOT_PROVEN; RUNTIME_ADAPTER_OWNS_CAUSAL_TRUTH; NO_FAKE_TERMINAL"
+    },
+    {
+      "id": "EpistemicStateContract",
+      "presentationOwner": null,
+      "stateOwner": "Typed epistemic descriptor/refusal vocabulary only; domain supplies canonical truth",
+      "implementation": [
+        "dist/foundation/contracts/epistemic-state.js"
+      ],
+      "duplicatePolicy": "CONTRACT_ONLY_M4; NO_GENERIC_ASYNC_ENGINE; CONTRADICTORY_SOURCE_TRUTH_REFUSED"
+    },
+    {
+      "id": "ConfirmationSafetyHost",
+      "presentationOwner": "ConfirmationSafetyHost",
+      "stateOwner": "Explicit destructive-risk presentation only",
+      "implementation": [
+        "dist/foundation/global/confirmation-host.js"
+      ],
+      "duplicatePolicy": "NEVER_GUESS_RISK; NEVER_OWN_MUTATION_OR_FAMILY_ACTION_MEANING"
+    },
+    {
+      "id": "Wave4FamilyInteractionAssembly",
+      "presentationOwner": "Controller composition only",
+      "stateOwner": "NONE_SEMANTIC; composes accepted Wave4 owners",
+      "implementation": [
+        "dist/foundation/wave4-assembly.js",
+        "dist/main.js"
+      ],
+      "duplicatePolicy": "COMPOSITION_ONLY_SEMANTIC_OWNER_FALSE"
+    },
+    {
+      "id": "StructuredSurfaceHost",
+      "presentationOwner": "StructuredSurfaceHost",
+      "stateOwner": "Presentation/orchestration only; canonical Structured truth remains StructuredDocumentDomainAdapter + accepted subordinate owners",
+      "implementation": [
+        "dist/foundation/structured/surface-host.js",
+        "dist/foundation/structured/block-renderer.js",
+        "dist/foundation/structured/presentation-bridge.js"
+      ],
+      "duplicatePolicy": "ONE_STRUCTURED_SURFACE_HOST; NO_SECOND_STRUCTURED_ENGINE"
+    },
+    {
+      "id": "StructuredNavigationDescriptorOwner",
+      "presentationOwner": "StructuredNavigationDescriptorOwner",
+      "stateOwner": "Derived read-inspection/outline/quick-jump descriptor truth only",
+      "implementation": [
+        "dist/foundation/structured/read-inspection.js",
+        "dist/foundation/structured/outline-descriptor.js"
+      ],
+      "duplicatePolicy": "ONE_STRUCTURED_NAV_DESCRIPTOR_OWNER; NO_CANONICAL_MUTATION_OR_DOM_FOCUS_SCROLL_OWNERSHIP"
+    },
+    {
+      "id": "StickyNoteWindowOwner",
+      "presentationOwner": "StickyNoteWindowOwner",
+      "stateOwner": "Sticky Note presentation/window lifecycle only; WindowMotion owns generic pointer geometry",
+      "implementation": [
+        "dist/foundation/notes/sticky-note-window.js",
+        "dist/foundation/window-motion.js"
+      ],
+      "duplicatePolicy": "ONE_PER_CANONICAL_HOST_GRAPH; NO_SECOND_WINDOW_MOTION_OWNER; NATIVE_ALWAYS_ON_TOP_UNAVAILABLE_WITHOUT_EXPLICIT_CAPABILITY_BRIDGE"
+    },
+    {
+      "id": "NoteBindingAdapter",
+      "presentationOwner": null,
+      "stateOwner": "Canonical note-to-source/domain binding/provenance descriptor truth only",
+      "implementation": [
+        "dist/foundation/notes/note-binding.js",
+        "dist/adapters/note-binding-domains.js"
+      ],
+      "duplicatePolicy": "ONE_CANONICAL_BINDING_TRUTH; FAIL_ATOMIC_REBIND; NO_PRESENTATION_ID_AS_SOURCE_ID"
+    },
+    {
+      "id": "StructuredNoteContentAdapter",
+      "presentationOwner": "Consumes StructuredSurfaceHost; no independent renderer/editor",
+      "stateOwner": "Thin note-content adaptation over StructuredDocumentDomainAdapter and accepted Structured owners",
+      "implementation": [
+        "dist/adapters/structured-note-content.js",
+        "dist/foundation/structured.js",
+        "dist/foundation/structured/surface-host.js"
+      ],
+      "duplicatePolicy": "ONE_FINAL_ADAPTER_PER_CANONICAL_GRAPH_NOTE; DOCUMENT_ID_COLLISION_REFUSED; NO_SECOND_STRUCTURED_ENGINE"
+    },
+    {
+      "id": "NotesFamilyComposition",
+      "presentationOwner": "Accepted Library note UI / Controller composition glue",
+      "stateOwner": "NONE_SEMANTIC; delegates to StickyNoteWindowOwner + NoteBindingAdapter + StructuredNoteContentAdapter",
+      "implementation": [
+        "dist/adapters/library-note-runtime-composition.js",
+        "dist/foundation/accepted-runtime.js",
+        "dist/main.js"
+      ],
+      "duplicatePolicy": "COMPOSITION_ONLY_SEMANTIC_OWNER_FALSE"
+    },
+    {
+      "id": "AnalyticalCompare",
+      "presentationOwner": "AnalyticalCompareHost",
+      "stateOwner": "AnalyticalCompareOwner exact pinned pair/session/result derived truth; provider records remain domain-owned",
+      "implementation": [
+        "dist/foundation/analytical/compare.js",
+        "dist/foundation/analytical/compare-host.js",
+        "dist/foundation/contracts/analysis-provider.js",
+        "dist/adapters/analytical/rq-compare-provider.js",
+        "dist/adapters/analytical/results-compare-provider.js"
+      ],
+      "duplicatePolicy": "ONE_REUSABLE_ANALYTICAL_COMPARE_OWNER; NO_SURFACE_LOCAL_COMPARE_ENGINE; NO_CROSS_PROVIDER_PAIR_WITHOUT_EXPLICIT_COMPATIBILITY"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "STRUCTURED_EDIT",
+      "owner": "StructuredDocumentDomainAdapter",
+      "resolver": "domain adapter capability and mode",
+      "consumers": [
+        "library",
+        "learn"
+      ]
+    },
+    {
+      "id": "RELATION_AUTHOR",
+      "owner": "RelationDomainAdapter",
+      "resolver": "adapter capability + endpoint types + canonical constraints",
+      "consumers": [
+        "visualize",
+        "enterprise"
+      ]
+    },
+    {
+      "id": "OPEN_TERMINAL",
+      "owner": "RuntimeProviderDescriptor",
+      "resolver": "provider descriptor capability + live state",
+      "consumers": [
+        "runs"
+      ]
+    },
+    {
+      "id": "NOTES_LINK",
+      "owner": "StructuredNoteBindingSeam",
+      "resolver": "active structured block or domain object binding",
+      "consumers": [
+        "library",
+        "learn",
+        "visualize",
+        "enterprise",
+        "runs"
+      ]
+    }
+  ],
+  "actionSurfaces": [
+    {
+      "id": "command-palette",
+      "owner": "WorkspaceFoundation",
+      "commands": "registry-derived",
+      "routes": [
+        "global button",
+        "keyboard"
+      ],
+      "exitRoutes": [
+        "close button",
+        "Escape",
+        "backdrop"
+      ]
+    },
+    {
+      "id": "context-actions",
+      "owner": "WorkspaceFoundation",
+      "commands": "context-derived",
+      "routes": [
+        "RMB",
+        "Shift+F10",
+        "global action"
+      ],
+      "exitRoutes": [
+        "Close item",
+        "Escape",
+        "outside pointer"
+      ]
+    },
+    {
+      "id": "selection-actions",
+      "owner": "RelationInteractionOwner + ActionAvailabilityCore",
+      "commands": [
+        "spatial.connect"
+      ],
+      "routes": [
+        "exactly two eligible endpoints unless deterministic bulk declared"
+      ],
+      "exitRoutes": [
+        "dismiss button",
+        "selection change",
+        "composer transition"
+      ]
+    },
+    {
+      "id": "relation-composer",
+      "owner": "RelationInteractionOwner",
+      "commands": [
+        "relation.edit",
+        "spatial.relation.commit"
+      ],
+      "routes": [
+        "selection Connect",
+        "label double-click",
+        "edge Enter/F2",
+        "RMB",
+        "Inspector",
+        "Command Palette"
+      ],
+      "exitRoutes": [
+        "Cancel",
+        "close button",
+        "Escape",
+        "safe outside pointer",
+        "Apply"
+      ]
+    }
+  ],
+  "familyEngines": [
+    {
+      "id": "Structured",
+      "engine": "StructuredSurfaceHost + StructuredNavigationDescriptorOwner over accepted Tree/Mutation/Transaction/Availability/Selection/Clipboard/Input/Actions/Direction/Rich/Drag owners",
+      "requiresAdapter": "StructuredDocumentDomainAdapter",
+      "proofConsumers": [
+        "library",
+        "learn",
+        "structured-note-content"
+      ],
+      "nonLibraryIsolation": "Learn uses donor-free WorkspaceFoundationHost and has no Library state/search/KU dependency",
+      "wave5HostPending": false,
+      "navigationDescriptorOwner": "StructuredNavigationDescriptorOwner",
+      "noteContentCompatibility": "FINAL_STRUCTURED_NOTE_CONTENT_ADAPTER_PROVEN_SAME_ENGINE"
+    },
+    {
+      "id": "SpatialRelation",
+      "engine": "SpatialSelectionNavigationKernel + SpatialInteractionKernel + RelationInteractionOwner",
+      "requiresAdapter": "RelationDomainAdapter",
+      "proofConsumers": [
+        "visualize",
+        "enterprise"
+      ]
+    },
+    {
+      "id": "OperationalTerminal",
+      "engine": "OperationalSessionOwner bounded provider-neutral presentation + RuntimeAdapter causal truth",
+      "requiresAdapter": "RuntimeAdapter",
+      "defaultAdapter": "InternalSimulationAdapter",
+      "proofConsumers": [
+        "runs"
+      ],
+      "maturity": "BELOW_M6_SECOND_REAL_PROVIDER_NOT_PROVEN"
+    },
+    {
+      "id": "Notes",
+      "engine": "StickyNoteWindowOwner + NoteBindingAdapter + StructuredNoteContentAdapter over accepted Structured engine",
+      "requiresAdapter": "NoteBindingAdapter domain input + StructuredDocumentDomainAdapter through StructuredNoteContentAdapter",
+      "proofConsumers": [
+        "library-sticky-note",
+        "structured-note",
+        "learn-bound-note",
+        "spatial-bound-note"
+      ],
+      "maturity": "CONTROLLER_ACCEPTED_M6",
+      "ownershipBoundary": "window/binding/content remain separate canonical owners; composition is non-semantic"
+    },
+    {
+      "id": "AnalyticalCompare",
+      "engine": "AnalyticalCompareOwner + AnalyticalCompareHost",
+      "requiresAdapter": "AnalysisProviderContract",
+      "proofConsumers": [
+        "rq",
+        "results"
+      ],
+      "maturity": "CONTROLLER_ACCEPTED_E18_TWO_REAL_PROVIDER_PROOF",
+      "ownershipBoundary": "Shared compare/diff/provenance inspection mechanic only; exact domain identity and canonical records remain provider-owned; Formal Review/Mastery/Evidence admission/Audit semantics stay separate."
+    }
+  ],
+  "domainAdapterContracts": [
+    {
+      "id": "StructuredDocumentDomainAdapter",
+      "version": "1.1.0",
+      "mustSupply": [
+        "document identity",
+        "working revision",
+        "structured schema/capabilities",
+        "commit/save boundary",
+        "family-local undo/redo/history",
+        "recovery boundary",
+        "minimum notes/source binding",
+        "domain metadata",
+        "command availability",
+        "structured selection descriptor",
+        "copy/cut/paste structured fragment boundary",
+        "read-only/schema clipboard eligibility"
+      ],
+      "mustNotOwn": [
+        "workspace panes",
+        "toolbar grammar",
+        "Library search/tree state for non-Library consumers"
+      ]
+    },
+    {
+      "id": "ContextDescriptorProvider",
+      "version": "1.0.0",
+      "mustSupply": [
+        "subject",
+        "domain/family fields",
+        "canonical owner"
+      ],
+      "mustNotOwn": [
+        "Context Inspector presentation",
+        "workspace pane state"
+      ]
+    },
+    {
+      "id": "RelationDomainAdapter",
+      "version": "1.1.0",
+      "mustSupply": [
+        "canonical relation store",
+        "eligible endpoints/types",
+        "capability and compatibility rules",
+        "duplicate constraints",
+        "version/transaction",
+        "projection"
+      ],
+      "mustNotOwn": [
+        "pointer gestures",
+        "composer presentation",
+        "semantic route duplication"
+      ]
+    },
+    {
+      "id": "RuntimeAdapter",
+      "version": "1.0.0",
+      "mustSupply": [
+        "provider descriptor",
+        "capabilities",
+        "stable session identity",
+        "input parser",
+        "semantic command",
+        "effect boundary",
+        "receipts",
+        "recorded projection"
+      ],
+      "mustNotOwn": [
+        "terminal rendering",
+        "window/tabs",
+        "host shell claims"
+      ]
+    }
+  ],
+  "wave3Status": "CONTROLLER_ACCEPTED_AND_CLOSED",
+  "controllerConvergence": {
+    "wave": "WAVE_6",
+    "order": [
+      "StickyNoteWindowOwner",
+      "NoteBindingAdapter",
+      "StructuredNoteContentAdapter",
+      "Library note runtime composition",
+      "registry/generator reconciliation",
+      "donor adjudication"
+    ],
+    "compositionOwner": "Controller final convergence",
+    "semanticOwner": false,
+    "notesFamily": "CONTROLLER_ACCEPTED_M6",
+    "operationalMaturity": "BOUNDED_BELOW_M6_SECOND_REAL_PROVIDER_NOT_PROVEN",
+    "structuredNoteContent": "SAME_ACCEPTED_STRUCTURED_ENGINE_NO_SECOND_EDITOR",
+    "noteWindowAlwaysOnTop": "UNAVAILABLE_UNLESS_EXPLICIT_PLATFORM_CAPABILITY_BRIDGE",
+    "notePersistence": "NO_DURABLE_PERSISTENCE_OWNER_CLAIM",
+    "donorPhysicalDeletionPerformed": false,
+    "browserLegacy": "6/6 PASS",
+    "browserWave3Integration": "5/5 PASS",
+    "browserWave4Integration": "5/5 PASS",
+    "browserWave5LaneC": "9 steps / 26 executable cases PASS",
+    "browserWave6IntegratedNotes": "8/8 PASS",
+    "model": "210/210 PASS"
+  },
+  "wave4Status": "CONTROLLER_ACCEPTED_AND_CLOSED",
+  "wave5Status": "CONTROLLER_ACCEPTED_AND_CLOSED",
+  "wave6Status": "CONTROLLER_ACCEPTED_AND_CLOSED",
+  "analyticalCompareCompletion": {
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_OWNER",
+    "semanticCore": "SC-032",
+    "owner": "AnalyticalCompareOwner",
+    "host": "AnalyticalCompareHost",
+    "providerContract": "AnalysisProviderContract",
+    "realProviderProofs": [
+      "rq",
+      "results"
+    ],
+    "crossProviderComparison": "REJECTED_BY_DEFAULT",
+    "exactPinnedIdentity": true,
+    "domainMutationOwned": false,
+    "persistenceOwned": false,
+    "reviewDecisionOwned": false,
+    "masteryOwned": false,
+    "evidenceAdmissionOwned": false,
+    "auditMutationOwned": false
+  },
+  "finalFoundationGateStatus": "CONTROLLER_ACCEPTED_AND_CLOSED_ALL_SURFACES_READY",
+  "finalFoundationIntakeGate": {
+    "status": "CONTROLLER_ACCEPTED_AND_CLOSED_ALL_SURFACES_READY",
+    "classification": "PER_SURFACE_READINESS",
+    "readinessRegistry": "contracts/SURFACE_READINESS_REGISTRY.json",
+    "readySurfaces": [
+      "audit",
+      "backup",
+      "configuration",
+      "enterprise",
+      "evidence",
+      "health",
+      "labs",
+      "learn",
+      "library",
+      "manual_ai",
+      "mastery",
+      "portfolio",
+      "processing",
+      "releases",
+      "results",
+      "reviews",
+      "rq",
+      "runs",
+      "scenarios",
+      "shell",
+      "today",
+      "validation",
+      "visualize"
+    ],
+    "blockedSurfaces": [],
+    "stackStatus": "STACK_NOT_FROZEN",
+    "surfaceReleaseRequiresExactExternalControllerAuthority": true
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "objects": {
+    "AuditEvent": "sequence + previousHash + recordHash + actor/action/target/correlation/time",
+    "IntegrityResult": "valid + count + firstInvalidSequence + verification boundary",
+    "AuditInspection": "filter/correlation cursor; no event mutation"
+  },
+  "state_dimensions": {
+    "integrity": [
+      "NOT_CHECKED",
+      "VALID_CHAIN",
+      "INVALID_CHAIN",
+      "VERIFICATION_ERROR"
+    ],
+    "coverage": [
+      "COMPLETE_OBSERVED",
+      "PARTIAL_OBSERVED",
+      "UNKNOWN"
+    ]
+  },
+  "read_model": "AuditReadService uses immutable cursor pages; AuditChainVerifier.verify supplies valid/count/first_invalid_sequence, not encryption proof.",
+  "persistence": {
+    "AuditEvent": "Platform.AuditRecord",
+    "IntegrityResult": "verification receipt",
+    "AuditInspection": "session or central preference filter"
+  },
+  "invariants": [
+    "Hash chain is not encryption",
+    "Application append-only claim is not DB-enforced immutability proof",
+    "Personal note stored separately from AuditEvent"
+  ],
+  "epistemic": {
+    "empty": "Zero observed events is empty with count 0; does not prove upstream coverage.",
+    "stale": "Verification watermark behind latest observed sequence: show exact checked range.",
+    "unavailable": "Audit source unavailable prevents integrity claim.",
+    "error": "First bad sequence visible; verifier exception not invalid-chain result."
+  },
+  "operations": [
+    {
+      "name": "search",
+      "family": "AnalyticalCommand",
+      "payload": "leftRef:ref rightRef:ref scope:strings workingAnalysisId:string correlationId:string",
+      "before": "audit readable",
+      "event": "query exact correlation/window",
+      "after": "ordered event page",
+      "guard": "Server-enforced read filter and safe redaction",
+      "oracle": "Search does not mutate audit event count/hash",
+      "persistence": "Platform.AuditReadProjection",
+      "method": "GET",
+      "gate": null,
+      "command_id": "audit.search",
+      "surface_id": "audit",
+      "semantic_owner": "W05AuditDomain",
+      "focus_after": "Audit active object/control; detached target→audit-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "First bad sequence visible; verifier exception not invalid-chain result.",
+        "503_timeout": "Audit source unavailable prevents integrity claim."
+      },
+      "test_id": "TEST-audit.search",
+      "evidence_id": "EVID-audit.search",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "verify",
+      "family": "OperationalCommand",
+      "payload": "auditRangeRef:ref action:enum:verify expectedState:enum:NOT_CHECKED correlationId:string",
+      "before": "integrity=NOT_CHECKED",
+      "event": "run chain verification",
+      "after": "VALID_CHAIN or INVALID_CHAIN with first bad sequence",
+      "guard": "Exact range/watermark recorded; no encryption label",
+      "oracle": "Tampered observed event returns first_invalid_sequence; verified bytes scope explicit",
+      "persistence": "Platform.IntegrityReceipt",
+      "method": "POST",
+      "gate": null,
+      "command_id": "audit.verify",
+      "surface_id": "audit",
+      "semantic_owner": "W05AuditDomain",
+      "focus_after": "Audit active object/control; detached target→audit-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "First bad sequence visible; verifier exception not invalid-chain result.",
+        "503_timeout": "Audit source unavailable prevents integrity claim."
+      },
+      "test_id": "TEST-audit.verify",
+      "evidence_id": "EVID-audit.verify",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "annotate",
+      "family": "AnalyticalCommand",
+      "payload": "leftRef:ref rightRef:ref scope:strings workingAnalysisId:string noteBlocks:blocks",
+      "before": "audit event selected",
+      "event": "save personal linked analysis",
+      "after": "note revision saved separately",
+      "guard": "No AuditRecord write capability in annotation adapter",
+      "oracle": "Original record_hash unchanged after note edit",
+      "persistence": "FreeformNotes.Note",
+      "method": "POST",
+      "gate": null,
+      "command_id": "audit.annotate",
+      "surface_id": "audit",
+      "semantic_owner": "W05AuditDomain",
+      "focus_after": "Audit active object/control; detached target→audit-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "First bad sequence visible; verifier exception not invalid-chain result.",
+        "503_timeout": "Audit source unavailable prevents integrity claim."
+      },
+      "test_id": "TEST-audit.annotate",
+      "evidence_id": "EVID-audit.annotate",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "audit",
+  "title": "Audit",
+  "workspace": "W05",
+  "semantic_owner": "W05AuditDomain",
+  "archetype": "AuditTraceWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W05-AUD-001",
+    "CAP-W05-AUD-002",
+    "CAP-W05-AUD-003",
+    "CAP-W05-AUD-004",
+    "CAP-W05-AUD-005",
+    "CAP-W05-AUD-006",
+    "CAP-W05-AUD-007"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W05-AUD-001",
+        "CAP-W05-AUD-002",
+        "CAP-W05-AUD-003",
+        "CAP-W05-AUD-004",
+        "CAP-W05-AUD-005",
+        "CAP-W05-AUD-006",
+        "CAP-W05-AUD-007"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Audit",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-027",
+    "NC-033",
+    "NC-035"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore",
+    "AnalyticalWorkbenchCore"
+  ],
+  "adapter": "W05AuditDomainAdapter",
+  "regions": {
+    "TOP": "Audit exact identity, local mode, command routes",
+    "LEFT": "typed AuditEvent collection/navigation",
+    "CENTER": "AuditTraceWorkbench primary task",
+    "RIGHT": "one selected AuditEvent identity/context inspector",
+    "BOTTOM": "Deep Audit diagnostics/history"
+  },
+  "command_ids": [
+    "audit.search",
+    "audit.verify",
+    "audit.annotate"
+  ]
+}

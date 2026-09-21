@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "contract": "StructuredDocumentDomainAdapter@1.1.0",
+  "selection": "StructuredSelectionModel@1.0.0",
+  "clipboard": "StructuredClipboardContract@1.0.0",
+  "flow": [
+    "StructuredFamilyEngine/consumer",
+    "StructuredSelectionModel",
+    "StructuredClipboardContract payload",
+    "StructuredDocumentDomainAdapter canonical mutation",
+    "LibraryDomainAdapter / LearnDomainAdapter / future structured consumer"
+  ],
+  "commands": [
+    "document.copy",
+    "document.cut",
+    "document.paste"
+  ],
+  "readOnly": {
+    "copy": "allowed with valid selection",
+    "cut": "denied",
+    "paste": "denied"
+  },
+  "schemaCompatibility": "exact schema id+version plus supported block types",
+  "librarySpecificStateOwned": false,
+  "deferredNotesCoreImplemented": false
+}

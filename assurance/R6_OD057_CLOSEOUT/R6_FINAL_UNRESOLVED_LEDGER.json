@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "status": "POST_R6_ONLY",
+  "items": [
+    {
+      "id": "BALANCED6_ACCEPTANCE_DATA_SEED",
+      "status": "HOLD_UNTIL_EXACT_R6_PARENT_BOUND",
+      "reason": "Explicitly outside R6; no Balanced6 mutation performed."
+    },
+    {
+      "id": "WINDOWS_FINAL_INTEGRATED_TARGET_PROOF",
+      "status": "OPEN_PENDING_TARGET_PROOF",
+      "requirements": [
+        "real ConPTY raw I/O",
+        "resize",
+        "exit/error/restart",
+        "stable session identity",
+        "PowerShell + cmd.exe + arbitrary installed executable/profile",
+        "xterm real consumer path on Windows",
+        "HWND/native detached window",
+        "observed topmost",
+        "focus/bounds",
+        "whole-surface detach for Sticky + Operational consumers",
+        "EN↔AR active input-layout direction binding"
+      ],
+      "reason": "R6 did not mutate Windows platform provider source or claim WINDOWS_TARGET_PASS."
+    },
+    {
+      "id": "R7_FINAL_BROAD_MULTI_LANE_AUDIT",
+      "status": "HOLD_UNTIL_POST_R6_POST_BALANCED6_WINDOWS_TARGET",
+      "reason": "Downstream independent final audit; not part of R6."
+    }
+  ]
+}

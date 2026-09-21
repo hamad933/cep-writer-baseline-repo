@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 2,
+  "baselineId": "CEP-FR-E18-ANALYTICAL-COMPARE-COMPLETION",
+  "records": [
+    {
+      "id": "DEV-LIBRARY-COMPAT-HOST-001",
+      "source": "Accepted Library donor parity requirement",
+      "reason": "Library alone retains the accepted donor host while representative non-Library consumers use WorkspaceFoundationHost; this is a bounded compatibility seam, not a second reusable owner.",
+      "affectedConsumers": [
+        "library"
+      ],
+      "proof": "Conditional dynamic import in dist/main.js; browser Library parity smoke; donor identity hash.",
+      "status": "APPROVED_BOUNDED_COMPATIBILITY_DEVIATION"
+    }
+  ],
+  "policy": "Every shared-mechanic deviation requires exact source, domain reason, affected consumers and executable proof."
+}

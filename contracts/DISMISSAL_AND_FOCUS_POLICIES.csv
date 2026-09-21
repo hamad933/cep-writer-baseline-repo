@@ -1,0 +1,9 @@
+component,routes,focus_policy,owner
+CommandPalette,Esc; visible Close; outside; selection,return invoker; trap tab,existing donor backdrop
+ContextActionMenu,Esc; visible Close; outside; command,return invoker; arrow/home/end,WorkspaceFoundation menu
+Dialog,Esc; visible Close; Cancel; safe outside only,trap Tab; return invoker,existing donor backdrop
+SidePane,internal collapse; external reveal; command; settings,persistent; no blur dismissal,PaneController
+Focus,same button; exit button; palette; Esc donor route,restore prior pane preference,FocusAndDismissal
+StickyNote,close; donor keep/discard; reopen,same identity; close is not source deletion,state.notes
+OperationalSurface,minimize; close presentation; open same capability,same provider session; hide is not disconnect,SessionPresentation
+Pointer move/resize,pointerup commit; Esc rollback; pointercancel rollback,restore geometry on cancellation,WindowMotion

@@ -1,0 +1,278 @@
+{
+  "objects": {
+    "BackupPackage": "packageId + schemaArtifactRef + content digest + capturedAt",
+    "RestorePlan": "planId + exact package + isolated target identity",
+    "RestoreDrill": "drillId + true-empty target + schema/content verification",
+    "ActivationRequest": "separate high-authority request; not ordinary web-child operation"
+  },
+  "state_dimensions": {
+    "package": [
+      "CREATING",
+      "CREATED",
+      "VERIFIED",
+      "INVALID"
+    ],
+    "drill": [
+      "PLANNED",
+      "PREFLIGHT_BLOCKED",
+      "STAGED",
+      "SCHEMA_BLOCKED",
+      "DRILLING",
+      "VERIFIED",
+      "FAILED"
+    ],
+    "activation": [
+      "NOT_REQUESTED",
+      "AUTHORITY_PENDING",
+      "ABANDONED"
+    ]
+  },
+  "read_model": "BackupReadService separates package integrity, isolated drill status, comparison and activation authority. #5315 remains package-time schema architecture gate.",
+  "persistence": {
+    "BackupPackage": "Platform.Backup package metadata",
+    "RestorePlan": "Platform.RestorePlan",
+    "RestoreDrill": "Platform.RestoreRun",
+    "ActivationRequest": "Parent-controlled authority record"
+  },
+  "invariants": [
+    "Current migrations do not prove historical package schema",
+    "Copying migration ledger rows does not create tables",
+    "Drill must target true-empty isolated environment",
+    "Verify/stage/drill never activate production",
+    "Integrity protection does not establish encryption"
+  ],
+  "epistemic": {
+    "empty": "No package: create/plan affordance; no restored-success status.",
+    "stale": "Live schema newer than package: display mismatch; do not substitute current migrations.",
+    "unavailable": "Package-time schema artifact absent: exact SCHEMA_DEPENDENCY and retained plan.",
+    "error": "Target not isolated/true-empty or digest mismatch blocks before destructive statement."
+  },
+  "operations": [
+    {
+      "name": "plan",
+      "family": "BackupSafetyCommand",
+      "payload": "packageId:string action:enum:plan authorityContext:authority reason:string",
+      "before": "package=VERIFIED",
+      "event": "prepare isolated restore plan",
+      "after": "drill=PLANNED",
+      "guard": "Exact package identity; target isolated; no activation authority implied",
+      "oracle": "Plan performs zero database restore writes",
+      "persistence": "Platform.RestorePlan",
+      "method": "POST",
+      "gate": null,
+      "command_id": "backup.plan",
+      "surface_id": "backup",
+      "semantic_owner": "W05BackupDomain",
+      "focus_after": "Backup & Restore active object/control; detached target→backup-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Target not isolated/true-empty or digest mismatch blocks before destructive statement.",
+        "503_timeout": "Package-time schema artifact absent: exact SCHEMA_DEPENDENCY and retained plan."
+      },
+      "test_id": "TEST-backup.plan",
+      "evidence_id": "EVID-backup.plan",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "preview",
+      "family": "BackupSafetyCommand",
+      "payload": "packageId:string drillId:string action:enum:compare authorityContext:authority reason:string",
+      "before": "drill=PLANNED|STAGED",
+      "event": "compare schema/content identities",
+      "after": "comparison with exact missing/extra artifacts",
+      "guard": "No current-checkout schema substituted",
+      "oracle": "Schema A package versus schema B checkout remains explicit conflict",
+      "persistence": "Platform.RestorePlan",
+      "method": "GET",
+      "gate": null,
+      "command_id": "backup.preview",
+      "surface_id": "backup",
+      "semantic_owner": "W05BackupDomain",
+      "focus_after": "Backup & Restore active object/control; detached target→backup-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Target not isolated/true-empty or digest mismatch blocks before destructive statement.",
+        "503_timeout": "Package-time schema artifact absent: exact SCHEMA_DEPENDENCY and retained plan."
+      },
+      "test_id": "TEST-backup.preview",
+      "evidence_id": "EVID-backup.preview",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "stage",
+      "family": "BackupSafetyCommand",
+      "payload": "packageId:string drillId:string action:enum:stage authorityContext:authority reason:string",
+      "before": "package=VERIFIED and drill=PLANNED",
+      "event": "stage verified content only",
+      "after": "drill=STAGED or SCHEMA_BLOCKED",
+      "guard": "Strict target identity/no live connection; package bytes verified",
+      "oracle": "Missing schema artifact never triggers TRUNCATE/INSERT",
+      "persistence": "Platform.RestoreRun",
+      "method": "POST",
+      "gate": "SCHEMA_DEPENDENCY",
+      "command_id": "backup.stage",
+      "surface_id": "backup",
+      "semantic_owner": "W05BackupDomain",
+      "focus_after": "Backup & Restore active object/control; detached target→backup-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Target not isolated/true-empty or digest mismatch blocks before destructive statement.",
+        "503_timeout": "Package-time schema artifact absent: exact SCHEMA_DEPENDENCY and retained plan."
+      },
+      "test_id": "TEST-backup.stage",
+      "evidence_id": "EVID-backup.stage",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "drill",
+      "family": "BackupSafetyCommand",
+      "payload": "packageId:string drillId:string action:enum:drill authorityContext:authority reason:string",
+      "before": "drill=STAGED",
+      "event": "reconstruct package-time schema then import isolated rows",
+      "after": "DRILLING then VERIFIED/FAILED",
+      "guard": "Parent chooses schema architecture; exact immutable schema artifact; true-empty proof",
+      "oracle": "Missing/extra schema input stops before application table writes",
+      "persistence": "Platform.RestoreRun",
+      "method": "POST",
+      "gate": "AUTHORITY_GATED",
+      "command_id": "backup.drill",
+      "surface_id": "backup",
+      "semantic_owner": "W05BackupDomain",
+      "focus_after": "Backup & Restore active object/control; detached target→backup-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Target not isolated/true-empty or digest mismatch blocks before destructive statement.",
+        "503_timeout": "Package-time schema artifact absent: exact SCHEMA_DEPENDENCY and retained plan."
+      },
+      "test_id": "TEST-backup.drill",
+      "evidence_id": "EVID-backup.drill",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "activationRequest",
+      "family": "BackupSafetyCommand",
+      "payload": "packageId:string drillId:string action:enum:requestActivation authorityContext:authority reason:string",
+      "before": "drill=VERIFIED",
+      "event": "prepare authority review record",
+      "after": "activation=AUTHORITY_PENDING",
+      "guard": "No direct activation endpoint in ordinary child UI",
+      "oracle": "Verified drill cannot create production restore side effect",
+      "persistence": "Parent.ActivationRequest",
+      "method": "POST",
+      "gate": "AUTHORITY_GATED",
+      "command_id": "backup.activationRequest",
+      "surface_id": "backup",
+      "semantic_owner": "W05BackupDomain",
+      "focus_after": "Backup & Restore active object/control; detached target→backup-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Target not isolated/true-empty or digest mismatch blocks before destructive statement.",
+        "503_timeout": "Package-time schema artifact absent: exact SCHEMA_DEPENDENCY and retained plan."
+      },
+      "test_id": "TEST-backup.activationRequest",
+      "evidence_id": "EVID-backup.activationRequest",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "backup",
+  "title": "Backup & Restore",
+  "workspace": "W05",
+  "semantic_owner": "W05BackupDomain",
+  "archetype": "RecoverySafetyWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W05-BKP-001",
+    "CAP-W05-BKP-002",
+    "CAP-W05-BKP-003",
+    "CAP-W05-BKP-004",
+    "CAP-W05-BKP-005",
+    "CAP-W05-BKP-006",
+    "CAP-W05-BKP-007",
+    "CAP-W05-BKP-008",
+    "CAP-W05-BKP-009",
+    "CAP-W05-BKP-010"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W05-BKP-001",
+        "CAP-W05-BKP-002",
+        "CAP-W05-BKP-003",
+        "CAP-W05-BKP-004",
+        "CAP-W05-BKP-005",
+        "CAP-W05-BKP-006",
+        "CAP-W05-BKP-007",
+        "CAP-W05-BKP-008",
+        "CAP-W05-BKP-009",
+        "CAP-W05-BKP-010"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Backup & Restore",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-027",
+    "NC-029"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore"
+  ],
+  "adapter": "W05BackupDomainAdapter",
+  "regions": {
+    "TOP": "Backup & Restore exact identity, local mode, command routes",
+    "LEFT": "typed BackupPackage collection/navigation",
+    "CENTER": "RecoverySafetyWorkbench primary task",
+    "RIGHT": "one selected BackupPackage identity/context inspector",
+    "BOTTOM": "Deep Backup & Restore diagnostics/history"
+  },
+  "command_ids": [
+    "backup.plan",
+    "backup.preview",
+    "backup.stage",
+    "backup.drill",
+    "backup.activationRequest"
+  ]
+}

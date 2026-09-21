@@ -1,0 +1,236 @@
+STEP screenshots
+STEP functional
+STEP self-close
+STEP search-keyboard
+STEP explicit-close
+STEP outside
+STEP escape
+STEP prefs
+STEP shortcut
+STEP suppression
+STEP negative
+STEP learn-second-consumer
+{
+  "classification": "PW05_EXACT_CURRENT_REAL_BROWSER_LIBRARY_PROOF",
+  "transport": "OD-20260915-038_NAVIGATION_INDEPENDENT_EXACT_CURRENT_DIST_IN_MEMORY",
+  "browserExecutable": "/usr/bin/chromium",
+  "distProvenance": {
+    "index": {
+      "bytes": 131035,
+      "sha256": "da0d1bf40e9a33cb097c8595ae1f81f3f605374b75b43cc074aa7fc6e897dfff"
+    },
+    "main": {
+      "bytes": 31578,
+      "sha256": "9a07b8f32e75d7872a48bf28a82b1c55a7f6b258d8edb72192e70c6a850718e6"
+    },
+    "css": {
+      "foundation/donor.css": {
+        "bytes": 217819,
+        "sha256": "bb3b29f51beda272d5118b9329a44250c896c0143d7ea593ec59419b02d93689"
+      },
+      "foundation/extensions.css": {
+        "bytes": 21797,
+        "sha256": "dc64b9235a08c8192aa560bce657af1a47a241d4413db654177624c480935589"
+      },
+      "foundation/global/tokens/scale.css": {
+        "bytes": 1157,
+        "sha256": "6e9d24c329c86b0595c956cbf6897c4bc11181c73fb7412c0fe5f20ef5664dda"
+      }
+    },
+    "reachableModules": 90
+  },
+  "flows": [
+    {
+      "id": "real-library-control-donor-rebind",
+      "status": "PASS",
+      "evidence": {
+        "host": "accepted-library-overflowMenu",
+        "roots": 1,
+        "owner": "SettingsCenterOwner",
+        "active": [
+          "global.settings-center"
+        ],
+        "modal": false
+      }
+    },
+    {
+      "id": "self-close-and-focus-return",
+      "status": "PASS",
+      "evidence": {
+        "open": false,
+        "active": [],
+        "focus": "toolbar-more"
+      }
+    },
+    {
+      "id": "search-one-open-keyboard",
+      "status": "PASS",
+      "evidence": {
+        "search": {
+          "query": "theme",
+          "open": "preferences.appearance",
+          "visible": [
+            "preferences.appearance",
+            "settings.general",
+            "commands.catalog"
+          ],
+          "openCount": 1
+        },
+        "end": {
+          "focused": "shortcuts.global",
+          "active": "shortcuts.global",
+          "last": "shortcuts.global"
+        },
+        "homeArrow": {
+          "focused": "preferences.editor",
+          "active": "preferences.editor"
+        }
+      }
+    },
+    {
+      "id": "explicit-dismiss",
+      "status": "PASS",
+      "evidence": {
+        "open": false,
+        "focus": "toolbar-more"
+      }
+    },
+    {
+      "id": "outside-dismiss",
+      "status": "PASS",
+      "evidence": {
+        "hidden": true,
+        "open": false,
+        "focus": "toolbar-more"
+      }
+    },
+    {
+      "id": "escape-dismiss-focus-return",
+      "status": "PASS",
+      "evidence": {
+        "hidden": true,
+        "open": false,
+        "focus": "toolbar-more"
+      }
+    },
+    {
+      "id": "bidi-ui-scale-reduced-motion-applicability",
+      "status": "PASS",
+      "evidence": {
+        "bidi": {
+          "preferred": "ltr",
+          "dir": "ltr"
+        },
+        "scale": {
+          "preferred": 1.2,
+          "css": "1.2"
+        },
+        "access": {
+          "motion": "reduced",
+          "bodyMotion": "reduced",
+          "structuredGrid": false
+        }
+      }
+    },
+    {
+      "id": "shortcut-visibility-execution-separation",
+      "status": "PASS",
+      "evidence": {
+        "globalCode": "SHORTCUT_DISPATCHED",
+        "owner": "SettingsCenterOwner",
+        "open": true,
+        "wave4Hosts": 1,
+        "donorHidden": true,
+        "transientActive": [
+          "global.settings-center"
+        ]
+      }
+    },
+    {
+      "id": "shortcut-input-suppression",
+      "status": "PASS",
+      "evidence": {
+        "before": "TRANSIENT_ESCAPE_DELEGATED",
+        "code": "TRANSIENT_ESCAPE_DELEGATED",
+        "open": true,
+        "donorHidden": false
+      }
+    },
+    {
+      "id": "negative-no-duplicate-owner-or-legacy-branch",
+      "status": "PASS",
+      "evidence": {
+        "settingsOwner": "SettingsCenterOwner",
+        "preferenceOwner": "ScopedPreferencesOwner",
+        "transientOwner": "TransientFocusOwner",
+        "donorHosts": 1,
+        "duplicateSettingsRoots": 1,
+        "oldLegacyControls": 0
+      }
+    },
+    {
+      "id": "qualified-real-learn-second-consumer-propagation",
+      "status": "PASS",
+      "evidence": {
+        "consumer": "learn",
+        "owner": "SettingsCenterOwner",
+        "open": true,
+        "settingsRoots": 1,
+        "wave4Hosts": 1,
+        "presentationHead": 1,
+        "scroll": 1,
+        "sections": 7,
+        "search": 1,
+        "globalCode": "SHORTCUT_DISPATCHED"
+      },
+      "surfaceSelectorTransport": "URLSearchParams evidence seam only; exact module bytes unchanged"
+    }
+  ],
+  "screenshots": [
+    {
+      "kind": "accepted-donor",
+      "viewport": "1440x1000",
+      "file": "donor-settings-1440x1000.png",
+      "bytes": 42348,
+      "sha256": "43834bc64ee4ad5ffcd5c5d304937954bde414920a97e100e5061b86b71fcbb2"
+    },
+    {
+      "kind": "pw05-candidate",
+      "viewport": "1440x1000",
+      "scroll": {
+        "clientHeight": 737,
+        "scrollHeight": 925,
+        "overflow": "auto"
+      },
+      "file": "candidate-settings-1440x1000.png",
+      "bytes": 38699,
+      "sha256": "01e0de0bf3f575f6e063e450a766f28bf727f2966e151b1f4b9940239d5e24b9"
+    },
+    {
+      "kind": "accepted-donor",
+      "viewport": "1024x900",
+      "file": "donor-settings-1024x900.png",
+      "bytes": 42124,
+      "sha256": "178703dcd75737312e5c0a96527b6a953ef907d074916537b7b24e89c63231b5"
+    },
+    {
+      "kind": "pw05-candidate",
+      "viewport": "1024x900",
+      "scroll": {
+        "clientHeight": 681,
+        "scrollHeight": 1185,
+        "overflow": "auto"
+      },
+      "file": "candidate-settings-1024x900.png",
+      "bytes": 26892,
+      "sha256": "e330c9cfd12bee59a8363f11a2c3fefc516b40ea04730bc0f0672ff53f6c8bc2"
+    }
+  ],
+  "errors": [],
+  "summary": {
+    "total": 11,
+    "pass": 11,
+    "fail": 0,
+    "screenshots": 4
+  }
+}

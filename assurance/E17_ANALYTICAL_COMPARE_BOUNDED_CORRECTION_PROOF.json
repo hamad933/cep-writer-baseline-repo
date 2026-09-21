@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "kind": "E17_ANALYTICAL_COMPARE_BOUNDED_CORRECTION_PROOF",
+  "status": "PASS",
+  "candidateOnly": true,
+  "controllerAccepted": false,
+  "canonicalSourceSha256": "252d822f82954f090578714b754185c90c79cd8713bf84354504be17c146ae5f",
+  "canonicalSourceFiles": 121,
+  "summary": {
+    "total": 20,
+    "pass": 20,
+    "fail": 0
+  },
+  "staticChecks": [
+    {
+      "id": "pair-canonicalized-before-resolve",
+      "pass": true
+    },
+    {
+      "id": "pair-id-rederived-and-checked",
+      "pass": true
+    },
+    {
+      "id": "keys-rederived-and-checked",
+      "pass": true
+    },
+    {
+      "id": "error-receipt-does-not-claim-forged-id",
+      "pass": true
+    },
+    {
+      "id": "duplicate-field-path-rejected",
+      "pass": true
+    },
+    {
+      "id": "non-deterministic-values-rejected",
+      "pass": true
+    },
+    {
+      "id": "ref-key-collision-monitored",
+      "pass": true
+    },
+    {
+      "id": "collision-safe-identity-helper",
+      "pass": true
+    }
+  ],
+  "tests": [
+    {
+      "id": "pair.forged-pair-id-rejected-unverified-receipt",
+      "status": "PASS",
+      "detail": {
+        "owner": "AnalyticalCompareOwner",
+        "ownerToken": "AnalyticalCompare",
+        "semanticCore": "SC-032 / AnalyticalWorkbenchCore",
+        "providerId": "rq.source-revision.compare",
+        "domainKind": "rq",
+        "pairId": "UNVERIFIED",
+        "suppliedPairId": "FORGED-PAIR-ID",
+        "comparatorVersion": "rq-compare/1.0.0",
+        "state": "ERROR",
+        "policy": {
+          "ordering": "PATH_ASC",
+          "revision": "AC-POLICY-1"
+        },
+        "diffExecuted": false,
+        "published": false,
+        "reason": "ANALYTICAL_PAIR_ID_DRIFT"
+      }
+    },
+    {
+      "id": "pair.forged-left-key-rejected",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "pair.forged-right-key-rejected",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "pair.forged-comparator-version-rejected",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "pair.forged-domain-kind-rejected",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "pair.ref-drift-with-stale-envelope-rejected",
+      "status": "PASS",
+      "detail": "ANALYTICAL_PAIR_LEFT_KEY_DRIFT"
+    },
+    {
+      "id": "pair.mutable-or-unpinned-rejected",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "session.forged-open-does-not-publish",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "session.forged-replace-fail-atomic",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "identity.rq-delimiter-collision-eliminated",
+      "status": "PASS",
+      "detail": {
+        "ka": "ACID1:a:[s:\"rq-source-revision-ref\",s:\"A\",s:\"B@C\",s:\"D\",s:\"L\"]",
+        "kb": "ACID1:a:[s:\"rq-source-revision-ref\",s:\"A@B\",s:\"C\",s:\"D\",s:\"L\"]"
+      }
+    },
+    {
+      "id": "identity.provider-ref-key-collision-detected",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "identity.provider-ref-key-nondeterminism-detected",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "fields.duplicate-path-rejected-before-diff",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "values.date-rejected",
+      "status": "PASS",
+      "detail": "ANALYTICAL_FIELD_VALUE_NON_DETERMINISTIC:x"
+    },
+    {
+      "id": "values.map-rejected",
+      "status": "PASS",
+      "detail": "ANALYTICAL_FIELD_VALUE_NON_DETERMINISTIC:x"
+    },
+    {
+      "id": "values.nan-rejected",
+      "status": "PASS",
+      "detail": "ANALYTICAL_FIELD_VALUE_NON_DETERMINISTIC:x"
+    },
+    {
+      "id": "values.infinity-rejected",
+      "status": "PASS",
+      "detail": "ANALYTICAL_FIELD_VALUE_NON_DETERMINISTIC:x"
+    },
+    {
+      "id": "values.plain-object-key-order-is-deterministic",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "values.negative-zero-distinct-from-zero",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "compatibility.comparator-version-drift-rejected",
+      "status": "PASS",
+      "detail": "PASS"
+    }
+  ]
+}

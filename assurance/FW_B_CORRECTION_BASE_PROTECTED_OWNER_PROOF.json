@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "kind": "FW_B_CORRECTION_BASE_AND_PROTECTED_OWNER_PRESERVATION",
+  "status": "PASS",
+  "generatedAt": "2026-09-11T21:44:21.862183+00:00",
+  "correctionBase": {
+    "zip": "CEP_FOUNDATION_FORGE_v0.2.1c_FW_B_STRUCTURED_SELECTION_KERNEL_CANDIDATE.zip",
+    "bytes": 5602040,
+    "sha256": "97b77faa4f769192c6f9dbfdcda2860506836f34cd77f4d9bdcd908354e62176",
+    "candidateId": "66ace0351781e248eca01734d55688eb767d5f75a6cfd7cfab90ccf562fe3871"
+  },
+  "correctedSourceCanonicalTreeSha256": "7a66cf34bda230208d6e79fa88250403dcb56b93fb4867cb310c973b431c4a5b",
+  "protectedPaths": [
+    {
+      "path": "stack/native-typescript/foundation/structured.ts",
+      "baseSha256": "a6deceb93c85cd623e80d992d4d99aeb906d05596978f497447637d660eae18b",
+      "correctedSha256": "a6deceb93c85cd623e80d992d4d99aeb906d05596978f497447637d660eae18b",
+      "unchanged": true
+    },
+    {
+      "path": "stack/native-typescript/foundation/structured/selection-contract.ts",
+      "baseSha256": "93c77df617f5148568082e368ad9366897f15c14c76c5dd8474d30ebfbe26960",
+      "correctedSha256": "93c77df617f5148568082e368ad9366897f15c14c76c5dd8474d30ebfbe26960",
+      "unchanged": true
+    },
+    {
+      "path": "stack/native-typescript/foundation/structured/selection-dom-bridge.ts",
+      "baseSha256": "452360f40d2ff34659f396672ed24f83df3deaf658a8102613e7a899db346f7c",
+      "correctedSha256": "452360f40d2ff34659f396672ed24f83df3deaf658a8102613e7a899db346f7c",
+      "unchanged": true
+    },
+    {
+      "path": "stack/native-typescript/foundation/accepted-runtime.ts",
+      "baseSha256": "ce100d86aefec8b35a7fd5c886fb5e278a4c76fd8759b56163e92a6a80f81a81",
+      "correctedSha256": "ce100d86aefec8b35a7fd5c886fb5e278a4c76fd8759b56163e92a6a80f81a81",
+      "unchanged": true
+    },
+    {
+      "path": "stack/native-typescript/adapters/structured-documents.ts",
+      "baseSha256": "dc88d75e2912efbc453549b58b0c1b94857cf74e97869863e2f72c563ade01db",
+      "correctedSha256": "dc88d75e2912efbc453549b58b0c1b94857cf74e97869863e2f72c563ade01db",
+      "unchanged": true
+    },
+    {
+      "path": "stack/native-typescript/main.ts",
+      "baseSha256": "276ef0f3df6b98aa753186eb8873da4e09e966006041538f7680cc76f586694d",
+      "correctedSha256": "276ef0f3df6b98aa753186eb8873da4e09e966006041538f7680cc76f586694d",
+      "unchanged": true
+    }
+  ],
+  "preservedOwners": [
+    "StructuredTreeKernel",
+    "StructuredMutationKernel",
+    "StructuredTransactionHistoryRecoveryOwner",
+    "StructuredCommandAvailabilityOwner"
+  ],
+  "scopeExclusions": [
+    "Clipboard",
+    "Structured keyboard",
+    "renderer",
+    "drag/drop",
+    "Workspace",
+    "Spatial",
+    "CURRENT_CONTROL",
+    "self-promotion"
+  ]
+}

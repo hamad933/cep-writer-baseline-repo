@@ -1,0 +1,122 @@
+{
+  "mission": "W3-C-CONTEXT-INSPECTOR-HOST",
+  "status": "PASS",
+  "browser": "Chromium",
+  "checks": [
+    {
+      "id": "single-host",
+      "status": "PASS",
+      "detail": "exactly one rendered ContextInspectorHost"
+    },
+    {
+      "id": "library-provider",
+      "status": "PASS",
+      "detail": "real Library/Structured provider active"
+    },
+    {
+      "id": "complementary-role",
+      "status": "PASS",
+      "detail": "inspector exposes complementary landmark"
+    },
+    {
+      "id": "labelled-heading",
+      "status": "PASS",
+      "detail": "aria-labelledby resolves to unique heading"
+    },
+    {
+      "id": "tablists",
+      "status": "PASS",
+      "detail": "lens and detail tablists are explicit"
+    },
+    {
+      "id": "tab-selected-state",
+      "status": "PASS",
+      "detail": "each tablist exposes one selected tab"
+    },
+    {
+      "id": "tabpanel",
+      "status": "PASS",
+      "detail": "active content is a tabpanel"
+    },
+    {
+      "id": "close-label",
+      "status": "PASS",
+      "detail": "close control is named"
+    },
+    {
+      "id": "pin-state",
+      "status": "PASS",
+      "detail": "pin exposes aria-pressed state"
+    },
+    {
+      "id": "technical-direction",
+      "status": "PASS",
+      "detail": "technical values are explicitly LTR"
+    },
+    {
+      "id": "pin-toggle",
+      "status": "PASS",
+      "detail": "host action toggles presentation pin state"
+    },
+    {
+      "id": "spatial-provider",
+      "status": "PASS",
+      "detail": "same host renders real Spatial provider"
+    },
+    {
+      "id": "descriptor-explicit",
+      "status": "PASS",
+      "detail": "active descriptor identity is explicit"
+    },
+    {
+      "id": "lens-action",
+      "status": "PASS",
+      "detail": "host-owned lens action updates active lens"
+    },
+    {
+      "id": "focus-return",
+      "status": "PASS",
+      "detail": "close delegates focus return to accepted TransientFocusOwner"
+    },
+    {
+      "id": "no-page-errors",
+      "status": "PASS",
+      "detail": "none"
+    },
+    {
+      "id": "a11y-duplicate-ids",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "id": "a11y-named-buttons",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "id": "a11y-tab-state",
+      "status": "PASS",
+      "detail": "0"
+    }
+  ],
+  "accessibility": {
+    "duplicateIds": [],
+    "unnamedButtons": [],
+    "invalidAriaSelected": 0
+  },
+  "screenshots": [
+    {
+      "filename": "library-context-inspector.png",
+      "bytes": 40955,
+      "sha256": "c1506759013db0443d0627bc03abf848afd03d3e6f955b2624aa2b8ddc37eff6"
+    },
+    {
+      "filename": "spatial-context-inspector.png",
+      "bytes": 49969,
+      "sha256": "6d5d4b121b3e875b8abba88eb6c20d883fb7bef93bc566fa045c78b9502d83e5"
+    }
+  ],
+  "limitations": [
+    "Isolated Wave 3 browser harness; shared workspace/DOM integration is Controller-only by controlling prompt."
+  ]
+}

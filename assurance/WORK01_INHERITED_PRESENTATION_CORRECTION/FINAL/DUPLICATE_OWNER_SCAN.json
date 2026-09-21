@@ -1,0 +1,21 @@
+{
+  "generatedAt": "2026-09-15T06:10:42.767373+00:00",
+  "status": "PASS",
+  "checks": {
+    "library_context_donor_native_gate_present": true,
+    "library_bottom_donor_native_gate_present": true,
+    "library_bottom_interceptor_guarded": true,
+    "diagnostics_explicit_route_only": true,
+    "normal_candidate_context_host_absent_both_viewports": true,
+    "normal_candidate_diagnostics_absent_both_viewports": true,
+    "candidate_history_raw_pre_absent_both_viewports": true,
+    "candidate_bottom_single_shelf_both_viewports": true,
+    "candidate_duplicate_ids_absent_both_viewports": true,
+    "explicit_diagnostics_route_retained": true,
+    "bottom_pointer_keyboard_focus_paths_pass": true,
+    "command_transient_focus_containment_pass": true,
+    "reduced_motion_a11y_negative_pass": true,
+    "focus_mode_roundtrip_pass": true
+  },
+  "interpretation": "Library keeps one Global semantic/provider owner while delegating visible Presentation to the accepted donor-native host. This is an intentional owner boundary, not a duplicate simultaneously-rendered owner."
+}

@@ -1,0 +1,3809 @@
+{
+  "filename": "CEP_LIBRARY_EDITOR_EXECUTABLE_BLUEPRINT_v1.2.17_ACCEPTED_DESIGN_REFERENCE.html",
+  "bytes": 672893,
+  "sha256": "ea66b58ef122bf2f8ca23fd0aa9e461b07da11ea7390c451902e4b1592d396fd",
+  "lines": 1892,
+  "named_function_count": 330,
+  "unique_function_count": 330,
+  "functions": [
+    {
+      "line": 1116,
+      "name": "announce"
+    },
+    {
+      "line": 1117,
+      "name": "toast"
+    },
+    {
+      "line": 1118,
+      "name": "logCommand"
+    },
+    {
+      "line": 1135,
+      "name": "canOwnChildren"
+    },
+    {
+      "line": 1136,
+      "name": "canContain"
+    },
+    {
+      "line": 1213,
+      "name": "newDocStore"
+    },
+    {
+      "line": 1238,
+      "name": "activeFixture"
+    },
+    {
+      "line": 1239,
+      "name": "getNote"
+    },
+    {
+      "line": 1240,
+      "name": "getStore"
+    },
+    {
+      "line": 1245,
+      "name": "surfaceLabel"
+    },
+    {
+      "line": 1246,
+      "name": "freshBlockId"
+    },
+    {
+      "line": 1247,
+      "name": "freshNoteId"
+    },
+    {
+      "line": 1248,
+      "name": "plainTextFromStoredHTML"
+    },
+    {
+      "line": 1249,
+      "name": "codeRaw"
+    },
+    {
+      "line": 1250,
+      "name": "blockHTML"
+    },
+    {
+      "line": 1251,
+      "name": "blockText"
+    },
+    {
+      "line": 1252,
+      "name": "inferCodeLanguage"
+    },
+    {
+      "line": 1253,
+      "name": "syntaxTokens"
+    },
+    {
+      "line": 1254,
+      "name": "syntaxRenderSegment"
+    },
+    {
+      "line": 1255,
+      "name": "renderCodeMarkup"
+    },
+    {
+      "line": 1257,
+      "name": "walk"
+    },
+    {
+      "line": 1258,
+      "name": "findRef"
+    },
+    {
+      "line": 1259,
+      "name": "maxBlockDepth"
+    },
+    {
+      "line": 1260,
+      "name": "serializeBlocks"
+    },
+    {
+      "line": 1261,
+      "name": "validTree"
+    },
+    {
+      "line": 1270,
+      "name": "pushHistory"
+    },
+    {
+      "line": 1271,
+      "name": "undo"
+    },
+    {
+      "line": 1272,
+      "name": "redo"
+    },
+    {
+      "line": 1273,
+      "name": "captureBookmark"
+    },
+    {
+      "line": 1274,
+      "name": "restoreBookmark"
+    },
+    {
+      "line": 1275,
+      "name": "textOffset"
+    },
+    {
+      "line": 1276,
+      "name": "setCaretByTextOffset"
+    },
+    {
+      "line": 1277,
+      "name": "rangeAtTextOffset"
+    },
+    {
+      "line": 1278,
+      "name": "splitHTMLAtOffset"
+    },
+    {
+      "line": 1295,
+      "name": "isRtlLocale"
+    },
+    {
+      "line": 1296,
+      "name": "resolveSystemDirection"
+    },
+    {
+      "line": 1297,
+      "name": "resolveEmptyBlockDirection"
+    },
+    {
+      "line": 1298,
+      "name": "firstStrongDirection"
+    },
+    {
+      "line": 1299,
+      "name": "blockEmptyDirectionHint"
+    },
+    {
+      "line": 1300,
+      "name": "resolvedBlockDirection"
+    },
+    {
+      "line": 1301,
+      "name": "rememberInputDirection"
+    },
+    {
+      "line": 1302,
+      "name": "updateAutoDirection"
+    },
+    {
+      "line": 1303,
+      "name": "refreshKeyboardDirectionHint"
+    },
+    {
+      "line": 1304,
+      "name": "contextualInsertionDirection"
+    },
+    {
+      "line": 1305,
+      "name": "subtreeCount"
+    },
+    {
+      "line": 1306,
+      "name": "blockContainsId"
+    },
+    {
+      "line": 1308,
+      "name": "localBlockIndent"
+    },
+    {
+      "line": 1309,
+      "name": "canStructuralIndentBlock"
+    },
+    {
+      "line": 1310,
+      "name": "canStructuralOutdentBlock"
+    },
+    {
+      "line": 1311,
+      "name": "canIndentBlock"
+    },
+    {
+      "line": 1312,
+      "name": "canOutdentBlock"
+    },
+    {
+      "line": 1313,
+      "name": "finishKeyboardStructureMutation"
+    },
+    {
+      "line": 1314,
+      "name": "indentBlock"
+    },
+    {
+      "line": 1315,
+      "name": "outdentBlock"
+    },
+    {
+      "line": 1316,
+      "name": "validateMoveTarget"
+    },
+    {
+      "line": 1317,
+      "name": "moveBlockToGap"
+    },
+    {
+      "line": 1318,
+      "name": "structurePathForBlock"
+    },
+    {
+      "line": 1319,
+      "name": "renderStructureHud"
+    },
+    {
+      "line": 1320,
+      "name": "commitDocumentTitle"
+    },
+    {
+      "line": 1321,
+      "name": "insertSiblingAfter"
+    },
+    {
+      "line": 1322,
+      "name": "structuralMergeBackward"
+    },
+    {
+      "line": 1325,
+      "name": "structuralMergeForward"
+    },
+    {
+      "line": 1326,
+      "name": "splitBlockAtCaret"
+    },
+    {
+      "line": 1327,
+      "name": "nextVisibleSibling"
+    },
+    {
+      "line": 1328,
+      "name": "showDragPreview"
+    },
+    {
+      "line": 1329,
+      "name": "hideDragPreview"
+    },
+    {
+      "line": 1330,
+      "name": "autoscrollDuringDrag"
+    },
+    {
+      "line": 1331,
+      "name": "describeInsertionTarget"
+    },
+    {
+      "line": 1332,
+      "name": "openToggleKeyboardContract"
+    },
+    {
+      "line": 1333,
+      "name": "syncOverlayGeometry"
+    },
+    {
+      "line": 1334,
+      "name": "blockMenuFilter"
+    },
+    {
+      "line": 1337,
+      "name": "formatMutationAllowed"
+    },
+    {
+      "line": 1338,
+      "name": "commandAvailability"
+    },
+    {
+      "line": 1339,
+      "name": "commandEnabled"
+    },
+    {
+      "line": 1360,
+      "name": "setSaveState"
+    },
+    {
+      "line": 1361,
+      "name": "scheduleAutosaveSimulation"
+    },
+    {
+      "line": 1362,
+      "name": "setMode"
+    },
+    {
+      "line": 1364,
+      "name": "blockPlaceholder"
+    },
+    {
+      "line": 1366,
+      "name": "codeLineLabels"
+    },
+    {
+      "line": 1367,
+      "name": "applyCodeViewToElement"
+    },
+    {
+      "line": 1368,
+      "name": "applyCodeViewPreferences"
+    },
+    {
+      "line": 1369,
+      "name": "renderSurface"
+    },
+    {
+      "line": 1370,
+      "name": "renderBlockArray"
+    },
+    {
+      "line": 1371,
+      "name": "renderGap"
+    },
+    {
+      "line": 1373,
+      "name": "renderBlock"
+    },
+    {
+      "line": 1383,
+      "name": "relatedLearningProjection"
+    },
+    {
+      "line": 1384,
+      "name": "relatedContextProjection"
+    },
+    {
+      "line": 1385,
+      "name": "renderCenterProjections"
+    },
+    {
+      "line": 1386,
+      "name": "updateMainCounts"
+    },
+    {
+      "line": 1387,
+      "name": "updateToolbarState"
+    },
+    {
+      "line": 1388,
+      "name": "commitEditable"
+    },
+    {
+      "line": 1390,
+      "name": "applyBlockFocusPreferenceDatasets"
+    },
+    {
+      "line": 1391,
+      "name": "setBlockFocusOrigin"
+    },
+    {
+      "line": 1392,
+      "name": "selectBlock"
+    },
+    {
+      "line": 1393,
+      "name": "clearBlockSelection"
+    },
+    {
+      "line": 1395,
+      "name": "dismissMainBlockFocus"
+    },
+    {
+      "line": 1397,
+      "name": "deriveGapTarget"
+    },
+    {
+      "line": 1398,
+      "name": "getArrayForParent"
+    },
+    {
+      "line": 1399,
+      "name": "makeBlock"
+    },
+    {
+      "line": 1400,
+      "name": "insertBlock"
+    },
+    {
+      "line": 1401,
+      "name": "invalidNesting"
+    },
+    {
+      "line": 1402,
+      "name": "caretSplitInsert"
+    },
+    {
+      "line": 1403,
+      "name": "focusBlock"
+    },
+    {
+      "line": 1404,
+      "name": "duplicateBlock"
+    },
+    {
+      "line": 1404,
+      "name": "reseed"
+    },
+    {
+      "line": 1405,
+      "name": "moveSibling"
+    },
+    {
+      "line": 1406,
+      "name": "removeBlock"
+    },
+    {
+      "line": 1407,
+      "name": "moveSiblingToEdge"
+    },
+    {
+      "line": 1409,
+      "name": "portableInlineHTML"
+    },
+    {
+      "line": 1409,
+      "name": "copyNode"
+    },
+    {
+      "line": 1411,
+      "name": "editorOwnedPortableInlineHTML"
+    },
+    {
+      "line": 1411,
+      "name": "copyOwned"
+    },
+    {
+      "line": 1412,
+      "name": "codePortableHTML"
+    },
+    {
+      "line": 1413,
+      "name": "blockPortableHTML"
+    },
+    {
+      "line": 1414,
+      "name": "selectedCodePortableHTML"
+    },
+    {
+      "line": 1415,
+      "name": "selectionBoundaryPortableHTML"
+    },
+    {
+      "line": 1416,
+      "name": "selectionPortableHTML"
+    },
+    {
+      "line": 1427,
+      "name": "copyPlainBlock"
+    },
+    {
+      "line": 1428,
+      "name": "blockToMarkdown"
+    },
+    {
+      "line": 1429,
+      "name": "copyMarkdownBlock"
+    },
+    {
+      "line": 1430,
+      "name": "cutBlock"
+    },
+    {
+      "line": 1431,
+      "name": "deleteConfirmationMode"
+    },
+    {
+      "line": 1432,
+      "name": "deleteRisk"
+    },
+    {
+      "line": 1433,
+      "name": "shouldConfirmDelete"
+    },
+    {
+      "line": 1434,
+      "name": "positionDeleteConfirm"
+    },
+    {
+      "line": 1435,
+      "name": "closeDeleteConfirm"
+    },
+    {
+      "line": 1436,
+      "name": "commitDeletePayload"
+    },
+    {
+      "line": 1437,
+      "name": "confirmPendingDelete"
+    },
+    {
+      "line": 1438,
+      "name": "openDeleteConfirm"
+    },
+    {
+      "line": 1439,
+      "name": "requestDeletePayload"
+    },
+    {
+      "line": 1440,
+      "name": "requestDelete"
+    },
+    {
+      "line": 1441,
+      "name": "setBlockProp"
+    },
+    {
+      "line": 1446,
+      "name": "requestConvert"
+    },
+    {
+      "line": 1447,
+      "name": "convertToPlainText"
+    },
+    {
+      "line": 1449,
+      "name": "commitConversion"
+    },
+    {
+      "line": 1450,
+      "name": "workspaceToggleState"
+    },
+    {
+      "line": 1451,
+      "name": "updateAllWorkspaceToggleControl"
+    },
+    {
+      "line": 1452,
+      "name": "toggleAllWorkspaceToggles"
+    },
+    {
+      "line": 1453,
+      "name": "toggleContainer"
+    },
+    {
+      "line": 1454,
+      "name": "enterToggleBody"
+    },
+    {
+      "line": 1455,
+      "name": "createSiblingToggle"
+    },
+    {
+      "line": 1456,
+      "name": "insertFirstChildOfContainer"
+    },
+    {
+      "line": 1457,
+      "name": "splitContainerSibling"
+    },
+    {
+      "line": 1459,
+      "name": "openInsertion"
+    },
+    {
+      "line": 1460,
+      "name": "renderInsertGrid"
+    },
+    {
+      "line": 1461,
+      "name": "closeInsertion"
+    },
+    {
+      "line": 1462,
+      "name": "positionPopover"
+    },
+    {
+      "line": 1464,
+      "name": "openBlockMenu"
+    },
+    {
+      "line": 1465,
+      "name": "blockMenuHTML"
+    },
+    {
+      "line": 1469,
+      "name": "renderSurfaceSelection"
+    },
+    {
+      "line": 1470,
+      "name": "blockSelection"
+    },
+    {
+      "line": 1471,
+      "name": "visibleBlockIds"
+    },
+    {
+      "line": 1472,
+      "name": "orderedSelectedBlockIds"
+    },
+    {
+      "line": 1473,
+      "name": "renderMultiBlockSelection"
+    },
+    {
+      "line": 1474,
+      "name": "clearMultiBlockSelection"
+    },
+    {
+      "line": 1475,
+      "name": "setMultiBlockSelection"
+    },
+    {
+      "line": 1476,
+      "name": "multiBlockRange"
+    },
+    {
+      "line": 1477,
+      "name": "handleMultiBlockClick"
+    },
+    {
+      "line": 1478,
+      "name": "blockSelectionUnionRect"
+    },
+    {
+      "line": 1479,
+      "name": "renderBlockSelectionToolbar"
+    },
+    {
+      "line": 1480,
+      "name": "copyMultiBlockSelection"
+    },
+    {
+      "line": 1481,
+      "name": "deleteMultiBlockSelectionNow"
+    },
+    {
+      "line": 1481,
+      "name": "prune"
+    },
+    {
+      "line": 1482,
+      "name": "deleteMultiBlockSelection"
+    },
+    {
+      "line": 1483,
+      "name": "multiBlockIntersection"
+    },
+    {
+      "line": 1484,
+      "name": "marqueeSafeTarget"
+    },
+    {
+      "line": 1485,
+      "name": "startBlockMarquee"
+    },
+    {
+      "line": 1486,
+      "name": "updateBlockMarquee"
+    },
+    {
+      "line": 1487,
+      "name": "finishBlockMarquee"
+    },
+    {
+      "line": 1489,
+      "name": "closeBlockMenu"
+    },
+    {
+      "line": 1491,
+      "name": "selectionContext"
+    },
+    {
+      "line": 1493,
+      "name": "selectionOffsets"
+    },
+    {
+      "line": 1494,
+      "name": "wrapCapturedRange"
+    },
+    {
+      "line": 1495,
+      "name": "unwrapNode"
+    },
+    {
+      "line": 1496,
+      "name": "clearFormattingInRange"
+    },
+    {
+      "line": 1497,
+      "name": "replaceCodeAnnotationRange"
+    },
+    {
+      "line": 1498,
+      "name": "restoreCodeSelectionAfterRender"
+    },
+    {
+      "line": 1499,
+      "name": "applyCodeAnnotation"
+    },
+    {
+      "line": 1500,
+      "name": "colorSwatches"
+    },
+    {
+      "line": 1501,
+      "name": "renderSelectionToolbarButtons"
+    },
+    {
+      "line": 1503,
+      "name": "refreshSelectionToolbarState"
+    },
+    {
+      "line": 1505,
+      "name": "updateSelectionToolbar"
+    },
+    {
+      "line": 1506,
+      "name": "positionSelectionBar"
+    },
+    {
+      "line": 1507,
+      "name": "restoreCapturedSelection"
+    },
+    {
+      "line": 1508,
+      "name": "copySelectionText"
+    },
+    {
+      "line": 1509,
+      "name": "openSelectionBlockMenu"
+    },
+    {
+      "line": 1510,
+      "name": "openInlineTarget"
+    },
+    {
+      "line": 1511,
+      "name": "closeInlineTarget"
+    },
+    {
+      "line": 1512,
+      "name": "applyInlineTarget"
+    },
+    {
+      "line": 1513,
+      "name": "applyInline"
+    },
+    {
+      "line": 1515,
+      "name": "renderStructureTree"
+    },
+    {
+      "line": 1518,
+      "name": "renderStructure"
+    },
+    {
+      "line": 1519,
+      "name": "syncLibraryControls"
+    },
+    {
+      "line": 1520,
+      "name": "treeContainsMatch"
+    },
+    {
+      "line": 1521,
+      "name": "renderTreeNode"
+    },
+    {
+      "line": 1522,
+      "name": "highlight"
+    },
+    {
+      "line": 1523,
+      "name": "findTreeNode"
+    },
+    {
+      "line": 1524,
+      "name": "findTreePathByKu"
+    },
+    {
+      "line": 1525,
+      "name": "switchKU"
+    },
+    {
+      "line": 1526,
+      "name": "syncFixtureHeader"
+    },
+    {
+      "line": 1527,
+      "name": "visibleTreeItems"
+    },
+    {
+      "line": 1528,
+      "name": "treeKeydown"
+    },
+    {
+      "line": 1531,
+      "name": "contextBlockId"
+    },
+    {
+      "line": 1532,
+      "name": "syncContextScopeButtons"
+    },
+    {
+      "line": 1534,
+      "name": "renderContextLenses"
+    },
+    {
+      "line": 1535,
+      "name": "contextTarget"
+    },
+    {
+      "line": 1537,
+      "name": "inspectReadBlock"
+    },
+    {
+      "line": 1538,
+      "name": "readerBlockMenuHTML"
+    },
+    {
+      "line": 1539,
+      "name": "openReaderBlockMenu"
+    },
+    {
+      "line": 1540,
+      "name": "bindReaderReference"
+    },
+    {
+      "line": 1541,
+      "name": "unlinkReaderReference"
+    },
+    {
+      "line": 1543,
+      "name": "renderInspector"
+    },
+    {
+      "line": 1545,
+      "name": "lensTitle"
+    },
+    {
+      "line": 1546,
+      "name": "overviewLens"
+    },
+    {
+      "line": 1548,
+      "name": "arrayLens"
+    },
+    {
+      "line": 1549,
+      "name": "sourceLens"
+    },
+    {
+      "line": 1550,
+      "name": "relationLens"
+    },
+    {
+      "line": 1551,
+      "name": "labLens"
+    },
+    {
+      "line": 1552,
+      "name": "projectLens"
+    },
+    {
+      "line": 1555,
+      "name": "evidenceLens"
+    },
+    {
+      "line": 1556,
+      "name": "relatedNotes"
+    },
+    {
+      "line": 1557,
+      "name": "notesLens"
+    },
+    {
+      "line": 1559,
+      "name": "historyLens"
+    },
+    {
+      "line": 1560,
+      "name": "createNote"
+    },
+    {
+      "line": 1562,
+      "name": "renderNotes"
+    },
+    {
+      "line": 1563,
+      "name": "renderNoteWindow"
+    },
+    {
+      "line": 1564,
+      "name": "updateNoteStatus"
+    },
+    {
+      "line": 1565,
+      "name": "openNote"
+    },
+    {
+      "line": 1566,
+      "name": "togglePin"
+    },
+    {
+      "line": 1567,
+      "name": "requestNoteClose"
+    },
+    {
+      "line": 1568,
+      "name": "closeNoteWith"
+    },
+    {
+      "line": 1569,
+      "name": "popoutNote"
+    },
+    {
+      "line": 1570,
+      "name": "clampNote"
+    },
+    {
+      "line": 1571,
+      "name": "noteKeyboardAdjust"
+    },
+    {
+      "line": 1585,
+      "name": "mirror"
+    },
+    {
+      "line": 1598,
+      "name": "preferenceSnapshot"
+    },
+    {
+      "line": 1599,
+      "name": "applyPreferenceSnapshot"
+    },
+    {
+      "line": 1617,
+      "name": "normalizeArabicSearch"
+    },
+    {
+      "line": 1618,
+      "name": "fixtureSearchText"
+    },
+    {
+      "line": 1619,
+      "name": "libraryRecord"
+    },
+    {
+      "line": 1620,
+      "name": "librarySearchScore"
+    },
+    {
+      "line": 1621,
+      "name": "librarySearchResults"
+    },
+    {
+      "line": 1622,
+      "name": "resolvedSystemTheme"
+    },
+    {
+      "line": 1623,
+      "name": "applyPresentationPreferences"
+    },
+    {
+      "line": 1624,
+      "name": "currentReferenceOriginLabel"
+    },
+    {
+      "line": 1630,
+      "name": "renderReferenceReturnControl"
+    },
+    {
+      "line": 1631,
+      "name": "bindScrollSurface"
+    },
+    {
+      "line": 1632,
+      "name": "bindTransientScrollSurfaces"
+    },
+    {
+      "line": 1633,
+      "name": "renderQuickJump"
+    },
+    {
+      "line": 1634,
+      "name": "syncQuickJumpControl"
+    },
+    {
+      "line": 1635,
+      "name": "installContainerObserver"
+    },
+    {
+      "line": 1636,
+      "name": "configureTooltips"
+    },
+    {
+      "line": 1637,
+      "name": "contextPinTarget"
+    },
+    {
+      "line": 1638,
+      "name": "toggleContextPin"
+    },
+    {
+      "line": 1639,
+      "name": "pinnedContextTarget"
+    },
+    {
+      "line": 1640,
+      "name": "applyDisclosurePreferenceOnOpen"
+    },
+    {
+      "line": 1641,
+      "name": "responsiveBand"
+    },
+    {
+      "line": 1643,
+      "name": "effectivePaneState"
+    },
+    {
+      "line": 1644,
+      "name": "setPaneState"
+    },
+    {
+      "line": 1645,
+      "name": "paneLimits"
+    },
+    {
+      "line": 1646,
+      "name": "clampPaneWidths"
+    },
+    {
+      "line": 1647,
+      "name": "persistPresentationPreferences"
+    },
+    {
+      "line": 1648,
+      "name": "restorePresentationPreferences"
+    },
+    {
+      "line": 1649,
+      "name": "applyResponsivePolicy"
+    },
+    {
+      "line": 1650,
+      "name": "paneResizeAvailable"
+    },
+    {
+      "line": 1651,
+      "name": "syncPaneCSS"
+    },
+    {
+      "line": 1652,
+      "name": "togglePane"
+    },
+    {
+      "line": 1653,
+      "name": "applyDocumentMeasure"
+    },
+    {
+      "line": 1654,
+      "name": "setDocumentWidth"
+    },
+    {
+      "line": 1655,
+      "name": "setDensity"
+    },
+    {
+      "line": 1656,
+      "name": "setEmptyBlockDirection"
+    },
+    {
+      "line": 1657,
+      "name": "resizePane"
+    },
+    {
+      "line": 1658,
+      "name": "previewPaneWidth"
+    },
+    {
+      "line": 1659,
+      "name": "setPaneWidth"
+    },
+    {
+      "line": 1660,
+      "name": "syncWorkspaceControls"
+    },
+    {
+      "line": 1661,
+      "name": "setBanner"
+    },
+    {
+      "line": 1662,
+      "name": "toggleFocus"
+    },
+    {
+      "line": 1666,
+      "name": "syncThemeControl"
+    },
+    {
+      "line": 1667,
+      "name": "applyTheme"
+    },
+    {
+      "line": 1668,
+      "name": "cycleTheme"
+    },
+    {
+      "line": 1669,
+      "name": "setThemeBehavior"
+    },
+    {
+      "line": 1670,
+      "name": "setSystemDarkTheme"
+    },
+    {
+      "line": 1671,
+      "name": "preferenceControlIdentity"
+    },
+    {
+      "line": 1672,
+      "name": "preferenceSectionDef"
+    },
+    {
+      "line": 1673,
+      "name": "renderOverflowMenu"
+    },
+    {
+      "line": 1688,
+      "name": "renderBottom"
+    },
+    {
+      "line": 1690,
+      "name": "focusableIn"
+    },
+    {
+      "line": 1691,
+      "name": "modalIsolation"
+    },
+    {
+      "line": 1692,
+      "name": "trapFocusWithin"
+    },
+    {
+      "line": 1693,
+      "name": "openBackdrop"
+    },
+    {
+      "line": 1694,
+      "name": "closeBackdrop"
+    },
+    {
+      "line": 1695,
+      "name": "trapModalTab"
+    },
+    {
+      "line": 1696,
+      "name": "ensureDynamicDialogs"
+    },
+    {
+      "line": 1698,
+      "name": "openShortcutHelp"
+    },
+    {
+      "line": 1699,
+      "name": "cyclePrimaryRegion"
+    },
+    {
+      "line": 1700,
+      "name": "syncBlockMenuDisclosures"
+    },
+    {
+      "line": 1701,
+      "name": "nestedMenuEscape"
+    },
+    {
+      "line": 1702,
+      "name": "blockMenuKeydown"
+    },
+    {
+      "line": 1704,
+      "name": "closePrimaryTransients"
+    },
+    {
+      "line": 1705,
+      "name": "topEscape"
+    },
+    {
+      "line": 1707,
+      "name": "openCommandPalette"
+    },
+    {
+      "line": 1708,
+      "name": "commandPaletteItems"
+    },
+    {
+      "line": 1730,
+      "name": "renderCommandResults"
+    },
+    {
+      "line": 1731,
+      "name": "executePaletteCommand"
+    },
+    {
+      "line": 1732,
+      "name": "openMapping"
+    },
+    {
+      "line": 1734,
+      "name": "replaceEmptyTextBlockByShorthand"
+    },
+    {
+      "line": 1736,
+      "name": "maybeHandleBlockShorthand"
+    },
+    {
+      "line": 1737,
+      "name": "handleEditableKey"
+    },
+    {
+      "line": 1754,
+      "name": "activeSurfaceForShortcut"
+    },
+    {
+      "line": 1755,
+      "name": "focusedBlockRef"
+    },
+    {
+      "line": 1756,
+      "name": "handleGlobalShortcut"
+    },
+    {
+      "line": 1757,
+      "name": "insertTextAtSelection"
+    },
+    {
+      "line": 1758,
+      "name": "insertSoftBreakAtSelection"
+    },
+    {
+      "line": 1759,
+      "name": "insertPortableHTMLAtSelection"
+    },
+    {
+      "line": 1760,
+      "name": "safePaste"
+    },
+    {
+      "line": 1761,
+      "name": "handlePointerDown"
+    },
+    {
+      "line": 1763,
+      "name": "handlePointerMove"
+    },
+    {
+      "line": 1765,
+      "name": "handlePointerUp"
+    },
+    {
+      "line": 1767,
+      "name": "moveBlockToTarget"
+    },
+    {
+      "line": 1768,
+      "name": "cancelDrag"
+    },
+    {
+      "line": 1770,
+      "name": "initSelectionToolbar"
+    },
+    {
+      "line": 1771,
+      "name": "explicitSaveSimulation"
+    },
+    {
+      "line": 1772,
+      "name": "openWorkspace"
+    },
+    {
+      "line": 1773,
+      "name": "openOverflow"
+    },
+    {
+      "line": 1774,
+      "name": "labState"
+    },
+    {
+      "line": 1776,
+      "name": "initStaticDOM"
+    },
+    {
+      "line": 1778,
+      "name": "bindEvents"
+    },
+    {
+      "line": 1847,
+      "name": "getVisibleContextOwnerCount"
+    },
+    {
+      "line": 1848,
+      "name": "inspect"
+    },
+    {
+      "line": 1852,
+      "name": "init"
+    }
+  ],
+  "function_categories": {
+    "WORKSPACE_PANE_LAYOUT": [
+      {
+        "line": 1450,
+        "name": "workspaceToggleState"
+      },
+      {
+        "line": 1451,
+        "name": "updateAllWorkspaceToggleControl"
+      },
+      {
+        "line": 1452,
+        "name": "toggleAllWorkspaceToggles"
+      },
+      {
+        "line": 1643,
+        "name": "effectivePaneState"
+      },
+      {
+        "line": 1644,
+        "name": "setPaneState"
+      },
+      {
+        "line": 1645,
+        "name": "paneLimits"
+      },
+      {
+        "line": 1646,
+        "name": "clampPaneWidths"
+      },
+      {
+        "line": 1650,
+        "name": "paneResizeAvailable"
+      },
+      {
+        "line": 1651,
+        "name": "syncPaneCSS"
+      },
+      {
+        "line": 1652,
+        "name": "togglePane"
+      },
+      {
+        "line": 1657,
+        "name": "resizePane"
+      },
+      {
+        "line": 1658,
+        "name": "previewPaneWidth"
+      },
+      {
+        "line": 1659,
+        "name": "setPaneWidth"
+      },
+      {
+        "line": 1660,
+        "name": "syncWorkspaceControls"
+      },
+      {
+        "line": 1661,
+        "name": "setBanner"
+      },
+      {
+        "line": 1688,
+        "name": "renderBottom"
+      },
+      {
+        "line": 1772,
+        "name": "openWorkspace"
+      }
+    ],
+    "CONTEXT_INSPECTOR": [
+      {
+        "line": 1304,
+        "name": "contextualInsertionDirection"
+      },
+      {
+        "line": 1368,
+        "name": "applyCodeViewPreferences"
+      },
+      {
+        "line": 1384,
+        "name": "relatedContextProjection"
+      },
+      {
+        "line": 1390,
+        "name": "applyBlockFocusPreferenceDatasets"
+      },
+      {
+        "line": 1491,
+        "name": "selectionContext"
+      },
+      {
+        "line": 1531,
+        "name": "contextBlockId"
+      },
+      {
+        "line": 1532,
+        "name": "syncContextScopeButtons"
+      },
+      {
+        "line": 1534,
+        "name": "renderContextLenses"
+      },
+      {
+        "line": 1535,
+        "name": "contextTarget"
+      },
+      {
+        "line": 1540,
+        "name": "bindReaderReference"
+      },
+      {
+        "line": 1541,
+        "name": "unlinkReaderReference"
+      },
+      {
+        "line": 1543,
+        "name": "renderInspector"
+      },
+      {
+        "line": 1545,
+        "name": "lensTitle"
+      },
+      {
+        "line": 1546,
+        "name": "overviewLens"
+      },
+      {
+        "line": 1548,
+        "name": "arrayLens"
+      },
+      {
+        "line": 1549,
+        "name": "sourceLens"
+      },
+      {
+        "line": 1550,
+        "name": "relationLens"
+      },
+      {
+        "line": 1551,
+        "name": "labLens"
+      },
+      {
+        "line": 1552,
+        "name": "projectLens"
+      },
+      {
+        "line": 1555,
+        "name": "evidenceLens"
+      },
+      {
+        "line": 1557,
+        "name": "notesLens"
+      },
+      {
+        "line": 1559,
+        "name": "historyLens"
+      },
+      {
+        "line": 1598,
+        "name": "preferenceSnapshot"
+      },
+      {
+        "line": 1599,
+        "name": "applyPreferenceSnapshot"
+      },
+      {
+        "line": 1623,
+        "name": "applyPresentationPreferences"
+      },
+      {
+        "line": 1624,
+        "name": "currentReferenceOriginLabel"
+      },
+      {
+        "line": 1630,
+        "name": "renderReferenceReturnControl"
+      },
+      {
+        "line": 1637,
+        "name": "contextPinTarget"
+      },
+      {
+        "line": 1638,
+        "name": "toggleContextPin"
+      },
+      {
+        "line": 1639,
+        "name": "pinnedContextTarget"
+      },
+      {
+        "line": 1640,
+        "name": "applyDisclosurePreferenceOnOpen"
+      },
+      {
+        "line": 1647,
+        "name": "persistPresentationPreferences"
+      },
+      {
+        "line": 1648,
+        "name": "restorePresentationPreferences"
+      },
+      {
+        "line": 1671,
+        "name": "preferenceControlIdentity"
+      },
+      {
+        "line": 1672,
+        "name": "preferenceSectionDef"
+      },
+      {
+        "line": 1847,
+        "name": "getVisibleContextOwnerCount"
+      }
+    ],
+    "COMMAND_ACTION": [
+      {
+        "line": 1118,
+        "name": "logCommand"
+      },
+      {
+        "line": 1338,
+        "name": "commandAvailability"
+      },
+      {
+        "line": 1339,
+        "name": "commandEnabled"
+      },
+      {
+        "line": 1698,
+        "name": "openShortcutHelp"
+      },
+      {
+        "line": 1707,
+        "name": "openCommandPalette"
+      },
+      {
+        "line": 1708,
+        "name": "commandPaletteItems"
+      },
+      {
+        "line": 1730,
+        "name": "renderCommandResults"
+      },
+      {
+        "line": 1731,
+        "name": "executePaletteCommand"
+      },
+      {
+        "line": 1754,
+        "name": "activeSurfaceForShortcut"
+      },
+      {
+        "line": 1756,
+        "name": "handleGlobalShortcut"
+      }
+    ],
+    "UNIFIED_EDITOR_BLOCK": [
+      {
+        "line": 1246,
+        "name": "freshBlockId"
+      },
+      {
+        "line": 1250,
+        "name": "blockHTML"
+      },
+      {
+        "line": 1251,
+        "name": "blockText"
+      },
+      {
+        "line": 1259,
+        "name": "maxBlockDepth"
+      },
+      {
+        "line": 1260,
+        "name": "serializeBlocks"
+      },
+      {
+        "line": 1276,
+        "name": "setCaretByTextOffset"
+      },
+      {
+        "line": 1297,
+        "name": "resolveEmptyBlockDirection"
+      },
+      {
+        "line": 1299,
+        "name": "blockEmptyDirectionHint"
+      },
+      {
+        "line": 1300,
+        "name": "resolvedBlockDirection"
+      },
+      {
+        "line": 1304,
+        "name": "contextualInsertionDirection"
+      },
+      {
+        "line": 1306,
+        "name": "blockContainsId"
+      },
+      {
+        "line": 1308,
+        "name": "localBlockIndent"
+      },
+      {
+        "line": 1309,
+        "name": "canStructuralIndentBlock"
+      },
+      {
+        "line": 1310,
+        "name": "canStructuralOutdentBlock"
+      },
+      {
+        "line": 1311,
+        "name": "canIndentBlock"
+      },
+      {
+        "line": 1312,
+        "name": "canOutdentBlock"
+      },
+      {
+        "line": 1314,
+        "name": "indentBlock"
+      },
+      {
+        "line": 1315,
+        "name": "outdentBlock"
+      },
+      {
+        "line": 1317,
+        "name": "moveBlockToGap"
+      },
+      {
+        "line": 1318,
+        "name": "structurePathForBlock"
+      },
+      {
+        "line": 1320,
+        "name": "commitDocumentTitle"
+      },
+      {
+        "line": 1321,
+        "name": "insertSiblingAfter"
+      },
+      {
+        "line": 1326,
+        "name": "splitBlockAtCaret"
+      },
+      {
+        "line": 1331,
+        "name": "describeInsertionTarget"
+      },
+      {
+        "line": 1332,
+        "name": "openToggleKeyboardContract"
+      },
+      {
+        "line": 1334,
+        "name": "blockMenuFilter"
+      },
+      {
+        "line": 1364,
+        "name": "blockPlaceholder"
+      },
+      {
+        "line": 1370,
+        "name": "renderBlockArray"
+      },
+      {
+        "line": 1373,
+        "name": "renderBlock"
+      },
+      {
+        "line": 1390,
+        "name": "applyBlockFocusPreferenceDatasets"
+      },
+      {
+        "line": 1391,
+        "name": "setBlockFocusOrigin"
+      },
+      {
+        "line": 1392,
+        "name": "selectBlock"
+      },
+      {
+        "line": 1393,
+        "name": "clearBlockSelection"
+      },
+      {
+        "line": 1395,
+        "name": "dismissMainBlockFocus"
+      },
+      {
+        "line": 1399,
+        "name": "makeBlock"
+      },
+      {
+        "line": 1400,
+        "name": "insertBlock"
+      },
+      {
+        "line": 1402,
+        "name": "caretSplitInsert"
+      },
+      {
+        "line": 1403,
+        "name": "focusBlock"
+      },
+      {
+        "line": 1404,
+        "name": "duplicateBlock"
+      },
+      {
+        "line": 1406,
+        "name": "removeBlock"
+      },
+      {
+        "line": 1413,
+        "name": "blockPortableHTML"
+      },
+      {
+        "line": 1427,
+        "name": "copyPlainBlock"
+      },
+      {
+        "line": 1428,
+        "name": "blockToMarkdown"
+      },
+      {
+        "line": 1429,
+        "name": "copyMarkdownBlock"
+      },
+      {
+        "line": 1430,
+        "name": "cutBlock"
+      },
+      {
+        "line": 1441,
+        "name": "setBlockProp"
+      },
+      {
+        "line": 1446,
+        "name": "requestConvert"
+      },
+      {
+        "line": 1447,
+        "name": "convertToPlainText"
+      },
+      {
+        "line": 1450,
+        "name": "workspaceToggleState"
+      },
+      {
+        "line": 1451,
+        "name": "updateAllWorkspaceToggleControl"
+      },
+      {
+        "line": 1452,
+        "name": "toggleAllWorkspaceToggles"
+      },
+      {
+        "line": 1453,
+        "name": "toggleContainer"
+      },
+      {
+        "line": 1454,
+        "name": "enterToggleBody"
+      },
+      {
+        "line": 1455,
+        "name": "createSiblingToggle"
+      },
+      {
+        "line": 1456,
+        "name": "insertFirstChildOfContainer"
+      },
+      {
+        "line": 1459,
+        "name": "openInsertion"
+      },
+      {
+        "line": 1460,
+        "name": "renderInsertGrid"
+      },
+      {
+        "line": 1461,
+        "name": "closeInsertion"
+      },
+      {
+        "line": 1464,
+        "name": "openBlockMenu"
+      },
+      {
+        "line": 1465,
+        "name": "blockMenuHTML"
+      },
+      {
+        "line": 1470,
+        "name": "blockSelection"
+      },
+      {
+        "line": 1471,
+        "name": "visibleBlockIds"
+      },
+      {
+        "line": 1472,
+        "name": "orderedSelectedBlockIds"
+      },
+      {
+        "line": 1473,
+        "name": "renderMultiBlockSelection"
+      },
+      {
+        "line": 1474,
+        "name": "clearMultiBlockSelection"
+      },
+      {
+        "line": 1475,
+        "name": "setMultiBlockSelection"
+      },
+      {
+        "line": 1476,
+        "name": "multiBlockRange"
+      },
+      {
+        "line": 1477,
+        "name": "handleMultiBlockClick"
+      },
+      {
+        "line": 1478,
+        "name": "blockSelectionUnionRect"
+      },
+      {
+        "line": 1479,
+        "name": "renderBlockSelectionToolbar"
+      },
+      {
+        "line": 1480,
+        "name": "copyMultiBlockSelection"
+      },
+      {
+        "line": 1481,
+        "name": "deleteMultiBlockSelectionNow"
+      },
+      {
+        "line": 1482,
+        "name": "deleteMultiBlockSelection"
+      },
+      {
+        "line": 1483,
+        "name": "multiBlockIntersection"
+      },
+      {
+        "line": 1485,
+        "name": "startBlockMarquee"
+      },
+      {
+        "line": 1486,
+        "name": "updateBlockMarquee"
+      },
+      {
+        "line": 1487,
+        "name": "finishBlockMarquee"
+      },
+      {
+        "line": 1489,
+        "name": "closeBlockMenu"
+      },
+      {
+        "line": 1509,
+        "name": "openSelectionBlockMenu"
+      },
+      {
+        "line": 1531,
+        "name": "contextBlockId"
+      },
+      {
+        "line": 1537,
+        "name": "inspectReadBlock"
+      },
+      {
+        "line": 1538,
+        "name": "readerBlockMenuHTML"
+      },
+      {
+        "line": 1539,
+        "name": "openReaderBlockMenu"
+      },
+      {
+        "line": 1566,
+        "name": "togglePin"
+      },
+      {
+        "line": 1638,
+        "name": "toggleContextPin"
+      },
+      {
+        "line": 1652,
+        "name": "togglePane"
+      },
+      {
+        "line": 1653,
+        "name": "applyDocumentMeasure"
+      },
+      {
+        "line": 1654,
+        "name": "setDocumentWidth"
+      },
+      {
+        "line": 1656,
+        "name": "setEmptyBlockDirection"
+      },
+      {
+        "line": 1662,
+        "name": "toggleFocus"
+      },
+      {
+        "line": 1700,
+        "name": "syncBlockMenuDisclosures"
+      },
+      {
+        "line": 1702,
+        "name": "blockMenuKeydown"
+      },
+      {
+        "line": 1734,
+        "name": "replaceEmptyTextBlockByShorthand"
+      },
+      {
+        "line": 1736,
+        "name": "maybeHandleBlockShorthand"
+      },
+      {
+        "line": 1755,
+        "name": "focusedBlockRef"
+      },
+      {
+        "line": 1757,
+        "name": "insertTextAtSelection"
+      },
+      {
+        "line": 1758,
+        "name": "insertSoftBreakAtSelection"
+      },
+      {
+        "line": 1759,
+        "name": "insertPortableHTMLAtSelection"
+      },
+      {
+        "line": 1767,
+        "name": "moveBlockToTarget"
+      }
+    ],
+    "SELECTION": [
+      {
+        "line": 1277,
+        "name": "rangeAtTextOffset"
+      },
+      {
+        "line": 1392,
+        "name": "selectBlock"
+      },
+      {
+        "line": 1393,
+        "name": "clearBlockSelection"
+      },
+      {
+        "line": 1409,
+        "name": "portableInlineHTML"
+      },
+      {
+        "line": 1411,
+        "name": "editorOwnedPortableInlineHTML"
+      },
+      {
+        "line": 1414,
+        "name": "selectedCodePortableHTML"
+      },
+      {
+        "line": 1415,
+        "name": "selectionBoundaryPortableHTML"
+      },
+      {
+        "line": 1416,
+        "name": "selectionPortableHTML"
+      },
+      {
+        "line": 1469,
+        "name": "renderSurfaceSelection"
+      },
+      {
+        "line": 1470,
+        "name": "blockSelection"
+      },
+      {
+        "line": 1472,
+        "name": "orderedSelectedBlockIds"
+      },
+      {
+        "line": 1473,
+        "name": "renderMultiBlockSelection"
+      },
+      {
+        "line": 1474,
+        "name": "clearMultiBlockSelection"
+      },
+      {
+        "line": 1475,
+        "name": "setMultiBlockSelection"
+      },
+      {
+        "line": 1476,
+        "name": "multiBlockRange"
+      },
+      {
+        "line": 1478,
+        "name": "blockSelectionUnionRect"
+      },
+      {
+        "line": 1479,
+        "name": "renderBlockSelectionToolbar"
+      },
+      {
+        "line": 1480,
+        "name": "copyMultiBlockSelection"
+      },
+      {
+        "line": 1481,
+        "name": "deleteMultiBlockSelectionNow"
+      },
+      {
+        "line": 1482,
+        "name": "deleteMultiBlockSelection"
+      },
+      {
+        "line": 1491,
+        "name": "selectionContext"
+      },
+      {
+        "line": 1493,
+        "name": "selectionOffsets"
+      },
+      {
+        "line": 1494,
+        "name": "wrapCapturedRange"
+      },
+      {
+        "line": 1496,
+        "name": "clearFormattingInRange"
+      },
+      {
+        "line": 1497,
+        "name": "replaceCodeAnnotationRange"
+      },
+      {
+        "line": 1498,
+        "name": "restoreCodeSelectionAfterRender"
+      },
+      {
+        "line": 1501,
+        "name": "renderSelectionToolbarButtons"
+      },
+      {
+        "line": 1503,
+        "name": "refreshSelectionToolbarState"
+      },
+      {
+        "line": 1505,
+        "name": "updateSelectionToolbar"
+      },
+      {
+        "line": 1506,
+        "name": "positionSelectionBar"
+      },
+      {
+        "line": 1507,
+        "name": "restoreCapturedSelection"
+      },
+      {
+        "line": 1508,
+        "name": "copySelectionText"
+      },
+      {
+        "line": 1509,
+        "name": "openSelectionBlockMenu"
+      },
+      {
+        "line": 1510,
+        "name": "openInlineTarget"
+      },
+      {
+        "line": 1511,
+        "name": "closeInlineTarget"
+      },
+      {
+        "line": 1512,
+        "name": "applyInlineTarget"
+      },
+      {
+        "line": 1513,
+        "name": "applyInline"
+      },
+      {
+        "line": 1757,
+        "name": "insertTextAtSelection"
+      },
+      {
+        "line": 1758,
+        "name": "insertSoftBreakAtSelection"
+      },
+      {
+        "line": 1759,
+        "name": "insertPortableHTMLAtSelection"
+      },
+      {
+        "line": 1770,
+        "name": "initSelectionToolbar"
+      }
+    ],
+    "CLIPBOARD": [
+      {
+        "line": 1409,
+        "name": "portableInlineHTML"
+      },
+      {
+        "line": 1409,
+        "name": "copyNode"
+      },
+      {
+        "line": 1411,
+        "name": "editorOwnedPortableInlineHTML"
+      },
+      {
+        "line": 1411,
+        "name": "copyOwned"
+      },
+      {
+        "line": 1412,
+        "name": "codePortableHTML"
+      },
+      {
+        "line": 1413,
+        "name": "blockPortableHTML"
+      },
+      {
+        "line": 1414,
+        "name": "selectedCodePortableHTML"
+      },
+      {
+        "line": 1415,
+        "name": "selectionBoundaryPortableHTML"
+      },
+      {
+        "line": 1416,
+        "name": "selectionPortableHTML"
+      },
+      {
+        "line": 1427,
+        "name": "copyPlainBlock"
+      },
+      {
+        "line": 1428,
+        "name": "blockToMarkdown"
+      },
+      {
+        "line": 1429,
+        "name": "copyMarkdownBlock"
+      },
+      {
+        "line": 1430,
+        "name": "cutBlock"
+      },
+      {
+        "line": 1480,
+        "name": "copyMultiBlockSelection"
+      },
+      {
+        "line": 1508,
+        "name": "copySelectionText"
+      },
+      {
+        "line": 1698,
+        "name": "openShortcutHelp"
+      },
+      {
+        "line": 1731,
+        "name": "executePaletteCommand"
+      },
+      {
+        "line": 1754,
+        "name": "activeSurfaceForShortcut"
+      },
+      {
+        "line": 1756,
+        "name": "handleGlobalShortcut"
+      },
+      {
+        "line": 1759,
+        "name": "insertPortableHTMLAtSelection"
+      },
+      {
+        "line": 1760,
+        "name": "safePaste"
+      }
+    ],
+    "NOTES_STICKY": [
+      {
+        "line": 1239,
+        "name": "getNote"
+      },
+      {
+        "line": 1247,
+        "name": "freshNoteId"
+      },
+      {
+        "line": 1556,
+        "name": "relatedNotes"
+      },
+      {
+        "line": 1557,
+        "name": "notesLens"
+      },
+      {
+        "line": 1560,
+        "name": "createNote"
+      },
+      {
+        "line": 1562,
+        "name": "renderNotes"
+      },
+      {
+        "line": 1563,
+        "name": "renderNoteWindow"
+      },
+      {
+        "line": 1564,
+        "name": "updateNoteStatus"
+      },
+      {
+        "line": 1565,
+        "name": "openNote"
+      },
+      {
+        "line": 1567,
+        "name": "requestNoteClose"
+      },
+      {
+        "line": 1568,
+        "name": "closeNoteWith"
+      },
+      {
+        "line": 1569,
+        "name": "popoutNote"
+      },
+      {
+        "line": 1570,
+        "name": "clampNote"
+      },
+      {
+        "line": 1571,
+        "name": "noteKeyboardAdjust"
+      }
+    ],
+    "HISTORY_RECOVERY": [
+      {
+        "line": 1270,
+        "name": "pushHistory"
+      },
+      {
+        "line": 1271,
+        "name": "undo"
+      },
+      {
+        "line": 1272,
+        "name": "redo"
+      },
+      {
+        "line": 1273,
+        "name": "captureBookmark"
+      },
+      {
+        "line": 1274,
+        "name": "restoreBookmark"
+      },
+      {
+        "line": 1559,
+        "name": "historyLens"
+      }
+    ],
+    "PREFERENCES_SETTINGS": [
+      {
+        "line": 1361,
+        "name": "scheduleAutosaveSimulation"
+      },
+      {
+        "line": 1368,
+        "name": "applyCodeViewPreferences"
+      },
+      {
+        "line": 1390,
+        "name": "applyBlockFocusPreferenceDatasets"
+      },
+      {
+        "line": 1598,
+        "name": "preferenceSnapshot"
+      },
+      {
+        "line": 1599,
+        "name": "applyPreferenceSnapshot"
+      },
+      {
+        "line": 1622,
+        "name": "resolvedSystemTheme"
+      },
+      {
+        "line": 1623,
+        "name": "applyPresentationPreferences"
+      },
+      {
+        "line": 1640,
+        "name": "applyDisclosurePreferenceOnOpen"
+      },
+      {
+        "line": 1647,
+        "name": "persistPresentationPreferences"
+      },
+      {
+        "line": 1648,
+        "name": "restorePresentationPreferences"
+      },
+      {
+        "line": 1655,
+        "name": "setDensity"
+      },
+      {
+        "line": 1666,
+        "name": "syncThemeControl"
+      },
+      {
+        "line": 1667,
+        "name": "applyTheme"
+      },
+      {
+        "line": 1668,
+        "name": "cycleTheme"
+      },
+      {
+        "line": 1669,
+        "name": "setThemeBehavior"
+      },
+      {
+        "line": 1670,
+        "name": "setSystemDarkTheme"
+      },
+      {
+        "line": 1671,
+        "name": "preferenceControlIdentity"
+      },
+      {
+        "line": 1672,
+        "name": "preferenceSectionDef"
+      },
+      {
+        "line": 1700,
+        "name": "syncBlockMenuDisclosures"
+      }
+    ],
+    "FOCUS_ACCESSIBILITY": [
+      {
+        "line": 1116,
+        "name": "announce"
+      },
+      {
+        "line": 1390,
+        "name": "applyBlockFocusPreferenceDatasets"
+      },
+      {
+        "line": 1391,
+        "name": "setBlockFocusOrigin"
+      },
+      {
+        "line": 1395,
+        "name": "dismissMainBlockFocus"
+      },
+      {
+        "line": 1403,
+        "name": "focusBlock"
+      },
+      {
+        "line": 1636,
+        "name": "configureTooltips"
+      },
+      {
+        "line": 1662,
+        "name": "toggleFocus"
+      },
+      {
+        "line": 1690,
+        "name": "focusableIn"
+      },
+      {
+        "line": 1692,
+        "name": "trapFocusWithin"
+      },
+      {
+        "line": 1699,
+        "name": "cyclePrimaryRegion"
+      },
+      {
+        "line": 1755,
+        "name": "focusedBlockRef"
+      }
+    ],
+    "RESPONSIVE": [
+      {
+        "line": 1570,
+        "name": "clampNote"
+      },
+      {
+        "line": 1641,
+        "name": "responsiveBand"
+      },
+      {
+        "line": 1646,
+        "name": "clampPaneWidths"
+      },
+      {
+        "line": 1649,
+        "name": "applyResponsivePolicy"
+      }
+    ],
+    "STORAGE_SAVE": [
+      {
+        "line": 1360,
+        "name": "setSaveState"
+      },
+      {
+        "line": 1361,
+        "name": "scheduleAutosaveSimulation"
+      },
+      {
+        "line": 1647,
+        "name": "persistPresentationPreferences"
+      },
+      {
+        "line": 1771,
+        "name": "explicitSaveSimulation"
+      }
+    ],
+    "DRAG_POINTER": [
+      {
+        "line": 1328,
+        "name": "showDragPreview"
+      },
+      {
+        "line": 1329,
+        "name": "hideDragPreview"
+      },
+      {
+        "line": 1330,
+        "name": "autoscrollDuringDrag"
+      },
+      {
+        "line": 1484,
+        "name": "marqueeSafeTarget"
+      },
+      {
+        "line": 1485,
+        "name": "startBlockMarquee"
+      },
+      {
+        "line": 1486,
+        "name": "updateBlockMarquee"
+      },
+      {
+        "line": 1487,
+        "name": "finishBlockMarquee"
+      },
+      {
+        "line": 1693,
+        "name": "openBackdrop"
+      },
+      {
+        "line": 1694,
+        "name": "closeBackdrop"
+      },
+      {
+        "line": 1761,
+        "name": "handlePointerDown"
+      },
+      {
+        "line": 1763,
+        "name": "handlePointerMove"
+      },
+      {
+        "line": 1765,
+        "name": "handlePointerUp"
+      },
+      {
+        "line": 1768,
+        "name": "cancelDrag"
+      }
+    ],
+    "CODE": [
+      {
+        "line": 1249,
+        "name": "codeRaw"
+      },
+      {
+        "line": 1252,
+        "name": "inferCodeLanguage"
+      },
+      {
+        "line": 1253,
+        "name": "syntaxTokens"
+      },
+      {
+        "line": 1254,
+        "name": "syntaxRenderSegment"
+      },
+      {
+        "line": 1255,
+        "name": "renderCodeMarkup"
+      },
+      {
+        "line": 1366,
+        "name": "codeLineLabels"
+      },
+      {
+        "line": 1367,
+        "name": "applyCodeViewToElement"
+      },
+      {
+        "line": 1368,
+        "name": "applyCodeViewPreferences"
+      },
+      {
+        "line": 1412,
+        "name": "codePortableHTML"
+      },
+      {
+        "line": 1414,
+        "name": "selectedCodePortableHTML"
+      },
+      {
+        "line": 1497,
+        "name": "replaceCodeAnnotationRange"
+      },
+      {
+        "line": 1498,
+        "name": "restoreCodeSelectionAfterRender"
+      },
+      {
+        "line": 1499,
+        "name": "applyCodeAnnotation"
+      }
+    ],
+    "OTHER": [
+      {
+        "line": 1117,
+        "name": "toast"
+      },
+      {
+        "line": 1135,
+        "name": "canOwnChildren"
+      },
+      {
+        "line": 1136,
+        "name": "canContain"
+      },
+      {
+        "line": 1213,
+        "name": "newDocStore"
+      },
+      {
+        "line": 1238,
+        "name": "activeFixture"
+      },
+      {
+        "line": 1240,
+        "name": "getStore"
+      },
+      {
+        "line": 1245,
+        "name": "surfaceLabel"
+      },
+      {
+        "line": 1248,
+        "name": "plainTextFromStoredHTML"
+      },
+      {
+        "line": 1257,
+        "name": "walk"
+      },
+      {
+        "line": 1258,
+        "name": "findRef"
+      },
+      {
+        "line": 1261,
+        "name": "validTree"
+      },
+      {
+        "line": 1275,
+        "name": "textOffset"
+      },
+      {
+        "line": 1278,
+        "name": "splitHTMLAtOffset"
+      },
+      {
+        "line": 1295,
+        "name": "isRtlLocale"
+      },
+      {
+        "line": 1296,
+        "name": "resolveSystemDirection"
+      },
+      {
+        "line": 1298,
+        "name": "firstStrongDirection"
+      },
+      {
+        "line": 1301,
+        "name": "rememberInputDirection"
+      },
+      {
+        "line": 1302,
+        "name": "updateAutoDirection"
+      },
+      {
+        "line": 1303,
+        "name": "refreshKeyboardDirectionHint"
+      },
+      {
+        "line": 1305,
+        "name": "subtreeCount"
+      },
+      {
+        "line": 1313,
+        "name": "finishKeyboardStructureMutation"
+      },
+      {
+        "line": 1316,
+        "name": "validateMoveTarget"
+      },
+      {
+        "line": 1319,
+        "name": "renderStructureHud"
+      },
+      {
+        "line": 1322,
+        "name": "structuralMergeBackward"
+      },
+      {
+        "line": 1325,
+        "name": "structuralMergeForward"
+      },
+      {
+        "line": 1327,
+        "name": "nextVisibleSibling"
+      },
+      {
+        "line": 1333,
+        "name": "syncOverlayGeometry"
+      },
+      {
+        "line": 1337,
+        "name": "formatMutationAllowed"
+      },
+      {
+        "line": 1362,
+        "name": "setMode"
+      },
+      {
+        "line": 1369,
+        "name": "renderSurface"
+      },
+      {
+        "line": 1371,
+        "name": "renderGap"
+      },
+      {
+        "line": 1383,
+        "name": "relatedLearningProjection"
+      },
+      {
+        "line": 1385,
+        "name": "renderCenterProjections"
+      },
+      {
+        "line": 1386,
+        "name": "updateMainCounts"
+      },
+      {
+        "line": 1387,
+        "name": "updateToolbarState"
+      },
+      {
+        "line": 1388,
+        "name": "commitEditable"
+      },
+      {
+        "line": 1397,
+        "name": "deriveGapTarget"
+      },
+      {
+        "line": 1398,
+        "name": "getArrayForParent"
+      },
+      {
+        "line": 1401,
+        "name": "invalidNesting"
+      },
+      {
+        "line": 1404,
+        "name": "reseed"
+      },
+      {
+        "line": 1405,
+        "name": "moveSibling"
+      },
+      {
+        "line": 1407,
+        "name": "moveSiblingToEdge"
+      },
+      {
+        "line": 1431,
+        "name": "deleteConfirmationMode"
+      },
+      {
+        "line": 1432,
+        "name": "deleteRisk"
+      },
+      {
+        "line": 1433,
+        "name": "shouldConfirmDelete"
+      },
+      {
+        "line": 1434,
+        "name": "positionDeleteConfirm"
+      },
+      {
+        "line": 1435,
+        "name": "closeDeleteConfirm"
+      },
+      {
+        "line": 1436,
+        "name": "commitDeletePayload"
+      },
+      {
+        "line": 1437,
+        "name": "confirmPendingDelete"
+      },
+      {
+        "line": 1438,
+        "name": "openDeleteConfirm"
+      },
+      {
+        "line": 1439,
+        "name": "requestDeletePayload"
+      },
+      {
+        "line": 1440,
+        "name": "requestDelete"
+      },
+      {
+        "line": 1449,
+        "name": "commitConversion"
+      },
+      {
+        "line": 1457,
+        "name": "splitContainerSibling"
+      },
+      {
+        "line": 1462,
+        "name": "positionPopover"
+      },
+      {
+        "line": 1481,
+        "name": "prune"
+      },
+      {
+        "line": 1495,
+        "name": "unwrapNode"
+      },
+      {
+        "line": 1500,
+        "name": "colorSwatches"
+      },
+      {
+        "line": 1515,
+        "name": "renderStructureTree"
+      },
+      {
+        "line": 1518,
+        "name": "renderStructure"
+      },
+      {
+        "line": 1519,
+        "name": "syncLibraryControls"
+      },
+      {
+        "line": 1520,
+        "name": "treeContainsMatch"
+      },
+      {
+        "line": 1521,
+        "name": "renderTreeNode"
+      },
+      {
+        "line": 1522,
+        "name": "highlight"
+      },
+      {
+        "line": 1523,
+        "name": "findTreeNode"
+      },
+      {
+        "line": 1524,
+        "name": "findTreePathByKu"
+      },
+      {
+        "line": 1525,
+        "name": "switchKU"
+      },
+      {
+        "line": 1526,
+        "name": "syncFixtureHeader"
+      },
+      {
+        "line": 1527,
+        "name": "visibleTreeItems"
+      },
+      {
+        "line": 1528,
+        "name": "treeKeydown"
+      },
+      {
+        "line": 1585,
+        "name": "mirror"
+      },
+      {
+        "line": 1617,
+        "name": "normalizeArabicSearch"
+      },
+      {
+        "line": 1618,
+        "name": "fixtureSearchText"
+      },
+      {
+        "line": 1619,
+        "name": "libraryRecord"
+      },
+      {
+        "line": 1620,
+        "name": "librarySearchScore"
+      },
+      {
+        "line": 1621,
+        "name": "librarySearchResults"
+      },
+      {
+        "line": 1631,
+        "name": "bindScrollSurface"
+      },
+      {
+        "line": 1632,
+        "name": "bindTransientScrollSurfaces"
+      },
+      {
+        "line": 1633,
+        "name": "renderQuickJump"
+      },
+      {
+        "line": 1634,
+        "name": "syncQuickJumpControl"
+      },
+      {
+        "line": 1635,
+        "name": "installContainerObserver"
+      },
+      {
+        "line": 1673,
+        "name": "renderOverflowMenu"
+      },
+      {
+        "line": 1691,
+        "name": "modalIsolation"
+      },
+      {
+        "line": 1695,
+        "name": "trapModalTab"
+      },
+      {
+        "line": 1696,
+        "name": "ensureDynamicDialogs"
+      },
+      {
+        "line": 1701,
+        "name": "nestedMenuEscape"
+      },
+      {
+        "line": 1704,
+        "name": "closePrimaryTransients"
+      },
+      {
+        "line": 1705,
+        "name": "topEscape"
+      },
+      {
+        "line": 1732,
+        "name": "openMapping"
+      },
+      {
+        "line": 1737,
+        "name": "handleEditableKey"
+      },
+      {
+        "line": 1773,
+        "name": "openOverflow"
+      },
+      {
+        "line": 1774,
+        "name": "labState"
+      },
+      {
+        "line": 1776,
+        "name": "initStaticDOM"
+      },
+      {
+        "line": 1778,
+        "name": "bindEvents"
+      },
+      {
+        "line": 1848,
+        "name": "inspect"
+      },
+      {
+        "line": 1852,
+        "name": "init"
+      }
+    ]
+  },
+  "components": [
+    "AppShell",
+    "BlockContextMenu",
+    "BottomShelf",
+    "CommandPalette",
+    "ContextInspector",
+    "ContextLensHost",
+    "EditorToolbar",
+    "FixtureStateLab",
+    "GroupedSectionSystem",
+    "InsertionPalette",
+    "KnowledgeDocumentSurface",
+    "PaneController",
+    "SelectionToolbar",
+    "StructurePane",
+    "StructureTree",
+    "TopBanner",
+    "UnifiedEditor",
+    "W02Nav",
+    "WorkspaceViewControl"
+  ],
+  "css_variables": [
+    "--accent",
+    "--accent2",
+    "--as",
+    "--bad",
+    "--bads",
+    "--bg0",
+    "--bg1",
+    "--bg2",
+    "--bg3",
+    "--block-focus-bg",
+    "--block-focus-ring",
+    "--block-gutter",
+    "--bottom",
+    "--bottom-live",
+    "--code-mark-bg",
+    "--code-mark-fg",
+    "--editor-center-floor",
+    "--editor-gutter",
+    "--editor-rail",
+    "--editor-rail-active",
+    "--elev",
+    "--focus",
+    "--global",
+    "--global-compact-min",
+    "--hairline",
+    "--left",
+    "--line",
+    "--line2",
+    "--marquee-fill",
+    "--marquee-line",
+    "--menu-elev",
+    "--menu-hover",
+    "--mono",
+    "--muted",
+    "--muted-strong",
+    "--ok",
+    "--oks",
+    "--overlay-top",
+    "--owner-rail",
+    "--quiet",
+    "--quiet2",
+    "--r",
+    "--rail-dot",
+    "--rail-dot-active",
+    "--rail-halo",
+    "--rail-line",
+    "--rail-line-active",
+    "--rail-line-hover",
+    "--right",
+    "--shadow",
+    "--surface",
+    "--surface-elev",
+    "--surface-pop",
+    "--sw",
+    "--text",
+    "--text-main",
+    "--text2",
+    "--text3",
+    "--toolbar",
+    "--tree-guide",
+    "--ui",
+    "--uielev",
+    "--uielev2",
+    "--uifloat",
+    "--uifocus",
+    "--uihair",
+    "--uitextdim",
+    "--violet",
+    "--w02",
+    "--warn",
+    "--warns"
+  ],
+  "css_classes": [
+    "accent",
+    "action-row",
+    "action-stack",
+    "active",
+    "active-path",
+    "add",
+    "app",
+    "avatar",
+    "backdrop",
+    "badge",
+    "banner",
+    "bannerstates",
+    "blockbody",
+    "blockhandle",
+    "blocklist",
+    "blockmenu-actions",
+    "blockmenu-object",
+    "blockmenu-search",
+    "blockrailhit",
+    "bmain",
+    "bottom",
+    "bottombar",
+    "bottomcontent",
+    "bottomsummary",
+    "bottomtabs",
+    "bottomtitle",
+    "brand",
+    "brandcopy",
+    "brandmark",
+    "brandname",
+    "bside",
+    "btn",
+    "center",
+    "centerrail",
+    "cmdgroup",
+    "cmditem",
+    "cmdmeta",
+    "cmdresults",
+    "cmdsearch",
+    "codeauthority",
+    "codebar",
+    "codecopy",
+    "codelang",
+    "color-a",
+    "color-control",
+    "cols",
+    "command",
+    "compact",
+    "compact-delete",
+    "contentgroups",
+    "context-boundary",
+    "context-eyebrow",
+    "context-identity",
+    "context-index",
+    "context-item",
+    "context-item-copy",
+    "context-item-ico",
+    "context-lenses",
+    "context-list",
+    "context-mini-grid",
+    "context-mini-grid-five",
+    "context-pin-control",
+    "context-pointer",
+    "context-reference-return",
+    "context-return-row",
+    "context-row",
+    "context-section",
+    "context-section-title",
+    "context-summary",
+    "context-summary-row",
+    "context-tabs",
+    "context-warning",
+    "contextaction",
+    "contextempty",
+    "contextscope",
+    "contextshell",
+    "convert-choice",
+    "convert-group",
+    "convert-list",
+    "convert-panel",
+    "count",
+    "crumbs",
+    "customwidth",
+    "danger",
+    "data-pref-actions",
+    "deepgrid",
+    "del",
+    "delete-confirm-actions",
+    "delete-confirm-copy",
+    "delete-confirm-popover",
+    "delete-confirm-pref",
+    "dialog",
+    "dialogbody",
+    "dialogfoot",
+    "dialoghead",
+    "dialoginput",
+    "diff",
+    "docintro",
+    "doclead",
+    "docmeta",
+    "docscroll",
+    "doctitle",
+    "document",
+    "dot",
+    "drop-preview",
+    "empty-tree",
+    "fieldlabel",
+    "fixture",
+    "fly-label",
+    "fly-section",
+    "flyout-sections",
+    "flytitle",
+    "focus-pref-buttons",
+    "focusflag",
+    "focusrow",
+    "frame",
+    "gapplus",
+    "gaprail",
+    "global",
+    "global-nav-list",
+    "global-theme-button",
+    "gnav",
+    "groupChev",
+    "groupCount",
+    "groupHint",
+    "groupIndex",
+    "groupMeta",
+    "groupTitle",
+    "grow",
+    "gsearch",
+    "gtools",
+    "handlecol",
+    "highlight-a",
+    "highlight-control",
+    "ico",
+    "icon",
+    "iconbtn",
+    "icononly",
+    "id",
+    "identity",
+    "identitychip",
+    "impact",
+    "inline-code",
+    "insert-empty",
+    "insertcontext",
+    "insertdesc",
+    "insertgrid",
+    "inserthead",
+    "insertico",
+    "insertmeta",
+    "insertpal",
+    "insertscope",
+    "inspector-scroll",
+    "inspector-section",
+    "k",
+    "kbd",
+    "lab-card",
+    "labbuttons",
+    "label",
+    "labgroup",
+    "labnote",
+    "labtitle",
+    "lbl",
+    "left",
+    "left-footer",
+    "left-search-row",
+    "lenslabel",
+    "lenssubject",
+    "library-current-actions",
+    "library-filter-row",
+    "library-footer",
+    "library-result-state",
+    "library-search",
+    "library-searchbox",
+    "library-smartviews",
+    "live",
+    "lock",
+    "lr",
+    "main",
+    "mainGroupBody",
+    "mainGroupHead",
+    "mapbtn",
+    "menu-disclosure",
+    "menu-flyout-panel",
+    "menu-subgrid",
+    "menugroup",
+    "menuitem",
+    "menusep",
+    "menutitle",
+    "muted",
+    "n",
+    "none",
+    "note-color-btn",
+    "note-color-dot",
+    "note-divider",
+    "note-highlight-btn",
+    "note-mode",
+    "note-new-compact",
+    "note-recovery",
+    "note-row-main",
+    "note-row-state",
+    "note-title",
+    "note-title-row",
+    "notebody",
+    "notedrag",
+    "noteeditor",
+    "noteformat",
+    "notehead",
+    "noterow",
+    "notes-actions",
+    "notes-list",
+    "notestatus",
+    "objico",
+    "ok",
+    "optional",
+    "overview-related",
+    "pane",
+    "paneEdgeToggle",
+    "paneToggle",
+    "paneheadicon",
+    "panel-scrim",
+    "pbody",
+    "phead",
+    "plain-text-convert",
+    "platform-gate",
+    "popover",
+    "pref-inline-label",
+    "prefbuttons",
+    "preferences-scroll",
+    "prefnote",
+    "prefsection",
+    "prefsection-body",
+    "prefsection-chev",
+    "prefsection-copy",
+    "prefsection-icon",
+    "prefsection-toggle",
+    "preftitle",
+    "primary",
+    "project-card",
+    "projection-body",
+    "projection-chev",
+    "projection-empty",
+    "projection-group",
+    "projection-head",
+    "projection-meta",
+    "projection-only",
+    "projection-row",
+    "projection-title",
+    "quickjump-group",
+    "quickjump-head",
+    "quickjump-item",
+    "quickjump-list",
+    "rail",
+    "read-block-actions",
+    "reader-block-menu",
+    "readerref",
+    "recovery-list",
+    "recovery-owner",
+    "recovery-row",
+    "ref-left-panel",
+    "ref-right-panel",
+    "relation-card",
+    "resizegrip",
+    "resizer",
+    "resultcount",
+    "rev",
+    "revid",
+    "revlist",
+    "right",
+    "right-scroll",
+    "rr",
+    "save",
+    "scopechip",
+    "scopehint",
+    "searchbox",
+    "searchmeta",
+    "secondary",
+    "segment",
+    "selection-context",
+    "selection-more",
+    "selection-more-panel",
+    "selection-picker",
+    "selection-picker-panel",
+    "selection-swatch",
+    "selection-swatches",
+    "selectionbar",
+    "semantic",
+    "shortcut-dialog",
+    "shortcut-intro",
+    "shortcut-row",
+    "shortcut-section",
+    "shortcut-sections",
+    "skiplink",
+    "sm",
+    "soft",
+    "source-card",
+    "sourcechip",
+    "sr",
+    "stage",
+    "statefab",
+    "statelab",
+    "static",
+    "structure-footer",
+    "structure-shell",
+    "structureempty",
+    "structurepanel",
+    "structuretree",
+    "structurewrap",
+    "style-choice",
+    "style-panel",
+    "style-reset",
+    "style-reset-wrap",
+    "style-segment",
+    "style-swatches",
+    "subtle",
+    "swatch",
+    "swatch-choice",
+    "switch",
+    "syn",
+    "tags",
+    "tags-inline",
+    "tech",
+    "tg",
+    "theme-cycle",
+    "title",
+    "titlerow",
+    "toaststack",
+    "toggle-children",
+    "toggle-contract-table",
+    "toggle-count",
+    "toggle-empty",
+    "toggle-head",
+    "toggle-shell",
+    "toggle-title",
+    "toggle-trigger",
+    "toolbar",
+    "transient-panel-head",
+    "tree-scroll",
+    "tree-secondary",
+    "treeclear",
+    "treecount",
+    "treeexp",
+    "treeico",
+    "treeid",
+    "treelabel",
+    "treematch",
+    "treesearch",
+    "treetitle",
+    "txt",
+    "typed-card",
+    "typed-icon",
+    "typed-lens-list",
+    "typed-meta",
+    "v",
+    "vline",
+    "w02nav",
+    "warn",
+    "width-presets",
+    "workrow",
+    "workspacepop"
+  ],
+  "html_ids": [
+    "assertiveLive",
+    "bannerKuId",
+    "bannerTitle",
+    "blockList",
+    "blockMarquee",
+    "blockMenu",
+    "blockSelectionToolbar",
+    "bottomContent",
+    "bottomShelf",
+    "bottomSummary",
+    "bottomToggle",
+    "centerPane",
+    "cepTooltip",
+    "closure-audit-hardening-receipt",
+    "commandBackdrop",
+    "commandResults",
+    "commandSearch",
+    "commandTitle",
+    "confirmDelete",
+    "conflictBackdrop",
+    "conflictTitle",
+    "contentGroupBody",
+    "contentGroupCount",
+    "contentGroupToggle",
+    "contentGroups",
+    "contextLenses",
+    "contextReferenceReturnButton",
+    "convTitle",
+    "conversionBackdrop",
+    "deleteConfirmPopover",
+    "deleteConfirmTitle",
+    "docScroll",
+    "documentTitle",
+    "dragPreview",
+    "dropPreview",
+    "editorDocument",
+    "focusButton",
+    "full-surface-accessibility-round3-receipt",
+    "full-surface-intensive-convergence-receipt",
+    "globalNavMenuButton",
+    "globalNavPopover",
+    "i-book",
+    "i-check",
+    "i-chev",
+    "i-close",
+    "i-code",
+    "i-command",
+    "i-copy",
+    "i-edit",
+    "i-focus",
+    "i-folder",
+    "i-grip",
+    "i-history",
+    "i-info",
+    "i-lab",
+    "i-layout",
+    "i-link",
+    "i-list",
+    "i-lock",
+    "i-more",
+    "i-move",
+    "i-note",
+    "i-panel",
+    "i-plus",
+    "i-quote",
+    "i-redo",
+    "i-ref",
+    "i-return",
+    "i-save",
+    "i-search",
+    "i-shield",
+    "i-text",
+    "i-theme",
+    "i-trash",
+    "i-type",
+    "i-undo",
+    "i-warn",
+    "impactBackdrop",
+    "impactText",
+    "impactTitle",
+    "inlineTargetBackdrop",
+    "inlineTargetInput",
+    "inlineTargetLabel",
+    "inlineTargetTitle",
+    "insertContext",
+    "insertGrid",
+    "insertMeta",
+    "insertScope",
+    "insertSearch",
+    "insertionPalette",
+    "inspectorContent",
+    "kuList",
+    "kuSearch",
+    "leftCollapsedRail",
+    "leftLocalReveal",
+    "leftPane",
+    "leftResizer",
+    "libraryDomainFilter",
+    "mappingBackdrop",
+    "mappingContent",
+    "mappingTitle",
+    "modeHint",
+    "noteCloseBackdrop",
+    "noteCloseTitle",
+    "overflowMenu",
+    "owner-consolidated-predecessor-css",
+    "owner-final-drive-handoff-v1-2-16",
+    "owner-final-drive-handoff-v1-2-17",
+    "owner-limited-closure-enhancements",
+    "owner-regression-recovery-v1-2-13",
+    "owner-scroll-reference-microfix-v1-2-14",
+    "owner-surgical-focus-marquee-theme-v1-2-9",
+    "owner-surgical-focus-theme-v1-2-8",
+    "owner-surgical-rail-microfix-v1-2-11",
+    "owner-ultra-final-css",
+    "owner-ultra-round1-layout-correction",
+    "owner-ultra-round2-correction",
+    "owner-ultra-round3-nesting-polish",
+    "owner-ultra-round4-nested-geometry",
+    "owner-ultra-round5-micro-polish",
+    "owner-value-recovery-p0-p2-v1-2-12",
+    "panelScrim",
+    "platformBackdrop",
+    "platformNoteId",
+    "platformTitle",
+    "politeLive",
+    "preferenceImportInput",
+    "production-mapping-manifest",
+    "quickJumpButton",
+    "quickJumpPopover",
+    "reference-delta-ledger",
+    "referenceReturnButton",
+    "relatedContextBody",
+    "relatedContextCount",
+    "relatedLearningBody",
+    "relatedLearningCount",
+    "requirement-reconciliation-ledger",
+    "rightLocalReveal",
+    "rightPane",
+    "rightResizer",
+    "saveStatus",
+    "selectionToolbar",
+    "shortcutBackdrop",
+    "shortcutTitle",
+    "stateFab",
+    "stateLab",
+    "stickyNoteHost",
+    "structureActivePath",
+    "structureEmpty",
+    "structureTree",
+    "surgical-final-wave-receipt",
+    "surgical-interaction-final-receipt",
+    "surgical-micro-final-receipt",
+    "surgical-minor-final-receipt",
+    "surgical-wave1-receipt",
+    "surgical-wave2-receipt",
+    "themeCycleButton",
+    "toastStack",
+    "toggleAllWorkspaceButton",
+    "toggleAllWorkspaceLabel",
+    "toggleContractBackdrop",
+    "toggleContractBody",
+    "toggleContractTitle",
+    "toolbarKuId",
+    "toolbarTitle",
+    "topBanner",
+    "treeClearSearch",
+    "treeResultCount",
+    "user-feedback-ultra-functional-receipt",
+    "wave03-writer-receipt",
+    "workspacePopover",
+    "workspaceViewButton",
+    "writer-v1-2-final-receipt",
+    "writer-v1-2-w1-w3-receipt",
+    "writer-v1-2-w4-w6-receipt",
+    "writer-v1-2-w7-receipt"
+  ],
+  "data_attributes": [
+    "data-action",
+    "data-active",
+    "data-align",
+    "data-authority",
+    "data-banner",
+    "data-bg",
+    "data-block-focus-origin",
+    "data-block-handle",
+    "data-block-id",
+    "data-block-rail",
+    "data-block-selected",
+    "data-center-context-lens",
+    "data-center-ku-target",
+    "data-cep-block",
+    "data-cep-block-type",
+    "data-cmd",
+    "data-cmd-item",
+    "data-code-copy",
+    "data-code-line-numbers",
+    "data-code-wrap",
+    "data-command",
+    "data-command-owner",
+    "data-component",
+    "data-context-ku-target",
+    "data-contrast",
+    "data-conv",
+    "data-copy-controls",
+    "data-delete-confirm",
+    "data-density",
+    "data-depth",
+    "data-dir",
+    "data-drag-target",
+    "data-dragging",
+    "data-drop",
+    "data-editability",
+    "data-editable",
+    "data-editable-block",
+    "data-editor-core",
+    "data-editor-surface",
+    "data-empty",
+    "data-explicit-annotation",
+    "data-flyout",
+    "data-focus",
+    "data-focus-indicators",
+    "data-focus-input",
+    "data-focus-rail",
+    "data-focus-selection",
+    "data-history-restore-index",
+    "data-inline",
+    "data-inline-target-choice",
+    "data-insert-gap",
+    "data-insert-scope",
+    "data-invalid",
+    "data-kind",
+    "data-lab",
+    "data-left",
+    "data-lens",
+    "data-library-current",
+    "data-library-view",
+    "data-list-number",
+    "data-menu-align",
+    "data-menu-bg",
+    "data-menu-cmd",
+    "data-menu-convert",
+    "data-menu-dir",
+    "data-menu-searchable",
+    "data-mode",
+    "data-motion",
+    "data-multi-action",
+    "data-note-action",
+    "data-note-close-choice",
+    "data-note-format",
+    "data-note-id",
+    "data-note-open",
+    "data-open",
+    "data-overlay-pane",
+    "data-pane-side",
+    "data-pane-state",
+    "data-pane-toggle",
+    "data-path",
+    "data-pinned",
+    "data-placeholder",
+    "data-pref-clipboard",
+    "data-pref-code-syntax",
+    "data-pref-code-wrap",
+    "data-pref-default-dir",
+    "data-pref-default-type",
+    "data-pref-delete-confirm",
+    "data-pref-density",
+    "data-pref-disclosure",
+    "data-pref-empty-dir",
+    "data-pref-motion",
+    "data-pref-section",
+    "data-pref-section-toggle",
+    "data-pref-system-dark",
+    "data-pref-theme",
+    "data-pref-theme-behavior",
+    "data-pref-width",
+    "data-projection-owner",
+    "data-quick-block",
+    "data-quick-ku",
+    "data-reader-cmd",
+    "data-reader-reference",
+    "data-recovery-restore",
+    "data-reference-ready",
+    "data-region",
+    "data-render-only",
+    "data-resolved-dir",
+    "data-responsive-band",
+    "data-right",
+    "data-selected",
+    "data-selection-action",
+    "data-state",
+    "data-surface",
+    "data-target-kind",
+    "data-theme",
+    "data-theme-value",
+    "data-toggle-block",
+    "data-toggle-children",
+    "data-tone",
+    "data-tree-id",
+    "data-type",
+    "data-value",
+    "data-width"
+  ],
+  "media_queries": [
+    "(max-width:1100px)",
+    "(max-width:820px)",
+    "(max-width:570px)",
+    "(prefers-reduced-motion:reduce)",
+    "(max-width:1100px)",
+    "(max-width:820px)",
+    "(max-width:1100px)",
+    "(max-width:820px)",
+    "(max-width:570px)",
+    "(prefers-reduced-motion:reduce)",
+    "(min-width:1101px)",
+    "(max-width:1100px)",
+    "(max-width:1100px)",
+    "(max-width:820px)",
+    "(max-width:570px)",
+    "(max-width:1100px)",
+    "(max-width:820px)",
+    "(max-width:620px)",
+    "(forced-colors:active)",
+    "(max-width:1100px)",
+    "(max-width:620px)",
+    "(prefers-reduced-motion:reduce)",
+    "(forced-colors:active)",
+    "(max-width:820px)",
+    "(forced-colors:active)",
+    "(max-width:620px)",
+    "(max-width:1100px)",
+    "(max-width:700px)",
+    "(prefers-reduced-motion:reduce)",
+    "(forced-colors:active)",
+    "(prefers-reduced-motion:reduce)",
+    "(max-width:1180px)",
+    "(max-width:820px)",
+    "(max-width:1180px)",
+    "(max-width:1100px)",
+    "(max-width:1100px)",
+    "(max-width:1180px)",
+    "(max-width:930px)",
+    "(max-width:840px)",
+    "(max-width:760px)",
+    "(max-width:930px)",
+    "(max-width:760px)"
+  ],
+  "event_listener_calls": 34,
+  "event_types": [
+    "beforeinput",
+    "blur",
+    "change",
+    "click",
+    "compositionend",
+    "compositionstart",
+    "contextmenu",
+    "copy",
+    "error",
+    "focusin",
+    "focusout",
+    "input",
+    "keydown",
+    "keyup",
+    "paste",
+    "pointerdown",
+    "pointermove",
+    "pointerout",
+    "pointerover",
+    "pointerup",
+    "resize",
+    "selectionchange",
+    "unhandledrejection"
+  ],
+  "authority_note": "Accepted executable design donor. Reuse mechanics directly; current Owner supersessions may improve fixed defaults (e.g. Arabic-first / dismissal routes) without discarding donor value."
+}

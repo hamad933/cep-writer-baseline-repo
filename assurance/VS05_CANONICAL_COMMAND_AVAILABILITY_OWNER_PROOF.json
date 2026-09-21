@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "kind": "VS05_CANONICAL_STRUCTURED_COMMAND_AVAILABILITY_OWNER_PROOF",
+  "status": "PASS",
+  "generatedAt": "2026-09-11T18:06:57.845921+00:00",
+  "canonicalSourceTreeSha256": "1c14a1b5074b63212d91f571f58b650690169526255bc1172b1f3ee0b04f117b",
+  "commandIdentityOwner": {
+    "id": "CommandRegistry",
+    "registeredOwner": "StructuredDocumentDomainAdapter",
+    "sourcePaths": [
+      "stack/native-typescript/foundation/models.ts",
+      "stack/native-typescript/foundation/structured.ts",
+      "stack/native-typescript/main.ts"
+    ]
+  },
+  "availabilityOwner": {
+    "id": "StructuredCommandAvailabilityOwner",
+    "contractVersion": "1.0.0",
+    "policyRevision": "structured-command-availability-vs05-r1",
+    "sourcePath": "stack/native-typescript/foundation/structured.ts"
+  },
+  "canonicalSemanticOwners": {
+    "tree": "StructuredTreeKernel",
+    "mutation": "StructuredMutationKernel",
+    "transactionHistoryRecovery": "StructuredTransactionHistoryRecoveryOwner"
+  },
+  "sharedCommandCount": 23,
+  "sharedCommands": [
+    "history.undo",
+    "history.redo",
+    "block.insert",
+    "block.duplicate",
+    "block.delete",
+    "block.moveUp",
+    "block.moveDown",
+    "block.moveStart",
+    "block.moveEnd",
+    "block.moveToGap",
+    "block.indent",
+    "block.outdent",
+    "block.split",
+    "block.mergeBackward",
+    "block.mergeForward",
+    "block.convert",
+    "block.plainText",
+    "block.align",
+    "block.direction",
+    "block.background",
+    "block.clearStyle",
+    "document.commit",
+    "document.recoverAsNew"
+  ],
+  "ownershipLaws": {
+    "uniqueRegistration": true,
+    "singleAvailabilityDecision": true,
+    "libraryEntryPointsProjectSameAvailability": true,
+    "executionRechecksSameAvailability": true,
+    "disabledCannotBypass": true,
+    "enabledExecutesExactlyOnce": true,
+    "donorLocalMainSemanticFallbackEliminatedForAdmittedCommands": true
+  },
+  "gateEvidence": "assurance/VS05_COMMAND_OWNERSHIP_GATE.json",
+  "modelEvidence": [
+    "structured.command.catalog-unique",
+    "structured.command.availability-projection",
+    "structured.command.disabled-preflight",
+    "structured.command.enabled-once",
+    "structured.command.read-edit-gating",
+    "structured.command.undo-redo-truth",
+    "structured.command-movement-edges",
+    "structured.command-indent-outdent-reasons",
+    "structured.command-destructive-guard",
+    "structured.command-real-consumers",
+    "structured.command-duplicate-owner-negative"
+  ],
+  "browserEvidence": "assurance/VS05_R3_TARGETED_BROWSER_REPLAY.json"
+}

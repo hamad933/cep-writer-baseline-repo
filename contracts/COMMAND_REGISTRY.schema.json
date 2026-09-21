@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CEPSemanticCommand",
+  "type": "object",
+  "required": [
+    "id",
+    "owner",
+    "intent",
+    "availability",
+    "effect"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "intent": {
+      "type": "string"
+    },
+    "availability": {
+      "type": "string"
+    },
+    "effect": {
+      "type": "string"
+    },
+    "entry_surfaces": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "TOOLBAR",
+          "COMMAND_PALETTE",
+          "CONTEXT_MENU",
+          "SELECTION_SURFACE",
+          "KEYBOARD",
+          "INSPECTOR",
+          "QUICK_ACTION",
+          "OTHER"
+        ]
+      }
+    },
+    "focus_result": {
+      "type": "string"
+    },
+    "negative_assertions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "domain_boundary": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,1610 @@
+{
+  "schemaVersion": 1,
+  "kind": "W4_CONTROLLER_CONVERGENCE_BROWSER_PROOF",
+  "classification": "CONTROLLER_EXECUTION_EVIDENCE_NOT_OWNER_ACCEPTANCE",
+  "sourceCanonicalTreeSha256": "5dcc401a95f6b7b38bbd2f64d9140c29182eb459042dc6e3dd7be5460c6bca5f",
+  "canonicalSourceFileCount": 113,
+  "environment": {
+    "engine": "Python Playwright Chromium",
+    "executable": "/usr/bin/chromium",
+    "transport": "in-memory-built-esm",
+    "viewport": "1440x980"
+  },
+  "summary": {
+    "total": 5,
+    "pass": 5,
+    "fail": 0
+  },
+  "flows": [
+    {
+      "id": "wave4.structured-keyboard-owner",
+      "owner": "StructuredInputKeymapOwner",
+      "oracle": "real Library keydown produces exactly one canonical history frame and owner receipt",
+      "status": "PASS",
+      "evidence": {
+        "target": {
+          "id": "blk-d05-h1",
+          "type": "h2"
+        },
+        "before": {
+          "blocks": 15,
+          "history": 1,
+          "receipts": 0
+        },
+        "after": {
+          "blocks": 16,
+          "history": 2,
+          "receipt": {
+            "sequence": 1,
+            "kind": "enter",
+            "owner": "StructuredInputKeymapOwner",
+            "policyTag": "structured-input-keymap-w4a-r1",
+            "command": "block.split",
+            "delegatedCommandOwner": "StructuredDocumentDomainAdapter",
+            "availabilityOwner": "StructuredCommandAvailabilityOwner",
+            "preventDefaultApplied": true
+          },
+          "classification": "WAVE6_CONTROLLER_CONVERGED_NOTES_FAMILY"
+        }
+      }
+    },
+    {
+      "id": "wave4.settings-applicability-and-escape",
+      "owner": "SettingsCenterOwner + TransientFocusOwner",
+      "oracle": "Structured-only settings apply only to Structured and Escape leaves no ghost transient/DOM",
+      "status": "PASS",
+      "evidence": {
+        "structured": {
+          "owner": "SettingsCenterOwner",
+          "editorGroup": true,
+          "top": "global.settings-center"
+        },
+        "nonStructured": {
+          "editorGroup": false,
+          "family": "spatial",
+          "owner": "SettingsCenterOwner"
+        },
+        "escapeRemovedDom": true
+      }
+    },
+    {
+      "id": "wave4.direction-rich-confirmation-convergence",
+      "owner": "InputDirectionResolver + StructuredRichContentOwner + StructuredActionDescriptorOwner + ConfirmationSafetyHost",
+      "oracle": "truthful direction provenance, safe rich sanitization and explicit risk confirmation before one canonical mutation",
+      "status": "PASS",
+      "evidence": {
+        "before": {
+          "d": {
+            "direction": "rtl",
+            "source": "POLICY_FALLBACK",
+            "persistedWon": false,
+            "fallbackUsed": true,
+            "bridgeUsed": false,
+            "bridgeCapability": {
+              "available": false,
+              "code": "PLATFORM_DIRECTION_BRIDGE_ABSENT",
+              "owner": "PlatformInputDirectionBridge",
+              "source": null,
+              "hint": null,
+              "recognized": false
+            },
+            "semanticInference": false,
+            "contentInspectedForLanguage": false,
+            "empty": true,
+            "surface": "structured",
+            "blockId": null,
+            "owner": "InputDirectionResolver",
+            "policyRevision": "input-direction-w4c-policy-r1"
+          },
+          "san": {
+            "html": "<strong>ok</strong>",
+            "changed": true,
+            "safe": true,
+            "violations": [
+              {
+                "code": "ACTIVE_ELEMENT_STRIPPED",
+                "tag": "script"
+              },
+              {
+                "code": "ACTIVE_ATTRIBUTE_STRIPPED",
+                "tag": "strong"
+              }
+            ],
+            "policyRevision": "structured-rich-sanitize-w4c-r1"
+          },
+          "target": "blk-d05-t1",
+          "desc": {
+            "owner": "StructuredActionDescriptorOwner",
+            "contract": {
+              "id": "StructuredActionDescriptorOwner",
+              "version": "1.0.0",
+              "compatibility": "SEMVER",
+              "owner": "Structured Family",
+              "policyRevision": "structured-action-descriptor-w4b-r1"
+            },
+            "policy": {
+              "subtreeConfirmThreshold": 2
+            },
+            "insertionContract": null,
+            "actionId": "block.delete",
+            "commandId": "block.delete",
+            "label": "Delete block",
+            "group": "danger",
+            "danger": true,
+            "destructive": true,
+            "enabled": true,
+            "code": "AVAILABLE",
+            "reason": "",
+            "target": null,
+            "availability": {
+              "enabled": true,
+              "code": "AVAILABLE",
+              "reason": "",
+              "owner": "StructuredCommandAvailabilityOwner",
+              "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+              "destructive": true,
+              "subtreeCount": 3,
+              "requiresStructuralConfirmation": true,
+              "confirmationThreshold": 2
+            },
+            "availabilityOwner": "StructuredCommandAvailabilityOwner",
+            "commandOwner": "StructuredDocumentDomainAdapter",
+            "mutationOwner": "StructuredMutationKernel",
+            "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+            "confirmation": {
+              "required": true,
+              "kind": "STRUCTURED_SUBTREE_DELETE",
+              "subtreeCount": 3,
+              "threshold": 2,
+              "reason": "Deleting this block removes a governed subtree.",
+              "presentationOwner": "GLOBAL_CONFIRMATION_HOST_NOT_OWNED_BY_W4_B"
+            },
+            "truthKey": "{\"actionId\":\"block.delete\",\"commandId\":\"block.delete\",\"group\":\"danger\",\"danger\":true,\"destructive\":true,\"enabled\":true,\"code\":\"AVAILABLE\",\"target\":null,\"confirmation\":{\"required\":true,\"kind\":\"STRUCTURED_SUBTREE_DELETE\",\"subtreeCount\":3,\"threshold\":2,\"reason\":\"Deleting this block removes a governed subtree.\",\"presentationOwner\":\"GLOBAL_CONFIRMATION_HOST_NOT_OWNED_BY_W4_B\"},\"availabilityOwner\":\"StructuredCommandAvailabilityOwner\"}"
+          },
+          "request": {
+            "accepted": true,
+            "code": "CONFIRMATION_PRESENTED",
+            "confirmationId": "confirmation-1",
+            "actionId": "block.delete",
+            "destructive": true,
+            "confirmationRequired": true,
+            "executesAction": false,
+            "projection": {
+              "id": "confirmation-1",
+              "actionId": "block.delete",
+              "sourceOwner": "StructuredActionDescriptorOwner",
+              "destructive": true,
+              "confirmationRequired": true,
+              "riskCode": "STRUCTURED_SUBTREE_DELETE",
+              "copy": {
+                "title": "Confirm destructive action",
+                "message": "This action affects 3 Structured block(s).",
+                "confirmLabel": "Confirm",
+                "cancelLabel": "Cancel"
+              },
+              "canonicalTruth": {
+                "owner": "StructuredCommandAvailabilityOwner",
+                "enabled": true,
+                "code": "AVAILABLE",
+                "subtreeCount": 3,
+                "threshold": 2
+              },
+              "scope": {
+                "family": "structured",
+                "blockId": "blk-d05-t1",
+                "surface": "block-menu"
+              },
+              "policyRevision": "w4g-confirmation-safety-v1",
+              "executesAction": false
+            }
+          },
+          "before": 1,
+          "pending": 1
+        },
+        "after": {
+          "history": 2,
+          "pending": 0,
+          "receipts": [
+            {
+              "accepted": true,
+              "code": "CONFIRMATION_PRESENTED",
+              "confirmationId": "confirmation-1",
+              "actionId": "block.delete",
+              "destructive": true,
+              "confirmationRequired": true,
+              "executesAction": false,
+              "projection": {
+                "id": "confirmation-1",
+                "actionId": "block.delete",
+                "sourceOwner": "StructuredActionDescriptorOwner",
+                "destructive": true,
+                "confirmationRequired": true,
+                "riskCode": "STRUCTURED_SUBTREE_DELETE",
+                "copy": {
+                  "title": "Confirm destructive action",
+                  "message": "This action affects 3 Structured block(s).",
+                  "confirmLabel": "Confirm",
+                  "cancelLabel": "Cancel"
+                },
+                "canonicalTruth": {
+                  "owner": "StructuredCommandAvailabilityOwner",
+                  "enabled": true,
+                  "code": "AVAILABLE",
+                  "subtreeCount": 3,
+                  "threshold": 2
+                },
+                "scope": {
+                  "family": "structured",
+                  "blockId": "blk-d05-t1",
+                  "surface": "block-menu"
+                },
+                "policyRevision": "w4g-confirmation-safety-v1",
+                "executesAction": false
+              }
+            },
+            {
+              "accepted": true,
+              "code": "CONFIRMED",
+              "confirmationId": "confirmation-1",
+              "actionId": "block.delete",
+              "sourceOwner": "StructuredActionDescriptorOwner",
+              "riskCode": "STRUCTURED_SUBTREE_DELETE",
+              "executesAction": false,
+              "authorizationOnly": true,
+              "canonicalTruth": {
+                "owner": "StructuredCommandAvailabilityOwner",
+                "enabled": true,
+                "code": "AVAILABLE",
+                "subtreeCount": 3,
+                "threshold": 2
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "wave4.dragdrop-canonical-route",
+      "owner": "StructuredDragDropOwner + StructuredDropTargetPolicyOwner",
+      "oracle": "one canonical target policy and exactly one history frame for pointer reorder",
+      "status": "PASS",
+      "evidence": {
+        "candidate": {
+          "id": "blk-d05-h1",
+          "target": {
+            "kind": "gap",
+            "parentId": null,
+            "index": 2,
+            "depth": 0,
+            "afterBlockId": "blk-d05-p1",
+            "beforeBlockId": "blk-d05-p-auto-ltr"
+          }
+        },
+        "before": 1,
+        "after": 2,
+        "beg": {
+          "ok": true,
+          "owner": "StructuredDragDropOwner",
+          "pointer": {
+            "sourceBlockId": "blk-d05-h1",
+            "pointerId": 7,
+            "startX": 10,
+            "startY": 10,
+            "active": false,
+            "target": null,
+            "validation": null,
+            "indicator": {
+              "visible": false,
+              "derived": true
+            },
+            "autoscroll": {
+              "direction": "none",
+              "deltaY": 0,
+              "derived": true
+            }
+          },
+          "receipt": {
+            "sequence": 1,
+            "kind": "pointer.begin",
+            "owner": "StructuredDragDropOwner",
+            "policyRevision": "structured-drag-drop-w4d-r1",
+            "sourceBlockId": "blk-d05-h1",
+            "pointerId": 7
+          }
+        },
+        "upd": {
+          "ok": true,
+          "owner": "StructuredDragDropOwner",
+          "active": true,
+          "distance": 28.284271247461902,
+          "validation": {
+            "ok": true,
+            "enabled": true,
+            "owner": "StructuredDropTargetPolicyOwner",
+            "policyRevision": "structured-drop-target-w4d-r1",
+            "code": "AVAILABLE",
+            "reason": "",
+            "target": {
+              "kind": "gap",
+              "parentId": null,
+              "index": 2,
+              "depth": 0,
+              "afterBlockId": "blk-d05-p1",
+              "beforeBlockId": "blk-d05-p-auto-ltr"
+            },
+            "targetIdentity": "ROOT::2::0",
+            "parentPathIds": [],
+            "sourceBlockId": "blk-d05-h1",
+            "availabilityOwner": "StructuredCommandAvailabilityOwner",
+            "mutationValidationOwner": "StructuredMutationKernel"
+          },
+          "indicator": {
+            "visible": true,
+            "derived": true,
+            "owner": "StructuredDragDropOwner",
+            "valid": true,
+            "code": "AVAILABLE",
+            "reason": "",
+            "targetIdentity": "ROOT::2::0",
+            "target": {
+              "kind": "gap",
+              "parentId": null,
+              "index": 2,
+              "depth": 0,
+              "afterBlockId": "blk-d05-p1",
+              "beforeBlockId": "blk-d05-p-auto-ltr"
+            }
+          },
+          "autoscroll": {
+            "direction": "up",
+            "deltaY": -11,
+            "derived": true,
+            "owner": "StructuredDragDropOwner"
+          }
+        },
+        "commit": {
+          "ok": true,
+          "changed": true,
+          "owner": "StructuredDragDropOwner",
+          "contract": {
+            "id": "StructuredMutationKernel",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "owner": "Structured Family",
+            "policyRevision": "structured-mutation-vs03-r1"
+          },
+          "policy": {
+            "maxLocalIndent": 6,
+            "moveToGapEnabled": true
+          },
+          "intent": {
+            "type": "moveToGap",
+            "blockId": "blk-d05-h1",
+            "target": {
+              "kind": "gap",
+              "parentId": null,
+              "index": 2,
+              "depth": 0,
+              "afterBlockId": "blk-d05-p1",
+              "beforeBlockId": "blk-d05-p-auto-ltr"
+            }
+          },
+          "code": "APPLIED",
+          "reason": "",
+          "blocks": [
+            {
+              "id": "blk-d05-p1",
+              "type": "paragraph",
+              "html": "يجب أن يربط التطبيق كل طلب بين <bdi dir=\"ltr\">subject_id</bdi> و <bdi dir=\"ltr\">object_id</bdi> والسياق المصرّح به. هذه فقرة طويلة مقصودة لتلتف بصريًا إلى عدة أسطر مع بقائها <strong>Block واحدًا</strong> بهوية بنيوية واحدة."
+            },
+            {
+              "id": "blk-d05-h1",
+              "type": "h2",
+              "html": "نطاق الحماية في واجهات <bdi dir=\"ltr\">API</bdi>"
+            },
+            {
+              "id": "blk-d05-p-auto-ltr",
+              "type": "paragraph",
+              "html": "English-first validation note — تحقق من <bdi dir=\"ltr\">policy.can(subject, action, resource)</bdi> قبل إعادة المورد.",
+              "dir": "auto"
+            },
+            {
+              "id": "blk-d05-t1",
+              "type": "toggle",
+              "title": "01 — التحقق من هوية المورد",
+              "open": true,
+              "children": [
+                {
+                  "id": "blk-d05-t1-p1",
+                  "type": "paragraph",
+                  "html": "تحقق من أن <bdi dir=\"ltr\">resource_id</bdi> ينتمي إلى النطاق الذي يملكه المستخدم قبل أي قراءة أو تعديل."
+                },
+                {
+                  "id": "blk-d05-t1-c1",
+                  "type": "callout",
+                  "html": "لا تعتمد على إخفاء العنصر في الواجهة. التفويض يجب أن يحدث في طبقة الخدمة."
+                }
+              ]
+            },
+            {
+              "id": "blk-d05-t2",
+              "type": "toggle",
+              "title": "02 — ضوابط التنفيذ",
+              "open": true,
+              "children": [
+                {
+                  "id": "blk-d05-li1",
+                  "type": "bullet",
+                  "html": "طبّق فحص السلطة لكل كائن حساس.",
+                  "children": [
+                    {
+                      "id": "blk-d05-li1a",
+                      "type": "bullet",
+                      "html": "افصل <bdi dir=\"ltr\">tenant_id</bdi> عن معرّف الكائن عند التحقق."
+                    }
+                  ]
+                },
+                {
+                  "id": "blk-d05-t2-n1",
+                  "type": "toggle",
+                  "title": "التحقق المتداخل من السياق",
+                  "open": true,
+                  "children": [
+                    {
+                      "id": "blk-d05-t2-n1-p1",
+                      "type": "paragraph",
+                      "html": "في المسار المختلط Arabic + English، حافظ على ترتيب النص المنطقي مثل <code class=\"inline-code\">policy.can(subject, action, resource)</code> دون قلب الرموز."
+                    },
+                    {
+                      "id": "blk-d05-code1",
+                      "type": "code",
+                      "html": "const allowed = policy.can(subject, \"read\", resource);\nif (!allowed) return response(403);\nreturn resourceView(resource);",
+                      "dir": "ltr"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "blk-d05-t3",
+              "type": "toggle",
+              "title": "03 — المراجع والربط",
+              "open": true,
+              "children": [
+                {
+                  "id": "blk-d05-ref1",
+                  "type": "reference",
+                  "html": "مرجع مرتبط: <bdi dir=\"ltr\">KU-D03-0011</bdi>"
+                },
+                {
+                  "id": "blk-d05-q1",
+                  "type": "quote",
+                  "html": "السياق يحدد ما إذا كان الوصول إلى الكائن مشروعًا، وليس مجرد معرفة المعرّف."
+                }
+              ]
+            }
+          ],
+          "meta": {
+            "operation": "moveToGap",
+            "focusId": "blk-d05-h1",
+            "parentId": null,
+            "index": 1,
+            "depth": 0,
+            "maxDepth": 2
+          },
+          "document": {
+            "id": "KU-D05-0021",
+            "title": "API Object-Level Authorization",
+            "tags": [
+              "Web / API",
+              "Authorization"
+            ],
+            "revision": "rev-17",
+            "sources": [
+              {
+                "title": "OWASP API Security — Object Level Authorization",
+                "kind": "مرجع تعليمي",
+                "status": "مربوط بالسياق"
+              },
+              {
+                "title": "CEP Defensive API Lab",
+                "kind": "Local reference",
+                "status": "NON-PRODUCTION"
+              }
+            ],
+            "relations": [
+              {
+                "label": "يرتبط بـ Identity Boundary Validation",
+                "target": "KU-D03-0011"
+              },
+              {
+                "label": "يسبق تمرين Triage",
+                "target": "KU-D09-0002"
+              }
+            ],
+            "labs": [
+              {
+                "title": "Broken Object Authorization Lab",
+                "status": "جاهز للتدريب"
+              }
+            ],
+            "projects": [
+              {
+                "title": "API Policy Review",
+                "status": "سياق مشروع ممثّل"
+              }
+            ],
+            "evidence": [
+              {
+                "title": "Evidence pointer only",
+                "status": "لا يصدر قرار W04"
+              }
+            ],
+            "blocks": [
+              {
+                "id": "blk-d05-p1",
+                "type": "paragraph",
+                "html": "يجب أن يربط التطبيق كل طلب بين <bdi dir=\"ltr\">subject_id</bdi> و <bdi dir=\"ltr\">object_id</bdi> والسياق المصرّح به. هذه فقرة طويلة مقصودة لتلتف بصريًا إلى عدة أسطر مع بقائها <strong>Block واحدًا</strong> بهوية بنيوية واحدة."
+              },
+              {
+                "id": "blk-d05-h1",
+                "type": "h2",
+                "html": "نطاق الحماية في واجهات <bdi dir=\"ltr\">API</bdi>"
+              },
+              {
+                "id": "blk-d05-p-auto-ltr",
+                "type": "paragraph",
+                "html": "English-first validation note — تحقق من <bdi dir=\"ltr\">policy.can(subject, action, resource)</bdi> قبل إعادة المورد.",
+                "dir": "auto"
+              },
+              {
+                "id": "blk-d05-t1",
+                "type": "toggle",
+                "title": "01 — التحقق من هوية المورد",
+                "open": true,
+                "children": [
+                  {
+                    "id": "blk-d05-t1-p1",
+                    "type": "paragraph",
+                    "html": "تحقق من أن <bdi dir=\"ltr\">resource_id</bdi> ينتمي إلى النطاق الذي يملكه المستخدم قبل أي قراءة أو تعديل."
+                  },
+                  {
+                    "id": "blk-d05-t1-c1",
+                    "type": "callout",
+                    "html": "لا تعتمد على إخفاء العنصر في الواجهة. التفويض يجب أن يحدث في طبقة الخدمة."
+                  }
+                ]
+              },
+              {
+                "id": "blk-d05-t2",
+                "type": "toggle",
+                "title": "02 — ضوابط التنفيذ",
+                "open": true,
+                "children": [
+                  {
+                    "id": "blk-d05-li1",
+                    "type": "bullet",
+                    "html": "طبّق فحص السلطة لكل كائن حساس.",
+                    "children": [
+                      {
+                        "id": "blk-d05-li1a",
+                        "type": "bullet",
+                        "html": "افصل <bdi dir=\"ltr\">tenant_id</bdi> عن معرّف الكائن عند التحقق."
+                      }
+                    ]
+                  },
+                  {
+                    "id": "blk-d05-t2-n1",
+                    "type": "toggle",
+                    "title": "التحقق المتداخل من السياق",
+                    "open": true,
+                    "children": [
+                      {
+                        "id": "blk-d05-t2-n1-p1",
+                        "type": "paragraph",
+                        "html": "في المسار المختلط Arabic + English، حافظ على ترتيب النص المنطقي مثل <code class=\"inline-code\">policy.can(subject, action, resource)</code> دون قلب الرموز."
+                      },
+                      {
+                        "id": "blk-d05-code1",
+                        "type": "code",
+                        "html": "const allowed = policy.can(subject, \"read\", resource);\nif (!allowed) return response(403);\nreturn resourceView(resource);",
+                        "dir": "ltr"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "blk-d05-t3",
+                "type": "toggle",
+                "title": "03 — المراجع والربط",
+                "open": true,
+                "children": [
+                  {
+                    "id": "blk-d05-ref1",
+                    "type": "reference",
+                    "html": "مرجع مرتبط: <bdi dir=\"ltr\">KU-D03-0011</bdi>"
+                  },
+                  {
+                    "id": "blk-d05-q1",
+                    "type": "quote",
+                    "html": "السياق يحدد ما إذا كان الوصول إلى الكائن مشروعًا، وليس مجرد معرفة المعرّف."
+                  }
+                ]
+              }
+            ]
+          },
+          "receipt": {
+            "sequence": 2,
+            "kind": "reorder.commit",
+            "owner": "StructuredDragDropOwner",
+            "policyRevision": "structured-drag-drop-w4d-r1",
+            "route": "pointer",
+            "sourceBlockId": "blk-d05-h1",
+            "targetIdentity": "ROOT::2::0",
+            "changed": true,
+            "mutationOwner": "StructuredMutationKernel",
+            "semanticOwner": "StructuredMutationKernel",
+            "availabilityOwner": "StructuredCommandAvailabilityOwner",
+            "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+            "historyFrameDelta": 1,
+            "beforeWorkingRevision": 1,
+            "afterWorkingRevision": 2
+          },
+          "transaction": {
+            "ok": true,
+            "changed": true,
+            "status": "COMMITTED_WORKING_TRANSACTION",
+            "document": {
+              "id": "KU-D05-0021",
+              "title": "API Object-Level Authorization",
+              "tags": [
+                "Web / API",
+                "Authorization"
+              ],
+              "revision": "rev-17",
+              "sources": [
+                {
+                  "title": "OWASP API Security — Object Level Authorization",
+                  "kind": "مرجع تعليمي",
+                  "status": "مربوط بالسياق"
+                },
+                {
+                  "title": "CEP Defensive API Lab",
+                  "kind": "Local reference",
+                  "status": "NON-PRODUCTION"
+                }
+              ],
+              "relations": [
+                {
+                  "label": "يرتبط بـ Identity Boundary Validation",
+                  "target": "KU-D03-0011"
+                },
+                {
+                  "label": "يسبق تمرين Triage",
+                  "target": "KU-D09-0002"
+                }
+              ],
+              "labs": [
+                {
+                  "title": "Broken Object Authorization Lab",
+                  "status": "جاهز للتدريب"
+                }
+              ],
+              "projects": [
+                {
+                  "title": "API Policy Review",
+                  "status": "سياق مشروع ممثّل"
+                }
+              ],
+              "evidence": [
+                {
+                  "title": "Evidence pointer only",
+                  "status": "لا يصدر قرار W04"
+                }
+              ],
+              "blocks": [
+                {
+                  "id": "blk-d05-p1",
+                  "type": "paragraph",
+                  "html": "يجب أن يربط التطبيق كل طلب بين <bdi dir=\"ltr\">subject_id</bdi> و <bdi dir=\"ltr\">object_id</bdi> والسياق المصرّح به. هذه فقرة طويلة مقصودة لتلتف بصريًا إلى عدة أسطر مع بقائها <strong>Block واحدًا</strong> بهوية بنيوية واحدة."
+                },
+                {
+                  "id": "blk-d05-h1",
+                  "type": "h2",
+                  "html": "نطاق الحماية في واجهات <bdi dir=\"ltr\">API</bdi>"
+                },
+                {
+                  "id": "blk-d05-p-auto-ltr",
+                  "type": "paragraph",
+                  "html": "English-first validation note — تحقق من <bdi dir=\"ltr\">policy.can(subject, action, resource)</bdi> قبل إعادة المورد.",
+                  "dir": "auto"
+                },
+                {
+                  "id": "blk-d05-t1",
+                  "type": "toggle",
+                  "title": "01 — التحقق من هوية المورد",
+                  "open": true,
+                  "children": [
+                    {
+                      "id": "blk-d05-t1-p1",
+                      "type": "paragraph",
+                      "html": "تحقق من أن <bdi dir=\"ltr\">resource_id</bdi> ينتمي إلى النطاق الذي يملكه المستخدم قبل أي قراءة أو تعديل."
+                    },
+                    {
+                      "id": "blk-d05-t1-c1",
+                      "type": "callout",
+                      "html": "لا تعتمد على إخفاء العنصر في الواجهة. التفويض يجب أن يحدث في طبقة الخدمة."
+                    }
+                  ]
+                },
+                {
+                  "id": "blk-d05-t2",
+                  "type": "toggle",
+                  "title": "02 — ضوابط التنفيذ",
+                  "open": true,
+                  "children": [
+                    {
+                      "id": "blk-d05-li1",
+                      "type": "bullet",
+                      "html": "طبّق فحص السلطة لكل كائن حساس.",
+                      "children": [
+                        {
+                          "id": "blk-d05-li1a",
+                          "type": "bullet",
+                          "html": "افصل <bdi dir=\"ltr\">tenant_id</bdi> عن معرّف الكائن عند التحقق."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "blk-d05-t2-n1",
+                      "type": "toggle",
+                      "title": "التحقق المتداخل من السياق",
+                      "open": true,
+                      "children": [
+                        {
+                          "id": "blk-d05-t2-n1-p1",
+                          "type": "paragraph",
+                          "html": "في المسار المختلط Arabic + English، حافظ على ترتيب النص المنطقي مثل <code class=\"inline-code\">policy.can(subject, action, resource)</code> دون قلب الرموز."
+                        },
+                        {
+                          "id": "blk-d05-code1",
+                          "type": "code",
+                          "html": "const allowed = policy.can(subject, \"read\", resource);\nif (!allowed) return response(403);\nreturn resourceView(resource);",
+                          "dir": "ltr"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "blk-d05-t3",
+                  "type": "toggle",
+                  "title": "03 — المراجع والربط",
+                  "open": true,
+                  "children": [
+                    {
+                      "id": "blk-d05-ref1",
+                      "type": "reference",
+                      "html": "مرجع مرتبط: <bdi dir=\"ltr\">KU-D03-0011</bdi>"
+                    },
+                    {
+                      "id": "blk-d05-q1",
+                      "type": "quote",
+                      "html": "السياق يحدد ما إذا كان الوصول إلى الكائن مشروعًا، وليس مجرد معرفة المعرّف."
+                    }
+                  ]
+                }
+              ]
+            },
+            "frame": {
+              "id": "structured-history-2",
+              "label": "Controller Wave4 pointer convergence",
+              "document": {
+                "id": "KU-D05-0021",
+                "title": "API Object-Level Authorization",
+                "tags": [
+                  "Web / API",
+                  "Authorization"
+                ],
+                "revision": "rev-17",
+                "sources": [
+                  {
+                    "title": "OWASP API Security — Object Level Authorization",
+                    "kind": "مرجع تعليمي",
+                    "status": "مربوط بالسياق"
+                  },
+                  {
+                    "title": "CEP Defensive API Lab",
+                    "kind": "Local reference",
+                    "status": "NON-PRODUCTION"
+                  }
+                ],
+                "relations": [
+                  {
+                    "label": "يرتبط بـ Identity Boundary Validation",
+                    "target": "KU-D03-0011"
+                  },
+                  {
+                    "label": "يسبق تمرين Triage",
+                    "target": "KU-D09-0002"
+                  }
+                ],
+                "labs": [
+                  {
+                    "title": "Broken Object Authorization Lab",
+                    "status": "جاهز للتدريب"
+                  }
+                ],
+                "projects": [
+                  {
+                    "title": "API Policy Review",
+                    "status": "سياق مشروع ممثّل"
+                  }
+                ],
+                "evidence": [
+                  {
+                    "title": "Evidence pointer only",
+                    "status": "لا يصدر قرار W04"
+                  }
+                ],
+                "blocks": [
+                  {
+                    "id": "blk-d05-p1",
+                    "type": "paragraph",
+                    "html": "يجب أن يربط التطبيق كل طلب بين <bdi dir=\"ltr\">subject_id</bdi> و <bdi dir=\"ltr\">object_id</bdi> والسياق المصرّح به. هذه فقرة طويلة مقصودة لتلتف بصريًا إلى عدة أسطر مع بقائها <strong>Block واحدًا</strong> بهوية بنيوية واحدة."
+                  },
+                  {
+                    "id": "blk-d05-h1",
+                    "type": "h2",
+                    "html": "نطاق الحماية في واجهات <bdi dir=\"ltr\">API</bdi>"
+                  },
+                  {
+                    "id": "blk-d05-p-auto-ltr",
+                    "type": "paragraph",
+                    "html": "English-first validation note — تحقق من <bdi dir=\"ltr\">policy.can(subject, action, resource)</bdi> قبل إعادة المورد.",
+                    "dir": "auto"
+                  },
+                  {
+                    "id": "blk-d05-t1",
+                    "type": "toggle",
+                    "title": "01 — التحقق من هوية المورد",
+                    "open": true,
+                    "children": [
+                      {
+                        "id": "blk-d05-t1-p1",
+                        "type": "paragraph",
+                        "html": "تحقق من أن <bdi dir=\"ltr\">resource_id</bdi> ينتمي إلى النطاق الذي يملكه المستخدم قبل أي قراءة أو تعديل."
+                      },
+                      {
+                        "id": "blk-d05-t1-c1",
+                        "type": "callout",
+                        "html": "لا تعتمد على إخفاء العنصر في الواجهة. التفويض يجب أن يحدث في طبقة الخدمة."
+                      }
+                    ]
+                  },
+                  {
+                    "id": "blk-d05-t2",
+                    "type": "toggle",
+                    "title": "02 — ضوابط التنفيذ",
+                    "open": true,
+                    "children": [
+                      {
+                        "id": "blk-d05-li1",
+                        "type": "bullet",
+                        "html": "طبّق فحص السلطة لكل كائن حساس.",
+                        "children": [
+                          {
+                            "id": "blk-d05-li1a",
+                            "type": "bullet",
+                            "html": "افصل <bdi dir=\"ltr\">tenant_id</bdi> عن معرّف الكائن عند التحقق."
+                          }
+                        ]
+                      },
+                      {
+                        "id": "blk-d05-t2-n1",
+                        "type": "toggle",
+                        "title": "التحقق المتداخل من السياق",
+                        "open": true,
+                        "children": [
+                          {
+                            "id": "blk-d05-t2-n1-p1",
+                            "type": "paragraph",
+                            "html": "في المسار المختلط Arabic + English، حافظ على ترتيب النص المنطقي مثل <code class=\"inline-code\">policy.can(subject, action, resource)</code> دون قلب الرموز."
+                          },
+                          {
+                            "id": "blk-d05-code1",
+                            "type": "code",
+                            "html": "const allowed = policy.can(subject, \"read\", resource);\nif (!allowed) return response(403);\nreturn resourceView(resource);",
+                            "dir": "ltr"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "blk-d05-t3",
+                    "type": "toggle",
+                    "title": "03 — المراجع والربط",
+                    "open": true,
+                    "children": [
+                      {
+                        "id": "blk-d05-ref1",
+                        "type": "reference",
+                        "html": "مرجع مرتبط: <bdi dir=\"ltr\">KU-D03-0011</bdi>"
+                      },
+                      {
+                        "id": "blk-d05-q1",
+                        "type": "quote",
+                        "html": "السياق يحدد ما إذا كان الوصول إلى الكائن مشروعًا، وليس مجرد معرفة المعرّف."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "workingRevision": 2,
+              "presentation": {
+                "bookmark": {
+                  "blockId": "blk-d05-h1",
+                  "offset": 0
+                }
+              }
+            },
+            "receipt": {
+              "sequence": 3,
+              "command": "document.transaction",
+              "owner": "StructuredTransactionHistoryRecoveryOwner",
+              "policyRevision": "structured-transaction-history-recovery-vs04-r1",
+              "documentId": "KU-D05-0021",
+              "label": "Controller Wave4 pointer convergence",
+              "source": "StructuredMutationKernel",
+              "workingRevision": 2,
+              "historyFrameId": "structured-history-2"
+            },
+            "projection": {
+              "document": {
+                "id": "KU-D05-0021",
+                "title": "API Object-Level Authorization",
+                "tags": [
+                  "Web / API",
+                  "Authorization"
+                ],
+                "revision": "rev-17",
+                "sources": [
+                  {
+                    "title": "OWASP API Security — Object Level Authorization",
+                    "kind": "مرجع تعليمي",
+                    "status": "مربوط بالسياق"
+                  },
+                  {
+                    "title": "CEP Defensive API Lab",
+                    "kind": "Local reference",
+                    "status": "NON-PRODUCTION"
+                  }
+                ],
+                "relations": [
+                  {
+                    "label": "يرتبط بـ Identity Boundary Validation",
+                    "target": "KU-D03-0011"
+                  },
+                  {
+                    "label": "يسبق تمرين Triage",
+                    "target": "KU-D09-0002"
+                  }
+                ],
+                "labs": [
+                  {
+                    "title": "Broken Object Authorization Lab",
+                    "status": "جاهز للتدريب"
+                  }
+                ],
+                "projects": [
+                  {
+                    "title": "API Policy Review",
+                    "status": "سياق مشروع ممثّل"
+                  }
+                ],
+                "evidence": [
+                  {
+                    "title": "Evidence pointer only",
+                    "status": "لا يصدر قرار W04"
+                  }
+                ],
+                "blocks": [
+                  {
+                    "id": "blk-d05-p1",
+                    "type": "paragraph",
+                    "html": "يجب أن يربط التطبيق كل طلب بين <bdi dir=\"ltr\">subject_id</bdi> و <bdi dir=\"ltr\">object_id</bdi> والسياق المصرّح به. هذه فقرة طويلة مقصودة لتلتف بصريًا إلى عدة أسطر مع بقائها <strong>Block واحدًا</strong> بهوية بنيوية واحدة."
+                  },
+                  {
+                    "id": "blk-d05-h1",
+                    "type": "h2",
+                    "html": "نطاق الحماية في واجهات <bdi dir=\"ltr\">API</bdi>"
+                  },
+                  {
+                    "id": "blk-d05-p-auto-ltr",
+                    "type": "paragraph",
+                    "html": "English-first validation note — تحقق من <bdi dir=\"ltr\">policy.can(subject, action, resource)</bdi> قبل إعادة المورد.",
+                    "dir": "auto"
+                  },
+                  {
+                    "id": "blk-d05-t1",
+                    "type": "toggle",
+                    "title": "01 — التحقق من هوية المورد",
+                    "open": true,
+                    "children": [
+                      {
+                        "id": "blk-d05-t1-p1",
+                        "type": "paragraph",
+                        "html": "تحقق من أن <bdi dir=\"ltr\">resource_id</bdi> ينتمي إلى النطاق الذي يملكه المستخدم قبل أي قراءة أو تعديل."
+                      },
+                      {
+                        "id": "blk-d05-t1-c1",
+                        "type": "callout",
+                        "html": "لا تعتمد على إخفاء العنصر في الواجهة. التفويض يجب أن يحدث في طبقة الخدمة."
+                      }
+                    ]
+                  },
+                  {
+                    "id": "blk-d05-t2",
+                    "type": "toggle",
+                    "title": "02 — ضوابط التنفيذ",
+                    "open": true,
+                    "children": [
+                      {
+                        "id": "blk-d05-li1",
+                        "type": "bullet",
+                        "html": "طبّق فحص السلطة لكل كائن حساس.",
+                        "children": [
+                          {
+                            "id": "blk-d05-li1a",
+                            "type": "bullet",
+                            "html": "افصل <bdi dir=\"ltr\">tenant_id</bdi> عن معرّف الكائن عند التحقق."
+                          }
+                        ]
+                      },
+                      {
+                        "id": "blk-d05-t2-n1",
+                        "type": "toggle",
+                        "title": "التحقق المتداخل من السياق",
+                        "open": true,
+                        "children": [
+                          {
+                            "id": "blk-d05-t2-n1-p1",
+                            "type": "paragraph",
+                            "html": "في المسار المختلط Arabic + English، حافظ على ترتيب النص المنطقي مثل <code class=\"inline-code\">policy.can(subject, action, resource)</code> دون قلب الرموز."
+                          },
+                          {
+                            "id": "blk-d05-code1",
+                            "type": "code",
+                            "html": "const allowed = policy.can(subject, \"read\", resource);\nif (!allowed) return response(403);\nreturn resourceView(resource);",
+                            "dir": "ltr"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "blk-d05-t3",
+                    "type": "toggle",
+                    "title": "03 — المراجع والربط",
+                    "open": true,
+                    "children": [
+                      {
+                        "id": "blk-d05-ref1",
+                        "type": "reference",
+                        "html": "مرجع مرتبط: <bdi dir=\"ltr\">KU-D03-0011</bdi>"
+                      },
+                      {
+                        "id": "blk-d05-q1",
+                        "type": "quote",
+                        "html": "السياق يحدد ما إذا كان الوصول إلى الكائن مشروعًا، وليس مجرد معرفة المعرّف."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "history": [
+                {
+                  "id": "structured-history-1",
+                  "label": "baseline",
+                  "document": {
+                    "id": "KU-D05-0021",
+                    "title": "API Object-Level Authorization",
+                    "tags": [
+                      "Web / API",
+                      "Authorization"
+                    ],
+                    "revision": "rev-17",
+                    "sources": [
+                      {
+                        "title": "OWASP API Security — Object Level Authorization",
+                        "kind": "مرجع تعليمي",
+                        "status": "مربوط بالسياق"
+                      },
+                      {
+                        "title": "CEP Defensive API Lab",
+                        "kind": "Local reference",
+                        "status": "NON-PRODUCTION"
+                      }
+                    ],
+                    "relations": [
+                      {
+                        "label": "يرتبط بـ Identity Boundary Validation",
+                        "target": "KU-D03-0011"
+                      },
+                      {
+                        "label": "يسبق تمرين Triage",
+                        "target": "KU-D09-0002"
+                      }
+                    ],
+                    "labs": [
+                      {
+                        "title": "Broken Object Authorization Lab",
+                        "status": "جاهز للتدريب"
+                      }
+                    ],
+                    "projects": [
+                      {
+                        "title": "API Policy Review",
+                        "status": "سياق مشروع ممثّل"
+                      }
+                    ],
+                    "evidence": [
+                      {
+                        "title": "Evidence pointer only",
+                        "status": "لا يصدر قرار W04"
+                      }
+                    ],
+                    "blocks": [
+                      {
+                        "id": "blk-d05-h1",
+                        "type": "h2",
+                        "html": "نطاق الحماية في واجهات <bdi dir=\"ltr\">API</bdi>"
+                      },
+                      {
+                        "id": "blk-d05-p1",
+                        "type": "paragraph",
+                        "html": "يجب أن يربط التطبيق كل طلب بين <bdi dir=\"ltr\">subject_id</bdi> و <bdi dir=\"ltr\">object_id</bdi> والسياق المصرّح به. هذه فقرة طويلة مقصودة لتلتف بصريًا إلى عدة أسطر مع بقائها <strong>Block واحدًا</strong> بهوية بنيوية واحدة."
+                      },
+                      {
+                        "id": "blk-d05-p-auto-ltr",
+                        "type": "paragraph",
+                        "html": "English-first validation note — تحقق من <bdi dir=\"ltr\">policy.can(subject, action, resource)</bdi> قبل إعادة المورد.",
+                        "dir": "auto"
+                      },
+                      {
+                        "id": "blk-d05-t1",
+                        "type": "toggle",
+                        "title": "01 — التحقق من هوية المورد",
+                        "open": true,
+                        "children": [
+                          {
+                            "id": "blk-d05-t1-p1",
+                            "type": "paragraph",
+                            "html": "تحقق من أن <bdi dir=\"ltr\">resource_id</bdi> ينتمي إلى النطاق الذي يملكه المستخدم قبل أي قراءة أو تعديل."
+                          },
+                          {
+                            "id": "blk-d05-t1-c1",
+                            "type": "callout",
+                            "html": "لا تعتمد على إخفاء العنصر في الواجهة. التفويض يجب أن يحدث في طبقة الخدمة."
+                          }
+                        ]
+                      },
+                      {
+                        "id": "blk-d05-t2",
+                        "type": "toggle",
+                        "title": "02 — ضوابط التنفيذ",
+                        "open": true,
+                        "children": [
+                          {
+                            "id": "blk-d05-li1",
+                            "type": "bullet",
+                            "html": "طبّق فحص السلطة لكل كائن حساس.",
+                            "children": [
+                              {
+                                "id": "blk-d05-li1a",
+                                "type": "bullet",
+                                "html": "افصل <bdi dir=\"ltr\">tenant_id</bdi> عن معرّف الكائن عند التحقق."
+                              }
+                            ]
+                          },
+                          {
+                            "id": "blk-d05-t2-n1",
+                            "type": "toggle",
+                            "title": "التحقق المتداخل من السياق",
+                            "open": true,
+                            "children": [
+                              {
+                                "id": "blk-d05-t2-n1-p1",
+                                "type": "paragraph",
+                                "html": "في المسار المختلط Arabic + English، حافظ على ترتيب النص المنطقي مثل <code class=\"inline-code\">policy.can(subject, action, resource)</code> دون قلب الرموز."
+                              },
+                              {
+                                "id": "blk-d05-code1",
+                                "type": "code",
+                                "html": "const allowed = policy.can(subject, \"read\", resource);\nif (!allowed) return response(403);\nreturn resourceView(resource);",
+                                "dir": "ltr"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "id": "blk-d05-t3",
+                        "type": "toggle",
+                        "title": "03 — المراجع والربط",
+                        "open": true,
+                        "children": [
+                          {
+                            "id": "blk-d05-ref1",
+                            "type": "reference",
+                            "html": "مرجع مرتبط: <bdi dir=\"ltr\">KU-D03-0011</bdi>"
+                          },
+                          {
+                            "id": "blk-d05-q1",
+                            "type": "quote",
+                            "html": "السياق يحدد ما إذا كان الوصول إلى الكائن مشروعًا، وليس مجرد معرفة المعرّف."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "workingRevision": 1,
+                  "presentation": null
+                },
+                {
+                  "id": "structured-history-2",
+                  "label": "Controller Wave4 pointer convergence",
+                  "document": {
+                    "id": "KU-D05-0021",
+                    "title": "API Object-Level Authorization",
+                    "tags": [
+                      "Web / API",
+                      "Authorization"
+                    ],
+                    "revision": "rev-17",
+                    "sources": [
+                      {
+                        "title": "OWASP API Security — Object Level Authorization",
+                        "kind": "مرجع تعليمي",
+                        "status": "مربوط بالسياق"
+                      },
+                      {
+                        "title": "CEP Defensive API Lab",
+                        "kind": "Local reference",
+                        "status": "NON-PRODUCTION"
+                      }
+                    ],
+                    "relations": [
+                      {
+                        "label": "يرتبط بـ Identity Boundary Validation",
+                        "target": "KU-D03-0011"
+                      },
+                      {
+                        "label": "يسبق تمرين Triage",
+                        "target": "KU-D09-0002"
+                      }
+                    ],
+                    "labs": [
+                      {
+                        "title": "Broken Object Authorization Lab",
+                        "status": "جاهز للتدريب"
+                      }
+                    ],
+                    "projects": [
+                      {
+                        "title": "API Policy Review",
+                        "status": "سياق مشروع ممثّل"
+                      }
+                    ],
+                    "evidence": [
+                      {
+                        "title": "Evidence pointer only",
+                        "status": "لا يصدر قرار W04"
+                      }
+                    ],
+                    "blocks": [
+                      {
+                        "id": "blk-d05-p1",
+                        "type": "paragraph",
+                        "html": "يجب أن يربط التطبيق كل طلب بين <bdi dir=\"ltr\">subject_id</bdi> و <bdi dir=\"ltr\">object_id</bdi> والسياق المصرّح به. هذه فقرة طويلة مقصودة لتلتف بصريًا إلى عدة أسطر مع بقائها <strong>Block واحدًا</strong> بهوية بنيوية واحدة."
+                      },
+                      {
+                        "id": "blk-d05-h1",
+                        "type": "h2",
+                        "html": "نطاق الحماية في واجهات <bdi dir=\"ltr\">API</bdi>"
+                      },
+                      {
+                        "id": "blk-d05-p-auto-ltr",
+                        "type": "paragraph",
+                        "html": "English-first validation note — تحقق من <bdi dir=\"ltr\">policy.can(subject, action, resource)</bdi> قبل إعادة المورد.",
+                        "dir": "auto"
+                      },
+                      {
+                        "id": "blk-d05-t1",
+                        "type": "toggle",
+                        "title": "01 — التحقق من هوية المورد",
+                        "open": true,
+                        "children": [
+                          {
+                            "id": "blk-d05-t1-p1",
+                            "type": "paragraph",
+                            "html": "تحقق من أن <bdi dir=\"ltr\">resource_id</bdi> ينتمي إلى النطاق الذي يملكه المستخدم قبل أي قراءة أو تعديل."
+                          },
+                          {
+                            "id": "blk-d05-t1-c1",
+                            "type": "callout",
+                            "html": "لا تعتمد على إخفاء العنصر في الواجهة. التفويض يجب أن يحدث في طبقة الخدمة."
+                          }
+                        ]
+                      },
+                      {
+                        "id": "blk-d05-t2",
+                        "type": "toggle",
+                        "title": "02 — ضوابط التنفيذ",
+                        "open": true,
+                        "children": [
+                          {
+                            "id": "blk-d05-li1",
+                            "type": "bullet",
+                            "html": "طبّق فحص السلطة لكل كائن حساس.",
+                            "children": [
+                              {
+                                "id": "blk-d05-li1a",
+                                "type": "bullet",
+                                "html": "افصل <bdi dir=\"ltr\">tenant_id</bdi> عن معرّف الكائن عند التحقق."
+                              }
+                            ]
+                          },
+                          {
+                            "id": "blk-d05-t2-n1",
+                            "type": "toggle",
+                            "title": "التحقق المتداخل من السياق",
+                            "open": true,
+                            "children": [
+                              {
+                                "id": "blk-d05-t2-n1-p1",
+                                "type": "paragraph",
+                                "html": "في المسار المختلط Arabic + English، حافظ على ترتيب النص المنطقي مثل <code class=\"inline-code\">policy.can(subject, action, resource)</code> دون قلب الرموز."
+                              },
+                              {
+                                "id": "blk-d05-code1",
+                                "type": "code",
+                                "html": "const allowed = policy.can(subject, \"read\", resource);\nif (!allowed) return response(403);\nreturn resourceView(resource);",
+                                "dir": "ltr"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "id": "blk-d05-t3",
+                        "type": "toggle",
+                        "title": "03 — المراجع والربط",
+                        "open": true,
+                        "children": [
+                          {
+                            "id": "blk-d05-ref1",
+                            "type": "reference",
+                            "html": "مرجع مرتبط: <bdi dir=\"ltr\">KU-D03-0011</bdi>"
+                          },
+                          {
+                            "id": "blk-d05-q1",
+                            "type": "quote",
+                            "html": "السياق يحدد ما إذا كان الوصول إلى الكائن مشروعًا، وليس مجرد معرفة المعرّف."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "workingRevision": 2,
+                  "presentation": {
+                    "bookmark": {
+                      "blockId": "blk-d05-h1",
+                      "offset": 0
+                    }
+                  }
+                }
+              ],
+              "descriptor": {
+                "contract": {
+                  "id": "StructuredTransactionHistoryRecoveryOwner",
+                  "version": "1.0.0",
+                  "compatibility": "SEMVER",
+                  "owner": "Structured Family",
+                  "policyRevision": "structured-transaction-history-recovery-vs04-r1"
+                },
+                "owner": "StructuredTransactionHistoryRecoveryOwner",
+                "policy": {
+                  "recoveryRetentionLimit": 5
+                },
+                "documentId": "KU-D05-0021",
+                "workingRevision": 2,
+                "committedRevision": "rev-17",
+                "dirty": true,
+                "historyLength": 2,
+                "historyIndex": 1,
+                "canUndo": true,
+                "canRedo": false,
+                "recoveryCount": 0,
+                "persistedBoundaryConfigured": false
+              },
+              "recovery": []
+            }
+          },
+          "command": "block.moveToGap",
+          "availability": {
+            "enabled": true,
+            "code": "AVAILABLE",
+            "reason": "",
+            "owner": "StructuredCommandAvailabilityOwner",
+            "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+            "target": {
+              "kind": "gap",
+              "parentId": null,
+              "index": 2,
+              "depth": 0,
+              "afterBlockId": "blk-d05-p1",
+              "beforeBlockId": "blk-d05-p-auto-ltr"
+            }
+          },
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "semanticOwner": "StructuredMutationKernel",
+          "dragDropOwner": "StructuredDragDropOwner",
+          "targetPolicyOwner": "StructuredDropTargetPolicyOwner",
+          "validation": {
+            "ok": true,
+            "enabled": true,
+            "owner": "StructuredDropTargetPolicyOwner",
+            "policyRevision": "structured-drop-target-w4d-r1",
+            "code": "AVAILABLE",
+            "reason": "",
+            "target": {
+              "kind": "gap",
+              "parentId": null,
+              "index": 2,
+              "depth": 0,
+              "afterBlockId": "blk-d05-p1",
+              "beforeBlockId": "blk-d05-p-auto-ltr"
+            },
+            "targetIdentity": "ROOT::2::0",
+            "parentPathIds": [],
+            "sourceBlockId": "blk-d05-h1",
+            "availabilityOwner": "StructuredCommandAvailabilityOwner",
+            "mutationValidationOwner": "StructuredMutationKernel"
+          },
+          "historyFrameDelta": 1,
+          "beforeDocumentId": "KU-D05-0021",
+          "afterDocumentId": "KU-D05-0021"
+        },
+        "receipts": [
+          {
+            "sequence": 1,
+            "kind": "pointer.begin",
+            "owner": "StructuredDragDropOwner",
+            "policyRevision": "structured-drag-drop-w4d-r1",
+            "sourceBlockId": "blk-d05-h1",
+            "pointerId": 7
+          },
+          {
+            "sequence": 2,
+            "kind": "reorder.commit",
+            "owner": "StructuredDragDropOwner",
+            "policyRevision": "structured-drag-drop-w4d-r1",
+            "route": "pointer",
+            "sourceBlockId": "blk-d05-h1",
+            "targetIdentity": "ROOT::2::0",
+            "changed": true,
+            "mutationOwner": "StructuredMutationKernel",
+            "semanticOwner": "StructuredMutationKernel",
+            "availabilityOwner": "StructuredCommandAvailabilityOwner",
+            "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+            "historyFrameDelta": 1,
+            "beforeWorkingRevision": 1,
+            "afterWorkingRevision": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "wave4.operational-and-epistemic-boundaries",
+      "owner": "OperationalSessionOwner + EpistemicStateContract",
+      "oracle": "real Runs session attaches below M6 and contradictory epistemic truth is refused",
+      "status": "PASS",
+      "evidence": {
+        "operational": {
+          "session": {
+            "owner": "OperationalSessionOwner",
+            "contract": {
+              "id": "OperationalSessionOwner",
+              "version": "1.0.0",
+              "compatibility": "SEMVER",
+              "scope": "OPERATIONAL_PRESENTATION_ONLY",
+              "runtimeTruth": "RuntimeAdapter",
+              "maturity": "BOUNDARY_ONLY_BELOW_M6_UNLESS_SECOND_REAL_PROVIDER_IS_PROVEN"
+            },
+            "runtimeBoundary": {
+              "id": "OperationalRuntimePresentationBoundary",
+              "version": "1.0.0",
+              "compatibility": "SEMVER",
+              "scope": "PRESENTATION_READ_BOUNDARY_ONLY",
+              "canonicalTruthOwner": "RuntimeAdapter"
+            },
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+            "tabs": [
+              {
+                "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-1",
+                "providerSessionOwner": "InternalSimulationAdapter",
+                "deviceId": "DEV-WEB-01",
+                "attachedAtSequence": 1
+              }
+            ],
+            "activePresentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+            "chrome": {
+              "lifecycle": "open",
+              "placement": "bottom",
+              "geometry": {
+                "x": 120,
+                "y": 140,
+                "width": 720,
+                "height": 420
+              }
+            },
+            "providerAttachments": [
+              {
+                "contract": {
+                  "id": "RuntimeAdapter",
+                  "version": "1.0.0",
+                  "compatibility": "SEMVER"
+                },
+                "id": "InternalSimulationAdapter",
+                "label": "Internal simulation",
+                "sessionOwner": "InternalSimulationAdapter",
+                "commandOwner": "InternalSimulationAdapter",
+                "inputLabel": "sim >",
+                "help": "Commands: help, show status, show topology, shutdown, no shutdown",
+                "capabilities": [
+                  "OPEN_TERMINAL",
+                  "runtime.input",
+                  "runtime.recorded"
+                ],
+                "connected": true,
+                "classification": "REAL_RUNTIME_PROVIDER",
+                "evidenceRole": "Runs canonical runtime provider"
+              }
+            ],
+            "lastTransition": {
+              "sequence": 1,
+              "action": "session.attach",
+              "owner": "OperationalSessionOwner",
+              "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-1",
+              "reused": false
+            }
+          },
+          "maturity": "BOUNDED_BELOW_M6_SECOND_REAL_PROVIDER_NOT_PROVEN",
+          "bottomProviders": [
+            "operational.runtime-session",
+            "operational.session-presentation"
+          ],
+          "runtimeEvents": 0
+        },
+        "epistemic": {
+          "rejected": "EPISTEMIC_TRUTH_CONFLICT:ERROR_PROVEN_SUCCESS",
+          "maturity": "BOUNDED_BELOW_M6_SECOND_REAL_PROVIDER_NOT_PROVEN"
+        }
+      }
+    }
+  ],
+  "status": "PASS",
+  "limits": [
+    "Five bounded Wave4 convergence flows; not final Surface certification",
+    "OperationalSessionOwner remains explicitly below M6 until a second genuine provider exists"
+  ]
+}

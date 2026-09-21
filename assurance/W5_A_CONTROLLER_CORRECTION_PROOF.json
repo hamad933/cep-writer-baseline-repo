@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 1,
+  "kind": "W5_A_CONTROLLER_CORRECTION_PROOF",
+  "classification": "LANE_BOUNDED_CORRECTION_EVIDENCE_NOT_CONTROLLER_ACCEPTANCE",
+  "status": "PASS",
+  "sourceCanonicalTreeSha256": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d",
+  "canonicalSourceFileCount": 99,
+  "controllerCases": [
+    {
+      "id": "w5a.controller.read-mode-keyboard-reorder-zero-mutation",
+      "status": "PASS",
+      "evidence": {
+        "code": "EDIT_MODE_REQUIRED",
+        "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+        "delegatedOwner": "StructuredDragDropOwner",
+        "historyDelta": 0,
+        "workingRevisionDelta": 0,
+        "canonicalUnchanged": true
+      }
+    },
+    {
+      "id": "w5a.controller.read-mode-pointer-drag-zero-mutation",
+      "status": "PASS",
+      "evidence": {
+        "begin": "EDIT_MODE_REQUIRED",
+        "update": "EDIT_MODE_REQUIRED",
+        "commit": "EDIT_MODE_REQUIRED",
+        "pointerState": null,
+        "historyDelta": 0,
+        "workingRevisionDelta": 0,
+        "canonicalUnchanged": true
+      }
+    },
+    {
+      "id": "w5a.controller.edit-drag-switch-read-commit-zero-mutation",
+      "status": "PASS",
+      "evidence": {
+        "modeReceipt": {
+          "sequence": 2,
+          "kind": "mode.project",
+          "owner": "StructuredSurfaceHost",
+          "policyRevision": "structured-surface-host-w5a-r3",
+          "mode": "read",
+          "canonicalDocumentMutation": false,
+          "cancelledPointerDrag": true
+        },
+        "commit": {
+          "code": "EDIT_MODE_REQUIRED",
+          "changed": false
+        },
+        "historyDelta": 0,
+        "workingRevisionDelta": 0,
+        "canonicalUnchanged": true
+      }
+    },
+    {
+      "id": "w5a.controller.input-owner-exact-instance-reuse",
+      "status": "PASS",
+      "evidence": {
+        "exactInstanceReuse": true,
+        "owner": "StructuredInputKeymapOwner",
+        "commandsSame": true,
+        "globalSame": true
+      }
+    },
+    {
+      "id": "w5a.controller.input-owner-command-global-mismatch-rejected",
+      "status": "PASS",
+      "evidence": {
+        "error": "SECOND_STRUCTURED_INPUT_KEYMAP_OWNER_DETECTED",
+        "rejected": true,
+        "adapterOwnerPreserved": true
+      }
+    },
+    {
+      "id": "w5a.controller.fake-input-owner-rejected",
+      "status": "PASS",
+      "evidence": {
+        "error": "SECOND_STRUCTURED_INPUT_KEYMAP_OWNER_DETECTED",
+        "rejected": true
+      }
+    },
+    {
+      "id": "w5a.controller.renderer-policy-failed-update-atomic",
+      "status": "PASS",
+      "evidence": {
+        "error": "INVALID_STRUCTURED_RENDERER_INDENT_UNIT",
+        "before": {
+          "revision": "structured-block-renderer-w5a-r3",
+          "blockGapPx": 8,
+          "indentUnitPx": 20
+        },
+        "after": {
+          "revision": "structured-block-renderer-w5a-r3",
+          "blockGapPx": 8,
+          "indentUnitPx": 20
+        },
+        "exactUnchanged": true
+      }
+    },
+    {
+      "id": "w5a.controller.fake-presentation-bridge-rejected",
+      "status": "PASS",
+      "evidence": {
+        "fakeError": "STRUCTURED_PRESENTATION_BRIDGE_CANONICAL_OWNER_MISMATCH",
+        "bindingError": "STRUCTURED_PRESENTATION_BRIDGE_CANONICAL_OWNER_MISMATCH",
+        "rejected": true
+      }
+    },
+    {
+      "id": "w5a.controller.no-op-content-update-truthful",
+      "status": "PASS",
+      "evidence": {
+        "code": "NO_CHANGE",
+        "changed": false,
+        "historyDelta": 0,
+        "workingRevisionDelta": 0,
+        "canonicalUnchanged": true
+      }
+    },
+    {
+      "id": "w5a.controller.generic-format-update-cannot-bypass-availability",
+      "status": "PASS",
+      "evidence": {
+        "attempts": [
+          {
+            "code": "FORMAT_UPDATE_REQUIRES_CANONICAL_COMMAND",
+            "rejectedKeys": [
+              "dir"
+            ],
+            "owner": "StructuredCommandAvailabilityOwner"
+          },
+          {
+            "code": "FORMAT_UPDATE_REQUIRES_CANONICAL_COMMAND",
+            "rejectedKeys": [
+              "align"
+            ],
+            "owner": "StructuredCommandAvailabilityOwner"
+          },
+          {
+            "code": "FORMAT_UPDATE_REQUIRES_CANONICAL_COMMAND",
+            "rejectedKeys": [
+              "bg"
+            ],
+            "owner": "StructuredCommandAvailabilityOwner"
+          }
+        ],
+        "canonicalUnchanged": true,
+        "historyDelta": 0,
+        "workingRevisionDelta": 0
+      }
+    },
+    {
+      "id": "w5a.controller.closed-toggle-hides-presented-children",
+      "status": "PASS",
+      "evidence": {
+        "closed": {
+          "collapsed": true,
+          "childrenVisible": false,
+          "canonicalChildRetained": true,
+          "childExposed": false
+        },
+        "opened": {
+          "childVisible": true
+        },
+        "toggleAriaTruth": true
+      }
+    },
+    {
+      "id": "w5a.controller.align-background-projection-both-consumers-exact-revert",
+      "status": "PASS",
+      "evidence": {
+        "consumers": [
+          {
+            "surface": "library",
+            "blockId": "blk-d05-p1",
+            "alignOwner": "StructuredCommandAvailabilityOwner",
+            "backgroundOwner": "StructuredCommandAvailabilityOwner",
+            "changed": true,
+            "exactProjectionRevert": true
+          },
+          {
+            "surface": "learn",
+            "blockId": "learn-p1",
+            "alignOwner": "StructuredCommandAvailabilityOwner",
+            "backgroundOwner": "StructuredCommandAvailabilityOwner",
+            "changed": true,
+            "exactProjectionRevert": true
+          }
+        ]
+      }
+    }
+  ],
+  "browserMutationCases": [
+    {
+      "id": "browser.read-mode-keyboard-reorder-zero-mutation",
+      "status": "PASS",
+      "evidence": {
+        "code": "EDIT_MODE_REQUIRED",
+        "historyDelta": 0,
+        "workingRevisionDelta": 0,
+        "canonicalUnchanged": true
+      }
+    },
+    {
+      "id": "browser.read-mode-pointer-drag-zero-mutation",
+      "status": "PASS",
+      "evidence": {
+        "begin": "EDIT_MODE_REQUIRED",
+        "update": "EDIT_MODE_REQUIRED",
+        "commit": "EDIT_MODE_REQUIRED",
+        "historyDelta": 0,
+        "workingRevisionDelta": 0,
+        "canonicalUnchanged": true
+      }
+    },
+    {
+      "id": "browser.edit-drag-switch-read-commit-zero-mutation",
+      "status": "PASS",
+      "evidence": {
+        "modeCancelledPointerDrag": true,
+        "commitCode": "EDIT_MODE_REQUIRED",
+        "historyDelta": 0,
+        "workingRevisionDelta": 0,
+        "canonicalUnchanged": true
+      }
+    }
+  ],
+  "checks": {
+    "allTwelveControllerCasesPass": true,
+    "allThreeBrowserMutationCasesPass": true,
+    "browserAndExecutableBoundToSameSource": true
+  },
+  "statusCeiling": "CANDIDATE_READY_FOR_CONTROLLER_REVIEW_ONLY_NO_SELF_PROMOTION"
+}

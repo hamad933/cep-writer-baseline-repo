@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "status": "CURRENT_POLICY",
+  "map": "authority/controller/07_W03_69_REQUIREMENT_REUSE_MAP.csv",
+  "workAdmissionSemantics": "HISTORICAL_PRE_V0_2_1_CONTROLLER_ADMISSION_PROVENANCE_ONLY",
+  "admittedTaskIdSemantics": "HISTORICAL_PRE_V0_2_1_CONTROLLER_TASK_TRACEABILITY_ONLY",
+  "notCurrentBacklog": true,
+  "currentActiveDeferredTruth": "assurance/HIGH_VALUE_DEFERRED_LEDGER.json",
+  "currentImplementationTruth": [
+    "contracts/FOUNDATION_RUNTIME_REGISTRY.json",
+    "contracts/MECHANIC_OWNERSHIP_REGISTRY.json",
+    "assurance/MODEL_TEST_RESULTS.json",
+    "assurance/CONTRACT_TEST_RESULTS.json"
+  ],
+  "writerRoutingLaw": "Writer scaffolds MUST NOT use raw W03 WORK_ADMISSION or ADMITTED_TASK_ID as current task selectors. Use current surface profile/family applicability and current high-value deferred ledger.",
+  "mapAuthority": "BOUNDED_ADVISORY_REQUIREMENT_TO_OWNER_COMPILATION_NOT_IMPLEMENTATION_AUTHORITY",
+  "truthCeiling": "SEMANTIC_ADJUDICATION_PARTIAL; future family/surface Writers re-adjudicate only their relevant subset against current Foundation ownership."
+}

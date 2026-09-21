@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "kind": "W5_AB_CONTROLLER_INDEPENDENT_PROBES",
+  "status": "PASS",
+  "sourceCanonicalTreeSha256": "7da83126305d82b820ea83fa4c9cd3f251f4afcf205c5dc89c14112280c73aa1",
+  "canonicalSourceFileCount": 96,
+  "pass": 11,
+  "fail": 0,
+  "cases": [
+    {
+      "id": "controller.a.action-owner-drift-rejected",
+      "status": "PASS",
+      "evidence": {
+        "error": "SECOND_STRUCTURED_ACTION_DESCRIPTOR_OWNER_DETECTED",
+        "fakeCalls": 0
+      }
+    },
+    {
+      "id": "controller.a.command-binding-drift-rejected",
+      "status": "PASS",
+      "evidence": {
+        "error": "STRUCTURED_CANONICAL_COMMAND_BINDING_DRIFT:block.align",
+        "fakeCalls": 0,
+        "canonicalUnchanged": true
+      }
+    },
+    {
+      "id": "controller.a.constructor-fail-atomic",
+      "status": "PASS",
+      "evidence": {
+        "error": "STRUCTURED_PRESENTATION_BRIDGE_CANONICAL_OWNER_MISMATCH",
+        "commandBindings": 0,
+        "inputOwner": null
+      }
+    },
+    {
+      "id": "controller.a.content-applicability-zero-transaction",
+      "status": "PASS",
+      "evidence": {
+        "error": "STRUCTURED_CONTENT_FIELD_NOT_APPLICABLE:paragraph:open",
+        "historyDelta": 0,
+        "workingRevisionDelta": 0
+      }
+    },
+    {
+      "id": "controller.a.toggle-titleHtml-sanitized",
+      "status": "PASS",
+      "evidence": {
+        "richPreserved": true,
+        "unsafeRemoved": true,
+        "canonicalRawPreserved": true
+      }
+    },
+    {
+      "id": "controller.b.workingRevision--1-rejected",
+      "status": "PASS",
+      "evidence": {
+        "value": -1,
+        "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+      }
+    },
+    {
+      "id": "controller.b.workingRevision-1.5-rejected",
+      "status": "PASS",
+      "evidence": {
+        "value": 1.5,
+        "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+      }
+    },
+    {
+      "id": "controller.b.helper-identity-contradiction-rejected",
+      "status": "PASS",
+      "evidence": {
+        "error": "STRUCTURED_NAVIGATION_DOCUMENT_IDENTITY_MISMATCH"
+      }
+    },
+    {
+      "id": "controller.b.fake-tree-rejected",
+      "status": "PASS",
+      "evidence": {
+        "error": "STRUCTURED_NAVIGATION_ADAPTER_TREE_KERNEL_MISMATCH"
+      }
+    },
+    {
+      "id": "controller.b.policy-type-atomic",
+      "status": "PASS",
+      "evidence": {
+        "error": "STRUCTURED_NAVIGATION_POLICY_BOOLEAN_REQUIRED",
+        "unchanged": true
+      }
+    },
+    {
+      "id": "controller.b.numeric-control-entity-safe",
+      "status": "PASS",
+      "evidence": {
+        "output": "A&#0;B &#1; C &#31; D &#127; E &#128; F A",
+        "hasControl": false
+      }
+    }
+  ]
+}

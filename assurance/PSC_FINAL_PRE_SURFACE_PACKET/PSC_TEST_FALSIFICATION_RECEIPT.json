@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "classification": "CANDIDATE_ONLY_AGGREGATED_TEST_FALSIFICATION_RECEIPT",
+  "canonicalSource": {
+    "sha256": "8b16e96795d3fa8815f310e62901c8e3957f072c9a8e11e377e353b315447084",
+    "files": 147
+  },
+  "gates": [
+    {
+      "id": "build-runtime",
+      "status": "PASS",
+      "detail": "CANONICAL_SOURCE_TO_GENERATED_ONLY build completed; 144 TS-derived modules + assets."
+    },
+    {
+      "id": "model-suite",
+      "status": "PASS",
+      "pass": 210,
+      "fail": 0
+    },
+    {
+      "id": "ps02-spatial",
+      "status": "PASS",
+      "total": 101,
+      "pass": 101,
+      "fail": 0
+    },
+    {
+      "id": "ps01-model",
+      "status": "PASS",
+      "pass": 5,
+      "fail": 0
+    },
+    {
+      "id": "ps04-model",
+      "status": "PASS",
+      "pass": 11,
+      "fail": 0
+    },
+    {
+      "id": "npm-check",
+      "status": "PASS",
+      "detail": "Final npm run check exit code 0 after packet/evidence creation; post-packet log retained."
+    },
+    {
+      "id": "runtime-persistence-falsification",
+      "status": "PASS",
+      "runtime": {
+        "node": "v22.16.0",
+        "required": "v22.16.0",
+        "driverId": "node:sqlite",
+        "productionDrivers": [
+          "node:sqlite"
+        ],
+        "host": "127.0.0.1"
+      }
+    },
+    {
+      "id": "legacy-browser-conformance",
+      "status": "PASS",
+      "summary": {
+        "total": 6,
+        "pass": 6,
+        "fail": 0
+      }
+    },
+    {
+      "id": "final-browser-persistence",
+      "status": "PASS",
+      "summary": {
+        "pass": 43,
+        "fail": 0
+      },
+      "networkEvents": 28
+    },
+    {
+      "id": "ps04-real-consumer-browser",
+      "status": "PASS",
+      "pass": 17,
+      "fail": 0
+    },
+    {
+      "id": "manual-visual-review",
+      "status": "PASS",
+      "manifest": "PSC_VISUAL_EVIDENCE_MANIFEST.json"
+    }
+  ],
+  "logHashes": {
+    "ps01-browser.log": {
+      "sha256": "ac67ffb690d39afc15619251600a0b3efbbc66c1c273a5f55e81cfe36b2a9f20",
+      "bytes": 14304
+    },
+    "ps02-spatial.log": {
+      "sha256": "d97d9cd1e91b292591bc43bd49f662fa48ab80610a0c41f7606b35aa3c941220",
+      "bytes": 17366
+    },
+    "ps04-browser.log": {
+      "sha256": "0b688c8785b02f2b5d874fd17a2de225eeabc991988ef60ce45c152684cba7cf",
+      "bytes": 66
+    },
+    "final-browser-persistence.log": {
+      "sha256": "4566247e08b6e84a637aa08fa7e14005853927b350e1a5f57146d26b4dfd77ed",
+      "bytes": 27568
+    },
+    "ps04-model.log": {
+      "sha256": "48ae8abc79ff1d788fc2f7e21e73b0284f7836ff836f07fa287f3149a5f4562b",
+      "bytes": 5996
+    },
+    "npm-test-models.log": {
+      "sha256": "9cbc2c72419e0fd78561dd3e0b1e93d0e4d30317ea5ccc71ded659044a3efd46",
+      "bytes": 81140
+    },
+    "npm-build-runtime.log": {
+      "sha256": "f4776927578d4b0f601333802ac9b895c3edbed79852ea652193d3c88626b0af",
+      "bytes": 1645
+    },
+    "npm-check.log": {
+      "sha256": "1e0956dba1319babc2b93b5ff72ff85c14800ce6460ac8f455c81a7172bcfac2",
+      "bytes": 136946
+    },
+    "ps01-model.log": {
+      "sha256": "4b00dc406af72dc54826255944dd4015f1a7bbb6c06681e388a0a1f7af17a509",
+      "bytes": 1914
+    },
+    "runtime-falsification.log": {
+      "sha256": "070c1c6e18183955e7eb1d4956d36edb003f0db9fd767729fea3e3a920f08c12",
+      "bytes": 10549
+    },
+    "npm-check-post-packet.log": {
+      "sha256": "2b8baf2c6de8824ba65dcaf3efef5d18fc2efe87c3b62fd475e3a7eed64c7b13",
+      "bytes": 136946
+    }
+  },
+  "result": "PASS"
+}

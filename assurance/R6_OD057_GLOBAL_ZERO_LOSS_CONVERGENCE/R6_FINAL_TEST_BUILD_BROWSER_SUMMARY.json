@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "classification": "R6_FINAL_TEST_BUILD_BROWSER_SUMMARY",
+  "source": {
+    "sha256": "557d9f617ee614d7bd21e2b7d76ffad318c476727dd48c2dbf5b84923f30eb1e",
+    "files": 271
+  },
+  "status": "PASS",
+  "gates": {
+    "build:runtime": {
+      "exit": 0
+    },
+    "npm test": {
+      "exit": 0,
+      "pass": 210,
+      "fail": 0
+    },
+    "npm run check": {
+      "exit": 0
+    },
+    "npm run runtime:check": {
+      "exit": 0
+    },
+    "23SurfaceBrowser": {
+      "total": 23,
+      "pass": 23,
+      "fail": 0
+    },
+    "criticalBrowser": {
+      "total": 6,
+      "pass": 6,
+      "fail": 0
+    },
+    "navigationContext": "PASS",
+    "routeScreenshots": {
+      "status": "PASS",
+      "count": 6
+    }
+  },
+  "browserTruth": {
+    "transport": "exact-current built ESM via Chromium CDP/blob module graph because localhost navigation is policy-blocked in review environment",
+    "viewports": [
+      "1440x1000",
+      "1024x900"
+    ],
+    "criticalInteractionViewport": "1440x980 plus compact workspace proof",
+    "reducedMotion": true,
+    "rtlLtrBidi": "PASS",
+    "keyboardPointerFocus": "PASS",
+    "backForwardContext": "PASS"
+  },
+  "notClaimed": {
+    "WindowsTargetPass": false,
+    "StackFrozen": false,
+    "Balanced6Executed": false
+  }
+}

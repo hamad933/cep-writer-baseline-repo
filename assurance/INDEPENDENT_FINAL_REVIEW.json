@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS_READY_FOR_CONTROLLER_SUCCESSION_INPUT",
+  "baselineId": "CEP-FOUNDATION-0.2.1c-BROWSER-TRUTHFULNESS-CORRECTED-CANDIDATE",
+  "lineageBaseline": {
+    "filename": "CEP_FOUNDATION_FORGE_v0.2.1b_CONTROLLER_REVIEW_CORRECTED_CANDIDATE.zip",
+    "bytes": 3593683,
+    "sha256": "787d886903099fc0cc0cb66c2ca9299217f9b19363e632f2a5ed8c2193d514aa",
+    "candidate_id": "5cb323107f2c826cfb61abe56901a6ea0347357c6b702968db5d935b2a71854d"
+  },
+  "independentGates": {
+    "model": {
+      "pass": 58,
+      "fail": 0
+    },
+    "contract": {
+      "pass": 151,
+      "fail": 0
+    },
+    "writerScaffold": {
+      "pass": 38,
+      "fail": 0
+    },
+    "w03Semantic": {
+      "passed": 60,
+      "failed": 0,
+      "total": 60,
+      "sections": 69,
+      "atoms": 318,
+      "rowsChanged": 242,
+      "independentReviewCorrections": 24
+    },
+    "authority": {
+      "pass": 5,
+      "fail": 0
+    },
+    "duplicateMechanics": "PASS_ZERO_FINDINGS",
+    "stackParity": "58/58_JS_AND_58/58_TS_PROOF_IDENTICAL"
+  },
+  "browserTruth": {
+    "lineageV0_2_1a": "6/6 PASS",
+    "freshV0_2_1cFullRerun": false,
+    "currentDelta": "receipt provenance + check semantics only; no runtime/UI behavior changed",
+    "currentDeltaValidation": "model/contract/scaffold/W03/authority/deferred/stack gates PASS",
+    "reason": "review environment lacks package-local Node Playwright and offline npm cache; no false fresh-browser claim"
+  },
+  "semanticTruthCeiling": "SEMANTIC_ADJUDICATION_PARTIAL",
+  "highValueDeferredItems": 10,
+  "droppedSupersededItems": 15,
+  "architectureStatus": [
+    "GLOBAL_EXECUTABLE_FOUNDATION",
+    "SURFACE_FAMILY_ENGINE",
+    "THIN_DOMAIN_ADAPTER",
+    "SURFACE_COMPOSITION"
+  ],
+  "stackStatus": "STACK_NOT_FROZEN",
+  "ownerAccepted": false,
+  "foundationFrozen": false,
+  "controllerSuccessionRecommendation": "READY: use this truthfulness-corrected candidate as the exact current Foundation succession input, not as Owner-accepted/frozen product truth. New Controller must independently verify identity and preserve stated truth ceilings."
+}

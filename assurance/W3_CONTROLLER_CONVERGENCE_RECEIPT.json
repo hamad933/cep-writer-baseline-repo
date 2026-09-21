@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "classification": "WAVE3_CONTROLLER_CONVERGENCE_ACCEPTANCE_EVIDENCE",
+  "generatedAt": "2026-09-12T03:24:02.151558+00:00",
+  "parent": {
+    "successorId": "CEP-FR-E12-W2C-2e4b6f8e",
+    "bytes": 6990771,
+    "sha256": "2e4b6f8e149824b84e59101f10c70e39e17871f9049386d1b6792553090b6216",
+    "canonicalSourceSha256": "52f3f3e5d6d669595fa57cbd2da7aa8cbd7a577c0ae6cc90c33a82d1b6597250"
+  },
+  "laneCandidates": {
+    "A": {
+      "name": "CEP_FOUNDATION_FORGE_v0.2.1c_W3_A_GLOBAL_INPUT_KEYMAP_WRITER_CORRECTED_CANDIDATE.zip",
+      "sha256": "eb7051c6ff498dcb1896b420dda0af7e3a015c2bc4f92773e27df36e14c84562",
+      "owner": "GlobalInputKeymapOwner"
+    },
+    "B": {
+      "name": "CEP_FOUNDATION_FORGE_v0.2.1c_W3_B_ACCESSIBILITY_FEEDBACK_CORRECTED_CANDIDATE.zip",
+      "sha256": "3de26f8525719d7f51bc264ae80759e2d30c251b44f51e0ab30210e485788855",
+      "owner": "AccessibilityFeedbackOwner"
+    },
+    "C": {
+      "name": "CEP_FOUNDATION_FORGE_v0.2.1c_W3_C_CONTEXT_INSPECTOR_HOST_CORRECTED_CANDIDATE.zip",
+      "owner": "ContextInspectorHost"
+    },
+    "D": {
+      "name": "CEP_FOUNDATION_FORGE_v0.2.1c_W3_D_BOTTOM_DEEP_WORK_CORRECTED_CANDIDATE.zip",
+      "sha256": "661f21a4d6aff27b5e3dae8bee1c6ec251191dcb79777e21d1eb2fb4a5434208",
+      "owner": "BottomDeepWorkOwner"
+    },
+    "E": {
+      "name": "CEP_FOUNDATION_FORGE_v0.2.1c_W3_E_UI_SCALE_POLICY_CANDIDATE.zip",
+      "sha256": "dbaf6c5692a2c033ff2747ae1179ccea89b1ba500874cff44001f4fd28e4e200",
+      "owner": "UIScalePolicyOwner"
+    }
+  },
+  "convergenceOrder": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "controllerIntegration": {
+    "compositionOwner": "ControllerIntegrationHost",
+    "module": "stack/native-typescript/foundation/wave3-assembly.ts",
+    "sharedSeams": [
+      "stack/native-typescript/main.ts",
+      "stack/native-typescript/foundation/accepted-runtime.ts",
+      "tools/browser-conformance.mjs",
+      "tools/build-runtime.mjs"
+    ],
+    "laws": [
+      "no duplicate donor F6 owner after GlobalInputKeymapOwner handles event",
+      "BottomDeepWorkOwner is canonical bottom lifecycle when Wave3 assembly mounted",
+      "ContextInspectorHost is canonical context lifecycle when Wave3 assembly mounted",
+      "AccessibilityFeedbackOwner owns presentation feedback only",
+      "UIScalePolicyOwner projects chrome scale only"
+    ]
+  },
+  "finalCanonicalSource": {
+    "sha256": "050089b82d0f77866c86bd91a395ce7834894d3e80428ffd0f0fd20e6780e8c4",
+    "files": 55
+  },
+  "gates": {
+    "buildRuntime": "PASS",
+    "model": "210/210 PASS",
+    "contracts": "157/157 PASS",
+    "legacyBrowser": "6/6 PASS",
+    "wave3IntegrationBrowser": "5/5 PASS",
+    "npmCheck": "PASS",
+    "generatorPreservation": "PASS"
+  },
+  "runtimeTruth": {
+    "stackStatus": "STACK_NOT_FROZEN",
+    "wave3Status": "CONTROLLER_ACCEPTED_AND_CLOSED_WAVE4_PENDING"
+  },
+  "authority": {
+    "controllerAccepted": true,
+    "selfPromoted": false,
+    "wave4Started": false,
+    "surfaceBuildStarted": false
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "mission": "W3-C-CONTEXT-INSPECTOR-HOST-BOUNDED-CORRECTION",
+  "status": "PASS",
+  "browser": {
+    "engine": "Chromium",
+    "executable": "/usr/bin/chromium",
+    "transport": "Chrome DevTools Protocol",
+    "headless": true
+  },
+  "checks": [
+    {
+      "id": "single-host",
+      "status": "PASS",
+      "detail": "exactly one rendered ContextInspectorHost"
+    },
+    {
+      "id": "library-provider",
+      "status": "PASS",
+      "detail": "real Library/Structured provider active"
+    },
+    {
+      "id": "complementary-role",
+      "status": "PASS",
+      "detail": "complementary landmark"
+    },
+    {
+      "id": "labelled-heading",
+      "status": "PASS",
+      "detail": "aria-labelledby resolves"
+    },
+    {
+      "id": "tablists",
+      "status": "PASS",
+      "detail": "lens and detail tablists"
+    },
+    {
+      "id": "tab-selected-state",
+      "status": "PASS",
+      "detail": "selected tabs exposed"
+    },
+    {
+      "id": "tabpanel",
+      "status": "PASS",
+      "detail": "active tabpanel"
+    },
+    {
+      "id": "close-label",
+      "status": "PASS",
+      "detail": "named close control"
+    },
+    {
+      "id": "pin-state",
+      "status": "PASS",
+      "detail": "pin aria state"
+    },
+    {
+      "id": "technical-direction",
+      "status": "PASS",
+      "detail": "technical fields LTR"
+    },
+    {
+      "id": "spatial-provider",
+      "status": "PASS",
+      "detail": "same host renders Spatial provider"
+    },
+    {
+      "id": "descriptor-explicit",
+      "status": "PASS",
+      "detail": "descriptor identity explicit"
+    },
+    {
+      "id": "lens-action",
+      "status": "PASS",
+      "detail": "lens action works"
+    },
+    {
+      "id": "active-invalidation-receipt",
+      "status": "PASS",
+      "detail": "{\"ok\":false,\"code\":\"DESCRIPTOR_INAPPLICABLE\",\"providerId\":\"spatial-context\",\"reconciled\":true,\"reconciliation\":\"CLOSED_NO_REPLACEMENT\",\"reason\":\"descriptor-inapplicable\",\"hostState\":{\"ownerId\":\"ContextInspectorHost\",\"open\":false,\"activeProviderId\":null,\"activeDescriptorId\":null,\"activeLensId\":null,\"activeTabId\":null,\"pinned\":false,\"lastTransition\":\"reconcile:project:descriptor-inapplicable:closed\",\"policyTag\":\"density=comfortable;owner=1;revision=1;empty=—\"},\"transientActive\":false,\"focusReturn\":{\"id\":\"context-inspector-host\",\"reason\":\"context-reconcile:descriptor-inapplicable\",\"restored\":true,\"focusTargetKind\":\"invoker\",\"owner\":\"TransientFocusOwner\",\"policyTag\":\"topmost-first-v1\"}}"
+    },
+    {
+      "id": "ghost-transient-negative",
+      "status": "PASS",
+      "detail": "{\"state\":{\"ownerId\":\"ContextInspectorHost\",\"open\":false,\"activeProviderId\":null,\"activeDescriptorId\":null,\"activeLensId\":null,\"activeTabId\":null,\"pinned\":false,\"lastTransition\":\"reconcile:project:descriptor-inapplicable:closed\",\"policyTag\":\"density=comfortable;owner=1;revision=1;empty=—\"},\"focus\":{\"owner\":\"TransientFocusOwner\",\"active\":[],\"top\":null,\"modal\":false,\"lastDismissal\":{\"id\":\"context-inspector-host\",\"reason\":\"context-reconcile:descriptor-inapplicable\",\"restored\":true,\"focusTargetKind\":\"invoker\",\"owner\":\"TransientFocusOwner\",\"policyTag\":\"topmost-first-v1\"}},\"rootHidden\":true,\"activeElement\":\"openLibrary\"}"
+    },
+    {
+      "id": "invalidation-focus-return",
+      "status": "PASS",
+      "detail": "focus returned through TransientFocusOwner"
+    },
+    {
+      "id": "reopen-after-invalidation",
+      "status": "PASS",
+      "detail": "reopens one clean lifecycle"
+    },
+    {
+      "id": "explicit-focus-return",
+      "status": "PASS",
+      "detail": "explicit close focus return"
+    },
+    {
+      "id": "a11y-duplicate-ids",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "id": "a11y-named-buttons",
+      "status": "PASS",
+      "detail": "0"
+    },
+    {
+      "id": "a11y-tab-state",
+      "status": "PASS",
+      "detail": "0"
+    },
+    {
+      "id": "a11y-ax-tree",
+      "status": "PASS",
+      "detail": "Chromium AX tree returned semantic roles"
+    }
+  ],
+  "accessibility": {
+    "duplicateIds": [],
+    "unnamedButtons": 0,
+    "invalidAriaSelected": 0
+  },
+  "axRoleSample": [
+    "RootWebArea",
+    "none",
+    "button",
+    "StaticText",
+    "InlineTextBox"
+  ],
+  "screenshots": [
+    {
+      "filename": "library-context-inspector-corrected.png",
+      "bytes": 31111,
+      "sha256": "2978f590a87fae6428a8bf0a729439555b10c8bef052238c54df3df87b4a262b"
+    },
+    {
+      "filename": "spatial-context-inspector-corrected.png",
+      "bytes": 34638,
+      "sha256": "c32e38909dac53c12e47d49a592507e0cb3a2c225ea38b84a2235cf5d3f2d67f"
+    }
+  ],
+  "limitations": [
+    "Isolated Wave 3 browser harness; shared workspace/DOM integration remains Controller-only."
+  ]
+}

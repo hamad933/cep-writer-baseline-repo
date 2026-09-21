@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "slots": {
+    "TOP": {
+      "selector": "#topBanner",
+      "owner": "WorkspaceFrame",
+      "binding": "exact domain identity/status"
+    },
+    "TOOLBAR": {
+      "selector": ".toolbar",
+      "owner": "WorkspaceToolbar",
+      "binding": "fixed universal group; domain group; palette retains all available commands"
+    },
+    "LEFT": {
+      "selector": "#leftPane",
+      "owner": "SidePaneShell",
+      "binding": "domain object/view navigation"
+    },
+    "CENTER": {
+      "selector": "#centerPane",
+      "owner": "WorkspaceFrame",
+      "binding": "family engine only"
+    },
+    "RIGHT": {
+      "selector": "#rightPane",
+      "owner": "ContextInspector",
+      "binding": "selected object/lens; not parallel inspector"
+    },
+    "BOTTOM": {
+      "selector": "#bottomShelf",
+      "owner": "BottomShelf",
+      "binding": "history/diagnostics; no canonical mutation"
+    },
+    "TRANSIENT": {
+      "selector": ".backdrop,.popover,#notesLayer",
+      "owner": "FocusAndDismissal",
+      "binding": "shared menus/dialogs/notes/session windows"
+    }
+  },
+  "same_mechanic_law": [
+    "same layout",
+    "same placement grammar",
+    "same interaction model",
+    "same customization",
+    "one semantic owner"
+  ],
+  "responsive": "preferred state persists; effective constraints projected; persistent panes never blur-dismiss",
+  "exceptions_require": "writer/DEVIATION_REQUEST.json"
+}

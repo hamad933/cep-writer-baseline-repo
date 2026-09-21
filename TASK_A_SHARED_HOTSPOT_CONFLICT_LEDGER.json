@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "mission": "W02_TASK_A_INTEGRATED_WORKBENCH_BASELINE",
+  "hotspots": [
+    {
+      "path": "stack/native-typescript/foundation/accepted-runtime.ts",
+      "contributors": [
+        "G1",
+        "G2_CORRECTED",
+        "G3",
+        "PW05",
+        "PW08_CORRECTED",
+        "PW12"
+      ],
+      "resolution": "SYMBOL_AND_BEHAVIOR_LEVEL_MERGE",
+      "preserved": [
+        "G1 workspace/top/feedback/context/bottom owners",
+        "corrected G2 Sticky Note title shortcut+IME suppression and focus-return truth",
+        "G3 Structured Presentation and Structure Tree focus return",
+        "PW05 Settings Center close/dismiss/focus semantics",
+        "PW08 action surfaces, outside/Escape/confirmation and insertion-target anchoring",
+        "PW12 LibraryChromeAdapter thin binding"
+      ],
+      "zeroLoss": "PASS"
+    },
+    {
+      "path": "stack/native-typescript/foundation/extensions.css",
+      "contributors": [
+        "PW05",
+        "PW08_CORRECTED"
+      ],
+      "resolution": "SELECTOR/BLOCK_LEVEL_MERGE",
+      "preserved": [
+        "PW05 Settings Center presentation",
+        "PW08 action-surface confirmation/palette/toolbar presentation"
+      ],
+      "zeroLoss": "PASS"
+    }
+  ],
+  "conflictMarkers": 0,
+  "wholeFileLaterSiblingOverwrite": false
+}

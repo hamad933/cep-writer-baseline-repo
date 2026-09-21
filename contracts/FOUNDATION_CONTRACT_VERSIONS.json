@@ -1,0 +1,368 @@
+{
+  "schemaVersion": 1,
+  "baselineId": "CEP-FR-E18-ANALYTICAL-COMPARE-COMPLETION",
+  "compatibilityModel": "SEMVER_LIGHTWEIGHT",
+  "contracts": [
+    {
+      "id": "WorkspaceFoundationHost",
+      "version": "1.0.0",
+      "changeType": "INITIAL_GLOBAL_HOST_BOUNDARY",
+      "consumers": [
+        "learn",
+        "visualize",
+        "enterprise",
+        "runs"
+      ],
+      "breakingRule": "Pane, transient/focus or context boundary changes require consumer migration."
+    },
+    {
+      "id": "ContextDescriptorProvider",
+      "version": "1.0.0",
+      "changeType": "INITIAL_DESCRIPTOR_BOUNDARY",
+      "consumers": [
+        "structured",
+        "spatial",
+        "operational"
+      ],
+      "breakingRule": "Descriptor field semantics changes require provider disposition."
+    },
+    {
+      "id": "RelationDomainAdapter",
+      "version": "1.1.0",
+      "changeType": "COMPATIBLE_EXTENSION",
+      "consumers": [
+        "visualize",
+        "enterprise"
+      ],
+      "breakingRule": "Endpoint/canonical mutation changes require migration and consumer disposition."
+    },
+    {
+      "id": "StructuredDocumentDomainAdapter",
+      "version": "1.1.0",
+      "changeType": "INITIAL_STABLE_BOUNDARY",
+      "consumers": [
+        "library",
+        "learn"
+      ],
+      "breakingRule": "Identity, schema, history, recovery or commit changes require migration and consumer disposition."
+    },
+    {
+      "id": "RuntimeAdapter",
+      "version": "1.0.0",
+      "changeType": "INITIAL_PROVIDER_NEUTRAL_BOUNDARY",
+      "consumers": [
+        "runs"
+      ],
+      "breakingRule": "Provider descriptor, session identity or input/effect changes require migration and consumer disposition."
+    },
+    {
+      "id": "ActionAvailability",
+      "version": "1.2.1",
+      "changeType": "COMPATIBLE_BUGFIX_STRICT_DECLARED_CAPABILITY",
+      "consumers": [
+        "visualize",
+        "enterprise"
+      ],
+      "breakingRule": "Visibility or eligibility semantic changes require affected-surface disposition."
+    },
+    {
+      "id": "SurfaceProfile",
+      "version": "1.0.0",
+      "changeType": "UNCHANGED_COMPATIBLE",
+      "consumers": [
+        "23-surface-scaffold"
+      ],
+      "breakingRule": "Classification vocabulary or required-slot changes require profile migration."
+    },
+    {
+      "id": "SemanticCommand",
+      "version": "1.0.0",
+      "changeType": "UNCHANGED_COMPATIBLE",
+      "consumers": [
+        "all-composed-surfaces"
+      ],
+      "breakingRule": "Command identity, owner, availability or effect changes require registry migration."
+    },
+    {
+      "id": "GlobalInputKeymapOwner",
+      "version": "1.0.0",
+      "changeType": "INITIAL_ACCEPTED_GLOBAL_INPUT_OWNER",
+      "consumers": [
+        "structured",
+        "spatial",
+        "operational",
+        "global-proof"
+      ],
+      "breakingRule": "Global shortcut/F6/Escape/input-ownership semantics require affected-family migration."
+    },
+    {
+      "id": "AccessibilityFeedbackOwner",
+      "version": "1.0.0",
+      "changeType": "INITIAL_ACCEPTED_PRESENTATION_FEEDBACK_OWNER",
+      "consumers": [
+        "all-composed-surfaces"
+      ],
+      "breakingRule": "Source-truth validation or announcement lifecycle changes require presentation-consumer review; canonical truth may never move here."
+    },
+    {
+      "id": "ContextInspectorHost",
+      "version": "1.0.0",
+      "changeType": "INITIAL_ACCEPTED_GLOBAL_CONTEXT_HOST",
+      "consumers": [
+        "library",
+        "visualize",
+        "future-context-aware"
+      ],
+      "breakingRule": "Host lifecycle/descriptor projection changes require provider compatibility proof; domain payload semantics remain provider-owned."
+    },
+    {
+      "id": "BottomDeepWorkOwner",
+      "version": "1.0.0",
+      "changeType": "INITIAL_ACCEPTED_GLOBAL_BOTTOM_OWNER",
+      "consumers": [
+        "structured",
+        "operational",
+        "future-deep-work"
+      ],
+      "breakingRule": "Open/close/inert/focus/provider lifecycle changes require provider migration proof."
+    },
+    {
+      "id": "UIScalePolicyOwner",
+      "version": "1.0.0",
+      "changeType": "INITIAL_ACCEPTED_GLOBAL_UI_SCALE_POLICY",
+      "consumers": [
+        "all-application-chrome"
+      ],
+      "breakingRule": "Scale token/projection changes require chrome geometry proof and must not alter document/canvas zoom, density or responsive semantics."
+    },
+    {
+      "id": "StructuredInputKeymapOwner",
+      "version": "1.0.0",
+      "changeType": "INITIAL_ACCEPTED_STRUCTURED_INPUT_OWNER",
+      "consumers": [
+        "library",
+        "learn",
+        "future-structured"
+      ],
+      "breakingRule": "Enter/Tab/Backspace/caret/composition/shorthand changes require Structured consumer migration and IME proof."
+    },
+    {
+      "id": "StructuredActionDescriptorOwner",
+      "version": "1.0.0",
+      "changeType": "INITIAL_ACCEPTED_STRUCTURED_ACTION_DESCRIPTOR_OWNER",
+      "consumers": [
+        "library",
+        "learn",
+        "future-structured"
+      ],
+      "breakingRule": "Insertion/action/confirmation descriptor changes require route convergence and mutation-delegation proof."
+    },
+    {
+      "id": "InputDirectionResolver",
+      "version": "1.0.0",
+      "changeType": "INITIAL_ACCEPTED_INPUT_DIRECTION_OWNER",
+      "consumers": [
+        "structured",
+        "notes-fixture",
+        "mixed-script-forms"
+      ],
+      "breakingRule": "Direction precedence/provenance changes require explicit rtl/ltr/platform/fallback proof and must never infer semantic language."
+    },
+    {
+      "id": "StructuredRichContentOwner",
+      "version": "1.0.0",
+      "changeType": "INITIAL_ACCEPTED_STRUCTURED_RICH_CONTENT_OWNER",
+      "consumers": [
+        "library",
+        "learn",
+        "note-content-fixture"
+      ],
+      "breakingRule": "Sanitization/code/bidi/portable-rich changes require security and clipboard-boundary proof."
+    },
+    {
+      "id": "StructuredDragDropOwner",
+      "version": "1.0.0",
+      "changeType": "INITIAL_ACCEPTED_STRUCTURED_DRAG_DROP_OWNER",
+      "consumers": [
+        "library",
+        "learn"
+      ],
+      "breakingRule": "Drop-target/autoscroll/drag semantics changes require pointer-keyboard parity and canonical mutation delegation proof."
+    },
+    {
+      "id": "SettingsCenterOwner",
+      "version": "1.0.0",
+      "changeType": "INITIAL_ACCEPTED_GLOBAL_SETTINGS_CENTER",
+      "consumers": [
+        "all-applicable-profiles"
+      ],
+      "breakingRule": "Group/search/disclosure/applicability changes require Structured and non-Structured profile proof; preference storage may never move here."
+    },
+    {
+      "id": "OperationalSessionOwner",
+      "version": "0.9.0",
+      "changeType": "ACCEPTED_BOUNDED_PROVIDER_NEUTRAL_BOUNDARY_BELOW_M6",
+      "consumers": [
+        "runs"
+      ],
+      "breakingRule": "No M6 claim until a second genuine runtime provider exists; RuntimeAdapter causal truth and raw input semantics remain provider-owned."
+    },
+    {
+      "id": "EpistemicStateContract",
+      "version": "0.4.0",
+      "changeType": "ACCEPTED_CONTRACT_M4_IMPLEMENT_ON_DEMAND",
+      "consumers": [
+        "local-fixture-domain",
+        "runtime-backed-domain",
+        "future-domains"
+      ],
+      "breakingRule": "State vocabulary/truth-conflict rules may not infer cause/copy/retry/status or build a generic async engine."
+    },
+    {
+      "id": "ConfirmationSafetyHost",
+      "version": "1.0.0",
+      "changeType": "INITIAL_ACCEPTED_CONFIRMATION_PRESENTATION_HOST",
+      "consumers": [
+        "structured-actions",
+        "future-explicit-risk-descriptors"
+      ],
+      "breakingRule": "Host only consumes explicit destructive-risk descriptors; risk meaning and mutation remain external."
+    },
+    {
+      "id": "StructuredSurfaceHost",
+      "version": "1.0.1",
+      "changeType": "CONTROLLER_ACCEPTED_FINAL_STRUCTURED_FAMILY_HOST",
+      "consumers": [
+        "library",
+        "learn",
+        "note-content-compatible",
+        "future-structured"
+      ],
+      "breakingRule": "Host orchestration/renderer/bridge changes require real-consumer, owner-graph, read/edit, command-bus and browser proof; canonical document truth may never move into the host."
+    },
+    {
+      "id": "StructuredNavigationDescriptorOwner",
+      "version": "1.0.0",
+      "changeType": "CONTROLLER_ACCEPTED_STRUCTURED_NAVIGATION_DESCRIPTOR_OWNER",
+      "consumers": [
+        "library",
+        "learn",
+        "note-content-compatible",
+        "future-structured-read-surfaces"
+      ],
+      "breakingRule": "Read-inspection/outline/quick-jump descriptor changes require canonical tree/identity coherence proof and must not acquire DOM focus/scroll or canonical mutation ownership."
+    },
+    {
+      "id": "StructuredNoteContentCompatibility",
+      "version": "1.0.0",
+      "changeType": "BOUNDED_CONTENT_COMPATIBILITY_PROOF_CONTRACT",
+      "consumers": [
+        "note-content-compatible-proof"
+      ],
+      "breakingRule": "This proves Structured content compatibility only; it must never imply StickyNoteWindowOwner, NoteBindingAdapter, pin/always-on-top or separate-window lifecycle ownership."
+    },
+    {
+      "id": "StickyNoteWindowOwner",
+      "version": "1.0.0",
+      "changeType": "CONTROLLER_ACCEPTED_NOTES_WINDOW_OWNER",
+      "consumers": [
+        "sticky-notes",
+        "library-note-composition",
+        "future-notes-surfaces"
+      ],
+      "breakingRule": "Geometry/lifecycle/z-order/pin/popout capability changes require pointer+keyboard+viewport+focus proof; close/hide may never become source deletion and OS always-on-top cannot be fabricated."
+    },
+    {
+      "id": "NoteBindingAdapter",
+      "version": "1.0.0",
+      "changeType": "CONTROLLER_ACCEPTED_NOTE_BINDING_OWNER",
+      "consumers": [
+        "library-note",
+        "learn-note",
+        "spatial-note",
+        "future-notes-domains"
+      ],
+      "breakingRule": "Binding identity/availability/provenance changes require domain-shape, fail-atomic and source-identity proof; window/presentation identity can never become canonical source identity."
+    },
+    {
+      "id": "StructuredNoteContentAdapter",
+      "version": "1.0.0",
+      "changeType": "CONTROLLER_ACCEPTED_FINAL_STRUCTURED_NOTE_CONTENT_ADAPTER",
+      "consumers": [
+        "sticky-notes",
+        "structured-note-content",
+        "future-structured-notes"
+      ],
+      "breakingRule": "Note content must consume the same accepted Structured engine; duplicate final adapter/document identity, second editor engines, persistence claims, binding takeover or window ownership are forbidden."
+    },
+    {
+      "id": "NotesFamilyComposition",
+      "version": "1.0.0",
+      "changeType": "CONTROLLER_ACCEPTED_NON_SEMANTIC_LIBRARY_NOTES_COMPOSITION",
+      "consumers": [
+        "library-runtime"
+      ],
+      "breakingRule": "Composition may mirror/project canonical owner truth for UI compatibility only and may not reacquire note window, binding, Structured content/history or persistence ownership."
+    },
+    {
+      "id": "AnalysisProviderContract",
+      "version": "1.0.0",
+      "changeType": "CONTROLLER_ACCEPTED_ANALYTICAL_PROVIDER_BOUNDARY",
+      "consumers": [
+        "rq",
+        "results",
+        "future-analytical-surfaces"
+      ],
+      "breakingRule": "Exact reference/key/compatibility/value normalization changes require collision, forged-metadata, missing/incompatible and provider-nonmutation proof; domain canonical meaning may not move into the shared owner."
+    },
+    {
+      "id": "AnalyticalCompareOwner",
+      "version": "1.0.0",
+      "changeType": "CONTROLLER_ACCEPTED_SC032_ANALYTICAL_COMPARE_OWNER",
+      "consumers": [
+        "rq",
+        "results",
+        "evidence",
+        "reviews",
+        "mastery",
+        "portfolio",
+        "audit"
+      ],
+      "breakingRule": "Pair/session/result changes require exact pinned identity, deterministic diff, fail-atomic session, two-real-provider and domain-noncollapse proof; must not infer Review/Mastery/Evidence/Audit semantics."
+    },
+    {
+      "id": "AnalyticalCompareHost",
+      "version": "1.0.0",
+      "changeType": "CONTROLLER_ACCEPTED_ANALYTICAL_PRESENTATION_HOST",
+      "consumers": [
+        "analytical-family-surfaces"
+      ],
+      "breakingRule": "Host changes require keyboard/focus/RTL-LTR/filter/inspection browser proof and may not acquire canonical provider or decision authority."
+    }
+  ],
+  "fixtures": {
+    "compatible": {
+      "change": "add optional descriptor field",
+      "result": "PASS"
+    },
+    "breaking": {
+      "change": "rename required canonical state field",
+      "required": [
+        "affectedConsumers",
+        "migrationPlan",
+        "disposition",
+        "conformanceProof"
+      ],
+      "result": "REQUIRES_MIGRATION"
+    }
+  },
+  "breakingChangeGate": {
+    "required": [
+      "affectedConsumers",
+      "migrationPlan",
+      "disposition",
+      "conformanceProof"
+    ],
+    "status": "ENFORCED_BY_CONTRACT_CHECK"
+  }
+}

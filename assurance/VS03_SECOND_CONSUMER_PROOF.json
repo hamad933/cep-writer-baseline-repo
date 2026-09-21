@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "project": "CEP",
+  "slice": "VS-03",
+  "status": "PASS",
+  "consumer": "learn",
+  "genuineConsumer": true,
+  "composition": "main.ts -> createStructuredConsumerAdapter(learn) -> StructuredDocumentDomainAdapter -> exact STRUCTURED_MUTATION_KERNEL singleton",
+  "browserRuntimeEvidence": {
+    "classification": "REAL_LEARN_BROWSER_RUNTIME_ADAPTER_MUTATION_ROUTE_MODEL_STATE_NOT_VISIBLE_UI_ROUTE",
+    "consumer": "learn",
+    "owner": "StructuredMutationKernel",
+    "policyRevision": "structured-mutation-vs03-r1",
+    "treeOwner": "StructuredTreeKernel",
+    "result": {
+      "ok": true,
+      "changed": true,
+      "owner": "StructuredMutationKernel",
+      "contract": {
+        "id": "StructuredMutationKernel",
+        "version": "1.0.0",
+        "compatibility": "SEMVER",
+        "owner": "Structured Family",
+        "policyRevision": "structured-mutation-vs03-r1"
+      },
+      "policy": {
+        "maxLocalIndent": 6,
+        "moveToGapEnabled": true
+      },
+      "intent": {
+        "type": "insert",
+        "target": {
+          "kind": "gap",
+          "surfaceKey": "learn",
+          "parentId": null,
+          "depth": 0,
+          "index": 1
+        },
+        "block": {
+          "id": "vs03-browser-learn-insert",
+          "type": "paragraph",
+          "html": "VS03 browser mutation"
+        }
+      },
+      "code": "APPLIED",
+      "reason": "",
+      "blocks": [
+        {
+          "id": "learn-h1",
+          "type": "h2",
+          "html": "حدود الثقة والتحقق"
+        },
+        {
+          "id": "vs03-browser-learn-insert",
+          "type": "paragraph",
+          "html": "VS03 browser mutation"
+        },
+        {
+          "id": "learn-p1",
+          "type": "paragraph",
+          "html": "اشرح أين تنتقل البيانات من نطاق غير موثوق إلى نطاق موثوق، ثم اربط الضابط الأمني بموضع التحقق."
+        },
+        {
+          "id": "learn-callout-1",
+          "type": "callout",
+          "html": "هذا مستند تعلّم مستقل؛ لا يحتاج إلى حالة بحث المكتبة أو شجرة <bdi dir=\"ltr\">KU</bdi>."
+        }
+      ],
+      "meta": {
+        "operation": "insert",
+        "focusId": "vs03-browser-learn-insert",
+        "parentId": null,
+        "index": 1,
+        "maxDepth": 0
+      },
+      "document": {
+        "id": "learn-document-trust-boundaries",
+        "revision": "learn-rev-1",
+        "title": "دفتر التعلّم · حدود الثقة",
+        "tags": [
+          "Learning",
+          "Editable draft"
+        ],
+        "blocks": [
+          {
+            "id": "learn-h1",
+            "type": "h2",
+            "html": "حدود الثقة والتحقق"
+          },
+          {
+            "id": "vs03-browser-learn-insert",
+            "type": "paragraph",
+            "html": "VS03 browser mutation"
+          },
+          {
+            "id": "learn-p1",
+            "type": "paragraph",
+            "html": "اشرح أين تنتقل البيانات من نطاق غير موثوق إلى نطاق موثوق، ثم اربط الضابط الأمني بموضع التحقق."
+          },
+          {
+            "id": "learn-callout-1",
+            "type": "callout",
+            "html": "هذا مستند تعلّم مستقل؛ لا يحتاج إلى حالة بحث المكتبة أو شجرة <bdi dir=\"ltr\">KU</bdi>."
+          }
+        ]
+      },
+      "receipt": {
+        "sequence": 1,
+        "command": "structured.mutation",
+        "owner": "StructuredMutationKernel",
+        "policyRevision": "structured-mutation-vs03-r1",
+        "intent": "insert",
+        "code": "APPLIED",
+        "meta": {
+          "operation": "insert",
+          "focusId": "vs03-browser-learn-insert",
+          "parentId": null,
+          "index": 1,
+          "maxDepth": 0
+        }
+      }
+    },
+    "beforeIds": [
+      "learn-h1",
+      "learn-p1",
+      "learn-callout-1"
+    ],
+    "afterIds": [
+      "learn-h1",
+      "vs03-browser-learn-insert",
+      "learn-p1",
+      "learn-callout-1"
+    ]
+  },
+  "modelEvidence": {
+    "id": "structured.mutation-learn-route",
+    "before": "real Learn StructuredDocumentDomainAdapter state",
+    "action": "execute insert and move-to-gap through mutateStructure",
+    "owner": "StructuredDocumentDomainAdapter + StructuredMutationKernel",
+    "oracle": "second consumer mutates real document state through canonical owner and emits canonical owner receipt",
+    "status": "PASS",
+    "kind": "MODEL_NOT_BROWSER"
+  },
+  "claimBoundary": "Browser proof exercises the real Learn adapter/document state and canonical mutation receipt. It is classified as runtime/model-state call-path proof, not a claim that Learn already exposes a donor-parity mutation UI."
+}

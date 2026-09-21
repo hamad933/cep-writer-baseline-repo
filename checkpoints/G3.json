@@ -1,0 +1,30 @@
+{
+  "phase": "G3",
+  "gate_token": "FOUNDATION_CONTRACTS_COMPILED",
+  "recorded_at": "2026-09-10T02:49:39.820662+00:00",
+  "checkpoint_kind": "CONSOLIDATED_AT_HANDOFF_NOT_RETROACTIVE_PHASE_TIMESTAMP",
+  "sources_consumed": [
+    "authority/SOURCE_INTAKE_RECEIPTS.csv"
+  ],
+  "coverage": {
+    "completed": "23 profiles; 1403 explicit classifications; schemas/owners/slots"
+  },
+  "artifacts": [
+    "contracts/BUILD_RECEIPT.json",
+    "assurance/MODEL_TEST_RESULTS.json",
+    "assurance/CONTRACT_TEST_RESULTS.json"
+  ],
+  "decisions": [
+    "Current direct Owner overrides historical architecture",
+    "No final stack selected",
+    "No Control Center mutation"
+  ],
+  "open_conflicts": [
+    "61 mechanisms each classified; many conceptual owners remain contract-only"
+  ],
+  "risks": [
+    "Acceptance and exhaustive behavior parity not established"
+  ],
+  "next_phase": "Close explicit gaps in assurance/OPEN_IMPLEMENTATION_GAPS.md",
+  "owner_accepted": false
+}

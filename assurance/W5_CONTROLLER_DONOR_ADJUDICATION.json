@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "kind": "W5_CONTROLLER_DONOR_ADJUDICATION",
+  "generatedAt": "2026-09-12T22:46:38.662660+00:00",
+  "status": "PASS",
+  "sourceCanonicalTreeSha256": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d",
+  "canonicalSourceFileCount": 99,
+  "inventory": {
+    "candidateBranches": 46,
+    "retireReady": 1,
+    "keepUntilWave6OrFinalConvergence": 45,
+    "unclassified": 0
+  },
+  "validatorStatus": "PASS",
+  "controllerDisposition": {
+    "D12": {
+      "inventoryDisposition": "RETIRE_READY",
+      "controllerAdjudication": "SEMANTIC_ROUTE_RETIREMENT_READY_PHYSICAL_INTEGRATION_GLUE_RETAINED",
+      "physicalDeletionPerformed": false,
+      "reason": "Main Library drag branch delegates canonical move semantics through extension.execute(block.moveToGap); remaining renderSurface/focusBlock behavior is integration/presentation glue and is retained to preserve accepted value.",
+      "hiddenDonorSemanticOwnerPathRemains": false
+    },
+    "other45": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+  },
+  "law": "RETIRE_READY is semantic ownership readiness evidence, not an instruction to delete high-value integration glue.",
+  "wave6StickyNotesNotAuthorized": true
+}

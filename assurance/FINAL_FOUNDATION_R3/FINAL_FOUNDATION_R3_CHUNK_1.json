@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "kind": "FINAL_FOUNDATION_R3_23_SCENARIO_REPLAY",
+  "classification": "CONTROLLER_FINAL_FOUNDATION_GATE_EVIDENCE",
+  "status": "PASS",
+  "sourceCanonicalTreeSha256": "5dcc401a95f6b7b38bbd2f64d9140c29182eb459042dc6e3dd7be5460c6bca5f",
+  "canonicalSourceFileCount": 113,
+  "scenarioCount": 6,
+  "pass": 6,
+  "fail": 0,
+  "results": [
+    {
+      "id": "G01",
+      "law": "GL-01/GL-12",
+      "status": "PASS",
+      "detail": {
+        "mode": "read",
+        "band": "wide",
+        "blocks": 15,
+        "editables": 0,
+        "left": "open",
+        "right": "open",
+        "overflow": false
+      }
+    },
+    {
+      "id": "G02",
+      "law": "GL-02",
+      "status": "PASS",
+      "detail": {
+        "html": "Final gate edit TCP/IP",
+        "tx": {
+          "contract": {
+            "id": "StructuredTransactionHistoryRecoveryOwner",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "owner": "Structured Family",
+            "policyRevision": "structured-transaction-history-recovery-vs04-r1"
+          },
+          "owner": "StructuredTransactionHistoryRecoveryOwner",
+          "policy": {
+            "recoveryRetentionLimit": 5
+          },
+          "documentId": "KU-D05-0021",
+          "workingRevision": 2,
+          "committedRevision": "rev-17",
+          "dirty": true,
+          "historyLength": 2,
+          "historyIndex": 1,
+          "canUndo": true,
+          "canRedo": false,
+          "recoveryCount": 1,
+          "persistedBoundaryConfigured": false
+        },
+        "selected": null
+      }
+    },
+    {
+      "id": "G03",
+      "law": "GL-02/GL-04",
+      "status": "PASS",
+      "detail": {
+        "undo": "يجب أن يربط التطبيق كل طلب بين <bdi dir=\"ltr\">subject_id</bdi> و <bdi dir=\"ltr\">object_id</bdi> والسياق المصرّح به. هذه فقرة طويلة مقصودة لتلتف بصريًا إلى عدة أسطر مع بقائها <strong>Block واحدًا</strong> بهوية بنيوية واحدة.",
+        "redo": "R3 undo redo proof",
+        "before": "يجب أن يربط التطبيق كل طلب بين subject_id و object_id والسياق المصرّح به. هذه فقرة طويلة مقصودة لتلتف بصريًا إلى عدة أسطر مع بقائها Block واحدًا بهوية بنيوية واحدة."
+      }
+    },
+    {
+      "id": "G04",
+      "law": "GL-03",
+      "status": "PASS",
+      "detail": {
+        "selected": [
+          "blk-d05-h1",
+          "blk-d05-p1"
+        ],
+        "cleared": true,
+        "escapeBindingStatic": true
+      }
+    },
+    {
+      "id": "G05",
+      "law": "GL-04",
+      "status": "PASS",
+      "detail": {
+        "before": 6,
+        "after": 7,
+        "owner": "StructuredDocumentDomainAdapter"
+      }
+    },
+    {
+      "id": "G06",
+      "law": "GL-04",
+      "status": "PASS",
+      "detail": {
+        "target": "blk-d05-t1",
+        "undoExact": true,
+        "confirmed": true
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "assurance/FINAL_FOUNDATION_R3/G01_final_1440x1000.png",
+      "bytes": 221725,
+      "sha256": "7069584878f065faef94cab954fc7c52db7be2e0ed9235fb0e65cb8f9da3b9cf"
+    }
+  ],
+  "r3LawCoverage": [
+    "GL-01/GL-12",
+    "GL-02",
+    "GL-02/GL-04",
+    "GL-03",
+    "GL-04"
+  ]
+}

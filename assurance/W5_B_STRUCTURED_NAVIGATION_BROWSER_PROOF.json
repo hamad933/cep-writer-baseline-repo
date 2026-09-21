@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "kind": "W5_B_STRUCTURED_NAVIGATION_BROWSER_PROOF",
+  "classification": "LANE_B_THIN_PRESENTATION_HARNESS_NOT_FINAL_INTEGRATION",
+  "sourceCanonicalTreeSha256": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d",
+  "canonicalSourceFileCount": 99,
+  "environment": {
+    "engine": "Python Playwright Chromium",
+    "executable": "/usr/bin/chromium",
+    "transport": "in-memory-built-esm",
+    "sharedIndexModified": false,
+    "sharedCssModified": false
+  },
+  "summary": {
+    "total": 3,
+    "pass": 3,
+    "fail": 0
+  },
+  "flows": [
+    {
+      "id": "w5b.browser.real-library-learn-outline",
+      "status": "PASS",
+      "oracle": "thin presentation harness renders both real Structured consumer descriptors while DOM ids remain presentation-only",
+      "evidence": {
+        "library": {
+          "count": 5,
+          "ids": [
+            "blk-d05-h1",
+            "blk-d05-t1",
+            "blk-d05-t2",
+            "blk-d05-t2-n1",
+            "blk-d05-t3"
+          ],
+          "owner": "StructuredNavigationDescriptorOwner"
+        },
+        "learn": {
+          "count": 1,
+          "ids": [
+            "learn-h1"
+          ],
+          "owner": "StructuredNavigationDescriptorOwner"
+        },
+        "domIds": [
+          "dom-outline-library-blk-d05-h1",
+          "dom-outline-library-blk-d05-t1",
+          "dom-outline-library-blk-d05-t2"
+        ]
+      }
+    },
+    {
+      "id": "w5b.browser.read-inspection-side-effect-free",
+      "status": "PASS",
+      "oracle": "read inspection derivation does not focus Writer/editor, activate selection, or scroll DOM",
+      "evidence": {
+        "focusBefore": "outsideFocus",
+        "focusAfter": "outsideFocus",
+        "selectionCount": 0,
+        "scrollCalls": 0,
+        "target": {
+          "identityKind": "canonical-structured-block",
+          "documentId": "KU-D05-0021",
+          "blockId": "blk-d05-p1"
+        }
+      }
+    },
+    {
+      "id": "w5b.browser.quick-jump-canonical-request-no-scroll",
+      "status": "PASS",
+      "oracle": "quick-jump uses canonical document/block target and emits no DOM-scroll ownership",
+      "evidence": {
+        "target": {
+          "identityKind": "canonical-structured-block",
+          "documentId": "KU-D05-0021",
+          "blockId": "blk-d05-t2-n1",
+          "key": "KU-D05-0021::blk-d05-t2-n1"
+        },
+        "request": {
+          "kind": "request-canonical-structured-target-presentation",
+          "target": {
+            "identityKind": "canonical-structured-block",
+            "documentId": "KU-D05-0021",
+            "blockId": "blk-d05-t2-n1",
+            "key": "KU-D05-0021::blk-d05-t2-n1"
+          },
+          "performsDomScroll": false,
+          "transientLifecycleOwned": false
+        },
+        "buttonDomId": "dom-quick-library-blk-d05-t2-n1",
+        "scrollCalls": 0,
+        "q": {
+          "domIdentityCanonical": false,
+          "performsDomScroll": false
+        }
+      }
+    }
+  ],
+  "status": "PASS",
+  "limits": [
+    "Thin Lane-owned descriptor presentation harness only. Final transient lifecycle and DOM scrolling remain Controller integration responsibilities."
+  ]
+}

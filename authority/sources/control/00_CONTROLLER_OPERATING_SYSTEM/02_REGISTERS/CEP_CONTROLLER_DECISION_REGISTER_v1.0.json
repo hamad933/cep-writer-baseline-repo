@@ -1,0 +1,82 @@
+{
+  "version": "1.0",
+  "decisions": [
+    {
+      "decision_id": "CTRL-GOV-001",
+      "class": "CONTROL_METHOD",
+      "decision": "Every Controller must read Controller OS at startup",
+      "scope": "ALL_CONTROLLERS",
+      "status": "ACTIVE"
+    },
+    {
+      "decision_id": "CTRL-GOV-002",
+      "class": "COMPLETENESS_MODEL",
+      "decision": "Report requirement coverage, source implementation, runtime evidence, and Owner acceptance separately",
+      "scope": "ALL",
+      "status": "ACTIVE"
+    },
+    {
+      "decision_id": "CTRL-GOV-003",
+      "class": "INTERACTION_ASSURANCE",
+      "decision": "Interactive closure requires before/action/after + negative stale-state proof",
+      "scope": "ALL_USER_FACING",
+      "status": "ACTIVE"
+    },
+    {
+      "decision_id": "CTRL-GOV-004",
+      "class": "SOURCE_AUTHORITY",
+      "decision": "Direct source/donor required where detailed behavior or ownership is being decided",
+      "scope": "ALL",
+      "status": "ACTIVE"
+    },
+    {
+      "decision_id": "CTRL-GOV-005",
+      "class": "PROPOSAL_ZERO_LOSS",
+      "decision": "High-value proposals require explicit current reconciliation denominator before design closure",
+      "scope": "ALL_HIGH_VALUE_PROPOSALS",
+      "status": "ACTIVE"
+    },
+    {
+      "decision_id": "CTRL-GOV-006",
+      "class": "BRANCH_TRUTH",
+      "decision": "Fresh GitHub branch/SHA truth required before Production mapping; main is not default by assumption",
+      "scope": "ALL_PRODUCTION_MAPPING",
+      "status": "ACTIVE"
+    },
+    {
+      "decision_id": "CTRL-GOV-007",
+      "class": "RUNTIME_STRATEGY",
+      "decision": "Use final runtime/Colab after safely resolvable source/contracts are exhausted",
+      "scope": "ALL_FINAL_ASSURANCE",
+      "status": "ACTIVE"
+    },
+    {
+      "decision_id": "CTRL-W03-001",
+      "class": "W03_PROPOSAL_RECONCILIATION",
+      "decision": "W03 v3.3.1 cannot reach Design Adjudication until original 69-section (0–68) world-class proposal is directly reconciled against current Blueprint and stronger models",
+      "scope": "W03",
+      "status": "ACTIVE"
+    },
+    {
+      "decision_id": "CTRL-W03-002",
+      "class": "W03_PACKET_SUPERSESSION",
+      "decision": "Writer-A Owner Direct Review packet v1.1 supersedes v1.0 for new execution intake; same v3.3.1 baseline preserved",
+      "scope": "W03_WRITER_A",
+      "status": "ACTIVE"
+    },
+    {
+      "decision_id": "CTRL-W01W02-003",
+      "class": "PRE_COLAB_SOURCE_EXHAUSTION",
+      "decision": "Writer-B v1.1.5 source exhaustion is not confirmed until stale V4 denial UI in BlockContextMenu is removed and independently rechecked",
+      "scope": "W01_W02",
+      "status": "SUPERSEDED_BY_CTRL-W01W02-004"
+    },
+    {
+      "decision_id": "CTRL-W01W02-004",
+      "class": "PRE_COLAB_SOURCE_EXHAUSTION",
+      "decision": "Controller-executed v1.1.5.1 closes W12-CTRL-001; no further safely-resolvable W01/W02 source gap was found in the bounded recheck; final Colab runtime/DB/browser evidence is now authorized on this exact candidate.",
+      "scope": "W01_W02",
+      "status": "ACTIVE"
+    }
+  ]
+}

@@ -1,0 +1,1902 @@
+
+> cep-foundation-forge@0.2.1c test
+> node tools/test-models.mjs
+
+{
+  "date": "2026-09-16T01:50:32.941Z",
+  "runtime": "v22.16.0",
+  "pass": 210,
+  "fail": 0,
+  "tests": [
+    {
+      "id": "command.unique",
+      "before": "one registered owner",
+      "action": "register duplicate",
+      "owner": "CommandRegistry",
+      "oracle": "duplicate rejected",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "command.guard",
+      "before": "unavailable action",
+      "action": "execute",
+      "owner": "CommandRegistry",
+      "oracle": "no effect or receipt",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "command.routes",
+      "before": "one action definition",
+      "action": "execute twice from differing entry payloads",
+      "owner": "CommandRegistry",
+      "oracle": "both receipts same owner",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2a.command-bus-canonical-owner",
+      "before": "one canonical bus behind compatibility facade",
+      "action": "register/discover/execute through facade",
+      "owner": "SemanticCommandBus",
+      "oracle": "compatibility registry delegates identity and receipt ownership to one bus",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2a.command-bus-unknown-direct-guard",
+      "before": "unknown then unavailable command",
+      "action": "attempt direct execution",
+      "owner": "SemanticCommandBus",
+      "oracle": "unknown/unavailable commands produce truthful denial and zero receipt/effect",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2a.command-bus-route-receipts",
+      "before": "same semantic command through five existing route classes",
+      "action": "execute toolbar/menu/palette/context/object-doubleclick payloads",
+      "owner": "SemanticCommandBus",
+      "oracle": "each accepted action yields exactly one receipt with same identity/owner and route truth",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2a.command-bus-shared-capability-action-surface",
+      "before": "one bus instance",
+      "action": "register command capability and action surface through compatibility facades",
+      "owner": "SemanticCommandBus",
+      "oracle": "generic registries are delegates over one identity graph",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3a.global-input-owner-contract",
+      "before": "new leaf owner without bootstrap listener ownership",
+      "action": "inspect canonical descriptors",
+      "owner": "GlobalInputKeymapOwner",
+      "oracle": "one canonical owner declares Controller integration as listener owner",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3a.shortcut-resolution-deterministic",
+      "before": "two explicit bindings share a chord with unequal priorities",
+      "action": "resolve repeatedly",
+      "owner": "GlobalInputKeymapOwner",
+      "oracle": "higher priority binding wins deterministically and equal-priority conflict denies",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3a.f6-region-cycle-forward-receipt-truth",
+      "before": "CENTER focused and RIGHT available",
+      "action": "press F6",
+      "owner": "GlobalInputKeymapOwner + WorkspaceRegionCycle",
+      "oracle": "receipt captures source before focus movement and reports CENTER -> RIGHT forward",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3a.f6-region-cycle-reverse-receipt-truth",
+      "before": "RIGHT focused and CENTER available",
+      "action": "press Shift+F6",
+      "owner": "GlobalInputKeymapOwner + WorkspaceRegionCycle",
+      "oracle": "receipt captures RIGHT -> CENTER reverse without changing correct focus movement",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3a.f6-region-cycle-hidden-skip-truth",
+      "before": "CENTER focused, RIGHT hidden, BOTTOM available",
+      "action": "press F6",
+      "owner": "GlobalInputKeymapOwner + WorkspaceRegionCycle",
+      "oracle": "hidden region is skipped in focus and reported in ordered receipt evidence",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3a.f6-region-cycle-unavailable-skip-truth",
+      "before": "CENTER focused, RIGHT unavailable, BOTTOM available",
+      "action": "press F6",
+      "owner": "GlobalInputKeymapOwner + WorkspaceRegionCycle",
+      "oracle": "unavailable region is skipped in focus and reported in ordered receipt evidence",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3a.f6-region-cycle-wrap-truth",
+      "before": "RIGHT focused at declared end and CENTER available at start",
+      "action": "press F6",
+      "owner": "GlobalInputKeymapOwner + WorkspaceRegionCycle",
+      "oracle": "cycle wraps RIGHT -> CENTER and receipt preserves forward direction truth",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3a.f6-region-cycle-no-legal-movement-truth",
+      "before": "CENTER is the only eligible region and RIGHT is hidden",
+      "action": "press F6",
+      "owner": "GlobalInputKeymapOwner + WorkspaceRegionCycle",
+      "oracle": "source equals destination only when no other legal movement exists and skipped region remains truthful",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3a.escape-delegates-transient-first",
+      "before": "one canonical transient with focusable invoker",
+      "action": "press Escape",
+      "owner": "GlobalInputKeymapOwner -> TransientFocusOwner",
+      "oracle": "top transient closes through promoted owner and no second dismissal state is created",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3a.structured-editor-input-suppression",
+      "before": "explicit Structured editor owns printable/edit/navigation intent",
+      "action": "press printable Backspace and ArrowLeft",
+      "owner": "GlobalInputKeymapOwner + input ownership contract",
+      "oracle": "global owner does not intercept or dispatch editor-owned semantics",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3a.global-shortcut-explicit-allow",
+      "before": "same semantic command with denied then explicit allowed binding",
+      "action": "press Ctrl+K",
+      "owner": "GlobalInputKeymapOwner -> SemanticCommandBus",
+      "oracle": "shortcut executes only when binding explicitly allows it and produces one command receipt",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3a.owned-input-shortcut-deny-by-default",
+      "before": "editor explicitly knows a global command but central policy forbids owned-input shortcuts",
+      "action": "press Ctrl+K inside editor",
+      "owner": "GlobalInputKeymapOwner",
+      "oracle": "binding cannot bypass central owned-input policy",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3a.ime-composition-pass-through",
+      "before": "composition is active during shortcut-like key event",
+      "action": "route keydown",
+      "owner": "GlobalInputKeymapOwner",
+      "oracle": "IME event is never prevented, stopped, or dispatched",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3a.real-family-descriptor-consumers",
+      "before": "real Learn Structured adapter and real Spatial relation adapter",
+      "action": "consume family descriptors through one global owner",
+      "owner": "GlobalInputKeymapOwner + SemanticCommandBus",
+      "oracle": "same global router dispatches family-described semantic commands without direct family mutation",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "capability.owner",
+      "before": "one OPEN_TERMINAL resolver",
+      "action": "register duplicate and inspect eligible/ineligible objects",
+      "owner": "CapabilityRegistry",
+      "oracle": "one owner supplies truthful reason",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "actions.routes",
+      "before": "registered command and reversible action surface",
+      "action": "validate route map and duplicate owner",
+      "owner": "ActionSurfaceRegistry",
+      "oracle": "all routes converge on registered semantic command and list exit routes",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "actions.selection-semantics",
+      "before": "two compatible nodes and then three nodes",
+      "action": "evaluate Connect centrally",
+      "owner": "ActionAvailabilityCore",
+      "oracle": "two is enabled; bulk is hidden without explicit domain semantics",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "actions.availability-matrix",
+      "before": "0/1/2/>2 selections and policy constraints",
+      "action": "derive all presentation/preflight states once",
+      "owner": "ActionAvailabilityCore",
+      "oracle": "count, command, domain, mode and destructive decisions are deterministic",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "actions.generic-policy",
+      "before": "representative Delete, Align and generic Inspect declarations",
+      "action": "evaluate shared policy constraints",
+      "owner": "ActionAvailabilityCore",
+      "oracle": "generic policy covers cardinality, type, mixed, command, canonical and destructive constraints",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "actions.declared-domain-capability-required",
+      "before": "action declares domain capability but adapter omits it",
+      "action": "evaluate missing then explicit capability",
+      "owner": "ActionAvailabilityCore",
+      "oracle": "declared capability is deny-by-default and enables only on explicit true",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "actions.preflight-presentation-convergence",
+      "before": "one central action context",
+      "action": "derive UI result and SemanticCommand guard from same policy",
+      "owner": "ActionAvailabilityCore",
+      "oracle": "presentation and preflight agree on enabled/denied state",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "preference.scope",
+      "before": "global and surface override",
+      "action": "resolve then reset surface",
+      "owner": "ScopedPreferences",
+      "oracle": "parent value restored",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "preference.effective",
+      "before": "preferred width 420",
+      "action": "resolve with narrow effective 280",
+      "owner": "ScopedPreferences",
+      "oracle": "preferred stays 420",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "preference.session",
+      "before": "session theme",
+      "action": "export/import",
+      "owner": "ScopedPreferences",
+      "oracle": "session override excluded",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "preference.atomic",
+      "before": "valid theme",
+      "action": "import invalid key",
+      "owner": "ScopedPreferences",
+      "oracle": "old overrides unchanged",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "preference.persistence",
+      "before": "memory storage",
+      "action": "save and reopen",
+      "owner": "ScopedPreferences",
+      "oracle": "presentation restored",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "preference.error",
+      "before": "unavailable storage",
+      "action": "save",
+      "owner": "ScopedPreferences",
+      "oracle": "visible error available to UI, local state intact",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "spatial.zoom",
+      "before": "camera and point",
+      "action": "zoomAt",
+      "owner": "SpatialModel",
+      "oracle": "world point under cursor stable",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "spatial.undo",
+      "before": "selected nodes",
+      "action": "move snap undo redo",
+      "owner": "SpatialModel",
+      "oracle": "data restoration",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "spatial.marquee",
+      "before": "three nodes",
+      "action": "marquee bounded region",
+      "owner": "SpatialModel",
+      "oracle": "only intersecting objects selected",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "spatial.relation",
+      "before": "valid objects",
+      "action": "invalid then valid relation",
+      "owner": "SpatialModel",
+      "oracle": "invalid leaves history unchanged; valid representation only",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "spatial.align",
+      "before": "multi selection",
+      "action": "align distribute undo",
+      "owner": "SpatialModel",
+      "oracle": "one reversible transaction per action",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "relation.canonical",
+      "before": "two domain objects",
+      "action": "commit, project, edit, undo",
+      "owner": "RelationDomainAdapter",
+      "oracle": "representations always derive from canonical versioned state",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "relation.stale",
+      "before": "canonical relation version 1",
+      "action": "commit with stale expected version",
+      "owner": "RelationDomainAdapter",
+      "oracle": "stale edit rejected without state mutation",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "relation.availability",
+      "before": "selection count and endpoint policy",
+      "action": "ask canonical adapter before showing Connect",
+      "owner": "RelationDomainAdapter",
+      "oracle": "eligible pair accepted; incompatible pair explains refusal",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "relation.canonical-constraints",
+      "before": "existing relation and disabled capability",
+      "action": "resolve Connect availability",
+      "owner": "RelationDomainAdapter",
+      "oracle": "duplicate canonical pair and disabled domain capability are rejected before command effect",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "relation.w03-v34",
+      "before": "exact Enterprise v3.4 nodes",
+      "action": "commit typed CONNECTS_TO through extracted validator",
+      "owner": "W03EnterpriseDomain.LocalDraft",
+      "oracle": "canonical draft changes and source fixture remains byte-stable",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2c.spatial-owner-contract",
+      "before": "SpatialModel compatibility facade",
+      "action": "inspect executable interaction owner",
+      "owner": "SpatialInteractionKernel",
+      "oracle": "model delegates camera/pointer/geometry/history to one family owner",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2c.spatial-camera-formulas",
+      "before": "known camera, node bounds and viewport",
+      "action": "pan then zoomAt then fit",
+      "owner": "SpatialInteractionKernel",
+      "oracle": "established cursor-stable zoom and fit formulas are preserved without selection/domain mutation",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2c.spatial-pointer-state",
+      "before": "blank then Ctrl+RMB pointer descriptors",
+      "action": "begin and advance gesture state centrally",
+      "owner": "SpatialInteractionKernel",
+      "oracle": "intent and drag transition are deterministic with no DOM or selection ownership",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2c.spatial-marquee-selection-handoff",
+      "before": "canonical selection owner with three nodes",
+      "action": "project marquee IDs through interaction owner",
+      "owner": "SpatialInteractionKernel -> SpatialSelectionNavigationKernel",
+      "oracle": "interaction returns the promoted selection receipt and never creates a second selection store",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2c.spatial-geometry-history",
+      "before": "three selected nodes",
+      "action": "move, snap, align, distribute, undo and redo",
+      "owner": "SpatialInteractionKernel",
+      "oracle": "geometry semantics and reversible presentation history remain deterministic",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2c.spatial-selection-survives-camera-geometry",
+      "before": "focused selected object b",
+      "action": "camera transforms then geometry mutation",
+      "owner": "SpatialInteractionKernel + SpatialSelectionNavigationKernel",
+      "oracle": "selection/focus identity survives rerender-independent interaction state changes",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2c.spatial-three-real-consumers",
+      "before": "Visualize, Enterprise and Runs projections",
+      "action": "inspect one interaction owner per real family consumer",
+      "owner": "SpatialInteractionKernel",
+      "oracle": "all three real consumers delegate reusable interaction mechanics to the same contract",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2c.spatial-pure-camera-domain-hash",
+      "before": "Enterprise canonical relations and Runs runtime truth",
+      "action": "camera and selection only",
+      "owner": "SpatialInteractionKernel",
+      "oracle": "pure camera/selection operations do not change canonical relation or runtime-state hashes",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2c.spatial-geometry-only-boundary",
+      "before": "Enterprise canonical relations and Runs runtime truth",
+      "action": "mutate presentation geometry in Author/Live",
+      "owner": "SpatialInteractionKernel",
+      "oracle": "geometry changes only Spatial projection coordinates and never domain relation/runtime truth",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2c.relation-owner-contract",
+      "before": "Visualize and Enterprise relation adapters",
+      "action": "derive drafts/action context through one owner contract",
+      "owner": "RelationInteractionOwner",
+      "oracle": "both consumers share presentation owner while canonical adapter identities remain distinct",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2c.relation-draft-transient-cancel",
+      "before": "Visualize canonical relation adapter with selected endpoints",
+      "action": "create and discard presentation draft",
+      "owner": "RelationInteractionOwner",
+      "oracle": "draft never becomes canonical before domain commit and cancellation is a no-op on canonical records/version/history",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2c.relation-commit-single-delegation",
+      "before": "valid transient draft and counting domain adapter",
+      "action": "delegate presentation commit exactly once",
+      "owner": "RelationInteractionOwner -> RelationDomainAdapter",
+      "oracle": "one domain commit produces one canonical record and one domain-history frame with no presentation history owner",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2c.relation-adapter-owned-negative-constraints",
+      "before": "invalid endpoint, type and Recorded adapter",
+      "action": "attempt relation mutations through domain truth",
+      "owner": "RelationDomainAdapter",
+      "oracle": "invalid/domain/read-only constraints remain explicit adapter-owned failures",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "gesture.blank",
+      "before": "input event descriptor",
+      "action": "classify",
+      "owner": "SpatialInteraction",
+      "oracle": "expected intent marquee",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "gesture.node",
+      "before": "input event descriptor",
+      "action": "classify",
+      "owner": "SpatialInteraction",
+      "oracle": "expected intent move",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "gesture.space",
+      "before": "input event descriptor",
+      "action": "classify",
+      "owner": "SpatialInteraction",
+      "oracle": "expected intent pan",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "gesture.middle",
+      "before": "input event descriptor",
+      "action": "classify",
+      "owner": "SpatialInteraction",
+      "oracle": "expected intent pan",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "gesture.right",
+      "before": "input event descriptor",
+      "action": "classify",
+      "owner": "SpatialInteraction",
+      "oracle": "expected intent context",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "gesture.ctrl-right",
+      "before": "input event descriptor",
+      "action": "classify",
+      "owner": "SpatialInteraction",
+      "oracle": "expected intent pending-pan",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "gesture.context-suppression",
+      "before": "Ctrl+RMB drag ends before a later normal RMB",
+      "action": "consume only the matching context event and expire stale state",
+      "owner": "ContextSuppressionGate",
+      "oracle": "own Ctrl context suppressed; next normal context never swallowed",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "spatial.keyboard-contract",
+      "before": "focus, selection, camera and object movement shortcuts",
+      "action": "inspect reusable semantic map",
+      "owner": "SpatialKeyboardSemantics",
+      "oracle": "each intent has a distinct route",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "spatial.selection-receipt",
+      "before": "three canonical spatial objects",
+      "action": "select out of order and inspect receipt",
+      "owner": "SpatialSelectionNavigationKernel",
+      "oracle": "canonical IDs, owner and receipt schema are stable with no DOM/SVG state",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "spatial.selection-modes",
+      "before": "empty canonical selection",
+      "action": "single, additive/toggle, marquee and clear through compatibility routes",
+      "owner": "SpatialSelectionNavigationKernel",
+      "oracle": "all routes converge on the same owner receipt and canonical ordering",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "spatial.selection-unknown-endpoint",
+      "before": "valid selection a",
+      "action": "attempt unknown canonical object ID",
+      "owner": "SpatialSelectionNavigationKernel",
+      "oracle": "unknown endpoint is rejected and selection remains unchanged",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "spatial.navigation-linear",
+      "before": "three canonical objects",
+      "action": "focus next then previous",
+      "owner": "SpatialAccessibleNavigator",
+      "oracle": "deterministic canonical traversal preserves IDs rather than DOM nodes",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "spatial.navigation-tie",
+      "before": "one origin and two equal right-side candidates",
+      "action": "navigate ArrowRight",
+      "owner": "SpatialAccessibleNavigator",
+      "oracle": "equal geometry resolves by canonical projection order",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "spatial.focus-reconcile-removal",
+      "before": "selection and focus on b",
+      "action": "replace projection without b",
+      "owner": "SpatialFocusContract",
+      "oracle": "focus/anchor repair deterministically and removed selection disappears",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "spatial.real-consumer-owner-schema",
+      "before": "Visualize bounded fixture, Enterprise v3.4 adapter and Runs runtime projection",
+      "action": "construct each real family projection and emit selection receipt",
+      "owner": "SpatialSelectionNavigationKernel",
+      "oracle": "all three consumers emit one owner and one receipt schema",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "spatial.negative-domain-runtime-state",
+      "before": "Enterprise relation records and Runs device truth",
+      "action": "select, navigate and move representation geometry",
+      "owner": "SpatialSelectionNavigationKernel",
+      "oracle": "selection/navigation do not edit canonical relation records or runtime device/session truth",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "spatial.runs-recorded-readonly",
+      "before": "Runs recorded topology with spatial objects",
+      "action": "inspect/select while relation adapter is read only",
+      "owner": "SpatialSelectionNavigationKernel + RelationDomainAdapter",
+      "oracle": "selection/navigation remains available while mutation availability is explicitly refused",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "spatial.recorded-mode-receipt-and-command-guard",
+      "before": "Runs Recorded projection with three selected objects",
+      "action": "set Recorded mode, navigate, query availability and attempt direct registry execution",
+      "owner": "SpatialSelectionNavigationKernel + SpatialModel",
+      "oracle": "Recorded receipt is truthful; selection/navigation work; geometry commands are unavailable and execution cannot bypass the guard",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "spatial.recorded-direct-model-mutation-refusal",
+      "before": "Recorded SpatialModel with selected objects and existing reversible history",
+      "action": "attempt move, snap, align, distribute, undo and redo directly",
+      "owner": "SpatialModel",
+      "oracle": "all direct geometry mutation routes reject without changing geometry/history/future state",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "spatial.author-live-mutation-preserved",
+      "before": "fresh SpatialModel in Author and Live modes",
+      "action": "align/distribute through guarded command routes",
+      "owner": "SpatialModel + CommandRegistry",
+      "oracle": "Author and Live modes retain intended geometry mutation behavior and truthful receipt mode",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.independent",
+      "before": "Learn document without Library fixtures",
+      "action": "edit through compatibility insert, undo, redo, recover and commit truth",
+      "owner": "StructuredDocumentDomainAdapter + StructuredMutationKernel + StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "Learn uses canonical mutation/history owner and cannot claim durable persistence without a save boundary",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.compatibility-mutation-owner",
+      "before": "real Learn compatibility insert/remove APIs",
+      "action": "insert then remove through compatibility methods",
+      "owner": "StructuredDocumentDomainAdapter + StructuredMutationKernel",
+      "oracle": "both compatibility structural routes return document snapshots but emit canonical mutation-owner receipts",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.update-block-structural-guard",
+      "before": "real Learn block and compatibility update API",
+      "action": "try structural patches then a content/presentation patch",
+      "owner": "StructuredDocumentDomainAdapter",
+      "oracle": "type/children/id/indent and unadmitted fields are rejected atomically while whitelisted content/presentation updates remain local",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.contract",
+      "before": "durable adapter descriptor",
+      "action": "inspect identity, schema, ownership and commands",
+      "owner": "StructuredDocumentDomainAdapter",
+      "oracle": "all required boundary fields are explicit and versioned",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.selection-clipboard",
+      "before": "two selected blocks in a non-Library Structured consumer",
+      "action": "copy, cut, undo, paste and undo",
+      "owner": "StructuredSelectionKernel + StructuredDocumentDomainAdapter",
+      "oracle": "selection identity and clipboard mutations are reusable and reversible",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.clipboard-readonly-schema",
+      "before": "read-only and incompatible Structured consumers",
+      "action": "resolve copy/cut/paste eligibility",
+      "owner": "StructuredClipboardContract",
+      "oracle": "copy can remain safe while cut/paste are denied and incompatible schema is rejected",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.semantic-command-route",
+      "before": "selected block and CommandRegistry",
+      "action": "copy/cut/paste through registered semantic commands",
+      "owner": "StructuredClipboardTrustOwner + CommandRegistry",
+      "oracle": "clipboard semantic routes converge on the canonical trust owner while the store remains a caller-scoped transport bridge",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.library-clipboard-consumer",
+      "before": "accepted Library fixture bundle bound only through its domain adapter",
+      "action": "select/copy/cut/paste through reusable Structured seam",
+      "owner": "LibraryDomainAdapter + StructuredDocumentDomainAdapter",
+      "oracle": "Library consumes the same clipboard boundary without making Library state the shared owner",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.clipboard-nested-copy",
+      "before": "nested Toggle subtree plus sibling",
+      "action": "copy canonical nested/subtree selection",
+      "owner": "StructuredClipboardTrustOwner + StructuredSelectionKernel",
+      "oracle": "copy preserves the selected subtree structure and canonical covered identities without DOM state",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.clipboard-atomic-nested-cut",
+      "before": "nested child selected inside Toggle",
+      "action": "cut then undo/redo",
+      "owner": "StructuredClipboardTrustOwner -> StructuredMutationKernel -> StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "nested removal is one transaction and history remains reversible",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.clipboard-recursive-reseed",
+      "before": "nested Toggle with descendants",
+      "action": "paste copied subtree",
+      "owner": "StructuredClipboardTrustOwner",
+      "oracle": "every inserted root and descendant receives a fresh collision-free identity and selection follows the new root",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.clipboard-paste-positions-target",
+      "before": "same safe paragraph payload across fresh documents",
+      "action": "paste at beginning, middle, end and compatible nested gap",
+      "owner": "StructuredClipboardTrustOwner + StructuredMutationKernel",
+      "oracle": "all admitted target placements use canonical gap insertion and preserve target containment",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.clipboard-cross-document-rich-code",
+      "before": "compatible source and target documents with rich/code blocks",
+      "action": "copy then cross-document paste",
+      "owner": "StructuredClipboardTrustOwner trust boundary",
+      "oracle": "compatible fragments preserve safe rich/code content while all identities reseed",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.clipboard-history-recovery",
+      "before": "copied Learn block and recovery checkpoint",
+      "action": "paste, capture, mutate, recover, undo and redo",
+      "owner": "StructuredClipboardTrustOwner + StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "clipboard transactions participate in canonical history/recovery without a second state owner",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.clipboard-trust-negative-atomic",
+      "before": "valid target plus forged unsafe/incompatible/duplicate/DOM-like payloads",
+      "action": "attempt direct paste",
+      "owner": "StructuredClipboardTrustOwner",
+      "oracle": "every trust/schema/identity rejection leaves document, history and selection unchanged",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.clipboard-read-mode-direct-guard",
+      "before": "editable adapter projected through read-mode command context",
+      "action": "copy then direct cut/paste with mode=read",
+      "owner": "StructuredClipboardTrustOwner consuming StructuredCommandAvailabilityOwner",
+      "oracle": "copy remains inspectable while mutating direct APIs inherit the promoted edit-mode guard",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.clipboard-transport-failure-atomic",
+      "before": "selected block plus failing transport capability bridge",
+      "action": "attempt cut",
+      "owner": "StructuredClipboardTrustOwner",
+      "oracle": "failed transport never mutates document/history/selection and the caller-scoped store is not canonical state",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.clipboard-owner-real-consumers",
+      "before": "accepted Library fixture adapter and donor-free Learn adapter",
+      "action": "inspect and execute same clipboard owner/contract",
+      "owner": "StructuredClipboardTrustOwner",
+      "oracle": "Library and Learn share owner class, policy and receipt schema without Library state leaking into Learn",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.clipboard-second-owner-rejected",
+      "before": "real Learn adapter with deliberate alternate clipboard owner",
+      "action": "inspect adapter descriptor",
+      "owner": "StructuredDocumentDomainAdapter ownership guard",
+      "oracle": "composition rejects a second clipboard semantic owner",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.tree-schema-owner",
+      "before": "accepted Structured type set and containment policy",
+      "action": "inspect canonical schema/capabilities",
+      "owner": "StructuredTreeKernel",
+      "oracle": "one Structured owner exposes donor-parity type/capability/containment decisions",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.tree-recursive-fixture",
+      "before": "accepted nested Library fixture",
+      "action": "walk, lookup, path and depth through canonical owner",
+      "owner": "StructuredTreeKernel",
+      "oracle": "nested identity/path survives without flattening",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.tree-serialization",
+      "before": "accepted nested Library fixture with bidi metadata",
+      "action": "serialize canonical tree",
+      "owner": "StructuredTreeKernel",
+      "oracle": "stable IDs, nesting, open state and block direction remain structural truth",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.tree-validation",
+      "before": "valid accepted tree plus illegal containment and over-depth branches",
+      "action": "validate canonical policy",
+      "owner": "StructuredTreeKernel",
+      "oracle": "invalid containment/type/depth are rejected by one policy owner",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.tree-real-consumers",
+      "before": "real Library accepted fixture bundle and real Learn composition adapters",
+      "action": "construct both consumers and inspect tree receipt",
+      "owner": "StructuredDocumentDomainAdapter + StructuredTreeKernel",
+      "oracle": "Library and Learn bind the exact same canonical tree object and policy revision",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-contract-real-consumers",
+      "before": "real Library accepted fixture adapter and real Learn adapter",
+      "action": "inspect canonical mutation ownership",
+      "owner": "StructuredMutationKernel",
+      "oracle": "both real Structured consumers bind the exact same executable mutation owner and policy revision",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-insert-nested",
+      "before": "valid root plus Toggle container",
+      "action": "insert paragraph at explicit nested gap",
+      "owner": "StructuredMutationKernel",
+      "oracle": "exact structural position is used and unrelated identities are preserved",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-duplicate-subtree",
+      "before": "nested Toggle subtree",
+      "action": "duplicate through explicit identity provider",
+      "owner": "StructuredMutationKernel",
+      "oracle": "every duplicated node receives a unique new identity while shape/content are preserved",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-remove-subtree",
+      "before": "Toggle with two descendants plus unaffected sibling",
+      "action": "remove the Toggle",
+      "owner": "StructuredMutationKernel",
+      "oracle": "whole subtree is removed atomically while non-target sibling identity survives",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-reorder-identity",
+      "before": "three root siblings",
+      "action": "move middle down then to start",
+      "owner": "StructuredMutationKernel",
+      "oracle": "reorder changes only position; subtree identity stays byte-stable",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-move-gap-atomic",
+      "before": "root subtree and independent Toggle destination",
+      "action": "move root paragraph into Toggle then try moving Toggle into itself",
+      "owner": "StructuredMutationKernel",
+      "oracle": "legal move commits once; self-descendant target rejects with exact unchanged input",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-indent-outdent",
+      "before": "paragraph after Toggle sibling",
+      "action": "indent then outdent same subtree",
+      "owner": "StructuredMutationKernel",
+      "oracle": "canonical owner performs structural nesting and restores root order without changing IDs",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-split-merge-convert",
+      "before": "splittable paragraph and target block types",
+      "action": "split, merge and convert through canonical data operations",
+      "owner": "StructuredMutationKernel",
+      "oracle": "data mutations preserve source identity, use supplied new identity, and obey conversion containment",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-invalid-atomicity",
+      "before": "valid tree with Bullet and deep Toggle branch",
+      "action": "attempt illegal child insert, duplicate identity and over-depth move",
+      "owner": "StructuredMutationKernel",
+      "oracle": "every invalid mutation returns rejection and leaves caller input byte-identical",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-learn-route",
+      "before": "real Learn StructuredDocumentDomainAdapter state",
+      "action": "execute insert and move-to-gap through mutateStructure",
+      "owner": "StructuredDocumentDomainAdapter + StructuredMutationKernel",
+      "oracle": "second consumer mutates real document state through canonical owner and emits canonical owner receipt",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.mutation-second-owner-rejected",
+      "before": "real Learn adapter with a deliberately injected alternate kernel",
+      "action": "invoke adapter descriptor/mutation ownership guard",
+      "owner": "StructuredDocumentDomainAdapter",
+      "oracle": "composition detects and rejects a second Structured mutation semantic owner",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.transaction-owner-real-consumers",
+      "before": "real Library accepted fixture adapter and real Learn adapter",
+      "action": "inspect transaction/history/recovery owner",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "both real Structured consumers use the same executable owner class and shared policy revision",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.transaction-one-intent-one-frame",
+      "before": "Learn canonical document with baseline frame",
+      "action": "one accepted content edit",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "exactly one working revision and one history frame are added",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.transaction-rejected-zero-frame",
+      "before": "Learn valid tree",
+      "action": "rejected duplicate-ID mutation",
+      "owner": "StructuredMutationKernel + StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "rejection is atomic and history/revision remain unchanged",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.transaction-undo-redo-exact",
+      "before": "title plus nested Structured tree",
+      "action": "edit title and nested block then undo/redo each",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "undo and redo restore exact canonical snapshots without adding frames",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.transaction-redo-truncation",
+      "before": "two edits then one undo",
+      "action": "make a new edit after undo",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "redo branch is deterministically truncated",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.transaction-dirty-working-revision",
+      "before": "clean Learn document",
+      "action": "edit then undo to committed baseline",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "working revision advances while dirty truth derives only from canonical committed snapshot",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.recovery-retention-isolation",
+      "before": "two Library KU documents under one owner",
+      "action": "capture beyond retention in first KU then capture in second",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "retention is bounded and recovery metadata never crosses document IDs",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.recovery-restore-as-new-preserves-history",
+      "before": "Learn edit captured in recovery then newer edit",
+      "action": "restore old recovery point",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "restore appends a new working frame and preserves earlier history identity",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.save-no-boundary-truth",
+      "before": "dirty Learn document without persistence boundary",
+      "action": "explicit commit",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "no boundary returns NOT persisted and cannot clear dirty or advance committed revision",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.save-boundary-success-truth",
+      "before": "Structured document with explicit successful boundary",
+      "action": "edit then commit",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "persisted success is claimed only after configured boundary executes",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.save-boundary-failure-safe",
+      "before": "Structured document with rejecting boundary",
+      "action": "edit then commit",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "failed boundary leaves dirty state and durable revision unchanged",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.save-stale-revision-atomic",
+      "before": "dirty canonical document",
+      "action": "commit with stale expected working revision",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "stale expected revision rejects without state change",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.library-presentation-bridge",
+      "before": "real Library adapter with presentation projection callbacks",
+      "action": "bind presentation, accept donor-rendered edit, undo/redo/recovery",
+      "owner": "StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "Library presentation receives canonical projections and never owns semantic history",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.command.catalog-unique",
+      "before": "VS-05 shared command catalog",
+      "action": "inspect command IDs and bind once",
+      "owner": "StructuredDocumentDomainAdapter",
+      "oracle": "all admitted command IDs are unique and register under one owner",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.command.availability-projection",
+      "before": "one selected Learn block in read mode",
+      "action": "ask toolbar/menu/palette projections through the same registry context",
+      "owner": "StructuredCommandAvailabilityOwner",
+      "oracle": "same command/context yields one code, reason, owner and policy truth",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.command.disabled-preflight",
+      "before": "first root block at level start",
+      "action": "attempt moveUp through CommandRegistry",
+      "owner": "CommandRegistry + StructuredCommandAvailabilityOwner",
+      "oracle": "disabled projection cannot be bypassed and creates no registry/history mutation receipt",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.command.enabled-once",
+      "before": "second root block",
+      "action": "moveUp through registry once",
+      "owner": "StructuredDocumentDomainAdapter -> StructuredMutationKernel",
+      "oracle": "one registered handler executes one canonical mutation and one history frame",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.command.read-edit-gating",
+      "before": "same Structured block and command",
+      "action": "compare read/edit availability",
+      "owner": "StructuredCommandAvailabilityOwner",
+      "oracle": "all persistent mutation classes are read-disabled while edit keeps normal availability",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.command.read-mode-policy-catalog",
+      "before": "canonical 23-command catalog",
+      "action": "classify mutability centrally",
+      "owner": "StructuredCommandAvailabilityOwner",
+      "oracle": "22 persistent mutators are read-forbidden and document.commit is the sole read-allowed checkpoint command",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.command.read-mode-no-mutation-matrix",
+      "before": "every admitted persistent Structured mutation command prepared in a valid editable context",
+      "action": "attempt direct CommandRegistry execution with mode=read",
+      "owner": "StructuredCommandAvailabilityOwner -> CommandRegistry preflight",
+      "oracle": "every command is denied with identical canonical decision and causes zero document/history/revision/dirty/receipt transition",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.command.edit-mode-positive-matrix",
+      "before": "same 22 persistent commands prepared with legal payloads",
+      "action": "execute each through CommandRegistry with mode=edit",
+      "owner": "StructuredCommandAvailabilityOwner + canonical Structured owners",
+      "oracle": "correction preserves each command existing edit-mode availability and canonical execution",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.command.read-mode-commit-checkpoint",
+      "before": "dirty document with no durable save boundary",
+      "action": "execute document.commit through registry in read mode",
+      "owner": "StructuredTransactionHistoryRecoveryOwner via canonical command path",
+      "oracle": "checkpoint action remains available but cannot fabricate persistence success or mutate document/history/working revision/dirty truth",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.command.undo-redo-truth",
+      "before": "clean canonical transaction state then one mutation",
+      "action": "inspect history availability before/after/undo",
+      "owner": "StructuredTransactionHistoryRecoveryOwner via StructuredCommandAvailabilityOwner",
+      "oracle": "undo/redo exactly mirror canonical transaction descriptor",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.command-movement-edges",
+      "before": "first and last root blocks",
+      "action": "inspect movement boundaries",
+      "owner": "StructuredCommandAvailabilityOwner",
+      "oracle": "start/end commands refuse with truthful stable codes",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.command-indent-outdent-reasons",
+      "before": "root Structured document",
+      "action": "inspect first root outdent and representative indent",
+      "owner": "StructuredCommandAvailabilityOwner + StructuredMutationKernel",
+      "oracle": "legality and reason originate from canonical mutation inspection",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.command-destructive-guard",
+      "before": "Library toggle subtree",
+      "action": "inspect delete availability",
+      "owner": "StructuredCommandAvailabilityOwner",
+      "oracle": "destructive metadata and subtree confirmation requirement come from canonical tree state",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.command-real-consumers",
+      "before": "real Library adapter and real Learn adapter",
+      "action": "bind shared commands and inspect representative mutation/history commands",
+      "owner": "StructuredDocumentDomainAdapter",
+      "oracle": "Library and Learn use identical IDs, availability owner/policy and command owner without Library KU state in Learn",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.command-duplicate-owner-negative",
+      "before": "canonical commands already bound",
+      "action": "attempt second semantic registration and second bind",
+      "owner": "CommandRegistry",
+      "oracle": "duplicate/local semantic owner is rejected by ownership gate",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.transaction-second-owner-rejected",
+      "before": "real Learn adapter with deliberately replaced transaction owner",
+      "action": "invoke descriptor ownership guard",
+      "owner": "StructuredDocumentDomainAdapter",
+      "oracle": "composition detects a second main-document history/recovery owner",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "workspace.panes-preferred-effective",
+      "before": "preferred panes open on a compact viewport",
+      "action": "apply responsive and focus projections",
+      "owner": "WorkspacePaneLayoutOwner",
+      "oracle": "effective collapse never mutates preferred state",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.selection-tree-canonical-order",
+      "before": "nested Library tree with click order reversed",
+      "action": "select root+nested IDs additively",
+      "owner": "StructuredSelectionKernel",
+      "oracle": "selection de-duplicates and emits StructuredTreeKernel preorder independent of click order",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.selection-range-nested",
+      "before": "nested Library ancestor and deep focus",
+      "action": "select canonical range across nested descendants",
+      "owner": "StructuredSelectionKernel",
+      "oracle": "anchor/focus are explicit; selected ancestor owns covered descendants without double counting or loss",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.selection-collapsed-toggle",
+      "before": "nested Library toggle is selected then visually collapsed by document transaction",
+      "action": "keep selection while open flag changes",
+      "owner": "StructuredSelectionKernel",
+      "oracle": "canonical traversal includes nested descendants independent of disclosure visibility",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.selection-inline-projection",
+      "before": "Library paragraph logical offsets",
+      "action": "record inline descriptor then edit same block",
+      "owner": "StructuredSelectionKernel",
+      "oracle": "logical offsets survive render-independent transaction projection with no DOM identity in canonical state",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.selection-stale-repair",
+      "before": "selected nested child then subtree deletion",
+      "action": "project transaction after mutation",
+      "owner": "StructuredSelectionKernel",
+      "oracle": "stale selection is pruned deterministically with explicit receipt and no history mutation caused by selection itself",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.selection-no-history-side-effect",
+      "before": "real Learn adapter clean transaction state",
+      "action": "single/additive/range/inline/clear selection only",
+      "owner": "StructuredSelectionKernel",
+      "oracle": "selection operations never mutate document history, working revision, dirty state or document bytes",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.selection-unknown-negative",
+      "before": "real Learn adapter",
+      "action": "request unknown block identity",
+      "owner": "StructuredSelectionKernel",
+      "oracle": "unknown identity is rejected and prior canonical selection remains unchanged",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.selection-real-consumers",
+      "before": "real Library accepted donor adapter and real Learn donor-free adapter",
+      "action": "inspect and change selection through actual consumer adapters",
+      "owner": "StructuredSelectionKernel",
+      "oracle": "Library and Learn share one contract/policy owner while remaining domain-isolated",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2a.transient-stack-precedence",
+      "before": "menu under modal dialog",
+      "action": "attempt outside/escape dismissal",
+      "owner": "TransientFocusOwner",
+      "oracle": "only top transient can dismiss and modal isolates underlying transient",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2a.transient-focus-return-fallback",
+      "before": "detached invoker and deterministic fallback",
+      "action": "close transient with restore",
+      "owner": "TransientFocusOwner",
+      "oracle": "detached invoker is never focused and configured fallback receives focus exactly once",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2a.transient-persistent-pane-isolation",
+      "before": "persistent pane state exists outside transient stack",
+      "action": "open/close overlay while pane marker remains",
+      "owner": "TransientFocusOwner",
+      "oracle": "transient lifecycle cannot blur-dismiss persistent pane state",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2a.preference-applicability-no-domain-leakage",
+      "before": "shared persisted global grid override from Spatial consumer",
+      "action": "reload same storage in Structured and Operational consumers",
+      "owner": "ScopedPreferencesOwner",
+      "oracle": "spatial preference persists but incompatible families resolve safe default and cannot set it",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2a.preference-precedence-reset",
+      "before": "global workspace surface view component values",
+      "action": "resolve then reset most specific",
+      "owner": "ScopedPreferencesOwner",
+      "oracle": "specific scope wins then parent value is restored deterministically",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2a.preference-import-atomic-validation",
+      "before": "valid persisted snapshot",
+      "action": "import invalid value",
+      "owner": "ScopedPreferencesOwner",
+      "oracle": "invalid import rejects atomically without replacing existing overrides",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w2a.preference-storage-truth",
+      "before": "working storage then throwing storage",
+      "action": "save and reload / fail write",
+      "owner": "ScopedPreferencesOwner",
+      "oracle": "real persistence round-trip is durable and storage failure is surfaced without fabricating success",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "workspace.transient-focus",
+      "before": "focusable invoker and two transients",
+      "action": "close one then all",
+      "owner": "TransientFocusController",
+      "oracle": "exact invoker focus restores and active ownership is empty",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "workspace.context-descriptors",
+      "before": "Structured and Spatial domain providers",
+      "action": "render with one Context Inspector presentation",
+      "owner": "ContextInspectorPresentation",
+      "oracle": "same presentation consumes distinct provider-owned fields without copied inspector implementations",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "workspace.host-contract",
+      "before": "cross-family host boundary",
+      "action": "inspect versioned owner contract",
+      "owner": "WorkspaceFoundationHost",
+      "oracle": "pane/transient/context subowners are explicit",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "runtime.capability",
+      "before": "note object",
+      "action": "open",
+      "owner": "InternalSimulationAdapter",
+      "oracle": "capability refusal",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "runtime.contract",
+      "before": "provider-neutral Operational boundary",
+      "action": "inspect RuntimeAdapter descriptor",
+      "owner": "RuntimeAdapter",
+      "oracle": "provider supplies label, prompt, capability and command ownership",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "contract.versions",
+      "before": "durable shared contracts",
+      "action": "inspect explicit semantic versions",
+      "owner": "Foundation contracts",
+      "oracle": "Structured, Runtime and ActionAvailability contracts are versioned",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "runtime.identity",
+      "before": "open Router",
+      "action": "open twice then float/split",
+      "owner": "SessionPresentation",
+      "oracle": "same provider session object/id",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "runtime.consequence",
+      "before": "Router UP",
+      "action": "shutdown then status then reverse",
+      "owner": "InternalSimulationAdapter",
+      "oracle": "real model state follows command; authored unchanged",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "runtime.idempotency",
+      "before": "one shutdown receipt",
+      "action": "retry same invocation",
+      "owner": "InternalSimulationAdapter",
+      "oracle": "one event same receipt",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "runtime.unknown",
+      "before": "UP device",
+      "action": "host-looking command",
+      "owner": "InternalSimulationAdapter",
+      "oracle": "unsupported no state mutation",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "runtime.stale",
+      "before": "two sessions",
+      "action": "disconnect reconnect one, use other",
+      "owner": "InternalSimulationAdapter",
+      "oracle": "disconnected and stale inputs refused",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "runtime.recorded",
+      "before": "event snapshot",
+      "action": "mutate live state",
+      "owner": "InternalSimulationAdapter",
+      "oracle": "recorded remains read only detached",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "runtime.w03-v34-causal",
+      "before": "exact RUN-0042 device is UP",
+      "action": "open stable session and enter shutdown",
+      "owner": "W03V34RunsAdapter",
+      "oracle": "parser command and canonical device/output/recorded truth agree",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "runtime.w03-v34-lifecycle",
+      "before": "RUN-0042 running",
+      "action": "pause then resume through extracted v3.4 guards",
+      "owner": "W03V34RunsAdapter",
+      "oracle": "request, acknowledge and completion reach valid lifecycle with no pending request",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "session.reorder",
+      "before": "two tabs",
+      "action": "reorder detach",
+      "owner": "SessionPresentation",
+      "oracle": "identity and active fallback coherent",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "learn.revision",
+      "before": "new activity",
+      "action": "start then change activity revision",
+      "owner": "LearnAdapter",
+      "oracle": "attempt pinned revision",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "learn.idempotency",
+      "before": "started attempt",
+      "action": "submit twice",
+      "owner": "LearnAdapter",
+      "oracle": "same attempt no Mastery write",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.selection-stale-range-metadata-repair",
+      "before": "canonical a->b->c range then delete stale anchor a",
+      "action": "reconcile selection after structural delete",
+      "owner": "StructuredSelectionKernel",
+      "oracle": "top-level and nested range endpoints/raw IDs/direction repair to b->c consistently",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.selection-stale-backward-range-metadata-repair",
+      "before": "canonical a->b->c backward range c->a then delete stale focus a",
+      "action": "reconcile backward selection after structural delete",
+      "owner": "StructuredSelectionKernel",
+      "oracle": "surviving range stays c->b with backward direction and canonical raw IDs b,c",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.selection-stale-bookmark-project-repair",
+      "before": "bookmark captured for a->c before a is deleted",
+      "action": "project stale bookmark after delete",
+      "owner": "StructuredSelectionKernel",
+      "oracle": "projection prunes a and preserves valid b,c instead of clearing selection",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "structured.selection-delete-undo-redo-recovery-bookmark-roundtrip",
+      "before": "range a->c repaired to b->c after deleting a",
+      "action": "delete, bookmark, Undo, Redo, recovery-as-new and bookmark projection",
+      "owner": "StructuredSelectionKernel + StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "all projections retain valid repaired b,c with internally consistent range metadata",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3b.feedback-single-presentation-owner",
+      "before": "new reusable feedback contract",
+      "action": "inspect owner identity and state-boundary declaration",
+      "owner": "AccessibilityFeedbackOwner",
+      "oracle": "exactly one reusable semantic owner is declared and it explicitly rejects canonical/focus/transient ownership",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3b.feedback-deterministic-politeness",
+      "before": "success, unavailable and failure source truths",
+      "action": "resolve central accessibility policy",
+      "owner": "AccessibilityFeedbackOwner",
+      "oracle": "success/unavailable are polite, failure is assertive, tooltip is non-live",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3b.feedback-dedupe-lifecycle",
+      "before": "same announcement repeated inside and outside central window",
+      "action": "publish, suppress duplicate, expire, republish",
+      "owner": "AccessibilityFeedbackOwner",
+      "oracle": "one central dedupe/lifetime policy deterministically suppresses and expires presentation only",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3b.feedback-real-library-learn-consumers",
+      "before": "real Library and Learn Structured consumers",
+      "action": "project their canonical unavailable decisions through one owner",
+      "owner": "AccessibilityFeedbackOwner",
+      "oracle": "both families consume one feedback owner without changing command/domain truth",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3b.feedback-success-projection-no-second-mutation",
+      "before": "real Structured command applies one domain mutation",
+      "action": "publish success after canonical command result",
+      "owner": "AccessibilityFeedbackOwner",
+      "oracle": "feedback reflects proven success and performs zero additional domain mutation",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3b.feedback-invented-success-rejected",
+      "before": "failed and unavailable canonical outcomes",
+      "action": "attempt to project them as success",
+      "owner": "AccessibilityFeedbackOwner",
+      "oracle": "presentation cannot invent success or convert unavailable truth into success",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3b.feedback-contradictory-source-truth-refused",
+      "before": "contradictory generic source signals ok:false+SAVED and ok:true+FAILED",
+      "action": "attempt success/failure/warning projection",
+      "owner": "AccessibilityFeedbackOwner",
+      "oracle": "validation boundary refuses contradiction before presentation semantics and never chooses a canonical meaning",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3b.feedback-explicit-intent-source-mismatch-refused",
+      "before": "consistent failure truth and consistent success truth",
+      "action": "request opposite presentation outcomes",
+      "owner": "AccessibilityFeedbackOwner",
+      "oracle": "success intent cannot override failure truth and failure intent cannot override success truth",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3b.feedback-consistent-source-truth-still-projects",
+      "before": "consistent success and failure source signals",
+      "action": "project matching presentation outcomes",
+      "owner": "AccessibilityFeedbackOwner",
+      "oracle": "legitimate source truth remains projectable without feedback inventing canonical state",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3b.feedback-canonical-error-not-owned",
+      "before": "canonical failure object with domain/error details",
+      "action": "project failure and inspect stored event",
+      "owner": "AccessibilityFeedbackOwner",
+      "oracle": "only presentation metadata is retained; canonical error/domain object remains external and byte-stable",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3b.feedback-bounded-source-contract",
+      "before": "missing source truth/family/owner and invalid channel",
+      "action": "attempt publication",
+      "owner": "AccessibilityFeedbackOwner",
+      "oracle": "projection refuses ownerless or truthless feedback instead of becoming a new truth source",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3c.context-single-global-host-real-providers",
+      "before": "real Library Structured adapter and real Enterprise Spatial/Relation adapters",
+      "action": "register both descriptor providers on one host and render each through the same owner",
+      "owner": "ContextInspectorHost",
+      "oracle": "one Global presentation owner renders genuine family projections while provider/domain ownership stays outside Global",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3c.context-explicit-descriptor-lens-tab-identity",
+      "before": "one ContextInspectorHost with real Structured provider",
+      "action": "activate provider then switch host-owned tab",
+      "owner": "ContextInspectorHost",
+      "oracle": "descriptor/provider/lens/tab identities are explicit presentation state and no domain payload is stored there",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3c.context-structured-projection-refresh-no-ownership-transfer",
+      "before": "real Library Structured document with no selected blocks",
+      "action": "select one canonical block externally then re-render active selection tab",
+      "owner": "StructuredSelectionKernel + LibraryStructuredContextDescriptorProvider + ContextInspectorHost",
+      "oracle": "projection refreshes from canonical selection while host retains only presentation identities",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3c.context-spatial-stale-selection-deterministic",
+      "before": "real Enterprise relation adapter and SpatialModel with one active object",
+      "action": "change canonical selection then clear it while the inspector is active",
+      "owner": "SpatialSelectionNavigationKernel + SpatialContextDescriptorProvider + ContextInspectorHost",
+      "oracle": "descriptor identity refreshes on selection change and stale/inapplicable selection deactivates without cached domain truth",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3c.context-readonly-no-domain-mutation",
+      "before": "real Library adapter, Enterprise relation/spatial state and Runs runtime truth after canonical selection",
+      "action": "render both providers and navigate inspector lens/tab only",
+      "owner": "ContextInspectorHost",
+      "oracle": "document, relation, runtime/device, geometry and selection canonical bytes remain unchanged by inspector presentation",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3c.context-invalid-inapplicable-safe-rejection",
+      "before": "one valid active Library descriptor plus malformed and empty-selection providers",
+      "action": "attempt activation of invalid descriptor and inapplicable Spatial descriptor",
+      "owner": "ContextInspectorHost + ContextDescriptorContract",
+      "oracle": "rejections are explicit and leave the valid active presentation state byte-identical",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3c.context-transient-focus-return",
+      "before": "accepted TransientFocusOwner and real Library provider with focusable invoker",
+      "action": "open inspector then close through host-level action with Escape reason",
+      "owner": "ContextInspectorHost + TransientFocusOwner",
+      "oracle": "focus lifecycle is delegated to accepted transient owner and returns to invoker exactly once",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3c.context-central-policy-change-exact-revert",
+      "before": "same host and genuine Library/Spatial providers under comfortable policy",
+      "action": "change host density centrally, render both, then restore exact prior policy",
+      "owner": "ContextInspectorHost",
+      "oracle": "one presentation policy change reaches both providers and exact revert reproduces both prior renderings",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3c.context-active-inapplicable-closes-ghost-transient",
+      "before": "open real Spatial provider with one selected object and focusable invoker",
+      "action": "clear canonical Spatial selection then project active inspector",
+      "owner": "ContextInspectorHost + TransientFocusOwner",
+      "oracle": "active descriptor invalidation closes host, removes transient, clears identities, restores focus and returns truthful reconciliation receipt",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3c.context-provider-removal-while-open-closes-cleanly",
+      "before": "open real Library/Structured provider with focusable invoker",
+      "action": "unregister the currently active provider",
+      "owner": "ContextInspectorHost + TransientFocusOwner",
+      "oracle": "provider removal closes inspector and clears transient/focus lifecycle without domain ownership transfer",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3c.context-invalid-descriptor-while-open-closes-cleanly",
+      "before": "open provider whose descriptor starts valid and can become malformed",
+      "action": "invalidate active descriptor lenses then project again",
+      "owner": "ContextInspectorHost + ContextDescriptorContract + TransientFocusOwner",
+      "oracle": "active INVALID_DESCRIPTOR closes host and returns explicit reconciliation receipt with no ghost transient",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3c.context-switch-valid-provider-and-reopen-after-invalidation",
+      "before": "real Library and Spatial providers with accepted TransientFocusOwner",
+      "action": "open Library, switch to valid Spatial, invalidate Spatial, then reopen Library",
+      "owner": "ContextInspectorHost",
+      "oracle": "valid provider switching preserves one transient; invalidation closes it; reopening creates one fresh consistent lifecycle",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3c.context-invalidation-presentation-only-domain-truth-unchanged",
+      "before": "real Library document, Spatial/Relation state and Runs runtime truth",
+      "action": "open Library, switch Spatial, invalidate through canonical selection owner, reconcile host, then reopen Library",
+      "owner": "ContextInspectorHost",
+      "oracle": "inspector reconciliation mutates only presentation/focus state; document/relation/runtime/save truth stays byte-identical and selection changes only through canonical Spatial owner",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3e.ui-scale-owner-contract",
+      "before": "accepted ScopedPreferencesOwner with global scale preference",
+      "action": "construct reusable UI scale owner",
+      "owner": "UIScalePolicyOwner",
+      "oracle": "one owner declares application-chrome scope and explicit exclusions from document/canvas/browser zoom, density and responsive breakpoints",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3e.ui-scale-deterministic-values",
+      "before": "central scale token bases",
+      "action": "project 0.8, 1.0 and 2.0",
+      "owner": "UIScalePolicyOwner",
+      "oracle": "all three scales deterministically project the same central geometry/token set",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3e.ui-scale-normalization",
+      "before": "arbitrary low/high/in-between scale inputs",
+      "action": "normalize against one governed range and step",
+      "owner": "UIScalePolicyOwner",
+      "oracle": "clamp and step normalization is deterministic",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3e.ui-scale-shared-library-visualize-consumers",
+      "before": "real Library Structured adapter and SpatialModel with independent domain state",
+      "action": "project both consumer chrome fixtures through the same central owner",
+      "owner": "UIScalePolicyOwner",
+      "oracle": "both families receive identical central scale tokens while domain/document/camera state remains byte-identical",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3e.ui-scale-scoped-preferences-authority",
+      "before": "shared durable storage and structured context",
+      "action": "set scale through UI scale policy then reload as Spatial context",
+      "owner": "ScopedPreferencesOwner + UIScalePolicyOwner",
+      "oracle": "value persists only through accepted preference storage and remains globally applicable",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3e.ui-scale-pane-responsive-separation",
+      "before": "open pane preferences at compact viewport",
+      "action": "project application-chrome geometry at low/default/high scale",
+      "owner": "UIScalePolicyOwner + WorkspacePaneLayoutOwner",
+      "oracle": "scaled widths change while preferred/effective pane state and responsive band remain unchanged",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3e.ui-scale-no-surface-local-policy",
+      "before": "central owner and two family descriptors",
+      "action": "attempt consumer-local scale/token overrides",
+      "owner": "UIScalePolicyOwner",
+      "oracle": "consumer descriptors cannot introduce competing local scale policy",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    {
+      "id": "w3e.ui-scale-style-projection",
+      "before": "fake DOM style target and pane owner",
+      "action": "apply central CSS-variable projection",
+      "owner": "UIScalePolicyOwner",
+      "oracle": "geometry variables are emitted without CSS zoom/transform semantics",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    }
+  ]
+}

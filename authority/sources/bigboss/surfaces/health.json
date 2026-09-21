@@ -1,0 +1,205 @@
+{
+  "objects": {
+    "Observation": "sourceId + observedAt + freshness budget + value/error",
+    "WorkerLiveness": "workerId + heartbeat/lease + observedAt",
+    "QueueMetric": "queueId + depth + observedAt",
+    "DiagnosticRun": "explicit separately requested durable check"
+  },
+  "state_dimensions": {
+    "observation": [
+      "AVAILABLE_DATA",
+      "AVAILABLE_EMPTY",
+      "UNAVAILABLE",
+      "ERROR",
+      "STALE"
+    ],
+    "worker": [
+      "ALIVE",
+      "EXPIRED",
+      "UNKNOWN"
+    ],
+    "refresh": [
+      "IDLE",
+      "FETCHING"
+    ]
+  },
+  "read_model": "HealthObservationService aggregates real source observations; liveness is independent from queue depth.",
+  "persistence": {
+    "Observation": "source read model/cache",
+    "WorkerLiveness": "worker heartbeat source",
+    "DiagnosticRun": "Platform.Diagnostics only on explicit diagnose"
+  },
+  "invariants": [
+    "Queue table exists does not imply alive worker",
+    "Refresh is not a durable diagnostic run",
+    "Unknown source never appears green"
+  ],
+  "epistemic": {
+    "empty": "Successful observed queue count 0 is available-empty, not disconnected.",
+    "stale": "Age exceeds source freshness budget: show value and age as stale.",
+    "unavailable": "Source unreachable/permission denied is unavailable with recovery path.",
+    "error": "Fetch/parse error preserves safe correlation ID and last observation."
+  },
+  "operations": [
+    {
+      "name": "refresh",
+      "family": "NavigationCommand",
+      "payload": "routeId:string sourceIds:strings",
+      "before": "refresh=IDLE",
+      "event": "fetch observations",
+      "after": "refresh=IDLE with per-source epistemic states",
+      "guard": "Authenticated source access; no diagnostic creation",
+      "oracle": "Zero queue + expired heartbeat yields EMPTY queue and EXPIRED worker",
+      "persistence": "Platform.HealthReadProjection",
+      "method": "GET",
+      "gate": null,
+      "command_id": "health.refresh",
+      "surface_id": "health",
+      "semantic_owner": "W05HealthDomain",
+      "focus_after": "Health active object/control; detached target→health-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Fetch/parse error preserves safe correlation ID and last observation.",
+        "503_timeout": "Source unreachable/permission denied is unavailable with recovery path."
+      },
+      "test_id": "TEST-health.refresh",
+      "evidence_id": "EVID-health.refresh",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "inspect",
+      "family": "NavigationCommand",
+      "payload": "routeId:string observationRef:ref",
+      "before": "observation any",
+      "event": "inspect origin/age",
+      "after": "source detail shown",
+      "guard": "Exact observation identity",
+      "oracle": "Unavailable source includes observedAt only if actually observed",
+      "persistence": "Platform.HealthReadProjection",
+      "method": "GET",
+      "gate": null,
+      "command_id": "health.inspect",
+      "surface_id": "health",
+      "semantic_owner": "W05HealthDomain",
+      "focus_after": "Health active object/control; detached target→health-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Fetch/parse error preserves safe correlation ID and last observation.",
+        "503_timeout": "Source unreachable/permission denied is unavailable with recovery path."
+      },
+      "test_id": "TEST-health.inspect",
+      "evidence_id": "EVID-health.inspect",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "diagnose",
+      "family": "OperationalCommand",
+      "payload": "sourceRef:ref action:enum:diagnose expectedState:enum:OBSERVED correlationId:string",
+      "before": "observation selected",
+      "event": "create explicit diagnostic request",
+      "after": "diagnostic request ID visible",
+      "guard": "Diagnostic capability exists and actor authorized",
+      "oracle": "Refresh never increments diagnostic history; diagnose does",
+      "persistence": "Platform.DiagnosticRequest",
+      "method": "POST",
+      "gate": null,
+      "command_id": "health.diagnose",
+      "surface_id": "health",
+      "semantic_owner": "W05HealthDomain",
+      "focus_after": "Health active object/control; detached target→health-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Fetch/parse error preserves safe correlation ID and last observation.",
+        "503_timeout": "Source unreachable/permission denied is unavailable with recovery path."
+      },
+      "test_id": "TEST-health.diagnose",
+      "evidence_id": "EVID-health.diagnose",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "health",
+  "title": "Health",
+  "workspace": "W05",
+  "semantic_owner": "W05HealthDomain",
+  "archetype": "OperationalObservationWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W05-HLT-001",
+    "CAP-W05-HLT-002",
+    "CAP-W05-HLT-003",
+    "CAP-W05-HLT-004",
+    "CAP-W05-HLT-005",
+    "CAP-W05-HLT-006",
+    "CAP-W05-HLT-007",
+    "CAP-W05-HLT-008",
+    "CAP-W05-HLT-009"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W05-HLT-001",
+        "CAP-W05-HLT-002",
+        "CAP-W05-HLT-003",
+        "CAP-W05-HLT-004",
+        "CAP-W05-HLT-005",
+        "CAP-W05-HLT-006",
+        "CAP-W05-HLT-007",
+        "CAP-W05-HLT-008",
+        "CAP-W05-HLT-009"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Health",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-023",
+    "NC-024"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore"
+  ],
+  "adapter": "W05HealthDomainAdapter",
+  "regions": {
+    "TOP": "Health exact identity, local mode, command routes",
+    "LEFT": "typed Observation collection/navigation",
+    "CENTER": "OperationalObservationWorkbench primary task",
+    "RIGHT": "one selected Observation identity/context inspector",
+    "BOTTOM": "Deep Health diagnostics/history"
+  },
+  "command_ids": [
+    "health.refresh",
+    "health.inspect",
+    "health.diagnose"
+  ]
+}

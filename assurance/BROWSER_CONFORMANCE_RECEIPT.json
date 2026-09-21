@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 2,
+  "classification": "GENUINE_ROUTE_EVIDENCE__OPEN_ENVIRONMENT__NOT_PRODUCT_PASS__NOT_OWNER_ACCEPTANCE",
+  "command": "node tools/update-browser-environment-receipt.mjs",
+  "sourceFoundationBaseline": "CEP-FR-E18-ANALYTICAL-COMPARE-COMPLETION",
+  "sourceCandidate": "CANONICAL_SOURCE_TREE_SHA256:5205d2a3d0db441e030a046bc831549728cc95b9c09ff9d2fa4233ba1672fd66",
+  "sourceCanonicalTreeSha256": "5205d2a3d0db441e030a046bc831549728cc95b9c09ff9d2fa4233ba1672fd66",
+  "canonicalSourceFileCount": 272,
+  "currentUse": "EXACT_CURRENT_CANONICAL_SOURCE_ENVIRONMENT_BLOCK_RECEIPT",
+  "executionStatus": "OPEN_ENVIRONMENT__LOOPBACK_BLOCKED_BEFORE_PRODUCT_RECEIPT",
+  "prerequisite": "BLOCKED: Chromium policy rejects loopback/local Product routes before Product receipt; no in-memory substitute is counted as genuine-route proof.",
+  "declaredFlows": [
+    "workspace.transient-and-pane-lifecycle",
+    "spatial.selection-connect-canonical-edge",
+    "relation.route-convergence-and-label-scope",
+    "central-change-reuse",
+    "runtime-causal-consequence",
+    "spatial-input-bidi-preference-and-structured-isolation"
+  ],
+  "environment": {
+    "engine": "Chromium",
+    "transport": "localhost-http-built-esm",
+    "attemptedHosts": [
+      "127.0.0.1",
+      "localhost",
+      "0.0.0.0",
+      "cep.local"
+    ],
+    "error": "net::ERR_BLOCKED_BY_ADMINISTRATOR",
+    "evidence": "loopback_policy_results.txt"
+  },
+  "summary": {
+    "total": 6,
+    "pass": 0,
+    "fail": 0,
+    "blocked": 6
+  },
+  "flows": [
+    {
+      "id": "workspace.transient-and-pane-lifecycle",
+      "status": "OPEN_ENVIRONMENT",
+      "reason": "LOOPBACK_BLOCKED_BEFORE_PRODUCT_RECEIPT"
+    },
+    {
+      "id": "spatial.selection-connect-canonical-edge",
+      "status": "OPEN_ENVIRONMENT",
+      "reason": "LOOPBACK_BLOCKED_BEFORE_PRODUCT_RECEIPT"
+    },
+    {
+      "id": "relation.route-convergence-and-label-scope",
+      "status": "OPEN_ENVIRONMENT",
+      "reason": "LOOPBACK_BLOCKED_BEFORE_PRODUCT_RECEIPT"
+    },
+    {
+      "id": "central-change-reuse",
+      "status": "OPEN_ENVIRONMENT",
+      "reason": "LOOPBACK_BLOCKED_BEFORE_PRODUCT_RECEIPT"
+    },
+    {
+      "id": "runtime-causal-consequence",
+      "status": "OPEN_ENVIRONMENT",
+      "reason": "LOOPBACK_BLOCKED_BEFORE_PRODUCT_RECEIPT"
+    },
+    {
+      "id": "spatial-input-bidi-preference-and-structured-isolation",
+      "status": "OPEN_ENVIRONMENT",
+      "reason": "LOOPBACK_BLOCKED_BEFORE_PRODUCT_RECEIPT"
+    }
+  ],
+  "limitations": [
+    "No genuine HTTP route executed in this Writer environment.",
+    "In-memory visual rendering is classified separately as presentation evidence only.",
+    "This receipt must never be interpreted as a browser PASS."
+  ]
+}

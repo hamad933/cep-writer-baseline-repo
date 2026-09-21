@@ -1,0 +1,1177 @@
+{
+  "schemaVersion": 1,
+  "kind": "W5_C_STRUCTURED_CONSUMER_PARITY_BROWSER_PROOF",
+  "classification": "LANE_C_EXECUTION_EVIDENCE_NOT_CONTROLLER_ACCEPTANCE",
+  "status": "PASS",
+  "sourceCanonicalTreeSha256": "fcca03a3ef529e5eda8b3ddddcc1f093ad7054336430d3c08224fac55328c753",
+  "canonicalSourceFileCount": 113,
+  "environment": {
+    "engine": "Python Playwright Chromium",
+    "executable": "/usr/bin/chromium",
+    "transport": "in-memory-built-esm",
+    "viewport": {
+      "width": 1680,
+      "height": 1050
+    }
+  },
+  "proof": {
+    "steps": [
+      {
+        "id": "browser.same-host-renderer-three-consumers",
+        "status": "PASS",
+        "evidence": {
+          "library": {
+            "host": "StructuredSurfaceHost",
+            "domain": "library",
+            "renderer": "StructuredBlockRenderer",
+            "presentation": "StructuredPresentationBridge"
+          },
+          "learn": {
+            "host": "StructuredSurfaceHost",
+            "domain": "learn",
+            "renderer": "StructuredBlockRenderer",
+            "presentation": "StructuredPresentationBridge"
+          },
+          "note": {
+            "host": "StructuredSurfaceHost",
+            "domain": "note-content",
+            "renderer": "StructuredBlockRenderer",
+            "presentation": "StructuredPresentationBridge"
+          }
+        }
+      },
+      {
+        "id": "browser.canonical-identity-paths",
+        "status": "PASS",
+        "evidence": {
+          "library": {
+            "blockId": "blk-d05-li1a",
+            "path": "blk-d05-t2/blk-d05-li1/blk-d05-li1a",
+            "depth": 2
+          },
+          "learn": {
+            "blockId": "learn-p1",
+            "path": "learn-p1",
+            "depth": 0
+          },
+          "note": {
+            "blockId": "note-toggle-p1",
+            "path": "note-toggle-1/note-toggle-p1",
+            "depth": 1
+          }
+        }
+      },
+      {
+        "id": "browser.pointer-selection-three-consumers",
+        "status": "PASS",
+        "evidence": {
+          "library": {
+            "owner": "StructuredSelectionKernel",
+            "selected": [
+              "blk-d05-p1"
+            ]
+          },
+          "learn": {
+            "owner": "StructuredSelectionKernel",
+            "selected": [
+              "learn-p1"
+            ]
+          },
+          "note": {
+            "owner": "StructuredSelectionKernel",
+            "selected": [
+              "note-p1"
+            ]
+          }
+        }
+      },
+      {
+        "id": "browser.keyboard-command-three-consumers",
+        "status": "PASS",
+        "evidence": {
+          "library": {
+            "global": "GlobalInputKeymapOwner",
+            "input": "StructuredInputKeymapOwner",
+            "mutation": "StructuredMutationKernel",
+            "transaction": "StructuredTransactionHistoryRecoveryOwner",
+            "undoExact": true
+          },
+          "learn": {
+            "global": "GlobalInputKeymapOwner",
+            "input": "StructuredInputKeymapOwner",
+            "mutation": "StructuredMutationKernel",
+            "transaction": "StructuredTransactionHistoryRecoveryOwner",
+            "undoExact": true
+          },
+          "note": {
+            "global": "GlobalInputKeymapOwner",
+            "input": "StructuredInputKeymapOwner",
+            "mutation": "StructuredMutationKernel",
+            "transaction": "StructuredTransactionHistoryRecoveryOwner",
+            "undoExact": true
+          }
+        }
+      },
+      {
+        "id": "browser.navigation-descriptor-presentation-only",
+        "status": "PASS",
+        "evidence": {
+          "library": {
+            "owner": "StructuredNavigationDescriptorOwner",
+            "outline": 5,
+            "quickJump": 5,
+            "inspection": "READ_INSPECTION_DESCRIPTOR_READY",
+            "delegation": {
+              "transientPresentationOwner": "TransientFocusOwner",
+              "contextInspectorLifecycleOwner": "ContextInspectorHost",
+              "canonicalSelectionOwner": "StructuredSelectionKernel",
+              "canonicalDocumentMutationOwner": "StructuredMutationKernel",
+              "domScrollOwner": "CONTROLLER_INTEGRATION_PRESENTATION",
+              "descriptorOwnerOwnsTransientLifecycle": false,
+              "descriptorOwnerOwnsDomScroll": false,
+              "descriptorOwnerOwnsSelection": false,
+              "descriptorOwnerOwnsDocumentMutation": false,
+              "descriptorOwnerOwnsDomainReferenceMutation": false
+            }
+          },
+          "learn": {
+            "owner": "StructuredNavigationDescriptorOwner",
+            "outline": 1,
+            "quickJump": 1,
+            "inspection": "READ_INSPECTION_DESCRIPTOR_READY",
+            "delegation": {
+              "transientPresentationOwner": "TransientFocusOwner",
+              "contextInspectorLifecycleOwner": "ContextInspectorHost",
+              "canonicalSelectionOwner": "StructuredSelectionKernel",
+              "canonicalDocumentMutationOwner": "StructuredMutationKernel",
+              "domScrollOwner": "CONTROLLER_INTEGRATION_PRESENTATION",
+              "descriptorOwnerOwnsTransientLifecycle": false,
+              "descriptorOwnerOwnsDomScroll": false,
+              "descriptorOwnerOwnsSelection": false,
+              "descriptorOwnerOwnsDocumentMutation": false,
+              "descriptorOwnerOwnsDomainReferenceMutation": false
+            }
+          },
+          "note": {
+            "owner": "StructuredNavigationDescriptorOwner",
+            "outline": 2,
+            "quickJump": 2,
+            "inspection": "READ_INSPECTION_DESCRIPTOR_READY",
+            "delegation": {
+              "transientPresentationOwner": "TransientFocusOwner",
+              "contextInspectorLifecycleOwner": "ContextInspectorHost",
+              "canonicalSelectionOwner": "StructuredSelectionKernel",
+              "canonicalDocumentMutationOwner": "StructuredMutationKernel",
+              "domScrollOwner": "CONTROLLER_INTEGRATION_PRESENTATION",
+              "descriptorOwnerOwnsTransientLifecycle": false,
+              "descriptorOwnerOwnsDomScroll": false,
+              "descriptorOwnerOwnsSelection": false,
+              "descriptorOwnerOwnsDocumentMutation": false,
+              "descriptorOwnerOwnsDomainReferenceMutation": false
+            }
+          }
+        }
+      },
+      {
+        "id": "browser.read-mode-three-consumers",
+        "status": "PASS",
+        "evidence": {
+          "library": {
+            "mode": "read",
+            "contenteditable": "false",
+            "canonicalUnchanged": true
+          },
+          "learn": {
+            "mode": "read",
+            "contenteditable": "false",
+            "canonicalUnchanged": true
+          },
+          "note": {
+            "mode": "read",
+            "contenteditable": "false",
+            "canonicalUnchanged": true
+          }
+        }
+      },
+      {
+        "id": "browser.toggle-rich-sanitization",
+        "status": "PASS",
+        "evidence": {
+          "library": {
+            "html": "<strong>SAFE</strong>مرحبا <bdi dir=\"ltr\">TCP/IP</bdi>",
+            "dir": "rtl",
+            "richOwner": "StructuredRichContentOwner"
+          },
+          "note": {
+            "html": "<strong>SAFE</strong>مرحبا <bdi dir=\"ltr\">TCP/IP</bdi>",
+            "dir": "rtl",
+            "richOwner": "StructuredRichContentOwner"
+          }
+        }
+      },
+      {
+        "id": "browser.pointer-keyboard-drag-same-policy",
+        "status": "PASS",
+        "evidence": {
+          "library": {
+            "keyboard": {
+              "dragOwner": "StructuredDragDropOwner",
+              "targetPolicy": "StructuredDropTargetPolicyOwner"
+            },
+            "pointer": {
+              "dragOwner": "StructuredDragDropOwner",
+              "targetPolicy": "StructuredDropTargetPolicyOwner",
+              "mutationOwner": "StructuredMutationKernel",
+              "transactionOwner": "StructuredTransactionHistoryRecoveryOwner"
+            },
+            "undoExact": true
+          },
+          "learn": {
+            "keyboard": {
+              "dragOwner": "StructuredDragDropOwner",
+              "targetPolicy": "StructuredDropTargetPolicyOwner"
+            },
+            "pointer": {
+              "dragOwner": "StructuredDragDropOwner",
+              "targetPolicy": "StructuredDropTargetPolicyOwner",
+              "mutationOwner": "StructuredMutationKernel",
+              "transactionOwner": "StructuredTransactionHistoryRecoveryOwner"
+            },
+            "undoExact": true
+          },
+          "note": {
+            "keyboard": {
+              "dragOwner": "StructuredDragDropOwner",
+              "targetPolicy": "StructuredDropTargetPolicyOwner"
+            },
+            "pointer": {
+              "dragOwner": "StructuredDragDropOwner",
+              "targetPolicy": "StructuredDropTargetPolicyOwner",
+              "mutationOwner": "StructuredMutationKernel",
+              "transactionOwner": "StructuredTransactionHistoryRecoveryOwner"
+            },
+            "undoExact": true
+          }
+        }
+      },
+      {
+        "id": "browser.central-change-exact-revert-three-consumers",
+        "status": "PASS",
+        "evidence": {
+          "policyBefore": {
+            "revision": "structured-block-renderer-w5a-r3",
+            "blockGapPx": 8,
+            "indentUnitPx": 20
+          },
+          "policyDuring": {
+            "revision": "structured-block-renderer-w5a-r3",
+            "blockGapPx": 12,
+            "indentUnitPx": 22
+          },
+          "consumers": {
+            "library": {
+              "changed": true,
+              "exactRevert": true,
+              "canonicalUnchanged": true
+            },
+            "learn": {
+              "changed": true,
+              "exactRevert": true,
+              "canonicalUnchanged": true
+            },
+            "note": {
+              "changed": true,
+              "exactRevert": true,
+              "canonicalUnchanged": true
+            }
+          }
+        }
+      }
+    ],
+    "errors": [],
+    "owners": {
+      "library": {
+        "owner": "StructuredSurfaceHost",
+        "contract": {
+          "id": "StructuredSurfaceHost",
+          "version": "1.0.1",
+          "compatibility": "SEMVER",
+          "owner": "Structured Family Presentation/Orchestration",
+          "policyRevision": "structured-surface-host-w5a-r3",
+          "canonicalTruthOwnership": false
+        },
+        "domainOwner": "LibraryDomainAdapter",
+        "domainKind": "library",
+        "mode": "edit",
+        "canonicalTruthOwnership": false,
+        "commands": "SemanticCommandBus",
+        "globalInputOwner": "GlobalInputKeymapOwner",
+        "treeOwner": "StructuredTreeKernel",
+        "mutationOwner": "StructuredMutationKernel",
+        "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+        "availabilityOwner": "StructuredCommandAvailabilityOwner",
+        "selectionOwner": "StructuredSelectionKernel",
+        "clipboardOwner": "StructuredClipboardTrustOwner",
+        "inputKeymapOwner": "StructuredInputKeymapOwner",
+        "actionOwner": "StructuredActionDescriptorOwner",
+        "directionOwner": "InputDirectionResolver",
+        "richContentOwner": "StructuredRichContentOwner",
+        "dragDropOwner": "StructuredDragDropOwner",
+        "rendererOwner": "StructuredBlockRenderer",
+        "presentationBridgeOwner": "StructuredPresentationBridge",
+        "commandBinding": {
+          "status": "BOUND_BY_ACCEPTED_ADAPTER",
+          "count": 26
+        }
+      },
+      "learn": {
+        "owner": "StructuredSurfaceHost",
+        "contract": {
+          "id": "StructuredSurfaceHost",
+          "version": "1.0.1",
+          "compatibility": "SEMVER",
+          "owner": "Structured Family Presentation/Orchestration",
+          "policyRevision": "structured-surface-host-w5a-r3",
+          "canonicalTruthOwnership": false
+        },
+        "domainOwner": "LearnDomainAdapter",
+        "domainKind": "learn",
+        "mode": "edit",
+        "canonicalTruthOwnership": false,
+        "commands": "SemanticCommandBus",
+        "globalInputOwner": "GlobalInputKeymapOwner",
+        "treeOwner": "StructuredTreeKernel",
+        "mutationOwner": "StructuredMutationKernel",
+        "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+        "availabilityOwner": "StructuredCommandAvailabilityOwner",
+        "selectionOwner": "StructuredSelectionKernel",
+        "clipboardOwner": "StructuredClipboardTrustOwner",
+        "inputKeymapOwner": "StructuredInputKeymapOwner",
+        "actionOwner": "StructuredActionDescriptorOwner",
+        "directionOwner": "InputDirectionResolver",
+        "richContentOwner": "StructuredRichContentOwner",
+        "dragDropOwner": "StructuredDragDropOwner",
+        "rendererOwner": "StructuredBlockRenderer",
+        "presentationBridgeOwner": "StructuredPresentationBridge",
+        "commandBinding": {
+          "status": "BOUND_BY_ACCEPTED_ADAPTER",
+          "count": 26
+        }
+      },
+      "note": {
+        "owner": "StructuredSurfaceHost",
+        "contract": {
+          "id": "StructuredSurfaceHost",
+          "version": "1.0.1",
+          "compatibility": "SEMVER",
+          "owner": "Structured Family Presentation/Orchestration",
+          "policyRevision": "structured-surface-host-w5a-r3",
+          "canonicalTruthOwnership": false
+        },
+        "domainOwner": "NoteContentCompatibilityAdapter",
+        "domainKind": "note-content",
+        "mode": "edit",
+        "canonicalTruthOwnership": false,
+        "commands": "SemanticCommandBus",
+        "globalInputOwner": "GlobalInputKeymapOwner",
+        "treeOwner": "StructuredTreeKernel",
+        "mutationOwner": "StructuredMutationKernel",
+        "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+        "availabilityOwner": "StructuredCommandAvailabilityOwner",
+        "selectionOwner": "StructuredSelectionKernel",
+        "clipboardOwner": "StructuredClipboardTrustOwner",
+        "inputKeymapOwner": "StructuredInputKeymapOwner",
+        "actionOwner": "StructuredActionDescriptorOwner",
+        "directionOwner": "InputDirectionResolver",
+        "richContentOwner": "StructuredRichContentOwner",
+        "dragDropOwner": "StructuredDragDropOwner",
+        "rendererOwner": "StructuredBlockRenderer",
+        "presentationBridgeOwner": "StructuredPresentationBridge",
+        "commandBinding": {
+          "status": "BOUND_BY_ACCEPTED_ADAPTER",
+          "count": 26
+        }
+      }
+    },
+    "executable": {
+      "schemaVersion": 1,
+      "kind": "W5_C_STRUCTURED_CONSUMER_PARITY_EXECUTABLE_PROOF",
+      "status": "PASS",
+      "caseCount": 26,
+      "passCount": 26,
+      "failCount": 0,
+      "cases": [
+        {
+          "id": "w5c.same-host-class-all-three-consumers",
+          "status": "PASS",
+          "evidence": {
+            "library": {
+              "hostClass": "StructuredSurfaceHost",
+              "hostOwner": "StructuredSurfaceHost",
+              "domainOwner": "LibraryDomainAdapter",
+              "domainKind": "library"
+            },
+            "learn": {
+              "hostClass": "StructuredSurfaceHost",
+              "hostOwner": "StructuredSurfaceHost",
+              "domainOwner": "LearnDomainAdapter",
+              "domainKind": "learn"
+            },
+            "note": {
+              "hostClass": "StructuredSurfaceHost",
+              "hostOwner": "StructuredSurfaceHost",
+              "domainOwner": "NoteContentCompatibilityAdapter",
+              "domainKind": "note-content"
+            }
+          }
+        },
+        {
+          "id": "w5c.same-canonical-adapter-model-all-three",
+          "status": "PASS",
+          "evidence": {
+            "adapterClass": "StructuredDocumentDomainAdapter",
+            "sharedTreeObject": true,
+            "sharedMutationObject": true,
+            "documents": [
+              {
+                "consumer": "library",
+                "id": "KU-D05-0021",
+                "owner": "LibraryDomainAdapter"
+              },
+              {
+                "consumer": "learn",
+                "id": "learn-document-trust-boundaries",
+                "owner": "LearnDomainAdapter"
+              },
+              {
+                "consumer": "note",
+                "id": "note-content-compatible-document",
+                "owner": "NoteContentCompatibilityAdapter"
+              }
+            ]
+          }
+        },
+        {
+          "id": "w5c.exact-owner-coherence-vector",
+          "status": "PASS",
+          "evidence": {
+            "expected": {
+              "tree": "StructuredTreeKernel",
+              "mutation": "StructuredMutationKernel",
+              "transaction": "StructuredTransactionHistoryRecoveryOwner",
+              "selection": "StructuredSelectionKernel",
+              "clipboard": "StructuredClipboardTrustOwner",
+              "input": "StructuredInputKeymapOwner",
+              "action": "StructuredActionDescriptorOwner",
+              "direction": "InputDirectionResolver",
+              "rich": "StructuredRichContentOwner",
+              "drag": "StructuredDragDropOwner",
+              "renderer": "StructuredBlockRenderer",
+              "presentation": "StructuredPresentationBridge",
+              "commands": "SemanticCommandBus",
+              "globalInput": "GlobalInputKeymapOwner",
+              "navigation": "StructuredNavigationDescriptorOwner"
+            },
+            "consumers": {
+              "library": {
+                "tree": "StructuredTreeKernel",
+                "mutation": "StructuredMutationKernel",
+                "transaction": "StructuredTransactionHistoryRecoveryOwner",
+                "selection": "StructuredSelectionKernel",
+                "clipboard": "StructuredClipboardTrustOwner",
+                "input": "StructuredInputKeymapOwner",
+                "action": "StructuredActionDescriptorOwner",
+                "direction": "InputDirectionResolver",
+                "rich": "StructuredRichContentOwner",
+                "drag": "StructuredDragDropOwner",
+                "renderer": "StructuredBlockRenderer",
+                "presentation": "StructuredPresentationBridge",
+                "commands": "SemanticCommandBus",
+                "globalInput": "GlobalInputKeymapOwner",
+                "navigation": "StructuredNavigationDescriptorOwner"
+              },
+              "learn": {
+                "tree": "StructuredTreeKernel",
+                "mutation": "StructuredMutationKernel",
+                "transaction": "StructuredTransactionHistoryRecoveryOwner",
+                "selection": "StructuredSelectionKernel",
+                "clipboard": "StructuredClipboardTrustOwner",
+                "input": "StructuredInputKeymapOwner",
+                "action": "StructuredActionDescriptorOwner",
+                "direction": "InputDirectionResolver",
+                "rich": "StructuredRichContentOwner",
+                "drag": "StructuredDragDropOwner",
+                "renderer": "StructuredBlockRenderer",
+                "presentation": "StructuredPresentationBridge",
+                "commands": "SemanticCommandBus",
+                "globalInput": "GlobalInputKeymapOwner",
+                "navigation": "StructuredNavigationDescriptorOwner"
+              },
+              "note": {
+                "tree": "StructuredTreeKernel",
+                "mutation": "StructuredMutationKernel",
+                "transaction": "StructuredTransactionHistoryRecoveryOwner",
+                "selection": "StructuredSelectionKernel",
+                "clipboard": "StructuredClipboardTrustOwner",
+                "input": "StructuredInputKeymapOwner",
+                "action": "StructuredActionDescriptorOwner",
+                "direction": "InputDirectionResolver",
+                "rich": "StructuredRichContentOwner",
+                "drag": "StructuredDragDropOwner",
+                "renderer": "StructuredBlockRenderer",
+                "presentation": "StructuredPresentationBridge",
+                "commands": "SemanticCommandBus",
+                "globalInput": "GlobalInputKeymapOwner",
+                "navigation": "StructuredNavigationDescriptorOwner"
+              }
+            }
+          }
+        },
+        {
+          "id": "w5c.note-content-boundary-content-only",
+          "status": "PASS",
+          "evidence": {
+            "contract": {
+              "id": "StructuredNoteContentCompatibilityFixture",
+              "version": "1.0.0",
+              "purpose": "CONTENT_COMPATIBILITY_ONLY",
+              "semanticOwner": false,
+              "stickyNoteWindowOwnerImplemented": false,
+              "finalNoteBindingAdapterImplemented": false,
+              "popoutLifecycleImplemented": false,
+              "pinAlwaysOnTopImplemented": false,
+              "secondEditorEngineImplemented": false
+            },
+            "adapterOwner": "NoteContentCompatibilityAdapter",
+            "hostOwner": "StructuredSurfaceHost"
+          }
+        },
+        {
+          "id": "w5c.canonical-block-identity-path-projection-all-three",
+          "status": "PASS",
+          "evidence": {
+            "library": {
+              "documentId": "KU-D05-0021",
+              "blockId": "blk-d05-li1a",
+              "path": [
+                "blk-d05-t2",
+                "blk-d05-li1",
+                "blk-d05-li1a"
+              ],
+              "depth": 2,
+              "rendererOwner": "StructuredBlockRenderer"
+            },
+            "learn": {
+              "documentId": "learn-document-trust-boundaries",
+              "blockId": "learn-p1",
+              "path": [
+                "learn-p1"
+              ],
+              "depth": 0,
+              "rendererOwner": "StructuredBlockRenderer"
+            },
+            "note": {
+              "documentId": "note-content-compatible-document",
+              "blockId": "note-toggle-p1",
+              "path": [
+                "note-toggle-1",
+                "note-toggle-p1"
+              ],
+              "depth": 1,
+              "rendererOwner": "StructuredBlockRenderer"
+            }
+          }
+        },
+        {
+          "id": "w5c.read-mode-denies-canonical-mutation-all-three",
+          "status": "PASS",
+          "evidence": {
+            "library": {
+              "content": "EDIT_MODE_REQUIRED",
+              "action": "EDIT_MODE_REQUIRED",
+              "command": "EDIT_MODE_REQUIRED",
+              "keyboard": "EDIT_MODE_REQUIRED",
+              "pointer": "EDIT_MODE_REQUIRED",
+              "canonicalUnchanged": true
+            },
+            "learn": {
+              "content": "EDIT_MODE_REQUIRED",
+              "action": "EDIT_MODE_REQUIRED",
+              "command": "EDIT_MODE_REQUIRED",
+              "keyboard": "EDIT_MODE_REQUIRED",
+              "pointer": "EDIT_MODE_REQUIRED",
+              "canonicalUnchanged": true
+            },
+            "note": {
+              "content": "EDIT_MODE_REQUIRED",
+              "action": "EDIT_MODE_REQUIRED",
+              "command": "EDIT_MODE_REQUIRED",
+              "keyboard": "EDIT_MODE_REQUIRED",
+              "pointer": "EDIT_MODE_REQUIRED",
+              "canonicalUnchanged": true
+            }
+          }
+        },
+        {
+          "id": "w5c.edit-content-mutation-transaction-owner-all-three",
+          "status": "PASS",
+          "evidence": {
+            "library": {
+              "code": "CONTENT_UPDATED_THROUGH_ACCEPTED_TRANSACTION_OWNER",
+              "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+              "historyFrameDelta": 1,
+              "undoExact": true
+            },
+            "learn": {
+              "code": "CONTENT_UPDATED_THROUGH_ACCEPTED_TRANSACTION_OWNER",
+              "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+              "historyFrameDelta": 1,
+              "undoExact": true
+            },
+            "note": {
+              "code": "CONTENT_UPDATED_THROUGH_ACCEPTED_TRANSACTION_OWNER",
+              "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+              "historyFrameDelta": 1,
+              "undoExact": true
+            }
+          }
+        },
+        {
+          "id": "w5c.selection-owner-pointer-route-all-three",
+          "status": "PASS",
+          "evidence": {
+            "library": {
+              "owner": "StructuredSelectionKernel",
+              "selected": [
+                "blk-d05-p1"
+              ]
+            },
+            "learn": {
+              "owner": "StructuredSelectionKernel",
+              "selected": [
+                "learn-p1"
+              ]
+            },
+            "note": {
+              "owner": "StructuredSelectionKernel",
+              "selected": [
+                "note-p1"
+              ]
+            }
+          }
+        },
+        {
+          "id": "w5c.keyboard-command-route-all-three",
+          "status": "PASS",
+          "evidence": {
+            "library": {
+              "globalOwner": "GlobalInputKeymapOwner",
+              "inputOwner": "StructuredInputKeymapOwner",
+              "command": "block.split",
+              "availabilityOwner": "StructuredCommandAvailabilityOwner",
+              "mutationOwner": "StructuredMutationKernel",
+              "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+              "undoExact": true
+            },
+            "learn": {
+              "globalOwner": "GlobalInputKeymapOwner",
+              "inputOwner": "StructuredInputKeymapOwner",
+              "command": "block.split",
+              "availabilityOwner": "StructuredCommandAvailabilityOwner",
+              "mutationOwner": "StructuredMutationKernel",
+              "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+              "undoExact": true
+            },
+            "note": {
+              "globalOwner": "GlobalInputKeymapOwner",
+              "inputOwner": "StructuredInputKeymapOwner",
+              "command": "block.split",
+              "availabilityOwner": "StructuredCommandAvailabilityOwner",
+              "mutationOwner": "StructuredMutationKernel",
+              "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+              "undoExact": true
+            }
+          }
+        },
+        {
+          "id": "w5c.clipboard-owner-all-three",
+          "status": "PASS",
+          "evidence": {
+            "library": {
+              "owner": "StructuredClipboardTrustOwner",
+              "busOwner": "StructuredClipboardTrustOwner",
+              "documentUnchanged": true,
+              "payloadBlocks": [
+                "blk-d05-p1"
+              ]
+            },
+            "learn": {
+              "owner": "StructuredClipboardTrustOwner",
+              "busOwner": "StructuredClipboardTrustOwner",
+              "documentUnchanged": true,
+              "payloadBlocks": [
+                "learn-p1"
+              ]
+            },
+            "note": {
+              "owner": "StructuredClipboardTrustOwner",
+              "busOwner": "StructuredClipboardTrustOwner",
+              "documentUnchanged": true,
+              "payloadBlocks": [
+                "note-p1"
+              ]
+            }
+          }
+        },
+        {
+          "id": "w5c.action-descriptor-owner-all-three",
+          "status": "PASS",
+          "evidence": {
+            "library": {
+              "descriptorOwner": "StructuredActionDescriptorOwner",
+              "delegation": {
+                "availabilityOwner": "StructuredCommandAvailabilityOwner",
+                "commandOwner": "StructuredDocumentDomainAdapter",
+                "mutationOwner": "StructuredMutationKernel",
+                "transactionOwner": "StructuredTransactionHistoryRecoveryOwner"
+              },
+              "historyDelta": 1,
+              "undoExact": true
+            },
+            "learn": {
+              "descriptorOwner": "StructuredActionDescriptorOwner",
+              "delegation": {
+                "availabilityOwner": "StructuredCommandAvailabilityOwner",
+                "commandOwner": "StructuredDocumentDomainAdapter",
+                "mutationOwner": "StructuredMutationKernel",
+                "transactionOwner": "StructuredTransactionHistoryRecoveryOwner"
+              },
+              "historyDelta": 1,
+              "undoExact": true
+            },
+            "note": {
+              "descriptorOwner": "StructuredActionDescriptorOwner",
+              "delegation": {
+                "availabilityOwner": "StructuredCommandAvailabilityOwner",
+                "commandOwner": "StructuredDocumentDomainAdapter",
+                "mutationOwner": "StructuredMutationKernel",
+                "transactionOwner": "StructuredTransactionHistoryRecoveryOwner"
+              },
+              "historyDelta": 1,
+              "undoExact": true
+            }
+          }
+        },
+        {
+          "id": "w5c.direction-rich-content-projection-all-three",
+          "status": "PASS",
+          "evidence": {
+            "library": {
+              "richContentOwner": "StructuredRichContentOwner",
+              "directionOwner": "InputDirectionResolver",
+              "direction": "rtl",
+              "contentSource": "html"
+            },
+            "learn": {
+              "richContentOwner": "StructuredRichContentOwner",
+              "directionOwner": "InputDirectionResolver",
+              "direction": "rtl",
+              "contentSource": "html"
+            },
+            "note": {
+              "richContentOwner": "StructuredRichContentOwner",
+              "directionOwner": "InputDirectionResolver",
+              "direction": "rtl",
+              "contentSource": "html"
+            }
+          }
+        },
+        {
+          "id": "w5c.toggle-rich-title-sanitization-real-compatible-consumers",
+          "status": "PASS",
+          "evidence": {
+            "library": {
+              "source": "titleHtml",
+              "sanitized": true,
+              "richContentOwner": "StructuredRichContentOwner",
+              "directionOwner": "InputDirectionResolver"
+            },
+            "note": {
+              "source": "titleHtml",
+              "sanitized": true,
+              "richContentOwner": "StructuredRichContentOwner",
+              "directionOwner": "InputDirectionResolver"
+            }
+          }
+        },
+        {
+          "id": "w5c.content-field-applicability-type-truth-all-three",
+          "status": "PASS",
+          "evidence": {
+            "library": {
+              "error": "STRUCTURED_CONTENT_FIELD_NOT_APPLICABLE:paragraph:title",
+              "zeroTransactionSideEffects": true
+            },
+            "learn": {
+              "error": "STRUCTURED_CONTENT_FIELD_NOT_APPLICABLE:paragraph:title",
+              "zeroTransactionSideEffects": true
+            },
+            "note": {
+              "error": "STRUCTURED_CONTENT_FIELD_NOT_APPLICABLE:paragraph:title",
+              "zeroTransactionSideEffects": true
+            }
+          }
+        },
+        {
+          "id": "w5c.drag-keyboard-shared-target-policy-all-three",
+          "status": "PASS",
+          "evidence": {
+            "library": {
+              "dragOwner": "StructuredDragDropOwner",
+              "targetPolicyOwner": "StructuredDropTargetPolicyOwner",
+              "targetIdentity": "ROOT::3::0",
+              "undoExact": true
+            },
+            "learn": {
+              "dragOwner": "StructuredDragDropOwner",
+              "targetPolicyOwner": "StructuredDropTargetPolicyOwner",
+              "targetIdentity": "ROOT::3::0",
+              "undoExact": true
+            },
+            "note": {
+              "dragOwner": "StructuredDragDropOwner",
+              "targetPolicyOwner": "StructuredDropTargetPolicyOwner",
+              "targetIdentity": "ROOT::3::0",
+              "undoExact": true
+            }
+          }
+        },
+        {
+          "id": "w5c.drag-pointer-shared-target-policy-all-three",
+          "status": "PASS",
+          "evidence": {
+            "library": {
+              "dragOwner": "StructuredDragDropOwner",
+              "targetPolicyOwner": "StructuredDropTargetPolicyOwner",
+              "mutationOwner": "StructuredMutationKernel",
+              "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+              "historyFrameDelta": 1,
+              "undoExact": true
+            },
+            "learn": {
+              "dragOwner": "StructuredDragDropOwner",
+              "targetPolicyOwner": "StructuredDropTargetPolicyOwner",
+              "mutationOwner": "StructuredMutationKernel",
+              "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+              "historyFrameDelta": 1,
+              "undoExact": true
+            },
+            "note": {
+              "dragOwner": "StructuredDragDropOwner",
+              "targetPolicyOwner": "StructuredDropTargetPolicyOwner",
+              "mutationOwner": "StructuredMutationKernel",
+              "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+              "historyFrameDelta": 1,
+              "undoExact": true
+            }
+          }
+        },
+        {
+          "id": "w5c.navigation-descriptor-presentation-only-all-three",
+          "status": "PASS",
+          "evidence": {
+            "library": {
+              "outlineCount": 5,
+              "quickJumpCount": 5,
+              "inspectionCode": "READ_INSPECTION_DESCRIPTOR_READY",
+              "presentationDelegation": {
+                "transientPresentationOwner": "TransientFocusOwner",
+                "contextInspectorLifecycleOwner": "ContextInspectorHost",
+                "canonicalSelectionOwner": "StructuredSelectionKernel",
+                "canonicalDocumentMutationOwner": "StructuredMutationKernel",
+                "domScrollOwner": "CONTROLLER_INTEGRATION_PRESENTATION",
+                "descriptorOwnerOwnsTransientLifecycle": false,
+                "descriptorOwnerOwnsDomScroll": false,
+                "descriptorOwnerOwnsSelection": false,
+                "descriptorOwnerOwnsDocumentMutation": false,
+                "descriptorOwnerOwnsDomainReferenceMutation": false
+              },
+              "canonicalTruthUnchanged": true
+            },
+            "learn": {
+              "outlineCount": 1,
+              "quickJumpCount": 1,
+              "inspectionCode": "READ_INSPECTION_DESCRIPTOR_READY",
+              "presentationDelegation": {
+                "transientPresentationOwner": "TransientFocusOwner",
+                "contextInspectorLifecycleOwner": "ContextInspectorHost",
+                "canonicalSelectionOwner": "StructuredSelectionKernel",
+                "canonicalDocumentMutationOwner": "StructuredMutationKernel",
+                "domScrollOwner": "CONTROLLER_INTEGRATION_PRESENTATION",
+                "descriptorOwnerOwnsTransientLifecycle": false,
+                "descriptorOwnerOwnsDomScroll": false,
+                "descriptorOwnerOwnsSelection": false,
+                "descriptorOwnerOwnsDocumentMutation": false,
+                "descriptorOwnerOwnsDomainReferenceMutation": false
+              },
+              "canonicalTruthUnchanged": true
+            },
+            "note": {
+              "outlineCount": 2,
+              "quickJumpCount": 2,
+              "inspectionCode": "READ_INSPECTION_DESCRIPTOR_READY",
+              "presentationDelegation": {
+                "transientPresentationOwner": "TransientFocusOwner",
+                "contextInspectorLifecycleOwner": "ContextInspectorHost",
+                "canonicalSelectionOwner": "StructuredSelectionKernel",
+                "canonicalDocumentMutationOwner": "StructuredMutationKernel",
+                "domScrollOwner": "CONTROLLER_INTEGRATION_PRESENTATION",
+                "descriptorOwnerOwnsTransientLifecycle": false,
+                "descriptorOwnerOwnsDomScroll": false,
+                "descriptorOwnerOwnsSelection": false,
+                "descriptorOwnerOwnsDocumentMutation": false,
+                "descriptorOwnerOwnsDomainReferenceMutation": false
+              },
+              "canonicalTruthUnchanged": true
+            }
+          }
+        },
+        {
+          "id": "w5c.navigation-fake-tree-authority-rejected",
+          "status": "PASS",
+          "evidence": {
+            "constructorError": "STRUCTURED_NAVIGATION_ADAPTER_TREE_KERNEL_MISMATCH",
+            "postConstructionDriftError": "CANONICAL_STRUCTURED_TREE_KERNEL_REQUIRED",
+            "fakeOwnerNameNotSufficient": true
+          }
+        },
+        {
+          "id": "w5c.global-input-command-bus-coherence-all-three",
+          "status": "PASS",
+          "evidence": {
+            "library": {
+              "commandAuthority": "SemanticCommandBus",
+              "globalInputOwner": "GlobalInputKeymapOwner",
+              "sameBusInstanceWithinConsumer": true
+            },
+            "learn": {
+              "commandAuthority": "SemanticCommandBus",
+              "globalInputOwner": "GlobalInputKeymapOwner",
+              "sameBusInstanceWithinConsumer": true
+            },
+            "note": {
+              "commandAuthority": "SemanticCommandBus",
+              "globalInputOwner": "GlobalInputKeymapOwner",
+              "sameBusInstanceWithinConsumer": true
+            }
+          }
+        },
+        {
+          "id": "w5c.post-construction-command-drift-refused-before-effect",
+          "status": "PASS",
+          "evidence": {
+            "error": "STRUCTURED_CANONICAL_COMMAND_BINDING_DRIFT:block.align",
+            "canonicalUnchanged": true,
+            "fakeCommandExecuted": false
+          }
+        },
+        {
+          "id": "w5c.post-construction-owner-drift-refused-before-effect",
+          "status": "PASS",
+          "evidence": {
+            "error": "SECOND_STRUCTURED_CLIPBOARD_OWNER_DETECTED",
+            "canonicalUnchanged": true,
+            "driftRejectedBeforeEffect": true
+          }
+        },
+        {
+          "id": "w5c.central-renderer-change-reaches-three-and-exact-revert",
+          "status": "PASS",
+          "evidence": {
+            "beforePolicy": {
+              "revision": "structured-block-renderer-w5a-r3",
+              "blockGapPx": 8,
+              "indentUnitPx": 20
+            },
+            "duringPolicy": {
+              "revision": "structured-block-renderer-w5a-r3",
+              "blockGapPx": 13,
+              "indentUnitPx": 23
+            },
+            "reverted": {
+              "revision": "structured-block-renderer-w5a-r3",
+              "blockGapPx": 8,
+              "indentUnitPx": 20
+            },
+            "consumers": {
+              "library": {
+                "changed": true,
+                "exactRevert": true
+              },
+              "learn": {
+                "changed": true,
+                "exactRevert": true
+              },
+              "note": {
+                "changed": true,
+                "exactRevert": true
+              }
+            }
+          }
+        },
+        {
+          "id": "w5c.navigation-policy-shared-authority-three-consumers",
+          "status": "PASS",
+          "evidence": {
+            "policy": {
+              "headingTypes": [
+                "h2",
+                "h3"
+              ],
+              "includeTogglesInOutline": true,
+              "includeTogglesInQuickJump": true,
+              "requireContentLabel": true,
+              "quickJumpLimit": 18
+            },
+            "consumers": {
+              "library": {
+                "owner": "StructuredNavigationDescriptorOwner",
+                "policy": {
+                  "headingTypes": [
+                    "h2",
+                    "h3"
+                  ],
+                  "includeTogglesInOutline": true,
+                  "includeTogglesInQuickJump": true,
+                  "requireContentLabel": true,
+                  "quickJumpLimit": 18
+                }
+              },
+              "learn": {
+                "owner": "StructuredNavigationDescriptorOwner",
+                "policy": {
+                  "headingTypes": [
+                    "h2",
+                    "h3"
+                  ],
+                  "includeTogglesInOutline": true,
+                  "includeTogglesInQuickJump": true,
+                  "requireContentLabel": true,
+                  "quickJumpLimit": 18
+                }
+              },
+              "note": {
+                "owner": "StructuredNavigationDescriptorOwner",
+                "policy": {
+                  "headingTypes": [
+                    "h2",
+                    "h3"
+                  ],
+                  "includeTogglesInOutline": true,
+                  "includeTogglesInQuickJump": true,
+                  "requireContentLabel": true,
+                  "quickJumpLimit": 18
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "w5c.renderer-presentation-bridge-exact-class-all-three",
+          "status": "PASS",
+          "evidence": {
+            "library": {
+              "renderer": "StructuredBlockRenderer",
+              "presentation": "StructuredPresentationBridge",
+              "sameRendererBridgeGraph": true
+            },
+            "learn": {
+              "renderer": "StructuredBlockRenderer",
+              "presentation": "StructuredPresentationBridge",
+              "sameRendererBridgeGraph": true
+            },
+            "note": {
+              "renderer": "StructuredBlockRenderer",
+              "presentation": "StructuredPresentationBridge",
+              "sameRendererBridgeGraph": true
+            }
+          }
+        },
+        {
+          "id": "w5c.no-copied-canonical-document-state-in-host-navigation",
+          "status": "PASS",
+          "evidence": {
+            "library": {
+              "documentId": "KU-D05-0021",
+              "hostUsesAdapter": true,
+              "navigationUsesAdapter": true,
+              "canonicalUnchanged": true
+            },
+            "learn": {
+              "documentId": "learn-document-trust-boundaries",
+              "hostUsesAdapter": true,
+              "navigationUsesAdapter": true,
+              "canonicalUnchanged": true
+            },
+            "note": {
+              "documentId": "note-content-compatible-document",
+              "hostUsesAdapter": true,
+              "navigationUsesAdapter": true,
+              "canonicalUnchanged": true
+            }
+          }
+        },
+        {
+          "id": "w5c.central-owner-change-revert-reaches-replacement-path",
+          "status": "PASS",
+          "evidence": {
+            "consumers": {
+              "library": {
+                "changed": true,
+                "exactRevert": true,
+                "ownerGraphStable": true
+              },
+              "learn": {
+                "changed": true,
+                "exactRevert": true,
+                "ownerGraphStable": true
+              },
+              "note": {
+                "changed": true,
+                "exactRevert": true,
+                "ownerGraphStable": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    "status": "PASS"
+  },
+  "pageErrors": [],
+  "coverage": {
+    "consumers": [
+      "library",
+      "learn",
+      "note-content-compatible"
+    ],
+    "pointer": true,
+    "keyboard": true,
+    "accessibilityReadOnly": true,
+    "navigationDescriptors": true,
+    "dragPointerAndKeyboard": true,
+    "centralChangeExactRevert": true
+  },
+  "artifacts": {
+    "screenshot": {
+      "path": "assurance/W5_C_BROWSER/W5_C_STRUCTURED_CONSUMER_PARITY.png",
+      "bytes": 164524,
+      "sha256": "9e7778e41f4492e9f96fd0f1c8e0da8a31e0f6e01f75352ea903c5c99059f9b6"
+    },
+    "dom": {
+      "path": "assurance/W5_C_BROWSER/W5_C_STRUCTURED_CONSUMER_PARITY_DOM.html",
+      "bytes": 13454325,
+      "sha256": "a5bd6408f8ca5a7f68346919fa26d09e9d397ab8daf4cb52b0a12f590bf9c5d2"
+    }
+  }
+}

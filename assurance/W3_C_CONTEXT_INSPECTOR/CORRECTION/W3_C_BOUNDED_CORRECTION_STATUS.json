@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "mission": "W3-C-CONTEXT-INSPECTOR-HOST-BOUNDED-CORRECTION",
+  "status": "READY_FOR_PACKAGE_FINALIZATION",
+  "baseIdentity": {
+    "filename": "CEP_FOUNDATION_FORGE_v0.2.1c_W3_C_CONTEXT_INSPECTOR_HOST_CANDIDATE.zip",
+    "bytes": 7631512,
+    "sha256": "8f28b6814e52052e527b86434d5a330b2cbcb4512623bff6db095250829ba47a",
+    "canonicalSourceSha256": "e4f3d1b357636b38e7b33a02a9f0a5aa28352d389f078b2d8f055099b2616637"
+  },
+  "correctedCanonicalSource": {
+    "sha256": "b5288b779e17e80e15bdcbbe0f999772fad856d7c971c5693b478c2569553f6e",
+    "files": 42
+  },
+  "controllerDefectReproduction": {
+    "open": true,
+    "activeProviderId": null,
+    "ghostTransient": "context-inspector-host",
+    "status": "REPRODUCED_BEFORE_FIX"
+  },
+  "boundedCorrection": {
+    "policy": "CLOSE_NO_REPLACEMENT",
+    "activeInvalidation": {
+      "open": false,
+      "activeProviderId": null,
+      "activeDescriptorId": null,
+      "transientActive": false,
+      "focusReturn": "TransientFocusOwner"
+    },
+    "providerRemoval": "same reconciliation path",
+    "descriptorInvalidation": "same reconciliation path",
+    "domainOwnership": "UNCHANGED_PRESENTATION_ONLY"
+  },
+  "requiredProofs": {
+    "model": {
+      "pass": 177,
+      "fail": 0
+    },
+    "executable": {
+      "status": "PASS",
+      "checks": 21
+    },
+    "browserAccessibility": {
+      "status": "PASS",
+      "checks": 22,
+      "engine": {
+        "engine": "Chromium",
+        "executable": "/usr/bin/chromium",
+        "transport": "Chrome DevTools Protocol",
+        "headless": true
+      }
+    },
+    "wave1Wave2Regression": {
+      "status": "PASS_WITH_INHERITED_ORACLE_DRIFT",
+      "semanticRegression": "PASS"
+    },
+    "centralPolicyExactRevert": {
+      "id": "central-policy-exact-revert",
+      "status": "PASS",
+      "evidence": {
+        "libraryReverted": "87e5a2210d7fe707e3011ce1ce8e0903324ac391f744e8832e7b85a1d03c0ae7",
+        "spatialReverted": "061024cc97add34ea5cc8b13f61df8c98527c3496012f236258a083f1e1ea2eb",
+        "policy": {
+          "density": "comfortable",
+          "showDomainOwner": true,
+          "showRevision": true,
+          "emptyValue": "\u2014"
+        }
+      }
+    },
+    "ghostTransientNegative": {
+      "id": "stale-context-deterministic",
+      "status": "PASS",
+      "evidence": {
+        "result": {
+          "ok": false,
+          "code": "DESCRIPTOR_INAPPLICABLE",
+          "providerId": "spatial-context",
+          "reconciled": true,
+          "reconciliation": "CLOSED_NO_REPLACEMENT",
+          "reason": "descriptor-inapplicable",
+          "hostState": {
+            "ownerId": "ContextInspectorHost",
+            "open": false,
+            "activeProviderId": null,
+            "activeDescriptorId": null,
+            "activeLensId": null,
+            "activeTabId": null,
+            "pinned": false,
+            "lastTransition": "reconcile:project:descriptor-inapplicable:closed",
+            "policyTag": "density=comfortable;owner=1;revision=1;empty=\u2014"
+          },
+          "transientActive": false,
+          "focusReturn": {
+            "id": "context-inspector-host",
+            "reason": "context-reconcile:descriptor-inapplicable",
+            "restored": true,
+            "focusTargetKind": "invoker",
+            "owner": "TransientFocusOwner",
+            "policyTag": "topmost-first-v1"
+          }
+        },
+        "state": {
+          "ownerId": "ContextInspectorHost",
+          "open": false,
+          "activeProviderId": null,
+          "activeDescriptorId": null,
+          "activeLensId": null,
+          "activeTabId": null,
+          "pinned": false,
+          "lastTransition": "reconcile:project:descriptor-inapplicable:closed",
+          "policyTag": "density=comfortable;owner=1;revision=1;empty=\u2014"
+        },
+        "focus": {
+          "owner": "TransientFocusOwner",
+          "active": [],
+          "top": null,
+          "modal": false,
+          "lastDismissal": {
+            "id": "context-inspector-host",
+            "reason": "context-reconcile:descriptor-inapplicable",
+            "restored": true,
+            "focusTargetKind": "invoker",
+            "owner": "TransientFocusOwner",
+            "policyTag": "topmost-first-v1"
+          }
+        },
+        "staleFocusCount": 1
+      }
+    }
+  },
+  "contracts": {
+    "pass": 149,
+    "fail": 2,
+    "failedIds": [
+      "browser.lineage_receipt_truthful",
+      "browser.current_candidate_claim_truthful"
+    ],
+    "adjudication": "Only shared browser receipt/current-candidate identity checks fail because root BROWSER_CONFORMANCE_RECEIPT is inherited from E12 and the shared Playwright verifier cannot rerun in this environment; Lane C did not edit the shared verifier. Current Lane C Chromium/CDP proof passes."
+  },
+  "sharedBrowserVerifier": {
+    "rerunAttempt": "BLOCKED",
+    "reason": "PLAYWRIGHT_PACKAGE_UNAVAILABLE",
+    "toolModifiedByLaneC": false,
+    "currentCandidateReplacementProof": "assurance/W3_C_CONTEXT_INSPECTOR_BROWSER/W3_C_CONTEXT_INSPECTOR_BROWSER_CORRECTION_PROOF.json"
+  },
+  "oldDeliveryManifestDefect": {
+    "listed": 666,
+    "actual": 703,
+    "missing": 0,
+    "extra": 37,
+    "hashMismatch": 3,
+    "sizeMismatch": 3,
+    "mismatchPaths": [
+      "dist-ts/model-tests.js",
+      "dist/model-tests.js",
+      "stack/native-typescript/model-tests.ts"
+    ]
+  },
+  "scope": {
+    "noCurrentControlEdit": true,
+    "noAcceptedSuccessorWrite": true,
+    "noSurfaceConstruction": true,
+    "noBottomDeepWorkOrSettings": true
+  }
+}

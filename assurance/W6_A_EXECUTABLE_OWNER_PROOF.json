@@ -1,0 +1,354 @@
+{
+  "schemaVersion": 1,
+  "kind": "W6_A_STICKY_NOTE_WINDOW_OWNER_EXECUTABLE_PROOF",
+  "classification": "LANE_A_EXECUTION_EVIDENCE_NOT_CONTROLLER_ACCEPTANCE",
+  "status": "PASS",
+  "caseCount": 24,
+  "passCount": 24,
+  "failCount": 0,
+  "cases": [
+    {
+      "id": "w6a.owner.one-per-host-graph",
+      "status": "PASS",
+      "detail": {
+        "message": "DUPLICATE_STICKY_NOTE_WINDOW_OWNER",
+        "owner": "StickyNoteWindowOwner"
+      }
+    },
+    {
+      "id": "w6a.owner.fake-owner-rejected",
+      "status": "PASS",
+      "detail": {
+        "message": "FAKE_STICKY_NOTE_WINDOW_OWNER_REJECTED"
+      }
+    },
+    {
+      "id": "w6a.window-motion.pointer-move-shared-owner",
+      "status": "PASS",
+      "detail": {
+        "x": 140,
+        "y": 125,
+        "width": 360,
+        "height": 300
+      }
+    },
+    {
+      "id": "w6a.window-motion.resize.left",
+      "status": "PASS",
+      "detail": {
+        "x": 140,
+        "y": 100,
+        "width": 360,
+        "height": 300
+      }
+    },
+    {
+      "id": "w6a.window-motion.resize.right",
+      "status": "PASS",
+      "detail": {
+        "x": 100,
+        "y": 100,
+        "width": 440,
+        "height": 300
+      }
+    },
+    {
+      "id": "w6a.window-motion.resize.top",
+      "status": "PASS",
+      "detail": {
+        "x": 100,
+        "y": 130,
+        "width": 400,
+        "height": 270
+      }
+    },
+    {
+      "id": "w6a.window-motion.resize.bottom",
+      "status": "PASS",
+      "detail": {
+        "x": 100,
+        "y": 100,
+        "width": 400,
+        "height": 330
+      }
+    },
+    {
+      "id": "w6a.window-motion.resize.top-left",
+      "status": "PASS",
+      "detail": {
+        "x": 140,
+        "y": 130,
+        "width": 360,
+        "height": 270
+      }
+    },
+    {
+      "id": "w6a.window-motion.resize.top-right",
+      "status": "PASS",
+      "detail": {
+        "x": 100,
+        "y": 130,
+        "width": 440,
+        "height": 270
+      }
+    },
+    {
+      "id": "w6a.window-motion.resize.bottom-left",
+      "status": "PASS",
+      "detail": {
+        "x": 140,
+        "y": 100,
+        "width": 360,
+        "height": 330
+      }
+    },
+    {
+      "id": "w6a.window-motion.resize.bottom-right",
+      "status": "PASS",
+      "detail": {
+        "x": 100,
+        "y": 100,
+        "width": 440,
+        "height": 330
+      }
+    },
+    {
+      "id": "w6a.window-motion.cancel-exact-rollback",
+      "status": "PASS",
+      "detail": {
+        "before": {
+          "x": 180,
+          "y": 130,
+          "width": 380,
+          "height": 290
+        },
+        "after": {
+          "x": 180,
+          "y": 130,
+          "width": 380,
+          "height": 290
+        },
+        "style": {
+          "left": "180px",
+          "top": "130px",
+          "width": "380px",
+          "height": "290px"
+        }
+      }
+    },
+    {
+      "id": "w6a.keyboard.move",
+      "status": "PASS",
+      "detail": {
+        "x": 132,
+        "y": 120,
+        "width": 360,
+        "height": 300
+      }
+    },
+    {
+      "id": "w6a.keyboard.resize",
+      "status": "PASS",
+      "detail": {
+        "geometry": {
+          "x": 120,
+          "y": 120,
+          "width": 360,
+          "height": 316
+        },
+        "passthrough": "WINDOW_KEY_PASSTHROUGH"
+      }
+    },
+    {
+      "id": "w6a.viewport.shrink-reachable",
+      "status": "PASS",
+      "detail": {
+        "geometry": {
+          "x": 8,
+          "y": 8,
+          "width": 444,
+          "height": 294
+        },
+        "viewport": {
+          "width": 460,
+          "height": 310,
+          "left": 8,
+          "top": 8,
+          "right": 452,
+          "bottom": 302,
+          "availableWidth": 444,
+          "availableHeight": 294
+        }
+      }
+    },
+    {
+      "id": "w6a.viewport.internal-overflow-bottom-reachable",
+      "status": "PASS",
+      "detail": {
+        "owner": "StickyNoteWindowOwner",
+        "noteId": "overflow",
+        "strategy": "WINDOW_INTERNAL_SCROLL_TO_BOTTOM_REGIONS",
+        "overflowY": "auto",
+        "internalScrollRequired": true,
+        "maxScroll": 808,
+        "bottomToolbarReachable": true,
+        "statusRegionReachable": true
+      }
+    },
+    {
+      "id": "w6a.z-order.presentation-only",
+      "status": "PASS",
+      "detail": {
+        "beforeZ1": 41,
+        "beforeZ2": 42,
+        "afterZ1": 43,
+        "domainUnchanged": true
+      }
+    },
+    {
+      "id": "w6a.pin.distinct-from-os-always-on-top",
+      "status": "PASS",
+      "detail": {
+        "pinned": true,
+        "alwaysOnTop": {
+          "capabilityAdvertised": false,
+          "availability": "UNAVAILABLE",
+          "requested": false,
+          "requestStatus": "NOT_REQUESTED",
+          "active": false,
+          "code": "NO_PLATFORM_BRIDGE_SUPPORT"
+        }
+      }
+    },
+    {
+      "id": "w6a.platform.default-always-on-top-unavailable",
+      "status": "PASS",
+      "detail": {
+        "capabilityAdvertised": false,
+        "availability": "UNAVAILABLE",
+        "requested": false,
+        "requestStatus": "NOT_REQUESTED",
+        "active": false,
+        "code": "NO_PLATFORM_BRIDGE_SUPPORT"
+      }
+    },
+    {
+      "id": "w6a.platform.unavailable-request-cannot-succeed",
+      "status": "PASS",
+      "detail": {
+        "ok": false,
+        "code": "UNAVAILABLE",
+        "projection": {
+          "capabilityAdvertised": false,
+          "availability": "UNAVAILABLE",
+          "requested": true,
+          "requestStatus": "UNAVAILABLE",
+          "active": false,
+          "code": "UNAVAILABLE"
+        },
+        "receipt": {
+          "sequence": 2,
+          "owner": "StickyNoteWindowOwner",
+          "policyRevision": "sticky-note-window-w6a-r2",
+          "action": "platform.always-on-top.request",
+          "noteId": "cap-request",
+          "requested": true,
+          "attempted": false,
+          "ok": false,
+          "code": "UNAVAILABLE",
+          "requestStatus": "UNAVAILABLE",
+          "active": false,
+          "capabilityAdvertised": false
+        }
+      }
+    },
+    {
+      "id": "w6a.platform.bridge-delegation-truthful",
+      "status": "PASS",
+      "detail": {
+        "calls": [
+          {
+            "kind": "always",
+            "noteId": "bridge",
+            "presentationId": "sticky-note::bridge",
+            "requested": true
+          },
+          {
+            "kind": "separate",
+            "noteId": "bridge",
+            "presentationId": "sticky-note::bridge"
+          }
+        ],
+        "alwaysOnTop": {
+          "capabilityAdvertised": true,
+          "availability": "ACTIVE",
+          "requested": true,
+          "requestStatus": "SUCCEEDED",
+          "active": true,
+          "code": "BRIDGE_CONFIRMED"
+        },
+        "separateWindow": {
+          "capabilityAdvertised": true,
+          "availability": "ACTIVE",
+          "requested": true,
+          "requestStatus": "SUCCEEDED",
+          "active": true,
+          "code": "BRIDGE_CONFIRMED"
+        }
+      }
+    },
+    {
+      "id": "w6a.close-hide-preserves-content-binding-source-fixtures",
+      "status": "PASS",
+      "detail": {
+        "fixtureUnchanged": true,
+        "identity": "sticky-note::preserve",
+        "focusReturn": "open-button"
+      }
+    },
+    {
+      "id": "w6a.geometry.nonfinite-negative-never-truth",
+      "status": "PASS",
+      "detail": {
+        "x": 8,
+        "y": 8,
+        "width": 360,
+        "height": 280
+      }
+    },
+    {
+      "id": "w6a.accessibility.descriptors-truthful",
+      "status": "PASS",
+      "detail": {
+        "owner": "StickyNoteWindowOwner",
+        "noteId": "a11y",
+        "move": {
+          "keys": "Alt+Arrow",
+          "label": "Move sticky note window",
+          "available": true
+        },
+        "resize": {
+          "keys": "Alt+Shift+Arrow",
+          "label": "Resize sticky note window",
+          "available": true,
+          "edges": [
+            "left",
+            "right",
+            "top",
+            "bottom",
+            "top-left",
+            "top-right",
+            "bottom-left",
+            "bottom-right"
+          ]
+        },
+        "close": {
+          "label": "Hide sticky note window without deleting note content",
+          "effect": "PRESENTATION_ONLY"
+        }
+      }
+    }
+  ],
+  "sourceCanonicalTreeSha256": "fcca03a3ef529e5eda8b3ddddcc1f093ad7054336430d3c08224fac55328c753",
+  "canonicalSourceFileCount": 113
+}

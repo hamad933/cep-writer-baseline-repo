@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "kind": "E18_ANALYTICAL_COMPARE_CONTROLLER_ACCEPTANCE",
+  "status": "CONTROLLER_ACCEPTED_AND_READY_FOR_PROMOTION",
+  "generatedAt": "2026-09-13T06:20:01.885929+00:00",
+  "project": "CEP",
+  "baselineId": "CEP-FR-E18-ANALYTICAL-COMPARE-COMPLETION",
+  "parentAuthority": {
+    "successorId": "CEP-FR-E17-FFG-5dcc401a",
+    "bytes": 26039878,
+    "sha256": "692a2acc7ca9c10253ee115c81d2c3c1fd720927e5d5189a9cb1b0b2043c4cd4",
+    "canonicalSourceSha256": "5dcc401a95f6b7b38bbd2f64d9140c29182eb459042dc6e3dd7be5460c6bca5f",
+    "canonicalSourceFiles": 113
+  },
+  "correctedCandidate": {
+    "filename": "CEP_FOUNDATION_FORGE_v0.2.1c_E17_ANALYTICAL_COMPARE_FOUNDATION_CORRECTED_CANDIDATE.zip",
+    "bytes": 26677270,
+    "sha256": "2fc388ea29e50d369da7214087cfeb8ac79a216cc591baea15d48ff5fb19dbc9",
+    "candidateId": "CEP-FR-E17-ANALYTICAL-COMPARE-CORR-252d822f",
+    "canonicalSourceSha256": "252d822f82954f090578714b754185c90c79cd8713bf84354504be17c146ae5f",
+    "canonicalSourceFiles": 121
+  },
+  "acceptedOwner": {
+    "component": "AnalyticalCompare",
+    "owner": "AnalyticalCompareOwner",
+    "host": "AnalyticalCompareHost",
+    "providerContract": "AnalysisProviderContract",
+    "semanticCore": "SC-032",
+    "implementation": "dist/foundation/analytical/compare.js + dist/foundation/analytical/compare-host.js + dist/foundation/contracts/analysis-provider.js + dist/adapters/analytical/rq-compare-provider.js + dist/adapters/analytical/results-compare-provider.js",
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_ANALYTICAL_COMPARE_E18"
+  },
+  "realProviderProof": [
+    "rq",
+    "results"
+  ],
+  "crossProviderComparison": "REJECTED_BY_DEFAULT",
+  "domainCanonicalRecordsMutated": false,
+  "persistenceOwned": false,
+  "reviewDecisionOwned": false,
+  "masteryOwned": false,
+  "evidenceAdmissionOwned": false,
+  "auditMutationOwned": false,
+  "sourceIdentity": {
+    "sha256": "252d822f82954f090578714b754185c90c79cd8713bf84354504be17c146ae5f",
+    "files": 121
+  },
+  "readiness": {
+    "readyCount": 23,
+    "blockedCount": 0,
+    "readySurfaces": [
+      "audit",
+      "backup",
+      "configuration",
+      "enterprise",
+      "evidence",
+      "health",
+      "labs",
+      "learn",
+      "library",
+      "manual_ai",
+      "mastery",
+      "portfolio",
+      "processing",
+      "releases",
+      "results",
+      "reviews",
+      "rq",
+      "runs",
+      "scenarios",
+      "shell",
+      "today",
+      "validation",
+      "visualize"
+    ],
+    "blockedSurfaces": []
+  },
+  "surfaceReleaseModel": "AUTHORIZED_PER_SURFACE_INTAKE_ONLY",
+  "stack": "STACK_NOT_FROZEN"
+}

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "pass": 5,
+  "fail": 0,
+  "checks": [
+    {
+      "id": "deferred.exact-ten-ids",
+      "detail": [
+        "DEF-HV-001",
+        "DEF-HV-002",
+        "DEF-HV-003",
+        "DEF-HV-004",
+        "DEF-HV-005",
+        "DEF-HV-006",
+        "DEF-HV-007",
+        "DEF-HV-008",
+        "DEF-HV-009",
+        "DEF-HV-010"
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "deferred.all-active",
+      "detail": {
+        "items": 10,
+        "classifications": {
+          "DEFER_HIGH_VALUE": 4,
+          "DEFER_TO_FAMILY_BUILD": 5,
+          "DEFER_TO_SURFACE_BUILD": 1
+        },
+        "activeFutureObligations": 10
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "deferred.applicability-metadata",
+      "detail": "routing metadata exists for each deferred obligation",
+      "status": "PASS"
+    },
+    {
+      "id": "deferred.named-implementations-absent",
+      "detail": [],
+      "status": "PASS"
+    },
+    {
+      "id": "deferred.stack-remains-unfrozen",
+      "detail": "STACK_NOT_FROZEN",
+      "status": "PASS"
+    }
+  ],
+  "truthCeiling": "Named deferred implementation owners are absent from executable source; small interface hooks/metadata do not count as implementation."
+}

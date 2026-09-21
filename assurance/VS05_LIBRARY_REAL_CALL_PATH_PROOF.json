@@ -1,0 +1,389 @@
+{
+  "schemaVersion": 1,
+  "kind": "VS05_LIBRARY_REAL_COMMAND_AVAILABILITY_CALL_PATH_PROOF",
+  "status": "PASS",
+  "generatedAt": "2026-09-11T18:06:57.845921+00:00",
+  "canonicalSourceTreeSha256": "1c14a1b5074b63212d91f571f58b650690169526255bc1172b1f3ee0b04f117b",
+  "callPath": [
+    "Library visible toolbar / block menu / command palette / compatibility semantic entry",
+    "accepted-runtime presentation projection -> extension.commandAvailability / extension.execute",
+    "CommandRegistry availability / execute",
+    "StructuredDocumentDomainAdapter.availability / executeSharedCommand",
+    "StructuredCommandAvailabilityOwner.inspect (same context/preflight truth)",
+    "StructuredMutationKernel or StructuredTransactionHistoryRecoveryOwner as command semantics require",
+    "canonical state/history consequence -> accepted-runtime DOM/bookmark/focus projection glue"
+  ],
+  "browserEvidence": {
+    "consumer": "library",
+    "descriptor": {
+      "contract": {
+        "id": "StructuredDocumentDomainAdapter",
+        "version": "1.1.0",
+        "compatibility": "SEMVER",
+        "changePolicy": "Compatible extensions may add optional capabilities; breaking changes require consumer migration records."
+      },
+      "treeContract": {
+        "id": "StructuredTreeKernel",
+        "version": "1.0.0",
+        "compatibility": "SEMVER",
+        "owner": "Structured Family",
+        "policyRevision": "structured-tree-vs01-r1"
+      },
+      "treeOwner": "StructuredTreeKernel",
+      "treePolicyRevision": "structured-tree-vs01-r1",
+      "mutationContract": {
+        "id": "StructuredMutationKernel",
+        "version": "1.0.0",
+        "compatibility": "SEMVER",
+        "owner": "Structured Family",
+        "policyRevision": "structured-mutation-vs03-r1"
+      },
+      "mutationOwner": "StructuredMutationKernel",
+      "mutationPolicyRevision": "structured-mutation-vs03-r1",
+      "transactionContract": {
+        "id": "StructuredTransactionHistoryRecoveryOwner",
+        "version": "1.0.0",
+        "compatibility": "SEMVER",
+        "owner": "Structured Family",
+        "policyRevision": "structured-transaction-history-recovery-vs04-r1"
+      },
+      "transactionOwner": "StructuredTransactionHistoryRecoveryOwner",
+      "transactionPolicyRevision": "structured-transaction-history-recovery-vs04-r1",
+      "transactionState": {
+        "contract": {
+          "id": "StructuredTransactionHistoryRecoveryOwner",
+          "version": "1.0.0",
+          "compatibility": "SEMVER",
+          "owner": "Structured Family",
+          "policyRevision": "structured-transaction-history-recovery-vs04-r1"
+        },
+        "owner": "StructuredTransactionHistoryRecoveryOwner",
+        "policy": {
+          "recoveryRetentionLimit": 5
+        },
+        "documentId": "KU-D05-0021",
+        "workingRevision": 11,
+        "committedRevision": "rev-17",
+        "dirty": false,
+        "historyLength": 2,
+        "historyIndex": 0,
+        "canUndo": false,
+        "canRedo": true,
+        "recoveryCount": 2,
+        "persistedBoundaryConfigured": false
+      },
+      "commandAvailabilityContract": {
+        "id": "StructuredCommandAvailabilityOwner",
+        "version": "1.0.0",
+        "compatibility": "SEMVER",
+        "owner": "Structured Family",
+        "policyRevision": "structured-command-availability-vs05-r1"
+      },
+      "commandAvailabilityOwner": "StructuredCommandAvailabilityOwner",
+      "commandAvailabilityPolicyRevision": "structured-command-availability-vs05-r1",
+      "selectionContract": {
+        "id": "StructuredSelectionModel",
+        "version": "1.0.0",
+        "compatibility": "SEMVER"
+      },
+      "clipboardContract": {
+        "id": "StructuredClipboardContract",
+        "version": "1.0.0",
+        "compatibility": "SEMVER",
+        "payloadKind": "cep.structured-fragment"
+      },
+      "owner": "LibraryDomainAdapter",
+      "domainKind": "library",
+      "identity": {
+        "id": "KU-D05-0021",
+        "committedRevision": "rev-17",
+        "workingRevision": 11,
+        "dirty": false,
+        "owner": "LibraryDomainAdapter",
+        "transactionOwner": "StructuredTransactionHistoryRecoveryOwner"
+      },
+      "schema": {
+        "id": "cep.structured-blocks.v1",
+        "version": 1,
+        "blockTypes": [
+          "paragraph",
+          "h2",
+          "h3",
+          "bullet",
+          "number",
+          "toggle",
+          "callout",
+          "quote",
+          "code",
+          "reference"
+        ],
+        "maxDepth": 6
+      },
+      "capabilities": {
+        "edit": true,
+        "history": true,
+        "recovery": true,
+        "notes": true,
+        "sources": true,
+        "selection": true,
+        "clipboard": true
+      },
+      "historyOwner": "StructuredTransactionHistoryRecoveryOwner",
+      "selectionOwner": "StructuredSelectionModel",
+      "clipboardOwner": "StructuredDocumentDomainAdapter",
+      "recoveryOwner": "StructuredTransactionHistoryRecoveryOwner",
+      "commitOwner": "StructuredTransactionHistoryRecoveryOwner",
+      "sourceBinding": {
+        "sources": [
+          {
+            "title": "OWASP API Security — Object Level Authorization",
+            "kind": "مرجع تعليمي",
+            "status": "مربوط بالسياق"
+          },
+          {
+            "title": "CEP Defensive API Lab",
+            "kind": "Local reference",
+            "status": "NON-PRODUCTION"
+          }
+        ]
+      },
+      "noteBinding": {
+        "route": "PERSONAL:CEP/W02/library"
+      },
+      "metadata": {
+        "surface": "library",
+        "provenance": "accepted Library donor"
+      },
+      "commands": [
+        "document.updateTitle",
+        "document.insertBlock",
+        "document.updateBlock",
+        "document.removeBlock",
+        "document.undo",
+        "document.redo",
+        "document.commit",
+        "document.recoverAsNew",
+        "document.copy",
+        "document.cut",
+        "document.paste",
+        "history.undo",
+        "history.redo",
+        "block.insert",
+        "block.duplicate",
+        "block.delete",
+        "block.moveUp",
+        "block.moveDown",
+        "block.moveStart",
+        "block.moveEnd",
+        "block.moveToGap",
+        "block.indent",
+        "block.outdent",
+        "block.split",
+        "block.mergeBackward",
+        "block.mergeForward",
+        "block.convert",
+        "block.plainText",
+        "block.align",
+        "block.direction",
+        "block.background",
+        "block.clearStyle"
+      ],
+      "sharedCommands": [
+        "history.undo",
+        "history.redo",
+        "block.insert",
+        "block.duplicate",
+        "block.delete",
+        "block.moveUp",
+        "block.moveDown",
+        "block.moveStart",
+        "block.moveEnd",
+        "block.moveToGap",
+        "block.indent",
+        "block.outdent",
+        "block.split",
+        "block.mergeBackward",
+        "block.mergeForward",
+        "block.convert",
+        "block.plainText",
+        "block.align",
+        "block.direction",
+        "block.background",
+        "block.clearStyle",
+        "document.commit",
+        "document.recoverAsNew"
+      ]
+    },
+    "sharedCommands": [
+      "history.undo",
+      "history.redo",
+      "block.insert",
+      "block.duplicate",
+      "block.delete",
+      "block.moveUp",
+      "block.moveDown",
+      "block.moveStart",
+      "block.moveEnd",
+      "block.moveToGap",
+      "block.indent",
+      "block.outdent",
+      "block.split",
+      "block.mergeBackward",
+      "block.mergeForward",
+      "block.convert",
+      "block.plainText",
+      "block.align",
+      "block.direction",
+      "block.background",
+      "block.clearStyle",
+      "document.commit",
+      "document.recoverAsNew"
+    ],
+    "availabilityOwner": "StructuredCommandAvailabilityOwner",
+    "policyRevision": "structured-command-availability-vs05-r1",
+    "registryOwners": [
+      {
+        "id": "block.insert",
+        "owner": "StructuredDocumentDomainAdapter"
+      },
+      {
+        "id": "block.delete",
+        "owner": "StructuredDocumentDomainAdapter"
+      },
+      {
+        "id": "block.moveDown",
+        "owner": "StructuredDocumentDomainAdapter"
+      },
+      {
+        "id": "history.undo",
+        "owner": "StructuredDocumentDomainAdapter"
+      },
+      {
+        "id": "document.commit",
+        "owner": "StructuredDocumentDomainAdapter"
+      }
+    ],
+    "directMainMutationDeferred": "VS-06 selection only"
+  },
+  "representativeGolden": {
+    "G03": {
+      "id": "G03",
+      "name": "Undo/Redo through canonical registry availability and handler",
+      "status": "PASS",
+      "evidence": {
+        "toolbar": {
+          "disabled": false,
+          "code": "AVAILABLE",
+          "title": "تراجع — Ctrl+Z"
+        },
+        "registry": {
+          "code": "AVAILABLE",
+          "reason": "",
+          "enabled": true,
+          "owner": "StructuredCommandAvailabilityOwner",
+          "policyRevision": "structured-command-availability-vs05-r1",
+          "historyIndex": 1,
+          "historyLength": 2
+        }
+      }
+    },
+    "G05": {
+      "id": "G05",
+      "name": "Gap insertion canonical command route",
+      "status": "PASS",
+      "evidence": {
+        "receipt": {
+          "sequence": 5,
+          "id": "block.insert",
+          "owner": "StructuredDocumentDomainAdapter"
+        },
+        "oneFrame": true
+      }
+    },
+    "G06": {
+      "id": "G06",
+      "name": "Safe subtree delete canonical guard/handler",
+      "status": "PASS",
+      "evidence": {
+        "availability": {
+          "code": "AVAILABLE",
+          "reason": "",
+          "enabled": true,
+          "owner": "StructuredCommandAvailabilityOwner",
+          "policyRevision": "structured-command-availability-vs05-r1",
+          "destructive": true,
+          "subtreeCount": 3,
+          "requiresStructuralConfirmation": true
+        },
+        "receipt": {
+          "sequence": 7,
+          "id": "block.delete",
+          "owner": "StructuredDocumentDomainAdapter"
+        }
+      }
+    },
+    "G07": {
+      "id": "G07",
+      "name": "Block-menu reorder availability equals canonical source",
+      "status": "PASS",
+      "evidence": {
+        "canonical": {
+          "code": "AVAILABLE",
+          "reason": "",
+          "enabled": true,
+          "owner": "StructuredCommandAvailabilityOwner",
+          "policyRevision": "structured-command-availability-vs05-r1"
+        },
+        "receipt": {
+          "sequence": 9,
+          "id": "block.moveDown",
+          "owner": "StructuredDocumentDomainAdapter"
+        }
+      }
+    },
+    "G12": {
+      "id": "G12",
+      "name": "Command Palette canonical IDs + focus trap + Escape",
+      "status": "PASS",
+      "evidence": {
+        "canonical": {
+          "code": "AVAILABLE",
+          "reason": "",
+          "enabled": true,
+          "owner": "StructuredCommandAvailabilityOwner",
+          "policyRevision": "structured-command-availability-vs05-r1"
+        },
+        "ui": {
+          "disabled": false,
+          "code": "AVAILABLE",
+          "meta": "نقل sibling كاملًا مع subtree"
+        },
+        "focusContained": true
+      }
+    },
+    "G22": {
+      "id": "G22",
+      "name": "Keyboard block menu search + canonical availability + focus return",
+      "status": "PASS",
+      "evidence": {
+        "canonical": {
+          "code": "AVAILABLE",
+          "reason": "",
+          "enabled": true,
+          "owner": "StructuredCommandAvailabilityOwner",
+          "policyRevision": "structured-command-availability-vs05-r1"
+        },
+        "focusReturned": true
+      }
+    }
+  },
+  "sameAvailabilityOwner": "StructuredCommandAvailabilityOwner",
+  "sameCommandOwner": "StructuredDocumentDomainAdapter",
+  "directMainMutationException": {
+    "mechanic": "selection.multi-delete",
+    "route": "applyStructuredMutation('main',{type:'removeMany'",
+    "targetSlice": "VS-06",
+    "status": "EXPLICITLY_DEFERRED"
+  },
+  "conclusion": "Real Library visible entry points use canonical command IDs and the same Structured availability/preflight owner; remaining direct main removeMany is explicitly VS-06 selection-owned and is not claimed by VS-05."
+}

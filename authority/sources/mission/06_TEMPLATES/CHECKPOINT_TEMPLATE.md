@@ -1,0 +1,11 @@
+# PHASE CHECKPOINT
+- Phase:
+- Gate token:
+- Sources fully consumed:
+- Coverage counts:
+- Artifacts created:
+- Decisions + authority basis:
+- Open conflicts:
+- Risks/regressions:
+- Next phase:
+- Owner accepted: **NO**

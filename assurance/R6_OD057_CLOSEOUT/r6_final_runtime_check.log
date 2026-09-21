@@ -1,0 +1,467 @@
+
+> cep-foundation-forge@0.2.1c runtime:check
+> node tools/psc-runtime-falsification.mjs
+
+(node:11385) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{
+  "schemaVersion": 1,
+  "kind": "PSC_RUNTIME_PERSISTENCE_FALSIFICATION",
+  "status": "PASS",
+  "runtime": {
+    "node": "v22.16.0",
+    "required": "v22.16.0",
+    "driverId": "node:sqlite",
+    "productionDrivers": [
+      "node:sqlite"
+    ],
+    "host": "127.0.0.1"
+  },
+  "requirements": {
+    "explicitSaveAfterCommit": true,
+    "staleBaseAtomic": true,
+    "duplicateInflightDeterministic": true,
+    "commitFailureRollback": true,
+    "runtimeUnavailableFalse": true,
+    "http5xxFalse": true,
+    "corruptDbRejected": true,
+    "autosaveNotSave": true,
+    "recoverySurvivesRestart": true,
+    "recoveryThenNewRevision": true,
+    "backupIntegrity": true,
+    "boundedBackupDestination": true,
+    "stagedImportExport": true,
+    "invalidChecksumRejected": true,
+    "pathTraversalContained": true,
+    "noCommandOrExecutableAllowlists": true,
+    "specializedExecutionRoutesNotFabricated": true,
+    "nonLoopbackOriginNotSecurityBlocked": true,
+    "mixedBidiReadback": true,
+    "ftsCanonicalRole": "DERIVED_ONLY"
+  },
+  "evidence": {
+    "clientSave": {
+      "ok": true,
+      "operation": "EXPLICIT_SAVE",
+      "committed": true,
+      "revision": "p00000002-091b432527fb",
+      "committedRevision": "p00000002-091b432527fb",
+      "previousRevision": "base-r1",
+      "digest": "091b432527fbbe9b6ab22ef5f16719d3cff3f6bec9e5bef36fe13eeb80917f06",
+      "driverId": "node:sqlite",
+      "httpStatus": 200,
+      "transportOk": true
+    },
+    "autosave": {
+      "ok": true,
+      "operation": "AUTOSAVE_DRAFT_ONLY",
+      "documentId": "psc-http-doc",
+      "digest": "701669e27573fea278f5e6ba4b21c848863392e7120c492b2404b5b2472cbb11",
+      "committedRevisionUnchanged": "p00000002-091b432527fb",
+      "httpStatus": 200,
+      "transportOk": true
+    },
+    "recovery": {
+      "ok": true,
+      "operation": "RECOVERY_POINT_ONLY",
+      "recoveryId": "http-rec-1",
+      "documentId": "psc-http-doc",
+      "digest": "64bf732e19a83c6f58b99b7907a0920a8cd9a81423ede2238e45585621a6f944",
+      "committedRevisionUnchanged": "p00000002-091b432527fb",
+      "httpStatus": 200,
+      "transportOk": true
+    },
+    "backup": {
+      "ok": true,
+      "operationKind": "LEGACY_BOUNDED_SNAPSHOT_STAGE",
+      "fileName": "escape-attempt-1789772475464.sqlite",
+      "targetRootBounded": true,
+      "driverId": "node:sqlite",
+      "receipt": {
+        "ok": true,
+        "driverId": "node:sqlite",
+        "pages": 21
+      }
+    },
+    "validImport": {
+      "ok": true,
+      "status": "validated",
+      "canonicalPublication": false,
+      "stagedOnly": true,
+      "validation": {
+        "checksumValid": true,
+        "canonicalPublication": false,
+        "stagedOnly": true
+      },
+      "computedSha256": "937c96a32b2f7a388f68eda01fe0c9dae294193efd0afb0bbf22f9f95aa7aceb",
+      "reason": null
+    },
+    "badImport": {
+      "ok": false,
+      "status": "rejected",
+      "canonicalPublication": false,
+      "stagedOnly": true,
+      "validation": {
+        "checksumValid": false,
+        "canonicalPublication": false,
+        "stagedOnly": true
+      },
+      "computedSha256": "937c96a32b2f7a388f68eda01fe0c9dae294193efd0afb0bbf22f9f95aa7aceb",
+      "reason": "IMPORT_VALIDATION_FAILED"
+    },
+    "specializedRoutes": [
+      {
+        "path": "/v1/shell/exec",
+        "status": 404,
+        "code": "NOT_FOUND"
+      },
+      {
+        "path": "/v1/process/exec",
+        "status": 404,
+        "code": "NOT_FOUND"
+      },
+      {
+        "path": "/v1/ssh/connect",
+        "status": 404,
+        "code": "NOT_FOUND"
+      },
+      {
+        "path": "/v1/docker/run",
+        "status": 404,
+        "code": "NOT_FOUND"
+      },
+      {
+        "path": "/v1/vm/start",
+        "status": 404,
+        "code": "NOT_FOUND"
+      },
+      {
+        "path": "/v1/wsl/run",
+        "status": 404,
+        "code": "NOT_FOUND"
+      },
+      {
+        "path": "/v1/pty/open",
+        "status": 404,
+        "code": "NOT_FOUND"
+      },
+      {
+        "path": "/v1/powershell/run",
+        "status": 404,
+        "code": "NOT_FOUND"
+      }
+    ],
+    "nonLoopbackStatus": 200,
+    "unavailable": {
+      "ok": false,
+      "reason": "fetch failed",
+      "httpStatus": 0,
+      "transportOk": false,
+      "code": "RUNTIME_UNAVAILABLE"
+    },
+    "failResponse": {
+      "ok": false,
+      "operation": "EXPLICIT_SAVE",
+      "code": "INJECTED_BEFORE_COMMIT_FAILURE",
+      "currentRevision": "base-r1",
+      "expectedRevision": "base-r1",
+      "driverId": "node:sqlite"
+    },
+    "traffic": [
+      {
+        "method": "GET",
+        "path": "/v1/capabilities",
+        "status": 200,
+        "body": {
+          "ok": true,
+          "node": "v22.16.0",
+          "host": "127.0.0.1",
+          "capabilities": {
+            "persistence": {
+              "availability": "AVAILABLE",
+              "driverId": "node:sqlite",
+              "semanticOwner": "StructuredTransactionHistoryRecoveryOwner"
+            },
+            "backup": {
+              "availability": "AVAILABLE",
+              "boundedDestination": true
+            },
+            "backupRestore": {
+              "owner": "BackupRestoreCapability",
+              "version": "1.1.0",
+              "availability": "AVAILABLE",
+              "activationMode": "EXPLICIT_AUTHORITY_GATE_ONLY",
+              "liveRestoreDuringDrill": false,
+              "semanticOwnerPreserved": "StructuredTransactionHistoryRecoveryOwner",
+              "durableAttemptJournal": true,
+              "readOnlyPackagePreview": true
+            },
+            "auditEventProvider": {
+              "owner": "AuditEventProvider",
+              "version": "1.0.0",
+              "availability": "AVAILABLE",
+              "domainKind": "CEP_AUDIT_EVENT",
+              "storage": "DURABLE_JSONL",
+              "appendOnlyApplicationContract": true,
+              "databaseImmutabilityProven": false,
+              "encryption": false,
+              "eventSchema": "CEP_AUDIT_EVENT_V1",
+              "annotationSchema": "CEP_AUDIT_ANNOTATION_V1",
+              "hashChain": {
+                "algorithm": "SHA-256",
+                "scope": "CANONICAL_AUDIT_EVENT_RECORD"
+              },
+              "annotationsStoredSeparately": true,
+              "semanticCommandReceiptsAreAuditEvents": false
+            },
+            "healthDomain": {
+              "owner": "HealthCapability",
+              "version": "1.0.0",
+              "availability": "AVAILABLE",
+              "states": [
+                "AVAILABLE",
+                "UNAVAILABLE",
+                "STALE",
+                "ERROR"
+              ],
+              "sourceIds": [
+                "health.local-runtime",
+                "health.persistence.sqlite",
+                "health.processing.worker",
+                "health.processing.queue"
+              ],
+              "persistenceHealthIsProductHealth": false
+            },
+            "processing": {
+              "owner": "ProcessingCapability",
+              "version": "1.1.0",
+              "availability": "AVAILABLE",
+              "providerId": "LocalDigestProcessingProvider",
+              "providerVersion": "1.0.0",
+              "executionKinds": [
+                "SHA256_JSON"
+              ],
+              "genericProcessExecution": false,
+              "shellExecution": false,
+              "durableCorrelationId": true,
+              "durableRetryIdempotency": true
+            },
+            "importExport": {
+              "availability": "AVAILABLE",
+              "stagedOnly": true,
+              "canonicalPublication": false
+            },
+            "platformWindow": {
+              "availability": "UNAVAILABLE",
+              "providerId": "cep-win32-sidecar",
+              "providerEpoch": 0,
+              "prerequisite": "EDGE_APP_RUNTIME"
+            },
+            "activeKeyboardSource": {
+              "availability": "UNAVAILABLE",
+              "providerId": "cep-win32-sidecar",
+              "providerEpoch": 0
+            },
+            "terminalRuntime": {
+              "id": "WindowsConptyRuntimeAdapter",
+              "providerId": "cep-win32-conpty",
+              "providerVersion": "1.0.0",
+              "platform": "linux",
+              "availability": "UNAVAILABLE",
+              "rawTerminal": true,
+              "pty": false,
+              "conpty": false,
+              "commandAllowlist": false,
+              "executableAllowlist": false,
+              "semanticCommandOwnership": false,
+              "sessionOwner": "TerminalRuntimeCapability"
+            },
+            "shell": {
+              "availability": "UNAVAILABLE"
+            },
+            "processExecution": {
+              "availability": "UNAVAILABLE"
+            },
+            "ssh": {
+              "availability": "UNAVAILABLE"
+            },
+            "pty": {
+              "availability": "UNAVAILABLE"
+            },
+            "powerShell": {
+              "availability": "UNAVAILABLE"
+            },
+            "docker": {
+              "availability": "UNAVAILABLE"
+            },
+            "vmWsl": {
+              "availability": "UNAVAILABLE"
+            }
+          }
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/v1/persistence/bootstrap",
+        "status": 200,
+        "body": {
+          "ok": true,
+          "created": true,
+          "document": {
+            "id": "psc-http-doc",
+            "revision": "base-r1",
+            "title": "حدود الثقة · Trust Boundary",
+            "blocks": [
+              {
+                "id": "p1",
+                "type": "paragraph",
+                "html": "العربية مع <bdi dir=\"ltr\">TCP/IP</bdi> و English token."
+              }
+            ]
+          },
+          "revisionId": "base-r1",
+          "digest": "43e2e32b6a33c6102ead570ce90410921009d382dbd19041395e6f8c53cee07c",
+          "semanticOwner": "StructuredTransactionHistoryRecoveryOwner"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/v1/backup/stage",
+        "status": 200,
+        "body": {
+          "ok": true,
+          "operationKind": "LEGACY_BOUNDED_SNAPSHOT_STAGE",
+          "fileName": "escape-attempt-1789772475464.sqlite",
+          "targetRootBounded": true,
+          "driverId": "node:sqlite",
+          "receipt": {
+            "ok": true,
+            "driverId": "node:sqlite",
+            "pages": 21
+          }
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/v1/export/stage",
+        "status": 200,
+        "body": {
+          "ok": true,
+          "fileName": "package-fe05f7057536.json",
+          "sha256": "fe05f7057536689a532a7baf2973323b42d148dbc94f444f95e037347aca97ed",
+          "targetRootBounded": true,
+          "stagedOnly": true,
+          "canonicalPublication": false
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/v1/import/validate",
+        "status": 200,
+        "body": {
+          "ok": true,
+          "status": "validated",
+          "canonicalPublication": false,
+          "stagedOnly": true,
+          "validation": {
+            "checksumValid": true,
+            "canonicalPublication": false,
+            "stagedOnly": true
+          },
+          "computedSha256": "937c96a32b2f7a388f68eda01fe0c9dae294193efd0afb0bbf22f9f95aa7aceb",
+          "reason": null
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/v1/import/validate",
+        "status": 422,
+        "body": {
+          "ok": false,
+          "status": "rejected",
+          "canonicalPublication": false,
+          "stagedOnly": true,
+          "validation": {
+            "checksumValid": false,
+            "canonicalPublication": false,
+            "stagedOnly": true
+          },
+          "computedSha256": "937c96a32b2f7a388f68eda01fe0c9dae294193efd0afb0bbf22f9f95aa7aceb",
+          "reason": "IMPORT_VALIDATION_FAILED"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/v1/shell/exec",
+        "status": 404,
+        "body": {
+          "ok": false,
+          "code": "NOT_FOUND"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/v1/process/exec",
+        "status": 404,
+        "body": {
+          "ok": false,
+          "code": "NOT_FOUND"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/v1/ssh/connect",
+        "status": 404,
+        "body": {
+          "ok": false,
+          "code": "NOT_FOUND"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/v1/docker/run",
+        "status": 404,
+        "body": {
+          "ok": false,
+          "code": "NOT_FOUND"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/v1/vm/start",
+        "status": 404,
+        "body": {
+          "ok": false,
+          "code": "NOT_FOUND"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/v1/wsl/run",
+        "status": 404,
+        "body": {
+          "ok": false,
+          "code": "NOT_FOUND"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/v1/pty/open",
+        "status": 404,
+        "body": {
+          "ok": false,
+          "code": "NOT_FOUND"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/v1/powershell/run",
+        "status": 404,
+        "body": {
+          "ok": false,
+          "code": "NOT_FOUND"
+        }
+      }
+    ]
+  }
+}

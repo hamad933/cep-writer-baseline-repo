@@ -1,0 +1,279 @@
+{
+  "objects": {
+    "KnowledgeUnit": "knowledgeUnitId; canonical metadata",
+    "WorkingDocument": "documentId + workingRevision + stable block IDs",
+    "PublishedRevision": "immutable revisionId + digest",
+    "EditorSelection": "blockId + offset + direction; transient"
+  },
+  "state_dimensions": {
+    "document": [
+      "READ",
+      "CLEAN_DRAFT",
+      "DIRTY",
+      "SAVING",
+      "CONFLICT",
+      "SAVE_FAILED",
+      "PUBLISHED"
+    ],
+    "anchor": [
+      "VALID",
+      "DETACHED"
+    ]
+  },
+  "read_model": "LibraryDocumentReadService returns revision identity, editable working document and source references independently.",
+  "persistence": {
+    "KnowledgeUnit": "Knowledge module existing models",
+    "WorkingDocument": "Knowledge-owned draft/revision records",
+    "PublishedRevision": "LessonRevisionWorkflow",
+    "EditorSelection": "StructuredContentCore.session"
+  },
+  "invariants": [
+    "One UnifiedEditor working transaction owner",
+    "Published content uses new revision, never overwrite",
+    "Presentation direction does not rewrite block metadata",
+    "279/80/33/39/25 historical counts are derived claims, not revalidated here"
+  ],
+  "epistemic": {
+    "empty": "Empty Library supports Create document; empty block supports insertion before/after and within list.",
+    "stale": "Base revision advanced: preserve working patch and show structured conflict.",
+    "unavailable": "Document service unavailable: keep recoverable draft; do not announce Saved.",
+    "error": "Sanitization/schema/save failure identifies offending block while retaining safe working content."
+  },
+  "operations": [
+    {
+      "name": "create",
+      "family": "ContentEditCommand",
+      "payload": "documentId:string workingRevision:integer anchor:string title:string blocks:blocks",
+      "before": "document absent",
+      "event": "create working document",
+      "after": "document=CLEAN_DRAFT with stable IDs",
+      "guard": "Document ID unused; actor owns creation; block schema valid",
+      "oracle": "New document round trip retains block IDs and empty insertion point",
+      "persistence": "Knowledge.WorkingDocument",
+      "method": "POST",
+      "gate": null,
+      "command_id": "library.create",
+      "surface_id": "library",
+      "semantic_owner": "LibraryDomain",
+      "focus_after": "Library + Unified Editor active object/control; detached target→library-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Sanitization/schema/save failure identifies offending block while retaining safe working content.",
+        "503_timeout": "Document service unavailable: keep recoverable draft; do not announce Saved."
+      },
+      "test_id": "TEST-library.create",
+      "evidence_id": "EVID-library.create",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "insert",
+      "family": "ContentEditCommand",
+      "payload": "documentId:string workingRevision:integer anchor:string blocks:blocks",
+      "before": "document=CLEAN_DRAFT|DIRTY",
+      "event": "insert at explicit gap or block offset",
+      "after": "document=DIRTY with one undo transaction",
+      "guard": "Anchor exists in same working revision; sanitize rich input",
+      "oracle": "Insert between list items preserves neighbours and selection; undo reverses only insertion",
+      "persistence": "Knowledge.WorkingDocument",
+      "method": "POST",
+      "gate": null,
+      "command_id": "library.insert",
+      "surface_id": "library",
+      "semantic_owner": "LibraryDomain",
+      "focus_after": "Library + Unified Editor active object/control; detached target→library-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Sanitization/schema/save failure identifies offending block while retaining safe working content.",
+        "503_timeout": "Document service unavailable: keep recoverable draft; do not announce Saved."
+      },
+      "test_id": "TEST-library.insert",
+      "evidence_id": "EVID-library.insert",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "save",
+      "family": "ContentEditCommand",
+      "payload": "documentId:string workingRevision:integer baseRef:ref blocks:blocks",
+      "before": "document=DIRTY|SAVE_FAILED",
+      "event": "compare-and-save",
+      "after": "ACK produces CLEAN_DRAFT; mismatch CONFLICT",
+      "guard": "Expected working revision equals stored revision",
+      "oracle": "Concurrent save gets 409 and retains both local draft and server ref",
+      "persistence": "Knowledge.WorkingDocument",
+      "method": "POST",
+      "gate": null,
+      "command_id": "library.save",
+      "surface_id": "library",
+      "semantic_owner": "LibraryDomain",
+      "focus_after": "Library + Unified Editor active object/control; detached target→library-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Sanitization/schema/save failure identifies offending block while retaining safe working content.",
+        "503_timeout": "Document service unavailable: keep recoverable draft; do not announce Saved."
+      },
+      "test_id": "TEST-library.save",
+      "evidence_id": "EVID-library.save",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "revise",
+      "family": "ContentEditCommand",
+      "payload": "documentId:string workingRevision:integer sourceRef:ref reason:string",
+      "before": "document=PUBLISHED",
+      "event": "fork successor draft",
+      "after": "new working revision refers to published source",
+      "guard": "Read source and create permission; source digest valid",
+      "oracle": "Published digest unchanged after edit of successor",
+      "persistence": "Knowledge.LessonRevisionWorkflow",
+      "method": "POST",
+      "gate": null,
+      "command_id": "library.revise",
+      "surface_id": "library",
+      "semantic_owner": "LibraryDomain",
+      "focus_after": "Library + Unified Editor active object/control; detached target→library-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Sanitization/schema/save failure identifies offending block while retaining safe working content.",
+        "503_timeout": "Document service unavailable: keep recoverable draft; do not announce Saved."
+      },
+      "test_id": "TEST-library.revise",
+      "evidence_id": "EVID-library.revise",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "history",
+      "family": "AnalyticalCommand",
+      "payload": "leftRef:ref rightRef:ref scope:strings workingAnalysisId:string",
+      "before": "two exact revisions selected",
+      "event": "compare structured block delta",
+      "after": "diff with added/removed/moved/changed blocks",
+      "guard": "Same document or explicit cross-document comparison",
+      "oracle": "Missing revision is unavailable; never compare latest aliases",
+      "persistence": "AnalysisSession",
+      "method": "GET",
+      "gate": null,
+      "command_id": "library.history",
+      "surface_id": "library",
+      "semantic_owner": "LibraryDomain",
+      "focus_after": "Library + Unified Editor active object/control; detached target→library-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Sanitization/schema/save failure identifies offending block while retaining safe working content.",
+        "503_timeout": "Document service unavailable: keep recoverable draft; do not announce Saved."
+      },
+      "test_id": "TEST-library.history",
+      "evidence_id": "EVID-library.history",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "library",
+  "title": "Library + Unified Editor",
+  "workspace": "W02",
+  "semantic_owner": "LibraryDomain",
+  "archetype": "StructuredContentWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W02-LIB-001",
+    "CAP-W02-LIB-002",
+    "CAP-W02-LIB-003",
+    "CAP-W02-LIB-004",
+    "CAP-W02-LIB-005",
+    "CAP-W02-LIB-006",
+    "CAP-W02-LIB-007",
+    "CAP-W02-LIB-008",
+    "CAP-W02-LIB-009",
+    "CAP-W02-LIB-010",
+    "CAP-W02-LIB-011",
+    "CAP-W02-LIB-012"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W02-LIB-001",
+        "CAP-W02-LIB-002",
+        "CAP-W02-LIB-003",
+        "CAP-W02-LIB-004",
+        "CAP-W02-LIB-005",
+        "CAP-W02-LIB-006",
+        "CAP-W02-LIB-007",
+        "CAP-W02-LIB-008",
+        "CAP-W02-LIB-009",
+        "CAP-W02-LIB-010",
+        "CAP-W02-LIB-011",
+        "CAP-W02-LIB-012"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Library + Unified Editor",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-003",
+    "NC-033",
+    "NC-034",
+    "NC-035"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore",
+    "StructuredContentCore",
+    "TransactionHistoryCore",
+    "ClipboardTrustCore"
+  ],
+  "adapter": "LibraryDomainAdapter",
+  "regions": {
+    "TOP": "Library + Unified Editor exact identity, local mode, command routes",
+    "LEFT": "typed KnowledgeUnit collection/navigation",
+    "CENTER": "StructuredContentWorkbench primary task",
+    "RIGHT": "one selected KnowledgeUnit identity/context inspector",
+    "BOTTOM": "Deep Library + Unified Editor diagnostics/history"
+  },
+  "command_ids": [
+    "library.create",
+    "library.insert",
+    "library.save",
+    "library.revise",
+    "library.history"
+  ]
+}

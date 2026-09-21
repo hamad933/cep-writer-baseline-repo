@@ -1,0 +1,251 @@
+{
+  "objects": {
+    "Journey": "journeyId + version; orientation and guidance",
+    "LearningActivity": "activityId + revision + type practice/assessment/lab-learning",
+    "PracticeAttempt": "attemptId + actor + activityRevision",
+    "LearningProgress": "canonical Learning projection; not Mastery"
+  },
+  "state_dimensions": {
+    "activity": [
+      "NOT_STARTED",
+      "IN_PROGRESS",
+      "SUBMITTED",
+      "FEEDBACK_AVAILABLE"
+    ],
+    "editor": [
+      "READ",
+      "EDIT",
+      "MIXED"
+    ],
+    "progress": [
+      "UNKNOWN",
+      "INCOMPLETE",
+      "COMPLETE"
+    ]
+  },
+  "read_model": "LearningActivityReadService exposes activity, attempt and recommendation refs; W04MasteryRead is a separate projection.",
+  "persistence": {
+    "PracticeAttempt": "Learning-owned attempt tables",
+    "LearningProgress": "Learning projection",
+    "LearningActivity draft": "Learning adapter delegates editable content to Knowledge draft owner"
+  },
+  "invariants": [
+    "No prerequisite navigation lock",
+    "Read/Edit/Mixed allowed by actual object editability",
+    "Lab-learning activity never becomes W03 runtime",
+    "Assessment outcome never writes Mastery directly"
+  ],
+  "epistemic": {
+    "empty": "No attempts: Start practice remains available; no mastery assertion.",
+    "stale": "Activity revision changed: old attempt retains pinned revision; offer new attempt explicitly.",
+    "unavailable": "Feedback provider missing: expose pending/unavailable feedback, not failure score.",
+    "error": "Submission timeout permits idempotent status recovery, not duplicate grading."
+  },
+  "operations": [
+    {
+      "name": "open",
+      "family": "NavigationCommand",
+      "payload": "routeId:string activityRef:ref",
+      "before": "any progress",
+      "event": "open activity",
+      "after": "activity visible; progress unchanged",
+      "guard": "Read authorization and identity only",
+      "oracle": "Future assessment opens while prerequisite incomplete",
+      "persistence": "NavigationContext",
+      "method": "LOCAL",
+      "gate": null,
+      "command_id": "learn.open",
+      "surface_id": "learn",
+      "semantic_owner": "LearnDomain",
+      "focus_after": "Learn active object/control; detached target→learn-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Submission timeout permits idempotent status recovery, not duplicate grading.",
+        "503_timeout": "Feedback provider missing: expose pending/unavailable feedback, not failure score."
+      },
+      "test_id": "TEST-learn.open",
+      "evidence_id": "EVID-learn.open",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "edit",
+      "family": "ContentEditCommand",
+      "payload": "documentId:string workingRevision:integer anchor:string blocks:blocks",
+      "before": "editor=READ and editable draft",
+      "event": "enter edit and apply transaction",
+      "after": "editor=EDIT|MIXED; draft dirty",
+      "guard": "Actual editable draft or explicit successor draft",
+      "oracle": "Changing learning content never edits completed attempt source",
+      "persistence": "Knowledge.WorkingDocument",
+      "method": "POST",
+      "gate": null,
+      "command_id": "learn.edit",
+      "surface_id": "learn",
+      "semantic_owner": "LearnDomain",
+      "focus_after": "Learn active object/control; detached target→learn-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Submission timeout permits idempotent status recovery, not duplicate grading.",
+        "503_timeout": "Feedback provider missing: expose pending/unavailable feedback, not failure score."
+      },
+      "test_id": "TEST-learn.edit",
+      "evidence_id": "EVID-learn.edit",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "practice",
+      "family": "OperationalCommand",
+      "payload": "activityRef:ref attemptId:string action:enum:start|submit expectedState:enum:NOT_STARTED|IN_PROGRESS answers:object correlationId:string",
+      "before": "activity=NOT_STARTED|IN_PROGRESS",
+      "event": "start or submit attempt",
+      "after": "start→IN_PROGRESS; submit→SUBMITTED",
+      "guard": "Pinned activity and unique attempt invocation; answers validated by activity kind",
+      "oracle": "Duplicate submit returns same attempt receipt and no duplicate score",
+      "persistence": "Learning.PracticeAttempt",
+      "method": "POST",
+      "gate": null,
+      "command_id": "learn.practice",
+      "surface_id": "learn",
+      "semantic_owner": "LearnDomain",
+      "focus_after": "Learn active object/control; detached target→learn-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Submission timeout permits idempotent status recovery, not duplicate grading.",
+        "503_timeout": "Feedback provider missing: expose pending/unavailable feedback, not failure score."
+      },
+      "test_id": "TEST-learn.practice",
+      "evidence_id": "EVID-learn.practice",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "review",
+      "family": "AnalyticalCommand",
+      "payload": "leftRef:ref rightRef:ref scope:strings workingAnalysisId:string",
+      "before": "feedback available",
+      "event": "inspect attempt against task criteria",
+      "after": "feedback view; no W04 Decision",
+      "guard": "Exact attempt/activity pair",
+      "oracle": "Feedback visibility cannot create formal Review or Mastery",
+      "persistence": "LearningFeedbackProjection",
+      "method": "GET",
+      "gate": null,
+      "command_id": "learn.review",
+      "surface_id": "learn",
+      "semantic_owner": "LearnDomain",
+      "focus_after": "Learn active object/control; detached target→learn-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Submission timeout permits idempotent status recovery, not duplicate grading.",
+        "503_timeout": "Feedback provider missing: expose pending/unavailable feedback, not failure score."
+      },
+      "test_id": "TEST-learn.review",
+      "evidence_id": "EVID-learn.review",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "learn",
+  "title": "Learn",
+  "workspace": "W02",
+  "semantic_owner": "LearnDomain",
+  "archetype": "LearningWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W02-LRN-001",
+    "CAP-W02-LRN-002",
+    "CAP-W02-LRN-003",
+    "CAP-W02-LRN-004",
+    "CAP-W02-LRN-005",
+    "CAP-W02-LRN-006",
+    "CAP-W02-LRN-007",
+    "CAP-W02-LRN-008",
+    "CAP-W02-LRN-009",
+    "CAP-W02-LRN-010",
+    "CAP-W02-LRN-011",
+    "CAP-W02-LRN-012",
+    "CAP-W02-LRN-013"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W02-LRN-001",
+        "CAP-W02-LRN-002",
+        "CAP-W02-LRN-003",
+        "CAP-W02-LRN-004",
+        "CAP-W02-LRN-005",
+        "CAP-W02-LRN-006",
+        "CAP-W02-LRN-007",
+        "CAP-W02-LRN-008",
+        "CAP-W02-LRN-009",
+        "CAP-W02-LRN-010",
+        "CAP-W02-LRN-011",
+        "CAP-W02-LRN-012",
+        "CAP-W02-LRN-013"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Learn",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-002",
+    "NC-003",
+    "NC-016",
+    "NC-034"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore",
+    "StructuredContentCore",
+    "TransactionHistoryCore",
+    "ClipboardTrustCore"
+  ],
+  "adapter": "LearnDomainAdapter",
+  "regions": {
+    "TOP": "Learn exact identity, local mode, command routes",
+    "LEFT": "typed Journey collection/navigation",
+    "CENTER": "LearningWorkbench primary task",
+    "RIGHT": "one selected Journey identity/context inspector",
+    "BOTTOM": "Deep Learn diagnostics/history"
+  },
+  "command_ids": [
+    "learn.open",
+    "learn.edit",
+    "learn.practice",
+    "learn.review"
+  ]
+}

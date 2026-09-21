@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "classification": "CONTROLLER_CONVERGENCE_AUTHORITY",
+  "status": "CONTROLLER_ACCEPTED_A_B_CONVERGED_INTERMEDIATE",
+  "project": "CEP",
+  "projectId": "CEP",
+  "route": "PERSONAL:CEP",
+  "generatedAt": "2026-09-13T00:16:46.059199+00:00",
+  "parentAuthority": {
+    "archive": "CEP_FOUNDATION_FORGE_v0.2.1c_W5_STRUCTURED_FAMILY_COMPLETION_CONTROLLER_ACCEPTED_SUCCESSOR.zip",
+    "bytes": 22204758,
+    "sha256": "71facfb824ac32ee67c988255846ad3c950887dc3f892fcac93fcad9f2a5012b",
+    "successorId": "CEP-FR-E15-W5-71facfb8",
+    "canonicalSourceSha256": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d",
+    "canonicalSourceFiles": 99
+  },
+  "laneA": {
+    "correctedArchive": "CEP_FOUNDATION_FORGE_v0.2.1c_W6_A_STICKY_NOTE_WINDOW_OWNER_CORRECTED_CANDIDATE.zip",
+    "bytes": 22459295,
+    "sha256": "ff3ef2099f2e5529a3ac486b633e573e34df5243713fd7cf9d37987c4e5ffe23",
+    "candidateId": "CEP-FR-E15-W6-A-CORR-c251be24",
+    "canonicalSourceSha256": "c251be24bfd31f9901e560c3b1ebda8174ae716e4ba3e7170a1af041b1c34768",
+    "canonicalSourceFiles": 102,
+    "controllerVerdict": "ACCEPTED_AS_CONVERGENCE_INPUT"
+  },
+  "laneB": {
+    "correctedArchive": "CEP_FOUNDATION_FORGE_v0.2.1c_W6_B_NOTE_BINDING_ADAPTER_CORRECTED_CANDIDATE.zip",
+    "bytes": 22349175,
+    "sha256": "bff1bf66a65b761f0c3e5d2a2c00f3fec1700d0ec428b86e17eeaedc24db46d8",
+    "candidateId": "CEP-FR-W6-B-CORR-c85657b9",
+    "canonicalSourceSha256": "c85657b9a36070c73fe38ba1d0c62b210658c925a51113746bfe13f1fe121e84",
+    "canonicalSourceFiles": 104,
+    "controllerVerdict": "ACCEPTED_AS_CONVERGENCE_INPUT"
+  },
+  "convergence": {
+    "order": [
+      "E15",
+      "Lane A corrected source delta",
+      "Lane B corrected source delta"
+    ],
+    "completeSiblingZipOverlay": false,
+    "sourceOverlap": [],
+    "laneASourceDelta": [
+      "foundation/notes/sticky-note-window.ts",
+      "foundation/window-motion.ts",
+      "w6-a-sticky-note-window-browser.ts",
+      "w6-a-sticky-note-window-tests.ts"
+    ],
+    "laneBSourceDelta": [
+      "adapters/note-binding-domains.ts",
+      "foundation/notes/note-binding.ts",
+      "w6-b-note-binding-browser.ts",
+      "w6-b-note-binding-correction-tests.ts",
+      "w6-b-note-binding-tests.ts"
+    ],
+    "canonicalSourceSha256": "a0af2911ce7ee65e6585ad44c7a620d12355eb35b50c4ab344df4047c1566fc2",
+    "canonicalSourceFiles": 107
+  },
+  "controllerReproductions": {
+    "A_phantomOwnerAfterThrow": "PASS_FIXED",
+    "A_cleanRetry": "PASS",
+    "A_platformBridgeErrorTruth": "PASS_FIXED",
+    "A_ownerUsableAfterBridgeFailure": "PASS",
+    "B_notApplicableNoSourceToAvailable": "REJECTED_FAIL_ATOMIC",
+    "B_unresolvedNoSourceToAvailable": "REJECTED_FAIL_ATOMIC"
+  },
+  "gates": {
+    "A_correction": "5/5 PASS",
+    "A_executable": "24/24 PASS",
+    "A_operational": "15/15 PASS",
+    "A_browser": "6/6 PASS",
+    "B_correction": "8/8 PASS",
+    "B_executable": "27/27 PASS",
+    "B_static": "8/8 PASS",
+    "B_browser": "5/5 PASS",
+    "model": "210/210 PASS",
+    "contracts": "168/168 PASS",
+    "legacyBrowser": "6/6 PASS",
+    "wave3Browser": "5/5 PASS",
+    "wave4Browser": "5/5 PASS",
+    "wave5CBrowser": "9 steps / 26 executable cases PASS",
+    "npmCheck": "PASS"
+  },
+  "toolingAdjudication": {
+    "finding": "The standard legacy Node browser harness initially carried stale E15 receipt/source truth and its in-memory Settings selector targeted the superseded preferenceSearch presentation. The same in-memory mismatch reproduced on unmodified E15, so it was not an A/B regression.",
+    "resolution": "Controller current Python browser regression re-executed Legacy 6/6 + Wave3 5/5 against the merged canonical source and rewrote current browser receipt truth; contracts and npm check then passed.",
+    "productDefect": false
+  },
+  "ceilings": {
+    "globalCurrentFoundationAuthority": "E15 remains global authority during Lane C",
+    "laneCParent": "THIS_EXACT_CONTROLLER_INTERMEDIATE_ONLY",
+    "surfaceBuild": "BLOCKED",
+    "stack": "STACK_NOT_FROZEN",
+    "operational": "BOUNDED_BELOW_M6_SECOND_REAL_PROVIDER_NOT_PROVEN",
+    "epistemic": "CONTRACT_ONLY_NO_GENERIC_ASYNC_ENGINE"
+  }
+}

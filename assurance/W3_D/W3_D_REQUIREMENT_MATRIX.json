@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 2,
+  "mission": "W3-D-BOTTOM-DEEP-WORK-BOUNDED-CORRECTION",
+  "status": "PASS_PENDING_FINAL_ZIP_EXTRACTION",
+  "requirements": [
+    {
+      "id": 1,
+      "requirement": "one BottomDeepWorkOwner",
+      "status": "PASS",
+      "evidence": [
+        "W3_D_EXECUTABLE_PROOF.json#w3d.one-global-owner-contract"
+      ]
+    },
+    {
+      "id": 2,
+      "requirement": "Structured + Operational real/provider-contract consumption",
+      "status": "PASS",
+      "evidence": [
+        "W3_D_EXECUTABLE_PROOF.json#w3d.real-structured-operational-providers"
+      ]
+    },
+    {
+      "id": 3,
+      "requirement": "open/close/toggle lifecycle preserved",
+      "status": "PASS",
+      "evidence": [
+        "W3_D_EXECUTABLE_PROOF.json#w3d.open-close-toggle-lifecycle",
+        "W3_D_EXECUTABLE_PROOF.json#w3d.focus.toggle-close-uses-fallback-chain"
+      ]
+    },
+    {
+      "id": 4,
+      "requirement": "closed/inert lifecycle preserved",
+      "status": "PASS",
+      "evidence": [
+        "W3_D_EXECUTABLE_PROOF.json#w3d.closed-inert-state",
+        "W3_D_BROWSER_ACCESSIBILITY_PROOF.json#closed-inert-accessibility"
+      ]
+    },
+    {
+      "id": 5,
+      "requirement": "deterministic focus-return chain with truthful receipt",
+      "status": "PASS",
+      "evidence": [
+        "W3_D_EXECUTABLE_PROOF.json#w3d.focus.invoker-success-stops-chain",
+        "W3_D_EXECUTABLE_PROOF.json#w3d.focus.invoker-fails-fallback-succeeds",
+        "W3_D_EXECUTABLE_PROOF.json#w3d.focus.invoker-unavailable-captured-succeeds",
+        "W3_D_EXECUTABLE_PROOF.json#w3d.focus.captured-fails-fallback-succeeds",
+        "W3_D_EXECUTABLE_PROOF.json#w3d.focus.all-targets-fail-truthful-receipt",
+        "W3_D_BROWSER_ACCESSIBILITY_PROOF.json#focus-fallback-chain-truthful-receipt"
+      ]
+    },
+    {
+      "id": 6,
+      "requirement": "provider switching without state leakage",
+      "status": "PASS",
+      "evidence": [
+        "W3_D_EXECUTABLE_PROOF.json#w3d.provider-switch-no-state-leakage",
+        "W3_D_EXECUTABLE_PROOF.json#w3d.focus.provider-switch-preserves-return-chain"
+      ]
+    },
+    {
+      "id": 7,
+      "requirement": "Structured and Operational close paths both restore through same policy",
+      "status": "PASS",
+      "evidence": [
+        "W3_D_EXECUTABLE_PROOF.json#w3d.focus.structured-close-fallback-chain",
+        "W3_D_EXECUTABLE_PROOF.json#w3d.focus.operational-close-fallback-chain"
+      ]
+    },
+    {
+      "id": 8,
+      "requirement": "Global owner never becomes provider content owner",
+      "status": "PASS",
+      "evidence": [
+        "W3_D_NEGATIVE_DOMAIN_RUNTIME_LEAKAGE.json"
+      ]
+    },
+    {
+      "id": 9,
+      "requirement": "central lifecycle-policy change reaches both providers with exact revert",
+      "status": "PASS",
+      "evidence": [
+        "W3_D_CENTRAL_POLICY_MODIFICATION_REVERT.json"
+      ]
+    },
+    {
+      "id": 10,
+      "requirement": "no duplicate bottom-shell semantic owner",
+      "status": "PASS",
+      "evidence": [
+        "W3_D_EXECUTABLE_PROOF.json#singleNewSemanticOwner"
+      ]
+    },
+    {
+      "id": 11,
+      "requirement": "negative domain/runtime leakage",
+      "status": "PASS",
+      "evidence": [
+        "W3_D_NEGATIVE_DOMAIN_RUNTIME_LEAKAGE.json"
+      ]
+    },
+    {
+      "id": 12,
+      "requirement": "accepted E12 regression + Model + Contracts + browser",
+      "status": "PASS",
+      "evidence": [
+        "W3_D_FULL_REGRESSION_RECEIPT.json",
+        "W3_D_E12_BROWSER_REGRESSION_HARNESS_RECEIPT.json"
+      ]
+    },
+    {
+      "id": 13,
+      "requirement": "fresh extraction",
+      "status": "TO_BE_VERIFIED_AFTER_ZIP",
+      "evidence": [
+        "EXTERNAL:W3_D_CORRECTED_FRESH_EXTRACTION_PROOF.json"
+      ]
+    },
+    {
+      "id": 14,
+      "requirement": "root DELIVERY_MANIFEST package integrity",
+      "status": "TO_BE_VERIFIED_AFTER_ZIP",
+      "evidence": [
+        "DELIVERY_MANIFEST.json",
+        "EXTERNAL:W3_D_CORRECTED_CANDIDATE_PACKAGE_RECEIPT.json"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "artifact": "CEP W01/W02 v1.1.5.1 Controller Micro-Correction Final Delivery Receipt",
+  "classification": "CONTROLLER_EXECUTED_BOUNDED_CORRECTION / PRE_COLAB_SOURCE_CONTRACT_EXHAUSTED_CONFIRMED / COLAB_READY / NOT_OWNER_ACCEPTED / NOT_FROZEN / NOT_MERGED / NOT_RELEASED / NOT_DEPLOYED",
+  "candidate": {
+    "filename": "CEP_W01_W02_PRODUCTION_KNOWLEDGE_WORKBENCH_FORGE_v1.1.5.1_PRE_COLAB_MICRO_CORRECTED_CANDIDATE.zip",
+    "sha256": "e554e9badbd0a79ad4ae84c7d72a875cf9cb9ce0fc8ddf71c810a12c355089be",
+    "source_tree": "892b1944951386e41658abe0ace65e89159f58c6",
+    "source_manifest_sha256": "72be846106cd64cbc496fc1ba20e59b1fb408bf9d4c153b4c53c1a7bfd9cc8d3"
+  },
+  "evidence": {
+    "filename": "CEP_W01_W02_CONTROLLER_v1.1.5.1_PRE_COLAB_MICRO_CORRECTION_EVIDENCE.zip",
+    "sha256": "e2e182ec7a21db93ea53d58f0d8b49de021d11fb1cd9b7bb1cd52d633ea5b4ad"
+  },
+  "finding": {
+    "W12-CTRL-001": "CLOSED"
+  },
+  "source_scope": {
+    "actual_changes": 2,
+    "authorized_changes": 2,
+    "unscoped": 0
+  },
+  "assurance": {
+    "static": "52/52 PASS",
+    "v4_ts": "12/12 PASS",
+    "v4_php": "15/15 PASS",
+    "v4_state": "10 PASS",
+    "c024": "251/6 no-loss/no-duplicate PASS",
+    "regression": "11/11 PASS",
+    "php_lint": "215/215 PASS",
+    "zip_crc": "candidate+evidence PASS"
+  },
+  "remaining_evidence_gates": [
+    "C025",
+    "C026"
+  ],
+  "remaining_external_gates": [
+    "Durable Linked Notes authority",
+    "OS cross-app topmost platform",
+    "C027",
+    "C028",
+    "C029",
+    "C030"
+  ],
+  "next_action": "RUN_EXISTING_COLAB_NOTEBOOK_FINAL_RUNTIME_DB_BROWSER_EVIDENCE_WAVE",
+  "self_acceptance": false
+}

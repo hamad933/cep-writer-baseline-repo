@@ -1,0 +1,38 @@
+{
+  "id": "G21",
+  "viewport": "1440x1000",
+  "checks": [
+    {
+      "name": "diagnostics absent normal",
+      "ok": true,
+      "actual": {
+        "stateLab": true,
+        "stateLabHidden": true,
+        "diag": 0,
+        "proof": false
+      }
+    },
+    {
+      "name": "StateLab not exposed",
+      "ok": true,
+      "actual": {
+        "stateLab": true,
+        "stateLabHidden": true,
+        "diag": 0,
+        "proof": false
+      }
+    },
+    {
+      "name": "Recovery is product route",
+      "ok": true,
+      "actual": "Recovery معزول لـ KU-D05-0021\nAutosave: ON · Recovery: ON. إيقاف Autosave لا يمسح نقاط Recovery الموجودة.\nلا توجد نقطة Recovery لهذه الوحدة بعد."
+    },
+    {
+      "name": "no page errors",
+      "ok": true,
+      "actual": []
+    }
+  ],
+  "pass": true,
+  "errors": []
+}

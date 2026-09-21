@@ -1,0 +1,102 @@
+{
+  "artifact": "CEP W01/W02 Colab Task Static Validation Receipt v1.0",
+  "classification": "CONTROLLER_STATIC_INSPECTION / CELLS_NOT_YET_EXECUTED_IN_COLAB / NOT_RUNTIME_EVIDENCE",
+  "expected": {
+    "candidate_sha256": "e554e9badbd0a79ad4ae84c7d72a875cf9cb9ce0fc8ddf71c810a12c355089be",
+    "source_tree": "892b1944951386e41658abe0ace65e89159f58c6",
+    "source_manifest_sha256": "72be846106cd64cbc496fc1ba20e59b1fb408bf9d4c153b4c53c1a7bfd9cc8d3",
+    "task_root_drive_id": "1Tjmk2IiyrQaQ9DgeZZNUuH0I_cRN5d8k"
+  },
+  "checks": [
+    {
+      "id": "PY-AST-CELL_00_BOOTSTRAP_STAGE_VERIFY",
+      "status": "PASS",
+      "sha256": "deefb5867c6f6cfed7c730dbecaa06271df33354c7b073d60ab2ee7cf534e02a",
+      "bytes": 5179
+    },
+    {
+      "id": "PY-AST-CELL_01_TOOLCHAIN_PROVISION",
+      "status": "PASS",
+      "sha256": "1aacaf2a0bd2adcec4572e8954c1b0e5e0b92f7c596e52a0d300a0f0bd4eac18",
+      "bytes": 5270
+    },
+    {
+      "id": "PY-AST-CELL_02_DB_DEPS_TESTS",
+      "status": "PASS",
+      "sha256": "54d24f050561fe734e1439ec03390d3eb0635d41487a12a9df946139270db472",
+      "bytes": 5645
+    },
+    {
+      "id": "PY-AST-CELL_03_RUNTIME_BROWSER_CORE",
+      "status": "PASS",
+      "sha256": "ecf2653ef966f63ef05cb24e6dc9981b70b8faeacbc9b2f251a5149dba4da613",
+      "bytes": 9490
+    },
+    {
+      "id": "PY-AST-CELL_04_DEEP_BROWSER_FINALIZE",
+      "status": "PASS",
+      "sha256": "57c3b056a69a94645ae0770fc786ee6d294d0d772b8dac8ae75dffe4119dedf2",
+      "bytes": 13837
+    },
+    {
+      "id": "NO_UNRESOLVED_PLACEHOLDERS",
+      "status": "PASS",
+      "hits": []
+    },
+    {
+      "id": "NO_GIT_PRODUCT_MUTATION",
+      "status": "PASS",
+      "hits": []
+    },
+    {
+      "id": "NO_RELEASE_DEPLOY_COMMAND",
+      "status": "PASS",
+      "hits": []
+    },
+    {
+      "id": "DISPOSABLE_DB_NAMES_EXACT",
+      "status": "PASS"
+    },
+    {
+      "id": "NO_SECRET_DRIVE_PERSISTENCE-CELL_02_DB_DEPS_TESTS",
+      "status": "PASS"
+    },
+    {
+      "id": "NO_SECRET_DRIVE_PERSISTENCE-CELL_03_RUNTIME_BROWSER_CORE",
+      "status": "PASS"
+    },
+    {
+      "id": "NO_SECRET_DRIVE_PERSISTENCE-CELL_04_DEEP_BROWSER_FINALIZE",
+      "status": "PASS"
+    },
+    {
+      "id": "CANDIDATE_SHA",
+      "status": "PASS",
+      "observed": "e554e9badbd0a79ad4ae84c7d72a875cf9cb9ce0fc8ddf71c810a12c355089be"
+    },
+    {
+      "id": "ZIP_CRC",
+      "status": "PASS",
+      "bad": null
+    },
+    {
+      "id": "SOURCE_MANIFEST_SHA",
+      "status": "PASS",
+      "observed": "72be846106cd64cbc496fc1ba20e59b1fb408bf9d4c153b4c53c1a7bfd9cc8d3"
+    },
+    {
+      "id": "SOURCE_TREE",
+      "status": "PASS",
+      "observed": "892b1944951386e41658abe0ace65e89159f58c6"
+    }
+  ],
+  "pass": true,
+  "notes": [
+    "Current unrelated Colab runtimes/queues are excluded from this task.",
+    "CELL 00 one-time staging uses Colab file picker only when 01_INPUT lacks the exact SHA-gated candidate.",
+    "No GitHub execution clone/push path exists in these cells.",
+    "Actual provider/package availability remains a runtime preflight fact; static PASS does not imply Colab execution PASS.",
+    "AX tree evidence is explicitly not promoted to screen-reader AT proof.",
+    "200% zoom is PASS only after actual headed Chromium UI zoom produces measured ~2x CSS viewport ratio."
+  ]
+}

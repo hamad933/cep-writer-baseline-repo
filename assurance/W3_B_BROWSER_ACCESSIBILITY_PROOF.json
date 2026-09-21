@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "kind": "W3_B_ACCESSIBILITY_FEEDBACK_BROWSER_PROOF",
+  "status": "PASS",
+  "environment": {
+    "engine": "Playwright API over managed playwright-core",
+    "browser": "/usr/bin/chromium",
+    "viewport": "1100x720",
+    "isolatedHostFixture": true
+  },
+  "semantics": {
+    "liveRegionCount": 2,
+    "live": [
+      {
+        "key": "polite",
+        "role": "status",
+        "ariaLive": "polite",
+        "ariaAtomic": "true",
+        "text": "Read mode cannot edit."
+      },
+      {
+        "key": "assertive",
+        "role": "alert",
+        "ariaLive": "assertive",
+        "ariaAtomic": "true",
+        "text": "Save failed"
+      }
+    ],
+    "tooltip": {
+      "politeness": "off",
+      "role": "tooltip",
+      "linked": true
+    },
+    "duplicateProjectionRejected": true
+  },
+  "focusSafety": {
+    "before": true,
+    "afterPolite": true,
+    "afterAssertive": true,
+    "afterTooltip": true
+  },
+  "dedupe": {
+    "accepted": false,
+    "code": "DUPLICATE_SUPPRESSED"
+  },
+  "lifecycle": {
+    "activeBeforeExpiry": 3,
+    "expiredCount": 3,
+    "afterExpiry": {
+      "active": 0,
+      "tooltipHidden": true,
+      "tooltipLink": null
+    }
+  },
+  "stateBoundary": {
+    "canonicalTruth": false,
+    "focusOwnership": false,
+    "transientStackOwnership": false
+  },
+  "pageErrors": [],
+  "screenshot": {
+    "path": "assurance/W3_B_ACCESSIBILITY_FEEDBACK_BROWSER.png",
+    "bytes": 13622,
+    "sha256": "61d23c25e9af0ee57079ad263cef0eb8d88d8dded150239b32a8fa969d861f1d"
+  }
+}

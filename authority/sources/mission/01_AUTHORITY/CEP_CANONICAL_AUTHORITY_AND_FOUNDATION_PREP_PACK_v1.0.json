@@ -1,0 +1,823 @@
+{
+  "version": "1.0",
+  "classification": "READ_ONLY_CANONICALIZATION_NOT_PRODUCT_ACCEPTANCE_NOT_STACK_FREEZE",
+  "generated_from": {
+    "deep_inventory": "CEP_CONTROL_CENTER_DEEP_CONTENT_INVENTORY_v1.0.md",
+    "top_level_source_count": 163,
+    "accepted_library": {
+      "name": "CEP_LIBRARY_EDITOR_EXECUTABLE_BLUEPRINT_v1.2.17_ACCEPTED_DESIGN_REFERENCE.html",
+      "sha256": "ea66b58ef122bf2f8ca23fd0aa9e461b07da11ea7390c451902e4b1592d396fd",
+      "bytes": 672893
+    },
+    "big_boss": {
+      "name": "CEP_BIG_BOSS_EXECUTION_SYSTEM_v1.2_OWNER_HARDENED_SUCCESSOR_CANDIDATE.zip",
+      "sha256": "cc852b6d6b3dd6404ea81a9129a00611558d7dc540a82a248b0f4844d6e8eb33"
+    }
+  },
+  "authority_order": [
+    "CURRENT_DIRECT_OWNER",
+    "CURRENT_GOVERNED_OWNER_RULE",
+    "CURRENT_CONTROLLER_ADJUDICATION",
+    "ADMITTED_BIG_BOSS_CONCEPTUAL_DECISION",
+    "GOVERNED_ACCEPTED_EXECUTABLE_DONOR_FOR_COMPATIBLE_MECHANICS",
+    "CURRENT_DOMAIN_REQUIREMENT_OR_EVIDENCE",
+    "WRITER_CANDIDATE_OR_EVIDENCE",
+    "HISTORICAL_SUPERSEDED_LINEAGE"
+  ],
+  "current_owner_additions": [
+    {
+      "decision_id": "OWNER-20260910-001",
+      "priority": "P0",
+      "scope": "PORTFOLIO",
+      "family": "CUSTOMIZATION_GENERALIZATION",
+      "decision": "Customization is a general platform principle, not a language-only exception. Theme, language, direction, alignment, layout, pane widths/visibility, toolbar composition, guidance, editor/spatial presentation and other safe presentation/workspace preferences should be configurable where meaningful.",
+      "supersedes": "Fixed historical defaults and surface-local preference owners."
+    },
+    {
+      "decision_id": "OWNER-20260910-002",
+      "priority": "P0",
+      "scope": "PORTFOLIO",
+      "family": "SAFE_DEFAULT_NOT_PRODUCT_LAW",
+      "decision": "Defaults are safe starting values, not permanent Owner laws unless an explicit safety/domain reason makes them non-configurable.",
+      "supersedes": "Arabic-first and other fixed-default formulations."
+    },
+    {
+      "decision_id": "OWNER-20260910-003",
+      "priority": "P0",
+      "scope": "W02_LIBRARY_EDITOR",
+      "family": "ACCEPTED_BLUEPRINT_SCOPE",
+      "decision": "The Library Editor v1.2.17 executable blueprint is the only currently accepted executable design reference among the discussed surface blueprints; reuse its compatible mechanics directly.",
+      "supersedes": "Any inference that latest Visualize/W03/other blueprint candidate is equally accepted."
+    },
+    {
+      "decision_id": "OWNER-20260910-004",
+      "priority": "P0",
+      "scope": "ALL_OTHER_BLUEPRINTS",
+      "family": "CANDIDATE_NOT_AUTHORITY",
+      "decision": "Visualize, W03 and other non-Library blueprints/candidates are value/proposal/evidence sources only until explicit future Owner/Controller design adjudication. Mine current Owner requests and useful mechanics; do not inherit the whole blueprint as authority.",
+      "supersedes": "Latest-file-equals-authority behavior."
+    },
+    {
+      "decision_id": "OWNER-20260910-005",
+      "priority": "P0",
+      "scope": "ALL_SURFACES",
+      "family": "FOUNDATION_REUSE_FIRST",
+      "decision": "The new foundation must maximize executable reusable structure across all 23 surfaces: global cores, surface-family engines and thin domain adapters. Never build a generic mechanic independently for one surface when it can be shared.",
+      "supersedes": "Surface-local duplicated shell/pane/editor/spatial/action/settings engines."
+    },
+    {
+      "decision_id": "OWNER-20260910-006",
+      "priority": "P0",
+      "scope": "EDITOR_AND_COMPATIBLE_SURFACES",
+      "family": "EDITOR_ENGINE_REUSE",
+      "decision": "Accepted Library editor mechanics should become reusable executable editor/structured-content primitives so Learn and every compatible authoring surface can inherit them rather than reimplement them.",
+      "supersedes": "Library-only editor implementation."
+    },
+    {
+      "decision_id": "OWNER-20260910-007",
+      "priority": "P0",
+      "scope": "VISUALIZE_AND_SPATIAL_CONSUMERS",
+      "family": "SPATIAL_ENGINE_REUSE",
+      "decision": "Visualize/spatial mechanics should be factored as a reusable spatial engine with domain adapters so Visualize and every compatible W03/other surface benefit from one implementation. Candidate Visualize/W03 designs may supply needs, but are not final design authority.",
+      "supersedes": "Separate spatial input/layout engines per surface."
+    },
+    {
+      "decision_id": "OWNER-20260910-008",
+      "priority": "P0",
+      "scope": "FUTURE_WORK",
+      "family": "AUTHORITY_INTAKE_HARDENING",
+      "decision": "Future Work must consume the canonical authority/supersession registry before raw candidates. Historical framework-specific target files, classes, routes and stack paths are not authority for the new foundation unless freshly adjudicated.",
+      "supersedes": "Big Boss/Laravel/Vue physical target paths treated as current architecture law."
+    },
+    {
+      "decision_id": "OWNER-20260910-009",
+      "priority": "P1",
+      "scope": "ACCEPTED_LIBRARY",
+      "family": "MICRO_SUPERSESSION_ALLOWED",
+      "decision": "Accepted Library remains the primary donor, but newer Owner interaction corrections such as broader dismissal/Escape behavior supersede the donor only at the exact affected mechanic while preserving the rest of its accepted value.",
+      "supersedes": "Whole-donor rejection because of a small corrected interaction."
+    }
+  ],
+  "surface_universe": [
+    {
+      "workspace": "W01",
+      "surface_id": "today",
+      "name": "Today"
+    },
+    {
+      "workspace": "W01",
+      "surface_id": "shell",
+      "name": "Shared Global Shell"
+    },
+    {
+      "workspace": "W02",
+      "surface_id": "library",
+      "name": "Library"
+    },
+    {
+      "workspace": "W02",
+      "surface_id": "learn",
+      "name": "Learn"
+    },
+    {
+      "workspace": "W02",
+      "surface_id": "visualize",
+      "name": "Visualize"
+    },
+    {
+      "workspace": "W02",
+      "surface_id": "rq",
+      "name": "Research & Quality"
+    },
+    {
+      "workspace": "W03",
+      "surface_id": "enterprise",
+      "name": "Enterprise"
+    },
+    {
+      "workspace": "W03",
+      "surface_id": "scenarios",
+      "name": "Scenarios"
+    },
+    {
+      "workspace": "W03",
+      "surface_id": "labs",
+      "name": "Labs"
+    },
+    {
+      "workspace": "W03",
+      "surface_id": "runs",
+      "name": "Runs"
+    },
+    {
+      "workspace": "W03",
+      "surface_id": "results",
+      "name": "Results"
+    },
+    {
+      "workspace": "W04",
+      "surface_id": "evidence",
+      "name": "Evidence"
+    },
+    {
+      "workspace": "W04",
+      "surface_id": "reviews",
+      "name": "Reviews"
+    },
+    {
+      "workspace": "W04",
+      "surface_id": "mastery",
+      "name": "Mastery"
+    },
+    {
+      "workspace": "W04",
+      "surface_id": "portfolio",
+      "name": "Portfolio"
+    },
+    {
+      "workspace": "W05",
+      "surface_id": "health",
+      "name": "Health"
+    },
+    {
+      "workspace": "W05",
+      "surface_id": "processing",
+      "name": "Processing"
+    },
+    {
+      "workspace": "W05",
+      "surface_id": "validation",
+      "name": "Validation"
+    },
+    {
+      "workspace": "W05",
+      "surface_id": "audit",
+      "name": "Audit"
+    },
+    {
+      "workspace": "W05",
+      "surface_id": "manual_ai",
+      "name": "AI Bridge / Manual AI Bridge"
+    },
+    {
+      "workspace": "W05",
+      "surface_id": "backup",
+      "name": "Backup & Restore"
+    },
+    {
+      "workspace": "W05",
+      "surface_id": "releases",
+      "name": "Releases"
+    },
+    {
+      "workspace": "W05",
+      "surface_id": "configuration",
+      "name": "Configuration"
+    }
+  ],
+  "shared_foundation_cores": [
+    {
+      "id": "SC-001",
+      "core": "GlobalShellCore",
+      "phase_b_disposition": "REQUIRED_SHARED",
+      "evidence_scope": "W01 + all Workspaces",
+      "responsibility": "Global navigation/orientation, cross-destination shell ownership; domain bodies excluded.",
+      "hard_boundary": "No domain store or sixth primary destination."
+    },
+    {
+      "id": "SC-002",
+      "core": "WorkspaceRegionCore",
+      "phase_b_disposition": "PROVEN_SHARED",
+      "evidence_scope": "W01–W05",
+      "responsibility": "TOP/structure/primary-work/context/deep-work region grammar repeatedly observed.",
+      "hard_boundary": "Region contents remain Surface-owned."
+    },
+    {
+      "id": "SC-003",
+      "core": "PaneResponsiveCore",
+      "phase_b_disposition": "PROVEN_SHARED",
+      "evidence_scope": "22/23 capsules + W01/W02 donor evidence",
+      "responsibility": "preferred vs effective state; resize/collapse/hide/reopen; responsive overlay/drawer.",
+      "hard_boundary": "Pane state is presentation, not domain state."
+    },
+    {
+      "id": "SC-004",
+      "core": "ContextInspectorCore",
+      "phase_b_disposition": "PROVEN_SHARED",
+      "evidence_scope": "W01–W05",
+      "responsibility": "RIGHT contextual inspection pattern recurs with one contextual owner.",
+      "hard_boundary": "Context payload remains domain-adapted."
+    },
+    {
+      "id": "SC-005",
+      "core": "BottomDeepWorkCore",
+      "phase_b_disposition": "PROVEN_SHARED",
+      "evidence_scope": "W01–W05",
+      "responsibility": "temporary deep-work region; closed/inert lifecycle and focus restoration.",
+      "hard_boundary": "BOTTOM content/semantics remain Surface-owned."
+    },
+    {
+      "id": "SC-006",
+      "core": "PresentationStateCore",
+      "phase_b_disposition": "PROVEN_SHARED",
+      "evidence_scope": "W01–W05",
+      "responsibility": "layout/view/focus/pane state repeatedly separated from domain truth.",
+      "hard_boundary": "Must not become canonical domain persistence."
+    },
+    {
+      "id": "SC-007",
+      "core": "GlobalPreferenceCore",
+      "phase_b_disposition": "REQUIRED_SHARED",
+      "evidence_scope": "OSD-072..079 + W01–W05 repeated preferences",
+      "responsibility": "one semantic preference owner with scoped inheritance and many entry routes.",
+      "hard_boundary": "Global owner does not mean globally forced value."
+    },
+    {
+      "id": "SC-008",
+      "core": "PreferenceScopeResolver",
+      "phase_b_disposition": "REQUIRED_SHARED",
+      "evidence_scope": "OSD-073 + all Workspaces",
+      "responsibility": "safe default → global → workspace → surface → view/tool → content/object where valid → session.",
+      "hard_boundary": "Applicability must be explicit per setting."
+    },
+    {
+      "id": "SC-009",
+      "core": "GlobalSettingsIA",
+      "phase_b_disposition": "REQUIRED_SHARED",
+      "evidence_scope": "OSD-078 + W01/W02/W05 evidence",
+      "responsibility": "central searchable settings IA over one registry.",
+      "hard_boundary": "Surface settings are filtered entry routes, not new stores."
+    },
+    {
+      "id": "SC-010",
+      "core": "PreferencePersistenceCore",
+      "phase_b_disposition": "PROVEN_SHARED",
+      "evidence_scope": "W01/W02/W03/W05 donor evidence",
+      "responsibility": "durable preference store with source/effective value and reset semantics.",
+      "hard_boundary": "Domain config remains outside preference state."
+    },
+    {
+      "id": "SC-011",
+      "core": "PreferenceExportImportResetModel",
+      "phase_b_disposition": "REQUIRED_SHARED",
+      "evidence_scope": "Owner preference seed",
+      "responsibility": "versioned export/import, reset one/section/scope/global; effective-source preview.",
+      "hard_boundary": "Secrets/domain configuration excluded unless separately governed."
+    },
+    {
+      "id": "SC-012",
+      "core": "LocaleLanguagePresentationCore",
+      "phase_b_disposition": "REQUIRED_SHARED",
+      "evidence_scope": "OSD-065..076 + all Workspaces",
+      "responsibility": "uiLocale/language pack/number-date-time/search language as distinct preferences.",
+      "hard_boundary": "Does not rewrite canonical content language metadata."
+    },
+    {
+      "id": "SC-013",
+      "core": "DirectionAlignmentResolutionCore",
+      "phase_b_disposition": "REQUIRED_SHARED",
+      "evidence_scope": "OSD-067..071 + all Workspaces",
+      "responsibility": "chrome direction, natural text direction and alignment resolved separately.",
+      "hard_boundary": "No single RTL/LTR mega-flag."
+    },
+    {
+      "id": "SC-014",
+      "core": "TypographyAndScriptProfileCore",
+      "phase_b_disposition": "REQUIRED_SHARED",
+      "evidence_scope": "OSD-070/075 + mixed-script portfolio",
+      "responsibility": "font/script fallback/profile and script-aware defaults.",
+      "hard_boundary": "Must not hard-code Arabic-only typography."
+    },
+    {
+      "id": "SC-015",
+      "core": "TechnicalTokenBidiIsolationCore",
+      "phase_b_disposition": "REQUIRED_SHARED",
+      "evidence_scope": "W01–W05 technical tokens",
+      "responsibility": "code/commands/paths/IPs/hashes/IDs/logs remain readable independent of chrome direction.",
+      "hard_boundary": "Token isolation policy can vary by tool/content."
+    },
+    {
+      "id": "SC-016",
+      "core": "SemanticCommandCore",
+      "phase_b_disposition": "PROVEN_SHARED",
+      "evidence_scope": "22/23 capsules + W02 donor",
+      "responsibility": "one behavioral command owner with many invocation routes.",
+      "hard_boundary": "Payloads MUST be typed per command family."
+    },
+    {
+      "id": "SC-017",
+      "core": "ActionSurfaceCore",
+      "phase_b_disposition": "PROVEN_SHARED",
+      "evidence_scope": "portfolio action surfaces + prior Big Boss valid machinery",
+      "responsibility": "visible/overflow/context/palette/quick/keyboard/pointer routes map to semantic command IDs.",
+      "hard_boundary": "Presentation route != semantic owner."
+    },
+    {
+      "id": "SC-018",
+      "core": "ActionAvailabilityCore",
+      "phase_b_disposition": "PROVEN_SHARED",
+      "evidence_scope": "W01–W05 disabled/authority/state rules",
+      "responsibility": "availability, disabled reason, permission/state constraints.",
+      "hard_boundary": "Disabled reason must be truthful, not cosmetic."
+    },
+    {
+      "id": "SC-019",
+      "core": "TransientFocusCore",
+      "phase_b_disposition": "PROVEN_SHARED",
+      "evidence_scope": "22/23 capsules",
+      "responsibility": "modal/menu/palette/drawer focus containment, dismissal, inertness, focus return.",
+      "hard_boundary": "Persistent panes are not transients."
+    },
+    {
+      "id": "SC-020",
+      "core": "InputKeymapCore",
+      "phase_b_disposition": "PROVEN_SHARED",
+      "evidence_scope": "W01–W05 + Library donor",
+      "responsibility": "keyboard/pointer/touch/trackpad mappings, conflicts, remap, text/IME protection.",
+      "hard_boundary": "Single-character shortcuts need guards."
+    },
+    {
+      "id": "SC-021",
+      "core": "AccessibilityInteractionCore",
+      "phase_b_disposition": "PROVEN_SHARED",
+      "evidence_scope": "W01–W05",
+      "responsibility": "focus visibility, region navigation, announcements, equivalent action routes.",
+      "hard_boundary": "Equivalent agency, not decorative accessibility."
+    },
+    {
+      "id": "SC-022",
+      "core": "StatusFeedbackCore",
+      "phase_b_disposition": "PROVEN_SHARED",
+      "evidence_scope": "W01–W05",
+      "responsibility": "status/toast/operation feedback with domain adapters.",
+      "hard_boundary": "Domain lifecycle tokens remain local."
+    },
+    {
+      "id": "SC-023",
+      "core": "EpistemicStateCore",
+      "phase_b_disposition": "PROVEN_SHARED",
+      "evidence_scope": "W01–W05",
+      "responsibility": "AVAILABLE/EMPTY/PARTIAL/STALE/UNAVAILABLE/ERROR presentation truth.",
+      "hard_boundary": "Do NOT replace domain-specific lifecycle/status enums."
+    },
+    {
+      "id": "SC-024",
+      "core": "SearchFilterDiscoveryCore",
+      "phase_b_disposition": "PROVEN_SHARED",
+      "evidence_scope": "W01/W02/W04/W05 + W03 catalogs",
+      "responsibility": "search/filter/discovery interaction primitives.",
+      "hard_boundary": "Search semantics/index owner remains domain-specific."
+    },
+    {
+      "id": "SC-025",
+      "core": "NavigationQuickAccessCore",
+      "phase_b_disposition": "CANDIDATE_SHARED",
+      "evidence_scope": "W01/W02/W03",
+      "responsibility": "Quick Jump, Return to Origin, command/search navigation patterns.",
+      "hard_boundary": "Applicability depends on Surface complexity."
+    },
+    {
+      "id": "SC-026",
+      "core": "ConfirmationSafetyCore",
+      "phase_b_disposition": "CANDIDATE_SHARED",
+      "evidence_scope": "editing/ops/backup/release/config surfaces",
+      "responsibility": "confirmation/reason/recovery patterns for destructive/high-risk actions.",
+      "hard_boundary": "Not applicable to every read-only observation action."
+    },
+    {
+      "id": "SC-027",
+      "core": "SelectionInteractionCore",
+      "phase_b_disposition": "CANDIDATE_SHARED",
+      "evidence_scope": "Library/Visualize/R&Q/W03",
+      "responsibility": "single/multi/selection-context mechanics.",
+      "hard_boundary": "Selection meaning/payload is domain-adapted."
+    },
+    {
+      "id": "SC-028",
+      "core": "TransactionHistoryCore",
+      "phase_b_disposition": "SURFACE_FAMILY_SHARED",
+      "evidence_scope": "Library/Learn/Visualize/RQ + authored W03",
+      "responsibility": "undo/redo/recovery transaction mechanics for mutable working state.",
+      "hard_boundary": "Never rewrite immutable historical/audit facts."
+    },
+    {
+      "id": "SC-029",
+      "core": "ClipboardTrustCore",
+      "phase_b_disposition": "SURFACE_FAMILY_SHARED",
+      "evidence_scope": "Library/Learn + deep inspection surfaces",
+      "responsibility": "copy/paste trust boundaries and safe transformations.",
+      "hard_boundary": "Copy convenience != canonical mutation."
+    },
+    {
+      "id": "SC-030",
+      "core": "StructuredContentCore",
+      "phase_b_disposition": "SURFACE_FAMILY_SHARED",
+      "evidence_scope": "Library/Learn + W03 authoring candidates",
+      "responsibility": "block/editor/insertion/selection/history/notes mechanics.",
+      "hard_boundary": "Knowledge/learning/scenario/lab semantics remain adapters."
+    },
+    {
+      "id": "SC-031",
+      "core": "SpatialInteractionCore",
+      "phase_b_disposition": "SURFACE_FAMILY_SHARED",
+      "evidence_scope": "Visualize + W03 Enterprise/Scenarios/Labs/Runs/Results",
+      "responsibility": "viewport/pan/zoom/fit/minimap/grid/snap/selection/layout + accessible navigator.",
+      "hard_boundary": "Node/edge geometry never owns domain relationship meaning."
+    },
+    {
+      "id": "SC-032",
+      "core": "AnalyticalWorkbenchCore",
+      "phase_b_disposition": "SURFACE_FAMILY_SHARED",
+      "evidence_scope": "R&Q + W03 Results + W04 + W05 Audit",
+      "responsibility": "compare/history/provenance/conflict/diff/dense inspection mechanics.",
+      "hard_boundary": "Formal W04 review semantics remain separate."
+    },
+    {
+      "id": "SC-033",
+      "core": "AuditProvenanceInteractionCore",
+      "phase_b_disposition": "SURFACE_FAMILY_SHARED",
+      "evidence_scope": "R&Q/W03 Results/W04/W05 Audit",
+      "responsibility": "identity/provenance/history chain inspection and correlation.",
+      "hard_boundary": "Audit immutability/Review authority remain domain-owned."
+    },
+    {
+      "id": "SC-034",
+      "core": "CollectionTableMatrixCore",
+      "phase_b_disposition": "CANDIDATE_SHARED",
+      "evidence_scope": "R&Q/Portfolio/Audit/Health/Processing",
+      "responsibility": "dense collection/table/matrix selection/filter/context patterns.",
+      "hard_boundary": "No universal domain row schema."
+    },
+    {
+      "id": "SC-035",
+      "core": "TimelineReplayCore",
+      "phase_b_disposition": "CANDIDATE_SHARED",
+      "evidence_scope": "W03 Results + history/audit consumers",
+      "responsibility": "ordered timeline, step/scrub/event detail mechanics.",
+      "hard_boundary": "Historical replay semantics remain W03 Results-owned."
+    },
+    {
+      "id": "SC-036",
+      "core": "OperationalWorkbenchCore",
+      "phase_b_disposition": "SURFACE_FAMILY_SHARED",
+      "evidence_scope": "W03 Runs + W05 operational surfaces",
+      "responsibility": "alerts/events/logs/session/deep diagnostics operational layout mechanics.",
+      "hard_boundary": "Runtime state owner remains target domain."
+    },
+    {
+      "id": "SC-037",
+      "core": "ReviewDecisionInteractionCore",
+      "phase_b_disposition": "SURFACE_FAMILY_SHARED",
+      "evidence_scope": "W04 Evidence/Reviews/Mastery",
+      "responsibility": "criteria/findings/decision/supersession inspection mechanics.",
+      "hard_boundary": "Must not absorb R&Q working review semantics."
+    },
+    {
+      "id": "SC-038",
+      "core": "NotesAnnotationCore",
+      "phase_b_disposition": "CANDIDATE_SHARED",
+      "evidence_scope": "W02 + W03 AAR + possible W04",
+      "responsibility": "one note/working-annotation semantic core with presentation adapters where semantics are actually freeform notes.",
+      "hard_boundary": "Formal Finding/Decision/Audit event are NOT generic notes."
+    },
+    {
+      "id": "SC-039",
+      "core": "ProductionMappingBoundary",
+      "phase_b_disposition": "PROVEN_SHARED",
+      "evidence_scope": "all 23 Surfaces",
+      "responsibility": "explicit component/state-owner/command/API/persistence/test/evidence mapping boundary.",
+      "hard_boundary": "No exact production binding may be implied by blueprint HTML alone."
+    },
+    {
+      "id": "SC-040",
+      "core": "PreferenceVsDomainConfigBoundary",
+      "phase_b_disposition": "REQUIRED_SHARED",
+      "evidence_scope": "W05 Configuration + all Workspaces",
+      "responsibility": "global presentation preference state separated from operational/domain configuration.",
+      "hard_boundary": "Settings UI does not authorize domain config mutation."
+    }
+  ],
+  "accepted_donor_components": [
+    {
+      "donor_component": "AppShell",
+      "target_foundation_module_candidate": "shell/AppShell",
+      "foundation_family": "GLOBAL_SHELL_TEMPLATE",
+      "reuse_posture": "REUSE_STRUCTURE_AND_INTERACTION_GRAMMAR",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "Do not freeze old visual/nav design if newer Owner correction reopens it."
+    },
+    {
+      "donor_component": "BlockContextMenu",
+      "target_foundation_module_candidate": "actions/ContextMenu",
+      "foundation_family": "CONTEXT_ACTION_SURFACE",
+      "reuse_posture": "REUSE_WITH_DOMAIN_ACTION_ADAPTER",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "RMB/Shift+F10 parity; no duplicate side effects."
+    },
+    {
+      "donor_component": "BottomShelf",
+      "target_foundation_module_candidate": "workspace/BottomDeepWork",
+      "foundation_family": "BOTTOM_DEEP_WORK",
+      "reuse_posture": "REUSE_AS_EXECUTABLE_SEED",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "Closed by default; temporary deep work."
+    },
+    {
+      "donor_component": "CommandPalette",
+      "target_foundation_module_candidate": "commands/CommandPalette",
+      "foundation_family": "COMMAND_DISCOVERY",
+      "reuse_posture": "REUSE_WITH_CURRENT_DISMISSAL_SUPERSESSION",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "Many entry/exit routes; one semantic command registry."
+    },
+    {
+      "donor_component": "ContextInspector",
+      "target_foundation_module_candidate": "context/ContextInspector",
+      "foundation_family": "CONTEXT_ENGINE",
+      "reuse_posture": "REUSE_AS_EXECUTABLE_SEED",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "RIGHT unique context owner; domain lenses via adapters."
+    },
+    {
+      "donor_component": "ContextLensHost",
+      "target_foundation_module_candidate": "context/ContextLensHost",
+      "foundation_family": "CONTEXT_LENS_HOST",
+      "reuse_posture": "REUSE_AS_EXECUTABLE_SEED",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "Lens changes RIGHT, not CENTER."
+    },
+    {
+      "donor_component": "EditorToolbar",
+      "target_foundation_module_candidate": "structured/EditorToolbar",
+      "foundation_family": "EDITOR_ACTION_SURFACE",
+      "reuse_posture": "REUSE_AND_MAKE_ELIGIBLE_COMPOSITION_CUSTOMIZABLE",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "Placement/order/visibility preference; same commands."
+    },
+    {
+      "donor_component": "FixtureStateLab",
+      "target_foundation_module_candidate": "testing/FixtureStateLab",
+      "foundation_family": "TEST_HARNESS",
+      "reuse_posture": "REUSE_AS_TEST_ONLY",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "Never ship internal fixture/governance diagnostics as normal product chrome."
+    },
+    {
+      "donor_component": "GroupedSectionSystem",
+      "target_foundation_module_candidate": "disclosure/GroupedSections",
+      "foundation_family": "DISCLOSURE_ENGINE",
+      "reuse_posture": "REUSE_IF_COMPATIBLE",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "Do not force one disclosure pattern on all domains."
+    },
+    {
+      "donor_component": "InsertionPalette",
+      "target_foundation_module_candidate": "structured/InsertionPalette",
+      "foundation_family": "STRUCTURED_INSERTION",
+      "reuse_posture": "REUSE_FOR_STRUCTURED_CONTENT",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "Exact anchor, keyboard/pointer parity."
+    },
+    {
+      "donor_component": "KnowledgeDocumentSurface",
+      "target_foundation_module_candidate": "structured/DocumentSurface",
+      "foundation_family": "DOCUMENT_SURFACE",
+      "reuse_posture": "ADAPT_DOMAIN_DOCUMENT",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "Knowledge domain semantics not universal."
+    },
+    {
+      "donor_component": "PaneController",
+      "target_foundation_module_candidate": "workspace/PaneController",
+      "foundation_family": "PANE_ENGINE",
+      "reuse_posture": "REUSE_AS_EXECUTABLE_SEED",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "Preferred/effective state separated; resizable/collapse/reopen/focus/responsive."
+    },
+    {
+      "donor_component": "SelectionToolbar",
+      "target_foundation_module_candidate": "actions/SelectionToolbar",
+      "foundation_family": "SELECTION_ACTION_SURFACE",
+      "reuse_posture": "REUSE_WHERE_SELECTION_EXISTS",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "Same semantic commands as menus/palette/toolbar."
+    },
+    {
+      "donor_component": "StructurePane",
+      "target_foundation_module_candidate": "navigation/StructurePane",
+      "foundation_family": "STRUCTURE_REGION",
+      "reuse_posture": "ADAPT_DOMAIN_TREE",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "LEFT owns structure/navigation only."
+    },
+    {
+      "donor_component": "StructureTree",
+      "target_foundation_module_candidate": "navigation/StructureTree",
+      "foundation_family": "TREE_NAVIGATION",
+      "reuse_posture": "ADAPT_DOMAIN_TREE",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "Preserve keyboard/roving focus/selection grammar."
+    },
+    {
+      "donor_component": "TopBanner",
+      "target_foundation_module_candidate": "support/TopBanner",
+      "foundation_family": "SUPPORT_BANNER",
+      "reuse_posture": "PRESERVE_AS_OPTIONAL_OR_MANDATORY_BY_CONTENT",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "Optional guidance must not become forced permanent chrome."
+    },
+    {
+      "donor_component": "UnifiedEditor",
+      "target_foundation_module_candidate": "structured/UnifiedEditor",
+      "foundation_family": "EDITOR_ENGINE",
+      "reuse_posture": "PRIMARY_EXECUTABLE_DONOR_SEED",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "Must become reusable engine for Library/Learn/compatible authoring surfaces."
+    },
+    {
+      "donor_component": "W02Nav",
+      "target_foundation_module_candidate": "navigation/AreaNavigation",
+      "foundation_family": "AREA_NAVIGATION",
+      "reuse_posture": "ADAPT_DESTINATIONS_ONLY",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "Navigation mechanics reusable; destination taxonomy/domain labels adapt."
+    },
+    {
+      "donor_component": "WorkspaceViewControl",
+      "target_foundation_module_candidate": "workspace/ViewModeControl",
+      "foundation_family": "VIEW_MODE",
+      "reuse_posture": "REUSE_MECHANIC",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "View mode changes CENTER; do not masquerade as Context lens."
+    },
+    {
+      "donor_component": "FUNCTION_FAMILY:WORKSPACE_PANE_LAYOUT",
+      "target_foundation_module_candidate": "workspace/PaneAndLayoutEngine",
+      "foundation_family": "WORKSPACE_PANE_LAYOUT",
+      "reuse_posture": "EXTRACT_BEHAVIOR_CONTRACT_AND_REUSABLE_EXECUTABLE_PRIMITIVES",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "17 named donor functions; examples: workspaceToggleState, updateAllWorkspaceToggleControl, toggleAllWorkspaceToggles, effectivePaneState, setPaneState, paneLimits, clampPaneWidths, paneResizeAvailable, syncPaneCSS, togglePane, resizePane, previewPaneWidth"
+    },
+    {
+      "donor_component": "FUNCTION_FAMILY:CONTEXT_INSPECTOR",
+      "target_foundation_module_candidate": "context/ContextInspectorEngine",
+      "foundation_family": "CONTEXT_INSPECTOR",
+      "reuse_posture": "EXTRACT_BEHAVIOR_CONTRACT_AND_REUSABLE_EXECUTABLE_PRIMITIVES",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "36 named donor functions; examples: contextualInsertionDirection, applyCodeViewPreferences, relatedContextProjection, applyBlockFocusPreferenceDatasets, selectionContext, contextBlockId, syncContextScopeButtons, renderContextLenses, contextTarget, bindReaderReference, unlinkReaderReference, renderInspector"
+    },
+    {
+      "donor_component": "FUNCTION_FAMILY:COMMAND_ACTION",
+      "target_foundation_module_candidate": "commands/SemanticCommandAndActionEngine",
+      "foundation_family": "COMMAND_ACTION",
+      "reuse_posture": "EXTRACT_BEHAVIOR_CONTRACT_AND_REUSABLE_EXECUTABLE_PRIMITIVES",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "10 named donor functions; examples: logCommand, commandAvailability, commandEnabled, openShortcutHelp, openCommandPalette, commandPaletteItems, renderCommandResults, executePaletteCommand, activeSurfaceForShortcut, handleGlobalShortcut"
+    },
+    {
+      "donor_component": "FUNCTION_FAMILY:UNIFIED_EDITOR_BLOCK",
+      "target_foundation_module_candidate": "structured/StructuredContentEngine",
+      "foundation_family": "UNIFIED_EDITOR_BLOCK",
+      "reuse_posture": "EXTRACT_BEHAVIOR_CONTRACT_AND_REUSABLE_EXECUTABLE_PRIMITIVES",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "99 named donor functions; examples: freshBlockId, blockHTML, blockText, maxBlockDepth, serializeBlocks, setCaretByTextOffset, resolveEmptyBlockDirection, blockEmptyDirectionHint, resolvedBlockDirection, contextualInsertionDirection, blockContainsId, localBlockIndent"
+    },
+    {
+      "donor_component": "FUNCTION_FAMILY:SELECTION",
+      "target_foundation_module_candidate": "selection/SelectionEngine",
+      "foundation_family": "SELECTION",
+      "reuse_posture": "EXTRACT_BEHAVIOR_CONTRACT_AND_REUSABLE_EXECUTABLE_PRIMITIVES",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "41 named donor functions; examples: rangeAtTextOffset, selectBlock, clearBlockSelection, portableInlineHTML, editorOwnedPortableInlineHTML, selectedCodePortableHTML, selectionBoundaryPortableHTML, selectionPortableHTML, renderSurfaceSelection, blockSelection, orderedSelectedBlockIds, renderMultiBlockSelection"
+    },
+    {
+      "donor_component": "FUNCTION_FAMILY:CLIPBOARD",
+      "target_foundation_module_candidate": "clipboard/ClipboardTrustEngine",
+      "foundation_family": "CLIPBOARD",
+      "reuse_posture": "EXTRACT_BEHAVIOR_CONTRACT_AND_REUSABLE_EXECUTABLE_PRIMITIVES",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "21 named donor functions; examples: portableInlineHTML, copyNode, editorOwnedPortableInlineHTML, copyOwned, codePortableHTML, blockPortableHTML, selectedCodePortableHTML, selectionBoundaryPortableHTML, selectionPortableHTML, copyPlainBlock, blockToMarkdown, copyMarkdownBlock"
+    },
+    {
+      "donor_component": "FUNCTION_FAMILY:NOTES_STICKY",
+      "target_foundation_module_candidate": "notes/NotesAnnotationEngine",
+      "foundation_family": "NOTES_STICKY",
+      "reuse_posture": "EXTRACT_BEHAVIOR_CONTRACT_AND_REUSABLE_EXECUTABLE_PRIMITIVES",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "14 named donor functions; examples: getNote, freshNoteId, relatedNotes, notesLens, createNote, renderNotes, renderNoteWindow, updateNoteStatus, openNote, requestNoteClose, closeNoteWith, popoutNote"
+    },
+    {
+      "donor_component": "FUNCTION_FAMILY:HISTORY_RECOVERY",
+      "target_foundation_module_candidate": "history/TransactionHistoryEngine",
+      "foundation_family": "HISTORY_RECOVERY",
+      "reuse_posture": "EXTRACT_BEHAVIOR_CONTRACT_AND_REUSABLE_EXECUTABLE_PRIMITIVES",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "6 named donor functions; examples: pushHistory, undo, redo, captureBookmark, restoreBookmark, historyLens"
+    },
+    {
+      "donor_component": "FUNCTION_FAMILY:PREFERENCES_SETTINGS",
+      "target_foundation_module_candidate": "preferences/PreferenceEngine",
+      "foundation_family": "PREFERENCES_SETTINGS",
+      "reuse_posture": "EXTRACT_BEHAVIOR_CONTRACT_AND_REUSABLE_EXECUTABLE_PRIMITIVES",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "19 named donor functions; examples: scheduleAutosaveSimulation, applyCodeViewPreferences, applyBlockFocusPreferenceDatasets, preferenceSnapshot, applyPreferenceSnapshot, resolvedSystemTheme, applyPresentationPreferences, applyDisclosurePreferenceOnOpen, persistPresentationPreferences, restorePresentationPreferences, setDensity, syncThemeControl"
+    },
+    {
+      "donor_component": "FUNCTION_FAMILY:FOCUS_ACCESSIBILITY",
+      "target_foundation_module_candidate": "a11y/FocusAndAccessibilityEngine",
+      "foundation_family": "FOCUS_ACCESSIBILITY",
+      "reuse_posture": "EXTRACT_BEHAVIOR_CONTRACT_AND_REUSABLE_EXECUTABLE_PRIMITIVES",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "11 named donor functions; examples: announce, applyBlockFocusPreferenceDatasets, setBlockFocusOrigin, dismissMainBlockFocus, focusBlock, configureTooltips, toggleFocus, focusableIn, trapFocusWithin, cyclePrimaryRegion, focusedBlockRef"
+    },
+    {
+      "donor_component": "FUNCTION_FAMILY:RESPONSIVE",
+      "target_foundation_module_candidate": "presentation/ResponsivePresentationEngine",
+      "foundation_family": "RESPONSIVE",
+      "reuse_posture": "EXTRACT_BEHAVIOR_CONTRACT_AND_REUSABLE_EXECUTABLE_PRIMITIVES",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "4 named donor functions; examples: clampNote, responsiveBand, clampPaneWidths, applyResponsivePolicy"
+    },
+    {
+      "donor_component": "FUNCTION_FAMILY:STORAGE_SAVE",
+      "target_foundation_module_candidate": "foundation/storage_save",
+      "foundation_family": "STORAGE_SAVE",
+      "reuse_posture": "EXTRACT_BEHAVIOR_CONTRACT_AND_REUSABLE_EXECUTABLE_PRIMITIVES",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "4 named donor functions; examples: setSaveState, scheduleAutosaveSimulation, persistPresentationPreferences, explicitSaveSimulation"
+    },
+    {
+      "donor_component": "FUNCTION_FAMILY:DRAG_POINTER",
+      "target_foundation_module_candidate": "foundation/drag_pointer",
+      "foundation_family": "DRAG_POINTER",
+      "reuse_posture": "EXTRACT_BEHAVIOR_CONTRACT_AND_REUSABLE_EXECUTABLE_PRIMITIVES",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "13 named donor functions; examples: showDragPreview, hideDragPreview, autoscrollDuringDrag, marqueeSafeTarget, startBlockMarquee, updateBlockMarquee, finishBlockMarquee, openBackdrop, closeBackdrop, handlePointerDown, handlePointerMove, handlePointerUp"
+    },
+    {
+      "donor_component": "FUNCTION_FAMILY:CODE",
+      "target_foundation_module_candidate": "foundation/code",
+      "foundation_family": "CODE",
+      "reuse_posture": "EXTRACT_BEHAVIOR_CONTRACT_AND_REUSABLE_EXECUTABLE_PRIMITIVES",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "13 named donor functions; examples: codeRaw, inferCodeLanguage, syntaxTokens, syntaxRenderSegment, renderCodeMarkup, codeLineLabels, applyCodeViewToElement, applyCodeViewPreferences, codePortableHTML, selectedCodePortableHTML, replaceCodeAnnotationRange, restoreCodeSelectionAfterRender"
+    },
+    {
+      "donor_component": "FUNCTION_FAMILY:OTHER",
+      "target_foundation_module_candidate": "foundation/other",
+      "foundation_family": "OTHER",
+      "reuse_posture": "EXTRACT_BEHAVIOR_CONTRACT_AND_REUSABLE_EXECUTABLE_PRIMITIVES",
+      "authority": "ACCEPTED_EXECUTABLE_DONOR_SUBJECT_TO_CURRENT_OWNER_SUPERSESSION",
+      "boundary_or_required_improvement": "96 named donor functions; examples: toast, canOwnChildren, canContain, newDocStore, activeFixture, getStore, surfaceLabel, plainTextFromStoredHTML, walk, findRef, validTree, textOffset"
+    }
+  ],
+  "hard_rules": [
+    "SAFE_DEFAULTS_ARE_NOT_IMMUTABLE_OWNER_LAWS_UNLESS_JUSTIFIED",
+    "ONLY_LIBRARY_EDITOR_CURRENTLY_ACCEPTED_EXECUTABLE_BLUEPRINT_DONOR",
+    "NON_LIBRARY_BLUEPRINTS_ARE_VALUE_PROPOSAL_EVIDENCE_NOT_FINAL_AUTHORITY",
+    "ONE_GENERIC_OWNER_PLUS_THIN_DOMAIN_ADAPTERS",
+    "ALL_23_SURFACES_APPLICABILITY_EVALUATION_REQUIRED",
+    "HISTORICAL_STACK_PATHS_NOT_PHYSICAL_AUTHORITY",
+    "EVIDENCE_CLASSES_NEVER_COLLAPSE"
+  ]
+}

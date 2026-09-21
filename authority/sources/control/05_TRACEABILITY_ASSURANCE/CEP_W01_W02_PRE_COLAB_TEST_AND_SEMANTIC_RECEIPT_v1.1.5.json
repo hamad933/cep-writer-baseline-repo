@@ -1,0 +1,159 @@
+{
+  "artifact": "CEP W01/W02 Writer-B v1.1.5 PRE-COLAB Source Completion Assurance Receipt",
+  "classification": "WRITER_EVIDENCE / CANDIDATE_ONLY / NOT_CONTROLLER_ACCEPTED / NOT_OWNER_ACCEPTED / NOT_FROZEN / NOT_MERGED / NOT_RELEASED / NOT_DEPLOYED",
+  "controlling_packet": "CEP_WRITER_B_W01_W02_PRE_COLAB_FINAL_SOURCE_COMPLETION_PACKET_v1.0.md",
+  "controller_adjudication": "CEP_CONTROLLER_ADJUDICATION_W01_W02_PRE_COLAB_SOURCE_COMPLETION_v1.0.md",
+  "lineage": {
+    "sole_writable_baseline": "CEP_W01_W02_PRODUCTION_KNOWLEDGE_WORKBENCH_FORGE_v1.1.4_WRITER_B_FINAL_CLOSURE_HARDENED_RESULT.zip",
+    "baseline_zip_sha256": "5954e55db93411293cacb28b4082f54cf53fe8fc3950e9e56ad36cf97b82d636",
+    "baseline_source_tree_sha": "acd14514dddbd5e45aeb2fc25fed22560511d8ca",
+    "successor_version": "v1.1.5_PRE_COLAB_SOURCE_COMPLETE_CANDIDATE",
+    "successor_source_tree_sha": "e59c0378da507faa4cc5eebcf5996e194fbb1fb3",
+    "source_manifest_sha256": "95be84b206fff97b95665b8192ce6f99f193f1299d79e4997ee719fe596f0008",
+    "source_file_count": 592
+  },
+  "traceability": {
+    "admitted_rows": 80,
+    "unique_rows": 80,
+    "previous_controller_implementation_universe": 67,
+    "previous_rows_source_handled": 67,
+    "missing_rows": 0,
+    "partial_rows": 0,
+    "verdict_counts": {
+      "NOT_APPLICABLE_JUSTIFIED": 4,
+      "RUNTIME_UNPROVEN": 41,
+      "TRANSFERRED_WITH_PRODUCTION_ADAPTATION": 15,
+      "AUTHORITY_GATED": 7,
+      "VISUAL_UNPROVEN": 13
+    },
+    "mapping_counts": {
+      "EXACT_CURRENT_OWNER_OR_GOVERNANCE_ROW": 64,
+      "EXACT_BOUNDARY_GATED": 7,
+      "EXACT_PLANNED_OWNER_CONTROLLER_ADJUDICATED": 9
+    },
+    "former_partial_rows": [
+      "LIB-026",
+      "LIB-037",
+      "W03-LIB-008"
+    ],
+    "former_partial_rows_current_verdict": {
+      "LIB-026": "RUNTIME_UNPROVEN",
+      "LIB-037": "RUNTIME_UNPROVEN",
+      "W03-LIB-008": "RUNTIME_UNPROVEN"
+    },
+    "zero_orphan_mapping_preserved": true,
+    "controller_destination_owner_drift": 0
+  },
+  "c024": {
+    "ledger_status": "SOURCE_IMPLEMENTED_RUNTIME_DB_EVIDENCE_OPEN",
+    "source_contract": "bounded Library/R&Q server search + cursor pagination + summaries + bounded hierarchy projection + lazy exact detail + claim-related analysis + server-driven frontend",
+    "source_gap_remaining": false,
+    "runtime_db_browser_evidence_pending": true
+  },
+  "changed_scope": {
+    "changed_files_vs_v1_1_4": 35,
+    "changed_files_in_controller_or_assurance_scope": 35,
+    "unscoped_changed_files": []
+  },
+  "executed_checks": [
+    {
+      "check": "Pre-Colab static source contract",
+      "result": "PASS",
+      "detail": "48/48 checks."
+    },
+    {
+      "check": "V4 TypeScript golden vectors",
+      "result": "PASS",
+      "detail": "12/12; Arabic/emoji/U+2028/U+2029 and invalid vectors."
+    },
+    {
+      "check": "V4 PHP golden/invalid/bounded vectors",
+      "result": "PASS",
+      "detail": "15/15; test-only mb_strlen polyfill used only because CLI lacks mbstring; Production source unchanged by the polyfill."
+    },
+    {
+      "check": "V4 state/data transition harness",
+      "result": "PASS",
+      "detail": "10 transitions; history round-trip true; canonical inline_marks updated rather than DOM-only state."
+    },
+    {
+      "check": "C024 actual cursor implementation harness",
+      "result": "PASS",
+      "detail": "251 IDs, 6 pages at 50, no duplicate/no loss, deterministic opaque query-bound cursor, default 50/max 100."
+    },
+    {
+      "check": "Strict TypeScript V4 core compile",
+      "result": "PASS",
+      "detail": "No diagnostics for lessonContent.ts, StructuredContentCore.ts, ClipboardTrustCore.ts."
+    },
+    {
+      "check": "v1.1.4 behavioral regression on preserved baseline",
+      "result": "PASS",
+      "detail": "11/11."
+    },
+    {
+      "check": "v1.1.4 behavioral regression on v1.1.5 successor",
+      "result": "PASS",
+      "detail": "11/11."
+    },
+    {
+      "check": "PHP syntax",
+      "result": "PASS",
+      "detail": "215/215 PHP files parsed."
+    },
+    {
+      "check": "workbench-bootstrap.js syntax",
+      "result": "PASS",
+      "detail": "Node syntax check passed."
+    },
+    {
+      "check": "Changed-file scope",
+      "result": "PASS",
+      "detail": "35/35 files in exact Controller-adjudicated source or assurance scope."
+    },
+    {
+      "check": "Baseline identity",
+      "result": "PASS",
+      "detail": "ZIP SHA 5954e55db93411293cacb28b4082f54cf53fe8fc3950e9e56ad36cf97b82d636; Git tree reproduced baseline expected source identity exactly."
+    },
+    {
+      "check": "Successor source identity",
+      "result": "PASS",
+      "detail": "Git tree e59c0378da507faa4cc5eebcf5996e194fbb1fb3; source manifest 95be84b206fff97b95665b8192ce6f99f193f1299d79e4997ee719fe596f0008; 592 files."
+    }
+  ],
+  "not_promoted_to_pass": [
+    "Full project Vitest/Vite/vue-tsc build: declared project Node/npm toolchain/dependencies unavailable.",
+    "Laravel/Composer/PostgreSQL DB-real runtime: Composer/vendor/PostgreSQL unavailable.",
+    "Exact-route/candidate-bound browser evidence: Chromium minimal smoke failed in environment; no screenshot/route PASS claimed.",
+    "Real browser clipboard/caret/focus/AT/200%/mixed-Bidi matrix.",
+    "Durable Linked Notes persistence, OS cross-app topmost, C027, C028, C029, C030."
+  ],
+  "environment": {
+    "node": "v22.16.0",
+    "npm": "10.9.2",
+    "project_declared_node": "24.18.0",
+    "project_declared_npm": "11.16.0",
+    "php_cli": "8.4.23",
+    "composer": "UNAVAILABLE",
+    "postgresql": "UNAVAILABLE",
+    "docker": "UNAVAILABLE",
+    "chromium": "144.0.7559.96; minimal headless smoke RC=-6 GPU/DBus environment failure; no screenshot",
+    "exact_route_browser": "UNPROVEN",
+    "candidate_visual": "UNPROVEN",
+    "browser_200_percent": "UNPROVEN",
+    "assistive_technology": "UNPROVEN",
+    "mixed_bidi_runtime": "UNPROVEN"
+  },
+  "remote_mutation": {
+    "github_product_mutation": "NO",
+    "governed_drive_product_mutation": "NO",
+    "merge": "NO",
+    "release": "NO",
+    "deploy": "NO",
+    "colab_used": "NO",
+    "new_colab_notebook": "NO",
+    "self_acceptance": "NO"
+  },
+  "writer_terminal_classification": "PRE_COLAB_SOURCE_CONTRACT_EXHAUSTED_AT_WRITER_SOURCE_SEMANTIC_EVIDENCE_LEVEL / ZERO_ORPHAN_MAPPING_PRESERVED / NO_SOURCE_MISSING_OR_PARTIAL / GENUINE_EXTERNAL_RUNTIME_AUTHORITY_PROVIDER_PLATFORM_GATES_PRESERVED / RUNTIME_BROWSER_DB_EVIDENCE_PENDING / CONTROLLER_INDEPENDENT_CONFIRMATION_REQUIRED"
+}

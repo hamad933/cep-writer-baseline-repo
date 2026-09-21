@@ -1,0 +1,30 @@
+{
+  "name": "cep-foundation-forge",
+  "version": "0.2.1c",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node tools/serve.mjs",
+    "build:runtime": "python3 tools/extract_donor.py && node tools/build-runtime.mjs && node stack/native-typescript/foundation/operational/xterm-runtime-assets.mjs",
+    "test": "node tools/test-models.mjs",
+    "check": "node tools/check-build-authority.mjs && node tools/check-duplicate-mechanics.mjs && node tools/test-writer-scaffold.mjs && python3 tools/check-w03-semantic-ownership.py && node tools/check-authority-intake.mjs && node tools/check-deferred-boundary.mjs && node tools/check-contracts.mjs && node tools/vs05-read-mode-matrix.mjs && node tools/check-vs05-command-ownership.mjs",
+    "browser:test": "node tools/browser-conformance.mjs",
+    "scaffold": "node tools/generate-writer-scaffold.mjs",
+    "check:build-authority": "node tools/check-build-authority.mjs",
+    "check:vs05-command-ownership": "node tools/check-vs05-command-ownership.mjs",
+    "check:vs05-read-mode": "node tools/vs05-read-mode-matrix.mjs",
+    "runtime:local": "node stack/local-runtime/server.mjs",
+    "runtime:check": "node tools/psc-runtime-falsification.mjs",
+    "seed:balanced6": "node stack/local-runtime/persistence/acceptance-seed/balanced6/seed.mjs",
+    "test:balanced6": "node tools/balanced6-acceptance-tests.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  },
+  "engines": {
+    "node": "22.16.0"
+  },
+  "dependencies": {
+    "@xterm/xterm": "6.0.0"
+  }
+}

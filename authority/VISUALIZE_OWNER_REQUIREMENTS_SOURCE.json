@@ -1,0 +1,380 @@
+{
+  "document": "CEP Visualize Owner Direct Requirements Ledger v1.3 — Interaction/Customization Hardened",
+  "source_note_preserved": "هناك ملاحظة مهمة: all four views must be freely editable. كل node/item/thing في Tree/Path/Graph/Canvas يجب أن يكون قابلًا للتحرير والتعديل المهني؛ Canvas ليس وحده الـinteractive/editable view. Tree/Path/Graph يجب أن تصبح بيئات تحرير كاملة، بمستوى Canvas أو أفضل بحسب semantics الخاصة بها. كذلك Canvas الحالي من ناحية التصميم ما زال بدائيًا/طفوليًا ويحتاج تحسينًا واسعًا في visual design, functionality, responsiveness, experience, branding وغيرها.",
+  "requirements": [
+    {
+      "requirement_id": "OWNER-VIS-EDIT-001",
+      "priority": "P0",
+      "family": "FOUR_VIEW_EDITABILITY",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "owner_note": "هناك ملاحظة مهمة: all four views must be freely editable. كل node/item/thing في Tree/Path/Graph/Canvas يجب أن يكون قابلًا للتحرير والتعديل المهني؛ Canvas ليس وحده الـinteractive/editable view. Tree/Path/Graph يجب أن تصبح بيئات تحرير كاملة، بمستوى Canvas أو أفضل بحسب semantics الخاصة بها. كذلك Canvas الحالي من ناحية التصميم ما زال بدائيًا/طفوليًا ويحتاج تحسينًا واسعًا في visual design, functionality, responsiveness, experience, branding وغيرها.",
+      "requirement": "Tree, Path, Graph, and Canvas are all full professional editing environments. No view may be reduced to a mostly-read-only visualization merely because Canvas is the free-spatial view.",
+      "interpretation": "Freely editable means every user-owned, semantically editable object/property/relationship/projection in that view has a direct or equivalently efficient editing path. It does NOT mean every view gets identical spatial freedom.",
+      "authority_boundary": "Canonical relation creation/edit/delete and canonical Tree containment commit remain AUTHORITY_GATED unless direct authority opens them. Working/draft/presentation edits must remain fully available without pretending to commit canonical truth.",
+      "acceptance": "Each view must pass a capability matrix covering select/multi-select, inspect, rename/edit label, add draft, remove/hide projection where admissible, move/reorder/layout where semantically valid, relation/link draft where admissible, Notes, Undo/Redo, keyboard parity, pointer parity, responsive reachability, state synchronization, and truthful gated states."
+    },
+    {
+      "requirement_id": "OWNER-VIS-EDIT-002",
+      "priority": "P0",
+      "family": "TREE_FULL_EDITABILITY",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "requirement": "Tree must be a full hierarchy editing workspace, not a static hierarchy viewer.",
+      "required_capabilities": [
+        "direct label edit",
+        "single/multi/range/subtree selection",
+        "expand/collapse",
+        "drag and keyboard reorder",
+        "indent/outdent or staged reparent proposal",
+        "add node/object draft",
+        "add relation/link draft where admissible",
+        "context actions",
+        "Notes",
+        "copy",
+        "projection hide/remove where semantically valid",
+        "Undo/Redo",
+        "keyboard tree navigation",
+        "RIGHT synchronization",
+        "BOTTOM history/compare/recovery integration"
+      ],
+      "semantic_constraint": "Tree remains hierarchy-constrained. No arbitrary free x/y positioning. Canonical containment commit is authority-gated; staged hierarchy proposals are fully editable and reversible.",
+      "acceptance": "Every visible task-relevant Tree item exposes an editing route with keyboard equivalent for essential actions; no pointer-only structural edit."
+    },
+    {
+      "requirement_id": "OWNER-VIS-EDIT-003",
+      "priority": "P0",
+      "family": "PATH_FULL_EDITABILITY",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "requirement": "Path must be a full ordered/progression editing workspace, not a decorative journey diagram.",
+      "required_capabilities": [
+        "direct label edit",
+        "single/multi-selection",
+        "marquee when geometrically valid",
+        "move/group move within path projection",
+        "stage/order/progression adjustment as working presentation/proposal state",
+        "add node draft",
+        "add link/relation draft",
+        "relation type draft",
+        "fork/join/cycle/blocked state editing where contract-owned",
+        "align/distribute/normalize",
+        "lock where meaningful",
+        "Notes",
+        "Undo/Redo",
+        "keyboard node/relation navigation",
+        "RIGHT synchronization"
+      ],
+      "semantic_constraint": "Path preserves ordered/progression semantics. It must not become a free Canvas clone; canonical relationship commit remains authority-gated.",
+      "acceptance": "Every task-relevant Path node/edge/stage control is inspectable and editable through pointer and keyboard paths where essential."
+    },
+    {
+      "requirement_id": "OWNER-VIS-EDIT-004",
+      "priority": "P0",
+      "family": "GRAPH_FULL_EDITABILITY",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "requirement": "Graph must be a full semantic relationship editing workspace, not only an exploration viewer.",
+      "required_capabilities": [
+        "direct node label edit",
+        "edge/relation selection",
+        "edge type draft edit",
+        "node/edge add draft",
+        "single/multi/marquee selection",
+        "move/group move",
+        "layered/radial/fit/layout controls",
+        "1-hop/2-hop focus",
+        "hide/show projection",
+        "Notes",
+        "Undo/Redo",
+        "keyboard node-to-edge-to-node navigation",
+        "keyboard camera controls",
+        "RIGHT synchronization",
+        "context actions"
+      ],
+      "semantic_constraint": "Graph edits relationship/projection working state according to authority. Canonical relation mutation remains gated unless explicitly opened.",
+      "acceptance": "Nodes and task-relevant edges are keyboard focusable/selectable; all essential editing workflows have non-pointer routes."
+    },
+    {
+      "requirement_id": "OWNER-VIS-EDIT-005",
+      "priority": "P0",
+      "family": "CANVAS_FULL_EDITABILITY",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "requirement": "Canvas remains fully editable and must not regress while the other views are raised to parity.",
+      "required_capabilities": [
+        "representation create/duplicate/remove",
+        "multi-selection/marquee",
+        "drag/nudge/group move",
+        "align/distribute/arrange/snap",
+        "representation label/presentation edit",
+        "Canvas-only links",
+        "pan/zoom/fit",
+        "minimap",
+        "Notes",
+        "lock",
+        "Undo/Redo",
+        "keyboard spatial movement",
+        "RIGHT representation context"
+      ],
+      "semantic_constraint": "Representation edits never silently mutate canonical object identity/relationship stores.",
+      "acceptance": "Canvas preserves all proven working functionality while converging to one owner per state/command/history path."
+    },
+    {
+      "requirement_id": "OWNER-VIS-DESIGN-006",
+      "priority": "P1",
+      "family": "CANVAS_PREMIUM_VISUAL_RECONSTRUCTION",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "requirement": "Canvas visual/product quality must be materially reconstructed from its current primitive/toy-like presentation into a premium CEP spatial workstation.",
+      "required_improvements": [
+        "strong CEP branding continuity",
+        "professional object/card hierarchy",
+        "clear type differentiation without color-only meaning",
+        "premium edge/link grammar",
+        "calm selection/focus/multi-selection states",
+        "better spatial depth and background/grid treatment",
+        "professional minimap",
+        "view-aware inspector composition",
+        "command hierarchy simplification",
+        "better typography/spacing/hit targets",
+        "dark/light/system theme quality",
+        "high contrast/reduced motion compatibility",
+        "responsive composition",
+        "empty/loading/error/unavailable states"
+      ],
+      "reference_law": "Use Canvas reference for useful design grammar, not literal cloning. Functionality/accessibility/responsiveness may add components absent from the image.",
+      "acceptance": "At 1440 and ~1024 the Canvas must read as a mature branded CEP product surface, not a prototype/demo, while retaining all editing functionality."
+    },
+    {
+      "requirement_id": "OWNER-VIS-EDIT-007",
+      "priority": "P0",
+      "family": "CROSS_VIEW_EDITABILITY_PARITY",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "requirement": "Create and enforce a cross-view editability capability matrix so shared editing concepts are not implemented only in Canvas.",
+      "shared_capabilities": [
+        "selection + primary + selected set",
+        "context inspection",
+        "direct/edit-label route",
+        "add draft",
+        "link/relation draft when admissible",
+        "remove/hide projection where admissible",
+        "multi-selection where admissible",
+        "Notes",
+        "copy/clipboard where admissible",
+        "Undo/Redo",
+        "command availability reasons",
+        "keyboard/pointer parity",
+        "focus restoration",
+        "responsive reachability"
+      ],
+      "view_specific_capabilities": {
+        "tree": [
+          "hierarchy reorder/reparent proposal",
+          "expand/collapse"
+        ],
+        "path": [
+          "ordered-stage/progression editing"
+        ],
+        "graph": [
+          "node-edge semantic editing",
+          "graph layouts"
+        ],
+        "canvas": [
+          "free spatial representations",
+          "Canvas-only links"
+        ]
+      },
+      "acceptance": "No shared capability is absent from Tree/Path/Graph merely because an implementation already exists in Canvas; NOT_APPLICABLE requires explicit semantic reason."
+    },
+    {
+      "requirement_id": "OWNER-VIS-EDIT-008",
+      "priority": "P1",
+      "family": "RESPONSIVE_EDITABILITY_PARITY",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "requirement": "Editability must survive responsive and accessibility states; narrow/zoom modes may reorganize controls but may not silently turn a view read-only.",
+      "acceptance": "At 1440, ~1024, 840/720 stress and actual 200% browser zoom, essential edit/inspect/undo/context operations remain reachable for all four views, with same-owner responsive panels and no body-level horizontal overflow."
+    },
+    {
+      "requirement_id": "OWNER-VIS-UX-009",
+      "priority": "P0",
+      "family": "TOOL_ORGANIZATION",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "owner_note": "Owner requires highly organized, intelligently grouped toolbars/context actions with progressive disclosure; one professional Notes system with fast node-anchored editing and same-instance Sticky Note escalation; a professional Visualize editor with multi-route accessibility and familiar mouse/keyboard interaction; blank left-drag marquee, restored pan navigation through alternate gestures, wheel scroll/pan and Ctrl/Cmd+wheel zoom; strong CENTER/work focus; and extreme customization so guides, legends, panels, toolbars and small chrome can be moved/hidden/shown/configured rather than forced permanently visible.",
+      "requirement": "All Visualize tools/actions must use a coherent, low-clutter, progressively disclosed command architecture rather than being scattered across permanent toolbars and panels.",
+      "required_patterns": [
+        "primary persistent command strip",
+        "selection/context toolbar",
+        "right-click contextual action hub",
+        "deep property editing in ContextInspector",
+        "searchable Command Palette",
+        "responsive overflow"
+      ],
+      "prohibited": [
+        "flat all-actions toolbar",
+        "duplicated command homes with separate state owners",
+        "permanent guide/tool islands that crowd CENTER"
+      ],
+      "acceptance": "At 1440 and ~1024, primary commands remain immediately reachable without horizontal tool-scroll; secondary/advanced commands are grouped by intent; right-click, contextual toolbar, persistent toolbar, inspector and command palette route to the same semantic command owner; no duplicated side-effect implementations."
+    },
+    {
+      "requirement_id": "OWNER-VIS-UX-010",
+      "priority": "P1",
+      "family": "ADVANCED_TOOL_GROUPING",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "owner_note": "Owner requires highly organized, intelligently grouped toolbars/context actions with progressive disclosure; one professional Notes system with fast node-anchored editing and same-instance Sticky Note escalation; a professional Visualize editor with multi-route accessibility and familiar mouse/keyboard interaction; blank left-drag marquee, restored pan navigation through alternate gestures, wheel scroll/pan and Ctrl/Cmd+wheel zoom; strong CENTER/work focus; and extreme customization so guides, legends, panels, toolbars and small chrome can be moved/hidden/shown/configured rather than forced permanently visible.",
+      "requirement": "Tool families with multiple variants/options must use the interaction pattern best suited to that family, not one generic list/dropdown for everything.",
+      "examples": {
+        "navigation_modes": "segmented Select/Hand/Move where admitted",
+        "align_distribute": "compact geometry popover/grid",
+        "shape_relation_types": "last-used tool + flyout",
+        "dangerous_actions": "separated submenu/section with impact truth",
+        "style_options": "swatch/slider/preset popover"
+      },
+      "acceptance": "Writer documents each family and chooses among split-button, segmented mode group, remembered-last-tool flyout, popover grid, nested submenu, swatch/slider popover, or overflow collection; each group has keyboard navigation, accessible naming, state indication and responsive fallback."
+    },
+    {
+      "requirement_id": "OWNER-VIS-UX-011",
+      "priority": "P0",
+      "family": "CONTEXT_ACTION_ARCHITECTURE",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "owner_note": "Owner requires highly organized, intelligently grouped toolbars/context actions with progressive disclosure; one professional Notes system with fast node-anchored editing and same-instance Sticky Note escalation; a professional Visualize editor with multi-route accessibility and familiar mouse/keyboard interaction; blank left-drag marquee, restored pan navigation through alternate gestures, wheel scroll/pan and Ctrl/Cmd+wheel zoom; strong CENTER/work focus; and extreme customization so guides, legends, panels, toolbars and small chrome can be moved/hidden/shown/configured rather than forced permanently visible.",
+      "requirement": "Right-click on a node/item/edge/stage/representation opens a context-sensitive action hub whose content is capability-driven by view + object + selection, not a generic duplicated menu.",
+      "scope": [
+        "Tree",
+        "Path",
+        "Graph",
+        "Canvas"
+      ],
+      "acceptance": "Context menu exposes high-value object/selection actions, grouped with progressive disclosure; disabled/unavailable actions explain why; keyboard Shift+F10/Menu key reaches the same command definitions; menu closes via command, explicit close where large, outside click and Escape with deterministic focus return."
+    },
+    {
+      "requirement_id": "OWNER-VIS-UX-012",
+      "priority": "P0",
+      "family": "NOTES_HYBRID_SYSTEM",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "owner_note": "Owner requires highly organized, intelligently grouped toolbars/context actions with progressive disclosure; one professional Notes system with fast node-anchored editing and same-instance Sticky Note escalation; a professional Visualize editor with multi-route accessibility and familiar mouse/keyboard interaction; blank left-drag marquee, restored pan navigation through alternate gestures, wheel scroll/pan and Ctrl/Cmd+wheel zoom; strong CENTER/work focus; and extreme customization so guides, legends, panels, toolbars and small chrome can be moved/hidden/shown/configured rather than forced permanently visible.",
+      "requirement": "Visualize must have one professional Notes system that supports immediate object-anchored editing and deep Sticky Note editing without separate note engines or duplicate note instances.",
+      "presentation_modes": [
+        "badge-only",
+        "anchored compact editor",
+        "sticky floating window",
+        "Context Notes lens"
+      ],
+      "customization": [
+        "show/hide note badges",
+        "show/hide anchored notes",
+        "sticky visibility",
+        "per-view note display preference"
+      ],
+      "acceptance": "note.new on an object creates/opens one NoteWorkingState bound read-only to source identity; quick invocation opens a compact anchored editor near the object; Open as Sticky/Pin promotes the SAME instance to movable/resizable StickyNoteWindow; Context Notes lens lists/opens the same instances; reopening never duplicates; Undo/recovery and Bidi/editor/clipboard semantics remain shared; durable persistence remains AUTHORITY_GATED."
+    },
+    {
+      "requirement_id": "OWNER-VIS-UX-013",
+      "priority": "P0",
+      "family": "PROFESSIONAL_VISUAL_EDITOR",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "owner_note": "Owner requires highly organized, intelligently grouped toolbars/context actions with progressive disclosure; one professional Notes system with fast node-anchored editing and same-instance Sticky Note escalation; a professional Visualize editor with multi-route accessibility and familiar mouse/keyboard interaction; blank left-drag marquee, restored pan navigation through alternate gestures, wheel scroll/pan and Ctrl/Cmd+wheel zoom; strong CENTER/work focus; and extreme customization so guides, legends, panels, toolbars and small chrome can be moved/hidden/shown/configured rather than forced permanently visible.",
+      "requirement": "Visualize editing quality must meet the same professional interaction standard as the Library editor: direct editability, low friction, reversible operations, precise selection, alignment/arrangement, predictable menus, rich shortcuts, and no toy/demo feel.",
+      "extends": "OWNER-VIS-EDIT-001..008",
+      "acceptance": "Every admitted editable property/action has direct pointer and keyboard-equivalent access or an equally efficient alternative; selection/primary/focus are distinct; align/distribute/layout/nudge/lock/copy/note/edit-label/duplicate/remove/history behave through one transaction/command model; no silent no-op; focus/caret/object identity survives rerender where semantically applicable."
+    },
+    {
+      "requirement_id": "OWNER-VIS-UX-014",
+      "priority": "P0",
+      "family": "POINTER_NAVIGATION_PROFILE",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "owner_note": "Owner requires highly organized, intelligently grouped toolbars/context actions with progressive disclosure; one professional Notes system with fast node-anchored editing and same-instance Sticky Note escalation; a professional Visualize editor with multi-route accessibility and familiar mouse/keyboard interaction; blank left-drag marquee, restored pan navigation through alternate gestures, wheel scroll/pan and Ctrl/Cmd+wheel zoom; strong CENTER/work focus; and extreme customization so guides, legends, panels, toolbars and small chrome can be moved/hidden/shown/configured rather than forced permanently visible.",
+      "requirement": "Provide a familiar, conflict-safe default mouse navigation grammar while allowing remapping/custom profiles.",
+      "external_ergonomic_precedent": [
+        "Figma: Space+drag pan; Ctrl/Cmd+wheel zoom",
+        "Miro: selection-field drag; right/Space/middle-assisted pan options; configurable mouse/trackpad navigation",
+        "FigJam: Ctrl/Cmd+wheel zoom and configurable wheel zoom"
+      ],
+      "acceptance": "Default profile: blank LEFT drag in Select mode = marquee; object LEFT drag = move/admitted drag; RIGHT click = context actions; Space+LEFT drag = temporary pan; middle-button drag = pan when supported; wheel = vertical pan/scroll; Shift+wheel = horizontal pan; Ctrl/Cmd+wheel = pointer-centered zoom; fit/zoom remain keyboard accessible. Ctrl/Cmd+LEFT drag pan may be offered as an OPTIONAL remap, not default, because Ctrl/Cmd+click commonly participates in multi-selection."
+    },
+    {
+      "requirement_id": "OWNER-VIS-UX-015",
+      "priority": "P0",
+      "family": "KEYBOARD_ACCESSIBILITY_REDUNDANCY",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "owner_note": "Owner requires highly organized, intelligently grouped toolbars/context actions with progressive disclosure; one professional Notes system with fast node-anchored editing and same-instance Sticky Note escalation; a professional Visualize editor with multi-route accessibility and familiar mouse/keyboard interaction; blank left-drag marquee, restored pan navigation through alternate gestures, wheel scroll/pan and Ctrl/Cmd+wheel zoom; strong CENTER/work focus; and extreme customization so guides, legends, panels, toolbars and small chrome can be moved/hidden/shown/configured rather than forced permanently visible.",
+      "requirement": "Essential Visualize actions must be accessible through multiple coherent routes without creating multiple state owners.",
+      "accessibility_invariant": "Multiple entry routes converge on one semantic command owner.",
+      "acceptance": "Critical operations have keyboard routes and are discoverable in shortcut help/Command Palette; object traversal/select, multi-select, context menu, edit, nudge/reorder, pan, zoom, fit, focus/right inspector, Notes, Undo/Redo and transient close/return are keyboard-operable. Pointer-only essential steps are prohibited. Shortcut conflicts are detected and surfaced in Settings."
+    },
+    {
+      "requirement_id": "OWNER-VIS-UX-016",
+      "priority": "P0",
+      "family": "EXTREME_CUSTOMIZATION",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "owner_note": "Owner requires highly organized, intelligently grouped toolbars/context actions with progressive disclosure; one professional Notes system with fast node-anchored editing and same-instance Sticky Note escalation; a professional Visualize editor with multi-route accessibility and familiar mouse/keyboard interaction; blank left-drag marquee, restored pan navigation through alternate gestures, wheel scroll/pan and Ctrl/Cmd+wheel zoom; strong CENTER/work focus; and extreme customization so guides, legends, panels, toolbars and small chrome can be moved/hidden/shown/configured rather than forced permanently visible.",
+      "requirement": "Workspace chrome should be user-customizable at very fine granularity: visibility, docking/position, order, density and behavior should be preferences wherever technically/semantically safe.",
+      "invariant": "Customization may hide/reposition presentation chrome but must not eliminate the last accessible route to Settings/Reset/Command Palette, required error/status/safety/authority disclosure, or mandatory accessibility recovery.",
+      "acceptance": "User can show/hide or auto-show applicable guides, legends, minimap, grid/ruler, state strip, selection frame, note badges, tool groups, TOP_BANNER, LEFT/RIGHT/BOTTOM, contextual helpers and nonessential chrome; applicable toolbars can be reordered, pinned/unpinned and docked to allowed workspace zones or floated; preferred state persists and responsive effective overrides restore it later."
+    },
+    {
+      "requirement_id": "OWNER-VIS-UX-017",
+      "priority": "P1",
+      "family": "CUSTOMIZATION_PROFILES",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "owner_note": "Owner requires highly organized, intelligently grouped toolbars/context actions with progressive disclosure; one professional Notes system with fast node-anchored editing and same-instance Sticky Note escalation; a professional Visualize editor with multi-route accessibility and familiar mouse/keyboard interaction; blank left-drag marquee, restored pan navigation through alternate gestures, wheel scroll/pan and Ctrl/Cmd+wheel zoom; strong CENTER/work focus; and extreme customization so guides, legends, panels, toolbars and small chrome can be moved/hidden/shown/configured rather than forced permanently visible.",
+      "requirement": "Provide reusable workspace customization profiles plus per-view overrides instead of forcing one fixed layout.",
+      "persistence": "PreferenceStore versioned snapshot; production backend remains a replaceable StorageAdapter seam.",
+      "acceptance": "At minimum Default, Focus, Editing, Exploration, Presentation and Custom profiles exist as presentation-preference bundles; user may choose global shared preferences plus Tree/Path/Graph/Canvas overrides; switching profile is reversible and preserves working/canonical data."
+    },
+    {
+      "requirement_id": "OWNER-VIS-UX-018",
+      "priority": "P1",
+      "family": "INPUT_BINDING_CUSTOMIZATION",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "owner_note": "Owner requires highly organized, intelligently grouped toolbars/context actions with progressive disclosure; one professional Notes system with fast node-anchored editing and same-instance Sticky Note escalation; a professional Visualize editor with multi-route accessibility and familiar mouse/keyboard interaction; blank left-drag marquee, restored pan navigation through alternate gestures, wheel scroll/pan and Ctrl/Cmd+wheel zoom; strong CENTER/work focus; and extreme customization so guides, legends, panels, toolbars and small chrome can be moved/hidden/shown/configured rather than forced permanently visible.",
+      "requirement": "Mouse/keyboard bindings for Visualize navigation and tools should be user-configurable with safe defaults and conflict detection.",
+      "default_profile": "Professional CEP Visualize default based on familiar editor/whiteboard conventions.",
+      "acceptance": "Settings exposes binding profile, searchable command bindings, remap/reset, conflict warnings and import/export through PreferenceStore; browser/OS-reserved combinations are identified truthfully; remapping changes entry routes only, not command semantics/state owners."
+    },
+    {
+      "requirement_id": "OWNER-VIS-UX-019",
+      "priority": "P0",
+      "family": "CENTER_WORK_FOCUS",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "owner_note": "Owner requires highly organized, intelligently grouped toolbars/context actions with progressive disclosure; one professional Notes system with fast node-anchored editing and same-instance Sticky Note escalation; a professional Visualize editor with multi-route accessibility and familiar mouse/keyboard interaction; blank left-drag marquee, restored pan navigation through alternate gestures, wheel scroll/pan and Ctrl/Cmd+wheel zoom; strong CENTER/work focus; and extreme customization so guides, legends, panels, toolbars and small chrome can be moved/hidden/shown/configured rather than forced permanently visible.",
+      "requirement": "The surface must remain unmistakably centered on the actual visual work: CENTER dominates; tools support the work rather than visually compete with it.",
+      "quality": "No scattered-tool demo feel; no mandatory permanent legend that competes with the work.",
+      "acceptance": "At all target widths, overlays/menus/toolbars avoid permanently consuming excessive CENTER space; contextual tools appear near relevance and disappear/compact when idle; Focus Mode can reduce nonessential chrome losslessly; the active view, selection and current editing intention remain immediately understandable."
+    },
+    {
+      "requirement_id": "OWNER-VIS-UX-020",
+      "priority": "P0",
+      "family": "GUIDES_LEGENDS_OPTIONAL",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "owner_note": "Owner requires highly organized, intelligently grouped toolbars/context actions with progressive disclosure; one professional Notes system with fast node-anchored editing and same-instance Sticky Note escalation; a professional Visualize editor with multi-route accessibility and familiar mouse/keyboard interaction; blank left-drag marquee, restored pan navigation through alternate gestures, wheel scroll/pan and Ctrl/Cmd+wheel zoom; strong CENTER/work focus; and extreme customization so guides, legends, panels, toolbars and small chrome can be moved/hidden/shown/configured rather than forced permanently visible.",
+      "requirement": "Reference-derived guides/legends/relationship keys/rulers must never become permanently mandatory merely because they appear in a reference image.",
+      "reference_law": "Reference image provides intent/grammar only; it cannot override customization/functionality/accessibility requirements.",
+      "acceptance": "Every nonessential guide/legend/ruler has SHOW/HIDE/AUTO (or equivalent) preference; state persists; keyboard/Settings route exists; hiding it does not hide the underlying semantic meaning from accessibility—object/edge labels and inspector semantics remain available."
+    },
+    {
+      "requirement_id": "OWNER-VIS-UX-021",
+      "priority": "P1",
+      "family": "CUSTOMIZATION_RECOVERY",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "owner_note": "Owner requires highly organized, intelligently grouped toolbars/context actions with progressive disclosure; one professional Notes system with fast node-anchored editing and same-instance Sticky Note escalation; a professional Visualize editor with multi-route accessibility and familiar mouse/keyboard interaction; blank left-drag marquee, restored pan navigation through alternate gestures, wheel scroll/pan and Ctrl/Cmd+wheel zoom; strong CENTER/work focus; and extreme customization so guides, legends, panels, toolbars and small chrome can be moved/hidden/shown/configured rather than forced permanently visible.",
+      "requirement": "Extreme customization must include deterministic recovery so experimentation cannot strand the user.",
+      "recovery": [
+        "command palette route",
+        "settings route",
+        "keyboard-accessible reset route"
+      ],
+      "acceptance": "Always provide Reset current view, Reset workspace layout, Reset input bindings, and Restore default visibility; import/export is versioned; unsupported/old preference keys migrate or fall back safely; responsive temporary overrides never overwrite preferred customization."
+    },
+    {
+      "requirement_id": "OWNER-VIS-UX-022",
+      "priority": "P1",
+      "family": "TOOLBAR_USER_CUSTOMIZATION",
+      "source": "OWNER_DIRECT_CURRENT_CONVERSATION",
+      "owner_note": "Owner requires highly organized, intelligently grouped toolbars/context actions with progressive disclosure; one professional Notes system with fast node-anchored editing and same-instance Sticky Note escalation; a professional Visualize editor with multi-route accessibility and familiar mouse/keyboard interaction; blank left-drag marquee, restored pan navigation through alternate gestures, wheel scroll/pan and Ctrl/Cmd+wheel zoom; strong CENTER/work focus; and extreme customization so guides, legends, panels, toolbars and small chrome can be moved/hidden/shown/configured rather than forced permanently visible.",
+      "requirement": "Toolbars themselves are customizable presentation surfaces rather than fixed immutable chrome.",
+      "external_ergonomic_precedent": [
+        "Miro allows reorder/add/remove of creation toolbar tools",
+        "Figma groups related toolbar tools and exposes actions/search for broader command access"
+      ],
+      "acceptance": "Eligible tools can be reordered, pinned/unpinned, grouped, hidden, restored and assigned to allowed toolbar zones; frequently used last-tool state may be remembered; responsive layout collapses lower-priority groups into overflow without losing commands; personalization is per-user preference, not canonical workspace data."
+    }
+  ],
+  "count": 22,
+  "source_note_preserved_v1_3": "Owner requires highly organized, intelligently grouped toolbars/context actions with progressive disclosure; one professional Notes system with fast node-anchored editing and same-instance Sticky Note escalation; a professional Visualize editor with multi-route accessibility and familiar mouse/keyboard interaction; blank left-drag marquee, restored pan navigation through alternate gestures, wheel scroll/pan and Ctrl/Cmd+wheel zoom; strong CENTER/work focus; and extreme customization so guides, legends, panels, toolbars and small chrome can be moved/hidden/shown/configured rather than forced permanently visible."
+}

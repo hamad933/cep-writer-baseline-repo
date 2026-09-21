@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "classification": "R6_SCOPE_LOCK_PROOF",
+  "status": "PASS",
+  "candidateOnly": true,
+  "governanceMutation": false,
+  "acceptedSuccessorMutation": false,
+  "balanced6Mutation": false,
+  "windowsPlatformSourceMutations": [],
+  "centralWiringChangedPaths": [
+    "stack/native-typescript/adapters/audit.ts",
+    "stack/native-typescript/adapters/backup-runtime.ts",
+    "stack/native-typescript/adapters/releases/domain-adapter.ts",
+    "stack/native-typescript/adapters/rq/domain.ts",
+    "stack/native-typescript/adapters/validation.ts",
+    "stack/native-typescript/main.ts",
+    "stack/native-typescript/surfaces/audit/index.ts",
+    "stack/native-typescript/surfaces/backup/index.ts",
+    "stack/native-typescript/surfaces/composition/w01-w02-rescue.ts",
+    "stack/native-typescript/surfaces/composition/w05-rescue.ts",
+    "stack/native-typescript/surfaces/m0-controller-composition.ts",
+    "stack/native-typescript/surfaces/releases/composition.ts",
+    "stack/native-typescript/surfaces/validation/index.ts"
+  ],
+  "canonicalOwnersPreserved": {
+    "AnalyticalCompare": "one central owner supplied from main.ts into RQ/W03/W04/W05 consumers",
+    "TimelineReplay": "one central owner supplied into Results",
+    "Structured": "shared family preserved; duplicate-owner negative fixture PASS in npm check",
+    "Spatial": "shared family preserved; central-change reuse browser flow PASS",
+    "providerPersistence": "W05 provider semantics remain adapters/runtime providers; no UI-direct persistence owner introduced"
+  }
+}

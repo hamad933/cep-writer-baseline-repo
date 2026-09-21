@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "kind": "W6_CONTROLLER_REGISTRY_RECONCILIATION",
+  "status": "PASS",
+  "sourceCanonicalTreeSha256": "fcca03a3ef529e5eda8b3ddddcc1f093ad7054336430d3c08224fac55328c753",
+  "canonicalSourceFiles": 113,
+  "baselineId": "CEP-FR-E16-W6-NOTES-FAMILY-COMPLETION",
+  "runtimeStatus": "CONTROLLER_ACCEPTED_WAVE6_SUCCESSOR_CONTENT",
+  "stackStatus": "STACK_NOT_FROZEN",
+  "waveStatuses": {
+    "wave3Status": "CONTROLLER_ACCEPTED_AND_CLOSED",
+    "wave4Status": "CONTROLLER_ACCEPTED_AND_CLOSED",
+    "wave5Status": "CONTROLLER_ACCEPTED_AND_CLOSED",
+    "wave6Status": "CONTROLLER_ACCEPTED_AND_CLOSED"
+  },
+  "acceptedNotesOwners": [
+    "StickyNoteWindowOwner",
+    "NoteBindingAdapter",
+    "StructuredNoteContentAdapter"
+  ],
+  "notesFamily": {
+    "id": "Notes",
+    "engine": "StickyNoteWindowOwner + NoteBindingAdapter + StructuredNoteContentAdapter over accepted Structured engine",
+    "requiresAdapter": "NoteBindingAdapter domain input + StructuredDocumentDomainAdapter through StructuredNoteContentAdapter",
+    "proofConsumers": [
+      "library-sticky-note",
+      "structured-note",
+      "learn-bound-note",
+      "spatial-bound-note"
+    ],
+    "maturity": "CONTROLLER_ACCEPTED_M6",
+    "ownershipBoundary": "window/binding/content remain separate canonical owners; composition is non-semantic"
+  },
+  "structuredFamily": {
+    "id": "Structured",
+    "engine": "StructuredSurfaceHost + StructuredNavigationDescriptorOwner over accepted Tree/Mutation/Transaction/Availability/Selection/Clipboard/Input/Actions/Direction/Rich/Drag owners",
+    "requiresAdapter": "StructuredDocumentDomainAdapter",
+    "proofConsumers": [
+      "library",
+      "learn",
+      "structured-note-content"
+    ],
+    "nonLibraryIsolation": "Learn uses donor-free WorkspaceFoundationHost and has no Library state/search/KU dependency",
+    "wave5HostPending": false,
+    "navigationDescriptorOwner": "StructuredNavigationDescriptorOwner",
+    "noteContentCompatibility": "FINAL_STRUCTURED_NOTE_CONTENT_ADAPTER_PROVEN_SAME_ENGINE"
+  },
+  "controllerConvergence": {
+    "wave": "WAVE_6",
+    "order": [
+      "StickyNoteWindowOwner",
+      "NoteBindingAdapter",
+      "StructuredNoteContentAdapter",
+      "Library note runtime composition",
+      "registry/generator reconciliation",
+      "donor adjudication"
+    ],
+    "compositionOwner": "Controller final convergence",
+    "semanticOwner": false,
+    "notesFamily": "CONTROLLER_ACCEPTED_M6",
+    "operationalMaturity": "BOUNDED_BELOW_M6_SECOND_REAL_PROVIDER_NOT_PROVEN",
+    "structuredNoteContent": "SAME_ACCEPTED_STRUCTURED_ENGINE_NO_SECOND_EDITOR",
+    "noteWindowAlwaysOnTop": "UNAVAILABLE_UNLESS_EXPLICIT_PLATFORM_CAPABILITY_BRIDGE",
+    "notePersistence": "NO_DURABLE_PERSISTENCE_OWNER_CLAIM",
+    "donorPhysicalDeletionPerformed": false,
+    "browserLegacy": "6/6 PASS",
+    "browserWave3Integration": "5/5 PASS",
+    "browserWave4Integration": "5/5 PASS",
+    "browserWave5LaneC": "9 steps / 26 executable cases PASS",
+    "browserWave6IntegratedNotes": "8/8 PASS",
+    "model": "210/210 PASS"
+  },
+  "generatorIdempotence": [
+    {
+      "id": "generator_idempotence:build-writer-contracts",
+      "status": "PASS",
+      "detail": {
+        "firstReturn": 0,
+        "secondReturn": 0,
+        "changedOnSecondRun": [],
+        "firstOutputTail": "{\n  \"status\": \"PASS\",\n  \"baselineId\": \"CEP-FR-E15-W5-STRUCTURED-FAMILY-COMPLETION\",\n  \"wave3Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave4Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave5Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave5StructuredOwners\": [\n    \"StructuredSurfaceHost\",\n    \"StructuredNavigationDescriptorOwner\"\n  ],\n  \"wave5Pending\": false,\n  \"noteContentCompatibility\": \"CONTENT_ONLY_PROVEN_NO_STICKY_NOTE_WINDOW_OWNER\",\n  \"donorRetirement\": {\n    \"retireReady\": [\n      \"D12\"\n    ],\n    \"keep\": 45,\n    \"physicalDeletion\": false\n  },\n  \"operationalSecondRealProvider\": false\n}\n{\n  \"status\": \"PASS\",\n  \"baselineId\": \"CEP-FR-E16-W6-NOTES-FAMILY-COMPLETION\",\n  \"wave3Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave4Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave5Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave6Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave6NotesOwners\": [\n    \"StickyNoteWindowOwner\",\n    \"NoteBindingAdapter\",\n    \"StructuredNoteContentAdapter\"\n  ],\n  \"stackStatus\": \"STACK_NOT_FROZEN\",\n  \"operationalSecondRealProvider\": false,\n  \"surfaceBuildAuthorizedByThisReconciliation\": false\n}\n",
+        "secondOutputTail": "{\n  \"status\": \"PASS\",\n  \"baselineId\": \"CEP-FR-E15-W5-STRUCTURED-FAMILY-COMPLETION\",\n  \"wave3Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave4Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave5Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave5StructuredOwners\": [\n    \"StructuredSurfaceHost\",\n    \"StructuredNavigationDescriptorOwner\"\n  ],\n  \"wave5Pending\": false,\n  \"noteContentCompatibility\": \"CONTENT_ONLY_PROVEN_NO_STICKY_NOTE_WINDOW_OWNER\",\n  \"donorRetirement\": {\n    \"retireReady\": [\n      \"D12\"\n    ],\n    \"keep\": 45,\n    \"physicalDeletion\": false\n  },\n  \"operationalSecondRealProvider\": false\n}\n{\n  \"status\": \"PASS\",\n  \"baselineId\": \"CEP-FR-E16-W6-NOTES-FAMILY-COMPLETION\",\n  \"wave3Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave4Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave5Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave6Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave6NotesOwners\": [\n    \"StickyNoteWindowOwner\",\n    \"NoteBindingAdapter\",\n    \"StructuredNoteContentAdapter\"\n  ],\n  \"stackStatus\": \"STACK_NOT_FROZEN\",\n  \"operationalSecondRealProvider\": false,\n  \"surfaceBuildAuthorizedByThisReconciliation\": false\n}\n"
+      }
+    },
+    {
+      "id": "generator_idempotence:compile-contracts",
+      "status": "PASS",
+      "detail": {
+        "firstReturn": 0,
+        "secondReturn": 0,
+        "changedOnSecondRun": [],
+        "firstOutputTail": "d\": \"CEP-FR-E15-W5-STRUCTURED-FAMILY-COMPLETION\",\n  \"wave3Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave4Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave5Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave5StructuredOwners\": [\n    \"StructuredSurfaceHost\",\n    \"StructuredNavigationDescriptorOwner\"\n  ],\n  \"wave5Pending\": false,\n  \"noteContentCompatibility\": \"CONTENT_ONLY_PROVEN_NO_STICKY_NOTE_WINDOW_OWNER\",\n  \"donorRetirement\": {\n    \"retireReady\": [\n      \"D12\"\n    ],\n    \"keep\": 45,\n    \"physicalDeletion\": false\n  },\n  \"operationalSecondRealProvider\": false\n}\n{\n  \"status\": \"PASS\",\n  \"baselineId\": \"CEP-FR-E16-W6-NOTES-FAMILY-COMPLETION\",\n  \"wave3Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave4Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave5Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave6Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave6NotesOwners\": [\n    \"StickyNoteWindowOwner\",\n    \"NoteBindingAdapter\",\n    \"StructuredNoteContentAdapter\"\n  ],\n  \"stackStatus\": \"STACK_NOT_FROZEN\",\n  \"operationalSecondRealProvider\": false,\n  \"surfaceBuildAuthorizedByThisReconciliation\": false\n}\n{\"surfaces\": 23, \"matrix_rows\": 1403, \"functions\": 330, \"intake\": 184, \"requirements\": 187}\n",
+        "secondOutputTail": "d\": \"CEP-FR-E15-W5-STRUCTURED-FAMILY-COMPLETION\",\n  \"wave3Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave4Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave5Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave5StructuredOwners\": [\n    \"StructuredSurfaceHost\",\n    \"StructuredNavigationDescriptorOwner\"\n  ],\n  \"wave5Pending\": false,\n  \"noteContentCompatibility\": \"CONTENT_ONLY_PROVEN_NO_STICKY_NOTE_WINDOW_OWNER\",\n  \"donorRetirement\": {\n    \"retireReady\": [\n      \"D12\"\n    ],\n    \"keep\": 45,\n    \"physicalDeletion\": false\n  },\n  \"operationalSecondRealProvider\": false\n}\n{\n  \"status\": \"PASS\",\n  \"baselineId\": \"CEP-FR-E16-W6-NOTES-FAMILY-COMPLETION\",\n  \"wave3Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave4Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave5Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave6Status\": \"CONTROLLER_ACCEPTED_AND_CLOSED\",\n  \"wave6NotesOwners\": [\n    \"StickyNoteWindowOwner\",\n    \"NoteBindingAdapter\",\n    \"StructuredNoteContentAdapter\"\n  ],\n  \"stackStatus\": \"STACK_NOT_FROZEN\",\n  \"operationalSecondRealProvider\": false,\n  \"surfaceBuildAuthorizedByThisReconciliation\": false\n}\n{\"surfaces\": 23, \"matrix_rows\": 1403, \"functions\": 330, \"intake\": 184, \"requirements\": 187}\n"
+      }
+    }
+  ],
+  "surfaceBuildAuthorized": false,
+  "hardCeilings": {
+    "stack": "STACK_NOT_FROZEN",
+    "operationalSessionOwner": "BOUNDED_BELOW_M6_SECOND_REAL_PROVIDER_NOT_PROVEN",
+    "epistemicStateContract": "CONTRACT_ONLY_NO_GENERIC_ASYNC_ENGINE",
+    "notePersistence": "NO_DURABLE_PERSISTENCE_OWNER_CLAIM",
+    "nativeAlwaysOnTop": "UNAVAILABLE_UNLESS_EXPLICIT_PLATFORM_CAPABILITY_BRIDGE",
+    "structuredEditor": "NO_SECOND_STRUCTURED_EDITOR_ENGINE"
+  },
+  "generatorIdempotenceEvidence": "assurance/W6_CONTROLLER_GENERATOR_IDEMPOTENCE.json"
+}

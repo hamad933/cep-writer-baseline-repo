@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CEPFoundationDeviation",
+  "type": "object",
+  "required": [
+    "id",
+    "surface",
+    "mechanic",
+    "reason",
+    "inherited_behavior",
+    "specialized_behavior",
+    "tests"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "surface": {
+      "type": "string"
+    },
+    "mechanic": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "inherited_behavior": {
+      "type": "string"
+    },
+    "specialized_behavior": {
+      "type": "string"
+    },
+    "tests": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "owner_approval_required": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": true
+}

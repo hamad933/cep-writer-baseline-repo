@@ -1,0 +1,514 @@
+{
+  "schemaVersion": 1,
+  "kind": "W6_B_NOTE_BINDING_ADAPTER_EXECUTABLE_PROOF",
+  "status": "PASS",
+  "pass": 27,
+  "fail": 0,
+  "caseCount": 27,
+  "contract": {
+    "id": "NoteBindingAdapter",
+    "version": "1.0.0",
+    "owner": "NoteBindingAdapter",
+    "policyRevision": "W6-B-NOTE-BINDING-01",
+    "responsibilities": [
+      "note-to-source-binding-truth",
+      "binding-availability-provenance",
+      "fail-atomic-rebind",
+      "presentation-stable-binding-projection"
+    ],
+    "excludedOwnership": [
+      "note-content",
+      "note-document",
+      "sticky-note-window-geometry",
+      "sticky-note-window-lifecycle",
+      "source-domain-mutation",
+      "source-deletion",
+      "structured-mutation",
+      "structured-history",
+      "structured-selection",
+      "structured-clipboard",
+      "structured-input",
+      "persistence-storage",
+      "dom-focus",
+      "dom-scroll"
+    ]
+  },
+  "cases": [
+    {
+      "id": "01.structured-document-block-binding",
+      "status": "PASS",
+      "evidence": {
+        "availability": {
+          "evidence": {
+            "kind": "LIVE_FIXTURE"
+          },
+          "state": "available"
+        },
+        "domain": {
+          "kind": "library",
+          "surfaceId": "library"
+        },
+        "noteId": "note-structured-01",
+        "owner": "NoteBindingAdapter",
+        "policyRevision": "W6-B-NOTE-BINDING-01",
+        "provenance": {
+          "domainAdapterId": "LibraryNoteBindingInputAdapter",
+          "kind": "EXPLICIT_VALIDATED_BINDING"
+        },
+        "revisions": {
+          "contextRevision": "ctx-3",
+          "documentRevision": "rev-12"
+        },
+        "route": "PERSONAL:CEP/W06/Library",
+        "source": {
+          "blockId": "blk-d05-p1",
+          "documentId": "KU-D05-0021",
+          "sourceRange": {
+            "end": 12,
+            "kind": "text",
+            "quote": "subject_id ↔ object_id",
+            "start": 0
+          }
+        },
+        "sourceLabel": "API Object-Level Authorization",
+        "sourceMetadata": {
+          "classification": "LOCAL_FIXTURE",
+          "domainKind": "library",
+          "surface": "library"
+        }
+      }
+    },
+    {
+      "id": "02.learn-document-object-binding",
+      "status": "PASS",
+      "evidence": {
+        "availability": {
+          "evidence": {
+            "kind": "LEARN_DOCUMENT_AND_ACTIVITY"
+          },
+          "state": "available"
+        },
+        "domain": {
+          "kind": "learn",
+          "surfaceId": "learn"
+        },
+        "noteId": "note-learn-01",
+        "owner": "NoteBindingAdapter",
+        "policyRevision": "W6-B-NOTE-BINDING-01",
+        "provenance": {
+          "domainAdapterId": "LearnNoteBindingInputAdapter",
+          "kind": "EXPLICIT_VALIDATED_BINDING"
+        },
+        "route": "PERSONAL:CEP/learn",
+        "source": {
+          "blockId": "learn-p1",
+          "documentId": "learn-document-trust-boundaries",
+          "objectId": "activity-identity-01"
+        }
+      }
+    },
+    {
+      "id": "03.non-structured-spatial-shape",
+      "status": "PASS",
+      "evidence": {
+        "availability": {
+          "evidence": {
+            "kind": "SPATIAL_ENTITY_PRESENT"
+          },
+          "state": "available"
+        },
+        "domain": {
+          "kind": "spatial",
+          "surfaceId": "visualize"
+        },
+        "noteId": "note-spatial-01",
+        "owner": "NoteBindingAdapter",
+        "policyRevision": "W6-B-NOTE-BINDING-01",
+        "provenance": {
+          "domainAdapterId": "SpatialNoteBindingInputAdapter",
+          "kind": "EXPLICIT_VALIDATED_BINDING"
+        },
+        "route": "PERSONAL:CEP/visualize",
+        "source": {
+          "objectId": "APP-WEB-01"
+        },
+        "sourceMetadata": {
+          "domainKind": "spatial",
+          "entityType": "Application",
+          "surfaceId": "visualize"
+        }
+      }
+    },
+    {
+      "id": "04.reopen-binding-stability",
+      "status": "PASS",
+      "evidence": {
+        "before": "{\"availability\":{\"evidence\":{\"kind\":\"LIVE_FIXTURE\"},\"state\":\"available\"},\"domain\":{\"kind\":\"library\",\"surfaceId\":\"library\"},\"noteId\":\"note-structured-01\",\"owner\":\"NoteBindingAdapter\",\"policyRevision\":\"W6-B-NOTE-BINDING-01\",\"provenance\":{\"domainAdapterId\":\"LibraryNoteBindingInputAdapter\",\"kind\":\"EXPLICIT_VALIDATED_BINDING\"},\"revisions\":{\"contextRevision\":\"ctx-3\",\"documentRevision\":\"rev-12\"},\"route\":\"PERSONAL:CEP/W06/Library\",\"source\":{\"blockId\":\"blk-d05-p1\",\"documentId\":\"KU-D05-0021\",\"sourceRange\":{\"end\":12,\"kind\":\"text\",\"quote\":\"subject_id ↔ object_id\",\"start\":0}},\"sourceLabel\":\"API Object-Level Authorization\",\"sourceMetadata\":{\"classification\":\"LOCAL_FIXTURE\",\"domainKind\":\"library\",\"surface\":\"library\"}}",
+        "hidden": "{\"availability\":{\"evidence\":{\"kind\":\"LIVE_FIXTURE\"},\"state\":\"available\"},\"domain\":{\"kind\":\"library\",\"surfaceId\":\"library\"},\"noteId\":\"note-structured-01\",\"owner\":\"NoteBindingAdapter\",\"policyRevision\":\"W6-B-NOTE-BINDING-01\",\"provenance\":{\"domainAdapterId\":\"LibraryNoteBindingInputAdapter\",\"kind\":\"EXPLICIT_VALIDATED_BINDING\"},\"revisions\":{\"contextRevision\":\"ctx-3\",\"documentRevision\":\"rev-12\"},\"route\":\"PERSONAL:CEP/W06/Library\",\"source\":{\"blockId\":\"blk-d05-p1\",\"documentId\":\"KU-D05-0021\",\"sourceRange\":{\"end\":12,\"kind\":\"text\",\"quote\":\"subject_id ↔ object_id\",\"start\":0}},\"sourceLabel\":\"API Object-Level Authorization\",\"sourceMetadata\":{\"classification\":\"LOCAL_FIXTURE\",\"domainKind\":\"library\",\"surface\":\"library\"}}",
+        "reopened": "{\"availability\":{\"evidence\":{\"kind\":\"LIVE_FIXTURE\"},\"state\":\"available\"},\"domain\":{\"kind\":\"library\",\"surfaceId\":\"library\"},\"noteId\":\"note-structured-01\",\"owner\":\"NoteBindingAdapter\",\"policyRevision\":\"W6-B-NOTE-BINDING-01\",\"provenance\":{\"domainAdapterId\":\"LibraryNoteBindingInputAdapter\",\"kind\":\"EXPLICIT_VALIDATED_BINDING\"},\"revisions\":{\"contextRevision\":\"ctx-3\",\"documentRevision\":\"rev-12\"},\"route\":\"PERSONAL:CEP/W06/Library\",\"source\":{\"blockId\":\"blk-d05-p1\",\"documentId\":\"KU-D05-0021\",\"sourceRange\":{\"end\":12,\"kind\":\"text\",\"quote\":\"subject_id ↔ object_id\",\"start\":0}},\"sourceLabel\":\"API Object-Level Authorization\",\"sourceMetadata\":{\"classification\":\"LOCAL_FIXTURE\",\"domainKind\":\"library\",\"surface\":\"library\"}}"
+      }
+    },
+    {
+      "id": "05.separate-window-binding-stability",
+      "status": "PASS",
+      "evidence": {
+        "noteId": "note-structured-01",
+        "binding": {
+          "availability": {
+            "evidence": {
+              "kind": "LIVE_FIXTURE"
+            },
+            "state": "available"
+          },
+          "domain": {
+            "kind": "library",
+            "surfaceId": "library"
+          },
+          "noteId": "note-structured-01",
+          "owner": "NoteBindingAdapter",
+          "policyRevision": "W6-B-NOTE-BINDING-01",
+          "provenance": {
+            "domainAdapterId": "LibraryNoteBindingInputAdapter",
+            "kind": "EXPLICIT_VALIDATED_BINDING"
+          },
+          "revisions": {
+            "contextRevision": "ctx-3",
+            "documentRevision": "rev-12"
+          },
+          "route": "PERSONAL:CEP/W06/Library",
+          "source": {
+            "blockId": "blk-d05-p1",
+            "documentId": "KU-D05-0021",
+            "sourceRange": {
+              "end": 12,
+              "kind": "text",
+              "quote": "subject_id ↔ object_id",
+              "start": 0
+            }
+          },
+          "sourceLabel": "API Object-Level Authorization",
+          "sourceMetadata": {
+            "classification": "LOCAL_FIXTURE",
+            "domainKind": "library",
+            "surface": "library"
+          }
+        },
+        "presentation": {
+          "hostKind": "separate-window",
+          "presentationId": "note-popout",
+          "visibility": "visible",
+          "windowInstanceId": "external-window-77"
+        },
+        "bindingOwner": "NoteBindingAdapter",
+        "bindingPolicyRevision": "W6-B-NOTE-BINDING-01",
+        "presentationSemanticOwnership": "NONE"
+      }
+    },
+    {
+      "id": "06.presentation-id-cannot-be-source",
+      "status": "PASS",
+      "evidence": {
+        "message": "PRESENTATION_IDENTITY_CANNOT_BECOME_SOURCE_IDENTITY:documentId",
+        "bindingUnchanged": true
+      }
+    },
+    {
+      "id": "07.malformed-note-id-rejects",
+      "status": "PASS",
+      "evidence": "MALFORMED_BINDING_IDENTITY_TYPE:noteId"
+    },
+    {
+      "id": "08.note-id-mismatch-rejects",
+      "status": "PASS",
+      "evidence": "NOTE_ID_MISMATCH:note-b!=note-a"
+    },
+    {
+      "id": "09.malformed-document-object-block-types-reject",
+      "status": "PASS",
+      "evidence": [
+        "MALFORMED_BINDING_IDENTITY_TYPE:source.documentId",
+        "MALFORMED_BINDING_IDENTITY_TYPE:source.objectId",
+        "MALFORMED_BINDING_IDENTITY_TYPE:source.blockId"
+      ]
+    },
+    {
+      "id": "10.contradictory-document-source-ids-reject",
+      "status": "PASS",
+      "evidence": "CONTRADICTORY_SOURCE_IDENTITY:documentId"
+    },
+    {
+      "id": "11.contradictory-domain-surface-metadata-reject",
+      "status": "PASS",
+      "evidence": [
+        "CONTRADICTORY_DOMAIN_METADATA:sourceMetadata.domainKind",
+        "CONTRADICTORY_SURFACE_METADATA:sourceMetadata.surface",
+        "CONTRADICTORY_SURFACE_METADATA:sourceMetadata.surfaceId"
+      ]
+    },
+    {
+      "id": "12.stale-unresolved-status-no-deletion",
+      "status": "PASS",
+      "evidence": {
+        "stale": {
+          "evidence": {
+            "resolver": "fixture"
+          },
+          "reason": "source-view-unavailable",
+          "state": "stale"
+        },
+        "unresolved": {
+          "reason": "source-not-resolved",
+          "state": "unresolved"
+        },
+        "externalStateUnchanged": true
+      }
+    },
+    {
+      "id": "13.stale-to-resolved-explicit-validation",
+      "status": "PASS",
+      "evidence": {
+        "rejection": "EXPLICIT_SOURCE_REVALIDATION_REQUIRED",
+        "resolved": {
+          "evidence": {
+            "resolver": "back",
+            "validated": true
+          },
+          "state": "available"
+        }
+      }
+    },
+    {
+      "id": "14.absent-non-applicable-fields-stay-absent",
+      "status": "PASS",
+      "evidence": {
+        "objectId": "SVC-SIEM-01"
+      }
+    },
+    {
+      "id": "15.optional-source-metadata-only-when-supplied",
+      "status": "PASS",
+      "evidence": {
+        "absent": [
+          "availability",
+          "domain",
+          "noteId",
+          "owner",
+          "policyRevision",
+          "provenance",
+          "route",
+          "source"
+        ],
+        "supplied": {
+          "a": "two",
+          "z": 1
+        }
+      }
+    },
+    {
+      "id": "16.no-source-domain-mutation-bind-rebind-status",
+      "status": "PASS",
+      "evidence": {
+        "sourceUnchanged": true
+      }
+    },
+    {
+      "id": "17.failed-rebind-is-atomic",
+      "status": "PASS",
+      "evidence": {
+        "message": "MALFORMED_BINDING_IDENTITY_TYPE:source.documentId",
+        "exactPriorRetained": true
+      }
+    },
+    {
+      "id": "18.fake-same-name-owner-and-adapter-rejected",
+      "status": "PASS",
+      "evidence": {
+        "ownerRejected": "NON_CANONICAL_NOTE_BINDING_OWNER",
+        "adapterRejected": "NON_CANONICAL_DOMAIN_BINDING_ADAPTER"
+      }
+    },
+    {
+      "id": "19.no-content-window-persistence-ownership",
+      "status": "PASS",
+      "evidence": {
+        "responsibilities": [
+          "note-to-source-binding-truth",
+          "binding-availability-provenance",
+          "fail-atomic-rebind",
+          "presentation-stable-binding-projection"
+        ],
+        "excluded": [
+          "note-content",
+          "note-document",
+          "sticky-note-window-geometry",
+          "sticky-note-window-lifecycle",
+          "source-domain-mutation",
+          "source-deletion",
+          "structured-mutation",
+          "structured-history",
+          "structured-selection",
+          "structured-clipboard",
+          "structured-input",
+          "persistence-storage",
+          "dom-focus",
+          "dom-scroll"
+        ]
+      }
+    },
+    {
+      "id": "20.deterministic-serializable-descriptors",
+      "status": "PASS",
+      "evidence": {
+        "serialized": "{\"availability\":{\"evidence\":{\"a\":1,\"z\":3},\"state\":\"available\"},\"domain\":{\"kind\":\"library\",\"surfaceId\":\"library\"},\"noteId\":\"note-det\",\"owner\":\"NoteBindingAdapter\",\"policyRevision\":\"W6-B-NOTE-BINDING-01\",\"provenance\":{\"domainAdapterId\":\"LibraryNoteBindingInputAdapter\",\"kind\":\"EXPLICIT_VALIDATED_BINDING\"},\"route\":\"PERSONAL:CEP/library\",\"source\":{\"blockId\":\"blk-d05-p1\",\"documentId\":\"KU-D05-0021\"},\"sourceMetadata\":{\"a\":{\"x\":1,\"y\":2},\"z\":9}}"
+      }
+    },
+    {
+      "id": "21.library-current-donor-fixtures-representable",
+      "status": "PASS",
+      "evidence": [
+        {
+          "noteId": "note-001",
+          "source": {
+            "blockId": "blk-d05-p1",
+            "documentId": "KU-D05-0021",
+            "sourceRange": "subject_id ↔ object_id"
+          },
+          "route": "PERSONAL:CEP/W02/Library"
+        },
+        {
+          "noteId": "note-002",
+          "source": {
+            "blockId": "blk-d03-p1",
+            "documentId": "KU-D03-0011"
+          },
+          "route": "PERSONAL:CEP/W02/Library"
+        }
+      ]
+    },
+    {
+      "id": "22.learn-current-note-route-representable",
+      "status": "PASS",
+      "evidence": {
+        "legacyShape": {
+          "documentId": "learn-document-trust-boundaries",
+          "blockId": "learn-p1",
+          "selection": null,
+          "route": "PERSONAL:CEP/learn",
+          "sourceBinding": {
+            "sources": [
+              {
+                "title": "Local learning fixture",
+                "kind": "Practice",
+                "status": "Unassessed"
+              }
+            ]
+          }
+        },
+        "canonical": {
+          "availability": {
+            "evidence": {
+              "kind": "CURRENT_STRUCTURED_LEARN_FIXTURE"
+            },
+            "state": "available"
+          },
+          "domain": {
+            "kind": "learn",
+            "surfaceId": "learn"
+          },
+          "noteId": "note-learn-current",
+          "owner": "NoteBindingAdapter",
+          "policyRevision": "W6-B-NOTE-BINDING-01",
+          "provenance": {
+            "domainAdapterId": "LearnNoteBindingInputAdapter",
+            "kind": "EXPLICIT_VALIDATED_BINDING"
+          },
+          "route": "PERSONAL:CEP/learn",
+          "source": {
+            "blockId": "learn-p1",
+            "documentId": "learn-document-trust-boundaries"
+          }
+        }
+      }
+    },
+    {
+      "id": "23.unrelated-revisions-not-forced-equal",
+      "status": "PASS",
+      "evidence": {
+        "contextRevision": "route-rev-3",
+        "documentRevision": "learn-rev-1",
+        "objectRevision": "activity-rev-17"
+      }
+    },
+    {
+      "id": "24.block-without-document-rejected",
+      "status": "PASS",
+      "evidence": "BLOCK_REQUIRES_DOCUMENT_IDENTITY"
+    },
+    {
+      "id": "25.spatial-rejects-structured-only-field",
+      "status": "PASS",
+      "evidence": "SOURCE_FIELD_NOT_APPLICABLE:documentId"
+    },
+    {
+      "id": "26.unknown-presentation-cannot-create-binding",
+      "status": "PASS",
+      "evidence": {
+        "message": "UNKNOWN_NOTE_BINDING:note-new",
+        "bindingCount": 0
+      }
+    },
+    {
+      "id": "27.library-source-fixture-identity-validated",
+      "status": "PASS",
+      "evidence": {
+        "documentId": "KU-D05-0021",
+        "revision": "rev-17"
+      }
+    }
+  ],
+  "classification": "W6_B_LANE_EXECUTION_EVIDENCE_NOT_CONTROLLER_ACCEPTANCE",
+  "sourceCanonicalTreeSha256": "fcca03a3ef529e5eda8b3ddddcc1f093ad7054336430d3c08224fac55328c753",
+  "canonicalSourceFileCount": 113,
+  "staticChecks": [
+    {
+      "id": "canonical-owner-single-declaration",
+      "pass": true
+    },
+    {
+      "id": "thin-domain-adapters-no-secondary-owner",
+      "pass": true
+    },
+    {
+      "id": "no-content-window-persistence-ownership",
+      "pass": true
+    },
+    {
+      "id": "presentation-source-injection-guard",
+      "pass": true
+    },
+    {
+      "id": "fail-atomic-rebind-order",
+      "pass": true
+    },
+    {
+      "id": "explicit-stale-resolution-guard",
+      "pass": true
+    },
+    {
+      "id": "canonical-owner-branding",
+      "pass": true
+    },
+    {
+      "id": "canonical-domain-adapter-branding",
+      "pass": true
+    }
+  ],
+  "forbiddenWriterEditTargets": [
+    "stack/native-typescript/main.ts",
+    "stack/native-typescript/foundation/accepted-runtime.ts",
+    "stack/native-typescript/foundation/workspace.ts",
+    "stack/native-typescript/foundation/workspace-host.ts",
+    "stack/native-typescript/model-tests.ts",
+    "index.html"
+  ]
+}

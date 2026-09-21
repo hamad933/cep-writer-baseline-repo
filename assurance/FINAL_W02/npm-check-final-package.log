@@ -1,0 +1,4264 @@
+
+> cep-foundation-forge@0.2.1c check
+> node tools/check-build-authority.mjs && node tools/check-duplicate-mechanics.mjs && node tools/test-writer-scaffold.mjs && python3 tools/check-w03-semantic-ownership.py && node tools/check-authority-intake.mjs && node tools/check-deferred-boundary.mjs && node tools/check-contracts.mjs && node tools/vs05-read-mode-matrix.mjs && node tools/check-vs05-command-ownership.mjs
+
+{
+  "pass": true,
+  "authority": "stack/native-typescript -> dist + dist-ts",
+  "canonicalSourceHashBefore": "2e508cc24e70027ff7c73321f349046c03b5d6f0273a31f3b756d3b93207410a",
+  "canonicalSourceHashAfterBuildRuntime": "2e508cc24e70027ff7c73321f349046c03b5d6f0273a31f3b756d3b93207410a",
+  "canonicalSourceHashAfterStackProof": "2e508cc24e70027ff7c73321f349046c03b5d6f0273a31f3b756d3b93207410a",
+  "canonicalSourceFiles": 144,
+  "generatedJsInventory": {
+    "expected": 141,
+    "dist": 141,
+    "distTs": 141,
+    "missingFromDist": [],
+    "extraInDist": [],
+    "missingFromDistTs": [],
+    "extraInDistTs": []
+  },
+  "inspectedPackageCommands": [
+    "build:runtime",
+    "test",
+    "check",
+    "browser:test"
+  ],
+  "referencedTools": [
+    "tools/browser-conformance.mjs",
+    "tools/build-runtime.mjs",
+    "tools/check-authority-intake.mjs",
+    "tools/check-build-authority.mjs",
+    "tools/check-contracts.mjs",
+    "tools/check-deferred-boundary.mjs",
+    "tools/check-duplicate-mechanics.mjs",
+    "tools/check-vs05-command-ownership.mjs",
+    "tools/check-w03-semantic-ownership.py",
+    "tools/extract_donor.py",
+    "tools/stack-proof.mjs",
+    "tools/test-models.mjs",
+    "tools/test-writer-scaffold.mjs",
+    "tools/vs05-read-mode-matrix.mjs"
+  ],
+  "suspiciousCanonicalWriters": [],
+  "buildRuntimeOutput": "{\n  \"pass\": true,\n  \"authority\": \"CANONICAL_SOURCE_TO_GENERATED_ONLY\",\n  \"source\": \"stack/native-typescript\",\n  \"destination\": \"dist\",\n  \"written\": 141,\n  \"copiedAssets\": 2,\n  \"removedStale\": 0\n}",
+  "stackProofOutput": "{\"parity\":true,\"source\":\"stack/native-typescript\",\"generated\":[\"dist\",\"dist-ts\"],\"reverseGeneratedToSourceWrites\":false,\"js_tests\":{\"generatedTree\":\"dist\",\"runtime_dependencies\":0,\"build_steps\":1,\"model_pass\":210,\"model_fail\":0,\"build\":{\"pass\":true,\"authority\":\"CANONICAL_SOURCE_TO_GENERATED_ONLY\",\"source\":\"stack/native-typescript\",\"destination\":\"dist\",\"written\":141,\"copiedAssets\":2,\"removedStale\":0}},\"ts_tests\":{\"generatedTree\":\"dist-ts\",\"runtime_dependencies\":0,\"development_tool\":\"Node built-in stripTypeScriptTypes\",\"build_steps\":1,\"type_checking\":\"NOT_AVAILABLE_NOT_CLAIMED\",\"static_types\":\"Canonical TypeScript source; proof measures erasable-syntax generation parity only.\",\"model_pass\":210,\"model_fail\":0,\"emit_ms\":167.08629800000057,\"build\":{\"pass\":true,\"authority\":\"CANONICAL_SOURCE_TO_GENERATED_ONLY\",\"source\":\"stack/native-typescript\",\"destination\":\"dist-ts\",\"written\":141,\"copiedAssets\":2,\"removedStale\":0}},\"files\":141}"
+}
+{
+  "schemaVersion": 4,
+  "status": "PASS",
+  "filesScanned": 140,
+  "rules": [
+    {
+      "mechanicId": "relation.edit",
+      "approvedOwners": [
+        "foundation/relations.js"
+      ]
+    },
+    {
+      "mechanicId": "action.availability",
+      "approvedOwners": [
+        "foundation/models.js"
+      ]
+    },
+    {
+      "mechanicId": "spatial.context-suppression",
+      "approvedOwners": [
+        "foundation/spatial.js"
+      ]
+    },
+    {
+      "mechanicId": "workspace.panes",
+      "approvedOwners": [
+        "foundation/workspace-host.js"
+      ]
+    },
+    {
+      "mechanicId": "workspace.context-inspector",
+      "approvedOwners": [
+        "foundation/global/context-inspector.js"
+      ]
+    },
+    {
+      "mechanicId": "global.input-keymap",
+      "approvedOwners": [
+        "foundation/global/input-keymap.js"
+      ]
+    },
+    {
+      "mechanicId": "global.accessibility-feedback",
+      "approvedOwners": [
+        "foundation/global/feedback.js"
+      ]
+    },
+    {
+      "mechanicId": "workspace.bottom-deep-work",
+      "approvedOwners": [
+        "foundation/global/bottom-shelf.js"
+      ]
+    },
+    {
+      "mechanicId": "global.ui-scale",
+      "approvedOwners": [
+        "foundation/global/preferences/ui-scale.js"
+      ]
+    },
+    {
+      "mechanicId": "operational.sessions",
+      "approvedOwners": [
+        "foundation/operational.js",
+        "foundation/models.js"
+      ]
+    },
+    {
+      "mechanicId": "structured.document",
+      "approvedOwners": [
+        "foundation/structured.js"
+      ]
+    },
+    {
+      "mechanicId": "structured.mutation",
+      "approvedOwners": [
+        "foundation/structured.js"
+      ]
+    },
+    {
+      "mechanicId": "structured.selection-clipboard",
+      "approvedOwners": [
+        "foundation/structured.js"
+      ]
+    },
+    {
+      "mechanicId": "structured.transaction-history-recovery",
+      "approvedOwners": [
+        "foundation/structured.js"
+      ]
+    }
+  ],
+  "findings": [],
+  "fixtureTests": [
+    {
+      "id": "duplicate.relation",
+      "status": "PASS",
+      "expected": "POSSIBLE_DUPLICATE_SHARED_MECHANIC",
+      "mechanicId": "relation.edit"
+    },
+    {
+      "id": "duplicate.pane",
+      "status": "PASS",
+      "expected": "POSSIBLE_DUPLICATE_SHARED_MECHANIC",
+      "mechanicId": "workspace.panes"
+    },
+    {
+      "id": "duplicate.context",
+      "status": "PASS",
+      "expected": "POSSIBLE_DUPLICATE_SHARED_MECHANIC",
+      "mechanicId": "workspace.context-inspector"
+    },
+    {
+      "id": "duplicate.session",
+      "status": "PASS",
+      "expected": "POSSIBLE_DUPLICATE_SHARED_MECHANIC",
+      "mechanicId": "operational.sessions"
+    },
+    {
+      "id": "duplicate.structured-mutation",
+      "status": "PASS",
+      "expected": "POSSIBLE_DUPLICATE_SHARED_MECHANIC",
+      "mechanicId": "structured.mutation"
+    }
+  ],
+  "ownershipGuards": [
+    {
+      "id": "structured.compat.insert-canonical",
+      "status": "PASS",
+      "method": "insertBlock"
+    },
+    {
+      "id": "structured.compat.remove-canonical",
+      "status": "PASS",
+      "method": "removeBlock"
+    },
+    {
+      "id": "structured.compat.update-nonstructural-only",
+      "status": "PASS",
+      "method": "updateBlock"
+    }
+  ],
+  "ownershipFixture": {
+    "id": "structured.compatibility-bypass-fixture",
+    "status": "PASS",
+    "expected": "ALL_THREE_BYPASSES_DETECTED",
+    "observed": [
+      {
+        "id": "structured.compat.insert-canonical",
+        "status": "FAIL",
+        "method": "insertBlock"
+      },
+      {
+        "id": "structured.compat.remove-canonical",
+        "status": "FAIL",
+        "method": "removeBlock"
+      },
+      {
+        "id": "structured.compat.update-nonstructural-only",
+        "status": "FAIL",
+        "method": "updateBlock"
+      }
+    ]
+  },
+  "historyRecoveryGuards": [
+    {
+      "id": "structured.history.canonical-owner",
+      "status": "PASS"
+    },
+    {
+      "id": "structured.history.adapter-delegates",
+      "status": "PASS"
+    },
+    {
+      "id": "structured.history.no-fake-save",
+      "status": "PASS"
+    },
+    {
+      "id": "structured.history.one-frame-owner",
+      "status": "PASS"
+    },
+    {
+      "id": "library.history.projects-canonical",
+      "status": "PASS"
+    },
+    {
+      "id": "library.recovery-delegates-canonical",
+      "status": "PASS"
+    },
+    {
+      "id": "library.no-direct-working-bump",
+      "status": "PASS"
+    },
+    {
+      "id": "library.save-truth",
+      "status": "PASS"
+    }
+  ],
+  "historyRecoveryNegativeFixture": {
+    "id": "structured.history-recovery-negative-fixture",
+    "status": "PASS",
+    "expected": "ALL_HISTORY_RECOVERY_OWNERSHIP_GUARDS_FAIL",
+    "observed": [
+      {
+        "id": "structured.history.canonical-owner",
+        "status": "FAIL"
+      },
+      {
+        "id": "structured.history.adapter-delegates",
+        "status": "FAIL"
+      },
+      {
+        "id": "structured.history.no-fake-save",
+        "status": "FAIL"
+      },
+      {
+        "id": "structured.history.one-frame-owner",
+        "status": "FAIL"
+      },
+      {
+        "id": "library.history.projects-canonical",
+        "status": "FAIL"
+      },
+      {
+        "id": "library.recovery-delegates-canonical",
+        "status": "FAIL"
+      },
+      {
+        "id": "library.no-direct-working-bump",
+        "status": "FAIL"
+      },
+      {
+        "id": "library.save-truth",
+        "status": "FAIL"
+      }
+    ]
+  },
+  "deferredExceptions": [],
+  "limits": "Deterministic symbol/registration heuristic plus executable Structured mutation and transaction/history/recovery semantic ownership gates with deliberate negative fixtures; novel naming still requires semantic review."
+}
+{
+  "schemaVersion": 4,
+  "pass": 164,
+  "fail": 0,
+  "profileCount": 23,
+  "tests": [
+    {
+      "id": "scaffold.deterministic.audit",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.audit",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.audit",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.audit",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.audit",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.audit",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.audit",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.backup",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.backup",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.backup",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.backup",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.backup",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.backup",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.backup",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.configuration",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.configuration",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.configuration",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.configuration",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.configuration",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.configuration",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.configuration",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.enterprise",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.enterprise",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.enterprise",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.enterprise",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.enterprise",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.enterprise",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.enterprise",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.evidence",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.evidence",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.evidence",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.evidence",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.evidence",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.evidence",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.evidence",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.health",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.health",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.health",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.health",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.health",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.health",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.health",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.labs",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.labs",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.labs",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.labs",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.labs",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.labs",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.labs",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.learn",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.learn",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.learn",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.learn",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.learn",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.learn",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.learn",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.library",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.library",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.library",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.library",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.library",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.library",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.library",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.manual_ai",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.manual_ai",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.manual_ai",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.manual_ai",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.manual_ai",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.manual_ai",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.manual_ai",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.mastery",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.mastery",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.mastery",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.mastery",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.mastery",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.mastery",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.mastery",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.portfolio",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.portfolio",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.portfolio",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.portfolio",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.portfolio",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.portfolio",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.portfolio",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.processing",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.processing",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.processing",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.processing",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.processing",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.processing",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.processing",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.releases",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.releases",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.releases",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.releases",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.releases",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.releases",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.releases",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.results",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.results",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.results",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.results",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.results",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.results",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.results",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.reviews",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.reviews",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.reviews",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.reviews",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.reviews",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.reviews",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.reviews",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.rq",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.rq",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.rq",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.rq",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.rq",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.rq",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.rq",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.runs",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.runs",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.runs",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.runs",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.runs",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.runs",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.runs",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.scenarios",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.scenarios",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.scenarios",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.scenarios",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.scenarios",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.scenarios",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.scenarios",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.shell",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.shell",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.shell",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.shell",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.shell",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.shell",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.shell",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.today",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.today",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.today",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.today",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.today",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.today",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.today",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.validation",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.validation",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.validation",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.validation",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.validation",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.validation",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.validation",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.deterministic.visualize",
+      "status": "PASS",
+      "detail": "byte-identical repeated generation"
+    },
+    {
+      "id": "scaffold.authority.visualize",
+      "status": "PASS",
+      "detail": "exact E17 parent authority bound for post-final AnalyticalCompare reconciliation test"
+    },
+    {
+      "id": "scaffold.profile.visualize",
+      "status": "PASS",
+      "detail": "one exact surface/profile"
+    },
+    {
+      "id": "scaffold.domain.visualize",
+      "status": "PASS",
+      "detail": "named thin domain adapter and no unresolved decision"
+    },
+    {
+      "id": "scaffold.scope.visualize",
+      "status": "PASS",
+      "detail": "Foundation/shared paths protected and old stack absent"
+    },
+    {
+      "id": "scaffold.negative.visualize",
+      "status": "PASS",
+      "detail": "negative proof packet present"
+    },
+    {
+      "id": "scaffold.ready-scope.visualize",
+      "status": "PASS",
+      "detail": "ready surface receives only own surface/domain scope"
+    },
+    {
+      "id": "scaffold.profile-count",
+      "status": "PASS",
+      "detail": [
+        "audit",
+        "backup",
+        "configuration",
+        "enterprise",
+        "evidence",
+        "health",
+        "labs",
+        "learn",
+        "library",
+        "manual_ai",
+        "mastery",
+        "portfolio",
+        "processing",
+        "releases",
+        "results",
+        "reviews",
+        "rq",
+        "runs",
+        "scenarios",
+        "shell",
+        "today",
+        "validation",
+        "visualize"
+      ]
+    },
+    {
+      "id": "scaffold.ready-count",
+      "status": "PASS",
+      "detail": {
+        "ready": 23
+      }
+    },
+    {
+      "id": "scaffold.blocked-exact",
+      "status": "PASS",
+      "detail": {
+        "expected": [],
+        "actual": []
+      }
+    }
+  ]
+}
+W03_SEMANTIC_OWNER_VALIDATION: PASS 60/60 (69/318; cumulativeChanged=242; reviewPatch=24)
+{
+  "schemaVersion": 1,
+  "pass": 5,
+  "fail": 0,
+  "tests": [
+    {
+      "id": "authority.all-classified",
+      "status": "PASS",
+      "detail": "164 retained sources explicitly intake-classified"
+    },
+    {
+      "id": "authority.old-production-not-implementation",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "id": "authority.current-or-retained-not-ambiguous",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "id": "authority.stack-forbidden",
+      "status": "PASS",
+      "detail": "old stack tokens are explicit non-authority"
+    },
+    {
+      "id": "authority.w03-role",
+      "status": "PASS",
+      "detail": "W03 v3.4 remains donor-only"
+    }
+  ]
+}
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "pass": 5,
+  "fail": 0,
+  "checks": [
+    {
+      "id": "deferred.exact-ten-ids",
+      "detail": [
+        "DEF-HV-001",
+        "DEF-HV-002",
+        "DEF-HV-003",
+        "DEF-HV-004",
+        "DEF-HV-005",
+        "DEF-HV-006",
+        "DEF-HV-007",
+        "DEF-HV-008",
+        "DEF-HV-009",
+        "DEF-HV-010"
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "deferred.all-active",
+      "detail": {
+        "items": 10,
+        "classifications": {
+          "DEFER_HIGH_VALUE": 4,
+          "DEFER_TO_FAMILY_BUILD": 5,
+          "DEFER_TO_SURFACE_BUILD": 1
+        },
+        "activeFutureObligations": 10
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "deferred.applicability-metadata",
+      "detail": "routing metadata exists for each deferred obligation",
+      "status": "PASS"
+    },
+    {
+      "id": "deferred.named-implementations-absent",
+      "detail": [],
+      "status": "PASS"
+    },
+    {
+      "id": "deferred.stack-remains-unfrozen",
+      "detail": "STACK_NOT_FROZEN",
+      "status": "PASS"
+    }
+  ],
+  "truthCeiling": "Named deferred implementation owners are absent from executable source; small interface hooks/metadata do not count as implementation."
+}
+{
+  "date": "2026-09-16T16:24:18.506Z",
+  "pass": 168,
+  "fail": 0,
+  "tests": [
+    {
+      "id": "profiles.count",
+      "status": "PASS",
+      "detail": 23
+    },
+    {
+      "id": "profile.audit",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.audit",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.audit",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.backup",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.backup",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.backup",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.configuration",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.configuration",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.configuration",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.enterprise",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.enterprise",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.enterprise",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.evidence",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.evidence",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.evidence",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.health",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.health",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.health",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.labs",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.labs",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.labs",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.learn",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.learn",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.learn",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.library",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.library",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.library",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.manual_ai",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.manual_ai",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.manual_ai",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.mastery",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.mastery",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.mastery",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.portfolio",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.portfolio",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.portfolio",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.processing",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.processing",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.processing",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.releases",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.releases",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.releases",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.results",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.results",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.results",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.reviews",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.reviews",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.reviews",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.rq",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.rq",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.rq",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.runs",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.runs",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.runs",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.scenarios",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.scenarios",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.scenarios",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.shell",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.shell",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.shell",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.today",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.today",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.today",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.validation",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.validation",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.validation",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "profile.visualize",
+      "status": "PASS",
+      "detail": "61 explicit dispositions and 7 slots"
+    },
+    {
+      "id": "profile.na_reason.visualize",
+      "status": "PASS",
+      "detail": "substantive N/A reasons"
+    },
+    {
+      "id": "profile.family_match.visualize",
+      "status": "PASS",
+      "detail": "family engines match profile inheritance"
+    },
+    {
+      "id": "commands.unique",
+      "status": "PASS",
+      "detail": 68
+    },
+    {
+      "id": "commands.schema",
+      "status": "PASS",
+      "detail": "required command fields"
+    },
+    {
+      "id": "preferences.schema",
+      "status": "PASS",
+      "detail": 42
+    },
+    {
+      "id": "donor.identity",
+      "status": "PASS",
+      "detail": "exact accepted donor bytes/hash"
+    },
+    {
+      "id": "donor.census",
+      "status": "PASS",
+      "detail": "330 preserved named function dispositions"
+    },
+    {
+      "id": "matrix.complete",
+      "status": "PASS",
+      "detail": "23 × (40 conceptual owners + 21 executable component families)"
+    },
+    {
+      "id": "syntax.dist/main.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/model-tests.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/foundation/models.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/foundation/workspace.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/foundation/workspace-host.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/foundation/spatial.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/foundation/relations.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/foundation/operational.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/foundation/accepted-runtime.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/foundation/window-motion.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/foundation/structured.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/adapters/simulation.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/adapters/structured-documents.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/adapters/learn.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/adapters/w03-enterprise.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/adapters/w03-runs.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/adapters/w03-v34/domain-kernel.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/adapters/w03-v34/runs-fixture.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "syntax.dist/adapters/w03-v34/enterprise-fixture.js",
+      "status": "PASS",
+      "detail": "valid"
+    },
+    {
+      "id": "runtime.no_host_provider",
+      "status": "PASS",
+      "detail": "simulation source has no host/network execution integration"
+    },
+    {
+      "id": "operational.provider_neutral",
+      "status": "PASS",
+      "detail": "shared Operational presentation consumes only the RuntimeAdapter contract"
+    },
+    {
+      "id": "structured.boundary",
+      "status": "PASS",
+      "detail": "executable structured ownership boundary is explicit"
+    },
+    {
+      "id": "structured.non_library_isolation",
+      "status": "PASS",
+      "detail": "Learn path has no Library fixture import/state/search dependency"
+    },
+    {
+      "id": "structured.contract_version",
+      "status": "PASS",
+      "detail": "Structured contract plus selection/clipboard seam are versioned"
+    },
+    {
+      "id": "workspace.donor_free_bootstrap",
+      "status": "PASS",
+      "detail": "accepted runtime is conditionally imported for Library only"
+    },
+    {
+      "id": "workspace.host_owners",
+      "status": "PASS",
+      "detail": "pane, transient/focus and context descriptor owners are executable"
+    },
+    {
+      "id": "registries.current_owner_consistency",
+      "status": "PASS",
+      "detail": "CSV registries name the accepted Wave 1-3 executable owners and preserve provider/domain truth boundaries"
+    },
+    {
+      "id": "generators.current_owner_consistency",
+      "status": "PASS",
+      "detail": "both active registry generators preserve base generation then apply the Controller-accepted current-owner reconciliation"
+    },
+    {
+      "id": "generators.deferred_applicability_preserved",
+      "status": "PASS",
+      "detail": "active registry generator preserves target-relevance metadata instead of regenerating a global-only deferred ledger"
+    },
+    {
+      "id": "runtime.baseline",
+      "status": "PASS",
+      "detail": "CEP-FR-E18-ANALYTICAL-COMPARE-COMPLETION"
+    },
+    {
+      "id": "wave3.global_owners_physical",
+      "status": "PASS",
+      "detail": "five accepted Wave 3 Global owners are physically executable"
+    },
+    {
+      "id": "wave3.composition_not_semantic_owner",
+      "status": "PASS",
+      "detail": "Controller assembly composes the five owners without becoming a parallel semantic owner"
+    },
+    {
+      "id": "wave3.input_single_route",
+      "status": "PASS",
+      "detail": "Library donor key router yields when the accepted GlobalInputKeymapOwner already handled the event"
+    },
+    {
+      "id": "wave3.context_single_route",
+      "status": "PASS",
+      "detail": "legacy inspector presentation is fallback-only after ContextInspectorHost assembly"
+    },
+    {
+      "id": "wave3.bottom_single_route",
+      "status": "PASS",
+      "detail": "legacy bottom entry routes delegate lifecycle to BottomDeepWorkOwner when Wave 3 assembly is present"
+    },
+    {
+      "id": "wave3.ui_scale_boundary",
+      "status": "PASS",
+      "detail": "UI scale policy explicitly separates application chrome scale from document/canvas zoom, density and responsive semantics"
+    },
+    {
+      "id": "wave4.owners_physical",
+      "status": "PASS",
+      "detail": "Wave 4 accepted Global/Structured/bounded-Operational/contract owners are physically executable"
+    },
+    {
+      "id": "wave4.composition_not_semantic_owner",
+      "status": "PASS",
+      "detail": "Wave4 assembly is Controller composition only and does not become a parallel semantic owner"
+    },
+    {
+      "id": "wave4.settings_owner_truth",
+      "status": "PASS",
+      "detail": "Settings and direction are registered to their accepted Global owners"
+    },
+    {
+      "id": "wave4.operational_maturity_ceiling",
+      "status": "PASS",
+      "detail": "OperationalSessionOwner remains explicitly below M6 because a second genuine provider is not proven"
+    },
+    {
+      "id": "wave5.structured_family_accepted",
+      "status": "PASS",
+      "detail": "Wave5 Structured host/navigation ownership remains accepted and Wave6 final note content consumes the same accepted Structured engine"
+    },
+    {
+      "id": "wave4.registry_owner_consistency",
+      "status": "PASS",
+      "detail": "Wave4 CSV registries name executable owners while preserving bounded maturity/truth boundaries"
+    },
+    {
+      "id": "wave5.owners_physical",
+      "status": "PASS",
+      "detail": "Wave5 Structured host and navigation descriptor owner are physically executable"
+    },
+    {
+      "id": "wave5.note_content_boundary",
+      "status": "PASS",
+      "detail": "Note-content compatibility is content-only and does not implement Wave6 window/binding ownership"
+    },
+    {
+      "id": "wave5.registry_owner_consistency",
+      "status": "PASS",
+      "detail": "Wave5 registries name final Structured presentation/descriptor owners without moving canonical truth"
+    },
+    {
+      "id": "wave5.generator_final_reconciliation",
+      "status": "PASS",
+      "detail": "active reconciliation generator ends in Wave5 accepted truth"
+    },
+    {
+      "id": "wave5.generator_delegation",
+      "status": "PASS",
+      "detail": "both registry-generating entry points delegate their final current-owner truth to the Wave5 reconciliation generator"
+    },
+    {
+      "id": "controller.identity_and_copies",
+      "status": "PASS",
+      "detail": {
+        "package": {
+          "identity": "CEP_FOUNDATION_PRE_WORK_RESUME_CONTROLLER_PACKET_v2.0.zip",
+          "bytes": 122721,
+          "sha256": "0bbb013cc767d9d7047a5a5f24fe67865f0ee4e75f9522978e6bd2ceafee406b"
+        },
+        "intentionalWorkingCompilationCorrection": "07_W03_69_REQUIREMENT_REUSE_MAP.csv",
+        "originalPackageIdentityPreserved": true
+      }
+    },
+    {
+      "id": "runtime.component_owners",
+      "status": "PASS",
+      "detail": "runtime component owners are unique and complete"
+    },
+    {
+      "id": "runtime.capability_owners",
+      "status": "PASS",
+      "detail": "capability owners are unique"
+    },
+    {
+      "id": "runtime.action_surface_owners",
+      "status": "PASS",
+      "detail": "action surfaces have owner, routes and exits"
+    },
+    {
+      "id": "runtime.action_commands",
+      "status": "PASS",
+      "detail": "every declared action command is registered"
+    },
+    {
+      "id": "contracts.versioned",
+      "status": "PASS",
+      "detail": [
+        "WorkspaceFoundationHost@1.0.0",
+        "ContextDescriptorProvider@1.0.0",
+        "RelationDomainAdapter@1.1.0",
+        "StructuredDocumentDomainAdapter@1.1.0",
+        "RuntimeAdapter@1.0.0",
+        "ActionAvailability@1.2.1",
+        "SurfaceProfile@1.0.0",
+        "SemanticCommand@1.0.0",
+        "GlobalInputKeymapOwner@1.0.0",
+        "AccessibilityFeedbackOwner@1.0.0",
+        "ContextInspectorHost@1.0.0",
+        "BottomDeepWorkOwner@1.0.0",
+        "UIScalePolicyOwner@1.0.0",
+        "StructuredInputKeymapOwner@1.0.0",
+        "StructuredActionDescriptorOwner@1.0.0",
+        "InputDirectionResolver@1.0.0",
+        "StructuredRichContentOwner@1.0.0",
+        "StructuredDragDropOwner@1.0.0",
+        "SettingsCenterOwner@1.0.0",
+        "OperationalSessionOwner@0.9.0",
+        "EpistemicStateContract@0.4.0",
+        "ConfirmationSafetyHost@1.0.0",
+        "StructuredSurfaceHost@1.0.1",
+        "StructuredNavigationDescriptorOwner@1.0.0",
+        "StructuredNoteContentCompatibility@1.0.0",
+        "StickyNoteWindowOwner@1.0.0",
+        "NoteBindingAdapter@1.0.0",
+        "StructuredNoteContentAdapter@1.0.0",
+        "NotesFamilyComposition@1.0.0",
+        "AnalysisProviderContract@1.0.0",
+        "AnalyticalCompareOwner@1.0.0",
+        "AnalyticalCompareHost@1.0.0"
+      ]
+    },
+    {
+      "id": "contracts.breaking_gate",
+      "status": "PASS",
+      "detail": "ENFORCED_BY_CONTRACT_CHECK"
+    },
+    {
+      "id": "contracts.version_fixtures",
+      "status": "PASS",
+      "detail": {
+        "compatible": {
+          "change": "add optional descriptor field",
+          "result": "PASS"
+        },
+        "breaking": {
+          "change": "rename required canonical state field",
+          "required": [
+            "affectedConsumers",
+            "migrationPlan",
+            "disposition",
+            "conformanceProof"
+          ],
+          "result": "REQUIRES_MIGRATION"
+        }
+      }
+    },
+    {
+      "id": "mechanics.registry",
+      "status": "PASS",
+      "detail": 30
+    },
+    {
+      "id": "mechanics.duplicate_scan",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "id": "deviations.explained",
+      "status": "PASS",
+      "detail": "no unexplained Foundation deviation"
+    },
+    {
+      "id": "deferred.value_filter",
+      "status": "PASS",
+      "detail": {
+        "items": 10,
+        "classifications": {
+          "DEFER_HIGH_VALUE": 4,
+          "DEFER_TO_FAMILY_BUILD": 5,
+          "DEFER_TO_SURFACE_BUILD": 1
+        },
+        "activeFutureObligations": 10
+      }
+    },
+    {
+      "id": "deferred.exclusion_traceability",
+      "status": "PASS",
+      "detail": {
+        "items": 15,
+        "classifications": {
+          "SUPERSEDED": 5,
+          "HISTORICAL_ONLY": 1,
+          "DROP_LOW_VALUE": 7,
+          "DROP_DUPLICATE": 2
+        },
+        "activeFutureObligations": 0
+      }
+    },
+    {
+      "id": "deferred.stale_active_status_absent",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "id": "w03.identity",
+      "status": "PASS",
+      "detail": "exact v3.4 evidence donor identity, five sources and corrected authority"
+    },
+    {
+      "id": "w03.reference.ENTERPRISE",
+      "status": "PASS",
+      "detail": "dist/reference/w03-v34/W03_ENTERPRISE_EXECUTABLE_BLUEPRINT_v3.0_SUCCESSOR_CANDIDATE.html"
+    },
+    {
+      "id": "w03.reference.SCENARIOS",
+      "status": "PASS",
+      "detail": "dist/reference/w03-v34/W03_SCENARIOS_EXECUTABLE_BLUEPRINT_v3.0_SUCCESSOR_CANDIDATE.html"
+    },
+    {
+      "id": "w03.reference.LABS",
+      "status": "PASS",
+      "detail": "dist/reference/w03-v34/W03_LABS_EXECUTABLE_BLUEPRINT_v3.0_SUCCESSOR_CANDIDATE.html"
+    },
+    {
+      "id": "w03.reference.RUNS",
+      "status": "PASS",
+      "detail": "dist/reference/w03-v34/W03_RUNS_EXECUTABLE_BLUEPRINT_v3.0_SUCCESSOR_CANDIDATE.html"
+    },
+    {
+      "id": "w03.reference.RESULTS",
+      "status": "PASS",
+      "detail": "dist/reference/w03-v34/W03_RESULTS_EXECUTABLE_BLUEPRINT_v3.0_SUCCESSOR_CANDIDATE.html"
+    },
+    {
+      "id": "w03.dispositions_69_318",
+      "status": "PASS",
+      "detail": {
+        "PARTIALLY_RECONCILED": 22,
+        "DEFERRED_TO_NAMED_FUTURE_OWNER": 19,
+        "RECONCILED_CURRENT": 28
+      }
+    },
+    {
+      "id": "w03.no_atom_task_expansion",
+      "status": "PASS",
+      "detail": "318 atoms remain grouped under admitted task owners"
+    },
+    {
+      "id": "w03.truth_ceiling",
+      "status": "PASS",
+      "detail": "SEMANTIC_ADJUDICATION_PARTIAL; HIGH_RISK_SEMANTIC_MISROUTES_CORRECTED; map is advisory/reusable-ownership evidence, not W03 design or implementation authority."
+    },
+    {
+      "id": "w03.work_admission_provenance_only",
+      "status": "PASS",
+      "detail": "HISTORICAL_PRE_V0_2_1_CONTROLLER_ADMISSION_PROVENANCE_ONLY"
+    },
+    {
+      "id": "w03.generated_historical_fields",
+      "status": "PASS",
+      "detail": "raw admissions remain provenance only"
+    },
+    {
+      "id": "w03.old_authority_zero_active",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "id": "w03.semantic_authority_alias_zero",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "id": "writer.intake",
+      "status": "PASS",
+      "detail": "lintable Writer intake matches current Foundation baseline"
+    },
+    {
+      "id": "writer.scaffold",
+      "status": "PASS",
+      "detail": "164/0"
+    },
+    {
+      "id": "resume.exact_ten_completed",
+      "status": "PASS",
+      "detail": "ALL_10_COMPLETED_FOR_BOUNDED_CANDIDATE"
+    },
+    {
+      "id": "relations.central_reuse",
+      "status": "PASS",
+      "detail": "one extracted RelationInteractionOwner policy serves Visualize and Enterprise"
+    },
+    {
+      "id": "relations.availability_inputs",
+      "status": "PASS",
+      "detail": "central resolver covers selection, domain, command, canonical and destructive inputs"
+    },
+    {
+      "id": "relations.route_scope",
+      "status": "PASS",
+      "detail": "relation double-click is label-scoped"
+    },
+    {
+      "id": "spatial.context_lifecycle",
+      "status": "PASS",
+      "detail": "context suppression clears on cancel and abnormal lifecycle"
+    },
+    {
+      "id": "spatial.keyboard_semantics",
+      "status": "PASS",
+      "detail": "distinct focus/selection/camera/move/context/edit/reverse semantics"
+    },
+    {
+      "id": "ownership.single_relation_commands",
+      "status": "PASS",
+      "detail": "one relation commit registration in RelationInteractionOwner; main only declares action route and relations facade registers none"
+    },
+    {
+      "id": "ownership.single_open_terminal",
+      "status": "PASS",
+      "detail": "one OPEN_TERMINAL semantic owner"
+    },
+    {
+      "id": "browser.suite_definition",
+      "status": "PASS",
+      "detail": "six deterministic critical browser flows are rerunnable"
+    },
+    {
+      "id": "browser.portable_resolution",
+      "status": "PASS",
+      "detail": "package-local Playwright first; explicit environment override only"
+    },
+    {
+      "id": "browser.lineage_receipt_truthful",
+      "status": "PASS",
+      "detail": {
+        "sourceFoundationBaseline": "CEP-FR-E18-ANALYTICAL-COMPARE-COMPLETION",
+        "sourceCanonicalTreeSha256": "d6b3fe48f7baddb115597ccb37d819d6b205cbcae94910b87245c18b398477f5",
+        "currentCanonicalTreeSha256": "d6b3fe48f7baddb115597ccb37d819d6b205cbcae94910b87245c18b398477f5",
+        "executionStatus": "EXECUTED_PASS",
+        "summary": {
+          "total": 6,
+          "pass": 6,
+          "fail": 0
+        }
+      }
+    },
+    {
+      "id": "browser.current_candidate_claim_truthful",
+      "status": "PASS",
+      "detail": {
+        "currentUse": "EXACT_CURRENT_CANONICAL_SOURCE_EXECUTION_RECEIPT",
+        "sourceCandidate": "CANONICAL_SOURCE_TREE_SHA256:d6b3fe48f7baddb115597ccb37d819d6b205cbcae94910b87245c18b398477f5",
+        "canonicalSourceFileCount": 144
+      }
+    },
+    {
+      "id": "browser.targeted_visual_evidence",
+      "status": "PASS",
+      "detail": "3 hash-bound screenshots (maximum 4)"
+    },
+    {
+      "id": "model.required_regressions",
+      "status": "PASS",
+      "detail": "210/0"
+    },
+    {
+      "id": "authority.intake_guard",
+      "status": "PASS",
+      "detail": {
+        "schemaVersion": 1,
+        "pass": 5,
+        "fail": 0,
+        "tests": [
+          {
+            "id": "authority.all-classified",
+            "status": "PASS",
+            "detail": "164 retained sources explicitly intake-classified"
+          },
+          {
+            "id": "authority.old-production-not-implementation",
+            "status": "PASS",
+            "detail": []
+          },
+          {
+            "id": "authority.current-or-retained-not-ambiguous",
+            "status": "PASS",
+            "detail": []
+          },
+          {
+            "id": "authority.stack-forbidden",
+            "status": "PASS",
+            "detail": "old stack tokens are explicit non-authority"
+          },
+          {
+            "id": "authority.w03-role",
+            "status": "PASS",
+            "detail": "W03 v3.4 remains donor-only"
+          }
+        ]
+      }
+    },
+    {
+      "id": "w03.semantic_review_318",
+      "status": "PASS",
+      "detail": {
+        "rowsReviewed": 318,
+        "rowsChanged": 242,
+        "unchangedRows": 76,
+        "method": "Bounded semantic-owner hardening of the existing 318-row compilation; v0.2.1a mappings were independently reviewed and only confirmed high-risk misroutes were corrected. No historical W03 archaeology or re-atomization."
+      }
+    }
+  ],
+  "limits": "Bounded structural/model/browser receipt validation; no Owner acceptance or final-product completeness claim."
+}
+{
+  "schemaVersion": 1,
+  "kind": "VS05_BOUNDED_READ_MODE_COMMAND_MATRIX",
+  "status": "PASS",
+  "executedAt": "2026-09-16T16:24:18.575Z",
+  "sourceIdentity": {
+    "sha256": "d6b3fe48f7baddb115597ccb37d819d6b205cbcae94910b87245c18b398477f5",
+    "files": 144,
+    "rows": [
+      {
+        "path": "adapters/analytical/results-compare-provider.ts",
+        "bytes": 4814,
+        "sha256": "76b17a403017ea7914c93e9183df455ae585d1220a0d96727e9d04ff688816bb"
+      },
+      {
+        "path": "adapters/analytical/rq-compare-provider.ts",
+        "bytes": 4046,
+        "sha256": "31d348c6f31000184955e7a771865c02599a245059754215cee1e52cef6aa253"
+      },
+      {
+        "path": "adapters/context-learn-structured.ts",
+        "bytes": 4268,
+        "sha256": "1181225434b9d661ee1772bef780966fb6035c5f0e5225cc2134f9659288a55f"
+      },
+      {
+        "path": "adapters/context-library-structured.ts",
+        "bytes": 6452,
+        "sha256": "2adf48745d4aee3dad4597fecb67c321900761dd84cea17881e1ed7d91678803"
+      },
+      {
+        "path": "adapters/context-spatial.ts",
+        "bytes": 2561,
+        "sha256": "cc95945a7bd1de4527523a0d14406615abe9328c45c27cf6144925ff511cdd7c"
+      },
+      {
+        "path": "adapters/learn.ts",
+        "bytes": 7327,
+        "sha256": "f20e22c713292b91a891aa0f5d5ea902859fc7cd28c93d05d688bb9038289ce5"
+      },
+      {
+        "path": "adapters/library-chrome.ts",
+        "bytes": 4728,
+        "sha256": "e94dcd29e580db015a769a62725346a2a15e60c8aec4f18daf3c58246b9efbce"
+      },
+      {
+        "path": "adapters/library-fixtures.ts",
+        "bytes": 7812,
+        "sha256": "ef244a43d17cbdfbda7fe00d42677cd6a51e3748e12df41e3ca8397c7da08cc1"
+      },
+      {
+        "path": "adapters/library-note-runtime-composition.ts",
+        "bytes": 6717,
+        "sha256": "8fd7a0e88e4df1eee429a5bc4ea10fd1d00b89c879b57e8c03de5122c79572c8"
+      },
+      {
+        "path": "adapters/library-outline-descriptor.ts",
+        "bytes": 4062,
+        "sha256": "3b395d52610c8635b6131d03e444bb154d153890017f2767401c39e121413472"
+      },
+      {
+        "path": "adapters/note-binding-domains.ts",
+        "bytes": 3098,
+        "sha256": "daa20a9dacd236b259a1d398094b0d0f146829025f4c3aaf89b715b805d7406c"
+      },
+      {
+        "path": "adapters/note-content-direction-fixture.ts",
+        "bytes": 717,
+        "sha256": "c8a77cf20b4fd393484bf262e69461b0f07d7da8ddeefce0be1e00ef5ac49921"
+      },
+      {
+        "path": "adapters/operational-bottom-provider.ts",
+        "bytes": 2288,
+        "sha256": "15413dcc4626447455454623b96c03802251b50e518a265b7fe0b95c3a227c3d"
+      },
+      {
+        "path": "adapters/simulation.ts",
+        "bytes": 6199,
+        "sha256": "57d6dcd74b5d855522ec760137a2a5dad1ee3b4c812eed7b4c9f478508431fa8"
+      },
+      {
+        "path": "adapters/structured-bottom-provider.ts",
+        "bytes": 1837,
+        "sha256": "7895edb1e77e5ac50000c76433542803fac971805d449fe8eada484c84e2c67a"
+      },
+      {
+        "path": "adapters/structured-documents.ts",
+        "bytes": 2044,
+        "sha256": "dc88d75e2912efbc453549b58b0c1b94857cf74e97869863e2f72c563ade01db"
+      },
+      {
+        "path": "adapters/structured-note-content-compatibility.ts",
+        "bytes": 2207,
+        "sha256": "a61f68cc839a46e3f01be6423ef7e5f6a2d50ff6fa0415c37af27063398c4bf5"
+      },
+      {
+        "path": "adapters/structured-note-content.ts",
+        "bytes": 15240,
+        "sha256": "af9f321f857513047192fbd1d9aa1bc22d99322ac5e6e0b6a1c5c1e6930b54b8"
+      },
+      {
+        "path": "adapters/w03-enterprise.ts",
+        "bytes": 1766,
+        "sha256": "95eddab2f65ce23cee269220b7b3a1e6da69ba167cf2200ea75e2afefa5e0f41"
+      },
+      {
+        "path": "adapters/w03-runs.ts",
+        "bytes": 2036,
+        "sha256": "73124f1c086d518afddcb2441364726e9528d8d3aff8f92fd2c5501b5ce847cd"
+      },
+      {
+        "path": "adapters/w03-v34/domain-kernel.ts",
+        "bytes": 9514,
+        "sha256": "4f306fd89463e5c7c4df2b8bdcdf02b0226c16c3e4ce0cfa75bcc7b5701aa3de"
+      },
+      {
+        "path": "adapters/w03-v34/enterprise-fixture.ts",
+        "bytes": 2292,
+        "sha256": "76720c5ea9d05fc5926d5445aec162c7e3fb24aa8c704ee86b864c231be0de0b"
+      },
+      {
+        "path": "adapters/w03-v34/runs-fixture.ts",
+        "bytes": 5253,
+        "sha256": "8f5be1ad9d0f8274ca9e3cafe7245b8fa45102f80aeb2ab56dfabf3e20db9c1e"
+      },
+      {
+        "path": "analytical-compare-browser.ts",
+        "bytes": 5478,
+        "sha256": "566fda2ce354489a5e6c0792253122293c36e095f3d86d5e90f702967d43c7d3"
+      },
+      {
+        "path": "analytical-compare-correction-tests.ts",
+        "bytes": 9383,
+        "sha256": "2b5680e42179db86581f86dc1c793c86832cb21aa329718b6a47a572a295742a"
+      },
+      {
+        "path": "analytical-compare-tests.ts",
+        "bytes": 21633,
+        "sha256": "ea0057165c6e29278830fbc588fdedb6e4e8f89a20f1f3402a7b2eeb101b4fe6"
+      },
+      {
+        "path": "fixtures/w4-f-runtime-contract-fixture.ts",
+        "bytes": 1200,
+        "sha256": "79efdcb0750d8f1cc71a57fcc6f1a81362e8aeea33f9d40b82810a5a498390d3"
+      },
+      {
+        "path": "foundation/accepted-runtime.ts",
+        "bytes": 332784,
+        "sha256": "82b5bbef81b104bcb25c85df3b29751924c3292b131db6d5f051d055f183732d"
+      },
+      {
+        "path": "foundation/analytical/compare-host.ts",
+        "bytes": 13045,
+        "sha256": "5c819e21a48f440c62ccc2c2f7c4aa4231d34395decbe78005e22b08492eae47"
+      },
+      {
+        "path": "foundation/analytical/compare.ts",
+        "bytes": 17065,
+        "sha256": "ce45507d1a133af0a3261b7a33e9e4aefc8aada08c66ae032ed11e949b93dfbd"
+      },
+      {
+        "path": "foundation/audit/provenance-host.ts",
+        "bytes": 14316,
+        "sha256": "c9c5a67a35ce76a0ded288e077022c28bba01316c29c042f057cfe0db838874d"
+      },
+      {
+        "path": "foundation/audit/provenance.ts",
+        "bytes": 10517,
+        "sha256": "70428e87e2394cbc8e1c6220ae4f0cee74d3dc13a0e4c47275beb7d05fbc201b"
+      },
+      {
+        "path": "foundation/collection/table-matrix-host.ts",
+        "bytes": 19811,
+        "sha256": "87a8aeb23c49f3a5d3adda6101fddf7831ca728645855c0eb846d1773f68860c"
+      },
+      {
+        "path": "foundation/collection/table-matrix.ts",
+        "bytes": 8315,
+        "sha256": "ea3faaedb15aede39e2b1c2e931c9cb5db65174f3f12bf5505a8e81612b532f2"
+      },
+      {
+        "path": "foundation/contracts/analysis-provider.ts",
+        "bytes": 10439,
+        "sha256": "6a5024ec2577d2f0b3cca4d01a08414e0b2dd49648a3f302eb531d1c60343d8a"
+      },
+      {
+        "path": "foundation/contracts/epistemic-state.ts",
+        "bytes": 13259,
+        "sha256": "1415e0bfa5415ac73e0daad40fe5d1087f0cd9d36bae0914b125ceabca64801d"
+      },
+      {
+        "path": "foundation/contracts/platform-input-direction-bridge.ts",
+        "bytes": 1941,
+        "sha256": "24fb870e8845b4becc6411b27aae91659889bf6573f5bc347c9998441ae1deb5"
+      },
+      {
+        "path": "foundation/contracts/runtime-adapter.ts",
+        "bytes": 3110,
+        "sha256": "48c1c1887660f0e7e64e84417b241b8b6f18915bbb0651c970dc34bd5cc375d9"
+      },
+      {
+        "path": "foundation/extensions.css",
+        "bytes": 31957,
+        "sha256": "e7c821af9f044a3b5cfa060b8576b8e21c3cfa6f5477158acbc6b6c3a32eae3c"
+      },
+      {
+        "path": "foundation/global/bottom-provider-contract.ts",
+        "bytes": 2208,
+        "sha256": "2b00bc4e4bb0a88222ee0c0ae4a3e50b6cee04063ee4dc383a86b7902144e4b0"
+      },
+      {
+        "path": "foundation/global/bottom-shelf.ts",
+        "bytes": 16604,
+        "sha256": "0f96da844ed34633cb07f337a5d9b6550f1d1b8e56b427374cbc356eb2b8b78e"
+      },
+      {
+        "path": "foundation/global/commands.ts",
+        "bytes": 4306,
+        "sha256": "19b36a35625418543305e84b2354a218348fcd47162acfe07ec1d8aaaa262ac4"
+      },
+      {
+        "path": "foundation/global/confirmation-host.ts",
+        "bytes": 8380,
+        "sha256": "3efef2de674314608b12c8ec5b6713216d15ecbc3b2c00bb9a10d5cd7bd36330"
+      },
+      {
+        "path": "foundation/global/context-descriptor-contract.ts",
+        "bytes": 5539,
+        "sha256": "d80f84abd81189c72b79a228205f9eef228d986d0ba59f5826d25411766cf0b1"
+      },
+      {
+        "path": "foundation/global/context-inspector.ts",
+        "bytes": 16656,
+        "sha256": "bf665c0af63c47e79a9071123052d0c557743d1ee6339d79493c927301579e93"
+      },
+      {
+        "path": "foundation/global/feedback-contract.ts",
+        "bytes": 4463,
+        "sha256": "79b04f7fffc03900ef6a4b4346b41f5c8b4c59a453399253298b595f58858364"
+      },
+      {
+        "path": "foundation/global/feedback.ts",
+        "bytes": 19939,
+        "sha256": "08322e658ce1af230b82d2181a97aef59258e083953c1d5eea97f7da6044d248"
+      },
+      {
+        "path": "foundation/global/input-direction.ts",
+        "bytes": 3949,
+        "sha256": "6d9d2b58966e70de15d2cdc7c6e241ebba597999763e844358b0a38532ce9c42"
+      },
+      {
+        "path": "foundation/global/input-keymap.ts",
+        "bytes": 8311,
+        "sha256": "c43d649c9ccd09771f92e6c5f94c4cff3eaa3479ff3530dabc4047b1541ecc44"
+      },
+      {
+        "path": "foundation/global/input-ownership-contract.ts",
+        "bytes": 4559,
+        "sha256": "bf748bdf6e58f33f48eccea5bf3209b066f344d6fb8922df81c1d4826f597349"
+      },
+      {
+        "path": "foundation/global/pane-layout.ts",
+        "bytes": 12950,
+        "sha256": "14ad9c24e6e609ca58b3e43dafb6b0841e94e4367c49975df252080d589ae7fa"
+      },
+      {
+        "path": "foundation/global/preferences/schema.ts",
+        "bytes": 3149,
+        "sha256": "8ef02f16aaa9a6caf39b0a7b1f7de923441695285eab6c824f34bda7492e2583"
+      },
+      {
+        "path": "foundation/global/preferences/store.ts",
+        "bytes": 5746,
+        "sha256": "8ae3a06b11dcce2c7ec4825da622ca01761d8b9d2a83af8d008a4c1eeb97e934"
+      },
+      {
+        "path": "foundation/global/preferences/ui-scale.ts",
+        "bytes": 7310,
+        "sha256": "f7ff0b5689e959c28b322e96cafd3c7946ab59c1b4d6836bc14deb2e21f04a4f"
+      },
+      {
+        "path": "foundation/global/region-contract.ts",
+        "bytes": 2174,
+        "sha256": "2a4f1c3b2dde88c8fc62835093a4cd6e7e56aea87a603b2ce38659f32099064b"
+      },
+      {
+        "path": "foundation/global/region-cycle.ts",
+        "bytes": 5552,
+        "sha256": "b5a183bf98468478e3ee26ae752368b10b151a9172c595e374de2ae235a1ab77"
+      },
+      {
+        "path": "foundation/global/responsive-layout.ts",
+        "bytes": 1584,
+        "sha256": "e7f2559f389f286f6fda85533ef510a5929ad3799af9c13b9d2626d4a7330092"
+      },
+      {
+        "path": "foundation/global/settings/center.ts",
+        "bytes": 14708,
+        "sha256": "150585b088c5717be4b4ebb673a24b551c162561876b23edf116f9cf2c8c8825"
+      },
+      {
+        "path": "foundation/global/settings/search.ts",
+        "bytes": 2628,
+        "sha256": "df09f4d3d488f29642794c7743fd83513f781cccbb426d3e499c61b61798bdac"
+      },
+      {
+        "path": "foundation/global/settings/sections.ts",
+        "bytes": 10700,
+        "sha256": "c1f975bdbf493f6c45041dfd6e2fe4bac708c83f46d504994fdd0b9e16962412"
+      },
+      {
+        "path": "foundation/global/shell/navigation.ts",
+        "bytes": 21541,
+        "sha256": "6dd1a00dd67cda417f3f70055dc36d3cf91ea82a66013c5ca5d2569ae2900292"
+      },
+      {
+        "path": "foundation/global/tokens/scale.css",
+        "bytes": 1157,
+        "sha256": "6e9d24c329c86b0595c956cbf6897c4bc11181c73fb7412c0fe5f20ef5664dda"
+      },
+      {
+        "path": "foundation/global/toolbar-template.ts",
+        "bytes": 3995,
+        "sha256": "920cc54e09db25ec0bb567c5969c5298c57156572beb753a3d7448817670335f"
+      },
+      {
+        "path": "foundation/global/top-region.ts",
+        "bytes": 4847,
+        "sha256": "02cf363333c24803cac6bff3d9f35ac758b29c40c56d077230c58b06077ab0e5"
+      },
+      {
+        "path": "foundation/global/transient-focus.ts",
+        "bytes": 7033,
+        "sha256": "acb0a53e800e7a3d14ba8520d8e46c2e5da5ff7e6a52afa77ea60915dbdcc0f2"
+      },
+      {
+        "path": "foundation/global/transient-host.ts",
+        "bytes": 1889,
+        "sha256": "d1a819c0cdf4fed40487cc617ff0507443627ea9377dc33e9ac977c31df46c4e"
+      },
+      {
+        "path": "foundation/global/workspace-host-kernel.ts",
+        "bytes": 1998,
+        "sha256": "d8e8d43d5b7c7375fca55990f08bb4ad165fa79e02c7a904f4968d1a9b1abfb0"
+      },
+      {
+        "path": "foundation/models.ts",
+        "bytes": 12584,
+        "sha256": "3ed9e7a9022fb85cad1b6f55594d079396603f51b1004a69286c558029efea7b"
+      },
+      {
+        "path": "foundation/notes/note-binding.ts",
+        "bytes": 12496,
+        "sha256": "ab4f79c8b6fd85457c7ed8bf8cf8b5cb170bb5bc2fb1b4d73530e426b625da4f"
+      },
+      {
+        "path": "foundation/notes/sticky-note-window.ts",
+        "bytes": 21264,
+        "sha256": "4591dda6d5c3ae4dd4c8a799af5c26caa56b087d1af1c539ea5741fb60cf6c0a"
+      },
+      {
+        "path": "foundation/operational.ts",
+        "bytes": 10105,
+        "sha256": "1622d526897ab2332641f9c6a0c018c1d458234ef96e91444753e9892bd981b5"
+      },
+      {
+        "path": "foundation/operational/presentation.ts",
+        "bytes": 2302,
+        "sha256": "b75adb07dad07ffd3fa0ae1a365442b422dcafcc51440ef3970f3d3ff9b123a6"
+      },
+      {
+        "path": "foundation/operational/session-owner.ts",
+        "bytes": 11097,
+        "sha256": "dc1b1b10b48f0bc2fa54079f302ef206294144a023f586918748fa96f735fa19"
+      },
+      {
+        "path": "foundation/operational/terminal-host.ts",
+        "bytes": 7286,
+        "sha256": "9547bbc061277a4cd0cb3d498fa19b45c3c47e8125647f51e41075a42efaf706"
+      },
+      {
+        "path": "foundation/presentation-carrier/CEP_LIBRARY_EDITOR_EXECUTABLE_BLUEPRINT_v1.2.17_ACCEPTED_DESIGN_REFERENCE.html",
+        "bytes": 672893,
+        "sha256": "ea66b58ef122bf2f8ca23fd0aa9e461b07da11ea7390c451902e4b1592d396fd"
+      },
+      {
+        "path": "foundation/relations.ts",
+        "bytes": 6138,
+        "sha256": "86e2281ac42dfbec3317e62df35fbdb552ed6d85d26711747a85533fcbdc3db5"
+      },
+      {
+        "path": "foundation/review/decision-host.ts",
+        "bytes": 14313,
+        "sha256": "104160f6969dd258aae5727c34a3bd0273d2e0d188671131ad7de233f6a6e529"
+      },
+      {
+        "path": "foundation/review/decision.ts",
+        "bytes": 6564,
+        "sha256": "6891860ef9f249983b2b5569b55aa288410eba059dff9bb074cacc0097a684ef"
+      },
+      {
+        "path": "foundation/spatial.ts",
+        "bytes": 15694,
+        "sha256": "4c4477c7cf0deb988f2471b8c4a48fd8d57308b0fecf0734f1dbce413cc93b7b"
+      },
+      {
+        "path": "foundation/spatial/accessible-navigator.ts",
+        "bytes": 2225,
+        "sha256": "33bea44ddb5663d71cf361ffdf55fae2a263c7389d6b5fc139d666f7e6af47b5"
+      },
+      {
+        "path": "foundation/spatial/focus-contract.ts",
+        "bytes": 939,
+        "sha256": "bfa0752313b6b9728ab9f4aea54557c3f8bf08933b83a78ff3d3b988b3ff2926"
+      },
+      {
+        "path": "foundation/spatial/interaction-kernel.ts",
+        "bytes": 6070,
+        "sha256": "dfd272d508574fd4008cb1803c703b29a5114972aa2d1ff73439ede3d8195e9a"
+      },
+      {
+        "path": "foundation/spatial/presentation.ts",
+        "bytes": 6726,
+        "sha256": "2cf979f3451076e375e9724ca99387cc1e511fa2d09bc7aec5df13757272f663"
+      },
+      {
+        "path": "foundation/spatial/relation-interaction.ts",
+        "bytes": 14014,
+        "sha256": "f03dc23a50bbee318f5cd91c8e745bac2cdc3b563a89a4e776935f4213a77b72"
+      },
+      {
+        "path": "foundation/spatial/selection-kernel.ts",
+        "bytes": 7733,
+        "sha256": "2a39792a4a264091dc18cb8d7c26d3028e8b5bb645506992828b6697a8d47129"
+      },
+      {
+        "path": "foundation/structured.ts",
+        "bytes": 77673,
+        "sha256": "b45a71007591d05975c58bbf8c619c23a3a4691a319ed8bc59e44862de755cac"
+      },
+      {
+        "path": "foundation/structured/action-descriptors.ts",
+        "bytes": 10041,
+        "sha256": "21452c42fdef3b3f73f0eba31dbc504016575a705fac651cba34b7a25e438714"
+      },
+      {
+        "path": "foundation/structured/action-surfaces/presentation-host.ts",
+        "bytes": 9375,
+        "sha256": "5d78c205bd4acbdc092b5097485f3d064e932077f742e4b13648154c1b0d5224"
+      },
+      {
+        "path": "foundation/structured/block-renderer.ts",
+        "bytes": 6781,
+        "sha256": "1d6a794fa8a82ecb35891839c2320e7a90fb71375978bbcb2a0295450529b6bc"
+      },
+      {
+        "path": "foundation/structured/caret-bridge.ts",
+        "bytes": 4748,
+        "sha256": "0b494fbef2530e71a2b3c8e8201efbafcfd7c643cdf48bdad49456cf9690d5a1"
+      },
+      {
+        "path": "foundation/structured/clipboard-contract.ts",
+        "bytes": 546,
+        "sha256": "f24ef6f8129f3aacfa51fc20f44e1e8ea656cc3fcca35a3f983d14ec10febce2"
+      },
+      {
+        "path": "foundation/structured/clipboard-owner.ts",
+        "bytes": 16223,
+        "sha256": "871b204ed28961ab101ef5946d0f5d97d5ed97294cd6bd268613e47a877025be"
+      },
+      {
+        "path": "foundation/structured/code-block.ts",
+        "bytes": 1744,
+        "sha256": "050a762d29fae15a092aec935bd60e73434a200d3db2960f753041be59332faf"
+      },
+      {
+        "path": "foundation/structured/direction-adapter.ts",
+        "bytes": 1005,
+        "sha256": "dedbcd68a3959f70d4c5f61ddb81a2dd613e6c48fdce5c33f940ceaa21804687"
+      },
+      {
+        "path": "foundation/structured/drag-drop.ts",
+        "bytes": 7691,
+        "sha256": "c029a395666cc8b77d4c56d95e629e0251e963f34200e8b32be2174923c39d3c"
+      },
+      {
+        "path": "foundation/structured/drop-target.ts",
+        "bytes": 8038,
+        "sha256": "cb1d58b10d6e22d79432c61a9236641af8923c87c91b236a69514bd9efcb0b53"
+      },
+      {
+        "path": "foundation/structured/input-keymap.ts",
+        "bytes": 18711,
+        "sha256": "bf4f1cad5bf05fb00be755cfe38da28ef4772fb010925126a8ac1df9974190bd"
+      },
+      {
+        "path": "foundation/structured/insertion-targets.ts",
+        "bytes": 4610,
+        "sha256": "4893b15b731d3d7122589fbedd0a1113d75dda62c351e6e9193e462f8cfad89c"
+      },
+      {
+        "path": "foundation/structured/outline-descriptor.ts",
+        "bytes": 16780,
+        "sha256": "f89b75936f27c822dc8fa8583a2215d805384752f77e05a2ecff288e6c4b7e61"
+      },
+      {
+        "path": "foundation/structured/outline-host.ts",
+        "bytes": 8132,
+        "sha256": "28baa735069925a3237d67e00e7a3bf3c603245555ec21338d22776ff4c39df0"
+      },
+      {
+        "path": "foundation/structured/presentation-bridge.ts",
+        "bytes": 28053,
+        "sha256": "541bf895aff12f7568628226efffc18d25ffdd541d3f5d9477eb975d9d5c4123"
+      },
+      {
+        "path": "foundation/structured/read-inspection.ts",
+        "bytes": 6753,
+        "sha256": "6ded261816bd2a6d35078cd42fc0f2300f16a4d4004899eede6acf07ebd91255"
+      },
+      {
+        "path": "foundation/structured/rich-content.ts",
+        "bytes": 6571,
+        "sha256": "2849980da547cadb981574ba4f6cd3257cbb013b5d82f093fabcac4303007480"
+      },
+      {
+        "path": "foundation/structured/sanitization-policy.ts",
+        "bytes": 3282,
+        "sha256": "1e873e2e5ca1fc976202927e2c5e574f9c45a1b647dace450df459cb4b5d6de4"
+      },
+      {
+        "path": "foundation/structured/selection-contract.ts",
+        "bytes": 592,
+        "sha256": "93c77df617f5148568082e368ad9366897f15c14c76c5dd8474d30ebfbe26960"
+      },
+      {
+        "path": "foundation/structured/selection-dom-bridge.ts",
+        "bytes": 2249,
+        "sha256": "452360f40d2ff34659f396672ed24f83df3deaf658a8102613e7a899db346f7c"
+      },
+      {
+        "path": "foundation/structured/selection-kernel.ts",
+        "bytes": 13375,
+        "sha256": "82016a5984164e2422c79e60372dc150f8eba176600707b11e2028e522e24a37"
+      },
+      {
+        "path": "foundation/structured/shorthand.ts",
+        "bytes": 1341,
+        "sha256": "de256ed6c75bb069a0d90fa2989fdfe2a61c07a278c00e61e8b4de43c2528e69"
+      },
+      {
+        "path": "foundation/structured/surface-host.ts",
+        "bytes": 40275,
+        "sha256": "d7ed7378b3544c093f35a9f6381334ae8f40d5be97a6f65984406ad9605d0e1b"
+      },
+      {
+        "path": "foundation/timeline/replay-host.ts",
+        "bytes": 13933,
+        "sha256": "63f8ac62bcacbe47d63a0a6cb1dc3664de4bf315642e419d48c68615f3aec58d"
+      },
+      {
+        "path": "foundation/timeline/replay.ts",
+        "bytes": 13874,
+        "sha256": "41e85e99b5bbca667062e772e2da0bfdf30e5fdeb315299fc1939a476b75ed40"
+      },
+      {
+        "path": "foundation/wave3-assembly.ts",
+        "bytes": 16201,
+        "sha256": "7ce069e1eaaf8438cd8593c6da48c6d6cc2c21c14d476f0d3b58ea6624039143"
+      },
+      {
+        "path": "foundation/wave4-assembly.ts",
+        "bytes": 12667,
+        "sha256": "e1286257097c59aab09110cf48ecb881ae38f1d4fb4647e0faa6a684c4d7c53b"
+      },
+      {
+        "path": "foundation/window-motion.ts",
+        "bytes": 6670,
+        "sha256": "011afed1a5d4842166f2a8e66cb06689fa6de1e98cdc80f2cc86e24fd4b015bb"
+      },
+      {
+        "path": "foundation/workspace-host.ts",
+        "bytes": 21814,
+        "sha256": "afcd7201ba8ceeb58fc8698073f6e16d695f87a79e5fb5b3c2178eb412c3de0c"
+      },
+      {
+        "path": "foundation/workspace.ts",
+        "bytes": 18571,
+        "sha256": "a4607903b46e86efb51954e0dbaf301b7a4fdb1fea626eba0fd6f01213fc82fd"
+      },
+      {
+        "path": "main.ts",
+        "bytes": 35889,
+        "sha256": "d9611bbde44f8e9b47038bfa506cd05fdabdfe49ca0e48e70cd077a71e2524e7"
+      },
+      {
+        "path": "model-tests.ts",
+        "bytes": 173512,
+        "sha256": "e377379c585d902b767f849cd99557f66a47bc3e2eaed9c353a62a9c5dab7d93"
+      },
+      {
+        "path": "pw08-structured-action-surfaces-tests.ts",
+        "bytes": 7930,
+        "sha256": "53f0728be11793a555813f01e2f76fc7e86b11381995d66c41eceba22ecf029b"
+      },
+      {
+        "path": "pw11-sticky-note-window-tests.ts",
+        "bytes": 6120,
+        "sha256": "d937f8a09e6b1e5cf620b838510df5c9a2992ffe05bd0c36d6b6425b60ee5692"
+      },
+      {
+        "path": "w3-d-bottom-deep-work-tests.ts",
+        "bytes": 15810,
+        "sha256": "7d6a3ee0ab68862d42eba7acfe75b04ba37354770408b100e42405d81def65dc"
+      },
+      {
+        "path": "w4-c-direction-rich-content-tests.ts",
+        "bytes": 13070,
+        "sha256": "b1adbf1d0e12b341ea5698f284e819f94d7156f953770093b055138e11b96251"
+      },
+      {
+        "path": "w4-d-structured-drag-drop-tests.ts",
+        "bytes": 7739,
+        "sha256": "6cce627e614f6883e0d7b718386ee4cb716d7e4731fc5446d576d0ffc628b92f"
+      },
+      {
+        "path": "w4-e-settings-center-tests.ts",
+        "bytes": 19105,
+        "sha256": "2c8c5c3a6ee3ad037254867463841944da7fa1d0c6a8a6518690aee9659e1308"
+      },
+      {
+        "path": "w4-f-operational-session-tests.ts",
+        "bytes": 8439,
+        "sha256": "8139a9c43310900e9f8f475db76cd018a81f40c327f540c3e1faffe48814a680"
+      },
+      {
+        "path": "w4-g-epistemic-confirmation-tests.ts",
+        "bytes": 16849,
+        "sha256": "2643ddb93130ca6f942b63157ff32093be240a8663d0063d73ea185af0a56074"
+      },
+      {
+        "path": "w5-a-structured-surface-host-browser.ts",
+        "bytes": 9072,
+        "sha256": "f9ffd345dec2551a3f5bc78c15d2422358f4a59713ee139d94ce382e84eae1fd"
+      },
+      {
+        "path": "w5-a-structured-surface-host-tests.ts",
+        "bytes": 44410,
+        "sha256": "f22ac348ecafe47c7252824d556e72aba563dab664c7d5de039c765e4d8c8480"
+      },
+      {
+        "path": "w5-b-structured-navigation-browser-harness.ts",
+        "bytes": 2394,
+        "sha256": "5fdf52dc32a4c0a9012a9cb12c82404b5a3e831242b372e6e490c5c31078abcf"
+      },
+      {
+        "path": "w5-b-structured-navigation-correction-tests.ts",
+        "bytes": 9097,
+        "sha256": "625e0353e4b157f3de73a411179c0335acecbbcd6d61af241b583639ff0435da"
+      },
+      {
+        "path": "w5-b-structured-navigation-delta2-tests.ts",
+        "bytes": 11343,
+        "sha256": "7650ed0b69181d843695eab7d2699f9c5f908f808c9733c341224347481e2b84"
+      },
+      {
+        "path": "w5-b-structured-navigation-micro3-tests.ts",
+        "bytes": 4909,
+        "sha256": "6e0a32150550918c971bb6a443adc78a4a9316ddae9792cf8bd4fb1f03473bb7"
+      },
+      {
+        "path": "w5-b-structured-navigation-tests.ts",
+        "bytes": 10660,
+        "sha256": "3bd0ae85d188c864011e87ed599ef6b25055181007a7019a9721ff3d358a71bd"
+      },
+      {
+        "path": "w5-c-structured-consumer-parity-browser.ts",
+        "bytes": 11121,
+        "sha256": "9568cf9343a790ca9387b547761f3857c7a480825e9786d63b486e247e1d79bc"
+      },
+      {
+        "path": "w5-c-structured-consumer-parity-tests.ts",
+        "bytes": 25310,
+        "sha256": "ebf72e374e2510d9cfef8e58f6c3e668877716d18b196fa75297c70a9b736d3d"
+      },
+      {
+        "path": "w6-a-sticky-note-window-browser.ts",
+        "bytes": 2808,
+        "sha256": "4623c02fb4896c334f62d3cfcf6ad3345422ae2b7237f453571600bb05fda6f2"
+      },
+      {
+        "path": "w6-a-sticky-note-window-tests.ts",
+        "bytes": 10628,
+        "sha256": "7b7f3ab3bfd801bbdaedcfc1388b1b1d84b339b09d84794c1ce380948e0373f4"
+      },
+      {
+        "path": "w6-b-note-binding-browser.ts",
+        "bytes": 3469,
+        "sha256": "60b28b023d4858ec846dde951edddddb85c8566717364659806d3c4036c2c2c2"
+      },
+      {
+        "path": "w6-b-note-binding-correction-tests.ts",
+        "bytes": 7796,
+        "sha256": "511a3c77c8300e8538756ddf212eaf18471b5ef60753d72617473df9bc339fb9"
+      },
+      {
+        "path": "w6-b-note-binding-tests.ts",
+        "bytes": 17361,
+        "sha256": "27528a6244f8dd1cf504059169d846b0ac052846296b2ec5484e420a5b9d62af"
+      },
+      {
+        "path": "w6-c-structured-note-content-browser.ts",
+        "bytes": 8535,
+        "sha256": "4c5eba08588079341995a8b48f1146be7558b2cce3e2594c7aae0dc1b916f939"
+      },
+      {
+        "path": "w6-c-structured-note-content-correction-browser.ts",
+        "bytes": 5456,
+        "sha256": "e880b161bbb1f29cf1841bc5c9fdd8a1a6f6c0922d3d0eb4ca2a710cb245f18a"
+      },
+      {
+        "path": "w6-c-structured-note-content-correction-tests.ts",
+        "bytes": 9830,
+        "sha256": "c9114a91d93012a20b44b1ec51fcfc2123422afc9d2ce8b905199a215caf7b6e"
+      },
+      {
+        "path": "w6-c-structured-note-content-tests.ts",
+        "bytes": 38150,
+        "sha256": "9d5cbd6cfcdc1943ed3b9323a872e6e8b18cafaaa0cf4f343c7597253854fb3a"
+      }
+    ]
+  },
+  "catalog": {
+    "shared": 23,
+    "persistentMutators": 22,
+    "readCheckpointCommands": [
+      "document.commit"
+    ]
+  },
+  "rows": [
+    {
+      "command": "history.undo",
+      "mutability": {
+        "class": "history-document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "history.undo",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "history-document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "history.undo",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "historyIndex": 1,
+          "historyLength": 2
+        },
+        "result": {
+          "ok": true
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "history.redo",
+      "mutability": {
+        "class": "history-document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "history.redo",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "history-document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "history.redo",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "historyIndex": 0,
+          "historyLength": 2
+        },
+        "result": {
+          "ok": true
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "block.insert",
+      "mutability": {
+        "class": "document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.insert",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.insert",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "targetKind": "gap"
+        },
+        "result": {
+          "ok": true,
+          "code": "APPLIED"
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "block.duplicate",
+      "mutability": {
+        "class": "document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.duplicate",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.duplicate",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode"
+        },
+        "result": {
+          "ok": true,
+          "code": "APPLIED"
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "block.delete",
+      "mutability": {
+        "class": "document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.delete",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.delete",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "destructive": true,
+          "subtreeCount": 1,
+          "requiresStructuralConfirmation": false,
+          "confirmationThreshold": 2
+        },
+        "result": {
+          "ok": true,
+          "code": "APPLIED"
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "block.moveUp",
+      "mutability": {
+        "class": "document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.moveUp",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.moveUp",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode"
+        },
+        "result": {
+          "ok": true,
+          "code": "APPLIED"
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "block.moveDown",
+      "mutability": {
+        "class": "document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.moveDown",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.moveDown",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode"
+        },
+        "result": {
+          "ok": true,
+          "code": "APPLIED"
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "block.moveStart",
+      "mutability": {
+        "class": "document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.moveStart",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.moveStart",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode"
+        },
+        "result": {
+          "ok": true,
+          "code": "APPLIED"
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "block.moveEnd",
+      "mutability": {
+        "class": "document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.moveEnd",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.moveEnd",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode"
+        },
+        "result": {
+          "ok": true,
+          "code": "APPLIED"
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "block.moveToGap",
+      "mutability": {
+        "class": "document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.moveToGap",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.moveToGap",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "target": {
+            "kind": "gap",
+            "parentId": null,
+            "index": 0,
+            "depth": 0
+          }
+        },
+        "result": {
+          "ok": true,
+          "code": "APPLIED"
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "block.indent",
+      "mutability": {
+        "class": "document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.indent",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.indent",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mode": "local"
+        },
+        "result": {
+          "ok": true,
+          "code": "APPLIED"
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "block.outdent",
+      "mutability": {
+        "class": "document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.outdent",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.outdent",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mode": "local"
+        },
+        "result": {
+          "ok": true,
+          "code": "APPLIED"
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "block.split",
+      "mutability": {
+        "class": "document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.split",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.split",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode"
+        },
+        "result": {
+          "ok": true,
+          "code": "APPLIED"
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "block.mergeBackward",
+      "mutability": {
+        "class": "document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.mergeBackward",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.mergeBackward",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "previewMode": "merge"
+        },
+        "result": {
+          "ok": true,
+          "code": "APPLIED"
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "block.mergeForward",
+      "mutability": {
+        "class": "document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.mergeForward",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.mergeForward",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode"
+        },
+        "result": {
+          "ok": true,
+          "code": "APPLIED"
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "block.convert",
+      "mutability": {
+        "class": "document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.convert",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.convert",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode"
+        },
+        "result": {
+          "ok": true,
+          "code": "APPLIED"
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "block.plainText",
+      "mutability": {
+        "class": "document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.plainText",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.plainText",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode"
+        },
+        "result": {
+          "ok": true,
+          "code": "APPLIED"
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "block.align",
+      "mutability": {
+        "class": "document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.align",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.align",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode"
+        },
+        "result": {
+          "ok": true,
+          "code": "APPLIED"
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "block.direction",
+      "mutability": {
+        "class": "document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.direction",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.direction",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode"
+        },
+        "result": {
+          "ok": true,
+          "code": "APPLIED"
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "block.background",
+      "mutability": {
+        "class": "document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.background",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.background",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode"
+        },
+        "result": {
+          "ok": true,
+          "code": "APPLIED"
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "block.clearStyle",
+      "mutability": {
+        "class": "document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.clearStyle",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "block.clearStyle",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode"
+        },
+        "result": {
+          "ok": true,
+          "code": "APPLIED"
+        },
+        "registryReceiptDelta": 1
+      }
+    },
+    {
+      "command": "document.recoverAsNew",
+      "mutability": {
+        "class": "recovery-document-mutation",
+        "persistentDocumentMutation": true,
+        "readModeAllowed": false
+      },
+      "read": {
+        "status": "PASS",
+        "availability": {
+          "id": "document.recoverAsNew",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير.",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": false,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+          "mutabilityClass": "recovery-document-mutation",
+          "readModeAllowed": false
+        },
+        "result": {
+          "ok": false,
+          "code": "EDIT_MODE_REQUIRED",
+          "reason": "وضع القراءة غير قابل للتحرير؛ يتطلب هذا الأمر وضع التحرير."
+        },
+        "zeroDocumentMutation": true,
+        "zeroHistoryFrame": true,
+        "zeroWorkingRevisionAdvance": true,
+        "zeroDirtyTransition": true,
+        "zeroAdapterMutationReceipt": true,
+        "zeroRegistryReceipt": true
+      },
+      "edit": {
+        "status": "PASS",
+        "availability": {
+          "id": "document.recoverAsNew",
+          "owner": "StructuredCommandAvailabilityOwner",
+          "commandOwner": "StructuredDocumentDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "StructuredCommandAvailabilityOwner",
+          "enabled": true,
+          "policyRevision": "structured-command-availability-vs05-r2-read-mode"
+        },
+        "result": {
+          "ok": true
+        },
+        "registryReceiptDelta": 1
+      }
+    }
+  ],
+  "checkpoint": {
+    "status": "PASS",
+    "availability": {
+      "id": "document.commit",
+      "owner": "StructuredCommandAvailabilityOwner",
+      "commandOwner": "StructuredDocumentDomainAdapter",
+      "code": "AVAILABLE",
+      "reason": "",
+      "availabilityOwner": "StructuredCommandAvailabilityOwner",
+      "enabled": true,
+      "policyRevision": "structured-command-availability-vs05-r2-read-mode",
+      "dirty": true,
+      "persistedBoundaryConfigured": false
+    },
+    "result": {
+      "status": "SAVE_BOUNDARY_UNAVAILABLE",
+      "persisted": false
+    },
+    "zeroDocumentMutation": true,
+    "zeroHistoryFrame": true,
+    "zeroWorkingRevisionAdvance": true,
+    "zeroDirtyTransition": true,
+    "committedRevisionUnchanged": true
+  },
+  "negativeFixture": {
+    "command": "block.align",
+    "artificialReenable": true,
+    "detected": true,
+    "status": "PASS"
+  }
+}
+{
+  "schemaVersion": 1,
+  "kind": "VS05_STRUCTURED_COMMAND_AVAILABILITY_OWNERSHIP_GATE",
+  "status": "PASS",
+  "commandCount": 23,
+  "checks": [
+    {
+      "id": "catalog.unique",
+      "status": "PASS",
+      "detail": {
+        "count": 23
+      }
+    },
+    {
+      "id": "owner.one-registration",
+      "status": "PASS",
+      "detail": "Library and Learn bind identical canonical owner"
+    },
+    {
+      "id": "availability.one-owner",
+      "status": "PASS",
+      "detail": {
+        "owner": "StructuredCommandAvailabilityOwner",
+        "policyRevision": "structured-command-availability-vs05-r2-read-mode"
+      }
+    },
+    {
+      "id": "read-mode.policy-catalog",
+      "status": "PASS",
+      "detail": {
+        "persistentMutators": 22,
+        "checkpointReadAllowed": true
+      }
+    },
+    {
+      "id": "read-mode.all-persistent-disabled",
+      "status": "PASS",
+      "detail": {
+        "count": 22,
+        "expected": "EDIT_MODE_REQUIRED"
+      }
+    },
+    {
+      "id": "read-mode.direct-registry-no-mutation",
+      "status": "PASS",
+      "detail": {
+        "code": "EDIT_MODE_REQUIRED",
+        "receiptDelta": 0
+      }
+    },
+    {
+      "id": "read-mode.negative-fixture",
+      "status": "PASS",
+      "detail": "deliberate block.align READ re-enable is detected by the durable matrix verifier"
+    },
+    {
+      "id": "read-mode.no-legacy-format-allowlist",
+      "status": "PASS",
+      "detail": "legacy READ formatting/conversion exception removed from canonical owner"
+    },
+    {
+      "id": "preflight.cannot-bypass-disabled",
+      "status": "PASS",
+      "detail": {
+        "code": "LEVEL_START",
+        "reason": "العنصر في بداية المستوى"
+      }
+    },
+    {
+      "id": "duplicate-owner.negative-fixture",
+      "status": "PASS",
+      "detail": "deliberate duplicate canonical command registration rejected"
+    },
+    {
+      "id": "runtime.no-direct-main-save-bypass",
+      "status": "PASS",
+      "detail": "Save/autosave use document.commit registry route"
+    },
+    {
+      "id": "runtime.history-registry-route",
+      "status": "PASS",
+      "detail": "Library history presentation delegates to canonical registry"
+    },
+    {
+      "id": "runtime.recovery-registry-route",
+      "status": "PASS",
+      "detail": "Library recovery presentation delegates to canonical registry"
+    },
+    {
+      "id": "runtime.palette-canonical-ids",
+      "status": "PASS",
+      "detail": "donor palette projects canonical command IDs"
+    },
+    {
+      "id": "runtime.main-direct-mutation-deferred-only",
+      "status": "PASS",
+      "detail": "only VS-06 selection multi-delete remains explicit direct main mutation deferment"
+    },
+    {
+      "id": "main.bind-before-runtime",
+      "status": "PASS",
+      "detail": "canonical command registrations exist before Library runtime mount"
+    },
+    {
+      "id": "structured.execution-preflight",
+      "status": "PASS",
+      "detail": "execution rechecks the same Structured availability source"
+    },
+    {
+      "id": "source-negative-fixture",
+      "status": "PASS",
+      "detail": {
+        "directSaveBypass": true,
+        "localAlias": true
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "mechanic": "selection.multi-delete",
+      "route": "applyStructuredMutation('main',{type:'removeMany'",
+      "targetSlice": "VS-06",
+      "status": "EXPLICITLY_DEFERRED"
+    },
+    {
+      "mechanic": "keyboard-mapping",
+      "targetSlice": "VS-09",
+      "status": "MAPPING_UNCHANGED_SEMANTIC_ROUTES_CONVERGED"
+    }
+  ]
+}

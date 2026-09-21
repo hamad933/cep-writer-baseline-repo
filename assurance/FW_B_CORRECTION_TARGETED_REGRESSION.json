@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "kind": "FW_B_BOUNDED_CORRECTION_TARGETED_REGRESSION",
+  "status": "PASS",
+  "generatedAt": "2026-09-11T21:44:21.862183+00:00",
+  "sourceCanonicalTreeSha256": "7a66cf34bda230208d6e79fa88250403dcb56b93fb4867cb310c973b431c4a5b",
+  "controllerDefectReproduction": "assurance/FW_B_CORRECTION_DEFECT_REPRO_AND_FIX.json",
+  "modelTests": {
+    "structured.selection-stale-range-metadata-repair": {
+      "id": "structured.selection-stale-range-metadata-repair",
+      "before": "canonical a->b->c range then delete stale anchor a",
+      "action": "reconcile selection after structural delete",
+      "owner": "StructuredSelectionKernel",
+      "oracle": "top-level and nested range endpoints/raw IDs/direction repair to b->c consistently",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    "structured.selection-stale-backward-range-metadata-repair": {
+      "id": "structured.selection-stale-backward-range-metadata-repair",
+      "before": "canonical a->b->c backward range c->a then delete stale focus a",
+      "action": "reconcile backward selection after structural delete",
+      "owner": "StructuredSelectionKernel",
+      "oracle": "surviving range stays c->b with backward direction and canonical raw IDs b,c",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    "structured.selection-stale-bookmark-project-repair": {
+      "id": "structured.selection-stale-bookmark-project-repair",
+      "before": "bookmark captured for a->c before a is deleted",
+      "action": "project stale bookmark after delete",
+      "owner": "StructuredSelectionKernel",
+      "oracle": "projection prunes a and preserves valid b,c instead of clearing selection",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    },
+    "structured.selection-delete-undo-redo-recovery-bookmark-roundtrip": {
+      "id": "structured.selection-delete-undo-redo-recovery-bookmark-roundtrip",
+      "before": "range a->c repaired to b->c after deleting a",
+      "action": "delete, bookmark, Undo, Redo, recovery-as-new and bookmark projection",
+      "owner": "StructuredSelectionKernel + StructuredTransactionHistoryRecoveryOwner",
+      "oracle": "all projections retain valid repaired b,c with internally consistent range metadata",
+      "status": "PASS",
+      "kind": "MODEL_NOT_BROWSER"
+    }
+  },
+  "libraryLearnBrowserProof": "assurance/FW_B_CORRECTION_LIBRARY_LEARN_PROOF.json",
+  "requiredBehaviors": [
+    "repair range.anchorBlockId",
+    "repair range.focusBlockId",
+    "repair range.rawBlockIds",
+    "repair range.direction",
+    "preserve surviving selection after delete",
+    "preserve repaired selection across Undo",
+    "preserve repaired selection across Redo",
+    "preserve repaired selection across recovery/bookmark projection"
+  ]
+}

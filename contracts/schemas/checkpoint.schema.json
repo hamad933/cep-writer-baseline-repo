@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CEPWorkCheckpoint",
+  "type": "object",
+  "required": [
+    "phase",
+    "gate_token",
+    "sources_consumed",
+    "artifacts",
+    "open_conflicts",
+    "next_phase"
+  ],
+  "properties": {
+    "phase": {
+      "type": "string"
+    },
+    "gate_token": {
+      "type": "string"
+    },
+    "sources_consumed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "coverage": {
+      "type": "object"
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "open_conflicts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_phase": {
+      "type": "string"
+    },
+    "owner_accepted": {
+      "const": false
+    }
+  },
+  "additionalProperties": true
+}

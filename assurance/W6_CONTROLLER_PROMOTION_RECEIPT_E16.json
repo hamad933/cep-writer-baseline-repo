@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "W6_CONTROLLER_PROMOTION_RECEIPT_E16",
+  "status": "PROMOTION_PACKAGE_BUILD_AUTHORIZED",
+  "successorId": "CEP-FR-E16-W6-fcca03a3",
+  "baselineId": "CEP-FR-E16-W6-NOTES-FAMILY-COMPLETION",
+  "predecessor": {
+    "successorId": "CEP-FR-E15-W5-71facfb8",
+    "zipSha256": "71facfb824ac32ee67c988255846ad3c950887dc3f892fcac93fcad9f2a5012b"
+  },
+  "wave6ABIntermediate": {
+    "sha256": "8a4226b5061fd8c0327bce4ac2ad69d538cb33a5672afb2167d8113487611d0a",
+    "intermediateId": "CEP-FR-E15-W6-AB-a0af2911"
+  },
+  "laneCCorrectedCandidate": {
+    "sha256": "8d12c85577ac83f9428bfe8115194b30ba68bd8ee5b57b32f1789607e0532e23",
+    "candidateId": "CEP-FR-E15-W6-C-CORR-864113b6"
+  },
+  "finalSource": {
+    "sha256": "fcca03a3ef529e5eda8b3ddddcc1f093ad7054336430d3c08224fac55328c753",
+    "files": 113
+  },
+  "gateMatrix": "assurance/W6_CONTROLLER_FINAL_GATE_MATRIX.json",
+  "acceptance": "assurance/W6_CONTROLLER_FINAL_ACCEPTANCE.json",
+  "donorAdjudication": "assurance/W6_CONTROLLER_DONOR_ADJUDICATION.json",
+  "registryReconciliation": "assurance/W6_CONTROLLER_REGISTRY_GENERATOR_RECONCILIATION.json",
+  "promotionRules": {
+    "freshManifestRequired": true,
+    "freshExtractionRequired": true,
+    "freshCriticalProofsRequired": true,
+    "currentControlUpdateOnlyAfterFreshPackagePass": true
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "kind": "W4_CONTROLLER_CHANGED_PATH_RECEIPT",
+  "parent": "CEP-FR-E13-W3-355df690",
+  "canonicalSource": {
+    "sha256": "c1426384377efb35b54bf8ef59f6fcb58cab997e09009b64721eb2ab5c40525d",
+    "files": 84
+  },
+  "paths": {
+    "added": [
+      "stack/native-typescript/adapters/note-content-direction-fixture.ts",
+      "stack/native-typescript/fixtures/w4-f-runtime-contract-fixture.ts",
+      "stack/native-typescript/foundation/contracts/epistemic-state.ts",
+      "stack/native-typescript/foundation/contracts/platform-input-direction-bridge.ts",
+      "stack/native-typescript/foundation/contracts/runtime-adapter.ts",
+      "stack/native-typescript/foundation/global/confirmation-host.ts",
+      "stack/native-typescript/foundation/global/input-direction.ts",
+      "stack/native-typescript/foundation/global/settings/center.ts",
+      "stack/native-typescript/foundation/global/settings/search.ts",
+      "stack/native-typescript/foundation/global/settings/sections.ts",
+      "stack/native-typescript/foundation/operational/session-owner.ts",
+      "stack/native-typescript/foundation/operational/terminal-host.ts",
+      "stack/native-typescript/foundation/structured/action-descriptors.ts",
+      "stack/native-typescript/foundation/structured/caret-bridge.ts",
+      "stack/native-typescript/foundation/structured/code-block.ts",
+      "stack/native-typescript/foundation/structured/direction-adapter.ts",
+      "stack/native-typescript/foundation/structured/drag-drop.ts",
+      "stack/native-typescript/foundation/structured/drop-target.ts",
+      "stack/native-typescript/foundation/structured/input-keymap.ts",
+      "stack/native-typescript/foundation/structured/insertion-targets.ts",
+      "stack/native-typescript/foundation/structured/rich-content.ts",
+      "stack/native-typescript/foundation/structured/sanitization-policy.ts",
+      "stack/native-typescript/foundation/structured/shorthand.ts",
+      "stack/native-typescript/foundation/wave4-assembly.ts",
+      "stack/native-typescript/w4-c-direction-rich-content-tests.ts",
+      "stack/native-typescript/w4-d-structured-drag-drop-tests.ts",
+      "stack/native-typescript/w4-e-settings-center-tests.ts",
+      "stack/native-typescript/w4-f-operational-session-tests.ts",
+      "stack/native-typescript/w4-g-epistemic-confirmation-tests.ts"
+    ],
+    "modified": [
+      "stack/native-typescript/foundation/accepted-runtime.ts",
+      "stack/native-typescript/foundation/structured.ts",
+      "stack/native-typescript/main.ts"
+    ],
+    "removed": [],
+    "count": 32
+  },
+  "manualConvergenceNotes": [
+    "foundation/structured.ts three-way union preserved B/C/D owners",
+    "accepted-runtime.ts owner-first event routing without prematurely claiming StructuredSurfaceHost",
+    "main.ts mounts Wave4 composition and Settings/Operational bindings",
+    "StructuredInputKeymapOwner container Enter/backspace integration correction",
+    "Settings Escape removes transient truth and Settings DOM",
+    "Operational session attachment accepts RuntimeAdapter session-id string"
+  ],
+  "wave5Pending": "StructuredSurfaceHost final renderer/event convergence remains required."
+}

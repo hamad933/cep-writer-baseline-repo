@@ -1,0 +1,410 @@
+[
+  {
+    "component_id": "WorkspaceFrame",
+    "semantic_core": "SC-002",
+    "implementation": "dist/foundation/workspace-host.js + dist/foundation/workspace.js",
+    "slots": [
+      "TOP",
+      "TOOLBAR",
+      "LEFT",
+      "CENTER",
+      "RIGHT",
+      "BOTTOM",
+      "TRANSIENT"
+    ],
+    "status": "EXECUTABLE_DONOR_FREE_HOST_WITH_LIBRARY_COMPATIBILITY_DEVIATION",
+    "duplicate_policy": "Consume this owner; no surface-local equivalent"
+  },
+  {
+    "component_id": "SidePaneShell",
+    "semantic_core": "SC-003",
+    "implementation": "dist/foundation/workspace-host.js",
+    "slots": [
+      "LEFT",
+      "RIGHT"
+    ],
+    "status": "EXECUTABLE_PREFERRED_EFFECTIVE_PANE_OWNER",
+    "duplicate_policy": "Consume this owner; no surface-local equivalent"
+  },
+  {
+    "component_id": "WorkspaceToolbar",
+    "semantic_core": "SC-017",
+    "implementation": "dist/foundation/workspace.js",
+    "slots": [
+      "TOOLBAR"
+    ],
+    "status": "EXECUTABLE_BOUNDED",
+    "duplicate_policy": "Consume this owner; no surface-local equivalent"
+  },
+  {
+    "component_id": "CommandPalette",
+    "semantic_core": "SC-016",
+    "implementation": "dist/foundation/workspace-host.js + dist/foundation/accepted-runtime.js (Library compatibility only)",
+    "slots": [
+      "TRANSIENT"
+    ],
+    "status": "EXECUTABLE_SHARED_CONTRACT_WITH_LIBRARY_COMPATIBILITY_DEVIATION",
+    "duplicate_policy": "Consume this owner; no surface-local equivalent"
+  },
+  {
+    "component_id": "ContextActionMenu",
+    "semantic_core": "SC-017",
+    "implementation": "dist/foundation/workspace.js",
+    "slots": [
+      "TRANSIENT"
+    ],
+    "status": "EXECUTABLE_BOUNDED",
+    "duplicate_policy": "Consume this owner; no surface-local equivalent"
+  },
+  {
+    "component_id": "SelectionActionSurface",
+    "semantic_core": "SC-027",
+    "implementation": "dist/foundation/spatial/relation-interaction.js + dist/foundation/models.js",
+    "slots": [
+      "TRANSIENT"
+    ],
+    "status": "EXECUTABLE_CENTRAL_AVAILABILITY_PRESENTATION",
+    "duplicate_policy": "Consume this owner; no surface-local equivalent"
+  },
+  {
+    "component_id": "InsertionPalette",
+    "semantic_core": "SC-030",
+    "implementation": "dist/foundation/accepted-runtime.js (Library compatibility only)",
+    "slots": [
+      "TRANSIENT"
+    ],
+    "status": "EXECUTABLE_LIBRARY_COMPATIBILITY_ONLY_NOT_GLOBAL_OWNER",
+    "duplicate_policy": "Consume this owner; no surface-local equivalent"
+  },
+  {
+    "component_id": "ContextInspector",
+    "semantic_core": "SC-004",
+    "implementation": "dist/foundation/global/context-inspector.js + dist/adapters/context-library-structured.js + dist/adapters/context-spatial.js",
+    "slots": [
+      "RIGHT",
+      "TRANSIENT"
+    ],
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_GLOBAL_OWNER",
+    "duplicate_policy": "ContextInspectorHost is the only reusable inspector lifecycle/presentation owner; descriptor payload truth remains provider/domain-owned"
+  },
+  {
+    "component_id": "LensHost",
+    "semantic_core": "SC-004",
+    "implementation": "dist/foundation/accepted-runtime.js (Library compatibility only)",
+    "slots": [
+      "RIGHT"
+    ],
+    "status": "EXECUTABLE_LIBRARY_COMPATIBILITY_ONLY_NOT_GLOBAL_OWNER",
+    "duplicate_policy": "Consume this owner; no surface-local equivalent"
+  },
+  {
+    "component_id": "BottomShelf",
+    "semantic_core": "SC-005",
+    "implementation": "dist/foundation/global/bottom-shelf.js + dist/adapters/structured-bottom-provider.js + dist/adapters/operational-bottom-provider.js",
+    "slots": [
+      "BOTTOM"
+    ],
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_GLOBAL_OWNER",
+    "duplicate_policy": "BottomDeepWorkOwner owns open/close/inert/focus/provider lifecycle; provider content remains family/domain-owned"
+  },
+  {
+    "component_id": "SettingsCenter",
+    "semantic_core": "SC-009",
+    "implementation": "dist/foundation/global/settings/center.js + dist/foundation/global/settings/sections.js + dist/foundation/global/settings/search.js",
+    "slots": [
+      "TRANSIENT"
+    ],
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_GLOBAL_OWNER_M6",
+    "duplicate_policy": "SettingsCenterOwner owns presentation/disclosure/search only; ScopedPreferencesOwner owns values/persistence; family applicability must be explicit."
+  },
+  {
+    "component_id": "ScopedPreferencesOwner",
+    "semantic_core": "SC-008",
+    "implementation": "dist/foundation/models.js",
+    "slots": [
+      "MODEL"
+    ],
+    "status": "EXECUTABLE_BOUNDED",
+    "duplicate_policy": "Consume this owner; no surface-local equivalent"
+  },
+  {
+    "component_id": "FocusAndDismissal",
+    "semantic_core": "SC-019",
+    "implementation": "dist/foundation/workspace-host.js + dist/foundation/workspace.js",
+    "slots": [
+      "TRANSIENT"
+    ],
+    "status": "EXECUTABLE_TRANSIENT_FOCUS_LIFECYCLE",
+    "duplicate_policy": "Consume this owner; no surface-local equivalent"
+  },
+  {
+    "component_id": "UnifiedEditor",
+    "semantic_core": "SC-030",
+    "implementation": "dist/foundation/structured.js + dist/foundation/structured/surface-host.js + dist/foundation/structured/block-renderer.js + dist/foundation/structured/presentation-bridge.js + dist/foundation/structured/read-inspection.js + dist/foundation/structured/outline-descriptor.js + dist/foundation/workspace-host.js + dist/foundation/accepted-runtime.js (Library compatibility integration only)",
+    "slots": [
+      "CENTER",
+      "NOTES"
+    ],
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_STRUCTURED_FAMILY_BOUNDARY_M6",
+    "duplicate_policy": "StructuredSurfaceHost/StructuredNavigationDescriptorOwner orchestrate presentation/descriptors only; StructuredDocumentDomainAdapter and accepted subordinate owners retain canonical truth; Library donor integration remains bounded compatibility glue"
+  },
+  {
+    "component_id": "StickyNotes",
+    "semantic_core": "SC-038",
+    "implementation": "dist/foundation/accepted-runtime.js (Library compatibility only)",
+    "slots": [
+      "TRANSIENT",
+      "RIGHT"
+    ],
+    "status": "EXECUTABLE_LIBRARY_COMPATIBILITY_ONLY_NOT_GLOBAL_OWNER",
+    "duplicate_policy": "Consume this owner; no surface-local equivalent"
+  },
+  {
+    "component_id": "SpatialInteraction",
+    "semantic_core": "SC-031",
+    "implementation": "dist/foundation/spatial/interaction-kernel.js + dist/foundation/spatial.js",
+    "slots": [
+      "CENTER"
+    ],
+    "status": "EXECUTABLE_BOUNDED",
+    "duplicate_policy": "Consume this owner; no surface-local equivalent"
+  },
+  {
+    "component_id": "OperationalSurface",
+    "semantic_core": "SC-036",
+    "implementation": "dist/foundation/operational.js",
+    "slots": [
+      "CENTER",
+      "BOTTOM",
+      "TRANSIENT"
+    ],
+    "status": "EXECUTABLE_WITH_RENDERER_AND_RUNTIME_ADAPTER_BOUNDARIES",
+    "duplicate_policy": "Consume this owner; no surface-local equivalent"
+  },
+  {
+    "component_id": "WindowMotion",
+    "semantic_core": "SC-006",
+    "implementation": "dist/foundation/window-motion.js",
+    "slots": [
+      "TRANSIENT"
+    ],
+    "status": "EXECUTABLE_BOUNDED",
+    "duplicate_policy": "Consume this owner; no surface-local equivalent"
+  },
+  {
+    "component_id": "SemanticCommandBus",
+    "semantic_core": "SC-016",
+    "implementation": "dist/foundation/models.js",
+    "slots": [
+      "MODEL"
+    ],
+    "status": "EXECUTABLE_BOUNDED",
+    "duplicate_policy": "Consume this owner; no surface-local equivalent"
+  },
+  {
+    "component_id": "StatusFeedback",
+    "semantic_core": "SC-022",
+    "implementation": "dist/foundation/global/feedback.js",
+    "slots": [
+      "GLOBAL",
+      "TRANSIENT"
+    ],
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_GLOBAL_OWNER",
+    "duplicate_policy": "AccessibilityFeedbackOwner projects source truth only; no domain status invention or duplicate aria-live owner"
+  },
+  {
+    "component_id": "AnalyticalCompare",
+    "semantic_core": "SC-032",
+    "implementation": "dist/foundation/analytical/compare.js + dist/foundation/analytical/compare-host.js + dist/foundation/contracts/analysis-provider.js + dist/adapters/analytical/rq-compare-provider.js + dist/adapters/analytical/results-compare-provider.js",
+    "slots": [
+      "CENTER",
+      "BOTTOM"
+    ],
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_ANALYTICAL_COMPARE_E18",
+    "duplicate_policy": "ONE_ANALYTICAL_COMPARE_OWNER; exact pinned identity only; domain meaning stays in typed AnalysisProvider adapters; no Review/Mastery/Audit authority transfer"
+  },
+  {
+    "component_id": "GlobalInputKeymap",
+    "semantic_core": "SC-020",
+    "implementation": "dist/foundation/global/input-keymap.js + dist/foundation/global/region-cycle.js + dist/foundation/global/input-ownership-contract.js",
+    "slots": [
+      "TOP",
+      "TOOLBAR",
+      "LEFT",
+      "CENTER",
+      "RIGHT",
+      "BOTTOM",
+      "TRANSIENT"
+    ],
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_GLOBAL_OWNER",
+    "duplicate_policy": "GlobalInputKeymapOwner alone owns global shortcuts/F6/Escape routing; family keymaps keep family semantics"
+  },
+  {
+    "component_id": "UIScalePolicy",
+    "semantic_core": "SC-007",
+    "implementation": "dist/foundation/global/preferences/ui-scale.js + dist/foundation/global/tokens/scale.css",
+    "slots": [
+      "GLOBAL"
+    ],
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_GLOBAL_POLICY",
+    "duplicate_policy": "UIScalePolicyOwner projects application-chrome scale only; no document/canvas zoom, density or responsive ownership"
+  },
+  {
+    "component_id": "InputDirectionResolver",
+    "semantic_core": "SC-013",
+    "implementation": "dist/foundation/global/input-direction.js + dist/foundation/contracts/platform-input-direction-bridge.js",
+    "slots": [
+      "CENTER",
+      "TRANSIENT"
+    ],
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_GLOBAL_OWNER_M6",
+    "duplicate_policy": "One transient direction resolver; explicit content direction wins; no semantic-language inference or surface-local heuristic owner."
+  },
+  {
+    "component_id": "StructuredInputKeymap",
+    "semantic_core": "SC-020",
+    "implementation": "dist/foundation/structured/input-keymap.js + dist/foundation/structured/caret-bridge.js + dist/foundation/structured/shorthand.js",
+    "slots": [
+      "CENTER"
+    ],
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_FAMILY_OWNER_M6",
+    "duplicate_policy": "StructuredInputKeymapOwner alone owns Structured editor key/caret/composition/shorthand semantics; global shortcuts remain GlobalInputKeymapOwner."
+  },
+  {
+    "component_id": "StructuredActionDescriptors",
+    "semantic_core": "SC-017",
+    "implementation": "dist/foundation/structured/action-descriptors.js + dist/foundation/structured/insertion-targets.js",
+    "slots": [
+      "CENTER",
+      "TRANSIENT"
+    ],
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_FAMILY_OWNER_M6",
+    "duplicate_policy": "One Structured action descriptor truth for palette/menu/keyboard/Shift+F10; mutation and confirmation presentation remain delegated."
+  },
+  {
+    "component_id": "StructuredRichContent",
+    "semantic_core": "SC-030",
+    "implementation": "dist/foundation/structured/rich-content.js + dist/foundation/structured/code-block.js + dist/foundation/structured/sanitization-policy.js + dist/foundation/structured/direction-adapter.js",
+    "slots": [
+      "CENTER"
+    ],
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_FAMILY_OWNER_M6",
+    "duplicate_policy": "StructuredRichContentOwner owns safe rich/code/bidi presentation policy; ClipboardTrust owns clipboard trust and document mutation stays outside renderer."
+  },
+  {
+    "component_id": "StructuredDragDrop",
+    "semantic_core": "SC-030",
+    "implementation": "dist/foundation/structured/drag-drop.js + dist/foundation/structured/drop-target.js",
+    "slots": [
+      "CENTER"
+    ],
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_FAMILY_OWNER_M6",
+    "duplicate_policy": "StructuredDragDropOwner owns drag intent/target/autoscroll projection; StructuredMutationKernel owns actual document mutation."
+  },
+  {
+    "component_id": "OperationalSessionBoundary",
+    "semantic_core": "SC-006",
+    "implementation": "dist/foundation/operational/session-owner.js + dist/foundation/operational/terminal-host.js + dist/foundation/contracts/runtime-adapter.js",
+    "slots": [
+      "CENTER",
+      "BOTTOM",
+      "TRANSIENT"
+    ],
+    "status": "CONTROLLER_ACCEPTED_BOUNDED_BELOW_M6_SECOND_REAL_PROVIDER_NOT_PROVEN",
+    "duplicate_policy": "OperationalSessionOwner owns provider-neutral session presentation/attachment identity only; RuntimeAdapter owns causal runtime truth; no fake second provider."
+  },
+  {
+    "component_id": "EpistemicStateContract",
+    "semantic_core": "SC-023",
+    "implementation": "dist/foundation/contracts/epistemic-state.js",
+    "slots": [
+      "GLOBAL"
+    ],
+    "status": "CONTROLLER_ACCEPTED_CONTRACT_M4_IMPLEMENT_ON_DEMAND",
+    "duplicate_policy": "Shared epistemic vocabulary/refusal contract only; domain supplies cause/status/copy; no generic async/status engine."
+  },
+  {
+    "component_id": "ConfirmationSafetyHost",
+    "semantic_core": "SC-026",
+    "implementation": "dist/foundation/global/confirmation-host.js",
+    "slots": [
+      "TRANSIENT"
+    ],
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_GLOBAL_PRESENTATION_HOST",
+    "duplicate_policy": "Consumes explicit destructive-risk descriptors only; never guesses risk and never becomes mutation/action semantic owner."
+  },
+  {
+    "component_id": "Wave4FamilyInteractionAssembly",
+    "semantic_core": "SC-017",
+    "implementation": "dist/foundation/wave4-assembly.js + dist/main.js",
+    "slots": [
+      "GLOBAL"
+    ],
+    "status": "CONTROLLER_ACCEPTED_COMPOSITION_ONLY",
+    "duplicate_policy": "Controller composition only; semanticOwner=false; never a substitute for Global/Family/Domain owners."
+  },
+  {
+    "component_id": "StructuredSurfaceHost",
+    "semantic_core": "SC-030",
+    "implementation": "dist/foundation/structured/surface-host.js + dist/foundation/structured/block-renderer.js + dist/foundation/structured/presentation-bridge.js",
+    "slots": [
+      "CENTER"
+    ],
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_FAMILY_HOST_M6",
+    "duplicate_policy": "ONE_STRUCTURED_SURFACE_HOST; presentation/orchestration only; document/mutation/selection/history/domain truth remain accepted Structured owners"
+  },
+  {
+    "component_id": "StructuredNavigationDescriptorOwner",
+    "semantic_core": "SC-030",
+    "implementation": "dist/foundation/structured/read-inspection.js + dist/foundation/structured/outline-descriptor.js",
+    "slots": [
+      "CENTER",
+      "RIGHT",
+      "TRANSIENT"
+    ],
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_FAMILY_DESCRIPTOR_OWNER_M6",
+    "duplicate_policy": "ONE_STRUCTURED_NAVIGATION_DESCRIPTOR_TRUTH; descriptor/read/outline/quick-jump only; no DOM scroll/focus/document/domain-reference/transaction mutation"
+  },
+  {
+    "component_id": "StickyNoteWindowOwner",
+    "semantic_core": "SC-006",
+    "implementation": "dist/foundation/notes/sticky-note-window.js + dist/foundation/window-motion.js",
+    "slots": [
+      "NOTES",
+      "TRANSIENT"
+    ],
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_NOTES_WINDOW_OWNER_M6",
+    "duplicate_policy": "ONE_STICKY_NOTE_WINDOW_OWNER_PER_CANONICAL_HOST_GRAPH; WindowMotion remains the one generic geometry owner; CEP pin is not OS always-on-top; close/hide is presentation-only"
+  },
+  {
+    "component_id": "NoteBindingAdapter",
+    "semantic_core": "SC-038",
+    "implementation": "dist/foundation/notes/note-binding.js + dist/adapters/note-binding-domains.js",
+    "slots": [
+      "NOTES"
+    ],
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_NOTE_BINDING_OWNER_M6",
+    "duplicate_policy": "ONE_CANONICAL_NOTE_BINDING_TRUTH_PER_NOTE; presentation/window IDs never become source identity; available bindings require validated source identity where applicable"
+  },
+  {
+    "component_id": "StructuredNoteContentAdapter",
+    "semantic_core": "SC-038",
+    "implementation": "dist/adapters/structured-note-content.js + dist/foundation/structured.js + dist/foundation/structured/surface-host.js",
+    "slots": [
+      "NOTES"
+    ],
+    "status": "CONTROLLER_ACCEPTED_EXECUTABLE_STRUCTURED_NOTE_CONTENT_ADAPTER_M6",
+    "duplicate_policy": "ONE_FINAL_NOTE_CONTENT_ADAPTER_PER_CANONICAL_BINDING+WINDOW+NOTE GRAPH; no second Structured editor/document engine; document identity collision is rejected fail-atomically"
+  },
+  {
+    "component_id": "NotesFamilyComposition",
+    "semantic_core": "SC-038",
+    "implementation": "dist/adapters/library-note-runtime-composition.js + dist/foundation/accepted-runtime.js + dist/main.js",
+    "slots": [
+      "NOTES",
+      "TRANSIENT"
+    ],
+    "status": "CONTROLLER_ACCEPTED_INTEGRATION_COMPOSITION_M6",
+    "duplicate_policy": "COMPOSITION_GLUE_ONLY_NOT_A_SEMANTIC_OWNER; note content/binding/window truth remains in accepted Wave6 owners"
+  }
+]

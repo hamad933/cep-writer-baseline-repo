@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "mission": "MISSION_CG1_CORR01_OD054_ACCEPTED_RUNTIME_SECONDARY_ROUTE",
+  "classification": "CANDIDATE_ONLY__REAL_PRODUCT_ACCEPTED_RUNTIME_ROUTE__NO_PROMOTION",
+  "browserExecutable": "/usr/bin/chromium",
+  "runtimeBuild": {
+    "pass": true,
+    "authority": "CANONICAL_SOURCE_TO_GENERATED_ONLY",
+    "source": "stack/native-typescript",
+    "destination": "../../../../tmp/cep-cg1-od054-runtime-1_xam39j/dist",
+    "written": 211,
+    "copiedAssets": 2,
+    "removedStale": 0
+  },
+  "summary": {
+    "total": 8,
+    "pass": 8,
+    "fail": 0
+  },
+  "results": [
+    {
+      "id": "primary-left-click-chooser-no-direct-insert",
+      "status": "PASS"
+    },
+    {
+      "id": "keyboard-enter-chooser-no-direct-insert",
+      "status": "PASS"
+    },
+    {
+      "id": "keyboard-space-chooser-no-direct-insert",
+      "status": "PASS"
+    },
+    {
+      "id": "secondary-contextmenu-main-exact-one-paragraph-undo-redo",
+      "status": "PASS",
+      "insertedBlockId": "blk-tmp-101",
+      "target": {
+        "ordinal": 1,
+        "surface": "main",
+        "index": 1,
+        "depth": 0,
+        "parentId": null,
+        "afterBlockId": "blk-d05-h1",
+        "beforeBlockId": "blk-d05-p1"
+      },
+      "contextmenu": {
+        "surface": "main",
+        "index": 1,
+        "depth": 0,
+        "defaultPrevented": true,
+        "interactive": "true",
+        "targetTag": "BUTTON"
+      }
+    },
+    {
+      "id": "noneditable-gap-no-mutation-native-contextmenu-preserved",
+      "status": "PASS",
+      "contextmenu": {
+        "surface": "main",
+        "index": 0,
+        "depth": 0,
+        "defaultPrevented": false,
+        "interactive": "false",
+        "targetTag": "DIV"
+      }
+    },
+    {
+      "id": "sticky-main-read-note-always-editable-secondary-exact-one-paragraph",
+      "status": "PASS",
+      "noteId": "note-tmp-021",
+      "insertedBlockId": "paragraph-gap-copy-1",
+      "target": {
+        "ordinal": 0,
+        "surface": "note:note-tmp-021",
+        "index": 0,
+        "depth": 0,
+        "parentId": null,
+        "afterBlockId": null,
+        "beforeBlockId": "note-blk-tmp-102"
+      },
+      "contextmenu": {
+        "surface": "note:note-tmp-021",
+        "index": 0,
+        "depth": 0,
+        "defaultPrevented": true,
+        "interactive": "true",
+        "targetTag": "BUTTON"
+      }
+    },
+    {
+      "id": "1024-main-contextmenu-exact-one-paragraph",
+      "status": "PASS",
+      "insertedBlockId": "blk-tmp-101",
+      "target": {
+        "ordinal": 1,
+        "surface": "main",
+        "index": 1,
+        "depth": 0,
+        "parentId": null,
+        "afterBlockId": "blk-d05-h1",
+        "beforeBlockId": "blk-d05-p1"
+      },
+      "contextmenu": {
+        "surface": "main",
+        "index": 1,
+        "depth": 0,
+        "defaultPrevented": true,
+        "interactive": "true",
+        "targetTag": "BUTTON"
+      }
+    },
+    {
+      "id": "1024-sticky-contextmenu-exact-one-paragraph",
+      "status": "PASS",
+      "insertedBlockId": "paragraph-gap-copy-1",
+      "target": {
+        "ordinal": 0,
+        "surface": "note:note-tmp-021",
+        "index": 0,
+        "depth": 0,
+        "parentId": null,
+        "afterBlockId": null,
+        "beforeBlockId": "note-blk-tmp-102"
+      },
+      "contextmenu": {
+        "surface": "note:note-tmp-021",
+        "index": 0,
+        "depth": 0,
+        "defaultPrevented": true,
+        "interactive": "true",
+        "targetTag": "BUTTON"
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "CG1_CORR01_OD054_1440x1000_CHOOSER.png",
+      "sha256": "ecfbc0d30c01796bc178431084206fff56bb0bdb03357ca0b943acd7710c0e29",
+      "viewport": "1440x1000",
+      "state": "canonical-chooser-open-after-primary-click"
+    },
+    {
+      "file": "CG1_CORR01_OD054_1440x1000_PRODUCT_ROUTE.png",
+      "sha256": "08554f668c1321d26f7881c3bf9b2a9b0fd5ee9fdeb06a89c5cc39c100e5805a",
+      "viewport": "1440x1000",
+      "state": "product-route-post-falsification"
+    },
+    {
+      "file": "CG1_CORR01_OD054_1024x900_PRODUCT_ROUTE.png",
+      "sha256": "66b763e907294f35d70d892edf47e5350d78de7073bb6ea929d7736bf9614b74",
+      "viewport": "1024x900"
+    }
+  ],
+  "unresolvedDependencies": [
+    "R6 whole-surface detach/final routing",
+    "R6 Library real-consumer final cutover",
+    "OE-001 Windows InputDirection",
+    "HWND / OS topmost",
+    "ConPTY / real terminal target proof"
+  ]
+}

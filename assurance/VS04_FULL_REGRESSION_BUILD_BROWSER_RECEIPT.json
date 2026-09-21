@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "kind": "VS04_FULL_REGRESSION_BUILD_BROWSER_RECEIPT",
+  "status": "PASS",
+  "canonicalSourceTreeSha256": "55645c1f89fc1d2af0653ec2eec00bb7dd2f779f7769bcffa2ea8981cd3f2be2",
+  "model": {
+    "pass": 90,
+    "fail": 0
+  },
+  "contracts": {
+    "pass": 151,
+    "fail": 0
+  },
+  "npmRunCheck": "PASS",
+  "buildAuthority": {
+    "status": "PASS",
+    "authority": "stack/native-typescript -> dist + dist-ts",
+    "canonicalSourceFiles": 20,
+    "generatedDistJs": 20,
+    "generatedDistTsJs": 20,
+    "reverseGeneratedToSourceWrites": false
+  },
+  "browser": {
+    "executionStatus": "EXECUTED_PASS",
+    "summary": {
+      "total": 6,
+      "pass": 6,
+      "fail": 0
+    },
+    "transport": "in-memory",
+    "sourceCanonicalTreeSha256": "55645c1f89fc1d2af0653ec2eec00bb7dd2f779f7769bcffa2ea8981cd3f2be2"
+  },
+  "r3Required": {
+    "status": "PASS",
+    "scenarios": {
+      "G02": "PASS",
+      "G03": "PASS",
+      "G05": "PASS",
+      "G06": "PASS",
+      "G07": "PASS",
+      "G16": "PASS",
+      "G17": "PASS",
+      "G21": "PASS"
+    }
+  },
+  "localhostConstraint": {
+    "observed": "net::ERR_BLOCKED_BY_ADMINISTRATOR",
+    "disposition": "NOT_CONVERTED_TO_PASS; rerun used the supported in-memory transport over the same built ESM graph",
+    "sourceIndependentEnvironmentConstraint": true
+  }
+}

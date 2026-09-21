@@ -1,0 +1,380 @@
+{
+  "schemaVersion": 1,
+  "kind": "W5_B_STRUCTURED_NAVIGATION_POST_CORRECTION_DELTA2_PROOF",
+  "status": "PASS",
+  "pass": 18,
+  "fail": 0,
+  "cases": [
+    {
+      "id": "w5b.delta2.policy-nonboolean-and-heading-types-reject-atomically",
+      "status": "PASS",
+      "evidence": {
+        "checks": [
+          {
+            "error": "STRUCTURED_NAVIGATION_POLICY_BOOLEAN_REQUIRED",
+            "unchanged": true,
+            "after": {
+              "headingTypes": [
+                "h2",
+                "h3"
+              ],
+              "includeTogglesInOutline": true,
+              "includeTogglesInQuickJump": true,
+              "requireContentLabel": true,
+              "quickJumpLimit": 18
+            }
+          },
+          {
+            "error": "STRUCTURED_NAVIGATION_POLICY_BOOLEAN_REQUIRED",
+            "unchanged": true,
+            "after": {
+              "headingTypes": [
+                "h2",
+                "h3"
+              ],
+              "includeTogglesInOutline": true,
+              "includeTogglesInQuickJump": true,
+              "requireContentLabel": true,
+              "quickJumpLimit": 18
+            }
+          },
+          {
+            "error": "STRUCTURED_NAVIGATION_POLICY_BOOLEAN_REQUIRED",
+            "unchanged": true,
+            "after": {
+              "headingTypes": [
+                "h2",
+                "h3"
+              ],
+              "includeTogglesInOutline": true,
+              "includeTogglesInQuickJump": true,
+              "requireContentLabel": true,
+              "quickJumpLimit": 18
+            }
+          },
+          {
+            "error": "STRUCTURED_NAVIGATION_HEADING_TYPE_STRING_REQUIRED",
+            "unchanged": true,
+            "after": {
+              "headingTypes": [
+                "h2",
+                "h3"
+              ],
+              "includeTogglesInOutline": true,
+              "includeTogglesInQuickJump": true,
+              "requireContentLabel": true,
+              "quickJumpLimit": 18
+            }
+          }
+        ],
+        "final": {
+          "headingTypes": [
+            "h2",
+            "h3"
+          ],
+          "includeTogglesInOutline": true,
+          "includeTogglesInQuickJump": true,
+          "requireContentLabel": true,
+          "quickJumpLimit": 18
+        }
+      }
+    },
+    {
+      "id": "w5b.delta2.quick-jump-limit-type-rejects-atomically",
+      "status": "PASS",
+      "evidence": {
+        "checks": [
+          {
+            "value": "18",
+            "error": "INVALID_STRUCTURED_NAVIGATION_QUICK_JUMP_LIMIT",
+            "unchanged": true,
+            "after": {
+              "headingTypes": [
+                "h2",
+                "h3"
+              ],
+              "includeTogglesInOutline": true,
+              "includeTogglesInQuickJump": true,
+              "requireContentLabel": true,
+              "quickJumpLimit": 18
+            }
+          },
+          {
+            "value": true,
+            "error": "INVALID_STRUCTURED_NAVIGATION_QUICK_JUMP_LIMIT",
+            "unchanged": true,
+            "after": {
+              "headingTypes": [
+                "h2",
+                "h3"
+              ],
+              "includeTogglesInOutline": true,
+              "includeTogglesInQuickJump": true,
+              "requireContentLabel": true,
+              "quickJumpLimit": 18
+            }
+          },
+          {
+            "value": null,
+            "error": "INVALID_STRUCTURED_NAVIGATION_QUICK_JUMP_LIMIT",
+            "unchanged": true,
+            "after": {
+              "headingTypes": [
+                "h2",
+                "h3"
+              ],
+              "includeTogglesInOutline": true,
+              "includeTogglesInQuickJump": true,
+              "requireContentLabel": true,
+              "quickJumpLimit": 18
+            }
+          },
+          {
+            "value": 18.5,
+            "error": "INVALID_STRUCTURED_NAVIGATION_QUICK_JUMP_LIMIT",
+            "unchanged": true,
+            "after": {
+              "headingTypes": [
+                "h2",
+                "h3"
+              ],
+              "includeTogglesInOutline": true,
+              "includeTogglesInQuickJump": true,
+              "requireContentLabel": true,
+              "quickJumpLimit": 18
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "w5b.delta2.full-policy-missing-fields-reject-atomically",
+      "status": "PASS",
+      "evidence": {
+        "checks": [
+          {
+            "missing": "headingTypes",
+            "error": "STRUCTURED_NAVIGATION_POLICY_SNAPSHOT_INCOMPLETE",
+            "unchanged": true,
+            "after": {
+              "headingTypes": [
+                "h2",
+                "h3"
+              ],
+              "includeTogglesInOutline": true,
+              "includeTogglesInQuickJump": true,
+              "requireContentLabel": true,
+              "quickJumpLimit": 18
+            }
+          },
+          {
+            "missing": "includeTogglesInOutline",
+            "error": "STRUCTURED_NAVIGATION_POLICY_SNAPSHOT_INCOMPLETE",
+            "unchanged": true,
+            "after": {
+              "headingTypes": [
+                "h2",
+                "h3"
+              ],
+              "includeTogglesInOutline": true,
+              "includeTogglesInQuickJump": true,
+              "requireContentLabel": true,
+              "quickJumpLimit": 18
+            }
+          },
+          {
+            "missing": "includeTogglesInQuickJump",
+            "error": "STRUCTURED_NAVIGATION_POLICY_SNAPSHOT_INCOMPLETE",
+            "unchanged": true,
+            "after": {
+              "headingTypes": [
+                "h2",
+                "h3"
+              ],
+              "includeTogglesInOutline": true,
+              "includeTogglesInQuickJump": true,
+              "requireContentLabel": true,
+              "quickJumpLimit": 18
+            }
+          },
+          {
+            "missing": "requireContentLabel",
+            "error": "STRUCTURED_NAVIGATION_POLICY_SNAPSHOT_INCOMPLETE",
+            "unchanged": true,
+            "after": {
+              "headingTypes": [
+                "h2",
+                "h3"
+              ],
+              "includeTogglesInOutline": true,
+              "includeTogglesInQuickJump": true,
+              "requireContentLabel": true,
+              "quickJumpLimit": 18
+            }
+          },
+          {
+            "missing": "quickJumpLimit",
+            "error": "STRUCTURED_NAVIGATION_POLICY_SNAPSHOT_INCOMPLETE",
+            "unchanged": true,
+            "after": {
+              "headingTypes": [
+                "h2",
+                "h3"
+              ],
+              "includeTogglesInOutline": true,
+              "includeTogglesInQuickJump": true,
+              "requireContentLabel": true,
+              "quickJumpLimit": 18
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "w5b.delta2.malformed-committed-revision-rejected",
+      "status": "PASS",
+      "evidence": {
+        "error": "INVALID_STRUCTURED_NAVIGATION_COMMITTED_REVISION"
+      }
+    },
+    {
+      "id": "w5b.delta2.malformed-working-revision-rejected",
+      "status": "PASS",
+      "evidence": {
+        "error": "INVALID_STRUCTURED_NAVIGATION_WORKING_REVISION"
+      }
+    },
+    {
+      "id": "w5b.delta2.malformed-owner-and-id-provenance-rejected",
+      "status": "PASS",
+      "evidence": {
+        "ownerError": "INVALID_STRUCTURED_NAVIGATION_IDENTITY_OWNER",
+        "idError": "INVALID_STRUCTURED_NAVIGATION_IDENTITY_ID"
+      }
+    },
+    {
+      "id": "w5b.delta2.document-missing-title-rejected",
+      "status": "PASS",
+      "evidence": {
+        "error": "INVALID_STRUCTURED_DOCUMENT"
+      }
+    },
+    {
+      "id": "w5b.delta2.document-missing-revision-rejected",
+      "status": "PASS",
+      "evidence": {
+        "error": "STRUCTURED_DOCUMENT_REVISION_REQUIRED"
+      }
+    },
+    {
+      "id": "w5b.delta2.document-wrong-title-type-rejected",
+      "status": "PASS",
+      "evidence": {
+        "error": "INVALID_STRUCTURED_DOCUMENT"
+      }
+    },
+    {
+      "id": "w5b.delta2.document-id-and-blocks-contract-preserved",
+      "status": "PASS",
+      "evidence": {
+        "idError": "STRUCTURED_DOCUMENT_ID_REQUIRED",
+        "blocksError": "INVALID_STRUCTURED_DOCUMENT"
+      }
+    },
+    {
+      "id": "w5b.delta2.direct-helper-document-identity-contradiction-rejected",
+      "status": "PASS",
+      "evidence": {
+        "documentId": "learn-document-trust-boundaries",
+        "error": "STRUCTURED_NAVIGATION_DOCUMENT_IDENTITY_MISMATCH"
+      }
+    },
+    {
+      "id": "w5b.delta2.fake-same-name-tree-kernel-rejected",
+      "status": "PASS",
+      "evidence": {
+        "fakeOwner": "StructuredTreeKernel",
+        "error": "CANONICAL_STRUCTURED_TREE_KERNEL_REQUIRED"
+      }
+    },
+    {
+      "id": "w5b.delta2.adapter-different-overriding-tree-kernel-rejected",
+      "status": "PASS",
+      "evidence": {
+        "adapterTreeIsCanonical": true,
+        "fakeOwner": "StructuredTreeKernel",
+        "error": "STRUCTURED_NAVIGATION_ADAPTER_TREE_KERNEL_MISMATCH"
+      }
+    },
+    {
+      "id": "w5b.delta2.helper-fake-tree-authority-rejected",
+      "status": "PASS",
+      "evidence": {
+        "fakeOwner": "StructuredTreeKernel",
+        "error": "CANONICAL_STRUCTURED_TREE_KERNEL_REQUIRED"
+      }
+    },
+    {
+      "id": "w5b.delta2.numeric-control-entities-never-emit-controls",
+      "status": "PASS",
+      "evidence": {
+        "input": "A&#0;B &#1; C &#31; D &#127; E &#128; F &#x9F; G &#9; H &#10; I",
+        "output": "A&#0;B &#1; C &#31; D &#127; E &#128; F &#x9F; G H I",
+        "containsControlScalar": false,
+        "unsafeEntitiesPreserved": true,
+        "whitespaceNormalized": true
+      }
+    },
+    {
+      "id": "w5b.delta2.printable-numeric-entities-decode",
+      "status": "PASS",
+      "evidence": {
+        "output": "ASCII A B © © عربي ا"
+      }
+    },
+    {
+      "id": "w5b.delta2.out-of-range-and-surrogate-entities-remain-safe",
+      "status": "PASS",
+      "evidence": {
+        "input": "Bad &#9999999999; &#x110000; &#xD800; valid &#65;",
+        "output": "Bad &#9999999999; &#x110000; &#xD800; valid A",
+        "noCrash": true
+      }
+    },
+    {
+      "id": "w5b.delta2.single-snapshot-combined-descriptor-remains-pass",
+      "status": "PASS",
+      "evidence": {
+        "combinedReads": 1,
+        "combinedDocumentId": "snapshot-A",
+        "standaloneDocumentId": "snapshot-B",
+        "totalReads": 2
+      }
+    }
+  ],
+  "finalPolicy": {
+    "headingTypes": [
+      "h2",
+      "h3"
+    ],
+    "includeTogglesInOutline": true,
+    "includeTogglesInQuickJump": true,
+    "requireContentLabel": true,
+    "quickJumpLimit": 18
+  },
+  "sourceCanonicalTreeSha256": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d",
+  "canonicalSourceFileCount": 99,
+  "regressionSuites": {
+    "original": {
+      "status": "PASS",
+      "pass": 9,
+      "fail": 0
+    },
+    "previousCorrection": {
+      "status": "PASS",
+      "pass": 8,
+      "fail": 0
+    }
+  },
+  "classification": "LANE_B_POST_CORRECTION_DELTA_ONLY_EVIDENCE_NOT_CONTROLLER_ACCEPTANCE"
+}

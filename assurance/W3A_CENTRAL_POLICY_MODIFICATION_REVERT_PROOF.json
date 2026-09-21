@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "classification": "WAVE3_LANE_A_CENTRAL_POLICY_MODIFICATION_REVERT_PROOF_NOT_CONTROLLER_ACCEPTANCE",
+  "source": "stack/native-typescript/foundation/global/input-keymap.ts",
+  "originalSha256": "c43d649c9ccd09771f92e6c5f94c4cff3eaa3479ff3530dabc4047b1541ecc44",
+  "modifiedSha256": "fae776e3f433aaa9a372d8560e3ace596a3541295e9d8c1b7ad8c959b6cb73ec",
+  "restoredSha256": "c43d649c9ccd09771f92e6c5f94c4cff3eaa3479ff3530dabc4047b1541ecc44",
+  "exactRevert": true,
+  "modifiedScenario": {
+    "policy": true,
+    "structured": {
+      "code": "SHORTCUT_DISPATCHED",
+      "effects": 1
+    },
+    "spatial": {
+      "code": "SHORTCUT_DISPATCHED",
+      "effects": 1
+    }
+  },
+  "restoredScenario": {
+    "policy": false,
+    "structured": {
+      "code": "OWNED_INPUT_SHORTCUT_SUPPRESSED",
+      "effects": 0
+    },
+    "spatial": {
+      "code": "OWNED_INPUT_SHORTCUT_SUPPRESSED",
+      "effects": 0
+    }
+  },
+  "finalCanonicalTreeSha256": "4fd00b884dcc3bb44a3284f307c8ef9c1983715c803f7652ab527ee30030c83c",
+  "verdict": "PASS"
+}

@@ -1,0 +1,3644 @@
+{
+  "schemaVersion": 2,
+  "status": "PASS",
+  "mission": "W5_C_STRUCTURED_CONSUMER_PARITY_DONOR_RETIREMENT_ASSURANCE_C1_CORRECTED",
+  "sourceCanonicalTreeSha256": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d",
+  "sourceCanonicalFiles": 99,
+  "protectedDonor": {
+    "path": "stack/native-typescript/foundation/accepted-runtime.ts",
+    "bytes": 333820,
+    "sha256": "2c0669e7cdafccea0769d9e85d157919f8ae42d19c635ce2503df8996e009ddb",
+    "matchesControllerConvergedParent": true
+  },
+  "proofBindings": {
+    "laneCExecutable": {
+      "status": "PASS",
+      "cases": 26
+    },
+    "laneCBrowser": {
+      "status": "PASS",
+      "steps": 9
+    }
+  },
+  "inventoryPolicy": {
+    "assuranceFirst": true,
+    "actualDeletionPerformed": false,
+    "controllerOwnsSharedHotspotRetirement": true,
+    "failClosedDispositionComputation": true,
+    "allowedDispositions": [
+      "RETIRE_READY",
+      "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    ]
+  },
+  "summary": {
+    "candidateBranches": 46,
+    "retireReady": 1,
+    "keepUntilWave6OrFinalConvergence": 45,
+    "unclassified": 0
+  },
+  "entries": [
+    {
+      "id": "D01",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "newDocStore",
+        "line": 29,
+        "branch": "canonical-shadow-store",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::newDocStore::canonical-shadow-store"
+      },
+      "behavior": "Creates accepted-runtime mutable document/history/selection shadow state.",
+      "replacement": {
+        "owner": "StructuredDocumentDomainAdapter",
+        "path": "foundation/structured.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "indirect",
+        "keyboard": "indirect",
+        "accessibility": "indirect",
+        "browser": "legacy + W5 C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Legacy runtime still consumes this local store and Note-window state is outside Lane C; deleting it now would break accepted runtime composition.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::newDocStore::canonical-shadow-store. Donor-local behavior remains material: Creates accepted-runtime mutable document/history/selection shadow state.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::newDocStore::canonical-shadow-store",
+          "Legacy runtime still consumes this local store and Note-window state is outside Lane C; deleting it now would break accepted runtime composition."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D02",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "applyStructuredProjection",
+        "line": 79,
+        "branch": "structured-projection-sync",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::applyStructuredProjection::structured-projection-sync"
+      },
+      "behavior": "Copies canonical Structured projections back into accepted-runtime presentation store.",
+      "replacement": {
+        "owner": "StructuredPresentationBridge",
+        "path": "foundation/structured/presentation-bridge.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer",
+        "Note-content-compatible consumer"
+      ],
+      "coverage": {
+        "pointer": "indirect",
+        "keyboard": "indirect",
+        "accessibility": "yes",
+        "browser": "W5 C + legacy",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Canonical presentation bridge is proven, but accepted-runtime synchronization glue remains an integration seam until Controller convergence.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "This branch synchronizes already-canonical projection into donor presentation state; it does not decide canonical Structured truth.",
+        "sourceEvidence": [
+          "applyStructuredProjection consumes accepted projection and updates presentation shadow only."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D03",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "pushHistory",
+        "line": 86,
+        "branch": "main-structured-transaction",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::pushHistory::main-structured-transaction"
+      },
+      "behavior": "Routes main Structured history frame creation through accepted external transaction.",
+      "replacement": {
+        "owner": "StructuredTransactionHistoryRecoveryOwner",
+        "path": "foundation/structured/transaction-history.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer",
+        "Note-content-compatible consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "n/a semantic transaction",
+        "browser": "W5 C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_BY_UNCHANGED_DONOR_PLUS_REGRESSION",
+      "priorAdjudication": "RETIRE_READY",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::pushHistory::main-structured-transaction. Donor-local behavior remains material: Routes main Structured history frame creation through accepted external transaction.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::pushHistory::main-structured-transaction",
+          "Branch-level semantic/integration behavior remains donor-owned or ambiguous pending final convergence."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "keepReason": "Conservative correction: retirement invariants are incomplete or fail (replacementExecutable, realConsumerProof, interactionCoverage, centralChange, visualPreservation, hiddenOwnerFalse); retain until Wave 6 or final Controller convergence."
+    },
+    {
+      "id": "D04",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "pushHistory",
+        "line": 86,
+        "branch": "note-local-history",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::pushHistory::note-local-history"
+      },
+      "behavior": "Creates local Sticky Note history frames for non-main surface.",
+      "replacement": {
+        "owner": "Wave 6 final NoteBindingAdapter / note-window integration",
+        "path": "DEFERRED_WAVE6"
+      },
+      "realConsumerProof": [],
+      "coverage": {
+        "pointer": "n/a",
+        "keyboard": "n/a",
+        "accessibility": "n/a",
+        "browser": "not applicable",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Lane C Note proof is content compatibility only and is forbidden from owning StickyNoteWindowOwner/final NoteBindingAdapter.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::pushHistory::note-local-history. Donor-local behavior remains material: Creates local Sticky Note history frames for non-main surface.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::pushHistory::note-local-history",
+          "Lane C Note proof is content compatibility only and is forbidden from owning StickyNoteWindowOwner/final NoteBindingAdapter."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D05",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "undo",
+        "line": 87,
+        "branch": "main-structured-history",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::undo::main-structured-history"
+      },
+      "behavior": "Routes main Structured undo through accepted command/transaction owner.",
+      "replacement": {
+        "owner": "StructuredTransactionHistoryRecoveryOwner",
+        "path": "foundation/structured/transaction-history.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer",
+        "Note-content-compatible consumer"
+      ],
+      "coverage": {
+        "pointer": "n/a",
+        "keyboard": "yes",
+        "accessibility": "n/a",
+        "browser": "W5 C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_BY_UNCHANGED_DONOR_PLUS_REGRESSION",
+      "priorAdjudication": "RETIRE_READY",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "The main undo branch delegates history causality to extension.execute(history.undo); remaining work is bookmark/render/focus projection glue.",
+        "sourceEvidence": [
+          "accepted-runtime.ts::undo::main branch receives the accepted transaction result before donor bookmark/render/focus projection."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "keepReason": "Conservative correction: retirement invariants are incomplete or fail (replacementExecutable, realConsumerProof, interactionCoverage, centralChange, visualPreservation); retain until Wave 6 or final Controller convergence."
+    },
+    {
+      "id": "D06",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "undo",
+        "line": 87,
+        "branch": "note-local-history",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::undo::note-local-history"
+      },
+      "behavior": "Runs local Sticky Note undo and bookmark restore.",
+      "replacement": {
+        "owner": "Wave 6 final note transaction binding",
+        "path": "DEFERRED_WAVE6"
+      },
+      "realConsumerProof": [],
+      "coverage": {
+        "pointer": "n/a",
+        "keyboard": "n/a",
+        "accessibility": "focus restore retained",
+        "browser": "not applicable",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Note-window history/focus is explicitly outside the Lane C content-compatibility authority.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::undo::note-local-history. Donor-local behavior remains material: Runs local Sticky Note undo and bookmark restore.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::undo::note-local-history",
+          "Note-window history/focus is explicitly outside the Lane C content-compatibility authority."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D07",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "redo",
+        "line": 88,
+        "branch": "main-structured-history",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::redo::main-structured-history"
+      },
+      "behavior": "Routes main Structured redo through accepted command/transaction owner.",
+      "replacement": {
+        "owner": "StructuredTransactionHistoryRecoveryOwner",
+        "path": "foundation/structured/transaction-history.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer",
+        "Note-content-compatible consumer"
+      ],
+      "coverage": {
+        "pointer": "n/a",
+        "keyboard": "yes",
+        "accessibility": "n/a",
+        "browser": "Lane A + preserved regressions",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_BY_UNCHANGED_DONOR_PLUS_REGRESSION",
+      "priorAdjudication": "RETIRE_READY",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "The main redo branch delegates history causality to extension.execute(history.redo); remaining work is bookmark/render/focus projection glue.",
+        "sourceEvidence": [
+          "accepted-runtime.ts::redo::main branch receives the accepted transaction result before donor bookmark/render/focus projection."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "keepReason": "Conservative correction: retirement invariants are incomplete or fail (replacementExecutable, realConsumerProof, interactionCoverage, centralChange, visualPreservation); retain until Wave 6 or final Controller convergence."
+    },
+    {
+      "id": "D08",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "redo",
+        "line": 88,
+        "branch": "note-local-history",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::redo::note-local-history"
+      },
+      "behavior": "Runs local Sticky Note redo and bookmark restore.",
+      "replacement": {
+        "owner": "Wave 6 final note transaction binding",
+        "path": "DEFERRED_WAVE6"
+      },
+      "realConsumerProof": [],
+      "coverage": {
+        "pointer": "n/a",
+        "keyboard": "n/a",
+        "accessibility": "focus restore retained",
+        "browser": "not applicable",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Requires final NoteBindingAdapter/window lifecycle evidence in Wave 6.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::redo::note-local-history. Donor-local behavior remains material: Runs local Sticky Note redo and bookmark restore.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::redo::note-local-history",
+          "Requires final NoteBindingAdapter/window lifecycle evidence in Wave 6."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D09",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "captureBookmark",
+        "line": 89,
+        "branch": "dom-selection-bookmark",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::captureBookmark::dom-selection-bookmark"
+      },
+      "behavior": "Captures DOM caret/focus bookmark for accepted runtime surfaces.",
+      "replacement": {
+        "owner": "StructuredSelectionKernel + accepted Global focus/transient owners",
+        "path": "foundation/structured/selection.ts + global owners"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "keyboard caret",
+        "accessibility": "yes",
+        "browser": "legacy/W3/W4",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Canonical selection ownership is proven, but DOM caret/focus restoration is presentation lifecycle and remains required by legacy composition.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "Bookmark capture records DOM caret/focus presentation and reads the accepted Structured selection bookmark; it does not author canonical selection.",
+        "sourceEvidence": [
+          "captureBookmark reads window selection and extension.structuredAdapter.selectionBookmark without canonical document mutation."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D10",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "restoreBookmark",
+        "line": 90,
+        "branch": "dom-selection-bookmark",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::restoreBookmark::dom-selection-bookmark"
+      },
+      "behavior": "Restores DOM caret/focus bookmark and Structured selection projection.",
+      "replacement": {
+        "owner": "StructuredSelectionKernel + accepted Global focus/transient owners",
+        "path": "foundation/structured/selection.ts + global owners"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "keyboard caret",
+        "accessibility": "yes",
+        "browser": "legacy/W3/W4",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "DOM focus restoration remains a presentation seam; Lane C must not replace it with a new transient owner.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "Bookmark restore is presentation/focus restoration around an already-owned Structured selection projection.",
+        "sourceEvidence": [
+          "restoreBookmark restores DOM selection/focus presentation rather than canonical document truth."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D11",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "applyStructuredMutation",
+        "line": 125,
+        "branch": "main-canonical-mutation",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::applyStructuredMutation::main-canonical-mutation"
+      },
+      "behavior": "Routes Structured document mutation to canonical mutation kernel.",
+      "replacement": {
+        "owner": "StructuredMutationKernel",
+        "path": "foundation/structured/mutation.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer",
+        "Note-content-compatible consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "n/a",
+        "browser": "W5 C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_BY_UNCHANGED_DONOR_PLUS_REGRESSION",
+      "priorAdjudication": "RETIRE_READY",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::applyStructuredMutation::main-canonical-mutation. Donor-local behavior remains material: Routes Structured document mutation to canonical mutation kernel.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::applyStructuredMutation::main-canonical-mutation",
+          "Branch-level semantic/integration behavior remains donor-owned or ambiguous pending final convergence."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "keepReason": "Conservative correction: retirement invariants are incomplete or fail (replacementExecutable, realConsumerProof, interactionCoverage, centralChange, visualPreservation, hiddenOwnerFalse); retain until Wave 6 or final Controller convergence."
+    },
+    {
+      "id": "D12",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "moveBlockToGap",
+        "line": 134,
+        "branch": "main-drag-mutation",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::moveBlockToGap::main-drag-mutation"
+      },
+      "behavior": "Validates and commits canonical move-to-gap semantics.",
+      "replacement": {
+        "owner": "StructuredDragDropOwner + StructuredDropTargetPolicyOwner + StructuredMutationKernel",
+        "path": "foundation/structured/drag-drop.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer",
+        "Note-content-compatible consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "n/a",
+        "browser": "W5 C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_BY_UNCHANGED_DONOR_PLUS_REGRESSION",
+      "priorAdjudication": "RETIRE_READY",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "The main drag branch delegates canonical move semantics to extension.execute(block.moveToGap); after success it only renders/focuses.",
+        "sourceEvidence": [
+          "moveBlockToGap(main) invokes extension.execute('block.moveToGap', ...) and performs no direct st.blocks write on the main branch.",
+          "The only post-success donor operations on the main branch are renderSurface and focusBlock presentation glue."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "replacementExecutableEvidenceRefs": [
+        "w5c.drag-keyboard-shared-target-policy-all-three",
+        "w5c.drag-pointer-shared-target-policy-all-three"
+      ],
+      "realConsumerEvidenceRefs": [
+        "w5c.drag-keyboard-shared-target-policy-all-three",
+        "w5c.drag-pointer-shared-target-policy-all-three"
+      ],
+      "interactionEvidenceRefs": {
+        "pointer": [
+          "browser.pointer-keyboard-drag-same-policy"
+        ],
+        "keyboard": [
+          "browser.pointer-keyboard-drag-same-policy"
+        ],
+        "browser": [
+          "browser.pointer-keyboard-drag-same-policy"
+        ]
+      },
+      "coverageNARationale": {
+        "accessibility": "N/A: canonical move-target/mutation policy has no independent ARIA surface; accessibility presentation remains with accepted renderer/focus owners and is not authored by this donor branch."
+      },
+      "centralChangeApplicable": false,
+      "centralChangeNotApplicableReason": "Requirement 14 central renderer/presentation-policy mutation does not govern drag target/mutation semantics; exact drag owner replacement is proven by the bound executable/browser drag cases.",
+      "visualPreservationEvidenceRefs": [
+        "browser.pointer-keyboard-drag-same-policy"
+      ],
+      "retirementOwnershipProof": "MAIN_BRANCH_DELEGATION_ONLY_AFTER_CANONICAL_EXECUTE; POST_SUCCESS_RENDER_AND_FOCUS_ARE_PRESENTATION_GLUE",
+      "retirementInvariantEvaluation": {
+        "pass": true,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": true,
+          "realConsumerProof": true,
+          "interactionCoverage": true,
+          "centralChange": true,
+          "visualPreservation": true,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": true,
+            "reason": "EVIDENCE_PASS"
+          },
+          {
+            "channel": "keyboard",
+            "pass": true,
+            "reason": "EVIDENCE_PASS"
+          },
+          {
+            "channel": "accessibility",
+            "pass": true,
+            "reason": "N/A: canonical move-target/mutation policy has no independent ARIA surface; accessibility presentation remains with accepted renderer/focus owners and is not authored by this donor branch."
+          },
+          {
+            "channel": "browser",
+            "pass": true,
+            "reason": "EVIDENCE_PASS"
+          }
+        ]
+      },
+      "disposition": "RETIRE_READY",
+      "retirementNote": "All fail-closed retirement invariants are proven for this exact donor branch. Remaining donor code is integration/presentation delegation glue only; physical deletion remains Controller-owned."
+    },
+    {
+      "id": "D13",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "validateMoveTarget",
+        "line": 133,
+        "branch": "main-target-validation",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::validateMoveTarget::main-target-validation"
+      },
+      "behavior": "Validates canonical nested/gap move targets.",
+      "replacement": {
+        "owner": "StructuredDropTargetPolicyOwner",
+        "path": "foundation/structured/drag-drop-target.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer",
+        "Note-content-compatible consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "n/a",
+        "browser": "W5 C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_BY_UNCHANGED_DONOR_PLUS_REGRESSION",
+      "priorAdjudication": "RETIRE_READY",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::validateMoveTarget::main-target-validation. Donor-local behavior remains material: Validates canonical nested/gap move targets.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::validateMoveTarget::main-target-validation",
+          "Branch-level semantic/integration behavior remains donor-owned or ambiguous pending final convergence."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "keepReason": "Conservative correction: retirement invariants are incomplete or fail (replacementExecutable, realConsumerProof, interactionCoverage, centralChange, visualPreservation, hiddenOwnerFalse); retain until Wave 6 or final Controller convergence."
+    },
+    {
+      "id": "D14",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "canonicalStructuredCommand",
+        "line": 153,
+        "branch": "command-normalization",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::canonicalStructuredCommand::command-normalization"
+      },
+      "behavior": "Normalizes accepted Structured command identity.",
+      "replacement": {
+        "owner": "SemanticCommandBus + StructuredCommandAvailabilityOwner",
+        "path": "foundation/global/commands.ts + foundation/structured/command-availability.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer",
+        "Note-content-compatible consumer"
+      ],
+      "coverage": {
+        "pointer": "indirect",
+        "keyboard": "yes",
+        "accessibility": "n/a",
+        "browser": "Lane A + W5 C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_BY_UNCHANGED_DONOR_PLUS_REGRESSION",
+      "priorAdjudication": "RETIRE_READY",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::canonicalStructuredCommand::command-normalization. Donor-local behavior remains material: Normalizes accepted Structured command identity.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::canonicalStructuredCommand::command-normalization",
+          "Branch-level semantic/integration behavior remains donor-owned or ambiguous pending final convergence."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "keepReason": "Conservative correction: retirement invariants are incomplete or fail (replacementExecutable, realConsumerProof, interactionCoverage, centralChange, visualPreservation, hiddenOwnerFalse); retain until Wave 6 or final Controller convergence."
+    },
+    {
+      "id": "D15",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "structuredCommandContext",
+        "line": 154,
+        "branch": "command-context",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::structuredCommandContext::command-context"
+      },
+      "behavior": "Builds canonical Structured command context without creating document truth.",
+      "replacement": {
+        "owner": "StructuredSurfaceHost command routing + StructuredCommandAvailabilityOwner",
+        "path": "foundation/structured/surface-host.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer",
+        "Note-content-compatible consumer"
+      ],
+      "coverage": {
+        "pointer": "indirect",
+        "keyboard": "yes",
+        "accessibility": "n/a",
+        "browser": "Lane A + W5 C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_BY_UNCHANGED_DONOR_PLUS_REGRESSION",
+      "priorAdjudication": "RETIRE_READY",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::structuredCommandContext::command-context. Donor-local behavior remains material: Builds canonical Structured command context without creating document truth.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::structuredCommandContext::command-context",
+          "Branch-level semantic/integration behavior remains donor-owned or ambiguous pending final convergence."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "keepReason": "Conservative correction: retirement invariants are incomplete or fail (replacementExecutable, realConsumerProof, interactionCoverage, centralChange, visualPreservation, hiddenOwnerFalse); retain until Wave 6 or final Controller convergence."
+    },
+    {
+      "id": "D16",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "commandAvailability",
+        "line": 155,
+        "branch": "main-command-availability",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::commandAvailability::main-command-availability"
+      },
+      "behavior": "Delegates main Structured command availability policy.",
+      "replacement": {
+        "owner": "StructuredCommandAvailabilityOwner",
+        "path": "foundation/structured/command-availability.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer",
+        "Note-content-compatible consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "n/a",
+        "browser": "Lane A + W5 C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_BY_UNCHANGED_DONOR_PLUS_REGRESSION",
+      "priorAdjudication": "RETIRE_READY",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "The canonical main command-availability branch is a direct return from extension.commandAvailability; local fallback policy executes only when the command is not canonical.",
+        "sourceEvidence": [
+          "commandAvailability begins with if(canonicalStructuredCommand(...)) return extension.commandAvailability(...)."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "keepReason": "Conservative correction: retirement invariants are incomplete or fail (replacementExecutable, realConsumerProof, interactionCoverage, centralChange, visualPreservation); retain until Wave 6 or final Controller convergence."
+    },
+    {
+      "id": "D17",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "setMode",
+        "line": 180,
+        "branch": "structured-read-edit-semantic",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::setMode::structured-read-edit-semantic"
+      },
+      "behavior": "Applies read/edit semantic mode to main Structured surface.",
+      "replacement": {
+        "owner": "StructuredSurfaceHost",
+        "path": "foundation/structured/surface-host.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer",
+        "Note-content-compatible consumer"
+      ],
+      "coverage": {
+        "pointer": "yes denial",
+        "keyboard": "yes denial",
+        "accessibility": "contenteditable/read projection",
+        "browser": "W5 C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_BY_UNCHANGED_DONOR_PLUS_REGRESSION",
+      "priorAdjudication": "RETIRE_READY",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::setMode::structured-read-edit-semantic. Donor-local behavior remains material: Applies read/edit semantic mode to main Structured surface.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::setMode::structured-read-edit-semantic",
+          "Branch-level semantic/integration behavior remains donor-owned or ambiguous pending final convergence."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "keepReason": "Conservative correction: retirement invariants are incomplete or fail (replacementExecutable, realConsumerProof, interactionCoverage, centralChange, visualPreservation, hiddenOwnerFalse); retain until Wave 6 or final Controller convergence."
+    },
+    {
+      "id": "D18",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "renderSurface",
+        "line": 187,
+        "branch": "legacy-dom-composition",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::renderSurface::legacy-dom-composition"
+      },
+      "behavior": "Renders accepted Library/Note surface DOM, chrome, focus hooks and existing visual composition.",
+      "replacement": {
+        "owner": "StructuredBlockRenderer + StructuredPresentationBridge",
+        "path": "foundation/structured/block-renderer.ts + presentation-bridge.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "yes",
+        "browser": "legacy + Wave3 + Wave4 + Wave5",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_AND_HIGH_VALUE; DONOR_LEFT_UNCHANGED",
+      "keepReason": "Central renderer reaches all Lane C consumers, but full accepted-runtime DOM/chrome convergence and actual donor removal are shared Controller work.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "This branch is accepted DOM/chrome/focus presentation composition; canonical Structured truth is supplied by the converged engine.",
+        "sourceEvidence": [
+          "renderSurface is retained for visual composition and focus hooks, not canonical document mutation."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D19",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "renderBlockArray",
+        "line": 188,
+        "branch": "legacy-recursive-dom-render",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::renderBlockArray::legacy-recursive-dom-render"
+      },
+      "behavior": "Recursively emits accepted runtime block DOM and surface-specific wiring.",
+      "replacement": {
+        "owner": "StructuredBlockRenderer",
+        "path": "foundation/structured/block-renderer.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "yes",
+        "browser": "legacy + W5 C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_AND_HIGH_VALUE; DONOR_LEFT_UNCHANGED",
+      "keepReason": "Replacement projection is proven, but exact accepted Library DOM/interaction composition is still supplied here pending final convergence.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "Recursive DOM emission is presentation rendering over existing block truth.",
+        "sourceEvidence": [
+          "renderBlockArray recursively emits DOM and wiring without becoming canonical tree authority."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D20",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "renderBlock",
+        "line": 191,
+        "branch": "legacy-block-dom-render",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::renderBlock::legacy-block-dom-render"
+      },
+      "behavior": "Renders individual block controls/content, accessibility hooks and donor visual behavior.",
+      "replacement": {
+        "owner": "StructuredBlockRenderer + StructuredPresentationBridge",
+        "path": "foundation/structured/block-renderer.ts + presentation-bridge.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "yes",
+        "browser": "legacy + W5 C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_AND_HIGH_VALUE; DONOR_LEFT_UNCHANGED",
+      "keepReason": "High-value per-block DOM behavior is broader than Lane C replacement evidence; retain until Controller performs convergence.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "Per-block DOM/accessibility rendering is presentation behavior over canonical block truth.",
+        "sourceEvidence": [
+          "renderBlock emits controls/content/ARIA projection while canonical tree/mutation owners remain external."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D21",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "commitEditable",
+        "line": 206,
+        "branch": "main-content-commit-semantic",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::commitEditable::main-content-commit-semantic"
+      },
+      "behavior": "Commits editable block content into canonical Structured transaction path.",
+      "replacement": {
+        "owner": "StructuredSurfaceHost.updateContent + StructuredTransactionHistoryRecoveryOwner",
+        "path": "foundation/structured/surface-host.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer",
+        "Note-content-compatible consumer"
+      ],
+      "coverage": {
+        "pointer": "pointer editing",
+        "keyboard": "keyboard editing",
+        "accessibility": "n/a",
+        "browser": "W5 C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_BY_UNCHANGED_DONOR_PLUS_REGRESSION",
+      "priorAdjudication": "RETIRE_READY",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::commitEditable::main-content-commit-semantic. Donor-local behavior remains material: Commits editable block content into canonical Structured transaction path.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::commitEditable::main-content-commit-semantic",
+          "Branch-level semantic/integration behavior remains donor-owned or ambiguous pending final convergence."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "keepReason": "Conservative correction: retirement invariants are incomplete or fail (replacementExecutable, realConsumerProof, interactionCoverage, centralChange, visualPreservation, hiddenOwnerFalse); retain until Wave 6 or final Controller convergence."
+    },
+    {
+      "id": "D22",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "selectBlock",
+        "line": 210,
+        "branch": "main-selection-semantic",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::selectBlock::main-selection-semantic"
+      },
+      "behavior": "Updates canonical block selection for main Structured surface.",
+      "replacement": {
+        "owner": "StructuredSelectionKernel",
+        "path": "foundation/structured/selection.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer",
+        "Note-content-compatible consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "selection DOM state",
+        "browser": "W5 C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_BY_UNCHANGED_DONOR_PLUS_REGRESSION",
+      "priorAdjudication": "RETIRE_READY",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::selectBlock::main-selection-semantic. Donor-local behavior remains material: Updates canonical block selection for main Structured surface.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::selectBlock::main-selection-semantic",
+          "Branch-level semantic/integration behavior remains donor-owned or ambiguous pending final convergence."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "keepReason": "Conservative correction: retirement invariants are incomplete or fail (replacementExecutable, realConsumerProof, interactionCoverage, centralChange, visualPreservation, hiddenOwnerFalse); retain until Wave 6 or final Controller convergence."
+    },
+    {
+      "id": "D23",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "deriveGapTarget",
+        "line": 215,
+        "branch": "dom-gap-hit-testing",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::deriveGapTarget::dom-gap-hit-testing"
+      },
+      "behavior": "Derives drag target from DOM geometry and pointer location.",
+      "replacement": {
+        "owner": "StructuredDropTargetPolicyOwner consumes canonical target; DOM geometry remains presentation-owned",
+        "path": "foundation/structured/drag-drop-target.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "n/a",
+        "accessibility": "n/a",
+        "browser": "legacy + W5 C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Lane C proves canonical target validation, not wholesale retirement of DOM hit-testing/geometry.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::deriveGapTarget::dom-gap-hit-testing. Donor-local behavior remains material: Derives drag target from DOM geometry and pointer location.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::deriveGapTarget::dom-gap-hit-testing",
+          "Lane C proves canonical target validation, not wholesale retirement of DOM hit-testing/geometry."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D24",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "insertBlock",
+        "line": 218,
+        "branch": "legacy-insertion-ui-and-mutation",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::insertBlock::legacy-insertion-ui-and-mutation"
+      },
+      "behavior": "Creates blocks from insertion UI, mixes presentation context with canonical insertion route.",
+      "replacement": {
+        "owner": "StructuredActionDescriptorOwner + StructuredMutationKernel",
+        "path": "foundation/structured/action-descriptor.ts + mutation.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "yes menus",
+        "browser": "legacy/W4/W5",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Core action owner is proven but this branch contains accepted UI/transient behavior and multiple insertion variants not exhaustively retired in Lane C.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::insertBlock::legacy-insertion-ui-and-mutation. Donor-local behavior remains material: Creates blocks from insertion UI, mixes presentation context with canonical insertion route.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::insertBlock::legacy-insertion-ui-and-mutation",
+          "Core action owner is proven but this branch contains accepted UI/transient behavior and multiple insertion variants not exhaustively retired in Lane C."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D25",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "duplicateBlock",
+        "line": 222,
+        "branch": "legacy-duplicate-action",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::duplicateBlock::legacy-duplicate-action"
+      },
+      "behavior": "Duplicates a block from donor context actions.",
+      "replacement": {
+        "owner": "StructuredActionDescriptorOwner + StructuredMutationKernel",
+        "path": "foundation/structured/action-descriptor.ts + mutation.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "menu accessibility",
+        "browser": "legacy/W4",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Action ownership is canonical, but exact donor UI branch remains tied to accepted menu/transient composition.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::duplicateBlock::legacy-duplicate-action. Donor-local behavior remains material: Duplicates a block from donor context actions.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::duplicateBlock::legacy-duplicate-action",
+          "Action ownership is canonical, but exact donor UI branch remains tied to accepted menu/transient composition."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D26",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "removeBlock",
+        "line": 224,
+        "branch": "legacy-delete-action",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::removeBlock::legacy-delete-action"
+      },
+      "behavior": "Deletes block/subtree with donor UI lifecycle.",
+      "replacement": {
+        "owner": "StructuredActionDescriptorOwner + StructuredMutationKernel",
+        "path": "foundation/structured/action-descriptor.ts + mutation.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "confirmation dialog",
+        "browser": "legacy/W4",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Deletion includes confirmation/transient presentation branches not fully replaceable by Lane C alone.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::removeBlock::legacy-delete-action. Donor-local behavior remains material: Deletes block/subtree with donor UI lifecycle.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::removeBlock::legacy-delete-action",
+          "Deletion includes confirmation/transient presentation branches not fully replaceable by Lane C alone."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D27",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "copyPlainBlock",
+        "line": 245,
+        "branch": "legacy-clipboard-copy",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::copyPlainBlock::legacy-clipboard-copy"
+      },
+      "behavior": "Serializes/copies a Structured block from donor runtime.",
+      "replacement": {
+        "owner": "StructuredClipboardTrustOwner",
+        "path": "foundation/structured/clipboard.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "keyboard shortcut",
+        "accessibility": "yes clipboard feedback",
+        "browser": "legacy/W5",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Clipboard truth owner is proven across three Lane C consumers, but donor serialization/UI glue is retained until final convergence.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::copyPlainBlock::legacy-clipboard-copy. Donor-local behavior remains material: Serializes/copies a Structured block from donor runtime.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::copyPlainBlock::legacy-clipboard-copy",
+          "Clipboard truth owner is proven across three Lane C consumers, but donor serialization/UI glue is retained until final convergence."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D28",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "cutBlock",
+        "line": 248,
+        "branch": "legacy-clipboard-cut",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::cutBlock::legacy-clipboard-cut"
+      },
+      "behavior": "Combines donor clipboard copy and mutation deletion.",
+      "replacement": {
+        "owner": "StructuredClipboardTrustOwner + StructuredMutationKernel",
+        "path": "foundation/structured/clipboard.ts + mutation.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "keyboard shortcut",
+        "accessibility": "yes",
+        "browser": "legacy",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Composite UI branch is broader than Lane C copy/ownership proof; retain conservatively.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::cutBlock::legacy-clipboard-cut. Donor-local behavior remains material: Combines donor clipboard copy and mutation deletion.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::cutBlock::legacy-clipboard-cut",
+          "Composite UI branch is broader than Lane C copy/ownership proof; retain conservatively."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D29",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "setBlockProp",
+        "line": 259,
+        "branch": "main-direction-format-semantic",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::setBlockProp::main-direction-format-semantic"
+      },
+      "behavior": "Routes block property formatting (including direction/alignment/background) through canonical command availability/mutation owners.",
+      "replacement": {
+        "owner": "InputDirectionResolver + StructuredCommandAvailabilityOwner + StructuredMutationKernel",
+        "path": "foundation/structured/direction.ts + command-availability.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer",
+        "Note-content-compatible consumer"
+      ],
+      "coverage": {
+        "pointer": "yes controls",
+        "keyboard": "yes command",
+        "accessibility": "projected dir",
+        "browser": "W5 C + Wave4",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_BY_UNCHANGED_DONOR_PLUS_REGRESSION",
+      "priorAdjudication": "RETIRE_READY",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "The main block-property branch delegates canonical formatting mutation to extension.execute; remaining donor operations are render/focus/menu presentation glue.",
+        "sourceEvidence": [
+          "setBlockProp(main) maps UI key to canonical command then calls extension.execute; it does not directly write the main block property."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "keepReason": "Conservative correction: retirement invariants are incomplete or fail (replacementExecutable, realConsumerProof, interactionCoverage, centralChange, visualPreservation); retain until Wave 6 or final Controller convergence."
+    },
+    {
+      "id": "D30",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "openInsertion",
+        "line": 276,
+        "branch": "insertion-transient-ui",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::openInsertion::insertion-transient-ui"
+      },
+      "behavior": "Opens insertion transient UI and binds donor DOM focus lifecycle.",
+      "replacement": {
+        "owner": "StructuredActionDescriptorOwner for descriptors; accepted Global transient/focus owners for presentation",
+        "path": "foundation/structured/action-descriptor.ts + global owners"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "focus/ARIA",
+        "browser": "legacy/W4",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Descriptor truth converges, but Global transient/focus presentation must remain accepted owner and donor DOM glue remains until convergence.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "Insertion transient is DOM/focus lifecycle only; insertion semantics are separately owned.",
+        "sourceEvidence": [
+          "openInsertion opens and positions transient UI and focus lifecycle."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D31",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "openBlockMenu",
+        "line": 281,
+        "branch": "context-menu-transient-ui",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::openBlockMenu::context-menu-transient-ui"
+      },
+      "behavior": "Opens block context menu, focus trapping and donor action presentation.",
+      "replacement": {
+        "owner": "StructuredActionDescriptorOwner + accepted Global transient/focus owners",
+        "path": "foundation/structured/action-descriptor.ts + global owners"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "Shift+F10",
+        "accessibility": "ARIA/focus",
+        "browser": "legacy/W4",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Lane C must not duplicate Global transient/focus ownership; donor presentation stays until final convergence.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "Context-menu branch is transient/focus presentation around accepted action descriptors.",
+        "sourceEvidence": [
+          "openBlockMenu provides menu/focus presentation rather than canonical mutation truth."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D32",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "renderStructure",
+        "line": 335,
+        "branch": "legacy-structure-tree-presentation",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::renderStructure::legacy-structure-tree-presentation"
+      },
+      "behavior": "Renders Library structure tree, search/filter, active path and DOM navigation.",
+      "replacement": {
+        "owner": "StructuredNavigationDescriptorOwner for descriptor truth; accepted Global presentation lifecycle for focus/scroll",
+        "path": "foundation/structured/outline-descriptor.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "tree accessibility",
+        "browser": "legacy + W5 B/C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_AND_HIGH_VALUE; DONOR_LEFT_UNCHANGED",
+      "keepReason": "Navigation descriptor truth is canonical, but actual structure-tree DOM/focus/scroll presentation remains accepted runtime behavior.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "Structure-tree branch renders navigation presentation; descriptor truth is supplied by StructuredNavigationDescriptorOwner.",
+        "sourceEvidence": [
+          "renderStructure supplies DOM/search/active-path presentation and does not replace descriptor authority."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D33",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "switchKU",
+        "line": 342,
+        "branch": "library-route-navigation",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::switchKU::library-route-navigation"
+      },
+      "behavior": "Switches Library KU and updates accepted route, focus and visual composition.",
+      "replacement": {
+        "owner": "StructuredNavigationDescriptorOwner is read-navigation descriptor only; route ownership remains outside Lane C",
+        "path": "foundation/structured/outline-descriptor.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "focus announcement",
+        "browser": "legacy",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "This is broader workspace/library route lifecycle, not a Structured navigation descriptor semantic to retire in Lane C.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::switchKU::library-route-navigation. Donor-local behavior remains material: Switches Library KU and updates accepted route, focus and visual composition.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::switchKU::library-route-navigation",
+          "This is broader workspace/library route lifecycle, not a Structured navigation descriptor semantic to retire in Lane C."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D34",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "inspectReadBlock",
+        "line": 354,
+        "branch": "read-inspection-descriptor-semantic",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::inspectReadBlock::read-inspection-descriptor-semantic"
+      },
+      "behavior": "Derives read inspection semantics for a canonical Structured block before presentation.",
+      "replacement": {
+        "owner": "StructuredNavigationDescriptorOwner.readInspection",
+        "path": "foundation/structured/outline-descriptor.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer",
+        "Note-content-compatible consumer"
+      ],
+      "coverage": {
+        "pointer": "yes entry",
+        "keyboard": "yes entry",
+        "accessibility": "presentation delegated",
+        "browser": "W5 B/C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_BY_UNCHANGED_DONOR_PLUS_REGRESSION",
+      "priorAdjudication": "RETIRE_READY",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::inspectReadBlock::read-inspection-descriptor-semantic. Donor-local behavior remains material: Derives read inspection semantics for a canonical Structured block before presentation.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::inspectReadBlock::read-inspection-descriptor-semantic",
+          "Branch-level semantic/integration behavior remains donor-owned or ambiguous pending final convergence."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "keepReason": "Conservative correction: retirement invariants are incomplete or fail (replacementExecutable, realConsumerProof, interactionCoverage, centralChange, visualPreservation, hiddenOwnerFalse); retain until Wave 6 or final Controller convergence."
+    },
+    {
+      "id": "D35",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "renderQuickJump",
+        "line": 450,
+        "branch": "quick-jump-presentation",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::renderQuickJump::quick-jump-presentation"
+      },
+      "behavior": "Renders quick-jump DOM, transient list and navigation affordances.",
+      "replacement": {
+        "owner": "StructuredNavigationDescriptorOwner.quickJump descriptor + accepted Global transient/focus owners",
+        "path": "foundation/structured/outline-descriptor.ts + global owners"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "focus/ARIA",
+        "browser": "legacy + W5 B/C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Descriptor is fully replaced, but DOM focus/scroll/transient presentation is intentionally not owned by Lane C.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "Quick-jump branch renders transient DOM from descriptor truth and accepted focus lifecycle.",
+        "sourceEvidence": [
+          "renderQuickJump is presentation of quick-jump descriptors."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D36",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "syncQuickJumpControl",
+        "line": 451,
+        "branch": "quick-jump-control-presentation",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::syncQuickJumpControl::quick-jump-control-presentation"
+      },
+      "behavior": "Synchronizes quick-jump button visibility/state with donor runtime.",
+      "replacement": {
+        "owner": "StructuredNavigationDescriptorOwner descriptor + accepted presentation lifecycle",
+        "path": "foundation/structured/outline-descriptor.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "yes",
+        "browser": "legacy",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Presentation control glue remains until Controller convergence.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "Quick-jump control synchronization is presentation state only.",
+        "sourceEvidence": [
+          "syncQuickJumpControl synchronizes control visibility/state without canonical document mutation."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D37",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "handleEditableKey",
+        "line": 558,
+        "branch": "legacy-key-event-glue",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::handleEditableKey::legacy-key-event-glue"
+      },
+      "behavior": "Handles raw contenteditable keyboard/caret/composition and donor DOM event integration.",
+      "replacement": {
+        "owner": "StructuredInputKeymapOwner + GlobalInputKeymapOwner + SemanticCommandBus",
+        "path": "foundation/structured/input-keymap.ts + foundation/global/input-keymap.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "n/a",
+        "keyboard": "yes",
+        "accessibility": "IME/caret accepted proofs",
+        "browser": "Lane A + Wave4 + legacy",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Semantic key ownership is canonical, but raw DOM caret/composition glue and all event cases are high-value integration behavior requiring final convergence.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::handleEditableKey::legacy-key-event-glue. Donor-local behavior remains material: Handles raw contenteditable keyboard/caret/composition and donor DOM event integration.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::handleEditableKey::legacy-key-event-glue",
+          "Semantic key ownership is canonical, but raw DOM caret/composition glue and all event cases are high-value integration behavior requiring final convergence."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D38",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "handlePointerDown",
+        "line": 583,
+        "branch": "legacy-pointer-drag-start-glue",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::handlePointerDown::legacy-pointer-drag-start-glue"
+      },
+      "behavior": "Starts donor pointer selection/drag/marquee behavior from DOM events.",
+      "replacement": {
+        "owner": "StructuredDragDropOwner + StructuredSelectionKernel; Global transient presentation retained",
+        "path": "foundation/structured/drag-drop.ts + selection.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "n/a",
+        "accessibility": "pointer semantics",
+        "browser": "legacy + W5 C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Canonical drag/selection semantics are proven, but this function multiplexes DOM pointer interactions including marquee/transients not exhaustively replaced.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::handlePointerDown::legacy-pointer-drag-start-glue. Donor-local behavior remains material: Starts donor pointer selection/drag/marquee behavior from DOM events.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::handlePointerDown::legacy-pointer-drag-start-glue",
+          "Canonical drag/selection semantics are proven, but this function multiplexes DOM pointer interactions including marquee/transients not exhaustively replaced."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D39",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "handlePointerMove",
+        "line": 585,
+        "branch": "legacy-pointer-drag-move-glue",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::handlePointerMove::legacy-pointer-drag-move-glue"
+      },
+      "behavior": "Updates donor pointer drag preview/autoscroll/marquee from DOM geometry.",
+      "replacement": {
+        "owner": "StructuredDragDropOwner for intent/target; accepted presentation owns DOM preview/scroll",
+        "path": "foundation/structured/drag-drop.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "n/a",
+        "accessibility": "n/a",
+        "browser": "legacy + W5 C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Autoscroll/preview DOM presentation remains donor behavior; Lane C proves it does not become canonical document truth.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::handlePointerMove::legacy-pointer-drag-move-glue. Donor-local behavior remains material: Updates donor pointer drag preview/autoscroll/marquee from DOM geometry.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::handlePointerMove::legacy-pointer-drag-move-glue",
+          "Autoscroll/preview DOM presentation remains donor behavior; Lane C proves it does not become canonical document truth."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D40",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "handlePointerUp",
+        "line": 587,
+        "branch": "legacy-pointer-drag-commit-glue",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::handlePointerUp::legacy-pointer-drag-commit-glue"
+      },
+      "behavior": "Commits donor pointer drag or block-selection gestures.",
+      "replacement": {
+        "owner": "StructuredDragDropOwner + StructuredMutationKernel",
+        "path": "foundation/structured/drag-drop.ts + mutation.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "n/a",
+        "accessibility": "n/a",
+        "browser": "legacy + W5 C",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": true,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Canonical commit path is proven, but pointer event multiplexing/presentation must remain until Controller convergence.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::handlePointerUp::legacy-pointer-drag-commit-glue. Donor-local behavior remains material: Commits donor pointer drag or block-selection gestures.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::handlePointerUp::legacy-pointer-drag-commit-glue",
+          "Canonical commit path is proven, but pointer event multiplexing/presentation must remain until Controller convergence."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D41",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "bindEvents",
+        "line": 600,
+        "branch": "global-legacy-event-wiring",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::bindEvents::global-legacy-event-wiring"
+      },
+      "behavior": "Binds accepted runtime pointer/click/keyboard/paste/transient event listeners.",
+      "replacement": {
+        "owner": "No single replacement: canonical semantic owners plus accepted Global transient/focus owners",
+        "path": "multiple accepted owners"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "yes",
+        "browser": "legacy/W3/W4/W5",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "This is a shared integration hotspot and cannot be retired by Lane C without Controller-owned convergence.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "Event binding is integration wiring; semantic ownership remains in the invoked canonical owners.",
+        "sourceEvidence": [
+          "bindEvents registers browser event listeners and dispatches into existing handlers/owners."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D42",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "renderCodeMarkup",
+        "line": 71,
+        "branch": "code-visual-rendering",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::renderCodeMarkup::code-visual-rendering"
+      },
+      "behavior": "Preserves syntax tokens, annotations and code-specific visual markup.",
+      "replacement": {
+        "owner": "StructuredBlockRenderer projects canonical code fields; donor code presentation remains high-value",
+        "path": "foundation/structured/block-renderer.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes copy",
+        "keyboard": "keyboard",
+        "accessibility": "code annotations",
+        "browser": "legacy",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Lane C does not claim complete code syntax/annotation visual parity; retain accepted high-value donor behavior.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "Code markup branch is visual rendering of code tokens/annotations.",
+        "sourceEvidence": [
+          "renderCodeMarkup emits syntax/annotation presentation and does not mutate canonical code truth."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D43",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "renderBlockSelectionToolbar",
+        "line": 296,
+        "branch": "multi-block-selection-presentation",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::renderBlockSelectionToolbar::multi-block-selection-presentation"
+      },
+      "behavior": "Renders donor multi-block selection toolbar and selection actions.",
+      "replacement": {
+        "owner": "StructuredSelectionKernel canonical selection + accepted presentation lifecycle",
+        "path": "foundation/structured/selection.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "yes",
+        "browser": "legacy",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Lane C proves canonical selection ownership but does not exhaustively retire multi-block toolbar presentation/actions.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "Multi-block toolbar function renders selection presentation; canonical selection remains StructuredSelectionKernel-owned.",
+        "sourceEvidence": [
+          "renderBlockSelectionToolbar projects toolbar/actions from existing selection state."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D44",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "applyInline",
+        "line": 330,
+        "branch": "inline-formatting-presentation-and-mutation",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::applyInline::inline-formatting-presentation-and-mutation"
+      },
+      "behavior": "Applies inline formatting based on DOM range and donor controls.",
+      "replacement": {
+        "owner": "Structured rich-content/direction owners plus canonical mutation path",
+        "path": "foundation/structured/rich-content.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "yes toolbar",
+        "browser": "legacy/W4",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Inline DOM range formatting breadth is not fully covered by Lane C; keep until final convergence.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": true,
+        "basis": "CONSERVATIVE_BRANCH_REVIEW",
+        "rationale": "No-hidden-owner condition is not proven for stack/native-typescript/foundation/accepted-runtime.ts::applyInline::inline-formatting-presentation-and-mutation. Donor-local behavior remains material: Applies inline formatting based on DOM range and donor controls.",
+        "sourceEvidence": [
+          "stack/native-typescript/foundation/accepted-runtime.ts::applyInline::inline-formatting-presentation-and-mutation",
+          "Inline DOM range formatting breadth is not fully covered by Lane C; keep until final convergence."
+        ],
+        "conclusion": "HIDDEN_DONOR_SEMANTIC_OWNER_REMAINS"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": true,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": false
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D45",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "openDeleteConfirm",
+        "line": 256,
+        "branch": "subtree-delete-confirmation-presentation",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::openDeleteConfirm::subtree-delete-confirmation-presentation"
+      },
+      "behavior": "Runs subtree delete confirmation UI and accepted focus lifecycle.",
+      "replacement": {
+        "owner": "StructuredActionDescriptorOwner owns deterministic confirmation requirement; Global transient owner owns dialog presentation",
+        "path": "foundation/structured/action-descriptor.ts"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "yes",
+        "keyboard": "yes",
+        "accessibility": "dialog accessibility",
+        "browser": "legacy/W4",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Confirmation requirement is canonical but actual dialog/focus lifecycle must remain presentation-owned.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "Delete-confirm function owns dialog/focus presentation while confirmation requirement is supplied by StructuredActionDescriptorOwner.",
+        "sourceEvidence": [
+          "openDeleteConfirm renders/positions confirmation UI and focus lifecycle; it does not decide canonical subtree confirmation policy."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    },
+    {
+      "id": "D46",
+      "region": {
+        "file": "stack/native-typescript/foundation/accepted-runtime.ts",
+        "function": "inspect",
+        "line": 671,
+        "branch": "accepted-runtime-inspector",
+        "deterministicId": "stack/native-typescript/foundation/accepted-runtime.ts::inspect::accepted-runtime-inspector"
+      },
+      "behavior": "Projects runtime diagnostic/inspection state.",
+      "replacement": {
+        "owner": "No direct Structured semantic replacement required",
+        "path": "diagnostic presentation"
+      },
+      "realConsumerProof": [
+        "Library reference consumer",
+        "Learn real Structured consumer"
+      ],
+      "coverage": {
+        "pointer": "n/a",
+        "keyboard": "n/a",
+        "accessibility": "n/a",
+        "browser": "legacy",
+        "notes": ""
+      },
+      "centralChangeProofReachesReplacement": false,
+      "visualInteractionPreservation": "PRESERVED_DONOR_REQUIRED",
+      "keepReason": "Diagnostic runtime projection is not a donor Structured semantic owner candidate for deletion in this lane.",
+      "priorAdjudication": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE",
+      "hiddenOwnerAssessment": {
+        "remains": false,
+        "basis": "BRANCH_SOURCE_AND_REPLACEMENT_REVIEW",
+        "rationale": "Inspector branch is diagnostic projection only, not a Structured semantic owner.",
+        "sourceEvidence": [
+          "inspect projects diagnostic runtime state without canonical Structured mutation."
+        ],
+        "conclusion": "NO_HIDDEN_DONOR_SEMANTIC_OWNER_PATH"
+      },
+      "hiddenDonorSemanticOwnerPathRemains": false,
+      "retirementInvariantEvaluation": {
+        "pass": false,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": false,
+          "realConsumerProof": false,
+          "interactionCoverage": false,
+          "centralChange": false,
+          "visualPreservation": false,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "keyboard",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "accessibility",
+            "pass": false,
+            "reason": "N_A_REASON_REQUIRED"
+          },
+          {
+            "channel": "browser",
+            "pass": false,
+            "reason": "PASSING_INTERACTION_EVIDENCE_REQUIRED"
+          }
+        ]
+      },
+      "disposition": "KEEP_UNTIL_WAVE6_OR_FINAL_CONVERGENCE"
+    }
+  ],
+  "validation": {
+    "status": "PASS",
+    "requirements": {
+      "17": {
+        "status": "PASS",
+        "coverageComplete": true,
+        "classifiedExactlyOnce": true,
+        "unknownDisposition": []
+      },
+      "18": {
+        "status": "PASS",
+        "invalidRetireReady": [],
+        "hiddenContradictions": []
+      },
+      "19": {
+        "status": "PASS",
+        "incompleteNotKeep": []
+      }
+    },
+    "negativeFixtures": {
+      "hiddenTrueRetireReadyRejected": true,
+      "incompleteRetireReadyRejected": true,
+      "injectedInvalidRetireReadyMakesRequirement18Fail": true,
+      "status": "PASS"
+    },
+    "mandatoryChecks": [
+      {
+        "id": 1,
+        "title": "zero RETIRE_READY entries have hiddenDonorSemanticOwnerPathRemains !== false",
+        "status": "PASS",
+        "detail": []
+      },
+      {
+        "id": 2,
+        "title": "every RETIRE_READY has non-empty replacement owner/path and executable proof",
+        "status": "PASS"
+      },
+      {
+        "id": 3,
+        "title": "every RETIRE_READY has real-consumer proof",
+        "status": "PASS"
+      },
+      {
+        "id": 4,
+        "title": "every RETIRE_READY has applicable browser/interaction evidence or explicit N/A reasons",
+        "status": "PASS"
+      },
+      {
+        "id": 5,
+        "title": "every RETIRE_READY satisfies central-change evidence where applicable",
+        "status": "PASS"
+      },
+      {
+        "id": 6,
+        "title": "every RETIRE_READY has visual/interaction preservation evidence",
+        "status": "PASS"
+      },
+      {
+        "id": 7,
+        "title": "every entry not fully satisfying retirement invariants is KEEP",
+        "status": "PASS",
+        "detail": []
+      },
+      {
+        "id": 8,
+        "title": "all 46 donor candidate branches are classified exactly once",
+        "status": "PASS",
+        "detail": {
+          "entryCount": 46,
+          "uniqueIds": 46
+        }
+      },
+      {
+        "id": 9,
+        "title": "no unknown disposition exists",
+        "status": "PASS",
+        "detail": []
+      },
+      {
+        "id": 10,
+        "title": "negative fixture RETIRE_READY + hidden owner true is rejected",
+        "status": "PASS"
+      },
+      {
+        "id": 11,
+        "title": "deliberate incomplete RETIRE_READY fixture is rejected",
+        "status": "PASS"
+      },
+      {
+        "id": 12,
+        "title": "Requirement 18 fails when an invalid RETIRE_READY is injected",
+        "status": "PASS"
+      }
+    ]
+  }
+}

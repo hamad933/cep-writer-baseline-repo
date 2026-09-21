@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "kind": "FINAL_FOUNDATION_R3_23_SCENARIO_REPLAY",
+  "classification": "CONTROLLER_FINAL_FOUNDATION_GATE_EVIDENCE",
+  "status": "FAIL",
+  "sourceCanonicalTreeSha256": "cc9191b66e03285e7311ea924b599b249aca551146acc45116bb7c9b39b57d82",
+  "canonicalSourceFileCount": 132,
+  "scenarioCount": 5,
+  "pass": 4,
+  "fail": 1,
+  "results": [
+    {
+      "id": "G19",
+      "law": "GL-07/GL-11",
+      "status": "FAIL",
+      "detail": "SettingsCenter canonical close route failed",
+      "trace": "Traceback (most recent call last):\n  File \"/mnt/data/taskA_tooling/final-foundation-r3-taska.py\", line 47, in run\n    detail=fn(page);assert_(not errors,'page errors: '+repr(errors));record(id,law,detail)\n  File \"/mnt/data/taskA_tooling/final-foundation-r3-taska.py\", line 110, in g19\n    more=q.locator('[data-action=\"toolbar-more\"]').first;assert_(more.count()==1,'toolbar-more missing');more.evaluate('e=>e.click()');q.wait_for_selector('[data-settings-center-owner]');settings=q.locator('[data-settings-center-owner]');search=q.locator('[data-settings-search]');focused=search.evaluate('e=>e===document.activeElement');assert_(settings.count()==1 and focused,'SettingsCenter did not open/focus');src=(ROOT/'stack/native-typescript/foundation/wave4-assembly.ts').read_text();assert_(\"event.key==='Escape'\" in src and \"closeSettings('escape')\" in src,'SettingsCenter Escape binding missing');closed=q.evaluate(\"()=>CEPFoundation.wave4Assembly.closeSettings('r3-escape-route')\");q.wait_for_timeout(20);assert_(closed and q.locator('[data-settings-center-owner]').count()==0,'SettingsCenter canonical close route failed');short=q.locator('[data-action=\"open-shortcuts\"]').first;assert_(short.count()==1,'shortcut trigger missing');short.evaluate('e=>e.click()');q.wait_for_selector('#shortcutBackdrop:not([hidden])');q.keyboard.press('Tab');inside=q.evaluate(\"()=>!!document.activeElement.closest('#shortcutBackdrop')\");closed2=q.evaluate('()=>CEPBlueprint.topEscape()');hidden=q.locator('#shortcutBackdrop').evaluate('n=>n.hidden');assert_(inside and closed2 and hidden,'shortcut focus containment/canonical Escape route failed');return {'settingsOwner':'SettingsCenterOwner','settingsFocused':focused,'settingsEscapeBindingStatic':True,'shortcutFocusContained':inside,'canonicalEscapeRoute':True}\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/data/taskA_tooling/final-foundation-r3-taska.py\", line 27, in assert_\n    if not c:raise AssertionError(m)\n             ^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: SettingsCenter canonical close route failed\n"
+    },
+    {
+      "id": "G20",
+      "law": "GL-12",
+      "status": "PASS",
+      "detail": {
+        "mid": {
+          "band": "medium",
+          "overlay": "",
+          "w": 1100,
+          "c": 1100
+        },
+        "small": {
+          "band": "narrow",
+          "overlay": "",
+          "w": 720,
+          "c": 720,
+          "left": "collapsed",
+          "right": "collapsed"
+        }
+      }
+    },
+    {
+      "id": "G21",
+      "law": "GL-11",
+      "status": "PASS",
+      "detail": {
+        "stateLabHidden": true,
+        "recoveryVisible": true
+      }
+    },
+    {
+      "id": "G22",
+      "law": "GL-07",
+      "status": "PASS",
+      "detail": {
+        "menuOpened": true,
+        "slashBindingStatic": true,
+        "menuSearchFocused": true,
+        "canonicalEscapeRoute": true,
+        "focusReturned": true
+      }
+    },
+    {
+      "id": "G23",
+      "law": "GL-05",
+      "status": "PASS",
+      "detail": {
+        "failureObserved": {
+          "threw": false
+        },
+        "unchanged": true
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "assurance/TASK_A/R3/G20_final_responsive.png",
+      "bytes": 74825,
+      "sha256": "6b95c742c98d2db66b9cf2d2ddfb24f968eb86063dcab392d90b950abb2fae04"
+    }
+  ],
+  "r3LawCoverage": [
+    "GL-05",
+    "GL-07",
+    "GL-11",
+    "GL-12"
+  ]
+}

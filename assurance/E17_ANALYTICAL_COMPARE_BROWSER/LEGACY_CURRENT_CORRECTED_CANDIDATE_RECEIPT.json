@@ -1,0 +1,271 @@
+{
+  "schemaVersion": 1,
+  "classification": "REPRODUCIBLE_BROWSER_CONFORMANCE_RECEIPT_NOT_OWNER_ACCEPTANCE",
+  "command": "python tools/w5-a-current-regression-browser.py",
+  "sourceFoundationBaseline": "CEP-FR-E17-FINAL-FOUNDATION-INTAKE-GATE",
+  "sourceCandidate": "CANONICAL_SOURCE_TREE_SHA256:252d822f82954f090578714b754185c90c79cd8713bf84354504be17c146ae5f",
+  "sourceCanonicalTreeSha256": "252d822f82954f090578714b754185c90c79cd8713bf84354504be17c146ae5f",
+  "canonicalSourceFileCount": 121,
+  "currentUse": "EXACT_CURRENT_CANONICAL_SOURCE_EXECUTION_RECEIPT",
+  "executionStatus": "EXECUTED_PASS",
+  "prerequisite": "SATISFIED: Python Playwright launched /usr/bin/chromium and executed the exact current built ESM graph in-memory because localhost is administratively blocked.",
+  "declaredFlows": [
+    "workspace.transient-and-pane-lifecycle",
+    "spatial.selection-connect-canonical-edge",
+    "relation.route-convergence-and-label-scope",
+    "central-change-reuse",
+    "runtime-causal-consequence",
+    "spatial-input-bidi-preference-and-structured-isolation"
+  ],
+  "environment": {
+    "engine": "Python Playwright Chromium",
+    "executable": "/usr/bin/chromium",
+    "transport": "in-memory-built-esm",
+    "viewport": "1440x980",
+    "reducedMotion": true
+  },
+  "summary": {
+    "total": 6,
+    "pass": 6,
+    "fail": 0
+  },
+  "flows": [
+    {
+      "id": "workspace.transient-and-pane-lifecycle",
+      "owner": "WorkspaceHostKernel + WorkspacePaneLayoutOwner + TransientFocusOwner",
+      "oracle": "pane truth changes, transient reverses, focus returns",
+      "status": "PASS",
+      "evidence": {
+        "collapsed": "collapsed",
+        "restored": "open",
+        "paletteExit": "Escape",
+        "focusReturned": true,
+        "responsive": {
+          "contract": {
+            "id": "WorkspacePaneStateContract",
+            "version": "1.0.0",
+            "owner": "WorkspacePaneLayoutOwner",
+            "persisted": [
+              "preferredState",
+              "preferredWidth"
+            ],
+            "projectedOnly": [
+              "effectiveState",
+              "mode",
+              "responsiveBand",
+              "resizeAvailability",
+              "focusMode"
+            ]
+          },
+          "responsiveBand": "medium",
+          "viewportWidth": 900,
+          "focusMode": false,
+          "left": {
+            "side": "left",
+            "preferredState": "open",
+            "effectiveState": "open",
+            "preferred": "open",
+            "effective": "open",
+            "mode": "docked",
+            "preferredWidth": 304,
+            "effectiveWidth": 304,
+            "responsiveSuppressed": false,
+            "resizeAvailability": {
+              "pointer": true,
+              "keyboard": true
+            }
+          },
+          "right": {
+            "side": "right",
+            "preferredState": "open",
+            "effectiveState": "collapsed",
+            "preferred": "open",
+            "effective": "collapsed",
+            "mode": "collapsed",
+            "preferredWidth": 420,
+            "effectiveWidth": 420,
+            "responsiveSuppressed": true,
+            "resizeAvailability": {
+              "pointer": false,
+              "keyboard": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "spatial.selection-connect-canonical-edge",
+      "owner": "ActionAvailabilityCore + RelationInteractionOwner + RelationDomainAdapter",
+      "oracle": "one canonical relation committed and projected",
+      "status": "PASS",
+      "evidence": {
+        "selectedIds": [
+          "concept-1",
+          "concept-2"
+        ],
+        "before": 30,
+        "after": 31,
+        "relationId": "relation-1",
+        "canonicalVersion": 2
+      }
+    },
+    {
+      "id": "relation.route-convergence-and-label-scope",
+      "owner": "RelationInteractionOwner",
+      "oracle": "whole-edge inert; label and F2 converge",
+      "status": "PASS",
+      "evidence": {
+        "wholeEdgeOpened": false,
+        "convergedReceipts": 2,
+        "owners": [
+          "RelationInteractionOwner"
+        ]
+      }
+    },
+    {
+      "id": "central-change-reuse",
+      "owner": "ActionAvailabilityCore + RelationInteractionOwner",
+      "oracle": "same policy/action owner across Visualize and Enterprise",
+      "status": "PASS",
+      "evidence": [
+        {
+          "consumer": "visualize",
+          "selectedIds": [
+            "concept-1",
+            "concept-2"
+          ],
+          "policyRevision": "RELATION-CENTRAL-04",
+          "availabilityOwner": "ActionAvailabilityCore",
+          "availability": {
+            "action": "connect",
+            "policyId": "connect",
+            "visible": true,
+            "enabled": true,
+            "reason": "",
+            "code": "AVAILABLE",
+            "selectionCount": 2,
+            "selectedTypes": [
+              "unspecified"
+            ]
+          },
+          "actionOwner": "RelationInteractionOwner"
+        },
+        {
+          "consumer": "enterprise",
+          "selectedIds": [
+            "CTL-WAF-01",
+            "SIM-ATK-01"
+          ],
+          "policyRevision": "RELATION-CENTRAL-04",
+          "availabilityOwner": "ActionAvailabilityCore",
+          "availability": {
+            "action": "connect",
+            "policyId": "connect",
+            "visible": true,
+            "enabled": true,
+            "reason": "",
+            "code": "AVAILABLE",
+            "selectionCount": 2,
+            "selectedTypes": [
+              "Security Control",
+              "Simulation-local Device"
+            ]
+          },
+          "actionOwner": "RelationInteractionOwner"
+        }
+      ]
+    },
+    {
+      "id": "runtime-causal-consequence",
+      "owner": "W03V34RunsAdapter via provider-neutral OperationalView",
+      "oracle": "device/spatial/terminal/event/recorded agree",
+      "status": "PASS",
+      "evidence": {
+        "up": false,
+        "nodeStatus": "DOWN",
+        "semanticCommand": "device.shutdown",
+        "eventOutput": "Web Application: interface DOWN (simulation)",
+        "recordedUp": false,
+        "provider": "InternalSimulationAdapter",
+        "terminalVisibleDown": true
+      }
+    },
+    {
+      "id": "spatial-input-bidi-preference-and-structured-isolation",
+      "owner": "SpatialInteractionKernel + GlobalInputKeymapOwner + ScopedPreferencesOwner + StructuredDocumentDomainAdapter",
+      "oracle": "input semantics distinct; Learn isolated and Bidi-correct",
+      "status": "PASS",
+      "evidence": {
+        "contextSuppression": "own-event-only",
+        "keyboard": {
+          "focusOnly": true,
+          "spaceSelect": true,
+          "altCameraOnly": true,
+          "controlMoveOnly": true
+        },
+        "preference": {
+          "lang": "en",
+          "dir": "ltr"
+        },
+        "structured": {
+          "hostKind": "DONOR_FREE_WORKSPACE_HOST",
+          "domainKind": "learn",
+          "libraryState": null,
+          "searchCount": 0,
+          "bdi": true,
+          "isolation": true
+        },
+        "libraryParity": {
+          "consumer": "library",
+          "activeDocument": "KU-D05-0021",
+          "blockCount": 6,
+          "editorCore": "UnifiedEditorCore",
+          "donorHost": true
+        }
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "filename": "E17_ANALYTICAL_COMPARE_BROWSER/legacy-current/browser-workspace-pane-context.png",
+      "flowId": "workspace.transient-and-pane-lifecycle",
+      "property": "preferred/effective pane state and shared workspace chrome",
+      "viewport": {
+        "width": 900,
+        "height": 980
+      },
+      "bytes": 102465,
+      "sha256": "7080ba39af1136874a3b236d1b65fe5741b19f1ee1d39adb5d5ca33d75943388",
+      "scope": "EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE"
+    },
+    {
+      "filename": "E17_ANALYTICAL_COMPARE_BROWSER/legacy-current/browser-selection-connect.png",
+      "flowId": "spatial.selection-connect-canonical-edge",
+      "property": "exactly-two central ActionAvailability presentation",
+      "viewport": {
+        "width": 1440,
+        "height": 980
+      },
+      "bytes": 209412,
+      "sha256": "aa09321376031299e8cf514cf6e6e967ba42f5013b6dd627048003ada4b249f9",
+      "scope": "EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE"
+    },
+    {
+      "filename": "E17_ANALYTICAL_COMPARE_BROWSER/legacy-current/browser-operational-shutdown.png",
+      "flowId": "runtime-causal-consequence",
+      "property": "provider-neutral terminal and canonical shutdown consequence",
+      "viewport": {
+        "width": 1440,
+        "height": 980
+      },
+      "bytes": 146321,
+      "sha256": "b59170940c287ecad47be0b18c9ea2a9c887a74a41ca2d11fb8fca2cd696a184",
+      "scope": "EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE"
+    }
+  ],
+  "limitations": [
+    "Headless Chromium only",
+    "Six bounded legacy critical flows; not exhaustive permutation certification",
+    "In-memory transport uses the exact built ESM graph because localhost navigation is blocked by administrator"
+  ]
+}

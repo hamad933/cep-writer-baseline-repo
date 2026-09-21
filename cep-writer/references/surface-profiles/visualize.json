@@ -1,0 +1,404 @@
+{
+  "schema_version": 1,
+  "surface": "visualize",
+  "workspace": "W02",
+  "title": "Visualize",
+  "foundation": {
+    "SC-001": {
+      "classification": "INHERIT_AND_BIND",
+      "reason": "Navigation owner shared; Shell composition explicitly reopened",
+      "owner": "GlobalShellCore"
+    },
+    "SC-002": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "WorkspaceRegionCore"
+    },
+    "SC-003": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "PaneResponsiveCore"
+    },
+    "SC-004": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "ContextInspectorCore"
+    },
+    "SC-005": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "BottomDeepWorkCore"
+    },
+    "SC-006": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "PresentationStateCore"
+    },
+    "SC-007": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "GlobalPreferenceCore"
+    },
+    "SC-008": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "PreferenceScopeResolver"
+    },
+    "SC-009": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "GlobalSettingsIA"
+    },
+    "SC-010": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "PreferencePersistenceCore"
+    },
+    "SC-011": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "PreferenceExportImportResetModel"
+    },
+    "SC-012": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "LocaleLanguagePresentationCore"
+    },
+    "SC-013": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "DirectionAlignmentResolutionCore"
+    },
+    "SC-014": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "TypographyAndScriptProfileCore"
+    },
+    "SC-015": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "TechnicalTokenBidiIsolationCore"
+    },
+    "SC-016": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "SemanticCommandCore"
+    },
+    "SC-017": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "ActionSurfaceCore"
+    },
+    "SC-018": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "ActionAvailabilityCore"
+    },
+    "SC-019": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "TransientFocusCore"
+    },
+    "SC-020": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "InputKeymapCore"
+    },
+    "SC-021": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "AccessibilityInteractionCore"
+    },
+    "SC-022": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "StatusFeedbackCore"
+    },
+    "SC-023": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "EpistemicStateCore"
+    },
+    "SC-024": {
+      "classification": "OPTIONAL",
+      "reason": "Search/filter binds domain source; no fabricated data",
+      "owner": "SearchFilterDiscoveryCore"
+    },
+    "SC-025": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "NavigationQuickAccessCore"
+    },
+    "SC-026": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "ConfirmationSafetyCore"
+    },
+    "SC-027": {
+      "classification": "INHERIT_AND_BIND",
+      "reason": "Shared selection action surface consumes one ActionAvailability result; canonical mutation remains in the domain adapter",
+      "owner": "SelectionInteractionCore"
+    },
+    "SC-028": {
+      "classification": "OPTIONAL",
+      "reason": "For personal annotations or working text only; no new canonical domain mutation",
+      "owner": "TransactionHistoryCore"
+    },
+    "SC-029": {
+      "classification": "OPTIONAL",
+      "reason": "For personal annotations or working text only; no new canonical domain mutation",
+      "owner": "ClipboardTrustCore"
+    },
+    "SC-030": {
+      "classification": "OPTIONAL",
+      "reason": "For personal annotations or working text only; no new canonical domain mutation",
+      "owner": "StructuredContentCore"
+    },
+    "SC-031": {
+      "classification": "INHERIT_AND_BIND",
+      "reason": "Explicit shared mechanic in admitted unsuperseded conceptual surface contract",
+      "owner": "SpatialInteractionCore"
+    },
+    "SC-032": {
+      "classification": "OPTIONAL",
+      "reason": "Only if domain supplies typed compare/history projection",
+      "owner": "AnalyticalWorkbenchCore"
+    },
+    "SC-033": {
+      "classification": "OPTIONAL",
+      "reason": "Command receipts only; canonical Audit adapter not implied",
+      "owner": "AuditProvenanceInteractionCore"
+    },
+    "SC-034": {
+      "classification": "INHERIT_AND_BIND",
+      "reason": "Collection/object browse binds row identity and domain actions",
+      "owner": "CollectionTableMatrixCore"
+    },
+    "SC-035": {
+      "classification": "OPTIONAL",
+      "reason": "Domain history if justified; never simulated truth",
+      "owner": "TimelineReplayCore"
+    },
+    "SC-036": {
+      "classification": "NOT_APPLICABLE",
+      "reason": "No live runtime owned by this surface",
+      "owner": "OperationalWorkbenchCore"
+    },
+    "SC-037": {
+      "classification": "OPTIONAL",
+      "reason": "Decision read projection only; no formal adjudication write",
+      "owner": "ReviewDecisionInteractionCore"
+    },
+    "SC-038": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "NotesAnnotationCore"
+    },
+    "SC-039": {
+      "classification": "NOT_APPLICABLE",
+      "reason": "Production mapping is evidence only; no production target in bounded foundation",
+      "owner": "ProductionMappingBoundary"
+    },
+    "SC-040": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "PreferenceVsDomainConfigBoundary"
+    },
+    "WorkspaceFrame": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "WorkspaceFrame"
+    },
+    "SidePaneShell": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "SidePaneShell"
+    },
+    "WorkspaceToolbar": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "WorkspaceToolbar"
+    },
+    "CommandPalette": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "CommandPalette"
+    },
+    "ContextActionMenu": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "ContextActionMenu"
+    },
+    "SelectionActionSurface": {
+      "classification": "INHERIT_AND_BIND",
+      "reason": "Shared selection action surface consumes one ActionAvailability result; canonical mutation remains in the domain adapter",
+      "owner": "SelectionActionSurface"
+    },
+    "InsertionPalette": {
+      "classification": "OPTIONAL",
+      "reason": "For personal annotations or working text only; no new canonical domain mutation",
+      "owner": "InsertionPalette"
+    },
+    "ContextInspector": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "ContextInspector"
+    },
+    "LensHost": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "LensHost"
+    },
+    "BottomShelf": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "BottomShelf"
+    },
+    "SettingsCenter": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "SettingsCenter"
+    },
+    "ScopedPreferencesOwner": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "ScopedPreferencesOwner"
+    },
+    "FocusAndDismissal": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "FocusAndDismissal"
+    },
+    "UnifiedEditor": {
+      "classification": "OPTIONAL",
+      "reason": "For personal annotations or working text only; no new canonical domain mutation",
+      "owner": "UnifiedEditor"
+    },
+    "StickyNotes": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "StickyNotes"
+    },
+    "SpatialInteraction": {
+      "classification": "INHERIT_AND_BIND",
+      "reason": "Explicit shared mechanic in admitted unsuperseded conceptual surface contract",
+      "owner": "SpatialInteraction"
+    },
+    "OperationalSurface": {
+      "classification": "NOT_APPLICABLE",
+      "reason": "No live runtime owned by this surface",
+      "owner": "OperationalSurface"
+    },
+    "WindowMotion": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "WindowMotion"
+    },
+    "SemanticCommandBus": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "SemanticCommandBus"
+    },
+    "StatusFeedback": {
+      "classification": "MANDATORY_INHERIT",
+      "reason": "Universal presentation/action/state boundary applies; domain supplies content only",
+      "owner": "StatusFeedback"
+    },
+    "AnalyticalCompare": {
+      "classification": "OPTIONAL",
+      "reason": "Only if domain supplies typed compare/history projection",
+      "owner": "AnalyticalCompare"
+    }
+  },
+  "family_engines": [
+    "SpatialInteraction"
+  ],
+  "slots": {
+    "TOP": "Visualize exact identity, local mode, command routes",
+    "LEFT": "typed KnowledgeObject collection/navigation",
+    "CENTER": "SpatialKnowledgeWorkbench primary task",
+    "RIGHT": "one selected KnowledgeObject identity/context inspector",
+    "BOTTOM": "Deep Visualize diagnostics/history",
+    "TOOLBAR": "Universal action group + domain command binding",
+    "TRANSIENT": "Shared focus/dismissal owner; no local duplicate"
+  },
+  "domain_commands": [
+    "spatial.connect",
+    "spatial.relation.commit",
+    "relation.edit",
+    "relation.undo",
+    "relation.redo",
+    "spatial.fit",
+    "spatial.align",
+    "spatial.distribute"
+  ],
+  "context_lenses": [
+    "identity",
+    "domain-context",
+    "notes"
+  ],
+  "bottom_tabs": [
+    "history",
+    "domain-diagnostics"
+  ],
+  "objects": {
+    "KnowledgeObject": "W02 canonical ID + revision",
+    "Representation": "representationId + canonicalObjectRef + viewId + geometry",
+    "KnowledgeRelation": "relationId + semantic type + endpoint refs",
+    "SpatialView": "Tree/Path/Graph/Canvas representation adapter"
+  },
+  "invariants": [
+    "representationId differs from canonicalObjectId",
+    "Moving geometry creates no relationship",
+    "All four views support domain-valid editing through same semantic command",
+    "Accessible navigator operates same representation selection"
+  ],
+  "epistemic": {
+    "empty": "Empty view offers add existing object/add draft via explicit command, not phantom nodes.",
+    "stale": "Canonical revision changed: mark representation stale and rebind explicitly.",
+    "unavailable": "Missing canonical object: retain detached representation/anchor and repair route.",
+    "error": "Cycle/type/permission rejection preserves drawing draft without canonical write."
+  },
+  "state_dimensions": {
+    "view": [
+      "TREE",
+      "PATH",
+      "GRAPH",
+      "CANVAS"
+    ],
+    "relation": [
+      "DRAFT",
+      "VALIDATED",
+      "REJECTED"
+    ],
+    "selection": [
+      "NONE",
+      "SINGLE",
+      "MULTI"
+    ]
+  },
+  "owner_decisions": [
+    "OWNER-20260910-001..020"
+  ],
+  "deviations": [],
+  "forbidden_duplicates": [
+    "pane geometry",
+    "palette",
+    "settings",
+    "focus",
+    "context menu",
+    "editor",
+    "spatial input",
+    "session presentation"
+  ],
+  "source_status": "CONCEPTUAL_SEMANTICS_RECONCILED_NOT_ACCEPTED_VISUAL_DESIGN",
+  "proof_consumer": true,
+  "domain_implementation": "BOUNDED_FIXTURE",
+  "excluded_historical_infrastructure": [
+    "HTTP method/server path",
+    "401/403 sign-in scaffolding",
+    "multi-actor role architecture",
+    "Production resources/js physical path"
+  ],
+  "host_contract": "WorkspaceFoundationHost@1.0.0"
+}

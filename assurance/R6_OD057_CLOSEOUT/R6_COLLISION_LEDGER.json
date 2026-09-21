@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "status": "NO_UNRESOLVED_COLLISIONS",
+  "legalReplayCollisions": [],
+  "adjudicatedCompatibilitySeams": [
+    {
+      "path": "stack/native-typescript/adapters/audit.ts",
+      "reportedAs": "R6_REPLAY_COLLISION",
+      "adjudication": "FALSE_POSITIVE_LEGAL_PATH_COLLISION__CROSS_STAGE_COMPATIBILITY_SEAM",
+      "cg2OwnsPath": false,
+      "cg6OwnsPath": true,
+      "resolution": "R6_MINIMAL_COMPATIBILITY_FACADE_PRESERVING_AuditProvenanceInteractionCore__W05AuditDomain__AuditEventProvider_SEPARATION",
+      "finalSha256": "0decc1a27cb3e899121994bd09535d5f12976544239f4ff7909d1a2e4d36e370"
+    }
+  ],
+  "ownersPreserved": [
+    "AuditProvenanceInteractionCore",
+    "W05AuditDomain",
+    "AuditEventProvider",
+    "AnalyticalCompareOwner",
+    "TimelineReplayOwner",
+    "Spatial family owner",
+    "Structured family owner"
+  ]
+}

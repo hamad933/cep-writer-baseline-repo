@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CEPPreference",
+  "type": "object",
+  "required": [
+    "key",
+    "safeDefault",
+    "scope",
+    "applicability",
+    "persistenceOwner"
+  ],
+  "properties": {
+    "key": {
+      "type": "string"
+    },
+    "safeDefault": {},
+    "preferredValue": {},
+    "effectiveValue": {},
+    "scope": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "applicability": {
+      "type": "string"
+    },
+    "persistenceOwner": {
+      "type": "string"
+    },
+    "resetTarget": {},
+    "responsiveMayOverrideEffectiveOnly": {
+      "type": "boolean"
+    },
+    "nonConfigurableReason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

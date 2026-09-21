@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "contract": "ActionAvailability@1.2.1",
+  "genericPolicyFields": [
+    "selection cardinality",
+    "accepted entity types",
+    "mixed-type policy",
+    "domain capability",
+    "canonical predicate",
+    "active mode",
+    "registered SemanticCommand",
+    "command enabled/preflight",
+    "destructive policy",
+    "domain predicate",
+    "custom predicate"
+  ],
+  "representativePolicies": [
+    "connect",
+    "delete",
+    "align",
+    "inspect",
+    "test-defined group"
+  ],
+  "presentationPreflightConvergence": "same ActionAvailabilityCore.evaluate / commandGuard",
+  "connectBulkDefault": "hidden above two unless deterministic bulk semantics declared",
+  "v0_2_1bReviewHardening": {
+    "change": "Declared string domainCapability is deny-by-default unless the active domain explicitly declares that capability true. Missing/undefined is no longer interpreted as allowed.",
+    "compatibility": "PATCH_BUGFIX",
+    "consumerImpact": "Current RelationDomainAdapter declares relationAuthoring explicitly; no current consumer migration required.",
+    "proof": "actions.declared-domain-capability-required + existing relation/action regression tests"
+  }
+}

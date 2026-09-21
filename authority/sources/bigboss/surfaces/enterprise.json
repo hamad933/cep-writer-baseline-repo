@@ -1,0 +1,285 @@
+{
+  "objects": {
+    "Enterprise": "enterpriseId; canonical inventory and typed relationships",
+    "EnterpriseRevision": "revisionId + digest; published immutable",
+    "DigitalTwin": "twinId + enterpriseRevisionRef + simulation-local overlay",
+    "Baseline": "baselineId + exact frozen revision set"
+  },
+  "state_dimensions": {
+    "authoring": [
+      "DRAFT",
+      "DIRTY",
+      "VALIDATED",
+      "PUBLISHED"
+    ],
+    "twinBinding": [
+      "BOUND",
+      "BASELINE_STALE",
+      "DETACHED"
+    ],
+    "selection": [
+      "NONE",
+      "DEVICE",
+      "INTERFACE",
+      "LINK",
+      "MULTI"
+    ]
+  },
+  "read_model": "EnterpriseReadService exposes canonical inventory and twin overlay as separate collections; W03SpatialAdapter maps representation to typed references.",
+  "persistence": {
+    "Enterprise": "Enterprise module",
+    "EnterpriseRevision": "EnterpriseBaselineRevision",
+    "DigitalTwin": "Enterprise-owned twin overlay",
+    "Baseline": "EnterpriseBaselineService"
+  },
+  "invariants": [
+    "Twin is not Enterprise",
+    "Simulation-local device is explicitly classified",
+    "Published baseline remains immutable",
+    "No generic visual edge may invent network semantics"
+  ],
+  "epistemic": {
+    "empty": "Empty enterprise: create draft inventory; no selection: overview context only.",
+    "stale": "Twin references older baseline: preserve pinned baseline and show rebase preview.",
+    "unavailable": "Baseline unavailable blocks its Run handoff, not catalog inspection.",
+    "error": "Invalid interface/link type shows field error and leaves draft intact."
+  },
+  "operations": [
+    {
+      "name": "inspect",
+      "family": "NavigationCommand",
+      "payload": "routeId:string objectRef:ref",
+      "before": "selection any",
+      "event": "select inventory object",
+      "after": "context displays exact device/interface/link identity",
+      "guard": "Actor can read Enterprise revision",
+      "oracle": "No selection never displays previous device as active",
+      "persistence": "Enterprise.ReadProjection",
+      "method": "GET",
+      "gate": null,
+      "command_id": "enterprise.inspect",
+      "surface_id": "enterprise",
+      "semantic_owner": "W03EnterpriseDomain",
+      "focus_after": "Enterprise active object/control; detached target→enterprise-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Invalid interface/link type shows field error and leaves draft intact.",
+        "503_timeout": "Baseline unavailable blocks its Run handoff, not catalog inspection."
+      },
+      "test_id": "TEST-enterprise.inspect",
+      "evidence_id": "EVID-enterprise.inspect",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "edit",
+      "family": "SpatialSemanticMutationCommand",
+      "payload": "domainObjectIds:refs relationType:string workingRevision:integer validationContext:object",
+      "before": "authoring=DRAFT|DIRTY",
+      "event": "validate typed interface/link mutation",
+      "after": "authoring=DIRTY with domain transaction",
+      "guard": "Endpoint interface types and membership valid; published version cannot change",
+      "oracle": "IP/link relation validation occurs before write; geometry alone leaves relationships intact",
+      "persistence": "Enterprise.WorkingAggregate",
+      "method": "POST",
+      "gate": null,
+      "command_id": "enterprise.edit",
+      "surface_id": "enterprise",
+      "semantic_owner": "W03EnterpriseDomain",
+      "focus_after": "Enterprise active object/control; detached target→enterprise-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Invalid interface/link type shows field error and leaves draft intact.",
+        "503_timeout": "Baseline unavailable blocks its Run handoff, not catalog inspection."
+      },
+      "test_id": "TEST-enterprise.edit",
+      "evidence_id": "EVID-enterprise.edit",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "revise",
+      "family": "ContentEditCommand",
+      "payload": "documentId:string workingRevision:integer sourceRef:ref reason:string",
+      "before": "authoring=PUBLISHED",
+      "event": "fork Enterprise draft baseline",
+      "after": "new draft with lineage; original unchanged",
+      "guard": "Revision read and successor create permission",
+      "oracle": "Original baseline digest remains identical",
+      "persistence": "Enterprise.BaselineRevision",
+      "method": "POST",
+      "gate": null,
+      "command_id": "enterprise.revise",
+      "surface_id": "enterprise",
+      "semantic_owner": "W03EnterpriseDomain",
+      "focus_after": "Enterprise active object/control; detached target→enterprise-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Invalid interface/link type shows field error and leaves draft intact.",
+        "503_timeout": "Baseline unavailable blocks its Run handoff, not catalog inspection."
+      },
+      "test_id": "TEST-enterprise.revise",
+      "evidence_id": "EVID-enterprise.revise",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "twin",
+      "family": "SpatialSemanticMutationCommand",
+      "payload": "domainObjectIds:refs relationType:enum:createTwin|rebaseTwin workingRevision:integer validationContext:object",
+      "before": "twin absent|BASELINE_STALE",
+      "event": "create or preview rebase twin overlay",
+      "after": "BOUND only after explicit conflict resolution",
+      "guard": "Overlay refs classify enterprise-backed vs simulation-local",
+      "oracle": "Rebase cannot silently convert simulation-local objects into enterprise inventory",
+      "persistence": "Enterprise.DigitalTwin",
+      "method": "POST",
+      "gate": null,
+      "command_id": "enterprise.twin",
+      "surface_id": "enterprise",
+      "semantic_owner": "W03EnterpriseDomain",
+      "focus_after": "Enterprise active object/control; detached target→enterprise-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Invalid interface/link type shows field error and leaves draft intact.",
+        "503_timeout": "Baseline unavailable blocks its Run handoff, not catalog inspection."
+      },
+      "test_id": "TEST-enterprise.twin",
+      "evidence_id": "EVID-enterprise.twin",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    },
+    {
+      "name": "handoff",
+      "family": "OperationalCommand",
+      "payload": "enterpriseRef:ref twinRef:ref action:enum:prepare expectedState:enum:PUBLISHED correlationId:string",
+      "before": "authoring=PUBLISHED",
+      "event": "send exact inputs to preflight",
+      "after": "Run preparation receipt only",
+      "guard": "Pinned source digests available",
+      "oracle": "Handoff performs zero live device changes and does not itself start run",
+      "persistence": "W03Run.Preparation",
+      "method": "POST",
+      "gate": null,
+      "command_id": "enterprise.handoff",
+      "surface_id": "enterprise",
+      "semantic_owner": "W03EnterpriseDomain",
+      "focus_after": "Enterprise active object/control; detached target→enterprise-heading",
+      "failure_behavior": {
+        "409": "Retain working input and exact base; expose current server reference, no automatic overwrite",
+        "401_403": "Preserve nonsecret local draft; disclose unavailable action and sign-in/authority route",
+        "422": "Invalid interface/link type shows field error and leaves draft intact.",
+        "503_timeout": "Baseline unavailable blocks its Run handoff, not catalog inspection."
+      },
+      "test_id": "TEST-enterprise.handoff",
+      "evidence_id": "EVID-enterprise.handoff",
+      "required_evidence": [
+        "SCHEMA_AND_CONTRACT",
+        "DOMAIN_INTEGRATION",
+        "KEYBOARD_POINTER",
+        "EXACT_CANDIDATE_IDENTITY"
+      ]
+    }
+  ],
+  "surface_id": "enterprise",
+  "title": "Enterprise",
+  "workspace": "W03",
+  "semantic_owner": "W03EnterpriseDomain",
+  "archetype": "DomainModelingSpatialWorkbench",
+  "status": "SUCCESSOR_CANDIDATE_CONTRACT_NOT_PRODUCT_IMPLEMENTATION",
+  "ontology_ids": [
+    "CAP-W03-ENT-001",
+    "CAP-W03-ENT-002",
+    "CAP-W03-ENT-003",
+    "CAP-W03-ENT-004",
+    "CAP-W03-ENT-005",
+    "CAP-W03-ENT-006",
+    "CAP-W03-ENT-007",
+    "CAP-W03-ENT-008",
+    "CAP-W03-ENT-009",
+    "CAP-W03-ENT-010",
+    "CAP-W03-ENT-011",
+    "CAP-W03-ENT-012",
+    "CAP-W03-ENT-013"
+  ],
+  "source_evidence": [
+    {
+      "path": "INPUT_EVIDENCE/01_READER_SET/06_CAPABILITY_ONTOLOGY_V2.csv",
+      "record_ids": [
+        "CAP-W03-ENT-001",
+        "CAP-W03-ENT-002",
+        "CAP-W03-ENT-003",
+        "CAP-W03-ENT-004",
+        "CAP-W03-ENT-005",
+        "CAP-W03-ENT-006",
+        "CAP-W03-ENT-007",
+        "CAP-W03-ENT-008",
+        "CAP-W03-ENT-009",
+        "CAP-W03-ENT-010",
+        "CAP-W03-ENT-011",
+        "CAP-W03-ENT-012",
+        "CAP-W03-ENT-013"
+      ],
+      "kind": "DERIVED_PHASE_A_REQUIREMENTS"
+    },
+    {
+      "path": "INPUT_EVIDENCE/02_PHASE_B_STRUCTURED_DECISIONS/05_SURFACE_ARCHETYPE_MAP.csv",
+      "surface": "Enterprise",
+      "kind": "PHASE_B_ADJUDICATION"
+    }
+  ],
+  "non_collapse_ids": [
+    "NC-006",
+    "NC-007",
+    "NC-008",
+    "NC-009",
+    "NC-011"
+  ],
+  "shared_mechanics": [
+    "WorkspaceRegionCore",
+    "PaneResponsiveCore",
+    "ContextInspectorCore",
+    "BottomDeepWorkCore",
+    "SemanticCommandCore",
+    "ActionSurfaceCore",
+    "GlobalPreferenceCore",
+    "TransientFocusCore",
+    "InputKeymapCore",
+    "SpatialInteractionCore"
+  ],
+  "adapter": "W03EnterpriseDomainAdapter",
+  "regions": {
+    "TOP": "Enterprise exact identity, local mode, command routes",
+    "LEFT": "typed Enterprise collection/navigation",
+    "CENTER": "DomainModelingSpatialWorkbench primary task",
+    "RIGHT": "one selected Enterprise identity/context inspector",
+    "BOTTOM": "Deep Enterprise diagnostics/history"
+  },
+  "command_ids": [
+    "enterprise.inspect",
+    "enterprise.edit",
+    "enterprise.revise",
+    "enterprise.twin",
+    "enterprise.handoff"
+  ]
+}

@@ -1,0 +1,2707 @@
+{
+  "schemaVersion": 1,
+  "mission": "PS04_OPERATIONAL_REAL_CONSUMER_XTERM_CONVERGENCE",
+  "modules": 97,
+  "viewports": {
+    "1440x1000-shutdown": {
+      "state": {
+        "device": {
+          "id": "DEV-WEB-01",
+          "name": "Web Application",
+          "type": "SIMULATED_WEB_APP",
+          "state": "HEALTHY",
+          "up": false,
+          "capabilities": [
+            "OPEN_TERMINAL"
+          ],
+          "version": 1
+        },
+        "event": {
+          "sequence": 2,
+          "sessionId": "sim-session-1",
+          "deviceId": "DEV-WEB-01",
+          "command": "shutdown",
+          "semanticCommand": "device.shutdown",
+          "output": "Web Application: interface DOWN (simulation)",
+          "changed": true,
+          "provider": "InternalSimulationAdapter",
+          "runtimeTruth": "INTERNAL_SIMULATION",
+          "presentation": {
+            "state": "completed",
+            "detail": "Completed device.shutdown in InternalSimulationAdapter.",
+            "sequence": 4,
+            "transitions": [
+              {
+                "sequence": 1,
+                "state": "running",
+                "detail": "Executing runtime.unsupported in InternalSimulationAdapter."
+              },
+              {
+                "sequence": 2,
+                "state": "error",
+                "detail": "Command is unsupported by InternalSimulationAdapter."
+              },
+              {
+                "sequence": 3,
+                "state": "running",
+                "detail": "Executing device.shutdown in InternalSimulationAdapter."
+              },
+              {
+                "sequence": 4,
+                "state": "completed",
+                "detail": "Completed device.shutdown in InternalSimulationAdapter."
+              }
+            ]
+          }
+        },
+        "spatial": {
+          "id": "DEV-WEB-01",
+          "label": "Web Application",
+          "x": 80,
+          "y": 120,
+          "status": "DOWN"
+        },
+        "terminal": "sim:DEV-WEB-01 > powershell\nUnsupported simulation command: powershell. Type help.\nsim:DEV-WEB-01 > shutdown\nWeb Application: interface DOWN (simulation)",
+        "context": "Runtime\nRuns context / سياق التشغيل\n×\nWeb Application\nRun RUN-0042 · RUNNING · Web Application: interface DOWN (simulation)\nRun\nRUN-0042\nLifecycle\nRUNNING\nLatest event sequence\n2\nLatest event\nWeb Application: interface DOWN (simulation)\nWeb Application\nDEV-WEB-01\nState\nDOWN\nCanonical owner: InternalSimulationAdapter + W03RunDomain.RecordedTopology\nRevision: selection:DEV-WEB-01|event:2|relations:1",
+        "legacyContextHidden": true,
+        "snapshot": {
+          "owner": "OperationalSessionOwner",
+          "contract": {
+            "id": "OperationalSessionOwner",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "OPERATIONAL_PRESENTATION_ONLY",
+            "runtimeTruth": "RuntimeAdapter",
+            "maturity": "BOUNDARY_ONLY_BELOW_M6_UNLESS_SECOND_REAL_PROVIDER_IS_PROVEN"
+          },
+          "runtimeBoundary": {
+            "id": "OperationalRuntimePresentationBoundary",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "PRESENTATION_READ_BOUNDARY_ONLY",
+            "canonicalTruthOwner": "RuntimeAdapter"
+          },
+          "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+          "tabs": [
+            {
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-1",
+              "providerSessionOwner": "InternalSimulationAdapter",
+              "attachedAtSequence": 1,
+              "deviceId": "DEV-WEB-01",
+              "runId": "RUN-0042",
+              "epoch": 1,
+              "runtimeIdentity": {
+                "source": "RuntimeAdapterReference",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-1",
+                "sessionId": "sim-session-1",
+                "runId": "RUN-0042",
+                "deviceId": "DEV-WEB-01",
+                "toolId": null,
+                "deviceOrToolId": "DEV-WEB-01",
+                "epoch": 1
+              },
+              "presentationState": {
+                "state": "completed",
+                "label": "Completed",
+                "detail": "Completed device.shutdown in InternalSimulationAdapter.",
+                "sequence": 4,
+                "transitions": [
+                  {
+                    "sequence": 1,
+                    "state": "running",
+                    "detail": "Executing runtime.unsupported in InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 2,
+                    "state": "error",
+                    "detail": "Command is unsupported by InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 3,
+                    "state": "running",
+                    "detail": "Executing device.shutdown in InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 4,
+                    "state": "completed",
+                    "detail": "Completed device.shutdown in InternalSimulationAdapter."
+                  }
+                ]
+              }
+            }
+          ],
+          "activePresentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+          "chrome": {
+            "lifecycle": "open",
+            "placement": "bottom",
+            "layout": "single",
+            "geometry": {
+              "x": 120,
+              "y": 140,
+              "width": 720,
+              "height": 420
+            }
+          },
+          "providerAttachments": [
+            {
+              "contract": {
+                "id": "RuntimeAdapter",
+                "version": "1.0.0",
+                "compatibility": "SEMVER"
+              },
+              "id": "InternalSimulationAdapter",
+              "label": "Internal simulation",
+              "sessionOwner": "InternalSimulationAdapter",
+              "commandOwner": "InternalSimulationAdapter",
+              "inputLabel": "sim >",
+              "help": "Commands: help, show status, show topology, shutdown, no shutdown",
+              "capabilities": [
+                "OPEN_TERMINAL",
+                "runtime.input",
+                "runtime.recorded"
+              ],
+              "connected": true,
+              "classification": "REAL_RUNTIME_PROVIDER",
+              "evidenceRole": "Runs canonical runtime provider"
+            }
+          ],
+          "lastTransition": {
+            "sequence": 3,
+            "action": "session.attach",
+            "owner": "OperationalSessionOwner",
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+            "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+            "providerId": "InternalSimulationAdapter",
+            "runtimeSessionId": "sim-session-1",
+            "reused": true
+          }
+        }
+      },
+      "contextRect": {
+        "x": 1033,
+        "y": 238,
+        "width": 394,
+        "height": 418.15625,
+        "left": 1033,
+        "right": 1427,
+        "top": 238,
+        "bottom": 656.15625
+      },
+      "screenshot": "/mnt/data/psc_work/candidate/CEP_FOUNDATION_FORGE_v0.2.1c_WORK02_FINAL_CONVERGENCE_CONTROLLER_ACCEPTED_f7643a4b/assurance/PSC_PS04_BROWSER_EVIDENCE/PS04_RUNS_SHUTDOWN_1440x1000.png"
+    },
+    "1440x1000": {
+      "final": {
+        "hostClass": "OperationalTerminalHost",
+        "ownerSame": true,
+        "renderer": {
+          "id": "DomOperationalTerminalRenderer",
+          "kind": "DOM_FALLBACK",
+          "contract": {
+            "id": "TerminalRendererPort",
+            "version": "1.0.0",
+            "role": "TERMINAL_IO_PRESENTATION_ONLY",
+            "semanticCommandOwnership": false,
+            "canonicalStateOwnership": false,
+            "processLifecycleOwnership": false
+          }
+        },
+        "snapshot": {
+          "owner": "OperationalSessionOwner",
+          "contract": {
+            "id": "OperationalSessionOwner",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "OPERATIONAL_PRESENTATION_ONLY",
+            "runtimeTruth": "RuntimeAdapter",
+            "maturity": "BOUNDARY_ONLY_BELOW_M6_UNLESS_SECOND_REAL_PROVIDER_IS_PROVEN"
+          },
+          "runtimeBoundary": {
+            "id": "OperationalRuntimePresentationBoundary",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "PRESENTATION_READ_BOUNDARY_ONLY",
+            "canonicalTruthOwner": "RuntimeAdapter"
+          },
+          "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+          "tabs": [
+            {
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-2",
+              "providerSessionOwner": "InternalSimulationAdapter",
+              "attachedAtSequence": 4,
+              "deviceId": "DEV-DB-01",
+              "runId": "RUN-0042",
+              "epoch": 2,
+              "runtimeIdentity": {
+                "source": "RuntimeAdapterReference",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-2",
+                "sessionId": "sim-session-2",
+                "runId": "RUN-0042",
+                "deviceId": "DEV-DB-01",
+                "toolId": null,
+                "deviceOrToolId": "DEV-DB-01",
+                "epoch": 2
+              },
+              "presentationState": {
+                "state": "idle",
+                "label": "Ready",
+                "detail": "Internal simulation reconnected.",
+                "sequence": 7,
+                "transitions": [
+                  {
+                    "sequence": 6,
+                    "state": "unavailable",
+                    "detail": "Internal simulation provider is disconnected."
+                  },
+                  {
+                    "sequence": 7,
+                    "state": "idle",
+                    "detail": "Internal simulation reconnected."
+                  }
+                ]
+              }
+            },
+            {
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-1",
+              "providerSessionOwner": "InternalSimulationAdapter",
+              "attachedAtSequence": 1,
+              "deviceId": "DEV-WEB-01",
+              "runId": "RUN-0042",
+              "epoch": 1,
+              "runtimeIdentity": {
+                "source": "RuntimeAdapterReference",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-1",
+                "sessionId": "sim-session-1",
+                "runId": "RUN-0042",
+                "deviceId": "DEV-WEB-01",
+                "toolId": null,
+                "deviceOrToolId": "DEV-WEB-01",
+                "epoch": 1
+              },
+              "presentationState": {
+                "state": "unavailable",
+                "label": "Unavailable",
+                "detail": "Internal simulation provider is disconnected.",
+                "sequence": 5,
+                "transitions": [
+                  {
+                    "sequence": 1,
+                    "state": "running",
+                    "detail": "Executing runtime.unsupported in InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 2,
+                    "state": "error",
+                    "detail": "Command is unsupported by InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 3,
+                    "state": "running",
+                    "detail": "Executing device.shutdown in InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 4,
+                    "state": "completed",
+                    "detail": "Completed device.shutdown in InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 5,
+                    "state": "unavailable",
+                    "detail": "Internal simulation provider is disconnected."
+                  }
+                ]
+              }
+            }
+          ],
+          "activePresentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+          "chrome": {
+            "lifecycle": "open",
+            "placement": "bottom",
+            "layout": "single",
+            "geometry": {
+              "x": 220,
+              "y": 180,
+              "width": 732,
+              "height": 432
+            }
+          },
+          "providerAttachments": [
+            {
+              "contract": {
+                "id": "RuntimeAdapter",
+                "version": "1.0.0",
+                "compatibility": "SEMVER"
+              },
+              "id": "InternalSimulationAdapter",
+              "label": "Internal simulation",
+              "sessionOwner": "InternalSimulationAdapter",
+              "commandOwner": "InternalSimulationAdapter",
+              "inputLabel": "sim >",
+              "help": "Commands: help, show status, show topology, shutdown, no shutdown",
+              "capabilities": [
+                "OPEN_TERMINAL",
+                "runtime.input",
+                "runtime.recorded"
+              ],
+              "connected": true,
+              "classification": "REAL_RUNTIME_PROVIDER",
+              "evidenceRole": "Runs canonical runtime provider"
+            }
+          ],
+          "lastTransition": {
+            "sequence": 29,
+            "action": "session.chrome.bottom",
+            "owner": "OperationalSessionOwner",
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1"
+          }
+        },
+        "context": "Runtime\nRuns context / سياق التشغيل\n×\nWeb Application\nRun RUN-0042 · RUNNING · Web Application: interface DOWN (simulation)\nRun\nRUN-0042\nLifecycle\nRUNNING\nLatest event sequence\n2\nLatest event\nWeb Application: interface DOWN (simulation)\nWeb Application\nDEV-WEB-01\nState\nDOWN\nCanonical owner: InternalSimulationAdapter + W03RunDomain.RecordedTopology\nRevision: selection:DEV-WEB-01|event:2|relations:1",
+        "legacyContextHidden": true,
+        "hostHidden": false,
+        "hostMode": "dock",
+        "panels": 1,
+        "resizeEdges": [],
+        "activeTag": "BUTTON",
+        "activeObject": null,
+        "activeTab": "ops-tab::InternalSimulationAdapter::sim-session-2"
+      },
+      "screenshot": "/mnt/data/psc_work/candidate/CEP_FOUNDATION_FORGE_v0.2.1c_WORK02_FINAL_CONVERGENCE_CONTROLLER_ACCEPTED_f7643a4b/assurance/PSC_PS04_BROWSER_EVIDENCE/PS04_RUNS_1440x1000.png"
+    },
+    "1024x900-shutdown": {
+      "state": {
+        "hostClass": "OperationalTerminalHost",
+        "ownerSame": true,
+        "renderer": {
+          "id": "DomOperationalTerminalRenderer",
+          "kind": "DOM_FALLBACK",
+          "contract": {
+            "id": "TerminalRendererPort",
+            "version": "1.0.0",
+            "role": "TERMINAL_IO_PRESENTATION_ONLY",
+            "semanticCommandOwnership": false,
+            "canonicalStateOwnership": false,
+            "processLifecycleOwnership": false
+          }
+        },
+        "snapshot": {
+          "owner": "OperationalSessionOwner",
+          "contract": {
+            "id": "OperationalSessionOwner",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "OPERATIONAL_PRESENTATION_ONLY",
+            "runtimeTruth": "RuntimeAdapter",
+            "maturity": "BOUNDARY_ONLY_BELOW_M6_UNLESS_SECOND_REAL_PROVIDER_IS_PROVEN"
+          },
+          "runtimeBoundary": {
+            "id": "OperationalRuntimePresentationBoundary",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "PRESENTATION_READ_BOUNDARY_ONLY",
+            "canonicalTruthOwner": "RuntimeAdapter"
+          },
+          "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+          "tabs": [
+            {
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-1",
+              "providerSessionOwner": "InternalSimulationAdapter",
+              "attachedAtSequence": 1,
+              "deviceId": "DEV-WEB-01",
+              "runId": "RUN-0042",
+              "epoch": 1,
+              "runtimeIdentity": {
+                "source": "RuntimeAdapterReference",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-1",
+                "sessionId": "sim-session-1",
+                "runId": "RUN-0042",
+                "deviceId": "DEV-WEB-01",
+                "toolId": null,
+                "deviceOrToolId": "DEV-WEB-01",
+                "epoch": 1
+              },
+              "presentationState": {
+                "state": "completed",
+                "label": "Completed",
+                "detail": "Completed device.shutdown in InternalSimulationAdapter.",
+                "sequence": 2,
+                "transitions": [
+                  {
+                    "sequence": 1,
+                    "state": "running",
+                    "detail": "Executing device.shutdown in InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 2,
+                    "state": "completed",
+                    "detail": "Completed device.shutdown in InternalSimulationAdapter."
+                  }
+                ]
+              }
+            }
+          ],
+          "activePresentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+          "chrome": {
+            "lifecycle": "open",
+            "placement": "bottom",
+            "layout": "single",
+            "geometry": {
+              "x": 120,
+              "y": 140,
+              "width": 720,
+              "height": 420
+            }
+          },
+          "providerAttachments": [
+            {
+              "contract": {
+                "id": "RuntimeAdapter",
+                "version": "1.0.0",
+                "compatibility": "SEMVER"
+              },
+              "id": "InternalSimulationAdapter",
+              "label": "Internal simulation",
+              "sessionOwner": "InternalSimulationAdapter",
+              "commandOwner": "InternalSimulationAdapter",
+              "inputLabel": "sim >",
+              "help": "Commands: help, show status, show topology, shutdown, no shutdown",
+              "capabilities": [
+                "OPEN_TERMINAL",
+                "runtime.input",
+                "runtime.recorded"
+              ],
+              "connected": true,
+              "classification": "REAL_RUNTIME_PROVIDER",
+              "evidenceRole": "Runs canonical runtime provider"
+            }
+          ],
+          "lastTransition": {
+            "sequence": 1,
+            "action": "session.attach",
+            "owner": "OperationalSessionOwner",
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+            "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+            "providerId": "InternalSimulationAdapter",
+            "runtimeSessionId": "sim-session-1",
+            "reused": false
+          }
+        },
+        "context": "Runtime\nRuns context / سياق التشغيل\n×\nWeb Application\nRun RUN-0042 · RUNNING · Web Application: interface DOWN (simulation)\nRun\nRUN-0042\nLifecycle\nRUNNING\nLatest event sequence\n1\nLatest event\nWeb Application: interface DOWN (simulation)\nWeb Application\nDEV-WEB-01\nState\nDOWN\nCanonical owner: InternalSimulationAdapter + W03RunDomain.RecordedTopology\nRevision: selection:DEV-WEB-01|event:1|relations:1",
+        "legacyContextHidden": true,
+        "hostHidden": false,
+        "hostMode": "dock",
+        "panels": 1,
+        "resizeEdges": [],
+        "activeTag": "INPUT",
+        "activeObject": null,
+        "activeTab": null
+      },
+      "contextRect": {
+        "x": 617,
+        "y": 206,
+        "width": 394,
+        "height": 418.15625,
+        "left": 617,
+        "right": 1011,
+        "top": 206,
+        "bottom": 624.15625
+      },
+      "screenshot": "/mnt/data/psc_work/candidate/CEP_FOUNDATION_FORGE_v0.2.1c_WORK02_FINAL_CONVERGENCE_CONTROLLER_ACCEPTED_f7643a4b/assurance/PSC_PS04_BROWSER_EVIDENCE/PS04_RUNS_SHUTDOWN_1024x900.png"
+    },
+    "1024x900": {
+      "split": {
+        "hostClass": "OperationalTerminalHost",
+        "ownerSame": true,
+        "renderer": {
+          "id": "DomOperationalTerminalRenderer",
+          "kind": "DOM_FALLBACK",
+          "contract": {
+            "id": "TerminalRendererPort",
+            "version": "1.0.0",
+            "role": "TERMINAL_IO_PRESENTATION_ONLY",
+            "semanticCommandOwnership": false,
+            "canonicalStateOwnership": false,
+            "processLifecycleOwnership": false
+          }
+        },
+        "snapshot": {
+          "owner": "OperationalSessionOwner",
+          "contract": {
+            "id": "OperationalSessionOwner",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "OPERATIONAL_PRESENTATION_ONLY",
+            "runtimeTruth": "RuntimeAdapter",
+            "maturity": "BOUNDARY_ONLY_BELOW_M6_UNLESS_SECOND_REAL_PROVIDER_IS_PROVEN"
+          },
+          "runtimeBoundary": {
+            "id": "OperationalRuntimePresentationBoundary",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "PRESENTATION_READ_BOUNDARY_ONLY",
+            "canonicalTruthOwner": "RuntimeAdapter"
+          },
+          "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+          "tabs": [
+            {
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-1",
+              "providerSessionOwner": "InternalSimulationAdapter",
+              "attachedAtSequence": 1,
+              "deviceId": "DEV-WEB-01",
+              "runId": "RUN-0042",
+              "epoch": 1,
+              "runtimeIdentity": {
+                "source": "RuntimeAdapterReference",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-1",
+                "sessionId": "sim-session-1",
+                "runId": "RUN-0042",
+                "deviceId": "DEV-WEB-01",
+                "toolId": null,
+                "deviceOrToolId": "DEV-WEB-01",
+                "epoch": 1
+              },
+              "presentationState": {
+                "state": "completed",
+                "label": "Completed",
+                "detail": "Completed device.shutdown in InternalSimulationAdapter.",
+                "sequence": 2,
+                "transitions": [
+                  {
+                    "sequence": 1,
+                    "state": "running",
+                    "detail": "Executing device.shutdown in InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 2,
+                    "state": "completed",
+                    "detail": "Completed device.shutdown in InternalSimulationAdapter."
+                  }
+                ]
+              }
+            },
+            {
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-2",
+              "providerSessionOwner": "InternalSimulationAdapter",
+              "attachedAtSequence": 2,
+              "deviceId": "DEV-DB-01",
+              "runId": "RUN-0042",
+              "epoch": 1,
+              "runtimeIdentity": {
+                "source": "RuntimeAdapterReference",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-2",
+                "sessionId": "sim-session-2",
+                "runId": "RUN-0042",
+                "deviceId": "DEV-DB-01",
+                "toolId": null,
+                "deviceOrToolId": "DEV-DB-01",
+                "epoch": 1
+              },
+              "presentationState": {
+                "state": "idle",
+                "label": "Ready",
+                "detail": "Internal simulation ready.",
+                "sequence": 0,
+                "transitions": []
+              }
+            }
+          ],
+          "activePresentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+          "chrome": {
+            "lifecycle": "open",
+            "placement": "bottom",
+            "layout": "split",
+            "geometry": {
+              "x": 120,
+              "y": 140,
+              "width": 720,
+              "height": 420
+            }
+          },
+          "providerAttachments": [
+            {
+              "contract": {
+                "id": "RuntimeAdapter",
+                "version": "1.0.0",
+                "compatibility": "SEMVER"
+              },
+              "id": "InternalSimulationAdapter",
+              "label": "Internal simulation",
+              "sessionOwner": "InternalSimulationAdapter",
+              "commandOwner": "InternalSimulationAdapter",
+              "inputLabel": "sim >",
+              "help": "Commands: help, show status, show topology, shutdown, no shutdown",
+              "capabilities": [
+                "OPEN_TERMINAL",
+                "runtime.input",
+                "runtime.recorded"
+              ],
+              "connected": true,
+              "classification": "REAL_RUNTIME_PROVIDER",
+              "evidenceRole": "Runs canonical runtime provider"
+            }
+          ],
+          "lastTransition": {
+            "sequence": 4,
+            "action": "session.chrome.split",
+            "owner": "OperationalSessionOwner",
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1"
+          }
+        },
+        "context": "Runtime\nRuns context / سياق التشغيل\n×\nWeb Application\nRun RUN-0042 · RUNNING · Web Application: interface DOWN (simulation)\nRun\nRUN-0042\nLifecycle\nRUNNING\nLatest event sequence\n1\nLatest event\nWeb Application: interface DOWN (simulation)\nWeb Application\nDEV-WEB-01\nState\nDOWN\nCanonical owner: InternalSimulationAdapter + W03RunDomain.RecordedTopology\nRevision: selection:DEV-WEB-01|event:1|relations:1",
+        "legacyContextHidden": true,
+        "hostHidden": false,
+        "hostMode": "split",
+        "panels": 2,
+        "resizeEdges": [],
+        "activeTag": "BUTTON",
+        "activeObject": null,
+        "activeTab": "ops-tab::InternalSimulationAdapter::sim-session-2"
+      },
+      "float": {
+        "hostClass": "OperationalTerminalHost",
+        "ownerSame": true,
+        "renderer": {
+          "id": "DomOperationalTerminalRenderer",
+          "kind": "DOM_FALLBACK",
+          "contract": {
+            "id": "TerminalRendererPort",
+            "version": "1.0.0",
+            "role": "TERMINAL_IO_PRESENTATION_ONLY",
+            "semanticCommandOwnership": false,
+            "canonicalStateOwnership": false,
+            "processLifecycleOwnership": false
+          }
+        },
+        "snapshot": {
+          "owner": "OperationalSessionOwner",
+          "contract": {
+            "id": "OperationalSessionOwner",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "OPERATIONAL_PRESENTATION_ONLY",
+            "runtimeTruth": "RuntimeAdapter",
+            "maturity": "BOUNDARY_ONLY_BELOW_M6_UNLESS_SECOND_REAL_PROVIDER_IS_PROVEN"
+          },
+          "runtimeBoundary": {
+            "id": "OperationalRuntimePresentationBoundary",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "PRESENTATION_READ_BOUNDARY_ONLY",
+            "canonicalTruthOwner": "RuntimeAdapter"
+          },
+          "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+          "tabs": [
+            {
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-1",
+              "providerSessionOwner": "InternalSimulationAdapter",
+              "attachedAtSequence": 1,
+              "deviceId": "DEV-WEB-01",
+              "runId": "RUN-0042",
+              "epoch": 1,
+              "runtimeIdentity": {
+                "source": "RuntimeAdapterReference",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-1",
+                "sessionId": "sim-session-1",
+                "runId": "RUN-0042",
+                "deviceId": "DEV-WEB-01",
+                "toolId": null,
+                "deviceOrToolId": "DEV-WEB-01",
+                "epoch": 1
+              },
+              "presentationState": {
+                "state": "completed",
+                "label": "Completed",
+                "detail": "Completed device.shutdown in InternalSimulationAdapter.",
+                "sequence": 2,
+                "transitions": [
+                  {
+                    "sequence": 1,
+                    "state": "running",
+                    "detail": "Executing device.shutdown in InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 2,
+                    "state": "completed",
+                    "detail": "Completed device.shutdown in InternalSimulationAdapter."
+                  }
+                ]
+              }
+            },
+            {
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-2",
+              "providerSessionOwner": "InternalSimulationAdapter",
+              "attachedAtSequence": 2,
+              "deviceId": "DEV-DB-01",
+              "runId": "RUN-0042",
+              "epoch": 1,
+              "runtimeIdentity": {
+                "source": "RuntimeAdapterReference",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-2",
+                "sessionId": "sim-session-2",
+                "runId": "RUN-0042",
+                "deviceId": "DEV-DB-01",
+                "toolId": null,
+                "deviceOrToolId": "DEV-DB-01",
+                "epoch": 1
+              },
+              "presentationState": {
+                "state": "idle",
+                "label": "Ready",
+                "detail": "Internal simulation ready.",
+                "sequence": 0,
+                "transitions": []
+              }
+            }
+          ],
+          "activePresentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+          "chrome": {
+            "lifecycle": "open",
+            "placement": "floating",
+            "layout": "single",
+            "geometry": {
+              "x": 120,
+              "y": 140,
+              "width": 720,
+              "height": 420
+            }
+          },
+          "providerAttachments": [
+            {
+              "contract": {
+                "id": "RuntimeAdapter",
+                "version": "1.0.0",
+                "compatibility": "SEMVER"
+              },
+              "id": "InternalSimulationAdapter",
+              "label": "Internal simulation",
+              "sessionOwner": "InternalSimulationAdapter",
+              "commandOwner": "InternalSimulationAdapter",
+              "inputLabel": "sim >",
+              "help": "Commands: help, show status, show topology, shutdown, no shutdown",
+              "capabilities": [
+                "OPEN_TERMINAL",
+                "runtime.input",
+                "runtime.recorded"
+              ],
+              "connected": true,
+              "classification": "REAL_RUNTIME_PROVIDER",
+              "evidenceRole": "Runs canonical runtime provider"
+            }
+          ],
+          "lastTransition": {
+            "sequence": 6,
+            "action": "session.chrome.floating",
+            "owner": "OperationalSessionOwner",
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1"
+          }
+        },
+        "context": "Runtime\nRuns context / سياق التشغيل\n×\nWeb Application\nRun RUN-0042 · RUNNING · Web Application: interface DOWN (simulation)\nRun\nRUN-0042\nLifecycle\nRUNNING\nLatest event sequence\n1\nLatest event\nWeb Application: interface DOWN (simulation)\nWeb Application\nDEV-WEB-01\nState\nDOWN\nCanonical owner: InternalSimulationAdapter + W03RunDomain.RecordedTopology\nRevision: selection:DEV-WEB-01|event:1|relations:1",
+        "legacyContextHidden": true,
+        "hostHidden": false,
+        "hostMode": "float",
+        "panels": 1,
+        "resizeEdges": [
+          "left",
+          "right",
+          "top",
+          "bottom",
+          "top-left",
+          "top-right",
+          "bottom-left",
+          "bottom-right"
+        ],
+        "activeTag": "BUTTON",
+        "activeObject": null,
+        "activeTab": "ops-tab::InternalSimulationAdapter::sim-session-2"
+      },
+      "rect": {
+        "x": 120,
+        "y": 140,
+        "width": 720,
+        "height": 420,
+        "left": 120,
+        "right": 840,
+        "top": 140,
+        "bottom": 560
+      },
+      "screenshot": "/mnt/data/psc_work/candidate/CEP_FOUNDATION_FORGE_v0.2.1c_WORK02_FINAL_CONVERGENCE_CONTROLLER_ACCEPTED_f7643a4b/assurance/PSC_PS04_BROWSER_EVIDENCE/PS04_RUNS_1024x900.png"
+    }
+  },
+  "checks": [
+    {
+      "id": "browser.canonical-visible-host",
+      "status": "PASS",
+      "detail": {
+        "hostClass": "OperationalTerminalHost",
+        "ownerSame": true,
+        "renderer": {
+          "id": "DomOperationalTerminalRenderer",
+          "kind": "DOM_FALLBACK",
+          "contract": {
+            "id": "TerminalRendererPort",
+            "version": "1.0.0",
+            "role": "TERMINAL_IO_PRESENTATION_ONLY",
+            "semanticCommandOwnership": false,
+            "canonicalStateOwnership": false,
+            "processLifecycleOwnership": false
+          }
+        },
+        "snapshot": {
+          "owner": "OperationalSessionOwner",
+          "contract": {
+            "id": "OperationalSessionOwner",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "OPERATIONAL_PRESENTATION_ONLY",
+            "runtimeTruth": "RuntimeAdapter",
+            "maturity": "BOUNDARY_ONLY_BELOW_M6_UNLESS_SECOND_REAL_PROVIDER_IS_PROVEN"
+          },
+          "runtimeBoundary": {
+            "id": "OperationalRuntimePresentationBoundary",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "PRESENTATION_READ_BOUNDARY_ONLY",
+            "canonicalTruthOwner": "RuntimeAdapter"
+          },
+          "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+          "tabs": [],
+          "activePresentationId": null,
+          "chrome": {
+            "lifecycle": "closed",
+            "placement": "bottom",
+            "layout": "single",
+            "geometry": {
+              "x": 120,
+              "y": 140,
+              "width": 720,
+              "height": 420
+            }
+          },
+          "providerAttachments": [
+            {
+              "contract": {
+                "id": "RuntimeAdapter",
+                "version": "1.0.0",
+                "compatibility": "SEMVER"
+              },
+              "id": "InternalSimulationAdapter",
+              "label": "Internal simulation",
+              "sessionOwner": "InternalSimulationAdapter",
+              "commandOwner": "InternalSimulationAdapter",
+              "inputLabel": "sim >",
+              "help": "Commands: help, show status, show topology, shutdown, no shutdown",
+              "capabilities": [
+                "OPEN_TERMINAL",
+                "runtime.input",
+                "runtime.recorded"
+              ],
+              "connected": true,
+              "classification": "REAL_RUNTIME_PROVIDER",
+              "evidenceRole": "Runs canonical runtime provider"
+            }
+          ],
+          "lastTransition": null
+        },
+        "context": "Runtime\nRuns context / سياق التشغيل\n×\nWeb Application\nRun RUN-0042 · RUNNING · No live command events\nRun\nRUN-0042\nLifecycle\nRUNNING\nLatest event sequence\n0\nLatest event\nNo live command events\nWeb Application\nDEV-WEB-01\nState\nUP\nCanonical owner: InternalSimulationAdapter + W03RunDomain.RecordedTopology\nRevision: selection:DEV-WEB-01|event:0|relations:1",
+        "legacyContextHidden": true,
+        "hostHidden": true,
+        "hostMode": "dock",
+        "panels": 0,
+        "resizeEdges": [],
+        "activeTag": "BODY",
+        "activeObject": null,
+        "activeTab": null
+      }
+    },
+    {
+      "id": "browser.truthful-dom-renderer-fallback",
+      "status": "PASS",
+      "detail": {
+        "id": "DomOperationalTerminalRenderer",
+        "kind": "DOM_FALLBACK",
+        "contract": {
+          "id": "TerminalRendererPort",
+          "version": "1.0.0",
+          "role": "TERMINAL_IO_PRESENTATION_ONLY",
+          "semanticCommandOwnership": false,
+          "canonicalStateOwnership": false,
+          "processLifecycleOwnership": false
+        }
+      }
+    },
+    {
+      "id": "browser.runtime-identity-bound-by-reference",
+      "status": "PASS",
+      "detail": {
+        "source": "RuntimeAdapterReference",
+        "providerId": "InternalSimulationAdapter",
+        "runtimeSessionId": "sim-session-1",
+        "sessionId": "sim-session-1",
+        "runId": "RUN-0042",
+        "deviceId": "DEV-WEB-01",
+        "toolId": null,
+        "deviceOrToolId": "DEV-WEB-01",
+        "epoch": 1
+      }
+    },
+    {
+      "id": "browser.close-focus-return",
+      "status": "PASS",
+      "detail": {
+        "hostClass": "OperationalTerminalHost",
+        "ownerSame": true,
+        "renderer": {
+          "id": "DomOperationalTerminalRenderer",
+          "kind": "DOM_FALLBACK",
+          "contract": {
+            "id": "TerminalRendererPort",
+            "version": "1.0.0",
+            "role": "TERMINAL_IO_PRESENTATION_ONLY",
+            "semanticCommandOwnership": false,
+            "canonicalStateOwnership": false,
+            "processLifecycleOwnership": false
+          }
+        },
+        "snapshot": {
+          "owner": "OperationalSessionOwner",
+          "contract": {
+            "id": "OperationalSessionOwner",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "OPERATIONAL_PRESENTATION_ONLY",
+            "runtimeTruth": "RuntimeAdapter",
+            "maturity": "BOUNDARY_ONLY_BELOW_M6_UNLESS_SECOND_REAL_PROVIDER_IS_PROVEN"
+          },
+          "runtimeBoundary": {
+            "id": "OperationalRuntimePresentationBoundary",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "PRESENTATION_READ_BOUNDARY_ONLY",
+            "canonicalTruthOwner": "RuntimeAdapter"
+          },
+          "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+          "tabs": [
+            {
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-1",
+              "providerSessionOwner": "InternalSimulationAdapter",
+              "attachedAtSequence": 1,
+              "deviceId": "DEV-WEB-01",
+              "runId": "RUN-0042",
+              "epoch": 1,
+              "runtimeIdentity": {
+                "source": "RuntimeAdapterReference",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-1",
+                "sessionId": "sim-session-1",
+                "runId": "RUN-0042",
+                "deviceId": "DEV-WEB-01",
+                "toolId": null,
+                "deviceOrToolId": "DEV-WEB-01",
+                "epoch": 1
+              },
+              "presentationState": {
+                "state": "idle",
+                "label": "Ready",
+                "detail": "Internal simulation ready.",
+                "sequence": 0,
+                "transitions": []
+              }
+            }
+          ],
+          "activePresentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+          "chrome": {
+            "lifecycle": "closed",
+            "placement": "bottom",
+            "layout": "single",
+            "geometry": {
+              "x": 120,
+              "y": 140,
+              "width": 720,
+              "height": 420
+            }
+          },
+          "providerAttachments": [
+            {
+              "contract": {
+                "id": "RuntimeAdapter",
+                "version": "1.0.0",
+                "compatibility": "SEMVER"
+              },
+              "id": "InternalSimulationAdapter",
+              "label": "Internal simulation",
+              "sessionOwner": "InternalSimulationAdapter",
+              "commandOwner": "InternalSimulationAdapter",
+              "inputLabel": "sim >",
+              "help": "Commands: help, show status, show topology, shutdown, no shutdown",
+              "capabilities": [
+                "OPEN_TERMINAL",
+                "runtime.input",
+                "runtime.recorded"
+              ],
+              "connected": true,
+              "classification": "REAL_RUNTIME_PROVIDER",
+              "evidenceRole": "Runs canonical runtime provider"
+            }
+          ],
+          "lastTransition": {
+            "sequence": 2,
+            "action": "session.chrome.close",
+            "owner": "OperationalSessionOwner",
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+            "sessionsRetained": 1
+          }
+        },
+        "context": "Runtime\nRuns context / سياق التشغيل\n×\nWeb Application\nRun RUN-0042 · RUNNING · No live command events\nRun\nRUN-0042\nLifecycle\nRUNNING\nLatest event sequence\n0\nLatest event\nNo live command events\nWeb Application\nDEV-WEB-01\nState\nUP\nCanonical owner: InternalSimulationAdapter + W03RunDomain.RecordedTopology\nRevision: selection:DEV-WEB-01|event:0|relations:1",
+        "legacyContextHidden": true,
+        "hostHidden": true,
+        "hostMode": "dock",
+        "panels": 1,
+        "resizeEdges": [],
+        "activeTag": "BUTTON",
+        "activeObject": "DEV-WEB-01",
+        "activeTab": null
+      }
+    },
+    {
+      "id": "browser.no-powershell-provider-fabrication",
+      "status": "PASS",
+      "detail": {
+        "device": {
+          "id": "DEV-WEB-01",
+          "name": "Web Application",
+          "type": "SIMULATED_WEB_APP",
+          "state": "HEALTHY",
+          "up": true,
+          "capabilities": [
+            "OPEN_TERMINAL"
+          ],
+          "version": 1
+        },
+        "event": {
+          "sequence": 1,
+          "sessionId": "sim-session-1",
+          "deviceId": "DEV-WEB-01",
+          "command": "powershell",
+          "semanticCommand": "runtime.unsupported",
+          "output": "Unsupported simulation command: powershell. Type help.",
+          "changed": false,
+          "provider": "InternalSimulationAdapter",
+          "runtimeTruth": "INTERNAL_SIMULATION",
+          "presentation": {
+            "state": "error",
+            "detail": "Command is unsupported by InternalSimulationAdapter.",
+            "sequence": 2,
+            "transitions": [
+              {
+                "sequence": 1,
+                "state": "running",
+                "detail": "Executing runtime.unsupported in InternalSimulationAdapter."
+              },
+              {
+                "sequence": 2,
+                "state": "error",
+                "detail": "Command is unsupported by InternalSimulationAdapter."
+              }
+            ]
+          }
+        },
+        "terminal": "sim:DEV-WEB-01 > powershell\nUnsupported simulation command: powershell. Type help."
+      }
+    },
+    {
+      "id": "browser.shutdown-causal-refresh-context-spatial-terminal",
+      "status": "PASS",
+      "detail": {
+        "device": {
+          "id": "DEV-WEB-01",
+          "name": "Web Application",
+          "type": "SIMULATED_WEB_APP",
+          "state": "HEALTHY",
+          "up": false,
+          "capabilities": [
+            "OPEN_TERMINAL"
+          ],
+          "version": 1
+        },
+        "event": {
+          "sequence": 2,
+          "sessionId": "sim-session-1",
+          "deviceId": "DEV-WEB-01",
+          "command": "shutdown",
+          "semanticCommand": "device.shutdown",
+          "output": "Web Application: interface DOWN (simulation)",
+          "changed": true,
+          "provider": "InternalSimulationAdapter",
+          "runtimeTruth": "INTERNAL_SIMULATION",
+          "presentation": {
+            "state": "completed",
+            "detail": "Completed device.shutdown in InternalSimulationAdapter.",
+            "sequence": 4,
+            "transitions": [
+              {
+                "sequence": 1,
+                "state": "running",
+                "detail": "Executing runtime.unsupported in InternalSimulationAdapter."
+              },
+              {
+                "sequence": 2,
+                "state": "error",
+                "detail": "Command is unsupported by InternalSimulationAdapter."
+              },
+              {
+                "sequence": 3,
+                "state": "running",
+                "detail": "Executing device.shutdown in InternalSimulationAdapter."
+              },
+              {
+                "sequence": 4,
+                "state": "completed",
+                "detail": "Completed device.shutdown in InternalSimulationAdapter."
+              }
+            ]
+          }
+        },
+        "spatial": {
+          "id": "DEV-WEB-01",
+          "label": "Web Application",
+          "x": 80,
+          "y": 120,
+          "status": "DOWN"
+        },
+        "terminal": "sim:DEV-WEB-01 > powershell\nUnsupported simulation command: powershell. Type help.\nsim:DEV-WEB-01 > shutdown\nWeb Application: interface DOWN (simulation)",
+        "context": "Runtime\nRuns context / سياق التشغيل\n×\nWeb Application\nRun RUN-0042 · RUNNING · Web Application: interface DOWN (simulation)\nRun\nRUN-0042\nLifecycle\nRUNNING\nLatest event sequence\n2\nLatest event\nWeb Application: interface DOWN (simulation)\nWeb Application\nDEV-WEB-01\nState\nDOWN\nCanonical owner: InternalSimulationAdapter + W03RunDomain.RecordedTopology\nRevision: selection:DEV-WEB-01|event:2|relations:1",
+        "legacyContextHidden": true,
+        "snapshot": {
+          "owner": "OperationalSessionOwner",
+          "contract": {
+            "id": "OperationalSessionOwner",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "OPERATIONAL_PRESENTATION_ONLY",
+            "runtimeTruth": "RuntimeAdapter",
+            "maturity": "BOUNDARY_ONLY_BELOW_M6_UNLESS_SECOND_REAL_PROVIDER_IS_PROVEN"
+          },
+          "runtimeBoundary": {
+            "id": "OperationalRuntimePresentationBoundary",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "PRESENTATION_READ_BOUNDARY_ONLY",
+            "canonicalTruthOwner": "RuntimeAdapter"
+          },
+          "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+          "tabs": [
+            {
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-1",
+              "providerSessionOwner": "InternalSimulationAdapter",
+              "attachedAtSequence": 1,
+              "deviceId": "DEV-WEB-01",
+              "runId": "RUN-0042",
+              "epoch": 1,
+              "runtimeIdentity": {
+                "source": "RuntimeAdapterReference",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-1",
+                "sessionId": "sim-session-1",
+                "runId": "RUN-0042",
+                "deviceId": "DEV-WEB-01",
+                "toolId": null,
+                "deviceOrToolId": "DEV-WEB-01",
+                "epoch": 1
+              },
+              "presentationState": {
+                "state": "completed",
+                "label": "Completed",
+                "detail": "Completed device.shutdown in InternalSimulationAdapter.",
+                "sequence": 4,
+                "transitions": [
+                  {
+                    "sequence": 1,
+                    "state": "running",
+                    "detail": "Executing runtime.unsupported in InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 2,
+                    "state": "error",
+                    "detail": "Command is unsupported by InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 3,
+                    "state": "running",
+                    "detail": "Executing device.shutdown in InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 4,
+                    "state": "completed",
+                    "detail": "Completed device.shutdown in InternalSimulationAdapter."
+                  }
+                ]
+              }
+            }
+          ],
+          "activePresentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+          "chrome": {
+            "lifecycle": "open",
+            "placement": "bottom",
+            "layout": "single",
+            "geometry": {
+              "x": 120,
+              "y": 140,
+              "width": 720,
+              "height": 420
+            }
+          },
+          "providerAttachments": [
+            {
+              "contract": {
+                "id": "RuntimeAdapter",
+                "version": "1.0.0",
+                "compatibility": "SEMVER"
+              },
+              "id": "InternalSimulationAdapter",
+              "label": "Internal simulation",
+              "sessionOwner": "InternalSimulationAdapter",
+              "commandOwner": "InternalSimulationAdapter",
+              "inputLabel": "sim >",
+              "help": "Commands: help, show status, show topology, shutdown, no shutdown",
+              "capabilities": [
+                "OPEN_TERMINAL",
+                "runtime.input",
+                "runtime.recorded"
+              ],
+              "connected": true,
+              "classification": "REAL_RUNTIME_PROVIDER",
+              "evidenceRole": "Runs canonical runtime provider"
+            }
+          ],
+          "lastTransition": {
+            "sequence": 3,
+            "action": "session.attach",
+            "owner": "OperationalSessionOwner",
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+            "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+            "providerId": "InternalSimulationAdapter",
+            "runtimeSessionId": "sim-session-1",
+            "reused": true
+          }
+        }
+      }
+    },
+    {
+      "id": "browser.real-split-preserved",
+      "status": "PASS",
+      "detail": {
+        "hostClass": "OperationalTerminalHost",
+        "ownerSame": true,
+        "renderer": {
+          "id": "DomOperationalTerminalRenderer",
+          "kind": "DOM_FALLBACK",
+          "contract": {
+            "id": "TerminalRendererPort",
+            "version": "1.0.0",
+            "role": "TERMINAL_IO_PRESENTATION_ONLY",
+            "semanticCommandOwnership": false,
+            "canonicalStateOwnership": false,
+            "processLifecycleOwnership": false
+          }
+        },
+        "snapshot": {
+          "owner": "OperationalSessionOwner",
+          "contract": {
+            "id": "OperationalSessionOwner",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "OPERATIONAL_PRESENTATION_ONLY",
+            "runtimeTruth": "RuntimeAdapter",
+            "maturity": "BOUNDARY_ONLY_BELOW_M6_UNLESS_SECOND_REAL_PROVIDER_IS_PROVEN"
+          },
+          "runtimeBoundary": {
+            "id": "OperationalRuntimePresentationBoundary",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "PRESENTATION_READ_BOUNDARY_ONLY",
+            "canonicalTruthOwner": "RuntimeAdapter"
+          },
+          "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+          "tabs": [
+            {
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-1",
+              "providerSessionOwner": "InternalSimulationAdapter",
+              "attachedAtSequence": 1,
+              "deviceId": "DEV-WEB-01",
+              "runId": "RUN-0042",
+              "epoch": 1,
+              "runtimeIdentity": {
+                "source": "RuntimeAdapterReference",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-1",
+                "sessionId": "sim-session-1",
+                "runId": "RUN-0042",
+                "deviceId": "DEV-WEB-01",
+                "toolId": null,
+                "deviceOrToolId": "DEV-WEB-01",
+                "epoch": 1
+              },
+              "presentationState": {
+                "state": "completed",
+                "label": "Completed",
+                "detail": "Completed device.shutdown in InternalSimulationAdapter.",
+                "sequence": 4,
+                "transitions": [
+                  {
+                    "sequence": 1,
+                    "state": "running",
+                    "detail": "Executing runtime.unsupported in InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 2,
+                    "state": "error",
+                    "detail": "Command is unsupported by InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 3,
+                    "state": "running",
+                    "detail": "Executing device.shutdown in InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 4,
+                    "state": "completed",
+                    "detail": "Completed device.shutdown in InternalSimulationAdapter."
+                  }
+                ]
+              }
+            },
+            {
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-2",
+              "providerSessionOwner": "InternalSimulationAdapter",
+              "attachedAtSequence": 4,
+              "deviceId": "DEV-DB-01",
+              "runId": "RUN-0042",
+              "epoch": 1,
+              "runtimeIdentity": {
+                "source": "RuntimeAdapterReference",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-2",
+                "sessionId": "sim-session-2",
+                "runId": "RUN-0042",
+                "deviceId": "DEV-DB-01",
+                "toolId": null,
+                "deviceOrToolId": "DEV-DB-01",
+                "epoch": 1
+              },
+              "presentationState": {
+                "state": "idle",
+                "label": "Ready",
+                "detail": "Internal simulation ready.",
+                "sequence": 0,
+                "transitions": []
+              }
+            }
+          ],
+          "activePresentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+          "chrome": {
+            "lifecycle": "open",
+            "placement": "bottom",
+            "layout": "split",
+            "geometry": {
+              "x": 120,
+              "y": 140,
+              "width": 720,
+              "height": 420
+            }
+          },
+          "providerAttachments": [
+            {
+              "contract": {
+                "id": "RuntimeAdapter",
+                "version": "1.0.0",
+                "compatibility": "SEMVER"
+              },
+              "id": "InternalSimulationAdapter",
+              "label": "Internal simulation",
+              "sessionOwner": "InternalSimulationAdapter",
+              "commandOwner": "InternalSimulationAdapter",
+              "inputLabel": "sim >",
+              "help": "Commands: help, show status, show topology, shutdown, no shutdown",
+              "capabilities": [
+                "OPEN_TERMINAL",
+                "runtime.input",
+                "runtime.recorded"
+              ],
+              "connected": true,
+              "classification": "REAL_RUNTIME_PROVIDER",
+              "evidenceRole": "Runs canonical runtime provider"
+            }
+          ],
+          "lastTransition": {
+            "sequence": 6,
+            "action": "session.chrome.split",
+            "owner": "OperationalSessionOwner",
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1"
+          }
+        },
+        "context": "Runtime\nRuns context / سياق التشغيل\n×\nWeb Application\nRun RUN-0042 · RUNNING · Web Application: interface DOWN (simulation)\nRun\nRUN-0042\nLifecycle\nRUNNING\nLatest event sequence\n2\nLatest event\nWeb Application: interface DOWN (simulation)\nWeb Application\nDEV-WEB-01\nState\nDOWN\nCanonical owner: InternalSimulationAdapter + W03RunDomain.RecordedTopology\nRevision: selection:DEV-WEB-01|event:2|relations:1",
+        "legacyContextHidden": true,
+        "hostHidden": false,
+        "hostMode": "split",
+        "panels": 2,
+        "resizeEdges": [],
+        "activeTag": "BUTTON",
+        "activeObject": null,
+        "activeTab": "ops-tab::InternalSimulationAdapter::sim-session-2"
+      }
+    },
+    {
+      "id": "browser.tab-reorder",
+      "status": "PASS",
+      "detail": {
+        "before": [
+          "ops-tab::InternalSimulationAdapter::sim-session-1",
+          "ops-tab::InternalSimulationAdapter::sim-session-2"
+        ],
+        "after": [
+          "ops-tab::InternalSimulationAdapter::sim-session-2",
+          "ops-tab::InternalSimulationAdapter::sim-session-1"
+        ],
+        "active": "ops-tab::InternalSimulationAdapter::sim-session-2"
+      }
+    },
+    {
+      "id": "browser.float-eight-resize-handles",
+      "status": "PASS",
+      "detail": {
+        "hostClass": "OperationalTerminalHost",
+        "ownerSame": true,
+        "renderer": {
+          "id": "DomOperationalTerminalRenderer",
+          "kind": "DOM_FALLBACK",
+          "contract": {
+            "id": "TerminalRendererPort",
+            "version": "1.0.0",
+            "role": "TERMINAL_IO_PRESENTATION_ONLY",
+            "semanticCommandOwnership": false,
+            "canonicalStateOwnership": false,
+            "processLifecycleOwnership": false
+          }
+        },
+        "snapshot": {
+          "owner": "OperationalSessionOwner",
+          "contract": {
+            "id": "OperationalSessionOwner",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "OPERATIONAL_PRESENTATION_ONLY",
+            "runtimeTruth": "RuntimeAdapter",
+            "maturity": "BOUNDARY_ONLY_BELOW_M6_UNLESS_SECOND_REAL_PROVIDER_IS_PROVEN"
+          },
+          "runtimeBoundary": {
+            "id": "OperationalRuntimePresentationBoundary",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "PRESENTATION_READ_BOUNDARY_ONLY",
+            "canonicalTruthOwner": "RuntimeAdapter"
+          },
+          "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+          "tabs": [
+            {
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-2",
+              "providerSessionOwner": "InternalSimulationAdapter",
+              "attachedAtSequence": 4,
+              "deviceId": "DEV-DB-01",
+              "runId": "RUN-0042",
+              "epoch": 1,
+              "runtimeIdentity": {
+                "source": "RuntimeAdapterReference",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-2",
+                "sessionId": "sim-session-2",
+                "runId": "RUN-0042",
+                "deviceId": "DEV-DB-01",
+                "toolId": null,
+                "deviceOrToolId": "DEV-DB-01",
+                "epoch": 1
+              },
+              "presentationState": {
+                "state": "idle",
+                "label": "Ready",
+                "detail": "Internal simulation ready.",
+                "sequence": 0,
+                "transitions": []
+              }
+            },
+            {
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-1",
+              "providerSessionOwner": "InternalSimulationAdapter",
+              "attachedAtSequence": 1,
+              "deviceId": "DEV-WEB-01",
+              "runId": "RUN-0042",
+              "epoch": 1,
+              "runtimeIdentity": {
+                "source": "RuntimeAdapterReference",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-1",
+                "sessionId": "sim-session-1",
+                "runId": "RUN-0042",
+                "deviceId": "DEV-WEB-01",
+                "toolId": null,
+                "deviceOrToolId": "DEV-WEB-01",
+                "epoch": 1
+              },
+              "presentationState": {
+                "state": "completed",
+                "label": "Completed",
+                "detail": "Completed device.shutdown in InternalSimulationAdapter.",
+                "sequence": 4,
+                "transitions": [
+                  {
+                    "sequence": 1,
+                    "state": "running",
+                    "detail": "Executing runtime.unsupported in InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 2,
+                    "state": "error",
+                    "detail": "Command is unsupported by InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 3,
+                    "state": "running",
+                    "detail": "Executing device.shutdown in InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 4,
+                    "state": "completed",
+                    "detail": "Completed device.shutdown in InternalSimulationAdapter."
+                  }
+                ]
+              }
+            }
+          ],
+          "activePresentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+          "chrome": {
+            "lifecycle": "open",
+            "placement": "floating",
+            "layout": "single",
+            "geometry": {
+              "x": 120,
+              "y": 140,
+              "width": 720,
+              "height": 420
+            }
+          },
+          "providerAttachments": [
+            {
+              "contract": {
+                "id": "RuntimeAdapter",
+                "version": "1.0.0",
+                "compatibility": "SEMVER"
+              },
+              "id": "InternalSimulationAdapter",
+              "label": "Internal simulation",
+              "sessionOwner": "InternalSimulationAdapter",
+              "commandOwner": "InternalSimulationAdapter",
+              "inputLabel": "sim >",
+              "help": "Commands: help, show status, show topology, shutdown, no shutdown",
+              "capabilities": [
+                "OPEN_TERMINAL",
+                "runtime.input",
+                "runtime.recorded"
+              ],
+              "connected": true,
+              "classification": "REAL_RUNTIME_PROVIDER",
+              "evidenceRole": "Runs canonical runtime provider"
+            }
+          ],
+          "lastTransition": {
+            "sequence": 9,
+            "action": "session.chrome.floating",
+            "owner": "OperationalSessionOwner",
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1"
+          }
+        },
+        "context": "Runtime\nRuns context / سياق التشغيل\n×\nWeb Application\nRun RUN-0042 · RUNNING · Web Application: interface DOWN (simulation)\nRun\nRUN-0042\nLifecycle\nRUNNING\nLatest event sequence\n2\nLatest event\nWeb Application: interface DOWN (simulation)\nWeb Application\nDEV-WEB-01\nState\nDOWN\nCanonical owner: InternalSimulationAdapter + W03RunDomain.RecordedTopology\nRevision: selection:DEV-WEB-01|event:2|relations:1",
+        "legacyContextHidden": true,
+        "hostHidden": false,
+        "hostMode": "float",
+        "panels": 1,
+        "resizeEdges": [
+          "left",
+          "right",
+          "top",
+          "bottom",
+          "top-left",
+          "top-right",
+          "bottom-left",
+          "bottom-right"
+        ],
+        "activeTag": "BUTTON",
+        "activeObject": null,
+        "activeTab": "ops-tab::InternalSimulationAdapter::sim-session-2"
+      }
+    },
+    {
+      "id": "browser.window-motion-eight-edge-pointer-binding",
+      "status": "PASS",
+      "detail": [
+        {
+          "edge": "left",
+          "before": {
+            "x": 220,
+            "y": 180,
+            "width": 720,
+            "height": 420
+          },
+          "after": {
+            "x": 208,
+            "y": 180,
+            "width": 732,
+            "height": 420
+          },
+          "transition": {
+            "sequence": 11,
+            "action": "session.geometry.resize",
+            "owner": "OperationalSessionOwner",
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+            "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+            "edge": "left",
+            "geometry": {
+              "x": 208,
+              "y": 180,
+              "width": 732,
+              "height": 420
+            }
+          }
+        },
+        {
+          "edge": "right",
+          "before": {
+            "x": 220,
+            "y": 180,
+            "width": 720,
+            "height": 420
+          },
+          "after": {
+            "x": 220,
+            "y": 180,
+            "width": 732,
+            "height": 420
+          },
+          "transition": {
+            "sequence": 13,
+            "action": "session.geometry.resize",
+            "owner": "OperationalSessionOwner",
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+            "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+            "edge": "right",
+            "geometry": {
+              "x": 220,
+              "y": 180,
+              "width": 732,
+              "height": 420
+            }
+          }
+        },
+        {
+          "edge": "top",
+          "before": {
+            "x": 220,
+            "y": 180,
+            "width": 720,
+            "height": 420
+          },
+          "after": {
+            "x": 220,
+            "y": 168,
+            "width": 720,
+            "height": 432
+          },
+          "transition": {
+            "sequence": 15,
+            "action": "session.geometry.resize",
+            "owner": "OperationalSessionOwner",
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+            "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+            "edge": "top",
+            "geometry": {
+              "x": 220,
+              "y": 168,
+              "width": 720,
+              "height": 432
+            }
+          }
+        },
+        {
+          "edge": "bottom",
+          "before": {
+            "x": 220,
+            "y": 180,
+            "width": 720,
+            "height": 420
+          },
+          "after": {
+            "x": 220,
+            "y": 180,
+            "width": 720,
+            "height": 432
+          },
+          "transition": {
+            "sequence": 17,
+            "action": "session.geometry.resize",
+            "owner": "OperationalSessionOwner",
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+            "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+            "edge": "bottom",
+            "geometry": {
+              "x": 220,
+              "y": 180,
+              "width": 720,
+              "height": 432
+            }
+          }
+        },
+        {
+          "edge": "top-left",
+          "before": {
+            "x": 220,
+            "y": 180,
+            "width": 720,
+            "height": 420
+          },
+          "after": {
+            "x": 208,
+            "y": 168,
+            "width": 732,
+            "height": 432
+          },
+          "transition": {
+            "sequence": 19,
+            "action": "session.geometry.resize",
+            "owner": "OperationalSessionOwner",
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+            "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+            "edge": "top-left",
+            "geometry": {
+              "x": 208,
+              "y": 168,
+              "width": 732,
+              "height": 432
+            }
+          }
+        },
+        {
+          "edge": "top-right",
+          "before": {
+            "x": 220,
+            "y": 180,
+            "width": 720,
+            "height": 420
+          },
+          "after": {
+            "x": 220,
+            "y": 168,
+            "width": 732,
+            "height": 432
+          },
+          "transition": {
+            "sequence": 21,
+            "action": "session.geometry.resize",
+            "owner": "OperationalSessionOwner",
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+            "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+            "edge": "top-right",
+            "geometry": {
+              "x": 220,
+              "y": 168,
+              "width": 732,
+              "height": 432
+            }
+          }
+        },
+        {
+          "edge": "bottom-left",
+          "before": {
+            "x": 220,
+            "y": 180,
+            "width": 720,
+            "height": 420
+          },
+          "after": {
+            "x": 208,
+            "y": 180,
+            "width": 732,
+            "height": 432
+          },
+          "transition": {
+            "sequence": 23,
+            "action": "session.geometry.resize",
+            "owner": "OperationalSessionOwner",
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+            "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+            "edge": "bottom-left",
+            "geometry": {
+              "x": 208,
+              "y": 180,
+              "width": 732,
+              "height": 432
+            }
+          }
+        },
+        {
+          "edge": "bottom-right",
+          "before": {
+            "x": 220,
+            "y": 180,
+            "width": 720,
+            "height": 420
+          },
+          "after": {
+            "x": 220,
+            "y": 180,
+            "width": 732,
+            "height": 432
+          },
+          "transition": {
+            "sequence": 25,
+            "action": "session.geometry.resize",
+            "owner": "OperationalSessionOwner",
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+            "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+            "edge": "bottom-right",
+            "geometry": {
+              "x": 220,
+              "y": 180,
+              "width": 732,
+              "height": 432
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "browser.minimize-restore-lifecycle",
+      "status": "PASS",
+      "detail": {
+        "minimized": {
+          "lifecycle": "minimized",
+          "placement": "floating",
+          "layout": "single",
+          "geometry": {
+            "x": 220,
+            "y": 180,
+            "width": 732,
+            "height": 432
+          }
+        },
+        "restored": {
+          "lifecycle": "open",
+          "placement": "floating",
+          "layout": "single",
+          "geometry": {
+            "x": 220,
+            "y": 180,
+            "width": 732,
+            "height": 432
+          }
+        }
+      }
+    },
+    {
+      "id": "browser.runtime-identity-epoch-reference-refresh",
+      "status": "PASS",
+      "detail": {
+        "before": {
+          "source": "RuntimeAdapterReference",
+          "providerId": "InternalSimulationAdapter",
+          "runtimeSessionId": "sim-session-2",
+          "sessionId": "sim-session-2",
+          "runId": "RUN-0042",
+          "deviceId": "DEV-DB-01",
+          "toolId": null,
+          "deviceOrToolId": "DEV-DB-01",
+          "epoch": 1
+        },
+        "disconnect": {
+          "identity": {
+            "source": "RuntimeAdapterReference",
+            "providerId": "InternalSimulationAdapter",
+            "runtimeSessionId": "sim-session-2",
+            "sessionId": "sim-session-2",
+            "runId": "RUN-0042",
+            "deviceId": "DEV-DB-01",
+            "toolId": null,
+            "deviceOrToolId": "DEV-DB-01",
+            "epoch": 1
+          },
+          "state": {
+            "state": "unavailable",
+            "label": "Unavailable",
+            "detail": "Internal simulation provider is disconnected.",
+            "sequence": 6,
+            "transitions": [
+              {
+                "sequence": 6,
+                "state": "unavailable",
+                "detail": "Internal simulation provider is disconnected."
+              }
+            ]
+          },
+          "disabled": true,
+          "terminal": "Commands: help, show status, show topology, shutdown, no shutdown"
+        },
+        "reconnect": {
+          "identity": {
+            "source": "RuntimeAdapterReference",
+            "providerId": "InternalSimulationAdapter",
+            "runtimeSessionId": "sim-session-2",
+            "sessionId": "sim-session-2",
+            "runId": "RUN-0042",
+            "deviceId": "DEV-DB-01",
+            "toolId": null,
+            "deviceOrToolId": "DEV-DB-01",
+            "epoch": 2
+          },
+          "state": {
+            "state": "idle",
+            "label": "Ready",
+            "detail": "Internal simulation reconnected.",
+            "sequence": 7,
+            "transitions": [
+              {
+                "sequence": 6,
+                "state": "unavailable",
+                "detail": "Internal simulation provider is disconnected."
+              },
+              {
+                "sequence": 7,
+                "state": "idle",
+                "detail": "Internal simulation reconnected."
+              }
+            ]
+          },
+          "disabled": false
+        }
+      }
+    },
+    {
+      "id": "browser.recorded-view-no-live-terminal-input",
+      "status": "PASS",
+      "detail": {
+        "hostClass": "OperationalTerminalHost",
+        "ownerSame": true,
+        "renderer": {
+          "id": "DomOperationalTerminalRenderer",
+          "kind": "DOM_FALLBACK",
+          "contract": {
+            "id": "TerminalRendererPort",
+            "version": "1.0.0",
+            "role": "TERMINAL_IO_PRESENTATION_ONLY",
+            "semanticCommandOwnership": false,
+            "canonicalStateOwnership": false,
+            "processLifecycleOwnership": false
+          }
+        },
+        "snapshot": {
+          "owner": "OperationalSessionOwner",
+          "contract": {
+            "id": "OperationalSessionOwner",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "OPERATIONAL_PRESENTATION_ONLY",
+            "runtimeTruth": "RuntimeAdapter",
+            "maturity": "BOUNDARY_ONLY_BELOW_M6_UNLESS_SECOND_REAL_PROVIDER_IS_PROVEN"
+          },
+          "runtimeBoundary": {
+            "id": "OperationalRuntimePresentationBoundary",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "PRESENTATION_READ_BOUNDARY_ONLY",
+            "canonicalTruthOwner": "RuntimeAdapter"
+          },
+          "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+          "tabs": [
+            {
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-2",
+              "providerSessionOwner": "InternalSimulationAdapter",
+              "attachedAtSequence": 4,
+              "deviceId": "DEV-DB-01",
+              "runId": "RUN-0042",
+              "epoch": 2,
+              "runtimeIdentity": {
+                "source": "RuntimeAdapterReference",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-2",
+                "sessionId": "sim-session-2",
+                "runId": "RUN-0042",
+                "deviceId": "DEV-DB-01",
+                "toolId": null,
+                "deviceOrToolId": "DEV-DB-01",
+                "epoch": 2
+              },
+              "presentationState": {
+                "state": "idle",
+                "label": "Ready",
+                "detail": "Internal simulation reconnected.",
+                "sequence": 7,
+                "transitions": [
+                  {
+                    "sequence": 6,
+                    "state": "unavailable",
+                    "detail": "Internal simulation provider is disconnected."
+                  },
+                  {
+                    "sequence": 7,
+                    "state": "idle",
+                    "detail": "Internal simulation reconnected."
+                  }
+                ]
+              }
+            },
+            {
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-1",
+              "providerSessionOwner": "InternalSimulationAdapter",
+              "attachedAtSequence": 1,
+              "deviceId": "DEV-WEB-01",
+              "runId": "RUN-0042",
+              "epoch": 1,
+              "runtimeIdentity": {
+                "source": "RuntimeAdapterReference",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-1",
+                "sessionId": "sim-session-1",
+                "runId": "RUN-0042",
+                "deviceId": "DEV-WEB-01",
+                "toolId": null,
+                "deviceOrToolId": "DEV-WEB-01",
+                "epoch": 1
+              },
+              "presentationState": {
+                "state": "unavailable",
+                "label": "Unavailable",
+                "detail": "Internal simulation provider is disconnected.",
+                "sequence": 5,
+                "transitions": [
+                  {
+                    "sequence": 1,
+                    "state": "running",
+                    "detail": "Executing runtime.unsupported in InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 2,
+                    "state": "error",
+                    "detail": "Command is unsupported by InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 3,
+                    "state": "running",
+                    "detail": "Executing device.shutdown in InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 4,
+                    "state": "completed",
+                    "detail": "Completed device.shutdown in InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 5,
+                    "state": "unavailable",
+                    "detail": "Internal simulation provider is disconnected."
+                  }
+                ]
+              }
+            }
+          ],
+          "activePresentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+          "chrome": {
+            "lifecycle": "open",
+            "placement": "floating",
+            "layout": "single",
+            "geometry": {
+              "x": 220,
+              "y": 180,
+              "width": 732,
+              "height": 432
+            }
+          },
+          "providerAttachments": [
+            {
+              "contract": {
+                "id": "RuntimeAdapter",
+                "version": "1.0.0",
+                "compatibility": "SEMVER"
+              },
+              "id": "InternalSimulationAdapter",
+              "label": "Internal simulation",
+              "sessionOwner": "InternalSimulationAdapter",
+              "commandOwner": "InternalSimulationAdapter",
+              "inputLabel": "sim >",
+              "help": "Commands: help, show status, show topology, shutdown, no shutdown",
+              "capabilities": [
+                "OPEN_TERMINAL",
+                "runtime.input",
+                "runtime.recorded"
+              ],
+              "connected": true,
+              "classification": "REAL_RUNTIME_PROVIDER",
+              "evidenceRole": "Runs canonical runtime provider"
+            }
+          ],
+          "lastTransition": {
+            "sequence": 27,
+            "action": "session.chrome.restore",
+            "owner": "OperationalSessionOwner",
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1"
+          }
+        },
+        "context": "Runtime\nRuns context / سياق التشغيل\n×\nWeb Application\nRun RUN-0042 · RUNNING · Web Application: interface DOWN (simulation)\nRun\nRUN-0042\nLifecycle\nRUNNING\nLatest event sequence\n2\nLatest event\nWeb Application: interface DOWN (simulation)\nWeb Application\nDEV-WEB-01\nState\nDOWN\nCanonical owner: InternalSimulationAdapter + W03RunDomain.RecordedTopology\nRevision: selection:DEV-WEB-01|event:2|relations:1",
+        "legacyContextHidden": true,
+        "hostHidden": true,
+        "hostMode": "float",
+        "panels": 1,
+        "resizeEdges": [
+          "left",
+          "right",
+          "top",
+          "bottom",
+          "top-left",
+          "top-right",
+          "bottom-left",
+          "bottom-right"
+        ],
+        "activeTag": "BODY",
+        "activeObject": null,
+        "activeTab": null
+      }
+    },
+    {
+      "id": "browser.1024-shutdown-context-visible",
+      "status": "PASS",
+      "detail": {
+        "snapshot": {
+          "hostClass": "OperationalTerminalHost",
+          "ownerSame": true,
+          "renderer": {
+            "id": "DomOperationalTerminalRenderer",
+            "kind": "DOM_FALLBACK",
+            "contract": {
+              "id": "TerminalRendererPort",
+              "version": "1.0.0",
+              "role": "TERMINAL_IO_PRESENTATION_ONLY",
+              "semanticCommandOwnership": false,
+              "canonicalStateOwnership": false,
+              "processLifecycleOwnership": false
+            }
+          },
+          "snapshot": {
+            "owner": "OperationalSessionOwner",
+            "contract": {
+              "id": "OperationalSessionOwner",
+              "version": "1.0.0",
+              "compatibility": "SEMVER",
+              "scope": "OPERATIONAL_PRESENTATION_ONLY",
+              "runtimeTruth": "RuntimeAdapter",
+              "maturity": "BOUNDARY_ONLY_BELOW_M6_UNLESS_SECOND_REAL_PROVIDER_IS_PROVEN"
+            },
+            "runtimeBoundary": {
+              "id": "OperationalRuntimePresentationBoundary",
+              "version": "1.0.0",
+              "compatibility": "SEMVER",
+              "scope": "PRESENTATION_READ_BOUNDARY_ONLY",
+              "canonicalTruthOwner": "RuntimeAdapter"
+            },
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+            "tabs": [
+              {
+                "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-1",
+                "providerSessionOwner": "InternalSimulationAdapter",
+                "attachedAtSequence": 1,
+                "deviceId": "DEV-WEB-01",
+                "runId": "RUN-0042",
+                "epoch": 1,
+                "runtimeIdentity": {
+                  "source": "RuntimeAdapterReference",
+                  "providerId": "InternalSimulationAdapter",
+                  "runtimeSessionId": "sim-session-1",
+                  "sessionId": "sim-session-1",
+                  "runId": "RUN-0042",
+                  "deviceId": "DEV-WEB-01",
+                  "toolId": null,
+                  "deviceOrToolId": "DEV-WEB-01",
+                  "epoch": 1
+                },
+                "presentationState": {
+                  "state": "completed",
+                  "label": "Completed",
+                  "detail": "Completed device.shutdown in InternalSimulationAdapter.",
+                  "sequence": 2,
+                  "transitions": [
+                    {
+                      "sequence": 1,
+                      "state": "running",
+                      "detail": "Executing device.shutdown in InternalSimulationAdapter."
+                    },
+                    {
+                      "sequence": 2,
+                      "state": "completed",
+                      "detail": "Completed device.shutdown in InternalSimulationAdapter."
+                    }
+                  ]
+                }
+              }
+            ],
+            "activePresentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+            "chrome": {
+              "lifecycle": "open",
+              "placement": "bottom",
+              "layout": "single",
+              "geometry": {
+                "x": 120,
+                "y": 140,
+                "width": 720,
+                "height": 420
+              }
+            },
+            "providerAttachments": [
+              {
+                "contract": {
+                  "id": "RuntimeAdapter",
+                  "version": "1.0.0",
+                  "compatibility": "SEMVER"
+                },
+                "id": "InternalSimulationAdapter",
+                "label": "Internal simulation",
+                "sessionOwner": "InternalSimulationAdapter",
+                "commandOwner": "InternalSimulationAdapter",
+                "inputLabel": "sim >",
+                "help": "Commands: help, show status, show topology, shutdown, no shutdown",
+                "capabilities": [
+                  "OPEN_TERMINAL",
+                  "runtime.input",
+                  "runtime.recorded"
+                ],
+                "connected": true,
+                "classification": "REAL_RUNTIME_PROVIDER",
+                "evidenceRole": "Runs canonical runtime provider"
+              }
+            ],
+            "lastTransition": {
+              "sequence": 1,
+              "action": "session.attach",
+              "owner": "OperationalSessionOwner",
+              "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-1",
+              "reused": false
+            }
+          },
+          "context": "Runtime\nRuns context / سياق التشغيل\n×\nWeb Application\nRun RUN-0042 · RUNNING · Web Application: interface DOWN (simulation)\nRun\nRUN-0042\nLifecycle\nRUNNING\nLatest event sequence\n1\nLatest event\nWeb Application: interface DOWN (simulation)\nWeb Application\nDEV-WEB-01\nState\nDOWN\nCanonical owner: InternalSimulationAdapter + W03RunDomain.RecordedTopology\nRevision: selection:DEV-WEB-01|event:1|relations:1",
+          "legacyContextHidden": true,
+          "hostHidden": false,
+          "hostMode": "dock",
+          "panels": 1,
+          "resizeEdges": [],
+          "activeTag": "INPUT",
+          "activeObject": null,
+          "activeTab": null
+        },
+        "contextRect": {
+          "x": 617,
+          "y": 206,
+          "width": 394,
+          "height": 418.15625,
+          "left": 617,
+          "right": 1011,
+          "top": 206,
+          "bottom": 624.15625
+        }
+      }
+    },
+    {
+      "id": "browser.1024-split-real-consumer",
+      "status": "PASS",
+      "detail": {
+        "hostClass": "OperationalTerminalHost",
+        "ownerSame": true,
+        "renderer": {
+          "id": "DomOperationalTerminalRenderer",
+          "kind": "DOM_FALLBACK",
+          "contract": {
+            "id": "TerminalRendererPort",
+            "version": "1.0.0",
+            "role": "TERMINAL_IO_PRESENTATION_ONLY",
+            "semanticCommandOwnership": false,
+            "canonicalStateOwnership": false,
+            "processLifecycleOwnership": false
+          }
+        },
+        "snapshot": {
+          "owner": "OperationalSessionOwner",
+          "contract": {
+            "id": "OperationalSessionOwner",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "OPERATIONAL_PRESENTATION_ONLY",
+            "runtimeTruth": "RuntimeAdapter",
+            "maturity": "BOUNDARY_ONLY_BELOW_M6_UNLESS_SECOND_REAL_PROVIDER_IS_PROVEN"
+          },
+          "runtimeBoundary": {
+            "id": "OperationalRuntimePresentationBoundary",
+            "version": "1.0.0",
+            "compatibility": "SEMVER",
+            "scope": "PRESENTATION_READ_BOUNDARY_ONLY",
+            "canonicalTruthOwner": "RuntimeAdapter"
+          },
+          "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+          "tabs": [
+            {
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-1",
+              "providerSessionOwner": "InternalSimulationAdapter",
+              "attachedAtSequence": 1,
+              "deviceId": "DEV-WEB-01",
+              "runId": "RUN-0042",
+              "epoch": 1,
+              "runtimeIdentity": {
+                "source": "RuntimeAdapterReference",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-1",
+                "sessionId": "sim-session-1",
+                "runId": "RUN-0042",
+                "deviceId": "DEV-WEB-01",
+                "toolId": null,
+                "deviceOrToolId": "DEV-WEB-01",
+                "epoch": 1
+              },
+              "presentationState": {
+                "state": "completed",
+                "label": "Completed",
+                "detail": "Completed device.shutdown in InternalSimulationAdapter.",
+                "sequence": 2,
+                "transitions": [
+                  {
+                    "sequence": 1,
+                    "state": "running",
+                    "detail": "Executing device.shutdown in InternalSimulationAdapter."
+                  },
+                  {
+                    "sequence": 2,
+                    "state": "completed",
+                    "detail": "Completed device.shutdown in InternalSimulationAdapter."
+                  }
+                ]
+              }
+            },
+            {
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-2",
+              "providerSessionOwner": "InternalSimulationAdapter",
+              "attachedAtSequence": 2,
+              "deviceId": "DEV-DB-01",
+              "runId": "RUN-0042",
+              "epoch": 1,
+              "runtimeIdentity": {
+                "source": "RuntimeAdapterReference",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-2",
+                "sessionId": "sim-session-2",
+                "runId": "RUN-0042",
+                "deviceId": "DEV-DB-01",
+                "toolId": null,
+                "deviceOrToolId": "DEV-DB-01",
+                "epoch": 1
+              },
+              "presentationState": {
+                "state": "idle",
+                "label": "Ready",
+                "detail": "Internal simulation ready.",
+                "sequence": 0,
+                "transitions": []
+              }
+            }
+          ],
+          "activePresentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+          "chrome": {
+            "lifecycle": "open",
+            "placement": "bottom",
+            "layout": "split",
+            "geometry": {
+              "x": 120,
+              "y": 140,
+              "width": 720,
+              "height": 420
+            }
+          },
+          "providerAttachments": [
+            {
+              "contract": {
+                "id": "RuntimeAdapter",
+                "version": "1.0.0",
+                "compatibility": "SEMVER"
+              },
+              "id": "InternalSimulationAdapter",
+              "label": "Internal simulation",
+              "sessionOwner": "InternalSimulationAdapter",
+              "commandOwner": "InternalSimulationAdapter",
+              "inputLabel": "sim >",
+              "help": "Commands: help, show status, show topology, shutdown, no shutdown",
+              "capabilities": [
+                "OPEN_TERMINAL",
+                "runtime.input",
+                "runtime.recorded"
+              ],
+              "connected": true,
+              "classification": "REAL_RUNTIME_PROVIDER",
+              "evidenceRole": "Runs canonical runtime provider"
+            }
+          ],
+          "lastTransition": {
+            "sequence": 4,
+            "action": "session.chrome.split",
+            "owner": "OperationalSessionOwner",
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1"
+          }
+        },
+        "context": "Runtime\nRuns context / سياق التشغيل\n×\nWeb Application\nRun RUN-0042 · RUNNING · Web Application: interface DOWN (simulation)\nRun\nRUN-0042\nLifecycle\nRUNNING\nLatest event sequence\n1\nLatest event\nWeb Application: interface DOWN (simulation)\nWeb Application\nDEV-WEB-01\nState\nDOWN\nCanonical owner: InternalSimulationAdapter + W03RunDomain.RecordedTopology\nRevision: selection:DEV-WEB-01|event:1|relations:1",
+        "legacyContextHidden": true,
+        "hostHidden": false,
+        "hostMode": "split",
+        "panels": 2,
+        "resizeEdges": [],
+        "activeTag": "BUTTON",
+        "activeObject": null,
+        "activeTab": "ops-tab::InternalSimulationAdapter::sim-session-2"
+      }
+    },
+    {
+      "id": "browser.1024-float-bounded",
+      "status": "PASS",
+      "detail": {
+        "snapshot": {
+          "hostClass": "OperationalTerminalHost",
+          "ownerSame": true,
+          "renderer": {
+            "id": "DomOperationalTerminalRenderer",
+            "kind": "DOM_FALLBACK",
+            "contract": {
+              "id": "TerminalRendererPort",
+              "version": "1.0.0",
+              "role": "TERMINAL_IO_PRESENTATION_ONLY",
+              "semanticCommandOwnership": false,
+              "canonicalStateOwnership": false,
+              "processLifecycleOwnership": false
+            }
+          },
+          "snapshot": {
+            "owner": "OperationalSessionOwner",
+            "contract": {
+              "id": "OperationalSessionOwner",
+              "version": "1.0.0",
+              "compatibility": "SEMVER",
+              "scope": "OPERATIONAL_PRESENTATION_ONLY",
+              "runtimeTruth": "RuntimeAdapter",
+              "maturity": "BOUNDARY_ONLY_BELOW_M6_UNLESS_SECOND_REAL_PROVIDER_IS_PROVEN"
+            },
+            "runtimeBoundary": {
+              "id": "OperationalRuntimePresentationBoundary",
+              "version": "1.0.0",
+              "compatibility": "SEMVER",
+              "scope": "PRESENTATION_READ_BOUNDARY_ONLY",
+              "canonicalTruthOwner": "RuntimeAdapter"
+            },
+            "tabPolicyRevision": "operational-session-tabs-w4f-r1",
+            "tabs": [
+              {
+                "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-1",
+                "providerSessionOwner": "InternalSimulationAdapter",
+                "attachedAtSequence": 1,
+                "deviceId": "DEV-WEB-01",
+                "runId": "RUN-0042",
+                "epoch": 1,
+                "runtimeIdentity": {
+                  "source": "RuntimeAdapterReference",
+                  "providerId": "InternalSimulationAdapter",
+                  "runtimeSessionId": "sim-session-1",
+                  "sessionId": "sim-session-1",
+                  "runId": "RUN-0042",
+                  "deviceId": "DEV-WEB-01",
+                  "toolId": null,
+                  "deviceOrToolId": "DEV-WEB-01",
+                  "epoch": 1
+                },
+                "presentationState": {
+                  "state": "completed",
+                  "label": "Completed",
+                  "detail": "Completed device.shutdown in InternalSimulationAdapter.",
+                  "sequence": 2,
+                  "transitions": [
+                    {
+                      "sequence": 1,
+                      "state": "running",
+                      "detail": "Executing device.shutdown in InternalSimulationAdapter."
+                    },
+                    {
+                      "sequence": 2,
+                      "state": "completed",
+                      "detail": "Completed device.shutdown in InternalSimulationAdapter."
+                    }
+                  ]
+                }
+              },
+              {
+                "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+                "providerId": "InternalSimulationAdapter",
+                "runtimeSessionId": "sim-session-2",
+                "providerSessionOwner": "InternalSimulationAdapter",
+                "attachedAtSequence": 2,
+                "deviceId": "DEV-DB-01",
+                "runId": "RUN-0042",
+                "epoch": 1,
+                "runtimeIdentity": {
+                  "source": "RuntimeAdapterReference",
+                  "providerId": "InternalSimulationAdapter",
+                  "runtimeSessionId": "sim-session-2",
+                  "sessionId": "sim-session-2",
+                  "runId": "RUN-0042",
+                  "deviceId": "DEV-DB-01",
+                  "toolId": null,
+                  "deviceOrToolId": "DEV-DB-01",
+                  "epoch": 1
+                },
+                "presentationState": {
+                  "state": "idle",
+                  "label": "Ready",
+                  "detail": "Internal simulation ready.",
+                  "sequence": 0,
+                  "transitions": []
+                }
+              }
+            ],
+            "activePresentationId": "ops-tab::InternalSimulationAdapter::sim-session-2",
+            "chrome": {
+              "lifecycle": "open",
+              "placement": "floating",
+              "layout": "single",
+              "geometry": {
+                "x": 120,
+                "y": 140,
+                "width": 720,
+                "height": 420
+              }
+            },
+            "providerAttachments": [
+              {
+                "contract": {
+                  "id": "RuntimeAdapter",
+                  "version": "1.0.0",
+                  "compatibility": "SEMVER"
+                },
+                "id": "InternalSimulationAdapter",
+                "label": "Internal simulation",
+                "sessionOwner": "InternalSimulationAdapter",
+                "commandOwner": "InternalSimulationAdapter",
+                "inputLabel": "sim >",
+                "help": "Commands: help, show status, show topology, shutdown, no shutdown",
+                "capabilities": [
+                  "OPEN_TERMINAL",
+                  "runtime.input",
+                  "runtime.recorded"
+                ],
+                "connected": true,
+                "classification": "REAL_RUNTIME_PROVIDER",
+                "evidenceRole": "Runs canonical runtime provider"
+              }
+            ],
+            "lastTransition": {
+              "sequence": 6,
+              "action": "session.chrome.floating",
+              "owner": "OperationalSessionOwner",
+              "tabPolicyRevision": "operational-session-tabs-w4f-r1"
+            }
+          },
+          "context": "Runtime\nRuns context / سياق التشغيل\n×\nWeb Application\nRun RUN-0042 · RUNNING · Web Application: interface DOWN (simulation)\nRun\nRUN-0042\nLifecycle\nRUNNING\nLatest event sequence\n1\nLatest event\nWeb Application: interface DOWN (simulation)\nWeb Application\nDEV-WEB-01\nState\nDOWN\nCanonical owner: InternalSimulationAdapter + W03RunDomain.RecordedTopology\nRevision: selection:DEV-WEB-01|event:1|relations:1",
+          "legacyContextHidden": true,
+          "hostHidden": false,
+          "hostMode": "float",
+          "panels": 1,
+          "resizeEdges": [
+            "left",
+            "right",
+            "top",
+            "bottom",
+            "top-left",
+            "top-right",
+            "bottom-left",
+            "bottom-right"
+          ],
+          "activeTag": "BUTTON",
+          "activeObject": null,
+          "activeTab": "ops-tab::InternalSimulationAdapter::sim-session-2"
+        },
+        "rect": {
+          "x": 120,
+          "y": 140,
+          "width": 720,
+          "height": 420,
+          "left": 120,
+          "right": 840,
+          "top": 140,
+          "bottom": 560
+        }
+      }
+    },
+    {
+      "id": "browser.no-runtime-errors",
+      "status": "PASS",
+      "detail": {
+        "count": 0,
+        "events": []
+      }
+    }
+  ],
+  "status": "PASS",
+  "pass": 17,
+  "fail": 0,
+  "runtimeEventCount": 0
+}

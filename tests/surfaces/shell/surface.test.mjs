@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {createStrongWaveShellDestinationRegistry} from '../../../dist/surfaces/shell/surface.js';
+import {resolveGlobalShellRoute,canonicalizeGlobalShellRoute} from '../../../dist/foundation/global/shell/navigation.js';
+const registry=createStrongWaveShellDestinationRegistry();
+assert.equal(registry.owner,'GlobalShellDestinationRegistry');
+assert.equal(registry.has('today'),true);
+assert.equal(registry.has('rq'),true);
+assert.equal(resolveGlobalShellRoute('?surface=today',registry).surface,'today');
+assert.equal(resolveGlobalShellRoute('?surface=rq',registry).surface,'rq');
+const fallback=resolveGlobalShellRoute('?surface=unknown',registry);assert.equal(fallback.fallback,true);assert.equal(fallback.surface,'library');
+const canonical=canonicalizeGlobalShellRoute('?surface=unknown','http://localhost:4173/?surface=unknown',registry);assert.equal(canonical.required,true);assert.equal(canonical.route.surface,'library');
+console.log(JSON.stringify({surface:'shell',status:'PASS',cases:8,finalDefaultRegistryWiring:'CONTROLLER_REPLAY_REQUIRED'}));

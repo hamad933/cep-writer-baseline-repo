@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "kind": "W5_C_DONOR_RETIREMENT_TRUTH_VALIDATOR_PROOF",
+  "status": "PASS",
+  "sourceCanonicalTreeSha256": "e6922dc13968d1760419c15fe40d91346a3acc7152c58795547153a14a885a6d",
+  "requirements": {
+    "17": {
+      "status": "PASS",
+      "coverageComplete": true,
+      "classifiedExactlyOnce": true,
+      "unknownDisposition": []
+    },
+    "18": {
+      "status": "PASS",
+      "invalidRetireReady": [],
+      "hiddenContradictions": []
+    },
+    "19": {
+      "status": "PASS",
+      "incompleteNotKeep": []
+    }
+  },
+  "negativeFixtures": {
+    "hiddenTrueRetireReadyRejected": true,
+    "incompleteRetireReadyRejected": true,
+    "injectedInvalidRetireReadyMakesRequirement18Fail": true,
+    "status": "PASS"
+  },
+  "mandatoryChecks": [
+    {
+      "id": 1,
+      "title": "zero RETIRE_READY entries have hiddenDonorSemanticOwnerPathRemains !== false",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "id": 2,
+      "title": "every RETIRE_READY has non-empty replacement owner/path and executable proof",
+      "status": "PASS"
+    },
+    {
+      "id": 3,
+      "title": "every RETIRE_READY has real-consumer proof",
+      "status": "PASS"
+    },
+    {
+      "id": 4,
+      "title": "every RETIRE_READY has applicable browser/interaction evidence or explicit N/A reasons",
+      "status": "PASS"
+    },
+    {
+      "id": 5,
+      "title": "every RETIRE_READY satisfies central-change evidence where applicable",
+      "status": "PASS"
+    },
+    {
+      "id": 6,
+      "title": "every RETIRE_READY has visual/interaction preservation evidence",
+      "status": "PASS"
+    },
+    {
+      "id": 7,
+      "title": "every entry not fully satisfying retirement invariants is KEEP",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "id": 8,
+      "title": "all 46 donor candidate branches are classified exactly once",
+      "status": "PASS",
+      "detail": {
+        "entryCount": 46,
+        "uniqueIds": 46
+      }
+    },
+    {
+      "id": 9,
+      "title": "no unknown disposition exists",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "id": 10,
+      "title": "negative fixture RETIRE_READY + hidden owner true is rejected",
+      "status": "PASS"
+    },
+    {
+      "id": 11,
+      "title": "deliberate incomplete RETIRE_READY fixture is rejected",
+      "status": "PASS"
+    },
+    {
+      "id": 12,
+      "title": "Requirement 18 fails when an invalid RETIRE_READY is injected",
+      "status": "PASS"
+    }
+  ],
+  "summary": {
+    "entries": 46,
+    "retireReady": 1,
+    "keep": 45,
+    "unknownDisposition": 0
+  },
+  "retireReadyEvaluations": [
+    {
+      "id": "D12",
+      "disposition": "RETIRE_READY",
+      "evaluation": {
+        "pass": true,
+        "checks": {
+          "replacementOwnerPath": true,
+          "replacementExecutable": true,
+          "realConsumerProof": true,
+          "interactionCoverage": true,
+          "centralChange": true,
+          "visualPreservation": true,
+          "hiddenOwnerFalse": true
+        },
+        "interactionChannels": [
+          {
+            "channel": "pointer",
+            "pass": true,
+            "reason": "EVIDENCE_PASS"
+          },
+          {
+            "channel": "keyboard",
+            "pass": true,
+            "reason": "EVIDENCE_PASS"
+          },
+          {
+            "channel": "accessibility",
+            "pass": true,
+            "reason": "N/A: canonical move-target/mutation policy has no independent ARIA surface; accessibility presentation remains with accepted renderer/focus owners and is not authored by this donor branch."
+          },
+          {
+            "channel": "browser",
+            "pass": true,
+            "reason": "EVIDENCE_PASS"
+          }
+        ]
+      }
+    }
+  ]
+}

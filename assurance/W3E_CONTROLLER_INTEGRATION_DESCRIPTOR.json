@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "mission": "W3-E-UI-SCALE-POLICY",
+  "owner": "UIScalePolicyOwner",
+  "status": "READY_FOR_CONTROLLER_INTEGRATION_REVIEW",
+  "writerIntegratedSharedDOM": false,
+  "writerIntegratedSharedCSS": false,
+  "canonicalModules": [
+    "stack/native-typescript/foundation/global/preferences/ui-scale.ts",
+    "stack/native-typescript/foundation/global/tokens/scale.css"
+  ],
+  "preferenceAuthority": "ScopedPreferencesOwner",
+  "paneAuthority": "WorkspacePaneLayoutOwner",
+  "controllerSeam": {
+    "value": "resolve/set preference key scale through ScopedPreferencesOwner",
+    "presentation": "apply UIScalePolicyOwner projected --cep-ui-* variables to application-chrome host only",
+    "mustNotBindTo": [
+      "document zoom",
+      "Spatial camera zoom",
+      "density",
+      "browser zoom",
+      "responsive breakpoint ownership",
+      "domain state"
+    ]
+  },
+  "genuineConsumersProved": [
+    "library-structured",
+    "visualize-spatial"
+  ]
+}

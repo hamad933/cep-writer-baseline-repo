@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "project": "CEP",
+  "slice": "VS-03",
+  "status": "PASS",
+  "consumer": "library",
+  "realBoot": true,
+  "bootPath": [
+    "stack/native-typescript/main.ts: createStructuredConsumerAdapter(library)",
+    "extension.structuredAdapter = real Library StructuredDocumentDomainAdapter",
+    "mountAcceptedRuntime(...)",
+    "accepted-runtime MUTATION = extension.structuredAdapter.mutationKernel",
+    "UI/menu/drag/keyboard compatibility event",
+    "applyStructuredMutation(...)",
+    "StructuredMutationKernel.apply/validateMoveTarget",
+    "next tree -> donor state projection",
+    "donor pushHistory/render/focus retained outside VS-03"
+  ],
+  "runtimeReceipt": {
+    "consumer": "library",
+    "mutationOwner": "StructuredMutationKernel",
+    "mutationPolicyRevision": "structured-mutation-vs03-r1",
+    "treeOwner": "StructuredTreeKernel",
+    "sharedWithAdapter": true,
+    "adapterOwner": "StructuredMutationKernel"
+  },
+  "goldenScenarioOwners": {
+    "G05": "StructuredMutationKernel",
+    "G06": "StructuredMutationKernel",
+    "G07": "StructuredMutationKernel",
+    "G08": "StructuredMutationKernel"
+  },
+  "noParallelOwnerEvidence": {
+    "acceptedRuntimeDirectSpliceCount": 0,
+    "duplicateHeuristic": "PASS",
+    "compositionSecondOwnerGuardTest": "structured.mutation-second-owner-rejected = PASS"
+  },
+  "scopeBoundary": {
+    "retainedInDonor": [
+      "history/undo/redo",
+      "caret extraction/placement",
+      "focus restoration",
+      "drag geometry/preview",
+      "rendering",
+      "selection/clipboard/keyboard semantic cutovers later"
+    ],
+    "notStarted": [
+      "VS-04",
+      "VS-05",
+      "VS-06",
+      "VS-07",
+      "VS-09",
+      "VS-11"
+    ]
+  }
+}

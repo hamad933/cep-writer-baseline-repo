@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "kind": "W6_C_DUPLICATE_OWNER_AND_BOUNDARY_NEGATIVE_SCAN",
+  "classification": "W6_C_LANE_EXECUTION_EVIDENCE_NOT_CONTROLLER_ACCEPTANCE",
+  "status": "PASS",
+  "sourceCanonicalTreeSha256": "fcca03a3ef529e5eda8b3ddddcc1f093ad7054336430d3c08224fac55328c753",
+  "canonicalSourceFileCount": 113,
+  "checkedPaths": [
+    "stack/native-typescript/adapters/structured-note-content.ts",
+    "stack/native-typescript/adapters/structured-note-content-compatibility.ts",
+    "stack/native-typescript/w6-c-structured-note-content-tests.ts",
+    "stack/native-typescript/w6-c-structured-note-content-browser.ts"
+  ],
+  "checks": [
+    {
+      "id": "exactly-one-final-structured-note-content-owner-declaration",
+      "pass": true,
+      "evidence": {
+        "declarationCount": 1
+      }
+    },
+    {
+      "id": "final-adapter-instantiates-accepted-structured-document-adapter",
+      "pass": true
+    },
+    {
+      "id": "no-parallel-structured-semantic-class-declarations",
+      "pass": true
+    },
+    {
+      "id": "note-binding-canonical-owner-validation",
+      "pass": true
+    },
+    {
+      "id": "sticky-window-canonical-owner-validation",
+      "pass": true
+    },
+    {
+      "id": "parallel-structured-engine-injection-rejected",
+      "pass": true
+    },
+    {
+      "id": "persistence-ceiling-explicit",
+      "pass": true
+    },
+    {
+      "id": "presentation-source-document-substitution-guards",
+      "pass": true
+    },
+    {
+      "id": "w5-compatibility-remains-content-only",
+      "pass": true
+    },
+    {
+      "id": "no-storage-or-source-deletion-implementation",
+      "pass": true
+    }
+  ]
+}
