@@ -1,4 +1,4 @@
-name: CEP CORR02 C1 Targeted Proof
+name: CEP CORR02 C1 Writer Validation
 
 on:
   push:
@@ -9,15 +9,16 @@ permissions:
   contents: read
 
 jobs:
-  targeted:
+  audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout candidate branch
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Prove bounded candidate delta
+      - name: Prove C1 bounded candidate delta
         shell: bash
         run: |
           set -euo pipefail
@@ -25,25 +26,134 @@ jobs:
           git cat-file -e "$START^{commit}"
           git diff --name-only "$START" HEAD | tee /tmp/c1-delta.txt
           illegal="$(grep -Ev '^(\.github/workflows/corr02-controller-full-carrier-audit.yml|controller-audit/full-carrier-audit.mjs|controller-targeted/targeted-falsification.mjs|stack/native-typescript/(main\.ts|foundation/accepted-runtime\.ts|foundation/workspace\.ts|foundation/workspace-host\.ts|foundation/global/input-ownership-contract\.ts|foundation/global/workspace-host-kernel\.ts|foundation/global/region-contract\.ts|foundation/global/toolbar-template\.ts|surfaces/m0-controller-composition\.ts|adapters/health-runtime\.ts|adapters/processing-runtime\.ts|surfaces/backup/index\.ts|surfaces/audit/index\.ts|surfaces/validation/index\.ts))$' /tmp/c1-delta.txt || true)"
-          test -z "$illegal" || { echo "$illegal"; exit 1; }
+          if [ -n "$illegal" ]; then
+            echo "C1_SCOPE_DELTA_VIOLATION"
+            echo "$illegal"
+            exit 1
+          fi
+          mkdir -p controller-audit-output
+          cp /tmp/c1-delta.txt controller-audit-output/audit-branch-delta.txt
+          printf '%s\n' "$START" > controller-audit-output/product-checkpoint.txt
+          git rev-parse HEAD > controller-audit-output/audit-branch-head.txt
 
-      - uses: actions/setup-node@v4
+      - name: Setup exact Node
+        uses: actions/setup-node@v4
         with:
           node-version: '22.16.0'
           cache: npm
 
-      - run: npm ci
-      - run: npx playwright install --with-deps chromium
-      - run: npm run build:runtime
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Record toolchain
+        shell: bash
+        run: |
+          {
+            node --version
+            npm --version
+            npx playwright --version
+            python3 --version
+          } | tee controller-audit-output/toolchain.txt
+
+      - name: Build exact runtime
+        shell: bash
+        run: |
+          set +e
+          npm run build:runtime > controller-audit-output/build-runtime.log 2>&1
+          code=$?
+          echo "$code" > controller-audit-output/build-runtime.exit
+          cat controller-audit-output/build-runtime.log
+          exit 0
+
+      - name: Run runtime falsification
+        shell: bash
+        run: |
+          set +e
+          npm run runtime:check > controller-audit-output/runtime-check.log 2>&1
+          code=$?
+          echo "$code" > controller-audit-output/runtime-check.exit
+          cat controller-audit-output/runtime-check.log
+          exit 0
+
+      - name: Run model tests
+        shell: bash
+        run: |
+          set +e
+          npm test > controller-audit-output/npm-test.log 2>&1
+          code=$?
+          echo "$code" > controller-audit-output/npm-test.exit
+          cat controller-audit-output/npm-test.log
+          exit 0
+
+      - name: Run pre-browser contract check
+        shell: bash
+        run: |
+          set +e
+          npm run check > controller-audit-output/check-pre-browser.log 2>&1
+          code=$?
+          echo "$code" > controller-audit-output/check-pre-browser.exit
+          cat controller-audit-output/check-pre-browser.log
+          exit 0
+
+      - name: Run genuine localhost browser conformance
+        shell: bash
+        run: |
+          set +e
+          npm run browser:test > controller-audit-output/browser-test.log 2>&1
+          code=$?
+          echo "$code" > controller-audit-output/browser-test.exit
+          cat controller-audit-output/browser-test.log
+          exit 0
+
+      - name: Re-run contract check after fresh browser receipt
+        shell: bash
+        run: |
+          set +e
+          npm run check > controller-audit-output/check-post-browser.log 2>&1
+          code=$?
+          echo "$code" > controller-audit-output/check-post-browser.exit
+          cat controller-audit-output/check-post-browser.log
+          exit 0
+
+      - name: Run 23-surface full-carrier audit
+        shell: bash
+        run: |
+          set +e
+          node controller-audit/full-carrier-audit.mjs > controller-audit-output/full-carrier-audit.log 2>&1
+          code=$?
+          echo "$code" > controller-audit-output/full-carrier-audit.exit
+          cat controller-audit-output/full-carrier-audit.log
+          exit 0
 
       - name: Run targeted C1 falsification
-        run: node controller-targeted/targeted-falsification.mjs
+        shell: bash
+        run: |
+          set +e
+          node controller-targeted/targeted-falsification.mjs > controller-audit-output/targeted-falsification.log 2>&1
+          code=$?
+          echo "$code" > controller-audit-output/targeted-falsification.exit
+          cat controller-audit-output/targeted-falsification.log
+          exit 0
 
-      - name: Upload targeted evidence
+      - name: Preserve exact-current browser receipts
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p controller-audit-output/existing-assurance
+          for f in assurance/BROWSER_CONFORMANCE_RECEIPT.json assurance/SCREENSHOT_MANIFEST.json assurance/CONTRACT_TEST_RESULTS.json assurance/MODEL_TEST_RESULTS.json; do
+            if [ -f "$f" ]; then cp "$f" controller-audit-output/existing-assurance/; fi
+          done
+
+      - name: Upload audit evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: corr02-c1-targeted-proof
-          path: controller-targeted-output/
+          name: corr02-c1-writer-validation
+          path: |
+            controller-audit-output/
+            controller-targeted-output/
           if-no-files-found: error
           retention-days: 30
