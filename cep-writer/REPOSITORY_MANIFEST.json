@@ -1,13 +1,15 @@
 {
-  "schemaVersion": 7,
-  "classification": "CORR02_C1_C0_PACKET_BINDING_RECEIPT__CANDIDATE_ONLY",
-  "productParentCommit": "da007840363d92cdadd9f7c5180449a49e6f1d19",
-  "productCanonicalSourceSha256": "777d8b24032891b00bf3b61858a3be015b0b77fea710e1d5bd446d182577bb51",
+  "schemaVersion": 8,
+  "classification": "CORR02_C2_CAPSULE_V1_1_PACKET_BINDING_RECEIPT__CANDIDATE_ONLY",
+  "productParentCommit": "ac888c7e622fdefdc4f958771b21db485e33f9fc",
+  "productCanonicalSourceSha256": "5885c32a71c14b1b982ec8dcdadba4fafde40c78b2d9287f367f1ca28373f91d",
   "productCanonicalSourceFiles": 273,
-  "candidateBranch": "writer/presentation-corr02-google-ai-studio",
+  "candidateBranch": "capsule/corr02-c2-w04-truth",
   "requiredInputManifest": "cep-writer/WRITER_INPUT_MANIFEST.json",
-  "requiredInputCount": 78,
+  "requiredInputCount": 89,
   "verificationCommand": "python3 cep-writer/tools/verify_repo.py",
   "noRequiredLiveDriveFetch": true,
-  "note": "Full historical normalization manifest is lineage. C0 verification is mission-bound required-input hashing plus exact Product source-tree identity."
+  "note": "C2 starts only from accepted C1 parent. Product parent identity is separate from generated Capsule transport HEAD/tree. Writer starts from downloaded Capsule, not network clone.",
+  "capsuleBinding": "cep-writer/CAPSULE_BINDING.json",
+  "visualBootstrapBinding": "cep-writer/CAPSULE_VISUAL_BOOTSTRAP.json"
 }
