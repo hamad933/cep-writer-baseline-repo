@@ -1,22 +1,7 @@
-# CEP Writer Authority Baseline
+# CEP Writer Authority Baseline — B3-R
 
-Classification: `WRITER_EXECUTION_SNAPSHOT__NOT_LIVE_CONTROLLER_AUTHORITY`.
+Authority order for this capsule: latest explicit Owner decision → live CURRENT_STATE captured by Controller at preparation → exact Controller-accepted C3 successor/evidence → live Owner decisions/current locks → current CORR02 mission/profile/intake → governed oracles/references → classified historical evidence.
 
-This repository carries the Product and all Writer-readable execution inputs needed without live Drive lookup. Latest Owner decision and Drive `CURRENT_STATE.md` remain live Controller authority; the Controller resolves them before launch and refreshes the Writer snapshot when material truth changes. Stale packet = STOP, never guess.
+Exact Product parent for B3-R is `fec137df4b06111db160cdcbd25d7c725dfec286`, Product source `e3951754ae79016603456b14dc71856671428e0d0811ec119388fbd79093890c / 273`.
 
-Architecture:
-`GLOBAL FOUNDATION -> FAMILY ENGINE -> REUSABLE MECHANICS/PRESENTATION/HOSTS -> THIN DOMAIN ADAPTER -> SURFACE COMPOSITION`.
-
-Keep four truths separate:
-- Content;
-- Presentation;
-- Behavior / Interaction / Functionality;
-- Domain / Data / Provider truth.
-
-Shared Presentation is not shared semantics. Surface/domain owners retain purpose, commands, labels, workflow, lifecycle, data/provider truth and effects. Library is not a universal semantic/action template; Learn is the maximum compatible Structured/Library consumer while retaining Learning semantics.
-
-Visual-reference binaries govern Presentation only and are distinct from evidence screenshots. Writers must inspect the actual applicable reference image together with its SurfaceProfile and domain/oracle truth before material Presentation mutation.
-
-The root `authority/` directory is a mixed traceability/build-test corpus. It is not the default Writer reading set. Use the curated Writer decision snapshot and exact mission-directed root-authority files only.
-
-Stack expansion is locked while final stack freeze remains open. Writer results are always `CANDIDATE_ONLY` pending independent Controller review.
+The capsule transport commit is not Product parent authority. The Writer may mutate only the B3-R allowlist and cannot self-promote. RQ/Visualize reference binaries are Presentation inputs with their exact ceilings; they do not grant provider/canonical truth. Balanced6/local acceptance data remains non-production unless an explicit provider contract says otherwise.

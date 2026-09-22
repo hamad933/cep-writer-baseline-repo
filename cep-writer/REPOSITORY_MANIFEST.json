@@ -1,15 +1,10 @@
 {
-  "schemaVersion": 9,
-  "classification": "CORR02_C3_CAPSULE_V1_1_PACKET_BINDING_RECEIPT__CANDIDATE_ONLY",
-  "productParentCommit": "1acf9d691b27b1a271f149139e055110971b1fa0",
-  "productCanonicalSourceSha256": "760578213b3f3e352dd2b08dd05fab183c3ffad9625844a1d0ea82e30cc9e454",
-  "productCanonicalSourceFiles": 273,
-  "candidateBranch": "capsule/corr02-c3-today-truth",
-  "requiredInputManifest": "cep-writer/WRITER_INPUT_MANIFEST.json",
-  "requiredInputCount": 95,
-  "verificationCommand": "python3 cep-writer/tools/verify_repo.py",
-  "noRequiredLiveDriveFetch": true,
-  "note": "C3 starts only from accepted C2 Controller Correction01 parent. Writer starts from downloaded Capsule, not network clone.",
-  "capsuleBinding": "cep-writer/CAPSULE_BINDING.json",
-  "visualBootstrapBinding": "cep-writer/CAPSULE_VISUAL_BOOTSTRAP.json"
+  "schemaVersion": 4,
+  "classification": "B3R_WRITER_REPOSITORY_PACKET__TRANSPORT_ONLY",
+  "missionId": "CORR02_B3R_RQ_VISUALIZE_TRUTH_CONVERGENCE",
+  "productParentCommit": "fec137df4b06111db160cdcbd25d7c725dfec286",
+  "productSourceSha256": "e3951754ae79016603456b14dc71856671428e0d0811ec119388fbd79093890c",
+  "productSourceFiles": 273,
+  "requiredInputs": 100,
+  "noRequiredLiveDriveFetch": true
 }

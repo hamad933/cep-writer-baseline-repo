@@ -4408,3 +4408,41 @@ Exact accepted C2 successor:
 Accepted closure: `F-022..F-026`, `F-038`, `F-043`, and the W04 domain-semantic half of `F-042`. Corrected exact-source proof: build PASS, `npm test 210/210 PASS`, runtime check PASS, C2 falsification `9/9 PASS`, browser `60/60 PASS` / `11` exact-source screenshots; the 11 screenshots are byte-identical to the Controller-inspected Writer C2 visual set. Root three stale browser/evidence-lineage check rows remain explicit non-Product evidence debt and are not relabeled PASS.
 
 C3 is now the next legal mutating lane and MUST derive from exact accepted C2 parent `1acf9d691b27b1a271f149139e055110971b1fa0` through a Controller-prepared Capsule v1.1. C3 owns `F-007..F-011`, `F-044`, plus Today-specific region/data/continuation truth. `B3-R` remains HOLD until C3/applicable prerequisites converge. No main merge/release/deployment/stack freeze is authorized.
+
+
+### 17.12 C3 Capsule v1.1 exact launch binding — 2026-09-22
+
+C3 launch prerequisite is satisfied. The only authorized `CHATGPT_WRITER` inbound workspace for `CORR02_C3_TODAY_PROVIDER_EPISTEMIC_CONTINUATION_TRUTH` is the Controller-verified Capsule v1.1 derived from accepted C2 parent `1acf9d691b27b1a271f149139e055110971b1fa0` / Product source `760578213b3f3e352dd2b08dd05fab183c3ffad9625844a1d0ea82e30cc9e454` (`273` files).
+
+Exact capsule identity:
+- local Controller transport branch `capsule/corr02-c3-today-truth`;
+- transport HEAD `b30cddd1c7d296416465681ba36e7c289c32ff72`;
+- transport tree `4a85854552262474cf0e65557dfb7b4adac5de07`;
+- zero Product-path delta from accepted C2;
+- final ZIP `CEP_WRITER_WORKSPACE_CAPSULE_C3_TODAY_b30cddd1.zip`;
+- bytes `87,219,690`;
+- SHA-256 `9e0e7cdee4c7176e0e033e69452a60f32a055ba45fb76094dd19595f029bf8cf`;
+- durable Drive file `1Nu1k6W9RTK2Ds4mktgGw9a53IhWDtryE` under folder `1PhPd17HpNKvDvlpNYIGoXOlar6qABYmi`.
+
+Controller final checks are PASS: `95/95` packaged Writer inputs, no required live Drive fetch, exact Product identity, Visual Bootstrap `READY`, tracked-source guard, ZIP CRC, post-Drive-download hash/bytes, standalone verifier, git-bundle verification, clean materialization, exact transport HEAD/tree, clean worktree and Writer input verifier.
+
+Visual Bootstrap contains 4 exact-parent Today screenshots and one raw receipt. Because the current environment blocks localhost navigation and offline npm cache lacks `@xterm/xterm`, Controller used the OD-072 local recovery path instead of managed-runner overuse: exact source -> `extract_donor.py + build-runtime.mjs` -> Python Playwright/system Chromium -> offline ESM import-map rendering. Classify these bootstrap captures `NAVIGATION_INDEPENDENT_EXACT_CANDIDATE_BROWSER_RENDER__NOT_GENUINE_ROUTE`; they do not prove HTTP route/Back/Forward/network integration and are bootstrap acceleration only. The material screenshots and governed Today reference were opened and inspected.
+
+C3 owns only `F-007..F-011`, `F-044` plus Today-specific provider/data/continuation truth. F-006 is root-context evidence for the currently bound acceptance provider; it does not authorize a persistence, SQLite or provider-architecture rewrite. Preserve C1 shared carrier/region/context owners and accepted C2 W04 truth. Do not touch B3-R/RQ/Visualize, W03/W05, persistence, runtime, terminal or dependencies.
+
+Required Writer truth objective: normal Today must not present `LOCAL_ACCEPTANCE_PROJECTION_ONLY` assertions as current provider truth; Resume must not become available from fixture `exists/readable/RESOLVABLE` alone without an exact current target-resolution boundary; recommendation why/provenance must remain source/version-bound; provider stale/unavailable/error must remain source-specific with `observedAt`; failure must preserve last successful projection when the profile requires it; state vocabulary must be reconciled to current authority; Today remains orchestration/projection and must not fabricate progress, Mastery, access decisions or canonical writes.
+
+No connector-driven per-file repository reconstruction is allowed. Writer flow: `verify once -> materialize once -> inspect prebuilt Today baseline/reference mapping -> compare -> diagnose -> narrow correction -> fresh local recapture -> compare -> falsify -> bounded handoff`. Intermediate visual evidence remains local under OD-073. Managed runner is corroboration only when a genuinely missing capability requires it.
+
+Stop exactly at `C3_CANDIDATE_ONLY__CONTROLLER_AUDIT_REQUIRED`. This launch binding creates no Product acceptance, B3-R launch, main merge, release, deployment, provider truth or stack freeze.
+
+
+### 17.13 C3 Controller acceptance / B3-R prerequisite rebind — 2026-09-22
+
+C3 Writer delivery was independently reconstructed from exact transport parent `b30cddd1c7d296416465681ba36e7c289c32ff72`. Delivered patch reproduced Writer tree `c06b9058cc8870a9035aa238556129baed3da7d7` and Product source `d5476a4a2bb70059ca54b71c081043b65e4dc719b53d7a166f52938dc64ecfea / 273`, but the handoff did not contain a commit object/git bundle and direct Controller falsification found one remaining F-011 Product defect: `STALE` without `observedAt` was still admitted.
+
+Under `OD-20260916-044`, Controller Correction01 changed one Product line in the existing Today domain owner plus one falsification test. Exact accepted successor is HEAD `fec137df4b06111db160cdcbd25d7c725dfec286`, tree `5e38492adc4dce89972d59a7b059430990e83bc4`, Product source `e3951754ae79016603456b14dc71856671428e0d0811ec119388fbd79093890c / 273`. Final evidence: build PASS, `npm test 210/210 PASS`, runtime PASS, Balanced6 `32/32 PASS`, C3 falsification `18/18 PASS`, source-bound Today visual/state inspection PASS. Three inherited browser/evidence-lineage check rows remain explicit non-Product debt. Accepted package Drive `1gqTgEajskWLnnyKHo4aV_hW4zfqdCVhB`; Controller audit Drive `1vnl8aBchUh6CbEwJQRGXln1rampZELzR`.
+
+Accepted closure: `F-007`, `F-008`, `F-009`, `F-010`, `F-044`; `F-011` is `CLOSED_AFTER_CONTROLLER_CORRECTION01`; F-006 remains root-context evidence only. C3 is `CONTROLLER_ACCEPTED_AFTER_BOUNDED_CORRECTION01`.
+
+B3-R sequencing is now unblocked. Section 0.8 Owner authorization for RQ+Visualize remains operative under `OD-20260921-071`, while section 17.3 controls the newer execution sequence and scope. With C1/C2/C3 accepted, the applicable prerequisites for `B3-R` are satisfied. Next action is Controller preparation and exact verification of a `SELF_CONTAINED_WRITER_WORKSPACE_CAPSULE_V1_1` derived from accepted C3 HEAD `fec137df...`; no B3-R Product mutation may start from the old Google-AI-Studio continuation assumptions or from a sibling ZIP. B3-R owns `F-027`, `F-034`, `F-035`, `F-036` plus bounded RQ/Visualize truth corrections. No main merge/release/deployment/stack freeze is authorized.

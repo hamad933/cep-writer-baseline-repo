@@ -1,33 +1,32 @@
 {
-  "schemaVersion": 8,
-  "classification": "CORR02_C3_MISSION_BINDING__CAPSULE_V1_1__CANDIDATE_ONLY",
+  "schemaVersion": 9,
+  "classification": "CORR02_B3R_MISSION_BINDING__CAPSULE_V1_1__CANDIDATE_ONLY",
   "repository": "hamad933/cep-writer-baseline-repo",
-  "acceptedProductParentCommit": "1acf9d691b27b1a271f149139e055110971b1fa0",
-  "acceptedProductSourceSha256": "760578213b3f3e352dd2b08dd05fab183c3ffad9625844a1d0ea82e30cc9e454",
+  "acceptedProductParentCommit": "fec137df4b06111db160cdcbd25d7c725dfec286",
+  "acceptedProductSourceSha256": "e3951754ae79016603456b14dc71856671428e0d0811ec119388fbd79093890c",
   "acceptedProductSourceFiles": 273,
-  "candidateBranch": "capsule/corr02-c3-today-truth",
+  "candidateBranch": "capsule/corr02-b3r-rq-visualize",
   "writerClass": "CHATGPT_WRITER",
   "executionMode": "CAPSULE_V1_1__LOCAL_FIRST__MANAGED_CORROBORATION_ONLY",
-  "activeMutationBatch": "C3_TODAY_PROVIDER_EPISTEMIC_CONTINUATION_TRUTH",
+  "activeMutationBatch": "B3R_RQ_VISUALIZE_TRUTH_CONVERGENCE",
   "findings": [
-    "F-007",
-    "F-008",
-    "F-009",
-    "F-010",
-    "F-011",
-    "F-044",
-    "F-006_ROOT_CONTEXT"
+    "F-027",
+    "F-034",
+    "F-035",
+    "F-036"
   ],
   "surfaces": [
-    "today"
+    "rq",
+    "visualize"
   ],
   "noRequiredLiveDriveFetch": true,
   "c1MechanicsStatus": "CONTROLLER_ACCEPTED__REGRESSION_ONLY",
   "c2TruthStatus": "CONTROLLER_ACCEPTED_AFTER_CORR01__REGRESSION_ONLY",
+  "c3TruthStatus": "CONTROLLER_ACCEPTED_AFTER_CORR01__REGRESSION_ONLY",
   "downstreamHeld": [
-    "B3_R_RQ_VISUALIZE",
     "LATER_W03_DOMAIN",
+    "REMAINING_CORR02_BATCHES",
     "B9_INTEGRATED"
   ],
-  "stopGate": "C3_CANDIDATE_ONLY__CONTROLLER_AUDIT_REQUIRED"
+  "stopGate": "B3R_CANDIDATE_ONLY__CONTROLLER_AUDIT_REQUIRED"
 }

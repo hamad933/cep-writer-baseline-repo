@@ -352,3 +352,14 @@ Final Controller disposition: `F-022 CLOSED`, `F-023 CLOSED`, `F-024 CLOSED`, `F
 Corrected evidence: build PASS; `npm test 210/210 PASS`; runtime PASS; C2 falsification `9/9 PASS`; browser `60/60 PASS` / `11` exact-source screenshots; all 11 images byte-identical to the accepted C2 visual set. Three root stale browser/evidence-lineage check failures and legacy pre-C2 W04 tests remain explicit harness/evidence debt, not Product blockers.
 
 **Disposition:** `C2_CONTROLLER_ACCEPTED_AFTER_BOUNDED_CORRECTION01__C3_PARENT_ELIGIBLE__NO_MAIN_MERGE_RELEASE`.
+
+
+## C3 Controller closure — 2026-09-22
+
+Writer C3 tree/source were independently reconstructed from exact capsule transport parent and scope-verified, but the Writer result was **not accepted as delivered**. Controller negative falsification found that `TodayProjectionDomainAdapter` still accepted provider state `STALE` when `observedAt` was absent, violating F-011's governed per-provider stale provenance requirement.
+
+Bounded Controller Correction01 under `OD-20260916-044` added the missing existing-owner guard and one falsification case only. Exact accepted identity: HEAD `fec137df4b06111db160cdcbd25d7c725dfec286`; tree `5e38492adc4dce89972d59a7b059430990e83bc4`; Product source `e3951754ae79016603456b14dc71856671428e0d0811ec119388fbd79093890c / 273`; package Drive `1gqTgEajskWLnnyKHo4aV_hW4zfqdCVhB`; Controller audit Drive `1vnl8aBchUh6CbEwJQRGXln1rampZELzR`.
+
+Final Controller disposition: `F-007 CLOSED`, `F-008 CLOSED`, `F-009 CLOSED`, `F-010 CLOSED`, `F-011 CLOSED_AFTER_CONTROLLER_CORRECTION01`, `F-044 CLOSED`; F-006 remains root-context only. Corrected evidence: build PASS; model `210/210 PASS`; runtime PASS; Balanced6 `32/32 PASS`; C3 falsification `18/18 PASS`; exact-source Today visual/state evidence inspected at both governed viewport families. The same three root browser/evidence-lineage check rows remain stale non-Product debt.
+
+**Disposition:** `C3_CONTROLLER_ACCEPTED_AFTER_BOUNDED_CORRECTION01__B3R_PREREQUISITES_SATISFIED__CAPSULE_PREPARATION_NEXT__NO_MAIN_MERGE_RELEASE`.

@@ -1,3 +1,14 @@
-# CORR02 C3 Writer Acceptance Gates
+# B3-R Acceptance Gates — Writer-side candidate only
 
-C3 handoff requires exact accepted C2 parent/source binding; only Today provider/epistemic/continuation paths; no normal Product binding to LOCAL_ACCEPTANCE_PROJECTION_ONLY truth; truthful provider-unbound/stale/unavailable/error states; exact target-resolution gating before Resume; no Today progress/Mastery/access writes; exact recommendation source/version/rationale gating; last-success retention on provider failure; source-specific observedAt/state visibility; current Today profile vocabulary honored; accepted C1 region/carrier mechanics preserved; accepted C2 W04 truth untouched; no dependency/schema/persistence/runtime architecture drift; focused C3 falsification plus npm test/build/runtime; fresh Today screenshots at 1440×1000 and 1024×900 with material images inspected; candidate only/no self-promotion.
+- Exact accepted C3 parent/source verified.
+- Exact scope diff: RQ/Visualize plus the specific F-036 harness only.
+- RQ non-production corpus cannot masquerade as current canonical provider truth.
+- Visualize local acceptance projection cannot masquerade as canonical.
+- Read-only vs editable provider/profile mismatch is resolved truthfully without fabricated canonical mutation.
+- F-036 harness tests current availability truth and separately authorized editing truth.
+- One shared Spatial engine/four view adapters preserved; no duplicate owner.
+- Representation/canonical separation preserved.
+- Build/model/runtime/browser/check results classified.
+- Both viewport families and material view states freshly inspected after mutation.
+- No dependency/persistence/runtime/governance/main/release drift.
+- Final handoff remains `CANDIDATE_ONLY`; Controller acceptance required.

@@ -1,10 +1,10 @@
 {
-  "schemaVersion": 6,
-  "classification": "CORR02_C3_CONTROLLER_BOUND_VISUAL_BOOTSTRAP__LOCAL_OFFLINE_EXACT_SOURCE_BUILD",
+  "schemaVersion": 7,
+  "classification": "CORR02_B3R_CONTROLLER_BOUND_VISUAL_BOOTSTRAP__LOCAL_OFFLINE_EXACT_SOURCE_BUILD",
   "enabled": true,
   "required": true,
   "allowWriterLocalRecapture": true,
-  "expectedProductParentCommit": "1acf9d691b27b1a271f149139e055110971b1fa0",
+  "expectedProductParentCommit": "fec137df4b06111db160cdcbd25d7c725dfec286",
   "minimumScreenshotCount": 4,
   "viewports": [
     {
@@ -18,11 +18,17 @@
   ],
   "states": [
     {
-      "surface": "today",
+      "surface": "rq",
       "states": [
         "default",
-        "right-revealed",
-        "recommendation-visible"
+        "right-revealed"
+      ]
+    },
+    {
+      "surface": "visualize",
+      "states": [
+        "tree-default",
+        "right-revealed"
       ]
     }
   ],
@@ -34,7 +40,7 @@
   },
   "setupCommands": [
     {
-      "id": "c3-verify-writer-inputs",
+      "id": "b3r-verify-writer-inputs",
       "cwd": ".",
       "argv": [
         "python3",
@@ -42,7 +48,7 @@
       ]
     },
     {
-      "id": "c3-extract-donor",
+      "id": "b3r-extract-donor",
       "cwd": ".",
       "argv": [
         "python3",
@@ -50,7 +56,7 @@
       ]
     },
     {
-      "id": "c3-build-runtime-no-external-deps",
+      "id": "b3r-build-runtime",
       "cwd": ".",
       "argv": [
         "node",
@@ -60,15 +66,15 @@
   ],
   "captureCommands": [
     {
-      "id": "c3-today-current-parent-baseline",
+      "id": "b3r-rq-visualize-current-parent-baseline",
       "cwd": ".",
       "argv": [
         "python3",
-        "tools/c3-capsule/capture_today_baseline.py"
+        "tools/b3r-rq-visualize/capture_b3r_parent.py"
       ]
     },
     {
-      "id": "c3-restore-generated-dist",
+      "id": "b3r-restore-generated-dist",
       "cwd": ".",
       "argv": [
         "git",
@@ -80,30 +86,58 @@
     }
   ],
   "baselineGlobs": [
-    ".capsule-c3-output/screenshots/*.png"
+    ".capsule-b3r-output/screenshots/*.png"
   ],
   "receiptGlobs": [
-    ".capsule-c3-output/*.json"
+    ".capsule-b3r-output/*.json"
   ],
   "referenceBindings": [
     {
-      "surface": "today",
-      "reference": "cep-writer/references/visual/00_TODAY/CEP_TODAY_MAIN_ORCHESTRATION_REFERENCE.png",
-      "role": "OWNER_CONFIRMED_FINAL_PRESENTATION_REFERENCE__NO_PROVIDER_TRUTH"
+      "surface": "rq",
+      "reference": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/04_RESEARCH_AND_QUALITY/image-gen-1(20260813-194728).png",
+      "role": "REVIEWED_FINAL_CANDIDATE__BOUNDED_PRESENTATION_INPUT_ONLY"
+    },
+    {
+      "surface": "visualize-tree",
+      "reference": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/03_VISUALIZE/CEP_VIS_001_VISUALIZE_TREE_CORRECTED_REFERENCE_v2.png",
+      "role": "OWNER_CONFIRMED_FINAL_REFERENCE__PRESENTATION_ONLY"
+    },
+    {
+      "surface": "visualize-path",
+      "reference": "cep-writer/references/visual/90_SUPPORTING_COMPONENT_REFERENCES/CEP_VISUALIZE_PATH_VIEW_COMPONENT_REFERENCE.png",
+      "role": "SUPPORTING_COMPONENT_REFERENCE"
+    },
+    {
+      "surface": "visualize-graph",
+      "reference": "cep-writer/references/visual/90_SUPPORTING_COMPONENT_REFERENCES/CEP_VISUALIZE_FOCUSED_GRAPH_RELATIONSHIP_COMPONENT_REFERENCE.png",
+      "role": "SUPPORTING_COMPONENT_REFERENCE"
+    },
+    {
+      "surface": "visualize-canvas",
+      "reference": "cep-writer/references/visual/90_SUPPORTING_COMPONENT_REFERENCES/CEP_VISUALIZE_CANVAS_VIEW_COMPONENT_REFERENCE.png",
+      "role": "OWNER_CONFIRMED_SUPPORTING_COMPONENT_REFERENCE"
     }
   ],
   "comparisonPlan": [
     {
-      "surface": "today",
+      "surface": "rq",
       "check": [
-        "acceptance fixture presented as current truth",
-        "Resume availability versus exact target resolution",
-        "recommendation source/version/rationale truth",
-        "provider-specific stale/unavailable/error plus observedAt",
-        "last successful projection retention on failure",
-        "profile state vocabulary",
-        "LEFT/CENTER/RIGHT/BOTTOM/TOOLBAR typed content",
-        "no canonical progress/Mastery/access writes"
+        "non-production acceptance records vs provider truth",
+        "exact SourceRevision compare availability",
+        "provenance/source/revision context",
+        "no Formal Review/Mastery authority",
+        "typed regions and analytical identity"
+      ]
+    },
+    {
+      "surface": "visualize",
+      "check": [
+        "canonical copy versus canonical:false provider",
+        "read-only/editable availability truth",
+        "one Spatial engine/four view adapters",
+        "representation versus canonical relation truth",
+        "Tree main reference plus Path/Graph/Canvas supporting ceilings",
+        "responsive RIGHT and typed inspector"
       ]
     }
   ]
