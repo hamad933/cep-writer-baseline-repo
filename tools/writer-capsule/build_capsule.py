@@ -1,47 +1,49 @@
 #!/usr/bin/env python3
-import argparse, hashlib, json, os, pathlib, subprocess, datetime
+import argparse, datetime, hashlib, json, os, pathlib, shutil, subprocess
 
-def run(*args, cwd=None):
+def run(*args,cwd=None):
     p=subprocess.run(args,cwd=cwd,text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-    if p.returncode:
-        raise SystemExit("command failed: "+" ".join(args)+"\n"+p.stderr)
+    if p.returncode: raise SystemExit("command failed: "+" ".join(args)+"\n"+p.stderr)
     return p.stdout.strip()
 
 def sha256(path):
     h=hashlib.sha256()
-    with open(path,'rb') as f:
-        for chunk in iter(lambda:f.read(1024*1024),b''):
-            h.update(chunk)
+    with open(path,"rb") as f:
+        for chunk in iter(lambda:f.read(1024*1024),b""): h.update(chunk)
     return h.hexdigest()
+
+def clean_dir(path):
+    if path.exists(): shutil.rmtree(path)
+    path.mkdir(parents=True,exist_ok=True)
+
+def file_meta(base,path):
+    return {"bytes":path.stat().st_size,"sha256":sha256(path)}
 
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--repo-root",default=".")
     ap.add_argument("--output",default="writer-capsule-out")
     ap.add_argument("--binding",default="cep-writer/CAPSULE_BINDING.json")
+    ap.add_argument("--visual-bootstrap",default=".capsule-visual-bootstrap")
     ap.add_argument("--mission",default=None)
     ns=ap.parse_args()
 
     root=pathlib.Path(ns.repo_root).resolve()
     out=(root/ns.output).resolve()
-    if out.exists():
-        for p in sorted(out.rglob("*"),reverse=True):
-            if p.is_file() or p.is_symlink(): p.unlink()
-            elif p.is_dir(): p.rmdir()
-    out.mkdir(parents=True,exist_ok=True)
+    clean_dir(out)
 
     head=run("git","rev-parse","HEAD",cwd=root)
     tree=run("git","rev-parse","HEAD^{tree}",cwd=root)
     branch=os.environ.get("GITHUB_REF_NAME") or run("git","rev-parse","--abbrev-ref","HEAD",cwd=root)
     repo=os.environ.get("GITHUB_REPOSITORY","hamad933/cep-writer-baseline-repo")
 
-    binding_path=root/ns.binding
+    binding_path=(root/ns.binding).resolve()
     binding={}
     if binding_path.exists():
         binding=json.loads(binding_path.read_text(encoding="utf-8"))
         exp=binding.get("expectedSourceCommit")
-        if exp and exp != head:
-            raise SystemExit(f"binding expectedSourceCommit {exp} != HEAD {head}")
+        if exp and exp != head: raise SystemExit(f"binding expectedSourceCommit {exp} != HEAD {head}")
+        shutil.copy2(binding_path,out/"CAPSULE_BINDING.json")
     mission=ns.mission or binding.get("missionId") or "INFRA_TEMPLATE_VALIDATION_ONLY"
 
     temp_ref="refs/heads/__cep_capsule_source"
@@ -53,21 +55,34 @@ def main():
         run("git","update-ref","-d",temp_ref,cwd=root)
     run("git","bundle","verify",str(bundle),cwd=root)
 
-    bootstrap_sh = """#!/usr/bin/env bash
+    visual_src=(root/ns.visual_bootstrap).resolve()
+    visual_status=None
+    if visual_src.exists():
+        visual_dst=out/"visual-bootstrap"
+        shutil.copytree(visual_src,visual_dst)
+        vm=visual_dst/"VISUAL_BOOTSTRAP_MANIFEST.json"
+        if vm.exists():
+            v=json.loads(vm.read_text(encoding="utf-8"))
+            if v.get("sourceCommit") != head: raise SystemExit("visual bootstrap sourceCommit mismatch")
+            if v.get("sourceTree") != tree: raise SystemExit("visual bootstrap sourceTree mismatch")
+            visual_status=v.get("status") or v.get("classification")
+
+    bootstrap_sh="""#!/usr/bin/env bash
 set -euo pipefail
 CAPSULE_DIR="$(cd "$(dirname "$0")" && pwd)"
-TARGET="__TARGET_EXPR__"
+TARGET="${1:-$CAPSULE_DIR/workspace}"
 python3 "$CAPSULE_DIR/verify_capsule.py" "$CAPSULE_DIR"
 git clone "$CAPSULE_DIR/repo.bundle" "$TARGET"
 git -C "$TARGET" checkout --detach __HEAD__
 ACTUAL="$(git -C "$TARGET" rev-parse HEAD)"
 test "$ACTUAL" = "__HEAD__"
 echo "CEP capsule materialized: $TARGET @ $ACTUAL"
-""".replace("__TARGET_EXPR__", '${1:-$CAPSULE_DIR/workspace}').replace("__HEAD__", head)
+echo "Visual bootstrap: $CAPSULE_DIR/visual-bootstrap"
+""".replace("__HEAD__",head)
     (out/"bootstrap.sh").write_text(bootstrap_sh,encoding="utf-8",newline="\n")
     os.chmod(out/"bootstrap.sh",0o755)
 
-    bootstrap_ps1 = """param([string]$Target = "$PSScriptRoot\\workspace")
+    bootstrap_ps1="""param([string]$Target = "$PSScriptRoot\\workspace")
 $ErrorActionPreference = "Stop"
 python "$PSScriptRoot\\verify_capsule.py" "$PSScriptRoot"
 git clone "$PSScriptRoot\\repo.bundle" $Target
@@ -75,56 +90,58 @@ git -C $Target checkout --detach __HEAD__
 $actual = (git -C $Target rev-parse HEAD).Trim()
 if ($actual -ne "__HEAD__") { throw "HEAD mismatch: $actual" }
 Write-Host "CEP capsule materialized: $Target @ $actual"
-""".replace("__HEAD__", head)
+Write-Host "Visual bootstrap: $PSScriptRoot\\visual-bootstrap"
+""".replace("__HEAD__",head)
     (out/"bootstrap.ps1").write_text(bootstrap_ps1,encoding="utf-8",newline="\n")
 
-    verifier_src=root/"tools/writer-capsule/verify_capsule.py"
-    (out/"verify_capsule.py").write_bytes(verifier_src.read_bytes())
+    shutil.copy2(root/"tools/writer-capsule/verify_capsule.py",out/"verify_capsule.py")
 
     first=f"""# CEP Writer Capsule — READ FIRST
 
 Mission: `{mission}`
 Repository: `{repo}`
-Source branch/ref: `{branch}`
+Source ref: `{branch}`
 Exact source commit: `{head}`
 Exact source tree: `{tree}`
+Visual bootstrap status: `{visual_status or 'NOT_CONFIGURED'}`
 
 1. Run `verify_capsule.py`.
 2. Materialize with `bootstrap.sh` or `bootstrap.ps1`.
-3. Re-check exact task authority inside the materialized repository before Product mutation.
-4. Work locally. Do not use connector-driven per-file assembly.
-5. Intermediate evidence remains local unless final custody is explicitly required.
-6. Stop on any identity/binding mismatch; never guess or silently refetch.
+3. Read the local mission packet and exact scope.
+4. Open `visual-bootstrap/VISUAL_BOOTSTRAP_MANIFEST.json` before creating a new baseline.
+5. If status is READY, use the prebuilt exact-parent screenshots/reference mappings as the first comparison.
+6. Capture locally only when a required state is missing/partial or after Product changes.
+7. Work locally; do not use connector-driven per-file assembly.
+8. Stop on identity/binding mismatch; never guess or silently refetch.
 """
     (out/"README_FIRST.md").write_text(first,encoding="utf-8",newline="\n")
 
     payload={}
-    for name in ["repo.bundle","bootstrap.sh","bootstrap.ps1","verify_capsule.py","README_FIRST.md"]:
-        p=out/name
-        payload[name]={"bytes":p.stat().st_size,"sha256":sha256(p)}
+    for p in sorted(out.rglob("*")):
+        if not p.is_file(): continue
+        if p.name in {"CAPSULE_MANIFEST.json","SHA256SUMS.txt"}: continue
+        rel=str(p.relative_to(out)).replace(os.sep,"/")
+        payload[rel]=file_meta(out,p)
 
     manifest={
-      "schemaVersion":1,
-      "classification":"SELF_CONTAINED_WRITER_WORKSPACE_CAPSULE__EXECUTION_TRANSPORT_ONLY__NOT_AUTHORITY",
-      "missionId":mission,
-      "repository":repo,
-      "sourceRef":branch,
-      "sourceCommit":head,
-      "sourceTree":tree,
+      "schemaVersion":2,
+      "classification":"SELF_CONTAINED_WRITER_WORKSPACE_CAPSULE_V1_1__CONTROLLER_PREPARED__EXECUTION_TRANSPORT_ONLY__NOT_AUTHORITY",
+      "missionId":mission,"repository":repo,"sourceRef":branch,
+      "sourceCommit":head,"sourceTree":tree,
       "bindingPath":str(binding_path.relative_to(root)) if binding_path.exists() else None,
       "binding":binding or None,
-      "noSilentLiveFetch":True,
-      "localFirst":True,
+      "controllerPrepared":True,
+      "writerPreparationDuty":"VERIFY_MATERIALIZE_COMPARE__NOT_CAPSULE_OR_BASELINE_ASSEMBLY",
+      "visualBootstrapStatus":visual_status,
+      "noSilentLiveFetch":True,"localFirst":True,
       "payload":payload,
       "generatedAtUtc":datetime.datetime.now(datetime.timezone.utc).isoformat()
     }
-    (out/"CAPSULE_MANIFEST.json").write_text(json.dumps(manifest,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
-    manifest_meta={"bytes":(out/"CAPSULE_MANIFEST.json").stat().st_size,"sha256":sha256(out/"CAPSULE_MANIFEST.json")}
+    manifest_path=out/"CAPSULE_MANIFEST.json"
+    manifest_path.write_text(json.dumps(manifest,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
     sums_payload=dict(payload)
-    sums_payload["CAPSULE_MANIFEST.json"]=manifest_meta
-    sums="".join(f"{v['sha256']}  {k}\n" for k,v in sorted(sums_payload.items()))
-    (out/"SHA256SUMS.txt").write_text(sums,encoding="utf-8",newline="\n")
-    print(json.dumps({"mission":mission,"head":head,"tree":tree,"output":str(out),"bundleSha256":payload["repo.bundle"]["sha256"]}))
+    sums_payload["CAPSULE_MANIFEST.json"]=file_meta(out,manifest_path)
+    (out/"SHA256SUMS.txt").write_text("".join(f"{v['sha256']}  {k}\n" for k,v in sorted(sums_payload.items())),encoding="utf-8",newline="\n")
+    print(json.dumps({"mission":mission,"head":head,"tree":tree,"output":str(out),"files":len(payload),"visualBootstrapStatus":visual_status,"bundleSha256":payload["repo.bundle"]["sha256"]}))
 
-if __name__=="__main__":
-    main()
+if __name__=="__main__": main()
