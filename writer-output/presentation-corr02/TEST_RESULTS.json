@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "classification": "C1_CANDIDATE_VALIDATION__NOT_CONTROLLER_ACCEPTANCE",
+  "startingPacketHead": "bcbb1ac2d09e30b21062fabeccf7a1aaa2b30a2d",
+  "validationHead": "7fbc25f781e7b8e9fe3eba72f5a57ffe2ed96c1c",
+  "sourceIdentityBefore": {
+    "sha256": "777d8b24032891b00bf3b61858a3be015b0b77fea710e1d5bd446d182577bb51",
+    "files": 273
+  },
+  "sourceIdentityAfter": {
+    "sha256": "5885c32a71c14b1b982ec8dcdadba4fafde40c78b2d9287f367f1ca28373f91d",
+    "files": 273
+  },
+  "gates": {
+    "build_runtime": {
+      "status": "PASS",
+      "exit": 0
+    },
+    "runtime_check": {
+      "status": "PASS",
+      "exit": 0
+    },
+    "npm_test": {
+      "status": "PASS",
+      "exit": 0,
+      "pass": 210,
+      "fail": 0
+    },
+    "npm_check_pre_browser": {
+      "status": "FAIL_CLASSIFIED_STALE_DOWNSTREAM_BROWSER_RECEIPT",
+      "exit": 1
+    },
+    "browser_test": {
+      "status": "FAIL_CLASSIFIED_DOWNSTREAM_STALE_HARNESS",
+      "exit": 1,
+      "pass": 2,
+      "fail": 4,
+      "failures": [
+        "spatial.selection-connect-canonical-edge: no eligible relation endpoint pair exists",
+        "relation.route-convergence-and-label-scope: label double-click did not open the composer",
+        "central-change-reuse: no eligible relation endpoint pair exists",
+        "runtime-causal-consequence: stale providerDescriptor.id assumption"
+      ]
+    },
+    "npm_check_post_browser": {
+      "status": "FAIL_CLASSIFIED_STALE_DOWNSTREAM_BROWSER_RECEIPT",
+      "exit": 1
+    },
+    "full_carrier_audit": {
+      "status": "PASS_WITH_RESPONSIVE_CLASSIFICATION",
+      "exit": 0,
+      "captures": 46,
+      "screenshots": 46,
+      "genuineLocalhostRoute": true,
+      "automatedFindingCounts": {
+        "PROFILE_RIGHT_REGION_NOT_VISIBLE": 22
+      }
+    },
+    "responsive_right": {
+      "status": "PASS",
+      "tested": 22,
+      "pass": 22,
+      "fail": 0
+    },
+    "contextual_toolbar": {
+      "status": "PASS",
+      "beforeContext": "KU-D03-0001",
+      "afterContext": "KU-D03-0004",
+      "availabilityChanged": "disabled_to_enabled",
+      "capturedPayload": {
+        "id": "KU-D03-0004",
+        "route": "toolbar",
+        "hasInvoker": true
+      }
+    },
+    "event_target": {
+      "status": "PASS",
+      "nodePrototypeOwnClosest": false,
+      "windowPrototypeOwnClosest": false,
+      "elementPrototypeOwnClosest": true,
+      "textNodeDispatch": true,
+      "capturedPayload": {
+        "id": "eventtarget-text-node",
+        "route": "toolbar",
+        "hasInvoker": true
+      },
+      "pageErrors": 0
+    },
+    "duplicate_owner_scan": {
+      "status": "PASS"
+    },
+    "runtime_component_owners": {
+      "status": "PASS"
+    },
+    "runtime_capability_owners": {
+      "status": "PASS"
+    },
+    "runtime_action_surface_owners": {
+      "status": "PASS"
+    },
+    "no_horizontal_page_overflow": {
+      "status": "PASS",
+      "rows": 46
+    },
+    "foreign_library_semantics": {
+      "status": "PASS",
+      "nonLibraryLearnRowsWithLeakage": 0
+    }
+  },
+  "revertFalsification": {
+    "status": "PASS_EXPECTED_FAILURE_ON_REVERT",
+    "revertedOwners": [
+      "stack/native-typescript/foundation/workspace.ts",
+      "stack/native-typescript/foundation/global/toolbar-template.ts",
+      "stack/native-typescript/surfaces/m0-controller-composition.ts"
+    ],
+    "targetedExit": 1,
+    "observedOnRevert": {
+      "FOREIGN_LIBRARY_READ_EDIT_VISIBLE": 32,
+      "FOREIGN_LIBRARY_EXPLICIT_SAVE_VISIBLE": 32
+    },
+    "restoredCorrectedCandidate": true
+  },
+  "visualReview": {
+    "finalImages": 46,
+    "hashStableFromPreviouslyInspectedSet": 43,
+    "changedImagesIndividuallyOpenedAndInspected": 3,
+    "representative": [
+      {
+        "path": "controller-audit-output/screenshots/shell-1440x1000.png",
+        "sha256": "2762ea0bb4b47e4e2c87daae77f5cceb2f6152e9b8e58c64d85a376318ddbf65"
+      },
+      {
+        "path": "controller-audit-output/screenshots/shell-1024x900.png",
+        "sha256": "a269b69d3fd3194cf430fb0e055317715cf6d6bcfacb69db887c7062066e1a22"
+      },
+      {
+        "path": "controller-audit-output/screenshots/today-1440x1000.png",
+        "sha256": "bfcbfb3e1a13ffe8f9482c3f1cb8aa0ea7588ffa6369e1a185c0c61f7e992e35"
+      },
+      {
+        "path": "controller-audit-output/screenshots/today-1024x900.png",
+        "sha256": "387cf6db52843556ee9fc504586ed495f452ba92170c998e2214f2735455d7a4"
+      },
+      {
+        "path": "controller-audit-output/screenshots/library-1440x1000.png",
+        "sha256": "239763ce80a1009a9dbc354783e9081e7105dffb493d1a5e1a64120a7ef91a6f"
+      },
+      {
+        "path": "controller-targeted-output/screenshots/rq-contextual-toolbar-1440x1000.png",
+        "sha256": "e2e9aa6465470582b97a3f8beab5273e649ced5e0ef0654bb431e01c59ff6a23"
+      }
+    ]
+  },
+  "temporaryValidationEvidence": {
+    "finalRunId": 35680746097,
+    "finalArtifactId": 10674641984,
+    "finalArtifactDigest": "sha256:dc4061180ba988e5e6af302762cbf673a8695773ccd48096d98265519977ef64",
+    "revertRunId": 35680113307,
+    "revertArtifactId": 10674981820,
+    "revertArtifactDigest": "sha256:16c9d0d49567d82a8c48191966ca7321eabcbd5f416066e20e53aee5e03290dd",
+    "committedToCandidate": false,
+    "driveCustodyCreated": false
+  }
+}

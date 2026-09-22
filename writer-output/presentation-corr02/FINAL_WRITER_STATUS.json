@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "mission": "CORR02 C1 — SERIAL SHARED FOUNDATION / CARRIER / REGION CORRECTION",
+  "mode": "CANDIDATE_ONLY__NO_SELF_PROMOTION__NO_MAIN_MERGE__NO_RELEASE",
+  "startingPacketHead": "bcbb1ac2d09e30b21062fabeccf7a1aaa2b30a2d",
+  "validatedCandidateHead": "7fbc25f781e7b8e9fe3eba72f5a57ffe2ed96c1c",
+  "finalGitHead": "BOUND_BY_FINAL_CLEANUP_COMMIT__SEE_GIT_REF",
+  "productSourceIdentity": {
+    "sha256": "5885c32a71c14b1b982ec8dcdadba4fafde40c78b2d9287f367f1ca28373f91d",
+    "files": 273
+  },
+  "findingsClosedCandidateSide": [
+    "F-013",
+    "F-001",
+    "F-002",
+    "F-003",
+    "F-004",
+    "F-005",
+    "F-021",
+    "F-029",
+    "F-032",
+    "F-033",
+    "F-042"
+  ],
+  "findingsRemainingByLane": {
+    "C2": [
+      "F-022",
+      "F-023",
+      "F-024",
+      "F-025",
+      "F-026",
+      "F-038",
+      "F-043"
+    ],
+    "C3": [
+      "F-007",
+      "F-008",
+      "F-009",
+      "F-010",
+      "F-011",
+      "F-044"
+    ],
+    "B3-R": [
+      "F-027",
+      "F-034",
+      "F-035",
+      "F-036"
+    ],
+    "later_W03_domain": [
+      "F-028",
+      "F-039"
+    ]
+  },
+  "status": "C1_STOP_GATE_REACHED__CONTROLLER_AUDIT_REQUIRED",
+  "blockedOrUnavailable": [
+    {
+      "code": "LOCAL_REPOSITORY_CHECKOUT_UNAVAILABLE_DNS",
+      "effect": "Local clone was unavailable; exact GitHub tree/commit identity and genuine-route GitHub Actions were used as secondary validation."
+    },
+    {
+      "code": "STALE_DOWNSTREAM_BROWSER_HARNESS_VISUALIZE",
+      "effect": "Three browser flows fail on current Visualize fixture/oracle assumptions outside C1."
+    },
+    {
+      "code": "STALE_DOWNSTREAM_BROWSER_HARNESS_RUNS",
+      "effect": "One browser flow fails on a stale providerDescriptor.id assumption outside C1."
+    },
+    {
+      "code": "STALE_HARNESS_EXPECTS_ALWAYS_VISIBLE_RIGHT_AT_1024",
+      "effect": "Full-carrier audit records 22 compact RIGHT-not-visible rows; targeted same-owner reveal proof passes 22/22."
+    }
+  ],
+  "promotionClaim": false,
+  "acceptanceClaim": false,
+  "c2Authorized": false,
+  "driveHeavyEvidenceCustodyIds": []
+}
