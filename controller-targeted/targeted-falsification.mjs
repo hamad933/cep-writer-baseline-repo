@@ -132,7 +132,7 @@ const toolbarContext={};
  toolbarContext.beforeContext=await page.evaluate(()=>CEPFoundation.workspace?.toolbarContext?.()||null);
  const importButton=page.locator('[data-evidence-import-submit]').first();
  toolbarContext.importButtonCount=await importButton.count();
- if(toolbarContext.importButtonCount){await importButton.click();await page.waitForTimeout(120)}
+ if(toolbarContext.importButtonCount){await page.evaluate(()=>document.querySelector('[data-evidence-import-submit]')?.click());await page.waitForTimeout(180)}
  toolbarContext.afterDisabled=await inspect.isDisabled();
  toolbarContext.afterContext=await page.evaluate(()=>CEPFoundation.workspace?.toolbarContext?.()||null);
  toolbarContext.contextBound=await page.locator('#domainToolbar').getAttribute('data-context-bound');
