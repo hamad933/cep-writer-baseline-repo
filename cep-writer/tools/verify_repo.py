@@ -2,24 +2,25 @@
 from pathlib import Path
 import hashlib,json,sys
 root=Path(__file__).resolve().parents[2]
-man=json.loads((root/'cep-writer'/'REPOSITORY_MANIFEST.json').read_text(encoding='utf-8'))
-expected={x['path']:(x['size'],x['sha256']) for x in man['entries']}
-actual={}
-for p in root.rglob('*'):
-    if not p.is_file():
-        continue
-    rel=p.relative_to(root).as_posix()
-    if rel=='cep-writer/REPOSITORY_MANIFEST.json' or rel.startswith('.git/') or rel.startswith('node_modules/'):
-        continue
-    b=p.read_bytes(); actual[rel]=(len(b),hashlib.sha256(b).hexdigest())
-if set(actual)!=set(expected):
-    print('PATH_SET_MISMATCH',sorted(set(actual)-set(expected))[:10],sorted(set(expected)-set(actual))[:10]);sys.exit(2)
-bad=[k for k,v in expected.items() if actual[k]!=v]
+man=json.loads((root/'cep-writer'/'WRITER_INPUT_MANIFEST.json').read_text(encoding='utf-8'))
+if man.get('noRequiredLiveDriveFetch') is not True:
+    print('LIVE_DRIVE_DEPENDENCY_NOT_ALLOWED');sys.exit(2)
+bad=[]
+for e in man['entries']:
+    p=root/e['path']
+    if not p.is_file(): bad.append((e['path'],'MISSING')); continue
+    b=p.read_bytes(); got=(len(b),hashlib.sha256(b).hexdigest()); exp=(e['size'],e['sha256'])
+    if got!=exp: bad.append((e['path'],'HASH_SIZE_MISMATCH',got,exp))
 if bad:
-    print('HASH_SIZE_MISMATCH',bad[:10]);sys.exit(2)
-rows=sorted(expected.items(),key=lambda x:x[0].encode())
-stream=''.join(f'{p}\0{s}\0{h}\n' for p,(s,h) in rows).encode()
-tree=hashlib.sha256(stream).hexdigest()
-if tree!=man['repositoryTreeSha256']:
-    print('TREE_MISMATCH',tree,man['repositoryTreeSha256']);sys.exit(2)
-print(json.dumps({'status':'PASS','files':len(expected),'repositoryTreeSha256':tree,'productCanonicalSourceSha256':man['productCanonicalSourceSha256']},indent=2))
+    print('REQUIRED_INPUT_MISMATCH',bad[:10]);sys.exit(2)
+source=root/'stack'/'native-typescript'
+rows=[]
+for p in source.rglob('*'):
+    if p.is_file():
+        b=p.read_bytes(); rows.append((p.relative_to(source).as_posix(),len(b),hashlib.sha256(b).hexdigest()))
+rows.sort(key=lambda x:x[0])
+stream=''.join(f'{p}\0{s}\0{h}\n' for p,s,h in rows).encode()
+source_sha=hashlib.sha256(stream).hexdigest()
+if source_sha!=man['productCanonicalSourceSha256'] or len(rows)!=man['productCanonicalSourceFiles']:
+    print('PRODUCT_SOURCE_IDENTITY_MISMATCH',source_sha,len(rows),man['productCanonicalSourceSha256'],man['productCanonicalSourceFiles']);sys.exit(2)
+print(json.dumps({'status':'PASS','requiredInputs':len(man['entries']),'productCanonicalSourceSha256':source_sha,'productCanonicalSourceFiles':len(rows),'noRequiredLiveDriveFetch':True},indent=2))

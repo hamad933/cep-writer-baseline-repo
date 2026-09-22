@@ -1,17 +1,13 @@
-# START HERE - CEP Presentation CORR02 Writer
+# START HERE — CEP CORR02 C1 Writer
 
-This is a task-bound candidate branch. Product mutation has NOT started.
+This repository is a **self-contained C1 Writer input**. `cep-writer/**` is Controller-owned read-only mission authority.
 
-1. Work only from a separate manual Git clone of `writer/presentation-corr02-google-ai-studio`; built-in AI Studio main sync is not the mission transport.
-2. Run `python3 cep-writer/tools/verify_repo.py`.
-3. Read repository `README.md`, `GIT_WORKFLOW.md`, `TASK_BINDING.json`, `CURRENT_MISSION.md`.
-4. Read `authority/AUTHORITY_PACKET.md` and `authority/APPLICABLE_OWNER_DECISIONS.csv`.
-5. Verify `PARENT_IDENTITY.json`.
-6. For the ACTIVE batch only, read the exact SurfaceProfiles/domain oracles and OPEN the actual local governed visual-reference image binaries before editing.
-7. Do not blanket-read root `authority/`; use exact task-directed files only.
-8. Inspect Controller findings under `controller-input/`.
-9. Change only authorized genuine Product Presentation/composition owners; never edit `cep-writer/` as the Writer.
-10. Execute CORR02 serially according to the small-batch plan in `CURRENT_MISSION.md`; stop for Owner visual review after each batch.
-11. Before final Owner approval, do not push Product results or final evidence.
-12. After final Owner approval, final Git CLI push may target only the candidate branch; never main.
-13. Return exact candidate HEAD as CANDIDATE_ONLY pending independent Controller audit.
+1. Checkout the exact candidate branch `writer/presentation-corr02-google-ai-studio` at its current Controller C0 packet HEAD. Do not use `main` as the work branch.
+2. Run `python3 cep-writer/tools/verify_repo.py` before Product mutation.
+3. Read, in order: `TASK_BINDING.json`, `PARENT_IDENTITY.json`, `CURRENT_MISSION.md`, `authority/AUTHORITY_PACKET.md`, `authority/APPLICABLE_OWNER_DECISIONS.csv`.
+4. Read `controller-input/CORR02_PRE_WRITER_DEEP_DEFECT_AUDIT.md`, `references/WRITER_LOCAL_VISUAL_CAPTURE_AND_RENDERING_METHOD.md`, and the exact matrix / visual / interaction references named by `CURRENT_MISSION.md`.
+5. Verify Product canonical source is exactly `777d8b24032891b00bf3b61858a3be015b0b77fea710e1d5bd446d182577bb51` / `273` before mutation. C0 changes only Writer authority/input bytes, never Product bytes.
+6. Execute **C1 only**: shared EventTarget/carrier/toolbar/context/region correction. Do not begin C2/C3/B3-R.
+7. Use local-first build/test/browser discovery. Managed genuine-route/CI proof is a second validation layer, not the primary investigation loop.
+8. Never edit `cep-writer/**` as the Writer. Do not mutate governance, accepted successors, `main`, release/deployment state or stack status.
+9. Stop at the C1 handoff with `CANDIDATE_ONLY__CONTROLLER_AUDIT_REQUIRED`.

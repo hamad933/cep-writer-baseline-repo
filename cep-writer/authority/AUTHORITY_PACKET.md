@@ -1,11 +1,11 @@
-# CEP Writer Authority Packet - Presentation CORR02
+# CEP Writer Authority Packet — Presentation CORR02 C1
 
-Baseline main: ef7de5e05eee79d1302a84c47ef41ba5e94364c6. Candidate branch: writer/presentation-corr02-google-ai-studio. Product parent: 5205d2a3... / 272.
+Candidate branch: `writer/presentation-corr02-google-ai-studio`. Product parent commit: `da007840363d92cdadd9f7c5180449a49e6f1d19`. Product source: `777d8b24032891b00bf3b61858a3be015b0b77fea710e1d5bd446d182577bb51 / 273`.
 
-Authority order for the Writer: repository README/START_HERE -> GIT_WORKFLOW/TASK_BINDING -> CURRENT_MISSION -> applicable Owner-decision snapshot -> exact SurfaceProfile/matrix -> applicable domain oracle -> actual visual-reference binary for Presentation only -> Controller inputs -> Product implementation.
+Authority order for the Writer: `START_HERE -> TASK_BINDING/PARENT_IDENTITY -> CURRENT_MISSION -> authority/APPLICABLE_OWNER_DECISIONS.csv -> exact SurfaceProfile/matrix -> applicable domain oracle -> actual governed visual-reference binary -> Controller defect ledger -> Product implementation`.
 
-Do not blanket-read root authority/. It is a mixed traceability/build-test corpus, not the task authority packet.
+`cep-writer/**` is Controller-owned read-only task authority. Live `CURRENT_STATE`, full governance and full decision register are intentionally excluded under OD-062. Required execution inputs are local; Drive IDs are provenance only.
 
-Hard laws: manual candidate-branch clone for AI Studio; no built-in main sync as mission transport; no direct main write/merge/release; cep-writer is Controller-owned read-only task authority; shared Presentation never overwrites Surface semantics; preserve Balanced6/SQLite/Save/runtime/xterm/domain truth and dependency graph; no stack expansion; no fake provider/data truth; no self-promotion.
+C1 is the only authorized mutation lane: narrow EventTarget correction + neutral shared carrier/toolbar/mode + reusable contextual toolbar payload/availability + correct Profile region binding into existing shared hosts. C1 must not repair W04/Today/RQ/Visualize/W03 domain/provider truth locally.
 
-Execution is serialized by CURRENT_MISSION small batches. Before each Surface correction, inspect the actual local reference image (when governed), exact SurfaceProfile, applicable domain/oracle truth and Owner decisions. Stop for Owner preview review after every batch.
+Use local-first discovery/build/browser loops. Managed genuine-route proof is second-layer corroboration. Preserve all truth ceilings and finish `CANDIDATE_ONLY__CONTROLLER_AUDIT_REQUIRED`.

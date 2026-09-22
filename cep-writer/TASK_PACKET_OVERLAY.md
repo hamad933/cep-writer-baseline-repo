@@ -1,9 +1,9 @@
-# CORR02 Task-Packet Overlay
+# C0 Packet Overlay — C1
 
-This branch is rebound from validated Writer-complete main exactly at ef7de5e05eee79d1302a84c47ef41ba5e94364c6.
+This overlay supersedes earlier B0/B1/B2/B3 launch wording in packet lineage. The canonical mission remains preserved in `CURRENT_MISSION.md`; its current section 17 correction DAG governs.
 
-Task-specific additions are limited to CORR02 mission/parent binding, applicable Owner decisions, Controller inputs, manual-Git Google AI Studio execution instructions, serialized small-batch execution rules, bounded output path, and branch-specific manifests.
+Active Product mutation is **C1 only** from exact Product parent `da007840...` / source `777d8b... / 273`. C0 is Controller packet-only and must produce zero Product-byte delta.
 
-Product/build/test/reference inputs are inherited from main. No Product bytes changed by this preparation/rebind. No required Writer input may depend on live Drive.
+Writer class for this execution is `CHATGPT_WRITER`. Transport/custody differences do not alter Product authority or scope. Use **local-first** discovery/rendering/test loops and managed genuine-route proof second.
 
-First mutation batch after B0 preparation is B1 = Today only.
+Downstream C2/C3/B3-R remain HOLD pending independent Controller audit of C1.
