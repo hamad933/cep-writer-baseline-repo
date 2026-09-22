@@ -9,11 +9,13 @@ export const RQ_DOMAIN_OWNER='RQDomainAdapter';
 export class RQDomainAdapter{
   constructor(records=[],options={}){
     this.owner=RQ_DOMAIN_OWNER;
-    this.records=clone(records);
-    const {analyticalCompareOwner=null,...providerOptions}=options||{};
+    const {analyticalCompareOwner=null,providerClassification='ADMITTED_CURRENT_PROVIDER',providerAdmitted=Array.isArray(records)&&records.length>0,...providerOptions}=options||{};
+    this.providerAdmitted=providerAdmitted===true;
+    this.providerClassification=String(providerClassification||'UNSPECIFIED_PROVIDER_CLASSIFICATION');
+    this.records=clone(this.providerAdmitted?records:[]);
     this.compareOwner=analyticalCompareOwner||new AnalyticalCompareOwner();
     if(this.compareOwner?.ownerToken!=='AnalyticalCompare')throw Error('CENTRAL_ANALYTICAL_COMPARE_REQUIRED');
-    this.provider=createRqCompareProvider(records,providerOptions);
+    this.provider=createRqCompareProvider(this.records,providerOptions);
     this.compareOwner.registerProvider(this.provider);
     this.providerId=this.provider.descriptor().providerId;
     this.sessions=new Set();
@@ -24,16 +26,20 @@ export class RQDomainAdapter{
     owner:this.owner,
     compareOwner:this.compareOwner.owner,
     providerId:this.providerId,
+    providerAdmitted:this.providerAdmitted,
+    providerClassification:this.providerClassification,
+    providerTruth:this.providerAdmitted?'ADMITTED_CURRENT_PROVIDER':'UNAVAILABLE_NO_ADMITTED_CURRENT_PROVIDER',
     analysisSessionPersistence:'UNAVAILABLE',
     formalReviewAuthority:false,
     visualReferenceCeiling:'REVIEWED_FINAL_CANDIDATE',
     exactCompareContext:{left:'SourceRevision',right:'SourceRevision',workingAnalysisId:'required',scope:'required-non-empty'}
   };}
+  providerAvailability(){return this.providerAdmitted?{enabled:true,code:'AVAILABLE',reason:'Admitted current RQ provider is bound.'}:{enabled:false,code:'RQ_CURRENT_PROVIDER_UNAVAILABLE',reason:'No admitted current RQ provider is bound; non-production acceptance data is not Product truth.'};}
   search(query='',options={}){
     const q=String(query||'').trim().toLocaleLowerCase('en-US'),includeExcluded=options.includeExcluded===true,requestedExcludedIds=new Set((options.includeExcludedIds||[]).map(String));
     const list=clone(this.records),matches=item=>!q||JSON.stringify(item).toLocaleLowerCase('en-US').includes(q),isExcluded=item=>item?.excluded===true||String(item?.status||'').toUpperCase()==='EXCLUDED';
     const trace=list.filter(matches).map(item=>({sourceRevision:clone(item),excluded:isExcluded(item),included:!isExcluded(item)||includeExcluded||requestedExcludedIds.has(String(item?.sourceId||'')),reason:isExcluded(item)?'EXCLUDED_SOURCE_TRACEABLE':'IN_SCOPE_SOURCE'}));
-    return {ok:true,status:'WORKING_SEARCH',query,items:trace.filter(item=>item.included).map(item=>clone(item.sourceRevision)),excluded:trace.filter(item=>item.excluded&&!item.included),trace,persisted:false,formalReview:false};
+    return {ok:true,status:this.providerAdmitted?'WORKING_SEARCH':'RQ_CURRENT_PROVIDER_UNAVAILABLE',query,items:trace.filter(item=>item.included).map(item=>clone(item.sourceRevision)),excluded:trace.filter(item=>item.excluded&&!item.included),trace,providerAdmitted:this.providerAdmitted,providerClassification:this.providerClassification,persisted:false,formalReview:false};
   }
   compareContext(payload={}){
     const workingAnalysisId=String(payload.workingAnalysisId||payload.sessionId||'').trim(),scope=normalizeScope(payload.scope),left=payload.left,right=payload.right;
@@ -41,6 +47,7 @@ export class RQDomainAdapter{
   }
   compareAvailability(payload={}){
     const context=this.compareContext(payload);
+    if(!this.providerAdmitted)return {enabled:false,code:'RQ_CURRENT_PROVIDER_UNAVAILABLE',reason:'No admitted current RQ provider is bound; compare cannot resolve Product SourceRevision truth.',context};
     if(!context.exactPair)return {enabled:false,code:'RQ_COMPARE_EXACT_SOURCE_REVISION_PAIR_REQUIRED',reason:'rq.compare requires two exact SourceRevision references.'};
     if(!context.workingAnalysisId)return {enabled:false,code:'RQ_COMPARE_WORKING_ANALYSIS_CONTEXT_REQUIRED',reason:'rq.compare requires a workingAnalysisId/sessionId.'};
     if(!context.scope.length)return {enabled:false,code:'RQ_COMPARE_SCOPE_REQUIRED',reason:'rq.compare requires explicit non-empty scope context.'};

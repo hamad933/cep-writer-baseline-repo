@@ -79,17 +79,20 @@ const ready = async (page, surface) => {
   else await page.goto(`${base}/?surface=${surface}`, { waitUntil: 'networkidle' });
   await page.waitForFunction(expected => window.CEPFoundation?.consumer === expected, surface);
 };
-const selectEligiblePair = async page => {
-  const ids = await page.evaluate(() => {
+const selectPair = async (page,{requireEligible=true}={}) => {
+  const ids = await page.evaluate(requireEligible => {
     const nodes = CEPFoundation.relations.nodes;
-    for (let i = 0; i < nodes.length; i += 1) for (let j = i + 1; j < nodes.length; j += 1) if (CEPFoundation.relations.connectionAvailability([nodes[i].id, nodes[j].id]).enabled) return [nodes[i].id, nodes[j].id];
+    for (let i = 0; i < nodes.length; i += 1) for (let j = i + 1; j < nodes.length; j += 1) {
+      if (!requireEligible || CEPFoundation.relations.connectionAvailability([nodes[i].id, nodes[j].id]).enabled) return [nodes[i].id, nodes[j].id];
+    }
     return null;
-  });
-  assert(ids?.length === 2, 'no eligible relation endpoint pair exists');
+  }, requireEligible);
+  assert(ids?.length === 2, requireEligible?'no eligible relation endpoint pair exists':'fewer than two relation endpoint objects exist');
   await page.locator(`#objectList [data-object="${ids[0]}"]`).click();
   await page.locator(`#objectList [data-object="${ids[1]}"]`).click({ modifiers: ['Control'] });
   return ids;
 };
+const selectEligiblePair = page => selectPair(page,{requireEligible:true});
 const flow = async (_browser, definition, run) => {
   let isolatedBrowser,context;
   const errors = [];
@@ -142,63 +145,65 @@ try {
 
   await flow(browser, {
     id: 'spatial.selection-connect-canonical-edge',
-    before: 'Visualize graph with no current selection',
-    action: 'select exactly two objects, use compact Connect, submit composer',
+    before: 'Visualize local-acceptance projection with no current selection',
+    action: 'select exactly two representations and inspect provider-truthful Connect availability without mutating provider truth',
     owner: 'ActionAvailabilityCore + RelationInteractionOwner + RelationDomainAdapter',
-    oracle: 'one canonical relation is committed and its edge is projected'
+    oracle: 'read-only Visualize preserves the two-item selection, hides author-only Connect UI, and leaves relation count/version unchanged'
   }, async page => {
     await ready(page, 'visualize');
-    const selectedIds = await selectEligiblePair(page);
+    const selectedIds = await selectPair(page,{requireEligible:false});
     const selection = page.locator('.relation-selection');
-    assert(!(await selection.evaluate(node => node.hidden)), 'selection action surface was not shown for two objects');
-    assert(await selection.locator('[data-connect]').isEnabled(), 'Connect was not enabled for the compatible pair');
-    await capture(page, 'browser-selection-connect.png', 'spatial.selection-connect-canonical-edge', 'exactly-two central ActionAvailability presentation');
-    const before = await page.evaluate(() => CEPFoundation.relations.records.length);
-    await selection.locator('[data-connect]').click();
-    assert(!(await page.locator('.relation-composer').evaluate(node => node.hidden)), 'relation composer did not open');
-    await page.locator('.relation-composer button[type="submit"]').click();
-    const after = await page.evaluate(() => ({ records: CEPFoundation.relations.records.length, latest: CEPFoundation.relations.records.at(-1), projected: CEPFoundation.spatial.model.edges.at(-1), version: CEPFoundation.relations.version }));
-    assert(after.records === before + 1, 'canonical relation count did not increment once');
-    assert(after.projected.canonicalId === after.latest.id && after.projected.kind === 'domain-projection', 'visible edge is not a canonical projection');
-    return { selectedIds, before, after: after.records, relationId: after.latest.id, canonicalVersion: after.version, projectedKind: after.projected.kind };
+    const before = await page.evaluate(() => ({selectedIds:[...CEPFoundation.spatial.model.selection],records:CEPFoundation.relations.records.length,version:CEPFoundation.relations.version,availability:CEPFoundation.relationUI.connectAvailability(),readOnly:CEPFoundation.relations.readOnly}));
+    assert(before.selectedIds.length === 2 && selectedIds.every(id => before.selectedIds.includes(id)), `Visualize did not preserve the exact two-item representation selection: ${JSON.stringify({selectedIds,before})}`);
+    assert(before.readOnly === true && before.availability.enabled === false && before.availability.visible === false, `Visualize read-only availability mismatch: ${JSON.stringify(before)}`);
+    assert(await selection.evaluate(node => node.hidden), 'author-only Connect action surface became visible against the read-only Visualize provider');
+    await capture(page, 'browser-selection-connect.png', 'spatial.selection-connect-canonical-edge', 'exactly-two selection with author-only Connect hidden by provider-truthful ActionAvailability');
+    const after = await page.evaluate(() => ({selectedIds:[...CEPFoundation.spatial.model.selection],records:CEPFoundation.relations.records.length,version:CEPFoundation.relations.version,composerHidden:document.querySelector('.relation-composer')?.hidden}));
+    assert(after.selectedIds.length === 2 && selectedIds.every(id => after.selectedIds.includes(id)), `read-only Visualize lost the selected representations: ${JSON.stringify({selectedIds,after})}`);
+    assert(after.records === before.records && after.version === before.version && after.composerHidden !== false, `read-only Visualize mutated relation truth: ${JSON.stringify({before,after})}`);
+    return { selectedIds, readOnly:before.readOnly, availability:before.availability, actionSurfaceVisible:false, canonicalRelationCount:after.records, canonicalVersion:after.version };
   });
 
   await flow(browser, {
     id: 'relation.route-convergence-and-label-scope',
-    before: 'Existing canonical Visualize relation edge',
+    before: 'Enterprise relation edge under its admitted editable domain adapter',
     action: 'double-click whole edge, double-click label, close, then press F2 on edge',
     owner: 'RelationInteractionOwner',
-    oracle: 'whole-edge double-click is inert; label and F2 converge on relation.edit'
+    oracle: 'whole-edge double-click is inert; authorized label and F2 edit routes converge on relation.edit'
   }, async page => {
-    await ready(page, 'visualize');
+    await ready(page, 'enterprise');
     const composer = page.locator('.relation-composer'), edge = page.locator('.spatial-canvas [data-edge]').first(), line = edge.locator('line').first(), label = edge.locator('[data-relation-label]');
+    assert(await edge.count() > 0 && await label.count() > 0, 'editable Enterprise relation edge/label is unavailable for route falsification');
     await line.dblclick({ force: true });
     assert(await composer.evaluate(node => node.hidden), 'whole-edge double-click incorrectly opened the composer');
     await label.dblclick({ force: true });
-    assert(!(await composer.evaluate(node => node.hidden)), 'label double-click did not open the composer');
+    assert(!(await composer.evaluate(node => node.hidden)), 'authorized label double-click did not open the composer');
     await composer.locator('[data-relation-close]').first().click();
     await edge.focus();
     await page.keyboard.press('F2');
-    assert(!(await composer.evaluate(node => node.hidden)), 'F2 did not open the relation composer');
+    assert(!(await composer.evaluate(node => node.hidden)), 'authorized F2 route did not open the relation composer');
     const receipts = await page.evaluate(() => CEPFoundation.registry.receipts.filter(item => item.id === 'relation.edit'));
     assert(receipts.length === 2 && receipts.every(item => item.owner === 'RelationInteractionOwner'), `relation routes did not converge: ${JSON.stringify(receipts)}`);
-    return { wholeEdgeOpened: false, convergedReceipts: receipts.length, owners: [...new Set(receipts.map(item => item.owner))] };
+    return { harnessDomain:'enterprise.editable-provider-boundary', wholeEdgeOpened:false, convergedReceipts:receipts.length, owners:[...new Set(receipts.map(item => item.owner))] };
   });
 
   await flow(browser, {
     id: 'central-change-reuse',
-    before: 'Visualize and Enterprise consumers use different domain adapters',
-    action: 'select two objects on each consumer and inspect selection action policy',
+    before: 'Visualize read-only and Enterprise editable consumers share the central relation interaction owner',
+    action: 'select two objects on each consumer and inspect central selection policy plus provider-specific availability',
     owner: 'ActionAvailabilityCore + RelationInteractionOwner',
-    oracle: 'both consumers expose the same policy revision and action owner'
+    oracle: 'policy revision/action owner are reused while availability remains provider-truthful'
   }, async page => {
     const evidence = [];
     for (const surface of ['visualize', 'enterprise']) {
       await ready(page, surface);
-      const selectedIds = await selectEligiblePair(page);
-      evidence.push(await page.evaluate(selectedIds => ({ consumer: CEPFoundation.consumer, selectedIds, policyRevision: CEPFoundation.relationUI.policyRevision, availabilityOwner: CEPFoundation.relationUI.actionAvailability.constructor.name, availability: CEPFoundation.relationUI.connectAvailability(), actionOwner: CEPFoundation.registry.commands.get('spatial.connect').owner }), selectedIds));
+      const selectedIds = surface === 'visualize' ? await selectPair(page,{requireEligible:false}) : await selectEligiblePair(page);
+      evidence.push(await page.evaluate(selectedIds => ({ consumer: CEPFoundation.consumer, selectedIds, readOnly:CEPFoundation.relations.readOnly, policyRevision: CEPFoundation.relationUI.policyRevision, availabilityOwner: CEPFoundation.relationUI.actionAvailability.constructor.name, availability: CEPFoundation.relationUI.connectAvailability(), actionOwner: CEPFoundation.registry.commands.get('spatial.connect').owner }), selectedIds));
     }
-    assert(evidence.every(item => item.policyRevision === 'RELATION-CENTRAL-04' && item.availabilityOwner === 'ActionAvailabilityCore' && item.actionOwner === 'RelationInteractionOwner' && item.availability.enabled), `central reuse mismatch: ${JSON.stringify(evidence)}`);
+    assert(evidence.every(item => item.policyRevision === 'RELATION-CENTRAL-04' && item.availabilityOwner === 'ActionAvailabilityCore' && item.actionOwner === 'RelationInteractionOwner'), `central reuse owner mismatch: ${JSON.stringify(evidence)}`);
+    const visualize=evidence.find(item=>item.consumer==='visualize'),enterprise=evidence.find(item=>item.consumer==='enterprise');
+    assert(visualize?.readOnly === true && visualize.availability.enabled === false, `Visualize did not preserve read-only availability: ${JSON.stringify(visualize)}`);
+    assert(enterprise?.readOnly === false && enterprise.availability.enabled === true, `Enterprise editable boundary did not remain available: ${JSON.stringify(enterprise)}`);
     return evidence;
   });
 
