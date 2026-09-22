@@ -1,15 +1,21 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "classification": "C2_CAPSULE_V1_1_FINAL_READY_MARKER__CONTROLLER_PREPARED__EXECUTION_TRANSPORT_ONLY__NOT_ACCEPTANCE",
   "missionId": "CORR02_C2_W04_PRODUCT_DATA_ACTION_TRUTH",
   "expectedProductParentCommit": "ac888c7e622fdefdc4f958771b21db485e33f9fc",
   "expectedProductSourceSha256": "5885c32a71c14b1b982ec8dcdadba4fafde40c78b2d9287f367f1ca28373f91d",
   "expectedProductSourceFiles": 273,
-  "packetHeadBeforeMarker": "731e63e4eb4682657c76560bd91421fe0e6e0267",
+  "packetHeadBeforeMarker": "349eabdac9219217ff4cab516b26eafcf27aaf5e",
   "noProductDeltaFromParent": true,
   "visualBootstrapRequired": true,
   "selfContainmentManifestRefreshed": true,
   "ready": true,
-  "triggerPurpose": "FINAL_C2_CAPSULE_V1_1_BUILD_ONLY",
-  "authorityCeiling": "WORKFLOW_OR_ARTIFACT_PASS_DOES_NOT_CREATE_PRODUCT_ACCEPTANCE_OR_WRITER_RESULT_AUTHORITY"
+  "triggerPurpose": "FINAL_C2_CAPSULE_V1_1_BUILD_RETRY_AFTER_TRANSPORT_HARNESS_CORRECTION",
+  "authorityCeiling": "WORKFLOW_OR_ARTIFACT_PASS_DOES_NOT_CREATE_PRODUCT_ACCEPTANCE_OR_WRITER_RESULT_AUTHORITY",
+  "previousBuildAttempt": {
+    "runId": 35683473328,
+    "conclusion": "FAIL__TRANSPORT_HARNESS_TRACKED_DIST_GUARD",
+    "productDefect": false,
+    "correction": "CAPTURE_WITH_FRESH_BUILT_DIST_THEN_RESTORE_TRACKED_DIST_BEFORE_GUARD"
+  }
 }
