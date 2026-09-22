@@ -87,5 +87,14 @@ The bootstrap is acceleration only. It does not prove genuine HTTP route/Back/Fo
 Report exact parent, candidate HEAD/tree, Product source identity, changed Product/harness paths, finding-by-finding disposition, RQ provider classification, Visualize provider/canonical/editability truth, F-036 harness correction proof, model/build/runtime/browser/check results, visual comparison disposition, and exact final artifact identities.
 
 ## Stop Gate
+
+## Final custody / output destination
+- Heavy final CHATGPT_WRITER custody folder: `/Google Drive/cep_building_mgm/00_CONTROLLER/B3R_RQ_VISUALIZE_TRUTH_CONVERGENCE`
+- Exact Google Drive folder ID: `1mOvbcrCNBi2iHnpOiyOWAiqUHZCZvRus`
+- Final candidate/evidence packages, if materially required, must be written only to this folder with exact filename, bytes, SHA-256, final candidate HEAD/tree and Product-source identity recorded in the bounded handoff.
+- Small textual receipts may also be committed only under `writer-output/presentation-corr02-b3r/**`.
+- Intermediate screenshots/logs/diffs remain local/ephemeral under OD-073; do not churn Drive or GitHub with intermediate evidence.
+- No output placement or upload creates acceptance, promotion, merge, release, deployment or stack-freeze authority.
+
 End exactly:
 `B3R_CANDIDATE_ONLY__CONTROLLER_AUDIT_REQUIRED`
