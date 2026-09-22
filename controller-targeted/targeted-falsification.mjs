@@ -125,27 +125,30 @@ const runs={};
 
 const toolbarContext={};
 {
- const {context,page,errors}=await ready('evidence',1440,1000);
+ const {context,page,errors}=await ready('rq',1440,1000);
  toolbarContext.pageErrors=errors;
- const inspect=page.locator('#domainToolbar [data-foundation-command="evidence.inspect"]').first();
- toolbarContext.beforeDisabled=await inspect.isDisabled();
  toolbarContext.beforeContext=await page.evaluate(()=>CEPFoundation.workspace?.toolbarContext?.()||null);
- const importButton=page.locator('[data-evidence-import-submit]').first();
- toolbarContext.importButtonCount=await importButton.count();
- if(toolbarContext.importButtonCount){await page.evaluate(()=>document.querySelector('[data-evidence-import-submit]')?.click());await page.waitForTimeout(180)}
- toolbarContext.afterDisabled=await inspect.isDisabled();
- toolbarContext.afterContext=await page.evaluate(()=>CEPFoundation.workspace?.toolbarContext?.()||null);
- toolbarContext.contextBound=await page.locator('#domainToolbar').getAttribute('data-context-bound');
+ toolbarContext.rowCount=await page.locator('#leftPane [data-r6-row]').count();
  await page.evaluate(()=>{
-   const command=CEPFoundation.registry.commands.get('evidence.inspect');
-   if(!command)return;
-   const run=command.run;
-   command.run=payload=>{globalThis.__C1_TOOLBAR_CAPTURED_PAYLOAD=structuredClone(payload);return run(payload)};
+   const initial=CEPFoundation.workspace?.toolbarContext?.()?.id||null;
+   if(!CEPFoundation.registry.commands.has('c1.context-probe')){
+     CEPFoundation.registry.register('c1.context-probe','C1Harness','C1 contextual toolbar probe',payload=>{
+       globalThis.__C1_TOOLBAR_CAPTURED_PAYLOAD=structuredClone(payload);
+       return {ok:true,status:'C1_CONTEXT_PROBE_EXECUTED',id:payload?.id||null};
+     },payload=>payload?.id&&payload.id!==initial?true:{enabled:false,code:'C1_PROBE_REQUIRES_SELECTION_CHANGE',reason:'Select a different real row.',availabilityOwner:'C1Harness'});
+   }
+   CEPFoundation.workspace.toolbar(['c1.context-probe'],{contextProvider:CEPFoundation.workspace.toolbarContextProvider});
  });
- if(!(await inspect.isDisabled()))await inspect.click();
+ const probe=page.locator('#domainToolbar [data-foundation-command="c1.context-probe"]').first();
+ toolbarContext.beforeDisabled=await probe.isDisabled();
+ if(toolbarContext.rowCount>1){await page.locator('#leftPane [data-r6-row]').nth(1).click();await page.waitForTimeout(120)}
+ toolbarContext.afterContext=await page.evaluate(()=>CEPFoundation.workspace?.toolbarContext?.()||null);
+ toolbarContext.afterDisabled=await probe.isDisabled();
+ toolbarContext.contextBound=await page.locator('#domainToolbar').getAttribute('data-context-bound');
+ if(!(await probe.isDisabled()))await probe.click();
  toolbarContext.capturedPayload=await page.evaluate(()=>globalThis.__C1_TOOLBAR_CAPTURED_PAYLOAD||null);
- toolbarContext.pass=toolbarContext.beforeDisabled===true&&toolbarContext.afterDisabled===false&&toolbarContext.contextBound==='true'&&!!toolbarContext.afterContext?.id&&toolbarContext.capturedPayload?.id===toolbarContext.afterContext.id&&toolbarContext.capturedPayload?.route==='toolbar';
- await page.screenshot({path:new URL('screenshots/evidence-contextual-toolbar-1440x1000.png',out).pathname,fullPage:false});
+ toolbarContext.pass=toolbarContext.rowCount>1&&toolbarContext.beforeDisabled===true&&toolbarContext.afterDisabled===false&&toolbarContext.contextBound==='true'&&toolbarContext.beforeContext?.id!==toolbarContext.afterContext?.id&&toolbarContext.capturedPayload?.id===toolbarContext.afterContext?.id&&toolbarContext.capturedPayload?.route==='toolbar';
+ await page.screenshot({path:new URL('screenshots/rq-contextual-toolbar-1440x1000.png',out).pathname,fullPage:false});
  await context.close();
 }
 
