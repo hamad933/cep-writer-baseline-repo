@@ -1,12 +1,12 @@
 {
-  "schemaVersion": 9,
-  "classification": "CORR02_B3R_REQUIRED_INPUT_MANIFEST__CAPSULE_V1_1__MISSION_BOUND__NOT_LIVE_AUTHORITY",
-  "productParentCommit": "fec137df4b06111db160cdcbd25d7c725dfec286",
-  "productCanonicalSourceSha256": "e3951754ae79016603456b14dc71856671428e0d0811ec119388fbd79093890c",
+  "schemaVersion": 10,
+  "classification": "CORR02_B3R_CORRECTION02_REQUIRED_INPUT_MANIFEST__CAPSULE_V1_1__MISSION_BOUND__NOT_LIVE_AUTHORITY",
+  "productParentCommit": "64a31e409c860a1e266101fd38fcb01f679327a2",
+  "productCanonicalSourceSha256": "16588836714764f10bc52066827e82b98b6809284e9aabeb19dd1e92580b6e36",
   "productCanonicalSourceFiles": 273,
-  "candidateBranch": "capsule/corr02-b3r-rq-visualize",
-  "executionMode": "CHATGPT_WRITER__CAPSULE_V1_1__LOCAL_FIRST__B3R_RQ_VISUALIZE_TRUTH_CONVERGENCE",
-  "firstMutationBatch": "B3R_RQ_VISUALIZE_TRUTH_CONVERGENCE",
+  "candidateBranch": "capsule/corr02-b3r-corr02-visualize-views",
+  "executionMode": "CHATGPT_WRITER__CAPSULE_V1_1__LOCAL_FIRST__B3R_CORRECTION02_VISUALIZE_FOUR_VIEW",
+  "firstMutationBatch": "B3R_CORRECTION02_VISUALIZE_FOUR_VIEW_COMPOSITION",
   "noRequiredLiveDriveFetch": true,
   "entries": [
     {
@@ -16,33 +16,43 @@
     },
     {
       "path": "cep-writer/ACCEPTANCE_GATES.md",
-      "size": 935,
-      "sha256": "0019c8090738a66dd23a5ed34df09def8bcf92dc01f244eb5fb60ec154000764"
+      "size": 1007,
+      "sha256": "3763e9ce0de11f54fc39b5efb2fc1e4f28e297f1f0c0e666a0d587725ac3fe41"
+    },
+    {
+      "path": "cep-writer/B3R_CORRECTION02_MISSION.md",
+      "size": 6604,
+      "sha256": "c8931f55ed345771970fb159f3759d6d99f2f97857db738d141773cc47f4bb46"
+    },
+    {
+      "path": "cep-writer/B3R_MISSION.md",
+      "size": 6604,
+      "sha256": "c8931f55ed345771970fb159f3759d6d99f2f97857db738d141773cc47f4bb46"
     },
     {
       "path": "cep-writer/CANONICAL_MISSION_SOURCE.md",
-      "size": 64222,
-      "sha256": "0edfe7fff914ac11c60e16ba6f38d1de71ef3a98404f0b11df322abc545bebd2"
+      "size": 70628,
+      "sha256": "b5f845d5cc4e2d08ed490f5237aca9c5f81d04cdccdf43ad9d9a26c1c40ded41"
     },
     {
       "path": "cep-writer/CAPSULE_BINDING.json",
-      "size": 2310,
-      "sha256": "5b77b6f27da849775aebdc5aa41ace05847d1776013d176626e6fce1196b71a2"
+      "size": 2637,
+      "sha256": "db6ec7b0c7dc2aa77211d34fd59e3778c51514b9dfb88094beda5459f2a0b4ba"
     },
     {
       "path": "cep-writer/CAPSULE_READY.json",
-      "size": 574,
-      "sha256": "cbbee221262548bd809b91d1a12d5630f49280aa48c1be1a13fc312e333c4b43"
+      "size": 669,
+      "sha256": "c6a9a0da43709c8513c54c90ef39d7be3986b829e18527a833720bce62a683bc"
     },
     {
       "path": "cep-writer/CAPSULE_VISUAL_BOOTSTRAP.json",
-      "size": 3982,
-      "sha256": "7012d03170de0fb417019a1ee82dfd53be9187ba2ae6a5bc041e239523dc82a3"
+      "size": 3659,
+      "sha256": "289265dfd0f443fca4301028fbe0df41aea8200c44687db654816cd096ecca03"
     },
     {
       "path": "cep-writer/CURRENT_MISSION.md",
-      "size": 64222,
-      "sha256": "0edfe7fff914ac11c60e16ba6f38d1de71ef3a98404f0b11df322abc545bebd2"
+      "size": 70628,
+      "sha256": "b5f845d5cc4e2d08ed490f5237aca9c5f81d04cdccdf43ad9d9a26c1c40ded41"
     },
     {
       "path": "cep-writer/GIT_WORKFLOW.md",
@@ -51,13 +61,13 @@
     },
     {
       "path": "cep-writer/KNOWN_OPEN_GATES.md",
-      "size": 890,
-      "sha256": "e2529cc7b55339df076241c95ae2df98a342878d33ac4c0bb78c9b0f9b3d2ba1"
+      "size": 724,
+      "sha256": "6abcbdc25c2676c321317c0a85f6ab79f51f3fae743db686ece31777f384014b"
     },
     {
       "path": "cep-writer/PARENT_IDENTITY.json",
-      "size": 893,
-      "sha256": "ec81b6089a9fbaff568bbc72d766f8c0d588285e5dadd5955ffbea4f0840068e"
+      "size": 796,
+      "sha256": "ef100a2b3b74b05bc918c61ff2c3ce1a6dde7f712b63f41bba46a7fdc6764bfb"
     },
     {
       "path": "cep-writer/REFERENCE_MANIFEST.json",
@@ -71,28 +81,28 @@
     },
     {
       "path": "cep-writer/REPOSITORY_MANIFEST.json",
-      "size": 405,
-      "sha256": "acd9fbfc72a0247036d1c87d0239fd09ddd231d845c93201f12e85f2c4d4b990"
+      "size": 499,
+      "sha256": "fd9cdf1b3fb1b66ab473d680273f7ff06d5b759add6e2ebebd05456be3818430"
     },
     {
       "path": "cep-writer/START_HERE.md",
-      "size": 833,
-      "sha256": "b339fe9b809f8e0a08b27d4c7be5ca670e8eec57fbad0d87a4871f3269a38663"
+      "size": 1009,
+      "sha256": "39cf41c2d7d0789484a926e99734da4af4020367123236ea4920f84632099a4d"
     },
     {
       "path": "cep-writer/TASK_BINDING.json",
-      "size": 1398,
-      "sha256": "ca38833b039dad465ce1c98b1b71bd6d24e6a57e5124ac3139b8bd2b025cdc82"
+      "size": 1194,
+      "sha256": "be2dfdcc379b96633c03a6ff61c095e9a94f46aca026e1d80e315086916aa3e1"
     },
     {
       "path": "cep-writer/TASK_PACKET_OVERLAY.md",
-      "size": 487,
-      "sha256": "18813d81650f4e2995655e9abfdb665c1f5def1d1bd75e14d74a4f8752ac4791"
+      "size": 795,
+      "sha256": "edbf67e625e136a609e4051b8d78b9aab7890f1698e57f92f7a0223710a762a8"
     },
     {
       "path": "cep-writer/WRITER_AUTHORITY_BASELINE.md",
-      "size": 905,
-      "sha256": "362ad6d2b574d14005be40521f975e48dbd7d2fb79d999836e7c76c9cd346ad0"
+      "size": 994,
+      "sha256": "3691fe3a8cc5aadc29580749851a1ccaa5e8344058f607d5e68a1c63447fd954"
     },
     {
       "path": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv",
@@ -120,6 +130,11 @@
       "sha256": "044a36ae2ba1331cbf78a033d0bdd554e448cb1d0c743a24aeaa9433970e179a"
     },
     {
+      "path": "cep-writer/controller-input/B3R_CONTROLLER_CORR01_AND_CORRECTION02_BINDING.md",
+      "size": 1098,
+      "sha256": "0de30bc27cb8288325631105c5b34f942c107424f7ede5e747e32a74ae0c8628"
+    },
+    {
       "path": "cep-writer/controller-input/C1_CONTROLLER_ACCEPTANCE.md",
       "size": 4709,
       "sha256": "c816ac5d3efd0ffe91360f54f12692a2d76777d82726dd9696cbd1e3973d4a2d"
@@ -130,9 +145,14 @@
       "sha256": "0c0734022deeb49f5c5c6210ca9f5a6cdf4271106e6149220cd47e66791ff496"
     },
     {
+      "path": "cep-writer/controller-input/C3_CONTROLLER_ACCEPTANCE.md",
+      "size": 7445,
+      "sha256": "a863f5975cc255f38843102b63f5e5df5552029af834d26cfb15717f350988ee"
+    },
+    {
       "path": "cep-writer/controller-input/CORR02_PRE_WRITER_DEEP_DEFECT_AUDIT.md",
-      "size": 45032,
-      "sha256": "e82deab6dbb033a3ff99ac563347f73b9f379da033ebe462fd769e2e3eb8b49f"
+      "size": 48849,
+      "sha256": "c4d7e6b78e7ef9b17e7b370c2464a3ce44042874238364ea433604141731cf20"
     },
     {
       "path": "cep-writer/references/23_SURFACE_ZERO_LOSS_IDENTITY_REFERENCE_MATRIX.md",
@@ -160,9 +180,24 @@
       "sha256": "ed414fba1174712017a969a6e6f9143cba092fba5fa1b4b5264192193ea989c9"
     },
     {
+      "path": "cep-writer/references/domain-oracles/04_D_VISUALIZE_CANVAS_REFERENCE_DELTA_ADDENDUM_v0.1.docx",
+      "size": 14756,
+      "sha256": "c0ad0015c3ef0770ea103b4cdbdf69cd9a17a4304c025a32b9ecc181ba6d9724"
+    },
+    {
       "path": "cep-writer/references/domain-oracles/CEP_PRD_001_A03_PROGRESS_AND_EVIDENCE_OPERATING_MODEL_v1.0_APPROVED.md",
       "size": 58241,
       "sha256": "7c00642be3644a7d24c783c17a9b9fdeb8235caa043e10013b662a2e21b57caa"
+    },
+    {
+      "path": "cep-writer/references/domain-oracles/CEP_RESEARCH_QUALITY_EXECUTABLE_BLUEPRINT_WRITER_PACKET_v1.0_20260907.docx",
+      "size": 16420,
+      "sha256": "00152d5afa8604d97bddd8e048ae202cab117d032416b46c77f94bc50dd830c9"
+    },
+    {
+      "path": "cep-writer/references/domain-oracles/CEP_VISUALIZE_EXECUTABLE_BLUEPRINT_WRITER_PACKET_v1.0_20260907.docx",
+      "size": 15358,
+      "sha256": "5f49d30d388eaeac62ee144224929b5a0ddb01cf2284f03176405cd51721c462"
     },
     {
       "path": "cep-writer/references/domain-oracles/CEP_W03_WORK_MASTER_PLAN_A-M_2026-08-31.md",
@@ -445,6 +480,16 @@
       "sha256": "1eed1bfeaed534bff44a3c69d88ea48fb6764b599a326499f6fe18e2c0aef470"
     },
     {
+      "path": "tools/b3r-rq-visualize/capture_b3r_corr02_parent.py",
+      "size": 7682,
+      "sha256": "092fbe8e9914c60870ec8d8358500f8c14c69cd299d9320f24fe6d8954167add"
+    },
+    {
+      "path": "tools/b3r-rq-visualize/capture_b3r_parent.py",
+      "size": 7056,
+      "sha256": "a810ac4bded252d3063aa5ae333d74005cd045874daac768419f2dd7275efe51"
+    },
+    {
       "path": "tools/c2-capsule/capture-w04-baseline.mjs",
       "size": 6610,
       "sha256": "cf56caab7be3baddce0d103d62df78158365d1e4fda70b7e9d50f90de1a14bb9"
@@ -478,36 +523,7 @@
       "path": "tools/writer-capsule/verify_capsule.py",
       "size": 3226,
       "sha256": "6edf1fadf53f1841163f82de0b4cd18ccdf5c5b1d1e76ef45ede7d4f860f04ae"
-    },
-    {
-      "path": "cep-writer/B3R_MISSION.md",
-      "size": 8862,
-      "sha256": "f53cd68749ddb3219292e530714ba91883ffcbf911777aa18158508e831fab8c"
-    },
-    {
-      "path": "cep-writer/controller-input/C3_CONTROLLER_ACCEPTANCE.md",
-      "size": 7445,
-      "sha256": "a863f5975cc255f38843102b63f5e5df5552029af834d26cfb15717f350988ee"
-    },
-    {
-      "path": "cep-writer/references/domain-oracles/CEP_RESEARCH_QUALITY_EXECUTABLE_BLUEPRINT_WRITER_PACKET_v1.0_20260907.docx",
-      "size": 16420,
-      "sha256": "00152d5afa8604d97bddd8e048ae202cab117d032416b46c77f94bc50dd830c9"
-    },
-    {
-      "path": "cep-writer/references/domain-oracles/CEP_VISUALIZE_EXECUTABLE_BLUEPRINT_WRITER_PACKET_v1.0_20260907.docx",
-      "size": 15358,
-      "sha256": "5f49d30d388eaeac62ee144224929b5a0ddb01cf2284f03176405cd51721c462"
-    },
-    {
-      "path": "cep-writer/references/domain-oracles/04_D_VISUALIZE_CANVAS_REFERENCE_DELTA_ADDENDUM_v0.1.docx",
-      "size": 14756,
-      "sha256": "c0ad0015c3ef0770ea103b4cdbdf69cd9a17a4304c025a32b9ecc181ba6d9724"
-    },
-    {
-      "path": "tools/b3r-rq-visualize/capture_b3r_parent.py",
-      "size": 7056,
-      "sha256": "a810ac4bded252d3063aa5ae333d74005cd045874daac768419f2dd7275efe51"
     }
-  ]
+  ],
+  "productParentTree": "f0eab313d37552889bce080a74b255b2ce91a38d"
 }

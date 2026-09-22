@@ -4447,4 +4447,51 @@ Accepted closure: `F-007`, `F-008`, `F-009`, `F-010`, `F-044`; `F-011` is `CLOSE
 
 B3-R sequencing is now unblocked. Section 0.8 Owner authorization for RQ+Visualize remains operative under `OD-20260921-071`, while section 17.3 controls the newer execution sequence and scope. With C1/C2/C3 accepted, the applicable prerequisites for `B3-R` are satisfied. Next action is Controller preparation and exact verification of a `SELF_CONTAINED_WRITER_WORKSPACE_CAPSULE_V1_1` derived from accepted C3 HEAD `fec137df...`; no B3-R Product mutation may start from the old Google-AI-Studio continuation assumptions or from a sibling ZIP. B3-R owns `F-027`, `F-034`, `F-035`, `F-036` plus bounded RQ/Visualize truth corrections. No main merge/release/deployment/stack freeze is authorized.
 
-Final B3-R heavy-output Drive folder: `1mOvbcrCNBi2iHnpOiyOWAiqUHZCZvRus` (`/Google Drive/cep_building_mgm/00_CONTROLLER/B3R_RQ_VISUALIZE_TRUTH_CONVERGENCE`).
+### 17.14 B3-R Capsule v1.1 exact launch binding — 2026-09-22
+
+B3-R is now launchable from one exact Controller-prepared CHATGPT_WRITER Capsule v1.1 derived from accepted C3 HEAD `fec137df4b06111db160cdcbd25d7c725dfec286` / Product source `e3951754ae79016603456b14dc71856671428e0d0811ec119388fbd79093890c / 273`. This capsule supersedes the old direct Google-AI-Studio continuation assumptions for B3 execution.
+
+Exact capsule identity:
+- mission `CORR02_B3R_RQ_VISUALIZE_TRUTH_CONVERGENCE`;
+- transport branch `capsule/corr02-b3r-rq-visualize`;
+- transport HEAD `aa172b5f3a3129719f307c0831ecaae1c3d8bac0`;
+- transport tree `3058c142475834296f11fa84ddab2cc04488cfe7`;
+- zero Product-path delta from accepted C3;
+- final ZIP `CEP_WRITER_WORKSPACE_CAPSULE_B3R_RQ_VISUALIZE_aa172b5.zip`;
+- bytes `87,096,926`;
+- SHA-256 `520af0a2b62ea77bff7201b7fea750b1e4188026ab7e254f173408df98c84922`;
+- durable Drive file `1Bc2V8J3pwQoJ7xfjJcXGW5jpqiLOwPBZ`;
+- SHA sidecar Drive `1jhj4vZO4ozLdd3TXf-ThYRj7OsP0qVle`;
+- preparation receipt Drive `1yRPuOdzjpqtG3cqPZ-YDaJYGYdtjJxPD`;
+- heavy final Writer-output folder `1mOvbcrCNBi2iHnpOiyOWAiqUHZCZvRus`.
+
+Final Controller preparation checks are PASS: `100/100` packaged Writer inputs, no required live Drive fetch, exact Product identity, tracked-source guard, Visual Bootstrap `READY`, 6 source-bound RQ/Visualize screenshots + 1 raw receipt, direct Controller inspection of all 6 screenshots and applicable governed references, standalone verifier, complete git bundle, fresh clean materialization to exact HEAD/tree, post-Drive-download hash/bytes and ZIP CRC. The bootstrap route class is `NAVIGATION_INDEPENDENT_EXACT_CANDIDATE_BROWSER_RENDER__NOT_GENUINE_ROUTE`; the Writer must generate fresh post-mutation browser/visual evidence and keep genuine-route proof separate.
+
+Only this capsule is authorized as the B3-R inbound workspace. Writer scope is `F-027`, `F-034`, `F-035`, `F-036` plus minimum RQ/Visualize truth corrections. The Writer must preserve accepted C1/C2/C3 owners, may not mutate Foundation/Today/W04/W03/W05/persistence/runtime/dependencies/governance, may not promote Balanced6/local acceptance data to canonical truth, and may not make the Visualize read-only acceptance provider writable merely to satisfy stale tests. F-036 harness edits are allowed only to align stale relation assumptions with truthful provider availability while preserving valid route/reuse/selection/canonical-boundary assertions.
+
+Stop exactly at `B3R_CANDIDATE_ONLY__CONTROLLER_AUDIT_REQUIRED`. No additional Owner authorization is required because section 0.8 authorization remains active under `OD-20260921-071`; this launch binding creates no acceptance, main merge, release, deployment or stack freeze.
+
+
+### 17.15 B3-R Independent Controller review — Correction02 required
+
+The B3-R Writer result is **not accepted as delivered**. Exact Writer candidate is HEAD `c77c1953f935e938e46034aa5decda931319ec23`, tree `31ca4506816786fbc0948069408ce97abcb965c2`, Product source `684434bcd21f0b61c6905f12ab2518170dc3c132d639f52c947ec446d67a38c6 / 273`. Controller direct falsification found two bounded truth gaps: noncanonical providers with write methods could bypass the Visualize authority-name guard and report `canonicalMutation:true`; provider-unbound RQ exposed `rq.search` as AVAILABLE. Under `OD-20260916-044`, Controller Correction01 changed only `adapters/visualize/domain.ts`, `surfaces/rq/surface.ts`, and `tools/b3r-rq-visualize/falsify-b3r.mjs`.
+
+Exact Correction01 lineage: HEAD `64a31e409c860a1e266101fd38fcb01f679327a2`; tree `f0eab313d37552889bce080a74b255b2ce91a38d`; Product source `16588836714764f10bc52066827e82b98b6809284e9aabeb19dd1e92580b6e36 / 273`. Post-correction: build PASS; model `210/210`; runtime PASS; Balanced6 `32/32`; B3-R focused falsification `13/13`; duplicate-owner PASS. Root check remains red only for the three inherited browser/evidence-lineage rows.
+
+New blocking finding `F-045`: current normal Visualize Product composition still exposes only `Topology / Objects / History`. The four governed `TREE / PATH / GRAPH / CANVAS` adapters exist only as descriptors/commands and are not bound as real normal-Product view states. As a result, `visualize.select`, `visualize.move`, and `visualize.viewport` remain unavailable absent a view mode, and the Product cannot satisfy the mission's four-view identity/reference gate.
+
+New blocking finding `F-046`: the B3-R final visual evidence captures only six default/right-reveal states and does not exercise the required Tree/Path/Graph/Canvas states against the governed references at the required viewports.
+
+**B3-R Correction02 scope, serialized, existing-owner only:**
+- start from exact Controller Correction01 HEAD `64a31e409c860a1e266101fd38fcb01f679327a2`; do not reset to C3 or the Writer candidate and do not overlay a sibling ZIP;
+- wire the existing `VisualizeDomainAdapter.view(TREE|PATH|GRAPH|CANVAS)` adapters into the normal Visualize Product composition using the existing single `SpatialInteractionKernel`/shared spatial owner;
+- provide one truthful view-selection/context binding so `visualize.select/move/viewport` receive the active governed view mode;
+- implement/distinguish the four governed view Presentation/interaction states only through existing Visualize/spatial seams; no second engine, relation owner, canonical store or Foundation rewrite;
+- preserve `LOCAL_ACCEPTANCE_PROJECTION_ONLY / canonical:false / READ_ONLY`; do not make the Balanced6 acceptance provider canonical/writable to satisfy view behavior;
+- Tree remains page-level visual authority; Path/Graph/Canvas are supporting component references and do not replace the shared shell;
+- capture/open fresh exact-candidate evidence for Tree/Path/Graph/Canvas at `1440×1000` and `1024×900` as applicable, including selected/context states and unavailable mutation truth;
+- preserve corrected RQ Search provider availability; RQ may remain truthful empty/unavailable while no current provider is admitted and must not be padded with synthetic reference data;
+- rerun build, `210/210`, runtime, Balanced6 `32/32`, B3-R focused falsification, duplicate-owner scan, browser/check classification, and view-specific keyboard/pointer/focus/no-overflow/Bidi evidence;
+- output remains `CANDIDATE_ONLY__CONTROLLER_AUDIT_REQUIRED`.
+
+This correction is already inside the Owner-authorized B3-R work item; no second Owner authorization is required once the Controller prepares the exact Correction02 Capsule v1.1. No main merge/release/deployment/stack freeze.

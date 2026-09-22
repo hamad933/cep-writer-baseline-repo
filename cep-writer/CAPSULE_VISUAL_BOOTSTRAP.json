@@ -1,10 +1,10 @@
 {
-  "schemaVersion": 7,
-  "classification": "CORR02_B3R_CONTROLLER_BOUND_VISUAL_BOOTSTRAP__LOCAL_OFFLINE_EXACT_SOURCE_BUILD",
+  "schemaVersion": 8,
+  "classification": "CORR02_B3R_CORRECTION02_CONTROLLER_BOUND_VISUAL_BOOTSTRAP__EXACT_CORR01_PARENT",
   "enabled": true,
   "required": true,
   "allowWriterLocalRecapture": true,
-  "expectedProductParentCommit": "fec137df4b06111db160cdcbd25d7c725dfec286",
+  "expectedProductParentCommit": "64a31e409c860a1e266101fd38fcb01f679327a2",
   "minimumScreenshotCount": 4,
   "viewports": [
     {
@@ -18,17 +18,16 @@
   ],
   "states": [
     {
-      "surface": "rq",
+      "surface": "visualize",
       "states": [
-        "default",
+        "parent-default-f045-gap",
         "right-revealed"
       ]
     },
     {
-      "surface": "visualize",
+      "surface": "rq",
       "states": [
-        "tree-default",
-        "right-revealed"
+        "regression-default"
       ]
     }
   ],
@@ -40,7 +39,7 @@
   },
   "setupCommands": [
     {
-      "id": "b3r-verify-writer-inputs",
+      "id": "corr02-verify-writer-inputs",
       "cwd": ".",
       "argv": [
         "python3",
@@ -48,7 +47,7 @@
       ]
     },
     {
-      "id": "b3r-extract-donor",
+      "id": "corr02-extract-donor",
       "cwd": ".",
       "argv": [
         "python3",
@@ -56,7 +55,7 @@
       ]
     },
     {
-      "id": "b3r-build-runtime",
+      "id": "corr02-build-runtime",
       "cwd": ".",
       "argv": [
         "node",
@@ -66,15 +65,15 @@
   ],
   "captureCommands": [
     {
-      "id": "b3r-rq-visualize-current-parent-baseline",
+      "id": "corr02-f045-parent-baseline",
       "cwd": ".",
       "argv": [
         "python3",
-        "tools/b3r-rq-visualize/capture_b3r_parent.py"
+        "tools/b3r-rq-visualize/capture_b3r_corr02_parent.py"
       ]
     },
     {
-      "id": "b3r-restore-generated-dist",
+      "id": "corr02-restore-generated-dist",
       "cwd": ".",
       "argv": [
         "git",
@@ -86,17 +85,12 @@
     }
   ],
   "baselineGlobs": [
-    ".capsule-b3r-output/screenshots/*.png"
+    ".capsule-b3r-corr02-output/screenshots/*.png"
   ],
   "receiptGlobs": [
-    ".capsule-b3r-output/*.json"
+    ".capsule-b3r-corr02-output/*.json"
   ],
   "referenceBindings": [
-    {
-      "surface": "rq",
-      "reference": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/04_RESEARCH_AND_QUALITY/image-gen-1(20260813-194728).png",
-      "role": "REVIEWED_FINAL_CANDIDATE__BOUNDED_PRESENTATION_INPUT_ONLY"
-    },
     {
       "surface": "visualize-tree",
       "reference": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/03_VISUALIZE/CEP_VIS_001_VISUALIZE_TREE_CORRECTED_REFERENCE_v2.png",
@@ -120,24 +114,22 @@
   ],
   "comparisonPlan": [
     {
-      "surface": "rq",
+      "surface": "visualize",
       "check": [
-        "non-production acceptance records vs provider truth",
-        "exact SourceRevision compare availability",
-        "provenance/source/revision context",
-        "no Formal Review/Mastery authority",
-        "typed regions and analytical identity"
+        "parent lacks governed TREE/PATH/GRAPH/CANVAS selector/context (F-045)",
+        "one Spatial engine/four thin view adapters",
+        "view-specific Presentation/interaction grammar",
+        "selection/context persistence",
+        "read-only/canonical:false provider truth",
+        "Tree page authority plus Path/Graph/Canvas supporting ceilings",
+        "1440/1024 RIGHT behavior"
       ]
     },
     {
-      "surface": "visualize",
+      "surface": "rq",
       "check": [
-        "canonical copy versus canonical:false provider",
-        "read-only/editable availability truth",
-        "one Spatial engine/four view adapters",
-        "representation versus canonical relation truth",
-        "Tree main reference plus Path/Graph/Canvas supporting ceilings",
-        "responsive RIGHT and typed inspector"
+        "regression only: provider-unbound Search stays unavailable",
+        "no Balanced6 leakage"
       ]
     }
   ]

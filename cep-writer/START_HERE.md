@@ -1,13 +1,11 @@
-# CEP Writer Start Here — CORR02 B3-R
+# CEP Writer Start Here — B3-R Correction02
 
-Mission: `CORR02_B3R_RQ_VISUALIZE_TRUTH_CONVERGENCE`
-Writer class: `CHATGPT_WRITER`
-Mode: `CANDIDATE_ONLY / LOCAL_FIRST / NO_SELF_PROMOTION`
+Mission: `CORR02_B3R_CORRECTION02_VISUALIZE_FOUR_VIEW_COMPOSITION`
+Writer: use the **same old B3-R Writer chat if available**, but use prior context only as knowledge.
 
-1. Verify the capsule and materialize the bundled repository once.
-2. Confirm accepted Product parent `fec137df4b06111db160cdcbd25d7c725dfec286` and Product source `e3951754... / 273`.
-3. Read `B3R_MISSION.md`, current mission, C3 Controller acceptance, exact RQ/Visualize profiles, domain packets and visual references.
-4. Inspect the prebuilt RQ/Visualize Visual Bootstrap before editing.
-5. Correct only F-027/F-034/F-035/F-036 under the exact allowlist.
-6. Never make local acceptance/demo providers canonical/writable to satisfy stale tests.
-7. Fresh-recapture after Product mutation and stop at `B3R_CANDIDATE_ONLY__CONTROLLER_AUDIT_REQUIRED`.
+1. Download/verify/materialize this new Capsule. **Do not continue from the old B3-R working tree.**
+2. Confirm parent `64a31e409c860a1e266101fd38fcb01f679327a2` / tree `f0eab313d37552889bce080a74b255b2ce91a38d` / Product `16588836714764f10bc52066827e82b98b6809284e9aabeb19dd1e92580b6e36 / 273`.
+3. Read `B3R_CORRECTION02_MISSION.md` first, then current mission, current defect audit, Visualize profile and Tree/Path/Graph/Canvas references.
+4. Inspect the Controller-prepared parent bootstrap. It intentionally proves F-045: normal parent has no governed four-view Product selector/context.
+5. Correct only F-045/F-046. RQ is regression-only. Preserve Controller Correction01.
+6. Fresh-capture all four views at governed viewports and stop at `B3R_CANDIDATE_ONLY__CONTROLLER_AUDIT_REQUIRED`.

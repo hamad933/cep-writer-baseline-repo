@@ -1,7 +1,7 @@
-# CEP Writer Authority Baseline — B3-R
+# Writer Authority Baseline — B3-R Correction02
 
-Authority order for this capsule: latest explicit Owner decision → live CURRENT_STATE captured by Controller at preparation → exact Controller-accepted C3 successor/evidence → live Owner decisions/current locks → current CORR02 mission/profile/intake → governed oracles/references → classified historical evidence.
+Authority order for this capsule: latest explicit Owner decision → live CURRENT_STATE resolved by Controller at preparation → exact Controller-Correction01 parent/evidence → live Owner decisions/current locks → current CORR02 mission/profile/intake → governed oracles/references → classified historical evidence.
 
-Exact Product parent for B3-R is `fec137df4b06111db160cdcbd25d7c725dfec286`, Product source `e3951754ae79016603456b14dc71856671428e0d0811ec119388fbd79093890c / 273`.
+Exact Correction02 Product parent is `64a31e409c860a1e266101fd38fcb01f679327a2`, tree `f0eab313d37552889bce080a74b255b2ce91a38d`, Product source `16588836714764f10bc52066827e82b98b6809284e9aabeb19dd1e92580b6e36 / 273`. This parent contains the Controller's post-Writer truth fixes and is not an overall B3-R acceptance.
 
-The capsule transport commit is not Product parent authority. The Writer may mutate only the B3-R allowlist and cannot self-promote. RQ/Visualize reference binaries are Presentation inputs with their exact ceilings; they do not grant provider/canonical truth. Balanced6/local acceptance data remains non-production unless an explicit provider contract says otherwise.
+The Capsule transport commit is not Product authority. The Writer may mutate only the Correction02 allowlist, cannot self-promote, and must preserve prior B3-R truth closures. Visual references are Presentation authority only; local acceptance data remains non-production/noncanonical/read-only.

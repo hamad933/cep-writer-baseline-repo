@@ -1,9 +1,7 @@
-# CORR02 B3-R — Known Open Gates
+# CORR02 B3-R Correction02 — Known Open Gates
 
-- F-027: RQ normal Product uses non-production Balanced6 acceptance records.
-- F-034: Visualize normal copy says canonical over `LOCAL_ACCEPTANCE_PROJECTION_ONLY / canonical:false`.
-- F-035: current Visualize provider is read-only while profile declares domain-valid editing commands. Never solve by making the acceptance provider canonical/writable.
-- F-036: three legacy relation browser flows assume editability against the read-only provider and must be corrected as harness truth, not Product coercion.
-- RQ visual is `REVIEWED_FINAL_CANDIDATE`, not Owner-confirmed final.
-- Visualize Tree is the page-level Owner-confirmed final Presentation reference; Path/Graph/Canvas are supporting references with their documented ceilings.
-- Genuine route/browser lineage evidence remains a separate proof class from navigation-independent capsule bootstrap.
+- `F-045 BLOCKING`: governed Tree/Path/Graph/Canvas Product composition is not wired; parent shows only Topology/Objects/History and view-required commands remain unavailable without governed view context.
+- `F-046 BLOCKING`: final evidence must include fresh exact-candidate Tree/Path/Graph/Canvas states at both governed viewport families and selected/context states.
+- Prior B3-R provider truth corrections are regression-only and MUST remain closed: F-027, F-034, F-035, F-036.
+- RQ is regression-only; do not refill unavailable RQ with Balanced6/non-production data.
+- Genuine-route evidence remains a separate proof class from navigation-independent Capsule bootstrap.

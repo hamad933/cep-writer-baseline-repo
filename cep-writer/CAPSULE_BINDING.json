@@ -1,24 +1,31 @@
 {
-  "schemaVersion": 4,
-  "classification": "CORR02_B3R_RQ_VISUALIZE__CAPSULE_V1_1__CONTROLLER_PREPARED",
-  "missionId": "CORR02_B3R_RQ_VISUALIZE_TRUTH_CONVERGENCE",
+  "schemaVersion": 5,
+  "classification": "CORR02_B3R_CORRECTION02_VISUALIZE_FOUR_VIEW__CAPSULE_V1_1__CONTROLLER_PREPARED",
+  "missionId": "CORR02_B3R_CORRECTION02_VISUALIZE_FOUR_VIEW_COMPOSITION",
   "writerClass": "CHATGPT_WRITER",
+  "preferredContinuation": "SAME_PRIOR_B3R_WRITER_CHAT__NEW_CAPSULE_REQUIRED",
   "controllerPreparedWorkspace": true,
-  "expectedProductParentCommit": "fec137df4b06111db160cdcbd25d7c725dfec286",
-  "expectedProductSourceSha256": "e3951754ae79016603456b14dc71856671428e0d0811ec119388fbd79093890c",
+  "expectedProductParentCommit": "64a31e409c860a1e266101fd38fcb01f679327a2",
+  "expectedProductParentTree": "f0eab313d37552889bce080a74b255b2ce91a38d",
+  "expectedProductSourceSha256": "16588836714764f10bc52066827e82b98b6809284e9aabeb19dd1e92580b6e36",
   "expectedProductSourceFiles": 273,
-  "candidateBranch": "capsule/corr02-b3r-rq-visualize",
+  "candidateBranch": "capsule/corr02-b3r-corr02-visualize-views",
   "authorityRoot": "cep-writer/",
-  "activeMutationBatch": "B3R_RQ_VISUALIZE_TRUTH_CONVERGENCE",
+  "activeMutationBatch": "B3R_CORRECTION02_VISUALIZE_FOUR_VIEW_COMPOSITION",
+  "openFindings": [
+    "F-045",
+    "F-046"
+  ],
   "writableProductPaths": [
-    "stack/native-typescript/adapters/rq/**",
-    "stack/native-typescript/surfaces/rq/**",
     "stack/native-typescript/adapters/visualize/**",
     "stack/native-typescript/surfaces/visualize/**",
     "stack/native-typescript/surfaces/m0-controller-composition.ts",
-    "tools/browser-conformance.mjs",
     "tools/b3r-rq-visualize/**",
     "writer-output/presentation-corr02-b3r/**"
+  ],
+  "regressionOnlyAreas": [
+    "stack/native-typescript/adapters/rq/**",
+    "stack/native-typescript/surfaces/rq/**"
   ],
   "prohibitedProductAreas": [
     "foundation/**",
@@ -39,15 +46,15 @@
   "localFirst": true,
   "writerPreparationDuty": "VERIFY_MATERIALIZE_COMPARE__NOT_CAPSULE_OR_BASELINE_ASSEMBLY",
   "visualBootstrapConfig": "cep-writer/CAPSULE_VISUAL_BOOTSTRAP.json",
-  "visualBootstrapPolicy": "MATERIAL__CONTROLLER_PREPARED_EXACT_ACCEPTED_C3_PARENT_RQ_VISUALIZE_BASELINE",
+  "visualBootstrapPolicy": "MATERIAL__CONTROLLER_PREPARED_EXACT_CORR01_PARENT__F045_GAP_BASELINE",
   "allowWriterLocalRecapture": true,
   "intermediateEvidenceCustody": "LOCAL_EPHEMERAL",
   "heavyFinalCustody": "GOOGLE_DRIVE_WHEN_REQUIRED",
   "githubRole": "SOURCE_DELTA_AND_SMALL_RECEIPTS_ONLY",
   "managedRunnerRole": "FINAL_CORROBORATION_ONLY__NOT_DEVELOPMENT_LOOP",
   "stopGate": "B3R_CANDIDATE_ONLY__CONTROLLER_AUDIT_REQUIRED",
-  "identityLaw": "PRODUCT_PARENT_IS_CONTROLLER_ACCEPTED_C3_CORR01__CAPSULE_TRANSPORT_HEAD_TREE_ARE_GENERATED_AT_BUILD",
-  "finalOutputDriveFolderId": "1mOvbcrCNBi2iHnpOiyOWAiqUHZCZvRus",
-  "finalOutputDrivePath": "/Google Drive/cep_building_mgm/00_CONTROLLER/B3R_RQ_VISUALIZE_TRUTH_CONVERGENCE",
+  "identityLaw": "PRODUCT_PARENT_IS_CONTROLLER_CORR01_64a31e4__OLD_WRITER_WORKTREE_IS_NOT_A_LEGAL_PARENT__CAPSULE_TRANSPORT_HEAD_TREE_GENERATED_AT_BUILD",
+  "finalOutputDriveFolderId": "1DGdhhFBQU7f0Pj1Q3SMFDe8XbhIrh84F",
+  "finalOutputDrivePath": "/Google Drive/cep_building_mgm/00_CONTROLLER/B3R_RQ_VISUALIZE_TRUTH_CONVERGENCE/B3R_CORRECTION02_VISUALIZE_VIEW_COMPOSITION",
   "finalOutputCustody": "HEAVY_FINAL_GENERATED_OUTPUT_ONLY__INTERMEDIATE_LOCAL_EPHEMERAL"
 }

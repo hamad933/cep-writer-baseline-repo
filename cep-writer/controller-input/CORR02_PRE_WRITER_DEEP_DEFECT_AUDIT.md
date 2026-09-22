@@ -363,3 +363,26 @@ Bounded Controller Correction01 under `OD-20260916-044` added the missing existi
 Final Controller disposition: `F-007 CLOSED`, `F-008 CLOSED`, `F-009 CLOSED`, `F-010 CLOSED`, `F-011 CLOSED_AFTER_CONTROLLER_CORRECTION01`, `F-044 CLOSED`; F-006 remains root-context only. Corrected evidence: build PASS; model `210/210 PASS`; runtime PASS; Balanced6 `32/32 PASS`; C3 falsification `18/18 PASS`; exact-source Today visual/state evidence inspected at both governed viewport families. The same three root browser/evidence-lineage check rows remain stale non-Product debt.
 
 **Disposition:** `C3_CONTROLLER_ACCEPTED_AFTER_BOUNDED_CORRECTION01__B3R_PREREQUISITES_SATISFIED__CAPSULE_PREPARATION_NEXT__NO_MAIN_MERGE_RELEASE`.
+
+
+## B3-R Independent Controller audit — post-Writer result
+
+### F-045 — Visualize governed four-view Product composition is not wired — BLOCKING / PRESENTATION + BEHAVIOR + FUNCTIONALITY
+
+The exact B3-R Writer candidate and Controller Correction01 both retain normal Visualize Product composition from `main.ts` with `view='topology'` and only `Topology / Objects / History` view controls. The governed `visualize.json` SurfaceProfile declares state dimension `TREE / PATH / GRAPH / CANVAS`; the current B3-R mission explicitly defines Visualize as those four views over one Spatial workbench and requires all four states to remain one shared engine with distinct view semantics.
+
+`VisualizeDomainAdapter` does contain `TREE / PATH / GRAPH / CANVAS` adapters, but they are descriptor-level unless a valid `mode` reaches the commands. Exact post-correction runtime inspection shows the normal Product UI contains no Tree/Path/Graph/Canvas selector; `visualize.select`, `visualize.move`, and `visualize.viewport` are disabled with `VISUALIZE_VIEW_MODE_REQUIRED`. Therefore adapter presence does not satisfy Surface identity/functionality under `OD-20260918-055`.
+
+Direct visual comparison also shows a material Presentation gap independent of illustrative reference data: the Owner-confirmed Tree page reference exposes explicit Tree/Path/Graph/Canvas selection and Tree-specific composition; the Path/Graph/Canvas supporting references expose distinct view grammars. The current Product presents one generic topology canvas plus table/history. Correct this through existing Visualize/spatial composition owners; preserve one `SpatialInteractionKernel`, representation/canonical separation, and current read-only provider truth. Do not create four engines or make acceptance data canonical/writable.
+
+### F-046 — B3-R final visual evidence omits required Tree/Path/Graph/Canvas states — BLOCKING / EVIDENCE_COMPLETENESS
+
+The Writer evidence ZIP contains six screenshots only: RQ default `1440×1000`, RQ default `1024×900`, RQ RIGHT-reveal `1024×900`, Visualize default `1440×1000`, Visualize default `1024×900`, and Visualize RIGHT-reveal `1024×900`. None is a Tree/Path/Graph/Canvas-specific state.
+
+B3-R mission gate explicitly requires `Tree/Path/Graph/Canvas states are visually compared against their governed reference ceilings at 1440×1000 and 1024×900 as applicable`. The evidence set therefore cannot close that gate. This is distinct from F-045 Product incompleteness: even after Product correction, acceptance requires fresh exact-candidate view-specific evidence that is opened and inspected.
+
+## B3-R Controller Correction01 truth closure
+
+The Writer's claims for F-027/F-035 were not sufficient under negative falsification. Controller found: (a) `canonical:false` provider projection with a non-local-acceptance authority plus write methods could still enable canonical mutation; (b) `rq.search` was command-available while the current RQ provider was explicitly unavailable. Controller Correction01 at HEAD `64a31e409c860a1e266101fd38fcb01f679327a2` / Product source `16588836714764f10bc52066827e82b98b6809284e9aabeb19dd1e92580b6e36 / 273` closes both in existing owners only. Post-correction direct falsification proves noncanonical provider commits/edits remain zero and RQ Search is disabled without an admitted current provider; B3-R focused suite is `13/13 PASS`.
+
+Current disposition after Correction01: `F-027` provider/search truth `CLOSED_AFTER_CONTROLLER_CORR01`; `F-034` `CLOSED` for canonical-copy/provider truth; `F-035` `CLOSED_AFTER_CONTROLLER_CORR01` for canonical-write/provider boundary; `F-036` stale-harness source correction remains clean with genuine-route evidence ceiling preserved; `F-045` and `F-046` are OPEN/BLOCKING. B3-R as a whole remains NOT ACCEPTED.
