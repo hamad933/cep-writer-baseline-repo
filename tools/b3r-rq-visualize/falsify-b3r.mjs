@@ -4,6 +4,8 @@ import {RQDomainAdapter} from '../../dist/adapters/rq/domain.js';
 import {VisualizeDomainAdapter} from '../../dist/adapters/visualize/domain.js';
 import {createBalanced6VisualizeProvider,BALANCED6_VISUALIZE_REPRESENTATIONS} from '../../dist/adapters/balanced6-acceptance-data.js';
 import {AnalyticalCompareOwner} from '../../dist/foundation/analytical/compare.js';
+import {CommandRegistry} from '../../dist/foundation/models.js';
+import {bindRqSurface} from '../../dist/surfaces/rq/surface.js';
 
 const result={schemaVersion:1,mission:'CORR02_B3R_RQ_VISUALIZE_TRUTH_CONVERGENCE',checks:[]};
 const check=(id,fn)=>{try{const detail=fn();result.checks.push({id,pass:true,detail:detail??null});}catch(error){result.checks.push({id,pass:false,error:String(error?.stack||error)});}};
@@ -14,6 +16,12 @@ check('F027.normal-rq-provider-unavailable',()=>{
   assert.equal(d.providerAdmitted,false);assert.equal(d.providerTruth,'UNAVAILABLE_NO_ADMITTED_CURRENT_PROVIDER');assert.equal(d.providerClassification,'UNAVAILABLE_NO_ADMITTED_CURRENT_PROVIDER');
   assert.equal(a.records.length,0);assert.equal(s.items.length,0);assert.equal(s.status,'RQ_CURRENT_PROVIDER_UNAVAILABLE');
   return {providerId:d.providerId,providerTruth:d.providerTruth,records:a.records.length};
+});
+
+check('F027.search-command-disabled-without-admitted-provider',()=>{
+  const a=new RQDomainAdapter([],{analyticalCompareOwner:new AnalyticalCompareOwner(),providerAdmitted:false,providerClassification:'UNAVAILABLE_NO_ADMITTED_CURRENT_PROVIDER'}),r=new CommandRegistry();bindRqSurface({commands:r,adapter:a});
+  const availability=r.availability('rq.search',{});assert.equal(availability.enabled,false);assert.equal(availability.code,'RQ_CURRENT_PROVIDER_UNAVAILABLE');
+  return {enabled:availability.enabled,code:availability.code};
 });
 
 check('F027.compare-disabled-without-admitted-provider',()=>{
@@ -43,6 +51,13 @@ check('F035.local-acceptance-provider-remains-read-only',()=>{
   assert.equal(truth.editability,'READ_ONLY');assert.equal(truth.relationMutation,'READ_ONLY');assert.equal(truth.objectEdit,'READ_ONLY');
   assert.equal(link.enabled,false);assert.equal(link.code,'VISUALIZE_LOCAL_ACCEPTANCE_PROVIDER_READ_ONLY');assert.equal(edit.enabled,false);assert.equal(edit.code,'VISUALIZE_LOCAL_ACCEPTANCE_PROVIDER_READ_ONLY');
   return {editability:truth.editability,link:link.code,edit:edit.code};
+});
+
+check('F035.noncanonical-writable-provider-is-still-read-only',()=>{
+  const state={commits:0,edits:0},provider={descriptor:()=>({providerId:'b3r.noncanonical-writable',authority:'BOUNDED_FIXTURE'}),read:()=>({ok:true,status:'LOCAL',canonical:false,objects:[{objectId:'a'},{objectId:'b'}],relations:[]}),validateRelation:()=>({ok:true,token:'unexpected'}),commitRelation:()=>{state.commits++;return {ok:true,status:'UNEXPECTED_COMMIT'};},editObject:()=>{state.edits++;return {ok:true,status:'UNEXPECTED_EDIT'};}},a=new VisualizeDomainAdapter({provider,representations:[{representationId:'ra',canonicalRef:{objectId:'a'}},{representationId:'rb',canonicalRef:{objectId:'b'}}]});
+  const truth=a.providerTruth(),link=a.linkAvailability({sourceObjectId:'a',targetObjectId:'b',type:'related'}),edit=a.editAvailability({objectId:'a'}),linkResult=a.link({sourceObjectId:'a',targetObjectId:'b',type:'related'}),editResult=a.edit({objectId:'a',patch:{label:'x'}});
+  assert.equal(truth.canonical,false);assert.equal(truth.editability,'READ_ONLY');assert.equal(link.enabled,false);assert.equal(link.code,'VISUALIZE_CANONICAL_PROVIDER_REQUIRED');assert.equal(edit.enabled,false);assert.equal(edit.code,'VISUALIZE_CANONICAL_PROVIDER_REQUIRED');assert.equal(linkResult.canonicalMutation,false);assert.equal(editResult.canonicalMutation,false);assert.equal(state.commits,0);assert.equal(state.edits,0);
+  return {truth,link:link.code,edit:edit.code,commits:state.commits,edits:state.edits};
 });
 
 check('F034.representation-move-does-not-mutate-provider-truth',()=>{
