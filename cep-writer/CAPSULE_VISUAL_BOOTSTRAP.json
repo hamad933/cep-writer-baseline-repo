@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 4,
-  "classification": "CORR02_C3_CONTROLLER_BOUND_VISUAL_BOOTSTRAP",
+  "schemaVersion": 5,
+  "classification": "CORR02_C3_CONTROLLER_BOUND_VISUAL_BOOTSTRAP__LOCAL_OFFLINE_TRACKED_ACCEPTED_RUNTIME",
   "enabled": true,
   "required": true,
   "allowWriterLocalRecapture": true,
@@ -26,7 +26,11 @@
       ]
     }
   ],
-  "environment": {},
+  "environment": {
+    "runtimeSource": "TRACKED_ACCEPTED_DIST_FROM_EXACT_C2_PARENT",
+    "dependencyFetchRequired": false,
+    "captureEngine": "PYTHON_PLAYWRIGHT_SYSTEM_CHROMIUM"
+  },
   "setupCommands": [
     {
       "id": "c3-verify-writer-inputs",
@@ -35,23 +39,6 @@
         "python3",
         "cep-writer/tools/verify_repo.py"
       ]
-    },
-    {
-      "id": "c3-npm-ci",
-      "cwd": ".",
-      "argv": [
-        "npm",
-        "ci"
-      ]
-    },
-    {
-      "id": "c3-build-runtime",
-      "cwd": ".",
-      "argv": [
-        "npm",
-        "run",
-        "build:runtime"
-      ]
     }
   ],
   "captureCommands": [
@@ -59,19 +46,8 @@
       "id": "c3-today-current-parent-baseline",
       "cwd": ".",
       "argv": [
-        "node",
-        "tools/c3-capsule/capture-today-baseline.mjs"
-      ]
-    },
-    {
-      "id": "c3-restore-generated-dist",
-      "cwd": ".",
-      "argv": [
-        "git",
-        "restore",
-        "--worktree",
-        "--",
-        "dist"
+        "python3",
+        "tools/c3-capsule/capture_today_baseline.py"
       ]
     }
   ],
