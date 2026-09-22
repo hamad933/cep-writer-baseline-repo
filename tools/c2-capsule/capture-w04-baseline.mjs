@@ -73,7 +73,7 @@ try{
    await page.goto(`${base}/?surface=evidence`,{waitUntil:'networkidle'});
    await page.waitForFunction(()=>globalThis.CEPFoundation?.consumer==='evidence');
    const details=page.locator('details').filter({hasText:'Import candidate evidence'}).first();
-   if(await details.count()) await details.evaluate(n=>n.open=true);
+   if(await details.count()){await details.evaluate(n=>{n.open=true;n.scrollIntoView({block:'center',inline:'nearest'})});await page.waitForTimeout(120);}
    const name='evidence-import-open-1440x1000.png'; const url=new URL('screenshots/'+name,outDir);
    await page.screenshot({path:url.pathname,fullPage:false}); const bytes=await readFile(url);
    const importProbe=await page.evaluate(()=>({preview:document.querySelector('[data-evidence-envelope-preview]')?.textContent||null,fields:[...document.querySelectorAll('[data-evidence-id],[data-evidence-revision],[data-evidence-source],[data-evidence-source-revision],[data-evidence-title],[data-evidence-claim]')].map(n=>({name:n.getAttributeNames().find(x=>x.startsWith('data-evidence-')),value:n.value}))}));
