@@ -4,10 +4,11 @@ import {RQDomainAdapter} from '../../dist/adapters/rq/domain.js';
 import {VisualizeDomainAdapter} from '../../dist/adapters/visualize/domain.js';
 import {createBalanced6VisualizeProvider,BALANCED6_VISUALIZE_REPRESENTATIONS} from '../../dist/adapters/balanced6-acceptance-data.js';
 import {AnalyticalCompareOwner} from '../../dist/foundation/analytical/compare.js';
-import {CommandRegistry} from '../../dist/foundation/models.js';
+import {CommandRegistry,SpatialModel} from '../../dist/foundation/models.js';
 import {bindRqSurface} from '../../dist/surfaces/rq/surface.js';
+import {bindVisualizeSurface} from '../../dist/surfaces/visualize/surface.js';
 
-const result={schemaVersion:1,mission:'CORR02_B3R_RQ_VISUALIZE_TRUTH_CONVERGENCE',checks:[]};
+const result={schemaVersion:1,mission:'CORR02_B3R_CORRECTION02_VISUALIZE_FOUR_VIEW_COMPOSITION',checks:[]};
 const check=(id,fn)=>{try{const detail=fn();result.checks.push({id,pass:true,detail:detail??null});}catch(error){result.checks.push({id,pass:false,error:String(error?.stack||error)});}};
 const rqRecord=(id,revision,digest)=>({sourceId:id,revision,digest,locator:`sources/${id}/${revision}.md`,schemaVersion:'rq-test/1',status:'CURRENT',comparable:{claim:{label:'Claim',type:'string',value:`${id}-${revision}`,provenanceRefs:[digest]}},provenanceRefs:[digest]});
 
@@ -83,21 +84,63 @@ check('F035.authorized-test-provider-is-isolated',()=>{
 });
 
 const m0Source=await readFile(new URL('../../stack/native-typescript/surfaces/m0-controller-composition.ts',import.meta.url),'utf8');
+const visualizeSurfaceSource=await readFile(new URL('../../stack/native-typescript/surfaces/visualize/surface.ts',import.meta.url),'utf8');
 const browserSource=await readFile(new URL('../browser-conformance.mjs',import.meta.url),'utf8');
+const corr02CaptureSource=await readFile(new URL('./capture_b3r_corr02_candidate.py',import.meta.url),'utf8');
 check('F027.composition-does-not-bind-balanced6-rq-records',()=>{
   assert.equal(m0Source.includes('BALANCED6_RQ_RECORDS'),false);assert.ok(m0Source.includes("providerClassification:'UNAVAILABLE_NO_ADMITTED_CURRENT_PROVIDER'"));assert.ok(m0Source.includes('Non-production acceptance data is excluded'));
   return {balanced6RqBinding:false,classification:'UNAVAILABLE_NO_ADMITTED_CURRENT_PROVIDER'};
 });
 
 check('F034.visualize-presentation-copy-is-truthful',()=>{
-  assert.ok(m0Source.includes("LOCAL_ACCEPTANCE_PROJECTION_ONLY")||m0Source.includes('truth.authority'));assert.ok(m0Source.includes('canonical:false'));assert.ok(m0Source.includes("heading.textContent='Spatial representation workspace'"));
-  assert.equal(m0Source.includes('Canonical relationship workspace'),false);assert.equal(m0Source.includes('Canonical relationships'),false);
+  assert.ok(m0Source.includes("LOCAL_ACCEPTANCE_PROJECTION_ONLY")||m0Source.includes('truth.authority'));assert.ok(m0Source.includes('canonical:false'));assert.ok(m0Source.includes('mountVisualizeFourViewComposition'));assert.ok(visualizeSurfaceSource.includes('Spatial representation workspace'));
+  const presentationSource=m0Source+'\n'+visualizeSurfaceSource;assert.equal(presentationSource.includes('Canonical relationship workspace'),false);assert.equal(presentationSource.includes('Canonical relationships'),false);
   return {canonicalCopy:false,readOnlyCopy:true};
 });
 
 check('F036.browser-harness-preserves-readonly-and-editable-route-oracles',()=>{
   assert.ok(browserSource.includes("await ready(page, 'visualize')"));assert.ok(browserSource.includes("author-only Connect action surface became visible against the read-only Visualize provider"));assert.ok(browserSource.includes("await ready(page, 'enterprise')"));assert.ok(browserSource.includes("harnessDomain:'enterprise.editable-provider-boundary'"));assert.ok(browserSource.includes("visualize.availability.enabled === false"));assert.ok(browserSource.includes("enterprise.availability.enabled === true"));
   assert.ok(browserSource.includes('before.availability.visible === false'));return {normalVisualize:'READ_ONLY_AUTHOR_ACTION_HIDDEN',editingHarness:'enterprise.editable-provider-boundary',centralOwnerPreserved:true};
+});
+
+
+const sharedSpatialModel=()=>new SpatialModel(BALANCED6_VISUALIZE_REPRESENTATIONS.map(item=>({id:item.representationId,label:item.label||item.representationId,x:Number(item.x)||0,y:Number(item.y)||0,type:item.type||'representation'})),[]);
+
+check('F045.normal-composition-binds-existing-shared-spatial-model',()=>{
+  const shared=sharedSpatialModel(),a=new VisualizeDomainAdapter({provider:createBalanced6VisualizeProvider(),representations:BALANCED6_VISUALIZE_REPRESENTATIONS,spatialModel:shared});
+  assert.equal(a.model,shared);assert.equal(a.descriptor().sharedSpatialModelBound,true);assert.equal(new Set(a.viewDescriptors().map(view=>view.engineOwner)).size,1);
+  return {sameModel:a.model===shared,sharedSpatialModelBound:a.descriptor().sharedSpatialModelBound,engineOwner:a.model.interactionKernel.ownerId};
+});
+
+check('F045.view-capabilities-bind-select-move-viewport-to-active-context',()=>{
+  const a=new VisualizeDomainAdapter({provider:createBalanced6VisualizeProvider(),representations:BALANCED6_VISUALIZE_REPRESENTATIONS,spatialModel:sharedSpatialModel()}),registry=new CommandRegistry(),binding=bindVisualizeSurface({commands:registry,adapter:a,initialView:'TREE'}),id=BALANCED6_VISUALIZE_REPRESENTATIONS[0].representationId;
+  assert.deepEqual(a.viewDescriptors().map(view=>view.mode),['TREE','PATH','GRAPH','CANVAS']);
+  assert.equal(binding.activeView(),'TREE');assert.equal(registry.availability('visualize.select',{representationIds:[id]}).enabled,true);assert.equal(registry.availability('visualize.move',{representationIds:[id],dx:1,dy:1}).code,'VISUALIZE_MOVE_REQUIRES_CANVAS_VIEW');assert.equal(registry.availability('visualize.viewport',{action:'fit',width:800,height:600}).code,'VISUALIZE_VIEWPORT_REQUIRES_GRAPH_OR_CANVAS');
+  registry.execute('visualize.view.graph',{});assert.equal(binding.activeView(),'GRAPH');assert.equal(registry.availability('visualize.viewport',{action:'fit',width:800,height:600}).enabled,true);assert.equal(registry.availability('visualize.move',{representationIds:[id],dx:1,dy:1}).code,'VISUALIZE_MOVE_REQUIRES_CANVAS_VIEW');
+  registry.execute('visualize.view.canvas',{});assert.equal(binding.activeView(),'CANVAS');registry.execute('visualize.select',{representationIds:[id]});assert.equal(registry.availability('visualize.move',{representationIds:[id],dx:1,dy:1}).enabled,true);assert.equal(registry.availability('visualize.viewport',{action:'fit',width:800,height:600}).enabled,true);
+  return {activeView:binding.activeView(),tree:{move:false,viewport:false},graph:{move:false,viewport:true},canvas:{move:true,viewport:true}};
+});
+
+check('F045.selection-and-canonical-truth-survive-view-switches',()=>{
+  const a=new VisualizeDomainAdapter({provider:createBalanced6VisualizeProvider(),representations:BALANCED6_VISUALIZE_REPRESENTATIONS,spatialModel:sharedSpatialModel()}),registry=new CommandRegistry(),binding=bindVisualizeSurface({commands:registry,adapter:a,initialView:'TREE'}),id=BALANCED6_VISUALIZE_REPRESENTATIONS[0].representationId,before=a.canonicalDigest();
+  registry.execute('visualize.select',{representationIds:[id]});for(const mode of ['PATH','GRAPH','CANVAS','TREE'])registry.execute(`visualize.view.${mode.toLowerCase()}`,{});
+  assert.deepEqual([...a.model.selection],[id]);assert.equal(a.canonicalDigest(),before);assert.equal(a.providerTruth().canonical,false);assert.equal(a.providerTruth().editability,'READ_ONLY');
+  return {selection:[...a.model.selection],canonicalUnchanged:a.canonicalDigest()===before,finalView:binding.activeView(),authority:a.providerTruth().authority};
+});
+
+check('F045.composition-source-reuses-wave3-spatial-and-exposes-four-view-presentation',()=>{
+  assert.ok(m0Source.includes('const sharedSpatial=wave3Assembly?.spatial'));assert.ok(m0Source.includes('spatialModel:sharedSpatial.model'));assert.ok(m0Source.includes('mountVisualizeFourViewComposition'));assert.ok(m0Source.includes("initialView:'TREE'"));assert.equal(m0Source.includes("new SpatialView(host.querySelector('[data-m0-spatial]'),nodes,edges)"),true);
+  const visualizeBlock=m0Source.slice(m0Source.indexOf("if(consumer==='visualize')"),m0Source.indexOf("if(consumer==='enterprise'"));assert.equal(visualizeBlock.includes('new SpatialView'),false);assert.equal(visualizeBlock.includes('BALANCED6_RQ_RECORDS'),false);
+  return {sharedSpatial:'wave3Assembly.spatial',initialView:'TREE',secondarySpatialEngineInVisualizeBlock:false};
+});
+
+
+check('F046.capture-harness-requires-four-view-exact-candidate-matrix',()=>{
+  for(const mode of ['TREE','PATH','GRAPH','CANVAS'])assert.ok(corr02CaptureSource.includes(mode));
+  assert.ok(corr02CaptureSource.includes("'visualizeScreenshots':len([r for r in records if r['surface']=='visualize'])"));
+  assert.ok(corr02CaptureSource.includes("selected-right-revealed-1024x900.png"));assert.ok(corr02CaptureSource.includes("--expected-head"));assert.ok(corr02CaptureSource.includes("--expected-tree"));assert.ok(corr02CaptureSource.includes("--expected-product-sha"));
+  assert.ok(corr02CaptureSource.includes("pointerAndKeyboard"));assert.ok(corr02CaptureSource.includes("sharedSpatialModelAsserted"));
+  return {views:['TREE','PATH','GRAPH','CANVAS'],viewports:['1440x1000','1024x900'],rightReveal:true,exactCandidateBinding:true};
 });
 
 result.pass=result.checks.every(item=>item.pass);result.summary={total:result.checks.length,pass:result.checks.filter(item=>item.pass).length,fail:result.checks.filter(item=>!item.pass).length};
