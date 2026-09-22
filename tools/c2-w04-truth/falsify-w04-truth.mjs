@@ -66,14 +66,13 @@ check('evidence-presentation-assertions-rejected',()=>{
   return {code:rejected.code,assertions:rejected.assertions};
 });
 
-check('evidence-provider-envelope-is-explicit',()=>{
+check('evidence-verified-assertion-requires-bound-provider',()=>{
   const d=new W04EvidenceDomain();
-  const imported=d.importEvidence({id:'verified',revisionId:'r1',sourceId:'s',sourceRevision:'sr1',subject:'subject:x',evidenceClaim:'verified candidate',governedPurpose:'test',verification:{status:'VERIFIED',providerId:'verifier:test',proofRef:'proof:test:1',digest:'sha256:abcd',sourceBytesAvailable:true,schemaValid:true,producerIdentity:'producer:test'}});
-  assert.equal(imported.ok,true);
-  assert.equal(imported.record.importAssurance,'VERIFIED_PROVIDER_BOUND');
-  assert.equal(imported.record.verification.providerId,'verifier:test');
-  assert.equal(imported.record.admissionAuthority.available,false);
-  return {providerId:imported.record.verification.providerId,authority:imported.record.admissionAuthority.available};
+  const rejected=d.importEvidence({id:'verified',revisionId:'r1',sourceId:'s',sourceRevision:'sr1',subject:'subject:x',evidenceClaim:'verified candidate',governedPurpose:'test',verification:{status:'VERIFIED',providerId:'forged-provider',proofRef:'forged-proof',digest:'sha256:abcd',sourceBytesAvailable:true,schemaValid:true,producerIdentity:'forged-producer'}});
+  assert.equal(rejected.ok,false);
+  assert.equal(rejected.code,'VERIFICATION_PROVIDER_UNBOUND');
+  assert.equal(d.records.length,0);
+  return {code:rejected.code,verifiedRecordCreated:false};
 });
 
 check('review-finding-requires-explicit-content',()=>{
