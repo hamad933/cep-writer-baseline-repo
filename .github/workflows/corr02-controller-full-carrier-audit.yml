@@ -1,0 +1,132 @@
+name: CEP CORR02 Controller Full-Carrier Audit
+
+on:
+  push:
+    branches:
+      - controller/corr02-full-carrier-audit-da007840
+    paths:
+      - '.github/workflows/corr02-controller-full-carrier-audit.yml'
+      - 'controller-audit/**'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout audit branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Prove audit-only branch delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHECKPOINT=da007840363d92cdadd9f7c5180449a49e6f1d19
+          git cat-file -e "$CHECKPOINT^{commit}"
+          git diff --name-only "$CHECKPOINT" HEAD | tee /tmp/audit-delta.txt
+          illegal="$(grep -Ev '^(\.github/workflows/|controller-audit/)' /tmp/audit-delta.txt || true)"
+          if [ -n "$illegal" ]; then
+            echo "ILLEGAL_PRODUCT_OR_AUTHORITY_DELTA"
+            echo "$illegal"
+            exit 1
+          fi
+          mkdir -p controller-audit-output
+          cp /tmp/audit-delta.txt controller-audit-output/audit-branch-delta.txt
+          printf '%s\n' "$CHECKPOINT" > controller-audit-output/product-checkpoint.txt
+          git rev-parse HEAD > controller-audit-output/audit-branch-head.txt
+
+      - name: Setup exact Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.16.0'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Record toolchain
+        shell: bash
+        run: |
+          {
+            node --version
+            npm --version
+            npx playwright --version
+            python3 --version
+          } | tee controller-audit-output/toolchain.txt
+
+      - name: Build exact runtime
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run build:runtime 2>&1 | tee controller-audit-output/build-runtime.log
+
+      - name: Run model tests
+        shell: bash
+        run: |
+          set +e
+          npm test > controller-audit-output/npm-test.log 2>&1
+          code=$?
+          echo "$code" > controller-audit-output/npm-test.exit
+          cat controller-audit-output/npm-test.log
+          exit 0
+
+      - name: Run pre-browser contract check
+        shell: bash
+        run: |
+          set +e
+          npm run check > controller-audit-output/check-pre-browser.log 2>&1
+          code=$?
+          echo "$code" > controller-audit-output/check-pre-browser.exit
+          cat controller-audit-output/check-pre-browser.log
+          exit 0
+
+      - name: Run genuine localhost browser conformance
+        shell: bash
+        run: |
+          set +e
+          npm run browser:test > controller-audit-output/browser-test.log 2>&1
+          code=$?
+          echo "$code" > controller-audit-output/browser-test.exit
+          cat controller-audit-output/browser-test.log
+          exit 0
+
+      - name: Re-run contract check after fresh browser receipt
+        shell: bash
+        run: |
+          set +e
+          npm run check > controller-audit-output/check-post-browser.log 2>&1
+          code=$?
+          echo "$code" > controller-audit-output/check-post-browser.exit
+          cat controller-audit-output/check-post-browser.log
+          exit 0
+
+      - name: Run 23-surface full-carrier audit
+        shell: bash
+        run: |
+          set -o pipefail
+          node controller-audit/full-carrier-audit.mjs 2>&1 | tee controller-audit-output/full-carrier-audit.log
+
+      - name: Preserve exact-current browser receipts
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p controller-audit-output/existing-assurance
+          for f in assurance/BROWSER_CONFORMANCE_RECEIPT.json assurance/SCREENSHOT_MANIFEST.json assurance/CONTRACT_TEST_RESULTS.json assurance/MODEL_TEST_RESULTS.json; do
+            if [ -f "$f" ]; then cp "$f" controller-audit-output/existing-assurance/; fi
+          done
+
+      - name: Upload audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: corr02-controller-full-carrier-audit
+          path: controller-audit-output/
+          if-no-files-found: error
+          retention-days: 30
