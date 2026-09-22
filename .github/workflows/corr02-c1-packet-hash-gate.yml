@@ -1,0 +1,98 @@
+name: CEP CORR02 C1 Packet Hash Gate
+
+on:
+  push:
+    branches:
+      - controller/corr02-full-carrier-audit-da007840
+    paths:
+      - '.github/workflows/corr02-c1-packet-hash-gate.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  packet:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact C1 packet branch
+        uses: actions/checkout@v4
+        with:
+          ref: writer/presentation-corr02-c1-chatgpt
+          fetch-depth: 0
+
+      - name: Prove exact parent and no Product mutation in C0
+        shell: bash
+        run: |
+          set -euo pipefail
+          PARENT=da007840363d92cdadd9f7c5180449a49e6f1d19
+          git merge-base --is-ancestor "$PARENT" HEAD
+          git diff --name-only "$PARENT" HEAD | tee c0-diff.txt
+          illegal="$(grep -Ev '^cep-writer/' c0-diff.txt || true)"
+          if [ -n "$illegal" ]; then
+            echo "C0_ILLEGAL_NON_PACKET_DELTA"
+            echo "$illegal"
+            exit 1
+          fi
+          if git diff --name-only "$PARENT" HEAD -- stack/ package.json package-lock.json tools/ | grep -q .; then
+            echo "C0_PRODUCT_MUTATION_DETECTED"
+            exit 1
+          fi
+
+      - name: Generate exact SHA-256 task packet manifest
+        shell: python
+        run: |
+          from pathlib import Path
+          import hashlib,json,subprocess
+          root=Path('.').resolve()
+          fixed=[
+            'cep-writer/CURRENT_MISSION.md',
+            'cep-writer/CANONICAL_MISSION_SOURCE.md',
+            'cep-writer/START_HERE.md',
+            'cep-writer/CHATGPT_WRITER_C1_EXECUTION_OVERLAY.md',
+            'cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv',
+            'cep-writer/TASK_BINDING.json',
+            'cep-writer/PARENT_IDENTITY.json',
+            'cep-writer/C1_SCOPE_LOCK.json',
+            'cep-writer/controller-input/R6_PRESENTATION_CORR02_PRE_WRITER_DEEP_DEFECT_AUDIT.md',
+            'cep-writer/controller-input/CORR02_C1_RUNTIME_AUDIT_RECEIPT.json',
+            'cep-writer/tools/verify_c1_packet.py'
+          ]
+          refs=sorted(str(p.as_posix()) for p in (root/'cep-writer'/'references').rglob('*') if p.is_file())
+          paths=[]
+          for x in fixed+refs:
+            if x not in paths: paths.append(x)
+          rows=[]
+          for rel in paths:
+            p=root/rel
+            if not p.is_file(): raise SystemExit('MISSING_REQUIRED_INPUT:'+rel)
+            b=p.read_bytes()
+            rows.append({
+              'path':rel,'size':len(b),'sha256':hashlib.sha256(b).hexdigest(),
+              'classification':'KEEP_TASK_AUTHORITY' if rel in fixed else 'KEEP_WRITER_INPUT',
+              'provenance':'C1_CONTROLLER_PACKET_REFRESH__EXACT_BRANCH_BYTES'
+            })
+          head=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+          out={
+            'schemaVersion':1,
+            'classification':'CORR02_C1_PACKET_MANIFEST__SELF_CONTAINED__NOT_LIVE_AUTHORITY',
+            'candidateBranch':'writer/presentation-corr02-c1-chatgpt',
+            'packetSourceCommit':head,
+            'exactProductParentCommit':'da007840363d92cdadd9f7c5180449a49e6f1d19',
+            'productCanonicalSourceTreeSha256':'777d8b24032891b00bf3b61858a3be015b0b77fea710e1d5bd446d182577bb51',
+            'productCanonicalSourceFiles':273,
+            'noRequiredLiveDriveFetch':True,
+            'entries':rows
+          }
+          Path('C1_PACKET_MANIFEST.json').write_text(json.dumps(out,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+          print(json.dumps({'status':'PASS','entries':len(rows),'packetSourceCommit':head},indent=2))
+
+      - name: Upload packet gate
+        uses: actions/upload-artifact@v4
+        with:
+          name: corr02-c1-packet-hash-gate
+          path: |
+            C1_PACKET_MANIFEST.json
+            c0-diff.txt
+          if-no-files-found: error
+          retention-days: 30
