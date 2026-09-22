@@ -1,6 +1,7 @@
 import {STRUCTURED_BLOCK_TYPES,STRUCTURED_CAPABILITIES,STRUCTURED_TREE_KERNEL,STRUCTURED_MUTATION_KERNEL} from './structured.js';
 import {StructuredActionSurfacePresentationHost} from './structured/action-surfaces/presentation-host.js';
-import {createLibraryChromeAdapter} from '../adapters/library-chrome.js';\nimport {eventTargetElement} from './global/input-ownership-contract.js';
+import {createLibraryChromeAdapter} from '../adapters/library-chrome.js';
+import {eventTargetElement} from './global/input-ownership-contract.js';
 
 export function mountAcceptedRuntime(fixtureBundle, extension = {}) {
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];

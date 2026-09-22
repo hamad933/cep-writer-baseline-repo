@@ -2,7 +2,8 @@ import {CommandRegistry,CapabilityRegistry,ActionSurfaceRegistry} from './founda
 import {SemanticCommandBus} from './foundation/global/commands.js';
 import {ScopedPreferencesOwner} from './foundation/global/preferences/store.js';
 import {TransientFocusOwner} from './foundation/global/transient-focus.js';
-import {defineContextDescriptorProvider} from './foundation/global/context-descriptor-contract.js';\nimport {eventTargetElement} from './foundation/global/input-ownership-contract.js';
+import {defineContextDescriptorProvider} from './foundation/global/context-descriptor-contract.js';
+import {eventTargetElement} from './foundation/global/input-ownership-contract.js';
 import {AccessibilityFeedbackOwner} from './foundation/global/feedback.js';
 import {mountWave3GlobalAssembly} from './foundation/wave3-assembly.js';
 import {mountWave4FamilyInteractionAssembly} from './foundation/wave4-assembly.js';
