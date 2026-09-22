@@ -1,10 +1,11 @@
-# CEP C2 Writer Authority Packet
+# C3 Authority Packet
 
-Exact accepted Product parent: `ac888c7e622fdefdc4f958771b21db485e33f9fc`.
-Product source: `5885c32a71c14b1b982ec8dcdadba4fafde40c78b2d9287f367f1ca28373f91d / 273`.
+Mission: `CORR02_C3_TODAY_PROVIDER_EPISTEMIC_CONTINUATION_TRUTH`
 
-C1 shared carrier/regions/contextual-toolbar mechanics are Controller-accepted and must be consumed, not duplicated.
-C2 owns only W04 Product data/action truth findings `F-022..F-026/F-038/F-043` plus the domain-semantic half of F-042.
-Profiles/oracles define semantics; visual references define Presentation ceiling only and cannot fabricate current data/provider truth.
-Capsule v1.1 is execution transport only, not authority.
-Use local-first execution; managed runner is corroboration, not iteration.
+Accepted parent: `1acf9d691b27b1a271f149139e055110971b1fa0`
+Product source: `760578213b3f3e352dd2b08dd05fab183c3ffad9625844a1d0ea82e30cc9e454 / 273`
+
+C2 Controller acceptance: Drive `1IJafIuLSO8YSOJ9vllltmCuHQp-nOwgV`.
+Accepted C2 package: Drive `11tlmcoAFIUjmprNv8gkVLWe0q37jDR6u`.
+
+Use packaged Owner decisions, Today SurfaceProfile, visual register/reference, A03 operating model, defect ledger and canonical mission snapshot. Live Controller files are intentionally not Writer dependencies.

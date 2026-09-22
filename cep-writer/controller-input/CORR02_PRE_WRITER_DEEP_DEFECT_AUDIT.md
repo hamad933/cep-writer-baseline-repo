@@ -339,3 +339,16 @@ C1 introduces no accepted closure for downstream truth findings: `F-022..F-026`,
 Evidence clarification: Writer claim `43/46 byte-identical to previously inspected set` is not bound to an exact intermediate artifact. Against governed pre-C1 artifact `10670544348`, only `4/46` are byte-identical and `42/46` changed, which is expected from the shared carrier/region correction. Because Controller directly inspected all 46 final images and verified the final source-bound artifact, this is `NONBLOCKING_EVIDENCE_ACCOUNTING_AMBIGUITY`, not a Product defect.
 
 **Disposition:** `C1_CONTROLLER_ACCEPTED__DOWNSTREAM_PARENT_ELIGIBLE__NO_MAIN_MERGE_RELEASE`.
+
+
+## C2 Controller closure — 2026-09-22
+
+Writer C2 candidate `287c30d135597c692a367cd1561aea67fd2c54bc` was **rejected as delivered for one exact remaining F-043 provider-boundary defect**. Although normal UI import was truthful, direct domain falsification showed caller-supplied string-only `VERIFIED` source assertions, validation proof and admission-authority proof could still create an admitted immutable Evidence revision without a bound verification provider.
+
+Controller bounded Correction01 changed only the existing Evidence domain owner plus the C2 falsification harness. Accepted corrected identity: HEAD `1acf9d691b27b1a271f149139e055110971b1fa0`; tree `e8b26523c72aba5888439eedb221feff9edc9486`; Product source `760578213b3f3e352dd2b08dd05fab183c3ffad9625844a1d0ea82e30cc9e454 / 273`; package Drive `11tlmcoAFIUjmprNv8gkVLWe0q37jDR6u`; Controller audit Drive `1IJafIuLSO8YSOJ9vllltmCuHQp-nOwgV`.
+
+Final Controller disposition: `F-022 CLOSED`, `F-023 CLOSED`, `F-024 CLOSED`, `F-025 CLOSED`, `F-026 CLOSED`, `F-038 CLOSED`, `F-043 CLOSED_AFTER_CONTROLLER_CORR01`, and W04 domain-semantic half of `F-042 CLOSED`. Provider-unbound imports cannot self-assert `VERIFIED`; a future real verification provider remains separate governed work.
+
+Corrected evidence: build PASS; `npm test 210/210 PASS`; runtime PASS; C2 falsification `9/9 PASS`; browser `60/60 PASS` / `11` exact-source screenshots; all 11 images byte-identical to the accepted C2 visual set. Three root stale browser/evidence-lineage check failures and legacy pre-C2 W04 tests remain explicit harness/evidence debt, not Product blockers.
+
+**Disposition:** `C2_CONTROLLER_ACCEPTED_AFTER_BOUNDED_CORRECTION01__C3_PARENT_ELIGIBLE__NO_MAIN_MERGE_RELEASE`.

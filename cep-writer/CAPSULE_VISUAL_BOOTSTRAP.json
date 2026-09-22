@@ -1,11 +1,11 @@
 {
-  "schemaVersion": 3,
-  "classification": "CORR02_C2_CONTROLLER_BOUND_VISUAL_BOOTSTRAP",
+  "schemaVersion": 4,
+  "classification": "CORR02_C3_CONTROLLER_BOUND_VISUAL_BOOTSTRAP",
   "enabled": true,
   "required": true,
   "allowWriterLocalRecapture": true,
-  "expectedProductParentCommit": "ac888c7e622fdefdc4f958771b21db485e33f9fc",
-  "minimumScreenshotCount": 9,
+  "expectedProductParentCommit": "1acf9d691b27b1a271f149139e055110971b1fa0",
+  "minimumScreenshotCount": 4,
   "viewports": [
     {
       "width": 1440,
@@ -18,35 +18,18 @@
   ],
   "states": [
     {
-      "surface": "evidence",
+      "surface": "today",
       "states": [
         "default",
-        "import-open"
-      ]
-    },
-    {
-      "surface": "reviews",
-      "states": [
-        "default"
-      ]
-    },
-    {
-      "surface": "mastery",
-      "states": [
-        "default"
-      ]
-    },
-    {
-      "surface": "portfolio",
-      "states": [
-        "default"
+        "right-revealed",
+        "recommendation-visible"
       ]
     }
   ],
   "environment": {},
   "setupCommands": [
     {
-      "id": "c2-verify-writer-inputs",
+      "id": "c3-verify-writer-inputs",
       "cwd": ".",
       "argv": [
         "python3",
@@ -54,7 +37,7 @@
       ]
     },
     {
-      "id": "c2-npm-ci",
+      "id": "c3-npm-ci",
       "cwd": ".",
       "argv": [
         "npm",
@@ -62,7 +45,7 @@
       ]
     },
     {
-      "id": "c2-build-runtime",
+      "id": "c3-build-runtime",
       "cwd": ".",
       "argv": [
         "npm",
@@ -73,15 +56,15 @@
   ],
   "captureCommands": [
     {
-      "id": "c2-w04-current-parent-baseline",
+      "id": "c3-today-current-parent-baseline",
       "cwd": ".",
       "argv": [
         "node",
-        "tools/c2-capsule/capture-w04-baseline.mjs"
+        "tools/c3-capsule/capture-today-baseline.mjs"
       ]
     },
     {
-      "id": "c2-restore-generated-dist",
+      "id": "c3-restore-generated-dist",
       "cwd": ".",
       "argv": [
         "git",
@@ -93,66 +76,30 @@
     }
   ],
   "baselineGlobs": [
-    ".capsule-c2-output/screenshots/*.png"
+    ".capsule-c3-output/screenshots/*.png"
   ],
   "receiptGlobs": [
-    ".capsule-c2-output/*.json"
+    ".capsule-c3-output/*.json"
   ],
   "referenceBindings": [
     {
-      "surface": "evidence",
-      "reference": "cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/01_EVIDENCE_INTAKE/Cybersecurity Evidence Dashboard in Arabic(1).png",
-      "role": "PRESENTATION_AUTHORITY_ONLY__NO_PROVIDER_TRUTH"
-    },
-    {
-      "surface": "reviews",
-      "reference": "cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/02_REVIEWS/Cybersecurity Evidence Review Dashboard.png",
-      "role": "PRESENTATION_AUTHORITY_ONLY__NO_FORMAL_DECISION_TRUTH"
-    },
-    {
-      "surface": "mastery",
-      "reference": "cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/03_MASTERY/Arabic Cybersecurity Mastery Dashboard.png",
-      "role": "PRESENTATION_AUTHORITY_ONLY__NO_MASTERY_TRUTH"
-    },
-    {
-      "surface": "portfolio",
-      "reference": "cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/04_PORTFOLIO/Cybersecurity Portfolio Evidence Dashboard.png",
-      "role": "PRESENTATION_AUTHORITY_ONLY__NO_ACHIEVEMENT_TRUTH"
+      "surface": "today",
+      "reference": "cep-writer/references/visual/00_TODAY/CEP_TODAY_MAIN_ORCHESTRATION_REFERENCE.png",
+      "role": "OWNER_CONFIRMED_FINAL_PRESENTATION_REFERENCE__NO_PROVIDER_TRUTH"
     }
   ],
   "comparisonPlan": [
     {
-      "surface": "evidence",
+      "surface": "today",
       "check": [
-        "seed/formal truth vs empty/unverified provider state",
-        "import verification assertions",
-        "all five domain commands",
-        "LEFT/CENTER/RIGHT/BOTTOM role integrity"
-      ]
-    },
-    {
-      "surface": "reviews",
-      "check": [
-        "seeded formal review/decision truth",
-        "explicit finding/decision inputs",
-        "all four domain commands",
-        "authority-unavailable behavior"
-      ]
-    },
-    {
-      "surface": "mastery",
-      "check": [
-        "synthetic judgments absent in normal mode",
-        "NOT_EVALUATED/UNAVAILABLE explanation",
-        "all three commands"
-      ]
-    },
-    {
-      "surface": "portfolio",
-      "check": [
-        "synthetic memberships absent in normal mode",
-        "empty/unavailable curation",
-        "all four commands"
+        "acceptance fixture presented as current truth",
+        "Resume availability versus exact target resolution",
+        "recommendation source/version/rationale truth",
+        "provider-specific stale/unavailable/error plus observedAt",
+        "last successful projection retention on failure",
+        "profile state vocabulary",
+        "LEFT/CENTER/RIGHT/BOTTOM/TOOLBAR typed content",
+        "no canonical progress/Mastery/access writes"
       ]
     }
   ]

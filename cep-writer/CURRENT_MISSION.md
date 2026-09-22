@@ -4368,3 +4368,43 @@ Accepted closure: `F-013`, `F-001`, `F-002`, `F-003`, `F-004`, `F-005`, `F-021`,
 The next legal mutating lane is **C2 — W04 Product data/action truth**, and it MUST start from the exact accepted C1 parent above through `SELF_CONTAINED_WRITER_WORKSPACE_CAPSULE_V1_1`. C2 owns only `F-022..F-026`, `F-038`, `F-043` plus the domain-semantic half exposed by F-042. It must consume the accepted C1 contextual-toolbar mechanism rather than duplicate it. C3/B3-R/later W03 remain HOLD.
 
 The C1 handoff's unbound `43/46 byte-identical` sentence is superseded by Controller audit: it is a nonblocking evidence-accounting ambiguity; final C1 visual evidence itself is accepted after direct Controller inspection of all 46 source-bound screenshots.
+
+### 17.10 C2 Capsule v1.1 exact launch binding — 2026-09-22
+
+C2 launch prerequisite is now satisfied. The only authorized CHATGPT_WRITER inbound workspace for `CORR02_C2_W04_PRODUCT_DATA_ACTION_TRUTH` is the Controller-verified capsule bound to accepted C1 parent `ac888c7e622fdefdc4f958771b21db485e33f9fc` / Product source `5885c32a71c14b1b982ec8dcdadba4fafde40c78b2d9287f367f1ca28373f91d` (`273` files).
+
+Exact capsule identity:
+- transport branch `capsule/corr02-c2-w04-truth`;
+- transport HEAD `32354e839f7681308638c43ea0dae2efaa7a586a`;
+- transport tree `7f42b56e7a150a5b420978f9712feab024f05fed`;
+- final run `35683933901`; artifact `10675902821`;
+- downloaded ZIP SHA-256 `b6e77a218e9f7d9fca8467d2799a92a7cf358660653759c6c60828fc4b0566b0`; bytes `87,991,918`;
+- durable Drive file `1xYH-5e_B98x-Z5RPNJgOq0TFMBlXqJTD` under folder `1gbQytPWUnaWDiH4ouob8Ips1WZfsQITn`.
+
+Controller independent post-download checks are PASS: standalone verifier, git-bundle completeness, bootstrap materialization, exact HEAD/tree, clean worktree, 92-input Writer self-containment, Product identity, tracked-source guard, and Visual Bootstrap `READY`. The Bootstrap includes nine W04 current-parent screenshots plus raw receipt/reference bindings; the Evidence import-open state was specifically corrected/rebuilt so the visible screenshot is not the default state.
+
+No live Drive fetch is required by the Writer for mission inputs. No connector-driven per-file assembly is allowed. The Writer must not replace this capsule with another branch snapshot, rebuild the capsule, or infer wider mutation rights from packaged knowledge.
+
+C2 launch flow is now:
+`exact Drive capsule -> verify -> materialize -> inspect C2 packet/bootstrap -> local-first W04 correction -> fresh local tests/browser/visual comparison -> bounded final handoff -> independent Controller audit`.
+
+This is launch readiness only. It is not C2 Product acceptance and creates no main merge, release, deployment, provider truth or stack-freeze authority.
+
+
+
+### 17.11 C2 Controller acceptance / C3 parent binding — 2026-09-22
+
+C2 Writer result `287c30d135597c692a367cd1561aea67fd2c54bc` was independently audited and **not accepted as delivered** because direct Controller falsification proved a remaining F-043 provider-boundary defect: caller-supplied string-only `VERIFIED` source assertions plus string-only validation/admission proof refs could be composed into admitted immutable Evidence without an actually bound verifier/provider.
+
+Controller bounded Correction01 under `OD-20260916-044` changed only `stack/native-typescript/adapters/evidence/domain.ts` and `tools/c2-w04-truth/falsify-w04-truth.mjs`. Provider-unbound normal Product truth now rejects caller-asserted `VERIFIED` with `VERIFICATION_PROVIDER_UNBOUND`; normal import remains `UNVERIFIED/UNAVAILABLE`. No fake verifier/provider or new architecture was introduced.
+
+Exact accepted C2 successor:
+- HEAD `1acf9d691b27b1a271f149139e055110971b1fa0`;
+- tree `e8b26523c72aba5888439eedb221feff9edc9486`;
+- Product source `760578213b3f3e352dd2b08dd05fab183c3ffad9625844a1d0ea82e30cc9e454 / 273`;
+- accepted package Drive `11tlmcoAFIUjmprNv8gkVLWe0q37jDR6u`, ZIP SHA-256 `1179cf95734cec3eef37f11cd0dd77388406f58221b43a5f2adddbafe1a443aa`, bytes `87,343,745`;
+- Controller audit Drive `1IJafIuLSO8YSOJ9vllltmCuHQp-nOwgV`.
+
+Accepted closure: `F-022..F-026`, `F-038`, `F-043`, and the W04 domain-semantic half of `F-042`. Corrected exact-source proof: build PASS, `npm test 210/210 PASS`, runtime check PASS, C2 falsification `9/9 PASS`, browser `60/60 PASS` / `11` exact-source screenshots; the 11 screenshots are byte-identical to the Controller-inspected Writer C2 visual set. Root three stale browser/evidence-lineage check rows remain explicit non-Product evidence debt and are not relabeled PASS.
+
+C3 is now the next legal mutating lane and MUST derive from exact accepted C2 parent `1acf9d691b27b1a271f149139e055110971b1fa0` through a Controller-prepared Capsule v1.1. C3 owns `F-007..F-011`, `F-044`, plus Today-specific region/data/continuation truth. `B3-R` remains HOLD until C3/applicable prerequisites converge. No main merge/release/deployment/stack freeze is authorized.
