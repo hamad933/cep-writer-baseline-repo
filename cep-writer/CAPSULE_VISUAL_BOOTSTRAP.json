@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 5,
-  "classification": "CORR02_C3_CONTROLLER_BOUND_VISUAL_BOOTSTRAP__LOCAL_OFFLINE_TRACKED_ACCEPTED_RUNTIME",
+  "schemaVersion": 6,
+  "classification": "CORR02_C3_CONTROLLER_BOUND_VISUAL_BOOTSTRAP__LOCAL_OFFLINE_EXACT_SOURCE_BUILD",
   "enabled": true,
   "required": true,
   "allowWriterLocalRecapture": true,
@@ -27,9 +27,10 @@
     }
   ],
   "environment": {
-    "runtimeSource": "TRACKED_ACCEPTED_DIST_FROM_EXACT_C2_PARENT",
+    "runtimeSource": "GENERATED_LOCALLY_FROM_EXACT_PRODUCT_SOURCE_WITHOUT_EXTERNAL_DEPENDENCY_FETCH",
     "dependencyFetchRequired": false,
-    "captureEngine": "PYTHON_PLAYWRIGHT_SYSTEM_CHROMIUM"
+    "captureEngine": "PYTHON_PLAYWRIGHT_SYSTEM_CHROMIUM",
+    "routeClass": "NAVIGATION_INDEPENDENT_EXACT_CANDIDATE_BROWSER_RENDER__NOT_GENUINE_ROUTE"
   },
   "setupCommands": [
     {
@@ -38,6 +39,22 @@
       "argv": [
         "python3",
         "cep-writer/tools/verify_repo.py"
+      ]
+    },
+    {
+      "id": "c3-extract-donor",
+      "cwd": ".",
+      "argv": [
+        "python3",
+        "tools/extract_donor.py"
+      ]
+    },
+    {
+      "id": "c3-build-runtime-no-external-deps",
+      "cwd": ".",
+      "argv": [
+        "node",
+        "tools/build-runtime.mjs"
       ]
     }
   ],
@@ -48,6 +65,17 @@
       "argv": [
         "python3",
         "tools/c3-capsule/capture_today_baseline.py"
+      ]
+    },
+    {
+      "id": "c3-restore-generated-dist",
+      "cwd": ".",
+      "argv": [
+        "git",
+        "restore",
+        "--worktree",
+        "--",
+        "dist"
       ]
     }
   ],
