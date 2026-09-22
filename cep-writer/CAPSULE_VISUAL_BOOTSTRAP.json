@@ -79,6 +79,17 @@
         "node",
         "tools/c2-capsule/capture-w04-baseline.mjs"
       ]
+    },
+    {
+      "id": "c2-restore-generated-dist",
+      "cwd": ".",
+      "argv": [
+        "git",
+        "restore",
+        "--worktree",
+        "--",
+        "dist"
+      ]
     }
   ],
   "baselineGlobs": [
