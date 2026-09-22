@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "classification": "CORR02_C1_EXACT_SCOPE_LOCK__SERIAL_SHARED_OWNER_ONLY",
+  "exactParentCommit": "da007840363d92cdadd9f7c5180449a49e6f1d19",
+  "writableProductPaths": [
+    "stack/native-typescript/main.ts",
+    "stack/native-typescript/foundation/accepted-runtime.ts",
+    "stack/native-typescript/foundation/global/toolbar-template.ts",
+    "stack/native-typescript/foundation/workspace.ts",
+    "stack/native-typescript/foundation/workspace-host.ts",
+    "stack/native-typescript/foundation/workspace-host-kernel.ts",
+    "stack/native-typescript/foundation/extensions.css",
+    "tools/extract_donor.py"
+  ],
+  "boundedWritableRegions": [
+    {
+      "path": "stack/native-typescript/surfaces/m0-controller-composition.ts",
+      "symbols": [
+        "ensureStage",
+        "renderTypedCollectionStage",
+        "shared region binding helpers only"
+      ],
+      "prohibition": "No domain seed/provider/command semantics mutation"
+    },
+    {
+      "path": "stack/native-typescript/foundation/presentation-carrier/**",
+      "symbols": [
+        "canonical carrier/extraction source required to neutralize donor semantic carrier"
+      ],
+      "prohibition": "Do not destroy accepted Library donor value; rebind compatible value explicitly"
+    },
+    {
+      "path": "stack/native-typescript/tests/**",
+      "symbols": [
+        "C1 focused/falsification/regression tests"
+      ],
+      "prohibition": "Tests may not redefine Product truth"
+    },
+    {
+      "path": "tools/**",
+      "symbols": [
+        "C1 evidence/falsification harnesses"
+      ],
+      "prohibition": "Tooling only; no Product architecture substitution"
+    }
+  ],
+  "readOnlyDomainProviderAreas": [
+    "stack/native-typescript/adapters/today/**",
+    "stack/native-typescript/adapters/rq/**",
+    "stack/native-typescript/adapters/visualize/**",
+    "stack/native-typescript/adapters/evidence/**",
+    "stack/native-typescript/adapters/reviews/**",
+    "stack/native-typescript/adapters/mastery/**",
+    "stack/native-typescript/adapters/portfolio/**",
+    "stack/native-typescript/surfaces/today/**"
+  ],
+  "prohibited": [
+    "package.json dependency changes",
+    "package-lock.json dependency graph changes",
+    "SQLite schema/driver changes",
+    "provider/runtime truth changes",
+    "new universal semantic owner",
+    "consumer-local CSS masks as the primary shared fix",
+    "main branch mutation",
+    "cep-writer task-authority mutation by Writer"
+  ],
+  "requiredNegativeFalsification": [
+    "No Library Read/Edit on incompatible Surfaces",
+    "No Library explicit Save on incompatible Surfaces",
+    "No residual Library KU/document identity on incompatible Surfaces",
+    "No residual Library unit/block Context payload on incompatible Surfaces",
+    "Profile-required LEFT/CENTER/RIGHT/BOTTOM roles bind their Surface content",
+    "Library and Learn compatible donor value remains intact",
+    "1024 responsive RIGHT reveal remains clean"
+  ]
+}
