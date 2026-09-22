@@ -89,7 +89,7 @@ function localizedRegionLabel(value){
 function compactRegionList(items=[]){
   const rows=Array.isArray(items)?items:[];
   if(!rows.length)return '<p class="state-token" data-state="empty">No current items.</p>';
-  return `<ul class="m0-region-list">${rows.map(item=>{const primary=localizedRegionLabel(item),meta=[item?.kind,item?.status||item?.state,item?.id,item?.area,item?.target].filter(Boolean).map(String).filter((value,index,array)=>array.indexOf(value)===index&&value!==primary).join(' · ');return `<li><strong dir="auto">${html(primary)}</strong>${meta?`<small><bdi dir="ltr">${html(meta)}</bdi></small>`:''}</li>`}).join('')}</ul>`;
+  return `<ul class="m0-region-list">${rows.map(item=>{const primary=localizedRegionLabel(item),rawMeta=[item?.kind,item?.status,item?.state,item?.id,item?.area,item?.target],meta=rawMeta.filter(value=>['string','number','boolean'].includes(typeof value)).map(String).filter((value,index,array)=>array.indexOf(value)===index&&value!==primary).join(' · ');return `<li><strong dir="auto">${html(primary)}</strong>${meta?`<small><bdi dir="ltr">${html(meta)}</bdi></small>`:''}</li>`}).join('')}</ul>`;
 }
 function typedCell(adapter,row,column){try{return adapter&&column?adapter.columns.includes(column)?null:null:null}catch{return null}}
 function renderTypedCollectionStage(stage,{workspace=null,surface,title,summary,collection=null,rows=null,columns=null,commands=[],registry,truth=[],payloadFor=null,detailFor=null,bottomFor=null,rowId=null,rowLabel=null,rowMeta=null,collectionMode='auto',emptyGuidance=[],emptyMessage='No current records.'}={}){

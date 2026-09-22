@@ -152,12 +152,45 @@ const toolbarContext={};
  await context.close();
 }
 
+const eventTarget={};
+{
+ const {context,page,errors}=await ready('rq',1440,1000);
+ eventTarget.pageErrors=errors;
+ eventTarget.prototypeState=await page.evaluate(()=>({
+   nodeOwnClosest:Object.prototype.hasOwnProperty.call(Node.prototype,'closest'),
+   windowOwnClosest:Object.prototype.hasOwnProperty.call(Window.prototype,'closest'),
+   elementOwnClosest:Object.prototype.hasOwnProperty.call(Element.prototype,'closest')
+ }));
+ eventTarget.execution=await page.evaluate(()=>{
+   globalThis.__C1_EVENTTARGET_CAPTURE=null;
+   if(!CEPFoundation.registry.commands.has('c1.eventtarget-probe')){
+     CEPFoundation.registry.register('c1.eventtarget-probe','C1Harness','C1 EventTarget probe',payload=>{
+       globalThis.__C1_EVENTTARGET_CAPTURE={id:payload?.id||null,route:payload?.route||null,hasInvoker:Boolean(payload?.invoker)};
+       return {ok:true,status:'C1_EVENTTARGET_PROBE_EXECUTED'};
+     },()=>true);
+   }
+   CEPFoundation.workspace.toolbar(['c1.eventtarget-probe'],{contextProvider:()=>({id:'eventtarget-text-node'})});
+   const button=document.querySelector('#domainToolbar [data-foundation-command="c1.eventtarget-probe"]');
+   if(!button)return {dispatched:false,reason:'PROBE_BUTTON_MISSING'};
+   const textNode=button.firstChild;
+   if(!(textNode instanceof Text))return {dispatched:false,reason:'TEXT_NODE_MISSING',nodeType:textNode?.nodeType||null};
+   let dispatchError=null;
+   try{textNode.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,composed:true}))}catch(error){dispatchError=String(error?.message||error)}
+   let neutralError=null;
+   try{const neutral=document.createTextNode('neutral');document.querySelector('#centerPane')?.append(neutral);neutral.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,composed:true}));neutral.remove()}catch(error){neutralError=String(error?.message||error)}
+   return {dispatched:true,dispatchError,neutralError,capture:globalThis.__C1_EVENTTARGET_CAPTURE};
+ });
+ eventTarget.pass=eventTarget.prototypeState.nodeOwnClosest===false&&eventTarget.prototypeState.windowOwnClosest===false&&eventTarget.prototypeState.elementOwnClosest===true&&eventTarget.execution?.dispatched===true&&!eventTarget.execution?.dispatchError&&!eventTarget.execution?.neutralError&&eventTarget.execution?.capture?.id==='eventtarget-text-node'&&eventTarget.execution?.capture?.route==='toolbar'&&eventTarget.execution?.capture?.hasInvoker===true&&eventTarget.pageErrors.length===0;
+ await context.close();
+}
+
 const result={
  generatedAt:new Date().toISOString(),checkpoint,
  classification:'CONTROLLER_TARGETED_FALSIFICATION__GENUINE_LOCALHOST_ROUTE__NO_PRODUCT_MUTATION',
  responsive:{tested:responsive.length,pass:responsive.filter(x=>x.pass).length,fail:responsive.filter(x=>!x.pass).length,rows:responsive},
- toolbarContext,visualize,runs
+ toolbarContext,eventTarget,visualize,runs
 };
 await writeFile(new URL('targeted-falsification.json',out),JSON.stringify(result,null,2)+'\n');
-console.log(JSON.stringify({responsive:{tested:result.responsive.tested,pass:result.responsive.pass,fail:result.responsive.fail},toolbarContext:{pass:toolbarContext.pass,beforeDisabled:toolbarContext.beforeDisabled,afterDisabled:toolbarContext.afterDisabled,contextBound:toolbarContext.contextBound,capturedId:toolbarContext.capturedPayload?.id||null},visualize:{eligiblePairs:visualize.eligiblePairs,edgeCount:visualize.edgeCount,labelCount:visualize.labelCount,composerBefore:visualize.composerBefore,composerAfter:visualize.composerAfter},runs:{openCount:runs.openCount,xtermInput:runs.xtermInput,formInput:runs.formInput,inputError:runs.inputError||null,deviceUp:runs.after?.device?.up,nodeStatus:runs.after?.node?.status,event:runs.after?.event?.semanticCommand,recordedUp:runs.after?.recorded?.up}},null,2));
+console.log(JSON.stringify({responsive:{tested:result.responsive.tested,pass:result.responsive.pass,fail:result.responsive.fail},toolbarContext:{pass:toolbarContext.pass,beforeDisabled:toolbarContext.beforeDisabled,afterDisabled:toolbarContext.afterDisabled,contextBound:toolbarContext.contextBound,capturedId:toolbarContext.capturedPayload?.id||null},eventTarget:{pass:eventTarget.pass,prototypeState:eventTarget.prototypeState,execution:eventTarget.execution},visualize:{eligiblePairs:visualize.eligiblePairs,edgeCount:visualize.edgeCount,labelCount:visualize.labelCount,composerBefore:visualize.composerBefore,composerAfter:visualize.composerAfter},runs:{openCount:runs.openCount,xtermInput:runs.xtermInput,formInput:runs.formInput,inputError:runs.inputError||null,deviceUp:runs.after?.device?.up,nodeStatus:runs.after?.node?.status,event:runs.after?.event?.semanticCommand,recordedUp:runs.after?.recorded?.up}},null,2));
 await browser.close();server.kill('SIGTERM');
+if(result.responsive.fail||!toolbarContext.pass||!eventTarget.pass)process.exitCode=1;
