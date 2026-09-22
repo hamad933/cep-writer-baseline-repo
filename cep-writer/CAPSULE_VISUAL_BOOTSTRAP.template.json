@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "classification": "TEMPLATE_ONLY__CONTROLLER_BINDS_PER_MISSION",
+  "enabled": true,
+  "required": false,
+  "allowWriterLocalRecapture": true,
+  "expectedSourceCommit": "REPLACE_WITH_EXACT_CAPSULE_SOURCE_COMMIT",
+  "minimumScreenshotCount": 1,
+  "viewports": [
+    {"width": 1440, "height": 1000},
+    {"width": 1024, "height": 900}
+  ],
+  "states": [],
+  "environment": {},
+  "captureCommands": [
+    {
+      "id": "REPLACE_WITH_GOVERNED_CURRENT_PARENT_CAPTURE_HARNESS",
+      "cwd": ".",
+      "argv": ["python3", "REPLACE_WITH_CAPTURE_HARNESS.py"]
+    }
+  ],
+  "baselineGlobs": [
+    "REPLACE_WITH_SOURCE_BOUND_BASELINE_SCREENSHOT_GLOB/**/*.png"
+  ],
+  "receiptGlobs": [
+    "REPLACE_WITH_SOURCE_BOUND_CAPTURE_RECEIPT_GLOB/**/*.json"
+  ],
+  "referenceBindings": [],
+  "comparisonPlan": []
+}
