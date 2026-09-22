@@ -99,7 +99,7 @@ set -euo pipefail
 CAPSULE_DIR="$(cd "$(dirname "$0")" && pwd)"
 TARGET="${1:-$CAPSULE_DIR/workspace}"
 python3 "$CAPSULE_DIR/verify_capsule.py" "$CAPSULE_DIR"
-git clone "$CAPSULE_DIR/repo.bundle" "$TARGET"
+git clone --no-checkout "$CAPSULE_DIR/repo.bundle" "$TARGET"
 git -C "$TARGET" checkout --detach __HEAD__
 ACTUAL="$(git -C "$TARGET" rev-parse HEAD)"
 test "$ACTUAL" = "__HEAD__"
@@ -112,7 +112,7 @@ echo "Visual bootstrap: $CAPSULE_DIR/visual-bootstrap"
     bootstrap_ps1="""param([string]$Target = "$PSScriptRoot\\workspace")
 $ErrorActionPreference = "Stop"
 python "$PSScriptRoot\\verify_capsule.py" "$PSScriptRoot"
-git clone "$PSScriptRoot\\repo.bundle" $Target
+git clone --no-checkout "$PSScriptRoot\\repo.bundle" $Target
 git -C $Target checkout --detach __HEAD__
 $actual = (git -C $Target rev-parse HEAD).Trim()
 if ($actual -ne "__HEAD__") { throw "HEAD mismatch: $actual" }
