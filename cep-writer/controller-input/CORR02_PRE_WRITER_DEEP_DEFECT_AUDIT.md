@@ -326,3 +326,16 @@ The correction DAG is now refined to:
 
 C1 must close F-042 as a reusable action-carrier mechanism in addition to its already-bound shared carrier/mode/region scope. C2 consumes that clean mechanism and closes F-022..F-026/F-038/F-043 without moving formal Evidence/Review semantics into Foundation. C3 closes F-007..F-011/F-044. No broad parallel Product Writer wave is safe before C1 convergence.
 
+
+
+## C1 Independent Controller acceptance — 2026-09-22
+
+Exact C1 final branch HEAD `ac888c7e622fdefdc4f958771b21db485e33f9fc`; validated Product HEAD `7fbc25f781e7b8e9fe3eba72f5a57ffe2ed96c1c`; accepted Product source `5885c32a71c14b1b982ec8dcdadba4fafde40c78b2d9287f367f1ca28373f91d / 273`. Controller independently reviewed the exact 14-Product-path delta, final/revert artifacts, logs/receipts, all 46 full-carrier screenshots, targeted responsive/context/EventTarget evidence and the central revert proof.
+
+**Accepted closed findings:** `F-013`, `F-001`, `F-002`, `F-003`, `F-004`, `F-005`, `F-021`, `F-029`, `F-032`, `F-033`, `F-042`.
+
+C1 introduces no accepted closure for downstream truth findings: `F-022..F-026`, `F-038`, `F-043` remain C2; `F-007..F-011`, `F-044` remain C3; `F-027`, `F-034..F-036` remain B3-R; `F-028`, `F-039` remain later W03/domain work.
+
+Evidence clarification: Writer claim `43/46 byte-identical to previously inspected set` is not bound to an exact intermediate artifact. Against governed pre-C1 artifact `10670544348`, only `4/46` are byte-identical and `42/46` changed, which is expected from the shared carrier/region correction. Because Controller directly inspected all 46 final images and verified the final source-bound artifact, this is `NONBLOCKING_EVIDENCE_ACCOUNTING_AMBIGUITY`, not a Product defect.
+
+**Disposition:** `C1_CONTROLLER_ACCEPTED__DOWNSTREAM_PARENT_ELIGIBLE__NO_MAIN_MERGE_RELEASE`.
