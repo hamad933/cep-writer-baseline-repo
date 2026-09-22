@@ -1,0 +1,56 @@
+name: CEP CORR02 Controller Targeted Falsification
+
+on:
+  push:
+    branches:
+      - controller/corr02-full-carrier-audit-da007840
+    paths:
+      - '.github/workflows/corr02-controller-targeted-falsification.yml'
+      - 'controller-targeted/**'
+
+permissions:
+  contents: read
+
+jobs:
+  targeted:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Prove Product checkpoint unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHECKPOINT=da007840363d92cdadd9f7c5180449a49e6f1d19
+          git cat-file -e "$CHECKPOINT^{commit}"
+          git diff --name-only "$CHECKPOINT" HEAD | tee /tmp/delta.txt
+          illegal="$(grep -Ev '^(\.github/workflows/|controller-audit/|controller-targeted/)' /tmp/delta.txt || true)"
+          if [ -n "$illegal" ]; then
+            echo "ILLEGAL_PRODUCT_OR_AUTHORITY_DELTA"
+            echo "$illegal"
+            exit 1
+          fi
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.16.0'
+          cache: npm
+
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build:runtime
+
+      - name: Run targeted genuine-route falsification
+        run: node controller-targeted/targeted-falsification.mjs
+
+      - name: Upload targeted evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: corr02-controller-targeted-falsification
+          path: controller-targeted-output/
+          if-no-files-found: error
+          retention-days: 30
