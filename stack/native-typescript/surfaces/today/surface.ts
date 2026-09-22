@@ -31,18 +31,29 @@ export function bindTodaySurface({commands,adapter,workspace=null}={}){
 export function composeTodayOrchestrationPresentation({host,commands,adapter,workspace=null,lang=null}={}){
   if(!host||!commands||!adapter)throw Error('TODAY_COMPOSITION_BINDING_REQUIRED');
   const binding=bindTodaySurface({commands,adapter,workspace});
-  const render=()=>renderTodayOrchestrationProjection({
-    host,projection:adapter.lastProjection||adapter.project(),adapter,lang,
-    onAction:({action,itemId,version,filter,invoker})=>{
-      let result=null;
-      if(action==='resume')result=commands.execute('today.resume',{itemId,route:'today-orchestration',invoker});
-      else if(action==='refresh')result=commands.execute('today.refresh',{route:'today-orchestration',invoker});
-      else if(action==='filter')result=commands.execute('today.filter',{value:filter,route:'today-orchestration',invoker});
-      else if(action==='why')result=commands.execute('today.why',{itemId,version,route:'today-orchestration',invoker});
-      if(action==='filter'||action==='refresh')render();
-      return result;
-    }
-  });
+  const focusKey=invoker=>invoker?{id:invoker.id||'',action:invoker.dataset?.todayAction||'',filter:invoker.dataset?.filter||'',itemId:invoker.dataset?.itemId||''}:null;
+  const restoreFocus=key=>{
+    if(!key)return;
+    const candidates=[...host.querySelectorAll('[data-today-action]')];
+    const target=(key.id&&host.querySelector(`#${key.id}`))||candidates.find(node=>node.dataset.todayAction===key.action&&(node.dataset.filter||'')===key.filter&&(node.dataset.itemId||'')===key.itemId);
+    target?.focus?.({preventScroll:true});
+  };
+  const render=(restore=null)=>{
+    const presentation=renderTodayOrchestrationProjection({
+      host,projection:adapter.lastProjection||adapter.project(),adapter,lang,
+      onAction:({action,itemId,version,filter,invoker})=>{
+        let result=null;
+        if(action==='resume')result=commands.execute('today.resume',{itemId,route:'today-orchestration',invoker});
+        else if(action==='refresh')result=commands.execute('today.refresh',{route:'today-orchestration',invoker});
+        else if(action==='filter')result=commands.execute('today.filter',{value:filter,route:'today-orchestration',invoker});
+        else if(action==='why')result=commands.execute('today.why',{itemId,version,route:'today-orchestration',invoker});
+        if(action==='filter'||action==='refresh')render(focusKey(invoker));
+        return result;
+      }
+    });
+    restoreFocus(restore);
+    return presentation;
+  };
   const presentation=render();
   return {binding,presentation,render,owner:'TodayOrchestrationPresentation',canonicalWrites:false};
 }

@@ -214,7 +214,7 @@ export function createBalanced6TodayProviders() {
       id: 'balanced6.today.orchestration-provider',
       read: () => ({
         providerId: 'balanced6.today.orchestration-provider',
-        state: 'OBSERVED_DATA',
+        state: 'AVAILABLE_DATA',
         observedAt: '2025-05-18T10:40:00Z',
         reason: 'GOVERNED_BASELINE_PROJECTION',
         items: structuredClone(BALANCED6_TODAY_ITEMS)
