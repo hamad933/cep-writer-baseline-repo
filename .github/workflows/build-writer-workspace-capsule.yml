@@ -19,9 +19,9 @@ permissions:
 
 jobs:
   build-capsule:
-    name: Build exact self-contained Writer capsule
+    name: Build Controller-prepared exact Writer capsule
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - name: Checkout exact triggering commit
         uses: actions/checkout@v4
@@ -33,20 +33,36 @@ jobs:
         with:
           python-version: '3.13'
 
+      - name: Prepare bounded exact-parent visual bootstrap
+        run: |
+          python tools/writer-capsule/prepare_visual_bootstrap.py \
+            --repo-root . \
+            --config cep-writer/CAPSULE_VISUAL_BOOTSTRAP.json \
+            --output .capsule-visual-bootstrap
+
       - name: Build capsule payload
         run: |
           python tools/writer-capsule/build_capsule.py \
             --repo-root . \
-            --output writer-capsule-out
+            --output writer-capsule-out \
+            --visual-bootstrap .capsule-visual-bootstrap
 
       - name: Verify generated capsule
         run: |
           python writer-capsule-out/verify_capsule.py writer-capsule-out
           git bundle verify writer-capsule-out/repo.bundle
           cat writer-capsule-out/CAPSULE_MANIFEST.json
+          cat writer-capsule-out/visual-bootstrap/VISUAL_BOOTSTRAP_MANIFEST.json
           cat writer-capsule-out/SHA256SUMS.txt
 
-      - name: Upload single inbound capsule artifact
+      - name: Prove clean local materialization
+        run: |
+          rm -rf /tmp/cep-capsule-smoke
+          bash writer-capsule-out/bootstrap.sh /tmp/cep-capsule-smoke
+          test "$(git -C /tmp/cep-capsule-smoke rev-parse HEAD)" = "$(git rev-parse HEAD)"
+          test -z "$(git -C /tmp/cep-capsule-smoke status --porcelain)"
+
+      - name: Upload one ready-to-work inbound capsule
         uses: actions/upload-artifact@v4
         with:
           name: CEP_WRITER_WORKSPACE_CAPSULE-${{ github.run_id }}
