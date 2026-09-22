@@ -36,7 +36,7 @@ for(const surface of surfaces){
  const {context,page,errors}=await ready(surface);
  const right=page.locator('#rightPane');
  const before=await page.evaluate(()=>({state:document.querySelector('#rightPane')?.getAttribute('data-state')||null,hidden:document.querySelector('#rightPane')?.hidden||false,bodyOverlay:document.body?.dataset?.overlayPane||null,text:(document.querySelector('#rightPane')?.innerText||'').replace(/\s+/g,' ').slice(0,300)}));
- const opener=page.locator('button[data-foundation-command="foundation.right"]:visible').first();
+ const opener=page.locator('button[data-pane-toggle="right"]:visible').filter({hasNot:page.locator('#rightPane button[data-pane-toggle="right"]')}).first();
  let openerCount=await opener.count(),clicked=false,clickError=null;
  if(openerCount){try{await opener.click();clicked=true;await page.waitForTimeout(120)}catch(e){clickError=String(e?.message||e)}}
  const after=await page.evaluate(()=>{const el=document.querySelector('#rightPane');const s=el?getComputedStyle(el):null,r=el?.getBoundingClientRect();return {state:el?.getAttribute('data-state')||null,visible:!!el&&s.display!=='none'&&s.visibility!=='hidden'&&Number(s.opacity||1)>0&&r.width>0&&r.height>0,bodyOverlay:document.body?.dataset?.overlayPane||null,text:(el?.innerText||'').replace(/\s+/g,' ').slice(0,300)}});
