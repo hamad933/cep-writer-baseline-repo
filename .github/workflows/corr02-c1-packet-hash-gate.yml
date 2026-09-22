@@ -58,7 +58,7 @@ jobs:
             'cep-writer/controller-input/CORR02_C1_RUNTIME_AUDIT_RECEIPT.json',
             'cep-writer/tools/verify_c1_packet.py'
           ]
-          refs=sorted(str(p.as_posix()) for p in (root/'cep-writer'/'references').rglob('*') if p.is_file())
+          refs=sorted(p.relative_to(root).as_posix() for p in (root/'cep-writer'/'references').rglob('*') if p.is_file())
           paths=[]
           for x in fixed+refs:
             if x not in paths: paths.append(x)
