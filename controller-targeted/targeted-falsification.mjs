@@ -133,7 +133,7 @@ const toolbarContext={};
    const initial=CEPFoundation.workspace?.toolbarContext?.()?.id||null;
    if(!CEPFoundation.registry.commands.has('c1.context-probe')){
      CEPFoundation.registry.register('c1.context-probe','C1Harness','C1 contextual toolbar probe',payload=>{
-       globalThis.__C1_TOOLBAR_CAPTURED_PAYLOAD=structuredClone(payload);
+       globalThis.__C1_TOOLBAR_CAPTURED_PAYLOAD={id:payload?.id||null,route:payload?.route||null,hasInvoker:Boolean(payload?.invoker)};
        return {ok:true,status:'C1_CONTEXT_PROBE_EXECUTED',id:payload?.id||null};
      },payload=>payload?.id&&payload.id!==initial?true:{enabled:false,code:'C1_PROBE_REQUIRES_SELECTION_CHANGE',reason:'Select a different real row.',availabilityOwner:'C1Harness'});
    }
