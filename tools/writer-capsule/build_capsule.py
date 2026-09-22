@@ -15,6 +15,12 @@ def tracked_changes(root):
             if line: names.add(line)
     return sorted(names)
 
+def ensure_ancestor(root,ancestor,descendant):
+    run("git","cat-file","-e",ancestor+"^{commit}",cwd=root)
+    p=subprocess.run(["git","merge-base","--is-ancestor",ancestor,descendant],cwd=root)
+    if p.returncode != 0:
+        raise SystemExit(f"expected Product parent {ancestor} is not an ancestor of capsule transport HEAD {descendant}")
+
 def sha256(path):
     h=hashlib.sha256()
     with open(path,"rb") as f:
@@ -52,10 +58,14 @@ def main():
 
     binding_path=(root/ns.binding).resolve()
     binding={}
+    product_parent=None
     if binding_path.exists():
         binding=json.loads(binding_path.read_text(encoding="utf-8"))
-        exp=binding.get("expectedSourceCommit")
-        if exp and exp != head: raise SystemExit(f"binding expectedSourceCommit {exp} != HEAD {head}")
+        product_parent=binding.get("expectedProductParentCommit")
+        if product_parent:
+            ensure_ancestor(root,product_parent,head)
+        if binding.get("expectedSourceCommit"):
+            raise SystemExit("legacy expectedSourceCommit is self-referential; use expectedProductParentCommit and let CAPSULE_MANIFEST bind the exact transport HEAD")
         shutil.copy2(binding_path,out/"CAPSULE_BINDING.json")
     mission=ns.mission or binding.get("missionId") or "INFRA_TEMPLATE_VALIDATION_ONLY"
 
@@ -117,12 +127,13 @@ Write-Host "Visual bootstrap: $PSScriptRoot\\visual-bootstrap"
 
 Mission: `{mission}`
 Repository: `{repo}`
-Source ref: `{branch}`
-Exact source commit: `{head}`
-Exact source tree: `{tree}`
+Product parent commit: `{product_parent or 'VALIDATION_OR_NOT_BOUND'}`
+Capsule transport ref: `{branch}`
+Exact capsule transport commit: `{head}`
+Exact capsule transport tree: `{tree}`
 Visual bootstrap status: `{visual_status or 'NOT_CONFIGURED'}`
 
-1. Run `verify_capsule.py`.
+1. Run `verify_capsule.py` from any directory; it must not require an existing Git repository.
 2. Materialize with `bootstrap.sh` or `bootstrap.ps1`.
 3. Read the local mission packet and exact scope.
 4. Open `visual-bootstrap/VISUAL_BOOTSTRAP_MANIFEST.json` before creating a new baseline.
@@ -141,10 +152,12 @@ Visual bootstrap status: `{visual_status or 'NOT_CONFIGURED'}`
         payload[rel]=file_meta(out,p)
 
     manifest={
-      "schemaVersion":2,
+      "schemaVersion":3,
       "classification":"SELF_CONTAINED_WRITER_WORKSPACE_CAPSULE_V1_1__CONTROLLER_PREPARED__EXECUTION_TRANSPORT_ONLY__NOT_AUTHORITY",
       "missionId":mission,"repository":repo,"sourceRef":branch,
+      "productParentCommit":product_parent,
       "sourceCommit":head,"sourceTree":tree,
+      "capsuleTransportCommit":head,"capsuleTransportTree":tree,
       "bindingPath":str(binding_path.relative_to(root)) if binding_path.exists() else None,
       "binding":binding or None,
       "controllerPrepared":True,
@@ -160,6 +173,6 @@ Visual bootstrap status: `{visual_status or 'NOT_CONFIGURED'}`
     sums_payload=dict(payload)
     sums_payload["CAPSULE_MANIFEST.json"]=file_meta(out,manifest_path)
     (out/"SHA256SUMS.txt").write_text("".join(f"{v['sha256']}  {k}\n" for k,v in sorted(sums_payload.items())),encoding="utf-8",newline="\n")
-    print(json.dumps({"mission":mission,"head":head,"tree":tree,"output":str(out),"files":len(payload),"visualBootstrapStatus":visual_status,"trackedSourceGuard":"PASS","bundleSha256":payload["repo.bundle"]["sha256"]}))
+    print(json.dumps({"mission":mission,"productParentCommit":product_parent,"capsuleTransportCommit":head,"capsuleTransportTree":tree,"output":str(out),"files":len(payload),"visualBootstrapStatus":visual_status,"trackedSourceGuard":"PASS","bundleSha256":payload["repo.bundle"]["sha256"]}))
 
 if __name__=="__main__": main()
