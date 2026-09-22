@@ -1,22 +1,22 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "classification": "C2_CAPSULE_V1_1_FINAL_READY_MARKER__CONTROLLER_PREPARED__EXECUTION_TRANSPORT_ONLY__NOT_ACCEPTANCE",
   "missionId": "CORR02_C2_W04_PRODUCT_DATA_ACTION_TRUTH",
   "expectedProductParentCommit": "ac888c7e622fdefdc4f958771b21db485e33f9fc",
   "expectedProductSourceSha256": "5885c32a71c14b1b982ec8dcdadba4fafde40c78b2d9287f367f1ca28373f91d",
   "expectedProductSourceFiles": 273,
-  "packetHeadBeforeMarker": "9dd8d8c753a422e004ab70c8f15e16b7d60d4bb5",
+  "packetHeadBeforeMarker": "6ef50ca62bc582d8aaea7ee136f0fcd1cf41455e",
   "noProductDeltaFromParent": true,
   "visualBootstrapRequired": true,
   "selfContainmentManifestRefreshed": true,
   "ready": true,
-  "triggerPurpose": "FINAL_C2_CAPSULE_V1_1_BUILD_AFTER_SELF_CONTAINMENT_DIGEST_CORRECTION",
+  "triggerPurpose": "FINAL_C2_CAPSULE_V1_1_BUILD_AFTER_VISUAL_STATE_BOOTSTRAP_CORRECTION",
   "authorityCeiling": "WORKFLOW_OR_ARTIFACT_PASS_DOES_NOT_CREATE_PRODUCT_ACCEPTANCE_OR_WRITER_RESULT_AUTHORITY",
   "previousBuildAttempt": {
-    "runId": 35683563155,
-    "conclusion": "WORKFLOW_SUCCESS__CAPSULE_REJECTED_BY_CONTROLLER__VISUAL_BOOTSTRAP_PARTIAL",
+    "runId": 35683724556,
+    "conclusion": "WORKFLOW_SUCCESS__CAPSULE_REJECTED_BY_CONTROLLER_VISUAL_BOOTSTRAP_STATE_INSPECTION",
     "productDefect": false,
-    "exactIssue": "verify_repo input digest mismatch for cep-writer/CAPSULE_VISUAL_BOOTSTRAP.json",
-    "correction": "manifest digest corrected to 5053970dfe452295942f1c0f29b421055d58b375fde361a0c808ea3f5c7fcdde"
+    "exactIssue": "evidence-import-open screenshot byte-identical to default because opened state was below viewport",
+    "correction": "open and scroll Evidence import state into governed viewport before capture"
   }
 }
