@@ -4326,3 +4326,45 @@ Only final representative source-bound captures/results that materially prove th
 
 This changes transport/evidence workflow only; it does not relax exact parent, C1 scope, visual inspection, falsification, final evidence, Controller audit or no-self-promotion gates.
 
+
+
+### 17.7 Post-C1 Writer Workspace Capsule activation law — OD-20260922-074
+
+C1 remains exactly bound to its current self-contained packet at `writer/presentation-corr02-google-ai-studio@bcbb1ac2d09e30b21062fabeccf7a1aaa2b30a2d`; do not rebuild/repackage C1 merely to adopt a new transport method.
+
+After independent Controller adjudication produces an exact clean C1 parent, the first downstream mutating Writer (normally C2 if launchable) MUST use `SELF_CONTAINED_WRITER_WORKSPACE_CAPSULE_V1` or a Controller-accepted successor. Canonical method Drive `1XtJlxnWIFZe_AmiLX7QXKVk31IjRQj7n`.
+
+Required downstream lifecycle:
+`exact Controller-adjudicated parent/source -> exact mission-bound capsule staging branch -> automated single artifact -> offline/local verify + materialize -> local-first mutation/test/browser/visual loop -> bounded final handoff -> independent Controller audit`.
+
+The capsule may package broad stable task-relevant knowledge, but mutation authority remains exactly the active mission scope. No capsule/workflow/artifact PASS creates Product acceptance, readiness, merge, release, provider truth or authority. Do not silently repair a capsule with live connector reads; identity/input mismatch is a Controller rebuild condition.
+
+### 17.8 Controller-prepared Capsule v1.1 / Visual Bootstrap activation — OD-20260922-075
+
+This changes only the **post-C1 Writer preparation/transport method**. C1 remains grandfathered at exact packet HEAD `bcbb1ac2d09e30b21062fabeccf7a1aaa2b30a2d`.
+
+For the first downstream Writer launched after exact Controller-clean C1 (normally C2 if launchable), the Controller MUST prepare a `SELF_CONTAINED_WRITER_WORKSPACE_CAPSULE_V1_1` before handoff. The Writer does not assemble the capsule, repository snapshot, initial capture harness or initial baseline.
+
+For a Presentation/interaction-heavy downstream mission, the Controller must bind and package, when technically available:
+- exact source/branch and complete mission packet;
+- task-bound reusable capture harness/method;
+- bounded current-parent baseline screenshots at the governed viewport/state set;
+- source-bound raw capture receipts;
+- `VISUAL_BOOTSTRAP_MANIFEST.json` with screenshot/receipt hashes, viewport/state metadata and reference mappings;
+- local-recapture fallback instructions.
+
+Writer first-pass work is:
+`verify -> materialize -> inspect prebuilt baseline/reference mapping -> compare -> diagnose -> fix -> fresh local recapture -> compare again`.
+
+Bootstrap images never satisfy final evidence/acceptance by themselves. Missing/partial bootstrap states may be recaptured locally using the packaged harness; no connector-driven per-file setup or silent screenshot/source substitution is permitted.
+
+
+### 17.9 C1 Controller acceptance / C2 parent binding — 2026-09-22
+
+C1 is now `CONTROLLER_ACCEPTED` for its bounded shared-owner scope. Exact downstream parent is final branch HEAD `ac888c7e622fdefdc4f958771b21db485e33f9fc`; validated Product tree is unchanged from Product HEAD `7fbc25f781e7b8e9fe3eba72f5a57ffe2ed96c1c`; accepted Product source is `5885c32a71c14b1b982ec8dcdadba4fafde40c78b2d9287f367f1ca28373f91d / 273`.
+
+Accepted closure: `F-013`, `F-001`, `F-002`, `F-003`, `F-004`, `F-005`, `F-021`, `F-029`, `F-032`, `F-033`, `F-042`.
+
+The next legal mutating lane is **C2 — W04 Product data/action truth**, and it MUST start from the exact accepted C1 parent above through `SELF_CONTAINED_WRITER_WORKSPACE_CAPSULE_V1_1`. C2 owns only `F-022..F-026`, `F-038`, `F-043` plus the domain-semantic half exposed by F-042. It must consume the accepted C1 contextual-toolbar mechanism rather than duplicate it. C3/B3-R/later W03 remain HOLD.
+
+The C1 handoff's unbound `43/46 byte-identical` sentence is superseded by Controller audit: it is a nonblocking evidence-accounting ambiguity; final C1 visual evidence itself is accepted after direct Controller inspection of all 46 source-bound screenshots.
