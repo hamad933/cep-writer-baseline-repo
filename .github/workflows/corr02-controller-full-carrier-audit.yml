@@ -25,7 +25,7 @@ jobs:
           START=bcbb1ac2d09e30b21062fabeccf7a1aaa2b30a2d
           git cat-file -e "$START^{commit}"
           git diff --name-only "$START" HEAD | tee /tmp/c1-delta.txt
-          illegal="$(grep -Ev '^(\.github/workflows/corr02-controller-full-carrier-audit.yml|controller-audit/full-carrier-audit.mjs|stack/native-typescript/(main\.ts|foundation/accepted-runtime\.ts|foundation/workspace\.ts|foundation/workspace-host\.ts|foundation/global/input-ownership-contract\.ts|foundation/global/workspace-host-kernel\.ts|foundation/global/region-contract\.ts|foundation/global/toolbar-template\.ts|surfaces/m0-controller-composition\.ts|adapters/health-runtime\.ts|adapters/processing-runtime\.ts|surfaces/backup/index\.ts|surfaces/audit/index\.ts|surfaces/validation/index\.ts))$' /tmp/c1-delta.txt || true)"
+          illegal="$(grep -Ev '^(\.github/workflows/corr02-controller-full-carrier-audit.yml|controller-audit/full-carrier-audit.mjs|controller-targeted/targeted-falsification.mjs|stack/native-typescript/(main\.ts|foundation/accepted-runtime\.ts|foundation/workspace\.ts|foundation/workspace-host\.ts|foundation/global/input-ownership-contract\.ts|foundation/global/workspace-host-kernel\.ts|foundation/global/region-contract\.ts|foundation/global/toolbar-template\.ts|surfaces/m0-controller-composition\.ts|adapters/health-runtime\.ts|adapters/processing-runtime\.ts|surfaces/backup/index\.ts|surfaces/audit/index\.ts|surfaces/validation/index\.ts))$' /tmp/c1-delta.txt || true)"
           if [ -n "$illegal" ]; then
             echo "C1_SCOPE_DELTA_VIOLATION"
             echo "$illegal"
@@ -128,6 +128,16 @@ jobs:
           cat controller-audit-output/full-carrier-audit.log
           exit 0
 
+      - name: Run targeted C1 falsification
+        shell: bash
+        run: |
+          set +e
+          node controller-targeted/targeted-falsification.mjs > controller-audit-output/targeted-falsification.log 2>&1
+          code=$?
+          echo "$code" > controller-audit-output/targeted-falsification.exit
+          cat controller-audit-output/targeted-falsification.log
+          exit 0
+
       - name: Preserve exact-current browser receipts
         if: always()
         shell: bash
@@ -142,6 +152,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: corr02-c1-writer-validation
-          path: controller-audit-output/
+          path: |
+            controller-audit-output/
+            controller-targeted-output/
           if-no-files-found: error
           retention-days: 30

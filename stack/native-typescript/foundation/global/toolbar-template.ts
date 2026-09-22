@@ -96,12 +96,15 @@ export function projectToolbarHistoryState(root, input = {}) {
   return Object.freeze({ owner: TOOLBAR_TEMPLATE_OWNER, projected: undo || redo, undo, redo });
 }
 
-export function applyToolbarCarrierPolicy(root,{documentSemantics='neutral',identity='hidden'}={}){
+export function applyToolbarCarrierPolicy(root,{documentSemantics='neutral',identity='hidden',allowExplicitSave=false}={}){
   const toolbar=root?.querySelector?.('.toolbar')||root?.querySelector?.('[data-component="EditorToolbar"]');
   if(!toolbar)return Object.freeze({owner:TOOLBAR_TEMPLATE_OWNER,applied:false,documentSemantics,identity});
   const donorMain=toolbar.querySelector(':scope > .tg.main'),donorIdentity=toolbar.querySelector(':scope > .tg.identity');
   const structured=documentSemantics==='library'||documentSemantics==='structured';
   if(donorMain){donorMain.hidden=!structured;donorMain.inert=!structured;donorMain.setAttribute('aria-hidden',String(!structured));donorMain.dataset.carrierSemantics=structured?documentSemantics:'neutral';}
+  const explicitSave=toolbar.querySelector('[data-action="explicit-save"]'),saveStatus=toolbar.querySelector('#saveStatus');
+  if(explicitSave){explicitSave.hidden=!allowExplicitSave;explicitSave.inert=!allowExplicitSave;explicitSave.setAttribute('aria-hidden',String(!allowExplicitSave));explicitSave.dataset.carrierSaveSemantics=allowExplicitSave?'bound':'suppressed';}
+  if(saveStatus){saveStatus.hidden=!allowExplicitSave;saveStatus.setAttribute('aria-hidden',String(!allowExplicitSave));saveStatus.dataset.carrierSaveSemantics=allowExplicitSave?'bound':'suppressed';}
   const showIdentity=identity==='visible';
   if(donorIdentity){donorIdentity.hidden=!showIdentity;donorIdentity.inert=!showIdentity;donorIdentity.setAttribute('aria-hidden',String(!showIdentity));donorIdentity.dataset.carrierIdentity=showIdentity?'bound':'suppressed';}
   toolbar.dataset.documentSemantics=documentSemantics;
@@ -109,7 +112,7 @@ export function applyToolbarCarrierPolicy(root,{documentSemantics='neutral',iden
   return Object.freeze({owner:TOOLBAR_TEMPLATE_OWNER,applied:true,documentSemantics,identity});
 }
 
-export function composeToolbarSlots(root,{globalHTML='',domainId='domainToolbar',documentSemantics='neutral',identity='hidden'}={}){
+export function composeToolbarSlots(root,{globalHTML='',domainId='domainToolbar',documentSemantics='neutral',identity='hidden',allowExplicitSave=false}={}){
   const toolbar=root?.querySelector?.('.toolbar')||root?.querySelector?.('[data-component="EditorToolbar"]');
   if(!toolbar)return Object.freeze({owner:TOOLBAR_TEMPLATE_OWNER,composed:false});
   toolbar.dataset.slot='TOOLBAR';toolbar.dataset.presentationOwner=TOOLBAR_TEMPLATE_OWNER;
@@ -117,6 +120,6 @@ export function composeToolbarSlots(root,{globalHTML='',domainId='domainToolbar'
   global.innerHTML=String(globalHTML);global.dataset.toolbarSlotOwner=TOOLBAR_TEMPLATE_OWNER;
   let domain=toolbar.querySelector(':scope > .foundation-domain');if(!domain){domain=(root.createElement?root:globalThis.document).createElement('div');domain.className='tg foundation-domain';toolbar.append(domain)}
   domain.id=domainId;domain.dataset.toolbarSlotOwner=TOOLBAR_TEMPLATE_OWNER;
-  const carrier=applyToolbarCarrierPolicy(root,{documentSemantics,identity});
+  const carrier=applyToolbarCarrierPolicy(root,{documentSemantics,identity,allowExplicitSave});
   return Object.freeze({owner:TOOLBAR_TEMPLATE_OWNER,composed:true,slots:['foundation-global','foundation-domain'],carrier});
 }

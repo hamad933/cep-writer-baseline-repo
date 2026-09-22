@@ -21,8 +21,8 @@ export class WorkspaceFoundation {
   createChrome(){
     document.body.dataset.consumer=this.consumer;document.querySelector('.global').hidden=true;document.querySelector('.w02nav').hidden=true;
     const shell=document.createElement('header');shell.className='foundation-shell';shell.dataset.shellHost='GlobalShellNavigationOwner';shell.setAttribute('aria-busy','true');document.querySelector('.app').prepend(shell);
-    const family=this.api.binding?.family||null,documentSemantics=this.consumer==='library'?'library':family==='structured'?'structured':'neutral',identity=(this.consumer==='library'||this.consumer==='learn')?'visible':'hidden';
-    composeToolbarSlots(document,{globalHTML:`${button('foundation.palette','⌘')}${button('foundation.focus',this.text('focus'),'data-i18n="focus"')}${button('foundation.note',this.text('note'),'data-i18n="note"')}${button('foundation.notes',this.text('notes'),'data-i18n="notes"')}`,documentSemantics,identity});
+    const family=this.api.binding?.family||null,documentSemantics=this.consumer==='library'?'library':this.consumer==='learn'?'structured':'neutral',identity=(this.consumer==='library'||this.consumer==='learn')?'visible':'hidden';
+    composeToolbarSlots(document,{globalHTML:`${button('foundation.palette','⌘')}${button('foundation.focus',this.text('focus'),'data-i18n="focus"')}${button('foundation.note',this.text('note'),'data-i18n="note"')}${button('foundation.notes',this.text('notes'),'data-i18n="notes"')}`,documentSemantics,identity,allowExplicitSave:this.consumer==='library'});
     this.applyCarrierPolicy({documentSemantics,identity});
     const menu=document.createElement('div');menu.id='foundationMenu';menu.className='popover';menu.setAttribute('role','menu');menu.hidden=true;document.body.append(menu);
     const bd=document.createElement('div');bd.id='foundationDialog';bd.className='backdrop';bd.hidden=true;bd.innerHTML='<section class="dialog" role="dialog" aria-modal="true" aria-labelledby="foundationDialogTitle"><header class="dialoghead"><h2 id="foundationDialogTitle"></h2><button class="btn" data-foundation-close="dialog" aria-label="Close dialog">×</button></header><div class="dialogbody"></div><footer class="dialogfoot"><button class="btn" data-foundation-close="dialog">Cancel / إلغاء</button></footer></section>';document.body.append(bd);
@@ -70,7 +70,7 @@ export class WorkspaceFoundation {
     else if(key==='TOOLBAR')host=document.querySelector('#domainToolbar');
     else if(key==='CENTER')host=document.querySelector('#foundationStage')||document.querySelector('#centerPane');
     if(!host)return null;
-    if(key==='LEFT'||key==='RIGHT'){const pbody=pane?.querySelector('.pbody');if(pbody)[...pbody.children].forEach(child=>{if(child!==host&&child.dataset?.donorSemantic==='suppressed')child.hidden=true});}
+    if(key==='LEFT'||key==='RIGHT'){const pbody=pane?.querySelector('.pbody');if(pbody)[...pbody.children].forEach(child=>{const neutral=document.body.dataset.carrierDocumentSemantics==='neutral';if(child!==host&&(neutral||child.dataset?.donorSemantic==='suppressed')){child.hidden=true;child.inert=true;child.setAttribute('aria-hidden','true')}});}
     host.replaceChildren();if(node)host.append(node);else host.innerHTML=String(html||'');host.hidden=false;host.inert=false;host.removeAttribute('aria-hidden');host.dataset.regionBindingOwner='WorkspaceFoundationHost';
     if(label&&pane?.querySelector('.phead h2'))pane.querySelector('.phead h2').textContent=label;
     if(key==='BOTTOM'){const title=document.querySelector('#bottomShelf .bottomtitle'),sum=document.querySelector('#bottomSummary');if(label&&title)title.textContent=label;if(summary&&sum)sum.textContent=summary;if(open!==null){this.api.state.surface.bottomOpen=Boolean(open);document.querySelector('#bottomShelf').dataset.state=open?'open':'closed';const content=document.querySelector('#bottomContent');if(content){content.inert=!open;content.hidden=false}}}
