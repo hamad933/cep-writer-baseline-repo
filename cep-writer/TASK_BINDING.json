@@ -1,35 +1,36 @@
 {
-  "schemaVersion": 4,
-  "classification": "CORR02_C1_MISSION_BRANCH_BINDING__CANDIDATE_ONLY",
+  "schemaVersion": 7,
+  "classification": "CORR02_C2_MISSION_BINDING__CAPSULE_V1_1__CANDIDATE_ONLY",
   "repository": "hamad933/cep-writer-baseline-repo",
-  "baselineBranch": "main",
-  "baselineCommit": "ef7de5e05eee79d1302a84c47ef41ba5e94364c6",
-  "candidateBranch": "writer/presentation-corr02-google-ai-studio",
-  "controllerPacketBinding": "CURRENT_BRANCH_HEAD_WITH_ZERO_PRODUCT_DELTA_FROM_PRODUCT_PARENT",
-  "productParentCommit": "da007840363d92cdadd9f7c5180449a49e6f1d19",
-  "productParentTreeSha": "77d2a35d7b607b2a73badadb9c7d9ddb873da458",
-  "productCanonicalSourceSha256": "777d8b24032891b00bf3b61858a3be015b0b77fea710e1d5bd446d182577bb51",
-  "productCanonicalSourceFiles": 273,
+  "acceptedProductParentCommit": "ac888c7e622fdefdc4f958771b21db485e33f9fc",
+  "acceptedProductSourceSha256": "5885c32a71c14b1b982ec8dcdadba4fafde40c78b2d9287f367f1ca28373f91d",
+  "acceptedProductSourceFiles": 273,
+  "candidateBranch": "capsule/corr02-c2-w04-truth",
   "writerClass": "CHATGPT_WRITER",
-  "executionMode": "LOCAL_FIRST__SERIAL_SHARED_OWNER_C1__MANAGED_ROUTE_PROOF_SECOND__OD073_EVIDENCE_LOCALITY",
-  "activeMutationBatch": "C1_SERIAL_SHARED_FOUNDATION_CARRIER_REGION_CORRECTION",
-  "downstreamHeld": [
-    "C2_W04_DATA_ACTION_TRUTH",
-    "C3_TODAY_PROVIDER_EPISTEMIC_TRUTH",
-    "B3_R_RQ_VISUALIZE",
-    "REMAINING_SURFACE_BATCHES",
-    "B9_FINAL_INTEGRATED_AUDIT"
+  "executionMode": "CAPSULE_V1_1__LOCAL_FIRST__MANAGED_CORROBORATION_ONLY",
+  "activeMutationBatch": "C2_W04_PRODUCT_DATA_ACTION_TRUTH",
+  "findings": [
+    "F-022",
+    "F-023",
+    "F-024",
+    "F-025",
+    "F-026",
+    "F-038",
+    "F-043",
+    "F-042_DOMAIN_SEMANTIC_HALF"
   ],
-  "requiredLocalAuthority": [
-    "cep-writer/CURRENT_MISSION.md",
-    "cep-writer/CANONICAL_MISSION_SOURCE.md",
-    "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv",
-    "cep-writer/controller-input/CORR02_PRE_WRITER_DEEP_DEFECT_AUDIT.md",
-    "cep-writer/references/23_SURFACE_ZERO_LOSS_IDENTITY_REFERENCE_MATRIX.md",
-    "cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md",
-    "cep-writer/references/CEP_FINAL_VISUAL_INTERACTION_CONTRACT.md",
-    "cep-writer/references/WRITER_LOCAL_VISUAL_CAPTURE_AND_RENDERING_METHOD.md"
+  "surfaces": [
+    "evidence",
+    "reviews",
+    "mastery",
+    "portfolio"
   ],
   "noRequiredLiveDriveFetch": true,
-  "writerStatus": "C1_READY_AFTER_MINIMAL_OD073_PACKET_SYNC__NOT_STARTED"
+  "c1MechanicsStatus": "CONTROLLER_ACCEPTED__CONSUME_NOT_DUPLICATE",
+  "downstreamHeld": [
+    "C3_TODAY_PROVIDER_EPISTEMIC_TRUTH",
+    "B3_R_RQ_VISUALIZE",
+    "LATER_W03_DOMAIN"
+  ],
+  "stopGate": "C2_CANDIDATE_ONLY__CONTROLLER_AUDIT_REQUIRED"
 }
