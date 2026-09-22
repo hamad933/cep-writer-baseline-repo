@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 3,
+  "classification": "CAPSULE_V1_1_VALIDATION_VISUAL_BOOTSTRAP__FIXTURE_ONLY",
+  "enabled": true,
+  "required": true,
+  "allowWriterLocalRecapture": true,
+  "expectedProductParentCommit": "ef7de5e05eee79d1302a84c47ef41ba5e94364c6",
+  "minimumScreenshotCount": 2,
+  "viewports": [
+    {"width": 1440, "height": 1000},
+    {"width": 1024, "height": 900}
+  ],
+  "states": [
+    {"id": "VALIDATION_CANVAS_DEFAULT", "classification": "FIXTURE_ONLY"}
+  ],
+  "environment": {},
+  "setupCommands": [],
+  "captureCommands": [
+    {
+      "id": "CAPSULE_VALIDATION_DETERMINISTIC_PNG_CAPTURE",
+      "cwd": ".",
+      "argv": ["python3", "tools/writer-capsule/validation/make_validation_capture.py"]
+    }
+  ],
+  "baselineGlobs": [
+    ".capsule-validation-output/baseline/*.png"
+  ],
+  "receiptGlobs": [
+    ".capsule-validation-output/validation-receipt.json"
+  ],
+  "referenceBindings": [
+    {
+      "referenceId": "CAPSULE_VALIDATION_FIXTURE_REFERENCE",
+      "classification": "FIXTURE_ONLY__NOT_GOVERNED_PRODUCT_REFERENCE"
+    }
+  ],
+  "comparisonPlan": [
+    {
+      "state": "VALIDATION_CANVAS_DEFAULT",
+      "viewports": ["1440x1000", "1024x900"],
+      "purpose": "Validate bootstrap packaging and source binding only."
+    }
+  ]
+}
