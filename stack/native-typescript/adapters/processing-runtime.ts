@@ -74,6 +74,10 @@ export class ProcessingRuntimeAdapter{
       </div>`;
       stage.querySelectorAll('[data-processing-job]').forEach(element=>element.addEventListener('click',()=>{this.inspect({jobId:element.dataset.processingJob});workspace.inspectorDescriptor(this.contextProvider);render();}));
       workspace.inspectorDescriptor(this.contextProvider);
+      const jobsPanel=stage.querySelector('.w05-processing-grid > .w05-processing-panel:first-child'),bottomPanel=stage.querySelector('.w05-processing-bottom');
+      if(jobsPanel)workspace.region('LEFT',{node:jobsPanel,label:'Processing Jobs'});
+      if(bottomPanel)workspace.region('BOTTOM',{node:bottomPanel,label:'Processing lifecycle detail',summary:'Cancellation, validation-handoff and receipt truth remain separate.'});
+      workspace.refreshToolbar?.();
       return state;
     };
     const run=fn=>async payload=>{const r=await fn(payload||{});workspace.status(r.ok?'Processing lifecycle receipt recorded':`Processing action failed · ${r.code||r.reason}`,r.ok?'info':'error');render();return r;};
