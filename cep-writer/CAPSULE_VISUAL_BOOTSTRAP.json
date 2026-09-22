@@ -46,6 +46,14 @@
   "environment": {},
   "setupCommands": [
     {
+      "id": "c2-verify-writer-inputs",
+      "cwd": ".",
+      "argv": [
+        "python3",
+        "cep-writer/tools/verify_repo.py"
+      ]
+    },
+    {
       "id": "c2-npm-ci",
       "cwd": ".",
       "argv": [
