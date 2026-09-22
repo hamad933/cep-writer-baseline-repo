@@ -94,9 +94,14 @@ def main():
 
     cfg=json.loads(config_path.read_text(encoding="utf-8"))
     enabled=bool(cfg.get("enabled",True))
-    expected=cfg.get("expectedSourceCommit")
-    if expected and expected != head:
-        raise SystemExit(f"visual bootstrap expectedSourceCommit {expected} != HEAD {head}")
+    expected_parent=cfg.get("expectedProductParentCommit")
+    if expected_parent:
+        subprocess.run(["git","cat-file","-e",expected_parent+"^{commit}"],cwd=root,check=True)
+        anc=subprocess.run(["git","merge-base","--is-ancestor",expected_parent,head],cwd=root)
+        if anc.returncode != 0:
+            raise SystemExit(f"visual bootstrap expected Product parent {expected_parent} is not an ancestor of transport HEAD {head}")
+    if cfg.get("expectedSourceCommit"):
+        raise SystemExit("legacy expectedSourceCommit is self-referential; use expectedProductParentCommit")
     shutil.copy2(config_path,out/"VISUAL_BOOTSTRAP_CONFIG.json")
 
     if not enabled:
