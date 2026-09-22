@@ -54,7 +54,7 @@ The final 46-image set was reviewed with hash continuity. Forty-three images are
 - `cep-writer/**`: unchanged.
 - Dependencies: no drift.
 - SQLite/schema/persistence/runtime architecture: unchanged.
-- `main`: not merged or modified by this mission.
+- Git `main` branch: unchanged; no merge performed. Product entry file `stack/native-typescript/main.ts` is intentionally part of the bounded C1 delta.
 - No release, deployment or self-promotion performed.
 
 ## Downstream findings left untouched
