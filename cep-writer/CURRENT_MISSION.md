@@ -4314,3 +4314,15 @@ A Writer may correct a test/harness only where the mission explicitly authorizes
 ### 17.5 Visual method
 
 Bind `OD-20260922-072` and `WRITER_LOCAL_VISUAL_CAPTURE_AND_RENDERING_METHOD.md` Drive `1W7CC1tGXmLShF240uKnjq4MpMx2J7e9V`. Localhost restriction alone is not a screenshot/video blocker. Every material screenshot must be opened and inspected; full-carrier negative assertions must check both required Surface semantics and absence of foreign donor semantics.
+
+### 17.6 Writer throughput / evidence-locality law — OD-20260922-073
+
+For C1 and every later CORR02 Writer, use the local workspace as the primary development and visual-analysis loop. Intermediate screenshots, crops, diffs, videos, logs and generated comparison artifacts are local scratch by default and are not GitHub/Drive deliverables. Their purpose is to expose weaknesses and drive repeated correction.
+
+Required working loop where a governed visual reference exists:
+`open exact reference -> decompose/crop material regions and states as useful -> capture current exact candidate -> compare corresponding regions/states -> record concrete mismatch -> correct narrowest owner -> rerender/recapture -> compare again -> repeat`.
+
+Only final representative source-bound captures/results that materially prove the handoff are promoted to durable evidence. `CHATGPT_WRITER` must not use the GitHub connector as a bulk evidence/file-transfer channel; heavy final generated custody goes to Drive only when needed. Preserve GitHub for source/delta plus small mission/handoff receipts. Google AI Studio retains its bounded final-evidence branch exception because it lacks governed Drive output, but intermediate evidence churn still remains local.
+
+This changes transport/evidence workflow only; it does not relax exact parent, C1 scope, visual inspection, falsification, final evidence, Controller audit or no-self-promotion gates.
+

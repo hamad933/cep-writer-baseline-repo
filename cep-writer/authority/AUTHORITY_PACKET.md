@@ -4,8 +4,8 @@ Candidate branch: `writer/presentation-corr02-google-ai-studio`. Product parent 
 
 Authority order for the Writer: `START_HERE -> TASK_BINDING/PARENT_IDENTITY -> CURRENT_MISSION -> authority/APPLICABLE_OWNER_DECISIONS.csv -> exact SurfaceProfile/matrix -> applicable domain oracle -> actual governed visual-reference binary -> Controller defect ledger -> Product implementation`.
 
-`cep-writer/**` is Controller-owned read-only task authority. Live `CURRENT_STATE`, full governance and full decision register are intentionally excluded under OD-062. Required execution inputs are local; Drive IDs are provenance only.
+`cep-writer/**` is Controller-owned read-only task authority. Required execution inputs are local; Drive IDs are provenance only.
 
 C1 is the only authorized mutation lane: narrow EventTarget correction + neutral shared carrier/toolbar/mode + reusable contextual toolbar payload/availability + correct Profile region binding into existing shared hosts. C1 must not repair W04/Today/RQ/Visualize/W03 domain/provider truth locally.
 
-Use local-first discovery/build/browser loops. Managed genuine-route proof is second-layer corroboration. Preserve all truth ceilings and finish `CANDIDATE_ONLY__CONTROLLER_AUDIT_REQUIRED`.
+Use local-first discovery/build/browser loops. Under OD-20260922-073, intermediate screenshots/crops/diffs/videos/logs stay local and drive the iterative correction loop. GitHub is not bulk evidence transport; heavy final generated custody goes to Drive only when needed. Managed genuine-route proof is second-layer corroboration. Finish `CANDIDATE_ONLY__CONTROLLER_AUDIT_REQUIRED`.

@@ -192,3 +192,20 @@ On 2026-09-22 the active ChatGPT Controller environment independently proved:
 - system FFmpeg `/usr/bin/ffmpeg` `7.1.5`; after a temporary tool-only link to the Playwright expected FFmpeg cache path, Playwright produced a valid `WebM/VP8` video at `1024x900`, `25fps`, verified with `ffprobe`.
 
 This example proves the separation model; future Writers must still run their own bounded preflight and must not assume identical environment state.
+
+## 12. Local-first iterative improvement and evidence custody — OD-20260922-073
+
+The Writer's main objective is Product improvement throughput, not evidence transport. Use screenshots, crops, pixel/region comparisons, interaction captures and logs first as **local working instruments** inside the correction loop.
+
+Preferred loop:
+`governed reference -> decompose into material regions/components/states -> capture exact current candidate -> compare region/state-by-region/state -> diagnose weakest mismatch -> correct narrow owner -> rebuild/rerender -> recapture -> reopen/reinspect -> repeat`.
+
+Rules:
+- Intermediate PNG/WebM/crops/diffs/logs/build outputs stay local/ephemeral by default. Do not upload them merely because they exist.
+- Reference cropping/decomposition is encouraged when it materially improves comparison precision. Preserve reference identity and never mistake a crop for a new authority source.
+- The final representative captures that demonstrate the corrected material states may be promoted to durable evidence; earlier iterations normally remain scratch.
+- `CHATGPT_WRITER`: do not use the GitHub connector for bulk screenshots/videos, large evidence trees, generated build output, or per-file blob assembly. GitHub is for source/delta, mission authority inputs and small handoff/receipt material. Heavy final candidate/evidence custody, when actually needed, goes to Google Drive in a bounded final transfer.
+- `GOOGLE_AI_STUDIO_WRITER`: because governed Drive output is unavailable, the existing bounded candidate-branch evidence exception may carry final representative evidence only; intermediate capture churn should still remain local to the Studio worktree.
+- Connector limits/failures must not dominate the Writer's time. Do not redesign Product code or spend the main execution budget on packaging/transport workarounds. Defer nonessential custody until the correction loop is materially complete.
+- A final audit still requires source-bound evidence, but documentation is downstream of improvement; evidence production is not a substitute for diagnose/fix/retest.
+
