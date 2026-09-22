@@ -6,6 +6,15 @@ def run(*args,cwd=None):
     if p.returncode: raise SystemExit("command failed: "+" ".join(args)+"\n"+p.stderr)
     return p.stdout.strip()
 
+def tracked_changes(root):
+    names=set()
+    for args in [("git","diff","--name-only"),("git","diff","--cached","--name-only")]:
+        out=run(*args,cwd=root)
+        for line in out.splitlines():
+            line=line.strip()
+            if line: names.add(line)
+    return sorted(names)
+
 def sha256(path):
     h=hashlib.sha256()
     with open(path,"rb") as f:
@@ -29,6 +38,10 @@ def main():
     ns=ap.parse_args()
 
     root=pathlib.Path(ns.repo_root).resolve()
+    tracked=tracked_changes(root)
+    if tracked:
+        raise SystemExit("capsule build requires zero tracked source delta from packaging/capture: "+", ".join(tracked))
+
     out=(root/ns.output).resolve()
     clean_dir(out)
 
@@ -65,7 +78,11 @@ def main():
             v=json.loads(vm.read_text(encoding="utf-8"))
             if v.get("sourceCommit") != head: raise SystemExit("visual bootstrap sourceCommit mismatch")
             if v.get("sourceTree") != tree: raise SystemExit("visual bootstrap sourceTree mismatch")
+            if v.get("trackedSourceGuard") != "PASS": raise SystemExit("visual bootstrap trackedSourceGuard is not PASS")
             visual_status=v.get("status") or v.get("classification")
+
+    if tracked_changes(root):
+        raise SystemExit("capsule packaging introduced tracked source delta")
 
     bootstrap_sh="""#!/usr/bin/env bash
 set -euo pipefail
@@ -133,6 +150,7 @@ Visual bootstrap status: `{visual_status or 'NOT_CONFIGURED'}`
       "controllerPrepared":True,
       "writerPreparationDuty":"VERIFY_MATERIALIZE_COMPARE__NOT_CAPSULE_OR_BASELINE_ASSEMBLY",
       "visualBootstrapStatus":visual_status,
+      "trackedSourceGuard":"PASS",
       "noSilentLiveFetch":True,"localFirst":True,
       "payload":payload,
       "generatedAtUtc":datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -142,6 +160,6 @@ Visual bootstrap status: `{visual_status or 'NOT_CONFIGURED'}`
     sums_payload=dict(payload)
     sums_payload["CAPSULE_MANIFEST.json"]=file_meta(out,manifest_path)
     (out/"SHA256SUMS.txt").write_text("".join(f"{v['sha256']}  {k}\n" for k,v in sorted(sums_payload.items())),encoding="utf-8",newline="\n")
-    print(json.dumps({"mission":mission,"head":head,"tree":tree,"output":str(out),"files":len(payload),"visualBootstrapStatus":visual_status,"bundleSha256":payload["repo.bundle"]["sha256"]}))
+    print(json.dumps({"mission":mission,"head":head,"tree":tree,"output":str(out),"files":len(payload),"visualBootstrapStatus":visual_status,"trackedSourceGuard":"PASS","bundleSha256":payload["repo.bundle"]["sha256"]}))
 
 if __name__=="__main__": main()
