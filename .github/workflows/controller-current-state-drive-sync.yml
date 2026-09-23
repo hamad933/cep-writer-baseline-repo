@@ -1,0 +1,116 @@
+name: Controller CURRENT_STATE Drive Sync
+
+on:
+  push:
+    branches:
+      - infra/gdrive-credential-smoke
+    paths:
+      - .github/workflows/controller-current-state-drive-sync.yml
+
+permissions:
+  contents: read
+
+jobs:
+  sync-current-state:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GDRIVE_SA_JSON_B64: ${{ secrets.GDRIVE_SA_JSON_B64 }}
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check --quiet google-auth requests
+
+      - name: Update CURRENT_STATE in place
+        shell: bash
+        run: |
+          python - <<'PY'
+          import base64, json, os, sys
+          import requests
+          from google.oauth2 import service_account
+          from google.auth.transport.requests import Request
+
+          FILE_ID = "164CDevKZ48ZAXke44oL3jXIVpYQJBmRu"
+          OLD_TOKEN = "__ZERO_LOSS_REPO_CLEANUP_IN_PROGRESS__GDRIVE_RUNNER_BRIDGE_AUTH_BLOCKED__D03_D04_MISSION_REFRESH_NEXT__"
+          NEW_TOKEN = "__ZERO_LOSS_REPO_CLEANUP_IN_PROGRESS__GDRIVE_RUNNER_BRIDGE_READ_PROVEN__D03_D04_MISSION_REFRESH_NEXT__"
+
+          old_bridge = (
+              "- GitHub Drive-runner bridge — 2026-09-24: repository secrets were exercised through "
+              "`infra/gdrive-credential-smoke` without exposing secret/token values. Exact baseline ancestry "
+              "check passed against `293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a`. GitHub Actions smoke "
+              "run `35932125899` reached Google authentication but remains BLOCKED: User OAuth refresh returns "
+              "`HTTP 400 invalid_grant`; Service Account authentication succeeds but has `0/3` read access to "
+              "the exact CEP test objects (`CURRENT_STATE`, post-C03 plan, CORR03 delta). Next transport action "
+              "is credential/access correction only: regenerate a refresh token bound to the same OAuth client "
+              "with Drive access, or grant the Service Account read access to the governed CEP Drive root; then "
+              "rerun the same read-only smoke gate before any Drive→GitHub bulk sync. No Product acceptance, "
+              "Product mutation, release, deployment, or stack freeze is implied."
+          )
+
+          new_bridge = (
+              "- GitHub Drive-runner bridge — 2026-09-24: repository secrets were exercised through "
+              "`infra/gdrive-credential-smoke` without exposing secret/token values. Exact baseline ancestry "
+              "check passed against `293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a`. After the Owner shared the "
+              "canonical `cep_building_mgm` root Drive folder `1mt_0MSzAiy81czOEcM2xsVr1suiRsibv` with "
+              "service account `jules-drive-reader@cep-project-506915.iam.gserviceaccount.com`, rerun evidence "
+              "proved exact Service Account access to `3/3` test objects: `CURRENT_STATE.md`, "
+              "`POST_C03_EXECUTION_PLAN`, and `CEP_B3R_CORR03_CANVAS_TREE_CANDIDATE_DELTA_293dd1e0.zip`. "
+              "GitHub Actions run `35932607850` completed SUCCESS after the smoke gate was corrected to accept "
+              "either verified authentication path. User OAuth refresh still returns `HTTP 400 invalid_grant`, "
+              "but it is now a non-blocking alternate-path defect because Service Account Drive access is proven. "
+              "Drive→GitHub manifest-based transport/verification may now proceed from the governed Drive root. "
+              "No Product acceptance, Product mutation, release, deployment, or stack freeze is implied."
+          )
+
+          info = json.loads(base64.b64decode(os.environ["GDRIVE_SA_JSON_B64"]).decode("utf-8"))
+          creds = service_account.Credentials.from_service_account_info(
+              info, scopes=["https://www.googleapis.com/auth/drive"]
+          )
+          creds.refresh(Request())
+          headers = {"Authorization": f"Bearer {creds.token}"}
+
+          read = requests.get(
+              f"https://www.googleapis.com/drive/v3/files/{FILE_ID}",
+              headers=headers,
+              params={"alt":"media","supportsAllDrives":"true"},
+              timeout=30,
+          )
+          read.raise_for_status()
+          text = read.text
+
+          if OLD_TOKEN not in text:
+              raise RuntimeError("expected active-mission auth-block token not found")
+          if old_bridge not in text:
+              raise RuntimeError("expected prior Drive-runner bridge paragraph not found")
+
+          text2 = text.replace(OLD_TOKEN, NEW_TOKEN, 1).replace(old_bridge, new_bridge, 1)
+          if text2 == text:
+              raise RuntimeError("no state change produced")
+
+          write = requests.patch(
+              f"https://www.googleapis.com/upload/drive/v3/files/{FILE_ID}",
+              headers={**headers, "Content-Type":"text/markdown; charset=utf-8"},
+              params={"uploadType":"media","supportsAllDrives":"true"},
+              data=text2.encode("utf-8"),
+              timeout=30,
+          )
+          write.raise_for_status()
+
+          verify = requests.get(
+              f"https://www.googleapis.com/drive/v3/files/{FILE_ID}",
+              headers=headers,
+              params={"alt":"media","supportsAllDrives":"true"},
+              timeout=30,
+          )
+          verify.raise_for_status()
+          final = verify.text
+
+          assert NEW_TOKEN in final
+          assert "run `35932607850` completed SUCCESS" in final
+          assert "Service Account Drive access is proven" in final
+          print("CURRENT_STATE_IN_PLACE_UPDATE_PASS")
+          PY
