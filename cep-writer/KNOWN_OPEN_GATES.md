@@ -1,7 +1,14 @@
-# CORR02 B3-R Correction02 — Known Open Gates
+# Current Open Gates — Post-C03
 
-- `F-045 BLOCKING`: governed Tree/Path/Graph/Canvas Product composition is not wired; parent shows only Topology/Objects/History and view-required commands remain unavailable without governed view context.
-- `F-046 BLOCKING`: final evidence must include fresh exact-candidate Tree/Path/Graph/Canvas states at both governed viewport families and selected/context states.
-- Prior B3-R provider truth corrections are regression-only and MUST remain closed: F-027, F-034, F-035, F-036.
-- RQ is regression-only; do not refill unavailable RQ with Balanced6/non-production data.
-- Genuine-route evidence remains a separate proof class from navigation-independent Capsule bootstrap.
+- `C03-GATE-020 VISUAL_REGION_STATE`: remaining exact-current visual/state proof only; do not recapture all surfaces indiscriminately.
+- `C03-GATE-021 WINDOWS_NATIVE_TARGET`: managed Windows automation first; genuine desktop-only capabilities remain separately target-gated.
+- `C03-GATE-022 GENUINE_BROWSER_SOURCE_RECEIPT`: final genuine HTTP/browser-navigation receipt must bind exact integrated source.
+- `C03-GATE-023 SHELL_DESTINATION_AUTHORITY`: Owner/Controller authority gate, not a Writer bug; preserve the five-destination functional baseline and `destinationCountFrozen=false`.
+- `C03-GATE-024 PRODUCT_CORRECTION_AND_INTEGRATION`: closes only through audited D03-D11, D12, D13 and D14.
+
+Current B3-R baseline remains not accepted.
+- `F-049`: blocking Product finding.
+- `F-050`: blocking Product finding.
+- `F-051`: evidence/receipt defect.
+
+Mission overlays bind the exact subset each Writer owns.
