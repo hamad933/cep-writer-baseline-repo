@@ -29,7 +29,7 @@ jobs:
         shell: bash
         run: |
           python - <<'PY'
-          import base64, json, os, sys
+          import base64, json, os
           import requests
           from google.oauth2 import service_account
           from google.auth.transport.requests import Request
@@ -37,22 +37,10 @@ jobs:
           FILE_ID = "164CDevKZ48ZAXke44oL3jXIVpYQJBmRu"
           OLD_TOKEN = "__ZERO_LOSS_REPO_CLEANUP_IN_PROGRESS__GDRIVE_RUNNER_BRIDGE_AUTH_BLOCKED__D03_D04_MISSION_REFRESH_NEXT__"
           NEW_TOKEN = "__ZERO_LOSS_REPO_CLEANUP_IN_PROGRESS__GDRIVE_RUNNER_BRIDGE_READ_PROVEN__D03_D04_MISSION_REFRESH_NEXT__"
+          BRIDGE_PREFIX = "- GitHub Drive-runner bridge — 2026-09-24:"
 
-          old_bridge = (
-              "- GitHub Drive-runner bridge — 2026-09-24: repository secrets were exercised through "
-              "`infra/gdrive-credential-smoke` without exposing secret/token values. Exact baseline ancestry "
-              "check passed against `293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a`. GitHub Actions smoke "
-              "run `35932125899` reached Google authentication but remains BLOCKED: User OAuth refresh returns "
-              "`HTTP 400 invalid_grant`; Service Account authentication succeeds but has `0/3` read access to "
-              "the exact CEP test objects (`CURRENT_STATE`, post-C03 plan, CORR03 delta). Next transport action "
-              "is credential/access correction only: regenerate a refresh token bound to the same OAuth client "
-              "with Drive access, or grant the Service Account read access to the governed CEP Drive root; then "
-              "rerun the same read-only smoke gate before any Drive→GitHub bulk sync. No Product acceptance, "
-              "Product mutation, release, deployment, or stack freeze is implied."
-          )
-
-          new_bridge = (
-              "- GitHub Drive-runner bridge — 2026-09-24: repository secrets were exercised through "
+          NEW_BRIDGE = (
+              BRIDGE_PREFIX + " repository secrets were exercised through "
               "`infra/gdrive-credential-smoke` without exposing secret/token values. Exact baseline ancestry "
               "check passed against `293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a`. After the Owner shared the "
               "canonical `cep_building_mgm` root Drive folder `1mt_0MSzAiy81czOEcM2xsVr1suiRsibv` with "
@@ -84,12 +72,17 @@ jobs:
 
           if OLD_TOKEN not in text:
               raise RuntimeError("expected active-mission auth-block token not found")
-          if old_bridge not in text:
-              raise RuntimeError("expected prior Drive-runner bridge paragraph not found")
 
-          text2 = text.replace(OLD_TOKEN, NEW_TOKEN, 1).replace(old_bridge, new_bridge, 1)
-          if text2 == text:
-              raise RuntimeError("no state change produced")
+          lines = text.splitlines()
+          matches = [i for i,line in enumerate(lines) if line.startswith(BRIDGE_PREFIX)]
+          if len(matches) != 1:
+              raise RuntimeError(f"expected exactly one bridge status line, found {len(matches)}")
+
+          lines[matches[0]] = NEW_BRIDGE
+          text2 = "\n".join(lines)
+          if text.endswith("\n"):
+              text2 += "\n"
+          text2 = text2.replace(OLD_TOKEN, NEW_TOKEN, 1)
 
           write = requests.patch(
               f"https://www.googleapis.com/upload/drive/v3/files/{FILE_ID}",
@@ -112,5 +105,6 @@ jobs:
           assert NEW_TOKEN in final
           assert "run `35932607850` completed SUCCESS" in final
           assert "Service Account Drive access is proven" in final
+          assert OLD_TOKEN not in final
           print("CURRENT_STATE_IN_PLACE_UPDATE_PASS")
           PY
