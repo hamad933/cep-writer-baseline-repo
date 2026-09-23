@@ -1,13 +1,10 @@
-# Git / Capsule Workflow — CORR02 C2
+# Git / Writer Workflow — Current Baseline
 
-- Repository: `hamad933/cep-writer-baseline-repo`
-- Controller-prepared transport branch: `capsule/corr02-c2-w04-truth`
-- Accepted Product parent: `ac888c7e622fdefdc4f958771b21db485e33f9fc`
-- Accepted Product source: `5885c32a71c14b1b982ec8dcdadba4fafde40c78b2d9287f367f1ca28373f91d / 273`
-- Writer starts from the downloaded Capsule artifact, not a network clone.
-- Verify and materialize `repo.bundle` locally; work on the materialized exact transport HEAD.
-- Do not edit `cep-writer/**`.
-- Intermediate screenshots/logs/diffs stay local.
-- GitHub Actions is not the correction loop; use managed execution only for final corroboration if materially required.
-- Never write/merge `main`, release, deploy or self-promote.
-- Finish `C2_CANDIDATE_ONLY__CONTROLLER_AUDIT_REQUIRED`.
+- `main` is the Controller-bound **working/correction baseline** at `293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a`.
+- `main` is not automatic Product acceptance authority.
+- Every mutating Writer mission starts from the exact Controller-bound `main` commit or an independently audited successor.
+- Each mission uses one mission-specific candidate branch.
+- Writers never push directly to `main`, merge to `main`, create releases, deploy, self-promote, or mutate live Controller governance.
+- `main` carries reusable Product/build/test/reference inputs; the mission branch carries the exact immutable task overlay.
+- Verified incremental continuation is preferred for correction loops when parent HEAD/tree/Product identity is exact.
+- Heavy generated evidence stays in Google Drive with hash/source-bound receipts; required Writer inputs remain local in GitHub.
