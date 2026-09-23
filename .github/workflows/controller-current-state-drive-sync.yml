@@ -73,15 +73,16 @@ jobs:
           if OLD_TOKEN not in text:
               raise RuntimeError("expected active-mission auth-block token not found")
 
-          lines = text.splitlines()
-          matches = [i for i,line in enumerate(lines) if line.startswith(BRIDGE_PREFIX)]
-          if len(matches) != 1:
-              raise RuntimeError(f"expected exactly one bridge status line, found {len(matches)}")
+          anchor = "Drive-runner bridge"
+          if text.count(anchor) != 1:
+              raise RuntimeError(f"expected exactly one bridge anchor, found {text.count(anchor)}")
+          pos = text.index(anchor)
+          start = text.rfind("\n", 0, pos) + 1
+          end = text.find("\n", pos)
+          if end == -1:
+              end = len(text)
 
-          lines[matches[0]] = NEW_BRIDGE
-          text2 = "\n".join(lines)
-          if text.endswith("\n"):
-              text2 += "\n"
+          text2 = text[:start] + NEW_BRIDGE + text[end:]
           text2 = text2.replace(OLD_TOKEN, NEW_TOKEN, 1)
 
           write = requests.patch(
