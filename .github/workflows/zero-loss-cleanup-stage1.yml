@@ -1,0 +1,315 @@
+name: CEP Zero-Loss Cleanup Stage 1
+
+on:
+  push:
+    branches:
+      - controller/zero-loss-repo-cleanup
+    paths:
+      - .github/workflows/zero-loss-cleanup-stage1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup-stage1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout cleanup branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify exact working baseline ancestry
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE=293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a
+          git cat-file -e "$BASE^{commit}"
+          git merge-base --is-ancestor "$BASE" HEAD
+          test "$(git rev-parse "$BASE^{tree}")" = "3101c06901dbdaff9602fea8098efb9c34575149"
+
+      - name: Apply conservative Stage-1 cleanup
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json, hashlib, subprocess
+
+          root=Path(".")
+          baseline="293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a"
+          tree="3101c06901dbdaff9602fea8098efb9c34575149"
+          product_sha="480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641"
+
+          historical_remove=[
+            "FINAL_FOUNDATION_GATE_HANDOFF_AR.md",
+            "FINAL_HANDOFF_AR.md",
+            "FW_B_RESULT_SUMMARY_AR.md",
+            "M0_OWNER_QA_UNIFIED_MIGRATION_INTERNAL_HANDOFF.md",
+            "README_START_HERE_AR.md",
+            "W2_A_RESULT_SUMMARY_AR.md",
+            "checkpoints/CURRENT_HIGH_LEVERAGE.json",
+            "checkpoints/G0.json","checkpoints/G1.json","checkpoints/G2.json","checkpoints/G3.json",
+            "checkpoints/G4.json","checkpoints/G5.json","checkpoints/G6.json","checkpoints/G7.json",
+          ]
+          stale_overlay_remove=[
+            "cep-writer/B3R_CORRECTION02_MISSION.md",
+            "cep-writer/B3R_MISSION.md",
+            "cep-writer/C2_MISSION.md",
+            "cep-writer/C3_MISSION.md",
+            "cep-writer/CANONICAL_MISSION_SOURCE.md",
+            "cep-writer/CAPSULE_BINDING.json",
+            "cep-writer/CAPSULE_READY.json",
+            "cep-writer/CAPSULE_VISUAL_BOOTSTRAP.json",
+            "cep-writer/CURRENT_MISSION.md",
+            "cep-writer/EXTERNAL_OUTPUT_CUSTODY.json",
+            "cep-writer/GOOGLE_AI_STUDIO_ENTRY_PROMPT.md",
+            "cep-writer/PARENT_IDENTITY.json",
+            "cep-writer/TASK_BINDING.json",
+            "cep-writer/TASK_PACKET_OVERLAY.md",
+            "cep-writer/controller-input/B3R_CONTROLLER_CORR01_AND_CORRECTION02_BINDING.md",
+            "cep-writer/controller-input/C1_CONTROLLER_ACCEPTANCE.md",
+            "cep-writer/controller-input/C2_CONTROLLER_ACCEPTANCE.md",
+            "cep-writer/controller-input/C3_CONTROLLER_ACCEPTANCE.md",
+            "cep-writer/controller-input/CORR02_PRE_WRITER_DEEP_DEFECT_AUDIT.md",
+          ]
+          for rel in historical_remove+stale_overlay_remove:
+              p=root/rel
+              if p.exists(): p.unlink()
+
+          (root/"docs/history").mkdir(parents=True,exist_ok=True)
+          index=["# CEP Historical Lineage Index","",
+                 "This file is a compact pointer to material intentionally removed from the current working baseline because it is historical/stale for current Writer execution.",
+                 "",
+                 f"Historical source tree: `main@{baseline}` / tree `{tree}`.",
+                 "All removed bytes remain recoverable from Git history. Google Drive remains canonical for live Controller/governance custody.",
+                 "",
+                 "## Removed historical root/checkpoint artifacts",""]
+          index += [f"- `{p}` — historical Foundation/M0/checkpoint lineage; not current Writer authority." for p in historical_remove]
+          index += ["","## Removed stale mission overlays",""]
+          index += [f"- `{p}` — mission-specific CORR02/C1/C2/C3 overlay replaced by current working-baseline packet; not valid current mission authority." for p in stale_overlay_remove]
+          index += ["","No Product source, build/test tooling, visual references, domain oracles, SurfaceProfiles, authority corpus, assurance corpus, archaeology, or generated runtime was removed in Stage-1.",""]
+          (root/"docs/history/HISTORICAL_LINEAGE_INDEX.md").write_text("\n".join(index),encoding="utf-8")
+
+          start=f"""# CEP Writer Start Here — Current Working Baseline
+
+Repository: `hamad933/cep-writer-baseline-repo`
+Current Controller-bound working baseline: `{baseline}`
+Git tree: `{tree}`
+Product source: `{product_sha} / 273 files`
+Classification: `WORKING_CORRECTION_BASELINE__SALVAGEABLE_NOT_ACCEPTED`
+
+This `main` baseline is the required starting point for current correction Writers. It is **not** Product acceptance, release, deployment, or stack freeze.
+
+## How Writers work
+
+1. Verify the exact bound baseline/mission-branch parent before mutation.
+2. Read this baseline packet plus the exact mission overlay supplied on your mission branch.
+3. Read only the SurfaceProfiles/domain-oracles/visual references and Owner-decision snapshot applicable to the mission.
+4. Mutate only the mission allowlist; shared hotspots `stack/native-typescript/main.ts` and `stack/native-typescript/surfaces/m0-controller-composition.ts` remain Controller-serialized until D13 unless an exact mission says otherwise.
+5. Keep heavy generated evidence in governed Drive custody; commit only bounded handoff/receipts explicitly allowed by the mission.
+6. Never push directly to `main`, self-merge, self-promote, release, deploy, or mutate live Controller governance.
+
+## Current execution stage
+
+Post-C03 source binding is closed. First correction wave is D03A / D03B / D03C / D04 from this exact baseline. Each mission gets its own Controller-bound branch and immutable overlay.
+"""
+          (root/"cep-writer/START_HERE.md").write_text(start,encoding="utf-8")
+
+          workflow=f"""# Git / Writer Workflow — Current Baseline
+
+- `main` is the Controller-bound **working/correction baseline**, currently `{baseline}`.
+- It is not automatic acceptance authority.
+- Every mutating Writer mission starts from the exact Controller-bound commit (or audited successor) on one mission-specific branch.
+- Writers never write directly to `main`, merge to `main`, release, deploy, self-promote, or mutate live Controller governance.
+- The mission branch carries the exact immutable task overlay. `main` carries reusable Product/build/test/reference inputs only.
+- Under verified incremental continuation, a salvageable candidate may be the next legal parent without becoming accepted.
+- Heavy generated evidence stays in Google Drive with hash/source-bound receipts; required Writer input references remain local in GitHub.
+"""
+          (root/"cep-writer/GIT_WORKFLOW.md").write_text(workflow,encoding="utf-8")
+
+          gates="""# Current Open Gates — Post-C03
+
+- `C03-GATE-020 VISUAL_REGION_STATE`: remaining exact-current visual/state proof only; do not recapture all surfaces indiscriminately.
+- `C03-GATE-021 WINDOWS_NATIVE_TARGET`: managed Windows automation first; genuine desktop-only capabilities remain separately target-gated.
+- `C03-GATE-022 GENUINE_BROWSER_SOURCE_RECEIPT`: final genuine HTTP/browser-navigation receipt must bind exact integrated source.
+- `C03-GATE-023 SHELL_DESTINATION_AUTHORITY`: Owner/Controller authority gate, not a Writer bug; preserve five-destination functional baseline and `destinationCountFrozen=false`.
+- `C03-GATE-024 PRODUCT_CORRECTION_AND_INTEGRATION`: closes only through audited D03-D11, D12, D13 and D14.
+
+Current B3-R baseline remains not accepted. `F-049` and `F-050` are blocking Product findings; `F-051` is an evidence/receipt defect. Mission overlays bind the exact subset each Writer owns.
+"""
+          (root/"cep-writer/KNOWN_OPEN_GATES.md").write_text(gates,encoding="utf-8")
+
+          authority=f"""# Writer Authority Baseline — Post-C03 Working Baseline
+
+Authority order for Writer execution:
+latest explicit Owner decision → Controller-bound working baseline/mission overlay → applicable Writer-readable Owner-decision snapshot → exact SurfaceProfile/domain/oracle/reference → protected truths → historical evidence only when explicitly bound.
+
+Current working baseline:
+- HEAD: `{baseline}`
+- tree: `{tree}`
+- Product source: `{product_sha} / 273`
+- status: `SALVAGEABLE_CORRECTION_BASE__NOT_ACCEPTED`
+
+Core Writer laws:
+- mission-specific branch only; no direct `main` write/merge/release/self-promotion;
+- exact parent identity and clean status before mutation;
+- verified incremental continuation is preferred for correction loops when lineage is exact;
+- Product source, Presentation, Behavior/Interaction/Functionality, and Domain/Data/Provider truth remain separate proof dimensions;
+- visual references govern Presentation only and never override domain/provider truth;
+- no duplicate shared owner or local reinvention when a governed shared owner exists;
+- no fake persistence/provider/runtime/native capability/success receipt;
+- stack expansion is locked and final stack is not frozen.
+
+Google Drive remains the live Controller/governance plane. GitHub copies are Writer execution inputs, never independent acceptance authority.
+"""
+          (root/"cep-writer/WRITER_AUTHORITY_BASELINE.md").write_text(authority,encoding="utf-8")
+
+          protected="""# Protected Truths — Current Working Baseline
+
+Preserve:
+- exact Product-source identity and parent lineage;
+- Save != Autosave != Recovery and durable settlement truth;
+- stale-save/competing revision atomicity;
+- xterm renderer vs runtime/provider separation;
+- InternalSimulationAdapter truth ceiling unless a real provider is explicitly admitted;
+- W03 workspace-first semantics;
+- W04 Evidence / Review / Mastery / Portfolio ownership boundaries;
+- W05 domain/provider truth ceilings;
+- Visualize representation identity distinct from canonical object identity;
+- current RQ unavailable/provider truth; do not refill with non-production fixture data;
+- one canonical shared owner per mechanic and no consumer-local duplicate owner;
+- no fabricated provider/runtime/native/domain state;
+- `main.ts` and `surfaces/m0-controller-composition.ts` remain serialized final-convergence hotspots until D13 unless exact Controller authority changes that.
+"""
+          (root/"cep-writer/PROTECTED_TRUTHS.md").write_text(protected,encoding="utf-8")
+
+          working={
+            "schemaVersion":1,
+            "classification":"CEP_WORKING_CORRECTION_BASELINE__SALVAGEABLE_NOT_ACCEPTED",
+            "repository":"hamad933/cep-writer-baseline-repo",
+            "head":baseline,
+            "tree":tree,
+            "productCanonicalSourceSha256":product_sha,
+            "productCanonicalSourceFiles":273,
+            "accepted":False,"released":False,"deployed":False,"stackFrozen":False,
+            "sourceBinding":"C03_SOURCE_BINDING_CLOSED",
+            "firstCorrectionWave":["D03A","D03B","D03C","D04"],
+            "exclusiveFinalConvergenceHotspots":["stack/native-typescript/main.ts","stack/native-typescript/surfaces/m0-controller-composition.ts"]
+          }
+          (root/"cep-writer/WORKING_BASELINE.json").write_text(json.dumps(working,indent=2)+"\n",encoding="utf-8")
+
+          repo_manifest={
+            "schemaVersion":6,
+            "classification":"CEP_CURRENT_WORKING_BASELINE_WRITER_REPOSITORY__NOT_ACCEPTANCE",
+            "workingBaselineCommit":baseline,
+            "workingBaselineTree":tree,
+            "productSourceSha256":product_sha,
+            "productSourceFiles":273,
+            "mainPurpose":"CONTROLLER_BOUND_WORKING_CORRECTION_BASELINE",
+            "missionOverlayPolicy":"MISSION_BRANCH_ONLY",
+            "noRequiredLiveDriveFetch":True,
+            "historicalLineageIndex":"docs/history/HISTORICAL_LINEAGE_INDEX.md"
+          }
+          (root/"cep-writer/REPOSITORY_MANIFEST.json").write_text(json.dumps(repo_manifest,indent=2)+"\n",encoding="utf-8")
+
+          # Regenerate reference manifest from actual current reference bytes.
+          refs=[]
+          for p in sorted((root/"cep-writer/references").rglob("*")):
+              if p.is_file():
+                  b=p.read_bytes()
+                  refs.append({"path":p.relative_to(root/"cep-writer").as_posix(),"size":len(b),"sha256":hashlib.sha256(b).hexdigest()})
+          ref_manifest={"schemaVersion":4,"classification":"CURRENT_WRITER_REFERENCE_MANIFEST__WORKING_BASELINE__NOT_ACCEPTANCE","baseline":baseline,"entries":refs}
+          (root/"cep-writer/REFERENCE_MANIFEST.json").write_text(json.dumps(ref_manifest,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
+
+          # Regenerate Writer input manifest conservatively. Exclude mission/history/output-only material.
+          include_roots=("stack/","tools/","tests/","contracts/","profiles/","authority/","archaeology/","dist/","writer/")
+          exact_keep={".gitignore","package.json","package-lock.json","BROWSER_CONFORMANCE_BOOTSTRAP.md","README.md"}
+          entries=[]
+          for p in sorted(root.rglob("*")):
+              if not p.is_file() or ".git/" in p.as_posix(): continue
+              rel=p.relative_to(root).as_posix()
+              if rel=="cep-writer/WRITER_INPUT_MANIFEST.json": continue
+              keep=(rel in exact_keep or rel.startswith(include_roots) or rel.startswith("cep-writer/references/") or rel in {
+                  "cep-writer/START_HERE.md","cep-writer/GIT_WORKFLOW.md","cep-writer/KNOWN_OPEN_GATES.md",
+                  "cep-writer/WRITER_AUTHORITY_BASELINE.md","cep-writer/PROTECTED_TRUTHS.md",
+                  "cep-writer/WORKING_BASELINE.json","cep-writer/REPOSITORY_MANIFEST.json",
+                  "cep-writer/REPOSITORY_BOUNDARY.md","cep-writer/REFERENCE_MANIFEST.json","cep-writer/tools/verify_repo.py"
+              })
+              if keep:
+                  b=p.read_bytes()
+                  entries.append({"path":rel,"size":len(b),"sha256":hashlib.sha256(b).hexdigest()})
+          manifest={
+            "schemaVersion":11,
+            "classification":"CEP_CURRENT_WORKING_BASELINE_REQUIRED_INPUT_MANIFEST__NOT_LIVE_AUTHORITY",
+            "productParentCommit":baseline,
+            "productCanonicalSourceSha256":product_sha,
+            "productCanonicalSourceFiles":273,
+            "executionMode":"MISSION_BRANCH_FROM_CONTROLLER_BOUND_WORKING_BASELINE",
+            "noRequiredLiveDriveFetch":True,
+            "entries":entries
+          }
+          (root/"cep-writer/WRITER_INPUT_MANIFEST.json").write_text(json.dumps(manifest,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
+
+          # Refresh root README stale-lineage note after removing the old root file.
+          readme=(root/"README.md").read_text(encoding="utf-8")
+          readme=readme.replace("Do not use the historical root file `README_START_HERE_AR.md` as current Writer authority; it is retained lineage from an earlier Foundation epoch.",
+                                "Historical Foundation/M0 handoffs and checkpoints are indexed at `docs/history/HISTORICAL_LINEAGE_INDEX.md` and remain recoverable from Git history; they are not current Writer authority.")
+          (root/"README.md").write_text(readme,encoding="utf-8")
+          PY
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Rebuild generated runtime
+        run: npm run build:runtime
+
+      - name: Verify Product identity unchanged
+        shell: bash
+        run: |
+          node tools/source-tree-identity.mjs > /tmp/source-id.txt
+          cat /tmp/source-id.txt
+          grep -q '480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641' /tmp/source-id.txt
+          grep -q '273' /tmp/source-id.txt
+
+      - name: Model tests
+        run: npm test
+
+      - name: Contract and authority checks
+        run: npm run check
+
+      - name: Runtime falsification
+        run: npm run runtime:check
+
+      - name: Restore generated assurance receipts from baseline
+        shell: bash
+        run: |
+          git checkout 293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a -- assurance || true
+
+      - name: Verify Writer self-containment
+        run: python3 cep-writer/tools/verify_repo.py
+
+      - name: Verify no Product mutation and no unexpected generated drift
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -z "$(git diff --name-only 293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a -- stack/native-typescript)"
+          test -z "$(git diff --name-only 293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a -- stack/local-runtime)"
+          git diff --exit-code -- dist
+
+      - name: Commit Stage-1 cleanup candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "CEP_CONTROLLER"
+          git config user.email "cep-controller@local.invalid"
+          git add -A
+          git reset -- .github/workflows/zero-loss-cleanup-stage1.yml || true
+          # Keep census evidence already on this branch; commit only cleanup changes generated above.
+          if git diff --cached --quiet; then
+            echo "No cleanup delta"
+            exit 1
+          fi
+          git commit -m "controller: stage conservative zero-loss baseline cleanup"
+          git push origin HEAD:controller/zero-loss-repo-cleanup
