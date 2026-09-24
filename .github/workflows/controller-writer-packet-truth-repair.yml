@@ -1,0 +1,265 @@
+name: Controller Writer Packet Truth Repair
+
+on:
+  push:
+    branches:
+      - controller/writer-packet-truth-repair
+    paths:
+      - .github/workflows/controller-writer-packet-truth-repair.yml
+
+permissions:
+  contents: write
+
+jobs:
+  repair-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact Stage-2 main
+        uses: actions/checkout@v4
+        with:
+          ref: f93b75310716f8cf527505ccfdbdb215eb4e3454
+          fetch-depth: 0
+
+      - name: Repair Writer execution identity projections only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+
+          product_parent="293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a"
+          product_tree="3101c06901dbdaff9602fea8098efb9c34575149"
+          product_sha="480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641"
+
+          Path("cep-writer/GIT_WORKFLOW.md").write_text("""# Git / Writer Workflow — Current Baseline
+
+          - `main` is the Controller-bound **working/correction baseline reference**; resolve its exact HEAD/tree at mission binding.
+          - The immutable Product-source ancestor is `293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a` / tree `3101c06901dbdaff9602fea8098efb9c34575149`; do not confuse it with current repository `main`.
+          - Product source remains `480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641 / 273`.
+          - `main` is not automatic Product acceptance authority.
+          - Every mutating Writer mission starts from the exact Controller-bound `main` commit or an independently audited successor named by the mission overlay.
+          - Each mission uses one mission-specific candidate branch.
+          - Writers never push directly to `main`, merge to `main`, create releases, deploy, self-promote, or mutate live Controller governance.
+          - `main` carries reusable Product/build/test/reference inputs; the mission branch carries the exact immutable task overlay.
+          - Verified incremental continuation is preferred for correction loops when parent HEAD/tree/Product identity is exact; fresh lanes use the Controller-bound Capsule method when required.
+          - Heavy generated evidence stays in Google Drive with hash/source-bound receipts; required Writer inputs remain local in GitHub.
+          """.replace("          ",""),encoding="utf-8")
+
+          repo={
+            "schemaVersion":7,
+            "classification":"CEP_CURRENT_WORKING_BASELINE_WRITER_REPOSITORY__NOT_ACCEPTANCE",
+            "repositoryBaselineRef":"main",
+            "repositoryHeadRule":"RESOLVE_EXACT_HEAD_AT_MISSION_BINDING",
+            "productSourceParentCommit":product_parent,
+            "productSourceParentTree":product_tree,
+            "productSourceSha256":product_sha,
+            "productSourceFiles":273,
+            "mainPurpose":"CONTROLLER_BOUND_WORKING_CORRECTION_BASELINE",
+            "missionOverlayPolicy":"MISSION_BRANCH_ONLY",
+            "noRequiredLiveDriveFetch":True,
+            "historicalLineageIndex":"docs/history/HISTORICAL_LINEAGE_INDEX.md"
+          }
+          Path("cep-writer/REPOSITORY_MANIFEST.json").write_text(json.dumps(repo,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
+
+          work={
+            "schemaVersion":2,
+            "classification":"CEP_WORKING_CORRECTION_BASELINE__SALVAGEABLE_NOT_ACCEPTED",
+            "repository":"hamad933/cep-writer-baseline-repo",
+            "repositoryBaselineRef":"main",
+            "repositoryHeadRule":"RESOLVE_EXACT_HEAD_AT_MISSION_BINDING",
+            "productSourceParentCommit":product_parent,
+            "productSourceParentTree":product_tree,
+            "productCanonicalSourceSha256":product_sha,
+            "productCanonicalSourceFiles":273,
+            "accepted":False,"released":False,"deployed":False,"stackFrozen":False,
+            "sourceBinding":"C03_SOURCE_BINDING_CLOSED",
+            "currentFindingProjection":"cep-writer/CURRENT_POST_C03_FINDINGS.json",
+            "firstCorrectionWave":["D03A","D03B","D03C","D04"],
+            "exclusiveFinalConvergenceHotspots":[
+              "stack/native-typescript/main.ts",
+              "stack/native-typescript/surfaces/m0-controller-composition.ts"
+            ]
+          }
+          Path("cep-writer/WORKING_BASELINE.json").write_text(json.dumps(work,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
+
+          Path("cep-writer/authority/AUTHORITY_PACKET.md").write_text("""# CEP Current Reusable Writer Authority Packet
+
+          This file is the mission-independent Writer entry packet for the current working baseline.
+
+          Repository execution baseline:
+          - ref: `main`
+          - exact repository HEAD/tree: resolve and record at mission binding
+          - exact mission parent: supplied by the Controller mission overlay
+
+          Unchanged Product-source ancestry:
+          - Product-source ancestor HEAD: `293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a`
+          - Product-source ancestor tree: `3101c06901dbdaff9602fea8098efb9c34575149`
+          - Product: `480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641 / 273`
+          - status: `SALVAGEABLE_NOT_ACCEPTED`
+
+          Read locally:
+          1. `../CURRENT_WRITER_BASELINE_STATE.json`
+          2. `WRITER_OWNER_DECISIONS.csv`
+          3. `OWNER_DECISION_SUMMARY.md`
+          4. `../WRITER_AUTHORITY_BASELINE.md`
+          5. `../KNOWN_OPEN_GATES.md`
+          6. `../PROTECTED_TRUTHS.md`
+          7. applicable local profiles/oracles/references
+          8. exact mission overlay on the mission branch
+
+          Do not fetch live Controller files to satisfy required Writer inputs.
+          Google Drive remains the Controller control plane; GitHub is the Writer execution plane.
+          """.replace("          ",""),encoding="utf-8")
+
+          common=Path("cep-writer/contracts/POST_C03_WAVE1_COMMON_WRITER_CONTRACT.md").read_text(encoding="utf-8")
+          old="""## Exact legal parent
+
+          HEAD: `293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a`
+          Tree: `3101c06901dbdaff9602fea8098efb9c34575149`
+          Product source: `480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641 / 273`
+          Classification: `SALVAGEABLE_CORRECTION_BASE__NOT_ACCEPTED`
+
+          Any exact mission branch must prove its bound parent/ancestor and exact mission overlay before mutation.
+          """.replace("          ","")
+          new="""## Execution identity law
+
+          Repository baseline ref: `main`.
+          Exact repository mission parent HEAD/tree: supplied by the immutable Controller mission overlay and MUST be verified before mutation.
+          Product-source ancestor HEAD: `293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a`.
+          Product-source ancestor tree: `3101c06901dbdaff9602fea8098efb9c34575149`.
+          Product source: `480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641 / 273`.
+          Classification: `WORKING_CORRECTION_BASELINE__SALVAGEABLE_NOT_ACCEPTED`.
+
+          Never substitute the Product-source ancestor for the current repository mission parent. Any mission branch must prove its exact Controller-bound parent/ancestor and exact mission overlay before mutation.
+
+          ## Current post-C03 finding routing
+
+          - `CBF-001`: remains open for Structured/Balanced6 correction in D08/D13/D14; Wave 1 must not claim closure outside a legal Structured owner scope.
+          - `CBF-002`: D03B owns the shared navigation semantic-context contract through `GlobalShellNavigationOwner`; final `main.ts`/m0 wiring remains D13.
+          - `CBF-003`: D03C owns bounded shared `BottomDeepWorkOwner` provider/reachability correction; no per-Surface duplicate bottom owner.
+          - `MFC-PF-001` and `MFC-PF-002`: D03B owns bounded Library/shared transient and F6 fallback residuals in existing shared interaction seams.
+          - `MFC-PF-003`: D03A owns canonical Settings exposure/action-home for preference export/import/reset; Library donor-local retirement remains D08/D13.
+          - `PVF-001`, `PVF-002`, `PVF-003`: remain downstream Surface integration residuals; D03 may repair only shared prerequisites and must not self-close final Surface mounting.
+          - `F-049` and `F-050`: remain Visualize correction residuals for D08/D13.
+          """.replace("          ","")
+          if old not in common:
+              raise SystemExit("repo-local common contract expected block missing")
+          common=common.replace(old,new,1)
+          Path("cep-writer/contracts/POST_C03_WAVE1_COMMON_WRITER_CONTRACT.md").write_text(common,encoding="utf-8")
+          PY
+
+      - name: Regenerate Writer input manifest from exact repaired bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,subprocess
+          root=Path(".").resolve()
+          old=json.load(open("cep-writer/WRITER_INPUT_MANIFEST.json",encoding="utf-8"))
+          entries=[]
+          for item in old["entries"]:
+              p=root/item["path"]
+              if not p.is_file(): raise SystemExit("manifest path missing: "+item["path"])
+              b=p.read_bytes()
+              entries.append({"path":item["path"],"size":len(b),"sha256":hashlib.sha256(b).hexdigest()})
+          out={**old,
+            "schemaVersion":14,
+            "classification":"CURRENT_WORKING_BASELINE_REQUIRED_INPUT_MANIFEST__STAGE2_INTEGRATED__WRITER_PACKET_TRUTH_REPAIRED__NOT_LIVE_AUTHORITY",
+            "entries":entries
+          }
+          Path("cep-writer/WRITER_INPUT_MANIFEST.json").write_text(json.dumps(out,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
+          PY
+
+      - name: Exact scope and Product non-mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --name-only > /tmp/changed
+          cat /tmp/changed
+          python3 - <<'PY'
+          expected=sorted([
+            "cep-writer/GIT_WORKFLOW.md",
+            "cep-writer/REPOSITORY_MANIFEST.json",
+            "cep-writer/WORKING_BASELINE.json",
+            "cep-writer/WRITER_INPUT_MANIFEST.json",
+            "cep-writer/authority/AUTHORITY_PACKET.md",
+            "cep-writer/contracts/POST_C03_WAVE1_COMMON_WRITER_CONTRACT.md",
+          ])
+          actual=sorted(x.strip() for x in open("/tmp/changed") if x.strip())
+          assert actual==expected,(actual,expected)
+          PY
+          test -z "$(git diff --name-only -- stack/native-typescript)"
+
+      - name: Validate Writer packet and regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 cep-writer/tools/verify_repo.py
+          npm run build:runtime >/tmp/build1.log 2>&1
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum >/tmp/d1
+          npm run build:runtime >/tmp/build2.log 2>&1
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum >/tmp/d2
+          cmp /tmp/d1 /tmp/d2
+          npm test >/tmp/test.log 2>&1
+          set +e
+          npm run check >/tmp/check.log 2>&1
+          code=$?
+          set -e
+          python3 - <<'PY'
+          import json
+          d=json.load(open("assurance/CONTRACT_TEST_RESULTS.json"))
+          fails=[x["id"] for x in d["tests"] if x.get("status")=="FAIL"]
+          assert fails==["browser.lineage_receipt_truthful","browser.current_candidate_claim_truthful","browser.targeted_visual_evidence"],fails
+          assert d["pass"]==165 and d["fail"]==3
+          dup=json.load(open("assurance/DUPLICATE_MECHANIC_SCAN.json"))
+          assert dup.get("status")=="PASS" and not dup.get("findings")
+          PY
+          test "$code" -ne 0
+          npm run runtime:check >/tmp/runtime.log 2>&1
+
+      - name: Reset generated receipts and commit exact packet repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          git checkout -- assurance
+          git status --short
+          git config user.name "CEP Controller"
+          git config user.email "controller@users.noreply.github.com"
+          git add             cep-writer/GIT_WORKFLOW.md             cep-writer/REPOSITORY_MANIFEST.json             cep-writer/WORKING_BASELINE.json             cep-writer/WRITER_INPUT_MANIFEST.json             cep-writer/authority/AUTHORITY_PACKET.md             cep-writer/contracts/POST_C03_WAVE1_COMMON_WRITER_CONTRACT.md
+          git diff --cached --name-only > /tmp/staged
+          test "$(wc -l </tmp/staged)" -eq 6
+          git commit -m "controller: repair Writer packet execution identity truth"
+          test "$(git rev-parse HEAD^)" = "f93b75310716f8cf527505ccfdbdb215eb4e3454"
+          git push origin HEAD:refs/heads/controller/writer-packet-truth-repair-integrable
+
+  exact-commit-validate:
+    needs: repair-and-validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: controller/writer-packet-truth-repair-integrable
+          fetch-depth: 0
+      - name: Validate exact committed packet repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "f93b75310716f8cf527505ccfdbdb215eb4e3454"
+          test -z "$(git diff HEAD^ HEAD --name-only -- stack/native-typescript)"
+          test "$(git diff HEAD^ HEAD --name-only | wc -l)" -eq 6
+          python3 cep-writer/tools/verify_repo.py
+          python3 - <<'PY'
+          import json,pathlib
+          g=pathlib.Path("cep-writer/GIT_WORKFLOW.md").read_text()
+          assert "working/correction baseline** at `293dd1e0" not in g
+          r=json.load(open("cep-writer/REPOSITORY_MANIFEST.json"))
+          assert r["repositoryBaselineRef"]=="main" and r["repositoryHeadRule"]=="RESOLVE_EXACT_HEAD_AT_MISSION_BINDING"
+          w=json.load(open("cep-writer/WORKING_BASELINE.json"))
+          assert w["repositoryBaselineRef"]=="main" and w["productSourceParentCommit"].startswith("293dd1e0")
+          c=pathlib.Path("cep-writer/contracts/POST_C03_WAVE1_COMMON_WRITER_CONTRACT.md").read_text()
+          assert "## Execution identity law" in c and "Current post-C03 finding routing" in c
+          m=json.load(open("cep-writer/WRITER_INPUT_MANIFEST.json"))
+          assert m["schemaVersion"]==14 and len(m["entries"])==620
+          PY
