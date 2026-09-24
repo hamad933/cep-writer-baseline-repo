@@ -25,3 +25,10 @@ export class SemanticCommandBus {
   registerActionSurface(id,owner,{presentation,routes,commands,exitRoutes}){if(this.actionSurfaces.has(id))throw Error('DUPLICATE_ACTION_SURFACE_OWNER:'+id);if(!routes?.length||!commands?.length||!exitRoutes?.length)throw Error('INCOMPLETE_ACTION_SURFACE:'+id);const surface={id,owner,presentation,routes:[...routes],commands:[...commands],exitRoutes:[...exitRoutes]};this.actionSurfaces.set(id,surface);return surface;}
   validateActionSurfaces(){const missing=[];for(const surface of this.actionSurfaces.values())for(const id of surface.commands)if(!this.commands.has(id))missing.push(`${surface.id}:${id}`);if(missing.length)throw Error('UNREGISTERED_ACTION_ROUTE:'+missing.join(','));return true;}
 }
+
+/** Dependency-injection contract: one canonical application semantic-command owner. Compositions and hosts must receive the canonical bus; they must not silently construct competing canonical owners. */
+export const SEMANTIC_COMMAND_BUS_DI_CONTRACT=Object.freeze({id:SEMANTIC_COMMAND_BUS_OWNER+':DIContract',version:'1.0.0',canonicalOwner:SEMANTIC_COMMAND_BUS_OWNER,policy:'CANONICAL_BUS_INJECTED_BY_CALLER__NO_COMPOSITION_LOCAL_COMPETING_BUS',contextualShortcutRule:'SHORTCUTS_REUSE_CANONICAL_BUS__NEVER_BECOME_OWNERS'});
+export function assertCanonicalSemanticCommandBus(candidate,consumer='unknown'){
+  if(candidate instanceof SemanticCommandBus)return candidate;
+  throw Error('CANONICAL_SEMANTIC_COMMAND_BUS_REQUIRED:'+consumer);
+}

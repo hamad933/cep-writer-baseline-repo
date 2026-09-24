@@ -41,12 +41,20 @@ export function isProductDestination(value       ,destinationRegistry           
                                    
                                                     
                                                                                                                  
+                   
+                        
+                        
+                          
+                                
+    
  
 
                                      
                                         
                                                           
  
+
+                                                                                                                                 
 
                        
                               
@@ -55,6 +63,7 @@ export function isProductDestination(value       ,destinationRegistry           
                   
                                                
                                                 
+                                   
  
 
 export class GlobalShellNavigationOwner{
@@ -70,15 +79,18 @@ export class GlobalShellNavigationOwner{
   storage             =null;
   lastDirection='';
   lastLanguage='';
+  onNavigate                          =null;
           clickHandler                         ;
           keyHandler                            ;
           pagehideHandler         ;
           beforeUnloadHandler                                ;
+          popstateHandler                            ;
 
   constructor(options             ){
     this.destinationRegistry=options.destinationRegistry||DEFAULT_SHELL_DESTINATION_REGISTRY;
     if(!isProductDestination(options.surface,this.destinationRegistry))throw Error('GLOBAL_SHELL_REAL_PRODUCT_SURFACE_REQUIRED');
     this.surface=options.surface;this.workspace=options.workspace;this.api=options.api;this.preferences=options.preferences;this.noteRuntime=options.noteRuntime??null;
+    this.onNavigate=options.onNavigate||null;
     const legacy=document.querySelector             ('.foundation-shell');
     if(!legacy)throw Error('GLOBAL_SHELL_HOST_MISSING');
     this.host=legacy;
@@ -87,12 +99,14 @@ export class GlobalShellNavigationOwner{
     this.keyHandler=event=>this.onKeydown(event);
     this.pagehideHandler=()=>this.captureCurrentContext('pagehide');
     this.beforeUnloadHandler=event=>{if(!this.isDirty())return;event.preventDefault();event.returnValue='';};
+    this.popstateHandler=event=>this.onPopState(event);
     this.adoptHost();
     this.render();
     this.host.addEventListener('click',this.clickHandler);
     this.host.addEventListener('keydown',this.keyHandler);
     window.addEventListener('pagehide',this.pagehideHandler);
     window.addEventListener('beforeunload',this.beforeUnloadHandler);
+    window.addEventListener('popstate',this.popstateHandler);
     this.observer=new MutationObserver(()=>this.syncLocaleDirection());
     this.observer.observe(document.documentElement,{attributes:true,attributeFilter:['lang','dir']});
     this.restoreOnArrival();
@@ -190,6 +204,20 @@ export class GlobalShellNavigationOwner{
     return false;
   }
 
+  onPopState(_event              ){
+    const url=new URL(location.href);
+    const targetSurface=(url.searchParams.get('surface')||this.destinationRegistry.defaultId)                       ;
+    if(isProductDestination(targetSurface,this.destinationRegistry)){
+      if(targetSurface!==this.surface){
+        this.surface=targetSurface;
+        this.adoptHost();
+        this.render();
+        try{this.onNavigate?.(targetSurface,{source:'popstate'})}catch(e){console.error('onNavigate popstate error',e)}
+      }
+    }
+    this.restoreOnArrival();
+  }
+
   navigate(destination                    ,invoker             =null){
     if(!isProductDestination(destination,this.destinationRegistry))throw Error('GLOBAL_SHELL_DESTINATION_NOT_PRODUCT');
     if(destination===this.surface){(invoker                    )?.focus?.();return {ok:true,status:'ALREADY_ACTIVE',surface:this.surface};}
@@ -198,7 +226,22 @@ export class GlobalShellNavigationOwner{
     const bookmark=this.captureCurrentContext('navigate');
     const arrival={schemaVersion:1,owner:GLOBAL_SHELL_OWNER,from:this.surface,to:destination,bookmarkKey:this.bookmarkKey(this.surface),capturedAt:bookmark?.capturedAt||new Date().toISOString()};
     try{this.storage?.setItem('cep:shell:arrival',JSON.stringify(arrival))}catch{}
-    location.assign(this.destinationURL(destination));
+    const targetUrl=this.destinationURL(destination);
+    try{
+      history.pushState({...history.state,cepDestination:destination},'',targetUrl);
+      this.surface=destination;
+      this.adoptHost();
+      this.render();
+      if(this.onNavigate){
+        const handled=this.onNavigate(destination,{source:'navigate',bookmark});
+        if(handled!==false){
+          this.restoreOnArrival();
+          return {ok:true,status:'NAVIGATING',surface:this.surface,destination};
+        }
+      }
+    }catch{
+      location.assign(targetUrl);
+    }
     return {ok:true,status:'NAVIGATING',surface:this.surface,destination};
   }
 
@@ -210,7 +253,22 @@ export class GlobalShellNavigationOwner{
     const bookmark=this.captureCurrentContext('navigate-preserved-recovery');
     const arrival={schemaVersion:1,owner:GLOBAL_SHELL_OWNER,from:this.surface,to:destination,bookmarkKey:this.bookmarkKey(this.surface),capturedAt:bookmark?.capturedAt||new Date().toISOString(),recoveryOwner:String(recoveryReceipt.owner)};
     try{this.storage?.setItem('cep:shell:arrival',JSON.stringify(arrival))}catch{}
-    location.assign(this.destinationURL(destination));
+    const targetUrl=this.destinationURL(destination);
+    try{
+      history.pushState({...history.state,cepDestination:destination,recoveryReceipt},'',targetUrl);
+      this.surface=destination;
+      this.adoptHost();
+      this.render();
+      if(this.onNavigate){
+        const handled=this.onNavigate(destination,{source:'navigate-preserved-recovery',recoveryReceipt,bookmark});
+        if(handled!==false){
+          this.restoreOnArrival();
+          return {ok:true,status:'NAVIGATING_WITH_VERIFIED_RECOVERY',surface:this.surface,destination,recoveryOwner:String(recoveryReceipt.owner)};
+        }
+      }
+    }catch{
+      location.assign(targetUrl);
+    }
     return {ok:true,status:'NAVIGATING_WITH_VERIFIED_RECOVERY',surface:this.surface,destination,recoveryOwner:String(recoveryReceipt.owner)};
   }
 
@@ -252,7 +310,20 @@ export class GlobalShellNavigationOwner{
   }
 
   captureCurrentContext(reason       ){
-    const bookmark              ={schemaVersion:1,owner:GLOBAL_SHELL_OWNER,surface:this.surface,href:location.href,capturedAt:new Date().toISOString(),windowScroll:{x:scrollX,y:scrollY},scroll:[],focus:this.focusIdentity()};
+    let surfaceContext                                =undefined;
+    if(this.surface==='today'){
+      const activeFilterBtn=document.querySelector             ('[data-filter][aria-pressed="true"], [data-filter].active');
+      const activeFilter=activeFilterBtn?.dataset.filter||undefined;
+      const focusedItem=document.querySelector             ('[data-today-action][data-item-id]');
+      const todayItemId=focusedItem?.dataset.itemId||undefined;
+      surfaceContext={todayFilter:activeFilter,todayItemId};
+    }else if(this.surface==='visualize'){
+      const activeViewBtn=document.querySelector             ('[data-view][aria-pressed="true"]');
+      const visualizeView=activeViewBtn?.dataset.view||undefined;
+      const selectedNodes=[...document.querySelectorAll             ('.spatial-canvas g[aria-selected="true"]')].map(n=>n.dataset.nodeId||n.id).filter(Boolean);
+      surfaceContext={visualizeView,visualizeSelected:selectedNodes};
+    }
+    const bookmark              ={schemaVersion:1,owner:GLOBAL_SHELL_OWNER,surface:this.surface,href:location.href,capturedAt:new Date().toISOString(),windowScroll:{x:scrollX,y:scrollY},scroll:[],focus:this.focusIdentity(),surfaceContext};
     for(const target of SCROLL_TARGETS){const element=document.querySelector             (target.selector);if(element&&(element.scrollTop||element.scrollLeft||element.scrollHeight>element.clientHeight||element.scrollWidth>element.clientWidth))bookmark.scroll.push({key:target.key,top:element.scrollTop,left:element.scrollLeft});}
     try{this.storage?.setItem(this.bookmarkKey(this.surface),JSON.stringify(bookmark))}catch{}
     try{history.replaceState({...history.state,cepShell:{owner:GLOBAL_SHELL_OWNER,surface:this.surface,bookmarkKey:this.bookmarkKey(this.surface),reason,bookmark}},'',location.href)}catch{}
@@ -294,6 +365,15 @@ export class GlobalShellNavigationOwner{
 
   async restoreBookmark(bookmark              ){
     delete this.host.dataset.contextRestored;this.host.dataset.contextRestoreStatus='pending';
+    if(bookmark.surfaceContext){
+      if(this.surface==='today'&&bookmark.surfaceContext.todayFilter){
+        const filterBtn=document.querySelector             (`[data-filter="${CSS.escape(bookmark.surfaceContext.todayFilter)}"]`);
+        filterBtn?.click();
+      }else if(this.surface==='visualize'&&bookmark.surfaceContext.visualizeView){
+        const viewBtn=document.querySelector             (`[data-view="${CSS.escape(bookmark.surfaceContext.visualizeView)}"]`);
+        viewBtn?.click();
+      }
+    }
     let stableFrames=0;
     for(let attempt=0;attempt<12;attempt++){
       const ready=this.applyBookmarkScroll(bookmark);
@@ -316,7 +396,7 @@ export class GlobalShellNavigationOwner{
     shellVisualComposition:'REOPENED__SEMANTIC_BASELINE_PRESERVED',adoptedLegacyProofHost:true,goldenConsumer:false,
     sharedOwners:{commands:'SemanticCommandBus/CommandRegistry',settings:'SettingsCenterOwner/WorkspaceFoundation',transients:'TransientFocusOwner',panes:'WorkspaceFoundation/PaneResponsiveCore',notes:'LibraryNoteRuntimeComposition/public transactionDescriptor'}
   }}
-  destroy(){this.captureCurrentContext('destroy');this.host.removeEventListener('click',this.clickHandler);this.host.removeEventListener('keydown',this.keyHandler);window.removeEventListener('pagehide',this.pagehideHandler);window.removeEventListener('beforeunload',this.beforeUnloadHandler);this.observer?.disconnect();}
+  destroy(){this.captureCurrentContext('destroy');this.host.removeEventListener('click',this.clickHandler);this.host.removeEventListener('keydown',this.keyHandler);window.removeEventListener('pagehide',this.pagehideHandler);window.removeEventListener('beforeunload',this.beforeUnloadHandler);window.removeEventListener('popstate',this.popstateHandler);this.observer?.disconnect();}
 }
 
 export function mountGlobalShellNavigation(options             ){return new GlobalShellNavigationOwner(options)}

@@ -36,9 +36,8 @@ const requested=shellRoute.requested;
 const consumer=shellRoute.surface;
 const family=['library','learn','labs','scenarios'].includes(consumer)?'structured':['visualize','enterprise'].includes(consumer)?'spatial':consumer==='runs'?'operational':'global';
 const platformInputDirectionBridge=createLocalRuntimePlatformInputDirectionBridge();
-function localRuntimeSync(path,{method='GET',body=null}={}){if(typeof XMLHttpRequest==='undefined')return {ok:false,code:'XMLHTTPREQUEST_UNAVAILABLE'};try{const xhr=new XMLHttpRequest();xhr.open(method,(globalThis.CEP_LOCAL_RUNTIME_URL||'http://127.0.0.1:4174')+path,false);if(body!==null)xhr.setRequestHeader('content-type','application/json');xhr.send(body===null?null:JSON.stringify(body));let value={};try{value=JSON.parse(xhr.responseText||'{}')}catch{}return xhr.status>=200&&xhr.status<300?value:{ok:false,...value,code:value.code||`HTTP_${xhr.status}`}}catch(error){return {ok:false,code:'LOCAL_RUNTIME_SYNC_ERROR',error:String(error?.message||error)}}}
-function stageDetachedNoteContext(note,routeState={}){if(!note?.id)return null;const result=localRuntimeSync('/v1/platform/detach-context',{method:'POST',body:{kind:'STICKY_WHOLE_SURFACE_CONTEXT',payload:{note:structuredClone(note),route:{activeKu:routeState.activeKu||null,contextLens:routeState.contextLens||null},createdAt:new Date().toISOString()}}});return result?.ok===true&&result.token?result.token:null}
-function readDetachedNoteContext(token){if(!token)return null;const result=localRuntimeSync(`/v1/platform/detach-context/${encodeURIComponent(token)}`);return result?.ok===true?result.payload:null}
+function stageDetachedNoteContext(note:any,routeState:any={}){if(!note?.id)return null;const token='ctx-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);const payload={kind:'STICKY_WHOLE_SURFACE_CONTEXT',payload:{note:structuredClone(note),route:{activeKu:routeState.activeKu||null,contextLens:routeState.contextLens||null},createdAt:new Date().toISOString()}};try{sessionStorage.setItem('cep:detached:'+token,JSON.stringify(payload))}catch{}try{fetch((globalThis.CEP_LOCAL_RUNTIME_URL||'http://127.0.0.1:4174')+'/v1/platform/detach-context',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)}).catch(()=>{})}catch{}return token}
+function readDetachedNoteContext(token:string|null){if(!token)return null;try{const item=sessionStorage.getItem('cep:detached:'+token);if(item)return JSON.parse(item).payload}catch{}return null}
 const platformWindowBridge=new LocalRuntimePlatformWindowBridge({urlForPresentation:({presentationId,noteId,runtimeSessionId,providerId})=>{const u=new URL(location.href);u.searchParams.set('surface',noteId?'library':'runs');u.searchParams.set(noteId?'detachedNoteId':'detachedTerminalPresentationId',noteId||presentationId);if(noteId){u.searchParams.delete('terminal');u.searchParams.delete('terminalSessionId');u.searchParams.delete('terminalProviderId');const note=api?.state?.notes?.[noteId],route=api?.state?.route||{},handoffToken=stageDetachedNoteContext(note,{...route,contextLens:api?.state?.surface?.contextLens});if(handoffToken)u.searchParams.set('detachedContextToken',handoffToken);if(route.activeKu)u.searchParams.set('detachedKu',route.activeKu);if(note?.binding?.blockId)u.searchParams.set('detachedBlockId',note.binding.blockId);if(note?.binding?.route)u.searchParams.set('detachedBindingRoute',note.binding.route);if(api?.state?.surface?.contextLens)u.searchParams.set('detachedContextLens',api.state.surface.contextLens);if(note?.binding?.selection)u.searchParams.set('detachedSelection',JSON.stringify(note.binding.selection))}else if(runtimeSessionId&&providerId==='WindowsConptyRuntimeAdapter'){u.searchParams.set('terminal','conpty');u.searchParams.set('terminalSessionId',runtimeSessionId);u.searchParams.set('terminalProviderId',providerId)}return u.href}});
 const commandBus=new SemanticCommandBus(),registry=new CommandRegistry(commandBus),capabilities=new CapabilityRegistry(commandBus),analyticalCompareOwner=new AnalyticalCompareOwner(),timelineReplayOwner=new TimelineReplayOwner(),transientOwner=new TransientFocusOwner({fallbackFocus:()=>document.querySelector('[data-shell-destination][aria-current="page"], #centerPane, #workspaceViewButton')}),feedbackOwner=new AccessibilityFeedbackOwner();let api,workspace,spatial,operational,simulation,learn,motion,relations,relationUI,structured,bundles,wave3Assembly=null,wave4Assembly=null,shellNavigation=null,runOperationalContextProvider=null;
 let windowsTerminal=null;
@@ -231,7 +230,45 @@ wave3Assembly=mountWave3GlobalAssembly({commandBus,transientOwner,preferences,ap
 wave4Assembly=mountWave4FamilyInteractionAssembly({commandBus,transientOwner,preferences,wave3Assembly,structured,consumer,family,simulation,document});
 if(consumer==='runs'&&wave4Assembly?.operationalSession){wave4Assembly.operationalSession.platformWindowBridge=platformWindowBridge;const tp=new URLSearchParams(location.search);if(tp.get('terminal')==='conpty'){windowsTerminal=new WindowsTerminalRuntimeAdapter();try{const existingSessionId=tp.get('terminalSessionId'),executable=tp.get('terminalExe')||'powershell.exe',args=tp.getAll('terminalArg'),cwd=tp.get('terminalCwd')||undefined,label=tp.get('terminalLabel')||executable;const realSession=existingSessionId?await windowsTerminal.attachSession(existingSessionId,{label}):await windowsTerminal.openProfile({executable,args,cwd,label,cols:120,rows:30});wave4Assembly.operationalSession.attachProviderSession(windowsTerminal,realSession.id,{classification:'REAL_RUNTIME_PROVIDER',evidenceRole:existingSessionId?'windows-conpty-detached-existing-session':'windows-conpty-real-consumer'});}catch(error){workspace?.status?.(`Windows terminal unavailable · ${String(error?.message||error)}`,'error')}}}
 if(consumer==='runs'&&simulation&&wave4Assembly?.operationalSession){operational=new OperationalTerminalHost(stage.querySelector('#operationalHost'),wave4Assembly.operationalSession,{routeInput:input=>{const tab=wave4Assembly.operationalSession.tab(input.presentationId);if(tab?.providerId==='WindowsConptyRuntimeAdapter')return windowsTerminal?.input(tab.runtimeSessionId,input.rawInput);return api.Commands.execute('runtime.input',{presentationId:input.presentationId,runtimeSessionId:input.runtimeSessionId,sessionId:input.runtimeSessionId,command:input.rawInput,invocationId:input.invocationId,route:'operational-terminal-host'})},routeResize:size=>{const tab=wave4Assembly.operationalSession.tab(size.presentationId);if(tab?.providerId==='WindowsConptyRuntimeAdapter')return windowsTerminal?.resize(tab.runtimeSessionId,size.cols,size.rows)},onError:error=>workspace.status(String(error?.message||error),'error'),routeRestart:async input=>{const tab=wave4Assembly.operationalSession.tab(input.presentationId);if(!tab)throw Error('OPERATIONAL_SESSION_NOT_FOUND');if(tab.providerId==='WindowsConptyRuntimeAdapter'){if(!windowsTerminal)throw Error('WINDOWS_CONPTY_PROVIDER_UNAVAILABLE');return windowsTerminal.restart(tab.runtimeSessionId)}const session=simulation.reconnect(tab.runtimeSessionId);return {id:session.id,restarted:true,providerId:tab.providerId}},onGeometryRequest:()=>api.Commands.execute('session.geometry',{route:'operational-terminal-host'}),onDetachRequest:tab=>wave4Assembly.operationalSession.detachWindow({url:null})});operational.render();renderDomainView();}
-if(shellRoute.kind==='product')shellNavigation=mountGlobalShellNavigation({surface:consumer,workspace,api,preferences,noteRuntime,destinationRegistry:CEP_PRODUCT_DESTINATION_REGISTRY});
+const handleShellNavigate = async (destination: string) => {
+  if (destination === window.CEPFoundation?.consumer) return true;
+  if (window.CEPFoundation) window.CEPFoundation.consumer = destination;
+  document.body.dataset.consumer = destination;
+  document.body.dataset.globalShellSurface = destination;
+  const donorDoc = document.querySelector<HTMLElement>('#editorDocument');
+  const stage = document.querySelector<HTMLElement>('#foundationStage');
+  if (destination === 'today') {
+    if (donorDoc) donorDoc.hidden = true;
+    if (stage) stage.hidden = false;
+    await mountM0ControllerComposition({
+      consumer: 'today',
+      registry,
+      commandBus,
+      workspace,
+      structured,
+      learn,
+      relations,
+      simulation,
+      wave3Assembly,
+      wave4Assembly,
+      api,
+      button,
+      esc,
+      shellNavigation,
+      analyticalCompareOwner,
+      timelineReplayOwner
+    });
+    workspace.applyPreferences();
+    return true;
+  } else if (destination === 'library') {
+    if (stage) stage.hidden = true;
+    if (donorDoc) donorDoc.hidden = false;
+    workspace.applyPreferences();
+    return true;
+  }
+  return true;
+};
+if(shellRoute.kind==='product')shellNavigation=mountGlobalShellNavigation({surface:consumer,workspace,api,preferences,noteRuntime,destinationRegistry:CEP_PRODUCT_DESTINATION_REGISTRY,onNavigate:handleShellNavigate});
 const m0Composition=await mountM0ControllerComposition({consumer,registry,commandBus,workspace,structured,learn,relations,simulation,wave3Assembly,wave4Assembly,api,button,esc,shellNavigation,analyticalCompareOwner,timelineReplayOwner});
 workspace.applyPreferences();
 if(false&&spatial){let previousSize='';const observer=new ResizeObserver(()=>{const key=spatial.svg.clientWidth+'x'+spatial.svg.clientHeight;if(key!==previousSize&&spatial.svg.clientWidth>0){previousSize=key;spatial.fit()}});observer.observe(spatial.host)}

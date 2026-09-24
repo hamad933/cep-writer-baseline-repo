@@ -17,6 +17,9 @@ const admitted=(value,policy)=>policy.admittedDirections.includes(String(value||
 const normalized=(value,policy)=>admitted(value,policy)?String(value).toLowerCase():null;
 
 export class InputDirectionResolver {
+          _cachedBridgeEpoch = 0;
+          _cachedBridgeRead      = null;
+
   constructor({bridge=NO_PLATFORM_INPUT_DIRECTION_BRIDGE,policy=INPUT_DIRECTION_POLICY}={}){
     this.owner='InputDirectionResolver';this.contract=INPUT_DIRECTION_RESOLVER_CONTRACT;this.policy=policy;this.bridge=bridge||NO_PLATFORM_INPUT_DIRECTION_BRIDGE;
   }
@@ -28,7 +31,13 @@ export class InputDirectionResolver {
     const fallback=explicitFallback||policyFallback;
     const empty=String(content??'').length===0;
     if(persisted)return {direction:persisted,source:'PERSISTED_EXPLICIT_DIRECTION',persistedWon:true,fallbackUsed:false,bridgeUsed:false,bridgeCapability:this.bridge.capability?.()||{available:false,code:'PLATFORM_DIRECTION_BRIDGE_INVALID'},semanticInference:false,contentInspectedForLanguage:false,empty,surface,blockId,owner:this.owner,policyRevision:this.policy.revision};
-    const bridgeRead=this.bridge.read?.({surface,blockId,empty,contentLength:String(content??'').length})||{available:false,recognized:false,code:'PLATFORM_DIRECTION_BRIDGE_INVALID',hint:null};
+    const now=Date.now();
+    let bridgeRead=this._cachedBridgeRead;
+    if(!bridgeRead||now-this._cachedBridgeEpoch>250){
+      bridgeRead=this.bridge.read?.({surface,blockId,empty,contentLength:String(content??'').length})||{available:false,recognized:false,code:'PLATFORM_DIRECTION_BRIDGE_INVALID',hint:null};
+      this._cachedBridgeRead=bridgeRead;
+      this._cachedBridgeEpoch=now;
+    }
     if(bridgeRead.available&&bridgeRead.recognized&&normalized(bridgeRead.hint,this.policy))return {direction:normalized(bridgeRead.hint,this.policy),source:'PLATFORM_OS_KEYBOARD_HINT',persistedWon:false,fallbackUsed:false,bridgeUsed:true,bridgeCapability:bridgeRead,semanticInference:false,contentInspectedForLanguage:false,empty,surface,blockId,owner:this.owner,policyRevision:this.policy.revision};
     return {direction:fallback,source:explicitFallback?'EXPLICIT_FALLBACK':'POLICY_FALLBACK',persistedWon:false,fallbackUsed:true,bridgeUsed:false,bridgeCapability:bridgeRead,semanticInference:false,contentInspectedForLanguage:false,empty,surface,blockId,owner:this.owner,policyRevision:this.policy.revision};
   }

@@ -41,12 +41,20 @@ interface ShellBookmark{
   windowScroll:{x:number;y:number};
   scroll:Array<{key:string;top:number;left:number}>;
   focus:null|{id?:string;blockId?:string;objectId?:string;commandId?:string;destination?:string;history?:string};
+  surfaceContext?:{
+    todayFilter?:string;
+    todayItemId?:string;
+    visualizeView?:string;
+    visualizeSelected?:string[];
+  };
 }
 
 interface NoteTransactionDirtySource{
   descriptor:()=>{notes?:Array<string>};
   transactionDescriptor:(noteId:string)=>{dirty?:boolean};
 }
+
+export type ShellNavigateHandler = (destination: ShellProductSurface, options?: any) => Promise<boolean | void> | boolean | void;
 
 interface ShellOptions{
   surface:ShellProductSurface;
@@ -55,6 +63,7 @@ interface ShellOptions{
   preferences:any;
   noteRuntime?:NoteTransactionDirtySource|null;
   destinationRegistry?:ShellDestinationRegistry;
+  onNavigate?:ShellNavigateHandler;
 }
 
 export class GlobalShellNavigationOwner{
@@ -70,15 +79,18 @@ export class GlobalShellNavigationOwner{
   storage:Storage|null=null;
   lastDirection='';
   lastLanguage='';
+  onNavigate:ShellNavigateHandler|null=null;
   private clickHandler:(event:MouseEvent)=>void;
   private keyHandler:(event:KeyboardEvent)=>void;
   private pagehideHandler:()=>void;
   private beforeUnloadHandler:(event:BeforeUnloadEvent)=>void;
+  private popstateHandler:(event:PopStateEvent)=>void;
 
   constructor(options:ShellOptions){
     this.destinationRegistry=options.destinationRegistry||DEFAULT_SHELL_DESTINATION_REGISTRY;
     if(!isProductDestination(options.surface,this.destinationRegistry))throw Error('GLOBAL_SHELL_REAL_PRODUCT_SURFACE_REQUIRED');
     this.surface=options.surface;this.workspace=options.workspace;this.api=options.api;this.preferences=options.preferences;this.noteRuntime=options.noteRuntime??null;
+    this.onNavigate=options.onNavigate||null;
     const legacy=document.querySelector<HTMLElement>('.foundation-shell');
     if(!legacy)throw Error('GLOBAL_SHELL_HOST_MISSING');
     this.host=legacy;
@@ -87,12 +99,14 @@ export class GlobalShellNavigationOwner{
     this.keyHandler=event=>this.onKeydown(event);
     this.pagehideHandler=()=>this.captureCurrentContext('pagehide');
     this.beforeUnloadHandler=event=>{if(!this.isDirty())return;event.preventDefault();event.returnValue='';};
+    this.popstateHandler=event=>this.onPopState(event);
     this.adoptHost();
     this.render();
     this.host.addEventListener('click',this.clickHandler);
     this.host.addEventListener('keydown',this.keyHandler);
     window.addEventListener('pagehide',this.pagehideHandler);
     window.addEventListener('beforeunload',this.beforeUnloadHandler);
+    window.addEventListener('popstate',this.popstateHandler);
     this.observer=new MutationObserver(()=>this.syncLocaleDirection());
     this.observer.observe(document.documentElement,{attributes:true,attributeFilter:['lang','dir']});
     this.restoreOnArrival();
@@ -190,6 +204,20 @@ export class GlobalShellNavigationOwner{
     return false;
   }
 
+  onPopState(_event:PopStateEvent){
+    const url=new URL(location.href);
+    const targetSurface=(url.searchParams.get('surface')||this.destinationRegistry.defaultId) as ShellProductSurface;
+    if(isProductDestination(targetSurface,this.destinationRegistry)){
+      if(targetSurface!==this.surface){
+        this.surface=targetSurface;
+        this.adoptHost();
+        this.render();
+        try{this.onNavigate?.(targetSurface,{source:'popstate'})}catch(e){console.error('onNavigate popstate error',e)}
+      }
+    }
+    this.restoreOnArrival();
+  }
+
   navigate(destination:ShellProductSurface,invoker:Element|null=null){
     if(!isProductDestination(destination,this.destinationRegistry))throw Error('GLOBAL_SHELL_DESTINATION_NOT_PRODUCT');
     if(destination===this.surface){(invoker as HTMLElement|null)?.focus?.();return {ok:true,status:'ALREADY_ACTIVE',surface:this.surface};}
@@ -198,7 +226,22 @@ export class GlobalShellNavigationOwner{
     const bookmark=this.captureCurrentContext('navigate');
     const arrival={schemaVersion:1,owner:GLOBAL_SHELL_OWNER,from:this.surface,to:destination,bookmarkKey:this.bookmarkKey(this.surface),capturedAt:bookmark?.capturedAt||new Date().toISOString()};
     try{this.storage?.setItem('cep:shell:arrival',JSON.stringify(arrival))}catch{}
-    location.assign(this.destinationURL(destination));
+    const targetUrl=this.destinationURL(destination);
+    try{
+      history.pushState({...history.state,cepDestination:destination},'',targetUrl);
+      this.surface=destination;
+      this.adoptHost();
+      this.render();
+      if(this.onNavigate){
+        const handled=this.onNavigate(destination,{source:'navigate',bookmark});
+        if(handled!==false){
+          this.restoreOnArrival();
+          return {ok:true,status:'NAVIGATING',surface:this.surface,destination};
+        }
+      }
+    }catch{
+      location.assign(targetUrl);
+    }
     return {ok:true,status:'NAVIGATING',surface:this.surface,destination};
   }
 
@@ -210,7 +253,22 @@ export class GlobalShellNavigationOwner{
     const bookmark=this.captureCurrentContext('navigate-preserved-recovery');
     const arrival={schemaVersion:1,owner:GLOBAL_SHELL_OWNER,from:this.surface,to:destination,bookmarkKey:this.bookmarkKey(this.surface),capturedAt:bookmark?.capturedAt||new Date().toISOString(),recoveryOwner:String(recoveryReceipt.owner)};
     try{this.storage?.setItem('cep:shell:arrival',JSON.stringify(arrival))}catch{}
-    location.assign(this.destinationURL(destination));
+    const targetUrl=this.destinationURL(destination);
+    try{
+      history.pushState({...history.state,cepDestination:destination,recoveryReceipt},'',targetUrl);
+      this.surface=destination;
+      this.adoptHost();
+      this.render();
+      if(this.onNavigate){
+        const handled=this.onNavigate(destination,{source:'navigate-preserved-recovery',recoveryReceipt,bookmark});
+        if(handled!==false){
+          this.restoreOnArrival();
+          return {ok:true,status:'NAVIGATING_WITH_VERIFIED_RECOVERY',surface:this.surface,destination,recoveryOwner:String(recoveryReceipt.owner)};
+        }
+      }
+    }catch{
+      location.assign(targetUrl);
+    }
     return {ok:true,status:'NAVIGATING_WITH_VERIFIED_RECOVERY',surface:this.surface,destination,recoveryOwner:String(recoveryReceipt.owner)};
   }
 
@@ -252,7 +310,20 @@ export class GlobalShellNavigationOwner{
   }
 
   captureCurrentContext(reason:string){
-    const bookmark:ShellBookmark={schemaVersion:1,owner:GLOBAL_SHELL_OWNER,surface:this.surface,href:location.href,capturedAt:new Date().toISOString(),windowScroll:{x:scrollX,y:scrollY},scroll:[],focus:this.focusIdentity()};
+    let surfaceContext:ShellBookmark['surfaceContext']=undefined;
+    if(this.surface==='today'){
+      const activeFilterBtn=document.querySelector<HTMLElement>('[data-filter][aria-pressed="true"], [data-filter].active');
+      const activeFilter=activeFilterBtn?.dataset.filter||undefined;
+      const focusedItem=document.querySelector<HTMLElement>('[data-today-action][data-item-id]');
+      const todayItemId=focusedItem?.dataset.itemId||undefined;
+      surfaceContext={todayFilter:activeFilter,todayItemId};
+    }else if(this.surface==='visualize'){
+      const activeViewBtn=document.querySelector<HTMLElement>('[data-view][aria-pressed="true"]');
+      const visualizeView=activeViewBtn?.dataset.view||undefined;
+      const selectedNodes=[...document.querySelectorAll<HTMLElement>('.spatial-canvas g[aria-selected="true"]')].map(n=>n.dataset.nodeId||n.id).filter(Boolean);
+      surfaceContext={visualizeView,visualizeSelected:selectedNodes};
+    }
+    const bookmark:ShellBookmark={schemaVersion:1,owner:GLOBAL_SHELL_OWNER,surface:this.surface,href:location.href,capturedAt:new Date().toISOString(),windowScroll:{x:scrollX,y:scrollY},scroll:[],focus:this.focusIdentity(),surfaceContext};
     for(const target of SCROLL_TARGETS){const element=document.querySelector<HTMLElement>(target.selector);if(element&&(element.scrollTop||element.scrollLeft||element.scrollHeight>element.clientHeight||element.scrollWidth>element.clientWidth))bookmark.scroll.push({key:target.key,top:element.scrollTop,left:element.scrollLeft});}
     try{this.storage?.setItem(this.bookmarkKey(this.surface),JSON.stringify(bookmark))}catch{}
     try{history.replaceState({...history.state,cepShell:{owner:GLOBAL_SHELL_OWNER,surface:this.surface,bookmarkKey:this.bookmarkKey(this.surface),reason,bookmark}},'',location.href)}catch{}
@@ -294,6 +365,15 @@ export class GlobalShellNavigationOwner{
 
   async restoreBookmark(bookmark:ShellBookmark){
     delete this.host.dataset.contextRestored;this.host.dataset.contextRestoreStatus='pending';
+    if(bookmark.surfaceContext){
+      if(this.surface==='today'&&bookmark.surfaceContext.todayFilter){
+        const filterBtn=document.querySelector<HTMLElement>(`[data-filter="${CSS.escape(bookmark.surfaceContext.todayFilter)}"]`);
+        filterBtn?.click();
+      }else if(this.surface==='visualize'&&bookmark.surfaceContext.visualizeView){
+        const viewBtn=document.querySelector<HTMLElement>(`[data-view="${CSS.escape(bookmark.surfaceContext.visualizeView)}"]`);
+        viewBtn?.click();
+      }
+    }
     let stableFrames=0;
     for(let attempt=0;attempt<12;attempt++){
       const ready=this.applyBookmarkScroll(bookmark);
@@ -316,7 +396,7 @@ export class GlobalShellNavigationOwner{
     shellVisualComposition:'REOPENED__SEMANTIC_BASELINE_PRESERVED',adoptedLegacyProofHost:true,goldenConsumer:false,
     sharedOwners:{commands:'SemanticCommandBus/CommandRegistry',settings:'SettingsCenterOwner/WorkspaceFoundation',transients:'TransientFocusOwner',panes:'WorkspaceFoundation/PaneResponsiveCore',notes:'LibraryNoteRuntimeComposition/public transactionDescriptor'}
   }}
-  destroy(){this.captureCurrentContext('destroy');this.host.removeEventListener('click',this.clickHandler);this.host.removeEventListener('keydown',this.keyHandler);window.removeEventListener('pagehide',this.pagehideHandler);window.removeEventListener('beforeunload',this.beforeUnloadHandler);this.observer?.disconnect();}
+  destroy(){this.captureCurrentContext('destroy');this.host.removeEventListener('click',this.clickHandler);this.host.removeEventListener('keydown',this.keyHandler);window.removeEventListener('pagehide',this.pagehideHandler);window.removeEventListener('beforeunload',this.beforeUnloadHandler);window.removeEventListener('popstate',this.popstateHandler);this.observer?.disconnect();}
 }
 
 export function mountGlobalShellNavigation(options:ShellOptions){return new GlobalShellNavigationOwner(options)}

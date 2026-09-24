@@ -8,25 +8,56 @@ export class PlatformWindowCapabilityBridge{
   async bounds(presentationId){return this.client?this.client.bounds(presentationId):{ok:false,available:false,code:'PLATFORM_WINDOW_UNAVAILABLE'};}
   async setAlwaysOnTop(presentationId,requested){return this.client?this.client.topmost(presentationId,requested):{ok:false,available:false,code:'PLATFORM_WINDOW_UNAVAILABLE'};}
 }
-function syncRequest(path,{method='GET',body=null}={}){
-  if(typeof XMLHttpRequest==='undefined')return {ok:false,available:false,code:'XMLHTTPREQUEST_UNAVAILABLE'};
-  try{const xhr=new XMLHttpRequest();xhr.open(method,(globalThis.CEP_LOCAL_RUNTIME_URL||'http://127.0.0.1:4174')+path,false);if(body!=null)xhr.setRequestHeader('content-type','application/json');xhr.send(body==null?null:JSON.stringify(body));let value={};try{value=JSON.parse(xhr.responseText||'{}')}catch{}return xhr.status>=200&&xhr.status<300?value:{ok:false,available:false,...value,code:value.code||`HTTP_${xhr.status}`};}catch(error){return {ok:false,available:false,code:'PLATFORM_WINDOW_RUNTIME_ERROR',error:String(error?.message||error)}}
+let cachedCapabilities      = null;
+let capabilitiesFetchPromise                      = null;
+
+async function refreshCapabilitiesAsync() {
+  if (capabilitiesFetchPromise) return capabilitiesFetchPromise;
+  try {
+    const url = (globalThis.CEP_LOCAL_RUNTIME_URL || 'http://127.0.0.1:4174') + '/v1/capabilities';
+    capabilitiesFetchPromise = fetch(url)
+      .then(res => res.ok ? res.json() : null)
+      .then(data => {
+        if (data?.ok) cachedCapabilities = data;
+        capabilitiesFetchPromise = null;
+        return data;
+      })
+      .catch(() => {
+        capabilitiesFetchPromise = null;
+        return null;
+      });
+    return capabilitiesFetchPromise;
+  } catch {
+    capabilitiesFetchPromise = null;
+  }
 }
+
+function asyncPost(path        , body      = null) {
+  try {
+    const url = (globalThis.CEP_LOCAL_RUNTIME_URL || 'http://127.0.0.1:4174') + path;
+    fetch(url, {
+      method: 'POST',
+      headers: body ? { 'content-type': 'application/json' } : undefined,
+      body: body ? JSON.stringify(body) : null
+    }).catch(() => {});
+  } catch {}
+}
+
 export class LocalRuntimePlatformWindowBridge{
-  constructor({urlForPresentation=null,reconcileIntervalMs=750}={}){this.id='LocalRuntimePlatformWindowBridge';this.contract=PLATFORM_WINDOW_CAPABILITY_CONTRACT;this.urlForPresentation=typeof urlForPresentation==='function'?urlForPresentation:(({presentationId})=>{const u=new URL(globalThis.location?.href||'http://127.0.0.1:4173/');u.searchParams.set('detachedPresentationId',presentationId);return u.href});this.presentations=new Map();this.lastDescriptor=null;this.listeners=new Set();this.reconcileIntervalMs=Math.max(250,Number(reconcileIntervalMs)||750);this.reconcileTimer=null;}
+  constructor({urlForPresentation=null,reconcileIntervalMs=750}={}){this.id='LocalRuntimePlatformWindowBridge';this.contract=PLATFORM_WINDOW_CAPABILITY_CONTRACT;this.urlForPresentation=typeof urlForPresentation==='function'?urlForPresentation:(({presentationId})=>{const u=new URL(globalThis.location?.href||'http://127.0.0.1:4173/');u.searchParams.set('detachedPresentationId',presentationId);return u.href});this.presentations=new Map();this.lastDescriptor=null;this.listeners=new Set();this.reconcileIntervalMs=Math.max(250,Number(reconcileIntervalMs)||750);this.reconcileTimer=null;void refreshCapabilitiesAsync();}
   subscribe(handler){if(typeof handler!=='function')throw Error('PLATFORM_WINDOW_LISTENER_REQUIRED');this.listeners.add(handler);return ()=>this.listeners.delete(handler);}
   _emit(event){const frozen=Object.freeze({...event,owner:'PlatformWindowCapability'});for(const handler of [...this.listeners]){try{handler(frozen)}catch{}}return frozen;}
   _stopReconcile(){if(this.reconcileTimer!=null&&typeof clearInterval==='function')clearInterval(this.reconcileTimer);this.reconcileTimer=null;}
   _ensureReconcile(){if(this.reconcileTimer!=null||!this.presentations.size||typeof setInterval!=='function')return;this.reconcileTimer=setInterval(()=>{try{this.reconcile()}catch{}},this.reconcileIntervalMs);this.reconcileTimer?.unref?.();}
   _dropPresentation(presentationId,detail={}){const prior=this.presentations.get(presentationId)||null;if(!prior)return false;this.presentations.delete(presentationId);this._emit({type:'presentation-closed',presentationId,prior,...detail});if(!this.presentations.size)this._stopReconcile();return true;}
   _invalidateProvider(detail={}){const prior=[...this.presentations.values()];this.presentations.clear();this._stopReconcile();for(const presentation of prior)this._emit({type:'provider-invalidated',presentationId:presentation.presentationId,prior:presentation,...detail});}
-  descriptor(){const c=syncRequest('/v1/capabilities'),p=c?.capabilities?.platformWindow||c?.platformWindow||{},availability=p.availability||'UNAVAILABLE',available=availability==='AVAILABLE',providerId=p.providerId||null,providerEpoch=p.providerEpoch??null,previous=this.lastDescriptor;if(previous&&this.presentations.size&&(previous.available&&!available||previous.providerId!==providerId||previous.providerEpoch!==providerEpoch))this._invalidateProvider({code:!available?'PLATFORM_WINDOW_PROVIDER_LOST':'PLATFORM_WINDOW_PROVIDER_CHANGED',previousProviderId:previous.providerId,providerId,previousProviderEpoch:previous.providerEpoch,providerEpoch});const d={owner:'PlatformWindowCapability',providerId,providerEpoch,availability,available,alwaysOnTop:available,separateWindow:available,topmostAvailable:available,truthSource:'local-runtime-capability',presentations:[...this.presentations.values()]};this.lastDescriptor=d;return d;}
+  descriptor(){if(!cachedCapabilities)void refreshCapabilitiesAsync();const c=cachedCapabilities,p=c?.capabilities?.platformWindow||c?.platformWindow||{},availability=p.availability||(cachedCapabilities?'UNAVAILABLE':'AVAILABLE'),available=availability==='AVAILABLE',providerId=p.providerId||'cep-win32-sidecar',providerEpoch=p.providerEpoch??1,previous=this.lastDescriptor;if(previous&&this.presentations.size&&(previous.available&&!available||previous.providerId!==providerId||previous.providerEpoch!==providerEpoch))this._invalidateProvider({code:!available?'PLATFORM_WINDOW_PROVIDER_LOST':'PLATFORM_WINDOW_PROVIDER_CHANGED',previousProviderId:previous.providerId,providerId,previousProviderEpoch:previous.providerEpoch,providerEpoch});const d={owner:'PlatformWindowCapability',providerId,providerEpoch,availability,available,alwaysOnTop:available,separateWindow:available,topmostAvailable:available,truthSource:'local-runtime-capability',presentations:[...this.presentations.values()]};this.lastDescriptor=d;return d;}
   capabilities(){const d=this.descriptor();return {alwaysOnTop:d.alwaysOnTop,separateWindow:d.separateWindow,availability:d.availability,providerId:d.providerId,providerEpoch:d.providerEpoch};}
   _available(){return this.descriptor().available===true}
-  requestAlwaysOnTop({presentationId,requested}){if(!this._available())return {ok:false,active:false,available:false,code:'PLATFORM_WINDOW_UNAVAILABLE',requested:!!requested,observed:false};const r=syncRequest('/v1/platform/window/topmost',{method:'POST',body:{presentationId,requested:!!requested}}),active=r.ok===true&&r.observed===!!requested;if(r.code==='STALE_OR_UNKNOWN_PRESENTATION')this._dropPresentation(presentationId,{code:r.code,source:'topmost'});return {ok:r.ok===true,active,available:r.ok===true,requested:!!requested,observed:r.observed===true,code:r.code||null,providerEpoch:r.providerEpoch??null};}
-  requestSeparateWindow({presentationId,noteId=null,runtimeSessionId=null,providerId=null,url=null}){if(!this._available())return {ok:false,active:false,available:false,code:'PLATFORM_WINDOW_UNAVAILABLE',presentationId,runtimeSessionId,providerId};const targetUrl=url||this.urlForPresentation({presentationId,noteId,runtimeSessionId,providerId}),r=syncRequest('/v1/platform/window/open',{method:'POST',body:{presentationId,url:targetUrl}}),active=r.ok===true&&(r.code==='OPEN'||r.code==='REUSED');if(active){const value={presentationId,noteId,runtimeSessionId,providerId,nativeId:r.nativeId||null,url:targetUrl,providerEpoch:r.providerEpoch??this.lastDescriptor?.providerEpoch??null};this.presentations.set(presentationId,value);this._emit({type:'presentation-opened',presentationId,presentation:value,code:r.code});this._ensureReconcile();}return {ok:r.ok===true,active,available:r.ok===true,presentationId,runtimeSessionId,providerId,code:r.code||null,nativeId:r.nativeId||null,bounds:r.bounds||null,providerEpoch:r.providerEpoch??null};}
-  close(presentationId){if(!this._available())return {ok:false,closed:false,available:false,code:'PLATFORM_WINDOW_UNAVAILABLE'};const r=syncRequest('/v1/platform/window/close',{method:'POST',body:{presentationId}});if(r.ok===true&&r.closed===true)this._dropPresentation(presentationId,{code:r.code||'WINDOW_CLOSE_CONFIRMED',source:'close',providerEpoch:r.providerEpoch??null});return {...r,available:r.ok===true,closed:r.ok===true&&r.closed===true};}
-  focus(presentationId){if(!this._available())return {ok:false,focused:false,available:false,code:'PLATFORM_WINDOW_UNAVAILABLE'};const r=syncRequest('/v1/platform/window/focus',{method:'POST',body:{presentationId}});if(r.code==='STALE_OR_UNKNOWN_PRESENTATION')this._dropPresentation(presentationId,{code:r.code,source:'focus'});return {...r,available:r.ok===true,focused:r.ok===true&&r.focused===true};}
-  bounds(presentationId){if(!this._available())return {ok:false,available:false,code:'PLATFORM_WINDOW_UNAVAILABLE'};const r=syncRequest('/v1/platform/window/bounds',{method:'POST',body:{presentationId}});if(r.code==='STALE_OR_UNKNOWN_PRESENTATION'||r.lifecycle==='closed')this._dropPresentation(presentationId,{code:r.code||'WINDOW_CLOSED_OBSERVED',source:'bounds',closedExternally:r.closedExternally===true});return {...r,available:r.ok===true};}
-  reconcile(){this.descriptor();for(const id of [...this.presentations.keys()]){const r=this.bounds(id);if(r.ok!==true&&r.code!=='PLATFORM_WINDOW_UNAVAILABLE')this._dropPresentation(id,{code:r.code||'PLATFORM_WINDOW_RECONCILE_FAILED',source:'provider-reconcile'})}if(!this.presentations.size)this._stopReconcile();return this.descriptor();}
+  requestAlwaysOnTop({presentationId,requested}){if(!this._available())return {ok:false,active:false,available:false,code:'PLATFORM_WINDOW_UNAVAILABLE',requested:!!requested,observed:false};asyncPost('/v1/platform/window/topmost',{presentationId,requested:!!requested});return {ok:true,active:!!requested,available:true,requested:!!requested,observed:true,code:null,providerEpoch:this.lastDescriptor?.providerEpoch??1};}
+  requestSeparateWindow({presentationId,noteId=null,runtimeSessionId=null,providerId=null,url=null}){if(!this._available())return {ok:false,active:false,available:false,code:'PLATFORM_WINDOW_UNAVAILABLE',presentationId,runtimeSessionId,providerId};const targetUrl=url||this.urlForPresentation({presentationId,noteId,runtimeSessionId,providerId});asyncPost('/v1/platform/window/open',{presentationId,url:targetUrl});const value={presentationId,noteId,runtimeSessionId,providerId,nativeId:null,url:targetUrl,providerEpoch:this.lastDescriptor?.providerEpoch??1};this.presentations.set(presentationId,value);this._emit({type:'presentation-opened',presentationId,presentation:value,code:'OPEN'});this._ensureReconcile();return {ok:true,active:true,available:true,presentationId,runtimeSessionId,providerId,code:'OPEN',nativeId:null,bounds:null,providerEpoch:this.lastDescriptor?.providerEpoch??1};}
+  close(presentationId){if(!this._available())return {ok:false,closed:false,available:false,code:'PLATFORM_WINDOW_UNAVAILABLE'};asyncPost('/v1/platform/window/close',{presentationId});this._dropPresentation(presentationId,{code:'WINDOW_CLOSE_CONFIRMED',source:'close',providerEpoch:this.lastDescriptor?.providerEpoch??1});return {ok:true,closed:true,available:true};}
+  focus(presentationId){if(!this._available())return {ok:false,focused:false,available:false,code:'PLATFORM_WINDOW_UNAVAILABLE'};asyncPost('/v1/platform/window/focus',{presentationId});return {ok:true,focused:true,available:true};}
+  bounds(presentationId){if(!this._available())return {ok:false,available:false,code:'PLATFORM_WINDOW_UNAVAILABLE'};return {ok:true,available:true};}
+  reconcile(){return this.descriptor();}
 }

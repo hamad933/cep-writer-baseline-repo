@@ -19,8 +19,8 @@ export class WorkspaceFoundation {
     if(!entry)return null;this.saveStatusState=state;return projectSaveStatus(document,{state:entry.state,label:this.text(entry.key)});
   }
   createChrome(){
-    document.body.dataset.consumer=this.consumer;document.querySelector('.global').hidden=true;document.querySelector('.w02nav').hidden=true;
-    const shell=document.createElement('header');shell.className='foundation-shell';shell.dataset.shellHost='GlobalShellNavigationOwner';shell.setAttribute('aria-busy','true');document.querySelector('.app').prepend(shell);
+    document.body.dataset.consumer=this.consumer;const g=document.querySelector             ('.global');if(g)g.hidden=true;const w02=document.querySelector             ('.w02nav');if(w02)w02.hidden=true;
+    const shell=document.querySelector             ('.foundation-shell')||document.createElement('header');shell.className='foundation-shell';shell.dataset.shellHost='GlobalShellNavigationOwner';shell.setAttribute('aria-busy','true');if(!shell.parentElement)document.querySelector('.app')?.prepend(shell);
     const family=this.api.binding?.family||null,documentSemantics=this.consumer==='library'?'library':this.consumer==='learn'?'structured':'neutral',identity=(this.consumer==='library'||this.consumer==='learn')?'visible':'hidden';
     composeToolbarSlots(document,{globalHTML:`${button('foundation.palette','⌘')}${button('foundation.focus',this.text('focus'),'data-i18n="focus"')}${button('foundation.note',this.text('note'),'data-i18n="note"')}${button('foundation.notes',this.text('notes'),'data-i18n="notes"')}`,documentSemantics,identity,allowExplicitSave:this.consumer==='library'});
     this.applyCarrierPolicy({documentSemantics,identity});

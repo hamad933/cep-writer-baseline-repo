@@ -1,10 +1,11 @@
-import {SemanticCommandBus} from '../../foundation/global/commands.js';
+import {assertCanonicalSemanticCommandBus} from '../../foundation/global/commands.js';
 import {CollectionTableMatrixPresentationCore,                                       } from '../../foundation/collection/table-matrix.js';
 import {defineContextDescriptorProvider} from '../../foundation/global/context-descriptor-contract.js';
 import {createFamilyWorkspaceBinding} from '../../foundation/workspace-host.js';
 import {ReleasesDomainAdapter,RELEASES_COMMANDS} from '../../adapters/releases/domain-adapter.js';
 export const RELEASES_SURFACE_ID='releases';
-export function createReleasesSurfaceComposition({adapter=null,commands=new SemanticCommandBus(),analyticalCompareOwner=null}={}){
+export function createReleasesSurfaceComposition({adapter=null,commands=null,analyticalCompareOwner=null}={}){
+  commands=assertCanonicalSemanticCommandBus(commands,'releases.composition');
   adapter=adapter||new ReleasesDomainAdapter({analyticalCompareOwner});
   adapter.bindCommands(commands);
   const tableAdapter                                        ={adapterId:'releases.candidates',rows:()=>adapter.rows(),rowId:r=>r.candidateId,rowLabel:r=>r.candidateId,searchableText:r=>`${r.candidateId} ${r.commitSHA} ${r.treeSHA} ${r.artifactDigest} ${r.state} ${r.authorization} ${r.deployment}`,columns:[{id:'candidate',label:'Candidate',cell:r=>({text:r.candidateId,secondary:r.commitSHA,direction:'ltr'})},{id:'readiness',label:'Technical readiness',cell:r=>({text:r.state,tone:r.state==='TECHNICALLY_READY'?'success':r.state==='NOT_READY'?'danger':'warning'})},{id:'evidence',label:'Candidate evidence',cell:r=>({text:r.evidenceDigest?'BOUND':'MISSING',secondary:r.evidenceDigest||'No candidate-bound evidence',tone:r.evidenceDigest?'success':'warning',direction:'ltr'})},{id:'authorization',label:'Owner authorization',cell:r=>({text:r.authorization})},{id:'deployment',label:'Deployment observation',cell:r=>({text:r.deployment,tone:r.deployment==='DEPLOYED'?'success':r.deployment==='FAILED'?'danger':r.deployment==='UNKNOWN'?'warning':'default'})}],actions:()=>[{id:'releases.inspect',label:'Inspect'},{id:'releases.compare',label:'Compare exact pair'},{id:'releases.plan',label:'Plan'}]};

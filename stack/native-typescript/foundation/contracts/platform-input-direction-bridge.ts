@@ -26,8 +26,52 @@ export const NO_PLATFORM_INPUT_DIRECTION_BRIDGE = Object.freeze({
 });
 
 
-function syncPlatformDirection(){
-  if(typeof XMLHttpRequest==='undefined')return null;
-  try{const xhr=new XMLHttpRequest();xhr.open('GET',(globalThis.CEP_LOCAL_RUNTIME_URL||'http://127.0.0.1:4174')+'/v1/platform/input-direction',false);xhr.send();if(xhr.status<200||xhr.status>=300)return null;const value=JSON.parse(xhr.responseText||'{}');return value?.recognized===true&&(value.hint==='rtl'||value.hint==='ltr')?value.hint:null;}catch{return null}
+let cachedDirectionHint: string | null = null;
+let lastDirectionFetch = 0;
+let fetchPromise: Promise<void> | null = null;
+const DIRECTION_CACHE_TTL_MS = 1000;
+
+async function refreshPlatformDirectionAsync() {
+  if (fetchPromise) return fetchPromise;
+  const now = Date.now();
+  if (now - lastDirectionFetch < DIRECTION_CACHE_TTL_MS && cachedDirectionHint !== null) {
+    return;
+  }
+  lastDirectionFetch = now;
+  try {
+    const url = (globalThis.CEP_LOCAL_RUNTIME_URL || 'http://127.0.0.1:4174') + '/v1/platform/input-direction';
+    fetchPromise = fetch(url, { method: 'GET' })
+      .then(res => {
+        if (!res.ok) return null;
+        return res.json();
+      })
+      .then(data => {
+        if (data?.recognized === true && (data.hint === 'rtl' || data.hint === 'ltr')) {
+          cachedDirectionHint = data.hint;
+        }
+        fetchPromise = null;
+      })
+      .catch(() => {
+        fetchPromise = null;
+      });
+    return fetchPromise;
+  } catch {
+    fetchPromise = null;
+  }
 }
-export function createLocalRuntimePlatformInputDirectionBridge(){return new PlatformInputDirectionBridge(()=>syncPlatformDirection(),{id:'windows-platform-input-direction',source:'platform-os-keyboard-hint'});}
+
+function readPlatformDirectionCached() {
+  const now = Date.now();
+  if (now - lastDirectionFetch >= DIRECTION_CACHE_TTL_MS) {
+    void refreshPlatformDirectionAsync();
+  }
+  return cachedDirectionHint;
+}
+
+export function createLocalRuntimePlatformInputDirectionBridge() {
+  void refreshPlatformDirectionAsync();
+  return new PlatformInputDirectionBridge(() => readPlatformDirectionCached(), {
+    id: 'windows-platform-input-direction',
+    source: 'platform-os-keyboard-hint'
+  });
+}

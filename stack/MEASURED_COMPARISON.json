@@ -1,6 +1,6 @@
 {
-  "runtime": "v22.23.2",
-  "measured_at": "2026-09-21T22:06:30.137Z",
+  "runtime": "v22.16.0",
+  "measured_at": "2026-09-24T21:26:04.236Z",
   "scope": "Canonical stack/native-typescript source independently generates dist and dist-ts JavaScript; no generated tree writes back to canonical source.",
   "buildDirection": "stack/native-typescript -> dist + dist-ts",
   "reverseGeneratedToSourceWrites": false,
@@ -15,7 +15,7 @@
       "authority": "CANONICAL_SOURCE_TO_GENERATED_ONLY",
       "source": "stack/native-typescript",
       "destination": "dist",
-      "written": 258,
+      "written": 260,
       "copiedAssets": 2,
       "removedStale": 0
     }
@@ -29,1569 +29,1581 @@
     "static_types": "Canonical TypeScript source; proof measures erasable-syntax generation parity only.",
     "model_pass": 210,
     "model_fail": 0,
-    "emit_ms": 256.30860000000257,
+    "emit_ms": 214.9008000000016,
     "build": {
       "pass": true,
       "authority": "CANONICAL_SOURCE_TO_GENERATED_ONLY",
       "source": "stack/native-typescript",
       "destination": "dist-ts",
-      "written": 258,
+      "written": 260,
       "copiedAssets": 2,
       "removedStale": 0
     }
   },
   "identical_model_results": true,
-  "A_model_suite_median_ms": 87.53377199999977,
-  "A_model_suite_p95_ms": 109.76926000000003,
+  "A_model_suite_median_ms": 65.95409999999993,
+  "A_model_suite_p95_ms": 88.05409999999983,
   "performance_limit": "One host, warm model workload only; not cold browser startup or representative full product workload.",
   "inventory": [
     {
       "file": "adapters/analytical/results-compare-provider.js",
-      "source_ts_bytes": 4814,
+      "source_ts_bytes": 4868,
       "source_ts_lines": 55,
-      "emitted_bytes": 4814
+      "emitted_bytes": 4868
     },
     {
       "file": "adapters/analytical/rq-compare-provider.js",
-      "source_ts_bytes": 4046,
+      "source_ts_bytes": 4096,
       "source_ts_lines": 51,
-      "emitted_bytes": 4046
+      "emitted_bytes": 4096
     },
     {
       "file": "adapters/audit.js",
-      "source_ts_bytes": 13444,
+      "source_ts_bytes": 13517,
       "source_ts_lines": 74,
-      "emitted_bytes": 13444
+      "emitted_bytes": 13517
     },
     {
       "file": "adapters/backup-runtime.js",
-      "source_ts_bytes": 13867,
+      "source_ts_bytes": 13923,
       "source_ts_lines": 57,
-      "emitted_bytes": 13867
+      "emitted_bytes": 13923
     },
     {
       "file": "adapters/balanced6-acceptance-data.js",
-      "source_ts_bytes": 296234,
+      "source_ts_bytes": 296247,
       "source_ts_lines": 14,
-      "emitted_bytes": 296234
+      "emitted_bytes": 296247
     },
     {
       "file": "adapters/configuration/domain-adapter.js",
-      "source_ts_bytes": 9824,
+      "source_ts_bytes": 9873,
       "source_ts_lines": 50,
-      "emitted_bytes": 9824
+      "emitted_bytes": 9873
     },
     {
       "file": "adapters/context-learn-structured.js",
-      "source_ts_bytes": 4268,
+      "source_ts_bytes": 4333,
       "source_ts_lines": 66,
-      "emitted_bytes": 4268
+      "emitted_bytes": 4333
     },
     {
       "file": "adapters/context-library-structured.js",
-      "source_ts_bytes": 6865,
+      "source_ts_bytes": 6951,
       "source_ts_lines": 87,
-      "emitted_bytes": 6865
+      "emitted_bytes": 6951
     },
     {
       "file": "adapters/context-spatial.js",
-      "source_ts_bytes": 2561,
+      "source_ts_bytes": 2604,
       "source_ts_lines": 44,
-      "emitted_bytes": 2561
+      "emitted_bytes": 2604
     },
     {
       "file": "adapters/enterprise/domain.js",
-      "source_ts_bytes": 13161,
+      "source_ts_bytes": 13345,
       "source_ts_lines": 185,
-      "emitted_bytes": 13161
+      "emitted_bytes": 13345
     },
     {
       "file": "adapters/evidence/domain.js",
-      "source_ts_bytes": 30580,
-      "source_ts_lines": 66,
-      "emitted_bytes": 30580
+      "source_ts_bytes": 32035,
+      "source_ts_lines": 76,
+      "emitted_bytes": 32035
     },
     {
       "file": "adapters/health-runtime.js",
-      "source_ts_bytes": 12969,
-      "source_ts_lines": 134,
-      "emitted_bytes": 12969
+      "source_ts_bytes": 13584,
+      "source_ts_lines": 138,
+      "emitted_bytes": 13584
     },
     {
       "file": "adapters/labs/domain.js",
-      "source_ts_bytes": 11700,
+      "source_ts_bytes": 11743,
       "source_ts_lines": 44,
-      "emitted_bytes": 11700
+      "emitted_bytes": 11743
     },
     {
       "file": "adapters/learn.js",
-      "source_ts_bytes": 10524,
+      "source_ts_bytes": 10585,
       "source_ts_lines": 62,
-      "emitted_bytes": 10524
+      "emitted_bytes": 10585
     },
     {
       "file": "adapters/library-chrome.js",
-      "source_ts_bytes": 4728,
+      "source_ts_bytes": 4796,
       "source_ts_lines": 69,
-      "emitted_bytes": 4728
+      "emitted_bytes": 4796
     },
     {
       "file": "adapters/library-fixtures.js",
-      "source_ts_bytes": 1755,
+      "source_ts_bytes": 1767,
       "source_ts_lines": 13,
-      "emitted_bytes": 1755
+      "emitted_bytes": 1767
     },
     {
       "file": "adapters/library-note-runtime-composition.js",
-      "source_ts_bytes": 8657,
+      "source_ts_bytes": 8787,
       "source_ts_lines": 131,
-      "emitted_bytes": 8657
+      "emitted_bytes": 8787
     },
     {
       "file": "adapters/library-outline-descriptor.js",
-      "source_ts_bytes": 4062,
+      "source_ts_bytes": 4143,
       "source_ts_lines": 82,
-      "emitted_bytes": 4062
+      "emitted_bytes": 4143
     },
     {
       "file": "adapters/manual_ai/domain-adapter.js",
-      "source_ts_bytes": 12315,
+      "source_ts_bytes": 12452,
       "source_ts_lines": 138,
-      "emitted_bytes": 12315
+      "emitted_bytes": 12452
     },
     {
       "file": "adapters/mastery/domain.js",
-      "source_ts_bytes": 10643,
-      "source_ts_lines": 103,
-      "emitted_bytes": 10643
+      "source_ts_bytes": 10813,
+      "source_ts_lines": 105,
+      "emitted_bytes": 10813
     },
     {
       "file": "adapters/note-binding-domains.js",
-      "source_ts_bytes": 3098,
+      "source_ts_bytes": 3137,
       "source_ts_lines": 40,
-      "emitted_bytes": 3098
+      "emitted_bytes": 3137
     },
     {
       "file": "adapters/note-content-direction-fixture.js",
-      "source_ts_bytes": 717,
+      "source_ts_bytes": 724,
       "source_ts_lines": 8,
-      "emitted_bytes": 717
+      "emitted_bytes": 724
     },
     {
       "file": "adapters/operational-bottom-provider.js",
-      "source_ts_bytes": 2288,
+      "source_ts_bytes": 2316,
       "source_ts_lines": 29,
-      "emitted_bytes": 2288
+      "emitted_bytes": 2316
     },
     {
       "file": "adapters/persistence/local-persistence-client.js",
-      "source_ts_bytes": 4149,
+      "source_ts_bytes": 4198,
       "source_ts_lines": 50,
-      "emitted_bytes": 4149
+      "emitted_bytes": 4198
     },
     {
       "file": "adapters/portfolio/domain.js",
-      "source_ts_bytes": 12934,
-      "source_ts_lines": 108,
-      "emitted_bytes": 12934
+      "source_ts_bytes": 13111,
+      "source_ts_lines": 110,
+      "emitted_bytes": 13111
     },
     {
       "file": "adapters/processing-runtime.js",
-      "source_ts_bytes": 15342,
-      "source_ts_lines": 90,
-      "emitted_bytes": 15342
+      "source_ts_bytes": 15900,
+      "source_ts_lines": 94,
+      "emitted_bytes": 15900
     },
     {
       "file": "adapters/releases/domain-adapter.js",
-      "source_ts_bytes": 10831,
+      "source_ts_bytes": 10885,
       "source_ts_lines": 55,
-      "emitted_bytes": 10831
+      "emitted_bytes": 10885
     },
     {
       "file": "adapters/releases/release-compare-provider.js",
-      "source_ts_bytes": 3454,
+      "source_ts_bytes": 3503,
       "source_ts_lines": 50,
-      "emitted_bytes": 3454
+      "emitted_bytes": 3503
     },
     {
       "file": "adapters/results/domain.js",
-      "source_ts_bytes": 8902,
+      "source_ts_bytes": 8992,
       "source_ts_lines": 91,
-      "emitted_bytes": 8902
+      "emitted_bytes": 8992
     },
     {
       "file": "adapters/results/timeline-replay-provider.js",
-      "source_ts_bytes": 3406,
-      "source_ts_lines": 64,
-      "emitted_bytes": 3406
-    },
-    {
-      "file": "adapters/reviews/domain.js",
-      "source_ts_bytes": 22673,
-      "source_ts_lines": 49,
-      "emitted_bytes": 22673
-    },
-    {
-      "file": "adapters/rq/domain.js",
-      "source_ts_bytes": 7896,
-      "source_ts_lines": 90,
-      "emitted_bytes": 7896
-    },
-    {
-      "file": "adapters/runs/domain.js",
-      "source_ts_bytes": 4812,
-      "source_ts_lines": 24,
-      "emitted_bytes": 4812
-    },
-    {
-      "file": "adapters/runtime/local-runtime-transport.js",
-      "source_ts_bytes": 1987,
-      "source_ts_lines": 19,
-      "emitted_bytes": 1987
-    },
-    {
-      "file": "adapters/scenarios/domain.js",
-      "source_ts_bytes": 12873,
-      "source_ts_lines": 67,
-      "emitted_bytes": 12873
-    },
-    {
-      "file": "adapters/simulation.js",
-      "source_ts_bytes": 6199,
-      "source_ts_lines": 33,
-      "emitted_bytes": 6199
-    },
-    {
-      "file": "adapters/structured-bottom-provider.js",
-      "source_ts_bytes": 1837,
-      "source_ts_lines": 27,
-      "emitted_bytes": 1837
-    },
-    {
-      "file": "adapters/structured-documents.js",
-      "source_ts_bytes": 5408,
-      "source_ts_lines": 48,
-      "emitted_bytes": 5408
-    },
-    {
-      "file": "adapters/structured-note-content-compatibility.js",
-      "source_ts_bytes": 2207,
-      "source_ts_lines": 43,
-      "emitted_bytes": 2207
-    },
-    {
-      "file": "adapters/structured-note-content.js",
-      "source_ts_bytes": 15240,
-      "source_ts_lines": 230,
-      "emitted_bytes": 15240
-    },
-    {
-      "file": "adapters/today/acceptance-data.js",
-      "source_ts_bytes": 8359,
-      "source_ts_lines": 229,
-      "emitted_bytes": 8359
-    },
-    {
-      "file": "adapters/today/domain.js",
-      "source_ts_bytes": 9719,
-      "source_ts_lines": 131,
-      "emitted_bytes": 9719
-    },
-    {
-      "file": "adapters/validation.js",
-      "source_ts_bytes": 12055,
-      "source_ts_lines": 56,
-      "emitted_bytes": 12055
-    },
-    {
-      "file": "adapters/visualize/domain.js",
-      "source_ts_bytes": 12550,
-      "source_ts_lines": 74,
-      "emitted_bytes": 12550
-    },
-    {
-      "file": "adapters/w03-enterprise.js",
-      "source_ts_bytes": 2048,
-      "source_ts_lines": 19,
-      "emitted_bytes": 2048
-    },
-    {
-      "file": "adapters/w03-runs.js",
-      "source_ts_bytes": 10450,
-      "source_ts_lines": 54,
-      "emitted_bytes": 10450
-    },
-    {
-      "file": "adapters/w03-v34/domain-kernel.js",
-      "source_ts_bytes": 9514,
-      "source_ts_lines": 41,
-      "emitted_bytes": 9514
-    },
-    {
-      "file": "adapters/w03-v34/enterprise-fixture.js",
-      "source_ts_bytes": 2292,
-      "source_ts_lines": 10,
-      "emitted_bytes": 2292
-    },
-    {
-      "file": "adapters/w03-v34/runs-fixture.js",
-      "source_ts_bytes": 5253,
-      "source_ts_lines": 37,
-      "emitted_bytes": 5253
-    },
-    {
-      "file": "adapters/windows-terminal-runtime.js",
-      "source_ts_bytes": 5830,
-      "source_ts_lines": 21,
-      "emitted_bytes": 5830
-    },
-    {
-      "file": "analytical-compare-browser.js",
-      "source_ts_bytes": 5478,
-      "source_ts_lines": 39,
-      "emitted_bytes": 5478
-    },
-    {
-      "file": "analytical-compare-correction-tests.js",
-      "source_ts_bytes": 9383,
-      "source_ts_lines": 65,
-      "emitted_bytes": 9383
-    },
-    {
-      "file": "analytical-compare-tests.js",
-      "source_ts_bytes": 21633,
-      "source_ts_lines": 111,
-      "emitted_bytes": 21633
-    },
-    {
-      "file": "fixtures/w4-f-runtime-contract-fixture.js",
-      "source_ts_bytes": 1200,
-      "source_ts_lines": 15,
-      "emitted_bytes": 1200
-    },
-    {
-      "file": "foundation/accepted-runtime.js",
-      "source_ts_bytes": 348417,
-      "source_ts_lines": 746,
-      "emitted_bytes": 348417
-    },
-    {
-      "file": "foundation/analytical/compare-host.js",
-      "source_ts_bytes": 13045,
-      "source_ts_lines": 33,
-      "emitted_bytes": 13045
-    },
-    {
-      "file": "foundation/analytical/compare.js",
-      "source_ts_bytes": 17065,
-      "source_ts_lines": 211,
-      "emitted_bytes": 17065
-    },
-    {
-      "file": "foundation/audit/provenance-host.js",
-      "source_ts_bytes": 14482,
-      "source_ts_lines": 104,
-      "emitted_bytes": 14482
-    },
-    {
-      "file": "foundation/audit/provenance.js",
-      "source_ts_bytes": 10870,
-      "source_ts_lines": 211,
-      "emitted_bytes": 10870
-    },
-    {
-      "file": "foundation/collection/table-matrix-host.js",
-      "source_ts_bytes": 19811,
-      "source_ts_lines": 156,
-      "emitted_bytes": 19811
-    },
-    {
-      "file": "foundation/collection/table-matrix.js",
-      "source_ts_bytes": 8315,
-      "source_ts_lines": 157,
-      "emitted_bytes": 8315
-    },
-    {
-      "file": "foundation/contracts/analysis-provider.js",
-      "source_ts_bytes": 10439,
-      "source_ts_lines": 186,
-      "emitted_bytes": 10439
-    },
-    {
-      "file": "foundation/contracts/epistemic-state.js",
-      "source_ts_bytes": 13259,
-      "source_ts_lines": 204,
-      "emitted_bytes": 13259
-    },
-    {
-      "file": "foundation/contracts/platform-input-direction-bridge.js",
-      "source_ts_bytes": 2609,
-      "source_ts_lines": 34,
-      "emitted_bytes": 2609
-    },
-    {
-      "file": "foundation/contracts/platform-window-capability.js",
-      "source_ts_bytes": 8497,
-      "source_ts_lines": 33,
-      "emitted_bytes": 8497
-    },
-    {
-      "file": "foundation/contracts/runtime-adapter.js",
-      "source_ts_bytes": 3110,
-      "source_ts_lines": 66,
-      "emitted_bytes": 3110
-    },
-    {
-      "file": "foundation/global/bottom-provider-contract.js",
-      "source_ts_bytes": 2208,
-      "source_ts_lines": 37,
-      "emitted_bytes": 2208
-    },
-    {
-      "file": "foundation/global/bottom-shelf.js",
-      "source_ts_bytes": 16604,
-      "source_ts_lines": 192,
-      "emitted_bytes": 16604
-    },
-    {
-      "file": "foundation/global/commands.js",
-      "source_ts_bytes": 4306,
-      "source_ts_lines": 28,
-      "emitted_bytes": 4306
-    },
-    {
-      "file": "foundation/global/confirmation-host.js",
-      "source_ts_bytes": 8380,
-      "source_ts_lines": 85,
-      "emitted_bytes": 8380
-    },
-    {
-      "file": "foundation/global/context-descriptor-contract.js",
-      "source_ts_bytes": 5539,
-      "source_ts_lines": 89,
-      "emitted_bytes": 5539
-    },
-    {
-      "file": "foundation/global/context-inspector.js",
-      "source_ts_bytes": 16657,
-      "source_ts_lines": 180,
-      "emitted_bytes": 16657
-    },
-    {
-      "file": "foundation/global/feedback-contract.js",
-      "source_ts_bytes": 4463,
-      "source_ts_lines": 114,
-      "emitted_bytes": 4463
-    },
-    {
-      "file": "foundation/global/feedback.js",
-      "source_ts_bytes": 19939,
-      "source_ts_lines": 500,
-      "emitted_bytes": 19939
-    },
-    {
-      "file": "foundation/global/input-direction.js",
-      "source_ts_bytes": 3941,
-      "source_ts_lines": 48,
-      "emitted_bytes": 3941
-    },
-    {
-      "file": "foundation/global/input-keymap.js",
-      "source_ts_bytes": 8311,
-      "source_ts_lines": 141,
-      "emitted_bytes": 8311
-    },
-    {
-      "file": "foundation/global/input-ownership-contract.js",
-      "source_ts_bytes": 4559,
-      "source_ts_lines": 98,
-      "emitted_bytes": 4559
-    },
-    {
-      "file": "foundation/global/pane-layout.js",
-      "source_ts_bytes": 13334,
-      "source_ts_lines": 354,
-      "emitted_bytes": 13334
-    },
-    {
-      "file": "foundation/global/preferences/schema.js",
-      "source_ts_bytes": 3149,
-      "source_ts_lines": 20,
-      "emitted_bytes": 3149
-    },
-    {
-      "file": "foundation/global/preferences/store.js",
-      "source_ts_bytes": 5746,
-      "source_ts_lines": 25,
-      "emitted_bytes": 5746
-    },
-    {
-      "file": "foundation/global/preferences/ui-scale.js",
-      "source_ts_bytes": 7310,
-      "source_ts_lines": 160,
-      "emitted_bytes": 7310
-    },
-    {
-      "file": "foundation/global/region-contract.js",
-      "source_ts_bytes": 2174,
-      "source_ts_lines": 69,
-      "emitted_bytes": 2174
-    },
-    {
-      "file": "foundation/global/region-cycle.js",
-      "source_ts_bytes": 5552,
-      "source_ts_lines": 119,
-      "emitted_bytes": 5552
-    },
-    {
-      "file": "foundation/global/responsive-layout.js",
-      "source_ts_bytes": 1584,
-      "source_ts_lines": 37,
-      "emitted_bytes": 1584
-    },
-    {
-      "file": "foundation/global/settings/center.js",
-      "source_ts_bytes": 14975,
-      "source_ts_lines": 131,
-      "emitted_bytes": 14975
-    },
-    {
-      "file": "foundation/global/settings/search.js",
-      "source_ts_bytes": 2628,
-      "source_ts_lines": 48,
-      "emitted_bytes": 2628
-    },
-    {
-      "file": "foundation/global/settings/sections.js",
-      "source_ts_bytes": 10740,
-      "source_ts_lines": 183,
-      "emitted_bytes": 10740
-    },
-    {
-      "file": "foundation/global/shell/cep-destinations.js",
-      "source_ts_bytes": 3719,
-      "source_ts_lines": 29,
-      "emitted_bytes": 3719
-    },
-    {
-      "file": "foundation/global/shell/destination-registry.js",
-      "source_ts_bytes": 7048,
-      "source_ts_lines": 98,
-      "emitted_bytes": 7048
-    },
-    {
-      "file": "foundation/global/shell/navigation.js",
-      "source_ts_bytes": 25108,
-      "source_ts_lines": 323,
-      "emitted_bytes": 25108
-    },
-    {
-      "file": "foundation/global/toolbar-template.js",
-      "source_ts_bytes": 5134,
-      "source_ts_lines": 109,
-      "emitted_bytes": 5134
-    },
-    {
-      "file": "foundation/global/top-region.js",
-      "source_ts_bytes": 4847,
-      "source_ts_lines": 92,
-      "emitted_bytes": 4847
-    },
-    {
-      "file": "foundation/global/transient-focus.js",
-      "source_ts_bytes": 10978,
-      "source_ts_lines": 152,
-      "emitted_bytes": 10978
-    },
-    {
-      "file": "foundation/global/transient-host.js",
-      "source_ts_bytes": 1889,
-      "source_ts_lines": 21,
-      "emitted_bytes": 1889
-    },
-    {
-      "file": "foundation/global/workspace-host-kernel.js",
-      "source_ts_bytes": 1998,
-      "source_ts_lines": 58,
-      "emitted_bytes": 1998
-    },
-    {
-      "file": "foundation/models.js",
-      "source_ts_bytes": 12584,
-      "source_ts_lines": 120,
-      "emitted_bytes": 12584
-    },
-    {
-      "file": "foundation/notes/note-binding.js",
-      "source_ts_bytes": 12496,
-      "source_ts_lines": 202,
-      "emitted_bytes": 12496
-    },
-    {
-      "file": "foundation/notes/sticky-note-window.js",
-      "source_ts_bytes": 23233,
-      "source_ts_lines": 142,
-      "emitted_bytes": 23233
-    },
-    {
-      "file": "foundation/operational.js",
-      "source_ts_bytes": 10105,
-      "source_ts_lines": 26,
-      "emitted_bytes": 10105
-    },
-    {
-      "file": "foundation/operational/presentation.js",
-      "source_ts_bytes": 2302,
-      "source_ts_lines": 38,
-      "emitted_bytes": 2302
-    },
-    {
-      "file": "foundation/operational/session-owner.js",
-      "source_ts_bytes": 16684,
-      "source_ts_lines": 180,
-      "emitted_bytes": 16684
-    },
-    {
-      "file": "foundation/operational/terminal-host.js",
-      "source_ts_bytes": 17161,
-      "source_ts_lines": 98,
-      "emitted_bytes": 17161
-    },
-    {
-      "file": "foundation/operational/terminal-renderer-port.js",
-      "source_ts_bytes": 242,
-      "source_ts_lines": 5,
-      "emitted_bytes": 242
-    },
-    {
-      "file": "foundation/operational/xterm-renderer.js",
-      "source_ts_bytes": 5933,
-      "source_ts_lines": 17,
-      "emitted_bytes": 5933
-    },
-    {
-      "file": "foundation/relations.js",
-      "source_ts_bytes": 6138,
-      "source_ts_lines": 30,
-      "emitted_bytes": 6138
-    },
-    {
-      "file": "foundation/review/decision-host.js",
-      "source_ts_bytes": 14254,
-      "source_ts_lines": 174,
-      "emitted_bytes": 14254
-    },
-    {
-      "file": "foundation/review/decision.js",
-      "source_ts_bytes": 9087,
-      "source_ts_lines": 198,
-      "emitted_bytes": 9087
-    },
-    {
-      "file": "foundation/review/family-admission.js",
-      "source_ts_bytes": 3164,
-      "source_ts_lines": 52,
-      "emitted_bytes": 3164
-    },
-    {
-      "file": "foundation/review/family-host.js",
-      "source_ts_bytes": 6119,
-      "source_ts_lines": 38,
-      "emitted_bytes": 6119
-    },
-    {
-      "file": "foundation/spatial.js",
-      "source_ts_bytes": 15967,
-      "source_ts_lines": 65,
-      "emitted_bytes": 15967
-    },
-    {
-      "file": "foundation/spatial/accessible-navigator.js",
-      "source_ts_bytes": 2225,
-      "source_ts_lines": 18,
-      "emitted_bytes": 2225
-    },
-    {
-      "file": "foundation/spatial/focus-contract.js",
-      "source_ts_bytes": 939,
-      "source_ts_lines": 10,
-      "emitted_bytes": 939
-    },
-    {
-      "file": "foundation/spatial/interaction-kernel.js",
-      "source_ts_bytes": 10011,
-      "source_ts_lines": 199,
-      "emitted_bytes": 10011
-    },
-    {
-      "file": "foundation/spatial/presentation.js",
-      "source_ts_bytes": 6726,
-      "source_ts_lines": 58,
-      "emitted_bytes": 6726
-    },
-    {
-      "file": "foundation/spatial/relation-interaction.js",
-      "source_ts_bytes": 14014,
-      "source_ts_lines": 142,
-      "emitted_bytes": 14014
-    },
-    {
-      "file": "foundation/spatial/selection-kernel.js",
-      "source_ts_bytes": 7733,
-      "source_ts_lines": 45,
-      "emitted_bytes": 7733
-    },
-    {
-      "file": "foundation/structured.js",
-      "source_ts_bytes": 80657,
-      "source_ts_lines": 676,
-      "emitted_bytes": 80657
-    },
-    {
-      "file": "foundation/structured/action-descriptors.js",
-      "source_ts_bytes": 10041,
-      "source_ts_lines": 153,
-      "emitted_bytes": 10041
-    },
-    {
-      "file": "foundation/structured/action-surfaces/presentation-host.js",
-      "source_ts_bytes": 10438,
-      "source_ts_lines": 149,
-      "emitted_bytes": 10438
-    },
-    {
-      "file": "foundation/structured/block-renderer.js",
-      "source_ts_bytes": 6781,
-      "source_ts_lines": 114,
-      "emitted_bytes": 6781
-    },
-    {
-      "file": "foundation/structured/caret-bridge.js",
-      "source_ts_bytes": 4748,
-      "source_ts_lines": 56,
-      "emitted_bytes": 4748
-    },
-    {
-      "file": "foundation/structured/clipboard-contract.js",
-      "source_ts_bytes": 546,
-      "source_ts_lines": 19,
-      "emitted_bytes": 546
-    },
-    {
-      "file": "foundation/structured/clipboard-owner.js",
-      "source_ts_bytes": 16223,
-      "source_ts_lines": 150,
-      "emitted_bytes": 16223
-    },
-    {
-      "file": "foundation/structured/code-block.js",
-      "source_ts_bytes": 1744,
-      "source_ts_lines": 29,
-      "emitted_bytes": 1744
-    },
-    {
-      "file": "foundation/structured/direction-adapter.js",
-      "source_ts_bytes": 1005,
-      "source_ts_lines": 10,
-      "emitted_bytes": 1005
-    },
-    {
-      "file": "foundation/structured/drag-drop.js",
-      "source_ts_bytes": 7691,
-      "source_ts_lines": 70,
-      "emitted_bytes": 7691
-    },
-    {
-      "file": "foundation/structured/drop-target.js",
-      "source_ts_bytes": 8038,
-      "source_ts_lines": 90,
-      "emitted_bytes": 8038
-    },
-    {
-      "file": "foundation/structured/input-keymap.js",
-      "source_ts_bytes": 18711,
-      "source_ts_lines": 146,
-      "emitted_bytes": 18711
-    },
-    {
-      "file": "foundation/structured/insertion-targets.js",
-      "source_ts_bytes": 4610,
-      "source_ts_lines": 77,
-      "emitted_bytes": 4610
-    },
-    {
-      "file": "foundation/structured/outline-descriptor.js",
-      "source_ts_bytes": 16780,
-      "source_ts_lines": 324,
-      "emitted_bytes": 16780
-    },
-    {
-      "file": "foundation/structured/outline-host.js",
-      "source_ts_bytes": 8132,
-      "source_ts_lines": 85,
-      "emitted_bytes": 8132
-    },
-    {
-      "file": "foundation/structured/presentation-bridge.js",
-      "source_ts_bytes": 28977,
-      "source_ts_lines": 238,
-      "emitted_bytes": 28977
-    },
-    {
-      "file": "foundation/structured/read-inspection.js",
-      "source_ts_bytes": 6753,
-      "source_ts_lines": 139,
-      "emitted_bytes": 6753
-    },
-    {
-      "file": "foundation/structured/rich-content.js",
-      "source_ts_bytes": 6571,
-      "source_ts_lines": 36,
-      "emitted_bytes": 6571
-    },
-    {
-      "file": "foundation/structured/sanitization-policy.js",
-      "source_ts_bytes": 3282,
-      "source_ts_lines": 29,
-      "emitted_bytes": 3282
-    },
-    {
-      "file": "foundation/structured/selection-contract.js",
-      "source_ts_bytes": 592,
-      "source_ts_lines": 18,
-      "emitted_bytes": 592
-    },
-    {
-      "file": "foundation/structured/selection-dom-bridge.js",
-      "source_ts_bytes": 2249,
-      "source_ts_lines": 19,
-      "emitted_bytes": 2249
-    },
-    {
-      "file": "foundation/structured/selection-kernel.js",
-      "source_ts_bytes": 13375,
-      "source_ts_lines": 86,
-      "emitted_bytes": 13375
-    },
-    {
-      "file": "foundation/structured/shorthand.js",
-      "source_ts_bytes": 1341,
-      "source_ts_lines": 28,
-      "emitted_bytes": 1341
-    },
-    {
-      "file": "foundation/structured/surface-host.js",
-      "source_ts_bytes": 42104,
-      "source_ts_lines": 356,
-      "emitted_bytes": 42104
-    },
-    {
-      "file": "foundation/timeline/replay-host.js",
-      "source_ts_bytes": 13933,
-      "source_ts_lines": 91,
-      "emitted_bytes": 13933
-    },
-    {
-      "file": "foundation/timeline/replay.js",
-      "source_ts_bytes": 13874,
-      "source_ts_lines": 217,
-      "emitted_bytes": 13874
-    },
-    {
-      "file": "foundation/wave3-assembly.js",
-      "source_ts_bytes": 16748,
-      "source_ts_lines": 130,
-      "emitted_bytes": 16748
-    },
-    {
-      "file": "foundation/wave4-assembly.js",
-      "source_ts_bytes": 12829,
-      "source_ts_lines": 87,
-      "emitted_bytes": 12829
-    },
-    {
-      "file": "foundation/window-motion.js",
-      "source_ts_bytes": 7700,
-      "source_ts_lines": 114,
-      "emitted_bytes": 7700
-    },
-    {
-      "file": "foundation/workspace-host.js",
-      "source_ts_bytes": 29132,
-      "source_ts_lines": 346,
-      "emitted_bytes": 29132
-    },
-    {
-      "file": "foundation/workspace.js",
-      "source_ts_bytes": 15519,
-      "source_ts_lines": 51,
-      "emitted_bytes": 15519
-    },
-    {
-      "file": "main.js",
-      "source_ts_bytes": 55633,
-      "source_ts_lines": 267,
-      "emitted_bytes": 55633
-    },
-    {
-      "file": "model-tests.js",
-      "source_ts_bytes": 173652,
-      "source_ts_lines": 280,
-      "emitted_bytes": 173652
-    },
-    {
-      "file": "ps02-spatial-finite-atomicity-tests.js",
-      "source_ts_bytes": 10308,
-      "source_ts_lines": 100,
-      "emitted_bytes": 10308
-    },
-    {
-      "file": "pw08-structured-action-surfaces-tests.js",
-      "source_ts_bytes": 7930,
-      "source_ts_lines": 98,
-      "emitted_bytes": 7930
-    },
-    {
-      "file": "pw11-sticky-note-window-tests.js",
-      "source_ts_bytes": 6120,
-      "source_ts_lines": 24,
-      "emitted_bytes": 6120
-    },
-    {
-      "file": "surfaces/audit/index.js",
-      "source_ts_bytes": 8569,
-      "source_ts_lines": 32,
-      "emitted_bytes": 8569
-    },
-    {
-      "file": "surfaces/backup/index.js",
-      "source_ts_bytes": 6766,
-      "source_ts_lines": 22,
-      "emitted_bytes": 6766
-    },
-    {
-      "file": "surfaces/composition/w01-w02-rescue.js",
-      "source_ts_bytes": 4599,
-      "source_ts_lines": 80,
-      "emitted_bytes": 4599
-    },
-    {
-      "file": "surfaces/composition/w03-rescue.js",
-      "source_ts_bytes": 7808,
-      "source_ts_lines": 133,
-      "emitted_bytes": 7808
-    },
-    {
-      "file": "surfaces/composition/w04-rescue.js",
-      "source_ts_bytes": 7743,
-      "source_ts_lines": 104,
-      "emitted_bytes": 7743
-    },
-    {
-      "file": "surfaces/composition/w05-rescue.js",
-      "source_ts_bytes": 2819,
-      "source_ts_lines": 50,
-      "emitted_bytes": 2819
-    },
-    {
-      "file": "surfaces/configuration/composition.js",
-      "source_ts_bytes": 4306,
-      "source_ts_lines": 14,
-      "emitted_bytes": 4306
-    },
-    {
-      "file": "surfaces/enterprise/index.js",
-      "source_ts_bytes": 2485,
-      "source_ts_lines": 39,
-      "emitted_bytes": 2485
-    },
-    {
-      "file": "surfaces/enterprise/presentation.js",
-      "source_ts_bytes": 20033,
-      "source_ts_lines": 108,
-      "emitted_bytes": 20033
-    },
-    {
-      "file": "surfaces/evidence/index.js",
-      "source_ts_bytes": 8792,
-      "source_ts_lines": 67,
-      "emitted_bytes": 8792
-    },
-    {
-      "file": "surfaces/labs/index.js",
-      "source_ts_bytes": 2479,
-      "source_ts_lines": 13,
-      "emitted_bytes": 2479
-    },
-    {
-      "file": "surfaces/labs/presentation.js",
-      "source_ts_bytes": 15044,
-      "source_ts_lines": 25,
-      "emitted_bytes": 15044
-    },
-    {
-      "file": "surfaces/learn/surface.js",
-      "source_ts_bytes": 2152,
-      "source_ts_lines": 18,
-      "emitted_bytes": 2152
-    },
-    {
-      "file": "surfaces/library/runtime-composition.js",
-      "source_ts_bytes": 3762,
-      "source_ts_lines": 46,
-      "emitted_bytes": 3762
-    },
-    {
-      "file": "surfaces/library/surface.js",
-      "source_ts_bytes": 3038,
-      "source_ts_lines": 20,
-      "emitted_bytes": 3038
-    },
-    {
-      "file": "surfaces/m0-controller-composition.js",
-      "source_ts_bytes": 44491,
-      "source_ts_lines": 188,
-      "emitted_bytes": 44491
-    },
-    {
-      "file": "surfaces/manual_ai/composition.js",
-      "source_ts_bytes": 3886,
-      "source_ts_lines": 14,
-      "emitted_bytes": 3886
-    },
-    {
-      "file": "surfaces/mastery/composition.js",
-      "source_ts_bytes": 4308,
-      "source_ts_lines": 26,
-      "emitted_bytes": 4308
-    },
-    {
-      "file": "surfaces/portfolio/composition.js",
-      "source_ts_bytes": 4323,
-      "source_ts_lines": 26,
-      "emitted_bytes": 4323
-    },
-    {
-      "file": "surfaces/releases/composition.js",
-      "source_ts_bytes": 4372,
-      "source_ts_lines": 15,
-      "emitted_bytes": 4372
-    },
-    {
-      "file": "surfaces/results/index.js",
-      "source_ts_bytes": 3406,
-      "source_ts_lines": 16,
-      "emitted_bytes": 3406
-    },
-    {
-      "file": "surfaces/results/presentation.js",
-      "source_ts_bytes": 20170,
-      "source_ts_lines": 75,
-      "emitted_bytes": 20170
-    },
-    {
-      "file": "surfaces/reviews/index.js",
-      "source_ts_bytes": 7844,
-      "source_ts_lines": 47,
-      "emitted_bytes": 7844
-    },
-    {
-      "file": "surfaces/rq/surface.js",
-      "source_ts_bytes": 1758,
-      "source_ts_lines": 15,
-      "emitted_bytes": 1758
-    },
-    {
-      "file": "surfaces/runs/index.js",
-      "source_ts_bytes": 4532,
-      "source_ts_lines": 23,
-      "emitted_bytes": 4532
-    },
-    {
-      "file": "surfaces/runs/presentation.js",
-      "source_ts_bytes": 16723,
-      "source_ts_lines": 31,
-      "emitted_bytes": 16723
-    },
-    {
-      "file": "surfaces/scenarios/index.js",
-      "source_ts_bytes": 2664,
-      "source_ts_lines": 13,
-      "emitted_bytes": 2664
-    },
-    {
-      "file": "surfaces/scenarios/presentation.js",
-      "source_ts_bytes": 14758,
-      "source_ts_lines": 27,
-      "emitted_bytes": 14758
-    },
-    {
-      "file": "surfaces/shell/surface.js",
-      "source_ts_bytes": 6444,
-      "source_ts_lines": 73,
-      "emitted_bytes": 6444
-    },
-    {
-      "file": "surfaces/today/presentation.js",
-      "source_ts_bytes": 31916,
-      "source_ts_lines": 964,
-      "emitted_bytes": 31916
-    },
-    {
-      "file": "surfaces/today/surface.js",
-      "source_ts_bytes": 3343,
-      "source_ts_lines": 49,
-      "emitted_bytes": 3343
-    },
-    {
-      "file": "surfaces/validation/index.js",
-      "source_ts_bytes": 7949,
-      "source_ts_lines": 23,
-      "emitted_bytes": 7949
-    },
-    {
-      "file": "surfaces/visualize/surface.js",
-      "source_ts_bytes": 2947,
-      "source_ts_lines": 18,
-      "emitted_bytes": 2947
-    },
-    {
-      "file": "tests/rescue/CG2_SHARED_FAMILIES_COVERAGE/shared-family-coverage.test.js",
-      "source_ts_bytes": 5661,
-      "source_ts_lines": 83,
-      "emitted_bytes": 5661
-    },
-    {
-      "file": "tests/rescue/CG3_CONTROLLER_CORR01_LEARN_RQ_TRUTH/controller-corr01.test.js",
-      "source_ts_bytes": 2081,
-      "source_ts_lines": 10,
-      "emitted_bytes": 2081
-    },
-    {
-      "file": "tests/rescue/CG3_W01_W02_COVERAGE/cg3-w01-w02-coverage.test.js",
-      "source_ts_bytes": 6373,
-      "source_ts_lines": 59,
-      "emitted_bytes": 6373
-    },
-    {
-      "file": "tests/rescue/CG4_W03_COVERAGE/controller-corr01-w03-lifecycle-truth.test.js",
-      "source_ts_bytes": 5119,
-      "source_ts_lines": 26,
-      "emitted_bytes": 5119
-    },
-    {
-      "file": "tests/rescue/CG4_W03_COVERAGE/group-composition.test.js",
-      "source_ts_bytes": 4882,
-      "source_ts_lines": 30,
-      "emitted_bytes": 4882
-    },
-    {
-      "file": "tests/rescue/CG4_W03_COVERAGE/group-falsification.test.js",
-      "source_ts_bytes": 3714,
-      "source_ts_lines": 26,
-      "emitted_bytes": 3714
-    },
-    {
-      "file": "tests/rescue/CG5_CONTROLLER_CORR01_A03_DOMAIN_INTEGRITY/controller-corr01.test.js",
-      "source_ts_bytes": 5578,
-      "source_ts_lines": 30,
-      "emitted_bytes": 5578
-    },
-    {
-      "file": "tests/rescue/CG5_W04_COVERAGE/w04-convergence.test.js",
-      "source_ts_bytes": 3908,
-      "source_ts_lines": 24,
-      "emitted_bytes": 3908
-    },
-    {
-      "file": "tests/rescue/CG6_W05_COVERAGE/cg6-w05-coverage.test.js",
-      "source_ts_bytes": 6141,
-      "source_ts_lines": 16,
-      "emitted_bytes": 6141
-    },
-    {
-      "file": "tests/rescue/CG6_W05_COVERAGE/controller-corr01-w05-truth.test.js",
-      "source_ts_bytes": 4370,
-      "source_ts_lines": 10,
-      "emitted_bytes": 4370
-    },
-    {
-      "file": "tests/rescue/S01_SHARED_STRUCTURED_EDITOR/s01-browser-proof.js",
-      "source_ts_bytes": 4437,
-      "source_ts_lines": 21,
-      "emitted_bytes": 4437
-    },
-    {
-      "file": "tests/rescue/S01_SHARED_STRUCTURED_EDITOR/s01-structured-editor-core-tests.js",
-      "source_ts_bytes": 14004,
-      "source_ts_lines": 91,
-      "emitted_bytes": 14004
-    },
-    {
-      "file": "tests/rescue/S03_SHARED_SETTINGS_TRANSIENT/s03-shared-settings-transient-tests.js",
-      "source_ts_bytes": 14720,
-      "source_ts_lines": 85,
-      "emitted_bytes": 14720
-    },
-    {
-      "file": "tests/rescue/S04_SHARED_NOTES_OPERATIONAL/s04-shared-notes-operational-tests.js",
-      "source_ts_bytes": 9618,
-      "source_ts_lines": 35,
-      "emitted_bytes": 9618
-    },
-    {
-      "file": "tests/rescue/S06_SHARED_COLLECTION_AUDIT_REVIEW/adapter-compatibility.test.js",
-      "source_ts_bytes": 1499,
-      "source_ts_lines": 26,
-      "emitted_bytes": 1499
-    },
-    {
-      "file": "tests/rescue/S06_SHARED_COLLECTION_AUDIT_REVIEW/audit-provenance-core.test.js",
-      "source_ts_bytes": 1667,
-      "source_ts_lines": 27,
-      "emitted_bytes": 1667
-    },
-    {
-      "file": "tests/rescue/S06_SHARED_COLLECTION_AUDIT_REVIEW/collection-core.test.js",
-      "source_ts_bytes": 1852,
-      "source_ts_lines": 29,
-      "emitted_bytes": 1852
-    },
-    {
-      "file": "tests/rescue/S06_SHARED_COLLECTION_AUDIT_REVIEW/review-decision-family.test.js",
-      "source_ts_bytes": 3300,
-      "source_ts_lines": 44,
-      "emitted_bytes": 3300
-    },
-    {
-      "file": "tests/rescue/S06_SHARED_COLLECTION_AUDIT_REVIEW/source-boundary.test.js",
-      "source_ts_bytes": 861,
-      "source_ts_lines": 14,
-      "emitted_bytes": 861
-    },
-    {
-      "file": "tests/rescue/S07_W01_W02_SHELL_TODAY/s07-contracts.test.js",
-      "source_ts_bytes": 8598,
-      "source_ts_lines": 106,
-      "emitted_bytes": 8598
-    },
-    {
-      "file": "tests/rescue/S08_W01_W02_LIBRARY_LEARN/s08-falsification.js",
-      "source_ts_bytes": 13867,
-      "source_ts_lines": 49,
-      "emitted_bytes": 13867
-    },
-    {
-      "file": "tests/rescue/S09_W01_W02_RQ_VISUALIZE/s09-reexecution-tests.js",
-      "source_ts_bytes": 10420,
-      "source_ts_lines": 41,
-      "emitted_bytes": 10420
-    },
-    {
-      "file": "tests/rescue/S10_W03_ENTERPRISE/domain-and-lifecycle.test.js",
-      "source_ts_bytes": 5324,
-      "source_ts_lines": 67,
-      "emitted_bytes": 5324
-    },
-    {
-      "file": "tests/rescue/S10_W03_ENTERPRISE/source-duplicate-owner.test.js",
-      "source_ts_bytes": 1074,
-      "source_ts_lines": 11,
-      "emitted_bytes": 1074
-    },
-    {
-      "file": "tests/rescue/S11_W03_SCENARIOS_LABS/lab-task-graph.test.js",
-      "source_ts_bytes": 4717,
-      "source_ts_lines": 19,
-      "emitted_bytes": 4717
-    },
-    {
-      "file": "tests/rescue/S11_W03_SCENARIOS_LABS/scenario-studio.test.js",
-      "source_ts_bytes": 4841,
-      "source_ts_lines": 27,
-      "emitted_bytes": 4841
-    },
-    {
-      "file": "tests/rescue/S12_W03_RUNS/runs-operational-workspace.test.js",
-      "source_ts_bytes": 7025,
-      "source_ts_lines": 61,
-      "emitted_bytes": 7025
-    },
-    {
-      "file": "tests/rescue/S13_W03_RESULTS/results-rescue.test.js",
-      "source_ts_bytes": 4666,
-      "source_ts_lines": 31,
-      "emitted_bytes": 4666
-    },
-    {
-      "file": "tests/rescue/S14_W04_EVIDENCE_REVIEWS/domain-lifecycle.test.js",
-      "source_ts_bytes": 9494,
-      "source_ts_lines": 28,
-      "emitted_bytes": 9494
-    },
-    {
-      "file": "tests/rescue/S14_W04_EVIDENCE_REVIEWS/surface-contract.test.js",
-      "source_ts_bytes": 2480,
-      "source_ts_lines": 13,
-      "emitted_bytes": 2480
-    },
-    {
-      "file": "tests/rescue/S15_W04_MASTERY_PORTFOLIO/domain-authority.test.js",
-      "source_ts_bytes": 8698,
-      "source_ts_lines": 49,
-      "emitted_bytes": 8698
-    },
-    {
-      "file": "tests/rescue/S16_W05_HEALTH_PROCESSING/s16-health-processing-tests.js",
-      "source_ts_bytes": 9316,
-      "source_ts_lines": 62,
-      "emitted_bytes": 9316
-    },
-    {
-      "file": "tests/rescue/S17_W05_VALIDATION_MANUAL_AI/s17-tests.js",
-      "source_ts_bytes": 6191,
-      "source_ts_lines": 22,
-      "emitted_bytes": 6191
-    },
-    {
-      "file": "tests/rescue/S18_W05_BACKUP_AUDIT/domain-tests.js",
-      "source_ts_bytes": 6042,
-      "source_ts_lines": 29,
-      "emitted_bytes": 6042
-    },
-    {
-      "file": "tests/rescue/S18_W05_BACKUP_AUDIT/source-boundary-tests.js",
-      "source_ts_bytes": 2099,
-      "source_ts_lines": 12,
-      "emitted_bytes": 2099
-    },
-    {
-      "file": "tests/rescue/S19_W05_RELEASES_CONFIGURATION/s19-tests.js",
-      "source_ts_bytes": 8650,
-      "source_ts_lines": 34,
-      "emitted_bytes": 8650
-    },
-    {
-      "file": "tests/surfaces/configuration/configuration-tests.js",
-      "source_ts_bytes": 4432,
-      "source_ts_lines": 21,
-      "emitted_bytes": 4432
-    },
-    {
-      "file": "tests/surfaces/enterprise/domain.test.js",
-      "source_ts_bytes": 1290,
-      "source_ts_lines": 11,
-      "emitted_bytes": 1290
-    },
-    {
-      "file": "tests/surfaces/evidence/domain.test.js",
-      "source_ts_bytes": 1355,
-      "source_ts_lines": 3,
-      "emitted_bytes": 1355
-    },
-    {
-      "file": "tests/surfaces/labs/domain.test.js",
-      "source_ts_bytes": 1384,
-      "source_ts_lines": 10,
-      "emitted_bytes": 1384
-    },
-    {
-      "file": "tests/surfaces/manual_ai/manual-ai-tests.js",
-      "source_ts_bytes": 4239,
-      "source_ts_lines": 20,
-      "emitted_bytes": 4239
-    },
-    {
-      "file": "tests/surfaces/mastery/domain.test.js",
-      "source_ts_bytes": 2266,
-      "source_ts_lines": 14,
-      "emitted_bytes": 2266
-    },
-    {
-      "file": "tests/surfaces/portfolio/domain.test.js",
-      "source_ts_bytes": 1811,
-      "source_ts_lines": 10,
-      "emitted_bytes": 1811
-    },
-    {
-      "file": "tests/surfaces/releases/releases-tests.js",
-      "source_ts_bytes": 4108,
-      "source_ts_lines": 20,
-      "emitted_bytes": 4108
-    },
-    {
-      "file": "tests/surfaces/results/domain.test.js",
-      "source_ts_bytes": 2008,
-      "source_ts_lines": 16,
-      "emitted_bytes": 2008
-    },
-    {
-      "file": "tests/surfaces/reviews/domain.test.js",
-      "source_ts_bytes": 1516,
-      "source_ts_lines": 3,
-      "emitted_bytes": 1516
-    },
-    {
-      "file": "tests/surfaces/runs/domain.test.js",
-      "source_ts_bytes": 1638,
-      "source_ts_lines": 11,
-      "emitted_bytes": 1638
-    },
-    {
-      "file": "tests/surfaces/runs/group-regression.test.js",
-      "source_ts_bytes": 1884,
-      "source_ts_lines": 19,
-      "emitted_bytes": 1884
-    },
-    {
-      "file": "tests/surfaces/scenarios/domain.test.js",
-      "source_ts_bytes": 1468,
-      "source_ts_lines": 8,
-      "emitted_bytes": 1468
-    },
-    {
-      "file": "w3-d-bottom-deep-work-tests.js",
-      "source_ts_bytes": 15810,
-      "source_ts_lines": 51,
-      "emitted_bytes": 15810
-    },
-    {
-      "file": "w4-c-direction-rich-content-tests.js",
-      "source_ts_bytes": 13070,
-      "source_ts_lines": 47,
-      "emitted_bytes": 13070
-    },
-    {
-      "file": "w4-d-structured-drag-drop-tests.js",
-      "source_ts_bytes": 7739,
-      "source_ts_lines": 21,
-      "emitted_bytes": 7739
-    },
-    {
-      "file": "w4-e-settings-center-tests.js",
-      "source_ts_bytes": 19105,
-      "source_ts_lines": 79,
-      "emitted_bytes": 19105
-    },
-    {
-      "file": "w4-f-operational-session-tests.js",
-      "source_ts_bytes": 8439,
-      "source_ts_lines": 42,
-      "emitted_bytes": 8439
-    },
-    {
-      "file": "w4-g-epistemic-confirmation-tests.js",
-      "source_ts_bytes": 16849,
-      "source_ts_lines": 80,
-      "emitted_bytes": 16849
-    },
-    {
-      "file": "w5-a-structured-surface-host-browser.js",
-      "source_ts_bytes": 9072,
-      "source_ts_lines": 56,
-      "emitted_bytes": 9072
-    },
-    {
-      "file": "w5-a-structured-surface-host-tests.js",
-      "source_ts_bytes": 44410,
-      "source_ts_lines": 63,
-      "emitted_bytes": 44410
-    },
-    {
-      "file": "w5-b-structured-navigation-browser-harness.js",
-      "source_ts_bytes": 2394,
-      "source_ts_lines": 23,
-      "emitted_bytes": 2394
-    },
-    {
-      "file": "w5-b-structured-navigation-correction-tests.js",
-      "source_ts_bytes": 9097,
-      "source_ts_lines": 88,
-      "emitted_bytes": 9097
-    },
-    {
-      "file": "w5-b-structured-navigation-delta2-tests.js",
-      "source_ts_bytes": 11343,
-      "source_ts_lines": 137,
-      "emitted_bytes": 11343
-    },
-    {
-      "file": "w5-b-structured-navigation-micro3-tests.js",
-      "source_ts_bytes": 4909,
-      "source_ts_lines": 60,
-      "emitted_bytes": 4909
-    },
-    {
-      "file": "w5-b-structured-navigation-tests.js",
-      "source_ts_bytes": 10660,
-      "source_ts_lines": 27,
-      "emitted_bytes": 10660
-    },
-    {
-      "file": "w5-c-structured-consumer-parity-browser.js",
-      "source_ts_bytes": 11121,
-      "source_ts_lines": 52,
-      "emitted_bytes": 11121
-    },
-    {
-      "file": "w5-c-structured-consumer-parity-tests.js",
-      "source_ts_bytes": 25310,
-      "source_ts_lines": 63,
-      "emitted_bytes": 25310
-    },
-    {
-      "file": "w6-a-sticky-note-window-browser.js",
-      "source_ts_bytes": 2808,
-      "source_ts_lines": 23,
-      "emitted_bytes": 2808
-    },
-    {
-      "file": "w6-a-sticky-note-window-tests.js",
-      "source_ts_bytes": 10628,
-      "source_ts_lines": 37,
-      "emitted_bytes": 10628
-    },
-    {
-      "file": "w6-b-note-binding-browser.js",
       "source_ts_bytes": 3469,
-      "source_ts_lines": 18,
+      "source_ts_lines": 64,
       "emitted_bytes": 3469
     },
     {
-      "file": "w6-b-note-binding-correction-tests.js",
-      "source_ts_bytes": 7796,
+      "file": "adapters/reviews/domain.js",
+      "source_ts_bytes": 22730,
+      "source_ts_lines": 51,
+      "emitted_bytes": 22730
+    },
+    {
+      "file": "adapters/rq/domain.js",
+      "source_ts_bytes": 9143,
+      "source_ts_lines": 97,
+      "emitted_bytes": 9143
+    },
+    {
+      "file": "adapters/runs/domain.js",
+      "source_ts_bytes": 4835,
+      "source_ts_lines": 24,
+      "emitted_bytes": 4835
+    },
+    {
+      "file": "adapters/runtime/local-runtime-transport.js",
+      "source_ts_bytes": 2005,
+      "source_ts_lines": 19,
+      "emitted_bytes": 2005
+    },
+    {
+      "file": "adapters/scenarios/domain.js",
+      "source_ts_bytes": 12939,
+      "source_ts_lines": 67,
+      "emitted_bytes": 12939
+    },
+    {
+      "file": "adapters/simulation.js",
+      "source_ts_bytes": 6231,
+      "source_ts_lines": 33,
+      "emitted_bytes": 6231
+    },
+    {
+      "file": "adapters/structured-bottom-provider.js",
+      "source_ts_bytes": 1863,
+      "source_ts_lines": 27,
+      "emitted_bytes": 1863
+    },
+    {
+      "file": "adapters/structured-documents.js",
+      "source_ts_bytes": 5455,
+      "source_ts_lines": 48,
+      "emitted_bytes": 5455
+    },
+    {
+      "file": "adapters/structured-note-content-compatibility.js",
+      "source_ts_bytes": 2249,
+      "source_ts_lines": 43,
+      "emitted_bytes": 2249
+    },
+    {
+      "file": "adapters/structured-note-content.js",
+      "source_ts_bytes": 15469,
+      "source_ts_lines": 230,
+      "emitted_bytes": 15469
+    },
+    {
+      "file": "adapters/today/acceptance-data.js",
+      "source_ts_bytes": 8588,
+      "source_ts_lines": 229,
+      "emitted_bytes": 8588
+    },
+    {
+      "file": "adapters/today/domain.js",
+      "source_ts_bytes": 17006,
+      "source_ts_lines": 182,
+      "emitted_bytes": 17006
+    },
+    {
+      "file": "adapters/validation.js",
+      "source_ts_bytes": 12110,
+      "source_ts_lines": 56,
+      "emitted_bytes": 12110
+    },
+    {
+      "file": "adapters/visualize/domain.js",
+      "source_ts_bytes": 36223,
+      "source_ts_lines": 110,
+      "emitted_bytes": 36223
+    },
+    {
+      "file": "adapters/w03-enterprise.js",
+      "source_ts_bytes": 2066,
+      "source_ts_lines": 19,
+      "emitted_bytes": 2066
+    },
+    {
+      "file": "adapters/w03-runs.js",
+      "source_ts_bytes": 10503,
+      "source_ts_lines": 54,
+      "emitted_bytes": 10503
+    },
+    {
+      "file": "adapters/w03-v34/domain-kernel.js",
+      "source_ts_bytes": 9554,
+      "source_ts_lines": 41,
+      "emitted_bytes": 9554
+    },
+    {
+      "file": "adapters/w03-v34/enterprise-fixture.js",
+      "source_ts_bytes": 2301,
+      "source_ts_lines": 10,
+      "emitted_bytes": 2301
+    },
+    {
+      "file": "adapters/w03-v34/runs-fixture.js",
+      "source_ts_bytes": 5289,
+      "source_ts_lines": 37,
+      "emitted_bytes": 5289
+    },
+    {
+      "file": "adapters/windows-terminal-runtime.js",
+      "source_ts_bytes": 5850,
+      "source_ts_lines": 21,
+      "emitted_bytes": 5850
+    },
+    {
+      "file": "analytical-compare-browser.js",
+      "source_ts_bytes": 5516,
+      "source_ts_lines": 39,
+      "emitted_bytes": 5516
+    },
+    {
+      "file": "analytical-compare-correction-tests.js",
+      "source_ts_bytes": 9447,
+      "source_ts_lines": 65,
+      "emitted_bytes": 9447
+    },
+    {
+      "file": "analytical-compare-tests.js",
+      "source_ts_bytes": 21743,
+      "source_ts_lines": 111,
+      "emitted_bytes": 21743
+    },
+    {
+      "file": "fixtures/w4-f-runtime-contract-fixture.js",
+      "source_ts_bytes": 1214,
+      "source_ts_lines": 15,
+      "emitted_bytes": 1214
+    },
+    {
+      "file": "foundation/accepted-runtime.js",
+      "source_ts_bytes": 351169,
+      "source_ts_lines": 729,
+      "emitted_bytes": 351169
+    },
+    {
+      "file": "foundation/analytical/compare-host.js",
+      "source_ts_bytes": 13077,
+      "source_ts_lines": 33,
+      "emitted_bytes": 13077
+    },
+    {
+      "file": "foundation/analytical/compare.js",
+      "source_ts_bytes": 17275,
+      "source_ts_lines": 211,
+      "emitted_bytes": 17275
+    },
+    {
+      "file": "foundation/audit/provenance-host.js",
+      "source_ts_bytes": 14585,
+      "source_ts_lines": 104,
+      "emitted_bytes": 14585
+    },
+    {
+      "file": "foundation/audit/provenance.js",
+      "source_ts_bytes": 11080,
+      "source_ts_lines": 211,
+      "emitted_bytes": 11080
+    },
+    {
+      "file": "foundation/collection/table-matrix-host.js",
+      "source_ts_bytes": 19966,
+      "source_ts_lines": 156,
+      "emitted_bytes": 19966
+    },
+    {
+      "file": "foundation/collection/table-matrix.js",
+      "source_ts_bytes": 8471,
+      "source_ts_lines": 157,
+      "emitted_bytes": 8471
+    },
+    {
+      "file": "foundation/contracts/analysis-provider.js",
+      "source_ts_bytes": 10624,
+      "source_ts_lines": 186,
+      "emitted_bytes": 10624
+    },
+    {
+      "file": "foundation/contracts/epistemic-state.js",
+      "source_ts_bytes": 13462,
+      "source_ts_lines": 204,
+      "emitted_bytes": 13462
+    },
+    {
+      "file": "foundation/contracts/platform-input-direction-bridge.js",
+      "source_ts_bytes": 3508,
+      "source_ts_lines": 78,
+      "emitted_bytes": 3508
+    },
+    {
+      "file": "foundation/contracts/platform-window-capability.js",
+      "source_ts_bytes": 7842,
+      "source_ts_lines": 64,
+      "emitted_bytes": 7842
+    },
+    {
+      "file": "foundation/contracts/runtime-adapter.js",
+      "source_ts_bytes": 3175,
+      "source_ts_lines": 66,
+      "emitted_bytes": 3175
+    },
+    {
+      "file": "foundation/global/bottom-provider-contract.js",
+      "source_ts_bytes": 2244,
+      "source_ts_lines": 37,
+      "emitted_bytes": 2244
+    },
+    {
+      "file": "foundation/global/bottom-shelf.js",
+      "source_ts_bytes": 16795,
+      "source_ts_lines": 192,
+      "emitted_bytes": 16795
+    },
+    {
+      "file": "foundation/global/commands.js",
+      "source_ts_bytes": 5045,
+      "source_ts_lines": 35,
+      "emitted_bytes": 5045
+    },
+    {
+      "file": "foundation/global/confirmation-host.js",
+      "source_ts_bytes": 8464,
+      "source_ts_lines": 85,
+      "emitted_bytes": 8464
+    },
+    {
+      "file": "foundation/global/context-descriptor-contract.js",
+      "source_ts_bytes": 5627,
+      "source_ts_lines": 89,
+      "emitted_bytes": 5627
+    },
+    {
+      "file": "foundation/global/context-inspector.js",
+      "source_ts_bytes": 16836,
+      "source_ts_lines": 180,
+      "emitted_bytes": 16836
+    },
+    {
+      "file": "foundation/global/feedback-contract.js",
+      "source_ts_bytes": 4576,
+      "source_ts_lines": 114,
+      "emitted_bytes": 4576
+    },
+    {
+      "file": "foundation/global/feedback.js",
+      "source_ts_bytes": 20438,
+      "source_ts_lines": 500,
+      "emitted_bytes": 20438
+    },
+    {
+      "file": "foundation/global/input-direction.js",
+      "source_ts_bytes": 4274,
+      "source_ts_lines": 57,
+      "emitted_bytes": 4274
+    },
+    {
+      "file": "foundation/global/input-keymap.js",
+      "source_ts_bytes": 8451,
+      "source_ts_lines": 141,
+      "emitted_bytes": 8451
+    },
+    {
+      "file": "foundation/global/input-ownership-contract.js",
+      "source_ts_bytes": 5279,
+      "source_ts_lines": 111,
+      "emitted_bytes": 5279
+    },
+    {
+      "file": "foundation/global/pane-layout.js",
+      "source_ts_bytes": 13687,
+      "source_ts_lines": 354,
+      "emitted_bytes": 13687
+    },
+    {
+      "file": "foundation/global/preferences/schema.js",
+      "source_ts_bytes": 3168,
+      "source_ts_lines": 20,
+      "emitted_bytes": 3168
+    },
+    {
+      "file": "foundation/global/preferences/store.js",
+      "source_ts_bytes": 5770,
+      "source_ts_lines": 25,
+      "emitted_bytes": 5770
+    },
+    {
+      "file": "foundation/global/preferences/ui-scale.js",
+      "source_ts_bytes": 7469,
+      "source_ts_lines": 160,
+      "emitted_bytes": 7469
+    },
+    {
+      "file": "foundation/global/region-contract.js",
+      "source_ts_bytes": 2197,
+      "source_ts_lines": 68,
+      "emitted_bytes": 2197
+    },
+    {
+      "file": "foundation/global/region-cycle.js",
+      "source_ts_bytes": 5670,
+      "source_ts_lines": 119,
+      "emitted_bytes": 5670
+    },
+    {
+      "file": "foundation/global/responsive-layout.js",
+      "source_ts_bytes": 1620,
+      "source_ts_lines": 37,
+      "emitted_bytes": 1620
+    },
+    {
+      "file": "foundation/global/settings/center.js",
+      "source_ts_bytes": 19672,
+      "source_ts_lines": 178,
+      "emitted_bytes": 19672
+    },
+    {
+      "file": "foundation/global/settings/search.js",
+      "source_ts_bytes": 2675,
+      "source_ts_lines": 48,
+      "emitted_bytes": 2675
+    },
+    {
+      "file": "foundation/global/settings/sections.js",
+      "source_ts_bytes": 10922,
+      "source_ts_lines": 183,
+      "emitted_bytes": 10922
+    },
+    {
+      "file": "foundation/global/shell/cep-destinations.js",
+      "source_ts_bytes": 3747,
+      "source_ts_lines": 29,
+      "emitted_bytes": 3747
+    },
+    {
+      "file": "foundation/global/shell/destination-registry.js",
+      "source_ts_bytes": 7145,
+      "source_ts_lines": 98,
+      "emitted_bytes": 7145
+    },
+    {
+      "file": "foundation/global/shell/navigation.js",
+      "source_ts_bytes": 29284,
+      "source_ts_lines": 403,
+      "emitted_bytes": 29284
+    },
+    {
+      "file": "foundation/global/toolbar-template.js",
+      "source_ts_bytes": 7258,
+      "source_ts_lines": 126,
+      "emitted_bytes": 7258
+    },
+    {
+      "file": "foundation/global/top-region.js",
+      "source_ts_bytes": 4938,
+      "source_ts_lines": 92,
+      "emitted_bytes": 4938
+    },
+    {
+      "file": "foundation/global/transient-focus.js",
+      "source_ts_bytes": 11129,
+      "source_ts_lines": 152,
+      "emitted_bytes": 11129
+    },
+    {
+      "file": "foundation/global/transient-host.js",
+      "source_ts_bytes": 1909,
+      "source_ts_lines": 21,
+      "emitted_bytes": 1909
+    },
+    {
+      "file": "foundation/global/workspace-host-kernel.js",
+      "source_ts_bytes": 2041,
+      "source_ts_lines": 58,
+      "emitted_bytes": 2041
+    },
+    {
+      "file": "foundation/models.js",
+      "source_ts_bytes": 12703,
+      "source_ts_lines": 120,
+      "emitted_bytes": 12703
+    },
+    {
+      "file": "foundation/notes/note-binding.js",
+      "source_ts_bytes": 12697,
+      "source_ts_lines": 202,
+      "emitted_bytes": 12697
+    },
+    {
+      "file": "foundation/notes/sticky-note-window.js",
+      "source_ts_bytes": 23374,
+      "source_ts_lines": 142,
+      "emitted_bytes": 23374
+    },
+    {
+      "file": "foundation/operational.js",
+      "source_ts_bytes": 10130,
+      "source_ts_lines": 26,
+      "emitted_bytes": 10130
+    },
+    {
+      "file": "foundation/operational/presentation.js",
+      "source_ts_bytes": 2339,
+      "source_ts_lines": 38,
+      "emitted_bytes": 2339
+    },
+    {
+      "file": "foundation/operational/session-owner.js",
+      "source_ts_bytes": 16863,
+      "source_ts_lines": 180,
+      "emitted_bytes": 16863
+    },
+    {
+      "file": "foundation/operational/terminal-host.js",
+      "source_ts_bytes": 17258,
+      "source_ts_lines": 98,
+      "emitted_bytes": 17258
+    },
+    {
+      "file": "foundation/operational/terminal-renderer-port.js",
+      "source_ts_bytes": 246,
+      "source_ts_lines": 5,
+      "emitted_bytes": 246
+    },
+    {
+      "file": "foundation/operational/xterm-renderer.js",
+      "source_ts_bytes": 5949,
+      "source_ts_lines": 17,
+      "emitted_bytes": 5949
+    },
+    {
+      "file": "foundation/relations.js",
+      "source_ts_bytes": 6167,
+      "source_ts_lines": 30,
+      "emitted_bytes": 6167
+    },
+    {
+      "file": "foundation/review/decision-host.js",
+      "source_ts_bytes": 14427,
+      "source_ts_lines": 174,
+      "emitted_bytes": 14427
+    },
+    {
+      "file": "foundation/review/decision.js",
+      "source_ts_bytes": 9284,
+      "source_ts_lines": 198,
+      "emitted_bytes": 9284
+    },
+    {
+      "file": "foundation/review/family-admission.js",
+      "source_ts_bytes": 3215,
+      "source_ts_lines": 52,
+      "emitted_bytes": 3215
+    },
+    {
+      "file": "foundation/review/family-host.js",
+      "source_ts_bytes": 6156,
+      "source_ts_lines": 38,
+      "emitted_bytes": 6156
+    },
+    {
+      "file": "foundation/spatial.js",
+      "source_ts_bytes": 16031,
+      "source_ts_lines": 65,
+      "emitted_bytes": 16031
+    },
+    {
+      "file": "foundation/spatial/accessible-navigator.js",
+      "source_ts_bytes": 2242,
+      "source_ts_lines": 18,
+      "emitted_bytes": 2242
+    },
+    {
+      "file": "foundation/spatial/focus-contract.js",
+      "source_ts_bytes": 948,
+      "source_ts_lines": 10,
+      "emitted_bytes": 948
+    },
+    {
+      "file": "foundation/spatial/interaction-kernel.js",
+      "source_ts_bytes": 10209,
+      "source_ts_lines": 199,
+      "emitted_bytes": 10209
+    },
+    {
+      "file": "foundation/spatial/presentation.js",
+      "source_ts_bytes": 6783,
+      "source_ts_lines": 58,
+      "emitted_bytes": 6783
+    },
+    {
+      "file": "foundation/spatial/relation-interaction.js",
+      "source_ts_bytes": 14155,
+      "source_ts_lines": 142,
+      "emitted_bytes": 14155
+    },
+    {
+      "file": "foundation/spatial/selection-kernel.js",
+      "source_ts_bytes": 7777,
+      "source_ts_lines": 45,
+      "emitted_bytes": 7777
+    },
+    {
+      "file": "foundation/structured.js",
+      "source_ts_bytes": 81332,
+      "source_ts_lines": 676,
+      "emitted_bytes": 81332
+    },
+    {
+      "file": "foundation/structured/action-descriptors.js",
+      "source_ts_bytes": 10193,
+      "source_ts_lines": 153,
+      "emitted_bytes": 10193
+    },
+    {
+      "file": "foundation/structured/action-surfaces/presentation-host.js",
+      "source_ts_bytes": 10586,
+      "source_ts_lines": 149,
+      "emitted_bytes": 10586
+    },
+    {
+      "file": "foundation/structured/block-renderer.js",
+      "source_ts_bytes": 6894,
+      "source_ts_lines": 114,
+      "emitted_bytes": 6894
+    },
+    {
+      "file": "foundation/structured/caret-bridge.js",
+      "source_ts_bytes": 4803,
+      "source_ts_lines": 56,
+      "emitted_bytes": 4803
+    },
+    {
+      "file": "foundation/structured/clipboard-contract.js",
+      "source_ts_bytes": 564,
+      "source_ts_lines": 19,
+      "emitted_bytes": 564
+    },
+    {
+      "file": "foundation/structured/clipboard-owner.js",
+      "source_ts_bytes": 16372,
+      "source_ts_lines": 150,
+      "emitted_bytes": 16372
+    },
+    {
+      "file": "foundation/structured/code-block.js",
+      "source_ts_bytes": 1772,
+      "source_ts_lines": 29,
+      "emitted_bytes": 1772
+    },
+    {
+      "file": "foundation/structured/direction-adapter.js",
+      "source_ts_bytes": 1014,
+      "source_ts_lines": 10,
+      "emitted_bytes": 1014
+    },
+    {
+      "file": "foundation/structured/drag-drop.js",
+      "source_ts_bytes": 7760,
+      "source_ts_lines": 70,
+      "emitted_bytes": 7760
+    },
+    {
+      "file": "foundation/structured/drop-target.js",
+      "source_ts_bytes": 8127,
+      "source_ts_lines": 90,
+      "emitted_bytes": 8127
+    },
+    {
+      "file": "foundation/structured/input-keymap.js",
+      "source_ts_bytes": 18856,
+      "source_ts_lines": 146,
+      "emitted_bytes": 18856
+    },
+    {
+      "file": "foundation/structured/insertion-targets.js",
+      "source_ts_bytes": 4686,
+      "source_ts_lines": 77,
+      "emitted_bytes": 4686
+    },
+    {
+      "file": "foundation/structured/outline-descriptor.js",
+      "source_ts_bytes": 17103,
+      "source_ts_lines": 324,
+      "emitted_bytes": 17103
+    },
+    {
+      "file": "foundation/structured/outline-host.js",
+      "source_ts_bytes": 8216,
+      "source_ts_lines": 85,
+      "emitted_bytes": 8216
+    },
+    {
+      "file": "foundation/structured/presentation-bridge.js",
+      "source_ts_bytes": 29214,
+      "source_ts_lines": 238,
+      "emitted_bytes": 29214
+    },
+    {
+      "file": "foundation/structured/read-inspection.js",
+      "source_ts_bytes": 6891,
+      "source_ts_lines": 139,
+      "emitted_bytes": 6891
+    },
+    {
+      "file": "foundation/structured/rich-content.js",
+      "source_ts_bytes": 6606,
+      "source_ts_lines": 36,
+      "emitted_bytes": 6606
+    },
+    {
+      "file": "foundation/structured/sanitization-policy.js",
+      "source_ts_bytes": 3310,
+      "source_ts_lines": 29,
+      "emitted_bytes": 3310
+    },
+    {
+      "file": "foundation/structured/selection-contract.js",
+      "source_ts_bytes": 609,
+      "source_ts_lines": 18,
+      "emitted_bytes": 609
+    },
+    {
+      "file": "foundation/structured/selection-dom-bridge.js",
+      "source_ts_bytes": 2267,
+      "source_ts_lines": 19,
+      "emitted_bytes": 2267
+    },
+    {
+      "file": "foundation/structured/selection-kernel.js",
+      "source_ts_bytes": 13460,
+      "source_ts_lines": 86,
+      "emitted_bytes": 13460
+    },
+    {
+      "file": "foundation/structured/shorthand.js",
+      "source_ts_bytes": 1368,
+      "source_ts_lines": 28,
+      "emitted_bytes": 1368
+    },
+    {
+      "file": "foundation/structured/surface-host.js",
+      "source_ts_bytes": 42459,
+      "source_ts_lines": 356,
+      "emitted_bytes": 42459
+    },
+    {
+      "file": "foundation/timeline/replay-host.js",
+      "source_ts_bytes": 14023,
+      "source_ts_lines": 91,
+      "emitted_bytes": 14023
+    },
+    {
+      "file": "foundation/timeline/replay.js",
+      "source_ts_bytes": 14090,
+      "source_ts_lines": 217,
+      "emitted_bytes": 14090
+    },
+    {
+      "file": "foundation/wave3-assembly.js",
+      "source_ts_bytes": 16877,
+      "source_ts_lines": 130,
+      "emitted_bytes": 16877
+    },
+    {
+      "file": "foundation/wave4-assembly.js",
+      "source_ts_bytes": 12915,
+      "source_ts_lines": 87,
+      "emitted_bytes": 12915
+    },
+    {
+      "file": "foundation/window-motion.js",
+      "source_ts_bytes": 7813,
+      "source_ts_lines": 114,
+      "emitted_bytes": 7813
+    },
+    {
+      "file": "foundation/workspace-host.js",
+      "source_ts_bytes": 29591,
+      "source_ts_lines": 347,
+      "emitted_bytes": 29591
+    },
+    {
+      "file": "foundation/workspace.js",
+      "source_ts_bytes": 21143,
+      "source_ts_lines": 98,
+      "emitted_bytes": 21143
+    },
+    {
+      "file": "main.js",
+      "source_ts_bytes": 56108,
+      "source_ts_lines": 287,
+      "emitted_bytes": 56108
+    },
+    {
+      "file": "model-tests.js",
+      "source_ts_bytes": 173931,
+      "source_ts_lines": 280,
+      "emitted_bytes": 173931
+    },
+    {
+      "file": "ps02-spatial-finite-atomicity-tests.js",
+      "source_ts_bytes": 10407,
+      "source_ts_lines": 100,
+      "emitted_bytes": 10407
+    },
+    {
+      "file": "pw08-structured-action-surfaces-tests.js",
+      "source_ts_bytes": 8027,
+      "source_ts_lines": 98,
+      "emitted_bytes": 8027
+    },
+    {
+      "file": "pw11-sticky-note-window-tests.js",
+      "source_ts_bytes": 6143,
+      "source_ts_lines": 24,
+      "emitted_bytes": 6143
+    },
+    {
+      "file": "surfaces/audit/index.js",
+      "source_ts_bytes": 9660,
+      "source_ts_lines": 32,
+      "emitted_bytes": 9660
+    },
+    {
+      "file": "surfaces/backup/index.js",
+      "source_ts_bytes": 7351,
+      "source_ts_lines": 28,
+      "emitted_bytes": 7351
+    },
+    {
+      "file": "surfaces/composition/w01-w02-rescue.js",
+      "source_ts_bytes": 4678,
+      "source_ts_lines": 80,
+      "emitted_bytes": 4678
+    },
+    {
+      "file": "surfaces/composition/w03-rescue.js",
+      "source_ts_bytes": 7940,
+      "source_ts_lines": 133,
+      "emitted_bytes": 7940
+    },
+    {
+      "file": "surfaces/composition/w04-rescue.js",
+      "source_ts_bytes": 8261,
+      "source_ts_lines": 106,
+      "emitted_bytes": 8261
+    },
+    {
+      "file": "surfaces/composition/w05-rescue.js",
+      "source_ts_bytes": 2868,
+      "source_ts_lines": 50,
+      "emitted_bytes": 2868
+    },
+    {
+      "file": "surfaces/configuration/composition.js",
+      "source_ts_bytes": 4385,
+      "source_ts_lines": 15,
+      "emitted_bytes": 4385
+    },
+    {
+      "file": "surfaces/enterprise/index.js",
+      "source_ts_bytes": 2523,
+      "source_ts_lines": 39,
+      "emitted_bytes": 2523
+    },
+    {
+      "file": "surfaces/enterprise/presentation.js",
+      "source_ts_bytes": 20140,
+      "source_ts_lines": 108,
+      "emitted_bytes": 20140
+    },
+    {
+      "file": "surfaces/evidence/index.js",
+      "source_ts_bytes": 8858,
+      "source_ts_lines": 67,
+      "emitted_bytes": 8858
+    },
+    {
+      "file": "surfaces/labs/index.js",
+      "source_ts_bytes": 2491,
+      "source_ts_lines": 13,
+      "emitted_bytes": 2491
+    },
+    {
+      "file": "surfaces/labs/presentation.js",
+      "source_ts_bytes": 15068,
+      "source_ts_lines": 25,
+      "emitted_bytes": 15068
+    },
+    {
+      "file": "surfaces/learn/surface.js",
+      "source_ts_bytes": 2169,
+      "source_ts_lines": 18,
+      "emitted_bytes": 2169
+    },
+    {
+      "file": "surfaces/library/runtime-composition.js",
+      "source_ts_bytes": 3807,
+      "source_ts_lines": 46,
+      "emitted_bytes": 3807
+    },
+    {
+      "file": "surfaces/library/surface.js",
+      "source_ts_bytes": 3057,
+      "source_ts_lines": 20,
+      "emitted_bytes": 3057
+    },
+    {
+      "file": "surfaces/m0-controller-composition.js",
+      "source_ts_bytes": 63575,
+      "source_ts_lines": 240,
+      "emitted_bytes": 63575
+    },
+    {
+      "file": "surfaces/manual_ai/composition.js",
+      "source_ts_bytes": 3961,
+      "source_ts_lines": 15,
+      "emitted_bytes": 3961
+    },
+    {
+      "file": "surfaces/mastery/composition.js",
+      "source_ts_bytes": 4333,
+      "source_ts_lines": 26,
+      "emitted_bytes": 4333
+    },
+    {
+      "file": "surfaces/portfolio/composition.js",
+      "source_ts_bytes": 4348,
+      "source_ts_lines": 26,
+      "emitted_bytes": 4348
+    },
+    {
+      "file": "surfaces/releases/composition.js",
+      "source_ts_bytes": 4446,
+      "source_ts_lines": 16,
+      "emitted_bytes": 4446
+    },
+    {
+      "file": "surfaces/results/index.js",
+      "source_ts_bytes": 3421,
+      "source_ts_lines": 16,
+      "emitted_bytes": 3421
+    },
+    {
+      "file": "surfaces/results/presentation.js",
+      "source_ts_bytes": 20244,
+      "source_ts_lines": 75,
+      "emitted_bytes": 20244
+    },
+    {
+      "file": "surfaces/reviews/index.js",
+      "source_ts_bytes": 7890,
+      "source_ts_lines": 47,
+      "emitted_bytes": 7890
+    },
+    {
+      "file": "surfaces/rq/surface.js",
+      "source_ts_bytes": 2149,
+      "source_ts_lines": 16,
+      "emitted_bytes": 2149
+    },
+    {
+      "file": "surfaces/runs/index.js",
+      "source_ts_bytes": 4554,
       "source_ts_lines": 23,
-      "emitted_bytes": 7796
+      "emitted_bytes": 4554
+    },
+    {
+      "file": "surfaces/runs/presentation.js",
+      "source_ts_bytes": 16753,
+      "source_ts_lines": 31,
+      "emitted_bytes": 16753
+    },
+    {
+      "file": "surfaces/scenarios/index.js",
+      "source_ts_bytes": 2676,
+      "source_ts_lines": 13,
+      "emitted_bytes": 2676
+    },
+    {
+      "file": "surfaces/scenarios/presentation.js",
+      "source_ts_bytes": 14784,
+      "source_ts_lines": 27,
+      "emitted_bytes": 14784
+    },
+    {
+      "file": "surfaces/shell/surface.js",
+      "source_ts_bytes": 6516,
+      "source_ts_lines": 73,
+      "emitted_bytes": 6516
+    },
+    {
+      "file": "surfaces/today/presentation.js",
+      "source_ts_bytes": 35553,
+      "source_ts_lines": 972,
+      "emitted_bytes": 35553
+    },
+    {
+      "file": "surfaces/today/surface.js",
+      "source_ts_bytes": 4076,
+      "source_ts_lines": 60,
+      "emitted_bytes": 4076
+    },
+    {
+      "file": "surfaces/validation/index.js",
+      "source_ts_bytes": 8558,
+      "source_ts_lines": 23,
+      "emitted_bytes": 8558
+    },
+    {
+      "file": "surfaces/visualize/surface.js",
+      "source_ts_bytes": 27824,
+      "source_ts_lines": 85,
+      "emitted_bytes": 27824
+    },
+    {
+      "file": "tests/post-c03/D03A/d03a-command-settings-convergence-tests.js",
+      "source_ts_bytes": 12315,
+      "source_ts_lines": 125,
+      "emitted_bytes": 12315
+    },
+    {
+      "file": "tests/post-c03/PR01/pr01-runtime-interaction-tests.js",
+      "source_ts_bytes": 13173,
+      "source_ts_lines": 281,
+      "emitted_bytes": 13173
+    },
+    {
+      "file": "tests/rescue/CG2_SHARED_FAMILIES_COVERAGE/shared-family-coverage.test.js",
+      "source_ts_bytes": 5743,
+      "source_ts_lines": 83,
+      "emitted_bytes": 5743
+    },
+    {
+      "file": "tests/rescue/CG3_CONTROLLER_CORR01_LEARN_RQ_TRUTH/controller-corr01.test.js",
+      "source_ts_bytes": 2090,
+      "source_ts_lines": 10,
+      "emitted_bytes": 2090
+    },
+    {
+      "file": "tests/rescue/CG3_W01_W02_COVERAGE/cg3-w01-w02-coverage.test.js",
+      "source_ts_bytes": 6431,
+      "source_ts_lines": 59,
+      "emitted_bytes": 6431
+    },
+    {
+      "file": "tests/rescue/CG4_W03_COVERAGE/controller-corr01-w03-lifecycle-truth.test.js",
+      "source_ts_bytes": 5144,
+      "source_ts_lines": 26,
+      "emitted_bytes": 5144
+    },
+    {
+      "file": "tests/rescue/CG4_W03_COVERAGE/group-composition.test.js",
+      "source_ts_bytes": 4911,
+      "source_ts_lines": 30,
+      "emitted_bytes": 4911
+    },
+    {
+      "file": "tests/rescue/CG4_W03_COVERAGE/group-falsification.test.js",
+      "source_ts_bytes": 3739,
+      "source_ts_lines": 26,
+      "emitted_bytes": 3739
+    },
+    {
+      "file": "tests/rescue/CG5_CONTROLLER_CORR01_A03_DOMAIN_INTEGRITY/controller-corr01.test.js",
+      "source_ts_bytes": 5607,
+      "source_ts_lines": 30,
+      "emitted_bytes": 5607
+    },
+    {
+      "file": "tests/rescue/CG5_W04_COVERAGE/w04-convergence.test.js",
+      "source_ts_bytes": 3931,
+      "source_ts_lines": 24,
+      "emitted_bytes": 3931
+    },
+    {
+      "file": "tests/rescue/CG6_W05_COVERAGE/cg6-w05-coverage.test.js",
+      "source_ts_bytes": 6156,
+      "source_ts_lines": 16,
+      "emitted_bytes": 6156
+    },
+    {
+      "file": "tests/rescue/CG6_W05_COVERAGE/controller-corr01-w05-truth.test.js",
+      "source_ts_bytes": 4379,
+      "source_ts_lines": 10,
+      "emitted_bytes": 4379
+    },
+    {
+      "file": "tests/rescue/S01_SHARED_STRUCTURED_EDITOR/s01-browser-proof.js",
+      "source_ts_bytes": 4457,
+      "source_ts_lines": 21,
+      "emitted_bytes": 4457
+    },
+    {
+      "file": "tests/rescue/S01_SHARED_STRUCTURED_EDITOR/s01-structured-editor-core-tests.js",
+      "source_ts_bytes": 14094,
+      "source_ts_lines": 91,
+      "emitted_bytes": 14094
+    },
+    {
+      "file": "tests/rescue/S03_SHARED_SETTINGS_TRANSIENT/s03-shared-settings-transient-tests.js",
+      "source_ts_bytes": 14804,
+      "source_ts_lines": 85,
+      "emitted_bytes": 14804
+    },
+    {
+      "file": "tests/rescue/S04_SHARED_NOTES_OPERATIONAL/s04-shared-notes-operational-tests.js",
+      "source_ts_bytes": 9652,
+      "source_ts_lines": 35,
+      "emitted_bytes": 9652
+    },
+    {
+      "file": "tests/rescue/S06_SHARED_COLLECTION_AUDIT_REVIEW/adapter-compatibility.test.js",
+      "source_ts_bytes": 1524,
+      "source_ts_lines": 26,
+      "emitted_bytes": 1524
+    },
+    {
+      "file": "tests/rescue/S06_SHARED_COLLECTION_AUDIT_REVIEW/audit-provenance-core.test.js",
+      "source_ts_bytes": 1693,
+      "source_ts_lines": 27,
+      "emitted_bytes": 1693
+    },
+    {
+      "file": "tests/rescue/S06_SHARED_COLLECTION_AUDIT_REVIEW/collection-core.test.js",
+      "source_ts_bytes": 1880,
+      "source_ts_lines": 29,
+      "emitted_bytes": 1880
+    },
+    {
+      "file": "tests/rescue/S06_SHARED_COLLECTION_AUDIT_REVIEW/review-decision-family.test.js",
+      "source_ts_bytes": 3343,
+      "source_ts_lines": 44,
+      "emitted_bytes": 3343
+    },
+    {
+      "file": "tests/rescue/S06_SHARED_COLLECTION_AUDIT_REVIEW/source-boundary.test.js",
+      "source_ts_bytes": 874,
+      "source_ts_lines": 14,
+      "emitted_bytes": 874
+    },
+    {
+      "file": "tests/rescue/S07_W01_W02_SHELL_TODAY/s07-contracts.test.js",
+      "source_ts_bytes": 8703,
+      "source_ts_lines": 106,
+      "emitted_bytes": 8703
+    },
+    {
+      "file": "tests/rescue/S08_W01_W02_LIBRARY_LEARN/s08-falsification.js",
+      "source_ts_bytes": 13915,
+      "source_ts_lines": 49,
+      "emitted_bytes": 13915
+    },
+    {
+      "file": "tests/rescue/S09_W01_W02_RQ_VISUALIZE/s09-reexecution-tests.js",
+      "source_ts_bytes": 10460,
+      "source_ts_lines": 41,
+      "emitted_bytes": 10460
+    },
+    {
+      "file": "tests/rescue/S10_W03_ENTERPRISE/domain-and-lifecycle.test.js",
+      "source_ts_bytes": 5390,
+      "source_ts_lines": 67,
+      "emitted_bytes": 5390
+    },
+    {
+      "file": "tests/rescue/S10_W03_ENTERPRISE/source-duplicate-owner.test.js",
+      "source_ts_bytes": 1084,
+      "source_ts_lines": 11,
+      "emitted_bytes": 1084
+    },
+    {
+      "file": "tests/rescue/S11_W03_SCENARIOS_LABS/lab-task-graph.test.js",
+      "source_ts_bytes": 4735,
+      "source_ts_lines": 19,
+      "emitted_bytes": 4735
+    },
+    {
+      "file": "tests/rescue/S11_W03_SCENARIOS_LABS/scenario-studio.test.js",
+      "source_ts_bytes": 4867,
+      "source_ts_lines": 27,
+      "emitted_bytes": 4867
+    },
+    {
+      "file": "tests/rescue/S12_W03_RUNS/runs-operational-workspace.test.js",
+      "source_ts_bytes": 7085,
+      "source_ts_lines": 61,
+      "emitted_bytes": 7085
+    },
+    {
+      "file": "tests/rescue/S13_W03_RESULTS/results-rescue.test.js",
+      "source_ts_bytes": 4696,
+      "source_ts_lines": 31,
+      "emitted_bytes": 4696
+    },
+    {
+      "file": "tests/rescue/S14_W04_EVIDENCE_REVIEWS/domain-lifecycle.test.js",
+      "source_ts_bytes": 9521,
+      "source_ts_lines": 28,
+      "emitted_bytes": 9521
+    },
+    {
+      "file": "tests/rescue/S14_W04_EVIDENCE_REVIEWS/surface-contract.test.js",
+      "source_ts_bytes": 2492,
+      "source_ts_lines": 13,
+      "emitted_bytes": 2492
+    },
+    {
+      "file": "tests/rescue/S15_W04_MASTERY_PORTFOLIO/domain-authority.test.js",
+      "source_ts_bytes": 8746,
+      "source_ts_lines": 49,
+      "emitted_bytes": 8746
+    },
+    {
+      "file": "tests/rescue/S16_W05_HEALTH_PROCESSING/s16-health-processing-tests.js",
+      "source_ts_bytes": 9377,
+      "source_ts_lines": 62,
+      "emitted_bytes": 9377
+    },
+    {
+      "file": "tests/rescue/S17_W05_VALIDATION_MANUAL_AI/s17-tests.js",
+      "source_ts_bytes": 6212,
+      "source_ts_lines": 22,
+      "emitted_bytes": 6212
+    },
+    {
+      "file": "tests/rescue/S18_W05_BACKUP_AUDIT/domain-tests.js",
+      "source_ts_bytes": 6070,
+      "source_ts_lines": 29,
+      "emitted_bytes": 6070
+    },
+    {
+      "file": "tests/rescue/S18_W05_BACKUP_AUDIT/source-boundary-tests.js",
+      "source_ts_bytes": 2110,
+      "source_ts_lines": 12,
+      "emitted_bytes": 2110
+    },
+    {
+      "file": "tests/rescue/S19_W05_RELEASES_CONFIGURATION/s19-tests.js",
+      "source_ts_bytes": 8683,
+      "source_ts_lines": 34,
+      "emitted_bytes": 8683
+    },
+    {
+      "file": "tests/surfaces/configuration/configuration-tests.js",
+      "source_ts_bytes": 4452,
+      "source_ts_lines": 21,
+      "emitted_bytes": 4452
+    },
+    {
+      "file": "tests/surfaces/enterprise/domain.test.js",
+      "source_ts_bytes": 1300,
+      "source_ts_lines": 11,
+      "emitted_bytes": 1300
+    },
+    {
+      "file": "tests/surfaces/evidence/domain.test.js",
+      "source_ts_bytes": 1357,
+      "source_ts_lines": 3,
+      "emitted_bytes": 1357
+    },
+    {
+      "file": "tests/surfaces/labs/domain.test.js",
+      "source_ts_bytes": 1393,
+      "source_ts_lines": 10,
+      "emitted_bytes": 1393
+    },
+    {
+      "file": "tests/surfaces/manual_ai/manual-ai-tests.js",
+      "source_ts_bytes": 4258,
+      "source_ts_lines": 20,
+      "emitted_bytes": 4258
+    },
+    {
+      "file": "tests/surfaces/mastery/domain.test.js",
+      "source_ts_bytes": 2279,
+      "source_ts_lines": 14,
+      "emitted_bytes": 2279
+    },
+    {
+      "file": "tests/surfaces/portfolio/domain.test.js",
+      "source_ts_bytes": 1820,
+      "source_ts_lines": 10,
+      "emitted_bytes": 1820
+    },
+    {
+      "file": "tests/surfaces/releases/releases-tests.js",
+      "source_ts_bytes": 4127,
+      "source_ts_lines": 20,
+      "emitted_bytes": 4127
+    },
+    {
+      "file": "tests/surfaces/results/domain.test.js",
+      "source_ts_bytes": 2023,
+      "source_ts_lines": 16,
+      "emitted_bytes": 2023
+    },
+    {
+      "file": "tests/surfaces/reviews/domain.test.js",
+      "source_ts_bytes": 1518,
+      "source_ts_lines": 3,
+      "emitted_bytes": 1518
+    },
+    {
+      "file": "tests/surfaces/runs/domain.test.js",
+      "source_ts_bytes": 1648,
+      "source_ts_lines": 11,
+      "emitted_bytes": 1648
+    },
+    {
+      "file": "tests/surfaces/runs/group-regression.test.js",
+      "source_ts_bytes": 1902,
+      "source_ts_lines": 19,
+      "emitted_bytes": 1902
+    },
+    {
+      "file": "tests/surfaces/scenarios/domain.test.js",
+      "source_ts_bytes": 1475,
+      "source_ts_lines": 8,
+      "emitted_bytes": 1475
+    },
+    {
+      "file": "w3-d-bottom-deep-work-tests.js",
+      "source_ts_bytes": 15860,
+      "source_ts_lines": 51,
+      "emitted_bytes": 15860
+    },
+    {
+      "file": "w4-c-direction-rich-content-tests.js",
+      "source_ts_bytes": 13116,
+      "source_ts_lines": 47,
+      "emitted_bytes": 13116
+    },
+    {
+      "file": "w4-d-structured-drag-drop-tests.js",
+      "source_ts_bytes": 7759,
+      "source_ts_lines": 21,
+      "emitted_bytes": 7759
+    },
+    {
+      "file": "w4-e-settings-center-tests.js",
+      "source_ts_bytes": 19183,
+      "source_ts_lines": 79,
+      "emitted_bytes": 19183
+    },
+    {
+      "file": "w4-f-operational-session-tests.js",
+      "source_ts_bytes": 8480,
+      "source_ts_lines": 42,
+      "emitted_bytes": 8480
+    },
+    {
+      "file": "w4-g-epistemic-confirmation-tests.js",
+      "source_ts_bytes": 16928,
+      "source_ts_lines": 80,
+      "emitted_bytes": 16928
+    },
+    {
+      "file": "w5-a-structured-surface-host-browser.js",
+      "source_ts_bytes": 9127,
+      "source_ts_lines": 56,
+      "emitted_bytes": 9127
+    },
+    {
+      "file": "w5-a-structured-surface-host-tests.js",
+      "source_ts_bytes": 44472,
+      "source_ts_lines": 63,
+      "emitted_bytes": 44472
+    },
+    {
+      "file": "w5-b-structured-navigation-browser-harness.js",
+      "source_ts_bytes": 2416,
+      "source_ts_lines": 23,
+      "emitted_bytes": 2416
+    },
+    {
+      "file": "w5-b-structured-navigation-correction-tests.js",
+      "source_ts_bytes": 9184,
+      "source_ts_lines": 88,
+      "emitted_bytes": 9184
+    },
+    {
+      "file": "w5-b-structured-navigation-delta2-tests.js",
+      "source_ts_bytes": 11479,
+      "source_ts_lines": 137,
+      "emitted_bytes": 11479
+    },
+    {
+      "file": "w5-b-structured-navigation-micro3-tests.js",
+      "source_ts_bytes": 4968,
+      "source_ts_lines": 60,
+      "emitted_bytes": 4968
+    },
+    {
+      "file": "w5-b-structured-navigation-tests.js",
+      "source_ts_bytes": 10686,
+      "source_ts_lines": 27,
+      "emitted_bytes": 10686
+    },
+    {
+      "file": "w5-c-structured-consumer-parity-browser.js",
+      "source_ts_bytes": 11172,
+      "source_ts_lines": 52,
+      "emitted_bytes": 11172
+    },
+    {
+      "file": "w5-c-structured-consumer-parity-tests.js",
+      "source_ts_bytes": 25372,
+      "source_ts_lines": 63,
+      "emitted_bytes": 25372
+    },
+    {
+      "file": "w6-a-sticky-note-window-browser.js",
+      "source_ts_bytes": 2830,
+      "source_ts_lines": 23,
+      "emitted_bytes": 2830
+    },
+    {
+      "file": "w6-a-sticky-note-window-tests.js",
+      "source_ts_bytes": 10664,
+      "source_ts_lines": 37,
+      "emitted_bytes": 10664
+    },
+    {
+      "file": "w6-b-note-binding-browser.js",
+      "source_ts_bytes": 3486,
+      "source_ts_lines": 18,
+      "emitted_bytes": 3486
+    },
+    {
+      "file": "w6-b-note-binding-correction-tests.js",
+      "source_ts_bytes": 7818,
+      "source_ts_lines": 23,
+      "emitted_bytes": 7818
     },
     {
       "file": "w6-b-note-binding-tests.js",
-      "source_ts_bytes": 17361,
+      "source_ts_bytes": 17410,
       "source_ts_lines": 50,
-      "emitted_bytes": 17361
+      "emitted_bytes": 17410
     },
     {
       "file": "w6-c-structured-note-content-browser.js",
-      "source_ts_bytes": 8535,
+      "source_ts_bytes": 8578,
       "source_ts_lines": 44,
-      "emitted_bytes": 8535
+      "emitted_bytes": 8578
     },
     {
       "file": "w6-c-structured-note-content-correction-browser.js",
-      "source_ts_bytes": 5456,
+      "source_ts_bytes": 5484,
       "source_ts_lines": 29,
-      "emitted_bytes": 5456
+      "emitted_bytes": 5484
     },
     {
       "file": "w6-c-structured-note-content-correction-tests.js",
-      "source_ts_bytes": 9830,
+      "source_ts_bytes": 9868,
       "source_ts_lines": 39,
-      "emitted_bytes": 9830
+      "emitted_bytes": 9868
     },
     {
       "file": "w6-c-structured-note-content-tests.js",
-      "source_ts_bytes": 38150,
+      "source_ts_bytes": 38256,
       "source_ts_lines": 107,
-      "emitted_bytes": 38150
+      "emitted_bytes": 38256
     }
   ],
   "recommendation": "Keep stack/native-typescript as the only writable logical runtime source; treat dist and dist-ts as disposable generated JavaScript trees.",

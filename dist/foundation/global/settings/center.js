@@ -14,6 +14,7 @@ export const SETTINGS_CENTER_CONTRACT=Object.freeze({
   preferenceValueOwner:'ScopedPreferencesOwner',
   preferencePersistenceOwner:'ScopedPreferencesOwner',
   commandOwner:'SemanticCommandBus',
+  sc011PreferenceTransferActionHome:'settings.transfer',
   globalShortcutOwner:'GlobalInputKeymapOwner',
   focusReturnOwner:'TransientFocusOwner',
   familyDescriptorContract:SETTINGS_CENTER_SECTION_DESCRIPTOR_CONTRACT.id,
@@ -39,6 +40,7 @@ function renderPreferenceControl(item){
 function renderItem(item){
   if(item.kind==='preference')return `<li class="settings-item settings-preference-item" data-settings-item="${esc(item.id)}" data-source-owner="${esc(item.sourceOwner)}"><div class="settings-item-copy"><strong>${esc(item.label)}</strong><small><bdi dir="ltr">${esc(item.key)}</bdi> · ${esc(item.sourceScope||'default')}</small></div>${renderPreferenceControl(item)}</li>`;
   if(item.kind==='command')return `<li class="settings-item" data-settings-item="${esc(item.id)}" data-source-owner="${esc(item.commandOwner||item.sourceOwner||'SemanticCommandBus')}"><div class="settings-item-copy"><strong>${esc(item.label)}</strong><small><bdi dir="ltr">${esc(item.commandId)}</bdi>${item.reason?` · ${esc(item.reason)}`:''}</small></div><span class="settings-state" data-state="${item.enabled?'available':'unavailable'}">${item.enabled?'Available':'Unavailable'}</span></li>`;
+  if(item.kind==='preference-transfer-action')return `<li class="settings-item settings-transfer-action-item" data-settings-item="${esc(item.id)}" data-source-owner="${SETTINGS_CENTER_OWNER}" data-delegates-to="${esc(item.delegatesTo)}"><div class="settings-item-copy"><strong>${esc(item.label)}</strong><small><bdi dir="ltr">${esc(item.actionId)}</bdi> · ${esc(item.delegatesTo)}</small></div><button type="button" class="btn" data-settings-action="${esc(item.actionId)}">${esc(item.actionLabel||item.label)}</button></li>`;
   return `<li class="settings-item" data-settings-item="${esc(item.id)}" data-source-owner="${esc(item.sourceOwner||item.shortcutOwner||'descriptor')}"><div class="settings-item-copy"><strong>${esc(item.label)}</strong>${item.commandId?`<small><bdi dir="ltr">${esc(item.commandId)}</bdi></small>`:''}</div>${item.chord?`<kbd class="kbd"><bdi dir="ltr">${esc(item.chord)}</bdi></kbd>`:''}</li>`;
 }
 
@@ -60,7 +62,28 @@ export class SettingsCenterOwner{
     if(!ids.includes(this.presentation.focusedSectionId))this.presentation.focusedSectionId=ids[0]||null;
     return this.snapshot(this.lastProfile,this.familySections);
   }
-  sections(profile=this.lastProfile||{},familySections=this.familySections){return projectSettingsSections({preferences:this.preferences,commands:this.commands,keymap:this.keymap,profile,familySections});}
+  transferSections(){
+    const preferences=this.preferences;
+    if(typeof preferences.export!=='function'||typeof preferences.import!=='function'||typeof preferences.reset!=='function')return Object.freeze([]);
+    const group=SETTINGS_CENTER_GROUPS.find(entry=>entry.id==='settings');
+    const action=(actionId,label,actionLabel,order)=>Object.freeze({id:`preference-transfer:${actionId.split('.').at(-1)}`,kind:'preference-transfer-action',actionId,actionLabel,label,delegatesTo:'ScopedPreferencesOwner',sourceOwner:SETTINGS_CENTER_OWNER,order,searchableText:`${label} ${actionId} export import reset preferences data`});
+    return Object.freeze([Object.freeze({
+      contract:SETTINGS_CENTER_SECTION_DESCRIPTOR_CONTRACT,
+      id:SETTINGS_CENTER_CONTRACT.sc011PreferenceTransferActionHome,
+      groupId:'settings',groupLabel:group.label,groupOrder:group.order,
+      label:'Export / import / reset',order:30,sourceKind:'preference-transfer',sourceOwner:SETTINGS_CENTER_OWNER,
+      preferenceValueOwner:'ScopedPreferencesOwner',preferencePersistenceOwner:'ScopedPreferencesOwner',structuredOnly:false,
+      items:Object.freeze([
+        action('settings.preferences.export','Export preferences','Export',10),
+        action('settings.preferences.import','Import preferences','Import',20),
+        action('settings.preferences.reset','Reset preferences to defaults','Reset',30)
+      ])
+    })]);
+  }
+  sections(profile=this.lastProfile||{},familySections=this.familySections){
+    const base=projectSettingsSections({preferences:this.preferences,commands:this.commands,keymap:this.keymap,profile,familySections});
+    return Object.freeze([...base,...this.transferSections()].sort((a,b)=>a.groupOrder-b.groupOrder||a.order-b.order||a.id.localeCompare(b.id)));
+  }
   visibleSections(profile=this.lastProfile||{},familySections=this.familySections){
     const sections=this.sections(profile,familySections),query=this.presentation.query;if(!query)return sections;
     const ids=new Set(this.search(query,profile,familySections).map(row=>row.sectionId));return Object.freeze(sections.filter(section=>ids.has(section.id)));
@@ -100,6 +123,30 @@ export class SettingsCenterOwner{
     const resolved=this.preferences.resolve(key),safeDefault=resolved.safeDefault;let next=value;
     if(typeof safeDefault==='boolean')next=bool(value);else if(typeof safeDefault==='number')next=Number(value);
     const result=this.preferences.set(key,next,scope);return this.record({kind:'preference-delegated-set',key,value:next,scope,valueOwner:'ScopedPreferencesOwner',persistenceOwner:'ScopedPreferencesOwner',storageResult:result});
+  }
+  exportPreferences(){
+    try{
+      const data=this.preferences.export();
+      return this.record({kind:'preference-transfer',action:'export',actionId:'settings.preferences.export',ok:true,code:'EXPORTED',schemaVersion:data.schemaVersion,transferKind:data.kind,scopeCount:Object.keys(data.overrides||{}).length,valueOwner:'ScopedPreferencesOwner',persistenceOwner:'ScopedPreferencesOwner',durablePersistenceClaim:false,data});
+    }catch(error){
+      return this.record({kind:'preference-transfer',action:'export',actionId:'settings.preferences.export',ok:false,code:'EXPORT_FAILED',error:String(error?.message||error)});
+    }
+  }
+  importPreferences(snapshot){
+    const before=this.preferences.export();
+    try{this.preferences.import(snapshot);}catch(error){return this.record({kind:'preference-transfer',action:'import',actionId:'settings.preferences.import',ok:false,code:'IMPORT_REJECTED',error:String(error?.message||error),overridesUnchanged:true,valueOwner:'ScopedPreferencesOwner'});}
+    const settled=this.preferences.save(),changed=JSON.stringify(before)!==JSON.stringify(this.preferences.export());
+    return this.record({kind:'preference-transfer',action:'import',actionId:'settings.preferences.import',ok:settled.ok===true,code:settled.code||'PERSISTED',changed,durable:settled.ok===true&&settled.durable===true,error:settled.error||null,storageResult:settled,valueOwner:'ScopedPreferencesOwner',persistenceOwner:'ScopedPreferencesOwner'});
+  }
+  resetPreferences(){
+    const snapshot=this.preferences.export(),entries=[];
+    for(const [scope,values] of Object.entries(snapshot.overrides||{}))for(const key of Object.keys(values||{}))entries.push([scope,key]);
+    const durableBefore=this.preferences.storageStatus?.().durable===true;
+    if(!entries.length)return this.record({kind:'preference-transfer',action:'reset',actionId:'settings.preferences.reset',ok:true,code:'NOTHING_TO_RESET',resetCount:0,durable:durableBefore,valueOwner:'ScopedPreferencesOwner',persistenceOwner:'ScopedPreferencesOwner'});
+    let settled=null;
+    for(const [scope,key] of entries)settled=this.preferences.reset(key,scope);
+    settled=settled||this.preferences.save();
+    return this.record({kind:'preference-transfer',action:'reset',actionId:'settings.preferences.reset',ok:settled.ok===true,code:settled.code||'PERSISTED',resetCount:entries.length,durable:settled.ok===true&&settled.durable===true,error:settled.error||null,storageResult:settled,valueOwner:'ScopedPreferencesOwner',persistenceOwner:'ScopedPreferencesOwner'});
   }
   toggleSection(sectionId,profile=this.lastProfile||{},familySections=this.familySections){
     const sections=this.visibleSections(profile,familySections);if(!sections.some(section=>section.id===sectionId))throw Error('SETTINGS_SECTION_NOT_APPLICABLE:'+sectionId);
