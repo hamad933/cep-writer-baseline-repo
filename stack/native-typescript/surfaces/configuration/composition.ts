@@ -1,10 +1,11 @@
-import {SemanticCommandBus} from '../../foundation/global/commands.js';
+import {assertCanonicalSemanticCommandBus} from '../../foundation/global/commands.js';
 import {CollectionTableMatrixPresentationCore,type CollectionTableMatrixDomainAdapter} from '../../foundation/collection/table-matrix.js';
 import {defineContextDescriptorProvider} from '../../foundation/global/context-descriptor-contract.js';
 import {createFamilyWorkspaceBinding} from '../../foundation/workspace-host.js';
 import {ConfigurationDomainAdapter,CONFIGURATION_COMMANDS} from '../../adapters/configuration/domain-adapter.js';
 export const CONFIGURATION_SURFACE_ID='configuration';
-export function createConfigurationSurfaceComposition({adapter=new ConfigurationDomainAdapter(),commands=new SemanticCommandBus()}={}){
+export function createConfigurationSurfaceComposition({adapter=new ConfigurationDomainAdapter(),commands=null}={}){
+  commands=assertCanonicalSemanticCommandBus(commands,'configuration.composition');
   adapter.bindCommands(commands);
   const tableAdapter:CollectionTableMatrixDomainAdapter<any>={adapterId:'configuration.observations',rows:()=>adapter.rows(),rowId:r=>r.key,rowLabel:r=>r.key,searchableText:r=>`${r.key} ${r.source} ${r.state}`,columns:[{id:'key',label:'Operational key',cell:r=>({text:r.key,direction:'ltr'})},{id:'value',label:'Present value (redacted)',cell:r=>({text:r.redactedValue,direction:'auto'})},{id:'source',label:'Source',cell:r=>({text:r.source,direction:'ltr'})},{id:'state',label:'Observation',cell:r=>({text:r.state,tone:r.state==='AVAILABLE'?'success':r.state==='STALE'?'warning':'danger'})},{id:'restart',label:'Restart if applied',cell:r=>({text:r.restartRequired?'REQUIRED':'NO'})}],actions:r=>[{id:'configuration.diff',label:'Diff proposal',enabled:true},{id:'configuration.edit',label:'Edit proposal',enabled:r.state==='AVAILABLE'||r.state==='STALE'}]};
   const collection=new CollectionTableMatrixPresentationCore(tableAdapter);

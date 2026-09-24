@@ -1,10 +1,11 @@
-import {SemanticCommandBus} from '../../foundation/global/commands.js';
+import {assertCanonicalSemanticCommandBus} from '../../foundation/global/commands.js';
 import {CollectionTableMatrixPresentationCore,type CollectionTableMatrixDomainAdapter} from '../../foundation/collection/table-matrix.js';
 import {defineContextDescriptorProvider} from '../../foundation/global/context-descriptor-contract.js';
 import {createFamilyWorkspaceBinding} from '../../foundation/workspace-host.js';
 import {ManualAiDomainAdapter,MANUAL_AI_COMMANDS} from '../../adapters/manual_ai/domain-adapter.js';
 export const MANUAL_AI_SURFACE_ID='manual_ai';
-export function createManualAiSurfaceComposition({adapter=new ManualAiDomainAdapter(),commands=new SemanticCommandBus()}={}){
+export function createManualAiSurfaceComposition({adapter=new ManualAiDomainAdapter(),commands=null}={}){
+  commands=assertCanonicalSemanticCommandBus(commands,'manual_ai.composition');
   adapter.bindCommands(commands);
   const tableAdapter:CollectionTableMatrixDomainAdapter<any>={adapterId:'manual_ai.proposals',rows:()=>adapter.rows(),rowId:r=>r.proposalId,rowLabel:r=>r.proposalId,searchableText:r=>`${r.proposalId} ${r.revision} ${r.state} ${r.provenance.sourceId} ${r.provenance.sourceRevisionId} ${r.provenance.sourceDigest}`,columns:[{id:'proposal',label:'Proposal',cell:r=>({text:r.proposalId,secondary:r.revision,direction:'ltr'})},{id:'state',label:'State',cell:r=>({text:r.state,tone:r.state==='PROVENANCE_INVALID'?'danger':r.state==='ACCEPTED_AS_DRAFT'?'success':'default'})},{id:'source',label:'Provenance',cell:r=>({text:r.provenance.sourceId,secondary:`${r.provenance.sourceRevisionId} · ${r.provenance.sourceDigest}`,direction:'auto'})}],actions:r=>[{id:'manual_ai.export',label:'Export packet',enabled:r.state!=='PROVENANCE_INVALID'&&r.state!=='REJECTED'&&r.state!=='ACCEPTED_AS_DRAFT'},{id:'manual_ai.import',label:'Import result',enabled:r.state==='EXPORTED'},{id:'manual_ai.review',label:'Review',enabled:true}]};
   const collection=new CollectionTableMatrixPresentationCore(tableAdapter);
