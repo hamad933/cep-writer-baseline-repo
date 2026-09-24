@@ -1,0 +1,351 @@
+{
+  "schemaVersion": 1,
+  "classification": "CURRENT_POST_C03_FINDING_PROJECTION__WRITER_EXECUTION_INPUT__NOT_LIVE_CONTROLLER_AUTHORITY__NOT_ACCEPTANCE",
+  "sourceProductIdentity": {
+    "productParentCommit": "293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a",
+    "productParentTree": "3101c06901dbdaff9602fea8098efb9c34575149",
+    "productCanonicalSourceSha256": "480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641",
+    "productCanonicalSourceFiles": 273
+  },
+  "controllerAdjudication": {
+    "date": "2026-09-24",
+    "rule": "Preserve independently supported exact-current findings without inflating aliases into separate root defects. Product correction remains in governed D03-D14 lanes.",
+    "evidenceSources": [
+      "CEP_CURRENT_BASELINE_GENUINE_BROWSER_AUDIT_293dd1e0 / CURRENT_BASELINE_GENUINE_BROWSER_AUDIT.md",
+      "CEP_MISSING_FINDINGS_CHALLENGE_FILES_ONLY / MISSING_FINDINGS_CHALLENGE_REPORT.md",
+      "CEP_VISUAL_GAP_FORENSIC_AUDIT_293dd1e0 / VISUAL_GAP_CLOSURE_REPORT.md",
+      "direct Controller source inspection on the unchanged Product source"
+    ]
+  },
+  "blockingFindings": [
+    {
+      "id": "CBF-001",
+      "severity": "P0_BLOCKING",
+      "status": "OPEN_CONTROLLER_ADJUDICATED",
+      "classification": "PRODUCT_DATA_BEHAVIOR_INTEGRATION",
+      "surfaces": [
+        "library",
+        "learn"
+      ],
+      "summary": "Official Balanced6 persistence seed emits Structured block type `section`, which current StructuredTreeKernel does not admit; genuine-browser persistence hydration aborts with INVALID_STRUCTURED_TREE:UNSUPPORTED_BLOCK_TYPE.",
+      "independentlyCorroboratedSource": [
+        "stack/local-runtime/persistence/acceptance-seed/balanced6/seed.mjs",
+        "stack/native-typescript/foundation/structured.ts"
+      ],
+      "routing": [
+        "D03",
+        "D08",
+        "D13",
+        "D14"
+      ],
+      "mutationCeiling": "NO_PRODUCT_MUTATION_IN_CLEANUP_INTEGRATION"
+    },
+    {
+      "id": "CBF-002",
+      "severity": "P0_BLOCKING",
+      "status": "OPEN_CONTROLLER_ADJUDICATED",
+      "classification": "PRODUCT_SHARED_NAVIGATION_STATE_PRESERVATION",
+      "surfaces": [
+        "today",
+        "visualize"
+      ],
+      "summary": "Browser Back restores route but not governed semantic context; Today filter and Visualize selected representation are lost.",
+      "sourceSeam": "GlobalShellNavigationOwner captureCurrentContext/restoreBookmark lacks a current Surface semantic-context payload/adapter.",
+      "independentlyReproducedByAudit": true,
+      "routing": [
+        "D03",
+        "D13",
+        "D14"
+      ],
+      "mutationCeiling": "NO_PRODUCT_MUTATION_IN_CLEANUP_INTEGRATION"
+    },
+    {
+      "id": "CBF-003",
+      "severity": "P0_BLOCKING",
+      "status": "OPEN_CONTROLLER_ADJUDICATED",
+      "classification": "PRODUCT_SHARED_PRESENTATION_INTERACTION_OWNER_INTEGRATION",
+      "surfaces": [
+        "today",
+        "rq",
+        "visualize",
+        "enterprise",
+        "results",
+        "evidence",
+        "mastery",
+        "portfolio",
+        "reviews",
+        "configuration",
+        "manual_ai",
+        "releases",
+        "backup",
+        "health",
+        "processing",
+        "audit",
+        "validation"
+      ],
+      "summary": "Domain BOTTOM content can exist while BottomDeepWorkOwner has zero registered providers, leaving the visible BOTTOM toggle inert.",
+      "independentlyCorroboratedSource": [
+        "stack/native-typescript/foundation/wave3-assembly.ts",
+        "stack/native-typescript/foundation/workspace.ts"
+      ],
+      "aliases": [
+        "PVF-004"
+      ],
+      "routing": [
+        "D03",
+        "D05",
+        "D07",
+        "D08",
+        "D10",
+        "D13",
+        "D14"
+      ],
+      "mutationCeiling": "SHARED_OWNER_FIRST__NO_PER_SURFACE_CSS_WORKAROUND"
+    },
+    {
+      "id": "F-049",
+      "severity": "P0_BLOCKING",
+      "status": "OPEN_RECONFIRMED_CURRENT_BROWSER",
+      "classification": "VISUALIZE_BEHAVIOR_INTERACTION",
+      "surfaces": [
+        "visualize"
+      ],
+      "summary": "Remove from Canvas removes the seed representation from TREE/PATH/GRAPH/CANVAS rather than Canvas scope only.",
+      "routing": [
+        "D04",
+        "D13",
+        "D14"
+      ]
+    },
+    {
+      "id": "F-050",
+      "severity": "P0_BLOCKING",
+      "status": "OPEN_RECONFIRMED_CURRENT_BROWSER",
+      "classification": "VISUALIZE_PRESENTATION_INTERACTION_OWNERSHIP",
+      "surfaces": [
+        "visualize"
+      ],
+      "summary": "Canvas duplicate identity, multi-select group boundary, Canvas-only relation grammar and one-action-home requirements remain deficient.",
+      "routing": [
+        "D04",
+        "D13",
+        "D14"
+      ]
+    }
+  ],
+  "materialFindings": [
+    {
+      "id": "MFC-PF-001",
+      "severity": "P1_MATERIAL",
+      "status": "OPEN_CONTROLLER_ADJUDICATED",
+      "classification": "SHARED_TRANSIENT_OWNER_RESIDUAL",
+      "surfaces": [
+        "library",
+        "shell"
+      ],
+      "summary": "Library Workspace, Quick Jump and Global Nav popovers retain local open/close/Escape/focus paths beside the canonical TransientFocusOwner.",
+      "independentlyCorroboratedSource": [
+        "stack/native-typescript/foundation/accepted-runtime.ts"
+      ],
+      "routing": [
+        "D03",
+        "D07",
+        "D08",
+        "D13",
+        "D14"
+      ]
+    },
+    {
+      "id": "MFC-PF-002",
+      "severity": "P1_MATERIAL_LATENT",
+      "status": "OPEN_CONTROLLER_ADJUDICATED",
+      "classification": "DUPLICATE_GLOBAL_INPUT_OWNER_RESIDUAL",
+      "surfaces": [
+        "library"
+      ],
+      "summary": "Library accepted-runtime retains local F6 primary-region cycling beside GlobalInputKeymapOwner. Current central capture normally suppresses double execution, so this is a latent duplicate/fallback rather than a claimed current double-fire.",
+      "routing": [
+        "D03",
+        "D08",
+        "D13",
+        "D14"
+      ]
+    },
+    {
+      "id": "MFC-PF-003",
+      "severity": "P1_MATERIAL",
+      "status": "OPEN_CONTROLLER_ADJUDICATED",
+      "classification": "SETTINGS_PREFERENCE_TRANSFER_RESET_SHARED_OWNER_GAP",
+      "surfaces": [
+        "shell",
+        "library"
+      ],
+      "summary": "SC-011 is MANDATORY_INHERIT with owner PreferenceExportImportResetModel; canonical preference owner exposes reset/export/import, current SettingsCenter lacks the real-consumer path while Library retains a donor-local transfer/import path.",
+      "authorityBinding": [
+        "profiles/library.json#SC-011",
+        "profiles/shell.json#SC-011"
+      ],
+      "routing": [
+        "D03",
+        "D08",
+        "D13",
+        "D14"
+      ]
+    },
+    {
+      "id": "PVF-001",
+      "severity": "P1_BLOCKING",
+      "status": "OPEN_CONTROLLER_ADJUDICATED_SUBFINDING",
+      "classification": "ENTERPRISE_MAJOR_STATE_INTEGRATION_PRESENTATION",
+      "surfaces": [
+        "enterprise"
+      ],
+      "summary": "Specialized exact-current Enterprise Twin/Baseline presentation exists but is not mounted by current Product integration.",
+      "routing": [
+        "D03",
+        "D07",
+        "D13",
+        "D14"
+      ]
+    },
+    {
+      "id": "PVF-002",
+      "severity": "P1_BLOCKING",
+      "status": "OPEN_CONTROLLER_ADJUDICATED_SUBFINDING",
+      "classification": "RUNS_PREFLIGHT_INTEGRATION_PRESENTATION",
+      "surfaces": [
+        "runs"
+      ],
+      "summary": "Exact-current Runs Preflight presentation exists but current Product integration does not expose the required Preflight major state.",
+      "routing": [
+        "D03",
+        "D07",
+        "D13",
+        "D14"
+      ]
+    },
+    {
+      "id": "PVF-003",
+      "severity": "P1_BLOCKING",
+      "status": "OPEN_CONTROLLER_ADJUDICATED_SUBFINDING",
+      "classification": "RESULTS_AAR_COMPARE_INTEGRATION_PRESENTATION",
+      "surfaces": [
+        "results"
+      ],
+      "summary": "Exact-current specialized Results AAR/Compare presentation exists but current Product integration mounts a different generic Results studio and lacks bound Result records for the required states.",
+      "routing": [
+        "D03",
+        "D07",
+        "D13",
+        "D14"
+      ]
+    }
+  ],
+  "evidenceAndCoverageItems": [
+    {
+      "id": "F-051",
+      "classification": "EVIDENCE_RECEIPT_DEFECT",
+      "status": "OPEN_OR_PRESERVED_EXISTING",
+      "summary": "Correction03 visual receipt uniqueness defect remains evidence-layer truth; do not relabel as Product defect."
+    },
+    {
+      "id": "MFC-CG-001",
+      "classification": "TEST_COVERAGE_GAP",
+      "routing": [
+        "D02",
+        "D03",
+        "D08",
+        "D14"
+      ]
+    },
+    {
+      "id": "MFC-CG-002",
+      "classification": "TEST_COVERAGE_GAP",
+      "routing": [
+        "D02",
+        "D03",
+        "D08",
+        "D14"
+      ]
+    },
+    {
+      "id": "MFC-CG-003",
+      "classification": "TEST_COVERAGE_GAP",
+      "routing": [
+        "D02",
+        "D03",
+        "D08",
+        "D14"
+      ]
+    },
+    {
+      "id": "MFC-CG-004",
+      "classification": "TEST_COVERAGE_GAP",
+      "routing": [
+        "D02",
+        "D03",
+        "D08",
+        "D14"
+      ]
+    },
+    {
+      "id": "MFC-HS-001",
+      "classification": "HISTORICAL_STALENESS_CURRENT_RESIDUAL",
+      "routing": [
+        "D01",
+        "D12",
+        "D14"
+      ]
+    },
+    {
+      "id": "PVF-005",
+      "classification": "PROVIDER_DATA_TRUTH_GATE",
+      "status": "NO_PRODUCT_DEFECT_INFERRED_FROM_MISSING_BOUND_PROVIDER",
+      "surfaces": [
+        "rq"
+      ]
+    },
+    {
+      "id": "PVF-006",
+      "classification": "REFERENCE_AUTHORITY_GAP",
+      "status": "RQ_REFERENCE_REVIEWED_FINAL_CANDIDATE_NOT_OWNER_CONFIRMED_FINAL"
+    },
+    {
+      "id": "PVF-007",
+      "classification": "PROVIDER_DATA_TRUTH_GATE",
+      "surfaces": [
+        "validation"
+      ]
+    },
+    {
+      "id": "PVF-008",
+      "classification": "PROVIDER_DATA_TRUTH_GATE",
+      "surfaces": [
+        "audit"
+      ]
+    },
+    {
+      "id": "PVF-009",
+      "classification": "PROVIDER_DATA_TRUTH_GATE",
+      "surfaces": [
+        "releases"
+      ]
+    },
+    {
+      "id": "PVF-010",
+      "classification": "ENVIRONMENT_EVIDENCE_LIMITATION",
+      "status": "SUPERSEDED_FOR_CURRENT_BASELINE_ROUTE_DIAGNOSTIC_BY_GENUINE_BROWSER_AUDIT__FINAL_D13_G22_STILL_OPEN"
+    }
+  ],
+  "evidenceUpdates": {
+    "currentTwoViewportRouteAndBaselineCensus": "46/46 CURRENT_BASELINE_DIAGNOSTIC",
+    "currentGenuineHttpRouteViewportMatrix": "46/46 PASS",
+    "currentReloadRouteIdentity": "23/23 PASS @ 1440x1000",
+    "currentInternalNavigationBackForward": "22 PASS / 0 FAIL / 1 N/A Shell",
+    "gate020": "OPEN__BASE_CENSUS_COMPLETE__MAJOR_STATE_BOTTOM_CANVAS_POST_CORRECTION_PROOF_REMAIN",
+    "gate021": "OPEN_WINDOWS_NATIVE",
+    "gate022": "OPEN_FINAL_D13_EXACT_SOURCE_RECEIPT_REQUIRED__CURRENT_BASELINE_DIAGNOSTIC_SUPPORTING_EVIDENCE_AVAILABLE",
+    "gate023": "OPEN_OWNER_AUTHORITY",
+    "gate024": "OPEN_PRODUCT_CORRECTION_AND_INTEGRATION_EXPANDED_BY_CURRENT_FINDINGS"
+  }
+}
