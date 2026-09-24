@@ -127,6 +127,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          # Validation commands above intentionally regenerate receipts. Rebuild the
+          # exact already-proven candidate from the clean parent so those outputs
+          # cannot leak into the integrable cleanup delta.
+          git reset --hard 16aafaec71706ebbb13b002395f72383b2e77a81
+          git clean -fdx
+          python3 /tmp/content_forensic_reduction_v2.py
           rm -rf controller-candidate-v2
           git status --short > /tmp/PRECOMMIT_STATUS.txt
           git config user.name "CEP Controller"
