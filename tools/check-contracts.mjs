@@ -133,7 +133,17 @@ const fixtureActive = fixture.input.filter(item => activeClasses.has(item.classi
 check('deferred.value_filter', deferred.policy === 'VALUE_FILTERED_DEFERRED_WORK' && deferred.items.length === 10 && deferred.items.every(item => activeClasses.has(item.classification) && item.activeFutureObligation === true) && JSON.stringify(fixtureActive) === JSON.stringify(fixture.expectedActiveIds) && JSON.stringify(fixtureExcluded) === JSON.stringify(fixture.expectedExcludedIds), deferred.summary);
 check('deferred.exclusion_traceability', excluded.items.length === 15 && excluded.items.every(item => excludedClasses.has(item.classification) && item.activeFutureObligation === false) && excluded.summary.activeFutureObligations === 0, excluded.summary);
 const staleDeferredToken = 'DEFERRED_WORK_' + 'ZERO_LOSS', staleDeferredPaths = [];
-for (const path of ['FINAL_HANDOFF_AR.md','README_START_HERE_AR.md','checkpoints/CURRENT_HIGH_LEVERAGE.json','tools/build-correction-registers.py','tools/finalize-candidate.py','assurance/HIGH_VALUE_DEFERRED_LEDGER.json','assurance/DEFERRED_WORK_LEDGER.json','tools/generate-writer-scaffold.mjs']) if ((await text(path)).includes(staleDeferredToken)) staleDeferredPaths.push(path);
+const staleDeferredScanPaths = ['FINAL_HANDOFF_AR.md','README_START_HERE_AR.md','checkpoints/CURRENT_HIGH_LEVERAGE.json','tools/build-correction-registers.py','tools/finalize-candidate.py','assurance/HIGH_VALUE_DEFERRED_LEDGER.json','assurance/DEFERRED_WORK_LEDGER.json','tools/generate-writer-scaffold.mjs'];
+for (const path of staleDeferredScanPaths) {
+  try {
+    if ((await text(path)).includes(staleDeferredToken)) staleDeferredPaths.push(path);
+  } catch (error) {
+    if (error?.code !== 'ENOENT') throw error;
+    // Historical/root lineage artifacts may be intentionally absent from the
+    // current working baseline after content-forensic cleanup. Absence cannot
+    // carry the stale active token this gate is designed to reject.
+  }
+}
 check('deferred.stale_active_status_absent', staleDeferredPaths.length === 0, staleDeferredPaths);
 
 const correctAuthority = 'W03_V3_4_SAME_LINEAGE_VALUE_DOMAIN_REQUIREMENT_EVIDENCE_DONOR_NOT_AUTHORITY';
