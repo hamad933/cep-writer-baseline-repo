@@ -32,6 +32,12 @@ export function canonicalizeGlobalShellRoute(search:string|URLSearchParams,href:
 
 export function isProductDestination(value:string,destinationRegistry:ShellDestinationRegistry=DEFAULT_SHELL_DESTINATION_REGISTRY):value is ShellProductSurface{return destinationRegistry.has(value)}
 
+export interface ShellSemanticContextProvider {
+  surface: ShellProductSurface;
+  capture: () => Record<string, any> | undefined;
+  restore: (context: Record<string, any>) => Promise<boolean | void> | boolean | void;
+}
+
 interface ShellBookmark{
   schemaVersion:1;
   owner:string;
@@ -41,12 +47,7 @@ interface ShellBookmark{
   windowScroll:{x:number;y:number};
   scroll:Array<{key:string;top:number;left:number}>;
   focus:null|{id?:string;blockId?:string;objectId?:string;commandId?:string;destination?:string;history?:string};
-  surfaceContext?:{
-    todayFilter?:string;
-    todayItemId?:string;
-    visualizeView?:string;
-    visualizeSelected?:string[];
-  };
+  surfaceContext?:Record<string, any>;
 }
 
 interface NoteTransactionDirtySource{
@@ -80,6 +81,16 @@ export class GlobalShellNavigationOwner{
   lastDirection='';
   lastLanguage='';
   onNavigate:ShellNavigateHandler|null=null;
+  private contextProviders = new Map<string, ShellSemanticContextProvider>();
+
+  registerContextProvider(provider: ShellSemanticContextProvider){
+    this.contextProviders.set(provider.surface, provider);
+  }
+
+  unregisterContextProvider(surface: string){
+    this.contextProviders.delete(surface);
+  }
+
   private clickHandler:(event:MouseEvent)=>void;
   private keyHandler:(event:KeyboardEvent)=>void;
   private pagehideHandler:()=>void;
@@ -311,7 +322,10 @@ export class GlobalShellNavigationOwner{
 
   captureCurrentContext(reason:string){
     let surfaceContext:ShellBookmark['surfaceContext']=undefined;
-    if(this.surface==='today'){
+    const provider=this.contextProviders.get(this.surface);
+    if(provider){
+      surfaceContext=provider.capture() as any;
+    }else if(this.surface==='today'){
       const activeFilterBtn=document.querySelector<HTMLElement>('[data-filter][aria-pressed="true"], [data-filter].active');
       const activeFilter=activeFilterBtn?.dataset.filter||undefined;
       const focusedItem=document.querySelector<HTMLElement>('[data-today-action][data-item-id]');
@@ -364,9 +378,18 @@ export class GlobalShellNavigationOwner{
   }
 
   async restoreBookmark(bookmark:ShellBookmark){
-    delete this.host.dataset.contextRestored;this.host.dataset.contextRestoreStatus='pending';
+    delete this.host.dataset.contextRestored;
+    delete document.documentElement.dataset.contextRestored;
+    this.host.dataset.contextRestoreStatus='pending';
     if(bookmark.surfaceContext){
-      if(this.surface==='today'&&bookmark.surfaceContext.todayFilter){
+      const provider=this.contextProviders.get(this.surface);
+      if(provider){
+        try{
+          await provider.restore(bookmark.surfaceContext);
+        }catch(e){
+          console.error('Context provider restore failed',e);
+        }
+      }else if(this.surface==='today'&&bookmark.surfaceContext.todayFilter){
         const filterBtn=document.querySelector<HTMLElement>(`[data-filter="${CSS.escape(bookmark.surfaceContext.todayFilter)}"]`);
         filterBtn?.click();
       }else if(this.surface==='visualize'&&bookmark.surfaceContext.visualizeView){
@@ -378,10 +401,20 @@ export class GlobalShellNavigationOwner{
     for(let attempt=0;attempt<12;attempt++){
       const ready=this.applyBookmarkScroll(bookmark);
       await this.frame();
-      if(ready&&this.bookmarkScrollMatches(bookmark)){stableFrames++;if(stableFrames>=2){this.restoreFocusIdentity(bookmark.focus,{shellFallback:true});this.host.dataset.contextRestored='true';this.host.dataset.contextRestoreStatus='restored';return true;}}
-      else stableFrames=0;
+      if(ready&&this.bookmarkScrollMatches(bookmark)){
+        stableFrames++;
+        if(stableFrames>=2){
+          this.restoreFocusIdentity(bookmark.focus,{shellFallback:true});
+          this.host.dataset.contextRestored='true';
+          document.documentElement.dataset.contextRestored='true';
+          this.host.dataset.contextRestoreStatus='restored';
+          return true;
+        }
+      }else stableFrames=0;
     }
-    delete this.host.dataset.contextRestored;this.host.dataset.contextRestoreStatus='unresolved';
+    delete this.host.dataset.contextRestored;
+    delete document.documentElement.dataset.contextRestored;
+    this.host.dataset.contextRestoreStatus='unresolved';
     return false;
   }
 

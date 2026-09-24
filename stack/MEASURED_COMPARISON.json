@@ -1,6 +1,6 @@
 {
   "runtime": "v22.16.0",
-  "measured_at": "2026-09-24T21:26:04.236Z",
+  "measured_at": "2026-09-24T21:49:10.975Z",
   "scope": "Canonical stack/native-typescript source independently generates dist and dist-ts JavaScript; no generated tree writes back to canonical source.",
   "buildDirection": "stack/native-typescript -> dist + dist-ts",
   "reverseGeneratedToSourceWrites": false,
@@ -15,7 +15,7 @@
       "authority": "CANONICAL_SOURCE_TO_GENERATED_ONLY",
       "source": "stack/native-typescript",
       "destination": "dist",
-      "written": 260,
+      "written": 261,
       "copiedAssets": 2,
       "removedStale": 0
     }
@@ -29,20 +29,20 @@
     "static_types": "Canonical TypeScript source; proof measures erasable-syntax generation parity only.",
     "model_pass": 210,
     "model_fail": 0,
-    "emit_ms": 214.9008000000016,
+    "emit_ms": 250.0659000000004,
     "build": {
       "pass": true,
       "authority": "CANONICAL_SOURCE_TO_GENERATED_ONLY",
       "source": "stack/native-typescript",
       "destination": "dist-ts",
-      "written": 260,
+      "written": 261,
       "copiedAssets": 2,
       "removedStale": 0
     }
   },
   "identical_model_results": true,
-  "A_model_suite_median_ms": 65.95409999999993,
-  "A_model_suite_p95_ms": 88.05409999999983,
+  "A_model_suite_median_ms": 80.3744999999999,
+  "A_model_suite_p95_ms": 162.66539999999986,
   "performance_limit": "One host, warm model workload only; not cold browser startup or representative full product workload.",
   "inventory": [
     {
@@ -371,9 +371,9 @@
     },
     {
       "file": "foundation/accepted-runtime.js",
-      "source_ts_bytes": 351169,
+      "source_ts_bytes": 354031,
       "source_ts_lines": 729,
-      "emitted_bytes": 351169
+      "emitted_bytes": 354031
     },
     {
       "file": "foundation/analytical/compare-host.js",
@@ -581,9 +581,9 @@
     },
     {
       "file": "foundation/global/shell/navigation.js",
-      "source_ts_bytes": 29284,
-      "source_ts_lines": 403,
-      "emitted_bytes": 29284
+      "source_ts_bytes": 30398,
+      "source_ts_lines": 436,
+      "emitted_bytes": 30398
     },
     {
       "file": "foundation/global/toolbar-template.js",
@@ -929,9 +929,9 @@
     },
     {
       "file": "main.js",
-      "source_ts_bytes": 56108,
-      "source_ts_lines": 287,
-      "emitted_bytes": 56108
+      "source_ts_bytes": 58262,
+      "source_ts_lines": 344,
+      "emitted_bytes": 58262
     },
     {
       "file": "model-tests.js",
@@ -1157,9 +1157,15 @@
     },
     {
       "file": "tests/post-c03/D03A/d03a-command-settings-convergence-tests.js",
-      "source_ts_bytes": 12315,
+      "source_ts_bytes": 12435,
       "source_ts_lines": 125,
-      "emitted_bytes": 12315
+      "emitted_bytes": 12435
+    },
+    {
+      "file": "tests/post-c03/D03B/d03b-workspace-context-convergence-tests.js",
+      "source_ts_bytes": 12203,
+      "source_ts_lines": 235,
+      "emitted_bytes": 12203
     },
     {
       "file": "tests/post-c03/PR01/pr01-runtime-interaction-tests.js",
