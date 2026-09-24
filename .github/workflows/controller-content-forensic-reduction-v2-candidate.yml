@@ -23,7 +23,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git show controller/content-forensic-reduction-v2:.controller/content_forensic_reduction_v2.py > /tmp/content_forensic_reduction_v2.py
+          git show origin/controller/content-forensic-reduction-v2:.controller/content_forensic_reduction_v2.py > /tmp/content_forensic_reduction_v2.py
 
       - name: Use governed Node target
         uses: actions/setup-node@v4
