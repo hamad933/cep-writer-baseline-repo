@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 2,
-  "classification": "ONE_TIME_WRITER_COMPLETE_MAIN_NORMALIZATION",
+  "schemaVersion": 3,
+  "classification": "WRITER_COMPLETE_MAIN_NORMALIZATION__STAGE2_CONTENT_FORENSIC_REDUCTION_CANDIDATE",
   "sourceCommit": "44f922e29e02363d00cc31ae6daeeca01dc9081a",
   "rules": {
     "keepRequiredWriterInputs": true,
@@ -4586,5 +4586,16 @@
       "sha256": "9d5cbd6cfcdc1943ed3b9323a872e6e8b18cafaaa0cf4f343c7597253854fb3a",
       "classification": "REGENERATE_ON_DEMAND"
     }
-  ]
+  ],
+  "stage2ContentForensicReduction": {
+    "sourceCommit": "16aafaec71706ebbb13b002395f72383b2e77a81",
+    "sourceTree": "c4d18db3b7e086bee92de188df1320d631fca7c2",
+    "crosswalk": "docs/history/CONTENT_FORENSIC_DISPOSITION_V2.json",
+    "historicalGeneratedEvidencePolicy": "ARCHIVE_GIT_HISTORY",
+    "writerOutputPolicy": "ARCHIVE_GIT_HISTORY",
+    "authorityPolicy": "KEEP_CURRENT_UNTIL_SOURCE_TO_REGISTRY_COMPACTION_PROVEN",
+    "archaeologyPolicy": "KEEP_REUSABLE_DONOR_EVIDENCE",
+    "r6EvidenceCorrection": "Old 5205d2/272 in-memory screenshot binaries are archived; C03-GATE-022 remains OPEN and is not converted to PASS.",
+    "productMutation": false
+  }
 }
