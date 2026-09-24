@@ -14,7 +14,7 @@ export const LOCAL_PERSISTENCE_CLIENT_CONTRACT=Object.freeze({
 export class LocalPersistenceClient{
   constructor({port=currentPort(),fetchImpl=globalThis.fetch}={}){
     const resolvedFetch=fetchImpl===globalThis.fetch&&typeof fetchImpl==='function'?fetchImpl.bind(globalThis):fetchImpl;
-    this.port=numericPort(port);this.baseUrl=`http://${LOOPBACK_HOST}:${this.port}`;this.fetchImpl=resolvedFetch;this.inFlightSaves=new Map();this.lastReceipt=null;
+    this.port=numericPort(port);this.baseUrl=`http://${LOOPBACK_HOST}:${this.port}`;this.fetchImpl=resolvedFetch;this.inFlightSaves=new Map();this.logicalSaveRequestIds=new Map();this.lastReceipt=null;
   }
   descriptor(){return {contract:LOCAL_PERSISTENCE_CLIENT_CONTRACT,baseUrl:this.baseUrl,host:LOOPBACK_HOST,port:this.port,arbitraryHost:false};}
   async request(method,path,body=undefined){
@@ -34,9 +34,10 @@ export class LocalPersistenceClient{
   explicitSave(document,context={}){
     const documentId=String(context.documentId||document.id),workingRevision=Number(context.workingRevision),key=`${documentId}:${workingRevision}`;
     if(this.inFlightSaves.has(key))return this.inFlightSaves.get(key);
-    const requestId=globalThis.crypto?.randomUUID?.()||`save-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    const suppliedRequestId=String(context.requestId||'').trim(),requestId=suppliedRequestId||this.logicalSaveRequestIds.get(key)||globalThis.crypto?.randomUUID?.()||`save-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    this.logicalSaveRequestIds.set(key,requestId);
     const work=this.request('POST','/v1/persistence/save',{operation:'EXPLICIT_SAVE',requestId,document,context:{...context,documentId}})
-      .then(receipt=>receipt?.ok===true?{...receipt,revision:receipt.revision||receipt.committedRevision}:{ok:false,reason:receipt?.code||receipt?.reason||'PERSISTENCE_SAVE_FAILED',...receipt})
+      .then(receipt=>receipt?.ok===true?{...receipt,requestId,logicalSaveKey:key,revision:receipt.revision||receipt.committedRevision}:{ok:false,reason:receipt?.code||receipt?.reason||'PERSISTENCE_SAVE_FAILED',...receipt,requestId,logicalSaveKey:key})
       .finally(()=>this.inFlightSaves.delete(key));
     this.inFlightSaves.set(key,work);return work;
   }

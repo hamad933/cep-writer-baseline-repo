@@ -54,10 +54,8 @@ export function bindShellSurfaceCommands({commands,navigation}={}){
       const choice=String(payload.choice||'').toLowerCase();
       if(choice==='cancel'||!choice)return {ok:false,status:choice==='cancel'?'DIRTY_DEPARTURE_CANCELLED':'DIRTY_DEPARTURE_CHOICE_REQUIRED',surface:navigation.surface,destination:target,mutated:false};
       if(choice==='save'){
-        const save=navigation.api?.Commands?.execute?.('document.commit',{route:'shell-leave-dirty',reason:'save-and-leave'});
-        if(save?.persisted!==true)return {ok:false,status:'SAVE_ACK_REQUIRED',surface:navigation.surface,destination:target,saveReceipt:save||null};
-        if(navigation.isDirty())return {ok:false,status:'SAVE_ACK_DIRTY_STATE_UNRESOLVED',surface:navigation.surface,destination:target,saveReceipt:save};
-        return navigation.navigate(target,payload.invoker||null);
+        let effect;try{effect=navigation.api?.Commands?.execute?.('document.commit',{route:'shell-leave-dirty',reason:'save-and-leave'});}catch(error){return {ok:false,status:'SAVE_SETTLEMENT_FAILED',surface:navigation.surface,destination:target,saveReceipt:null,error:String(error?.code||error?.message||error)}}
+        return Promise.resolve(effect).then(save=>{if(save?.persisted!==true)return {ok:false,status:save?.status||save?.code||'SAVE_NOT_PERSISTED',surface:navigation.surface,destination:target,saveReceipt:save||null};if(navigation.isDirty())return {ok:false,status:'SAVE_ACK_DIRTY_STATE_UNRESOLVED',surface:navigation.surface,destination:target,saveReceipt:save};return navigation.navigate(target,payload.invoker||null);},error=>({ok:false,status:'SAVE_SETTLEMENT_FAILED',surface:navigation.surface,destination:target,saveReceipt:null,error:String(error?.code||error?.message||error)}));
       }
       if(choice==='preserve')return navigation.navigateWithPreservedRecovery(target,payload.recoveryReceipt,payload.invoker||null);
       return {ok:false,status:'DIRTY_DEPARTURE_CHOICE_INVALID',allowed:['cancel','save','preserve']};
@@ -67,6 +65,6 @@ export function bindShellSurfaceCommands({commands,navigation}={}){
     surface:'shell',owner,commands:ids,destinationRegistryOwner:navigation.destinationRegistry.owner,
     routeContext:createShellRouteContextProjection(navigation),
     globalDestinationBaseline:navigation.globalAreas().map(item=>item.id),destinationCountFrozen:false,
-    shellVisualComposition:'REOPENED__NO_OBSOLETE_CHROME_AUTHORITY',finalDefaultRegistryWiring:'CONTROLLER_REPLAY_REQUIRED'
+    shellVisualComposition:'REOPENED__NO_OBSOLETE_CHROME_AUTHORITY',finalDefaultRegistryWiring:'CURRENT_PRODUCT_REGISTRY_BOUND__FINAL_SHELL_AUTHORITY_NOT_CLAIMED'
   };
 }
