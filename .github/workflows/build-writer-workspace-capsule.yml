@@ -3,45 +3,58 @@ name: CEP Writer Workspace Capsule
 on:
   push:
     branches:
-      - controller/writer-workspace-capsule-v1
       - 'capsule/**'
+      - controller/zero-loss-repo-cleanup
     paths:
       - '.github/workflows/build-writer-workspace-capsule.yml'
-      - 'cep-writer/CAPSULE_READY.json'
+      - 'tools/writer-capsule/**'
+      - 'mission-overlay/**'
+      - 'cep-writer/CAPSULE_BINDING.template.json'
   workflow_dispatch:
+    inputs:
+      mission_id:
+        description: Mission ID override
+        required: false
+        default: ''
+      binding_path:
+        description: Repo-local mission binding JSON
+        required: false
+        default: 'mission-overlay/CAPSULE_BINDING.json'
+      visual_config_path:
+        description: Repo-local optional visual bootstrap config
+        required: false
+        default: 'mission-overlay/CAPSULE_VISUAL_BOOTSTRAP.json'
 
 permissions:
   contents: read
 
 jobs:
   build-capsule:
-    name: Build Controller-prepared exact Writer capsule
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      - name: Checkout exact triggering commit
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Configure Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
 
-      - name: Prepare bounded exact-parent visual bootstrap
+      - name: Prepare optional exact-parent visual bootstrap
+        env:
+          VISUAL_CONFIG: ${{ inputs.visual_config_path || 'mission-overlay/CAPSULE_VISUAL_BOOTSTRAP.json' }}
         run: |
-          python tools/writer-capsule/prepare_visual_bootstrap.py \
-            --repo-root . \
-            --config cep-writer/CAPSULE_VISUAL_BOOTSTRAP.json \
-            --output .capsule-visual-bootstrap
+          python tools/writer-capsule/prepare_visual_bootstrap.py             --repo-root .             --config "$VISUAL_CONFIG"             --output .capsule-visual-bootstrap
 
       - name: Build capsule payload
+        env:
+          BINDING_PATH: ${{ inputs.binding_path || 'mission-overlay/CAPSULE_BINDING.json' }}
+          MISSION_ID: ${{ inputs.mission_id }}
         run: |
-          python tools/writer-capsule/build_capsule.py \
-            --repo-root . \
-            --output writer-capsule-out \
-            --visual-bootstrap .capsule-visual-bootstrap
+          args=(--repo-root . --output writer-capsule-out --visual-bootstrap .capsule-visual-bootstrap --binding "$BINDING_PATH")
+          if [ -n "$MISSION_ID" ]; then args+=(--mission "$MISSION_ID"); fi
+          python tools/writer-capsule/build_capsule.py "${args[@]}"
 
       - name: Verify generated capsule
         run: |
@@ -58,8 +71,7 @@ jobs:
           test "$(git -C /tmp/cep-capsule-smoke rev-parse HEAD)" = "$(git rev-parse HEAD)"
           test -z "$(git -C /tmp/cep-capsule-smoke status --porcelain)"
 
-      - name: Upload one ready-to-work inbound capsule
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: CEP_WRITER_WORKSPACE_CAPSULE-${{ github.run_id }}
           path: writer-capsule-out/
