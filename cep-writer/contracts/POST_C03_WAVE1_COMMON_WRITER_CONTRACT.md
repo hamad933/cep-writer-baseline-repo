@@ -16,14 +16,26 @@ Before editing, read locally:
 
 Required Writer execution must not fetch live Controller files from Drive.
 
-## Exact legal parent
+## Execution identity law
 
-HEAD: `293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a`
-Tree: `3101c06901dbdaff9602fea8098efb9c34575149`
-Product source: `480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641 / 273`
-Classification: `SALVAGEABLE_CORRECTION_BASE__NOT_ACCEPTED`
+Repository baseline ref: `main`.
+Exact repository mission parent HEAD/tree: supplied by the immutable Controller mission overlay and MUST be verified before mutation.
+Product-source ancestor HEAD: `293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a`.
+Product-source ancestor tree: `3101c06901dbdaff9602fea8098efb9c34575149`.
+Product source: `480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641 / 273`.
+Classification: `WORKING_CORRECTION_BASELINE__SALVAGEABLE_NOT_ACCEPTED`.
 
-Any exact mission branch must prove its bound parent/ancestor and exact mission overlay before mutation.
+Never substitute the Product-source ancestor for the current repository mission parent. Any mission branch must prove its exact Controller-bound parent/ancestor and exact mission overlay before mutation.
+
+## Current post-C03 finding routing
+
+- `CBF-001`: remains open for Structured/Balanced6 correction in D08/D13/D14; Wave 1 must not claim closure outside a legal Structured owner scope.
+- `CBF-002`: D03B owns the shared navigation semantic-context contract through `GlobalShellNavigationOwner`; final `main.ts`/m0 wiring remains D13.
+- `CBF-003`: D03C owns bounded shared `BottomDeepWorkOwner` provider/reachability correction; no per-Surface duplicate bottom owner.
+- `MFC-PF-001` and `MFC-PF-002`: D03B owns bounded Library/shared transient and F6 fallback residuals in existing shared interaction seams.
+- `MFC-PF-003`: D03A owns canonical Settings exposure/action-home for preference export/import/reset; Library donor-local retirement remains D08/D13.
+- `PVF-001`, `PVF-002`, `PVF-003`: remain downstream Surface integration residuals; D03 may repair only shared prerequisites and must not self-close final Surface mounting.
+- `F-049` and `F-050`: remain Visualize correction residuals for D08/D13.
 
 ## Global locks
 
