@@ -1,5 +1,6 @@
-import {AnalyticalCompareOwner} from '../../foundation/analytical/compare.js';
-import {TimelineReplayOwner} from '../../foundation/timeline/replay.js';
+import {CollectionTableMatrixHost} from '../../foundation/collection/table-matrix-host.js';
+import {TimelineReplayHost} from '../../foundation/timeline/replay-host.js';
+import {AnalyticalCompareHost} from '../../foundation/analytical/compare-host.js';
 import {createResultsCompareProvider} from '../analytical/results-compare-provider.js';
 import {createResultsTimelineProvider} from './timeline-replay-provider.js';
 
@@ -27,10 +28,12 @@ export class W03ResultsDomain {
     this.aar=new Map();
     this.persistence=persistence;
     this.determinismVerifier=determinismVerifier;
-    this.replayOwner=timelineReplayOwner||new TimelineReplayOwner();
+    if(!timelineReplayOwner)throw Error('RESULTS_SHARED_TIMELINE_REPLAY_OWNER_REQUIRED');
+    this.replayOwner=timelineReplayOwner;
     if(this.replayOwner?.owner!=='TimelineReplayOwner')throw Error('RESULTS_TIMELINE_REPLAY_OWNER_REQUIRED');
     this.replayRef=null;
-    this.compareOwner=analyticalCompareOwner||new AnalyticalCompareOwner();
+    if(!analyticalCompareOwner)throw Error('RESULTS_SHARED_ANALYTICAL_COMPARE_OWNER_REQUIRED');
+    this.compareOwner=analyticalCompareOwner;
     if(this.compareOwner?.owner!=='AnalyticalCompareOwner')throw Error('RESULTS_ANALYTICAL_COMPARE_OWNER_REQUIRED');
     this.provider=createResultsCompareProvider(this.records);
     this.compareOwner.registerProvider(this.provider);
@@ -87,4 +90,38 @@ export class W03ResultsDomain {
     return freeze({ok:true,owner:this.owner,envelopeVersion:'candidate-evidence/results-source/1',resultRef,sourceRunInputRef:clone(record.sourceRunInputRef||null),schemaVersion:record.schemaVersion||'',comparatorVersion:record.comparatorVersion||'',provenanceRefs:clone(record.provenanceRefs||[]),limitations:clone(record.limitations||[]),sealed:true,candidateEvidenceOnly:true,formalAdmissionPerformed:false,reviewDecisionPerformed:false,masteryMutation:false,portfolioMutation:false,auditAuthority:false});
   }
   verifyDeterminism({ref}={}){const record=this._record(ref);if(typeof this.determinismVerifier!=='function')return freeze({ok:false,code:'DETERMINISM_PROVIDER_UNAVAILABLE',reason:'Determinism verification requires a separately admitted execution provider.',runExecuted:false,mutated:false});return this.determinismVerifier({result:clone(record)})}
+}
+
+const resultsCollectionAdapter=domain=>({
+  adapterId:'results.sealed-revisions',
+  rows:()=>domain.listResults(),
+  rowId:row=>`${row.ref.resultId}@${row.ref.revisionId}`,
+  rowLabel:row=>String(row.label||row.ref.resultId),
+  searchableText:row=>JSON.stringify({label:row.label,ref:row.ref,status:row.status,runId:row.runId}),
+  columns:Object.freeze([
+    {id:'result',label:'Result',cell:row=>({text:String(row.label||row.ref.resultId),secondary:`${row.ref.resultId}@${row.ref.revisionId}`,direction:'auto'})},
+    {id:'status',label:'Status',cell:row=>({text:String(row.status),tone:'accent'})},
+    {id:'events',label:'Events',align:'end',cell:row=>String(row.eventCount)}
+  ]),
+  actions:row=>Object.freeze([{id:'results.replay',label:'Replay recorded Result',ariaLabel:`Replay ${row.ref.resultId}`}])
+});
+
+/**
+ * Reusable D03C host binding only. It deliberately does not mount a route, select
+ * a Result, open an AAR, or claim the D09/D13 integration boundary.
+ */
+export function bindResultsReusableHosts({domain,roots={},transientHost}={}){
+  if(domain?.owner!=='W03ResultsDomain')throw Error('RESULTS_DOMAIN_REQUIRED_FOR_SHARED_HOSTS');
+  if(!roots.collection)throw Error('RESULTS_COLLECTION_HOST_ROOT_REQUIRED');
+  if(!roots.timeline)throw Error('RESULTS_TIMELINE_HOST_ROOT_REQUIRED');
+  if(!transientHost)throw Error('RESULTS_SHARED_TRANSIENT_HOST_REQUIRED');
+  const collection=new CollectionTableMatrixHost({root:roots.collection,adapter:resultsCollectionAdapter(domain),title:'Sealed Results',transientHost});
+  const timeline=new TimelineReplayHost(roots.timeline,domain.replayOwner);
+  const analytical=new AnalyticalCompareHost(domain.compareOwner);
+  return Object.freeze({
+    owner:'ResultsReusableHostBinding',domainOwner:domain.owner,
+    collection,timeline,analytical,
+    ownerIdentity:Object.freeze({timeline:timeline.owner===domain.replayOwner,analytical:analytical.owner===domain.compareOwner}),
+    reachable:true,finalRouteMounted:false,aarMounted:false,downstreamOwner:'D09/D13'
+  });
 }

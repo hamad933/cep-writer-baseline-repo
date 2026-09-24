@@ -75,7 +75,46 @@ const historyRecoveryNegativeRuntime=`const state={recovery:{byKu:{}}}; function
 const historyRecoveryNegativeObserved=structuredHistoryRecoveryOwnership(historyRecoveryNegativeStructured,historyRecoveryNegativeRuntime),historyRecoveryNegativeFixture={id:'structured.history-recovery-negative-fixture',status:historyRecoveryNegativeObserved.every(x=>x.status==='FAIL')?'PASS':'FAIL',expected:'ALL_HISTORY_RECOVERY_OWNERSHIP_GUARDS_FAIL',observed:historyRecoveryNegativeObserved};
 const historyRecoveryFail=historyRecoveryGuards.some(x=>x.status==='FAIL')||historyRecoveryNegativeFixture.status==='FAIL';
 
-const result={schemaVersion:4,status:findings.length||fixtureFail||ownershipFail||historyRecoveryFail?'FAIL':'PASS',filesScanned:files.length,rules:rules.map(rule=>({mechanicId:rule.mechanicId,approvedOwners:rule.owners})),findings,fixtureTests,ownershipGuards,ownershipFixture,historyRecoveryGuards,historyRecoveryNegativeFixture,deferredExceptions:[],limits:'Deterministic symbol/registration heuristic plus executable Structured mutation and transaction/history/recovery semantic ownership gates with deliberate negative fixtures; novel naming still requires semantic review.'};
+const CANONICAL_OWNER_NAMES=Object.freeze(['AnalyticalCompareOwner','TimelineReplayOwner','ContextInspectorHost','BottomDeepWorkOwner','OperationalSessionOwner']);
+const silentOwnerFallbackPattern=new RegExp(`(?:\\|\\||\\?\\?)\\s*new\\s+(?:${CANONICAL_OWNER_NAMES.join('|')})\\s*\\(`,'g');
+const domProductFallbackPatterns=Object.freeze([
+  /renderer\s*=\s*new\s+DomTerminalRendererAdapter\s*\(/g,
+  /renderer\s*\|\|\s*new\s+DomTerminalRendererAdapter\s*\(/g
+]);
+function sharedHostConstructionDefects(source,{requiredHosts=[]}={}){
+  const duplicateCanonicalInstances=[...source.matchAll(silentOwnerFallbackPattern)].map(match=>match[0]);
+  const forbiddenProductFallbacks=domProductFallbackPatterns.flatMap(pattern=>[...source.matchAll(new RegExp(pattern.source,pattern.flags))].map(match=>match[0]));
+  const deadRequiredHosts=requiredHosts.filter(host=>!new RegExp(`new\\s+${host}\\s*\\(`).test(source));
+  const consumerPropagationFailures=[];
+  if(/new\s+TimelineReplayHost\s*\([^,]+,\s*new\s+TimelineReplayOwner\s*\(/.test(source))consumerPropagationFailures.push('TimelineReplayHost');
+  if(/new\s+AnalyticalCompareHost\s*\(\s*new\s+AnalyticalCompareOwner\s*\(/.test(source))consumerPropagationFailures.push('AnalyticalCompareHost');
+  return {duplicateCanonicalInstances,deadRequiredHosts,forbiddenProductFallbacks,consumerPropagationFailures};
+}
+const d03cBindings=Object.freeze([
+  {id:'results.reusable-host-binding',file:'adapters/results/domain.js',requiredHosts:['CollectionTableMatrixHost','TimelineReplayHost','AnalyticalCompareHost'],requiredTokens:['RESULTS_SHARED_TIMELINE_REPLAY_OWNER_REQUIRED','RESULTS_SHARED_ANALYTICAL_COMPARE_OWNER_REQUIRED','domain.replayOwner','domain.compareOwner','finalRouteMounted:false']},
+  {id:'rq.reusable-host-binding',file:'adapters/rq/domain.js',requiredHosts:['CollectionTableMatrixHost','AnalyticalCompareHost'],requiredTokens:['RQ_SHARED_ANALYTICAL_COMPARE_OWNER_REQUIRED','domain.compareOwner','finalRouteMounted:false']}
+]);
+const d03cBindingGuards=d03cBindings.map(binding=>{
+  const source=content.get(binding.file)||'',defects=sharedHostConstructionDefects(source,binding),missingTokens=binding.requiredTokens.filter(token=>!source.includes(token));
+  return {id:binding.id,status:source&&Object.values(defects).every(items=>items.length===0)&&missingTokens.length===0?'PASS':'FAIL',file:binding.file,requiredHosts:binding.requiredHosts,missingTokens,defects};
+});
+const operationalSource=content.get('foundation/operational.js')||'',terminalHostSource=content.get('foundation/operational/terminal-host.js')||'',bottomSource=content.get('foundation/global/bottom-shelf.js')||'',wave3Source=content.get('foundation/wave3-assembly.js')||'';
+const d03cRuntimeGuards=[
+  {id:'terminal.dom-fallback-product-unreachable',status:/OPERATIONAL_VIEW_RETIRED_USE_OPERATIONAL_TERMINAL_HOST_XTERM/.test(operationalSource)&&/productReachable\s*=\s*false/.test(operationalSource)&&sharedHostConstructionDefects(operationalSource).forbiddenProductFallbacks.length===0?'PASS':'FAIL'},
+  {id:'terminal.xterm-canonical-product-renderer',status:/new\s+XtermOperationalTerminalRenderer\s*\(/.test(terminalHostSource)&&/TERMINAL_PRODUCT_RENDERER_MUST_BE_XTERM/.test(terminalHostSource)?'PASS':'FAIL'},
+  {id:'bottom.zero-provider-truthful-unavailable',status:/BOTTOM_PROVIDER_UNAVAILABLE/.test(bottomSource)&&/status:\s*['"]UNAVAILABLE['"]/.test(bottomSource)&&/toggle\.disabled\s*=\s*!snapshot\.providerCount/.test(bottomSource)?'PASS':'FAIL'},
+  {id:'bottom.provider-propagation-reachable',status:/bottomProviders\s*=\s*\[\]/.test(wave3Source)&&/registerBottomProvider\s*\(/.test(wave3Source)&&/providers=\[\.\.\.this\.bottomProviders\]/.test(wave3Source)?'PASS':'FAIL'}
+];
+const d03cNegativeSources=Object.freeze([
+  {id:'duplicate-canonical-instance',source:'class Consumer { constructor(owner){ this.owner=owner||new AnalyticalCompareOwner(); } }',options:{},field:'duplicateCanonicalInstances'},
+  {id:'dead-required-host',source:'export function bind(){ return {reachable:true}; }',options:{requiredHosts:['AnalyticalCompareHost']},field:'deadRequiredHosts'},
+  {id:'forbidden-production-fallback',source:'class ProductTerminal { constructor(renderer=new DomTerminalRendererAdapter()){} }',options:{},field:'forbiddenProductFallbacks'},
+  {id:'consumer-propagation-failure',source:'const host=new AnalyticalCompareHost(new AnalyticalCompareOwner());',options:{},field:'consumerPropagationFailures'}
+]);
+const d03cNegativeProbes=d03cNegativeSources.map(probe=>{const observed=sharedHostConstructionDefects(probe.source,probe.options)[probe.field];return {id:probe.id,status:observed.length?'PASS':'FAIL',expected:`${probe.field}:NON_EMPTY`,observed};});
+const d03cFail=d03cBindingGuards.some(item=>item.status==='FAIL')||d03cRuntimeGuards.some(item=>item.status==='FAIL')||d03cNegativeProbes.some(item=>item.status==='FAIL');
+
+const result={schemaVersion:5,status:findings.length||fixtureFail||ownershipFail||historyRecoveryFail||d03cFail?'FAIL':'PASS',filesScanned:files.length,rules:rules.map(rule=>({mechanicId:rule.mechanicId,approvedOwners:rule.owners})),findings,fixtureTests,ownershipGuards,ownershipFixture,historyRecoveryGuards,historyRecoveryNegativeFixture,d03cBindingGuards,d03cRuntimeGuards,d03cNegativeProbes,deferredExceptions:[],limits:'Deterministic symbol/registration heuristic plus executable Structured mutation, transaction/history/recovery, and reusable-host construction gates with deliberate negative probes; novel naming still requires semantic review.'};
 await writeFile(new URL('assurance/DUPLICATE_MECHANIC_SCAN.json',root),JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
-if(findings.length||fixtureFail||ownershipFail||historyRecoveryFail)process.exitCode=1;
+if(findings.length||fixtureFail||ownershipFail||historyRecoveryFail||d03cFail)process.exitCode=1;

@@ -23,9 +23,10 @@ const toneOutcome=tone=>tone==='error'?'error':tone==='success'?'success':tone==
 const truthForOutcome=outcome=>outcome==='error'||outcome==='failure'?{ok:false,status:'ERROR'}:outcome==='success'?{ok:true,status:'SUCCESS'}:{status:outcome.toUpperCase()};
 
 export class Wave3GlobalAssembly{
-  constructor({commandBus,transientOwner,preferences,api,workspace,consumer,family,structured=null,learn=null,spatial=null,relations=null,simulation=null,feedbackOwner=null,document:doc=globalThis.document}={}){
+  constructor({commandBus,transientOwner,preferences,api,workspace,consumer,family,structured=null,learn=null,spatial=null,relations=null,simulation=null,bottomProviders=[],feedbackOwner=null,document:doc=globalThis.document}={}){
     if(!commandBus||!transientOwner||!preferences||!api||!workspace||!doc)throw Error('WAVE3_ASSEMBLY_DEPENDENCY_REQUIRED');
-    this.contract=WAVE3_GLOBAL_ASSEMBLY_CONTRACT;this.commandBus=commandBus;this.transientOwner=transientOwner;this.preferences=preferences;this.api=api;this.workspace=workspace;this.consumer=consumer;this.family=family;this.structured=structured;this.learn=learn;this.spatial=spatial;this.relations=relations;this.simulation=simulation;this.document=doc;
+    if(!Array.isArray(bottomProviders))throw Error('WAVE3_BOTTOM_PROVIDERS_ARRAY_REQUIRED');
+    this.contract=WAVE3_GLOBAL_ASSEMBLY_CONTRACT;this.commandBus=commandBus;this.transientOwner=transientOwner;this.preferences=preferences;this.api=api;this.workspace=workspace;this.consumer=consumer;this.family=family;this.structured=structured;this.learn=learn;this.spatial=spatial;this.relations=relations;this.simulation=simulation;this.bottomProviders=[...bottomProviders];this.document=doc;
     this.feedbackOwner=feedbackOwner||new AccessibilityFeedbackOwner();this.feedbackProjector=null;this.contextInspector=null;this.contextContainer=null;this.contextPresentationMode='foundation-host';this.bottomOwner=null;this.bottomPresentationMode='foundation-host';this.uiScale=new UIScalePolicyOwner(preferences);this.inputOwner=null;this.inputListener=null;this.originalWorkspaceStatus=workspace.status.bind(workspace);this.originalApplyPreferences=workspace.applyPreferences.bind(workspace);
   }
   mount(){this.mountInput();this.mountFeedback();this.mountContext();this.mountBottom();this.mountScale();return this;}
@@ -97,7 +98,7 @@ export class Wave3GlobalAssembly{
   }
   usesDonorNativeBottomPresentation(){return this.consumer==='library'&&Boolean(this.document.querySelector('#bottomShelf'))&&typeof this.api?.renderBottom==='function';}
   mountBottom(){
-    const providers=[];if(this.structured&&typeof this.structured.transactionDescriptor==='function')providers.push(new StructuredBottomProvider(this.structured));if(this.simulation)providers.push(new OperationalBottomProvider(this.simulation));
+    const providers=[...this.bottomProviders];if(this.structured&&typeof this.structured.transactionDescriptor==='function')providers.push(new StructuredBottomProvider(this.structured));if(this.simulation)providers.push(new OperationalBottomProvider(this.simulation));
     this.bottomOwner=new BottomDeepWorkOwner({providers,focusBridge:{captureCurrent:()=>this.document.activeElement,enter:()=>{const shelf=this.document.querySelector('#bottomShelf'),toggle=this.document.querySelector('#bottomToggle'),content=this.document.querySelector('#bottomContent');if(!content)return false;if(shelf)shelf.dataset.state='open';if(toggle)toggle.setAttribute('aria-expanded','true');content.hidden=false;content.inert=false;content.removeAttribute('aria-hidden');content.tabIndex=-1;const entry=this.document.querySelector('.bottomtabs [data-action=bottom-tab][aria-selected="true"]')||this.document.querySelector('.bottomtabs [data-action=bottom-tab]')||content;entry?.focus?.();return this.document.activeElement===entry},restore:target=>{if(!target?.focus)return false;target.focus();return this.document.activeElement===target},fallback:()=>this.document.querySelector('#centerPane')}});
     this.bottomPresentationMode=this.usesDonorNativeBottomPresentation()?'donor-native':'foundation-host';
     this.api.bottomPresentationRenderer=(options={})=>this.bottomOwner?.renderPresentation({root:this.document,presentationOwner:'BottomDeepWorkOwner',...options})||false;
@@ -107,10 +108,11 @@ export class Wave3GlobalAssembly{
     const shelf=this.document.querySelector('#bottomShelf');if(shelf){shelf.dataset.bottomPresentationOwner='BottomDeepWorkOwner';shelf.dataset.bottomPresentationSource='ACCEPTED_LIBRARY_DONOR_EXTRACTED';}
     this.renderBottom();return this.bottomOwner;
   }
-  setBottomOpen(open,{invoker=this.document.activeElement,reason='controller-set',restoreFocus=true}={}){if(!this.bottomOwner?.providerDescriptors().length)return false;const state=this.bottomOwner.snapshot();if(open&&!state.open)this.bottomOwner.open(undefined,{invoker,reason});else if(!open&&state.open)this.bottomOwner.close({reason,restoreFocus});this.renderBottom();return this.bottomOwner.snapshot();}
-  toggleBottom({invoker=this.document.activeElement,reason='command'}={}){if(!this.bottomOwner?.providerDescriptors().length)return false;this.bottomOwner.toggle(undefined,{invoker,reason});this.renderBottom();return this.bottomOwner.snapshot();}
+  registerBottomProvider(provider){if(!this.bottomOwner)throw Error('WAVE3_BOTTOM_OWNER_NOT_MOUNTED');const descriptor=this.bottomOwner.registerProvider(provider);this.renderBottom();return descriptor;}
+  setBottomOpen(open,{invoker=this.document.activeElement,reason='controller-set',restoreFocus=true}={}){if(!this.bottomOwner)return false;if(!this.bottomOwner.providerDescriptors().length){this.renderBottom();return this.bottomOwner.snapshot();}const state=this.bottomOwner.snapshot();if(open&&!state.open)this.bottomOwner.open(undefined,{invoker,reason});else if(!open&&state.open)this.bottomOwner.close({reason,restoreFocus});this.renderBottom();return this.bottomOwner.snapshot();}
+  toggleBottom({invoker=this.document.activeElement,reason='command'}={}){if(!this.bottomOwner)return false;if(!this.bottomOwner.providerDescriptors().length){this.renderBottom();return this.bottomOwner.snapshot();}this.bottomOwner.toggle(undefined,{invoker,reason});this.renderBottom();return this.bottomOwner.snapshot();}
   renderBottom(){
-    if(!this.bottomOwner)return false;const snapshot=this.bottomOwner.snapshot();if(!snapshot.providerCount)return false;
+    if(!this.bottomOwner)return false;const snapshot=this.bottomOwner.snapshot();
     if(this.api.state?.surface)this.api.state.surface.bottomOpen=snapshot.open;
     const tab=this.bottomPresentationMode==='donor-native'?(this.api.state?.surface?.bottomTab||snapshot.activeTab):snapshot.activeTab;
     const preferences=this.api.state?.preferences||{};

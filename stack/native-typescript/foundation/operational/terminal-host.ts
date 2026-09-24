@@ -41,9 +41,11 @@ export class OperationalTerminalHost {
     if(!owner||owner.owner!=='OperationalSessionOwner')throw Error('TERMINAL_HOST_OWNER_REQUIRED');
     this.root=root;this.owner=owner;this.routeInput=typeof routeInput==='function'?routeInput:null;this.routeResize=typeof routeResize==='function'?routeResize:null;this.routeRestart=typeof routeRestart==='function'?routeRestart:null;this.onError=typeof onError==='function'?onError:()=>{};this.onGeometryRequest=typeof onGeometryRequest==='function'?onGeometryRequest:null;this.onDetachRequest=typeof onDetachRequest==='function'?onDetachRequest:null;
     this.renderer=renderer||new XtermOperationalTerminalRenderer();if(typeof this.renderer.render!=='function')throw Error('TERMINAL_RENDERER_PORT_REQUIRED');
+    const rendererKind=this.renderer.descriptor?.().kind||this.renderer.kind;
+    if(rendererKind!=='XTERM_JS'&&!String(rendererKind||'').startsWith('TEST_'))throw Error('TERMINAL_PRODUCT_RENDERER_MUST_BE_XTERM');
     this.invocation=0;this.lastError='';this.readOnly=false;this.returnFocus=null;
   }
-  rendererDescriptor(){return this.renderer.descriptor?.()||{id:this.renderer.id||'TerminalRenderer',kind:'CUSTOM',contract:TERMINAL_RENDERER_PORT_CONTRACT};}
+  rendererDescriptor(){return this.renderer.descriptor?.()||{id:this.renderer.id||'TerminalRenderer',kind:this.renderer.kind||'CUSTOM',contract:TERMINAL_RENDERER_PORT_CONTRACT};}
   captureReturnFocus(target=globalThis.document?.activeElement){if(target&&target!==globalThis.document?.body)this.returnFocus=target;return this.returnFocus;}
   _restoreFocus(){const target=this.returnFocus;if(target?.isConnected)queueMicrotask(()=>target.focus());}
   setReadOnly(readOnly,{render=true}={}){this.readOnly=!!readOnly;if(render)this.render();return this.readOnly;}

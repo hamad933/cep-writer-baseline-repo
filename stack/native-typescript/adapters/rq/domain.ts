@@ -1,4 +1,5 @@
-import {AnalyticalCompareOwner} from '../../foundation/analytical/compare.js';
+import {CollectionTableMatrixHost} from '../../foundation/collection/table-matrix-host.js';
+import {AnalyticalCompareHost} from '../../foundation/analytical/compare-host.js';
 import {createRqCompareProvider} from '../analytical/rq-compare-provider.js';
 const clone=value=>value===undefined?undefined:structuredClone(value);
 const nonEmpty=value=>typeof value==='string'&&value.trim().length>0;
@@ -13,7 +14,8 @@ export class RQDomainAdapter{
     this.providerAdmitted=providerAdmitted===true;
     this.providerClassification=String(providerClassification||'UNSPECIFIED_PROVIDER_CLASSIFICATION');
     this.records=clone(this.providerAdmitted?records:[]);
-    this.compareOwner=analyticalCompareOwner||new AnalyticalCompareOwner();
+    if(!analyticalCompareOwner)throw Error('RQ_SHARED_ANALYTICAL_COMPARE_OWNER_REQUIRED');
+    this.compareOwner=analyticalCompareOwner;
     if(this.compareOwner?.ownerToken!=='AnalyticalCompare')throw Error('CENTRAL_ANALYTICAL_COMPARE_REQUIRED');
     this.provider=createRqCompareProvider(this.records,providerOptions);
     this.compareOwner.registerProvider(this.provider);
@@ -93,4 +95,33 @@ export class RQDomainAdapter{
     return {ok:true,status:'PROVENANCE_PROJECTION',sessionId,provenance:clone(projection.provenance),receipt:clone(projection.receipt),formalReview:false,sourceAuthority:originalBytesAvailable?'ORIGINAL_BYTES_VERIFIED':'DERIVED_ONLY',originalHashAssertion:originalBytesAvailable?String(payload.originalHash||'UNSPECIFIED'):'FORBIDDEN_DERIVED_ONLY',persisted:false};
   }
   saveAnalysisSession(sessionId){if(!this.sessions.has(sessionId))return {ok:false,status:'ANALYSIS_SESSION_UNKNOWN',persisted:false};return {ok:false,status:'RQ_ANALYSIS_SESSION_PERSISTENCE_UNAVAILABLE',persisted:false,canonicalMutation:false,sessionId};}
+}
+
+const rqCollectionAdapter=domain=>({
+  adapterId:'rq.source-revisions',
+  rows:()=>clone(domain.records),
+  rowId:row=>`${row.sourceId}@${row.revision}`,
+  rowLabel:row=>String(row.title||row.label||row.sourceId),
+  searchableText:row=>JSON.stringify(row),
+  columns:Object.freeze([
+    {id:'source',label:'Source',cell:row=>({text:String(row.title||row.label||row.sourceId),secondary:`${row.sourceId}@${row.revision}`,direction:'auto'})},
+    {id:'digest',label:'Digest',cell:row=>({text:String(row.digest),direction:'ltr',tone:'muted'})},
+    {id:'status',label:'Status',cell:row=>String(row.status||'CURRENT')}
+  ]),
+  actions:row=>Object.freeze([{id:'rq.compare.pin',label:'Pin for comparison',ariaLabel:`Pin ${row.sourceId} revision ${row.revision}`}])
+});
+
+/** Reusable D03C host binding; final RQ route composition remains downstream-owned. */
+export function bindRqReusableHosts({domain,roots={},transientHost}={}){
+  if(domain?.owner!==RQ_DOMAIN_OWNER)throw Error('RQ_DOMAIN_REQUIRED_FOR_SHARED_HOSTS');
+  if(!roots.collection)throw Error('RQ_COLLECTION_HOST_ROOT_REQUIRED');
+  if(!transientHost)throw Error('RQ_SHARED_TRANSIENT_HOST_REQUIRED');
+  const collection=new CollectionTableMatrixHost({root:roots.collection,adapter:rqCollectionAdapter(domain),title:'RQ Source Revisions',transientHost});
+  const analytical=new AnalyticalCompareHost(domain.compareOwner);
+  return Object.freeze({
+    owner:'RqReusableHostBinding',domainOwner:domain.owner,
+    collection,analytical,
+    ownerIdentity:Object.freeze({analytical:analytical.owner===domain.compareOwner}),
+    reachable:true,finalRouteMounted:false,reviewMounted:false,downstreamOwner:'D09/D13'
+  });
 }

@@ -1,7 +1,7 @@
 {
-  "schemaVersion": 4,
+  "schemaVersion": 5,
   "status": "PASS",
-  "filesScanned": 260,
+  "filesScanned": 261,
   "rules": [
     {
       "mechanicId": "relation.edit",
@@ -234,6 +234,93 @@
       }
     ]
   },
+  "d03cBindingGuards": [
+    {
+      "id": "results.reusable-host-binding",
+      "status": "PASS",
+      "file": "adapters/results/domain.js",
+      "requiredHosts": [
+        "CollectionTableMatrixHost",
+        "TimelineReplayHost",
+        "AnalyticalCompareHost"
+      ],
+      "missingTokens": [],
+      "defects": {
+        "duplicateCanonicalInstances": [],
+        "deadRequiredHosts": [],
+        "forbiddenProductFallbacks": [],
+        "consumerPropagationFailures": []
+      }
+    },
+    {
+      "id": "rq.reusable-host-binding",
+      "status": "PASS",
+      "file": "adapters/rq/domain.js",
+      "requiredHosts": [
+        "CollectionTableMatrixHost",
+        "AnalyticalCompareHost"
+      ],
+      "missingTokens": [],
+      "defects": {
+        "duplicateCanonicalInstances": [],
+        "deadRequiredHosts": [],
+        "forbiddenProductFallbacks": [],
+        "consumerPropagationFailures": []
+      }
+    }
+  ],
+  "d03cRuntimeGuards": [
+    {
+      "id": "terminal.dom-fallback-product-unreachable",
+      "status": "PASS"
+    },
+    {
+      "id": "terminal.xterm-canonical-product-renderer",
+      "status": "PASS"
+    },
+    {
+      "id": "bottom.zero-provider-truthful-unavailable",
+      "status": "PASS"
+    },
+    {
+      "id": "bottom.provider-propagation-reachable",
+      "status": "PASS"
+    }
+  ],
+  "d03cNegativeProbes": [
+    {
+      "id": "duplicate-canonical-instance",
+      "status": "PASS",
+      "expected": "duplicateCanonicalInstances:NON_EMPTY",
+      "observed": [
+        "||new AnalyticalCompareOwner("
+      ]
+    },
+    {
+      "id": "dead-required-host",
+      "status": "PASS",
+      "expected": "deadRequiredHosts:NON_EMPTY",
+      "observed": [
+        "AnalyticalCompareHost"
+      ]
+    },
+    {
+      "id": "forbidden-production-fallback",
+      "status": "PASS",
+      "expected": "forbiddenProductFallbacks:NON_EMPTY",
+      "observed": [
+        "renderer=new DomTerminalRendererAdapter("
+      ]
+    },
+    {
+      "id": "consumer-propagation-failure",
+      "status": "PASS",
+      "expected": "consumerPropagationFailures:NON_EMPTY",
+      "observed": [
+        "AnalyticalCompareHost"
+      ]
+    }
+  ],
   "deferredExceptions": [],
-  "limits": "Deterministic symbol/registration heuristic plus executable Structured mutation and transaction/history/recovery semantic ownership gates with deliberate negative fixtures; novel naming still requires semantic review."
+  "limits": "Deterministic symbol/registration heuristic plus executable Structured mutation, transaction/history/recovery, and reusable-host construction gates with deliberate negative probes; novel naming still requires semantic review."
 }

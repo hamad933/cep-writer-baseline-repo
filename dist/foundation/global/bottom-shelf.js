@@ -161,18 +161,20 @@ export class BottomDeepWorkOwner {
   }
   presentationModel({tab=this.activeTab,actionCapabilities={},preferences={}}={}){
     const currentTab=safeTab(tab),snapshot=this.snapshot();
-    if(!snapshot.providerCount)return {owner:this.owner,tab:currentTab,summary:'Deep work unavailable',html:'',sourceOwner:null,readOnly:true};
+    if(!snapshot.providerCount)return {owner:this.owner,tab:currentTab,status:'UNAVAILABLE',code:'BOTTOM_PROVIDER_UNAVAILABLE',summary:'Deep work unavailable',html:'<div class="context-warning" role="status" data-bottom-unavailable>No compatible bottom/deep-work provider is registered for this surface.</div>',sourceOwner:null,readOnly:true,ownsCanonicalContent:false};
     const projection=this.readActiveProvider();
     const view=projection.family==='structured'?structuredPresentation(projection,{tab:currentTab,actionCapabilities,preferences}):operationalPresentation(projection,{tab:currentTab});
     return {owner:this.owner,providerId:projection.providerId,sourceOwner:projection.sourceOwner,readOnly:true,ownsCanonicalContent:false,...view};
   }
   renderPresentation({root=globalThis.document,tab=this.activeTab,actionCapabilities={},preferences={},presentationOwner=BOTTOM_DEEP_WORK_OWNER}={}){
     if(!root)return false;const shelf=root.querySelector?.('#bottomShelf'),content=root.querySelector?.('#bottomContent'),toggle=root.querySelector?.('#bottomToggle'),summary=root.querySelector?.('#bottomSummary'),snapshot=this.snapshot();
-    if(!snapshot.providerCount||!shelf||!content)return false;const presentation=snapshot.presentation,model=this.presentationModel({tab,actionCapabilities,preferences});
+    if(!shelf||!content)return false;const presentation=snapshot.presentation,model=this.presentationModel({tab,actionCapabilities,preferences});
     shelf.dataset.state=snapshot.open?'open':'closed';shelf.dataset.bottomOwner=snapshot.owner;shelf.dataset.bottomPresentationOwner=presentationOwner;shelf.dataset.bottomProviderOwner=model.sourceOwner||'';shelf.dataset.bottomPresentationSource='ACCEPTED_LIBRARY_DONOR_EXTRACTED';
-    if(toggle)toggle.setAttribute('aria-expanded',String(snapshot.open));
+    shelf.dataset.bottomAvailability=snapshot.availability.status;
+    if(toggle){toggle.setAttribute('aria-expanded',String(snapshot.open));toggle.disabled=!snapshot.providerCount;toggle.setAttribute('aria-disabled',String(!snapshot.providerCount));}
     content.hidden=presentation.hidden;content.inert=presentation.inert;content.setAttribute('aria-hidden',presentation.ariaHidden);
     root.querySelectorAll?.('.bottomtabs [data-action=bottom-tab]')?.forEach(button=>{const on=button.dataset.value===model.tab;button.classList.toggle('active',on);button.setAttribute('aria-selected',String(on));button.tabIndex=on?0:-1;});
+    if(!snapshot.providerCount){content.innerHTML='';if(summary)summary.textContent=model.summary;return {snapshot,model};}
     if(!snapshot.open){content.innerHTML='';if(summary)summary.textContent='مغلق — افتحه للسجل أو المقارنة أو الاسترداد';return {snapshot,model};}
     content.innerHTML=model.html;if(summary)summary.textContent=model.summary;return {snapshot,model};
   }
@@ -184,6 +186,7 @@ export class BottomDeepWorkOwner {
       owner:this.owner,contract:this.contract,policyRevision:this.policy.revision,
       open:this.isOpen,activeProviderId:this.activeProviderId,
       activeProvider:this.providerDescriptor(),providerCount:this.providers.size,
+      availability:this.providers.size?{status:'AVAILABLE',code:'BOTTOM_PROVIDER_AVAILABLE',enabled:true}:{status:'UNAVAILABLE',code:'BOTTOM_PROVIDER_UNAVAILABLE',enabled:false},
       presentation,activeTab:this.activeTab,lastTransition:this.lastTransition?clone(this.lastTransition):null,
       actions:[...BOTTOM_DEEP_WORK_ACTIONS]
     };
