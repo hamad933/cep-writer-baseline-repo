@@ -235,3 +235,86 @@ jobs:
           path: controller-audit-v2/
           if-no-files-found: error
           retention-days: 14
+
+  baseline-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact live main baseline
+        uses: actions/checkout@v4
+        with:
+          ref: 16aafaec71706ebbb13b002395f72383b2e77a81
+          fetch-depth: 0
+
+      - name: Capture baseline identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p controller-baseline-v2
+          git rev-parse HEAD > controller-baseline-v2/HEAD.txt
+          git rev-parse HEAD^{tree} > controller-baseline-v2/TREE.txt
+          node --input-type=module <<'NODE' > controller-baseline-v2/PRODUCT_SOURCE_IDENTITY.json
+          import { canonicalSourceIdentity } from './tools/source-tree-identity.mjs';
+          import { pathToFileURL } from 'node:url';
+          console.log(JSON.stringify(await canonicalSourceIdentity(pathToFileURL(process.cwd() + '/')), null, 2));
+          NODE
+          python3 cep-writer/tools/verify_repo.py > controller-baseline-v2/WRITER_VERIFY.log 2>&1
+
+      - name: Deterministic build proof
+        shell: bash
+        run: |
+          set +e
+          npm run build:runtime > controller-baseline-v2/build-1.log 2>&1
+          b1=$?
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum > controller-baseline-v2/dist-1.sha256 2>/dev/null
+          npm run build:runtime > controller-baseline-v2/build-2.log 2>&1
+          b2=$?
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum > controller-baseline-v2/dist-2.sha256 2>/dev/null
+          cmp -s controller-baseline-v2/dist-1.sha256 controller-baseline-v2/dist-2.sha256
+          deterministic=$?
+          printf '{"build1":%s,"build2":%s,"deterministicCompare":%s}\n' "$b1" "$b2" "$deterministic" > controller-baseline-v2/BUILD_STATUS.json
+          exit 0
+
+      - name: Baseline npm test
+        shell: bash
+        run: |
+          set +e
+          npm test > controller-baseline-v2/npm-test.log 2>&1
+          s=$?
+          printf '{"exitCode":%s}\n' "$s" > controller-baseline-v2/NPM_TEST_STATUS.json
+          exit 0
+
+      - name: Baseline npm check
+        shell: bash
+        run: |
+          set +e
+          npm run check > controller-baseline-v2/npm-check.log 2>&1
+          s=$?
+          printf '{"exitCode":%s}\n' "$s" > controller-baseline-v2/NPM_CHECK_STATUS.json
+          exit 0
+
+      - name: Baseline runtime falsification
+        shell: bash
+        run: |
+          set +e
+          npm run runtime:check > controller-baseline-v2/runtime-check.log 2>&1
+          s=$?
+          printf '{"exitCode":%s}\n' "$s" > controller-baseline-v2/RUNTIME_CHECK_STATUS.json
+          exit 0
+
+      - name: Snapshot post-validation contract truth
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp assurance/CONTRACT_TEST_RESULTS.json controller-baseline-v2/CONTRACT_TEST_RESULTS.json 2>/dev/null || true
+          cp assurance/MODEL_TEST_RESULTS.json controller-baseline-v2/MODEL_TEST_RESULTS.json 2>/dev/null || true
+          cp assurance/DUPLICATE_MECHANIC_SCAN.json controller-baseline-v2/DUPLICATE_MECHANIC_SCAN.json 2>/dev/null || true
+          cp assurance/WRITER_SCAFFOLD_TEST_RESULTS.json controller-baseline-v2/WRITER_SCAFFOLD_TEST_RESULTS.json 2>/dev/null || true
+          git status --short > controller-baseline-v2/GIT_STATUS_AFTER.txt
+
+      - name: Upload baseline validation
+        uses: actions/upload-artifact@v4
+        with:
+          name: controller-content-forensic-reduction-v2-baseline-validation
+          path: controller-baseline-v2/
+          if-no-files-found: error
+          retention-days: 14
