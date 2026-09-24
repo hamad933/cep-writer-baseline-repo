@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 3,
+  "classification": "CONTROLLER_BOUND_VISUAL_BOOTSTRAP_CONFIG__PARTIAL_LOCAL_RECAPTURE_EXPECTED",
+  "enabled": true,
+  "required": false,
+  "allowWriterLocalRecapture": true,
+  "expectedProductParentCommit": "37c4d765e1db854505c81cbd15b90d4715f6690e",
+  "minimumScreenshotCount": 1,
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1024,
+      "height": 900
+    }
+  ],
+  "states": [
+    "shared-workspace-wide",
+    "shared-workspace-medium",
+    "back-forward-semantic-context",
+    "library-transient-focus",
+    "library-f6-region-cycle"
+  ],
+  "environment": {},
+  "setupCommands": [],
+  "captureCommands": [],
+  "baselineGlobs": [],
+  "receiptGlobs": [],
+  "referenceBindings": [
+    {
+      "id": "REF-1",
+      "path": "cep-writer/references/visual/00_TODAY/CEP_TODAY_MAIN_ORCHESTRATION_REFERENCE.png",
+      "authority": "PRESENTATION_ONLY"
+    },
+    {
+      "id": "REF-2",
+      "path": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/01_LIBRARY/CEP_VIS_001_LIBRARY_FINAL_OWNER_CONFIRMED_REFERENCE.png",
+      "authority": "PRESENTATION_ONLY"
+    },
+    {
+      "id": "REF-3",
+      "path": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/03_VISUALIZE/CEP_VIS_001_VISUALIZE_TREE_CORRECTED_REFERENCE_v2.png",
+      "authority": "PRESENTATION_ONLY"
+    }
+  ],
+  "comparisonPlan": [
+    {
+      "state": "shared-workspace-wide",
+      "method": "REFERENCE_REGION -> EXACT_PARENT_LOCAL_RECAPTURE -> CANDIDATE_RECAPTURE -> FULL_SCREEN_REGRESSION",
+      "truthCeiling": "PRESENTATION_ONLY"
+    },
+    {
+      "state": "shared-workspace-medium",
+      "method": "REFERENCE_REGION -> EXACT_PARENT_LOCAL_RECAPTURE -> CANDIDATE_RECAPTURE -> FULL_SCREEN_REGRESSION",
+      "truthCeiling": "PRESENTATION_ONLY"
+    },
+    {
+      "state": "back-forward-semantic-context",
+      "method": "REFERENCE_REGION -> EXACT_PARENT_LOCAL_RECAPTURE -> CANDIDATE_RECAPTURE -> FULL_SCREEN_REGRESSION",
+      "truthCeiling": "PRESENTATION_ONLY"
+    },
+    {
+      "state": "library-transient-focus",
+      "method": "REFERENCE_REGION -> EXACT_PARENT_LOCAL_RECAPTURE -> CANDIDATE_RECAPTURE -> FULL_SCREEN_REGRESSION",
+      "truthCeiling": "PRESENTATION_ONLY"
+    },
+    {
+      "state": "library-f6-region-cycle",
+      "method": "REFERENCE_REGION -> EXACT_PARENT_LOCAL_RECAPTURE -> CANDIDATE_RECAPTURE -> FULL_SCREEN_REGRESSION",
+      "truthCeiling": "PRESENTATION_ONLY"
+    }
+  ]
+}
