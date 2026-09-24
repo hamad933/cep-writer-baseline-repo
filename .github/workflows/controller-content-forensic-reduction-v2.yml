@@ -1,0 +1,235 @@
+name: Controller Content-Forensic Reduction V2 Audit
+
+on:
+  push:
+    branches:
+      - controller/content-forensic-reduction-v2
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  forensic-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build zero-loss content and inbound-reference inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p controller-audit-v2
+          python3 - <<'PY'
+          import csv, hashlib, json, os, pathlib, re, subprocess
+          from collections import Counter, defaultdict
+
+          ROOT = pathlib.Path(".")
+          OUT = pathlib.Path("controller-audit-v2")
+          TARGET_PREFIXES = ("assurance/", "writer-output/", "authority/", "archaeology/")
+          CURRENT_MANIFESTS = {
+              "cep-writer/WRITER_INPUT_MANIFEST.json",
+              "cep-writer/REFERENCE_MANIFEST.json",
+          }
+          TEXT_EXTS = {".md",".json",".csv",".txt",".mjs",".js",".ts",".py",".yml",".yaml",".html",".css",".xml",".toml",".ini",".sh",".ps1"}
+
+          def run(*args):
+              return subprocess.check_output(args, text=True, stderr=subprocess.DEVNULL).strip()
+
+          files = run("git","ls-files").splitlines()
+          file_set = set(files)
+          meta = {}
+          text_cache = {}
+          for p in files:
+              b = pathlib.Path(p).read_bytes()
+              meta[p] = {
+                  "path": p,
+                  "bytes": len(b),
+                  "sha256": hashlib.sha256(b).hexdigest(),
+                  "extension": pathlib.Path(p).suffix.lower() or "<none>",
+              }
+              is_text = pathlib.Path(p).suffix.lower() in TEXT_EXTS
+              if is_text:
+                  try:
+                      text_cache[p] = b.decode("utf-8")
+                  except UnicodeDecodeError:
+                      pass
+
+          targets = [p for p in files if p.startswith(TARGET_PREFIXES)]
+          inbound = defaultdict(list)
+
+          # Exact-path + basename references across every readable tracked text file.
+          for tp in targets:
+              base = pathlib.Path(tp).name
+              for consumer, txt in text_cache.items():
+                  if consumer == tp:
+                      continue
+                  modes = []
+                  if tp in txt:
+                      modes.append("EXACT_PATH")
+                  if base and base in txt:
+                      modes.append("BASENAME")
+                  if modes:
+                      inbound[tp].append({
+                          "consumer": consumer,
+                          "modes": sorted(set(modes)),
+                          "consumerClass": (
+                              "CURRENT_MANIFEST" if consumer in CURRENT_MANIFESTS else
+                              "WORKFLOW" if consumer.startswith(".github/workflows/") else
+                              "TEST" if consumer.startswith("tests/") else
+                              "TOOL" if consumer.startswith("tools/") else
+                              "CEP_WRITER" if consumer.startswith("cep-writer/") else
+                              "DOC" if consumer.startswith("docs/") or consumer.endswith(".md") else
+                              "OTHER"
+                          )
+                      })
+
+          def git_last(path):
+              try:
+                  out = run("git","log","-1","--format=%H%x09%cI%x09%s","--",path)
+                  if not out:
+                      return None
+                  sha, date, subject = out.split("\t",2)
+                  return {"commit":sha,"date":date,"subject":subject}
+              except Exception:
+                  return None
+
+          def content_signals(path, txt):
+              t = txt or ""
+              u = t.upper()
+              sig = []
+              pairs = [
+                  ("CANDIDATE_ONLY","CANDIDATE_ONLY"),
+                  ("NOT_ACCEPTED","NOT_ACCEPTED"),
+                  ("CHECKPOINT_ONLY","CHECKPOINT_ONLY"),
+                  ("HISTORICAL","HISTORICAL"),
+                  ("SUPERSEDED","SUPERSEDED"),
+                  ("ACCEPTED_DESIGN_REFERENCE","ACCEPTED_DESIGN_REFERENCE"),
+                  ("DONOR","DONOR"),
+                  ("REUSE","REUSE"),
+                  ("OWNER_ACCEPTED","OWNER_ACCEPTED"),
+                  ("CURRENT_","CURRENT_MARKER"),
+                  ("RUNTIME","RUNTIME"),
+                  ("TEST","TEST"),
+                  ("RECEIPT","RECEIPT"),
+              ]
+              for needle,label in pairs:
+                  if needle in u:
+                      sig.append(label)
+              return sig
+
+          rows = []
+          for p in targets:
+              refs = inbound[p]
+              operational = [r for r in refs if r["consumerClass"] in {"WORKFLOW","TEST","TOOL","OTHER"}]
+              writer_refs = [r for r in refs if r["consumerClass"] == "CEP_WRITER" and r["consumer"] not in CURRENT_MANIFESTS]
+              manifest_refs = [r for r in refs if r["consumerClass"] == "CURRENT_MANIFEST"]
+              txt = text_cache.get(p,"")
+              row = dict(meta[p])
+              row.update({
+                  "scope": p.split("/",1)[0],
+                  "textReadable": p in text_cache,
+                  "signals": content_signals(p, txt),
+                  "inboundReferenceCount": len(refs),
+                  "operationalInboundCount": len(operational),
+                  "writerNonManifestInboundCount": len(writer_refs),
+                  "currentManifestInboundCount": len(manifest_refs),
+                  "inbound": refs,
+                  "lastChange": git_last(p),
+              })
+              rows.append(row)
+
+          scope_summary = {}
+          for scope in ["assurance","writer-output","authority","archaeology"]:
+              rr=[r for r in rows if r["scope"]==scope]
+              scope_summary[scope]={
+                  "files":len(rr),
+                  "bytes":sum(r["bytes"] for r in rr),
+                  "operationalReferencedFiles":sum(1 for r in rr if r["operationalInboundCount"]),
+                  "writerNonManifestReferencedFiles":sum(1 for r in rr if r["writerNonManifestInboundCount"]),
+                  "manifestOnlyOrNoOperationalRefFiles":sum(1 for r in rr if not r["operationalInboundCount"] and not r["writerNonManifestInboundCount"]),
+                  "extensions":dict(Counter(r["extension"] for r in rr)),
+              }
+
+          repo_head=run("git","rev-parse","HEAD")
+          repo_tree=run("git","rev-parse","HEAD^{tree}")
+          product_parent="293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a"
+          product_diff=run("git","diff","--name-only",product_parent,"--","stack/native-typescript") if product_parent in run("git","rev-list","--all") else "PARENT_NOT_FOUND"
+
+          report={
+              "schemaVersion":1,
+              "classification":"CONTROLLER_CONTENT_FORENSIC_INVENTORY_V2__READ_ONLY_AUDIT__NOT_DELETION_AUTHORITY",
+              "repository":"hamad933/cep-writer-baseline-repo",
+              "head":repo_head,
+              "tree":repo_tree,
+              "targetPrefixes":list(TARGET_PREFIXES),
+              "trackedFiles":len(files),
+              "trackedBytes":sum(v["bytes"] for v in meta.values()),
+              "targetFiles":len(rows),
+              "targetBytes":sum(r["bytes"] for r in rows),
+              "productNativeSourceDiffVs293dd1e0":product_diff.splitlines() if product_diff else [],
+              "scopeSummary":scope_summary,
+              "items":rows,
+              "notes":[
+                  "Inbound references are exact-path/basename textual references across all readable tracked text files.",
+                  "Current manifest references are counted separately because Stage-1 intentionally listed retained material conservatively.",
+                  "No disposition is acceptance authority; Controller must adjudicate actual content and governance role."
+              ]
+          }
+          (OUT/"CONTENT_FORENSIC_INVENTORY.json").write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8")
+
+          with (OUT/"CONTENT_FORENSIC_INVENTORY.csv").open("w",encoding="utf-8",newline="") as f:
+              w=csv.writer(f)
+              w.writerow(["path","scope","bytes","sha256","extension","operationalInboundCount","writerNonManifestInboundCount","currentManifestInboundCount","signals","lastCommit","lastDate"])
+              for r in rows:
+                  lc=r["lastChange"] or {}
+                  w.writerow([r["path"],r["scope"],r["bytes"],r["sha256"],r["extension"],r["operationalInboundCount"],r["writerNonManifestInboundCount"],r["currentManifestInboundCount"],"|".join(r["signals"]),lc.get("commit",""),lc.get("date","")])
+
+          # Compact candidate subsets for Controller review, never automatic deletion.
+          writer_output=[r for r in rows if r["scope"]=="writer-output"]
+          archaeology=[r for r in rows if r["scope"]=="archaeology"]
+          unreferenced_assurance=[r for r in rows if r["scope"]=="assurance" and r["operationalInboundCount"]==0 and r["writerNonManifestInboundCount"]==0]
+          unreferenced_authority=[r for r in rows if r["scope"]=="authority" and r["operationalInboundCount"]==0 and r["writerNonManifestInboundCount"]==0]
+          subsets={
+              "writerOutput":writer_output,
+              "archaeology":archaeology,
+              "assuranceNoOperationalOrWriterNonManifestInbound":unreferenced_assurance,
+              "authorityNoOperationalOrWriterNonManifestInbound":unreferenced_authority,
+          }
+          (OUT/"REVIEW_SUBSETS.json").write_text(json.dumps(subsets,ensure_ascii=False,indent=2),encoding="utf-8")
+
+          md=["# Controller Content-Forensic Inventory V2","",
+              f"- HEAD: \`{repo_head}\`",
+              f"- tree: \`{repo_tree}\`",
+              f"- tracked: {len(files)} files / {sum(v['bytes'] for v in meta.values()):,} bytes",
+              f"- audited targets: {len(rows)} files / {sum(r['bytes'] for r in rows):,} bytes",
+              f"- Product native-source diff vs 293dd1e0: {'NONE' if not product_diff else product_diff}",
+              "",
+              "## Scope summary",""]
+          for s,v in scope_summary.items():
+              md.append(f"- **{s}**: {v['files']} files / {v['bytes']:,} bytes; operational refs={v['operationalReferencedFiles']}; Writer non-manifest refs={v['writerNonManifestReferencedFiles']}; no operational/Writer-nonmanifest refs={v['manifestOnlyOrNoOperationalRefFiles']}.")
+          md += ["","## Guard","This report is discovery evidence only. It does not authorize deletion, Product acceptance, merge, release, deployment or stack freeze."]
+          (OUT/"SUMMARY.md").write_text("\n".join(md)+"\n",encoding="utf-8")
+          PY
+
+      - name: Verify Product source identity through module API
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE' > controller-audit-v2/PRODUCT_SOURCE_IDENTITY.json
+          import { canonicalSourceIdentity } from './tools/source-tree-identity.mjs';
+          const identity = await canonicalSourceIdentity();
+          console.log(JSON.stringify(identity, null, 2));
+          NODE
+          cat controller-audit-v2/PRODUCT_SOURCE_IDENTITY.json
+
+      - name: Upload forensic inventory
+        uses: actions/upload-artifact@v4
+        with:
+          name: controller-content-forensic-reduction-v2-audit
+          path: controller-audit-v2/
+          if-no-files-found: error
+          retention-days: 14
