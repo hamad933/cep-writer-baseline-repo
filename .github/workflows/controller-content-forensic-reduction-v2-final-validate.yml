@@ -1,0 +1,155 @@
+name: Controller Stage-2 Cleanup Final Validation
+
+on:
+  push:
+    branches:
+      - controller/content-forensic-reduction-v2
+
+permissions:
+  contents: read
+
+jobs:
+  final-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact cleanup commit
+        uses: actions/checkout@v4
+        with:
+          ref: f93b75310716f8cf527505ccfdbdb215eb4e3454
+          fetch-depth: 0
+
+      - name: Use governed Node target
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.16.0
+
+      - name: Exact commit tree and delta gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p final-validation
+          test "$(git rev-parse HEAD)" = "f93b75310716f8cf527505ccfdbdb215eb4e3454"
+          test "$(git rev-parse HEAD^)" = "16aafaec71706ebbb13b002395f72383b2e77a81"
+          test "$(git rev-parse HEAD^{tree})" = "e8a4ae6fabcd2db3e74ff1b96e95b2bff6a62b88"
+          git diff --name-status HEAD^ HEAD > final-validation/DIFF_NAME_STATUS.txt
+          git diff --numstat HEAD^ HEAD > final-validation/DIFF_NUMSTAT.txt
+          python3 - <<'PY'
+          import subprocess
+          rows=subprocess.check_output(['git','diff','--name-status','HEAD^','HEAD'],text=True).splitlines()
+          d=[r for r in rows if r.startswith('D\t')]
+          m=[r for r in rows if r.startswith('M\t')]
+          a=[r for r in rows if r.startswith('A\t')]
+          assert len(d)==364,len(d)
+          assert sorted(x.split('\t',1)[1] for x in m)==sorted([
+            'assurance/SCREENSHOT_MANIFEST.json',
+            'cep-writer/NORMALIZATION_MANIFEST.json',
+            'cep-writer/WRITER_INPUT_MANIFEST.json',
+            'docs/history/HISTORICAL_LINEAGE_INDEX.md',
+          ])
+          assert a==['A\tdocs/history/CONTENT_FORENSIC_DISPOSITION_V2.json'],a
+          out=subprocess.check_output(['git','ls-tree','-r','-l','HEAD'],text=True).splitlines()
+          files=0; size=0
+          for line in out:
+            parts=line.split(None,4)
+            if len(parts)>=4 and parts[1]=='blob':
+              files+=1; size+=int(parts[3])
+          assert files==1154,(files,size)
+          assert size==68545787,(files,size)
+          print({'files':files,'bytes':size})
+          PY
+
+      - name: Product and Writer truth
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff HEAD^ HEAD -- stack/native-typescript > final-validation/PRODUCT_DIFF.patch
+          test ! -s final-validation/PRODUCT_DIFF.patch
+          node --input-type=module <<'NODE' > final-validation/PRODUCT_SOURCE_IDENTITY.json
+          import { canonicalSourceIdentity } from './tools/source-tree-identity.mjs';
+          import { pathToFileURL } from 'node:url';
+          console.log(JSON.stringify(await canonicalSourceIdentity(pathToFileURL(process.cwd() + '/')), null, 2));
+          NODE
+          python3 - <<'PY'
+          import json
+          d=json.load(open('final-validation/PRODUCT_SOURCE_IDENTITY.json'))
+          assert d['sha256']=='480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641'
+          assert d['files']==273
+          PY
+          python3 cep-writer/tools/verify_repo.py | tee final-validation/WRITER_VERIFY.log
+          grep -q '"status": "PASS"' final-validation/WRITER_VERIFY.log
+          grep -q '"requiredInputs": 620' final-validation/WRITER_VERIFY.log
+
+      - name: Public disclosure
+        shell: bash
+        run: |
+          set -euo pipefail
+          git grep -nEI -- '-----BEGIN (RSA |EC |OPENSSH |)?PRIVATE KEY-----|github_pat_[A-Za-z0-9_]{20,}|ghp_[A-Za-z0-9]{30,}|AIza[0-9A-Za-z_-]{30,}|AKIA[0-9A-Z]{16}' . ':!package-lock.json' > final-validation/PUBLIC_DISCLOSURE_HITS.txt || true
+          test ! -s final-validation/PUBLIC_DISCLOSURE_HITS.txt
+
+      - name: Deterministic build
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build:runtime > final-validation/build-1.log 2>&1
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum > final-validation/dist-1.sha256
+          npm run build:runtime > final-validation/build-2.log 2>&1
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum > final-validation/dist-2.sha256
+          cmp final-validation/dist-1.sha256 final-validation/dist-2.sha256
+
+      - name: Model and contract truth
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test > final-validation/npm-test.log 2>&1
+          set +e
+          npm run check > final-validation/npm-check.log 2>&1
+          code=$?
+          set -e
+          cp assurance/CONTRACT_TEST_RESULTS.json final-validation/CONTRACT_TEST_RESULTS.json
+          cp assurance/DUPLICATE_MECHANIC_SCAN.json final-validation/DUPLICATE_MECHANIC_SCAN.json
+          cp assurance/WRITER_SCAFFOLD_TEST_RESULTS.json final-validation/WRITER_SCAFFOLD_TEST_RESULTS.json
+          python3 - <<'PY'
+          import json
+          d=json.load(open('final-validation/CONTRACT_TEST_RESULTS.json'))
+          fails=[x['id'] for x in d['tests'] if x.get('status')=='FAIL']
+          expected=['browser.lineage_receipt_truthful','browser.current_candidate_claim_truthful','browser.targeted_visual_evidence']
+          assert fails==expected,(fails,expected)
+          assert d['pass']==165 and d['fail']==3,(d['pass'],d['fail'])
+          dup=json.load(open('final-validation/DUPLICATE_MECHANIC_SCAN.json'))
+          assert dup.get('status')=='PASS' and not dup.get('findings')
+          scaffold=json.load(open('final-validation/WRITER_SCAFFOLD_TEST_RESULTS.json'))
+          assert scaffold.get('fail')==0
+          PY
+          test "$code" -ne 0
+
+      - name: Runtime falsification
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run runtime:check > final-validation/runtime-check.log 2>&1
+
+      - name: Open-gate truth and custody
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          s=json.load(open('assurance/SCREENSHOT_MANIFEST.json'))
+          assert s['count']==0
+          assert s['currentGate']=='C03-GATE-022 GENUINE_BROWSER_SOURCE_RECEIPT OPEN'
+          assert 'MUST NOT satisfy' in s['truthCeiling']
+          d=json.load(open('docs/history/CONTENT_FORENSIC_DISPOSITION_V2.json'))
+          assert d['classification'].endswith('NO_PRODUCT_ACCEPTANCE')
+          assert d['summary']['ARCHIVE_GIT_HISTORY']=={'files':364,'bytes':12753366}
+          w=json.load(open('cep-writer/WRITER_INPUT_MANIFEST.json'))
+          assert w['assurancePolicy']=='STAGE2_KEEP_ACTIVE_PACKAGE_CHECK_RUNTIME_INPUTS__ARCHIVE_HISTORICAL_GENERATED_EVIDENCE_IN_GIT_HISTORY'
+          assert len(w['entries'])==620
+          PY
+
+      - name: Upload final validation
+        uses: actions/upload-artifact@v4
+        with:
+          name: controller-stage2-cleanup-final-validation
+          path: final-validation/
+          if-no-files-found: error
+          retention-days: 14
