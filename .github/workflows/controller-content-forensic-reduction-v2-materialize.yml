@@ -1,0 +1,276 @@
+name: Controller Content-Forensic Reduction V2 Materialize
+
+on:
+  push:
+    branches:
+      - controller/content-forensic-reduction-v2
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    outputs:
+      commit_sha: ${{ steps.commit.outputs.commit_sha }}
+    steps:
+      - name: Checkout exact live main parent
+        uses: actions/checkout@v4
+        with:
+          ref: 16aafaec71706ebbb13b002395f72383b2e77a81
+          fetch-depth: 0
+
+      - name: Fetch Controller transform
+        shell: bash
+        run: |
+          set -euo pipefail
+          git show origin/controller/content-forensic-reduction-v2:.controller/content_forensic_reduction_v2.py > /tmp/content_forensic_reduction_v2.py
+
+      - name: Use governed Node target
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.16.0
+
+      - name: Rebuild exact Stage-2 candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "16aafaec71706ebbb13b002395f72383b2e77a81"
+          test "$(git rev-parse HEAD^{tree})" = "c4d18db3b7e086bee92de188df1320d631fca7c2"
+          python3 /tmp/content_forensic_reduction_v2.py
+          cp controller-candidate-v2/DELETION_ALLOWLIST.txt /tmp/DELETION_ALLOWLIST.txt
+
+      - name: Exact delta and Product immutability gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff -- stack/native-typescript > /tmp/PRODUCT_DIFF.patch
+          test ! -s /tmp/PRODUCT_DIFF.patch
+          node --input-type=module <<'NODE' > /tmp/PRODUCT_IDENTITY.json
+          import { canonicalSourceIdentity } from './tools/source-tree-identity.mjs';
+          import { pathToFileURL } from 'node:url';
+          console.log(JSON.stringify(await canonicalSourceIdentity(pathToFileURL(process.cwd() + '/')), null, 2));
+          NODE
+          python3 - <<'PY'
+          import json, pathlib, subprocess
+          ident=json.load(open('/tmp/PRODUCT_IDENTITY.json'))
+          assert ident['sha256']=='480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641'
+          assert ident['files']==273
+          deleted=sorted(subprocess.check_output(['git','diff','--diff-filter=D','--name-only'],text=True).splitlines())
+          allowed=sorted(x for x in pathlib.Path('/tmp/DELETION_ALLOWLIST.txt').read_text(encoding='utf-8').splitlines() if x)
+          assert deleted==allowed,(len(deleted),len(allowed),sorted(set(deleted)^set(allowed))[:20])
+          assert len(deleted)==364,len(deleted)
+          modified=sorted(subprocess.check_output(['git','diff','--diff-filter=M','--name-only'],text=True).splitlines())
+          expected=sorted([
+            'assurance/SCREENSHOT_MANIFEST.json',
+            'cep-writer/NORMALIZATION_MANIFEST.json',
+            'cep-writer/WRITER_INPUT_MANIFEST.json',
+            'docs/history/HISTORICAL_LINEAGE_INDEX.md',
+          ])
+          assert modified==expected,(modified,expected)
+          assert pathlib.Path('docs/history/CONTENT_FORENSIC_DISPOSITION_V2.json').is_file()
+          summary=json.load(open('docs/history/CONTENT_FORENSIC_DISPOSITION_V2.json'))
+          assert summary['summary']['ARCHIVE_GIT_HISTORY']=={'files':364,'bytes':12753366}
+          PY
+
+      - name: Writer self-containment and public disclosure
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 cep-writer/tools/verify_repo.py > /tmp/writer-verify.log
+          grep -q '"status": "PASS"' /tmp/writer-verify.log
+          grep -q '"requiredInputs": 620' /tmp/writer-verify.log
+          git grep -nEI -- '-----BEGIN (RSA |EC |OPENSSH |)?PRIVATE KEY-----|github_pat_[A-Za-z0-9_]{20,}|ghp_[A-Za-z0-9]{30,}|AIza[0-9A-Za-z_-]{30,}|AKIA[0-9A-Z]{16}' . ':!package-lock.json' > /tmp/public-hits.txt || true
+          test ! -s /tmp/public-hits.txt
+
+      - name: Deterministic build
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build:runtime > /tmp/build-1.log 2>&1
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum > /tmp/dist-1.sha256
+          npm run build:runtime > /tmp/build-2.log 2>&1
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum > /tmp/dist-2.sha256
+          cmp /tmp/dist-1.sha256 /tmp/dist-2.sha256
+
+      - name: Tests and truthful open evidence gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test > /tmp/npm-test.log 2>&1
+          set +e
+          npm run check > /tmp/npm-check.log 2>&1
+          code=$?
+          set -e
+          python3 - <<'PY'
+          import json
+          d=json.load(open('assurance/CONTRACT_TEST_RESULTS.json'))
+          fails=[x['id'] for x in d['tests'] if x.get('status')=='FAIL']
+          expected=['browser.lineage_receipt_truthful','browser.current_candidate_claim_truthful','browser.targeted_visual_evidence']
+          assert fails==expected,(fails,expected)
+          assert d['pass']==165 and d['fail']==3,(d['pass'],d['fail'])
+          dup=json.load(open('assurance/DUPLICATE_MECHANIC_SCAN.json'))
+          assert dup.get('status')=='PASS' and not dup.get('findings'),dup
+          scaffold=json.load(open('assurance/WRITER_SCAFFOLD_TEST_RESULTS.json'))
+          assert scaffold.get('fail')==0,scaffold
+          PY
+          test "$code" -ne 0
+
+      - name: Runtime falsification
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run runtime:check > /tmp/runtime-check.log 2>&1
+
+      - name: Commit exact integrable delta
+        id: commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf controller-candidate-v2
+          git status --short > /tmp/PRECOMMIT_STATUS.txt
+          git config user.name "CEP Controller"
+          git config user.email "controller@users.noreply.github.com"
+          git add -A
+          python3 - <<'PY'
+          import subprocess
+          rows=subprocess.check_output(['git','diff','--cached','--name-status'],text=True).splitlines()
+          deleted=[r for r in rows if r.startswith('D\t')]
+          modified=[r for r in rows if r.startswith('M\t')]
+          added=[r for r in rows if r.startswith('A\t')]
+          assert len(deleted)==364,len(deleted)
+          assert sorted(x.split('\t',1)[1] for x in modified)==sorted([
+            'assurance/SCREENSHOT_MANIFEST.json',
+            'cep-writer/NORMALIZATION_MANIFEST.json',
+            'cep-writer/WRITER_INPUT_MANIFEST.json',
+            'docs/history/HISTORICAL_LINEAGE_INDEX.md',
+          ])
+          assert [x.split('\t',1)[1] for x in added]==['docs/history/CONTENT_FORENSIC_DISPOSITION_V2.json'],added
+          PY
+          git commit -m "controller: Stage-2 content-forensic historical bulk reduction"
+          commit="$(git rev-parse HEAD)"
+          parent="$(git rev-parse HEAD^)"
+          test "$parent" = "16aafaec71706ebbb13b002395f72383b2e77a81"
+          echo "commit_sha=$commit" >> "$GITHUB_OUTPUT"
+          git push origin HEAD:refs/heads/controller/content-forensic-reduction-v2-integrable
+
+  validate-integrable:
+    needs: materialize
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact integrable commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.materialize.outputs.commit_sha }}
+          fetch-depth: 0
+
+      - name: Use governed Node target
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.16.0
+
+      - name: Exact ancestry and cleanup diff
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p controller-integrable-proof
+          echo "${{ needs.materialize.outputs.commit_sha }}" > controller-integrable-proof/COMMIT.txt
+          git rev-parse HEAD^{tree} > controller-integrable-proof/TREE.txt
+          test "$(git rev-parse HEAD^)" = "16aafaec71706ebbb13b002395f72383b2e77a81"
+          git diff --name-status HEAD^ HEAD > controller-integrable-proof/DIFF_NAME_STATUS.txt
+          git diff --numstat HEAD^ HEAD > controller-integrable-proof/DIFF_NUMSTAT.txt
+          python3 - <<'PY'
+          import subprocess
+          rows=subprocess.check_output(['git','diff','--name-status','HEAD^','HEAD'],text=True).splitlines()
+          deleted=[r for r in rows if r.startswith('D\t')]
+          modified=[r for r in rows if r.startswith('M\t')]
+          added=[r for r in rows if r.startswith('A\t')]
+          assert len(deleted)==364,len(deleted)
+          assert len(modified)==4,modified
+          assert added==['A\tdocs/history/CONTENT_FORENSIC_DISPOSITION_V2.json'],added
+          PY
+
+      - name: Product identity and Writer self-containment
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff HEAD^ HEAD -- stack/native-typescript > controller-integrable-proof/PRODUCT_DIFF.patch
+          test ! -s controller-integrable-proof/PRODUCT_DIFF.patch
+          node --input-type=module <<'NODE' > controller-integrable-proof/PRODUCT_SOURCE_IDENTITY.json
+          import { canonicalSourceIdentity } from './tools/source-tree-identity.mjs';
+          import { pathToFileURL } from 'node:url';
+          console.log(JSON.stringify(await canonicalSourceIdentity(pathToFileURL(process.cwd() + '/')), null, 2));
+          NODE
+          python3 - <<'PY'
+          import json
+          d=json.load(open('controller-integrable-proof/PRODUCT_SOURCE_IDENTITY.json'))
+          assert d['sha256']=='480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641'
+          assert d['files']==273
+          PY
+          python3 cep-writer/tools/verify_repo.py | tee controller-integrable-proof/WRITER_VERIFY.log
+
+      - name: Public disclosure
+        shell: bash
+        run: |
+          set -euo pipefail
+          git grep -nEI -- '-----BEGIN (RSA |EC |OPENSSH |)?PRIVATE KEY-----|github_pat_[A-Za-z0-9_]{20,}|ghp_[A-Za-z0-9]{30,}|AIza[0-9A-Za-z_-]{30,}|AKIA[0-9A-Z]{16}' . ':!package-lock.json' > controller-integrable-proof/PUBLIC_DISCLOSURE_HITS.txt || true
+          test ! -s controller-integrable-proof/PUBLIC_DISCLOSURE_HITS.txt
+
+      - name: Deterministic build
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build:runtime > controller-integrable-proof/build-1.log 2>&1
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum > controller-integrable-proof/dist-1.sha256
+          npm run build:runtime > controller-integrable-proof/build-2.log 2>&1
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum > controller-integrable-proof/dist-2.sha256
+          cmp controller-integrable-proof/dist-1.sha256 controller-integrable-proof/dist-2.sha256
+
+      - name: Model and contract regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test > controller-integrable-proof/npm-test.log 2>&1
+          set +e
+          npm run check > controller-integrable-proof/npm-check.log 2>&1
+          code=$?
+          set -e
+          cp assurance/CONTRACT_TEST_RESULTS.json controller-integrable-proof/CONTRACT_TEST_RESULTS.json
+          cp assurance/DUPLICATE_MECHANIC_SCAN.json controller-integrable-proof/DUPLICATE_MECHANIC_SCAN.json
+          cp assurance/WRITER_SCAFFOLD_TEST_RESULTS.json controller-integrable-proof/WRITER_SCAFFOLD_TEST_RESULTS.json
+          python3 - <<'PY'
+          import json
+          d=json.load(open('controller-integrable-proof/CONTRACT_TEST_RESULTS.json'))
+          fails=[x['id'] for x in d['tests'] if x.get('status')=='FAIL']
+          expected=['browser.lineage_receipt_truthful','browser.current_candidate_claim_truthful','browser.targeted_visual_evidence']
+          assert fails==expected,(fails,expected)
+          assert d['pass']==165 and d['fail']==3
+          dup=json.load(open('controller-integrable-proof/DUPLICATE_MECHANIC_SCAN.json'))
+          assert dup.get('status')=='PASS' and not dup.get('findings')
+          scaffold=json.load(open('controller-integrable-proof/WRITER_SCAFFOLD_TEST_RESULTS.json'))
+          assert scaffold.get('fail')==0
+          PY
+          test "$code" -ne 0
+
+      - name: Runtime falsification and final size
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run runtime:check > controller-integrable-proof/runtime-check.log 2>&1
+          python3 - <<'PY'
+          import json,pathlib,subprocess
+          paths=subprocess.check_output(['git','ls-files'],text=True).splitlines()
+          size=sum(pathlib.Path(p).stat().st_size for p in paths if pathlib.Path(p).is_file())
+          out={'files':len(paths),'bytes':size,'sourceFiles':1517,'sourceBytes':81065169,'deltaFiles':len(paths)-1517,'deltaBytes':size-81065169}
+          assert out['files']==1154,out
+          assert out['bytes']==68545800,out
+          json.dump(out,open('controller-integrable-proof/CANDIDATE_SIZE.json','w'),indent=2)
+          PY
+
+      - name: Upload exact integrable proof
+        uses: actions/upload-artifact@v4
+        with:
+          name: controller-content-forensic-reduction-v2-integrable-proof
+          path: controller-integrable-proof/
+          if-no-files-found: error
+          retention-days: 14
