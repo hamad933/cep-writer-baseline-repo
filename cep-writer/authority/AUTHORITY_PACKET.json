@@ -1,35 +1,30 @@
 {
-  "schemaVersion": 6,
-  "classification": "CONTROLLER_DISTILLED_C3_AUTHORITY_PACKET__TASK_BOUND__NOT_LIVE_CONTROL_STATE",
-  "mission": "CORR02_C3_TODAY_PROVIDER_EPISTEMIC_CONTINUATION_TRUTH",
-  "canonicalMissionDriveId": "1AFGtiiIvgwZK4nxvnJU3ZC1FuSBGWvoq",
-  "c2AcceptedParent": "1acf9d691b27b1a271f149139e055110971b1fa0",
-  "productSource": "760578213b3f3e352dd2b08dd05fab183c3ffad9625844a1d0ea82e30cc9e454 / 273",
-  "c2ControllerAuditDriveId": "1IJafIuLSO8YSOJ9vllltmCuHQp-nOwgV",
-  "c2AcceptedPackageDriveId": "11tlmcoAFIUjmprNv8gkVLWe0q37jDR6u",
-  "capsuleMethodDriveId": "1XtJlxnWIFZe_AmiLX7QXKVk31IjRQj7n",
-  "activeBatch": "C3_TODAY_PROVIDER_EPISTEMIC_CONTINUATION_TRUTH",
-  "applicableDecisionTail": [
-    "OD-20260920-059",
-    "OD-20260920-060",
-    "OD-20260921-062",
-    "OD-20260921-066",
-    "OD-20260921-067",
-    "OD-20260921-068",
-    "OD-20260921-070",
-    "OD-20260921-071",
-    "OD-20260922-072",
-    "OD-20260922-073",
-    "OD-20260922-074",
-    "OD-20260922-075"
-  ],
+  "schemaVersion": 7,
+  "classification": "CURRENT_REUSABLE_WRITER_AUTHORITY_PACKET__MISSION_INDEPENDENT__NOT_LIVE_CONTROL_STATE",
+  "baseline": {
+    "head": "293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a",
+    "tree": "3101c06901dbdaff9602fea8098efb9c34575149",
+    "productSourceSha256": "480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641",
+    "productSourceFiles": 273,
+    "status": "SALVAGEABLE_NOT_ACCEPTED"
+  },
+  "localSources": {
+    "baselineState": "cep-writer/CURRENT_WRITER_BASELINE_STATE.json",
+    "ownerDecisions": "cep-writer/authority/WRITER_OWNER_DECISIONS.csv",
+    "ownerSummary": "cep-writer/authority/OWNER_DECISION_SUMMARY.md",
+    "openGates": "cep-writer/KNOWN_OPEN_GATES.md",
+    "protectedTruths": "cep-writer/PROTECTED_TRUTHS.md",
+    "writerAuthority": "cep-writer/WRITER_AUTHORITY_BASELINE.md",
+    "wave1CommonContract": "cep-writer/contracts/POST_C03_WAVE1_COMMON_WRITER_CONTRACT.md"
+  },
+  "missionAuthority": "MISSION_BRANCH_OVERLAY_ONLY",
+  "noRequiredLiveDriveFetch": true,
   "excludedLiveControllerFiles": [
     "CURRENT_STATE.md",
     "CONTROLLER_GOVERNANCE.md",
     "OWNER_DECISION_LIVE_REGISTER.csv",
     "READ_FIRST.md"
   ],
-  "noRequiredLiveDriveFetch": true,
-  "writerExecutionMode": "CAPSULE_V1_1__LOCAL_FIRST__MANAGED_CORROBORATION_ONLY",
-  "stopGate": "C3_CANDIDATE_ONLY__CONTROLLER_AUDIT_REQUIRED"
+  "executionTransport": "VERIFIED_INCREMENTAL_CONTINUATION_DEFAULT__FULL_CAPSULE_FALLBACK",
+  "stopGate": "CANDIDATE_ONLY__CONTROLLER_AUDIT_REQUIRED"
 }
