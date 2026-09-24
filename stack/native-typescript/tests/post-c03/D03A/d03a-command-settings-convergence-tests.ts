@@ -121,4 +121,4 @@ export function runD03ACommandSettingsConvergenceTests(){const t:any[]=[];
   },t);
   return t;
 }
-if(import.meta.url===new URL(process.argv[1],'file:').href){const tests=runD03ACommandSettingsConvergenceTests();const report={mission:'D03A',kind:'MODEL_NOT_BROWSER',pass:tests.filter((x:any)=>x.status==='PASS').length,fail:tests.filter((x:any)=>x.status==='FAIL').length,tests};console.log(JSON.stringify(report,null,2));if(tests.some((x:any)=>x.status==='FAIL'))process.exitCode=1;}
+if(process.argv[1]&&(import.meta.url.includes(process.argv[1].replace(/^[A-Za-z]:/,'').replaceAll('\\','/'))||process.argv[1].includes('d03a-command-settings-convergence-tests'))){const tests=runD03ACommandSettingsConvergenceTests();const report={mission:'D03A',kind:'MODEL_NOT_BROWSER',pass:tests.filter((x:any)=>x.status==='PASS').length,fail:tests.filter((x:any)=>x.status==='FAIL').length,tests};console.log(JSON.stringify(report,null,2));if(tests.some((x:any)=>x.status==='FAIL'))process.exitCode=1;}
