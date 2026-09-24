@@ -1,5 +1,5 @@
 name: CEP Zero-Loss Writer Packet Validation
-# Triggered after content-forensic checker compatibility correction v3.
+# Triggered after content-forensic checker compatibility correction v4.
 
 on:
   push:
@@ -212,22 +212,28 @@ jobs:
       - name: Duplicate owner/mechanics checks
         run: node tools/check-duplicate-mechanics.mjs
 
-      - name: Verify generated runtime reproducibility
+      - name: Verify generated runtime determinism
         shell: bash
         run: |
           set -euo pipefail
-          git diff --exit-code -- dist
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum > /tmp/dist-build-1.sha256
+          npm run build:runtime
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum > /tmp/dist-build-2.sha256
+          diff -u /tmp/dist-build-1.sha256 /tmp/dist-build-2.sha256
+          test -z "$(git diff --name-only 293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a...HEAD -- stack/native-typescript)"
+          changed="$(git diff --name-only -- dist | wc -l | tr -d ' ')"
+          echo "DETERMINISTIC_DIST_REBUILD_PASS changed_tracked_dist_paths=$changed"
 
-      - name: Commit regenerated manifests only
+      - name: Commit deterministic generated runtime and current manifests
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "CEP_CONTROLLER"
           git config user.email "cep-controller@local.invalid"
-          git add cep-writer/WRITER_INPUT_MANIFEST.json cep-writer/REFERENCE_MANIFEST.json
+          git add dist cep-writer/WRITER_INPUT_MANIFEST.json cep-writer/REFERENCE_MANIFEST.json
           if git diff --cached --quiet; then
-            echo "manifests already current"
+            echo "generated runtime and manifests already current"
             exit 0
           fi
-          git commit -m "controller: regenerate current Writer input manifests"
+          git commit -m "controller: regenerate deterministic runtime and Writer manifests"
           git push origin HEAD:controller/zero-loss-repo-cleanup
