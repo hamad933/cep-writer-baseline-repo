@@ -19,7 +19,7 @@ jobs:
       - name: Checkout exact cleanup candidate
         uses: actions/checkout@v4
         with:
-          ref: 7a8a1352ef1dd228c7e823e2b503b1921b85220d
+          ref: 16aafaec71706ebbb13b002395f72383b2e77a81
           fetch-depth: 0
 
       - uses: actions/setup-node@v4
@@ -35,7 +35,7 @@ jobs:
         run: |
           set -euo pipefail
           BASE=293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a
-          test "$(git rev-parse HEAD)" = "7a8a1352ef1dd228c7e823e2b503b1921b85220d"
+          test "$(git rev-parse HEAD)" = "16aafaec71706ebbb13b002395f72383b2e77a81"
           git merge-base --is-ancestor "$BASE" HEAD
           test "$(git rev-parse "$BASE^{tree}")" = "3101c06901dbdaff9602fea8098efb9c34575149"
           test -z "$(git diff --name-only "$BASE"...HEAD -- stack/native-typescript)"
@@ -104,16 +104,32 @@ jobs:
           python - <<'PY'
           import csv, json, pathlib, sys
           base=json.load(open("cep-writer/CURRENT_WRITER_BASELINE_STATE.json",encoding="utf-8"))
-          assert base["mainCommit"]=="293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a"
-          assert base["mainTree"]=="3101c06901dbdaff9602fea8098efb9c34575149"
+          assert base["repositoryBaselineRef"]=="main"
+          assert base["productSourceParentCommit"]=="293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a"
+          assert base["productSourceParentTree"]=="3101c06901dbdaff9602fea8098efb9c34575149"
           assert base["productCanonicalSourceSha256"]=="480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641"
           assert base["productCanonicalSourceFiles"]==273
           assert base["accepted"] is False
+          assert base["currentFindingProjection"]=="cep-writer/CURRENT_POST_C03_FINDINGS.json"
 
           manifest=json.load(open("cep-writer/WRITER_INPUT_MANIFEST.json",encoding="utf-8"))
-          assert manifest["productParentCommit"]=="293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a"
+          assert manifest["repositoryBaselineRef"]=="main"
+          assert manifest["repositoryHeadRule"]=="RESOLVE_EXACT_HEAD_AT_MISSION_BINDING"
+          assert manifest["productSourceParentCommit"]=="293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a"
+          assert manifest["productSourceParentTree"]=="3101c06901dbdaff9602fea8098efb9c34575149"
           assert manifest["productCanonicalSourceSha256"]=="480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641"
           assert manifest["productCanonicalSourceFiles"]==273
+
+          findings=json.load(open("cep-writer/CURRENT_POST_C03_FINDINGS.json",encoding="utf-8"))
+          blocking={x["id"]:x for x in findings["blockingFindings"]}
+          material={x["id"]:x for x in findings["materialFindings"]}
+          for required in ["CBF-001","CBF-002","CBF-003","F-049","F-050"]:
+              assert required in blocking
+          for required in ["MFC-PF-001","MFC-PF-002","MFC-PF-003","PVF-001","PVF-002","PVF-003"]:
+              assert required in material
+          assert "PVF-004" in blocking["CBF-003"].get("aliases",[])
+          assert findings["evidenceUpdates"]["currentTwoViewportRouteAndBaselineCensus"]=="46/46 CURRENT_BASELINE_DIAGNOSTIC"
+          assert findings["evidenceUpdates"]["gate022"].startswith("OPEN_FINAL_D13")
 
           with open("cep-writer/authority/WRITER_OWNER_DECISIONS.csv",newline="",encoding="utf-8-sig") as f:
               rows=list(csv.DictReader(f))
