@@ -6,7 +6,7 @@ export const MASTERY_JUDGMENTS=Object.freeze(['NOT_EVALUATED','INSUFFICIENT_EVID
 export const MASTERY_FRESHNESS=Object.freeze(['CURRENT','REVALIDATION_REQUIRED']);
 export const MASTERY_AUTHORITY_REF='ORACLE-011/A03';
 const clone=value=>structuredClone(value), freeze=value=>Object.freeze(clone(value));
-const initial=()=>[
+const demoInitial=()=>[
  {id:'mastery-crypto',revisionId:'mr-001',subject:'user:self',capability:'crypto-basics',judgment:'MASTERED',freshness:'REVALIDATION_REQUIRED',policyRef:'policy:mastery-v3',truthClass:'SYNTHETIC_DEMO_SEED',basis:{evidenceRefs:['ev-beta@evr-002'],decisionRefs:['decision-17'],digest:'basis:aaa'}},
  {id:'mastery-network',revisionId:'mr-002',subject:'user:self',capability:'network-analysis',judgment:'NOT_MASTERED',freshness:'CURRENT',policyRef:'policy:mastery-v3',truthClass:'SYNTHETIC_DEMO_SEED',basis:{evidenceRefs:['ev-alpha@evr-001'],decisionRefs:['decision-18'],digest:'basis:bbb'}}
 ];
@@ -34,8 +34,10 @@ const refResolution=(provider,method,ref)=>{
  }catch(error){return {ref,state:'UNAVAILABLE',reason:String(error?.message||error)};}
 };
 
+export const createW04MasteryDemoRecords=()=>freeze(demoInitial());
+
 export class W04MasteryDomain{
- constructor(records=initial(),{basisResolver=null,evaluator=null}={}){
+ constructor(records=[],{basisResolver=null,evaluator=null}={}){
   this.owner=MASTERY_DOMAIN_OWNER;
   this.records=clone(records).map(validRecord);
   this.basisResolver=basisResolver;

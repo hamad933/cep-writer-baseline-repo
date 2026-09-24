@@ -7,7 +7,7 @@ const itemBadge = (item, lang) => String(item?.statusBadge?.[lang] || item?.stat
 const itemBadgeTone = item => String(item?.statusTone || item?.badgeTone || 'ok');
 const itemActionLabel = (item, lang) => String(item?.actionLabel?.[lang] || item?.actionLabel || '');
 const byKind = (projection, kind) => projection.items.filter(item => item.kind === kind);
-const stateTone = state => ['FAILED', 'UNAVAILABLE'].includes(state) ? 'danger' : state === 'STALE' ? 'warning' : state === 'PARTIAL' ? 'warning' : ['UNOBSERVED', 'OBSERVED_EMPTY'].includes(state) ? 'muted' : 'ok';
+const stateTone = state => ['ERROR','UNAVAILABLE'].includes(state) ? 'danger' : ['STALE','PARTIAL'].includes(state) ? 'warning' : ['FETCHING','AVAILABLE_EMPTY'].includes(state) ? 'muted' : 'ok';
 
 const COPY = Object.freeze({
   ar: {
@@ -25,9 +25,8 @@ const COPY = Object.freeze({
     all: 'الكل',
     empty: 'لا توجد عناصر مرصودة في هذا الإسقاط.',
     filtered: 'لا توجد عناصر مطابقة للمرشح، بينما تبقى إجماليات المصدر كما هي.',
-    unobserved: 'لم تُرصد مصادر Today بعد.',
     unavailable: 'مصادر Today غير متاحة حاليًا.',
-    failed: 'فشل رصد مصادر Today.',
+    failed: 'فشل رصد مصادر Today؛ تم الاحتفاظ بآخر إسقاط ناجح عندما يكون متاحًا.',
     stale: 'البيانات المرصودة قديمة.',
     partial: 'الإسقاط جزئي؛ بعض المصادر لم تُرصد بنجاح.',
     source: 'المصدر',
@@ -37,7 +36,10 @@ const COPY = Object.freeze({
     noSession: 'لا توجد جلسة قابلة للاستئناف في الإسقاط الحالي.',
     noAttention: 'لا توجد عناصر انتباه مرصودة.',
     noRecent: 'لا يوجد سياق حديث مرصود.',
-    noProgress: 'لا يوجد إسقاط تقدم مرصود.'
+    noProgress: 'لا يوجد إسقاط تقدم مرصود.',
+    fetching: 'جارٍ رصد مصادر Today الحالية.',
+    retained: 'سياق محتفظ به من آخر رصد ناجح',
+    explore: 'استكشاف المحتوى'
   },
   en: {
     eyebrow: 'Daily projection from canonical owners',
@@ -54,9 +56,8 @@ const COPY = Object.freeze({
     all: 'All',
     empty: 'No observed items in this projection.',
     filtered: 'No items match this filter; source totals are unchanged.',
-    unobserved: 'Today providers have not been observed yet.',
     unavailable: 'Today providers are currently unavailable.',
-    failed: 'Today provider observation failed.',
+    failed: 'Today provider observation failed; the last successful projection is retained when available.',
     stale: 'Observed data is stale.',
     partial: 'Projection is partial; one or more sources were not observed successfully.',
     source: 'Source',
@@ -66,7 +67,10 @@ const COPY = Object.freeze({
     noSession: 'No resumable session is present in the current projection.',
     noAttention: 'No observed attention items.',
     noRecent: 'No observed recent context.',
-    noProgress: 'No observed progress projection.'
+    noProgress: 'No observed progress projection.',
+    fetching: 'Observing current Today providers.',
+    retained: 'Retained context from the last successful observation',
+    explore: 'Explore content'
   }
 });
 
@@ -74,21 +78,21 @@ export function todayProjectionStateCopy(projection, lang = 'ar') {
   const c = COPY[lang === 'en' ? 'en' : 'ar'];
   if (projection.filteredEmpty) return c.filtered;
   return ({
-    UNOBSERVED: c.unobserved,
     UNAVAILABLE: c.unavailable,
-    FAILED: c.failed,
+    ERROR: c.failed,
     STALE: c.stale,
     PARTIAL: c.partial,
-    OBSERVED_EMPTY: c.empty
+    AVAILABLE_EMPTY: c.empty,
+    FETCHING: c.fetching
   }[projection.state] || '');
 }
 
 export function buildTodayOrchestrationViewModel(projection, { lang = 'ar', adapter = null } = {}) {
   const l = lang === 'en' ? 'en' : 'ar', c = COPY[l], recommendations = byKind(projection, 'RECOMMENDATION'), selected = recommendations[0] || null;
   const selectedVersion = selected?.recommendation?.version || '';
-  const whyAvailability = selected && adapter?.canExplain ? adapter.canExplain(selected.id, selectedVersion) : { enabled: !!(selected?.recommendation?.sourceRef && selectedVersion && (selected.recommendation.reasonCode || selected.recommendation.rationale)), reason: c.noRationale };
+  const whyAvailability = selected && adapter?.canExplain ? adapter.canExplain(selected.id, selectedVersion) : { enabled: false, reason: c.noRationale, code: 'RECOMMENDATION_SELECTION_BOUNDARY_UNAVAILABLE' };
   const continuation = byKind(projection, 'CONTINUE_SESSION')[0] || null;
-  const resumeAvailability = continuation && adapter?.canResume ? adapter.canResume(continuation.id) : { enabled: !!continuation?.continuation };
+  const resumeAvailability = continuation && adapter?.canResume ? adapter.canResume(continuation.id) : { enabled: false, reason: c.unavailable, code: 'CONTINUATION_RESOLVER_UNBOUND' };
   return Object.freeze({
     owner: 'TodayOrchestrationPresentation',
     lang: l,
@@ -618,6 +622,11 @@ const style = `<style data-today-orchestration-style>
   white-space: nowrap;
 }
 
+.today-provider-truth { display:grid; gap:6px; border:1px solid rgba(148,163,184,.18); border-radius:10px; padding:8px 10px; background:rgba(2,11,22,.45); }
+.today-provider-row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:11px; color:#94a3b8; }
+.today-provider-row[data-state="UNAVAILABLE"], .today-provider-row[data-state="ERROR"] { color:#fca5a5; }
+.today-provider-row[data-state="STALE"] { color:#fcd34d; }
+.today-provider-retained { color:#fbbf24; font-size:11px; }
 @media (max-width: 1120px) {
   .today-layout {
     grid-template-columns: 1fr;
@@ -647,7 +656,7 @@ const style = `<style data-today-orchestration-style>
 </style>`;
 
 const empty = text => `<div class="today-empty">${esc(text)}</div>`;
-const sourceLine = (item, c) => item?.providerId ? `<div class="today-source">${esc(c.source)} · ${bdi(item.providerId)}${item?.recommendation?.version ? ` · ${esc(c.version)} ${bdi(item.recommendation.version)}` : ''}</div>` : '';
+const sourceLine = (item, c) => {if(!item?.providerId)return '';const rec=item?.recommendation;const parts=[`${esc(c.source)} · ${bdi(item.providerId)}`];if(rec?.sourceRef)parts.push(bdi(rec.sourceRef));if(rec?.version)parts.push(`${esc(c.version)} ${bdi(rec.version)}`);if(item?.sourceObservedAt)parts.push(bdi(item.sourceObservedAt));if(item?.retainedStale)parts.push(esc(c.retained));return `<div class="today-source">${parts.join(' · ')}</div>`;};
 
 export function renderTodayOrchestrationProjection({ host, projection, adapter = null, lang = null, onAction = null } = {}) {
   if (!host || !projection) throw Error('TODAY_PRESENTATION_HOST_AND_PROJECTION_REQUIRED');
@@ -657,6 +666,9 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
     adapter.selectRecommendation(primaryRecommendation.id, primaryRecommendation.recommendation.version);
   }
   const vm = buildTodayOrchestrationViewModel(projection, { lang: l, adapter }), c = vm.copy;
+  const resumeFor = item => item && adapter?.canResume ? adapter.canResume(item.id) : {enabled:false,reason:'Continuation resolver unavailable',code:'CONTINUATION_RESOLVER_UNBOUND'};
+  const providerTruthHtml = (projection.sources||[]).map(source => `<div class="today-provider-row" data-state="${esc(source.state)}"><strong>${bdi(source.providerId)}</strong><span>${bdi(source.state)}</span>${source.observedAt?`<span>${bdi(source.observedAt)}</span>`:''}${source.reason?`<span>${esc(source.reason)}</span>`:''}${source.errorRef?`<span>${bdi(source.errorRef)}</span>`:''}</div>`).join('');
+  const stateAbsence = projection.state === 'UNAVAILABLE' ? c.unavailable : projection.state === 'ERROR' ? c.failed : projection.state === 'FETCHING' ? c.fetching : c.empty;
 
   // Session continuation
   let sessionHtml = '';
@@ -685,17 +697,17 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
         ${tagsHtml ? `<div class="today-tags-row">${tagsHtml}</div>` : ''}
         ${sourceLine(cont, c)}
         <div class="today-actions">
-          <button class="today-action today-action-primary" data-primary="true" data-today-action="resume" data-item-id="${esc(cont.id)}" ${vm.resumeAvailability.enabled ? '' : 'disabled'}>
+          <button class="today-action today-action-primary" data-primary="true" data-today-action="resume" data-item-id="${esc(cont.id)}" ${vm.resumeAvailability.enabled ? '' : `disabled aria-disabled="true" title="${esc(vm.resumeAvailability.reason||vm.resumeAvailability.code||'Unavailable')}"`}>
             ${esc(c.resume)} &gt;
           </button>
-          <button class="today-action today-action-secondary" data-today-action="resume" data-item-id="${esc(cont.id)}">
+          <button class="today-action today-action-secondary" data-today-action="resume" data-item-id="${esc(cont.id)}" ${vm.resumeAvailability.enabled ? '' : `disabled aria-disabled="true" title="${esc(vm.resumeAvailability.reason||vm.resumeAvailability.code||'Unavailable')}"`}>
             ${l === 'ar' ? 'عرض السياق' : 'View context'}
           </button>
         </div>
       </div>
     `;
   } else {
-    sessionHtml = empty(c.noSession);
+    sessionHtml = empty(projection.sourceTotalCount === 0 ? stateAbsence : c.noSession);
   }
 
   // Next recommendation
@@ -705,6 +717,7 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
     const metaTags = Array.isArray(rec.metaTags) ? rec.metaTags : [];
     const metaTagsHtml = metaTags.map(tag => `<span class="today-pill today-pill-tag">${esc(tag?.[l] || tag)}</span>`).join('');
     const nextUnlock = rec.nextUnlock?.[l] || rec.nextUnlock || '';
+    const recResume=resumeFor(rec);
     recommendationHtml = `
       <div class="today-card-body">
         <h3 class="today-recommendation-title">${esc(itemTitle(rec, l))}</h3>
@@ -713,36 +726,30 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
         ${nextUnlock ? `<div class="today-unlock-note"><span>🔓</span> ${esc(nextUnlock)}</div>` : ''}
         ${sourceLine(rec, c)}
         <div class="today-actions">
-          <button class="today-action today-action-primary" data-primary="true" data-today-action="resume" data-item-id="${esc(rec.id)}">
-            ${esc(itemActionLabel(rec, l) || (l === 'ar' ? 'إتمام الممارسة قبل Basic Lab >' : 'Complete practice before Basic Lab >'))}
+          <button class="today-action today-action-primary" data-primary="true" data-today-action="resume" data-item-id="${esc(rec.id)}" ${recResume.enabled ? '' : `disabled aria-disabled="true" title="${esc(recResume.reason||recResume.code||'Unavailable')}"`}>
+            ${esc(itemActionLabel(rec, l) || c.resume)}
           </button>
         </div>
       </div>
     `;
   } else {
-    recommendationHtml = empty(c.empty);
+    recommendationHtml = empty(projection.sourceTotalCount === 0 ? stateAbsence : c.empty);
   }
 
   // Why now? rationale
   let whyHtml = '';
   if (vm.recommendation && vm.whyAvailability.enabled) {
     const rec = vm.recommendation;
-    const checkItem = rec.rationaleCheck?.[l] || rec.rationaleCheck || (l === 'ar' ? 'المتطلب السابق مستوفى: Lesson 02' : 'Prerequisite satisfied: Lesson 02');
-    const nextItem = rec.rationaleNext?.[l] || rec.rationaleNext || (l === 'ar' ? 'الاعتماد التالي غير المكتمل: Basic Lab' : 'Next incomplete dependency: Basic Lab');
+    const checkItem = rec.rationaleCheck?.[l] || rec.rationaleCheck || '';
+    const nextItem = rec.rationaleNext?.[l] || rec.rationaleNext || '';
     whyHtml = `
       <div class="today-card-body">
         <ul class="today-rationale-list">
-          <li class="today-rationale-item today-rationale-ok">
-            <span class="today-rationale-icon">✓</span>
-            <span>${esc(checkItem)}</span>
-          </li>
-          <li class="today-rationale-item today-rationale-clock">
-            <span class="today-rationale-icon">⏱</span>
-            <span>${esc(nextItem)}</span>
-          </li>
+          ${checkItem ? `<li class="today-rationale-item today-rationale-ok"><span class="today-rationale-icon">✓</span><span>${esc(checkItem)}</span></li>` : ''}
+          ${nextItem ? `<li class="today-rationale-item today-rationale-clock"><span class="today-rationale-icon">⏱</span><span>${esc(nextItem)}</span></li>` : ''}
         </ul>
         <p class="today-why-summary">${esc(rec.recommendation?.rationale || rec.recommendation?.reasonCode || c.noRationale)}</p>
-        <div class="today-source">${esc(c.source)}: ${bdi(rec.recommendation?.sourceRef || '')}</div>
+        <div class="today-source">${esc(c.source)}: ${bdi(rec.recommendation?.sourceRef || '')} · ${esc(c.version)} ${bdi(rec.recommendation?.version || '')} · ${bdi(rec.recommendation?.observedAt || rec.sourceObservedAt || '')}</div>
         <div class="today-actions">
           <button class="today-action today-action-secondary" data-today-action="why" data-item-id="${esc(rec.id)}" data-recommendation-version="${esc(rec.recommendation?.version || '')}">
             ${l === 'ar' ? 'عرض السبب >' : 'Why now? >'}
@@ -755,7 +762,7 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
   }
 
   // Attention sidebar items
-  const attention = vm.attention.length ? vm.attention.map(item => `
+  const attention = vm.attention.length ? vm.attention.map(item => { const itemResume=resumeFor(item); return `
     <article class="today-attention-item" data-attention-id="${esc(item.id)}">
       <div class="today-attention-item-head">
         <span class="today-attention-domain">${esc(itemTrack(item, l))}</span>
@@ -766,13 +773,13 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
       ${sourceLine(item, c)}
       ${item.continuation ? `
         <div class="today-attention-item-actions">
-          <button class="today-action today-action-sm" data-today-action="resume" data-item-id="${esc(item.id)}">
+          <button class="today-action today-action-sm" data-today-action="resume" data-item-id="${esc(item.id)}" ${itemResume.enabled ? '' : `disabled aria-disabled="true" title="${esc(itemResume.reason||itemResume.code||'Unavailable')}"`}>
             ${esc(itemActionLabel(item, l) || c.open)}
           </button>
         </div>
       ` : ''}
     </article>
-  `).join('') : empty(c.noAttention);
+  `;}).join('') : empty(projection.sourceTotalCount === 0 ? stateAbsence : c.noAttention);
 
   // Recent context items
   const recent = vm.recent.length ? vm.recent.map(item => `
@@ -783,7 +790,7 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
       </div>
       <div class="today-recent-title">${esc(itemTitle(item, l))}</div>
     </div>
-  `).join('') : empty(c.noRecent);
+  `).join('') : empty(projection.sourceTotalCount === 0 ? stateAbsence : c.noRecent);
 
   // Progress items
   const progress = vm.progress.length ? vm.progress.map(item => {
@@ -809,7 +816,7 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
         <span class="today-progress-title">${esc(itemTitle(item, l))}</span>
       </div>
     `;
-  }).join('') : empty(c.noProgress);
+  }).join('') : empty(projection.sourceTotalCount === 0 ? stateAbsence : c.noProgress);
 
   const filterLabels = l === 'ar' ? {
     ALL: c.all,
@@ -850,14 +857,14 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
         <div class="today-head-main">
           <div class="today-greeting-row">
             <h1 class="today-heading" id="todayHeading" tabindex="-1">
-              ${l === 'ar' ? 'الأحد 18 مايو 2025 | مرحبًا، أحمد' : 'Sunday, May 18, 2025 | Welcome, Ahmed'}
+              ${esc(c.title)}
             </h1>
             <div class="today-clock" id="todayClock" aria-label="Current time">
-              <span>🕒</span> 10:40 (UTC+3)
+              <span>◉</span> ${bdi(projection.state)}
             </div>
           </div>
           <p class="today-subtitle" id="todaySubtitle">
-            ${l === 'ar' ? 'إليك ما يهمك للمتابعة اليوم.' : 'Here is what matters for your follow-up today.'}
+            ${esc(c.subtitle)}
           </p>
         </div>
         <div class="today-head-controls">
@@ -870,6 +877,7 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
           ${vm.statusMessage ? `<div class="today-status" id="todayStatus" data-tone="${vm.statusTone}" role="status">${esc(vm.statusMessage)}</div>` : ''}
         </div>
       </header>
+      <section class="today-provider-truth" id="todayProviderTruth" aria-label="Today provider truth">${providerTruthHtml || empty(c.unavailable)}${projection.retainedFromLastSuccess?`<div class="today-provider-retained">${l==='ar'?'تم الاحتفاظ بآخر إسقاط ناجح كسياق قديم بعد فشل التحديث.':'Last successful projection retained as stale context after refresh failure.'}</div>`:''}</section>
 
       <div class="today-layout">
         <div class="today-main">

@@ -4,7 +4,7 @@ import {createAnalyticalProviderBoundary,canonicalAnalyticalIdentityKey} from '.
 export const PORTFOLIO_DOMAIN_OWNER='W04PortfolioDomain';
 export const PORTFOLIO_AUTHORITY_REF='ORACLE-011/A03';
 const clone=value=>structuredClone(value), freeze=value=>Object.freeze(clone(value));
-const initial=()=>[
+const demoInitial=()=>[
  {id:'member-1',revisionId:'pm-001',refType:'Evidence',sourceRef:'ev-beta@evr-002',state:'RESOLVABLE',groupingRef:null,groupingState:'AUTHORITY_PENDING',title:'Configuration transcript',truthClass:'SYNTHETIC_DEMO_SEED'},
  {id:'member-2',revisionId:'pm-002',refType:'Mastery',sourceRef:'mastery-crypto@mr-001',state:'SOURCE_SUPERSEDED',groupingRef:null,groupingState:'AUTHORITY_PENDING',title:'Crypto mastery snapshot',truthClass:'SYNTHETIC_DEMO_SEED'}
 ];
@@ -23,8 +23,10 @@ const sourceSnapshot=(provider,ref)=>{
 };
 const sameSourceSnapshot=(a,b)=>a.state==='RESOLVED'&&b.state==='RESOLVED'?a.digest===b.digest&&a.rowCount===b.rowCount:null;
 
+export const createW04PortfolioDemoRecords=()=>freeze(demoInitial());
+
 export class W04PortfolioDomain{
- constructor(records=initial(),{groupingAuthority=null,sourceResolver=null}={}){
+ constructor(records=[],{groupingAuthority=null,sourceResolver=null}={}){
   this.owner=PORTFOLIO_DOMAIN_OWNER;
   this.records=clone(records).map(record=>({...record,groupingRef:record.groupingRef??null,groupingState:record.groupingRef?'REGISTRY_BOUND':(record.groupingState||'AUTHORITY_PENDING')}));
   this.groupingAuthority=groupingAuthority;

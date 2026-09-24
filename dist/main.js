@@ -3,6 +3,7 @@ import {SemanticCommandBus} from './foundation/global/commands.js';
 import {ScopedPreferencesOwner} from './foundation/global/preferences/store.js';
 import {TransientFocusOwner} from './foundation/global/transient-focus.js';
 import {defineContextDescriptorProvider} from './foundation/global/context-descriptor-contract.js';
+import {eventTargetElement} from './foundation/global/input-ownership-contract.js';
 import {AccessibilityFeedbackOwner} from './foundation/global/feedback.js';
 import {mountWave3GlobalAssembly} from './foundation/wave3-assembly.js';
 import {mountWave4FamilyInteractionAssembly} from './foundation/wave4-assembly.js';
@@ -27,24 +28,6 @@ import {CEP_PRODUCT_DESTINATION_REGISTRY} from './foundation/global/shell/cep-de
 import {mountM0ControllerComposition} from './surfaces/m0-controller-composition.js';
 import {AnalyticalCompareOwner} from './foundation/analytical/compare.js';
 import {TimelineReplayOwner} from './foundation/timeline/replay.js';
-
-if (typeof Node !== 'undefined' && !Node.prototype.closest) {
-  Node.prototype.closest = function(            selector        )                 {
-    let current              = this;
-    while (current) {
-      if (current.nodeType === 1 && typeof (current       ).matches === 'function') {
-        if ((current       ).matches(selector)) {
-          return current           ;
-        }
-      }
-      current = current.parentElement || current.parentNode;
-    }
-    return null;
-  };
-}
-if (typeof Window !== 'undefined' && !Window.prototype.closest) {
-  (Window.prototype       ).closest = function() { return null; };
-}
 
 const shellCanonicalization=canonicalizeGlobalShellRoute(location.search,location.href,CEP_PRODUCT_DESTINATION_REGISTRY);
 if(shellCanonicalization.required)history.replaceState(history.state,'',shellCanonicalization.href);
@@ -130,8 +113,8 @@ if(consumer==='library'){
 }else api=mountWorkspaceHost({commands:registry,preferences,binding:familyBinding,extension});
 workspace=new WorkspaceFoundation(api,registry,preferences,consumer,transientOwner);
 if(consumer==='library'){const detachedParams=new URLSearchParams(location.search),detachedNoteId=detachedParams.get('detachedNoteId'),detachedKu=detachedParams.get('detachedKu'),detachedBlockId=detachedParams.get('detachedBlockId'),detachedLens=detachedParams.get('detachedContextLens'),detachedContext=readDetachedNoteContext(detachedParams.get('detachedContextToken'));if(detachedNoteId&&detachedContext?.note?.id===detachedNoteId){api.state.notes[detachedNoteId]=structuredClone(detachedContext.note);document.documentElement.dataset.detachedContextTransport='local-runtime-ephemeral-handoff'}const restoreKu=detachedContext?.route?.activeKu||detachedKu,restoreLens=detachedContext?.route?.contextLens||detachedLens;if(restoreKu&&api?.state?.route?.activeKu!==restoreKu&&typeof api?.switchKU==='function')api.switchKU(restoreKu);if(detachedNoteId&&api?.state?.notes?.[detachedNoteId]){api.renderNotes?.();api.openNote?.(detachedNoteId,false);if(restoreLens)api.state.surface.contextLens=restoreLens;if(detachedBlockId&&typeof api?.selectBlock==='function')api.selectBlock('main',detachedBlockId,false,'detached-window-restore');document.documentElement.dataset.detachedNoteId=detachedNoteId;document.documentElement.dataset.detachedNoteBinding=String(api.state.notes[detachedNoteId]?.binding?.documentId||api.state.notes[detachedNoteId]?.binding?.kuId||'');document.documentElement.dataset.detachedContextRestored='true'}}
-if(structured&&persistenceClient)document.addEventListener('click',event=>{const target=(event.target?.closest?event.target:event.target?.parentElement);const save=target?.closest?.('[data-action="explicit-save"]');if(!save)return;event.preventDefault();event.stopImmediatePropagation();Promise.resolve(api.Commands.execute('document.commit',{route:'toolbar',reason:'explicit-save'})).catch(error=>presentPersistenceReceipt({command:'document.commit',persisted:false,error:String(error?.message||error)}))},true);
-motion=new WindowMotion(rawTarget=>{const target=(rawTarget?.closest?rawTarget:rawTarget?.parentElement);if(!target)return null;const note=target.closest?.('.stickynote');if(note&&(target.closest?.('[data-note-drag-handle]')||target.closest?.('[data-note-resize]'))){const resizeHandle=target.closest?.('[data-note-resize]'),binding=noteRuntime?.motionBinding(note.dataset.noteId,note,{edge:resizeHandle?.dataset.noteResize||null});if(binding){const originalCommit=binding.commit;binding.commit=receipt=>{originalCommit?.(receipt);api.syncNoteFromCanonical?.(note.dataset.noteId);api.renderNotes()};return binding}}const ops=target.closest?.('.operational-host'),owner=wave4Assembly?.operationalSession,resize=target.closest?.('[data-operational-resize]'),drag=target.closest?.('[data-operational-drag]');if(ops&&owner&&(resize||drag)){const active=owner.activeTab?.();if(!active)return null;const binding=owner.motionBinding(active.presentationId,ops,{resizeEdge:resize?.dataset.operationalResize||null});if(binding){const originalCommit=binding.commit;binding.commit=receipt=>{originalCommit?.(receipt);operational?.render?.()};return binding}}return null});
+if(structured&&persistenceClient)document.addEventListener('click',event=>{const target=eventTargetElement(event.target);const save=target?.closest?.('[data-action="explicit-save"]');if(!save)return;event.preventDefault();event.stopImmediatePropagation();Promise.resolve(api.Commands.execute('document.commit',{route:'toolbar',reason:'explicit-save'})).catch(error=>presentPersistenceReceipt({command:'document.commit',persisted:false,error:String(error?.message||error)}))},true);
+motion=new WindowMotion(rawTarget=>{const target=eventTargetElement(rawTarget);if(!target)return null;const note=target.closest?.('.stickynote');if(note&&(target.closest?.('[data-note-drag-handle]')||target.closest?.('[data-note-resize]'))){const resizeHandle=target.closest?.('[data-note-resize]'),binding=noteRuntime?.motionBinding(note.dataset.noteId,note,{edge:resizeHandle?.dataset.noteResize||null});if(binding){const originalCommit=binding.commit;binding.commit=receipt=>{originalCommit?.(receipt);api.syncNoteFromCanonical?.(note.dataset.noteId);api.renderNotes()};return binding}}const ops=target.closest?.('.operational-host'),owner=wave4Assembly?.operationalSession,resize=target.closest?.('[data-operational-resize]'),drag=target.closest?.('[data-operational-drag]');if(ops&&owner&&(resize||drag)){const active=owner.activeTab?.();if(!active)return null;const binding=owner.motionBinding(active.presentationId,ops,{resizeEdge:resize?.dataset.operationalResize||null});if(binding){const originalCommit=binding.commit;binding.commit=receipt=>{originalCommit?.(receipt);operational?.render?.()};return binding}}return null});
 if(consumer==='runs'){document.addEventListener('pointerdown',e=>motion.down(e),true);document.addEventListener('pointermove',e=>motion.move(e),true);document.addEventListener('pointerup',e=>motion.up(e),true)}
 document.addEventListener('pointercancel',()=>motion.cancel(),true);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&motion.cancel()){e.preventDefault();e.stopImmediatePropagation()}},true);

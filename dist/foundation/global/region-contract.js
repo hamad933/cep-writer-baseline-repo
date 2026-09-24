@@ -46,7 +46,6 @@ export function createWorkspaceFamilyBinding(options = {}) {
       domainKind: options.domainKind
     }),
     commandContext: typeof options.commandContext === 'function' ? options.commandContext : ({ state }) => ({
-      mode: state?.surface?.mode || 'read',
       selection: [],
       activeTarget: state?.domain?.activeTarget || null,
       transientOpen: Boolean(state?.transient?.open)

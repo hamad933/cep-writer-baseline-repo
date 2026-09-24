@@ -119,6 +119,10 @@ export class HealthRuntimeAdapter{
       </div>`;
       stage.querySelectorAll('[data-health-source]').forEach(element=>element.addEventListener('click',()=>{this.inspect({sourceId:element.dataset.healthSource});workspace.inspectorDescriptor(this.contextProvider);render();}));
       workspace.inspectorDescriptor(this.contextProvider);
+      const sourcePanel=stage.querySelector('.w05-health-grid > .w05-health-panel:first-child'),diagnosticPanel=stage.querySelector('.w05-health-diagnostic');
+      if(sourcePanel)workspace.region('LEFT',{node:sourcePanel,label:'Observed sources'});
+      if(diagnosticPanel)workspace.region('BOTTOM',{node:diagnosticPanel,label:'Health diagnostics',summary:'Durable diagnostic projection; refresh alone does not create a diagnostic run.'});
+      workspace.refreshToolbar?.();
       return state;
     };
     const run=fn=>async payload=>{const r=await fn(payload||{});workspace.status(r.ok?'Health observation receipt recorded':`Health action failed · ${r.code||r.reason}`,r.ok?'info':'error');render();return r;};

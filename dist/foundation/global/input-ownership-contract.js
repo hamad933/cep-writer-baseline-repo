@@ -27,6 +27,19 @@ const truthyContentEditable = target => {
   return attr === '' || attr === 'true' || attr === 'plaintext-only';
 };
 
+export function eventTargetElement(target) {
+  if (!target || typeof target !== 'object') return null;
+  if (typeof Element !== 'undefined' && target instanceof Element) return target;
+  if (typeof Node !== 'undefined' && target instanceof Node) return target.parentElement || null;
+  if (target.nodeType === 1 && typeof target.closest === 'function') return target;
+  const parent = target.parentElement;
+  return parent && typeof parent.closest === 'function' ? parent : null;
+}
+
+export function closestFromEventTarget(target, selector) {
+  return eventTargetElement(target)?.closest?.(selector) || null;
+}
+
 export function isCompositionEvent(event = {}) {
   return event.isComposing === true || event.key === 'Process' || event.keyCode === 229 || event.which === 229;
 }

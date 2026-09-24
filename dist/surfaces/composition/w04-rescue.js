@@ -23,7 +23,8 @@ function evidenceProvenanceProvider(domain){
   return Object.freeze({
     descriptor:()=>({providerId:'w04.evidence.provenance',domainKind:'Evidence',schemaVersion:'1.0.0',authorityRef:W04_RESCUE_AUTHORITY,label:'Evidence provenance'}),
     read:({id}={})=>{
-      const row=domain.inspect(id||domain.records[0]?.id),revision=row?.currentRevision;
+      const target=id||domain.records[0]?.id;if(!target)return {state:'EMPTY',identity:{id:'evidence:none',label:'No Evidence selected',revision:null,provenanceRefs:[]},entries:[],message:'No governed Evidence record is selected.'};
+      const row=domain.inspect(target),revision=row?.currentRevision;
       if(!row)return {state:'EMPTY',identity:{id:'evidence:none',label:'No Evidence selected',revision:null,provenanceRefs:[]},entries:[],message:'No governed Evidence record is selected.'};
       const sourceRef=revision?`${revision.source.sourceId}@${revision.source.sourceRevision}`:`${row.sourceId||row.id}@${row.sourceRevision||row.revisionId}`;
       const entries=[{id:`source:${sourceRef}`,label:'Pinned source revision',kind:'SOURCE_REVISION',summary:`Source status: ${row.sourceStatus}`,provenanceRefs:[sourceRef],attributes:{digest:revision?.source.digest||row.digest,sourceStatus:row.sourceStatus}}];
@@ -37,7 +38,8 @@ function reviewsProvenanceProvider(domain){
   return Object.freeze({
     descriptor:()=>({providerId:'w04.reviews.provenance',domainKind:'FormalReview',schemaVersion:'1.0.0',authorityRef:W04_RESCUE_AUTHORITY,label:'Formal Review provenance'}),
     read:({id}={})=>{
-      const row=domain.inspect(id||domain.records[0]?.id);
+      const target=id||domain.records[0]?.id;if(!target)return {state:'EMPTY',identity:{id:'review:none',label:'No Review selected',revision:null,provenanceRefs:[]},entries:[],message:'No formal Review is selected.'};
+      const row=domain.inspect(target);
       if(!row)return {state:'EMPTY',identity:{id:'review:none',label:'No Review selected',revision:null,provenanceRefs:[]},entries:[],message:'No formal Review is selected.'};
       const entries=[...row.evidenceRefs.map(ref=>({id:`evidence:${ref}`,label:'Pinned Evidence revision',kind:'EVIDENCE_REVISION_REF',summary:'Exact Evidence revision pinned to this Review.',provenanceRefs:[ref]})),...row.decisionHistory.map(decision=>({id:`decision:${decision.decisionId}`,label:`Decision ${decision.decisionId}`,kind:'REVIEW_DECISION',summary:`${decision.outcome}${decision.supersedesDecisionRef?` · supersedes ${decision.supersedesDecisionRef}`:''}`,provenanceRefs:[decision.decisionId,...(decision.supersedesDecisionRef?[decision.supersedesDecisionRef]:[])],attributes:{immutable:true,outcome:decision.outcome}}))];
       return {state:entries.length?'READY':'EMPTY',identity:{id:row.id,label:`Review ${row.id}`,revision:row.revisionId,provenanceRefs:[...row.evidenceRefs,...row.criteriaRefs]},entries,message:'Issued Decisions are read-only provenance records here; correction uses superseding Decision lineage.'};

@@ -4,6 +4,7 @@ import { WorkspaceHostKernel, WORKSPACE_HOST_CONTRACT } from './global/workspace
 import { WorkspacePaneLayoutOwner, WORKSPACE_PANE_WIDTH_LIMITS } from './global/pane-layout.js';
 import { createWorkspaceFamilyBinding, WORKSPACE_REGION_CONTRACT } from './global/region-contract.js';
 import { TransientFocusOwner } from './global/transient-focus.js';
+import { eventTargetElement } from './global/input-ownership-contract.js';
 import { StructuredSurfaceHost as CanonicalStructuredSurfaceHost } from './structured/surface-host.js';
 import { StructuredActionSurfacePresentationHost } from './structured/action-surfaces/presentation-host.js';
 
@@ -55,12 +56,12 @@ export class DonorFreeStructuredSurfaceHost {
   _bindCanonicalContent(root,host){
     if(this.boundRoot===root)return;this.boundRoot=root;
     root.addEventListener('blur',event=>{
-      const editable=event.target?.closest?.('[data-structured-editable],[data-editable-block]');if(this.suppressContentCommit||!editable||!root.contains(editable)||this.state.surface.mode!=='edit')return;
+      const editable=eventTargetElement(event.target)?.closest('[data-structured-editable],[data-editable-block]');if(this.suppressContentCommit||!editable||!root.contains(editable)||this.state.surface.mode!=='edit')return;
       const row=editable.closest('[data-structured-block-id]'),blockId=row?.getAttribute('data-structured-block-id');if(!blockId)return;
       const result=host.updateContent(blockId,{html:editable.innerHTML});if(result?.ok)this._syncState(blockId);
     },true);
     root.addEventListener('keydown',event=>{
-      const editable=event.target?.closest?.('[data-structured-editable],[data-editable-block]'),historyChord=!!(event.ctrlKey||event.metaKey)&&!event.altKey&&['z','y'].includes(String(event.key||'').toLowerCase());
+      const editable=eventTargetElement(event.target)?.closest('[data-structured-editable],[data-editable-block]'),historyChord=!!(event.ctrlKey||event.metaKey)&&!event.altKey&&['z','y'].includes(String(event.key||'').toLowerCase());
       if(editable&&!root.contains(editable))return;if(!editable&&!(this.state.surface.mode==='read'&&historyChord&&root.contains(event.target)))return;
       const row=editable?.closest?.('[data-structured-block-id]'),blockId=row?.getAttribute('data-structured-block-id')||this.adapter.selectedFragmentIdentity?.()?.blockIds?.[0]||this.adapter.snapshot()?.blocks?.[0]?.id;if(!blockId)return;
       const routed=host.routeKeydown(event,{...(editable?this._caretContext(editable,blockId):{blockId,offset:0,anchorOffset:0,focusOffset:0,beforeText:'',afterText:'',atStart:true,atEnd:true,target:root}),mode:this.state.surface.mode,target:editable||root});
@@ -70,7 +71,7 @@ export class DonorFreeStructuredSurfaceHost {
       }
     },true);
     for(const [name,kind] of [['compositionstart','start'],['compositionupdate','update'],['compositionend','end']])root.addEventListener(name,event=>{
-      const editable=event.target?.closest?.('[data-structured-editable],[data-editable-block]');if(!editable||!root.contains(editable))return;
+      const editable=eventTargetElement(event.target)?.closest('[data-structured-editable],[data-editable-block]');if(!editable||!root.contains(editable))return;
       const row=editable.closest('[data-structured-block-id]'),blockId=row?.getAttribute('data-structured-block-id');if(!blockId)return;
       host.routeComposition(kind,event,{...this._caretContext(editable,blockId),mode:this.state.surface.mode,target:editable});
     },true);
@@ -111,7 +112,7 @@ export function createStructuredWorkspaceBinding(adapter,{id='learn-structured-w
     domainKind:adapter.domainKind||'learn',
     label:'Structured workspace',
     adapter,
-    createState:()=>({editor:{...clone(adapter.snapshot()),selectedBlock:null,dirty:false,committedRevision:adapter.committedRevision}}),
+    createState:()=>({surface:{mode:'read'},editor:{...clone(adapter.snapshot()),selectedBlock:null,dirty:false,committedRevision:adapter.committedRevision}}),
     descriptor:()=>({id,family:'structured',domainKind:adapter.domainKind||'learn',adapter:adapter.descriptor?.()||null}),
     commandContext:({state,payload})=>({mode:state.surface.mode,blockId:payload.blockId??state.editor?.selectedBlock??null,...payload}),
     setMode:({state,mode})=>{state.surface.mode=mode;}
@@ -126,7 +127,7 @@ export function createFamilyWorkspaceBinding({id,family,domainKind,label,activeT
     label:label||`${family} workspace`,
     createState:()=>({domainState:{activeTarget}}),
     descriptor:({state})=>({id,family,domainKind,activeTarget:state?.domain?.activeTarget??activeTarget}),
-    commandContext:({state,payload})=>({mode:state.surface.mode,activeTarget:payload.activeTarget??state.domain.activeTarget??activeTarget,...payload})
+    commandContext:({state,payload})=>({activeTarget:payload.activeTarget??state.domain.activeTarget??activeTarget,...payload})
   });
 }
 
@@ -184,7 +185,7 @@ export function mountWorkspaceHost({commands,preferences,binding,extension={}}){
     palette.dataset.surface=binding.domainKind||structuredAdapter.domainKind||'structured';palette.dataset.targetKind='gap';palette.dataset.canonicalInsertionBinding='StructuredInsertionTargetOwner';
     if(context)context.textContent='Add block';if(meta)meta.textContent=`gap · depth ${target.depth} · index ${target.index}`;search.value='';renderStructuredInsertionChooser('');
     search.oninput=()=>renderStructuredInsertionChooser(search.value);
-    grid.onclick=event=>{const button=event.target?.closest?.('[data-canonical-insert-type]');if(!button)return;const type=button.dataset.canonicalInsertType,block=makeStructuredChooserBlock(type);if(!block)return;const result=host.routeInsertionGap(insertionPaletteState.target,{block,type});if(result?.changed){closeStructuredInsertionChooser({restore:false,reason:'inserted'});surface?.render();requestAnimationFrame(()=>document.querySelector(`[data-structured-block-id="${CSS.escape(block.id)}"] [data-structured-editable="true"]`)?.focus?.({preventScroll:true}));}};
+    grid.onclick=event=>{const button=eventTargetElement(event.target)?.closest('[data-canonical-insert-type]');if(!button)return;const type=button.dataset.canonicalInsertType,block=makeStructuredChooserBlock(type);if(!block)return;const result=host.routeInsertionGap(insertionPaletteState.target,{block,type});if(result?.changed){closeStructuredInsertionChooser({restore:false,reason:'inserted'});surface?.render();requestAnimationFrame(()=>document.querySelector(`[data-structured-block-id="${CSS.escape(block.id)}"] [data-structured-editable="true"]`)?.focus?.({preventScroll:true}));}};
     structuredActionPresentation.openInsertionPalette({element:palette,invoker:insertionPaletteState.invoker,anchorRect:insertionPaletteState.invoker?.getBoundingClientRect?.(),fallbackFocus:returnFocus,onClose:()=>{insertionPaletteState.target=null;insertionPaletteState.host=null;insertionPaletteState.invoker=null;}});
     palette.hidden=false;requestAnimationFrame(()=>search.focus({preventScroll:true}));return true;
   };
@@ -332,7 +333,7 @@ export function mountWorkspaceHost({commands,preferences,binding,extension={}}){
   document.querySelector('.library-current-actions')?.remove();
   document.querySelector('#structureTree')?.setAttribute('aria-label',binding.label||'Workspace navigation');
   document.querySelector('#commandSearch')?.addEventListener('input',event=>renderCommandResults(event.currentTarget.value));
-  document.querySelector('#commandResults')?.addEventListener('click',event=>{const target=(event.target?.closest?event.target:event.target?.parentElement);const button=target?.closest?.('[data-foundation-command]');if(!button||button.disabled)return;const result=commands.execute(button.dataset.foundationCommand,commandContext({route:'palette'}));if(result!==false){closeBackdrop(document.querySelector('#commandBackdrop'),{reason:'command-accepted'});surface?.render();binding.render?.({state,root:document,extension});}});
+  document.querySelector('#commandResults')?.addEventListener('click',event=>{const target=eventTargetElement(event.target);const button=target?.closest?.('[data-foundation-command]');if(!button||button.disabled)return;const result=commands.execute(button.dataset.foundationCommand,commandContext({route:'palette'}));if(result!==false){closeBackdrop(document.querySelector('#commandBackdrop'),{reason:'command-accepted'});surface?.render();binding.render?.({state,root:document,extension});}});
   document.addEventListener('keydown',event=>{const palette=document.querySelector('#commandBackdrop');if(event.key==='Escape'&&palette&&!palette.hidden&&transients.canDismiss(palette.id,'escape')){event.preventDefault();event.stopImmediatePropagation();closeBackdrop(palette,{reason:'escape'});}},true);
   for(const side of ['left','right']){bindPaneToggle(side);bindSeparator(side);}
   window.addEventListener('resize',()=>{const before=lastAppliedPaneSnapshot||paneSnapshot(),focused={left:paneOwnsFocus('left')||lastPaneFocusSide==='left',right:paneOwnsFocus('right')||lastPaneFocusSide==='right'};panes.setViewportWidth(globalThis.innerWidth||1440);const snapshot=applyPanes();for(const side of ['left','right'])collapseFocusReturn(side,before[side],snapshot[side],focused[side]);});

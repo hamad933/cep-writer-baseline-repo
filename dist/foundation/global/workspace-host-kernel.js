@@ -28,7 +28,7 @@ export class WorkspaceHostKernel {
     this.panes = new WorkspacePaneLayoutOwner(preferences, { viewportWidth });
     const familyState = this.binding.createState({ extension }) || {};
     this.state = {
-      surface: { mode: 'read', preferredDensity: 'comfortable', zoom: 1, focusMode: false, bottomOpen: false },
+      surface: { preferredDensity: 'comfortable', zoom: 1, focusMode: false, bottomOpen: false },
       notes: { floating: true, docked: false },
       transient: { open: false, kind: null, returnFocus: null },
       domain: {
