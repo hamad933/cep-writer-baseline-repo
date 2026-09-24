@@ -55,21 +55,23 @@ jobs:
           creds.refresh(Request())
           headers={"Authorization":f"Bearer {creds.token}"}
           r=requests.get(f"https://www.googleapis.com/drive/v3/files/{FILE_ID}",headers=headers,params={"alt":"media"},timeout=30)
-          r.raise_for_status(); text=r.text
+          r.raise_for_status(); text=r.content.decode('utf-8-sig')
           if old not in text and new not in text: raise RuntimeError("active mission cleanup token not found")
           if old in text: text=text.replace(old,new,1)
           if marker not in text:
-              anchor="- Zero-loss repository cleanup method — 2026-09-24:"
+              anchor="Zero-loss repository cleanup method"
               pos=text.find(anchor)
               if pos<0: raise RuntimeError("cleanup method anchor missing")
+              start=text.rfind("\n",0,pos)+1
               end=text.find("\n",pos)
+              if end<0: end=len(text)
               text=text[:end+1]+line+"\n"+text[end+1:]
           w=requests.patch(f"https://www.googleapis.com/upload/drive/v3/files/{FILE_ID}",
               headers={**headers,"Content-Type":"text/markdown; charset=utf-8"},
               params={"uploadType":"media"},data=text.encode(),timeout=30)
           w.raise_for_status()
           v=requests.get(f"https://www.googleapis.com/drive/v3/files/{FILE_ID}",headers=headers,params={"alt":"media"},timeout=30)
-          v.raise_for_status(); final=v.text
+          v.raise_for_status(); final=v.content.decode('utf-8-sig')
           assert new in final and marker in final
           print("CURRENT_STATE_AUDIT_RECONCILIATION_PASS")
           PY
