@@ -168,7 +168,18 @@ for (const path of await walk(root)) {
 check('w03.old_authority_zero_active', activeOld.length === 0, activeOld);
 const semanticAuthorityAliases=[];
 const aliasPattern=/W03[^\n]{0,100}(?:is|as|=)\s+(?:the\s+)?(?:implementation|design|UI|layout|interaction|visual|component|stack)\s+(?:authority|baseline)/ig;
-for (const path of ['FOUNDATION_ARCHITECTURE.md','FINAL_HANDOFF_AR.md','README_START_HERE_AR.md','tools/build-writer-contracts.py','tools/finalize-candidate.py']) { const value=await text(path); if(aliasPattern.test(value))semanticAuthorityAliases.push(path); aliasPattern.lastIndex=0; }
+for (const path of ['FOUNDATION_ARCHITECTURE.md','FINAL_HANDOFF_AR.md','README_START_HERE_AR.md','tools/build-writer-contracts.py','tools/finalize-candidate.py']) {
+  try {
+    const value=await text(path);
+    if(aliasPattern.test(value)) semanticAuthorityAliases.push(path);
+    aliasPattern.lastIndex=0;
+  } catch (error) {
+    if (error?.code !== 'ENOENT') throw error;
+    // Historical handoffs may be removed from the current tip after their
+    // content is classified and preserved by Git/Drive lineage.
+    aliasPattern.lastIndex=0;
+  }
+}
 check('w03.semantic_authority_alias_zero', semanticAuthorityAliases.length === 0, semanticAuthorityAliases);
 
 const writer = await read('writer/WRITER_INTAKE_TEMPLATE.json'), writerKeys = ['foundationBaseline', 'targetSurface', 'surfaceProfile', 'inheritedGlobalComponents', 'familyEngines', 'domainAdapter', 'allowedDeviations', 'ownerDeltas', 'requiredProof'];
