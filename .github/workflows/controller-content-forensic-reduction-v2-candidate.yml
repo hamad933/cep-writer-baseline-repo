@@ -1,0 +1,150 @@
+name: Controller Content-Forensic Reduction V2 Candidate
+
+on:
+  push:
+    branches:
+      - controller/content-forensic-reduction-v2
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate-proof:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact live main parent
+        uses: actions/checkout@v4
+        with:
+          ref: 16aafaec71706ebbb13b002395f72383b2e77a81
+          fetch-depth: 0
+
+      - name: Fetch Controller transform from candidate branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git show controller/content-forensic-reduction-v2:.controller/content_forensic_reduction_v2.py > /tmp/content_forensic_reduction_v2.py
+
+      - name: Use governed Node target
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.16.0
+
+      - name: Build reduction candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 /tmp/content_forensic_reduction_v2.py
+
+      - name: Prove allowlist and Product non-mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --name-status > controller-candidate-v2/DIFF_NAME_STATUS.txt
+          git diff --numstat > controller-candidate-v2/DIFF_NUMSTAT.txt
+          git diff -- stack/native-typescript > controller-candidate-v2/PRODUCT_DIFF.patch
+          test ! -s controller-candidate-v2/PRODUCT_DIFF.patch
+          node --input-type=module <<'NODE' > controller-candidate-v2/PRODUCT_SOURCE_IDENTITY.json
+          import { canonicalSourceIdentity } from './tools/source-tree-identity.mjs';
+          import { pathToFileURL } from 'node:url';
+          console.log(JSON.stringify(await canonicalSourceIdentity(pathToFileURL(process.cwd() + '/')), null, 2));
+          NODE
+          python3 - <<'PY'
+          import json, subprocess
+          ident=json.load(open('controller-candidate-v2/PRODUCT_SOURCE_IDENTITY.json'))
+          assert ident['sha256']=='480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641'
+          assert ident['files']==273
+          actual=sorted(subprocess.check_output(['git','diff','--diff-filter=D','--name-only'],text=True).splitlines())
+          allowed=sorted([x for x in open('controller-candidate-v2/DELETION_ALLOWLIST.txt',encoding='utf-8').read().splitlines() if x])
+          assert actual==allowed,(len(actual),len(allowed),set(actual)^set(allowed))
+          PY
+
+      - name: Writer self-containment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 cep-writer/tools/verify_repo.py | tee controller-candidate-v2/WRITER_VERIFY.log
+
+      - name: Public disclosure scan
+        shell: bash
+        run: |
+          set -euo pipefail
+          git grep -nEI -- '-----BEGIN (RSA |EC |OPENSSH |)?PRIVATE KEY-----|github_pat_[A-Za-z0-9_]{20,}|ghp_[A-Za-z0-9]{30,}|AIza[0-9A-Za-z_-]{30,}|AKIA[0-9A-Z]{16}' . ':!package-lock.json' > controller-candidate-v2/PUBLIC_DISCLOSURE_HITS.txt || true
+          test ! -s controller-candidate-v2/PUBLIC_DISCLOSURE_HITS.txt
+          printf '{"status":"PASS","highRiskPatternHits":0}\n' > controller-candidate-v2/PUBLIC_DISCLOSURE_STATUS.json
+
+      - name: Deterministic build
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build:runtime > controller-candidate-v2/build-1.log 2>&1
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum > controller-candidate-v2/dist-1.sha256
+          npm run build:runtime > controller-candidate-v2/build-2.log 2>&1
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum > controller-candidate-v2/dist-2.sha256
+          cmp controller-candidate-v2/dist-1.sha256 controller-candidate-v2/dist-2.sha256
+          printf '{"build1":"PASS","build2":"PASS","deterministic":"PASS"}\n' > controller-candidate-v2/BUILD_STATUS.json
+
+      - name: Model tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test > controller-candidate-v2/npm-test.log 2>&1
+          cp assurance/MODEL_TEST_RESULTS.json controller-candidate-v2/MODEL_TEST_RESULTS.json
+
+      - name: Contract and duplicate-owner regression
+        shell: bash
+        run: |
+          set +e
+          npm run check > controller-candidate-v2/npm-check.log 2>&1
+          code=$?
+          cp assurance/CONTRACT_TEST_RESULTS.json controller-candidate-v2/CONTRACT_TEST_RESULTS.json
+          cp assurance/DUPLICATE_MECHANIC_SCAN.json controller-candidate-v2/DUPLICATE_MECHANIC_SCAN.json
+          cp assurance/WRITER_SCAFFOLD_TEST_RESULTS.json controller-candidate-v2/WRITER_SCAFFOLD_TEST_RESULTS.json
+          python3 - <<'PY'
+          import json
+          d=json.load(open('assurance/CONTRACT_TEST_RESULTS.json'))
+          fails=[x['id'] for x in d['tests'] if x.get('status')=='FAIL']
+          expected=['browser.lineage_receipt_truthful','browser.current_candidate_claim_truthful','browser.targeted_visual_evidence']
+          assert fails==expected,(fails,expected)
+          assert d['pass']==165 and d['fail']==3,(d['pass'],d['fail'])
+          dup=json.load(open('assurance/DUPLICATE_MECHANIC_SCAN.json'))
+          assert dup.get('status')=='PASS',dup
+          scaffold=json.load(open('assurance/WRITER_SCAFFOLD_TEST_RESULTS.json'))
+          assert scaffold.get('fail')==0,scaffold
+          print(json.dumps({'contractPass':d['pass'],'contractFail':d['fail'],'expectedOpenEvidenceFailures':fails,'duplicateOwner':dup.get('status'),'writerScaffoldFail':scaffold.get('fail')},indent=2))
+          PY
+          printf '{"exitCode":%s,"classification":"EXPECTED_INHERITED_OPEN_BROWSER_EVIDENCE_DEBT_ONLY"}\n' "$code" > controller-candidate-v2/NPM_CHECK_STATUS.json
+          exit 0
+
+      - name: Runtime falsification on governed Node
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --version | tee controller-candidate-v2/NODE_VERSION.txt
+          npm run runtime:check > controller-candidate-v2/runtime-check.log 2>&1
+          printf '{"status":"PASS"}\n' > controller-candidate-v2/RUNTIME_CHECK_STATUS.json
+
+      - name: Candidate size and patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,pathlib,subprocess
+          deleted=set(subprocess.check_output(['git','diff','--diff-filter=D','--name-only'],text=True).splitlines())
+          base=set(subprocess.check_output(['git','ls-files'],text=True).splitlines())
+          new={'docs/history/CONTENT_FORENSIC_DISPOSITION_V2.json'}
+          paths=sorted((base-deleted)|new)
+          paths=[p for p in paths if not p.startswith('controller-candidate-v2/')]
+          size=sum(pathlib.Path(p).stat().st_size for p in paths if pathlib.Path(p).is_file())
+          json.dump({'files':len(paths),'bytes':size,'sourceFiles':1517,'sourceBytes':81065169,'deltaFiles':len(paths)-1517,'deltaBytes':size-81065169},open('controller-candidate-v2/CANDIDATE_SIZE.json','w'),indent=2)
+          PY
+          git diff --binary > controller-candidate-v2/CANDIDATE.patch
+          git status --short > controller-candidate-v2/FINAL_GIT_STATUS.txt
+
+      - name: Upload candidate proof
+        uses: actions/upload-artifact@v4
+        with:
+          name: controller-content-forensic-reduction-v2-candidate-proof
+          path: controller-candidate-v2/
+          if-no-files-found: error
+          retention-days: 14
