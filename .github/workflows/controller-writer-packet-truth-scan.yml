@@ -1,0 +1,58 @@
+name: Controller Writer Packet Truth Scan
+
+on:
+  push:
+    branches:
+      - controller/writer-packet-truth-repair
+    paths:
+      - .github/workflows/controller-writer-packet-truth-scan.yml
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: f93b75310716f8cf527505ccfdbdb215eb4e3454
+          fetch-depth: 0
+
+      - name: Scan Writer packet execution-vs-lineage identity claims
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p packet-truth-scan
+          grep -RIn --binary-files=without-match             -e '293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a'             -e '3101c06901dbdaff9602fea8098efb9c34575149'             cep-writer > packet-truth-scan/HASH_REFERENCES.txt || true
+          python3 - <<'PY'
+          import json,pathlib,re
+          rows=[]
+          for raw in pathlib.Path('packet-truth-scan/HASH_REFERENCES.txt').read_text(encoding='utf-8').splitlines():
+              m=re.match(r'([^:]+):(\d+):(.*)',raw)
+              if not m: continue
+              path,line,text=m.group(1),int(m.group(2)),m.group(3)
+              low=text.lower()
+              if any(k in low for k in [
+                  'product parent','product-source','product source parent','source ancestor',
+                  'productsourceparent','productparentcommit','productsourcelineage','product source:'
+              ]):
+                  classification='LIKELY_VALID_PRODUCT_LINEAGE_REFERENCE'
+              elif any(k in low for k in [
+                  'main','workingbaselinecommit','workingbaselinetree','baseline:','head','tree'
+              ]):
+                  classification='REVIEW_EXECUTION_TRUTH_POSSIBLY_STALE'
+              else:
+                  classification='REVIEW_CONTEXT'
+              rows.append({'path':path,'line':line,'text':text,'classification':classification})
+          pathlib.Path('packet-truth-scan/REPORT.json').write_text(
+              json.dumps({'sourceCommit':'f93b75310716f8cf527505ccfdbdb215eb4e3454','rows':rows},indent=2,ensure_ascii=False)+'\n',
+              encoding='utf-8')
+          print(json.dumps({'matches':len(rows),'executionReview':[r for r in rows if r['classification']=='REVIEW_EXECUTION_TRUTH_POSSIBLY_STALE']},indent=2,ensure_ascii=False))
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: controller-writer-packet-truth-scan
+          path: packet-truth-scan/
+          retention-days: 14
