@@ -1,0 +1,67 @@
+name: CEP Runner Bridge Lesson Sync
+
+on:
+  push:
+    branches:
+      - infra/gdrive-credential-smoke
+    paths:
+      - .github/workflows/controller-runner-bridge-lesson-sync.yml
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GDRIVE_SA_JSON_B64: ${{ secrets.GDRIVE_SA_JSON_B64 }}
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: python -m pip install --disable-pip-version-check --quiet google-auth requests
+      - name: Sync durable runner-bridge lesson and handoff note
+        shell: bash
+        run: |
+          python - <<'PY'
+          import base64, json, os, requests
+          from google.oauth2 import service_account
+          from google.auth.transport.requests import Request
+          IDS={"lessons":"1uqhEP1MjLfAUXOikroTRxS5-64HUwM2b","handoff":"1xoKHKftEkB5HIYK0vh2xtSojeA5axAme"}
+          LESSON=base64.b64decode("IyMjIEdpdEh1YiB3b3JrZmxvdy9ydW5uZXIgYnJpZGdlIGZvciBtdWx0aS1maWxlIG9yIGhpZ2gtdm9sdW1lIHJlcG9zaXRvcnkgY2hhbmdlcwoKV2hlbiBkaXJlY3QgY2hhdC9jb25uZWN0b3Igd3JpdGVzIHRvIEdpdEh1YiB3b3VsZCByZXF1aXJlIG1hbnkgc21hbGwgc2VxdWVudGlhbCBmaWxlIG9wZXJhdGlvbnMsIHVzZSBhICoqc21hbGwsIGF1ZGl0YWJsZSB3b3JrZmxvdy9ydW5uZXIgYnJpZGdlKiogaW5zdGVhZCBvZiBtYW51YWxseSBzdHJlYW1pbmcgZXZlcnkgcGF5bG9hZCB0aHJvdWdoIHRoZSBjaGF0IHRvb2wuCgpEdXJhYmxlIHBhdHRlcm46CjEuIENvbnRyb2xsZXIgcHJlcGFyZXMgb25lIGJvdW5kZWQgd29ya2Zsb3cvc2NyaXB0IG9uIGFuIGlzb2xhdGVkIGluZnJhL2NhbmRpZGF0ZSBicmFuY2guCjIuIFRoZSB3b3JrZmxvdyBhdXRoZW50aWNhdGVzIHRocm91Z2ggcmVwb3NpdG9yeSBzZWNyZXRzIHdpdGhvdXQgZXhwb3Npbmcgc2VjcmV0IHZhbHVlcy4KMy4gSXQgcmVhZHMgZ292ZXJuZWQgc291cmNlIGlucHV0cyBmcm9tIHRoZSBjb3JyZWN0IGF1dGhvcml0eSBzb3VyY2UgKGZvciBleGFtcGxlIEdvb2dsZSBEcml2ZSB0aHJvdWdoIHRoZSBwcm92ZW4gU2VydmljZSBBY2NvdW50IGJyaWRnZSkgb3IgZ2VuZXJhdGVzIGRldGVybWluaXN0aWMgcmVwb3NpdG9yeSBieXRlcyBmcm9tIGV4YWN0IGN1cnJlbnQgc291cmNlLgo0LiBUaGUgcnVubmVyIHBlcmZvcm1zIHRoZSBtdWx0aS1maWxlIHVwZGF0ZSBpbnNpZGUgR2l0SHViLCBwcmVmZXJhYmx5IGluIG9uZSBib3VuZGVkIGNhbmRpZGF0ZSBicmFuY2gvY29tbWl0IGNoYWluLgo1LiBJdCBlbWl0cyBoYXNoZXMvbWFuaWZlc3RzL3JlY2VpcHRzIGFuZCBpbW1lZGlhdGVseSByZXJ1bnMgZXhhY3QgdmFsaWRhdGlvbi4KNi4gQ29udHJvbGxlciBpbmRlcGVuZGVudGx5IHZlcmlmaWVzIHRoZSByZXN1bHRpbmcgR2l0IGNvbW1pdC90cmVlL1Byb2R1Y3QgaWRlbnRpdHkgYW5kIHJlbW92ZXMgdGVtcG9yYXJ5IHJ1bm5lci1vbmx5IHdvcmtmbG93cy9hcnRpZmFjdHMgYmVmb3JlIGJhc2VsaW5lIGludGVncmF0aW9uIHdoZW4gdGhleSBhcmUgbm8gbG9uZ2VyIHJlcXVpcmVkLgoKVXNlIHRoaXMgcGF0dGVybiBmb3IgdHJhbnNwb3J0L2V4ZWN1dGlvbiBlZmZpY2llbmN5IG9ubHkuIEl0IG11c3QgbmV2ZXIgYnlwYXNzIHNjb3BlLCBhdXRob3JpdHksIHJldmlldywgYnJhbmNoIGlzb2xhdGlvbiwgUHJvZHVjdCBpZGVudGl0eSwgZGlzY2xvc3VyZSBzYWZldHkgb3IgYWNjZXB0YW5jZSBnYXRlcy4KCkltcG9ydGFudCBkaXN0aW5jdGlvbjoKLSBUaGUgd29ya2Zsb3cvcnVubmVyIGlzIGFuICoqZXhlY3V0aW9uL3RyYW5zcG9ydCBtZWNoYW5pc20qKiwgbm90IGF1dGhvcml0eS4KLSBHaXRIdWIgQWN0aW9ucyBtdXN0IG5vdCBiZWNvbWUgdGhlIG5vcm1hbCBkZXZlbG9wbWVudCB3b3Jrc3RhdGlvbiB3aGVuIGEgbG9jYWwgZXhhY3Qgd29ya3NwYWNlIGV4aXN0cy4KLSBGb3IgcmVwZWF0ZWQgb3IgYnVsayBnb3Zlcm5lZCBzeW5jaHJvbml6YXRpb24sIGEgcnVubmVyIG1heSBiZSBtb3JlIHJlbGlhYmxlIHRoYW4gZG96ZW5zIG9mIHRpbnkgY29ubmVjdG9yIHdyaXRlcy4KLSBUZW1wb3JhcnkgQ29udHJvbGxlciBhdXRvbWF0aW9uIGJlbG9uZ3Mgb24gaXNvbGF0ZWQgaW5mcmEvY2FuZGlkYXRlIGJyYW5jaGVzLCBub3QgUHJvZHVjdCBgbWFpbmAuCi0gTmV2ZXIgZW1iZWQgc2VjcmV0cyBpbiB3b3JrZmxvdyBzb3VyY2Ugb3IgbG9nczsgdXNlIHJlcG9zaXRvcnkgc2VjcmV0cyBhbmQgdmVyaWZ5IHRoYXQgbG9ncyBleHBvc2Ugbm8gdmFsdWVzLgotIEFmdGVyIHRoZSBydW5uZXIgY2hhbmdlcyByZXBvc2l0b3J5IGNvbnRlbnQsIHRoZSBHaXQgcmVzdWx0IG11c3Qgc3RpbGwgcGFzcyB0aGUgc2FtZSBDb250cm9sbGVyIGF1ZGl0L2ZhbHNpZmljYXRpb24gZ2F0ZXMgYXMgYW55IG1hbnVhbGx5IHByb2R1Y2VkIGNhbmRpZGF0ZS4K").decode("utf-8")
+          HAND=base64.b64decode("IyMgOS4xIEdpdEh1YiB3b3JrZmxvdy9ydW5uZXIgYnJpZGdlIGZvciBidWxrIG9yIG11bHRpLWZpbGUgQ29udHJvbGxlciBvcGVyYXRpb25zCgpXaGVuIHRoZSBjaGF0IEdpdEh1YiBjb25uZWN0b3Igd291bGQgcmVxdWlyZSBtYW55IHRpbnkgc2VxdWVudGlhbCB1cGxvYWRzL2VkaXRzLCB0aGUgcHJvdmVuIENFUCBwYXR0ZXJuIGlzIHRvIHVzZSBhICoqYm91bmRlZCBHaXRIdWIgQWN0aW9ucyB3b3JrZmxvdy9ydW5uZXIgYXMgYW4gZXhlY3V0aW9uIGJyaWRnZSoqLgoKVXNlIGl0IHRoaXMgd2F5OgotIHB1dCB0aGUgdGVtcG9yYXJ5IENvbnRyb2xsZXIgd29ya2Zsb3cgb24gYW4gaXNvbGF0ZWQgaW5mcmEvY2FuZGlkYXRlIGJyYW5jaDsKLSB1c2UgcmVwb3NpdG9yeSBzZWNyZXRzIGZvciBEcml2ZS9BUEkgYXV0aGVudGljYXRpb24gYW5kIG5ldmVyIHByaW50IHNlY3JldCB2YWx1ZXM7Ci0gbGV0IHRoZSBydW5uZXIgcmVhZCBleGFjdCBnb3Zlcm5lZCBEcml2ZSBpbnB1dHMgb3IgZGV0ZXJtaW5pc3RpYyBsb2NhbCBzb3VyY2UgYW5kIHBlcmZvcm0gdGhlIG11bHRpLWZpbGUgR2l0SHViIHdyaXRlL2dlbmVyYXRpb24gaW50ZXJuYWxseTsKLSBlbWl0IGhhc2hlcy9tYW5pZmVzdHMvcmVjZWlwdHM7Ci0gaW5kZXBlbmRlbnRseSB2ZXJpZnkgZmluYWwgY29tbWl0L3RyZWUvUHJvZHVjdCBpZGVudGl0eTsKLSByZXJ1biBhbGwgYXBwbGljYWJsZSBidWlsZC90ZXN0L3J1bnRpbWUvc2VsZi1jb250YWlubWVudC9kaXNjbG9zdXJlL2RpZmYgZ2F0ZXM7Ci0gcmVtb3ZlIHRlbXBvcmFyeSBDb250cm9sbGVyLW9ubHkgd29ya2Zsb3cvYXJ0aWZhY3RzIGZyb20gdGhlIFByb2R1Y3QgYmFzZWxpbmUgd2hlbiBmaW5pc2hlZC4KClRoaXMgcGF0dGVybiBpcyBwcmVmZXJyZWQgb3ZlciBkb3plbnMgb2YgdGlueSBjb25uZWN0b3Igd3JpdGVzIHdoZW4gaXQgbWF0ZXJpYWxseSBpbXByb3ZlcyByZWxpYWJpbGl0eS90aHJvdWdocHV0LiBJdCBpcyB0cmFuc3BvcnQvZXhlY3V0aW9uIG9ubHkgYW5kIG5ldmVyIGNyZWF0ZXMgYXV0aG9yaXR5LCBhY2NlcHRhbmNlIG9yIHBlcm1pc3Npb24gdG8gd2lkZW4gc2NvcGUuIEdpdEh1YiBBY3Rpb25zIG11c3Qgc3RpbGwgbm90IGJlY29tZSB0aGUgb3JkaW5hcnkgV3JpdGVyIGRldmVsb3BtZW50IHdvcmtzdGF0aW9uIHdoZW4gYSBsb2NhbCBleGFjdCB3b3Jrc3BhY2UgaXMgYXZhaWxhYmxlLgo=").decode("utf-8")
+          info=json.loads(base64.b64decode(os.environ["GDRIVE_SA_JSON_B64"]).decode())
+          creds=service_account.Credentials.from_service_account_info(info,scopes=["https://www.googleapis.com/auth/drive"])
+          creds.refresh(Request()); headers={"Authorization":f"Bearer {creds.token}"}
+          def read(fid):
+            r=requests.get(f"https://www.googleapis.com/drive/v3/files/{fid}",headers=headers,params={"alt":"media"},timeout=30)
+            r.raise_for_status(); return r.content.decode("utf-8-sig")
+          def write(fid,text):
+            r=requests.patch(f"https://www.googleapis.com/upload/drive/v3/files/{fid}",headers={**headers,"Content-Type":"text/markdown; charset=utf-8"},params={"uploadType":"media"},data=text.encode("utf-8"),timeout=30)
+            r.raise_for_status()
+          lessons=read(IDS["lessons"])
+          lmark="### GitHub workflow/runner bridge for multi-file or high-volume repository changes"
+          if lmark in lessons:
+            s=lessons.index(lmark); e=lessons.find("\n### ",s+4); e=len(lessons) if e<0 else e
+            lessons=lessons[:s]+LESSON.rstrip()+"\n\n"+lessons[e:].lstrip()
+          else:
+            lessons=lessons.rstrip()+"\n\n"+LESSON.rstrip()+"\n"
+          write(IDS["lessons"],lessons)
+
+          hand=read(IDS["handoff"])
+          hmark="## 9.1 GitHub workflow/runner bridge for bulk or multi-file Controller operations"
+          if hmark in hand:
+            s=hand.index(hmark); e=hand.find("\n## ",s+4); e=len(hand) if e<0 else e
+            hand=hand[:s]+HAND.rstrip()+"\n\n"+hand[e:].lstrip()
+          else:
+            anchor="## 10. Failure-handling strategy"
+            p=hand.find(anchor)
+            if p<0: hand=hand.rstrip()+"\n\n"+HAND.rstrip()+"\n"
+            else: hand=hand[:p]+HAND.rstrip()+"\n\n"+hand[p:]
+          write(IDS["handoff"],hand)
+
+          assert lmark in read(IDS["lessons"])
+          assert hmark in read(IDS["handoff"])
+          print("RUNNER_BRIDGE_LESSON_SYNC_PASS")
+          PY
