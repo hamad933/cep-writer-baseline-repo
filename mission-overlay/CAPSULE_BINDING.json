@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 4,
+  "classification": "CONTROLLER_BOUND_FRESH_MISSION_CAPSULE_V1_1__CANDIDATE_ONLY__NOT_ACCEPTANCE",
+  "missionId": "MISSION_D03B_SHARED_WORKSPACE_PANE_PRESENTATION",
+  "writerClass": "CHATGPT_WRITER",
+  "controllerPreparedWorkspace": true,
+  "expectedProductParentCommit": "37c4d765e1db854505c81cbd15b90d4715f6690e",
+  "expectedProductParentTree": "57dbde7a730c687a341748dad4a725a052653f0b",
+  "expectedProductSourceSha256": "480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641",
+  "expectedProductSourceFiles": 273,
+  "candidateBranch": "writer/post-c03-d03b-37c4d765",
+  "capsuleStagingBranch": "capsule/post-c03-d03b-37c4d765",
+  "authorityRoot": "cep-writer/",
+  "missionOverlayRoot": "mission-overlay/",
+  "noRequiredLiveDriveFetch": true,
+  "localFirst": true,
+  "continuationPolicy": "FRESH_MISSION__CAPSULE_V1_1",
+  "visualBootstrapConfig": "mission-overlay/CAPSULE_VISUAL_BOOTSTRAP.json",
+  "allowWriterLocalRecapture": true,
+  "missionDriveId": "1FUwuMyLX2QkYGvexYqH8dMswyBeux8kt8AK83pAYAB8",
+  "commonContractDriveId": "1yx2bCIomPRWcgh5QFHTT13K-PVjxtnITCbQEX2NIBj0",
+  "finalOutputDriveFolderId": "1c6LXJR_VOVhZn50H0N7cb8g8CEc2AvDK",
+  "assignedFindings": [
+    "A05-PF-001",
+    "A05-PF-002",
+    "CBF-002",
+    "MFC-PF-001",
+    "MFC-PF-002"
+  ],
+  "downstreamResiduals": [
+    "CBF-001",
+    "CBF-003",
+    "MFC-PF-003",
+    "PVF-001",
+    "PVF-002",
+    "PVF-003",
+    "F-049",
+    "F-050"
+  ],
+  "writablePaths": [
+    "stack/native-typescript/foundation/accepted-runtime.ts",
+    "stack/native-typescript/foundation/workspace-host.ts",
+    "stack/native-typescript/adapters/library-chrome.ts",
+    "stack/native-typescript/global/workspace-host-kernel.ts",
+    "stack/native-typescript/foundation/global/shell/navigation.ts",
+    "stack/native-typescript/tests/post-c03/D03B/**"
+  ],
+  "prohibitedPaths": [
+    "stack/native-typescript/main.ts",
+    "stack/native-typescript/surfaces/m0-controller-composition.ts",
+    "Surface domain/data/provider semantics",
+    "second pane/layout/resizer/focus owner"
+  ],
+  "protectedHotspots": [
+    "stack/native-typescript/main.ts",
+    "stack/native-typescript/surfaces/m0-controller-composition.ts"
+  ],
+  "evidenceCustody": {
+    "intermediate": "LOCAL_EPHEMERAL",
+    "heavyFinal": "GOOGLE_DRIVE_WHEN_REQUIRED",
+    "github": "SOURCE_DELTA_AND_SMALL_RECEIPTS_ONLY"
+  },
+  "stopGate": "D03B_CANDIDATE_COMPLETE__CONTROLLER_AUDIT_REQUIRED",
+  "noSelfPromotion": true,
+  "noMainMerge": true,
+  "noRelease": true,
+  "noDeployment": true,
+  "noStackFreeze": true
+}
