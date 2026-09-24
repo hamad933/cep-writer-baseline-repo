@@ -192,33 +192,69 @@ jobs:
           PY
           test -z "$(git diff --name-only -- stack/native-typescript)"
 
+      - name: Use governed Node target
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.16.0
+
       - name: Validate Writer packet and regressions
         shell: bash
         run: |
-          set -euo pipefail
-          python3 cep-writer/tools/verify_repo.py
-          npm run build:runtime >/tmp/build1.log 2>&1
-          find dist -type f -print0 | sort -z | xargs -0 sha256sum >/tmp/d1
-          npm run build:runtime >/tmp/build2.log 2>&1
-          find dist -type f -print0 | sort -z | xargs -0 sha256sum >/tmp/d2
-          cmp /tmp/d1 /tmp/d2
-          npm test >/tmp/test.log 2>&1
           set +e
+          python3 cep-writer/tools/verify_repo.py
+          verify=$?
+
+          npm run build:runtime >/tmp/build1.log 2>&1
+          build1=$?
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum >/tmp/d1 2>/dev/null
+
+          npm run build:runtime >/tmp/build2.log 2>&1
+          build2=$?
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum >/tmp/d2 2>/dev/null
+          cmp /tmp/d1 /tmp/d2
+          deterministic=$?
+
+          npm test >/tmp/test.log 2>&1
+          model=$?
+
           npm run check >/tmp/check.log 2>&1
-          code=$?
-          set -e
-          python3 - <<'PY'
-          import json
+          check=$?
+
+          npm run runtime:check >/tmp/runtime.log 2>&1
+          runtime=$?
+
+          echo "DIAG verify=$verify build1=$build1 build2=$build2 deterministic=$deterministic model=$model check=$check runtime=$runtime"
+          echo "---- build1 tail ----"; tail -40 /tmp/build1.log || true
+          echo "---- build2 tail ----"; tail -40 /tmp/build2.log || true
+          echo "---- test tail ----"; tail -60 /tmp/test.log || true
+          echo "---- check tail ----"; tail -100 /tmp/check.log || true
+          echo "---- runtime tail ----"; tail -60 /tmp/runtime.log || true
+
+          python3 - "$verify" "$build1" "$build2" "$deterministic" "$model" "$check" "$runtime" <<'PY'
+          import json,sys
+          verify,build1,build2,deterministic,model,check,runtime=map(int,sys.argv[1:])
           d=json.load(open("assurance/CONTRACT_TEST_RESULTS.json"))
           fails=[x["id"] for x in d["tests"] if x.get("status")=="FAIL"]
-          assert fails==["browser.lineage_receipt_truthful","browser.current_candidate_claim_truthful","browser.targeted_visual_evidence"],fails
-          assert d["pass"]==165 and d["fail"]==3
           dup=json.load(open("assurance/DUPLICATE_MECHANIC_SCAN.json"))
-          assert dup.get("status")=="PASS" and not dup.get("findings")
+          scaffold=json.load(open("assurance/WRITER_SCAFFOLD_TEST_RESULTS.json"))
+          summary={
+            "codes":{"verify":verify,"build1":build1,"build2":build2,"deterministic":deterministic,"model":model,"check":check,"runtime":runtime},
+            "contract":{"pass":d["pass"],"fail":d["fail"],"failIds":fails},
+            "duplicate":{"status":dup.get("status"),"findings":dup.get("findings")},
+            "writerScaffold":{"pass":scaffold.get("pass"),"fail":scaffold.get("fail")}
+          }
+          print(json.dumps(summary,indent=2))
+          expected=["browser.lineage_receipt_truthful","browser.current_candidate_claim_truthful","browser.targeted_visual_evidence"]
+          assert verify==0,summary
+          assert build1==0 and build2==0 and deterministic==0,summary
+          assert model==0,summary
+          assert check!=0,summary
+          assert fails==expected,(fails,expected)
+          assert d["pass"]==165 and d["fail"]==3,(d["pass"],d["fail"])
+          assert dup.get("status")=="PASS" and not dup.get("findings"),dup
+          assert scaffold.get("fail")==0,scaffold
+          assert runtime==0,summary
           PY
-          test "$code" -ne 0
-          npm run runtime:check >/tmp/runtime.log 2>&1
-
       - name: Reset generated receipts and commit exact packet repair
         shell: bash
         run: |
