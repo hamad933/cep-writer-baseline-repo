@@ -1,0 +1,238 @@
+name: Final Zero-Loss Cleanup Candidate Validation
+
+on:
+  push:
+    branches:
+      - infra/gdrive-credential-smoke
+    paths:
+      - .github/workflows/final-zero-loss-cleanup-validation.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout exact cleanup candidate
+        uses: actions/checkout@v4
+        with:
+          ref: 7a8a1352ef1dd228c7e823e2b503b1921b85220d
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.16.0"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Verify exact candidate and Product immutability
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE=293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a
+          test "$(git rev-parse HEAD)" = "7a8a1352ef1dd228c7e823e2b503b1921b85220d"
+          git merge-base --is-ancestor "$BASE" HEAD
+          test "$(git rev-parse "$BASE^{tree}")" = "3101c06901dbdaff9602fea8098efb9c34575149"
+          test -z "$(git diff --name-only "$BASE"...HEAD -- stack/native-typescript)"
+
+      - name: Verify zero-loss deletion allowlist
+        shell: bash
+        run: |
+          python - <<'PY'
+          import subprocess, sys
+          base="293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a"
+          deleted=set(subprocess.check_output(
+              ["git","diff","--diff-filter=D","--name-only",base+"...HEAD"],
+              text=True).splitlines())
+          allowed={
+              "FINAL_FOUNDATION_GATE_HANDOFF_AR.md",
+              "FINAL_HANDOFF_AR.md",
+              "FW_B_RESULT_SUMMARY_AR.md",
+              "M0_OWNER_QA_UNIFIED_MIGRATION_INTERNAL_HANDOFF.md",
+              "README_START_HERE_AR.md",
+              "W2_A_RESULT_SUMMARY_AR.md",
+              "checkpoints/CURRENT_HIGH_LEVERAGE.json",
+              "checkpoints/G0.json","checkpoints/G1.json","checkpoints/G2.json","checkpoints/G3.json",
+              "checkpoints/G4.json","checkpoints/G5.json","checkpoints/G6.json","checkpoints/G7.json",
+              "cep-writer/B3R_CORRECTION02_MISSION.md",
+              "cep-writer/B3R_MISSION.md",
+              "cep-writer/C2_MISSION.md",
+              "cep-writer/C3_MISSION.md",
+              "cep-writer/CANONICAL_MISSION_SOURCE.md",
+              "cep-writer/CAPSULE_BINDING.json",
+              "cep-writer/CAPSULE_READY.json",
+              "cep-writer/CAPSULE_VISUAL_BOOTSTRAP.json",
+              "cep-writer/CURRENT_MISSION.md",
+              "cep-writer/EXTERNAL_OUTPUT_CUSTODY.json",
+              "cep-writer/GOOGLE_AI_STUDIO_ENTRY_PROMPT.md",
+              "cep-writer/PARENT_IDENTITY.json",
+              "cep-writer/TASK_BINDING.json",
+              "cep-writer/TASK_PACKET_OVERLAY.md",
+              "cep-writer/controller-input/B3R_CONTROLLER_CORR01_AND_CORRECTION02_BINDING.md",
+              "cep-writer/controller-input/C1_CONTROLLER_ACCEPTANCE.md",
+              "cep-writer/controller-input/C2_CONTROLLER_ACCEPTANCE.md",
+              "cep-writer/controller-input/C3_CONTROLLER_ACCEPTANCE.md",
+              "cep-writer/controller-input/CORR02_PRE_WRITER_DEEP_DEFECT_AUDIT.md",
+          }
+          unexpected=sorted(deleted-allowed)
+          missing_review=sorted(deleted & allowed)
+          if unexpected:
+              print("UNEXPECTED_DELETIONS",unexpected)
+              sys.exit(2)
+          print("DELETION_ALLOWLIST_PASS",len(deleted))
+          print("\n".join(sorted(deleted)))
+          PY
+
+      - name: Verify no temporary Controller cleanup artifacts remain
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e controller-cleanup
+          test ! -e .github/workflows/zero-loss-repo-census.yml
+          test ! -e .github/workflows/zero-loss-writer-packet-validation.yml
+          test ! -e .github/workflows/zero-loss-writer-p1-projection.yml
+          ! grep -q 'controller/zero-loss-repo-cleanup' .github/workflows/build-writer-workspace-capsule.yml
+
+      - name: Verify current Writer packet semantics
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv, json, pathlib, sys
+          base=json.load(open("cep-writer/CURRENT_WRITER_BASELINE_STATE.json",encoding="utf-8"))
+          assert base["mainCommit"]=="293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a"
+          assert base["mainTree"]=="3101c06901dbdaff9602fea8098efb9c34575149"
+          assert base["productCanonicalSourceSha256"]=="480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641"
+          assert base["productCanonicalSourceFiles"]==273
+          assert base["accepted"] is False
+
+          manifest=json.load(open("cep-writer/WRITER_INPUT_MANIFEST.json",encoding="utf-8"))
+          assert manifest["productParentCommit"]=="293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a"
+          assert manifest["productCanonicalSourceSha256"]=="480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641"
+          assert manifest["productCanonicalSourceFiles"]==273
+
+          with open("cep-writer/authority/WRITER_OWNER_DECISIONS.csv",newline="",encoding="utf-8-sig") as f:
+              rows=list(csv.DictReader(f))
+          assert len(rows)==89, len(rows)
+          ids={r["decision_id"] for r in rows}
+          for forbidden in [
+              "OD-20260914-015","OD-20260914-016","OD-20260914-018","OD-20260914-025",
+              "OD-20260915-041","OD-20260916-044","OD-20260921-071","OD-20260922-077","OD-20260922-079",
+          ]:
+              assert forbidden not in ids
+
+          oracle=json.load(open("cep-writer/references/ORACLE_INDEX.json",encoding="utf-8"))
+          assert len(oracle["oracles"])>=14
+          scenarios=json.load(open("cep-writer/references/library-golden/GOLDEN_BROWSER_SCENARIOS.json",encoding="utf-8"))
+          assert len(scenarios["scenarios"])==13
+          profiles=json.load(open("cep-writer/references/SURFACE_PROFILE_BINDING.json",encoding="utf-8"))
+          assert profiles["surfaceCount"]==23
+          assert profiles["allWriterCopiesByteIdenticalToCurrentBaselineProfiles"] is True
+          assert pathlib.Path("cep-writer/references/domain-oracles/W02_DURABLE_REQUIREMENTS_PROJECTION.md").exists()
+          print("CURRENT_WRITER_PACKET_PASS")
+          PY
+
+      - name: Public disclosure scan on complete current Writer surface
+        shell: bash
+        run: |
+          python - <<'PY'
+          import pathlib, re, sys
+          roots=[pathlib.Path("cep-writer"),pathlib.Path("docs/history")]
+          pats=[
+              re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----"),
+              re.compile(r"(?i)(refresh_token|client_secret|api[_-]?key|github[_-]?token)\s*[:=]\s*[\"'][^\"']{8,}"),
+              re.compile(r"(?i)Bearer\s+[A-Za-z0-9._-]{20,}"),
+          ]
+          bad=[]
+          scanned=0
+          for root in roots:
+              if not root.exists(): continue
+              for p in root.rglob("*"):
+                  if not p.is_file() or p.stat().st_size>4_000_000: continue
+                  scanned+=1
+                  text=p.read_text(encoding="utf-8",errors="ignore")
+                  if any(rx.search(text) for rx in pats): bad.append(str(p))
+          if bad:
+              print("DISCLOSURE_SCAN_FAIL",bad)
+              sys.exit(2)
+          print("DISCLOSURE_SCAN_PASS",scanned)
+          PY
+
+      - name: Verify Writer self-containment
+        run: python3 cep-writer/tools/verify_repo.py
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build runtime
+        run: npm run build:runtime
+
+      - name: Verify exact Product identity
+        shell: bash
+        run: |
+          node --input-type=module - <<'NODE' >/tmp/product-id.json
+          import { canonicalSourceIdentity } from './tools/source-tree-identity.mjs';
+          const result=await canonicalSourceIdentity(new URL('./',import.meta.url));
+          console.log(JSON.stringify({sha256:result.sha256,files:result.files}));
+          NODE
+          grep -q '480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641' /tmp/product-id.json
+          grep -q '"files":273' /tmp/product-id.json
+
+      - name: Model tests
+        run: npm test
+
+      - name: Verify expected-only open browser evidence gate
+        shell: bash
+        run: |
+          set +e
+          node tools/check-contracts.mjs >/tmp/check-contracts.json
+          rc=$?
+          set -e
+          python - <<'PY'
+          import json,sys
+          data=json.load(open("/tmp/check-contracts.json",encoding="utf-8"))
+          failed=sorted(x["id"] for x in data.get("tests",[]) if x.get("status")=="FAIL")
+          expected=sorted([
+              "browser.lineage_receipt_truthful",
+              "browser.current_candidate_claim_truthful",
+              "browser.targeted_visual_evidence",
+          ])
+          if failed not in ([],expected):
+              print("UNEXPECTED_CONTRACT_FAILURES",failed)
+              sys.exit(2)
+          if failed:
+              receipt=json.load(open("assurance/BROWSER_CONFORMANCE_RECEIPT.json",encoding="utf-8"))
+              assert receipt["executionStatus"]=="OPEN_ENVIRONMENT__LOOPBACK_BLOCKED_BEFORE_PRODUCT_RECEIPT"
+              assert receipt["currentUse"]=="EXACT_CURRENT_CANONICAL_SOURCE_ENVIRONMENT_BLOCK_RECEIPT"
+              print("EXPECTED_OPEN_C03_BROWSER_VISUAL_GATE",failed)
+          else:
+              print("CONTRACT_CHECK_FULL_PASS")
+          PY
+
+      - name: Runtime falsification
+        run: npm run runtime:check
+
+      - name: Duplicate owner/mechanics
+        run: node tools/check-duplicate-mechanics.mjs
+
+      - name: Verify deterministic generated runtime is current
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- dist
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum >/tmp/d1
+          npm run build:runtime
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum >/tmp/d2
+          diff -u /tmp/d1 /tmp/d2
+          git diff --exit-code -- dist
+
+      - name: Final diff policy
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -z "$(git diff --name-only 293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a...HEAD -- stack/native-typescript)"
+          echo "FINAL_ZERO_LOSS_CLEANUP_CANDIDATE_VALIDATION_PASS"
