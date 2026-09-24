@@ -2,13 +2,20 @@
 
 Authority order for Writer execution:
 
-latest explicit Owner decision → Controller-bound working baseline + exact mission overlay → applicable Writer-readable Owner decisions → exact SurfaceProfile/domain/oracle/reference → protected truths → classified historical evidence only when explicitly bound.
+latest explicit Owner decision → Controller-bound repository baseline + exact mission overlay → applicable Writer-readable Owner decisions → current finding projection → exact SurfaceProfile/domain/oracle/reference → protected truths → classified historical evidence only when explicitly bound.
 
-Current working baseline:
-- HEAD: `293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a`
-- tree: `3101c06901dbdaff9602fea8098efb9c34575149`
+Repository baseline:
+- ref: `main`
+- exact repository HEAD: resolve at mission binding and record in the mission receipt
+
+Unchanged Product source:
+- source ancestor: `293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a`
+- source ancestor tree: `3101c06901dbdaff9602fea8098efb9c34575149`
 - Product source: `480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641 / 273`
 - status: `SALVAGEABLE_CORRECTION_BASE__NOT_ACCEPTED`
+
+Current exact-source finding projection:
+`cep-writer/CURRENT_POST_C03_FINDINGS.json`
 
 Core laws:
 - mission-specific branch only; no direct `main` write/merge/release/self-promotion;
