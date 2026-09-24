@@ -221,7 +221,9 @@ jobs:
           set -euo pipefail
           node --input-type=module <<'NODE' > controller-audit-v2/PRODUCT_SOURCE_IDENTITY.json
           import { canonicalSourceIdentity } from './tools/source-tree-identity.mjs';
-          const identity = await canonicalSourceIdentity();
+          import { pathToFileURL } from 'node:url';
+          const root = pathToFileURL(process.cwd() + '/');
+          const identity = await canonicalSourceIdentity(root);
           console.log(JSON.stringify(identity, null, 2));
           NODE
           cat controller-audit-v2/PRODUCT_SOURCE_IDENTITY.json
