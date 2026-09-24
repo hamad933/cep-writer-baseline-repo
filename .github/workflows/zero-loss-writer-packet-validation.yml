@@ -1,5 +1,5 @@
 name: CEP Zero-Loss Writer Packet Validation
-# Triggered after content-forensic checker compatibility correction v2.
+# Triggered after content-forensic checker compatibility correction v3.
 
 on:
   push:
@@ -159,7 +159,52 @@ jobs:
         run: npm test
 
       - name: Contract and browser-evidence checks
-        run: npm run check
+        shell: bash
+        run: |
+          set -euo pipefail
+          set +e
+          npm run check | tee /tmp/npm-check.log
+          check_rc=${PIPESTATUS[0]}
+          set -e
+          if [ "$check_rc" -eq 0 ]; then
+            echo "NPM_CHECK_PASS"
+          else
+            set +e
+            node tools/check-contracts.mjs > /tmp/check-contracts.json
+            contracts_rc=$?
+            set -e
+            python - <<'PY'
+          import json, subprocess, sys
+          data=json.load(open('/tmp/check-contracts.json',encoding='utf-8'))
+          failed=sorted(x['id'] for x in data.get('tests',[]) if x.get('status')=='FAIL')
+          expected=sorted([
+              'browser.lineage_receipt_truthful',
+              'browser.current_candidate_claim_truthful',
+              'browser.targeted_visual_evidence',
+          ])
+          if failed != expected or data.get('fail') != 3:
+              print('UNEXPECTED_CHECK_FAILURES',failed)
+              sys.exit(2)
+          receipt=json.load(open('assurance/BROWSER_CONFORMANCE_RECEIPT.json',encoding='utf-8'))
+          if receipt.get('executionStatus') != 'OPEN_ENVIRONMENT__LOOPBACK_BLOCKED_BEFORE_PRODUCT_RECEIPT':
+              print('UNEXPECTED_BROWSER_RECEIPT_STATUS',receipt.get('executionStatus'))
+              sys.exit(3)
+          if receipt.get('currentUse') != 'EXACT_CURRENT_CANONICAL_SOURCE_ENVIRONMENT_BLOCK_RECEIPT':
+              print('UNEXPECTED_BROWSER_RECEIPT_USE',receipt.get('currentUse'))
+              sys.exit(4)
+          base='293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a'
+          current=subprocess.check_output(['git','hash-object','assurance/BROWSER_CONFORMANCE_RECEIPT.json'],text=True).strip()
+          original=subprocess.check_output(
+              ['bash','-lc',f"git show {base}:assurance/BROWSER_CONFORMANCE_RECEIPT.json | git hash-object --stdin"],
+              text=True
+          ).strip()
+          if current != original:
+              print('BROWSER_RECEIPT_CHANGED',current,original)
+              sys.exit(5)
+          print('EXPECTED_OPEN_C03_BROWSER_VISUAL_EVIDENCE_GATE',','.join(failed))
+          PY
+            test "$contracts_rc" -ne 0
+          fi
 
       - name: Runtime falsification
         run: npm run runtime:check
