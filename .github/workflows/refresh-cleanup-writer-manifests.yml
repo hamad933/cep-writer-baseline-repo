@@ -1,0 +1,106 @@
+name: Refresh Cleanup Writer Manifests
+
+on:
+  push:
+    branches:
+      - infra/gdrive-credential-smoke
+    paths:
+      - .github/workflows/refresh-cleanup-writer-manifests.yml
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: controller/zero-loss-repo-cleanup
+          fetch-depth: 0
+
+      - name: Regenerate Writer manifests from exact branch bytes
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json, subprocess
+
+          root=Path('.').resolve()
+          PRODUCT_PARENT='293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a'
+          PRODUCT_TREE='3101c06901dbdaff9602fea8098efb9c34575149'
+          PRODUCT='480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641'
+
+          def meta(p):
+              b=p.read_bytes()
+              return {'size':len(b),'sha256':hashlib.sha256(b).hexdigest()}
+
+          refs=[]
+          for p in sorted((root/'cep-writer'/'references').rglob('*')):
+              if p.is_file():
+                  refs.append({'path':p.relative_to(root/'cep-writer').as_posix(),**meta(p)})
+          (root/'cep-writer'/'REFERENCE_MANIFEST.json').write_text(json.dumps({
+              'schemaVersion':5,
+              'classification':'CURRENT_WRITER_REFERENCE_MANIFEST__WORKING_BASELINE__NOT_ACCEPTANCE',
+              'repositoryBaselineRef':'main',
+              'productSourceParentCommit':PRODUCT_PARENT,
+              'productSourceParentTree':PRODUCT_TREE,
+              'entries':refs
+          },indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+
+          raw=subprocess.check_output(['git','ls-files','-z'])
+          tracked=[Path(x.decode()) for x in raw.split(b'\0') if x]
+          exact={
+              '.gitignore','README.md','package.json','package-lock.json',
+              'BROWSER_CONFORMANCE_BOOTSTRAP.md','FOUNDATION_ARCHITECTURE.md'
+          }
+          prefixes=(
+              'tools/','tests/','contracts/','profiles/','writer/',
+              'stack/local-runtime/','stack/windows-platform/','dist/',
+              'assurance/','cep-writer/'
+          )
+          entries=[]
+          for rel in tracked:
+              s=rel.as_posix()
+              if s in {'cep-writer/WRITER_INPUT_MANIFEST.json','cep-writer/REFERENCE_MANIFEST.json'}:
+                  continue
+              if s in exact or s.startswith(prefixes):
+                  p=root/rel
+                  if p.is_file(): entries.append({'path':s,**meta(p)})
+          p=root/'cep-writer/REFERENCE_MANIFEST.json'
+          entries.append({'path':'cep-writer/REFERENCE_MANIFEST.json',**meta(p)})
+          entries.sort(key=lambda x:x['path'])
+
+          (root/'cep-writer'/'WRITER_INPUT_MANIFEST.json').write_text(json.dumps({
+              'schemaVersion':12,
+              'classification':'CURRENT_WORKING_BASELINE_REQUIRED_INPUT_MANIFEST__STAGE1_ZERO_LOSS__NOT_LIVE_AUTHORITY',
+              'repositoryBaselineRef':'main',
+              'repositoryHeadRule':'RESOLVE_EXACT_HEAD_AT_MISSION_BINDING',
+              'productSourceParentCommit':PRODUCT_PARENT,
+              'productSourceParentTree':PRODUCT_TREE,
+              'productCanonicalSourceSha256':PRODUCT,
+              'productCanonicalSourceFiles':273,
+              'executionMode':'MISSION_BRANCH_FROM_CONTROLLER_BOUND_WORKING_BASELINE',
+              'noRequiredLiveDriveFetch':True,
+              'missionOverlayPolicy':'BRANCH_LOCAL_IMMUTABLE_OVERLAY',
+              'assurancePolicy':'STAGE1_KEEP_PENDING_CONTENT_LEVEL_OPERATIONAL_DEPENDENCY_REDUCTION',
+              'entries':entries
+          },indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+
+          print(json.dumps({'referenceEntries':len(refs),'writerInputEntries':len(entries)},indent=2))
+          PY
+
+      - name: Commit exact manifests
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "CEP_CONTROLLER"
+          git config user.email "cep-controller@local.invalid"
+          git add cep-writer/REFERENCE_MANIFEST.json cep-writer/WRITER_INPUT_MANIFEST.json
+          if git diff --cached --quiet; then
+            echo "MANIFESTS_ALREADY_CURRENT"
+            exit 0
+          fi
+          git commit -m "controller: regenerate Writer manifests after post-C03 finding reconciliation"
+          git push origin HEAD:controller/zero-loss-repo-cleanup
