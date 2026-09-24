@@ -1,0 +1,81 @@
+name: Controller Cleanup Validation Closeout State Sync
+
+on:
+  push:
+    branches:
+      - infra/gdrive-credential-smoke
+    paths:
+      - .github/workflows/controller-current-state-cleanup-validation-closeout.yml
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GDRIVE_SA_JSON_B64: ${{ secrets.GDRIVE_SA_JSON_B64 }}
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: python -m pip install --disable-pip-version-check --quiet google-auth requests
+      - name: Close out cleanup reconciliation in CURRENT_STATE
+        shell: bash
+        run: |
+          python - <<'PY'
+          import base64, json, os, requests
+          from google.oauth2 import service_account
+          from google.auth.transport.requests import Request
+
+          FILE_ID="164CDevKZ48ZAXke44oL3jXIVpYQJBmRu"
+          old="ZERO_LOSS_REPO_CLEANUP_AUDITS_DELIVERED__CONTROLLER_RECONCILIATION_ACTIVE__WRITER_PACKET_REPAIR_FIRST__CLEANUP_BRANCH_CANDIDATE_ONLY"
+          new="ZERO_LOSS_REPO_CLEANUP_AUDITS_DELIVERED__CONTROLLER_RECONCILIATION_COMPLETE__CLEANUP_CANDIDATE_VALIDATED__READY_FOR_INTEGRATION_DECISION__MAIN_UNTOUCHED"
+          marker="- Zero-loss repository cleanup final validation — 2026-09-24:"
+          line=(marker+" Controller reconciliation of both delivered audit bundles is complete. Exact cleanup candidate "
+                "`controller/zero-loss-repo-cleanup@7a8a1352ef1dd228c7e823e2b503b1921b85220d` passed independent final validation "
+                "run `35941217768`: exact baseline ancestry/Product immutability PASS; zero-loss deletion allowlist PASS; temporary Controller cleanup "
+                "artifacts absent PASS; current Writer packet semantics PASS; public disclosure scan PASS; Writer self-containment PASS; build PASS; "
+                "Product identity `480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641 / 273` PASS; model tests PASS; "
+                "expected-only inherited C03 browser/visual evidence gate preserved truthfully; runtime falsification PASS; duplicate-owner/mechanics PASS; "
+                "deterministic generated runtime PASS; final diff policy PASS. Writer packet now contains 89 current Writer/Product/Surface Owner-decision rows "
+                "(Controller-only rows excluded), 14 Oracle-index entries, 23 Golden browser scenarios, and 23/23 SurfaceProfile copies byte-identical to the "
+                "current Git working-baseline profiles. This validates the cleanup candidate for Controller integration consideration only; `main@293dd1e0...` "
+                "remains untouched, and no Product acceptance, release, deployment, stack freeze, or closure of C03-GATE-020..024 is implied.")
+
+          info=json.loads(base64.b64decode(os.environ["GDRIVE_SA_JSON_B64"]).decode())
+          creds=service_account.Credentials.from_service_account_info(
+              info, scopes=["https://www.googleapis.com/auth/drive"])
+          creds.refresh(Request())
+          headers={"Authorization":f"Bearer {creds.token}"}
+          r=requests.get(f"https://www.googleapis.com/drive/v3/files/{FILE_ID}",
+              headers=headers,params={"alt":"media"},timeout=30)
+          r.raise_for_status()
+          text=r.content.decode("utf-8-sig")
+          if old in text:
+              text=text.replace(old,new,1)
+          elif new not in text:
+              raise RuntimeError("expected active mission token not found")
+          if marker not in text:
+              anchor="Zero-loss repository cleanup audit reconciliation"
+              pos=text.find(anchor)
+              if pos<0: raise RuntimeError("audit reconciliation anchor missing")
+              end=text.find("\n",pos)
+              if end<0: end=len(text)
+              text=text[:end+1]+line+"\n"+text[end+1:]
+          w=requests.patch(
+              f"https://www.googleapis.com/upload/drive/v3/files/{FILE_ID}",
+              headers={**headers,"Content-Type":"text/markdown; charset=utf-8"},
+              params={"uploadType":"media"},
+              data=text.encode("utf-8"),
+              timeout=30,
+          )
+          w.raise_for_status()
+          v=requests.get(f"https://www.googleapis.com/drive/v3/files/{FILE_ID}",
+              headers=headers,params={"alt":"media"},timeout=30)
+          v.raise_for_status()
+          final=v.content.decode("utf-8-sig")
+          assert new in final and marker in final
+          print("CURRENT_STATE_CLEANUP_VALIDATION_CLOSEOUT_PASS")
+          PY
