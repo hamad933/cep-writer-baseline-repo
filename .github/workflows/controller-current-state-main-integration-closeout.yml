@@ -1,0 +1,151 @@
+name: Controller Main Integration Closeout State Sync
+
+on:
+  push:
+    branches:
+      - infra/gdrive-credential-smoke
+    paths:
+      - .github/workflows/controller-current-state-main-integration-closeout.yml
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GDRIVE_SA_JSON_B64: ${{ secrets.GDRIVE_SA_JSON_B64 }}
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: python -m pip install --disable-pip-version-check --quiet google-auth requests
+      - name: Record integrated main and post-audit findings in CURRENT_STATE
+        shell: bash
+        run: |
+          python - <<'PY'
+          import base64, json, os, requests
+          from google.oauth2 import service_account
+          from google.auth.transport.requests import Request
+
+          FILE_ID="164CDevKZ48ZAXke44oL3jXIVpYQJBmRu"
+          OLD_TOKEN="ZERO_LOSS_REPO_CLEANUP_AUDITS_DELIVERED__CONTROLLER_RECONCILIATION_COMPLETE__CLEANUP_CANDIDATE_VALIDATED__READY_FOR_INTEGRATION_DECISION__MAIN_UNTOUCHED"
+          NEW_TOKEN="ZERO_LOSS_REPO_CLEANUP_INTEGRATED_MAIN_16aafaec__POST_AUDIT_FINDINGS_BOUND__WRITER_BASELINE_TRUTH_COMPLETE__D03_D04_MISSION_REFRESH_REQUIRED_WITH_CBF_MFC_PVF"
+
+          integration_line=(
+            "- GitHub cleaned Writer-baseline integration — 2026-09-24: repository "
+            "`hamad933/cep-writer-baseline-repo` `main` was fast-forwarded without force from "
+            "`293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a` to "
+            "`16aafaec71706ebbb13b002395f72383b2e77a81`, tree "
+            "`c4d18db3b7e086bee92de188df1320d631fca7c2`. Product source is unchanged at "
+            "`480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641 / 273`; "
+            "`stack/native-typescript/**` is byte-unchanged versus the Product-source parent. "
+            "The integrated `main` passed full post-integration validation run `35942517533`: "
+            "exact ancestry/Product immutability, deletion allowlist, no temporary cleanup artifacts, "
+            "current Writer packet semantics, public-disclosure scan, Writer self-containment, build, "
+            "exact Product identity, model tests, expected-only open browser-evidence gate, runtime "
+            "falsification, duplicate-owner/mechanics, deterministic generated runtime and final diff "
+            "policy all PASS. This is a cleaned self-contained Writer working baseline, not Product acceptance."
+          )
+
+          findings_line=(
+            "- Post-C03 diagnostic audit reconciliation — 2026-09-24: three independent READ_ONLY audit "
+            "deliveries against exact Product parent `293dd1e0... / 480dbe9d.../273` were Controller-adjudicated "
+            "before cleanup integration. Genuine-browser diagnostics establish `46/46` direct route/viewport "
+            "cases, `23/23` reload route identity at 1440x1000 and `22 PASS / 0 FAIL / 1 N/A (Shell)` "
+            "internal navigation/Back/Forward route transport, but do not close final D13 browser proof. "
+            "New current blockers accepted into Writer finding projection: `CBF-001` P0 official Balanced6 "
+            "persistence seed `section` type incompatible with current StructuredTreeKernel; `CBF-002` P0 "
+            "Back restores route but loses governed Surface semantic context; `CBF-003` P0 domain BOTTOM "
+            "content is orphaned from BottomDeepWorkOwner on affected zero-provider Surfaces. Existing "
+            "`F-049/F-050` were genuinely re-confirmed. Material current residuals accepted: "
+            "`MFC-PF-001` local Library transient paths beside TransientFocusOwner, `MFC-PF-002` latent "
+            "Library F6 duplicate/fallback beside GlobalInputKeymapOwner, `MFC-PF-003` required SC-011 "
+            "PreferenceExportImportResetModel not exposed through the canonical Settings consumer while a "
+            "Library-local donor transfer path remains. `PVF-001/002/003` are accepted P1 blocking major-state "
+            "integration subfindings for Enterprise Twin/Baseline, Runs Preflight, and Results AAR/Compare; "
+            "`PVF-004` is deduplicated into root `CBF-003`. Provider/reference/evidence-only PVF items remain "
+            "non-Product-defect truth. `C03-GATE-020/021/022/023/024` all remain OPEN; GATE-020 base census is "
+            "diagnostically complete but major-state/BOTTOM/Canvas closure remains, and GATE-022 still requires "
+            "fresh exact-D13 genuine-browser receipt."
+          )
+
+          prevalidation_line=(
+            "- Zero-loss repository cleanup final validation — 2026-09-24: pre-integration cleanup candidate "
+            "`controller/zero-loss-repo-cleanup@7a8a1352ef1dd228c7e823e2b503b1921b85220d` passed its "
+            "independent cleanup validation. That gate was subsequently superseded by post-audit truth-binding, "
+            "manifest regeneration, exact candidate validation `35942428542`, fast-forward integration to "
+            "`main@16aafaec71706ebbb13b002395f72383b2e77a81`, and post-integration validation "
+            "`35942517533`. It remains historical lineage inside CURRENT_STATE, not the current repository head."
+          )
+
+          info=json.loads(base64.b64decode(os.environ["GDRIVE_SA_JSON_B64"]).decode())
+          creds=service_account.Credentials.from_service_account_info(
+              info,scopes=["https://www.googleapis.com/auth/drive"])
+          creds.refresh(Request())
+          headers={"Authorization":f"Bearer {creds.token}"}
+
+          r=requests.get(
+              f"https://www.googleapis.com/drive/v3/files/{FILE_ID}",
+              headers=headers,params={"alt":"media"},timeout=30)
+          r.raise_for_status()
+          text=r.content.decode("utf-8-sig")
+          lines=text.splitlines()
+
+          out=[]
+          saw_integration=False
+          saw_findings=False
+          saw_prevalidation=False
+          for line in lines:
+              if line.startswith("- Active mission class:"):
+                  line=line.replace(OLD_TOKEN,NEW_TOKEN)
+              if line.startswith("- GitHub working-baseline binding"):
+                  line=integration_line
+                  saw_integration=True
+              elif line.startswith("- Zero-loss repository cleanup final validation"):
+                  line=prevalidation_line
+                  saw_prevalidation=True
+              elif line.startswith("- Post-C03 diagnostic audit reconciliation"):
+                  line=findings_line
+                  saw_findings=True
+              out.append(line)
+
+          if not saw_integration:
+              out.append(integration_line)
+          if not saw_findings:
+              insert_at=next((i+1 for i,l in enumerate(out) if l.startswith("- GitHub cleaned Writer-baseline integration")),len(out))
+              out.insert(insert_at,findings_line)
+          if not saw_prevalidation:
+              out.append(prevalidation_line)
+
+          final="\n".join(out)+"\n"
+          if OLD_TOKEN in final:
+              raise RuntimeError("old active cleanup token remains")
+          for required in [
+              NEW_TOKEN,
+              "main@16aafaec71706ebbb13b002395f72383b2e77a81",
+              "CBF-001","CBF-002","CBF-003","MFC-PF-001","MFC-PF-002","MFC-PF-003",
+              "PVF-001/002/003","35942517533"
+          ]:
+              if required not in final:
+                  raise RuntimeError("missing current-state closeout token: "+required)
+
+          w=requests.patch(
+              f"https://www.googleapis.com/upload/drive/v3/files/{FILE_ID}",
+              headers={**headers,"Content-Type":"text/markdown; charset=utf-8"},
+              params={"uploadType":"media"},
+              data=final.encode("utf-8"),
+              timeout=30)
+          w.raise_for_status()
+
+          v=requests.get(
+              f"https://www.googleapis.com/drive/v3/files/{FILE_ID}",
+              headers=headers,params={"alt":"media"},timeout=30)
+          v.raise_for_status()
+          verify=v.content.decode("utf-8-sig")
+          assert NEW_TOKEN in verify
+          assert "main@16aafaec71706ebbb13b002395f72383b2e77a81" in verify
+          assert "Post-C03 diagnostic audit reconciliation" in verify
+          print("CURRENT_STATE_MAIN_INTEGRATION_CLOSEOUT_PASS")
+          PY
