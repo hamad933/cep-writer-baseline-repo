@@ -36,6 +36,20 @@ jobs:
           set -euo pipefail
           python3 /tmp/content_forensic_reduction_v2.py
 
+      - name: Capture exact intended candidate files
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p controller-candidate-v2/intended/assurance controller-candidate-v2/intended/cep-writer controller-candidate-v2/intended/docs/history
+          cp assurance/SCREENSHOT_MANIFEST.json controller-candidate-v2/intended/assurance/SCREENSHOT_MANIFEST.json
+          cp cep-writer/NORMALIZATION_MANIFEST.json controller-candidate-v2/intended/cep-writer/NORMALIZATION_MANIFEST.json
+          cp cep-writer/WRITER_INPUT_MANIFEST.json controller-candidate-v2/intended/cep-writer/WRITER_INPUT_MANIFEST.json
+          cp docs/history/HISTORICAL_LINEAGE_INDEX.md controller-candidate-v2/intended/docs/history/HISTORICAL_LINEAGE_INDEX.md
+          cp docs/history/CONTENT_FORENSIC_DISPOSITION_V2.json controller-candidate-v2/intended/docs/history/CONTENT_FORENSIC_DISPOSITION_V2.json
+          git add -N docs/history/CONTENT_FORENSIC_DISPOSITION_V2.json
+          git diff --binary > controller-candidate-v2/CLEAN_CANDIDATE.patch
+          git reset docs/history/CONTENT_FORENSIC_DISPOSITION_V2.json
+
       - name: Prove allowlist and Product non-mutation
         shell: bash
         run: |
