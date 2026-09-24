@@ -217,10 +217,19 @@ export function runD03BWorkspaceContextConvergenceTests(){const t:any[]=[];
     const runtimeSource=readFileSync(new URL('../../../../stack/native-typescript/foundation/accepted-runtime.ts',import.meta.url),'utf8');
     assert(runtimeSource.includes('cyclePrimaryRegion'),'accepted-runtime has region cycle delegation');
     assert(runtimeSource.includes('owner.handleKeydown'),'F6 keydown delegates directly to canonical owner.handleKeydown');
+    assert(!runtimeSource.includes('function cyclePrimaryRegion(reverse=false)'),'accepted-runtime has no independent legacy F6 candidate loop');
+    assert(!runtimeSource.includes("const candidates=[];const add=(el)=>"),'accepted-runtime has no Library-local region-cycle fallback');
     assert(runtimeSource.includes('extension.transientOwner?.dismiss?.(\'outside\''),'outside click dismisses through transientOwner');
     assert(runtimeSource.includes('owner.open(\'workspacePopover\''),'workspacePopover delegates to transientOwner.open');
     assert(runtimeSource.includes('owner.open(\'quickJumpPopover\''),'quickJumpPopover delegates to transientOwner.open');
     assert(runtimeSource.includes('owner.open(\'globalNavPopover\''),'globalNavPopover delegates to transientOwner.open');
+  },t);
+
+  run('d03b.negative.no-premature-product-entry-binding',()=>{
+    const mainSource=readFileSync(new URL('../../../../stack/native-typescript/main.ts',import.meta.url),'utf8');
+    assert(!mainSource.includes('registerContextProvider'),'D03B semantic-context providers remain injectable and are not bound in main.ts before D13');
+    assert(!mainSource.includes("destination === 'visualize'"),'D03B does not add final Visualize Product navigation wiring in main.ts');
+    assert(!mainSource.includes('get inputOwner()'),'D03B does not add Product-entry input-owner wiring in main.ts');
   },t);
 
   return t;

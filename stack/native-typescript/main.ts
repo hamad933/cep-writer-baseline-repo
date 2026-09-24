@@ -74,7 +74,6 @@ const familyBinding=structuredConsumer&&consumer!=='library'
 const genericDomainRef=()=>({surface:consumer,objectId:spatial?.model.selection.values().next().value||wave4Assembly?.operationalSession?.activeTab?.()?.runtimeIdentity?.deviceOrToolId||consumer});
 const extension={
  transientOwner,
- get inputOwner(){ return wave3Assembly?.inputOwner || null; },
  feedbackPublish:input=>feedbackOwner.publish(input),
  bottomSet:(open,options={})=>wave3Assembly?.setBottomOpen(open,options)||false,
  structuredInputOwnership:()=>wave4Assembly?.structuredInputOwnership?.()||null,
@@ -261,29 +260,6 @@ const handleShellNavigate = async (destination: string) => {
     });
     workspace.applyPreferences();
     return true;
-  } else if (destination === 'visualize') {
-    if (donorDoc) donorDoc.hidden = true;
-    if (stage) stage.hidden = false;
-    await mountM0ControllerComposition({
-      consumer: 'visualize',
-      registry,
-      commandBus,
-      workspace,
-      structured,
-      learn,
-      relations,
-      simulation,
-      wave3Assembly,
-      wave4Assembly,
-      api,
-      button,
-      esc,
-      shellNavigation,
-      analyticalCompareOwner,
-      timelineReplayOwner
-    });
-    workspace.applyPreferences();
-    return true;
   } else if (destination === 'library') {
     if (stage) stage.hidden = true;
     if (donorDoc) donorDoc.hidden = false;
@@ -293,39 +269,6 @@ const handleShellNavigate = async (destination: string) => {
   return true;
 };
 if(shellRoute.kind==='product')shellNavigation=mountGlobalShellNavigation({surface:consumer,workspace,api,preferences,noteRuntime,destinationRegistry:CEP_PRODUCT_DESTINATION_REGISTRY,onNavigate:handleShellNavigate});
-if(shellNavigation){
-  shellNavigation.registerContextProvider({
-    surface: 'today',
-    capture: () => {
-      const activeFilterBtn = document.querySelector<HTMLElement>('[data-filter][aria-pressed="true"], [data-filter].active');
-      const activeFilter = activeFilterBtn?.dataset.filter || 'ALL';
-      const focusedItem = document.querySelector<HTMLElement>('[data-today-action][data-item-id]');
-      const todayItemId = focusedItem?.dataset.itemId || undefined;
-      return { todayFilter: activeFilter, todayItemId };
-    },
-    restore: (ctx: Record<string, any>) => {
-      if (ctx?.todayFilter) {
-        const filterBtn = document.querySelector<HTMLElement>(`[data-filter="${CSS.escape(ctx.todayFilter)}"]`);
-        filterBtn?.click();
-      }
-    }
-  });
-  shellNavigation.registerContextProvider({
-    surface: 'visualize',
-    capture: () => {
-      const activeViewBtn = document.querySelector<HTMLElement>('[data-view][aria-pressed="true"]');
-      const visualizeView = activeViewBtn?.dataset.view || 'TREE';
-      const selectedNodes = [...document.querySelectorAll<HTMLElement>('.spatial-canvas g[aria-selected="true"]')].map(n => n.dataset.nodeId || n.id).filter(Boolean);
-      return { visualizeView, visualizeSelected: selectedNodes };
-    },
-    restore: (ctx: Record<string, any>) => {
-      if (ctx?.visualizeView) {
-        const viewBtn = document.querySelector<HTMLElement>(`[data-view="${CSS.escape(ctx.visualizeView)}"]`);
-        viewBtn?.click();
-      }
-    }
-  });
-}
 const m0Composition=await mountM0ControllerComposition({consumer,registry,commandBus,workspace,structured,learn,relations,simulation,wave3Assembly,wave4Assembly,api,button,esc,shellNavigation,analyticalCompareOwner,timelineReplayOwner});
 workspace.applyPreferences();
 if(false&&spatial){let previousSize='';const observer=new ResizeObserver(()=>{const key=spatial.svg.clientWidth+'x'+spatial.svg.clientHeight;if(key!==previousSize&&spatial.svg.clientWidth>0){previousSize=key;spatial.fit()}});observer.observe(spatial.host)}
