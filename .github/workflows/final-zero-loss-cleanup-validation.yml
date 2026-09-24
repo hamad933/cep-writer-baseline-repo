@@ -128,7 +128,7 @@ jobs:
           oracle=json.load(open("cep-writer/references/ORACLE_INDEX.json",encoding="utf-8"))
           assert len(oracle["oracles"])>=14
           scenarios=json.load(open("cep-writer/references/library-golden/GOLDEN_BROWSER_SCENARIOS.json",encoding="utf-8"))
-          assert len(scenarios["scenarios"])==13
+          assert len(scenarios["scenarios"])==23
           profiles=json.load(open("cep-writer/references/SURFACE_PROFILE_BINDING.json",encoding="utf-8"))
           assert profiles["surfaceCount"]==23
           assert profiles["allWriterCopiesByteIdenticalToCurrentBaselineProfiles"] is True
