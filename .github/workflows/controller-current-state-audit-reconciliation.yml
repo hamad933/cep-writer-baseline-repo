@@ -1,0 +1,75 @@
+name: Controller Audit Reconciliation State Sync
+
+on:
+  push:
+    branches:
+      - infra/gdrive-credential-smoke
+    paths:
+      - .github/workflows/controller-current-state-audit-reconciliation.yml
+
+permissions:
+  contents: read
+
+jobs:
+  sync-state:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GDRIVE_SA_JSON_B64: ${{ secrets.GDRIVE_SA_JSON_B64 }}
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: python -m pip install --disable-pip-version-check --quiet google-auth requests
+      - name: Reconcile cleanup audit delivery into CURRENT_STATE
+        shell: bash
+        run: |
+          python - <<'PY'
+          import base64, json, os, requests
+          from google.oauth2 import service_account
+          from google.auth.transport.requests import Request
+
+          FILE_ID="164CDevKZ48ZAXke44oL3jXIVpYQJBmRu"
+          old="ZERO_LOSS_REPO_CLEANUP_CONTENT_FORENSIC_AUDIT_IN_PROGRESS__CLEANUP_BRANCH_CANDIDATE_ONLY"
+          new="ZERO_LOSS_REPO_CLEANUP_AUDITS_DELIVERED__CONTROLLER_RECONCILIATION_ACTIVE__WRITER_PACKET_REPAIR_FIRST__CLEANUP_BRANCH_CANDIDATE_ONLY"
+          marker="- Zero-loss repository cleanup audit reconciliation — 2026-09-24:"
+          line=(marker+" both independent required audits are delivered and Controller-rechecked. "
+                "Drive→GitHub Writer-input audit ZIP SHA-256 `aa75795c29549af074fc5de75078e37e4c520c27b4a04fb243fac4a5cb7cf640` "
+                "contains 8 outputs; GitHub content-forensic audit ZIP SHA-256 "
+                "`f616aea927be8459bdb8688931357a264cd2101c974631dfe72d00c9246d37e5` contains 8 outputs and "
+                "audits exact cleanup candidate `controller/zero-loss-repo-cleanup@b4548367a76ac2580af1d926b2cd7bff6cbe810e`. "
+                "Direct Controller verification confirms the cleanup candidate has no Product-source mutation but is NOT integrable as-is because "
+                "the live `cep-writer/` packet on main is materially stale: `BASELINE_IDENTITY.json` still binds Product "
+                "`5205d2a3.../272`, while `WRITER_INPUT_MANIFEST.json` is Correction02-bound to parent `64a31e40...` / Product "
+                "`16588836.../273`; current working truth remains main `293dd1e0...` / tree `3101c069...` / Product "
+                "`480dbe9d.../273`. Live Owner register parse is 105 total rows with 96 ACTIVE + 2 ACTIVE_PLATFORM_GATED = 98 current; "
+                "the audit's extracted count of 81 is non-authoritative. `OD-20260922-079` is Controller-only by applies_to and will be distilled "
+                "into Writer governance rules rather than copied as a Writer-applicable decision row. Controller disposition: preserve the already-audited "
+                "historical removals as candidate changes, perform no further deletion yet, repair current Writer baseline/authority/manifests and "
+                "mission-neutral capsule fallback atomically, keep Product source and current reference assets untouched, keep `dist/**` while it remains "
+                "an operational dependency, then rerun self-containment/build/test/check/runtime/Product-identity gates before resuming archive/cleanup adjudication. "
+                "No Product acceptance, release, deployment or stack freeze is implied.")
+
+          info=json.loads(base64.b64decode(os.environ["GDRIVE_SA_JSON_B64"]).decode())
+          creds=service_account.Credentials.from_service_account_info(info,scopes=["https://www.googleapis.com/auth/drive"])
+          creds.refresh(Request())
+          headers={"Authorization":f"Bearer {creds.token}"}
+          r=requests.get(f"https://www.googleapis.com/drive/v3/files/{FILE_ID}",headers=headers,params={"alt":"media"},timeout=30)
+          r.raise_for_status(); text=r.text
+          if old not in text and new not in text: raise RuntimeError("active mission cleanup token not found")
+          if old in text: text=text.replace(old,new,1)
+          if marker not in text:
+              anchor="- Zero-loss repository cleanup method — 2026-09-24:"
+              pos=text.find(anchor)
+              if pos<0: raise RuntimeError("cleanup method anchor missing")
+              end=text.find("\n",pos)
+              text=text[:end+1]+line+"\n"+text[end+1:]
+          w=requests.patch(f"https://www.googleapis.com/upload/drive/v3/files/{FILE_ID}",
+              headers={**headers,"Content-Type":"text/markdown; charset=utf-8"},
+              params={"uploadType":"media"},data=text.encode(),timeout=30)
+          w.raise_for_status()
+          v=requests.get(f"https://www.googleapis.com/drive/v3/files/{FILE_ID}",headers=headers,params={"alt":"media"},timeout=30)
+          v.raise_for_status(); final=v.text
+          assert new in final and marker in final
+          print("CURRENT_STATE_AUDIT_RECONCILIATION_PASS")
+          PY
