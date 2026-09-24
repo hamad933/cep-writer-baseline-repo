@@ -38,7 +38,7 @@ def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--repo-root",default=".")
     ap.add_argument("--output",default="writer-capsule-out")
-    ap.add_argument("--binding",default="cep-writer/CAPSULE_BINDING.json")
+    ap.add_argument("--binding",default="mission-overlay/CAPSULE_BINDING.json")
     ap.add_argument("--visual-bootstrap",default=".capsule-visual-bootstrap")
     ap.add_argument("--mission",default=None)
     ns=ap.parse_args()
