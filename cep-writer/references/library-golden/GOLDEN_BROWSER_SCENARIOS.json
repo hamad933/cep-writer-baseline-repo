@@ -1,0 +1,536 @@
+{
+  "schema_version": 3,
+  "classification": "WRITER_GOLDEN_INTERACTION_SCENARIO_CONTRACT__DERIVED_FROM_ACCEPTED_ORACLE__NO_HISTORICAL_EVIDENCE_PATHS",
+  "source_drive_id": "1eoMJ1eJHUZKnUTQvTe2jbMe7QOeOztCS",
+  "source_sha256": "3ba479cdccbff1991b1ea56e3c2ea07b158c9b3f1026a7f413f3479fecbfd34b",
+  "authority": {
+    "current_control": "/cep_building_mgm/00_CONTROLLER/CEP_BUILDING_CURRENT_CONTROL_v1.0.md",
+    "baseline": "CEP_FOUNDATION_FORGE_v0.2.1c_CONTROLLER_SUCCESSION_READY_CANDIDATE.zip",
+    "baseline_sha256": "b7af640ff6da4a6beb9339f44d936bfa8a21cccca3fc7dc242ee9c89da6927d7",
+    "baseline_status": [
+      "NOT_OWNER_ACCEPTED",
+      "NOT_FROZEN",
+      "STACK_NOT_FROZEN",
+      "SEMANTIC_ADJUDICATION_PARTIAL",
+      "SHELL_DESIGN_REOPENED"
+    ],
+    "donor": {
+      "filename": "CEP_LIBRARY_EDITOR_EXECUTABLE_BLUEPRINT_v1.2.17_ACCEPTED_DESIGN_REFERENCE.html",
+      "bytes": 672893,
+      "sha256": "ea66b58ef122bf2f8ca23fd0aa9e461b07da11ea7390c451902e4b1592d396fd",
+      "expected_bytes": 672893,
+      "expected_sha256": "ea66b58ef122bf2f8ca23fd0aa9e461b07da11ea7390c451902e4b1592d396fd",
+      "identity_match": true,
+      "authority_role": "ACCEPTED_EXECUTABLE_DESIGN_DONOR",
+      "not_roles": [
+        "universal domain runtime",
+        "stack authority",
+        "final shell authority"
+      ]
+    },
+    "writer_a_use": "DIAGNOSTIC_COMPARISON_ONLY"
+  },
+  "scenario_contract": "For every scenario: START STATE -> USER ACTION -> EXPECTED DOM/STATE -> EXPECTED VISUAL RESULT. Future extraction/candidate replay fails parity if a P0 scenario loses the documented behavior without an explicit higher-authority supersession.",
+  "golden_parity_laws": [
+    {
+      "id": "GL-01",
+      "law": "At accepted desktop 1440×1000, preserve or improve the usable three-pane Library composition, document readability, context reachability, and bottom-shelf access; pixel identity is not required when a current Owner correction deliberately supersedes presentation."
+    },
+    {
+      "id": "GL-02",
+      "law": "Read mode is non-editable; Edit mode exposes real content editing. A typed change must commit to working state/history and drive truthful save status."
+    },
+    {
+      "id": "GL-03",
+      "law": "Single block selection drives block context; multi-select is stateful, count-aware, command-aware, and Escape-unwindable."
+    },
+    {
+      "id": "GL-04",
+      "law": "Insertion targets exact structural gaps; deletion respects subtree risk; reorder and drag/drop operate on canonical block identity/nesting and are undoable."
+    },
+    {
+      "id": "GL-05",
+      "law": "Clipboard claims must match browser clipboard evidence. Cut is atomic: clipboard success first, deletion second; clipboard failure must never delete content."
+    },
+    {
+      "id": "GL-06",
+      "law": "Rich paste crosses a sanitizer trust boundary: unsupported/dangerous markup is removed, safe portable markup is retained, and the result participates in history."
+    },
+    {
+      "id": "GL-07",
+      "law": "Keyboard users get equivalent command access: Ctrl+K, / search, F6 region cycling, Shift+F10 block menu, modal focus containment, deterministic Escape and focus return."
+    },
+    {
+      "id": "GL-08",
+      "law": "Pane collapse changes both layout and accessibility exposure; separators support keyboard resize; Focus Mode round-trips prior presentation state."
+    },
+    {
+      "id": "GL-09",
+      "law": "Bidi is block-aware: Arabic-first auto resolves RTL, English-first auto resolves LTR, technical code stays LTR, and explicit direction override is undoable."
+    },
+    {
+      "id": "GL-10",
+      "law": "Structure tree, center editor, right context and bottom deep-work shelf remain synchronized to one active knowledge/document state."
+    },
+    {
+      "id": "GL-11",
+      "law": "Empty and failure states are explicit and recoverable. Hidden diagnostic StateLab simulations are not Golden product UX and cannot be used as production error/loading proof."
+    },
+    {
+      "id": "GL-12",
+      "law": "Responsive medium/narrow behavior is supplemental resilience. The accepted desktop viewport is the primary parity gate; constrained widths must avoid destructive center squeeze and expose support panes as reachable overlays."
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario_id": "G01",
+      "name_ar": "الإقلاع والتخطيط الذهبي عند 1440×1000",
+      "area": "SHELL_VISUAL",
+      "priority": "P0",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Donor exact bytes; fresh browser context; 1440×1000.",
+      "user_actions": [
+        "Load exact self-contained donor in Chromium.",
+        "Observe without mutation.",
+        "Capture viewport screenshot."
+      ],
+      "expected_dom_state": "body: mode=read, responsiveBand=wide, left=open, right=open; 15 rendered blocks; no editables; no page/console errors.",
+      "expected_visual_result": "Three-pane dark Library workspace with global + Library navigation, banner, structured document, context pane and bottom shelf rail; no overlap/clipping at accepted viewport.",
+      "limitations": [],
+      "rejection_gate": "Reject extraction if accepted desktop shell loses usable three-pane composition, initial 15-block document, or introduces runtime errors."
+    },
+    {
+      "scenario_id": "G02",
+      "name_ar": "التحرير الفعلي + تحديد الكتلة + مزامنة Context",
+      "area": "EDITING_CONTEXT",
+      "priority": "P0",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Read mode with original p1.",
+      "user_actions": [
+        "Switch to Edit via UI.",
+        "Click p1 editable body.",
+        "Type marker at caret end.",
+        "Tab away to commit."
+      ],
+      "expected_dom_state": "p1 selected; Context scope switches to block and names blk-d05-p1; committed text persists in DOM; Undo becomes available; save state becomes dirty/autosaving.",
+      "expected_visual_result": "Selected block and context are visibly coupled; typed content appears in place without replacing block identity.",
+      "limitations": [],
+      "rejection_gate": "Reject if content can type but does not commit to history/context, or context pane does not follow selected block."
+    },
+    {
+      "scenario_id": "G03",
+      "name_ar": "Undo / Redo كمعاملة تحرير قابلة للاسترداد",
+      "area": "HISTORY_RECOVERY",
+      "priority": "P0",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Edit mode, unchanged p1.",
+      "user_actions": [
+        "Append one edit transaction and blur.",
+        "Press Ctrl+Z.",
+        "Press Ctrl+Shift+Z."
+      ],
+      "expected_dom_state": "Undo restores exact prior block content; Redo restores committed edit; toolbar availability tracks history truth.",
+      "expected_visual_result": "Content visibly rolls backward/forward without losing block structure.",
+      "limitations": [],
+      "rejection_gate": "Reject if committed edit is not one reversible history transaction or redo cannot restore it."
+    },
+    {
+      "scenario_id": "G04",
+      "name_ar": "Single / Multi-select + Escape unwind",
+      "area": "SELECTION",
+      "priority": "P0",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Edit mode; no multi-selection.",
+      "user_actions": [
+        "Click p1.",
+        "Escape single focus.",
+        "Ctrl-click p1 and p-auto-ltr.",
+        "Observe multi toolbar.",
+        "Press Escape."
+      ],
+      "expected_dom_state": "Single selection drives block context. Ctrl-click creates two-ID multi-selection and visible 2-block toolbar. Escape clears multi-selection first.",
+      "expected_visual_result": "Two rows show selected styling; contextual multi-block command rail appears then disappears on Escape.",
+      "limitations": [],
+      "rejection_gate": "Reject if multi-selection is cosmetic only, count is wrong, or Escape cannot deterministically unwind selection."
+    },
+    {
+      "scenario_id": "G05",
+      "name_ar": "الإدراج بين الكتل من Gap Palette",
+      "area": "INSERTION",
+      "priority": "P0",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Edit mode, 15 blocks, first structural gap before h2.",
+      "user_actions": [
+        "Click first gap plus.",
+        "Filter palette for paragraph.",
+        "Choose paragraph.",
+        "Undo insertion."
+      ],
+      "expected_dom_state": "Palette opens; exactly one new paragraph is inserted at targeted structural index, receives a new ID, focuses for edit, and is undoable.",
+      "expected_visual_result": "A real blank paragraph appears at the requested boundary; palette closes; document reflows without layout breakage.",
+      "limitations": [],
+      "rejection_gate": "Reject if insertion is appended to wrong location, loses structural identity, or cannot be undone."
+    },
+    {
+      "scenario_id": "G06",
+      "name_ar": "Smart structural delete + subtree confirmation",
+      "area": "DELETE_SAFETY",
+      "priority": "P0",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Edit mode; toggle t1 owns two descendants.",
+      "user_actions": [
+        "Open t1 block menu.",
+        "Choose Delete.",
+        "Verify confirmation appears for structural risk.",
+        "Confirm.",
+        "Undo."
+      ],
+      "expected_dom_state": "Smart policy detects subtree risk; confirmation is required; exactly t1 + its two descendants are removed as one transaction; undo restores all.",
+      "expected_visual_result": "Confirmation explicitly warns before branch loss; after confirmation subtree disappears cleanly; undo restores it.",
+      "limitations": [],
+      "rejection_gate": "Reject if parent deletion can silently orphan/drop descendants without smart confirmation, or if subtree deletion is not atomic/undoable."
+    },
+    {
+      "scenario_id": "G07",
+      "name_ar": "إعادة الترتيب البنيوي من قائمة الكتلة",
+      "area": "REORDER",
+      "priority": "P0",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Edit mode; p1 precedes p-auto-ltr at root.",
+      "user_actions": [
+        "Open p1 block menu.",
+        "Expand “تحريك وبنية”.",
+        "Choose move down.",
+        "Undo."
+      ],
+      "expected_dom_state": "p1 changes structural index by exactly one, sibling identity preserved, undo restores original order.",
+      "expected_visual_result": "Rows exchange positions without copy/re-render identity loss or accidental nesting.",
+      "limitations": [],
+      "rejection_gate": "Reject if reorder is visual-only, changes IDs, changes nesting unintentionally, or lacks undo parity."
+    },
+    {
+      "scenario_id": "G08",
+      "name_ar": "Drag & Drop مع feedback بنيوي حقيقي",
+      "area": "DRAG_DROP",
+      "priority": "P0",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Edit mode; p1 before p-auto-ltr.",
+      "user_actions": [
+        "Pointer-down on p1 grip.",
+        "Move >8px drag threshold.",
+        "Hover a structural drop boundary after p-auto-ltr.",
+        "Capture feedback.",
+        "Release pointer."
+      ],
+      "expected_dom_state": "Source exposes dragging state after threshold; a structural target/preview appears; drop moves subtree to intended legal gap.",
+      "expected_visual_result": "Source row enters drag styling and insertion/drop feedback becomes visible before commit; final row order changes only on drop.",
+      "limitations": [],
+      "rejection_gate": "Reject if drag has no pre-drop target feedback, commits before pointer-up, or produces a different structural location."
+    },
+    {
+      "scenario_id": "G09",
+      "name_ar": "Copy من تحديد نصي مع Clipboard MIME truth",
+      "area": "CLIPBOARD",
+      "priority": "P0",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Edit mode; p1 focused.",
+      "user_actions": [
+        "Create a real DOM text selection inside p1.",
+        "Press Ctrl+C.",
+        "Observe browser copy event payload."
+      ],
+      "expected_dom_state": "Copy event carries exact selected text/plain and formatted text/html when formatted clipboard preference is active; UI selection context remains truthful.",
+      "expected_visual_result": "Text remains selected; copy does not mutate content; selection toolbar/context may expose selection actions.",
+      "limitations": [
+        "Range creation is scripted only to make a deterministic RTL substring; the copy command itself is a real Chromium keyboard event and donor copy handler."
+      ],
+      "rejection_gate": "Reject if formatted-copy claims success without browser clipboard event data, or copied plain text differs from selection."
+    },
+    {
+      "scenario_id": "G10",
+      "name_ar": "Atomic Cut: الحافظة أولًا ثم الحذف",
+      "area": "CLIPBOARD_DELETE_SAFETY",
+      "priority": "P0",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Edit mode; p1 exists.",
+      "user_actions": [
+        "Open p1 block menu.",
+        "Expand “نسخ ومشاركة”.",
+        "Choose Cut.",
+        "Observe toast and block count."
+      ],
+      "expected_dom_state": "Cut writes clipboard first; only after successful clipboard write is p1 deleted; success feedback names the successful mode.",
+      "expected_visual_result": "p1 disappears only after positive clipboard result; user receives explicit truthful cut feedback.",
+      "limitations": [],
+      "rejection_gate": "Reject if Cut can delete before clipboard success or UI claims success when clipboard write failed."
+    },
+    {
+      "scenario_id": "G11",
+      "name_ar": "Safe Rich Paste مع allowlist sanitizer",
+      "area": "PASTE_SANITIZATION",
+      "priority": "P0",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Edit mode; caret at end of p1; rich paste enabled.",
+      "user_actions": [
+        "Dispatch a browser ClipboardEvent containing safe bold text plus img/onerror, script, and javascript: URL.",
+        "Let donor paste handler sanitize and commit."
+      ],
+      "expected_dom_state": "Supported portable inline markup inserts; script/img/event handlers/javascript URLs do not survive or execute; paste is committed to history.",
+      "expected_visual_result": "Safe text appears; malicious/unsupported visual content does not render; success feedback remains bounded to sanitized content.",
+      "limitations": [
+        "ClipboardEvent data is synthetic because the automation environment cannot seed the OS clipboard with arbitrary HTML; sanitization, DOM insertion, commit, and history run in real Chromium through the donor handler."
+      ],
+      "rejection_gate": "Reject if rich paste can execute scripts/event handlers, preserve javascript URLs, or bypass history commit."
+    },
+    {
+      "scenario_id": "G12",
+      "name_ar": "Command Palette: Ctrl+K + focus trap + Escape",
+      "area": "KEYBOARD_OVERLAY",
+      "priority": "P0",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Read mode; no modal open.",
+      "user_actions": [
+        "Press Ctrl+K.",
+        "Tab repeatedly through controls.",
+        "Capture overlay.",
+        "Press Escape."
+      ],
+      "expected_dom_state": "Command backdrop opens and receives focus; Tab remains trapped inside modal; Escape closes top overlay and returns to workspace.",
+      "expected_visual_result": "Centered command UI overlays workspace with unambiguous focus; background is visually de-emphasized.",
+      "limitations": [],
+      "rejection_gate": "Reject if Ctrl+K is dead, focus escapes behind modal, or Escape cannot close the top overlay."
+    },
+    {
+      "scenario_id": "G13",
+      "name_ar": "اختصارات القراءة: / للبحث و F6 للتنقل بين المناطق",
+      "area": "KEYBOARD_NAV",
+      "priority": "P1",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Read mode, no overlay.",
+      "user_actions": [
+        "Press /.",
+        "Verify Library search focus.",
+        "Escape.",
+        "Press F6 repeatedly."
+      ],
+      "expected_dom_state": "/ focuses kuSearch in read mode; F6 cycles across primary workspace regions rather than trapping in one pane.",
+      "expected_visual_result": "Keyboard user can visibly jump into search and cycle major panes without mouse.",
+      "limitations": [],
+      "rejection_gate": "Reject if read-mode / shortcut steals text editing incorrectly, or F6 cannot traverse major regions."
+    },
+    {
+      "scenario_id": "G14",
+      "name_ar": "Pane collapse + keyboard separator resize",
+      "area": "PANES",
+      "priority": "P0",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Wide viewport; left and right open; left separator ~304px.",
+      "user_actions": [
+        "Collapse left pane via local toggle.",
+        "Verify inert/aria-hidden and center expansion.",
+        "Reopen.",
+        "Focus separator and press ArrowRight twice."
+      ],
+      "expected_dom_state": "Collapse removes pane from active layout/accessibility flow; center expands. Separator Arrow keys adjust aria-valuenow and pane width in bounded steps.",
+      "expected_visual_result": "Pane disappears/reappears without overlap; width change is visible and operable without pointer drag.",
+      "limitations": [],
+      "rejection_gate": "Reject if collapse only hides visually but leaves focusable content, or separator lacks keyboard resizing."
+    },
+    {
+      "scenario_id": "G15",
+      "name_ar": "Focus Mode يحفظ presentation ثم يعيدها",
+      "area": "FOCUS_PRESENTATION",
+      "priority": "P0",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Wide desktop with support panes open and banner expanded.",
+      "user_actions": [
+        "Click Focus.",
+        "Observe support panes/banner/bottom.",
+        "Capture screenshot.",
+        "Exit Focus."
+      ],
+      "expected_dom_state": "Focus mode hides support panes and banner and closes bottom work area while preserving previous presentation; exit restores previous pane/banner state.",
+      "expected_visual_result": "Center document becomes distraction-reduced; restoration returns to the same workspace composition rather than defaults.",
+      "limitations": [],
+      "rejection_gate": "Reject if Focus Mode destroys prior pane state or requires manual reconstruction after exit."
+    },
+    {
+      "scenario_id": "G16",
+      "name_ar": "RTL/LTR: auto first-strong + explicit per-block direction",
+      "area": "BIDI",
+      "priority": "P0",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Edit mode with Arabic-first auto paragraph, English-first auto paragraph, technical code block.",
+      "user_actions": [
+        "Inspect resolved directions.",
+        "Open Arabic p1 block menu > تنسيق > LTR.",
+        "Observe explicit direction.",
+        "Undo."
+      ],
+      "expected_dom_state": "Arabic-first auto resolves RTL; English-first auto resolves LTR; code remains LTR. Explicit LTR overrides p1 and is undoable back to auto/RTL.",
+      "expected_visual_result": "Mixed Arabic/English stays readable; technical tokens/code preserve LTR; explicit block direction changes alignment/flow predictably.",
+      "limitations": [],
+      "rejection_gate": "Reject if auto direction collapses all blocks to page RTL, code is mirrored, or explicit direction is not persisted/undoable."
+    },
+    {
+      "scenario_id": "G17",
+      "name_ar": "مزامنة Structure / Context / Bottom Shelf",
+      "area": "SYNC",
+      "priority": "P0",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Active KU in tree; edit mode.",
+      "user_actions": [
+        "Observe current tree item.",
+        "Select p1, then p-auto-ltr.",
+        "Expand bottom shelf."
+      ],
+      "expected_dom_state": "Tree retains current KU; Context inspector updates to exact selected block ID; bottom shelf opens without losing selection and presents history/compare/recovery workspace.",
+      "expected_visual_result": "Left navigation, center selection, right context and bottom deep-work surface remain coherent rather than independent mock panels.",
+      "limitations": [],
+      "rejection_gate": "Reject if selecting a center block leaves stale right context or opening bottom shelf disrupts active KU/selection."
+    },
+    {
+      "scenario_id": "G18",
+      "name_ar": "Empty state لبحث البنية + استعادة السياق",
+      "area": "EMPTY_RECOVERY",
+      "priority": "P1",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Read mode with populated knowledge tree.",
+      "user_actions": [
+        "Enter a guaranteed no-match search.",
+        "Observe empty state.",
+        "Clear search."
+      ],
+      "expected_dom_state": "No-match state is explicit rather than blank failure; clearing restores tree and current KU indication.",
+      "expected_visual_result": "User sees a bounded empty-state message and a recovery path; normal tree returns after clear.",
+      "limitations": [],
+      "rejection_gate": "Reject if search yields unexplained blank pane or clearing loses current knowledge-unit context."
+    },
+    {
+      "scenario_id": "G19",
+      "name_ar": "Menus / Preferences / Shortcuts overlays + focus containment",
+      "area": "MENUS_ACCESSIBILITY",
+      "priority": "P1",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Read mode; no overlay.",
+      "user_actions": [
+        "Open toolbar More/preferences.",
+        "Escape.",
+        "Open keyboard shortcuts.",
+        "Tab repeatedly.",
+        "Escape."
+      ],
+      "expected_dom_state": "Menus expose workspace, bidi, clipboard, code, save/recovery, appearance, deletion and accessibility controls. Modal shortcuts keep focus contained and Escape closes.",
+      "expected_visual_result": "Overlays appear above workspace with clear grouping and keyboard-dismiss behavior; focus does not leak behind the active modal.",
+      "limitations": [],
+      "rejection_gate": "Reject if high-value preferences disappear, modal focus leaks, or nested overlays cannot be dismissed predictably."
+    },
+    {
+      "scenario_id": "G20",
+      "name_ar": "Responsive bands + overlay panes",
+      "area": "RESPONSIVE",
+      "priority": "P1",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Start at accepted desktop 1440×1000 wide.",
+      "user_actions": [
+        "Resize to 1100×900.",
+        "Reveal right support pane.",
+        "Resize to 720×900.",
+        "Reveal left pane.",
+        "Return to 1440×1000."
+      ],
+      "expected_dom_state": "Wide/medium/narrow bands update. Support panes collapse when center width would be harmed and reveal as overlay with scrim in constrained widths; returning wide restores wide composition logic.",
+      "expected_visual_result": "Center content remains usable instead of being squeezed below its minimum; support panes become temporary overlays on constrained widths.",
+      "limitations": [
+        "1440×1000 is the accepted desktop parity viewport; 1100/720 checks are supplementary resilience evidence, not authority to redesign the desktop shell."
+      ],
+      "rejection_gate": "Reject desktop extraction if it breaks 1440×1000; constrained widths must at minimum avoid unusable center squeeze/overlap."
+    },
+    {
+      "scenario_id": "G21",
+      "name_ar": "حدود Loading/Error/Recovery: لا نرقّي StateLab المخفي إلى Golden",
+      "area": "STATE_BOUNDARY",
+      "priority": "P0",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Accepted donor normal runtime.",
+      "user_actions": [
+        "Inspect product-exposed state controls.",
+        "Open bottom shelf Recovery tab."
+      ],
+      "expected_dom_state": "Non-production StateLab remains CSS-hidden and must not be treated as accepted loading/error UX. Only exposed recovery/history behavior is Golden evidence; backend loading/error semantics require future admitted product evidence.",
+      "expected_visual_result": "No fake diagnostic lab appears to user. Recovery workspace is exposed through the bottom shelf, while hidden simulation controls stay absent.",
+      "limitations": [
+        "The donor contains hidden diagnostic state simulation. R3 explicitly excludes it from Golden product parity rather than claiming simulated conflict/loading as accepted UX."
+      ],
+      "rejection_gate": "Reject any audit that treats hidden StateLab simulations as proof of production loading/error parity."
+    },
+    {
+      "scenario_id": "G22",
+      "name_ar": "Block-handle keyboard menu + menu search + focus return",
+      "area": "ACCESSIBILITY_FOCUS",
+      "priority": "P0",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Edit mode; p1 block handle focused by keyboard.",
+      "user_actions": [
+        "Press Shift+F10.",
+        "Press / inside block menu.",
+        "Escape."
+      ],
+      "expected_dom_state": "Shift+F10 opens same block command surface as pointer. / focuses menu search. Escape closes and restores focus to invoking handle.",
+      "expected_visual_result": "Keyboard receives the same structural commands as mouse, with visible focus styling and deterministic focus return.",
+      "limitations": [],
+      "rejection_gate": "Reject if structural block commands are pointer-only or closing menu drops keyboard focus unpredictably."
+    },
+    {
+      "scenario_id": "G23",
+      "name_ar": "Clipboard failure: Cut يفشل بدون فقد بيانات",
+      "area": "ERROR_ATOMICITY",
+      "priority": "P0",
+      "authority": "ACCEPTED_LIBRARY_EDITOR_v1.2.17",
+      "execution_mode": "REAL_CHROMIUM_IN_MEMORY_EXACT_DONOR",
+      "start_state": "Edit mode; p1 exists; clipboard transports intentionally unavailable.",
+      "user_actions": [
+        "Inject clipboard-unavailable browser capability boundary.",
+        "Open p1 > نسخ ومشاركة > قص العنصر.",
+        "Observe failure path."
+      ],
+      "expected_dom_state": "Cut failure is caught; p1 remains in document; block count is unchanged; UI reports that deletion did not happen because clipboard write failed.",
+      "expected_visual_result": "User sees an explicit error toast and content remains visibly intact.",
+      "limitations": [
+        "Clipboard unavailability is deliberately fault-injected in Chromium to exercise the real donor failure branch; Foundation/donor source is not modified."
+      ],
+      "rejection_gate": "Reject if a failed clipboard write can still remove content, or if error feedback falsely claims a successful cut."
+    }
+  ],
+  "exclusions_and_limits": [
+    "No Foundation or Writer A candidate source was mutated.",
+    "No old GitHub/Production authority was used.",
+    "The hidden StateLab is explicitly excluded from Golden production loading/error semantics.",
+    "OS-level clipboard seeding for arbitrary HTML was unavailable; G11 uses a synthetic ClipboardEvent only as input transport, while sanitizer, DOM insertion, commit and undo execute in real Chromium.",
+    "G09 creates a deterministic RTL DOM Range programmatically; the Ctrl+C event and donor clipboard handler are real browser execution.",
+    "G23 deliberately removes browser clipboard capabilities to exercise the donor’s real failure branch; donor source is not changed.",
+    "R3 establishes the Golden oracle; it does not self-accept the Foundation or Writer A candidate."
+  ]
+}
