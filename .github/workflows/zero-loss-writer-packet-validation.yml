@@ -145,9 +145,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          node tools/source-tree-identity.mjs | tee /tmp/source-id.txt
+          node --input-type=module - <<'NODE' | tee /tmp/source-id.txt
+          import { canonicalSourceIdentity } from './tools/source-tree-identity.mjs';
+          const result = await canonicalSourceIdentity(new URL('./', import.meta.url));
+          console.log(JSON.stringify({sha256: result.sha256, files: result.files}));
+          NODE
           grep -q '480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641' /tmp/source-id.txt
-          grep -q '273' /tmp/source-id.txt
+          grep -q '"files":273' /tmp/source-id.txt
           test -z "$(git diff --name-only 293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a...HEAD -- stack/native-typescript)"
 
       - name: Model tests
