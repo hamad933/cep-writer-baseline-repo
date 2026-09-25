@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "classification": "CURRENT_WRITER_BASELINE_STATE_PROJECTION__NOT_LIVE_CONTROLLER_STATE__NOT_ACCEPTANCE",
   "repository": "hamad933/cep-writer-baseline-repo",
   "repositoryBaselineRef": "main",
@@ -27,6 +27,7 @@
     "C03-GATE-024"
   ],
   "firstCorrectionWave": [
+    "PR01",
     "D03A",
     "D03B",
     "D03C",
@@ -38,5 +39,25 @@
   ],
   "liveControllerStateDriveId": "164CDevKZ48ZAXke44oL3jXIVpYQJBmRu",
   "liveOwnerDecisionRegisterDriveId": "1GF70xX-eGWNmp8VaK_gjTRrAAVq0bihh",
-  "writerRule": "Mission branches inherit reusable main inputs and add only exact mission overlay; required execution must not depend on live Drive fetches."
+  "writerRule": "Mission branches inherit reusable main inputs and add only exact mission overlay; required execution must not depend on live Drive fetches.",
+  "postC03ZeroLossReconciliation": {
+    "date": "2026-09-25",
+    "classification": "SOURCE_ZERO_LOSS_THROUGH_C03__POST_C03_FORWARD_CONTROL_LAYER_REQUIRES_BOUNDED_RECONCILIATION",
+    "compactFindingProjectionExhaustive": false,
+    "downstreamMissionMaterializationRequiredBeforeLaunch": [
+      "D05",
+      "D06",
+      "D07",
+      "D08",
+      "D09",
+      "D10",
+      "D11"
+    ],
+    "frozenObligationManifestRequiredFor": [
+      "D12",
+      "D13",
+      "D14"
+    ]
+  },
+  "executionCarrierRule": "Mission/DAG scope and execution carrier are separate. ROUTE-LOCAL may use writer/cep-serial when the exact Owner/Controller mission binds it; other carriers do not inherit local topology."
 }
