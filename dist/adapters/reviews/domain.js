@@ -18,18 +18,126 @@ function normalizedRecord(record){const evidenceRefs=clone(record.evidenceRefs||
 
 export const createW04ReviewDemoRecords=()=>freeze(demoInitial());
 
+export class ReviewAuthorityRegistry{
+  constructor(entries=[],{testOnly=false}={}){
+    this.testOnly=testOnly;
+    this.authorities=new Map();
+    for(const entry of entries){
+      if(entry&&entry.identity){
+        this.authorities.set(entry.identity,{
+          identity:entry.identity,
+          authorized:entry.authorized!==false,
+          canAssign:entry.canAssign!==false,
+          permissionProofRef:entry.permissionProofRef||`perm:${entry.identity}`,
+          testOnly:entry.testOnly??testOnly,
+          reason:entry.reason||null
+        });
+      }
+    }
+  }
+  resolveReviewerAuthority(identity){
+    if(!identity)return {authorized:false,reason:'REVIEWER_IDENTITY_REQUIRED'};
+    const entry=this.authorities.get(identity);
+    if(!entry)return {authorized:false,reason:'REVIEWER_NOT_IN_AUTHORITY_REGISTRY'};
+    return {...entry};
+  }
+  registerReviewer(identity,opts={}){
+    this.authorities.set(identity,{
+      identity,
+      authorized:opts.authorized!==false,
+      canAssign:opts.canAssign!==false,
+      permissionProofRef:opts.permissionProofRef||`perm:${identity}`,
+      testOnly:opts.testOnly??this.testOnly,
+      reason:opts.reason||null
+    });
+  }
+}
+
+export function createTestReviewAuthorityRegistry(entries=[
+  {identity:'reviewer:local-owner',authorized:true,canAssign:true,permissionProofRef:'perm:local-owner:v1',testOnly:true},
+  {identity:'reviewer:new',authorized:true,canAssign:true,permissionProofRef:'perm:new:v1',testOnly:true}
+]){
+  return new ReviewAuthorityRegistry(entries,{testOnly:true});
+}
+
 export class W04ReviewDomain{
- constructor(records=[],{evidenceResolver=null}={}){this.owner=REVIEW_DOMAIN_OWNER;this.evidenceResolver=evidenceResolver;this.records=clone(records).map(normalizedRecord);this.receipts=[];this.compareWorkingState=new Map();this.seq=0;this.persistence={mode:'SESSION_LOCAL',durable:false,status:'UNAVAILABLE',reason:'No surface-local persistence owner; no false Save.'};this.familyAdmissionClaim=false;this.reviewDecisionPresentationStatus='CONCEPT_CONTRACT_ONLY';this.availability=new ActionAvailabilityCore();for(const id of ['reviews.review','reviews.finding','reviews.compare','reviews.supersede'])this.availability.register(id,{selection:{exact:1},activeModes:['review']});}
- snapshot(){return freeze({owner:this.owner,records:this.records,persistence:this.persistence,familyAdmissionClaim:this.familyAdmissionClaim,reviewDecisionPresentationStatus:this.reviewDecisionPresentationStatus,receipts:this.receipts,compareWorkingState:[...this.compareWorkingState.entries()]});}
- get(id){const r=this.records.find(x=>x.id===id);if(!r)throw Error('REVIEW_UNKNOWN:'+id);return r;}inspect(id){return freeze(this.get(id));}
- replaceRecord(id,next){const index=this.records.findIndex(item=>item.id===id);if(index<0)throw Error('REVIEW_UNKNOWN:'+id);this.records[index]=normalizedRecord(next);return this.records[index];}
- receipt(command,id,detail={}){const item=freeze({sequence:++this.seq,command,owner:this.owner,id,...detail});this.receipts.push(item);return item;}
- authorityFailure(record,{assignment=false}={}){if(!record.reviewer?.identity)return {ok:false,code:'REVIEWER_ACTOR_REQUIRED',mutated:false};if(!record.reviewer.authorityAvailable||!record.reviewer.permissionProofRef)return {ok:false,code:'REVIEWER_AUTHORITY_UNAVAILABLE',mutated:false};if(assignment&&!record.reviewer.assignmentPermissionAvailable)return {ok:false,code:'ASSIGNMENT_PERMISSION_UNAVAILABLE',mutated:false};return null;}
- resolveEvidenceRef(ref){if(!this.evidenceResolver)return {state:'UNVERIFIED_PROVIDER_UNBOUND',reason:'Evidence resolver is not bound.'};try{return this.evidenceResolver(ref);}catch(error){return {state:'UNAVAILABLE',reason:String(error?.message||error)};}}
- validatePinnedEvidence(refs){for(const ref of refs){if(typeof ref!=='string'||!ref.includes('@'))return {ok:false,code:'EXACT_EVIDENCE_REFS_REQUIRED',ref};const resolved=this.resolveEvidenceRef(ref);if(resolved?.state!=='RESOLVED'||resolved.immutable!==true)return {ok:false,code:resolved?.state==='UNVERIFIED_PROVIDER_UNBOUND'?'EVIDENCE_RESOLVER_UNBOUND':'ADMITTED_IMMUTABLE_EVIDENCE_REQUIRED',ref,resolution:resolved};}return {ok:true};}
- review(id,{action='continue',evidenceRefs=null,criteriaRefs=null,reviewer=null,requester='owner:local',purpose='Formal Evidence Review',newReviewId=null}={}){
-  let r=this.records.find(item=>item.id===id)||null;
-  if(!r){if(action!=='request')return freeze({ok:false,code:'REVIEW_UNKNOWN',mutated:false,id});const pinnedEvidence=Array.isArray(evidenceRefs)?evidenceRefs.map(String).filter(Boolean):[],pinnedCriteria=Array.isArray(criteriaRefs)?criteriaRefs.map(String).filter(Boolean):[];if(!pinnedEvidence.length)return freeze({ok:false,code:'EXACT_EVIDENCE_REFS_REQUIRED',mutated:false});const evidenceValidation=this.validatePinnedEvidence(pinnedEvidence);if(!evidenceValidation.ok)return freeze({...evidenceValidation,mutated:false});if(!pinnedCriteria.length)return freeze({ok:false,code:'PINNED_CRITERIA_REQUIRED',mutated:false});if(!reviewer?.identity)return freeze({ok:false,code:'REVIEWER_ACTOR_REQUIRED',mutated:false});const created=normalizedRecord({id:String(id),revisionId:`${id}:r1`,evidenceRefs:pinnedEvidence,criteriaRefs:pinnedCriteria,reviewer:{identity:String(reviewer.identity),permissionProofRef:reviewer.permissionProofRef||null,authorityAvailable:reviewer.authorityAvailable===true,assignmentPermissionAvailable:reviewer.assignmentPermissionAvailable===true},state:'REQUESTED',findings:[],decision:null,decisionHistory:[],effectiveDecisionId:null,rereview:'NONE',requester:String(requester),purpose:String(purpose),requestedAt:now()});this.records.push(created);this.receipt('reviews.review',created.id,{action:'request',state:'REQUESTED',pinnedEvidenceRefs:created.evidenceRefs,pinnedCriteriaRefs:created.criteriaRefs,requester:created.requester});return freeze({ok:true,record:created,mutated:true,pinned:true});}
+  constructor(records=undefined,{evidenceResolver=null,reviewAuthorityRegistry=null,allowTestAuthority=false}={}){
+    this.owner=REVIEW_DOMAIN_OWNER;
+    this.evidenceResolver=evidenceResolver;
+    this.reviewAuthorityRegistry=reviewAuthorityRegistry;
+    this.allowTestAuthority=allowTestAuthority;
+    const initialRecords=records===undefined?demoInitial():records;
+    this.records=clone(initialRecords).map(normalizedRecord);
+    this.receipts=[];
+    this.compareWorkingState=new Map();
+    this.seq=0;
+    this.persistence={mode:'SESSION_LOCAL',durable:false,status:'UNAVAILABLE',reason:'No surface-local persistence owner; no false Save.'};
+    this.familyAdmissionClaim=false;
+    this.reviewDecisionPresentationStatus='CONCEPT_CONTRACT_ONLY';
+    this.availability=new ActionAvailabilityCore();
+    for(const id of ['reviews.review','reviews.request','reviews.assign','reviews.start','reviews.finding','reviews.ready','reviews.continue','reviews.cancel','reviews.compare','reviews.supersede','reviews.rereview'])this.availability.register(id,{selection:{exact:1},activeModes:['review']});
+  }
+  snapshot(){return freeze({owner:this.owner,records:this.records,persistence:this.persistence,familyAdmissionClaim:this.familyAdmissionClaim,reviewDecisionPresentationStatus:this.reviewDecisionPresentationStatus,receipts:this.receipts,compareWorkingState:[...this.compareWorkingState.entries()]});}
+  get(id){const r=this.records.find(x=>x.id===id);if(!r)throw Error('REVIEW_UNKNOWN:'+id);return r;}inspect(id){return freeze(this.get(id));}
+  replaceRecord(id,next){const index=this.records.findIndex(item=>item.id===id);if(index<0)throw Error('REVIEW_UNKNOWN:'+id);this.records[index]=normalizedRecord(next);return this.records[index];}
+  receipt(command,id,detail={}){const item=freeze({sequence:++this.seq,command,owner:this.owner,id,...detail});this.receipts.push(item);return item;}
+  resolveReviewerAuthority(identity){
+    if(!identity)return {authorized:false,reason:'REVIEWER_IDENTITY_REQUIRED'};
+    if(this.reviewAuthorityRegistry){
+      return this.reviewAuthorityRegistry.resolveReviewerAuthority(identity);
+    }
+    if(this.allowTestAuthority){
+      return {authorized:true,canAssign:true,permissionProofRef:`perm:test:${identity}`,testOnly:true};
+    }
+    return null;
+  }
+  authorityFailure(record,{assignment=false}={}){
+    if(!record.reviewer?.identity)return {ok:false,code:'REVIEWER_ACTOR_REQUIRED',mutated:false};
+    if(record.reviewer.authorityAvailable===false)return {ok:false,code:'REVIEWER_AUTHORITY_UNAVAILABLE',mutated:false};
+    if(assignment&&record.reviewer.assignmentPermissionAvailable===false)return {ok:false,code:'ASSIGNMENT_PERMISSION_UNAVAILABLE',mutated:false};
+    if(this.reviewAuthorityRegistry){
+      const resolved=this.reviewAuthorityRegistry.resolveReviewerAuthority(record.reviewer.identity);
+      if(!resolved||!resolved.authorized)return {ok:false,code:'REVIEWER_AUTHORITY_UNAVAILABLE',mutated:false,reason:resolved?.reason||'REVIEWER_NOT_IN_AUTHORITY_REGISTRY'};
+      if(resolved.testOnly&&!this.allowTestAuthority)return {ok:false,code:'TEST_AUTHORITY_NOT_ALLOWED_IN_PRODUCT',mutated:false};
+      if(assignment&&!resolved.canAssign)return {ok:false,code:'ASSIGNMENT_PERMISSION_UNAVAILABLE',mutated:false};
+      return null;
+    }
+    if(this.allowTestAuthority){
+      if(!record.reviewer.authorityAvailable||!record.reviewer.permissionProofRef)return {ok:false,code:'REVIEWER_AUTHORITY_UNAVAILABLE',mutated:false};
+      if(assignment&&!record.reviewer.assignmentPermissionAvailable)return {ok:false,code:'ASSIGNMENT_PERMISSION_UNAVAILABLE',mutated:false};
+      return null;
+    }
+    if(!record.reviewer.permissionProofRef)return {ok:false,code:'REVIEWER_AUTHORITY_UNAVAILABLE',mutated:false};
+    if(!record.reviewer.authorityAvailable)return {ok:false,code:'REVIEWER_AUTHORITY_UNAVAILABLE',mutated:false};
+    if(assignment&&!record.reviewer.assignmentPermissionAvailable)return {ok:false,code:'ASSIGNMENT_PERMISSION_UNAVAILABLE',mutated:false};
+    return null;
+  }
+  resolveEvidenceRef(ref){if(!this.evidenceResolver)return {state:'UNVERIFIED_PROVIDER_UNBOUND',reason:'Evidence resolver is not bound.'};try{return this.evidenceResolver(ref);}catch(error){return {state:'UNAVAILABLE',reason:String(error?.message||error)};}}
+  validatePinnedEvidence(refs){for(const ref of refs){if(typeof ref!=='string'||!ref.includes('@'))return {ok:false,code:'EXACT_EVIDENCE_REFS_REQUIRED',ref};const resolved=this.resolveEvidenceRef(ref);if(resolved?.state!=='RESOLVED'||resolved.immutable!==true)return {ok:false,code:resolved?.state==='UNVERIFIED_PROVIDER_UNBOUND'?'EVIDENCE_RESOLVER_UNBOUND':'ADMITTED_IMMUTABLE_EVIDENCE_REQUIRED',ref,resolution:resolved};}return {ok:true};}
+  review(id,{action='continue',evidenceRefs=null,criteriaRefs=null,reviewer=null,requester='owner:local',purpose='Formal Evidence Review',newReviewId=null}={}){
+   let r=this.records.find(item=>item.id===id)||null;
+   if(!r){
+     if(action!=='request')return freeze({ok:false,code:'REVIEW_UNKNOWN',mutated:false,id});
+     const pinnedEvidence=Array.isArray(evidenceRefs)?evidenceRefs.map(String).filter(Boolean):[],pinnedCriteria=Array.isArray(criteriaRefs)?criteriaRefs.map(String).filter(Boolean):[];
+     if(!pinnedEvidence.length)return freeze({ok:false,code:'EXACT_EVIDENCE_REFS_REQUIRED',mutated:false});
+     const evidenceValidation=this.validatePinnedEvidence(pinnedEvidence);
+     if(!evidenceValidation.ok)return freeze({...evidenceValidation,mutated:false});
+     if(!pinnedCriteria.length)return freeze({ok:false,code:'PINNED_CRITERIA_REQUIRED',mutated:false});
+     if(!reviewer?.identity)return freeze({ok:false,code:'REVIEWER_ACTOR_REQUIRED',mutated:false});
+     if(this.reviewAuthorityRegistry){
+       const authCheck=this.reviewAuthorityRegistry.resolveReviewerAuthority(reviewer.identity);
+       if(!authCheck||!authCheck.authorized)return freeze({ok:false,code:'REVIEWER_AUTHORITY_UNAVAILABLE',mutated:false,reason:authCheck?.reason||'REVIEWER_NOT_IN_AUTHORITY_REGISTRY'});
+       if(authCheck.testOnly&&!this.allowTestAuthority)return freeze({ok:false,code:'TEST_AUTHORITY_NOT_ALLOWED_IN_PRODUCT',mutated:false});
+     }
+     const registryCheck=this.reviewAuthorityRegistry?this.reviewAuthorityRegistry.resolveReviewerAuthority(reviewer.identity):null;
+     const authorityAvailable=registryCheck?registryCheck.authorized===true:reviewer.authorityAvailable===true;
+     const assignmentPermissionAvailable=registryCheck?registryCheck.canAssign===true:reviewer.assignmentPermissionAvailable===true;
+     const permissionProofRef=registryCheck?.permissionProofRef||reviewer.permissionProofRef||null;
+     const created=normalizedRecord({id:String(id),revisionId:`${id}:r1`,evidenceRefs:pinnedEvidence,criteriaRefs:pinnedCriteria,reviewer:{identity:String(reviewer.identity),permissionProofRef,authorityAvailable,assignmentPermissionAvailable},state:'REQUESTED',findings:[],decision:null,decisionHistory:[],effectiveDecisionId:null,rereview:'NONE',requester:String(requester),purpose:String(purpose),requestedAt:now()});
+     this.records.push(created);
+     this.receipt('reviews.review',created.id,{action:'request',state:'REQUESTED',pinnedEvidenceRefs:created.evidenceRefs,pinnedCriteriaRefs:created.criteriaRefs,requester:created.requester});
+     return freeze({ok:true,record:created,mutated:true,pinned:true});
+   }
   if(action==='rereview'){if(r.state!=='CLOSED'||!r.effectiveDecisionId)return freeze({ok:false,code:'CLOSED_DECIDED_REVIEW_REQUIRED_FOR_REREVIEW',mutated:false,state:r.state});if(!newReviewId)return freeze({ok:false,code:'NEW_REVIEW_ID_REQUIRED',mutated:false});if(this.records.some(x=>x.id===String(newReviewId)))return freeze({ok:false,code:'REVIEW_ID_CONFLICT',mutated:false});const evidenceValidation=this.validatePinnedEvidence(r.evidenceRefs);if(!evidenceValidation.ok)return freeze({...evidenceValidation,mutated:false});const created=normalizedRecord({id:String(newReviewId),revisionId:`${newReviewId}:r1`,evidenceRefs:r.evidenceRefs,criteriaRefs:r.criteriaRefs,reviewer:reviewer||r.reviewer,state:'REQUESTED',findings:[],decision:null,decisionHistory:clone(r.decisionHistory),effectiveDecisionId:r.effectiveDecisionId,priorDecisionRef:r.effectiveDecisionId,previousReviewRef:r.id,rereview:'OPEN',requester:String(requester),purpose:String(purpose||'Formal Evidence Re-review'),requestedAt:now()});this.records.push(created);this.receipt('reviews.review',created.id,{action:'rereview-request',previousReviewRef:r.id,priorDecisionRef:r.effectiveDecisionId,state:'REQUESTED'});return freeze({ok:true,record:created,mutated:true,priorReviewImmutable:true});}
   const failure=this.authorityFailure(r,{assignment:action==='assign'||action==='start'});if(failure)return freeze(failure);let next={...r};
   if(action==='assign'){if(r.state!=='REQUESTED')return freeze({ok:false,code:'REVIEW_STATE_ACTION_INVALID',mutated:false,state:r.state});next.state='ASSIGNED';}

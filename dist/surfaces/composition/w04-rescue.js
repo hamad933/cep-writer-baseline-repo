@@ -52,9 +52,10 @@ export function createW04RescueComposition({
   reviewsDomain=null,
   masteryDomain=new W04MasteryDomain(),
   portfolioDomain=null,
-  analyticalCompareOwner=new AnalyticalCompareOwner()
+  analyticalCompareOwner=undefined
 }={}){
-  if(analyticalCompareOwner.ownerToken!=='AnalyticalCompare')throw Error('CENTRAL_ANALYTICAL_COMPARE_REQUIRED');
+  const compareOwner=analyticalCompareOwner===undefined?new AnalyticalCompareOwner():analyticalCompareOwner;
+  if(!compareOwner||compareOwner.ownerToken!=='AnalyticalCompare')throw Error('CENTRAL_ANALYTICAL_COMPARE_REQUIRED');
   const boundReviews=reviewsDomain||new W04ReviewDomain(undefined,{evidenceResolver:ref=>evidenceDomain.resolveReviewableEvidenceRef(ref)});
   if(!boundReviews.evidenceResolver)boundReviews.evidenceResolver=ref=>evidenceDomain.resolveReviewableEvidenceRef(ref);
   evidenceDomain.setReviewProjectionResolver(input=>boundReviews.projectionForEvidence(input));
@@ -64,10 +65,10 @@ export function createW04RescueComposition({
     const mastery=masteryDomain.records.find(row=>row.id===id&&row.revisionId===revisionId);if(mastery)return {digest:mastery.basis.digest,rowCount:1};
     return null;
   }}});
-  const evidence=composeEvidenceSurface({domain:evidenceDomain,analyticalCompareOwner});
-  const reviews=composeReviewsSurface({domain:boundReviews,analyticalCompareOwner});
-  const mastery=createMasterySurfaceComposition({domain:masteryDomain,analyticalCompareOwner});
-  const portfolio=createPortfolioSurfaceComposition({domain:boundPortfolio,analyticalCompareOwner});
+  const evidence=composeEvidenceSurface({domain:evidenceDomain,analyticalCompareOwner:compareOwner});
+  const reviews=composeReviewsSurface({domain:boundReviews,analyticalCompareOwner:compareOwner});
+  const mastery=createMasterySurfaceComposition({domain:masteryDomain,analyticalCompareOwner:compareOwner});
+  const portfolio=createPortfolioSurfaceComposition({domain:boundPortfolio,analyticalCompareOwner:compareOwner});
 
   const evidenceCollection=new CollectionTableMatrixPresentationCore(evidence.collection);
   const reviewsCollection=new CollectionTableMatrixPresentationCore(reviews.collection);
@@ -83,8 +84,8 @@ export function createW04RescueComposition({
     causalChain:W04_CAUSAL_CHAIN,
     routeBindings:W04_ROUTE_BINDINGS,
     shared:Object.freeze({
-      analyticalCompareOwner,
-      analyticalProviderIds:analyticalCompareOwner.providerIds(),
+      analyticalCompareOwner: compareOwner,
+      analyticalProviderIds: compareOwner.providerIds(),
       collectionOwner:'CollectionTableMatrixPresentationCore',
       auditOwner:'AuditProvenanceInteractionCore',
       reviewDecisionOwner:'ReviewDecisionPresentationOwner'

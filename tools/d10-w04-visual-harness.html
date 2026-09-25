@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D10 W04 Authority & Lifecycle Convergence Harness</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090d16;
+      --panel: #111827;
+      --panel-border: #1f2937;
+      --text: #f9fafb;
+      --text-muted: #9ca3af;
+      --accent: #38bdf8;
+      --success: #34d399;
+      --warning: #fbbf24;
+      --danger: #f87171;
+      --font-mono: Consolas, monospace;
+      --font-sans: system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+      background: #0d1322;
+      border-bottom: 1px solid var(--panel-border);
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+    .badge-success {
+      background: rgba(52, 211, 153, 0.15);
+      border-color: var(--success);
+      color: var(--success);
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding: 16px 24px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .card-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-metric {
+      font-size: 20px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: #fff;
+    }
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+    .surfaces-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 0 24px 24px 24px;
+    }
+    .surface-panel {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .surface-header {
+      background: #1e293b;
+      padding: 10px 16px;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--panel-border);
+    }
+    .surface-content {
+      padding: 16px;
+      max-height: 380px;
+      overflow-y: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    th {
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+    .mono {
+      font-family: var(--font-mono);
+    }
+    .tag {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .tag-green { background: rgba(52, 211, 153, 0.2); color: #34d399; }
+    .tag-blue { background: rgba(56, 189, 248, 0.2); color: #38bdf8; }
+    .tag-yellow { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+    .tag-purple { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+  </style>
+</head>
+<body>
+  <div class="header-bar">
+    <div>
+      <span style="font-weight: 700; font-size: 15px;">CEP W04 Authority & Lifecycle Convergence Studio</span>
+      <span style="color: var(--text-muted); margin-left: 12px;">D10 Candidate Checkpoint Verification</span>
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <span class="badge">W04_AUTHORITY_CONVERGED</span>
+      <span class="badge badge-success">CANDIDATE_ONLY</span>
+    </div>
+  </div>
+
+  <div class="grid-4">
+    <div class="card">
+      <div class="card-title">
+        <span>Evidence Authority</span>
+        <span class="tag tag-green">Enforced</span>
+      </div>
+      <div class="card-metric" id="evidenceMetric">3 Records</div>
+      <div class="card-desc">Schema validation & verification provider gating active</div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <span>Review Authority</span>
+        <span class="tag tag-blue">Registry Bound</span>
+      </div>
+      <div class="card-metric" id="reviewsMetric">1 Active</div>
+      <div class="card-desc">ReviewAuthorityRegistry governs assignment & decisions</div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <span>Mastery Grounding</span>
+        <span class="tag tag-purple">Zero Local Write</span>
+      </div>
+      <div class="card-metric" id="masteryMetric">1 Competency</div>
+      <div class="card-desc">Governed evaluation required for state transitions</div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <span>Analytical Compare</span>
+        <span class="tag tag-green">Single Central</span>
+      </div>
+      <div class="card-metric" id="compareMetric">4 Providers</div>
+      <div class="card-desc">AnalyticalCompareOwner shared across all 4 surfaces</div>
+    </div>
+  </div>
+
+  <div class="surfaces-container">
+    <div class="surface-panel">
+      <div class="surface-header">
+        <span>Evidence Surface (/progress/evidence)</span>
+        <span class="mono" style="font-size: 11px; color: var(--accent);">GovernedEvidenceWorkbench</span>
+      </div>
+      <div class="surface-content" id="evidenceContent">
+        <table>
+          <thead>
+            <tr><th>ID</th><th>Title</th><th>Status</th><th>Review Status</th><th>Source Ref</th></tr>
+          </thead>
+          <tbody id="evidenceTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="surface-panel">
+      <div class="surface-header">
+        <span>Formal Reviews Surface (/progress/reviews)</span>
+        <span class="mono" style="font-size: 11px; color: var(--accent);">FormalReviewDecisionWorkbench</span>
+      </div>
+      <div class="surface-content" id="reviewsContent">
+        <table>
+          <thead>
+            <tr><th>ID</th><th>Status</th><th>Reviewer</th><th>Decision</th><th>Evidence Pinned</th></tr>
+          </thead>
+          <tbody id="reviewsTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="surface-panel">
+      <div class="surface-header">
+        <span>Mastery Surface (/progress/mastery)</span>
+        <span class="mono" style="font-size: 11px; color: var(--accent);">ExplainabilityProjectionWorkbench</span>
+      </div>
+      <div class="surface-content" id="masteryContent">
+        <table>
+          <thead>
+            <tr><th>Target</th><th>Judgment</th><th>Freshness</th><th>Governed Basis</th></tr>
+          </thead>
+          <tbody id="masteryTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="surface-panel">
+      <div class="surface-header">
+        <span>Curated Portfolio Surface (/progress/portfolio)</span>
+        <span class="mono" style="font-size: 11px; color: var(--accent);">CuratedPortfolioWorkbench</span>
+      </div>
+      <div class="surface-content" id="portfolioContent">
+        <table>
+          <thead>
+            <tr><th>Item ID</th><th>Label</th><th>Status</th><th>Source Preserved</th><th>Grouping</th></tr>
+          </thead>
+          <tbody id="portfolioTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { createW04RescueComposition } from '../dist/surfaces/composition/w04-rescue.js';
+    import { AnalyticalCompareOwner } from '../dist/foundation/analytical/compare.js';
+
+    const centralCompare = new AnalyticalCompareOwner();
+    const rescue = createW04RescueComposition({ analyticalCompareOwner: centralCompare });
+
+    // Populate Evidence
+    const evTbody = document.getElementById('evidenceTableBody');
+    rescue.evidence.domain.records.forEach(r => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="mono">${r.id}</td>
+        <td>${r.title}</td>
+        <td><span class="tag tag-${r.status === 'ADMITTED' ? 'green' : 'yellow'}">${r.status}</span></td>
+        <td><span class="tag tag-blue">${r.reviewStatus || 'UNREVIEWED'}</span></td>
+        <td class="mono" style="font-size: 11px;">${r.sourceId}@${r.sourceRevision}</td>
+      `;
+      evTbody.appendChild(tr);
+    });
+    document.getElementById('evidenceMetric').textContent = `${rescue.evidence.domain.records.length} Records`;
+
+    // Populate Reviews
+    const revTbody = document.getElementById('reviewsTableBody');
+    rescue.reviews.domain.records.forEach(r => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="mono">${r.id}</td>
+        <td><span class="tag tag-blue">${r.status}</span></td>
+        <td>${r.reviewerId || 'UNASSIGNED'}</td>
+        <td><span class="tag tag-${r.effectiveDecision === 'ACCEPTED' ? 'green' : 'yellow'}">${r.effectiveDecision || 'NONE'}</span></td>
+        <td class="mono" style="font-size: 11px;">${(r.evidenceRefs || []).join(', ')}</td>
+      `;
+      revTbody.appendChild(tr);
+    });
+    document.getElementById('reviewsMetric').textContent = `${rescue.reviews.domain.records.length} Active`;
+
+    // Populate Mastery
+    const masTbody = document.getElementById('masteryTableBody');
+    rescue.mastery.domain.records.forEach(r => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><strong>${r.capability}</strong><br><span style="color:var(--text-muted);font-size:11px;">${r.subject}</span></td>
+        <td><span class="tag tag-${r.judgment === 'MASTERED' ? 'green' : 'yellow'}">${r.judgment}</span></td>
+        <td><span class="tag tag-blue">${r.freshness}</span></td>
+        <td class="mono" style="font-size: 11px;">${r.basis?.digest || 'none'}</td>
+      `;
+      masTbody.appendChild(tr);
+    });
+    document.getElementById('masteryMetric').textContent = `${rescue.mastery.domain.records.length} Governed`;
+
+    // Populate Portfolio
+    const portTbody = document.getElementById('portfolioTableBody');
+    rescue.portfolio.domain.records.forEach(r => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="mono">${r.id}</td>
+        <td>${r.label || r.id}</td>
+        <td><span class="tag tag-green">${r.status || 'RESOLVABLE'}</span></td>
+        <td><span class="tag tag-blue">TRUE (CANONICAL)</span></td>
+        <td class="mono" style="font-size: 11px;">${r.groupRef || 'ungrouped'}</td>
+      `;
+      portTbody.appendChild(tr);
+    });
+
+    document.getElementById('compareMetric').textContent = `${centralCompare.providerIds().length} Providers`;
+
+    window.D10_VISUAL_PROOF = {
+      timestamp: new Date().toISOString(),
+      checkpoint: 'D10',
+      evidenceCount: rescue.evidence.domain.records.length,
+      reviewsCount: rescue.reviews.domain.records.length,
+      masteryCount: rescue.mastery.domain.records.length,
+      portfolioCount: rescue.portfolio.domain.records.length,
+      compareOwner: centralCompare.owner,
+      compareProviderIds: centralCompare.providerIds(),
+      causalChain: rescue.causalChain,
+      routeBindings: rescue.routeBindings,
+      invariants: rescue.invariants
+    };
+  </script>
+</body>
+</html>

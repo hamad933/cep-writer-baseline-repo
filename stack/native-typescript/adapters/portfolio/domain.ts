@@ -26,9 +26,10 @@ const sameSourceSnapshot=(a,b)=>a.state==='RESOLVED'&&b.state==='RESOLVED'?a.dig
 export const createW04PortfolioDemoRecords=()=>freeze(demoInitial());
 
 export class W04PortfolioDomain{
- constructor(records=[],{groupingAuthority=null,sourceResolver=null}={}){
+ constructor(records=undefined,{groupingAuthority=null,sourceResolver=null}={}){
   this.owner=PORTFOLIO_DOMAIN_OWNER;
-  this.records=clone(records).map(record=>({...record,groupingRef:record.groupingRef??null,groupingState:record.groupingRef?'REGISTRY_BOUND':(record.groupingState||'AUTHORITY_PENDING')}));
+  const initialRecords=records===undefined?demoInitial():records;
+  this.records=clone(initialRecords).map(record=>({...record,groupingRef:record.groupingRef??null,groupingState:record.groupingRef?'REGISTRY_BOUND':(record.groupingState||'AUTHORITY_PENDING')}));
   this.groupingAuthority=groupingAuthority;
   this.groupingAuthorityDescriptor=groupingDescriptor(groupingAuthority);
   this.sourceResolver=sourceResolver;

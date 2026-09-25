@@ -37,9 +37,10 @@ const refResolution=(provider,method,ref)=>{
 export const createW04MasteryDemoRecords=()=>freeze(demoInitial());
 
 export class W04MasteryDomain{
- constructor(records=[],{basisResolver=null,evaluator=null}={}){
+ constructor(records=undefined,{basisResolver=null,evaluator=null}={}){
   this.owner=MASTERY_DOMAIN_OWNER;
-  this.records=clone(records).map(validRecord);
+  const initialRecords=records===undefined?demoInitial():records;
+  this.records=clone(initialRecords).map(validRecord);
   this.basisResolver=basisResolver;
   this.evaluator=evaluator;
   this.evaluatorDescriptor=evaluatorDescriptor(evaluator);

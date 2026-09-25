@@ -32,7 +32,27 @@ export function reviewsCenterProjection(domain,selectedId){
     reviewer:Object.freeze({identity:row.reviewer.identity,authorityAvailable:row.reviewer.authorityAvailable===true,assignmentPermissionAvailable:row.reviewer.assignmentPermissionAvailable===true,permissionProofRef:row.reviewer.permissionProofRef||null}),
     findings:Object.freeze(row.findings.map(item=>Object.freeze({...item}))),
     decision:Object.freeze({effectiveDecisionId:row.effectiveDecisionId||null,effectiveOutcome:row.decision?.outcome||'NONE',historyCount:row.decisionHistory.length,history:Object.freeze(row.decisionHistory.map(item=>Object.freeze({decisionId:item.decisionId,outcome:item.outcome,supersedesDecisionRef:item.supersedesDecisionRef,issuedAt:item.issuedAt,correctionReason:item.correctionReason})))}),
-    actions:Object.freeze({review:row.reviewer.authorityAvailable===true,finding:row.reviewer.authorityAvailable===true&&row.state==='IN_REVIEW',compare:['IN_REVIEW','READY_FOR_DECISION','CLOSED'].includes(row.state),supersede:row.reviewer.authorityAvailable===true&&row.state==='READY_FOR_DECISION'})
+    actions:Object.freeze({
+      review:row.reviewer.authorityAvailable===true,
+      request:true,
+      assign:row.reviewer.authorityAvailable===true&&row.reviewer.assignmentPermissionAvailable!==false&&row.state==='REQUESTED',
+      start:row.reviewer.authorityAvailable===true&&row.state==='ASSIGNED',
+      finding:row.reviewer.authorityAvailable===true&&row.state==='IN_REVIEW',
+      ready:row.reviewer.authorityAvailable===true&&row.state==='IN_REVIEW'&&row.findings.length>0,
+      continue:['IN_REVIEW','READY_FOR_DECISION'].includes(row.state),
+      cancel:row.reviewer.authorityAvailable===true&&['REQUESTED','ASSIGNED','IN_REVIEW'].includes(row.state),
+      supersede:row.reviewer.authorityAvailable===true&&row.state==='READY_FOR_DECISION'&&row.findings.length>0,
+      rereview:row.state==='CLOSED'&&!!row.effectiveDecisionId,
+      compare:['IN_REVIEW','READY_FOR_DECISION','CLOSED'].includes(row.state),
+      canAssign:row.reviewer.authorityAvailable===true&&row.reviewer.assignmentPermissionAvailable!==false&&row.state==='REQUESTED',
+      canStart:row.reviewer.authorityAvailable===true&&row.state==='ASSIGNED',
+      canAddFinding:row.reviewer.authorityAvailable===true&&row.state==='IN_REVIEW',
+      canMarkReady:row.reviewer.authorityAvailable===true&&row.state==='IN_REVIEW'&&row.findings.length>0,
+      canContinue:['IN_REVIEW','READY_FOR_DECISION'].includes(row.state),
+      canCancel:row.reviewer.authorityAvailable===true&&['REQUESTED','ASSIGNED','IN_REVIEW'].includes(row.state),
+      canSupersede:row.reviewer.authorityAvailable===true&&row.state==='READY_FOR_DECISION'&&row.findings.length>0,
+      canRereview:row.state==='CLOSED'&&!!row.effectiveDecisionId
+    })
   });
 }
 
@@ -42,5 +62,5 @@ export function composeReviewsSurface({domain,analyticalCompareOwner=null}={}){
   if(!domain||domain.owner!==REVIEW_DOMAIN_OWNER)throw Error('REVIEWS_DOMAIN_REQUIRED');
   const compareProvider=createReviewsCompareProvider(domain);
   if(analyticalCompareOwner){if(analyticalCompareOwner.ownerToken!=='AnalyticalCompare')throw Error('CENTRAL_ANALYTICAL_COMPARE_REQUIRED');if(!analyticalCompareOwner.providerIds().includes(compareProvider.descriptor().providerId))analyticalCompareOwner.registerProvider(compareProvider);}
-  return Object.freeze({contract:REVIEWS_SURFACE_CONTRACT,domain,collection:createReviewsCollectionAdapter(domain),center:selectedId=>reviewsCenterProjection(domain,selectedId),context:createReviewsContextProvider(domain),bottom:selectedId=>reviewsBottomProjection(domain,selectedId),compareProvider,slots:Object.freeze({LEFT:'w04.reviews.collection',CENTER:'FormalReviewDecisionWorkbench',RIGHT:'w04.reviews.context',BOTTOM:'reviewsBottomProjection',TRANSIENT:'SHARED_TRANSIENT_HOST_ONLY'}),commands:Object.freeze(['reviews.review','reviews.finding','reviews.compare','reviews.supersede']),compareOwner:analyticalCompareOwner?.owner||'INTEGRATION_REQUIRED'});
+  return Object.freeze({contract:REVIEWS_SURFACE_CONTRACT,domain,collection:createReviewsCollectionAdapter(domain),center:selectedId=>reviewsCenterProjection(domain,selectedId),context:createReviewsContextProvider(domain),bottom:selectedId=>reviewsBottomProjection(domain,selectedId),compareProvider,slots:Object.freeze({LEFT:'w04.reviews.collection',CENTER:'FormalReviewDecisionWorkbench',RIGHT:'w04.reviews.context',BOTTOM:'reviewsBottomProjection',TRANSIENT:'SHARED_TRANSIENT_HOST_ONLY'}),commands:Object.freeze(['reviews.review','reviews.request','reviews.assign','reviews.start','reviews.finding','reviews.ready','reviews.continue','reviews.cancel','reviews.compare','reviews.supersede','reviews.rereview']),compareOwner:analyticalCompareOwner?.owner||'INTEGRATION_REQUIRED'});
 }
