@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D09 W03 Studios & Results Historical Analysis Parity Harness</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0f19;
+      --panel: #111827;
+      --text: #f1f5f9;
+      --line: #1e293b;
+      --accent: #38bdf8;
+      --mono: Consolas, monospace;
+      --ui: system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--ui);
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+    }
+    .harness-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+    .harness-tag {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      padding: 12px 20px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--line);
+      font-size: 12px;
+    }
+    .proof-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+    .proof-card strong {
+      display: block;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    #resultsStudioMount {
+      padding: 20px;
+      min-height: 700px;
+    }
+  </style>
+</head>
+<body>
+  <header class="harness-banner">
+    <div>
+      <strong>CEP W03 Studios · Results Historical Analysis Verification Harness</strong>
+      <span style="opacity: 0.6; margin-left: 8px;">D09 Candidate Proof</span>
+    </div>
+    <div class="harness-tag">D09_W03_CONVERGENCE · CANDIDATE_ONLY</div>
+  </header>
+
+  <section class="proof-grid">
+    <div class="proof-card">
+      <strong>A01-PF-007 Adjudication</strong>
+      <span>TimelineReplayOwner = RETAIN_AND_REBIND</span>
+    </div>
+    <div class="proof-card">
+      <strong>Replay Execution Bound</strong>
+      <span>replayExecutesRuntime: false (Inert)</span>
+    </div>
+    <div class="proof-card">
+      <strong>Analytical Compare Authority</strong>
+      <span>AnalyticalCompareOwner shared binding</span>
+    </div>
+    <div class="proof-card">
+      <strong>Sealed Truth Ceiling</strong>
+      <span>sealedFactsMutable: false</span>
+    </div>
+  </section>
+
+  <main id="resultsStudioMount"></main>
+
+  <script type="module">
+    import {W03ResultsDomain} from '../dist/adapters/results/domain.js';
+    import {composeResultsSurface} from '../dist/surfaces/results/index.js';
+    import {renderResultsSurface} from '../dist/surfaces/results/presentation.js';
+    import {TimelineReplayOwner} from '../dist/foundation/timeline/replay.js';
+    import {AnalyticalCompareOwner} from '../dist/foundation/analytical/compare.js';
+
+    const sampleRecords = [
+      {
+        resultId: 'RES-INC-402',
+        revisionId: 'r1',
+        manifestDigest: 'sha256:d82f716c90e',
+        sealed: true,
+        label: 'Enterprise Breach Isolation Test · Run #402',
+        schemaVersion: 'results/v1.2',
+        comparatorVersion: 'results-compare/1.0.0',
+        comparable: {
+          quarantineStatus: {label: 'Quarantine Status', type: 'string', value: 'CONTAINED'},
+          lateralMovement: {label: 'Lateral Spread', type: 'string', value: 'BLOCKED'},
+          affectedHosts: {label: 'Compromised Hosts', type: 'number', value: 1}
+        },
+        recordedEvents: [
+          {seq: 1, id: 'ev-101', type: 'DETECTION', timestamp: '2026-09-25T03:00:00Z', presentationMeta: {sourceEvent: {threat: 'CredentialDump'}}},
+          {seq: 2, id: 'ev-102', type: 'ISOLATION_REQUEST', timestamp: '2026-09-25T03:00:01Z', presentationMeta: {sourceEvent: {device: 'HOST-CORP-09'}}},
+          {seq: 3, id: 'ev-103', type: 'POLICY_ENFORCED', timestamp: '2026-09-25T03:00:03Z', presentationMeta: {sourceEvent: {fwRule: 'DENY_ALL_OUTBOUND'}}}
+        ],
+        historicalTerminalBytes: '[ALERT] Endpoint agent tripped\n[OK] Host HOST-CORP-09 severed from corporate vLAN\n[INFO] Run sealed and preserved.'
+      },
+      {
+        resultId: 'RES-INC-401',
+        revisionId: 'r2',
+        manifestDigest: 'sha256:a14c330b62f',
+        sealed: true,
+        label: 'Baseline Breach Simulation · Prior Run #401',
+        schemaVersion: 'results/v1.2',
+        comparatorVersion: 'results-compare/1.0.0',
+        comparable: {
+          quarantineStatus: {label: 'Quarantine Status', type: 'string', value: 'PARTIAL'},
+          lateralMovement: {label: 'Lateral Spread', type: 'string', value: 'OBSERVED'},
+          affectedHosts: {label: 'Compromised Hosts', type: 'number', value: 3}
+        },
+        recordedEvents: [
+          {seq: 1, id: 'ev-001', type: 'DETECTION', timestamp: '2026-09-24T18:00:00Z', presentationMeta: {sourceEvent: {threat: 'CredentialDump'}}},
+          {seq: 2, id: 'ev-002', type: 'ESCALATION', timestamp: '2026-09-24T18:00:05Z', presentationMeta: {sourceEvent: {device: 'HOST-CORP-02'}}}
+        ],
+        historicalTerminalBytes: '[WARN] Lateral movement detected to host HOST-CORP-02\n[INFO] Sealed.'
+      }
+    ];
+
+    const replayOwner = new TimelineReplayOwner();
+    const compareOwner = new AnalyticalCompareOwner();
+    const domain = new W03ResultsDomain({
+      records: sampleRecords,
+      timelineReplayOwner: replayOwner,
+      analyticalCompareOwner: compareOwner
+    });
+
+    const composition = composeResultsSurface({
+      domain,
+      shared: {
+        spatialRelation: {owner: 'RelationInteractionOwner'},
+        timelineReplayOwner: replayOwner,
+        analyticalCompareOwner: compareOwner
+      }
+    });
+
+    const mount = document.getElementById('resultsStudioMount');
+    const controller = renderResultsSurface(mount, composition);
+
+    window.D09_STUDIOS_PROOF = {
+      timestamp: new Date().toISOString(),
+      adjudicationA01PF007: 'RETAIN_AND_REBIND',
+      replayOwner: domain.replayOwner.owner,
+      compareOwner: domain.compareOwner.owner,
+      resultsCount: domain.listResults().length,
+      sealedTruth: composition.truthCeiling.sealedFactsMutable === false,
+      replayInert: composition.truthCeiling.replayExecutesRuntime === false,
+      surfaceContract: composition.contract.id,
+      interactionModel: composition.contract.interactionModel,
+      activeMode: controller.state().mode
+    };
+  </script>
+</body>
+</html>

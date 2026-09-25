@@ -1,5 +1,5 @@
-import {spawnSync} from 'node:child_process';import {writeFile,readdir} from 'node:fs/promises';
-const root=new URL('../',import.meta.url),generator=new URL('tools/generate-writer-scaffold.mjs',root).pathname,authority=new URL('authority/FINAL_GATE_PARENT_AUTHORITY.json',root).pathname,tests=[];
+import {spawnSync} from 'node:child_process';import {writeFile,readdir} from 'node:fs/promises';import {fileURLToPath} from 'node:url';
+const root=new URL('../',import.meta.url),generator=fileURLToPath(new URL('tools/generate-writer-scaffold.mjs',root)),authority=fileURLToPath(new URL('authority/FINAL_GATE_PARENT_AUTHORITY.json',root)),tests=[];
 const check=(id,ok,detail)=>tests.push({id,status:ok?'PASS':'FAIL',detail});
 const profiles=(await readdir(new URL('profiles/',root))).filter(x=>x.endsWith('.json')).map(x=>x.slice(0,-5)).sort();
 const blockedExpected=[];

@@ -37,7 +37,7 @@ add('runtime.main-multi-delete-canonical',(runtime.match(/applyStructuredMutatio
 add('main.bind-before-runtime',main.indexOf('structured.bindSharedCommands(registry)')>=0&&main.indexOf('structured.bindSharedCommands(registry)')<main.indexOf('mountAcceptedRuntime'),'canonical command registrations exist before Library runtime mount');
 add('structured.execution-preflight',structured.includes('const availability=this.availability(command,context);if(!availability.enabled)return'),'execution rechecks the same Structured availability source');
 
-const negativeRuntime=runtime.replace("const receipt=extension.execute('document.commit',structuredCommandContext('main',{reason:'autosave',route:'library-autosave'}));","const receipt=extension.structuredAdapter?.commit({reason:'autosave'});")
+const negativeRuntime=runtime.replace("operation=extension.execute('document.commit',structuredCommandContext('main',{reason,route:'library-explicit-save'}))","operation=extension.structuredAdapter?.commit({reason})")
  .replace("project('block.moveUp'","{id:'up',group:'العنصر المحدد',label:'تحريك لأعلى',meta:'local',enabled:true},project('block.moveUp'");
 const negativeObserved={directSaveBypass:negativeRuntime.includes('structuredAdapter?.commit('),localAlias:negativeRuntime.includes("{id:'up',group:'العنصر المحدد'")};
 add('source-negative-fixture',negativeObserved.directSaveBypass&&negativeObserved.localAlias,negativeObserved);
