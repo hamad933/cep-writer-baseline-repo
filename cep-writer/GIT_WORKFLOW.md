@@ -10,3 +10,13 @@
 - `main` carries reusable Product/build/test/reference inputs; the mission branch carries the exact immutable task overlay.
 - Verified incremental continuation is preferred for correction loops when parent HEAD/tree/Product identity is exact; fresh lanes use the Controller-bound Capsule method when required.
 - Heavy generated evidence stays in Google Drive with hash/source-bound receipts; required Writer inputs remain local in GitHub.
+
+## Execution-carrier clarification
+
+Mission/DAG scope and execution-carrier topology are separate.
+
+- Default non-local Writer transport remains mission-bound candidate branches.
+- Under an exact `ROUTE-LOCAL` Owner/Controller binding, the persistent local branch may be `writer/cep-serial` and may carry an Owner-grouped sequence of checkpointed tasks.
+- Local serial/grouping rules do not automatically apply to ChatGPT/Google AI Studio Writers.
+- No Writer may push/merge directly to `main`, self-accept, release, deploy, or mutate live Controller governance.
+- Exact parent/HEAD/tree, clean status, task attribution and checkpoint identity remain mandatory regardless of carrier.
