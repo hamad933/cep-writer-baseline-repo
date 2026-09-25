@@ -1,4 +1,3 @@
-import {AnalyticalCompareOwner} from '../../foundation/analytical/compare.js';
 import {AuditProvenanceInteractionCore} from '../../foundation/audit/provenance.js';
 import {CollectionTableMatrixPresentationCore} from '../../foundation/collection/table-matrix.js';
 import {W04EvidenceDomain} from '../../adapters/evidence/domain.js';
@@ -52,9 +51,11 @@ export function createW04RescueComposition({
   reviewsDomain=null,
   masteryDomain=new W04MasteryDomain(),
   portfolioDomain=null,
-  analyticalCompareOwner=undefined
+  analyticalCompareOwner=undefined,
+  commands=null
 }={}){
-  const compareOwner=analyticalCompareOwner===undefined?new AnalyticalCompareOwner():analyticalCompareOwner;
+  const compareOwner=analyticalCompareOwner??null;
+  if(!compareOwner)return Object.freeze({authority:W04_RESCUE_AUTHORITY,candidateOnly:true,selfPromotion:false,integration:Object.freeze({state:'INTEGRATION_REQUIRED',code:'ANALYTICAL_COMPARE_INTEGRATION_REQUIRED',reason:'W04 requires the controller-injected AnalyticalCompareOwner.'}),shared:Object.freeze({analyticalCompareOwner:null,analyticalProviderIds:Object.freeze([])}),commands:null});
   if(!compareOwner||compareOwner.ownerToken!=='AnalyticalCompare')throw Error('CENTRAL_ANALYTICAL_COMPARE_REQUIRED');
   const boundReviews=reviewsDomain||new W04ReviewDomain(undefined,{evidenceResolver:ref=>evidenceDomain.resolveReviewableEvidenceRef(ref)});
   if(!boundReviews.evidenceResolver)boundReviews.evidenceResolver=ref=>evidenceDomain.resolveReviewableEvidenceRef(ref);
@@ -66,7 +67,7 @@ export function createW04RescueComposition({
     return null;
   }}});
   const evidence=composeEvidenceSurface({domain:evidenceDomain,analyticalCompareOwner:compareOwner});
-  const reviews=composeReviewsSurface({domain:boundReviews,analyticalCompareOwner:compareOwner});
+  const reviews=composeReviewsSurface({domain:boundReviews,analyticalCompareOwner:compareOwner,commands});
   const mastery=createMasterySurfaceComposition({domain:masteryDomain,analyticalCompareOwner:compareOwner});
   const portfolio=createPortfolioSurfaceComposition({domain:boundPortfolio,analyticalCompareOwner:compareOwner});
 
@@ -79,6 +80,7 @@ export function createW04RescueComposition({
 
   return Object.freeze({
     authority:W04_RESCUE_AUTHORITY,
+    integration:Object.freeze({state:'READY',code:'CENTRAL_OWNERS_BOUND'}),
     candidateOnly:true,
     selfPromotion:false,
     causalChain:W04_CAUSAL_CHAIN,

@@ -14,6 +14,10 @@ export const ENTERPRISE_SURFACE_CONTRACT=Object.freeze({
 
 export function composeEnterpriseSurface({relationAdapter,domain=new W03EnterpriseDomain({relationAdapter}),bus=new SemanticCommandBus()}={}){
   const register=(id,label,run)=>bus.registerCommand(id,domain.owner,label,run,payload=>domain.commandAvailability(id,payload));
+  register('enterprise.create','Create Enterprise working revision',payload=>domain.create(payload));
+  register('enterprise.baseline','Pin exact Enterprise Baseline',payload=>domain.pinBaseline(payload));
+  register('enterprise.validate','Validate Enterprise revision',()=>domain.validate());
+  register('enterprise.publish','Publish Enterprise revision',()=>domain.publish());
   register('enterprise.inspect','Inspect Enterprise selection',payload=>domain.inspect(payload));
   register('enterprise.edit','Edit typed Enterprise relation',payload=>domain.edit(payload));
   register('enterprise.revise','Create successor Enterprise revision',payload=>domain.revise(payload));

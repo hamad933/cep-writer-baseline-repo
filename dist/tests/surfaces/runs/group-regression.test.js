@@ -10,7 +10,7 @@ import {composeRunsSurface} from '../../../surfaces/runs/index.js';
 import {composeScenariosSurface} from '../../../surfaces/scenarios/index.js';
 const sharedSpatial={owner:'RelationInteractionOwner'},sharedStructured={owner:'StructuredSurfaceHost'};
 const replayOwner=new TimelineReplayOwner(),compareOwner=new AnalyticalCompareOwner();
-const enterprise=composeEnterpriseSurface({relationAdapter:createEnterpriseAdapter()});
+const enterprise=composeEnterpriseSurface({relationAdapter:createEnterpriseAdapter({fixture:true})});
 const labs=composeLabsSurface({shared:{structuredHost:sharedStructured,spatialRelation:sharedSpatial}});
 const results=composeResultsSurface({domain:new W03ResultsDomain({records:[],timelineReplayOwner:replayOwner,analyticalCompareOwner:compareOwner}),shared:{spatialRelation:sharedSpatial,timelineReplayOwner:replayOwner,analyticalCompareOwner:compareOwner}});
 const runs=composeRunsSurface({shared:{spatialRelation:sharedSpatial}});

@@ -36,10 +36,11 @@ export function normalizeHealthObservation(raw={}){
 }
 
 export class HealthRuntimeAdapter{
-  constructor({transport=createBoundedLocalRuntimeTransport()}={}){
+  constructor({transport=createBoundedLocalRuntimeTransport(),clock=()=>Date.now()}={}){
     this.owner='W05HealthDomainAdapter';
     this.transport=transport;
-    this.state={observations:[],selectedSourceId:null,refreshPhase:'IDLE',lastRefresh:null,lastDiagnostic:null,lastError:null};
+    this.clock=clock;
+    this.state={observations:[],selectedSourceId:null,currentProviderState:'UNAVAILABLE',refreshPhase:'IDLE',lastRefresh:null,lastDiagnostic:null,lastError:null};
     this.tableAdapter={
       adapterId:'health.observations',
       rows:()=>this.rows(),
@@ -61,13 +62,14 @@ export class HealthRuntimeAdapter{
   }
   descriptor(){return {owner:this.owner,semanticOwner:'W05HealthDomain',capabilityOwner:'HealthCapability',collectionOwner:'CollectionTableMatrixPresentationCore',contextOwner:'ContextInspectorHost',transport:this.transport.descriptor(),persistenceHealthAlias:false,observationStates:['AVAILABLE_DATA','AVAILABLE_EMPTY','UNAVAILABLE','ERROR','STALE']};}
   snapshot(){return clone(this.state);}
-  rows(){return this.state.observations.map(clone);}
-  selected(){return this.state.observations.find(row=>row.sourceId===this.state.selectedSourceId)||this.state.observations[0]||null;}
-  select(sourceId){if(sourceId!=null&&!this.state.observations.some(row=>row.sourceId===sourceId))throw Error('HEALTH_OBSERVATION_UNKNOWN');this.state.selectedSourceId=sourceId;return this.selected();}
+  rows(){const current=this.state.currentProviderState;return this.state.observations.map(row=>{const expired=row.freshUntil&&this.clock()>Date.parse(row.freshUntil);if(current==='AVAILABLE'&&!expired)return clone({...row,current:true,lastKnownState:row.state,lastKnownWorkerState:row.workerState});const state=current==='ERROR'?'ERROR':current==='UNAVAILABLE'?'UNAVAILABLE':'STALE';return clone({...row,state,workerState:row.kind==='WorkerLiveness'?'UNKNOWN':row.workerState,current:false,lastKnownState:row.state,lastKnownWorkerState:row.workerState,currentProviderState:current});});}
+  selected(){const rows=this.rows();return rows.find(row=>row.sourceId===this.state.selectedSourceId)||rows[0]||null;}
+  select(sourceId){if(sourceId!=null&&!this.rows().some(row=>row.sourceId===sourceId))throw Error('HEALTH_OBSERVATION_UNKNOWN');this.state.selectedSourceId=sourceId;return this.selected();}
   #ingest(result,{diagnostic=false}={}){
     if(!result?.ok)return result;
     const rows=(result.observations||[]).map(normalizeHealthObservation);
     this.state.observations=rows;
+    this.state.currentProviderState='AVAILABLE';
     if(!this.state.selectedSourceId||!rows.some(row=>row.sourceId===this.state.selectedSourceId))this.state.selectedSourceId=rows[0]?.sourceId||null;
     if(diagnostic)this.state.lastDiagnostic=clone(result);else this.state.lastRefresh=clone(result);
     this.state.lastError=null;
@@ -77,13 +79,13 @@ export class HealthRuntimeAdapter{
     this.state.refreshPhase='FETCHING';
     const r=await this.transport.request('POST','/v1/health/refresh',{});
     this.state.refreshPhase='IDLE';
-    if(!r.ok){this.state.lastError=clone(r);return r;}
+    if(!r.ok){this.state.lastError=clone(r);this.state.currentProviderState=/ERROR|FAILED/.test(String(r.code||r.reason||''))?'ERROR':'UNAVAILABLE';return r;}
     return this.#ingest(r,{diagnostic:false});
   }
   inspect({sourceId}={}){
     const id=sourceId??this.state.selectedSourceId??this.state.observations[0]?.sourceId;
     if(!id)return {ok:false,code:'HEALTH_OBSERVATION_REQUIRED'};
-    const row=this.state.observations.find(item=>item.sourceId===id);
+    const row=this.rows().find(item=>item.sourceId===id);
     if(!row)return {ok:false,code:'HEALTH_OBSERVATION_UNKNOWN'};
     this.state.selectedSourceId=id;
     this.collection.selectOnly(id);

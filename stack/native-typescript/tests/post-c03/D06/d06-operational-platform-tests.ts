@@ -14,7 +14,7 @@ const equal=(actual,expected,message='values differ')=>assert(actual===expected,
 const test=async(id,run)=>{try{rows.push({id,status:'PASS',detail:await run()})}catch(error){rows.push({id,status:'FAIL',error:String(error?.stack||error)})}};
 
 const fakeRuntime=(id='runtime-01')=>({
-  descriptor(){return {contract:RUNTIME_ADAPTER_CONTRACT,id:'FakeOperationalRuntime',label:'Fake Runtime',sessionOwner:'FakeOwner',rawTerminal:true,pty:true,conpty:true,runtimeTruth:'WINDOWS_CONPTY'};},
+  descriptor(){return {contract:RUNTIME_ADAPTER_CONTRACT,id:'FakeOperationalRuntime',label:'Fake Runtime',sessionOwner:'FakeOwner',capabilities:['runtime.reattach'],rawTerminal:true,pty:true,conpty:true,runtimeTruth:'WINDOWS_CONPTY'};},
   session(sessionId){return {id:sessionId,deviceId:'dev-1',runId:'run-1',epoch:'e1',lines:[],rawOutputBase64:'',presentation:{state:'running',detail:'',sequence:1,transitions:[]}};},
   prompt(){return 'fake>';}
 });
@@ -23,7 +23,7 @@ const fakeRuntime=(id='runtime-01')=>({
 await test('d06.operational.detach-preserves-provider-session-and-identities',()=>{
   let detachRequest=null;
   const bridge={
-    requestSeparateWindow:(req)=>{detachRequest=structuredClone(req);return {ok:true,active:true,code:'OPEN'};}
+    requestSeparateWindow:(req)=>{detachRequest=structuredClone(req);return {ok:true,active:true,contextHandoffValid:true,code:'OPEN'};}
   };
   const runtime=fakeRuntime(),owner=new OperationalSessionOwner({platformWindowBridge:bridge});
   const tab=owner.attachProviderSession(runtime,'sess-100',{classification:'REAL_RUNTIME_PROVIDER'});

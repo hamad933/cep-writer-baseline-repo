@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import {W04EvidenceDomain,createEvidenceCompareProvider} from '../../../adapters/evidence/domain.js';
+import {W04EvidenceDomain,createEvidenceCompareProvider,createW04EvidenceDemoRecords} from '../../../adapters/evidence/domain.js';
 import {W04ReviewDomain,ReviewAuthorityRegistry,createTestReviewAuthorityRegistry,createReviewsCompareProvider} from '../../../adapters/reviews/domain.js';
 import {W04MasteryDomain,createMasteryCompareProvider} from '../../../adapters/mastery/domain.js';
-import {W04PortfolioDomain,createPortfolioCompareProvider} from '../../../adapters/portfolio/domain.js';
+import {W04PortfolioDomain,createPortfolioCompareProvider,createW04PortfolioDemoRecords} from '../../../adapters/portfolio/domain.js';
 import {reviewsCenterProjection,composeReviewsSurface} from '../../../surfaces/reviews/index.js';
 import {createMasterySurfaceComposition} from '../../../surfaces/mastery/composition.js';
 import {createPortfolioSurfaceComposition} from '../../../surfaces/portfolio/composition.js';
@@ -125,7 +125,7 @@ console.log('[D10 TEST] Starting W04 Authority + Lifecycle verification...');
     { identity: 'reviewer:suspended', authorized: false, canAssign: false, permissionProofRef: 'perm:susp:1', testOnly: false }
   ]);
 
-  const evidenceDomain = new W04EvidenceDomain(undefined, { allowTestAuthority: true });
+  const evidenceDomain = new W04EvidenceDomain(createW04EvidenceDemoRecords(), { allowTestAuthority: true, admissionAuthorityRegistry:{resolveAdmissionAuthority:()=>({state:'AUTHORIZED',testOnly:true})} });
   // Admit evidence
   evidenceDomain.setAdmissionAuthority('ev-alpha', true, 'authority:evidence-admission:test');
   const evAdmit = evidenceDomain.admit('ev-alpha');
@@ -251,7 +251,7 @@ console.log('[D10 TEST] Starting W04 Authority + Lifecycle verification...');
 // 3. Portfolio Curation & Grouping Hard Ceiling (A15-PF-004)
 // =========================================================================
 {
-  const portfolio = new W04PortfolioDomain();
+  const portfolio = new W04PortfolioDomain(createW04PortfolioDemoRecords());
 
   // Test 1: Unresolvable source cannot become falsely verified membership (RESOLVABLE)
   const unverifiedAdd = portfolio.curate({

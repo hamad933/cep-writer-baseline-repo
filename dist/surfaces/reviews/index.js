@@ -58,9 +58,79 @@ export function reviewsCenterProjection(domain,selectedId){
 
 export function reviewsBottomProjection(domain,selectedId){const row=domain.inspect(selectedId);return Object.freeze({owner:REVIEW_DOMAIN_OWNER,readOnly:true,selectedId:row.id,sections:Object.freeze([{id:'evidence-basis',label:'Pinned Evidence basis',value:Object.freeze([...row.evidenceRefs])},{id:'criteria-basis',label:'Pinned criteria',value:Object.freeze([...row.criteriaRefs])},{id:'prior-decisions',label:'Immutable Decision lineage',value:Object.freeze(row.decisionHistory.map(item=>Object.freeze({decisionId:item.decisionId,outcome:item.outcome,supersedesDecisionRef:item.supersedesDecisionRef,issuedAt:item.issuedAt,correctionReason:item.correctionReason})))},{id:'compare-working-state',label:'Analytical compare working state',value:domain.compareWorkingState.get(row.id)||null}])});}
 
-export function composeReviewsSurface({domain,analyticalCompareOwner=null}={}){
+export function composeReviewsSurface({domain,analyticalCompareOwner=null,commands=null}={}){
   if(!domain||domain.owner!==REVIEW_DOMAIN_OWNER)throw Error('REVIEWS_DOMAIN_REQUIRED');
   const compareProvider=createReviewsCompareProvider(domain);
   if(analyticalCompareOwner){if(analyticalCompareOwner.ownerToken!=='AnalyticalCompare')throw Error('CENTRAL_ANALYTICAL_COMPARE_REQUIRED');if(!analyticalCompareOwner.providerIds().includes(compareProvider.descriptor().providerId))analyticalCompareOwner.registerProvider(compareProvider);}
-  return Object.freeze({contract:REVIEWS_SURFACE_CONTRACT,domain,collection:createReviewsCollectionAdapter(domain),center:selectedId=>reviewsCenterProjection(domain,selectedId),context:createReviewsContextProvider(domain),bottom:selectedId=>reviewsBottomProjection(domain,selectedId),compareProvider,slots:Object.freeze({LEFT:'w04.reviews.collection',CENTER:'FormalReviewDecisionWorkbench',RIGHT:'w04.reviews.context',BOTTOM:'reviewsBottomProjection',TRANSIENT:'SHARED_TRANSIENT_HOST_ONLY'}),commands:Object.freeze(['reviews.review','reviews.request','reviews.assign','reviews.start','reviews.finding','reviews.ready','reviews.continue','reviews.cancel','reviews.compare','reviews.supersede','reviews.rereview']),compareOwner:analyticalCompareOwner?.owner||'INTEGRATION_REQUIRED'});
+  if(commands){
+    const getRecord=p=>p?.id?domain.records.find(x=>x.id===p.id):null;
+    const register=(id,label,run,available=()=>true)=>{if(!(commands.commands instanceof Map&&commands.commands.has(id)))commands.registerCommand(id,domain.owner,label,run,available);};
+    register('reviews.request','Request formal Review',p=>domain.review(p.id,{...p,action:'request'}),p=>{
+      if(!domain.reviewAuthorityRegistry&&!domain.allowTestAuthority)return {enabled:false,code:'REVIEWER_AUTHORITY_UNAVAILABLE',reason:'Reviewer authority registry is not bound; caller-supplied fields are not authoritative.',availabilityOwner:domain.owner};
+      if(p?.id&&domain.records.some(x=>x.id===p.id))return {enabled:false,code:'REVIEW_ID_CONFLICT',reason:'Review record already exists.',availabilityOwner:domain.owner};
+      if(p?.reviewer?.identity){
+        const auth=domain.resolveReviewerAuthority(p.reviewer.identity);
+        if(!auth||!auth.authorized)return {enabled:false,code:'REVIEWER_AUTHORITY_UNAVAILABLE',reason:auth?.reason||'Reviewer not in authority registry',availabilityOwner:domain.owner};
+        if(auth.testOnly&&!domain.allowTestAuthority)return {enabled:false,code:'TEST_AUTHORITY_NOT_ALLOWED_IN_PRODUCT',reason:'Test authority not allowed in product',availabilityOwner:domain.owner};
+      }
+      return true;
+    });
+    register('reviews.assign','Assign formal Review',p=>domain.review(p.id,{...p,action:'assign'}),p=>{
+      const r=getRecord(p);if(!r)return {enabled:false,code:'REVIEW_RECORD_REQUIRED',reason:'Review record required.',availabilityOwner:domain.owner};
+      if(r.state!=='REQUESTED')return {enabled:false,code:'REVIEW_STATE_ACTION_INVALID',reason:'Review must be in REQUESTED state to assign.',availabilityOwner:domain.owner};
+      const failure=domain.authorityFailure(r,{assignment:true});if(failure)return {enabled:false,code:failure.code,reason:failure.reason||failure.code,availabilityOwner:domain.owner};
+      return true;
+    });
+    register('reviews.start','Start formal Review',p=>domain.review(p.id,{...p,action:'start'}),p=>{
+      const r=getRecord(p);if(!r)return {enabled:false,code:'REVIEW_RECORD_REQUIRED',reason:'Review record required.',availabilityOwner:domain.owner};
+      if(r.state!=='ASSIGNED')return {enabled:false,code:'REVIEW_STATE_ACTION_INVALID',reason:'Review must be in ASSIGNED state to start.',availabilityOwner:domain.owner};
+      const failure=domain.authorityFailure(r,{assignment:true});if(failure)return {enabled:false,code:failure.code,reason:failure.reason||failure.code,availabilityOwner:domain.owner};
+      return true;
+    });
+    register('reviews.finding','Add Review finding',p=>domain.finding(p.id,p),p=>{
+      const r=getRecord(p);if(!r)return {enabled:false,code:'REVIEW_RECORD_REQUIRED',reason:'Review record required.',availabilityOwner:domain.owner};
+      if(r.state!=='IN_REVIEW')return {enabled:false,code:'REVIEW_NOT_FINDING_EDITABLE',reason:'Review must be in IN_REVIEW state to add findings.',availabilityOwner:domain.owner};
+      const failure=domain.authorityFailure(r);if(failure)return {enabled:false,code:failure.code,reason:failure.reason||failure.code,availabilityOwner:domain.owner};
+      return true;
+    });
+    register('reviews.ready','Mark Review ready for Decision',p=>domain.review(p.id,{...p,action:'ready'}),p=>{
+      const r=getRecord(p);if(!r)return {enabled:false,code:'REVIEW_RECORD_REQUIRED',reason:'Review record required.',availabilityOwner:domain.owner};
+      if(r.state!=='IN_REVIEW')return {enabled:false,code:'REVIEW_STATE_ACTION_INVALID',reason:'Review must be in IN_REVIEW state to mark ready.',availabilityOwner:domain.owner};
+      if(!r.findings.length)return {enabled:false,code:'REVIEW_FINDINGS_REQUIRED',reason:'Review findings required before marking ready.',availabilityOwner:domain.owner};
+      const failure=domain.authorityFailure(r);if(failure)return {enabled:false,code:failure.code,reason:failure.reason||failure.code,availabilityOwner:domain.owner};
+      return true;
+    });
+    register('reviews.continue','Continue formal Review',p=>domain.review(p.id,{...p,action:'continue'}),p=>{
+      const r=getRecord(p);if(!r)return {enabled:false,code:'REVIEW_RECORD_REQUIRED',reason:'Review record required.',availabilityOwner:domain.owner};
+      if(!['IN_REVIEW','READY_FOR_DECISION'].includes(r.state))return {enabled:false,code:'REVIEW_STATE_ACTION_INVALID',reason:'Review must be IN_REVIEW or READY_FOR_DECISION to continue.',availabilityOwner:domain.owner};
+      return true;
+    });
+    register('reviews.cancel','Cancel formal Review',p=>domain.review(p.id,{...p,action:'cancel'}),p=>{
+      const r=getRecord(p);if(!r)return {enabled:false,code:'REVIEW_RECORD_REQUIRED',reason:'Review record required.',availabilityOwner:domain.owner};
+      if(!['REQUESTED','ASSIGNED','IN_REVIEW'].includes(r.state))return {enabled:false,code:'REVIEW_STATE_ACTION_INVALID',reason:'Review can only be cancelled from REQUESTED, ASSIGNED, or IN_REVIEW.',availabilityOwner:domain.owner};
+      const failure=domain.authorityFailure(r);if(failure)return {enabled:false,code:failure.code,reason:failure.reason||failure.code,availabilityOwner:domain.owner};
+      return true;
+    });
+    register('reviews.supersede','Issue superseding Decision',p=>domain.supersede(p.id,p),p=>{
+      const r=getRecord(p);if(!r)return {enabled:false,code:'REVIEW_RECORD_REQUIRED',reason:'Review record required.',availabilityOwner:domain.owner};
+      if(r.state!=='READY_FOR_DECISION')return {enabled:false,code:'REVIEW_NOT_READY_FOR_DECISION',reason:'Review must be in READY_FOR_DECISION state to issue decision.',availabilityOwner:domain.owner};
+      if(!r.findings.length)return {enabled:false,code:'REVIEW_FINDINGS_REQUIRED',reason:'Review findings required before issuing decision.',availabilityOwner:domain.owner};
+      const failure=domain.authorityFailure(r);if(failure)return {enabled:false,code:failure.code,reason:failure.reason||failure.code,availabilityOwner:domain.owner};
+      const current=r.effectiveDecisionId||r.priorDecisionRef||null;
+      if(p?.expectedDecisionId!==undefined&&p.expectedDecisionId!==current)return {enabled:false,code:'STALE_EXPECTED_DECISION',reason:'Expected decision CAS mismatch.',availabilityOwner:domain.owner};
+      return true;
+    });
+    register('reviews.rereview','Request re-review',p=>domain.review(p.id,{...p,action:'rereview'}),p=>{
+      const r=getRecord(p);if(!r)return {enabled:false,code:'REVIEW_RECORD_REQUIRED',reason:'Review record required.',availabilityOwner:domain.owner};
+      if(r.state!=='CLOSED'||!r.effectiveDecisionId)return {enabled:false,code:'CLOSED_DECIDED_REVIEW_REQUIRED_FOR_REREVIEW',reason:'Re-review requires a CLOSED review with an effective Decision.',availabilityOwner:domain.owner};
+      return true;
+    });
+    register('reviews.compare','Compare exact Review revisions',p=>domain.compare(p.id,{...p,compareOwner:analyticalCompareOwner,provider:compareProvider}),p=>{
+      const r=getRecord(p);if(!r)return {enabled:false,code:'REVIEW_RECORD_REQUIRED',reason:'Review record required.',availabilityOwner:domain.owner};
+      if(!analyticalCompareOwner)return {enabled:false,code:'CENTRAL_ANALYTICAL_COMPARE_REQUIRED',reason:'Central analytical compare owner required.',availabilityOwner:domain.owner};
+      if(!['IN_REVIEW','READY_FOR_DECISION','CLOSED'].includes(r.state))return {enabled:false,code:'REVIEW_STATE_ACTION_INVALID',reason:'Review comparison requires IN_REVIEW, READY_FOR_DECISION, or CLOSED state.',availabilityOwner:domain.owner};
+      return true;
+    });
+  }
+  return Object.freeze({contract:REVIEWS_SURFACE_CONTRACT,domain,collection:createReviewsCollectionAdapter(domain),center:selectedId=>reviewsCenterProjection(domain,selectedId),context:createReviewsContextProvider(domain),bottom:selectedId=>reviewsBottomProjection(domain,selectedId),compareProvider,slots:Object.freeze({LEFT:'w04.reviews.collection',CENTER:'FormalReviewDecisionWorkbench',RIGHT:'w04.reviews.context',BOTTOM:'reviewsBottomProjection',TRANSIENT:'SHARED_TRANSIENT_HOST_ONLY'}),commandIds:Object.freeze(['reviews.request','reviews.assign','reviews.start','reviews.finding','reviews.ready','reviews.continue','reviews.cancel','reviews.compare','reviews.supersede','reviews.rereview']),commands,compareOwner:analyticalCompareOwner?.owner||'INTEGRATION_REQUIRED'});
 }

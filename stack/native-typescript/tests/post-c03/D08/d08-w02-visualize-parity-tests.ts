@@ -33,11 +33,10 @@ await test('d08.library.non-production-source-rejected',()=>{
 
 // 2. A03-PF-014: Learn Source Truth
 await test('d08.learn.non-production-source-rejected',()=>{
-  let thrownSeed=false,thrownNotCanonical=false;
-  try{createLearnRuntimeComposition({source:{classification:'PRODUCT_RUNTIME_BOUND_SOURCE',truth:'ACCEPTANCE_SEED',activity:{id:'a1'},document:{id:'d1',blocks:[]}}});}catch(e){thrownSeed=true;}
-  try{createLearnRuntimeComposition({source:{classification:'PRODUCT_RUNTIME_BOUND_SOURCE',truth:'NOT_CANONICAL_RUNTIME_IMPORT',activity:{id:'a1'},document:{id:'d1',blocks:[]}}});}catch(e){thrownNotCanonical=true;}
-  assert(thrownSeed&&thrownNotCanonical,'failed to reject non-production Learn sources');
-  return {rejectedSeed:true,rejectedNotCanonical:true};
+  const seed=createLearnRuntimeComposition({source:{classification:'PRODUCT_RUNTIME_BOUND_SOURCE',truth:'ACCEPTANCE_SEED',activity:{id:'a1'},document:{id:'d1',blocks:[]}}});
+  const nonCanonical=createLearnRuntimeComposition({source:{classification:'PRODUCT_RUNTIME_BOUND_SOURCE',truth:'NOT_CANONICAL_RUNTIME_IMPORT',activity:{id:'a1'},document:{id:'d1',blocks:[]}}});
+  assert(!seed.learn.sourceAvailability().enabled&&!nonCanonical.learn.sourceAvailability().enabled,'failed to reject non-production Learn sources');
+  return {rejectedSeed:true,rejectedNotCanonical:true,appCrash:false};
 });
 
 // 3. A12-PF-001 / A12-PF-002: Learn Journey Navigation Semantics

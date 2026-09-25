@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {createEnterpriseAdapter} from '../../../adapters/w03-enterprise.js';
 import {composeEnterpriseSurface} from '../../../surfaces/enterprise/index.js';
-const surface=composeEnterpriseSurface({relationAdapter:createEnterpriseAdapter()});
+const surface=composeEnterpriseSurface({relationAdapter:createEnterpriseAdapter({fixture:true})});
 assert.equal(surface.contract.id,'enterprise');assert.equal(surface.domain.inspect().persistence.status,'UNAVAILABLE');
 assert.equal(surface.bus.execute('enterprise.inspect').owner,'W03EnterpriseDomain');
 const revision=surface.bus.execute('enterprise.revise',{expectedVersion:1});assert.equal(revision.snapshot.dirty,true);

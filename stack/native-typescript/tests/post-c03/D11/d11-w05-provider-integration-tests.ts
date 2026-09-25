@@ -698,6 +698,7 @@ const testCandidate = (id: string, patch: any = {}): ReleaseCandidate => ({
 
   const relAdapter = new ReleasesDomainAdapter({
     candidates: [testCandidate('A'), testCandidate('B')],
+    analyticalCompareOwner: new AnalyticalCompareOwner(),
     requester: {
       request: () => ({requestId: 'auth-req-1', state: 'REQUESTED'})
     }
@@ -843,8 +844,10 @@ const testCandidate = (id: string, patch: any = {}): ReleaseCandidate => ({
 // 4.4 W05 Rescue Composition End-to-End Integration
 {
   const centralCompare = new AnalyticalCompareOwner();
+  const centralCommands = new SemanticCommandBus();
   const rescueComp = createW05RescueComposition({
-    analyticalCompareOwner: centralCompare
+    analyticalCompareOwner: centralCompare,
+    commands: centralCommands
   });
 
   assert.equal(rescueComp.owner, 'CG6W05RescueComposition');

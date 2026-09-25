@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
-import {W04EvidenceDomain} from '../../../adapters/evidence/domain.js';
-import {W04ReviewDomain} from '../../../adapters/reviews/domain.js';
+import {W04EvidenceDomain,createW04EvidenceDemoRecords} from '../../../adapters/evidence/domain.js';
+import {W04ReviewDomain,createW04ReviewDemoRecords} from '../../../adapters/reviews/domain.js';
 import {AnalyticalCompareOwner} from '../../../foundation/analytical/compare.js';
 import {CONTEXT_DESCRIPTOR_CONTRACT,describeContextProvider} from '../../../foundation/global/context-descriptor-contract.js';
 import {composeEvidenceSurface,EVIDENCE_SURFACE_CONTRACT,evidenceBottomProjection} from '../../../surfaces/evidence/index.js';
 import {composeReviewsSurface,REVIEWS_SURFACE_CONTRACT,reviewsBottomProjection} from '../../../surfaces/reviews/index.js';
 
-const analytical=new AnalyticalCompareOwner(),evidenceDomain=new W04EvidenceDomain(),reviewsDomain=new W04ReviewDomain();const evidence=composeEvidenceSurface({domain:evidenceDomain,analyticalCompareOwner:analytical}),reviews=composeReviewsSurface({domain:reviewsDomain,analyticalCompareOwner:analytical});
+const analytical=new AnalyticalCompareOwner(),evidenceDomain=new W04EvidenceDomain(createW04EvidenceDemoRecords()),reviewsDomain=new W04ReviewDomain(createW04ReviewDemoRecords());const evidence=composeEvidenceSurface({domain:evidenceDomain,analyticalCompareOwner:analytical}),reviews=composeReviewsSurface({domain:reviewsDomain,analyticalCompareOwner:analytical});
 for(const composition of [evidence,reviews]){assert.equal(composition.contract.localSharedOwnerCreation,false);assert.deepEqual(Object.keys(composition.slots).sort(),['BOTTOM','CENTER','LEFT','RIGHT','TRANSIENT'].sort());assert.equal(composition.compareOwner,'AnalyticalCompareOwner');assert.equal(composition.context.contract,CONTEXT_DESCRIPTOR_CONTRACT);assert.equal(composition.collection.adapterId.startsWith('w04.'),true);}
 assert.equal(analytical.providerIds().includes('w04.evidence.analysis'),true);assert.equal(analytical.providerIds().includes('w04.reviews.analysis'),true);const ec=describeContextProvider(evidence.context,{selectedId:'ev-beta'});assert.equal(ec.ok,true);assert.equal(ec.descriptor.lenses[0].tabs.some(tab=>tab.id==='state'),true);const rc=describeContextProvider(reviews.context,{selectedId:'review-1'});assert.equal(rc.ok,true);assert.equal(rc.descriptor.lenses[0].tabs.some(tab=>tab.id==='lineage'),true);assert.equal(evidenceBottomProjection(evidenceDomain,'ev-beta').readOnly,true);assert.equal(reviewsBottomProjection(reviewsDomain,'review-1').sections.find(s=>s.id==='prior-decisions').value.length>=1,true);assert.equal(EVIDENCE_SURFACE_CONTRACT.center,'GovernedEvidenceWorkbench');assert.equal(REVIEWS_SURFACE_CONTRACT.center,'FormalReviewDecisionWorkbench');
 console.log(JSON.stringify({pass:true,lane:'S14_W04_EVIDENCE_REVIEWS',typedRegions:true,sharedCompareProviders:analytical.providerIds(),evidenceCenter:EVIDENCE_SURFACE_CONTRACT.center,reviewsCenter:REVIEWS_SURFACE_CONTRACT.center}));

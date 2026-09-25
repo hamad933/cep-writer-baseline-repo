@@ -6,6 +6,14 @@ export function composeLabsSurface({domain=new W03LabDomain(),bus=new SemanticCo
   const r=(id,label,run,available=()=>true)=>bus.registerCommand(id,domain.owner,label,run,available);
   r('labs.author','Author Lab',p=>domain.author(p),()=>domain.snapshot().lifecycle==='PUBLISHED'?{enabled:false,code:'PUBLISHED_REVISION_IMMUTABLE',reason:'Published Lab revisions require labs.revise before mutation.',availabilityOwner:domain.owner}:true);
   r('labs.preflight','Preflight Lab',p=>domain.preflight(p));
+  r('labs.publish','Publish validated Lab revision',p=>domain.publish(p),p=>{
+    if(domain.snapshot().lifecycle==='PUBLISHED')return true;
+    const validation=domain.validate();
+    if(!validation.ok)return {enabled:false,code:'LAB_VALIDATION_REQUIRED_BEFORE_PUBLISH',reason:'Lab validation must pass before publish.',errors:validation.errors,availabilityOwner:domain.owner};
+    const capabilityPreflight=domain.capabilityPreflight(p||{});
+    if(capabilityPreflight.status!=='READY')return {enabled:false,code:'LAB_PROVIDER_PREFLIGHT_REQUIRED_BEFORE_PUBLISH',reason:'Required tools and environment capabilities must be ready before publish.',checks:capabilityPreflight.checks,availabilityOwner:domain.owner};
+    return true;
+  });
   r('labs.handoff','Prepare Lab handoff',p=>domain.handoff(p),p=>{if(domain.snapshot().lifecycle!=='PUBLISHED')return {enabled:false,code:'LAB_REVISION_NOT_PUBLISHED',reason:'Run/Lab-module handoff requires an exact published Lab revision.',availabilityOwner:domain.owner};return domain.preflight(p).status==='READY'?true:{enabled:false,code:'LAB_PREFLIGHT_BLOCKED',reason:'Lab preflight must be READY before handoff.',availabilityOwner:domain.owner}});
   r('labs.revise','Revise Lab',p=>domain.revise(p));
   return Object.freeze({contract:LABS_SURFACE_CONTRACT,domain,bus,shared,slots:Object.freeze({TOP:'Lab revision identity + lifecycle',LEFT:'Lab definition structure',CENTER:'non-linear Task Graph through shared Spatial owner',RIGHT:'selected task/branch authoring context',BOTTOM:'preflight + environment/tool binding detail',TOOLBAR:'author/connect/branch/preflight/handoff/revise',TRANSIENT:'shared transient owner'}),ownerBindings:Object.freeze(['WorkspaceFoundation','StructuredSurfaceHost','StructuredNavigationDescriptorOwner','SpatialInteractionKernel','RelationInteractionOwner','SemanticCommandBus','ContextInspectorHost']),truth:Object.freeze({definitionNotRunInstance:true,resetNeverOverwritesDefinition:true,simulationExplicit:true,scenarioReferenceDoesNotTransferOwnership:true}),platformTruth:Object.freeze({activeKeyboardSource:'UNAVAILABLE_FALLBACK',nativeWindow:'UNAVAILABLE',osAlwaysOnTop:'UNAVAILABLE'})});

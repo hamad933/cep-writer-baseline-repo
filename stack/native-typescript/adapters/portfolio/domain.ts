@@ -28,7 +28,7 @@ export const createW04PortfolioDemoRecords=()=>freeze(demoInitial());
 export class W04PortfolioDomain{
  constructor(records=undefined,{groupingAuthority=null,sourceResolver=null}={}){
   this.owner=PORTFOLIO_DOMAIN_OWNER;
-  const initialRecords=records===undefined?demoInitial():records;
+  const initialRecords=records===undefined?[]:records;
   this.records=clone(initialRecords).map(record=>({...record,groupingRef:record.groupingRef??null,groupingState:record.groupingRef?'REGISTRY_BOUND':(record.groupingState||'AUTHORITY_PENDING')}));
   this.groupingAuthority=groupingAuthority;
   this.groupingAuthorityDescriptor=groupingDescriptor(groupingAuthority);

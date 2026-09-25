@@ -3,7 +3,7 @@ import {createEnterpriseAdapter} from '../../../adapters/w03-enterprise.js';
 import {W03EnterpriseDomain} from '../../../adapters/enterprise/domain.js';
 import {composeEnterpriseSurface} from '../../../surfaces/enterprise/index.js';
 
-const adapter=createEnterpriseAdapter();
+const adapter=createEnterpriseAdapter({fixture:true});
 assert.equal(adapter.canonicalProductTruth,false);
 assert.equal(adapter.sourceClassification,'FIXTURE_ONLY__NOT_PRODUCT_TRUTH');
 const surface=composeEnterpriseSurface({relationAdapter:adapter});
@@ -34,7 +34,7 @@ adapter.nodes[0].x+=25;adapter.nodes[0].y+=15;
 assert.equal(JSON.stringify(adapter.project()),canonicalBefore);
 
 // Published revision remains interactive for inspect but domain mutation is unavailable.
-const publishedAdapter=createEnterpriseAdapter();
+const publishedAdapter=createEnterpriseAdapter({fixture:true});
 const publishedDomain=new W03EnterpriseDomain({relationAdapter:publishedAdapter,authoring:'PUBLISHED',revisionId:'ENT-REV-900-PUBLISHED',baseline:{status:'AVAILABLE',id:'BL-900',revision:'900',digest:'digest-900'}});
 const published=composeEnterpriseSurface({relationAdapter:publishedAdapter,domain:publishedDomain});
 assert.equal(published.bus.availability('enterprise.edit').enabled,false);
@@ -58,7 +58,7 @@ assert.equal(rebound.ok,true);assert.equal(rebound.snapshot.twinBinding,'BOUND')
 assert.deepEqual(rebound.snapshot.objects.filter(o=>o.classification==='SIMULATION_LOCAL').map(o=>o.id).sort(),simBefore);
 
 // Handoff is preflight-only: no run start and no live device mutation.
-const handoffDomain=new W03EnterpriseDomain({relationAdapter:createEnterpriseAdapter(),authoring:'PUBLISHED',revisionId:'ENT-REV-901-PUBLISHED',baseline:{status:'AVAILABLE',id:'BL-901',revision:'901',digest:'digest-901'}});
+const handoffDomain=new W03EnterpriseDomain({relationAdapter:createEnterpriseAdapter({fixture:true}),authoring:'PUBLISHED',revisionId:'ENT-REV-901-PUBLISHED',baseline:{status:'AVAILABLE',id:'BL-901',revision:'901',digest:'digest-901'}});
 const handoffSurface=composeEnterpriseSurface({relationAdapter:handoffDomain.relations,domain:handoffDomain});
 const nodeTruth=JSON.stringify(handoffDomain.relations.nodes),handoff=handoffSurface.bus.execute('enterprise.handoff');
 assert.equal(handoff.ok,true);assert.equal(handoff.runStarted,false);assert.equal(handoff.liveDeviceChanges,0);assert.equal(handoff.preflightOnly,true);assert.equal(JSON.stringify(handoffDomain.relations.nodes),nodeTruth);

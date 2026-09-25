@@ -1,6 +1,3 @@
-import {TimelineReplayOwner} from '../../foundation/timeline/replay.js';
-import {AnalyticalCompareOwner} from '../../foundation/analytical/compare.js';
-import {OperationalSessionOwner} from '../../foundation/operational/session-owner.js';
 import {W03RunDomain} from '../../adapters/runs/domain.js';
 import {W03ResultsDomain} from '../../adapters/results/domain.js';
 import {composeEnterpriseSurface} from '../enterprise/index.js';
@@ -30,9 +27,10 @@ function requireShared(shared){
   if(!shared||typeof shared!=='object')throw Error('W03_SHARED_BINDINGS_REQUIRED');
   if(!shared.structuredHost)throw Error('W03_STRUCTURED_HOST_BINDING_REQUIRED');
   if(!shared.spatialRelation)throw Error('W03_SPATIAL_RELATION_BINDING_REQUIRED');
-  const replay=shared.timelineReplayOwner||new TimelineReplayOwner();
-  const compare=shared.analyticalCompareOwner||new AnalyticalCompareOwner();
-  const operational=shared.operationalSessionOwner||new OperationalSessionOwner();
+  const replay=shared.timelineReplayOwner;
+  const compare=shared.analyticalCompareOwner;
+  const operational=shared.operationalSessionOwner;
+  if(!replay||!compare||!operational)throw Error('W03_CONTROLLER_SHARED_OWNER_BINDINGS_REQUIRED');
   if(replay?.owner!=='TimelineReplayOwner')throw Error('W03_TIMELINE_REPLAY_OWNER_REQUIRED');
   if(compare?.owner!=='AnalyticalCompareOwner')throw Error('W03_ANALYTICAL_COMPARE_OWNER_REQUIRED');
   if(operational?.owner!=='OperationalSessionOwner')throw Error('W03_OPERATIONAL_SESSION_OWNER_REQUIRED');

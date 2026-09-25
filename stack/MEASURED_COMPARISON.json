@@ -1,6 +1,6 @@
 {
   "runtime": "v22.16.0",
-  "measured_at": "2026-09-24T22:30:37.663Z",
+  "measured_at": "2026-09-25T18:12:50.403Z",
   "scope": "Canonical stack/native-typescript source independently generates dist and dist-ts JavaScript; no generated tree writes back to canonical source.",
   "buildDirection": "stack/native-typescript -> dist + dist-ts",
   "reverseGeneratedToSourceWrites": false,
@@ -15,7 +15,7 @@
       "authority": "CANONICAL_SOURCE_TO_GENERATED_ONLY",
       "source": "stack/native-typescript",
       "destination": "dist",
-      "written": 262,
+      "written": 271,
       "copiedAssets": 2,
       "removedStale": 0
     }
@@ -29,20 +29,20 @@
     "static_types": "Canonical TypeScript source; proof measures erasable-syntax generation parity only.",
     "model_pass": 210,
     "model_fail": 0,
-    "emit_ms": 202.82640000000129,
+    "emit_ms": 212.66730000000075,
     "build": {
       "pass": true,
       "authority": "CANONICAL_SOURCE_TO_GENERATED_ONLY",
       "source": "stack/native-typescript",
       "destination": "dist-ts",
-      "written": 262,
+      "written": 271,
       "copiedAssets": 2,
       "removedStale": 0
     }
   },
   "identical_model_results": true,
-  "A_model_suite_median_ms": 62.76999999999998,
-  "A_model_suite_p95_ms": 82.78390000000013,
+  "A_model_suite_median_ms": 66.91820000000007,
+  "A_model_suite_p95_ms": 88.86519999999973,
   "performance_limit": "One host, warm model workload only; not cold browser startup or representative full product workload.",
   "inventory": [
     {
@@ -59,15 +59,15 @@
     },
     {
       "file": "adapters/audit.js",
-      "source_ts_bytes": 13517,
+      "source_ts_bytes": 13954,
       "source_ts_lines": 74,
-      "emitted_bytes": 13517
+      "emitted_bytes": 13954
     },
     {
       "file": "adapters/backup-runtime.js",
-      "source_ts_bytes": 13923,
-      "source_ts_lines": 57,
-      "emitted_bytes": 13923
+      "source_ts_bytes": 15887,
+      "source_ts_lines": 81,
+      "emitted_bytes": 15887
     },
     {
       "file": "adapters/balanced6-acceptance-data.js",
@@ -101,33 +101,33 @@
     },
     {
       "file": "adapters/enterprise/domain.js",
-      "source_ts_bytes": 13345,
-      "source_ts_lines": 185,
-      "emitted_bytes": 13345
+      "source_ts_bytes": 16690,
+      "source_ts_lines": 224,
+      "emitted_bytes": 16690
     },
     {
       "file": "adapters/evidence/domain.js",
-      "source_ts_bytes": 32035,
-      "source_ts_lines": 76,
-      "emitted_bytes": 32035
+      "source_ts_bytes": 39006,
+      "source_ts_lines": 184,
+      "emitted_bytes": 39006
     },
     {
       "file": "adapters/health-runtime.js",
-      "source_ts_bytes": 13584,
-      "source_ts_lines": 138,
-      "emitted_bytes": 13584
+      "source_ts_bytes": 14302,
+      "source_ts_lines": 140,
+      "emitted_bytes": 14302
     },
     {
       "file": "adapters/labs/domain.js",
-      "source_ts_bytes": 11743,
-      "source_ts_lines": 44,
-      "emitted_bytes": 11743
+      "source_ts_bytes": 12585,
+      "source_ts_lines": 47,
+      "emitted_bytes": 12585
     },
     {
       "file": "adapters/learn.js",
-      "source_ts_bytes": 10585,
-      "source_ts_lines": 62,
-      "emitted_bytes": 10585
+      "source_ts_bytes": 15131,
+      "source_ts_lines": 75,
+      "emitted_bytes": 15131
     },
     {
       "file": "adapters/library-chrome.js",
@@ -143,9 +143,9 @@
     },
     {
       "file": "adapters/library-note-runtime-composition.js",
-      "source_ts_bytes": 8787,
-      "source_ts_lines": 131,
-      "emitted_bytes": 8787
+      "source_ts_bytes": 12277,
+      "source_ts_lines": 147,
+      "emitted_bytes": 12277
     },
     {
       "file": "adapters/library-outline-descriptor.js",
@@ -161,9 +161,9 @@
     },
     {
       "file": "adapters/mastery/domain.js",
-      "source_ts_bytes": 10813,
-      "source_ts_lines": 105,
-      "emitted_bytes": 10813
+      "source_ts_bytes": 10882,
+      "source_ts_lines": 106,
+      "emitted_bytes": 10882
     },
     {
       "file": "adapters/note-binding-domains.js",
@@ -185,27 +185,27 @@
     },
     {
       "file": "adapters/persistence/local-persistence-client.js",
-      "source_ts_bytes": 4198,
-      "source_ts_lines": 50,
-      "emitted_bytes": 4198
+      "source_ts_bytes": 4406,
+      "source_ts_lines": 51,
+      "emitted_bytes": 4406
     },
     {
       "file": "adapters/portfolio/domain.js",
-      "source_ts_bytes": 13111,
-      "source_ts_lines": 110,
-      "emitted_bytes": 13111
+      "source_ts_bytes": 13180,
+      "source_ts_lines": 111,
+      "emitted_bytes": 13180
     },
     {
       "file": "adapters/processing-runtime.js",
-      "source_ts_bytes": 15900,
-      "source_ts_lines": 94,
-      "emitted_bytes": 15900
+      "source_ts_bytes": 16761,
+      "source_ts_lines": 95,
+      "emitted_bytes": 16761
     },
     {
       "file": "adapters/releases/domain-adapter.js",
-      "source_ts_bytes": 10885,
-      "source_ts_lines": 55,
-      "emitted_bytes": 10885
+      "source_ts_bytes": 11324,
+      "source_ts_lines": 57,
+      "emitted_bytes": 11324
     },
     {
       "file": "adapters/releases/release-compare-provider.js",
@@ -215,9 +215,9 @@
     },
     {
       "file": "adapters/results/domain.js",
-      "source_ts_bytes": 11234,
-      "source_ts_lines": 128,
-      "emitted_bytes": 11234
+      "source_ts_bytes": 12273,
+      "source_ts_lines": 135,
+      "emitted_bytes": 12273
     },
     {
       "file": "adapters/results/timeline-replay-provider.js",
@@ -227,15 +227,15 @@
     },
     {
       "file": "adapters/reviews/domain.js",
-      "source_ts_bytes": 22730,
-      "source_ts_lines": 51,
-      "emitted_bytes": 22730
+      "source_ts_bytes": 27164,
+      "source_ts_lines": 155,
+      "emitted_bytes": 27164
     },
     {
       "file": "adapters/rq/domain.js",
-      "source_ts_bytes": 10966,
-      "source_ts_lines": 128,
-      "emitted_bytes": 10966
+      "source_ts_bytes": 11284,
+      "source_ts_lines": 131,
+      "emitted_bytes": 11284
     },
     {
       "file": "adapters/runs/domain.js",
@@ -251,9 +251,9 @@
     },
     {
       "file": "adapters/scenarios/domain.js",
-      "source_ts_bytes": 12939,
+      "source_ts_bytes": 13062,
       "source_ts_lines": 67,
-      "emitted_bytes": 12939
+      "emitted_bytes": 13062
     },
     {
       "file": "adapters/simulation.js",
@@ -269,9 +269,9 @@
     },
     {
       "file": "adapters/structured-documents.js",
-      "source_ts_bytes": 5455,
-      "source_ts_lines": 48,
-      "emitted_bytes": 5455
+      "source_ts_bytes": 10397,
+      "source_ts_lines": 87,
+      "emitted_bytes": 10397
     },
     {
       "file": "adapters/structured-note-content-compatibility.js",
@@ -281,9 +281,9 @@
     },
     {
       "file": "adapters/structured-note-content.js",
-      "source_ts_bytes": 15469,
-      "source_ts_lines": 230,
-      "emitted_bytes": 15469
+      "source_ts_bytes": 16091,
+      "source_ts_lines": 235,
+      "emitted_bytes": 16091
     },
     {
       "file": "adapters/today/acceptance-data.js",
@@ -305,15 +305,15 @@
     },
     {
       "file": "adapters/visualize/domain.js",
-      "source_ts_bytes": 36223,
-      "source_ts_lines": 110,
-      "emitted_bytes": 36223
+      "source_ts_bytes": 36639,
+      "source_ts_lines": 119,
+      "emitted_bytes": 36639
     },
     {
       "file": "adapters/w03-enterprise.js",
-      "source_ts_bytes": 2066,
-      "source_ts_lines": 19,
-      "emitted_bytes": 2066
+      "source_ts_bytes": 2358,
+      "source_ts_lines": 21,
+      "emitted_bytes": 2358
     },
     {
       "file": "adapters/w03-runs.js",
@@ -341,9 +341,9 @@
     },
     {
       "file": "adapters/windows-terminal-runtime.js",
-      "source_ts_bytes": 5850,
+      "source_ts_bytes": 6352,
       "source_ts_lines": 21,
-      "emitted_bytes": 5850
+      "emitted_bytes": 6352
     },
     {
       "file": "analytical-compare-browser.js",
@@ -371,9 +371,9 @@
     },
     {
       "file": "foundation/accepted-runtime.js",
-      "source_ts_bytes": 352791,
-      "source_ts_lines": 729,
-      "emitted_bytes": 352791
+      "source_ts_bytes": 355689,
+      "source_ts_lines": 736,
+      "emitted_bytes": 355689
     },
     {
       "file": "foundation/analytical/compare-host.js",
@@ -431,9 +431,9 @@
     },
     {
       "file": "foundation/contracts/platform-window-capability.js",
-      "source_ts_bytes": 7842,
-      "source_ts_lines": 64,
-      "emitted_bytes": 7842
+      "source_ts_bytes": 10485,
+      "source_ts_lines": 113,
+      "emitted_bytes": 10485
     },
     {
       "file": "foundation/contracts/runtime-adapter.js",
@@ -449,9 +449,9 @@
     },
     {
       "file": "foundation/global/bottom-shelf.js",
-      "source_ts_bytes": 17464,
+      "source_ts_bytes": 17287,
       "source_ts_lines": 195,
-      "emitted_bytes": 17464
+      "emitted_bytes": 17287
     },
     {
       "file": "foundation/global/commands.js",
@@ -629,15 +629,15 @@
     },
     {
       "file": "foundation/notes/sticky-note-window.js",
-      "source_ts_bytes": 23374,
-      "source_ts_lines": 142,
-      "emitted_bytes": 23374
+      "source_ts_bytes": 26532,
+      "source_ts_lines": 162,
+      "emitted_bytes": 26532
     },
     {
       "file": "foundation/operational.js",
-      "source_ts_bytes": 8804,
+      "source_ts_bytes": 8783,
       "source_ts_lines": 28,
-      "emitted_bytes": 8804
+      "emitted_bytes": 8783
     },
     {
       "file": "foundation/operational/presentation.js",
@@ -647,15 +647,15 @@
     },
     {
       "file": "foundation/operational/session-owner.js",
-      "source_ts_bytes": 16863,
-      "source_ts_lines": 180,
-      "emitted_bytes": 16863
+      "source_ts_bytes": 17876,
+      "source_ts_lines": 187,
+      "emitted_bytes": 17876
     },
     {
       "file": "foundation/operational/terminal-host.js",
-      "source_ts_bytes": 17490,
+      "source_ts_bytes": 17395,
       "source_ts_lines": 100,
-      "emitted_bytes": 17490
+      "emitted_bytes": 17395
     },
     {
       "file": "foundation/operational/terminal-renderer-port.js",
@@ -665,9 +665,9 @@
     },
     {
       "file": "foundation/operational/xterm-renderer.js",
-      "source_ts_bytes": 5949,
-      "source_ts_lines": 17,
-      "emitted_bytes": 5949
+      "source_ts_bytes": 7328,
+      "source_ts_lines": 59,
+      "emitted_bytes": 7328
     },
     {
       "file": "foundation/relations.js",
@@ -701,9 +701,9 @@
     },
     {
       "file": "foundation/spatial.js",
-      "source_ts_bytes": 16031,
+      "source_ts_bytes": 16142,
       "source_ts_lines": 65,
-      "emitted_bytes": 16031
+      "emitted_bytes": 16142
     },
     {
       "file": "foundation/spatial/accessible-navigator.js",
@@ -725,9 +725,9 @@
     },
     {
       "file": "foundation/spatial/presentation.js",
-      "source_ts_bytes": 6783,
-      "source_ts_lines": 58,
-      "emitted_bytes": 6783
+      "source_ts_bytes": 10607,
+      "source_ts_lines": 86,
+      "emitted_bytes": 10607
     },
     {
       "file": "foundation/spatial/relation-interaction.js",
@@ -899,9 +899,9 @@
     },
     {
       "file": "foundation/wave3-assembly.js",
-      "source_ts_bytes": 17361,
+      "source_ts_bytes": 17242,
       "source_ts_lines": 132,
-      "emitted_bytes": 17361
+      "emitted_bytes": 17242
     },
     {
       "file": "foundation/wave4-assembly.js",
@@ -917,15 +917,15 @@
     },
     {
       "file": "foundation/workspace-host.js",
-      "source_ts_bytes": 29591,
-      "source_ts_lines": 347,
-      "emitted_bytes": 29591
+      "source_ts_bytes": 29870,
+      "source_ts_lines": 348,
+      "emitted_bytes": 29870
     },
     {
       "file": "foundation/workspace.js",
-      "source_ts_bytes": 21143,
-      "source_ts_lines": 98,
-      "emitted_bytes": 21143
+      "source_ts_bytes": 22730,
+      "source_ts_lines": 101,
+      "emitted_bytes": 22730
     },
     {
       "file": "main.js",
@@ -935,9 +935,9 @@
     },
     {
       "file": "model-tests.js",
-      "source_ts_bytes": 173931,
-      "source_ts_lines": 280,
-      "emitted_bytes": 173931
+      "source_ts_bytes": 174493,
+      "source_ts_lines": 281,
+      "emitted_bytes": 174493
     },
     {
       "file": "ps02-spatial-finite-atomicity-tests.js",
@@ -959,15 +959,15 @@
     },
     {
       "file": "surfaces/audit/index.js",
-      "source_ts_bytes": 9660,
-      "source_ts_lines": 32,
-      "emitted_bytes": 9660
+      "source_ts_bytes": 10910,
+      "source_ts_lines": 41,
+      "emitted_bytes": 10910
     },
     {
       "file": "surfaces/backup/index.js",
-      "source_ts_bytes": 7351,
-      "source_ts_lines": 28,
-      "emitted_bytes": 7351
+      "source_ts_bytes": 7698,
+      "source_ts_lines": 29,
+      "emitted_bytes": 7698
     },
     {
       "file": "surfaces/composition/w01-w02-rescue.js",
@@ -977,21 +977,21 @@
     },
     {
       "file": "surfaces/composition/w03-rescue.js",
-      "source_ts_bytes": 7940,
-      "source_ts_lines": 133,
-      "emitted_bytes": 7940
+      "source_ts_bytes": 7706,
+      "source_ts_lines": 131,
+      "emitted_bytes": 7706
     },
     {
       "file": "surfaces/composition/w04-rescue.js",
-      "source_ts_bytes": 8261,
-      "source_ts_lines": 106,
-      "emitted_bytes": 8261
+      "source_ts_bytes": 8767,
+      "source_ts_lines": 109,
+      "emitted_bytes": 8767
     },
     {
       "file": "surfaces/composition/w05-rescue.js",
-      "source_ts_bytes": 2868,
-      "source_ts_lines": 50,
-      "emitted_bytes": 2868
+      "source_ts_bytes": 3451,
+      "source_ts_lines": 58,
+      "emitted_bytes": 3451
     },
     {
       "file": "surfaces/configuration/composition.js",
@@ -1001,15 +1001,15 @@
     },
     {
       "file": "surfaces/enterprise/index.js",
-      "source_ts_bytes": 2523,
-      "source_ts_lines": 39,
-      "emitted_bytes": 2523
+      "source_ts_bytes": 2901,
+      "source_ts_lines": 43,
+      "emitted_bytes": 2901
     },
     {
       "file": "surfaces/enterprise/presentation.js",
-      "source_ts_bytes": 20140,
-      "source_ts_lines": 108,
-      "emitted_bytes": 20140
+      "source_ts_bytes": 22090,
+      "source_ts_lines": 113,
+      "emitted_bytes": 22090
     },
     {
       "file": "surfaces/evidence/index.js",
@@ -1019,9 +1019,9 @@
     },
     {
       "file": "surfaces/labs/index.js",
-      "source_ts_bytes": 2491,
-      "source_ts_lines": 13,
-      "emitted_bytes": 2491
+      "source_ts_bytes": 2565,
+      "source_ts_lines": 14,
+      "emitted_bytes": 2565
     },
     {
       "file": "surfaces/labs/presentation.js",
@@ -1037,15 +1037,15 @@
     },
     {
       "file": "surfaces/library/runtime-composition.js",
-      "source_ts_bytes": 3807,
-      "source_ts_lines": 46,
-      "emitted_bytes": 3807
+      "source_ts_bytes": 5338,
+      "source_ts_lines": 54,
+      "emitted_bytes": 5338
     },
     {
       "file": "surfaces/library/surface.js",
-      "source_ts_bytes": 3057,
-      "source_ts_lines": 20,
-      "emitted_bytes": 3057
+      "source_ts_bytes": 3345,
+      "source_ts_lines": 23,
+      "emitted_bytes": 3345
     },
     {
       "file": "surfaces/m0-controller-composition.js",
@@ -1061,15 +1061,15 @@
     },
     {
       "file": "surfaces/mastery/composition.js",
-      "source_ts_bytes": 4333,
-      "source_ts_lines": 26,
-      "emitted_bytes": 4333
+      "source_ts_bytes": 4344,
+      "source_ts_lines": 31,
+      "emitted_bytes": 4344
     },
     {
       "file": "surfaces/portfolio/composition.js",
-      "source_ts_bytes": 4348,
-      "source_ts_lines": 26,
-      "emitted_bytes": 4348
+      "source_ts_bytes": 4359,
+      "source_ts_lines": 31,
+      "emitted_bytes": 4359
     },
     {
       "file": "surfaces/releases/composition.js",
@@ -1079,27 +1079,27 @@
     },
     {
       "file": "surfaces/results/index.js",
-      "source_ts_bytes": 3421,
-      "source_ts_lines": 16,
-      "emitted_bytes": 3421
+      "source_ts_bytes": 3422,
+      "source_ts_lines": 18,
+      "emitted_bytes": 3422
     },
     {
       "file": "surfaces/results/presentation.js",
-      "source_ts_bytes": 20244,
-      "source_ts_lines": 75,
-      "emitted_bytes": 20244
+      "source_ts_bytes": 20651,
+      "source_ts_lines": 76,
+      "emitted_bytes": 20651
     },
     {
       "file": "surfaces/reviews/index.js",
-      "source_ts_bytes": 7890,
-      "source_ts_lines": 47,
-      "emitted_bytes": 7890
+      "source_ts_bytes": 10676,
+      "source_ts_lines": 80,
+      "emitted_bytes": 10676
     },
     {
       "file": "surfaces/rq/surface.js",
-      "source_ts_bytes": 2149,
+      "source_ts_bytes": 2243,
       "source_ts_lines": 16,
-      "emitted_bytes": 2149
+      "emitted_bytes": 2243
     },
     {
       "file": "surfaces/runs/index.js",
@@ -1115,9 +1115,9 @@
     },
     {
       "file": "surfaces/scenarios/index.js",
-      "source_ts_bytes": 2676,
-      "source_ts_lines": 13,
-      "emitted_bytes": 2676
+      "source_ts_bytes": 2760,
+      "source_ts_lines": 14,
+      "emitted_bytes": 2760
     },
     {
       "file": "surfaces/scenarios/presentation.js",
@@ -1127,15 +1127,15 @@
     },
     {
       "file": "surfaces/shell/surface.js",
-      "source_ts_bytes": 6516,
-      "source_ts_lines": 73,
-      "emitted_bytes": 6516
+      "source_ts_bytes": 6889,
+      "source_ts_lines": 71,
+      "emitted_bytes": 6889
     },
     {
       "file": "surfaces/today/presentation.js",
-      "source_ts_bytes": 35553,
-      "source_ts_lines": 972,
-      "emitted_bytes": 35553
+      "source_ts_bytes": 39723,
+      "source_ts_lines": 1020,
+      "emitted_bytes": 39723
     },
     {
       "file": "surfaces/today/surface.js",
@@ -1151,9 +1151,9 @@
     },
     {
       "file": "surfaces/visualize/surface.js",
-      "source_ts_bytes": 27824,
-      "source_ts_lines": 85,
-      "emitted_bytes": 27824
+      "source_ts_bytes": 28079,
+      "source_ts_lines": 90,
+      "emitted_bytes": 28079
     },
     {
       "file": "tests/post-c03/D03A/d03a-command-settings-convergence-tests.js",
@@ -1172,6 +1172,60 @@
       "source_ts_bytes": 7194,
       "source_ts_lines": 85,
       "emitted_bytes": 7194
+    },
+    {
+      "file": "tests/post-c03/D04/d04-async-effect-settlement-tests.js",
+      "source_ts_bytes": 9815,
+      "source_ts_lines": 101,
+      "emitted_bytes": 9815
+    },
+    {
+      "file": "tests/post-c03/D05/d05-structured-sticky-persistence-tests.js",
+      "source_ts_bytes": 14284,
+      "source_ts_lines": 90,
+      "emitted_bytes": 14284
+    },
+    {
+      "file": "tests/post-c03/D06/d06-operational-platform-tests.js",
+      "source_ts_bytes": 11089,
+      "source_ts_lines": 252,
+      "emitted_bytes": 11089
+    },
+    {
+      "file": "tests/post-c03/D07/d07-today-presentation-authority-tests.js",
+      "source_ts_bytes": 7909,
+      "source_ts_lines": 35,
+      "emitted_bytes": 7909
+    },
+    {
+      "file": "tests/post-c03/D08/d08-w02-visualize-parity-tests.js",
+      "source_ts_bytes": 12746,
+      "source_ts_lines": 200,
+      "emitted_bytes": 12746
+    },
+    {
+      "file": "tests/post-c03/D09/d09-w03-studios-replay-tests.js",
+      "source_ts_bytes": 15053,
+      "source_ts_lines": 315,
+      "emitted_bytes": 15053
+    },
+    {
+      "file": "tests/post-c03/D10/d10-w04-authority-lifecycle-tests.js",
+      "source_ts_bytes": 14595,
+      "source_ts_lines": 325,
+      "emitted_bytes": 14595
+    },
+    {
+      "file": "tests/post-c03/D11/d11-w05-provider-integration-tests.js",
+      "source_ts_bytes": 36305,
+      "source_ts_lines": 884,
+      "emitted_bytes": 36305
+    },
+    {
+      "file": "tests/post-c03/LCORR01/lcorr01-parent-candidate-falsification-tests.js",
+      "source_ts_bytes": 19168,
+      "source_ts_lines": 270,
+      "emitted_bytes": 19168
     },
     {
       "file": "tests/post-c03/PR01/pr01-runtime-interaction-tests.js",
@@ -1193,45 +1247,45 @@
     },
     {
       "file": "tests/rescue/CG3_W01_W02_COVERAGE/cg3-w01-w02-coverage.test.js",
-      "source_ts_bytes": 6431,
-      "source_ts_lines": 59,
-      "emitted_bytes": 6431
+      "source_ts_bytes": 6767,
+      "source_ts_lines": 62,
+      "emitted_bytes": 6767
     },
     {
       "file": "tests/rescue/CG4_W03_COVERAGE/controller-corr01-w03-lifecycle-truth.test.js",
-      "source_ts_bytes": 5144,
-      "source_ts_lines": 26,
-      "emitted_bytes": 5144
+      "source_ts_bytes": 5474,
+      "source_ts_lines": 29,
+      "emitted_bytes": 5474
     },
     {
       "file": "tests/rescue/CG4_W03_COVERAGE/group-composition.test.js",
-      "source_ts_bytes": 4911,
+      "source_ts_bytes": 4925,
       "source_ts_lines": 30,
-      "emitted_bytes": 4911
+      "emitted_bytes": 4925
     },
     {
       "file": "tests/rescue/CG4_W03_COVERAGE/group-falsification.test.js",
-      "source_ts_bytes": 3739,
+      "source_ts_bytes": 3753,
       "source_ts_lines": 26,
-      "emitted_bytes": 3739
+      "emitted_bytes": 3753
     },
     {
       "file": "tests/rescue/CG5_CONTROLLER_CORR01_A03_DOMAIN_INTEGRITY/controller-corr01.test.js",
-      "source_ts_bytes": 5607,
-      "source_ts_lines": 30,
-      "emitted_bytes": 5607
+      "source_ts_bytes": 6043,
+      "source_ts_lines": 31,
+      "emitted_bytes": 6043
     },
     {
       "file": "tests/rescue/CG5_W04_COVERAGE/w04-convergence.test.js",
-      "source_ts_bytes": 3931,
-      "source_ts_lines": 24,
-      "emitted_bytes": 3931
+      "source_ts_bytes": 4664,
+      "source_ts_lines": 27,
+      "emitted_bytes": 4664
     },
     {
       "file": "tests/rescue/CG6_W05_COVERAGE/cg6-w05-coverage.test.js",
-      "source_ts_bytes": 6156,
-      "source_ts_lines": 16,
-      "emitted_bytes": 6156
+      "source_ts_bytes": 6296,
+      "source_ts_lines": 17,
+      "emitted_bytes": 6296
     },
     {
       "file": "tests/rescue/CG6_W05_COVERAGE/controller-corr01-w05-truth.test.js",
@@ -1295,9 +1349,9 @@
     },
     {
       "file": "tests/rescue/S07_W01_W02_SHELL_TODAY/s07-contracts.test.js",
-      "source_ts_bytes": 8703,
-      "source_ts_lines": 106,
-      "emitted_bytes": 8703
+      "source_ts_bytes": 9192,
+      "source_ts_lines": 108,
+      "emitted_bytes": 9192
     },
     {
       "file": "tests/rescue/S08_W01_W02_LIBRARY_LEARN/s08-falsification.js",
@@ -1313,9 +1367,9 @@
     },
     {
       "file": "tests/rescue/S10_W03_ENTERPRISE/domain-and-lifecycle.test.js",
-      "source_ts_bytes": 5390,
+      "source_ts_bytes": 5432,
       "source_ts_lines": 67,
-      "emitted_bytes": 5390
+      "emitted_bytes": 5432
     },
     {
       "file": "tests/rescue/S10_W03_ENTERPRISE/source-duplicate-owner.test.js",
@@ -1349,21 +1403,21 @@
     },
     {
       "file": "tests/rescue/S14_W04_EVIDENCE_REVIEWS/domain-lifecycle.test.js",
-      "source_ts_bytes": 9521,
+      "source_ts_bytes": 9745,
       "source_ts_lines": 28,
-      "emitted_bytes": 9521
+      "emitted_bytes": 9745
     },
     {
       "file": "tests/rescue/S14_W04_EVIDENCE_REVIEWS/surface-contract.test.js",
-      "source_ts_bytes": 2492,
+      "source_ts_bytes": 2603,
       "source_ts_lines": 13,
-      "emitted_bytes": 2492
+      "emitted_bytes": 2603
     },
     {
       "file": "tests/rescue/S15_W04_MASTERY_PORTFOLIO/domain-authority.test.js",
-      "source_ts_bytes": 8746,
+      "source_ts_bytes": 8882,
       "source_ts_lines": 49,
-      "emitted_bytes": 8746
+      "emitted_bytes": 8882
     },
     {
       "file": "tests/rescue/S16_W05_HEALTH_PROCESSING/s16-health-processing-tests.js",
@@ -1373,9 +1427,9 @@
     },
     {
       "file": "tests/rescue/S17_W05_VALIDATION_MANUAL_AI/s17-tests.js",
-      "source_ts_bytes": 6212,
-      "source_ts_lines": 22,
-      "emitted_bytes": 6212
+      "source_ts_bytes": 6323,
+      "source_ts_lines": 23,
+      "emitted_bytes": 6323
     },
     {
       "file": "tests/rescue/S18_W05_BACKUP_AUDIT/domain-tests.js",
@@ -1391,21 +1445,21 @@
     },
     {
       "file": "tests/rescue/S19_W05_RELEASES_CONFIGURATION/s19-tests.js",
-      "source_ts_bytes": 8683,
-      "source_ts_lines": 34,
-      "emitted_bytes": 8683
+      "source_ts_bytes": 8876,
+      "source_ts_lines": 35,
+      "emitted_bytes": 8876
     },
     {
       "file": "tests/surfaces/configuration/configuration-tests.js",
-      "source_ts_bytes": 4452,
-      "source_ts_lines": 21,
-      "emitted_bytes": 4452
+      "source_ts_bytes": 4701,
+      "source_ts_lines": 22,
+      "emitted_bytes": 4701
     },
     {
       "file": "tests/surfaces/enterprise/domain.test.js",
-      "source_ts_bytes": 1300,
+      "source_ts_bytes": 1314,
       "source_ts_lines": 11,
-      "emitted_bytes": 1300
+      "emitted_bytes": 1314
     },
     {
       "file": "tests/surfaces/evidence/domain.test.js",
@@ -1421,9 +1475,9 @@
     },
     {
       "file": "tests/surfaces/manual_ai/manual-ai-tests.js",
-      "source_ts_bytes": 4258,
-      "source_ts_lines": 20,
-      "emitted_bytes": 4258
+      "source_ts_bytes": 4507,
+      "source_ts_lines": 21,
+      "emitted_bytes": 4507
     },
     {
       "file": "tests/surfaces/mastery/domain.test.js",
@@ -1439,15 +1493,15 @@
     },
     {
       "file": "tests/surfaces/releases/releases-tests.js",
-      "source_ts_bytes": 4127,
-      "source_ts_lines": 20,
-      "emitted_bytes": 4127
+      "source_ts_bytes": 4375,
+      "source_ts_lines": 21,
+      "emitted_bytes": 4375
     },
     {
       "file": "tests/surfaces/results/domain.test.js",
-      "source_ts_bytes": 2023,
-      "source_ts_lines": 16,
-      "emitted_bytes": 2023
+      "source_ts_bytes": 2339,
+      "source_ts_lines": 19,
+      "emitted_bytes": 2339
     },
     {
       "file": "tests/surfaces/reviews/domain.test.js",
@@ -1463,9 +1517,9 @@
     },
     {
       "file": "tests/surfaces/runs/group-regression.test.js",
-      "source_ts_bytes": 1902,
-      "source_ts_lines": 19,
-      "emitted_bytes": 1902
+      "source_ts_bytes": 2300,
+      "source_ts_lines": 22,
+      "emitted_bytes": 2300
     },
     {
       "file": "tests/surfaces/scenarios/domain.test.js",
@@ -1493,9 +1547,9 @@
     },
     {
       "file": "w4-e-settings-center-tests.js",
-      "source_ts_bytes": 19183,
+      "source_ts_bytes": 19197,
       "source_ts_lines": 79,
-      "emitted_bytes": 19183
+      "emitted_bytes": 19197
     },
     {
       "file": "w4-f-operational-session-tests.js",

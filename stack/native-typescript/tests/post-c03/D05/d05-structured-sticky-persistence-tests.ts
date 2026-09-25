@@ -10,6 +10,7 @@ const assert=(condition,message='assertion failed')=>{if(!condition)throw Error(
 const test=async(id,run)=>{try{rows.push({id,status:'PASS',detail:await run()})}catch(error){rows.push({id,status:'FAIL',error:String(error?.stack||error)})}};
 const note=(id,surface='library')=>({id,title:'',titleDirection:'auto',binding:{documentId:`${surface}-document`,objectId:`${surface}-object`,blockId:`${surface}-block`,selection:{anchorOffset:2,focusOffset:5},route:`PERSONAL:CEP/W02/${surface}`,domainRef:{surface,objectId:`${surface}-object`}},working:{blocks:[{id:`${id}-p1`,type:'paragraph',html:'Working note'}],history:[],historyIndex:-1,selectedBlock:null,dirty:true},window:{x:40,y:70,width:360,height:300,closed:false,pinned:false}});
 const documentFixture=()=>({id:'D05-DOC-1',revision:'base-r1',title:'D05 persistence',blocks:[{id:'b1',type:'paragraph',html:'baseline',children:[]}]});
+const explicitTestLearnSource=()=>({...structuredClone(BALANCED6_LEARN_SOURCE),testOnly:true});
 const persistenceFixture=({autosavePreference=()=>false,recoveryPreference=()=>false,provider={}}={})=>{const calls=[],client={
   autosave:provider.autosave||((document,context)=>{calls.push({operation:'AUTOSAVE_DRAFT_ONLY',document,context});return {ok:true,status:'AUTOSAVE_DRAFT_STORED'}}),
   explicitSave:provider.explicitSave||((document,context)=>{calls.push({operation:'EXPLICIT_SAVE',document,context});return {ok:true,committed:true,revision:'persisted-r2'}}),
@@ -17,7 +18,7 @@ const persistenceFixture=({autosavePreference=()=>false,recoveryPreference=()=>f
 };const adapter=createStructuredConsumerAdapter('learn',null,{document:documentFixture()});bindStructuredPersistence(adapter,client,{autosaveDelayMs:60000,autosavePreference,recoveryPreference});return {adapter,calls,client}};
 
 await test('d05.shared-family-library-and-learn-use-one-composition-class',()=>{
-  const library=createLibraryNoteRuntimeComposition(),learnComposition=createLearnRuntimeComposition({source:BALANCED6_LEARN_SOURCE}),learn=learnComposition.learn;
+  const library=createLibraryNoteRuntimeComposition(),learnComposition=createLearnRuntimeComposition({source:explicitTestLearnSource(),allowTestSource:true}),learn=learnComposition.learn;
   library.ensure(note('library-note','library'));
   const created=learn.createLinkedNote({noteId:'learn-note',title:'Learn note',blockId:BALANCED6_LEARN_SOURCE.document.blocks[0].id,sourceRange:{anchorOffset:1,focusOffset:3}});
   assert(created.ok&&created.status==='D05_FAMILY_CAPABILITY_IMPLEMENTED_AND_FALSIFIED');
@@ -28,7 +29,7 @@ await test('d05.shared-family-library-and-learn-use-one-composition-class',()=>{
 });
 
 await test('d05.learn-capability-family-ready-final-route-pending',()=>{
-  const composition=createLearnRuntimeComposition({source:BALANCED6_LEARN_SOURCE,noteRouteBound:false}),pending=composition.learn.noteCapability(),family=composition.learn.noteCapability({routeBound:true});
+  const composition=createLearnRuntimeComposition({source:explicitTestLearnSource(),allowTestSource:true,noteRouteBound:false}),pending=composition.learn.noteCapability(),family=composition.learn.noteCapability({routeBound:true});
   assert(!pending.enabled&&pending.familyAvailable&&pending.code==='FINAL_PRODUCT_ROUTE_BINDING_PENDING_D13'&&pending.finalRouteBound===false);
   assert(family.enabled&&family.code==='AVAILABLE');
   return {familyCapability:'D05_FAMILY_CAPABILITY_IMPLEMENTED_AND_FALSIFIED',productRoute:pending.code,routeBoundCapability:family.code};
@@ -44,7 +45,7 @@ await test('d05.private-document-command-input-instances-never-leak-or-collide',
 });
 
 await test('d05.detached-owning-surface-context-is-not-library-hardcoded',()=>{
-  const bridge={id:'d05-test-platform-window',capabilities:()=>({alwaysOnTop:true,separateWindow:true}),requestSeparateWindow:request=>({ok:true,active:true,request}),requestAlwaysOnTop:request=>({ok:true,active:request.requested})};
+  const bridge={id:'d05-test-platform-window',capabilities:()=>({alwaysOnTop:true,separateWindow:true}),requestSeparateWindow:request=>({ok:true,active:true,contextHandoffValid:true,request}),requestAlwaysOnTop:request=>({ok:true,active:request.requested})};
   const runtime=createStructuredStickyNoteRuntimeComposition({domainKind:'learn',surfaceId:'learn',platformWindowBridge:bridge,finalRouteBound:false}),value=note('learn-detached','learn');
   runtime.ensure(value,{focusReturnId:'learn-object',owningSurfaceContext:{contextLens:'activity-notes',selectionFocus:{blockId:'learn-block',sourceRange:{anchorOffset:2,focusOffset:5}}}});
   const detached=runtime.requestSeparateWindow(value.id),serialized=JSON.stringify(detached.surfaceIntent);

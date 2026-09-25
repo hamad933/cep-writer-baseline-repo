@@ -66,7 +66,7 @@ export class W04ReviewDomain{
     this.evidenceResolver=evidenceResolver;
     this.reviewAuthorityRegistry=reviewAuthorityRegistry;
     this.allowTestAuthority=allowTestAuthority;
-    const initialRecords=records===undefined?demoInitial():records;
+    const initialRecords=records===undefined?[]:records;
     this.records=clone(initialRecords).map(normalizedRecord);
     this.receipts=[];
     this.compareWorkingState=new Map();
@@ -93,8 +93,6 @@ export class W04ReviewDomain{
   }
   authorityFailure(record,{assignment=false}={}){
     if(!record.reviewer?.identity)return {ok:false,code:'REVIEWER_ACTOR_REQUIRED',mutated:false};
-    if(record.reviewer.authorityAvailable===false)return {ok:false,code:'REVIEWER_AUTHORITY_UNAVAILABLE',mutated:false};
-    if(assignment&&record.reviewer.assignmentPermissionAvailable===false)return {ok:false,code:'ASSIGNMENT_PERMISSION_UNAVAILABLE',mutated:false};
     if(this.reviewAuthorityRegistry){
       const resolved=this.reviewAuthorityRegistry.resolveReviewerAuthority(record.reviewer.identity);
       if(!resolved||!resolved.authorized)return {ok:false,code:'REVIEWER_AUTHORITY_UNAVAILABLE',mutated:false,reason:resolved?.reason||'REVIEWER_NOT_IN_AUTHORITY_REGISTRY'};
@@ -107,10 +105,7 @@ export class W04ReviewDomain{
       if(assignment&&!record.reviewer.assignmentPermissionAvailable)return {ok:false,code:'ASSIGNMENT_PERMISSION_UNAVAILABLE',mutated:false};
       return null;
     }
-    if(!record.reviewer.permissionProofRef)return {ok:false,code:'REVIEWER_AUTHORITY_UNAVAILABLE',mutated:false};
-    if(!record.reviewer.authorityAvailable)return {ok:false,code:'REVIEWER_AUTHORITY_UNAVAILABLE',mutated:false};
-    if(assignment&&!record.reviewer.assignmentPermissionAvailable)return {ok:false,code:'ASSIGNMENT_PERMISSION_UNAVAILABLE',mutated:false};
-    return null;
+    return {ok:false,code:'REVIEWER_AUTHORITY_UNAVAILABLE',mutated:false,reason:'Reviewer authority registry is not bound; caller-supplied fields are not authoritative.'};
   }
   resolveEvidenceRef(ref){if(!this.evidenceResolver)return {state:'UNVERIFIED_PROVIDER_UNBOUND',reason:'Evidence resolver is not bound.'};try{return this.evidenceResolver(ref);}catch(error){return {state:'UNAVAILABLE',reason:String(error?.message||error)};}}
   validatePinnedEvidence(refs){for(const ref of refs){if(typeof ref!=='string'||!ref.includes('@'))return {ok:false,code:'EXACT_EVIDENCE_REFS_REQUIRED',ref};const resolved=this.resolveEvidenceRef(ref);if(resolved?.state!=='RESOLVED'||resolved.immutable!==true)return {ok:false,code:resolved?.state==='UNVERIFIED_PROVIDER_UNBOUND'?'EVIDENCE_RESOLVER_UNBOUND':'ADMITTED_IMMUTABLE_EVIDENCE_REQUIRED',ref,resolution:resolved};}return {ok:true};}
@@ -124,6 +119,7 @@ export class W04ReviewDomain{
      if(!evidenceValidation.ok)return freeze({...evidenceValidation,mutated:false});
      if(!pinnedCriteria.length)return freeze({ok:false,code:'PINNED_CRITERIA_REQUIRED',mutated:false});
      if(!reviewer?.identity)return freeze({ok:false,code:'REVIEWER_ACTOR_REQUIRED',mutated:false});
+     if(!this.reviewAuthorityRegistry&&!this.allowTestAuthority)return freeze({ok:false,code:'REVIEWER_AUTHORITY_UNAVAILABLE',mutated:false,reason:'Reviewer authority registry is not bound; caller-supplied fields are not authoritative.'});
      if(this.reviewAuthorityRegistry){
        const authCheck=this.reviewAuthorityRegistry.resolveReviewerAuthority(reviewer.identity);
        if(!authCheck||!authCheck.authorized)return freeze({ok:false,code:'REVIEWER_AUTHORITY_UNAVAILABLE',mutated:false,reason:authCheck?.reason||'REVIEWER_NOT_IN_AUTHORITY_REGISTRY'});

@@ -21,9 +21,15 @@ function sourceEventFrom(projected){return clone(projected?.selection?.selectedE
 function gapSelected(projected){return projected?.selection?.selectedEvent?.presentationMeta?.recordedGap===true}
 
 export class W03ResultsDomain {
-  constructor({records=[],determinismVerifier=null,persistence=null,timelineReplayOwner=null,analyticalCompareOwner=null}={}){
+  constructor(options={}){
+    const {records=[],providerState=undefined,providerError=null,determinismVerifier=null,persistence=null,timelineReplayOwner=null,analyticalCompareOwner=null}=options;
     this.owner='W03ResultsDomain';
-    this.records=freeze(records.map(sealedRecord));
+    const requestedState=String(providerState||((records?.length||0)>0?'AVAILABLE':'UNAVAILABLE')).toUpperCase();
+    if(!['AVAILABLE','EMPTY','UNAVAILABLE','ERROR'].includes(requestedState))throw Error('RESULTS_PROVIDER_STATE_INVALID');
+    if(requestedState==='EMPTY'&&(records?.length||0)>0)throw Error('RESULTS_EMPTY_PROVIDER_HAS_RECORDS');
+    this.providerState=requestedState==='AVAILABLE'&&!(records?.length||0)?'EMPTY':requestedState;
+    this.providerError=clone(providerError);
+    this.records=freeze(['AVAILABLE','EMPTY'].includes(this.providerState)?records.map(sealedRecord):[]);
     this.byId=new Map(this.records.map(record=>[keyOf(record),record]));
     this.aar=new Map();
     this.persistence=persistence;
@@ -38,6 +44,7 @@ export class W03ResultsDomain {
     this.provider=createResultsCompareProvider(this.records);
     this.compareOwner.registerProvider(this.provider);
   }
+  providerAvailability(){return freeze({state:this.providerState,enabled:this.providerState==='AVAILABLE',code:`RESULTS_PROVIDER_${this.providerState}`,reason:this.providerState==='UNAVAILABLE'?'Results provider is not bound.':this.providerState==='EMPTY'?'Results provider is available and returned no sealed Results.':this.providerState==='ERROR'?String(this.providerError?.code||this.providerError?.message||'Results provider failed.'):'',error:clone(this.providerError),availabilityOwner:this.owner});}
   _record(ref){
     const exact=exactRef(ref),record=this.byId.get(keyOf(exact));
     if(!record)throw Error('RESULT_REVISION_ABSENT');

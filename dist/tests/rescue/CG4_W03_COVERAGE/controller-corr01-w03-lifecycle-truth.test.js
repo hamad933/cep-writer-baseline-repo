@@ -12,7 +12,7 @@ import {composeResultsSurface} from '../../../surfaces/results/index.js';
 
 const shared={structuredHost:{owner:'StructuredSurfaceHost'},spatialRelation:{owner:'RelationInteractionOwner'}};
 
-const ent=new W03EnterpriseDomain({relationAdapter:createEnterpriseAdapter(),authoring:'PUBLISHED',revisionId:'ENT-PUBLISHED',baseline:{status:'AVAILABLE',id:'BL-1',revision:'1',digest:'d1'}});
+const ent=new W03EnterpriseDomain({relationAdapter:createEnterpriseAdapter({fixture:true}),authoring:'PUBLISHED',revisionId:'ENT-PUBLISHED',baseline:{status:'AVAILABLE',id:'BL-1',revision:'1',digest:'d1'}});
 const entBefore=ent.snapshot();const publishedRebase=ent.setTwinBinding({action:'rebaseTwin',overlayRefs:entBefore.objects.map(x=>({id:x.id,classification:x.classification})),conflictsResolved:true,targetBaseline:{id:'BL-2',revision:'2',digest:'d2'}});assert.equal(publishedRebase.ok,false);assert.match(publishedRebase.code,/PUBLISHED_REVISION_IMMUTABLE/);assert.deepEqual(ent.snapshot().baseline,entBefore.baseline);const statusOnly=ent.setTwinBinding({baselineStatus:'STALE'});assert.equal(statusOnly.baseline.status,'STALE');assert.equal(statusOnly.baseline.id,'BL-1');assert.equal(statusOnly.baseline.revision,'1');assert.equal(statusOnly.baseline.digest,'d1');
 
 const scenario=new W03ScenarioDomain({definition:{id:'SC',revision:'1',title:'Scenario',environment:{capabilities:[]},phases:[{id:'P1',name:'Phase',elements:[{id:'LM1',kind:'lab',title:'Lab',labRef:{id:'LAB-X',revision:'2'}}]}]}});const scenarioSurface=composeScenariosSurface({domain:scenario,shared});

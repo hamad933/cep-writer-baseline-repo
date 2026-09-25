@@ -39,7 +39,7 @@ export const createW04MasteryDemoRecords=()=>freeze(demoInitial());
 export class W04MasteryDomain{
  constructor(records=undefined,{basisResolver=null,evaluator=null}={}){
   this.owner=MASTERY_DOMAIN_OWNER;
-  const initialRecords=records===undefined?demoInitial():records;
+  const initialRecords=records===undefined?[]:records;
   this.records=clone(initialRecords).map(validRecord);
   this.basisResolver=basisResolver;
   this.evaluator=evaluator;

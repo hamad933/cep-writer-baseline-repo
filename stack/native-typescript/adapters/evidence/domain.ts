@@ -28,7 +28,7 @@ export class W04EvidenceDomain{
   constructor(records=undefined,{reviewProjectionResolver=null,admissionAuthorityRegistry=null,allowTestAuthority=false}={}){
     this.owner=EVIDENCE_DOMAIN_OWNER;this.reviewProjectionResolver=reviewProjectionResolver;
     this.admissionAuthorityRegistry=admissionAuthorityRegistry;this.allowTestAuthority=allowTestAuthority;
-    const initialRecords=records===undefined?demoInitial():records;
+    const initialRecords=records===undefined?[]:records;
     this.records=clone(initialRecords).map(record=>({...record,evidenceId:record.evidenceId||record.id,criterionRefs:clone(record.criterionRefs||[]),selectedMaterialRefs:selectedMaterials(record),candidateRevision:Number.isInteger(record.candidateRevision)?record.candidateRevision:1,candidateState:record.candidateState||(record.status==='ADMITTED'?'ADMITTED':'PREPARED'),intakeValidation:clone(record.intakeValidation||{status:'NOT_VALIDATED'}),admissionAuthority:clone(record.admissionAuthority||{available:false,proofRef:null})}));
     this.evidenceRevisions=[];this.lineage=new Map();this.sourceChoices=[];this.receipts=[];this.seq=0;
     this.persistence={mode:'SESSION_LOCAL',durable:false,status:'UNAVAILABLE',reason:'No surface-local persistence owner; shared persistence may be bound by final integration.'};
@@ -55,10 +55,8 @@ export class W04EvidenceDomain{
       if(res.testOnly&&!this.allowTestAuthority)return {ok:false,code:'TEST_AUTHORITY_FORBIDDEN_IN_PRODUCT',mutated:false};
       return null;
     }
-    if(candidate.testOnly===true&&!this.allowTestAuthority&&candidate.allowTestAuthority===false){
-      return {ok:false,code:'TEST_AUTHORITY_FORBIDDEN_IN_PRODUCT',mutated:false};
-    }
-    return null;
+    if(this.allowTestAuthority&&candidate.testOnly===true)return null;
+    return {ok:false,code:'ADMISSION_AUTHORITY_UNAVAILABLE',mutated:false,reason:'Admission authority registry is not bound; caller-supplied fields are not authoritative.'};
   }
   duplicateCandidate(record,excludeId=null){const key=fingerprint(record);return this.records.find(r=>r.id!==excludeId&&r.status!=='WITHDRAWN'&&!['DECLINED','WITHDRAWN'].includes(r.candidateState)&&!(record.baseEvidenceRevisionId&&r.evidenceId===record.evidenceId)&&fingerprint(r)===key)||null;}
   importEvidence(input={}){

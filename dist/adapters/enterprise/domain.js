@@ -11,7 +11,7 @@ const digestToken=value=>String(value||'UNAVAILABLE');
 export class W03EnterpriseDomain {
   constructor({
     relationAdapter,
-    baseline={status:'AVAILABLE',id:'BL-LOCAL',revision:'1',digest:null},
+    baseline={status:'UNAVAILABLE',id:null,revision:null,digest:null},
     persistence=null,
     authoring=null,
     revisionId=null,
@@ -27,8 +27,9 @@ export class W03EnterpriseDomain {
     this.twinId=twinId||relationAdapter.twinId||null;
     this.authoring=normalizedAuthoring(authoring||(/PUBLISHED/i.test(this.revisionId)?'PUBLISHED':'DRAFT'));
     this.dirty=this.authoring==='DIRTY';
-    const sourceDigest=digestToken(baseline.digest||relationAdapter.sourceDigest||`${this.revisionId}:LOCAL_SOURCE`);
-    this.baseline=freeze({...clone(baseline),digest:sourceDigest,status:baseline.status||'AVAILABLE'});
+    const baselineStatus=baseline.status||'UNAVAILABLE';
+    const sourceDigest=baseline.digest||(baselineStatus==='AVAILABLE'?relationAdapter.sourceDigest:null)||null;
+    this.baseline=freeze({...clone(baseline),digest:sourceDigest,status:baselineStatus});
     this.baselines=[this.baseline];
     this.twinBinding=this.baseline.status==='STALE'?'BASELINE_STALE':this.baseline.status==='AVAILABLE'?'BOUND':'DETACHED';
     this.selection=freeze({kind:'NONE',id:null});
@@ -76,6 +77,48 @@ export class W03EnterpriseDomain {
     const receipt=freeze({owner:this.owner,action:'enterprise.inspect',selection:clone(this.selection)});
     this.receipts.push(receipt);
     return this.snapshot();
+  }
+
+  create({enterpriseId=undefined,twinId=undefined,revisionId=undefined}={}){
+    if(this.authoring==='PUBLISHED')return freeze({ok:false,code:'PUBLISHED_REVISION_IMMUTABLE__CREATE_SUCCESSOR_REVISION',mutated:false});
+    const nextEnterpriseId=enterpriseId!==undefined?(enterpriseId?String(enterpriseId).trim():null):this.enterpriseId;
+    if(!nextEnterpriseId)return freeze({ok:false,code:'ENTERPRISE_ID_REQUIRED',reason:'Enterprise working revision requires an enterpriseId.',mutated:false});
+    const nextRevisionId=revisionId!==undefined?(revisionId?String(revisionId).trim():null):this.revisionId;
+    if(!nextRevisionId)return freeze({ok:false,code:'ENTERPRISE_REVISION_REQUIRED',reason:'Enterprise working revision requires a revisionId.',mutated:false});
+    const nextTwinId=twinId!==undefined?(twinId?String(twinId).trim():null):this.twinId;
+    const mutated=nextEnterpriseId!==this.enterpriseId||nextTwinId!==this.twinId||nextRevisionId!==this.revisionId;
+    this.enterpriseId=nextEnterpriseId;
+    this.twinId=nextTwinId;
+    this.revisionId=nextRevisionId;
+    if(mutated&&this.authoring==='VALIDATED')this.authoring='DIRTY';
+    const receipt=freeze({owner:this.owner,action:'enterprise.create',enterpriseId:this.enterpriseId,twinId:this.twinId,revisionId:this.revisionId,canonicalPublication:false});
+    this.receipts.push(receipt);
+    return freeze({ok:true,mutated,receipt,snapshot:this.snapshot()});
+  }
+
+  pinBaseline({baseline}={}){
+    if(this.authoring==='PUBLISHED')return freeze({ok:false,code:'PUBLISHED_REVISION_IMMUTABLE__CREATE_SUCCESSOR_REVISION',mutated:false});
+    if(!baseline?.id||!baseline?.revision||!baseline?.digest||baseline?.status!=='AVAILABLE')return freeze({ok:false,code:'PINNED_BASELINE_IDENTITY_REQUIRED',mutated:false});
+    const pinned=freeze({status:'AVAILABLE',id:String(baseline.id),revision:String(baseline.revision),digest:String(baseline.digest)});
+    this.baseline=pinned;if(!this.baselines.some(item=>item.id===pinned.id&&item.revision===pinned.revision&&item.digest===pinned.digest))this.baselines.push(pinned);this.twinBinding='BOUND';
+    const receipt=freeze({owner:this.owner,action:'enterprise.baseline',baseline:clone(pinned),canonicalPublication:false});this.receipts.push(receipt);
+    return freeze({ok:true,mutated:true,receipt,snapshot:this.snapshot()});
+  }
+
+  validate(){
+    const errors=[];
+    if(!this.enterpriseId)errors.push('ENTERPRISE_ID_REQUIRED');
+    if(!this.revisionId)errors.push('ENTERPRISE_REVISION_REQUIRED');
+    if(this.baseline.status!=='AVAILABLE'||!this.baseline.id||!this.baseline.revision||!this.baseline.digest)errors.push('PINNED_BASELINE_IDENTITY_REQUIRED');
+    return freeze({ok:errors.length===0,status:errors.length?'VALIDATION_FAILED':'VALIDATED',errors,mutated:false,canonicalPublication:false});
+  }
+
+  publish(){
+    if(this.authoring==='PUBLISHED')return freeze({ok:true,mutated:false,snapshot:this.snapshot()});
+    const validation=this.validate();if(!validation.ok)return freeze({ok:false,code:'ENTERPRISE_VALIDATION_REQUIRED_BEFORE_PUBLISH',validation,mutated:false});
+    this.authoring='PUBLISHED';this.dirty=false;this.version++;const published=this.#recordPublishedRevision({reason:'explicit-publish'});
+    const receipt=freeze({owner:this.owner,action:'enterprise.publish',revisionId:this.revisionId,baselineDigest:this.baseline.digest,canonicalPublication:false});this.receipts.push(receipt);
+    return freeze({ok:true,mutated:true,published,receipt,snapshot:this.snapshot()});
   }
 
   edit(payload={}){
@@ -151,6 +194,11 @@ export class W03EnterpriseDomain {
   }
 
   commandAvailability(id,payload={}){
+    if(['enterprise.create','enterprise.baseline','enterprise.validate','enterprise.publish'].includes(id)){
+      if(['enterprise.create','enterprise.baseline'].includes(id)&&this.authoring==='PUBLISHED')return {enabled:false,code:'PUBLISHED_REVISION_IMMUTABLE',reason:'Create a successor revision before changing Enterprise identity or baseline.',availabilityOwner:this.owner};
+      if(id==='enterprise.publish'&&!this.validate().ok)return {enabled:false,code:'ENTERPRISE_VALIDATION_REQUIRED_BEFORE_PUBLISH',reason:'Enterprise validation and an exact Baseline pin are required before publication.',availabilityOwner:this.owner};
+      return true;
+    }
     if(id==='enterprise.edit'){
       if(this.authoring==='PUBLISHED')return {enabled:false,code:'PUBLISHED_REVISION_IMMUTABLE',reason:'Published Enterprise/Twin revisions are immutable. Create a successor revision before editing.',availabilityOwner:this.owner};
       const ids=[payload?.source,payload?.target].filter(Boolean);

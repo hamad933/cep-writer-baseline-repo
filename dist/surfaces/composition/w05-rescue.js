@@ -1,4 +1,3 @@
-import {SemanticCommandBus} from '../../foundation/global/commands.js';
 import {createBoundedLocalRuntimeTransport} from '../../adapters/runtime/local-runtime-transport.js';
 import {HealthRuntimeAdapter} from '../../adapters/health-runtime.js';
 import {ProcessingRuntimeAdapter} from '../../adapters/processing-runtime.js';
@@ -14,8 +13,9 @@ export const W05_RESCUE_SURFACES=Object.freeze(['health','processing','validatio
 export function createW05RescueComposition({
   transport=createBoundedLocalRuntimeTransport(),
   analyticalCompareOwner=null,
-  commands=new SemanticCommandBus()
+  commands=null
 }={}){
+  if(!commands)return Object.freeze({owner:'CG6W05RescueComposition',integration:Object.freeze({state:'INTEGRATION_REQUIRED',code:'SEMANTIC_COMMAND_BUS_INTEGRATION_REQUIRED',reason:'W05 requires the controller-injected SemanticCommandBus.'}),surfaces:Object.freeze({}),surfaceIds:Object.freeze([]),commands:null,finalR6Wiring:false,balanced6:'HOLD'});
   const health=new HealthRuntimeAdapter({transport});
   const processing=new ProcessingRuntimeAdapter({transport});
   const validation=createValidationConsumerAdapter();
@@ -27,6 +27,7 @@ export function createW05RescueComposition({
   const surfaces=Object.freeze({health,processing,validation,manual_ai:manualAi,backup,audit,releases,configuration});
   return Object.freeze({
     owner:'CG6W05RescueComposition',
+    integration:Object.freeze({state:'READY',code:'CENTRAL_COMMAND_BUS_BOUND'}),
     surfaces,
     surfaceIds:[...W05_RESCUE_SURFACES],
     commands,

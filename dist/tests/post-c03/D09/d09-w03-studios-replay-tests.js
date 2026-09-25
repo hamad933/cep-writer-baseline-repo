@@ -77,7 +77,7 @@ await test('d09.w03.cross-studio-composition-and-workspace-first', () => {
   };
   const group = composeW03RescueGroup({
     shared,
-    enterprise: {relationAdapter: createEnterpriseAdapter()}
+    enterprise: {relationAdapter: createEnterpriseAdapter({fixture:true})}
   });
   equal(group.surfaceIds.length, 5, 'must compose exactly 5 W03 surfaces');
   assert(group.surfaceIds.includes('enterprise'), 'includes enterprise');
@@ -230,7 +230,7 @@ await test('d09.results.epistemic-unbound-distinct-from-empty', () => {
 // 8. Enterprise Published Revision Immutability
 await test('d09.enterprise.published-revision-immutable-twin-rebase-rejected', () => {
   const ent = new W03EnterpriseDomain({
-    relationAdapter: createEnterpriseAdapter(),
+    relationAdapter: createEnterpriseAdapter({fixture:true}),
     authoring: 'PUBLISHED',
     revisionId: 'ENT-PUB-01',
     baseline: {status: 'AVAILABLE', id: 'BL-1', revision: '1', digest: 'd1'}

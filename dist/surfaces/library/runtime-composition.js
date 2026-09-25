@@ -6,6 +6,7 @@ export const LIBRARY_REAL_CONSUMER_SOURCE_CONTRACT=Object.freeze({
 });
 const forbiddenTruth=/(FIXTURE|DEMO|SYNTHETIC|HARNESS|PROOF[_ -]?ONLY|NON_PRODUCTION|ACCEPTANCE_SEED|NOT_CANONICAL_RUNTIME_IMPORT)/i;
 const clone=value=>structuredClone(value);
+const unavailableDocument=()=>({id:'library-unavailable',revision:'UNAVAILABLE',title:'Library source unavailable',tags:['Library','Unavailable'],blocks:[{id:'library-unavailable-p1',type:'paragraph',html:'Library source is unavailable. This placeholder is not canonical content and cannot be mutated.'}]});
 
 export function assertGenuineLibrarySource(source){
   if(!source||typeof source!=='object')throw Error('LIBRARY_REAL_SOURCE_REQUIRED');
@@ -19,12 +20,18 @@ export function assertGenuineLibrarySource(source){
 
 export class LibraryRuntimeComposition {
   constructor({source,commit=null,noteRoute='PERSONAL:CEP/W02/library'}={}){
-    const identity=assertGenuineLibrarySource(source);
+    let identity,rejection=null;
+    try{identity=assertGenuineLibrarySource(source);}catch(error){
+      rejection={classification:String(source?.classification||source?.kind||'UNAVAILABLE'),truth:String(source?.truth||source?.sourceTruth||'UNAVAILABLE'),reason:String(error?.message||error)};
+      identity={classification:'UNAVAILABLE',truth:'UNAVAILABLE',documentId:'library-unavailable'};
+      source={classification:'UNAVAILABLE',truth:'UNAVAILABLE',providerRef:source?.providerRef||null,document:unavailableDocument(),lifecycle:source?.lifecycle||null,context:source?.context||{},services:{}};
+    }
     this.owner='LibraryRuntimeComposition';
     this.semanticOwner=false;
     const {services={},...sourceData}=source;
     this.source=clone(sourceData);
     this.sourceIdentity=identity;
+    this.sourceRejection=rejection;
     this.services=services;
     this.structured=new StructuredDocumentDomainAdapter({
       owner:'LibraryDomainAdapter',domainKind:'library',document:clone(source.document),
@@ -33,13 +40,14 @@ export class LibraryRuntimeComposition {
       noteBinding:{route:noteRoute},commit:commit||this.services.saveBoundary||null
     });
   }
-  canCreate(){return typeof this.services.createDocument==='function';}
+  sourceAvailability(){return this.sourceRejection?{enabled:false,code:'LIBRARY_CANONICAL_SOURCE_UNAVAILABLE',reason:this.sourceRejection.reason,availabilityOwner:'LibraryDomainAdapter',rejectedSource:clone(this.sourceRejection)}:{enabled:true,code:'AVAILABLE',reason:'',availabilityOwner:'LibraryDomainAdapter'};}
+  canCreate(){return this.sourceAvailability().enabled&&typeof this.services.createDocument==='function';}
   create(payload={}){if(!this.canCreate())return {ok:false,status:'LIBRARY_CREATE_PROVIDER_UNAVAILABLE',mutated:false};return this.services.createDocument(payload);}
-  canRevise(){return typeof this.services.createSuccessorRevision==='function';}
+  canRevise(){return this.sourceAvailability().enabled&&typeof this.services.createSuccessorRevision==='function';}
   revise(payload={}){if(!this.canRevise())return {ok:false,status:'LIBRARY_REVISION_PROVIDER_UNAVAILABLE',mutated:false};return this.services.createSuccessorRevision({document:this.structured.snapshot(),identity:this.structured.identity(),...payload});}
-  canCompareRevisions(payload={}){return typeof this.services.compareRevisions==='function'&&Boolean(payload.leftRevision)&&Boolean(payload.rightRevision);}
+  canCompareRevisions(payload={}){return this.sourceAvailability().enabled&&typeof this.services.compareRevisions==='function'&&Boolean(payload.leftRevision)&&Boolean(payload.rightRevision);}
   compareRevisions(payload={}){if(!this.canCompareRevisions(payload))return {ok:false,status:'LIBRARY_EXACT_REVISION_PAIR_REQUIRED',mutated:false};if(String(payload.leftRevision)==='latest'||String(payload.rightRevision)==='latest')return {ok:false,status:'LIBRARY_LATEST_ALIAS_FORBIDDEN',mutated:false};return this.services.compareRevisions({documentId:this.structured.identity().id,leftRevision:String(payload.leftRevision),rightRevision:String(payload.rightRevision)});}
-  descriptor(){return {owner:this.owner,semanticOwner:false,contract:LIBRARY_REAL_CONSUMER_SOURCE_CONTRACT,sourceIdentity:clone(this.sourceIdentity),structuredOwner:this.structured.owner,transactionOwner:this.structured.transactionOwner.owner,persistenceConfigured:this.structured.transactionDescriptor().persistedBoundaryConfigured,fixtureFallback:false};}
+  descriptor(){return {owner:this.owner,semanticOwner:false,contract:LIBRARY_REAL_CONSUMER_SOURCE_CONTRACT,sourceIdentity:clone(this.sourceIdentity),sourceState:this.sourceAvailability().enabled?'AVAILABLE':'UNAVAILABLE',sourceReason:this.sourceRejection?.reason||null,rejectedSource:clone(this.sourceRejection),structuredOwner:this.structured.owner,transactionOwner:this.structured.transactionOwner.owner,persistenceConfigured:this.structured.transactionDescriptor().persistedBoundaryConfigured,fixtureFallback:false};}
 }
 
 export function createLibraryRuntimeComposition(options){return new LibraryRuntimeComposition(options);}

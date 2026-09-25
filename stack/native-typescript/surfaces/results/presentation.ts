@@ -33,6 +33,7 @@ export function renderResultsSurface(root,composition,{dir='ltr',refs=[]}={}){
   if(!root||!composition)throw Error('RESULTS_PRESENTATION_INPUT_REQUIRED');
   root.dir=dir;root.dataset.surface='results';
   const catalog=composition.domain.listResults();
+  const provider=composition.domain.providerAvailability();
   const normalizedRefs=(refs.length?refs:catalog.map(item=>item.ref)).map(ref=>catalog.find(item=>refKey(item.ref)===refKey(ref))?.ref||ref).filter(Boolean);
   const state={mode:'replay',selected:normalizedRefs[0]||catalog[0]?.ref||null,left:normalizedRefs[0]||catalog[0]?.ref||null,right:normalizedRefs[1]||catalog[1]?.ref||null,compare:null};
   let timelineHost=null;
@@ -40,7 +41,7 @@ export function renderResultsSurface(root,composition,{dir='ltr',refs=[]}={}){
   const selectRef=key=>catalog.find(item=>refKey(item.ref)===key)?.ref||null;
   const renderCenter=()=>{
     const center=root.querySelector('[data-results-center]');if(!center)return;
-    if(!state.selected){center.innerHTML='<div class="rs-empty">No sealed Results are available.</div>';return}
+    if(!state.selected){const messages={UNAVAILABLE:'Results provider is unavailable. No sealed Result truth is being inferred.',EMPTY:'The Results provider is available and returned an empty collection.',ERROR:`Results provider error: ${provider.reason||'Unknown provider error.'}`};center.innerHTML=`<div class="rs-empty" data-results-provider-state="${attr(provider.state)}">${esc(messages[provider.state]||'No sealed Results are available.')}</div>`;return}
     if(state.mode==='replay'){
       composition.bus.execute('results.replay',state.selected);
       center.innerHTML='<div data-results-timeline></div>';

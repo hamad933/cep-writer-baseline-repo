@@ -17,7 +17,7 @@ export class ProcessingRuntimeAdapter{
   constructor({transport=createBoundedLocalRuntimeTransport()}={}){
     this.owner='W05ProcessingDomainAdapter';
     this.transport=transport;
-    this.state={jobs:[],selectedJobId:null,lastReceipt:null,lastError:null,refreshPhase:'IDLE'};
+    this.state={jobs:[],selectedJobId:null,lastReceipt:null,lastError:null,refreshPhase:'IDLE',providerState:'UNAVAILABLE'};
     this.tableAdapter={
       adapterId:'processing.jobs',rows:()=>this.rows(),rowId:row=>row.jobId,rowLabel:row=>row.jobId,
       searchableText:row=>`${row.jobId} ${row.requestId} ${row.state} ${(row.attempts||[]).map(a=>a.attemptId).join(' ')}`,
@@ -45,14 +45,15 @@ export class ProcessingRuntimeAdapter{
     if(r.job){const i=this.state.jobs.findIndex(job=>job.jobId===r.job.jobId);if(i>=0)this.state.jobs[i]=clone(r.job);else this.state.jobs.push(clone(r.job));this.state.selectedJobId=r.job.jobId;}
     return r;
   }
-  async refresh(){this.state.refreshPhase='FETCHING';const r=await this.transport.request('GET','/v1/processing/jobs');this.state.refreshPhase='IDLE';if(r.ok){this.state.jobs=(r.jobs||[]).map(clone);if(!this.state.selectedJobId||!this.state.jobs.some(job=>job.jobId===this.state.selectedJobId))this.state.selectedJobId=this.state.jobs.at(-1)?.jobId||null;this.state.lastError=null;}else this.state.lastError=clone(r);return r;}
+  async refresh(){this.state.refreshPhase='FETCHING';const r=await this.transport.request('GET','/v1/processing/jobs');this.state.refreshPhase='IDLE';if(r.ok){this.state.jobs=(r.jobs||[]).map(clone);if(!this.state.selectedJobId||!this.state.jobs.some(job=>job.jobId===this.state.selectedJobId))this.state.selectedJobId=this.state.jobs.at(-1)?.jobId||null;this.state.lastError=null;this.state.providerState='AVAILABLE';}else{this.state.lastError=clone(r);this.state.providerState=/ERROR|FAILED/.test(String(r.code||r.reason||''))?'ERROR':'UNAVAILABLE';}return r;}
   inspect({jobId}={}){const id=jobId??this.state.selectedJobId??this.state.jobs.at(-1)?.jobId;if(!id)return {ok:false,code:'PROCESSING_JOB_REQUIRED'};const job=this.state.jobs.find(item=>item.jobId===id);if(!job)return {ok:false,code:'PROCESSING_JOB_UNKNOWN'};this.state.selectedJobId=id;this.collection.selectOnly(id);return {ok:true,job:clone(job),providerTruth:safeProviderProof(job),cancellationTruth:safeCancelTruth(job),validationTruth:safeValidationTruth(job)};}
-  async retry(){const job=this.selected();if(!job)return {ok:false,code:'JOB_REQUIRED'};if(!['FAILED','TIMED_OUT'].includes(job.state))return {ok:false,code:'RETRY_NOT_ALLOWED',reason:'Retry requires FAILED or TIMED_OUT Job'};const retryBase=job.currentAttemptId||job.attempts?.at(-1)?.attemptId||'unknown-attempt';const idempotencyKey=`retry:${job.jobId}:${retryBase}`;return this.#record(await this.transport.request('POST',`/v1/processing/jobs/${encodeURIComponent(job.jobId)}/retry`,{idempotencyKey}));}
-  async requestCancel(){const job=this.selected();return job?this.#record(await this.transport.request('POST',`/v1/processing/jobs/${encodeURIComponent(job.jobId)}/cancel-request`,{requestId:`cancel-${Date.now()}`})):{ok:false,code:'JOB_REQUIRED'};}
-  async validationHandoff(){const job=this.selected();return job?this.#record(await this.transport.request('POST',`/v1/processing/jobs/${encodeURIComponent(job.jobId)}/validation-handoff`,{consumerId:'processing-safety-validator'})):{ok:false,code:'JOB_REQUIRED'};}
+  async retry(){if(this.state.providerState!=='AVAILABLE')return {ok:false,code:'PROCESSING_PROVIDER_UNAVAILABLE',mutated:false};const job=this.selected();if(!job)return {ok:false,code:'JOB_REQUIRED'};if(!['FAILED','TIMED_OUT'].includes(job.state))return {ok:false,code:'RETRY_NOT_ALLOWED',reason:'Retry requires FAILED or TIMED_OUT Job'};const retryBase=job.currentAttemptId||job.attempts?.at(-1)?.attemptId||'unknown-attempt';const idempotencyKey=`retry:${job.jobId}:${retryBase}`;return this.#record(await this.transport.request('POST',`/v1/processing/jobs/${encodeURIComponent(job.jobId)}/retry`,{idempotencyKey}));}
+  async requestCancel(){if(this.state.providerState!=='AVAILABLE')return {ok:false,code:'PROCESSING_PROVIDER_UNAVAILABLE',mutated:false};const job=this.selected();return job?this.#record(await this.transport.request('POST',`/v1/processing/jobs/${encodeURIComponent(job.jobId)}/cancel-request`,{requestId:`cancel-${Date.now()}`})):{ok:false,code:'JOB_REQUIRED'};}
+  async validationHandoff(){if(this.state.providerState!=='AVAILABLE')return {ok:false,code:'PROCESSING_PROVIDER_UNAVAILABLE',mutated:false};const job=this.selected();return job?this.#record(await this.transport.request('POST',`/v1/processing/jobs/${encodeURIComponent(job.jobId)}/validation-handoff`,{consumerId:'processing-safety-validator'})):{ok:false,code:'JOB_REQUIRED'};}
   availability(id,payload={}){
     const job=payload.jobId?this.state.jobs.find(item=>item.jobId===payload.jobId):this.selected();
     if(id==='processing.inspect')return Boolean(job)||'Select a Job';
+    if(this.state.providerState!=='AVAILABLE')return {enabled:false,code:'PROCESSING_PROVIDER_UNAVAILABLE',reason:'Processing provider is unavailable; retained historical jobs are inspection-only.',availabilityOwner:this.owner};
     if(id==='processing.retry')return ['FAILED','TIMED_OUT'].includes(job?.state)||'Retry requires FAILED or TIMED_OUT Job';
     if(id==='processing.requestCancel')return Boolean(job)&&!terminalStates.has(job.state)||'Select a non-terminal Job';
     if(id==='processing.validationHandoff')return job?.state==='COMPLETED'||'A COMPLETED Job is required';
