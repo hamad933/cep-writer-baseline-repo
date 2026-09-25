@@ -1,6 +1,6 @@
 {
   "runtime": "v22.16.0",
-  "measured_at": "2026-09-25T18:12:50.403Z",
+  "measured_at": "2026-09-25T20:24:26.265Z",
   "scope": "Canonical stack/native-typescript source independently generates dist and dist-ts JavaScript; no generated tree writes back to canonical source.",
   "buildDirection": "stack/native-typescript -> dist + dist-ts",
   "reverseGeneratedToSourceWrites": false,
@@ -15,7 +15,7 @@
       "authority": "CANONICAL_SOURCE_TO_GENERATED_ONLY",
       "source": "stack/native-typescript",
       "destination": "dist",
-      "written": 271,
+      "written": 272,
       "copiedAssets": 2,
       "removedStale": 0
     }
@@ -29,20 +29,20 @@
     "static_types": "Canonical TypeScript source; proof measures erasable-syntax generation parity only.",
     "model_pass": 210,
     "model_fail": 0,
-    "emit_ms": 212.66730000000075,
+    "emit_ms": 260.01540000000114,
     "build": {
       "pass": true,
       "authority": "CANONICAL_SOURCE_TO_GENERATED_ONLY",
       "source": "stack/native-typescript",
       "destination": "dist-ts",
-      "written": 271,
+      "written": 272,
       "copiedAssets": 2,
       "removedStale": 0
     }
   },
   "identical_model_results": true,
-  "A_model_suite_median_ms": 66.91820000000007,
-  "A_model_suite_p95_ms": 88.86519999999973,
+  "A_model_suite_median_ms": 61.16949999999997,
+  "A_model_suite_p95_ms": 78.94789999999989,
   "performance_limit": "One host, warm model workload only; not cold browser startup or representative full product workload.",
   "inventory": [
     {
@@ -101,9 +101,9 @@
     },
     {
       "file": "adapters/enterprise/domain.js",
-      "source_ts_bytes": 16690,
-      "source_ts_lines": 224,
-      "emitted_bytes": 16690
+      "source_ts_bytes": 17538,
+      "source_ts_lines": 233,
+      "emitted_bytes": 17538
     },
     {
       "file": "adapters/evidence/domain.js",
@@ -665,9 +665,9 @@
     },
     {
       "file": "foundation/operational/xterm-renderer.js",
-      "source_ts_bytes": 7328,
-      "source_ts_lines": 59,
-      "emitted_bytes": 7328
+      "source_ts_bytes": 7529,
+      "source_ts_lines": 60,
+      "emitted_bytes": 7529
     },
     {
       "file": "foundation/relations.js",
@@ -929,9 +929,9 @@
     },
     {
       "file": "main.js",
-      "source_ts_bytes": 56102,
-      "source_ts_lines": 287,
-      "emitted_bytes": 56102
+      "source_ts_bytes": 56279,
+      "source_ts_lines": 291,
+      "emitted_bytes": 56279
     },
     {
       "file": "model-tests.js",
@@ -1019,9 +1019,9 @@
     },
     {
       "file": "surfaces/labs/index.js",
-      "source_ts_bytes": 2565,
-      "source_ts_lines": 14,
-      "emitted_bytes": 2565
+      "source_ts_bytes": 3226,
+      "source_ts_lines": 21,
+      "emitted_bytes": 3226
     },
     {
       "file": "surfaces/labs/presentation.js",
@@ -1049,9 +1049,9 @@
     },
     {
       "file": "surfaces/m0-controller-composition.js",
-      "source_ts_bytes": 63575,
-      "source_ts_lines": 240,
-      "emitted_bytes": 63575
+      "source_ts_bytes": 64610,
+      "source_ts_lines": 244,
+      "emitted_bytes": 64610
     },
     {
       "file": "surfaces/manual_ai/composition.js",
@@ -1091,9 +1091,9 @@
     },
     {
       "file": "surfaces/reviews/index.js",
-      "source_ts_bytes": 10676,
-      "source_ts_lines": 80,
-      "emitted_bytes": 10676
+      "source_ts_bytes": 17035,
+      "source_ts_lines": 137,
+      "emitted_bytes": 17035
     },
     {
       "file": "surfaces/rq/surface.js",
@@ -1115,9 +1115,9 @@
     },
     {
       "file": "surfaces/scenarios/index.js",
-      "source_ts_bytes": 2760,
-      "source_ts_lines": 14,
-      "emitted_bytes": 2760
+      "source_ts_bytes": 3188,
+      "source_ts_lines": 20,
+      "emitted_bytes": 3188
     },
     {
       "file": "surfaces/scenarios/presentation.js",
@@ -1223,9 +1223,15 @@
     },
     {
       "file": "tests/post-c03/LCORR01/lcorr01-parent-candidate-falsification-tests.js",
-      "source_ts_bytes": 19168,
-      "source_ts_lines": 270,
-      "emitted_bytes": 19168
+      "source_ts_bytes": 29033,
+      "source_ts_lines": 502,
+      "emitted_bytes": 29033
+    },
+    {
+      "file": "tests/post-c03/LCORR03/lcorr03-central-integration-falsification-tests.js",
+      "source_ts_bytes": 23227,
+      "source_ts_lines": 603,
+      "emitted_bytes": 23227
     },
     {
       "file": "tests/post-c03/PR01/pr01-runtime-interaction-tests.js",
