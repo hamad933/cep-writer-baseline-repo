@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 7,
+  "schemaVersion": 8,
   "classification": "CEP_CURRENT_WORKING_BASELINE_WRITER_REPOSITORY__NOT_ACCEPTANCE",
   "repositoryBaselineRef": "main",
   "repositoryHeadRule": "RESOLVE_EXACT_HEAD_AT_MISSION_BINDING",
@@ -8,7 +8,13 @@
   "productSourceSha256": "480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641",
   "productSourceFiles": 273,
   "mainPurpose": "CONTROLLER_BOUND_WORKING_CORRECTION_BASELINE",
-  "missionOverlayPolicy": "MISSION_BRANCH_ONLY",
+  "missionOverlayPolicy": "CARRIER_BOUND_EXACT_MISSION_OVERLAY",
   "noRequiredLiveDriveFetch": true,
-  "historicalLineageIndex": "docs/history/HISTORICAL_LINEAGE_INDEX.md"
+  "historicalLineageIndex": "docs/history/HISTORICAL_LINEAGE_INDEX.md",
+  "postC03ZeroLossReconciliation": {
+    "date": "2026-09-25",
+    "compactFindingProjectionExhaustive": false,
+    "downstreamMissionMaterializationRequired": true,
+    "finalObligationManifestRequired": true
+  }
 }
