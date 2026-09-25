@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ar" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D07 Today populated Presentation harness</title>
+  <style>
+    :root { color-scheme:dark; --ui:"Segoe UI",Tahoma,sans-serif; --fg:#e7f1fb; background:#020b16; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; background:#020b16; color:var(--fg); font-family:var(--ui); overflow:auto; }
+    .harness-label { position:fixed; z-index:1000; inset:8px 12px auto auto; max-width:calc(100vw - 24px); border:1px solid #38bdf8; color:#b9ecff; background:#061828ee; border-radius:999px; padding:6px 11px; font:10px Consolas,monospace; direction:ltr; box-shadow:0 6px 24px #0008; }
+    #host { min-height:100vh; }
+    @media (min-width:1200px) { #host { width:1440px; transform:scale(.68); transform-origin:top left; } }
+    @media (min-width:900px) and (max-width:1199px) { #host { width:1024px; transform:scale(.80); transform-origin:top left; } }
+  </style>
+</head>
+<body>
+  <div class="harness-label">TEST_ONLY_PRESENTATION_HARNESS__NOT_PRODUCT_PROVIDER_TRUTH</div>
+  <main id="host" aria-label="Today populated Presentation harness"></main>
+  <script type="module">
+    import {TodayProjectionDomainAdapter} from '../dist/adapters/today/domain.js';
+    import {createBalanced6TodayProviders} from '../dist/adapters/today/acceptance-data.js';
+    import {CommandRegistry} from '../dist/foundation/models.js';
+    import {composeTodayOrchestrationPresentation} from '../dist/surfaces/today/surface.js';
+
+    const observedAt='2025-05-18T10:40:00Z';
+    const resolver={
+      descriptor:()=>({providerId:'d07.test-only.continuation-resolver',authority:'TEST_ONLY_PRESENTATION_HARNESS'}),
+      resolve:({destination,objectId})=>({state:'RESOLVABLE',destination,objectId,providerId:'d07.test-only.continuation-resolver',observedAt,resolutionRef:`d07-test:${destination}:${objectId}`})
+    };
+    const adapter=new TodayProjectionDomainAdapter({providers:createBalanced6TodayProviders(),allowFixtureProviders:true,continuationResolver:resolver,allowFixtureResolvers:true});
+    const projection=adapter.project();
+    const commands=new CommandRegistry();
+    const composition=composeTodayOrchestrationPresentation({host:document.querySelector('#host'),commands,adapter,lang:'ar'});
+    const receipt=composition.presentation;
+    document.documentElement.dataset.harnessTruth='TEST_ONLY_PRESENTATION_HARNESS__NOT_PRODUCT_PROVIDER_TRUTH';
+    window.D07_PRESENTATION_PROOF={adapter,commands,composition,projection,receipt,normalProductProviderTruth:'TODAY_PROVIDER_UNBOUND'};
+  </script>
+</body>
+</html>

@@ -7,16 +7,18 @@ import {TodayProjectionDomainAdapter} from '../../../adapters/today/domain.js';
 import {bindTodaySurface} from '../../../surfaces/today/surface.js';
 import {buildTodayOrchestrationViewModel,todayProjectionStateCopy} from '../../../surfaces/today/presentation.js';
 
-const observed=(id,items,extra={})=>({id,read:()=>({providerId:id,state:'OBSERVED_DATA',observedAt:'2026-09-18T00:00:00Z',items,...extra})});
+const observed=(id,items,extra={})=>({id,read:()=>({providerId:id,state:'AVAILABLE_DATA',observedAt:'2026-09-18T00:00:00Z',items,...extra})});
 const failed={id:'queue',read:()=>{throw Error('QUEUE_PROVIDER_FAILED')}};
+const resolver=(objectId,state='RESOLVABLE')=>({descriptor:()=>({providerId:'s07-current-target-resolver',authority:'CURRENT_PROVIDER_BROWSER_EVIDENCE'}),resolve:({destination})=>({state,destination,objectId,providerId:'s07-current-target-resolver',observedAt:'2026-09-18T00:00:00Z',resolutionRef:`s07:${objectId}:${state}`})});
 
-// Today: an unbound provider is UNOBSERVED, never AVAILABLE_EMPTY/OBSERVED_EMPTY.
+// Today: an unbound provider is UNAVAILABLE, never AVAILABLE_EMPTY/legacy UNOBSERVED.
 {
   const adapter=new TodayProjectionDomainAdapter(),projection=adapter.project();
-  assert.equal(projection.state,'UNOBSERVED');
+  assert.equal(projection.state,'UNAVAILABLE');
+  assert.equal(projection.sources[0].reason,'TODAY_PROVIDER_UNBOUND');
   assert.equal(projection.sourceTotalCount,0);assert.equal(projection.visibleCount,0);
   assert.equal(projection.canonicalWrites,false);assert.equal(projection.mastery,'NOT_INFERRED__W04_OWNED');
-  assert.match(todayProjectionStateCopy(projection,'en'),/not been observed/i);
+  assert.match(todayProjectionStateCopy(projection,'en'),/unavailable/i);
 }
 
 // Today: one successful source + one failed source is PARTIAL, not empty/failure collapse.
@@ -24,7 +26,7 @@ const failed={id:'queue',read:()=>{throw Error('QUEUE_PROVIDER_FAILED')}};
   const recent=observed('recent',[{id:'ctx-1',kind:'RECENT_CONTEXT',title:'Viewed map'}]);
   const adapter=new TodayProjectionDomainAdapter({providers:[failed,recent]}),projection=adapter.project();
   assert.equal(projection.state,'PARTIAL');assert.equal(projection.sourceTotalCount,1);assert.equal(projection.items[0].providerId,'recent');
-  assert.equal(projection.sources.find(s=>s.providerId==='queue').state,'FAILED');
+  assert.equal(projection.sources.find(s=>s.providerId==='queue').state,'ERROR');
 }
 
 // Today: filter is presentation-side, source totals remain stable and filtered-empty is explicit.
@@ -48,13 +50,13 @@ const failed={id:'queue',read:()=>{throw Error('QUEUE_PROVIDER_FAILED')}};
   const vm=buildTodayOrchestrationViewModel(adapter.lastProjection,{lang:'en',adapter});assert.equal(vm.whyAvailability.enabled,true);
 }
 
-// Today: continuation guard uses target existence/readability only, never learner progress.
+// Today: continuation guard requires an exact current resolver proof and never learner progress.
 {
   const provider=observed('resume',[{id:'resume-1',kind:'CONTINUE_SESSION',title:'Lesson 02',progress:0.42,continuation:{destination:'learn',objectId:'lesson-02',exists:true,readable:true}}]);
-  const adapter=new TodayProjectionDomainAdapter({providers:[provider]});adapter.project();
+  const adapter=new TodayProjectionDomainAdapter({providers:[provider],continuationResolver:resolver('lesson-02')});adapter.project();
   const result=adapter.resume('resume-1');assert.equal(result.ok,true);assert.equal(result.progressMutation,false);assert.equal(result.accessDecisionMade,false);assert.equal(result.returnBookmark.surface,'today');
   const blockedProvider=observed('blocked',[{id:'resume-2',kind:'CONTINUE_SESSION',continuation:{destination:'learn',objectId:'lesson-03',exists:true,readable:false}}]);
-  const blocked=new TodayProjectionDomainAdapter({providers:[blockedProvider]});blocked.project();assert.equal(blocked.resume('resume-2').status,'CONTINUATION_TARGET_UNRESOLVED');
+  const blocked=new TodayProjectionDomainAdapter({providers:[blockedProvider],continuationResolver:resolver('lesson-03','TARGET_FORBIDDEN')});blocked.project();assert.equal(blocked.resume('resume-2').status,'CONTINUATION_TARGET_FORBIDDEN');
 }
 
 // Today semantic commands inherit adapter availability; why is disabled without exact selected version.

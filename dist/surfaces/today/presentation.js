@@ -13,6 +13,9 @@ const COPY = Object.freeze({
   ar: {
     eyebrow: 'إسقاط يومي من مصادره الأصلية',
     title: 'اليوم',
+    greeting: 'مرحبًا، إليك سياق يومك',
+    observed: 'آخر رصد موثوق',
+    noObservation: 'لا يوجد رصد مزوّد حالي',
     subtitle: 'استأنف ما كنت تعمل عليه، وراجع الإجراء التالي والانتباه والسياق والتقدم دون إنشاء حقيقة جديدة.',
     continue: 'متابعة الجلسة الحالية',
     resume: 'متابعة',
@@ -44,6 +47,9 @@ const COPY = Object.freeze({
   en: {
     eyebrow: 'Daily projection from canonical owners',
     title: 'Today',
+    greeting: 'Welcome — here is your day in context',
+    observed: 'Last trusted observation',
+    noObservation: 'No current provider observation',
     subtitle: 'Resume work and inspect next action, attention, recent context and progress without creating a second truth store.',
     continue: 'Continue current session',
     resume: 'Resume',
@@ -89,6 +95,9 @@ export function todayProjectionStateCopy(projection, lang = 'ar') {
 
 export function buildTodayOrchestrationViewModel(projection, { lang = 'ar', adapter = null } = {}) {
   const l = lang === 'en' ? 'en' : 'ar', c = COPY[l], recommendations = byKind(projection, 'RECOMMENDATION'), selected = recommendations[0] || null;
+  const observedAt = (projection.sources || []).map(source => source.observedAt).find(Boolean) || null;
+  const observedDate = observedAt ? new Date(observedAt) : null;
+  const dayContext = observedDate && !Number.isNaN(observedDate.valueOf()) ? new Intl.DateTimeFormat(l === 'ar' ? 'ar-SA-u-ca-gregory' : 'en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'UTC' }).format(observedDate) : c.noObservation;
   const selectedVersion = selected?.recommendation?.version || '';
   const whyAvailability = selected && adapter?.canExplain ? adapter.canExplain(selected.id, selectedVersion) : { enabled: false, reason: c.noRationale, code: 'RECOMMENDATION_SELECTION_BOUNDARY_UNAVAILABLE' };
   const continuation = byKind(projection, 'CONTINUE_SESSION')[0] || null;
@@ -107,7 +116,9 @@ export function buildTodayOrchestrationViewModel(projection, { lang = 'ar', adap
     recent: byKind(projection, 'RECENT_CONTEXT'),
     progress: byKind(projection, 'PROGRESS'),
     statusMessage: todayProjectionStateCopy(projection, l),
-    statusTone: stateTone(projection.state)
+    statusTone: stateTone(projection.state),
+    observedAt,
+    dayContext
   });
 }
 
@@ -115,10 +126,10 @@ const style = `<style data-today-orchestration-style>
 .today-orchestration {
   font-family: var(--ui, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Arabic", sans-serif);
   display: grid;
-  gap: 16px;
+  gap: 10px;
   color: var(--fg, #e6f1fc);
   min-height: 100%;
-  padding: 16px 20px;
+  padding: 14px 18px 20px;
   background: radial-gradient(circle at 45% 0%, rgba(14, 165, 233, 0.12) 0%, rgba(3, 16, 32, 0.96) 42%, #020b16 100%);
   box-sizing: border-box;
 }
@@ -131,13 +142,14 @@ const style = `<style data-today-orchestration-style>
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
-  padding-bottom: 4px;
+  padding: 4px 0 10px;
   border-bottom: 1px solid rgba(56, 189, 248, 0.12);
 }
 .today-head-main {
   display: grid;
-  gap: 4px;
+  gap: 3px;
 }
+.today-eyebrow { color:#38bdf8; font-size:11px; font-weight:700; letter-spacing:.05em; }
 .today-greeting-row {
   display: flex;
   align-items: baseline;
@@ -146,7 +158,7 @@ const style = `<style data-today-orchestration-style>
 }
 .today-heading {
   margin: 0;
-  font-size: clamp(20px, 2.2vw, 28px);
+  font-size: clamp(24px, 2.7vw, 34px);
   font-weight: 700;
   color: #f8fafc;
   letter-spacing: -0.01em;
@@ -162,6 +174,8 @@ const style = `<style data-today-orchestration-style>
   border-radius: 6px;
   border: 1px solid rgba(56, 189, 248, 0.2);
 }
+.today-day-context { display:flex; align-items:center; gap:7px; color:#cbd5e1; font-size:12px; }
+.today-day-context strong { color:#7dd3fc; font-weight:600; }
 .today-subtitle {
   margin: 0;
   color: #94a3b8;
@@ -218,22 +232,32 @@ const style = `<style data-today-orchestration-style>
 
 .today-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.85fr) minmax(310px, 1.05fr);
-  gap: 16px;
+  grid-template-columns: minmax(0, 1.85fr) minmax(285px, .95fr);
+  grid-template-areas: "main attention";
+  direction: ltr;
+  gap: 12px;
   align-items: start;
 }
 .today-main {
   display: grid;
-  gap: 16px;
+  grid-area: main;
+  min-width: 0;
+  gap: 10px;
 }
+.today-attention-side { grid-area:attention; min-width:0; }
+.today-orchestration[dir="rtl"] .today-main,
+.today-orchestration[dir="rtl"] .today-attention-side { direction:rtl; }
+.today-orchestration[dir="ltr"] .today-main,
+.today-orchestration[dir="ltr"] .today-attention-side { direction:ltr; }
 .today-grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 10px;
+  min-width: 0;
 }
 .today-card {
   border: 1px solid rgba(46, 115, 170, 0.35);
-  border-radius: 12px;
+  border-radius: 11px;
   background: linear-gradient(180deg, rgba(8, 30, 52, 0.95) 0%, rgba(5, 20, 36, 0.97) 100%);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
   overflow: hidden;
@@ -245,7 +269,7 @@ const style = `<style data-today-orchestration-style>
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 14px 16px 8px;
+  padding: 10px 13px 6px;
 }
 .today-card-title-group {
   display: flex;
@@ -260,13 +284,13 @@ const style = `<style data-today-orchestration-style>
   margin: 0;
 }
 .today-card-body {
-  padding: 8px 16px 16px;
+  padding: 6px 13px 12px;
   display: grid;
   gap: 10px;
   flex: 1;
 }
 .today-card-footer {
-  padding: 8px 16px 12px;
+  padding: 6px 13px 9px;
   border-top: 1px solid rgba(56, 189, 248, 0.1);
   display: flex;
   align-items: center;
@@ -345,8 +369,19 @@ const style = `<style data-today-orchestration-style>
 .today-session-card {
   border-color: rgba(56, 189, 248, 0.4);
 }
+.today-session-grid { display:grid; grid-template-columns:minmax(210px,.72fr) minmax(0,1.35fr); grid-template-areas:"visual content"; gap:14px; min-width:0; }
+.today-session-content { grid-area:content; display:grid; align-content:start; gap:7px; min-width:0; }
+.today-session-visual { grid-area:visual; position:relative; min-height:190px; border:1px solid rgba(56,189,248,.23); border-radius:10px; overflow:hidden; background:radial-gradient(circle at 82% 18%,rgba(34,211,238,.15),transparent 28%),linear-gradient(145deg,#071a2b,#03101d); direction:ltr; }
+.today-session-visual-window { position:absolute; inset:24px 26px 42px 20px; border:1px solid rgba(125,211,252,.33); border-radius:8px; background:#03111f; box-shadow:14px 15px 0 -8px rgba(14,165,233,.11); }
+.today-session-visual-window::before { content:"●  ●  ●"; display:block; height:22px; padding:5px 9px; color:#64748b; border-bottom:1px solid rgba(125,211,252,.16); font-size:8px; letter-spacing:4px; }
+.today-session-visual-code { margin:0; padding:15px 13px; color:#a5f3fc; font:11px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace; white-space:pre-wrap; }
+.today-session-visual-db { position:absolute; left:19px; bottom:18px; width:48px; height:28px; border:1px solid #38bdf8; border-radius:50%; background:#07243a; box-shadow:0 7px 0 #061c2e,0 8px 0 #38bdf8,0 14px 0 #061725,0 15px 0 rgba(56,189,248,.75); }
+.today-session-visual-progress { position:absolute; left:84px; right:20px; bottom:15px; height:5px; border-radius:99px; background:#0d2c42; overflow:hidden; }
+.today-session-visual-progress::after { content:""; display:block; width:58%; height:100%; background:linear-gradient(90deg,#0ea5e9,#22d3ee); }
+.today-orchestration[dir="rtl"] .today-session-content { direction:rtl; }
+.today-orchestration[dir="ltr"] .today-session-content { direction:ltr; }
 .today-session-title {
-  font-size: 21px;
+  font-size: 19px;
   font-weight: 700;
   color: #f8fafc;
   margin: 0;
@@ -568,13 +603,13 @@ const style = `<style data-today-orchestration-style>
 /* Attention Sidebar */
 .today-attention-body {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 .today-attention-item {
   border: 1px solid rgba(46, 115, 170, 0.3);
   border-radius: 8px;
   background: rgba(4, 18, 33, 0.7);
-  padding: 10px 12px;
+  padding: 8px 10px;
   display: grid;
   gap: 6px;
 }
@@ -618,18 +653,20 @@ const style = `<style data-today-orchestration-style>
   color: #64748b;
   margin-top: 2px;
 }
+.today-source, .today-provider-row { min-width:0; overflow-wrap:anywhere; }
 .today-source bdi, .today-rationale-list bdi {
-  white-space: nowrap;
+  white-space: normal;
 }
 
-.today-provider-truth { display:grid; gap:6px; border:1px solid rgba(148,163,184,.18); border-radius:10px; padding:8px 10px; background:rgba(2,11,22,.45); }
+.today-provider-truth { display:flex; flex-wrap:wrap; gap:6px 12px; border:1px solid rgba(148,163,184,.18); border-radius:9px; padding:6px 9px; background:rgba(2,11,22,.45); }
 .today-provider-row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:11px; color:#94a3b8; }
 .today-provider-row[data-state="UNAVAILABLE"], .today-provider-row[data-state="ERROR"] { color:#fca5a5; }
 .today-provider-row[data-state="STALE"] { color:#fcd34d; }
 .today-provider-retained { color:#fbbf24; font-size:11px; }
-@media (max-width: 1120px) {
+@media (max-width: 900px) {
   .today-layout {
     grid-template-columns: 1fr;
+    grid-template-areas:"main" "attention";
   }
   .today-grid-2 {
     grid-template-columns: 1fr 1fr;
@@ -638,6 +675,10 @@ const style = `<style data-today-orchestration-style>
     order: 2;
   }
 }
+@media (max-width: 1080px) {
+  .today-session-grid { grid-template-columns:minmax(180px,.65fr) minmax(0,1.35fr); }
+  .today-session-visual { min-height:178px; }
+}
 @media (max-width: 768px) {
   .today-orchestration {
     padding: 12px;
@@ -645,6 +686,8 @@ const style = `<style data-today-orchestration-style>
   .today-grid-2 {
     grid-template-columns: 1fr;
   }
+  .today-session-grid { grid-template-columns:1fr; grid-template-areas:"visual" "content"; }
+  .today-session-visual { min-height:165px; }
   .today-head {
     align-items: flex-start;
     flex-direction: column;
@@ -684,25 +727,30 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
     const tagsHtml = tags.map(t => `<span class="today-pill today-pill-tag">${esc(t?.[l] || t?.label?.[l] || t?.label || t)}</span>`).join('');
 
     sessionHtml = `
-      <div class="today-card-body">
-        <h3 class="today-session-title">${esc(itemTitle(cont, l))}</h3>
-        ${codeSnippet ? `<pre class="today-code-box" dir="ltr"><code>${esc(codeSnippet)}</code></pre>` : ''}
-        ${(lastActivity || lastPosition) ? `
-          <div class="today-session-meta-row">
-            ${lastActivity ? `<div class="today-meta-item"><span class="today-meta-label">${l === 'ar' ? 'آخر نشاط:' : 'Last activity:'}</span> <span class="today-meta-val">${esc(lastActivity)}</span></div>` : ''}
-            ${lastPosition ? `<div class="today-meta-item"><span class="today-meta-label">${l === 'ar' ? 'آخر موضع:' : 'Last position:'}</span> <span class="today-meta-val">${esc(lastPosition)}</span></div>` : ''}
+      <div class="today-card-body today-session-grid">
+        <div class="today-session-content">
+          <h3 class="today-session-title">${esc(itemTitle(cont, l))}</h3>
+          ${(lastActivity || lastPosition) ? `
+            <div class="today-session-meta-row">
+              ${lastActivity ? `<div class="today-meta-item"><span class="today-meta-label">${l === 'ar' ? 'آخر نشاط:' : 'Last activity:'}</span> <span class="today-meta-val">${esc(lastActivity)}</span></div>` : ''}
+              ${lastPosition ? `<div class="today-meta-item"><span class="today-meta-label">${l === 'ar' ? 'آخر موضع:' : 'Last position:'}</span> <span class="today-meta-val">${esc(lastPosition)}</span></div>` : ''}
+            </div>
+          ` : ''}
+          <p class="today-session-summary">${esc(itemSummary(cont, l))}</p>
+          ${tagsHtml ? `<div class="today-tags-row">${tagsHtml}</div>` : ''}
+          ${sourceLine(cont, c)}
+          <div class="today-actions">
+            <button class="today-action today-action-primary" data-primary="true" data-today-action="resume" data-item-id="${esc(cont.id)}" ${vm.resumeAvailability.enabled ? '' : `disabled aria-disabled="true" title="${esc(vm.resumeAvailability.reason||vm.resumeAvailability.code||'Unavailable')}"`}>
+              ${esc(c.resume)} &gt;
+            </button>
+            <button class="today-action today-action-secondary" data-today-action="resume" data-item-id="${esc(cont.id)}" ${vm.resumeAvailability.enabled ? '' : `disabled aria-disabled="true" title="${esc(vm.resumeAvailability.reason||vm.resumeAvailability.code||'Unavailable')}"`}>
+              ${l === 'ar' ? 'عرض السياق' : 'View context'}
+            </button>
           </div>
-        ` : ''}
-        <p class="today-session-summary">${esc(itemSummary(cont, l))}</p>
-        ${tagsHtml ? `<div class="today-tags-row">${tagsHtml}</div>` : ''}
-        ${sourceLine(cont, c)}
-        <div class="today-actions">
-          <button class="today-action today-action-primary" data-primary="true" data-today-action="resume" data-item-id="${esc(cont.id)}" ${vm.resumeAvailability.enabled ? '' : `disabled aria-disabled="true" title="${esc(vm.resumeAvailability.reason||vm.resumeAvailability.code||'Unavailable')}"`}>
-            ${esc(c.resume)} &gt;
-          </button>
-          <button class="today-action today-action-secondary" data-today-action="resume" data-item-id="${esc(cont.id)}" ${vm.resumeAvailability.enabled ? '' : `disabled aria-disabled="true" title="${esc(vm.resumeAvailability.reason||vm.resumeAvailability.code||'Unavailable')}"`}>
-            ${l === 'ar' ? 'عرض السياق' : 'View context'}
-          </button>
+        </div>
+        <div class="today-session-visual" aria-hidden="true">
+          <div class="today-session-visual-window">${codeSnippet ? `<pre class="today-session-visual-code"><code>${esc(codeSnippet)}</code></pre>` : ''}</div>
+          <span class="today-session-visual-db"></span><span class="today-session-visual-progress"></span>
         </div>
       </div>
     `;
@@ -855,19 +903,19 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
     <section class="today-orchestration m0-workbench" data-r6-workbench="" id="todayWorkbench" dir="${vm.dir}" data-owner="${vm.owner}" data-projection-state="${esc(projection.state)}" data-provider-truth="read-side" tabindex="0">
       <header class="today-head" id="todayHeader">
         <div class="today-head-main">
+          <div class="today-eyebrow">${esc(c.eyebrow)} · ${esc(c.title)}</div>
           <div class="today-greeting-row">
             <h1 class="today-heading" id="todayHeading" tabindex="-1">
-              ${esc(c.title)}
+              ${esc(c.greeting)}
             </h1>
-            <div class="today-clock" id="todayClock" aria-label="Current time">
-              <span>◉</span> ${bdi(projection.state)}
-            </div>
           </div>
           <p class="today-subtitle" id="todaySubtitle">
             ${esc(c.subtitle)}
           </p>
         </div>
         <div class="today-head-controls">
+          <div class="today-day-context" id="todayClock"><strong>${esc(c.observed)}:</strong> <span>${esc(vm.dayContext)}</span></div>
+          <div class="today-clock" aria-label="Projection state"><span>◉</span> ${bdi(projection.state)}</div>
           <div class="today-filterbar" id="todayFilterBar" role="toolbar" aria-label="Today filters">
             ${filters}
             <button class="today-filter today-refresh-btn" id="todayRefreshBtn" data-today-action="refresh" title="${esc(c.refresh)}">

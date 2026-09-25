@@ -1,13 +1,15 @@
 import assert from 'node:assert/strict';
 import {CommandRegistry} from '../../../foundation/models.js';
 import {GLOBAL_SHELL_OWNER} from '../../../foundation/global/shell/navigation.js';
+import {AnalyticalCompareOwner} from '../../../foundation/analytical/compare.js';
 import {composeW01W02Rescue} from '../../../surfaces/composition/w01-w02-rescue.js';
 
 function sharedSpatial(registry){
   const owners={
     'spatial.connect':'RelationInteractionOwner','spatial.relation.commit':'RelationDomainAdapter',
     'relation.edit':'RelationInteractionOwner','relation.undo':'RelationDomainAdapter','relation.redo':'RelationDomainAdapter',
-    'spatial.fit':'SpatialInteractionKernel','spatial.align':'SpatialInteractionKernel','spatial.distribute':'SpatialInteractionKernel'
+    'spatial.fit':'SpatialInteractionKernel','spatial.align':'SpatialInteractionKernel','spatial.distribute':'SpatialInteractionKernel',
+    'spatial.undo':'SpatialInteractionKernel','spatial.redo':'SpatialInteractionKernel'
   };
   for(const [id,owner] of Object.entries(owners))registry.register(id,owner,id,()=>({ok:true,owner}));
   return owners;
@@ -31,12 +33,13 @@ const representations=[
   {representationId:'rep-b',canonicalRef:{objectId:'obj-b',revision:'r1'},label:'B',views:['TREE','PATH','GRAPH','CANVAS']}
 ];
 
-const commands=new CommandRegistry(),expectedOwners=sharedSpatial(commands),composition=composeW01W02Rescue({commands,shellNavigation:shellNavigation(),librarySource,learnSource,rqRecords,visualizeRepresentations:representations});
+const commands=new CommandRegistry(),expectedOwners=sharedSpatial(commands),analyticalCompareOwner=new AnalyticalCompareOwner(),composition=composeW01W02Rescue({commands,shellNavigation:shellNavigation(),librarySource,learnSource,rqRecords,visualizeRepresentations:representations,analyticalCompareOwner});
 assert.deepEqual(composition.contract.surfaces,['shell','today','library','learn','rq','visualize']);
 assert.equal(composition.shell.owner,GLOBAL_SHELL_OWNER);
 assert.equal(composition.shell.context.canonicalDomainWrites,false);
 assert.equal(composition.today.binding.canonicalWrites,false);
-assert.equal(composition.today.binding.projection.state,'UNOBSERVED');
+assert.equal(composition.today.binding.projection.state,'UNAVAILABLE');
+assert.equal(composition.today.binding.projection.sources[0].reason,'TODAY_PROVIDER_UNBOUND');
 assert.equal(composition.library.binding.consumerTruth,'REAL_LIBRARY_PRODUCT_SOURCE');
 assert.equal(composition.library.binding.transactionOwner,'StructuredTransactionHistoryRecoveryOwner');
 assert.equal(composition.learn.binding.masteryWrite,false);
