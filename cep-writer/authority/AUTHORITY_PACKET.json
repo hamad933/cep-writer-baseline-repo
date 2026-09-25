@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 8,
+  "schemaVersion": 9,
   "classification": "CURRENT_REUSABLE_WRITER_AUTHORITY_PACKET__MISSION_INDEPENDENT__NOT_LIVE_CONTROL_STATE",
   "baseline": {
     "repositoryRef": "main",
@@ -29,5 +29,37 @@
     "READ_FIRST.md"
   ],
   "executionTransport": "VERIFIED_INCREMENTAL_CONTINUATION_DEFAULT__FULL_CAPSULE_FALLBACK",
-  "stopGate": "CANDIDATE_ONLY__CONTROLLER_AUDIT_REQUIRED"
+  "stopGate": "CANDIDATE_ONLY__CONTROLLER_AUDIT_REQUIRED",
+  "zeroLossReconciliation": {
+    "date": "2026-09-25",
+    "classification": "SOURCE_ZERO_LOSS_THROUGH_C03__POST_C03_FORWARD_CONTROL_LAYER_REQUIRES_BOUNDED_RECONCILIATION",
+    "compactFindingProjectionExhaustive": false,
+    "visualRoutingCorrections": {
+      "F-049": [
+        "D08",
+        "D13",
+        "D14"
+      ],
+      "F-050": [
+        "D08",
+        "D13",
+        "D14"
+      ]
+    },
+    "downstreamMissionMaterializationRequired": [
+      "D05",
+      "D06",
+      "D07",
+      "D08",
+      "D09",
+      "D10",
+      "D11"
+    ],
+    "frozenObligationManifestRequired": [
+      "D12",
+      "D13",
+      "D14"
+    ]
+  },
+  "executionCarrierRule": "Carrier-specific topology is bound by the exact mission. ROUTE-LOCAL may use writer/cep-serial; do not generalize that topology to other carriers."
 }
