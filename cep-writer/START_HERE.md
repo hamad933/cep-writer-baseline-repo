@@ -45,3 +45,22 @@ Post-C03 source binding is closed. Current-baseline diagnostic browser/visual/so
 The first correction wave remains `D03A / D03B / D03C / D04`, with the current finding projection routed into the existing D03-D14 DAG rather than creating a parallel DAG.
 
 `stack/native-typescript/main.ts` and `stack/native-typescript/surfaces/m0-controller-composition.ts` remain serialized final-convergence hotspots until D13 unless an exact Controller mission explicitly changes that.
+
+## Post-C03 zero-loss reconciliation
+
+Controller reconciliation on 2026-09-25 established:
+
+`SOURCE_ZERO_LOSS_THROUGH_C03__POST_C03_FORWARD_CONTROL_LAYER_REQUIRES_BOUNDED_RECONCILIATION`.
+
+Important Writer rule:
+
+`CURRENT_POST_C03_FINDINGS.json` is a compact current root-finding projection, not an exhaustive replacement for the C03 source corpus. An exact mission must carry all applicable source-bound sub-obligations, proof requirements, owner/authority ceilings and durable details.
+
+Current authoritative routing corrections include:
+
+- `F-049`: `D08 -> D13 -> D14`
+- `F-050`: `D08 -> D13 -> D14`
+- `D04` is explicitly Visualize-no-touch for those findings.
+- A03 Path/Graph/broad-Canvas Presentation obligations remain Product requirements for D08/GATE-020.
+- D05-D11 are not launch-ready merely because a DAG route exists; each requires an exact Controller-materialized mission.
+- D12/D13/D14 require row-addressable obligation traceability rather than prose-only "all findings" claims.
