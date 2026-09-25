@@ -25,3 +25,14 @@ Read locally:
 
 Do not fetch live Controller files to satisfy required Writer inputs.
 Google Drive remains the Controller control plane; GitHub is the Writer execution plane.
+
+## Post-C03 zero-loss execution note
+
+The local Writer packet is intentionally compact but must remain zero-loss at mission materialization time.
+
+- `CURRENT_POST_C03_FINDINGS.json` is not exhaustive.
+- Exact mission overlays must carry applicable C03 source obligations and Controller-adjudicated zero-loss durable details.
+- Current corrected Visualize route is `F-049/F-050 -> D08 -> D13 -> D14`; D04 does not own those findings.
+- D05-D11 require launch-ready exact missions before Product mutation.
+- D12/D13/D14 require a frozen row-addressable obligation manifest.
+- Current authority prerequisites must remain explicit rather than inferred by Product Writers.
