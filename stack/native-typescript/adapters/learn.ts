@@ -1,6 +1,8 @@
 import {StructuredDocumentDomainAdapter} from '../foundation/structured.js';
 import {StructuredNavigationDescriptorOwner,createStructuredOutlinePresentationDescriptor} from '../foundation/structured/outline-descriptor.js';
 import {renderStructuredOutline,resolveStructuredOutlineKeyboardIntent} from '../foundation/structured/outline-host.js';
+import {createStructuredStickyNoteRuntimeComposition} from './library-note-runtime-composition.js';
+import {learnNoteBindingInput} from './note-binding-domains.js';
 
 const clone=value=>structuredClone(value);
 const unsafeTruth=value=>/(FIXTURE|DEMO|SYNTHETIC|HARNESS|PROOF)/i.test(String(value||''));
@@ -14,9 +16,9 @@ const normalizeSource=source=>{
 
 /** Thin Learn-domain owner. Shared workbench/editor mechanics remain Foundation-owned. */
 export class LearnAdapter {
-  constructor({source=null}={}){
+  constructor({source=null,noteRuntime=null,noteRouteBound=false}={}){
     this.source=normalizeSource(source);this.sourceAvailable=this.source.available;
-    this.activity=clone(this.source.activity);this.attempt=null;this.progress='INCOMPLETE';this.sequence=0;this.structured=null;this.navigation=null;
+    this.activity=clone(this.source.activity);this.attempt=null;this.progress='INCOMPLETE';this.sequence=0;this.structured=null;this.navigation=null;this.noteRuntime=noteRuntime;this.noteRouteBound=noteRouteBound===true;
   }
   createStructuredAdapter(){
     if(this.structured)return this.structured;
@@ -31,6 +33,15 @@ export class LearnAdapter {
     return this.structured;
   }
   sourceAvailability(){return this.sourceAvailable?{enabled:true,code:'AVAILABLE',reason:'',availabilityOwner:'LearnAdapter'}:{enabled:false,code:'LEARN_CANONICAL_SOURCE_UNAVAILABLE',reason:'No canonical learning-object source is bound; local fallback content is not product truth.',availabilityOwner:'LearnAdapter'};}
+  bindNoteRuntime(noteRuntime,{routeBound=false}={}){if(!noteRuntime||noteRuntime.owner!=='StructuredStickyNoteRuntimeComposition')throw Error('LEARN_SHARED_STRUCTURED_STICKY_RUNTIME_REQUIRED');this.noteRuntime=noteRuntime;this.noteRouteBound=routeBound===true;return this.noteCapability();}
+  noteCapability({routeBound=this.noteRouteBound}={}){if(!this.sourceAvailable)return {enabled:false,code:'LEARN_CANONICAL_SOURCE_UNAVAILABLE',reason:'No canonical learning object is bound for linked-note context.',availabilityOwner:'LearnAdapter',familyAvailable:false,finalRouteBound:routeBound===true};if(!this.noteRuntime)return {enabled:false,code:'STRUCTURED_STICKY_RUNTIME_UNAVAILABLE',reason:'Shared Structured Sticky runtime is not composed.',availabilityOwner:'LearnAdapter',familyAvailable:false,finalRouteBound:routeBound===true};return this.noteRuntime.capability({sourceAvailable:true,routeBound});}
+  createLinkedNote({noteId=`learn-note-${++this.sequence}`,title='',titleDirection='auto',blockId=null,sourceRange=null,blocks=null,contextLens='notes',open=true,pinned=false}={}){
+    if(!this.sourceAvailable)return {ok:false,status:'LEARN_CANONICAL_SOURCE_UNAVAILABLE',capability:this.noteCapability()};
+    if(!this.noteRuntime)return {ok:false,status:'STRUCTURED_STICKY_RUNTIME_UNAVAILABLE',capability:this.noteCapability()};
+    const firstBlockId=blockId||this.source.document.blocks?.[0]?.id||null,note={id:String(noteId),title:String(title),titleDirection,binding:{documentId:this.source.document.id,objectId:this.activity.id,blockId:firstBlockId,sourceRange,route:'PERSONAL:CEP/W02/learn',domainRef:{surface:'learn',objectId:this.activity.id}},working:{blocks:clone(blocks||[{id:`${noteId}-p1`,type:'paragraph',html:''}]),history:[],historyIndex:-1,selectedBlock:null,dirty:true},window:{closed:open!==true,pinned:pinned===true}};
+    const adapter=this.noteRuntime.ensure(note,{owningSurfaceContext:{surfaceId:'learn',domainKind:'learn',route:note.binding.route,documentId:note.binding.documentId,objectId:note.binding.objectId,blockId:firstBlockId,sourceRange,contextLens,selectionFocus:{blockId:firstBlockId,sourceRange}}});
+    return {ok:true,status:'D05_FAMILY_CAPABILITY_IMPLEMENTED_AND_FALSIFIED',classification:'REAL_PRODUCTION_COMPOSITION_HARNESS__NOT_FINAL_ROUTE_BINDING',finalProductRouteBinding:this.noteRouteBound?'BOUND':'PENDING_D13',note,adapter,capability:this.noteCapability()};
+  }
   outlineDescriptor({query=''}={}){
     if(!this.structured)this.createStructuredAdapter();
     const selected=new Set(this.structured.selectedFragmentIdentity?.().blockIds||[]),outline=this.navigation.outline();
@@ -58,4 +69,4 @@ export class LearnAdapter {
   labDescriptor(){return {kind:'LAB_LEARNING_BRIEF',runtime:'NOT_CREATED',operationalAdapter:'UNBOUND',w03RuntimeCreated:false};}
 }
 
-export function createLearnRuntimeComposition({source=null}={}){const learn=new LearnAdapter({source}),structured=learn.createStructuredAdapter();return {learn,structured,descriptor:{owner:'LearnAdapter',domainKind:'learn',structuredOwner:structured.owner,sourceTruth:structured.sourceBinding?.truth||null,sourceAvailability:learn.sourceAvailable?'AVAILABLE':'UNAVAILABLE',realConsumer:learn.sourceAvailable,fixtureFallback:false}};}
+export function createLearnRuntimeComposition({source=null,viewport=undefined,platformWindowBridge=undefined,inputDirectionBridge=undefined,noteRouteBound=false}={}){const noteRuntime=createStructuredStickyNoteRuntimeComposition({domainKind:'learn',surfaceId:'learn',bindingInputFactory:learnNoteBindingInput,routePrefix:'PERSONAL:CEP/W02/learn',viewport,platformWindowBridge,inputDirectionBridge,finalRouteBound:noteRouteBound}),learn=new LearnAdapter({source,noteRuntime,noteRouteBound}),structured=learn.createStructuredAdapter();return {learn,structured,noteRuntime,noteCapability:learn.noteCapability(),descriptor:{owner:'LearnAdapter',domainKind:'learn',structuredOwner:structured.owner,stickyCompositionOwner:noteRuntime.owner,sourceTruth:structured.sourceBinding?.truth||null,sourceAvailability:learn.sourceAvailable?'AVAILABLE':'UNAVAILABLE',realConsumer:learn.sourceAvailable,fixtureFallback:false,noteFamilyCapability:noteRuntime.capability({sourceAvailable:learn.sourceAvailable,routeBound:true}),finalProductRouteBinding:noteRouteBound?'BOUND':'PENDING_D13'}};}

@@ -81,6 +81,7 @@ function documentShape(document,noteId){
   if(document===undefined||document===null)return {
     id:`structured-note-content::${encodeURIComponent(noteId)}`,
     revision:'structured-note-content-r1',
+    titleDirection:'auto',
     title:'ملاحظة منظّمة',
     tags:['Structured note content'],
     blocks:[]
@@ -90,6 +91,8 @@ function documentShape(document,noteId){
   text(next.id,'document.id');
   text(next.revision,'document.revision');
   if(typeof next.title!=='string'||!Array.isArray(next.blocks))throw Error('MALFORMED_STRUCTURED_NOTE_DOCUMENT');
+  if(next.titleDirection!==undefined&&!['auto','rtl','ltr'].includes(next.titleDirection))throw Error('INVALID_STRUCTURED_NOTE_TITLE_DIRECTION');
+  next.titleDirection=next.titleDirection||'auto';
   return next;
 }
 
@@ -118,8 +121,8 @@ function assertPresentationNotCanonicalIdentity({document,binding,window}){
 export function isCanonicalStructuredNoteContentAdapter(value){return !!value&&OWNER_INSTANCES.has(value)}
 export function structuredNoteContentAdapterPublicationCount(){return publicationCount}
 export function structuredNoteContentDocumentId(noteId){return `structured-note-content::${encodeURIComponent(text(noteId,'noteId'))}`}
-export function createStructuredNoteContentDocument(noteId,{documentId=structuredNoteContentDocumentId(noteId),revision='structured-note-content-r1',title='ملاحظة منظّمة',tags=['Structured note content'],blocks=[]}={}){
-  return documentShape({id:documentId,revision,title,tags:clone(tags),blocks:clone(blocks)},text(noteId,'noteId'));
+export function createStructuredNoteContentDocument(noteId,{documentId=structuredNoteContentDocumentId(noteId),revision='structured-note-content-r1',title='ملاحظة منظّمة',titleDirection='auto',tags=['Structured note content'],blocks=[]}={}){
+  return documentShape({id:documentId,revision,title,titleDirection,tags:clone(tags),blocks:clone(blocks)},text(noteId,'noteId'));
 }
 
 export class StructuredNoteContentAdapter{
@@ -170,10 +173,11 @@ export class StructuredNoteContentAdapter{
     this.surfaceHost=surfaceHost;
     this.commands=commands;
     this.globalInputKeymapOwner=globalInputKeymapOwner;
+    this.executionScope=Object.freeze({kind:'PRIVATE_DOCUMENT_SCOPED_EXECUTION_INSTANCES',noteId,documentId:documentAdapter.identity().id,publishedToApplicationCommandRegistry:false,applicationGlobalListenerOwnership:false,listenerOwner:'NONE'});
     this.sequence=0;
     this.receipts=[];
     this.documentId=documentAdapter.identity().id;
-    this._receipt('adapter.publish',{documentId:this.documentId,bindingOwner:bindingOwner.owner,windowOwner:windowOwner.owner,persistenceOwned:false,sourceBindingOwned:false,windowLifecycleOwned:false});
+    this._receipt('adapter.publish',{documentId:this.documentId,bindingOwner:bindingOwner.owner,windowOwner:windowOwner.owner,executionScope:this.executionScope,persistenceOwned:false,sourceBindingOwned:false,windowLifecycleOwned:false});
     publishCanonicalAdapter(this);
   }
   _receipt(action,detail={}){
@@ -191,6 +195,7 @@ export class StructuredNoteContentAdapter{
     if(Object.getPrototypeOf(this.surfaceHost)!==StructuredSurfaceHost.prototype||this.surfaceHost.adapter!==this.documentAdapter)throw Error('PARALLEL_STRUCTURED_SURFACE_HOST_DETECTED');
     if(this.documentAdapter.owner!==this.owner||this.documentAdapter.domainKind!=='note-content')throw Error('STRUCTURED_NOTE_CONTENT_DOMAIN_OWNER_DRIFT');
     if(this.surfaceHost.commands!==this.commands||this.surfaceHost.globalInputKeymapOwner!==this.globalInputKeymapOwner)throw Error('STRUCTURED_NOTE_CONTENT_INPUT_COMMAND_GRAPH_DRIFT');
+    if(this.executionScope.kind!=='PRIVATE_DOCUMENT_SCOPED_EXECUTION_INSTANCES'||this.executionScope.publishedToApplicationCommandRegistry!==false||this.executionScope.applicationGlobalListenerOwnership!==false)throw Error('STRUCTURED_NOTE_PRIVATE_EXECUTION_SCOPE_DRIFT');
     if(this.documentAdapter.identity().id!==this.documentId)throw Error('STRUCTURED_NOTE_CONTENT_DOCUMENT_IDENTITY_DRIFT');
     const publication=compositionRegistry(this.bindingOwner,this.windowOwner);
     if(!publication||publication.byNoteId.get(this.noteId)!==this)throw Error('STRUCTURED_NOTE_CONTENT_CANONICAL_PUBLICATION_DRIFT');
@@ -206,7 +211,7 @@ export class StructuredNoteContentAdapter{
   transactionDescriptor(){this.assertCanonicalComposition();return this.documentAdapter.transactionDescriptor()}
   engineIdentity(){
     this.assertCanonicalComposition();const d=this.surfaceHost.descriptor();
-    return {adapterClass:this.documentAdapter.constructor.name,hostClass:this.surfaceHost.constructor.name,tree:d.treeOwner,mutation:d.mutationOwner,transaction:d.transactionOwner,selection:d.selectionOwner,clipboard:d.clipboardOwner,input:d.inputKeymapOwner,action:d.actionOwner,direction:d.directionOwner,rich:d.richContentOwner,drag:d.dragDropOwner,renderer:d.rendererOwner,presentation:d.presentationBridgeOwner,commands:d.commands,globalInput:d.globalInputOwner};
+    return {adapterClass:this.documentAdapter.constructor.name,hostClass:this.surfaceHost.constructor.name,tree:d.treeOwner,mutation:d.mutationOwner,transaction:d.transactionOwner,selection:d.selectionOwner,clipboard:d.clipboardOwner,input:d.inputKeymapOwner,action:d.actionOwner,direction:d.directionOwner,rich:d.richContentOwner,drag:d.dragDropOwner,renderer:d.rendererOwner,presentation:d.presentationBridgeOwner,commands:d.commands,globalInput:d.globalInputOwner,executionScope:this.executionScope};
   }
   presentationBinding({windowInstanceId=null,hostKind=null,visibility=null,metadata=undefined}={}){
     this.assertCanonicalComposition();const window=this.windowOwner.window(this.noteId),separate=window.platform?.separateWindow?.active===true;

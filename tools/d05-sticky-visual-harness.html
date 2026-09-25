@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D05 Learn Sticky production-composition proof</title>
+  <style>
+    :root { color-scheme: dark; font-family: "Segoe UI", Tahoma, sans-serif; background: #091019; color: #edf3fa; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: radial-gradient(circle at 75% 0, #172840, #091019 58%); }
+    header { height: 70px; padding: 14px clamp(18px,4vw,56px); display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #29405b; background:#0c1622e8; }
+    .brand { display:flex; gap:12px; align-items:center; }
+    .mark { width:36px; height:36px; display:grid; place-items:center; border-radius:9px; background:#60a5fa; color:#08111c; font-weight:900; }
+    .eyebrow { color:#95abc2; font-size:12px; letter-spacing:.07em; text-transform:uppercase; }
+    h1 { margin:2px 0 0; font-size:18px; }
+    .truth { border:1px solid #3b82f6; color:#bfdbfe; background:#142943; border-radius:999px; padding:7px 12px; font-size:12px; direction:ltr; }
+    main { max-width:1200px; margin:auto; padding:38px clamp(18px,4vw,56px) 54px; }
+    .context { display:grid; grid-template-columns:1fr auto; gap:20px; align-items:end; margin-bottom:24px; }
+    .context h2 { margin:5px 0 8px; font-size:28px; }
+    .context p { margin:0; color:#a8bacd; max-width:760px; line-height:1.6; }
+    .route { direction:ltr; font:12px Consolas, monospace; color:#86bdf9; }
+    .stage { min-height:700px; position:relative; border:1px solid #29405b; border-radius:18px; overflow:hidden; background:linear-gradient(145deg,#0f1d2c,#0a131e); box-shadow:0 20px 70px #0008; }
+    .stage::before { content:"LEARN · W02"; position:absolute; inset:22px auto auto 24px; color:#536d87; font-weight:700; letter-spacing:.1em; direction:ltr; }
+    .source { position:absolute; top:75px; right:5%; width:56%; min-width:420px; padding:24px; border:1px solid #263b52; background:#101c29; border-radius:14px; }
+    .source small { color:#87a0b8; }
+    .source h3 { margin:8px 0; font-size:20px; direction:ltr; text-align:left; }
+    .source p { margin:0; color:#adbdcc; line-height:1.6; }
+    .sticky { position:absolute; top:185px; left:7%; width:min(390px,42%); min-width:320px; background:#fff8cf; color:#18202b; border:1px solid #f0d86c; border-radius:13px; box-shadow:0 24px 55px #000a; overflow:hidden; }
+    .sticky-head { padding:10px 12px; display:flex; align-items:center; gap:8px; border-bottom:1px solid #e8d895; background:#fff4bd; }
+    .sticky-head strong { margin-inline-end:auto; font-size:13px; }
+    button { border:1px solid #c8b660; border-radius:7px; background:#fffbe5; color:#4b4217; padding:6px 10px; cursor:pointer; }
+    [data-title] { min-height:48px; padding:14px 16px 6px; outline:none; font-size:20px; font-weight:700; unicode-bidi:plaintext; }
+    [data-body] { min-height:175px; margin:0 16px 16px; padding:12px; border:1px solid #dfce83; border-radius:8px; background:#fffced; outline:none; line-height:1.7; unicode-bidi:plaintext; }
+    .receipt { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 12px; padding:12px 16px; border-top:1px solid #e8d895; background:#fff4bd; font:11px Consolas, monospace; direction:ltr; }
+    .receipt span { overflow-wrap:anywhere; }
+    .footer-proof { position:absolute; left:24px; bottom:20px; right:24px; display:flex; flex-wrap:wrap; gap:8px; }
+    .badge { padding:6px 9px; border:1px solid #36516e; border-radius:999px; background:#111f2e; color:#aac0d6; font:11px Consolas,monospace; direction:ltr; }
+    .badge.ok { border-color:#2f8069; color:#8ce0c4; }
+    @media (max-width:760px) { .truth{display:none}.context{grid-template-columns:1fr}.source{right:4%;width:92%;min-width:0}.sticky{left:5%;top:245px;width:90%;min-width:0}.stage{min-height:720px}.footer-proof{bottom:14px}.receipt{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand"><div class="mark">C</div><div><div class="eyebrow">CEP · D05 ownership proof</div><h1>ملاحظة التعلّم المرتبطة</h1></div></div>
+    <div class="truth">REAL_PRODUCTION_COMPOSITION_HARNESS__NOT_FINAL_ROUTE_BINDING</div>
+  </header>
+  <main>
+    <section class="context">
+      <div><div class="eyebrow">Learn consumer · canonical source context</div><h2>المحرر البنيوي المشترك، بسياق تعلّم حقيقي</h2><p>هذه الصفحة تشغّل تكوين Learn الفعلي ومالك Sticky المشترك من ناتج البناء. وهي دليل تكوين وقدرة للعائلة، وليست ربط مسار المنتج النهائي المحجوز لـ D13.</p></div>
+      <div class="route">PERSONAL:CEP/W02/learn</div>
+    </section>
+    <section class="stage" aria-label="Learn production composition harness">
+      <article class="source"><small>المصدر المالك</small><h3 id="source-title"></h3><p>تم إنشاء الملاحظة من كتلة المصدر المحددة، مع حفظ هوية المستند والنشاط والكتلة ونطاق التحديد وسطح الاستدعاء.</p></article>
+      <article class="sticky" aria-label="Structured Learn Sticky Note">
+        <div class="sticky-head"><strong>ملاحظة مرتبطة</strong><button id="pin" type="button">تثبيت داخلي</button></div>
+        <div data-title contenteditable="true" role="textbox" aria-label="عنوان الملاحظة"></div>
+        <div data-body contenteditable="true" role="textbox" aria-label="محتوى الملاحظة"></div>
+        <div class="receipt" id="receipt"></div>
+      </article>
+      <div class="footer-proof" id="proof"></div>
+    </section>
+  </main>
+  <script type="module">
+    import {createLearnRuntimeComposition} from '../dist/adapters/learn.js';
+    import {BALANCED6_LEARN_SOURCE} from '../dist/adapters/balanced6-acceptance-data.js';
+    import {resolveStickyTitleDirection} from '../dist/foundation/notes/sticky-note-window.js';
+
+    const composition=createLearnRuntimeComposition({source:BALANCED6_LEARN_SOURCE,noteRouteBound:false});
+    const blockId=BALANCED6_LEARN_SOURCE.document.blocks[0].id;
+    const created=composition.learn.createLinkedNote({noteId:'learn-d05-proof',title:'راجع حدود الثقة و policy.can()',blockId,sourceRange:{anchorOffset:2,focusOffset:11},blocks:[{id:'learn-d05-proof-p1',type:'paragraph',html:'اربط القرار بالمصدر ولا تستنتج الفعالية التشغيلية من دليل ساكن.'}]});
+    const runtime=composition.noteRuntime;
+    const title=document.querySelector('[data-title]');
+    const body=document.querySelector('[data-body]');
+    const pin=document.querySelector('#pin');
+    const render=()=>{
+      const projection=runtime.projection(created.note.id),presentation=runtime.windowPresentation(created.note.id),documentState=projection.document;
+      const direction=resolveStickyTitleDirection({title:documentState.title,persistedDirection:documentState.titleDirection,inputDirection:'rtl',platformDirection:'rtl'});
+      title.textContent=documentState.title; title.dir=direction.direction; title.dataset.directionSource=direction.source;
+      body.textContent=documentState.blocks[0]?.html||''; body.dir='rtl';
+      pin.textContent=projection.window.pinned?'إلغاء التثبيت الداخلي':'تثبيت داخلي';
+      document.querySelector('#receipt').innerHTML=`<span>owner: ${runtime.owner}</span><span>content: ${presentation.contentOwner}</span><span>surface: ${presentation.source.surfaceId}</span><span>object: ${presentation.source.objectId}</span><span>block: ${presentation.source.blockId}</span><span>title-dir: ${direction.direction} · ${direction.source}</span>`;
+    };
+    document.querySelector('#source-title').textContent=BALANCED6_LEARN_SOURCE.activity.title;
+    document.querySelector('#proof').innerHTML=[`D05_FAMILY_CAPABILITY_IMPLEMENTED_AND_FALSIFIED`,`family: ${composition.descriptor.noteFamilyCapability.code}`,`final-route: ${composition.noteCapability.code}`,`context: ${runtime.windowPresentation(created.note.id).source.surfaceId}`].map((x,i)=>`<span class="badge ${i<2?'ok':''}">${x}</span>`).join('');
+    title.addEventListener('input',()=>{runtime.setTitle(created.note.id,title.textContent||'');render()});
+    body.addEventListener('input',()=>{runtime.updateBlock(created.note.id,'learn-d05-proof-p1',{html:body.textContent||''});render()});
+    pin.addEventListener('click',()=>{runtime.setPinned(created.note.id,!runtime.projection(created.note.id).window.pinned);render()});
+    render();
+    window.D05_PROOF={composition,created,runtime};
+  </script>
+</body>
+</html>
