@@ -46,3 +46,28 @@ Only five C03 gates remain open, but their evidence detail has advanced:
    - Closure remains through audited correction packages, legal convergence, D13 serial final integration and D14 independent proof.
 
 Passing a lane's tests closes only its exact bounded obligations. It never closes unrelated gates or creates Product acceptance.
+
+## Zero-loss proof strengthening
+
+The post-C03 Controller reconciliation adds the following mandatory proof detail:
+
+### C03-GATE-020
+In addition to existing obligations, prove as applicable:
+- A03-PF-007 Path typed component/state parity;
+- A03-PF-008 Graph node/edge/status/focus parity;
+- broad A03-PF-009 Canvas full-screen/region composition parity;
+- materially corrected Canvas lifecycle at 1024x900;
+- actual DOM focus through `document.activeElement`;
+- executed fit/pan/zoom effects with canonical-state invariance;
+- exact command-availability state/code matrix.
+
+### C03-GATE-021
+Fresh-checkout native harness preparation must deterministically create/verify its output directory before writing evidence.
+
+### C03-GATE-022
+Before semantic browser assertions:
+- reject stale browser API access through a static/behavioral preflight;
+- prove exact generated-runtime/dist binding to the intended source.
+
+### C03-GATE-024 / D14
+Final closure requires a frozen row-addressable obligation manifest covering C03 source findings, post-C03 discoveries and Controller-adjudicated zero-loss deltas. A broad regression PASS alone cannot close an unmapped obligation.
