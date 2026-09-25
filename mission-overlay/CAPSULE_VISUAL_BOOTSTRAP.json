@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 3,
+  "classification": "DS01_VISUAL_BOOTSTRAP_DISABLED_BY_CONTROLLER_BINDING__WRITER_LOCAL_RECAPTURE_REQUIRED",
+  "enabled": false,
+  "required": false,
+  "allowWriterLocalRecapture": true,
+  "expectedProductParentCommit": "48fec27608859d3a8e991b18b9f35f6e1dac1d19",
+  "minimumScreenshotCount": 0,
+  "viewports": [
+    {"width": 1440, "height": 1000},
+    {"width": 1024, "height": 900}
+  ],
+  "states": ["NORMAL_PRODUCT_TRUTH", "DS01_CLASSIFIED_POPULATED_STATE"],
+  "environment": {},
+  "setupCommands": [],
+  "captureCommands": [],
+  "baselineGlobs": [],
+  "receiptGlobs": [],
+  "referenceBindings": [
+    {"surface":"today","path":"cep-writer/references/visual/00_TODAY/CEP_TODAY_MAIN_ORCHESTRATION_REFERENCE.png"},
+    {"surface":"library","path":"cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/01_LIBRARY/CEP_VIS_001_LIBRARY_FINAL_OWNER_CONFIRMED_REFERENCE.png"},
+    {"surface":"learn","path":"cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/02_LEARN/CEP_VIS_001_LEARN_FINAL_OWNER_CONFIRMED_REFERENCE.png"},
+    {"surface":"rq","path":"cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/04_RESEARCH_AND_QUALITY/image-gen-1(20260813-194728).png","ceiling":"REVIEWED_FINAL_CANDIDATE"},
+    {"surface":"results","path":"cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/05_RESULTS_REPLAY/Cybersecurity Replay Dashboard Timeline.png"},
+    {"surface":"evidence","path":"cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/01_EVIDENCE_INTAKE/Cybersecurity Evidence Dashboard in Arabic(1).png"},
+    {"surface":"reviews","path":"cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/02_REVIEWS/Cybersecurity Evidence Review Dashboard.png"},
+    {"surface":"mastery","path":"cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/03_MASTERY/Arabic Cybersecurity Mastery Dashboard.png"},
+    {"surface":"portfolio","path":"cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/04_PORTFOLIO/Cybersecurity Portfolio Evidence Dashboard.png"},
+    {"surface":"validation","path":"cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/03_VALIDATION/CEP_SYSTEM_VALIDATION_REFERENCE.png"},
+    {"surface":"backup","path":"cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/05_BACKUP_AND_RESTORE/CEP_SYSTEM_BACKUP_RESTORE_RESTORE_DRILL_REFERENCE.png"},
+    {"surface":"audit","path":"cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/06_AUDIT/CEP_SYSTEM_AUDIT_TRACEABILITY_REFERENCE.png"},
+    {"surface":"configuration","path":"cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/08_CONFIGURATION/CEP_SYSTEM_CONFIGURATION_REVISION_REFERENCE.png"}
+  ],
+  "comparisonPlan": [
+    "D14 source-bound screenshots remain prior audit evidence and are not repackaged as fresh DS01 bootstrap evidence.",
+    "Writer must recapture exact materialized parent normal Product truth locally before mutation for all 13 target Surfaces.",
+    "Writer must separately capture DS01 populated classified state after mutation.",
+    "No test seed may become Product/provider/canonical truth."
+  ]
+}
