@@ -61,3 +61,43 @@ export class LocalRuntimePlatformWindowBridge{
   bounds(presentationId){if(!this._available())return {ok:false,available:false,code:'PLATFORM_WINDOW_UNAVAILABLE'};return {ok:true,available:true};}
   reconcile(){return this.descriptor();}
 }
+
+export const DETACH_CONTEXT_TTL_MS = 60000;
+
+export function stageGovernedDetachedContext(payload     , {storage = globalThis.sessionStorage, ttlMs = DETACH_CONTEXT_TTL_MS}      = {}) {
+  if (!payload) return null;
+  const token = 'ctx-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+  const now = Date.now();
+  const envelope = {
+    kind: payload.kind || 'STICKY_WHOLE_SURFACE_CONTEXT',
+    payload: structuredClone(payload),
+    createdAt: new Date(now).toISOString(),
+    expiresAt: now + ttlMs,
+    token
+  };
+  try {
+    storage?.setItem?.('cep:detached:' + token, JSON.stringify(envelope));
+  } catch {}
+  return token;
+}
+
+export function validateAndConsumeGovernedDetachedContext(token               , {storage = globalThis.sessionStorage, expectedKind = null}      = {}) {
+  if (!token || typeof token !== 'string') return { ok: false, code: 'TOKEN_REQUIRED', payload: null };
+  const key = 'cep:detached:' + token;
+  try {
+    const raw = storage?.getItem?.(key);
+    if (!raw) return { ok: false, code: 'DETACH_CONTEXT_NOT_FOUND', payload: null };
+    storage?.removeItem?.(key);
+    const parsed = JSON.parse(raw);
+    if (parsed.expiresAt && Date.now() > parsed.expiresAt) {
+      return { ok: false, code: 'DETACH_CONTEXT_EXPIRED', payload: null };
+    }
+    if (expectedKind && parsed.kind !== expectedKind) {
+      return { ok: false, code: 'DETACH_CONTEXT_KIND_MISMATCH', payload: null };
+    }
+    return { ok: true, code: 'DETACH_CONTEXT_VALIDATED', payload: parsed.payload, kind: parsed.kind };
+  } catch (error) {
+    return { ok: false, code: 'DETACH_CONTEXT_CORRUPT', payload: null, error: String(error?.message || error) };
+  }
+}
+

@@ -29,7 +29,7 @@ export const OPERATIONAL_SESSION_TAB_POLICY=Object.freeze({
 export const OPERATIONAL_PRESENTATION_ROUTES=Object.freeze([
   'session.attach','session.select','session.close-tab','session.reorder',
   'session.chrome.open','session.chrome.close','session.chrome.minimize','session.chrome.restore',
-  'session.chrome.bottom','session.chrome.floating','session.chrome.single','session.chrome.split','session.geometry','session.pin','session.detach-window'
+  'session.chrome.bottom','session.chrome.floating','session.chrome.single','session.chrome.split','session.geometry','session.geometry.cancel','session.pin','session.detach-window'
 ]);
 
 const identity=(providerId,sessionId)=>`ops-tab::${encodeURIComponent(providerId)}::${encodeURIComponent(sessionId)}`;
@@ -148,7 +148,14 @@ export class OperationalSessionOwner {
     if(this.chrome.placement!=='floating'||this.chrome.lifecycle==='closed')return null;
     if(!this._tabRef(presentationId))return null;
     const edge=resizeEdge==null?null:String(resizeEdge);
-    return {id:presentationId,element,geometry:this.chrome.geometry,resize:edge?false:!!resize,resizeSign,resizeEdge:edge,bounds:this.viewport||undefined,minWidth:320,minHeight:200,keepFullyVisible:true,commit:receipt=>this._record(receipt?.action==='resize'?'session.geometry.resize':'session.geometry.move',{presentationId,edge:receipt?.edge||edge,geometry:this.chrome.geometry})};
+    return {
+      id:presentationId,element,geometry:this.chrome.geometry,resize:edge?false:!!resize,resizeSign,resizeEdge:edge,bounds:this.viewport||undefined,minWidth:320,minHeight:200,keepFullyVisible:true,
+      commit:receipt=>{
+        if(receipt?.cancelled)return this._record('session.geometry.cancel',{presentationId,edge:receipt?.edge||edge,geometry:this.chrome.geometry,reason:receipt?.reason||'cancel'});
+        return this._record(receipt?.action==='resize'?'session.geometry.resize':'session.geometry.move',{presentationId,edge:receipt?.edge||edge,geometry:this.chrome.geometry});
+      },
+      cancel:receipt=>this._record('session.geometry.cancel',{presentationId,edge:receipt?.edge||edge,geometry:this.chrome.geometry,reason:receipt?.reason||'cancel'})
+    };
   }
   route(action,payload={}){
     if(!OPERATIONAL_PRESENTATION_ROUTES.includes(action))throw Error('OPERATIONAL_PRESENTATION_ROUTE_OUT_OF_SCOPE:'+action);

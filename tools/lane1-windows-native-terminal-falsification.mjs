@@ -1,10 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 import {OperationalSessionOwner} from '../dist/foundation/operational/session-owner.js';
 import {XtermOperationalTerminalRenderer} from '../dist/foundation/operational/xterm-renderer.js';
 import {RUNTIME_ADAPTER_CONTRACT} from '../dist/foundation/operational.js';
 
-const root=path.resolve(new URL('..',import.meta.url).pathname);
+const root=path.resolve(fileURLToPath(new URL('..',import.meta.url)));
 const checks=[]; const check=(id,ok,detail='')=>{checks.push({id,status:ok?'PASS':'FAIL',detail}); if(!ok)process.exitCode=1};
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 
@@ -35,6 +36,8 @@ const renderer=new XtermOperationalTerminalRenderer(); const rd=renderer.descrip
 check('xterm.renderer_only',rd.rendererOnly===true&&rd.semanticCommandOwnership===false&&rd.processLifecycleOwnership===false,'xterm remains renderer-only');
 
 const out={mission:'MISSION_WINDOWS_NATIVE_PLATFORM_TERMINAL_CONVERGENCE',classification:'LANE1_LOCAL_FALSIFICATION__NOT_WINDOWS_INTERACTIVE_ACCEPTANCE',pass:checks.every(x=>x.status==='PASS'),checks};
-fs.writeFileSync(path.join(root,'assurance/lane1-windows-native-terminal/local-falsification.json'),JSON.stringify(out,null,2));
+const outDir=path.join(root,'assurance/lane1-windows-native-terminal');
+fs.mkdirSync(outDir,{recursive:true});
+fs.writeFileSync(path.join(outDir,'local-falsification.json'),JSON.stringify(out,null,2));
 console.log(JSON.stringify(out,null,2));
 if(!out.pass)process.exit(1);
