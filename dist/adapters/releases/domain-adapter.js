@@ -31,7 +31,9 @@ export class ReleasesDomainAdapter{
     this.compareOwner=analyticalCompareOwner||new AnalyticalCompareOwner();
     if(this.compareOwner?.ownerToken!=='AnalyticalCompare')throw Error('CENTRAL_ANALYTICAL_COMPARE_REQUIRED');
     this.compareProvider=createReleaseCompareProvider(ref=>this.resolveExact(ref));
-    this.compareOwner.registerProvider(this.compareProvider);
+    if(!this.compareOwner.providerIds().includes(this.compareProvider.descriptor().providerId)){
+      this.compareOwner.registerProvider(this.compareProvider);
+    }
   }
           put(input                 ){const row=clone(input);if(!row?.candidateId||!hex(row.commitSHA)||!hex(row.treeSHA)||!hex(row.artifactDigest))throw Error('RELEASE_CANDIDATE_IDENTITY_INVALID');if(!['ASSEMBLED','TECHNICALLY_READY','NOT_READY'].includes(row.state)||!['NONE','REQUESTED','GRANTED','REVOKED'].includes(row.authorization)||!['NOT_DEPLOYED','IN_PROGRESS','DEPLOYED','FAILED','UNKNOWN'].includes(row.deployment))throw Error('RELEASE_CANDIDATE_STATE_INVALID');row.evidenceBinding=normalizeEvidence(row);this.candidates.set(row.candidateId,row);}
           resolveExact(ref                    ){const row=this.candidates.get(ref.candidateId);return row&&exactRefMatches(row,ref)?clone(row):null;}
