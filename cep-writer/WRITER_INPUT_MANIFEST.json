@@ -1,15 +1,15 @@
 {
-  "schemaVersion": 14,
-  "classification": "CURRENT_WORKING_BASELINE_REQUIRED_INPUT_MANIFEST__STAGE2_INTEGRATED__WRITER_PACKET_TRUTH_REPAIRED__NOT_LIVE_AUTHORITY",
+  "schemaVersion": 15,
+  "classification": "CURRENT_WORKING_BASELINE_REQUIRED_INPUT_MANIFEST__POST_C03_ZERO_LOSS_RECONCILED__NOT_LIVE_AUTHORITY",
   "repositoryBaselineRef": "main",
   "repositoryHeadRule": "RESOLVE_EXACT_HEAD_AT_MISSION_BINDING",
   "productSourceParentCommit": "293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a",
   "productSourceParentTree": "3101c06901dbdaff9602fea8098efb9c34575149",
   "productCanonicalSourceSha256": "480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641",
   "productCanonicalSourceFiles": 273,
-  "executionMode": "MISSION_BRANCH_FROM_CONTROLLER_BOUND_WORKING_BASELINE",
+  "executionMode": "CARRIER_BOUND_EXACT_MISSION_EXECUTION",
   "noRequiredLiveDriveFetch": true,
-  "missionOverlayPolicy": "BRANCH_LOCAL_IMMUTABLE_OVERLAY",
+  "missionOverlayPolicy": "CARRIER_BOUND_EXACT_MISSION_OVERLAY",
   "assurancePolicy": "STAGE2_KEEP_ACTIVE_PACKAGE_CHECK_RUNTIME_INPUTS__ARCHIVE_HISTORICAL_GENERATED_EVIDENCE_IN_GIT_HISTORY",
   "entries": [
     {
@@ -124,8 +124,8 @@
     },
     {
       "path": "cep-writer/ACCEPTANCE_GATES.md",
-      "size": 637,
-      "sha256": "0cb9fb5d314f23cfdf3694761757c6704ddf1e8ff9a7badb6c078c51139f1aa2"
+      "size": 1055,
+      "sha256": "81db5c149554cac7ef5d016c3361a40b0380078eb251e4c897915a0505a3e22c"
     },
     {
       "path": "cep-writer/BASELINE_IDENTITY.json",
@@ -144,23 +144,23 @@
     },
     {
       "path": "cep-writer/CURRENT_POST_C03_FINDINGS.json",
-      "size": 11014,
-      "sha256": "9f1487fca9936ccbaebeb42900e1e61f1ac5775ded5af77e3ffb836d614d5d9d"
+      "size": 14384,
+      "sha256": "8db0c251febe08bf6ed1eb403e5f649c85441862860a8cb7f1dcbac7ae09b225"
     },
     {
       "path": "cep-writer/CURRENT_WRITER_BASELINE_STATE.json",
-      "size": 1729,
-      "sha256": "a9c9c6fa51a5c129b18ee10af21188f52f1d77a93286e2a82ab20a265fd0b1d4"
+      "size": 2441,
+      "sha256": "1205bdccd93f8355e329d6997469cd27471c42dbd9cbc9b5b48615bd1fa1d2b8"
     },
     {
       "path": "cep-writer/GIT_WORKFLOW.md",
-      "size": 1298,
-      "sha256": "bdb236c41457636c4c00aa449fbf244ef3d41f6cc84cfd8df58379978e5bf850"
+      "size": 1983,
+      "sha256": "40d687dc0b72281d7850fc7482088ebdb511c49fda671e6e9c5c4588ab5deb93"
     },
     {
       "path": "cep-writer/KNOWN_OPEN_GATES.md",
-      "size": 2828,
-      "sha256": "59e55a2bf8dd6ccaff8c8bb9ecccaf3adb4a600426a92045c77770656089b9cd"
+      "size": 3997,
+      "sha256": "33a21a406258320dac34e3062e14e389ec765e35de084baa9d91c4bae20710ce"
     },
     {
       "path": "cep-writer/NORMALIZATION_MANIFEST.json",
@@ -184,13 +184,13 @@
     },
     {
       "path": "cep-writer/REPOSITORY_MANIFEST.json",
-      "size": 703,
-      "sha256": "4d6fcb2272be7800cef60b6d1c16c829299612d11542ce989d37dc59718dcdda"
+      "size": 934,
+      "sha256": "235ea561bbd70ccc427dfb259e4fc2aa8594b82bac9555ff1afac4c9e163b39d"
     },
     {
       "path": "cep-writer/START_HERE.md",
-      "size": 2390,
-      "sha256": "5c77024d4082ff10e49a5b5e61877da638e7b4fea026b891effdac9cee922651"
+      "size": 3386,
+      "sha256": "2d5b14e436ca3107ae3b7c47a129bbd759a68f3a7c41eec3c584b01b303ff953"
     },
     {
       "path": "cep-writer/WORKING_BASELINE.json",
@@ -199,8 +199,8 @@
     },
     {
       "path": "cep-writer/WRITER_AUTHORITY_BASELINE.md",
-      "size": 1707,
-      "sha256": "4771d64160ed34dff38bcf8069e7821c584fcc000f232c8bbe1e6e256c243810"
+      "size": 2478,
+      "sha256": "f3d5c4794d432add18372077d6f4d44e5015bd7bde49c83d41acded54e42c9a0"
     },
     {
       "path": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv",
@@ -209,13 +209,13 @@
     },
     {
       "path": "cep-writer/authority/AUTHORITY_PACKET.json",
-      "size": 1525,
-      "sha256": "1587041f4e89efc9665c0f15e01ff87ce5a1898acf3013b7d4ed73af87b7b75a"
+      "size": 2342,
+      "sha256": "aa0854eed9e0363c6853c112ce0d10a4cb4999b1ddfef0fc6a8fb2e630cc1e67"
     },
     {
       "path": "cep-writer/authority/AUTHORITY_PACKET.md",
-      "size": 1096,
-      "sha256": "73845f161ceba4e6bd1cf6b3161b77ec1c056c45cbab31662627c41b5016c292"
+      "size": 1765,
+      "sha256": "428ac4cc68be7bb0276b5ad64440d8b1897d3b1f696bc1afe905db7857ce0c22"
     },
     {
       "path": "cep-writer/authority/OWNER_DECISION_SUMMARY.md",
@@ -229,8 +229,8 @@
     },
     {
       "path": "cep-writer/contracts/POST_C03_WAVE1_COMMON_WRITER_CONTRACT.md",
-      "size": 4019,
-      "sha256": "5813a4141694e5db5f889203245f0aa549be7c6cb767471b7037aaa9ce1f53a6"
+      "size": 4958,
+      "sha256": "9439e810db17c816f0d3d731dab1dfeb18d31aa85dee48f84f6d77f17d22c0d5"
     },
     {
       "path": "cep-writer/controller-input/CONTROLLER_EVIDENCE_CHAIN_CORRECTION.json",
@@ -3112,5 +3112,13 @@
       "size": 3812,
       "sha256": "08fee1d1a7ffffe0b927c2b4c993f752ec8d67608e3e7c8cf9fc7530825befc3"
     }
-  ]
+  ],
+  "postC03ZeroLossReconciliation": {
+    "date": "2026-09-25",
+    "compactFindingProjectionExhaustive": false,
+    "correctedRouting": [
+      "F-049:D08>D13>D14",
+      "F-050:D08>D13>D14"
+    ]
+  }
 }
