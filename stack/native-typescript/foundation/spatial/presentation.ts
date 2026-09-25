@@ -16,10 +16,15 @@ const STYLE=`
 [data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-node-card .node-surface{transition:stroke-width .14s ease,stroke .14s ease,filter .14s ease}
 [data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-node-card:hover .node-surface{stroke:color-mix(in srgb,var(--accent) 62%,var(--line2));filter:drop-shadow(0 6px 10px rgba(0,0,0,.12))}
 [data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-node-card:focus-visible .node-surface{stroke:var(--accent);stroke-width:3;filter:drop-shadow(0 0 0 3px color-mix(in srgb,var(--accent) 24%,transparent))}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-node-duplicate .node-surface{stroke-dasharray:5 3;stroke:color-mix(in srgb,var(--accent) 75%,var(--line2))}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-multi-selection-group .group-boundary{stroke:var(--accent);stroke-dasharray:6 4;stroke-width:1.5px;fill:color-mix(in srgb,var(--accent) 6%,transparent);pointer-events:none}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-multi-selection-group .group-label{font-family:var(--mono);font-size:11px;font-weight:700;fill:var(--accent);pointer-events:none}
 [data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-relation{cursor:default}
 [data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-relation .relation-line{transition:stroke-width .14s ease,stroke .14s ease}
 [data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-relation:hover .relation-line,[data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-relation:focus-visible .relation-line{stroke:var(--accent);stroke-width:2.2}
 [data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-relation[aria-pressed="true"] .relation-line{stroke:var(--accent);stroke-width:3}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-relation-canvas-only .relation-line{stroke:color-mix(in srgb,var(--accent) 70%,#f59e0b);stroke-dasharray:6 3}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-relation-canvas-only .relation-label{fill:color-mix(in srgb,var(--accent) 85%,#f59e0b);font-weight:600}
 [data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-readout{backdrop-filter:blur(8px)}
 @media (prefers-reduced-motion:reduce){[data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-node-card .node-surface,[data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-relation .relation-line{transition:none}}
 `;
@@ -43,13 +48,36 @@ export function spatialShellMarkup(instanceId){
 
 export function renderSpatialRelation({edge,source,target,selected=false,tabbable=false,markerId}){
   const ax=source.x+66,ay=source.y+31,bx=target.x+66,by=target.y+31,labelX=(source.x+target.x)/2+66,labelY=(source.y+target.y)/2+25;
-  const aria=`${source.label||source.id} to ${target.label||target.id}: ${edge.type}${edge.direction==='bidirectional'?', bidirectional':''}`;
-  return `<g class="spatial-relation" data-edge="${esc(edge.id)}" tabindex="${tabbable?'0':'-1'}" role="button" aria-pressed="${selected}" aria-label="${esc(aria)}" aria-keyshortcuts="F2 Shift+R"><line class="relation-hit-target" x1="${ax}" y1="${ay}" x2="${bx}" y2="${by}" stroke="transparent" stroke-width="18"/><line class="relation-line" x1="${ax}" y1="${ay}" x2="${bx}" y2="${by}" stroke="${selected?'var(--accent)':'var(--text3)'}" stroke-width="${selected?3:1.4}" marker-end="url(#${markerId})" ${edge.direction==='bidirectional'?`marker-start="url(#${markerId})"`:''}/><text class="relation-label" data-relation-label="${esc(edge.id)}" x="${labelX}" y="${labelY}" fill="var(--text)" text-anchor="middle" font-size="12" direction="ltr">${esc(edge.type)}</text></g>`;
+  const isCanvasOnly=Boolean(edge.presentationOnly||edge.kind==='canvas-presentation'||edge.type==='canvas-only'||edge.type?.startsWith('canvas'));
+  const strokeColor=selected?'var(--accent)':isCanvasOnly?'color-mix(in srgb,var(--accent) 70%,#f59e0b)':'var(--text3)';
+  const strokeDash=isCanvasOnly?'stroke-dasharray="6 3"':'';
+  const strokeWidth=selected?3:(isCanvasOnly?1.8:1.4);
+  const aria=isCanvasOnly?`Canvas-only presentation link (non-canonical): ${source.label||source.id} to ${target.label||target.id}: ${edge.type}`:`${source.label||source.id} to ${target.label||target.id}: ${edge.type}${edge.direction==='bidirectional'?', bidirectional':''}`;
+  const labelText=isCanvasOnly?`[Canvas] ${edge.type}`:edge.type;
+  return `<g class="spatial-relation ${isCanvasOnly?'spatial-relation-canvas-only':''}" data-edge="${esc(edge.id)}" data-presentation-only="${isCanvasOnly}" tabindex="${tabbable?'0':'-1'}" role="button" aria-pressed="${selected}" aria-label="${esc(aria)}" aria-keyshortcuts="F2 Shift+R"><line class="relation-hit-target" x1="${ax}" y1="${ay}" x2="${bx}" y2="${by}" stroke="transparent" stroke-width="18"/><line class="relation-line" x1="${ax}" y1="${ay}" x2="${bx}" y2="${by}" stroke="${strokeColor}" stroke-width="${strokeWidth}" ${strokeDash} marker-end="url(#${markerId})" ${edge.direction==='bidirectional'?`marker-start="url(#${markerId})"`:''}/><text class="relation-label ${isCanvasOnly?'relation-label-canvas-only':''}" data-relation-label="${esc(edge.id)}" x="${labelX}" y="${labelY}" fill="${isCanvasOnly?'color-mix(in srgb,var(--accent) 85%,#f59e0b)':'var(--text)'}" text-anchor="middle" font-size="11" font-weight="${isCanvasOnly?'600':'400'}" direction="ltr">${esc(labelText)}</text></g>`;
 }
 
 export function renderSpatialNode({node,selected=false,tabbable=false}){
   const status=node.status||node.id,statusFill=node.status==='DOWN'?'var(--bad)':'var(--text3)';
-  return `<g class="spatial-node-card" data-node="${esc(node.id)}" transform="translate(${node.x},${node.y})" tabindex="${tabbable?'0':'-1'}" role="button" aria-pressed="${selected}" aria-label="${esc(`${node.label} ${status}`)}"><rect class="node-surface" width="132" height="62" rx="10" fill="var(--bg2)" stroke="${selected?'var(--accent)':'var(--line2)'}" stroke-width="${selected?3:1}"/><text x="12" y="26" fill="var(--text)" font-size="13" font-weight="600" direction="ltr">${esc(node.label)}</text><text x="12" y="47" fill="${statusFill}" font-size="10" direction="ltr">${esc(status)}</text></g>`;
+  const isDuplicate=Boolean(node.presentationState?.duplicateOf||node.duplicateOf||String(node.id).includes('--canvas-rep-'));
+  const strokeColor=selected?'var(--accent)':isDuplicate?'color-mix(in srgb,var(--accent) 75%,var(--line2))':'var(--line2)';
+  const strokeDash=isDuplicate?'stroke-dasharray="5 3"':'';
+  const duplicateBadge=isDuplicate?`<rect x="12" y="44" width="70" height="13" rx="3" fill="color-mix(in srgb,var(--accent) 15%,var(--bg2))" stroke="var(--accent)" stroke-width="0.8"/><text class="duplicate-badge" x="16" y="53" fill="var(--accent)" font-size="8.5" font-weight="700" font-family="var(--mono)" direction="ltr">[DUPLICATE]</text>`:'';
+  const ariaLabel=isDuplicate?`${node.label} ${status} [Duplicate of ${node.presentationState?.duplicateOf||'source'}]`:`${node.label} ${status}`;
+  return `<g class="spatial-node-card ${isDuplicate?'spatial-node-duplicate':''}" data-node="${esc(node.id)}" data-duplicate="${isDuplicate}" transform="translate(${node.x},${node.y})" tabindex="${tabbable?'0':'-1'}" role="button" aria-pressed="${selected}" aria-label="${esc(ariaLabel)}"><rect class="node-surface" width="132" height="62" rx="10" fill="var(--bg2)" stroke="${strokeColor}" stroke-width="${selected?3:(isDuplicate?1.8:1)}" ${strokeDash}/><text x="12" y="26" fill="var(--text)" font-size="13" font-weight="600" direction="ltr">${esc(node.label)}</text><text x="${isDuplicate?86:12}" y="47" fill="${statusFill}" font-size="10" direction="ltr">${esc(status)}</text>${duplicateBadge}</g>`;
+}
+
+export function renderMultiSelectionGroupBoundary({nodes,selectedIds}){
+  if(!selectedIds||selectedIds.size<=1)return '';
+  const selectedNodes=nodes.filter(n=>selectedIds.has(n.id)&&Number.isFinite(n.x)&&Number.isFinite(n.y));
+  if(selectedNodes.length<=1)return '';
+  const pad=16,nodeW=132,nodeH=62;
+  const minX=Math.min(...selectedNodes.map(n=>n.x))-pad;
+  const minY=Math.min(...selectedNodes.map(n=>n.y))-pad;
+  const maxX=Math.max(...selectedNodes.map(n=>n.x+nodeW))+pad;
+  const maxY=Math.max(...selectedNodes.map(n=>n.y+nodeH))+pad;
+  const width=maxX-minX,height=maxY-minY;
+  return `<g class="spatial-multi-selection-group" data-selection-count="${selectedNodes.length}"><rect class="group-boundary" x="${minX}" y="${minY}" width="${width}" height="${height}" fill="color-mix(in srgb,var(--accent) 6%,transparent)" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="6 4" rx="10"/><text class="group-label" x="${minX+10}" y="${minY-6}" font-size="11" font-weight="700" font-family="var(--mono)" fill="var(--accent)">GROUP BOUNDARY (${selectedNodes.length} selected)</text></g>`;
 }
 
 export function spatialReadout({zoom,selectionCount,nodeCount,relationSelected=false}){

@@ -31,17 +31,20 @@ export class RQDomainAdapter{
     providerAdmitted:this.providerAdmitted,
     providerClassification:this.providerClassification,
     providerTruth:this.providerAdmitted?'ADMITTED_CURRENT_PROVIDER':'UNAVAILABLE_NO_ADMITTED_CURRENT_PROVIDER',
+    epistemicState:this.providerAdmitted?'AVAILABLE':'UNAVAILABLE',
     analysisSessionPersistence:'UNAVAILABLE',
     formalReviewAuthority:false,
     visualReferenceCeiling:'REVIEWED_FINAL_CANDIDATE',
     exactCompareContext:{left:'SourceRevision',right:'SourceRevision',workingAnalysisId:'required',scope:'required-non-empty'}
   };}
-  providerAvailability(){return this.providerAdmitted?{enabled:true,code:'AVAILABLE',reason:'Admitted current RQ provider is bound.'}:{enabled:false,code:'RQ_CURRENT_PROVIDER_UNAVAILABLE',reason:'No admitted current RQ provider is bound; non-production acceptance data is not Product truth.'};}
+  providerAvailability(){return this.providerAdmitted?{enabled:true,code:'AVAILABLE',epistemicState:'AVAILABLE',reason:'Admitted current RQ provider is bound.'}:{enabled:false,code:'RQ_CURRENT_PROVIDER_UNAVAILABLE',epistemicState:'UNAVAILABLE',reason:'No admitted current RQ provider is bound; non-production acceptance data is not Product truth.'};}
   search(query='',options={}){
+    if(!this.providerAdmitted)return {ok:false,status:'RQ_CURRENT_PROVIDER_UNAVAILABLE',epistemicState:'UNAVAILABLE',query,items:[],excluded:[],trace:[],providerAdmitted:false,providerClassification:this.providerClassification,persisted:false,formalReview:false};
     const q=String(query||'').trim().toLocaleLowerCase('en-US'),includeExcluded=options.includeExcluded===true,requestedExcludedIds=new Set((options.includeExcludedIds||[]).map(String));
     const list=clone(this.records),matches=item=>!q||JSON.stringify(item).toLocaleLowerCase('en-US').includes(q),isExcluded=item=>item?.excluded===true||String(item?.status||'').toUpperCase()==='EXCLUDED';
     const trace=list.filter(matches).map(item=>({sourceRevision:clone(item),excluded:isExcluded(item),included:!isExcluded(item)||includeExcluded||requestedExcludedIds.has(String(item?.sourceId||'')),reason:isExcluded(item)?'EXCLUDED_SOURCE_TRACEABLE':'IN_SCOPE_SOURCE'}));
-    return {ok:true,status:this.providerAdmitted?'WORKING_SEARCH':'RQ_CURRENT_PROVIDER_UNAVAILABLE',query,items:trace.filter(item=>item.included).map(item=>clone(item.sourceRevision)),excluded:trace.filter(item=>item.excluded&&!item.included),trace,providerAdmitted:this.providerAdmitted,providerClassification:this.providerClassification,persisted:false,formalReview:false};
+    const items=trace.filter(item=>item.included).map(item=>clone(item.sourceRevision));
+    return {ok:true,status:'WORKING_SEARCH',epistemicState:items.length?'AVAILABLE':'EMPTY',query,items,excluded:trace.filter(item=>item.excluded&&!item.included),trace,providerAdmitted:true,providerClassification:this.providerClassification,persisted:false,formalReview:false};
   }
   compareContext(payload={}){
     const workingAnalysisId=String(payload.workingAnalysisId||payload.sessionId||'').trim(),scope=normalizeScope(payload.scope),left=payload.left,right=payload.right;
@@ -49,7 +52,7 @@ export class RQDomainAdapter{
   }
   compareAvailability(payload={}){
     const context=this.compareContext(payload);
-    if(!this.providerAdmitted)return {enabled:false,code:'RQ_CURRENT_PROVIDER_UNAVAILABLE',reason:'No admitted current RQ provider is bound; compare cannot resolve Product SourceRevision truth.',context};
+    if(!this.providerAdmitted)return {enabled:false,code:'RQ_CURRENT_PROVIDER_UNAVAILABLE',epistemicState:'UNAVAILABLE',reason:'No admitted current RQ provider is bound; compare cannot resolve Product SourceRevision truth.',context};
     if(!context.exactPair)return {enabled:false,code:'RQ_COMPARE_EXACT_SOURCE_REVISION_PAIR_REQUIRED',reason:'rq.compare requires two exact SourceRevision references.'};
     if(!context.workingAnalysisId)return {enabled:false,code:'RQ_COMPARE_WORKING_ANALYSIS_CONTEXT_REQUIRED',reason:'rq.compare requires a workingAnalysisId/sessionId.'};
     if(!context.scope.length)return {enabled:false,code:'RQ_COMPARE_SCOPE_REQUIRED',reason:'rq.compare requires explicit non-empty scope context.'};

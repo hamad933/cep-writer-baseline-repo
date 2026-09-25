@@ -11,5 +11,5 @@ export function bindRqSurface({commands,adapter,workspace=null}={}){
   ];
   const provider=adapter.descriptor();
   workspace?.status?.(provider.providerAdmitted?'RQ · WORKING analysis · exact SourceRevision context required · durable Save unavailable':'RQ · current provider unavailable · no Product SourceRevision corpus admitted · durable Save unavailable');
-  return {surface:'rq',owner:adapter.owner,commands:ids,sharedFamilyOwner:adapter.compareOwner.owner,providerId:provider.providerId,providerAdmitted:provider.providerAdmitted,providerClassification:provider.providerClassification,providerTruth:provider.providerTruth,analysisSessionPersistence:'UNAVAILABLE',formalReviewAuthority:false,visualReferenceCeiling:'REVIEWED_FINAL_CANDIDATE',compareContext:'EXACT_SOURCE_REVISION_PAIR_PLUS_SCOPE'};
+  return {surface:'rq',owner:adapter.owner,commands:ids,sharedFamilyOwner:adapter.compareOwner.owner,providerId:provider.providerId,providerAdmitted:provider.providerAdmitted,providerClassification:provider.providerClassification,providerTruth:provider.providerTruth,epistemicState:provider.epistemicState||(provider.providerAdmitted?'AVAILABLE':'UNAVAILABLE'),analysisSessionPersistence:'UNAVAILABLE',formalReviewAuthority:false,visualReferenceCeiling:'REVIEWED_FINAL_CANDIDATE',compareContext:'EXACT_SOURCE_REVISION_PAIR_PLUS_SCOPE'};
 }

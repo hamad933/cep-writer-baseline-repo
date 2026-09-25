@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D08 Visualize Presentation Parity Harness</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090d16;
+      --bg2: #111827;
+      --panel: #141c2e;
+      --text: #e2e8f0;
+      --text2: #94a3b8;
+      --text3: #64748b;
+      --line: #1e293b;
+      --line2: #334155;
+      --accent: #38bdf8;
+      --bad: #ef4444;
+      --mono: Consolas, monospace;
+      --ui: system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--ui);
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+    }
+    .harness-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 16px;
+      background: #0c1524;
+      border-bottom: 1px solid var(--line);
+      font-size: 12px;
+    }
+    .harness-tag {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+    .workspace-toolbar-strip {
+      display: flex;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--line);
+      align-items: center;
+    }
+    .workspace-toolbar-strip .title {
+      font-weight: 700;
+      font-size: 13px;
+      margin-right: 12px;
+      color: var(--text2);
+    }
+    .btn {
+      padding: 5px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--line2);
+      background: #1e293b;
+      color: var(--text);
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn.primary {
+      border-color: var(--accent);
+      background: rgba(56, 189, 248, 0.12);
+    }
+    .main-grid {
+      display: grid;
+      grid-template-columns: 220px 1fr 300px;
+      min-height: calc(100vh - 84px);
+    }
+    .side-pane {
+      background: var(--panel);
+      border-right: 1px solid var(--line);
+      padding: 12px;
+      overflow: auto;
+    }
+    .side-pane.right {
+      border-right: none;
+      border-left: 1px solid var(--line);
+    }
+    .spatial-stage {
+      position: relative;
+      background: #0a0f1d;
+      overflow: hidden;
+    }
+    svg.spatial-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header class="harness-banner">
+    <strong>Visualize Presentation Parity Verification Harness</strong>
+    <span class="harness-tag">TEST_ONLY_PRESENTATION_HARNESS__NOT_PRODUCT_PROVIDER_TRUTH</span>
+  </header>
+  <div class="workspace-toolbar-strip" aria-label="Authoritative Canvas Toolbar">
+    <span class="title">Canvas Toolbar (Authoritative Home)</span>
+    <button type="button" class="btn" data-foundation-command="visualize.viewport">Fit Viewport</button>
+    <button type="button" class="btn primary" data-foundation-command="visualize.duplicateRepresentation">Duplicate</button>
+    <button type="button" class="btn" data-foundation-command="visualize.removeRepresentation">Remove from Canvas</button>
+    <button type="button" class="btn" data-foundation-command="visualize.canvasLink">Canvas Link</button>
+    <button type="button" class="btn" data-foundation-command="visualize.undoPresentation">Undo</button>
+    <button type="button" class="btn" data-foundation-command="visualize.redoPresentation">Redo</button>
+    <button type="button" class="btn" data-foundation-command="foundation.note">Add Note</button>
+  </div>
+  <main class="main-grid">
+    <aside class="side-pane left" aria-label="Projections & Navigation">
+      <h3 style="font-size: 13px; margin-top: 0;">Projections</h3>
+      <div style="display: grid; gap: 6px;">
+        <button type="button" class="btn">Tree (Ceiling)</button>
+        <button type="button" class="btn">Path (Lanes)</button>
+        <button type="button" class="btn">Graph (Focused)</button>
+        <button type="button" class="btn primary">Canvas (Author)</button>
+      </div>
+      <h4 style="font-size: 12px; margin-top: 16px; color: var(--text2);">Representations</h4>
+      <div style="font-size: 12px; display: grid; gap: 4px; color: var(--text3);">
+        <div>• Object A (Primary)</div>
+        <div>• Object A [DUPLICATE]</div>
+        <div>• Object B (Target)</div>
+      </div>
+    </aside>
+    <section class="spatial-stage" id="spatialHost">
+      <svg class="spatial-svg" id="spatialSvg" viewBox="0 0 800 600">
+        <defs>
+          <marker id="marker-canvas" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <polygon points="0 1, 8 4, 0 7" fill="#f59e0b" />
+          </marker>
+        </defs>
+        <g id="spatialLayer"></g>
+      </svg>
+    </section>
+    <aside class="side-pane right" id="contextInspectorHost" aria-label="Context Inspector">
+      <section class="visualize-representation-actions" aria-label="Canvas representation status" style="display: grid; gap: 8px;">
+        <h3 style="margin: 0; font-size: 13px;">Canvas representation status</h3>
+        <p style="margin: 0; font-size: 12px; color: var(--text2);">Canvas presentation state only. These actions do not create/delete canonical objects, change canonical relationships, or persist a Saved Map.</p>
+        <p class="visualize-action-home-truth" style="margin: 0; font-size: 12px; color: var(--accent);"><strong>Authoritative action home: Canvas Toolbar</strong></p>
+        <div class="visualize-selection-truth" style="font-family: var(--mono); font-size: 11px; color: var(--text3);">selected=[rep-a, rep-a--canvas-rep-1] · primary=rep-a · focus=rep-a</div>
+      </section>
+    </aside>
+  </main>
+
+  <script type="module">
+    import {VisualizeDomainAdapter} from '../dist/adapters/visualize/domain.js';
+    import {renderSpatialNode, renderSpatialRelation, renderMultiSelectionGroupBoundary} from '../dist/foundation/spatial/presentation.js';
+
+    const reps = [
+      {representationId:'rep-a', canonicalRef:{objectId:'obj-a', revision:'r1'}, label:'Object A', x:60, y:80, views:['TREE','PATH','GRAPH','CANVAS']},
+      {representationId:'rep-b', canonicalRef:{objectId:'obj-b', revision:'r1'}, label:'Object B', x:360, y:240, views:['TREE','PATH','GRAPH','CANVAS']}
+    ];
+
+    const adapter = new VisualizeDomainAdapter({representations: reps});
+    const dupResult = adapter.duplicateRepresentation({representationId:'rep-a', mode:'CANVAS'});
+    const linkResult = adapter.createCanvasOnlyLink({sourceRepresentationId:'rep-a', targetRepresentationId:'rep-b'});
+
+    const layer = document.querySelector('#spatialLayer');
+    const nodes = adapter.model.nodes;
+    const selectedIds = new Set(['rep-a', dupResult.representationId]);
+
+    // 1. Group Boundary
+    const groupSvg = renderMultiSelectionGroupBoundary({nodes, selectedIds});
+
+    // 2. Relations
+    const relationsSvg = adapter.model.edges.map(edge => {
+      const source = nodes.find(n => n.id === edge.source);
+      const target = nodes.find(n => n.id === edge.target);
+      return renderSpatialRelation({edge, source, target, markerId:'marker-canvas'});
+    }).join('');
+
+    // 3. Nodes
+    const nodesSvg = nodes.map(node => {
+      const selected = selectedIds.has(node.id);
+      return renderSpatialNode({node, selected});
+    }).join('');
+
+    layer.innerHTML = groupSvg + relationsSvg + nodesSvg;
+
+    window.D08_PARITY_PROOF = {
+      duplicateId: dupResult.representationId,
+      linkId: linkResult.edge?.id,
+      selectedCount: selectedIds.size,
+      classification: 'TEST_ONLY_PRESENTATION_HARNESS__NOT_PRODUCT_PROVIDER_TRUTH'
+    };
+  </script>
+</body>
+</html>

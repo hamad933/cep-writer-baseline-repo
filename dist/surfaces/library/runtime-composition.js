@@ -4,7 +4,7 @@ export const LIBRARY_REAL_CONSUMER_SOURCE_CONTRACT=Object.freeze({
   id:'LibraryRealConsumerSource',version:'1.0.0',owner:'LibraryDomainAdapter',
   role:'REAL_PRODUCT_SOURCE_INJECTION__NO_FIXTURE_FALLBACK'
 });
-const forbiddenTruth=/(FIXTURE|DEMO|SYNTHETIC|HARNESS|PROOF[_ -]?ONLY)/i;
+const forbiddenTruth=/(FIXTURE|DEMO|SYNTHETIC|HARNESS|PROOF[_ -]?ONLY|NON_PRODUCTION|ACCEPTANCE_SEED|NOT_CANONICAL_RUNTIME_IMPORT)/i;
 const clone=value=>structuredClone(value);
 
 export function assertGenuineLibrarySource(source){
