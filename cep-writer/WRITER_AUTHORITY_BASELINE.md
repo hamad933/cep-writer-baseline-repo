@@ -28,3 +28,21 @@ Core laws:
 - stack expansion is locked and final stack remains not frozen.
 
 Google Drive remains the live Controller/governance plane. GitHub copies are Writer execution inputs, never independent acceptance authority.
+
+## Zero-loss source-detail law
+
+The compact current finding projection is not exhaustive authority for mission detail.
+
+For each mission, the Controller-bound execution packet must preserve applicable:
+- C03 source/crosswalk rows;
+- component/state obligations;
+- positive and negative/falsification requirements;
+- Controller-adjudicated zero-loss durable details;
+- Owner/authority prerequisites;
+- profile/oracle/reference truth.
+
+Do not recreate old historical status, but do not discard a current material sub-obligation merely because it was collapsed under a root finding.
+
+Current corrected routing: `F-049/F-050 -> D08 -> D13 -> D14`.
+
+Carrier topology is mission-bound: `ROUTE-LOCAL` may use `writer/cep-serial`; other carriers do not inherit that local rule.
