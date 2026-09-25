@@ -63,3 +63,23 @@ Intermediate screenshots/diffs/logs remain local by default. Promote only final 
 Return exact parent identity; candidate HEAD/tree/Product identity; changed paths; delta/git-bundle with exact prerequisite; finding-closure matrix; positive/negative receipts; final handoff; and bounded representative evidence.
 
 Every result remains `CANDIDATE_ONLY / NO_SELF_PROMOTION / NO_MAIN_MERGE / NO_RELEASE / NO_DEPLOYMENT / NO_STACK_FREEZE`.
+
+## ZERO-LOSS MISSION MATERIALIZATION ADDENDUM
+
+A compact current finding projection is NOT sufficient by itself for Writer mission generation.
+
+Every exact mission packet must import all applicable:
+1. C03 source finding/crosswalk rows;
+2. component/state and evidence/falsification obligations;
+3. live Owner authority and exact current Controller overlays;
+4. Controller-adjudicated zero-loss durable details;
+5. profile/oracle/reference constraints;
+6. dependency, collision and final-integration responsibility.
+
+A route tag alone is not an executable Mission.
+
+Do not inflate ancillary rows into artificial Product defects. Preserve them in the narrowest correct role: mission acceptance criterion, positive/negative test, profile/oracle requirement, proof gate, authority ceiling or historical regression exclusion.
+
+Current routing override:
+- `F-049/F-050 -> D08 -> D13 -> D14`
+- D04 must not mutate Visualize for those findings.
