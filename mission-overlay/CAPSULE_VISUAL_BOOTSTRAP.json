@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 3,
+  "classification": "CONTROLLER_PREPARED_VISUAL_BOOTSTRAP__BOOTSTRAP_ONLY__NOT_FINAL_ACCEPTANCE_EVIDENCE",
+  "enabled": true,
+  "required": true,
+  "allowWriterLocalRecapture": true,
+  "expectedProductParentCommit": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+  "minimumScreenshotCount": 6,
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1024,
+      "height": 900
+    }
+  ],
+  "states": [
+    "normal-product-truth",
+    "ds01-populated",
+    "ds01-selected-active",
+    "ds01-mastery-judgment-freshness"
+  ],
+  "environment": {},
+  "setupCommands": [],
+  "captureCommands": [],
+  "baselineGlobs": [
+    "writer-output/DS01_GLOBAL_DATA_SUFFICIENCY_SEED/visual/screenshots/mastery__*.png"
+  ],
+  "receiptGlobs": [
+    "writer-output/DS01_GLOBAL_DATA_SUFFICIENCY_SEED/visual/DS01_FINAL_VISUAL_MANIFEST.json",
+    "writer-output/DS01_GLOBAL_DATA_SUFFICIENCY_SEED/DS01_FINAL_REGRESSION_RECEIPT.json",
+    "writer-output/DS01_GLOBAL_DATA_SUFFICIENCY_SEED/DS01_FINAL_VISUAL_INSPECTION.md"
+  ],
+  "referenceBindings": [
+    {
+      "surface": "mastery",
+      "referenceId": "1blXqaIvZq-YKlOVT6dCbA7BR0qasrguj",
+      "classification": "CURRENT_FINAL_REFERENCE__PRESENTATION_ONLY",
+      "path": "cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/03_MASTERY/Arabic Cybersecurity Mastery Dashboard.png",
+      "sha256": "7784568ef868bfefdad8dcd731e20c2dbbe95bd9cdd8d81daaca7b0723d82a54"
+    }
+  ],
+  "comparisonPlan": [
+    "Inspect governed Mastery reference and B0 normal/DS01 populated bootstrap.",
+    "Compare typed regions and material judgment/freshness state at both viewports.",
+    "After Product edits recapture fresh exact candidate; bootstrap cannot serve as final candidate evidence.",
+    "Exercise pointer/keyboard/focus/responsive/RTL/LTR/Bidi and truthful evaluator/policy/evidence state.",
+    "Keep route/history/network proof separate from NOT_GENUINE_ROUTE bootstrap."
+  ]
+}
