@@ -2,8 +2,20 @@ import assert from 'node:assert/strict';
 import {W03V34RunsAdapter} from '../../../adapters/w03-runs.js';
 import {W03RunDomain} from '../../../adapters/runs/domain.js';
 import {composeRunsSurface} from '../../../surfaces/runs/index.js';
+import {resolveRunsInitialMode} from '../../../surfaces/runs/presentation.js';
 
 const throwsCode=(fn,expected)=>{let error=null;try{fn()}catch(caught){error=caught}assert.ok(error,`expected ${expected}`);assert.equal(error.code||error.message,expected)};
+
+
+// PVF-002 — pre-active lifecycle opens the governed Preflight major state by default; explicit operator mode remains authoritative.
+{
+ assert.equal(resolveRunsInitialMode('PREPARING'),'preflight');
+ assert.equal(resolveRunsInitialMode('BLOCKED'),'preflight');
+ assert.equal(resolveRunsInitialMode('READY'),'preflight');
+ assert.equal(resolveRunsInitialMode('RUNNING'),'operations');
+ assert.equal(resolveRunsInitialMode('PAUSED'),'operations');
+ assert.equal(resolveRunsInitialMode('PREPARING','operations'),'operations');
+}
 
 // INV.1 — runtime effects never rewrite authored definitions or frozen source truth.
 {

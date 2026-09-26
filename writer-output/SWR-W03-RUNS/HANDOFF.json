@@ -1,0 +1,146 @@
+{
+  "schemaVersion": "1.0",
+  "missionId": "SWR-W03-RUNS",
+  "role": "CHATGPT_WRITER",
+  "executionCarrier": "ROUTE-CHATGPT",
+  "candidateBranch": "writer/surface-w03-runs",
+  "generatedAtUtc": "2026-09-26T16:00:49.560247+00:00",
+  "sourceBinding": {
+    "capsuleDriveId": "1llO6HAntvZKFaHmBv_rcW93tKfoDtVcQ",
+    "capsuleSha256": "922a454e7dffe27ae1fe5a058677bb9e567cfc21cad33a4e585019899c81a0b3",
+    "expectedParentCommit": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+    "expectedParentTree": "dd0315926270ec1f6571b82566dcdab3d65267f9",
+    "expectedProductSourceSha256": "b8b5e4a5797eb48b4cb8ae10439ff7dca5d8e2c900cb782b4802f69b21e23b7a",
+    "expectedProductSourceFiles": 289,
+    "capsuleVerifier": "PASS",
+    "workspaceCleanBeforeMutation": true
+  },
+  "changes": [
+    {
+      "path": "stack/native-typescript/surfaces/runs/presentation.ts",
+      "sha256": "037c1f1bdbd46435cea5ecd35c9efebc3ed0dab496cd07f004bce649fdf0874c",
+      "purpose": "Make Preflight the lifecycle-derived default major state for PREPARING/BLOCKED/READY, preserve explicit mode selection, transition successful READY Start to Operations, and add true local Run Structure collapse/reveal geometry with external accessible control."
+    },
+    {
+      "path": "stack/native-typescript/tests/rescue/S12_W03_RUNS/runs-operational-workspace.test.ts",
+      "sha256": "484c9a82a95ca4059d9e58eb633cfea27ac2294e60cb457da3501b619154ab21",
+      "purpose": "Add direct lifecycle-to-major-state regression assertions for PVF-002."
+    }
+  ],
+  "truthPreserved": {
+    "runtimeTruth": "INTERNAL_SIMULATION",
+    "provider": "InternalSimulationAdapter",
+    "realWindowsTerminalProof": "UNVERIFIED_PLATFORM_GATE",
+    "manifestImmutability": "OBJECT_SCOPED_NOT_SURFACE_READ_ONLY",
+    "providerLossIsRunCompletion": false,
+    "sharedOwnerMutations": false,
+    "spatialInteractionMutation": false,
+    "operationalSurfaceMutation": false
+  },
+  "tests": [
+    {
+      "name": "npm test",
+      "result": "PASS",
+      "detail": "210/210 model tests; 0 failures"
+    },
+    {
+      "name": "python3 tools/check-w03-semantic-ownership.py",
+      "result": "PASS",
+      "detail": "60/60"
+    },
+    {
+      "name": "S12 W03 Runs operational workspace compiled lane baseline",
+      "result": "PASS"
+    },
+    {
+      "name": "Runs surface domain compiled lane baseline",
+      "result": "PASS"
+    },
+    {
+      "name": "W03 group regression compiled lane baseline",
+      "result": "PASS"
+    },
+    {
+      "name": "CG4_CONTROLLER_CORR01_W03_LIFECYCLE_TRUTH",
+      "result": "PASS"
+    },
+    {
+      "name": "CG4 W03 group composition",
+      "result": "PASS"
+    },
+    {
+      "name": "CG4 W03 falsification",
+      "result": "PASS"
+    },
+    {
+      "name": "candidate presentation source syntax/helper",
+      "result": "PASS",
+      "detail": "PREPARING/BLOCKED/READY -> preflight; RUNNING/PAUSED -> operations; explicit mode preserved"
+    },
+    {
+      "name": "candidate-transformed S12 source test against bound compiled domain + candidate presentation helper",
+      "result": "PASS"
+    },
+    {
+      "name": "fresh Chromium visual/interaction/accessibility falsification",
+      "result": "PASS",
+      "detail": "1440x1000 + compact 768; mouse/keyboard collapse/reveal; no compact horizontal overflow"
+    }
+  ],
+  "visualEvidence": {
+    "classification": "FRESH_CURRENT_CANDIDATE__BROWSER_RENDERED__NAVIGATION_INDEPENDENT__NOT_GENUINE_ROUTE",
+    "navigationClaim": "NOT_GENUINE_ROUTE",
+    "referenceAuthority": "capsule-bound Operations + Preflight references, both SHA-256 verified before recapture",
+    "screenshots": {
+      "preparing-default-preflight.png": {
+        "sha256": "f6b3599fcf8bb2af761892c4959af781022af57a3619e435237a38b9b1076e8f",
+        "bytes": 252874
+      },
+      "running-compact-768-collapsed.png": {
+        "sha256": "28a177ec0c576cb1c1678933c9790cdc5585f693be9f2539b5c5ee7614b48f86",
+        "bytes": 117309
+      },
+      "running-expanded.png": {
+        "sha256": "2c661cd4300460a0005e25a7c11613a4abee74f0b7260c1c2627dd709f8acfa3",
+        "bytes": 245690
+      },
+      "running-left-collapsed.png": {
+        "sha256": "48ef700ec1e3f1f7df8a46cefbb61f1ac334cff049d516a3d69bc7c5a94324f4",
+        "bytes": 210306
+      }
+    },
+    "geometry": {
+      "expandedCenter": {
+        "x": 241,
+        "width": 888,
+        "height": 778
+      },
+      "collapsedCenter": {
+        "x": 11,
+        "width": 1118,
+        "height": 778
+      },
+      "compactOverflowPx": 0
+    },
+    "preflightDefaultMode": "preflight",
+    "runningDefaultMode": "operations",
+    "readyStartResultMode": "operations",
+    "externalRevealControl": true,
+    "keyboardRevealControl": true
+  },
+  "sharedOwnerEscalations": [],
+  "limitations": [
+    "Fresh visual proof is navigation-independent browser rendering, not a genuine app-route navigation claim.",
+    "No Windows/ConPTY/PowerShell/SSH/native-window certification is made or implied."
+  ],
+  "custody": {
+    "writerOutputDriveFolderId": "1YSNeiRWIREZUfHe07fDVLgX1unvDTtnO",
+    "heavyEvidenceUpload": "PENDING_FINAL_PUSH_AND_DRIVE_UPLOAD",
+    "repoReceiptPath": "writer-output/SWR-W03-RUNS/HANDOFF.json"
+  },
+  "stopGate": "CANDIDATE_ONLY__SOLE_CONTROLLER_REVIEW_REQUIRED",
+  "selfAcceptance": false,
+  "mainMerge": false,
+  "release": false,
+  "deployment": false
+}
