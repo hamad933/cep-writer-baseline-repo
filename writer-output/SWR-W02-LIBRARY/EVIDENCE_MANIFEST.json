@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 1,
+  "missionId": "SWR-W02-LIBRARY",
+  "candidateBranch": "writer/surface-w02-library",
+  "productParentCommit": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+  "productParentTree": "dd0315926270ec1f6571b82566dcdab3d65267f9",
+  "capsuleTransportCommit": "fbc0f61d6d8f8713ab5f987b6041c211e39ad10c",
+  "canonicalSourceHashAfterDelta": "1d87df7cd3f0ca4e2f9c2c350cc187f1e65a98a81fffb304bac66624712ead03",
+  "canonicalSourceFiles": 289,
+  "changedProductFiles": [
+    {
+      "path": "stack/native-typescript/surfaces/library/runtime-composition.ts",
+      "sha256": "3d0e1af18148a56c65da38c584bab2018bdd9497ca50952c347a91cf58fa2f38"
+    },
+    {
+      "path": "tests/surfaces/library/surface.test.mjs",
+      "sha256": "fc79c90e9236835c86af5f44dd63720b7a6b9003d685e2b7d1a78166ba01a25f"
+    }
+  ],
+  "tests": [
+    {
+      "command": "npm ci",
+      "status": "ENVIRONMENT_BLOCKED_HUNG",
+      "productFailure": false
+    },
+    {
+      "command": "npm run build:runtime",
+      "status": "PASS"
+    },
+    {
+      "command": "node tests/surfaces/library/surface.test.mjs",
+      "status": "PASS",
+      "cases": 22
+    },
+    {
+      "command": "node dist/w5-c-structured-consumer-parity-tests.js",
+      "status": "PASS"
+    },
+    {
+      "command": "npm test",
+      "status": "PASS"
+    },
+    {
+      "command": "npm run check",
+      "status": "BLOCKED_GLOBAL_BROWSER_ASSURANCE",
+      "detail": "ERR_BLOCKED_BY_ADMINISTRATOR; current genuine-route lineage/screenshot receipt unavailable in this environment"
+    }
+  ],
+  "browserProof": {
+    "classification": "FRESH_BROWSER_PROOF__EXACT_ACCEPTED_DONOR__NAVIGATION_INDEPENDENT__NOT_GENUINE_ROUTE",
+    "donor_sha256": "ea66b58ef122bf2f8ca23fd0aa9e461b07da11ea7390c451902e4b1592d396fd",
+    "chromium": "144.0.7559.96",
+    "cases": [
+      {
+        "id": "G01-layout",
+        "status": "PASS",
+        "detail": {
+          "density": "comfortable",
+          "focus": "false",
+          "left": "open",
+          "right": "open",
+          "motion": "system",
+          "focusIndicators": "true",
+          "focusInput": "true",
+          "focusRail": "true",
+          "focusSelection": "true",
+          "blockFocusOrigin": "none",
+          "theme": "dark-blue",
+          "contrast": "normal",
+          "overlayPane": "",
+          "responsiveBand": "wide",
+          "mode": "read"
+        }
+      },
+      {
+        "id": "G01-blocks",
+        "status": "PASS",
+        "detail": {
+          "blocks": 15,
+          "editables": 0
+        }
+      },
+      {
+        "id": "G01-runtime-errors",
+        "status": "PASS",
+        "detail": {
+          "pageErrors": [],
+          "consoleErrors": []
+        }
+      },
+      {
+        "id": "G05-left-insertion-chooser",
+        "status": "PASS",
+        "detail": {
+          "paletteDisplay": "block"
+        }
+      },
+      {
+        "id": "G05-insert-paragraph",
+        "status": "PASS",
+        "detail": {
+          "before": 15,
+          "after": 16,
+          "firstType": "paragraph"
+        }
+      },
+      {
+        "id": "G05-undo",
+        "status": "PASS",
+        "detail": {
+          "blocks": 15
+        }
+      },
+      {
+        "id": "OD-054-right-click-direct-paragraph",
+        "status": "PASS",
+        "detail": {
+          "before": 15,
+          "after": 16,
+          "firstType": "paragraph",
+          "paletteDisplay": "none"
+        }
+      },
+      {
+        "id": "G22-keyboard-block-menu",
+        "status": "PASS",
+        "detail": {
+          "display": "block"
+        }
+      },
+      {
+        "id": "G22-focus-return",
+        "status": "PASS",
+        "detail": {
+          "active": "blk-d05-h1"
+        }
+      },
+      {
+        "id": "G16-bidi-evidence",
+        "status": "PASS",
+        "detail": {
+          "arabicSample": {
+            "id": "blk-d05-h1",
+            "type": "h2",
+            "dir": "rtl",
+            "text": "نطاق الحماية في واجهات API"
+          },
+          "englishSample": {
+            "id": "blk-d05-p-auto-ltr",
+            "type": "paragraph",
+            "dir": "ltr",
+            "text": "English-first validation note — تحقق من policy.can"
+          }
+        }
+      },
+      {
+        "id": "responsive-1024-center-dominance",
+        "status": "PASS",
+        "detail": {
+          "state": {
+            "density": "comfortable",
+            "focus": "false",
+            "left": "open",
+            "right": "collapsed",
+            "motion": "system",
+            "focusIndicators": "true",
+            "focusInput": "true",
+            "focusRail": "true",
+            "focusSelection": "true",
+            "blockFocusOrigin": "none",
+            "theme": "dark-blue",
+            "contrast": "normal",
+            "overlayPane": "",
+            "responsiveBand": "medium",
+            "mode": "read"
+          },
+          "centerRect": {
+            "x": 315,
+            "y": 206.546875,
+            "width": 709,
+            "height": 754.453125
+          },
+          "pageErrors": []
+        }
+      }
+    ],
+    "limits": [
+      "Local file/http navigation is blocked by browser administrator policy; proof uses Chromium page.set_content over the exact governed self-contained donor bytes.",
+      "This browser proof validates the accepted Library presentation/interaction donor, not a genuine Product route/provider binding. Genuine Library source/provider truth is separately falsified by the Library runtime test."
+    ],
+    "screenshots": [
+      {
+        "path": "/mnt/data/swr-w02-library/evidence/library-donor-1440x1000.png",
+        "sha256": "af7941c34f5afc2edec83fe647a6fa6419d836bde2c6042c03074def83b8b5ea"
+      },
+      {
+        "path": "/mnt/data/swr-w02-library/evidence/library-donor-1024x1000.png",
+        "sha256": "cde349f7c4bf238f9b6942c633c6d36788d1f0f26143dfba3a95b168a1f33124"
+      }
+    ]
+  },
+  "escalationsFile": "SHARED_OWNER_ESCALATIONS.txt",
+  "stopGate": "SURFACE_CANDIDATE_ONLY__CONTROLLER_DELTA_ADMISSION_REQUIRED",
+  "selfPromotion": false,
+  "handoffSha256": "20f99df0e0d78c38e6cac14ba4f1cade9f889aff0331e8d67188b3713886f9e7",
+  "escalationsSha256": "5a60ac4898b958600fc9b5781ed4c0f24848557b70419a5834af079e76489312"
+}
