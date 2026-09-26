@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 3,
+  "classification": "MISSION_BOUND_VISUAL_BOOTSTRAP__MATERIAL__REFERENCE_BOUND__LOCAL_RECAPTURE_ALLOWED",
+  "enabled": true,
+  "required": false,
+  "allowWriterLocalRecapture": true,
+  "expectedProductParentCommit": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+  "minimumScreenshotCount": 1,
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1024,
+      "height": 900
+    }
+  ],
+  "states": [
+    "normal-product-truth",
+    "ds01-populated",
+    "journey-selected",
+    "structured-edit-when-capable",
+    "practice-toggle",
+    "review",
+    "empty/unavailable",
+    "1024-responsive"
+  ],
+  "environment": {},
+  "setupCommands": [],
+  "captureCommands": [],
+  "baselineGlobs": [],
+  "receiptGlobs": [],
+  "referenceBindings": [
+    {
+      "path": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/02_LEARN/CEP_VIS_001_LEARN_FINAL_OWNER_CONFIRMED_REFERENCE.png",
+      "classification": "OWNER_CONFIRMED_FINAL_REFERENCE",
+      "driveId": "1HLU4FemcxptjirsUlXKf_dzTARiu6rSJ",
+      "sha256": "5fa530e7c9506fd7d70339699c5f013908f77dd4df29007d1d021cf7d331d2b8"
+    }
+  ],
+  "comparisonPlan": [
+    {
+      "surface": "learn",
+      "rule": "Fresh 1440/1024 source-bound region/state comparison; reference Presentation-only."
+    },
+    {
+      "surface": "learn",
+      "rule": "Pointer/keyboard/focus/dismissal + RTL/LTR/Bidi; normal and DS01 truth kept distinct."
+    }
+  ]
+}
