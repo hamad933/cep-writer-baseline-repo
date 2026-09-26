@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 3,
+  "classification": "MISSION_BOUND_VISUAL_BOOTSTRAP__MATERIAL__REFERENCE_BOUND__LOCAL_RECAPTURE_ALLOWED",
+  "enabled": true,
+  "required": false,
+  "allowWriterLocalRecapture": true,
+  "expectedProductParentCommit": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+  "minimumScreenshotCount": 1,
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1024,
+      "height": 900
+    }
+  ],
+  "states": [
+    "normal-product-truth",
+    "ds01-populated",
+    "ds01-rq-compare",
+    "selected-source",
+    "conflict/provenance",
+    "empty/unavailable/stale",
+    "1024-responsive"
+  ],
+  "environment": {},
+  "setupCommands": [],
+  "captureCommands": [],
+  "baselineGlobs": [],
+  "receiptGlobs": [],
+  "referenceBindings": [
+    {
+      "path": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/04_RESEARCH_AND_QUALITY/image-gen-1(20260813-194728).png",
+      "classification": "REVIEWED_FINAL_CANDIDATE",
+      "driveId": "16INkI_mgjhbCNig2PUqSvbzOdLEKJ1mQ",
+      "sha256": "312bf193216402f8c16fb8c2bca424fa453d961e31f818ac0183cdf8e7b380c8"
+    }
+  ],
+  "comparisonPlan": [
+    {
+      "surface": "rq",
+      "rule": "Reference is REVIEWED_FINAL_CANDIDATE only; compare Presentation without promotion."
+    },
+    {
+      "surface": "rq",
+      "rule": "Fresh normal+DS01, exact-pair compare, pointer/keyboard/focus and 1440/1024 evidence."
+    }
+  ]
+}
