@@ -40,6 +40,8 @@ export class ManualAiDomainAdapter{
   private draftSink:DraftSink|null;
   private history:any[]=[];
 
+  capabilityTruth(){return {exportHelperAvailable:typeof this.io.exportPackage==='function',importHelperBound:typeof this.io.importResult==='function',draftSinkAvailable:!!this.draftSink,historyPersistence:'IN_MEMORY_ONLY',appendOnlyDurableHistory:false,providerNetworkCalls:0,backgroundCompletion:false};}
+
   constructor({proposals=[],io={},draftSink=null}:{proposals?:ManualProposal[];io?:ManualIoBridge;draftSink?:DraftSink|null}={}){
     this.io=io;this.draftSink=draftSink;for(const row of proposals)this.put(row);
   }
@@ -127,11 +129,23 @@ export class ManualAiDomainAdapter{
   availability(id:string,payload:any={}){
     const row=this.proposals.get(payload.id??this.selectedId??'');
     if(id==='manual_ai.draft')return true;
-    if(id==='manual_ai.export')return row&&row.state!=='PROVENANCE_INVALID'&&!terminal(row.state)?true:'Valid non-final proposal required';
+    if(id==='manual_ai.export'){
+      if(!row||row.state==='PROVENANCE_INVALID'||terminal(row.state))return 'Valid non-final proposal required';
+      if(!this.io.exportPackage)return 'Export helper unavailable; export remains manual and no provider call is substituted';
+      return true;
+    }
     if(id==='manual_ai.import')return row?.state==='EXPORTED'?true:'Exported request required for provenance equality';
-    if(id==='manual_ai.review'){if(!row)return 'Select a ManualProposal';if(row.state==='PROVENANCE_INVALID')return 'Imported proposal with valid provenance required for human review';return row.state==='IMPORTED'||row.state==='DEFERRED'?true:'Import and provenance equality must succeed before human review';}
+    if(id==='manual_ai.review'){
+      if(!row)return 'Select a ManualProposal';
+      if(payload?.disposition==='ACCEPT'&&row.state==='ACCEPTED_AS_DRAFT'&&row.draftState==='CREATED'&&row.draftId)return true;
+      if(terminal(row.state))return 'Final decision requires explicit supersession';
+      if(row.state==='PROVENANCE_INVALID')return 'Imported proposal with valid provenance required for human review';
+      if(row.state!=='IMPORTED'&&row.state!=='DEFERRED')return 'Import and provenance equality must succeed before human review';
+      if(payload?.disposition==='ACCEPT'&&!this.draftSink)return 'Draft sink unavailable; ACCEPT cannot create or persist a working draft';
+      return true;
+    }
     return 'Unknown Manual AI command';
   }
   bindCommands(bus:SemanticCommandBus){for(const id of MANUAL_AI_COMMANDS)bus.registerCommand(id,this.owner,id.split('.').at(-1)!,p=>{if(id==='manual_ai.draft')return this.prepare(p);if(id==='manual_ai.export')return this.export(p.id??this.selectedId);if(id==='manual_ai.import')return this.import(p.input);return this.review(p);},p=>this.availability(id,p));return bus;}
-  diagnosticProjection(){return {owner:this.owner,providerMode:this.providerMode,hiddenProviderCalls:0,automaticCanonicalPublication:false,selectedId:this.selectedId,proposals:this.rows(),history:clone(this.history),truth:{importRequiresDeclaredExport:true,sourceRevisionDigestEqualityRequired:true,acceptCreatesDraftOnly:true}};}
+  diagnosticProjection(){return {owner:this.owner,providerMode:this.providerMode,hiddenProviderCalls:0,automaticCanonicalPublication:false,selectedId:this.selectedId,proposals:this.rows(),history:clone(this.history),capabilities:this.capabilityTruth(),truth:{importRequiresDeclaredExport:true,sourceRevisionDigestEqualityRequired:true,acceptCreatesDraftOnly:true,historyPersistence:'IN_MEMORY_ONLY',appendOnlyDurableHistory:false,backgroundCompletion:false,providerNetworkCalls:0}};}
 }

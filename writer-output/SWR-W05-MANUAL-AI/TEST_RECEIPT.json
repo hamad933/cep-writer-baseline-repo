@@ -1,0 +1,33 @@
+{
+  "missionId": "SWR-W05-MANUAL-AI",
+  "productParentCommit": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+  "testRuns": [
+    {
+      "suite": "stack/native-typescript/tests/surface-restoration/manual_ai/manual-ai-restoration-tests.ts",
+      "result": "PASS",
+      "pass": 8,
+      "fail": 0,
+      "classification": "MISSION_LOCAL_POSITIVE_NEGATIVE_FALSIFICATION"
+    },
+    {
+      "suite": "stack/native-typescript/tests/rescue/S17_W05_VALIDATION_MANUAL_AI/s17-tests.ts",
+      "result": "PASS",
+      "pass": 12,
+      "fail": 0,
+      "classification": "READ_ONLY_SHARED_ORACLE"
+    },
+    {
+      "suite": "stack/native-typescript/tests/surfaces/manual_ai/manual-ai-tests.ts",
+      "result": "KNOWN_READ_ONLY_CONTRADICTION",
+      "pass": 8,
+      "fail": 4,
+      "classification": "LEGACY_TEST_EXPECTS_UNDECLARED_IMPORT_AUTHORITY",
+      "reason": "The failing legacy cases expect direct import of an undeclared request. The governing S17 oracle requires unknown import to fail closed and forbids creating authority from import. This read-only suite was not weakened or edited."
+    }
+  ],
+  "transpileExecution": {
+    "typescript": "5.8.3",
+    "mode": "tsc --noCheck --module nodenext --moduleResolution nodenext --target es2022",
+    "result": "PASS"
+  }
+}
