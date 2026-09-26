@@ -9,6 +9,10 @@ const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value))
 const required=(value,code)=>{if(typeof value!=='string'||!value.trim())throw Error(code);return value.trim()};
 const exactRef=record=>freeze({resultId:required(record?.resultId,'RESULT_ID_REQUIRED'),revisionId:required(record?.revisionId,'RESULT_REVISION_ID_REQUIRED'),manifestDigest:required(record?.manifestDigest,'RESULT_MANIFEST_DIGEST_REQUIRED')});
 const keyOf=ref=>`${ref.resultId}@${ref.revisionId}`;
+const inertTerminalText=value=>{if(value===undefined||value===null)return '';if(typeof value==='string')return value;if(value instanceof Uint8Array)return new TextDecoder().decode(value);try{return JSON.stringify(value,null,2)}catch{return String(value)}};
+const supersedingRef=record=>record?.supersededByRef?exactRef(record.supersededByRef):null;
+const recordedGap=record=>(record?.recordedEvents||[]).some(event=>event?.gap===true||String(event?.type||'').toUpperCase()==='GAP');
+const resultState=record=>{const explicit=String(record?.resultState||'').toUpperCase();if(['SEALED_COMPLETE','SEALED_PARTIAL','SOURCE_UNAVAILABLE'].includes(explicit))return explicit;if(record?.sourceUnavailable===true||String(record?.status||'').toUpperCase()==='SOURCE_UNAVAILABLE')return 'SOURCE_UNAVAILABLE';if(recordedGap(record)||record?.partial===true||String(record?.status||'').toUpperCase().includes('PARTIAL'))return 'SEALED_PARTIAL';return 'SEALED_COMPLETE'};
 const hash=text=>{let h=0x811c9dc5;for(const ch of String(text)){h^=ch.codePointAt(0);h=Math.imul(h,0x01000193)>>>0}return h.toString(16).padStart(8,'0')};
 
 function sealedRecord(input){
@@ -18,6 +22,7 @@ function sealedRecord(input){
   return freeze({...record,...ref,recordedEvents:clone(record.recordedEvents||[])});
 }
 function sourceEventFrom(projected){return clone(projected?.selection?.selectedEvent?.presentationMeta?.sourceEvent??null)}
+function selectedGapRange(projected){return clone(projected?.selection?.selectedEvent?.presentationMeta?.gapRange??null)}
 function gapSelected(projected){return projected?.selection?.selectedEvent?.presentationMeta?.recordedGap===true}
 
 export class W03ResultsDomain {
@@ -51,8 +56,8 @@ export class W03ResultsDomain {
     if(record.manifestDigest!==exact.manifestDigest)throw Error('RESULT_MANIFEST_DIGEST_REVISION_CONTRADICTION');
     return record;
   }
-  listResults(){return freeze(this.records.map(record=>({ref:exactRef(record),sealed:true,schemaVersion:record.schemaVersion||'',comparatorVersion:record.comparatorVersion||'',label:record.label||record.title||record.resultId,runId:record.runId||record.sourceRunInputRef?.runId||'',status:record.status||record.outcome||'SEALED',eventCount:record.recordedEvents.length,provenanceRefs:clone(record.provenanceRefs||[])})))}
-  resultProjection(ref){const record=this._record(ref);return freeze({ref:exactRef(record),sealed:true,label:record.label||record.title||record.resultId,status:record.status||record.outcome||'SEALED',runId:record.runId||record.sourceRunInputRef?.runId||'',schemaVersion:record.schemaVersion||'',comparatorVersion:record.comparatorVersion||'',sourceRunInputRef:clone(record.sourceRunInputRef||null),provenanceRefs:clone(record.provenanceRefs||[]),limitations:clone(record.limitations||[]),historicalTerminalBytesInert:true})}
+  listResults(){return freeze(this.records.map(record=>({ref:exactRef(record),sealed:true,schemaVersion:record.schemaVersion||'',comparatorVersion:record.comparatorVersion||'',label:record.label||record.title||record.resultId,runId:record.runId||record.sourceRunInputRef?.runId||'',status:record.status||record.outcome||'SEALED',resultState:resultState(record),eventCount:record.recordedEvents.length,provenanceRefs:clone(record.provenanceRefs||[])})))}
+  resultProjection(ref){const record=this._record(ref);return freeze({ref:exactRef(record),sealed:true,label:record.label||record.title||record.resultId,status:record.status||record.outcome||'SEALED',resultState:resultState(record),runId:record.runId||record.sourceRunInputRef?.runId||'',schemaVersion:record.schemaVersion||'',comparatorVersion:record.comparatorVersion||'',sourceRunInputRef:clone(record.sourceRunInputRef||null),provenanceRefs:clone(record.provenanceRefs||[]),limitations:clone(record.limitations||[]),historicalTerminalBytes:inertTerminalText(record.historicalTerminalBytes),historicalTerminalBytesInert:true})}
   hasReplaySelection(){return !!this.replayRef}
   replayResult(ref){
     const record=this._record(ref);
@@ -64,13 +69,13 @@ export class W03ResultsDomain {
   replayState(){
     const projected=this.replayOwner.project(),hasSelection=!!this.replayRef;
     const state=!hasSelection?'IDLE':projected.timeline.status==='EMPTY'?'GAP':gapSelected(projected)?'GAP':'PAUSED';
-    return freeze({owner:this.owner,replayOwner:projected.owner,replayOwnerToken:projected.ownerToken,ref:clone(this.replayRef),key:this.replayRef?keyOf(this.replayRef):null,index:projected.timeline.index,state,event:sourceEventFrom(projected),selectedEventId:projected.selection.selectedEventId,timelineStatus:projected.timeline.status,total:projected.timeline.total,replayExecutesRuntime:false,historicalTerminalBytesInert:true,canonicalHistoryClaimByGenericOwner:false,providerCanonicalHistoryClaim:projected.provider.providerCanonicalClaim===true,presentationTruth:clone(projected.presentationTruth)})
+    return freeze({owner:this.owner,replayOwner:projected.owner,replayOwnerToken:projected.ownerToken,ref:clone(this.replayRef),key:this.replayRef?keyOf(this.replayRef):null,index:projected.timeline.index,state,event:sourceEventFrom(projected),selectedEventId:projected.selection.selectedEventId,gapRange:selectedGapRange(projected),timelineStatus:projected.timeline.status,timelineMessage:projected.timeline.stateMessage||'',total:projected.timeline.total,replayExecutesRuntime:false,historicalTerminalBytesInert:true,canonicalHistoryClaimByGenericOwner:false,providerCanonicalHistoryClaim:projected.provider.providerCanonicalClaim===true,presentationTruth:clone(projected.presentationTruth)})
   }
   compare({left,right}){const id=this.provider.descriptor().providerId,pair=this.compareOwner.createPair({left:{providerId:id,ref:left},right:{providerId:id,ref:right}});return this.compareOwner.comparePair(pair)}
   aarProjection(ref){
-    const record=this._record(ref),entry=this.aar.get(keyOf(record));
-    if(!entry)return freeze({resultRef:exactRef(record),state:'EMPTY',analysisId:null,revision:0,analysisDigest:null,revisions:[],resultManifestDigest:record.manifestDigest,factMutation:false});
-    return freeze(clone(entry));
+    const record=this._record(ref),entry=this.aar.get(keyOf(record)),relinkRevisionRef=supersedingRef(record),sourceEpistemicState=relinkRevisionRef?'STALE':'CURRENT';
+    if(!entry)return freeze({resultRef:exactRef(record),state:'DRAFT',analysisId:null,revision:0,analysisDigest:null,revisions:[],resultManifestDigest:record.manifestDigest,factMutation:false,sourceEpistemicState,relinkRevisionRef});
+    return freeze({...clone(entry),sourceEpistemicState,relinkRevisionRef});
   }
   annotate({ref,text,analysisId=null,expectedRevision=null,state='DRAFT',anchoredEventRefs=[]}={}){
     const record=this._record(ref),key=keyOf(record),existing=this.aar.get(key),normalizedState=String(state||'DRAFT').toUpperCase();
@@ -96,7 +101,21 @@ export class W03ResultsDomain {
     const record=this._record(ref),resultRef=exactRef(record);
     return freeze({ok:true,owner:this.owner,envelopeVersion:'candidate-evidence/results-source/1',resultRef,sourceRunInputRef:clone(record.sourceRunInputRef||null),schemaVersion:record.schemaVersion||'',comparatorVersion:record.comparatorVersion||'',provenanceRefs:clone(record.provenanceRefs||[]),limitations:clone(record.limitations||[]),sealed:true,candidateEvidenceOnly:true,formalAdmissionPerformed:false,reviewDecisionPerformed:false,masteryMutation:false,portfolioMutation:false,auditAuthority:false});
   }
-  verifyDeterminism({ref}={}){const record=this._record(ref);if(typeof this.determinismVerifier!=='function')return freeze({ok:false,code:'DETERMINISM_PROVIDER_UNAVAILABLE',reason:'Determinism verification requires a separately admitted execution provider.',runExecuted:false,mutated:false});return this.determinismVerifier({result:clone(record)})}
+  verifyDeterminism({ref}={}){
+    const record=this._record(ref);
+    if(typeof this.determinismVerifier!=='function')return freeze({ok:false,code:'DETERMINISM_PROVIDER_UNAVAILABLE',reason:'Determinism verification requires a separately admitted execution provider.',runExecuted:false,mutated:false});
+    const originalRunId=required(record.runId||record.sourceRunInputRef?.runId,'DETERMINISM_ORIGINAL_RUN_ID_REQUIRED'),originalResultRef=exactRef(record);
+    const request=freeze({mode:'SEPARATE_LINKED_EXECUTION',originalResultRef,originalRunId,sourceRunInputRef:clone(record.sourceRunInputRef||null),sealedResult:clone(record),historicalReplayReadOnly:true});
+    const providerResult=this.determinismVerifier(request);
+    if(!providerResult||typeof providerResult!=='object'||Array.isArray(providerResult))throw Error('DETERMINISM_PROVIDER_RECEIPT_REQUIRED');
+    if(providerResult.mutated===true)throw Error('DETERMINISM_PROVIDER_MUTATION_CLAIM');
+    if(providerResult.runExecuted!==true)throw Error('DETERMINISM_NEW_EXECUTION_NOT_CONFIRMED');
+    const verificationRunId=required(providerResult.verificationRunId||providerResult.runId||providerResult.execution?.runId,'DETERMINISM_VERIFICATION_RUN_ID_REQUIRED');
+    if(verificationRunId===originalRunId)throw Error('DETERMINISM_REQUIRES_DISTINCT_NEW_RUN');
+    const pinnedSourceRunInputRef=clone(record.sourceRunInputRef||null),providerPinned=providerResult.pinnedSourceRunInputRef??providerResult.sourceRunInputRef??null;
+    if(JSON.stringify(providerPinned)!==JSON.stringify(pinnedSourceRunInputRef))throw Error('DETERMINISM_PINNED_SOURCE_INPUT_NOT_CONFIRMED');
+    return freeze({...clone(providerResult),ok:providerResult.ok===true,runExecuted:true,mutated:false,originalResultRef,originalRunId,verificationRunId,linkedToOriginal:true,historicalReplayReadOnly:true,pinnedSourceRunInputRef});
+  }
 }
 
 const resultsCollectionAdapter=domain=>({
