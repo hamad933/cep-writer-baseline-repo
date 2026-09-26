@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 3,
+  "classification": "W05A_CONTROLLER_BOUND_VISUAL_BOOTSTRAP__NO_FABRICATED_CURRENT_PARENT_CAPTURE",
+  "enabled": true,
+  "required": false,
+  "allowWriterLocalRecapture": true,
+  "expectedProductParentCommit": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+  "minimumScreenshotCount": 1,
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1024,
+      "height": 900
+    }
+  ],
+  "states": [
+    "pending",
+    "running",
+    "retry_wait",
+    "cancel_requested",
+    "cancelled",
+    "completed",
+    "failed",
+    "provider_unavailable"
+  ],
+  "environment": {},
+  "setupCommands": [],
+  "captureCommands": [],
+  "baselineGlobs": [],
+  "receiptGlobs": [],
+  "referenceBindings": [
+    {
+      "surface": "processing",
+      "referenceId": "INTENTIONALLY_NOT_GENERATED",
+      "classification": "CONTRACT_DERIVABLE / NO_NEW_REFERENCE_REQUIRED",
+      "sha256": null,
+      "localPath": null
+    }
+  ],
+  "comparisonPlan": [
+    {
+      "id": "processing-current-vs-governed-contract",
+      "method": "LOCAL_RECAPTURE_REQUIRED",
+      "sourceParent": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+      "referenceCeiling": "CONTRACT_DERIVABLE / NO_NEW_REFERENCE_REQUIRED",
+      "viewports": [
+        "1440x1000",
+        "1024x900"
+      ],
+      "notes": "No standalone final reference; derive only from governed contract/profile/source."
+    }
+  ]
+}
