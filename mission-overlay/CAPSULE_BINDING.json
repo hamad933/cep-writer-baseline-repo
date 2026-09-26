@@ -74,5 +74,85 @@
   "sharedOwnerPolicy": "ESCALATE_GLOBAL_SHARED__NO_SURFACE_LOCAL_WORKAROUND",
   "siblingCollisionGuard": "Today writable paths are disjoint from Shell; do not mutate `stack/native-typescript/surfaces/shell/**` or shared owners.",
   "stopGate": "CANDIDATE_ONLY__NO_SELF_PROMOTION__SOLE_CONTROLLER_REVIEW_REQUIRED",
-  "productMutationBeforeCapsuleVerification": false
+  "productMutationBeforeCapsuleVerification": false,
+  "surfaceProfileBinding": {
+    "path": "cep-writer/references/surface-profiles/today.json",
+    "sha256": "a9313a4c8d429ada7f76224df9192e3de750ac46f21be1da8034c96677bce47c",
+    "expectedSurface": "today",
+    "expectedWriterGroup": "W01"
+  },
+  "oracleIndexBinding": {
+    "path": "cep-writer/references/ORACLE_INDEX.json",
+    "sha256": "d20b55611a91a041d916b67b2fd559bfeb77eb72be0ee94f10112538bf02c4b4"
+  },
+  "oracleBindings": [
+    {
+      "id": "ORACLE-005",
+      "name": "Current Owner Decision Live Register",
+      "resolution": "PRE_RESOLVED_CURRENT_SELECTED_ROWS",
+      "capsulePath": "mission-overlay/APPLICABLE_OWNER_DECISIONS.csv",
+      "liveSourceDriveId": "1GF70xX-eGWNmp8VaK_gjTRrAAVq0bihh",
+      "writerLiveDriveDiscoveryRequired": false
+    },
+    {
+      "id": "ORACLE-009",
+      "name": "Current Final Visual Reference Register",
+      "sourcePath": "cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md",
+      "sourceSha256": "e51a0d8571476302d18bebd644b32cea78cba3dca891ea588f220b6082330efd",
+      "resolvedReference": {
+        "path": "cep-writer/references/visual/00_TODAY/CEP_TODAY_MAIN_ORCHESTRATION_REFERENCE.png",
+        "sha256": "3f75eac759efd920cfb2600766c7719d1754359326bc5a3df5508bee864dd617",
+        "classification": "OWNER_CONFIRMED_FINAL_REFERENCE"
+      }
+    },
+    {
+      "id": "ORACLE-010",
+      "name": "CEP Final Visual & Interaction Contract",
+      "sourcePath": "cep-writer/references/CEP_FINAL_VISUAL_INTERACTION_CONTRACT.md",
+      "sourceSha256": "20bf151fba9d69255e54cd724d0efb5dc6e485b91aedf2795e1a6497cf40aa8d",
+      "ceiling": "DURABLE_UX_IA_INTERACTION_ORACLE_WITH_NEWER_OWNER_OVERLAYS"
+    },
+    {
+      "id": "ORACLE-013",
+      "name": "23 Surface Zero-Loss Identity / Reference / Current-Owner Matrix",
+      "sourcePath": "cep-writer/references/23_SURFACE_ZERO_LOSS_IDENTITY_REFERENCE_MATRIX.md",
+      "sourceSha256": "28d558d8f116a2ef27ae1938fcffa1528f98fda9d4950935f4d3e7232830ae40",
+      "resolution": "EXACT_TODAY_ROW_PROJECTED_INTO_LIVE_AUTHORITY_SNAPSHOT"
+    }
+  ],
+  "surfaceSemanticBinding": {
+    "purpose": "Daily orchestration/command projection over domain-owned truth; never a second canonical store.",
+    "objects": [
+      "TodayProjection",
+      "ContinuationRef",
+      "Recommendation"
+    ],
+    "commands": [
+      "today.resume",
+      "today.refresh",
+      "today.filter",
+      "today.why"
+    ],
+    "projectionStates": [
+      "FETCHING",
+      "AVAILABLE_DATA",
+      "AVAILABLE_EMPTY",
+      "PARTIAL",
+      "STALE",
+      "UNAVAILABLE",
+      "ERROR"
+    ],
+    "continuationStates": [
+      "RESOLVABLE",
+      "TARGET_REMOVED",
+      "TARGET_FORBIDDEN"
+    ],
+    "providerTruth": "NORMAL_PRODUCT_TRUTH_PLUS_DS01_TEST_ONLY_POPULATED_INSPECTION__DS01_NEVER_DEFAULT_OR_CANONICAL",
+    "ds01Target": true
+  },
+  "currentFindingsBinding": [
+    "CBF-002",
+    "CBF-003",
+    "TODAY_IDENTITY_MATRIX_PROVIDER_AND_GENERIC_PANE_DRIFT"
+  ]
 }
