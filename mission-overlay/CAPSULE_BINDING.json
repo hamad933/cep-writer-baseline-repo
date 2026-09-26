@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 4,
+  "writerClass": "CHATGPT_WRITER",
+  "missionId": "SWR-W05-AUDIT",
+  "surface": "audit",
+  "workspace": "W05",
+  "expectedProductParentCommit": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+  "expectedProductParentTree": "dd0315926270ec1f6571b82566dcdab3d65267f9",
+  "expectedProductSourceSha256": "b8b5e4a5797eb48b4cb8ae10439ff7dca5d8e2c900cb782b4802f69b21e23b7a",
+  "expectedProductSourceFiles": 289,
+  "candidateBranch": "writer/surface-w05-audit",
+  "authorityRoot": "cep-writer/",
+  "missionOverlayRoot": "mission-overlay/",
+  "noRequiredLiveDriveFetch": true,
+  "localFirst": true,
+  "continuationPolicy": "NEW_SURFACE_MISSION__FULL_CAPSULE_REQUIRED",
+  "visualBootstrapConfig": "mission-overlay/CAPSULE_VISUAL_BOOTSTRAP.json",
+  "allowWriterLocalRecapture": true,
+  "intermediateEvidenceCustody": "LOCAL_EPHEMERAL",
+  "heavyFinalCustody": "GOOGLE_DRIVE_WHEN_REQUIRED",
+  "githubRole": "SOURCE_DELTA_AND_SMALL_RECEIPTS_ONLY",
+  "driveOutput": {
+    "capsuleFolderId": "14IVqvjqJVBTJk3OGE820hLAXtnVEnj5k",
+    "writerOutputFolderId": "1tpcPthrPCfNm43OrTx9tXVjdCo6f3eia"
+  },
+  "authorityBindings": {
+    "surfaceProfile": {
+      "path": "profiles/audit.json",
+      "gitBlobSha": "945a7a8b82f650751184cc5d0ab21de2168a5bdf"
+    },
+    "w05Oracle": {
+      "path": "cep-writer/references/domain-oracles/CEP_W05_WORK_MASTER_PLAN_A-M_2026-08-31.md",
+      "oracleId": "ORACLE-012"
+    },
+    "identityReferenceMatrix": {
+      "path": "cep-writer/references/23_SURFACE_ZERO_LOSS_IDENTITY_REFERENCE_MATRIX.md",
+      "oracleId": "ORACLE-013"
+    },
+    "visualReferenceRegister": {
+      "path": "cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md",
+      "oracleId": "ORACLE-009"
+    },
+    "visualReference": {
+      "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/06_AUDIT/CEP_SYSTEM_AUDIT_TRACEABILITY_REFERENCE.png",
+      "driveId": "1YEnx_rg8o9qfNxEG5gcEVY33HAn2em-m",
+      "sha256": "7cb34c8357dfad0914e4eeaf732c97efbe376e957fe508137c4f730edaeb1e88",
+      "classification": "OWNER_CONFIRMED_FINAL_REFERENCE"
+    },
+    "ownerDecisionSnapshot": {
+      "path": "mission-overlay/AUTHORITY_SNAPSHOT.md",
+      "sourceDriveId": "1GF70xX-eGWNmp8VaK_gjTRrAAVq0bihh",
+      "decisionIds": [
+        "OD-20260916-045",
+        "OD-20260917-053",
+        "OD-20260918-055",
+        "OD-20260920-060",
+        "OD-20260921-066",
+        "OD-20260921-067",
+        "OD-20260922-072",
+        "OD-20260922-073",
+        "OD-20260922-074",
+        "OD-20260922-075",
+        "OD-20260924-081"
+      ]
+    },
+    "currentFindings": {
+      "path": "mission-overlay/AUTHORITY_SNAPSHOT.md",
+      "sourceDriveId": "164CDevKZ48ZAXke44oL3jXIVpYQJBmRu"
+    },
+    "postDs01Plan": {
+      "sourceDriveId": "1HkssNtVd2SAve2ibYyCoLCtEXZAW2mOP"
+    },
+    "carrierAuthority": {
+      "sourceDriveId": "1lyFTo1kzW1STWYNfhYRHSg8hOBINnJCDE5mVTzR0j-8"
+    }
+  },
+  "collisionLocks": {
+    "sharedPathsReadOnly": [
+      "stack/native-typescript/surfaces/composition/w05-rescue.ts",
+      "stack/native-typescript/surfaces/m0-controller-composition.ts",
+      "stack/native-typescript/main.ts",
+      "stack/native-typescript/foundation/**",
+      "stack/native-typescript/tests/rescue/S18_W05_BACKUP_AUDIT/**",
+      "stack/native-typescript/tests/rescue/S19_W05_RELEASES_CONFIGURATION/**"
+    ],
+    "canonicalOwners": [
+      "SemanticCommandBus",
+      "AnalyticalCompareOwner",
+      "AuditProvenanceInteractionCore",
+      "SettingsCenterOwner"
+    ],
+    "noFallbackOwnerConstruction": true
+  },
+  "truthConstraints": [
+    "Preserve canonical AuditEvent identity/provenance: eventId, occurredAt, sequence, previous projected-event identity/hash, correlation and source must project from provider truth rather than synthetic UI identity.",
+    "Keep AuditEvent append-only application semantics distinct from separate personal annotations.",
+    "Hash-chain verification is SHA-256 integrity evidence only; never label it encryption or DB-level immutability unless separately proven.",
+    "Search/filter/history must distinguish observed coverage from total upstream coverage and surface firstInvalidSequence exactly.",
+    "Consume controller-injected canonical AnalyticalCompare and shared Audit/Provenance mechanics; no local/fallback owner construction."
+  ],
+  "stopGate": "SURFACE_CANDIDATE_ONLY__CONTROLLER_DELTA_ADMISSION_REQUIRED"
+}

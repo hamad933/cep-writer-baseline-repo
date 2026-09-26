@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "missionId": "SWR-W05-AUDIT",
+  "surface": "audit",
+  "workspace": "W05",
+  "exactProductParent": {
+    "head": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+    "tree": "dd0315926270ec1f6571b82566dcdab3d65267f9",
+    "productSourceSha256": "b8b5e4a5797eb48b4cb8ae10439ff7dca5d8e2c900cb782b4802f69b21e23b7a",
+    "productSourceFiles": 289
+  },
+  "candidateBranch": "writer/surface-w05-audit",
+  "noRequiredLiveDriveFetch": true,
+  "noBroadDiscovery": true,
+  "boundedDiscoveryEscape": {
+    "allowed": true,
+    "condition": "Only a named bound path/symbol is missing, contradictory or insufficient",
+    "scope": "Smallest listed surface/adapter/test directory only",
+    "recordReason": true,
+    "stopOnAuthorityContradiction": true
+  },
+  "closedReadSet": [
+    {
+      "path": "mission-overlay/MISSION.md",
+      "mode": "READ_WHOLE_FILE",
+      "purpose": "Exact mission contract"
+    },
+    {
+      "path": "mission-overlay/AUTHORITY_SNAPSHOT.md",
+      "mode": "READ_WHOLE_FILE",
+      "purpose": "Resolved live Drive authority/current findings; prevents live Drive dependency"
+    },
+    {
+      "path": "mission-overlay/CAPSULE_BINDING.json",
+      "mode": "READ_WHOLE_FILE",
+      "purpose": "Exact source/candidate/output/Stop-Gate binding"
+    },
+    {
+      "path": "profiles/audit.json",
+      "mode": "READ_WHOLE_FILE",
+      "purpose": "Exact SurfaceProfile"
+    },
+    {
+      "path": "cep-writer/references/domain-oracles/CEP_W05_WORK_MASTER_PLAN_A-M_2026-08-31.md",
+      "mode": "READ_ONLY_SECTIONS",
+      "sections": [
+        "B W05 ownership table",
+        "G Audit + Releases + Configuration",
+        "L Verification",
+        "M convergence invariants"
+      ],
+      "purpose": "W05 durable domain semantics only; historical infrastructure excluded"
+    },
+    {
+      "path": "cep-writer/references/23_SURFACE_ZERO_LOSS_IDENTITY_REFERENCE_MATRIX.md",
+      "mode": "READ_ONLY_ROW",
+      "sections": [
+        "audit"
+      ],
+      "purpose": "Exact Surface identity/reference/current gap"
+    },
+    {
+      "path": "cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md",
+      "mode": "READ_ONLY_ROW",
+      "sections": [
+        "Audit"
+      ],
+      "purpose": "Exact visual authority classification/hash"
+    },
+    {
+      "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/06_AUDIT/CEP_SYSTEM_AUDIT_TRACEABILITY_REFERENCE.png",
+      "mode": "READ_BINARY_REFERENCE",
+      "purpose": "Exact governed visual reference"
+    },
+    {
+      "path": "cep-writer/references/WRITER_LOCAL_VISUAL_CAPTURE_AND_RENDERING_METHOD.md",
+      "mode": "READ_WHOLE_FILE",
+      "purpose": "Visual/browser recovery and evidence classification"
+    },
+    {
+      "path": "cep-writer/references/CEP_RUNTIME_PERSISTENCE_BRIDGE_TECHNICAL_REFERENCE.md",
+      "mode": "READ_ONLY_RELEVANT_SECTIONS",
+      "purpose": "Provider/persistence/runtime truth ceiling"
+    },
+    {
+      "path": "cep-writer/authority/WRITER_OWNER_DECISIONS.csv",
+      "mode": "READ_ONLY_ROWS",
+      "sections": [
+        "OD-20260916-045",
+        "OD-20260917-053",
+        "OD-20260918-055",
+        "OD-20260920-060",
+        "OD-20260921-066",
+        "OD-20260921-067",
+        "OD-20260922-072",
+        "OD-20260922-073",
+        "OD-20260922-074",
+        "OD-20260922-075",
+        "OD-20260924-081"
+      ],
+      "purpose": "Repo-local decision snapshot cross-check only"
+    },
+    {
+      "path": "stack/local-runtime/audit/audit-event-provider.mjs",
+      "mode": "READ_WHOLE_FILE_OR_RELEVANT_SYMBOLS",
+      "purpose": "Exact current source/test/provider/DS01 evidence needed for this Surface"
+    },
+    {
+      "path": "stack/native-typescript/foundation/analytical/compare.ts",
+      "mode": "READ_WHOLE_FILE_OR_RELEVANT_SYMBOLS",
+      "purpose": "Exact current source/test/provider/DS01 evidence needed for this Surface"
+    },
+    {
+      "path": "stack/native-typescript/tests/rescue/S18_W05_BACKUP_AUDIT/domain-tests.ts",
+      "mode": "READ_WHOLE_FILE_OR_RELEVANT_SYMBOLS",
+      "purpose": "Exact current source/test/provider/DS01 evidence needed for this Surface"
+    },
+    {
+      "path": "stack/native-typescript/tests/rescue/S18_W05_BACKUP_AUDIT/source-boundary-tests.ts",
+      "mode": "READ_WHOLE_FILE_OR_RELEVANT_SYMBOLS",
+      "purpose": "Exact current source/test/provider/DS01 evidence needed for this Surface"
+    },
+    {
+      "path": "stack/native-typescript/tests/post-c03/D11/d11-w05-provider-integration-tests.ts",
+      "mode": "READ_WHOLE_FILE_OR_RELEVANT_SYMBOLS",
+      "purpose": "Exact current source/test/provider/DS01 evidence needed for this Surface"
+    },
+    {
+      "path": "stack/native-typescript/fixtures/acceptance-data/ds01-global/index.ts",
+      "mode": "READ_WHOLE_FILE_OR_RELEVANT_SYMBOLS",
+      "purpose": "Exact current source/test/provider/DS01 evidence needed for this Surface"
+    },
+    {
+      "path": "stack/native-typescript/tests/post-d13/DS01_GLOBAL_DATA_SUFFICIENCY/ds01-global-data-sufficiency.test.ts",
+      "mode": "READ_WHOLE_FILE_OR_RELEVANT_SYMBOLS",
+      "purpose": "Exact current source/test/provider/DS01 evidence needed for this Surface"
+    },
+    {
+      "path": "tools/ds01-global-data-sufficiency/capture.py",
+      "mode": "READ_WHOLE_FILE_OR_RELEVANT_SYMBOLS",
+      "purpose": "Exact current source/test/provider/DS01 evidence needed for this Surface"
+    },
+    {
+      "path": "stack/native-typescript/adapters/audit.ts",
+      "mode": "READ_WHOLE_FILE",
+      "purpose": "Writable mission source"
+    }
+  ],
+  "writableScope": [
+    "stack/native-typescript/surfaces/audit/**",
+    "stack/native-typescript/adapters/audit.ts",
+    "stack/native-typescript/tests/surfaces/audit/**",
+    "writer-output/SWR-W05-AUDIT/**"
+  ],
+  "prohibitedScope": [
+    "Any Product path outside the per-surface writable scope",
+    "stack/native-typescript/foundation/** shared-owner implementations",
+    "stack/native-typescript/surfaces/composition/w05-rescue.ts",
+    "stack/native-typescript/surfaces/m0-controller-composition.ts",
+    "stack/native-typescript/main.ts",
+    "Global Settings / SettingsCenter owner implementation",
+    "package.json and all lockfiles/dependency manifests",
+    "cep-writer/** authority/profile/reference files",
+    "mission-overlay/**",
+    "CURRENT_STATE/governance/Owner-decision artifacts",
+    "main branch, merge, release, deployment, stack-freeze operations",
+    "manual edits to dist/** or other generated build outputs",
+    "DS01 fixture semantics/classification changes",
+    "shared S18/S19 regression files unless Controller separately rebinds collision ownership"
+  ],
+  "ds01PopulatedState": "YES",
+  "visualReference": {
+    "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/06_AUDIT/CEP_SYSTEM_AUDIT_TRACEABILITY_REFERENCE.png",
+    "driveId": "1YEnx_rg8o9qfNxEG5gcEVY33HAn2em-m",
+    "sha256": "7cb34c8357dfad0914e4eeaf732c97efbe376e957fe508137c4f730edaeb1e88",
+    "classification": "OWNER_CONFIRMED_FINAL_REFERENCE"
+  },
+  "output": {
+    "driveCapsuleFolderId": "14IVqvjqJVBTJk3OGE820hLAXtnVEnj5k",
+    "writerOutputFolderId": "1tpcPthrPCfNm43OrTx9tXVjdCo6f3eia"
+  },
+  "stopGate": "SURFACE_CANDIDATE_ONLY__CONTROLLER_DELTA_ADMISSION_REQUIRED"
+}

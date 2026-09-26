@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 2,
+  "enabled": false,
+  "required": false,
+  "allowWriterLocalRecapture": true,
+  "expectedProductParentCommit": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+  "classification": "MATERIAL__CONTROLLER_BASELINE_NOT_FRESHLY_CAPTURED_IN_THIS_HELPER_CARRIER__WRITER_LOCAL_RECAPTURE_REQUIRED",
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1024,
+      "height": 900
+    }
+  ],
+  "states": [
+    "NORMAL_PRODUCT_TRUTH",
+    "DS01_POPULATED_TEST_STATE",
+    "SURFACE_TARGETED_STATE"
+  ],
+  "referenceBindings": [
+    {
+      "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/06_AUDIT/CEP_SYSTEM_AUDIT_TRACEABILITY_REFERENCE.png",
+      "driveId": "1YEnx_rg8o9qfNxEG5gcEVY33HAn2em-m",
+      "sha256": "7cb34c8357dfad0914e4eeaf732c97efbe376e957fe508137c4f730edaeb1e88",
+      "classification": "OWNER_CONFIRMED_FINAL_REFERENCE"
+    }
+  ],
+  "comparisonPlan": [
+    "Fresh current-parent/candidate capture; never reuse historical D14/DS01 screenshots as fresh evidence.",
+    "State-match reference where lawful; DS01 is test-only and never canonical/provider/persistence authority.",
+    "Inspect full frame plus material regions/components/states at 1440x1000 and 1024x900.",
+    "Exercise keyboard/focus/disabled-unavailable/RTL-LTR-Bidi/responsive behavior.",
+    "Classify genuine route separately from navigation-independent browser rendering."
+  ]
+}
