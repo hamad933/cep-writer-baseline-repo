@@ -6,6 +6,8 @@ export const LIBRARY_REAL_CONSUMER_SOURCE_CONTRACT=Object.freeze({
 });
 const forbiddenTruth=/(FIXTURE|DEMO|SYNTHETIC|HARNESS|PROOF[_ -]?ONLY|NON_PRODUCTION|ACCEPTANCE_SEED|NOT_CANONICAL_RUNTIME_IMPORT)/i;
 const clone=value=>structuredClone(value);
+const normalizedRevision=value=>String(value??'').trim();
+const isExactRevision=value=>Boolean(normalizedRevision(value))&&normalizedRevision(value).toLowerCase()!=='latest';
 const unavailableDocument=()=>({id:'library-unavailable',revision:'UNAVAILABLE',title:'Library source unavailable',tags:['Library','Unavailable'],blocks:[{id:'library-unavailable-p1',type:'paragraph',html:'Library source is unavailable. This placeholder is not canonical content and cannot be mutated.'}]});
 
 export function assertGenuineLibrarySource(source){
@@ -45,8 +47,13 @@ export class LibraryRuntimeComposition {
   create(payload={}){if(!this.canCreate())return {ok:false,status:'LIBRARY_CREATE_PROVIDER_UNAVAILABLE',mutated:false};return this.services.createDocument(payload);}
   canRevise(){return this.sourceAvailability().enabled&&typeof this.services.createSuccessorRevision==='function';}
   revise(payload={}){if(!this.canRevise())return {ok:false,status:'LIBRARY_REVISION_PROVIDER_UNAVAILABLE',mutated:false};return this.services.createSuccessorRevision({document:this.structured.snapshot(),identity:this.structured.identity(),...payload});}
-  canCompareRevisions(payload={}){return this.sourceAvailability().enabled&&typeof this.services.compareRevisions==='function'&&Boolean(payload.leftRevision)&&Boolean(payload.rightRevision);}
-  compareRevisions(payload={}){if(!this.canCompareRevisions(payload))return {ok:false,status:'LIBRARY_EXACT_REVISION_PAIR_REQUIRED',mutated:false};if(String(payload.leftRevision)==='latest'||String(payload.rightRevision)==='latest')return {ok:false,status:'LIBRARY_LATEST_ALIAS_FORBIDDEN',mutated:false};return this.services.compareRevisions({documentId:this.structured.identity().id,leftRevision:String(payload.leftRevision),rightRevision:String(payload.rightRevision)});}
+  canCompareRevisions(payload={}){return this.sourceAvailability().enabled&&typeof this.services.compareRevisions==='function'&&isExactRevision(payload.leftRevision)&&isExactRevision(payload.rightRevision);}
+  compareRevisions(payload={}){
+    const leftRevision=normalizedRevision(payload.leftRevision),rightRevision=normalizedRevision(payload.rightRevision);
+    if(leftRevision.toLowerCase()==='latest'||rightRevision.toLowerCase()==='latest')return {ok:false,status:'LIBRARY_LATEST_ALIAS_FORBIDDEN',mutated:false};
+    if(!this.canCompareRevisions({leftRevision,rightRevision}))return {ok:false,status:'LIBRARY_EXACT_REVISION_PAIR_REQUIRED',mutated:false};
+    return this.services.compareRevisions({documentId:this.structured.identity().id,leftRevision,rightRevision});
+  }
   descriptor(){return {owner:this.owner,semanticOwner:false,contract:LIBRARY_REAL_CONSUMER_SOURCE_CONTRACT,sourceIdentity:clone(this.sourceIdentity),sourceState:this.sourceAvailability().enabled?'AVAILABLE':'UNAVAILABLE',sourceReason:this.sourceRejection?.reason||null,rejectedSource:clone(this.sourceRejection),structuredOwner:this.structured.owner,transactionOwner:this.structured.transactionOwner.owner,persistenceConfigured:this.structured.transactionDescriptor().persistedBoundaryConfigured,fixtureFallback:false};}
 }
 
