@@ -1,0 +1,54 @@
+{
+  "suite": "SWR-W05-VALIDATION_BROWSER_PROOF",
+  "classification": "FRESH_CURRENT_CANDIDATE__BROWSER_RENDERED__NAVIGATION_INDEPENDENT__NOT_GENUINE_ROUTE",
+  "routeGatesClosed": false,
+  "providerAuthority": false,
+  "persistenceAuthority": false,
+  "pointerRun": {
+    "state": "TECHNICALLY_VALID · RES-0001",
+    "requestCount": 1,
+    "pass": true
+  },
+  "keyboardFocusCtrlEnter": {
+    "activeElement": "validationInput",
+    "requestCount": 2,
+    "pass": true
+  },
+  "staleIdentity": {
+    "state": "STALE_FOR_CURRENT_ARTIFACT · RES-0002",
+    "inspection": "STALE_FOR_CURRENT_ARTIFACT\nCurrent identity matches result:\nfalse\n\nAcceptance:\nnull\n· Formal Review authority: false · Mastery authority: false",
+    "pass": true
+  },
+  "missingValidatorUnavailable": {
+    "state": "UNAVAILABLE · RES-0003",
+    "pass": true
+  },
+  "ds01Truth": {
+    "truthText": "TEST_ONLY / DETERMINISTIC / RESETTABLE / NON_PRODUCTION / NON_CANONICAL\nProvider authority: none\nPersistence authority: none",
+    "pass": true
+  },
+  "validatorExceptionError": {
+    "state": "ERROR · RES-0001",
+    "findings": "Validator execution failed. Inspect safe diagnostics and retry only after the execution dependency is healthy.\nVALIDATOR_EXECUTION_ERROR · VALIDATOR_EXECUTION\nLocator\n$.validator\nObserved\nError\nExpected\nSuccessful bounded validator execution\nTechnicalFinding only · formalReviewFinding=false",
+    "pass": true
+  },
+  "viewports": {
+    "1440x1000": {
+      "innerWidth": 1440,
+      "scrollWidth": 1440,
+      "noHorizontalOverflow": true,
+      "inputDir": "auto",
+      "ltrBdi": 12
+    },
+    "1024x900": {
+      "innerWidth": 1024,
+      "scrollWidth": 1024,
+      "noHorizontalOverflow": true,
+      "inputDir": "auto",
+      "ltrBdi": 12,
+      "state": "TECHNICALLY_VALID · RES-0001"
+    }
+  },
+  "consoleErrors": [],
+  "pass": true
+}
