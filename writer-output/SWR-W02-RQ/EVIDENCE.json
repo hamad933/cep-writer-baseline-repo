@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "mission": "SWR-W02-RQ",
+  "status": "CANDIDATE_READY_FOR_CONTROLLER_DELTA_ADMISSION",
+  "stopGate": "SURFACE_CANDIDATE_ONLY__CONTROLLER_DELTA_ADMISSION_REQUIRED",
+  "capsule": {
+    "driveId": "1q7d6aBPdaQyxg0yLKSsgs4aV-br8QERO",
+    "sha256": "c60782d63d4704d6ab1c1e2bd4225bf6c94b45d15cd3719b00d04b7c714b68ad",
+    "verifier": "PASS"
+  },
+  "source": {
+    "repository": "hamad933/cep-writer-baseline-repo",
+    "candidateBranch": "writer/surface-w02-rq",
+    "productParent": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+    "productParentTree": "dd0315926270ec1f6571b82566dcdab3d65267f9",
+    "boundNativeTypescriptSha256": "b8b5e4a5797eb48b4cb8ae10439ff7dca5d8e2c900cb782b4802f69b21e23b7a",
+    "boundNativeTypescriptFileCount": 289,
+    "workspaceBeforeMutation": "CLEAN"
+  },
+  "changedProductPaths": [
+    "stack/native-typescript/adapters/rq/domain.ts",
+    "stack/native-typescript/surfaces/rq/surface.ts",
+    "tests/surfaces/rq/surface.test.mjs"
+  ],
+  "truth": {
+    "normalProviderTruth": "UNAVAILABLE_NO_ADMITTED_CURRENT_PROVIDER",
+    "ds01ProviderTruth": "NON_CANONICAL_DS01_TEST_ONLY",
+    "ds01CanonicalProductTruth": false,
+    "formalReviewAuthority": false,
+    "canonicalMutationAuthority": false,
+    "visualReferenceClassification": "REVIEWED_FINAL_CANDIDATE",
+    "visualReferenceFinal": false
+  },
+  "analyticalCompare": {
+    "owner": "AnalyticalCompareOwner",
+    "ownerToken": "AnalyticalCompare",
+    "localFork": false,
+    "sharedOwnerTests": "PASS",
+    "fakeOwnerRejected": true
+  },
+  "tests": {
+    "buildRuntime": "PASS",
+    "rqSurface": {"status": "PASS", "cases": 40},
+    "analyticalCompare": "PASS",
+    "npmTest": "PASS",
+    "modelRequiredRegressions": "PASS 210/0",
+    "npmCheck": {
+      "status": "OPEN_ENVIRONMENT_GLOBAL_BROWSER_RECEIPT",
+      "exitCode": 1,
+      "blockedBy": "net::ERR_BLOCKED_BY_ADMINISTRATOR",
+      "failedGates": [
+        "browser.lineage_receipt_truthful",
+        "browser.current_candidate_claim_truthful",
+        "browser.targeted_visual_evidence"
+      ]
+    },
+    "npmCi": "BOUNDED_TIMEOUT_NOT_CLAIMED_SUCCESS"
+  },
+  "browserEvidence": {
+    "browser": "Chromium 144.0.7559.96",
+    "renderClass": "FRESH_CURRENT_CANDIDATE__BROWSER_RENDERED__NAVIGATION_INDEPENDENT__NOT_GENUINE_ROUTE",
+    "routeProof": false,
+    "pointerExercised": true,
+    "keyboardExercised": true,
+    "responsiveFocusReturn": true,
+    "rtlArabic": true,
+    "technicalTokensLTR": true,
+    "screenshots": [
+      {"name": "normal_1440x1000.png", "sha256": "f37d39c5df6100cd6c7c1f1a56a4ff965a50878c0915f54771b40075bbfd9799", "bytes": 112795},
+      {"name": "normal_1024x900.png", "sha256": "db62a6c40b48c98f017e64e0f18a9d130fa8e9c4f10973a52a5e90098671654d", "bytes": 97984},
+      {"name": "ds01_1440x1000.png", "sha256": "fe7057daa7efdffdd9e97d3ae86905e318430468acea7832a8b7e55de730a27e", "bytes": 132849},
+      {"name": "ds01_1024x900.png", "sha256": "81f1e69c91586a8a2bca4e55def22a8b38afd818ed2d28ea17868f3739d8e923", "bytes": 102192}
+    ]
+  },
+  "sharedOwnerState": {
+    "analyticalCompareEscalationRequired": false,
+    "bottomDeepWorkDependency": "CBF-003",
+    "localBottomReplacement": false
+  },
+  "prohibitedActionsPerformed": {
+    "mainMerge": false,
+    "release": false,
+    "deployment": false,
+    "selfPromotion": false,
+    "sharedOwnerMutation": false
+  }
+}

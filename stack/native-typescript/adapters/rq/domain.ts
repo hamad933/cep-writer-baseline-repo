@@ -1,5 +1,6 @@
 import {CollectionTableMatrixHost} from '../../foundation/collection/table-matrix-host.js';
 import {AnalyticalCompareHost} from '../../foundation/analytical/compare-host.js';
+import {AnalyticalCompareOwner} from '../../foundation/analytical/compare.js';
 import {createRqCompareProvider} from '../analytical/rq-compare-provider.js';
 const clone=value=>value===undefined?undefined:structuredClone(value);
 const nonEmpty=value=>typeof value==='string'&&value.trim().length>0;
@@ -7,16 +8,31 @@ const exactSourceRevision=ref=>!!ref&&['sourceId','revision','digest','locator']
 const normalizeScope=scope=>Array.isArray(scope)?[...new Set(scope.map(value=>String(value||'').trim()).filter(Boolean))].sort():[];
 
 export const RQ_DOMAIN_OWNER='RQDomainAdapter';
+export const RQ_PROVIDER_TRUTH=Object.freeze({
+  CURRENT:'ADMITTED_CURRENT_PROVIDER',
+  DS01_TEST_ONLY:'NON_CANONICAL_DS01_TEST_ONLY',
+  UNAVAILABLE:'UNAVAILABLE_NO_ADMITTED_CURRENT_PROVIDER'
+});
 export class RQDomainAdapter{
   constructor(records=[],options={}){
     this.owner=RQ_DOMAIN_OWNER;
-    const {analyticalCompareOwner=null,providerClassification='ADMITTED_CURRENT_PROVIDER',providerAdmitted=Array.isArray(records)&&records.length>0,...providerOptions}=options||{};
+    const {
+      analyticalCompareOwner=null,
+      providerAdmitted=false,
+      providerTestOnly=false,
+      providerClassification=providerAdmitted?'ADMITTED_CURRENT_PROVIDER':providerTestOnly?'DS01_TEST_ONLY_NON_CANONICAL':'NO_ADMITTED_CURRENT_PROVIDER',
+      ...providerOptions
+    }=options||{};
+    if(providerAdmitted&&providerTestOnly)throw Error('RQ_PROVIDER_TRUTH_CONTRADICTION');
+    if(!(analyticalCompareOwner instanceof AnalyticalCompareOwner))throw Error('RQ_SHARED_ANALYTICAL_COMPARE_OWNER_REQUIRED');
     this.providerAdmitted=providerAdmitted===true;
+    this.providerTestOnly=providerTestOnly===true;
+    this.providerUsable=this.providerAdmitted||this.providerTestOnly;
     this.providerClassification=String(providerClassification||'UNSPECIFIED_PROVIDER_CLASSIFICATION');
-    this.records=clone(this.providerAdmitted?records:[]);
-    if(!analyticalCompareOwner)throw Error('RQ_SHARED_ANALYTICAL_COMPARE_OWNER_REQUIRED');
+    this.providerTruth=this.providerAdmitted?RQ_PROVIDER_TRUTH.CURRENT:this.providerTestOnly?RQ_PROVIDER_TRUTH.DS01_TEST_ONLY:RQ_PROVIDER_TRUTH.UNAVAILABLE;
+    this.canonicalProductTruth=this.providerAdmitted;
+    this.records=clone(this.providerUsable?records:[]);
     this.compareOwner=analyticalCompareOwner;
-    if(this.compareOwner?.ownerToken!=='AnalyticalCompare')throw Error('CENTRAL_ANALYTICAL_COMPARE_REQUIRED');
     this.provider=createRqCompareProvider(this.records,providerOptions);
     this.compareOwner.registerProvider(this.provider);
     this.providerId=this.provider.descriptor().providerId;
@@ -29,45 +45,53 @@ export class RQDomainAdapter{
     compareOwner:this.compareOwner.owner,
     providerId:this.providerId,
     providerAdmitted:this.providerAdmitted,
+    providerTestOnly:this.providerTestOnly,
+    providerUsable:this.providerUsable,
     providerClassification:this.providerClassification,
-    providerTruth:this.providerAdmitted?'ADMITTED_CURRENT_PROVIDER':'UNAVAILABLE_NO_ADMITTED_CURRENT_PROVIDER',
-    epistemicState:this.providerAdmitted?'AVAILABLE':'UNAVAILABLE',
+    providerTruth:this.providerTruth,
+    canonicalProductTruth:this.canonicalProductTruth,
+    epistemicState:this.providerAdmitted?'AVAILABLE':this.providerTestOnly?'TEST_ONLY_AVAILABLE':'UNAVAILABLE',
     analysisSessionPersistence:'UNAVAILABLE',
     formalReviewAuthority:false,
     visualReferenceCeiling:'REVIEWED_FINAL_CANDIDATE',
     exactCompareContext:{left:'SourceRevision',right:'SourceRevision',workingAnalysisId:'required',scope:'required-non-empty'}
   };}
-  providerAvailability(){return this.providerAdmitted?{enabled:true,code:'AVAILABLE',epistemicState:'AVAILABLE',reason:'Admitted current RQ provider is bound.'}:{enabled:false,code:'RQ_CURRENT_PROVIDER_UNAVAILABLE',epistemicState:'UNAVAILABLE',reason:'No admitted current RQ provider is bound; non-production acceptance data is not Product truth.'};}
+  providerAvailability(){
+    if(this.providerAdmitted)return {enabled:true,code:'AVAILABLE',epistemicState:'AVAILABLE',reason:'Admitted current RQ provider is bound.',providerTruth:this.providerTruth,canonicalProductTruth:true};
+    if(this.providerTestOnly)return {enabled:true,code:'AVAILABLE_TEST_ONLY',epistemicState:'TEST_ONLY_AVAILABLE',reason:'DS01/non-production SourceRevision data is available for bounded test evidence only; it is not Product truth.',providerTruth:this.providerTruth,canonicalProductTruth:false};
+    return {enabled:false,code:'RQ_CURRENT_PROVIDER_UNAVAILABLE',epistemicState:'UNAVAILABLE',reason:'No admitted current RQ provider is bound; non-production acceptance data is not Product truth.',providerTruth:this.providerTruth,canonicalProductTruth:false};
+  }
   search(query='',options={}){
-    if(!this.providerAdmitted)return {ok:false,status:'RQ_CURRENT_PROVIDER_UNAVAILABLE',epistemicState:'UNAVAILABLE',query,items:[],excluded:[],trace:[],providerAdmitted:false,providerClassification:this.providerClassification,persisted:false,formalReview:false};
+    const availability=this.providerAvailability();
+    if(!availability.enabled)return {ok:false,status:'RQ_CURRENT_PROVIDER_UNAVAILABLE',epistemicState:'UNAVAILABLE',query,items:[],excluded:[],trace:[],providerAdmitted:false,providerTestOnly:false,providerClassification:this.providerClassification,providerTruth:this.providerTruth,canonicalProductTruth:false,persisted:false,formalReview:false};
     const q=String(query||'').trim().toLocaleLowerCase('en-US'),includeExcluded=options.includeExcluded===true,requestedExcludedIds=new Set((options.includeExcludedIds||[]).map(String));
     const list=clone(this.records),matches=item=>!q||JSON.stringify(item).toLocaleLowerCase('en-US').includes(q),isExcluded=item=>item?.excluded===true||String(item?.status||'').toUpperCase()==='EXCLUDED';
     const trace=list.filter(matches).map(item=>({sourceRevision:clone(item),excluded:isExcluded(item),included:!isExcluded(item)||includeExcluded||requestedExcludedIds.has(String(item?.sourceId||'')),reason:isExcluded(item)?'EXCLUDED_SOURCE_TRACEABLE':'IN_SCOPE_SOURCE'}));
     const items=trace.filter(item=>item.included).map(item=>clone(item.sourceRevision));
-    return {ok:true,status:'WORKING_SEARCH',epistemicState:items.length?'AVAILABLE':'EMPTY',query,items,excluded:trace.filter(item=>item.excluded&&!item.included),trace,providerAdmitted:true,providerClassification:this.providerClassification,persisted:false,formalReview:false};
+    return {ok:true,status:this.providerTestOnly?'WORKING_SEARCH_TEST_ONLY':'WORKING_SEARCH',epistemicState:items.length?(this.providerTestOnly?'TEST_ONLY_AVAILABLE':'AVAILABLE'):'EMPTY',query,items,excluded:trace.filter(item=>item.excluded&&!item.included),trace,providerAdmitted:this.providerAdmitted,providerTestOnly:this.providerTestOnly,providerClassification:this.providerClassification,providerTruth:this.providerTruth,canonicalProductTruth:this.canonicalProductTruth,persisted:false,formalReview:false};
   }
   compareContext(payload={}){
     const workingAnalysisId=String(payload.workingAnalysisId||payload.sessionId||'').trim(),scope=normalizeScope(payload.scope),left=payload.left,right=payload.right;
     return {workingAnalysisId,scope,left:clone(left),right:clone(right),exactPair:exactSourceRevision(left)&&exactSourceRevision(right)};
   }
   compareAvailability(payload={}){
-    const context=this.compareContext(payload);
-    if(!this.providerAdmitted)return {enabled:false,code:'RQ_CURRENT_PROVIDER_UNAVAILABLE',epistemicState:'UNAVAILABLE',reason:'No admitted current RQ provider is bound; compare cannot resolve Product SourceRevision truth.',context};
-    if(!context.exactPair)return {enabled:false,code:'RQ_COMPARE_EXACT_SOURCE_REVISION_PAIR_REQUIRED',reason:'rq.compare requires two exact SourceRevision references.'};
-    if(!context.workingAnalysisId)return {enabled:false,code:'RQ_COMPARE_WORKING_ANALYSIS_CONTEXT_REQUIRED',reason:'rq.compare requires a workingAnalysisId/sessionId.'};
-    if(!context.scope.length)return {enabled:false,code:'RQ_COMPARE_SCOPE_REQUIRED',reason:'rq.compare requires explicit non-empty scope context.'};
+    const context=this.compareContext(payload),provider=this.providerAvailability();
+    if(!provider.enabled)return {enabled:false,code:'RQ_CURRENT_PROVIDER_UNAVAILABLE',epistemicState:'UNAVAILABLE',reason:'No admitted current RQ provider is bound; compare cannot resolve Product SourceRevision truth.',context,providerTruth:this.providerTruth,canonicalProductTruth:false};
+    if(!context.exactPair)return {enabled:false,code:'RQ_COMPARE_EXACT_SOURCE_REVISION_PAIR_REQUIRED',reason:'rq.compare requires two exact SourceRevision references.',context,providerTruth:this.providerTruth,canonicalProductTruth:this.canonicalProductTruth};
+    if(!context.workingAnalysisId)return {enabled:false,code:'RQ_COMPARE_WORKING_ANALYSIS_CONTEXT_REQUIRED',reason:'rq.compare requires a workingAnalysisId/sessionId.',context,providerTruth:this.providerTruth,canonicalProductTruth:this.canonicalProductTruth};
+    if(!context.scope.length)return {enabled:false,code:'RQ_COMPARE_SCOPE_REQUIRED',reason:'rq.compare requires explicit non-empty scope context.',context,providerTruth:this.providerTruth,canonicalProductTruth:this.canonicalProductTruth};
     try{
       const left=this.provider.resolve(context.left),right=this.provider.resolve(context.right);
-      if(left?.state!=='RESOLVED')return {enabled:false,code:`RQ_COMPARE_LEFT_${String(left?.state||'UNAVAILABLE')}`,reason:left?.reason||'Left SourceRevision is not resolved by the bound provider.',context};
-      if(right?.state!=='RESOLVED')return {enabled:false,code:`RQ_COMPARE_RIGHT_${String(right?.state||'UNAVAILABLE')}`,reason:right?.reason||'Right SourceRevision is not resolved by the bound provider.',context};
+      if(left?.state!=='RESOLVED')return {enabled:false,code:`RQ_COMPARE_LEFT_${String(left?.state||'UNAVAILABLE')}`,reason:left?.reason||'Left SourceRevision is not resolved by the bound provider.',context,providerTruth:this.providerTruth,canonicalProductTruth:this.canonicalProductTruth};
+      if(right?.state!=='RESOLVED')return {enabled:false,code:`RQ_COMPARE_RIGHT_${String(right?.state||'UNAVAILABLE')}`,reason:right?.reason||'Right SourceRevision is not resolved by the bound provider.',context,providerTruth:this.providerTruth,canonicalProductTruth:this.canonicalProductTruth};
       const compatibility=this.provider.preflightCompatibility?.(left,right);
-      if(compatibility&&compatibility.compatible===false)return {enabled:false,code:compatibility.reasonCode||'RQ_COMPARE_INCOMPATIBLE',reason:compatibility.reason||'SourceRevision pair is not comparable.',context};
-      return {enabled:true,code:'AVAILABLE',reason:'',context,providerResolution:{left:'RESOLVED',right:'RESOLVED'}};
-    }catch(error){return {enabled:false,code:'RQ_COMPARE_PROVIDER_RESOLUTION_ERROR',reason:String(error?.message||error),context};}
+      if(compatibility&&compatibility.compatible===false)return {enabled:false,code:compatibility.reasonCode||'RQ_COMPARE_INCOMPATIBLE',reason:compatibility.reason||'SourceRevision pair is not comparable.',context,providerTruth:this.providerTruth,canonicalProductTruth:this.canonicalProductTruth};
+      return {enabled:true,code:this.providerTestOnly?'AVAILABLE_TEST_ONLY':'AVAILABLE',reason:provider.reason,context,providerResolution:{left:'RESOLVED',right:'RESOLVED'},providerTruth:this.providerTruth,canonicalProductTruth:this.canonicalProductTruth};
+    }catch(error){return {enabled:false,code:'RQ_COMPARE_PROVIDER_RESOLUTION_ERROR',reason:String(error?.message||error),context,providerTruth:this.providerTruth,canonicalProductTruth:this.canonicalProductTruth};}
   }
   compare(payload={}){
     const availability=this.compareAvailability(payload);
-    if(!availability.enabled)return {ok:false,status:availability.code,reason:availability.reason,persisted:false,formalReview:false,canonicalMutation:false};
+    if(!availability.enabled)return {ok:false,status:availability.code,reason:availability.reason,providerTruth:this.providerTruth,canonicalProductTruth:this.canonicalProductTruth,persisted:false,formalReview:false,canonicalMutation:false};
     const context=availability.context,sessionId=context.workingAnalysisId;
     try{
       const pair=this.compareOwner.createPair({left:{providerId:this.providerId,ref:context.left},right:{providerId:this.providerId,ref:context.right}});
@@ -76,28 +100,28 @@ export class RQDomainAdapter{
         this.sessions.add(sessionId);
         this.sessionContexts.set(sessionId,{workingAnalysisId:sessionId,scope:clone(context.scope),left:clone(context.left),right:clone(context.right)});
       }
-      return {ok:result.state!=='ERROR',status:result.state,sessionId,pair,result,context:this.sessionContexts.get(sessionId)||clone(context),persisted:false,formalReview:false,canonicalMutation:false};
-    }catch(error){return {ok:false,status:'RQ_COMPARE_REJECTED',reason:String(error?.message||error),sessionId,persisted:false,formalReview:false,canonicalMutation:false};}
+      return {ok:result.state!=='ERROR',status:result.state,sessionId,pair,result,context:this.sessionContexts.get(sessionId)||clone(context),providerTruth:this.providerTruth,canonicalProductTruth:this.canonicalProductTruth,persisted:false,formalReview:false,canonicalMutation:false};
+    }catch(error){return {ok:false,status:'RQ_COMPARE_REJECTED',reason:String(error?.message||error),sessionId,providerTruth:this.providerTruth,canonicalProductTruth:this.canonicalProductTruth,persisted:false,formalReview:false,canonicalMutation:false};}
   }
   project(sessionId){return this.compareOwner.projectSession(sessionId);}
   filter(sessionId,value){return this.compareOwner.setFilter(sessionId,value);}
   review(sessionId,payload={}){
-    if(!this.sessions.has(sessionId))return {ok:false,status:'ANALYSIS_SESSION_UNKNOWN',sessionId,formalReview:false,reviewDecisionAuthority:false,evidenceDecisionWrites:0};
+    if(!this.sessions.has(sessionId))return {ok:false,status:'ANALYSIS_SESSION_UNKNOWN',sessionId,providerTruth:this.providerTruth,canonicalProductTruth:this.canonicalProductTruth,formalReview:false,reviewDecisionAuthority:false,evidenceDecisionWrites:0};
     const projection=this.project(sessionId),conflict=payload?.conflict;
     let workingConflict=null;
     if(conflict){
-      if(!nonEmpty(conflict.id)||!nonEmpty(conflict.author)||!nonEmpty(conflict.revision))return {ok:false,status:'RQ_WORKING_CONFLICT_IDENTITY_REQUIRED',sessionId,formalReview:false,reviewDecisionAuthority:false,evidenceDecisionWrites:0};
+      if(!nonEmpty(conflict.id)||!nonEmpty(conflict.author)||!nonEmpty(conflict.revision))return {ok:false,status:'RQ_WORKING_CONFLICT_IDENTITY_REQUIRED',sessionId,providerTruth:this.providerTruth,canonicalProductTruth:this.canonicalProductTruth,formalReview:false,reviewDecisionAuthority:false,evidenceDecisionWrites:0};
       workingConflict={id:String(conflict.id),author:String(conflict.author),revision:String(conflict.revision),classification:String(conflict.classification||'UNRESOLVED'),rationale:String(conflict.rationale||''),workingAnalysisId:sessionId,formalReview:false};
       this.workingConflicts.set(`${sessionId}:${workingConflict.id}`,clone(workingConflict));
     }
-    return {ok:true,status:'WORKING_REVIEW_ONLY',sessionId,projection,workingConflict,formalReview:false,reviewDecisionAuthority:false,evidenceDecisionWrites:0,persisted:false};
+    return {ok:true,status:'WORKING_REVIEW_ONLY',sessionId,projection,workingConflict,providerTruth:this.providerTruth,canonicalProductTruth:this.canonicalProductTruth,formalReview:false,reviewDecisionAuthority:false,evidenceDecisionWrites:0,persisted:false};
   }
   provenance(sessionId,payload={}){
-    if(!this.sessions.has(sessionId))return {ok:false,status:'ANALYSIS_SESSION_UNKNOWN',sessionId,formalReview:false};
+    if(!this.sessions.has(sessionId))return {ok:false,status:'ANALYSIS_SESSION_UNKNOWN',sessionId,providerTruth:this.providerTruth,canonicalProductTruth:this.canonicalProductTruth,formalReview:false};
     const projection=this.project(sessionId),originalBytesAvailable=payload.originalBytesAvailable===true;
-    return {ok:true,status:'PROVENANCE_PROJECTION',sessionId,provenance:clone(projection.provenance),receipt:clone(projection.receipt),formalReview:false,sourceAuthority:originalBytesAvailable?'ORIGINAL_BYTES_VERIFIED':'DERIVED_ONLY',originalHashAssertion:originalBytesAvailable?String(payload.originalHash||'UNSPECIFIED'):'FORBIDDEN_DERIVED_ONLY',persisted:false};
+    return {ok:true,status:'PROVENANCE_PROJECTION',sessionId,provenance:clone(projection.provenance),receipt:clone(projection.receipt),providerTruth:this.providerTruth,canonicalProductTruth:this.canonicalProductTruth,formalReview:false,sourceAuthority:originalBytesAvailable?'ORIGINAL_BYTES_VERIFIED':'DERIVED_ONLY',originalHashAssertion:originalBytesAvailable?String(payload.originalHash||'UNSPECIFIED'):'FORBIDDEN_DERIVED_ONLY',persisted:false};
   }
-  saveAnalysisSession(sessionId){if(!this.sessions.has(sessionId))return {ok:false,status:'ANALYSIS_SESSION_UNKNOWN',persisted:false};return {ok:false,status:'RQ_ANALYSIS_SESSION_PERSISTENCE_UNAVAILABLE',persisted:false,canonicalMutation:false,sessionId};}
+  saveAnalysisSession(sessionId){if(!this.sessions.has(sessionId))return {ok:false,status:'ANALYSIS_SESSION_UNKNOWN',persisted:false};return {ok:false,status:'RQ_ANALYSIS_SESSION_PERSISTENCE_UNAVAILABLE',providerTruth:this.providerTruth,canonicalProductTruth:this.canonicalProductTruth,persisted:false,canonicalMutation:false,sessionId};}
 }
 
 const rqCollectionAdapter=domain=>({
