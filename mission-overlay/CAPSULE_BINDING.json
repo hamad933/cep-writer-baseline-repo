@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 4,
+  "classification": "MISSION_BRANCH_CONTROLLER_BINDING__W05A_SURFACE_RESTORATION",
+  "missionId": "SWR-W05-HEALTH",
+  "writerClass": "CHATGPT_WRITER",
+  "executionCarrier": "ROUTE-CHATGPT",
+  "controllerPreparedWorkspace": true,
+  "expectedProductParentCommit": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+  "expectedProductParentTree": "dd0315926270ec1f6571b82566dcdab3d65267f9",
+  "expectedProductSourceSha256": "b8b5e4a5797eb48b4cb8ae10439ff7dca5d8e2c900cb782b4802f69b21e23b7a",
+  "expectedProductSourceFiles": 289,
+  "candidateBranch": "writer/surface-w05-health",
+  "capsuleTransportBranch": "capsule/w05a-health-v1-1",
+  "authorityRoot": "cep-writer/",
+  "missionOverlayRoot": "mission-overlay/",
+  "noRequiredLiveDriveFetch": true,
+  "localFirst": true,
+  "continuationPolicy": "NEW_LANE_FULL_CAPSULE_V1_1",
+  "visualBootstrapConfig": "mission-overlay/CAPSULE_VISUAL_BOOTSTRAP.json",
+  "allowWriterLocalRecapture": true,
+  "intermediateEvidenceCustody": "LOCAL_EPHEMERAL",
+  "heavyFinalCustody": "GOOGLE_DRIVE_WHEN_REQUIRED",
+  "githubRole": "SOURCE_DELTA_AND_SMALL_RECEIPTS_ONLY",
+  "writablePaths": [
+    "stack/native-typescript/adapters/health-runtime.ts",
+    "stack/native-typescript/tests/surface-restoration/health/**",
+    "writer-output/SWR-W05-HEALTH/**"
+  ],
+  "readOnlyLocks": [
+    "stack/local-runtime/health/health-capability.mjs",
+    "tools/w05-health-capability-proof.mjs",
+    "stack/native-typescript/tests/rescue/S16_W05_HEALTH_PROCESSING/s16-health-processing-tests.ts",
+    "stack/native-typescript/surfaces/composition/w05-rescue.ts",
+    "stack/native-typescript/foundation/**",
+    "stack/local-runtime/**",
+    "cep-writer/**",
+    "authority/**",
+    "contracts/**",
+    "profiles/**"
+  ],
+  "prohibitedPaths": [
+    "stack/native-typescript/main.ts",
+    "stack/native-typescript/surfaces/m0-controller-composition.ts",
+    ".github/**",
+    "package.json",
+    "package-lock.json",
+    "all sibling Surface Product paths"
+  ],
+  "outputCustody": {
+    "surfaceFolderDriveId": "1MRD_YIyEswwb0DRYzn9yaolA1fyZ8_e4",
+    "writerOutputDriveId": "1PkTHxdky4OnBizs1cNaPx_YrK8Z53XPM"
+  },
+  "stopGate": "SURFACE_CANDIDATE_ONLY__CONTROLLER_DELTA_ADMISSION_REQUIRED"
+}

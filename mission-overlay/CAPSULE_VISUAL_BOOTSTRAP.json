@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 3,
+  "classification": "W05A_CONTROLLER_BOUND_VISUAL_BOOTSTRAP__NO_FABRICATED_CURRENT_PARENT_CAPTURE",
+  "enabled": true,
+  "required": false,
+  "allowWriterLocalRecapture": true,
+  "expectedProductParentCommit": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+  "minimumScreenshotCount": 1,
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1024,
+      "height": 900
+    }
+  ],
+  "states": [
+    "available",
+    "empty",
+    "stale",
+    "unavailable",
+    "error",
+    "diagnostic"
+  ],
+  "environment": {},
+  "setupCommands": [],
+  "captureCommands": [],
+  "baselineGlobs": [],
+  "receiptGlobs": [],
+  "referenceBindings": [
+    {
+      "surface": "health",
+      "referenceId": "1VKIQOlLJNMkd1jLNV7CBGdiBxoAlpUU6",
+      "classification": "CURRENT_FINAL_REFERENCE",
+      "sha256": "f5f789687f09f115a75e96a315d74ba5d664853b4430cc766fcc70eaf8aa17b6",
+      "localPath": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/01_HEALTH/Arabic Operational Health Dashboard.png"
+    }
+  ],
+  "comparisonPlan": [
+    {
+      "id": "health-current-vs-governed-contract",
+      "method": "LOCAL_RECAPTURE_REQUIRED",
+      "sourceParent": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+      "referenceCeiling": "CURRENT_FINAL_REFERENCE",
+      "viewports": [
+        "1440x1000",
+        "1024x900"
+      ],
+      "notes": "Reference is Presentation-only; provider/runtime/data truth remains independent."
+    }
+  ]
+}
