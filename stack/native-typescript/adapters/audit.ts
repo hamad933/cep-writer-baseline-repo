@@ -62,12 +62,44 @@ export function createAuditConsumerAdapter({domain=new AuditEventDomain(),comman
 /* CG6 durable provider binding. AuditEvent storage/hash-chain ownership remains in the
    approved app-wide AuditEventProvider; this adapter owns only W05 search/verify/annotate semantics. */
 export class DurableAuditRuntimeAdapter{
-  constructor({transport=createBoundedLocalRuntimeTransport()}={}){this.owner='W05DurableAuditRuntimeAdapter';this.transport=transport;this.state={events:[],pagination:null,filters:{},integrity:{status:'UNVERIFIED',firstInvalidSequence:null,scope:null},annotations:[],lastError:null};}
+  constructor({transport=createBoundedLocalRuntimeTransport()}={}){this.owner='W05DurableAuditRuntimeAdapter';this.transport=transport;this.state={events:[],pagination:null,filters:{},observedScope:null,integrity:{status:'UNVERIFIED',valid:null,firstInvalidSequence:null,scope:null,errorCode:null},annotations:[],errors:{search:null,verify:null,annotate:null},lastError:null};}
   descriptor(){return {owner:this.owner,semanticOwner:AUDIT_DOMAIN_OWNER,providerOwner:'AuditEventProvider',providerStorage:'DURABLE_JSONL',semanticCommandReceiptsAreAuditEvents:false,hashAlgorithm:'SHA-256',hashIsEncryption:false,databaseImmutabilityProven:false,annotationsStoredSeparately:true,surfaceSemanticsMovedIntoProvider:false};}
   snapshot(){return clone(this.state);}
-  async search(filters={}){const params=new URLSearchParams();for(const key of ['actor','action','target','outcome','correlationId','from','to','limit','cursor'])if(filters[key]!=null&&filters[key]!=='')params.set(key,String(filters[key]));const r=await this.transport.request('GET',`/v1/audit/events${params.size?`?${params.toString()}`:''}`);if(r.ok){this.state.events=(r.events||[]).map(clone);this.state.pagination=clone(r.pagination||null);this.state.filters=clone(r.filters||filters);this.state.lastError=null;}else this.state.lastError=clone(r);return r;}
-  async verify(){const r=await this.transport.request('GET','/v1/audit/verify');if(r.ok){this.state.integrity={status:r.valid?'VALID_CHAIN':'INVALID_CHAIN',valid:r.valid,firstInvalidSequence:r.firstInvalidSequence??null,scope:clone(r.observedScope||null)};this.state.lastError=null;}else this.state.lastError=clone(r);return r;}
-  async annotate({eventId,note,actor='Local product user'}={}){const r=await this.transport.request('POST','/v1/audit/annotations',{eventId,actor,note});if(r.ok){this.state.annotations.push(clone(r.annotation));this.state.lastError=null;}else this.state.lastError=clone(r);return r;}
-  truth(){return {owner:this.owner,providerOwner:'AuditEventProvider',eventCount:this.state.events.length,integrityStatus:this.state.integrity.status,firstInvalidSequence:this.state.integrity.firstInvalidSequence,persistence:'PROVIDER_DURABLE_JSONL',appendOnlyApplicationContract:true,databaseImmutabilityClaim:false,hashChain:'SHA-256',hashIsEncryption:false,commandReceiptsAreAuditTruth:false,annotationsSeparate:true};}
+  async search(filters={}){
+    const params=new URLSearchParams();for(const key of ['actor','action','target','outcome','correlationId','from','to','limit','cursor'])if(filters[key]!=null&&filters[key]!=='')params.set(key,String(filters[key]));
+    try{
+      const r=await this.transport.request('GET',`/v1/audit/events${params.size?`?${params.toString()}`:''}`);
+      if(r?.ok===true){this.state.events=(r.events||[]).map(clone);this.state.pagination=clone(r.pagination||null);this.state.filters=clone(r.filters||filters);this.state.observedScope=clone(r.observedScope||null);this.state.errors.search=null;this.state.lastError=null;}
+      else {this.state.errors.search=clone(r||{ok:false,code:'AUDIT_SEARCH_PROVIDER_ERROR'});this.state.lastError=clone(this.state.errors.search);}
+      return r;
+    }catch(error){const r={ok:false,code:'AUDIT_SEARCH_PROVIDER_ERROR',error:String(error?.message||error)};this.state.errors.search=clone(r);this.state.lastError=clone(r);return r;}
+  }
+  async verify(){
+    try{
+      const r=await this.transport.request('GET','/v1/audit/verify');
+      if(r?.ok===true&&typeof r.valid==='boolean'){
+        this.state.observedScope=clone(r.observedScope||this.state.observedScope||null);
+        this.state.integrity={status:r.valid?'VALID_CHAIN':'INVALID_CHAIN',valid:r.valid,firstInvalidSequence:r.firstInvalidSequence??null,scope:clone(r.observedScope||null),errorCode:null};this.state.errors.verify=null;this.state.lastError=null;
+      }else{
+        const code=String(r?.code||r?.status||'AUDIT_VERIFICATION_PROVIDER_ERROR');
+        this.state.integrity={status:'VERIFICATION_ERROR',valid:null,firstInvalidSequence:null,scope:clone(r?.observedScope||this.state.observedScope||null),errorCode:code};this.state.errors.verify=clone(r||{ok:false,code});this.state.lastError=clone(this.state.errors.verify);
+      }
+      return r;
+    }catch(error){const r={ok:false,code:'AUDIT_VERIFICATION_PROVIDER_ERROR',error:String(error?.message||error)};this.state.integrity={status:'VERIFICATION_ERROR',valid:null,firstInvalidSequence:null,scope:clone(this.state.observedScope||null),errorCode:r.code};this.state.errors.verify=clone(r);this.state.lastError=clone(r);return r;}
+  }
+  async annotate({eventId,note,actor='Local product user'}={}){
+    const canonicalEventId=String(eventId||'').trim(),text=String(note||'').trim();
+    if(!canonicalEventId)return {ok:false,code:'AUDIT_CANONICAL_EVENT_ID_REQUIRED'};
+    if(!text)return {ok:false,code:'AUDIT_ANNOTATION_FIELDS_REQUIRED'};
+    const aliasMatch=this.state.events.find(row=>row.eventId!==canonicalEventId&&(String(row.sequence)===canonicalEventId||String(row.hash||row.recordHash||'')===canonicalEventId||String(row.previousHash||'')===canonicalEventId));
+    if(aliasMatch)return {ok:false,code:'AUDIT_CANONICAL_EVENT_ID_REQUIRED',requiredEventId:aliasMatch.eventId||null};
+    try{
+      const r=await this.transport.request('POST','/v1/audit/annotations',{eventId:canonicalEventId,actor,note:text});if(r?.ok===true){this.state.annotations.push(clone(r.annotation));this.state.errors.annotate=null;this.state.lastError=null;}else {this.state.errors.annotate=clone(r||{ok:false,code:'AUDIT_ANNOTATION_PROVIDER_ERROR'});this.state.lastError=clone(this.state.errors.annotate);}return r;
+    }catch(error){const r={ok:false,code:'AUDIT_ANNOTATION_PROVIDER_ERROR',error:String(error?.message||error)};this.state.errors.annotate=clone(r);this.state.lastError=clone(r);return r;}
+  }
+  truth(){
+    const scope=this.state.observedScope||this.state.integrity.scope||null,pagination=this.state.pagination||null,filters=this.state.filters||{},filtered=Object.entries(filters).some(([key,value])=>key!=='limit'&&key!=='cursor'&&value!=null&&value!==''),observedCount=scope&&Number.isFinite(Number(scope.count))?Number(scope.count):null,returned=this.state.events.length,observedCoverage=!scope?'UNKNOWN':(!filtered&&!pagination?.nextCursor&&observedCount===returned?'COMPLETE_OBSERVED':'PARTIAL_OBSERVED');
+    return {owner:this.owner,providerOwner:'AuditEventProvider',eventCount:returned,returnedEventCount:returned,observedEventCount:observedCount,observedCoverage,upstreamCoverage:'UNKNOWN',totalUpstreamKnown:false,zeroObservedProvesCompleteCoverage:false,searchPageComplete:pagination?pagination.nextCursor==null:null,integrityStatus:this.state.integrity.status,firstInvalidSequence:this.state.integrity.firstInvalidSequence,persistence:'PROVIDER_DURABLE_JSONL',appendOnlyApplicationContract:true,databaseImmutabilityClaim:false,hashChain:'SHA-256',hashIsEncryption:false,commandReceiptsAreAuditTruth:false,annotationsSeparate:true,canonicalEventId:true,canonicalOccurredAt:true};
+  }
 }
 export function createDurableAuditRuntimeAdapter(options={}){return new DurableAuditRuntimeAdapter(options);}
