@@ -17,7 +17,7 @@ export function createLearnStructuredContextProvider({learn,structured=null,reco
     owner:LEARN_STRUCTURED_CONTEXT_PROVIDER_OWNER,
     isApplicable:()=>Boolean(learn.activity?.id),
     describe:(context={})=>{
-      const activity=learn.activity||{},attempt=learn.attempt||null,document=structured?.identity?.()||null;
+      const activity=learn.activity||{},attempt=learn.attempt||null,document=structured?.identity?.()||null,journey=learn.source?.journey||null;
       const activityRevision=activity.revision??null,attemptRevision=attempt?.revision??null;
       const revisionAligned=attempt?String(attemptRevision)===String(activityRevision):null;
       const recommendationTruth=truthValue(context.recommendation??recommendation);
@@ -35,6 +35,8 @@ export function createLearnStructuredContextProvider({learn,structured=null,reco
         lenses:[
           {id:'activity',label:'Activity',tabs:[
             {id:'identity',label:'Identity',fields:[
+              {id:'journey-id',label:'Journey ID',value:technical(journey?.id),technical:true},
+              {id:'journey-version',label:'Journey version',value:technical(journey?.version),technical:true},
               {id:'activity-id',label:'Activity ID',value:technical(activity.id),technical:true},
               {id:'activity-kind',label:'Activity kind',value:technical(activity.kind),technical:true},
               {id:'activity-revision',label:'Activity revision',value:activityRevision==null?'':activityRevision,technical:true},
@@ -48,7 +50,8 @@ export function createLearnStructuredContextProvider({learn,structured=null,reco
               {id:'attempt-id',label:'Attempt ID',value:technical(attempt?.id),technical:true},
               {id:'attempt-state',label:'Attempt state',value:truthValue(attempt?.state,'NO_ATTEMPT'),technical:true},
               {id:'attempt-revision',label:'Attempt revision',value:attemptRevision==null?'':attemptRevision,technical:true},
-              {id:'revision-aligned',label:'Current activity revision',value:revisionAligned==null?'NO_ATTEMPT':revisionAligned,technical:true}
+              {id:'revision-aligned',label:'Current activity revision',value:revisionAligned==null?'NO_ATTEMPT':revisionAligned,technical:true},
+              {id:'prerequisite-state',label:'Prerequisite state',value:truthValue(activity.prerequisiteState,'UNKNOWN'),technical:true}
             ]}
           ]},
           {id:'support',label:'Support',tabs:[

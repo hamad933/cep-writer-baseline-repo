@@ -13,5 +13,5 @@ export function bindLearnSurface({commands,learn,structured,workspace=null}={}){
     register(commands,'learn.review','Review local learning projection',payload=>learn.review(payload||{}),()=>learn.reviewAvailability())
   ];
   workspace?.status?.(learn.sourceAvailable?'Learn · canonical learning source bound':'Learn · canonical source unavailable · no local fixture truth');
-  return {surface:'learn',owner:OWNER,sourceOwner:structured.owner,transactionOwner:structured.transactionOwner.owner,commands:ids,masteryWrite:false,labRuntimeCreated:false,consumerTruth:structured.sourceBinding?.truth||'UNBOUND',fixtureClaimed:false,sourceAvailability:learn.sourceAvailable?'AVAILABLE':'UNAVAILABLE'};
+  return {surface:'learn',owner:OWNER,workbench:'LearningWorkbench',sourceOwner:structured.owner,transactionOwner:structured.transactionOwner.owner,commands:ids,actionHomes:{'learn.open':'CENTER_ACTIVITY','learn.edit':'CENTER_STRUCTURED','learn.practice':'CENTER_GOVERNED_ACTIVITY_TOGGLE','learn.review':'CENTER_OR_BOTTOM_CONTEXTUAL'},describeWorkbench:()=>learn.learningWorkbenchDescriptor(),practicePlacement:{placement:'GOVERNED_ACTIVITY_TOGGLE',prominent:false,firstFocus:false},masteryWrite:false,labRuntimeCreated:false,consumerTruth:structured.sourceBinding?.truth||'UNBOUND',fixtureClaimed:false,sourceAvailability:learn.sourceAvailable?'AVAILABLE':'UNAVAILABLE'};
 }

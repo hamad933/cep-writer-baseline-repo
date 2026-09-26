@@ -10,26 +10,33 @@ const unavailableDocument=()=>({id:'learn-unavailable',revision:'UNAVAILABLE',ti
 const unavailableSource=(source,reason)=>({available:false,truth:'UNAVAILABLE',classification:'UNAVAILABLE',providerRef:source?.providerRef||null,rejectionReason:reason,rejectedSource:{truth:String(source?.truth||source?.sourceTruth||'UNAVAILABLE'),classification:String(source?.classification||source?.kind||'UNAVAILABLE'),reason},activity:{id:'learn-unavailable',revision:1,title:'Learning source unavailable',kind:'unavailable',editable:false,prerequisiteState:'UNKNOWN'},document:unavailableDocument()});
 const normalizeSource=(source,{allowTestSource=false}={})=>{
   if(!source)return unavailableSource(source,'LEARN_PROVIDER_UNBOUND');
+  if(source.testOnly===true&&!allowTestSource)return unavailableSource(source,'LEARN_TEST_ONLY_SOURCE_REQUIRES_EXPLICIT_ADMISSION');
   if((unsafeTruth(source.classification)||unsafeTruth(source.truth))&&!(allowTestSource&&source.testOnly===true))return unavailableSource(source,'LEARN_FIXTURE_OR_SYNTHETIC_SOURCE_FORBIDDEN');
   if(!source.activity?.id||source.activity.revision===undefined||!source.document?.id||!source.document?.revision||!Array.isArray(source.document?.blocks))return unavailableSource(source,'LEARN_EXACT_CANONICAL_SOURCE_REQUIRED');
-  return {available:true,truth:String(source.truth||'BOUND_CANONICAL_LEARNING_SOURCE'),classification:String(source.classification||'PRODUCT_RUNTIME_BOUND_SOURCE'),providerRef:source.providerRef||null,activity:clone(source.activity),document:clone(source.document)};
+  return {available:true,truth:String(source.truth||'BOUND_CANONICAL_LEARNING_SOURCE'),classification:String(source.classification||'PRODUCT_RUNTIME_BOUND_SOURCE'),providerRef:source.providerRef||null,testOnly:source.testOnly===true,journey:source.journey?clone(source.journey):null,activity:clone(source.activity),document:clone(source.document)};
 };
 
 /** Thin Learn-domain owner. Shared workbench/editor mechanics remain Foundation-owned. */
 export class LearnAdapter {
   constructor({source=null,noteRuntime=null,noteRouteBound=false,allowTestSource=false}={}){
-    this.source=normalizeSource(source,{allowTestSource});this.sourceAvailable=this.source.available;
+    this.source=normalizeSource(source,{allowTestSource});this.sourceAvailable=this.source.available;this.testSourceAdmitted=this.sourceAvailable&&this.source.testOnly===true&&allowTestSource===true;
     this.activity=clone(this.source.activity);this.attempt=null;this.progress='INCOMPLETE';this.sequence=0;this.structured=null;this.navigation=null;this.noteRuntime=noteRuntime;this.noteRouteBound=noteRouteBound===true;
   }
   createStructuredAdapter(){
     if(this.structured)return this.structured;
     const document=clone(this.source.document);
-    this.structured=new StructuredDocumentDomainAdapter({
-      owner:'LearnAdapter',domainKind:'learn',document,
-      metadata:{surface:'learn',domainOwner:'LearnAdapter',activityId:this.activity.id,activityRevision:this.activity.revision,libraryIndependent:false,persistence:'UNCONFIGURED_LOCAL_WORKING_STATE',consumerTruth:this.source.truth,sourceAvailability:this.sourceAvailable?'AVAILABLE':'UNAVAILABLE'},
-      sourceBinding:{sources:this.sourceAvailable?[{id:this.activity.id,title:this.activity.title,kind:'LearningActivity',revision:this.activity.revision,status:'BOUND'}]:[],truth:this.source.truth,classification:this.source.classification,providerRef:this.source.providerRef},
-      noteBinding:{route:'PERSONAL:CEP/W02/learn'}
-    });
+    try{
+      this.structured=new StructuredDocumentDomainAdapter({
+        owner:'LearnAdapter',domainKind:'learn',document,
+        metadata:{surface:'learn',domainOwner:'LearnAdapter',activityId:this.activity.id,activityRevision:this.activity.revision,libraryIndependent:true,librarySemanticsInherited:false,sharedStructuredMechanics:true,persistence:'UNCONFIGURED_LOCAL_WORKING_STATE',consumerTruth:this.source.truth,sourceAvailability:this.sourceAvailable?'AVAILABLE':'UNAVAILABLE',testSourceAdmitted:this.testSourceAdmitted},
+        sourceBinding:{sources:this.sourceAvailable?[{id:this.activity.id,title:this.activity.title,kind:'LearningActivity',revision:this.activity.revision,status:'BOUND'}]:[],truth:this.source.truth,classification:this.source.classification,providerRef:this.source.providerRef},
+        noteBinding:{route:'PERSONAL:CEP/W02/learn'}
+      });
+    }catch(error){
+      const code=String(error?.message||error||'STRUCTURED_BINDING_FAILED');
+      if(/UNSUPPORTED_STRUCTURED_TREE_SCHEMA|INVALID_STRUCTURED_TREE|STRUCTURED_DOCUMENT_REVISION_REQUIRED/.test(code))throw Error(`SHARED_OWNER_ESCALATION:UnifiedEditor:${code}`);
+      throw error;
+    }
     this.navigation=new StructuredNavigationDescriptorOwner({adapter:this.structured});
     return this.structured;
   }
@@ -49,7 +56,8 @@ export class LearnAdapter {
     const project=item=>({id:item.descriptorId,kind:item.kind==='heading'?'journey-stage':'journey-activity-step',label:item.label,iconKey:item.kind==='heading'?'i-journey':'i-activity',secondary:[{text:`${item.target.blockId} · Journey`,direction:'ltr',element:'bdi'}],selected:selected.has(item.target.blockId),current:selected.has(item.target.blockId),expanded:true,forceExpanded:true,activationDataset:{blockId:item.target.blockId,journeyStage:item.kind},children:(item.children||[]).map(project)});
     return createStructuredOutlinePresentationDescriptor({mode:'hierarchy',ariaLabel:'Learn Journey navigation',query,nodes:outline.hierarchy.map(project),summary:{kind:'count',text:`${outline.count} Journey navigation milestone(s)`}});
   }
-  journeyDescriptor(){return {semanticOwner:'JourneyNavigationOwner',journeyBound:true,activityId:this.activity.id,activityTitle:this.activity.title,progress:this.progress,mastery:'NOT_INFERRED',gradingProvider:'UNAVAILABLE'};}
+  journeyDescriptor(){const journey=this.source.journey?clone(this.source.journey):null,progress=this.learningProgress();return {semanticOwner:'JourneyNavigationOwner',journeyBound:this.sourceAvailable,journey,activityId:this.activity.id,activityTitle:this.activity.title,activityRevision:this.activity.revision,progress:progress.state,progressTruth:progress.attemptTruth,mastery:'NOT_INFERRED',gradingProvider:'UNAVAILABLE',prerequisiteNavigationLocked:false,primaryFocus:'LEARNING_CONTENT',practicePlacement:{placement:'GOVERNED_ACTIVITY_TOGGLE',prominent:false,firstFocus:false,orderAfter:'learning-content'}};}
+  learningWorkbenchDescriptor(){const source=this.sourceAvailability(),editability=this.editability(),progress=this.learningProgress();return {id:`learn-workbench:${this.activity.id}`,kind:'LearningWorkbench',semanticOwner:'LearnAdapter',sourceTruth:this.source.truth,sourceClassification:this.source.classification,sourceAvailability:source.enabled?'AVAILABLE':'UNAVAILABLE',testSourceAdmitted:this.testSourceAdmitted,primaryFocus:'LEARNING_CONTENT',activity:{id:this.activity.id,title:this.activity.title,kind:this.activity.kind,revision:this.activity.revision,editable:editability.enabled===true},journey:this.journeyDescriptor(),structured:{owner:this.structured?.owner||'LearnAdapter',documentId:this.source.document.id,documentRevision:this.source.document.revision,mode:editability.enabled===true?'EDIT_OR_MIXED':'READ',sharedMechanics:true,librarySemantics:false},progress,toggles:[{id:'practice',label:'Practice',command:'learn.practice',placement:'GOVERNED_ACTIVITY_TOGGLE',prominent:false,firstFocus:false,availability:this.practiceAvailability()},{id:'assessment',label:'Assessment',placement:'GOVERNED_ACTIVITY_TOGGLE',prominent:false,firstFocus:false,descriptor:this.assessmentDescriptor()},{id:'lab',label:'Lab',placement:'GOVERNED_ACTIVITY_TOGGLE',prominent:false,firstFocus:false,descriptor:this.labDescriptor()}],review:{command:'learn.review',availability:this.reviewAvailability(),formalReviewCreated:false},mastery:'NOT_INFERRED',labRuntimeCreated:false,librarySemanticActions:[]};}
   mountOutline(host,{query='',onActivate=null}={}){
     if(!host)throw Error('LEARN_OUTLINE_HOST_REQUIRED');
     const render=()=>renderStructuredOutline(host,this.outlineDescriptor({query}),{document:host.ownerDocument});
@@ -71,4 +79,4 @@ export class LearnAdapter {
   labDescriptor(){return {kind:'LAB_LEARNING_BRIEF',runtime:'NOT_CREATED',operationalAdapter:'UNBOUND',w03RuntimeCreated:false};}
 }
 
-export function createLearnRuntimeComposition({source=null,viewport=undefined,platformWindowBridge=undefined,inputDirectionBridge=undefined,noteRouteBound=false,allowTestSource=false}={}){const noteRuntime=createStructuredStickyNoteRuntimeComposition({domainKind:'learn',surfaceId:'learn',bindingInputFactory:learnNoteBindingInput,routePrefix:'PERSONAL:CEP/W02/learn',viewport,platformWindowBridge,inputDirectionBridge,finalRouteBound:noteRouteBound}),learn=new LearnAdapter({source,noteRuntime,noteRouteBound,allowTestSource}),structured=learn.createStructuredAdapter();return {learn,structured,noteRuntime,noteCapability:learn.noteCapability(),descriptor:{owner:'LearnAdapter',domainKind:'learn',semanticOwner:'JourneyNavigationOwner',journeyBound:true,activityId:learn.activity.id,structuredOwner:structured.owner,stickyCompositionOwner:noteRuntime.owner,sourceTruth:structured.sourceBinding?.truth||null,sourceAvailability:learn.sourceAvailable?'AVAILABLE':'UNAVAILABLE',realConsumer:learn.sourceAvailable&&!allowTestSource,explicitTestSource:allowTestSource&&learn.sourceAvailable,fixtureFallback:false,noteFamilyCapability:noteRuntime.capability({sourceAvailable:learn.sourceAvailable,routeBound:true}),finalProductRouteBinding:noteRouteBound?'BOUND':'PENDING_D13'}};}
+export function createLearnRuntimeComposition({source=null,viewport=undefined,platformWindowBridge=undefined,inputDirectionBridge=undefined,noteRouteBound=false,allowTestSource=false}={}){const noteRuntime=createStructuredStickyNoteRuntimeComposition({domainKind:'learn',surfaceId:'learn',bindingInputFactory:learnNoteBindingInput,routePrefix:'PERSONAL:CEP/W02/learn',viewport,platformWindowBridge,inputDirectionBridge,finalRouteBound:noteRouteBound}),learn=new LearnAdapter({source,noteRuntime,noteRouteBound,allowTestSource}),structured=learn.createStructuredAdapter();return {learn,structured,noteRuntime,noteCapability:learn.noteCapability(),descriptor:{owner:'LearnAdapter',domainKind:'learn',semanticOwner:'JourneyNavigationOwner',journeyBound:learn.sourceAvailable,activityId:learn.activity.id,structuredOwner:structured.owner,stickyCompositionOwner:noteRuntime.owner,sourceTruth:structured.sourceBinding?.truth||null,sourceAvailability:learn.sourceAvailable?'AVAILABLE':'UNAVAILABLE',realConsumer:learn.sourceAvailable&&!learn.testSourceAdmitted,explicitTestSource:learn.testSourceAdmitted,fixtureFallback:false,noteFamilyCapability:noteRuntime.capability({sourceAvailable:learn.sourceAvailable,routeBound:true}),finalProductRouteBinding:noteRouteBound?'BOUND':'PENDING_D13'}};}
