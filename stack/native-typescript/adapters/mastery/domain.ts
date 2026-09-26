@@ -46,7 +46,6 @@ export class W04MasteryDomain{
   this.evaluatorDescriptor=evaluatorDescriptor(evaluator);
   this.history=this.records.map(r=>({evaluationId:`eval:${r.id}:0`,recordId:r.id,revisionId:r.revisionId,judgment:r.judgment,freshness:r.freshness,policyRef:r.policyRef,evidenceRefs:[...r.basis.evidenceRefs],decisionRefs:[...r.basis.decisionRefs],basisDigest:r.basis.digest,truthClass:r.truthClass||'PROVIDER_BOUND'}));
   this.receipts=[];
-  this.seq=0;
   this.persistence={mode:'SESSION_LOCAL_PROJECTION',durable:false,status:'UNAVAILABLE',reason:'No surface-local persistence or canonical Mastery publisher is authorized.'};
   this.availability=new ActionAvailabilityCore();
   for(const id of ['mastery.inspect','mastery.explain','mastery.reevaluate'])this.availability.register(id,{selection:{exact:1},activeModes:['review']});
@@ -75,11 +74,11 @@ export class W04MasteryDomain{
   if(!this.evaluatorDescriptor){
    return freeze({ok:false,code:'AUTHORIZED_EVALUATOR_UNBOUND',action:'INSPECT_OR_REQUEST',mutated:false,record:before,requirements:explanation,historyCount});
   }
-  const request=freeze({requestId:`mastery-request:${id}:${++this.seq}`,subject:r.subject,masteryTarget:r.capability,currentStateRef:`${r.id}@${r.revisionId}`,policyRef:r.policyRef,evidenceRefs:[...r.basis.evidenceRefs],decisionRefs:[...r.basis.decisionRefs],basisDigest:r.basis.digest,trigger:String(options.trigger||'USER_REEVALUATE_REQUEST'),requestedJudgment:null,completionOrActivityInputsAccepted:false});
+  const requestId=options.requestId===undefined?`mastery-request:${r.id}@${r.revisionId}:${r.basis.digest}`:exactText(options.requestId,'MASTERY_REQUEST_ID_INVALID');
+  const request=freeze({requestId,subject:r.subject,masteryTarget:r.capability,currentStateRef:`${r.id}@${r.revisionId}`,policyRef:r.policyRef,evidenceRefs:[...r.basis.evidenceRefs],decisionRefs:[...r.basis.decisionRefs],basisDigest:r.basis.digest,trigger:String(options.trigger||'USER_REEVALUATE_REQUEST'),requestedJudgment:null,completionOrActivityInputsAccepted:false});
   const providerReceipt=this.evaluator.requestEvaluation(clone(request));
-  const receipt=freeze({sequence:this.seq,command:'mastery.reevaluate',owner:this.owner,providerId:this.evaluatorDescriptor.providerId,providerRevision:this.evaluatorDescriptor.revision,requestId:request.requestId,canonicalWriteOwner:this.evaluatorDescriptor.providerId,localMasteryWrite:false});
-  this.receipts.push(receipt);
-  return freeze({ok:true,code:'EVALUATION_REQUESTED',action:'REQUEST',delegated:true,mutated:false,record:before,request,providerReceipt,receipt,historyCount});
+  const receipt=freeze({command:'mastery.reevaluate',owner:this.owner,providerId:this.evaluatorDescriptor.providerId,providerRevision:this.evaluatorDescriptor.revision,requestId:request.requestId,canonicalWriteOwner:this.evaluatorDescriptor.providerId,localMasteryWrite:false,localReceiptPersisted:false,providerReceiptOnly:true});
+  return freeze({ok:true,code:'EVALUATION_REQUESTED',action:'REQUEST',delegated:true,requestOnly:true,mutated:false,canonicalStateAcceptedLocally:false,record:before,request,providerReceipt,receipt,historyCount});
  }
  setFreshness(id,freshness){
   this.get(id);
