@@ -1,0 +1,115 @@
+{
+  "missionId": "SWR-W03-RESULTS",
+  "status": "CANDIDATE_ONLY__SOLE_CONTROLLER_REVIEW_REQUIRED",
+  "source": {
+    "commit": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+    "tree": "dd0315926270ec1f6571b82566dcdab3d65267f9",
+    "capsuleSha256": "6146aaa7e1f1a46fa62087be0ecf6ded9ae58f0174bc0f678ef3fa0e2b38eb3b"
+  },
+  "branch": "writer/surface-w03-results",
+  "tests": {
+    "npmTest": "210/210 PASS",
+    "w03SemanticOwnership": "60/60 PASS",
+    "s13": "PASS",
+    "domain": "PASS",
+    "cg4": "3/3 PASS",
+    "npmRunCheck": "INHERITED_PARENT_BROWSER_RECEIPTS_FAIL_ONLY"
+  },
+  "visualEvidenceClass": "FRESH_CURRENT_CANDIDATE__BROWSER_RENDERED__NAVIGATION_INDEPENDENT__NOT_GENUINE_ROUTE",
+  "screenshots": [
+    {
+      "file": "candidate_aar_saved_stale_anchor.png",
+      "bytes": 146300,
+      "sha256": "72e207b5eada1babb9f9156debd5d0161cf583d47a208352ffed9472dafc8bd8"
+    },
+    {
+      "file": "candidate_compare_exact.png",
+      "bytes": 126139,
+      "sha256": "810636988f7427b765fe16cd589bcb8216cc1b7442b768a54c6dc71178749449"
+    },
+    {
+      "file": "candidate_replay_gap.png",
+      "bytes": 143210,
+      "sha256": "a920e933029b109a559bc9272722d9336fa44fe55bc92d8ddc6e7e32cd847a56"
+    },
+    {
+      "file": "candidate_result_inert_terminal.png",
+      "bytes": 149329,
+      "sha256": "317bee76505f5f99ee9d720f8587fa3f77521256b4e40ee5a87da9611db927fd"
+    }
+  ],
+  "interaction": {
+    "evidenceClass": "FRESH_CURRENT_CANDIDATE__BROWSER_RENDERED__NAVIGATION_INDEPENDENT__NOT_GENUINE_ROUTE",
+    "viewport": "1440x1000",
+    "terminalLiteralVisible": true,
+    "terminalScriptExecuted": false,
+    "aarFactsByteIdentical": true,
+    "compareExact": true,
+    "missingTruth": true,
+    "incompatibleTruth": true,
+    "emptyTruth": true,
+    "handoffStatus": "Candidate Evidence envelope prepared for RESULT-0042@R1; no W04 admission performed.",
+    "determinism": {
+      "ok": true,
+      "runExecuted": true,
+      "verificationRunId": "RUN-VERIFY-0042",
+      "pinnedSourceRunInputRef": {
+        "runId": "RUN-0042",
+        "revisionId": "RI-42",
+        "rulesRevision": "RULES-7"
+      },
+      "providerReceipt": "isolated-execution",
+      "mutated": false,
+      "originalResultRef": {
+        "resultId": "RESULT-0042",
+        "revisionId": "R1",
+        "manifestDigest": "sha256:aa11"
+      },
+      "originalRunId": "RUN-0042",
+      "linkedToOriginal": true,
+      "historicalReplayReadOnly": true
+    },
+    "keyboardTabFocus": true
+  },
+  "escalations": [
+    "PVF-003_RESULTS_FINAL_ROUTE_COMPOSITION",
+    "TIMELINE_REPLAY_PLAYING_STATE",
+    "CBF-003_BOTTOM_DEEP_WORK"
+  ],
+  "changedFiles": [
+    {
+      "path": "stack/native-typescript/adapters/results/domain.ts",
+      "sha256": "49e344cdc1e934b0bfccfd1ab32d1408cf8ac3581454a40648b691cb0c8351ab"
+    },
+    {
+      "path": "stack/native-typescript/adapters/results/timeline-replay-provider.ts",
+      "sha256": "8633df1832a03f2b15bf57a9950286a407d92f93e6bd3f2de4f7eb8af8744486"
+    },
+    {
+      "path": "stack/native-typescript/surfaces/results/presentation.ts",
+      "sha256": "44941b589411b1257a7379df251ddd2bf84f7eb0a79d3cca33035d343f983527"
+    },
+    {
+      "path": "stack/native-typescript/tests/rescue/S13_W03_RESULTS/results-rescue.test.ts",
+      "sha256": "91a9c45987bcef29e2271fe433ccd7a154b8b0031d78ce9a168c9f9c2a8010d6"
+    },
+    {
+      "path": "writer-output/SWR-W03-RESULTS/SOURCE_AND_TEST_RECEIPT.md",
+      "sha256": "7676062c5f513afd390d1b96a01f593fcfed33af5179a386c914c5d5fdc74366"
+    },
+    {
+      "path": "writer-output/SWR-W03-RESULTS/SHARED_OWNER_ESCALATIONS.md",
+      "sha256": "6242c9c24aa1bd2bad6e4fd25dc0dcce5cec0456aea59a329ff4ad1c7990b8cc"
+    },
+    {
+      "path": "writer-output/SWR-W03-RESULTS/INTERACTION_PROOF.json",
+      "sha256": "9a1d6da0bff6320deb67c98c80cc052897d7bc6ceeb11e02addfa9ecaed531df"
+    }
+  ],
+  "prohibitedActions": {
+    "mainMerge": false,
+    "release": false,
+    "deployment": false,
+    "selfAcceptance": false
+  }
+}
