@@ -48,14 +48,15 @@ export class W04EvidenceDomain{
   replaceRecord(id,next){const index=this.records.findIndex(item=>item.id===id);if(index<0)throw Error('EVIDENCE_UNKNOWN:'+id);this.records[index]=clone(next);return this.records[index];}
   validateAdmissionAuthority(record,authority){
     const candidate=authority||record.admissionAuthority;
-    if(!candidate||typeof candidate!=='object'||candidate.available!==true||!candidate.proofRef)return {ok:false,code:'ADMISSION_AUTHORITY_UNAVAILABLE',mutated:false};
+    if(!candidate||typeof candidate!=='object'||candidate.available!==true||!(candidate.proofId||candidate.proofRef))return {ok:false,code:'ADMISSION_AUTHORITY_UNAVAILABLE',mutated:false};
+    const requestedProofRef=String(candidate.proofId||candidate.proofRef);
     if(this.admissionAuthorityRegistry){
-      const res=this.admissionAuthorityRegistry.resolveAdmissionAuthority(record.evidenceId||record.id,candidate.proofId||candidate.proofRef);
+      const res=this.admissionAuthorityRegistry.resolveAdmissionAuthority(record.evidenceId||record.id,requestedProofRef);
       if(!res||res.state!=='AUTHORIZED')return {ok:false,code:'ADMISSION_AUTHORITY_UNAVAILABLE',mutated:false,reason:res?.reason||'Registry denied authority'};
       if(res.testOnly&&!this.allowTestAuthority)return {ok:false,code:'TEST_AUTHORITY_FORBIDDEN_IN_PRODUCT',mutated:false};
-      return null;
+      return {ok:true,authority:freeze({available:true,providerId:res.providerId||candidate.providerId||null,providerRevision:res.providerRevision||candidate.providerRevision||null,proofRef:String(res.proofRef||requestedProofRef),authority:res.authority||candidate.authority||'AUTHORIZED_EVIDENCE_ADMISSION',testOnly:res.testOnly===true})};
     }
-    if(this.allowTestAuthority&&candidate.testOnly===true)return null;
+    if(this.allowTestAuthority&&candidate.testOnly===true)return {ok:true,authority:freeze({...candidate,proofRef:requestedProofRef})};
     return {ok:false,code:'ADMISSION_AUTHORITY_UNAVAILABLE',mutated:false,reason:'Admission authority registry is not bound; caller-supplied fields are not authoritative.'};
   }
   duplicateCandidate(record,excludeId=null){const key=fingerprint(record);return this.records.find(r=>r.id!==excludeId&&r.status!=='WITHDRAWN'&&!['DECLINED','WITHDRAWN'].includes(r.candidateState)&&!(record.baseEvidenceRevisionId&&r.evidenceId===record.evidenceId)&&fingerprint(r)===key)||null;}
@@ -70,18 +71,21 @@ export class W04EvidenceDomain{
     
     let verification;
     if(verificationStatus==='VERIFIED'){
-      const hasEnvelope=!!verificationInput?.providerId&&(!!verificationInput?.proofId||!!verificationInput?.proofRef);
+      const hasEnvelope=!!verificationInput?.providerId&&!!verificationInput?.providerRevision&&(!!verificationInput?.proofId||!!verificationInput?.proofRef);
       if(!hasEnvelope&&!this.allowTestAuthority&&!input.testOnly){
         return freeze({ok:false,code:'VERIFICATION_PROVIDER_UNBOUND',mutated:false,note:'Verified source facts require a bound verification provider; caller-supplied verification assertions are not authoritative.'});
       }
+      const envelopeDigest=verificationInput?.digest??input.digest;
+      if(!envelopeDigest||verificationInput?.schemaValid!==true||verificationInput?.sourceBytesAvailable!==true)return freeze({ok:false,code:'VERIFICATION_ENVELOPE_INCOMPLETE',mutated:false});
+      if(input.digest!=null&&String(input.digest)!==String(envelopeDigest))return freeze({ok:false,code:'VERIFICATION_DIGEST_MISMATCH',mutated:false});
       verification={
         status:'VERIFIED',
         providerId:String(verificationInput?.providerId||'test.verification.provider'),
         providerRevision:String(verificationInput?.providerRevision||'1.0.0'),
         proofRef:String(verificationInput?.proofId||verificationInput?.proofRef||`proof:test:${input.id}`),
-        digest:String(verificationInput?.digest||input.digest||'sha256:verified'),
-        sourceBytesAvailable:verificationInput?.sourceBytesAvailable===true||input.sourceBytesAvailable===true,
-        schemaValid:verificationInput?.schemaValid===true||input.schemaValid===true,
+        digest:String(envelopeDigest),
+        sourceBytesAvailable:true,
+        schemaValid:true,
         producerIdentity:verificationInput?.producerIdentity||input.producerIdentity||null,
         handoffReceiptRef:verificationInput?.handoffReceiptRef||input.handoffReceiptRef||null,
         verifiedAt:verificationInput?.verifiedAt||now(),
@@ -108,6 +112,7 @@ export class W04EvidenceDomain{
     if(!envelope.digest||envelope.schemaValid!==true||envelope.sourceBytesAvailable!==true){
       return freeze({ok:false,code:'VERIFICATION_ENVELOPE_INCOMPLETE',mutated:false});
     }
+    if(record.digest!=null&&String(record.digest)!==String(envelope.digest))return freeze({ok:false,code:'VERIFICATION_DIGEST_MISMATCH',mutated:false,expectedDigest:String(record.digest),verifiedDigest:String(envelope.digest)});
     const verification={status:'VERIFIED',providerId:String(envelope.providerId),providerRevision:String(envelope.providerRevision),proofRef:String(envelope.proofId||envelope.proofRef),digest:String(envelope.digest),schemaValid:true,sourceBytesAvailable:true,producerIdentity:envelope.producerIdentity?String(envelope.producerIdentity):null,handoffReceiptRef:envelope.handoffReceiptRef?String(envelope.handoffReceiptRef):null,verifiedAt:envelope.verifiedAt||now(),testOnly:!!envelope.testOnly};
     const next={...record,digest:verification.digest,schemaValid:true,sourceBytesAvailable:true,verification};
     this.replaceRecord(id,next);
@@ -133,7 +138,28 @@ export class W04EvidenceDomain{
   returnForContext(id,{reason}={}){const r=this.get(id);if(r.status!=='CANDIDATE'||r.candidateState!=='SUBMITTED_FOR_INTAKE')return freeze({ok:false,code:'CANDIDATE_NOT_SUBMITTED',mutated:false});if(!text(reason).trim())return freeze({ok:false,code:'RETURN_REASON_REQUIRED',mutated:false});this.replaceRecord(id,{...r,candidateState:'RETURNED_FOR_CONTEXT',returnReason:text(reason)});return freeze({ok:true,record:this.get(id),mutated:true});}
   declineCandidate(id,{reason}={}){const r=this.get(id);if(r.status!=='CANDIDATE'||r.candidateState!=='SUBMITTED_FOR_INTAKE')return freeze({ok:false,code:'CANDIDATE_NOT_SUBMITTED',mutated:false});if(!text(reason).trim())return freeze({ok:false,code:'DECLINE_REASON_REQUIRED',mutated:false});this.replaceRecord(id,{...r,candidateState:'DECLINED',declineReason:text(reason)});return freeze({ok:true,record:this.get(id),mutated:true});}
   withdrawCandidate(id,{reason='Owner withdrawal'}={}){const r=this.get(id);if(r.status!=='CANDIDATE'||['ADMITTED','DECLINED','WITHDRAWN'].includes(r.candidateState))return freeze({ok:false,code:'CANDIDATE_NOT_WITHDRAWABLE',mutated:false});this.replaceRecord(id,{...r,status:'WITHDRAWN',candidateState:'WITHDRAWN',withdrawReason:text(reason)});return freeze({ok:true,record:this.get(id),mutated:true});}
-  amend(id,patch={}){const base=this.get(id);if(!base.sourceBytesAvailable)return freeze({ok:false,code:'SOURCE_BYTES_UNAVAILABLE',mutated:false});const evidenceId=base.evidenceId||base.id,lineage=this.lineage.get(evidenceId);const expectedBase=patch.expectedBaseRevisionId??lineage?.currentRevisionId??(base.status==='ADMITTED'?base.revisionId:null);if(!expectedBase)return freeze({ok:false,code:'EXACT_BASE_REVISION_REQUIRED',mutated:false});if(!lineage||lineage.currentRevisionId!==expectedBase)return freeze({ok:false,code:'STALE_EXPECTED_EVIDENCE_REVISION',mutated:false,currentRevisionId:lineage?.currentRevisionId||null});const immutableBase=this.findRevision(evidenceId,expectedBase);if(!immutableBase)return freeze({ok:false,code:'EXACT_BASE_REVISION_MISSING',mutated:false});const forbidden=['digest','sourceId','sourceRevision','producerIdentity','sourceTimestamp','handoffReceiptRef'];if(forbidden.some(key=>key in patch))return freeze({ok:false,code:'SOURCE_FACT_MUTATION_FORBIDDEN',mutated:false});const candidateId=String(patch.candidateId||`${evidenceId}:amend:${this.seq+1}`);if(this.records.some(item=>item.id===candidateId))return freeze({ok:false,code:'EVIDENCE_ID_CONFLICT',mutated:false});const candidate={id:candidateId,evidenceId,revisionId:`candidate:${candidateId}`,title:text(patch.title,immutableBase.title),status:'CANDIDATE',candidateState:'PREPARED',candidateRevision:1,intakeValidation:{status:'NOT_VALIDATED'},sourceStatus:base.sourceStatus||'CURRENT',digest:immutableBase.source.digest,schemaValid:true,sourceBytesAvailable:true,verification:clone(immutableBase.source.verification||{status:'VERIFIED',providerId:'inherited.verification',proofRef:`proof:inherited:${expectedBase}`,digest:immutableBase.source.digest,schemaValid:true,sourceBytesAvailable:true,verifiedAt:now()}),reviewStatus:null,effectiveDecision:null,notes:text(patch.notes,immutableBase.notes),subject:immutableBase.subject,evidenceClaim:text(patch.evidenceClaim,immutableBase.evidenceClaim),criterionRefs:clone(patch.criterionRefs||immutableBase.criterionRefs),governedPurpose:text(patch.governedPurpose,immutableBase.governedPurpose),selectedMaterialRefs:clone(patch.selectedMaterialRefs||immutableBase.selectedMaterialRefs),sourceType:immutableBase.source.sourceType,sourceId:immutableBase.source.sourceId,sourceRevision:immutableBase.source.sourceRevision,producerIdentity:immutableBase.source.producerIdentity,sourceTimestamp:immutableBase.source.sourceTimestamp,handoffReceiptRef:immutableBase.source.handoffReceiptRef,baseEvidenceRevisionId:expectedBase,expectedPriorRevisionId:expectedBase,amendmentReason:text(patch.reason,patch.notes||'Evidence amendment'),admissionAuthority:clone(patch.admissionAuthority||base.admissionAuthority||{available:false,proofRef:null})};if(!coherentCandidate(candidate))return freeze({ok:false,code:'CANDIDATE_CLAIM_PURPOSE_REQUIRED',mutated:false});this.records.push(candidate);this.receipt('evidence.amend',candidateId,{evidenceId,baseRevisionId:expectedBase,baseUntouched:true});return freeze({ok:true,record:candidate,baseRevision:immutableBase,mutated:true,baseEvidenceMutated:false});}
+  amend(id,patch={}){
+    const base=this.get(id);
+    if(base.status!=='ADMITTED')return freeze({ok:false,code:'ADMITTED_EVIDENCE_REQUIRED',mutated:false});
+    if(!base.sourceBytesAvailable)return freeze({ok:false,code:'SOURCE_BYTES_UNAVAILABLE',mutated:false});
+    const evidenceId=base.evidenceId||base.id,lineage=this.lineage.get(evidenceId);
+    const expectedBase=patch.expectedBaseRevisionId??null;
+    if(!expectedBase)return freeze({ok:false,code:'EXACT_BASE_REVISION_REQUIRED',mutated:false});
+    if(!lineage||lineage.currentRevisionId!==expectedBase)return freeze({ok:false,code:'STALE_EXPECTED_EVIDENCE_REVISION',mutated:false,currentRevisionId:lineage?.currentRevisionId||null});
+    const immutableBase=this.findRevision(evidenceId,expectedBase);
+    if(!immutableBase)return freeze({ok:false,code:'EXACT_BASE_REVISION_MISSING',mutated:false});
+    const forbidden=['digest','sourceId','sourceRevision','producerIdentity','sourceTimestamp','handoffReceiptRef','sourceBytesAvailable','schemaValid','verification'];
+    if(forbidden.some(key=>key in patch))return freeze({ok:false,code:'SOURCE_FACT_MUTATION_FORBIDDEN',mutated:false});
+    const reason=text(patch.reason).trim();
+    if(!reason)return freeze({ok:false,code:'AMENDMENT_REASON_REQUIRED',mutated:false});
+    const candidateId=String(patch.candidateId||`${evidenceId}:amend:${this.seq+1}`);
+    if(this.records.some(item=>item.id===candidateId))return freeze({ok:false,code:'EVIDENCE_ID_CONFLICT',mutated:false});
+    const candidate={id:candidateId,evidenceId,revisionId:`candidate:${candidateId}`,title:text(patch.title,immutableBase.title),status:'CANDIDATE',candidateState:'PREPARED',candidateRevision:1,intakeValidation:{status:'NOT_VALIDATED'},sourceStatus:base.sourceStatus||'CURRENT',digest:immutableBase.source.digest,schemaValid:immutableBase.source.schemaValid===true,sourceBytesAvailable:immutableBase.source.sourceBytesAvailable===true,verification:clone(immutableBase.source.verification||{status:'UNVERIFIED',providerId:null,proofRef:null,digest:immutableBase.source.digest,schemaValid:immutableBase.source.schemaValid===true,sourceBytesAvailable:immutableBase.source.sourceBytesAvailable===true}),reviewStatus:null,effectiveDecision:null,notes:text(patch.notes,immutableBase.notes),subject:immutableBase.subject,evidenceClaim:text(patch.evidenceClaim,immutableBase.evidenceClaim),criterionRefs:clone(patch.criterionRefs||immutableBase.criterionRefs),governedPurpose:text(patch.governedPurpose,immutableBase.governedPurpose),selectedMaterialRefs:clone(patch.selectedMaterialRefs||immutableBase.selectedMaterialRefs),sourceType:immutableBase.source.sourceType,sourceId:immutableBase.source.sourceId,sourceRevision:immutableBase.source.sourceRevision,producerIdentity:immutableBase.source.producerIdentity,sourceTimestamp:immutableBase.source.sourceTimestamp,handoffReceiptRef:immutableBase.source.handoffReceiptRef,baseEvidenceRevisionId:expectedBase,expectedPriorRevisionId:expectedBase,amendmentReason:reason,admissionAuthority:clone(patch.admissionAuthority||base.admissionAuthority||{available:false,proofRef:null})};
+    if(!coherentCandidate(candidate))return freeze({ok:false,code:'CANDIDATE_CLAIM_PURPOSE_REQUIRED',mutated:false});
+    this.records.push(candidate);this.receipt('evidence.amend',candidateId,{evidenceId,baseRevisionId:expectedBase,reason,baseUntouched:true});
+    return freeze({ok:true,record:candidate,baseRevision:immutableBase,mutated:true,baseEvidenceMutated:false});
+  }
+
   admit(id,{expectedPriorRevisionId=undefined,authority=null,authorityEnvelope=null,actor='owner:local',reason=null}={}){
     const candidate=this.get(id);
     if(candidate.status==='ADMITTED')return freeze({ok:false,code:'CANDIDATE_ALREADY_ADMITTED',mutated:false,currentRevisionId:this.lineage.get(candidate.evidenceId)?.currentRevisionId||candidate.revisionId});
@@ -146,16 +172,19 @@ export class W04EvidenceDomain{
     if(candidate.intakeValidation?.status!=='VALIDATED')return freeze({ok:false,code:'CANDIDATE_NOT_VALIDATED',mutated:false});
     if(!coherentCandidate(candidate))return freeze({ok:false,code:'CANDIDATE_CLAIM_PURPOSE_REQUIRED',mutated:false});
     const effectiveAuthority=authorityEnvelope||authority;
-    const authorityFailure=this.validateAdmissionAuthority(candidate,effectiveAuthority);
-    if(authorityFailure)return freeze(authorityFailure);
+    const authorityCheck=this.validateAdmissionAuthority(candidate,effectiveAuthority);
+    if(!authorityCheck.ok)return freeze(authorityCheck);
     const evidenceId=candidate.evidenceId||candidate.id,current=this.lineage.get(evidenceId)||null;
     const storedExpected=candidate.expectedPriorRevisionId??null,callerExpected=expectedPriorRevisionId===undefined?storedExpected:expectedPriorRevisionId,actualPrior=current?.currentRevisionId??null;
     if(callerExpected!==actualPrior)return freeze({ok:false,code:'STALE_EXPECTED_EVIDENCE_REVISION',mutated:false,currentRevisionId:actualPrior,expectedPriorRevisionId:callerExpected});
-    const revisionNumber=(current?.revisionIds.length||0)+1,revisionId=revisionNumber===1&&candidate.revisionId&&!String(candidate.revisionId).startsWith('candidate:')?candidate.revisionId:`${evidenceId}:r${revisionNumber}`;
+    const revisionNumber=(current?.revisionIds.length||0)+1;
+    const revisionReason=text(reason||candidate.amendmentReason||(revisionNumber===1?'Initial Evidence admission':'')).trim();
+    if(revisionNumber>1&&!revisionReason)return freeze({ok:false,code:'REVISION_REASON_REQUIRED',mutated:false});
+    const revisionId=revisionNumber===1&&candidate.revisionId&&!String(candidate.revisionId).startsWith('candidate:')?candidate.revisionId:`${evidenceId}:r${revisionNumber}`;
     if(this.findRevision(evidenceId,revisionId))return freeze({ok:false,code:'EVIDENCE_REVISION_CONFLICT',mutated:false,currentRevisionId:actualPrior});
-    const admittedRecord={...candidate,revisionId,status:'ADMITTED',candidateState:'ADMITTED'};
-    const authorityProof=(effectiveAuthority||candidate.admissionAuthority)?.proofRef||(effectiveAuthority||candidate.admissionAuthority)?.proofId||null;
-    const revision=immutableRevisionFromRecord(admittedRecord,{revisionNumber,previousRevisionRef:actualPrior,actor,reason:reason||candidate.amendmentReason||'Evidence Admission'});
+    const admittedRecord={...candidate,revisionId,status:'ADMITTED',candidateState:'ADMITTED',admissionAuthority:clone(authorityCheck.authority)};
+    const authorityProof=authorityCheck.authority.proofRef;
+    const revision=immutableRevisionFromRecord(admittedRecord,{revisionNumber,previousRevisionRef:actualPrior,actor,reason:revisionReason});
     this.evidenceRevisions.push(revision);
     const revisionIds=[...(current?.revisionIds||[]),revisionId];
     this.lineage.set(evidenceId,{evidenceId,currentRevisionId:revisionId,revisionIds,lifecycle:'ACTIVE'});
@@ -163,7 +192,44 @@ export class W04EvidenceDomain{
     this.receipt('evidence.admit',id,{evidenceId,revisionId,previousRevisionRef:actualPrior,authorityProofRef:authorityProof,noReviewDecisionCreated:true});
     return freeze({ok:true,record:this.inspect(id),revision:this.inspectRevision(evidenceId,revisionId),mutated:true,note:'Admission created an immutable Evidence revision only; no Review Decision or Mastery mutation occurred.'});
   }
-  sourceChoice(id,choiceInput,options={}){const choice=typeof choiceInput==='string'?choiceInput:choiceInput?.choice,opts=typeof choiceInput==='object'&&choiceInput!==null?choiceInput:options;if(!['update','retain','withdraw'].includes(choice))throw Error('EVIDENCE_SOURCE_CHOICE_INVALID');const record=this.get(id);if(record.sourceStatus!=='SUPERSEDED')return freeze({ok:false,code:'SOURCE_NOT_SUPERSEDED',mutated:false});if(choice==='retain'&&!text(opts.reason).trim())return freeze({ok:false,code:'RETAIN_REASON_REQUIRED',mutated:false});const evidenceId=record.evidenceId||record.id,lineage=this.lineage.get(evidenceId)||null;if(choice==='update'){if(!opts.successorSource?.sourceId||!opts.successorSource?.sourceRevision||!opts.successorSource?.digest)return freeze({ok:false,code:'SUCCESSOR_SOURCE_REQUIRED',mutated:false});if(record.status==='ADMITTED'){const result=this.amend(id,{candidateId:opts.candidateId,expectedBaseRevisionId:opts.expectedBaseRevisionId??lineage?.currentRevisionId,title:record.title,notes:opts.notes??record.notes,reason:opts.reason||'Source superseded; prepare amendment against successor source',admissionAuthority:opts.admissionAuthority||record.admissionAuthority});if(!result.ok)return result;const successor=opts.successorSource,candidate=this.get(result.record.id);this.replaceRecord(candidate.id,{...candidate,sourceStatus:'CURRENT',sourceId:String(successor.sourceId),sourceRevision:String(successor.sourceRevision),digest:String(successor.digest),selectedMaterialRefs:[`${successor.sourceId}@${successor.sourceRevision}`],sourceHistory:[exactSource(record)]});this.sourceChoices.push(freeze({evidenceId,choice:'update',fromRevisionId:lineage?.currentRevisionId||record.revisionId,candidateId:result.record.id,at:now(),reason:text(opts.reason,'Source supersession update')}));return freeze({...result,record:this.get(result.record.id),sourceChoice:'update',priorRevisionUntouched:true});}const next={...record,sourceStatus:'CURRENT',sourceId:String(opts.successorSource.sourceId),sourceRevision:String(opts.successorSource.sourceRevision),digest:String(opts.successorSource.digest),selectedMaterialRefs:[`${opts.successorSource.sourceId}@${opts.successorSource.sourceRevision}`],sourceHistory:[...(record.sourceHistory||[]),exactSource(record)],intakeValidation:{status:'NOT_VALIDATED'},candidateState:'PREPARED',candidateRevision:(record.candidateRevision||1)+1};this.replaceRecord(id,next);this.sourceChoices.push(freeze({evidenceId,choice:'update',candidateId:id,at:now(),reason:text(opts.reason,'Candidate source updated')}));this.receipt('evidence.sourceChoice',id,{choice:'update',successorSourceRef:`${next.sourceId}@${next.sourceRevision}`,priorSourcePreserved:true});return freeze({ok:true,record:next,mutated:true,priorSourcePreserved:true});}if(choice==='retain'){const decision=freeze({evidenceId,revisionId:lineage?.currentRevisionId||record.revisionId,choice:'retain',reason:text(opts.reason),actor:text(opts.actor,'owner:local'),at:now(),historicalSourceRetained:true});this.sourceChoices.push(decision);this.replaceRecord(id,{...record,sourceRetention:{reason:decision.reason,at:decision.at},sourceStatus:'SUPERSEDED'});this.receipt('evidence.sourceChoice',id,{choice:'retain',reason:decision.reason,revisionId:decision.revisionId});return freeze({ok:true,record:this.inspect(id),mutated:true,evidenceRevisionMutated:false});}if(lineage){this.lineage.set(evidenceId,{...lineage,lifecycle:'WITHDRAWN'});this.replaceRecord(id,{...record,status:'WITHDRAWN'});}else this.replaceRecord(id,{...record,status:'WITHDRAWN',candidateState:'WITHDRAWN'});this.sourceChoices.push(freeze({evidenceId,revisionId:lineage?.currentRevisionId||record.revisionId,choice:'withdraw',reason:text(opts.reason,'Source supersession withdrawal'),actor:text(opts.actor,'owner:local'),at:now()}));this.receipt('evidence.sourceChoice',id,{choice:'withdraw',historyPreserved:true,currentRevisionId:lineage?.currentRevisionId||null});return freeze({ok:true,record:this.inspect(id),mutated:true,historyPreserved:true});}
+  sourceChoice(id,choiceInput,options={}){
+    const choice=typeof choiceInput==='string'?choiceInput:choiceInput?.choice,opts=typeof choiceInput==='object'&&choiceInput!==null?choiceInput:options;
+    if(!['update','retain','withdraw'].includes(choice))return freeze({ok:false,code:'EVIDENCE_SOURCE_CHOICE_INVALID',mutated:false});
+    const record=this.get(id);
+    if(record.sourceStatus!=='SUPERSEDED')return freeze({ok:false,code:'SOURCE_NOT_SUPERSEDED',mutated:false});
+    const reason=text(opts.reason).trim();
+    if(!reason)return freeze({ok:false,code:choice==='retain'?'RETAIN_REASON_REQUIRED':'SOURCE_CHOICE_REASON_REQUIRED',mutated:false});
+    const evidenceId=record.evidenceId||record.id,lineage=this.lineage.get(evidenceId)||null;
+    if(choice==='update'){
+      const successor=opts.successorSource;
+      if(!successor?.sourceId||!successor?.sourceRevision||!successor?.digest)return freeze({ok:false,code:'SUCCESSOR_SOURCE_REQUIRED',mutated:false});
+      let candidateId=id,baseResult=null;
+      if(record.status==='ADMITTED'){
+        if(!opts.expectedBaseRevisionId)return freeze({ok:false,code:'EXACT_BASE_REVISION_REQUIRED',mutated:false,currentRevisionId:lineage?.currentRevisionId||record.revisionId});
+        baseResult=this.amend(id,{candidateId:opts.candidateId,expectedBaseRevisionId:opts.expectedBaseRevisionId,title:record.title,notes:opts.notes??record.notes,reason,admissionAuthority:opts.admissionAuthority||record.admissionAuthority});
+        if(!baseResult.ok)return baseResult;
+        candidateId=baseResult.record.id;
+      }
+      const candidate=this.get(candidateId);
+      if(record.status!=='ADMITTED'&&opts.expectedCandidateRevision!==undefined&&opts.expectedCandidateRevision!==candidate.candidateRevision)return freeze({ok:false,code:'STALE_CANDIDATE_REVISION',mutated:false,currentCandidateRevision:candidate.candidateRevision});
+      const priorSource=record.status==='ADMITTED'?exactSource(record):exactSource(candidate);
+      const verification={status:'UNVERIFIED',providerId:null,proofRef:null,digest:String(successor.digest),sourceBytesAvailable:successor.sourceBytesAvailable===true,schemaValid:successor.schemaValid===true,producerIdentity:successor.producerIdentity||null,handoffReceiptRef:successor.handoffReceiptRef||null,verifiedAt:null};
+      const next={...candidate,sourceStatus:'CURRENT',sourceType:text(successor.sourceType,candidate.sourceType),sourceId:String(successor.sourceId),sourceRevision:String(successor.sourceRevision),digest:String(successor.digest),schemaValid:successor.schemaValid===true,sourceBytesAvailable:successor.sourceBytesAvailable===true,verification,producerIdentity:successor.producerIdentity||null,sourceTimestamp:successor.sourceTimestamp||null,handoffReceiptRef:successor.handoffReceiptRef||null,selectedMaterialRefs:clone(successor.selectedMaterialRefs||[`${successor.sourceId}@${successor.sourceRevision}`]),sourceHistory:[...(candidate.sourceHistory||[]),priorSource],intakeValidation:{status:'NOT_VALIDATED'},candidateState:'PREPARED',candidateRevision:record.status==='ADMITTED'?candidate.candidateRevision:(candidate.candidateRevision||1)+1,sourceUpdateReason:reason};
+      this.replaceRecord(candidateId,next);
+      let verifiedRecord=this.get(candidateId);
+      if(successor.verification){const verified=this.verifySource(candidateId,{...successor.verification,digest:successor.verification.digest??successor.digest});if(!verified.ok)return freeze({...verified,sourceChoice:'update',priorSourcePreserved:true});verifiedRecord=this.get(candidateId);}
+      this.sourceChoices.push(freeze({evidenceId,choice:'update',fromRevisionId:lineage?.currentRevisionId||record.revisionId,candidateId,at:now(),reason}));
+      this.receipt('evidence.sourceChoice',candidateId,{choice:'update',successorSourceRef:`${next.sourceId}@${next.sourceRevision}`,priorSourcePreserved:true,verificationStatus:verifiedRecord.verification?.status||'UNVERIFIED'});
+      return freeze({ok:true,record:verifiedRecord,mutated:true,sourceChoice:'update',priorRevisionUntouched:record.status==='ADMITTED',priorSourcePreserved:true,requiresIndependentVerification:verifiedRecord.verification?.status!=='VERIFIED'});
+    }
+    if(choice==='retain'){
+      const decision=freeze({evidenceId,revisionId:lineage?.currentRevisionId||record.revisionId,choice:'retain',reason,actor:text(opts.actor,'owner:local'),at:now(),historicalSourceRetained:true});
+      this.sourceChoices.push(decision);this.replaceRecord(id,{...record,sourceRetention:{reason:decision.reason,at:decision.at},sourceStatus:'SUPERSEDED'});this.receipt('evidence.sourceChoice',id,{choice:'retain',reason:decision.reason,revisionId:decision.revisionId});return freeze({ok:true,record:this.inspect(id),mutated:true,evidenceRevisionMutated:false});
+    }
+    if(lineage){this.lineage.set(evidenceId,{...lineage,lifecycle:'WITHDRAWN'});this.replaceRecord(id,{...record,status:'WITHDRAWN'});}else this.replaceRecord(id,{...record,status:'WITHDRAWN',candidateState:'WITHDRAWN'});
+    this.sourceChoices.push(freeze({evidenceId,revisionId:lineage?.currentRevisionId||record.revisionId,choice:'withdraw',reason,actor:text(opts.actor,'owner:local'),at:now()}));this.receipt('evidence.sourceChoice',id,{choice:'withdraw',reason,historyPreserved:true,currentRevisionId:lineage?.currentRevisionId||null});return freeze({ok:true,record:this.inspect(id),mutated:true,historyPreserved:true});
+  }
+
   setSourceAvailability(id,available){
     const current=this.get(id);
     const verification=current.verification?{...current.verification,sourceBytesAvailable:available===true}:current.verification;
