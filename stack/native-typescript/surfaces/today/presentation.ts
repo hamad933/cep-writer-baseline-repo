@@ -704,10 +704,6 @@ const sourceLine = (item, c) => {if(!item?.providerId)return '';const rec=item?.
 export function renderTodayOrchestrationProjection({ host, projection, adapter = null, lang = null, onAction = null } = {}) {
   if (!host || !projection) throw Error('TODAY_PRESENTATION_HOST_AND_PROJECTION_REQUIRED');
   const l = lang || (document.documentElement.lang === 'en' ? 'en' : 'ar');
-  const primaryRecommendation = projection.items.find(item => item.kind === 'RECOMMENDATION');
-  if (adapter?.selectRecommendation && primaryRecommendation?.recommendation?.version) {
-    adapter.selectRecommendation(primaryRecommendation.id, primaryRecommendation.recommendation.version);
-  }
   const vm = buildTodayOrchestrationViewModel(projection, { lang: l, adapter }), c = vm.copy;
   const resumeFor = item => item && adapter?.canResume ? adapter.canResume(item.id) : {enabled:false,reason:'Continuation resolver unavailable',code:'CONTINUATION_RESOLVER_UNBOUND'};
   const providerTruthHtml = (projection.sources||[]).map(source => `<div class="today-provider-row" data-state="${esc(source.state)}"><strong>${bdi(source.providerId)}</strong><span>${bdi(source.state)}</span>${source.observedAt?`<span>${bdi(source.observedAt)}</span>`:''}${source.reason?`<span>${esc(source.reason)}</span>`:''}${source.errorRef?`<span>${bdi(source.errorRef)}</span>`:''}</div>`).join('');
@@ -777,6 +773,9 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
           <button class="today-action today-action-primary" data-primary="true" data-today-action="resume" data-item-id="${esc(rec.id)}" ${recResume.enabled ? '' : `disabled aria-disabled="true" title="${esc(recResume.reason||recResume.code||'Unavailable')}"`}>
             ${esc(itemActionLabel(rec, l) || c.resume)}
           </button>
+          <button class="today-action today-action-secondary" data-today-action="select-recommendation" data-item-id="${esc(rec.id)}" data-recommendation-version="${esc(rec.recommendation?.version || '')}" aria-pressed="${vm.whyAvailability.enabled ? 'true' : 'false'}">
+            ${l === 'ar' ? (vm.whyAvailability.enabled ? 'التوصية محددة' : 'تحديد لعرض السبب') : (vm.whyAvailability.enabled ? 'Recommendation selected' : 'Select to explain')}
+          </button>
         </div>
       </div>
     `;
@@ -806,7 +805,7 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
       </div>
     `;
   } else {
-    whyHtml = empty(c.noRationale);
+    whyHtml = empty(vm.recommendation ? (vm.whyAvailability.reason || c.noRationale) : c.noRationale);
   }
 
   // Attention sidebar items
@@ -1004,7 +1003,6 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
   host.querySelectorAll('[data-today-action]').forEach(button => button.addEventListener('click', () => {
     if (button.disabled) return;
     const action = button.dataset.todayAction, itemId = button.dataset.itemId || '', version = button.dataset.recommendationVersion || '';
-    if (action === 'why' && adapter?.selectRecommendation) adapter.selectRecommendation(itemId, version);
     onAction?.({ action, itemId, version, filter: button.dataset.filter || null, invoker: button });
   }));
 
