@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "classification": "CURRENT_MISSION_FINDINGS_PROJECTION__CONTROLLER_BOUND__NOT_ACCEPTANCE",
+  "sourceBase": {
+    "commit": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+    "tree": "dd0315926270ec1f6571b82566dcdab3d65267f9",
+    "productSourceSha256": "b8b5e4a5797eb48b4cb8ae10439ff7dca5d8e2c900cb782b4802f69b21e23b7a",
+    "productSourceFiles": 289
+  },
+  "ds01Ceiling": "CONTROLLER_ACCEPTED_FOR_DATA_SUFFICIENCY_FOUNDATION__NOT_OVERALL_PRODUCT_ACCEPTANCE__NOT_MAIN_MERGED__NOT_RELEASED__NOT_DEPLOYED__STACK_NOT_FROZEN",
+  "findings": [
+    {
+      "id": "CBF-001",
+      "severity": "P0",
+      "status": "OPEN_OR_PRESERVED_FOR_SURFACE_MISSION",
+      "summary": "Official Balanced6 persistence seed can emit Structured block type `section` while the canonical Structured tree kernel does not admit that type; DS01 test-only data does not authorize hiding or redefining this normal Product truth."
+    },
+    {
+      "id": "MFC-PF-001",
+      "severity": "P1",
+      "status": "OPEN_OR_PRESERVED_FOR_SURFACE_MISSION",
+      "summary": "Library Workspace/Quick Jump/Global Nav popovers retain local open/close/Escape/focus paths beside TransientFocusOwner. Surface Writer must not repair the shared owner locally; escalate if the symptom blocks Library."
+    },
+    {
+      "id": "MFC-PF-002",
+      "severity": "P1_LATENT",
+      "status": "OPEN_OR_PRESERVED_FOR_SURFACE_MISSION",
+      "summary": "Library retains local F6 primary-region cycling beside GlobalInputKeymapOwner; avoid adding or strengthening a duplicate input owner."
+    },
+    {
+      "id": "MFC-PF-003",
+      "severity": "P1",
+      "status": "OPEN_OR_PRESERVED_FOR_SURFACE_MISSION",
+      "summary": "Preference export/import/reset path is split between canonical preference owner/Settings and donor-local Library behavior; do not create another Library-only shared settings owner."
+    },
+    {
+      "id": "D14/POST-DS01",
+      "severity": "OPEN",
+      "status": "OPEN_OR_PRESERVED_FOR_SURFACE_MISSION",
+      "summary": "Fresh surface identity, Presentation, behavior, interaction and normal-vs-DS01 data review remains required; DS01 acceptance closed data sufficiency only."
+    }
+  ],
+  "rule": "DS01 populated/test data closes data-sufficiency foundation only. It does not close inherited D14/browser/shared-owner/visual parity or normal Product/provider truth obligations."
+}
