@@ -4,7 +4,7 @@
   "role": "CHATGPT_WRITER",
   "executionCarrier": "ROUTE-CHATGPT",
   "candidateBranch": "writer/surface-w03-runs",
-  "generatedAtUtc": "2026-09-26T16:00:49.560247+00:00",
+  "generatedAtUtc": "2026-09-26T17:11:28.018950+00:00",
   "sourceBinding": {
     "capsuleDriveId": "1llO6HAntvZKFaHmBv_rcW93tKfoDtVcQ",
     "capsuleSha256": "922a454e7dffe27ae1fe5a058677bb9e567cfc21cad33a4e585019899c81a0b3",
@@ -18,13 +18,13 @@
   "changes": [
     {
       "path": "stack/native-typescript/surfaces/runs/presentation.ts",
-      "sha256": "037c1f1bdbd46435cea5ecd35c9efebc3ed0dab496cd07f004bce649fdf0874c",
-      "purpose": "Make Preflight the lifecycle-derived default major state for PREPARING/BLOCKED/READY, preserve explicit mode selection, transition successful READY Start to Operations, and add true local Run Structure collapse/reveal geometry with external accessible control."
+      "sha256": "e6bbc4d0dbf805c12ea96bb586e938ff45a8cd25782cb3354b13b1b56fc944cd",
+      "purpose": "Preserve CEP shared-region structure while strengthening Runs-local visual closure: mode-specific Preflight IA/context, Operations alert-detail-event workbench, truthful lifecycle processing band, richer selected/hover/focus/disabled states, keyboard-selectable alerts, and compact LEFT-collapsed responsive stacking."
     },
     {
       "path": "stack/native-typescript/tests/rescue/S12_W03_RUNS/runs-operational-workspace.test.ts",
-      "sha256": "484c9a82a95ca4059d9e58eb633cfea27ac2294e60cb457da3501b619154ab21",
-      "purpose": "Add direct lifecycle-to-major-state regression assertions for PVF-002."
+      "sha256": "864d7d4db7092ddc983d589acfe69fcddf915e54d4ebda824ffdfd1702668fd9",
+      "purpose": "Retain PVF-002 coverage and add mode-specific IA plus lifecycle/provider-ack presentation truth regressions."
     }
   ],
   "truthPreserved": {
@@ -49,15 +49,15 @@
       "detail": "60/60"
     },
     {
-      "name": "S12 W03 Runs operational workspace compiled lane baseline",
+      "name": "S12 W03 Runs operational workspace compiled lane",
       "result": "PASS"
     },
     {
-      "name": "Runs surface domain compiled lane baseline",
+      "name": "Runs surface domain compiled lane",
       "result": "PASS"
     },
     {
-      "name": "W03 group regression compiled lane baseline",
+      "name": "W03 group regression compiled lane",
       "result": "PASS"
     },
     {
@@ -73,74 +73,125 @@
       "result": "PASS"
     },
     {
-      "name": "candidate presentation source syntax/helper",
+      "name": "fresh Chromium visual/interaction/accessibility proof",
       "result": "PASS",
-      "detail": "PREPARING/BLOCKED/READY -> preflight; RUNNING/PAUSED -> operations; explicit mode preserved"
+      "detail": "19/19 checks; 1440 + 768; LTR/RTL; mouse/keyboard collapse; keyboard alert selection; mode-specific LEFT/RIGHT; provider-unavailable truth; no compact horizontal overflow"
     },
     {
-      "name": "candidate-transformed S12 source test against bound compiled domain + candidate presentation helper",
-      "result": "PASS"
-    },
-    {
-      "name": "fresh Chromium visual/interaction/accessibility falsification",
-      "result": "PASS",
-      "detail": "1440x1000 + compact 768; mouse/keyboard collapse/reveal; no compact horizontal overflow"
+      "name": "npm run check",
+      "result": "STRUCTURAL_PASS_WITH_EXISTING_BROWSER_ROUTE_RECEIPT_OPEN",
+      "detail": "Build authority, duplicate mechanics, writer scaffold, semantic ownership, authority/deferred/contracts checks passed; existing genuine-route browser receipt remains environment-blocked and is not promoted as current visual proof."
     }
   ],
   "visualEvidence": {
-    "classification": "FRESH_CURRENT_CANDIDATE__BROWSER_RENDERED__NAVIGATION_INDEPENDENT__NOT_GENUINE_ROUTE",
+    "classification": "FRESH_EXACT_CURRENT_CORRECTION__BROWSER_RENDERED__NAVIGATION_INDEPENDENT__NOT_GENUINE_ROUTE",
     "navigationClaim": "NOT_GENUINE_ROUTE",
-    "referenceAuthority": "capsule-bound Operations + Preflight references, both SHA-256 verified before recapture",
+    "referenceAuthority": "capsule-bound Operations CURRENT_FINAL_REFERENCE + Preflight OWNER_CONFIRMED_SUPPORTING_MAJOR_STATE_REFERENCE; interpreted beneath Owner/shared-structure/domain truth authority",
+    "dataClassification": {
+      "operations": "GOVERNED_ACCEPTANCE_SEED",
+      "preflightPreparing": "GOVERNED_ACCEPTANCE_SEED",
+      "preflightProviderBlocked": "TEST_ONLY_PRESENTATION_HARNESS",
+      "lifecycleMatrixNonFixtureVariants": "TEST_ONLY_PRESENTATION_HARNESS"
+    },
     "screenshots": {
-      "preparing-default-preflight.png": {
-        "sha256": "f6b3599fcf8bb2af761892c4959af781022af57a3619e435237a38b9b1076e8f",
-        "bytes": 252874
+      "01-operations-running-1440-ltr.png": {
+        "sha256": "10ef6a6cf953619277685ec4b7632da6f5f39fbd05b882a89ff2d38634d81185",
+        "bytes": 250563
       },
-      "running-compact-768-collapsed.png": {
-        "sha256": "28a177ec0c576cb1c1678933c9790cdc5585f693be9f2539b5c5ee7614b48f86",
-        "bytes": 117309
+      "02-preflight-preparing-1440-ltr.png": {
+        "sha256": "0bec0a47682e88cbf22b8ebae5b3bc114219270cfe8d478b92525de7ee8604ca",
+        "bytes": 230068
       },
-      "running-expanded.png": {
-        "sha256": "2c661cd4300460a0005e25a7c11613a4abee74f0b7260c1c2627dd709f8acfa3",
-        "bytes": 245690
+      "03-preflight-provider-blocked-1440-ltr.png": {
+        "sha256": "65f3ba65f6d2af59a9667826902fefa178adbc15557c45310251fbaa9183e4ff",
+        "bytes": 232544
       },
-      "running-left-collapsed.png": {
-        "sha256": "48ef700ec1e3f1f7df8a46cefbb61f1ac334cff049d516a3d69bc7c5a94324f4",
-        "bytes": 210306
+      "05-operations-pause-requested-1440-ltr.png": {
+        "sha256": "69124c47a80cc3b0dc055736f7bbec292819defd6055e4de712e18bb3eb2ace2",
+        "bytes": 255187
+      },
+      "08-operations-running-1440-rtl.png": {
+        "sha256": "26923feb6e1a0fb1b637b939b19d6f401798d16a3d00e43997bb8a34695e2e7a",
+        "bytes": 252405
+      },
+      "12-operations-running-768-collapsed-keyboard.png": {
+        "sha256": "b1d57e1d31c0ffee89186146c467bb6bfafd931a706efcb66aa9e3ab4aba69b6",
+        "bytes": 118644
+      },
+      "lifecycle-matrix-contact-sheet.png": {
+        "sha256": "a34d064b0281cdada6ef67cf586e097cd41de8de87069284fbbaf14b0a510bc0",
+        "bytes": 316405
       }
     },
     "geometry": {
-      "expandedCenter": {
-        "x": 241,
-        "width": 888,
-        "height": 778
-      },
-      "collapsedCenter": {
-        "x": 11,
-        "width": 1118,
-        "height": 778
-      },
+      "expandedCenterWidth": 888,
+      "collapsedCenterWidth": 1118,
+      "compactCenterWidth": 746,
+      "compactRightWidth": 746,
       "compactOverflowPx": 0
     },
-    "preflightDefaultMode": "preflight",
-    "runningDefaultMode": "operations",
-    "readyStartResultMode": "operations",
-    "externalRevealControl": true,
-    "keyboardRevealControl": true
+    "statesCovered": [
+      "PREPARING",
+      "BLOCKED",
+      "READY",
+      "STARTING",
+      "RUNNING",
+      "PAUSE_REQUESTED",
+      "PAUSED",
+      "RESUME_REQUESTED",
+      "STOP_REQUESTED",
+      "STOPPED",
+      "COMPLETED",
+      "FAILED",
+      "INPUT_INVALID_SOURCE_DRIFT"
+    ],
+    "directions": [
+      "LTR",
+      "RTL"
+    ],
+    "viewports": [
+      "1440x1000",
+      "768x1000"
+    ],
+    "interactionProof": "19/19 PASS",
+    "materialClosureNotes": [
+      "Preflight now uses preparation-specific LEFT and RIGHT content without inventing roles/participants or validation facts absent from current domain data.",
+      "Operations now separates alert collection, selected alert detail and recorded event timeline while preserving existing shared-region structure.",
+      "Pending lifecycle states explicitly preserve provider-ACK semantics; provider loss remains non-completion.",
+      "Compact LEFT collapse now preserves single-column center/right geometry and zero horizontal overflow."
+    ]
   },
-  "sharedOwnerEscalations": [],
+  "sharedOwnerEscalations": [
+    {
+      "owner": "WorkspaceFrame / PaneResponsiveCore / ContextInspectorCore / BottomDeepWorkCore / TransientFocusCore / LocaleLanguagePresentationCore",
+      "status": "NOT_PATCHED_LOCALLY",
+      "reason": "Any genuine-route shell/pane/transient/locale defect remains shared-owner authority; this correction only supplies Runs-local region content and responsive behavior already inside its presentation."
+    }
+  ],
   "limitations": [
-    "Fresh visual proof is navigation-independent browser rendering, not a genuine app-route navigation claim.",
-    "No Windows/ConPTY/PowerShell/SSH/native-window certification is made or implied."
+    "Fresh visual proof remains navigation-independent browser rendering, not a genuine app-route claim, because the environment blocks localhost/file route navigation.",
+    "No Windows/ConPTY/PowerShell/SSH/native-window certification is made or implied.",
+    "The current Runs domain does not supply a full reference-style roles/participants roster or the exact owner-reference validation discrepancy; those details were not fabricated for visual parity."
   ],
   "custody": {
     "writerOutputDriveFolderId": "1YSNeiRWIREZUfHe07fDVLgX1unvDTtnO",
-    "heavyEvidenceUpload": "PENDING_FINAL_PUSH_AND_DRIVE_UPLOAD",
+    "heavyEvidenceUpload": "PENDING_CORRECTION_COMMIT_AND_NEW_EVIDENCE_UPLOAD",
     "repoReceiptPath": "writer-output/SWR-W03-RUNS/HANDOFF.json"
   },
   "stopGate": "CANDIDATE_ONLY__SOLE_CONTROLLER_REVIEW_REQUIRED",
   "selfAcceptance": false,
   "mainMerge": false,
   "release": false,
-  "deployment": false
+  "deployment": false,
+  "continuationCorrection": {
+    "kind": "BOUNDED_VISUAL_CLOSURE_CORRECTION",
+    "previousCandidateCommit": "0859c8a3a3047d11d4be14471a96ff08d57cfacb",
+    "ownerInterpretation": "Visual references supply governed presentation details but do not override Owner decisions, shared CEP structure, interaction authority, or domain/provider truth; no byte-for-byte reproduction target.",
+    "scope": [
+      "Runs-local presentation",
+      "Runs-local regression tests",
+      "writer handoff evidence"
+    ],
+    "sharedOwnerSourceMutated": false
+  }
 }

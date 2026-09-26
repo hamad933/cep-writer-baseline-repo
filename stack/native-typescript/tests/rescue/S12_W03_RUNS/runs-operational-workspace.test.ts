@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {W03V34RunsAdapter} from '../../../adapters/w03-runs.js';
 import {W03RunDomain} from '../../../adapters/runs/domain.js';
 import {composeRunsSurface} from '../../../surfaces/runs/index.js';
-import {resolveRunsInitialMode} from '../../../surfaces/runs/presentation.js';
+import {describeRunsLifecycle,resolveRunsInitialMode,runsNavigationForMode} from '../../../surfaces/runs/presentation.js';
 
 const throwsCode=(fn,expected)=>{let error=null;try{fn()}catch(caught){error=caught}assert.ok(error,`expected ${expected}`);assert.equal(error.code||error.message,expected)};
 
@@ -15,6 +15,16 @@ const throwsCode=(fn,expected)=>{let error=null;try{fn()}catch(caught){error=cau
  assert.equal(resolveRunsInitialMode('RUNNING'),'operations');
  assert.equal(resolveRunsInitialMode('PAUSED'),'operations');
  assert.equal(resolveRunsInitialMode('PREPARING','operations'),'operations');
+}
+
+// Visual closure helpers — mode-specific IA stays local to Runs and lifecycle presentation never skips provider-ACK truth.
+{
+ assert.deepEqual(runsNavigationForMode('preflight').map(item=>item[0]),['overview','source','environment','run-type','policy','readiness','provenance']);
+ assert.deepEqual(runsNavigationForMode('operations').map(item=>item[0]),['overview','scenario','tasks','devices','events','telemetry','observations','artifacts']);
+ assert.equal(describeRunsLifecycle('STARTING',{stage:'REQUESTED'}).tone,'processing');
+ assert.match(describeRunsLifecycle('STARTING',{stage:'REQUESTED'}).detail,/provider acknowledgement/i);
+ assert.match(describeRunsLifecycle('STOP_REQUESTED',{stage:'REQUESTED'}).detail,/Completion is not asserted/i);
+ assert.equal(describeRunsLifecycle('FAILED').tone,'danger');
 }
 
 // INV.1 — runtime effects never rewrite authored definitions or frozen source truth.
