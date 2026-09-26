@@ -15,6 +15,20 @@ function timestampLabel(event,index){
 }
 function kindLabel(event){
   return text(event?.kindLabel,text(event?.kind,text(event?.type,'')));
+function exactGapRange(event){
+  const candidates=[
+    [event?.gapStartSequence,event?.gapEndSequence],
+    [event?.missingRange?.startSequence,event?.missingRange?.endSequence],
+    [event?.gapRange?.startSequence,event?.gapRange?.endSequence],
+    [event?.gapRange?.start,event?.gapRange?.end],
+    [event?.seq,event?.seq]
+  ];
+  for(const [start,end] of candidates){
+    const first=Number(start),last=Number(end);
+    if(Number.isInteger(first)&&Number.isInteger(last)&&first>=0&&last>=first)return Object.freeze({startSequence:first,endSequence:last});
+  }
+  return null;
+}
 }
 function detailRows(event){
   if(Array.isArray(event?.detailRows))return clone(event.detailRows);
@@ -24,6 +38,7 @@ function detailRows(event){
 }
 function normalizeEvent(event,index){
   const raw=event&&typeof event==='object'&&!Array.isArray(event)?event:{value:event};
+  const range=gap?exactGapRange(raw):null;
   const gap=raw.gap===true||String(raw.type||'').toUpperCase()==='GAP';
   return {
     eventId:eventId(raw,index),
@@ -32,7 +47,7 @@ function normalizeEvent(event,index){
     timestampLabel:timestampLabel(raw,index),
     kindLabel:gap?'GAP':kindLabel(raw),
     detailRows:detailRows(raw),
-    presentationMeta:{recordedGap:gap,sourceIndex:index,sourceEvent:clone(raw)}
+    presentationMeta:{recordedGap:gap,gapRange:range,sourceIndex:index,sourceEvent:clone(raw)}
   };
 }
 
