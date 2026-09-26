@@ -9,11 +9,11 @@ const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value))
 const required=(value,code)=>{if(typeof value!=='string'||!value.trim())throw Error(code);return value.trim()};
 const exactRef=record=>freeze({resultId:required(record?.resultId,'RESULT_ID_REQUIRED'),revisionId:required(record?.revisionId,'RESULT_REVISION_ID_REQUIRED'),manifestDigest:required(record?.manifestDigest,'RESULT_MANIFEST_DIGEST_REQUIRED')});
 const keyOf=ref=>`${ref.resultId}@${ref.revisionId}`;
+const hash=text=>{let h=0x811c9dc5;for(const ch of String(text)){h^=ch.codePointAt(0);h=Math.imul(h,0x01000193)>>>0}return h.toString(16).padStart(8,'0')};
 const inertTerminalText=value=>{if(value===undefined||value===null)return '';if(typeof value==='string')return value;if(value instanceof Uint8Array)return new TextDecoder().decode(value);try{return JSON.stringify(value,null,2)}catch{return String(value)}};
 const supersedingRef=record=>record?.supersededByRef?exactRef(record.supersededByRef):null;
 const recordedGap=record=>(record?.recordedEvents||[]).some(event=>event?.gap===true||String(event?.type||'').toUpperCase()==='GAP');
 const resultState=record=>{const explicit=String(record?.resultState||'').toUpperCase();if(['SEALED_COMPLETE','SEALED_PARTIAL','SOURCE_UNAVAILABLE'].includes(explicit))return explicit;if(record?.sourceUnavailable===true||String(record?.status||'').toUpperCase()==='SOURCE_UNAVAILABLE')return 'SOURCE_UNAVAILABLE';if(recordedGap(record)||record?.partial===true||String(record?.status||'').toUpperCase().includes('PARTIAL'))return 'SEALED_PARTIAL';return 'SEALED_COMPLETE'};
-const hash=text=>{let h=0x811c9dc5;for(const ch of String(text)){h^=ch.codePointAt(0);h=Math.imul(h,0x01000193)>>>0}return h.toString(16).padStart(8,'0')};
 
 function sealedRecord(input){
   const record=clone(input),ref=exactRef(record);
@@ -22,8 +22,8 @@ function sealedRecord(input){
   return freeze({...record,...ref,recordedEvents:clone(record.recordedEvents||[])});
 }
 function sourceEventFrom(projected){return clone(projected?.selection?.selectedEvent?.presentationMeta?.sourceEvent??null)}
-function selectedGapRange(projected){return clone(projected?.selection?.selectedEvent?.presentationMeta?.gapRange??null)}
 function gapSelected(projected){return projected?.selection?.selectedEvent?.presentationMeta?.recordedGap===true}
+function selectedGapRange(projected){return clone(projected?.selection?.selectedEvent?.presentationMeta?.gapRange??null)}
 
 export class W03ResultsDomain {
   constructor(options={}){
