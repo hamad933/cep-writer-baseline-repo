@@ -28,6 +28,7 @@ export function createReleaseCompareProvider(resolveCandidate:(ref:ReleaseCandid
       const row=resolveCandidate(ref);
       if(!row)return {state:'MISSING',reason:'Exact ReleaseCandidate identity is not present.',reasonCode:'RELEASE_CANDIDATE_EXACT_REF_MISSING',provenanceRefs:[clone(ref)]};
       const evidence=row.evidenceBinding??null;
+      const deploymentObservation=row.deploymentObservation??null;
       return {
         state:'RESOLVED',objectId:row.candidateId,revisionId:row.artifactDigest,schemaVersion:'1.0.0',
         fields:[
@@ -36,12 +37,14 @@ export function createReleaseCompareProvider(resolveCandidate:(ref:ReleaseCandid
           {path:'identity.artifactDigest',label:'Artifact digest',type:'digest',present:true,value:row.artifactDigest,provenanceRefs:[clone(ref)]},
           {path:'technical.state',label:'Technical readiness',type:'state',present:true,value:row.state,provenanceRefs:evidence?[clone(evidence)]:[]},
           {path:'technical.evidenceDigest',label:'Evidence digest',type:'digest',present:Boolean(row.evidenceDigest),...(row.evidenceDigest?{value:row.evidenceDigest}:{}),provenanceRefs:evidence?[clone(evidence)]:[]},
+          {path:'technical.evidencePackageCount',label:'Evidence package count',type:'number',present:true,value:evidence?.packages?.length??0,provenanceRefs:evidence?[clone(evidence)]:[]},
           {path:'authorization.state',label:'Owner authorization',type:'state',present:true,value:row.authorization,provenanceRefs:[]},
-          {path:'deployment.state',label:'Deployment observation',type:'state',present:true,value:row.deployment,provenanceRefs:[]},
-          {path:'deployment.observedAt',label:'Deployment observed at',type:'timestamp',present:Boolean(row.deploymentObservedAt),...(row.deploymentObservedAt?{value:row.deploymentObservedAt}:{}),provenanceRefs:[]}
+          {path:'deployment.state',label:'Deployment observation',type:'state',present:true,value:deploymentObservation?.state??'UNKNOWN',provenanceRefs:deploymentObservation?[clone(deploymentObservation)]:[]},
+          {path:'deployment.providerId',label:'Deployment provider',type:'string',present:Boolean(deploymentObservation?.providerId),...(deploymentObservation?.providerId?{value:deploymentObservation.providerId}:{}),provenanceRefs:deploymentObservation?[clone(deploymentObservation)]:[]},
+          {path:'deployment.observedAt',label:'Deployment observed at',type:'timestamp',present:Boolean(deploymentObservation?.observedAt),...(deploymentObservation?.observedAt?{value:deploymentObservation.observedAt}:{}),provenanceRefs:deploymentObservation?[clone(deploymentObservation)]:[]}
         ],
         provenanceRefs:evidence?[clone(evidence)]:[clone(ref)],
-        domainContext:{technicalReadinessIsAuthorization:false,authorizationIsDeployment:false,deploymentIsObservedNotInferred:true}
+        domainContext:{technicalReadinessIsAuthorization:false,authorizationIsDeployment:false,deploymentIsObservedNotInferred:true,deploymentProviderUnavailableMeansUnknown:true}
       };
     },
     preflightCompatibility(){return {compatible:true,reason:'',reasonCode:'',comparatorVersion:'1.0.0'};}
