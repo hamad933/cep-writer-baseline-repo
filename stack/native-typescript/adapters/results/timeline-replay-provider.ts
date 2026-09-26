@@ -15,6 +15,7 @@ function timestampLabel(event,index){
 }
 function kindLabel(event){
   return text(event?.kindLabel,text(event?.kind,text(event?.type,'')));
+}
 function exactGapRange(event){
   const candidates=[
     [event?.gapStartSequence,event?.gapEndSequence],
@@ -29,7 +30,6 @@ function exactGapRange(event){
   }
   return null;
 }
-}
 function detailRows(event){
   if(Array.isArray(event?.detailRows))return clone(event.detailRows);
   if(!event||typeof event!=='object'||Array.isArray(event))return [];
@@ -38,8 +38,8 @@ function detailRows(event){
 }
 function normalizeEvent(event,index){
   const raw=event&&typeof event==='object'&&!Array.isArray(event)?event:{value:event};
-  const range=gap?exactGapRange(raw):null;
   const gap=raw.gap===true||String(raw.type||'').toUpperCase()==='GAP';
+  const range=gap?exactGapRange(raw):null;
   return {
     eventId:eventId(raw,index),
     label:gap?text(raw.label,'Recorded gap'):eventLabel(raw,index),
