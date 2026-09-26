@@ -33,6 +33,33 @@ const canonicalBefore=JSON.stringify(adapter.project());
 adapter.nodes[0].x+=25;adapter.nodes[0].y+=15;
 assert.equal(JSON.stringify(adapter.project()),canonicalBefore);
 
+// Lifecycle truth: publication cannot bypass explicit validation, and later mutation invalidates validation.
+const lifecycleAdapter=createEnterpriseAdapter({fixture:true});
+const lifecycle=composeEnterpriseSurface({relationAdapter:lifecycleAdapter});
+assert.equal(lifecycle.bus.availability('enterprise.publish').enabled,false);
+const blockedPublish=lifecycle.domain.publish();
+assert.equal(blockedPublish.ok,false);assert.equal(blockedPublish.code,'ENTERPRISE_VALIDATION_REQUIRED_BEFORE_PUBLISH');
+lifecycle.bus.execute('enterprise.baseline',{baseline:{status:'AVAILABLE',id:'BL-LIFE',revision:'1',digest:'digest-life'}});
+assert.equal(lifecycle.domain.snapshot().twinBinding,'DETACHED');
+assert.equal(lifecycle.bus.availability('enterprise.twin').enabled,false);
+assert.equal(lifecycle.bus.availability('enterprise.publish').enabled,false);
+const validated=lifecycle.bus.execute('enterprise.validate');
+assert.equal(validated.ok,true);assert.equal(validated.snapshot.authoring,'VALIDATED');
+assert.equal(lifecycle.bus.availability('enterprise.publish').enabled,true);
+const publishedLifecycle=lifecycle.bus.execute('enterprise.publish');
+assert.equal(publishedLifecycle.ok,true);assert.equal(publishedLifecycle.snapshot.authoring,'PUBLISHED');
+const draftRevise=surface.bus.execute('enterprise.revise',{expectedVersion:surface.domain.version});
+assert.equal(draftRevise.ok,false);assert.equal(draftRevise.code,'SOURCE_REVISION_NOT_PUBLISHED');
+
+// Mutation after successful validation returns the working revision to DIRTY.
+const dirtyAdapter=createEnterpriseAdapter({fixture:true});
+const dirtySurface=composeEnterpriseSurface({relationAdapter:dirtyAdapter});
+dirtySurface.bus.execute('enterprise.baseline',{baseline:{status:'AVAILABLE',id:'BL-DIRTY',revision:'1',digest:'digest-dirty'}});
+dirtySurface.bus.execute('enterprise.validate');
+const dirtyMutation=dirtySurface.bus.execute('enterprise.create',{enterpriseId:`${dirtySurface.domain.snapshot().enterpriseId}-UPDATED`});
+assert.equal(dirtyMutation.ok,true);assert.equal(dirtyMutation.snapshot.authoring,'DIRTY');
+assert.equal(dirtySurface.bus.availability('enterprise.publish').enabled,false);
+
 // Published revision remains interactive for inspect but domain mutation is unavailable.
 const publishedAdapter=createEnterpriseAdapter({fixture:true});
 const publishedDomain=new W03EnterpriseDomain({relationAdapter:publishedAdapter,authoring:'PUBLISHED',revisionId:'ENT-REV-900-PUBLISHED',baseline:{status:'AVAILABLE',id:'BL-900',revision:'900',digest:'digest-900'}});
