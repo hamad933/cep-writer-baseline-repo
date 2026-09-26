@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "missionId": "SWR-W05-RELEASES",
+  "surface": "releases",
+  "workspace": "W05",
+  "exactProductParent": {
+    "head": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+    "tree": "dd0315926270ec1f6571b82566dcdab3d65267f9",
+    "productSourceSha256": "b8b5e4a5797eb48b4cb8ae10439ff7dca5d8e2c900cb782b4802f69b21e23b7a",
+    "productSourceFiles": 289
+  },
+  "candidateBranch": "writer/surface-w05-releases",
+  "noRequiredLiveDriveFetch": true,
+  "noBroadDiscovery": true,
+  "boundedDiscoveryEscape": {
+    "allowed": true,
+    "condition": "named bound input missing/contradictory/insufficient only",
+    "scope": "smallest listed releases/adapter/test directory",
+    "recordReason": true,
+    "stopOnAuthorityContradiction": true
+  },
+  "closedReadSet": [
+    {
+      "path": "mission-overlay/MISSION.md",
+      "mode": "READ_WHOLE_FILE",
+      "purpose": "mission contract"
+    },
+    {
+      "path": "mission-overlay/AUTHORITY_SNAPSHOT.md",
+      "mode": "READ_WHOLE_FILE",
+      "purpose": "resolved live authority/current findings"
+    },
+    {
+      "path": "mission-overlay/CAPSULE_BINDING.json",
+      "mode": "READ_WHOLE_FILE",
+      "purpose": "source/output/stop binding"
+    },
+    {
+      "path": "profiles/releases.json",
+      "mode": "READ_WHOLE_FILE",
+      "purpose": "SurfaceProfile"
+    },
+    {
+      "path": "cep-writer/references/domain-oracles/CEP_W05_WORK_MASTER_PLAN_A-M_2026-08-31.md",
+      "mode": "READ_ONLY_SECTIONS",
+      "sections": [
+        "W05 ownership",
+        "G2 Releases",
+        "L verification",
+        "M convergence"
+      ],
+      "purpose": "W05 oracle"
+    },
+    {
+      "path": "cep-writer/references/23_SURFACE_ZERO_LOSS_IDENTITY_REFERENCE_MATRIX.md",
+      "mode": "READ_ONLY_ROW",
+      "sections": [
+        "releases"
+      ],
+      "purpose": "identity/current gap"
+    },
+    {
+      "path": "cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md",
+      "mode": "READ_ONLY_ROW",
+      "sections": [
+        "Releases"
+      ],
+      "purpose": "visual authority"
+    },
+    {
+      "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/07_RELEASES/CEP_SYSTEM_RELEASES_REFERENCE.png",
+      "mode": "READ_BINARY_REFERENCE",
+      "purpose": "exact visual"
+    },
+    {
+      "path": "cep-writer/references/WRITER_LOCAL_VISUAL_CAPTURE_AND_RENDERING_METHOD.md",
+      "mode": "READ_WHOLE_FILE",
+      "purpose": "browser/visual method"
+    },
+    {
+      "path": "cep-writer/references/CEP_RUNTIME_PERSISTENCE_BRIDGE_TECHNICAL_REFERENCE.md",
+      "mode": "READ_ONLY_RELEVANT_SECTIONS",
+      "purpose": "provider/runtime truth"
+    },
+    {
+      "path": "cep-writer/authority/WRITER_OWNER_DECISIONS.csv",
+      "mode": "READ_ONLY_ROWS",
+      "sections": [
+        "OD-20260916-045",
+        "OD-20260917-053",
+        "OD-20260918-055",
+        "OD-20260920-060",
+        "OD-20260921-066",
+        "OD-20260921-067",
+        "OD-20260922-072",
+        "OD-20260922-073",
+        "OD-20260922-074",
+        "OD-20260922-075",
+        "OD-20260924-081"
+      ],
+      "purpose": "Owner snapshot cross-check"
+    },
+    {
+      "path": "stack/native-typescript/surfaces/releases/composition.ts",
+      "mode": "READ_WHOLE_FILE",
+      "purpose": "current Surface source"
+    },
+    {
+      "path": "stack/native-typescript/adapters/releases/domain-adapter.ts",
+      "mode": "READ_WHOLE_FILE",
+      "purpose": "domain truth"
+    },
+    {
+      "path": "stack/native-typescript/adapters/releases/release-compare-provider.ts",
+      "mode": "READ_WHOLE_FILE",
+      "purpose": "exact pair provider"
+    },
+    {
+      "path": "stack/native-typescript/foundation/analytical/compare.ts",
+      "mode": "READ_ONLY_RELEVANT_SYMBOLS",
+      "purpose": "canonical shared compare owner"
+    },
+    {
+      "path": "stack/native-typescript/tests/surfaces/releases/releases-tests.ts",
+      "mode": "READ_WHOLE_FILE",
+      "purpose": "focused tests"
+    },
+    {
+      "path": "stack/native-typescript/tests/rescue/S19_W05_RELEASES_CONFIGURATION/s19-tests.ts",
+      "mode": "READ_WHOLE_FILE",
+      "purpose": "shared regression read-only"
+    },
+    {
+      "path": "stack/native-typescript/tests/post-c03/D11/d11-w05-provider-integration-tests.ts",
+      "mode": "READ_WHOLE_FILE",
+      "purpose": "provider truth regression"
+    }
+  ],
+  "writableScope": [
+    "stack/native-typescript/surfaces/releases/**",
+    "stack/native-typescript/adapters/releases/**",
+    "stack/native-typescript/tests/surfaces/releases/**",
+    "writer-output/SWR-W05-RELEASES/**"
+  ],
+  "prohibitedScope": [
+    "shared foundation/composition/main/settings paths",
+    "S19 shared test mutation",
+    "package/lock/dependency mutation",
+    "cep-writer or mission-overlay mutation",
+    "DS01 mutation",
+    "dist commit",
+    "main/merge/release/deploy/acceptance"
+  ],
+  "ds01PopulatedState": "NO",
+  "visualReference": {
+    "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/07_RELEASES/CEP_SYSTEM_RELEASES_REFERENCE.png",
+    "driveId": "1vk_AGnCeOFk1TrmyoeNkxXsWk1vOloV1",
+    "sha256": "9e7c8747953bef1d8e0f2000ad00bad12667ddfd35bbcbbde4f227a812604f7a",
+    "classification": "OWNER_CONFIRMED_FINAL_REFERENCE"
+  },
+  "output": {
+    "driveCapsuleFolderId": "1dkN9FhG00tZRTyYQsBthgHufuwkkmcam",
+    "writerOutputFolderId": "1ZFZVcWLSsU6JsD0aqBPUIT4uBpFxfNCN"
+  },
+  "stopGate": "SURFACE_CANDIDATE_ONLY__CONTROLLER_DELTA_ADMISSION_REQUIRED"
+}
