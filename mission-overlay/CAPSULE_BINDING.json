@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 4,
+  "classification": "SELF_CONTAINED_WRITER_WORKSPACE_CAPSULE_V1_1__CONTROLLER_PREPARED__EXECUTION_TRANSPORT_ONLY__NOT_AUTHORITY",
+  "missionId": "SWR-W01-TODAY",
+  "surface": "today",
+  "writerGroup": "W01",
+  "writerClass": "CHATGPT_WRITER",
+  "executionCarrier": "ROUTE-CHATGPT",
+  "repository": "hamad933/cep-writer-baseline-repo",
+  "expectedProductParentCommit": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+  "expectedProductParentTree": "dd0315926270ec1f6571b82566dcdab3d65267f9",
+  "expectedProductSourceIdentity": {
+    "sha256": "b8b5e4a5797eb48b4cb8ae10439ff7dca5d8e2c900cb782b4802f69b21e23b7a",
+    "files": 289
+  },
+  "candidateBranch": "writer/surface-w01-today",
+  "capsuleTransportBranch": "capsule/surface-w01-today",
+  "noRequiredLiveDriveFetch": true,
+  "localFirst": true,
+  "continuationPolicy": "NEW_CHATGPT_MISSION__CAPSULE_V1_1_REQUIRED",
+  "visualBootstrapConfig": "mission-overlay/CAPSULE_VISUAL_BOOTSTRAP.json",
+  "visualBootstrapDisposition": "DISABLED__LOCAL_RECAPTURE_ALLOWED",
+  "allowWriterLocalRecapture": true,
+  "intermediateEvidenceCustody": "LOCAL_EPHEMERAL",
+  "heavyFinalCustody": {
+    "provider": "GOOGLE_DRIVE",
+    "folderId": "1ZOAYeK_XlMbosPaMv7N0odUHAB6nnTzs"
+  },
+  "githubRole": "PRODUCT_SOURCE_DELTA_AND_SMALL_RECEIPTS_ONLY",
+  "executionMatrixRow": "Today,W01,SWR-W01-TODAY,writer/surface-w01-today,NONE,YES,COV-W01,ESCALATE_GLOBAL_SHARED",
+  "closedReadSet": [
+    "mission-overlay/MISSION.md",
+    "mission-overlay/CAPSULE_BINDING.json",
+    "mission-overlay/LIVE_AUTHORITY_SNAPSHOT.md",
+    "mission-overlay/APPLICABLE_OWNER_DECISIONS.csv",
+    "cep-writer/references/surface-profiles/today.json",
+    "cep-writer/references/WRITER_LOCAL_VISUAL_CAPTURE_AND_RENDERING_METHOD.md",
+    "cep-writer/references/CEP_FINAL_VISUAL_INTERACTION_CONTRACT.md",
+    "cep-writer/references/visual/00_TODAY/CEP_TODAY_MAIN_ORCHESTRATION_REFERENCE.png",
+    "stack/native-typescript/tests/post-c03/D07/d07-today-presentation-authority-tests.ts",
+    "stack/native-typescript/tests/rescue/S07_W01_W02_SHELL_TODAY/s07-contracts.test.ts",
+    "stack/native-typescript/fixtures/acceptance-data/ds01-global/index.ts"
+  ],
+  "writablePaths": [
+    "stack/native-typescript/surfaces/today/**",
+    "stack/native-typescript/adapters/today/**",
+    "stack/native-typescript/tests/post-ds01/W01/TODAY/**",
+    "dist/surfaces/today/** (generated only)",
+    "dist/adapters/today/** (generated only)",
+    "dist/tests/post-ds01/W01/TODAY/** (generated only)"
+  ],
+  "readOnlyPaths": [
+    "stack/native-typescript/foundation/**",
+    "stack/native-typescript/surfaces/shell/**",
+    "stack/native-typescript/tests/post-c03/D07/d07-today-presentation-authority-tests.ts",
+    "stack/native-typescript/tests/rescue/S07_W01_W02_SHELL_TODAY/s07-contracts.test.ts",
+    "stack/native-typescript/fixtures/acceptance-data/ds01-global/**",
+    "tools/d07-falsification.mjs",
+    "tools/d07-today-visual-harness.html",
+    "all W02-W05 paths"
+  ],
+  "prohibitedPaths": [
+    "stack/native-typescript/main.ts",
+    "stack/native-typescript/surfaces/m0-controller-composition.ts",
+    "stack/native-typescript/foundation/**",
+    "all non-bound sibling Surface/domain paths",
+    "cep-writer/**",
+    "mission-overlay/** after launch",
+    ".github/**",
+    "package/lock/dependency manifests",
+    "shared Global Foundation owners",
+    "merge/release/deployment/acceptance paths"
+  ],
+  "sharedOwnerPolicy": "ESCALATE_GLOBAL_SHARED__NO_SURFACE_LOCAL_WORKAROUND",
+  "siblingCollisionGuard": "Today writable paths are disjoint from Shell; do not mutate `stack/native-typescript/surfaces/shell/**` or shared owners.",
+  "stopGate": "CANDIDATE_ONLY__NO_SELF_PROMOTION__SOLE_CONTROLLER_REVIEW_REQUIRED",
+  "productMutationBeforeCapsuleVerification": false
+}
