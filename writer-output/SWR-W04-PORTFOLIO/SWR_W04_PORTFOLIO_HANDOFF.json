@@ -1,0 +1,95 @@
+{
+  "schema": "cep.writer-handoff/1.1",
+  "missionId": "SWR-W04-PORTFOLIO",
+  "role": "SWR-W04-PORTFOLIO / CHATGPT_WRITER",
+  "executionCarrier": "ROUTE-CHATGPT",
+  "status": "CANDIDATE_ONLY__AWAITING_SOLE_CONTROLLER_REVIEW",
+  "capsule": {
+    "driveId": "1OmmqW3ZIQ_Lma2QVFe6hNvgh6ehiJ0qW",
+    "sha256": "1718dfffebd4af89e85d23d34d8f648d755247f9c6d9a41c5aea9d8ab0260571",
+    "verification": "PASS"
+  },
+  "binding": {
+    "repository": "hamad933/cep-writer-baseline-repo",
+    "branch": "writer/surface-w04-portfolio",
+    "productParentCommit": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+    "productParentTree": "dd0315926270ec1f6571b82566dcdab3d65267f9",
+    "productSourceSha256": "b8b5e4a5797eb48b4cb8ae10439ff7dca5d8e2c900cb782b4802f69b21e23b7a",
+    "productSourceFileCount": 289,
+    "sourceCandidateCommit": "298fc69dc17107ac51ff1ce654aab44f90ea88d0",
+    "sourceCandidateTree": "0c029c704d033c156eb59049116a2ea62a752763"
+  },
+  "changedSourcePaths": [
+    {
+      "path": "stack/native-typescript/adapters/portfolio/domain.ts",
+      "sha256": "d00a324df32f46c6f0a9981bb5a72f800d80d75b392015910330299dad09322a",
+      "gitBlob": "9bef896d2b7587b9e8e11abd1a1a18522a6e5a44"
+    },
+    {
+      "path": "stack/native-typescript/surfaces/portfolio/composition.ts",
+      "sha256": "88b683597e124e19367837eaa0718fe68ced4924a6c01ccfa72bd3e46a896005",
+      "gitBlob": "8148e54cf73c13258da2a3f04453b2da05c01aed"
+    },
+    {
+      "path": "stack/native-typescript/tests/surfaces/portfolio/domain.test.ts",
+      "sha256": "610dcb5cc82c8478b823b8fbdb8ba2752d67fda984cfeb49f3bc3366701760a5",
+      "gitBlob": "5ed551292ff99877bcad8e583134eb0978ffdf4e"
+    }
+  ],
+  "truthBoundaries": {
+    "portfolio": "CURATION_PROJECTION_ONLY",
+    "exactRefsOnly": true,
+    "canonicalSourceCopies": 0,
+    "upstreamDeleteAuthority": false,
+    "reviewDecisionWriteAuthority": false,
+    "analyticalCompareOwner": "CENTRAL_SHARED_OWNER",
+    "groupingAuthorityWhenUnbound": "AUTHORITY_DECISION_REQUIRED",
+    "presentationDefaultsAreProductLaw": false
+  },
+  "verification": {
+    "focusedPortfolio": "PASS",
+    "s15": "PASS",
+    "d10": "PASS",
+    "ds01": "14/14 PASS",
+    "npmTest": "210/210 PASS",
+    "runtimeCheck": "PASS",
+    "balanced6": "PASS",
+    "deterministicRuntimeBuildSha256": "7b8baf4f7c6ddead92378c5442c33182bdeadc1a786441f0d99e9dc44303a863",
+    "npmRunCheck": {
+      "status": "BASELINE_SAME_INHERITED_BROWSER_EVIDENCE_FAILURES",
+      "candidateSpecificNewFailures": 0,
+      "failureIds": [
+        "browser.lineage_receipt_truthful",
+        "browser.current_candidate_claim_truthful",
+        "browser.targeted_visual_evidence"
+      ]
+    },
+    "falsification": "10/10 PASS",
+    "interaction": "3/3 PASS",
+    "accessibilityOverflowBidi": "16/16 PASS",
+    "visual": {
+      "screenshots": 6,
+      "classification": "LOCAL_BROWSER_PRESENTATION_PROOF__NOT_GENUINE_ROUTE",
+      "routeHistoryNetworkClosure": false
+    }
+  },
+  "evidenceCustody": {
+    "driveFolderId": "1eDtV0pioDiaDe2X1pmMW66aABX1GuB3C",
+    "evidenceFileId": "1W1-Lmzb63l53BFsghhhO9OjbwAW24P_y",
+    "evidenceFileName": "SWR_W04_PORTFOLIO_EVIDENCE.zip",
+    "sha256": "88dc6b98d49dad79fa533c53a122c522abe80b75440a58d22ea963b963f6e82a",
+    "bytes": 911603
+  },
+  "escalations": [
+    "Project/Learning Objective grouping requires an approved shared registry/provider; Portfolio returns AUTHORITY_DECISION_REQUIRED while unbound.",
+    "Browser route/history/network closure is not claimed by the local presentation harness; visual evidence is explicitly NOT_GENUINE_ROUTE."
+  ],
+  "prohibitionsObserved": [
+    "NO_MAIN_MERGE",
+    "NO_RELEASE",
+    "NO_DEPLOYMENT",
+    "NO_SELF_ACCEPTANCE"
+  ],
+  "finalBranchHead": "BOUND_BY_EXTERNAL_READBACK_AFTER_THIS_HANDOFF_COMMIT",
+  "stopGate": "SWR_W04_PORTFOLIO_CANDIDATE_ONLY__SOLE_CONTROLLER_REVIEW_REQUIRED"
+}
