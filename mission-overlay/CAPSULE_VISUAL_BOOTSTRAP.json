@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 3,
+  "classification": "W05A_CONTROLLER_BOUND_VISUAL_BOOTSTRAP__NO_FABRICATED_CURRENT_PARENT_CAPTURE",
+  "enabled": true,
+  "required": false,
+  "allowWriterLocalRecapture": true,
+  "expectedProductParentCommit": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+  "minimumScreenshotCount": 1,
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1024,
+      "height": 900
+    }
+  ],
+  "states": [
+    "not_run",
+    "queued",
+    "running",
+    "technically_valid",
+    "technically_invalid",
+    "stale",
+    "unavailable",
+    "error"
+  ],
+  "environment": {},
+  "setupCommands": [],
+  "captureCommands": [],
+  "baselineGlobs": [],
+  "receiptGlobs": [],
+  "referenceBindings": [
+    {
+      "surface": "validation",
+      "referenceId": "1WNirNMPW0tyoRk9IcJSjTYNlN_hhrGcb",
+      "classification": "OWNER_CONFIRMED_FINAL_REFERENCE",
+      "sha256": "0074ab58c53f1d9e2e24a3b10c87f795701b233794b869280c0c25ba6f64178d",
+      "localPath": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/03_VALIDATION/CEP_SYSTEM_VALIDATION_REFERENCE.png"
+    }
+  ],
+  "comparisonPlan": [
+    {
+      "id": "validation-current-vs-reference",
+      "method": "LOCAL_RECAPTURE_REQUIRED",
+      "sourceParent": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+      "referenceCeiling": "OWNER_CONFIRMED_FINAL_REFERENCE",
+      "viewports": [
+        "1440x1000",
+        "1024x900"
+      ],
+      "notes": "Presentation-only reference. Provider/runtime/data truth remains independent."
+    }
+  ]
+}
