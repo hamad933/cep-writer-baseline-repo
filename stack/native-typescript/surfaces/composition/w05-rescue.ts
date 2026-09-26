@@ -13,17 +13,18 @@ export const W05_RESCUE_SURFACES=Object.freeze(['health','processing','validatio
 export function createW05RescueComposition({
   transport=createBoundedLocalRuntimeTransport(),
   analyticalCompareOwner=null,
-  commands=null
+  commands=null,
+  overrides=null
 }={}){
   if(!commands)return Object.freeze({owner:'CG6W05RescueComposition',integration:Object.freeze({state:'INTEGRATION_REQUIRED',code:'SEMANTIC_COMMAND_BUS_INTEGRATION_REQUIRED',reason:'W05 requires the controller-injected SemanticCommandBus.'}),surfaces:Object.freeze({}),surfaceIds:Object.freeze([]),commands:null,finalR6Wiring:false,balanced6:'HOLD'});
   const health=new HealthRuntimeAdapter({transport});
   const processing=new ProcessingRuntimeAdapter({transport});
-  const validation=createValidationConsumerAdapter();
+  const validation=overrides?.validation||createValidationConsumerAdapter();
   const manualAi=createManualAiSurfaceComposition({commands});
-  const backup=new ProviderAwareBackupIntegrationAdapter({transport});
-  const audit=new DurableAuditRuntimeAdapter({transport});
+  const backup=overrides?.backup||new ProviderAwareBackupIntegrationAdapter({transport});
+  const audit=overrides?.audit||new DurableAuditRuntimeAdapter({transport});
   const releases=createReleasesSurfaceComposition({commands, analyticalCompareOwner});
-  const configuration=createConfigurationSurfaceComposition({commands});
+  const configuration=createConfigurationSurfaceComposition({adapter:overrides?.configuration,commands});
   const surfaces=Object.freeze({health,processing,validation,manual_ai:manualAi,backup,audit,releases,configuration});
   return Object.freeze({
     owner:'CG6W05RescueComposition',

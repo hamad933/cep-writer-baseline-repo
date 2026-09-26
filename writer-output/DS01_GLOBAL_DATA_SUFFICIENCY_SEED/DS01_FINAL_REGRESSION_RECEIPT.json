@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 1,
+  "mission": "DS01_GLOBAL_DATA_SUFFICIENCY_SEED",
+  "classification": "CANDIDATE_ONLY__CONTROLLER_REVIEW_REQUIRED",
+  "parent": {
+    "commit": "48fec27608859d3a8e991b18b9f35f6e1dac1d19",
+    "tree": "fbe50585c4173d47f319cecfb3105b160199d42d"
+  },
+  "candidateBranch": "writer/ds01-global-data-sufficiency-seed",
+  "sourceIdentity": {
+    "sha256": "b8b5e4a5797eb48b4cb8ae10439ff7dca5d8e2c900cb782b4802f69b21e23b7a",
+    "files": 289
+  },
+  "commands": [
+    {
+      "command": "npm run build:runtime",
+      "exit": 0,
+      "result": "PASS"
+    },
+    {
+      "command": "npm run build:runtime (repeat)",
+      "exit": 0,
+      "result": "PASS"
+    },
+    {
+      "command": "npm test",
+      "exit": 0,
+      "result": "PASS"
+    },
+    {
+      "command": "npm run check",
+      "exit": 1,
+      "result": "INHERITED_PREEXISTING_RECEIPT_FAILURE",
+      "exactParentSameFailure": true,
+      "failIds": [
+        "browser.lineage_receipt_truthful",
+        "browser.current_candidate_claim_truthful",
+        "browser.targeted_visual_evidence"
+      ]
+    },
+    {
+      "command": "npm run runtime:check",
+      "exit": 0,
+      "result": "PASS"
+    },
+    {
+      "command": "npm run test:balanced6",
+      "exit": 0,
+      "result": "PASS"
+    },
+    {
+      "command": "node dist/tests/post-d13/DS01_GLOBAL_DATA_SUFFICIENCY/ds01-global-data-sufficiency.test.js",
+      "exit": 0,
+      "result": "PASS_14_OF_14"
+    },
+    {
+      "command": "npm run browser:test",
+      "exit": 1,
+      "result": "ENVIRONMENT_LIMITATION__PLAYWRIGHT_NODE_PACKAGE_UNAVAILABLE",
+      "exactParentSameFailure": true
+    }
+  ],
+  "deterministicBuild": {
+    "first": "161c72477e25ce5cbec08d0679502d7dbb0291854d98bc092ab79c7c4a29b5e2 293",
+    "second": "161c72477e25ce5cbec08d0679502d7dbb0291854d98bc092ab79c7c4a29b5e2 293",
+    "match": true
+  },
+  "visual": {
+    "totalScreenshots": 79,
+    "baseNormal": 26,
+    "baseSeeded": 26,
+    "selectedActive": 13,
+    "specialStates": 14
+  },
+  "targets": [
+    {
+      "surface": "today",
+      "normalProductState": "UNAVAILABLE/provider-unbound",
+      "ds01PopulatedState": "populated acceptance TodayProjection from Balanced6 providers",
+      "dataClassification": "LOCAL_DEV_ACCEPTANCE_SEED__DETERMINISTIC__RESETTABLE__NON_PRODUCTION",
+      "visualStatus": "POPULATED_STATE_ADJUDICABLE__FINAL_PRESENTATION_IDENTITY_PARITY_NOT_CLAIMED"
+    },
+    {
+      "surface": "library",
+      "normalProductState": "existing source-grounded Library content",
+      "ds01PopulatedState": "populated structured acceptance content with non-production classification",
+      "dataClassification": "LOCAL_DEV_ACCEPTANCE_SEED__DETERMINISTIC__RESETTABLE__NON_PRODUCTION",
+      "visualStatus": "POPULATED_STATE_ADJUDICABLE__FINAL_PRESENTATION_IDENTITY_PARITY_NOT_CLAIMED"
+    },
+    {
+      "surface": "learn",
+      "normalProductState": "provider/test-source unbound",
+      "ds01PopulatedState": "explicit test-source learning/practice state; no Mastery write",
+      "dataClassification": "LOCAL_DEV_ACCEPTANCE_SEED__DETERMINISTIC__RESETTABLE__NON_PRODUCTION",
+      "visualStatus": "POPULATED_STATE_ADJUDICABLE__FINAL_PRESENTATION_IDENTITY_PARITY_NOT_CLAIMED"
+    },
+    {
+      "surface": "rq",
+      "normalProductState": "provider-unbound/empty",
+      "ds01PopulatedState": "two exact SourceRevision records + Compare; no formal Review/durable Save",
+      "dataClassification": "TEST_ONLY_PRESENTATION_HARNESS__DETERMINISTIC__RESETTABLE__NON_PRODUCTION__NON_CANONICAL",
+      "visualStatus": "POPULATED_STATE_ADJUDICABLE__FINAL_PRESENTATION_IDENTITY_PARITY_NOT_CLAIMED"
+    },
+    {
+      "surface": "results",
+      "normalProductState": "empty recorded results",
+      "ds01PopulatedState": "two sealed Results + non-empty Replay + AAR revision + non-trivial Compare",
+      "dataClassification": "TEST_ONLY_PRESENTATION_HARNESS__DETERMINISTIC__RESETTABLE__NON_PRODUCTION__NON_CANONICAL",
+      "visualStatus": "POPULATED_STATE_ADJUDICABLE__FINAL_PRESENTATION_IDENTITY_PARITY_NOT_CLAIMED"
+    },
+    {
+      "surface": "evidence",
+      "normalProductState": "empty",
+      "ds01PopulatedState": "Candidate Evidence + two immutable admitted revisions",
+      "dataClassification": "TEST_ONLY_PRESENTATION_HARNESS__DETERMINISTIC__RESETTABLE__NON_PRODUCTION__NON_CANONICAL",
+      "visualStatus": "POPULATED_STATE_ADJUDICABLE__FINAL_PRESENTATION_IDENTITY_PARITY_NOT_CLAIMED"
+    },
+    {
+      "surface": "reviews",
+      "normalProductState": "genuine-route D14-002 remains open; L3 evidence cannot close route",
+      "ds01PopulatedState": "IN_REVIEW + CLOSED Decision with TEST_ONLY reviewer authority",
+      "dataClassification": "TEST_ONLY_PRESENTATION_HARNESS__DETERMINISTIC__RESETTABLE__NON_PRODUCTION__NON_CANONICAL",
+      "visualStatus": "POPULATED_STATE_ADJUDICABLE__FINAL_PRESENTATION_IDENTITY_PARITY_NOT_CLAIMED"
+    },
+    {
+      "surface": "mastery",
+      "normalProductState": "NOT_EVALUATED/empty",
+      "ds01PopulatedState": "MASTERED/REVALIDATION_REQUIRED plus lawful second judgment; evaluator authority not fabricated",
+      "dataClassification": "TEST_ONLY_PRESENTATION_HARNESS__DETERMINISTIC__RESETTABLE__NON_PRODUCTION__NON_CANONICAL",
+      "visualStatus": "POPULATED_STATE_ADJUDICABLE__FINAL_PRESENTATION_IDENTITY_PARITY_NOT_CLAIMED"
+    },
+    {
+      "surface": "portfolio",
+      "normalProductState": "empty memberships",
+      "ds01PopulatedState": "memberships referencing DS01 Evidence/Mastery; source truth preserved",
+      "dataClassification": "TEST_ONLY_PRESENTATION_HARNESS__DETERMINISTIC__RESETTABLE__NON_PRODUCTION__NON_CANONICAL",
+      "visualStatus": "POPULATED_STATE_ADJUDICABLE__FINAL_PRESENTATION_IDENTITY_PARITY_NOT_CLAIMED"
+    },
+    {
+      "surface": "validation",
+      "normalProductState": "NOT_RUN/empty",
+      "ds01PopulatedState": "real adapter TECHNICALLY_INVALID result + TechnicalFinding; no W04 Review authority",
+      "dataClassification": "TEST_ONLY_PRESENTATION_HARNESS__DETERMINISTIC__RESETTABLE__NON_PRODUCTION__NON_CANONICAL",
+      "visualStatus": "POPULATED_STATE_ADJUDICABLE__FINAL_PRESENTATION_IDENTITY_PARITY_NOT_CLAIMED"
+    },
+    {
+      "surface": "backup",
+      "normalProductState": "IDLE/no package",
+      "ds01PopulatedState": "real adapter package/plan/preview/stage/drill; liveRestored=false; activation authority pending",
+      "dataClassification": "TEST_ONLY_PRESENTATION_HARNESS__DETERMINISTIC__RESETTABLE__NON_PRODUCTION__NON_CANONICAL",
+      "visualStatus": "POPULATED_STATE_ADJUDICABLE__FINAL_PRESENTATION_IDENTITY_PARITY_NOT_CLAIMED"
+    },
+    {
+      "surface": "audit",
+      "normalProductState": "0 events/unverified",
+      "ds01PopulatedState": "three test-only AuditEvents through real hash-chain semantics + separate annotation",
+      "dataClassification": "TEST_ONLY_PRESENTATION_HARNESS__DETERMINISTIC__RESETTABLE__NON_PRODUCTION__NON_CANONICAL",
+      "visualStatus": "POPULATED_STATE_ADJUDICABLE__FINAL_PRESENTATION_IDENTITY_PARITY_NOT_CLAIMED"
+    },
+    {
+      "surface": "configuration",
+      "normalProductState": "EMPTY",
+      "ds01PopulatedState": "three observations + proposal/diff/validation; apply authority absent",
+      "dataClassification": "TEST_ONLY_PRESENTATION_HARNESS__DETERMINISTIC__RESETTABLE__NON_PRODUCTION__NON_CANONICAL",
+      "visualStatus": "POPULATED_STATE_ADJUDICABLE__FINAL_PRESENTATION_IDENTITY_PARITY_NOT_CLAIMED"
+    }
+  ],
+  "knownInheritedBlockers": [
+    "D14-002 Reviews genuine Product route blocker remains outside DS01 bugfix scope",
+    "Genuine-route browser gate remains open because this ChatGPT environment blocks direct URL navigation and Node Playwright package is not materialized"
+  ],
+  "newDs01BlockingDefects": [],
+  "truthCeiling": "No DS01 datum is canonical Product/provider/persistence/reviewer/Mastery/audit/backup/config authority.",
+  "evidenceCustody": {
+    "driveFileId": "1nJa9MkNsqFeBLSDImv0_H3VpTlff4bRu",
+    "driveFolderId": "1g7k170kecXiVqApPWx-cGCykyXmEdjI8",
+    "file": "DS01_GLOBAL_DATA_SUFFICIENCY_SEED_FINAL_EVIDENCE.zip",
+    "bytes": 14874835,
+    "sha256": "bb5620430df31a69f18afe6a5a11a945f0fe30b12ca43c96706368986fe2cb3d",
+    "classification": "HEAVY_FINAL_GENERATED_EVIDENCE__DRIVE_CUSTODY__NOT_PRODUCT_AUTHORITY"
+  }
+}
