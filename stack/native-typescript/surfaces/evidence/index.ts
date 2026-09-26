@@ -8,6 +8,19 @@ export const EVIDENCE_SURFACE_CONTRACT=Object.freeze({
   localSharedOwnerCreation:false,centralWiring:'CG5_OR_GLOBAL_CONVERGENCE_REQUIRED'
 });
 
+export function createEvidenceCommandAdapter(domain){
+  if(!domain||domain.owner!==EVIDENCE_DOMAIN_OWNER)throw Error('EVIDENCE_DOMAIN_REQUIRED');
+  const commandIds=Object.freeze(['evidence.inspect','evidence.import','evidence.amend','evidence.admit','evidence.sourceChoice']);
+  return Object.freeze({owner:EVIDENCE_DOMAIN_OWNER,commandIds,invoke(command,payload={}){
+    if(!commandIds.includes(command))return Object.freeze({ok:false,code:'EVIDENCE_COMMAND_UNKNOWN',mutated:false});
+    if(command==='evidence.inspect')return domain.inspect(payload.id);
+    if(command==='evidence.import')return domain.importEvidence(payload.input||payload);
+    if(command==='evidence.amend')return domain.amend(payload.id,payload.patch||{});
+    if(command==='evidence.admit')return domain.admit(payload.id,payload.options||{});
+    return domain.sourceChoice(payload.id,payload.choice??payload.input,payload.options||{});
+  }});
+}
+
 export function createEvidenceCollectionAdapter(domain){
   if(!domain||domain.owner!==EVIDENCE_DOMAIN_OWNER)throw Error('EVIDENCE_DOMAIN_REQUIRED');
   return Object.freeze({
@@ -22,6 +35,7 @@ export function createEvidenceCollectionAdapter(domain){
       {id:'source',label:'Source',minWidth:150,cell:row=>({text:row.sourceStatus,secondary:`${row.sourceId||row.id}@${row.sourceRevision||row.revisionId}`,direction:'ltr',tone:row.sourceStatus==='SUPERSEDED'?'warning':'default'})},
       {id:'review',label:'Review',minWidth:170,cell:row=>({text:row.reviewStatus||'UNREVIEWED',secondary:row.effectiveDecision||'NONE',direction:'ltr'})}
     ]),
+    entryActions:()=>Object.freeze([{id:'evidence.import',label:'Import supporting material',enabled:true,selectionRequired:false}]),
     actions:row=>Object.freeze([
       {id:'evidence.inspect',label:'Inspect exact record',enabled:true},
       {id:'evidence.amend',label:'Prepare amendment',enabled:row.status==='ADMITTED'},
@@ -62,5 +76,6 @@ export function composeEvidenceSurface({domain,analyticalCompareOwner=null}={}){
   if(!domain||domain.owner!==EVIDENCE_DOMAIN_OWNER)throw Error('EVIDENCE_DOMAIN_REQUIRED');
   const compareProvider=createEvidenceCompareProvider(domain);
   if(analyticalCompareOwner){if(analyticalCompareOwner.ownerToken!=='AnalyticalCompare')throw Error('CENTRAL_ANALYTICAL_COMPARE_REQUIRED');if(!analyticalCompareOwner.providerIds().includes(compareProvider.descriptor().providerId))analyticalCompareOwner.registerProvider(compareProvider);}
-  return Object.freeze({contract:EVIDENCE_SURFACE_CONTRACT,domain,collection:createEvidenceCollectionAdapter(domain),center:selectedId=>evidenceCenterProjection(domain,selectedId),context:createEvidenceContextProvider(domain),bottom:selectedId=>evidenceBottomProjection(domain,selectedId),compareProvider,slots:Object.freeze({LEFT:'w04.evidence.collection',CENTER:'GovernedEvidenceWorkbench',RIGHT:'w04.evidence.context',BOTTOM:'evidenceBottomProjection',TRANSIENT:'SHARED_TRANSIENT_HOST_ONLY'}),commands:Object.freeze(['evidence.inspect','evidence.import','evidence.amend','evidence.admit','evidence.sourceChoice']),compareOwner:analyticalCompareOwner?.owner||'INTEGRATION_REQUIRED'});
+  const commandAdapter=createEvidenceCommandAdapter(domain);
+  return Object.freeze({contract:EVIDENCE_SURFACE_CONTRACT,domain,collection:createEvidenceCollectionAdapter(domain),center:selectedId=>evidenceCenterProjection(domain,selectedId),context:createEvidenceContextProvider(domain),bottom:selectedId=>evidenceBottomProjection(domain,selectedId),compareProvider,commandAdapter,slots:Object.freeze({LEFT:'w04.evidence.collection',CENTER:'GovernedEvidenceWorkbench',RIGHT:'w04.evidence.context',BOTTOM:'evidenceBottomProjection',TRANSIENT:'SHARED_TRANSIENT_HOST_ONLY'}),commands:commandAdapter.commandIds,compareOwner:analyticalCompareOwner?.owner||'INTEGRATION_REQUIRED'});
 }
