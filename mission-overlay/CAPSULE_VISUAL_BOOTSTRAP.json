@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 3,
+  "classification": "CONTROLLER_PREPARED_VISUAL_BOOTSTRAP__BOOTSTRAP_ONLY__NOT_FINAL_ACCEPTANCE_EVIDENCE",
+  "enabled": true,
+  "required": true,
+  "allowWriterLocalRecapture": true,
+  "expectedProductParentCommit": "25a5f13c55096b7c4c8ef51100256a856cff75f5",
+  "minimumScreenshotCount": 7,
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1024,
+      "height": 900
+    }
+  ],
+  "states": [
+    "normal-product-truth",
+    "ds01-populated",
+    "ds01-selected-active",
+    "ds01-evidence-candidate",
+    "ds01-evidence-admitted"
+  ],
+  "environment": {},
+  "setupCommands": [],
+  "captureCommands": [],
+  "baselineGlobs": [
+    "writer-output/DS01_GLOBAL_DATA_SUFFICIENCY_SEED/visual/screenshots/evidence__*.png"
+  ],
+  "receiptGlobs": [
+    "writer-output/DS01_GLOBAL_DATA_SUFFICIENCY_SEED/visual/DS01_FINAL_VISUAL_MANIFEST.json",
+    "writer-output/DS01_GLOBAL_DATA_SUFFICIENCY_SEED/DS01_FINAL_REGRESSION_RECEIPT.json",
+    "writer-output/DS01_GLOBAL_DATA_SUFFICIENCY_SEED/DS01_FINAL_VISUAL_INSPECTION.md"
+  ],
+  "referenceBindings": [
+    {
+      "surface": "evidence",
+      "referenceId": "1DmBW-iQjkBy1EZ7VI_GQ6F_aVOBNooiY",
+      "classification": "CURRENT_FINAL_REFERENCE__PRESENTATION_ONLY",
+      "path": "cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/01_EVIDENCE_INTAKE/Cybersecurity Evidence Dashboard in Arabic(1).png",
+      "sha256": "789deee01cd946d97d8e1ff59e583026bef733cf153a70c8765389a23aaacb69"
+    }
+  ],
+  "comparisonPlan": [
+    "Open and inspect the governed final reference image and the exact B0 normal + DS01 populated bootstrap captures.",
+    "Decompose TOP/TOOLBAR/LEFT/CENTER/RIGHT/BOTTOM/TRANSIENT and compare matched state/viewports.",
+    "After any Product mutation, recapture fresh exact candidate evidence locally; bootstrap images never count as final candidate evidence.",
+    "Exercise pointer, keyboard, focus/dismissal, responsive 1440x1000 and 1024x900, RTL/LTR/Bidi and truthful data/provider state.",
+    "Genuine route/history/network proof remains separate from navigation-independent bootstrap rendering."
+  ]
+}
