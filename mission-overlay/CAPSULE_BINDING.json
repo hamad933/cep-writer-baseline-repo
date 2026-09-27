@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 5,
+  "classification": "STAGE3_HARDENED_CAPSULE_BINDING__PREPARATION_ONLY",
+  "missionId": "STAGE3-SWR-W04-MASTERY-HARDENED",
+  "writerClass": "CHATGPT_WRITER",
+  "executionCarrier": "ROUTE-CHATGPT",
+  "expectedProductParentCommit": "3e5d9de324ef304b0cedcc08e46350db32962725",
+  "expectedProductParentTree": "e6bda79aa87182b428460a65c167975a879d9f0c",
+  "expectedProductSourceSha256": "PENDING_CALIBRATION_BUILD",
+  "expectedProductSourceFiles": 289,
+  "candidateBranch": "writer/surface-w04-mastery",
+  "stagingTransportBranch": "capsule/stage3-helper-c-w04-mastery",
+  "continuationAdmission": {
+    "od": "OD-20260922-076",
+    "path": "C_NEW_FULL_CAPSULE_FALLBACK"
+  },
+  "noRequiredLiveDriveFetch": true,
+  "localFirst": true,
+  "writablePaths": [
+    "stack/native-typescript/adapters/mastery/domain.ts",
+    "stack/native-typescript/surfaces/mastery/composition.ts",
+    "stack/native-typescript/tests/surfaces/mastery/**"
+  ],
+  "readOnlyPaths": [
+    "stack/native-typescript/surfaces/composition/w04-rescue.ts",
+    "stack/native-typescript/foundation/**",
+    "stack/native-typescript/main.ts",
+    "stack/native-typescript/surfaces/m0-controller-composition.ts",
+    "cep-writer/**",
+    "tools/**",
+    "package.json",
+    "package-lock.json"
+  ],
+  "prohibitedPaths": [
+    ".github/**",
+    "governance/**",
+    "CURRENT_STATE.md",
+    "other Surface domain/adapters",
+    "local Mastery authority invention",
+    "local shared-owner fallback"
+  ],
+  "outputDriveFolderId": "1y-GbPV744ICU6biILDmcK2cfvWnsmVUP",
+  "stopGate": "CANDIDATE_ONLY__NO_SELF_PROMOTION__SOLE_CONTROLLER_REVIEW_REQUIRED"
+}

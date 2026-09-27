@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 3,
+  "classification": "STAGE3_VISUAL_BOOTSTRAP__BOOTSTRAP_ONLY__NOT_ACCEPTANCE",
+  "enabled": true,
+  "required": false,
+  "allowWriterLocalRecapture": true,
+  "expectedProductParentCommit": "3e5d9de324ef304b0cedcc08e46350db32962725",
+  "minimumScreenshotCount": 1,
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1024,
+      "height": 900
+    }
+  ],
+  "states": [
+    "NOT_EVALUATED",
+    "INSUFFICIENT_EVIDENCE",
+    "INCONCLUSIVE",
+    "NOT_MASTERED",
+    "MASTERED CURRENT",
+    "MASTERED + REVALIDATION_REQUIRED",
+    "evaluation unavailable",
+    "reevaluation requested without local state write",
+    "1440x1000",
+    "1024x900",
+    "genuine route/history/network"
+  ],
+  "environment": {},
+  "setupCommands": [
+    {
+      "id": "canonical-product-source-identity",
+      "cwd": ".",
+      "argv": [
+        "node",
+        "--input-type=module",
+        "-e",
+        "import {canonicalSourceIdentity} from './tools/source-tree-identity.mjs'; const x=await canonicalSourceIdentity(new URL('file://' + process.cwd() + '/')); console.log(JSON.stringify({sha256:x.sha256,files:x.files}));"
+      ]
+    }
+  ],
+  "captureCommands": [],
+  "baselineGlobs": [],
+  "receiptGlobs": [],
+  "referenceBindings": [
+    {
+      "id": "1blXqaIvZq-YKlOVT6dCbA7BR0qasrguj",
+      "name": "Arabic Cybersecurity Mastery Dashboard.png",
+      "classification": "CURRENT_FINAL_REFERENCE",
+      "sha256": "7784568ef868bfefdad8dcd731e20c2dbbe95bd9cdd8d81daaca7b0723d82a54"
+    }
+  ],
+  "comparisonPlan": [
+    {
+      "surface": "MASTERY",
+      "rule": "Presentation floor only"
+    }
+  ]
+}
