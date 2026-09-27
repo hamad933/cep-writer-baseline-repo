@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "surface": "AUDIT",
+  "method": "CAPSULE_V1_1",
+  "transportDecision": "NEW_FULL_CAPSULE_V1_1",
+  "repository": "hamad933/cep-writer-baseline-repo",
+  "exactBaseMain": "37c4d765e1db854505c81cbd15b90d4715f6690e",
+  "candidateBranch": "writer/surface-w05-audit-stage3",
+  "canonicalWorkflow": ".github/workflows/build-writer-workspace-capsule.yml",
+  "workflowBlobSha": "175875940ad15ff5e73b2f1f91a8e0e10a83ae83",
+  "builder": "tools/writer-capsule/build_capsule.py",
+  "builderBlobSha": "75346b1e82a258a2b0b2423a009d814acee9aa0a",
+  "bindingTemplateBlobSha": "f77c98c8bdf914307e29781b5245a417a2b411e8",
+  "requiredWorkspaceCapsulePayload": [
+    "repo.bundle",
+    "CAPSULE_BINDING.json",
+    "CAPSULE_MANIFEST.json",
+    "SHA256SUMS.txt",
+    "bootstrap.sh",
+    "bootstrap.ps1",
+    "verify_capsule.py",
+    "README_FIRST.md",
+    "complete mission-bound packet",
+    "visual-bootstrap/VISUAL_BOOTSTRAP_MANIFEST.json",
+    "source-bound bootstrap/current screenshots and receipts when capture is material/available"
+  ],
+  "helperScopeResult": "BUILD_INPUT_READY__WORKSPACE_CAPSULE_WORKFLOW_NOT_EXECUTED__NO_WRITER_LAUNCH",
+  "controllerNextGate": "Materialize canonical Capsule v1.1 from exact branch/base, verify downloaded artifact, then independently prelaunch review before Writer launch."
+}
