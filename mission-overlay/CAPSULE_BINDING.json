@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 4,
+  "classification": "STAGE3_HARDENED_BINDING__CANDIDATE_ONLY__SOLE_CONTROLLER_REVIEW_REQUIRED",
+  "missionId": "SWR-W05-CONFIGURATION-STAGE3-HARDENED",
+  "surface": "CONFIGURATION",
+  "writerClass": "CHATGPT_WRITER",
+  "executionCarrier": "ROUTE-CHATGPT",
+  "controllerPreparedWorkspace": true,
+  "repository": "hamad933/cep-writer-baseline-repo",
+  "repositoryMainAtPreparation": "37c4d765e1db854505c81cbd15b90d4715f6690e",
+  "repositoryMainTreeAtPreparation": "57dbde7a730c687a341748dad4a725a052653f0b",
+  "expectedProductParentCommit": "37c4d765e1db854505c81cbd15b90d4715f6690e",
+  "expectedProductSourceSha256": "480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641",
+  "expectedProductSourceFiles": 273,
+  "candidateBranch": "writer/surface-w05-configuration-stage3",
+  "authorityRoot": "cep-writer/",
+  "missionOverlayRoot": "mission-overlay/",
+  "noRequiredLiveDriveFetch": true,
+  "localFirst": true,
+  "continuationPolicy": "NEW_FULL_CAPSULE_V1_1",
+  "salvageCandidateCommit": null,
+  "salvageCandidateStatus": "NO_DURABLE_RESULT__NEW_FULL_CAPSULE_V1_1",
+  "writableScope": [
+    "stack/native-typescript/adapters/configuration/domain-adapter.ts",
+    "stack/native-typescript/surfaces/configuration/composition.ts",
+    "stack/native-typescript/surfaces/composition/w05-rescue.ts",
+    "stack/native-typescript/tests/surface-restoration/configuration/**"
+  ],
+  "readOnlyScope": [
+    "cep-writer/references/surface-profiles/configuration.json",
+    "stack/native-typescript/main.ts",
+    "stack/native-typescript/foundation/workspace-host.ts",
+    "stack/native-typescript/foundation/global/**",
+    "stack/native-typescript/foundation/collection/**",
+    "stack/native-typescript/foundation/audit/provenance.ts",
+    "stack/native-typescript/foundation/analytical/compare.ts",
+    "package.json",
+    "tools/serve.mjs",
+    "tools/check-duplicate-mechanics.mjs"
+  ],
+  "prohibitedScope": [
+    "main direct push",
+    "governance/CURRENT_STATE mutation",
+    "Product acceptance",
+    "merge",
+    "release",
+    "deployment",
+    "stack freeze",
+    "sibling Surface domain semantics",
+    "local shared-owner forks"
+  ],
+  "sharedHotspot": {
+    "path": "stack/native-typescript/surfaces/composition/w05-rescue.ts",
+    "owner": "SWR-W05-CONFIGURATION",
+    "thisSurfaceRole": "SOLE_WRITER"
+  },
+  "visualBootstrapConfig": "TEST_HARNESS_AND_VISUAL_BOOTSTRAP.json",
+  "allowWriterLocalRecapture": true,
+  "intermediateEvidenceCustody": "LOCAL_EPHEMERAL",
+  "heavyFinalCustody": "GOOGLE_DRIVE_WHEN_REQUIRED",
+  "githubRole": "SOURCE_DELTA_AND_SMALL_RECEIPTS_ONLY",
+  "stopGate": "CANDIDATE_ONLY__NO_SELF_PROMOTION__SOLE_CONTROLLER_REVIEW_REQUIRED"
+}
