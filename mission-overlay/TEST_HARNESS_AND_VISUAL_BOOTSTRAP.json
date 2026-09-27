@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "surface": "VALIDATION",
+  "classification": "PRELAUNCH_TEST_AND_VISUAL_BOOTSTRAP_METADATA__NO_EXECUTION_PERFORMED_BY_HELPER_D",
+  "repository": "hamad933/cep-writer-baseline-repo",
+  "boundMain": "37c4d765e1db854505c81cbd15b90d4715f6690e",
+  "packageJsonSha": "627da2d37eda687d4d5c8f0d5fde1b6d9dc91323",
+  "nodeEngine": "22.16.0",
+  "playwrightDevDependency": "1.62.1",
+  "knownScripts": {
+    "test": "node tools/test-models.mjs",
+    "check": "node tools/check-build-authority.mjs && node tools/check-duplicate-mechanics.mjs && node tools/test-writer-scaffold.mjs && python3 tools/check-w03-semantic-ownership.py && node tools/check-authority-intake.mjs && node tools/check-deferred-boundary.mjs && node tools/check-contracts.mjs && node tools/vs05-read-mode-matrix.mjs && node tools/check-vs05-command-ownership.mjs",
+    "browser:test": "node tools/browser-conformance.mjs",
+    "dev": "node tools/serve.mjs",
+    "runtime:local": "node stack/local-runtime/server.mjs"
+  },
+  "requiredTestLayers": [
+    "targeted Surface/domain positive tests",
+    "negative/falsification cases from ACCEPTANCE_AND_FALSIFICATION_MATRIX.csv",
+    "npm test",
+    "npm run check",
+    "build/runtime proof required by current repository contract",
+    "browser/interaction proof for Presentation-impacting changes",
+    "duplicate-mechanics / shared-owner regression proof",
+    "source identity + clean worktree before and after"
+  ],
+  "visualReference": {
+    "driveId": "1WNirNMPW0tyoRk9IcJSjTYNlN_hhrGcb",
+    "classification": "OWNER_CONFIRMED_FINAL_REFERENCE"
+  },
+  "viewports": [
+    "1440 full frame",
+    "~1024 full frame"
+  ],
+  "requiredModes": [
+    "keyboard/focus",
+    "200% zoom",
+    "reduced-motion where applicable",
+    "forced-colors where applicable",
+    "RTL",
+    "LTR",
+    "Bidi isolation"
+  ],
+  "requiredStates": [
+    "EMPTY",
+    "LOADING",
+    "ERROR",
+    "UNAVAILABLE",
+    "STALE",
+    "READ_ONLY",
+    "PROCESSING",
+    "SUCCESS",
+    "NOT_RUN",
+    "QUEUED",
+    "RUNNING",
+    "TECHNICALLY_VALID",
+    "TECHNICALLY_INVALID"
+  ],
+  "captureLaw": "L1-L8 recovery ladder; navigation-independent browser render may prove Presentation only and must be labeled NOT_GENUINE_ROUTE. Genuine route/history/network/platform proof remains separate.",
+  "debugProofChromeInNormalProductUI": "FORBIDDEN",
+  "bootstrapStatus": "METADATA_READY__SOURCE_BOUND_CONTROLLER_CAPTURE_NOT_EXECUTED_BY_HELPER_D",
+  "writerMustRecaptureAfterMutation": true
+}
