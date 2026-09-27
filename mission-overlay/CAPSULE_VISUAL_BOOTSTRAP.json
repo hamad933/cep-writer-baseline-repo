@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 3,
+  "classification": "STAGE3_CALIBRATION_VISUAL_BOOTSTRAP__BOOTSTRAP_ONLY__NOT_ACCEPTANCE",
+  "enabled": true,
+  "required": false,
+  "allowWriterLocalRecapture": true,
+  "expectedProductParentCommit": "bf4440403956d6c7b75c9859f40be3c1f267185d",
+  "minimumScreenshotCount": 1,
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1024,
+      "height": 900
+    }
+  ],
+  "states": [
+    "STAGE3_PACKET_BOUND_STATES"
+  ],
+  "environment": {},
+  "setupCommands": [
+    {
+      "id": "canonical-product-source-identity",
+      "cwd": ".",
+      "argv": [
+        "node",
+        "--input-type=module",
+        "-e",
+        "import {canonicalSourceIdentity} from './tools/source-tree-identity.mjs'; const x=await canonicalSourceIdentity(new URL('file://' + process.cwd() + '/')); console.log(JSON.stringify({sha256:x.sha256,files:x.files}));"
+      ]
+    }
+  ],
+  "captureCommands": [],
+  "baselineGlobs": [],
+  "receiptGlobs": [],
+  "referenceBindings": [
+    {
+      "id": "1Fmoa7SS7hG_FljA984cJBdW5zIhCCcJw",
+      "classification": "CURRENT_FINAL_REFERENCE"
+    }
+  ],
+  "comparisonPlan": [
+    {
+      "surface": "PORTFOLIO",
+      "rule": "Use governed final reference as Presentation floor; fresh local recapture required."
+    }
+  ]
+}
