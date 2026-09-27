@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 5,
+  "classification": "STAGE3_HARDENED_CAPSULE_BINDING__PREPARATION_ONLY",
+  "missionId": "STAGE3-SWR-W04-PORTFOLIO-HARDENED",
+  "writerClass": "CHATGPT_WRITER",
+  "executionCarrier": "ROUTE-CHATGPT",
+  "expectedProductParentCommit": "bf4440403956d6c7b75c9859f40be3c1f267185d",
+  "expectedProductParentTree": "c01b64010fe9b7de04a9cd4a5d017d5aa1c11bf5",
+  "expectedProductSourceSha256": "PENDING_CALIBRATION_BUILD",
+  "expectedProductSourceFiles": 289,
+  "candidateBranch": "writer/surface-w04-portfolio",
+  "stagingTransportBranch": "capsule/stage3-helper-c-w04-portfolio",
+  "continuationAdmission": {
+    "od": "OD-20260922-076",
+    "path": "C_NEW_FULL_CAPSULE_FALLBACK"
+  },
+  "noRequiredLiveDriveFetch": true,
+  "localFirst": true,
+  "writablePaths": [
+    "stack/native-typescript/adapters/portfolio/domain.ts",
+    "stack/native-typescript/surfaces/portfolio/composition.ts",
+    "stack/native-typescript/tests/surfaces/portfolio/**"
+  ],
+  "readOnlyPaths": [
+    "stack/native-typescript/surfaces/composition/w04-rescue.ts",
+    "stack/native-typescript/foundation/**",
+    "stack/native-typescript/main.ts",
+    "stack/native-typescript/surfaces/m0-controller-composition.ts",
+    "cep-writer/**",
+    "tools/**",
+    "package.json",
+    "package-lock.json"
+  ],
+  "prohibitedPaths": [
+    ".github/**",
+    "governance/**",
+    "CURRENT_STATE.md",
+    "other Surface domain/adapters",
+    "source copy/delete authority",
+    "invented grouping registry",
+    "local shared-owner fallback"
+  ],
+  "outputDriveFolderId": "1qqaJoWyJCyyh8odKpTHpdrxSPGExUXAs",
+  "stopGate": "CANDIDATE_ONLY__NO_SELF_PROMOTION__SOLE_CONTROLLER_REVIEW_REQUIRED"
+}

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 3,
+  "classification": "STAGE3_VISUAL_BOOTSTRAP__BOOTSTRAP_ONLY__NOT_ACCEPTANCE",
+  "enabled": true,
+  "required": false,
+  "allowWriterLocalRecapture": true,
+  "expectedProductParentCommit": "bf4440403956d6c7b75c9859f40be3c1f267185d",
+  "minimumScreenshotCount": 1,
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1024,
+      "height": 900
+    }
+  ],
+  "states": [
+    "EMPTY",
+    "RESOLVABLE",
+    "SOURCE_SUPERSEDED",
+    "SOURCE_WITHDRAWN",
+    "UNAVAILABLE",
+    "UNGROUPED",
+    "REGISTRY_BOUND",
+    "AUTHORITY_PENDING",
+    "export exact refs",
+    "1440x1000",
+    "1024x900",
+    "genuine route/history/network"
+  ],
+  "environment": {},
+  "setupCommands": [
+    {
+      "id": "canonical-product-source-identity",
+      "cwd": ".",
+      "argv": [
+        "node",
+        "--input-type=module",
+        "-e",
+        "import {canonicalSourceIdentity} from './tools/source-tree-identity.mjs'; const x=await canonicalSourceIdentity(new URL('file://' + process.cwd() + '/')); console.log(JSON.stringify({sha256:x.sha256,files:x.files}));"
+      ]
+    }
+  ],
+  "captureCommands": [],
+  "baselineGlobs": [],
+  "receiptGlobs": [],
+  "referenceBindings": [
+    {
+      "id": "1Fmoa7SS7hG_FljA984cJBdW5zIhCCcJw",
+      "name": "Cybersecurity Portfolio Evidence Dashboard.png",
+      "classification": "CURRENT_FINAL_REFERENCE",
+      "sha256": "3651bff6bee8098e8ab7633c3d5a9ebec0a0cb7e8701466932d21f53988ea37b"
+    }
+  ],
+  "comparisonPlan": [
+    {
+      "surface": "PORTFOLIO",
+      "rule": "Presentation floor only"
+    }
+  ]
+}
