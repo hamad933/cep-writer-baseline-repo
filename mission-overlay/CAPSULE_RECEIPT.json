@@ -1,0 +1,19 @@
+{
+  "schema": "cep.stage3.capsule-receipt/1",
+  "surface": "HEALTH",
+  "classification": "CONTROLLER_HELPER_C_STAGE3_CALIBRATION_PASS__FINAL_CAPSULE_REBUILD_REQUIRED",
+  "sourceParent": {
+    "commit": "2dd4c3eb7b412e9924688728c7e60c3933d9d208",
+    "tree": "994c4da514fbe36342bcb0c2a388de3cbdb7354e",
+    "canonicalSourceSha256": "9b00f10e3d9fe1532daae59dbf4844178c4d82d73bc25ad8dd248039dc781fc6",
+    "canonicalSourceFiles": 290
+  },
+  "bindingCommit": "bb399d5a022e90a5b84e5f8e02322dfe55117b95",
+  "verification": [
+    "canonicalSourceIdentity PASS",
+    "trackedSourceGuard PASS",
+    "git bundle verify PASS on calibration run",
+    "fresh clean materialization PASS"
+  ],
+  "stopGate": "CANDIDATE_ONLY__NO_SELF_PROMOTION__SOLE_CONTROLLER_REVIEW_REQUIRED"
+}
