@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 3,
+  "classification": "STAGE3_VISUAL_BOOTSTRAP__BOOTSTRAP_ONLY__NOT_ACCEPTANCE",
+  "enabled": true,
+  "required": false,
+  "allowWriterLocalRecapture": true,
+  "expectedProductParentCommit": "2dd4c3eb7b412e9924688728c7e60c3933d9d208",
+  "minimumScreenshotCount": 1,
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1024,
+      "height": 900
+    }
+  ],
+  "states": [
+    "AVAILABLE_DATA",
+    "AVAILABLE_EMPTY",
+    "STALE",
+    "UNAVAILABLE with last-known",
+    "ERROR with last-known",
+    "worker ALIVE",
+    "worker EXPIRED",
+    "worker UNKNOWN",
+    "refresh FETCHING",
+    "durable diagnostic success/error",
+    "1440x1000",
+    "1024x900",
+    "genuine route/history/network"
+  ],
+  "environment": {},
+  "setupCommands": [
+    {
+      "id": "canonical-product-source-identity",
+      "cwd": ".",
+      "argv": [
+        "node",
+        "--input-type=module",
+        "-e",
+        "import {canonicalSourceIdentity} from './tools/source-tree-identity.mjs'; const x=await canonicalSourceIdentity(new URL('file://' + process.cwd() + '/')); console.log(JSON.stringify({sha256:x.sha256,files:x.files}));"
+      ]
+    }
+  ],
+  "captureCommands": [],
+  "baselineGlobs": [],
+  "receiptGlobs": [],
+  "referenceBindings": [
+    {
+      "id": "1VKIQOlLJNMkd1jLNV7CBGdiBxoAlpUU6",
+      "name": "Arabic Operational Health Dashboard.png",
+      "classification": "CURRENT_FINAL_REFERENCE",
+      "sha256": "f5f789687f09f115a75e96a315d74ba5d664853b4430cc766fcc70eaf8aa17b6"
+    }
+  ],
+  "comparisonPlan": [
+    {
+      "surface": "HEALTH",
+      "rule": "Presentation floor only"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 5,
+  "classification": "STAGE3_HARDENED_CAPSULE_BINDING__PREPARATION_ONLY",
+  "missionId": "STAGE3-SWR-W05-HEALTH-HARDENED",
+  "writerClass": "CHATGPT_WRITER",
+  "executionCarrier": "ROUTE-CHATGPT",
+  "expectedProductParentCommit": "2dd4c3eb7b412e9924688728c7e60c3933d9d208",
+  "expectedProductParentTree": "994c4da514fbe36342bcb0c2a388de3cbdb7354e",
+  "expectedProductSourceSha256": "PENDING_CALIBRATION_BUILD",
+  "expectedProductSourceFiles": 290,
+  "candidateBranch": "writer/surface-w05-health",
+  "stagingTransportBranch": "capsule/stage3-helper-c-w05-health",
+  "continuationAdmission": {
+    "od": "OD-20260922-076",
+    "path": "C_NEW_FULL_CAPSULE_FALLBACK"
+  },
+  "noRequiredLiveDriveFetch": true,
+  "localFirst": true,
+  "writablePaths": [
+    "stack/native-typescript/adapters/health-runtime.ts",
+    "stack/native-typescript/surfaces/health/**",
+    "stack/native-typescript/tests/surface-restoration/health/**",
+    "stack/native-typescript/tests/surfaces/health/**"
+  ],
+  "readOnlyPaths": [
+    "stack/native-typescript/surfaces/composition/w05-rescue.ts",
+    "stack/native-typescript/foundation/**",
+    "stack/native-typescript/main.ts",
+    "stack/native-typescript/surfaces/m0-controller-composition.ts",
+    "cep-writer/**",
+    "tools/**",
+    "package.json",
+    "package-lock.json"
+  ],
+  "prohibitedPaths": [
+    ".github/**",
+    "governance/**",
+    "CURRENT_STATE.md",
+    "other Surface domain/adapters",
+    "local BottomDeepWork/shared-owner fallback",
+    "Product weakening to hide TypeScript diagnostics"
+  ],
+  "outputDriveFolderId": "14JbZHmVTfbnMdlUh2HbUujUWSicRCX8M",
+  "stopGate": "CANDIDATE_ONLY__NO_SELF_PROMOTION__SOLE_CONTROLLER_REVIEW_REQUIRED"
+}
