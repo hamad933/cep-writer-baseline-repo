@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 3,
+  "classification": "STAGE3_VISUAL_BOOTSTRAP__CONTRACT_DERIVED__NOT_ACCEPTANCE",
+  "enabled": true,
+  "required": false,
+  "allowWriterLocalRecapture": true,
+  "expectedProductParentCommit": "eafdf6661a7bc0d96cdefcf5aee8fc1041dcaa39",
+  "minimumScreenshotCount": 0,
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1024,
+      "height": 900
+    }
+  ],
+  "states": [
+    "EMPTY successful no jobs",
+    "PENDING",
+    "RUNNING",
+    "RETRY_WAIT",
+    "TIMED_OUT",
+    "CANCEL_REQUESTED",
+    "CANCELLED",
+    "COMPLETED",
+    "FAILED",
+    "provider UNAVAILABLE with historical inspection",
+    "provider ERROR distinct",
+    "validation NONE",
+    "validation PENDING",
+    "validation ACKNOWLEDGED",
+    "validation FAILED",
+    "1440x1000",
+    "1024x900",
+    "genuine route/history/network"
+  ],
+  "environment": {},
+  "setupCommands": [
+    {
+      "id": "canonical-product-source-identity",
+      "cwd": ".",
+      "argv": [
+        "node",
+        "--input-type=module",
+        "-e",
+        "import {canonicalSourceIdentity} from './tools/source-tree-identity.mjs'; const x=await canonicalSourceIdentity(new URL('file://' + process.cwd() + '/')); console.log(JSON.stringify({sha256:x.sha256,files:x.files}));"
+      ]
+    }
+  ],
+  "captureCommands": [],
+  "baselineGlobs": [],
+  "receiptGlobs": [],
+  "referenceBindings": [],
+  "comparisonPlan": [
+    {
+      "surface": "PROCESSING",
+      "rule": "No standalone reference; compare against current SurfaceProfile/contract and canonical shared mechanics."
+    }
+  ]
+}

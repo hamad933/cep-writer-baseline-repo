@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 5,
+  "classification": "STAGE3_HARDENED_CAPSULE_BINDING__PREPARATION_ONLY",
+  "missionId": "STAGE3-SWR-W05-PROCESSING-HARDENED",
+  "writerClass": "CHATGPT_WRITER",
+  "executionCarrier": "ROUTE-CHATGPT",
+  "expectedProductParentCommit": "eafdf6661a7bc0d96cdefcf5aee8fc1041dcaa39",
+  "expectedProductParentTree": "4a26e8e1e610fadac607e1d6ddd572362c97676f",
+  "expectedProductSourceSha256": "PENDING_CALIBRATION_BUILD",
+  "expectedProductSourceFiles": 290,
+  "candidateBranch": "writer/surface-w05-processing",
+  "stagingTransportBranch": "capsule/stage3-helper-c-w05-processing",
+  "continuationAdmission": {
+    "od": "OD-20260922-076",
+    "path": "C_NEW_FULL_CAPSULE_FALLBACK"
+  },
+  "noRequiredLiveDriveFetch": true,
+  "localFirst": true,
+  "writablePaths": [
+    "stack/native-typescript/adapters/processing-runtime.ts",
+    "stack/native-typescript/surfaces/processing/**",
+    "stack/native-typescript/tests/surface-restoration/processing/**",
+    "stack/native-typescript/tests/surfaces/processing/**"
+  ],
+  "readOnlyPaths": [
+    "tools/w05-processing-capability-proof.mjs",
+    "stack/native-typescript/surfaces/composition/w05-rescue.ts",
+    "stack/native-typescript/foundation/**",
+    "stack/native-typescript/main.ts",
+    "stack/native-typescript/surfaces/m0-controller-composition.ts",
+    "cep-writer/**",
+    "tools/**",
+    "package.json",
+    "package-lock.json"
+  ],
+  "prohibitedPaths": [
+    ".github/**",
+    "governance/**",
+    "CURRENT_STATE.md",
+    "other Surface domain/adapters",
+    "mutation of Product to satisfy stale capability harness",
+    "local BottomDeepWork/shared-owner fallback"
+  ],
+  "outputDriveFolderId": "1UxwSVQIlhfcvz9Jz50JgSs1WZ_FAsCfx",
+  "stopGate": "CANDIDATE_ONLY__NO_SELF_PROMOTION__SOLE_CONTROLLER_REVIEW_REQUIRED"
+}
