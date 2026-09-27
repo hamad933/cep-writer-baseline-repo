@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 3,
+  "classification": "STAGE3_VISUAL_BOOTSTRAP__BOOTSTRAP_ONLY__NOT_ACCEPTANCE",
+  "enabled": true,
+  "required": false,
+  "allowWriterLocalRecapture": true,
+  "expectedProductParentCommit": "2d7330571d682def0534246b7fe16400aedba717",
+  "minimumScreenshotCount": 1,
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1024,
+      "height": 900
+    }
+  ],
+  "states": [
+    "governed populated",
+    "PREPARED",
+    "VALIDATED",
+    "REJECTED",
+    "ADMITTED",
+    "ACTIVE",
+    "SOURCE_SUPERSEDED",
+    "WITHDRAWN",
+    "EMPTY",
+    "UNAVAILABLE",
+    "ERROR",
+    "1440x1000",
+    "1024x900",
+    "genuine route/history/network"
+  ],
+  "environment": {},
+  "setupCommands": [
+    {
+      "id": "canonical-product-source-identity",
+      "cwd": ".",
+      "argv": [
+        "node",
+        "--input-type=module",
+        "-e",
+        "import {canonicalSourceIdentity} from './tools/source-tree-identity.mjs'; const x=await canonicalSourceIdentity(new URL('file://' + process.cwd() + '/')); console.log(JSON.stringify({sha256:x.sha256,files:x.files}));"
+      ]
+    }
+  ],
+  "captureCommands": [],
+  "baselineGlobs": [],
+  "receiptGlobs": [
+    "writer-output/DS01_GLOBAL_DATA_SUFFICIENCY_SEED/*.json"
+  ],
+  "referenceBindings": [
+    {
+      "id": "1DmBW-iQjkBy1EZ7VI_GQ6F_aVOBNooiY",
+      "name": "Cybersecurity Evidence Dashboard in Arabic(1).png",
+      "classification": "CURRENT_FINAL_REFERENCE",
+      "sha256": "789deee01cd946d97d8e1ff59e583026bef733cf153a70c8765389a23aaacb69"
+    }
+  ],
+  "comparisonPlan": [
+    {
+      "surface": "EVIDENCE",
+      "rule": "Reference is Presentation floor only; local recapture required."
+    }
+  ]
+}
