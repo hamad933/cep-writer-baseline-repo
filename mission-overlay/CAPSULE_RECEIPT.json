@@ -1,0 +1,19 @@
+{
+  "schema": "cep.stage3.capsule-receipt/1",
+  "surface": "EVIDENCE",
+  "classification": "CONTROLLER_HELPER_C_STAGE3_CALIBRATION_PASS__FINAL_CAPSULE_REBUILD_REQUIRED",
+  "sourceParent": {
+    "commit": "2d7330571d682def0534246b7fe16400aedba717",
+    "tree": "b46aef98dffb2aec4352599618a7e4980025715f",
+    "canonicalSourceSha256": "566d78328068706dfec473550ad1ad52c4e1e11ffc9a528b21f95ee880b2b237",
+    "canonicalSourceFiles": 289
+  },
+  "bindingCommit": "0b27d9b4e69479047c76dc2e26ef8ceed06db470",
+  "verification": [
+    "canonicalSourceIdentity PASS",
+    "trackedSourceGuard PASS",
+    "git bundle verify PASS on calibration run",
+    "fresh clean materialization PASS"
+  ],
+  "stopGate": "CANDIDATE_ONLY__NO_SELF_PROMOTION__SOLE_CONTROLLER_REVIEW_REQUIRED"
+}
