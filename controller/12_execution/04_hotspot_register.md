@@ -32,4 +32,14 @@ slot; nothing is applied by the requesting Writer.
 
 | Slot | Applied at commit | Tree | Regression delta | Result |
 |---|---|---|---|---|
-| — | — | — | — | none yet |
+| shared (Coordinator-granted, directive §5/§19) | `c855bc8` | RC-1/RC-2/RC-3: `renderTypedCollectionStage` CENTER/RIGHT split + `contextFor`, `collectionMode:'list'` dropped at the W04/W05 call sites, `semanticProjection` informative projection, fabricated `studio-node-1/2/3` removed | 7 typed-collection consumers + S14/S15/S17/S19/CG5/D10/D11/D03A all PASS; `npm test` 210/0; `check-contracts` unchanged | **APPLIED** |
+| shared (Coordinator-granted, F5) | `37a533a` | `m0` mount path: per-surface read-only `BottomDeepWorkOwner` provider via `wave3Assembly.registerBottomProvider`; `renderTypedCollectionStage` stops the duplicate `#domainBottomRegion` write when the shelf is authoritative | measured `data-bottom-availability` UNAVAILABLE→AVAILABLE, provider owner `''→'W04EvidenceDomain'`/`'ConfigurationDomainAdapter'`; `w3d` exit 0, closed hidden+inert lifecycle preserved | **APPLIED** |
+
+Still unapplied (filed, awaiting slot): W01 Today LEFT `Filter` (slot 2) · W03 `H1a/H1b/H2/H3`
+runs lifecycle + toolbar + telemetry + Preflight, `H4` Results identity/mode distinctness, `H5`
+scenarios/labs RIGHT lens · shared F5 remainder (`domain` in `BOTTOM_DEEP_WORK_PROVIDER_FAMILIES`
++ `domainPresentation()` section renderer — **no `main.ts` hunk needed**).
+
+**Rule applied at every application:** re-run the consumer regression and re-bind the browser
+receipt afterwards. `browser.current_candidate_claim_truthful` is currently red purely because
+source is still moving under the live remediation agents; it is re-bound once source settles.
