@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "label": "pre-writer-baseline",
+  "note": "STATIC pre-Writer baseline failure set, measured by the Coordinator before any Writer dispatch. Sources: (a) full compiled-corpus sweep of all 86 dist test files at HEAD 48fec276 / worktree candidate c82cec63..., (b) tests/surfaces/*/surface.test.mjs sweep, (c) npm run check with each of its 9 sub-commands run individually. 14 compiled-corpus failures + 4 surface-route failures + 1 check sub-command failure. tests/surfaces/today/surface.test.mjs was repaired by W01 after this baseline was captured; it is recorded here in its true pre-Writer state (FAIL).",
+  "capturedAt": "2026-09-29T03:05:00Z",
+  "commit": "48fec27608859d3a8e991b18b9f35f6e1dac1d19",
+  "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+  "results": [
+    {"id": "dist/tests/post-c03/LCORR03/lcorr03-central-integration-falsification-tests.js", "status": "FAIL", "owner": "W03"},
+    {"id": "dist/tests/rescue/CG2_SHARED_FAMILIES_COVERAGE/shared-family-coverage.test.js", "status": "FAIL", "owner": "W04"},
+    {"id": "dist/tests/rescue/CG3_CONTROLLER_CORR01_LEARN_RQ_TRUTH/controller-corr01.test.js", "status": "FAIL", "owner": "W02"},
+    {"id": "dist/tests/rescue/S01_SHARED_STRUCTURED_EDITOR/s01-browser-proof.js", "status": "FAIL", "owner": "W02(shared)"},
+    {"id": "dist/tests/rescue/S04_SHARED_NOTES_OPERATIONAL/s04-shared-notes-operational-tests.js", "status": "FAIL", "owner": "W02(shared)"},
+    {"id": "dist/tests/rescue/S11_W03_SCENARIOS_LABS/lab-task-graph.test.js", "status": "FAIL", "owner": "W03"},
+    {"id": "dist/tests/rescue/S19_W05_RELEASES_CONFIGURATION/s19-tests.js", "status": "FAIL", "owner": "W05"},
+    {"id": "dist/tests/surfaces/evidence/domain.test.js", "status": "FAIL", "owner": "W04"},
+    {"id": "dist/tests/surfaces/labs/domain.test.js", "status": "FAIL", "owner": "W03"},
+    {"id": "dist/tests/surfaces/manual_ai/manual-ai-tests.js", "status": "FAIL", "owner": "W05"},
+    {"id": "dist/tests/surfaces/mastery/domain.test.js", "status": "FAIL", "owner": "W04"},
+    {"id": "dist/tests/surfaces/portfolio/domain.test.js", "status": "FAIL", "owner": "W04"},
+    {"id": "dist/tests/surfaces/reviews/domain.test.js", "status": "FAIL", "owner": "W04"},
+    {"id": "dist/tests/surfaces/scenarios/domain.test.js", "status": "FAIL", "owner": "W03"},
+    {"id": "tests/surfaces/learn/surface.test.mjs", "status": "FAIL", "owner": "W02"},
+    {"id": "tests/surfaces/library/surface.test.mjs", "status": "FAIL", "owner": "W02"},
+    {"id": "tests/surfaces/rq/surface.test.mjs", "status": "FAIL", "owner": "W02"},
+    {"id": "tests/surfaces/today/surface.test.mjs", "status": "FAIL", "owner": "W01", "repairedBy": "W01"},
+    {"id": "check::node tools/check-contracts.mjs", "status": "FAIL", "owner": "SHARED/UNKNOWN", "reason": "browser.lineage_receipt_truthful (1/6 flows) + browser.targeted_visual_evidence"}
+  ]
+}
