@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "workspace": "W04",
+  "checkpoint": "CKPT-A",
+  "label": "PRE_EDIT_BASELINE_MEASUREMENT",
+  "candidate": "WORKTREE_VARIANT:c82cec63cb5f",
+  "declaredCandidateTree": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+  "commit": "d3ddc5e",
+  "capturedAt": "2026-09-29T04:05:00.000Z",
+  "policy": "Baseline failures are preserved verbatim. A later green rerun never replaces or deletes this record (evidence preservation law, packet §18).",
+  "proofs": [
+    {
+      "command": "node dist/tests/surfaces/evidence/domain.test.js",
+      "result": "FAIL",
+      "measuredBy": "W04 writer, session start, before any W04 edit",
+      "observed": "Error: EVIDENCE_UNKNOWN:ev-alpha at W04EvidenceDomain.setSourceAvailability (dist/adapters/evidence/domain.js:168)",
+      "rootCause": "surface domain test constructed `new W04EvidenceDomain()` with no fixture; the default domain is intentionally EMPTY by law (tools/c2-w04-truth check 'normal-defaults-empty'), so every record lookup threw",
+      "disposition": "FIXED — test now injects the explicit demo fixture factory + a bound admission-authority registry; default-empty invariant asserted"
+    },
+    {
+      "command": "node dist/tests/surfaces/mastery/domain.test.js",
+      "result": "FAIL",
+      "measuredBy": "W04 writer, session start, before any W04 edit",
+      "observed": "Error: MASTERY_UNKNOWN:mastery-crypto at W04MasteryDomain.get (dist/adapters/mastery/domain.js:55)",
+      "rootCause": "same missing explicit fixture injection (also on the resolved-basis second domain instance)",
+      "disposition": "FIXED — both instances inject createW04MasteryDemoRecords(); default-empty invariant asserted"
+    },
+    {
+      "command": "node dist/tests/surfaces/reviews/domain.test.js",
+      "result": "FAIL",
+      "measuredBy": "W04 writer, session start, before any W04 edit",
+      "observed": "Error: REVIEW_UNKNOWN:review-1 at W04ReviewDomain.get (dist/adapters/reviews/domain.js:81)",
+      "rootCause": "same missing explicit fixture injection",
+      "disposition": "FIXED — injects createW04ReviewDemoRecords() with allowTestAuthority:true; default-empty invariant asserted"
+    },
+    {
+      "command": "node dist/tests/surfaces/portfolio/domain.test.js",
+      "result": "FAIL",
+      "measuredBy": "W04 writer, session start, before any W04 edit",
+      "observed": "Error: PORTFOLIO_MEMBER_UNKNOWN:member-1 at W04PortfolioDomain.get (dist/adapters/portfolio/domain.js:44)",
+      "rootCause": "same missing explicit fixture injection",
+      "disposition": "FIXED — injects createW04PortfolioDemoRecords(); default-empty invariant asserted"
+    },
+    {
+      "command": "node dist/tests/rescue/CG2_SHARED_FAMILIES_COVERAGE/shared-family-coverage.test.js",
+      "result": "FAIL",
+      "measuredBy": "W04 writer, session start, before any W04 edit; re-verified FAIL after W04 changes",
+      "observed": "6 tests, 1 fail: 'CG2 retains one Spatial family engine and no universal VirtualizationOwner' — AssertionError 2 !== 0 at assert.equal(count('VirtualizationOwner'),0)",
+      "rootCause": "the substring 'VirtualizationOwner' occurs twice in NON-W04 product source: stack/native-typescript/adapters/visualize/domain.ts (`universalVirtualizationOwner:false`) and stack/native-typescript/surfaces/visualize/surface.ts (`universalVirtualizationOwner:false`). Both files are READ-ONLY for W04 (W02 in flight) and the CG2 test itself is not in W04's ownership list.",
+      "disposition": "NOT OWNED BY W04 — reported as a cross-workspace blocker (see W04_HANDOFF.md 'Blockers'). Both source files and the test are byte-identical to HEAD d3ddc5e, so this failure is pre-existing at the dispatch baseline.",
+      "classification": "ORACLE_OR_W02 (test regex counts the negating flag name `universalVirtualizationOwner` as an owner declaration)"
+    },
+    {
+      "command": "node dist/tests/rescue/S14_W04_EVIDENCE_REVIEWS/{domain-lifecycle,surface-contract}.test.js",
+      "result": "PASS",
+      "measuredBy": "dispatch brief baseline table",
+      "reVerifiedAfterChange": "PASS"
+    },
+    {
+      "command": "node dist/tests/rescue/S15_W04_MASTERY_PORTFOLIO/domain-authority.test.js",
+      "result": "PASS",
+      "measuredBy": "dispatch brief baseline table",
+      "reVerifiedAfterChange": "PASS"
+    },
+    {
+      "command": "node dist/tests/post-c03/D10/d10-w04-authority-lifecycle-tests.js",
+      "result": "PASS",
+      "measuredBy": "dispatch brief baseline table",
+      "reVerifiedAfterChange": "PASS"
+    },
+    {
+      "command": "node dist/w4-g-epistemic-confirmation-tests.js",
+      "result": "PASS",
+      "measuredBy": "dispatch brief baseline table",
+      "reVerifiedAfterChange": "PASS"
+    },
+    {
+      "command": "npm test",
+      "result": "PASS (210 / 0)",
+      "measuredBy": "dispatch brief baseline table",
+      "reVerifiedAfterChange": "PASS (210 / 0) via tools/writer-serial.sh npm test"
+    },
+    {
+      "command": "npm run check",
+      "result": "FAIL (exit 1)",
+      "measuredBy": "dispatch brief baseline table",
+      "reVerifiedAfterChange": "FAIL (exit 1) via tools/writer-serial.sh npm run check",
+      "rootCause": "2 browser.* assertions over the SHARED receipt assurance/BROWSER_CONFORMANCE_RECEIPT.json (6 flows, 1 PASS / 5 FAIL, executionStatus BLOCKED_OR_FAILED) and assurance/SCREENSHOT_MANIFEST.json ('1 hash-bound screenshots; class=legacy'). Both artifacts belong to the Controller/shared browser suite, not to W04.",
+      "classification": "NOT_W04_OWNED — W04's own flows live in writer-output/W04/BROWSER_RECEIPT.json and measure 5/5 PASS"
+    },
+    {
+      "command": "npm run browser:test",
+      "result": "NOT RUN BY W04",
+      "measuredBy": "dispatch brief baseline table (6 flows, 1 PASS / 5 FAIL at baseline; W04 flows not run)",
+      "reason": "tools/browser-conformance.mjs is not W04-owned and declares six non-W04 flows. W04 executed its packet §9 flows through tools/w04-browser-flows.mjs instead (5/5 PASS)."
+    }
+  ],
+  "postChangeSurfaceProofs": {
+    "command": "node dist/tests/surfaces/{evidence,mastery,reviews,portfolio}/domain.test.js",
+    "result": "PASS (4/4)"
+  }
+}

@@ -132,5 +132,10 @@ export function composeReviewsSurface({domain,analyticalCompareOwner=null,comman
       return true;
     });
   }
-  return Object.freeze({contract:REVIEWS_SURFACE_CONTRACT,domain,collection:createReviewsCollectionAdapter(domain),center:selectedId=>reviewsCenterProjection(domain,selectedId),context:createReviewsContextProvider(domain),bottom:selectedId=>reviewsBottomProjection(domain,selectedId),compareProvider,slots:Object.freeze({LEFT:'w04.reviews.collection',CENTER:'FormalReviewDecisionWorkbench',RIGHT:'w04.reviews.context',BOTTOM:'reviewsBottomProjection',TRANSIENT:'SHARED_TRANSIENT_HOST_ONLY'}),commandIds:Object.freeze(['reviews.request','reviews.assign','reviews.start','reviews.finding','reviews.ready','reviews.continue','reviews.cancel','reviews.compare','reviews.supersede','reviews.rereview']),commands,compareOwner:analyticalCompareOwner?.owner||'INTEGRATION_REQUIRED'});
+  return Object.freeze({contract:REVIEWS_SURFACE_CONTRACT,domain,collection:createReviewsCollectionAdapter(domain),center:selectedId=>reviewsCenterProjection(domain,selectedId),context:createReviewsContextProvider(domain),bottom:selectedId=>reviewsBottomProjection(domain,selectedId),compareProvider,slots:Object.freeze({LEFT:'w04.reviews.collection',CENTER:'FormalReviewDecisionWorkbench',RIGHT:'w04.reviews.context',BOTTOM:'reviewsBottomProjection',TRANSIENT:'SHARED_TRANSIENT_HOST_ONLY'}),commandIds:Object.freeze(['reviews.request','reviews.assign','reviews.start','reviews.finding','reviews.ready','reviews.continue','reviews.cancel','reviews.compare','reviews.supersede','reviews.rereview']),
+  /** Toolbar id list for the controller composition. The `commands` slot below carries the
+   *  semantic command BUS (an object, not an id list); the toolbar must never receive it. */
+  toolbarCommandIds:Object.freeze(['reviews.review','reviews.finding','reviews.compare','reviews.supersede']),
+  commandBus:commands,
+  commands:Object.freeze(['reviews.review','reviews.finding','reviews.compare','reviews.supersede']),compareOwner:analyticalCompareOwner?.owner||'INTEGRATION_REQUIRED'});
 }

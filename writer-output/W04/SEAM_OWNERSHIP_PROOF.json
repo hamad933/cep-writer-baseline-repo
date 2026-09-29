@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "workspace": "W04",
+  "proof": "W04_SEAM_SINGLE_OWNER_INVARIANT",
+  "executedAt": "2026-09-29T04:41:13.030Z",
+  "checks": [
+    {
+      "id": "S1-exactly-one-w04-rescue-seam",
+      "pass": true,
+      "detail": {
+        "count": 1,
+        "files": [
+          "stack/native-typescript/surfaces/composition/w04-rescue.ts"
+        ],
+        "expected": "stack/native-typescript/surfaces/composition/w04-rescue.ts"
+      }
+    },
+    {
+      "id": "S2-seam-defines-one-rescue-composition",
+      "pass": true,
+      "detail": {
+        "definitions": 1
+      }
+    },
+    {
+      "id": "S3-one-domain-class-per-family",
+      "pass": true,
+      "detail": {
+        "W04EvidenceDomain": {
+          "adapter": "stack/native-typescript/adapters/evidence/domain.ts",
+          "classDefinitions": 1
+        },
+        "W04ReviewDomain": {
+          "adapter": "stack/native-typescript/adapters/reviews/domain.ts",
+          "classDefinitions": 1
+        },
+        "W04MasteryDomain": {
+          "adapter": "stack/native-typescript/adapters/mastery/domain.ts",
+          "classDefinitions": 1
+        },
+        "W04PortfolioDomain": {
+          "adapter": "stack/native-typescript/adapters/portfolio/domain.ts",
+          "classDefinitions": 1
+        }
+      }
+    },
+    {
+      "id": "S4-no-local-shared-owner-creation",
+      "pass": true,
+      "detail": {
+        "offenders": [],
+        "surfaceFilesChecked": 4
+      }
+    },
+    {
+      "id": "S5-unbound-seam-reports-integration-required",
+      "pass": true,
+      "detail": {
+        "state": "INTEGRATION_REQUIRED",
+        "code": "ANALYTICAL_COMPARE_INTEGRATION_REQUIRED",
+        "sharedOwner": null
+      }
+    },
+    {
+      "id": "S6-bound-seam-is-ready-without-local-ownership",
+      "pass": true,
+      "detail": {
+        "state": "READY",
+        "code": "CENTRAL_OWNERS_BOUND"
+      }
+    },
+    {
+      "id": "S7-seam-is-candidate-only-and-never-self-promoting",
+      "pass": true,
+      "detail": {
+        "candidateOnly": true,
+        "selfPromotion": false
+      }
+    },
+    {
+      "id": "S8-single-shared-owner-set",
+      "pass": true,
+      "detail": {
+        "collectionOwner": "CollectionTableMatrixPresentationCore",
+        "auditOwner": "AuditProvenanceInteractionCore",
+        "reviewDecisionOwner": "ReviewDecisionPresentationOwner"
+      }
+    },
+    {
+      "id": "S9-w04-provider-ids-unique-and-four",
+      "pass": true,
+      "detail": {
+        "providerIds": [
+          "w04.evidence.analysis",
+          "w04.mastery.analysis",
+          "w04.portfolio.analysis",
+          "w04.reviews.analysis"
+        ]
+      }
+    },
+    {
+      "id": "S10-each-family-uses-its-own-w04-domain-owner",
+      "pass": true,
+      "detail": {
+        "evidence": "W04EvidenceDomain",
+        "reviews": "W04ReviewDomain",
+        "mastery": "W04MasteryDomain",
+        "portfolio": "W04PortfolioDomain"
+      }
+    },
+    {
+      "id": "S11-surface-contracts-declare-no-local-shared-ownership",
+      "pass": true,
+      "detail": {
+        "evidence": false,
+        "reviews": false,
+        "compareOwners": [
+          "AnalyticalCompareOwner",
+          "AnalyticalCompareOwner",
+          "AnalyticalCompareOwner",
+          "AnalyticalCompareOwner"
+        ],
+        "note": "all four families delegate comparison to the ONE controller-injected AnalyticalCompareOwner"
+      }
+    },
+    {
+      "id": "S12-grouping-authority-not-claimed-q5-open",
+      "pass": true,
+      "detail": {
+        "groupingAuthority": "AUTHORITY_DECISION_REQUIRED"
+      }
+    },
+    {
+      "id": "S13-seam-authority-and-causal-chain",
+      "pass": true,
+      "detail": {
+        "authority": "ORACLE-011/A03",
+        "causalChain": [
+          "Candidate Evidence",
+          "Evidence",
+          "Review",
+          "Decision",
+          "Mastery State"
+        ],
+        "routes": [
+          "evidence",
+          "reviews",
+          "mastery",
+          "portfolio"
+        ]
+      }
+    },
+    {
+      "id": "S14-seam-defaults-empty-no-implied-fixture",
+      "pass": true,
+      "detail": {
+        "records": {
+          "evidence": 0,
+          "reviews": 0,
+          "mastery": 0,
+          "portfolio": 0
+        }
+      }
+    }
+  ],
+  "binding": {
+    "bindingAlgorithm": "path\\0size\\0sha256\\n (tools/source-tree-identity.mjs)",
+    "dispatchDeclaredCandidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+    "executedSourceTreeSha256": "54fd74e19123cbc60aac5df960aa8d6b84e64b31a1b80449ae6ca17a814b3ca6",
+    "executedSourceFileCount": 287,
+    "matchesDispatchBaseline": false,
+    "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+    "tree": "6a42db2d3beedd94df07d5ff83b19b5f5f0a7093",
+    "command": "node tools/w04-seam-ownership-proof.mjs"
+  },
+  "pass": true
+}

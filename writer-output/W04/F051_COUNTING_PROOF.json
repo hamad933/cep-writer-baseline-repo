@@ -1,0 +1,840 @@
+{
+  "schemaVersion": 1,
+  "workspace": "W04",
+  "finding": "F-051",
+  "findingTitle": "Evidence-receipt overcount — named screenshot count must not be equated with unique byte identity count",
+  "law": [
+    "No evidence total derives from filenames alone.",
+    "Named count cannot exceed published count; the published count IS the unique byte-identity count.",
+    "One frame may support multiple claims but must not be counted twice.",
+    "A receipt count that cannot be bound to an executed candidate is a LINEAGE failure."
+  ],
+  "checks": [
+    {
+      "id": "A1-real-published-count-is-identity-count",
+      "pass": true,
+      "detail": {
+        "published": 18,
+        "unique": 18
+      }
+    },
+    {
+      "id": "A2-real-no-inflation",
+      "pass": true,
+      "detail": {
+        "named": 97,
+        "unique": 18,
+        "note": "named >= unique is legal (retained superseded frames); named > unique is only a defect if NAMES are published as the count"
+      }
+    },
+    {
+      "id": "A3-real-every-name-binds-one-identity",
+      "pass": true,
+      "detail": {
+        "files": 97,
+        "allHashed": true
+      }
+    },
+    {
+      "id": "B1-counter-reports-unique-not-named",
+      "pass": true,
+      "detail": {
+        "unique": 17
+      }
+    },
+    {
+      "id": "B2-named-count-would-have-overcounted",
+      "pass": true,
+      "detail": {
+        "named": 18,
+        "unique": 17,
+        "inflation": 1
+      }
+    },
+    {
+      "id": "B3-duplicate-frame-counted-once",
+      "pass": true,
+      "detail": {
+        "duplicateIdentities": 1,
+        "namesOnDuplicate": 2
+      }
+    },
+    {
+      "id": "C1-receipt-count-equals-successful-mutations",
+      "pass": true,
+      "detail": {
+        "receipts": 4,
+        "mutations": 4
+      }
+    },
+    {
+      "id": "C2-receipt-identities-unique",
+      "pass": true,
+      "detail": {
+        "receipts": 4,
+        "unique": 4
+      }
+    },
+    {
+      "id": "C3-refused-operation-emitted-no-receipt",
+      "pass": true,
+      "detail": {
+        "refusedCode": "SOURCE_VERIFICATION_REQUIRED",
+        "receipts": 4
+      }
+    },
+    {
+      "id": "C4-record-identities-unique",
+      "pass": true,
+      "detail": {
+        "records": 3,
+        "unique": 3
+      }
+    },
+    {
+      "id": "C5-receipt-owner-is-w04-domain",
+      "pass": true,
+      "detail": {
+        "owners": [
+          "W04EvidenceDomain"
+        ]
+      }
+    }
+  ],
+  "executedAt": "2026-09-29T04:41:31.446Z",
+  "realCensus": {
+    "directory": "writer-output/W04/evidence",
+    "namedFileCount": 97,
+    "uniqueByteIdentityCount": 18,
+    "publishedEvidenceCount": 18,
+    "overcountIfNamesWereUsed": 79,
+    "duplicateByteIdentities": [
+      {
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "names": [
+          "evidence-create-attest-verify-lifecycle-admitted-immutable-20260929T042937Z-c82cec63.png",
+          "evidence-create-attest-verify-lifecycle-candidate-imported-20260929T042228Z-c82cec63.png",
+          "evidence-create-attest-verify-lifecycle-candidate-imported-20260929T042313Z-c82cec63.png",
+          "evidence-create-attest-verify-lifecycle-candidate-imported-20260929T042419Z-c82cec63.png",
+          "evidence-create-attest-verify-lifecycle-candidate-imported-20260929T042750Z-c82cec63.png",
+          "evidence-create-attest-verify-lifecycle-candidate-imported-20260929T042937Z-c82cec63.png",
+          "evidence-create-attest-verify-lifecycle-empty-state-20260929T042146Z-c82cec63.png",
+          "evidence-create-attest-verify-lifecycle-empty-state-20260929T042228Z-c82cec63.png",
+          "evidence-create-attest-verify-lifecycle-empty-state-20260929T042313Z-c82cec63.png",
+          "evidence-create-attest-verify-lifecycle-empty-state-20260929T042419Z-c82cec63.png",
+          "evidence-create-attest-verify-lifecycle-empty-state-20260929T042750Z-c82cec63.png",
+          "evidence-create-attest-verify-lifecycle-empty-state-20260929T042937Z-c82cec63.png",
+          "evidence-create-attest-verify-lifecycle-verified-not-admitted-20260929T042751Z-c82cec63.png",
+          "evidence-create-attest-verify-lifecycle-verified-not-admitted-20260929T042937Z-c82cec63.png",
+          "evidence-receipt-count-truth-f051-receipt-census-20260929T042155Z-c82cec63.png",
+          "evidence-receipt-count-truth-f051-receipt-census-20260929T042239Z-c82cec63.png",
+          "evidence-receipt-count-truth-f051-receipt-census-20260929T042322Z-c82cec63.png",
+          "evidence-receipt-count-truth-f051-receipt-census-20260929T042431Z-c82cec63.png",
+          "evidence-receipt-count-truth-f051-receipt-census-20260929T042759Z-c82cec63.png",
+          "evidence-receipt-count-truth-f051-receipt-census-20260929T042946Z-c82cec63.png"
+        ]
+      },
+      {
+        "sha256": "8ea9dde5708480c9d0dbef06747172b2ff42e8ab5dc5839f01c4e1f622c31c14",
+        "names": [
+          "evidence-create-attest-verify-lifecycle-admitted-immutable-20260929T043545Z-c82cec63.png",
+          "evidence-create-attest-verify-lifecycle-admitted-immutable-20260929T044118Z-c82cec63.png"
+        ]
+      },
+      {
+        "sha256": "bc553ab068200129f19234f2ab33a22463cfd6708e45df61b8c240bdfce5432f",
+        "names": [
+          "evidence-create-attest-verify-lifecycle-candidate-imported-20260929T043545Z-c82cec63.png",
+          "evidence-create-attest-verify-lifecycle-candidate-imported-20260929T044117Z-c82cec63.png"
+        ]
+      },
+      {
+        "sha256": "07f05a3fccf28afe8e5085497388ba6854600f63a9e84c395bd4485f87222215",
+        "names": [
+          "evidence-create-attest-verify-lifecycle-empty-state-20260929T043544Z-c82cec63.png",
+          "evidence-create-attest-verify-lifecycle-empty-state-20260929T044117Z-c82cec63.png"
+        ]
+      },
+      {
+        "sha256": "d82288b779e455665eafb9470892e2f1ab1d18b95275ebc0fd703f1f1c0c5fda",
+        "names": [
+          "evidence-create-attest-verify-lifecycle-verified-not-admitted-20260929T043545Z-c82cec63.png",
+          "evidence-create-attest-verify-lifecycle-verified-not-admitted-20260929T044117Z-c82cec63.png"
+        ]
+      },
+      {
+        "sha256": "6aa571b54a932c53e2e721768d50b479fd6f0bfe435ff5727f62c880947da3a5",
+        "names": [
+          "evidence-receipt-count-truth-f051-receipt-census-20260929T043557Z-c82cec63.png",
+          "evidence-receipt-count-truth-f051-receipt-census-20260929T044131Z-c82cec63.png"
+        ]
+      },
+      {
+        "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+        "names": [
+          "mastery-progression-state-machine-empty-state-20260929T042150Z-c82cec63.png",
+          "mastery-progression-state-machine-empty-state-20260929T042233Z-c82cec63.png",
+          "mastery-progression-state-machine-empty-state-20260929T042318Z-c82cec63.png",
+          "mastery-progression-state-machine-empty-state-20260929T042424Z-c82cec63.png",
+          "mastery-progression-state-machine-empty-state-20260929T042755Z-c82cec63.png",
+          "mastery-progression-state-machine-empty-state-20260929T042941Z-c82cec63.png",
+          "mastery-progression-state-machine-fixture-row-20260929T042150Z-c82cec63.png",
+          "mastery-progression-state-machine-fixture-row-20260929T042234Z-c82cec63.png",
+          "mastery-progression-state-machine-fixture-row-20260929T042318Z-c82cec63.png",
+          "mastery-progression-state-machine-fixture-row-20260929T042424Z-c82cec63.png",
+          "mastery-progression-state-machine-fixture-row-20260929T042755Z-c82cec63.png",
+          "mastery-progression-state-machine-fixture-row-20260929T042942Z-c82cec63.png",
+          "mastery-progression-state-machine-state-machine-blocked-20260929T042755Z-c82cec63.png",
+          "mastery-progression-state-machine-state-machine-blocked-20260929T042942Z-c82cec63.png"
+        ]
+      },
+      {
+        "sha256": "e34b9999719ce5039a3c0799844461938af481ff2869115013bf2b262e583e97",
+        "names": [
+          "mastery-progression-state-machine-empty-state-20260929T043550Z-c82cec63.png",
+          "mastery-progression-state-machine-empty-state-20260929T044124Z-c82cec63.png"
+        ]
+      },
+      {
+        "sha256": "8c76f4bd61a28133e85407b4a152e2b301f69c5fef3a2dd6ae78ec2d787c1e3a",
+        "names": [
+          "mastery-progression-state-machine-fixture-row-20260929T043551Z-c82cec63.png",
+          "mastery-progression-state-machine-fixture-row-20260929T044124Z-c82cec63.png"
+        ]
+      },
+      {
+        "sha256": "3b8a26efc3740309197f2a17de762337c23c5e1bb9c2d53d4b9dfc8c39a4fa0b",
+        "names": [
+          "mastery-progression-state-machine-state-machine-blocked-20260929T043551Z-c82cec63.png",
+          "mastery-progression-state-machine-state-machine-blocked-20260929T044125Z-c82cec63.png"
+        ]
+      },
+      {
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "names": [
+          "portfolio-assembly-and-export-assembly-one-reference-20260929T042152Z-c82cec63.png",
+          "portfolio-assembly-and-export-assembly-one-reference-20260929T042236Z-c82cec63.png",
+          "portfolio-assembly-and-export-assembly-one-reference-20260929T042320Z-c82cec63.png",
+          "portfolio-assembly-and-export-assembly-one-reference-20260929T042427Z-c82cec63.png",
+          "portfolio-assembly-and-export-assembly-one-reference-20260929T042757Z-c82cec63.png",
+          "portfolio-assembly-and-export-assembly-one-reference-20260929T042944Z-c82cec63.png",
+          "portfolio-assembly-and-export-empty-state-20260929T041922Z-c82cec63.png",
+          "portfolio-assembly-and-export-empty-state-20260929T042152Z-c82cec63.png",
+          "portfolio-assembly-and-export-empty-state-20260929T042236Z-c82cec63.png",
+          "portfolio-assembly-and-export-empty-state-20260929T042320Z-c82cec63.png",
+          "portfolio-assembly-and-export-empty-state-20260929T042427Z-c82cec63.png",
+          "portfolio-assembly-and-export-empty-state-20260929T042757Z-c82cec63.png",
+          "portfolio-assembly-and-export-empty-state-20260929T042944Z-c82cec63.png",
+          "portfolio-assembly-and-export-export-reproducible-20260929T042152Z-c82cec63.png",
+          "portfolio-assembly-and-export-export-reproducible-20260929T042236Z-c82cec63.png",
+          "portfolio-assembly-and-export-export-reproducible-20260929T042320Z-c82cec63.png",
+          "portfolio-assembly-and-export-export-reproducible-20260929T042428Z-c82cec63.png",
+          "portfolio-assembly-and-export-export-reproducible-20260929T042757Z-c82cec63.png",
+          "portfolio-assembly-and-export-export-reproducible-20260929T042944Z-c82cec63.png"
+        ]
+      },
+      {
+        "sha256": "425cfe954a24ded6c8228dda15801fd6997f012df6e9bc0c19ace0c6a6930cd9",
+        "names": [
+          "portfolio-assembly-and-export-assembly-one-reference-20260929T043554Z-c82cec63.png",
+          "portfolio-assembly-and-export-assembly-one-reference-20260929T044127Z-c82cec63.png"
+        ]
+      },
+      {
+        "sha256": "b6247c7f8c7d00f9804b1b63a02e37b15800e4f8815e01b4cac3b20fbd9ef2e2",
+        "names": [
+          "portfolio-assembly-and-export-empty-state-20260929T043553Z-c82cec63.png",
+          "portfolio-assembly-and-export-empty-state-20260929T044127Z-c82cec63.png"
+        ]
+      },
+      {
+        "sha256": "fd1b8b2f89343d017d75d3a85a423361af6f8b4a07042c30e443f5cc485b832c",
+        "names": [
+          "portfolio-assembly-and-export-export-reproducible-20260929T043554Z-c82cec63.png",
+          "portfolio-assembly-and-export-export-reproducible-20260929T044128Z-c82cec63.png"
+        ]
+      },
+      {
+        "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+        "names": [
+          "reviews-flow-and-verdict-recording-empty-state-20260929T041917Z-c82cec63.png",
+          "reviews-flow-and-verdict-recording-empty-state-20260929T042148Z-c82cec63.png",
+          "reviews-flow-and-verdict-recording-empty-state-20260929T042231Z-c82cec63.png",
+          "reviews-flow-and-verdict-recording-empty-state-20260929T042315Z-c82cec63.png",
+          "reviews-flow-and-verdict-recording-empty-state-20260929T042421Z-c82cec63.png",
+          "reviews-flow-and-verdict-recording-empty-state-20260929T042752Z-c82cec63.png",
+          "reviews-flow-and-verdict-recording-empty-state-20260929T042939Z-c82cec63.png",
+          "reviews-flow-and-verdict-recording-ready-for-decision-20260929T042231Z-c82cec63.png",
+          "reviews-flow-and-verdict-recording-ready-for-decision-20260929T042315Z-c82cec63.png",
+          "reviews-flow-and-verdict-recording-ready-for-decision-20260929T042421Z-c82cec63.png",
+          "reviews-flow-and-verdict-recording-ready-for-decision-20260929T042753Z-c82cec63.png",
+          "reviews-flow-and-verdict-recording-ready-for-decision-20260929T042939Z-c82cec63.png",
+          "reviews-flow-and-verdict-recording-verdict-recorded-20260929T042316Z-c82cec63.png",
+          "reviews-flow-and-verdict-recording-verdict-recorded-20260929T042422Z-c82cec63.png",
+          "reviews-flow-and-verdict-recording-verdict-recorded-20260929T042753Z-c82cec63.png",
+          "reviews-flow-and-verdict-recording-verdict-recorded-20260929T042940Z-c82cec63.png"
+        ]
+      },
+      {
+        "sha256": "aee77eed907e0ffc2f24d5f2fa22f2f5f517d6f9b2b69999e1a5c6d183022c9b",
+        "names": [
+          "reviews-flow-and-verdict-recording-empty-state-20260929T043547Z-c82cec63.png",
+          "reviews-flow-and-verdict-recording-empty-state-20260929T044120Z-c82cec63.png"
+        ]
+      },
+      {
+        "sha256": "16d746ac41ee484819126fa0ceef8f1756abc57d7158e58a336bb6bbc4370ab0",
+        "names": [
+          "reviews-flow-and-verdict-recording-ready-for-decision-20260929T043548Z-c82cec63.png",
+          "reviews-flow-and-verdict-recording-ready-for-decision-20260929T044121Z-c82cec63.png"
+        ]
+      },
+      {
+        "sha256": "57466eea8da3d93d65e6f39e223e9f5ac8bb21df9b83f047d958b7ce6777e0f4",
+        "names": [
+          "reviews-flow-and-verdict-recording-verdict-recorded-20260929T043548Z-c82cec63.png",
+          "reviews-flow-and-verdict-recording-verdict-recorded-20260929T044122Z-c82cec63.png"
+        ]
+      }
+    ],
+    "files": [
+      {
+        "name": "evidence-create-attest-verify-lifecycle-admitted-immutable-20260929T042937Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-admitted-immutable-20260929T043545Z-c82cec63.png",
+        "sha256": "8ea9dde5708480c9d0dbef06747172b2ff42e8ab5dc5839f01c4e1f622c31c14",
+        "bytes": 189854
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-admitted-immutable-20260929T044118Z-c82cec63.png",
+        "sha256": "8ea9dde5708480c9d0dbef06747172b2ff42e8ab5dc5839f01c4e1f622c31c14",
+        "bytes": 189854
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-candidate-imported-20260929T042228Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-candidate-imported-20260929T042313Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-candidate-imported-20260929T042419Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-candidate-imported-20260929T042750Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-candidate-imported-20260929T042937Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-candidate-imported-20260929T043545Z-c82cec63.png",
+        "sha256": "bc553ab068200129f19234f2ab33a22463cfd6708e45df61b8c240bdfce5432f",
+        "bytes": 189940
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-candidate-imported-20260929T044117Z-c82cec63.png",
+        "sha256": "bc553ab068200129f19234f2ab33a22463cfd6708e45df61b8c240bdfce5432f",
+        "bytes": 189940
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-empty-state-20260929T042146Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-empty-state-20260929T042228Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-empty-state-20260929T042313Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-empty-state-20260929T042419Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-empty-state-20260929T042750Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-empty-state-20260929T042937Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-empty-state-20260929T043544Z-c82cec63.png",
+        "sha256": "07f05a3fccf28afe8e5085497388ba6854600f63a9e84c395bd4485f87222215",
+        "bytes": 119185
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-empty-state-20260929T044117Z-c82cec63.png",
+        "sha256": "07f05a3fccf28afe8e5085497388ba6854600f63a9e84c395bd4485f87222215",
+        "bytes": 119185
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-verified-not-admitted-20260929T042751Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-verified-not-admitted-20260929T042937Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-verified-not-admitted-20260929T043545Z-c82cec63.png",
+        "sha256": "d82288b779e455665eafb9470892e2f1ab1d18b95275ebc0fd703f1f1c0c5fda",
+        "bytes": 191281
+      },
+      {
+        "name": "evidence-create-attest-verify-lifecycle-verified-not-admitted-20260929T044117Z-c82cec63.png",
+        "sha256": "d82288b779e455665eafb9470892e2f1ab1d18b95275ebc0fd703f1f1c0c5fda",
+        "bytes": 191281
+      },
+      {
+        "name": "evidence-receipt-count-truth-f051-receipt-census-20260929T042155Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-receipt-count-truth-f051-receipt-census-20260929T042239Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-receipt-count-truth-f051-receipt-census-20260929T042322Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-receipt-count-truth-f051-receipt-census-20260929T042431Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-receipt-count-truth-f051-receipt-census-20260929T042759Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-receipt-count-truth-f051-receipt-census-20260929T042946Z-c82cec63.png",
+        "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+        "bytes": 124274
+      },
+      {
+        "name": "evidence-receipt-count-truth-f051-receipt-census-20260929T043557Z-c82cec63.png",
+        "sha256": "6aa571b54a932c53e2e721768d50b479fd6f0bfe435ff5727f62c880947da3a5",
+        "bytes": 182786
+      },
+      {
+        "name": "evidence-receipt-count-truth-f051-receipt-census-20260929T044131Z-c82cec63.png",
+        "sha256": "6aa571b54a932c53e2e721768d50b479fd6f0bfe435ff5727f62c880947da3a5",
+        "bytes": 182786
+      },
+      {
+        "name": "mastery-progression-state-machine-empty-state-20260929T042150Z-c82cec63.png",
+        "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+        "bytes": 124691
+      },
+      {
+        "name": "mastery-progression-state-machine-empty-state-20260929T042233Z-c82cec63.png",
+        "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+        "bytes": 124691
+      },
+      {
+        "name": "mastery-progression-state-machine-empty-state-20260929T042318Z-c82cec63.png",
+        "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+        "bytes": 124691
+      },
+      {
+        "name": "mastery-progression-state-machine-empty-state-20260929T042424Z-c82cec63.png",
+        "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+        "bytes": 124691
+      },
+      {
+        "name": "mastery-progression-state-machine-empty-state-20260929T042755Z-c82cec63.png",
+        "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+        "bytes": 124691
+      },
+      {
+        "name": "mastery-progression-state-machine-empty-state-20260929T042941Z-c82cec63.png",
+        "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+        "bytes": 124691
+      },
+      {
+        "name": "mastery-progression-state-machine-empty-state-20260929T043550Z-c82cec63.png",
+        "sha256": "e34b9999719ce5039a3c0799844461938af481ff2869115013bf2b262e583e97",
+        "bytes": 124349
+      },
+      {
+        "name": "mastery-progression-state-machine-empty-state-20260929T044124Z-c82cec63.png",
+        "sha256": "e34b9999719ce5039a3c0799844461938af481ff2869115013bf2b262e583e97",
+        "bytes": 124349
+      },
+      {
+        "name": "mastery-progression-state-machine-fixture-row-20260929T042150Z-c82cec63.png",
+        "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+        "bytes": 124691
+      },
+      {
+        "name": "mastery-progression-state-machine-fixture-row-20260929T042234Z-c82cec63.png",
+        "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+        "bytes": 124691
+      },
+      {
+        "name": "mastery-progression-state-machine-fixture-row-20260929T042318Z-c82cec63.png",
+        "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+        "bytes": 124691
+      },
+      {
+        "name": "mastery-progression-state-machine-fixture-row-20260929T042424Z-c82cec63.png",
+        "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+        "bytes": 124691
+      },
+      {
+        "name": "mastery-progression-state-machine-fixture-row-20260929T042755Z-c82cec63.png",
+        "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+        "bytes": 124691
+      },
+      {
+        "name": "mastery-progression-state-machine-fixture-row-20260929T042942Z-c82cec63.png",
+        "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+        "bytes": 124691
+      },
+      {
+        "name": "mastery-progression-state-machine-fixture-row-20260929T043551Z-c82cec63.png",
+        "sha256": "8c76f4bd61a28133e85407b4a152e2b301f69c5fef3a2dd6ae78ec2d787c1e3a",
+        "bytes": 181960
+      },
+      {
+        "name": "mastery-progression-state-machine-fixture-row-20260929T044124Z-c82cec63.png",
+        "sha256": "8c76f4bd61a28133e85407b4a152e2b301f69c5fef3a2dd6ae78ec2d787c1e3a",
+        "bytes": 181960
+      },
+      {
+        "name": "mastery-progression-state-machine-state-machine-blocked-20260929T042755Z-c82cec63.png",
+        "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+        "bytes": 124691
+      },
+      {
+        "name": "mastery-progression-state-machine-state-machine-blocked-20260929T042942Z-c82cec63.png",
+        "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+        "bytes": 124691
+      },
+      {
+        "name": "mastery-progression-state-machine-state-machine-blocked-20260929T043551Z-c82cec63.png",
+        "sha256": "3b8a26efc3740309197f2a17de762337c23c5e1bb9c2d53d4b9dfc8c39a4fa0b",
+        "bytes": 182063
+      },
+      {
+        "name": "mastery-progression-state-machine-state-machine-blocked-20260929T044125Z-c82cec63.png",
+        "sha256": "3b8a26efc3740309197f2a17de762337c23c5e1bb9c2d53d4b9dfc8c39a4fa0b",
+        "bytes": 182063
+      },
+      {
+        "name": "portfolio-assembly-and-export-assembly-one-reference-20260929T042152Z-c82cec63.png",
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "bytes": 122572
+      },
+      {
+        "name": "portfolio-assembly-and-export-assembly-one-reference-20260929T042236Z-c82cec63.png",
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "bytes": 122572
+      },
+      {
+        "name": "portfolio-assembly-and-export-assembly-one-reference-20260929T042320Z-c82cec63.png",
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "bytes": 122572
+      },
+      {
+        "name": "portfolio-assembly-and-export-assembly-one-reference-20260929T042427Z-c82cec63.png",
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "bytes": 122572
+      },
+      {
+        "name": "portfolio-assembly-and-export-assembly-one-reference-20260929T042757Z-c82cec63.png",
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "bytes": 122572
+      },
+      {
+        "name": "portfolio-assembly-and-export-assembly-one-reference-20260929T042944Z-c82cec63.png",
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "bytes": 122572
+      },
+      {
+        "name": "portfolio-assembly-and-export-assembly-one-reference-20260929T043554Z-c82cec63.png",
+        "sha256": "425cfe954a24ded6c8228dda15801fd6997f012df6e9bc0c19ace0c6a6930cd9",
+        "bytes": 169726
+      },
+      {
+        "name": "portfolio-assembly-and-export-assembly-one-reference-20260929T044127Z-c82cec63.png",
+        "sha256": "425cfe954a24ded6c8228dda15801fd6997f012df6e9bc0c19ace0c6a6930cd9",
+        "bytes": 169726
+      },
+      {
+        "name": "portfolio-assembly-and-export-empty-state-20260929T041922Z-c82cec63.png",
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "bytes": 122572
+      },
+      {
+        "name": "portfolio-assembly-and-export-empty-state-20260929T042152Z-c82cec63.png",
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "bytes": 122572
+      },
+      {
+        "name": "portfolio-assembly-and-export-empty-state-20260929T042236Z-c82cec63.png",
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "bytes": 122572
+      },
+      {
+        "name": "portfolio-assembly-and-export-empty-state-20260929T042320Z-c82cec63.png",
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "bytes": 122572
+      },
+      {
+        "name": "portfolio-assembly-and-export-empty-state-20260929T042427Z-c82cec63.png",
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "bytes": 122572
+      },
+      {
+        "name": "portfolio-assembly-and-export-empty-state-20260929T042757Z-c82cec63.png",
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "bytes": 122572
+      },
+      {
+        "name": "portfolio-assembly-and-export-empty-state-20260929T042944Z-c82cec63.png",
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "bytes": 122572
+      },
+      {
+        "name": "portfolio-assembly-and-export-empty-state-20260929T043553Z-c82cec63.png",
+        "sha256": "b6247c7f8c7d00f9804b1b63a02e37b15800e4f8815e01b4cac3b20fbd9ef2e2",
+        "bytes": 121852
+      },
+      {
+        "name": "portfolio-assembly-and-export-empty-state-20260929T044127Z-c82cec63.png",
+        "sha256": "b6247c7f8c7d00f9804b1b63a02e37b15800e4f8815e01b4cac3b20fbd9ef2e2",
+        "bytes": 121852
+      },
+      {
+        "name": "portfolio-assembly-and-export-export-reproducible-20260929T042152Z-c82cec63.png",
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "bytes": 122572
+      },
+      {
+        "name": "portfolio-assembly-and-export-export-reproducible-20260929T042236Z-c82cec63.png",
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "bytes": 122572
+      },
+      {
+        "name": "portfolio-assembly-and-export-export-reproducible-20260929T042320Z-c82cec63.png",
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "bytes": 122572
+      },
+      {
+        "name": "portfolio-assembly-and-export-export-reproducible-20260929T042428Z-c82cec63.png",
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "bytes": 122572
+      },
+      {
+        "name": "portfolio-assembly-and-export-export-reproducible-20260929T042757Z-c82cec63.png",
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "bytes": 122572
+      },
+      {
+        "name": "portfolio-assembly-and-export-export-reproducible-20260929T042944Z-c82cec63.png",
+        "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+        "bytes": 122572
+      },
+      {
+        "name": "portfolio-assembly-and-export-export-reproducible-20260929T043554Z-c82cec63.png",
+        "sha256": "fd1b8b2f89343d017d75d3a85a423361af6f8b4a07042c30e443f5cc485b832c",
+        "bytes": 166006
+      },
+      {
+        "name": "portfolio-assembly-and-export-export-reproducible-20260929T044128Z-c82cec63.png",
+        "sha256": "fd1b8b2f89343d017d75d3a85a423361af6f8b4a07042c30e443f5cc485b832c",
+        "bytes": 166006
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-empty-state-20260929T041917Z-c82cec63.png",
+        "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+        "bytes": 125313
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-empty-state-20260929T042148Z-c82cec63.png",
+        "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+        "bytes": 125313
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-empty-state-20260929T042231Z-c82cec63.png",
+        "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+        "bytes": 125313
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-empty-state-20260929T042315Z-c82cec63.png",
+        "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+        "bytes": 125313
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-empty-state-20260929T042421Z-c82cec63.png",
+        "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+        "bytes": 125313
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-empty-state-20260929T042752Z-c82cec63.png",
+        "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+        "bytes": 125313
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-empty-state-20260929T042939Z-c82cec63.png",
+        "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+        "bytes": 125313
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-empty-state-20260929T043547Z-c82cec63.png",
+        "sha256": "aee77eed907e0ffc2f24d5f2fa22f2f5f517d6f9b2b69999e1a5c6d183022c9b",
+        "bytes": 120622
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-empty-state-20260929T044120Z-c82cec63.png",
+        "sha256": "aee77eed907e0ffc2f24d5f2fa22f2f5f517d6f9b2b69999e1a5c6d183022c9b",
+        "bytes": 120622
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-ready-for-decision-20260929T042231Z-c82cec63.png",
+        "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+        "bytes": 125313
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-ready-for-decision-20260929T042315Z-c82cec63.png",
+        "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+        "bytes": 125313
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-ready-for-decision-20260929T042421Z-c82cec63.png",
+        "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+        "bytes": 125313
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-ready-for-decision-20260929T042753Z-c82cec63.png",
+        "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+        "bytes": 125313
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-ready-for-decision-20260929T042939Z-c82cec63.png",
+        "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+        "bytes": 125313
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-ready-for-decision-20260929T043548Z-c82cec63.png",
+        "sha256": "16d746ac41ee484819126fa0ceef8f1756abc57d7158e58a336bb6bbc4370ab0",
+        "bytes": 181386
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-ready-for-decision-20260929T044121Z-c82cec63.png",
+        "sha256": "16d746ac41ee484819126fa0ceef8f1756abc57d7158e58a336bb6bbc4370ab0",
+        "bytes": 181386
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-verdict-recorded-20260929T042316Z-c82cec63.png",
+        "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+        "bytes": 125313
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-verdict-recorded-20260929T042422Z-c82cec63.png",
+        "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+        "bytes": 125313
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-verdict-recorded-20260929T042753Z-c82cec63.png",
+        "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+        "bytes": 125313
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-verdict-recorded-20260929T042940Z-c82cec63.png",
+        "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+        "bytes": 125313
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-verdict-recorded-20260929T043548Z-c82cec63.png",
+        "sha256": "57466eea8da3d93d65e6f39e223e9f5ac8bb21df9b83f047d958b7ce6777e0f4",
+        "bytes": 180942
+      },
+      {
+        "name": "reviews-flow-and-verdict-recording-verdict-recorded-20260929T044122Z-c82cec63.png",
+        "sha256": "57466eea8da3d93d65e6f39e223e9f5ac8bb21df9b83f047d958b7ce6777e0f4",
+        "bytes": 180942
+      }
+    ]
+  },
+  "syntheticFalsification": {
+    "inputClass": "SYNTHETIC_COUNTER_FALSIFICATION_INPUT__NOT_REAL_EVIDENCE",
+    "purpose": "prove the counter reports unique byte identities (17), never named files (18)",
+    "namedCount": 18,
+    "uniqueIdentityCount": 17,
+    "duplicates": [
+      {
+        "sha256": "d4817ec13e341532d3b08890598438e3f151e73e3d107398599dc0ed8386a6b3",
+        "names": [
+          "frame-17.png",
+          "frame-17-duplicate-name.png"
+        ]
+      }
+    ]
+  },
+  "productReceiptCensus": {
+    "inputClass": "REAL_DOMAIN_RUN__dist/adapters/evidence/domain.js",
+    "successfulMutatingOperations": 4,
+    "refusedOperations": [
+      {
+        "id": "f051-b-admit",
+        "code": "SOURCE_VERIFICATION_REQUIRED",
+        "receiptEmitted": false
+      }
+    ],
+    "receiptCount": 4,
+    "uniqueReceiptIdentities": 4,
+    "uniqueReceiptSequences": 4,
+    "receiptCommands": [
+      "evidence.import",
+      "evidence.import",
+      "evidence.import",
+      "evidence.source.verify"
+    ],
+    "receiptOwners": [
+      "W04EvidenceDomain"
+    ],
+    "recordCount": 3,
+    "uniqueRecordIdentities": 3
+  },
+  "binding": {
+    "bindingAlgorithm": "path\\0size\\0sha256\\n (tools/source-tree-identity.mjs)",
+    "dispatchDeclaredCandidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+    "executedSourceTreeSha256": "54fd74e19123cbc60aac5df960aa8d6b84e64b31a1b80449ae6ca17a814b3ca6",
+    "executedSourceFileCount": 287,
+    "matchesDispatchBaseline": false,
+    "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+    "tree": "6a42db2d3beedd94df07d5ff83b19b5f5f0a7093",
+    "command": "node tools/w04-f051-counting-proof.mjs",
+    "note": "The executed source identity is recomputed at run time; this receipt never claims the canonical 480dbe…/273 identity."
+  },
+  "pass": true
+}

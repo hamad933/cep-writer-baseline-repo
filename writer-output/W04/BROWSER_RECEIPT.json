@@ -1,0 +1,2761 @@
+{
+  "schemaVersion": 1,
+  "classification": "W04_BROWSER_RECEIPT_NOT_OWNER_ACCEPTANCE",
+  "contract": "controller/07_browser/browser_contract.md §1",
+  "command": "node tools/w04-browser-flows.mjs",
+  "browser": "Chromium (Playwright package-local)",
+  "browserVersion": "151.0.7922.34",
+  "transport": "localhost-http",
+  "runtime": "Node v22.16.0",
+  "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+  "canonicalSourceFileCount": 287,
+  "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+  "tree": "6a42db2d3beedd94df07d5ff83b19b5f5f0a7093",
+  "environment": {
+    "node": "v22.16.0",
+    "engine": "Playwright Chromium",
+    "playwrightResolution": "package-local",
+    "packageDeclaredVersion": "1.62.1",
+    "transport": "localhost-http",
+    "proofServer": "tools/serve.mjs on 127.0.0.1:43353",
+    "viewport": "1440x980",
+    "reducedMotion": true,
+    "browserExecutableOverride": false,
+    "browserVersion": "151.0.7922.34"
+  },
+  "capturedAt": "2026-09-29T04:41:31.321Z",
+  "evidenceLineage": {
+    "bindingAlgorithm": "path\\0size\\0sha256\\n (tools/source-tree-identity.mjs)",
+    "recomputedCandidateTreeSha256": "54fd74e19123cbc60aac5df960aa8d6b84e64b31a1b80449ae6ca17a814b3ca6",
+    "recomputedCandidateFileCount": 287,
+    "expectedCandidateTreeSha256": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+    "expectedCandidateFileCount": 287,
+    "dispatchDeclaredCandidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+    "lineageStatus": "DIVERGED_FROM_DISPATCH_BASELINE_BY_WRITER_DELTAS",
+    "note": "The executed source tree is recomputed here and is bound exactly; it differs from the dispatch baseline c82cec63… because this run includes W04 candidate deltas (packet §14). The recomputed value above IS the candidate this receipt executed against — it is never presented as the canonical 480dbe…/273 identity."
+  },
+  "summary": {
+    "total": 5,
+    "pass": 5,
+    "fail": 0
+  },
+  "limitations": [
+    "Headless Chromium only; no Owner acceptance and no exhaustive permutation certification",
+    "Static proof server (tools/serve.mjs) serves the current dist/ build only — no local runtime API process runs, so requestfailed transport entries are ENVIRONMENT noise, not product verdicts",
+    "Fixture rows and fixture admission/reviewer authority are labelled per flow; they are never presented as a real-consumer or a real achievement",
+    "Q-5 (Portfolio grouping authority) is an open Owner question: the portfolio flow proves the refusal, never an implementation"
+  ],
+  "flows": [
+    {
+      "flow": "evidence.create-attest-verify-lifecycle",
+      "route": "/?surface=evidence",
+      "preconditions": [
+        "static proof server serves the current dist/ build",
+        "app booted with CEPFoundation.consumer === \"evidence\"",
+        "W04 evidence domain starts EMPTY (tools/c2-w04-truth \"normal-defaults-empty\")",
+        "no admission-authority registry ships with this route; the default product refusal is asserted first"
+      ],
+      "expectedState": "Candidate import never implies verification or Admission; verification requires a bound verifier envelope; Admission requires validated intake AND explicit admission authority; the admitted Evidence is an immutable revision that creates no Review Decision and no Mastery",
+      "fixtureState": "reviewer harness seeds the candidate through the live evidence.import semantic command; the admission authority registry is injected ONLY after the default product refusal is captured, and is labelled FIXTURE in every receipt field",
+      "negativeCases": [
+        "Admission before source verification must be refused with SOURCE_VERIFICATION_REQUIRED",
+        "Admission without bound admission authority must be refused with ADMISSION_AUTHORITY_UNAVAILABLE",
+        "Import must never report canonicalEvidenceCreated=true",
+        "Admission must not create a Review Decision or a Mastery mutation"
+      ],
+      "consumerTaxonomy": {
+        "primaryLiveOperationalConsumer": "W04 Evidence domain executed inside the mounted Chromium page (CEPFoundation.m0Composition.group.evidence.domain)",
+        "recordedConsumer": "m0 Evidence workbench DOM projection (rows, state list, import form)",
+        "fixture": "candidate identity + admission authority registry injected by this harness (labelled FIXTURE)"
+      },
+      "actionSequence": [
+        "GET /?surface=evidence",
+        "inspect the mounted Evidence workbench before any mutation",
+        "execute semantic command evidence.import (Candidate creation only)",
+        "NEGATIVE: attempt Admission before source verification",
+        "ATTTEST: bind a verifier envelope (verifySource) and record the attestation",
+        "submit for intake and validate intake",
+        "NEGATIVE: Admission without bound admission authority (product default)",
+        "bind an explicitly labelled FIXTURE admission authority and complete the lifecycle",
+        "re-render the workbench after Admission and capture the admitted state"
+      ],
+      "assertions": [
+        {
+          "id": "evidence.route-mounted",
+          "expected": {
+            "consumer": "evidence",
+            "stage": "evidence"
+          },
+          "actual": {
+            "consumer": "evidence",
+            "stage": "evidence"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "evidence.domain-empty-at-start",
+          "expected": 0,
+          "actual": 0,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "evidence.domain-owner-w04",
+          "expected": "W04EvidenceDomain",
+          "actual": "W04EvidenceDomain",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "evidence.command-set-complete",
+          "expected": [
+            "evidence.inspect",
+            "evidence.import",
+            "evidence.amend",
+            "evidence.admit",
+            "evidence.sourceChoice"
+          ],
+          "actual": [
+            "evidence.inspect",
+            "evidence.import",
+            "evidence.amend",
+            "evidence.admit",
+            "evidence.sourceChoice"
+          ],
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "evidence.empty-state-is-visible",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "evidence.import-created-candidate",
+          "expected": {
+            "ok": true,
+            "canonicalEvidenceCreated": false,
+            "verificationStatus": "UNVERIFIED",
+            "records": 1,
+            "status": "CANDIDATE",
+            "candidateState": "PREPARED",
+            "verification": "UNVERIFIED",
+            "receipts": 1
+          },
+          "actual": {
+            "ok": true,
+            "canonicalEvidenceCreated": false,
+            "verificationStatus": "UNVERIFIED",
+            "records": 1,
+            "status": "CANDIDATE",
+            "candidateState": "PREPARED",
+            "verification": "UNVERIFIED",
+            "receipts": 1
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "evidence.negative-admit-before-verification",
+          "expected": {
+            "ok": false,
+            "code": "SOURCE_VERIFICATION_REQUIRED",
+            "status": "CANDIDATE",
+            "receipts": 1
+          },
+          "actual": {
+            "ok": false,
+            "code": "SOURCE_VERIFICATION_REQUIRED",
+            "status": "CANDIDATE",
+            "receipts": 1
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "evidence.negative-no-receipt-on-refusal",
+          "expected": 1,
+          "actual": 1,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "evidence.verify-attested-by-bound-provider",
+          "expected": {
+            "ok": true,
+            "verification": "VERIFIED",
+            "providerId": "provider:w04-browser-flow",
+            "proofRef": "proof:flow:cand-w04-flow",
+            "status": "CANDIDATE",
+            "receipts": 2
+          },
+          "actual": {
+            "ok": true,
+            "verification": "VERIFIED",
+            "providerId": "provider:w04-browser-flow",
+            "proofRef": "proof:flow:cand-w04-flow",
+            "status": "CANDIDATE",
+            "receipts": 2
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "evidence.verify-does-not-admit",
+          "expected": "CANDIDATE",
+          "actual": "CANDIDATE",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "evidence.intake-staged",
+          "expected": {
+            "submitOk": true,
+            "validateOk": true,
+            "candidateState": "SUBMITTED_FOR_INTAKE",
+            "intake": "VALIDATED"
+          },
+          "actual": {
+            "submitOk": true,
+            "validateOk": true,
+            "candidateState": "SUBMITTED_FOR_INTAKE",
+            "intake": "VALIDATED"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "evidence.negative-admit-needs-admission-authority",
+          "expected": {
+            "ok": false,
+            "code": "ADMISSION_AUTHORITY_UNAVAILABLE",
+            "status": "CANDIDATE",
+            "receipts": 4
+          },
+          "actual": {
+            "ok": false,
+            "code": "ADMISSION_AUTHORITY_UNAVAILABLE",
+            "status": "CANDIDATE",
+            "receipts": 4
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "evidence.admit-created-immutable-revision",
+          "expected": {
+            "ok": true,
+            "status": "ADMITTED",
+            "candidateState": "ADMITTED",
+            "immutableRevision": true,
+            "lifecycle": "ACTIVE"
+          },
+          "actual": {
+            "ok": true,
+            "status": "ADMITTED",
+            "candidateState": "ADMITTED",
+            "immutableRevision": true,
+            "lifecycle": "ACTIVE"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "evidence.admission-created-no-review-decision",
+          "expected": {
+            "reviewStatus": "UNREVIEWED",
+            "effectiveDecision": "NONE"
+          },
+          "actual": {
+            "reviewStatus": "UNREVIEWED",
+            "effectiveDecision": "NONE"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "evidence.admission-receipt-carries-authority-proof",
+          "expected": "authority:evidence-admission:browser-flow:v1",
+          "actual": "authority:evidence-admission:browser-flow:v1",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "evidence.admission-receipt-no-review-decision",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "evidence.collection-renders-one-row",
+          "expected": [
+            "cand-w04-flow"
+          ],
+          "actual": [
+            "cand-w04-flow"
+          ],
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "evidence.receipt-identities-are-unique",
+          "expected": 5,
+          "actual": 5,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "evidence.receipt-count-exact",
+          "expected": 5,
+          "actual": 5,
+          "ok": true,
+          "class": null,
+          "message": ""
+        }
+      ],
+      "screenshots": [
+        {
+          "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-empty-state-20260929T044117Z-c82cec63.png",
+          "sha256": "07f05a3fccf28afe8e5085497388ba6854600f63a9e84c395bd4485f87222215",
+          "bytes": 119185,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:41:17.470Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "evidence.create-attest-verify-lifecycle",
+            "id": "empty-state"
+          }
+        },
+        {
+          "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-candidate-imported-20260929T044117Z-c82cec63.png",
+          "sha256": "bc553ab068200129f19234f2ab33a22463cfd6708e45df61b8c240bdfce5432f",
+          "bytes": 189940,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:41:17.748Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "evidence.create-attest-verify-lifecycle",
+            "id": "candidate-imported"
+          }
+        },
+        {
+          "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-verified-not-admitted-20260929T044117Z-c82cec63.png",
+          "sha256": "d82288b779e455665eafb9470892e2f1ab1d18b95275ebc0fd703f1f1c0c5fda",
+          "bytes": 191281,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:41:18.084Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "evidence.create-attest-verify-lifecycle",
+            "id": "verified-not-admitted"
+          }
+        },
+        {
+          "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-admitted-immutable-20260929T044118Z-c82cec63.png",
+          "sha256": "8ea9dde5708480c9d0dbef06747172b2ff42e8ab5dc5839f01c4e1f622c31c14",
+          "bytes": 189854,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:41:18.824Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "evidence.create-attest-verify-lifecycle",
+            "id": "admitted-immutable"
+          }
+        }
+      ],
+      "pageErrors": [],
+      "transportFailures": [
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": "151.0.7922.34",
+      "status": "PASS",
+      "failureClassification": null
+    },
+    {
+      "flow": "evidence.receipt-count-truth-f051",
+      "route": "/?surface=evidence",
+      "preconditions": [
+        "app booted with CEPFoundation.consumer === \"evidence\"",
+        "F-051 (Corr03 evidence-receipt overcount) is the regression under test: named count must never exceed unique identity count",
+        "receipts are counted by identity (sequence + command + subject), never by name alone"
+      ],
+      "expectedState": "the W04 receipt census reports exactly one receipt per mutating operation, with unique receipt identities and a visible row count equal to the unique record id count; a refused operation emits no receipt",
+      "fixtureState": "three Candidates imported through the live evidence.import semantic command; one verified; one refused Admission (no receipt)",
+      "negativeCases": [
+        "a refused Admission must not add a receipt (no phantom counts)",
+        "two receipts must never share an identity (sequence+command+subject)",
+        "the visible named row count must equal the unique record id count"
+      ],
+      "consumerTaxonomy": {
+        "primaryLiveOperationalConsumer": "W04 Evidence domain receipt ledger executed inside the mounted Chromium page",
+        "recordedConsumer": "m0 Evidence workbench collection rows (visible row census)",
+        "fixture": "three Candidate identities imported by this harness"
+      },
+      "actionSequence": [
+        "GET /?surface=evidence",
+        "import three Candidates through the live semantic command",
+        "verify one candidate (attestation receipt) and refuse one Admission (no receipt)",
+        "census the receipt ledger by identity"
+      ],
+      "assertions": [
+        {
+          "id": "f051.three-candidates-imported",
+          "expected": {
+            "ok": true,
+            "ok2": true,
+            "ok3": true
+          },
+          "actual": {
+            "ok": true,
+            "ok2": true,
+            "ok3": true
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "f051.refused-admission-code",
+          "expected": {
+            "refusedOk": false,
+            "refusedCode": "SOURCE_VERIFICATION_REQUIRED"
+          },
+          "actual": {
+            "refusedOk": false,
+            "refusedCode": "SOURCE_VERIFICATION_REQUIRED"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "f051.receipt-count-equals-unique-identity-count",
+          "expected": 4,
+          "actual": 4,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "f051.sequences-unique",
+          "expected": 4,
+          "actual": 4,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "f051.receipt-count-exact",
+          "expected": 4,
+          "actual": 4,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "f051.sequences-increasing",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "f051.owners-are-w04-domain",
+          "expected": [
+            "W04EvidenceDomain"
+          ],
+          "actual": [
+            "W04EvidenceDomain"
+          ],
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "f051.named-rows-equal-unique-record-ids",
+          "expected": 3,
+          "actual": 3,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "f051.visible-rows-equal-domain-records",
+          "expected": 3,
+          "actual": 3,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "f051.record-ids-unique",
+          "expected": 3,
+          "actual": 3,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "f051.semantic-command-receipts-not-undercounted",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        }
+      ],
+      "screenshots": [
+        {
+          "filename": "writer-output/W04/evidence/evidence-receipt-count-truth-f051-receipt-census-20260929T044131Z-c82cec63.png",
+          "sha256": "6aa571b54a932c53e2e721768d50b479fd6f0bfe435ff5727f62c880947da3a5",
+          "bytes": 182786,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:41:31.122Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "evidence.receipt-count-truth-f051",
+            "id": "receipt-census"
+          }
+        }
+      ],
+      "pageErrors": [],
+      "transportFailures": [
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": "151.0.7922.34",
+      "status": "PASS",
+      "failureClassification": null
+    },
+    {
+      "flow": "mastery.progression-state-machine",
+      "route": "/?surface=mastery",
+      "preconditions": [
+        "app booted with CEPFoundation.consumer === \"mastery\"",
+        "no canonical Mastery writer / authorized evaluator is bound on this route",
+        "CEP-DEC-026 (A03) judgment + freshness vocabulary is the state machine under test"
+      ],
+      "expectedState": "NOT_EVALUATED -> INSUFFICIENT_EVIDENCE/INCONCLUSIVE -> NOT_MASTERED/MASTERED with freshness CURRENT|REVALIDATION_REQUIRED; no progression may occur without a bound basis and an authorized evaluator; there is no local Mastery write",
+      "fixtureState": "reviewer harness injects ONE synthetic Mastery State row (truthClass SYNTHETIC_DEMO_SEED) so the state machine has a subject; the row is labelled fixture and is never presented as a real achievement",
+      "negativeCases": [
+        "reevaluation without an authorized evaluator must be refused (AUTHORIZED_EVALUATOR_UNBOUND)",
+        "reevaluation with an unavailable basis must be refused (BASIS_UNAVAILABLE)",
+        "conflicting Decisions must route to governed evaluation, never to a grant (CONFLICT_REQUIRES_GOVERNED_EVALUATION)",
+        "local freshness/Mastery writes must be refused (CANONICAL_MASTERY_WRITE_FORBIDDEN)",
+        "completion/activity must never be an input to Mastery"
+      ],
+      "consumerTaxonomy": {
+        "primaryLiveOperationalConsumer": "W04 Mastery domain executed inside the mounted Chromium page",
+        "recordedConsumer": "m0 Mastery workbench DOM projection (rows, explainability projection)",
+        "fixture": "single SYNTHETIC_DEMO_SEED Mastery State injected by this harness"
+      },
+      "actionSequence": [
+        "GET /?surface=mastery",
+        "inspect the mounted Mastery workbench before any mutation",
+        "inject ONE synthetic Mastery State (truthClass SYNTHETIC_DEMO_SEED) as the state-machine subject",
+        "NEGATIVE: re-evaluation with an unavailable/unbound basis",
+        "NEGATIVE: basis bound but no authorized evaluator -> no grant",
+        "NEGATIVE: conflicting Decisions route to governed evaluation, never to a grant",
+        "NEGATIVE: local freshness write is forbidden (canonical Mastery writer only)",
+        "explain the causal basis and confirm completion/activity is never an input"
+      ],
+      "assertions": [
+        {
+          "id": "mastery.route-mounted",
+          "expected": {
+            "consumer": "mastery",
+            "stage": "mastery"
+          },
+          "actual": {
+            "consumer": "mastery",
+            "stage": "mastery"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "mastery.domain-empty-at-start",
+          "expected": 0,
+          "actual": 0,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "mastery.truth-no-local-write",
+          "expected": {
+            "masteryFromCompletion": false,
+            "canonicalMasteryWriter": "UNBOUND",
+            "reevaluate": "ZERO_LOCAL_MASTERY_WRITE"
+          },
+          "actual": {
+            "masteryFromCompletion": false,
+            "canonicalMasteryWriter": "UNBOUND",
+            "reevaluate": "ZERO_LOCAL_MASTERY_WRITE"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "mastery.toolbar-command-set",
+          "expected": [
+            "mastery.inspect",
+            "mastery.explain",
+            "mastery.reevaluate"
+          ],
+          "actual": [
+            "mastery.inspect",
+            "mastery.explain",
+            "mastery.reevaluate"
+          ],
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "mastery.empty-state-is-visible",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "mastery.judgment-in-vocabulary",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "mastery.freshness-in-vocabulary",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "mastery.fixture-row-is-labelled",
+          "expected": "SYNTHETIC_DEMO_SEED",
+          "actual": "SYNTHETIC_DEMO_SEED",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "mastery.negative-basis-unavailable",
+          "expected": {
+            "code": "BASIS_UNAVAILABLE",
+            "mutated": false,
+            "snapshotUnchanged": true,
+            "history": 1
+          },
+          "actual": {
+            "code": "BASIS_UNAVAILABLE",
+            "mutated": false,
+            "snapshotUnchanged": true,
+            "history": 1
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "mastery.negative-no-evaluator-no-grant",
+          "expected": {
+            "ok": false,
+            "code": "AUTHORIZED_EVALUATOR_UNBOUND",
+            "mutated": false,
+            "snapshotUnchanged": true,
+            "history": 1,
+            "judgment": "MASTERED"
+          },
+          "actual": {
+            "ok": false,
+            "code": "AUTHORIZED_EVALUATOR_UNBOUND",
+            "mutated": false,
+            "snapshotUnchanged": true,
+            "history": 1,
+            "judgment": "MASTERED"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "mastery.negative-conflict-needs-governed-evaluation",
+          "expected": {
+            "code": "CONFLICT_REQUIRES_GOVERNED_EVALUATION",
+            "action": "REQUEST_REVIEW_OR_EVALUATION",
+            "mutated": false,
+            "snapshotUnchanged": true,
+            "judgment": "MASTERED",
+            "history": 1
+          },
+          "actual": {
+            "code": "CONFLICT_REQUIRES_GOVERNED_EVALUATION",
+            "action": "REQUEST_REVIEW_OR_EVALUATION",
+            "mutated": false,
+            "snapshotUnchanged": true,
+            "judgment": "MASTERED",
+            "history": 1
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "mastery.negative-no-local-write",
+          "expected": {
+            "ok": false,
+            "code": "CANONICAL_MASTERY_WRITE_FORBIDDEN",
+            "mutated": false,
+            "freshness": "REVALIDATION_REQUIRED",
+            "judgment": "MASTERED"
+          },
+          "actual": {
+            "ok": false,
+            "code": "CANONICAL_MASTERY_WRITE_FORBIDDEN",
+            "mutated": false,
+            "freshness": "REVALIDATION_REQUIRED",
+            "judgment": "MASTERED"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "mastery.explain-causal-law",
+          "expected": {
+            "completionOrActivityUsed": false,
+            "institutionalAuthorityInferred": false,
+            "causalLaw": "EFFECTIVE_DECISIONS+EVIDENCE+VERSIONED_POLICY_ONLY"
+          },
+          "actual": {
+            "completionOrActivityUsed": false,
+            "institutionalAuthorityInferred": false,
+            "causalLaw": "EFFECTIVE_DECISIONS+EVIDENCE+VERSIONED_POLICY_ONLY"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "mastery.no-progression-without-proof",
+          "expected": {
+            "judgment": "MASTERED",
+            "freshness": "REVALIDATION_REQUIRED",
+            "history": 1,
+            "receipts": 0
+          },
+          "actual": {
+            "judgment": "MASTERED",
+            "freshness": "REVALIDATION_REQUIRED",
+            "history": 1,
+            "receipts": 0
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "mastery.collection-renders-fixture-row",
+          "expected": [
+            "mastery-w04-flow"
+          ],
+          "actual": [
+            "mastery-w04-flow"
+          ],
+          "ok": true,
+          "class": null,
+          "message": ""
+        }
+      ],
+      "screenshots": [
+        {
+          "filename": "writer-output/W04/evidence/mastery-progression-state-machine-empty-state-20260929T044124Z-c82cec63.png",
+          "sha256": "e34b9999719ce5039a3c0799844461938af481ff2869115013bf2b262e583e97",
+          "bytes": 124349,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:41:24.762Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "mastery.progression-state-machine",
+            "id": "empty-state"
+          }
+        },
+        {
+          "filename": "writer-output/W04/evidence/mastery-progression-state-machine-fixture-row-20260929T044124Z-c82cec63.png",
+          "sha256": "8c76f4bd61a28133e85407b4a152e2b301f69c5fef3a2dd6ae78ec2d787c1e3a",
+          "bytes": 181960,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:41:25.045Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "mastery.progression-state-machine",
+            "id": "fixture-row"
+          }
+        },
+        {
+          "filename": "writer-output/W04/evidence/mastery-progression-state-machine-state-machine-blocked-20260929T044125Z-c82cec63.png",
+          "sha256": "3b8a26efc3740309197f2a17de762337c23c5e1bb9c2d53d4b9dfc8c39a4fa0b",
+          "bytes": 182063,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:41:25.619Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "mastery.progression-state-machine",
+            "id": "state-machine-blocked"
+          }
+        }
+      ],
+      "pageErrors": [],
+      "transportFailures": [
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": "151.0.7922.34",
+      "status": "PASS",
+      "failureClassification": null
+    },
+    {
+      "flow": "portfolio.assembly-and-export",
+      "route": "/?surface=portfolio",
+      "preconditions": [
+        "app booted with CEPFoundation.consumer === \"portfolio\"",
+        "Portfolio owns curation references only; the shared source resolver can only resolve admitted Evidence/ Mastery revisions",
+        "Project/Learning Objective grouping authority is UNRESOLVED (open question Q-5) — no grouping registry is bound"
+      ],
+      "expectedState": "assembly adds reference-only memberships whose source state is whatever the resolver observed (never an invented RESOLVABLE); grouping is refused with AUTHORITY_DECISION_REQUIRED while Q-5 is open; export is a reproducible projection that never duplicates or deletes canonical truth",
+      "fixtureState": "reviewer harness adds two curation references through the live portfolio.curate path; the referenced sources do not exist, so their source state must stay UNVERIFIED_PROVIDER_UNBOUND",
+      "negativeCases": [
+        "grouping without bound authority must be refused with AUTHORITY_DECISION_REQUIRED (Q-5 stays open)",
+        "a missing canonical source must never be presented as RESOLVABLE",
+        "curate remove must preserve the canonical source (canonicalSourceWrite=false, sourcePreserved=true)",
+        "export must never claim canonical publication or copy canonical Evidence truth"
+      ],
+      "consumerTaxonomy": {
+        "primaryLiveOperationalConsumer": "W04 Portfolio domain executed inside the mounted Chromium page",
+        "recordedConsumer": "m0 Portfolio workbench DOM projection (rows, curation metadata)",
+        "fixture": "two curation references added by this harness"
+      },
+      "actionSequence": [
+        "GET /?surface=portfolio",
+        "inspect the mounted Portfolio workbench before any mutation",
+        "assemble a curation reference whose canonical source is NOT resolvable",
+        "NEGATIVE: grouping without bound authority (open question Q-5)",
+        "add a second reference, then remove the first with an exact revision envelope",
+        "export twice and compare byte-for-byte (reproducible export)"
+      ],
+      "assertions": [
+        {
+          "id": "portfolio.route-mounted",
+          "expected": {
+            "consumer": "portfolio",
+            "stage": "portfolio"
+          },
+          "actual": {
+            "consumer": "portfolio",
+            "stage": "portfolio"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "portfolio.domain-empty-at-start",
+          "expected": 0,
+          "actual": 0,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "portfolio.truth-no-canonical-copy",
+          "expected": {
+            "canonicalSourceCopies": 0,
+            "canonicalSourceDeleteAuthority": false,
+            "groupingAuthority": "AUTHORITY_DECISION_REQUIRED"
+          },
+          "actual": {
+            "canonicalSourceCopies": 0,
+            "canonicalSourceDeleteAuthority": false,
+            "groupingAuthority": "AUTHORITY_DECISION_REQUIRED"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "portfolio.toolbar-command-set",
+          "expected": [
+            "portfolio.curate",
+            "portfolio.filter",
+            "portfolio.export",
+            "portfolio.group"
+          ],
+          "actual": [
+            "portfolio.curate",
+            "portfolio.filter",
+            "portfolio.export",
+            "portfolio.group"
+          ],
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "portfolio.export-empty-and-not-canonical",
+          "expected": {
+            "ok": true,
+            "canonicalPublication": false,
+            "members": 0
+          },
+          "actual": {
+            "ok": true,
+            "canonicalPublication": false,
+            "members": 0
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "portfolio.add-is-reference-only",
+          "expected": {
+            "ok": true,
+            "groupingState": "UNGROUPED",
+            "canonicalSourceWrite": false,
+            "records": 1
+          },
+          "actual": {
+            "ok": true,
+            "groupingState": "UNGROUPED",
+            "canonicalSourceWrite": false,
+            "records": 1
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "portfolio.unbound-source-not-resolvable",
+          "expected": "UNAVAILABLE",
+          "actual": "UNAVAILABLE",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "portfolio.negative-grouping-authority-unresolved",
+          "expected": {
+            "ok": false,
+            "code": "AUTHORITY_DECISION_REQUIRED",
+            "mutated": false,
+            "unchanged": true,
+            "responseGroupingState": "AUTHORITY_PENDING",
+            "groupingRef": null,
+            "groupingState": "UNGROUPED"
+          },
+          "actual": {
+            "ok": false,
+            "code": "AUTHORITY_DECISION_REQUIRED",
+            "mutated": false,
+            "unchanged": true,
+            "responseGroupingState": "AUTHORITY_PENDING",
+            "groupingRef": null,
+            "groupingState": "UNGROUPED"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "portfolio.negative-stale-revision-envelope",
+          "expected": {
+            "staleOk": false,
+            "staleCode": "REVISION_CONFLICT"
+          },
+          "actual": {
+            "staleOk": false,
+            "staleCode": "REVISION_CONFLICT"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "portfolio.remove-preserves-canonical-source",
+          "expected": {
+            "removeOk": true,
+            "sourcePreserved": true,
+            "canonicalSourceWrite": false
+          },
+          "actual": {
+            "removeOk": true,
+            "sourcePreserved": true,
+            "canonicalSourceWrite": false
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "portfolio.records-after-removal",
+          "expected": [
+            "member-w04-flow-2"
+          ],
+          "actual": [
+            "member-w04-flow-2"
+          ],
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "portfolio.export-reproducible",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "portfolio.export-never-canonical",
+          "expected": {
+            "canonicalPublication": false,
+            "hasCanonicalEvidence": false,
+            "hasDigestCopy": false
+          },
+          "actual": {
+            "canonicalPublication": false,
+            "hasCanonicalEvidence": false,
+            "hasDigestCopy": false
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "portfolio.export-exact-refs",
+          "expected": [
+            "member-w04-flow-2@pm-flow-002:not-bound-mastery@r1:UNGROUPED"
+          ],
+          "actual": [
+            "member-w04-flow-2@pm-flow-002:not-bound-mastery@r1:UNGROUPED"
+          ],
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "portfolio.receipt-identities-are-unique",
+          "expected": 3,
+          "actual": 3,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "portfolio.collection-renders-member",
+          "expected": [
+            "member-w04-flow-2"
+          ],
+          "actual": [
+            "member-w04-flow-2"
+          ],
+          "ok": true,
+          "class": null,
+          "message": ""
+        }
+      ],
+      "screenshots": [
+        {
+          "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-empty-state-20260929T044127Z-c82cec63.png",
+          "sha256": "b6247c7f8c7d00f9804b1b63a02e37b15800e4f8815e01b4cac3b20fbd9ef2e2",
+          "bytes": 121852,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:41:27.758Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "portfolio.assembly-and-export",
+            "id": "empty-state"
+          }
+        },
+        {
+          "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-assembly-one-reference-20260929T044127Z-c82cec63.png",
+          "sha256": "425cfe954a24ded6c8228dda15801fd6997f012df6e9bc0c19ace0c6a6930cd9",
+          "bytes": 169726,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:41:28.212Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "portfolio.assembly-and-export",
+            "id": "assembly-one-reference"
+          }
+        },
+        {
+          "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-export-reproducible-20260929T044128Z-c82cec63.png",
+          "sha256": "fd1b8b2f89343d017d75d3a85a423361af6f8b4a07042c30e443f5cc485b832c",
+          "bytes": 166006,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:41:28.805Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "portfolio.assembly-and-export",
+            "id": "export-reproducible"
+          }
+        }
+      ],
+      "pageErrors": [],
+      "transportFailures": [
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": "151.0.7922.34",
+      "status": "PASS",
+      "failureClassification": null
+    },
+    {
+      "flow": "reviews.flow-and-verdict-recording",
+      "route": "/?surface=reviews",
+      "preconditions": [
+        "app booted with CEPFoundation.consumer === \"reviews\"",
+        "shared W04 evidence domain starts empty, so no admitted immutable Evidence exists yet",
+        "central ReviewAuthorityRegistry is bound (no reviewer is registered initially)"
+      ],
+      "expectedState": "a Review cannot exist without pinned admitted immutable Evidence; workflow runs REQUESTED -> ASSIGNED -> IN_REVIEW -> finding -> READY_FOR_DECISION -> CLOSED verdict; the Decision is append-only immutable lineage; the family never self-admits and never claims formal presentation authority",
+      "fixtureState": "reviewer harness (a) seeds the shared Evidence domain through the live evidence API with a labelled FIXTURE admission authority, (b) registers ONE reviewer in the CENTRAL ReviewAuthorityRegistry. Both are labelled fixture; no review, finding or Decision content is invented by the harness beyond the explicit reviewer-authored text used by this proof.",
+      "negativeCases": [
+        "a Review request pinned to a non-existent Evidence revision must be refused (ADMITTED_IMMUTABLE_EVIDENCE_REQUIRED)",
+        "a finding/Decision must never be created without reviewer authority",
+        "a second Decision must not overwrite or delete the first (append-only lineage)",
+        "the family must stay familyAdmissionClaim=false and CONCEPT_CONTRACT_ONLY (no self-approval)"
+      ],
+      "consumerTaxonomy": {
+        "primaryLiveOperationalConsumer": "W04 Review domain + central ReviewAuthorityRegistry executed inside the mounted Chromium page",
+        "recordedConsumer": "m0 Reviews workbench DOM projection (rows, governed Review input form)",
+        "fixture": "reviewer registration + admission authority injected by this harness (labelled FIXTURE)"
+      },
+      "actionSequence": [
+        "GET /?surface=reviews",
+        "inspect the mounted Reviews workbench before any mutation",
+        "NEGATIVE: request a Review pinned to an Evidence revision that does not exist",
+        "seed the shared Evidence domain through the live evidence domain API (labelled FIXTURE) so a real admitted revision can be pinned",
+        "register exactly one Reviewer in the CENTRAL ReviewAuthorityRegistry (the only authority path)",
+        "request the formal Review pinned to the admitted Evidence revision + pinned criterion",
+        "assign -> start the Review",
+        "record an explicit reviewer-authored finding (no manufactured text)",
+        "mark ready for Decision",
+        "record the verdict (issuing Decision) with explicit expected CAS = null (no prior Decision)",
+        "NEGATIVE: re-issuing a Decision on a CLOSED review must not mutate lineage",
+        "assert the family authority ceiling after the verdict"
+      ],
+      "assertions": [
+        {
+          "id": "reviews.route-mounted",
+          "expected": {
+            "consumer": "reviews",
+            "stage": "reviews"
+          },
+          "actual": {
+            "consumer": "reviews",
+            "stage": "reviews"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reviews.domain-empty-at-start",
+          "expected": 0,
+          "actual": 0,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reviews.no-family-self-admission",
+          "expected": {
+            "familyAdmissionClaim": false,
+            "presentation": "CONCEPT_CONTRACT_ONLY"
+          },
+          "actual": {
+            "familyAdmissionClaim": false,
+            "presentation": "CONCEPT_CONTRACT_ONLY"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reviews.toolbar-command-set",
+          "expected": [
+            "reviews.review",
+            "reviews.finding",
+            "reviews.compare",
+            "reviews.supersede"
+          ],
+          "actual": [
+            "reviews.review",
+            "reviews.finding",
+            "reviews.compare",
+            "reviews.supersede"
+          ],
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reviews.central-authority-registry-bound",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reviews.negative-no-phantom-review",
+          "expected": {
+            "ok": false,
+            "code": "ADMITTED_IMMUTABLE_EVIDENCE_REQUIRED",
+            "records": 0
+          },
+          "actual": {
+            "ok": false,
+            "code": "ADMITTED_IMMUTABLE_EVIDENCE_REQUIRED",
+            "records": 0
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reviews.fixture-evidence-admitted",
+          "expected": {
+            "importOk": true,
+            "admitOk": true,
+            "status": "ADMITTED",
+            "evidenceRef": "ev-w04-flow@ev-w04-flow-r1",
+            "immutable": true
+          },
+          "actual": {
+            "importOk": true,
+            "admitOk": true,
+            "status": "ADMITTED",
+            "evidenceRef": "ev-w04-flow@ev-w04-flow-r1",
+            "immutable": true
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reviews.reviewer-registered-in-central-registry",
+          "expected": {
+            "authorized": true,
+            "canAssign": true,
+            "testOnly": false
+          },
+          "actual": {
+            "authorized": true,
+            "canAssign": true,
+            "testOnly": false
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reviews.request-created",
+          "expected": {
+            "ok": true,
+            "state": "REQUESTED",
+            "decision": null,
+            "findings": 0
+          },
+          "actual": {
+            "ok": true,
+            "state": "REQUESTED",
+            "decision": null,
+            "findings": 0
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reviews.pinned-to-exact-admission-revision",
+          "expected": [
+            "ev-w04-flow@ev-w04-flow-r1"
+          ],
+          "actual": [
+            "ev-w04-flow@ev-w04-flow-r1"
+          ],
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reviews.workflow-advances",
+          "expected": {
+            "assignOk": true,
+            "startOk": true,
+            "state": "IN_REVIEW"
+          },
+          "actual": {
+            "assignOk": true,
+            "startOk": true,
+            "state": "IN_REVIEW"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reviews.finding-creates-no-decision",
+          "expected": {
+            "ok": true,
+            "findings": 1,
+            "decision": null
+          },
+          "actual": {
+            "ok": true,
+            "findings": 1,
+            "decision": null
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reviews.ready-for-decision",
+          "expected": {
+            "ok": true,
+            "state": "READY_FOR_DECISION"
+          },
+          "actual": {
+            "ok": true,
+            "state": "READY_FOR_DECISION"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reviews.verdict-recorded",
+          "expected": {
+            "ok": true,
+            "code": null,
+            "state": "CLOSED",
+            "outcome": "ACCEPT_WITH_LIMITATIONS",
+            "decisionId": "decision-w04-flow-1",
+            "history": [
+              "decision-w04-flow-1:ACCEPT_WITH_LIMITATIONS"
+            ],
+            "priorRetained": true,
+            "receipts": 6
+          },
+          "actual": {
+            "ok": true,
+            "code": null,
+            "state": "CLOSED",
+            "outcome": "ACCEPT_WITH_LIMITATIONS",
+            "decisionId": "decision-w04-flow-1",
+            "history": [
+              "decision-w04-flow-1:ACCEPT_WITH_LIMITATIONS"
+            ],
+            "priorRetained": true,
+            "receipts": 6
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reviews.negative-closed-review-not-redecided",
+          "expected": {
+            "ok": false,
+            "code": "REVIEW_NOT_READY_FOR_DECISION",
+            "unchanged": true
+          },
+          "actual": {
+            "ok": false,
+            "code": "REVIEW_NOT_READY_FOR_DECISION",
+            "unchanged": true
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reviews.family-never-self-approves",
+          "expected": {
+            "familyAdmissionClaim": false,
+            "presentation": "CONCEPT_CONTRACT_ONLY"
+          },
+          "actual": {
+            "familyAdmissionClaim": false,
+            "presentation": "CONCEPT_CONTRACT_ONLY"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reviews.presentation-authority-ceiling",
+          "expected": "NO_FORMAL_DECISION_AUTHORITY_OR_MUTATION",
+          "actual": "NO_FORMAL_DECISION_AUTHORITY_OR_MUTATION",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reviews.presentation-is-not-a-real-consumer",
+          "expected": "W04_NOT_SELF_ADMITTED",
+          "actual": "W04_NOT_SELF_ADMITTED",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reviews.collection-renders-review-row",
+          "expected": [
+            "rv-w04-flow"
+          ],
+          "actual": [
+            "rv-w04-flow"
+          ],
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reviews.decision-history-append-only",
+          "expected": 1,
+          "actual": 1,
+          "ok": true,
+          "class": null,
+          "message": ""
+        }
+      ],
+      "screenshots": [
+        {
+          "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-empty-state-20260929T044120Z-c82cec63.png",
+          "sha256": "aee77eed907e0ffc2f24d5f2fa22f2f5f517d6f9b2b69999e1a5c6d183022c9b",
+          "bytes": 120622,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:41:21.006Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "reviews.flow-and-verdict-recording",
+            "id": "empty-state"
+          }
+        },
+        {
+          "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-ready-for-decision-20260929T044121Z-c82cec63.png",
+          "sha256": "16d746ac41ee484819126fa0ceef8f1756abc57d7158e58a336bb6bbc4370ab0",
+          "bytes": 181386,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:41:21.627Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "reviews.flow-and-verdict-recording",
+            "id": "ready-for-decision"
+          }
+        },
+        {
+          "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-verdict-recorded-20260929T044122Z-c82cec63.png",
+          "sha256": "57466eea8da3d93d65e6f39e223e9f5ac8bb21df9b83f047d958b7ce6777e0f4",
+          "bytes": 180942,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:41:22.283Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "reviews.flow-and-verdict-recording",
+            "id": "verdict-recorded"
+          }
+        }
+      ],
+      "pageErrors": [],
+      "transportFailures": [
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": "151.0.7922.34",
+      "status": "PASS",
+      "failureClassification": null
+    }
+  ],
+  "evidenceArtifacts": [
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-admitted-immutable-20260929T042937Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-admitted-immutable-20260929T043545Z-c82cec63.png",
+      "sha256": "8ea9dde5708480c9d0dbef06747172b2ff42e8ab5dc5839f01c4e1f622c31c14",
+      "bytes": 189854,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-admitted-immutable-20260929T044118Z-c82cec63.png",
+      "sha256": "8ea9dde5708480c9d0dbef06747172b2ff42e8ab5dc5839f01c4e1f622c31c14",
+      "bytes": 189854,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": "evidence.create-attest-verify-lifecycle"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow evidence.create-attest-verify-lifecycle"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-candidate-imported-20260929T042228Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-candidate-imported-20260929T042313Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-candidate-imported-20260929T042419Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-candidate-imported-20260929T042750Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-candidate-imported-20260929T042937Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-candidate-imported-20260929T043545Z-c82cec63.png",
+      "sha256": "bc553ab068200129f19234f2ab33a22463cfd6708e45df61b8c240bdfce5432f",
+      "bytes": 189940,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-candidate-imported-20260929T044117Z-c82cec63.png",
+      "sha256": "bc553ab068200129f19234f2ab33a22463cfd6708e45df61b8c240bdfce5432f",
+      "bytes": 189940,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": "evidence.create-attest-verify-lifecycle"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow evidence.create-attest-verify-lifecycle"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-empty-state-20260929T042146Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-empty-state-20260929T042228Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-empty-state-20260929T042313Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-empty-state-20260929T042419Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-empty-state-20260929T042750Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-empty-state-20260929T042937Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-empty-state-20260929T043544Z-c82cec63.png",
+      "sha256": "07f05a3fccf28afe8e5085497388ba6854600f63a9e84c395bd4485f87222215",
+      "bytes": 119185,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-empty-state-20260929T044117Z-c82cec63.png",
+      "sha256": "07f05a3fccf28afe8e5085497388ba6854600f63a9e84c395bd4485f87222215",
+      "bytes": 119185,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": "evidence.create-attest-verify-lifecycle"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow evidence.create-attest-verify-lifecycle"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-verified-not-admitted-20260929T042751Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-verified-not-admitted-20260929T042937Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-verified-not-admitted-20260929T043545Z-c82cec63.png",
+      "sha256": "d82288b779e455665eafb9470892e2f1ab1d18b95275ebc0fd703f1f1c0c5fda",
+      "bytes": 191281,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-create-attest-verify-lifecycle-verified-not-admitted-20260929T044117Z-c82cec63.png",
+      "sha256": "d82288b779e455665eafb9470892e2f1ab1d18b95275ebc0fd703f1f1c0c5fda",
+      "bytes": 191281,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": "evidence.create-attest-verify-lifecycle"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow evidence.create-attest-verify-lifecycle"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-receipt-count-truth-f051-receipt-census-20260929T042155Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-receipt-count-truth-f051-receipt-census-20260929T042239Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-receipt-count-truth-f051-receipt-census-20260929T042322Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-receipt-count-truth-f051-receipt-census-20260929T042431Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-receipt-count-truth-f051-receipt-census-20260929T042759Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-receipt-count-truth-f051-receipt-census-20260929T042946Z-c82cec63.png",
+      "sha256": "a29d3436656bf3a68b84813b41d6fa8c7d84c0fe8388797d4f8533e550d59991",
+      "bytes": 124274,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-receipt-count-truth-f051-receipt-census-20260929T043557Z-c82cec63.png",
+      "sha256": "6aa571b54a932c53e2e721768d50b479fd6f0bfe435ff5727f62c880947da3a5",
+      "bytes": 182786,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/evidence-receipt-count-truth-f051-receipt-census-20260929T044131Z-c82cec63.png",
+      "sha256": "6aa571b54a932c53e2e721768d50b479fd6f0bfe435ff5727f62c880947da3a5",
+      "bytes": 182786,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": "evidence.receipt-count-truth-f051"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow evidence.receipt-count-truth-f051"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-empty-state-20260929T042150Z-c82cec63.png",
+      "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+      "bytes": 124691,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-empty-state-20260929T042233Z-c82cec63.png",
+      "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+      "bytes": 124691,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-empty-state-20260929T042318Z-c82cec63.png",
+      "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+      "bytes": 124691,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-empty-state-20260929T042424Z-c82cec63.png",
+      "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+      "bytes": 124691,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-empty-state-20260929T042755Z-c82cec63.png",
+      "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+      "bytes": 124691,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-empty-state-20260929T042941Z-c82cec63.png",
+      "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+      "bytes": 124691,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-empty-state-20260929T043550Z-c82cec63.png",
+      "sha256": "e34b9999719ce5039a3c0799844461938af481ff2869115013bf2b262e583e97",
+      "bytes": 124349,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-empty-state-20260929T044124Z-c82cec63.png",
+      "sha256": "e34b9999719ce5039a3c0799844461938af481ff2869115013bf2b262e583e97",
+      "bytes": 124349,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": "mastery.progression-state-machine"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow mastery.progression-state-machine"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-fixture-row-20260929T042150Z-c82cec63.png",
+      "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+      "bytes": 124691,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-fixture-row-20260929T042234Z-c82cec63.png",
+      "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+      "bytes": 124691,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-fixture-row-20260929T042318Z-c82cec63.png",
+      "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+      "bytes": 124691,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-fixture-row-20260929T042424Z-c82cec63.png",
+      "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+      "bytes": 124691,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-fixture-row-20260929T042755Z-c82cec63.png",
+      "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+      "bytes": 124691,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-fixture-row-20260929T042942Z-c82cec63.png",
+      "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+      "bytes": 124691,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-fixture-row-20260929T043551Z-c82cec63.png",
+      "sha256": "8c76f4bd61a28133e85407b4a152e2b301f69c5fef3a2dd6ae78ec2d787c1e3a",
+      "bytes": 181960,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-fixture-row-20260929T044124Z-c82cec63.png",
+      "sha256": "8c76f4bd61a28133e85407b4a152e2b301f69c5fef3a2dd6ae78ec2d787c1e3a",
+      "bytes": 181960,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": "mastery.progression-state-machine"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow mastery.progression-state-machine"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-state-machine-blocked-20260929T042755Z-c82cec63.png",
+      "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+      "bytes": 124691,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-state-machine-blocked-20260929T042942Z-c82cec63.png",
+      "sha256": "ee3bdd551c782ef16c1143cb86c430bca097343683372056f96a92e45225a61f",
+      "bytes": 124691,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-state-machine-blocked-20260929T043551Z-c82cec63.png",
+      "sha256": "3b8a26efc3740309197f2a17de762337c23c5e1bb9c2d53d4b9dfc8c39a4fa0b",
+      "bytes": 182063,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/mastery-progression-state-machine-state-machine-blocked-20260929T044125Z-c82cec63.png",
+      "sha256": "3b8a26efc3740309197f2a17de762337c23c5e1bb9c2d53d4b9dfc8c39a4fa0b",
+      "bytes": 182063,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": "mastery.progression-state-machine"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow mastery.progression-state-machine"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-assembly-one-reference-20260929T042152Z-c82cec63.png",
+      "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+      "bytes": 122572,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-assembly-one-reference-20260929T042236Z-c82cec63.png",
+      "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+      "bytes": 122572,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-assembly-one-reference-20260929T042320Z-c82cec63.png",
+      "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+      "bytes": 122572,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-assembly-one-reference-20260929T042427Z-c82cec63.png",
+      "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+      "bytes": 122572,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-assembly-one-reference-20260929T042757Z-c82cec63.png",
+      "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+      "bytes": 122572,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-assembly-one-reference-20260929T042944Z-c82cec63.png",
+      "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+      "bytes": 122572,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-assembly-one-reference-20260929T043554Z-c82cec63.png",
+      "sha256": "425cfe954a24ded6c8228dda15801fd6997f012df6e9bc0c19ace0c6a6930cd9",
+      "bytes": 169726,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-assembly-one-reference-20260929T044127Z-c82cec63.png",
+      "sha256": "425cfe954a24ded6c8228dda15801fd6997f012df6e9bc0c19ace0c6a6930cd9",
+      "bytes": 169726,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": "portfolio.assembly-and-export"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow portfolio.assembly-and-export"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-empty-state-20260929T041922Z-c82cec63.png",
+      "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+      "bytes": 122572,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-empty-state-20260929T042152Z-c82cec63.png",
+      "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+      "bytes": 122572,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-empty-state-20260929T042236Z-c82cec63.png",
+      "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+      "bytes": 122572,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-empty-state-20260929T042320Z-c82cec63.png",
+      "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+      "bytes": 122572,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-empty-state-20260929T042427Z-c82cec63.png",
+      "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+      "bytes": 122572,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-empty-state-20260929T042757Z-c82cec63.png",
+      "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+      "bytes": 122572,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-empty-state-20260929T042944Z-c82cec63.png",
+      "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+      "bytes": 122572,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-empty-state-20260929T043553Z-c82cec63.png",
+      "sha256": "b6247c7f8c7d00f9804b1b63a02e37b15800e4f8815e01b4cac3b20fbd9ef2e2",
+      "bytes": 121852,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-empty-state-20260929T044127Z-c82cec63.png",
+      "sha256": "b6247c7f8c7d00f9804b1b63a02e37b15800e4f8815e01b4cac3b20fbd9ef2e2",
+      "bytes": 121852,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": "portfolio.assembly-and-export"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow portfolio.assembly-and-export"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-export-reproducible-20260929T042152Z-c82cec63.png",
+      "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+      "bytes": 122572,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-export-reproducible-20260929T042236Z-c82cec63.png",
+      "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+      "bytes": 122572,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-export-reproducible-20260929T042320Z-c82cec63.png",
+      "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+      "bytes": 122572,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-export-reproducible-20260929T042428Z-c82cec63.png",
+      "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+      "bytes": 122572,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-export-reproducible-20260929T042757Z-c82cec63.png",
+      "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+      "bytes": 122572,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-export-reproducible-20260929T042944Z-c82cec63.png",
+      "sha256": "056535086773c36f99409bc40e545e9a249f15802b13ad5cfc4a04f3b58fe640",
+      "bytes": 122572,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-export-reproducible-20260929T043554Z-c82cec63.png",
+      "sha256": "fd1b8b2f89343d017d75d3a85a423361af6f8b4a07042c30e443f5cc485b832c",
+      "bytes": 166006,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/portfolio-assembly-and-export-export-reproducible-20260929T044128Z-c82cec63.png",
+      "sha256": "fd1b8b2f89343d017d75d3a85a423361af6f8b4a07042c30e443f5cc485b832c",
+      "bytes": 166006,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": "portfolio.assembly-and-export"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow portfolio.assembly-and-export"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-empty-state-20260929T041917Z-c82cec63.png",
+      "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+      "bytes": 125313,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-empty-state-20260929T042148Z-c82cec63.png",
+      "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+      "bytes": 125313,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-empty-state-20260929T042231Z-c82cec63.png",
+      "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+      "bytes": 125313,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-empty-state-20260929T042315Z-c82cec63.png",
+      "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+      "bytes": 125313,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-empty-state-20260929T042421Z-c82cec63.png",
+      "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+      "bytes": 125313,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-empty-state-20260929T042752Z-c82cec63.png",
+      "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+      "bytes": 125313,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-empty-state-20260929T042939Z-c82cec63.png",
+      "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+      "bytes": 125313,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-empty-state-20260929T043547Z-c82cec63.png",
+      "sha256": "aee77eed907e0ffc2f24d5f2fa22f2f5f517d6f9b2b69999e1a5c6d183022c9b",
+      "bytes": 120622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-empty-state-20260929T044120Z-c82cec63.png",
+      "sha256": "aee77eed907e0ffc2f24d5f2fa22f2f5f517d6f9b2b69999e1a5c6d183022c9b",
+      "bytes": 120622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": "reviews.flow-and-verdict-recording"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow reviews.flow-and-verdict-recording"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-ready-for-decision-20260929T042231Z-c82cec63.png",
+      "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+      "bytes": 125313,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-ready-for-decision-20260929T042315Z-c82cec63.png",
+      "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+      "bytes": 125313,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-ready-for-decision-20260929T042421Z-c82cec63.png",
+      "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+      "bytes": 125313,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-ready-for-decision-20260929T042753Z-c82cec63.png",
+      "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+      "bytes": 125313,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-ready-for-decision-20260929T042939Z-c82cec63.png",
+      "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+      "bytes": 125313,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-ready-for-decision-20260929T043548Z-c82cec63.png",
+      "sha256": "16d746ac41ee484819126fa0ceef8f1756abc57d7158e58a336bb6bbc4370ab0",
+      "bytes": 181386,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-ready-for-decision-20260929T044121Z-c82cec63.png",
+      "sha256": "16d746ac41ee484819126fa0ceef8f1756abc57d7158e58a336bb6bbc4370ab0",
+      "bytes": 181386,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": "reviews.flow-and-verdict-recording"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow reviews.flow-and-verdict-recording"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-verdict-recorded-20260929T042316Z-c82cec63.png",
+      "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+      "bytes": 125313,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-verdict-recorded-20260929T042422Z-c82cec63.png",
+      "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+      "bytes": 125313,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-verdict-recorded-20260929T042753Z-c82cec63.png",
+      "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+      "bytes": 125313,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-verdict-recorded-20260929T042940Z-c82cec63.png",
+      "sha256": "3ebe2289209c434bda2a4a114d38fbbfc9ff4c635b62c9cf7fbc8a7566e27112",
+      "bytes": 125313,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-verdict-recorded-20260929T043548Z-c82cec63.png",
+      "sha256": "57466eea8da3d93d65e6f39e223e9f5ac8bb21df9b83f047d958b7ce6777e0f4",
+      "bytes": 180942,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W04/evidence/reviews-flow-and-verdict-recording-verdict-recorded-20260929T044122Z-c82cec63.png",
+      "sha256": "57466eea8da3d93d65e6f39e223e9f5ac8bb21df9b83f047d958b7ce6777e0f4",
+      "bytes": 180942,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+        "flow": "reviews.flow-and-verdict-recording"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow reviews.flow-and-verdict-recording"
+    }
+  ]
+}

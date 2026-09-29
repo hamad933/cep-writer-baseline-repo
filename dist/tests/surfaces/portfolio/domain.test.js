@@ -1,8 +1,11 @@
 import assert from 'node:assert/strict';
-import {W04PortfolioDomain,createPortfolioCompareProvider} from '../../../adapters/portfolio/domain.js';
+import {W04PortfolioDomain,createPortfolioCompareProvider,createW04PortfolioDemoRecords} from '../../../adapters/portfolio/domain.js';
 import {AnalyticalCompareOwner} from '../../../foundation/analytical/compare.js';
 
-const d=new W04PortfolioDomain();const source=d.get('member-1').sourceRef;const revision=d.get('member-1').revisionId;const removed=d.curate({action:'remove',id:'member-1',expectedRevisionId:revision});assert.equal(removed.ok,true);assert.equal(removed.sourcePreserved,true);assert.equal(removed.removed.sourceRef,source);assert.equal(removed.receipt.canonicalSourceWrite,false);
+// Default construction is intentionally empty (tools/c2-w04-truth 'normal-defaults-empty');
+// curated demo memberships are injected only through the explicit fixture factory.
+assert.equal(new W04PortfolioDomain().records.length,0);
+const d=new W04PortfolioDomain(createW04PortfolioDemoRecords());const source=d.get('member-1').sourceRef;const revision=d.get('member-1').revisionId;const removed=d.curate({action:'remove',id:'member-1',expectedRevisionId:revision});assert.equal(removed.ok,true);assert.equal(removed.sourcePreserved,true);assert.equal(removed.removed.sourceRef,source);assert.equal(removed.receipt.canonicalSourceWrite,false);
 const target=d.get('member-2'),before=JSON.stringify(target);const unresolved=d.group('member-2','unapproved',{expectedRevisionId:target.revisionId});assert.equal(unresolved.code,'AUTHORITY_DECISION_REQUIRED');assert.equal(unresolved.mutated,false);assert.equal(JSON.stringify(d.get('member-2')),before);assert.equal(d.get('member-2').groupingRef,null);
 const exp=d.export();assert.equal(exp.canonicalPublication,false);assert.equal(JSON.stringify(exp).includes('canonicalEvidence'),false);
 const ac=new AnalyticalCompareOwner(),p=createPortfolioCompareProvider(d);ac.registerProvider(p);const add=d.curate({action:'add',member:{id:'member-3',revisionId:'pm-003',refType:'Evidence',sourceRef:'ev-alpha@evr-001',title:'Evidence ref'}});assert.equal(add.ok,true);assert.equal(add.receipt.canonicalSourceWrite,false);const a=d.records[0],b=d.records[1],pair=ac.createPair({left:{providerId:p.descriptor().providerId,ref:{id:a.id,revisionId:a.revisionId}},right:{providerId:p.descriptor().providerId,ref:{id:b.id,revisionId:b.revisionId}}});assert.notEqual(ac.comparePair(pair).state,'ERROR');

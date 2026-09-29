@@ -1,0 +1,268 @@
+{
+  "schemaVersion": 1,
+  "workspace": "W04",
+  "packet": "controller/09_writer_forge/W04_writer_packet.md",
+  "requirements": "controller/09_writer_forge/W04_REQUIREMENTS.csv",
+  "notes": "Disjoint total partition of all 1,445 W04 obligation rows. Literal rules carry a binding justification; every derived rule names only MEASURED proof artifacts. Q-5 (Portfolio grouping authority) rows are BLOCKED with Q-5 named — W04 stops and reports rather than picking a grouping authority.",
+  "proofs": [
+    {
+      "id": "P-W04-BUILD",
+      "command": "tools/writer-serial.sh node tools/build-runtime.mjs",
+      "artifact": "dist/ (build-runtime.mjs output manifest)",
+      "kind": "checker",
+      "workspaceScope": "W04",
+      "timeout": 900
+    },
+    {
+      "id": "P-EVIDENCE-SURFACE",
+      "command": "node dist/tests/surfaces/evidence/domain.test.js",
+      "artifact": "stack/native-typescript/tests/surfaces/evidence/domain.test.ts",
+      "kind": "surface_route_test",
+      "workspaceScope": "W04",
+      "timeout": 300
+    },
+    {
+      "id": "P-REVIEWS-SURFACE",
+      "command": "node dist/tests/surfaces/reviews/domain.test.js",
+      "artifact": "stack/native-typescript/tests/surfaces/reviews/domain.test.ts",
+      "kind": "surface_route_test",
+      "workspaceScope": "W04",
+      "timeout": 300
+    },
+    {
+      "id": "P-MASTERY-SURFACE",
+      "command": "node dist/tests/surfaces/mastery/domain.test.js",
+      "artifact": "stack/native-typescript/tests/surfaces/mastery/domain.test.ts",
+      "kind": "surface_route_test",
+      "workspaceScope": "W04",
+      "timeout": 300
+    },
+    {
+      "id": "P-PORTFOLIO-SURFACE",
+      "command": "node dist/tests/surfaces/portfolio/domain.test.js",
+      "artifact": "stack/native-typescript/tests/surfaces/portfolio/domain.test.ts",
+      "kind": "surface_route_test",
+      "workspaceScope": "W04",
+      "timeout": 300
+    },
+    {
+      "id": "P-S14-EVIDENCE-REVIEWS",
+      "command": "node dist/tests/rescue/S14_W04_EVIDENCE_REVIEWS/domain-lifecycle.test.js && node dist/tests/rescue/S14_W04_EVIDENCE_REVIEWS/surface-contract.test.js",
+      "artifact": "stack/native-typescript/tests/rescue/S14_W04_EVIDENCE_REVIEWS/",
+      "kind": "contract",
+      "workspaceScope": "W04",
+      "timeout": 300
+    },
+    {
+      "id": "P-S15-MASTERY-PORTFOLIO",
+      "command": "node dist/tests/rescue/S15_W04_MASTERY_PORTFOLIO/domain-authority.test.js",
+      "artifact": "stack/native-typescript/tests/rescue/S15_W04_MASTERY_PORTFOLIO/domain-authority.test.ts",
+      "kind": "contract",
+      "workspaceScope": "W04",
+      "timeout": 300
+    },
+    {
+      "id": "P-CG5-W04-COVERAGE",
+      "command": "node dist/tests/rescue/CG5_W04_COVERAGE/w04-convergence.test.js",
+      "artifact": "stack/native-typescript/tests/rescue/CG5_W04_COVERAGE/w04-convergence.test.ts",
+      "kind": "contract",
+      "workspaceScope": "W04",
+      "timeout": 300
+    },
+    {
+      "id": "P-D10-W04-AUTHORITY-LIFECYCLE",
+      "command": "node dist/tests/post-c03/D10/d10-w04-authority-lifecycle-tests.js",
+      "artifact": "stack/native-typescript/tests/post-c03/D10/d10-w04-authority-lifecycle-tests.ts",
+      "kind": "contract",
+      "workspaceScope": "W04",
+      "timeout": 300
+    },
+    {
+      "id": "P-W4G-EPISTEMIC-CONFIRMATION",
+      "command": "node dist/w4-g-epistemic-confirmation-tests.js",
+      "artifact": "stack/native-typescript/w4-g-epistemic-confirmation-tests.ts",
+      "kind": "contract",
+      "workspaceScope": "W04",
+      "timeout": 300
+    },
+    {
+      "id": "P-W04-SEAM-OWNERSHIP",
+      "command": "node tools/w04-seam-ownership-proof.mjs",
+      "artifact": "writer-output/W04/SEAM_OWNERSHIP_PROOF.json",
+      "kind": "checker",
+      "workspaceScope": "W04",
+      "timeout": 300
+    },
+    {
+      "id": "P-W04-BROWSER-FLOWS",
+      "command": "node tools/w04-browser-flows.mjs",
+      "artifact": "writer-output/W04/BROWSER_RECEIPT.json",
+      "kind": "browser",
+      "workspaceScope": "W04",
+      "timeout": 900
+    },
+    {
+      "id": "P-F051-COUNTING",
+      "command": "node tools/w04-f051-counting-proof.mjs",
+      "artifact": "writer-output/W04/F051_COUNTING_PROOF.json",
+      "kind": "checker",
+      "workspaceScope": "W04",
+      "timeout": 300
+    },
+    {
+      "id": "P-MODEL-TESTS",
+      "command": "tools/writer-serial.sh npm test",
+      "artifact": "assurance/MODEL_TEST_RESULTS.json",
+      "kind": "unit",
+      "workspaceScope": "ALL",
+      "timeout": 900
+    }
+  ],
+  "rules": [
+    {
+      "id": "R-VISUAL-REFERENCE-NOT-LAW",
+      "match": { "source_layer": "VISUAL_REFERENCE" },
+      "status_mode": "literal",
+      "status": "NOT_APPLICABLE_WITH_PROOF",
+      "justification": "K-05 + W04 packet §6: a visual reference is a presentation input only and may never override domain/provider/authority truth. The 4 rows are CURRENT_FINAL_REFERENCE presentation floors, not executable obligations, so they are not applicable as domain law.",
+      "proof_ref": "controller/07_browser/browser_contract.md#4",
+      "evidence_ref": "controller/09_writer_forge/W04_writer_packet.md#6"
+    },
+    {
+      "id": "R-ARCHAEOLOGY-NOT-LAW",
+      "match": { "source_layer": "AUTHORITY_RECOVERY_ARCHAEOLOGY" },
+      "status_mode": "literal",
+      "status": "NOT_APPLICABLE_WITH_PROOF",
+      "justification": "W04 packet §17 (old-source conflict -> lineage, not current law) and the row text itself: 'Historical path/module details remain lineage only'. The 4 recovered AR3 durable-value rows are provenance records, not current executable obligations.",
+      "proof_ref": "controller/09_writer_forge/W04_writer_packet.md#17",
+      "evidence_ref": "controller/09_writer_forge/W04_REQUIREMENTS.csv"
+    },
+    {
+      "id": "R-Q5-GROUPING-AUTHORITY-BLOCKED",
+      "match": {
+        "obligation__contains": [
+          "Bind real grouping owner/provider/policy",
+          "Portfolio Project/Learning Objective grouping requires real authority"
+        ]
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "Q-5 (Portfolio grouping authority) is an explicitly open Owner question — controller/03_historical/open_questions.md maps it to W04 with state 'grouping authority unresolved' and smallest closure step 'Owner decision'. W04 packet §6 forbids deciding it silently and ACCEPTANCE_MATRIX_SPEC forbids folding an open OWNER_DECISION into a passing surface test. W04 measures and proves the refusal (AUTHORITY_DECISION_REQUIRED, proven by P-W04-BROWSER-FLOWS portfolio.assembly-and-export) but does not implement a grouping authority. BLOCKED on Q-5.",
+      "proof_ref": "controller/03_historical/open_questions.md#q-5",
+      "evidence_ref": "writer-output/W04/BROWSER_RECEIPT.json#portfolio.assembly-and-export"
+    },
+    {
+      "id": "R-HISTORICAL-GUARDRAIL-NOT-CURRENT-LAW",
+      "match": { "obligation__contains": "STALE_HISTORICAL_FINDING / INFORMATIONAL / RECONCILED__DO_NOT_REOPEN" },
+      "status_mode": "literal",
+      "status": "NOT_APPLICABLE_WITH_PROOF",
+      "justification": "These 5 rows carry controller_conflict_flag=HISTORICAL_GUARDRAIL_NOT_CURRENT_LAW and controller_status RECONCILED__DO_NOT_REOPEN in controller/09_writer_forge/W04_REQUIREMENTS.csv: they are reconciled historical guardrails expressly recorded as not current law, so no current obligation can be discharged by them.",
+      "proof_ref": "controller/09_writer_forge/W04_REQUIREMENTS.csv",
+      "evidence_ref": "controller/09_writer_forge/W04_writer_packet.md#17"
+    },
+    {
+      "id": "R-EVIDENCE-SURFACE",
+      "match": {
+        "surface": "evidence",
+        "source_layer__not": ["VISUAL_REFERENCE", "AUTHORITY_RECOVERY_ARCHAEOLOGY"],
+        "obligation__not_contains": [
+          "Bind real grouping owner/provider/policy",
+          "Portfolio Project/Learning Objective grouping requires real authority",
+          "STALE_HISTORICAL_FINDING / INFORMATIONAL / RECONCILED__DO_NOT_REOPEN"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-W04-BUILD",
+        "P-EVIDENCE-SURFACE",
+        "P-S14-EVIDENCE-REVIEWS",
+        "P-D10-W04-AUTHORITY-LIFECYCLE",
+        "P-CG5-W04-COVERAGE",
+        "P-W4G-EPISTEMIC-CONFIRMATION",
+        "P-W04-SEAM-OWNERSHIP",
+        "P-W04-BROWSER-FLOWS",
+        "P-F051-COUNTING",
+        "P-MODEL-TESTS"
+      ],
+      "proof_logic": "all",
+      "justification": "Evidence obligations are discharged by the measured Evidence surface route test, the S14 lifecycle/contract suite, the D10 authority-lifecycle suite, the CG5 W04 convergence suite, the W4-G epistemic confirmation suite, the seam single-owner proof, the five packet §9 browser flows (incl. the evidence create->attest->verify lifecycle and the F-051 receipt-count flow), the F-051 counting proof and the repo model-test gate.",
+      "evidence_ref": "writer-output/W04/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-REVIEWS-SURFACE",
+      "match": {
+        "surface": "reviews",
+        "source_layer__not": ["VISUAL_REFERENCE", "AUTHORITY_RECOVERY_ARCHAEOLOGY"],
+        "obligation__not_contains": [
+          "Bind real grouping owner/provider/policy",
+          "Portfolio Project/Learning Objective grouping requires real authority",
+          "STALE_HISTORICAL_FINDING / INFORMATIONAL / RECONCILED__DO_NOT_REOPEN"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-W04-BUILD",
+        "P-REVIEWS-SURFACE",
+        "P-S14-EVIDENCE-REVIEWS",
+        "P-CG5-W04-COVERAGE",
+        "P-W04-SEAM-OWNERSHIP",
+        "P-W04-BROWSER-FLOWS",
+        "P-MODEL-TESTS"
+      ],
+      "proof_logic": "all",
+      "justification": "Reviews obligations are discharged by the measured Reviews surface route test, the S14 review lifecycle/contract suite, the CG5 W04 convergence suite, the seam single-owner proof, the packet §9 browser flows (review flow + verdict recording, family never self-approves) and the repo model-test gate.",
+      "evidence_ref": "writer-output/W04/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-MASTERY-SURFACE",
+      "match": {
+        "surface": "mastery",
+        "source_layer__not": ["VISUAL_REFERENCE", "AUTHORITY_RECOVERY_ARCHAEOLOGY"],
+        "obligation__not_contains": [
+          "Bind real grouping owner/provider/policy",
+          "Portfolio Project/Learning Objective grouping requires real authority",
+          "STALE_HISTORICAL_FINDING / INFORMATIONAL / RECONCILED__DO_NOT_REOPEN"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-W04-BUILD",
+        "P-MASTERY-SURFACE",
+        "P-S15-MASTERY-PORTFOLIO",
+        "P-CG5-W04-COVERAGE",
+        "P-W4G-EPISTEMIC-CONFIRMATION",
+        "P-W04-SEAM-OWNERSHIP",
+        "P-W04-BROWSER-FLOWS",
+        "P-MODEL-TESTS"
+      ],
+      "proof_logic": "all",
+      "justification": "Mastery obligations (CEP-DEC-026 / A03 state-machine law) are discharged by the measured Mastery surface route test, the S15 mastery authority suite, the CG5 W04 convergence suite, the W4-G epistemic confirmation suite, the seam single-owner proof, the packet §9 mastery-progression browser flow and the repo model-test gate.",
+      "evidence_ref": "writer-output/W04/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-PORTFOLIO-SURFACE",
+      "match": {
+        "surface": "portfolio",
+        "source_layer__not": ["VISUAL_REFERENCE", "AUTHORITY_RECOVERY_ARCHAEOLOGY"],
+        "obligation__not_contains": [
+          "Bind real grouping owner/provider/policy",
+          "Portfolio Project/Learning Objective grouping requires real authority",
+          "STALE_HISTORICAL_FINDING / INFORMATIONAL / RECONCILED__DO_NOT_REOPEN"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-W04-BUILD",
+        "P-PORTFOLIO-SURFACE",
+        "P-S15-MASTERY-PORTFOLIO",
+        "P-CG5-W04-COVERAGE",
+        "P-W04-SEAM-OWNERSHIP",
+        "P-W04-BROWSER-FLOWS",
+        "P-MODEL-TESTS"
+      ],
+      "proof_logic": "all",
+      "justification": "Portfolio obligations are discharged by the measured Portfolio surface route test, the S15 portfolio authority suite, the CG5 W04 convergence suite, the seam single-owner proof (grouping authority NOT claimed), the packet §9 portfolio assembly/export browser flow (reference-only curation + byte-identical reproducible export) and the repo model-test gate. Grouping-authority rows are carved out to R-Q5-GROUPING-AUTHORITY-BLOCKED.",
+      "evidence_ref": "writer-output/W04/PROOF_RESULTS.json"
+    }
+  ]
+}
