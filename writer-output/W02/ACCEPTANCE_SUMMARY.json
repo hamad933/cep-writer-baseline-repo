@@ -1,100 +1,95 @@
 {
   "schemaVersion": 1,
   "workspace": "W02",
-  "generatedAt": "2026-09-29T05:24:59.497308+00:00",
+  "generatedAt": "2026-09-29T17:24:26.073289+00:00",
   "requirements_csv": "controller/09_writer_forge/W02_REQUIREMENTS.csv",
   "requirements_rows": 1485,
   "rows_dispositioned": 1485,
   "zero_loss": true,
-  "candidate": "WORKTREE_VARIANT:c82cec63cb5f",
-  "commit": "072343e9f99e03f4deeb707a5393c0d8a18b38b2",
-  "tree": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+  "candidate": "OWNED_PARTITION_SHA256:44236cc27fff146a9bb6aa28de45f23076ed3b2f3d5ac53e0c6067dbe06cdae5",
+  "commit": "eb23ede6e3b1bde7e0f528a6345a5d27877eac46",
+  "tree": "8731e87b68c8856f1f16bbd590dcb54176e3e758",
   "requirements_sha256": "32024e3067885c659ba8ee8d66201be184cda6672fb14f28b652f4955d814821",
   "counts": {
-    "PASS": 1411,
-    "NOT_APPLICABLE_WITH_PROOF": 6,
-    "BLOCKED": 68
+    "BLOCKED": 906,
+    "PASS": 13,
+    "NOT_APPLICABLE_WITH_PROOF": 566
   },
   "per_surface": {
     "learn": {
-      "PASS": 351,
-      "NOT_APPLICABLE_WITH_PROOF": 2,
-      "BLOCKED": 16
+      "BLOCKED": 222,
+      "PASS": 3,
+      "NOT_APPLICABLE_WITH_PROOF": 144
     },
     "library": {
-      "PASS": 356,
-      "NOT_APPLICABLE_WITH_PROOF": 2,
-      "BLOCKED": 17
+      "BLOCKED": 222,
+      "PASS": 3,
+      "NOT_APPLICABLE_WITH_PROOF": 150
     },
     "rq": {
-      "BLOCKED": 19,
-      "PASS": 334
+      "BLOCKED": 219,
+      "PASS": 4,
+      "NOT_APPLICABLE_WITH_PROOF": 130
     },
     "visualize": {
-      "PASS": 370,
-      "NOT_APPLICABLE_WITH_PROOF": 2,
-      "BLOCKED": 16
+      "BLOCKED": 243,
+      "PASS": 3,
+      "NOT_APPLICABLE_WITH_PROOF": 142
     }
   },
   "per_source_layer": {
     "CURRENT_IDENTITY": {
-      "PASS": 3,
-      "BLOCKED": 1
+      "BLOCKED": 4
     },
     "CURRENT_PROFILE": {
-      "PASS": 3,
-      "BLOCKED": 1
+      "BLOCKED": 4
     },
     "OWNER_DECISION": {
-      "PASS": 296
+      "BLOCKED": 284,
+      "PASS": 12
     },
     "AUTHORITY_RECOVERY_ARCHAEOLOGY": {
       "NOT_APPLICABLE_WITH_PROOF": 3,
       "BLOCKED": 1
     },
     "OWNER_QA_DEEP_AUDIT": {
-      "PASS": 211
+      "BLOCKED": 211
     },
     "ZL01_ROOT_FINDING": {
-      "PASS": 311,
-      "BLOCKED": 2
+      "BLOCKED": 255,
+      "NOT_APPLICABLE_WITH_PROOF": 58
     },
     "ZL01_FORWARD_GAP": {
-      "BLOCKED": 62,
-      "PASS": 5
+      "NOT_APPLICABLE_WITH_PROOF": 50,
+      "BLOCKED": 17
     },
     "ZL01_DURABLE_ANCILLARY": {
-      "PASS": 567
+      "NOT_APPLICABLE_WITH_PROOF": 452,
+      "BLOCKED": 115
     },
     "ZL01_ZL02_RECONCILIATION": {
-      "PASS": 11
+      "BLOCKED": 10,
+      "PASS": 1
     },
     "VISUAL_REFERENCE": {
       "NOT_APPLICABLE_WITH_PROOF": 3,
       "BLOCKED": 1
     },
     "CURRENT_RESULT_AUDIT": {
-      "PASS": 4
+      "BLOCKED": 4
     }
   },
   "proofs_used": [
-    "P-B3R",
     "P-B3R-CORR03",
-    "P-CHECK-AUTH",
-    "P-CHECK-DEFERRED",
-    "P-CHECK-DUP",
-    "P-D08",
-    "P-LEARN-ROUTE",
-    "P-LIBRARY-ROUTE",
-    "P-MANIFEST-COVERAGE",
-    "P-MODEL",
-    "P-RQ-ROUTE",
-    "P-S01",
-    "P-S08",
-    "P-S09",
-    "P-VISUALIZE-ROUTE",
-    "P-W02-BROWSER"
+    "P-BIND-OD-054",
+    "P-BIND-OD-060",
+    "P-BIND-OE-003",
+    "P-S01-CORE",
+    "P-S03-SETTINGS",
+    "P-S08-FALSIFY",
+    "P-W05-STACK-ADMISSION",
+    "P-W4E-SETTINGS"
   ],
   "matrix": "writer-output/W02/ACCEPTANCE_MATRIX.csv",
-  "matrix_sha256": "e101788ecd6c089e95fc2e0069e89ebb08c9464a0a0980cf6229f481e6bdefaa"
+  "matrix_sha256": "4bc2196eadfebd30426df51e428aaa6a1996d533261e46e0e1804830c01be275"
 }

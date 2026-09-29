@@ -1,96 +1,92 @@
 {
   "schemaVersion": 1,
   "workspace": "W04",
-  "generatedAt": "2026-09-29T04:48:41.142616+00:00",
+  "generatedAt": "2026-09-29T17:24:48.351211+00:00",
   "requirements_csv": "controller/09_writer_forge/W04_REQUIREMENTS.csv",
   "requirements_rows": 1445,
   "rows_dispositioned": 1445,
   "zero_loss": true,
-  "candidate": "WORKTREE_VARIANT:c82cec63cb5f",
-  "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
-  "tree": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+  "candidate": "OWNED_PARTITION_SHA256:9e30d40fda87bec70b2bdce08184aafb072e9fd7c8add3f980985cadfda19a5f",
+  "commit": "eb23ede6e3b1bde7e0f528a6345a5d27877eac46",
+  "tree": "8731e87b68c8856f1f16bbd590dcb54176e3e758",
   "requirements_sha256": "58678893100f32bfa739b84de161e32d80f32631d8d2ae39d8f3f141d2ca755e",
   "counts": {
-    "PASS": 1427,
-    "NOT_APPLICABLE_WITH_PROOF": 13,
-    "BLOCKED": 5
+    "BLOCKED": 924,
+    "PASS": 12,
+    "NOT_APPLICABLE_WITH_PROOF": 509
   },
   "per_surface": {
     "evidence": {
-      "PASS": 377,
-      "NOT_APPLICABLE_WITH_PROOF": 4,
-      "BLOCKED": 1
+      "BLOCKED": 247,
+      "PASS": 3,
+      "NOT_APPLICABLE_WITH_PROOF": 132
     },
     "mastery": {
-      "PASS": 349,
-      "NOT_APPLICABLE_WITH_PROOF": 3,
-      "BLOCKED": 1
+      "BLOCKED": 224,
+      "PASS": 3,
+      "NOT_APPLICABLE_WITH_PROOF": 126
     },
     "portfolio": {
-      "PASS": 350,
-      "NOT_APPLICABLE_WITH_PROOF": 3,
-      "BLOCKED": 2
+      "BLOCKED": 227,
+      "PASS": 3,
+      "NOT_APPLICABLE_WITH_PROOF": 125
     },
     "reviews": {
-      "PASS": 351,
-      "NOT_APPLICABLE_WITH_PROOF": 3,
-      "BLOCKED": 1
+      "BLOCKED": 226,
+      "PASS": 3,
+      "NOT_APPLICABLE_WITH_PROOF": 126
     }
   },
   "per_source_layer": {
     "CURRENT_IDENTITY": {
-      "PASS": 4
-    },
-    "CURRENT_PROFILE": {
-      "PASS": 4
-    },
-    "OWNER_DECISION": {
-      "PASS": 291
-    },
-    "AUTHORITY_RECOVERY_ARCHAEOLOGY": {
-      "NOT_APPLICABLE_WITH_PROOF": 4
-    },
-    "OWNER_QA_DEEP_AUDIT": {
-      "PASS": 216
-    },
-    "ZL01_ROOT_FINDING": {
-      "PASS": 311,
-      "NOT_APPLICABLE_WITH_PROOF": 5,
       "BLOCKED": 4
     },
+    "CURRENT_PROFILE": {
+      "BLOCKED": 4
+    },
+    "OWNER_DECISION": {
+      "BLOCKED": 279,
+      "PASS": 12
+    },
+    "AUTHORITY_RECOVERY_ARCHAEOLOGY": {
+      "NOT_APPLICABLE_WITH_PROOF": 3,
+      "BLOCKED": 1
+    },
+    "OWNER_QA_DEEP_AUDIT": {
+      "BLOCKED": 216
+    },
+    "ZL01_ROOT_FINDING": {
+      "BLOCKED": 258,
+      "NOT_APPLICABLE_WITH_PROOF": 62
+    },
     "ZL01_FORWARD_GAP": {
-      "PASS": 59
+      "NOT_APPLICABLE_WITH_PROOF": 33,
+      "BLOCKED": 26
     },
     "ZL01_DURABLE_ANCILLARY": {
-      "PASS": 534
+      "NOT_APPLICABLE_WITH_PROOF": 407,
+      "BLOCKED": 127
     },
     "ZL01_ZL02_RECONCILIATION": {
-      "PASS": 4,
-      "BLOCKED": 1
+      "BLOCKED": 5
     },
     "VISUAL_REFERENCE": {
       "NOT_APPLICABLE_WITH_PROOF": 4
     },
     "CURRENT_RESULT_AUDIT": {
-      "PASS": 4
+      "BLOCKED": 4
     }
   },
   "proofs_used": [
-    "P-CG5-W04-COVERAGE",
-    "P-D10-W04-AUTHORITY-LIFECYCLE",
-    "P-EVIDENCE-SURFACE",
-    "P-F051-COUNTING",
-    "P-MASTERY-SURFACE",
-    "P-MODEL-TESTS",
-    "P-PORTFOLIO-SURFACE",
-    "P-REVIEWS-SURFACE",
-    "P-S14-EVIDENCE-REVIEWS",
-    "P-S15-MASTERY-PORTFOLIO",
-    "P-W04-BROWSER-FLOWS",
-    "P-W04-BUILD",
-    "P-W04-SEAM-OWNERSHIP",
-    "P-W4G-EPISTEMIC-CONFIRMATION"
+    "P-BIND-OD-054",
+    "P-BIND-OD-060",
+    "P-BIND-OE-003",
+    "P-S01-CORE",
+    "P-S03-SETTINGS",
+    "P-S08-FALSIFY",
+    "P-W05-STACK-ADMISSION",
+    "P-W4E-SETTINGS"
   ],
   "matrix": "writer-output/W04/ACCEPTANCE_MATRIX.csv",
-  "matrix_sha256": "a35c1157b9c73ac7f48397ddd696d2d04421adf5736c733adf80ec9107c9bb12"
+  "matrix_sha256": "5dfa32b6ff537c3833aa29111f0eb03fbe6f2bbfa367c44eb63c8e96bcab52b0"
 }
