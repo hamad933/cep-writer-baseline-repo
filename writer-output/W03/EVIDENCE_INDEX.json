@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "workspace": "W03",
+  "generatedAt": "2026-09-29T04:52:00Z",
+  "contract": "controller/08_evidence/evidence_contract.md",
+  "identities": {
+    "dispatchCandidateLabel": "WORKTREE_VARIANT:c82cec63cb5f",
+    "dispatchTreeLabel": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+    "dispatchCommit": "d3ddc5e5280f41625b81ff2e0bf456914fcd3239",
+    "measuredCommitAtProofTime": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
+    "measuredCanonicalSourceTreeSha256": "90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+    "measuredCanonicalSourceFileCount": 287,
+    "identityNote": "The matrix binds the dispatch-mandated WORKTREE_VARIANT tree label. The measured receipts bind the canonical source tree actually executed at proof time (287 files) — it differs because this workspace made 6 in-scope source edits and because other parallel Writers are editing their own disjoint files under stack/native-typescript/** concurrently. Both identities are recorded so the Coordinator can re-bind either way."
+  },
+  "sections": {
+    "surface-identity": {
+      "claim": "Enterprise/Scenarios/Labs/Runs/Results preserve their canonical purpose, CENTER archetype, commands and WORKSPACE_FIRST interaction model.",
+      "artifacts": [
+        "writer-output/W03/ACCEPTANCE_MATRIX.csv#R-IDENTITY-{ENTERPRISE,SCENARIOS,LABS,RUNS,RESULTS}",
+        "dist/tests/surfaces/enterprise/domain.test.js",
+        "dist/tests/surfaces/scenarios/domain.test.js",
+        "dist/tests/surfaces/labs/domain.test.js",
+        "dist/tests/surfaces/runs/domain.test.js",
+        "dist/tests/surfaces/runs/group-regression.test.js",
+        "dist/tests/surfaces/results/domain.test.js"
+      ]
+    },
+    "surface-profile-coverage": {
+      "claim": "Every top-level key of all five SurfaceProfiles is consumed by the composed surface; no profile field silently dropped; no forbidden surface-local duplicate of global chrome.",
+      "artifacts": ["writer-output/W03/PROFILE_COVERAGE.json", "tools/w03-profile-coverage.mjs"],
+      "measured": "107/107 profile keys covered, 0 gaps across enterprise(22) scenarios(21) labs(21) runs(22) results(21)."
+    },
+    "ar2-recovered-durable-value-crosswalk": {
+      "claim": "AR2 recovered durable-value sections are consumed through the current profile/domain/owner crosswalk; historical path/module details stay lineage only and historical writer/surface-* branch work is NOT re-implemented (C-10).",
+      "crosswalk": [
+        {"recoveredSection": "enterprise:identity_recovery (OBL-003108)", "currentProof": "profiles/enterprise.json + surfaces/enterprise/** + P-W03-ENTERPRISE-SURFACE + P-W03-S10-*", "supersession": "historical path/module detail: LINEAGE ONLY (packet §17)"},
+        {"recoveredSection": "scenarios:identity_recovery (OBL-003109)", "currentProof": "profiles/scenarios.json + surfaces/scenarios/** + P-W03-SCENARIOS-SURFACE + P-W03-S11-SCENARIO", "supersession": "historical path/module detail: LINEAGE ONLY (packet §17)"},
+        {"recoveredSection": "labs:identity_recovery (OBL-003110)", "currentProof": "profiles/labs.json + surfaces/labs/** + P-W03-LABS-SURFACE + P-W03-S11-LAB", "supersession": "historical path/module detail: LINEAGE ONLY (packet §17)"},
+        {"recoveredSection": "runs:identity_recovery (OBL-003111)", "currentProof": "profiles/runs.json + surfaces/runs/** + P-W03-RUNS-* + P-W03-S12", "supersession": "historical path/module detail: LINEAGE ONLY (packet §17)"},
+        {"recoveredSection": "results:identity_recovery (OBL-003112)", "currentProof": "profiles/results.json + surfaces/results/** + P-W03-RESULTS-SURFACE + P-W03-S13 + P-W03-D09", "supersession": "historical path/module detail: LINEAGE ONLY (packet §17)"}
+      ],
+      "artifacts": ["writer-output/W03/ACCEPTANCE_MATRIX.csv#R-ARCH-*", "writer-output/W03/PROFILE_COVERAGE.json"]
+    },
+    "d09-w03-studios": {
+      "claim": "W03 studios converge through the shared carriers: Enterprise presenter, Structured+Spatial Labs/Scenarios studio, Runs operational workspace, Results historical-analysis studio, shared Results replay authority.",
+      "artifacts": [
+        "dist/tests/post-c03/D09/d09-w03-studios-replay-tests.js",
+        "dist/tests/post-c03/LCORR03/lcorr03-central-integration-falsification-tests.js (15/15)",
+        "dist/tests/post-c03/LCORR01/lcorr01-parent-candidate-falsification-tests.js",
+        "dist/tests/rescue/CG4_W03_COVERAGE/*.test.js (3 files)",
+        "dist/tests/rescue/S10_W03_ENTERPRISE/*.test.js",
+        "dist/tests/rescue/S11_W03_SCENARIOS_LABS/*.test.js",
+        "dist/tests/rescue/S12_W03_RUNS/runs-operational-workspace.test.js",
+        "dist/tests/rescue/S13_W03_RESULTS/results-rescue.test.js"
+      ]
+    },
+    "owner_decision": {
+      "claim": "385 OWNER_DECISION obligations are implemented and measured (workspace-first lifecycle gating, published/sealed immutability, object lifecycle, no global Read/Edit mode, V1 internal-simulation doctrine).",
+      "artifacts": ["writer-output/W03/ACCEPTANCE_MATRIX.csv#R-OWNERDECISION-*", "dist/analytical-compare-tests.js", "dist/analytical-compare-correction-tests.js"]
+    },
+    "owner_qa_deep_audit": {
+      "claim": "355 OWNER_QA_DEEP_AUDIT rows closed against exact source + current owner + matched executable consumer proof (A2/A3/A4/A5 findings).",
+      "artifacts": ["writer-output/W03/ACCEPTANCE_MATRIX.csv#R-OWNERQADEEPAUDIT-*", "dist/tests/rescue/CG4_W03_COVERAGE/*.test.js", "dist/tests/post-c03/LCORR03/*"]
+    },
+    "root_finding": {
+      "claim": "504 ZL01_ROOT_FINDING rows dispositioned; the 5 A01-PF-007 replay-owner rows are BLOCKED on Q-4 rather than silently closed.",
+      "artifacts": ["writer-output/W03/ACCEPTANCE_MATRIX.csv#R-ZL01ROOTFINDING-*", "dist/tests/post-c03/D09/*", "dist/tests/post-c03/LCORR03/*"]
+    },
+    "forward_gap": {
+      "claim": "116 ZL01_FORWARD_GAP rows: 32 discharge through W03's own D09 mission material, 74 are BLOCKED on another lane's Dx mission receipt, 10 discharge through D09+LCORR03.",
+      "artifacts": ["writer-output/W03/ACCEPTANCE_MATRIX.csv#R-FUTURE-D09-W03-MISSION", "writer-output/W03/ACCEPTANCE_MATRIX.csv#R-FUTURE-FOREIGN-MISSION-BLOCKED"]
+    },
+    "durable_ancillary": {
+      "claim": "785 ZL01_DURABLE_ANCILLARY rows proven in the same affected surface/component lane (spatial atomicity + bottom deep-work + surface lane proofs); the 5 TimelineReplayOwner rows are BLOCKED on Q-4.",
+      "artifacts": ["writer-output/W03/ACCEPTANCE_MATRIX.csv#R-ZL01DURABLEANCILLARY-*", "dist/ps02-spatial-finite-atomicity-tests.js", "dist/w3-d-bottom-deep-work-tests.js"]
+    },
+    "replay-mechanics": {
+      "claim": "Replay is presentation-only over inert recorded bytes; the causal chain (action -> timeline event -> state delta) holds in both scrub directions; an absent exact ref fails closed; replay never claims canonical history.",
+      "artifacts": ["writer-output/W03/BROWSER_RECEIPT.json#flows.replay-causality-timeline-scrub", "dist/tests/rescue/S13_W03_RESULTS/results-rescue.test.js", "dist/tests/post-c03/D09/d09-w03-studios-replay-tests.js"],
+      "screenshots": ["writer-output/W03/evidence/replay-causality-timeline-scrub-20260929T045728Z-90240a5e.png"]
+    },
+    "aar-mechanics": {
+      "claim": "AAR creates a separate analysis revision anchored to an exact sealed Result revision; factMutation=false; sealed recorded facts are never rewritten.",
+      "artifacts": ["writer-output/W03/BROWSER_RECEIPT.json#flows.results-aar-compare", "dist/tests/post-c03/D09/d09-w03-studios-replay-tests.js"]
+    },
+    "compare-mechanics": {
+      "claim": "Analytical compare proves canonical-state invariance: compare/AAR changed neither sealed Result truth nor live canonical relation state; E18 acceptance shape governs (exact refs + exact comparator version).",
+      "artifacts": ["writer-output/W03/BROWSER_RECEIPT.json#flows.results-aar-compare", "dist/analytical-compare-tests.js", "dist/analytical-compare-correction-tests.js"],
+      "screenshots": ["writer-output/W03/evidence/results-aar-compare-20260929T045726Z-90240a5e.png"]
+    },
+    "spatial-boundary": {
+      "claim": "F-049-class boundary: spatial selection on a read-only consumer never exposes author-only Connect nor mutates canonical relation truth; typed canonical edges commit only through the W03EnterpriseDomain relation owner; duplicate/stale edge attempts fail closed; no cross-consumer leak.",
+      "artifacts": [
+        "writer-output/W03/BROWSER_RECEIPT.json#flows.spatial-select-connect-canonical-edge@1440x1000",
+        "writer-output/W03/BROWSER_RECEIPT.json#flows.spatial-select-connect-canonical-edge@1024x900",
+        "dist/ps02-spatial-finite-atomicity-tests.js"
+      ],
+      "screenshots": [
+        "writer-output/W03/evidence/spatial-select-connect-canonical-edge-20260929T045731Z-90240a5e.png",
+        "writer-output/W03/evidence/spatial-select-connect-canonical-edge-20260929T045734Z-90240a5e.png"
+      ],
+      "engineNote": "The spatial ENGINE is W02-owned this wave; W03 owns and enforces the BOUNDARY only. No foundation/spatial* file was edited."
+    },
+    "pvf-001-enterprise-twin-baseline": {
+      "status": "CLOSED",
+      "claim": "create -> pin exact Baseline -> validate -> publish -> handoff (preflight-only) -> revise successor -> Twin rebase, with published revision and pinned Baseline immutable, Enterprise/Twin identity separation preserved, relation truth untouched.",
+      "artifacts": ["writer-output/W03/BROWSER_RECEIPT.json#flows.enterprise-twin-baseline", "dist/tests/rescue/S10_W03_ENTERPRISE/domain-and-lifecycle.test.js", "dist/tests/rescue/S10_W03_ENTERPRISE/source-duplicate-owner.test.js"],
+      "screenshots": ["writer-output/W03/evidence/enterprise-twin-baseline-20260929T045721Z-90240a5e.png"],
+      "negativeCases": ["Twin rebase against a PUBLISHED revision refused with PUBLISHED_REVISION_IMMUTABLE__CREATE_SUCCESSOR_REVISION", "handoff never starts a run (runStarted=false, liveDeviceChanges=0)"]
+    },
+    "pvf-002-runs-preflight": {
+      "status": "CLOSED_WITH_REPORTED_WIRING_GAP",
+      "claim": "runs.preflight is a NO_WRITE_PREFLIGHT projection -> runs.prepare freezes an immutable manifest and reaches READY -> runs.start reaches RUNNING -> terminal command produces semantic event + canonical device delta + spatial delta + recorded agreement; recorded projection resists mutation.",
+      "artifacts": ["writer-output/W03/BROWSER_RECEIPT.json#flows.runs-preflight-run-recorded", "dist/tests/rescue/S12_W03_RUNS/runs-operational-workspace.test.js", "dist/tests/surfaces/runs/group-regression.test.js"],
+      "screenshots": ["writer-output/W03/evidence/runs-preflight-run-recorded-20260929T045724Z-90240a5e.png"],
+      "reportedGap": "The LIVE runs route registers only runs.pause/runs.resume (main.ts L217); runs.preflight/prepare/start are not wired into the live route in this candidate. Mechanics are proven on the composed Runs surface. Reported to the Controller, not worked around."
+    },
+    "pvf-003-results-aar-compare": {
+      "status": "MECHANICS_CLOSED_LIVE_PROVIDER_BINDING_BLOCKED",
+      "claim": "AAR + Analytical Compare + replay mechanics are proven end to end with explicitly labelled recordedConsumer fixtures, and canonical-state invariance is asserted; the live results route reports RESULTS_PROVIDER_UNAVAILABLE truthfully instead of fabricating sealed Results.",
+      "artifacts": ["writer-output/W03/BROWSER_RECEIPT.json#flows.results-aar-compare", "writer-output/W03/BROWSER_RECEIPT.json#flows.replay-causality-timeline-scrub", "dist/tests/rescue/S13_W03_RESULTS/results-rescue.test.js", "dist/analytical-compare-tests.js"],
+      "screenshots": ["writer-output/W03/evidence/results-aar-compare-20260929T045726Z-90240a5e.png"],
+      "blockedOn": "Live sealed-Results provider binding. Exact missing dependency: W05 persistence phase CBF-001 seed + SC-011 (concurrent workspace, MUST NOT be worked around by W03 — no surface-local persistence was implemented)."
+    },
+    "timeline-replayowner-single-instance": {
+      "status": "HOLDS",
+      "claim": "Exactly one production instantiation of TimelineReplayOwner exists in the runtime graph; every other occurrence is test-scoped.",
+      "measured": "grep -rn 'new TimelineReplayOwner(' stack/native-typescript --include=*.ts | grep -v '/tests/' => 1 hit (stack/native-typescript/main.ts:43); 22 further hits are all under **/tests/**.",
+      "liveProbe": "writer-output/W03/BROWSER_RECEIPT.json#flows.replay-causality-timeline-scrub evidence.liveOwner + replayOwnerInstances.liveInstanceIsSingular=true",
+      "caveat": "Q-4 (retain-vs-retire, registry presence) remains OPEN and is STOP/REPORT — see ACCEPTANCE_MATRIX.csv#R-Q4-TIMELINE-REPLAY-OWNER-BLOCKED."
+    },
+    "recorded-result-read-only-truth": {
+      "status": "PRESERVED",
+      "claim": "Recorded results never mutate: replay/AAR/compare are analysis-only; direct mutation pressure leaves the recorded projection byte-identical; V1 internal-simulation doctrine preserved (no host command execution).",
+      "artifacts": ["writer-output/W03/BROWSER_RECEIPT.json#flows.runs-preflight-run-recorded evidence.recordedTruth", "writer-output/W03/BROWSER_RECEIPT.json#flows.results-aar-compare evidence.mechanics.fixtureRecordsUnchanged", "dist/tests/rescue/S13_W03_RESULTS/results-rescue.test.js"]
+    },
+    "semantic-ownership": {
+      "status": "GREEN",
+      "claim": "tools/check-w03-semantic-ownership.py passes on the candidate.",
+      "measured": "W03_SEMANTIC_OWNER_VALIDATION: PASS 60/60 (69/318; cumulativeChanged=242; reviewPatch=24)",
+      "artifacts": ["assurance/W03_SEMANTIC_OWNER_VALIDATION.json", "tools/check-w03-semantic-ownership.py"]
+    },
+    "acceptance-matrix": {
+      "status": "zero_loss=true",
+      "claim": "All 2,183 W03 obligation rows are dispositioned exactly once with PASS|FAIL|BLOCKED|NOT_APPLICABLE_WITH_PROOF.",
+      "artifacts": [
+        "writer-output/W03/PROOF_CATALOG.json",
+        "writer-output/W03/PROOF_RESULTS.json",
+        "writer-output/W03/ACCEPTANCE_MATRIX.csv",
+        "writer-output/W03/ACCEPTANCE_SUMMARY.json"
+      ],
+      "measured": {"rows": 2183, "dispositioned": 2183, "zero_loss": true, "PASS": 2084, "FAIL": 0, "BLOCKED": 99, "NOT_APPLICABLE_WITH_PROOF": 0}
+    },
+    "browser-receipt": {
+      "status": "EXECUTED_PASS",
+      "artifacts": ["writer-output/W03/BROWSER_RECEIPT.json"],
+      "measured": "7/7 W03 packet §9 flows PASS at 1440x1000 and 1024x900; 7 hash-bound screenshots; receipt tree 90240a5e... == live canonical source tree.",
+      "globalSuite": "npm run browser:test (tools/browser-conformance.mjs, NOT W03-owned) remains 1 PASS / 5 FAIL — see W03_HANDOFF.md#browser-global-suite"
+    }
+  },
+  "artifacts": [
+    {"path": "writer-output/W03/PROOF_CATALOG.json", "kind": "zero-loss rule partition", "proves": "disjoint total partition of 2,183 rows over 27 measured proofs"},
+    {"path": "writer-output/W03/PROOF_RESULTS.json", "kind": "measured proof results", "proves": "27/27 proofs PASS, executed against the candidate"},
+    {"path": "writer-output/W03/ACCEPTANCE_MATRIX.csv", "kind": "row-addressable obligation manifest", "proves": "2,183/2,183 rows dispositioned, zero_loss=true"},
+    {"path": "writer-output/W03/ACCEPTANCE_SUMMARY.json", "kind": "aggregate", "proves": "PASS 2084 / BLOCKED 99 / FAIL 0"},
+    {"path": "writer-output/W03/BROWSER_RECEIPT.json", "kind": "browser receipt", "proves": "7 packet-§9 flows with full §1 field set + 7-class failureClassification"},
+    {"path": "writer-output/W03/PROFILE_COVERAGE.json", "kind": "profile field coverage matrix", "proves": "107/107 SurfaceProfile keys consumed, 0 gaps"},
+    {"path": "writer-output/W03/evidence/", "kind": "screenshots", "proves": "7 hash-bound PNGs at 1440x1000 and 1024x900"},
+    {"path": "writer-output/W03/CHECKPOINTS.md", "kind": "checkpoint record", "proves": "CKPT-A..E states"},
+    {"path": "writer-output/W03/W03_HANDOFF.md", "kind": "handoff", "proves": "PVF closures, blockers, conflicts, residual gaps"},
+    {"path": "writer-output/W03/PROPOSALS.md", "kind": "proposals", "proves": "contract/hotspot proposals not applied unilaterally"}
+  ]
+}

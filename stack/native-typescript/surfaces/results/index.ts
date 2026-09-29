@@ -1,6 +1,6 @@
 import {SemanticCommandBus} from '../../foundation/global/commands.js';
 import {W03ResultsDomain} from '../../adapters/results/domain.js';
-export const RESULTS_SURFACE_CONTRACT=Object.freeze({id:'results',workspace:'W03',owner:'W03ResultsDomain',families:['TimelineReplay','AnalyticalCompare','AuditProvenance'],interactionModel:'WORKSPACE_FIRST_HISTORICAL_ANALYSIS',centralWiring:'CONTROLLER_CONVERGENCE_REQUIRED'});
+export const RESULTS_SURFACE_CONTRACT=Object.freeze({id:'results',workspace:'W03',owner:'W03ResultsDomain',families:['TimelineReplay','AnalyticalCompare','AuditProvenance','SpatialInteraction'],interactionModel:'WORKSPACE_FIRST_HISTORICAL_ANALYSIS',centralWiring:'CONTROLLER_CONVERGENCE_REQUIRED'});
 export function composeResultsSurface({domain=new W03ResultsDomain(),bus=new SemanticCommandBus(),shared={}}={}){
   if(!shared.spatialRelation)throw Error('RESULTS_SHARED_SPATIAL_REQUIRED');
   const exactRef=ref=>!!(ref?.resultId&&ref?.revisionId&&ref?.manifestDigest);

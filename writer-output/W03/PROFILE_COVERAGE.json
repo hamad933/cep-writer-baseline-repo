@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "workspace": "W03",
+  "generatedAt": "2026-09-29T04:57:18.797Z",
+  "contract": "controller/09_writer_forge/W03_REQUIREMENTS.csv CURRENT_PROFILE rows (no silent profile-field drop)",
+  "surfaces": [
+    {
+      "surface": "enterprise",
+      "profile": "profiles/enterprise.json",
+      "profileKeyCount": 22,
+      "coveredKeyCount": 22,
+      "uncoveredKeys": [],
+      "contract": "enterprise",
+      "contractFamilies": [
+        "SpatialInteraction",
+        "RelationInteraction"
+      ],
+      "domainOwner": "W03EnterpriseDomain",
+      "registeredCommandCount": 9,
+      "slots": [
+        "BOTTOM",
+        "CENTER",
+        "LEFT",
+        "RIGHT",
+        "TOOLBAR",
+        "TOP",
+        "TRANSIENT"
+      ],
+      "gaps": [],
+      "invariantFailures": []
+    },
+    {
+      "surface": "scenarios",
+      "profile": "profiles/scenarios.json",
+      "profileKeyCount": 21,
+      "coveredKeyCount": 21,
+      "uncoveredKeys": [],
+      "contract": "scenarios",
+      "contractFamilies": [
+        "UnifiedEditor",
+        "SpatialInteraction"
+      ],
+      "domainOwner": "W03ScenarioDomain",
+      "registeredCommandCount": 5,
+      "slots": [
+        "BOTTOM",
+        "CENTER",
+        "LEFT",
+        "RIGHT",
+        "TOOLBAR",
+        "TOP",
+        "TRANSIENT"
+      ],
+      "gaps": [],
+      "invariantFailures": []
+    },
+    {
+      "surface": "labs",
+      "profile": "profiles/labs.json",
+      "profileKeyCount": 21,
+      "coveredKeyCount": 21,
+      "uncoveredKeys": [],
+      "contract": "labs",
+      "contractFamilies": [
+        "UnifiedEditor",
+        "SpatialInteraction"
+      ],
+      "domainOwner": "W03LabDomain",
+      "registeredCommandCount": 5,
+      "slots": [
+        "BOTTOM",
+        "CENTER",
+        "LEFT",
+        "RIGHT",
+        "TOOLBAR",
+        "TOP",
+        "TRANSIENT"
+      ],
+      "gaps": [],
+      "invariantFailures": []
+    },
+    {
+      "surface": "runs",
+      "profile": "profiles/runs.json",
+      "profileKeyCount": 22,
+      "coveredKeyCount": 22,
+      "uncoveredKeys": [],
+      "contract": "runs",
+      "contractFamilies": [
+        "SpatialInteraction",
+        "OperationalSurface"
+      ],
+      "domainOwner": "W03RunDomain",
+      "registeredCommandCount": 13,
+      "slots": [
+        "BOTTOM",
+        "CENTER",
+        "LEFT",
+        "RIGHT",
+        "TOOLBAR",
+        "TOP",
+        "TRANSIENT"
+      ],
+      "gaps": [],
+      "invariantFailures": []
+    },
+    {
+      "surface": "results",
+      "profile": "profiles/results.json",
+      "profileKeyCount": 21,
+      "coveredKeyCount": 21,
+      "uncoveredKeys": [],
+      "contract": "results",
+      "contractFamilies": [
+        "TimelineReplay",
+        "AnalyticalCompare",
+        "AuditProvenance",
+        "SpatialInteraction"
+      ],
+      "domainOwner": "W03ResultsDomain",
+      "registeredCommandCount": 6,
+      "slots": [
+        "BOTTOM",
+        "CENTER",
+        "LEFT",
+        "RIGHT",
+        "TOOLBAR",
+        "TOP",
+        "TRANSIENT"
+      ],
+      "gaps": [],
+      "invariantFailures": []
+    }
+  ],
+  "totals": {
+    "profileKeys": 107,
+    "coveredKeys": 107,
+    "gaps": 0
+  },
+  "verdict": "PASS"
+}

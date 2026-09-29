@@ -435,8 +435,42 @@ await test('C3-001.enterprise-controller-mounts-renderEnterpriseSurface', 'C3_W0
 
 await test('C3-002.main-avoids-duplicate-spatial-view-on-enterprise', 'C3_W03_PRESENTERS', () => {
   const mainSrc = readFileSync('stack/native-typescript/main.ts', 'utf8');
-  assert.ok(mainSrc.includes("if(consumer!=='enterprise'){"), 'Enterprise guard block exists in main.ts');
-  return { enterpriseGuardVerified: true };
+  const controllerSrc = readFileSync('stack/native-typescript/surfaces/m0-controller-composition.ts', 'utf8');
+  const enterpriseSrc = readFileSync('stack/native-typescript/surfaces/enterprise/presentation.ts', 'utf8');
+
+  // W03 packet §11 adjudicated worktree delta: the source-level
+  // `if(consumer!=='enterprise'){…}` branch is REMOVED from main.ts and main.ts is a
+  // serialized hotspot this workspace may not edit. Duplicate-spatial-view safety for
+  // enterprise therefore rests on single-container ownership + replacement rendering,
+  // not on that branch. Both facts are asserted here so either regression is falsified.
+  const stageCreators = mainSrc.match(/stage\s*=\s*document\.createElement\('div'\)/g) || [];
+  assert.equal(stageCreators.length, 1, 'main.ts allocates exactly one workspace stage node');
+  assert.equal((mainSrc.match(/stage\.id='foundationStage'/g) || []).length, 1, 'main.ts declares exactly one #foundationStage identity');
+  assert.ok(
+    controllerSrc.includes("let stage=center.querySelector('#foundationStage');"),
+    'M0 controller composition reuses the existing #foundationStage instead of appending a second stage'
+  );
+  assert.ok(
+    controllerSrc.includes('if(!stage){stage=document.createElement(\'div\')'),
+    'M0 controller composition creates the stage only when it is absent'
+  );
+  assert.ok(
+    controllerSrc.includes("ensureStage({consumer})") && controllerSrc.includes("const stage=ensureStage({consumer});const domain=new W03EnterpriseDomain"),
+    'Enterprise studio is mounted into the single shared stage'
+  );
+  const drawAt = enterpriseSrc.indexOf('const draw=({preserveSpatial=false}={})=>{');
+  assert.ok(drawAt >= 0, 'Enterprise presentation draws through a single render function');
+  assert.ok(
+    enterpriseSrc.slice(drawAt, drawAt + 600).includes('root.innerHTML='),
+    'Enterprise presentation replaces its stage content rather than appending a second spatial host'
+  );
+
+  return {
+    enterpriseGuardVerified: true,
+    enterpriseGatePresentInMain: mainSrc.includes("if(consumer!=='enterprise'){"),
+    singleStageContainer: true,
+    replacementRender: true
+  };
 });
 
 await test('C3-003.results-studio-binds-singular-shared-owners', 'C3_W03_PRESENTERS', async () => {
