@@ -25,6 +25,23 @@ const STYLE=`
 [data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-relation[aria-pressed="true"] .relation-line{stroke:var(--accent);stroke-width:3}
 [data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-relation-canvas-only .relation-line{stroke:color-mix(in srgb,var(--accent) 70%,#f59e0b);stroke-dasharray:6 3}
 [data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-relation-canvas-only .relation-label{fill:color-mix(in srgb,var(--accent) 85%,#f59e0b);font-weight:600}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-relation-canonical .relation-line{stroke-width:1.6}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-relation-related .relation-line{stroke-dasharray:7 4}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-relation-current-path .relation-line{stroke-dasharray:7 4;stroke-width:1.8}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .relation-label{paint-order:stroke;stroke:var(--bg2);stroke-width:3px;stroke-linejoin:round}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .node-icon-tile rect{fill:color-mix(in srgb,var(--accent) 12%,var(--bg));stroke:color-mix(in srgb,var(--accent) 38%,var(--line2));stroke-width:.8}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .node-icon-tile text{fill:color-mix(in srgb,var(--accent) 78%,var(--text))}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .node-icon-tile[data-kind="ku"] rect{fill:color-mix(in srgb,#10b981 18%,var(--bg));stroke:color-mix(in srgb,#10b981 55%,var(--line2))}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .node-icon-tile[data-kind="ku"] text{fill:color-mix(in srgb,#10b981 80%,var(--text))}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .node-icon-tile[data-kind="lab"] rect,[data-spatial-presentation-owner="SpatialPresentationOwner"] .node-icon-tile[data-kind="lab-module"] rect{fill:color-mix(in srgb,#a78bfa 18%,var(--bg));stroke:color-mix(in srgb,#a78bfa 55%,var(--line2))}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .node-icon-tile[data-kind="lab"] text,[data-spatial-presentation-owner="SpatialPresentationOwner"] .node-icon-tile[data-kind="lab-module"] text{fill:color-mix(in srgb,#a78bfa 82%,var(--text))}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .node-id-chip{fill:var(--text3)}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .node-title{paint-order:stroke;stroke:var(--bg2);stroke-width:2.5px;stroke-linejoin:round}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .node-secondary-line{opacity:.92}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .node-progress-track{fill:color-mix(in srgb,var(--line2) 70%,transparent)}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .node-progress-fill{fill:color-mix(in srgb,var(--accent) 75%,#10b981)}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .node-tag rect{fill:color-mix(in srgb,var(--accent) 10%,var(--bg));stroke:color-mix(in srgb,var(--accent) 35%,var(--line2));stroke-width:.7}
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .node-tag text{fill:var(--text3)}
 [data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-readout{backdrop-filter:blur(8px)}
 @media (prefers-reduced-motion:reduce){[data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-node-card .node-surface,[data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-relation .relation-line{transition:none}}
 `;
@@ -49,12 +66,20 @@ export function spatialShellMarkup(instanceId){
 export function renderSpatialRelation({edge,source,target,selected=false,tabbable=false,markerId}){
   const ax=source.x+66,ay=source.y+31,bx=target.x+66,by=target.y+31,labelX=(source.x+target.x)/2+66,labelY=(source.y+target.y)/2+25;
   const isCanvasOnly=Boolean(edge.presentationOnly||edge.kind==='canvas-presentation'||edge.type==='canvas-only'||edge.type?.startsWith('canvas'));
-  const strokeColor=selected?'var(--accent)':isCanvasOnly?'color-mix(in srgb,var(--accent) 70%,#f59e0b)':'var(--text3)';
-  const strokeDash=isCanvasOnly?'stroke-dasharray="6 3"':'';
-  const strokeWidth=selected?3:(isCanvasOnly?1.8:1.4);
+  const styleClass=isCanvasOnly?'canvasOnly'
+    :edge.styleClass&&['canonical','related','currentPath','canvasOnly'].includes(edge.styleClass)?edge.styleClass
+    :/current.?path/i.test(String(edge.type||edge.kind||edge.label||''))?'currentPath'
+    :/(optional|conditional|branch)/i.test(String(edge.type||''))?'related'
+    :/(depend|linear|canonical|prereq|require|sequence|flow)/i.test(String(edge.type||''))?'canonical'
+    :'related';
+  const classToken=styleClass==='currentPath'?'current-path':styleClass==='canvasOnly'?'canvas-only':styleClass.toLowerCase();
+  const edgeLabel=String(edge.label||edge.type||'');
+  const strokeColor=selected?'var(--accent)':styleClass==='canvasOnly'?'color-mix(in srgb,var(--accent) 70%,#f59e0b)':styleClass==='canonical'?'color-mix(in srgb,var(--accent) 45%,#10b981)':styleClass==='currentPath'?'color-mix(in srgb,var(--accent) 55%,#a78bfa)':'color-mix(in srgb,var(--accent) 60%,#3b82f6)';
+  const strokeDash=styleClass==='canvasOnly'?'stroke-dasharray="6 3"':styleClass==='canonical'?'':'stroke-dasharray="7 4"';
+  const strokeWidth=selected?3:styleClass==='canvasOnly'?1.8:styleClass==='currentPath'?1.8:1.5;
   const aria=isCanvasOnly?`Canvas-only presentation link (non-canonical): ${source.label||source.id} to ${target.label||target.id}: ${edge.type}`:`${source.label||source.id} to ${target.label||target.id}: ${edge.type}${edge.direction==='bidirectional'?', bidirectional':''}`;
-  const labelText=isCanvasOnly?`[Canvas] ${edge.type}`:edge.type;
-  return `<g class="spatial-relation ${isCanvasOnly?'spatial-relation-canvas-only':''}" data-edge="${esc(edge.id)}" data-presentation-only="${isCanvasOnly}" tabindex="${tabbable?'0':'-1'}" role="button" aria-pressed="${selected}" aria-label="${esc(aria)}" aria-keyshortcuts="F2 Shift+R"><line class="relation-hit-target" x1="${ax}" y1="${ay}" x2="${bx}" y2="${by}" stroke="transparent" stroke-width="18"/><line class="relation-line" x1="${ax}" y1="${ay}" x2="${bx}" y2="${by}" stroke="${strokeColor}" stroke-width="${strokeWidth}" ${strokeDash} marker-end="url(#${markerId})" ${edge.direction==='bidirectional'?`marker-start="url(#${markerId})"`:''}/><text class="relation-label ${isCanvasOnly?'relation-label-canvas-only':''}" data-relation-label="${esc(edge.id)}" x="${labelX}" y="${labelY}" fill="${isCanvasOnly?'color-mix(in srgb,var(--accent) 85%,#f59e0b)':'var(--text)'}" text-anchor="middle" font-size="11" font-weight="${isCanvasOnly?'600':'400'}" direction="ltr">${esc(labelText)}</text></g>`;
+  const labelText=isCanvasOnly?`[Canvas] ${edgeLabel}`:edgeLabel;
+  return `<g class="spatial-relation spatial-relation-${classToken}" data-edge="${esc(edge.id)}" data-edge-class="${styleClass}" data-presentation-only="${isCanvasOnly}" tabindex="${tabbable?'0':'-1'}" role="button" aria-pressed="${selected}" aria-label="${esc(aria)}" aria-keyshortcuts="F2 Shift+R"><line class="relation-hit-target" x1="${ax}" y1="${ay}" x2="${bx}" y2="${by}" stroke="transparent" stroke-width="18"/><line class="relation-line" x1="${ax}" y1="${ay}" x2="${bx}" y2="${by}" stroke="${strokeColor}" stroke-width="${strokeWidth}" ${strokeDash} marker-end="url(#${markerId})" ${edge.direction==='bidirectional'?`marker-start="url(#${markerId})"`:''}/><text class="relation-label relation-label-${classToken}" data-relation-label="${esc(edge.id)}" x="${labelX}" y="${labelY}" fill="${isCanvasOnly?'color-mix(in srgb,var(--accent) 85%,#f59e0b)':styleClass==='canonical'?'color-mix(in srgb,var(--accent) 55%,#10b981)':styleClass==='currentPath'?'color-mix(in srgb,var(--accent) 70%,#a78bfa)':'color-mix(in srgb,var(--accent) 70%,#3b82f6)'}" text-anchor="middle" font-size="11" font-weight="${isCanvasOnly||styleClass==='canonical'||styleClass==='currentPath'?'600':'500'}" direction="ltr">${esc(labelText)}</text></g>`;
 }
 
 export function renderSpatialNode({node,selected=false,tabbable=false}){
@@ -62,9 +87,23 @@ export function renderSpatialNode({node,selected=false,tabbable=false}){
   const isDuplicate=Boolean(node.presentationState?.duplicateOf||node.duplicateOf||String(node.id).includes('--canvas-rep-'));
   const strokeColor=selected?'var(--accent)':isDuplicate?'color-mix(in srgb,var(--accent) 75%,var(--line2))':'var(--line2)';
   const strokeDash=isDuplicate?'stroke-dasharray="5 3"':'';
+  const kind=String(node.kind||node.type||(/^KU[-_]/i.test(String(node.canonicalRef?.objectId||node.id||''))?'ku':'work-item')),kindToken=kind.toLowerCase().replace(/[^a-z0-9]+/g,'-');
+  const idChip=String(node.idChip||node.canonicalRef?.objectId||node.id||'');
+  const subtitle=String(node.subtitle||node.meta||'');
+  const shortStatus=String(node.status||''),showStatusChip=shortStatus&&shortStatus.length<=22;
+  const secondary=subtitle||(!showStatusChip?shortStatus:'');
+  const progress=node.progress&&typeof node.progress==='object'&&Number.isFinite(node.progress.value)?node.progress:null;
+  const tags=Array.isArray(node.tags)?node.tags.filter(tag=>String(tag||'').trim()).slice(0,2):[];
+  const glyph=(String(node.iconKey||'').replace(/^i-/,'')[0]||kindToken[0]||'n').toUpperCase();
+  const iconTile=`<g class="node-icon-tile" data-kind="${esc(kindToken)}"><rect x="9" y="8" width="18" height="18" rx="5"/><text x="18" y="21" text-anchor="middle" font-size="9" font-weight="750">${esc(glyph)}</text></g>`;
+  const idChipText=`<text class="node-id-chip" x="31" y="21" font-size="8" font-family="var(--mono)" direction="ltr">${esc(idChip)}</text>`;
+  const statusChip=showStatusChip?`<g class="node-status-chip" data-status="${esc(shortStatus)}"><circle class="node-status-dot" cx="125" cy="17.5" r="2.5" fill="${statusFill}"/><text x="119" y="21" text-anchor="end" font-size="7.5" fill="${statusFill}" direction="ltr">${esc(shortStatus)}</text></g>`:'';
+  const secondaryLine=secondary?`<text class="node-secondary-line" x="${isDuplicate?86:31}" y="46" font-size="7.5" fill="${statusFill}" direction="ltr">${esc(secondary)}</text>`:'';
+  const progressMeter=progress&&!isDuplicate?`<g class="node-progress"><rect class="node-progress-track" x="31" y="50" width="70" height="4" rx="2"/><rect class="node-progress-fill" x="31" y="50" width="${Math.max(0,Math.min(70,70*(progress.value/(progress.max||1))))}" height="4" rx="2"/><text class="node-progress-text" x="119" y="55" text-anchor="end" font-size="7" fill="var(--text3)" direction="ltr">${esc(node.progressText||`${progress.value}/${progress.max||100}`)}</text></g>`:'';
+  const tagRow=!progress&&!isDuplicate&&tags.length?`<g class="node-tags">${tags.map((tag,index)=>`<g class="node-tag"><rect x="${31+index*46}" y="50" width="42" height="10" rx="3"/><text x="${52+index*46}" y="57.5" text-anchor="middle" font-size="6.5" fill="var(--text3)" direction="ltr">${esc(String(tag).slice(0,9))}</text></g>`).join('')}</g>`:'';
   const duplicateBadge=isDuplicate?`<rect x="12" y="44" width="70" height="13" rx="3" fill="color-mix(in srgb,var(--accent) 15%,var(--bg2))" stroke="var(--accent)" stroke-width="0.8"/><text class="duplicate-badge" x="16" y="53" fill="var(--accent)" font-size="8.5" font-weight="700" font-family="var(--mono)" direction="ltr">[DUPLICATE]</text>`:'';
   const ariaLabel=isDuplicate?`${node.label} ${status} [Duplicate of ${node.presentationState?.duplicateOf||'source'}]`:`${node.label} ${status}`;
-  return `<g class="spatial-node-card ${isDuplicate?'spatial-node-duplicate':''}" data-node="${esc(node.id)}" data-duplicate="${isDuplicate}" transform="translate(${node.x},${node.y})" tabindex="${tabbable?'0':'-1'}" role="button" aria-pressed="${selected}" aria-label="${esc(ariaLabel)}"><rect class="node-surface" width="132" height="62" rx="10" fill="var(--bg2)" stroke="${strokeColor}" stroke-width="${selected?3:(isDuplicate?1.8:1)}" ${strokeDash}/><text x="12" y="26" fill="var(--text)" font-size="13" font-weight="600" direction="ltr">${esc(node.label)}</text><text x="${isDuplicate?86:12}" y="47" fill="${statusFill}" font-size="10" direction="ltr">${esc(status)}</text>${duplicateBadge}</g>`;
+  return `<g class="spatial-node-card ${isDuplicate?'spatial-node-duplicate':''}" data-node="${esc(node.id)}" data-node-kind="${esc(kindToken)}" data-duplicate="${isDuplicate}" transform="translate(${node.x},${node.y})" tabindex="${tabbable?'0':'-1'}" role="button" aria-pressed="${selected}" aria-label="${esc(ariaLabel)}"><rect class="node-surface" width="132" height="62" rx="10" fill="var(--bg2)" stroke="${strokeColor}" stroke-width="${selected?3:(isDuplicate?1.8:1)}" ${strokeDash}/>${iconTile}${idChipText}${statusChip}<text class="node-title" x="31" y="33" fill="var(--text)" font-size="10.5" font-weight="600" direction="ltr">${esc(node.label)}</text>${secondaryLine}${progressMeter}${tagRow}${duplicateBadge}</g>`;
 }
 
 export function renderMultiSelectionGroupBoundary({nodes,selectedIds}){

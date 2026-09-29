@@ -5,6 +5,9 @@ import {eventTargetElement} from './global/input-ownership-contract.js';
 import {StructuredActionSurfacePresentationHost} from './structured/action-surfaces/presentation-host.js';
 export const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export const button=(id,label,extra='')=>`<button class="btn" data-foundation-command="${esc(id)}" ${extra}>${esc(label)}</button>`;
+const RTL_STRONG=/[\u0590-\u08FF\uFB1D-\uFDFD\uFE70-\uFEFC]/;
+const LTR_STRONG=/[A-Za-z\u00C0-\u024F\u0370-\u03FF\u0400-\u04FF\u0530-\u058F]/;
+export const firstStrongDirection=value=>{for(const char of String(value??'')){if(RTL_STRONG.test(char))return 'rtl';if(LTR_STRONG.test(char))return 'ltr'}return 'ltr'};
 export class ContextDescriptorProvider {
   constructor(id,describe){if(!id||typeof describe!=='function')throw Error('INVALID_CONTEXT_DESCRIPTOR_PROVIDER');this.id=id;this.describe=describe;}
 }
@@ -75,7 +78,7 @@ export class WorkspaceFoundation {
     if(!host)return null;
     if(key==='LEFT'||key==='RIGHT'){const pbody=pane?.querySelector('.pbody');if(pbody)[...pbody.children].forEach(child=>{const neutral=document.body.dataset.carrierDocumentSemantics==='neutral';if(child!==host&&(neutral||child.dataset?.donorSemantic==='suppressed')){child.hidden=true;child.inert=true;child.setAttribute('aria-hidden','true')}});}
     host.replaceChildren();if(node)host.append(node);else host.innerHTML=String(html||'');host.hidden=false;host.inert=false;host.removeAttribute('aria-hidden');host.dataset.regionBindingOwner='WorkspaceFoundationHost';
-    if(label&&pane?.querySelector('.phead h2'))pane.querySelector('.phead h2').textContent=label;
+    if(label&&pane?.querySelector('.phead h2')){const heading=pane.querySelector('.phead h2'),direction=firstStrongDirection(label);heading.textContent=label;heading.setAttribute('dir','auto');heading.style.setProperty('unicode-bidi','isolate');heading.style.setProperty('direction',direction,'important');}
     if(key==='BOTTOM'){const title=document.querySelector('#bottomShelf .bottomtitle'),sum=document.querySelector('#bottomSummary');if(label&&title)title.textContent=label;if(summary&&sum)sum.textContent=summary;if(open!==null){this.api.state.surface.bottomOpen=Boolean(open);document.querySelector('#bottomShelf').dataset.state=open?'open':'closed';const content=document.querySelector('#bottomContent');if(content){content.inert=!open;content.hidden=false}}}
     this.regionHosts.set(key,host);return host;
   }

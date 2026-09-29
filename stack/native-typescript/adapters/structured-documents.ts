@@ -1,6 +1,7 @@
 import {StructuredDocumentDomainAdapter} from '../foundation/structured.js';
 
 const clone=value=>structuredClone(value);
+const seedLabel=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const learnDocument={
   id:'learn-document-trust-boundaries',revision:'learn-rev-1',title:'دفتر التعلّم · حدود الثقة',tags:['Learning','Editable draft'],
   blocks:[
@@ -13,7 +14,7 @@ const learnDocument={
 export function structuredConsumerSeed(surface,libraryBundle=null){
   if(surface==='library'){if(!libraryBundle)throw Error('LIBRARY_FIXTURE_BUNDLE_REQUIRED');const id=libraryBundle.initialDocumentId||Object.keys(libraryBundle.FIXTURES)[0];return clone(libraryBundle.FIXTURES[id])}
   if(surface==='learn')return clone(learnDocument);
-  return {id:`structured-${surface}-document`,revision:'foundation-rev-1',title:`${surface} · Foundation document host`,tags:['Foundation'],blocks:[{id:`${surface}-placeholder`,type:'paragraph',html:'Structured host retained for shared workspace composition.'}]};
+  return {id:`structured-${surface}-document`,revision:'foundation-rev-1',title:`${surface} · empty Structured scaffold — no domain document bound`,tags:['Scaffold','No domain content bound'],blocks:[{id:`${surface}-placeholder`,type:'callout',html:`Empty Structured scaffold for <bdi dir="ltr">${seedLabel(surface)}</bdi> — this host holds no <bdi dir="ltr">${seedLabel(surface)}</bdi> product content. It is a composition placeholder, not a real <bdi dir="ltr">${seedLabel(surface)}</bdi> document: no identity, structure, records or facts are asserted here. Real content appears only when a bound <bdi dir="ltr">${seedLabel(surface)}</bdi> domain source supplies it.`}]};
 }
 
 export function bindStructuredPersistence(adapter,persistenceClient,{onReceipt=null,autosaveDelayMs=350,autosavePreference=null,recoveryPreference=null}={}){
