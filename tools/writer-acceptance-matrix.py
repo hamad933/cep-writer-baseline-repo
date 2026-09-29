@@ -224,6 +224,22 @@ def main() -> int:
             for pid in rule.get("proofs", []):
                 if pid not in proof_map:
                     fail(f"rule {rule['id']} references unknown/never-run proof {pid!r}")
+            # --- P6 proof hygiene (Pro critical review, mission §27) ---
+            cmds = [proof_map[p]["command"] for p in rule.get("proofs", [])]
+            self_ref = [c for c in cmds if "writer-acceptance-matrix" in c]
+            if self_ref:
+                fail(
+                    f"rule {rule['id']}: SELF_REFERENTIAL_PROOF forbidden - the matrix generator "
+                    f"cannot prove the matrix ({self_ref[0]!r}). Use a subject-matched proof."
+                )
+            non_discharge = ("build-runtime", "npm test", "test-models")
+            usable = [c for c in cmds if not any(b in c for b in non_discharge)]
+            if not usable:
+                fail(
+                    f"rule {rule['id']}: NO_SUBJECT_MATCHED_DISCHARGE - build steps and model/test "
+                    f"suites are preconditions only and cannot be the sole basis for PASS. "
+                    f"Add a proof whose subject is this rule's rows."
+                )
         else:
             if rule.get("status") not in VALID:
                 fail(f"rule {rule['id']}: literal status must be one of {VALID}")
@@ -246,6 +262,20 @@ def main() -> int:
             multi.append((row["obligation_id"], [h["id"] for h in hits]))
             continue
         rule = hits[0]
+        # --- P6 granularity guard (Pro critical review, mission §27) ---
+        # OWNER_DECISION / OWNER_QA_DEEP_AUDIT rows carry a per-subject truth (decision id /
+        # finding id). Sweeping them from a surface-wide or layer-wide rule is a manufactured
+        # PASS: the disposition must be keyed on the row's subject.
+        if row.get("source_layer") in ("OWNER_DECISION", "OWNER_QA_DEEP_AUDIT"):
+            subject_keys = {"component", "component__contains", "obligation_id",
+                            "obligation_id__contains", "source_key", "source_key__contains"}
+            if not (subject_keys & set(rule.get("match", {}))):
+                fail(
+                    f"rule {rule['id']}: INSUFFICIENT_GRANULARITY - it matches "
+                    f"{row.get('source_layer')} row {row['obligation_id']} without keying on the "
+                    f"row subject. Match on 'component' (decision id / finding id) or "
+                    f"'obligation_id', per the unified disposition policy P3/P4."
+                )
         if rule["status_mode"] == "literal":
             status = rule["status"]
             justification = rule["justification"]
@@ -347,6 +377,8 @@ def aggregate(args) -> int:
     per_ws = {}
     total = 0
     grand = {}
+    subject_status = {}
+    conflicts = []
     for i in range(1, 6):
         ws = f"W0{i}"
         path = os.path.join(ROOT, "writer-output", ws, "ACCEPTANCE_SUMMARY.json")
@@ -366,14 +398,56 @@ def aggregate(args) -> int:
         total += s["requirements_rows"]
         for k, v in s["counts"].items():
             grand[k] = grand.get(k, 0) + v
+
+        # --- cross-matrix consistency (Pro critical review, mission §27) ---
+        # Findings and decisions are replicated across workspace row sets, so closure is a
+        # GLOBAL fact: the same (component, proof_requirement) must resolve to the same status
+        # in every workspace matrix.
+        matrix = os.path.join(ROOT, "writer-output", ws, "ACCEPTANCE_MATRIX.csv")
+        if os.path.exists(matrix):
+            with open(matrix, newline="", encoding="utf-8") as fh:
+                for r in csv.DictReader(fh):
+                    if r.get("source_layer") not in ("OWNER_DECISION", "OWNER_QA_DEEP_AUDIT"):
+                        continue
+                    key = (r.get("component", ""), r.get("proof_requirement", ""))
+                    if not key[0]:
+                        continue
+                    seen = subject_status.setdefault(key, {})
+                    seen.setdefault(r["status"], []).append(f"{ws}:{r['obligation_id']}")
+            for key, seen in subject_status.items():
+                if len(seen) > 1:
+                    conflicts.append({
+                        "component": key[0],
+                        "proof_requirement": key[1][:120],
+                        "statuses": {k: v[:4] for k, v in seen.items()},
+                    })
+    # dedupe conflicts (subject_status is cumulative across workspaces)
+    uniq = {}
+    for c in conflicts:
+        uniq[(c["component"], c["proof_requirement"])] = c
+    conflicts = sorted(uniq.values(), key=lambda c: c["component"])
+
     out = {
         "schemaVersion": 1,
         "generatedAt": datetime.now(timezone.utc).isoformat(),
         "total_obligations": total,
         "grand_counts": grand,
         "workspaces": per_ws,
+        "cross_matrix_consistency": {
+            "subjects_checked": len(subject_status),
+            "conflicts": len(conflicts),
+            "detail": conflicts[:40],
+        },
     }
     print(json.dumps(out, indent=2))
+    if conflicts:
+        print(
+            f"\nCROSS_MATRIX_INCONSISTENCY: {len(conflicts)} subject(s) resolve to different "
+            f"statuses in different workspaces. Closure is a global fact - regenerate the "
+            f"outlier matrices so every workspace agrees.",
+            file=sys.stderr,
+        )
+        return 1
     return 0
 
 
