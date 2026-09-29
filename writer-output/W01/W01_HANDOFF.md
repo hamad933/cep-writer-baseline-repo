@@ -252,3 +252,112 @@ Raw output tails for every proof are in `writer-output/W01/PROOF_RESULTS.json`.
 4. **Candidate identity not recomputable to the dispatch-declared value** — reported as a LINEAGE-class condition caused by Owner-directed parallel execution, with both identities recorded (§5.2). Not silently absorbed, not silently "fixed".
 
 No secret or credential was printed, read or passed at any point. No `git add` / `commit` / `push` / `reset` / `clean` / `restore` / `checkout` / `stash` was executed.
+
+---
+
+# RESIDUAL ROUND (W01-F) — CBF-002 closure, C03-GATE-020 capture, hotspot request
+
+**Date:** 2026-09-29 · **branch** `writer/mi-serial` · **commit at the authoritative proof run** `e78d453c43961daba72f2e1ffb203e43c90b6eba` · **`HEAD^{tree}`** `21c1ed0606f0bd322e140dd4a2c7597761cc7007`
+**Candidate (per-writer binding)** `OWNED_PARTITION_SHA256:b9419922de60834bd7948830e883542a96bb87878031c9c9a909b67d09975965` / 14 files / `stableUnderSiblingEdits: true`, from `node tools/writer-candidate-identity.mjs --workspace W01 --json`. The whole-worktree variant is `INFORMATIONAL_MOVING` under parallel sibling edits (HEAD moved `891c1e5 → d4b9e151 → e78d453c` during this round from sibling checkpoints alone) and is recorded as context only — `controller/12_execution/03_lineage_adjudication.md`.
+**Scope:** only the residuals W01 itself listed in §6 (items 3 and 5) plus §5.3 / §6 item 9. Not a restart of W01-A..E: every earlier artifact is preserved, nothing deleted, no prior checkpoint record rewritten.
+
+## R1. What changed
+
+### CBF-002 — **FIXED with proof**, inside W01's own partition, no serialized hotspot touched
+
+§6 item 3 named the seam as *"restore vs async `handleShellNavigate`"*. A new probe (`tools/w01-cbf-probe.mjs` → `writer-output/W01/CBF002_PROBE.json`) **measured** it and found the seam is real but only **half** the defect:
+
+1. **Restore side (was able to claim a restore it did not perform).** `restoreBookmark()` issued a single click on a control that may not exist yet — the destination surface is re-mounted by the `async` `main.ts#handleShellNavigate`, which `navigate()`/`onPopState()` never awaited — and then reported `contextRestoreStatus='restored'` **whether or not the context came back**. A route+scroll restore was being reported as a context restore, exactly the packet §11 negative case.
+2. **Command side (the actual state loss).** `SemanticCommandBus.registerCommand` rejects `DUPLICATE_COMMAND_OWNER`, so `today.filter` is registered **once**, by the first Today composition, closing over *that* composition's `TodayProjectionDomainAdapter`. Every Back/Forward re-mount builds a **new** adapter and re-renders the stage from it; the command kept mutating the orphaned adapter. Measured before the repair: after Forward, `today.filter` emitted a receipt (`seq 2`, `ok:true`, `filter:'ATTENTION'`) while the DOM stayed `ALL:true` — and a *manual* user click was equally dead (`seq 3`, still `ALL:true`).
+
+**Repairs applied (both files are in W01's declared writable partition):**
+
+| file | change |
+|---|---|
+| `stack/native-typescript/foundation/global/shell/navigation.ts` | `applySurfaceContext()` — bounded wait (90 frames) for the context control, one click, then **verify** the pressed/selected state moved. `restoreBookmark()` sets `contextRestored='true'` / `contextRestoreStatus='restored'` **only** on verification; otherwise `contextRestored='false'` / `contextRestoreStatus='context-unapplied'` and returns `false`. Scroll + focus restoration unchanged; registered context providers keep their `boolean` outcome contract (`void` = unverifiable ⇒ treated as applied). |
+| `stack/native-typescript/surfaces/today/surface.ts` | `today.{filter,resume,refresh,why}` resolve their target through the **mounted** adapter at call time (`currentTodayAdapter()`, set by `bindTodaySurface`). One owner, one registration — no competing bus, no duplicate mechanics. |
+
+`dist/` regenerated with `tools/writer-serial.sh node tools/build-runtime.mjs` (`pass: true`, `CANONICAL_SOURCE_TO_GENERATED_ONLY`, written 272, removedStale 0) — W01's first product-source change, so the "rebuild not required" note of W01-E no longer applies.
+
+**Proof:** `cbf.context-restored-on-forward`, `cbf.native-context-preserved`, `cbf.restore-machinery-ran` and the new **`cbf.restore-reported-only-when-context-applied`** all PASS on the shell buttons *and* on browser-native Back/Forward. Probe after the repair: `domPressed=true`, `domFilters=ALL:false,…,ATTENTION:true`, `restoreStatus=restored`, `restoreBookmark(surface:'today') → domAfter:true`.
+
+### C03-GATE-020 — W01-side matched-viewport capture **COMPLETE**, gate still `BLOCKED`
+
+New `tools/w01-visual-capture.mjs` captures both W01 surfaces at **1440×1000 and 1024×900**, baseline + real keyboard focus, into `writer-output/W01/evidence/<surface>/<flow>-<YYYYMMDDTHHMMSSZ>-<candidate8>.png` per `controller/08_evidence/evidence_contract.md` (`<candidate8>` = first 8 of `OWNED_PARTITION_SHA256`, because the worktree candidate is moving and must never bind a W01 claim).
+
+* **32/32 assertions PASS** · 8 CURRENT artifacts (+48 retained-and-labelled superseded) · receipt `writer-output/W01/VISUAL_CAPTURE_RECEIPT.json`
+* measured per viewport × surface: declared viewport applied; **no horizontal overflow at either viewport**; shell `destination-count=5` / `frozen=false` / links rendered; Today 6-filter set complete; Tab reaches the W01-owned focus region; ArrowRight moves focus inside the shell destination navigation; focus stays in region; `document.activeElement` connected, non-body, owned by `GlobalShellNavigationOwner` (shell) / `TodayOrchestrationPresentation` (today)
+* `P-VISUAL-CAPTURE` added to `PROOF_CATALOG.json` and ordered **before** the browser flows so `BROWSER_RECEIPT.json.evidenceArtifacts` indexes the captures from the same run — no orphans
+
+**The gate itself is NOT claimed.** `C03-GATE-020` requires Owner matched-state image inspection; `OBL-003674`, `OBL-003675`, `OBL-008651` stay `BLOCKED` under their own rules. W01 produced the evidence and stopped at the authority boundary.
+
+### Serialized hotspot — **FILED, not applied**
+
+`writer-output/W01/SERIALIZED_HOTSPOT_REQUEST.md`: the Today LEFT-region `Filter · …` summary is written once at mount by `m0-controller-composition.ts` (line 203) and never re-rendered after `today.filter` — measured `Filter · ALL` beside `ATTENTION:true` in probe observations 03/05/06/07. The request carries the exact OLD/NEW substring of line 203, the companion `surfaces/today/surface.ts` half, the 5 obligation ids (`OBL-000003`, `OBL-001774`, `OBL-003358`, `OBL-001400`, `OBL-000001`) with their post-round matrix status, 9 negative cases and a 9-step verification battery. **No edit was made to `m0-controller-composition.ts` or `main.ts`** — both byte-identical (`w01.read-only-roots-untouched` PASS), and **no matrix row was flipped on the strength of a proposal**.
+
+### Shared-tool change absorbed without touching shared tools
+
+An uncommitted edit to the Coordinator-owned `tools/writer-acceptance-matrix.py` added P6 guards mid-round (`SELF_REFERENTIAL_PROOF`, `NO_SUBJECT_MATCHED_DISCHARGE`, `INSUFFICIENT_GRANULARITY`). W01 **did not edit that tool** (outside its write partition). It adapted only its own `PROOF_CATALOG.json`: `R-OBLIGATION-MANIFEST` and `R-OD-ZEROLOSS` were repointed from the self-referential `P-MATRIX-ZEROLOSS` to the new subject-matched `P-OBLIGATION-MANIFEST` (`tools/w01-obligation-manifest-proof.mjs` re-reads the manifest independently of its generator), and the 6 rules sweeping `OWNER_DECISION` / `OWNER_QA_DEEP_AUDIT` rows were keyed on `obligation_id__contains` with their **exact current row sets — no status changed**. Output under the new tool is identical to the committed tool's: 711/711, `327 / 356 / 26 / 2`.
+
+## R2. New proof table (13 proofs, measured)
+
+| proof | command | result | exit |
+|---|---|---|---|
+| `P-SHELL-ROUTE` | `node tests/surfaces/shell/surface.test.mjs` | **PASS** `cases:8` | 0 |
+| `P-TODAY-ROUTE` | `node tests/surfaces/today/surface.test.mjs` | **PASS** `cases:9` | 0 |
+| `P-S07` | `node dist/tests/rescue/S07_W01_W02_SHELL_TODAY/s07-contracts.test.js` | **PASS** | 0 |
+| `P-D07` | `node dist/tests/post-c03/D07/d07-today-presentation-authority-tests.js` | **PASS** | 0 |
+| `P-MODEL` | `tools/writer-serial.sh npm test` | **PASS** 210/0 | 0 |
+| `P-CHECK` | `tools/writer-serial.sh npm run check` | **FAIL** — `browser.lineage_receipt_truthful` (1/6) + `browser.targeted_visual_evidence` (legacy class); pre-writer baseline, Controller plane | 1 |
+| `P-CHECK-DUP` | `tools/writer-serial.sh node tools/check-duplicate-mechanics.mjs` | **PASS** | 0 |
+| `P-CONFORMANCE` | `tools/writer-serial.sh node tools/w01-conformance.mjs` | **PASS** 21/21 | 0 |
+| `P-VISUAL-CAPTURE` **(new)** | `node tools/w01-visual-capture.mjs` | **PASS** 32/32, 8 artifacts | 0 |
+| `P-BROWSER-W01` | `node tools/w01-browser-flows.mjs --flow shell.destination-routing --flow today.render-and-filter --flow deep-work.open-close-lifecycle --flow diagnostics.gate` | **PASS** | 0 |
+| `P-BROWSER-CBF002` | `node tools/w01-browser-flows.mjs --flow back-forward-semantic-context` | **PASS** *(was FAIL at W01-E)* | 0 |
+| `P-MATRIX-ZEROLOSS` | `python3 tools/writer-acceptance-matrix.py --workspace W01` | **PASS** 711/711 `zero_loss: true` | 0 |
+| `P-OBLIGATION-MANIFEST` **(new)** | `node tools/w01-obligation-manifest-proof.mjs` | **PASS** — 711 ids exactly once, nothing invented, 4-status vocabulary, PASS⇒`proof_ref` / BLOCKED+NA⇒`justification`, uniform identity binding, summary agreement | 0 |
+
+**13 proofs: 12 PASS / 1 FAIL** — the single FAIL is the pre-existing browser-lineage gate. Raw tails in `writer-output/W01/PROOF_RESULTS.json`.
+
+## R3. New matrix counts
+
+```
+711 / 711 rows dispositioned · zero_loss: true · exit 0
+PASS 327 (+1 vs W01-E) | BLOCKED 356 (0) | NOT_APPLICABLE_WITH_PROOF 26 (0) | FAIL 2 (-1)
+shell: 159 PASS / 179 BLOCKED / 13 NA / 1 FAIL      today: 168 PASS / 177 BLOCKED / 13 NA / 1 FAIL
+matrix sha256 2075057c8aeaec512a406763655517ffb79952bec8d2fe672de1140167f75f7a
+bound: candidate OWNED_PARTITION_SHA256:b9419922… · commit e78d453c… · tree 21c1ed06…
+```
+
+* **Moved:** `OBL-000001` (shell return continuity, `R-IDENTITY-SHELL-RETURN-CONTINUITY`) **`FAIL → PASS`** — the rule derives from `P-SHELL-ROUTE + P-S07 + P-BROWSER-W01 + P-BROWSER-CBF002`, and `P-BROWSER-CBF002` is green now that CBF-002 is repaired.
+* **Unchanged:** every `BLOCKED` / `NOT_APPLICABLE_WITH_PROOF` row keeps its named missing authority or cited binding. Q-1 → 4 rows `BLOCKED`, Q-2 → 3 rows `BLOCKED`, both still `STOP/REPORT` and still never decided. `destinationCountFrozen=false` still proven three ways; `domain-diagnostics` bottom tab still not invented.
+
+## R4. New browser results + 7-class classifications (5/5 PASS)
+
+| flow | status | classification | assertions | notes |
+|---|---|---|---|---|
+| `shell.destination-routing` | **PASS** | — | 11/11 | 5 destinations, `frozen=false`, 23 routes, real click navigation + `shell.navigate` receipt owned by `GlobalShellNavigationOwner`, browser Back restores the route |
+| `today.render-and-filter` | **PASS** | — | 10/10 | stage mounted, 6-filter set complete, `today.filter` receipt, `mastery='NOT_INFERRED__W04_OWNED'`, `canonicalWrites=false`, `masteryWrites=false` |
+| `back-forward-semantic-context` | **PASS** | — | **10/10** | **CBF-002 closed.** capture `ATTENTION` → Back → Forward re-applies on the shell buttons *and* browser-native popstate; `contextRestoreStatus='restored'`; new `cbf.restore-reported-only-when-context-applied='true'` — a route-only restore can no longer claim a context restore |
+| `deep-work.open-close-lifecycle` | **PASS** | — | 9/9 | closed `hidden+inert+aria-hidden=true`, `providerCount:0` → toggle disabled, no fabricated content; `runs` open→close lifecycle, owner preserved, close returns to `hidden+inert` |
+| `diagnostics.gate` | **PASS** | — | 4/4 | negative: no `#foundationDiagnostics` without the parameter, no `domain-diagnostics` tab; positive: `?diagnostics=foundation` → panel `isConnected`, `assuranceOnly='true'` |
+
+**44/44 assertions green.** No flow is classified `PRODUCT | HARNESS | ENVIRONMENT | ORACLE | EVIDENCE | LINEAGE | UNKNOWN` because none failed; transport noise (`net::ERR_CONNECTION_REFUSED` on `http://127.0.0.1:<port>/v1/…`) is still recorded per flow as **ENVIRONMENT** (the static proof server serves `dist/` only) and is not a product verdict. Receipt `writer-output/W01/BROWSER_RECEIPT.json` — Playwright 1.62.1 package-local / Chromium 151.0.7922.34 / viewport 1440×980 / `reducedMotion:'reduce'` / transport `localhost-http`.
+
+Evidence set: **216 screenshots on disk, 216 indexed, 0 orphans, 0 deleted** — 13 `FLOW_EVIDENCE`, 8 `MATCHED_VIEWPORT_VISUAL_CAPTURE_EVIDENCE`, 195 `SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED` (160 root + 28 `evidence/shell/` + 28 `evidence/today/`).
+
+## R5. What remains BLOCKED
+
+| item | status | named missing authority |
+|---|---|---|
+| **Q-1** shell final destination count (4 rows) | `BLOCKED` | STOP/REPORT open question, Owner-authority-only (C03-GATE-023). Never frozen, never invented. |
+| **Q-2** Today provider owner (3 rows) | `BLOCKED` | STOP/REPORT open question, Owner/Controller ownership decision + registry row |
+| **C03-GATE-020** matched viewport (3 rows: `OBL-003674`, `OBL-003675`, `OBL-008651`) | `BLOCKED` | Owner matched-state image inspection. **W01-side capture is complete** (8 artifacts, 32/32 assertions, 1440×1000 + 1024×900 + keyboard/focus, hash-bound) — the inspection decision is not W01's to make |
+| **C03-GATE-022** browser evidence (2 rows: `OBL-008623`, `OBL-008624`) | **FAIL** | `npm run check` `browser.lineage_receipt_truthful` + `browser.targeted_visual_evidence`; browser-lineage class, Controller plane, unchanged from the pre-writer baseline |
+| Owner visual acceptance `OBL-008677` (1 row) | `BLOCKED` | `NO_FINAL_BINARY__VISUAL_COMPOSITION_REOPENED_BY_OWNER-20260910-010`, bound to Q-1 |
+| Today LEFT-region `Filter · …` summary | **FILED** | `m0-controller-composition.ts` is a serialized hotspot (`02_parallel_dispatch.md` §3). `writer-output/W01/SERIALIZED_HOTSPOT_REQUEST.md` — hunk proposed, **not applied** |
+| 356 `BLOCKED` rows total | `BLOCKED` | each row names its own authority in `ACCEPTANCE_MATRIX.csv`: 116 Controller/Owner evidence, 104 QA deep audit, 118 finding convergence, 4 POST-C03 overlay, 2 AR1 recovery, plus the above |
+| `domain-diagnostics` bottom tab | never implemented, `NOT_APPLICABLE_WITH_PROOF` where a row carries it | declared in all 23 profiles as a requirement candidate only; W01 did not invent it (A-2), proven by `w01.domain-diagnostics-tab-not-invented` and the `diagnostics.gate` flow |
+| **Q-1 / Q-2** | still `BLOCKED`, **never decided** | per hard rule (STOP/REPORT) |
+
+**W01 product-source change set (complete, this workspace only):** `stack/native-typescript/foundation/global/shell/navigation.ts` and `stack/native-typescript/surfaces/today/surface.ts`. Protected canonical deltas `main.ts` / `foundation/extensions.css` / `foundation/operational/xterm-renderer.ts` byte-identical; `m0-controller-composition.ts` and `profiles/**` untouched. Records: `writer-output/W01/CHECKPOINTS.md` §W01-F · `writer-output/W01/EVIDENCE_INDEX.json`.

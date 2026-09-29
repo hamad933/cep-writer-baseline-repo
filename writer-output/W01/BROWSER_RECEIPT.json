@@ -7,27 +7,53 @@
   "transport": "localhost-http",
   "runtime": "Node v22.16.0",
   "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-  "measuredCandidate": "WORKTREE_VARIANT:ac424340da0dc6db1a1922eaff5c1e8789343ee438abd0771669e18f86a11fa8",
+  "measuredCandidate": "WORKTREE_VARIANT:90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
   "canonicalSourceFileCount": 287,
   "measuredCandidateFileCount": 287,
-  "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
-  "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+  "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+  "tree": "21c1ed0606f0bd322e140dd4a2c7597761cc7007",
+  "ownedPartition": {
+    "identity": "OWNED_PARTITION_SHA256:b9419922de60834bd7948830e883542a96bb87878031c9c9a909b67d09975965",
+    "roots": [
+      "stack/native-typescript/surfaces/shell",
+      "stack/native-typescript/surfaces/today",
+      "stack/native-typescript/foundation/global/shell",
+      "stack/native-typescript/foundation/global/bottom-shelf.ts",
+      "stack/native-typescript/foundation/workspace.ts",
+      "stack/native-typescript/adapters/today",
+      "tests/surfaces/shell",
+      "tests/surfaces/today",
+      "tools/c3-today-truth"
+    ],
+    "fileCount": 14,
+    "stableUnderSiblingEdits": true,
+    "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+    "tree": "21c1ed0606f0bd322e140dd4a2c7597761cc7007",
+    "branch": "writer/mi-serial",
+    "bindingRule": "Use OWNED_PARTITION for per-writer proof binding. WORKTREE_VARIANT is INFORMATIONAL_MOVING only under concurrent sibling workspace edits and must never be used as a per-writer candidate identity.",
+    "worktreeVariantInformational": {
+      "identity": "WORKTREE_VARIANT:d7fb2559205eedc8",
+      "fileCount": 350,
+      "stableUnderSiblingEdits": false,
+      "classification": "INFORMATIONAL_MOVING"
+    }
+  },
   "environment": {
     "node": "v22.16.0",
     "engine": "Playwright Chromium",
     "playwrightResolution": "package-local",
     "packageDeclaredVersion": "1.62.1",
     "transport": "localhost-http",
-    "proofServer": "tools/serve.mjs on 127.0.0.1:40565",
+    "proofServer": "tools/serve.mjs on 127.0.0.1:33661",
     "viewport": "1440x980",
     "reducedMotion": true,
     "browserExecutableOverride": false,
     "browserVersion": "151.0.7922.34"
   },
-  "capturedAt": "2026-09-29T04:16:31.074Z",
+  "capturedAt": "2026-09-29T05:23:05.625Z",
   "evidenceLineage": {
     "bindingAlgorithm": "path\\0size\\0sha256\\n (tools/source-tree-identity.mjs)",
-    "recomputedCandidateTreeSha256": "ac424340da0dc6db1a1922eaff5c1e8789343ee438abd0771669e18f86a11fa8",
+    "recomputedCandidateTreeSha256": "90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
     "recomputedCandidateFileCount": 287,
     "expectedCandidateTreeSha256": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
     "expectedCandidateFileCount": 287,
@@ -38,8 +64,8 @@
   },
   "summary": {
     "total": 5,
-    "pass": 4,
-    "fail": 1
+    "pass": 5,
+    "fail": 0
   },
   "limitations": [
     "Headless Chromium only; no Owner acceptance and no exhaustive permutation certification",
@@ -119,15 +145,23 @@
         {
           "id": "cbf.context-restored-on-forward",
           "expected": "true",
-          "actual": "false",
-          "ok": false,
-          "class": "PRODUCT",
-          "message": "CBF-002: Back restored the route but the Today filter semantic context was silently reset to ALL"
+          "actual": "true",
+          "ok": true,
+          "class": null,
+          "message": ""
         },
         {
           "id": "cbf.restore-machinery-ran",
           "expected": "restored",
           "actual": "restored",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "cbf.restore-reported-only-when-context-applied",
+          "expected": "true",
+          "actual": "true",
           "ok": true,
           "class": null,
           "message": ""
@@ -143,22 +177,22 @@
         {
           "id": "cbf.native-context-preserved",
           "expected": "true",
-          "actual": "false",
-          "ok": false,
-          "class": "PRODUCT",
-          "message": "CBF-002: browser-native Back/Forward silently reset the Today filter semantic context"
+          "actual": "true",
+          "ok": true,
+          "class": null,
+          "message": ""
         }
       ],
       "screenshots": [
         {
-          "filename": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T041627Z-c82cec63.png",
+          "filename": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T052302Z-c82cec63.png",
           "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
           "bytes": 290622,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T04:16:27.705Z",
+          "capturedAt": "2026-09-29T05:23:03.008Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "back-forward-semantic-context",
@@ -166,14 +200,14 @@
           }
         },
         {
-          "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T041628Z-c82cec63.png",
-          "sha256": "50321947cf7a1ea766d5778d1bb9b8a38f185580ea09060b64b34611630941ba",
-          "bytes": 290895,
+          "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T052303Z-c82cec63.png",
+          "sha256": "262007710277c24be2af5c971a80777a47a5b4b96e972b88517b2ff2cb7ba496",
+          "bytes": 291016,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T04:16:29.396Z",
+          "capturedAt": "2026-09-29T05:23:04.149Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "back-forward-semantic-context",
@@ -181,14 +215,14 @@
           }
         },
         {
-          "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T041630Z-c82cec63.png",
-          "sha256": "5a72530a8ef9e15c28bcdc10c155b07529a20acf3c494d5469350e9a1177fbdf",
-          "bytes": 290895,
+          "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T052304Z-c82cec63.png",
+          "sha256": "3be726ef1d8a97a86f1a478c7b4782c56f00c6cf2c1f65c96b1c23207cc08316",
+          "bytes": 291134,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T04:16:30.618Z",
+          "capturedAt": "2026-09-29T05:23:05.134Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "back-forward-semantic-context",
@@ -209,8 +243,8 @@
       ],
       "browser": "Chromium (Playwright package-local)",
       "browserVersion": "151.0.7922.34",
-      "status": "FAIL",
-      "failureClassification": "PRODUCT"
+      "status": "PASS",
+      "failureClassification": null
     },
     {
       "flow": "deep-work.open-close-lifecycle",
@@ -360,14 +394,14 @@
       ],
       "screenshots": [
         {
-          "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T041610Z-c82cec63.png",
+          "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T052251Z-c82cec63.png",
           "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
           "bytes": 127244,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T04:16:10.843Z",
+          "capturedAt": "2026-09-29T05:22:51.268Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "deep-work.open-close-lifecycle",
@@ -375,14 +409,14 @@
           }
         },
         {
-          "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T041613Z-c82cec63.png",
+          "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T052253Z-c82cec63.png",
           "sha256": "b8fe0022a79d9f40c4ac19edb05f1b3f03e1421cb55ad19236bdcae9f2feb42f",
           "bytes": 152221,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T04:16:13.351Z",
+          "capturedAt": "2026-09-29T05:22:53.698Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "deep-work.open-close-lifecycle",
@@ -390,14 +424,14 @@
           }
         },
         {
-          "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T041613Z-c82cec63.png",
+          "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T052254Z-c82cec63.png",
           "sha256": "d83ee272be22b78abcb30a36dce7a1ca601fb966b272f186c6886571c0cdd34d",
           "bytes": 155248,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T04:16:13.842Z",
+          "capturedAt": "2026-09-29T05:22:54.184Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "deep-work.open-close-lifecycle",
@@ -492,14 +526,14 @@
       ],
       "screenshots": [
         {
-          "filename": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T041615Z-c82cec63.png",
+          "filename": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T052256Z-c82cec63.png",
           "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
           "bytes": 127244,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T04:16:15.734Z",
+          "capturedAt": "2026-09-29T05:22:56.265Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "diagnostics.gate",
@@ -507,14 +541,14 @@
           }
         },
         {
-          "filename": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T041617Z-c82cec63.png",
+          "filename": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T052258Z-c82cec63.png",
           "sha256": "b9ea4eccd7a014ed5770bb29e51d6b29ccb6d92b755d05b9b66070454c332942",
           "bytes": 128901,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T04:16:18.292Z",
+          "capturedAt": "2026-09-29T05:22:58.447Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "diagnostics.gate",
@@ -707,14 +741,14 @@
       ],
       "screenshots": [
         {
-          "filename": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T041605Z-c82cec63.png",
+          "filename": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T052245Z-c82cec63.png",
           "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
           "bytes": 127244,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T04:16:05.139Z",
+          "capturedAt": "2026-09-29T05:22:45.630Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "shell.destination-routing",
@@ -722,14 +756,14 @@
           }
         },
         {
-          "filename": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T041605Z-c82cec63.png",
+          "filename": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T052246Z-c82cec63.png",
           "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
           "bytes": 290381,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T04:16:05.792Z",
+          "capturedAt": "2026-09-29T05:22:46.249Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "shell.destination-routing",
@@ -737,14 +771,14 @@
           }
         },
         {
-          "filename": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T041605Z-c82cec63.png",
+          "filename": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T052246Z-c82cec63.png",
           "sha256": "6d8349c7030bc955881489155f996ed8813dd5f36776431b81acd0eb2b889a2b",
           "bytes": 290496,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T04:16:06.194Z",
+          "capturedAt": "2026-09-29T05:22:46.563Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "shell.destination-routing",
@@ -897,14 +931,14 @@
       ],
       "screenshots": [
         {
-          "filename": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T041607Z-c82cec63.png",
+          "filename": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T052248Z-c82cec63.png",
           "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
           "bytes": 290381,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T04:16:08.266Z",
+          "capturedAt": "2026-09-29T05:22:48.990Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "today.render-and-filter",
@@ -912,14 +946,14 @@
           }
         },
         {
-          "filename": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T041608Z-c82cec63.png",
+          "filename": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T052249Z-c82cec63.png",
           "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
           "bytes": 290622,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T04:16:08.832Z",
+          "capturedAt": "2026-09-29T05:22:49.507Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "today.render-and-filter",
@@ -951,7 +985,7 @@
       "bytes": 290622,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -963,7 +997,7 @@
       "bytes": 290622,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -975,7 +1009,7 @@
       "bytes": 290622,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -987,7 +1021,7 @@
       "bytes": 290622,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -999,7 +1033,103 @@
       "bytes": 290622,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T044559Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T045303Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T050337Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T050731Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T051533Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T051656Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T051917Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T052302Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": "back-forward-semantic-context"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1011,7 +1141,7 @@
       "bytes": 290895,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1023,7 +1153,7 @@
       "bytes": 290895,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1035,7 +1165,7 @@
       "bytes": 290895,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1047,7 +1177,7 @@
       "bytes": 290895,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1059,7 +1189,103 @@
       "bytes": 290895,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T044601Z-c82cec63.png",
+      "sha256": "945f7683ac5295fa80481fe52ec03c882988a41e4bc3204b917375a137509909",
+      "bytes": 291133,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T045305Z-c82cec63.png",
+      "sha256": "3be726ef1d8a97a86f1a478c7b4782c56f00c6cf2c1f65c96b1c23207cc08316",
+      "bytes": 291134,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T050340Z-c82cec63.png",
+      "sha256": "3be726ef1d8a97a86f1a478c7b4782c56f00c6cf2c1f65c96b1c23207cc08316",
+      "bytes": 291134,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T050733Z-c82cec63.png",
+      "sha256": "3be726ef1d8a97a86f1a478c7b4782c56f00c6cf2c1f65c96b1c23207cc08316",
+      "bytes": 291134,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T051535Z-c82cec63.png",
+      "sha256": "3be726ef1d8a97a86f1a478c7b4782c56f00c6cf2c1f65c96b1c23207cc08316",
+      "bytes": 291134,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T051658Z-c82cec63.png",
+      "sha256": "3be726ef1d8a97a86f1a478c7b4782c56f00c6cf2c1f65c96b1c23207cc08316",
+      "bytes": 291134,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T051919Z-c82cec63.png",
+      "sha256": "3be726ef1d8a97a86f1a478c7b4782c56f00c6cf2c1f65c96b1c23207cc08316",
+      "bytes": 291134,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T052304Z-c82cec63.png",
+      "sha256": "3be726ef1d8a97a86f1a478c7b4782c56f00c6cf2c1f65c96b1c23207cc08316",
+      "bytes": 291134,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": "back-forward-semantic-context"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1071,7 +1297,7 @@
       "bytes": 290895,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1083,7 +1309,7 @@
       "bytes": 290895,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1095,7 +1321,7 @@
       "bytes": 290779,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1107,7 +1333,7 @@
       "bytes": 290895,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1119,7 +1345,103 @@
       "bytes": 290895,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T044600Z-c82cec63.png",
+      "sha256": "6eb75be2ef1905718a6679cadebd3b8c7a90a20f700be8a1f4f6f058ccca5279",
+      "bytes": 291132,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T045304Z-c82cec63.png",
+      "sha256": "262007710277c24be2af5c971a80777a47a5b4b96e972b88517b2ff2cb7ba496",
+      "bytes": 291016,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T050338Z-c82cec63.png",
+      "sha256": "6eb75be2ef1905718a6679cadebd3b8c7a90a20f700be8a1f4f6f058ccca5279",
+      "bytes": 291132,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T050732Z-c82cec63.png",
+      "sha256": "6eb75be2ef1905718a6679cadebd3b8c7a90a20f700be8a1f4f6f058ccca5279",
+      "bytes": 291132,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T051535Z-c82cec63.png",
+      "sha256": "6eb75be2ef1905718a6679cadebd3b8c7a90a20f700be8a1f4f6f058ccca5279",
+      "bytes": 291132,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T051657Z-c82cec63.png",
+      "sha256": "878a3310541cf67c04b8f3b34195fab887f061951700e2c7ec6035995d0bcd65",
+      "bytes": 291133,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T051918Z-c82cec63.png",
+      "sha256": "6eb75be2ef1905718a6679cadebd3b8c7a90a20f700be8a1f4f6f058ccca5279",
+      "bytes": 291132,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T052303Z-c82cec63.png",
+      "sha256": "262007710277c24be2af5c971a80777a47a5b4b96e972b88517b2ff2cb7ba496",
+      "bytes": 291016,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": "back-forward-semantic-context"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1131,7 +1453,7 @@
       "bytes": 155248,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1143,7 +1465,7 @@
       "bytes": 155248,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1155,7 +1477,7 @@
       "bytes": 155248,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1167,7 +1489,7 @@
       "bytes": 155248,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1179,7 +1501,91 @@
       "bytes": 155248,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T045310Z-c82cec63.png",
+      "sha256": "d83ee272be22b78abcb30a36dce7a1ca601fb966b272f186c6886571c0cdd34d",
+      "bytes": 155248,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T050328Z-c82cec63.png",
+      "sha256": "d83ee272be22b78abcb30a36dce7a1ca601fb966b272f186c6886571c0cdd34d",
+      "bytes": 155248,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T050724Z-c82cec63.png",
+      "sha256": "d83ee272be22b78abcb30a36dce7a1ca601fb966b272f186c6886571c0cdd34d",
+      "bytes": 155248,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T051523Z-c82cec63.png",
+      "sha256": "d83ee272be22b78abcb30a36dce7a1ca601fb966b272f186c6886571c0cdd34d",
+      "bytes": 155248,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T051647Z-c82cec63.png",
+      "sha256": "d83ee272be22b78abcb30a36dce7a1ca601fb966b272f186c6886571c0cdd34d",
+      "bytes": 155248,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T051906Z-c82cec63.png",
+      "sha256": "d83ee272be22b78abcb30a36dce7a1ca601fb966b272f186c6886571c0cdd34d",
+      "bytes": 155248,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T052254Z-c82cec63.png",
+      "sha256": "d83ee272be22b78abcb30a36dce7a1ca601fb966b272f186c6886571c0cdd34d",
+      "bytes": 155248,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": "deep-work.open-close-lifecycle"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1191,7 +1597,7 @@
       "bytes": 152221,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1203,7 +1609,7 @@
       "bytes": 152221,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1215,7 +1621,7 @@
       "bytes": 152221,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1227,7 +1633,7 @@
       "bytes": 152221,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1239,7 +1645,91 @@
       "bytes": 152221,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T045309Z-c82cec63.png",
+      "sha256": "b8fe0022a79d9f40c4ac19edb05f1b3f03e1421cb55ad19236bdcae9f2feb42f",
+      "bytes": 152221,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T050327Z-c82cec63.png",
+      "sha256": "b8fe0022a79d9f40c4ac19edb05f1b3f03e1421cb55ad19236bdcae9f2feb42f",
+      "bytes": 152221,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T050723Z-c82cec63.png",
+      "sha256": "b8fe0022a79d9f40c4ac19edb05f1b3f03e1421cb55ad19236bdcae9f2feb42f",
+      "bytes": 152221,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T051523Z-c82cec63.png",
+      "sha256": "b8fe0022a79d9f40c4ac19edb05f1b3f03e1421cb55ad19236bdcae9f2feb42f",
+      "bytes": 152221,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T051647Z-c82cec63.png",
+      "sha256": "b8fe0022a79d9f40c4ac19edb05f1b3f03e1421cb55ad19236bdcae9f2feb42f",
+      "bytes": 152221,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T051906Z-c82cec63.png",
+      "sha256": "b8fe0022a79d9f40c4ac19edb05f1b3f03e1421cb55ad19236bdcae9f2feb42f",
+      "bytes": 152221,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T052253Z-c82cec63.png",
+      "sha256": "b8fe0022a79d9f40c4ac19edb05f1b3f03e1421cb55ad19236bdcae9f2feb42f",
+      "bytes": 152221,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": "deep-work.open-close-lifecycle"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1251,7 +1741,7 @@
       "bytes": 127244,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1263,7 +1753,7 @@
       "bytes": 127244,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1275,7 +1765,7 @@
       "bytes": 127244,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1287,7 +1777,7 @@
       "bytes": 127244,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1299,7 +1789,91 @@
       "bytes": 127244,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T045307Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T050325Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T050721Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T051521Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T051645Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T051903Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T052251Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": "deep-work.open-close-lifecycle"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1311,7 +1885,7 @@
       "bytes": 127244,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1323,7 +1897,7 @@
       "bytes": 127244,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1335,7 +1909,7 @@
       "bytes": 127244,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1347,7 +1921,7 @@
       "bytes": 127244,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1359,7 +1933,91 @@
       "bytes": 127244,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T045313Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T050330Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T050725Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T051525Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T051649Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T051909Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T052256Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": "diagnostics.gate"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1371,7 +2029,7 @@
       "bytes": 128901,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1383,7 +2041,7 @@
       "bytes": 128901,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1395,7 +2053,7 @@
       "bytes": 128901,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1407,7 +2065,7 @@
       "bytes": 128901,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1419,7 +2077,91 @@
       "bytes": 128901,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T045315Z-c82cec63.png",
+      "sha256": "b9ea4eccd7a014ed5770bb29e51d6b29ccb6d92b755d05b9b66070454c332942",
+      "bytes": 128901,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T050332Z-c82cec63.png",
+      "sha256": "b9ea4eccd7a014ed5770bb29e51d6b29ccb6d92b755d05b9b66070454c332942",
+      "bytes": 128901,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T050727Z-c82cec63.png",
+      "sha256": "b9ea4eccd7a014ed5770bb29e51d6b29ccb6d92b755d05b9b66070454c332942",
+      "bytes": 128901,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T051527Z-c82cec63.png",
+      "sha256": "b9ea4eccd7a014ed5770bb29e51d6b29ccb6d92b755d05b9b66070454c332942",
+      "bytes": 128901,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T051652Z-c82cec63.png",
+      "sha256": "b9ea4eccd7a014ed5770bb29e51d6b29ccb6d92b755d05b9b66070454c332942",
+      "bytes": 128901,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T051911Z-c82cec63.png",
+      "sha256": "b9ea4eccd7a014ed5770bb29e51d6b29ccb6d92b755d05b9b66070454c332942",
+      "bytes": 128901,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T052258Z-c82cec63.png",
+      "sha256": "b9ea4eccd7a014ed5770bb29e51d6b29ccb6d92b755d05b9b66070454c332942",
+      "bytes": 128901,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": "diagnostics.gate"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1431,7 +2173,7 @@
       "bytes": 290381,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1443,7 +2185,7 @@
       "bytes": 290381,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1455,7 +2197,7 @@
       "bytes": 290381,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1467,7 +2209,7 @@
       "bytes": 290381,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1479,7 +2221,91 @@
       "bytes": 290381,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T045256Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T050318Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T050717Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T051517Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T051640Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T051856Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T052246Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": "shell.destination-routing"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1491,7 +2317,7 @@
       "bytes": 290496,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1503,7 +2329,7 @@
       "bytes": 290651,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1515,7 +2341,7 @@
       "bytes": 290496,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1527,7 +2353,7 @@
       "bytes": 290496,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1539,7 +2365,91 @@
       "bytes": 290496,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T045257Z-c82cec63.png",
+      "sha256": "6d8349c7030bc955881489155f996ed8813dd5f36776431b81acd0eb2b889a2b",
+      "bytes": 290496,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T050319Z-c82cec63.png",
+      "sha256": "6d8349c7030bc955881489155f996ed8813dd5f36776431b81acd0eb2b889a2b",
+      "bytes": 290496,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T050717Z-c82cec63.png",
+      "sha256": "6d8349c7030bc955881489155f996ed8813dd5f36776431b81acd0eb2b889a2b",
+      "bytes": 290496,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T051517Z-c82cec63.png",
+      "sha256": "6d8349c7030bc955881489155f996ed8813dd5f36776431b81acd0eb2b889a2b",
+      "bytes": 290496,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T051640Z-c82cec63.png",
+      "sha256": "6d8349c7030bc955881489155f996ed8813dd5f36776431b81acd0eb2b889a2b",
+      "bytes": 290496,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T051856Z-c82cec63.png",
+      "sha256": "6d8349c7030bc955881489155f996ed8813dd5f36776431b81acd0eb2b889a2b",
+      "bytes": 290496,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T052246Z-c82cec63.png",
+      "sha256": "6d8349c7030bc955881489155f996ed8813dd5f36776431b81acd0eb2b889a2b",
+      "bytes": 290496,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": "shell.destination-routing"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1551,7 +2461,7 @@
       "bytes": 127244,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1563,7 +2473,7 @@
       "bytes": 127244,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1575,7 +2485,7 @@
       "bytes": 127244,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1587,7 +2497,7 @@
       "bytes": 127244,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1599,7 +2509,7 @@
       "bytes": 127244,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1611,11 +2521,487 @@
       "bytes": 127244,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T045256Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T050317Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T050716Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T051517Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T051640Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T051855Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T052245Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": "shell.destination-routing"
       },
       "binding": "FLOW_EVIDENCE",
       "reason": "screenshot captured by flow shell.destination-routing"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-baseline-20260929T045144Z-b9419922.png",
+      "sha256": "d3139b910b81700e80e16f5790176aeb6262c70c5fce111f4eebe4f4b717f35d",
+      "bytes": 127339,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1440x1000",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-baseline-20260929T045149Z-b9419922.png",
+      "sha256": "7491755e5124b98d3ed462bd4a55d3c23fb07b21dc390a1782b473b5f8368ded",
+      "bytes": 101350,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1024x900",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-baseline-20260929T050344Z-b9419922.png",
+      "sha256": "d3139b910b81700e80e16f5790176aeb6262c70c5fce111f4eebe4f4b717f35d",
+      "bytes": 127339,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1440x1000",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-baseline-20260929T050349Z-b9419922.png",
+      "sha256": "7491755e5124b98d3ed462bd4a55d3c23fb07b21dc390a1782b473b5f8368ded",
+      "bytes": 101350,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1024x900",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-baseline-20260929T050707Z-b9419922.png",
+      "sha256": "d3139b910b81700e80e16f5790176aeb6262c70c5fce111f4eebe4f4b717f35d",
+      "bytes": 127339,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1440x1000",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-baseline-20260929T050711Z-b9419922.png",
+      "sha256": "7491755e5124b98d3ed462bd4a55d3c23fb07b21dc390a1782b473b5f8368ded",
+      "bytes": 101350,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1024x900",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-baseline-20260929T051506Z-b9419922.png",
+      "sha256": "d3139b910b81700e80e16f5790176aeb6262c70c5fce111f4eebe4f4b717f35d",
+      "bytes": 127339,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1440x1000",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-baseline-20260929T051512Z-b9419922.png",
+      "sha256": "7491755e5124b98d3ed462bd4a55d3c23fb07b21dc390a1782b473b5f8368ded",
+      "bytes": 101350,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1024x900",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-baseline-20260929T051629Z-b9419922.png",
+      "sha256": "d3139b910b81700e80e16f5790176aeb6262c70c5fce111f4eebe4f4b717f35d",
+      "bytes": 127339,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1440x1000",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-baseline-20260929T051634Z-b9419922.png",
+      "sha256": "7491755e5124b98d3ed462bd4a55d3c23fb07b21dc390a1782b473b5f8368ded",
+      "bytes": 101350,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1024x900",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-baseline-20260929T051840Z-b9419922.png",
+      "sha256": "d3139b910b81700e80e16f5790176aeb6262c70c5fce111f4eebe4f4b717f35d",
+      "bytes": 127339,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1440x1000",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-baseline-20260929T051847Z-b9419922.png",
+      "sha256": "7491755e5124b98d3ed462bd4a55d3c23fb07b21dc390a1782b473b5f8368ded",
+      "bytes": 101350,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1024x900",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-baseline-20260929T052233Z-b9419922.png",
+      "sha256": "d3139b910b81700e80e16f5790176aeb6262c70c5fce111f4eebe4f4b717f35d",
+      "bytes": 127339,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1440x1000",
+        "surface": "shell"
+      },
+      "binding": "MATCHED_VIEWPORT_VISUAL_CAPTURE_EVIDENCE",
+      "reason": "matched-viewport (undefinedxundefined) capture of surface shell by tools/w01-visual-capture.mjs — hashed and bound in writer-output/W01/VISUAL_CAPTURE_RECEIPT.json"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-baseline-20260929T052239Z-b9419922.png",
+      "sha256": "7491755e5124b98d3ed462bd4a55d3c23fb07b21dc390a1782b473b5f8368ded",
+      "bytes": 101350,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1024x900",
+        "surface": "shell"
+      },
+      "binding": "MATCHED_VIEWPORT_VISUAL_CAPTURE_EVIDENCE",
+      "reason": "matched-viewport (undefinedxundefined) capture of surface shell by tools/w01-visual-capture.mjs — hashed and bound in writer-output/W01/VISUAL_CAPTURE_RECEIPT.json"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-keyboard-focus-20260929T045144Z-b9419922.png",
+      "sha256": "f5da096a2b2915035536ec9d2c16a242f8604619be909f6034fcd0170686a192",
+      "bytes": 127712,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1440x1000",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-keyboard-focus-20260929T045149Z-b9419922.png",
+      "sha256": "3f9c31855ab49ce39b3ea31d7f71bd77efbf45b3736504a03076ef261a58601b",
+      "bytes": 101547,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1024x900",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-keyboard-focus-20260929T050344Z-b9419922.png",
+      "sha256": "f5da096a2b2915035536ec9d2c16a242f8604619be909f6034fcd0170686a192",
+      "bytes": 127712,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1440x1000",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-keyboard-focus-20260929T050349Z-b9419922.png",
+      "sha256": "3f9c31855ab49ce39b3ea31d7f71bd77efbf45b3736504a03076ef261a58601b",
+      "bytes": 101547,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1024x900",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-keyboard-focus-20260929T050707Z-b9419922.png",
+      "sha256": "f5da096a2b2915035536ec9d2c16a242f8604619be909f6034fcd0170686a192",
+      "bytes": 127712,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1440x1000",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-keyboard-focus-20260929T050711Z-b9419922.png",
+      "sha256": "3f9c31855ab49ce39b3ea31d7f71bd77efbf45b3736504a03076ef261a58601b",
+      "bytes": 101547,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1024x900",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-keyboard-focus-20260929T051507Z-b9419922.png",
+      "sha256": "f5da096a2b2915035536ec9d2c16a242f8604619be909f6034fcd0170686a192",
+      "bytes": 127712,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1440x1000",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-keyboard-focus-20260929T051512Z-b9419922.png",
+      "sha256": "3f9c31855ab49ce39b3ea31d7f71bd77efbf45b3736504a03076ef261a58601b",
+      "bytes": 101547,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1024x900",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-keyboard-focus-20260929T051630Z-b9419922.png",
+      "sha256": "f5da096a2b2915035536ec9d2c16a242f8604619be909f6034fcd0170686a192",
+      "bytes": 127712,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1440x1000",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-keyboard-focus-20260929T051634Z-b9419922.png",
+      "sha256": "3f9c31855ab49ce39b3ea31d7f71bd77efbf45b3736504a03076ef261a58601b",
+      "bytes": 101547,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1024x900",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-keyboard-focus-20260929T051841Z-b9419922.png",
+      "sha256": "f5da096a2b2915035536ec9d2c16a242f8604619be909f6034fcd0170686a192",
+      "bytes": 127712,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1440x1000",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-keyboard-focus-20260929T051848Z-b9419922.png",
+      "sha256": "3f9c31855ab49ce39b3ea31d7f71bd77efbf45b3736504a03076ef261a58601b",
+      "bytes": 101547,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1024x900",
+        "surface": "shell"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-keyboard-focus-20260929T052234Z-b9419922.png",
+      "sha256": "f5da096a2b2915035536ec9d2c16a242f8604619be909f6034fcd0170686a192",
+      "bytes": 127712,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1440x1000",
+        "surface": "shell"
+      },
+      "binding": "MATCHED_VIEWPORT_VISUAL_CAPTURE_EVIDENCE",
+      "reason": "matched-viewport (undefinedxundefined) capture of surface shell by tools/w01-visual-capture.mjs — hashed and bound in writer-output/W01/VISUAL_CAPTURE_RECEIPT.json"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell/matched-viewport-keyboard-focus-20260929T052239Z-b9419922.png",
+      "sha256": "3f9c31855ab49ce39b3ea31d7f71bd77efbf45b3736504a03076ef261a58601b",
+      "bytes": 101547,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1024x900",
+        "surface": "shell"
+      },
+      "binding": "MATCHED_VIEWPORT_VISUAL_CAPTURE_EVIDENCE",
+      "reason": "matched-viewport (undefinedxundefined) capture of surface shell by tools/w01-visual-capture.mjs — hashed and bound in writer-output/W01/VISUAL_CAPTURE_RECEIPT.json"
     },
     {
       "filename": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T035447Z-c82cec63.png",
@@ -1623,7 +3009,7 @@
       "bytes": 290381,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1635,7 +3021,7 @@
       "bytes": 290381,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1647,7 +3033,7 @@
       "bytes": 290381,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1659,7 +3045,7 @@
       "bytes": 290381,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1671,7 +3057,91 @@
       "bytes": 290381,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T045300Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T050322Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T050719Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T051519Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T051642Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T051859Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T052248Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": "today.render-and-filter"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1683,7 +3153,7 @@
       "bytes": 290622,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1695,7 +3165,7 @@
       "bytes": 290622,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1707,7 +3177,7 @@
       "bytes": 290622,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1719,7 +3189,7 @@
       "bytes": 290622,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1731,11 +3201,487 @@
       "bytes": 290622,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T045300Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T050322Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T050719Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T051520Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T051643Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T051901Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T052249Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
         "flow": "today.render-and-filter"
       },
       "binding": "FLOW_EVIDENCE",
       "reason": "screenshot captured by flow today.render-and-filter"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-baseline-20260929T045146Z-b9419922.png",
+      "sha256": "149d9cc21fb698f112090afde49e2b9153c5ff1cb2f361ff840afd045d4c9209",
+      "bytes": 293660,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1440x1000",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-baseline-20260929T045151Z-b9419922.png",
+      "sha256": "1f792b8193f7795cad0967d529686d22039dcf951b3bb75ca324e69269a47563",
+      "bytes": 250205,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1024x900",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-baseline-20260929T050346Z-b9419922.png",
+      "sha256": "149d9cc21fb698f112090afde49e2b9153c5ff1cb2f361ff840afd045d4c9209",
+      "bytes": 293660,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1440x1000",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-baseline-20260929T050351Z-b9419922.png",
+      "sha256": "1f792b8193f7795cad0967d529686d22039dcf951b3bb75ca324e69269a47563",
+      "bytes": 250205,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1024x900",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-baseline-20260929T050709Z-b9419922.png",
+      "sha256": "149d9cc21fb698f112090afde49e2b9153c5ff1cb2f361ff840afd045d4c9209",
+      "bytes": 293660,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1440x1000",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-baseline-20260929T050713Z-b9419922.png",
+      "sha256": "1f792b8193f7795cad0967d529686d22039dcf951b3bb75ca324e69269a47563",
+      "bytes": 250205,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1024x900",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-baseline-20260929T051509Z-b9419922.png",
+      "sha256": "149d9cc21fb698f112090afde49e2b9153c5ff1cb2f361ff840afd045d4c9209",
+      "bytes": 293660,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1440x1000",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-baseline-20260929T051514Z-b9419922.png",
+      "sha256": "1f792b8193f7795cad0967d529686d22039dcf951b3bb75ca324e69269a47563",
+      "bytes": 250205,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1024x900",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-baseline-20260929T051631Z-b9419922.png",
+      "sha256": "149d9cc21fb698f112090afde49e2b9153c5ff1cb2f361ff840afd045d4c9209",
+      "bytes": 293660,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1440x1000",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-baseline-20260929T051636Z-b9419922.png",
+      "sha256": "1f792b8193f7795cad0967d529686d22039dcf951b3bb75ca324e69269a47563",
+      "bytes": 250205,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1024x900",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-baseline-20260929T051843Z-b9419922.png",
+      "sha256": "149d9cc21fb698f112090afde49e2b9153c5ff1cb2f361ff840afd045d4c9209",
+      "bytes": 293660,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1440x1000",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-baseline-20260929T051850Z-b9419922.png",
+      "sha256": "1f792b8193f7795cad0967d529686d22039dcf951b3bb75ca324e69269a47563",
+      "bytes": 250205,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1024x900",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-baseline-20260929T052236Z-b9419922.png",
+      "sha256": "149d9cc21fb698f112090afde49e2b9153c5ff1cb2f361ff840afd045d4c9209",
+      "bytes": 293660,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1440x1000",
+        "surface": "today"
+      },
+      "binding": "MATCHED_VIEWPORT_VISUAL_CAPTURE_EVIDENCE",
+      "reason": "matched-viewport (undefinedxundefined) capture of surface today by tools/w01-visual-capture.mjs — hashed and bound in writer-output/W01/VISUAL_CAPTURE_RECEIPT.json"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-baseline-20260929T052241Z-b9419922.png",
+      "sha256": "1f792b8193f7795cad0967d529686d22039dcf951b3bb75ca324e69269a47563",
+      "bytes": 250205,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-baseline",
+        "viewport": "1024x900",
+        "surface": "today"
+      },
+      "binding": "MATCHED_VIEWPORT_VISUAL_CAPTURE_EVIDENCE",
+      "reason": "matched-viewport (undefinedxundefined) capture of surface today by tools/w01-visual-capture.mjs — hashed and bound in writer-output/W01/VISUAL_CAPTURE_RECEIPT.json"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-keyboard-focus-20260929T045146Z-b9419922.png",
+      "sha256": "115613cfc31fa08b7e2acf3ccf5b93bbb9a4924de36b2d6766d46cdd424ac479",
+      "bytes": 294448,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1440x1000",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-keyboard-focus-20260929T045151Z-b9419922.png",
+      "sha256": "3cfdc2538da41971a9d75af1a7d538f2069348ef8dfec034b9a874b5bf2799e9",
+      "bytes": 250645,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1024x900",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-keyboard-focus-20260929T050346Z-b9419922.png",
+      "sha256": "75ed9793281ae86180a29b57b3c1fc3dc2c40081a31a3d46525ed0ac7b5e02b5",
+      "bytes": 294465,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1440x1000",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-keyboard-focus-20260929T050351Z-b9419922.png",
+      "sha256": "64745ae10aed466985f44a9993f3f95a900556baa4c710be85577fef3d75087f",
+      "bytes": 250644,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1024x900",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-keyboard-focus-20260929T050710Z-b9419922.png",
+      "sha256": "e069385a57198e4c6d2662987460e1235f415f44fe61653b21f08be7c4a72a0b",
+      "bytes": 294418,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1440x1000",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-keyboard-focus-20260929T050713Z-b9419922.png",
+      "sha256": "cd02b8030d17fbca8da83349490a8c851405faf01355e68ac1ad0b4dc1665e74",
+      "bytes": 250702,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1024x900",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-keyboard-focus-20260929T051510Z-b9419922.png",
+      "sha256": "a402bb480dd9bf71d988f6a7b2df39059362be6445157771847ebdf70aaabc27",
+      "bytes": 294355,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1440x1000",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-keyboard-focus-20260929T051514Z-b9419922.png",
+      "sha256": "11c352f8c915d0aacb5a0eae0f6410c16b1f2e378368a978208be376fe46d09e",
+      "bytes": 250675,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1024x900",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-keyboard-focus-20260929T051632Z-b9419922.png",
+      "sha256": "baeb5678d52084d5717533ca1a12490480862d357158f0759ca385b1152543b7",
+      "bytes": 294512,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1440x1000",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-keyboard-focus-20260929T051636Z-b9419922.png",
+      "sha256": "ac11209527ef00bbfa1adc2a2d0e31dbe92b3af3673d6e68149cc6470b472df2",
+      "bytes": 250673,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1024x900",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-keyboard-focus-20260929T051844Z-b9419922.png",
+      "sha256": "70f21d6073823ee0d8efe409e14ad5a7ba7466933fc630976798691d216e2065",
+      "bytes": 294389,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1440x1000",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-keyboard-focus-20260929T051850Z-b9419922.png",
+      "sha256": "60523fedea4b9b37a9b7736eba84d7e47bc196e562a093d0e4aea7d0f01cc9a2",
+      "bytes": 250678,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1024x900",
+        "surface": "today"
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-keyboard-focus-20260929T052237Z-b9419922.png",
+      "sha256": "0db1743397f939b6214e330db00a5c5ca2d7a9a8e6eee83faf20c67eb4e4fed9",
+      "bytes": 294422,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1440x1000",
+        "surface": "today"
+      },
+      "binding": "MATCHED_VIEWPORT_VISUAL_CAPTURE_EVIDENCE",
+      "reason": "matched-viewport (undefinedxundefined) capture of surface today by tools/w01-visual-capture.mjs — hashed and bound in writer-output/W01/VISUAL_CAPTURE_RECEIPT.json"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today/matched-viewport-keyboard-focus-20260929T052241Z-b9419922.png",
+      "sha256": "65e0a352fac3d49b3bdca2dd05d11b780d87ea0f8122fe3d2d68a17541f3f276",
+      "bytes": 250646,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+        "flow": "matched-viewport-keyboard-focus",
+        "viewport": "1024x900",
+        "surface": "today"
+      },
+      "binding": "MATCHED_VIEWPORT_VISUAL_CAPTURE_EVIDENCE",
+      "reason": "matched-viewport (undefinedxundefined) capture of surface today by tools/w01-visual-capture.mjs — hashed and bound in writer-output/W01/VISUAL_CAPTURE_RECEIPT.json"
     }
   ]
 }

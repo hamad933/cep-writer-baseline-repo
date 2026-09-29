@@ -21,7 +21,7 @@
  * Policy: no repair loop. Classify -> preserve evidence -> report. Exit 1 if a selected flow FAILs.
  */
 import { createRequire } from 'node:module';
-import { spawn } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import net from 'node:net';
@@ -62,8 +62,18 @@ const git = command => {
 
 const stamp = () => new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z');
 const flowFile = id => `${id.replace(/\./g, '-')}-${stamp()}-${CANDIDATE8}.png`;
-async function readdirSafe(directory) {
-  try { return (await readdir(directory)).filter(name => name.endsWith('.png')); } catch { return []; }
+/** Recursive evidence walk: nested `evidence/<surface>/` captures are indexed too, so a
+ *  matched-viewport screenshot can never be an orphan (evidence_contract.md naming rule). */
+async function walkEvidence(directory, prefix = '') {
+  const out = [];
+  let entries = [];
+  try { entries = await readdir(directory, { withFileTypes: true }); } catch { return out; }
+  for (const entry of entries) {
+    const relative = prefix ? `${prefix}/${entry.name}` : entry.name;
+    if (entry.isDirectory()) out.push(...(await walkEvidence(path.join(directory, entry.name), relative)));
+    else if (entry.name.endsWith('.png')) out.push(relative);
+  }
+  return out;
 }
 
 /* ------------------------------------------------------------------ flow runner */
@@ -300,6 +310,7 @@ const definitions = [
           pressed: document.querySelector('.today-filter[data-filter="ATTENTION"]')?.getAttribute('aria-pressed'),
           filters: [...document.querySelectorAll('.today-filter[data-today-action="filter"]')].map(b => `${b.dataset.filter}:${b.getAttribute('aria-pressed')}`).join(','),
           restoreStatus: document.querySelector('.foundation-shell')?.dataset.contextRestoreStatus || null,
+          contextRestored: document.querySelector('.foundation-shell')?.dataset.contextRestored || null,
           captured: (history.state && history.state.cepShell) ? { surface: history.state.cepShell.surface, reason: history.state.cepShell.reason, todayFilter: history.state.cepShell.bookmark?.surfaceContext?.todayFilter ?? null, todayItemId: history.state.cepShell.bookmark?.surfaceContext?.todayItemId ?? null } : null
         }));
         await shot(page, record, 'forward-shell-button');
@@ -307,6 +318,9 @@ const definitions = [
         check(record, 'cbf.context-captured-on-back', 'ATTENTION', shellForward.captured?.todayFilter ?? null, CLASS_PRODUCT, 'CBF-002 capture side: the Today filter was not captured into the shell bookmark before Back');
         check(record, 'cbf.context-restored-on-forward', 'true', shellForward.pressed, CLASS_PRODUCT, 'CBF-002: Back restored the route but the Today filter semantic context was silently reset to ALL');
         check(record, 'cbf.restore-machinery-ran', 'restored', shellForward.restoreStatus, CLASS_PRODUCT, 'restore machinery did not report a completed restore while the semantic context stayed lost');
+        // Negative case (packet §11): route restoration alone must not be reported as a context
+        // restore — the restore reports `contextRestored` only after it verified the re-applied state.
+        check(record, 'cbf.restore-reported-only-when-context-applied', 'true', shellForward.contextRestored, CLASS_PRODUCT, 'the shell reported a completed context restore without a verified context application');
 
         note(record, 'repeat with browser-native Back/Forward (popstate) instead of the shell buttons');
         await page.goBack();
@@ -480,6 +494,24 @@ const identity = await canonicalSourceIdentity(new URL('../', import.meta.url));
 const lineageOk = identity.sha256 === CANDIDATE_TREE && identity.files === CANDIDATE_FILES;
 const commit = git('git rev-parse HEAD');
 const headTree = git('git rev-parse HEAD^{tree}');
+// Per-writer candidate binding (controller/12_execution/03_lineage_adjudication.md): receipts bind
+// to OWNED_PARTITION.identity + commit + tree. The whole-worktree hash above stays recorded as
+// INFORMATIONAL_MOVING context only — it is never the per-writer candidate identity.
+let candidateIdentity = null;
+try {
+  candidateIdentity = JSON.parse(spawnSync(process.execPath, [path.join(root, 'tools/writer-candidate-identity.mjs'), '--workspace', 'W01', '--json'], { cwd: root, encoding: 'utf8' }).stdout || 'null');
+} catch { candidateIdentity = null; }
+const ownedPartition = candidateIdentity ? {
+  identity: candidateIdentity.ownedPartition.identity,
+  roots: candidateIdentity.ownedPartition.roots,
+  fileCount: candidateIdentity.ownedPartition.fileCount,
+  stableUnderSiblingEdits: candidateIdentity.ownedPartition.stableUnderSiblingEdits,
+  commit: candidateIdentity.commit,
+  tree: candidateIdentity.tree,
+  branch: candidateIdentity.branch,
+  bindingRule: candidateIdentity.bindingRule,
+  worktreeVariantInformational: candidateIdentity.worktreeVariant
+} : null;
 let receipt = { schemaVersion: 1, workspace: 'W01', flows: [] };
 try { receipt = JSON.parse(await readFile(receiptPath, 'utf8')); } catch {}
 const merged = (receipt.flows || []).filter(existing => !records.some(r => r.flow === existing.flow));
@@ -497,6 +529,7 @@ receipt = {
   measuredCandidateFileCount: identity.files,
   commit,
   tree: headTree,
+  ownedPartition,
   environment: env,
   capturedAt: new Date().toISOString(),
   evidenceLineage: {
@@ -530,21 +563,32 @@ receipt.summary = {
 // be an orphan. Files not referenced by the current flow records are kept (never deleted) and
 // labelled with the reason they were superseded.
 const referenced = new Set(receipt.flows.flatMap(f => (f.screenshots || []).map(s => s.filename)));
+// Matched-viewport visual captures (tools/w01-visual-capture.mjs) live under
+// evidence/<surface>/ per controller/08_evidence/evidence_contract.md; they are indexed here
+// too so that no screenshot in writer-output/W01/evidence/ is ever an orphan.
+let visualCapture = null;
+try { visualCapture = JSON.parse(await readFile(path.join(outDir, 'VISUAL_CAPTURE_RECEIPT.json'), 'utf8')); } catch {}
+const visualByPath = new Map((visualCapture?.artifacts || []).map(a => [a.filename, a]));
 const artifactIndex = [];
-for (const entry of await readdirSafe(evidenceDir)) {
+for (const entry of await walkEvidence(evidenceDir)) {
   const filePath = path.join(evidenceDir, entry);
   const bytes = await readFile(filePath);
   const relative = path.join('writer-output/W01/evidence', entry);
   const ownerFlow = receipt.flows.find(f => (f.screenshots || []).some(s => s.filename === relative)) || null;
+  const visual = visualByPath.get(relative) || null;
+  const binding = referenced.has(relative) ? 'FLOW_EVIDENCE'
+    : visual && visual.status === 'CURRENT' ? 'MATCHED_VIEWPORT_VISUAL_CAPTURE_EVIDENCE'
+      : 'SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED';
   artifactIndex.push({
     filename: relative,
     sha256: createHash('sha256').update(bytes).digest('hex'),
     bytes: bytes.length,
-    boundTo: { candidate: CANDIDATE_LABEL, commit, flow: ownerFlow ? ownerFlow.flow : null },
-    binding: referenced.has(relative) ? 'FLOW_EVIDENCE' : 'SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED',
-    reason: referenced.has(relative)
-      ? `screenshot captured by flow ${ownerFlow.flow}`
-      : 'intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned'
+    boundTo: { candidate: CANDIDATE_LABEL, commit, flow: ownerFlow ? ownerFlow.flow : (visual ? visual.flow : null), viewport: visual ? visual.viewport : undefined, surface: visual ? visual.surface : undefined },
+    binding,
+    reason: binding === 'FLOW_EVIDENCE' ? `screenshot captured by flow ${ownerFlow.flow}`
+      : binding === 'MATCHED_VIEWPORT_VISUAL_CAPTURE_EVIDENCE'
+        ? `matched-viewport (${visual.viewport.width}x${visual.viewport.height}) capture of surface ${visual.surface} by tools/w01-visual-capture.mjs — hashed and bound in writer-output/W01/VISUAL_CAPTURE_RECEIPT.json`
+        : 'intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned'
   });
 }
 artifactIndex.sort((a, b) => a.filename.localeCompare(b.filename));

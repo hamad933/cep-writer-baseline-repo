@@ -283,14 +283,32 @@ const EXPECTED_WORKTREE_FILES = 287;
     'tests/surfaces/today',
     'tools/c3-today-truth'
   ];
-  const status = spawnSync('git', ['status', '--porcelain', '-uall', '--', ...w01Writable, 'tools/w01-conformance.mjs', 'tools/w01-browser-flows.mjs'], { cwd: rootPath, encoding: 'utf8' });
+  const w01Tools = [
+    'tools/w01-conformance.mjs',
+    'tools/w01-browser-flows.mjs',
+    'tools/w01-visual-capture.mjs',
+    'tools/w01-cbf-probe.mjs',
+    'tools/w01-evidence-index.mjs',
+    'tools/w01-obligation-manifest-proof.mjs'
+  ];
+  const status = spawnSync('git', ['status', '--porcelain', '-uall', '--', ...w01Writable, ...w01Tools], { cwd: rootPath, encoding: 'utf8' });
   const changed = String(status.stdout || '').split('\n').filter(Boolean).map(line => line.slice(3).trim()).sort();
-  // The only in-partition changes W01 is allowed: its own Coordinator-accepted route-test fix and
-  // the two W01 tools it authored (`tools/{c3-today-truth,w01-*}` is W01's declared tooling root).
-  const expectedChanged = ['tests/surfaces/today/surface.test.mjs', 'tools/w01-browser-flows.mjs', 'tools/w01-conformance.mjs'].sort();
+  // The complete set of W01-owned paths this workspace has changed relative to HEAD:
+  //  * W01-C/B: the Coordinator-accepted route-test fix (`tests/surfaces/today/surface.test.mjs`,
+  //    already committed in checkpoint W01-E, therefore clean in `git status`);
+  //  * W01-F (residual round): the CBF-002 repair — both files are inside W01's declared
+  //    writable partition (`surfaces/today/**`, `foundation/global/shell/**`);
+  //  * the W01 tools this workspace authored (`tools/w01-*`).
+  // Nothing outside that partition may appear here; out-of-partition writes are a hard FAIL.
+  const expectedChanged = [
+    'stack/native-typescript/foundation/global/shell/navigation.ts',
+    'stack/native-typescript/surfaces/today/surface.ts',
+    ...w01Tools
+  ].sort();
   record('w01.writable-partition-only-expected-changes', status.status === 0 && JSON.stringify(changed) === JSON.stringify(expectedChanged), {
     binding: 'controller/12_execution/02_parallel_dispatch.md §4 W01 writable roots + §3 (writers may not edit main.ts/m0, git, dist, assurance)',
     writableRoots: w01Writable,
+    w01Tools,
     expectedChanged,
     changedPaths: changed,
     productSourceChanged: changed.filter(p => p.startsWith('stack/'))

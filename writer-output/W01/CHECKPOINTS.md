@@ -138,3 +138,103 @@ Common bindings for this return:
   2. `npm run check` remains **exit 1** for `browser.lineage_receipt_truthful` + `browser.targeted_visual_evidence` — shared browser-receipt evidence, Controller plane, not W01 product code.
   3. 55 of the 66 screenshots are superseded intermediate attempts retained deliberately (never deleted) and labelled in `BROWSER_RECEIPT.json.evidenceArtifacts`; the Coordinator may prune them if a single-attempt evidence set is preferred.
   4. Today LEFT-region filter summary staleness (bounded finding, blocked on the serialized hotspot rule).
+
+---
+
+## W01-F — residual round: CBF-002 repaired, C03-GATE-020 capture filed, hotspot request filed
+
+- **checkpoint_id:** `W01-F`
+- **branch:** `writer/mi-serial`
+- **commit** (at the final authoritative proof run, 2026-09-29T05:23Z): `e78d453c43961daba72f2e1ffb203e43c90b6eba`
+- **`HEAD^{tree}`:** `21c1ed0606f0bd322e140dd4a2c7597761cc7007`
+- **candidate (per-writer binding, `controller/12_execution/03_lineage_adjudication.md`):** `OWNED_PARTITION_SHA256:b9419922de60834bd7948830e883542a96bb87878031c9c9a909b67d09975965` / 14 files / `stableUnderSiblingEdits: true`
+- **candidate (whole worktree, `INFORMATIONAL_MOVING` only):** recomputed every run via `tools/writer-candidate-identity.mjs`; HEAD advanced several times during this round (`891c1e5 → d4b9e151 → e78d453c`) purely from sibling checkpoints — recorded, never used to bind a W01 claim
+- **scope:** the two residuals W01 itself listed in `W01_HANDOFF.md` §6 (item 3 = CBF-002, item 5 = C03-GATE-020) plus §5.3 / §6 item 9 (Today LEFT filter summary → filed, not applied)
+
+### changed_files (this round, complete)
+
+| Path | Provenance |
+|---|---|
+| `stack/native-typescript/foundation/global/shell/navigation.ts` | `W01_CHANGE` — **CBF-002 restore side**: `applySurfaceContext()` waits (bounded, 90 frames) for the context control, clicks it once, then **verifies** the pressed/selected state moved. `restoreBookmark()` sets `contextRestored='true'` / `contextRestoreStatus='restored'` only on verification; otherwise `contextRestored='false'` / `contextRestoreStatus='context-unapplied'` and returns `false` — a route+scroll restore is never reported as a context restore (packet §11 negative case). Scroll + focus restoration unchanged. |
+| `stack/native-typescript/surfaces/today/surface.ts` | `W01_CHANGE` — **CBF-002 command side**: `today.{filter,resume,refresh,why}` resolve their target adapter at call time through the mounted adapter (`currentTodayAdapter()`, set by `bindTodaySurface`). One owner, one registration — no competing bus, no duplicate mechanics. |
+| `tools/w01-obligation-manifest-proof.mjs` | `W01_NEW` — subject-matched `P-OBLIGATION-MANIFEST` proof (see known_risks 5) |
+| `tools/w01-visual-capture.mjs` | `W01_NEW` — matched-viewport 1440×1000 + 1024×900 + keyboard/focus capture with `document.activeElement` proof |
+| `tools/w01-cbf-probe.mjs` | `W01_NEW` — CBF-002 root-cause measurement probe |
+| `tools/w01-evidence-index.mjs` | `W01_NEW` — regenerates `EVIDENCE_INDEX.json` from disk, recursive, orphan-checked |
+| `tools/w01-conformance.mjs` | `W01_CHANGE` — `w01.writable-partition-only-expected-changes` expectation refreshed to the current in-partition change set (the W01-E list was already committed, so it could no longer be observed in `git status`); `w01Tools` extended with the three new W01 tools |
+| `tools/w01-browser-flows.mjs` | `W01_CHANGE` — added `cbf.restore-reported-only-when-context-applied`; recursive evidence indexing (nested `evidence/<surface>/`); `ownedPartition` binding on the receipt |
+| `tests/surfaces/today/surface.test.mjs` | `W01_CHANGE` (previous round, still carried) |
+| `writer-output/W01/PROOF_CATALOG.json` | `EVIDENCE` — +`P-VISUAL-CAPTURE`, +`P-OBLIGATION-MANIFEST`, repointed 2 rules off the self-referential proof, keyed 6 rules on their row subject (see known_risks 5) |
+| `writer-output/W01/SERIALIZED_HOTSPOT_REQUEST.md` | `EVIDENCE` — exact m0 hunk, **filed not applied** |
+| `writer-output/W01/{PROOF_RESULTS,ACCEPTANCE_MATRIX,ACCEPTANCE_SUMMARY,BROWSER_RECEIPT,VISUAL_CAPTURE_RECEIPT,CBF002_PROBE,EVIDENCE_INDEX}.json` | `EVIDENCE` (tool-measured / regenerated) |
+| `writer-output/W01/evidence/**/*.png` | `EVIDENCE` — 216 files, 0 orphans, nothing deleted |
+| `stack/native-typescript/{main.ts,foundation/extensions.css,foundation/operational/xterm-renderer.ts}` | `PRE_EXISTING_PROTECTED` — untouched (`w01.protected-canonical-deltas-preserved`) |
+| `stack/native-typescript/surfaces/m0-controller-composition.ts`, `profiles/**` | `READ_ONLY_FOR_WRITERS` — untouched (`w01.read-only-roots-untouched`); the LEFT-region hunk is filed instead |
+| `dist/**` | `GENERATED_DIST` — **regenerated this round** under `tools/writer-serial.sh node tools/build-runtime.mjs` (`pass: true`, `CANONICAL_SOURCE_TO_GENERATED_ONLY`, written 272, copiedAssets 2, removedStale 0): W01's first product-source change |
+
+### proof table (measured — `python3 tools/writer-acceptance-matrix.py --workspace W01 --run-proofs …`)
+
+| proof | result | exit |
+|---|---|---|
+| `P-SHELL-ROUTE` `node tests/surfaces/shell/surface.test.mjs` | **PASS** (`cases:8`) | 0 |
+| `P-TODAY-ROUTE` `node tests/surfaces/today/surface.test.mjs` | **PASS** (`cases:9`) | 0 |
+| `P-S07` `node dist/tests/rescue/S07_W01_W02_SHELL_TODAY/s07-contracts.test.js` | **PASS** | 0 |
+| `P-D07` `node dist/tests/post-c03/D07/d07-today-presentation-authority-tests.js` | **PASS** | 0 |
+| `P-MODEL` `tools/writer-serial.sh npm test` | **PASS** (210/0) | 0 |
+| `P-CHECK` `tools/writer-serial.sh npm run check` | **FAIL** — `browser.lineage_receipt_truthful` (1/6) + `browser.targeted_visual_evidence` (legacy class); unchanged from the pre-writer baseline, Controller plane | 1 |
+| `P-CHECK-DUP` `tools/writer-serial.sh node tools/check-duplicate-mechanics.mjs` | **PASS** | 0 |
+| `P-CONFORMANCE` `tools/writer-serial.sh node tools/w01-conformance.mjs` | **PASS** (21/21) | 0 |
+| `P-VISUAL-CAPTURE` *(new this round)* `node tools/w01-visual-capture.mjs` | **PASS** (32/32 assertions, 8 artifacts) | 0 |
+| `P-BROWSER-W01` (4 flows) | **PASS** | 0 |
+| `P-BROWSER-CBF002` `node tools/w01-browser-flows.mjs --flow back-forward-semantic-context` | **PASS** — *was FAIL at W01-E* | 0 |
+| `P-MATRIX-ZEROLOSS` `python3 tools/writer-acceptance-matrix.py --workspace W01` | **PASS** (711/711, `zero_loss: true`) | 0 |
+| `P-OBLIGATION-MANIFEST` *(new this round)* `node tools/w01-obligation-manifest-proof.mjs` | **PASS** (711 ids exactly once, 4-status vocabulary, proof/justification law, uniform binding, summary agreement) | 0 |
+
+**13 proofs: 12 PASS / 1 FAIL** — the single FAIL is the pre-existing browser-lineage gate.
+
+### acceptance
+
+- **711 / 711 rows dispositioned · `zero_loss: true` · exit 0**
+- counts: `PASS 327` (+1 vs W01-E) · `BLOCKED 356` (0) · `NOT_APPLICABLE_WITH_PROOF 26` (0) · `FAIL 2` (−1)
+- per surface: shell `159 / 179 / 13 / 1` · today `168 / 177 / 13 / 1` (PASS/BLOCKED/NA/FAIL)
+- matrix sha256 `2075057c8aeaec512a406763655517ffb79952bec8d2fe672de1140167f75f7a`
+- every row bound with `--candidate OWNED_PARTITION_SHA256:b9419922…` `--commit e78d453c…` `--tree 21c1ed06…`
+- the row that moved: **`OBL-000001` (shell return continuity) `FAIL → PASS`** behind the now-green `P-BROWSER-CBF002`; the 2 remaining FAIL rows are `OBL-008623 / OBL-008624` (`R-GATE022-BROWSER-EVIDENCE`, Controller plane)
+- Q-1 → 4 rows `BLOCKED`, Q-2 → 3 rows `BLOCKED`: **still STOP/REPORT, still never decided**
+
+### browser (5/5 PASS, all 44 assertions green)
+
+| flow | status | classification |
+|---|---|---|
+| `shell.destination-routing` | **PASS** | — |
+| `today.render-and-filter` | **PASS** | — |
+| `back-forward-semantic-context` | **PASS** | — *(was FAIL / PRODUCT at W01-E — CBF-002)* |
+| `deep-work.open-close-lifecycle` | **PASS** | — |
+| `diagnostics.gate` | **PASS** | — |
+
+Receipt `writer-output/W01/BROWSER_RECEIPT.json` (Playwright 1.62.1 package-local, Chromium 151.0.7922.34, viewport 1440×980, `reducedMotion:'reduce'`, transport `localhost-http`, commit `e78d453c…`). **216 screenshots on disk, 216 indexed, 0 orphans, 0 deleted** = 13 `FLOW_EVIDENCE` + 8 `MATCHED_VIEWPORT_VISUAL_CAPTURE_EVIDENCE` + 195 `SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED`.
+
+### evidence
+
+- `writer-output/W01/VISUAL_CAPTURE_RECEIPT.json` — C03-GATE-020 W01-side capture: **32/32 assertions**, 1440×1000 **and** 1024×900 × {shell, today} × {baseline, keyboard-focus}, `document.activeElement` proof per keyboard frame, sha256-bound per `controller/08_evidence/evidence_contract.md` as `evidence/<workspace>/<surface>/<flow>-<ts>-<candidate8>.png` (`<candidate8>` = first 8 of `OWNED_PARTITION_SHA256`); 8 CURRENT + 48 retained-and-labelled superseded = 56 artifacts
+- `writer-output/W01/CBF002_PROBE.json` — CBF-002 root cause measured before the repair, repair verified after
+- `writer-output/W01/SERIALIZED_HOTSPOT_REQUEST.md` — exact m0 line-203 hunk, filed not applied
+- `writer-output/W01/EVIDENCE_INDEX.json` — regenerated by `node tools/w01-evidence-index.mjs` (235 artifacts = 19 documents/tools + 216 screenshots, 0 orphans)
+
+### remaining_work
+
+1. **Q-1** shell final destination count — Owner decision only; `destinationCountFrozen=false` preserved, never frozen, never invented (4 rows `BLOCKED`).
+2. **Q-2** Today provider owner — Owner/Controller ownership decision + registry row (3 rows `BLOCKED`).
+3. **C03-GATE-022** browser evidence — Controller plane (the 2 remaining FAIL rows).
+4. **C03-GATE-020** — W01-side capture complete; gate stays `BLOCKED` on Owner matched-state image inspection (`OBL-003674 / OBL-003675 / OBL-008651` unchanged).
+5. **Today LEFT-region `Filter · …` summary** — filed as `SERIALIZED_HOTSPOT_REQUEST.md`; needs the Coordinator to apply the m0 half atomically with the `surfaces/today/surface.ts` half.
+6. 356 `BLOCKED` rows — each names its own missing authority; 26 `NOT_APPLICABLE_WITH_PROOF` rows keep their cited bindings.
+
+### known_risks
+
+1. **Candidate identity drift is structural under Owner-directed parallel execution.** HEAD advanced `891c1e5 → d4b9e151 → e78d453c` during this round from sibling checkpoints only. W01 therefore binds every receipt and every matrix row to `OWNED_PARTITION_SHA256:b9419922…` + `commit` + `tree`, and records the worktree variant as `INFORMATIONAL_MOVING` context. Nothing suppressed.
+2. **`npm run check` still exits 1** on the browser-lineage class — unchanged from the pre-writer baseline, Controller plane, not W01 product code.
+3. **Superseded screenshots accumulate and are retained by design** (195 of 216 are superseded intermediate attempts, all labelled with their reason). The Coordinator may prune; W01 does not delete evidence.
+4. **The CBF-002 repair changed product source for the first time**, so `dist/` was regenerated under `tools/writer-serial.sh`. A sibling's in-flight `stack/native-typescript/**` edit present at that instant is included in `dist/` — inherent to the shared serial worktree; the build is re-runnable by any writer under the lock.
+5. **The shared acceptance-matrix tool changed underneath this round.** An uncommitted edit to the Coordinator-owned `tools/writer-acceptance-matrix.py` added P6 guards (`SELF_REFERENTIAL_PROOF`, `NO_SUBJECT_MATCHED_DISCHARGE`, `INSUFFICIENT_GRANULARITY`). W01 **did not edit that tool** (outside its write partition). It adapted its own `writer-output/W01/PROOF_CATALOG.json`: `R-OBLIGATION-MANIFEST` and `R-OD-ZEROLOSS` were repointed from the self-referential `P-MATRIX-ZEROLOSS` to the new subject-matched `P-OBLIGATION-MANIFEST`, and the 6 rules that sweep `OWNER_DECISION` / `OWNER_QA_DEEP_AUDIT` rows were keyed on `obligation_id__contains` (their exact current row sets, so **no status changed**). Row counts are byte-for-byte the same as under the committed tool: 711/711, `327/356/26/2`. If the Coordinator reverts the tool change, this catalog still produces identical output.
+6. **Four proof runs were needed** (transient, recorded): run 1 populated the new proof, run 2 exposed the replay-binding assumption in it, run 3 exposed the stale `obligation_id__contains` narrowing (5 rows momentarily unmatched), run 4 is the authoritative one above. Only run 4's `PROOF_RESULTS.json` is the handoff record; no earlier run's failure is hidden — all are visible in the tool's stdout history of this session.

@@ -377,26 +377,65 @@ export class GlobalShellNavigationOwner{
     return true;
   }
 
+  /** Bounded frame wait used by the semantic-context restore seam (never an unbounded spin). */
+  private async waitFor(predicate:()=>boolean,frames=90):Promise<boolean>{
+    for(let attempt=0;attempt<frames;attempt++){if(predicate())return true;await this.frame();}
+    return predicate();
+  }
+  private async waitForElement(selector:string):Promise<HTMLElement|null>{
+    let found:HTMLElement|null=null;
+    await this.waitFor(()=>{found=document.querySelector<HTMLElement>(selector);return found!==null;});
+    return found;
+  }
+
+  /**
+   * Re-apply the bookmarked semantic context and report whether it ACTUALLY took effect.
+   *
+   * CBF-002 (P0): the destination surface is re-mounted by the shell navigation handler
+   * (`main.ts#handleShellNavigate` -> `mountM0ControllerComposition`), which is `async` and is
+   * never awaited by `navigate()`/`onPopState()`. Two failures follow from that seam and both
+   * are closed here:
+   *   1. the context control may not exist on the first frame after Back/Forward -> wait for it
+   *      (bounded) before issuing the click;
+   *   2. the click may be issued but not take effect -> verify the pressed/selected state moved
+   *      and return false when it did not, so a route+scroll restore is never reported as a
+   *      context restore (packet §11 negative case).
+   */
+  private async applySurfaceContext(bookmark:ShellBookmark):Promise<boolean>{
+    const context=bookmark.surfaceContext;
+    if(!context)return true;
+    const provider=this.contextProviders.get(this.surface);
+    if(provider){
+      try{
+        const outcome=await provider.restore(context);
+        return typeof outcome==='boolean'?outcome:true;
+      }catch(e){
+        console.error('Context provider restore failed',e);
+        return false;
+      }
+    }
+    if(this.surface==='today'&&context.todayFilter){
+      return this.applyDomContext(`[data-filter="${CSS.escape(String(context.todayFilter))}"]`);
+    }
+    if(this.surface==='visualize'&&context.visualizeView){
+      return this.applyDomContext(`[data-view="${CSS.escape(String(context.visualizeView))}"]`);
+    }
+    return true;
+  }
+
+  private async applyDomContext(selector:string):Promise<boolean>{
+    const applied=`${selector}[aria-pressed="true"], ${selector}[aria-selected="true"], ${selector}.active`;
+    const target=await this.waitForElement(selector);
+    if(!target)return false;
+    target.click();
+    return this.waitFor(()=>document.querySelector(applied)!==null);
+  }
+
   async restoreBookmark(bookmark:ShellBookmark){
     delete this.host.dataset.contextRestored;
     delete document.documentElement.dataset.contextRestored;
     this.host.dataset.contextRestoreStatus='pending';
-    if(bookmark.surfaceContext){
-      const provider=this.contextProviders.get(this.surface);
-      if(provider){
-        try{
-          await provider.restore(bookmark.surfaceContext);
-        }catch(e){
-          console.error('Context provider restore failed',e);
-        }
-      }else if(this.surface==='today'&&bookmark.surfaceContext.todayFilter){
-        const filterBtn=document.querySelector<HTMLElement>(`[data-filter="${CSS.escape(bookmark.surfaceContext.todayFilter)}"]`);
-        filterBtn?.click();
-      }else if(this.surface==='visualize'&&bookmark.surfaceContext.visualizeView){
-        const viewBtn=document.querySelector<HTMLElement>(`[data-view="${CSS.escape(bookmark.surfaceContext.visualizeView)}"]`);
-        viewBtn?.click();
-      }
-    }
+    const contextApplied=await this.applySurfaceContext(bookmark);
     let stableFrames=0;
     for(let attempt=0;attempt<12;attempt++){
       const ready=this.applyBookmarkScroll(bookmark);
@@ -405,6 +444,14 @@ export class GlobalShellNavigationOwner{
         stableFrames++;
         if(stableFrames>=2){
           this.restoreFocusIdentity(bookmark.focus,{shellFallback:true});
+          if(!contextApplied){
+            // Route + scroll came back, the captured semantic context did NOT. Never report that
+            // as a restore (CBF-002): the status stays a distinct, inspectable negative.
+            this.host.dataset.contextRestored='false';
+            document.documentElement.dataset.contextRestored='false';
+            this.host.dataset.contextRestoreStatus='context-unapplied';
+            return false;
+          }
           this.host.dataset.contextRestored='true';
           document.documentElement.dataset.contextRestored='true';
           this.host.dataset.contextRestoreStatus='restored';

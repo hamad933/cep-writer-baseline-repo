@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "workspace": "W01",
+  "probe": "w01-cbf-probe.mjs",
+  "capturedAt": "2026-09-29T05:53:31.497Z",
+  "observations": [
+    {
+      "phase": "01-initial-shell",
+      "at": "2026-09-29T05:53:28.370Z",
+      "value": {
+        "phase": "01-initial-shell",
+        "consumer": "shell",
+        "search": "?surface=shell",
+        "domPressed": null,
+        "domFilters": "",
+        "stageComposition": "shell",
+        "leftFilterSummary": null,
+        "adapterFilterViaM0": null,
+        "adapterFilterViaBinding": null,
+        "todayFilterCommandOwner": null,
+        "restoreStatus": null,
+        "contextRestored": null,
+        "captureProviderRegistered": [],
+        "todayReceipts": []
+      }
+    },
+    {
+      "phase": "02-first-today-arrival",
+      "at": "2026-09-29T05:53:28.817Z",
+      "value": {
+        "phase": "02-first-today-arrival",
+        "consumer": "today",
+        "search": "?surface=today",
+        "domPressed": "false",
+        "domFilters": "ALL:true,CONTINUE_SESSION:false,RECOMMENDATION:false,ATTENTION:false,RECENT_CONTEXT:false,PROGRESS:false",
+        "stageComposition": "today",
+        "leftFilterSummary": "Filter · ALL",
+        "adapterFilterViaM0": null,
+        "adapterFilterViaBinding": null,
+        "todayFilterCommandOwner": "TodayProjectionDomainAdapter",
+        "restoreStatus": null,
+        "contextRestored": null,
+        "captureProviderRegistered": [],
+        "todayReceipts": []
+      }
+    },
+    {
+      "phase": "03-after-attention-click",
+      "at": "2026-09-29T05:53:29.259Z",
+      "value": {
+        "phase": "03-after-attention-click",
+        "consumer": "today",
+        "search": "?surface=today",
+        "domPressed": "true",
+        "domFilters": "ALL:false,CONTINUE_SESSION:false,RECOMMENDATION:false,ATTENTION:true,RECENT_CONTEXT:false,PROGRESS:false",
+        "stageComposition": "today",
+        "leftFilterSummary": "Filter · ALL",
+        "adapterFilterViaM0": null,
+        "adapterFilterViaBinding": null,
+        "todayFilterCommandOwner": "TodayProjectionDomainAdapter",
+        "restoreStatus": null,
+        "contextRestored": null,
+        "captureProviderRegistered": [],
+        "todayReceipts": [
+          {
+            "seq": 1,
+            "route": "today-orchestration"
+          }
+        ]
+      }
+    },
+    {
+      "phase": "04-after-back",
+      "at": "2026-09-29T05:53:29.715Z",
+      "value": {
+        "phase": "04-after-back",
+        "consumer": "shell",
+        "search": "?surface=shell",
+        "domPressed": "true",
+        "domFilters": "ALL:false,CONTINUE_SESSION:false,RECOMMENDATION:false,ATTENTION:true,RECENT_CONTEXT:false,PROGRESS:false",
+        "stageComposition": "today",
+        "leftFilterSummary": "Filter · ALL",
+        "adapterFilterViaM0": null,
+        "adapterFilterViaBinding": null,
+        "todayFilterCommandOwner": "TodayProjectionDomainAdapter",
+        "restoreStatus": "restored",
+        "contextRestored": "true",
+        "captureProviderRegistered": [],
+        "todayReceipts": [
+          {
+            "seq": 1,
+            "route": "today-orchestration"
+          }
+        ]
+      }
+    },
+    {
+      "phase": "05-after-forward-restore",
+      "at": "2026-09-29T05:53:30.987Z",
+      "value": {
+        "phase": "05-after-forward-restore",
+        "consumer": "today",
+        "search": "?surface=today",
+        "domPressed": "true",
+        "domFilters": "ALL:false,CONTINUE_SESSION:false,RECOMMENDATION:false,ATTENTION:true,RECENT_CONTEXT:false,PROGRESS:false",
+        "stageComposition": "today",
+        "leftFilterSummary": "Filter · ALL",
+        "adapterFilterViaM0": null,
+        "adapterFilterViaBinding": null,
+        "todayFilterCommandOwner": "TodayProjectionDomainAdapter",
+        "restoreStatus": "restored",
+        "contextRestored": "true",
+        "captureProviderRegistered": [],
+        "todayReceipts": [
+          {
+            "seq": 1,
+            "route": "today-orchestration"
+          },
+          {
+            "seq": 2,
+            "route": "today-orchestration"
+          }
+        ]
+      }
+    },
+    {
+      "phase": "06-after-manual-attention-click",
+      "at": "2026-09-29T05:53:31.412Z",
+      "value": {
+        "phase": "06-after-manual-attention-click",
+        "consumer": "today",
+        "search": "?surface=today",
+        "domPressed": "true",
+        "domFilters": "ALL:false,CONTINUE_SESSION:false,RECOMMENDATION:false,ATTENTION:true,RECENT_CONTEXT:false,PROGRESS:false",
+        "stageComposition": "today",
+        "leftFilterSummary": "Filter · ALL",
+        "adapterFilterViaM0": null,
+        "adapterFilterViaBinding": null,
+        "todayFilterCommandOwner": "TodayProjectionDomainAdapter",
+        "restoreStatus": "restored",
+        "contextRestored": "true",
+        "captureProviderRegistered": [],
+        "todayReceipts": [
+          {
+            "seq": 1,
+            "route": "today-orchestration"
+          },
+          {
+            "seq": 2,
+            "route": "today-orchestration"
+          },
+          {
+            "seq": 3,
+            "route": "today-orchestration"
+          }
+        ]
+      }
+    },
+    {
+      "phase": "07-direct-today.filter-command",
+      "at": "2026-09-29T05:53:31.416Z",
+      "value": {
+        "result": {
+          "ok": true,
+          "filter": "ATTENTION"
+        },
+        "domPressed": "true",
+        "m0AdapterFilter": null,
+        "receiptsAdded": 1
+      }
+    },
+    {
+      "phase": "08-instrumentation",
+      "at": "2026-09-29T05:53:31.418Z",
+      "value": {
+        "restoreBookmarkCalls": [
+          {
+            "surface": "shell",
+            "surfaceContext": null,
+            "filterButtonFound": false
+          },
+          {
+            "surface": "today",
+            "surfaceContext": {
+              "todayFilter": "ATTENTION"
+            },
+            "filterButtonFound": true
+          }
+        ],
+        "restoreBookmarkResults": [
+          {
+            "surface": "shell",
+            "result": true,
+            "domAfter": "true",
+            "filterButtonFound": false
+          },
+          {
+            "surface": "today",
+            "result": true,
+            "domAfter": "true",
+            "filterButtonFound": true
+          }
+        ],
+        "popstate": 2
+      }
+    }
+  ]
+}

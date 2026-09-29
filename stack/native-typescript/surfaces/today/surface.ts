@@ -3,17 +3,41 @@ import {renderTodayOrchestrationProjection} from './presentation.js';
 const hasCommand=(registry,id)=>registry?.commands instanceof Map&&registry.commands.has(id);
 const register=(registry,id,label,run,available=()=>true)=>{if(!hasCommand(registry,id))registry.register(id,TODAY_PROJECTION_OWNER,label,run,available);return id;};
 
+/**
+ * The Today adapter whose presentation is currently mounted (CBF-002 repair).
+ *
+ * The semantic bus registers each `today.*` command exactly once —
+ * `SemanticCommandBus.registerCommand` rejects `DUPLICATE_COMMAND_OWNER` — so the registered
+ * closure is created by the FIRST Today composition and permanently captures that composition's
+ * adapter. The shared shell re-mounts Today with a fresh adapter on every Back/Forward restore
+ * (`main.ts#handleShellNavigate` -> `mountM0ControllerComposition({consumer:'today'})`), and that
+ * mount re-renders the stage from the NEW adapter. With a captured (first-mount) closure,
+ * `today.filter` kept mutating the orphaned adapter while the rendered projection never moved:
+ * the route came back, the semantic context silently did not — the measured CBF-002 defect
+ * (`tools/w01-cbf-probe.mjs`, observation 05-07: `today.filter` receipts are emitted, the DOM
+ * pressed state never moves).
+ *
+ * Resolving the target at call time keeps ONE command owner and ONE registration (no competing
+ * bus, no duplicate mechanics) while guaranteeing a command always drives the adapter the stage
+ * is actually rendering.
+ */
+let mountedAdapter:any=null;
+/** Current Today adapter — the one the mounted presentation renders. Test/proof seam. */
+export function currentTodayAdapter(){return mountedAdapter}
+
 /** Thin semantic-command binding over read-side Today projection truth. */
 export function bindTodaySurface({commands,adapter,workspace=null}={}){
   if(!commands||!adapter)throw Error('TODAY_SURFACE_BINDING_REQUIRED');
+  mountedAdapter=adapter;
+  const active=()=>mountedAdapter||adapter;
   const ids=[
-    register(commands,'today.resume','Resume projected work',payload=>adapter.resume(payload.itemId),payload=>adapter.canResume(payload.itemId)),
-    register(commands,'today.refresh','Refresh Today projection',()=>adapter.refresh()),
+    register(commands,'today.resume','Resume projected work',payload=>active().resume(payload.itemId),payload=>active().canResume(payload.itemId)),
+    register(commands,'today.refresh','Refresh Today projection',()=>active().refresh()),
     register(commands,'today.filter','Filter Today projection',payload=>{
-      try{return {ok:true,filter:adapter.setFilter(payload.value),projection:adapter.project(),mutated:false};}
+      try{return {ok:true,filter:active().setFilter(payload.value),projection:active().project(),mutated:false};}
       catch(error){return {ok:false,status:String(error?.message||error),mutated:false};}
     },payload=>{const value=String(payload?.value||'ALL').toUpperCase();return value==='ALL'||TODAY_PROJECTION_KINDS.includes(value)||'Choose a recognized Today projection kind';}),
-    register(commands,'today.why','Explain recommendation source',payload=>adapter.why(payload.itemId,payload.version),payload=>adapter.canExplain(payload.itemId,payload.version))
+    register(commands,'today.why','Explain recommendation source',payload=>active().why(payload.itemId,payload.version),payload=>active().canExplain(payload.itemId,payload.version))
   ];
   const projection=adapter.project();
   workspace?.status?.(`Today · ${projection.state}`);
