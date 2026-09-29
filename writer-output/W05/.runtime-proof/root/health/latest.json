@@ -1,0 +1,79 @@
+{
+  "schema": "CEP_HEALTH_LATEST_V1",
+  "observations": [
+    {
+      "observationId": "obs-42676711-499e-4a50-8120-da22ae954407",
+      "sourceId": "health.local-runtime",
+      "kind": "Observation",
+      "observedAt": "2026-09-29T05:03:23.511Z",
+      "freshnessMs": 10000,
+      "ageMs": 0,
+      "status": "AVAILABLE",
+      "value": {
+        "node": "v22.16.0",
+        "host": "127.0.0.1",
+        "driverId": "node:sqlite"
+      },
+      "error": null,
+      "sourceIdentity": "CEP_LOCAL_RUNTIME",
+      "providerEvidence": {
+        "actualProbe": true
+      }
+    },
+    {
+      "observationId": "obs-779786e0-8647-4eb6-92bb-2b35a5bd68f1",
+      "sourceId": "health.persistence.sqlite",
+      "kind": "Observation",
+      "observedAt": "2026-09-29T05:03:23.511Z",
+      "freshnessMs": 10000,
+      "ageMs": 0,
+      "status": "AVAILABLE",
+      "value": {
+        "integrityOk": true,
+        "foreignKeysOk": true,
+        "driverId": "node:sqlite"
+      },
+      "error": null,
+      "sourceIdentity": "CepSqlitePersistenceProvider:node:sqlite",
+      "providerEvidence": {
+        "actualProbe": true
+      }
+    },
+    {
+      "observationId": "obs-6d27753a-0665-4324-ba68-d6efa732ec4a",
+      "sourceId": "health.processing.worker",
+      "kind": "WorkerLiveness",
+      "observedAt": "2026-09-29T05:03:23.512Z",
+      "freshnessMs": 5000,
+      "ageMs": 0,
+      "status": "UNAVAILABLE",
+      "value": {
+        "state": "UNKNOWN",
+        "workerId": null
+      },
+      "error": "NO_WORKER_HEARTBEAT",
+      "sourceIdentity": "processing.local-digest-provider",
+      "providerEvidence": {
+        "actualWorkerHeartbeat": false
+      }
+    },
+    {
+      "observationId": "obs-c0bcb119-7f9f-4202-a46f-9b97de12860b",
+      "sourceId": "health.processing.queue",
+      "kind": "QueueMetric",
+      "observedAt": "2026-09-29T05:03:23.512Z",
+      "freshnessMs": 5000,
+      "ageMs": 0,
+      "status": "AVAILABLE",
+      "value": {
+        "queueId": "processing.default",
+        "depth": 0
+      },
+      "error": null,
+      "sourceIdentity": "processing.local-digest-provider",
+      "providerEvidence": {
+        "actualQueueRead": true
+      }
+    }
+  ]
+}

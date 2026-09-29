@@ -11,7 +11,34 @@ const tests=[]; const record=(id,fn)=>{try{const detail=fn();tests.push({id,stat
 const root=mkdtempSync(join(tmpdir(),'cep-balanced6-'));const db=join(root,'balanced6-acceptance.sqlite');
 const first=seedBalanced6({databasePath:db,reset:true}),second=seedBalanced6({databasePath:db});
 const {manifest,records}=loadAndValidateBalanced6();
+// CBF-001 (P0): the official Balanced6 seed `section` block type is not part of the canonical
+// StructuredTreeKernel type set. Every seeded document must validate against the real kernel.
+const {STRUCTURED_TREE_KERNEL}=await import('../dist/foundation/structured.js');
+const blockTypesOf=()=>{const types=new Set(),walk=blocks=>{for(const block of blocks||[]){types.add(block.type);walk(block.children)}};records.forEach(entry=>walk(entry.document.blocks));return [...types].sort()};
 record('seed.exact-six-ids',()=>assert.deepEqual(first.documents.map(x=>x.document_id),EXPECTED_IDS));
+record('cbf-001.seed-blocks-satisfy-structured-tree-kernel',()=>{
+  const invalid=records.map(row=>({id:row.id,issues:STRUCTURED_TREE_KERNEL.validate(row.document.blocks).issues})).filter(row=>row.issues.length);
+  assert.deepEqual(invalid,[],'CBF-001: seeded blocks rejected by StructuredTreeKernel');
+  return {documents:records.length,owner:STRUCTURED_TREE_KERNEL.owner,validated:'ALL_SIX'};
+});
+record('cbf-001.no-unsupported-section-block-type',()=>{
+  const types=blockTypesOf();
+  assert.equal(types.includes('section'),false,'CBF-001 regression: legacy `section` block type seeded again');
+  const unsupported=types.filter(type=>!STRUCTURED_TREE_KERNEL.hasType(type));
+  assert.deepEqual(unsupported,[],'CBF-001: seeded block type outside the canonical kernel type set');
+  return {seededBlockTypes:types};
+});
+record('cbf-001.db-state-hash-bound',()=>{
+  const probe=new CepSqlitePersistenceProvider({databasePath:db});
+  try{
+    const stateHash=probe.committedTruthFingerprint();
+    assert.match(stateHash,/^[0-9a-f]{64}$/,'committed DB state hash must be a sha256');
+    assert.equal(stateHash,probe.committedTruthFingerprint(),'committed DB state hash must be stable');
+    const revisionHashes=probe.listDocuments().map(row=>({documentId:row.document_id,revisionId:row.current_revision_id,contentSha256:probe.readCommitted(row.document_id).digest}));
+    assert.equal(revisionHashes.length,6);
+    return {stateHash,revisions:revisionHashes};
+  }finally{probe.close()}
+});
 record('seed.exact-titles',()=>{const p=new CepSqlitePersistenceProvider({databasePath:db});try{for(const r of records)assert.equal(p.readCommitted(r.id).document.title,r.title)}finally{p.close()}});
 record('seed.exact-source-hashes',()=>{for(const r of records)assert.equal(r.document.provenance.sourceSha256,r.sourceSha256)});
 record('seed.classification-non-production',()=>assert.equal(first.classification,BALANCED6_CLASSIFICATION));

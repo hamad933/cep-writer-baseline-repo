@@ -1,0 +1,728 @@
+{
+  "schemaVersion": 1,
+  "workspace": "W05",
+  "proofs": [
+    {
+      "id": "P-MODEL",
+      "command": "tools/writer-serial.sh npm test",
+      "artifact": "assurance/MODEL_TEST_RESULTS.json",
+      "kind": "model_test",
+      "workspaceScope": "W05",
+      "timeout": 900
+    },
+    {
+      "id": "P-PSC",
+      "command": "node tools/psc-runtime-falsification.mjs",
+      "artifact": "tools/psc-runtime-falsification.mjs",
+      "kind": "falsification",
+      "workspaceScope": "W05",
+      "timeout": 900
+    },
+    {
+      "id": "P-BALANCED6",
+      "command": "node tools/balanced6-acceptance-tests.mjs",
+      "artifact": "tools/balanced6-acceptance-tests.mjs",
+      "kind": "seed_kernel_conformance",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-STACK",
+      "command": "node tools/w05-stack-admission-proof.mjs",
+      "artifact": "tools/w05-stack-admission-proof.mjs",
+      "kind": "checker",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-PC1",
+      "command": "node stack/native-typescript/tests/rescue/PC1_W05_PROVIDER_PERSISTENCE/provider-persistence-falsification.mjs",
+      "artifact": "stack/native-typescript/tests/rescue/PC1_W05_PROVIDER_PERSISTENCE/provider-persistence-falsification.mjs",
+      "kind": "falsification",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-PC1-SEAM",
+      "command": "node stack/native-typescript/tests/rescue/PC1_W05_PROVIDER_PERSISTENCE/server-provider-seam-smoke.mjs",
+      "artifact": "stack/native-typescript/tests/rescue/PC1_W05_PROVIDER_PERSISTENCE/server-provider-seam-smoke.mjs",
+      "kind": "contract",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-D11",
+      "command": "node dist/tests/post-c03/D11/d11-w05-provider-integration-tests.js",
+      "artifact": "stack/native-typescript/tests/post-c03/D11/d11-w05-provider-integration-tests.ts",
+      "kind": "integration",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-BROWSER",
+      "command": "node tools/w05-browser-flows.mjs",
+      "artifact": "tools/w05-browser-flows.mjs",
+      "kind": "browser",
+      "workspaceScope": "W05",
+      "timeout": 900
+    },
+    {
+      "id": "P-S16",
+      "command": "node dist/tests/rescue/S16_W05_HEALTH_PROCESSING/s16-health-processing-tests.js",
+      "artifact": "stack/native-typescript/tests/rescue/S16_W05_HEALTH_PROCESSING/s16-health-processing-tests.ts",
+      "kind": "surface_route_test",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-HEALTH-CAP",
+      "command": "node tools/w05-health-capability-proof.mjs",
+      "artifact": "tools/w05-health-capability-proof.mjs",
+      "kind": "capability_proof",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-HTTP",
+      "command": "node tools/w05-runtime-http-integration.mjs",
+      "artifact": "tools/w05-runtime-http-integration.mjs",
+      "kind": "capability_proof",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-CG6",
+      "command": "node dist/tests/rescue/CG6_W05_COVERAGE/cg6-w05-coverage.test.js",
+      "artifact": "stack/native-typescript/tests/rescue/CG6_W05_COVERAGE/cg6-w05-coverage.test.ts",
+      "kind": "contract",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-PROC-CAP",
+      "command": "node tools/w05-processing-capability-proof.mjs",
+      "artifact": "tools/w05-processing-capability-proof.mjs",
+      "kind": "capability_proof",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-S17",
+      "command": "node dist/tests/rescue/S17_W05_VALIDATION_MANUAL_AI/s17-tests.js",
+      "artifact": "stack/native-typescript/tests/rescue/S17_W05_VALIDATION_MANUAL_AI/s17-tests.ts",
+      "kind": "surface_route_test",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-MANUALAI-SURFACE",
+      "command": "node dist/tests/surfaces/manual_ai/manual-ai-tests.js",
+      "artifact": "stack/native-typescript/tests/surfaces/manual_ai/manual-ai-tests.ts",
+      "kind": "surface_route_test",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-CG6-TRUTH",
+      "command": "node dist/tests/rescue/CG6_W05_COVERAGE/controller-corr01-w05-truth.test.js",
+      "artifact": "stack/native-typescript/tests/rescue/CG6_W05_COVERAGE/controller-corr01-w05-truth.test.ts",
+      "kind": "contract",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-S18-DOMAIN",
+      "command": "node dist/tests/rescue/S18_W05_BACKUP_AUDIT/domain-tests.js",
+      "artifact": "stack/native-typescript/tests/rescue/S18_W05_BACKUP_AUDIT/domain-tests.ts",
+      "kind": "surface_route_test",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-S18-BOUNDARY",
+      "command": "node dist/tests/rescue/S18_W05_BACKUP_AUDIT/source-boundary-tests.js",
+      "artifact": "stack/native-typescript/tests/rescue/S18_W05_BACKUP_AUDIT/source-boundary-tests.ts",
+      "kind": "contract",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-BACKUP-CAP",
+      "command": "node tools/w05-backup-capability-proof.mjs",
+      "artifact": "tools/w05-backup-capability-proof.mjs",
+      "kind": "capability_proof",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-S19",
+      "command": "node dist/tests/rescue/S19_W05_RELEASES_CONFIGURATION/s19-tests.js",
+      "artifact": "stack/native-typescript/tests/rescue/S19_W05_RELEASES_CONFIGURATION/s19-tests.ts",
+      "kind": "surface_route_test",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-RELEASES-SURFACE",
+      "command": "node dist/tests/surfaces/releases/releases-tests.js",
+      "artifact": "stack/native-typescript/tests/surfaces/releases/releases-tests.ts",
+      "kind": "surface_route_test",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-CONFIGURATION-SURFACE",
+      "command": "node dist/tests/surfaces/configuration/configuration-tests.js",
+      "artifact": "stack/native-typescript/tests/surfaces/configuration/configuration-tests.ts",
+      "kind": "surface_route_test",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-W4E",
+      "command": "node dist/w4-e-settings-center-tests.js",
+      "artifact": "w4-e-settings-center-tests.ts",
+      "kind": "contract",
+      "workspaceScope": "W05",
+      "timeout": 300
+    },
+    {
+      "id": "P-SC011",
+      "command": "node dist/tests/post-c03/D03A/d03a-command-settings-convergence-tests.js",
+      "artifact": "stack/native-typescript/tests/post-c03/D03A/d03a-command-settings-convergence-tests.ts",
+      "kind": "contract",
+      "workspaceScope": "W05",
+      "timeout": 300
+    }
+  ],
+  "rules": [
+    {
+      "id": "R-W05-VISUAL-REFERENCE-NOT-LAW",
+      "match": {
+        "source_layer": "VISUAL_REFERENCE"
+      },
+      "status_mode": "literal",
+      "status": "NOT_APPLICABLE_WITH_PROOF",
+      "justification": "K-05 / packet \u00a73: rows whose source_layer is VISUAL_REFERENCE are presentation inputs only and never domain, data or provider truth, so they carry no executable W05 obligation.",
+      "proof_ref": "controller/09_writer_forge/W05_writer_packet.md#3",
+      "evidence_ref": "writer-output/W05/ACCEPTANCE_MATRIX.csv"
+    },
+    {
+      "id": "R-W05-ARCHAEOLOGY-NOT-LAW",
+      "match": {
+        "source_layer": "AUTHORITY_RECOVERY_ARCHAEOLOGY"
+      },
+      "status_mode": "literal",
+      "status": "NOT_APPLICABLE_WITH_PROOF",
+      "justification": "Packet \u00a717 (code wins over registries; old-source conflict is superseded) + \u00a73 (location resolutions are binding): recovered archaeology sections are provenance/lineage, not current execution specification. W05 implements only the verified current locations, so the recovered sections are not applicable as execution obligations.",
+      "proof_ref": "controller/09_writer_forge/W05_writer_packet.md#17",
+      "evidence_ref": "writer-output/W05/EVIDENCE_INDEX.json#location-resolutions"
+    },
+    {
+      "id": "R-W05-Q6-MANUAL-AI-PROVENANCE-MECHANISM",
+      "match": {
+        "obligation__contains": [
+          "A16-PF-006"
+        ],
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY"
+        ]
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "OPEN QUESTION Q-6 (controller/03_historical/open_questions.md): the Manual-AI provenance recording mechanism is unspecified and requires an Owner decision. A16-PF-006 (bind reviewer identity from the admitted local authority boundary, persist durable append-only per-change dispositions, model EDIT as a human-edited draft lineage) cannot be closed by W05 without silently deciding Q-6, which packet \u00a76 forbids (STOP/REPORT). The current adapter keeps review history in adapter memory only, so there is no durable provenance record to prove. Blocker: Owner decision on Q-6 provenance recording; runner type irrelevant (not an execution gap).",
+      "proof_ref": "controller/03_historical/open_questions.md#q-6",
+      "evidence_ref": "writer-output/W05/W05_HANDOFF.md#q-6"
+    },
+    {
+      "id": "R-W05-FORWARD-GAP-NO-MISSION-MATERIAL",
+      "match": {
+        "source_layer": "ZL01_FORWARD_GAP",
+        "obligation__not_contains": [
+          "A16-PF-006",
+          "A4-0",
+          "PLATFORM_GATED",
+          "PLATFORM_PROOF",
+          "TARGET_PLATFORM_PENDING",
+          "ENVIRONMENT-PLATFORM",
+          "ENVIRONMENT_PLATFORM",
+          "Windows",
+          "Win32",
+          "HWND",
+          "ConPTY",
+          "target-platform"
+        ]
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "ZL01_FORWARD_GAP rows whose positive test requires a new Stage3 mission that explicitly carries the value with an executable owner/proof route, and whose negative test forbids treating a route label or generic test as consumption. proof_requirement is \"Future D0x Mission material\" or POST_C03 routing metadata; no such mission material exists for this wave, so the row is BLOCKED on missing mission material (not on a product defect and not on a product FAIL). Runner type for any future proof: automated \u2014 but no proof is authorised yet.",
+      "proof_ref": "controller/09_writer_forge/W05_writer_packet.md#5",
+      "evidence_ref": "writer-output/W05/ACCEPTANCE_MATRIX.csv"
+    },
+    {
+      "id": "R-W05-C03-GATE-021-MANAGED-RUNNER-IDENTITY",
+      "match": {
+        "obligation__contains": [
+          "A4-0",
+          "PLATFORM_GATED",
+          "PLATFORM_PROOF",
+          "TARGET_PLATFORM_PENDING",
+          "ENVIRONMENT-PLATFORM",
+          "ENVIRONMENT_PLATFORM",
+          "Windows",
+          "Win32",
+          "HWND",
+          "ConPTY",
+          "target-platform"
+        ],
+        "proof_requirement__contains": "MANAGED_RUNNER_ENVIRONMENT_IDENTITY",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY"
+        ],
+        "obligation__not_contains": [
+          "A16-PF-006"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-BROWSER",
+        "P-PSC",
+        "P-STACK"
+      ],
+      "proof_logic": "all",
+      "justification": "C03-GATE-021 runner type = AUTOMATED (managed Linux runner). The row explicitly forbids the superseded reading OWNER_MACHINE_REQUIRED_FOR_ALL_WINDOWS_TARGET_PROOF, so it is discharged by a managed-runner identity proof: browser/environment identity + exact harness source binding + hash-bound artifact custody (BROWSER_RECEIPT evidenceLineage/artifact index) plus runtime target semantics with local-only capabilities explicit and no command/executable allowlist (PSC) plus the stack-admission ledger.",
+      "evidence_ref": "writer-output/W05/BROWSER_RECEIPT.json#evidenceLineage"
+    },
+    {
+      "id": "R-W05-STACK-ADMISSION-NO-UNPROVEN-EXPANSION",
+      "match": {
+        "obligation__contains": [
+          "A4-0",
+          "PLATFORM_GATED",
+          "PLATFORM_PROOF",
+          "TARGET_PLATFORM_PENDING",
+          "ENVIRONMENT-PLATFORM",
+          "ENVIRONMENT_PLATFORM",
+          "Windows",
+          "Win32",
+          "HWND",
+          "ConPTY",
+          "target-platform"
+        ],
+        "proof_requirement__contains": "PACKAGE_AND_LOCKFILE_DIFF_SCAN",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY"
+        ],
+        "obligation__not_contains": [
+          "A16-PF-006"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-STACK"
+      ],
+      "proof_logic": "all",
+      "justification": "Runner type = AUTOMATED (managed Linux runner): package.json / package-lock.json diff scan against HEAD, explicit dependency-admission ledger, and a scan proving no unadmitted third-party import in product source. The proof deliberately does NOT assert a frozen stack (negative UNBOUNDED_WRITER_SELECTED_STACK_EXPANSION / PREMATURE_STACK_FROZEN is rejected; packet \u00a76 keeps the stack NOT frozen).",
+      "evidence_ref": "writer-output/W05/PROOF_RESULTS.json#P-STACK"
+    },
+    {
+      "id": "R-W05-C03-GATE-021-WINDOWS-NATIVE-OWNER-DEVICE",
+      "match": {
+        "obligation__contains": [
+          "A4-0",
+          "PLATFORM_GATED",
+          "PLATFORM_PROOF",
+          "TARGET_PLATFORM_PENDING",
+          "ENVIRONMENT-PLATFORM",
+          "ENVIRONMENT_PLATFORM",
+          "Windows",
+          "Win32",
+          "HWND",
+          "ConPTY",
+          "target-platform"
+        ],
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY"
+        ],
+        "obligation__not_contains": [
+          "A16-PF-006"
+        ],
+        "proof_requirement__not_contains": [
+          "MANAGED_RUNNER_ENVIRONMENT_IDENTITY",
+          "PACKAGE_AND_LOCKFILE_DIFF_SCAN"
+        ]
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "C03-GATE-021 Windows native target. Runner type = OWNER-DEVICE (interactive Windows 10.0.26100 desktop/session: real HWND + OS topmost + focus/bounds, active keyboard-source layout, ConPTY PTY raw-I/O, Windows path containment, native-window lifecycle). This W05 run executed on the managed Linux runner (Node 22.16.0, Playwright 1.62.1 Chromium headless); no Owner-device execution authority was granted to W05, and per mission law an Owner-device claim is BLOCKED (Owner authority). Automated Linux checks for the same surfaces are recorded by the W05 surface rules; only the Windows-native target proof itself is blocked.",
+      "proof_ref": "controller/09_writer_forge/W05_writer_packet.md#6",
+      "evidence_ref": "writer-output/W05/CHECKPOINTS.md#windows-proof-cluster"
+    },
+    {
+      "id": "R-W05-SURFACE-HEALTH",
+      "match": {
+        "surface": "health",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_FORWARD_GAP"
+        ],
+        "obligation__not_contains": [
+          "A16-PF-006",
+          "A4-0",
+          "PLATFORM_GATED",
+          "PLATFORM_PROOF",
+          "TARGET_PLATFORM_PENDING",
+          "ENVIRONMENT-PLATFORM",
+          "ENVIRONMENT_PLATFORM",
+          "Windows",
+          "Win32",
+          "HWND",
+          "ConPTY",
+          "target-platform"
+        ],
+        "proof_requirement__not_contains": [
+          "MANAGED_RUNNER_ENVIRONMENT_IDENTITY",
+          "PACKAGE_AND_LOCKFILE_DIFF_SCAN"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-MODEL",
+        "P-PSC",
+        "P-BALANCED6",
+        "P-PC1",
+        "P-PC1-SEAM",
+        "P-D11",
+        "P-BROWSER",
+        "P-S16",
+        "P-HEALTH-CAP",
+        "P-HTTP",
+        "P-CG6"
+      ],
+      "proof_logic": "all",
+      "justification": "W05 health obligation discharged by the measured W05 proof set: surface rescue/contract tests, the W05 real-consumer proofs (persistence save/autosave/recovery chain with bound DB state hashes, Balanced6 seed StructuredTreeKernel conformance, provider-persistence falsification, capability proofs), the W05 D11 provider-integration suite, and the W05 browser flows bound to this candidate. Shared ownership held: W05 policy-owns persistence/SC-011/backup/AI-bridge/audit-release truth and consumes shell + policy mechanics read-only.",
+      "evidence_ref": "writer-output/W05/BROWSER_RECEIPT.json#health.refresh-inspect-diagnose"
+    },
+    {
+      "id": "R-W05-SURFACE-PROCESSING",
+      "match": {
+        "surface": "processing",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_FORWARD_GAP"
+        ],
+        "obligation__not_contains": [
+          "A16-PF-006",
+          "A4-0",
+          "PLATFORM_GATED",
+          "PLATFORM_PROOF",
+          "TARGET_PLATFORM_PENDING",
+          "ENVIRONMENT-PLATFORM",
+          "ENVIRONMENT_PLATFORM",
+          "Windows",
+          "Win32",
+          "HWND",
+          "ConPTY",
+          "target-platform"
+        ],
+        "proof_requirement__not_contains": [
+          "MANAGED_RUNNER_ENVIRONMENT_IDENTITY",
+          "PACKAGE_AND_LOCKFILE_DIFF_SCAN"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-MODEL",
+        "P-PSC",
+        "P-BALANCED6",
+        "P-PC1",
+        "P-PC1-SEAM",
+        "P-D11",
+        "P-BROWSER",
+        "P-S16",
+        "P-PROC-CAP",
+        "P-HTTP",
+        "P-CG6"
+      ],
+      "proof_logic": "all",
+      "justification": "W05 processing obligation discharged by the measured W05 proof set: surface rescue/contract tests, the W05 real-consumer proofs (persistence save/autosave/recovery chain with bound DB state hashes, Balanced6 seed StructuredTreeKernel conformance, provider-persistence falsification, capability proofs), the W05 D11 provider-integration suite, and the W05 browser flows bound to this candidate. Shared ownership held: W05 policy-owns persistence/SC-011/backup/AI-bridge/audit-release truth and consumes shell + policy mechanics read-only.",
+      "evidence_ref": "writer-output/W05/BROWSER_RECEIPT.json#processing.inspect-retry-requestCancel-validationHandoff"
+    },
+    {
+      "id": "R-W05-SURFACE-VALIDATION",
+      "match": {
+        "surface": "validation",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_FORWARD_GAP"
+        ],
+        "obligation__not_contains": [
+          "A16-PF-006",
+          "A4-0",
+          "PLATFORM_GATED",
+          "PLATFORM_PROOF",
+          "TARGET_PLATFORM_PENDING",
+          "ENVIRONMENT-PLATFORM",
+          "ENVIRONMENT_PLATFORM",
+          "Windows",
+          "Win32",
+          "HWND",
+          "ConPTY",
+          "target-platform"
+        ],
+        "proof_requirement__not_contains": [
+          "MANAGED_RUNNER_ENVIRONMENT_IDENTITY",
+          "PACKAGE_AND_LOCKFILE_DIFF_SCAN"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-MODEL",
+        "P-PSC",
+        "P-BALANCED6",
+        "P-PC1",
+        "P-PC1-SEAM",
+        "P-D11",
+        "P-BROWSER",
+        "P-S17"
+      ],
+      "proof_logic": "all",
+      "justification": "W05 validation obligation discharged by the measured W05 proof set: surface rescue/contract tests, the W05 real-consumer proofs (persistence save/autosave/recovery chain with bound DB state hashes, Balanced6 seed StructuredTreeKernel conformance, provider-persistence falsification, capability proofs), the W05 D11 provider-integration suite, and the W05 browser flows bound to this candidate. Shared ownership held: W05 policy-owns persistence/SC-011/backup/AI-bridge/audit-release truth and consumes shell + policy mechanics read-only.",
+      "evidence_ref": "writer-output/W05/BROWSER_RECEIPT.json#validation.flow"
+    },
+    {
+      "id": "R-W05-SURFACE-MANUAL_AI",
+      "match": {
+        "surface": "manual_ai",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_FORWARD_GAP"
+        ],
+        "obligation__not_contains": [
+          "A16-PF-006",
+          "A4-0",
+          "PLATFORM_GATED",
+          "PLATFORM_PROOF",
+          "TARGET_PLATFORM_PENDING",
+          "ENVIRONMENT-PLATFORM",
+          "ENVIRONMENT_PLATFORM",
+          "Windows",
+          "Win32",
+          "HWND",
+          "ConPTY",
+          "target-platform"
+        ],
+        "proof_requirement__not_contains": [
+          "MANAGED_RUNNER_ENVIRONMENT_IDENTITY",
+          "PACKAGE_AND_LOCKFILE_DIFF_SCAN"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-MODEL",
+        "P-PSC",
+        "P-BALANCED6",
+        "P-PC1",
+        "P-PC1-SEAM",
+        "P-D11",
+        "P-BROWSER",
+        "P-S17",
+        "P-MANUALAI-SURFACE",
+        "P-CG6-TRUTH"
+      ],
+      "proof_logic": "all",
+      "justification": "W05 manual_ai obligation discharged by the measured W05 proof set: surface rescue/contract tests, the W05 real-consumer proofs (persistence save/autosave/recovery chain with bound DB state hashes, Balanced6 seed StructuredTreeKernel conformance, provider-persistence falsification, capability proofs), the W05 D11 provider-integration suite, and the W05 browser flows bound to this candidate. Shared ownership held: W05 policy-owns persistence/SC-011/backup/AI-bridge/audit-release truth and consumes shell + policy mechanics read-only.",
+      "evidence_ref": "writer-output/W05/BROWSER_RECEIPT.json#manual-ai.bridge-truthful-ceilings"
+    },
+    {
+      "id": "R-W05-SURFACE-BACKUP",
+      "match": {
+        "surface": "backup",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_FORWARD_GAP"
+        ],
+        "obligation__not_contains": [
+          "A16-PF-006",
+          "A4-0",
+          "PLATFORM_GATED",
+          "PLATFORM_PROOF",
+          "TARGET_PLATFORM_PENDING",
+          "ENVIRONMENT-PLATFORM",
+          "ENVIRONMENT_PLATFORM",
+          "Windows",
+          "Win32",
+          "HWND",
+          "ConPTY",
+          "target-platform"
+        ],
+        "proof_requirement__not_contains": [
+          "MANAGED_RUNNER_ENVIRONMENT_IDENTITY",
+          "PACKAGE_AND_LOCKFILE_DIFF_SCAN"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-MODEL",
+        "P-PSC",
+        "P-BALANCED6",
+        "P-PC1",
+        "P-PC1-SEAM",
+        "P-D11",
+        "P-BROWSER",
+        "P-S18-DOMAIN",
+        "P-S18-BOUNDARY",
+        "P-BACKUP-CAP",
+        "P-HTTP",
+        "P-CG6"
+      ],
+      "proof_logic": "all",
+      "justification": "W05 backup obligation discharged by the measured W05 proof set: surface rescue/contract tests, the W05 real-consumer proofs (persistence save/autosave/recovery chain with bound DB state hashes, Balanced6 seed StructuredTreeKernel conformance, provider-persistence falsification, capability proofs), the W05 D11 provider-integration suite, and the W05 browser flows bound to this candidate. Shared ownership held: W05 policy-owns persistence/SC-011/backup/AI-bridge/audit-release truth and consumes shell + policy mechanics read-only.",
+      "evidence_ref": "writer-output/W05/BROWSER_RECEIPT.json#backup.restore-round-trip"
+    },
+    {
+      "id": "R-W05-SURFACE-AUDIT",
+      "match": {
+        "surface": "audit",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_FORWARD_GAP"
+        ],
+        "obligation__not_contains": [
+          "A16-PF-006",
+          "A4-0",
+          "PLATFORM_GATED",
+          "PLATFORM_PROOF",
+          "TARGET_PLATFORM_PENDING",
+          "ENVIRONMENT-PLATFORM",
+          "ENVIRONMENT_PLATFORM",
+          "Windows",
+          "Win32",
+          "HWND",
+          "ConPTY",
+          "target-platform"
+        ],
+        "proof_requirement__not_contains": [
+          "MANAGED_RUNNER_ENVIRONMENT_IDENTITY",
+          "PACKAGE_AND_LOCKFILE_DIFF_SCAN"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-MODEL",
+        "P-PSC",
+        "P-BALANCED6",
+        "P-PC1",
+        "P-PC1-SEAM",
+        "P-D11",
+        "P-BROWSER",
+        "P-S18-DOMAIN",
+        "P-S18-BOUNDARY",
+        "P-CG6"
+      ],
+      "proof_logic": "all",
+      "justification": "W05 audit obligation discharged by the measured W05 proof set: surface rescue/contract tests, the W05 real-consumer proofs (persistence save/autosave/recovery chain with bound DB state hashes, Balanced6 seed StructuredTreeKernel conformance, provider-persistence falsification, capability proofs), the W05 D11 provider-integration suite, and the W05 browser flows bound to this candidate. Shared ownership held: W05 policy-owns persistence/SC-011/backup/AI-bridge/audit-release truth and consumes shell + policy mechanics read-only.",
+      "evidence_ref": "writer-output/W05/BROWSER_RECEIPT.json#audit.trail-recording"
+    },
+    {
+      "id": "R-W05-SURFACE-RELEASES",
+      "match": {
+        "surface": "releases",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_FORWARD_GAP"
+        ],
+        "obligation__not_contains": [
+          "A16-PF-006",
+          "A4-0",
+          "PLATFORM_GATED",
+          "PLATFORM_PROOF",
+          "TARGET_PLATFORM_PENDING",
+          "ENVIRONMENT-PLATFORM",
+          "ENVIRONMENT_PLATFORM",
+          "Windows",
+          "Win32",
+          "HWND",
+          "ConPTY",
+          "target-platform"
+        ],
+        "proof_requirement__not_contains": [
+          "MANAGED_RUNNER_ENVIRONMENT_IDENTITY",
+          "PACKAGE_AND_LOCKFILE_DIFF_SCAN"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-MODEL",
+        "P-PSC",
+        "P-BALANCED6",
+        "P-PC1",
+        "P-PC1-SEAM",
+        "P-D11",
+        "P-BROWSER",
+        "P-S19",
+        "P-RELEASES-SURFACE"
+      ],
+      "proof_logic": "all",
+      "justification": "W05 releases obligation discharged by the measured W05 proof set: surface rescue/contract tests, the W05 real-consumer proofs (persistence save/autosave/recovery chain with bound DB state hashes, Balanced6 seed StructuredTreeKernel conformance, provider-persistence falsification, capability proofs), the W05 D11 provider-integration suite, and the W05 browser flows bound to this candidate. Shared ownership held: W05 policy-owns persistence/SC-011/backup/AI-bridge/audit-release truth and consumes shell + policy mechanics read-only.",
+      "evidence_ref": "writer-output/W05/BROWSER_RECEIPT.json#releases.view"
+    },
+    {
+      "id": "R-W05-SURFACE-CONFIGURATION",
+      "match": {
+        "surface": "configuration",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_FORWARD_GAP"
+        ],
+        "obligation__not_contains": [
+          "A16-PF-006",
+          "A4-0",
+          "PLATFORM_GATED",
+          "PLATFORM_PROOF",
+          "TARGET_PLATFORM_PENDING",
+          "ENVIRONMENT-PLATFORM",
+          "ENVIRONMENT_PLATFORM",
+          "Windows",
+          "Win32",
+          "HWND",
+          "ConPTY",
+          "target-platform"
+        ],
+        "proof_requirement__not_contains": [
+          "MANAGED_RUNNER_ENVIRONMENT_IDENTITY",
+          "PACKAGE_AND_LOCKFILE_DIFF_SCAN"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-MODEL",
+        "P-PSC",
+        "P-BALANCED6",
+        "P-PC1",
+        "P-PC1-SEAM",
+        "P-D11",
+        "P-BROWSER",
+        "P-S19",
+        "P-CONFIGURATION-SURFACE",
+        "P-W4E",
+        "P-SC011"
+      ],
+      "proof_logic": "all",
+      "justification": "W05 configuration obligation discharged by the measured W05 proof set: surface rescue/contract tests, the W05 real-consumer proofs (persistence save/autosave/recovery chain with bound DB state hashes, Balanced6 seed StructuredTreeKernel conformance, provider-persistence falsification, capability proofs), the W05 D11 provider-integration suite, and the W05 browser flows bound to this candidate. Shared ownership held: W05 policy-owns persistence/SC-011/backup/AI-bridge/audit-release truth and consumes shell + policy mechanics read-only.",
+      "evidence_ref": "writer-output/W05/BROWSER_RECEIPT.json#configuration.sc011-transfer"
+    }
+  ]
+}

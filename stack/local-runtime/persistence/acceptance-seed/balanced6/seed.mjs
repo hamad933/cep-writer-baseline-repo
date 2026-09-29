@@ -13,7 +13,7 @@ const titleFrom=text=>{const line=text.split(/\r?\n/,1)[0]||'';return line.repla
 const documentFrom=(record,sourceText)=>({
   id:record.id,title:record.title,revision:`b6-${record.sourceSha256.slice(0,12)}`,
   tags:[record.domainId,'Balanced6','Local acceptance'],
-  blocks:[{id:`b6-${record.id.toLowerCase()}-source`,type:'section',level:2,title:'Source-bound acceptance content',children:[{id:`b6-${record.id.toLowerCase()}-text`,type:'code',codeText:sourceText,children:[]}]}],
+  blocks:[{id:`b6-${record.id.toLowerCase()}-source`,type:'toggle',title:'Source-bound acceptance content',open:true,children:[{id:`b6-${record.id.toLowerCase()}-text`,type:'code',codeText:sourceText,children:[]}]}],
   sources:[{title:record.sourcePath,kind:'B09 source-bound acceptance content',status:`${record.sourceVersion} · SHA-256 verified`}],relations:[],labs:[],projects:[],evidence:[],
   provenance:{profile:'ACCEPTANCE_BALANCED_6',classification:BALANCED6_CLASSIFICATION,sourcePath:record.sourcePath,sourceSha256:record.sourceSha256,sourceVersion:record.sourceVersion,corpusSha256:record.corpusSha256,canonicalPublication:false}
 });

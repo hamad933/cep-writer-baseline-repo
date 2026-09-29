@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "workspace": "W05",
+  "generatedAt": "2026-09-29T05:04:02.750130+00:00",
+  "requirements_csv": "controller/09_writer_forge/W05_REQUIREMENTS.csv",
+  "requirements_rows": 2827,
+  "rows_dispositioned": 2827,
+  "zero_loss": true,
+  "candidate": "WORKTREE_VARIANT:c82cec63cb5f",
+  "commit": "f9d5a4d25163842db04e8e5bc7ec78132f88cc5f",
+  "tree": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+  "requirements_sha256": "a5d03bf1b7d4a9b274dc31b90e090789b80057f1668d687663da84f901a3e092",
+  "counts": {
+    "PASS": 2487,
+    "BLOCKED": 324,
+    "NOT_APPLICABLE_WITH_PROOF": 16
+  },
+  "per_surface": {
+    "audit": {
+      "PASS": 303,
+      "BLOCKED": 40,
+      "NOT_APPLICABLE_WITH_PROOF": 2
+    },
+    "backup": {
+      "PASS": 308,
+      "BLOCKED": 44,
+      "NOT_APPLICABLE_WITH_PROOF": 2
+    },
+    "configuration": {
+      "PASS": 305,
+      "BLOCKED": 40,
+      "NOT_APPLICABLE_WITH_PROOF": 2
+    },
+    "health": {
+      "PASS": 314,
+      "BLOCKED": 39,
+      "NOT_APPLICABLE_WITH_PROOF": 2
+    },
+    "manual_ai": {
+      "PASS": 309,
+      "BLOCKED": 41,
+      "NOT_APPLICABLE_WITH_PROOF": 2
+    },
+    "processing": {
+      "PASS": 320,
+      "BLOCKED": 39,
+      "NOT_APPLICABLE_WITH_PROOF": 2
+    },
+    "releases": {
+      "PASS": 311,
+      "BLOCKED": 41,
+      "NOT_APPLICABLE_WITH_PROOF": 2
+    },
+    "validation": {
+      "PASS": 317,
+      "BLOCKED": 40,
+      "NOT_APPLICABLE_WITH_PROOF": 2
+    }
+  },
+  "per_source_layer": {
+    "CURRENT_IDENTITY": {
+      "PASS": 8
+    },
+    "CURRENT_PROFILE": {
+      "PASS": 8
+    },
+    "OWNER_DECISION": {
+      "PASS": 573,
+      "BLOCKED": 8
+    },
+    "AUTHORITY_RECOVERY_ARCHAEOLOGY": {
+      "NOT_APPLICABLE_WITH_PROOF": 8
+    },
+    "OWNER_QA_DEEP_AUDIT": {
+      "PASS": 284,
+      "BLOCKED": 136
+    },
+    "ZL01_ROOT_FINDING": {
+      "PASS": 512,
+      "BLOCKED": 65
+    },
+    "ZL01_FORWARD_GAP": {
+      "BLOCKED": 115
+    },
+    "ZL01_DURABLE_ANCILLARY": {
+      "PASS": 1086
+    },
+    "ZL01_ZL02_RECONCILIATION": {
+      "PASS": 8
+    },
+    "VISUAL_REFERENCE": {
+      "NOT_APPLICABLE_WITH_PROOF": 8
+    },
+    "CURRENT_RESULT_AUDIT": {
+      "PASS": 8
+    }
+  },
+  "proofs_used": [
+    "P-BACKUP-CAP",
+    "P-BALANCED6",
+    "P-BROWSER",
+    "P-CG6",
+    "P-CG6-TRUTH",
+    "P-CONFIGURATION-SURFACE",
+    "P-D11",
+    "P-HEALTH-CAP",
+    "P-HTTP",
+    "P-MANUALAI-SURFACE",
+    "P-MODEL",
+    "P-PC1",
+    "P-PC1-SEAM",
+    "P-PROC-CAP",
+    "P-PSC",
+    "P-RELEASES-SURFACE",
+    "P-S16",
+    "P-S17",
+    "P-S18-BOUNDARY",
+    "P-S18-DOMAIN",
+    "P-S19",
+    "P-SC011",
+    "P-STACK",
+    "P-W4E"
+  ],
+  "matrix": "writer-output/W05/ACCEPTANCE_MATRIX.csv",
+  "matrix_sha256": "eaa4fd6fe4759cdf01c6f5c4c9c28dec6c681e95d5658f697aa04e19006f600a"
+}

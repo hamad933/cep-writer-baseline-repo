@@ -1,0 +1,965 @@
+{
+  "schemaVersion": 1,
+  "workspace": "W05",
+  "classification": "W05_EVIDENCE_INDEX__CANDIDATE_ONLY__NOT_OWNER_ACCEPTANCE",
+  "generatedAt": "2026-09-29T05:09:52.955597+00:00",
+  "candidate": "WORKTREE_VARIANT:c82cec63cb5f",
+  "candidateTree": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+  "commit": "f9d5a4d25163842db04e8e5bc7ec78132f88cc5f",
+  "measuredCandidateAtBrowserCapture": "WORKTREE_VARIANT:90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+  "measuredCandidateFileCount": 287,
+  "declaredCandidateFileCount": 287,
+  "lineageNote": "The dispatch-declared WORKTREE_VARIANT c82cec63\u2026/287 no longer recomputes because sibling writers are committing to writer/mi-serial concurrently. W05 records both identities instead of suppressing the drift; the shared assurance receipt was rebound to the live tree by `tools/writer-serial.sh npm run browser:test` (receipt sourceCanonicalTreeSha256 = live tree).",
+  "requirements": {
+    "path": "controller/09_writer_forge/W05_REQUIREMENTS.csv",
+    "rows": 2827,
+    "dispositioned": 2827,
+    "zero_loss": true,
+    "sha256": "a5d03bf1b7d4a9b274dc31b90e090789b80057f1668d687663da84f901a3e092",
+    "counts": {
+      "PASS": 2487,
+      "BLOCKED": 324,
+      "NOT_APPLICABLE_WITH_PROOF": 16
+    },
+    "per_surface": {
+      "audit": {
+        "PASS": 303,
+        "BLOCKED": 40,
+        "NOT_APPLICABLE_WITH_PROOF": 2
+      },
+      "backup": {
+        "PASS": 308,
+        "BLOCKED": 44,
+        "NOT_APPLICABLE_WITH_PROOF": 2
+      },
+      "configuration": {
+        "PASS": 305,
+        "BLOCKED": 40,
+        "NOT_APPLICABLE_WITH_PROOF": 2
+      },
+      "health": {
+        "PASS": 314,
+        "BLOCKED": 39,
+        "NOT_APPLICABLE_WITH_PROOF": 2
+      },
+      "manual_ai": {
+        "PASS": 309,
+        "BLOCKED": 41,
+        "NOT_APPLICABLE_WITH_PROOF": 2
+      },
+      "processing": {
+        "PASS": 320,
+        "BLOCKED": 39,
+        "NOT_APPLICABLE_WITH_PROOF": 2
+      },
+      "releases": {
+        "PASS": 311,
+        "BLOCKED": 41,
+        "NOT_APPLICABLE_WITH_PROOF": 2
+      },
+      "validation": {
+        "PASS": 317,
+        "BLOCKED": 40,
+        "NOT_APPLICABLE_WITH_PROOF": 2
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "path": "controller/09_writer_forge/W05_REQUIREMENTS.csv",
+      "kind": "requirement_input",
+      "exists": true,
+      "bytes": 4385773,
+      "sha256": "a5d03bf1b7d4a9b274dc31b90e090789b80057f1668d687663da84f901a3e092",
+      "command": "(read-only)",
+      "status": "BOUND",
+      "note": "2,827 obligation rows; sha256 bound in ACCEPTANCE_SUMMARY.requirements_sha256"
+    },
+    {
+      "path": "writer-output/W05/PROOF_CATALOG.json",
+      "kind": "proof_catalog",
+      "exists": true,
+      "bytes": 28695,
+      "sha256": "b66c03577e06b8f234e1d4afed4a44e4079edd6efdd8837b7128b34bbba33a9f",
+      "command": "python3 tools/writer-acceptance-matrix.py --workspace W05 (authoring)",
+      "status": "AUTHORED",
+      "note": "disjoint total partition: 15 rules, 24 proofs"
+    },
+    {
+      "path": "writer-output/W05/PROOF_RESULTS.json",
+      "kind": "measured_proof_results",
+      "exists": true,
+      "bytes": 76759,
+      "sha256": "be022a0dabd992d4e30853545ae2e2fbf1cb9d4ba19da9b23926da8d0f663023",
+      "command": "python3 tools/writer-acceptance-matrix.py --workspace W05 --run-proofs",
+      "status": "MEASURED",
+      "note": "24/24 proofs measured PASS"
+    },
+    {
+      "path": "writer-output/W05/ACCEPTANCE_MATRIX.csv",
+      "kind": "acceptance_matrix",
+      "exists": true,
+      "bytes": 5571960,
+      "sha256": "eaa4fd6fe4759cdf01c6f5c4c9c28dec6c681e95d5658f697aa04e19006f600a",
+      "command": "python3 tools/writer-acceptance-matrix.py --workspace W05",
+      "status": "GENERATED",
+      "note": "2,827 rows dispositioned, zero_loss=true"
+    },
+    {
+      "path": "writer-output/W05/ACCEPTANCE_SUMMARY.json",
+      "kind": "acceptance_summary",
+      "exists": true,
+      "bytes": 2766,
+      "sha256": "dfb81871140b8b0e9d503b603185f7932716012b364d2456910e524416349182",
+      "command": "python3 tools/writer-acceptance-matrix.py --workspace W05",
+      "status": "GENERATED",
+      "note": "counts: {\"PASS\": 2487, \"BLOCKED\": 324, \"NOT_APPLICABLE_WITH_PROOF\": 16}"
+    },
+    {
+      "path": "writer-output/W05/BROWSER_RECEIPT.json",
+      "kind": "browser_receipt",
+      "exists": true,
+      "bytes": 93280,
+      "sha256": "9076a0b0b985e7757af1068acb84716836c657715a39dc32b6d9423dffc56fa9",
+      "command": "node tools/w05-browser-flows.mjs",
+      "status": "MEASURED",
+      "note": "8 W05 flows, 8 PASS / 0 FAIL, 64 indexed screenshots (no orphans)"
+    },
+    {
+      "path": "assurance/MODEL_TEST_RESULTS.json",
+      "kind": "model_tests",
+      "exists": true,
+      "bytes": 81073,
+      "sha256": "f340e604f50f8e6b6d98291545779425d384149bc2febd0714df7eeb83827905",
+      "command": "tools/writer-serial.sh npm test",
+      "status": "MEASURED",
+      "note": "210 / 0"
+    },
+    {
+      "path": "assurance/BROWSER_CONFORMANCE_RECEIPT.json",
+      "kind": "shared_browser_receipt",
+      "exists": true,
+      "bytes": 10166,
+      "sha256": "60978e6934466ee5173b967348307a9146526c9a9a78fe8ee714cf501c0e1bb2",
+      "command": "tools/writer-serial.sh npm run browser:test",
+      "status": "MEASURED",
+      "note": "rebind proof: 6 shared flows 1 PASS / 5 FAIL (pre-classified, not W05-owned)"
+    },
+    {
+      "path": "assurance/CONTRACT_TEST_RESULTS.json",
+      "kind": "contract_check",
+      "exists": true,
+      "bytes": 27884,
+      "sha256": "bebd6cb1427c9cfaba118118334c855526ddfd82ac0f7a991ee58e46575ab39f",
+      "command": "tools/writer-serial.sh npm run check",
+      "status": "MEASURED",
+      "note": "exit 1 = 2 pre-existing browser.* failures, not W05-owned"
+    }
+  ],
+  "proofs": [
+    {
+      "id": "P-BACKUP-CAP",
+      "command": "node tools/w05-backup-capability-proof.mjs",
+      "artifact": "tools/w05-backup-capability-proof.mjs",
+      "kind": "capability_proof",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:04:01.534397+00:00"
+    },
+    {
+      "id": "P-BALANCED6",
+      "command": "node tools/balanced6-acceptance-tests.mjs",
+      "artifact": "tools/balanced6-acceptance-tests.mjs",
+      "kind": "seed_kernel_conformance",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:03:12.146353+00:00"
+    },
+    {
+      "id": "P-BROWSER",
+      "command": "node tools/w05-browser-flows.mjs",
+      "artifact": "tools/w05-browser-flows.mjs",
+      "kind": "browser",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:03:14.521747+00:00"
+    },
+    {
+      "id": "P-CG6",
+      "command": "node dist/tests/rescue/CG6_W05_COVERAGE/cg6-w05-coverage.test.js",
+      "artifact": "stack/native-typescript/tests/rescue/CG6_W05_COVERAGE/cg6-w05-coverage.test.ts",
+      "kind": "contract",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:04:00.910053+00:00"
+    },
+    {
+      "id": "P-CG6-TRUTH",
+      "command": "node dist/tests/rescue/CG6_W05_COVERAGE/controller-corr01-w05-truth.test.js",
+      "artifact": "stack/native-typescript/tests/rescue/CG6_W05_COVERAGE/controller-corr01-w05-truth.test.ts",
+      "kind": "contract",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:04:01.332561+00:00"
+    },
+    {
+      "id": "P-CONFIGURATION-SURFACE",
+      "command": "node dist/tests/surfaces/configuration/configuration-tests.js",
+      "artifact": "stack/native-typescript/tests/surfaces/configuration/configuration-tests.ts",
+      "kind": "surface_route_test",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:04:01.930750+00:00"
+    },
+    {
+      "id": "P-D11",
+      "command": "node dist/tests/post-c03/D11/d11-w05-provider-integration-tests.js",
+      "artifact": "stack/native-typescript/tests/post-c03/D11/d11-w05-provider-integration-tests.ts",
+      "kind": "integration",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:03:14.222714+00:00"
+    },
+    {
+      "id": "P-HEALTH-CAP",
+      "command": "node tools/w05-health-capability-proof.mjs",
+      "artifact": "tools/w05-health-capability-proof.mjs",
+      "kind": "capability_proof",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:04:00.243914+00:00"
+    },
+    {
+      "id": "P-HTTP",
+      "command": "node tools/w05-runtime-http-integration.mjs",
+      "artifact": "tools/w05-runtime-http-integration.mjs",
+      "kind": "capability_proof",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:04:00.310725+00:00"
+    },
+    {
+      "id": "P-MANUALAI-SURFACE",
+      "command": "node dist/tests/surfaces/manual_ai/manual-ai-tests.js",
+      "artifact": "stack/native-typescript/tests/surfaces/manual_ai/manual-ai-tests.ts",
+      "kind": "surface_route_test",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:04:01.233277+00:00"
+    },
+    {
+      "id": "P-MODEL",
+      "command": "tools/writer-serial.sh npm test",
+      "artifact": "assurance/MODEL_TEST_RESULTS.json",
+      "kind": "model_test",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:02:59.809174+00:00"
+    },
+    {
+      "id": "P-PC1",
+      "command": "node stack/native-typescript/tests/rescue/PC1_W05_PROVIDER_PERSISTENCE/provider-persistence-falsification.mjs",
+      "artifact": "stack/native-typescript/tests/rescue/PC1_W05_PROVIDER_PERSISTENCE/provider-persistence-falsification.mjs",
+      "kind": "falsification",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:03:13.197477+00:00"
+    },
+    {
+      "id": "P-PC1-SEAM",
+      "command": "node stack/native-typescript/tests/rescue/PC1_W05_PROVIDER_PERSISTENCE/server-provider-seam-smoke.mjs",
+      "artifact": "stack/native-typescript/tests/rescue/PC1_W05_PROVIDER_PERSISTENCE/server-provider-seam-smoke.mjs",
+      "kind": "contract",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:03:13.552511+00:00"
+    },
+    {
+      "id": "P-PROC-CAP",
+      "command": "node tools/w05-processing-capability-proof.mjs",
+      "artifact": "tools/w05-processing-capability-proof.mjs",
+      "kind": "capability_proof",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:04:01.047583+00:00"
+    },
+    {
+      "id": "P-PSC",
+      "command": "node tools/psc-runtime-falsification.mjs",
+      "artifact": "tools/psc-runtime-falsification.mjs",
+      "kind": "falsification",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:03:10.794850+00:00"
+    },
+    {
+      "id": "P-RELEASES-SURFACE",
+      "command": "node dist/tests/surfaces/releases/releases-tests.js",
+      "artifact": "stack/native-typescript/tests/surfaces/releases/releases-tests.ts",
+      "kind": "surface_route_test",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:04:01.817131+00:00"
+    },
+    {
+      "id": "P-S16",
+      "command": "node dist/tests/rescue/S16_W05_HEALTH_PROCESSING/s16-health-processing-tests.js",
+      "artifact": "stack/native-typescript/tests/rescue/S16_W05_HEALTH_PROCESSING/s16-health-processing-tests.ts",
+      "kind": "surface_route_test",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:04:00.172740+00:00"
+    },
+    {
+      "id": "P-S17",
+      "command": "node dist/tests/rescue/S17_W05_VALIDATION_MANUAL_AI/s17-tests.js",
+      "artifact": "stack/native-typescript/tests/rescue/S17_W05_VALIDATION_MANUAL_AI/s17-tests.ts",
+      "kind": "surface_route_test",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:04:01.123784+00:00"
+    },
+    {
+      "id": "P-S18-BOUNDARY",
+      "command": "node dist/tests/rescue/S18_W05_BACKUP_AUDIT/source-boundary-tests.js",
+      "artifact": "stack/native-typescript/tests/rescue/S18_W05_BACKUP_AUDIT/source-boundary-tests.ts",
+      "kind": "contract",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:04:01.475812+00:00"
+    },
+    {
+      "id": "P-S18-DOMAIN",
+      "command": "node dist/tests/rescue/S18_W05_BACKUP_AUDIT/domain-tests.js",
+      "artifact": "stack/native-typescript/tests/rescue/S18_W05_BACKUP_AUDIT/domain-tests.ts",
+      "kind": "surface_route_test",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:04:01.393564+00:00"
+    },
+    {
+      "id": "P-S19",
+      "command": "node dist/tests/rescue/S19_W05_RELEASES_CONFIGURATION/s19-tests.js",
+      "artifact": "stack/native-typescript/tests/rescue/S19_W05_RELEASES_CONFIGURATION/s19-tests.ts",
+      "kind": "surface_route_test",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:04:01.695692+00:00"
+    },
+    {
+      "id": "P-SC011",
+      "command": "node dist/tests/post-c03/D03A/d03a-command-settings-convergence-tests.js",
+      "artifact": "stack/native-typescript/tests/post-c03/D03A/d03a-command-settings-convergence-tests.ts",
+      "kind": "contract",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:04:02.271538+00:00"
+    },
+    {
+      "id": "P-STACK",
+      "command": "node tools/w05-stack-admission-proof.mjs",
+      "artifact": "tools/w05-stack-admission-proof.mjs",
+      "kind": "checker",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:03:12.804467+00:00"
+    },
+    {
+      "id": "P-W4E",
+      "command": "node dist/w4-e-settings-center-tests.js",
+      "artifact": "w4-e-settings-center-tests.ts",
+      "kind": "contract",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "executedAt": "2026-09-29T05:04:02.031065+00:00"
+    }
+  ],
+  "browserFlows": [
+    {
+      "flow": "audit.trail-recording",
+      "route": "/?surface=audit",
+      "status": "PASS",
+      "failureClassification": null,
+      "assertions": 16,
+      "failedAssertions": [],
+      "screenshots": [
+        "writer-output/W05/evidence/audit-trail-recording-after-search-20260929T050351Z-c82cec63.png",
+        "writer-output/W05/evidence/audit-trail-recording-after-verify-20260929T050353Z-c82cec63.png",
+        "writer-output/W05/evidence/audit-trail-recording-after-annotate-20260929T050353Z-c82cec63.png"
+      ],
+      "screenshotSha256": [
+        "e6d7d03cab94fa7df81bb8e8fd34c9c04fd7e19dce41f89496b5bcd6f142edb1",
+        "08bc3e15123147ad034464759707db53e54f2e51d5eaef6a07aa822c6c54e69c",
+        "08bc3e15123147ad034464759707db53e54f2e51d5eaef6a07aa822c6c54e69c"
+      ],
+      "negativeCases": [
+        "command receipts must not be counted as audit events",
+        "hash must not be presented as encryption",
+        "database immutability must not be claimed",
+        "annotate must not fabricate an event when the target does not exist"
+      ],
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": null,
+      "transport": "localhost-http",
+      "environment": {
+        "node": "v22.16.0",
+        "engine": "Playwright Chromium",
+        "playwrightResolution": "package-local",
+        "packageDeclaredVersion": "1.62.1",
+        "transport": "localhost-http",
+        "proofServer": "tools/serve.mjs on 127.0.0.1:34879",
+        "runtimeServer": "stack/local-runtime/server.mjs on 127.0.0.1:34573 (throwaway sqlite at writer-output/W05/.runtime-proof)",
+        "viewport": "1440x980",
+        "reducedMotion": true,
+        "browserExecutableOverride": false,
+        "browserVersion": "151.0.7922.34"
+      },
+      "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+      "measuredCandidate": "WORKTREE_VARIANT:90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+      "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+      "tree": "1fc29a81ff17fde696ab1a1ef72c33ba61cc4141",
+      "evidenceLineage": {
+        "bindingAlgorithm": "path\\0size\\0sha256\\n (tools/source-tree-identity.mjs)",
+        "recomputedCandidateTreeSha256": "90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+        "recomputedCandidateFileCount": 287,
+        "expectedCandidateTreeSha256": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "expectedCandidateFileCount": 287,
+        "lineageStatus": "DRIFT_RECORDED__CONCURRENT_SIBLING_WORKSPACE_EDITS",
+        "drift": true,
+        "driftAttribution": "Sibling workspaces edit the shared serial worktree concurrently; W05 records the drift instead of suppressing it.",
+        "note": "Worktree variant candidate (3 protected pre-existing canonical deltas) \u2014 never presented as the canonical 480dbe\u2026/273 identity."
+      },
+      "fixtureState": "durable JSONL audit log owned by the throwaway runtime database of this run",
+      "preconditions": [
+        "local runtime API reachable",
+        "durable AuditEventProvider JSONL carries the events recorded by this run's earlier processing/backup operations",
+        "app booted with CEPFoundation.consumer === \"audit\""
+      ],
+      "actionSequence": [
+        "GET /?surface=audit&persistencePort=34573",
+        "click product command audit.search",
+        "click product command audit.verify"
+      ],
+      "expectedState": "search lists durable AuditEvents, verify returns a hash-chain verdict, annotations are stored separately and never mutate AuditEvent bytes",
+      "pageErrors": [],
+      "transportFailures": 2
+    },
+    {
+      "flow": "backup.restore-round-trip",
+      "route": "/?surface=backup",
+      "status": "PASS",
+      "failureClassification": null,
+      "assertions": 18,
+      "failedAssertions": [],
+      "screenshots": [
+        "writer-output/W05/evidence/backup-restore-round-trip-after-package-20260929T050341Z-c82cec63.png",
+        "writer-output/W05/evidence/backup-restore-round-trip-after-stage-20260929T050344Z-c82cec63.png",
+        "writer-output/W05/evidence/backup-restore-round-trip-after-drill-20260929T050346Z-c82cec63.png",
+        "writer-output/W05/evidence/backup-restore-round-trip-after-activation-20260929T050347Z-c82cec63.png"
+      ],
+      "screenshotSha256": [
+        "56e6fdcffe6451293e9b446a63263c522e78d738e2fdab40fccab408e7988616",
+        "695029849f34a9545a92dc06e60ab6bc4cf8a0059eb3961a66eced5b34399ac0",
+        "aa6a6f3e8ca3624fb38df4912f8edaca48dc7ea2c66a98b9c6dbc5cc893bbc71",
+        "39e13848445f53e33b5bc294ddf419056693e3f1cc9aa1f499ac95f33ca33c06"
+      ],
+      "negativeCases": [
+        "drill must not claim a live restore",
+        "activation request must not mutate the production database",
+        "activation must stay pending without explicit authority"
+      ],
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": null,
+      "transport": "localhost-http",
+      "environment": {
+        "node": "v22.16.0",
+        "engine": "Playwright Chromium",
+        "playwrightResolution": "package-local",
+        "packageDeclaredVersion": "1.62.1",
+        "transport": "localhost-http",
+        "proofServer": "tools/serve.mjs on 127.0.0.1:34879",
+        "runtimeServer": "stack/local-runtime/server.mjs on 127.0.0.1:34573 (throwaway sqlite at writer-output/W05/.runtime-proof)",
+        "viewport": "1440x980",
+        "reducedMotion": true,
+        "browserExecutableOverride": false,
+        "browserVersion": "151.0.7922.34"
+      },
+      "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+      "measuredCandidate": "WORKTREE_VARIANT:90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+      "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+      "tree": "1fc29a81ff17fde696ab1a1ef72c33ba61cc4141",
+      "evidenceLineage": {
+        "bindingAlgorithm": "path\\0size\\0sha256\\n (tools/source-tree-identity.mjs)",
+        "recomputedCandidateTreeSha256": "90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+        "recomputedCandidateFileCount": 287,
+        "expectedCandidateTreeSha256": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "expectedCandidateFileCount": 287,
+        "lineageStatus": "DRIFT_RECORDED__CONCURRENT_SIBLING_WORKSPACE_EDITS",
+        "drift": true,
+        "driftAttribution": "Sibling workspaces edit the shared serial worktree concurrently; W05 records the drift instead of suppressing it.",
+        "note": "Worktree variant candidate (3 protected pre-existing canonical deltas) \u2014 never presented as the canonical 480dbe\u2026/273 identity."
+      },
+      "fixtureState": "runtime-seeded document + throwaway sqlite database owned by this proof run",
+      "preconditions": [
+        "local runtime API reachable",
+        "one structured document bootstrapped so the package has real content",
+        "app booted with CEPFoundation.consumer === \"backup\""
+      ],
+      "actionSequence": [
+        "GET /?surface=backup&persistencePort=34573",
+        "click product command backup.package",
+        "click product command backup.plan",
+        "click product command backup.preview",
+        "click product command backup.stage",
+        "click product command backup.drill",
+        "click product command backup.activationRequest"
+      ],
+      "expectedState": "package \u2192 plan \u2192 preview \u2192 stage \u2192 isolated drill \u2192 activation request; STAGED_AND_VERIFIED is never LIVE_RESTORED; activation stays AUTHORITY_PENDING and the production database is never mutated",
+      "pageErrors": [],
+      "transportFailures": 2
+    },
+    {
+      "flow": "configuration.sc011-transfer",
+      "route": "/?surface=configuration",
+      "status": "PASS",
+      "failureClassification": null,
+      "assertions": 16,
+      "failedAssertions": [],
+      "screenshots": [
+        "writer-output/W05/evidence/configuration-sc011-transfer-configuration-boundary-20260929T050357Z-c82cec63.png",
+        "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-20260929T050359Z-c82cec63.png",
+        "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-done-20260929T050359Z-c82cec63.png"
+      ],
+      "screenshotSha256": [
+        "63f1d06341025eec41c84f172672d9d567cc4a9c931af21f8d1a56d96c756d45",
+        "1276331fb29966a80ae21421f2974d52b3dd71d890328e58dc19f7731f477f6a",
+        "1276331fb29966a80ae21421f2974d52b3dd71d890328e58dc19f7731f477f6a"
+      ],
+      "negativeCases": [
+        "edit must not mutate operational configuration",
+        "validate must not imply apply",
+        "reset must not factory-reset operational configuration",
+        "Settings must not dispatch an operational configuration apply",
+        "preference import must not clobber unscoped (session) state"
+      ],
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": null,
+      "transport": "localhost-http",
+      "environment": {
+        "node": "v22.16.0",
+        "engine": "Playwright Chromium",
+        "playwrightResolution": "package-local",
+        "packageDeclaredVersion": "1.62.1",
+        "transport": "localhost-http",
+        "proofServer": "tools/serve.mjs on 127.0.0.1:34879",
+        "runtimeServer": "stack/local-runtime/server.mjs on 127.0.0.1:34573 (throwaway sqlite at writer-output/W05/.runtime-proof)",
+        "viewport": "1440x980",
+        "reducedMotion": true,
+        "browserExecutableOverride": false,
+        "browserVersion": "151.0.7922.34"
+      },
+      "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+      "measuredCandidate": "WORKTREE_VARIANT:90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+      "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+      "tree": "1fc29a81ff17fde696ab1a1ef72c33ba61cc4141",
+      "evidenceLineage": {
+        "bindingAlgorithm": "path\\0size\\0sha256\\n (tools/source-tree-identity.mjs)",
+        "recomputedCandidateTreeSha256": "90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+        "recomputedCandidateFileCount": 287,
+        "expectedCandidateTreeSha256": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "expectedCandidateFileCount": 287,
+        "lineageStatus": "DRIFT_RECORDED__CONCURRENT_SIBLING_WORKSPACE_EDITS",
+        "drift": true,
+        "driftAttribution": "Sibling workspaces edit the shared serial worktree concurrently; W05 records the drift instead of suppressing it.",
+        "note": "Worktree variant candidate (3 protected pre-existing canonical deltas) \u2014 never presented as the canonical 480dbe\u2026/273 identity."
+      },
+      "fixtureState": "default operational observations from the local runtime capability advertisement",
+      "preconditions": [
+        "app booted with CEPFoundation.consumer === \"configuration\"",
+        "canonical Settings opens through the shared foundation.settings command"
+      ],
+      "actionSequence": [
+        "GET /?surface=configuration&persistencePort=34573",
+        "open canonical Settings through the shared foundation.settings command",
+        "click product command foundation.settings"
+      ],
+      "expectedState": "operational configuration is observe/propose/validate only, apply requires explicit authority, Global Settings stays a separate owner, SC-011 export/import/reset is exposed once through settings.transfer",
+      "pageErrors": [],
+      "transportFailures": 2
+    },
+    {
+      "flow": "health.refresh-inspect-diagnose",
+      "route": "/?surface=health",
+      "status": "PASS",
+      "failureClassification": null,
+      "assertions": 15,
+      "failedAssertions": [],
+      "screenshots": [
+        "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-refresh-20260929T050322Z-c82cec63.png",
+        "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-inspect-20260929T050323Z-c82cec63.png",
+        "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-diagnose-20260929T050325Z-c82cec63.png"
+      ],
+      "screenshotSha256": [
+        "b15dd41524f0ba045a10bea755ed8b452e6fe6838ee372a540f14b3505afdaa1",
+        "34fad1e1c4859746339fb5542eb21d6872fdfe67a45d2b2d0fe34af94c3aa56b",
+        "d7b2f24098597f341449279146de1feb99c860e89856d9179167b379eae00022"
+      ],
+      "negativeCases": [
+        "queue depth is a QueueMetric and must not be presented as worker liveness",
+        "persistence health must not alias product health",
+        "refresh must not create a diagnostic"
+      ],
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": null,
+      "transport": "localhost-http",
+      "environment": {
+        "node": "v22.16.0",
+        "engine": "Playwright Chromium",
+        "playwrightResolution": "package-local",
+        "packageDeclaredVersion": "1.62.1",
+        "transport": "localhost-http",
+        "proofServer": "tools/serve.mjs on 127.0.0.1:34879",
+        "runtimeServer": "stack/local-runtime/server.mjs on 127.0.0.1:34573 (throwaway sqlite at writer-output/W05/.runtime-proof)",
+        "viewport": "1440x980",
+        "reducedMotion": true,
+        "browserExecutableOverride": false,
+        "browserVersion": "151.0.7922.34"
+      },
+      "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+      "measuredCandidate": "WORKTREE_VARIANT:90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+      "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+      "tree": "1fc29a81ff17fde696ab1a1ef72c33ba61cc4141",
+      "evidenceLineage": {
+        "bindingAlgorithm": "path\\0size\\0sha256\\n (tools/source-tree-identity.mjs)",
+        "recomputedCandidateTreeSha256": "90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+        "recomputedCandidateFileCount": 287,
+        "expectedCandidateTreeSha256": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "expectedCandidateFileCount": 287,
+        "lineageStatus": "DRIFT_RECORDED__CONCURRENT_SIBLING_WORKSPACE_EDITS",
+        "drift": true,
+        "driftAttribution": "Sibling workspaces edit the shared serial worktree concurrently; W05 records the drift instead of suppressing it.",
+        "note": "Worktree variant candidate (3 protected pre-existing canonical deltas) \u2014 never presented as the canonical 480dbe\u2026/273 identity."
+      },
+      "fixtureState": "fresh local-runtime sqlite database for this run; no fixture mutation of observations",
+      "preconditions": [
+        "local runtime API process reachable on the bound persistence port",
+        "app booted with CEPFoundation.consumer === \"health\"",
+        "no diagnostic exists before the explicit diagnose action"
+      ],
+      "actionSequence": [
+        "GET /?surface=health&persistencePort=34573",
+        "click product command health.refresh",
+        "click product command health.inspect",
+        "click product command health.diagnose"
+      ],
+      "expectedState": "refresh re-observes provider state without creating a diagnostic; inspect returns one exact observation; diagnose produces a durable receipt; UNAVAILABLE/STALE/ERROR never render green by fallback",
+      "pageErrors": [],
+      "transportFailures": 2
+    },
+    {
+      "flow": "manual-ai.bridge-truthful-ceilings",
+      "route": "/?surface=manual_ai",
+      "status": "PASS",
+      "failureClassification": null,
+      "assertions": 12,
+      "failedAssertions": [],
+      "screenshots": [
+        "writer-output/W05/evidence/manual-ai-bridge-truthful-ceilings-ceilings-20260929T050338Z-c82cec63.png"
+      ],
+      "screenshotSha256": [
+        "63215d07670a664c2e727f5e1ee33fa91a811b5c6945c76379935121d567cff6"
+      ],
+      "negativeCases": [
+        "export with no helper must not call a provider",
+        "accept must never publish canonically",
+        "the default product composition must not carry an export helper or draft sink"
+      ],
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": null,
+      "transport": "localhost-http",
+      "environment": {
+        "node": "v22.16.0",
+        "engine": "Playwright Chromium",
+        "playwrightResolution": "package-local",
+        "packageDeclaredVersion": "1.62.1",
+        "transport": "localhost-http",
+        "proofServer": "tools/serve.mjs on 127.0.0.1:34879",
+        "runtimeServer": "stack/local-runtime/server.mjs on 127.0.0.1:34573 (throwaway sqlite at writer-output/W05/.runtime-proof)",
+        "viewport": "1440x980",
+        "reducedMotion": true,
+        "browserExecutableOverride": false,
+        "browserVersion": "151.0.7922.34"
+      },
+      "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+      "measuredCandidate": "WORKTREE_VARIANT:90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+      "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+      "tree": "1fc29a81ff17fde696ab1a1ef72c33ba61cc4141",
+      "evidenceLineage": {
+        "bindingAlgorithm": "path\\0size\\0sha256\\n (tools/source-tree-identity.mjs)",
+        "recomputedCandidateTreeSha256": "90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+        "recomputedCandidateFileCount": 287,
+        "expectedCandidateTreeSha256": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "expectedCandidateFileCount": 287,
+        "lineageStatus": "DRIFT_RECORDED__CONCURRENT_SIBLING_WORKSPACE_EDITS",
+        "drift": true,
+        "driftAttribution": "Sibling workspaces edit the shared serial worktree concurrently; W05 records the drift instead of suppressing it.",
+        "note": "Worktree variant candidate (3 protected pre-existing canonical deltas) \u2014 never presented as the canonical 480dbe\u2026/273 identity."
+      },
+      "fixtureState": "one prepared proposal created through the product command bus by this run",
+      "preconditions": [
+        "app booted with CEPFoundation.consumer === \"manual_ai\"",
+        "no export helper and no DraftSink injected into the default product composition"
+      ],
+      "actionSequence": [
+        "GET /?surface=manual_ai&persistencePort=34573",
+        "execute manual_ai.draft through the canonical semantic command bus",
+        "click product command manual_ai.export"
+      ],
+      "expectedState": "providerMode is MANUAL_ONLY_PROVIDER_NEUTRAL, hiddenProviderCalls stays 0, automaticCanonicalPublication stays false, export without a helper returns a packet instead of calling a provider",
+      "pageErrors": [],
+      "transportFailures": 2
+    },
+    {
+      "flow": "processing.inspect-retry-requestCancel-validationHandoff",
+      "route": "/?surface=processing",
+      "status": "PASS",
+      "failureClassification": null,
+      "assertions": 14,
+      "failedAssertions": [],
+      "screenshots": [
+        "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-inspect-20260929T050328Z-c82cec63.png",
+        "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-cancel-and-handoff-20260929T050329Z-c82cec63.png"
+      ],
+      "screenshotSha256": [
+        "0db3ab5bf6f2a2fd1cf5157a1248f36cd6e869091b3f78d8259cf8b89da103d2",
+        "8fe48e3c46f61fe738d0a81402731436d28d83cc8f57f776842c6c2e39266396"
+      ],
+      "negativeCases": [
+        "retry must not be offered for a COMPLETED job",
+        "CANCEL_REQUESTED must not be reported as CANCELLED before ack",
+        "validation handoff PENDING must not be reported as acknowledged"
+      ],
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": null,
+      "transport": "localhost-http",
+      "environment": {
+        "node": "v22.16.0",
+        "engine": "Playwright Chromium",
+        "playwrightResolution": "package-local",
+        "packageDeclaredVersion": "1.62.1",
+        "transport": "localhost-http",
+        "proofServer": "tools/serve.mjs on 127.0.0.1:34879",
+        "runtimeServer": "stack/local-runtime/server.mjs on 127.0.0.1:34573 (throwaway sqlite at writer-output/W05/.runtime-proof)",
+        "viewport": "1440x980",
+        "reducedMotion": true,
+        "browserExecutableOverride": false,
+        "browserVersion": "151.0.7922.34"
+      },
+      "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+      "measuredCandidate": "WORKTREE_VARIANT:90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+      "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+      "tree": "1fc29a81ff17fde696ab1a1ef72c33ba61cc4141",
+      "evidenceLineage": {
+        "bindingAlgorithm": "path\\0size\\0sha256\\n (tools/source-tree-identity.mjs)",
+        "recomputedCandidateTreeSha256": "90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+        "recomputedCandidateFileCount": 287,
+        "expectedCandidateTreeSha256": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "expectedCandidateFileCount": 287,
+        "lineageStatus": "DRIFT_RECORDED__CONCURRENT_SIBLING_WORKSPACE_EDITS",
+        "drift": true,
+        "driftAttribution": "Sibling workspaces edit the shared serial worktree concurrently; W05 records the drift instead of suppressing it.",
+        "note": "Worktree variant candidate (3 protected pre-existing canonical deltas) \u2014 never presented as the canonical 480dbe\u2026/273 identity."
+      },
+      "fixtureState": "runtime-seeded Jobs created over HTTP by this proof run against a throwaway sqlite database",
+      "preconditions": [
+        "local runtime API reachable",
+        "two Jobs exist for this run (one completed through a real provider run, one cancelled through the ack path)",
+        "app booted with CEPFoundation.consumer === \"processing\""
+      ],
+      "actionSequence": [
+        "GET /?surface=processing&persistencePort=34573",
+        "click product command processing.inspect",
+        "click product command processing.requestCancel"
+      ],
+      "expectedState": "job/attempt identity stays distinct, retry is only offered for FAILED/TIMED_OUT, cancel request \u2260 cancel success until provider ack, validation handoff stays PENDING until the real consumer acks",
+      "pageErrors": [],
+      "transportFailures": 2
+    },
+    {
+      "flow": "releases.view",
+      "route": "/?surface=releases",
+      "status": "PASS",
+      "failureClassification": null,
+      "assertions": 9,
+      "failedAssertions": [],
+      "screenshots": [
+        "writer-output/W05/evidence/releases-view-empty-truth-20260929T050355Z-c82cec63.png",
+        "writer-output/W05/evidence/releases-view-compare-blocked-20260929T050355Z-c82cec63.png"
+      ],
+      "screenshotSha256": [
+        "816e570357fffba710b6cc4055f5356dbfb8f1ba6a48faa35ba96a9052b90228",
+        "816e570357fffba710b6cc4055f5356dbfb8f1ba6a48faa35ba96a9052b90228"
+      ],
+      "negativeCases": [
+        "readiness must not be presented as authorization",
+        "authorization must not be presented as deployment",
+        "compare without an exact pair must fail closed",
+        "the adapter must never synthesise a local compare owner"
+      ],
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": null,
+      "transport": "localhost-http",
+      "environment": {
+        "node": "v22.16.0",
+        "engine": "Playwright Chromium",
+        "playwrightResolution": "package-local",
+        "packageDeclaredVersion": "1.62.1",
+        "transport": "localhost-http",
+        "proofServer": "tools/serve.mjs on 127.0.0.1:34879",
+        "runtimeServer": "stack/local-runtime/server.mjs on 127.0.0.1:34573 (throwaway sqlite at writer-output/W05/.runtime-proof)",
+        "viewport": "1440x980",
+        "reducedMotion": true,
+        "browserExecutableOverride": false,
+        "browserVersion": "151.0.7922.34"
+      },
+      "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+      "measuredCandidate": "WORKTREE_VARIANT:90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+      "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+      "tree": "1fc29a81ff17fde696ab1a1ef72c33ba61cc4141",
+      "evidenceLineage": {
+        "bindingAlgorithm": "path\\0size\\0sha256\\n (tools/source-tree-identity.mjs)",
+        "recomputedCandidateTreeSha256": "90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+        "recomputedCandidateFileCount": 287,
+        "expectedCandidateTreeSha256": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "expectedCandidateFileCount": 287,
+        "lineageStatus": "DRIFT_RECORDED__CONCURRENT_SIBLING_WORKSPACE_EDITS",
+        "drift": true,
+        "driftAttribution": "Sibling workspaces edit the shared serial worktree concurrently; W05 records the drift instead of suppressing it.",
+        "note": "Worktree variant candidate (3 protected pre-existing canonical deltas) \u2014 never presented as the canonical 480dbe\u2026/273 identity."
+      },
+      "fixtureState": "no ReleaseCandidate seeded \u2014 the truthful empty state is the product state under test",
+      "preconditions": [
+        "app booted with CEPFoundation.consumer === \"releases\"",
+        "the controller-injected shared AnalyticalCompareOwner is bound by the W05 composition seam"
+      ],
+      "actionSequence": [
+        "GET /?surface=releases&persistencePort=34573"
+      ],
+      "expectedState": "technical readiness, Owner authorization and deployment observation stay three separate truths; compare requires two exact candidates; an empty candidate set never renders green readiness",
+      "pageErrors": [],
+      "transportFailures": 2
+    },
+    {
+      "flow": "validation.flow",
+      "route": "/?surface=validation",
+      "status": "PASS",
+      "failureClassification": null,
+      "assertions": 7,
+      "failedAssertions": [],
+      "screenshots": [
+        "writer-output/W05/evidence/validation-flow-after-validate-20260929T050333Z-c82cec63.png",
+        "writer-output/W05/evidence/validation-flow-after-findings-20260929T050334Z-c82cec63.png"
+      ],
+      "screenshotSha256": [
+        "5ca93f68fcd6d5d4e160e2c95c937f0421aa436fc43e06c93f967434e752f2b0",
+        "10f09b1372d9ba6fcb882d1ff52a475df1339692dceaeed7b0ce6b0693f4acca"
+      ],
+      "negativeCases": [
+        "technical findings must not appear in the formal review snapshot",
+        "missing validator identity must yield UNAVAILABLE, never PASS"
+      ],
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": null,
+      "transport": "localhost-http",
+      "environment": {
+        "node": "v22.16.0",
+        "engine": "Playwright Chromium",
+        "playwrightResolution": "package-local",
+        "packageDeclaredVersion": "1.62.1",
+        "transport": "localhost-http",
+        "proofServer": "tools/serve.mjs on 127.0.0.1:34879",
+        "runtimeServer": "stack/local-runtime/server.mjs on 127.0.0.1:34573 (throwaway sqlite at writer-output/W05/.runtime-proof)",
+        "viewport": "1440x980",
+        "reducedMotion": true,
+        "browserExecutableOverride": false,
+        "browserVersion": "151.0.7922.34"
+      },
+      "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+      "measuredCandidate": "WORKTREE_VARIANT:90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+      "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+      "tree": "1fc29a81ff17fde696ab1a1ef72c33ba61cc4141",
+      "evidenceLineage": {
+        "bindingAlgorithm": "path\\0size\\0sha256\\n (tools/source-tree-identity.mjs)",
+        "recomputedCandidateTreeSha256": "90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+        "recomputedCandidateFileCount": 287,
+        "expectedCandidateTreeSha256": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "expectedCandidateFileCount": 287,
+        "lineageStatus": "DRIFT_RECORDED__CONCURRENT_SIBLING_WORKSPACE_EDITS",
+        "drift": true,
+        "driftAttribution": "Sibling workspaces edit the shared serial worktree concurrently; W05 records the drift instead of suppressing it.",
+        "note": "Worktree variant candidate (3 protected pre-existing canonical deltas) \u2014 never presented as the canonical 480dbe\u2026/273 identity."
+      },
+      "fixtureState": "product-provided sample payload; no fixture mutation",
+      "preconditions": [
+        "app booted with CEPFoundation.consumer === \"validation\"",
+        "sample artifact payload is pre-filled by the product"
+      ],
+      "actionSequence": [
+        "GET /?surface=validation&persistencePort=34573",
+        "click product command validation.validate",
+        "click product command validation.findings"
+      ],
+      "expectedState": "validate produces a TECHNICALLY_VALID result bound to exact artifact/ruleset/validator identity; findings stay technical and never become W04 review findings",
+      "pageErrors": [],
+      "transportFailures": 2
+    }
+  ],
+  "locationResolutions": {
+    "HEALTH": "stack/native-typescript/adapters/health-runtime.ts",
+    "PROCESSING": "stack/native-typescript/adapters/processing-runtime.ts",
+    "VALIDATION": "stack/native-typescript/surfaces/validation/ + adapters/validation.ts",
+    "MANUAL_AI": "stack/native-typescript/adapters/manual_ai/domain-adapter.ts + surfaces/manual_ai/composition.ts",
+    "BACKUP": "stack/native-typescript/adapters/backup-runtime.ts + surfaces/backup/",
+    "AUDIT": "stack/native-typescript/adapters/audit.ts + surfaces/audit/",
+    "RELEASES": "stack/native-typescript/adapters/releases/ + surfaces/releases/",
+    "CONFIGURATION": "stack/native-typescript/adapters/configuration/ + surfaces/configuration/",
+    "SEAM": "stack/native-typescript/surfaces/composition/w05-rescue.ts (W05-group seam)",
+    "PERSISTENCE": "stack/local-runtime/persistence/** (persistence kernel + Balanced6 seed)",
+    "SC011": "stack/native-typescript/foundation/global/settings/ + foundation/global/preferences/"
+  },
+  "duplicationBanHeld": {
+    "adapters/surfaces/*": false,
+    "surfaces/{health,processing}/**": false,
+    "note": "No adapters/surfaces/ module and no surfaces/health|processing tree was created; health/processing remain in adapters/health-runtime.ts and adapters/processing-runtime.ts (packet \u00a73 duplication ban)."
+  },
+  "limitations": [
+    "Owner-device Windows native-target proof (C03-GATE-021) not executed \u2014 those rows are BLOCKED with runner type stated",
+    "Q-6 Manual-AI provenance mechanism undecided \u2014 2 rows BLOCKED with Q-6 named",
+    "106 ZL01_FORWARD_GAP rows BLOCKED on missing Stage3 mission material",
+    "No Owner acceptance, no Controller acceptance, no product freeze is claimed"
+  ]
+}
