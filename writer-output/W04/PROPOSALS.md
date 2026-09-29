@@ -68,3 +68,52 @@ that workspace-scoped evidence avoids this shared-resource collision (packet §1
   `stack/native-typescript/surfaces/m0-controller-composition.ts` were never edited; the reviews-route
   mount defect was fixed inside `surfaces/reviews/index.ts`.
 * **No registry / profile / contract changes.**
+
+---
+
+## P-W04-04 · falsifier ↔ shared D3 bottom-shelf fix — **truth-law conflict created in parallel**
+
+`node tools/c2-w04-truth/falsify-w04-truth.mjs` check **`composition-static-negative-falsification`**
+now FAILs (the run went 4/9 → 3/9 for this reason only). The check asserts that
+`stack/native-typescript/surfaces/m0-controller-composition.ts` does **not** contain `.slice(0,3)`
+(a historical *truncation* defect). The shared-component owner's D3 bottom-shelf fix introduced
+`bottomValueSummary` with `value.slice(0,3)` to summarise deep-projection values inside the shelf title.
+
+Both readings are defensible: the original defect truncated **displayed content**; the new use
+summarises a **label**. W04 did not adjudicate either way and changed neither side — weakening a
+truth-law falsifier from a surface Writer would be exactly the silent adjudication the packet forbids.
+
+**Requested:** Controller/Owner rule whether `bottomValueSummary`'s label summarisation is inside the
+falsifier's scope (and if so, whether the check should be narrowed to *content* paths) — or route the
+`m0` hunk back to the shared-component owner for a summarisation that needs no slice.
+
+**Note:** this check is the only W04-owned tool that moved from PASS to FAIL this round; every other
+W04 proof is green (`npm test` 210/0 · browser flows 5/5 · seam proof 14/14 · F-051 11/11 ·
+`w04-reaudit-proofs` 86/86 · `presentation.test.js` PASS).
+
+---
+
+## P-W04-05 · P3 (`portfolio.curate` label) closed WITHOUT a serialized hotspot — for the record
+
+The visual re-audit's **P3** wanted `portfolio.curate` relabelled; the label lives in
+`m0-controller-composition.ts#registerW04SurfaceCommands`, which W04 may not edit. Instead of filing a
+hotspot, W04 registers the same command id with the same domain owner (`PORTFOLIO_DOMAIN_OWNER`) on the
+**canonical `SemanticCommandBus` inside `createW04RescueComposition`**, which the controller runs
+*before* `registerW04SurfaceCommands`. The controller's `reg()` therefore sees an already-owned command
+with a matching owner and yields. Behaviour is unchanged for the existing payload (`id` → remove);
+`action:'add'`/`member` routes to the domain's reference-only `add`.
+
+**Requested:** Controller confirms this ordering (composition before command registration) as an
+accepted surface-owned registration point, or moves the label into the profile and I will drop the
+registration. Proof: `writer-output/W04/reaudit-evidence/REAUDIT_PROOFS.json#P3.portfolio.curate-label`.
+
+---
+
+## Not filed
+
+* **No `SERIALIZED_HOTSPOT_REQUEST.md`** — `stack/native-typescript/main.ts` and
+  `stack/native-typescript/surfaces/m0-controller-composition.ts` were never edited; the reviews-route
+  mount defect was fixed inside `surfaces/reviews/index.ts`, **P3** inside `w04-rescue.ts` (P-W04-05),
+  and **D3** was already being fixed in parallel by the shared-component owner — W04's contribution is
+  that `surface.bottom` / `surface.bottomProjection` are authored and wired as its binding source.
+* **No registry / profile / contract changes.**

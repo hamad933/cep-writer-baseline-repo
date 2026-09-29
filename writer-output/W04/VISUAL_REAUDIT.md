@@ -474,3 +474,221 @@ must run first, then the L1–L4 loop re-run per surface.
 *Audit artefacts (derived, non-product): `/tmp/opencode/audit/**` — re-encoded reference copies, labelled
 side-by-side composites, and the read-only DOM probe script. No product source, `dist/**`, `assurance/**`,
 `controller/**`, `cep-writer/**`, `contracts/**`, `profiles/**` or `authority/**` file was modified.*
+
+---
+
+# W04 R5–R7 REMEDIATION — surface-owned defects closed
+
+**Round type:** R1 implement · R2 capture · R3 compare · R4 component discrepancy · R5 fix · R6 recapture · R7 recompare
+(governance §8). Method: **file bytes are ground truth** — SHA-256, PIL dimensions, pixel ink/blank-band
+geometry and per-file tesseract OCR, per `controller/12_execution/11_evidence_channel_integrity.md` §3/§4.
+The harness image channel was used for orientation only; every claim below is reproduced from
+`writer-output/W04/reaudit-evidence/**` byte measurements, never from a rendered view.
+
+**Owner of this round:** W04 Surface Writer (Evidence · Reviews · Mastery · Portfolio).
+**Shared code touched:** none. `m0-controller-composition.ts`, `foundation/**`, `adapters/structured-documents.ts`
+and the 3 protected canonical deltas were read/consumed only.
+
+## R0/R5. What was built
+
+| File | Role |
+|---|---|
+| `surfaces/evidence/presentation.ts` (new) | Evidence CENTER record composition as **data** |
+| `surfaces/reviews/presentation.ts` (new) | Reviews CENTER record composition as data |
+| `surfaces/mastery/presentation.ts` (new) | Mastery CENTER record composition as data |
+| `surfaces/portfolio/presentation.ts` (new) | Portfolio CENTER record composition as data |
+| `surfaces/composition/w04-rescue.ts` (extended) | **one** shared W04 renderer + presentation engine (CSS, MutationObserver upgrade, `More ▾` overflow, P3 command registration) |
+| `surfaces/evidence/index.ts`, `surfaces/reviews/index.ts` | RIGHT context lenses rebuilt (provenance/lineage/scope/authority/prior) |
+| `surfaces/mastery/composition.ts`, `surfaces/portfolio/composition.ts` | RIGHT context lenses rebuilt (provenance+request · authority+receipts) |
+| `tests/surfaces/w04-reaudit/presentation.test.ts` (new) | pins the D9/D10/M1/M2/P2 composition contract |
+| `tools/w04-reaudit-capture.mjs`, `w04-reaudit-measure.py`, `w04-reaudit-proofs.mjs`, `w04-reaudit-composite.py` (new) | R2/R6 capture · R3/R7 measure · 86 acceptance proofs · self-identifying composites |
+
+Design decision (governance §6 *reuse of the right contract*): the surface files **declare** the
+composition; `w04-rescue.ts` **projects** it once for all four surfaces. Section headings keep the shared
+`m0-semantic-group` contract and label/value rows keep `m0-semantic-list`, so the shared structural metrics
+still describe these surfaces; pills, lifecycle tracks, numbered steps, split cards, the findings table and
+notices are the surface-specific components the reference shows and the shared primitive deliberately does
+not own. **No shared component was modified.**
+
+## R7. Defect-by-defect closure
+
+| ID | Was | Now | Evidence |
+|---|---|---|---|
+| **D9** lifecycle state affordances | `VISUAL_FAIL` V2 | **CLOSED** | Every surface renders a state **track** with exactly one `data-w04-step-state=current` position plus ≥2 derived *next actions* (evidence intake→admission, reviews REQUESTED→CLOSED, mastery judgment dimension, portfolio member source state). Proofs `D9.evidence.lifecycle-track`, `D9.evidence.next-actions`, `D9.reviews.workflow-track`, `D9.mastery.judgment-dimension-track`; `pills 0→2..3` per surface in the frame census. |
+| **D10** record composition | `VISUAL_FAIL` V3 | **CLOSED** | Evidence: `Source Handoff` + `Selected Supporting References` (3-card pattern, informative EMPTY when the handoff selected none). Reviews: `Criterion Findings` **table** (3 columns) beside `Criterion References`, `Reviewer Rationale`, dashed `Decision Preparation`. Mastery: **both status pills** + the **numbered 5-step** explainability structure (`rectables 1+0 → 1+2`). Portfolio: Q-5 notice, member-state track, reference identity, source integrity, export preparation. Proofs `D10.*` (17 assertions) + `presentation.test.js`. |
+| **D11** responsive capture | `VISUAL_FAIL` V2 | **CLOSED** | 34 frames at **1440×1000 and 1024×900** (was 1440×980 only). Zero clipped titles/pills/steps, zero horizontal overflow at both widths (proofs `D11.*`). Frame census `CAPTURE_RECEIPT.json#viewports`. |
+| **M1** `NOT_EVALUATED` masked | `VISUAL_FAIL` V2 | **CLOSED** | Empty Mastery CENTER now leads with the pill `Mastery Judgment: NOT_EVALUATED` (+ `Freshness Status: UNAVAILABLE`, explicitly labelled *no evaluation exists*) and a notice explaining that `NOT_EVALUATED` **is** the informative state. Proof `M1.mastery.*`; empty CENTER ink 0.051 → 0.122, words 150 → 294. The shared empty guidance sentence is preserved (proof `M1.mastery.guidance-preserved`). |
+| **M2** unlabelled fixture `MASTERED` | `VISUAL_FAIL` V2 | **CLOSED** | Fixture rows carry a **`FIXTURE` badge on the judgment pill** and a first-block notice `FIXTURE · SYNTHETIC_DEMO_SEED … not a real consumer achievement` (L07 taxonomy named). Proofs `M2.mastery.*`. No record was added to make this true — the two fixture rows are the harness's existing `SYNTHETIC_DEMO_SEED` rows. |
+| **R1** 7/10 `reviews.*` unreachable | `VISUAL_FAIL` V2 | **CLOSED** | Toolbar keeps exactly the 4 `domain_commands`; a `More` overflow lists the other **7** (`request, assign, start, ready, continue, cancel, rereview`), each with its live availability reason, and executes through the canonical bus with the toolbar payload. Proof `R1.*` includes an end-to-end transition `IN_REVIEW → READY_FOR_DECISION` driven from the overflow with the pill following. Extra state shot `reviews-<vw>-more-menu-open.png`. |
+| **P2** Q-5 authority illegible | `VISUAL_FAIL` V2 | **CLOSED** | First block on Portfolio is the notice **`Grouping authority: AUTHORITY_DECISION_REQUIRED — Q-5 open`** plus a pill `Grouping: AUTHORITY DECISION REQUIRED`. **No grouping structure is rendered** (proof `P2.portfolio.no-grouping-structure`). The refusal itself is unchanged and re-proven (`P1.portfolio.Q5-refusal-preserved`). |
+| **P3** `portfolio.curate` label | `VISUAL_FAIL` V2 | **CLOSED** | Label is now **`Curate Portfolio reference`** (proof `P3.portfolio.curate-label`), and the command genuinely routes `action:'add'` \| `'remove'` to the domain's reference-only curation. Implemented by registering the command on the canonical bus **inside W04's own composition, before the controller's `registerW04SurfaceCommands`**, so the controller's `reg()` sees an already-owned command with the same domain owner and yields. **No `m0` edit was needed → no `SERIALIZED_HOTSPOT_REQUEST.md` was filed.** |
+| **D3** bottom shelf `UNAVAILABLE` | shared seam | **AUTHORED + WIRED (consumes the shared fix)** | `surface.bottom` (evidence/reviews) and `surface.bottomProjection` (mastery/portfolio) remain the projection the shared `BottomDeepWorkOwner` binding reads. Frame census: `data-bottom-availability = AVAILABLE` on all 8 surface×viewport runs, and the **collapsed → open transition is proved byte-distinct** (`*-bottom-shelf-open.png`) showing the real deep projection (`Raw provenance…`, `Immutable Decision lineage…`, `Diagnostics…`, `ExportPreparation…`). |
+| **D1** CENTER/RIGHT duplication | already fixed | **NOT REGRESSED, improved** | RIGHT↔CENTER line overlap **0.385→0.051** (evidence), **0.292→0.140** (reviews), **0.529→0.125** (mastery), **0.333→0.080** (portfolio). The remaining shared tokens are exact source/decision identifiers the reference itself shows in both a record row and a context card. |
+| **D2** matrix suppressed | already fixed | **NOT REGRESSED** | `table.m0-table` still renders on all four surfaces with the authored headers (frame census `tableHeaders`). |
+| **D6/D12** generic filler / bare `EMPTY` | already fixed | **NOT REGRESSED, improved** | Whole-frame blank share in the EMPTY state: evidence 0.330→0.046, reviews 0.330→0.066, mastery 0.330→0.000, portfolio 0.309→0.000 — all ≪ the 35 % D12 threshold. |
+
+## R3/R7 · Density before → after vs reference (1440×1000, whole frame unless stated)
+
+| Surface | Measure | REFERENCE | BEFORE | AFTER |
+|---|---|---:|---:|---:|
+| evidence (admitted) | ink % | 0.072 | 0.082 | **0.097** |
+| evidence | OCR words | 308 | 198 | **301** |
+| evidence | CENTER ink | 0.091 | 0.082 | **0.118** |
+| evidence | RIGHT ink / blank | 0.073 / 0.160 | 0.086 / 0.000 | **0.096 / 0.000** |
+| evidence | CENTER lines / pills | – | 52 / 0 | **67 / 3** |
+| reviews (in review) | ink % | 0.069 | 0.078 | **0.093** |
+| reviews | OCR words | 338 | 196 | **310** |
+| reviews | CENTER ink | 0.090 | 0.076 | **0.110** |
+| reviews | RIGHT ink / blank | 0.088 / 0.000 | 0.078 / 0.000 | **0.091 / 0.000** |
+| reviews | CENTER record tables / pills | 1 table (findings) | 0 / 0 | **1 / 2** |
+| mastery (fixture) | ink % | 0.053 | 0.068 | **0.096** |
+| mastery | OCR words | 253 | 163 | **293** |
+| mastery | CENTER ink | 0.060 | 0.072 | **0.119** |
+| mastery | RIGHT ink / blank | 0.087 / 0.062 | 0.065 / 0.372 | **0.102 / 0.000** |
+| mastery | numbered steps / record tables / pills | 5 / 3 tables / 2 | 0 / 0 / 0 | **5 / 2 / 2** |
+| portfolio (2 refs) | ink % | 0.054 | 0.070 | **0.103** |
+| portfolio | OCR words | 424 | 177 | **335** |
+| portfolio | CENTER ink | 0.068 | 0.064 | **0.128** |
+| portfolio | RIGHT ink / blank | 0.063 / 0.000 | 0.067 / 0.368 | **0.100 / 0.000** |
+| portfolio | CENTER lines / pills | – | 21 / 0 | **58 / 3** |
+
+EMPTY state (1440×1000): whole-frame blank **0.330→0.046 / 0.066 / 0.000 / 0.000**; CENTER ink
+**0.049-0.052 → 0.095-0.122**; OCR words **143-151 → 255-294**.
+
+Reference region ink/blank measured from the same tool against approximate reference pane rectangles
+(`reference/MEASURES-reference.json`); reference OCR word counts are an *under-count* for the three Arabic
+frames because only `eng` tessdata is installed — they are used as an order-of-magnitude cross-check, not as
+an exact target.
+
+## R7 · State-transition proof (byte-distinct)
+
+`after/CAPTURE_RECEIPT.json` — **34 frames, 8/8 (surface × viewport) groups byte-distinct**:
+
+| surface | states | 1440×1000 | 1024×900 |
+|---|---|---|---|
+| evidence | empty · candidate-submitted · admitted-immutable · bottom-shelf-open | 4/4 unique SHA-256 | 4/4 |
+| reviews | empty · in-review-with-findings · ready-for-decision · decision-issued · bottom-shelf-open | 5/5 | 5/5 |
+| mastery | empty · fixture-mastered · fixture-second-row · bottom-shelf-open | 4/4 | 4/4 |
+| portfolio | empty · assembly-one-reference · assembly-two-references · bottom-shelf-open | 4/4 | 4/4 |
+
+plus `reviews-<vw>-more-menu-open.png` (2) and 8 proofs-driven frames inside `REAUDIT_PROOFS.json`.
+The capture tool **exits non-zero** on any byte-identity collision — a claimed-but-not-distinct state is an
+EVIDENCE/ORACLE failure, not a pass. This closes the E1 evidence-hygiene finding of the original audit for
+the current rounds (the historical 18-identity/97-name census is left intact and untouched).
+
+## R7 · Remaining differences and their explicit justification
+
+1. **LTR record area inside an RTL chrome.** The workspace renders as an RTL mirror (foundation
+   `chromeDirection`/locale preference); the references are LTR-layout. The CENTER record composition is
+   explicitly `direction:ltr` so English record copy reads correctly (this also removes the D5-class
+   sentence-final punctuation displacement *inside my composition*). The chrome direction is a foundation
+   preference, not a W04 surface decision → **not changed here**.
+2. **LEFT is the typed collection matrix, not the reference's structural nav tree** (Intake/Candidates/…,
+   Review Queue/Assigned/In Review/Closed, Mastery tree, Saved Views). Justified three ways: (a)
+   `CollectionTableMatrixPresentationCore` is a protected shared contract whose RC-2 restoration the
+   Coordinator explicitly required; (b) register **D10 targets CENTER** — the four LEFT defects in §3/§4 are
+   `SHARED_COMPONENT`-routed; (c) measured LEFT blank share 0.47–0.81 sits **inside the reference's own LEFT
+   blank range 0.58–0.73**, so LEFT is not where the density gap was. Inventing nav rows that filter nothing
+   would be an "arbitrary placeholder control" (governance §7).
+3. **Toolbar control sets differ from the reference's icon pills.** The rendered set is exactly
+   `surface-profiles/*.json#domain_commands` — the original audit itself classified this as a
+   *reference-vs-contract conflict, not a bug*, routed to the Coordinator. Evidence gets **no** `More` overflow
+   because all 5 of its commands are already visible (an empty overflow would be a dead control); Reviews
+   gets one because 7 of its 10 commands were unreachable (**R1**).
+4. **RIGHT lens titles are English, not the reference's Arabic card titles.** Content maps 1:1 to facts the
+   domain actually owns (`Source integrity and provenance · Lineage completeness · Duplicate search` ↔
+   `سلامة المصدر · مراجعة المراجع · فحص التكرار`). Reproducing Arabic product copy would fabricate content;
+   governance §3 makes the reference a construction baseline, not a pixel template.
+5. **Reference fixture facts are not re-used** (`CE-0142`, `Ahmed`, `RUN-0042`, `MP-APPSEC-v4`, `EV-0128…`).
+   They are reference-scenario values; seeding them into the product would violate the default-EMPTY truth
+   law. Every value rendered is read from the live domain.
+6. **LEFT/RIGHT blank share in the EMPTY state** (LEFT 0.47–0.81, RIGHT 0.766 with no selection).
+   Whole-frame blank is **0.000–0.066**, far below the 35 % D12 threshold. RIGHT is selection-scoped by
+   `EVIDENCE_SURFACE_CONTRACT.regionRoles.RIGHT` ("one selected … context inspector"); it now carries an
+   explicit **`Context that appears on selection`** block (region role · lens titles · domain owner ·
+   selection state) so it is an *informative* empty state rather than a dead zone. The reference ships no
+   empty state to compare against.
+7. **D4 / D5 / D7 / D8 remain open and are not mine.** Start-clipped region headings, RTL punctuation in
+   shared copy outside my composition, the Library donor scope tabs `الوحدة | الكتلة المحددة` still present in
+   `#rightPane`, and palette label/owner concatenation are all `SHARED_COMPONENT`-routed. I did **not** patch
+   them (governance §6: do not copy the defect into every consumer, and do not patch shared code from a
+   surface Writer). The only surface-local mitigation is `dir="auto"` on the two empty-state nodes I already
+   re-attach, which is non-destructive.
+8. **`tools/c2-w04-truth/falsify-w04-truth.mjs` → `composition-static-negative-falsification` now FAILS.**
+   The shared D3 bottom-shelf fix introduced `bottomValueSummary … value.slice(0,3)` in
+   `m0-controller-composition.ts`, which that check forbids. It is a **truth-law conflict created by a
+   parallel change**; I did not adjudicate or weaken it. → reported below (P-W04-04).
+9. **`npm run check` exits 1 on 3 `browser.*` receipts** (`lineage_receipt_truthful`,
+   `current_candidate_claim_truthful`, `targeted_visual_evidence`) — shared `assurance/**` artifacts bound to
+   the dispatch tree hash; the dispatch already recorded the first and third as **P-W04-03**. All 374
+   non-browser checks PASS; `npm test` is **210/0**.
+
+## R7 · Acceptance gate re-run (governance §10)
+
+| Box | evidence | reviews | mastery | portfolio |
+|---|---|---|---|---|
+| Functional behaviour | ✅ | ✅ | ✅ | ✅ |
+| Architecture respected | ✅ | ✅ | ✅ | ✅ |
+| Ownership respected | ✅ | ✅ | ✅ | ✅ |
+| Shared components used correctly | ✅ consumed, none modified | ✅ | ✅ | ✅ |
+| Not unnecessarily duplicated | ✅ overlap 0.051 | ✅ 0.140 | ✅ 0.125 | ✅ 0.080 |
+| Not forcing inappropriate composition | ✅ one renderer, 4 declarative specs | ✅ | ✅ | ✅ |
+| Meaningful content/state exists | ✅ | ✅ | ✅ M1/M2 | ✅ P2 |
+| No unjustified blank regions | ✅ blank 0.046 | ✅ 0.066 | ✅ 0.000 | ✅ 0.000 |
+| Reference actually inspected | ✅ opened + SHA-verified | ✅ | ✅ | ✅ |
+| Current screenshot captured | ✅ 1440×1000 + 1024×900 | ✅ | ✅ | ✅ |
+| Component-level comparison performed | ✅ L1–L4 | ✅ L1–L4 | ✅ L1–L4 | ✅ L1–L4 |
+| Major discrepancies addressed | ✅ D9/D10/D11 | ✅ D9/D10/R1 | ✅ D9/D10/M1/M2 | ✅ D10/P2/P3 |
+| Responsive still correct | ✅ 0 clip / 0 overflow | ✅ | ✅ | ✅ |
+| Valid strategic decisions preserved | ✅ | ✅ toolbar 4/4 | ✅ default-EMPTY | ✅ Q-5 held |
+| Obsolete assumptions not blindly preserved | ✅ | ✅ | ✅ | ✅ |
+| Evidence bound to correct candidate | ✅ 34/34 distinct | ✅ 5/5 | ✅ 4/4 | ✅ 4/4 |
+| Re-comparison confirms the fix | ✅ 86/86 proofs | ✅ | ✅ | ✅ |
+| Remaining differences justified | ✅ §"Remaining differences" | ✅ | ✅ | ✅ |
+
+**Result:** the four W04 surfaces clear every box this Writer owns. Residual open items are **D4/D5/D7/D8**
+(shared-component owner), **P-W04-04** (falsifier ↔ shared `.slice(0,3)` conflict) and **Q-5** (Owner STOP/REPORT).
+
+## R7 · Artifacts
+
+```
+writer-output/W04/reaudit-evidence/
+  before/  CAPTURE_RECEIPT.json + MEASURES.json + 26 PNG   (shared-fix baseline, no surface presentation)
+  after/   CAPTURE_RECEIPT.json + MEASURES.json + 34 PNG   (this remediation, 1440x1000 + 1024x900)
+  reference/ MEASURES-reference.json                       (the 4 CURRENT_FINAL_REFERENCE PNGs, SHA-verified)
+  REAUDIT_PROOFS.json                                      86/86 acceptance proofs
+  composites/ MANIFEST.json + 34 self-identifying composites (REFERENCE | BEFORE | AFTER, filenames + SHA-256 burned in)
+  reviews-1440x1000-more-menu-open.png, reviews-1024x900-more-menu-open.png   (R1 enacted state)
+```
+
+Proof commands (all re-runnable):
+`node tools/w04-reaudit-capture.mjs --label after` · `python3 tools/w04-reaudit-measure.py --label after` ·
+`node tools/w04-reaudit-proofs.mjs` (86/86) · `python3 tools/w04-reaudit-composite.py` ·
+`node dist/tests/surfaces/w04-reaudit/presentation.test.js` · `tools/writer-serial.sh npm test` (210/0) ·
+`node tools/w04-browser-flows.mjs` (5/5) · `node tools/w04-seam-ownership-proof.mjs` (14/14) ·
+`node tools/w04-f051-counting-proof.mjs` (11/11).
+
+### R7 · Residual shared-defect probe (`SHARED_RESIDUAL_PROBE.json`)
+
+The shared-component owner's follow-up round (committed `37a533a`, after this remediation started) closed
+two of the four shared defects that were visible on my surfaces; two remain. Read-only probe at 1440×1000,
+all four surfaces:
+
+| ID | Sev | State on the W04 surfaces | Evidence |
+|---|---|---|---|
+| **D5** RTL punctuation displacement | V2 | **CLOSED (shared)** — every English block in my composition *and* the shared studio/empty copy computes `direction: ltr` (`dir="auto"` was added surface-locally to the two empty-state nodes I re-attach) | `SHARED_RESIDUAL_PROBE.json#englishDirection` (16/16 `computed:"ltr"`) |
+| **D7** Library donor scope tabs | V2 | **CLOSED (shared)** — `#rightPane .contextscope` is still in the DOM but `visible:false` on all four surfaces | `#donorScopeTabs.visible = false` ×4 |
+| **D4** region heading start-clipping | V2 | **OPEN · shared** — LEFT `<h2>` `scrollWidth 253–260 > clientWidth 187` on all four (`Evidence workbench · Collection`, …). Lives in `foundation/workspace.ts#region()`; a surface Writer must not patch it. | `#regionHeadings[].clipped = true` ×4 |
+| **D8** palette label/owner concatenation | V1 | **OPEN · shared** — `New linked noteWorkspaceNoteBindingSeam`, `Commands / الأوامرfoundation.commands`, … | `#paletteLabels` ×4 |
+
+### R7 · Per-surface verdicts
+
+| Surface | Verdict | Why not `VISUAL_PASS` |
+|---|---|---|
+| **evidence** | **ACCEPTANCE_REQUIRES_REVIEW** | All W04-owned defects closed (D9, D10, D11, M1, M2, R1-n/a, P2, P3, D3 authored+wired; D1/D2/D6/D12 not regressed and improved). D4 (V2) + D8 (V1) are still visibly present on shared code, and P-W04-04 (falsifier ↔ shared `.slice(0,3)`) is unresolved. |
+| **reviews** | **ACCEPTANCE_REQUIRES_REVIEW** | Same; plus R1 closed with an end-to-end overflow-driven state transition proof. |
+| **mastery** | **ACCEPTANCE_REQUIRES_REVIEW** | Same; M1/M2 closed; D4 + D8 + P-W04-04 residual. |
+| **portfolio** | **ACCEPTANCE_REQUIRES_REVIEW** | Same; P2/P3 closed with the Q-5 refusal re-proven; D4 + D8 + P-W04-04 residual. |
+
+Q-5 remains an **Owner STOP/REPORT** — it is not counted against these verdicts, and no grouping
+structure was rendered.

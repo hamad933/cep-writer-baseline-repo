@@ -1,0 +1,2795 @@
+{
+  "schemaVersion": 1,
+  "proof": "w04-visual-reaudit-capture",
+  "label": "before",
+  "method": "file-bytes ground truth (sha256 + dimensions); ink/blank-band + OCR in w04-reaudit-measure.mjs",
+  "viewports": [
+    "1440x1000",
+    "1024x900"
+  ],
+  "surfaces": [
+    "evidence",
+    "reviews",
+    "mastery",
+    "portfolio"
+  ],
+  "fixturePolicy": "every populated state is enacted through the live product domain inside the page; seeded rows carry truthClass SYNTHETIC_DEMO_SEED or are created by the live semantic commands",
+  "frameCount": 26,
+  "distinctness": [
+    {
+      "key": "evidence@1440x1000",
+      "states": 3,
+      "uniqueByteIdentities": 3,
+      "byteDistinct": true
+    },
+    {
+      "key": "reviews@1440x1000",
+      "states": 4,
+      "uniqueByteIdentities": 4,
+      "byteDistinct": true
+    },
+    {
+      "key": "mastery@1440x1000",
+      "states": 3,
+      "uniqueByteIdentities": 3,
+      "byteDistinct": true
+    },
+    {
+      "key": "portfolio@1440x1000",
+      "states": 3,
+      "uniqueByteIdentities": 3,
+      "byteDistinct": true
+    },
+    {
+      "key": "evidence@1024x900",
+      "states": 3,
+      "uniqueByteIdentities": 3,
+      "byteDistinct": true
+    },
+    {
+      "key": "reviews@1024x900",
+      "states": 4,
+      "uniqueByteIdentities": 4,
+      "byteDistinct": true
+    },
+    {
+      "key": "mastery@1024x900",
+      "states": 3,
+      "uniqueByteIdentities": 3,
+      "byteDistinct": true
+    },
+    {
+      "key": "portfolio@1024x900",
+      "states": 3,
+      "uniqueByteIdentities": 3,
+      "byteDistinct": true
+    }
+  ],
+  "problems": [],
+  "frames": [
+    {
+      "surface": "evidence",
+      "viewport": "1440x1000",
+      "viewportWidth": 1440,
+      "viewportHeight": 1000,
+      "state": "empty",
+      "file": "evidence-1440x1000-empty.png",
+      "sha256": "6dceed8a233d57226257c186138e049a2068f1132ff6f72e4c3aece2c25797d9",
+      "bytes": 122706,
+      "pageErrors": [],
+      "seeds": [],
+      "metrics": {
+        "centerText": "Evidence workbench\n\nEMPTY · No current Candidate or admitted Evidence is bound.\n\nHow this workspace works\nDeclare a Candidate without inventing verification facts.\nBind an admitted verifier/provider before validation or Admission.",
+        "leftText": "No current Candidate or admitted Evidence is bound.",
+        "rightText": "الوحدة\nالكتلة المحددة\n\nEMPTY · No record is selected; record context appears here once a record is active.",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 5,
+        "rightLineCount": 3,
+        "leftLineCount": 1,
+        "rightLineOverlapRatio": 0,
+        "tables": 0,
+        "tableHeaders": [],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 0,
+        "semanticGroups": 0,
+        "regionItems": 0,
+        "centerStateTokens": 1,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Inspect Evidence",
+          "Import Candidate Evidence",
+          "Prepare Evidence amendment",
+          "Admit submitted Candidate",
+          "Retain superseded source"
+        ],
+        "toolbarCount": 5,
+        "toolbarDisabled": 5,
+        "guidance": true,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 779
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          },
+          "#rightPane": {
+            "x": 1020,
+            "y": 182,
+            "width": 420,
+            "height": 779
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 961,
+            "width": 1440,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 538,
+            "y": 142,
+            "width": 890,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          }
+        }
+      }
+    },
+    {
+      "surface": "evidence",
+      "viewport": "1440x1000",
+      "viewportWidth": 1440,
+      "viewportHeight": 1000,
+      "state": "candidate-submitted",
+      "file": "evidence-1440x1000-candidate-submitted.png",
+      "sha256": "71848dc3f97f3d8242e17e8170488e425cfda27e508efc428ec38568ef094890",
+      "bytes": 199719,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "evImport",
+          "args": [
+            "cand-reaudit-1"
+          ],
+          "value": {
+            "ok": true,
+            "record": {
+              "id": "cand-reaudit-1",
+              "evidenceId": "cand-reaudit-1",
+              "revisionId": "cand-reaudit-1-r1",
+              "title": "Re-audit candidate cand-reaudit-1",
+              "status": "CANDIDATE",
+              "candidateState": "PREPARED",
+              "candidateRevision": 1,
+              "intakeValidation": {
+                "status": "NOT_VALIDATED"
+              },
+              "sourceStatus": "CURRENT",
+              "digest": null,
+              "schemaValid": false,
+              "sourceBytesAvailable": false,
+              "verification": {
+                "status": "UNVERIFIED",
+                "providerId": null,
+                "proofRef": null,
+                "digest": null,
+                "sourceBytesAvailable": false,
+                "schemaValid": false,
+                "producerIdentity": null,
+                "handoffReceiptRef": null,
+                "verifiedAt": null
+              },
+              "reviewStatus": null,
+              "effectiveDecision": null,
+              "notes": "Submitted with a source handoff note for the re-audit capture.",
+              "subject": "owner:local",
+              "evidenceClaim": "Candidate claim recorded for the W04 visual re-audit lifecycle state.",
+              "criterionRefs": [
+                "criteria:v4#integrity",
+                "criteria:v4#provenance"
+              ],
+              "governedPurpose": "W04 visual re-audit state capture (fixture)",
+              "selectedMaterialRefs": [
+                "reaudit-source-cand-reaudit-1@r1",
+                "reaudit-timeline@t1",
+                "reaudit-observation@o1"
+              ],
+              "sourceType": "imported-material",
+              "sourceId": "reaudit-source-cand-reaudit-1",
+              "sourceRevision": "r1",
+              "producerIdentity": null,
+              "sourceTimestamp": null,
+              "handoffReceiptRef": null,
+              "admissionAuthority": {
+                "available": false,
+                "proofRef": null
+              },
+              "importAssurance": "UNVERIFIED"
+            },
+            "mutated": true,
+            "canonicalEvidenceCreated": false,
+            "verificationStatus": "UNVERIFIED",
+            "note": "Import creates Candidate Evidence only. Source verification, Admission, Review, Decision and Mastery remain separate."
+          }
+        },
+        {
+          "seed": "evSubmit",
+          "args": [
+            "cand-reaudit-1"
+          ],
+          "value": {
+            "ok": true,
+            "code": null
+          }
+        }
+      ],
+      "metrics": {
+        "centerText": "Re-audit candidate cand-reaudit-1\nKind\nGovernedEvidenceWorkbench\nSelectedId\ncand-reaudit-1\nIDENTITY\nRecordKind\nCANDIDATE_EVIDENCE\nEvidenceId\ncand-reaudit-1\nRevisionId\ncand-reaudit-1-r1\nBaseEvidenceRevisionId\n—\nCLAIM\nTitle\nRe-audit candidate cand-reaudit-1\nEvidenceClaim\nCandidate claim recorded for the W04 visual re-audit lifecycle state.\nSubject\nowner:local\nCriterionRefs\ncriteria:v4#integrity · criteria:v4#provenance\nSTATE\nCandidateState\nSUBMITTED_FOR_INTAKE\nEvidenceLifecycle\n—\nReviewStatus\nUNREVIEWED\nEffectiveReviewDecision\nNONE\nSourceStatus\nCURRENT\nPROVENANCE\nSourceRef\nreaudit-source-cand-reaudit-1@r1\nDigest\n—\nImmutableRevision\nNo\nAdmissionAuthorityAvailable\nNo\nACTIONS\nInspect\nYes\nAmend\nNo\nAdmit\nNo\nSourceChoice\nNo",
+        "leftText": "Evidence record Lifecycle Source Review\nRe-audit candidate cand-reaudit-1\ncand-reaudit-1 · cand-reaudit-1-r1\n CANDIDATE\nSUBMITTED_FOR_INTAKE\n CURRENT\nreaudit-source-cand-reaudit-1@r1\n UNREVIEWED\nNONE",
+        "rightText": "الوحدة\nالكتلة المحددة\n\nEVIDENCE CONTEXT\n\nRe-audit candidate cand-reaudit-1\n\nCANDIDATE · source CURRENT\n\nGOVERNANCE\nProvenance\nEvidence ID\ncand-reaudit-1\nRevision\ncand-reaudit-1-r1\nPinned source\nreaudit-source-cand-reaudit-1@r1\nDigest\n—\nCriterion relevance\ncriteria:v4#integrity, criteria:v4#provenance\nState dimensions\nEvidence lifecycle\nCANDIDATE\nReview status\nUNREVIEWED\nEffective Review Decision\nNONE\nSource integrity/status\nCURRENT",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 52,
+        "rightLineCount": 26,
+        "leftLineCount": 9,
+        "rightLineOverlapRatio": 0.346,
+        "tables": 1,
+        "tableHeaders": [
+          "Evidence record",
+          "Lifecycle",
+          "Source",
+          "Review"
+        ],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 23,
+        "semanticGroups": 5,
+        "regionItems": 0,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Inspect Evidence",
+          "Import Candidate Evidence",
+          "Prepare Evidence amendment",
+          "Admit submitted Candidate",
+          "Retain superseded source"
+        ],
+        "toolbarCount": 5,
+        "toolbarDisabled": 4,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 779
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          },
+          "#rightPane": {
+            "x": 1020,
+            "y": 182,
+            "width": 420,
+            "height": 779
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 961,
+            "width": 1440,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 538,
+            "y": 142,
+            "width": 890,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          }
+        }
+      }
+    },
+    {
+      "surface": "evidence",
+      "viewport": "1440x1000",
+      "viewportWidth": 1440,
+      "viewportHeight": 1000,
+      "state": "admitted-immutable",
+      "file": "evidence-1440x1000-admitted-immutable.png",
+      "sha256": "9f6ddc0090f0fb34cb81b8c57692b35d44108fccdcd859eefe20983007847c5d",
+      "bytes": 204327,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "evAdmit",
+          "args": [
+            "cand-reaudit-1"
+          ],
+          "value": {
+            "verified": true,
+            "validated": true,
+            "admitted": true,
+            "code": null,
+            "status": "ADMITTED",
+            "revisionId": "cand-reaudit-1-r1",
+            "immutable": true
+          }
+        }
+      ],
+      "metrics": {
+        "centerText": "Re-audit candidate cand-reaudit-1\nKind\nGovernedEvidenceWorkbench\nSelectedId\ncand-reaudit-1\nIDENTITY\nRecordKind\nADMITTED_EVIDENCE\nEvidenceId\ncand-reaudit-1\nRevisionId\ncand-reaudit-1-r1\nBaseEvidenceRevisionId\n—\nCLAIM\nTitle\nRe-audit candidate cand-reaudit-1\nEvidenceClaim\nCandidate claim recorded for the W04 visual re-audit lifecycle state.\nSubject\nowner:local\nCriterionRefs\ncriteria:v4#integrity · criteria:v4#provenance\nSTATE\nCandidateState\nADMITTED\nEvidenceLifecycle\nACTIVE\nReviewStatus\nUNREVIEWED\nEffectiveReviewDecision\nNONE\nSourceStatus\nCURRENT\nPROVENANCE\nSourceRef\nreaudit-source-cand-reaudit-1@r1\nDigest\nsha256:7777777777777777777777777777777777777777777777777777777777777777\nImmutableRevision\nYes\nAdmissionAuthorityAvailable\nYes\nACTIONS\nInspect\nYes\nAmend\nYes\nAdmit\nNo\nSourceChoice\nNo",
+        "leftText": "Evidence record Lifecycle Source Review\nRe-audit candidate cand-reaudit-1\ncand-reaudit-1 · cand-reaudit-1-r1\n ADMITTED\nADMITTED\n CURRENT\nreaudit-source-cand-reaudit-1@r1\n UNREVIEWED\nNONE",
+        "rightText": "الوحدة\nالكتلة المحددة\n\nEVIDENCE CONTEXT\n\nRe-audit candidate cand-reaudit-1\n\nADMITTED · source CURRENT\n\nGOVERNANCE\nProvenance\nEvidence ID\ncand-reaudit-1\nRevision\ncand-reaudit-1-r1\nPinned source\nreaudit-source-cand-reaudit-1@r1\nDigest\nsha256:7777777777777777777777777777777777777777777777777777777777777777\nCriterion relevance\ncriteria:v4#integrity, criteria:v4#provenance\nState dimensions\nEvidence lifecycle\nACTIVE\nReview status\nUNREVIEWED\nEffective Review Decision\nNONE\nSource integrity/status\nCURRENT",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 52,
+        "rightLineCount": 26,
+        "leftLineCount": 9,
+        "rightLineOverlapRatio": 0.385,
+        "tables": 1,
+        "tableHeaders": [
+          "Evidence record",
+          "Lifecycle",
+          "Source",
+          "Review"
+        ],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 23,
+        "semanticGroups": 5,
+        "regionItems": 0,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Inspect Evidence",
+          "Import Candidate Evidence",
+          "Prepare Evidence amendment",
+          "Admit submitted Candidate",
+          "Retain superseded source"
+        ],
+        "toolbarCount": 5,
+        "toolbarDisabled": 3,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 779
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          },
+          "#rightPane": {
+            "x": 1020,
+            "y": 182,
+            "width": 420,
+            "height": 779
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 961,
+            "width": 1440,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 538,
+            "y": 142,
+            "width": 890,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          }
+        }
+      }
+    },
+    {
+      "surface": "reviews",
+      "viewport": "1440x1000",
+      "viewportWidth": 1440,
+      "viewportHeight": 1000,
+      "state": "empty",
+      "file": "reviews-1440x1000-empty.png",
+      "sha256": "d247f86b37a1062c1a8d60d9ffc4c1074eafe0772c2b07053eb360719d05dee7",
+      "bytes": 123457,
+      "pageErrors": [],
+      "seeds": [],
+      "metrics": {
+        "centerText": "Reviews workbench\n\nEMPTY · No formal Evidence Review is bound.\n\nHow this workspace works\nFormal Review starts only from admitted immutable Evidence and pinned criteria.\nFindings and Decisions require explicit governed input and reviewer authority.",
+        "leftText": "No formal Evidence Review is bound.",
+        "rightText": "الوحدة\nالكتلة المحددة\n\nEMPTY · No record is selected; record context appears here once a record is active.",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 5,
+        "rightLineCount": 3,
+        "leftLineCount": 1,
+        "rightLineOverlapRatio": 0,
+        "tables": 0,
+        "tableHeaders": [],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 0,
+        "semanticGroups": 0,
+        "regionItems": 0,
+        "centerStateTokens": 1,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Continue Review",
+          "Add Review finding",
+          "Compare exact Review revisions",
+          "Issue superseding Decision"
+        ],
+        "toolbarCount": 4,
+        "toolbarDisabled": 4,
+        "guidance": true,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 779
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          },
+          "#rightPane": {
+            "x": 1020,
+            "y": 182,
+            "width": 420,
+            "height": 779
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 961,
+            "width": 1440,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 757,
+            "y": 142,
+            "width": 671,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          }
+        }
+      }
+    },
+    {
+      "surface": "reviews",
+      "viewport": "1440x1000",
+      "viewportWidth": 1440,
+      "viewportHeight": 1000,
+      "state": "in-review-with-findings",
+      "file": "reviews-1440x1000-in-review-with-findings.png",
+      "sha256": "1f00c25132c613e9a4a340dce37a83dd792287ab6eaf39c4cd135ccac6072b63",
+      "bytes": 197325,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "rvEvidence",
+          "args": [],
+          "value": {
+            "status": "ADMITTED",
+            "revisionId": "ev-reaudit-1-r1"
+          }
+        },
+        {
+          "seed": "rvRequest",
+          "args": [],
+          "value": {
+            "state": "IN_REVIEW"
+          }
+        },
+        {
+          "seed": "rvFinding",
+          "args": [
+            "f-reaudit-1",
+            "SATISFIED",
+            "criteria:v4#integrity",
+            "Digest and schema verified against the pinned source revision."
+          ],
+          "value": true
+        },
+        {
+          "seed": "rvFinding",
+          "args": [
+            "f-reaudit-2",
+            "PARTIALLY_SATISFIED",
+            "criteria:v4#provenance",
+            "Provenance chain is present but the handoff receipt is not yet pinned."
+          ],
+          "value": true
+        }
+      ],
+      "metrics": {
+        "centerText": "Review rv-reaudit-1\nKind\nFormalReviewDecisionWorkbench\nSelectedId\nrv-reaudit-1\nREQUEST\nReviewRevisionId\nrv-reaudit-1:r1\nState\nIN_REVIEW\nRereview\nNONE\nPinnedEvidenceRefs\nev-reaudit-1@ev-reaudit-1-r1\nPinnedCriteriaRefs\ncriteria:v4#integrity · criteria:v4#provenance\nREVIEWER\nIdentity\nreviewer:reaudit\nAuthorityAvailable\nYes\nAssignmentPermissionAvailable\nYes\nPermissionProofRef\nperm:reaudit\nFINDINGS\nf-reaudit-1\nState: SATISFIED · ScopeDisposition: IN_SCOPE · CriterionRef: criteria:v4#integrity · Text: Digest and schema verified against the pinned source revision. · CreatedAt: 2026-09-29T18:02:19.072Z · ReviewRevisionRef: rv-reaudit-1:r1\nf-reaudit-2\nState: PARTIALLY_SATISFIED · ScopeDisposition: IN_SCOPE · CriterionRef: criteria:v4#provenance · Text: Provenance chain is present but the handoff receipt is not yet pinned. · CreatedAt: 2026-09-29T18:02:19.073Z · ReviewRevisionRef: rv-reaudit-1:r1\nDECISION\nEffectiveDecisionId\n—\nEffectiveOutcome\nNONE\nHistoryCount\n0\nACTIONS\nReview\nYes\nRequest\nYes\nAssign\nNo\nStart\nNo\nFinding\nYes\nReady\nYes\nContinue\nYes\nCancel\nYes\nSupersede\nNo\nRereview\nNo\nCompare\nYes\nCanAssign\nNo\nCanStart\nNo\nCanAddFinding\nYes\nCanMarkReady\nYes\nCanContinue\nYes\nCanCancel\nYes\nCanSupersede\nNo\nCanRereview\nNo",
+        "leftText": "Review Workflow Pinned Evidence Effective Decision\nReview rv-reaudit-1\nrv-reaudit-1:r1\n IN_REVIEW ev-reaudit-1@ev-reaudit-1-r1\nExact revision basis\n NONE\nNo issued decision",
+        "rightText": "الوحدة\nالكتلة المحددة\n\nFORMAL REVIEW CONTEXT\n\nReview rv-reaudit-1\n\nIN_REVIEW · NO DECISION\n\nREVIEW GOVERNANCE\nPinned scope\nPinned Evidence revisions\nev-reaudit-1@ev-reaudit-1-r1\nPinned criteria\ncriteria:v4#integrity, criteria:v4#provenance\nReviewer actor\nreviewer:reaudit\nAuthority proof\nperm:reaudit\nDecision lineage\nEffective Decision\nNONE\nIssued Decisions retained\n0\nRe-review\nNONE\nFindings\n2",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 76,
+        "rightLineCount": 24,
+        "leftLineCount": 7,
+        "rightLineOverlapRatio": 0.292,
+        "tables": 1,
+        "tableHeaders": [
+          "Review",
+          "Workflow",
+          "Pinned Evidence",
+          "Effective Decision"
+        ],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 33,
+        "semanticGroups": 5,
+        "regionItems": 2,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Continue Review",
+          "Add Review finding",
+          "Compare exact Review revisions",
+          "Issue superseding Decision"
+        ],
+        "toolbarCount": 4,
+        "toolbarDisabled": 1,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 779
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          },
+          "#rightPane": {
+            "x": 1020,
+            "y": 182,
+            "width": 420,
+            "height": 779
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 961,
+            "width": 1440,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 757,
+            "y": 142,
+            "width": 671,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          }
+        }
+      }
+    },
+    {
+      "surface": "reviews",
+      "viewport": "1440x1000",
+      "viewportWidth": 1440,
+      "viewportHeight": 1000,
+      "state": "ready-for-decision",
+      "file": "reviews-1440x1000-ready-for-decision.png",
+      "sha256": "f5bb29d9355d8fdf978fab38bf6b76106eb589f232fa754afa0e3fe41afebebf",
+      "bytes": 193398,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "rvReady",
+          "args": [],
+          "value": true
+        }
+      ],
+      "metrics": {
+        "centerText": "Review rv-reaudit-1\nKind\nFormalReviewDecisionWorkbench\nSelectedId\nrv-reaudit-1\nREQUEST\nReviewRevisionId\nrv-reaudit-1:r1\nState\nREADY_FOR_DECISION\nRereview\nNONE\nPinnedEvidenceRefs\nev-reaudit-1@ev-reaudit-1-r1\nPinnedCriteriaRefs\ncriteria:v4#integrity · criteria:v4#provenance\nREVIEWER\nIdentity\nreviewer:reaudit\nAuthorityAvailable\nYes\nAssignmentPermissionAvailable\nYes\nPermissionProofRef\nperm:reaudit\nFINDINGS\nf-reaudit-1\nState: SATISFIED · ScopeDisposition: IN_SCOPE · CriterionRef: criteria:v4#integrity · Text: Digest and schema verified against the pinned source revision. · CreatedAt: 2026-09-29T18:02:19.072Z · ReviewRevisionRef: rv-reaudit-1:r1\nf-reaudit-2\nState: PARTIALLY_SATISFIED · ScopeDisposition: IN_SCOPE · CriterionRef: criteria:v4#provenance · Text: Provenance chain is present but the handoff receipt is not yet pinned. · CreatedAt: 2026-09-29T18:02:19.073Z · ReviewRevisionRef: rv-reaudit-1:r1\nDECISION\nEffectiveDecisionId\n—\nEffectiveOutcome\nNONE\nHistoryCount\n0\nACTIONS\nReview\nYes\nRequest\nYes\nAssign\nNo\nStart\nNo\nFinding\nNo\nReady\nNo\nContinue\nYes\nCancel\nNo\nSupersede\nYes\nRereview\nNo\nCompare\nYes\nCanAssign\nNo\nCanStart\nNo\nCanAddFinding\nNo\nCanMarkReady\nNo\nCanContinue\nYes\nCanCancel\nNo\nCanSupersede\nYes\nCanRereview\nNo",
+        "leftText": "Review Workflow Pinned Evidence Effective Decision\nReview rv-reaudit-1\nrv-reaudit-1:r1\n READY_FOR_DECISION ev-reaudit-1@ev-reaudit-1-r1\nExact revision basis\n NONE\nNo issued decision",
+        "rightText": "الوحدة\nالكتلة المحددة\n\nFORMAL REVIEW CONTEXT\n\nReview rv-reaudit-1\n\nREADY_FOR_DECISION · NO DECISION\n\nREVIEW GOVERNANCE\nPinned scope\nPinned Evidence revisions\nev-reaudit-1@ev-reaudit-1-r1\nPinned criteria\ncriteria:v4#integrity, criteria:v4#provenance\nReviewer actor\nreviewer:reaudit\nAuthority proof\nperm:reaudit\nDecision lineage\nEffective Decision\nNONE\nIssued Decisions retained\n0\nRe-review\nNONE\nFindings\n2",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 76,
+        "rightLineCount": 24,
+        "leftLineCount": 7,
+        "rightLineOverlapRatio": 0.292,
+        "tables": 1,
+        "tableHeaders": [
+          "Review",
+          "Workflow",
+          "Pinned Evidence",
+          "Effective Decision"
+        ],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 33,
+        "semanticGroups": 5,
+        "regionItems": 2,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Continue Review",
+          "Add Review finding",
+          "Compare exact Review revisions",
+          "Issue superseding Decision"
+        ],
+        "toolbarCount": 4,
+        "toolbarDisabled": 1,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 779
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          },
+          "#rightPane": {
+            "x": 1020,
+            "y": 182,
+            "width": 420,
+            "height": 779
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 961,
+            "width": 1440,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 757,
+            "y": 142,
+            "width": 671,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          }
+        }
+      }
+    },
+    {
+      "surface": "reviews",
+      "viewport": "1440x1000",
+      "viewportWidth": 1440,
+      "viewportHeight": 1000,
+      "state": "decision-issued",
+      "file": "reviews-1440x1000-decision-issued.png",
+      "sha256": "94fe58901914663726adc9510a16ad0e1c1e9b1ca6e9faa14d59978efc9c862e",
+      "bytes": 201114,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "rvDecide",
+          "args": [],
+          "value": {
+            "ok": true,
+            "code": null,
+            "state": "CLOSED"
+          }
+        }
+      ],
+      "metrics": {
+        "centerText": "Review rv-reaudit-1\nKind\nFormalReviewDecisionWorkbench\nSelectedId\nrv-reaudit-1\nREQUEST\nReviewRevisionId\nrv-reaudit-1:r1-d7\nState\nCLOSED\nRereview\nNONE\nPinnedEvidenceRefs\nev-reaudit-1@ev-reaudit-1-r1\nPinnedCriteriaRefs\ncriteria:v4#integrity · criteria:v4#provenance\nREVIEWER\nIdentity\nreviewer:reaudit\nAuthorityAvailable\nYes\nAssignmentPermissionAvailable\nYes\nPermissionProofRef\nperm:reaudit\nFINDINGS\nf-reaudit-1\nState: SATISFIED · ScopeDisposition: IN_SCOPE · CriterionRef: criteria:v4#integrity · Text: Digest and schema verified against the pinned source revision. · CreatedAt: 2026-09-29T18:02:19.072Z · ReviewRevisionRef: rv-reaudit-1:r1\nf-reaudit-2\nState: PARTIALLY_SATISFIED · ScopeDisposition: IN_SCOPE · CriterionRef: criteria:v4#provenance · Text: Provenance chain is present but the handoff receipt is not yet pinned. · CreatedAt: 2026-09-29T18:02:19.073Z · ReviewRevisionRef: rv-reaudit-1:r1\nDECISION\nEffectiveDecisionId\ndecision-reaudit-1\nEffectiveOutcome\nACCEPT_WITH_LIMITATIONS\nHistoryCount\n1\nACTIONS\nReview\nYes\nRequest\nYes\nAssign\nNo\nStart\nNo\nFinding\nNo\nReady\nNo\nContinue\nNo\nCancel\nNo\nSupersede\nNo\nRereview\nYes\nCompare\nYes\nCanAssign\nNo\nCanStart\nNo\nCanAddFinding\nNo\nCanMarkReady\nNo\nCanContinue\nNo\nCanCancel\nNo\nCanSupersede\nNo\nCanRereview\nYes",
+        "leftText": "Review Workflow Pinned Evidence Effective Decision\nReview rv-reaudit-1\nrv-reaudit-1:r1-d7\n CLOSED ev-reaudit-1@ev-reaudit-1-r1\nExact revision basis\n ACCEPT_WITH_LIMITATIONS\ndecision-reaudit-1",
+        "rightText": "الوحدة\nالكتلة المحددة\n\nFORMAL REVIEW CONTEXT\n\nReview rv-reaudit-1\n\nCLOSED · ACCEPT_WITH_LIMITATIONS\n\nREVIEW GOVERNANCE\nPinned scope\nPinned Evidence revisions\nev-reaudit-1@ev-reaudit-1-r1\nPinned criteria\ncriteria:v4#integrity, criteria:v4#provenance\nReviewer actor\nreviewer:reaudit\nAuthority proof\nperm:reaudit\nDecision lineage\nEffective Decision\ndecision-reaudit-1\nIssued Decisions retained\n1\nRe-review\nNONE\nFindings\n2",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 76,
+        "rightLineCount": 24,
+        "leftLineCount": 7,
+        "rightLineOverlapRatio": 0.292,
+        "tables": 1,
+        "tableHeaders": [
+          "Review",
+          "Workflow",
+          "Pinned Evidence",
+          "Effective Decision"
+        ],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 33,
+        "semanticGroups": 5,
+        "regionItems": 2,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Continue Review",
+          "Add Review finding",
+          "Compare exact Review revisions",
+          "Issue superseding Decision"
+        ],
+        "toolbarCount": 4,
+        "toolbarDisabled": 3,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 779
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          },
+          "#rightPane": {
+            "x": 1020,
+            "y": 182,
+            "width": 420,
+            "height": 779
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 961,
+            "width": 1440,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 757,
+            "y": 142,
+            "width": 671,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          }
+        }
+      }
+    },
+    {
+      "surface": "mastery",
+      "viewport": "1440x1000",
+      "viewportWidth": 1440,
+      "viewportHeight": 1000,
+      "state": "empty",
+      "file": "mastery-1440x1000-empty.png",
+      "sha256": "e37bded6bb831b92cf43ea346154edb26329be3e66ee900d0abeb898f393b13d",
+      "bytes": 130103,
+      "pageErrors": [],
+      "seeds": [],
+      "metrics": {
+        "centerText": "Mastery workbench\n\nEMPTY · NOT_EVALUATED · No authorized Mastery provider/evaluator is bound.\n\nHow this workspace works\nCurrent state is NOT_EVALUATED while evaluator/provider truth is unavailable.\nCompletion or activity never creates Mastery.",
+        "leftText": "NOT_EVALUATED · No authorized Mastery provider/evaluator is bound.",
+        "rightText": "الوحدة\nالكتلة المحددة\n\nEMPTY · No record is selected; record context appears here once a record is active.",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 5,
+        "rightLineCount": 3,
+        "leftLineCount": 1,
+        "rightLineOverlapRatio": 0,
+        "tables": 0,
+        "tableHeaders": [],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 0,
+        "semanticGroups": 0,
+        "regionItems": 0,
+        "centerStateTokens": 1,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Inspect Mastery",
+          "Explain causal basis",
+          "Request governed re-evaluation"
+        ],
+        "toolbarCount": 3,
+        "toolbarDisabled": 3,
+        "guidance": true,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 779
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          },
+          "#rightPane": {
+            "x": 1020,
+            "y": 182,
+            "width": 420,
+            "height": 779
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 961,
+            "width": 1440,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 947,
+            "y": 142,
+            "width": 481,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          }
+        }
+      }
+    },
+    {
+      "surface": "mastery",
+      "viewport": "1440x1000",
+      "viewportWidth": 1440,
+      "viewportHeight": 1000,
+      "state": "fixture-mastered",
+      "file": "mastery-1440x1000-fixture-mastered.png",
+      "sha256": "d89e47349f19ce1b77de86efd73ed008431f98f6fae10df07a82d6def7eee0ee",
+      "bytes": 168962,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "msFixture",
+          "args": [],
+          "value": {
+            "judgment": "MASTERED",
+            "truthClass": "SYNTHETIC_DEMO_SEED"
+          }
+        }
+      ],
+      "metrics": {
+        "centerText": "crypto-basics user:self\nOk\nYes\nId\nmastery-reaudit-1\nSubject\nuser:self\nMasteryTarget\ncrypto-basics\nJudgment\nMASTERED\nFreshness\nREVALIDATION_REQUIRED\nPolicyRef\npolicy:mastery-v3\nBasisDigest\nbasis:reaudit001\nEVIDENCE\nItem 1\nRef: ev-reaudit-1@ev-reaudit-1-r1 · State: UNVERIFIED_PROVIDER_UNBOUND\nDECISIONS\nItem 1\nRef: decision-reaudit-1 · State: UNVERIFIED_PROVIDER_UNBOUND\nPOLICY\nRef\npolicy:mastery-v3\nState\nUNVERIFIED_PROVIDER_UNBOUND\nMissingRefs\nev-reaudit-1@ev-reaudit-1-r1 · decision-reaudit-1 · policy:mastery-v3\nConflict\nNo\nCausalLaw\nEFFECTIVE_DECISIONS+EVIDENCE+VERSIONED_POLICY_ONLY\nCompletionOrActivityUsed\nNo\nInstitutionalAuthorityInferred\nNo",
+        "leftText": "Mastery target Judgment Freshness Policy\ncrypto-basics\nuser:self\n MASTERED REVALIDATION_REQUIRED policy:mastery-v3",
+        "rightText": "الوحدة\nالكتلة المحددة\n\nMASTERY\n\ncrypto-basics\n\nMASTERED · REVALIDATION_REQUIRED\n\nIDENTITY\nGoverned basis\nSubject\nuser:self\nPolicy revision\npolicy:mastery-v3\nJudgment\nMASTERED\nFreshness\nREVALIDATION_REQUIRED\nBasis digest\nbasis:reaudit001",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 38,
+        "rightLineCount": 17,
+        "leftLineCount": 4,
+        "rightLineOverlapRatio": 0.529,
+        "tables": 1,
+        "tableHeaders": [
+          "Mastery target",
+          "Judgment",
+          "Freshness",
+          "Policy"
+        ],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 15,
+        "semanticGroups": 3,
+        "regionItems": 2,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Inspect Mastery",
+          "Explain causal basis",
+          "Request governed re-evaluation"
+        ],
+        "toolbarCount": 3,
+        "toolbarDisabled": 1,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 779
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          },
+          "#rightPane": {
+            "x": 1020,
+            "y": 182,
+            "width": 420,
+            "height": 779
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 961,
+            "width": 1440,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 947,
+            "y": 142,
+            "width": 481,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          }
+        }
+      }
+    },
+    {
+      "surface": "mastery",
+      "viewport": "1440x1000",
+      "viewportWidth": 1440,
+      "viewportHeight": 1000,
+      "state": "fixture-second-row",
+      "file": "mastery-1440x1000-fixture-second-row.png",
+      "sha256": "28927850ce61565562b215adf1adbb887ec0288de31b812c27d9ff91b49a293e",
+      "bytes": 169215,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "msSecond",
+          "args": [],
+          "value": {
+            "judgment": "INSUFFICIENT_EVIDENCE",
+            "rows": [
+              "mastery-reaudit-1",
+              "mastery-reaudit-2"
+            ]
+          }
+        }
+      ],
+      "metrics": {
+        "centerText": "network-analysis user:self\nOk\nYes\nId\nmastery-reaudit-2\nSubject\nuser:self\nMasteryTarget\nnetwork-analysis\nJudgment\nINSUFFICIENT_EVIDENCE\nFreshness\nCURRENT\nPolicyRef\npolicy:mastery-v3\nBasisDigest\nbasis:reaudit002\nEVIDENCE\nItem 1\nRef: ev-missing@r1 · State: UNVERIFIED_PROVIDER_UNBOUND\nDecisions\nNone\nPOLICY\nRef\npolicy:mastery-v3\nState\nUNVERIFIED_PROVIDER_UNBOUND\nMissingRefs\nev-missing@r1 · policy:mastery-v3\nConflict\nNo\nCausalLaw\nEFFECTIVE_DECISIONS+EVIDENCE+VERSIONED_POLICY_ONLY\nCompletionOrActivityUsed\nNo\nInstitutionalAuthorityInferred\nNo",
+        "leftText": "Mastery target Judgment Freshness Policy\ncrypto-basics\nuser:self\n MASTERED REVALIDATION_REQUIRED policy:mastery-v3\nnetwork-analysis\nuser:self\n INSUFFICIENT_EVIDENCE CURRENT policy:mastery-v3",
+        "rightText": "الوحدة\nالكتلة المحددة\n\nMASTERY\n\nnetwork-analysis\n\nINSUFFICIENT_EVIDENCE · CURRENT\n\nIDENTITY\nGoverned basis\nSubject\nuser:self\nPolicy revision\npolicy:mastery-v3\nJudgment\nINSUFFICIENT_EVIDENCE\nFreshness\nCURRENT\nBasis digest\nbasis:reaudit002",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 37,
+        "rightLineCount": 17,
+        "leftLineCount": 7,
+        "rightLineOverlapRatio": 0.529,
+        "tables": 1,
+        "tableHeaders": [
+          "Mastery target",
+          "Judgment",
+          "Freshness",
+          "Policy"
+        ],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 16,
+        "semanticGroups": 2,
+        "regionItems": 1,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Inspect Mastery",
+          "Explain causal basis",
+          "Request governed re-evaluation"
+        ],
+        "toolbarCount": 3,
+        "toolbarDisabled": 1,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 779
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          },
+          "#rightPane": {
+            "x": 1020,
+            "y": 182,
+            "width": 420,
+            "height": 779
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 961,
+            "width": 1440,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 947,
+            "y": 142,
+            "width": 481,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          }
+        }
+      }
+    },
+    {
+      "surface": "portfolio",
+      "viewport": "1440x1000",
+      "viewportWidth": 1440,
+      "viewportHeight": 1000,
+      "state": "empty",
+      "file": "portfolio-1440x1000-empty.png",
+      "sha256": "cf55900504e92d7b723f7d1acc947883c4250c5c712048befdf82d3172f0db09",
+      "bytes": 125337,
+      "pageErrors": [],
+      "seeds": [],
+      "metrics": {
+        "centerText": "Portfolio workbench\n\nEMPTY · No canonical Portfolio memberships are bound.\n\nHow this workspace works\nPortfolio starts empty when no canonical source/provider is bound.\nCuration references canonical Evidence/Mastery/project records; it does not invent achievements.",
+        "leftText": "No canonical Portfolio memberships are bound.",
+        "rightText": "الوحدة\nالكتلة المحددة\n\nEMPTY · No record is selected; record context appears here once a record is active.",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 5,
+        "rightLineCount": 3,
+        "leftLineCount": 1,
+        "rightLineOverlapRatio": 0,
+        "tables": 0,
+        "tableHeaders": [],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 0,
+        "semanticGroups": 0,
+        "regionItems": 0,
+        "centerStateTokens": 1,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Remove Portfolio reference",
+          "Filter Portfolio",
+          "Export exact references",
+          "Update governed grouping"
+        ],
+        "toolbarCount": 4,
+        "toolbarDisabled": 2,
+        "guidance": true,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 779
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          },
+          "#rightPane": {
+            "x": 1020,
+            "y": 182,
+            "width": 420,
+            "height": 779
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 961,
+            "width": 1440,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 780,
+            "y": 142,
+            "width": 648,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          }
+        }
+      }
+    },
+    {
+      "surface": "portfolio",
+      "viewport": "1440x1000",
+      "viewportWidth": 1440,
+      "viewportHeight": 1000,
+      "state": "assembly-one-reference",
+      "file": "portfolio-1440x1000-assembly-one-reference.png",
+      "sha256": "42a998ec63d23202989419de7b17913882bd7f925d33cdab3c85e0da5a9502b1",
+      "bytes": 162693,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "pfAdd",
+          "args": [
+            "member-reaudit-1",
+            "Evidence",
+            "ev-reaudit-1@ev-reaudit-1-r1",
+            "Re-audit Evidence reference"
+          ],
+          "value": {
+            "ok": true,
+            "record": {
+              "id": "member-reaudit-1",
+              "revisionId": "pm-reaudit-member-reaudit-1",
+              "refType": "Evidence",
+              "sourceRef": "ev-reaudit-1@ev-reaudit-1-r1",
+              "state": "UNAVAILABLE",
+              "groupingRef": null,
+              "groupingState": "UNGROUPED",
+              "title": "Re-audit Evidence reference",
+              "annotation": null,
+              "truthClass": "CURATION_REFERENCE"
+            },
+            "receipt": {
+              "sequence": 1,
+              "command": "portfolio.curate",
+              "action": "add",
+              "owner": "W04PortfolioDomain",
+              "id": "member-reaudit-1",
+              "sourceRef": "ev-reaudit-1@ev-reaudit-1-r1",
+              "sourceResolution": "UNAVAILABLE",
+              "canonicalSourceWrite": false
+            },
+            "mutated": true
+          }
+        }
+      ],
+      "metrics": {
+        "centerText": "Re-audit Evidence reference\nId\nmember-reaudit-1\nRevisionId\npm-reaudit-member-reaudit-1\nRefType\nEvidence\nSourceRef\nev-reaudit-1@ev-reaudit-1-r1\nState\nUNAVAILABLE\nGroupingRef\n—\nGroupingState\nUNGROUPED\nTitle\nRe-audit Evidence reference\nAnnotation\n—\nTruthClass\nCURATION_REFERENCE",
+        "leftText": "Curated item Reference type Source state Grouping\nRe-audit Evidence reference\nev-reaudit-1@ev-reaudit-1-r1\n Evidence UNAVAILABLE Ungrouped\nUNGROUPED",
+        "rightText": "الوحدة\nالكتلة المحددة\n\nPORTFOLIO\n\nRe-audit Evidence reference\n\nEvidence · UNAVAILABLE · UNGROUPED\n\nIDENTITY\nCuration metadata\nCanonical source ref\nev-reaudit-1@ev-reaudit-1-r1\nSource state\nUNAVAILABLE\nGrouping ref\nUNGROUPED\nGrouping authority state\nUNGROUPED",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 21,
+        "rightLineCount": 15,
+        "leftLineCount": 5,
+        "rightLineOverlapRatio": 0.333,
+        "tables": 1,
+        "tableHeaders": [
+          "Curated item",
+          "Reference type",
+          "Source state",
+          "Grouping"
+        ],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 10,
+        "semanticGroups": 0,
+        "regionItems": 0,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Remove Portfolio reference",
+          "Filter Portfolio",
+          "Export exact references",
+          "Update governed grouping"
+        ],
+        "toolbarCount": 4,
+        "toolbarDisabled": 0,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 779
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          },
+          "#rightPane": {
+            "x": 1020,
+            "y": 182,
+            "width": 420,
+            "height": 779
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 961,
+            "width": 1440,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 780,
+            "y": 142,
+            "width": 648,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          }
+        }
+      }
+    },
+    {
+      "surface": "portfolio",
+      "viewport": "1440x1000",
+      "viewportWidth": 1440,
+      "viewportHeight": 1000,
+      "state": "assembly-two-references",
+      "file": "portfolio-1440x1000-assembly-two-references.png",
+      "sha256": "aca7bb5cb6d551f0010bf7ce5a734bfe60952686b2679650c69ef01c0658a168",
+      "bytes": 174082,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "pfAdd",
+          "args": [
+            "member-reaudit-2",
+            "Mastery",
+            "mastery-reaudit-1@mr-reaudit-001",
+            "Re-audit Mastery reference"
+          ],
+          "value": {
+            "ok": true,
+            "record": {
+              "id": "member-reaudit-2",
+              "revisionId": "pm-reaudit-member-reaudit-2",
+              "refType": "Mastery",
+              "sourceRef": "mastery-reaudit-1@mr-reaudit-001",
+              "state": "UNAVAILABLE",
+              "groupingRef": null,
+              "groupingState": "UNGROUPED",
+              "title": "Re-audit Mastery reference",
+              "annotation": null,
+              "truthClass": "CURATION_REFERENCE"
+            },
+            "receipt": {
+              "sequence": 2,
+              "command": "portfolio.curate",
+              "action": "add",
+              "owner": "W04PortfolioDomain",
+              "id": "member-reaudit-2",
+              "sourceRef": "mastery-reaudit-1@mr-reaudit-001",
+              "sourceResolution": "UNAVAILABLE",
+              "canonicalSourceWrite": false
+            },
+            "mutated": true
+          }
+        }
+      ],
+      "metrics": {
+        "centerText": "Re-audit Evidence reference\nId\nmember-reaudit-1\nRevisionId\npm-reaudit-member-reaudit-1\nRefType\nEvidence\nSourceRef\nev-reaudit-1@ev-reaudit-1-r1\nState\nUNAVAILABLE\nGroupingRef\n—\nGroupingState\nUNGROUPED\nTitle\nRe-audit Evidence reference\nAnnotation\n—\nTruthClass\nCURATION_REFERENCE",
+        "leftText": "Curated item Reference type Source state Grouping\nRe-audit Evidence reference\nev-reaudit-1@ev-reaudit-1-r1\n Evidence UNAVAILABLE Ungrouped\nUNGROUPED\n\nRe-audit Mastery reference\nmastery-reaudit-1@mr-reaudit-001\n Mastery UNAVAILABLE Ungrouped\nUNGROUPED",
+        "rightText": "الوحدة\nالكتلة المحددة\n\nPORTFOLIO\n\nRe-audit Evidence reference\n\nEvidence · UNAVAILABLE · UNGROUPED\n\nIDENTITY\nCuration metadata\nCanonical source ref\nev-reaudit-1@ev-reaudit-1-r1\nSource state\nUNAVAILABLE\nGrouping ref\nUNGROUPED\nGrouping authority state\nUNGROUPED",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 21,
+        "rightLineCount": 15,
+        "leftLineCount": 9,
+        "rightLineOverlapRatio": 0.333,
+        "tables": 1,
+        "tableHeaders": [
+          "Curated item",
+          "Reference type",
+          "Source state",
+          "Grouping"
+        ],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 10,
+        "semanticGroups": 0,
+        "regionItems": 0,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Remove Portfolio reference",
+          "Filter Portfolio",
+          "Export exact references",
+          "Update governed grouping"
+        ],
+        "toolbarCount": 4,
+        "toolbarDisabled": 0,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 779
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          },
+          "#rightPane": {
+            "x": 1020,
+            "y": 182,
+            "width": 420,
+            "height": 779
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 961,
+            "width": 1440,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 780,
+            "y": 142,
+            "width": 648,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          }
+        }
+      }
+    },
+    {
+      "surface": "evidence",
+      "viewport": "1024x900",
+      "viewportWidth": 1024,
+      "viewportHeight": 900,
+      "state": "empty",
+      "file": "evidence-1024x900-empty.png",
+      "sha256": "9c372e8a0002b6c0adc2899037fb644bb97c1ecfb52b8980efd70e932f439adb",
+      "bytes": 97128,
+      "pageErrors": [],
+      "seeds": [],
+      "metrics": {
+        "centerText": "Evidence workbench\n\nEMPTY · No current Candidate or admitted Evidence is bound.\n\nHow this workspace works\nDeclare a Candidate without inventing verification facts.\nBind an admitted verifier/provider before validation or Admission.",
+        "leftText": "No current Candidate or admitted Evidence is bound.",
+        "rightText": "الوحدةالكتلة المحددةEMPTY · No record is selected; record context appears here once a record is active.",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 5,
+        "rightLineCount": 1,
+        "leftLineCount": 1,
+        "rightLineOverlapRatio": 0,
+        "tables": 0,
+        "tableHeaders": [],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 0,
+        "semanticGroups": 0,
+        "regionItems": 0,
+        "centerStateTokens": 1,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Inspect Evidence",
+          "Import Candidate Evidence",
+          "Prepare Evidence amendment",
+          "Admit submitted Candidate",
+          "Retain superseded source"
+        ],
+        "toolbarCount": 5,
+        "toolbarDisabled": 5,
+        "guidance": true,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 200,
+            "width": 304,
+            "height": 661
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 200,
+            "width": 709,
+            "height": 661
+          },
+          "#rightPane": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 861,
+            "width": 1024,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 283,
+            "y": 134,
+            "width": 729,
+            "height": 65
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 200,
+            "width": 709,
+            "height": 661
+          }
+        }
+      }
+    },
+    {
+      "surface": "evidence",
+      "viewport": "1024x900",
+      "viewportWidth": 1024,
+      "viewportHeight": 900,
+      "state": "candidate-submitted",
+      "file": "evidence-1024x900-candidate-submitted.png",
+      "sha256": "2125ef1b94f73f58593ccc23bfbda54c70e61b7bd65826b9a35b2e12080ee9a6",
+      "bytes": 119602,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "evImport",
+          "args": [
+            "cand-reaudit-1"
+          ],
+          "value": {
+            "ok": true,
+            "record": {
+              "id": "cand-reaudit-1",
+              "evidenceId": "cand-reaudit-1",
+              "revisionId": "cand-reaudit-1-r1",
+              "title": "Re-audit candidate cand-reaudit-1",
+              "status": "CANDIDATE",
+              "candidateState": "PREPARED",
+              "candidateRevision": 1,
+              "intakeValidation": {
+                "status": "NOT_VALIDATED"
+              },
+              "sourceStatus": "CURRENT",
+              "digest": null,
+              "schemaValid": false,
+              "sourceBytesAvailable": false,
+              "verification": {
+                "status": "UNVERIFIED",
+                "providerId": null,
+                "proofRef": null,
+                "digest": null,
+                "sourceBytesAvailable": false,
+                "schemaValid": false,
+                "producerIdentity": null,
+                "handoffReceiptRef": null,
+                "verifiedAt": null
+              },
+              "reviewStatus": null,
+              "effectiveDecision": null,
+              "notes": "Submitted with a source handoff note for the re-audit capture.",
+              "subject": "owner:local",
+              "evidenceClaim": "Candidate claim recorded for the W04 visual re-audit lifecycle state.",
+              "criterionRefs": [
+                "criteria:v4#integrity",
+                "criteria:v4#provenance"
+              ],
+              "governedPurpose": "W04 visual re-audit state capture (fixture)",
+              "selectedMaterialRefs": [
+                "reaudit-source-cand-reaudit-1@r1",
+                "reaudit-timeline@t1",
+                "reaudit-observation@o1"
+              ],
+              "sourceType": "imported-material",
+              "sourceId": "reaudit-source-cand-reaudit-1",
+              "sourceRevision": "r1",
+              "producerIdentity": null,
+              "sourceTimestamp": null,
+              "handoffReceiptRef": null,
+              "admissionAuthority": {
+                "available": false,
+                "proofRef": null
+              },
+              "importAssurance": "UNVERIFIED"
+            },
+            "mutated": true,
+            "canonicalEvidenceCreated": false,
+            "verificationStatus": "UNVERIFIED",
+            "note": "Import creates Candidate Evidence only. Source verification, Admission, Review, Decision and Mastery remain separate."
+          }
+        },
+        {
+          "seed": "evSubmit",
+          "args": [
+            "cand-reaudit-1"
+          ],
+          "value": {
+            "ok": true,
+            "code": null
+          }
+        }
+      ],
+      "metrics": {
+        "centerText": "Re-audit candidate cand-reaudit-1\nKind\nGovernedEvidenceWorkbench\nSelectedId\ncand-reaudit-1\nIDENTITY\nRecordKind\nCANDIDATE_EVIDENCE\nEvidenceId\ncand-reaudit-1\nRevisionId\ncand-reaudit-1-r1\nBaseEvidenceRevisionId\n—\nCLAIM\nTitle\nRe-audit candidate cand-reaudit-1\nEvidenceClaim\nCandidate claim recorded for the W04 visual re-audit lifecycle state.\nSubject\nowner:local\nCriterionRefs\ncriteria:v4#integrity · criteria:v4#provenance\nSTATE\nCandidateState\nSUBMITTED_FOR_INTAKE\nEvidenceLifecycle\n—\nReviewStatus\nUNREVIEWED\nEffectiveReviewDecision\nNONE\nSourceStatus\nCURRENT\nPROVENANCE\nSourceRef\nreaudit-source-cand-reaudit-1@r1\nDigest\n—\nImmutableRevision\nNo\nAdmissionAuthorityAvailable\nNo\nACTIONS\nInspect\nYes\nAmend\nNo\nAdmit\nNo\nSourceChoice\nNo",
+        "leftText": "Evidence record Lifecycle Source Review\nRe-audit candidate cand-reaudit-1\ncand-reaudit-1 · cand-reaudit-1-r1\n CANDIDATE\nSUBMITTED_FOR_INTAKE\n CURRENT\nreaudit-source-cand-reaudit-1@r1\n UNREVIEWED\nNONE",
+        "rightText": "الوحدةالكتلة المحددةEvidence contextRe-audit candidate cand-reaudit-1CANDIDATE · source CURRENTGovernanceProvenanceEvidence IDcand-reaudit-1Revisioncand-reaudit-1-r1Pinned sourcereaudit-source-cand-reaudit-1@r1Digest—Criterion relevancecriteria:v4#integrity, criteria:v4#provenanceState dimensionsEvidence lifecycleCANDIDATEReview statusUNREVIEWEDEffective Review DecisionNONESource integrity/statusCURRENT",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 52,
+        "rightLineCount": 1,
+        "leftLineCount": 9,
+        "rightLineOverlapRatio": 0,
+        "tables": 1,
+        "tableHeaders": [
+          "Evidence record",
+          "Lifecycle",
+          "Source",
+          "Review"
+        ],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 23,
+        "semanticGroups": 5,
+        "regionItems": 0,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Inspect Evidence",
+          "Import Candidate Evidence",
+          "Prepare Evidence amendment",
+          "Admit submitted Candidate",
+          "Retain superseded source"
+        ],
+        "toolbarCount": 5,
+        "toolbarDisabled": 4,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 200,
+            "width": 304,
+            "height": 661
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 200,
+            "width": 709,
+            "height": 661
+          },
+          "#rightPane": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 861,
+            "width": 1024,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 283,
+            "y": 134,
+            "width": 729,
+            "height": 65
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 200,
+            "width": 709,
+            "height": 661
+          }
+        }
+      }
+    },
+    {
+      "surface": "evidence",
+      "viewport": "1024x900",
+      "viewportWidth": 1024,
+      "viewportHeight": 900,
+      "state": "admitted-immutable",
+      "file": "evidence-1024x900-admitted-immutable.png",
+      "sha256": "cadca9cb570f0dbb5c90ce15fb246877824008d6fa472208a170713bd1839069",
+      "bytes": 122318,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "evAdmit",
+          "args": [
+            "cand-reaudit-1"
+          ],
+          "value": {
+            "verified": true,
+            "validated": true,
+            "admitted": true,
+            "code": null,
+            "status": "ADMITTED",
+            "revisionId": "cand-reaudit-1-r1",
+            "immutable": true
+          }
+        }
+      ],
+      "metrics": {
+        "centerText": "Re-audit candidate cand-reaudit-1\nKind\nGovernedEvidenceWorkbench\nSelectedId\ncand-reaudit-1\nIDENTITY\nRecordKind\nADMITTED_EVIDENCE\nEvidenceId\ncand-reaudit-1\nRevisionId\ncand-reaudit-1-r1\nBaseEvidenceRevisionId\n—\nCLAIM\nTitle\nRe-audit candidate cand-reaudit-1\nEvidenceClaim\nCandidate claim recorded for the W04 visual re-audit lifecycle state.\nSubject\nowner:local\nCriterionRefs\ncriteria:v4#integrity · criteria:v4#provenance\nSTATE\nCandidateState\nADMITTED\nEvidenceLifecycle\nACTIVE\nReviewStatus\nUNREVIEWED\nEffectiveReviewDecision\nNONE\nSourceStatus\nCURRENT\nPROVENANCE\nSourceRef\nreaudit-source-cand-reaudit-1@r1\nDigest\nsha256:7777777777777777777777777777777777777777777777777777777777777777\nImmutableRevision\nYes\nAdmissionAuthorityAvailable\nYes\nACTIONS\nInspect\nYes\nAmend\nYes\nAdmit\nNo\nSourceChoice\nNo",
+        "leftText": "Evidence record Lifecycle Source Review\nRe-audit candidate cand-reaudit-1\ncand-reaudit-1 · cand-reaudit-1-r1\n ADMITTED\nADMITTED\n CURRENT\nreaudit-source-cand-reaudit-1@r1\n UNREVIEWED\nNONE",
+        "rightText": "الوحدةالكتلة المحددةEvidence contextRe-audit candidate cand-reaudit-1ADMITTED · source CURRENTGovernanceProvenanceEvidence IDcand-reaudit-1Revisioncand-reaudit-1-r1Pinned sourcereaudit-source-cand-reaudit-1@r1Digestsha256:7777777777777777777777777777777777777777777777777777777777777777Criterion relevancecriteria:v4#integrity, criteria:v4#provenanceState dimensionsEvidence lifecycleACTIVEReview statusUNREVIEWEDEffective Review DecisionNONESource integrity/statusCURRENT",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 52,
+        "rightLineCount": 1,
+        "leftLineCount": 9,
+        "rightLineOverlapRatio": 0,
+        "tables": 1,
+        "tableHeaders": [
+          "Evidence record",
+          "Lifecycle",
+          "Source",
+          "Review"
+        ],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 23,
+        "semanticGroups": 5,
+        "regionItems": 0,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Inspect Evidence",
+          "Import Candidate Evidence",
+          "Prepare Evidence amendment",
+          "Admit submitted Candidate",
+          "Retain superseded source"
+        ],
+        "toolbarCount": 5,
+        "toolbarDisabled": 3,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 200,
+            "width": 304,
+            "height": 661
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 200,
+            "width": 709,
+            "height": 661
+          },
+          "#rightPane": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 861,
+            "width": 1024,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 283,
+            "y": 134,
+            "width": 729,
+            "height": 65
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 200,
+            "width": 709,
+            "height": 661
+          }
+        }
+      }
+    },
+    {
+      "surface": "reviews",
+      "viewport": "1024x900",
+      "viewportWidth": 1024,
+      "viewportHeight": 900,
+      "state": "empty",
+      "file": "reviews-1024x900-empty.png",
+      "sha256": "8bd15a6057f5ab6ced1bac42c9a7f9dc0d486f819b9e966f19d6450033be021f",
+      "bytes": 95686,
+      "pageErrors": [],
+      "seeds": [],
+      "metrics": {
+        "centerText": "Reviews workbench\n\nEMPTY · No formal Evidence Review is bound.\n\nHow this workspace works\nFormal Review starts only from admitted immutable Evidence and pinned criteria.\nFindings and Decisions require explicit governed input and reviewer authority.",
+        "leftText": "No formal Evidence Review is bound.",
+        "rightText": "الوحدةالكتلة المحددةEMPTY · No record is selected; record context appears here once a record is active.",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 5,
+        "rightLineCount": 1,
+        "leftLineCount": 1,
+        "rightLineOverlapRatio": 0,
+        "tables": 0,
+        "tableHeaders": [],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 0,
+        "semanticGroups": 0,
+        "regionItems": 0,
+        "centerStateTokens": 1,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Continue Review",
+          "Add Review finding",
+          "Compare exact Review revisions",
+          "Issue superseding Decision"
+        ],
+        "toolbarCount": 4,
+        "toolbarDisabled": 4,
+        "guidance": true,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 679
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          },
+          "#rightPane": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 861,
+            "width": 1024,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 341,
+            "y": 142,
+            "width": 671,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          }
+        }
+      }
+    },
+    {
+      "surface": "reviews",
+      "viewport": "1024x900",
+      "viewportWidth": 1024,
+      "viewportHeight": 900,
+      "state": "in-review-with-findings",
+      "file": "reviews-1024x900-in-review-with-findings.png",
+      "sha256": "ff891d78f096da14d165bb33b5f9b86a97372e90c182227e403c63873283024d",
+      "bytes": 121983,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "rvEvidence",
+          "args": [],
+          "value": {
+            "status": "ADMITTED",
+            "revisionId": "ev-reaudit-1-r1"
+          }
+        },
+        {
+          "seed": "rvRequest",
+          "args": [],
+          "value": {
+            "state": "IN_REVIEW"
+          }
+        },
+        {
+          "seed": "rvFinding",
+          "args": [
+            "f-reaudit-1",
+            "SATISFIED",
+            "criteria:v4#integrity",
+            "Digest and schema verified against the pinned source revision."
+          ],
+          "value": true
+        },
+        {
+          "seed": "rvFinding",
+          "args": [
+            "f-reaudit-2",
+            "PARTIALLY_SATISFIED",
+            "criteria:v4#provenance",
+            "Provenance chain is present but the handoff receipt is not yet pinned."
+          ],
+          "value": true
+        }
+      ],
+      "metrics": {
+        "centerText": "Review rv-reaudit-1\nKind\nFormalReviewDecisionWorkbench\nSelectedId\nrv-reaudit-1\nREQUEST\nReviewRevisionId\nrv-reaudit-1:r1\nState\nIN_REVIEW\nRereview\nNONE\nPinnedEvidenceRefs\nev-reaudit-1@ev-reaudit-1-r1\nPinnedCriteriaRefs\ncriteria:v4#integrity · criteria:v4#provenance\nREVIEWER\nIdentity\nreviewer:reaudit\nAuthorityAvailable\nYes\nAssignmentPermissionAvailable\nYes\nPermissionProofRef\nperm:reaudit\nFINDINGS\nf-reaudit-1\nState: SATISFIED · ScopeDisposition: IN_SCOPE · CriterionRef: criteria:v4#integrity · Text: Digest and schema verified against the pinned source revision. · CreatedAt: 2026-09-29T18:02:31.288Z · ReviewRevisionRef: rv-reaudit-1:r1\nf-reaudit-2\nState: PARTIALLY_SATISFIED · ScopeDisposition: IN_SCOPE · CriterionRef: criteria:v4#provenance · Text: Provenance chain is present but the handoff receipt is not yet pinned. · CreatedAt: 2026-09-29T18:02:31.289Z · ReviewRevisionRef: rv-reaudit-1:r1\nDECISION\nEffectiveDecisionId\n—\nEffectiveOutcome\nNONE\nHistoryCount\n0\nACTIONS\nReview\nYes\nRequest\nYes\nAssign\nNo\nStart\nNo\nFinding\nYes\nReady\nYes\nContinue\nYes\nCancel\nYes\nSupersede\nNo\nRereview\nNo\nCompare\nYes\nCanAssign\nNo\nCanStart\nNo\nCanAddFinding\nYes\nCanMarkReady\nYes\nCanContinue\nYes\nCanCancel\nYes\nCanSupersede\nNo\nCanRereview\nNo",
+        "leftText": "Review Workflow Pinned Evidence Effective Decision\nReview rv-reaudit-1\nrv-reaudit-1:r1\n IN_REVIEW ev-reaudit-1@ev-reaudit-1-r1\nExact revision basis\n NONE\nNo issued decision",
+        "rightText": "الوحدةالكتلة المحددةFormal Review contextReview rv-reaudit-1IN_REVIEW · NO DECISIONReview governancePinned scopePinned Evidence revisionsev-reaudit-1@ev-reaudit-1-r1Pinned criteriacriteria:v4#integrity, criteria:v4#provenanceReviewer actorreviewer:reauditAuthority proofperm:reauditDecision lineageEffective DecisionNONEIssued Decisions retained0Re-reviewNONEFindings2",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 76,
+        "rightLineCount": 1,
+        "leftLineCount": 7,
+        "rightLineOverlapRatio": 0,
+        "tables": 1,
+        "tableHeaders": [
+          "Review",
+          "Workflow",
+          "Pinned Evidence",
+          "Effective Decision"
+        ],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 33,
+        "semanticGroups": 5,
+        "regionItems": 2,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Continue Review",
+          "Add Review finding",
+          "Compare exact Review revisions",
+          "Issue superseding Decision"
+        ],
+        "toolbarCount": 4,
+        "toolbarDisabled": 1,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 679
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          },
+          "#rightPane": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 861,
+            "width": 1024,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 341,
+            "y": 142,
+            "width": 671,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          }
+        }
+      }
+    },
+    {
+      "surface": "reviews",
+      "viewport": "1024x900",
+      "viewportWidth": 1024,
+      "viewportHeight": 900,
+      "state": "ready-for-decision",
+      "file": "reviews-1024x900-ready-for-decision.png",
+      "sha256": "26f9c26b54ec63fe086df12746f80231e89778d91b2554e4bfc925cd753ec4fd",
+      "bytes": 116486,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "rvReady",
+          "args": [],
+          "value": true
+        }
+      ],
+      "metrics": {
+        "centerText": "Review rv-reaudit-1\nKind\nFormalReviewDecisionWorkbench\nSelectedId\nrv-reaudit-1\nREQUEST\nReviewRevisionId\nrv-reaudit-1:r1\nState\nREADY_FOR_DECISION\nRereview\nNONE\nPinnedEvidenceRefs\nev-reaudit-1@ev-reaudit-1-r1\nPinnedCriteriaRefs\ncriteria:v4#integrity · criteria:v4#provenance\nREVIEWER\nIdentity\nreviewer:reaudit\nAuthorityAvailable\nYes\nAssignmentPermissionAvailable\nYes\nPermissionProofRef\nperm:reaudit\nFINDINGS\nf-reaudit-1\nState: SATISFIED · ScopeDisposition: IN_SCOPE · CriterionRef: criteria:v4#integrity · Text: Digest and schema verified against the pinned source revision. · CreatedAt: 2026-09-29T18:02:31.288Z · ReviewRevisionRef: rv-reaudit-1:r1\nf-reaudit-2\nState: PARTIALLY_SATISFIED · ScopeDisposition: IN_SCOPE · CriterionRef: criteria:v4#provenance · Text: Provenance chain is present but the handoff receipt is not yet pinned. · CreatedAt: 2026-09-29T18:02:31.289Z · ReviewRevisionRef: rv-reaudit-1:r1\nDECISION\nEffectiveDecisionId\n—\nEffectiveOutcome\nNONE\nHistoryCount\n0\nACTIONS\nReview\nYes\nRequest\nYes\nAssign\nNo\nStart\nNo\nFinding\nNo\nReady\nNo\nContinue\nYes\nCancel\nNo\nSupersede\nYes\nRereview\nNo\nCompare\nYes\nCanAssign\nNo\nCanStart\nNo\nCanAddFinding\nNo\nCanMarkReady\nNo\nCanContinue\nYes\nCanCancel\nNo\nCanSupersede\nYes\nCanRereview\nNo",
+        "leftText": "Review Workflow Pinned Evidence Effective Decision\nReview rv-reaudit-1\nrv-reaudit-1:r1\n READY_FOR_DECISION ev-reaudit-1@ev-reaudit-1-r1\nExact revision basis\n NONE\nNo issued decision",
+        "rightText": "الوحدةالكتلة المحددةFormal Review contextReview rv-reaudit-1READY_FOR_DECISION · NO DECISIONReview governancePinned scopePinned Evidence revisionsev-reaudit-1@ev-reaudit-1-r1Pinned criteriacriteria:v4#integrity, criteria:v4#provenanceReviewer actorreviewer:reauditAuthority proofperm:reauditDecision lineageEffective DecisionNONEIssued Decisions retained0Re-reviewNONEFindings2",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 76,
+        "rightLineCount": 1,
+        "leftLineCount": 7,
+        "rightLineOverlapRatio": 0,
+        "tables": 1,
+        "tableHeaders": [
+          "Review",
+          "Workflow",
+          "Pinned Evidence",
+          "Effective Decision"
+        ],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 33,
+        "semanticGroups": 5,
+        "regionItems": 2,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Continue Review",
+          "Add Review finding",
+          "Compare exact Review revisions",
+          "Issue superseding Decision"
+        ],
+        "toolbarCount": 4,
+        "toolbarDisabled": 1,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 679
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          },
+          "#rightPane": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 861,
+            "width": 1024,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 341,
+            "y": 142,
+            "width": 671,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          }
+        }
+      }
+    },
+    {
+      "surface": "reviews",
+      "viewport": "1024x900",
+      "viewportWidth": 1024,
+      "viewportHeight": 900,
+      "state": "decision-issued",
+      "file": "reviews-1024x900-decision-issued.png",
+      "sha256": "96bb4ec1863b386dce8bfeda484b911cb768343a4fee49009513bd8cfa427f33",
+      "bytes": 123485,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "rvDecide",
+          "args": [],
+          "value": {
+            "ok": true,
+            "code": null,
+            "state": "CLOSED"
+          }
+        }
+      ],
+      "metrics": {
+        "centerText": "Review rv-reaudit-1\nKind\nFormalReviewDecisionWorkbench\nSelectedId\nrv-reaudit-1\nREQUEST\nReviewRevisionId\nrv-reaudit-1:r1-d7\nState\nCLOSED\nRereview\nNONE\nPinnedEvidenceRefs\nev-reaudit-1@ev-reaudit-1-r1\nPinnedCriteriaRefs\ncriteria:v4#integrity · criteria:v4#provenance\nREVIEWER\nIdentity\nreviewer:reaudit\nAuthorityAvailable\nYes\nAssignmentPermissionAvailable\nYes\nPermissionProofRef\nperm:reaudit\nFINDINGS\nf-reaudit-1\nState: SATISFIED · ScopeDisposition: IN_SCOPE · CriterionRef: criteria:v4#integrity · Text: Digest and schema verified against the pinned source revision. · CreatedAt: 2026-09-29T18:02:31.288Z · ReviewRevisionRef: rv-reaudit-1:r1\nf-reaudit-2\nState: PARTIALLY_SATISFIED · ScopeDisposition: IN_SCOPE · CriterionRef: criteria:v4#provenance · Text: Provenance chain is present but the handoff receipt is not yet pinned. · CreatedAt: 2026-09-29T18:02:31.289Z · ReviewRevisionRef: rv-reaudit-1:r1\nDECISION\nEffectiveDecisionId\ndecision-reaudit-1\nEffectiveOutcome\nACCEPT_WITH_LIMITATIONS\nHistoryCount\n1\nACTIONS\nReview\nYes\nRequest\nYes\nAssign\nNo\nStart\nNo\nFinding\nNo\nReady\nNo\nContinue\nNo\nCancel\nNo\nSupersede\nNo\nRereview\nYes\nCompare\nYes\nCanAssign\nNo\nCanStart\nNo\nCanAddFinding\nNo\nCanMarkReady\nNo\nCanContinue\nNo\nCanCancel\nNo\nCanSupersede\nNo\nCanRereview\nYes",
+        "leftText": "Review Workflow Pinned Evidence Effective Decision\nReview rv-reaudit-1\nrv-reaudit-1:r1-d7\n CLOSED ev-reaudit-1@ev-reaudit-1-r1\nExact revision basis\n ACCEPT_WITH_LIMITATIONS\ndecision-reaudit-1",
+        "rightText": "الوحدةالكتلة المحددةFormal Review contextReview rv-reaudit-1CLOSED · ACCEPT_WITH_LIMITATIONSReview governancePinned scopePinned Evidence revisionsev-reaudit-1@ev-reaudit-1-r1Pinned criteriacriteria:v4#integrity, criteria:v4#provenanceReviewer actorreviewer:reauditAuthority proofperm:reauditDecision lineageEffective Decisiondecision-reaudit-1Issued Decisions retained1Re-reviewNONEFindings2",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 76,
+        "rightLineCount": 1,
+        "leftLineCount": 7,
+        "rightLineOverlapRatio": 0,
+        "tables": 1,
+        "tableHeaders": [
+          "Review",
+          "Workflow",
+          "Pinned Evidence",
+          "Effective Decision"
+        ],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 33,
+        "semanticGroups": 5,
+        "regionItems": 2,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Continue Review",
+          "Add Review finding",
+          "Compare exact Review revisions",
+          "Issue superseding Decision"
+        ],
+        "toolbarCount": 4,
+        "toolbarDisabled": 3,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 679
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          },
+          "#rightPane": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 861,
+            "width": 1024,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 341,
+            "y": 142,
+            "width": 671,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          }
+        }
+      }
+    },
+    {
+      "surface": "mastery",
+      "viewport": "1024x900",
+      "viewportWidth": 1024,
+      "viewportHeight": 900,
+      "state": "empty",
+      "file": "mastery-1024x900-empty.png",
+      "sha256": "6d6b12fdeb14546b28fcf67af28a6ef99d6644d3f1447233e5023e0b2c930ee0",
+      "bytes": 101799,
+      "pageErrors": [],
+      "seeds": [],
+      "metrics": {
+        "centerText": "Mastery workbench\n\nEMPTY · NOT_EVALUATED · No authorized Mastery provider/evaluator is bound.\n\nHow this workspace works\nCurrent state is NOT_EVALUATED while evaluator/provider truth is unavailable.\nCompletion or activity never creates Mastery.",
+        "leftText": "NOT_EVALUATED · No authorized Mastery provider/evaluator is bound.",
+        "rightText": "الوحدةالكتلة المحددةEMPTY · No record is selected; record context appears here once a record is active.",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 5,
+        "rightLineCount": 1,
+        "leftLineCount": 1,
+        "rightLineOverlapRatio": 0,
+        "tables": 0,
+        "tableHeaders": [],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 0,
+        "semanticGroups": 0,
+        "regionItems": 0,
+        "centerStateTokens": 1,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Inspect Mastery",
+          "Explain causal basis",
+          "Request governed re-evaluation"
+        ],
+        "toolbarCount": 3,
+        "toolbarDisabled": 3,
+        "guidance": true,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 679
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          },
+          "#rightPane": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 861,
+            "width": 1024,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 531,
+            "y": 142,
+            "width": 481,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          }
+        }
+      }
+    },
+    {
+      "surface": "mastery",
+      "viewport": "1024x900",
+      "viewportWidth": 1024,
+      "viewportHeight": 900,
+      "state": "fixture-mastered",
+      "file": "mastery-1024x900-fixture-mastered.png",
+      "sha256": "4b64d70bd35b4ee8811ccb9720b9f21b01cff3c911eda6e88404665fd9241031",
+      "bytes": 110848,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "msFixture",
+          "args": [],
+          "value": {
+            "judgment": "MASTERED",
+            "truthClass": "SYNTHETIC_DEMO_SEED"
+          }
+        }
+      ],
+      "metrics": {
+        "centerText": "crypto-basics user:self\nOk\nYes\nId\nmastery-reaudit-1\nSubject\nuser:self\nMasteryTarget\ncrypto-basics\nJudgment\nMASTERED\nFreshness\nREVALIDATION_REQUIRED\nPolicyRef\npolicy:mastery-v3\nBasisDigest\nbasis:reaudit001\nEVIDENCE\nItem 1\nRef: ev-reaudit-1@ev-reaudit-1-r1 · State: UNVERIFIED_PROVIDER_UNBOUND\nDECISIONS\nItem 1\nRef: decision-reaudit-1 · State: UNVERIFIED_PROVIDER_UNBOUND\nPOLICY\nRef\npolicy:mastery-v3\nState\nUNVERIFIED_PROVIDER_UNBOUND\nMissingRefs\nev-reaudit-1@ev-reaudit-1-r1 · decision-reaudit-1 · policy:mastery-v3\nConflict\nNo\nCausalLaw\nEFFECTIVE_DECISIONS+EVIDENCE+VERSIONED_POLICY_ONLY\nCompletionOrActivityUsed\nNo\nInstitutionalAuthorityInferred\nNo",
+        "leftText": "Mastery target Judgment Freshness Policy\ncrypto-basics\nuser:self\n MASTERED REVALIDATION_REQUIRED policy:mastery-v3",
+        "rightText": "الوحدةالكتلة المحددةMasterycrypto-basicsMASTERED · REVALIDATION_REQUIREDIdentityGoverned basisSubjectuser:selfPolicy revisionpolicy:mastery-v3JudgmentMASTEREDFreshnessREVALIDATION_REQUIREDBasis digestbasis:reaudit001",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 38,
+        "rightLineCount": 1,
+        "leftLineCount": 4,
+        "rightLineOverlapRatio": 0,
+        "tables": 1,
+        "tableHeaders": [
+          "Mastery target",
+          "Judgment",
+          "Freshness",
+          "Policy"
+        ],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 15,
+        "semanticGroups": 3,
+        "regionItems": 2,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Inspect Mastery",
+          "Explain causal basis",
+          "Request governed re-evaluation"
+        ],
+        "toolbarCount": 3,
+        "toolbarDisabled": 1,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 679
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          },
+          "#rightPane": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 861,
+            "width": 1024,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 531,
+            "y": 142,
+            "width": 481,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          }
+        }
+      }
+    },
+    {
+      "surface": "mastery",
+      "viewport": "1024x900",
+      "viewportWidth": 1024,
+      "viewportHeight": 900,
+      "state": "fixture-second-row",
+      "file": "mastery-1024x900-fixture-second-row.png",
+      "sha256": "dfed62a926162cd8f8a2cf7c3b4dea95d77b018f2788e1ea47a1f7ab07eedb00",
+      "bytes": 114987,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "msSecond",
+          "args": [],
+          "value": {
+            "judgment": "INSUFFICIENT_EVIDENCE",
+            "rows": [
+              "mastery-reaudit-1",
+              "mastery-reaudit-2"
+            ]
+          }
+        }
+      ],
+      "metrics": {
+        "centerText": "network-analysis user:self\nOk\nYes\nId\nmastery-reaudit-2\nSubject\nuser:self\nMasteryTarget\nnetwork-analysis\nJudgment\nINSUFFICIENT_EVIDENCE\nFreshness\nCURRENT\nPolicyRef\npolicy:mastery-v3\nBasisDigest\nbasis:reaudit002\nEVIDENCE\nItem 1\nRef: ev-missing@r1 · State: UNVERIFIED_PROVIDER_UNBOUND\nDecisions\nNone\nPOLICY\nRef\npolicy:mastery-v3\nState\nUNVERIFIED_PROVIDER_UNBOUND\nMissingRefs\nev-missing@r1 · policy:mastery-v3\nConflict\nNo\nCausalLaw\nEFFECTIVE_DECISIONS+EVIDENCE+VERSIONED_POLICY_ONLY\nCompletionOrActivityUsed\nNo\nInstitutionalAuthorityInferred\nNo",
+        "leftText": "Mastery target Judgment Freshness Policy\ncrypto-basics\nuser:self\n MASTERED REVALIDATION_REQUIRED policy:mastery-v3\nnetwork-analysis\nuser:self\n INSUFFICIENT_EVIDENCE CURRENT policy:mastery-v3",
+        "rightText": "الوحدةالكتلة المحددةMasterynetwork-analysisINSUFFICIENT_EVIDENCE · CURRENTIdentityGoverned basisSubjectuser:selfPolicy revisionpolicy:mastery-v3JudgmentINSUFFICIENT_EVIDENCEFreshnessCURRENTBasis digestbasis:reaudit002",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 37,
+        "rightLineCount": 1,
+        "leftLineCount": 7,
+        "rightLineOverlapRatio": 0,
+        "tables": 1,
+        "tableHeaders": [
+          "Mastery target",
+          "Judgment",
+          "Freshness",
+          "Policy"
+        ],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 16,
+        "semanticGroups": 2,
+        "regionItems": 1,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Inspect Mastery",
+          "Explain causal basis",
+          "Request governed re-evaluation"
+        ],
+        "toolbarCount": 3,
+        "toolbarDisabled": 1,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 679
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          },
+          "#rightPane": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 861,
+            "width": 1024,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 531,
+            "y": 142,
+            "width": 481,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          }
+        }
+      }
+    },
+    {
+      "surface": "portfolio",
+      "viewport": "1024x900",
+      "viewportWidth": 1024,
+      "viewportHeight": 900,
+      "state": "empty",
+      "file": "portfolio-1024x900-empty.png",
+      "sha256": "dd1f501806a066f1dafa656ed505356ab3e538da67c7a7e52cfa1fd05a0cdc2c",
+      "bytes": 97054,
+      "pageErrors": [],
+      "seeds": [],
+      "metrics": {
+        "centerText": "Portfolio workbench\n\nEMPTY · No canonical Portfolio memberships are bound.\n\nHow this workspace works\nPortfolio starts empty when no canonical source/provider is bound.\nCuration references canonical Evidence/Mastery/project records; it does not invent achievements.",
+        "leftText": "No canonical Portfolio memberships are bound.",
+        "rightText": "الوحدةالكتلة المحددةEMPTY · No record is selected; record context appears here once a record is active.",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 5,
+        "rightLineCount": 1,
+        "leftLineCount": 1,
+        "rightLineOverlapRatio": 0,
+        "tables": 0,
+        "tableHeaders": [],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 0,
+        "semanticGroups": 0,
+        "regionItems": 0,
+        "centerStateTokens": 1,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Remove Portfolio reference",
+          "Filter Portfolio",
+          "Export exact references",
+          "Update governed grouping"
+        ],
+        "toolbarCount": 4,
+        "toolbarDisabled": 2,
+        "guidance": true,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 679
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          },
+          "#rightPane": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 861,
+            "width": 1024,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 364,
+            "y": 142,
+            "width": 648,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          }
+        }
+      }
+    },
+    {
+      "surface": "portfolio",
+      "viewport": "1024x900",
+      "viewportWidth": 1024,
+      "viewportHeight": 900,
+      "state": "assembly-one-reference",
+      "file": "portfolio-1024x900-assembly-one-reference.png",
+      "sha256": "21c796d31676ce9ebf3874ee7e73fe742f6973a34dd14abdc47f9cfb93b64abf",
+      "bytes": 109255,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "pfAdd",
+          "args": [
+            "member-reaudit-1",
+            "Evidence",
+            "ev-reaudit-1@ev-reaudit-1-r1",
+            "Re-audit Evidence reference"
+          ],
+          "value": {
+            "ok": true,
+            "record": {
+              "id": "member-reaudit-1",
+              "revisionId": "pm-reaudit-member-reaudit-1",
+              "refType": "Evidence",
+              "sourceRef": "ev-reaudit-1@ev-reaudit-1-r1",
+              "state": "UNAVAILABLE",
+              "groupingRef": null,
+              "groupingState": "UNGROUPED",
+              "title": "Re-audit Evidence reference",
+              "annotation": null,
+              "truthClass": "CURATION_REFERENCE"
+            },
+            "receipt": {
+              "sequence": 1,
+              "command": "portfolio.curate",
+              "action": "add",
+              "owner": "W04PortfolioDomain",
+              "id": "member-reaudit-1",
+              "sourceRef": "ev-reaudit-1@ev-reaudit-1-r1",
+              "sourceResolution": "UNAVAILABLE",
+              "canonicalSourceWrite": false
+            },
+            "mutated": true
+          }
+        }
+      ],
+      "metrics": {
+        "centerText": "Re-audit Evidence reference\nId\nmember-reaudit-1\nRevisionId\npm-reaudit-member-reaudit-1\nRefType\nEvidence\nSourceRef\nev-reaudit-1@ev-reaudit-1-r1\nState\nUNAVAILABLE\nGroupingRef\n—\nGroupingState\nUNGROUPED\nTitle\nRe-audit Evidence reference\nAnnotation\n—\nTruthClass\nCURATION_REFERENCE",
+        "leftText": "Curated item Reference type Source state Grouping\nRe-audit Evidence reference\nev-reaudit-1@ev-reaudit-1-r1\n Evidence UNAVAILABLE Ungrouped\nUNGROUPED",
+        "rightText": "الوحدةالكتلة المحددةPortfolioRe-audit Evidence referenceEvidence · UNAVAILABLE · UNGROUPEDIdentityCuration metadataCanonical source refev-reaudit-1@ev-reaudit-1-r1Source stateUNAVAILABLEGrouping refUNGROUPEDGrouping authority stateUNGROUPED",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 21,
+        "rightLineCount": 1,
+        "leftLineCount": 5,
+        "rightLineOverlapRatio": 0,
+        "tables": 1,
+        "tableHeaders": [
+          "Curated item",
+          "Reference type",
+          "Source state",
+          "Grouping"
+        ],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 10,
+        "semanticGroups": 0,
+        "regionItems": 0,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Remove Portfolio reference",
+          "Filter Portfolio",
+          "Export exact references",
+          "Update governed grouping"
+        ],
+        "toolbarCount": 4,
+        "toolbarDisabled": 0,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 679
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          },
+          "#rightPane": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 861,
+            "width": 1024,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 364,
+            "y": 142,
+            "width": 648,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          }
+        }
+      }
+    },
+    {
+      "surface": "portfolio",
+      "viewport": "1024x900",
+      "viewportWidth": 1024,
+      "viewportHeight": 900,
+      "state": "assembly-two-references",
+      "file": "portfolio-1024x900-assembly-two-references.png",
+      "sha256": "b9c110aef3f72e72970acc12c9b2785b0576736cbff72c74d8b5cf671b6fcbf6",
+      "bytes": 120541,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "pfAdd",
+          "args": [
+            "member-reaudit-2",
+            "Mastery",
+            "mastery-reaudit-1@mr-reaudit-001",
+            "Re-audit Mastery reference"
+          ],
+          "value": {
+            "ok": true,
+            "record": {
+              "id": "member-reaudit-2",
+              "revisionId": "pm-reaudit-member-reaudit-2",
+              "refType": "Mastery",
+              "sourceRef": "mastery-reaudit-1@mr-reaudit-001",
+              "state": "UNAVAILABLE",
+              "groupingRef": null,
+              "groupingState": "UNGROUPED",
+              "title": "Re-audit Mastery reference",
+              "annotation": null,
+              "truthClass": "CURATION_REFERENCE"
+            },
+            "receipt": {
+              "sequence": 2,
+              "command": "portfolio.curate",
+              "action": "add",
+              "owner": "W04PortfolioDomain",
+              "id": "member-reaudit-2",
+              "sourceRef": "mastery-reaudit-1@mr-reaudit-001",
+              "sourceResolution": "UNAVAILABLE",
+              "canonicalSourceWrite": false
+            },
+            "mutated": true
+          }
+        }
+      ],
+      "metrics": {
+        "centerText": "Re-audit Evidence reference\nId\nmember-reaudit-1\nRevisionId\npm-reaudit-member-reaudit-1\nRefType\nEvidence\nSourceRef\nev-reaudit-1@ev-reaudit-1-r1\nState\nUNAVAILABLE\nGroupingRef\n—\nGroupingState\nUNGROUPED\nTitle\nRe-audit Evidence reference\nAnnotation\n—\nTruthClass\nCURATION_REFERENCE",
+        "leftText": "Curated item Reference type Source state Grouping\nRe-audit Evidence reference\nev-reaudit-1@ev-reaudit-1-r1\n Evidence UNAVAILABLE Ungrouped\nUNGROUPED\n\nRe-audit Mastery reference\nmastery-reaudit-1@mr-reaudit-001\n Mastery UNAVAILABLE Ungrouped\nUNGROUPED",
+        "rightText": "الوحدةالكتلة المحددةPortfolioRe-audit Evidence referenceEvidence · UNAVAILABLE · UNGROUPEDIdentityCuration metadataCanonical source refev-reaudit-1@ev-reaudit-1-r1Source stateUNAVAILABLEGrouping refUNGROUPEDGrouping authority stateUNGROUPED",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 21,
+        "rightLineCount": 1,
+        "leftLineCount": 9,
+        "rightLineOverlapRatio": 0,
+        "tables": 1,
+        "tableHeaders": [
+          "Curated item",
+          "Reference type",
+          "Source state",
+          "Grouping"
+        ],
+        "recordTables": 0,
+        "statePills": 0,
+        "pillTexts": [],
+        "numberedSteps": [],
+        "semanticRows": 10,
+        "semanticGroups": 0,
+        "regionItems": 0,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Remove Portfolio reference",
+          "Filter Portfolio",
+          "Export exact references",
+          "Update governed grouping"
+        ],
+        "toolbarCount": 4,
+        "toolbarDisabled": 0,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 679
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          },
+          "#rightPane": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 861,
+            "width": 1024,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 364,
+            "y": 142,
+            "width": 648,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 709,
+            "height": 679
+          }
+        }
+      }
+    }
+  ]
+}

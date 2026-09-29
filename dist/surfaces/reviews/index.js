@@ -20,7 +20,37 @@ export function createReviewsCollectionAdapter(domain){
 
 export function createReviewsContextProvider(domain){
   if(!domain||domain.owner!==REVIEW_DOMAIN_OWNER)throw Error('REVIEWS_DOMAIN_REQUIRED');
-  return defineContextDescriptorProvider({id:'w04.reviews.context',family:'reviews',owner:REVIEW_DOMAIN_OWNER,isApplicable:context=>typeof context?.selectedId==='string'&&domain.records.some(row=>row.id===context.selectedId),describe:context=>{const row=domain.inspect(context.selectedId);return {id:`reviews-context:${row.id}:${row.revisionId}`,providerId:'w04.reviews.context',family:'reviews',subject:`Review ${row.id}`,eyebrow:'Formal Review context',summary:`${row.state} · ${row.decision?.outcome||'NO DECISION'}`,domainOwner:REVIEW_DOMAIN_OWNER,revisionToken:row.revisionId,lenses:[{id:'review-governance',label:'Review governance',tabs:[{id:'scope',label:'Pinned scope',fields:[{id:'evidence',label:'Pinned Evidence revisions',value:row.evidenceRefs.join(', '),technical:true},{id:'criteria',label:'Pinned criteria',value:row.criteriaRefs.join(', '),technical:true},{id:'reviewer',label:'Reviewer actor',value:row.reviewer.identity||'UNAVAILABLE',technical:true},{id:'authority',label:'Authority proof',value:row.reviewer.authorityAvailable?row.reviewer.permissionProofRef||'MISSING':'UNAVAILABLE',technical:true}]},{id:'lineage',label:'Decision lineage',fields:[{id:'effective',label:'Effective Decision',value:row.effectiveDecisionId||'NONE',technical:true},{id:'decision-count',label:'Issued Decisions retained',value:row.decisionHistory.length},{id:'rereview',label:'Re-review',value:row.rereview,technical:true},{id:'finding-count',label:'Findings',value:row.findings.length}]}]}]};}});
+  // RIGHT context lens — mirrors the reference's right column (Review Scope · Reviewer Authority ·
+  // Criterion Authority · Prior Review Context · Provenance). Deliberately NOT a copy of the
+  // CENTER workbench: counts, authority and lineage live here; findings, rationale and Decision
+  // preparation live in CENTER (CEP-VIS-001-FINAL).
+  return defineContextDescriptorProvider({id:'w04.reviews.context',family:'reviews',owner:REVIEW_DOMAIN_OWNER,isApplicable:context=>typeof context?.selectedId==='string'&&domain.records.some(row=>row.id===context.selectedId),describe:context=>{
+    const row=domain.inspect(context.selectedId);
+    const authority=row.reviewer?.authorityAvailable===true;
+    return {id:`reviews-context:${row.id}:${row.revisionId}`,providerId:'w04.reviews.context',family:'reviews',subject:`Review ${row.id}`,eyebrow:'Formal Review context',summary:row.decision?`Decision ${row.decision.decisionId} \u00b7 ${row.decision.outcome}`:'No Decision is issued on this Review; findings and rationale remain the only reviewer-authored content.',domainOwner:REVIEW_DOMAIN_OWNER,revisionToken:row.revisionId,lenses:[
+      {id:'scope',label:'Review scope',tabs:[{id:'scope',label:'Scope',fields:[
+        {id:'scope-summary',label:'Scope summary',value:`Formal competency Evidence review against ${row.criteriaRefs.length} pinned criterion/criteria and ${row.evidenceRefs.length} pinned Evidence revision(s).`},
+        {id:'evidence-count',label:'Pinned Evidence revisions',value:String(row.evidenceRefs.length),technical:true},
+        {id:'criteria-count',label:'Pinned criteria',value:String(row.criteriaRefs.length),technical:true},
+        {id:'requester',label:'Requested by',value:String(row.requester||'owner:local'),technical:true},
+        {id:'purpose',label:'Purpose',value:String(row.purpose||'Formal Evidence Review')},
+        {id:'requested-at',label:'Requested at',value:String(row.requestedAt||'EMPTY \u2014 not recorded'),technical:true}
+      ]}]},
+      {id:'authority',label:'Reviewer authority',tabs:[{id:'authority',label:'Actor vs authority',fields:[
+        {id:'reviewer',label:'Reviewer actor',value:String(row.reviewer?.identity||'EMPTY'),technical:true},
+        {id:'authority-proof',label:'Authority proof',value:authority?String(row.reviewer?.permissionProofRef||'MISSING'):'UNAVAILABLE \u2014 mutations refused',technical:true},
+        {id:'assignment',label:'Assignment permission',value:row.reviewer?.assignmentPermissionAvailable===true?'GRANTED':'NOT GRANTED'},
+        {id:'invariant',label:'Authority law',value:'Actor display label is not institutional reviewer authority; the family never approves its own authority.'}
+      ]}]},
+      {id:'prior',label:'Prior Review context',tabs:[{id:'lineage',label:'Lineage',fields:[
+        {id:'previous',label:'Previous Review ref',value:String(row.previousReviewRef||'None'),technical:true},
+        {id:'prior-decision',label:'Prior effective Decision',value:String(row.priorDecisionRef||'NONE'),technical:true},
+        {id:'effective-id',label:'Effective Decision id',value:String(row.effectiveDecisionId||'NONE'),technical:true},
+        {id:'decisions',label:'Issued Decisions retained',value:String(row.decisionHistory.length),technical:true},
+        {id:'findings',label:'Findings recorded',value:String(row.findings.length),technical:true},
+        {id:'review-revision',label:'Review revision',value:String(row.revisionId),technical:true}
+      ]}]}
+    ]};}});
 }
 
 

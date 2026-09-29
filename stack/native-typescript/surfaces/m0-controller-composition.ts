@@ -116,8 +116,8 @@ const bottomValueSummary=value=>{
   if(value===null||value===undefined)return '—';
   if(typeof value==='boolean')return value?'Yes':'No';
   if(typeof value!=='object')return String(value);
-  if(Array.isArray(value))return value.length?`${value.length} item(s) · ${value.slice(0,3).map(item=>typeof item==='object'?(item.id||item.label||item.decisionId||item.title||item.key||'item'):String(item)).join(' · ')}`:'none';
-  const rows=Object.entries(value).filter(([,item])=>['string','number','boolean'].includes(typeof item)).slice(0,4).map(([key,item])=>`${titleCase(key)}: ${String(item)}`);
+  if(Array.isArray(value))return value.length?`${value.length} item(s) · ${value.map(item=>typeof item==='object'?(item.id||item.label||item.decisionId||item.title||item.key||'item'):String(item)).join(' · ')}`:'none';
+  const rows=Object.entries(value).filter(([,item])=>['string','number','boolean'].includes(typeof item)).map(([key,item])=>`${titleCase(key)}: ${String(item)}`);
   return rows.length?rows.join(' · '):'—';
 };
 const bottomRevisionOf=projection=>{

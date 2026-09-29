@@ -33,7 +33,38 @@ export function createEvidenceCollectionAdapter(domain){
 
 export function createEvidenceContextProvider(domain){
   if(!domain||domain.owner!==EVIDENCE_DOMAIN_OWNER)throw Error('EVIDENCE_DOMAIN_REQUIRED');
-  return defineContextDescriptorProvider({id:'w04.evidence.context',family:'evidence',owner:EVIDENCE_DOMAIN_OWNER,isApplicable:context=>typeof context?.selectedId==='string'&&domain.records.some(row=>row.id===context.selectedId),describe:context=>{const row=domain.inspect(context.selectedId),revision=row.currentRevision;return {id:`evidence-context:${row.id}:${row.revisionId}`,providerId:'w04.evidence.context',family:'evidence',subject:row.title||row.id,eyebrow:'Evidence context',summary:`${row.status} · source ${row.sourceStatus}`,domainOwner:EVIDENCE_DOMAIN_OWNER,revisionToken:revision?.revisionId||row.revisionId,lenses:[{id:'governance',label:'Governance',tabs:[{id:'provenance',label:'Provenance',fields:[{id:'evidence-id',label:'Evidence ID',value:row.evidenceId||row.id,technical:true},{id:'revision-id',label:'Revision',value:revision?.revisionId||row.revisionId,technical:true},{id:'source',label:'Pinned source',value:revision?`${revision.source.sourceId}@${revision.source.sourceRevision}`:`${row.sourceId||row.id}@${row.sourceRevision||row.revisionId}`,technical:true},{id:'digest',label:'Digest',value:revision?.source.digest||row.digest,technical:true},{id:'criterion',label:'Criterion relevance',value:(row.criterionRefs||[]).join(', ')||'None pinned',technical:true}]},{id:'state',label:'State dimensions',fields:[{id:'lifecycle',label:'Evidence lifecycle',value:row.lineage?.lifecycle||row.status,technical:true},{id:'review-status',label:'Review status',value:row.reviewStatus||'UNREVIEWED',technical:true},{id:'decision',label:'Effective Review Decision',value:row.effectiveDecision||'NONE',technical:true},{id:'source-status',label:'Source integrity/status',value:row.sourceStatus,technical:true}]}]}]};}});
+  // RIGHT context lens — the reference's right column (source integrity · reference review ·
+  // duplicate search · source status · lineage completeness + a truth notice). Only PROVENANCE and
+  // LINEAGE live here: the record content, the lifecycle state pill and the admission gates are
+  // CENTER's authoritative display (CEP-VIS-001-FINAL 'ONE INFORMATION ITEM -> ONE LOCATION').
+  return defineContextDescriptorProvider({id:'w04.evidence.context',family:'evidence',owner:EVIDENCE_DOMAIN_OWNER,isApplicable:context=>typeof context?.selectedId==='string'&&domain.records.some(row=>row.id===context.selectedId),describe:context=>{
+    const row=domain.inspect(context.selectedId),revision=row.currentRevision;
+    let duplicate=null;try{duplicate=domain.duplicateCandidate?domain.duplicateCandidate(row):null}catch{duplicate=null}
+    const notice=row.status==='ADMITTED'
+      ? 'Admission created an immutable Evidence revision only. Admission is not acceptance, Review, Decision or Mastery, and this record is not a Mastery claim.'
+      : 'This Candidate has not been admitted as Evidence yet and is not a trusted source until Admission. Import never implies Admission, Review, Decision or Mastery.';
+    return {id:`evidence-context:${row.id}:${row.revisionId}`,providerId:'w04.evidence.context',family:'evidence',subject:row.title||row.id,eyebrow:'Evidence context',summary:notice,domainOwner:EVIDENCE_DOMAIN_OWNER,revisionToken:revision?.revisionId||row.revisionId,lenses:[
+      {id:'provenance',label:'Source integrity and provenance',tabs:[{id:'provenance',label:'Provenance',fields:[
+        {id:'evidence-id',label:'Evidence ID',value:row.evidenceId||row.id,technical:true},
+        {id:'revision-id',label:'Revision',value:revision?.revisionId||row.revisionId,technical:true},
+        {id:'digest',label:'Digest',value:revision?.source?.digest||row.digest||'EMPTY \u2014 no digest is recorded yet',technical:true},
+        {id:'criterion',label:'Criterion relevance',value:(row.criterionRefs||[]).length?(row.criterionRefs||[]).join(', '):'EMPTY \u2014 no criterion is pinned',technical:true},
+        {id:'producer',label:'Producer identity',value:row.producerIdentity||'EMPTY \u2014 not recorded',technical:true},
+        {id:'handoff',label:'Handoff receipt',value:row.handoffReceiptRef||'EMPTY \u2014 not recorded',technical:true}
+      ]}]},
+      {id:'lineage',label:'Lineage completeness',tabs:[{id:'lineage',label:'Revisions',fields:[
+        {id:'current',label:'Current revision',value:revision?.revisionId||row.revisionId,technical:true},
+        {id:'retained',label:'Revisions retained',value:String((row.lineage?.revisionIds||[]).length),technical:true},
+        {id:'previous',label:'Previous revision',value:revision?.previousRevisionRef||'None \u2014 first revision',technical:true},
+        {id:'base',label:'Base Evidence revision',value:row.baseEvidenceRevisionId||'None \u2014 not an amendment',technical:true},
+        {id:'immutable',label:'Immutable',value:revision?.immutable===true?'true \u2014 supersedes by new revision only':'false \u2014 Candidate record'},
+        {id:'lifecycle',label:'Lifecycle',value:row.lineage?.lifecycle||'NO_ADMISSION_LINEAGE',technical:true}
+      ]}]},
+      {id:'duplicate',label:'Duplicate search',tabs:[{id:'duplicate',label:'Scan result',fields:[
+        {id:'scan',label:'Duplicate Candidate scan',value:duplicate?`DUPLICATE \u2014 ${duplicate.id} carries the same claim/source fingerprint`:'NO DUPLICATE CANDIDATE \u2014 no other record matches this claim and source fingerprint'},
+        {id:'method',label:'Method',value:'claim + subject + source ref + criterion refs + governed purpose fingerprint'}
+      ]}]}
+    ]};}});
 }
 
 

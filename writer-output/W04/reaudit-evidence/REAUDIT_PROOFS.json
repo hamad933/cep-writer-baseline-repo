@@ -1,0 +1,889 @@
+{
+  "schemaVersion": 1,
+  "proof": "w04-visual-reaudit-remediation",
+  "viewports": [
+    "1440x1000",
+    "1024x900"
+  ],
+  "method": "live product DOM + file bytes (sha256) in package-local Chromium",
+  "total": 86,
+  "passed": 86,
+  "failed": 0,
+  "failedIds": [],
+  "checks": [
+    {
+      "id": "D10.evidence.Source-Handoff",
+      "surface": "evidence",
+      "ok": true,
+      "expected": "Source Handoff section",
+      "actual": "present",
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D10.evidence.Supporting-References",
+      "surface": "evidence",
+      "ok": true,
+      "expected": "Selected Supporting References section",
+      "actual": "present",
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D10.evidence.status-pill",
+      "surface": "evidence",
+      "ok": true,
+      "expected": ">=2 status pills",
+      "actual": 3,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D9.evidence.lifecycle-track",
+      "surface": "evidence",
+      "ok": true,
+      "expected": "exactly one current lifecycle step",
+      "actual": 1,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D9.evidence.next-actions",
+      "surface": "evidence",
+      "ok": true,
+      "expected": ">=3 next-action affordances",
+      "actual": 3,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D1.evidence.right-context-lens-bound",
+      "surface": "evidence",
+      "ok": true,
+      "expected": "RIGHT renders the authored context lens (no fallback)",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D3.evidence.bottom-shelf-availability",
+      "surface": "evidence",
+      "ok": true,
+      "expected": "AVAILABLE",
+      "actual": "AVAILABLE",
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D11.evidence.no-horizontal-overflow",
+      "surface": "evidence",
+      "ok": true,
+      "expected": "no horizontal overflow",
+      "actual": false,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D11.evidence.no-clipped-heading",
+      "surface": "evidence",
+      "ok": true,
+      "expected": "no clipped title/pill",
+      "actual": 0,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "E.evidence.no-page-errors",
+      "surface": "evidence",
+      "ok": true,
+      "expected": "0 page errors",
+      "actual": [],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "R1.reviews.toolbar-is-4-domain-commands",
+      "surface": "reviews",
+      "ok": true,
+      "expected": "the 4 domain_commands stay visible",
+      "actual": [
+        "reviews.review",
+        "reviews.finding",
+        "reviews.compare",
+        "reviews.supersede"
+      ],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "R1.reviews.more-overflow-present",
+      "surface": "reviews",
+      "ok": true,
+      "expected": 1,
+      "actual": 1,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "R1.reviews.seven-unreachable-now-listed",
+      "surface": "reviews",
+      "ok": true,
+      "expected": [
+        "reviews.request",
+        "reviews.assign",
+        "reviews.start",
+        "reviews.ready",
+        "reviews.continue",
+        "reviews.cancel",
+        "reviews.rereview"
+      ],
+      "actual": [
+        "reviews.request",
+        "reviews.assign",
+        "reviews.start",
+        "reviews.ready",
+        "reviews.continue",
+        "reviews.cancel",
+        "reviews.rereview"
+      ],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "R1.reviews.every-item-has-label-and-reason",
+      "surface": "reviews",
+      "ok": true,
+      "expected": 7,
+      "actual": 7,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "R1.reviews.state-appropriate-items-enabled",
+      "surface": "reviews",
+      "ok": true,
+      "expected": "reviews.ready enabled for IN_REVIEW with findings",
+      "actual": [
+        "reviews.ready",
+        "reviews.continue",
+        "reviews.cancel"
+      ],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "R1.reviews.overflow-command-executes-and-renders",
+      "surface": "reviews",
+      "ok": true,
+      "expected": "IN_REVIEW -> READY_FOR_DECISION and the pill follows",
+      "actual": "IN_REVIEW -> READY_FOR_DECISION | pill: Review workflowREADY_FOR_DECISION",
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D1.reviews.right-context-lens-bound",
+      "surface": "reviews",
+      "ok": true,
+      "expected": "RIGHT renders the authored context lens (no fallback)",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D10.reviews.Criterion-Findings-table",
+      "surface": "reviews",
+      "ok": true,
+      "expected": "Criterion Findings table",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D10.reviews.Decision-Preparation",
+      "surface": "reviews",
+      "ok": true,
+      "expected": "Decision Preparation card",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D10.reviews.Reviewer-Rationale",
+      "surface": "reviews",
+      "ok": true,
+      "expected": "Reviewer Rationale card",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D9.reviews.workflow-track",
+      "surface": "reviews",
+      "ok": true,
+      "expected": 5,
+      "actual": 5,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D1.reviews.right-not-a-center-copy",
+      "surface": "reviews",
+      "ok": true,
+      "expected": "RIGHT/CENTER line overlap <= 0.2",
+      "actual": 0.14,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "E.reviews.no-page-errors",
+      "surface": "reviews",
+      "ok": true,
+      "expected": "0 page errors",
+      "actual": [],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "M1.mastery.NOT_EVALUATED-is-the-judgment-pill",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "Mastery Judgment: NOT_EVALUATED pill",
+      "actual": [
+        "Mastery JudgmentNOT_EVALUATED",
+        "Freshness StatusUNAVAILABLEno evaluation exists"
+      ],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "M1.mastery.not-a-bare-EMPTY-token",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "NOT_EVALUATED displayed, no bare State|EMPTY row",
+      "actual": "Mastery workbenchNo governed Mastery State is boundMastery JudgmentNOT_EVALUATEDFreshness StatusUNAVAILABLEno evaluation existsEMPTY · NOT_EVALUATED · No authorized Mastery provider/evaluator is bound.NOT_EVALUATED — the authoritative epist",
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "M1.mastery.guidance-preserved",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "shared empty guidance preserved",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "M2.mastery.fixture-badge-on-judgment-pill",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "FIXTURE badge on the judgment pill",
+      "actual": [
+        "Mastery JudgmentMASTEREDFIXTURE",
+        "Freshness StatusREVALIDATION_REQUIRED"
+      ],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "M2.mastery.fixture-notice-visible",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "fixture notice names SYNTHETIC_DEMO_SEED + L07",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D1.mastery.right-context-lens-bound",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "RIGHT renders the authored context lens (no fallback)",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D10.mastery.numbered-5-step-structure",
+      "surface": "mastery",
+      "ok": true,
+      "expected": 5,
+      "actual": 5,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D10.mastery.both-status-pills",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "Mastery Judgment + Freshness Status pills",
+      "actual": [
+        "Mastery JudgmentMASTEREDFIXTURE",
+        "Freshness StatusREVALIDATION_REQUIRED"
+      ],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D9.mastery.judgment-dimension-track",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "5 judgment steps, 1 current",
+      "actual": 5,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D11.mastery.no-horizontal-overflow",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "no horizontal overflow",
+      "actual": false,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "E.mastery.no-page-errors",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "0 page errors",
+      "actual": [],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "P3.portfolio.curate-label",
+      "surface": "portfolio",
+      "ok": true,
+      "expected": "Curate Portfolio reference",
+      "actual": "Curate Portfolio reference",
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D1.portfolio.right-context-lens-bound",
+      "surface": "portfolio",
+      "ok": true,
+      "expected": "RIGHT renders the authored context lens (no fallback)",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "P2.portfolio.legible-pending-authority",
+      "surface": "portfolio",
+      "ok": true,
+      "expected": "AUTHORITY_DECISION_REQUIRED (Q-5) notice",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "P2.portfolio.no-grouping-structure",
+      "surface": "portfolio",
+      "ok": true,
+      "expected": "no capability-grouping structure rendered",
+      "actual": 0,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "P1.portfolio.Q5-refusal-preserved",
+      "surface": "portfolio",
+      "ok": true,
+      "expected": "AUTHORITY_DECISION_REQUIRED, no mutation",
+      "actual": {
+        "code": "AUTHORITY_DECISION_REQUIRED",
+        "mutated": false,
+        "groupingState": "UNGROUPED"
+      },
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D10.portfolio.status-pills",
+      "surface": "portfolio",
+      "ok": true,
+      "expected": ">=2 status pills",
+      "actual": [
+        "Source stateUNAVAILABLE",
+        "Reference typeEvidence",
+        "GroupingAUTHORITY DECISION REQUIRED"
+      ],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D3.portfolio.bottom-shelf-availability",
+      "surface": "portfolio",
+      "ok": true,
+      "expected": "AVAILABLE",
+      "actual": "AVAILABLE",
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D11.portfolio.no-horizontal-overflow",
+      "surface": "portfolio",
+      "ok": true,
+      "expected": "no horizontal overflow",
+      "actual": false,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "E.portfolio.no-page-errors",
+      "surface": "portfolio",
+      "ok": true,
+      "expected": "0 page errors",
+      "actual": [],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D10.evidence.Source-Handoff",
+      "surface": "evidence",
+      "ok": true,
+      "expected": "Source Handoff section",
+      "actual": "present",
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D10.evidence.Supporting-References",
+      "surface": "evidence",
+      "ok": true,
+      "expected": "Selected Supporting References section",
+      "actual": "present",
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D10.evidence.status-pill",
+      "surface": "evidence",
+      "ok": true,
+      "expected": ">=2 status pills",
+      "actual": 3,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D9.evidence.lifecycle-track",
+      "surface": "evidence",
+      "ok": true,
+      "expected": "exactly one current lifecycle step",
+      "actual": 1,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D9.evidence.next-actions",
+      "surface": "evidence",
+      "ok": true,
+      "expected": ">=3 next-action affordances",
+      "actual": 3,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D1.evidence.right-context-lens-bound",
+      "surface": "evidence",
+      "ok": true,
+      "expected": "RIGHT renders the authored context lens (no fallback)",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D3.evidence.bottom-shelf-availability",
+      "surface": "evidence",
+      "ok": true,
+      "expected": "AVAILABLE",
+      "actual": "AVAILABLE",
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D11.evidence.no-horizontal-overflow",
+      "surface": "evidence",
+      "ok": true,
+      "expected": "no horizontal overflow",
+      "actual": false,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D11.evidence.no-clipped-heading",
+      "surface": "evidence",
+      "ok": true,
+      "expected": "no clipped title/pill",
+      "actual": 0,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "E.evidence.no-page-errors",
+      "surface": "evidence",
+      "ok": true,
+      "expected": "0 page errors",
+      "actual": [],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "R1.reviews.toolbar-is-4-domain-commands",
+      "surface": "reviews",
+      "ok": true,
+      "expected": "the 4 domain_commands stay visible",
+      "actual": [
+        "reviews.review",
+        "reviews.finding",
+        "reviews.compare",
+        "reviews.supersede"
+      ],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "R1.reviews.more-overflow-present",
+      "surface": "reviews",
+      "ok": true,
+      "expected": 1,
+      "actual": 1,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "R1.reviews.seven-unreachable-now-listed",
+      "surface": "reviews",
+      "ok": true,
+      "expected": [
+        "reviews.request",
+        "reviews.assign",
+        "reviews.start",
+        "reviews.ready",
+        "reviews.continue",
+        "reviews.cancel",
+        "reviews.rereview"
+      ],
+      "actual": [
+        "reviews.request",
+        "reviews.assign",
+        "reviews.start",
+        "reviews.ready",
+        "reviews.continue",
+        "reviews.cancel",
+        "reviews.rereview"
+      ],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "R1.reviews.every-item-has-label-and-reason",
+      "surface": "reviews",
+      "ok": true,
+      "expected": 7,
+      "actual": 7,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "R1.reviews.state-appropriate-items-enabled",
+      "surface": "reviews",
+      "ok": true,
+      "expected": "reviews.ready enabled for IN_REVIEW with findings",
+      "actual": [
+        "reviews.ready",
+        "reviews.continue",
+        "reviews.cancel"
+      ],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "R1.reviews.overflow-command-executes-and-renders",
+      "surface": "reviews",
+      "ok": true,
+      "expected": "IN_REVIEW -> READY_FOR_DECISION and the pill follows",
+      "actual": "IN_REVIEW -> READY_FOR_DECISION | pill: Review workflowREADY_FOR_DECISION",
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D1.reviews.right-context-lens-bound",
+      "surface": "reviews",
+      "ok": true,
+      "expected": "RIGHT renders the authored context lens (no fallback)",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D10.reviews.Criterion-Findings-table",
+      "surface": "reviews",
+      "ok": true,
+      "expected": "Criterion Findings table",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D10.reviews.Decision-Preparation",
+      "surface": "reviews",
+      "ok": true,
+      "expected": "Decision Preparation card",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D10.reviews.Reviewer-Rationale",
+      "surface": "reviews",
+      "ok": true,
+      "expected": "Reviewer Rationale card",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D9.reviews.workflow-track",
+      "surface": "reviews",
+      "ok": true,
+      "expected": 5,
+      "actual": 5,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D1.reviews.right-not-a-center-copy",
+      "surface": "reviews",
+      "ok": true,
+      "expected": "RIGHT/CENTER line overlap <= 0.2",
+      "actual": 0,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "E.reviews.no-page-errors",
+      "surface": "reviews",
+      "ok": true,
+      "expected": "0 page errors",
+      "actual": [],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "M1.mastery.NOT_EVALUATED-is-the-judgment-pill",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "Mastery Judgment: NOT_EVALUATED pill",
+      "actual": [
+        "Mastery JudgmentNOT_EVALUATED",
+        "Freshness StatusUNAVAILABLEno evaluation exists"
+      ],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "M1.mastery.not-a-bare-EMPTY-token",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "NOT_EVALUATED displayed, no bare State|EMPTY row",
+      "actual": "Mastery workbenchNo governed Mastery State is boundMastery JudgmentNOT_EVALUATEDFreshness StatusUNAVAILABLEno evaluation existsEMPTY · NOT_EVALUATED · No authorized Mastery provider/evaluator is bound.NOT_EVALUATED — the authoritative epist",
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "M1.mastery.guidance-preserved",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "shared empty guidance preserved",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "M2.mastery.fixture-badge-on-judgment-pill",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "FIXTURE badge on the judgment pill",
+      "actual": [
+        "Mastery JudgmentMASTEREDFIXTURE",
+        "Freshness StatusREVALIDATION_REQUIRED"
+      ],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "M2.mastery.fixture-notice-visible",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "fixture notice names SYNTHETIC_DEMO_SEED + L07",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D1.mastery.right-context-lens-bound",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "RIGHT renders the authored context lens (no fallback)",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D10.mastery.numbered-5-step-structure",
+      "surface": "mastery",
+      "ok": true,
+      "expected": 5,
+      "actual": 5,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D10.mastery.both-status-pills",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "Mastery Judgment + Freshness Status pills",
+      "actual": [
+        "Mastery JudgmentMASTEREDFIXTURE",
+        "Freshness StatusREVALIDATION_REQUIRED"
+      ],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D9.mastery.judgment-dimension-track",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "5 judgment steps, 1 current",
+      "actual": 5,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D11.mastery.no-horizontal-overflow",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "no horizontal overflow",
+      "actual": false,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "E.mastery.no-page-errors",
+      "surface": "mastery",
+      "ok": true,
+      "expected": "0 page errors",
+      "actual": [],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "P3.portfolio.curate-label",
+      "surface": "portfolio",
+      "ok": true,
+      "expected": "Curate Portfolio reference",
+      "actual": "Curate Portfolio reference",
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D1.portfolio.right-context-lens-bound",
+      "surface": "portfolio",
+      "ok": true,
+      "expected": "RIGHT renders the authored context lens (no fallback)",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "P2.portfolio.legible-pending-authority",
+      "surface": "portfolio",
+      "ok": true,
+      "expected": "AUTHORITY_DECISION_REQUIRED (Q-5) notice",
+      "actual": true,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "P2.portfolio.no-grouping-structure",
+      "surface": "portfolio",
+      "ok": true,
+      "expected": "no capability-grouping structure rendered",
+      "actual": 0,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "P1.portfolio.Q5-refusal-preserved",
+      "surface": "portfolio",
+      "ok": true,
+      "expected": "AUTHORITY_DECISION_REQUIRED, no mutation",
+      "actual": {
+        "code": "AUTHORITY_DECISION_REQUIRED",
+        "mutated": false,
+        "groupingState": "UNGROUPED"
+      },
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D10.portfolio.status-pills",
+      "surface": "portfolio",
+      "ok": true,
+      "expected": ">=2 status pills",
+      "actual": [
+        "Source stateUNAVAILABLE",
+        "Reference typeEvidence",
+        "GroupingAUTHORITY DECISION REQUIRED"
+      ],
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D3.portfolio.bottom-shelf-availability",
+      "surface": "portfolio",
+      "ok": true,
+      "expected": "AVAILABLE",
+      "actual": "AVAILABLE",
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "D11.portfolio.no-horizontal-overflow",
+      "surface": "portfolio",
+      "ok": true,
+      "expected": "no horizontal overflow",
+      "actual": false,
+      "note": "",
+      "status": "PASS"
+    },
+    {
+      "id": "E.portfolio.no-page-errors",
+      "surface": "portfolio",
+      "ok": true,
+      "expected": "0 page errors",
+      "actual": [],
+      "note": "",
+      "status": "PASS"
+    }
+  ],
+  "extraStateShots": [
+    {
+      "file": "reviews-1440x1000-more-menu-open.png",
+      "viewport": "1440x1000",
+      "sha256": "fb34e1148baa32fb4a682ee7f969b3b75de09b6a88b6efa9a3d5eb26779c562f",
+      "bytes": 253449,
+      "state": "more-menu-open"
+    },
+    {
+      "file": "reviews-1024x900-more-menu-open.png",
+      "viewport": "1024x900",
+      "sha256": "58a2d4e8a3656536c0a2b92beb624211897de68075e5ea7769ebeeee7d6dff52",
+      "bytes": 142493,
+      "state": "more-menu-open"
+    }
+  ]
+}

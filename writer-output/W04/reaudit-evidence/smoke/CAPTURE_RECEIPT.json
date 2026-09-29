@@ -1,0 +1,792 @@
+{
+  "schemaVersion": 1,
+  "proof": "w04-visual-reaudit-capture",
+  "label": "smoke",
+  "method": "file-bytes ground truth (sha256 + dimensions); ink/blank-band + OCR in w04-reaudit-measure.mjs",
+  "viewports": [
+    "1440x1000",
+    "1024x900"
+  ],
+  "surfaces": [
+    "evidence"
+  ],
+  "fixturePolicy": "every populated state is enacted through the live product domain inside the page; seeded rows carry truthClass SYNTHETIC_DEMO_SEED or are created by the live semantic commands",
+  "frameCount": 6,
+  "distinctness": [
+    {
+      "key": "evidence@1440x1000",
+      "states": 3,
+      "uniqueByteIdentities": 3,
+      "byteDistinct": true
+    },
+    {
+      "key": "evidence@1024x900",
+      "states": 3,
+      "uniqueByteIdentities": 3,
+      "byteDistinct": true
+    }
+  ],
+  "problems": [],
+  "frames": [
+    {
+      "surface": "evidence",
+      "viewport": "1440x1000",
+      "viewportWidth": 1440,
+      "viewportHeight": 1000,
+      "state": "empty",
+      "file": "evidence-1440x1000-empty.png",
+      "sha256": "0d9a93e415e681eae9afbe8e769c808c573c58a0b0e4d5be1349a92725fa8c75",
+      "bytes": 162340,
+      "pageErrors": [],
+      "seeds": [],
+      "metrics": {
+        "centerText": "Evidence workbench\nEVIDENCE RECORD\nNONE BOUND\n\nEMPTY · No current Candidate or admitted Evidence is bound.\n\nINTAKE → ADMISSION LIFECYCLE\n1\nHandoff received\n2\nCandidate prepared\n3\nSubmitted for intake\n4\nAdmitted as immutable Evidence\nNo Candidate or admitted Evidence is selected, so no lifecycle position exists yet.\nImporting a Candidate starts this track at “Handoff received”; Admission only becomes reachable after verification, intake validation and admission authority all hold.\nHow this workspace works\nDeclare a Candidate without inventing verification facts.\nBind an admitted verifier/provider before validation or Admission.\nImport candidate evidence",
+        "leftText": "No current Candidate or admitted Evidence is bound.",
+        "rightText": "الوحدة\nالكتلة المحددة\n\nEMPTY · No record is selected; record context appears here once a record is active.",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 19,
+        "rightLineCount": 3,
+        "leftLineCount": 1,
+        "rightLineOverlapRatio": 0,
+        "tables": 0,
+        "tableHeaders": [],
+        "recordTables": 0,
+        "statePills": 1,
+        "pillTexts": [
+          "Evidence recordNONE BOUND"
+        ],
+        "numberedSteps": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "semanticRows": 0,
+        "semanticGroups": 1,
+        "regionItems": 0,
+        "centerStateTokens": 1,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Inspect Evidence",
+          "Import Candidate Evidence",
+          "Prepare Evidence amendment",
+          "Admit submitted Candidate",
+          "Retain superseded source"
+        ],
+        "toolbarCount": 5,
+        "toolbarDisabled": 5,
+        "guidance": true,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 779
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          },
+          "#rightPane": {
+            "x": 1020,
+            "y": 182,
+            "width": 420,
+            "height": 779
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 961,
+            "width": 1440,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 538,
+            "y": 142,
+            "width": 890,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          }
+        }
+      }
+    },
+    {
+      "surface": "evidence",
+      "viewport": "1440x1000",
+      "viewportWidth": 1440,
+      "viewportHeight": 1000,
+      "state": "candidate-submitted",
+      "file": "evidence-1440x1000-candidate-submitted.png",
+      "sha256": "9614fb9bcb6b73ce33826aadeb800855793ca16171aed477090aaa2a2c426c24",
+      "bytes": 228426,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "evImport",
+          "args": [
+            "cand-reaudit-1"
+          ],
+          "value": {
+            "ok": true,
+            "record": {
+              "id": "cand-reaudit-1",
+              "evidenceId": "cand-reaudit-1",
+              "revisionId": "cand-reaudit-1-r1",
+              "title": "Re-audit candidate cand-reaudit-1",
+              "status": "CANDIDATE",
+              "candidateState": "PREPARED",
+              "candidateRevision": 1,
+              "intakeValidation": {
+                "status": "NOT_VALIDATED"
+              },
+              "sourceStatus": "CURRENT",
+              "digest": null,
+              "schemaValid": false,
+              "sourceBytesAvailable": false,
+              "verification": {
+                "status": "UNVERIFIED",
+                "providerId": null,
+                "proofRef": null,
+                "digest": null,
+                "sourceBytesAvailable": false,
+                "schemaValid": false,
+                "producerIdentity": null,
+                "handoffReceiptRef": null,
+                "verifiedAt": null
+              },
+              "reviewStatus": null,
+              "effectiveDecision": null,
+              "notes": "Submitted with a source handoff note for the re-audit capture.",
+              "subject": "owner:local",
+              "evidenceClaim": "Candidate claim recorded for the W04 visual re-audit lifecycle state.",
+              "criterionRefs": [
+                "criteria:v4#integrity",
+                "criteria:v4#provenance"
+              ],
+              "governedPurpose": "W04 visual re-audit state capture (fixture)",
+              "selectedMaterialRefs": [
+                "reaudit-source-cand-reaudit-1@r1",
+                "reaudit-timeline@t1",
+                "reaudit-observation@o1"
+              ],
+              "sourceType": "imported-material",
+              "sourceId": "reaudit-source-cand-reaudit-1",
+              "sourceRevision": "r1",
+              "producerIdentity": null,
+              "sourceTimestamp": null,
+              "handoffReceiptRef": null,
+              "admissionAuthority": {
+                "available": false,
+                "proofRef": null
+              },
+              "importAssurance": "UNVERIFIED"
+            },
+            "mutated": true,
+            "canonicalEvidenceCreated": false,
+            "verificationStatus": "UNVERIFIED",
+            "note": "Import creates Candidate Evidence only. Source verification, Admission, Review, Decision and Mastery remain separate."
+          }
+        },
+        {
+          "seed": "evSubmit",
+          "args": [
+            "cand-reaudit-1"
+          ],
+          "value": {
+            "ok": true,
+            "code": null
+          }
+        }
+      ],
+      "metrics": {
+        "centerText": "Re-audit candidate cand-reaudit-1 · cand-reaudit-1\n\nCandidate Evidence · cand-reaudit-1-r1\n\nCANDIDATE STATE\nSUBMITTED_FOR_INTAKE\nSOURCE STATUS\nCURRENT\nREVIEW STATUS\nUNREVIEWED\nINTAKE → ADMISSION LIFECYCLE\n1\nHandoff received\n2\nCandidate prepared\n3\nSubmitted for intake\n4\nAdmitted as immutable Evidence\nSource verification is outstanding — admission is refused with SOURCE_VERIFICATION_REQUIRED.\nImport never implies Admission, Review, Decision or Mastery — those stay separate governed steps.\nCANDIDATE RECORD\nEvidence Claim\nCandidate claim recorded for the W04 visual re-audit lifecycle state.\nSubject\nowner:local\nGoverned purpose\nW04 visual re-audit state capture (fixture)\nProposed Capability / Criterion Scope\ncriteria:v4#integrity · criteria:v4#provenance\nRecord identity\ncand-reaudit-1 @ cand-reaudit-1-r1\nSOURCE HANDOFF\nSource Domain\nimported-material\nSource Type\nCandidate handoff\nSource\nreaudit-source-cand-reaudit-1 @ r1\nSource status\nCURRENT\nDigest\nEMPTY\nHandoff\nNo handoff receipt recorded\nHandoff Received\nNo source timestamp recorded\nSubmitted By\nNo producer identity recorded\nSubmission Note\nSubmitted with a source handoff note for the re-audit capture.\nSELECTED SUPPORTING REFERENCES\nreaudit-source-cand-reaudit-1@r1\nReference\nreaudit-timeline@t1\nReference\nreaudit-observation@o1\nReference\nVERIFICATION AND ADMISSION GATES\nSource bytes\nUNAVAILABLE\nSchema\nREJECTED / NOT CHECKED\nSource verification\nUNVERIFIED\nIntake validation\nNOT_VALIDATED\nAdmission authority\nUNAVAILABLE — Admission refuses without a bound authority\nImport candidate evidence",
+        "leftText": "Evidence record Lifecycle Source Review\nRe-audit candidate cand-reaudit-1\ncand-reaudit-1 · cand-reaudit-1-r1\n CANDIDATE\nSUBMITTED_FOR_INTAKE\n CURRENT\nreaudit-source-cand-reaudit-1@r1\n UNREVIEWED\nNONE",
+        "rightText": "الوحدة\nالكتلة المحددة\n\nEVIDENCE CONTEXT\n\nRe-audit candidate cand-reaudit-1\n\nCANDIDATE · source CURRENT\n\nGOVERNANCE\nProvenance\nEvidence ID\ncand-reaudit-1\nRevision\ncand-reaudit-1-r1\nPinned source\nreaudit-source-cand-reaudit-1@r1\nDigest\n—\nCriterion relevance\ncriteria:v4#integrity, criteria:v4#provenance\nState dimensions\nEvidence lifecycle\nCANDIDATE\nReview status\nUNREVIEWED\nEffective Review Decision\nNONE\nSource integrity/status\nCURRENT",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 68,
+        "rightLineCount": 26,
+        "leftLineCount": 9,
+        "rightLineOverlapRatio": 0.154,
+        "tables": 1,
+        "tableHeaders": [
+          "Evidence record",
+          "Lifecycle",
+          "Source",
+          "Review"
+        ],
+        "recordTables": 0,
+        "statePills": 3,
+        "pillTexts": [
+          "Candidate stateSUBMITTED_FOR_INTAKE",
+          "Source statusCURRENT",
+          "Review statusUNREVIEWED"
+        ],
+        "numberedSteps": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "semanticRows": 19,
+        "semanticGroups": 5,
+        "regionItems": 0,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Inspect Evidence",
+          "Import Candidate Evidence",
+          "Prepare Evidence amendment",
+          "Admit submitted Candidate",
+          "Retain superseded source"
+        ],
+        "toolbarCount": 5,
+        "toolbarDisabled": 4,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 779
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          },
+          "#rightPane": {
+            "x": 1020,
+            "y": 182,
+            "width": 420,
+            "height": 779
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 961,
+            "width": 1440,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 538,
+            "y": 142,
+            "width": 890,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          }
+        }
+      }
+    },
+    {
+      "surface": "evidence",
+      "viewport": "1440x1000",
+      "viewportWidth": 1440,
+      "viewportHeight": 1000,
+      "state": "admitted-immutable",
+      "file": "evidence-1440x1000-admitted-immutable.png",
+      "sha256": "907882a4bf81ca21cd6e1413be84e37f39ba519a988acd6f71d7021273929190",
+      "bytes": 233351,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "evAdmit",
+          "args": [
+            "cand-reaudit-1"
+          ],
+          "value": {
+            "verified": true,
+            "validated": true,
+            "admitted": true,
+            "code": null,
+            "status": "ADMITTED",
+            "revisionId": "cand-reaudit-1-r1",
+            "immutable": true
+          }
+        }
+      ],
+      "metrics": {
+        "centerText": "Re-audit candidate cand-reaudit-1 · cand-reaudit-1\n\nAdmitted Evidence · cand-reaudit-1-r1\n\nEVIDENCE LIFECYCLE\nACTIVE\nSOURCE STATUS\nCURRENT\nREVIEW STATUS\nUNREVIEWED\nINTAKE → ADMISSION LIFECYCLE\n1\nHandoff received\n2\nCandidate prepared\n3\nSubmitted for intake\n4\nAdmitted as immutable Evidence\nInspect the exact immutable revision (evidence.inspect) — always available.\nAmend against the exact current revision (evidence.amend) when the source changes.\nImport never implies Admission, Review, Decision or Mastery — those stay separate governed steps.\nCANDIDATE RECORD\nEvidence Claim\nCandidate claim recorded for the W04 visual re-audit lifecycle state.\nSubject\nowner:local\nGoverned purpose\nW04 visual re-audit state capture (fixture)\nProposed Capability / Criterion Scope\ncriteria:v4#integrity · criteria:v4#provenance\nRecord identity\ncand-reaudit-1 @ cand-reaudit-1-r1\nSOURCE HANDOFF\nSource Domain\nimported-material\nSource Type\nAdmitted Evidence revision\nSource\nreaudit-source-cand-reaudit-1 @ r1\nSource status\nCURRENT\nDigest\nsha256:777777777777777…7777\nHandoff\nNo handoff receipt recorded\nHandoff Received\nNo source timestamp recorded\nSubmitted By\nNo producer identity recorded\nSubmission Note\nSubmitted with a source handoff note for the re-audit capture.\nSELECTED SUPPORTING REFERENCES\nreaudit-source-cand-reaudit-1@r1\nReference\nreaudit-timeline@t1\nReference\nreaudit-observation@o1\nReference\nVERIFICATION AND ADMISSION GATES\nSource bytes\nAVAILABLE\nSchema\nVALID\nSource verification\nVERIFIED · provider:w04-reaudit · proof:reaudit:cand-reaudit-1\nIntake validation\nVALIDATED · w04-reaudit · proof:intake:cand-reaudit-1\nAdmission authority\nAUTHORIZED · authority:evidence-admission:reaudit:cand-reaudit-1\nINDEPENDENT REVIEW PROJECTION\nEvidence lifecycle\nACTIVE\nReview status\nUNREVIEWED\nEffective Review Decision\nNONE\nImmutable revision\nYES — supersedes by new revision only\nPrevious revision\nNone — first revision\nImport candidate evidence",
+        "leftText": "Evidence record Lifecycle Source Review\nRe-audit candidate cand-reaudit-1\ncand-reaudit-1 · cand-reaudit-1-r1\n ADMITTED\nADMITTED\n CURRENT\nreaudit-source-cand-reaudit-1@r1\n UNREVIEWED\nNONE",
+        "rightText": "الوحدة\nالكتلة المحددة\n\nEVIDENCE CONTEXT\n\nRe-audit candidate cand-reaudit-1\n\nADMITTED · source CURRENT\n\nGOVERNANCE\nProvenance\nEvidence ID\ncand-reaudit-1\nRevision\ncand-reaudit-1-r1\nPinned source\nreaudit-source-cand-reaudit-1@r1\nDigest\nsha256:7777777777777777777777777777777777777777777777777777777777777777\nCriterion relevance\ncriteria:v4#integrity, criteria:v4#provenance\nState dimensions\nEvidence lifecycle\nACTIVE\nReview status\nUNREVIEWED\nEffective Review Decision\nNONE\nSource integrity/status\nCURRENT",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 80,
+        "rightLineCount": 26,
+        "leftLineCount": 9,
+        "rightLineOverlapRatio": 0.346,
+        "tables": 1,
+        "tableHeaders": [
+          "Evidence record",
+          "Lifecycle",
+          "Source",
+          "Review"
+        ],
+        "recordTables": 0,
+        "statePills": 3,
+        "pillTexts": [
+          "Evidence lifecycleACTIVE",
+          "Source statusCURRENT",
+          "Review statusUNREVIEWED"
+        ],
+        "numberedSteps": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "semanticRows": 24,
+        "semanticGroups": 6,
+        "regionItems": 0,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Inspect Evidence",
+          "Import Candidate Evidence",
+          "Prepare Evidence amendment",
+          "Admit submitted Candidate",
+          "Retain superseded source"
+        ],
+        "toolbarCount": 5,
+        "toolbarDisabled": 3,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 182,
+            "width": 304,
+            "height": 779
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          },
+          "#rightPane": {
+            "x": 1020,
+            "y": 182,
+            "width": 420,
+            "height": 779
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 961,
+            "width": 1440,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 538,
+            "y": 142,
+            "width": 890,
+            "height": 31
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 182,
+            "width": 694,
+            "height": 779
+          }
+        }
+      }
+    },
+    {
+      "surface": "evidence",
+      "viewport": "1024x900",
+      "viewportWidth": 1024,
+      "viewportHeight": 900,
+      "state": "empty",
+      "file": "evidence-1024x900-empty.png",
+      "sha256": "3a38a945aa2f7eac8804d04e80a47d3df0f43f5c30958590a26b13359762cfa6",
+      "bytes": 131843,
+      "pageErrors": [],
+      "seeds": [],
+      "metrics": {
+        "centerText": "Evidence workbench\nEVIDENCE RECORD\nNONE BOUND\n\nEMPTY · No current Candidate or admitted Evidence is bound.\n\nINTAKE → ADMISSION LIFECYCLE\n1\nHandoff received\n2\nCandidate prepared\n3\nSubmitted for intake\n4\nAdmitted as immutable Evidence\nNo Candidate or admitted Evidence is selected, so no lifecycle position exists yet.\nImporting a Candidate starts this track at “Handoff received”; Admission only becomes reachable after verification, intake validation and admission authority all hold.\nHow this workspace works\nDeclare a Candidate without inventing verification facts.\nBind an admitted verifier/provider before validation or Admission.\nImport candidate evidence",
+        "leftText": "No current Candidate or admitted Evidence is bound.",
+        "rightText": "الوحدةالكتلة المحددةEMPTY · No record is selected; record context appears here once a record is active.",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 19,
+        "rightLineCount": 1,
+        "leftLineCount": 1,
+        "rightLineOverlapRatio": 0,
+        "tables": 0,
+        "tableHeaders": [],
+        "recordTables": 0,
+        "statePills": 1,
+        "pillTexts": [
+          "Evidence recordNONE BOUND"
+        ],
+        "numberedSteps": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "semanticRows": 0,
+        "semanticGroups": 1,
+        "regionItems": 0,
+        "centerStateTokens": 1,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Inspect Evidence",
+          "Import Candidate Evidence",
+          "Prepare Evidence amendment",
+          "Admit submitted Candidate",
+          "Retain superseded source"
+        ],
+        "toolbarCount": 5,
+        "toolbarDisabled": 5,
+        "guidance": true,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 200,
+            "width": 304,
+            "height": 661
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 200,
+            "width": 709,
+            "height": 661
+          },
+          "#rightPane": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 861,
+            "width": 1024,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 283,
+            "y": 134,
+            "width": 729,
+            "height": 65
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 200,
+            "width": 709,
+            "height": 661
+          }
+        }
+      }
+    },
+    {
+      "surface": "evidence",
+      "viewport": "1024x900",
+      "viewportWidth": 1024,
+      "viewportHeight": 900,
+      "state": "candidate-submitted",
+      "file": "evidence-1024x900-candidate-submitted.png",
+      "sha256": "73996a71878e8b83f714144d6f88b7d1fdecbf1b6f2059ec38be3b0c38aa0931",
+      "bytes": 146468,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "evImport",
+          "args": [
+            "cand-reaudit-1"
+          ],
+          "value": {
+            "ok": true,
+            "record": {
+              "id": "cand-reaudit-1",
+              "evidenceId": "cand-reaudit-1",
+              "revisionId": "cand-reaudit-1-r1",
+              "title": "Re-audit candidate cand-reaudit-1",
+              "status": "CANDIDATE",
+              "candidateState": "PREPARED",
+              "candidateRevision": 1,
+              "intakeValidation": {
+                "status": "NOT_VALIDATED"
+              },
+              "sourceStatus": "CURRENT",
+              "digest": null,
+              "schemaValid": false,
+              "sourceBytesAvailable": false,
+              "verification": {
+                "status": "UNVERIFIED",
+                "providerId": null,
+                "proofRef": null,
+                "digest": null,
+                "sourceBytesAvailable": false,
+                "schemaValid": false,
+                "producerIdentity": null,
+                "handoffReceiptRef": null,
+                "verifiedAt": null
+              },
+              "reviewStatus": null,
+              "effectiveDecision": null,
+              "notes": "Submitted with a source handoff note for the re-audit capture.",
+              "subject": "owner:local",
+              "evidenceClaim": "Candidate claim recorded for the W04 visual re-audit lifecycle state.",
+              "criterionRefs": [
+                "criteria:v4#integrity",
+                "criteria:v4#provenance"
+              ],
+              "governedPurpose": "W04 visual re-audit state capture (fixture)",
+              "selectedMaterialRefs": [
+                "reaudit-source-cand-reaudit-1@r1",
+                "reaudit-timeline@t1",
+                "reaudit-observation@o1"
+              ],
+              "sourceType": "imported-material",
+              "sourceId": "reaudit-source-cand-reaudit-1",
+              "sourceRevision": "r1",
+              "producerIdentity": null,
+              "sourceTimestamp": null,
+              "handoffReceiptRef": null,
+              "admissionAuthority": {
+                "available": false,
+                "proofRef": null
+              },
+              "importAssurance": "UNVERIFIED"
+            },
+            "mutated": true,
+            "canonicalEvidenceCreated": false,
+            "verificationStatus": "UNVERIFIED",
+            "note": "Import creates Candidate Evidence only. Source verification, Admission, Review, Decision and Mastery remain separate."
+          }
+        },
+        {
+          "seed": "evSubmit",
+          "args": [
+            "cand-reaudit-1"
+          ],
+          "value": {
+            "ok": true,
+            "code": null
+          }
+        }
+      ],
+      "metrics": {
+        "centerText": "Re-audit candidate cand-reaudit-1 · cand-reaudit-1\n\nCandidate Evidence · cand-reaudit-1-r1\n\nCANDIDATE STATE\nSUBMITTED_FOR_INTAKE\nSOURCE STATUS\nCURRENT\nREVIEW STATUS\nUNREVIEWED\nINTAKE → ADMISSION LIFECYCLE\n1\nHandoff received\n2\nCandidate prepared\n3\nSubmitted for intake\n4\nAdmitted as immutable Evidence\nSource verification is outstanding — admission is refused with SOURCE_VERIFICATION_REQUIRED.\nImport never implies Admission, Review, Decision or Mastery — those stay separate governed steps.\nCANDIDATE RECORD\nEvidence Claim\nCandidate claim recorded for the W04 visual re-audit lifecycle state.\nSubject\nowner:local\nGoverned purpose\nW04 visual re-audit state capture (fixture)\nProposed Capability / Criterion Scope\ncriteria:v4#integrity · criteria:v4#provenance\nRecord identity\ncand-reaudit-1 @ cand-reaudit-1-r1\nSOURCE HANDOFF\nSource Domain\nimported-material\nSource Type\nCandidate handoff\nSource\nreaudit-source-cand-reaudit-1 @ r1\nSource status\nCURRENT\nDigest\nEMPTY\nHandoff\nNo handoff receipt recorded\nHandoff Received\nNo source timestamp recorded\nSubmitted By\nNo producer identity recorded\nSubmission Note\nSubmitted with a source handoff note for the re-audit capture.\nSELECTED SUPPORTING REFERENCES\nreaudit-source-cand-reaudit-1@r1\nReference\nreaudit-timeline@t1\nReference\nreaudit-observation@o1\nReference\nVERIFICATION AND ADMISSION GATES\nSource bytes\nUNAVAILABLE\nSchema\nREJECTED / NOT CHECKED\nSource verification\nUNVERIFIED\nIntake validation\nNOT_VALIDATED\nAdmission authority\nUNAVAILABLE — Admission refuses without a bound authority\nImport candidate evidence",
+        "leftText": "Evidence record Lifecycle Source Review\nRe-audit candidate cand-reaudit-1\ncand-reaudit-1 · cand-reaudit-1-r1\n CANDIDATE\nSUBMITTED_FOR_INTAKE\n CURRENT\nreaudit-source-cand-reaudit-1@r1\n UNREVIEWED\nNONE",
+        "rightText": "الوحدةالكتلة المحددةEvidence contextRe-audit candidate cand-reaudit-1CANDIDATE · source CURRENTGovernanceProvenanceEvidence IDcand-reaudit-1Revisioncand-reaudit-1-r1Pinned sourcereaudit-source-cand-reaudit-1@r1Digest—Criterion relevancecriteria:v4#integrity, criteria:v4#provenanceState dimensionsEvidence lifecycleCANDIDATEReview statusUNREVIEWEDEffective Review DecisionNONESource integrity/statusCURRENT",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 68,
+        "rightLineCount": 1,
+        "leftLineCount": 9,
+        "rightLineOverlapRatio": 0,
+        "tables": 1,
+        "tableHeaders": [
+          "Evidence record",
+          "Lifecycle",
+          "Source",
+          "Review"
+        ],
+        "recordTables": 0,
+        "statePills": 3,
+        "pillTexts": [
+          "Candidate stateSUBMITTED_FOR_INTAKE",
+          "Source statusCURRENT",
+          "Review statusUNREVIEWED"
+        ],
+        "numberedSteps": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "semanticRows": 19,
+        "semanticGroups": 5,
+        "regionItems": 0,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Inspect Evidence",
+          "Import Candidate Evidence",
+          "Prepare Evidence amendment",
+          "Admit submitted Candidate",
+          "Retain superseded source"
+        ],
+        "toolbarCount": 5,
+        "toolbarDisabled": 4,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 200,
+            "width": 304,
+            "height": 661
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 200,
+            "width": 709,
+            "height": 661
+          },
+          "#rightPane": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 861,
+            "width": 1024,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 283,
+            "y": 134,
+            "width": 729,
+            "height": 65
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 200,
+            "width": 709,
+            "height": 661
+          }
+        }
+      }
+    },
+    {
+      "surface": "evidence",
+      "viewport": "1024x900",
+      "viewportWidth": 1024,
+      "viewportHeight": 900,
+      "state": "admitted-immutable",
+      "file": "evidence-1024x900-admitted-immutable.png",
+      "sha256": "042966cd8593d74a0e6733867cf0066cbb38c1e10971750b52cc77fedcea531d",
+      "bytes": 149368,
+      "pageErrors": [],
+      "seeds": [
+        {
+          "seed": "evAdmit",
+          "args": [
+            "cand-reaudit-1"
+          ],
+          "value": {
+            "verified": true,
+            "validated": true,
+            "admitted": true,
+            "code": null,
+            "status": "ADMITTED",
+            "revisionId": "cand-reaudit-1-r1",
+            "immutable": true
+          }
+        }
+      ],
+      "metrics": {
+        "centerText": "Re-audit candidate cand-reaudit-1 · cand-reaudit-1\n\nAdmitted Evidence · cand-reaudit-1-r1\n\nEVIDENCE LIFECYCLE\nACTIVE\nSOURCE STATUS\nCURRENT\nREVIEW STATUS\nUNREVIEWED\nINTAKE → ADMISSION LIFECYCLE\n1\nHandoff received\n2\nCandidate prepared\n3\nSubmitted for intake\n4\nAdmitted as immutable Evidence\nInspect the exact immutable revision (evidence.inspect) — always available.\nAmend against the exact current revision (evidence.amend) when the source changes.\nImport never implies Admission, Review, Decision or Mastery — those stay separate governed steps.\nCANDIDATE RECORD\nEvidence Claim\nCandidate claim recorded for the W04 visual re-audit lifecycle state.\nSubject\nowner:local\nGoverned purpose\nW04 visual re-audit state capture (fixture)\nProposed Capability / Criterion Scope\ncriteria:v4#integrity · criteria:v4#provenance\nRecord identity\ncand-reaudit-1 @ cand-reaudit-1-r1\nSOURCE HANDOFF\nSource Domain\nimported-material\nSource Type\nAdmitted Evidence revision\nSource\nreaudit-source-cand-reaudit-1 @ r1\nSource status\nCURRENT\nDigest\nsha256:777777777777777…7777\nHandoff\nNo handoff receipt recorded\nHandoff Received\nNo source timestamp recorded\nSubmitted By\nNo producer identity recorded\nSubmission Note\nSubmitted with a source handoff note for the re-audit capture.\nSELECTED SUPPORTING REFERENCES\nreaudit-source-cand-reaudit-1@r1\nReference\nreaudit-timeline@t1\nReference\nreaudit-observation@o1\nReference\nVERIFICATION AND ADMISSION GATES\nSource bytes\nAVAILABLE\nSchema\nVALID\nSource verification\nVERIFIED · provider:w04-reaudit · proof:reaudit:cand-reaudit-1\nIntake validation\nVALIDATED · w04-reaudit · proof:intake:cand-reaudit-1\nAdmission authority\nAUTHORIZED · authority:evidence-admission:reaudit:cand-reaudit-1\nINDEPENDENT REVIEW PROJECTION\nEvidence lifecycle\nACTIVE\nReview status\nUNREVIEWED\nEffective Review Decision\nNONE\nImmutable revision\nYES — supersedes by new revision only\nPrevious revision\nNone — first revision\nImport candidate evidence",
+        "leftText": "Evidence record Lifecycle Source Review\nRe-audit candidate cand-reaudit-1\ncand-reaudit-1 · cand-reaudit-1-r1\n ADMITTED\nADMITTED\n CURRENT\nreaudit-source-cand-reaudit-1@r1\n UNREVIEWED\nNONE",
+        "rightText": "الوحدةالكتلة المحددةEvidence contextRe-audit candidate cand-reaudit-1ADMITTED · source CURRENTGovernanceProvenanceEvidence IDcand-reaudit-1Revisioncand-reaudit-1-r1Pinned sourcereaudit-source-cand-reaudit-1@r1Digestsha256:7777777777777777777777777777777777777777777777777777777777777777Criterion relevancecriteria:v4#integrity, criteria:v4#provenanceState dimensionsEvidence lifecycleACTIVEReview statusUNREVIEWEDEffective Review DecisionNONESource integrity/statusCURRENT",
+        "bottomText": "عمل عميق\nمغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+        "centerLineCount": 80,
+        "rightLineCount": 1,
+        "leftLineCount": 9,
+        "rightLineOverlapRatio": 0,
+        "tables": 1,
+        "tableHeaders": [
+          "Evidence record",
+          "Lifecycle",
+          "Source",
+          "Review"
+        ],
+        "recordTables": 0,
+        "statePills": 3,
+        "pillTexts": [
+          "Evidence lifecycleACTIVE",
+          "Source statusCURRENT",
+          "Review statusUNREVIEWED"
+        ],
+        "numberedSteps": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "semanticRows": 24,
+        "semanticGroups": 6,
+        "regionItems": 0,
+        "centerStateTokens": 0,
+        "overflow": 0,
+        "toolbarButtons": [
+          "Inspect Evidence",
+          "Import Candidate Evidence",
+          "Prepare Evidence amendment",
+          "Admit submitted Candidate",
+          "Retain superseded source"
+        ],
+        "toolbarCount": 5,
+        "toolbarDisabled": 3,
+        "guidance": false,
+        "bottomRegionText": "",
+        "bottomAvailability": "AVAILABLE",
+        "direction": "rtl",
+        "rects": {
+          "#leftPane": {
+            "x": 0,
+            "y": 200,
+            "width": 304,
+            "height": 661
+          },
+          "#centerPane": {
+            "x": 315,
+            "y": 200,
+            "width": 709,
+            "height": 661
+          },
+          "#rightPane": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "#bottomShelf": {
+            "x": 0,
+            "y": 861,
+            "width": 1024,
+            "height": 39
+          },
+          "#domainToolbar": {
+            "x": 283,
+            "y": 134,
+            "width": 729,
+            "height": 65
+          },
+          "#foundationStage": {
+            "x": 315,
+            "y": 200,
+            "width": 709,
+            "height": 661
+          }
+        }
+      }
+    }
+  ]
+}
