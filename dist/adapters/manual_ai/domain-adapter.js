@@ -1,6 +1,7 @@
 import {SemanticCommandBus} from '../../foundation/global/commands.js';
 
 export const MANUAL_AI_DOMAIN_OWNER='ManualAiDomainAdapter';
+export const MANUAL_AI_COMMAND_LABELS=Object.freeze({'manual_ai.draft':'Prepare manual packet','manual_ai.export':'Export packet for external AI','manual_ai.import':'Import external result','manual_ai.review':'Record human disposition'});
 export const MANUAL_AI_COMMANDS=Object.freeze(['manual_ai.draft','manual_ai.export','manual_ai.import','manual_ai.review']);
                                                                                                                                 
                                                      
@@ -38,7 +39,7 @@ export class ManualAiDomainAdapter{
           selectedId            =null;
           io               ;
           draftSink               ;
-          history      =[];
+          history      =[]; lastAction    =null;
 
   constructor({proposals=[],io={},draftSink=null}                                                                           ={}){
     this.io=io;this.draftSink=draftSink;for(const row of proposals)this.put(row);
@@ -49,7 +50,7 @@ export class ManualAiDomainAdapter{
     return {...clone(row),revision:text(row.revision),sourceDigest,provenance:{...clone(row.provenance),sourceId:text(row.provenance?.sourceId),sourceRevisionId,sourceDigest,obtainedBy:row.provenance?.obtainedBy||'USER_MEDIATED_EXTERNAL_AI',obtainedAt:row.provenance?.obtainedAt||new Date().toISOString(),exportedArtifactId:row.provenance?.exportedArtifactId??null,exportedPackageDigest:row.provenance?.exportedPackageDigest??null},draftId:row.draftId??null};
   }
           put(row               ){if(!row?.proposalId||!row.revision)throw Error('MANUAL_PROPOSAL_IDENTITY_REQUIRED');const normalized=this.normalize(row);this.proposals.set(normalized.proposalId,normalized);}
-  rows(){return [...this.proposals.values()].map(clone);}
+  rows(){return [...this.proposals.values()].map(row=>({...clone(row),id:row.proposalId}));}
   select(id            ){if(id!==null&&!this.proposals.has(id))throw Error('MANUAL_PROPOSAL_UNKNOWN');this.selectedId=id;return this.selected();}
   selected(){return this.selectedId?clone(this.proposals.get(this.selectedId) ):null;}
           provenanceMatches(row               ,input    ){
@@ -132,6 +133,35 @@ export class ManualAiDomainAdapter{
     if(id==='manual_ai.review'){if(!row)return 'Select a ManualProposal';if(row.state==='PROVENANCE_INVALID')return 'Imported proposal with valid provenance required for human review';return row.state==='IMPORTED'||row.state==='DEFERRED'?true:'Import and provenance equality must succeed before human review';}
     return 'Unknown Manual AI command';
   }
-  bindCommands(bus                   ){for(const id of MANUAL_AI_COMMANDS)bus.registerCommand(id,this.owner,id.split('.').at(-1) ,p=>{if(id==='manual_ai.draft')return this.prepare(p);if(id==='manual_ai.export')return this.export(p.id??this.selectedId);if(id==='manual_ai.import')return this.import(p.input);return this.review(p);},p=>this.availability(id,p));return bus;}
+  /** Authoritative single-location projection of one ManualProposal (CEP-VIS-001-FINAL:
+      ONE INFORMATION ITEM -> ONE AUTHORITATIVE DISPLAY LOCATION). Consumed by the typed-collection
+      CENTER region; the declared state machine comes from the W05 surface profile. */
+  inspect(id            =this.selectedId){
+    const row=id?this.proposals.get(id):null;
+    if(!row)return {ok:false         ,code:'NO_MANUAL_PROPOSAL',requirements:['proposalId','revision','sourceId','sourceRevisionId','sourceDigest']};
+    const terminalState=terminal(row.state);
+    const sequence=(['PREPARED','EXPORTED','IMPORTED','DEFERRED','REJECTED','ACCEPTED_AS_DRAFT']         ).map((step,index)=>({
+      step:index+1,name:step,
+      reached:step==='PREPARED'?true:step==='EXPORTED'?['EXPORTED','IMPORTED','DEFERRED','REJECTED','ACCEPTED_AS_DRAFT'].includes(row.state):step==='IMPORTED'?['IMPORTED','DEFERRED','REJECTED','ACCEPTED_AS_DRAFT'].includes(row.state):step==='DEFERRED'?row.state==='DEFERRED':step==='REJECTED'?row.state==='REJECTED':row.state==='ACCEPTED_AS_DRAFT',
+      current:(step==='PREPARED'&&row.state==='PREPARED')||(step==='EXPORTED'&&row.state==='EXPORTED')||(step==='IMPORTED'&&row.state==='IMPORTED')||(step==='DEFERRED'&&row.state==='DEFERRED')||(step==='REJECTED'&&row.state==='REJECTED')||(step==='ACCEPTED_AS_DRAFT'&&row.state==='ACCEPTED_AS_DRAFT')
+    }));
+    return {
+      proposalId:row.proposalId,revision:row.revision,state:row.state,draftState:row.draftState,draftId:row.draftId,
+      terminal:terminalState,
+      provenance:{sourceId:row.provenance.sourceId,sourceRevisionId:row.provenance.sourceRevisionId,sourceDigest:row.provenance.sourceDigest,obtainedBy:row.provenance.obtainedBy,obtainedAt:row.provenance.obtainedAt,exportedArtifactId:row.provenance.exportedArtifactId||'NOT_EXPORTED',exportedPackageDigest:row.provenance.exportedPackageDigest||'NOT_EXPORTED'},
+      sequence,
+      ceilings:{providerMode:this.providerMode,hiddenProviderCalls:0,automaticCanonicalPublication:false,importRequiresDeclaredExport:true,sourceRevisionDigestEqualityRequired:true,acceptCreatesDraftOnly:true,invalidProvenanceFailsClosed:true},
+      governance:[
+        {rule:'الذكاء الاصطناعي الخارجي أداة مساعدة للمراجعة فقط',en:'External AI is a review aid only',enforced:'MANUAL_ONLY_PROVIDER_NEUTRAL'},
+        {rule:'القرار النهائي يبقى لدى المراجع البشري',en:'The final decision stays with the human reviewer',enforced:'human disposition ACCEPT/EDIT/REJECT/DEFER/REQUEST_EVIDENCE'},
+        {rule:'لا قبول من دون تحقّق وتدوين (audit)',en:'No acceptance without verification and audit',enforced:'provenance equality + separate audit trail'}
+      ],
+      timeline:this.history.filter(entry=>entry.proposalId===row.proposalId).map(entry=>({type:entry.type,state:entry.state||entry.disposition||entry.code||'RECORDED',at:entry.at||null})),
+      lastAction:this.lastAction||null,
+      commandAvailability:Object.fromEntries(Object.entries({draft:['manual_ai.draft',{}],export:['manual_ai.export',{id:row.proposalId}],import:['manual_ai.import',{id:row.proposalId}],review:['manual_ai.review',{id:row.proposalId}]}).map(([k,v]    )=>{let r    ='';try{r=this.availability(k,v)}catch(e){r='ERROR'}return [k,r===true?'AVAILABLE':(typeof r==='string'?r:(r&&r.reason?r.reason:'UNAVAILABLE'))]})),
+      ok:true
+    };
+  }
+  bindCommands(bus                   ){for(const id of MANUAL_AI_COMMANDS)bus.registerCommand(id,this.owner,MANUAL_AI_COMMAND_LABELS[id]||id,p=>{const exec=()=>{if(id==='manual_ai.draft')return this.prepare(p);if(id==='manual_ai.export')return this.export(p.id??this.selectedId);if(id==='manual_ai.import')return this.import(p.input);return this.review(p)};let result    ;try{result=exec()}catch(error){this.lastAction={commandId:id,ok:false,code:String((error       )?.message||error),at:new Date().toISOString()};throw error}this.lastAction={commandId:id,ok:result?.ok!==false,code:String(result?.code||result?.state||'RECORDED'),proposalId:result?.proposal?.proposalId??p?.id??null,at:new Date().toISOString()};return result;},p=>this.availability(id,p));return bus;}
   diagnosticProjection(){return {owner:this.owner,providerMode:this.providerMode,hiddenProviderCalls:0,automaticCanonicalPublication:false,selectedId:this.selectedId,proposals:this.rows(),history:clone(this.history),truth:{importRequiresDeclaredExport:true,sourceRevisionDigestEqualityRequired:true,acceptCreatesDraftOnly:true}};}
 }

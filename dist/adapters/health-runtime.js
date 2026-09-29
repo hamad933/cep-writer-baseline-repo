@@ -103,27 +103,122 @@ export class HealthRuntimeAdapter{
     return 'Unknown Health command';
   }
   mount({stage,registry,workspace,button,esc}){
+    /* Arabic-first surface language (CEP-VIS-001-FINAL §2.2/§12). Identifiers, timestamps and
+       digests stay in isolated LTR <bdi> spans; product copy is Arabic with an English secondary
+       line so the reference structure is legible while the Owner product-language decision is
+       still pending. No product fact is asserted that the adapter did not observe. */
+    const E=value=>typeof esc==='function'?esc(value):String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const B=value=>`<bdi dir="ltr">${E(value)}</bdi>`;
+    const STATE={
+      AVAILABLE_DATA:{tone:'ok',icon:'✓',ar:'متاح ببيانات',en:'Available with data',noteAr:'رصد حالي متاح، ولا يوجب أي إجراء.',noteEn:'Current observation available; no action required.'},
+      AVAILABLE_EMPTY:{tone:'muted',icon:'○',ar:'متاح · دون سجلات',en:'Available · no records',noteAr:'رصد فارغ صالح، ولا يعني انقطاع المصدر.',noteEn:'Valid empty observation; the source is not disconnected.'},
+      STALE:{tone:'warn',icon:'⚠',ar:'تجاوز حدّ الحداثة',en:'Past freshness budget',noteAr:'تجاوز الرصد حدّ حداثته المسموح.',noteEn:'Observation is past its declared freshness budget.'},
+      UNAVAILABLE:{tone:'bad',icon:'✕',ar:'غير متاح',en:'Unavailable',noteAr:'تعذّر الوصول إلى المصدر وقت الرصد.',noteEn:'Source unreachable at observation time.'},
+      ERROR:{tone:'bad',icon:'✕',ar:'خطأ في الرصد',en:'Observation error',noteAr:'فشل جلب الرصد أو تحليله، مع الاحتفاظ بآخر رصد معروف.',noteEn:'Fetch or parse failed; the last known observation is retained.'}
+    };
+    const NEXT={
+      AVAILABLE_DATA:['health.inspect','عرض التفاصيل','View details'],
+      AVAILABLE_EMPTY:['health.inspect','عرض التفاصيل','View details'],
+      STALE:['health.refresh','إعادة المحاولة','Retry observation'],
+      UNAVAILABLE:['health.diagnose','تشغيل تشخيص','Run durable diagnostic'],
+      ERROR:['health.diagnose','تشغيل تشخيص','Run durable diagnostic']
+    };
+    const meta=state=>STATE[state]||STATE.UNAVAILABLE;
+    const blocking=state=>state==='UNAVAILABLE'||state==='ERROR';
+    const ageOf=iso=>{if(!iso)return 'غير مرصود';const base=Date.parse(iso);if(!Number.isFinite(base))return 'غير مرصود';const s=Math.max(0,Math.round((Date.now()-base)/1000));if(s<60)return `منذ ${s} ثانية`;const m=Math.round(s/60);if(m<60)return `منذ ${m} دقيقة`;const h=Math.round(m/60);if(h<24)return `منذ ${h} ساعة`;return `منذ ${Math.round(h/24)} يوم`};
     const render=()=>{
       const state=this.snapshot(),rows=this.collection.snapshot().visibleRows,selected=this.selected();
       const summary={AVAILABLE_DATA:0,AVAILABLE_EMPTY:0,UNAVAILABLE:0,ERROR:0,STALE:0};
       for(const row of rows)summary[row.state]=(summary[row.state]||0)+1;
+      const ok=summary.AVAILABLE_DATA+summary.AVAILABLE_EMPTY,warn=summary.STALE,bad=summary.UNAVAILABLE+summary.ERROR;
+      const diagnostic=state.lastDiagnostic?.diagnostic||null;
+      const latest=rows.map(row=>row.observedAt).filter(Boolean).sort().at(-1)||null;
+      const sel=selected||rows[0]||null,selMeta=meta(sel?.state);
+      const next= NEXT[sel?.state]||NEXT.UNAVAILABLE;
+
+      /* ---- CENTER: reference architecture = component status table + selected-component detail ---- */
       stage.innerHTML=`<style>
-      [data-w05-surface="health"]{display:grid;gap:14px;min-width:0}.w05-health-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}.w05-health-head h1{margin:0}.w05-truth-strip{display:flex;flex-wrap:wrap;gap:7px}.w05-truth-chip{border:1px solid var(--line);border-radius:999px;padding:5px 9px;font:600 11px var(--mono)}.w05-health-grid{display:grid;grid-template-columns:minmax(260px,.95fr) minmax(320px,1.25fr);gap:12px}.w05-health-panel{border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--panel) 94%,transparent);padding:12px;min-width:0}.w05-health-list{display:grid;gap:7px}.w05-health-row{display:grid;grid-template-columns:1fr;gap:5px;text-align:start;border:1px solid var(--line);border-radius:9px;background:transparent;color:inherit;padding:10px;cursor:pointer}.w05-health-row[aria-pressed="true"]{outline:2px solid var(--accent);outline-offset:1px}.w05-health-row>span{display:grid;gap:3px;min-width:0}.w05-health-row strong,.w05-health-row small{overflow-wrap:anywhere}.w05-health-row small{color:var(--text3)}.w05-health-detail dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:7px 10px;margin:0}.w05-health-detail dt{color:var(--text3)}.w05-health-detail dd{margin:0;overflow-wrap:anywhere}.w05-health-diagnostic{grid-column:1/-1}.w05-health-diagnostic pre{max-height:220px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}@media(max-width:1100px){.w05-health-grid{grid-template-columns:1fr}.w05-health-diagnostic{grid-column:auto}}</style>
-      <div data-w05-surface="health" data-health-refresh-phase="${esc(state.refreshPhase)}">
-        <header class="w05-health-head" dir="ltr"><div><div class="m0-eyebrow">W05 · Operational observation</div><h1>Health</h1><p>Provider, freshness, liveness, queue and diagnostic truth remain distinct. Refresh observes; it does not recover or create a diagnostic run.</p></div><div class="m0-command-strip">${button('health.refresh',state.refreshPhase==='FETCHING'?'Refreshing…':'Refresh observed state')}${button('health.diagnose','Run durable diagnostic')}</div></header>
-        <div class="w05-truth-strip" dir="ltr">${Object.entries(summary).map(([key,value])=>`<span class="w05-truth-chip" data-health-summary="${esc(key)}">${esc(key)} · ${value}</span>`).join('')}</div>
-        <div class="w05-health-grid">
-          <section class="w05-health-panel" dir="ltr"><h2>Observed sources</h2><div class="w05-health-list">${rows.length?rows.map(row=>`<button class="w05-health-row" type="button" data-health-source="${esc(row.sourceId)}" data-health-state="${esc(row.state)}" aria-pressed="${row.sourceId===selected?.sourceId}"><span><strong>${esc(row.sourceId)}</strong><small>${esc(row.kind)} · ${esc(row.state)}${row.workerState?` · ${esc(row.workerState)}`:''}</small></span><small>${esc(displayTime(row.observedAt))}</small></button>`).join(''):'<p class="state-token" data-state="empty">No observations yet. This is not a healthy-state claim.</p>'}</div></section>
-          <section class="w05-health-panel w05-health-detail" dir="ltr"><h2>Selected observation</h2>${selected?`<dl><dt>Source</dt><dd><bdi dir="ltr">${esc(selected.sourceId)}</bdi></dd><dt>State</dt><dd data-health-selected-state="${esc(selected.state)}">${esc(selected.state)}</dd><dt>Observed</dt><dd><bdi dir="ltr">${esc(displayTime(selected.observedAt))}</bdi></dd><dt>Fresh until</dt><dd><bdi dir="ltr">${esc(selected.freshUntil||'NOT_ESTABLISHED')}</bdi></dd><dt>Liveness</dt><dd>${esc(selected.workerState||'NOT_APPLICABLE')}</dd><dt>Error</dt><dd>${esc(selected.error||'NONE')}</dd></dl>${button('health.inspect','Inspect exact observation')}`:'<p>Select an observed source after refresh.</p>'}</section>
-          <section class="w05-health-panel w05-health-diagnostic" dir="ltr"><h2>Durable diagnostic</h2><p>Only <bdi dir="ltr">health.diagnose</bdi> creates diagnostic history. A refresh never increments it.</p><pre data-w05-receipt>${esc(JSON.stringify(state.lastDiagnostic?.diagnostic||{status:'NOT_RUN'},null,2))}</pre></section>
-        </div>
-        <section class="w05-health-panel"><h2>Status meaning</h2><p dir="ltr"><bdi dir="ltr">AVAILABLE_EMPTY</bdi> means a successful empty observation. <bdi dir="ltr">UNAVAILABLE</bdi>, <bdi dir="ltr">STALE</bdi>, and <bdi dir="ltr">ERROR</bdi> never become green by fallback.</p><p dir="rtl">تحديث الصحة عملية رصد فقط، ولا يعني إصلاح المزود أو استعادته.</p></section>
+      [data-w05-surface="health"]{display:grid;gap:14px;min-width:0}
+      .h-head{display:grid;gap:4px};margin-block-start:26px.h-head h1{margin:0;font-size:clamp(20px,2vw,27px);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.h-head h1 small{font-size:13px;font-weight:600;color:var(--text3)}
+      .h-lead{margin:0;color:var(--text2);max-width:78ch;line-height:1.6}
+      .h-sec{border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--panel) 94%,transparent);padding:12px;min-width:0}
+      .h-sec>h2{margin:0 0 3px;font-size:15px}.h-sub{display:block;font:600 10px var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:10px}
+      .h-table-wrap{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px}
+      table.h-table{width:100%;border-collapse:collapse;table-layout:fixed}
+      .h-table th,.h-table td{padding:8px 7px;border-bottom:1px solid var(--line);text-align:start;vertical-align:middle;overflow-wrap:anywhere;word-break:normal}
+      .h-table th{font-size:11px;color:var(--text3);background:color-mix(in srgb,var(--panel) 96%,transparent);line-height:1.35}
+      .h-table th strong{display:block;color:var(--text2);font-size:12px}
+      .h-table th em{font-style:normal;font:600 9.5px var(--mono);opacity:.75}
+      .h-table td small{display:block;color:var(--text3);font-size:10.5px;margin-top:2px}
+      .h-table tr[data-selected="true"]{background:rgba(255,255,255,.05);outline:2px solid var(--accent);outline-offset:-2px}
+      .h-state{display:flex;align-items:center;gap:6px;font-weight:650;font-size:12px;line-height:1.3}
+      .h-state bdi{font:600 10px var(--mono);opacity:.8;font-weight:600}
+      .h-badge{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-size:11px;border:1.5px solid currentColor;flex:none}
+      [data-tone="ok"]{color:#37d67a}[data-tone="warn"]{color:#f0b429}[data-tone="bad"]{color:#ff6b6b}[data-tone="muted"]{color:#9fb0c6}
+      .h-time{display:grid;gap:1px}
+      .h-time .h-age{font-size:11px;color:var(--text2);white-space:nowrap}
+      .h-time bdi{font-family:var(--mono);font-size:10.5px;white-space:nowrap}
+      .h-rowbtn{border:1px solid var(--line);border-radius:8px;background:#152438;color:inherit;padding:6px 10px;cursor:pointer;white-space:nowrap;font-size:12px}
+      .h-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+      .h-card{border:1px solid var(--line);border-radius:11px;background:#0d1622;padding:11px;min-width:0;display:grid;gap:7px;align-content:start}
+      .h-card>h3{margin:0;font-size:13px;display:flex;align-items:center;gap:7px}
+      .h-card dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 10px;font-size:12px}
+      .h-card dt{color:var(--text3);white-space:nowrap}.h-card dd{margin:0;overflow-wrap:anywhere;text-align:end}
+      .h-card p{margin:0;font-size:12px;line-height:1.55;color:var(--text2)}
+      .h-card p.en{color:var(--text3);font-size:11px}
+      .h-count{display:flex;gap:9px;flex-wrap:wrap;font:600 12px var(--mono)}
+      .h-lead2{margin:0 0 8px;color:var(--text2);font-size:12px}
+      .h-diag{display:grid;gap:8px}
+      .h-diag dl{margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px}
+      .h-diag dl>div{border:1px solid var(--line);border-radius:9px;padding:8px 10px;background:#0d1622}
+      .h-diag dt{font-size:11px;color:var(--text3)}.h-diag dd{margin:3px 0 0;font-size:13px;font-weight:650;overflow-wrap:anywhere}
+      @media(max-width:760px){.h-table th,.h-table td{padding:7px 8px}}
+      </style>
+      <div data-w05-surface="health" data-health-refresh-phase="${E(state.refreshPhase)}">
+        <header class="h-head"><div class="m0-eyebrow"><bdi dir="ltr">W05 · OPERATIONAL OBSERVATION</bdi></div><h1>الصحة التشغيلية <small>Operational Health</small></h1><p class="h-lead">مراقبة لحالة مكوّنات النظام وعملياتها وضمان استمراريتها وسلامة بياناتها. تحديث الرصد يرصد فقط ولا يستعيد المزود ولا ينشئ تشخيصًا دائمًا.</p></header>
+        <section class="h-sec"><h2>حالة المكوّنات</h2><span class="h-sub">Component status</span>
+          ${rows.length?`<div class="h-table-wrap"><table class="h-table"><thead><tr><th scope="col" style="width:23%"><strong>المكوّن</strong><em>COMPONENT</em></th><th scope="col" style="width:19%"><strong>الحالة التشغيلية</strong><em>STATE</em></th><th scope="col" style="width:18%"><strong>آخر فحص</strong><em>LAST CHECK</em></th><th scope="col" style="width:25%"><strong>الملاحظة المختصرة</strong><em>RECORDED NOTE</em></th><th scope="col" style="width:15%"><strong>الإجراء التالي</strong><em>NEXT ACTION</em></th></tr></thead><tbody>${rows.map(row=>{const m=meta(row.state),n=NEXT[row.state]||NEXT.UNAVAILABLE;return `<tr data-health-row="${E(row.sourceId)}" data-selected="${row.sourceId===sel?.sourceId}"><td><strong dir="auto">${E(row.sourceId)}</strong><small>${E(row.kind)}${row.workerState?` · ${B(row.workerState)}`:''}</small></td><td><span class="h-state" data-tone="${m.tone}" data-health-state="${E(row.state)}"><span class="h-badge" aria-hidden="true">${m.icon}</span><span dir="auto">${E(m.ar)}</span></span><small><bdi dir="ltr">${E(row.state)}</bdi></small></td><td><span class="h-time"><span class="h-age">${E(ageOf(row.observedAt))}</span><bdi dir="ltr">${E((row.observedAt||'NOT_OBSERVED').slice(11)||'NOT_OBSERVED')}</bdi><small><bdi dir="ltr">${row.freshUntil?E(row.freshUntil.slice(11)):'no freshness claim'}</bdi></small></span></td><td dir="auto">${E(m.noteAr)}</td><td><button type="button" class="h-rowbtn" data-health-next="${E(row.sourceId)}" data-health-next-command="${E(n[0])}">${E(n[1])}</button></td></tr>`}).join('')}</tbody></table></div>`:`<p class="state-token" data-state="empty"><strong>لا توجد رصود بعد</strong> · No observation has been recorded yet. This is an explicit empty state, not a healthy-state claim.</p>`}
+        </section>
+        <section class="h-sec"><h2>تفاصيل المكوّن المحدد</h2><span class="h-sub">Selected component details</span>
+          <p class="h-lead2">عرض تفصيل حالة التحقق الحالي للمكوّن المحدد، ثم طلب إجراء واحد ملائم له.</p>
+          ${sel?`<div class="h-cards">
+            <article class="h-card"><h3 data-tone="${summary[sel.state]!==undefined?'muted':'muted'}">ملخص آخر فحص <small class="h-sub" style="margin:0">Last check</small></h3><dl><dt>تاريخ آخر رصد</dt><dd>${B(displayTime(sel.observedAt))}</dd><dt>النتيجة</dt><dd>${E(`${ok} متاح · ${warn} تنبيه · ${bad} حجب`)}</dd><dt>حد الصلاحية</dt><dd>${B(sel.freshUntil||'NOT_ESTABLISHED')}</dd></dl><div class="h-count"><span data-tone="ok">✓ ${ok}</span><span data-tone="warn">⚠ ${warn}</span><span data-tone="bad">✕ ${bad}</span></div></article>
+            <article class="h-card"><h3>حالة الحجب <small class="h-sub" style="margin:0">Blocking state</small></h3><p class="h-state" data-tone="${blocking(sel.state)?'bad':'ok'}"><span class="h-badge" aria-hidden="true">${blocking(sel.state)?'✕':'✓'}</span>${blocking(sel.state)?'نشطة':'غير نشطة'}<small>${blocking(sel.state)?'ACTIVE':'INACTIVE'}</small></p><dl><dt>نوع الحجب</dt><dd>${B(blocking(sel.state)?sel.state:'NONE')}</dd><dt>المصدر</dt><dd>${B(sel.sourceId)}</dd><dt>تاريخ البداية</dt><dd>${B(displayTime(sel.observedAt))}</dd></dl></article>
+            <article class="h-card"><h3>تفاصيل مختصرة <small class="h-sub" style="margin:0">Brief detail</small></h3><p dir="auto">${E(selMeta.noteAr)}</p><p class="en">${E(selMeta.noteEn)}</p><dl><dt>النوع</dt><dd>${B(sel.kind)}</dd><dt>حالة الرصد</dt><dd data-health-selected-state="${E(sel.state)}">${B(sel.state)}</dd><dt>الخطأ</dt><dd>${B(sel.error||'NONE')}</dd></dl></article>
+            <article class="h-card"><h3>الإجراء التالي المقترح <small class="h-sub" style="margin:0">Suggested next action</small></h3><p class="h-state" data-tone="ok"><span class="h-badge" aria-hidden="true">⚙</span>${E(next[1])}<small>${B(next[0])}</small></p><p dir="auto">إجراء واحد مناسب لحالة المكوّن الحالية؛ لا يؤدي هذا الإجراء إلى إصلاح المزود أو استعادته.</p><p><button type="button" class="h-rowbtn" data-health-next="${E(sel.sourceId)}" data-health-next-command="${E(next[0])}">${E(next[1])}</button></p></article>
+          </div>`:`<p class="state-token" data-state="empty"><strong>لا يوجد مكوّن محدد</strong> · Refresh observed state to select an exact component.</p>`}
+        </section>
+        <section class="h-sec h-diag"><h2>آخر تشخيص دائم</h2><span class="h-sub">Last durable diagnostic</span>
+          <p class="h-lead2">هذا ملخّص مختصر لآخر تشخيص دائم. الإيصال الكامل يظهر في مساحة العمل المؤقتة أسفل الشاشة. إجراء <bdi dir="ltr">health.diagnose</bdi> فقط هو ما ينشئ سجل تشخيص؛ عمليتا <bdi dir="ltr">refresh</bdi> لا تزيدان العدّاد.</p>
+          ${diagnostic?`<dl><div><dt>الحالة</dt><dd>${B(diagnostic.status||'UNKNOWN')}</dd></div><div><dt>دائم</dt><dd>${B(String(diagnostic.durable===true))}</dd></div><div><dt>طُلب بواسطة</dt><dd>${B(diagnostic.requestedBy||'health-surface')}</dd></div><div><dt>عدد الرصود</dt><dd>${B(String(diagnostic.observationCount??diagnostic.observations?.length??rows.length))}</dd></div><div><dt>وقت آخر رصد</dt><dd>${B(latest||'NOT_OBSERVED')}</dd></div><div><dt>مزوّد الرصد</dt><dd>${B(state.currentProviderState)}</dd></div></dl>`:`<p class="state-token" data-state="unavailable"><strong>لم يُنفَّذ تشخيص بعد</strong> · No durable diagnostic has been run in this session. <bdi dir="ltr">refresh</bdi> never creates one.</p>`}
+        </section>
       </div>`;
-      stage.querySelectorAll('[data-health-source]').forEach(element=>element.addEventListener('click',()=>{this.inspect({sourceId:element.dataset.healthSource});workspace.inspectorDescriptor(this.contextProvider);render();}));
-      workspace.inspectorDescriptor(this.contextProvider);
-      const sourcePanel=stage.querySelector('.w05-health-grid > .w05-health-panel:first-child'),diagnosticPanel=stage.querySelector('.w05-health-diagnostic');
-      if(sourcePanel)workspace.region('LEFT',{node:sourcePanel,label:'Observed sources'});
-      if(diagnosticPanel)workspace.region('BOTTOM',{node:diagnosticPanel,label:'Health diagnostics',summary:'Durable diagnostic projection; refresh alone does not create a diagnostic run.'});
+
+      /* ---- LEFT: structure/navigation only (contract §3.2) ---- */
+      const left=document.createElement('section');left.className='h-nav';
+      left.innerHTML=`<style>.h-nav{display:grid;gap:10px;min-width:0}.h-nav-sum{display:flex;flex-wrap:wrap;gap:6px}.h-nav-chip{border:1px solid var(--line);border-radius:999px;padding:4px 8px;font:600 10.5px var(--mono);white-space:nowrap}.h-nav-list{list-style:none;margin:0;padding:0;display:grid;gap:6px}.h-nav-list li{min-width:0}.h-nav-item{display:grid;grid-template-columns:auto minmax(0,1fr);gap:9px;align-items:center;width:100%;text-align:start;border:1px solid var(--line);border-radius:9px;background:transparent;color:inherit;padding:9px;cursor:pointer}.h-nav-item[aria-pressed="true"]{border-color:var(--accent);background:rgba(255,255,255,.05)}.h-nav-item .h-badge{width:22px;height:22px}.h-nav-item strong{display:block;overflow-wrap:anywhere;font-size:12.5px}.h-nav-item small{display:block;color:var(--text3);font-size:11px;overflow-wrap:anywhere}</style>
+      <div class="h-nav-sum" dir="ltr">${Object.entries(summary).map(([key,value])=>`<span class="h-nav-chip" data-tone="${meta(key).tone}" data-health-summary="${E(key)}">${E(key)} · ${value}</span>`).join('')}</div>
+      <ul class="h-nav-list">${rows.length?rows.map(row=>{const m=meta(row.state);return `<li><button type="button" class="h-nav-item" data-health-source="${E(row.sourceId)}" aria-pressed="${row.sourceId===sel?.sourceId}"><span class="h-badge" data-tone="${m.tone}" aria-hidden="true">${m.icon}</span><span><strong dir="auto">${E(row.sourceId)}</strong><small>${E(row.kind)} · ${E(m.ar)}</small><small>${B(displayTime(row.observedAt))}</small></span></button></li>`}).join(''):`<li><p class="state-token" data-state="empty"><strong>لا توجد مصادر مرصودة</strong> · No observed source yet; this is not a healthy-state claim.</p></li>`}</ul>`;
+      const leftHost=workspace.region('LEFT',{node:left,label:'المكوّنات المراقبة'});
+
+      /* ---- RIGHT: unique contextual information only (contract §3.3) ---- */
+      const right=document.createElement('aside');right.className='h-ctx';
+      right.innerHTML=`<style>.h-ctx{display:grid;gap:10px;min-width:0}.h-ctx-block{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;border:1px solid var(--line);border-radius:11px;background:#0d1622;padding:11px;min-width:0}.h-ctx-block h3{margin:0 0 6px;font-size:13px}.h-ctx-block ul{list-style:none;margin:0;padding:0;display:grid;gap:5px;font-size:11.5px;color:var(--text2)}.h-ctx-block li{overflow-wrap:anywhere}.h-ctx-block .h-ico{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;border:1px solid var(--line);font-size:14px}</style>
+      <section class="h-ctx-block"><div><h3>التواريخ</h3><ul><li>آخر رصد: ${B(latest||'NOT_OBSERVED')}</li><li>آخر تشخيص: ${B(state.lastDiagnostic?.observedAt||state.lastDiagnostic?.diagnostic?.observedAt||'NOT_RUN')}</li><li>حد صلاحية المكوّن المحدد: ${B(sel?.freshUntil||'NOT_ESTABLISHED')}</li></ul></div><span class="h-ico" aria-hidden="true">🗓</span></section>
+      <section class="h-ctx-block"><div><h3>المصادر والاعتماديات</h3><ul>${rows.length?rows.map(row=>`<li><bdi dir="ltr">${E(row.kind)} &larr; ${E(row.sourceIdentity||row.sourceId)}</bdi></li>`).join(''):'<li>لا توجد مصادر مرصودة بعد.</li>'}</ul></div><span class="h-ico" aria-hidden="true">⛓</span></section>
+      <section class="h-ctx-block"><div><h3>سياسة الحالات</h3><ul><li>الحالة الخالية <bdi dir="ltr">AVAILABLE_EMPTY</bdi> رصد فارغ صالح وليست فشلًا.</li><li><bdi dir="ltr">UNAVAILABLE</bdi> و <bdi dir="ltr">STALE</bdi> و <bdi dir="ltr">ERROR</bdi> لا تتحول إلى أخضر أبدًا.</li><li>المرجع: <bdi dir="ltr">Observation.state ∈ {AVAILABLE_DATA, AVAILABLE_EMPTY, UNAVAILABLE, ERROR, STALE}</bdi></li></ul></div><span class="h-ico" aria-hidden="true">✓</span></section>
+      <section class="h-ctx-block"><div><h3>نطاق القدرة</h3><ul><li><bdi dir="ltr">persistenceHealthAlias = false</bdi> — صحة التخزين ليست صحة المنتج.</li><li><bdi dir="ltr">queueDepthIsWorkerLiveness = false</bdi> — عمق الطابور ليس حياة العامل.</li><li><bdi dir="ltr">refresh ≠ diagnostic</bdi> — التحديث لا ينشئ سجل تشخيص.</li><li>المالك: <bdi dir="ltr">${E(this.owner)}</bdi></li></ul></div><span class="h-ico" aria-hidden="true">⎔</span></section>`;
+      workspace.region('RIGHT',{node:right,label:'السياق'});
+
+      /* ---- BOTTOM: temporary deep workspace (full durable receipt) ---- */
+      const bottom=document.createElement('section');bottom.className='h-bottom';
+      bottom.innerHTML=`<style>.h-bottom pre{max-height:260px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-size:11.5px;background:#070d16;border:1px solid var(--line);border-radius:9px;padding:10px}</style>
+      <p class="h-lead2">التشخيص الدائم الكامل — <bdi dir="ltr">health.diagnose</bdi> فقط ينشئ هذا الإيصال؛ التحديث لا يغيّره.</p>
+      ${diagnostic||state.lastDiagnostic?`<pre dir="ltr" data-w05-receipt>${E(JSON.stringify(state.lastDiagnostic,null,2))}</pre>`:`<p class="state-token" data-state="unavailable"><strong>لا يوجد تشخيص دائم بعد</strong> · No durable diagnostic receipt exists. A refresh never creates one; run the durable diagnostic to record it.</p>`}`;
+      workspace.region('BOTTOM',{node:bottom,label:'التشخيص الدائم',summary:'الإيصال الكامل لآخر تشخيص دائم؛ التحديث لا ينشئ سجل تشخيص.'});
+      (leftHost||stage).querySelectorAll?.('[data-health-source]').forEach(element=>element.addEventListener('click',()=>{this.inspect({sourceId:element.dataset.healthSource});render();}));
+      stage.querySelectorAll('tr[data-health-row]').forEach(element=>element.addEventListener('click',()=>{this.inspect({sourceId:element.dataset.healthRow});render();}));
+      stage.querySelectorAll('[data-health-next]').forEach(element=>element.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();if(element.dataset.healthNextCommand==='health.inspect'){this.inspect({sourceId:element.dataset.healthNext});render();}}));
       workspace.refreshToolbar?.();
       return state;
     };

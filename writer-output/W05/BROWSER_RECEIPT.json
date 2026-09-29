@@ -7,29 +7,29 @@
   "transport": "localhost-http",
   "runtime": "Node v22.16.0",
   "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-  "measuredCandidate": "WORKTREE_VARIANT:90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+  "measuredCandidate": "WORKTREE_VARIANT:64d103fa004d2df4dcc23d86a026d3c12b02202eb5b07ffb67540ea11087a1ec",
   "canonicalSourceFileCount": 287,
-  "measuredCandidateFileCount": 287,
-  "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
-  "tree": "1fc29a81ff17fde696ab1a1ef72c33ba61cc4141",
+  "measuredCandidateFileCount": 292,
+  "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+  "tree": "f0e24e2f2134c7ce30a6ff7e64df30685d3c88aa",
   "environment": {
     "node": "v22.16.0",
     "engine": "Playwright Chromium",
     "playwrightResolution": "package-local",
     "packageDeclaredVersion": "1.62.1",
     "transport": "localhost-http",
-    "proofServer": "tools/serve.mjs on 127.0.0.1:34879",
-    "runtimeServer": "stack/local-runtime/server.mjs on 127.0.0.1:34573 (throwaway sqlite at writer-output/W05/.runtime-proof)",
+    "proofServer": "tools/serve.mjs on 127.0.0.1:34313",
+    "runtimeServer": "stack/local-runtime/server.mjs on 127.0.0.1:32879 (throwaway sqlite at writer-output/W05/.runtime-proof)",
     "viewport": "1440x980",
     "reducedMotion": true,
     "browserExecutableOverride": false,
     "browserVersion": "151.0.7922.34"
   },
-  "capturedAt": "2026-09-29T05:04:00.064Z",
+  "capturedAt": "2026-09-29T21:19:53.119Z",
   "evidenceLineage": {
     "bindingAlgorithm": "path\\0size\\0sha256\\n (tools/source-tree-identity.mjs)",
-    "recomputedCandidateTreeSha256": "90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
-    "recomputedCandidateFileCount": 287,
+    "recomputedCandidateTreeSha256": "64d103fa004d2df4dcc23d86a026d3c12b02202eb5b07ffb67540ea11087a1ec",
+    "recomputedCandidateFileCount": 292,
     "expectedCandidateTreeSha256": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
     "expectedCandidateFileCount": 287,
     "lineageStatus": "DRIFT_RECORDED__CONCURRENT_SIBLING_WORKSPACE_EDITS",
@@ -66,7 +66,7 @@
         "annotate must not fabricate an event when the target does not exist"
       ],
       "actionSequence": [
-        "GET /?surface=audit&persistencePort=34573",
+        "GET /?surface=audit&persistencePort=32879",
         "click product command audit.search",
         "click product command audit.verify"
       ],
@@ -182,20 +182,20 @@
             "ok": true,
             "code": null,
             "thrown": null,
-            "eventId": "audit-554b6551-9575-412f-9c3b-d44add4c17b1",
+            "eventId": "audit-1e2665cb-b754-4b42-b687-bd49570c58c6",
             "raw": {
               "ok": true,
               "annotation": {
                 "schema": "CEP_AUDIT_ANNOTATION_V1",
-                "annotationId": "annotation-629f94c4-f7f0-491a-89c7-397e5d5647f7",
-                "eventId": "audit-554b6551-9575-412f-9c3b-d44add4c17b1",
+                "annotationId": "annotation-3beb58e8-fa4b-4733-aaba-2c249b661923",
+                "eventId": "audit-1e2665cb-b754-4b42-b687-bd49570c58c6",
                 "revision": 1,
                 "actor": "Local product user",
                 "note": "W05 browser proof annotation",
-                "createdAt": "2026-09-29T05:03:53.553Z"
+                "createdAt": "2026-09-29T21:19:46.721Z"
               },
-              "eventHashBefore": "c652d2c303fbc027011702544b378a71dad5f3c456b59df977dd88af81dcf952",
-              "eventHashAfter": "c652d2c303fbc027011702544b378a71dad5f3c456b59df977dd88af81dcf952",
+              "eventHashBefore": "dc79302d898aa1967638fdac0ca1bc604365f32a10a6a002cbe2ea4e8243d236",
+              "eventHashAfter": "dc79302d898aa1967638fdac0ca1bc604365f32a10a6a002cbe2ea4e8243d236",
               "eventCountBefore": 12,
               "eventCountAfter": 12,
               "eventMutated": false,
@@ -226,14 +226,14 @@
       ],
       "screenshots": [
         {
-          "filename": "writer-output/W05/evidence/audit-trail-recording-after-search-20260929T050351Z-c82cec63.png",
-          "sha256": "e6d7d03cab94fa7df81bb8e8fd34c9c04fd7e19dce41f89496b5bcd6f142edb1",
-          "bytes": 180931,
+          "filename": "writer-output/W05/evidence/audit-trail-recording-after-search-20260929T211944Z-c82cec63.png",
+          "sha256": "677681448c50a53bec4e46ed571b6b21d0484e436807d5e28b49b5cbab57152b",
+          "bytes": 244648,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:52.005Z",
+          "capturedAt": "2026-09-29T21:19:45.208Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "audit.trail-recording",
@@ -241,14 +241,14 @@
           }
         },
         {
-          "filename": "writer-output/W05/evidence/audit-trail-recording-after-verify-20260929T050353Z-c82cec63.png",
-          "sha256": "08bc3e15123147ad034464759707db53e54f2e51d5eaef6a07aa822c6c54e69c",
-          "bytes": 181036,
+          "filename": "writer-output/W05/evidence/audit-trail-recording-after-verify-20260929T211946Z-c82cec63.png",
+          "sha256": "d561e2e67837d658340b47f7ef3bb47baf085094993e32bb50c51c4710579c41",
+          "bytes": 244783,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:53.541Z",
+          "capturedAt": "2026-09-29T21:19:46.712Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "audit.trail-recording",
@@ -256,14 +256,14 @@
           }
         },
         {
-          "filename": "writer-output/W05/evidence/audit-trail-recording-after-annotate-20260929T050353Z-c82cec63.png",
-          "sha256": "08bc3e15123147ad034464759707db53e54f2e51d5eaef6a07aa822c6c54e69c",
-          "bytes": 181036,
+          "filename": "writer-output/W05/evidence/audit-trail-recording-after-annotate-20260929T211946Z-c82cec63.png",
+          "sha256": "d561e2e67837d658340b47f7ef3bb47baf085094993e32bb50c51c4710579c41",
+          "bytes": 244783,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:53.670Z",
+          "capturedAt": "2026-09-29T21:19:46.841Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "audit.trail-recording",
@@ -304,7 +304,7 @@
         "activation must stay pending without explicit authority"
       ],
       "actionSequence": [
-        "GET /?surface=backup&persistencePort=34573",
+        "GET /?surface=backup&persistencePort=32879",
         "click product command backup.package",
         "click product command backup.plan",
         "click product command backup.preview",
@@ -411,16 +411,16 @@
         },
         {
           "id": "backup.drill-restores-the-exact-package",
-          "expected": "backup-20260929050340-31126fb8",
-          "actual": "backup-20260929050340-31126fb8",
+          "expected": "backup-20260929211934-0c4fffff",
+          "actual": "backup-20260929211934-0c4fffff",
           "ok": true,
           "class": null,
           "message": ""
         },
         {
           "id": "backup.drill-restores-the-exact-snapshot",
-          "expected": "8f93c53c8b7d9e33895daeafc6eac5d1b8644c57184b53e16072d00d56a8e4d4",
-          "actual": "8f93c53c8b7d9e33895daeafc6eac5d1b8644c57184b53e16072d00d56a8e4d4",
+          "expected": "0a7dbff62d03ed3b92bb5d5bb2f52ac117fed4e352d6969fc2ebc39b7f04f5bb",
+          "actual": "0a7dbff62d03ed3b92bb5d5bb2f52ac117fed4e352d6969fc2ebc39b7f04f5bb",
           "ok": true,
           "class": null,
           "message": ""
@@ -460,14 +460,14 @@
       ],
       "screenshots": [
         {
-          "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-package-20260929T050341Z-c82cec63.png",
-          "sha256": "56e6fdcffe6451293e9b446a63263c522e78d738e2fdab40fccab408e7988616",
-          "bytes": 164011,
+          "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-package-20260929T211936Z-c82cec63.png",
+          "sha256": "12028eca597ef91bfa623f841e6245e1a40e34d80f09bde4e367503842269e62",
+          "bytes": 250433,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:42.246Z",
+          "capturedAt": "2026-09-29T21:19:36.303Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "backup.restore-round-trip",
@@ -475,14 +475,14 @@
           }
         },
         {
-          "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-stage-20260929T050344Z-c82cec63.png",
-          "sha256": "695029849f34a9545a92dc06e60ab6bc4cf8a0059eb3961a66eced5b34399ac0",
-          "bytes": 181691,
+          "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-stage-20260929T211938Z-c82cec63.png",
+          "sha256": "a837fdb9b469319744b1f6eb2256511790201f6f6d8cbdaf55e41c384c9f8e95",
+          "bytes": 244434,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:44.540Z",
+          "capturedAt": "2026-09-29T21:19:38.599Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "backup.restore-round-trip",
@@ -490,14 +490,14 @@
           }
         },
         {
-          "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-drill-20260929T050346Z-c82cec63.png",
-          "sha256": "aa6a6f3e8ca3624fb38df4912f8edaca48dc7ea2c66a98b9c6dbc5cc893bbc71",
-          "bytes": 187778,
+          "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-drill-20260929T211940Z-c82cec63.png",
+          "sha256": "7cf9be8d451d163f3c2922c191874b9e27a2d31fcb54a909377934ce04764bd9",
+          "bytes": 245814,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:46.264Z",
+          "capturedAt": "2026-09-29T21:19:40.301Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "backup.restore-round-trip",
@@ -505,14 +505,14 @@
           }
         },
         {
-          "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-activation-20260929T050347Z-c82cec63.png",
-          "sha256": "39e13848445f53e33b5bc294ddf419056693e3f1cc9aa1f499ac95f33ca33c06",
-          "bytes": 189795,
+          "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-activation-20260929T211941Z-c82cec63.png",
+          "sha256": "b559a50adb3bb233ef95df860530c5beb2eddb9e340202faa6067761ae7953dd",
+          "bytes": 247525,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:47.972Z",
+          "capturedAt": "2026-09-29T21:19:41.832Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "backup.restore-round-trip",
@@ -554,7 +554,7 @@
         "preference import must not clobber unscoped (session) state"
       ],
       "actionSequence": [
-        "GET /?surface=configuration&persistencePort=34573",
+        "GET /?surface=configuration&persistencePort=32879",
         "open canonical Settings through the shared foundation.settings command",
         "click product command foundation.settings"
       ],
@@ -690,14 +690,14 @@
       ],
       "screenshots": [
         {
-          "filename": "writer-output/W05/evidence/configuration-sc011-transfer-configuration-boundary-20260929T050357Z-c82cec63.png",
-          "sha256": "63f1d06341025eec41c84f172672d9d567cc4a9c931af21f8d1a56d96c756d45",
-          "bytes": 127864,
+          "filename": "writer-output/W05/evidence/configuration-sc011-transfer-configuration-boundary-20260929T211950Z-c82cec63.png",
+          "sha256": "1594905b0af99629d43ed0d97bf066560f177f12df47f15f91a295c9ae5b429b",
+          "bytes": 241552,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:57.492Z",
+          "capturedAt": "2026-09-29T21:19:50.607Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "configuration.sc011-transfer",
@@ -705,14 +705,14 @@
           }
         },
         {
-          "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-20260929T050359Z-c82cec63.png",
-          "sha256": "1276331fb29966a80ae21421f2974d52b3dd71d890328e58dc19f7731f477f6a",
-          "bytes": 153063,
+          "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-20260929T211952Z-c82cec63.png",
+          "sha256": "3c903ae80b03535f76ebdfc340bf71b041fb6c49884423b60d68450d8bd1680a",
+          "bytes": 273296,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:59.346Z",
+          "capturedAt": "2026-09-29T21:19:52.582Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "configuration.sc011-transfer",
@@ -720,14 +720,14 @@
           }
         },
         {
-          "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-done-20260929T050359Z-c82cec63.png",
-          "sha256": "1276331fb29966a80ae21421f2974d52b3dd71d890328e58dc19f7731f477f6a",
-          "bytes": 153063,
+          "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-done-20260929T211952Z-c82cec63.png",
+          "sha256": "3c903ae80b03535f76ebdfc340bf71b041fb6c49884423b60d68450d8bd1680a",
+          "bytes": 273296,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:59.808Z",
+          "capturedAt": "2026-09-29T21:19:52.912Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "configuration.sc011-transfer",
@@ -768,7 +768,7 @@
         "refresh must not create a diagnostic"
       ],
       "actionSequence": [
-        "GET /?surface=health&persistencePort=34573",
+        "GET /?surface=health&persistencePort=32879",
         "click product command health.refresh",
         "click product command health.inspect",
         "click product command health.diagnose"
@@ -897,14 +897,14 @@
       ],
       "screenshots": [
         {
-          "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-refresh-20260929T050322Z-c82cec63.png",
-          "sha256": "b15dd41524f0ba045a10bea755ed8b452e6fe6838ee372a540f14b3505afdaa1",
-          "bytes": 200739,
+          "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-refresh-20260929T211920Z-c82cec63.png",
+          "sha256": "21b4b3c4d035391fba8d751f959a7beec644c048cdcf56047101a08d81add73d",
+          "bytes": 279248,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:22.469Z",
+          "capturedAt": "2026-09-29T21:19:20.207Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "health.refresh-inspect-diagnose",
@@ -912,14 +912,14 @@
           }
         },
         {
-          "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-inspect-20260929T050323Z-c82cec63.png",
-          "sha256": "34fad1e1c4859746339fb5542eb21d6872fdfe67a45d2b2d0fe34af94c3aa56b",
-          "bytes": 200869,
+          "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-inspect-20260929T211920Z-c82cec63.png",
+          "sha256": "0d9fcc242d69389b2e9a8d271d95a152cfcc623654c0c4154c84d5843f8fd288",
+          "bytes": 279353,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:23.488Z",
+          "capturedAt": "2026-09-29T21:19:21.012Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "health.refresh-inspect-diagnose",
@@ -927,14 +927,14 @@
           }
         },
         {
-          "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-diagnose-20260929T050325Z-c82cec63.png",
-          "sha256": "d7b2f24098597f341449279146de1feb99c860e89856d9179167b379eae00022",
-          "bytes": 200062,
+          "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-diagnose-20260929T211922Z-c82cec63.png",
+          "sha256": "10a248d42fc80e1573fa0f5fcc18b3546516ff02e53ea1bda4a5c26cb1499e4b",
+          "bytes": 278772,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:25.502Z",
+          "capturedAt": "2026-09-29T21:19:22.795Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "health.refresh-inspect-diagnose",
@@ -974,7 +974,7 @@
         "the default product composition must not carry an export helper or draft sink"
       ],
       "actionSequence": [
-        "GET /?surface=manual_ai&persistencePort=34573",
+        "GET /?surface=manual_ai&persistencePort=32879",
         "execute manual_ai.draft through the canonical semantic command bus",
         "click product command manual_ai.export"
       ],
@@ -1049,6 +1049,9 @@
           "actual": [
             {
               "id": "manual_ai.draft"
+            },
+            {
+              "id": "manual_ai.export"
             }
           ],
           "ok": true,
@@ -1082,14 +1085,14 @@
       ],
       "screenshots": [
         {
-          "filename": "writer-output/W05/evidence/manual-ai-bridge-truthful-ceilings-ceilings-20260929T050338Z-c82cec63.png",
-          "sha256": "63215d07670a664c2e727f5e1ee33fa91a811b5c6945c76379935121d567cff6",
-          "bytes": 124967,
+          "filename": "writer-output/W05/evidence/manual-ai-bridge-truthful-ceilings-ceilings-20260929T211932Z-c82cec63.png",
+          "sha256": "f0548ab168413f394786e77112df7e4499a58b6a85302dba6d28e9423a0ba2a3",
+          "bytes": 210563,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:38.558Z",
+          "capturedAt": "2026-09-29T21:19:32.872Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "manual-ai.bridge-truthful-ceilings",
@@ -1130,7 +1133,7 @@
         "validation handoff PENDING must not be reported as acknowledged"
       ],
       "actionSequence": [
-        "GET /?surface=processing&persistencePort=34573",
+        "GET /?surface=processing&persistencePort=32879",
         "click product command processing.inspect",
         "click product command processing.requestCancel"
       ],
@@ -1250,14 +1253,14 @@
       ],
       "screenshots": [
         {
-          "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-inspect-20260929T050328Z-c82cec63.png",
-          "sha256": "0db3ab5bf6f2a2fd1cf5157a1248f36cd6e869091b3f78d8259cf8b89da103d2",
-          "bytes": 175781,
+          "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-inspect-20260929T211925Z-c82cec63.png",
+          "sha256": "44e151649c6ab2cf731d5b586e4672459d1b5c26718fd8e330a9063f01f0a8df",
+          "bytes": 237893,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:29.106Z",
+          "capturedAt": "2026-09-29T21:19:25.523Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "processing.inspect-retry-requestCancel-validationHandoff",
@@ -1265,14 +1268,14 @@
           }
         },
         {
-          "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-cancel-and-handoff-20260929T050329Z-c82cec63.png",
-          "sha256": "8fe48e3c46f61fe738d0a81402731436d28d83cc8f57f776842c6c2e39266396",
-          "bytes": 175863,
+          "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-cancel-and-handoff-20260929T211926Z-c82cec63.png",
+          "sha256": "ccaf8133fe60b34a50f96ebc63fed64ab6afb777457748831988fcb87059bc63",
+          "bytes": 238000,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:29.957Z",
+          "capturedAt": "2026-09-29T21:19:26.370Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "processing.inspect-retry-requestCancel-validationHandoff",
@@ -1313,7 +1316,7 @@
         "the adapter must never synthesise a local compare owner"
       ],
       "actionSequence": [
-        "GET /?surface=releases&persistencePort=34573"
+        "GET /?surface=releases&persistencePort=32879"
       ],
       "assertions": [
         {
@@ -1357,6 +1360,22 @@
           "message": ""
         },
         {
+          "id": "releases.domain-default-has-no-fabricated-candidates",
+          "expected": 0,
+          "actual": 0,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "releases.representative-records-are-explicitly-labelled",
+          "expected": 5,
+          "actual": 5,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
           "id": "releases.empty-set-is-not-green",
           "expected": true,
           "actual": true,
@@ -1391,14 +1410,14 @@
       ],
       "screenshots": [
         {
-          "filename": "writer-output/W05/evidence/releases-view-empty-truth-20260929T050355Z-c82cec63.png",
-          "sha256": "816e570357fffba710b6cc4055f5356dbfb8f1ba6a48faa35ba96a9052b90228",
-          "bytes": 126085,
+          "filename": "writer-output/W05/evidence/releases-view-empty-truth-20260929T211948Z-c82cec63.png",
+          "sha256": "efb349af8dcc014a06e7ac6d5ee940aa7a1615061ab9e840593a1fdd50cedda0",
+          "bytes": 241693,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:55.539Z",
+          "capturedAt": "2026-09-29T21:19:48.586Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "releases.view",
@@ -1406,14 +1425,14 @@
           }
         },
         {
-          "filename": "writer-output/W05/evidence/releases-view-compare-blocked-20260929T050355Z-c82cec63.png",
-          "sha256": "816e570357fffba710b6cc4055f5356dbfb8f1ba6a48faa35ba96a9052b90228",
-          "bytes": 126085,
+          "filename": "writer-output/W05/evidence/releases-view-compare-blocked-20260929T211948Z-c82cec63.png",
+          "sha256": "efb349af8dcc014a06e7ac6d5ee940aa7a1615061ab9e840593a1fdd50cedda0",
+          "bytes": 241693,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:55.640Z",
+          "capturedAt": "2026-09-29T21:19:48.712Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "releases.view",
@@ -1452,7 +1471,7 @@
         "missing validator identity must yield UNAVAILABLE, never PASS"
       ],
       "actionSequence": [
-        "GET /?surface=validation&persistencePort=34573",
+        "GET /?surface=validation&persistencePort=32879",
         "click product command validation.validate",
         "click product command validation.findings"
       ],
@@ -1516,14 +1535,14 @@
       ],
       "screenshots": [
         {
-          "filename": "writer-output/W05/evidence/validation-flow-after-validate-20260929T050333Z-c82cec63.png",
-          "sha256": "5ca93f68fcd6d5d4e160e2c95c937f0421aa436fc43e06c93f967434e752f2b0",
-          "bytes": 209809,
+          "filename": "writer-output/W05/evidence/validation-flow-after-validate-20260929T211929Z-c82cec63.png",
+          "sha256": "98624d19b380821b2b77e7bf214c9d61ebdc98881ca7cb7f9c0fb7c6168fe502",
+          "bytes": 212523,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:34.165Z",
+          "capturedAt": "2026-09-29T21:19:29.581Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "validation.flow",
@@ -1531,14 +1550,14 @@
           }
         },
         {
-          "filename": "writer-output/W05/evidence/validation-flow-after-findings-20260929T050334Z-c82cec63.png",
-          "sha256": "10f09b1372d9ba6fcb882d1ff52a475df1339692dceaeed7b0ce6b0693f4acca",
-          "bytes": 210152,
+          "filename": "writer-output/W05/evidence/validation-flow-after-findings-20260929T211930Z-c82cec63.png",
+          "sha256": "69b4b4436f2ae7196d0607058301ffebcc8a55060c0a5d4ee63f6480cee54941",
+          "bytes": 212458,
           "viewport": {
             "width": 1440,
             "height": 980
           },
-          "capturedAt": "2026-09-29T05:03:35.097Z",
+          "capturedAt": "2026-09-29T21:19:30.372Z",
           "boundTo": {
             "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
             "flow": "validation.flow",
@@ -1571,7 +1590,7 @@
       "bytes": 175752,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1583,7 +1602,43 @@
       "bytes": 181036,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-annotate-20260929T205341Z-c82cec63.png",
+      "sha256": "b349c4197b910faeaa05f7949cce98782454c71b307b8627effae4d6784dfc31",
+      "bytes": 246049,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-annotate-20260929T205616Z-c82cec63.png",
+      "sha256": "d3081751b37c81ee30e8e668af90e850f548d2735a36fb1a75855cb7a7557ad5",
+      "bytes": 246234,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-annotate-20260929T211946Z-c82cec63.png",
+      "sha256": "d561e2e67837d658340b47f7ef3bb47baf085094993e32bb50c51c4710579c41",
+      "bytes": 244783,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "audit.trail-recording"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1595,7 +1650,7 @@
       "bytes": 181014,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1607,7 +1662,7 @@
       "bytes": 181014,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1619,7 +1674,7 @@
       "bytes": 180578,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1631,7 +1686,7 @@
       "bytes": 175648,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1643,7 +1698,43 @@
       "bytes": 180931,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-search-20260929T205339Z-c82cec63.png",
+      "sha256": "664216f5cbe450050d4b5743bfd287f1904b47a8c179c001e8d3fe8980fce3fa",
+      "bytes": 245914,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-search-20260929T205614Z-c82cec63.png",
+      "sha256": "44333b6ab7d71676634caa41fb529bf6cc16ce6e5c2c6e87465ae239125e68f9",
+      "bytes": 246101,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-search-20260929T211944Z-c82cec63.png",
+      "sha256": "677681448c50a53bec4e46ed571b6b21d0484e436807d5e28b49b5cbab57152b",
+      "bytes": 244648,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "audit.trail-recording"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1655,7 +1746,7 @@
       "bytes": 181112,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1667,7 +1758,7 @@
       "bytes": 181112,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1679,7 +1770,7 @@
       "bytes": 180681,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1691,7 +1782,7 @@
       "bytes": 175752,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1703,7 +1794,43 @@
       "bytes": 181036,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-verify-20260929T205341Z-c82cec63.png",
+      "sha256": "b349c4197b910faeaa05f7949cce98782454c71b307b8627effae4d6784dfc31",
+      "bytes": 246049,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-verify-20260929T205615Z-c82cec63.png",
+      "sha256": "d3081751b37c81ee30e8e668af90e850f548d2735a36fb1a75855cb7a7557ad5",
+      "bytes": 246234,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-verify-20260929T211946Z-c82cec63.png",
+      "sha256": "d561e2e67837d658340b47f7ef3bb47baf085094993e32bb50c51c4710579c41",
+      "bytes": 244783,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "audit.trail-recording"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1715,7 +1842,7 @@
       "bytes": 188358,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1727,7 +1854,7 @@
       "bytes": 188430,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1739,7 +1866,43 @@
       "bytes": 189795,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-activation-20260929T205336Z-c82cec63.png",
+      "sha256": "0098ef2b673590356418099a42805796c0cd612c837c4487ffd04e0e0fb44bab",
+      "bytes": 249391,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-activation-20260929T205610Z-c82cec63.png",
+      "sha256": "631656580438d9f35fada2e59dda8d30d4e72bbd9a95b30b79144541a532af9e",
+      "bytes": 248891,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-activation-20260929T211941Z-c82cec63.png",
+      "sha256": "b559a50adb3bb233ef95df860530c5beb2eddb9e340202faa6067761ae7953dd",
+      "bytes": 247525,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "backup.restore-round-trip"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1751,7 +1914,7 @@
       "bytes": 186700,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1763,7 +1926,7 @@
       "bytes": 186494,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1775,7 +1938,43 @@
       "bytes": 187778,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-drill-20260929T205334Z-c82cec63.png",
+      "sha256": "ed9617b9056b88d939902601f41b063b1242124c93aaf2acf37277b7c7755a13",
+      "bytes": 247731,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-drill-20260929T205609Z-c82cec63.png",
+      "sha256": "2dd7c6c4cbd2b7d569542dd24d0361fb343f5114e9d30c52ac9cc756cc843ca8",
+      "bytes": 247189,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-drill-20260929T211940Z-c82cec63.png",
+      "sha256": "7cf9be8d451d163f3c2922c191874b9e27a2d31fcb54a909377934ce04764bd9",
+      "bytes": 245814,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "backup.restore-round-trip"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1787,7 +1986,7 @@
       "bytes": 162880,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1799,7 +1998,7 @@
       "bytes": 163262,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1811,7 +2010,43 @@
       "bytes": 164011,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-package-20260929T205330Z-c82cec63.png",
+      "sha256": "70d2165633994dd403bc898923027442e81304695df55a04cf74274e0f288e06",
+      "bytes": 252332,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-package-20260929T205605Z-c82cec63.png",
+      "sha256": "39ec4de97a9530fd2a805620a1437d64d7fa86f2ee34cf3b31796544f04e19c4",
+      "bytes": 252531,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-package-20260929T211936Z-c82cec63.png",
+      "sha256": "12028eca597ef91bfa623f841e6245e1a40e34d80f09bde4e367503842269e62",
+      "bytes": 250433,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "backup.restore-round-trip"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1823,7 +2058,7 @@
       "bytes": 180764,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1835,7 +2070,7 @@
       "bytes": 180872,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1847,7 +2082,43 @@
       "bytes": 181691,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-stage-20260929T205332Z-c82cec63.png",
+      "sha256": "f4b3e0615ba572dc11521edb33f63d1c0019b521c3c12158d6f883fcc1ac6517",
+      "bytes": 246314,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-stage-20260929T205607Z-c82cec63.png",
+      "sha256": "7b94ed7b906321897aecc0391fdc2ccf782944c44af1fcc118eb2b195206f1a9",
+      "bytes": 246499,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-stage-20260929T211938Z-c82cec63.png",
+      "sha256": "a837fdb9b469319744b1f6eb2256511790201f6f6d8cbdaf55e41c384c9f8e95",
+      "bytes": 244434,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "backup.restore-round-trip"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1859,7 +2130,7 @@
       "bytes": 127864,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1871,7 +2142,7 @@
       "bytes": 127864,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1883,7 +2154,7 @@
       "bytes": 127864,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1895,7 +2166,43 @@
       "bytes": 127864,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-configuration-boundary-20260929T205344Z-c82cec63.png",
+      "sha256": "1594905b0af99629d43ed0d97bf066560f177f12df47f15f91a295c9ae5b429b",
+      "bytes": 241552,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-configuration-boundary-20260929T205619Z-c82cec63.png",
+      "sha256": "1594905b0af99629d43ed0d97bf066560f177f12df47f15f91a295c9ae5b429b",
+      "bytes": 241552,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-configuration-boundary-20260929T211950Z-c82cec63.png",
+      "sha256": "1594905b0af99629d43ed0d97bf066560f177f12df47f15f91a295c9ae5b429b",
+      "bytes": 241552,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "configuration.sc011-transfer"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1907,7 +2214,7 @@
       "bytes": 153063,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1919,7 +2226,7 @@
       "bytes": 153063,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1931,7 +2238,7 @@
       "bytes": 153063,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1943,7 +2250,43 @@
       "bytes": 153063,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-20260929T205346Z-c82cec63.png",
+      "sha256": "3c903ae80b03535f76ebdfc340bf71b041fb6c49884423b60d68450d8bd1680a",
+      "bytes": 273296,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-20260929T205621Z-c82cec63.png",
+      "sha256": "3c903ae80b03535f76ebdfc340bf71b041fb6c49884423b60d68450d8bd1680a",
+      "bytes": 273296,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-20260929T211952Z-c82cec63.png",
+      "sha256": "3c903ae80b03535f76ebdfc340bf71b041fb6c49884423b60d68450d8bd1680a",
+      "bytes": 273296,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "configuration.sc011-transfer"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1955,7 +2298,7 @@
       "bytes": 153063,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1967,7 +2310,7 @@
       "bytes": 153063,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -1979,7 +2322,43 @@
       "bytes": 153063,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-done-20260929T205346Z-c82cec63.png",
+      "sha256": "3c903ae80b03535f76ebdfc340bf71b041fb6c49884423b60d68450d8bd1680a",
+      "bytes": 273296,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-done-20260929T205621Z-c82cec63.png",
+      "sha256": "3c903ae80b03535f76ebdfc340bf71b041fb6c49884423b60d68450d8bd1680a",
+      "bytes": 273296,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-done-20260929T211952Z-c82cec63.png",
+      "sha256": "3c903ae80b03535f76ebdfc340bf71b041fb6c49884423b60d68450d8bd1680a",
+      "bytes": 273296,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "configuration.sc011-transfer"
       },
       "binding": "FLOW_EVIDENCE",
@@ -1991,7 +2370,7 @@
       "bytes": 199899,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -2003,7 +2382,7 @@
       "bytes": 200104,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -2015,7 +2394,43 @@
       "bytes": 200062,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-diagnose-20260929T205316Z-c82cec63.png",
+      "sha256": "6c88afbf37b91594da9d9f230478783a82f2ce4690392756cec188cccc8861c1",
+      "bytes": 281386,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-diagnose-20260929T205551Z-c82cec63.png",
+      "sha256": "29c966052417fdcd823b6b2138eb3547c991388ba96d241198fe2b04b32dab1d",
+      "bytes": 280957,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-diagnose-20260929T211922Z-c82cec63.png",
+      "sha256": "10a248d42fc80e1573fa0f5fcc18b3546516ff02e53ea1bda4a5c26cb1499e4b",
+      "bytes": 278772,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "health.refresh-inspect-diagnose"
       },
       "binding": "FLOW_EVIDENCE",
@@ -2027,7 +2442,7 @@
       "bytes": 199801,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -2039,7 +2454,7 @@
       "bytes": 198859,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -2051,7 +2466,43 @@
       "bytes": 200869,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-inspect-20260929T205314Z-c82cec63.png",
+      "sha256": "f6bf8803d6f418d5f826890f68ddfb2fff77d9f60adb0c9379eed037ae716d26",
+      "bytes": 281754,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-inspect-20260929T205549Z-c82cec63.png",
+      "sha256": "41f9e8f28ca6262dc6a77c6ed90399be7ed57056d40ac50c1b63ee84f65ab8df",
+      "bytes": 280913,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-inspect-20260929T211920Z-c82cec63.png",
+      "sha256": "0d9fcc242d69389b2e9a8d271d95a152cfcc623654c0c4154c84d5843f8fd288",
+      "bytes": 279353,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "health.refresh-inspect-diagnose"
       },
       "binding": "FLOW_EVIDENCE",
@@ -2063,7 +2514,7 @@
       "bytes": 199671,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -2075,7 +2526,7 @@
       "bytes": 198730,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -2087,7 +2538,43 @@
       "bytes": 200739,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-refresh-20260929T205313Z-c82cec63.png",
+      "sha256": "4e72144d2349797000d45d2394d79bd40756cd82f157eedf9d5b019f52835bf1",
+      "bytes": 281644,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-refresh-20260929T205548Z-c82cec63.png",
+      "sha256": "342fbcb518b93fd083d9b1418534e5af4f513489bc5d8c015734a7564f64b0d3",
+      "bytes": 280798,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-refresh-20260929T211920Z-c82cec63.png",
+      "sha256": "21b4b3c4d035391fba8d751f959a7beec644c048cdcf56047101a08d81add73d",
+      "bytes": 279248,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "health.refresh-inspect-diagnose"
       },
       "binding": "FLOW_EVIDENCE",
@@ -2099,7 +2586,7 @@
       "bytes": 124967,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -2111,7 +2598,7 @@
       "bytes": 124967,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -2123,7 +2610,43 @@
       "bytes": 124967,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/manual-ai-bridge-truthful-ceilings-ceilings-20260929T205327Z-c82cec63.png",
+      "sha256": "f0548ab168413f394786e77112df7e4499a58b6a85302dba6d28e9423a0ba2a3",
+      "bytes": 210563,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/manual-ai-bridge-truthful-ceilings-ceilings-20260929T205601Z-c82cec63.png",
+      "sha256": "f0548ab168413f394786e77112df7e4499a58b6a85302dba6d28e9423a0ba2a3",
+      "bytes": 210563,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/manual-ai-bridge-truthful-ceilings-ceilings-20260929T211932Z-c82cec63.png",
+      "sha256": "f0548ab168413f394786e77112df7e4499a58b6a85302dba6d28e9423a0ba2a3",
+      "bytes": 210563,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "manual-ai.bridge-truthful-ceilings"
       },
       "binding": "FLOW_EVIDENCE",
@@ -2135,7 +2658,7 @@
       "bytes": 176824,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -2147,7 +2670,43 @@
       "bytes": 175863,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-cancel-and-handoff-20260929T205320Z-c82cec63.png",
+      "sha256": "cd8d6839dbd408195ae03f1e887d9bbf1b74333db03070adec7c467f3466f15b",
+      "bytes": 238477,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-cancel-and-handoff-20260929T205554Z-c82cec63.png",
+      "sha256": "c24b55e0aae06865cbd91f692ab67803e72fa5580519a1443fc247c968d05361",
+      "bytes": 237189,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-cancel-and-handoff-20260929T211926Z-c82cec63.png",
+      "sha256": "ccaf8133fe60b34a50f96ebc63fed64ab6afb777457748831988fcb87059bc63",
+      "bytes": 238000,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "processing.inspect-retry-requestCancel-validationHandoff"
       },
       "binding": "FLOW_EVIDENCE",
@@ -2159,7 +2718,7 @@
       "bytes": 172730,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -2171,7 +2730,7 @@
       "bytes": 176744,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -2183,7 +2742,43 @@
       "bytes": 175781,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-inspect-20260929T205319Z-c82cec63.png",
+      "sha256": "ef49292b6e3f22c4c814c3676cb49b95a876a02c9ff6430f935b87f13e7bcfc0",
+      "bytes": 238372,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-inspect-20260929T205553Z-c82cec63.png",
+      "sha256": "9723474ba77f88cc4da2017f41f5e904869cb17c07be8c138f551d58355bed82",
+      "bytes": 237083,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-inspect-20260929T211925Z-c82cec63.png",
+      "sha256": "44e151649c6ab2cf731d5b586e4672459d1b5c26718fd8e330a9063f01f0a8df",
+      "bytes": 237893,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "processing.inspect-retry-requestCancel-validationHandoff"
       },
       "binding": "FLOW_EVIDENCE",
@@ -2195,7 +2790,7 @@
       "bytes": 126085,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -2207,7 +2802,7 @@
       "bytes": 126085,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -2219,7 +2814,31 @@
       "bytes": 126085,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/releases-view-compare-blocked-20260929T205617Z-c82cec63.png",
+      "sha256": "efb349af8dcc014a06e7ac6d5ee940aa7a1615061ab9e840593a1fdd50cedda0",
+      "bytes": 241693,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/releases-view-compare-blocked-20260929T211948Z-c82cec63.png",
+      "sha256": "efb349af8dcc014a06e7ac6d5ee940aa7a1615061ab9e840593a1fdd50cedda0",
+      "bytes": 241693,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "releases.view"
       },
       "binding": "FLOW_EVIDENCE",
@@ -2231,7 +2850,7 @@
       "bytes": 126085,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -2243,7 +2862,7 @@
       "bytes": 126085,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -2255,7 +2874,31 @@
       "bytes": 126085,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/releases-view-empty-truth-20260929T205617Z-c82cec63.png",
+      "sha256": "efb349af8dcc014a06e7ac6d5ee940aa7a1615061ab9e840593a1fdd50cedda0",
+      "bytes": 241693,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/releases-view-empty-truth-20260929T211948Z-c82cec63.png",
+      "sha256": "efb349af8dcc014a06e7ac6d5ee940aa7a1615061ab9e840593a1fdd50cedda0",
+      "bytes": 241693,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "releases.view"
       },
       "binding": "FLOW_EVIDENCE",
@@ -2267,7 +2910,7 @@
       "bytes": 210152,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -2279,7 +2922,7 @@
       "bytes": 210152,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -2291,7 +2934,43 @@
       "bytes": 210152,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-findings-20260929T205324Z-c82cec63.png",
+      "sha256": "69c9077cca814fb581cfde5c70e74547e473c90ef9cbcf6688e7af8eddf91009",
+      "bytes": 212441,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-findings-20260929T205558Z-c82cec63.png",
+      "sha256": "11bb76860a41b46e8757f8cf57d510ed8311bee0b2e36d2a810c24fa9ab6c178",
+      "bytes": 212422,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-findings-20260929T211930Z-c82cec63.png",
+      "sha256": "69b4b4436f2ae7196d0607058301ffebcc8a55060c0a5d4ee63f6480cee54941",
+      "bytes": 212458,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "validation.flow"
       },
       "binding": "FLOW_EVIDENCE",
@@ -2303,7 +2982,7 @@
       "bytes": 209809,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -2315,7 +2994,7 @@
       "bytes": 209809,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": null
       },
       "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
@@ -2327,7 +3006,43 @@
       "bytes": 209809,
       "boundTo": {
         "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
-        "commit": "d4b9e151801b66d8c50511306532dec3482ae553",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-validate-20260929T205323Z-c82cec63.png",
+      "sha256": "404b687b44ac94ccef67e9103027f3bc1561a49abfcd88054e28c7be1c0573ad",
+      "bytes": 212525,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-validate-20260929T205558Z-c82cec63.png",
+      "sha256": "2ae9c45feaa84587b2aa1bfa42547fb405d1dd23cdea879985b92ec9af343e4c",
+      "bytes": 212521,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-validate-20260929T211929Z-c82cec63.png",
+      "sha256": "98624d19b380821b2b77e7bf214c9d61ebdc98881ca7cb7f9c0fb7c6168fe502",
+      "bytes": 212523,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "f68f80581f2628d08ae14c99164653b90c044e39",
         "flow": "validation.flow"
       },
       "binding": "FLOW_EVIDENCE",

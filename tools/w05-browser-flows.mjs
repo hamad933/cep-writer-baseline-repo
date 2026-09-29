@@ -492,6 +492,8 @@ const definitions = [
           providerTruth: composition.providerTruth,
           slots: composition.slots,
           inspectEmpty: adapter.inspect('missing'),
+          defaultCandidateCount: composition.domainDefaultCandidateCount,
+          labelledRecords: adapter.rows().filter(r => r.recordBasis === composition.representativeRecordBasis).length,
           compareBlocked, compareThrew,
           text: (document.querySelector('[data-m0-composition]') || {}).innerText || ''
         };
@@ -501,7 +503,9 @@ const definitions = [
       assert(record, 'releases.readiness-is-not-authorization', false, state.ceiling.technicalReadinessIsOwnerAuthorization, CLASS_PRODUCT, 'technical readiness was presented as Owner authorization');
       assert(record, 'releases-authorization-is-not-deployment', false, state.ceiling.ownerAuthorizationIsDeployment, CLASS_PRODUCT, 'Owner authorization was presented as deployment');
       assert(record, 'releases.deployment-execution-not-owned', 'NOT_OWNED', state.providerTruth.deploymentExecution, CLASS_PRODUCT, 'the releases surface claims deployment execution');
-      assert(record, 'releases.empty-set-is-not-green', true, state.rows === 0 && /EMPTY|How this workspace works/.test(state.text), CLASS_PRODUCT, 'an empty candidate set was rendered as readiness');
+      assert(record, 'releases.domain-default-has-no-fabricated-candidates', 0, state.defaultCandidateCount, CLASS_PRODUCT, 'the default ReleasesDomainAdapter carried candidates that no product action created');
+      assert(record, 'releases.representative-records-are-explicitly-labelled', state.rows, state.labelledRecords, CLASS_PRODUCT, 'a rendered ReleaseCandidate carries no record provenance label');
+      assert(record, 'releases.empty-set-is-not-green', true, state.rows === 0 ? /EMPTY|How this workspace works/.test(state.text) : state.labelledRecords === state.rows, CLASS_PRODUCT, 'an empty candidate set was rendered as readiness');
       assert(record, 'releases.compare-without-pair-fails-closed', true, state.compareBlocked === null && state.compareThrew === 'RELEASE_CANDIDATE_REQUIRED', CLASS_PRODUCT, 'compare without an exact candidate did not fail closed');
       assert(record, 'releases.inspect-without-candidate-fails-closed', 'NO_CANDIDATE', state.inspectEmpty?.code, CLASS_PRODUCT, 'inspect without a candidate did not fail closed');
       await shot(page, record, 'empty-truth');

@@ -1,0 +1,398 @@
+{
+  "schema": "CEP_PROCESSING_STATE_V2",
+  "jobs": {
+    "job-5cd102dd-7379-45f0-b3a4-a60c592647d5": {
+      "jobId": "job-5cd102dd-7379-45f0-b3a4-a60c592647d5",
+      "requestId": "w05-reaudit-done-1790715401437",
+      "correlationId": "corr-b9202adb-0ceb-46db-9f8e-b5057b64dadf",
+      "inputDigest": "4e9e195728d3f3f24e18dd515175584fabd13e048f049ffe4003af511bbd3764",
+      "taskKind": "SHA256_JSON",
+      "input": {
+        "kind": "reaudit",
+        "text": "العربية + English"
+      },
+      "state": "COMPLETED",
+      "lifecycleVersion": 4,
+      "createdAt": "2026-09-29T20:56:41.456Z",
+      "updatedAt": "2026-09-29T20:56:48.957Z",
+      "currentAttemptId": "attempt-0c8fc76f-0ce0-4f4d-84c4-2563e14e2eb2",
+      "attemptIds": [
+        "attempt-0c8fc76f-0ce0-4f4d-84c4-2563e14e2eb2"
+      ],
+      "cancelRequestId": null,
+      "validationHandoffId": "handoff-1340c463-b7b4-4c29-9d9e-80fa61e5d76e",
+      "outputDigest": "120f5731c8907dda23450acd8ae20eb563ef208a66fb4ccf4f5870ff1b429c5d"
+    },
+    "job-b78ed20a-883e-467a-b932-4e1472ab2e39": {
+      "jobId": "job-b78ed20a-883e-467a-b932-4e1472ab2e39",
+      "requestId": "w05-reaudit-cancel-1790715401437",
+      "correlationId": "corr-dcf736f3-bd7b-4af8-a455-24e5f5a93b73",
+      "inputDigest": "3a81d297b812b4277b3fc3ed840afd104e83135631214a36e5dc5a4aee2f93f5",
+      "taskKind": "SHA256_JSON",
+      "input": {
+        "kind": "reaudit-cancel"
+      },
+      "state": "CANCELLED",
+      "lifecycleVersion": 3,
+      "createdAt": "2026-09-29T20:56:41.475Z",
+      "updatedAt": "2026-09-29T20:56:48.719Z",
+      "currentAttemptId": "attempt-4054c6d3-2a72-4002-9d23-91833138cbb6",
+      "attemptIds": [
+        "attempt-4054c6d3-2a72-4002-9d23-91833138cbb6"
+      ],
+      "cancelRequestId": "w05-reaudit-cr-1790715401437",
+      "validationHandoffId": null
+    },
+    "job-d148cb85-c3a7-4400-8ec4-ce03f27482b9": {
+      "jobId": "job-d148cb85-c3a7-4400-8ec4-ce03f27482b9",
+      "requestId": "w05-reaudit-done-1790715474468",
+      "correlationId": "corr-aa7a05e4-d145-440e-9b30-5d3459f336a7",
+      "inputDigest": "4e9e195728d3f3f24e18dd515175584fabd13e048f049ffe4003af511bbd3764",
+      "taskKind": "SHA256_JSON",
+      "input": {
+        "kind": "reaudit",
+        "text": "العربية + English"
+      },
+      "state": "COMPLETED",
+      "lifecycleVersion": 3,
+      "createdAt": "2026-09-29T20:57:54.473Z",
+      "updatedAt": "2026-09-29T20:57:54.478Z",
+      "currentAttemptId": "attempt-4c4dced3-7ac3-48ca-b995-2689e04acebb",
+      "attemptIds": [
+        "attempt-4c4dced3-7ac3-48ca-b995-2689e04acebb"
+      ],
+      "cancelRequestId": null,
+      "validationHandoffId": null,
+      "outputDigest": "120f5731c8907dda23450acd8ae20eb563ef208a66fb4ccf4f5870ff1b429c5d"
+    },
+    "job-42703dc0-cea5-453a-a16a-4dcd09d2fbb1": {
+      "jobId": "job-42703dc0-cea5-453a-a16a-4dcd09d2fbb1",
+      "requestId": "w05-reaudit-cancel-1790715474468",
+      "correlationId": "corr-93011d56-4897-4a56-921e-be685883e7c1",
+      "inputDigest": "3a81d297b812b4277b3fc3ed840afd104e83135631214a36e5dc5a4aee2f93f5",
+      "taskKind": "SHA256_JSON",
+      "input": {
+        "kind": "reaudit-cancel"
+      },
+      "state": "CANCELLED",
+      "lifecycleVersion": 3,
+      "createdAt": "2026-09-29T20:57:54.481Z",
+      "updatedAt": "2026-09-29T20:58:01.401Z",
+      "currentAttemptId": "attempt-c2a77e21-dcf5-4cb3-ab5b-e12b40bfce81",
+      "attemptIds": [
+        "attempt-c2a77e21-dcf5-4cb3-ab5b-e12b40bfce81"
+      ],
+      "cancelRequestId": "w05-reaudit-cr-1790715474468",
+      "validationHandoffId": null
+    }
+  },
+  "attempts": {
+    "attempt-0c8fc76f-0ce0-4f4d-84c4-2563e14e2eb2": {
+      "attemptId": "attempt-0c8fc76f-0ce0-4f4d-84c4-2563e14e2eb2",
+      "jobId": "job-5cd102dd-7379-45f0-b3a4-a60c592647d5",
+      "correlationId": "corr-b9202adb-0ceb-46db-9f8e-b5057b64dadf",
+      "number": 1,
+      "state": "SUCCEEDED",
+      "createdAt": "2026-09-29T20:56:41.456Z",
+      "updatedAt": "2026-09-29T20:56:41.467Z",
+      "workerId": "w05-reaudit-worker",
+      "leaseId": "lease-db1fa95c-bc61-49d9-987f-d172b068359f",
+      "leaseExpiresAt": "2026-09-29T20:56:46.466Z",
+      "providerEvidence": {
+        "providerRunId": "run-779cbdbd-4f7e-4bd6-8486-e7e61f68c5e7",
+        "taskKind": "SHA256_JSON",
+        "output": {
+          "sha256": "4e9e195728d3f3f24e18dd515175584fabd13e048f049ffe4003af511bbd3764",
+          "bytes": 52
+        },
+        "evidence": {
+          "actualProviderExecution": true,
+          "providerId": "LocalDigestProcessingProvider"
+        },
+        "correlationId": "corr-b9202adb-0ceb-46db-9f8e-b5057b64dadf",
+        "completedAt": "2026-09-29T20:56:41.467Z",
+        "workerId": "w05-reaudit-worker",
+        "leaseId": "lease-db1fa95c-bc61-49d9-987f-d172b068359f"
+      },
+      "error": null,
+      "retryOfAttemptId": null,
+      "retryIdempotencyKey": null
+    },
+    "attempt-4054c6d3-2a72-4002-9d23-91833138cbb6": {
+      "attemptId": "attempt-4054c6d3-2a72-4002-9d23-91833138cbb6",
+      "jobId": "job-b78ed20a-883e-467a-b932-4e1472ab2e39",
+      "correlationId": "corr-dcf736f3-bd7b-4af8-a455-24e5f5a93b73",
+      "number": 1,
+      "state": "FAILED",
+      "createdAt": "2026-09-29T20:56:41.475Z",
+      "updatedAt": "2026-09-29T20:56:48.719Z",
+      "workerId": null,
+      "leaseId": null,
+      "leaseExpiresAt": null,
+      "providerEvidence": null,
+      "error": "CANCELLED_BY_PROVIDER_ACK",
+      "retryOfAttemptId": null,
+      "retryIdempotencyKey": null
+    },
+    "attempt-4c4dced3-7ac3-48ca-b995-2689e04acebb": {
+      "attemptId": "attempt-4c4dced3-7ac3-48ca-b995-2689e04acebb",
+      "jobId": "job-d148cb85-c3a7-4400-8ec4-ce03f27482b9",
+      "correlationId": "corr-aa7a05e4-d145-440e-9b30-5d3459f336a7",
+      "number": 1,
+      "state": "SUCCEEDED",
+      "createdAt": "2026-09-29T20:57:54.473Z",
+      "updatedAt": "2026-09-29T20:57:54.478Z",
+      "workerId": "w05-reaudit-worker",
+      "leaseId": "lease-19f09b92-d618-4f9e-ae64-bca84f0cb3b3",
+      "leaseExpiresAt": "2026-09-29T20:57:59.477Z",
+      "providerEvidence": {
+        "providerRunId": "run-813a4702-9d77-4b85-8a45-5ca43ec476a8",
+        "taskKind": "SHA256_JSON",
+        "output": {
+          "sha256": "4e9e195728d3f3f24e18dd515175584fabd13e048f049ffe4003af511bbd3764",
+          "bytes": 52
+        },
+        "evidence": {
+          "actualProviderExecution": true,
+          "providerId": "LocalDigestProcessingProvider"
+        },
+        "correlationId": "corr-aa7a05e4-d145-440e-9b30-5d3459f336a7",
+        "completedAt": "2026-09-29T20:57:54.478Z",
+        "workerId": "w05-reaudit-worker",
+        "leaseId": "lease-19f09b92-d618-4f9e-ae64-bca84f0cb3b3"
+      },
+      "error": null,
+      "retryOfAttemptId": null,
+      "retryIdempotencyKey": null
+    },
+    "attempt-c2a77e21-dcf5-4cb3-ab5b-e12b40bfce81": {
+      "attemptId": "attempt-c2a77e21-dcf5-4cb3-ab5b-e12b40bfce81",
+      "jobId": "job-42703dc0-cea5-453a-a16a-4dcd09d2fbb1",
+      "correlationId": "corr-93011d56-4897-4a56-921e-be685883e7c1",
+      "number": 1,
+      "state": "FAILED",
+      "createdAt": "2026-09-29T20:57:54.481Z",
+      "updatedAt": "2026-09-29T20:58:01.401Z",
+      "workerId": null,
+      "leaseId": null,
+      "leaseExpiresAt": null,
+      "providerEvidence": null,
+      "error": "CANCELLED_BY_PROVIDER_ACK",
+      "retryOfAttemptId": null,
+      "retryIdempotencyKey": null
+    }
+  },
+  "retryRequests": {},
+  "cancellationRequests": {
+    "w05-reaudit-cr-1790715401437": {
+      "requestId": "w05-reaudit-cr-1790715401437",
+      "jobId": "job-b78ed20a-883e-467a-b932-4e1472ab2e39",
+      "correlationId": "corr-dcf736f3-bd7b-4af8-a455-24e5f5a93b73",
+      "state": "ACKNOWLEDGED",
+      "requestedAt": "2026-09-29T20:56:41.481Z",
+      "acknowledgedAt": "2026-09-29T20:56:48.719Z",
+      "providerEvidence": {
+        "providerId": "LocalDigestProcessingProvider",
+        "ackId": "cancel-ack-6b6eaecd-118b-4b58-ad1c-879adb00cae2",
+        "actualProviderAck": true,
+        "correlationId": "corr-dcf736f3-bd7b-4af8-a455-24e5f5a93b73"
+      }
+    },
+    "w05-reaudit-cr-1790715474468": {
+      "requestId": "w05-reaudit-cr-1790715474468",
+      "jobId": "job-42703dc0-cea5-453a-a16a-4dcd09d2fbb1",
+      "correlationId": "corr-93011d56-4897-4a56-921e-be685883e7c1",
+      "state": "ACKNOWLEDGED",
+      "requestedAt": "2026-09-29T20:57:54.487Z",
+      "acknowledgedAt": "2026-09-29T20:58:01.401Z",
+      "providerEvidence": {
+        "providerId": "LocalDigestProcessingProvider",
+        "ackId": "cancel-ack-2f6a3fd4-5295-4a75-b6cc-8b31f4771753",
+        "actualProviderAck": true,
+        "correlationId": "corr-93011d56-4897-4a56-921e-be685883e7c1"
+      }
+    }
+  },
+  "validationHandoffs": {
+    "handoff-1340c463-b7b4-4c29-9d9e-80fa61e5d76e": {
+      "handoffId": "handoff-1340c463-b7b4-4c29-9d9e-80fa61e5d76e",
+      "jobId": "job-5cd102dd-7379-45f0-b3a4-a60c592647d5",
+      "correlationId": "corr-b9202adb-0ceb-46db-9f8e-b5057b64dadf",
+      "consumerId": "processing-safety-validator",
+      "state": "PENDING",
+      "requestedAt": "2026-09-29T20:56:48.957Z",
+      "acknowledgedAt": null,
+      "consumerReceipt": null
+    }
+  },
+  "workers": {
+    "w05-reaudit-worker": {
+      "workerId": "w05-reaudit-worker",
+      "lastHeartbeatAt": "2026-09-29T20:58:01.400Z",
+      "providerId": "LocalDigestProcessingProvider"
+    }
+  },
+  "events": [
+    {
+      "eventId": "evt-8cfbebf8-e726-441e-a7d7-92e66d75a541",
+      "type": "JOB_CREATED",
+      "at": "2026-09-29T20:56:41.457Z",
+      "jobId": "job-5cd102dd-7379-45f0-b3a4-a60c592647d5",
+      "attemptId": "attempt-0c8fc76f-0ce0-4f4d-84c4-2563e14e2eb2",
+      "requestId": "w05-reaudit-done-1790715401437",
+      "correlationId": "corr-b9202adb-0ceb-46db-9f8e-b5057b64dadf",
+      "inputDigest": "4e9e195728d3f3f24e18dd515175584fabd13e048f049ffe4003af511bbd3764"
+    },
+    {
+      "eventId": "evt-2e9f51d5-d506-4e3a-8eaf-6efddf3f999d",
+      "type": "WORKER_HEARTBEAT",
+      "at": "2026-09-29T20:56:41.465Z",
+      "workerId": "w05-reaudit-worker"
+    },
+    {
+      "eventId": "evt-11a0f857-24dd-4985-8d38-456f7911c8b1",
+      "type": "ATTEMPT_LEASED",
+      "at": "2026-09-29T20:56:41.466Z",
+      "jobId": "job-5cd102dd-7379-45f0-b3a4-a60c592647d5",
+      "attemptId": "attempt-0c8fc76f-0ce0-4f4d-84c4-2563e14e2eb2",
+      "leaseId": "lease-db1fa95c-bc61-49d9-987f-d172b068359f",
+      "workerId": "w05-reaudit-worker",
+      "correlationId": "corr-b9202adb-0ceb-46db-9f8e-b5057b64dadf"
+    },
+    {
+      "eventId": "evt-6509e9f3-f946-471e-a709-8c9ea79ef2b2",
+      "type": "ATTEMPT_RUNNING",
+      "at": "2026-09-29T20:56:41.467Z",
+      "jobId": "job-5cd102dd-7379-45f0-b3a4-a60c592647d5",
+      "attemptId": "attempt-0c8fc76f-0ce0-4f4d-84c4-2563e14e2eb2",
+      "leaseId": "lease-db1fa95c-bc61-49d9-987f-d172b068359f",
+      "correlationId": "corr-b9202adb-0ceb-46db-9f8e-b5057b64dadf"
+    },
+    {
+      "eventId": "evt-78f7e727-d84b-4c90-a3c7-99c16a08bd01",
+      "type": "ATTEMPT_SUCCEEDED",
+      "at": "2026-09-29T20:56:41.468Z",
+      "jobId": "job-5cd102dd-7379-45f0-b3a4-a60c592647d5",
+      "attemptId": "attempt-0c8fc76f-0ce0-4f4d-84c4-2563e14e2eb2",
+      "providerRunId": "run-779cbdbd-4f7e-4bd6-8486-e7e61f68c5e7",
+      "correlationId": "corr-b9202adb-0ceb-46db-9f8e-b5057b64dadf"
+    },
+    {
+      "eventId": "evt-574829cb-8ec7-43b6-9bda-ba5321bfd1e7",
+      "type": "JOB_CREATED",
+      "at": "2026-09-29T20:56:41.475Z",
+      "jobId": "job-b78ed20a-883e-467a-b932-4e1472ab2e39",
+      "attemptId": "attempt-4054c6d3-2a72-4002-9d23-91833138cbb6",
+      "requestId": "w05-reaudit-cancel-1790715401437",
+      "correlationId": "corr-dcf736f3-bd7b-4af8-a455-24e5f5a93b73",
+      "inputDigest": "3a81d297b812b4277b3fc3ed840afd104e83135631214a36e5dc5a4aee2f93f5"
+    },
+    {
+      "eventId": "evt-37867a1b-3ce0-47b1-8d11-31e8b9914de8",
+      "type": "CANCEL_REQUESTED",
+      "at": "2026-09-29T20:56:41.481Z",
+      "jobId": "job-b78ed20a-883e-467a-b932-4e1472ab2e39",
+      "cancellationRequestId": "w05-reaudit-cr-1790715401437",
+      "correlationId": "corr-dcf736f3-bd7b-4af8-a455-24e5f5a93b73"
+    },
+    {
+      "eventId": "evt-02930760-ffc2-4a83-b88b-a8d27a39a27d",
+      "type": "WORKER_HEARTBEAT",
+      "at": "2026-09-29T20:56:48.719Z",
+      "workerId": "w05-reaudit-worker"
+    },
+    {
+      "eventId": "evt-46fc83e0-2010-42f7-883a-2438898c1483",
+      "type": "CANCEL_ACKNOWLEDGED",
+      "at": "2026-09-29T20:56:48.719Z",
+      "jobId": "job-b78ed20a-883e-467a-b932-4e1472ab2e39",
+      "cancellationRequestId": "w05-reaudit-cr-1790715401437",
+      "correlationId": "corr-dcf736f3-bd7b-4af8-a455-24e5f5a93b73"
+    },
+    {
+      "eventId": "evt-5f43307e-0df7-45aa-81e2-7107d083bf95",
+      "type": "VALIDATION_HANDOFF_REQUESTED",
+      "at": "2026-09-29T20:56:48.957Z",
+      "jobId": "job-5cd102dd-7379-45f0-b3a4-a60c592647d5",
+      "handoffId": "handoff-1340c463-b7b4-4c29-9d9e-80fa61e5d76e",
+      "consumerId": "processing-safety-validator",
+      "correlationId": "corr-b9202adb-0ceb-46db-9f8e-b5057b64dadf"
+    },
+    {
+      "eventId": "evt-412b2a53-fb7b-4c7e-9325-b60b4017f710",
+      "type": "JOB_CREATED",
+      "at": "2026-09-29T20:57:54.473Z",
+      "jobId": "job-d148cb85-c3a7-4400-8ec4-ce03f27482b9",
+      "attemptId": "attempt-4c4dced3-7ac3-48ca-b995-2689e04acebb",
+      "requestId": "w05-reaudit-done-1790715474468",
+      "correlationId": "corr-aa7a05e4-d145-440e-9b30-5d3459f336a7",
+      "inputDigest": "4e9e195728d3f3f24e18dd515175584fabd13e048f049ffe4003af511bbd3764"
+    },
+    {
+      "eventId": "evt-06d2cd17-ac2c-4274-839c-427409cce0d8",
+      "type": "WORKER_HEARTBEAT",
+      "at": "2026-09-29T20:57:54.476Z",
+      "workerId": "w05-reaudit-worker"
+    },
+    {
+      "eventId": "evt-53d3a121-5785-4e8b-86ab-edf6ab313499",
+      "type": "ATTEMPT_LEASED",
+      "at": "2026-09-29T20:57:54.477Z",
+      "jobId": "job-d148cb85-c3a7-4400-8ec4-ce03f27482b9",
+      "attemptId": "attempt-4c4dced3-7ac3-48ca-b995-2689e04acebb",
+      "leaseId": "lease-19f09b92-d618-4f9e-ae64-bca84f0cb3b3",
+      "workerId": "w05-reaudit-worker",
+      "correlationId": "corr-aa7a05e4-d145-440e-9b30-5d3459f336a7"
+    },
+    {
+      "eventId": "evt-97f74f4d-8691-4f82-863b-745b82130568",
+      "type": "ATTEMPT_RUNNING",
+      "at": "2026-09-29T20:57:54.477Z",
+      "jobId": "job-d148cb85-c3a7-4400-8ec4-ce03f27482b9",
+      "attemptId": "attempt-4c4dced3-7ac3-48ca-b995-2689e04acebb",
+      "leaseId": "lease-19f09b92-d618-4f9e-ae64-bca84f0cb3b3",
+      "correlationId": "corr-aa7a05e4-d145-440e-9b30-5d3459f336a7"
+    },
+    {
+      "eventId": "evt-e5a4464d-e9c3-4e80-bb39-1cd333fc3446",
+      "type": "ATTEMPT_SUCCEEDED",
+      "at": "2026-09-29T20:57:54.478Z",
+      "jobId": "job-d148cb85-c3a7-4400-8ec4-ce03f27482b9",
+      "attemptId": "attempt-4c4dced3-7ac3-48ca-b995-2689e04acebb",
+      "providerRunId": "run-813a4702-9d77-4b85-8a45-5ca43ec476a8",
+      "correlationId": "corr-aa7a05e4-d145-440e-9b30-5d3459f336a7"
+    },
+    {
+      "eventId": "evt-d8668839-c34f-475f-8b53-b26d25b1981c",
+      "type": "JOB_CREATED",
+      "at": "2026-09-29T20:57:54.481Z",
+      "jobId": "job-42703dc0-cea5-453a-a16a-4dcd09d2fbb1",
+      "attemptId": "attempt-c2a77e21-dcf5-4cb3-ab5b-e12b40bfce81",
+      "requestId": "w05-reaudit-cancel-1790715474468",
+      "correlationId": "corr-93011d56-4897-4a56-921e-be685883e7c1",
+      "inputDigest": "3a81d297b812b4277b3fc3ed840afd104e83135631214a36e5dc5a4aee2f93f5"
+    },
+    {
+      "eventId": "evt-a1f291fb-d82e-48e9-a3ca-1c1f268c864c",
+      "type": "CANCEL_REQUESTED",
+      "at": "2026-09-29T20:57:54.487Z",
+      "jobId": "job-42703dc0-cea5-453a-a16a-4dcd09d2fbb1",
+      "cancellationRequestId": "w05-reaudit-cr-1790715474468",
+      "correlationId": "corr-93011d56-4897-4a56-921e-be685883e7c1"
+    },
+    {
+      "eventId": "evt-6312eafa-033d-4ac5-bb83-08c6cdc8ef66",
+      "type": "WORKER_HEARTBEAT",
+      "at": "2026-09-29T20:58:01.400Z",
+      "workerId": "w05-reaudit-worker"
+    },
+    {
+      "eventId": "evt-76382adf-e1a4-41c7-8536-006d6a6af1f6",
+      "type": "CANCEL_ACKNOWLEDGED",
+      "at": "2026-09-29T20:58:01.401Z",
+      "jobId": "job-42703dc0-cea5-453a-a16a-4dcd09d2fbb1",
+      "cancellationRequestId": "w05-reaudit-cr-1790715474468",
+      "correlationId": "corr-93011d56-4897-4a56-921e-be685883e7c1"
+    }
+  ]
+}

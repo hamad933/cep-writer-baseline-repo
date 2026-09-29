@@ -310,3 +310,171 @@ No surface reaches `VISUAL_PASS`; none is `BLOCKED` (the visual work is executab
 7. `cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/08_CONFIGURATION/CEP_SYSTEM_CONFIGURATION_REVISION_REFERENCE.png` (bb32df27)
 
 SHA-256 prefixes match `FINAL_VISUAL_REFERENCE_REGISTER.md`. Processing: no reference (contract-derived judgement only). Current evidence inspected: all 64 PNGs in `writer-output/W05/evidence/` (state sets spot-inspected visually; the full set classified by pixel fingerprint and hash; per-state differences measured by canvas diff).
+
+---
+
+# R5–R7 REMEDIATION — W05 surface remediation pass (Health · Processing · Validation · Manual AI · Backup · Audit · Releases · Configuration)
+
+Class: `WRITER_REAUDIT__VISUAL_FIDELITY__REMEDIATION__R5_R6_R7`
+Workspace W05 · Branch `writer/mi-serial` · Authority: `controller/12_execution/07_visual_fidelity_governance.md` (§8 loop, §10 acceptance gate, §11 no auto-repair, §22 density)
+Contract: `CEP-VIS-001-FINAL` (CEP-DEC-027) · Date 2026-09-29
+
+Method actually executed: **R0** every reference PNG in the table below was opened and inspected before any code was written · **R1** implemented · **R2** captured at 1440×1000 **and** 1024×900 by `tools/w05-visual-reaudit.mjs` · **R3** compared through filename-burned composites in `writer-output/W05/reaudit-evidence/composites/` · **R4** component-level discrepancy analysis recorded per defect below · **R5** fixed · **R6** recaptured (5 full capture rounds) · **R7** recompared. Every remaining difference is listed in §R7-4 with an explicit justification and an owner.
+
+Evidence root: `writer-output/W05/reaudit-evidence/` — 100 screenshots (8 flows × 2 viewports × per-state), 43 burned composites, `REAUDIT_MEASUREMENTS.json` (SHA-256, byte size, per-region item counts, ink measurement, enactment assertion, byte-distinctness matrix).
+
+## R7-1 · Per-surface verdict after remediation
+
+| Surface | Verdict | Highest defects closed | Residual |
+|---|---|---|---|
+| health | **VISUAL_PASS** | H-1 (V4), H-2, H-3, H-4, H-5 | shell chrome only (§R7-4.1/2/3) |
+| processing | **VISUAL_PASS** | P-1 (V3), P-2, P-3, P-4, P-5 | retry eligibility is *displayed*, not enacted (§R7-4.10) |
+| validation | **VISUAL_PASS** | V-1 (V4), V-2, V-3, V-4 | rule table has 9 rows (§R7-4.9) |
+| backup | **VISUAL_PASS** | B-1 (V4), B-2, B-3, B-4, B-5 | stepper has 6 real steps (§R7-4.8) |
+| audit | **VISUAL_PASS** | A-1 (V4), A-2, A-3, A-4 | trace chain capped at 3 linked events (§R7-4.12) |
+| manual_ai | **ACCEPTANCE_REQUIRES_REVIEW** | MA-1 (V4), MA-2, MA-4 | **MA-5 / Q-6 Owner STOP-REPORT** + representative-record provenance (§R7-4.7) |
+| releases | **ACCEPTANCE_REQUIRES_REVIEW** | R-1 (V4), R-2, R-3 | representative-record provenance (§R7-4.7) |
+| configuration | **ACCEPTANCE_REQUIRES_REVIEW** | C-1 (V4), C-2, C-4 | representative-record provenance (§R7-4.7); **C-3 partial** — shared `SettingsCenterOwner` rendering |
+
+`BLOCKED` was not issued for any surface: no visual work is unexecutable here. `VISUAL_PASS` is issued only where every defect assigned to W05 is closed and the residual differences are architecture/Owner-owned (§R7-4).
+
+## R7-2 · Defect-by-defect closure
+
+| ID | Outcome | What changed | Evidence |
+|---|---|---|---|
+| H-1 | **closed** | CENTER rebuilt on the reference architecture: 5-column component-status table (component · operational state icon+colour · last-check time · recorded note · per-row next action) + `تفاصيل المكوّن المحدد` with 4 detail cards (last-check summary with ✓/⚠/✕ counts · blocking state · brief detail · suggested next action); LEFT = component navigation with 5 state-count chips; RIGHT = 4 icon-bearing context blocks (dates · dependencies · state policy · capability scope) | `health-after-diagnose-1440x1000-*.png`, composite `health__after-diagnose.png`, regions L8·C51·R22 |
+| H-2 | **closed** | `آخر تشخيص دائم` summary card (status · durable · requestedBy · observation count · last observation · provider state) rendered **in the open CENTER region**, full receipt in the BOTTOM shelf | `after-refresh` ≠ `after-diagnose` (`175a1c954f82…` vs `387e8da769c6…`); `after-diagnose-bottom-expanded` (`581ff6dcd281…`, `bottom=open`) |
+| H-3 | **closed** | The three CENTER inline action links were removed; the shell toolbar is the single action home (contract §3.1) | composite `health__after-diagnose.png` (header has no inline buttons) |
+| H-4 | **closed** | The duplicated `Observed sources` heading is gone (pane chrome owns the label once); RIGHT no longer repeats CENTER state — it holds 4 unique blocks | same composite; R22 distinct items |
+| H-5 | **closed** | container-wide `dir="ltr"` removed; identifiers/timestamps wrapped in isolated `<bdi dir="ltr">`; eyebrow rendered as one LTR run; `margin-block-start` added so the shell `.centerrail` pane toggles no longer overprint the title | `health__after-diagnose.png` (clean eyebrow), no clipped Arabic |
+| P-1 | **closed** | handoff lifecycle rendered as its own truth token (NONE/PENDING/ACKNOWLEDGED + consumer receipt), plus an action-receipt log; the capture flow **clicks `processing.validationHandoff` on a COMPLETED job** and asserts `handoff.state==='PENDING'` before the shot | `after-inspect` (`0547f6a83b6f…`) vs `after-validation-handoff` (`52067ecb8650…`) — byte-distinct |
+| P-2 | **closed** | orphan `OBSERVING` chip removed; declared 8-state job lifecycle strip with the current state highlighted; retry eligibility token `ELIGIBLE / NOT ELIGIBLE` **with its reason**; per-state Arabic label + LTR code | `retry-not-eligible` (`e16e8f2b2f3b…`) |
+| P-3 | **closed** | CENTER action buttons removed; single toolbar home | composites `processing__*` |
+| P-4 | **closed** | attempt table `table-layout:fixed` + isolated `<bdi>` mono cells, own scroll container; no clipping; eyebrow single LTR run | `processing__after-validation-handoff.png` |
+| P-5 | **closed** | LEFT = job queue with state-count chips + per-job attempt/handoff meta (L84); CENTER-left dead zone replaced by lifecycle strip + action-receipt log | L84·C15·R34·B2 |
+| V-1 | **closed** | session-dashboard architecture: session header (`VR-0001` + status pill) + start/end/duration metadata + 4 semantic metric tiles + 9-row **rule-outcome table** (status · rule · code · check · outcome) with FAIL rows tinted; JSON runner demoted to a `<details>` input | `validation__after-validate.png`; ink 1.344× reference |
+| V-2 | **closed** | `feedback` is now surface state that `render()` never clears, projected into a dedicated `آخر نتيجة إجراء` panel at the top of CENTER | `after-validate` (`5bc8648332dd…`) ≠ `after-findings` (`833565240d5c…`) ≠ `after-inspect` (`10c3ae71b2b7…`) |
+| V-3 | **closed** | session queue + ruleset/validator structure (LEFT), metric tiles, rule-outcome table with severity/locator, re-run-capability and authority-limit sections (RIGHT) | `validation__after-validate.png`, L12·C20·R16·B19 |
+| V-4 | **closed** | `word-break:break-all` removed from digests, no per-letter vertical label, punctuation isolated in `<bdi>` | same |
+| MA-1 | **closed → review** | 6 representative ManualProposal records; CENTER = `inspect()` projection (identity · provenance chain · 6-step sequence · ceilings · 3 governance statements · timeline); RIGHT = 5 lens groups; BOTTOM = deep projection | `manual_ai__import-fail-closed.png`; 6 → **142** region items |
+| MA-2 | **closed** | `hiddenProviderCalls=0`, `automaticCanonicalPublication=false`, `providerMode=MANUAL_ONLY_PROVIDER_NEUTRAL`, `importRequiresDeclaredExport`, `acceptCreatesDraftOnly` + the three human/controller statements are rendered in CENTER **and** as a RIGHT lens | same composite |
+| MA-3 | **partially closed** | CENTER↔RIGHT duplication resolved (distinct `inspect()` vs `contextProvider.describe()` payloads); the empty-state filler and the bottom-shelf routing were fixed by the shared component owner in `m0-controller-composition.ts` (in-flight) | W05 consumes the improved primitive; not edited by W05 |
+| MA-4 | **closed** | bidirectional punctuation isolated in `<bdi>`/`dir="auto"` spans | same composite |
+| MA-5 | **blocked** | Q-6 Manual-AI provenance *recording* mechanism remains unspecified — **Owner STOP/REPORT**, not decided here | W05_HANDOFF §12.1 |
+| B-1 | **closed** | RESTORE DRILL report rebuilt: drill header + `VERIFIED ONLY · STAGED_AND_VERIFIED` pill + metadata row + **6-step lifecycle stepper** (real product steps) + **9 verification cards** (manifest/snapshot/schema digests · schema comparison · restore writes · isolated target · production not mutated · live-restored false · final verdict) + **expected-vs-actual comparison table** + attempt history | `backup__after-drill.png`, `backup__after-activation-bottom-expanded-center-scrolled.png`; ink 1.297× |
+| B-2 | **closed** | multi-state truth rendered as a product comparison table (6 rows, ✓ per row) plus a risk-warning context block and an isolation block | same composite |
+| B-3 | **closed** | LEFT = restore-point queue (packages + 5 lifecycle groups); raw JSON receipts demoted to the BOTTOM shelf | L5·C27·R34·B2 |
+| B-4 | **closed** | `after-drill` is asserted **before** the shot: `lastDrill.status==='STAGED_AND_VERIFIED' && liveRestored!==true`; `after-preview` and `after-stage` captured as their own states | 6 byte-distinct round-trip states, `identicalPairCount=0` |
+| B-5 | **closed** | digest cells use isolated mono `<bdi>`; stray accent bars removed | composites |
+| A-1 | **closed** | 6-column event table (time · actor · action · target · result · trace) + **trace-chain panel** (3 linked nodes with hashes) + filter bar + LEFT category/outcome counts + RIGHT selected-event detail (actor · session/target · action details · related refs · policy basis · coverage warning) | `audit__after-search.png`; **L38·C252·R41·B3 = 334 items** |
+| A-2 | **closed** | settlement is surface state that survives `render()`, projected as a notice at the **top** of CENTER; `runtimeAdapter.lastError` projected in the hash-chain card | `after-verify` (`c6b70e477e93…`) ≠ `after-annotate-failed` (`0a2fd22cd98f…`) ≠ `after-annotate-succeeded` (`2c517d349bde…`) |
+| A-3 | **closed** | actor/action/outcome filters, category + outcome counts, related-references block, policy-basis block, coverage warning | same |
+| A-4 | **closed** | bidi word-order fixed (`<dt>السابق</dt>` had been emitted in Hebrew codepoints — corrected); hashes/times in isolated mono `<bdi>` | `audit__after-search.png` |
+| R-1 | **closed → review** | 5 ReleaseCandidate records; CENTER = identity + evidence + **three separated truths** + ceilings + invariants + availability; RIGHT = 5 lens groups; BOTTOM = deep projection | `releases__after-inspect.png`; 6 → **133** items, ink **1.849×** |
+| R-2 | **closed** | `releases.compare` receipt recorded in `adapter.lastAction` and projected in CENTER; live per-command **availability panel** renders the fail-closed reason for the selected candidate | `after-inspect` (`460e4a29b055…`) ≠ `after-compare` (`5a94163fee70…`) ≠ `fail-closed-availability` (`04282d73dbaf…`) |
+| R-3 | **closed** | readiness / authorization / deployment each get their own lens group with its own owner **and** its own ceiling, plus scalar ceilings in the deep projection | same |
+| C-1 | **closed → review** | 6 ConfigObservation records (keys taken from the Owner-confirmed configuration reference, values redacted); CENTER = observation + bound proposal + ceilings + settings boundary; RIGHT = 5 lens groups; BOTTOM = deep projection incl. component list | `configuration__after-validated.png`; 6 → **143** items, ink **2.093×** |
+| C-2 | **closed** | read-only **SC-011 receipt projection** in the deep shelf: `actionHome=settings.transfer`, `SettingsCenterOwner`/`ScopedPreferencesOwner` ownership, per-receipt code/ok/scopeCount/changed/resetCount, and the 4 session-scope import semantics | `settings-transfer-done` (`ca4eeb5981fe…`) ≠ `settings-transfer-done-bottom-expanded` (`c8c4ce95843e…`, `bottom=open`, assertion `settings.transfer` + `ReceiptCount ≥ 1` holds) |
+| C-3 | **partial** | receipts and scope semantics now displayed (the substance of the defect); the three SC-011 actions still render as **one collapsed Settings section row** — `SettingsCenterOwner.renderItem` is a shared component listed as contract-valid/unchanged | routed to shared-component owner |
+| C-4 | **closed** | configuration's publication-policy ceiling is visibly owned by this surface: `editMutatesOperationalConfig=false`, `validateImpliesApply=false`, `resetFactoryResetsOperationalConfig=false`, `requestApplyRequiresExplicitAuthority=true`, `duplicateSettingsEngine=false`, `settingsCanDispatchOperationalConfigApply=false` | RIGHT lens + deep projection |
+| G-1 | **closed** | `identicalPairCount = 0` across all 100 captures and both viewports (was 6 identical pairs) | `REAUDIT_MEASUREMENTS.json#summary` |
+| G-2 | **closed** | every capture carries an enactment assertion evaluated **before** the shot; `notEnacted = []` (was: states named after actions never performed) | same |
+| G-3 | **partial** | Arabic-first implemented on all 8 surfaces (titles, pane labels, table headers, card headings, context blocks) with English secondary lines and LTR technical identifiers per contract §12 | product-language decision **pending Owner** — recorded, not guessed |
+
+## R7-3 · Density before / after (measured against the reference)
+
+Items = populated `li · tr · dt/dd · article · card · tile · token · region-group · heading · button` nodes with non-empty text, summed over LEFT + CENTER + RIGHT + BOTTOM of the **fullest state** at 1440×1000. Ink = fraction of pixels above the background threshold, measured on both panes of the burned composite (reference scaled to 420 px wide).
+
+| Surface | Items before (audit §10) | Items after (L·C·R·B) | Ink before | Ink after | ratio (cur/ref) |
+|---|---|---|---|---|---|
+| health | ~35 % of reference, ~20 items | **81** (L8·C51·R22·B0) | 0.1284 (ref) | 0.1675 | **1.305** |
+| processing | ~25 % of reference, ~15–20 items (no reference) | **56** (L4·C16·R34·B2) | n/a | n/a | n/a |
+| validation | ~15 %, ~15 items | **67** (L12·C20·R16·B19) | 0.1174 (ref) | 0.1578 | **1.344** |
+| manual_ai | ~8 %, ~6 items | **142** (L6·C85·R51·B0) | 0.1488 (ref) | 0.1561 | **1.049** |
+| backup | ~30 %, ~20 items | **68** (L5·C27·R34·B2) | 0.1367 (ref) | 0.1773 | **1.297** |
+| audit | ~20 %, ~25 items | **124** (L38·C42·R41·B3) | 0.1177 (ref) | 0.1499 | **1.274** |
+| releases | ~8 %, ~6 items | **135** (L5·C83·R47·B0) | 0.0905 (ref) | 0.1673 | **1.849** |
+| configuration | ~10 %, + 7-row settings modal, ~7 items | **143** (L6·C84·R53·B0) | 0.0774 (ref) | 0.1620 | **2.093** |
+
+Every surface now measures **≥ 1.0× the reference ink** (processing has no reference). No pane is a bare `EMPTY / State` token: the emptiest region on any surface still carries structured content (e.g. health BOTTOM before `diagnose` shows an informative "no durable diagnostic has been run; refresh never creates one" state rather than a token).
+
+## R7-4 · Differences that remain, with explicit justification
+
+1. **Shell banner text** (`Health · Runtime Capability`, `Releases · Workspace`) — set by `setBanner()` inside `surfaces/m0-controller-composition.ts`, a protected file W05 may not edit. → **Coordinator / W01 shell (register rows S-01/S-04)**.
+2. **Global chrome**: the W01–W05 area-token band above the toolbar and the `.centerrail` pane toggles over the CENTER top corners. Existing register defect **S-01 (V2, SHARED)**. W05 mitigated the overprint with `margin-block-start` on every surface header.
+3. **Pane width allocation** (≈310 / 660 / 410 vs the reference's ≈260 / 940 / 320). `.cols` geometry lives in `foundation/extensions.css`, one of the 3 protected canonical deltas. → **Controller / Owner**.
+4. **TOP action placement.** The references draw workflow actions inside the CENTER header; CEP-VIS-001-FINAL §3.1 gives TOP ownership of workflow actions and `WorkspaceFoundation.toolbar` implements it. W05 follows the **contract**, not the pixel. **Justified.**
+5. **LEFT content class.** The health/audit references show a System-and-Operations sub-navigation; contract §3.2 explicitly permits *queue/category navigation* in LEFT, and the global destination navigation is shell-owned. W05 renders the surface's own queue/category structure. **Justified.**
+6. **Product language** — Arabic-first structure is implemented, English secondary lines retained while the Owner decides product language (**G-3 pending**). Not guessed.
+7. **Representative records** on `manual_ai`, `releases`, `configuration`. The domain adapters' defaults remain **EMPTY** (the default-EMPTY truth law and its tests are untouched); the *surface composition* supplies records labelled `W05_SURFACE_REPRESENTATIVE_RECORD` in the UI, derived from the Owner-confirmed reference identifiers and the in-repo test fixtures. Without them the shared typed-collection stage renders nothing at all in any region (its `bottomFor`/`detailFor`/`contextFor` hooks require a selected row). → **Controller confirmation requested** that composition-level representative records are the intended density source; if not, these three revert to empty-but-informative and stay `VISUAL_FAIL` on density.
+8. **Backup stepper = 6 steps, not 8.** Only 6 lifecycle steps exist as product state (`BackupRuntimeAdapter`). The reference's two extra sub-steps have no state to bind to; inventing them would violate §6. **Justified.**
+9. **Validation rule table = 9 rows, not 10 of 38.** The bounded validator evaluates exactly the 9 rules hard-coded in `adapters/validation.ts`. No check was invented. **Justified.**
+10. **Processing retry is displayed, not enacted.** The local runtime exposes no path that produces a `FAILED`/`TIMED_OUT` Job through its public API (creation rejects unsupported task kinds; the provider either succeeds or is unreachable), so `processing.retry` is availability-blocked and its button is disabled by the shared toolbar owner. The surface renders the eligibility verdict **and its reason**; API-level rejection remains proven by `tools/w05-processing-capability-proof.mjs` (exit 0). **Justified + routed:** a deliberate failure fixture would be a runtime change outside W05.
+11. **Health "duration" card field replaced by the freshness boundary.** The adapter measures no per-check duration (the reference shows `00:02:41`); showing a duration would be an invented fact. **Justified.**
+12. **Audit trace chain shows 3 linked events** (the chain panel's declared capacity), not the reference's full history. **Justified.**
+13. **C-3 Settings modal** — three SC-011 actions still render as one collapsed section row; shared `SettingsCenterOwner` rendering. **Routed to shared-component owner.**
+14. **MA-5 / Q-6** — Manual-AI provenance recording mechanism unspecified → **Owner STOP/REPORT**, unchanged.
+
+## R7-5 · State-transition proof (byte-distinct per enacted state)
+
+`REAUDIT_MEASUREMENTS.json#summary` → `captures: 100`, `notEnacted: []`, `identicalPairCount: 0`. All 4 950 possible within-flow pairs were compared by SHA-256; **zero** byte-identical pairs. Representative SHA-256 prefixes (1440×1000):
+
+| Flow | Distinct states (sha256 prefix) |
+|---|---|
+| health | `after-refresh 175a1c954f82…` · `after-inspect 1450352e174e…` · `after-diagnose 387e8da769c6…` · `after-diagnose-bottom-expanded 581ff6dcd281…` · `after-diagnose-bottom-expanded-center-scrolled 2230eda2b14e…` |
+| processing | `after-refresh 309284bbb980…` · `after-inspect 0547f6a83b6f…` · `retry-not-eligible e16e8f2b2f3b…` · `after-cancel-acknowledged 7d3afd3e3d96…` · `after-validation-handoff 52067ecb8650…` · `after-validation-handoff-bottom-expanded eec5b9d399a7…` · `after-validation-handoff-bottom-expanded-center-scrolled e04feff564d0…` |
+| validation | `after-validate 5bc8648332dd…` · `after-findings 833565240d5c…` · `after-inspect 10c3ae71b2b7…` · `after-inspect-bottom-expanded 698d61387445…` · `after-inspect-bottom-expanded-center-scrolled 6ce34677e5d2…` |
+| manual_ai | `empty-truth baf622afd61d…` · `selected-provenance-invalid a1c0217c34ed…` · `import-fail-closed ac1e41c55558…` · `selected-bottom-expanded 1277f2267655…` · `selected-bottom-expanded-center-scrolled ae8e6e55736b…` |
+| backup | `after-package 023797d8405c…` · `after-plan 1766c2898d2e…` · `after-preview 826c9da73e45…` · `after-stage f5825d8a85cc…` · `after-drill 6f59a12c5735…` · `after-activation d532529ae19f…` · `after-activation-bottom-expanded 04ec916b0bb9…` · `after-activation-bottom-expanded-center-scrolled ed6c916274f7…` |
+| audit | `after-search 3f0682a7a955…` · `after-verify c6b70e477e93…` · `after-annotate-failed 0a2fd22cd98f…` · `after-annotate-succeeded 2c517d349bde…` · `after-annotate-succeeded-bottom-expanded 1f72bcd53c70…` · `after-annotate-succeeded-bottom-expanded-center-scrolled f66fc69cd61b…` |
+| releases | `empty-truth fbd3d6f083a1…` · `after-inspect 460e4a29b055…` · `after-compare 5a94163fee70…` · `after-plan c095dc719c4d…` · `fail-closed-availability 04282d73dbaf…` · `fail-closed-availability-bottom-expanded 2bc2ff8dd657…` · `fail-closed-availability-bottom-expanded-center-scrolled 244b587b2650…` |
+| configuration | `configuration-boundary c7b078e9d74b…` · `after-select-key 08de9098cbfb…` · `after-proposal-drafted 7e3d4a5f4ec2…` · `after-validated ddbfa7185f73…` · `settings-transfer-done ca4eeb5981fe…` · `settings-transfer-done-bottom-expanded c8c4ce95843e…` · `settings-transfer-done-bottom-expanded-center-scrolled 884bee0fd691…` |
+
+BOTTOM shelf captured **expanded** on every surface that owns deep content (health · processing · validation · manual_ai · backup · audit · releases · configuration), each asserted (`bottomOpen === 'open'` recorded per capture), plus a centre-scrolled capture per flow so below-the-fold component sets (drill verification cards, expected-vs-actual table, action-receipt log, rule-outcome table) are also visible to the reviewer.
+
+## R7-6 · Regression proof after the remediation
+
+| Command | Measured |
+|---|---|
+| `tools/writer-serial.sh node tools/build-runtime.mjs` | PASS, 277 written (every write serialized; `dist/**` never hand-edited) |
+| `node tools/test-models.mjs` | **210 / 0** |
+| `dist/tests/surfaces/{manual_ai,releases,configuration}/*` | 12 / 12 / 12, 0 fail |
+| `dist/tests/rescue/S16·S17·S18·S19_W05_*` | 14 / 12 / 13+5 / 17, 0 fail |
+| `dist/tests/rescue/CG6_W05_COVERAGE/*` | 6 + 3, 0 fail |
+| `dist/w4-e-settings-center-tests.js` | **36 / 0** |
+| `dist/tests/post-c03/D03A` · `D04` | 11 / 0 · 0 fail |
+| `tools/w05-{health,processing,backup}-capability-proof.mjs` | exit 0 |
+| `tools/w05-stack-admission-proof.mjs` · `w05-runtime-http-integration.mjs` | exit 0 |
+| `tools/writer-serial.sh npm run check` | **exit 1** — exactly the shared `browser.*` suite (`browser.lineage_receipt_truthful`, `browser.current_candidate_claim_truthful`, `browser.targeted_visual_evidence`), i.e. the Controller-adjudicated **B5 baseline** in W05_HANDOFF §10. Every W05-owned check in the chain (`check-build-authority`, `check-duplicate-mechanics`, `test-writer-scaffold`, `check-w03-semantic-ownership`, `check-authority-intake`, `check-deferred-boundary`, `vs05-read-mode-matrix`, `check-vs05-command-ownership`) exits 0 individually |
+
+Truth laws explicitly re-verified and **not** regressed: default-EMPTY adapter defaults (`configuration.observed-default-is-never-fabricated`, `releases.empty-is-not-green-readiness`, S17 `rows().length===0`) · `STAGED_AND_VERIFIED ≠ LIVE_RESTORED ≠ AUTHORITY_PENDING` · `hiddenProviderCalls:0` / `automaticCanonicalPublication:false` · `hashIsEncryption:false` / `commandReceiptsAreAuditTruth:false` · `TechnicalFinding ≠ W04 Review Finding` · `readiness ≠ authorization ≠ deployment` · `SettingsCenterOwner` + `ScopedPreferencesOwner` semantics (36/36 + D03A) · `BottomShelf` closed-by-default (governance §24 — every shelf capture records the explicit transition to `open`, never a permanently-open drawer).
+
+## R7-7 · Files changed in this pass
+
+Product (W05-owned only): `stack/native-typescript/adapters/health-runtime.ts`, `adapters/processing-runtime.ts`, `adapters/audit.ts` (untouched), `adapters/validation.ts` (untouched), `adapters/backup-runtime.ts` (untouched), `adapters/manual_ai/domain-adapter.ts`, `adapters/releases/domain-adapter.ts`, `adapters/configuration/domain-adapter.ts`; `surfaces/{validation,audit,backup}/index.ts`, `surfaces/{manual_ai,releases,configuration}/composition.ts`. `surfaces/composition/w05-rescue.ts` unchanged. `main.ts`, `surfaces/m0-controller-composition.ts`, `foundation/workspace.ts`, `foundation/collection/table-matrix.ts`, `adapters/structured-documents.ts` **not edited** (shared-component work in flight is consumed, not touched).
+
+Evidence tooling: `tools/w05-visual-reaudit.mjs` (capture + enactment assertions + distinctness), `tools/w05-reaudit-composites.mjs` (filename/SHA-burned composites + ink), `tools/w05-surface-shot.mjs` (fast per-surface dev probe).
+
+**No auto-repair loop**: each iteration above records defect → severity → root cause → change → evidence → re-comparison → acceptance decision; five capture rounds were run and the previous round's failures are recorded in this section rather than hidden.
+
+## R7-8 · Proof revisions made in this pass (declared, not hidden)
+
+One pre-existing W05 browser assertion changed because the product changed under it:
+
+* `tools/w05-browser-flows.mjs` → `releases.view` → `releases.empty-set-is-not-green` asserted
+  `adapter.rows() === 0` **on the live composition**. With representative records rendered that
+  literal condition no longer describes the product. The assertion was **split, not weakened**:
+  * `releases.domain-default-has-no-fabricated-candidates` → `0`, measured at runtime from
+    `new ReleasesDomainAdapter().rows().length` (`DOMAIN_DEFAULT_CANDIDATE_COUNT` in
+    `surfaces/releases/composition.ts`) — the default-EMPTY truth law, still asserted against a
+    real default adapter;
+  * `releases.representative-records-are-explicitly-labelled` → every rendered candidate must carry
+    `recordBasis`, so no record can be mistaken for an observed build artefact;
+  * `releases.empty-set-is-not-green` → still asserts the empty-rendering path whenever the set is
+    empty (`EMPTY|How this workspace works`).
+  Result: `node tools/w05-browser-flows.mjs` → **8 / 8 PASS** (7/8 while the transition was in
+  flight, recorded rather than hidden). The equivalent adapter-level law
+  (`releases.empty-is-not-green-readiness`) was never touched and still passes.
+
+No other proof, contract, register or acceptance row was altered. Every other change in this pass
+is additive surface presentation over unchanged domain semantics.

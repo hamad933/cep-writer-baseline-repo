@@ -1,0 +1,81 @@
+{
+  "schema": "CEP_HEALTH_LATEST_V1",
+  "observations": [
+    {
+      "observationId": "obs-596a143f-1579-4893-8dfe-84333cefb3c2",
+      "sourceId": "health.local-runtime",
+      "kind": "Observation",
+      "observedAt": "2026-09-29T20:57:51.523Z",
+      "freshnessMs": 10000,
+      "ageMs": 0,
+      "status": "AVAILABLE",
+      "value": {
+        "node": "v22.16.0",
+        "host": "127.0.0.1",
+        "driverId": "node:sqlite"
+      },
+      "error": null,
+      "sourceIdentity": "CEP_LOCAL_RUNTIME",
+      "providerEvidence": {
+        "actualProbe": true
+      }
+    },
+    {
+      "observationId": "obs-7ed61d53-65e6-44b3-b9c6-6664490e7e5c",
+      "sourceId": "health.persistence.sqlite",
+      "kind": "Observation",
+      "observedAt": "2026-09-29T20:57:51.523Z",
+      "freshnessMs": 10000,
+      "ageMs": 0,
+      "status": "AVAILABLE",
+      "value": {
+        "integrityOk": true,
+        "foreignKeysOk": true,
+        "driverId": "node:sqlite"
+      },
+      "error": null,
+      "sourceIdentity": "CepSqlitePersistenceProvider:node:sqlite",
+      "providerEvidence": {
+        "actualProbe": true
+      }
+    },
+    {
+      "observationId": "obs-7049adc2-0924-41fa-9ad7-cddd21502cfb",
+      "sourceId": "health.processing.worker",
+      "kind": "WorkerLiveness",
+      "observedAt": "2026-09-29T20:56:48.719Z",
+      "freshnessMs": 5000,
+      "ageMs": 62804,
+      "status": "STALE",
+      "value": {
+        "workerId": "w05-reaudit-worker",
+        "state": "EXPIRED",
+        "ageMs": 62804,
+        "providerId": "LocalDigestProcessingProvider"
+      },
+      "error": null,
+      "sourceIdentity": "processing.local-digest-provider",
+      "providerEvidence": {
+        "actualWorkerHeartbeat": true
+      }
+    },
+    {
+      "observationId": "obs-8b53dd50-a289-4c71-aeba-eba31e623e39",
+      "sourceId": "health.processing.queue",
+      "kind": "QueueMetric",
+      "observedAt": "2026-09-29T20:57:51.523Z",
+      "freshnessMs": 5000,
+      "ageMs": 0,
+      "status": "AVAILABLE",
+      "value": {
+        "queueId": "processing.default",
+        "depth": 0
+      },
+      "error": null,
+      "sourceIdentity": "processing.local-digest-provider",
+      "providerEvidence": {
+        "actualQueueRead": true
+      }
+    }
+  ]
+}
