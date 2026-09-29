@@ -62,7 +62,72 @@ therefore contain a small number of pre-existing regenerated `dist/` artifacts a
 output. It is not rewritten (history is immutable); the rule is tightened forward. W03's `f9d5a4d` is
 source-correspondence clean.
 
-## IN-4 · Disposition-policy contradiction (open — Pro review)
+## IN-4 · Disposition-policy contradiction — **RESOLVED** (Pro review)
+
+W01 (`61ee12d`) marked `OWNER_DECISION` and `OWNER_QA_DEEP_AUDIT` rows **BLOCKED**; W04 (`81a2732`)
+marked the same row classes **PASS** from a per-surface proof battery. Both ran real measured proofs.
+Escalated to the Pro reviewer as a requirement-interpretation dispute (mission §27).
+
+**Outcome:** neither treatment was defensible. A single unified policy P1-P6 was issued
+(`06_unified_disposition_policy.md`) and all five matrices were regenerated (`55a46d6`).
+Cross-matrix conflicts went **111 → 0** across 180 replicated subjects. The truthful landscape is
+PASS 75 / BLOCKED 5356 / NOT_APPLICABLE_WITH_PROOF 3220 / FAIL 0 — the earlier 7,736 PASS was
+manufactured by sweep rules. The single largest gap surfaced: **0 of 98 `OWNER_QA_DEEP_AUDIT`
+findings have any executable closure proof anywhere in the repo.**
+
+## IN-5 · The writer-forbidden hotspot is forcing worse designs (HIGH — architectural)
+
+Three separate Writers have now hit the same wall: `main.ts` / `m0-controller-composition.ts` are
+writer-forbidden, so when the *correct* fix is a one-line change at a call site, the Writer reaches
+for a design that fits inside its own partition instead.
+
+Concrete instance (W03, `f68f805`-era, currently uncommitted):
+`main.ts:185` calls `createEnterpriseAdapter()` with **no arguments**. The safe default was
+`fixture:false` (empty topology, `sourceClassification:'UNAVAILABLE'`, `sourceDigest:null`) and
+`tests/post-c03/LCORR01` enforced it. To make the V3 "empty topology" defect fixable without
+touching `main.ts`, W03 **flipped the default to `fixture:true`** and re-expressed the negative case
+as `createEnterpriseAdapter({fixture:false})`.
+
+**Ruling: ACCEPTED as bounded, but the design is recorded as sub-optimal and routed to the hotspot.**
+
+Why accepted — the boundary genuinely holds:
+- `canonicalProductTruth` is `false` **unconditionally** (fixture or not).
+- `providerAvailability` is `'EXPLICIT_TEST_FIXTURE'`.
+- The classification `FIXTURE_ONLY__NOT_PRODUCT_TRUTH` is **rendered in the UI**
+  (`surfaces/enterprise/presentation.ts:70` RIGHT context shows `Classification` and
+  `Canonical product truth`).
+- The negative invariant "no product truth without a seed" is **still enforced**, just via an
+  explicit parameter.
+- All four affected suites green (LCORR01, S10, CG4 group-falsification, enterprise domain).
+
+Why sub-optimal — the *default* now carries fixture data, so any future no-arg caller silently
+receives it. The cleaner design is: default `fixture:false`, and `main.ts:185` passes
+`{fixture:true}` explicitly. **That is a `main.ts` hunk and therefore a PW-C slot item**, filed
+below. It is not a Writer error; it is the hotspot constraint doing exactly what the constraint
+does — pushing design distortion into the partition that is allowed to move.
+
+**Rule for the rest of the phase:** when a Writer's correct fix requires a writer-forbidden call
+site, prefer (in order): (1) file the hotspot hunk and leave the safe default intact; (2) if the
+surface would otherwise be materially empty, change the default **but** keep
+`canonicalProductTruth:false`, an explicit `providerAvailability` marker, a UI-rendered
+classification, and the negative case expressed with an explicit parameter. Never weaken the
+negative case.
+
+## IN-6 · Representative-record patterns compared (for consistency)
+
+Two patterns appeared; they are **not** equivalent and the difference matters.
+
+| | W05 (`b87313c`) | W03 (enterprise) |
+|---|---|---|
+| where records live | **composition** (presentation) | **adapter default** (domain) |
+| adapter default | stays **EMPTY** | now returns 6 labelled nodes |
+| default-EMPTY law | intact, 7/7 green | re-expressed via `{fixture:false}` |
+| provenance label | `W05_SURFACE_REPRESENTATIVE_RECORD` + honest basis string | `FIXTURE_ONLY__NOT_PRODUCT_TRUTH` + `canonicalProductTruth:false` |
+| verdict | **preferred** | accepted, sub-optimal (see IN-5) |
+
+Both are authorised by Owner directive §6-§7. **W05's shape is the preferred one** and should be the
+template for future work; W03's is acceptable only because the labelling is exhaustive and the
+negative case survives.
 
 W01 (`61ee12d`) marked `OWNER_DECISION` and `OWNER_QA_DEEP_AUDIT` rows **BLOCKED**;
 W04 (`81a2732`) marked the same row classes **PASS** from a per-surface proof battery. Both ran real

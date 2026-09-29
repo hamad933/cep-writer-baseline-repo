@@ -135,7 +135,11 @@ await test('A14-PF-004.results-provider-unavailable-empty-available-error-distin
 });
 
 await test('A13-PF-001.enterprise-create-validate-publish-baseline-command-path',()=>{
-  const productSource=createEnterpriseAdapter();assert.equal(productSource.nodes.length,0);assert.equal(productSource.sourceClassification,'UNAVAILABLE');assert.equal(productSource.sourceDigest,null);
+  // VISUAL_REAUDIT DEF-ENT-1 changed the *default* of createEnterpriseAdapter() to the
+  // labelled representative seed; the negative "no product truth without a seed" case is now
+  // expressed explicitly with {fixture:false}.
+  const productSource=createEnterpriseAdapter({fixture:false});assert.equal(productSource.nodes.length,0);assert.equal(productSource.sourceClassification,'UNAVAILABLE');assert.equal(productSource.sourceDigest,null);
+  const representative=createEnterpriseAdapter();assert.equal(representative.nodes.length,6);assert.equal(representative.sourceClassification,'FIXTURE_ONLY__NOT_PRODUCT_TRUTH');assert.equal(representative.canonicalProductTruth,false);
   const adapter=createEnterpriseAdapter({fixture:true}),domain=new W03EnterpriseDomain({relationAdapter:adapter}),bus=new SemanticCommandBus(),surface=composeEnterpriseSurface({relationAdapter:adapter,domain,bus});
   for(const id of ['enterprise.create','enterprise.baseline','enterprise.validate','enterprise.publish','enterprise.handoff'])assert.equal(bus.commands.has(id),true,id);
   assert.equal(bus.execute('enterprise.baseline',{baseline:{status:'AVAILABLE',id:'BL-EXACT',revision:'1',digest:'digest-exact'}}).ok,true);
