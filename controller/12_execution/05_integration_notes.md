@@ -49,6 +49,19 @@ the workspace partition. Sibling `dist/` deltas stay uncommitted and are committ
 workspace checkpoint. `tools/writer-candidate-identity.mjs` `PARTITIONS` is the reference for which
 `dist/` subtrees belong to whom.
 
+**Refined at `f9d5a4d` (W03) — apply from now on:** partition membership is necessary but not
+sufficient. A `dist/**` file may be staged **only if its corresponding source file under
+`stack/native-typescript/**` is also changed in the same checkpoint**. Otherwise it is one of the
+**175 pre-existing B-5 regenerated `dist/` artifacts** (worktree disposition: `GENERATED_ARTIFACT`,
+regeneration reproducible) and must be left uncommitted. Applying this at the W03 checkpoint unstaged
+25 such files, e.g. `dist/adapters/simulation.js`, `dist/foundation/timeline/*.js`,
+`dist/analytical-compare-*.js`, whose sources were untouched.
+
+Provenance note, recorded for transparency: `81a2732` (W04) applied the partition-level rule and may
+therefore contain a small number of pre-existing regenerated `dist/` artifacts alongside W04's genuine
+output. It is not rewritten (history is immutable); the rule is tightened forward. W03's `f9d5a4d` is
+source-correspondence clean.
+
 ## IN-4 · Disposition-policy contradiction (open — Pro review)
 
 W01 (`61ee12d`) marked `OWNER_DECISION` and `OWNER_QA_DEEP_AUDIT` rows **BLOCKED**;
