@@ -205,7 +205,7 @@ try {
       'enterprise.revise (successor revision), then enterprise.twin rebase on the DRAFT successor'
     ],
     expectedState: 'Published revision + pinned baseline stay immutable, Twin and Enterprise identities stay distinct, handoff never starts a run',
-    fixtureState: 'LIVE_ROUTE_NO_FIXTURE_DATA__snapshot.sourceTruth.canonicalProductTruth stays false and objects stay empty',
+    fixtureState: 'LIVE_ROUTE_REPRESENTATIVE_SEED__the W03 6-object fixture is bound and labelled FIXTURE_ONLY__NOT_PRODUCT_TRUTH; snapshot.sourceTruth.canonicalProductTruth stays false',
     owner: 'W03EnterpriseDomain + SpatialInteractionKernel + RelationInteractionOwner'
   }, async (page, ok) => {
     await ready(page, 'enterprise');
@@ -220,6 +220,7 @@ try {
         commands,
         objects: CEPFoundation.m0Composition?.domain?.snapshot?.()?.objects?.length ?? null,
         canonicalProductTruth: CEPFoundation.m0Composition?.domain?.snapshot?.()?.sourceTruth?.canonicalProductTruth ?? null,
+        sourceClassification: CEPFoundation.m0Composition?.domain?.snapshot?.()?.sourceTruth?.classification ?? null,
         revisionId: CEPFoundation.m0Composition?.domain?.snapshot?.()?.revisionId ?? null
       };
     });
@@ -231,8 +232,13 @@ try {
       assert(boot.commands.includes(id), `missing enterprise command ${id}`);
     }
     assert(boot.canonicalProductTruth === false, 'enterprise must not claim canonical product truth for its local draft');
-    assert(boot.objects === 0 && boot.revisionId === 'ENT-REV-UNAVAILABLE', 'live enterprise route fabricated inventory/identity: ' + JSON.stringify(boot));
-    ok('live enterprise route boots as a single-studio workspace with truthful UNAVAILABLE provider state');
+    // VISUAL_REAUDIT DEF-ENT-1: the live route now binds the *representative* W03 6-object
+    // fixture (same six objects as the CURRENT_FINAL_REFERENCE) instead of 0 objects.
+    // It must stay labelled FIXTURE_ONLY__NOT_PRODUCT_TRUTH and never claim canonical truth.
+    assert(boot.objects === 6, 'live enterprise route did not bind the representative 6-object seed: ' + JSON.stringify(boot));
+    assert(boot.sourceClassification === 'FIXTURE_ONLY__NOT_PRODUCT_TRUTH', 'representative seed lost its FIXTURE_ONLY classification: ' + JSON.stringify(boot));
+    assert(boot.revisionId === 'ENT-REV-004-DRAFT', 'live enterprise route did not bind the representative draft revision: ' + JSON.stringify(boot));
+    ok('live enterprise route boots as a single-studio workspace with a labelled representative 6-object seed and non-canonical truth');
 
     const lifecycle = await page.evaluate(async () => {
       const execute = (id, payload) => CEPFoundation.registry.execute(id, { ...payload, route: 'w03-browser-flow' });

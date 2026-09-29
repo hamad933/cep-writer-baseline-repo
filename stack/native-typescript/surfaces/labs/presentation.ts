@@ -9,6 +9,79 @@ function style(root){if(root.querySelector(':scope > style[data-s11-lab-style]')
 </style>`)}
 function graph(projection){const tasks=projection.tasks,edges=projection.edges,nodes=tasks.map((task,index)=>{const incoming=edges.filter(e=>e.to===task.id).length,outgoing=edges.filter(e=>e.from===task.id).length;return {id:`task:${task.id}`,label:task.title||task.id,type:task.nodeType||'task',x:90+(index%4)*245,y:90+Math.floor(index/4)*190+(incoming>1?35:0)+(outgoing>1?15:0)}}),relations=edges.map(edge=>({id:`edge:${edge.id}`,source:`task:${edge.from}`,target:`task:${edge.to}`,type:'depends',direction:'directed',label:edge.label||edge.condition||edge.type,kind:'representation'}));return {nodes,edges:relations}}
 function nextTaskId(tasks){let n=tasks.length+1,id=`TASK-${n}`,ids=new Set(tasks.map(x=>x.id));while(ids.has(id))id=`TASK-${++n}`;return id}
+
+/* ------------------------------------------------------------------ DEF-LAB-1 identity
+ * Same live-route seam as the Scenario timeline: `m0-controller-composition.mountStructuredStudio`
+ * reserves `#m0StructuredSpatial` and only overwrites it when it contains
+ * `[data-m0-spatial-slot]`. We mount the reference-shaped non-linear task graph (composed from
+ * `domain.snapshot().definition.tasks` / `.dependencies`) into that reserved host and keep the
+ * shared SpatialInteractionKernel as the graph's interaction owner.
+ */
+const identityStyle=root=>{if(root.querySelector(':scope > style[data-w03-lab-identity]'))return;root.insertAdjacentHTML('afterbegin',`<style data-w03-lab-identity>
+.w03-identity{display:grid;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg1);margin-block-end:14px}
+.w03-identity-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:11px 13px;border-bottom:1px solid var(--line);background:var(--bg2)}
+.w03-identity-head strong{font-size:15px}
+.w03-pill{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border:1px solid var(--line2);border-radius:999px;font:11px var(--mono);color:var(--text2)}
+.w03-pill[data-tone=accent]{border-color:var(--accent);color:var(--accent)}
+.w03-identity-sub{margin-inline-start:auto;font-size:11px;color:var(--text3)}
+.w03-purpose{margin:0;padding:9px 13px;border-bottom:1px solid var(--line);font-size:12px;color:var(--text2);overflow-wrap:anywhere}
+.w03-graph{position:relative;min-height:340px;padding:6px}
+.w03-graph .spatial-shell,.w03-graph>div{min-height:340px}
+.w03-graph-tools{display:flex;gap:7px;align-items:center;flex-wrap:wrap;padding:9px 13px;border-top:1px solid var(--line);background:var(--bg2);font-size:11px;color:var(--text2)}
+.w03-chip{display:inline-flex;padding:2px 8px;border:1px solid var(--line2);border-radius:999px;font:10.5px var(--mono)}
+.w03-legend{border-top:1px solid var(--line);padding:10px 13px;background:var(--bg2)}
+.w03-legend h4{margin:0 0 7px;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--text2)}
+.w03-legend ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:11.5px;color:var(--text2)}
+.w03-legend li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:9px;align-items:center}
+.w03-legend .key{height:0;border-top:2px solid var(--text2)}
+.w03-legend .key.conditional,.w03-legend .key.optional{border-top-style:dashed}
+.w03-taskindex{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px;padding:11px 13px;border-top:1px solid var(--line)}
+.w03-taskcard{display:grid;gap:4px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--bg0);min-width:0}
+.w03-taskcard h5{margin:0;font-size:12px;display:flex;gap:7px;align-items:center}
+.w03-taskcard h5 span{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--accent);color:var(--bg0);font:700 10px var(--mono)}
+.w03-taskcard p{margin:0;font-size:11px;color:var(--text2);overflow-wrap:anywhere}
+.w03-taskcard dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:1px 7px;margin:0;font-size:10.5px}
+.w03-taskcard dt{color:var(--text3)}.w03-taskcard dd{margin:0;color:var(--text2);overflow-wrap:anywhere}
+@media(prefers-reduced-motion:reduce){.w03-identity *{transition:none!important;animation:none!important}}
+</style>`)};
+
+const LAB_LAYOUT={ 'TASK-1':[70,70], 'TASK-2':[300,70], 'TASK-3':[530,70], 'TASK-4':[760,70], 'TASK-5':[530,240] };
+const EDGE_LABEL={depends:'Linear Dependency',conditional:'Conditional Unlock',optional:'Optional Branch',success:'Success Path',failure:'Failure Path',branch:'Conditional Unlock'};
+
+export function mountLabTaskGraphIdentity(composition){
+  if(typeof document==='undefined'||!composition?.domain)return null;
+  const doc=document.querySelector('#centerPane .docscroll');if(!doc)return null;
+  let host=document.querySelector('#m0StructuredSpatial');
+  if(!host){host=document.createElement('section');host.id='m0StructuredSpatial';host.className='m0-structured-spatial';doc.prepend(host)}
+  host.dataset.m0StructuredStudio='true';
+  let view=null,lastVersion=null,selected=composition.domain.selectionContext();
+  const render=()=>{
+    const projection=composition.domain.graphProjection(),tasks=projection.tasks||[],edges=projection.edges||[];
+    if(view){view=null}
+    const nodes=tasks.map((task,index)=>{const point=LAB_LAYOUT[task.id]||[70+(index%4)*230,70+Math.floor(index/4)*170];return {id:task.id,label:task.title||task.id,status:task.description||task.expectedSignal||'',x:point[0],y:point[1],type:task.nodeType||'task'}});
+    const relations=edges.map(edge=>({id:edge.id,source:edge.from,target:edge.to,type:EDGE_LABEL[edge.type]||edge.type||'Linear Dependency',direction:'directed',kind:'representation'}));
+    host.innerHTML=`<section class="w03-identity" data-w03-surface="labs" aria-label="Lab non-linear task graph identity">
+      <header class="w03-identity-head"><strong>${esc(projection.title||'Untitled Lab')}</strong><span class="w03-pill" data-tone="accent">Draft Revision ${esc(projection.identity?.revision||'1')}</span><span class="w03-pill">${esc(projection.lifecycle||'DRAFT')}</span><span class="w03-identity-sub">${tasks.length} tasks · ${edges.length} edges · non-linear=${String(composition.domain.validate().graph.nonLinear)}</span></header>
+      ${projection.purpose?`<p class="w03-purpose"><strong>Purpose:</strong> ${esc(projection.purpose)}</p>`:''}
+      <div class="w03-graph" data-lab-graph aria-label="Non-linear Lab task graph"></div>
+      <div class="w03-graph-tools"><span>Tasks</span><span class="w03-chip">${tasks.length}</span><span>Optional / conditional branches</span><span class="w03-chip">${edges.filter(e=>['optional','conditional','branch'].includes(e.type)).length}</span><span>Selected</span><span class="w03-chip">${esc(selected?.id||'none')}</span></div>
+      <div class="w03-taskindex">${tasks.map((task,index)=>`<article class="w03-taskcard"><h5><span>${index+1}</span>${esc(task.title||task.id)}</h5><p>${esc(task.description||task.expectedSignal||'')}</p><dl><dt>Objective</dt><dd>${esc(task.objectiveType||task.nodeType||'—')}</dd><dt>Capability</dt><dd>${esc(task.requiredCapability||'—')}</dd><dt>Tools</dt><dd>${(task.toolRefs||[]).map(esc).join(' · ')||'—'}</dd><dt>Validation</dt><dd>${esc(task.validation||'—')}</dd><dt>Completion</dt><dd>${esc(task.completion||'Required')}</dd></dl></article>`).join('')}</div>
+      <aside class="w03-legend" aria-label="Relationship Legend"><h4>Relationship Legend</h4><ul><li><span class="key" aria-hidden="true"></span><span>Linear Dependency — required predecessor before the next task</span></li><li><span class="key conditional" aria-hidden="true"></span><span>Conditional Unlock — successor unlocks only on its condition</span></li><li><span class="key optional" aria-hidden="true"></span><span>Optional Branch — may be skipped without failing the Lab</span></li></ul></aside>
+    </section>`;
+    identityStyle(host);
+    const graphHost=host.querySelector('[data-lab-graph]');
+    view=new SpatialView(graphHost,nodes,relations,{
+      select:ids=>{const id=ids.at(-1);if(!id)return;composition.domain.select({kind:'task',id});selected=composition.domain.selectionContext();render()},
+      edgeSelect:id=>{if(!id)return;composition.domain.select({kind:'edge',id:String(id).replace(/^edge:/,'')});selected=composition.domain.selectionContext();render()},
+      open:id=>{composition.domain.select({kind:'task',id});selected=composition.domain.selectionContext();render()}
+    });
+    view.setActiveMode(projection.lifecycle==='PUBLISHED'?'review':'author');
+    requestAnimationFrame(()=>view?.fit?.());
+    lastVersion=composition.domain.version;
+  };
+  render();
+  return {host,refresh:render,owner:'LabTaskGraphIdentity'};
+}
 export function renderLabsSurface(root,composition,{dir='rtl',locale=dir==='rtl'?'ar':'en',toolContext={tools:{},environmentBinding:{capabilities:[]}}}={}){
   if(!root||!composition)throw Error('LABS_PRESENTATION_INPUT_REQUIRED');const t=labels[locale]||labels.en;root.dir=dir;root.dataset.surface='labs';root.dataset.workspaceInteraction='authoring';let spatial=null,statusText='';
   const act=(id,payload={})=>{const r=composition.bus.execute(id,payload);if(r?.ok===false&&r.reason)statusText=r.reason;draw();return r};

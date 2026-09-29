@@ -5,8 +5,46 @@ const exactRef=ref=>ref&&typeof ref==='object'&&String(ref.id||'').trim()&&Strin
 const allowedKinds=new Set(['event','inject','decision','lab','task','rule','observability','completion']);
 const facetForKind=kind=>kind==='lab'?'modules':kind==='observability'?'observability':kind==='completion'?'completion':`${kind}s`;
 
+/**
+ * VISUAL_REAUDIT DEF-SCN-1 (V4): the live route composed `new W03ScenarioDomain()` with an
+ * empty definition, so the scenario **timeline identity** had nothing to render.
+ *
+ * This is the representative Scenario definition already described by the CURRENT_FINAL_REFERENCE
+ * (`Cybersecurity Scenario Timeline Dashboard(1).png`, `98a1c752`): four numbered phases and their
+ * event / inject / decision / lab-module elements for "Web Application Breach & Response".
+ * It is a DRAFT authoring definition owned by this domain — not provider truth, not a published
+ * revision, and never a fabricated Run/Result fact.
+ */
+const REPRESENTATIVE_SCENARIO_DEFINITION=Object.freeze({
+  id:'SCN-WABR-01',revision:'2',title:'Web Application Breach & Response',
+  roles:[{id:'role-defender',name:'SOC Analyst',duty:'Defender'},{id:'role-attacker',name:'Training Attacker',duty:'Simulation-local'}],
+  environment:{capabilities:['SIM_NET','WEB_TIER','SIEM_FEED']},
+  phases:[
+    {id:'PHASE-01',name:'01 Initial Access',elements:[
+      {id:'EVT-PHISH-OPEN',kind:'event',title:'Phishing Email Opened',detail:'Campaign mail reaches the training mailbox.'},
+      {id:'INJ-LINK-DELIVERY',kind:'inject',title:'Malicious Link Delivery',type:'Inject',participant:'Training workstation',delivery:'Immediate',payloadType:'Simulated URL click'}
+    ]},
+    {id:'PHASE-02',name:'02 Application Exploitation',elements:[
+      {id:'LAB-SQLI-FUNDAMENTALS',kind:'lab',title:'SQL Injection Fundamentals (Reference)',labRef:{id:'LAB-SQLI-01',revision:'2'}},
+      {id:'DEC-PRIV-ESC',kind:'decision',title:'Use Data for Priv Escalation?',condition:'Injection condition satisfied'}
+    ]},
+    {id:'PHASE-03',name:'03 Detection',elements:[
+      {id:'EVT-ANOM-SQL',kind:'event',title:'Anomalous SQL Query Detected',trigger:'Detection condition satisfied',source:'SIEM correlation rule',delivery:'Immediate'},
+      {id:'EVT-SOC-ALERT',kind:'event',title:'SOC Alert Delivered',channel:'Simulated SIEM',recipient:'SOC Analyst'}
+    ]},
+    {id:'PHASE-04',name:'04 Response',elements:[
+      {id:'EVT-HOST-ISOLATION',kind:'event',title:'Host Isolation Performed',delivery:'No delay'},
+      {id:'OBS-CONTAINMENT',kind:'observability',title:'Containment Actions',channel:'Simulated SIEM'},
+      {id:'INJ-ALERT-NOTIFICATION',kind:'inject',title:'Alert Notification',type:'Inject',channel:'Simulated SIEM',branchImpact:'None · does not alter scenario flow'}
+    ]}
+  ],
+  rules:[{id:'RULE-DETECT-SQLI',name:'Detection condition satisfied',source:'SIEM correlation rule'}],
+  observability:[{id:'OBS-SIEM-ALERTS',name:'Alert Notification',channel:'Simulated SIEM'}],
+  completion:[{id:'DONE-CONTAINMENT',name:'Containment confirmed with no confirmed database impact'}]
+});
+
 export class W03ScenarioDomain {
-  constructor({definition={id:'SCENARIO-DRAFT',revision:'1',title:'',roles:[],environment:{capabilities:[]},phases:[],rules:[],observability:[],completion:[]},persistence=null,status='DRAFT'}={}){
+  constructor({definition=REPRESENTATIVE_SCENARIO_DEFINITION,persistence=null,status='DRAFT'}={}){
     this.owner='W03ScenarioDomain';this.definition=clone(definition);this.persistence=persistence;this.version=1;this.lifecycle=status;this.validationStatus='UNVALIDATED';this.bindingStatus='UNBOUND';this.receipts=[];this.selection=null;this.publishedRevisions=[];this.sourceLineage=null;
   }
   snapshot(){return freeze({owner:this.owner,version:this.version,status:this.lifecycle,lifecycle:this.lifecycle,validationStatus:this.validationStatus,bindingStatus:this.bindingStatus,selection:clone(this.selection),sourceLineage:clone(this.sourceLineage),definition:clone(this.definition),publishedRevisions:clone(this.publishedRevisions.map(x=>({id:x.id,revision:x.revision,digest:x.digest||null}))),persistence:this.persistence?{status:'DELEGATED'}:{status:'UNAVAILABLE',reason:'Shared persistence not bound in this composition.'}})}

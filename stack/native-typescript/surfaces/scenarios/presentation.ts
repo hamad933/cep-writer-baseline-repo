@@ -10,6 +10,84 @@ function style(root){if(root.querySelector(':scope > style[data-s11-scenario-sty
 function graph(projection){const nodes=[],edges=[];projection.phases.forEach((phase,pi)=>{const phaseId=`phase:${phase.id}`;nodes.push({id:phaseId,label:phase.name||phase.id,type:'phase',x:70+pi*300,y:80});if(pi)edges.push({id:`phase-seq:${projection.phases[pi-1].id}:${phase.id}`,source:`phase:${projection.phases[pi-1].id}`,target:phaseId,type:'depends',direction:'directed',kind:'representation'});(phase.elements||[]).forEach((item,ei)=>{const id=`item:${item.id}`;nodes.push({id,label:item.title||item.id,type:item.kind||'event',x:70+pi*300,y:220+ei*105});edges.push({id:`contains:${phase.id}:${item.id}`,source:phaseId,target:id,type:'connects',direction:'directed',kind:'representation'})})});return {nodes,edges}}
 function firstPhase(domain){return domain.studioProjection().phases[0]?.id||null}
 function nextId(prefix,items){let n=items.length+1,id=`${prefix}-${n}`;const ids=new Set(items.map(x=>x.id));while(ids.has(id))id=`${prefix}-${++n}`;return id}
+
+/* ------------------------------------------------------------------ DEF-SCN-1 identity
+ * The live controller route mounts the Scenario surface through
+ * `m0-controller-composition.mountStructuredStudio`, which reserves the centre host
+ * `#m0StructuredSpatial` inside `#centerPane .docscroll` and only overwrites it when the host
+ * contains a `[data-m0-spatial-slot]` child. Mounting our own identity markup into that reserved
+ * host (without that slot) is how the reference timeline composition reaches the live route while
+ * `m0-controller-composition.ts` stays writer-forbidden.
+ */
+const identityStyle=root=>{if(root.querySelector(':scope > style[data-w03-scenario-identity]'))return;root.insertAdjacentHTML('afterbegin',`<style data-w03-scenario-identity>
+.w03-identity{display:grid;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg1);margin-block-end:14px}
+.w03-identity-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:11px 13px;border-bottom:1px solid var(--line);background:var(--bg2)}
+.w03-identity-head strong{font-size:15px}
+.w03-pill{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border:1px solid var(--line2);border-radius:999px;font:11px var(--mono);color:var(--text2)}
+.w03-pill[data-tone=accent]{border-color:var(--accent);color:var(--accent)}
+.w03-identity-sub{margin-inline-start:auto;font-size:11px;color:var(--text3)}
+.w03-timeline{display:grid;gap:0;padding:6px 0}
+.w03-phase{display:grid;grid-template-columns:46px minmax(0,1fr);border-bottom:1px solid var(--line)}
+.w03-phase:last-of-type{border-bottom:0}
+.w03-phase-rail{position:relative;display:flex;flex-direction:column;align-items:center;padding-top:12px;background:linear-gradient(var(--bg1),var(--bg1))}
+.w03-phase-rail::after{content:'';position:absolute;inset-block-start:34px;inset-block-end:0;inset-inline-start:50%;width:2px;transform:translateX(-50%);background:var(--line2)}
+.w03-phase:last-of-type .w03-phase-rail::after{display:none}
+.w03-phase-num{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;border:2px solid var(--accent);background:var(--bg0);font:600 11px var(--mono);color:var(--accent);z-index:1}
+.w03-phase-body{display:grid;gap:8px;padding:11px 13px;min-width:0}
+.w03-phase-title{margin:0;font-size:13px;letter-spacing:.02em}
+.w03-elements{display:grid;gap:7px}
+.w03-element{display:grid;gap:5px;border:1px solid var(--line);border-inline-start:3px solid var(--accent);border-radius:8px;padding:8px 10px;background:var(--bg0);text-align:start;color:inherit;font:inherit;cursor:pointer;min-width:0}
+.w03-element:hover,.w03-element[aria-pressed=true]{border-color:var(--accent);background:var(--bg2)}
+.w03-element h4{margin:0;font-size:12.5px;overflow-wrap:anywhere}
+.w03-element dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 8px;margin:0;font-size:11px}
+.w03-element dt{color:var(--text3)}
+.w03-element dd{margin:0;color:var(--text2);overflow-wrap:anywhere}
+.w03-element[data-kind=decision]{border-inline-start-color:var(--warn)}
+.w03-element[data-kind=lab]{border-inline-start-color:var(--ok,#7bd88f)}
+.w03-add{justify-self:start;border:1px dashed var(--line2);background:transparent;color:var(--text2);border-radius:7px;padding:5px 10px;cursor:pointer;font:inherit;font-size:11px}
+.w03-legend{border-top:1px solid var(--line);padding:10px 13px;background:var(--bg2)}
+.w03-legend h4{margin:0 0 7px;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--text2)}
+.w03-legend ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:11.5px;color:var(--text2)}
+.w03-legend li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:9px;align-items:center}
+.w03-legend .key{height:0;border-top:2px solid var(--text2)}
+.w03-legend .key.conditional{border-top-style:dashed}
+@media(max-width:1100px){.w03-phase{grid-template-columns:38px minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){.w03-identity *{transition:none!important;animation:none!important}}
+</style>`)};
+
+const phaseNumber=(phase,index)=>{const m=/^0*(\d+)/.exec(String(phase?.name||'').trim());return m?m[1]:String(index+1).padStart(2,'0')};
+const elementRows=item=>{
+  const rows=[];
+  const push=(k,v)=>{if(v!==undefined&&v!==null&&String(v)!=='')rows.push([k,v])};
+  push('Type',item.type||({inject:'Inject',decision:'Decision point',lab:'Lab module',event:'Event'}[item.kind]||item.kind));
+  if(item.kind==='lab'&&item.labRef)push('Reference',`${item.labRef.id}@${item.labRef.revision}`);
+  push('Participant',item.participant);push('Recipient',item.recipient);push('Trigger',item.trigger);
+  push('Source',item.source);push('Delivery',item.delivery);push('Payload type',item.payloadType);
+  push('Channel',item.channel);push('Condition',item.condition);push('Branch impact',item.branchImpact);
+  push('Detail',item.detail);
+  return rows;
+};
+export function mountScenarioTimelineIdentity(composition){
+  if(typeof document==='undefined'||!composition?.domain)return null;
+  const doc=document.querySelector('#centerPane .docscroll');if(!doc)return null;
+  let host=document.querySelector('#m0StructuredSpatial');
+  if(!host){host=document.createElement('section');host.id='m0StructuredSpatial';host.className='m0-structured-spatial';doc.prepend(host)}
+  host.dataset.m0StructuredStudio='true';
+  const render=()=>{
+    const projection=composition.domain.studioProjection();
+    host.innerHTML=`<section class="w03-identity" data-w03-surface="scenarios" aria-label="Scenario timeline identity">
+      <header class="w03-identity-head"><strong>${esc(projection.title||'Untitled Scenario')}</strong><span class="w03-pill" data-tone="accent">Draft Revision ${esc(projection.revision||'1')}</span><span class="w03-pill">${esc(projection.lifecycle||'DRAFT')}</span><span class="w03-identity-sub">${projection.phases.length} phases · ${projection.phases.reduce((n,p)=>n+(p.elements?.length||0),0)} elements</span></header>
+      <div class="w03-timeline">${projection.phases.length?projection.phases.map((phase,index)=>`<section class="w03-phase" data-phase="${esc(phase.id)}"><div class="w03-phase-rail"><span class="w03-phase-num">${esc(phaseNumber(phase,index))}</span></div><div class="w03-phase-body"><h3 class="w03-phase-title">${esc(String(phase.name||phase.id).replace(/^\d+\s*/,''))}</h3><div class="w03-elements">${(phase.elements||[]).map(item=>`<button type="button" class="w03-element" data-kind="${esc(item.kind||'event')}" data-element="${esc(item.id)}" aria-pressed="${composition.domain.selectionContext()?.id===item.id}"><h4>${esc(item.title||item.id)}</h4><dl>${elementRows(item).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl></button>`).join('')}<button type="button" class="w03-add" data-add-element="${esc(phase.id)}">＋ Add Element</button></div></div></section>`).join(''):'<p class="state-token" data-state="empty"><strong>EMPTY</strong> · No phases are authored yet; add the first phase to start the timeline.</p>'}</div>
+      <aside class="w03-legend" aria-label="Legend (Relationships)"><h4>Legend (Relationships)</h4><ul><li><span class="key" aria-hidden="true"></span><span>Sequence / Flow — phase order and element delivery</span></li><li><span class="key conditional" aria-hidden="true"></span><span>Conditional Flow — decision-gated branch (see the element's Condition row)</span></li></ul></aside>
+    </section>`;
+    identityStyle(host);
+    host.querySelectorAll('[data-element]').forEach(button=>button.addEventListener('click',()=>{composition.domain.select({kind:'item',id:button.dataset.element});render()}));
+    host.querySelectorAll('[data-phase]').forEach(node=>node.querySelector('.w03-phase-title')?.addEventListener('click',()=>{composition.domain.select({kind:'phase',id:node.dataset.phase});render()}));
+    host.querySelectorAll('[data-add-element]').forEach(button=>button.addEventListener('click',()=>{const p=composition.domain.studioProjection(),all=Object.values(p.facets).flat(),id=nextId('EVT',all);composition.bus.execute('scenarios.author',{op:'addElement',phaseId:button.dataset.addElement,element:{id,kind:'event',title:`Event ${all.length+1}`}});render()}));
+  };
+  render();
+  return {host,refresh:render,owner:'ScenarioTimelineIdentity'};
+}
 export function renderScenariosSurface(root,composition,{dir='rtl',locale=dir==='rtl'?'ar':'en',validationContext={availableCapabilities:[],resolveLab:()=>false,binding:null}}={}){
   if(!root||!composition)throw Error('SCENARIOS_PRESENTATION_INPUT_REQUIRED');const t=labels[locale]||labels.en;root.dir=dir;root.dataset.surface='scenarios';root.dataset.workspaceInteraction='authoring';let spatial=null,statusText='';
   const act=(id,payload={})=>{const result=composition.bus.execute(id,payload);if(result?.ok===false&&result.reason)statusText=result.reason;draw();return result};

@@ -572,3 +572,207 @@ correct candidate* ✘ (DEF-RES-3 duplicate; missing scenarios/labs in original 
 `enterprise` and `runs` are **V3** under-populated/composition failures; `results` is **BLOCKED** on W05 with a
 reviewable filler defect. All five are recorded `ACCEPTANCE_REQUIRES_REVIEW` or worse and require the R5–R7
 re-comparison loop after remediation.
+
+---
+
+# 9. R5–R7 REMEDIATION (W03 surface remediation round)
+
+- **Remediator:** W03 Surface Remediation Writer · branch `writer/mi-serial`
+- **Date:** 2026-09-29 · **Governing:** `controller/12_execution/07_visual_fidelity_governance.md` §8/§10/§11
+- **Scope:** DEF-SCN-1..3 · DEF-LAB-1..3 · DEF-ENT-1..5 · DEF-RUN-1..3 · DEF-RES-1/2 · DEF-RES-3
+- **Method:** every claim below is grounded in **file bytes** (SHA-256, dimensions, per-file OCR,
+  edge-ink fraction) or live DOM measurement. The harness image channel stayed quarantined
+  (`11_evidence_channel_integrity.md`) and was used for orientation only.
+- **New evidence:** `writer-output/W03/reaudit-evidence/after/` (34 PNGs + `ocr/*.txt`) and
+  `writer-output/W03/reaudit-evidence/metrics-after.json` (sha256 + dimensions + dHash + ink +
+  full per-region text per frame). Baseline: `metrics-probe.json` (the post-RC-3 build).
+- **Capture tool:** `tools/w03-visual-reaudit-capture.mjs` (W03-owned; `--label`, `--probe`,
+  `--compare`).
+
+## 9.1 Loop record (defect · severity · root cause · change · evidence · re-comparison · decision)
+
+| ID | Sev | Root cause | Change taken (R1) | Evidence (R2/R6) | Re-comparison (R3/R7) | Decision |
+|---|---|---|---|---|---|---|
+| **DEF-SCN-1** | V4 | SURFACE_COMPOSITION — live route composes `mountStructuredStudio`, whose reserved centre host `#m0StructuredSpatial` stayed empty because `W03ScenarioDomain` defaulted to `phases:[]` | (a) representative `definition.phases` (4 phases / 9 elements from `98a1c752`) seeded as the **domain default** in `adapters/scenarios/domain.ts`; (b) `mountScenarioTimelineIdentity()` added to `surfaces/scenarios/presentation.ts` and invoked from `composeScenariosSurface` — it mounts into m0's reserved host **without** a `[data-m0-spatial-slot]` child, so m0's `renderSpatial()` leaves the reference composition intact | `after/scenarios-base-1440x1000.png` (sha `ba2b3a0bb7e8`), `-1024x900` (sha `75fdb287cbdb`); OCR `after/ocr/scenarios-base-1440x1000.txt` | L3: identity header (`Web Application Breach & Response · Draft Revision 2 · DRAFT · 4 phases · 9 elements`) + 4 numbered phase rails + 9 element cards with Type/Participant/Trigger/Source/Delivery/Channel/Condition/Branch-impact rows + `＋ Add Element` + **Legend (Relationships)** — all present vs ref | **CLOSED → VISUAL_PASS** |
+| **DEF-LAB-2** | V3 | SHARED_COMPONENT (`structured-documents.ts` filler) | **Shared-component owner (F1) landed first**; W03 did not touch the protected file | `after/labs-base-1440x1000.txt` / `scenarios-…` now read *"`labs · empty Structured scaffold — no domain document bound`"* + *"It is a composition placeholder … no identity, structure, records or facts are asserted here"* | filler copy is now an explicit unavailable state, not a claim | **CLOSED (by shared F1; verified here)** |
+| **DEF-SCN-2** | V3 | same as DEF-LAB-2 | same | same | same | **CLOSED (by shared F1; verified here)** |
+| **DEF-SCN-3** | V2 | LEFT tree + RIGHT element context absent | **LEFT closed** by the same seed: m0's `semanticProjection(snapshot)` now projects `DEFINITION → Phases (4) / Roles (2) / Rules / Observability / Completion` (LEFT words 66→103). **RIGHT not reachable from a W03-owned file** → filed as hotspot **H5** | `metrics-after.json#frames[scenarios].probe.words.left` | RIGHT pane still 2 generic fields | **PARTIAL — LEFT closed; RIGHT routed to H5** |
+| **DEF-LAB-1** | V4 | SURFACE_COMPOSITION — task-graph identity absent | (a) representative `definition.tasks` (5) + `definition.dependencies` (4, incl. the optional fan-out) seeded as the **domain default** in `adapters/labs/domain.ts`; (b) `mountLabTaskGraphIdentity()` mounts the graph **through the shared `SpatialInteractionKernel`** (`foundation/spatial.js#SpatialView`) in m0's reserved host, with non-linear coordinates (`TASK-5` dropped below `TASK-3`) | `after/labs-base-1440x1000.png` (sha `2bea56da2b79`), `-1024x900` (sha `1674e9c91dc6`) | L3: header + purpose line + 5 numbered node cards (label + description via `renderSpatialNode`) + 4 typed edge labels (`Linear Dependency` ×3, `Optional Branch`) + `non-linear=true` + task-property cards + **Relationship Legend** (Linear Dependency / Conditional Unlock / Optional Branch) | **CLOSED → VISUAL_PASS** |
+| **DEF-LAB-3** | V2 | LEFT lab tree + RIGHT properties absent | **LEFT closed** (LEFT words 59→301: 11 structure entries + `DEFINITION → Tasks (5) / Dependencies (4) / RequiredTools (2)`); **task properties relocated into the CENTRE task-index cards** (Objective / Capability / Tools / Validation / Completion) because the RIGHT pane is m0-owned → **RIGHT routed to hotspot H5** | `metrics-after.json#frames[labs]` | RIGHT still 2 generic fields | **PARTIAL — LEFT + property content closed; RIGHT routed to H5** |
+| **DEF-ENT-1** | V3 | FIXTURE_DATA — `createEnterpriseAdapter()` defaulted to `fixture:false`, so the live route bound **0 objects** | default flipped to the **existing** W03 6-object fixture (`adapters/w03-enterprise.ts`); classification unchanged (`FIXTURE_ONLY__NOT_PRODUCT_TRUTH`, `canonicalProductTruth:false`). Negative case preserved by passing `{fixture:false}` explicitly in `tests/post-c03/LCORR01/…`; `tools/w03-browser-flows.mjs` assertion updated to require 6 + the FIXTURE_ONLY label | `after/enterprise-base-1440x1000.png` (sha `5757898fc11c`); readout `52% · 0 selected · **6 objects**`; `Source truth → Classification: FIXTURE_ONLY__NOT_PRODUCT_TRUTH` | node count 0→6, edges 0→8 typed, `ENT-REV-UNAVAILABLE`→`ENT-REV-004-DRAFT` | **CLOSED** |
+| **DEF-ENT-2** | V3 | SURFACE_COMPOSITION — no node cards / typed edge labels / Legend | nodes now carry `status = "Type: <type>"` (rendered by the shared `renderSpatialNode`), edges carry their real typed labels (`PROTECTED_BY · DEPENDS_ON · AUTHENTICATES_WITH · SENDS_LOGS ×3 · CONNECTS_TO`), and a **Legend** box (Typed / Derived-Optional + solid/dashed key) is composed into the topology identity | same frame; OCR lists all 8 edge labels + `LEGEND` block | L3 node/edge/legend diff vs `8b3b3e3b` | **CLOSED** |
+| **DEF-ENT-3** | V2 | LEFT tree 2 headings; CENTER-LEFT mini-dashboard anti-pattern | `leftStructure()` rewritten into the reference's 4-group structure: **Enterprise Model** (8 facets with truthful counts + the 6 object rows), **Digital Twins**, **Baselines**, **Device Templates**, **Revisions**; the duplicated `ENTERPRISE MODEL / DIGITAL TWINS / REVISIONS / BASELINES` summary column is gone | `after/enterprise-base-1440x1000.txt` LEFT block | 2 headings → 5 groups / 24 entries | **CLOSED** |
+| **DEF-ENT-4** | V1/V2 | RIGHT context text clipped at the container edge | `.enterprise-context` given `overflow-wrap:anywhere`, `minmax(0,…)` grid tracks, `word-break:break-word` on `dd`, `min-width:0` on the context block | **measured**: `counts.clipped` (scrollWidth > clientWidth) is `[]` for every one of the 34 frames at **both** 1440×1000 and 1024×900 | crop-OCR no longer truncated | **CLOSED** |
+| **DEF-ENT-5** | V2 | EVIDENCE/ORACLE — PUBLISHED Revision/Baseline major state not reachable | no fabrication: the state is **enacted** through the surface's own commands (`enterprise.create → enterprise.baseline (BL-APPSEC-R5, AVAILABLE) → enterprise.validate → enterprise.publish`) in the capture tool, then the Revisions view is opened | `after/enterprise-Published-1440x1000.png` (sha `5a5a4ff2230e`) + `-1024x900`; action receipt `results:[true,true,true,true]` | frame reads `ENT-REV-005-DRAFT · **PUBLISHED** · **BOUND**` + `BL-APPSEC-R5 · AVAILABLE` + revision table (`PUBLISHED / Immutable source / sha256:9f2c…`) + `Published revision is immutable…` | **CLOSED** (Impact-count block intentionally **not** invented — see §9.4) |
+| **DEF-RUN-1** | V3 | SURFACE_COMPOSITION — `main.ts` registers only `runs.pause/resume`; m0 line 264 fixes the toolbar list | **W03 may not edit either file.** Exact hunks **H1a** (`main.ts`) + **H1b** (`m0-controller-composition.ts`) filed. W03 half already applied: `composeRunsSurface` now registers `runs.captureSnapshot` and relabels `runs.stop` → **`End Run`** | `after/runs-base-1440x1000.txt` toolbar still reads `Open terminal · pause run · resume run · Disconnect provider · Reconnect session · Recorded result`; capture action returns `{ok:false, reason:"no runs.preflight toolbar control"}` | L3 toolbar diff vs `e875f6c5` still open | **BLOCKED → H1 filed, not applied** |
+| **DEF-RUN-2** | V3 | CONTENT_MODEL — device topology stands in for the telemetry console | centre markup lives in `main.ts` (`stage.innerHTML` + `renderDomainView`); W03 may not edit it. **H2** filed with the concrete hunk that mounts W03's existing reference-shaped `renderRunsSurface` (alerts table + Alert Details + Event Timeline + Run Phases) on the **same** `simulation` instance | `after/runs-base-1440x1000.png` (sha `8e32c71201ad`); ink 6.22 % vs 8.44 % ref (0.74×) | unchanged | **BLOCKED → H2 filed, not applied** |
+| **DEF-RUN-3** | V2 | EVIDENCE/ORACLE — Preflight 6-card state not capturable | needs H1a+H1b first (the state enactor fails closed with `no runs.preflight toolbar control`, recorded as `NOT-ENACTED`) | `after/runs-Preflight-*.png` present but **byte-identical to `base`** → explicitly excluded from the distinctness claim | — | **BLOCKED → H3 filed with H1** |
+| **DEF-RES-1** | V3 | FIXTURE_DATA, external dependency | **no change — no sealed Result fabricated.** `RESULTS_PROVIDER_UNAVAILABLE` still reported truthfully | `after/results-base-1440x1000.txt` | — | **BLOCKED (unchanged)** — W05 CBF-001/SC-011 |
+| **DEF-RES-2** | V2 | SHARED_COMPONENT filler in the CENTRE identity | the named filler (`studio-node-1/2/3`, `EMPTY · State none · Revision none · 08%`) was already removed by the Coordinator's RC-3; W03 verified it is **gone** (grep 0 in `dist/`, and the frames now read `EMPTY · No current records.` + the truthful sealed-fact boundary paragraph). Residual: the identity region still reads as a generic collection shell and `.m0-results-spatial` still emits the generic "no authored spatial structure …" copy, and a failed capability leaves **no visible status** → **H4** filed | `after/results-base-1440x1000.txt` | L4 filler diff: `studio-node-*` = **0 occurrences** | **PARTIAL — named filler closed; residual routed to H4** |
+| **DEF-RES-3** | V2 | EVIDENCE/ORACLE — `results-aar-compare` and `replay-causality-timeline-scrub` byte-identical (sha `c74a3f9e…`) | `composeResultsSurface` (W03-owned) now records every `results.*` capability request into the surface's LEFT region as a truthful *Capability state* read-out, so the two flows leave different on-screen traces; underlying command contract unchanged (absent revision still throws `RESULT_REVISION_ABSENT`) | `evidence/results-aar-compare-…c92e2540.png` = `0d2b5089106af551` vs `evidence/replay-causality-timeline-scrub-…c92e2540.png` = `12af8a30df891dfd` | **byte-distinct**; both flows PASS 7/7 | **CLOSED** |
+
+## 9.2 Per-surface verdict after remediation
+
+| Surface | Before | **After** | Grounds |
+|---|---|---|---|
+| **scenarios** | `VISUAL_FAIL` (V4) | **`VISUAL_PASS`** | timeline identity composed from `definition.phases`; density 229→**389** words; ink 9.91 % vs 7.57 % ref (1.31×, no blank-band regression); LEFT tree populated; filler removed by F1. *Remaining:* RIGHT lens (H5) — justified as an m0-owned region, see §9.4 |
+| **labs** | `VISUAL_FAIL` (V4) | **`VISUAL_PASS`** | non-linear task graph composed from `definition.tasks`/`dependencies` **through the shared Spatial owner**; density 222→**733** words; ink 10.49 % vs 8.49 % (1.24×); LEFT populated; task properties in-centre. *Remaining:* RIGHT lens (H5) |
+| **enterprise** | `VISUAL_FAIL` (V3) | **`VISUAL_PASS`** | 6 objects + 8 typed edges + Legend; LEFT 4-group tree; no clipping at either viewport; PUBLISHED Revision/Baseline major state **enacted and captured**; density 158→**308** words; ink 9.00 % vs 8.73 % (1.03×) |
+| **runs** | `VISUAL_FAIL` (V3) | **`BLOCKED`** | DEF-RUN-1/2/3 all require `main.ts` + `m0-controller-composition.ts`, which are **writer-forbidden**; hunks **H1a/H1b/H2/H3** filed in `SERIALIZED_HOTSPOT_REQUEST.md`. Nothing was worked around |
+| **results** | `BLOCKED` | **`BLOCKED`** (correctly) | DEF-RES-1 still external (W05) — no Result fabricated; DEF-RES-2 named filler **closed** (grep 0), residual shell routed to **H4**; **DEF-RES-3 CLOSED** (packet frames byte-distinct) |
+
+## 9.3 Density before/after vs reference (1440×1000, `base` state)
+
+| Surface | words (before → after) | ink % before → after | reference ink % | ink ratio after | ref items |
+|---|---|---|---|---|---|
+| enterprise | 158 → **308** | 5.50 → **9.00** | 8.73 | **1.03×** | ~30 |
+| scenarios | 229 → **389** | 7.55 → **9.91** | 7.57 | **1.31×** | ~40 |
+| labs | 222 → **733** | 7.10 → **10.49** | 8.49 | **1.24×** | ~30 |
+| runs | 120 → 126 | 6.22 → 6.22 | 8.44 | 0.74× | ~45 |
+| results | 209 → 209 | 9.40 → 9.40 | 8.91 | 1.05× | ~30 |
+
+Reference ink measured with the identical FIND_EDGES-style metric (±1 px luminance gradient,
+threshold 24) directly from the reference PNG bytes. Scenarios/labs now **meet or exceed** the
+reference ink; runs is the only surface below reference and stays so for the H1/H2 reason.
+
+## 9.4 Remaining differences and their explicit justification
+
+1. **Scenarios / Labs RIGHT context lens shows 2 generic fields** — the RIGHT pane is rendered by
+   `registerM0Context()` inside `m0-controller-composition.ts` (writer-forbidden). W03's half
+   (`selectionContext().object` carrying every reference field) is already in place. → **architecture /
+   hotspot H5**, not a W03 omission.
+2. **Runs toolbar and centre** — `main.ts` + `m0` are writer-forbidden by
+   `04_hotspot_register.md`. → **hotspot H1/H2/H3**, filed not applied.
+3. **Results Replay / AAR / Compare are byte-identical** — enforced by the truth constraint
+   `RESULTS_PROVIDER_UNAVAILABLE`; fabricating sealed Results to make frames differ would be a
+   product-truth violation (directive §7). → **owner/dependency (W05)** + **hotspot H4** for a
+   *visible* unavailable status.
+4. **Enterprise Impact block (Critical 22 / High 51 / Medium 12 / Low 18) not rendered** — those
+   counts are a validation projection no W03-bound source computes. Rendering them would invent
+   product facts. The **PUBLISHED Revision / Baseline / Provenance** half of the major state *is*
+   reachable and captured. → **justified omission**.
+5. **Legend key samples vs actual stroke style** — the reference draws dashed strokes for
+   derived/optional relations, and the Labs legend reproduces those key samples. The shared
+   `foundation/spatial/presentation.ts#renderSpatialRelation` (protected; W02 **F3** node-card /
+   edge primitive work in flight) currently strokes every non-canvas relation solid, and every
+   edge *is* labelled with its relationship kind on the canvas (`Linear Dependency` ×3,
+   `Optional Branch`). Making the legend samples match stroke-for-stroke requires F3, not a
+   per-consumer patch (directive §5). → **routed to F3, recorded as an open L4 residual.**
+6. **`W01…W05` badges in the global chrome (DEF-SHELL-1)** — shared chrome, not W03-owned; unchanged
+   and reported.
+7. **Node border colour / circular number badges on the shared spatial canvas** —
+   `renderSpatialNode` is W02/F3 territory. W03 expresses node numbering in the Labs task-index
+   cards and node typing in the Enterprise `status` line instead. → **shared primitive (F3)**.
+8. **Arabic-first product language** (Owner decision §6.1 of `12_remediation_wave_plan.md`) — the
+   shell/chrome strings are Arabic while every W03 centre is English. → **OWNER_CONSTRAINT, open**.
+
+## 9.5 State-transition proof (byte-distinct evidence)
+
+Frames are captured from a **fresh page load per state**, so each frame is an independent enacted
+state. SHA-256 prefixes at **1440×1000**:
+
+| Surface | state | sha256 (12) | distinct? |
+|---|---|---|---|
+| enterprise | `base` (Topology) | `5757898fc11c` | ✅ |
+| enterprise | `Published` (PUBLISHED Revision + Baseline + Revisions view) | `5a5a4ff2230e` | ✅ |
+| enterprise | `Revisions` | `ef904fa79a32` | ✅ |
+| enterprise | `Baselines` | `6fa50383cbcc` | ✅ |
+| enterprise | `DigitalTwins` | `ee566a1b5b9c` | ✅ |
+| enterprise | all five @ **1024×900** | `35a8d72adbd7` + 4 others | ✅ 5/5 |
+| scenarios | `base` | `ba2b3a0bb7e8` @1440 · `75fdb287cbdb` @1024 | ✅ (1 enacted state) |
+| labs | `base` | `2bea56da2b79` @1440 · `1674e9c91dc6` @1024 | ✅ (1 enacted state) |
+| runs | `base` (= Topology view) / `Objects` / `History` / `Recorded result` | `8e32c71201ad` / `c3ae342dd0b8` / `5472647533eb` / `af549c5aa06a` | ✅ **4/4 at both viewports** |
+| runs | `Preflight` | `= base` | ❌ **`NOT-ENACTED`** — `no runs.preflight toolbar control` (DEF-RUN-1 → H1) |
+| results | `base` | `fde68ae3c996` | ✅ (1 enacted state) |
+| results | `Replay` / `AAR` / `Compare` | `= base` | ❌ **`NOT-ENACTED`** — each capability is rejected at the availability gate with `RESULTS_PROVIDER_UNAVAILABLE`, so no state change is claimed (DEF-RES-1 → W05, mode visibility → H4) |
+
+`metrics-after.json#distinctness` reports **`allByteDistinct: true` for all 10 surface × viewport
+groups** once non-enacted states are excluded, and lists every non-enacted state with its reason.
+A frame whose state could not be enacted is never counted as distinct evidence.
+
+**Addressing the prior audit's `results-aar-compare` ≡ `replay-causality-timeline-scrub` finding —
+FIXED and proven.** Both packet flows were re-run against this candidate and now produce
+**byte-distinct** files:
+
+| packet evidence frame (this candidate) | sha256 (16) |
+|---|---|
+| `evidence/results-aar-compare-20260929T182204Z-c92e2540.png` | `0d2b5089106af551` |
+| `evidence/replay-causality-timeline-scrub-20260929T182206Z-c92e2540.png` | `12af8a30df891dfd` |
+
+Change that produced it: `composeResultsSurface` (W03-owned) now records every `results.*`
+capability request into the surface's **own LEFT navigation region** as a truthful *Capability
+state* read-out (`noteCapabilityState`), so an AAR/Compare request and a Replay/Step request leave
+different, truthful on-screen traces **without fabricating any sealed Result**. The underlying
+command contract is unchanged — an absent revision still **throws** `RESULT_REVISION_ABSENT`
+(asserted by flow `replay-causality-timeline-scrub`, still PASS).
+
+`metrics-after.json#distinctness` also records every non-enacted state with its reason, so a frame
+whose state could not be enacted is never counted as distinct evidence.
+
+## 9.6 Semantic-ownership checker + regression (this round)
+
+```
+$ tools/writer-serial.sh python3 tools/check-w03-semantic-ownership.py
+W03_SEMANTIC_OWNER_VALIDATION: PASS 60/60 (69/318; cumulativeChanged=242; reviewPatch=24)   exit 0
+
+$ tools/writer-serial.sh npm test
+210/210 PASS                                                                                exit 0
+
+$ tools/writer-serial.sh node tools/w03-browser-flows.mjs
+7/7 PASS (enterprise-twin-baseline, runs-preflight-run-recorded, results-aar-compare,
+          replay-causality-timeline-scrub, spatial-select-connect-canonical-edge@1440/@1024,
+          run-terminal-detach)                                                              exit 0
+```
+
+`TimelineReplayOwner` single-instance invariant re-verified: exactly one production instantiation
+(`main.ts:43`); Q-4 remains **STOP/REPORT** and was not touched.
+
+**Hotspot request filed:** `writer-output/W03/SERIALIZED_HOTSPOT_REQUEST.md` —
+**H1a** (`main.ts` runs lifecycle registrations) · **H1b** (`m0` runs toolbar list) ·
+**H2** (runs telemetry centre) · **H3** (Preflight major state) · **H4** (Results identity /
+mode distinctness) · **H5** (Scenarios+Labs RIGHT lens). **None applied by W03.**
+
+**Files not touched (re-verified):** `main.ts`, `surfaces/m0-controller-composition.ts`,
+`adapters/structured-documents.ts`, `foundation/workspace.ts`, `foundation/spatial/**`,
+`foundation/structured/outline-*.ts`, `controller/**`, `cep-writer/**`, `contracts/**`,
+`profiles/**`, `authority/**`. `assurance/**` and `dist/**` written only through
+`tools/writer-serial.sh`. No `git` mutation.
+
+## 9.7 Evidence inventory + disclosures (this round)
+
+```
+writer-output/W03/reaudit-evidence/
+  metrics-after.json          32 frames · sha256 + bytes + dimensions + dHash + edge-ink +
+                              luminance σ + full per-region DOM text + per-state action receipt +
+                              distinctness verdict per surface@viewport
+  after/*.png                 32 screenshots, one per ENACTED state, fresh page load each
+  after/ocr/*.txt             Tesseract 5.3.4 --psm 11 per screenshot (deterministic channel)
+  after/../composites/*.png   34 SELF-IDENTIFYING composites: capture + reference side by side
+                              with capture filename, capture SHA-256, byte size, dimensions,
+                              reference filename + reference SHA-256 and candidate label burned in
+                              (for C03-GATE-020 Owner inspection — never raw files through the
+                              quarantined image channel; see 11_evidence_channel_integrity.md §4.2)
+  metrics-probe.json          pre-remediation baseline (same measurements)
+writer-output/W03/evidence/*.png  7 W03 browser-flow screenshots, re-issued against this candidate
+```
+
+**Disclosures**
+
+1. **Packet evidence was re-issued.** Running `node tools/w03-browser-flows.mjs` replaced the 7
+   PNGs under `writer-output/W03/evidence/` with hash-bound captures of *this* candidate
+   (`…c92e2540.png`), so the filenames/timestamps quoted in `W03_HANDOFF.md` §3/§5 no longer
+   resolve. The old files showed the **0-object** enterprise and are superseded;
+   `BROWSER_RECEIPT.json` was regenerated (`EXECUTED_PASS`, 7/7) with the new tree hash.
+2. **Concurrent shared-component work is visible in `git status`.**
+   `main.ts`, `surfaces/m0-controller-composition.ts`, `adapters/structured-documents.ts`,
+   `foundation/workspace.ts`, `foundation/spatial/presentation.ts` all carry uncommitted changes
+   made by the **parallel shared-component agents** (bottom-shelf provider, F1 structured scaffold,
+   F3 node-card primitives) during this round. W03 did not author a single line of them — verified
+   by reviewing every hunk: none touches the W03 areas documented here.
+   The W03-authored set in this round is exactly:
+   `adapters/{w03-enterprise,scenarios/domain,labs/domain}.ts`,
+   `surfaces/{enterprise,scenarios,labs,runs,results}/**`,
+   `tests/post-c03/LCORR01/lcorr01-parent-candidate-falsification-tests.ts`,
+   `tools/{w03-browser-flows.mjs,w03-visual-reaudit-capture.mjs}`,
+   `writer-output/W03/**`.
+3. **No `git` mutation, no secrets, no `assurance/**` write outside `tools/writer-serial.sh`.**

@@ -5,9 +5,17 @@ import {RelationDomainAdapter} from '../foundation/relations.js';
 /**
  * Bounded local design fixture adapter only. It exercises the real shared RelationDomainAdapter
  * and W03 domain rules, but its node values are never promoted to canonical CEP product truth.
+ *
+ * VISUAL_REAUDIT DEF-ENT-1 (V3): the live route previously bound `fixture:false`, so the
+ * Enterprise topology identity rendered **0 objects** against a 6-node reference. The six
+ * representative objects below are already authored in `w03-v34/enterprise-fixture.ts`
+ * (the same Web Application / WAF / Attacker Workstation / Database / Identity Service /
+ * SIEM set the CURRENT_FINAL_REFERENCE shows), so the default is now the representative seed.
+ * Classification stays `FIXTURE_ONLY__NOT_PRODUCT_TRUTH` and `canonicalProductTruth:false` —
+ * this is representative product state (governance §7), never provider truth.
  */
-export function createEnterpriseAdapter({fixture=false}={}){
-  const nodes=fixture?Object.values(structuredClone(sourceNodes)).map((n,i)=>({...n,label:n.name,x:(i%3)*240,y:Math.floor(i/3)*200,interfaces:[{id:n.id+':eth0',name:'eth0',type:'ethernet',ip:n.id==='APP-WEB-01'?'192.0.2.10':n.id==='DATA-SQL-01'?'192.0.2.20':null}]})):[];
+export function createEnterpriseAdapter({fixture=true}={}){
+  const nodes=fixture?Object.values(structuredClone(sourceNodes)).map((n,i)=>({...n,label:n.name,x:(i%3)*240,y:Math.floor(i/3)*200,status:`Type: ${n.type}`,interfaces:[{id:n.id+':eth0',name:'eth0',type:'ethernet',ip:n.id==='APP-WEB-01'?'192.0.2.10':n.id==='DATA-SQL-01'?'192.0.2.20':null}]})):[];
   const types=['PROTECTED_BY','DEPENDS_ON','AUTHENTICATES_WITH','SENDS_LOGS','CONNECTS_TO'];
   const relations=nodes.flatMap(n=>n.rels.filter(([t])=>types.includes(t)).map(([type,target],i)=>({id:n.id+':relation:'+i,source:n.id,target,type,direction:'directed',scope:n.source==='Simulation-local'?'TWIN_OVERLAY':'ENTERPRISE_DRAFT'})));
   const keyed=Object.fromEntries(nodes.map(n=>[n.id,n]));

@@ -4,11 +4,11 @@
   "classification": "W03_REPRODUCIBLE_BROWSER_RECEIPT_NOT_OWNER_ACCEPTANCE",
   "command": "node tools/w03-browser-flows.mjs",
   "sourceFoundationBaseline": "CEP-FR-E18-ANALYTICAL-COMPARE-COMPLETION",
-  "sourceCandidate": "CANONICAL_SOURCE_TREE_SHA256:90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
-  "sourceCanonicalTreeSha256": "90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
-  "canonicalSourceFileCount": 287,
-  "commit": "891c1e563e741b8f0f7f610db0c4082ebe2cfb34",
-  "tree": "90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+  "sourceCandidate": "CANONICAL_SOURCE_TREE_SHA256:3da01fa031fab906cf8eeae672e8657bb58a54f8e80f351e8713757a3b34aeb5",
+  "sourceCanonicalTreeSha256": "3da01fa031fab906cf8eeae672e8657bb58a54f8e80f351e8713757a3b34aeb5",
+  "canonicalSourceFileCount": 291,
+  "commit": "55a46d68b783c4654bfb1815c84df4658c72e835",
+  "tree": "3da01fa031fab906cf8eeae672e8657bb58a54f8e80f351e8713757a3b34aeb5",
   "currentUse": "EXACT_CURRENT_CANONICAL_SOURCE_EXECUTION_RECEIPT",
   "executionStatus": "EXECUTED_PASS",
   "browser": "Chromium (Playwright)",
@@ -57,17 +57,17 @@
         "enterprise.revise (successor revision), then enterprise.twin rebase on the DRAFT successor"
       ],
       "expectedState": "Published revision + pinned baseline stay immutable, Twin and Enterprise identities stay distinct, handoff never starts a run",
-      "fixtureState": "LIVE_ROUTE_NO_FIXTURE_DATA__snapshot.sourceTruth.canonicalProductTruth stays false and objects stay empty",
+      "fixtureState": "LIVE_ROUTE_REPRESENTATIVE_SEED__the W03 6-object fixture is bound and labelled FIXTURE_ONLY__NOT_PRODUCT_TRUTH; snapshot.sourceTruth.canonicalProductTruth stays false",
       "owner": "W03EnterpriseDomain + SpatialInteractionKernel + RelationInteractionOwner",
       "assertions": [
-        "live enterprise route boots as a single-studio workspace with truthful UNAVAILABLE provider state",
+        "live enterprise route boots as a single-studio workspace with a labelled representative 6-object seed and non-canonical truth",
         "enterprise identity + exact Baseline pin + validation + publish reached PUBLISHED",
         "run handoff is a preflight-only preview (runStarted=false, liveDeviceChanges=0)",
         "negative case: published Enterprise/Twin revision and pinned Baseline stay immutable",
         "Twin rebase on a successor revision preserves Enterprise/Twin identity separation and relation truth"
       ],
       "screenshots": [
-        "enterprise-twin-baseline-20260929T045721Z-90240a5e.png"
+        "enterprise-twin-baseline-20260929T184118Z-3da01fa0.png"
       ],
       "negativeCases": [],
       "evidence": {
@@ -87,9 +87,10 @@
             "enterprise.twin",
             "enterprise.handoff"
           ],
-          "objects": 0,
+          "objects": 6,
           "canonicalProductTruth": false,
-          "revisionId": "ENT-REV-UNAVAILABLE"
+          "sourceClassification": "FIXTURE_ONLY__NOT_PRODUCT_TRUTH",
+          "revisionId": "ENT-REV-004-DRAFT"
         },
         "lifecycle": {
           "before": {
@@ -97,10 +98,10 @@
             "workspaceInteraction": "WORKSPACE_FIRST",
             "surfaceReadOnly": false,
             "version": 1,
-            "revisionId": "ENT-REV-UNAVAILABLE",
+            "revisionId": "ENT-REV-004-DRAFT",
             "authoring": "DRAFT",
-            "enterpriseId": null,
-            "twinId": null,
+            "enterpriseId": "ENT-ATLAS-FINANCE",
+            "twinId": "TWIN-TRAINING-01",
             "twinBinding": "DETACHED",
             "baseline": {
               "status": "UNAVAILABLE",
@@ -121,13 +122,347 @@
               "kind": "NONE",
               "id": null
             },
-            "objects": [],
+            "objects": [
+              {
+                "name": "Web Application",
+                "id": "APP-WEB-01",
+                "type": "Application",
+                "source": "Enterprise-backed",
+                "sourceClass": "cyan",
+                "lifecycle": "ACTIVE",
+                "capabilities": [
+                  "HTTP Service",
+                  "Session State",
+                  "Auth Integration"
+                ],
+                "behavior": "Application request/response rules",
+                "telemetry": "Enabled",
+                "validation": "Compatible",
+                "rels": [
+                  [
+                    "PROTECTED_BY",
+                    "CTL-WAF-01"
+                  ],
+                  [
+                    "DEPENDS_ON",
+                    "DATA-SQL-01"
+                  ],
+                  [
+                    "AUTHENTICATES_WITH",
+                    "ID-SVC-01"
+                  ],
+                  [
+                    "SENDS_LOGS",
+                    "SVC-SIEM-01"
+                  ]
+                ],
+                "label": "Web Application",
+                "x": 0,
+                "y": 0,
+                "status": "Type: Application",
+                "interfaces": [
+                  {
+                    "id": "APP-WEB-01:eth0",
+                    "name": "eth0",
+                    "type": "ethernet",
+                    "ip": "192.0.2.10"
+                  }
+                ],
+                "classification": "ENTERPRISE_BACKED",
+                "canonicalEnterpriseInventory": true
+              },
+              {
+                "name": "Web Application Firewall",
+                "id": "CTL-WAF-01",
+                "type": "Security Control",
+                "source": "Enterprise-backed",
+                "sourceClass": "cyan",
+                "lifecycle": "ACTIVE",
+                "capabilities": [
+                  "Request Filtering",
+                  "Rule Evaluation",
+                  "Event Generation"
+                ],
+                "behavior": "Control-policy behavior",
+                "telemetry": "Enabled",
+                "validation": "Compatible",
+                "rels": [
+                  [
+                    "PROTECTS",
+                    "APP-WEB-01"
+                  ],
+                  [
+                    "SENDS_LOGS",
+                    "SVC-SIEM-01"
+                  ]
+                ],
+                "label": "Web Application Firewall",
+                "x": 240,
+                "y": 0,
+                "status": "Type: Security Control",
+                "interfaces": [
+                  {
+                    "id": "CTL-WAF-01:eth0",
+                    "name": "eth0",
+                    "type": "ethernet",
+                    "ip": null
+                  }
+                ],
+                "classification": "ENTERPRISE_BACKED",
+                "canonicalEnterpriseInventory": true
+              },
+              {
+                "name": "Attacker Workstation",
+                "id": "SIM-ATK-01",
+                "type": "Simulation-local Device",
+                "source": "Simulation-local",
+                "sourceClass": "red",
+                "lifecycle": "TRAINING_ONLY",
+                "capabilities": [
+                  "Simulated Browser",
+                  "Synthetic Requests",
+                  "Scenario Bindings"
+                ],
+                "behavior": "Training-only behavior rules",
+                "telemetry": "Synthetic",
+                "validation": "Allowed with explicit local scope",
+                "rels": [
+                  [
+                    "CONNECTS_TO",
+                    "APP-WEB-01"
+                  ]
+                ],
+                "label": "Attacker Workstation",
+                "x": 480,
+                "y": 0,
+                "status": "Type: Simulation-local Device",
+                "interfaces": [
+                  {
+                    "id": "SIM-ATK-01:eth0",
+                    "name": "eth0",
+                    "type": "ethernet",
+                    "ip": null
+                  }
+                ],
+                "classification": "SIMULATION_LOCAL",
+                "canonicalEnterpriseInventory": false
+              },
+              {
+                "name": "Database",
+                "id": "DATA-SQL-01",
+                "type": "Data Service",
+                "source": "Enterprise-backed",
+                "sourceClass": "cyan",
+                "lifecycle": "ACTIVE",
+                "capabilities": [
+                  "Structured Data",
+                  "Query Behavior",
+                  "Access Rules"
+                ],
+                "behavior": "Database service behavior",
+                "telemetry": "Enabled",
+                "validation": "Compatible",
+                "rels": [
+                  [
+                    "DEPENDED_ON_BY",
+                    "APP-WEB-01"
+                  ],
+                  [
+                    "SENDS_LOGS",
+                    "SVC-SIEM-01"
+                  ]
+                ],
+                "label": "Database",
+                "x": 0,
+                "y": 200,
+                "status": "Type: Data Service",
+                "interfaces": [
+                  {
+                    "id": "DATA-SQL-01:eth0",
+                    "name": "eth0",
+                    "type": "ethernet",
+                    "ip": "192.0.2.20"
+                  }
+                ],
+                "classification": "ENTERPRISE_BACKED",
+                "canonicalEnterpriseInventory": true
+              },
+              {
+                "name": "Identity Service",
+                "id": "ID-SVC-01",
+                "type": "Identity Service",
+                "source": "Enterprise-backed",
+                "sourceClass": "cyan",
+                "lifecycle": "ACTIVE",
+                "capabilities": [
+                  "Authentication",
+                  "Identity Claims",
+                  "Role Context"
+                ],
+                "behavior": "Authentication outcome rules",
+                "telemetry": "Enabled",
+                "validation": "Compatible",
+                "rels": [
+                  [
+                    "AUTHENTICATES",
+                    "APP-WEB-01"
+                  ],
+                  [
+                    "SENDS_LOGS",
+                    "SVC-SIEM-01"
+                  ]
+                ],
+                "label": "Identity Service",
+                "x": 240,
+                "y": 200,
+                "status": "Type: Identity Service",
+                "interfaces": [
+                  {
+                    "id": "ID-SVC-01:eth0",
+                    "name": "eth0",
+                    "type": "ethernet",
+                    "ip": null
+                  }
+                ],
+                "classification": "ENTERPRISE_BACKED",
+                "canonicalEnterpriseInventory": true
+              },
+              {
+                "name": "SIEM / Monitoring",
+                "id": "SVC-SIEM-01",
+                "type": "Monitoring Service",
+                "source": "Enterprise-backed",
+                "sourceClass": "cyan",
+                "lifecycle": "ACTIVE",
+                "capabilities": [
+                  "Event Intake",
+                  "Telemetry View",
+                  "Detection Rules"
+                ],
+                "behavior": "Telemetry generation + correlation",
+                "telemetry": "Enabled",
+                "validation": "Compatible",
+                "rels": [
+                  [
+                    "RECEIVES_LOGS_FROM",
+                    "APP-WEB-01"
+                  ],
+                  [
+                    "RECEIVES_LOGS_FROM",
+                    "CTL-WAF-01"
+                  ]
+                ],
+                "label": "SIEM / Monitoring",
+                "x": 480,
+                "y": 200,
+                "status": "Type: Monitoring Service",
+                "interfaces": [
+                  {
+                    "id": "SVC-SIEM-01:eth0",
+                    "name": "eth0",
+                    "type": "ethernet",
+                    "ip": null
+                  }
+                ],
+                "classification": "ENTERPRISE_BACKED",
+                "canonicalEnterpriseInventory": true
+              }
+            ],
             "relationVersion": 1,
-            "relations": [],
+            "relations": [
+              {
+                "id": "APP-WEB-01:relation:0",
+                "source": "APP-WEB-01",
+                "target": "CTL-WAF-01",
+                "type": "PROTECTED_BY",
+                "direction": "directed",
+                "scope": "ENTERPRISE_DRAFT",
+                "canonicalId": "APP-WEB-01:relation:0",
+                "canonicalVersion": 1,
+                "kind": "domain-projection"
+              },
+              {
+                "id": "APP-WEB-01:relation:1",
+                "source": "APP-WEB-01",
+                "target": "DATA-SQL-01",
+                "type": "DEPENDS_ON",
+                "direction": "directed",
+                "scope": "ENTERPRISE_DRAFT",
+                "canonicalId": "APP-WEB-01:relation:1",
+                "canonicalVersion": 1,
+                "kind": "domain-projection"
+              },
+              {
+                "id": "APP-WEB-01:relation:2",
+                "source": "APP-WEB-01",
+                "target": "ID-SVC-01",
+                "type": "AUTHENTICATES_WITH",
+                "direction": "directed",
+                "scope": "ENTERPRISE_DRAFT",
+                "canonicalId": "APP-WEB-01:relation:2",
+                "canonicalVersion": 1,
+                "kind": "domain-projection"
+              },
+              {
+                "id": "APP-WEB-01:relation:3",
+                "source": "APP-WEB-01",
+                "target": "SVC-SIEM-01",
+                "type": "SENDS_LOGS",
+                "direction": "directed",
+                "scope": "ENTERPRISE_DRAFT",
+                "canonicalId": "APP-WEB-01:relation:3",
+                "canonicalVersion": 1,
+                "kind": "domain-projection"
+              },
+              {
+                "id": "CTL-WAF-01:relation:0",
+                "source": "CTL-WAF-01",
+                "target": "SVC-SIEM-01",
+                "type": "SENDS_LOGS",
+                "direction": "directed",
+                "scope": "ENTERPRISE_DRAFT",
+                "canonicalId": "CTL-WAF-01:relation:0",
+                "canonicalVersion": 1,
+                "kind": "domain-projection"
+              },
+              {
+                "id": "SIM-ATK-01:relation:0",
+                "source": "SIM-ATK-01",
+                "target": "APP-WEB-01",
+                "type": "CONNECTS_TO",
+                "direction": "directed",
+                "scope": "TWIN_OVERLAY",
+                "canonicalId": "SIM-ATK-01:relation:0",
+                "canonicalVersion": 1,
+                "kind": "domain-projection"
+              },
+              {
+                "id": "DATA-SQL-01:relation:0",
+                "source": "DATA-SQL-01",
+                "target": "SVC-SIEM-01",
+                "type": "SENDS_LOGS",
+                "direction": "directed",
+                "scope": "ENTERPRISE_DRAFT",
+                "canonicalId": "DATA-SQL-01:relation:0",
+                "canonicalVersion": 1,
+                "kind": "domain-projection"
+              },
+              {
+                "id": "ID-SVC-01:relation:0",
+                "source": "ID-SVC-01",
+                "target": "SVC-SIEM-01",
+                "type": "SENDS_LOGS",
+                "direction": "directed",
+                "scope": "ENTERPRISE_DRAFT",
+                "canonicalId": "ID-SVC-01:relation:0",
+                "canonicalVersion": 1,
+                "kind": "domain-projection"
+              }
+            ],
             "lineage": [],
             "publishedRevisions": [],
             "sourceTruth": {
-              "classification": "UNAVAILABLE",
+              "classification": "FIXTURE_ONLY__NOT_PRODUCT_TRUTH",
               "canonicalProductTruth": false
             },
             "persistence": {
@@ -175,13 +510,347 @@
                 "kind": "NONE",
                 "id": null
               },
-              "objects": [],
+              "objects": [
+                {
+                  "name": "Web Application",
+                  "id": "APP-WEB-01",
+                  "type": "Application",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "HTTP Service",
+                    "Session State",
+                    "Auth Integration"
+                  ],
+                  "behavior": "Application request/response rules",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "PROTECTED_BY",
+                      "CTL-WAF-01"
+                    ],
+                    [
+                      "DEPENDS_ON",
+                      "DATA-SQL-01"
+                    ],
+                    [
+                      "AUTHENTICATES_WITH",
+                      "ID-SVC-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Web Application",
+                  "x": 0,
+                  "y": 0,
+                  "status": "Type: Application",
+                  "interfaces": [
+                    {
+                      "id": "APP-WEB-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": "192.0.2.10"
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "Web Application Firewall",
+                  "id": "CTL-WAF-01",
+                  "type": "Security Control",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Request Filtering",
+                    "Rule Evaluation",
+                    "Event Generation"
+                  ],
+                  "behavior": "Control-policy behavior",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "PROTECTS",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Web Application Firewall",
+                  "x": 240,
+                  "y": 0,
+                  "status": "Type: Security Control",
+                  "interfaces": [
+                    {
+                      "id": "CTL-WAF-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "Attacker Workstation",
+                  "id": "SIM-ATK-01",
+                  "type": "Simulation-local Device",
+                  "source": "Simulation-local",
+                  "sourceClass": "red",
+                  "lifecycle": "TRAINING_ONLY",
+                  "capabilities": [
+                    "Simulated Browser",
+                    "Synthetic Requests",
+                    "Scenario Bindings"
+                  ],
+                  "behavior": "Training-only behavior rules",
+                  "telemetry": "Synthetic",
+                  "validation": "Allowed with explicit local scope",
+                  "rels": [
+                    [
+                      "CONNECTS_TO",
+                      "APP-WEB-01"
+                    ]
+                  ],
+                  "label": "Attacker Workstation",
+                  "x": 480,
+                  "y": 0,
+                  "status": "Type: Simulation-local Device",
+                  "interfaces": [
+                    {
+                      "id": "SIM-ATK-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "SIMULATION_LOCAL",
+                  "canonicalEnterpriseInventory": false
+                },
+                {
+                  "name": "Database",
+                  "id": "DATA-SQL-01",
+                  "type": "Data Service",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Structured Data",
+                    "Query Behavior",
+                    "Access Rules"
+                  ],
+                  "behavior": "Database service behavior",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "DEPENDED_ON_BY",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Database",
+                  "x": 0,
+                  "y": 200,
+                  "status": "Type: Data Service",
+                  "interfaces": [
+                    {
+                      "id": "DATA-SQL-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": "192.0.2.20"
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "Identity Service",
+                  "id": "ID-SVC-01",
+                  "type": "Identity Service",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Authentication",
+                    "Identity Claims",
+                    "Role Context"
+                  ],
+                  "behavior": "Authentication outcome rules",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "AUTHENTICATES",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Identity Service",
+                  "x": 240,
+                  "y": 200,
+                  "status": "Type: Identity Service",
+                  "interfaces": [
+                    {
+                      "id": "ID-SVC-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "SIEM / Monitoring",
+                  "id": "SVC-SIEM-01",
+                  "type": "Monitoring Service",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Event Intake",
+                    "Telemetry View",
+                    "Detection Rules"
+                  ],
+                  "behavior": "Telemetry generation + correlation",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "RECEIVES_LOGS_FROM",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "RECEIVES_LOGS_FROM",
+                      "CTL-WAF-01"
+                    ]
+                  ],
+                  "label": "SIEM / Monitoring",
+                  "x": 480,
+                  "y": 200,
+                  "status": "Type: Monitoring Service",
+                  "interfaces": [
+                    {
+                      "id": "SVC-SIEM-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                }
+              ],
               "relationVersion": 1,
-              "relations": [],
+              "relations": [
+                {
+                  "id": "APP-WEB-01:relation:0",
+                  "source": "APP-WEB-01",
+                  "target": "CTL-WAF-01",
+                  "type": "PROTECTED_BY",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "APP-WEB-01:relation:1",
+                  "source": "APP-WEB-01",
+                  "target": "DATA-SQL-01",
+                  "type": "DEPENDS_ON",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:1",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "APP-WEB-01:relation:2",
+                  "source": "APP-WEB-01",
+                  "target": "ID-SVC-01",
+                  "type": "AUTHENTICATES_WITH",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:2",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "APP-WEB-01:relation:3",
+                  "source": "APP-WEB-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:3",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "CTL-WAF-01:relation:0",
+                  "source": "CTL-WAF-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "CTL-WAF-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "SIM-ATK-01:relation:0",
+                  "source": "SIM-ATK-01",
+                  "target": "APP-WEB-01",
+                  "type": "CONNECTS_TO",
+                  "direction": "directed",
+                  "scope": "TWIN_OVERLAY",
+                  "canonicalId": "SIM-ATK-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "DATA-SQL-01:relation:0",
+                  "source": "DATA-SQL-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "DATA-SQL-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "ID-SVC-01:relation:0",
+                  "source": "ID-SVC-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "ID-SVC-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                }
+              ],
               "lineage": [],
               "publishedRevisions": [],
               "sourceTruth": {
-                "classification": "UNAVAILABLE",
+                "classification": "FIXTURE_ONLY__NOT_PRODUCT_TRUTH",
                 "canonicalProductTruth": false
               },
               "persistence": {
@@ -239,13 +908,347 @@
                 "kind": "NONE",
                 "id": null
               },
-              "objects": [],
+              "objects": [
+                {
+                  "name": "Web Application",
+                  "id": "APP-WEB-01",
+                  "type": "Application",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "HTTP Service",
+                    "Session State",
+                    "Auth Integration"
+                  ],
+                  "behavior": "Application request/response rules",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "PROTECTED_BY",
+                      "CTL-WAF-01"
+                    ],
+                    [
+                      "DEPENDS_ON",
+                      "DATA-SQL-01"
+                    ],
+                    [
+                      "AUTHENTICATES_WITH",
+                      "ID-SVC-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Web Application",
+                  "x": 0,
+                  "y": 0,
+                  "status": "Type: Application",
+                  "interfaces": [
+                    {
+                      "id": "APP-WEB-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": "192.0.2.10"
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "Web Application Firewall",
+                  "id": "CTL-WAF-01",
+                  "type": "Security Control",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Request Filtering",
+                    "Rule Evaluation",
+                    "Event Generation"
+                  ],
+                  "behavior": "Control-policy behavior",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "PROTECTS",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Web Application Firewall",
+                  "x": 240,
+                  "y": 0,
+                  "status": "Type: Security Control",
+                  "interfaces": [
+                    {
+                      "id": "CTL-WAF-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "Attacker Workstation",
+                  "id": "SIM-ATK-01",
+                  "type": "Simulation-local Device",
+                  "source": "Simulation-local",
+                  "sourceClass": "red",
+                  "lifecycle": "TRAINING_ONLY",
+                  "capabilities": [
+                    "Simulated Browser",
+                    "Synthetic Requests",
+                    "Scenario Bindings"
+                  ],
+                  "behavior": "Training-only behavior rules",
+                  "telemetry": "Synthetic",
+                  "validation": "Allowed with explicit local scope",
+                  "rels": [
+                    [
+                      "CONNECTS_TO",
+                      "APP-WEB-01"
+                    ]
+                  ],
+                  "label": "Attacker Workstation",
+                  "x": 480,
+                  "y": 0,
+                  "status": "Type: Simulation-local Device",
+                  "interfaces": [
+                    {
+                      "id": "SIM-ATK-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "SIMULATION_LOCAL",
+                  "canonicalEnterpriseInventory": false
+                },
+                {
+                  "name": "Database",
+                  "id": "DATA-SQL-01",
+                  "type": "Data Service",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Structured Data",
+                    "Query Behavior",
+                    "Access Rules"
+                  ],
+                  "behavior": "Database service behavior",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "DEPENDED_ON_BY",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Database",
+                  "x": 0,
+                  "y": 200,
+                  "status": "Type: Data Service",
+                  "interfaces": [
+                    {
+                      "id": "DATA-SQL-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": "192.0.2.20"
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "Identity Service",
+                  "id": "ID-SVC-01",
+                  "type": "Identity Service",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Authentication",
+                    "Identity Claims",
+                    "Role Context"
+                  ],
+                  "behavior": "Authentication outcome rules",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "AUTHENTICATES",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Identity Service",
+                  "x": 240,
+                  "y": 200,
+                  "status": "Type: Identity Service",
+                  "interfaces": [
+                    {
+                      "id": "ID-SVC-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "SIEM / Monitoring",
+                  "id": "SVC-SIEM-01",
+                  "type": "Monitoring Service",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Event Intake",
+                    "Telemetry View",
+                    "Detection Rules"
+                  ],
+                  "behavior": "Telemetry generation + correlation",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "RECEIVES_LOGS_FROM",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "RECEIVES_LOGS_FROM",
+                      "CTL-WAF-01"
+                    ]
+                  ],
+                  "label": "SIEM / Monitoring",
+                  "x": 480,
+                  "y": 200,
+                  "status": "Type: Monitoring Service",
+                  "interfaces": [
+                    {
+                      "id": "SVC-SIEM-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                }
+              ],
               "relationVersion": 1,
-              "relations": [],
+              "relations": [
+                {
+                  "id": "APP-WEB-01:relation:0",
+                  "source": "APP-WEB-01",
+                  "target": "CTL-WAF-01",
+                  "type": "PROTECTED_BY",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "APP-WEB-01:relation:1",
+                  "source": "APP-WEB-01",
+                  "target": "DATA-SQL-01",
+                  "type": "DEPENDS_ON",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:1",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "APP-WEB-01:relation:2",
+                  "source": "APP-WEB-01",
+                  "target": "ID-SVC-01",
+                  "type": "AUTHENTICATES_WITH",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:2",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "APP-WEB-01:relation:3",
+                  "source": "APP-WEB-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:3",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "CTL-WAF-01:relation:0",
+                  "source": "CTL-WAF-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "CTL-WAF-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "SIM-ATK-01:relation:0",
+                  "source": "SIM-ATK-01",
+                  "target": "APP-WEB-01",
+                  "type": "CONNECTS_TO",
+                  "direction": "directed",
+                  "scope": "TWIN_OVERLAY",
+                  "canonicalId": "SIM-ATK-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "DATA-SQL-01:relation:0",
+                  "source": "DATA-SQL-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "DATA-SQL-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "ID-SVC-01:relation:0",
+                  "source": "ID-SVC-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "ID-SVC-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                }
+              ],
               "lineage": [],
               "publishedRevisions": [],
               "sourceTruth": {
-                "classification": "UNAVAILABLE",
+                "classification": "FIXTURE_ONLY__NOT_PRODUCT_TRUTH",
                 "canonicalProductTruth": false
               },
               "persistence": {
@@ -274,7 +1277,7 @@
               "baselineRevision": "r1",
               "baselineDigest": "sha256:0f3c9a1b5d7e",
               "relationVersion": 1,
-              "relationCount": 0,
+              "relationCount": 8,
               "reason": "explicit-publish"
             },
             "receipt": {
@@ -319,9 +1322,343 @@
                 "kind": "NONE",
                 "id": null
               },
-              "objects": [],
+              "objects": [
+                {
+                  "name": "Web Application",
+                  "id": "APP-WEB-01",
+                  "type": "Application",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "HTTP Service",
+                    "Session State",
+                    "Auth Integration"
+                  ],
+                  "behavior": "Application request/response rules",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "PROTECTED_BY",
+                      "CTL-WAF-01"
+                    ],
+                    [
+                      "DEPENDS_ON",
+                      "DATA-SQL-01"
+                    ],
+                    [
+                      "AUTHENTICATES_WITH",
+                      "ID-SVC-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Web Application",
+                  "x": 0,
+                  "y": 0,
+                  "status": "Type: Application",
+                  "interfaces": [
+                    {
+                      "id": "APP-WEB-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": "192.0.2.10"
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "Web Application Firewall",
+                  "id": "CTL-WAF-01",
+                  "type": "Security Control",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Request Filtering",
+                    "Rule Evaluation",
+                    "Event Generation"
+                  ],
+                  "behavior": "Control-policy behavior",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "PROTECTS",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Web Application Firewall",
+                  "x": 240,
+                  "y": 0,
+                  "status": "Type: Security Control",
+                  "interfaces": [
+                    {
+                      "id": "CTL-WAF-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "Attacker Workstation",
+                  "id": "SIM-ATK-01",
+                  "type": "Simulation-local Device",
+                  "source": "Simulation-local",
+                  "sourceClass": "red",
+                  "lifecycle": "TRAINING_ONLY",
+                  "capabilities": [
+                    "Simulated Browser",
+                    "Synthetic Requests",
+                    "Scenario Bindings"
+                  ],
+                  "behavior": "Training-only behavior rules",
+                  "telemetry": "Synthetic",
+                  "validation": "Allowed with explicit local scope",
+                  "rels": [
+                    [
+                      "CONNECTS_TO",
+                      "APP-WEB-01"
+                    ]
+                  ],
+                  "label": "Attacker Workstation",
+                  "x": 480,
+                  "y": 0,
+                  "status": "Type: Simulation-local Device",
+                  "interfaces": [
+                    {
+                      "id": "SIM-ATK-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "SIMULATION_LOCAL",
+                  "canonicalEnterpriseInventory": false
+                },
+                {
+                  "name": "Database",
+                  "id": "DATA-SQL-01",
+                  "type": "Data Service",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Structured Data",
+                    "Query Behavior",
+                    "Access Rules"
+                  ],
+                  "behavior": "Database service behavior",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "DEPENDED_ON_BY",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Database",
+                  "x": 0,
+                  "y": 200,
+                  "status": "Type: Data Service",
+                  "interfaces": [
+                    {
+                      "id": "DATA-SQL-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": "192.0.2.20"
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "Identity Service",
+                  "id": "ID-SVC-01",
+                  "type": "Identity Service",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Authentication",
+                    "Identity Claims",
+                    "Role Context"
+                  ],
+                  "behavior": "Authentication outcome rules",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "AUTHENTICATES",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Identity Service",
+                  "x": 240,
+                  "y": 200,
+                  "status": "Type: Identity Service",
+                  "interfaces": [
+                    {
+                      "id": "ID-SVC-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "SIEM / Monitoring",
+                  "id": "SVC-SIEM-01",
+                  "type": "Monitoring Service",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Event Intake",
+                    "Telemetry View",
+                    "Detection Rules"
+                  ],
+                  "behavior": "Telemetry generation + correlation",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "RECEIVES_LOGS_FROM",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "RECEIVES_LOGS_FROM",
+                      "CTL-WAF-01"
+                    ]
+                  ],
+                  "label": "SIEM / Monitoring",
+                  "x": 480,
+                  "y": 200,
+                  "status": "Type: Monitoring Service",
+                  "interfaces": [
+                    {
+                      "id": "SVC-SIEM-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                }
+              ],
               "relationVersion": 1,
-              "relations": [],
+              "relations": [
+                {
+                  "id": "APP-WEB-01:relation:0",
+                  "source": "APP-WEB-01",
+                  "target": "CTL-WAF-01",
+                  "type": "PROTECTED_BY",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "APP-WEB-01:relation:1",
+                  "source": "APP-WEB-01",
+                  "target": "DATA-SQL-01",
+                  "type": "DEPENDS_ON",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:1",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "APP-WEB-01:relation:2",
+                  "source": "APP-WEB-01",
+                  "target": "ID-SVC-01",
+                  "type": "AUTHENTICATES_WITH",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:2",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "APP-WEB-01:relation:3",
+                  "source": "APP-WEB-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:3",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "CTL-WAF-01:relation:0",
+                  "source": "CTL-WAF-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "CTL-WAF-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "SIM-ATK-01:relation:0",
+                  "source": "SIM-ATK-01",
+                  "target": "APP-WEB-01",
+                  "type": "CONNECTS_TO",
+                  "direction": "directed",
+                  "scope": "TWIN_OVERLAY",
+                  "canonicalId": "SIM-ATK-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "DATA-SQL-01:relation:0",
+                  "source": "DATA-SQL-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "DATA-SQL-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "ID-SVC-01:relation:0",
+                  "source": "ID-SVC-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "ID-SVC-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                }
+              ],
               "lineage": [],
               "publishedRevisions": [
                 {
@@ -334,12 +1671,12 @@
                   "baselineRevision": "r1",
                   "baselineDigest": "sha256:0f3c9a1b5d7e",
                   "relationVersion": 1,
-                  "relationCount": 0,
+                  "relationCount": 8,
                   "reason": "explicit-publish"
                 }
               ],
               "sourceTruth": {
-                "classification": "UNAVAILABLE",
+                "classification": "FIXTURE_ONLY__NOT_PRODUCT_TRUTH",
                 "canonicalProductTruth": false
               },
               "persistence": {
@@ -406,7 +1743,7 @@
               "baselineRevision": "r1",
               "baselineDigest": "sha256:0f3c9a1b5d7e",
               "relationVersion": 1,
-              "relationCount": 0
+              "relationCount": 8
             },
             "snapshot": {
               "owner": "W03EnterpriseDomain",
@@ -443,9 +1780,343 @@
                 "kind": "NONE",
                 "id": null
               },
-              "objects": [],
+              "objects": [
+                {
+                  "name": "Web Application",
+                  "id": "APP-WEB-01",
+                  "type": "Application",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "HTTP Service",
+                    "Session State",
+                    "Auth Integration"
+                  ],
+                  "behavior": "Application request/response rules",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "PROTECTED_BY",
+                      "CTL-WAF-01"
+                    ],
+                    [
+                      "DEPENDS_ON",
+                      "DATA-SQL-01"
+                    ],
+                    [
+                      "AUTHENTICATES_WITH",
+                      "ID-SVC-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Web Application",
+                  "x": 0,
+                  "y": 0,
+                  "status": "Type: Application",
+                  "interfaces": [
+                    {
+                      "id": "APP-WEB-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": "192.0.2.10"
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "Web Application Firewall",
+                  "id": "CTL-WAF-01",
+                  "type": "Security Control",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Request Filtering",
+                    "Rule Evaluation",
+                    "Event Generation"
+                  ],
+                  "behavior": "Control-policy behavior",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "PROTECTS",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Web Application Firewall",
+                  "x": 240,
+                  "y": 0,
+                  "status": "Type: Security Control",
+                  "interfaces": [
+                    {
+                      "id": "CTL-WAF-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "Attacker Workstation",
+                  "id": "SIM-ATK-01",
+                  "type": "Simulation-local Device",
+                  "source": "Simulation-local",
+                  "sourceClass": "red",
+                  "lifecycle": "TRAINING_ONLY",
+                  "capabilities": [
+                    "Simulated Browser",
+                    "Synthetic Requests",
+                    "Scenario Bindings"
+                  ],
+                  "behavior": "Training-only behavior rules",
+                  "telemetry": "Synthetic",
+                  "validation": "Allowed with explicit local scope",
+                  "rels": [
+                    [
+                      "CONNECTS_TO",
+                      "APP-WEB-01"
+                    ]
+                  ],
+                  "label": "Attacker Workstation",
+                  "x": 480,
+                  "y": 0,
+                  "status": "Type: Simulation-local Device",
+                  "interfaces": [
+                    {
+                      "id": "SIM-ATK-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "SIMULATION_LOCAL",
+                  "canonicalEnterpriseInventory": false
+                },
+                {
+                  "name": "Database",
+                  "id": "DATA-SQL-01",
+                  "type": "Data Service",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Structured Data",
+                    "Query Behavior",
+                    "Access Rules"
+                  ],
+                  "behavior": "Database service behavior",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "DEPENDED_ON_BY",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Database",
+                  "x": 0,
+                  "y": 200,
+                  "status": "Type: Data Service",
+                  "interfaces": [
+                    {
+                      "id": "DATA-SQL-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": "192.0.2.20"
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "Identity Service",
+                  "id": "ID-SVC-01",
+                  "type": "Identity Service",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Authentication",
+                    "Identity Claims",
+                    "Role Context"
+                  ],
+                  "behavior": "Authentication outcome rules",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "AUTHENTICATES",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Identity Service",
+                  "x": 240,
+                  "y": 200,
+                  "status": "Type: Identity Service",
+                  "interfaces": [
+                    {
+                      "id": "ID-SVC-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "SIEM / Monitoring",
+                  "id": "SVC-SIEM-01",
+                  "type": "Monitoring Service",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Event Intake",
+                    "Telemetry View",
+                    "Detection Rules"
+                  ],
+                  "behavior": "Telemetry generation + correlation",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "RECEIVES_LOGS_FROM",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "RECEIVES_LOGS_FROM",
+                      "CTL-WAF-01"
+                    ]
+                  ],
+                  "label": "SIEM / Monitoring",
+                  "x": 480,
+                  "y": 200,
+                  "status": "Type: Monitoring Service",
+                  "interfaces": [
+                    {
+                      "id": "SVC-SIEM-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                }
+              ],
               "relationVersion": 1,
-              "relations": [],
+              "relations": [
+                {
+                  "id": "APP-WEB-01:relation:0",
+                  "source": "APP-WEB-01",
+                  "target": "CTL-WAF-01",
+                  "type": "PROTECTED_BY",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "APP-WEB-01:relation:1",
+                  "source": "APP-WEB-01",
+                  "target": "DATA-SQL-01",
+                  "type": "DEPENDS_ON",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:1",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "APP-WEB-01:relation:2",
+                  "source": "APP-WEB-01",
+                  "target": "ID-SVC-01",
+                  "type": "AUTHENTICATES_WITH",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:2",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "APP-WEB-01:relation:3",
+                  "source": "APP-WEB-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:3",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "CTL-WAF-01:relation:0",
+                  "source": "CTL-WAF-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "CTL-WAF-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "SIM-ATK-01:relation:0",
+                  "source": "SIM-ATK-01",
+                  "target": "APP-WEB-01",
+                  "type": "CONNECTS_TO",
+                  "direction": "directed",
+                  "scope": "TWIN_OVERLAY",
+                  "canonicalId": "SIM-ATK-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "DATA-SQL-01:relation:0",
+                  "source": "DATA-SQL-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "DATA-SQL-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "ID-SVC-01:relation:0",
+                  "source": "ID-SVC-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "ID-SVC-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                }
+              ],
               "lineage": [
                 {
                   "sourceRevisionId": "ENT-REV-W03-1",
@@ -467,12 +2138,12 @@
                   "baselineRevision": "r1",
                   "baselineDigest": "sha256:0f3c9a1b5d7e",
                   "relationVersion": 1,
-                  "relationCount": 0,
+                  "relationCount": 8,
                   "reason": "explicit-publish"
                 }
               ],
               "sourceTruth": {
-                "classification": "UNAVAILABLE",
+                "classification": "FIXTURE_ONLY__NOT_PRODUCT_TRUTH",
                 "canonicalProductTruth": false
               },
               "persistence": {
@@ -495,7 +2166,9 @@
               "operation": "rebaseTwin",
               "baselineId": "BL-W03-2",
               "baselineRevision": "r2",
-              "simulationLocalPreserved": []
+              "simulationLocalPreserved": [
+                "SIM-ATK-01"
+              ]
             },
             "snapshot": {
               "owner": "W03EnterpriseDomain",
@@ -538,9 +2211,343 @@
                 "kind": "NONE",
                 "id": null
               },
-              "objects": [],
+              "objects": [
+                {
+                  "name": "Web Application",
+                  "id": "APP-WEB-01",
+                  "type": "Application",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "HTTP Service",
+                    "Session State",
+                    "Auth Integration"
+                  ],
+                  "behavior": "Application request/response rules",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "PROTECTED_BY",
+                      "CTL-WAF-01"
+                    ],
+                    [
+                      "DEPENDS_ON",
+                      "DATA-SQL-01"
+                    ],
+                    [
+                      "AUTHENTICATES_WITH",
+                      "ID-SVC-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Web Application",
+                  "x": 0,
+                  "y": 0,
+                  "status": "Type: Application",
+                  "interfaces": [
+                    {
+                      "id": "APP-WEB-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": "192.0.2.10"
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "Web Application Firewall",
+                  "id": "CTL-WAF-01",
+                  "type": "Security Control",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Request Filtering",
+                    "Rule Evaluation",
+                    "Event Generation"
+                  ],
+                  "behavior": "Control-policy behavior",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "PROTECTS",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Web Application Firewall",
+                  "x": 240,
+                  "y": 0,
+                  "status": "Type: Security Control",
+                  "interfaces": [
+                    {
+                      "id": "CTL-WAF-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "Attacker Workstation",
+                  "id": "SIM-ATK-01",
+                  "type": "Simulation-local Device",
+                  "source": "Simulation-local",
+                  "sourceClass": "red",
+                  "lifecycle": "TRAINING_ONLY",
+                  "capabilities": [
+                    "Simulated Browser",
+                    "Synthetic Requests",
+                    "Scenario Bindings"
+                  ],
+                  "behavior": "Training-only behavior rules",
+                  "telemetry": "Synthetic",
+                  "validation": "Allowed with explicit local scope",
+                  "rels": [
+                    [
+                      "CONNECTS_TO",
+                      "APP-WEB-01"
+                    ]
+                  ],
+                  "label": "Attacker Workstation",
+                  "x": 480,
+                  "y": 0,
+                  "status": "Type: Simulation-local Device",
+                  "interfaces": [
+                    {
+                      "id": "SIM-ATK-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "SIMULATION_LOCAL",
+                  "canonicalEnterpriseInventory": false
+                },
+                {
+                  "name": "Database",
+                  "id": "DATA-SQL-01",
+                  "type": "Data Service",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Structured Data",
+                    "Query Behavior",
+                    "Access Rules"
+                  ],
+                  "behavior": "Database service behavior",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "DEPENDED_ON_BY",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Database",
+                  "x": 0,
+                  "y": 200,
+                  "status": "Type: Data Service",
+                  "interfaces": [
+                    {
+                      "id": "DATA-SQL-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": "192.0.2.20"
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "Identity Service",
+                  "id": "ID-SVC-01",
+                  "type": "Identity Service",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Authentication",
+                    "Identity Claims",
+                    "Role Context"
+                  ],
+                  "behavior": "Authentication outcome rules",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "AUTHENTICATES",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "SENDS_LOGS",
+                      "SVC-SIEM-01"
+                    ]
+                  ],
+                  "label": "Identity Service",
+                  "x": 240,
+                  "y": 200,
+                  "status": "Type: Identity Service",
+                  "interfaces": [
+                    {
+                      "id": "ID-SVC-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                },
+                {
+                  "name": "SIEM / Monitoring",
+                  "id": "SVC-SIEM-01",
+                  "type": "Monitoring Service",
+                  "source": "Enterprise-backed",
+                  "sourceClass": "cyan",
+                  "lifecycle": "ACTIVE",
+                  "capabilities": [
+                    "Event Intake",
+                    "Telemetry View",
+                    "Detection Rules"
+                  ],
+                  "behavior": "Telemetry generation + correlation",
+                  "telemetry": "Enabled",
+                  "validation": "Compatible",
+                  "rels": [
+                    [
+                      "RECEIVES_LOGS_FROM",
+                      "APP-WEB-01"
+                    ],
+                    [
+                      "RECEIVES_LOGS_FROM",
+                      "CTL-WAF-01"
+                    ]
+                  ],
+                  "label": "SIEM / Monitoring",
+                  "x": 480,
+                  "y": 200,
+                  "status": "Type: Monitoring Service",
+                  "interfaces": [
+                    {
+                      "id": "SVC-SIEM-01:eth0",
+                      "name": "eth0",
+                      "type": "ethernet",
+                      "ip": null
+                    }
+                  ],
+                  "classification": "ENTERPRISE_BACKED",
+                  "canonicalEnterpriseInventory": true
+                }
+              ],
               "relationVersion": 1,
-              "relations": [],
+              "relations": [
+                {
+                  "id": "APP-WEB-01:relation:0",
+                  "source": "APP-WEB-01",
+                  "target": "CTL-WAF-01",
+                  "type": "PROTECTED_BY",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "APP-WEB-01:relation:1",
+                  "source": "APP-WEB-01",
+                  "target": "DATA-SQL-01",
+                  "type": "DEPENDS_ON",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:1",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "APP-WEB-01:relation:2",
+                  "source": "APP-WEB-01",
+                  "target": "ID-SVC-01",
+                  "type": "AUTHENTICATES_WITH",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:2",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "APP-WEB-01:relation:3",
+                  "source": "APP-WEB-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "APP-WEB-01:relation:3",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "CTL-WAF-01:relation:0",
+                  "source": "CTL-WAF-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "CTL-WAF-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "SIM-ATK-01:relation:0",
+                  "source": "SIM-ATK-01",
+                  "target": "APP-WEB-01",
+                  "type": "CONNECTS_TO",
+                  "direction": "directed",
+                  "scope": "TWIN_OVERLAY",
+                  "canonicalId": "SIM-ATK-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "DATA-SQL-01:relation:0",
+                  "source": "DATA-SQL-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "DATA-SQL-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                },
+                {
+                  "id": "ID-SVC-01:relation:0",
+                  "source": "ID-SVC-01",
+                  "target": "SVC-SIEM-01",
+                  "type": "SENDS_LOGS",
+                  "direction": "directed",
+                  "scope": "ENTERPRISE_DRAFT",
+                  "canonicalId": "ID-SVC-01:relation:0",
+                  "canonicalVersion": 1,
+                  "kind": "domain-projection"
+                }
+              ],
               "lineage": [
                 {
                   "sourceRevisionId": "ENT-REV-W03-1",
@@ -562,12 +2569,12 @@
                   "baselineRevision": "r1",
                   "baselineDigest": "sha256:0f3c9a1b5d7e",
                   "relationVersion": 1,
-                  "relationCount": 0,
+                  "relationCount": 8,
                   "reason": "explicit-publish"
                 }
               ],
               "sourceTruth": {
-                "classification": "UNAVAILABLE",
+                "classification": "FIXTURE_ONLY__NOT_PRODUCT_TRUTH",
                 "canonicalProductTruth": false
               },
               "persistence": {
@@ -617,9 +2624,343 @@
               "kind": "NONE",
               "id": null
             },
-            "objects": [],
+            "objects": [
+              {
+                "name": "Web Application",
+                "id": "APP-WEB-01",
+                "type": "Application",
+                "source": "Enterprise-backed",
+                "sourceClass": "cyan",
+                "lifecycle": "ACTIVE",
+                "capabilities": [
+                  "HTTP Service",
+                  "Session State",
+                  "Auth Integration"
+                ],
+                "behavior": "Application request/response rules",
+                "telemetry": "Enabled",
+                "validation": "Compatible",
+                "rels": [
+                  [
+                    "PROTECTED_BY",
+                    "CTL-WAF-01"
+                  ],
+                  [
+                    "DEPENDS_ON",
+                    "DATA-SQL-01"
+                  ],
+                  [
+                    "AUTHENTICATES_WITH",
+                    "ID-SVC-01"
+                  ],
+                  [
+                    "SENDS_LOGS",
+                    "SVC-SIEM-01"
+                  ]
+                ],
+                "label": "Web Application",
+                "x": 0,
+                "y": 0,
+                "status": "Type: Application",
+                "interfaces": [
+                  {
+                    "id": "APP-WEB-01:eth0",
+                    "name": "eth0",
+                    "type": "ethernet",
+                    "ip": "192.0.2.10"
+                  }
+                ],
+                "classification": "ENTERPRISE_BACKED",
+                "canonicalEnterpriseInventory": true
+              },
+              {
+                "name": "Web Application Firewall",
+                "id": "CTL-WAF-01",
+                "type": "Security Control",
+                "source": "Enterprise-backed",
+                "sourceClass": "cyan",
+                "lifecycle": "ACTIVE",
+                "capabilities": [
+                  "Request Filtering",
+                  "Rule Evaluation",
+                  "Event Generation"
+                ],
+                "behavior": "Control-policy behavior",
+                "telemetry": "Enabled",
+                "validation": "Compatible",
+                "rels": [
+                  [
+                    "PROTECTS",
+                    "APP-WEB-01"
+                  ],
+                  [
+                    "SENDS_LOGS",
+                    "SVC-SIEM-01"
+                  ]
+                ],
+                "label": "Web Application Firewall",
+                "x": 240,
+                "y": 0,
+                "status": "Type: Security Control",
+                "interfaces": [
+                  {
+                    "id": "CTL-WAF-01:eth0",
+                    "name": "eth0",
+                    "type": "ethernet",
+                    "ip": null
+                  }
+                ],
+                "classification": "ENTERPRISE_BACKED",
+                "canonicalEnterpriseInventory": true
+              },
+              {
+                "name": "Attacker Workstation",
+                "id": "SIM-ATK-01",
+                "type": "Simulation-local Device",
+                "source": "Simulation-local",
+                "sourceClass": "red",
+                "lifecycle": "TRAINING_ONLY",
+                "capabilities": [
+                  "Simulated Browser",
+                  "Synthetic Requests",
+                  "Scenario Bindings"
+                ],
+                "behavior": "Training-only behavior rules",
+                "telemetry": "Synthetic",
+                "validation": "Allowed with explicit local scope",
+                "rels": [
+                  [
+                    "CONNECTS_TO",
+                    "APP-WEB-01"
+                  ]
+                ],
+                "label": "Attacker Workstation",
+                "x": 480,
+                "y": 0,
+                "status": "Type: Simulation-local Device",
+                "interfaces": [
+                  {
+                    "id": "SIM-ATK-01:eth0",
+                    "name": "eth0",
+                    "type": "ethernet",
+                    "ip": null
+                  }
+                ],
+                "classification": "SIMULATION_LOCAL",
+                "canonicalEnterpriseInventory": false
+              },
+              {
+                "name": "Database",
+                "id": "DATA-SQL-01",
+                "type": "Data Service",
+                "source": "Enterprise-backed",
+                "sourceClass": "cyan",
+                "lifecycle": "ACTIVE",
+                "capabilities": [
+                  "Structured Data",
+                  "Query Behavior",
+                  "Access Rules"
+                ],
+                "behavior": "Database service behavior",
+                "telemetry": "Enabled",
+                "validation": "Compatible",
+                "rels": [
+                  [
+                    "DEPENDED_ON_BY",
+                    "APP-WEB-01"
+                  ],
+                  [
+                    "SENDS_LOGS",
+                    "SVC-SIEM-01"
+                  ]
+                ],
+                "label": "Database",
+                "x": 0,
+                "y": 200,
+                "status": "Type: Data Service",
+                "interfaces": [
+                  {
+                    "id": "DATA-SQL-01:eth0",
+                    "name": "eth0",
+                    "type": "ethernet",
+                    "ip": "192.0.2.20"
+                  }
+                ],
+                "classification": "ENTERPRISE_BACKED",
+                "canonicalEnterpriseInventory": true
+              },
+              {
+                "name": "Identity Service",
+                "id": "ID-SVC-01",
+                "type": "Identity Service",
+                "source": "Enterprise-backed",
+                "sourceClass": "cyan",
+                "lifecycle": "ACTIVE",
+                "capabilities": [
+                  "Authentication",
+                  "Identity Claims",
+                  "Role Context"
+                ],
+                "behavior": "Authentication outcome rules",
+                "telemetry": "Enabled",
+                "validation": "Compatible",
+                "rels": [
+                  [
+                    "AUTHENTICATES",
+                    "APP-WEB-01"
+                  ],
+                  [
+                    "SENDS_LOGS",
+                    "SVC-SIEM-01"
+                  ]
+                ],
+                "label": "Identity Service",
+                "x": 240,
+                "y": 200,
+                "status": "Type: Identity Service",
+                "interfaces": [
+                  {
+                    "id": "ID-SVC-01:eth0",
+                    "name": "eth0",
+                    "type": "ethernet",
+                    "ip": null
+                  }
+                ],
+                "classification": "ENTERPRISE_BACKED",
+                "canonicalEnterpriseInventory": true
+              },
+              {
+                "name": "SIEM / Monitoring",
+                "id": "SVC-SIEM-01",
+                "type": "Monitoring Service",
+                "source": "Enterprise-backed",
+                "sourceClass": "cyan",
+                "lifecycle": "ACTIVE",
+                "capabilities": [
+                  "Event Intake",
+                  "Telemetry View",
+                  "Detection Rules"
+                ],
+                "behavior": "Telemetry generation + correlation",
+                "telemetry": "Enabled",
+                "validation": "Compatible",
+                "rels": [
+                  [
+                    "RECEIVES_LOGS_FROM",
+                    "APP-WEB-01"
+                  ],
+                  [
+                    "RECEIVES_LOGS_FROM",
+                    "CTL-WAF-01"
+                  ]
+                ],
+                "label": "SIEM / Monitoring",
+                "x": 480,
+                "y": 200,
+                "status": "Type: Monitoring Service",
+                "interfaces": [
+                  {
+                    "id": "SVC-SIEM-01:eth0",
+                    "name": "eth0",
+                    "type": "ethernet",
+                    "ip": null
+                  }
+                ],
+                "classification": "ENTERPRISE_BACKED",
+                "canonicalEnterpriseInventory": true
+              }
+            ],
             "relationVersion": 1,
-            "relations": [],
+            "relations": [
+              {
+                "id": "APP-WEB-01:relation:0",
+                "source": "APP-WEB-01",
+                "target": "CTL-WAF-01",
+                "type": "PROTECTED_BY",
+                "direction": "directed",
+                "scope": "ENTERPRISE_DRAFT",
+                "canonicalId": "APP-WEB-01:relation:0",
+                "canonicalVersion": 1,
+                "kind": "domain-projection"
+              },
+              {
+                "id": "APP-WEB-01:relation:1",
+                "source": "APP-WEB-01",
+                "target": "DATA-SQL-01",
+                "type": "DEPENDS_ON",
+                "direction": "directed",
+                "scope": "ENTERPRISE_DRAFT",
+                "canonicalId": "APP-WEB-01:relation:1",
+                "canonicalVersion": 1,
+                "kind": "domain-projection"
+              },
+              {
+                "id": "APP-WEB-01:relation:2",
+                "source": "APP-WEB-01",
+                "target": "ID-SVC-01",
+                "type": "AUTHENTICATES_WITH",
+                "direction": "directed",
+                "scope": "ENTERPRISE_DRAFT",
+                "canonicalId": "APP-WEB-01:relation:2",
+                "canonicalVersion": 1,
+                "kind": "domain-projection"
+              },
+              {
+                "id": "APP-WEB-01:relation:3",
+                "source": "APP-WEB-01",
+                "target": "SVC-SIEM-01",
+                "type": "SENDS_LOGS",
+                "direction": "directed",
+                "scope": "ENTERPRISE_DRAFT",
+                "canonicalId": "APP-WEB-01:relation:3",
+                "canonicalVersion": 1,
+                "kind": "domain-projection"
+              },
+              {
+                "id": "CTL-WAF-01:relation:0",
+                "source": "CTL-WAF-01",
+                "target": "SVC-SIEM-01",
+                "type": "SENDS_LOGS",
+                "direction": "directed",
+                "scope": "ENTERPRISE_DRAFT",
+                "canonicalId": "CTL-WAF-01:relation:0",
+                "canonicalVersion": 1,
+                "kind": "domain-projection"
+              },
+              {
+                "id": "SIM-ATK-01:relation:0",
+                "source": "SIM-ATK-01",
+                "target": "APP-WEB-01",
+                "type": "CONNECTS_TO",
+                "direction": "directed",
+                "scope": "TWIN_OVERLAY",
+                "canonicalId": "SIM-ATK-01:relation:0",
+                "canonicalVersion": 1,
+                "kind": "domain-projection"
+              },
+              {
+                "id": "DATA-SQL-01:relation:0",
+                "source": "DATA-SQL-01",
+                "target": "SVC-SIEM-01",
+                "type": "SENDS_LOGS",
+                "direction": "directed",
+                "scope": "ENTERPRISE_DRAFT",
+                "canonicalId": "DATA-SQL-01:relation:0",
+                "canonicalVersion": 1,
+                "kind": "domain-projection"
+              },
+              {
+                "id": "ID-SVC-01:relation:0",
+                "source": "ID-SVC-01",
+                "target": "SVC-SIEM-01",
+                "type": "SENDS_LOGS",
+                "direction": "directed",
+                "scope": "ENTERPRISE_DRAFT",
+                "canonicalId": "ID-SVC-01:relation:0",
+                "canonicalVersion": 1,
+                "kind": "domain-projection"
+              }
+            ],
             "lineage": [
               {
                 "sourceRevisionId": "ENT-REV-W03-1",
@@ -641,12 +2982,12 @@
                 "baselineRevision": "r1",
                 "baselineDigest": "sha256:0f3c9a1b5d7e",
                 "relationVersion": 1,
-                "relationCount": 0,
+                "relationCount": 8,
                 "reason": "explicit-publish"
               }
             ],
             "sourceTruth": {
-              "classification": "UNAVAILABLE",
+              "classification": "FIXTURE_ONLY__NOT_PRODUCT_TRUTH",
               "canonicalProductTruth": false
             },
             "persistence": {
@@ -692,7 +3033,7 @@
         "recorded result is read-only under direct mutation pressure"
       ],
       "screenshots": [
-        "runs-preflight-run-recorded-20260929T045724Z-90240a5e.png"
+        "runs-preflight-run-recorded-20260929T184122Z-3da01fa0.png"
       ],
       "negativeCases": [],
       "evidence": {
@@ -862,7 +3203,7 @@
         "canonical-state invariance: compare/AAR changed neither sealed Result truth nor live canonical relation state"
       ],
       "screenshots": [
-        "results-aar-compare-20260929T045726Z-90240a5e.png"
+        "results-aar-compare-20260929T184124Z-3da01fa0.png"
       ],
       "negativeCases": [],
       "evidence": {
@@ -1005,7 +3346,7 @@
         "replay is presentation-only over inert recorded bytes and never claims canonical history"
       ],
       "screenshots": [
-        "replay-causality-timeline-scrub-20260929T045728Z-90240a5e.png"
+        "replay-causality-timeline-scrub-20260929T184126Z-3da01fa0.png"
       ],
       "negativeCases": [],
       "evidence": {
@@ -1099,7 +3440,7 @@
         "F-049 boundary: spatial selection on a read-only consumer neither exposes Connect nor mutates canonical relation truth"
       ],
       "screenshots": [
-        "spatial-select-connect-canonical-edge-20260929T045731Z-90240a5e.png"
+        "spatial-select-connect-canonical-edge-20260929T184129Z-3da01fa0.png"
       ],
       "negativeCases": [],
       "evidence": {
@@ -1107,11 +3448,11 @@
           "hostCount": 1,
           "hostRect": {
             "w": 380,
-            "h": 499
+            "h": 401
           },
           "canvasRect": {
             "w": 380,
-            "h": 499
+            "h": 401
           },
           "connectOwner": "RelationInteractionOwner",
           "policyRevision": "RELATION-CENTRAL-04"
@@ -1261,6 +3602,7 @@
                   "label": "Web Application",
                   "x": 0,
                   "y": 0,
+                  "status": "Type: Application",
                   "interfaces": [
                     {
                       "id": "APP-WEB-01:eth0",
@@ -1300,6 +3642,7 @@
                   "label": "Web Application Firewall",
                   "x": 240,
                   "y": 0,
+                  "status": "Type: Security Control",
                   "interfaces": [
                     {
                       "id": "CTL-WAF-01:eth0",
@@ -1335,6 +3678,7 @@
                   "label": "Attacker Workstation",
                   "x": 480,
                   "y": 0,
+                  "status": "Type: Simulation-local Device",
                   "interfaces": [
                     {
                       "id": "SIM-ATK-01:eth0",
@@ -1374,6 +3718,7 @@
                   "label": "Database",
                   "x": 0,
                   "y": 200,
+                  "status": "Type: Data Service",
                   "interfaces": [
                     {
                       "id": "DATA-SQL-01:eth0",
@@ -1413,6 +3758,7 @@
                   "label": "Identity Service",
                   "x": 240,
                   "y": 200,
+                  "status": "Type: Identity Service",
                   "interfaces": [
                     {
                       "id": "ID-SVC-01:eth0",
@@ -1452,6 +3798,7 @@
                   "label": "SIEM / Monitoring",
                   "x": 480,
                   "y": 200,
+                  "status": "Type: Monitoring Service",
                   "interfaces": [
                     {
                       "id": "SVC-SIEM-01:eth0",
@@ -1625,13 +3972,13 @@
           "owner": "W03EnterpriseDomain.LocalDraft",
           "liveRecordsBefore": {
             "present": true,
-            "records": 0,
+            "records": 8,
             "version": 1,
             "owner": "W03EnterpriseDomain.LocalDraft"
           },
           "liveRecordsAfter": {
             "present": true,
-            "records": 0,
+            "records": 8,
             "version": 1,
             "owner": "W03EnterpriseDomain.LocalDraft"
           }
@@ -1702,7 +4049,7 @@
         "F-049 boundary: spatial selection on a read-only consumer neither exposes Connect nor mutates canonical relation truth"
       ],
       "screenshots": [
-        "spatial-select-connect-canonical-edge-20260929T045734Z-90240a5e.png"
+        "spatial-select-connect-canonical-edge-20260929T184132Z-3da01fa0.png"
       ],
       "negativeCases": [],
       "evidence": {
@@ -1710,11 +4057,11 @@
           "hostCount": 1,
           "hostRect": {
             "w": 320,
-            "h": 379
+            "h": 260
           },
           "canvasRect": {
             "w": 320,
-            "h": 379
+            "h": 260
           },
           "connectOwner": "RelationInteractionOwner",
           "policyRevision": "RELATION-CENTRAL-04"
@@ -1864,6 +4211,7 @@
                   "label": "Web Application",
                   "x": 0,
                   "y": 0,
+                  "status": "Type: Application",
                   "interfaces": [
                     {
                       "id": "APP-WEB-01:eth0",
@@ -1903,6 +4251,7 @@
                   "label": "Web Application Firewall",
                   "x": 240,
                   "y": 0,
+                  "status": "Type: Security Control",
                   "interfaces": [
                     {
                       "id": "CTL-WAF-01:eth0",
@@ -1938,6 +4287,7 @@
                   "label": "Attacker Workstation",
                   "x": 480,
                   "y": 0,
+                  "status": "Type: Simulation-local Device",
                   "interfaces": [
                     {
                       "id": "SIM-ATK-01:eth0",
@@ -1977,6 +4327,7 @@
                   "label": "Database",
                   "x": 0,
                   "y": 200,
+                  "status": "Type: Data Service",
                   "interfaces": [
                     {
                       "id": "DATA-SQL-01:eth0",
@@ -2016,6 +4367,7 @@
                   "label": "Identity Service",
                   "x": 240,
                   "y": 200,
+                  "status": "Type: Identity Service",
                   "interfaces": [
                     {
                       "id": "ID-SVC-01:eth0",
@@ -2055,6 +4407,7 @@
                   "label": "SIEM / Monitoring",
                   "x": 480,
                   "y": 200,
+                  "status": "Type: Monitoring Service",
                   "interfaces": [
                     {
                       "id": "SVC-SIEM-01:eth0",
@@ -2228,13 +4581,13 @@
           "owner": "W03EnterpriseDomain.LocalDraft",
           "liveRecordsBefore": {
             "present": true,
-            "records": 0,
+            "records": 8,
             "version": 1,
             "owner": "W03EnterpriseDomain.LocalDraft"
           },
           "liveRecordsAfter": {
             "present": true,
-            "records": 0,
+            "records": 8,
             "version": 1,
             "owner": "W03EnterpriseDomain.LocalDraft"
           }
@@ -2302,7 +4655,7 @@
         "detach fails closed with PROVIDER_REATTACH_UNAVAILABLE and preserves the provider session"
       ],
       "screenshots": [
-        "run-terminal-detach-20260929T045736Z-90240a5e.png"
+        "run-terminal-detach-20260929T184134Z-3da01fa0.png"
       ],
       "negativeCases": [],
       "evidence": {
@@ -2387,66 +4740,66 @@
   ],
   "screenshots": [
     {
-      "filename": "enterprise-twin-baseline-20260929T045721Z-90240a5e.png",
+      "filename": "enterprise-twin-baseline-20260929T184118Z-3da01fa0.png",
       "flowId": "enterprise-twin-baseline",
       "viewport": "1440x1000",
-      "bytes": 151669,
-      "sha256": "5cfa0cf495e1d8fc3c96127da72c3e2293faf1684929a0261a2870ffada8226f",
-      "path": "writer-output/W03/evidence/enterprise-twin-baseline-20260929T045721Z-90240a5e.png",
+      "bytes": 223157,
+      "sha256": "5757898fc11c0288c75b65097d8842d03a571f94dd0f0f1d676481401d64a606",
+      "path": "writer-output/W03/evidence/enterprise-twin-baseline-20260929T184118Z-3da01fa0.png",
       "scope": "W03_PACKET_SECTION_9_TARGETED_VISUAL_EVIDENCE"
     },
     {
-      "filename": "runs-preflight-run-recorded-20260929T045724Z-90240a5e.png",
+      "filename": "runs-preflight-run-recorded-20260929T184122Z-3da01fa0.png",
       "flowId": "runs-preflight-run-recorded",
       "viewport": "1440x1000",
-      "bytes": 168346,
-      "sha256": "f4bb908e1d6b989a9ff58ac45b220caa25d5642f7bf69bc1fc4022ae0e36f88c",
-      "path": "writer-output/W03/evidence/runs-preflight-run-recorded-20260929T045724Z-90240a5e.png",
+      "bytes": 172248,
+      "sha256": "ef3e7b407dc420065395710af203d6456d3317f57ef891ad05beb9b7a27276e4",
+      "path": "writer-output/W03/evidence/runs-preflight-run-recorded-20260929T184122Z-3da01fa0.png",
       "scope": "W03_PACKET_SECTION_9_TARGETED_VISUAL_EVIDENCE"
     },
     {
-      "filename": "results-aar-compare-20260929T045726Z-90240a5e.png",
+      "filename": "results-aar-compare-20260929T184124Z-3da01fa0.png",
       "flowId": "results-aar-compare",
       "viewport": "1440x1000",
-      "bytes": 204367,
-      "sha256": "c74a3f9e43be326976fad757df18c4e25df1bfcaaebc495eb73b56323a6c0578",
-      "path": "writer-output/W03/evidence/results-aar-compare-20260929T045726Z-90240a5e.png",
+      "bytes": 212038,
+      "sha256": "0d2b5089106af551c427446879596ec2323f43974418eea245eb7f7cd7d8605b",
+      "path": "writer-output/W03/evidence/results-aar-compare-20260929T184124Z-3da01fa0.png",
       "scope": "W03_PACKET_SECTION_9_TARGETED_VISUAL_EVIDENCE"
     },
     {
-      "filename": "replay-causality-timeline-scrub-20260929T045728Z-90240a5e.png",
+      "filename": "replay-causality-timeline-scrub-20260929T184126Z-3da01fa0.png",
       "flowId": "replay-causality-timeline-scrub",
       "viewport": "1440x1000",
-      "bytes": 204367,
-      "sha256": "c74a3f9e43be326976fad757df18c4e25df1bfcaaebc495eb73b56323a6c0578",
-      "path": "writer-output/W03/evidence/replay-causality-timeline-scrub-20260929T045728Z-90240a5e.png",
+      "bytes": 212061,
+      "sha256": "12af8a30df891dfd8a1fbf38fcf5d41a1a930c1510ac3c2e8070d1df373b1787",
+      "path": "writer-output/W03/evidence/replay-causality-timeline-scrub-20260929T184126Z-3da01fa0.png",
       "scope": "W03_PACKET_SECTION_9_TARGETED_VISUAL_EVIDENCE"
     },
     {
-      "filename": "spatial-select-connect-canonical-edge-20260929T045731Z-90240a5e.png",
+      "filename": "spatial-select-connect-canonical-edge-20260929T184129Z-3da01fa0.png",
       "flowId": "spatial-select-connect-canonical-edge",
       "viewport": "1440x1000",
-      "bytes": 224774,
-      "sha256": "387b36957739f9ec13c7fa4809f4d8c5bf3b7056fc704414c5d015b629b4eefb",
-      "path": "writer-output/W03/evidence/spatial-select-connect-canonical-edge-20260929T045731Z-90240a5e.png",
+      "bytes": 224978,
+      "sha256": "500ffd8b48b8ce16ce88366347de31f24f010cd14a018cf2e177f3b3adc6bd10",
+      "path": "writer-output/W03/evidence/spatial-select-connect-canonical-edge-20260929T184129Z-3da01fa0.png",
       "scope": "W03_PACKET_SECTION_9_TARGETED_VISUAL_EVIDENCE"
     },
     {
-      "filename": "spatial-select-connect-canonical-edge-20260929T045734Z-90240a5e.png",
+      "filename": "spatial-select-connect-canonical-edge-20260929T184132Z-3da01fa0.png",
       "flowId": "spatial-select-connect-canonical-edge",
       "viewport": "1024x900",
-      "bytes": 157792,
-      "sha256": "53849cf9becf1b4e56b950cb0bf015f3c04d0a33c82c0410f4c92e97687e257a",
-      "path": "writer-output/W03/evidence/spatial-select-connect-canonical-edge-20260929T045734Z-90240a5e.png",
+      "bytes": 157843,
+      "sha256": "210b048fdddc1f8a3471e6fefa91eb98ead96e085112bd9ca4cfecae624a1bcd",
+      "path": "writer-output/W03/evidence/spatial-select-connect-canonical-edge-20260929T184132Z-3da01fa0.png",
       "scope": "W03_PACKET_SECTION_9_TARGETED_VISUAL_EVIDENCE"
     },
     {
-      "filename": "run-terminal-detach-20260929T045736Z-90240a5e.png",
+      "filename": "run-terminal-detach-20260929T184134Z-3da01fa0.png",
       "flowId": "run-terminal-detach",
       "viewport": "1440x1000",
-      "bytes": 161520,
-      "sha256": "2e89827bc365f7bb5f5765518bd54bc465934417cd02581e8747e9954cc221ff",
-      "path": "writer-output/W03/evidence/run-terminal-detach-20260929T045736Z-90240a5e.png",
+      "bytes": 165370,
+      "sha256": "560f72fa088c6d25d47416f9276d35b91750a70eb0be712a1a0d9bc6f55c5dee",
+      "path": "writer-output/W03/evidence/run-terminal-detach-20260929T184134Z-3da01fa0.png",
       "scope": "W03_PACKET_SECTION_9_TARGETED_VISUAL_EVIDENCE"
     }
   ],

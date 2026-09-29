@@ -4,14 +4,46 @@ const uniq=list=>new Set(list).size===list.length;
 const revisionAfter=value=>{const n=Number(value);return Number.isFinite(n)&&String(n)===String(value).trim()?String(n+1):`${String(value||'0')}.1`};
 const EDGE_TYPES=new Set(['depends','success','failure','conditional','optional','branch']);
 
+/**
+ * VISUAL_REAUDIT DEF-LAB-1 (V4): the live route composed `new W03LabDomain()` with an empty
+ * definition, so the lab **non-linear task graph identity** had nothing to render.
+ *
+ * Representative Lab definition already described by the CURRENT_FINAL_REFERENCE
+ * (`Cybersecurity Lab Task Graph Dashboard(2).png`, `09f9d53b`): five tasks where task 3 fans
+ * out to a required successor and an optional branch, which is what makes the graph non-linear.
+ * DRAFT authoring definition owned by this domain — not a Run instance, not provider truth.
+ */
+const REPRESENTATIVE_LAB_DEFINITION=Object.freeze({
+  id:'LAB-SQLI-01',revision:'2',title:'SQL Injection Fundamentals',
+  purpose:'Practice detecting and exploiting a simulated vulnerable web-input flow and interpreting resulting signals.',
+  requiredTools:[
+    {id:'tool-browser',name:'Browser',revision:'1'},
+    {id:'tool-request-inspector',name:'Request Inspector',revision:'1'}
+  ],
+  environment:{capabilities:['SIM_NET','WEB_TIER']},
+  tasks:[
+    {id:'TASK-1',title:'Discover Input Surface',nodeType:'objective',validation:'Injection-condition rule',expectedSignal:'Reachable input points enumerated.',description:'Identify reachable input points.',objectiveType:'State confirmation',requiredCapability:'HTTP interaction',toolRefs:['tool-browser'],completion:'Required'},
+    {id:'TASK-2',title:'Test Input Behavior',nodeType:'action',validation:'Injection-condition rule',expectedSignal:'Application responses recorded.',description:'Probe and observe application responses.',objectiveType:'Behavior probe',requiredCapability:'HTTP interaction',toolRefs:['tool-browser','tool-request-inspector'],completion:'Required'},
+    {id:'TASK-3',title:'Confirm Injection Condition',nodeType:'check',validation:'Injection-condition rule',expectedSignal:'Vulnerable response behavior observed.',description:'Determine if input manipulation is accepted.',objectiveType:'Condition check',requiredCapability:'Response interpretation',toolRefs:['tool-request-inspector'],completion:'Required'},
+    {id:'TASK-4',title:'Inspect Simulated Database Effect',nodeType:'action',validation:'Injection-condition rule',expectedSignal:'Expected change observed in simulated data.',description:'Verify expected changes in simulated data.',objectiveType:'Effect inspection',requiredCapability:'Simulated data access',toolRefs:['tool-request-inspector'],completion:'Required'},
+    {id:'TASK-5',title:'Interpret Generated Signals',nodeType:'interpret',validation:'Injection-condition rule',expectedSignal:'Logs and outputs explain the behavior.',description:'Analyze logs and outputs to explain behavior.',objectiveType:'Interpretation',requiredCapability:'Telemetry reading',toolRefs:['tool-browser'],completion:'Optional'}
+  ],
+  dependencies:[
+    {id:'EDGE-1',from:'TASK-1',to:'TASK-2',type:'depends',label:'Linear Dependency'},
+    {id:'EDGE-2',from:'TASK-2',to:'TASK-3',type:'depends',label:'Linear Dependency'},
+    {id:'EDGE-3',from:'TASK-3',to:'TASK-4',type:'depends',label:'Linear Dependency'},
+    {id:'EDGE-4',from:'TASK-3',to:'TASK-5',type:'optional',label:'Optional Branch',condition:'Optional when generated signals are already explained'}
+  ]
+});
+
 /** Lab definition truth only. Structured/Spatial mechanics remain shared Foundation owners. */
 export class W03LabDomain {
-  constructor({definition={id:'LAB-DRAFT',revision:'1',title:'',tasks:[],dependencies:[],requiredTools:[],environment:{capabilities:[]}},persistence=null,status='DRAFT'}={}){this.owner='W03LabDomain';this.definition=clone(definition);this.persistence=persistence;this.version=1;this.lifecycle=status;this.selection=null;this.publishedRevisions=[];this.sourceLineage=null;this.receipts=[]}
+  constructor({definition=REPRESENTATIVE_LAB_DEFINITION,persistence=null,status='DRAFT'}={}){this.owner='W03LabDomain';this.definition=clone(definition);this.persistence=persistence;this.version=1;this.lifecycle=status;this.selection=null;this.publishedRevisions=[];this.sourceLineage=null;this.receipts=[]}
   snapshot(){return freeze({owner:this.owner,version:this.version,status:this.lifecycle,lifecycle:this.lifecycle,selection:clone(this.selection),sourceLineage:clone(this.sourceLineage),definition:clone(this.definition),publishedRevisions:clone(this.publishedRevisions.map(x=>({id:x.id,revision:x.revision,digest:x.digest||null}))),persistence:this.persistence?{status:'DELEGATED'}:{status:'UNAVAILABLE',reason:'Shared persistence not bound in this composition.'}})}
   _assertMutable(){if(this.lifecycle==='PUBLISHED')throw Error('LAB_PUBLISHED_REVISION_IMMUTABLE')}
   _receipt(action,detail={}){const receipt=freeze({owner:this.owner,action,version:this.version,lifecycle:this.lifecycle,...clone(detail)});this.receipts.push(receipt);return receipt}
   _edges(){return (this.definition.dependencies||[]).map((edge,index)=>({id:edge.id||`EDGE-${index+1}`,type:EDGE_TYPES.has(edge.type)?edge.type:'depends',...clone(edge)}))}
-  graphProjection(){return freeze({owner:this.owner,identity:{id:this.definition.id,revision:this.definition.revision},lifecycle:this.lifecycle,title:this.definition.title||'',tasks:clone(this.definition.tasks||[]),edges:this._edges(),environment:clone(this.definition.environment||{}),requiredTools:clone(this.definition.requiredTools||[]),selection:this.selectionContext(),sharedOwnerRequirements:['StructuredSurfaceHost','SpatialInteractionKernel','RelationInteractionOwner']})}
+  graphProjection(){return freeze({owner:this.owner,identity:{id:this.definition.id,revision:this.definition.revision},lifecycle:this.lifecycle,title:this.definition.title||'',purpose:this.definition.purpose||'',tasks:clone(this.definition.tasks||[]),edges:this._edges(),environment:clone(this.definition.environment||{}),requiredTools:clone(this.definition.requiredTools||[]),selection:this.selectionContext(),sharedOwnerRequirements:['StructuredSurfaceHost','SpatialInteractionKernel','RelationInteractionOwner']})}
   selectionContext(){if(!this.selection)return freeze({kind:'lab',id:this.definition.id,title:this.definition.title||'',editable:this.lifecycle!=='PUBLISHED'});if(this.selection.kind==='edge'){const edge=this._edges().find(x=>x.id===this.selection.id);return freeze(edge?{kind:'branch',id:edge.id,title:edge.label||edge.condition||edge.type,editable:this.lifecycle!=='PUBLISHED',object:clone(edge)}:{kind:'missing',id:this.selection.id,editable:false})}const task=(this.definition.tasks||[]).find(x=>x.id===this.selection.id);return freeze(task?{kind:'task',id:task.id,title:task.title||task.id,editable:this.lifecycle!=='PUBLISHED',object:clone(task)}:{kind:'missing',id:this.selection.id,editable:false})}
   select(selection=null){this.selection=selection?clone(selection):null;return this.selectionContext()}
   _applyOperation(operation){
