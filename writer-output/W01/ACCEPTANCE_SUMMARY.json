@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "workspace": "W01",
+  "generatedAt": "2026-09-29T04:24:28.350553+00:00",
+  "requirements_csv": "controller/09_writer_forge/W01_REQUIREMENTS.csv",
+  "requirements_rows": 711,
+  "rows_dispositioned": 711,
+  "zero_loss": true,
+  "candidate": "",
+  "commit": "",
+  "tree": "",
+  "requirements_sha256": "d9234daf733c86aba2344b810d4b2ad4b203e528e494f0f3536906000afeb933",
+  "counts": {
+    "FAIL": 3,
+    "PASS": 326,
+    "BLOCKED": 356,
+    "NOT_APPLICABLE_WITH_PROOF": 26
+  },
+  "per_surface": {
+    "shell": {
+      "FAIL": 2,
+      "PASS": 158,
+      "BLOCKED": 179,
+      "NOT_APPLICABLE_WITH_PROOF": 13
+    },
+    "today": {
+      "PASS": 168,
+      "BLOCKED": 177,
+      "NOT_APPLICABLE_WITH_PROOF": 13,
+      "FAIL": 1
+    }
+  },
+  "per_source_layer": {
+    "CURRENT_IDENTITY": {
+      "FAIL": 1,
+      "PASS": 1
+    },
+    "CURRENT_PROFILE": {
+      "PASS": 2
+    },
+    "OWNER_DECISION": {
+      "BLOCKED": 119,
+      "PASS": 28
+    },
+    "AUTHORITY_RECOVERY_ARCHAEOLOGY": {
+      "BLOCKED": 2
+    },
+    "OWNER_QA_DEEP_AUDIT": {
+      "BLOCKED": 104
+    },
+    "ZL01_ROOT_FINDING": {
+      "BLOCKED": 122,
+      "NOT_APPLICABLE_WITH_PROOF": 2,
+      "PASS": 16
+    },
+    "ZL01_FORWARD_GAP": {
+      "NOT_APPLICABLE_WITH_PROOF": 24,
+      "BLOCKED": 6
+    },
+    "ZL01_DURABLE_ANCILLARY": {
+      "PASS": 275
+    },
+    "ZL01_ZL02_RECONCILIATION": {
+      "PASS": 2,
+      "FAIL": 2,
+      "BLOCKED": 1
+    },
+    "VISUAL_REFERENCE": {
+      "BLOCKED": 2
+    },
+    "CURRENT_RESULT_AUDIT": {
+      "PASS": 2
+    }
+  },
+  "proofs_used": [
+    "P-BROWSER-CBF002",
+    "P-BROWSER-W01",
+    "P-CHECK",
+    "P-CHECK-DUP",
+    "P-CONFORMANCE",
+    "P-D07",
+    "P-MATRIX-ZEROLOSS",
+    "P-MODEL",
+    "P-S07",
+    "P-SHELL-ROUTE",
+    "P-TODAY-ROUTE"
+  ],
+  "matrix": "writer-output/W01/ACCEPTANCE_MATRIX.csv",
+  "matrix_sha256": "eb10fa61572ed3fdaab99c5ef3267077706295605f1c3076b0157989ecadc1dd"
+}

@@ -1,0 +1,1741 @@
+{
+  "schemaVersion": 1,
+  "classification": "W01_BROWSER_RECEIPT_NOT_OWNER_ACCEPTANCE",
+  "command": "node tools/w01-browser-flows.mjs --flow back-forward-semantic-context",
+  "browser": "Chromium (Playwright package-local)",
+  "browserVersion": "151.0.7922.34",
+  "transport": "localhost-http",
+  "runtime": "Node v22.16.0",
+  "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+  "measuredCandidate": "WORKTREE_VARIANT:ac424340da0dc6db1a1922eaff5c1e8789343ee438abd0771669e18f86a11fa8",
+  "canonicalSourceFileCount": 287,
+  "measuredCandidateFileCount": 287,
+  "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+  "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+  "environment": {
+    "node": "v22.16.0",
+    "engine": "Playwright Chromium",
+    "playwrightResolution": "package-local",
+    "packageDeclaredVersion": "1.62.1",
+    "transport": "localhost-http",
+    "proofServer": "tools/serve.mjs on 127.0.0.1:40565",
+    "viewport": "1440x980",
+    "reducedMotion": true,
+    "browserExecutableOverride": false,
+    "browserVersion": "151.0.7922.34"
+  },
+  "capturedAt": "2026-09-29T04:16:31.074Z",
+  "evidenceLineage": {
+    "bindingAlgorithm": "path\\0size\\0sha256\\n (tools/source-tree-identity.mjs)",
+    "recomputedCandidateTreeSha256": "ac424340da0dc6db1a1922eaff5c1e8789343ee438abd0771669e18f86a11fa8",
+    "recomputedCandidateFileCount": 287,
+    "expectedCandidateTreeSha256": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+    "expectedCandidateFileCount": 287,
+    "lineageStatus": "DRIFT_RECORDED__CONCURRENT_SIBLING_WORKSPACE_EDITS",
+    "drift": true,
+    "driftAttribution": "Sibling workspaces (W03/W04) are editing the shared serial worktree concurrently; observed directly when a file appeared in git status during a 60 s window with no command executed by W01. W01 did not write any file under stack/native-typescript/. Recorded, not suppressed.",
+    "note": "Worktree variant candidate (3 protected pre-existing canonical deltas) — never presented as the canonical 480dbe…/273 identity."
+  },
+  "summary": {
+    "total": 5,
+    "pass": 4,
+    "fail": 1
+  },
+  "limitations": [
+    "Headless Chromium only; no Owner acceptance and no exhaustive permutation certification",
+    "Static proof server (tools/serve.mjs) serves the committed dist/ build only — no local runtime API process runs, so requestfailed transport entries are ENVIRONMENT noise, not product verdicts",
+    "Flows drive shared and sibling surfaces read-only where the shared owner requires a second consumer; no sibling workspace source is touched"
+  ],
+  "flows": [
+    {
+      "flow": "back-forward-semantic-context",
+      "route": "/?surface=shell -> /?surface=today (filter ATTENTION) -> Back -> Forward",
+      "preconditions": [
+        "CBF-002 is an open P0 finding declared for W01 (TODAY filter side)",
+        "shell history Back/Forward buttons are rendered by GlobalShellNavigationOwner",
+        "Today filter changed to ATTENTION before departure"
+      ],
+      "expectedState": "Back restores the shell route AND preserves the Today semantic context (filter ATTENTION) so Forward re-applies it — CBF-002 must not regress",
+      "fixtureState": "Today projection with zero providers; only the filter (semantic context) is mutated by the reviewer",
+      "negativeCases": [
+        "Back/Forward must not silently reset semantic context (CBF-002)",
+        "route restoration alone must not be reported as context restoration"
+      ],
+      "actionSequence": [
+        "GET /?surface=shell",
+        "navigate shell -> today via the W01 destination link",
+        "set Today semantic context: filter = ATTENTION",
+        "click the shell history Back button ([data-shell-history=\"back\"])",
+        "click the shell history Forward button ([data-shell-history=\"forward\"])",
+        "repeat with browser-native Back/Forward (popstate) instead of the shell buttons"
+      ],
+      "assertions": [
+        {
+          "id": "cbf.context-set-before-departure",
+          "expected": "true",
+          "actual": "true",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "cbf.precondition-route",
+          "expected": "?surface=today",
+          "actual": "?surface=today",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "cbf.back-restores-route",
+          "expected": {
+            "consumer": "shell",
+            "search": "?surface=shell"
+          },
+          "actual": {
+            "consumer": "shell",
+            "search": "?surface=shell"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "cbf.forward-restores-today-route",
+          "expected": "today",
+          "actual": "today",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "cbf.context-captured-on-back",
+          "expected": "ATTENTION",
+          "actual": "ATTENTION",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "cbf.context-restored-on-forward",
+          "expected": "true",
+          "actual": "false",
+          "ok": false,
+          "class": "PRODUCT",
+          "message": "CBF-002: Back restored the route but the Today filter semantic context was silently reset to ALL"
+        },
+        {
+          "id": "cbf.restore-machinery-ran",
+          "expected": "restored",
+          "actual": "restored",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "cbf.native-back-restores-route",
+          "expected": "today",
+          "actual": "today",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "cbf.native-context-preserved",
+          "expected": "true",
+          "actual": "false",
+          "ok": false,
+          "class": "PRODUCT",
+          "message": "CBF-002: browser-native Back/Forward silently reset the Today filter semantic context"
+        }
+      ],
+      "screenshots": [
+        {
+          "filename": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T041627Z-c82cec63.png",
+          "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+          "bytes": 290622,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:16:27.705Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "back-forward-semantic-context",
+            "id": "context-set"
+          }
+        },
+        {
+          "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T041628Z-c82cec63.png",
+          "sha256": "50321947cf7a1ea766d5778d1bb9b8a38f185580ea09060b64b34611630941ba",
+          "bytes": 290895,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:16:29.396Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "back-forward-semantic-context",
+            "id": "forward-shell-button"
+          }
+        },
+        {
+          "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T041630Z-c82cec63.png",
+          "sha256": "5a72530a8ef9e15c28bcdc10c155b07529a20acf3c494d5469350e9a1177fbdf",
+          "bytes": 290895,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:16:30.618Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "back-forward-semantic-context",
+            "id": "forward-native"
+          }
+        }
+      ],
+      "pageErrors": [],
+      "transportFailures": [
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": "151.0.7922.34",
+      "status": "FAIL",
+      "failureClassification": "PRODUCT"
+    },
+    {
+      "flow": "deep-work.open-close-lifecycle",
+      "route": "/?surface=shell (no provider) + /?surface=runs (shared-owner consumer)",
+      "preconditions": [
+        "BottomDeepWorkOwner is the single global deep-work presentation owner",
+        "shell registers no deep-work provider in this route",
+        "runs registers 2 providers through the shared wave3 assembly"
+      ],
+      "expectedState": "closed => hidden+inert+aria-hidden with no fabricated content; open => hidden=false, inert=false, owner preserved; close => restored to hidden+inert",
+      "fixtureState": "read-only provider projections (structured history / runtime events); no provider content is written by the owner",
+      "negativeCases": [
+        "a surface with no deep-work provider must not fabricate an openable shelf (toggle disabled, content empty)",
+        "closing must return the shelf to hidden+inert"
+      ],
+      "actionSequence": [
+        "GET /?surface=shell",
+        "inspect the deep-work shelf on the shell route (no provider registered)",
+        "navigate to the runs route, a read-only consumer of the shared BottomDeepWorkOwner",
+        "GET /?surface=runs",
+        "click #bottomToggle to open the deep-work shelf",
+        "click #bottomToggle again to close the deep-work shelf"
+      ],
+      "assertions": [
+        {
+          "id": "deepwork.shell-owner-is-bottom-deep-work-owner",
+          "expected": "BottomDeepWorkOwner",
+          "actual": "BottomDeepWorkOwner",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "deepwork.shell-closed-hidden-inert",
+          "expected": {
+            "state": "closed",
+            "hidden": true,
+            "inert": true,
+            "aria": "true"
+          },
+          "actual": {
+            "state": "closed",
+            "hidden": true,
+            "inert": true,
+            "aria": "true"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "deepwork.shell-no-provider-no-fabrication",
+          "expected": {
+            "providerCount": 0,
+            "toggleDisabled": true
+          },
+          "actual": {
+            "providerCount": 0,
+            "toggleDisabled": true
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "deepwork.consumer-starts-closed-hidden-inert",
+          "expected": {
+            "state": "closed",
+            "hidden": true,
+            "inert": true,
+            "aria": "true"
+          },
+          "actual": {
+            "state": "closed",
+            "hidden": true,
+            "inert": true,
+            "aria": "true"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "deepwork.consumer-toggle-enabled",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "deepwork.open-lifecycle",
+          "expected": {
+            "state": "open",
+            "hidden": false,
+            "inert": false,
+            "aria": "false",
+            "expanded": "true"
+          },
+          "actual": {
+            "state": "open",
+            "hidden": false,
+            "inert": false,
+            "aria": "false",
+            "expanded": "true"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "deepwork.owner-preserved-across-lifecycle",
+          "expected": "BottomDeepWorkOwner",
+          "actual": "BottomDeepWorkOwner",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "deepwork.open-has-provider-content",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "deepwork.close-returns-to-hidden-inert",
+          "expected": {
+            "state": "closed",
+            "hidden": true,
+            "inert": true,
+            "aria": "true",
+            "expanded": "false"
+          },
+          "actual": {
+            "state": "closed",
+            "hidden": true,
+            "inert": true,
+            "aria": "true",
+            "expanded": "false"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        }
+      ],
+      "screenshots": [
+        {
+          "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T041610Z-c82cec63.png",
+          "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+          "bytes": 127244,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:16:10.843Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "deep-work.open-close-lifecycle",
+            "id": "shell-closed"
+          }
+        },
+        {
+          "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T041613Z-c82cec63.png",
+          "sha256": "b8fe0022a79d9f40c4ac19edb05f1b3f03e1421cb55ad19236bdcae9f2feb42f",
+          "bytes": 152221,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:16:13.351Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "deep-work.open-close-lifecycle",
+            "id": "open"
+          }
+        },
+        {
+          "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T041613Z-c82cec63.png",
+          "sha256": "d83ee272be22b78abcb30a36dce7a1ca601fb966b272f186c6886571c0cdd34d",
+          "bytes": 155248,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:16:13.842Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "deep-work.open-close-lifecycle",
+            "id": "closed"
+          }
+        }
+      ],
+      "pageErrors": [],
+      "transportFailures": [
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": "151.0.7922.34",
+      "status": "PASS",
+      "failureClassification": null
+    },
+    {
+      "flow": "diagnostics.gate",
+      "route": "/?surface=shell (negative) then /?surface=shell&diagnostics=foundation (positive)",
+      "preconditions": [
+        "diagnostics are assurance-only and never consume product geometry",
+        "A-2: the domain-diagnostics bottom tab is a requirement candidate only and must not exist"
+      ],
+      "expectedState": "no diagnostics panel without ?diagnostics=foundation; #foundationDiagnostics present, isConnected and assurance-only with the parameter",
+      "fixtureState": "no fixture mutation; URL parameter is the only input",
+      "negativeCases": [
+        "diagnostics panel must NOT appear without ?diagnostics=foundation",
+        "no domain-diagnostics bottom tab may be rendered anywhere"
+      ],
+      "actionSequence": [
+        "GET /?surface=shell",
+        "negative: inspect diagnostics surface without the parameter",
+        "positive: load /?surface=shell&diagnostics=foundation",
+        "GET /?surface=shell&diagnostics=foundation"
+      ],
+      "assertions": [
+        {
+          "id": "diagnostics.absent-without-parameter",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "diagnostics.no-invented-domain-tab",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "diagnostics.present-with-parameter",
+          "expected": {
+            "panel": true,
+            "assuranceOnly": "true",
+            "isConnected": true
+          },
+          "actual": {
+            "panel": true,
+            "assuranceOnly": "true",
+            "isConnected": true
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "diagnostics.no-invented-domain-tab-positive",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        }
+      ],
+      "screenshots": [
+        {
+          "filename": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T041615Z-c82cec63.png",
+          "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+          "bytes": 127244,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:16:15.734Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "diagnostics.gate",
+            "id": "negative"
+          }
+        },
+        {
+          "filename": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T041617Z-c82cec63.png",
+          "sha256": "b9ea4eccd7a014ed5770bb29e51d6b29ccb6d92b755d05b9b66070454c332942",
+          "bytes": 128901,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:16:18.292Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "diagnostics.gate",
+            "id": "positive"
+          }
+        }
+      ],
+      "pageErrors": [],
+      "transportFailures": [
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": "151.0.7922.34",
+      "status": "PASS",
+      "failureClassification": null
+    },
+    {
+      "flow": "shell.destination-routing",
+      "route": "/?surface=shell",
+      "preconditions": [
+        "static proof server serves the committed dist/ build",
+        "app booted with CEPFoundation.consumer === \"shell\"",
+        "no ?diagnostics parameter"
+      ],
+      "expectedState": "five global destinations, destinationCountFrozen=false, 23 registered product routes, every area link resolves to its registered default surface",
+      "fixtureState": "no fixture mutation; read-only navigation projection",
+      "negativeCases": [
+        "destination count must not be frozen or invented (Q-1: destinationCountFrozen=false, baseline=5)",
+        "shell navigation must not create domain state (SC-001)"
+      ],
+      "actionSequence": [
+        "GET /?surface=shell",
+        "inspect .global-shell-destinations and every [data-shell-destination] anchor",
+        "click the W01 area destination link (real history navigation)",
+        "execute the semantic route command shell.navigate {destination:\"shell\"} (SC-001: navigation owner, never a domain owner)",
+        "browser Back restores the previous destination"
+      ],
+      "assertions": [
+        {
+          "id": "shell.destination-count-is-five",
+          "expected": "5",
+          "actual": "5",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "shell.destination-count-not-frozen",
+          "expected": "false",
+          "actual": "false",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "shell.descriptor-not-frozen",
+          "expected": {
+            "frozen": false,
+            "baseline": 5
+          },
+          "actual": {
+            "frozen": false,
+            "baseline": 5
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "shell.registered-routes-unchanged",
+          "expected": "23",
+          "actual": "23",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "shell.five-area-links-resolved",
+          "expected": [
+            "W01=today",
+            "W02=library",
+            "W03=enterprise",
+            "W04=evidence",
+            "W05=health"
+          ],
+          "actual": [
+            "W01=today",
+            "W02=library",
+            "W03=enterprise",
+            "W04=evidence",
+            "W05=health"
+          ],
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "shell.area-destinations-match-links",
+          "expected": [
+            "enterprise",
+            "evidence",
+            "health",
+            "library",
+            "today"
+          ],
+          "actual": [
+            "enterprise",
+            "evidence",
+            "health",
+            "library",
+            "today"
+          ],
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "shell.navigation-lands-on-today",
+          "expected": {
+            "consumer": "today",
+            "search": "?surface=today"
+          },
+          "actual": {
+            "consumer": "today",
+            "search": "?surface=today"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "shell.semantic-command-registered-receipt",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "shell.navigation-owner-is-shell-owner",
+          "expected": "GlobalShellNavigationOwner",
+          "actual": "GlobalShellNavigationOwner",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "shell.semantic-command-routes-back",
+          "expected": {
+            "consumer": "shell",
+            "search": "?surface=shell"
+          },
+          "actual": {
+            "consumer": "shell",
+            "search": "?surface=shell"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "shell.back-restores-previous-route",
+          "expected": {
+            "consumer": "today",
+            "search": "?surface=today"
+          },
+          "actual": {
+            "consumer": "today",
+            "search": "?surface=today"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        }
+      ],
+      "screenshots": [
+        {
+          "filename": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T041605Z-c82cec63.png",
+          "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+          "bytes": 127244,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:16:05.139Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "shell.destination-routing",
+            "id": "baseline"
+          }
+        },
+        {
+          "filename": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T041605Z-c82cec63.png",
+          "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+          "bytes": 290381,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:16:05.792Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "shell.destination-routing",
+            "id": "after-navigate"
+          }
+        },
+        {
+          "filename": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T041605Z-c82cec63.png",
+          "sha256": "6d8349c7030bc955881489155f996ed8813dd5f36776431b81acd0eb2b889a2b",
+          "bytes": 290496,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:16:06.194Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "shell.destination-routing",
+            "id": "back-restored"
+          }
+        }
+      ],
+      "pageErrors": [],
+      "transportFailures": [
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": "151.0.7922.34",
+      "status": "PASS",
+      "failureClassification": null
+    },
+    {
+      "flow": "today.render-and-filter",
+      "route": "/?surface=today",
+      "preconditions": [
+        "app booted with CEPFoundation.consumer === \"today\"",
+        "Today composition mounted by m0-controller-composition",
+        "no Today providers bound in this static route (central provider composition is the declared boundary)"
+      ],
+      "expectedState": "Today projection renders in the stage, filter command set is complete, filter state is truthful, projection stays read-only (no canonical/Mastery write)",
+      "fixtureState": "TodayProjectionDomainAdapter with zero providers -> projection state UNAVAILABLE; no acceptance fixture data is injected",
+      "negativeCases": [
+        "Today must never write canonical progress or Mastery (profiles/today.json invariants)",
+        "Mastery must never be inferred by the Today projection (W04-owned)"
+      ],
+      "actionSequence": [
+        "GET /?surface=today",
+        "inspect the Today stage, LEFT region and the filter command set",
+        "execute today.filter -> ATTENTION through the rendered filter control"
+      ],
+      "assertions": [
+        {
+          "id": "today.stage-mounted",
+          "expected": "today",
+          "actual": "today",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "today.left-region-rendered",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "today.filter-set-complete",
+          "expected": [
+            "ALL",
+            "CONTINUE_SESSION",
+            "RECOMMENDATION",
+            "ATTENTION",
+            "RECENT_CONTEXT",
+            "PROGRESS"
+          ],
+          "actual": [
+            "ALL",
+            "CONTINUE_SESSION",
+            "RECOMMENDATION",
+            "ATTENTION",
+            "RECENT_CONTEXT",
+            "PROGRESS"
+          ],
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "today.all-filter-initially-pressed",
+          "expected": "true",
+          "actual": "true",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "today.mastery-never-inferred",
+          "expected": "NOT_INFERRED__W04_OWNED",
+          "actual": "NOT_INFERRED__W04_OWNED",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "today.mastery-authority-w04",
+          "expected": "W04_OWNED",
+          "actual": "W04_OWNED",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "today.no-canonical-write",
+          "expected": {
+            "canonical": false,
+            "mastery": false
+          },
+          "actual": {
+            "canonical": false,
+            "mastery": false
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "today.filter-switches-truthfully",
+          "expected": {
+            "attention": "true",
+            "all": "false"
+          },
+          "actual": {
+            "attention": "true",
+            "all": "false"
+          },
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "today.filter-command-executed-by-today-owner",
+          "expected": "today.filter",
+          "actual": "today.filter",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "today.filter-is-not-a-canonical-write",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        }
+      ],
+      "screenshots": [
+        {
+          "filename": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T041607Z-c82cec63.png",
+          "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+          "bytes": 290381,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:16:08.266Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "today.render-and-filter",
+            "id": "all-filter"
+          }
+        },
+        {
+          "filename": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T041608Z-c82cec63.png",
+          "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+          "bytes": 290622,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T04:16:08.832Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "today.render-and-filter",
+            "id": "attention-filter"
+          }
+        }
+      ],
+      "pageErrors": [],
+      "transportFailures": [
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": "151.0.7922.34",
+      "status": "PASS",
+      "failureClassification": null
+    }
+  ],
+  "evidenceArtifacts": [
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T035450Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T040317Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T041007Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T041338Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T041627Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": "back-forward-semantic-context"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow back-forward-semantic-context"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T035452Z-c82cec63.png",
+      "sha256": "5a72530a8ef9e15c28bcdc10c155b07529a20acf3c494d5469350e9a1177fbdf",
+      "bytes": 290895,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T040319Z-c82cec63.png",
+      "sha256": "5a72530a8ef9e15c28bcdc10c155b07529a20acf3c494d5469350e9a1177fbdf",
+      "bytes": 290895,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T041009Z-c82cec63.png",
+      "sha256": "5a72530a8ef9e15c28bcdc10c155b07529a20acf3c494d5469350e9a1177fbdf",
+      "bytes": 290895,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T041340Z-c82cec63.png",
+      "sha256": "5a72530a8ef9e15c28bcdc10c155b07529a20acf3c494d5469350e9a1177fbdf",
+      "bytes": 290895,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T041630Z-c82cec63.png",
+      "sha256": "5a72530a8ef9e15c28bcdc10c155b07529a20acf3c494d5469350e9a1177fbdf",
+      "bytes": 290895,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": "back-forward-semantic-context"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow back-forward-semantic-context"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T035451Z-c82cec63.png",
+      "sha256": "e2f6ed0b43bbb10d3e5672cb277ee0cb0288a34638c294c02ab01831ed68f6fe",
+      "bytes": 290895,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T040318Z-c82cec63.png",
+      "sha256": "50321947cf7a1ea766d5778d1bb9b8a38f185580ea09060b64b34611630941ba",
+      "bytes": 290895,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T041008Z-c82cec63.png",
+      "sha256": "57180140fa5be95d4d5e9bc406ba3b71b35bec537132537a79b1bddfe1627ca7",
+      "bytes": 290779,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T041339Z-c82cec63.png",
+      "sha256": "50321947cf7a1ea766d5778d1bb9b8a38f185580ea09060b64b34611630941ba",
+      "bytes": 290895,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T041628Z-c82cec63.png",
+      "sha256": "50321947cf7a1ea766d5778d1bb9b8a38f185580ea09060b64b34611630941ba",
+      "bytes": 290895,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": "back-forward-semantic-context"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow back-forward-semantic-context"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T035457Z-c82cec63.png",
+      "sha256": "d83ee272be22b78abcb30a36dce7a1ca601fb966b272f186c6886571c0cdd34d",
+      "bytes": 155248,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T040310Z-c82cec63.png",
+      "sha256": "d83ee272be22b78abcb30a36dce7a1ca601fb966b272f186c6886571c0cdd34d",
+      "bytes": 155248,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T040959Z-c82cec63.png",
+      "sha256": "d83ee272be22b78abcb30a36dce7a1ca601fb966b272f186c6886571c0cdd34d",
+      "bytes": 155248,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T041330Z-c82cec63.png",
+      "sha256": "d83ee272be22b78abcb30a36dce7a1ca601fb966b272f186c6886571c0cdd34d",
+      "bytes": 155248,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T041613Z-c82cec63.png",
+      "sha256": "d83ee272be22b78abcb30a36dce7a1ca601fb966b272f186c6886571c0cdd34d",
+      "bytes": 155248,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": "deep-work.open-close-lifecycle"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow deep-work.open-close-lifecycle"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T035456Z-c82cec63.png",
+      "sha256": "b8fe0022a79d9f40c4ac19edb05f1b3f03e1421cb55ad19236bdcae9f2feb42f",
+      "bytes": 152221,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T040309Z-c82cec63.png",
+      "sha256": "b8fe0022a79d9f40c4ac19edb05f1b3f03e1421cb55ad19236bdcae9f2feb42f",
+      "bytes": 152221,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T040959Z-c82cec63.png",
+      "sha256": "b8fe0022a79d9f40c4ac19edb05f1b3f03e1421cb55ad19236bdcae9f2feb42f",
+      "bytes": 152221,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T041330Z-c82cec63.png",
+      "sha256": "b8fe0022a79d9f40c4ac19edb05f1b3f03e1421cb55ad19236bdcae9f2feb42f",
+      "bytes": 152221,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T041613Z-c82cec63.png",
+      "sha256": "b8fe0022a79d9f40c4ac19edb05f1b3f03e1421cb55ad19236bdcae9f2feb42f",
+      "bytes": 152221,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": "deep-work.open-close-lifecycle"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow deep-work.open-close-lifecycle"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T035454Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T040307Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T040957Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T041328Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T041610Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": "deep-work.open-close-lifecycle"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow deep-work.open-close-lifecycle"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T035459Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T040311Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T041001Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T041332Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T041615Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": "diagnostics.gate"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow diagnostics.gate"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T035501Z-c82cec63.png",
+      "sha256": "b9ea4eccd7a014ed5770bb29e51d6b29ccb6d92b755d05b9b66070454c332942",
+      "bytes": 128901,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T040313Z-c82cec63.png",
+      "sha256": "b9ea4eccd7a014ed5770bb29e51d6b29ccb6d92b755d05b9b66070454c332942",
+      "bytes": 128901,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T041003Z-c82cec63.png",
+      "sha256": "b9ea4eccd7a014ed5770bb29e51d6b29ccb6d92b755d05b9b66070454c332942",
+      "bytes": 128901,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T041334Z-c82cec63.png",
+      "sha256": "b9ea4eccd7a014ed5770bb29e51d6b29ccb6d92b755d05b9b66070454c332942",
+      "bytes": 128901,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T041617Z-c82cec63.png",
+      "sha256": "b9ea4eccd7a014ed5770bb29e51d6b29ccb6d92b755d05b9b66070454c332942",
+      "bytes": 128901,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": "diagnostics.gate"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow diagnostics.gate"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T035627Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T040302Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T040952Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T041323Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T041605Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": "shell.destination-routing"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow shell.destination-routing"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T035627Z-c82cec63.png",
+      "sha256": "6d8349c7030bc955881489155f996ed8813dd5f36776431b81acd0eb2b889a2b",
+      "bytes": 290496,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T040302Z-c82cec63.png",
+      "sha256": "37aaaced53ed6ee9fbc609963786fcd06793184edcae47eb0ba9d07099935e4f",
+      "bytes": 290651,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T040952Z-c82cec63.png",
+      "sha256": "6d8349c7030bc955881489155f996ed8813dd5f36776431b81acd0eb2b889a2b",
+      "bytes": 290496,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T041323Z-c82cec63.png",
+      "sha256": "6d8349c7030bc955881489155f996ed8813dd5f36776431b81acd0eb2b889a2b",
+      "bytes": 290496,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T041605Z-c82cec63.png",
+      "sha256": "6d8349c7030bc955881489155f996ed8813dd5f36776431b81acd0eb2b889a2b",
+      "bytes": 290496,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": "shell.destination-routing"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow shell.destination-routing"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T035536Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T035626Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T040301Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T040951Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T041322Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T041605Z-c82cec63.png",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": "shell.destination-routing"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow shell.destination-routing"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T035447Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T040305Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T040954Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T041325Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T041607Z-c82cec63.png",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": "today.render-and-filter"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow today.render-and-filter"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T035448Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T040305Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T040955Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T041325Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "filename": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T041608Z-c82cec63.png",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "flow": "today.render-and-filter"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow today.render-and-filter"
+    }
+  ]
+}

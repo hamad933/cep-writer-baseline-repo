@@ -1,0 +1,1323 @@
+{
+  "schemaVersion": 1,
+  "workspace": "W01",
+  "generatedBy": "W01 writer (CKPT-E)",
+  "branch": "writer/mi-serial",
+  "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+  "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+  "candidate": {
+    "dispatchDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+    "dispatchDeclaredFiles": 287,
+    "measuredAtIndex": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+    "measuredFiles": 287,
+    "lineageStatus": "DRIFT_RECORDED__CONCURRENT_SIBLING_WORKSPACE_EDITS",
+    "driftAttribution": "Owner-directed parallel execution (controller/12_execution/02_parallel_dispatch.md): W02/W03/W04/W05 edit this worktree concurrently. Recorded, never suppressed."
+  },
+  "bindingAlgorithm": "path\\0size\\0sha256\\n (tools/source-tree-identity.mjs)",
+  "requirements": {
+    "csv": "controller/09_writer_forge/W01_REQUIREMENTS.csv",
+    "sha256": "d9234daf733c86aba2344b810d4b2ad4b203e528e494f0f3536906000afeb933",
+    "rows": 711,
+    "dispositioned": 711,
+    "zero_loss": true,
+    "counts": {
+      "PASS": 326,
+      "BLOCKED": 356,
+      "NOT_APPLICABLE_WITH_PROOF": 26,
+      "FAIL": 3
+    },
+    "matrixSha256": "e95694c4781ddd9851f0207442ea8325d87d342da9f70e140722bbd422184827"
+  },
+  "selfReference": "writer-output/W01/EVIDENCE_INDEX.json is not hashed here (self-reference); the Coordinator hashes it at review time",
+  "artifactCount": 76,
+  "artifacts": [
+    {
+      "path": "writer-output/W01/PROOF_CATALOG.json",
+      "kind": "acceptance_catalog",
+      "provenance": "EVIDENCE",
+      "sha256": "419073beedfc2f14991ffcde7e05704c1bba73adedee45adb5366331bf3411b2",
+      "bytes": 23952,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "note": "24 disjoint rules + 11 proofs; verified 711 matched / 0 unmatched / 0 multi before execution"
+    },
+    {
+      "path": "writer-output/W01/PROOF_RESULTS.json",
+      "kind": "measured_proof_results",
+      "provenance": "EVIDENCE",
+      "sha256": "d22b72857397dc9f6b2aec13a695daf14cfe2a29574ad3421426b944ca1991d0",
+      "bytes": 30622,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "note": "tool-measured by tools/writer-acceptance-matrix.py --run-proofs, never hand-written"
+    },
+    {
+      "path": "writer-output/W01/ACCEPTANCE_MATRIX.csv",
+      "kind": "acceptance_matrix",
+      "provenance": "EVIDENCE",
+      "sha256": "e95694c4781ddd9851f0207442ea8325d87d342da9f70e140722bbd422184827",
+      "bytes": 834822,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "note": "711 rows / zero_loss true / PASS 326 BLOCKED 356 NA 26 FAIL 3"
+    },
+    {
+      "path": "writer-output/W01/ACCEPTANCE_SUMMARY.json",
+      "kind": "acceptance_summary",
+      "provenance": "EVIDENCE",
+      "sha256": "ba204145e81247d0890f2f69cb55c2cb7cac53efd343cafdf1748aad17962c0b",
+      "bytes": 2052,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "note": "zero_loss true; requirements_sha256 d9234daf733c86aba2344b810d4b2ad4b203e528e494f0f3536906000afeb933"
+    },
+    {
+      "path": "writer-output/W01/BROWSER_RECEIPT.json",
+      "kind": "browser_receipt",
+      "provenance": "EVIDENCE",
+      "sha256": "a1a643ce1000be7a01efa1ae8963e3e0f24222de3d55218531d74ac1d8d57a67",
+      "bytes": 76044,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "note": "5 packet flows; contract fields per controller/07_browser/browser_contract.md s1; 4 PASS / 1 FAIL PRODUCT"
+    },
+    {
+      "path": "writer-output/W01/CHECKPOINTS.md",
+      "kind": "checkpoint_record",
+      "provenance": "EVIDENCE",
+      "sha256": "0a18516ee7ac5ffac6602e1401902a5b0e951555e21fbe46070b28aacfab319e",
+      "bytes": 11921,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "note": "W01-A..W01-E per controller/12_execution/01_writer_checkpoint_contract.md s1"
+    },
+    {
+      "path": "writer-output/W01/W01_HANDOFF.md",
+      "kind": "handoff",
+      "provenance": "EVIDENCE",
+      "sha256": "5beac58de84b3487a5c11685e6b768f44676e9d5faa314415cba324deda85275",
+      "bytes": 27832,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "note": "completion handoff: rows dispositioned, findings, conflicts, integration impact"
+    },
+    {
+      "path": "tools/w01-conformance.mjs",
+      "kind": "w01_tool",
+      "provenance": "W01_NEW",
+      "sha256": "9a56692042c677397a1f5b188757029ced73e9b97f24ec42fd0c4d5ad0c02116",
+      "bytes": 18959,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "note": "21-check executable acceptance proof (packet s10 a-f)"
+    },
+    {
+      "path": "tools/w01-browser-flows.mjs",
+      "kind": "w01_tool",
+      "provenance": "W01_NEW",
+      "sha256": "a981303f593e89e870a9a02665937b39147e253f0c4cb131282d6eee837d8601",
+      "bytes": 40894,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "note": "5 packet s9 flows + BROWSER_RECEIPT writer"
+    },
+    {
+      "path": "tests/surfaces/today/surface.test.mjs",
+      "kind": "w01_route_test",
+      "provenance": "W01_CHANGE",
+      "sha256": "e12fca414ddb189ee83db2fc5dcb84061078319f69e5f461c8292bce885e5a65",
+      "bytes": 2994,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "note": "Coordinator-accepted fix: mastery epistemic token + adapter-contract fixture"
+    },
+    {
+      "path": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T035450Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T040317Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T041007Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T041338Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/back-forward-semantic-context-context-set-20260929T041627Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": "back-forward-semantic-context"
+      },
+      "screenshotBinding": "FLOW_EVIDENCE",
+      "note": "screenshot captured by flow back-forward-semantic-context"
+    },
+    {
+      "path": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T035452Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "5a72530a8ef9e15c28bcdc10c155b07529a20acf3c494d5469350e9a1177fbdf",
+      "bytes": 290895,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T040319Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "5a72530a8ef9e15c28bcdc10c155b07529a20acf3c494d5469350e9a1177fbdf",
+      "bytes": 290895,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T041009Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "5a72530a8ef9e15c28bcdc10c155b07529a20acf3c494d5469350e9a1177fbdf",
+      "bytes": 290895,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T041340Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "5a72530a8ef9e15c28bcdc10c155b07529a20acf3c494d5469350e9a1177fbdf",
+      "bytes": 290895,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/back-forward-semantic-context-forward-native-20260929T041630Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "5a72530a8ef9e15c28bcdc10c155b07529a20acf3c494d5469350e9a1177fbdf",
+      "bytes": 290895,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": "back-forward-semantic-context"
+      },
+      "screenshotBinding": "FLOW_EVIDENCE",
+      "note": "screenshot captured by flow back-forward-semantic-context"
+    },
+    {
+      "path": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T035451Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "e2f6ed0b43bbb10d3e5672cb277ee0cb0288a34638c294c02ab01831ed68f6fe",
+      "bytes": 290895,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T040318Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "50321947cf7a1ea766d5778d1bb9b8a38f185580ea09060b64b34611630941ba",
+      "bytes": 290895,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T041008Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "57180140fa5be95d4d5e9bc406ba3b71b35bec537132537a79b1bddfe1627ca7",
+      "bytes": 290779,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T041339Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "50321947cf7a1ea766d5778d1bb9b8a38f185580ea09060b64b34611630941ba",
+      "bytes": 290895,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/back-forward-semantic-context-forward-shell-button-20260929T041628Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "50321947cf7a1ea766d5778d1bb9b8a38f185580ea09060b64b34611630941ba",
+      "bytes": 290895,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": "back-forward-semantic-context"
+      },
+      "screenshotBinding": "FLOW_EVIDENCE",
+      "note": "screenshot captured by flow back-forward-semantic-context"
+    },
+    {
+      "path": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T035457Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "d83ee272be22b78abcb30a36dce7a1ca601fb966b272f186c6886571c0cdd34d",
+      "bytes": 155248,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T040310Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "d83ee272be22b78abcb30a36dce7a1ca601fb966b272f186c6886571c0cdd34d",
+      "bytes": 155248,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T040959Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "d83ee272be22b78abcb30a36dce7a1ca601fb966b272f186c6886571c0cdd34d",
+      "bytes": 155248,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T041330Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "d83ee272be22b78abcb30a36dce7a1ca601fb966b272f186c6886571c0cdd34d",
+      "bytes": 155248,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/deep-work-open-close-lifecycle-closed-20260929T041613Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "d83ee272be22b78abcb30a36dce7a1ca601fb966b272f186c6886571c0cdd34d",
+      "bytes": 155248,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": "deep-work.open-close-lifecycle"
+      },
+      "screenshotBinding": "FLOW_EVIDENCE",
+      "note": "screenshot captured by flow deep-work.open-close-lifecycle"
+    },
+    {
+      "path": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T035456Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "b8fe0022a79d9f40c4ac19edb05f1b3f03e1421cb55ad19236bdcae9f2feb42f",
+      "bytes": 152221,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T040309Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "b8fe0022a79d9f40c4ac19edb05f1b3f03e1421cb55ad19236bdcae9f2feb42f",
+      "bytes": 152221,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T040959Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "b8fe0022a79d9f40c4ac19edb05f1b3f03e1421cb55ad19236bdcae9f2feb42f",
+      "bytes": 152221,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T041330Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "b8fe0022a79d9f40c4ac19edb05f1b3f03e1421cb55ad19236bdcae9f2feb42f",
+      "bytes": 152221,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/deep-work-open-close-lifecycle-open-20260929T041613Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "b8fe0022a79d9f40c4ac19edb05f1b3f03e1421cb55ad19236bdcae9f2feb42f",
+      "bytes": 152221,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": "deep-work.open-close-lifecycle"
+      },
+      "screenshotBinding": "FLOW_EVIDENCE",
+      "note": "screenshot captured by flow deep-work.open-close-lifecycle"
+    },
+    {
+      "path": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T035454Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T040307Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T040957Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T041328Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/deep-work-open-close-lifecycle-shell-closed-20260929T041610Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": "deep-work.open-close-lifecycle"
+      },
+      "screenshotBinding": "FLOW_EVIDENCE",
+      "note": "screenshot captured by flow deep-work.open-close-lifecycle"
+    },
+    {
+      "path": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T035459Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T040311Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T041001Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T041332Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/diagnostics-gate-negative-20260929T041615Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": "diagnostics.gate"
+      },
+      "screenshotBinding": "FLOW_EVIDENCE",
+      "note": "screenshot captured by flow diagnostics.gate"
+    },
+    {
+      "path": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T035501Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "b9ea4eccd7a014ed5770bb29e51d6b29ccb6d92b755d05b9b66070454c332942",
+      "bytes": 128901,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T040313Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "b9ea4eccd7a014ed5770bb29e51d6b29ccb6d92b755d05b9b66070454c332942",
+      "bytes": 128901,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T041003Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "b9ea4eccd7a014ed5770bb29e51d6b29ccb6d92b755d05b9b66070454c332942",
+      "bytes": 128901,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T041334Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "b9ea4eccd7a014ed5770bb29e51d6b29ccb6d92b755d05b9b66070454c332942",
+      "bytes": 128901,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/diagnostics-gate-positive-20260929T041617Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "b9ea4eccd7a014ed5770bb29e51d6b29ccb6d92b755d05b9b66070454c332942",
+      "bytes": 128901,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": "diagnostics.gate"
+      },
+      "screenshotBinding": "FLOW_EVIDENCE",
+      "note": "screenshot captured by flow diagnostics.gate"
+    },
+    {
+      "path": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T035627Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T040302Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T040952Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T041323Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/shell-destination-routing-after-navigate-20260929T041605Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": "shell.destination-routing"
+      },
+      "screenshotBinding": "FLOW_EVIDENCE",
+      "note": "screenshot captured by flow shell.destination-routing"
+    },
+    {
+      "path": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T035627Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "6d8349c7030bc955881489155f996ed8813dd5f36776431b81acd0eb2b889a2b",
+      "bytes": 290496,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T040302Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "37aaaced53ed6ee9fbc609963786fcd06793184edcae47eb0ba9d07099935e4f",
+      "bytes": 290651,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T040952Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "6d8349c7030bc955881489155f996ed8813dd5f36776431b81acd0eb2b889a2b",
+      "bytes": 290496,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T041323Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "6d8349c7030bc955881489155f996ed8813dd5f36776431b81acd0eb2b889a2b",
+      "bytes": 290496,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/shell-destination-routing-back-restored-20260929T041605Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "6d8349c7030bc955881489155f996ed8813dd5f36776431b81acd0eb2b889a2b",
+      "bytes": 290496,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": "shell.destination-routing"
+      },
+      "screenshotBinding": "FLOW_EVIDENCE",
+      "note": "screenshot captured by flow shell.destination-routing"
+    },
+    {
+      "path": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T035536Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T035626Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T040301Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T040951Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T041322Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/shell-destination-routing-baseline-20260929T041605Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "4804c357a9c8ebac951e2e3a32bb53042317baae45be1630c306265a320b249b",
+      "bytes": 127244,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": "shell.destination-routing"
+      },
+      "screenshotBinding": "FLOW_EVIDENCE",
+      "note": "screenshot captured by flow shell.destination-routing"
+    },
+    {
+      "path": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T035447Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T040305Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T040954Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T041325Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/today-render-and-filter-all-filter-20260929T041607Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "d2300f02e7487f8053699628bc9919d993b316f13a25ab645fe534a1e40cda6d",
+      "bytes": 290381,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": "today.render-and-filter"
+      },
+      "screenshotBinding": "FLOW_EVIDENCE",
+      "note": "screenshot captured by flow today.render-and-filter"
+    },
+    {
+      "path": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T035448Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T040305Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T040955Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T041325Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": null
+      },
+      "screenshotBinding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "note": "intermediate run of the same flow superseded by a later run; retained and indexed so the evidence set stays complete and non-orphaned"
+    },
+    {
+      "path": "writer-output/W01/evidence/today-render-and-filter-attention-filter-20260929T041608Z-c82cec63.png",
+      "kind": "screenshot",
+      "provenance": "EVIDENCE",
+      "sha256": "551f59e441ef2d7e1408c02d5415feab12b203dd51d3609d916b872edfb39bc0",
+      "bytes": 290622,
+      "bound": {
+        "candidateDeclared": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "candidateMeasured": "WORKTREE_VARIANT:3985a71416a6cd7bb7e4977d92a860fb57262a87f67b102f085f9672de435672",
+        "commit": "3763d13b27df6505a309c3b51299e70a9bf56d3c",
+        "tree": "1faf6df1b71e9f528b6001ce4dfe0b34376352fd",
+        "branch": "writer/mi-serial",
+        "flow": "today.render-and-filter"
+      },
+      "screenshotBinding": "FLOW_EVIDENCE",
+      "note": "screenshot captured by flow today.render-and-filter"
+    }
+  ],
+  "orphanCheck": {
+    "evidenceDirFiles": 66,
+    "indexedInBrowserReceipt": 66,
+    "orphans": 0,
+    "statement": "every screenshot in writer-output/W01/evidence/ is indexed in BROWSER_RECEIPT.json.evidenceArtifacts with sha256 and bound to a flow or labelled SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED; nothing was deleted"
+  }
+}

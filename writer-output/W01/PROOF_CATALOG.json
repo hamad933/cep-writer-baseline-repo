@@ -1,0 +1,489 @@
+{
+  "schemaVersion": 1,
+  "workspace": "W01",
+  "proofs": [
+    {
+      "id": "P-SHELL-ROUTE",
+      "command": "node tests/surfaces/shell/surface.test.mjs",
+      "artifact": "tests/surfaces/shell/surface.test.mjs",
+      "kind": "surface_route_test",
+      "workspaceScope": "W01",
+      "timeout": 300
+    },
+    {
+      "id": "P-TODAY-ROUTE",
+      "command": "node tests/surfaces/today/surface.test.mjs",
+      "artifact": "tests/surfaces/today/surface.test.mjs",
+      "kind": "surface_route_test",
+      "workspaceScope": "W01",
+      "timeout": 300
+    },
+    {
+      "id": "P-S07",
+      "command": "node dist/tests/rescue/S07_W01_W02_SHELL_TODAY/s07-contracts.test.js",
+      "artifact": "dist/tests/rescue/S07_W01_W02_SHELL_TODAY/s07-contracts.test.js",
+      "kind": "contract",
+      "workspaceScope": "W01",
+      "timeout": 300
+    },
+    {
+      "id": "P-D07",
+      "command": "node dist/tests/post-c03/D07/d07-today-presentation-authority-tests.js",
+      "artifact": "dist/tests/post-c03/D07/d07-today-presentation-authority-tests.js",
+      "kind": "contract",
+      "workspaceScope": "W01",
+      "timeout": 300
+    },
+    {
+      "id": "P-MODEL",
+      "command": "tools/writer-serial.sh npm test",
+      "artifact": "assurance/MODEL_TEST_RESULTS.json",
+      "kind": "model_test",
+      "workspaceScope": "ALL",
+      "timeout": 900
+    },
+    {
+      "id": "P-CHECK",
+      "command": "tools/writer-serial.sh npm run check",
+      "artifact": "assurance/CONTRACT_TEST_RESULTS.json",
+      "kind": "checker",
+      "workspaceScope": "ALL",
+      "timeout": 1800
+    },
+    {
+      "id": "P-CHECK-DUP",
+      "command": "tools/writer-serial.sh node tools/check-duplicate-mechanics.mjs",
+      "artifact": "tools/check-duplicate-mechanics.mjs",
+      "kind": "checker",
+      "workspaceScope": "ALL",
+      "timeout": 600
+    },
+    {
+      "id": "P-CONFORMANCE",
+      "command": "tools/writer-serial.sh node tools/w01-conformance.mjs",
+      "artifact": "tools/w01-conformance.mjs",
+      "kind": "checker",
+      "workspaceScope": "W01",
+      "timeout": 600
+    },
+    {
+      "id": "P-BROWSER-W01",
+      "command": "node tools/w01-browser-flows.mjs --flow shell.destination-routing --flow today.render-and-filter --flow deep-work.open-close-lifecycle --flow diagnostics.gate",
+      "artifact": "writer-output/W01/BROWSER_RECEIPT.json",
+      "kind": "browser",
+      "workspaceScope": "W01",
+      "timeout": 900
+    },
+    {
+      "id": "P-BROWSER-CBF002",
+      "command": "node tools/w01-browser-flows.mjs --flow back-forward-semantic-context",
+      "artifact": "writer-output/W01/BROWSER_RECEIPT.json",
+      "kind": "browser",
+      "workspaceScope": "W01",
+      "timeout": 600
+    },
+    {
+      "id": "P-MATRIX-ZEROLOSS",
+      "command": "python3 tools/writer-acceptance-matrix.py --workspace W01",
+      "artifact": "writer-output/W01/ACCEPTANCE_MATRIX.csv",
+      "kind": "checker",
+      "workspaceScope": "W01",
+      "timeout": 600
+    }
+  ],
+  "rules": [
+    {
+      "id": "R-VISUAL-SHELL-REOPENED-BLOCKED",
+      "match": {
+        "source_layer": "VISUAL_REFERENCE",
+        "surface": "shell"
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "Shell has no accepted final binary: reference_binding=NO_FINAL_BINARY__VISUAL_COMPOSITION_REOPENED_BY_OWNER-20260910-010 (W01_REQUIREMENTS.csv OBL-008677). Final shell visual/destination acceptance is an Owner-authority decision bound to open question Q-1 (shell destination count, destinationCountFrozen=false) and packet \u00a76/\u00a711 forbid freezing historical five-destination chrome or treating old screenshots as authority; K-05 (browser_contract \u00a74) keeps the image presentation-only. Missing authority: Owner visual acceptance.",
+      "proof_ref": "controller/09_writer_forge/W01_writer_packet.md#6",
+      "evidence_ref": ""
+    },
+    {
+      "id": "R-VISUAL-TODAY-MATCHED-VIEWPORT-BLOCKED",
+      "match": {
+        "source_layer": "VISUAL_REFERENCE",
+        "surface": "today"
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "Row proof_requirement demands actual image inspection at matched state/viewport (1440 and ~1024) with RTL/LTR, focus/keyboard and accessibility evidence (OBL-008651). W01's bounded five-flow receipt captures 1440x980 route evidence only, so the matched-viewport Owner comparison is not produced; K-05 (browser_contract \u00a74) also forbids letting CEP_TODAY_MAIN_ORCHESTRATION_REFERENCE.png override domain/provider/authority truth. Missing authority: Owner matched-state visual acceptance + C03-GATE-020 visual region/state proof.",
+      "proof_ref": "controller/07_browser/browser_contract.md#4",
+      "evidence_ref": "writer-output/W01/BROWSER_RECEIPT.json"
+    },
+    {
+      "id": "R-Q1-DESTINATION-COUNT-BLOCKED",
+      "match": {
+        "obligation__contains": [
+          "destinationCountFrozen",
+          "Historical five destinations are current baseline evidence",
+          "Current Shell/navigation visual composition is not accepted"
+        ],
+        "source_layer__not": [
+          "VISUAL_REFERENCE"
+        ]
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "STOP/REPORT open question Q-1: shell final destination count is not adjudicated. destinationCountFrozen=false is preserved and the five-destination functional baseline is proven (S07/D07/browser flow), but the row's own text requires explicit Owner resolution (A11-PF-004 / C03-GATE-023 is Owner-authority-only). Writer may not decide or freeze a destination count; rows OBL-000198, OBL-004728, OBL-005153, OBL-008620 stay blocked on Q-1.",
+      "proof_ref": "controller/03_historical/open_questions.md#Q-1",
+      "evidence_ref": "writer-output/W01/BROWSER_RECEIPT.json"
+    },
+    {
+      "id": "R-Q2-TODAY-PROVIDER-BLOCKED",
+      "match": {
+        "surface": "today",
+        "obligation__contains": [
+          "Close through authorized provider/data chain",
+          "Shared global/family owners govern compatible Presentation grammar"
+        ]
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "STOP/REPORT open question Q-2: the Today domain/provider owner is not adjudicated in any current registry, so the shared-owner clause 'Each SurfaceProfile and its domain/provider owners supply those Surface-specific truths' cannot be discharged for Today, and A11-PF-002 must close through an authorized provider/data chain. Rows OBL-001451, OBL-004726, OBL-005151 stay blocked on Q-2; W01 must not invent a provider owner.",
+      "proof_ref": "controller/03_historical/open_questions.md#Q-2",
+      "evidence_ref": "writer-output/W01/BROWSER_RECEIPT.json"
+    },
+    {
+      "id": "R-HISTORICAL-GUARDRAIL-NA",
+      "match": {
+        "temporal_disposition": "HISTORICAL_DURABLE_GUARDRAIL"
+      },
+      "status_mode": "literal",
+      "status": "NOT_APPLICABLE_WITH_PROOF",
+      "justification": "The row carries controller_conflict_flag=HISTORICAL_GUARDRAIL_NOT_CURRENT_LAW and packet \u00a75 classifies HISTORICAL_DURABLE_GUARDRAIL rows as history, not law; obligation A01-PF-003 is STALE_HISTORICAL_FINDING / RECONCILED__DO_NOT_REOPEN ('Treat AR0 as lineage/recovery source with newer live overlay; no new governance mutation from A01'). There is no current-law obligation to discharge (OBL-003172, OBL-003173).",
+      "proof_ref": "controller/09_writer_forge/W01_writer_packet.md#5",
+      "evidence_ref": ""
+    },
+    {
+      "id": "R-FUTURE-MISSION-NA",
+      "match": {
+        "proof_requirement": [
+          "Future D05 Mission material",
+          "Future D06 Mission material",
+          "Future D07 Mission material",
+          "Future D08 Mission material",
+          "Future D09 Mission material",
+          "Future D10 Mission material",
+          "Future D11 Mission material"
+        ],
+        "obligation__not_contains": [
+          "destinationCountFrozen",
+          "Close through authorized provider/data chain"
+        ]
+      },
+      "status_mode": "literal",
+      "status": "NOT_APPLICABLE_WITH_PROOF",
+      "justification": "The row's own proof_requirement binding assigns this material to a Future D05-D11 Mission ('Future D05/D06/D07/D08/D09/D10/D11 Mission material') and notes carry gap_type=CURRENTLY_ROUTED_BUT_MISSION_UNDERSPECIFIED; packet \u00a716 integration boundaries scope W01 to the shell/today lanes only. The rows stay preserved row-addressably in ACCEPTANCE_MATRIX.csv for the named future mission (24 rows: Sticky/Learn/OperationalSession/Runs/W04-provider/config lanes outside W01).",
+      "proof_ref": "controller/09_writer_forge/W01_writer_packet.md#16",
+      "evidence_ref": ""
+    },
+    {
+      "id": "R-POST-C03-OVERLAY-BLOCKED",
+      "match": {
+        "proof_requirement": [
+          "CURRENT_POST_C03_FINDINGS routing metadata",
+          "POST_C03_EXECUTION_PLAN / PROOF_PLAN / active local mission overlays when next edited"
+        ]
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "The required correction targets Controller-owned artifacts (POST_C03 execution plan / proof plan / active local mission overlays; F-050 over-broad D04 routing tag and OD-20260924-082 grouping text). controller/** is protected Controller input that a Writer may not edit (dispatch_readiness \u00a73 forbidden operations). Missing authority: Controller edit of the POST_C03 overlays.",
+      "proof_ref": "controller/12_execution/00_dispatch_readiness.md#3",
+      "evidence_ref": ""
+    },
+    {
+      "id": "R-GATE022-BROWSER-EVIDENCE",
+      "match": {
+        "proof_requirement": "GATE-022"
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-CHECK"
+      ],
+      "proof_logic": "all",
+      "justification": "C03-GATE-022 (genuine-browser exact-source receipt) is measured OPEN: npm run check exits 1 on browser.lineage_receipt_truthful (receipt executionStatus=BLOCKED_OR_FAILED, 1/6 flows) and browser.targeted_visual_evidence (legacy-class screenshots). Reported as FAIL, not hidden; the failures are browser-lineage class and not W01 product code.",
+      "evidence_ref": "writer-output/W01/BROWSER_RECEIPT.json"
+    },
+    {
+      "id": "R-OBLIGATION-MANIFEST",
+      "match": {
+        "proof_requirement": "D12/D13/D14 equivalent obligation-level manifest"
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-MATRIX-ZEROLOSS"
+      ],
+      "proof_logic": "all",
+      "justification": "C03-GATE-024 requires a frozen obligation-level proof manifest; this acceptance matrix is that manifest and the proof re-derives it, exiting 0 only when all 711 rows land in exactly one rule (zero loss).",
+      "evidence_ref": "writer-output/W01/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-AR1-RECOVERY-BLOCKED",
+      "match": {
+        "source_layer": "AUTHORITY_RECOVERY_ARCHAEOLOGY"
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "Row proof_requirement 'Source/value crosswalk + domain/profile reconciliation + current Owner overlay' is not present as a W01-measured artifact; the AR1 recovered durable-value crosswalk and the current Owner overlay live in the Controller evidence plane (recovered archives are requirement/value input per packet \u00a713, and historical path/module details remain lineage only). Missing evidence: the AR1 crosswalk receipt.",
+      "proof_ref": "controller/09_writer_forge/W01_writer_packet.md#13",
+      "evidence_ref": ""
+    },
+    {
+      "id": "R-IDENTITY-SHELL-RETURN-CONTINUITY",
+      "match": {
+        "source_layer": "CURRENT_IDENTITY",
+        "surface": "shell"
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-SHELL-ROUTE",
+        "P-S07",
+        "P-BROWSER-W01",
+        "P-BROWSER-CBF002"
+      ],
+      "proof_logic": "all",
+      "justification": "OBL-000001 identity text includes 'return continuity'. Route, destination and shell-mechanics proofs pass, but the CBF-002 regression proof measures Back restoring the route while the Today filter semantic context is silently reset -> FAIL (reported, not hidden). CBF-002 is explicitly bounded with evidence in writer-output/W01/BROWSER_RECEIPT.json (capture side OK, restore side does not re-apply).",
+      "evidence_ref": "writer-output/W01/BROWSER_RECEIPT.json#back-forward-semantic-context"
+    },
+    {
+      "id": "R-IDENTITY-TODAY",
+      "match": {
+        "source_layer": "CURRENT_IDENTITY",
+        "surface": "today"
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-TODAY-ROUTE",
+        "P-D07",
+        "P-BROWSER-W01"
+      ],
+      "proof_logic": "all",
+      "justification": "Source + executable route + state/interaction proof for the Today identity: route test, D07 presentation-authority test and the today.render-and-filter browser flow all measure PASS.",
+      "evidence_ref": "writer-output/W01/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-PROFILE-SHELL",
+      "match": {
+        "source_layer": "CURRENT_PROFILE",
+        "surface": "shell"
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-CONFORMANCE",
+        "P-CHECK-DUP"
+      ],
+      "proof_logic": "all",
+      "justification": "Decision/profile-by-profile evidence matrix: P-CONFORMANCE walks profiles/shell.json domain_commands and proves every declared command is registered by bindShellSurfaceCommands, plus the profile invariants and the no-duplicate-mechanics gate.",
+      "evidence_ref": "writer-output/W01/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-PROFILE-TODAY",
+      "match": {
+        "source_layer": "CURRENT_PROFILE",
+        "surface": "today"
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-CONFORMANCE",
+        "P-TODAY-ROUTE"
+      ],
+      "proof_logic": "all",
+      "justification": "Decision/profile-by-profile evidence matrix: P-CONFORMANCE walks profiles/today.json domain_commands and invariants (No Today canonical domain writes; Progress is a projection, Mastery is W04-owned) against bindTodaySurface, plus the today route test.",
+      "evidence_ref": "writer-output/W01/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-RESULT-AUDIT",
+      "match": {
+        "source_layer": "CURRENT_RESULT_AUDIT"
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-CONFORMANCE",
+        "P-MODEL",
+        "P-BROWSER-W01"
+      ],
+      "proof_logic": "all",
+      "justification": "Exact source identity (P-CONFORMANCE recomputes the worktree identity c82cec63.../287), independent rerun (npm test) and result-first runtime/visual proof (browser flows at 1440x980 with hash-bound screenshots). Existing work remains unaccepted input - no waiver of any unproven obligation.",
+      "evidence_ref": "writer-output/W01/BROWSER_RECEIPT.json#evidenceLineage"
+    },
+    {
+      "id": "R-OD-ZEROLOSS",
+      "match": {
+        "source_layer": "OWNER_DECISION",
+        "proof_requirement": "ZERO_LOSS_DISPOSITION_REQUIRED",
+        "obligation__not_contains": [
+          "Current Shell/navigation visual composition is not accepted"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-MATRIX-ZEROLOSS",
+        "P-CONFORMANCE",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "justification": "The row's own proof_requirement is an explicit zero-loss disposition: this acceptance matrix dispositions the decision row-by-row and P-CONFORMANCE/P-MODEL prove the decision is honoured inside the shell/today lanes (no canonical writes, no duplicate mechanics, profile coverage). The one ZERO_LOSS row whose decision is still open (OBL-000198 shell redesign) is carved out to R-Q1-DESTINATION-COUNT-BLOCKED.",
+      "evidence_ref": "writer-output/W01/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-OD-SHARED-OWNERS-SHELL",
+      "match": {
+        "source_layer": "OWNER_DECISION",
+        "surface": "shell",
+        "obligation__contains": [
+          "Shared global/family owners govern compatible Presentation grammar"
+        ]
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "Compound proof_requirement AUTHORITY_DIMENSION_CLASSIFICATION__...__NO_LIBRARY_SEMANTIC_TEMPLATE__LEARN_MAXIMUM_COMPATIBLE_INHERITANCE__PER_SURFACE_ACTION_AVAILABILITY spans Library/Learn lanes and per-surface action-availability proofs owned by W02 and by the Controller; W01 holds no matched executable consumer proof for those lanes. The identical Today row is separately blocked on open question Q-2 (R-Q2-TODAY-PROVIDER-BLOCKED). Missing authority: W02 consumer proofs + Controller acceptance.",
+      "proof_ref": "controller/07_browser/browser_contract.md#5",
+      "evidence_ref": ""
+    },
+    {
+      "id": "R-OD-OWNER-EVIDENCE-BLOCKED",
+      "match": {
+        "source_layer": "OWNER_DECISION",
+        "proof_requirement__not": "ZERO_LOSS_DISPOSITION_REQUIRED",
+        "obligation__not_contains": [
+          "Shared global/family owners govern compatible Presentation grammar"
+        ]
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "Owner-decision acceptance evidence is held by the Controller/Owner plane: proof_requirement values are CONTROLLER_ZERO_LOSS_EVIDENCE (28) and compound acceptance proofs (Owner-visible evidence sheet, matched-viewport matrix, Drive/repo/capsule identity receipts, harness custody receipts, cross-workspace consumer proofs). browser_contract \u00a75 assigns adjudication and acceptance to the Controller and OD-20260914-005 (OBL-000615) states Writer PASS never transfers that responsibility. Decision text is preserved row-addressably in ACCEPTANCE_MATRIX.csv (116 rows).",
+      "proof_ref": "controller/07_browser/browser_contract.md#5",
+      "evidence_ref": ""
+    },
+    {
+      "id": "R-QA-DEEP-AUDIT-BLOCKED",
+      "match": {
+        "source_layer": "OWNER_QA_DEEP_AUDIT"
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "All 104 rows are OPEN deep-audit verdicts (A3-GUI-001..012, A4-001..018, C01..C30) whose own proof_requirement demands 'Exact source + current owner + matched executable consumer proof'. W01's measured proofs do not provide that for Windows/ConPTY platform cases, Settings/toolbar presentation acceptance, or Library/Learn/Runs/W03-W05 lanes. Missing authority: Controller/Owner audit convergence (browser_contract \u00a75); finding text preserved row-addressably.",
+      "proof_ref": "controller/07_browser/browser_contract.md#5",
+      "evidence_ref": ""
+    },
+    {
+      "id": "R-FINDING-VIEWPORT-GATE-BLOCKED",
+      "match": {
+        "source_layer": "ZL01_ROOT_FINDING",
+        "obligation__contains": [
+          "Require matched 1440/~1024"
+        ]
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "A02-PF-023 requires matched 1440/~1024 viewport plus keyboard/focus visual acceptance evidence. W01's bounded five-flow receipt captures 1440x980 route/state evidence only, so the matched-~1024 visual gate is not produced; C03-GATE-020 visual region/state proof remains Controller/Owner-gated. Missing evidence: matched-viewport capture at ~1024 with keyboard/focus traversal.",
+      "proof_ref": "controller/07_browser/browser_contract.md#4",
+      "evidence_ref": ""
+    },
+    {
+      "id": "R-FINDING-OPEN-BLOCKED",
+      "match": {
+        "source_layer": "ZL01_ROOT_FINDING",
+        "obligation__contains": [
+          "OPEN",
+          "BLOCKING",
+          "CURRENT_BLOCKER",
+          "PLATFORM_GATED",
+          "PARITY_NOT_PROVEN",
+          "EXISTING F-030 CORROBORATED",
+          "ACTIVE_",
+          "CONTROLLER_CONVERGENCE_REQUIRED"
+        ],
+        "obligation__not_contains": [
+          "destinationCountFrozen",
+          "Historical five destinations are current baseline evidence",
+          "Current Shell/navigation visual composition is not accepted",
+          "Close through authorized provider/data chain",
+          "Shared global/family owners govern compatible Presentation grammar",
+          "Require matched 1440/~1024"
+        ],
+        "temporal_disposition__not": [
+          "HISTORICAL_DURABLE_GUARDRAIL"
+        ]
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "Open C03 root findings (status tokens OPEN*, *BLOCKING, CURRENT_BLOCKER, PLATFORM_GATED, PARITY_NOT_PROVEN, ACTIVE_*, *_CONTROLLER_CONVERGENCE_REQUIRED). Their own text names the missing authority: Controller convergence, Owner adjudication, platform/environment evidence gate or later-Writer correction. C03 DAG routes D01-D11 remain open; W01 measured proofs do not close them.",
+      "proof_ref": "controller/09_writer_forge/W01_writer_packet.md#6",
+      "evidence_ref": ""
+    },
+    {
+      "id": "R-FINDING-GUARDRAIL",
+      "match": {
+        "source_layer": "ZL01_ROOT_FINDING",
+        "temporal_disposition__not": [
+          "HISTORICAL_DURABLE_GUARDRAIL"
+        ],
+        "obligation__not_contains": [
+          "OPEN",
+          "BLOCKING",
+          "CURRENT_BLOCKER",
+          "PLATFORM_GATED",
+          "PARITY_NOT_PROVEN",
+          "EXISTING F-030 CORROBORATED",
+          "ACTIVE_",
+          "CONTROLLER_CONVERGENCE_REQUIRED",
+          "Require matched 1440/~1024",
+          "destinationCountFrozen",
+          "Historical five destinations are current baseline evidence",
+          "Current Shell/navigation visual composition is not accepted",
+          "Close through authorized provider/data chain",
+          "Shared global/family owners govern compatible Presentation grammar"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-SHELL-ROUTE",
+        "P-TODAY-ROUTE",
+        "P-MODEL",
+        "P-CONFORMANCE"
+      ],
+      "proof_logic": "all",
+      "justification": "Non-open finding rows whose status token is a dispositioned guardrail (COVERAGE_GUARD__NO_DEFECT, COVERAGE_GUARD__USE_LATEST_DISPOSITION, CURRENT_BINDING__LIVE_REFRESH_APPLIED, DURABLE_GUARDRAIL, AUTHORITY_GUARDRAIL, AUTHORITY_GUARDRAIL_DEPENDENCY). These are lane-scoped negative/positive guardrails proven by the shell+today route tests, the full model-test corpus and the conformance checks.",
+      "evidence_ref": "writer-output/W01/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-DURABLE-SHELL",
+      "match": {
+        "proof_requirement": "Same affected Surface/component lane",
+        "surface": "shell"
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-SHELL-ROUTE",
+        "P-MODEL",
+        "P-CONFORMANCE"
+      ],
+      "proof_logic": "all",
+      "justification": "Row proof_requirement is literally 'Same affected Surface/component lane': the durable ancillary row is discharged by its own lane's executable route proof plus the full model-test corpus and the W01 conformance checks; the row itself is preserved row-addressably (zero loss) as acceptance criteria/negative test/provider ceiling/guardrail.",
+      "evidence_ref": "writer-output/W01/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-DURABLE-TODAY",
+      "match": {
+        "proof_requirement": "Same affected Surface/component lane",
+        "surface": "today"
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-TODAY-ROUTE",
+        "P-MODEL",
+        "P-CONFORMANCE"
+      ],
+      "proof_logic": "all",
+      "justification": "Row proof_requirement is literally 'Same affected Surface/component lane': the durable ancillary row is discharged by the Today lane's executable route proof plus the full model-test corpus and the W01 conformance checks; the row itself is preserved row-addressably (zero loss) as acceptance criteria/negative test/provider ceiling/guardrail.",
+      "evidence_ref": "writer-output/W01/PROOF_RESULTS.json"
+    }
+  ]
+}
