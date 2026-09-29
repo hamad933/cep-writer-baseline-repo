@@ -88,3 +88,7 @@ export function runS01StructuredEditorCoreProof(){
   const failed=cases.filter(item=>item.status!=='PASS');
   return {schemaVersion:1,kind:'OD057_S01_SHARED_STRUCTURED_EDITOR_CORE_PROOF',classification:'CANDIDATE_ONLY_SPECIALIST_EVIDENCE',status:failed.length?'FAIL':'PASS',caseCount:cases.length,passCount:cases.length-failed.length,failCount:failed.length,cases};
 }
+
+const s01CoreResult=runS01StructuredEditorCoreProof();
+console.log(JSON.stringify(s01CoreResult,null,2));
+if(s01CoreResult.failCount)process.exitCode=1;

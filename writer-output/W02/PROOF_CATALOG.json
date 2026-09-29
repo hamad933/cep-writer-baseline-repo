@@ -1,0 +1,1511 @@
+{
+  "schemaVersion": 1,
+  "workspace": "W02",
+  "proofs": [
+    {
+      "id": "P-LIBRARY-ROUTE",
+      "command": "node tests/surfaces/library/surface.test.mjs",
+      "artifact": "tests/surfaces/library/surface.test.mjs",
+      "kind": "surface_route",
+      "workspaceScope": "W02",
+      "timeout": 300
+    },
+    {
+      "id": "P-LEARN-ROUTE",
+      "command": "node tests/surfaces/learn/surface.test.mjs",
+      "artifact": "tests/surfaces/learn/surface.test.mjs",
+      "kind": "surface_route",
+      "workspaceScope": "W02",
+      "timeout": 300
+    },
+    {
+      "id": "P-RQ-ROUTE",
+      "command": "node tests/surfaces/rq/surface.test.mjs",
+      "artifact": "tests/surfaces/rq/surface.test.mjs",
+      "kind": "surface_route",
+      "workspaceScope": "W02",
+      "timeout": 300
+    },
+    {
+      "id": "P-VISUALIZE-ROUTE",
+      "command": "node tests/surfaces/visualize/surface.test.mjs",
+      "artifact": "tests/surfaces/visualize/surface.test.mjs",
+      "kind": "surface_route",
+      "workspaceScope": "W02",
+      "timeout": 300
+    },
+    {
+      "id": "P-MODEL",
+      "command": "tools/writer-serial.sh npm test",
+      "artifact": "assurance/MODEL_TEST_RESULTS.json",
+      "kind": "model_test",
+      "workspaceScope": "ALL",
+      "timeout": 900
+    },
+    {
+      "id": "P-S01",
+      "command": "node dist/tests/rescue/S01_SHARED_STRUCTURED_EDITOR/s01-structured-editor-core-tests.js",
+      "artifact": "stack/native-typescript/tests/rescue/S01_SHARED_STRUCTURED_EDITOR/s01-structured-editor-core-tests.ts",
+      "kind": "contract",
+      "workspaceScope": "W02",
+      "timeout": 300
+    },
+    {
+      "id": "P-S08",
+      "command": "node dist/tests/rescue/S08_W01_W02_LIBRARY_LEARN/s08-falsification.js",
+      "artifact": "stack/native-typescript/tests/rescue/S08_W01_W02_LIBRARY_LEARN/s08-falsification.ts",
+      "kind": "contract",
+      "workspaceScope": "W02",
+      "timeout": 300
+    },
+    {
+      "id": "P-S09",
+      "command": "node dist/tests/rescue/S09_W01_W02_RQ_VISUALIZE/s09-reexecution-tests.js",
+      "artifact": "stack/native-typescript/tests/rescue/S09_W01_W02_RQ_VISUALIZE/s09-reexecution-tests.ts",
+      "kind": "contract",
+      "workspaceScope": "W02",
+      "timeout": 300
+    },
+    {
+      "id": "P-D08",
+      "command": "node dist/tests/post-c03/D08/d08-w02-visualize-parity-tests.js",
+      "artifact": "stack/native-typescript/tests/post-c03/D08/d08-w02-visualize-parity-tests.ts",
+      "kind": "contract",
+      "workspaceScope": "W02",
+      "timeout": 300
+    },
+    {
+      "id": "P-B3R",
+      "command": "node tools/b3r-rq-visualize/falsify-b3r.mjs",
+      "artifact": "tools/b3r-rq-visualize/falsify-b3r.mjs",
+      "kind": "checker",
+      "workspaceScope": "W02",
+      "timeout": 300
+    },
+    {
+      "id": "P-B3R-CORR03",
+      "command": "node tools/b3r-rq-visualize/falsify-b3r-corr03.mjs",
+      "artifact": "tools/b3r-rq-visualize/falsify-b3r-corr03.mjs",
+      "kind": "checker",
+      "workspaceScope": "W02",
+      "timeout": 300
+    },
+    {
+      "id": "P-CHECK-DUP",
+      "command": "node tools/check-duplicate-mechanics.mjs",
+      "artifact": "assurance/DUPLICATE_MECHANIC_SCAN.json",
+      "kind": "checker",
+      "workspaceScope": "ALL",
+      "timeout": 300
+    },
+    {
+      "id": "P-CHECK-AUTH",
+      "command": "node tools/check-authority-intake.mjs",
+      "artifact": "authority/",
+      "kind": "checker",
+      "workspaceScope": "ALL",
+      "timeout": 300
+    },
+    {
+      "id": "P-CHECK-DEFERRED",
+      "command": "node tools/check-deferred-boundary.mjs",
+      "artifact": "tools/check-deferred-boundary.mjs",
+      "kind": "checker",
+      "workspaceScope": "ALL",
+      "timeout": 300
+    },
+    {
+      "id": "P-W02-BROWSER",
+      "command": "node tools/w02-browser-flows.mjs --only=library-edit-learn-consume-real-consumer-chain,spatial-select-connect-canonical-edge,spatial-input-bidi-preference-and-structured-isolation,fit-pan-zoom-canonical-state-invariance,focus-document-activeElement-proofs,s01-structured-insertion-pointer-keyboard-1440x1000,s01-structured-insertion-pointer-keyboard-1024x900,spatial-closure-1024x900",
+      "artifact": "writer-output/W02/BROWSER_RECEIPT.json",
+      "kind": "browser",
+      "workspaceScope": "W02",
+      "timeout": 900
+    },
+    {
+      "id": "P-W02-BROWSER-ALL",
+      "command": "node tools/w02-browser-flows.mjs",
+      "artifact": "writer-output/W02/BROWSER_RECEIPT.json",
+      "kind": "browser",
+      "workspaceScope": "W02",
+      "timeout": 900
+    },
+    {
+      "id": "P-MANIFEST-COVERAGE",
+      "command": "node tools/w02-coverage-check.mjs",
+      "artifact": "tools/w02-coverage-check.mjs",
+      "kind": "checker",
+      "workspaceScope": "W02",
+      "timeout": 300
+    }
+  ],
+  "rules": [
+    {
+      "id": "R-Q3-RQ-VISUAL-REF",
+      "match": {
+        "surface": "rq",
+        "source_layer": "VISUAL_REFERENCE"
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "Q-3 (controller/03_historical/open_questions.md) is STOP/REPORT: the RQ visual reference ceiling classification REVIEWED_FINAL_CANDIDATE is an unresolved Owner decision on visual reference authority. K-05 (browser_contract.md \u00a74) also makes visual references presentation-only. W02 must not decide Q-3.",
+      "proof_ref": "controller/03_historical/open_questions.md#q-3",
+      "evidence_ref": "writer-output/W02/EVIDENCE_INDEX.json"
+    },
+    {
+      "id": "R-Q3-RQ-CEILING-BINDING",
+      "match": {
+        "surface": "rq",
+        "source_layer__not": [
+          "VISUAL_REFERENCE"
+        ],
+        "reference_binding__contains": "REVIEWED_FINAL_CANDIDATE"
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "Q-3 (controller/03_historical/open_questions.md): \"RQ visual ceiling (REVIEWED_FINAL_CANDIDATE) \u2014 ceiling claim unresolved; Owner decision on visual reference authority\". W02 packet \u00a76 lists Q-3 as do-not-decide-silently (STOP/REPORT), so these rows are blocked on the Q-3 Owner decision and are not folded into any passing surface proof.",
+      "proof_ref": "controller/03_historical/open_questions.md#q-3",
+      "evidence_ref": "writer-output/W02/EVIDENCE_INDEX.json"
+    },
+    {
+      "id": "R-Q3-RQ-CEILING-EXCERPT",
+      "match": {
+        "surface": "rq",
+        "source_layer__not": [
+          "VISUAL_REFERENCE"
+        ],
+        "source_excerpt__contains": "REVIEWED_FINAL_CANDIDATE"
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "Q-3 (controller/03_historical/open_questions.md): \"RQ visual ceiling (REVIEWED_FINAL_CANDIDATE) \u2014 ceiling claim unresolved; Owner decision on visual reference authority\". W02 packet \u00a76 lists Q-3 as do-not-decide-silently (STOP/REPORT), so these rows are blocked on the Q-3 Owner decision and are not folded into any passing surface proof.",
+      "proof_ref": "controller/03_historical/open_questions.md#q-3",
+      "evidence_ref": "writer-output/W02/EVIDENCE_INDEX.json"
+    },
+    {
+      "id": "R-VISREF-K05",
+      "match": {
+        "source_layer": "VISUAL_REFERENCE",
+        "surface__not": "rq"
+      },
+      "status_mode": "literal",
+      "status": "NOT_APPLICABLE_WITH_PROOF",
+      "justification": "K-05 / browser_contract.md \u00a74: visual references (cep-writer/references/visual, FINAL_VISUAL_REFERENCE_REGISTER, CEP_VIS-001) are presentation inputs only, never domain/data/provider truth; W02 packet \u00a78 states the same. Presentation-only rows impose no domain obligation and are discharged by K-05.",
+      "proof_ref": "controller/07_browser/browser_contract.md#4",
+      "evidence_ref": "writer-output/W02/EVIDENCE_INDEX.json"
+    },
+    {
+      "id": "R-ARCH-PROVENANCE",
+      "match": {
+        "source_layer": "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+        "surface__not": "rq"
+      },
+      "status_mode": "literal",
+      "status": "NOT_APPLICABLE_WITH_PROOF",
+      "justification": "dispatch/READ-ONLY law: controller/** recovered archives are provenance evidence only, never current execution specification (W02 packet \u00a713 donor/reference map lists them as historical input; ownership_adjudication.md preserves historical locks as provenance superseded by current code).",
+      "proof_ref": "controller/09_writer_forge/W02_writer_packet.md#13",
+      "evidence_ref": "writer-output/W02/EVIDENCE_INDEX.json"
+    },
+    {
+      "id": "R-FWD-FUTURE-D",
+      "match": {
+        "source_layer": "ZL01_FORWARD_GAP",
+        "proof_requirement__contains": "Future D"
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "POST_C03_FORWARD_CONTROL_GAP rows whose proof_requirement names Future D05/D06/D08/D09/D10/D11 Mission material: the required proof artifact does not exist yet and no Writer may fabricate it. Blocked pending issuance of the named D-mission material.",
+      "proof_ref": "controller/09_writer_forge/W02_writer_packet.md#15",
+      "evidence_ref": "writer-output/W02/EVIDENCE_INDEX.json"
+    },
+    {
+      "id": "R-FWD-PLAN",
+      "match": {
+        "source_layer": "ZL01_FORWARD_GAP",
+        "proof_requirement__contains": "POST_C03_EXECUTION_PLAN"
+      },
+      "status_mode": "literal",
+      "status": "BLOCKED",
+      "justification": "Proof requirement is \"POST_C03_EXECUTION_PLAN / PROOF_PLAN / active local mission overlays when next edited\": the plan is a Controller-owned artifact under controller/** (read-only to Writers) and has not been re-issued. Blocked pending Controller re-issue.",
+      "proof_ref": "controller/09_writer_forge/W02_writer_packet.md#15",
+      "evidence_ref": "writer-output/W02/EVIDENCE_INDEX.json"
+    },
+    {
+      "id": "R-RECON-GATE20",
+      "match": {
+        "source_layer": "ZL01_ZL02_RECONCILIATION",
+        "proof_requirement": "GATE-020"
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-W02-BROWSER",
+        "P-D08"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-RECON-GATE22",
+      "match": {
+        "source_layer": "ZL01_ZL02_RECONCILIATION",
+        "proof_requirement": "GATE-022"
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-W02-BROWSER"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-RECON-D0814",
+      "match": {
+        "source_layer": "ZL01_ZL02_RECONCILIATION",
+        "proof_requirement": "D08/D13/D14"
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-D08",
+        "P-B3R"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-RECON-MANIFEST",
+      "match": {
+        "source_layer": "ZL01_ZL02_RECONCILIATION",
+        "proof_requirement__contains": "D12/D13/D14"
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-MANIFEST-COVERAGE"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json",
+      "justification": "D12/D13/D14-equivalent obligation-level manifest: tools/w02-coverage-check.mjs consumes the frozen W02_REQUIREMENTS.csv and returns obligation->rule->status for all 1,485 rows (0 unmatched, 0 ambiguous, 0 dangling proof refs). It is an independent checker and never invokes the matrix generator, so the generator cannot prove itself."
+    },
+    {
+      "id": "R-RECON-PROVIDER",
+      "match": {
+        "source_layer": "ZL01_ZL02_RECONCILIATION",
+        "proof_requirement": "Provider truth"
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-RQ-ROUTE",
+        "P-S09",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-LIBRARY-IDENTITY",
+      "match": {
+        "surface": "library",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "CURRENT_IDENTITY",
+          "CURRENT_PROFILE"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-LIBRARY-ROUTE",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-LIBRARY-RESULT",
+      "match": {
+        "surface": "library",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "CURRENT_RESULT_AUDIT"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-LIBRARY-ROUTE",
+        "P-W02-BROWSER",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-LIBRARY-DECISION",
+      "match": {
+        "surface": "library",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "OWNER_DECISION"
+        ],
+        "component": [
+          "ACCEPTED_BLUEPRINT_SCOPE",
+          "ACTION_SURFACE_REUSE",
+          "ACTIVE_INPUT_DIRECTION",
+          "ALL_COMPONENTS_MATERIAL",
+          "AUTHORITY_INTAKE_HARDENING",
+          "BALANCED_SPECIALIST_COVERAGE_EXECUTION",
+          "CAPABILITY_SEPARATION_AND_LOCAL_RENDER_RECOVERY",
+          "CHATGPT_WRITER_VS_GOOGLE_AI_STUDIO_WRITER",
+          "COMPONENT_BY_COMPONENT_ORACLE_COMPARISON",
+          "CONTENT_AWARE_GOVERNANCE_CENSUS",
+          "CONTROLLER_ACCOUNTABILITY",
+          "CONTROLLER_PREPARED_READY_TO_WORK_CAPSULE",
+          "CUSTOMIZATION_GENERALIZATION",
+          "DONOR_FLOOR_HARD_FAIL",
+          "DRIVE_AS_CANONICAL_GOVERNANCE_WORKSPACE",
+          "DRIVE_PATH_IN_PLACE_MAINTENANCE",
+          "DURABLE_VALUE_FROM_HISTORICAL_STATE",
+          "EDITOR_ENGINE_REUSE",
+          "EXECUTABLE_NOT_PROSE_ONLY",
+          "EXECUTION_CARRIER_ROUTE_ISOLATION_AND_SCOPED_TOPOLOGY",
+          "EXPLICIT_LAUNCH_ADMISSION_ONLY",
+          "EXTRACTION_NOT_PARALLEL_REIMPLEMENTATION",
+          "FOUNDATION_REUSE_FIRST",
+          "GLOBAL_LAYOUT_SLOT_CONSTITUTION",
+          "GOVERNANCE_ROOT_ROLE",
+          "GROUPED_SETTINGS",
+          "HEAVY_CHAT_RESUMABLE_CHECKPOINT",
+          "HISTORICAL_LOCKS_REQUIRE_CURRENT_RECONCILIATION",
+          "ISOLATED_WRITER_CANDIDATE_AND_SEQUENTIAL_OVERLAP",
+          "LEAN_SELF_CONTAINED_WRITER_REPOSITORY",
+          "LIBRARY_AS_DONOR_CONSUMER_ORACLE",
+          "LOCAL_FIRST_ITERATIVE_IMPROVEMENT_OVER_CONNECTOR_TRANSPORT",
+          "MANAGED_TARGET_RUNNER_FIRST",
+          "MANDATORY_REVIEW_CHAIN",
+          "MICRO_SUPERSESSION_ALLOWED",
+          "MINIMIZE_WRITER_DISCRETION",
+          "MISSION_BOUND_CANDIDATE_BRANCH_WORKFLOW",
+          "MULTI_ROUTE_REVERSIBILITY",
+          "NARROW_WIN32_SIDECAR_PROVIDER_SELECTION",
+          "OWNER_DECISION_ZERO_LOSS",
+          "OWNER_VISIBLE_EVIDENCE_SHEET_REQUIRED",
+          "OWNER_VISUAL_REJECTION_OVERRIDES_LOWER_PASS",
+          "PANE_SYSTEM_UNIFICATION",
+          "PERSONAL_LOCAL_VALUE_FIRST_EXECUTION",
+          "PER_RESPONSE_LIVE_REFRESH",
+          "PUBLIC_EXISTING_WRITER_REPOSITORY",
+          "REAL_CONSUMER_REQUIRED_FOR_PRESENTATION_REUSE",
+          "RESULT_FIRST_ACCEPTANCE",
+          "REUSE_INCLUDES_PRESENTATION",
+          "SAFE_DEFAULT_NOT_PRODUCT_LAW",
+          "SECURITY_NON_BLOCKING_OWNER_POLICY",
+          "SELF_CONTAINED_WRITER_WORKSPACE_CAPSULE_V1",
+          "SETTINGS_DETAILS_ROLE_SEPARATION_AND_GROUPING_QUALITY",
+          "SHARED_MECHANICS_DO_NOT_OVERRIDE_SURFACE_SEMANTICS",
+          "SHORTCUT_VISIBILITY_VS_EXECUTION",
+          "STACK_EXPANSION_LOCK_WITH_SEPARATE_FINAL_FREEZE_GATE",
+          "STATE_VIEWPORT_MATCHED_COMPONENT_PROOF",
+          "STATIC_INSTRUCTIONS_LIVE_POINTERS",
+          "STICKY_NOTES",
+          "STICKY_NOTE_FULL_EDITOR_PARITY_AND_ALWAYS_EDITABLE",
+          "STRUCTURED_INSERTION_GAP_DONOR_INTERACTION_RESTORATION",
+          "SUPPORTING_REGISTRY_AUTHORITY_CEILING",
+          "SURFACE_IDENTITY_FUNCTIONAL_COMPLETENESS_RESCUE_GATE",
+          "SURFACE_LEVEL_DETACHED_WINDOW_SEMANTICS",
+          "TECHNOLOGY_MUST_EARN_ADMISSION",
+          "TOOLBAR_TEMPLATE_UNIFICATION",
+          "UI_SCALE",
+          "VALUE_WEIGHTED_PARALLELISM",
+          "VERIFIED_INCREMENTAL_WRITER_CONTINUATION",
+          "VERIFIED_PREREQUISITE_CORRECTNESS_REPAIR",
+          "VISUAL_CAPTURE_RECOVERY_AND_FRESH_EVIDENCE",
+          "WORST_UNRESOLVED_FINDING_CONTROLS_VERDICT",
+          "WRITER_COMPLETE_MAIN_PLUS_MISSION_OVERLAY__CONTROLLER_PRE_RESOLVED_READ_SET",
+          "WRITER_CONSTRAINED_ASSEMBLER"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-MODEL",
+        "P-CHECK-DUP",
+        "P-CHECK-AUTH",
+        "P-CHECK-DEFERRED",
+        "P-S08",
+        "P-S01"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-LIBRARY-QA",
+      "match": {
+        "surface": "library",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "OWNER_QA_DEEP_AUDIT"
+        ],
+        "component": [
+          "A3-GUI-001",
+          "A3-GUI-002",
+          "A3-GUI-003",
+          "A3-GUI-004",
+          "A3-GUI-005",
+          "A3-GUI-006",
+          "A3-GUI-007",
+          "A3-GUI-008",
+          "A3-GUI-009",
+          "A3-GUI-010",
+          "A3-GUI-011",
+          "A3-GUI-012",
+          "A4-001",
+          "A4-003",
+          "A4-004",
+          "A4-005",
+          "A4-006",
+          "A4-007",
+          "A4-008",
+          "A4-009",
+          "A4-010",
+          "A4-011",
+          "A4-012",
+          "A4-013",
+          "A4-014",
+          "A4-015",
+          "A4-016",
+          "A4-017",
+          "A4-018",
+          "C01",
+          "C02",
+          "C03",
+          "C04",
+          "C05",
+          "C06",
+          "C07",
+          "C08",
+          "C09",
+          "C10",
+          "C11",
+          "C12",
+          "C13",
+          "C14",
+          "C15",
+          "C16",
+          "C17",
+          "C19",
+          "C22",
+          "C23",
+          "C24",
+          "C25",
+          "C27",
+          "C29",
+          "C30"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-LIBRARY-ROUTE",
+        "P-S08",
+        "P-S01",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-LIBRARY-ROOT",
+      "match": {
+        "surface": "library",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "ZL01_ROOT_FINDING"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-LIBRARY-ROUTE",
+        "P-S08",
+        "P-S01",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-LIBRARY-DURABLE",
+      "match": {
+        "surface": "library",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "ZL01_DURABLE_ANCILLARY"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-LIBRARY-ROUTE",
+        "P-S08",
+        "P-S01",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-LIBRARY-FWD",
+      "match": {
+        "surface": "library",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "ZL01_FORWARD_GAP"
+        ],
+        "proof_requirement__not_contains": [
+          "Future D",
+          "POST_C03_EXECUTION_PLAN"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-LIBRARY-ROUTE",
+        "P-S08",
+        "P-S01",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-LEARN-IDENTITY",
+      "match": {
+        "surface": "learn",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "CURRENT_IDENTITY",
+          "CURRENT_PROFILE"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-LEARN-ROUTE",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-LEARN-RESULT",
+      "match": {
+        "surface": "learn",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "CURRENT_RESULT_AUDIT"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-LEARN-ROUTE",
+        "P-W02-BROWSER",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-LEARN-DECISION",
+      "match": {
+        "surface": "learn",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "OWNER_DECISION"
+        ],
+        "component": [
+          "ACCEPTED_BLUEPRINT_SCOPE",
+          "ACTION_SURFACE_REUSE",
+          "ACTIVE_INPUT_DIRECTION",
+          "ALL_COMPONENTS_MATERIAL",
+          "AUTHORITY_INTAKE_HARDENING",
+          "BALANCED_SPECIALIST_COVERAGE_EXECUTION",
+          "CANDIDATE_NOT_AUTHORITY",
+          "CAPABILITY_SEPARATION_AND_LOCAL_RENDER_RECOVERY",
+          "CHATGPT_WRITER_VS_GOOGLE_AI_STUDIO_WRITER",
+          "COMPONENT_BY_COMPONENT_ORACLE_COMPARISON",
+          "CONTENT_AWARE_GOVERNANCE_CENSUS",
+          "CONTROLLER_ACCOUNTABILITY",
+          "CONTROLLER_PREPARED_READY_TO_WORK_CAPSULE",
+          "CUSTOMIZATION_GENERALIZATION",
+          "DONOR_FLOOR_HARD_FAIL",
+          "DRIVE_AS_CANONICAL_GOVERNANCE_WORKSPACE",
+          "DRIVE_PATH_IN_PLACE_MAINTENANCE",
+          "DURABLE_VALUE_FROM_HISTORICAL_STATE",
+          "EDITOR_ENGINE_REUSE",
+          "EXECUTABLE_NOT_PROSE_ONLY",
+          "EXECUTION_CARRIER_ROUTE_ISOLATION_AND_SCOPED_TOPOLOGY",
+          "EXPLICIT_LAUNCH_ADMISSION_ONLY",
+          "EXTRACTION_NOT_PARALLEL_REIMPLEMENTATION",
+          "FOUNDATION_REUSE_FIRST",
+          "GLOBAL_LAYOUT_SLOT_CONSTITUTION",
+          "GOVERNANCE_ROOT_ROLE",
+          "GROUPED_SETTINGS",
+          "HEAVY_CHAT_RESUMABLE_CHECKPOINT",
+          "HISTORICAL_LOCKS_REQUIRE_CURRENT_RECONCILIATION",
+          "ISOLATED_WRITER_CANDIDATE_AND_SEQUENTIAL_OVERLAP",
+          "LEAN_SELF_CONTAINED_WRITER_REPOSITORY",
+          "LIBRARY_AS_DONOR_CONSUMER_ORACLE",
+          "LOCAL_FIRST_ITERATIVE_IMPROVEMENT_OVER_CONNECTOR_TRANSPORT",
+          "MANAGED_TARGET_RUNNER_FIRST",
+          "MANDATORY_REVIEW_CHAIN",
+          "MAX_LIBRARY_INHERITANCE",
+          "MICRO_SUPERSESSION_ALLOWED",
+          "MINIMIZE_WRITER_DISCRETION",
+          "MISSION_BOUND_CANDIDATE_BRANCH_WORKFLOW",
+          "MULTI_ROUTE_REVERSIBILITY",
+          "NARROW_WIN32_SIDECAR_PROVIDER_SELECTION",
+          "OWNER_DECISION_ZERO_LOSS",
+          "OWNER_VISIBLE_EVIDENCE_SHEET_REQUIRED",
+          "OWNER_VISUAL_REJECTION_OVERRIDES_LOWER_PASS",
+          "PANE_SYSTEM_UNIFICATION",
+          "PERSONAL_LOCAL_VALUE_FIRST_EXECUTION",
+          "PER_RESPONSE_LIVE_REFRESH",
+          "PUBLIC_EXISTING_WRITER_REPOSITORY",
+          "REAL_CONSUMER_REQUIRED_FOR_PRESENTATION_REUSE",
+          "RESULT_FIRST_ACCEPTANCE",
+          "REUSE_INCLUDES_PRESENTATION",
+          "SAFE_DEFAULT_NOT_PRODUCT_LAW",
+          "SECURITY_NON_BLOCKING_OWNER_POLICY",
+          "SELF_CONTAINED_WRITER_WORKSPACE_CAPSULE_V1",
+          "SETTINGS_DETAILS_ROLE_SEPARATION_AND_GROUPING_QUALITY",
+          "SHARED_MECHANICS_DO_NOT_OVERRIDE_SURFACE_SEMANTICS",
+          "SHORTCUT_VISIBILITY_VS_EXECUTION",
+          "STACK_EXPANSION_LOCK_WITH_SEPARATE_FINAL_FREEZE_GATE",
+          "STATE_VIEWPORT_MATCHED_COMPONENT_PROOF",
+          "STATIC_INSTRUCTIONS_LIVE_POINTERS",
+          "STICKY_NOTES",
+          "STICKY_NOTE_FULL_EDITOR_PARITY_AND_ALWAYS_EDITABLE",
+          "STRUCTURED_INSERTION_GAP_DONOR_INTERACTION_RESTORATION",
+          "SUPPORTING_REGISTRY_AUTHORITY_CEILING",
+          "SURFACE_IDENTITY_FUNCTIONAL_COMPLETENESS_RESCUE_GATE",
+          "SURFACE_LEVEL_DETACHED_WINDOW_SEMANTICS",
+          "TECHNOLOGY_MUST_EARN_ADMISSION",
+          "TOOLBAR_TEMPLATE_UNIFICATION",
+          "UI_SCALE",
+          "VALUE_WEIGHTED_PARALLELISM",
+          "VERIFIED_INCREMENTAL_WRITER_CONTINUATION",
+          "VERIFIED_PREREQUISITE_CORRECTNESS_REPAIR",
+          "VISUAL_CAPTURE_RECOVERY_AND_FRESH_EVIDENCE",
+          "WORST_UNRESOLVED_FINDING_CONTROLS_VERDICT",
+          "WRITER_COMPLETE_MAIN_PLUS_MISSION_OVERLAY__CONTROLLER_PRE_RESOLVED_READ_SET",
+          "WRITER_CONSTRAINED_ASSEMBLER"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-MODEL",
+        "P-CHECK-DUP",
+        "P-CHECK-AUTH",
+        "P-CHECK-DEFERRED",
+        "P-S08",
+        "P-S01"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-LEARN-QA",
+      "match": {
+        "surface": "learn",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "OWNER_QA_DEEP_AUDIT"
+        ],
+        "component": [
+          "A3-GUI-001",
+          "A3-GUI-002",
+          "A3-GUI-003",
+          "A3-GUI-004",
+          "A3-GUI-005",
+          "A3-GUI-006",
+          "A3-GUI-007",
+          "A3-GUI-008",
+          "A3-GUI-009",
+          "A3-GUI-010",
+          "A3-GUI-011",
+          "A3-GUI-012",
+          "A4-001",
+          "A4-003",
+          "A4-004",
+          "A4-005",
+          "A4-006",
+          "A4-007",
+          "A4-008",
+          "A4-009",
+          "A4-010",
+          "A4-011",
+          "A4-012",
+          "A4-013",
+          "A4-014",
+          "A4-015",
+          "A4-016",
+          "A4-017",
+          "A4-018",
+          "C01",
+          "C02",
+          "C03",
+          "C04",
+          "C05",
+          "C06",
+          "C07",
+          "C08",
+          "C09",
+          "C10",
+          "C11",
+          "C13",
+          "C14",
+          "C15",
+          "C16",
+          "C17",
+          "C19",
+          "C22",
+          "C23",
+          "C24",
+          "C25",
+          "C27",
+          "C29",
+          "C30"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-LEARN-ROUTE",
+        "P-S08",
+        "P-S01",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-LEARN-ROOT",
+      "match": {
+        "surface": "learn",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "ZL01_ROOT_FINDING"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-LEARN-ROUTE",
+        "P-S08",
+        "P-S01",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-LEARN-DURABLE",
+      "match": {
+        "surface": "learn",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "ZL01_DURABLE_ANCILLARY"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-LEARN-ROUTE",
+        "P-S08",
+        "P-S01",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-LEARN-FWD",
+      "match": {
+        "surface": "learn",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "ZL01_FORWARD_GAP"
+        ],
+        "proof_requirement__not_contains": [
+          "Future D",
+          "POST_C03_EXECUTION_PLAN"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-LEARN-ROUTE",
+        "P-S08",
+        "P-S01",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-RQ-IDENTITY",
+      "match": {
+        "surface": "rq",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "reference_binding__not_contains": "REVIEWED_FINAL_CANDIDATE",
+        "source_excerpt__not_contains": "REVIEWED_FINAL_CANDIDATE",
+        "source_layer": [
+          "CURRENT_IDENTITY",
+          "CURRENT_PROFILE"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-RQ-ROUTE",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-RQ-RESULT",
+      "match": {
+        "surface": "rq",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "reference_binding__not_contains": "REVIEWED_FINAL_CANDIDATE",
+        "source_excerpt__not_contains": "REVIEWED_FINAL_CANDIDATE",
+        "source_layer": [
+          "CURRENT_RESULT_AUDIT"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-RQ-ROUTE",
+        "P-W02-BROWSER",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-RQ-DECISION",
+      "match": {
+        "surface": "rq",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "reference_binding__not_contains": "REVIEWED_FINAL_CANDIDATE",
+        "source_excerpt__not_contains": "REVIEWED_FINAL_CANDIDATE",
+        "source_layer": [
+          "OWNER_DECISION"
+        ],
+        "component": [
+          "ACTION_SURFACE_REUSE",
+          "ACTIVE_INPUT_DIRECTION",
+          "ALL_COMPONENTS_MATERIAL",
+          "AUTHORITY_INTAKE_HARDENING",
+          "BALANCED_SPECIALIST_COVERAGE_EXECUTION",
+          "CANDIDATE_NOT_AUTHORITY",
+          "CAPABILITY_SEPARATION_AND_LOCAL_RENDER_RECOVERY",
+          "CHATGPT_WRITER_VS_GOOGLE_AI_STUDIO_WRITER",
+          "COMPONENT_BY_COMPONENT_ORACLE_COMPARISON",
+          "CONTENT_AWARE_GOVERNANCE_CENSUS",
+          "CONTROLLER_ACCOUNTABILITY",
+          "CONTROLLER_PREPARED_READY_TO_WORK_CAPSULE",
+          "CUSTOMIZATION_GENERALIZATION",
+          "DONOR_FLOOR_HARD_FAIL",
+          "DRIVE_AS_CANONICAL_GOVERNANCE_WORKSPACE",
+          "DRIVE_PATH_IN_PLACE_MAINTENANCE",
+          "DURABLE_VALUE_FROM_HISTORICAL_STATE",
+          "EDITOR_ENGINE_REUSE",
+          "EXECUTABLE_NOT_PROSE_ONLY",
+          "EXECUTION_CARRIER_ROUTE_ISOLATION_AND_SCOPED_TOPOLOGY",
+          "EXPLICIT_LAUNCH_ADMISSION_ONLY",
+          "EXTRACTION_NOT_PARALLEL_REIMPLEMENTATION",
+          "FOUNDATION_REUSE_FIRST",
+          "GLOBAL_LAYOUT_SLOT_CONSTITUTION",
+          "GOVERNANCE_ROOT_ROLE",
+          "GROUPED_SETTINGS",
+          "HEAVY_CHAT_RESUMABLE_CHECKPOINT",
+          "HISTORICAL_LOCKS_REQUIRE_CURRENT_RECONCILIATION",
+          "ISOLATED_WRITER_CANDIDATE_AND_SEQUENTIAL_OVERLAP",
+          "LEAN_SELF_CONTAINED_WRITER_REPOSITORY",
+          "LIBRARY_AS_DONOR_CONSUMER_ORACLE",
+          "LOCAL_FIRST_ITERATIVE_IMPROVEMENT_OVER_CONNECTOR_TRANSPORT",
+          "MANAGED_TARGET_RUNNER_FIRST",
+          "MANDATORY_REVIEW_CHAIN",
+          "MINIMIZE_WRITER_DISCRETION",
+          "MISSION_BOUND_CANDIDATE_BRANCH_WORKFLOW",
+          "MULTI_ROUTE_REVERSIBILITY",
+          "NARROW_WIN32_SIDECAR_PROVIDER_SELECTION",
+          "OWNER_DECISION_ZERO_LOSS",
+          "OWNER_VISIBLE_EVIDENCE_SHEET_REQUIRED",
+          "OWNER_VISUAL_REJECTION_OVERRIDES_LOWER_PASS",
+          "PANE_SYSTEM_UNIFICATION",
+          "PERSONAL_LOCAL_VALUE_FIRST_EXECUTION",
+          "PER_RESPONSE_LIVE_REFRESH",
+          "PUBLIC_EXISTING_WRITER_REPOSITORY",
+          "REAL_CONSUMER_REQUIRED_FOR_PRESENTATION_REUSE",
+          "RESULT_FIRST_ACCEPTANCE",
+          "REUSE_INCLUDES_PRESENTATION",
+          "SAFE_DEFAULT_NOT_PRODUCT_LAW",
+          "SECURITY_NON_BLOCKING_OWNER_POLICY",
+          "SELF_CONTAINED_WRITER_WORKSPACE_CAPSULE_V1",
+          "SETTINGS_DETAILS_ROLE_SEPARATION_AND_GROUPING_QUALITY",
+          "SHARED_MECHANICS_DO_NOT_OVERRIDE_SURFACE_SEMANTICS",
+          "SHORTCUT_VISIBILITY_VS_EXECUTION",
+          "STACK_EXPANSION_LOCK_WITH_SEPARATE_FINAL_FREEZE_GATE",
+          "STATE_VIEWPORT_MATCHED_COMPONENT_PROOF",
+          "STATIC_INSTRUCTIONS_LIVE_POINTERS",
+          "STICKY_NOTES",
+          "STICKY_NOTE_FULL_EDITOR_PARITY_AND_ALWAYS_EDITABLE",
+          "STRUCTURED_INSERTION_GAP_DONOR_INTERACTION_RESTORATION",
+          "SUPPORTING_REGISTRY_AUTHORITY_CEILING",
+          "SURFACE_IDENTITY_FUNCTIONAL_COMPLETENESS_RESCUE_GATE",
+          "SURFACE_LEVEL_DETACHED_WINDOW_SEMANTICS",
+          "TECHNOLOGY_MUST_EARN_ADMISSION",
+          "TOOLBAR_TEMPLATE_UNIFICATION",
+          "UI_SCALE",
+          "VALUE_WEIGHTED_PARALLELISM",
+          "VERIFIED_INCREMENTAL_WRITER_CONTINUATION",
+          "VERIFIED_PREREQUISITE_CORRECTNESS_REPAIR",
+          "VISUAL_CAPTURE_RECOVERY_AND_FRESH_EVIDENCE",
+          "WORST_UNRESOLVED_FINDING_CONTROLS_VERDICT",
+          "WRITER_COMPLETE_MAIN_PLUS_MISSION_OVERLAY__CONTROLLER_PRE_RESOLVED_READ_SET",
+          "WRITER_CONSTRAINED_ASSEMBLER"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-MODEL",
+        "P-CHECK-DUP",
+        "P-CHECK-AUTH",
+        "P-CHECK-DEFERRED",
+        "P-S09",
+        "P-B3R-CORR03"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-RQ-QA",
+      "match": {
+        "surface": "rq",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "reference_binding__not_contains": "REVIEWED_FINAL_CANDIDATE",
+        "source_excerpt__not_contains": "REVIEWED_FINAL_CANDIDATE",
+        "source_layer": [
+          "OWNER_QA_DEEP_AUDIT"
+        ],
+        "component": [
+          "A3-GUI-001",
+          "A3-GUI-002",
+          "A3-GUI-003",
+          "A3-GUI-004",
+          "A3-GUI-005",
+          "A3-GUI-006",
+          "A3-GUI-007",
+          "A3-GUI-008",
+          "A3-GUI-009",
+          "A3-GUI-010",
+          "A3-GUI-011",
+          "A3-GUI-012",
+          "A4-001",
+          "A4-003",
+          "A4-004",
+          "A4-005",
+          "A4-006",
+          "A4-007",
+          "A4-008",
+          "A4-009",
+          "A4-010",
+          "A4-011",
+          "A4-012",
+          "A4-013",
+          "A4-014",
+          "A4-015",
+          "A4-016",
+          "A4-017",
+          "A4-018",
+          "C01",
+          "C02",
+          "C03",
+          "C05",
+          "C06",
+          "C07",
+          "C08",
+          "C09",
+          "C10",
+          "C11",
+          "C13",
+          "C14",
+          "C15",
+          "C16",
+          "C17",
+          "C19",
+          "C22",
+          "C23",
+          "C24",
+          "C25",
+          "C27",
+          "C29",
+          "C30"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-RQ-ROUTE",
+        "P-S09",
+        "P-B3R-CORR03",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-RQ-ROOT",
+      "match": {
+        "surface": "rq",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "reference_binding__not_contains": "REVIEWED_FINAL_CANDIDATE",
+        "source_excerpt__not_contains": "REVIEWED_FINAL_CANDIDATE",
+        "source_layer": [
+          "ZL01_ROOT_FINDING"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-RQ-ROUTE",
+        "P-S09",
+        "P-B3R-CORR03",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-RQ-DURABLE",
+      "match": {
+        "surface": "rq",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "reference_binding__not_contains": "REVIEWED_FINAL_CANDIDATE",
+        "source_excerpt__not_contains": "REVIEWED_FINAL_CANDIDATE",
+        "source_layer": [
+          "ZL01_DURABLE_ANCILLARY"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-RQ-ROUTE",
+        "P-S09",
+        "P-B3R-CORR03",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-RQ-FWD",
+      "match": {
+        "surface": "rq",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "reference_binding__not_contains": "REVIEWED_FINAL_CANDIDATE",
+        "source_excerpt__not_contains": "REVIEWED_FINAL_CANDIDATE",
+        "source_layer": [
+          "ZL01_FORWARD_GAP"
+        ],
+        "proof_requirement__not_contains": [
+          "Future D",
+          "POST_C03_EXECUTION_PLAN"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-RQ-ROUTE",
+        "P-S09",
+        "P-B3R-CORR03",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-VISUALIZE-IDENTITY",
+      "match": {
+        "surface": "visualize",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "CURRENT_IDENTITY",
+          "CURRENT_PROFILE"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-VISUALIZE-ROUTE",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-VISUALIZE-RESULT",
+      "match": {
+        "surface": "visualize",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "CURRENT_RESULT_AUDIT"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-VISUALIZE-ROUTE",
+        "P-W02-BROWSER",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-VISUALIZE-DECISION",
+      "match": {
+        "surface": "visualize",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "OWNER_DECISION"
+        ],
+        "component": [
+          "ACTION_SURFACE_REUSE",
+          "ACTIVE_INPUT_DIRECTION",
+          "ALL_COMPONENTS_MATERIAL",
+          "AUTHORITY_INTAKE_HARDENING",
+          "BALANCED_SPECIALIST_COVERAGE_EXECUTION",
+          "CANDIDATE_NOT_AUTHORITY",
+          "CAPABILITY_SEPARATION_AND_LOCAL_RENDER_RECOVERY",
+          "CHATGPT_WRITER_VS_GOOGLE_AI_STUDIO_WRITER",
+          "COMPONENT_BY_COMPONENT_ORACLE_COMPARISON",
+          "CONTENT_AWARE_GOVERNANCE_CENSUS",
+          "CONTROLLER_ACCOUNTABILITY",
+          "CONTROLLER_PREPARED_READY_TO_WORK_CAPSULE",
+          "CUSTOMIZATION_GENERALIZATION",
+          "DONOR_FLOOR_HARD_FAIL",
+          "DRIVE_AS_CANONICAL_GOVERNANCE_WORKSPACE",
+          "DRIVE_PATH_IN_PLACE_MAINTENANCE",
+          "DURABLE_VALUE_FROM_HISTORICAL_STATE",
+          "EDITOR_ENGINE_REUSE",
+          "EXECUTABLE_NOT_PROSE_ONLY",
+          "EXECUTION_CARRIER_ROUTE_ISOLATION_AND_SCOPED_TOPOLOGY",
+          "EXPLICIT_LAUNCH_ADMISSION_ONLY",
+          "EXTRACTION_NOT_PARALLEL_REIMPLEMENTATION",
+          "FOUNDATION_REUSE_FIRST",
+          "GLOBAL_LAYOUT_SLOT_CONSTITUTION",
+          "GOVERNANCE_ROOT_ROLE",
+          "GROUPED_SETTINGS",
+          "HEAVY_CHAT_RESUMABLE_CHECKPOINT",
+          "HISTORICAL_LOCKS_REQUIRE_CURRENT_RECONCILIATION",
+          "ISOLATED_WRITER_CANDIDATE_AND_SEQUENTIAL_OVERLAP",
+          "LEAN_SELF_CONTAINED_WRITER_REPOSITORY",
+          "LIBRARY_AS_DONOR_CONSUMER_ORACLE",
+          "LOCAL_FIRST_ITERATIVE_IMPROVEMENT_OVER_CONNECTOR_TRANSPORT",
+          "MANAGED_TARGET_RUNNER_FIRST",
+          "MANDATORY_REVIEW_CHAIN",
+          "MINIMIZE_WRITER_DISCRETION",
+          "MISSION_BOUND_CANDIDATE_BRANCH_WORKFLOW",
+          "MULTI_ROUTE_REVERSIBILITY",
+          "NARROW_WIN32_SIDECAR_PROVIDER_SELECTION",
+          "OWNER_DECISION_ZERO_LOSS",
+          "OWNER_VISIBLE_EVIDENCE_SHEET_REQUIRED",
+          "OWNER_VISUAL_REJECTION_OVERRIDES_LOWER_PASS",
+          "PANE_SYSTEM_UNIFICATION",
+          "PERSONAL_LOCAL_VALUE_FIRST_EXECUTION",
+          "PER_RESPONSE_LIVE_REFRESH",
+          "PUBLIC_EXISTING_WRITER_REPOSITORY",
+          "REAL_CONSUMER_REQUIRED_FOR_PRESENTATION_REUSE",
+          "RESULT_FIRST_ACCEPTANCE",
+          "REUSE_INCLUDES_PRESENTATION",
+          "SAFE_DEFAULT_NOT_PRODUCT_LAW",
+          "SECURITY_NON_BLOCKING_OWNER_POLICY",
+          "SELF_CONTAINED_WRITER_WORKSPACE_CAPSULE_V1",
+          "SETTINGS_DETAILS_ROLE_SEPARATION_AND_GROUPING_QUALITY",
+          "SHARED_MECHANICS_DO_NOT_OVERRIDE_SURFACE_SEMANTICS",
+          "SHORTCUT_VISIBILITY_VS_EXECUTION",
+          "SPATIAL_ENGINE_REUSE",
+          "STACK_EXPANSION_LOCK_WITH_SEPARATE_FINAL_FREEZE_GATE",
+          "STATE_VIEWPORT_MATCHED_COMPONENT_PROOF",
+          "STATIC_INSTRUCTIONS_LIVE_POINTERS",
+          "STICKY_NOTES",
+          "STICKY_NOTE_FULL_EDITOR_PARITY_AND_ALWAYS_EDITABLE",
+          "STRUCTURED_INSERTION_GAP_DONOR_INTERACTION_RESTORATION",
+          "SUPPORTING_REGISTRY_AUTHORITY_CEILING",
+          "SURFACE_IDENTITY_FUNCTIONAL_COMPLETENESS_RESCUE_GATE",
+          "SURFACE_LEVEL_DETACHED_WINDOW_SEMANTICS",
+          "TECHNOLOGY_MUST_EARN_ADMISSION",
+          "TOOLBAR_TEMPLATE_UNIFICATION",
+          "UI_SCALE",
+          "VALUE_WEIGHTED_PARALLELISM",
+          "VERIFIED_PREREQUISITE_CORRECTNESS_REPAIR",
+          "VISUAL_CAPTURE_RECOVERY_AND_FRESH_EVIDENCE",
+          "WORST_UNRESOLVED_FINDING_CONTROLS_VERDICT",
+          "WRITER_COMPLETE_MAIN_PLUS_MISSION_OVERLAY__CONTROLLER_PRE_RESOLVED_READ_SET",
+          "WRITER_CONSTRAINED_ASSEMBLER"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-MODEL",
+        "P-CHECK-DUP",
+        "P-CHECK-AUTH",
+        "P-CHECK-DEFERRED",
+        "P-S09",
+        "P-D08",
+        "P-B3R",
+        "P-B3R-CORR03"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-VISUALIZE-QA",
+      "match": {
+        "surface": "visualize",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "OWNER_QA_DEEP_AUDIT"
+        ],
+        "component": [
+          "A3-GUI-001",
+          "A3-GUI-002",
+          "A3-GUI-003",
+          "A3-GUI-004",
+          "A3-GUI-005",
+          "A3-GUI-006",
+          "A3-GUI-007",
+          "A3-GUI-008",
+          "A3-GUI-009",
+          "A3-GUI-010",
+          "A3-GUI-011",
+          "A3-GUI-012",
+          "A4-001",
+          "A4-003",
+          "A4-004",
+          "A4-005",
+          "A4-006",
+          "A4-007",
+          "A4-008",
+          "A4-009",
+          "A4-010",
+          "A4-011",
+          "A4-012",
+          "A4-013",
+          "A4-014",
+          "A4-015",
+          "A4-016",
+          "A4-017",
+          "A4-018",
+          "C01",
+          "C02",
+          "C03",
+          "C05",
+          "C06",
+          "C07",
+          "C08",
+          "C09",
+          "C10",
+          "C11",
+          "C13",
+          "C14",
+          "C15",
+          "C16",
+          "C17",
+          "C19",
+          "C22",
+          "C23",
+          "C24",
+          "C25",
+          "C27",
+          "C29",
+          "C30"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-VISUALIZE-ROUTE",
+        "P-S09",
+        "P-D08",
+        "P-B3R",
+        "P-B3R-CORR03",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-VISUALIZE-ROOT",
+      "match": {
+        "surface": "visualize",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "ZL01_ROOT_FINDING"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-VISUALIZE-ROUTE",
+        "P-S09",
+        "P-D08",
+        "P-B3R",
+        "P-B3R-CORR03",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-VISUALIZE-DURABLE",
+      "match": {
+        "surface": "visualize",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "ZL01_DURABLE_ANCILLARY"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-VISUALIZE-ROUTE",
+        "P-S09",
+        "P-D08",
+        "P-B3R",
+        "P-B3R-CORR03",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    },
+    {
+      "id": "R-VISUALIZE-FWD",
+      "match": {
+        "surface": "visualize",
+        "source_layer__not": [
+          "VISUAL_REFERENCE",
+          "AUTHORITY_RECOVERY_ARCHAEOLOGY",
+          "ZL01_ZL02_RECONCILIATION"
+        ],
+        "source_layer": [
+          "ZL01_FORWARD_GAP"
+        ],
+        "proof_requirement__not_contains": [
+          "Future D",
+          "POST_C03_EXECUTION_PLAN"
+        ]
+      },
+      "status_mode": "derived_from_proof",
+      "proofs": [
+        "P-VISUALIZE-ROUTE",
+        "P-S09",
+        "P-D08",
+        "P-B3R",
+        "P-B3R-CORR03",
+        "P-MODEL"
+      ],
+      "proof_logic": "all",
+      "evidence_ref": "writer-output/W02/PROOF_RESULTS.json"
+    }
+  ]
+}

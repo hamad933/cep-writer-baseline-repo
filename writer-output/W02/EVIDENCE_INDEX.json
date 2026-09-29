@@ -1,0 +1,1498 @@
+{
+  "schemaVersion": 1,
+  "workspace": "W02",
+  "generatedAt": "2026-09-29T05:25:23.967848+00:00",
+  "candidateDispatchTime": "WORKTREE_VARIANT:c82cec63cb5f",
+  "candidateDispatchTree": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+  "candidateExecutionTime": "WORKTREE_VARIANT:90240a5e9f5b",
+  "candidateExecutionTree": "90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+  "canonicalSourceFileCount": 287,
+  "commitBoundOnArtifacts": "072343e9f99e03f4deeb707a5393c0d8a18b38b2",
+  "treeBoundOnArtifacts": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+  "proofExecutionCommit": "072343e9f99e03f4deeb707a5393c0d8a18b38b2",
+  "headAtHandoffWrite": "e78d453c43961daba72f2e1ffb203e43c90b6eba",
+  "lineageNote": "candidateDispatchTree is the identity named in the W02 brief and bound on every ACCEPTANCE_MATRIX.csv row; candidateExecutionTree was recomputed with tools/source-tree-identity.mjs at browser-capture time (receipt tree field). They differ from the dispatch-time hash because five writers share one worktree (evidence_contract.md lineage rule). EVIDENCE_INDEX.json does not hash itself.",
+  "requirements": {
+    "rows": 1485,
+    "dispositioned": 1485,
+    "zero_loss": true,
+    "counts": {
+      "PASS": 1411,
+      "NOT_APPLICABLE_WITH_PROOF": 6,
+      "BLOCKED": 68
+    },
+    "requirements_sha256": "32024e3067885c659ba8ee8d66201be184cda6672fb14f28b652f4955d814821",
+    "matrix_sha256": "e101788ecd6c089e95fc2e0069e89ebb08c9464a0a0980cf6229f481e6bdefaa"
+  },
+  "proofs": {
+    "P-LIBRARY-ROUTE": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node tests/surfaces/library/surface.test.mjs",
+      "executedAt": "2026-09-29T05:18:29.704420+00:00"
+    },
+    "P-LEARN-ROUTE": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node tests/surfaces/learn/surface.test.mjs",
+      "executedAt": "2026-09-29T05:18:29.829847+00:00"
+    },
+    "P-RQ-ROUTE": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node tests/surfaces/rq/surface.test.mjs",
+      "executedAt": "2026-09-29T05:18:29.963444+00:00"
+    },
+    "P-VISUALIZE-ROUTE": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node tests/surfaces/visualize/surface.test.mjs",
+      "executedAt": "2026-09-29T05:18:30.066846+00:00"
+    },
+    "P-MODEL": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "tools/writer-serial.sh npm test",
+      "executedAt": "2026-09-29T05:18:30.161379+00:00"
+    },
+    "P-S01": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node dist/tests/rescue/S01_SHARED_STRUCTURED_EDITOR/s01-structured-editor-core-tests.js",
+      "executedAt": "2026-09-29T05:18:34.434392+00:00"
+    },
+    "P-S08": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node dist/tests/rescue/S08_W01_W02_LIBRARY_LEARN/s08-falsification.js",
+      "executedAt": "2026-09-29T05:18:36.309024+00:00"
+    },
+    "P-S09": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node dist/tests/rescue/S09_W01_W02_RQ_VISUALIZE/s09-reexecution-tests.js",
+      "executedAt": "2026-09-29T05:18:36.556381+00:00"
+    },
+    "P-D08": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node dist/tests/post-c03/D08/d08-w02-visualize-parity-tests.js",
+      "executedAt": "2026-09-29T05:18:36.735185+00:00"
+    },
+    "P-B3R": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node tools/b3r-rq-visualize/falsify-b3r.mjs",
+      "executedAt": "2026-09-29T05:18:36.983455+00:00"
+    },
+    "P-B3R-CORR03": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node tools/b3r-rq-visualize/falsify-b3r-corr03.mjs",
+      "executedAt": "2026-09-29T05:18:37.256522+00:00"
+    },
+    "P-CHECK-DUP": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node tools/check-duplicate-mechanics.mjs",
+      "executedAt": "2026-09-29T05:18:37.506630+00:00"
+    },
+    "P-CHECK-AUTH": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node tools/check-authority-intake.mjs",
+      "executedAt": "2026-09-29T05:18:37.853511+00:00"
+    },
+    "P-CHECK-DEFERRED": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node tools/check-deferred-boundary.mjs",
+      "executedAt": "2026-09-29T05:18:37.949971+00:00"
+    },
+    "P-W02-BROWSER": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node tools/w02-browser-flows.mjs --only=library-edit-learn-consume-real-consumer-chain,spatial-select-connect-canonical-edge,spatial-input-bidi-preference-and-structured-isolation,fit-pan-zoom-canonical-state-invariance,focus-document-activeElement-proofs,s01-structured-insertion-pointer-keyboard-1440x1000,s01-structured-insertion-pointer-keyboard-1024x900,spatial-closure-1024x900",
+      "executedAt": "2026-09-29T05:18:39.081303+00:00"
+    },
+    "P-W02-BROWSER-ALL": {
+      "status": "FAIL",
+      "exitCode": 1,
+      "command": "node tools/w02-browser-flows.mjs",
+      "executedAt": "2026-09-29T05:19:02.345543+00:00"
+    },
+    "P-MANIFEST-COVERAGE": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node tools/w02-coverage-check.mjs",
+      "executedAt": "2026-09-29T05:19:26.547520+00:00"
+    }
+  },
+  "browser": {
+    "command": "node tools/w02-browser-flows.mjs",
+    "summary": {
+      "total": 10,
+      "pass": 8,
+      "fail": 2
+    },
+    "contractFields": [
+      "browser",
+      "browserVersion",
+      "transportRuntime",
+      "candidate",
+      "commit",
+      "tree",
+      "environment",
+      "route",
+      "flow",
+      "preconditions",
+      "actionSequence",
+      "expectedState",
+      "assertions",
+      "screenshots",
+      "evidenceLineage",
+      "fixtureState",
+      "negativeCases",
+      "failureClassification"
+    ],
+    "failureClasses": {
+      "PRODUCT": "Product defect: product code produced the observed wrong state.",
+      "HARNESS": "Harness defect: the probe/eval itself threw or asserted on missing state.",
+      "ENVIRONMENT": "Environment difference that does not implicate product or oracle.",
+      "ORACLE": "Oracle defect: the assertion asks for state the contract does not require.",
+      "EVIDENCE": "Evidence defect: capture/lineage of the produced artifact is unusable.",
+      "LINEAGE": "Lineage defect: the receipt candidate does not match the executed source.",
+      "UNKNOWN": "Evidence cannot yet separate PRODUCT from ORACLE/HARNESS."
+    },
+    "capturedAt": "2026-09-29T05:19:03Z",
+    "environment": {
+      "node": "v22.16.0",
+      "engine": "Playwright Chromium",
+      "playwrightResolution": "package-local",
+      "packageDeclaredVersion": "1.62.1",
+      "transport": "localhost-http",
+      "viewports": [
+        "1440x1000",
+        "1024x900"
+      ],
+      "reducedMotion": "reduce",
+      "browserExecutableOverride": false
+    },
+    "evidenceLineage": {
+      "identityAlgorithm": "path\\0size\\0sha256\\n (tools/source-tree-identity.mjs)",
+      "candidateIdentity": "WORKTREE_VARIANT:90240a5e9f5b",
+      "commit": "072343e9f99e03f4deeb707a5393c0d8a18b38b2",
+      "tree": "90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+      "screenshotDirectory": "writer-output/W02/evidence/",
+      "screenshotCount": 10,
+      "note": "Evidence is bound to the exact tree executed by this run; any later source change invalidates it."
+    },
+    "flows": [
+      {
+        "flow": "library-edit-learn-consume-real-consumer-chain",
+        "route": "/?surface=library -> /?surface=learn",
+        "flowDefinition": "Edit a Library structured block through the canonical shared Structured command, then prove Learn (second consumer) binds the identical owners and was not mutated by the Library edit",
+        "owner": "StructuredDocumentDomainAdapter + StructuredTransactionHistoryRecoveryOwner (implementation) / W02 (policy)",
+        "oracle": "one mutation + transaction owner across both consumers; Library edit creates exactly one history frame; Learn document untouched; no Library fixture leaks into Learn",
+        "preconditions": "Library donor-compatible working document mounted, Learn canonical source unbound",
+        "actionSequence": [
+          "open library",
+          "execute document.insertBlock",
+          "inspect history frame + owners",
+          "open learn",
+          "inspect owners + snapshot equality"
+        ],
+        "expectedState": {
+          "libraryHistoryDelta": 1,
+          "learnUnchanged": true,
+          "sharedOwners": [
+            "StructuredDocumentDomainAdapter",
+            "StructuredTransactionHistoryRecoveryOwner"
+          ]
+        },
+        "negativeCases": [
+          "Learn must not observe the Library mutation",
+          "no second Structured owner may appear"
+        ],
+        "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "status": "PASS",
+        "failureClassification": null,
+        "classificationRationale": null,
+        "repairOwner": null,
+        "repairableInW02": null,
+        "assertions": [
+          {
+            "name": "library.owner",
+            "status": "PASS",
+            "detail": "LibraryDomainAdapter"
+          },
+          {
+            "name": "library.transactionOwner",
+            "status": "PASS",
+            "detail": "StructuredTransactionHistoryRecoveryOwner"
+          },
+          {
+            "name": "library.insert.created-one-frame",
+            "status": "PASS",
+            "detail": {
+              "before": 1,
+              "after": 2
+            }
+          },
+          {
+            "name": "library.insert.changed-document",
+            "status": "PASS",
+            "detail": true
+          },
+          {
+            "name": "learn.owner-identical",
+            "status": "PASS",
+            "detail": {
+              "owner": "LearnAdapter",
+              "tx": "StructuredTransactionHistoryRecoveryOwner"
+            }
+          },
+          {
+            "name": "learn.document-not-mutated-by-library",
+            "status": "PASS",
+            "detail": true
+          },
+          {
+            "name": "learn.domain-isolation",
+            "status": "PASS",
+            "detail": true
+          },
+          {
+            "name": "learn.unbound-source-truth",
+            "status": "PASS",
+            "detail": "UNAVAILABLE_PROVIDER_UNBOUND"
+          }
+        ],
+        "screenshots": [
+          {
+            "file": "writer-output/W02/evidence/library-edit-learn-consume-real-consumer-chain-20260929T051903Z-90240a5e-01.png",
+            "flowId": "library-edit-learn-consume-real-consumer-chain",
+            "label": "Library canonical edit",
+            "viewport": {
+              "width": 1440,
+              "height": 1000
+            },
+            "bytes": 200829,
+            "sha256": "17d9601e94ddcc7a126d34bd5f2e453d8e421a7658af7e59e13e229e1237e436"
+          },
+          {
+            "file": "writer-output/W02/evidence/library-edit-learn-consume-real-consumer-chain-20260929T051903Z-90240a5e-02.png",
+            "flowId": "library-edit-learn-consume-real-consumer-chain",
+            "label": "Learn second consumer",
+            "viewport": {
+              "width": 1440,
+              "height": 1000
+            },
+            "bytes": 165552,
+            "sha256": "830b3792ab0d7892b0a7fbbc6c243a7a9b380d8d5987cdcc5f5c05d21b357f1b"
+          }
+        ]
+      },
+      {
+        "flow": "spatial-select-connect-canonical-edge",
+        "route": "/?surface=visualize",
+        "flowDefinition": "Select exactly two representations through the composed LEFT region, inspect provider-truthful Connect availability and prove canonical relation truth is unchanged",
+        "owner": "SpatialInteractionKernel + RelationInteractionOwner (implementation) / W02 (policy)",
+        "oracle": "two-item selection preserved; author-only Connect hidden for the read-only Visualize provider; canonical relation count and version unchanged",
+        "preconditions": "Visualize four-view composition mounted, LEFT region composed by mountVisualizeFourViewComposition",
+        "actionSequence": [
+          "open visualize",
+          "click two representation buttons in the composed LEFT region",
+          "read selection + availability",
+          "re-read after refresh"
+        ],
+        "expectedState": {
+          "selection": 2,
+          "connectEnabled": false,
+          "relationsUnchanged": true
+        },
+        "negativeCases": [
+          "read-only Visualize must not expose author Connect",
+          "selection must not mutate canonical relations"
+        ],
+        "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "status": "PASS",
+        "failureClassification": null,
+        "classificationRationale": null,
+        "repairOwner": null,
+        "repairableInW02": null,
+        "assertions": [
+          {
+            "name": "visualize.composed-left-region-present",
+            "status": "PASS",
+            "detail": {
+              "buttons": 6,
+              "ids": [
+                "b6-rep-ku-d03-0001",
+                "b6-rep-ku-d03-0004"
+              ]
+            }
+          },
+          {
+            "name": "spatial.selection-two",
+            "status": "PASS",
+            "detail": [
+              "b6-rep-ku-d03-0001",
+              "b6-rep-ku-d03-0004"
+            ]
+          },
+          {
+            "name": "spatial.read-only-connect-hidden",
+            "status": "PASS",
+            "detail": {
+              "selected": [
+                "b6-rep-ku-d03-0001",
+                "b6-rep-ku-d03-0004"
+              ],
+              "records": 2,
+              "version": 1,
+              "readOnly": true,
+              "availability": {
+                "action": "connect",
+                "policyId": "connect",
+                "visible": false,
+                "enabled": false,
+                "reason": "Active mode does not permit this action",
+                "code": "MODE_FORBIDS_ACTION",
+                "selectionCount": 2,
+                "selectedTypes": [
+                  "unspecified"
+                ]
+              },
+              "hidden": true
+            }
+          },
+          {
+            "name": "spatial.canonical-relations-unchanged",
+            "status": "PASS",
+            "detail": {
+              "before": {
+                "selected": [
+                  "b6-rep-ku-d03-0001",
+                  "b6-rep-ku-d03-0004"
+                ],
+                "records": 2,
+                "version": 1,
+                "readOnly": true,
+                "availability": {
+                  "action": "connect",
+                  "policyId": "connect",
+                  "visible": false,
+                  "enabled": false,
+                  "reason": "Active mode does not permit this action",
+                  "code": "MODE_FORBIDS_ACTION",
+                  "selectionCount": 2,
+                  "selectedTypes": [
+                    "unspecified"
+                  ]
+                },
+                "hidden": true
+              },
+              "after": {
+                "selected": [
+                  "b6-rep-ku-d03-0001",
+                  "b6-rep-ku-d03-0004"
+                ],
+                "records": 2,
+                "version": 1
+              }
+            }
+          },
+          {
+            "name": "spatial.selection-preserved",
+            "status": "PASS",
+            "detail": [
+              "b6-rep-ku-d03-0001",
+              "b6-rep-ku-d03-0004"
+            ]
+          }
+        ],
+        "screenshots": [
+          {
+            "file": "writer-output/W02/evidence/spatial-select-connect-canonical-edge-20260929T051903Z-90240a5e-03.png",
+            "flowId": "spatial-select-connect-canonical-edge",
+            "label": "two-item selection, author Connect hidden",
+            "viewport": {
+              "width": 1440,
+              "height": 1000
+            },
+            "bytes": 233476,
+            "sha256": "bd01103024170e0a7ed9bd8e659e2b3f09f3217ae2b69213e06599ced920c97a"
+          }
+        ]
+      },
+      {
+        "flow": "relation-route-convergence-and-label-scope",
+        "route": "/?surface=enterprise",
+        "flowDefinition": "Double-click whole edge, double-click label, close, then press F2 on the edge",
+        "owner": "RelationInteractionOwner (implementation) / W02 (policy)",
+        "oracle": "whole-edge double-click is inert; authorized label and F2 routes converge on relation.edit with one owner; no page error is raised",
+        "preconditions": "Enterprise relation edge and label rendered on the spatial canvas",
+        "actionSequence": [
+          "open enterprise",
+          "dblclick edge line",
+          "dblclick label",
+          "close composer",
+          "focus edge + F2",
+          "read relation.edit receipts"
+        ],
+        "expectedState": {
+          "wholeEdgeOpened": false,
+          "labelOpened": true,
+          "f2Opened": true,
+          "convergedReceipts": 2,
+          "owner": "RelationInteractionOwner"
+        },
+        "negativeCases": [
+          "whole-edge double-click must not open the composer",
+          "no page-level null dereference"
+        ],
+        "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "status": "FAIL",
+        "failureClassification": "ORACLE",
+        "classificationRationale": "The flow precondition is not satisfiable on the current product route: main.ts binds the Enterprise relation adapter through adapters/w03-enterprise.ts createEnterpriseAdapter() with fixture:false, which returns nodes:[], sourceClassification:UNAVAILABLE, providerAvailability:UNAVAILABLE (\"its node values are never promoted to canonical CEP product truth\"). No admitted editable relation edge exists to drive the oracle.",
+        "repairOwner": "ORACLE (flow definition, tools/browser-conformance.mjs \u2014 W01-owned) + W03 (admitted Enterprise provider binding, adapters/w03-enterprise.ts)",
+        "repairableInW02": false,
+        "assertions": [],
+        "screenshots": []
+      },
+      {
+        "flow": "central-change-reuse",
+        "route": "/?surface=visualize -> /?surface=enterprise",
+        "flowDefinition": "Select two objects on each consumer and inspect central selection/action policy reuse plus provider-specific availability",
+        "owner": "ActionAvailabilityCore + RelationInteractionOwner (implementation) / W02 (policy)",
+        "oracle": "policy revision and action/availability owners are reused on both consumers while availability stays provider-truthful",
+        "preconditions": "both consumers mounted with the shared relation interaction owner",
+        "actionSequence": [
+          "open visualize",
+          "select two",
+          "read policy/owners",
+          "open enterprise",
+          "select two eligible",
+          "read policy/owners"
+        ],
+        "expectedState": {
+          "policyRevision": "RELATION-CENTRAL-04",
+          "availabilityOwner": "ActionAvailabilityCore",
+          "actionOwner": "RelationInteractionOwner",
+          "visualizeReadOnly": true,
+          "enterpriseEditable": true
+        },
+        "negativeCases": [
+          "Visualize must not become writable",
+          "Enterprise must not lose its editable boundary"
+        ],
+        "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "status": "FAIL",
+        "failureClassification": "ORACLE",
+        "classificationRationale": "The flow precondition is not satisfiable on the current product route: main.ts binds the Enterprise relation adapter through adapters/w03-enterprise.ts createEnterpriseAdapter() with fixture:false, which returns nodes:[], sourceClassification:UNAVAILABLE, providerAvailability:UNAVAILABLE (\"its node values are never promoted to canonical CEP product truth\"). No admitted editable relation edge exists to drive the oracle.",
+        "repairOwner": "ORACLE (flow definition, tools/browser-conformance.mjs \u2014 W01-owned) + W03 (admitted Enterprise provider binding, adapters/w03-enterprise.ts)",
+        "repairableInW02": false,
+        "assertions": [],
+        "screenshots": []
+      },
+      {
+        "flow": "spatial-input-bidi-preference-and-structured-isolation",
+        "route": "/?surface=visualize -> /?surface=learn",
+        "flowDefinition": "Canonical locale preference change, then BIDI isolation DOM evidence and Learn structured isolation from Library",
+        "owner": "InputDirectionResolver + StructuredRichContentOwner + ScopedPreferencesOwner (implementation) / W02 (policy)",
+        "oracle": "locale preference drives html lang/dir; mixed-direction tokens carry unicode-bidi:isolate through bdi; Learn never mounts Library state",
+        "preconditions": "Visualize spatial host mounted, Learn structured consumer mounted",
+        "actionSequence": [
+          "open visualize",
+          "measure spatial canvas bounds",
+          "open learn",
+          "set locale=en global",
+          "read lang/dir + bdi isolation + domain isolation"
+        ],
+        "expectedState": {
+          "lang": "en",
+          "dir": "ltr",
+          "bdiIsolate": true,
+          "domainIsolation": true
+        },
+        "negativeCases": [
+          "Learn must not expose Library search state",
+          "mixed-direction tokens must be isolated"
+        ],
+        "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "status": "PASS",
+        "failureClassification": null,
+        "classificationRationale": null,
+        "repairOwner": null,
+        "repairableInW02": null,
+        "assertions": [
+          {
+            "name": "spatial.canvas-has-bounds",
+            "status": "PASS",
+            "detail": {
+              "x": 315,
+              "y": 301.1875,
+              "width": 694,
+              "height": 396.6875
+            }
+          },
+          {
+            "name": "bidi.locale-drives-lang-dir",
+            "status": "PASS",
+            "detail": {
+              "lang": "en",
+              "dir": "ltr"
+            }
+          },
+          {
+            "name": "bidi.dom-isolate-evidence",
+            "status": "PASS",
+            "detail": [
+              {
+                "dir": "ltr",
+                "style": "isolate",
+                "text": "W01"
+              },
+              {
+                "dir": "ltr",
+                "style": "isolate",
+                "text": "W02"
+              },
+              {
+                "dir": "ltr",
+                "style": "isolate",
+                "text": "W03"
+              },
+              {
+                "dir": "ltr",
+                "style": "isolate",
+                "text": "W04"
+              },
+              {
+                "dir": "ltr",
+                "style": "isolate",
+                "text": "W05"
+              },
+              {
+                "dir": "ltr",
+                "style": "isolate",
+                "text": "Ctrl K"
+              },
+              {
+                "dir": "ltr",
+                "style": "isolate",
+                "text": "W02"
+              },
+              {
+                "dir": "ltr",
+                "style": "isolate",
+                "text": "learn-unavailable"
+              },
+              {
+                "dir": "ltr",
+                "style": "isolate",
+                "text": "Local Runtime"
+              },
+              {
+                "dir": "ltr",
+                "style": "isolate",
+                "text": "learn-unavailable"
+              },
+              {
+                "dir": "ltr",
+                "style": "isolate",
+                "text": "learn-unavailable \u00b7 r1"
+              },
+              {
+                "dir": "ltr",
+                "style": "isolate",
+                "text": "activity:1"
+              }
+            ]
+          },
+          {
+            "name": "bidi.isolate-rule-present",
+            "status": "PASS",
+            "detail": true
+          },
+          {
+            "name": "learn.structured-isolation",
+            "status": "PASS",
+            "detail": {
+              "hostKind": "DONOR_FREE_WORKSPACE_HOST",
+              "domainKind": "learn",
+              "searchCount": 0,
+              "isolation": true,
+              "isolated": [
+                {
+                  "dir": "ltr",
+                  "style": "isolate",
+                  "text": "W01"
+                },
+                {
+                  "dir": "ltr",
+                  "style": "isolate",
+                  "text": "W02"
+                },
+                {
+                  "dir": "ltr",
+                  "style": "isolate",
+                  "text": "W03"
+                },
+                {
+                  "dir": "ltr",
+                  "style": "isolate",
+                  "text": "W04"
+                },
+                {
+                  "dir": "ltr",
+                  "style": "isolate",
+                  "text": "W05"
+                },
+                {
+                  "dir": "ltr",
+                  "style": "isolate",
+                  "text": "Ctrl K"
+                },
+                {
+                  "dir": "ltr",
+                  "style": "isolate",
+                  "text": "W02"
+                },
+                {
+                  "dir": "ltr",
+                  "style": "isolate",
+                  "text": "learn-unavailable"
+                },
+                {
+                  "dir": "ltr",
+                  "style": "isolate",
+                  "text": "Local Runtime"
+                },
+                {
+                  "dir": "ltr",
+                  "style": "isolate",
+                  "text": "learn-unavailable"
+                },
+                {
+                  "dir": "ltr",
+                  "style": "isolate",
+                  "text": "learn-unavailable \u00b7 r1"
+                },
+                {
+                  "dir": "ltr",
+                  "style": "isolate",
+                  "text": "activity:1"
+                }
+              ],
+              "isolateRulePresent": true
+            }
+          }
+        ],
+        "screenshots": [
+          {
+            "file": "writer-output/W02/evidence/spatial-input-bidi-preference-and-structured-isolation-20260929T051903Z-90240a5e-04.png",
+            "flowId": "spatial-input-bidi-preference-and-structured-isolation",
+            "label": "spatial canvas bounds",
+            "viewport": {
+              "width": 1440,
+              "height": 1000
+            },
+            "bytes": 271929,
+            "sha256": "472e2e9c8ce7e2a9f27cde77e3efb50ad5d0dd0729bd86cdc2f2921d8c0bd32d"
+          },
+          {
+            "file": "writer-output/W02/evidence/spatial-input-bidi-preference-and-structured-isolation-20260929T051903Z-90240a5e-05.png",
+            "flowId": "spatial-input-bidi-preference-and-structured-isolation",
+            "label": "BIDI isolation + structured isolation",
+            "viewport": {
+              "width": 1440,
+              "height": 1000
+            },
+            "bytes": 171061,
+            "sha256": "aa40b0378074fdeea05d2b90999632261a9d5de09b0fef0ac8e191be537c0818"
+          }
+        ]
+      },
+      {
+        "flow": "fit-pan-zoom-canonical-state-invariance",
+        "route": "/?surface=visualize",
+        "flowDefinition": "Fit, pan and zoom the Graph/Canvas representation camera and prove canonical state and relations never change",
+        "owner": "SpatialModel camera + VisualizeDomainAdapter.viewport (implementation) / W02 (policy)",
+        "oracle": "camera changes; canonical projection digest, object/relation counts and canonical mutation flags stay identical",
+        "preconditions": "Visualize spatial host visible (GRAPH/CANVAS capability view)",
+        "actionSequence": [
+          "open visualize",
+          "activate Canvas view",
+          "execute visualize.viewport fit",
+          "pan",
+          "zoom",
+          "re-read canonical projection"
+        ],
+        "expectedState": {
+          "cameraChanged": true,
+          "canonicalUnchanged": true,
+          "keyboardReachable": true,
+          "minimapReachable": true
+        },
+        "negativeCases": [
+          "fit/pan/zoom must never write canonical truth",
+          "Tree/Path views must refuse viewport commands"
+        ],
+        "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "status": "PASS",
+        "failureClassification": null,
+        "classificationRationale": null,
+        "repairOwner": null,
+        "repairableInW02": null,
+        "assertions": [
+          {
+            "name": "viewport.tree-refuses",
+            "status": "PASS",
+            "detail": {
+              "id": "visualize.viewport",
+              "owner": "VisualizeDomainAdapter",
+              "commandOwner": "VisualizeDomainAdapter",
+              "code": "VISUALIZE_VIEWPORT_REQUIRES_GRAPH_OR_CANVAS",
+              "reason": "Spatial viewport commands are available only in Graph or Canvas view.",
+              "availabilityOwner": "VisualizeDomainAdapter",
+              "enabled": false,
+              "mode": "TREE"
+            }
+          },
+          {
+            "name": "viewport.fit-pan-zoom-enabled",
+            "status": "PASS",
+            "detail": {
+              "fit": {
+                "id": "visualize.viewport",
+                "owner": "VisualizeDomainAdapter",
+                "commandOwner": "VisualizeDomainAdapter",
+                "code": "AVAILABLE",
+                "reason": "",
+                "availabilityOwner": "VisualizeDomainAdapter",
+                "enabled": true,
+                "mode": "CANVAS"
+              },
+              "pan": {
+                "id": "visualize.viewport",
+                "owner": "VisualizeDomainAdapter",
+                "commandOwner": "VisualizeDomainAdapter",
+                "code": "AVAILABLE",
+                "reason": "",
+                "availabilityOwner": "VisualizeDomainAdapter",
+                "enabled": true,
+                "mode": "CANVAS"
+              },
+              "zoom": {
+                "id": "visualize.viewport",
+                "owner": "VisualizeDomainAdapter",
+                "commandOwner": "VisualizeDomainAdapter",
+                "code": "AVAILABLE",
+                "reason": "",
+                "availabilityOwner": "VisualizeDomainAdapter",
+                "enabled": true,
+                "mode": "CANVAS"
+              }
+            }
+          },
+          {
+            "name": "viewport.camera-changed",
+            "status": "PASS",
+            "detail": {
+              "before": {
+                "x": -66.9,
+                "y": -35.4,
+                "zoom": 0.15
+              },
+              "after": {
+                "x": -181.52147239263797,
+                "y": 23.941104294478578,
+                "zoom": 1.54601226993865
+              }
+            }
+          },
+          {
+            "name": "viewport.canonical-invariant",
+            "status": "PASS",
+            "detail": {
+              "canonicalSame": true,
+              "relationsSame": true
+            }
+          }
+        ],
+        "screenshots": [
+          {
+            "file": "writer-output/W02/evidence/fit-pan-zoom-canonical-state-invariance-20260929T051903Z-90240a5e-06.png",
+            "flowId": "fit-pan-zoom-canonical-state-invariance",
+            "label": "camera changed, canonical state invariant",
+            "viewport": {
+              "width": 1440,
+              "height": 1000
+            },
+            "bytes": 263668,
+            "sha256": "2c00778e8578aa5ec04afe9b4355e65ca836e147d0542b3c3157165aa95710de"
+          }
+        ]
+      },
+      {
+        "flow": "focus-document-activeElement-proofs",
+        "route": "/?surface=golden",
+        "flowDefinition": "Command palette open/close focus return, pane lifecycle, and spatial node keyboard focus/selection via document.activeElement",
+        "owner": "TransientFocusOwner + GlobalInputKeymapOwner + SpatialInteractionKernel (implementation) / W02 (policy)",
+        "oracle": "Escape returns focus to the invoker; Arrow moves focus without changing selection; Space selects the focused node",
+        "preconditions": "Foundation chrome visible with palette invoker and a spatial host",
+        "actionSequence": [
+          "open golden",
+          "toggle pane",
+          "open palette",
+          "Escape",
+          "check activeElement",
+          "focus spatial node",
+          "ArrowRight",
+          "Space"
+        ],
+        "expectedState": {
+          "focusReturned": true,
+          "focusMoved": true,
+          "spaceSelected": true
+        },
+        "negativeCases": [
+          "Arrow must not change selection",
+          "Escape must not leave focus on document.body"
+        ],
+        "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "status": "PASS",
+        "failureClassification": null,
+        "classificationRationale": null,
+        "repairOwner": null,
+        "repairableInW02": null,
+        "assertions": [
+          {
+            "name": "pane.lifecycle",
+            "status": "PASS",
+            "detail": {
+              "collapsed": "collapsed",
+              "restored": "open"
+            }
+          },
+          {
+            "name": "palette.opens",
+            "status": "PASS",
+            "detail": true
+          },
+          {
+            "name": "palette.escape-closes",
+            "status": "PASS",
+            "detail": true
+          },
+          {
+            "name": "focus.returns-to-invoker",
+            "status": "PASS",
+            "detail": true
+          }
+        ],
+        "screenshots": [
+          {
+            "file": "writer-output/W02/evidence/focus-document-activeElement-proofs-20260929T051903Z-90240a5e-07.png",
+            "flowId": "focus-document-activeElement-proofs",
+            "label": "focus returned to palette invoker",
+            "viewport": {
+              "width": 1440,
+              "height": 1000
+            },
+            "bytes": 117049,
+            "sha256": "5b394f9ed3ca284ae5d6c74e5d5fcf79c66d40fffb86f26a2db31ffaa456eaaa"
+          }
+        ]
+      },
+      {
+        "flow": "s01-structured-insertion-pointer-keyboard-1440x1000",
+        "route": "/?surface=library + /tests/rescue/S01_SHARED_STRUCTURED_EDITOR/s01-browser-proof.js",
+        "flowDefinition": "Run the compiled S01 shared structured editor browser proof (primary click, keyboard Enter, secondary right-click exact gap) in a real document",
+        "owner": "StructuredSurfaceHost + StructuredDragDropOwner (implementation) / W02 (policy)",
+        "oracle": "chooser routes create no mutation; right-click inserts an exact-gap paragraph atomically; interaction metadata is centralized",
+        "preconditions": "S01 harness host with #surface and #status at the application origin",
+        "actionSequence": [
+          "open library route",
+          "mount S01 host",
+          "primary click",
+          "keyboard Enter",
+          "secondary right-click",
+          "read S01BrowserProof"
+        ],
+        "expectedState": {
+          "status": "PASS",
+          "chooserRoutesWithoutMutation": true,
+          "exactGapInsertion": true
+        },
+        "negativeCases": [
+          "left click and Enter must not mutate the document",
+          "forged gap metadata must be refused"
+        ],
+        "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "status": "PASS",
+        "failureClassification": null,
+        "classificationRationale": null,
+        "repairOwner": null,
+        "repairableInW02": null,
+        "assertions": [
+          {
+            "name": "s01.status",
+            "status": "PASS",
+            "detail": {
+              "status": "PASS",
+              "kind": "OD057_S01_BROWSER_POINTER_KEYBOARD_PROOF",
+              "chooserCount": 2,
+              "steps": [
+                {
+                  "id": "browser.primary-left-click-opens-chooser-no-mutation",
+                  "status": "PASS",
+                  "evidence": {
+                    "chooserCount": 1,
+                    "documentUnchanged": true,
+                    "historyDelta": 0
+                  }
+                },
+                {
+                  "id": "browser.keyboard-enter-opens-chooser-no-mutation",
+                  "status": "PASS",
+                  "evidence": {
+                    "chooserCount": 2,
+                    "activeElementIsGap": true,
+                    "documentUnchanged": true,
+                    "historyDelta": 0
+                  }
+                },
+                {
+                  "id": "browser.secondary-right-click-direct-paragraph-exact-gap",
+                  "status": "PASS",
+                  "evidence": {
+                    "defaultPrevented": true,
+                    "chooserCount": 2,
+                    "insertedId": "paragraph-gap-copy-1",
+                    "insertedType": "paragraph",
+                    "exactGap": true,
+                    "historyDelta": 1,
+                    "workingRevisionDelta": 1,
+                    "rerendered": true
+                  }
+                },
+                {
+                  "id": "browser.route-metadata-present",
+                  "status": "PASS",
+                  "evidence": {
+                    "primary": "chooser",
+                    "keyboard": "chooser",
+                    "secondary": "insert-paragraph"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "s01.steps",
+            "status": "PASS",
+            "detail": [
+              {
+                "id": "browser.primary-left-click-opens-chooser-no-mutation",
+                "status": "PASS"
+              },
+              {
+                "id": "browser.keyboard-enter-opens-chooser-no-mutation",
+                "status": "PASS"
+              },
+              {
+                "id": "browser.secondary-right-click-direct-paragraph-exact-gap",
+                "status": "PASS"
+              },
+              {
+                "id": "browser.route-metadata-present",
+                "status": "PASS"
+              }
+            ]
+          }
+        ],
+        "screenshots": [
+          {
+            "file": "writer-output/W02/evidence/s01-structured-insertion-pointer-keyboard-1440x1000-20260929T051903Z-90240a5e-08.png",
+            "flowId": "s01-structured-insertion-pointer-keyboard-1440x1000",
+            "label": "S01 structured editor proof 1440x1000",
+            "viewport": {
+              "width": 1440,
+              "height": 1000
+            },
+            "bytes": 221935,
+            "sha256": "c92a353efc056d24a57ce2da46a7d03902a1c771e1868ea87ca22f49abce2e43"
+          }
+        ]
+      },
+      {
+        "flow": "s01-structured-insertion-pointer-keyboard-1024x900",
+        "route": "/?surface=library + /tests/rescue/S01_SHARED_STRUCTURED_EDITOR/s01-browser-proof.js",
+        "flowDefinition": "Run the compiled S01 shared structured editor browser proof (primary click, keyboard Enter, secondary right-click exact gap) in a real document",
+        "owner": "StructuredSurfaceHost + StructuredDragDropOwner (implementation) / W02 (policy)",
+        "oracle": "chooser routes create no mutation; right-click inserts an exact-gap paragraph atomically; interaction metadata is centralized",
+        "preconditions": "S01 harness host with #surface and #status at the application origin",
+        "actionSequence": [
+          "open library route",
+          "mount S01 host",
+          "primary click",
+          "keyboard Enter",
+          "secondary right-click",
+          "read S01BrowserProof"
+        ],
+        "expectedState": {
+          "status": "PASS",
+          "chooserRoutesWithoutMutation": true,
+          "exactGapInsertion": true
+        },
+        "negativeCases": [
+          "left click and Enter must not mutate the document",
+          "forged gap metadata must be refused"
+        ],
+        "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+        "viewport": {
+          "width": 1024,
+          "height": 900
+        },
+        "status": "PASS",
+        "failureClassification": null,
+        "classificationRationale": null,
+        "repairOwner": null,
+        "repairableInW02": null,
+        "assertions": [
+          {
+            "name": "s01.status",
+            "status": "PASS",
+            "detail": {
+              "status": "PASS",
+              "kind": "OD057_S01_BROWSER_POINTER_KEYBOARD_PROOF",
+              "chooserCount": 2,
+              "steps": [
+                {
+                  "id": "browser.primary-left-click-opens-chooser-no-mutation",
+                  "status": "PASS",
+                  "evidence": {
+                    "chooserCount": 1,
+                    "documentUnchanged": true,
+                    "historyDelta": 0
+                  }
+                },
+                {
+                  "id": "browser.keyboard-enter-opens-chooser-no-mutation",
+                  "status": "PASS",
+                  "evidence": {
+                    "chooserCount": 2,
+                    "activeElementIsGap": true,
+                    "documentUnchanged": true,
+                    "historyDelta": 0
+                  }
+                },
+                {
+                  "id": "browser.secondary-right-click-direct-paragraph-exact-gap",
+                  "status": "PASS",
+                  "evidence": {
+                    "defaultPrevented": true,
+                    "chooserCount": 2,
+                    "insertedId": "paragraph-gap-copy-1",
+                    "insertedType": "paragraph",
+                    "exactGap": true,
+                    "historyDelta": 1,
+                    "workingRevisionDelta": 1,
+                    "rerendered": true
+                  }
+                },
+                {
+                  "id": "browser.route-metadata-present",
+                  "status": "PASS",
+                  "evidence": {
+                    "primary": "chooser",
+                    "keyboard": "chooser",
+                    "secondary": "insert-paragraph"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "s01.steps",
+            "status": "PASS",
+            "detail": [
+              {
+                "id": "browser.primary-left-click-opens-chooser-no-mutation",
+                "status": "PASS"
+              },
+              {
+                "id": "browser.keyboard-enter-opens-chooser-no-mutation",
+                "status": "PASS"
+              },
+              {
+                "id": "browser.secondary-right-click-direct-paragraph-exact-gap",
+                "status": "PASS"
+              },
+              {
+                "id": "browser.route-metadata-present",
+                "status": "PASS"
+              }
+            ]
+          }
+        ],
+        "screenshots": [
+          {
+            "file": "writer-output/W02/evidence/s01-structured-insertion-pointer-keyboard-1024x900-20260929T051903Z-90240a5e-09.png",
+            "flowId": "s01-structured-insertion-pointer-keyboard-1024x900",
+            "label": "S01 structured editor proof 1024x900",
+            "viewport": {
+              "width": 1024,
+              "height": 900
+            },
+            "bytes": 203919,
+            "sha256": "988301285d80900c349f794d9738dac9b699b8a77422fc59554b8489103d318e"
+          }
+        ]
+      },
+      {
+        "flow": "spatial-closure-1024x900",
+        "route": "/?surface=visualize",
+        "flowDefinition": "Canvas closure obligation: spatial host, selection and representation actions reachable at 1024x900",
+        "owner": "SpatialPresentationOwner + SpatialInteractionKernel (implementation) / W02 (policy)",
+        "oracle": "spatial host has non-zero bounds and representation selection works at the 1024x900 closure viewport",
+        "preconditions": "Visualize four-view composition mounted at 1024x900",
+        "actionSequence": [
+          "open visualize at 1024x900",
+          "measure spatial canvas bounds",
+          "select a representation",
+          "screenshot"
+        ],
+        "expectedState": {
+          "bounds": "non-zero",
+          "selection": 1
+        },
+        "negativeCases": [
+          "no zero-size spatial canvas"
+        ],
+        "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+        "viewport": {
+          "width": 1024,
+          "height": 900
+        },
+        "status": "PASS",
+        "failureClassification": null,
+        "classificationRationale": null,
+        "repairOwner": null,
+        "repairableInW02": null,
+        "assertions": [
+          {
+            "name": "closure.canvas-bounds",
+            "status": "PASS",
+            "detail": {
+              "x": 315,
+              "y": 319.1875,
+              "width": 709,
+              "height": 541.8125
+            }
+          },
+          {
+            "name": "closure.selection-reachable",
+            "status": "PASS",
+            "detail": [
+              "b6-rep-ku-d03-0001"
+            ]
+          }
+        ],
+        "screenshots": [
+          {
+            "file": "writer-output/W02/evidence/spatial-closure-1024x900-20260929T051903Z-90240a5e-10.png",
+            "flowId": "spatial-closure-1024x900",
+            "label": "spatial closure at 1024x900",
+            "viewport": {
+              "width": 1024,
+              "height": 900
+            },
+            "bytes": 191643,
+            "sha256": "5d2189f98f35b3148a220f45487866cd73be29818b921b45d2c172263e235a9f"
+          }
+        ]
+      }
+    ],
+    "sharedHarness": {
+      "command": "tools/writer-serial.sh npm run browser:test",
+      "summary": {
+        "total": 6,
+        "pass": 1,
+        "fail": 5
+      },
+      "sourceCandidate": "CANONICAL_SOURCE_TREE_SHA256:90240a5e9f5b5eae74d8843a3ab074762fea4aad058aa19b6ffd37577161805a",
+      "flowStatus": [
+        {
+          "id": "workspace.transient-and-pane-lifecycle",
+          "status": "PASS"
+        },
+        {
+          "id": "spatial.selection-connect-canonical-edge",
+          "status": "FAIL"
+        },
+        {
+          "id": "relation.route-convergence-and-label-scope",
+          "status": "FAIL"
+        },
+        {
+          "id": "central-change-reuse",
+          "status": "FAIL"
+        },
+        {
+          "id": "runtime-causal-consequence",
+          "status": "FAIL"
+        },
+        {
+          "id": "spatial-input-bidi-preference-and-structured-isolation",
+          "status": "FAIL"
+        }
+      ]
+    }
+  },
+  "artifacts": {
+    "writer_output": [
+      {
+        "path": "writer-output/W02/ACCEPTANCE_MATRIX.csv",
+        "bytes": 1522791,
+        "sha256": "e101788ecd6c089e95fc2e0069e89ebb08c9464a0a0980cf6229f481e6bdefaa"
+      },
+      {
+        "path": "writer-output/W02/ACCEPTANCE_SUMMARY.json",
+        "bytes": 2238,
+        "sha256": "92e69efbe2dc5d1033a7aa41b95c33c9269ccee9fda0aaf5925dd78d985f0951"
+      },
+      {
+        "path": "writer-output/W02/BROWSER_RECEIPT.json",
+        "bytes": 49942,
+        "sha256": "d14f50b94eba5777fc3efe7bc29efba58ee9f8b86439b325bb0fa4fb7b607ba1"
+      },
+      {
+        "path": "writer-output/W02/CHECKPOINTS.md",
+        "bytes": 21429,
+        "sha256": "9a4c8bdd016d6eeaf9dadef93ebe188e66b0bd3bb7afb69b500c1048d984a615"
+      },
+      {
+        "path": "writer-output/W02/PROOF_CATALOG.json",
+        "bytes": 47824,
+        "sha256": "8e10574b48988497e67f778e2b9f27d6e2cbf0d9fdae2ec806a8a4ac89c1c2e5"
+      },
+      {
+        "path": "writer-output/W02/PROOF_RESULTS.json",
+        "bytes": 48088,
+        "sha256": "7cbd2973a026666099c427c900352ac2aaf4a8f5bf8134ebe7dec4c1793d442a"
+      },
+      {
+        "path": "writer-output/W02/PROPOSALS.md",
+        "bytes": 10288,
+        "sha256": "8fb0eb72ade16be0905ffebe925ec1db3154eab21a55ed760f6fbc8dea2ee0c8"
+      },
+      {
+        "path": "writer-output/W02/W02_HANDOFF.md",
+        "bytes": 16015,
+        "sha256": "e630c49ec03db374fae8bc49f3e165e096889a7c96c3b94ac931dd7d8a5dfbe6"
+      },
+      {
+        "path": "writer-output/W02/evidence/fit-pan-zoom-canonical-state-invariance-20260929T051903Z-90240a5e-06.png",
+        "bytes": 263668,
+        "sha256": "2c00778e8578aa5ec04afe9b4355e65ca836e147d0542b3c3157165aa95710de"
+      },
+      {
+        "path": "writer-output/W02/evidence/focus-document-activeElement-proofs-20260929T051903Z-90240a5e-07.png",
+        "bytes": 117049,
+        "sha256": "5b394f9ed3ca284ae5d6c74e5d5fcf79c66d40fffb86f26a2db31ffaa456eaaa"
+      },
+      {
+        "path": "writer-output/W02/evidence/library-edit-learn-consume-real-consumer-chain-20260929T051903Z-90240a5e-01.png",
+        "bytes": 200829,
+        "sha256": "17d9601e94ddcc7a126d34bd5f2e453d8e421a7658af7e59e13e229e1237e436"
+      },
+      {
+        "path": "writer-output/W02/evidence/library-edit-learn-consume-real-consumer-chain-20260929T051903Z-90240a5e-02.png",
+        "bytes": 165552,
+        "sha256": "830b3792ab0d7892b0a7fbbc6c243a7a9b380d8d5987cdcc5f5c05d21b357f1b"
+      },
+      {
+        "path": "writer-output/W02/evidence/s01-structured-insertion-pointer-keyboard-1024x900-20260929T051903Z-90240a5e-09.png",
+        "bytes": 203919,
+        "sha256": "988301285d80900c349f794d9738dac9b699b8a77422fc59554b8489103d318e"
+      },
+      {
+        "path": "writer-output/W02/evidence/s01-structured-insertion-pointer-keyboard-1440x1000-20260929T051903Z-90240a5e-08.png",
+        "bytes": 221935,
+        "sha256": "c92a353efc056d24a57ce2da46a7d03902a1c771e1868ea87ca22f49abce2e43"
+      },
+      {
+        "path": "writer-output/W02/evidence/spatial-closure-1024x900-20260929T051903Z-90240a5e-10.png",
+        "bytes": 191643,
+        "sha256": "5d2189f98f35b3148a220f45487866cd73be29818b921b45d2c172263e235a9f"
+      },
+      {
+        "path": "writer-output/W02/evidence/spatial-input-bidi-preference-and-structured-isolation-20260929T051903Z-90240a5e-04.png",
+        "bytes": 271929,
+        "sha256": "472e2e9c8ce7e2a9f27cde77e3efb50ad5d0dd0729bd86cdc2f2921d8c0bd32d"
+      },
+      {
+        "path": "writer-output/W02/evidence/spatial-input-bidi-preference-and-structured-isolation-20260929T051903Z-90240a5e-05.png",
+        "bytes": 171061,
+        "sha256": "aa40b0378074fdeea05d2b90999632261a9d5de09b0fef0ac8e191be537c0818"
+      },
+      {
+        "path": "writer-output/W02/evidence/spatial-select-connect-canonical-edge-20260929T051903Z-90240a5e-03.png",
+        "bytes": 233476,
+        "sha256": "bd01103024170e0a7ed9bd8e659e2b3f09f3217ae2b69213e06599ced920c97a"
+      }
+    ],
+    "source_changed": [
+      {
+        "path": "stack/native-typescript/adapters/learn.ts",
+        "bytes": 15196,
+        "sha256": "0e5e6d3fea4b400f6b75477bdbc7c780b77b60b3610f968c6ad1b332ba13a51b"
+      },
+      {
+        "path": "stack/native-typescript/adapters/visualize/domain.ts",
+        "bytes": 36620,
+        "sha256": "bcc68d70a16e4b9b6cfe6bbe6d4f7c1dcf326f1a9257f0d72249c836e6103568"
+      },
+      {
+        "path": "stack/native-typescript/surfaces/library/surface.ts",
+        "bytes": 4444,
+        "sha256": "62276b74e737c3f620076d15514d0d790dda28ef715b26bedbfe09c0c92b6fc5"
+      },
+      {
+        "path": "stack/native-typescript/tests/rescue/S01_SHARED_STRUCTURED_EDITOR/s01-structured-editor-core-tests.ts",
+        "bytes": 14158,
+        "sha256": "afe2650bd5870548512d434c1c0d6096e77ed76202adb4e4f52bab961170b6ea"
+      },
+      {
+        "path": "stack/native-typescript/tests/rescue/S09_W01_W02_RQ_VISUALIZE/s09-reexecution-tests.ts",
+        "bytes": 11834,
+        "sha256": "0d4de0c49126e36d19f25b74b5700dab50edec2f24cd47b89b08a37215ae46ce"
+      },
+      {
+        "path": "tests/surfaces/learn/surface.test.mjs",
+        "bytes": 3900,
+        "sha256": "13ae4f791848ca591dc07534f701e1b5908c1203d2eb9cf4ed4092c8ff7b3023"
+      },
+      {
+        "path": "tests/surfaces/library/surface.test.mjs",
+        "bytes": 1213,
+        "sha256": "db213195fb3763885ba7952ef6abffd214cf2ec8ade74fc771c3c4c19e22f0d6"
+      },
+      {
+        "path": "tests/surfaces/rq/surface.test.mjs",
+        "bytes": 3687,
+        "sha256": "5636f2bd10739299de9a02500e6e9d1e64690d4d9d3d002aa57d4b16cb83bb32"
+      },
+      {
+        "path": "tools/w02-browser-flows.mjs",
+        "bytes": 37678,
+        "sha256": "3ec25159f15e425713a37c397ae65c61b7657e76e825e7b513c8f83ccce4f45d"
+      },
+      {
+        "path": "tools/w02-coverage-check.mjs",
+        "bytes": 4830,
+        "sha256": "4b9d1002d9694b5fe45376d7b6238e8482c800b4f6a321eff76219bd9b1f609f"
+      }
+    ],
+    "shared_measured_receipts": [
+      {
+        "path": "assurance/BROWSER_CONFORMANCE_RECEIPT.json",
+        "bytes": 10166,
+        "sha256": "60978e6934466ee5173b967348307a9146526c9a9a78fe8ee714cf501c0e1bb2"
+      },
+      {
+        "path": "assurance/MODEL_TEST_RESULTS.json",
+        "bytes": 81073,
+        "sha256": "9d8e2e97fdeebc5291ede2c42ecc211cc1037fd5a830252dea3eddb0f304d5be"
+      }
+    ],
+    "binding_inputs": [
+      {
+        "path": "controller/05_foundation/ownership_adjudication.md",
+        "bytes": 6988,
+        "sha256": "c863a535f1e91bc47c5635aa97ab596a1dde5c33bdbc70db54d2ad1ca0cf04d8"
+      },
+      {
+        "path": "controller/05_foundation/shared_ownership_map.md",
+        "bytes": 31788,
+        "sha256": "bf6352b413687ae407f0c4698b6badd822b8daa92b28b22383463459f742cdf2"
+      },
+      {
+        "path": "controller/07_browser/browser_contract.md",
+        "bytes": 3280,
+        "sha256": "cf3dee3d94d28d6119a6f61b13ffb249ee044427497aebb4989c5e9b715617dd"
+      },
+      {
+        "path": "controller/07_browser/failure_taxonomy.md",
+        "bytes": 4075,
+        "sha256": "aff08d5b4c213305d6c12c22a1abd5e0d9b5a06e0f1702a4b32bd66c04a1892b"
+      },
+      {
+        "path": "controller/08_evidence/evidence_contract.md",
+        "bytes": 2630,
+        "sha256": "af7fe318e97be058f8ddea8a948f140bc453de52e4fb002f63e5fa153dcc0d10"
+      },
+      {
+        "path": "controller/09_writer_forge/W02_REQUIREMENTS.csv",
+        "bytes": 2277620,
+        "sha256": "32024e3067885c659ba8ee8d66201be184cda6672fb14f28b652f4955d814821"
+      },
+      {
+        "path": "controller/09_writer_forge/W02_writer_packet.md",
+        "bytes": 7985,
+        "sha256": "ddccc4ffccaad93c1771c41c679ff2fb381f0bfefa1fb0a68128ba5c5b4c67da"
+      },
+      {
+        "path": "controller/12_execution/00_dispatch_readiness.md",
+        "bytes": 8521,
+        "sha256": "93fb7c257669d0b762f6aea2d41f81374d6a9d2f04c8196501ca44ecff93fb4c"
+      },
+      {
+        "path": "controller/12_execution/01_writer_checkpoint_contract.md",
+        "bytes": 4181,
+        "sha256": "c5d60e2952c228f61e46bd5511e24da9273c58b41e028fc052037e674d196d63"
+      },
+      {
+        "path": "writer-output/ACCEPTANCE_MATRIX_SPEC.md",
+        "bytes": 4329,
+        "sha256": "414db21b09c95d91e83999cf700f8b6a6b79c1ef6113ab1d77412c600958b697"
+      }
+    ]
+  }
+}
