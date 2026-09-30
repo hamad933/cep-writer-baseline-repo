@@ -21,21 +21,21 @@ const REPRESENTATIVE_SCENARIO_DEFINITION=Object.freeze({
   environment:{capabilities:['SIM_NET','WEB_TIER','SIEM_FEED']},
   phases:[
     {id:'PHASE-01',name:'01 Initial Access',elements:[
-      {id:'EVT-PHISH-OPEN',kind:'event',title:'Phishing Email Opened',detail:'Campaign mail reaches the training mailbox.'},
-      {id:'INJ-LINK-DELIVERY',kind:'inject',title:'Malicious Link Delivery',type:'Inject',participant:'Training workstation',delivery:'Immediate',payloadType:'Simulated URL click'}
+      {id:'EVT-PHISH-OPEN',kind:'event',title:'Phishing Email Opened',detail:'Campaign mail reaches the training mailbox.',participant:'Training mailbox',recipient:'SOC Analyst',trigger:'Campaign delivery scheduled',source:'Simulated mail gateway',delivery:'Immediate',payloadType:'Message opened',channel:'Mail telemetry'},
+      {id:'INJ-LINK-DELIVERY',kind:'inject',title:'Malicious Link Delivery',type:'Inject',participant:'Training workstation',recipient:'SOC Analyst',trigger:'Phishing email opened',source:'Mail gateway event',delivery:'Immediate',payloadType:'Simulated URL click',channel:'Browser telemetry',branchImpact:'None · does not alter scenario flow'}
     ]},
     {id:'PHASE-02',name:'02 Application Exploitation',elements:[
-      {id:'LAB-SQLI-FUNDAMENTALS',kind:'lab',title:'SQL Injection Fundamentals (Reference)',labRef:{id:'LAB-SQLI-01',revision:'2'}},
-      {id:'DEC-PRIV-ESC',kind:'decision',title:'Use Data for Priv Escalation?',condition:'Injection condition satisfied'}
+      {id:'LAB-SQLI-FUNDAMENTALS',kind:'lab',title:'SQL Injection Fundamentals (Reference)',labRef:{id:'LAB-SQLI-01',revision:'2'},participant:'Trainee',recipient:'Trainee',trigger:'Phase 02 opened',source:'Scenario reference set',delivery:'On demand',detail:'Reference module pinned at LAB-SQLI-01@2.'},
+      {id:'DEC-PRIV-ESC',kind:'decision',title:'Use Data for Priv Escalation?',condition:'Injection condition satisfied',participant:'Training attacker',recipient:'Training Attacker',trigger:'Injection succeeded',source:'Injection success signal',branchImpact:'Branches the flow: yes → privilege escalation, no → stop at data access'}
     ]},
     {id:'PHASE-03',name:'03 Detection',elements:[
-      {id:'EVT-ANOM-SQL',kind:'event',title:'Anomalous SQL Query Detected',trigger:'Detection condition satisfied',source:'SIEM correlation rule',delivery:'Immediate'},
-      {id:'EVT-SOC-ALERT',kind:'event',title:'SOC Alert Delivered',channel:'Simulated SIEM',recipient:'SOC Analyst'}
+      {id:'EVT-ANOM-SQL',kind:'event',title:'Anomalous SQL Query Detected',trigger:'Detection condition satisfied',source:'SIEM correlation rule',delivery:'Immediate',recipient:'SOC Analyst',payloadType:'Correlation alert',channel:'Simulated SIEM'},
+      {id:'EVT-SOC-ALERT',kind:'event',title:'SOC Alert Delivered',channel:'Simulated SIEM',recipient:'SOC Analyst',payloadType:'Alert Notification',trigger:'Anomalous SQL query detected',source:'SOC alerting rule',delivery:'Immediate'}
     ]},
     {id:'PHASE-04',name:'04 Response',elements:[
-      {id:'EVT-HOST-ISOLATION',kind:'event',title:'Host Isolation Performed',delivery:'No delay'},
-      {id:'OBS-CONTAINMENT',kind:'observability',title:'Containment Actions',channel:'Simulated SIEM'},
-      {id:'INJ-ALERT-NOTIFICATION',kind:'inject',title:'Alert Notification',type:'Inject',channel:'Simulated SIEM',branchImpact:'None · does not alter scenario flow'}
+      {id:'EVT-HOST-ISOLATION',kind:'event',title:'Host Isolation Performed',delivery:'No delay',recipient:'SOC Analyst',trigger:'Containment approved',source:'SOAR playbook',channel:'Endpoint control',payloadType:'Isolation command'},
+      {id:'OBS-CONTAINMENT',kind:'observability',title:'Containment Actions',channel:'Simulated SIEM',recipient:'SOC Analyst',trigger:'Isolation confirmed',source:'Endpoint telemetry',payloadType:'Containment telemetry',delivery:'Streamed'},
+      {id:'INJ-ALERT-NOTIFICATION',kind:'inject',title:'Alert Notification',type:'Inject',channel:'Simulated SIEM',recipient:'SOC Analyst',payloadType:'Alert Notification',trigger:'SOC alert notification raised',source:'SOC alerting rule',delivery:'Immediate',branchImpact:'None · does not alter scenario flow'}
     ]}
   ],
   rules:[{id:'RULE-DETECT-SQLI',name:'Detection condition satisfied',source:'SIEM correlation rule'}],
