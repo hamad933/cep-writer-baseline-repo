@@ -47,6 +47,19 @@ The active Controller must prove image capability with an actual local-image vis
 
 If vision works: use it throughout. If it fails: identify the exact failing layer, fix configuration if possible, and **do not fabricate visual analysis**.
 
+### R3b. Vision can be intermittently stale — always cross-check with ground truth
+
+**Observed failure:** an image-read channel can return a *previously read* frame for a *newly written* file, while other reads of similar files are perfectly correct. It is unreliable **per-read**, not uniformly broken. A canary test passing once does **not** certify later reads.
+
+Therefore **never issue a visual verdict without a ground-truth cross-check of the same bytes**:
+
+1. **Hash + dimensions** — assert the file's sha256 and dims before and after reading; the claim must cite them.
+2. **OCR the same bytes** (tesseract) and compare the recognised text to what you believe you are seeing. If OCR says "Scenarios" and you saw "RQ", your read was stale — discard it.
+3. **Pixel-diff against a known image** when identity is in doubt (two files with different sha256 that "look identical" indicate a stale frame).
+4. **Controlled canaries** (solid magenta / yellow / blue probe images) are useful for detecting the failure, but a passing canary does not clear a later read.
+
+If a read and its ground truth disagree: **report the conflict, mark vision verification as OPEN, and fall back to hash-bound pixel metrics, DOM geometry probes, and OCR** — never to an unverified image claim.
+
 ### R4. Comparison depth L1–L4 (use the appropriate depth)
 
 **L1 — WHOLE SURFACE**: overall composition, visual hierarchy, major regions, balance, density, spacing, identity.
