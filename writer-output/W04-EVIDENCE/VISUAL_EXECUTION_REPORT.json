@@ -1,0 +1,304 @@
+{
+  "SURFACE": "evidence",
+  "OWNER": "W04-EVIDENCE",
+  "REFERENCE": "cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/01_EVIDENCE_INTAKE/Cybersecurity Evidence Dashboard in Arabic(1).png",
+  "REFERENCE_CLASSIFICATION": "CURRENT_FINAL_REFERENCE · sha256 prefix 789deee01cd946d9 · 1505x1045 · register: cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md · manifest: cep-writer/REFERENCE_MANIFEST.json · read as CONSTRUCTION AUTHORITY for composition, hierarchy, spatial relationships, information architecture, density/rhythm, interaction language, visual emphasis, pane organization and responsive intent (never 'presentation only'; REFERENCE != BLIND PIXEL COPY). The reference's Arabic chrome + English record copy establishes layout intent ONLY — it does not set product language: Arabic and English are both first-class and the active language is Settings-owned.",
+  "CURRENT_CANDIDATE": "writer/mi-serial@68341ec1 + W04 working tree (my 3 writable files, git diff sha256 f1914c7b298780af) · dist built by tools/writer-serial.sh `npm run build:runtime` (pass, written 290) after the final source change",
+  "FILES_CHANGED": [
+    "stack/native-typescript/surfaces/evidence/index.ts (+/- collection adapter columns; RIGHT context descriptor gates/state/criteria; duplicate-scan excludeId fix)",
+    "stack/native-typescript/surfaces/evidence/presentation.ts (CENTER record descriptor: header, icons, block order, gates moved to RIGHT)",
+    "stack/native-typescript/surfaces/composition/w04-rescue.ts (owned seam: renderers, W04 presentation system CSS, LEFT queue segments, RIGHT check-card decoration, BIDI hygiene, toolbar hierarchy, responsive/collapsed rules)",
+    "writer-output/W04-EVIDENCE/** (unit output only: capture/populate/index harnesses, 54 captures, LINEAGE.json, EVIDENCE_INDEX.json, PARTIAL_BUILD_RECEIPT.json, this report, HANDOFF.md)"
+  ],
+  "FUNCTIONAL_STATUS": "PASS — tools/w04-reaudit-proofs.mjs 86/86 (two runs, final dist: D1/D3/D9/D10/D11/E checks across evidence+reviews+mastery+portfolio); tools/w04-browser-flows.mjs 5/5 two runs (evidence.create-attest-verify-lifecycle incl. domain-empty-at-start + empty-state-visible, evidence.receipt-count-truth-f051, reviews, mastery, portfolio) exit 0; segment-filter probe (visibleRows 5->1->5, aria-pressed follows, center selection follows, zero page errors); toolbar availability truthful (disabled with domain reasons; green primary only when every admission gate holds); bottom shelf AVAILABLE; zero pageerrors in all captures",
+  "STRUCTURAL_STATUS": "PASS — descriptor contract test (Source Handoff, Selected Supporting References, >=2 pills, one current track step, >=3 next-actions, ONE-LOCATION, no 'None — first revision' in CENTER) green; RIGHT lens ids exactly [duplicate,lineage,provenance]; EVIDENCE_SURFACE_CONTRACT untouched (regionRoles, slots, center='GovernedEvidenceWorkbench'); default-domain-empty invariants preserved; no shared file edited outside surfaces/composition/w04-rescue.ts (my owned seam)",
+  "VISUAL_STATUS": "WRITER-LEVEL PASS — L1-L4 completed against CURRENT_FINAL_REFERENCE for the populated state, the empty entry state, both directions, four width bands and both collapsed-pane states; six structural and twelve polish defects root-caused and fixed (see DEFECTS_FOUND). NOT accepted: I cannot accept my own work; sole Controller review required.",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": [
+    "L1",
+    "L2",
+    "L3",
+    "L4"
+  ],
+  "RESPONSIVE_STATUS": "PASS — wide 1505x1045 and 1280x900, narrow 1024x900 (right pane auto-collapsed by shared PaneResponsiveCore, queue footer pinned, rows scroll), compact 760x900 (panes collapsed with reveal toggles, toolbar wraps to 3 rows, track 2x2, rows stack label/value); collapsed-state comparison: LEFT collapsed (cand8-noleft) and RIGHT collapsed (cand8-noright) — no overlap, no truncation; RIGHT region and CENTER stage own their scroll; no horizontal overflow and no clipped title/pill (proofs D11)",
+  "RTL_LTR_STATUS": "PASS both directions — Arabic/RTL: cand8-entry-ar + cand8-rtl; English/LTR: cand8-entry-en + cand8-ltr (language seeded through the product's own preference store: cep-foundation.preferences.v1 {locale, chromeDirection}). Row grids, segment lists, tracks, gate chips and pane headers mirror correctly; the shared direction-baking in .m0-workbench/.m0-collection-panel was corrected scope-ly (D-14) and reported for a shared fix; English copy inside RTL resolves per element (dir=auto on state tokens, next-actions, queue note, intake-form paragraph), technical tokens stay <bdi>/bdi-isolated; no all-caps hierarchy device applied to Arabic. Note: CENTER/RIGHT record vocabulary is English-canonical in both locales because the reference itself shows English record copy under localized chrome and the W04 proofs pin those exact strings ('Source Handoff', 'Selected Supporting References'); chrome/pane/shelf copy follows the active language.",
+  "DEFECTS_FOUND": [
+    {
+      "id": "D-01",
+      "severity": "V3",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "Entry state rendered as an uncomposed generic dump in all three panes: no queue structure in LEFT, shared key/value hero + loose boxes in CENTER, RIGHT duplicating CENTER content; ~65-70% whitespace, dead zones under every pane.",
+      "change": "Reference-shaped empty composition: LEFT queue segments with zero-counts + empty token + pinned footer; CENTER record panel with lifecycle band, guidance and the intake form opened by default (the workspace's actual next action); RIGHT role rows + three lens skeleton cards (labels only, em-dash values).",
+      "evidence": "baseline-rtl-20260930T002831Z vs cand8-entry-ar-20260930T173847Z / cand8-entry-en-20260930T173843Z (EVIDENCE_INDEX.json)",
+      "reComparison": "L1 whole-surface and L2 per-pane re-compared: pane fill now matches the reference's proportions (content top, settings pinned bottom, no unexplained blank region).",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "D-02",
+      "severity": "V3",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "Shared 150 px studio hero (WORKSPACE + Evidence workbench + summary) pushed the record card below the fold; reference has no such hero above the record.",
+      "change": "Surface-scoped compaction of .m0-studio-head to a 57 px single-line strip (text preserved for the OCR key-string contract); stage padding 20->14 px.",
+      "evidence": "probe4/probe7 measurements (head height 150 -> 57 px) + cand8-rtl capture",
+      "reComparison": "L1/L2: record card now begins at y~290 instead of y~430; hero text still present (tools/w04-reaudit-measure KEY_STRINGS).",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "D-03",
+      "severity": "V2",
+      "rootCause": "IMPLEMENTATION",
+      "defect": "Four-column queue table inside a 278 px pane: Source and Review columns were horizontally scrolled out of reach; raw protocol tokens wrapped mid-word.",
+      "change": "Collection adapter reduced to two columns (record + state) with human state labels (Submitted/Returned/Prepared/Admitted) and id·sourceStatus secondary; adapter lives in the writable root.",
+      "evidence": "probe (table columns) + cand8-rtl / cand8-ltr left pane",
+      "reComparison": "L3: both headers (INTAKE QUEUE, STATE) and every cell visible in RTL and LTR; no mid-word breaks (cand8-1024).",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "D-04",
+      "severity": "V2",
+      "rootCause": "CONTENT_MODEL",
+      "defect": "CENTER carried a 'Verification and admission gates' block that duplicated the SAME facts already projected in the RIGHT lens (violates ONE INFORMATION ITEM -> ONE LOCATION).",
+      "change": "Gates block removed from the CENTER descriptor; the same facts are expressed once, as gate rows with PASS/HOLD/OPEN/INFO vocabulary, in the RIGHT context descriptor.",
+      "evidence": "tests/surfaces/w04-reaudit/presentation.test.js (ONE-LOCATION assertions) PASS; cand8-rtl center vs right",
+      "reComparison": "L2: center = record content only; right = verification only; overlap ratio probe <= 0.2 maintained by w04-reaudit-proofs.",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "D-05",
+      "severity": "V2",
+      "rootCause": "IMPLEMENTATION",
+      "defect": "Surface stylesheet was injected BEFORE the shared m0ControllerStyle, so every equal-specificity tie lost to shared rules (section headings stayed ALL-CAPS from the shared rule, studio head would not compact).",
+      "change": "w04EnsureStyle() now runs on every presentation pass and keeps #w04SurfacePresentationStyle as the last style element in <head>.",
+      "evidence": "probe5 (rule order: w04 first, m0 second; computed values lost) -> probe6/probe (styleIsLast true, h3 text-transform none applied)",
+      "reComparison": "L4: heading case, pill sizing and panel geometry now follow the surface system.",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "D-06",
+      "severity": "V2",
+      "rootCause": "IMPLEMENTATION",
+      "defect": "Toolbar hierarchy CSS was silently dropped: attribute selector [data-foundation-command=evidence.admit] is invalid because the value contains a dot, invalidating the whole rule — no green primary action ever rendered.",
+      "change": "Values quoted ([data-foundation-command=\"evidence.admit\"]); primary/secondary/tertiary hierarchy restored.",
+      "evidence": "cand4-rtl (flat toolbar) vs cand5-rtl..cand8-rtl (green enabled Admit primary, subdued tertiary)",
+      "reComparison": "L3: enabled/disabled states truthful; disabled buttons keep their domain reasons (probe).",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "D-07",
+      "severity": "V2",
+      "rootCause": "IMPLEMENTATION",
+      "defect": "Scoping by [data-r6-typed-surface=evidence] never matched: the shared controller writes data-r6-typed-surface=\"[object Object]\" for W04 (it passes the composed surface object where a label string is expected).",
+      "change": "All shared-chrome scoping moved to body:is([data-consumer=evidence|reviews|mastery|portfolio]) … (probe6 showed sectionAttr '[object Object]'). Shared quirk reported to Controller; not patched in the shared file.",
+      "evidence": "probe6 + working scoped rules (probe4 rules list + computed styles)",
+      "reComparison": "L1: compaction/rules now apply; other surfaces untouched (scoped selectors).",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "D-08",
+      "severity": "V2",
+      "rootCause": "SHARED_COMPONENT",
+      "defect": "Donor scope tabs (الوحدة / الكتلة المحددة) stayed visible in the RIGHT pane although the workspace owner marks them data-donor-semantic=\"suppressed\": donor.css asserts #rightPane .contextscope{display:grid!important} which outranks extensions.css .contextscope{display:none!important}.",
+      "change": "Surface-family-scoped, specificity+important-corrected suppression in W04 panes; root cause reported as SHARED_COMPONENT for a shared-level ruling (other surfaces may show the same tabs).",
+      "evidence": "probe8/probe11 (matched-rule census: donor !important wins) -> cand8-* right pane (tabs absent)",
+      "reComparison": "L2: right pane contains only the authored lens; donor semantics stay suppressed.",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "D-09",
+      "severity": "V2",
+      "rootCause": "RESPONSIVE_RULE",
+      "defect": "At 1024x900 the queue footer (session truth + Settings entry) was pushed below the pane and clipped by .pbody overflow:hidden — content unreachable.",
+      "change": "LEFT region restructured as a column flex: segments + footer fixed, queue rows scroll in between (overscroll contained).",
+      "evidence": "cand5-1024 (footer clipped) vs cand8-1024 (footer pinned, rows scroll)",
+      "reComparison": "L2/L4: footer reachable at 1505/1280/1024; collapsed-left state keeps the same guarantee.",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "D-10",
+      "severity": "V1",
+      "rootCause": "IMPLEMENTATION",
+      "defect": "BIDI: English copy inside RTL containers resolved trailing punctuation against the wrong direction (state tokens rendered '…or .admitted Evidence', the intake-form paragraph '…by an .admitted verifier/provider').",
+      "change": "dir=auto applied per element to state tokens and the shared intake-form paragraph (surface-local DOM hygiene, non-destructive).",
+      "evidence": "baseline (misplaced punctuation) vs cand8-entry-ar (punctuation correct)",
+      "reComparison": "L4: punctuation, word order and wrapping verified in both directions.",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "D-11",
+      "severity": "V1",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "Shared pane-header template label ('Evidence workbench · Collection') start-clipped inside the 278 px pane (ellipsis), and duplicated the workspace title.",
+      "change": "Surface-owned short pane labels via w04SetPaneLabel: 'Evidence intake' / 'Evidence context' (also matches the reference's distinct pane headers).",
+      "evidence": "probe (phead text + scrollWidth) vs cand8-* pane headers (no clipping)",
+      "reComparison": "L2/L4: pane headers legible; the 'Evidence workbench' key string remains present in the CENTER strip (OCR contract satisfied).",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "D-12",
+      "severity": "V1",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "Record header stacked title / three pills / sub into a ~150 px block; title wrapped to three lines at the reference viewport.",
+      "change": "Header restructured: icon + (title with the primary state pill inline) + mono id sub-line + meta row for the two secondary pills; tightened pill type scale.",
+      "evidence": "cand3-rtl (3-line title, pill stack) vs cand8-rtl (single-line title + inline pill)",
+      "reComparison": "L3: no clipped title/pill (w04-reaudit-proofs D11 checks); header height ~85 px.",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "D-13",
+      "severity": "V1",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "Lifecycle track wrapped awkwardly at the reference viewport (step 4 orphaned on a second line with a stray connector).",
+      "change": "Steps given equal flexible widths so the four governed steps hold one row at wide/standard bands, deliberate 2x2 at narrow and stacked at compact; connectors centre-aligned.",
+      "evidence": "cand3-rtl (wrap) vs cand8-rtl (one row) / cand8-760 (2x2) / cand8-1024",
+      "reComparison": "L3: exactly one current step (proof) + readable sequence in both directions (RTL right-to-left, LTR left-to-right).",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "D-14",
+      "severity": "V1",
+      "rootCause": "SHARED_COMPONENT",
+      "defect": "Shared m0 rule bakes direction:rtl into .m0-collection-panel/.m0-workbench/.m0-truth (surfaces/m0-controller-composition.ts:50), overriding the active preference — queue columns and CENTER content rendered RTL even in LTR mode, violating 'direction follows the active preference'.",
+      "change": "Surface-family-scoped correction (:is(...) { direction:inherit }) so the panes follow the pane/preference direction; shared-level fix REQUESTED from the Controller with the exact one-line diff (not patched in the shared file).",
+      "evidence": "probe14/15 (matched-rule census proving the baked rtl) -> cand6-ltr/cand8-ltr (queue columns and rows correct in LTR) + cand8-rtl unchanged",
+      "reComparison": "L2: RTL composition unchanged; LTR composition now mirrors correctly; no direction baked in surface structure.",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "D-15",
+      "severity": "V1",
+      "rootCause": "RESPONSIVE_RULE",
+      "defect": "RIGHT region content (1417 px populated) was clipped by the pane's overflow:hidden — the Duplicate search card and the admission truth notice were unreachable.",
+      "change": "Region-owned scroll (#domainContext max-height:100%; overflow:auto; overscroll contained) so the notice pinned at the pane bottom is reachable by a short scroll.",
+      "evidence": "probe16 (scrollH 1417 vs clientH 754, clipped) -> probe17 (maxScroll 663, notice in viewport) -> cand8-notice (visual)",
+      "reComparison": "L2: notice visible at the pane bottom, mirroring the reference's bottom notice placement.",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "D-16",
+      "severity": "V2",
+      "rootCause": "CONTENT_MODEL",
+      "defect": "TRUTH DEFECT: the duplicate scan called domain.duplicateCandidate(row) without excluding the record itself, so every record matched ITSELF and the Duplicate search card reported a false 'BLOCKED / HOLD — same claim and source fingerprint'.",
+      "change": "Call now passes excludeId (row.id); the card reports 'PASS — no other candidate matches this claim and source fingerprint'.",
+      "evidence": "cand7-notice-20260930T032221Z (BLOCKED self-match) vs cand8-notice-20260930T173840Z (HOLDS / PASS)",
+      "reComparison": "L3/L4: all three right cards re-read; no false HOLD remains on records without a real duplicate.",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "D-17",
+      "severity": "V0",
+      "rootCause": "EVIDENCE/ORACLE",
+      "defect": "Two capture-harness errors: a URL mis-parameterisation (?surface=evidencear, surface never mounted) and a flag typo ('scrollright' matched substring 'right', collapsing the pane instead of scrolling).",
+      "change": "Flag parsing moved to exact tokens; URL seeding fixed; BOTH bad captures retained, renamed SUPERSEDED-* and annotated in LINEAGE.json (never used as proof).",
+      "evidence": "SUPERSEDED-BADURL-cand4-entry-*.png, SUPERSEDED-MISLABELLED-cand7-notice-*.png + LINEAGE entries",
+      "reComparison": "Superseding captures produced (cand8-entry-ar, cand8-notice) with verified dom.mounted/selected state.",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "D-18",
+      "severity": "V2",
+      "rootCause": "CONTENT_MODEL",
+      "defect": "CONSTRAINT-RESOLUTION (not a code defect): the product domain must boot EMPTY (tools/c2-w04-truth 'normal-defaults-empty', w04-browser-flows 'evidence.domain-empty-at-start'), so the reference's populated state is unreachable without a live import — density could not be shown from product defaults alone.",
+      "change": "No product seeding (constructor/domain untouched). The capture harness imports a 5-record intake batch through the LIVE domain API (evidence.import / verifySource / markCandidateValidated / submitCandidate / returnForContext / setAdmissionAuthority+admit) exactly like the sanctioned reviewer flow; every receipt carries fixtureLabel FIXTURE_INTAKE_BATCH__W04_EVIDENCE_VISUAL_HARNESS (entry captures carry NONE__EMPTY_BOOT_STATE).",
+      "evidence": "EVIDENCE_INDEX.json captures[].fixtureLabel + populate.mjs fixture log (imports/verifications/admissions/authorities)",
+      "reComparison": "Both states evidenced: composed EMPTY boot state AND realistic populated state; product still boots empty (flow assertion PASS).",
+      "status": "ACCEPTED"
+    }
+  ],
+  "DEFECT_SEVERITY": {
+    "counts": {
+      "V3": 2,
+      "V2": 9,
+      "V1": 6,
+      "V0": 1
+    },
+    "highest": "V3",
+    "note": "V3x2 (entry-state composition, hero displacement), V2x9, V1x6, V0x1 = 18 logged defects; every defect is closed with re-comparison evidence except the shared-layer root causes that are explicitly reported for a Controller ruling (D-07, D-08, D-14) and the out-of-scope assurance receipts in BLOCKERS"
+  },
+  "ROOT_CAUSE": {
+    "counts": {
+      "SURFACE_COMPOSITION": 5,
+      "IMPLEMENTATION": 5,
+      "CONTENT_MODEL": 3,
+      "SHARED_COMPONENT": 2,
+      "RESPONSIVE_RULE": 2,
+      "EVIDENCE/ORACLE": 1
+    },
+    "sharedLayerFindings": [
+      "SHARED_COMPONENT: surfaces/m0-controller-composition.ts:50 bakes direction:rtl into .m0-collection-panel/.m0-workbench/.m0-truth — requested shared fix (change to inherit) + surface-scoped correction applied",
+      "SHARED_COMPONENT: donor.css #rightPane .contextscope{display:grid!important} outranks extensions.css suppression — surface-scoped suppression applied, shared ruling requested",
+      "SHARED_COMPONENT (quirk): data-r6-typed-surface receives the composed surface object for W04 ('[object Object]') — surface scoping moved to data-consumer; no shared edit",
+      "OUT OF SCOPE (reported, not patched): assurance/BROWSER_CONFORMANCE_RECEIPT.json (spatial flows failing) and assurance/SCREENSHOT_MANIFEST.json (1 legacy shot) keep `npm run check` red on 3 browser.* checks; 4 non-evidence dist tests fail (CG2 spatial, CG3 learn/rq, S01 structured-editor browser proof, S04 notes) with zero import of evidence/W04 files"
+    ]
+  },
+  "FIXES_APPLIED": [
+    "Reference-shaped composition for all three regions in both populated and empty states (record panel, intake queue segments, gated check cards, admission notice, intake form)",
+    "Vertical budget: 150px hero -> 57px strip; gates relocated to RIGHT; stage padding trimmed; header restructured to one confident line",
+    "Surface presentation system: type/spacing/radius scales, teal section headings, per-row icons, status pills, gate chips, primary/secondary/tertiary toolbar hierarchy, segment filters with live counts, tone-coded queue rows",
+    "Correctness: duplicate-scan self-match removed; direction inheritance restored in scope; region-owned scroll in RIGHT; footer pinned + queue scroll in LEFT; BIDI dir=auto hygiene; invalid CSS selectors quoted; style cascade order fixed",
+    "Evidence discipline: bad captures retained + labelled superseded; fixture labelling on every populated capture; full lineage index"
+  ],
+  "RECAPTURE_STATUS": "COMPLETE — final round cand8 (11 captures: rtl, ltr, entry-ar, entry-en, 1280, 1024, 760, noleft, noright, segment=ADMITTED, notice-scrolled) all taken from the final dist after the last source change; superseded captures retained and labelled (2); EVIDENCE_INDEX.json re-generated (54 total / 11 current / 41 intermediate / 2 superseded)",
+  "RECOMPARISON_STATUS": "COMPLETE — cand8 re-compared at L1 (whole surface), L2 (left/center/right/bottom regions incl. collapsed states), L3 (record panel, queue table, track, pills, check cards, notice, toolbar) and L4 (alignment, spacing, type, icons, dividers, truncation, wrapping, BIDI punctuation, rhythm) against the reference; defects D-15/D-16 were found in this pass and fixed, then re-captured (cand8-notice proves both)",
+  "REGRESSION_STATUS": "PASS WITH EXCLUSIONS — npm test 210/0 (twice); check-build-authority PASS (build written 290, canonical source->generated); check-duplicate-mechanics, check-authority-intake, check-deferred-boundary, check-w03-semantic-ownership, vs05-read-mode-matrix, vs05-command-ownership, test-writer-scaffold all PASS; w04 dist tests 8/8; full dist suite 60/64 (4 failures import no evidence/W04 file); proofs 86/86 x2; browser flows 5/5 x2. EXCLUSION: `npm run check` exit 1 solely on browser.lineage_receipt_truthful / browser.current_candidate_claim_truthful / browser.targeted_visual_evidence, which read shared assurance receipts bound to failing SPATIAL flows and a legacy screenshot manifest (workspace.transient-and-pane-lifecycle PASSES; model.required_regressions 210/0) — outside my writable roots, reported to the Controller. Build pipeline was repeatedly blocked by other writers' in-flight syntax errors (surfaces/today, then surfaces/audit); builds serialized via tools/writer-serial.sh and retried until green.",
+  "EVIDENCE": {
+    "index": "writer-output/W04-EVIDENCE/EVIDENCE_INDEX.json (54 captures; every entry: path + sha256 + dims + bytes + viewport + seeded locale + url + dom state + fixture label)",
+    "lineageFile": "writer-output/W04-EVIDENCE/LINEAGE.json (per-capture candidate/commit/branch/environment/timestamp + supersession annotations)",
+    "currentCandidateCaptures": [
+      "cand8-rtl (populated, Arabic, RTL, 1505x1045)",
+      "cand8-ltr (populated, English, LTR, 1505x1045)",
+      "cand8-entry-ar / cand8-entry-en (empty boot state, both directions)",
+      "cand8-1280 / cand8-1024 / cand8-760 (wide/narrow/compact)",
+      "cand8-noleft / cand8-noright (collapsed-state comparison)",
+      "cand8-segment (Admitted segment active: queue filtered to 1 row, center follows)",
+      "cand8-notice (RIGHT pane scrolled: lineage + duplicate cards + admission truth notice)"
+    ],
+    "supersededRetained": [
+      "SUPERSEDED-BADURL-cand4-entry-20260930T014120Z-f5222cab.png",
+      "SUPERSEDED-MISLABELLED-cand7-notice-20260930T032221Z-fa0d309b.png"
+    ],
+    "functionalProofs": [
+      "tools/w04-reaudit-proofs.mjs 86/86 (x2)",
+      "tools/w04-browser-flows.mjs 5/5 (x2, exit 0)",
+      "assurance/MODEL_TEST_RESULTS.json 210/0",
+      "writer-output/W04-EVIDENCE/probe12 (segment filter behaviour)",
+      "writer-output/W04-EVIDENCE/probe17 (RIGHT scroll + notice reachability)"
+    ],
+    "visionVerification": "Every visual claim above was made from PNGs opened with the local-image tool in this session (reference + baseline + 8 capture rounds); no claim is derived from filenames alone"
+  },
+  "LINEAGE": {
+    "reference": {
+      "path": "cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/01_EVIDENCE_INTAKE/Cybersecurity Evidence Dashboard in Arabic(1).png",
+      "classification": "CURRENT_FINAL_REFERENCE",
+      "sha256Prefix16": "789deee01cd946d9",
+      "dims": [
+        1505,
+        1045
+      ]
+    },
+    "candidate": {
+      "branch": "writer/mi-serial",
+      "commitAtCapture": "68341ec1",
+      "workingTreeDiffSha256": "f1914c7b298780af",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/evidence/",
+        "stack/native-typescript/adapters/evidence/",
+        "stack/native-typescript/surfaces/composition/w04-rescue.ts"
+      ],
+      "sharedFilesEdited": "none (surface-scoped corrections + Controller-reported shared findings only)"
+    },
+    "build": {
+      "command": "tools/writer-serial.sh npm run build:runtime",
+      "result": "pass, written 290, authority CANONICAL_SOURCE_TO_GENERATED_ONLY",
+      "receipt": "writer-output/W04-EVIDENCE/PARTIAL_BUILD_RECEIPT.json documents the interim partial build used while another writer's source was uncompilable (skip list now empty)"
+    },
+    "environment": "dist served by tools/serve.mjs on http://localhost:4173; Playwright Chromium headless; deviceScaleFactor 1; language seeded via the product preference store",
+    "fixture": "FIXTURE_INTAKE_BATCH__W04_EVIDENCE_VISUAL_HARNESS imported through the live W04EvidenceDomain API (labels in every populated receipt); entry captures are NONE__EMPTY_BOOT_STATE",
+    "captureTooling": "writer-output/W04-EVIDENCE/{capture.mjs, populate.mjs, index-evidence.mjs, probe*.mjs} — unit-owned harness"
+  },
+  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED — Writer self-acceptance is forbidden; sole Controller review required. Status: candidate ready for Controller adjudication.",
+  "BLOCKERS": [
+    "None blocking Controller review of this surface.",
+    "Shared-assurance debt outside my roots keeps `npm run check` red: assurance/BROWSER_CONFORMANCE_RECEIPT.json bound to an older canonical tree with 5 failing SPATIAL flows, and assurance/SCREENSHOT_MANIFEST.json holding 1 legacy-classified screenshot — owners: spatial/browser-conformance + Controller.",
+    "Shared findings awaiting a Controller ruling (I applied surface-scoped corrections only): baked direction:rtl in m0-controller-composition.ts:50; donor .contextscope !important collision; data-r6-typed-surface='[object Object]' for W04.",
+    "Shared build pipeline was intermittently unbuildable due to other writers' in-flight syntax errors; all my builds were serialized and retried (documented)."
+  ]
+}
