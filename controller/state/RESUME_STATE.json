@@ -338,14 +338,11 @@
     }
   ],
   "nextActions": [
-    "Independently review the 12 durably rescued Writer results; Writer PASS/self-acceptance is never authoritative.",
-    "Review W03-ENTERPRISE first: Writer execution COMPLETE, durable rescue COMPLETE, Controller review PENDING, Owner acceptance NOT_OWNER_ACCEPTED.",
-    "Review W02-LIBRARY / W02-LEARN / W02-VISUALIZE / W03-LABS / W03-RUNS / W05-BACKUP / W05-RELEASES against their reports and rescued evidence; preserve partial states where build or recapture proof is pending.",
-    "Keep W04-REVIEWS and W04-MASTERY at early-stage preserved status; keep W04-PORTFOLIO at session-start status.",
-    "Reconstruct W05-AUDIT review state because its VISUAL_EXECUTION_REPORT is missing; evidence/source rescue is not acceptance.",
-    "After the current rescue review queue is reconciled, resume the not-dispatched W05 trio and W03-RESULTS according to the dispatch matrix.",
-    "At a serialized Controller checkpoint, resolve G-24/G-36 assurance lineage and rerun canonical build/check authority without concurrent Writer mutations.",
-    "Then execute WAVE-4 shared seams: AD-01 pane proportions, AD-02 donor/shared chrome language, and D-08 shared !important collision."
+    "Serialized current-tree build and assurance receipt regeneration before treating any old capture as current proof.",
+    "Apply W03-RUNS H-RUN-1 in the coordinator slot.",
+    "Run fresh bilingual matched-viewport captures for the units whose reports/evidence disagree.",
+    "Reconstruct W05-AUDIT review record.",
+    "Revisit W03-ENTERPRISE after trustworthy image verification and shared receipt refresh."
   ],
   "recoveryInstructions": "controller/state/RESUME.md",
   "lastCheckpoint": {
@@ -382,7 +379,9 @@
       "responsive": "NOT_YET_RETESTED_AFTER_FIXES (baseline 1505x1045 only)",
       "rtl_ltr": "DEFECT_FOUND — direction resolves correctly (locale ar→dir=rtl, locale en→dir=ltr, verified by probe), but under locale=en 40 Arabic-only chrome strings remain in Library panes/toolbar (see DEF-06). Root cause is in read-only foundation files; shared-component request raised.",
       "acceptance": "NOT_OWNER_ACCEPTED",
-      "controllerReview": "PENDING"
+      "controllerReview": "REVIEWED_HOLD",
+      "controllerVerdict": "REVIEWED_HOLD",
+      "reviewedAt": "2026-09-30T20:30:00Z"
     },
     "W02-LEARN": {
       "surface": "learn",
@@ -393,7 +392,9 @@
       "responsive": "PASS at v1 for 1505x1045 and 1280x860: three panes retained, no horizontal overflow, center reflows (759px -> 534px), touch/control targets unchanged. 1024x800 compact pass pending v2.",
       "rtl_ltr": "PASS at v1: en -> dir=ltr/lang=en, ar -> dir=rtl/lang=ar, both with identical structure and localized labels; no hardcoded direction in Learn source (logical properties + dir=auto content runs + bdi-isolated technical tokens).",
       "acceptance": "NOT_OWNER_ACCEPTED",
-      "controllerReview": "PENDING"
+      "controllerReview": "REVIEWED_HOLD",
+      "controllerVerdict": "REVIEWED_HOLD",
+      "reviewedAt": "2026-09-30T20:30:00Z"
     },
     "W02-VISUALIZE": {
       "surface": "visualize",
@@ -404,7 +405,9 @@
       "responsive": "PENDING — CSS bands written at 1180 / 1024 / 760 (column shedding, switcher full-width, truth chip hidden, single-column fields); not yet captured.",
       "rtl_ltr": "PENDING — Arabic/RTL and English/LTR captures planned; direction removed from structure (visualize-tree/visualize-path/visualize-view-switcher/visualize-path-lane/visualize-path-node hardcoded direction removed), #domainView.domain-readonly and .domain-heading direction overridden to inherit inside the surface stage, technical tokens isolated with <bdi dir=\"ltr\"> / .vis-mono{direction:ltr;unicode-bidi:isolate}.",
       "acceptance": "NOT_OWNER_ACCEPTED",
-      "controllerReview": "PENDING"
+      "controllerReview": "REVIEWED_HOLD",
+      "controllerVerdict": "REVIEWED_HOLD",
+      "reviewedAt": "2026-09-30T20:30:00Z"
     },
     "W03-LABS": {
       "surface": "labs",
@@ -415,7 +418,9 @@
       "responsive": "PENDING recapture (matrix 1505x1045 / 1440x1000 / 1280x860 / 1024x800)",
       "rtl_ltr": "PENDING recapture (en+ltr and ar+rtl)",
       "acceptance": "NOT_OWNER_ACCEPTED",
-      "controllerReview": "PENDING"
+      "controllerReview": "REVIEWED_HOLD",
+      "controllerVerdict": "REVIEWED_HOLD",
+      "reviewedAt": "2026-09-30T20:30:00Z"
     },
     "W03-RUNS": {
       "surface": "runs",
@@ -426,7 +431,9 @@
       "responsive": "PENDING_BUILD",
       "rtl_ltr": "PENDING_BUILD",
       "acceptance": "NOT_OWNER_ACCEPTED",
-      "controllerReview": "PENDING"
+      "controllerReview": "REVIEWED_HOLD",
+      "controllerVerdict": "REVIEWED_BLOCKED_ARCHITECTURE",
+      "reviewedAt": "2026-09-30T20:30:00Z"
     },
     "W04-REVIEWS": {
       "surface": "reviews",
@@ -437,7 +444,9 @@
       "responsive": "NOT_STARTED",
       "rtl_ltr": "NOT_STARTED",
       "acceptance": "NOT_OWNER_ACCEPTED",
-      "controllerReview": "PENDING"
+      "controllerReview": "REVIEWED_HOLD",
+      "controllerVerdict": "REVIEWED_EARLY_STAGE_HOLD",
+      "reviewedAt": "2026-09-30T20:30:00Z"
     },
     "W04-MASTERY": {
       "surface": "mastery",
@@ -448,7 +457,9 @@
       "responsive": "NOT_STARTED",
       "rtl_ltr": "NOT_STARTED",
       "acceptance": "NOT_OWNER_ACCEPTED",
-      "controllerReview": "PENDING"
+      "controllerReview": "REVIEWED_HOLD",
+      "controllerVerdict": "REVIEWED_EARLY_STAGE_HOLD",
+      "reviewedAt": "2026-09-30T20:30:00Z"
     },
     "W04-PORTFOLIO": {
       "surface": "portfolio",
@@ -459,13 +470,17 @@
       "responsive": "NOT_YET_TESTED",
       "rtl_ltr": "NOT_YET_TESTED",
       "acceptance": "NOT_OWNER_ACCEPTED — Writer self-acceptance is forbidden; sole Controller review required.",
-      "controllerReview": "PENDING"
+      "controllerReview": "REVIEWED_HOLD",
+      "controllerVerdict": "REVIEWED_EARLY_STAGE_HOLD",
+      "reviewedAt": "2026-09-30T20:30:00Z"
     },
     "W05-AUDIT": {
       "surface": "audit",
       "report": "MISSING",
-      "controllerReview": "PENDING",
-      "acceptance": "NOT_OWNER_ACCEPTED"
+      "controllerReview": "REVIEWED_HOLD",
+      "acceptance": "NOT_OWNER_ACCEPTED",
+      "controllerVerdict": "REVIEWED_EVIDENCE_ONLY_NO_ACCEPTANCE",
+      "reviewedAt": "2026-09-30T20:30:00Z"
     },
     "W05-BACKUP": {
       "surface": "backup",
@@ -476,7 +491,9 @@
       "responsive": "SOURCE_ONLY — style.ts composes with container queries at 860/660/470px (metrics 6→3→2→1, checks 3→2→1, pipeline 8→4→2 with connector removed when it cannot be honest). COLLAPSED-STATE AND RESPONSIVE CAPTURES PENDING.",
       "rtl_ltr": "SOURCE_ONLY__OFFLINE_PASS__BROWSER_PENDING — every layout property in style.ts is logical (inline-start/end, block, inset-inline); pipeline connector is a CSS rule, not a direction glyph; disclosure cue is a direction-neutral down/up chevron; summary rows carry dir from the active preference at render time; technical tokens isolated in `<bdi dir=\"ltr\">`. Offline mount in ar/rtl produced Arabic-only copy with no English command labels and en/ltr produced English-only copy with no Arabic. Browser RTL/LTR capture PENDING.",
       "acceptance": "NOT_OWNER_ACCEPTED",
-      "controllerReview": "PENDING"
+      "controllerReview": "REVIEWED_HOLD",
+      "controllerVerdict": "REVIEWED_HOLD",
+      "reviewedAt": "2026-09-30T20:30:00Z"
     },
     "W05-RELEASES": {
       "surface": "releases",
@@ -487,7 +504,9 @@
       "responsive": "PARTIAL PASS (cycle 1) — composed for wide/standard/narrow/compact: no horizontal document overflow at 1536/1280/1024/820; deliberate container reflows (two-column workbench -> single column below 620px container, scope metrics 4-across -> 2x2 below 700px container, strip 4 -> 2 facts); cycle-1 defects at 1024/820 (metric label clipping) were FIXED and re-checked; collapsed-state comparison of the shared pane toggles is scheduled for cycle 2.",
       "rtl_ltr": "PASS (cycle 1) — AR/RTL: document lang=ar dir=rtl, heading direction rtl, no horizontal overflow, no stage h-scroll, 1997 Arabic glyphs of 5127 surface characters, eyebrow text-transform falls back to none (no all-caps hierarchy in Arabic), left pane stays the structure pane. EN/LTR: 0 Arabic glyphs across stage+left+right+toolbar after switching back (round-trip verified). All layout uses logical properties (padding-inline-start, margin-inline-start, text-align:start) and every ID/SHA/path/time is wrapped in <bdi dir=ltr>.",
       "acceptance": "NOT_OWNER_ACCEPTED",
-      "controllerReview": "PENDING"
+      "controllerReview": "REVIEWED_HOLD",
+      "controllerVerdict": "REVIEWED_HOLD",
+      "reviewedAt": "2026-09-30T20:30:00Z"
     },
     "W03-ENTERPRISE": {
       "surface": "enterprise",
@@ -498,9 +517,11 @@
       "responsive": "PASS",
       "rtl_ltr": "PASS_WITH_LIMITATION",
       "acceptance": "NOT_OWNER_ACCEPTED",
-      "controllerReview": "PENDING",
+      "controllerReview": "REVIEWED_HOLD",
       "writerExecution": "COMPLETE",
-      "durableRescue": "COMPLETE"
+      "durableRescue": "COMPLETE",
+      "controllerVerdict": "REVIEWED_HOLD",
+      "reviewedAt": "2026-09-30T20:30:00Z"
     }
   },
   "durableRescue": {
@@ -531,5 +552,26 @@
       "writer-output/W04/reaudit-evidence/**",
       "all .runtime/** and runtime/database artifacts"
     ]
+  },
+  "controllerReviewSummary": {
+    "checkpoint_id": "CP-2026-09-30-003",
+    "reviewed_at": "2026-09-30T20:30:00Z",
+    "verdict": "REVIEWED_HOLD__NO_OWNER_ACCEPTANCE",
+    "queueRemaining": [
+      "W03-ENTERPRISE",
+      "W02-LIBRARY",
+      "W02-LEARN",
+      "W02-VISUALIZE",
+      "W03-LABS",
+      "W03-RUNS",
+      "W04-REVIEWS",
+      "W04-MASTERY",
+      "W04-PORTFOLIO",
+      "W05-AUDIT",
+      "W05-BACKUP",
+      "W05-RELEASES"
+    ],
+    "acceptedUnits": [],
+    "ownerAcceptedUnits": []
   }
 }

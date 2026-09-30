@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "checkpoint_id": "CP-2026-09-30-003",
+  "timestamp": "2026-09-30T20:30:00Z",
+  "branch": "writer/mi-serial",
+  "reviewedFromCommit": "f54bb060bc8b9e5b1a05fe17895254aa6b8b217e",
+  "controllerDecision": "REVIEWED_HOLD__NO_OWNER_ACCEPTANCE",
+  "rule": "Writer evidence is evidence only; no Writer result is self-accepted.",
+  "units": {
+    "W03-ENTERPRISE": {
+      "verdict": "REVIEWED_HOLD",
+      "reason": [
+        "Vision channel has three documented byte/frame mismatches.",
+        "Shared SpatialNode collision remains an open cross-consumer concern.",
+        "Shared browser/build lineage receipts are stale."
+      ],
+      "evidence": "Final after5 has 12 frames, hash-bound receipts, DOM probes, OCR, ink metrics; functional npm test exit 0.",
+      "next": "Serialized controller recapture with trustworthy image channel + shared receipt regeneration."
+    },
+    "W02-LIBRARY": {
+      "verdict": "REVIEWED_HOLD",
+      "reason": [
+        "FINAL-en evidence is newer than the stale execution report.",
+        "FINAL-en shows improved tree density and Library identity, but Arabic-only strings remain under EN in right/bottom chrome.",
+        "Arabic FINAL lacks probe payload."
+      ],
+      "evidence": "FINAL-en hash-bound capture and DOM geometry; no horizontal overflow.",
+      "next": "Refresh report; verify EN/AR chrome and bottom shelf with fresh matched captures."
+    },
+    "W02-LEARN": {
+      "verdict": "REVIEWED_HOLD",
+      "reason": [
+        "v3 capture manifest exists for 4 viewports x 2 locales.",
+        "Report still says v2 fixes await build/recapture.",
+        "Canonical Learn source binding remains outside the unit writable roots."
+      ],
+      "evidence": "v3 frames have pageErrors=[] and locale/direction metadata.",
+      "next": "Serialized rebuild + fresh v3/v4 verification against current source."
+    },
+    "W02-VISUALIZE": {
+      "verdict": "REVIEWED_HOLD",
+      "reason": [
+        "Fresh-ish candidate evidence exists, but current report shows build/recapture pending.",
+        "Multiple V2/V3/V4 defects remain open.",
+        "Responsive and RTL/LTR current proof is pending."
+      ],
+      "evidence": "Candidate receipt proves RTL mount and no horizontal overflow for one 1672x941 frame only.",
+      "next": "Build, then matched viewport EN/AR recapture and defect closure."
+    },
+    "W03-LABS": {
+      "verdict": "REVIEWED_HOLD",
+      "reason": [
+        "after3 evidence exists with pageErrors=[].",
+        "Manifest explicitly says sharedDistWritten=false, so source-vs-dist freshness is not proven.",
+        "Functional/structural status remains pending rebuild+run and responsive/RTL recapture pending."
+      ],
+      "evidence": "Hash-bound after3 captures across required viewport matrix.",
+      "next": "Canonical rebuild + fresh matched recapture."
+    },
+    "W03-RUNS": {
+      "verdict": "REVIEWED_BLOCKED_ARCHITECTURE",
+      "reason": [
+        "H-RUN-1 mount seam is filed but not applied.",
+        "Final evidence is explicitly classified candidate in-page mount, not coordinator-applied mount.",
+        "Live route integration remains unproven."
+      ],
+      "evidence": "Candidate mount frames are useful design evidence, not integration proof.",
+      "next": "Apply H-RUN-1 in serialized coordinator slot, then build/test/fresh route captures."
+    },
+    "W04-REVIEWS": {
+      "verdict": "REVIEWED_EARLY_STAGE_HOLD",
+      "reason": [
+        "Report is READING_REFERENCE / NOT_STARTED.",
+        "Evidence is baseline only.",
+        "No functional, structural, or visual ownership loop completed."
+      ],
+      "evidence": "Baseline capture harness and receipts preserved.",
+      "next": "Start bounded Writer loop from preserved state."
+    },
+    "W04-MASTERY": {
+      "verdict": "REVIEWED_EARLY_STAGE_HOLD",
+      "reason": [
+        "Report is INITIALIZED / NOT_STARTED.",
+        "Seeded baseline measurements are useful but do not prove the current source composition."
+      ],
+      "evidence": "Three hash-bound baseline frames with OCR/ink metrics.",
+      "next": "Complete source composition and fresh bilingual captures."
+    },
+    "W04-PORTFOLIO": {
+      "verdict": "REVIEWED_EARLY_STAGE_HOLD",
+      "reason": [
+        "Report indicates session start / source build started.",
+        "No completed comparison cycle is recorded."
+      ],
+      "evidence": "Session report preserved.",
+      "next": "Resume execution from session-start state without reset."
+    },
+    "W05-AUDIT": {
+      "verdict": "REVIEWED_EVIDENCE_ONLY_NO_ACCEPTANCE",
+      "reason": [
+        "VISUAL_EXECUTION_REPORT.json is missing.",
+        "Capture-lineage and multiple EN/AR/responsive frames exist.",
+        "Without the execution report there is no trustworthy consolidated functional/structural ownership statement."
+      ],
+      "evidence": "Hash-bound bilingual/responsive capture lineage; provider fixture verification valid.",
+      "next": "Reconstruct Controller review from source + evidence or regenerate a proper execution report."
+    },
+    "W05-BACKUP": {
+      "verdict": "REVIEWED_HOLD",
+      "reason": [
+        "Offline smoke and source remediation are recorded.",
+        "Browser runtime lifecycle remains pending.",
+        "Responsive and RTL browser evidence is pending."
+      ],
+      "evidence": "Offline mount/command assertions and source composition report.",
+      "next": "Serialized build + browser lifecycle + matched responsive/RTL recapture."
+    },
+    "W05-RELEASES": {
+      "verdict": "REVIEWED_HOLD",
+      "reason": [
+        "Functional 26/26 and first-cycle L1-L4 evidence are strong.",
+        "Second cycle is pending.",
+        "Two bottom-shelf issues remain open, one explicitly shared-owned."
+      ],
+      "evidence": "EN/AR cycle-1 evidence with hash/OCR/DOM cross-checks.",
+      "next": "Cycle-2 collapsed-state capture and shared bottom-shelf correction/regression."
+    }
+  },
+  "globalFindings": [
+    "No reviewed unit qualifies for Owner acceptance from the rescued evidence alone.",
+    "Several reports are stale relative to newer rescued evidence; report/evidence reconciliation is itself required.",
+    "The dominant remaining risks are shared seams, current-build freshness, route mounting, and trustworthy visual verification.",
+    "W03-RUNS has the clearest architecture gate: the live route still lacks the coordinator-applied mount.",
+    "W03-ENTERPRISE is the closest to a complete review package, but the unreliable vision channel and shared/lineage blockers prevent acceptance."
+  ],
+  "nextControllerActions": [
+    "Serialized current-tree build and assurance receipt regeneration before treating any old capture as current proof.",
+    "Apply W03-RUNS H-RUN-1 in the coordinator slot.",
+    "Run fresh bilingual matched-viewport captures for the units whose reports/evidence disagree.",
+    "Reconstruct W05-AUDIT review record.",
+    "Revisit W03-ENTERPRISE after trustworthy image verification and shared receipt refresh."
+  ]
+}
