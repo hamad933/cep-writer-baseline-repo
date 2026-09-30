@@ -102,10 +102,10 @@ Binding required on every artifact: candidate · commit/tree · environment · t
 | CP-4 | Dispatch rebuilt (§7/§23) | PASS — 23 units, computed reference identity, collision seams declared |
 | CP-5 | Capability gates (§20/§21/§30) | PASS — vision empirical, models live, preview/capture flow confirmed |
 | CP-6 | Governance durable in repo | PASS — commit `7c9c153` |
-| CP-7 | Wave-1 launch | **IN PROGRESS** — 6 Writers live on `mimo-v2.6-flash` |
-| CP-8 | Controller review of Wave-1 | NOT_STARTED |
-| CP-9 | Wave-2/3/4 launch | NOT_STARTED |
-| CP-10 | Final integration + candidate identity + lineage verification | NOT_STARTED |
+| CP-7 | Wave-1 launch | **DONE** — 6 Writers launched on `mimo-v2.6-flash` (`W01-TODAY`, `W02-RESEARCH-QUALITY`, `W03-SCENARIOS`, `W04-EVIDENCE`, `W05-AUDIT`, `W05-CONFIGURATION`) |
+| CP-8 | Controller review of Wave-1 | **IN PROGRESS** — 4 reviewed: W02-RQ `VISUAL_PASS_PENDING_OWNER`, W01-TODAY `VISUAL_PASS_PENDING_OWNER`, W03-SCENARIOS `PASS_WITH_LIMITATION`, W05-CONFIGURATION `VISUAL_PASS_PENDING_OWNER`. W04-EVIDENCE mid-flight (§17 incremental report skeleton), W05-AUDIT continuation mid-flight. |
+| CP-9 | Wave-3 launch (independent surfaces) | **DONE** — 6 launched: `W03-ENTERPRISE`, `W03-LABS`, `W03-RUNS`, `W05-BACKUP`, `W05-RELEASES`, `W05-MANUAL-AI`. Governance added: Writers must not `git commit` (git index race). |
+| CP-10 | Final integration + candidate identity + lineage verification | NOT_STARTED — requires Wave-2 (donor cluster) + WAVE-4 shared pane-proportion change (AD-01) + receipt regeneration (G-24) |
 
 ---
 

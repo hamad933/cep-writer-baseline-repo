@@ -16,6 +16,7 @@
 - **Execution unit:** 1 WRITER → 1 SURFACE → 1 VISUAL OWNERSHIP LOOP. A Writer does not own multiple unrelated surfaces.
 - A Writer may touch shared files **only** when its packet explicitly permits it and the change is justified.
 - Surface ownership is isolated where practical.
+- **Writers must NOT run `git add` or `git commit`.** The git index is a shared resource and concurrent commits from parallel Writers corrupt or race it. Leave changes in the working tree; the Controller commits at checkpoint. (A Writer may commit only if its packet explicitly authorises it *and* no other Writer is live — this is rare.)
 
 ---
 
