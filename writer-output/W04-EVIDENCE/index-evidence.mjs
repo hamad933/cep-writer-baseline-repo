@@ -53,7 +53,15 @@ const index = {
     classification: 'CURRENT_FINAL_REFERENCE', sha256Prefix16: '789deee01cd946d9', dims: [1505, 1045],
     role: 'CONSTRUCTION AUTHORITY — composition/hierarchy/density/interaction intent; not presentation-only'
   },
-  candidate: { branch, commit, workingTreeDiffSha256: diffHash, writableRootsStatus: untracked ? untracked.split('\n') : [], note: 'dist/ rebuilt from this working tree via tools/writer-serial.sh' },
+  candidate: {
+    branch, commit,
+    workingTreeDiffSha256: diffHash,
+    writableRootsStatus: untracked ? untracked.split('\n') : [],
+    diffNote: diffHash === 'e3b0c44298fc1c14' || diffHash.startsWith('e3b0c442')
+      ? 'empty worktree diff — the writable roots match checkpoint commit 8818227; the capture-time diff (pre-commit) was f1914c7b298780af, recorded in VISUAL_EXECUTION_REPORT.json.LINEAGE'
+      : 'uncommitted writable-root delta relative to HEAD at index time',
+    note: 'dist/ rebuilt from this working tree via tools/writer-serial.sh (final official build: pass, written 290)'
+  },
   environment: 'tools/serve.mjs on :4173 serving dist/; Playwright Chromium (headless); deviceScaleFactor 1',
   visionVerification: 'Controller-Writer read each PNG with the local-image tool; every visual claim below is from opened pixels',
   counts: {
