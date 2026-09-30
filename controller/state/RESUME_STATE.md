@@ -22,18 +22,19 @@
 
 ## 2. Where execution is
 
-**Controller phase:** PHASE 7 — continuous visual ownership loop (build → compare → fix → recompare).
+**Controller phase:** PHASE 7 — continuous visual ownership loop.
 
-**Wave state:** WAVE-1 reviewed · WAVE-3 + W02 cluster + W04 trio in flight · WAVE-4 shared work pending.
+**Current durable head:** `c36279910b82a0bd2c715f4dd5c00bcf7eb574e2`
 
 | Category | Surfaces |
 |---|---|
-| **Reviewed** (5) | today, rq, scenarios, evidence, configuration |
-| **In progress** (13) | audit, backup, enterprise, labs, runs, releases, manual_ai, library, learn, visualize, reviews, mastery, portfolio |
-| **Not dispatched** (5) | health, processing, validation, results, shell |
-| Blocked / failed | — none — |
+| **Reviewed** | today, rq, scenarios, evidence, configuration |
+| **In progress / review queue** | audit, backup, enterprise, labs, runs, releases, manual_ai, library, learn, visualize, reviews, mastery, portfolio |
+| **Durably rescued** | W02-LIBRARY, W02-LEARN, W02-VISUALIZE, W03-LABS, W03-RUNS, W04-REVIEWS, W04-MASTERY, W04-PORTFOLIO, W05-AUDIT, W05-BACKUP, W05-RELEASES, W03-ENTERPRISE |
+| **Not dispatched** | health, processing, validation, results, shell |
+| Blocked / failed | — none recorded at state level — |
 
-Reviewed verdicts: `today`, `rq`, `evidence`, `configuration` = **VISUAL_PASS_PENDING_OWNER**; `scenarios` = **PASS_WITH_LIMITATION**. None self-accepted — a Writer cannot accept its own work.
+The rescued Writer work is durable in GitHub but remains **NOT_OWNER_ACCEPTED**.
 
 ## 3. Surface ownership and dispatch
 

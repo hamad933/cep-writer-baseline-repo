@@ -79,6 +79,96 @@
       "remote_verified": true,
       "remote_verified_at": "2026-09-30T18:46:31Z",
       "remote_ref": "refs/heads/writer/mi-serial @ f98eb465359e4875145ef9d9d79323986f17f440"
+    },
+    {
+      "checkpoint_id": "CP-2026-09-30-002",
+      "timestamp": "2026-09-30T20:07:01Z",
+      "branch": "writer/mi-serial",
+      "commit_sha": "c36279910b82a0bd2c715f4dd5c00bcf7eb574e2",
+      "parent_sha": "149f7f5df034c3cb5c15428ddc9d113dc0433964",
+      "controller_phase": "PHASE_7_CONTINUOUS_VISUAL_OWNERSHIP_LOOP",
+      "execution_wave": "WAVE-1 reviewed; 12 Writer results durably rescued; independent Controller review queue open; WAVE-4 shared work pending",
+      "active_writers": [],
+      "historical_writer_sessions_only": [
+        "W02-LEARN",
+        "W02-LIBRARY",
+        "W02-VISUALIZE",
+        "W03-ENTERPRISE",
+        "W03-LABS",
+        "W03-RUNS",
+        "W04-MASTERY",
+        "W04-PORTFOLIO",
+        "W04-REVIEWS",
+        "W05-AUDIT",
+        "W05-BACKUP",
+        "W05-MANUAL-AI",
+        "W05-RELEASES"
+      ],
+      "completed_surfaces": [
+        "today",
+        "rq",
+        "scenarios",
+        "evidence",
+        "configuration"
+      ],
+      "in_progress_surfaces": [
+        "audit",
+        "backup",
+        "enterprise",
+        "labs",
+        "runs",
+        "releases",
+        "manual_ai",
+        "library",
+        "learn",
+        "visualize",
+        "reviews",
+        "mastery",
+        "portfolio"
+      ],
+      "durably_rescued_surfaces": [
+        "W02-LIBRARY",
+        "W02-LEARN",
+        "W02-VISUALIZE",
+        "W03-LABS",
+        "W03-RUNS",
+        "W04-REVIEWS",
+        "W04-MASTERY",
+        "W04-PORTFOLIO",
+        "W05-AUDIT",
+        "W05-BACKUP",
+        "W05-RELEASES",
+        "W03-ENTERPRISE"
+      ],
+      "blocked_surfaces": [],
+      "not_dispatched_surfaces": [
+        "health",
+        "processing",
+        "validation",
+        "results",
+        "shell"
+      ],
+      "changed_areas": [
+        "remaining Writer-owned TypeScript source/adapters",
+        "matching Writer-owned dist output",
+        "non-runtime Writer evidence/reports",
+        "controller/state/RESCUE_REMAINING_WRITERS_2026-09-30.*"
+      ],
+      "validation_status": {
+        "lastModelTests": "210/0 PASS",
+        "lastBuildAuthority": "pass=true, CANONICAL_SOURCE_TO_GENERATED_ONLY, 290 written, parity true",
+        "lastKnownCheckFailures": [
+          "browser.lineage_receipt_truthful",
+          "browser.current_candidate_claim_truthful",
+          "browser.targeted_visual_evidence"
+        ],
+        "lastKnownCheckFailureRootCause": "EVIDENCE/ORACLE — stale assurance/BROWSER_CONFORMANCE_RECEIPT.json lineage (gap G-24/G-36), pre-existing"
+      },
+      "next_action": "Independently review the 12 durably rescued Writer results; Writer PASS/self-acceptance is never authoritative.",
+      "acceptance_note": "Durable preservation only. Rescued Writer units remain NOT_OWNER_ACCEPTED pending independent Controller review.",
+      "remote_verified": true,
+      "remote_verified_at": "2026-09-30T20:07:01Z",
+      "remote_ref": "refs/heads/writer/mi-serial @ c36279910b82a0bd2c715f4dd5c00bcf7eb574e2"
     }
   ]
 }

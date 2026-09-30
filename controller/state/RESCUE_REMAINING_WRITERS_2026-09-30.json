@@ -21,7 +21,7 @@
   },
   "stagedInventorySha256": "787f73c0c2f7dd0b0305f5027f40c4c0631dd235e65d820b9072da034e45db77",
   "status": {
-    "durableRescue": "READY_FOR_COMMIT",
+    "durableRescue": "COMPLETE",
     "controllerReview": "PENDING",
     "ownerAcceptance": "NOT_OWNER_ACCEPTED",
     "productAcceptance": "NOT_CLAIMED"
@@ -53,5 +53,10 @@
     "Global RESUME_STATE reconciliation remains deferred until after durable rescue.",
     "The whitespace findings are recorded rather than silently rewriting Writer artifacts."
   ],
-  "generatedAtUtc": "2026-09-30T20:07:01.102456+00:00"
+  "generatedAtUtc": "2026-09-30T20:07:01.102456+00:00",
+  "rescueCommit": "c36279910b82a0bd2c715f4dd5c00bcf7eb574e2",
+  "remoteVerifiedHead": "c36279910b82a0bd2c715f4dd5c00bcf7eb574e2",
+  "committedAtUtc": "2026-09-30T20:07:01Z",
+  "stateReconciliation": "COMPLETED_AFTER_RESCUE",
+  "nextControllerAction": "Review rescued Writer units independently; preserve NOT_OWNER_ACCEPTED until Controller review."
 }
