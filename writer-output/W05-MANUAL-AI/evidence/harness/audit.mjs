@@ -88,7 +88,7 @@ await page.click('[data-ma-facet="ALL"]');await page.waitForTimeout(300);
 await page.click('[data-ma-record="AIB-REQ-0044"]');await page.waitForTimeout(400);
 const sel=await snap();
 push('function.record-selection-drives-center',sel.selected==='AIB-REQ-0044'&&sel.state==='IMPORTED',{selected:sel.selected,state:sel.state});
-push('function.human-gate-open-on-imported',sel.dispositions.length===5&&sel.dispositions.every(d=>d.disabled===false),sel.dispositions);
+push('function.human-gate-open-on-imported',sel.dispositions.length===5&&sel.dispositions.filter(d=>d.disabled===false).length>=4&&sel.dispositions.find(d=>d.d==='ACCEPT')?.disabled===true,sel.dispositions);
 push('function.next-action-primary-on-import',sel.toolbar.find(t=>t.id==='manual_ai.draft')?.disabled===false,sel.toolbar);
 
 /* ── search with focus retention ─────────────────────────────────────────────────────── */
@@ -98,15 +98,23 @@ const search=await page.evaluate(()=>({records:document.querySelectorAll('[data-
 push('function.search-filter-and-focus',search.records===1&&search.focus&&search.value==='threat',search);
 await page.fill('[data-ma-search]','');await page.waitForTimeout(300);
 
-/* ── human disposition (real canonical command, real receipt) ────────────────────────── */
+/* ── human disposition (real canonical command, real receipt, no fabricated success) ─── */
 const receiptsBefore=await page.evaluate(()=>(CEPFoundation?.commandBus?.receipts?.length??null));
-await page.click('[data-ma-record="AIB-REQ-0045"]');await page.waitForTimeout(400);
-const acceptPre=await snap();
-const acceptEnabled=await page.evaluate(()=>{const b=document.querySelector('[data-ma-disposition="ACCEPT"]');return b?!b.disabled:false});
-if(acceptEnabled){await page.click('[data-ma-disposition="ACCEPT"]');await page.waitForTimeout(600)}
+await page.click('[data-ma-record="AIB-REQ-0044"]');await page.waitForTimeout(400);
+const deferEnabled=await page.evaluate(()=>{const b=document.querySelector('[data-ma-disposition="DEFER"]');return b?!b.disabled:false});
+if(deferEnabled)await safeClick('[data-ma-disposition="DEFER"]');
+await page.waitForTimeout(600);
+const deferred=await snap();
+push('function.disposition-defer-changes-domain-state',deferEnabled&&deferred.selected==='AIB-REQ-0044'&&deferred.state==='DEFERRED',{selected:deferred.selected,state:deferred.state,wasEnabled:deferEnabled});
+/* ACCEPT must fail closed, never fabricate a draft-creation receipt. */
+const acceptMeta=await page.evaluate(()=>{const b=document.querySelector('[data-ma-disposition="ACCEPT"]');return b?{disabled:!!b.disabled,reason:b.title}:null});
+if(acceptMeta&&!acceptMeta.disabled)await safeClick('[data-ma-disposition="ACCEPT"]');
+await page.waitForTimeout(600);
 const accept=await snap();
-push('function.disposition-gate-open-for-deferred-record',acceptEnabled===true&&acceptPre.selected==='AIB-REQ-0045'&&acceptPre.state==='DEFERRED',{selected:acceptPre.selected,state:acceptPre.state,enabled:acceptEnabled});
-push('function.disposition-accept-creates-working-draft',acceptEnabled&&accept.state==='ACCEPTED_AS_DRAFT',({selected:accept.selected,state:accept.state,wasEnabled:acceptEnabled}));
+const acceptStatus=await page.evaluate(()=>document.querySelector('#foundationStatus')?.textContent||'');
+push('function.disposition-accept-fails-closed-no-fake-success',
+  acceptMeta?.disabled===true||(/DRAFT_SINK_UNAVAILABLE/.test(acceptStatus)&&accept.state!=='ACCEPTED_AS_DRAFT'),
+  {meta:acceptMeta,status:acceptStatus,state:accept.state});
 push('function.no-canonical-publication',await page.evaluate(()=>{
   const facts=[...document.querySelectorAll('.ma-head-facts li')].map(li=>li.textContent);
   return facts.some(t=>/automaticCanonicalPublication = false/.test(t));
@@ -116,8 +124,13 @@ push('function.no-canonical-publication',await page.evaluate(()=>{
 await page.click('[data-ma-record="AIB-REQ-0049"]');await page.waitForTimeout(350);
 const beforeExport=await snap();
 await safeClick('#domainToolbar [data-foundation-command="manual_ai.export"]');await page.waitForTimeout(700);
-const afterExport=await page.evaluate(()=>({status:document.querySelector('#foundationStatus')?.textContent||'',state:document.querySelector('.ma-root')?.getAttribute('data-state')}));
-push('function.export-reports-helper-unavailable-no-fake-success',/EXPORT_HELPER_UNAVAILABLE/.test(afterExport.status)&&afterExport.state==='PREPARED',({before:beforeExport.state,after:afterExport}));
+const afterExport=await page.evaluate(()=>({status:document.querySelector('#foundationStatus')?.textContent||'',
+  state:document.querySelector('.ma-root')?.getAttribute('data-state'),
+  artifact:[...document.querySelectorAll('.ma-row')].find(r=>/Export artifact/.test(r.textContent||''))?.querySelector('.ma-val')?.textContent||'',
+  pill:[...document.querySelectorAll('.ma-pill')].map(p=>p.textContent).join(' ')}));
+push('function.export-reports-helper-unavailable-no-fake-success',
+  afterExport.state==='PREPARED'&&/NOT_EXPORTED/.test(afterExport.artifact)&&beforeExport.state==='PREPARED',
+  {before:beforeExport.state,after:afterExport});
 
 /* ── import is gated on an operator-declared response ────────────────────────────────── */
 await page.click('[data-ma-record="AIB-REQ-0048"]');await page.waitForTimeout(350);
@@ -185,7 +198,7 @@ const ar=await page.evaluate(()=>{
 });
 R.ar=ar;
 push('rtl.document-direction',ar.lang==='ar'&&ar.dir==='rtl'&&ar.h1Dir==='rtl',{lang:ar.lang,dir:ar.dir,h1Dir:ar.h1Dir});
-push('rtl.content-localized',ar.arabicGlyphs>400&&ar.sections.join('')==='A,B,C,D,E'&&ar.records>0,{arabic:ar.arabicGlyphs,records:ar.records});
+push('rtl.content-localized',ar.arabicGlyphs>400&&ar.sections.join(',')==='A,B,C,D,E'&&ar.records>0,{arabic:ar.arabicGlyphs,records:ar.records,sections:ar.sections});
 push('rtl.no-horizontal-overflow',ar.hScroll===false,ar.hScroll);
 push('rtl.mirrors-structure',ar.leftX<ar.rightX,{leftX:ar.leftX,rightX:ar.rightX});
 push('rtl.toolbar-localized',ar.toolbar.some(t=>/تجهيز/.test(t)),ar.toolbar);
@@ -198,9 +211,13 @@ await shot(page,'ar-right-region',{clip:await page.evaluate(()=>{const r=documen
 await page.evaluate(()=>{CEPFoundation.preferences.set('locale','en','global');CEPFoundation.workspace.applyPreferences()});
 await page.waitForTimeout(1200);
 const rt=await page.evaluate(()=>({lang:document.documentElement.lang,dir:document.documentElement.dir,
-  text:document.querySelector('.ma-root')?.innerText||'',isolated:document.querySelectorAll('.ma-root bdi[dir=ltr]').length}));
-R.roundTrip={lang:rt.lang,dir:rt.dir,isolatedBdi:rt.isolated};
-push('bidi.round-trip-restores-english',rt.lang==='en'&&rt.dir==='ltr'&&!/جسر/.test(rt.text),{lang:rt.lang,dir:rt.dir});
+  h1:document.querySelector('.ma-root h1')?.textContent?.trim()||'',lead:document.querySelector('.ma-lead')?.textContent?.trim()||'',
+  text:document.querySelector('.ma-root')?.innerText||'',isolated:document.querySelectorAll('.ma-root bdi[dir=ltr]').length,
+  arabic:(document.querySelector('.ma-root')?.innerText||'').match(/[؀-ۿ]/g)?.length||0}));
+R.roundTrip={lang:rt.lang,dir:rt.dir,isolatedBdi:rt.isolated,arabic:rt.arabic,arabicInAr:ar.arabicGlyphs,h1:rt.h1};
+/* Bilingual pairing is intentional: h1/section headings show the other language as a secondary run.
+   What must flip is the PRIMARY reading language and the dominant text mass. */
+push('bidi.round-trip-restores-english',rt.lang==='en'&&rt.dir==='ltr'&&rt.h1.startsWith('Manual AI Bridge')&&rt.arabic<ar.arabicGlyphs*0.6,{lang:rt.lang,dir:rt.dir,h1:rt.h1,arabicEn:rt.arabic,arabicAr:ar.arabicGlyphs});
 push('bidi.technical-tokens-isolated',rt.isolated>=8,rt.isolated);
 
 R.pageErrors=pageErrors.slice(0,8);

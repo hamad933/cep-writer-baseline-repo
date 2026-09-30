@@ -1,0 +1,806 @@
+{
+  "lineage": {
+    "unit": "W05-MANUAL-AI",
+    "surface": "manual_ai",
+    "commit": "d2b3e47615d2ddca738925a1f1b0df2d4449afab",
+    "short": "d2b3e47",
+    "treeSha": "1bc68bbeaa8362622914ccb86224560e04e7bdbe",
+    "branch": "writer/mi-serial",
+    "dirtyFiles": 5,
+    "dirty": "M stack/native-typescript/adapters/manual_ai/domain-adapter.ts\n M stack/native-typescript/surfaces/manual_ai/presentation.ts\n M stack/native-typescript/surfaces/manual_ai/runtime.ts\n M stack/native-typescript/surfaces/manual_ai/style.ts\n M stack/native-typescript/surfaces/manual_ai/workbench.ts",
+    "argv": "audit",
+    "capturedAt": "2026-09-30T19:05:46.777Z",
+    "viewport": "1536x1024",
+    "runtime": "playwright-chromium-headless",
+    "host": "linux"
+  },
+  "checks": [
+    {
+      "id": "function.route-opens-on-manual_ai",
+      "status": "PASS",
+      "detail": "manual_ai"
+    },
+    {
+      "id": "structure.surface-owned-not-generic",
+      "status": "PASS",
+      "detail": {
+        "owned": "manual_ai",
+        "generic": {
+          "groups": 0,
+          "table": 0
+        }
+      }
+    },
+    {
+      "id": "structure.lettered-workbench-A-E",
+      "status": "PASS",
+      "detail": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    },
+    {
+      "id": "structure.records-and-facets",
+      "status": "PASS",
+      "detail": {
+        "records": 8,
+        "facets": [
+          {
+            "id": "ALL",
+            "n": 8
+          },
+          {
+            "id": "PREPARED",
+            "n": 1
+          },
+          {
+            "id": "EXPORTED",
+            "n": 2
+          },
+          {
+            "id": "IMPORTED",
+            "n": 1
+          },
+          {
+            "id": "DEFERRED",
+            "n": 1
+          },
+          {
+            "id": "PROVENANCE_INVALID",
+            "n": 1
+          },
+          {
+            "id": "ACCEPTED_AS_DRAFT",
+            "n": 1
+          },
+          {
+            "id": "REJECTED",
+            "n": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "structure.governance-cards",
+      "status": "PASS",
+      "detail": 9
+    },
+    {
+      "id": "structure.no-page-errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "id": "structure.no-console-errors",
+      "status": "PASS",
+      "detail": [
+        "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+        "Failed to load resource: net::ERR_CONNECTION_REFUSED"
+      ]
+    },
+    {
+      "id": "structure.exchange-stepper-7",
+      "status": "PASS",
+      "detail": [
+        "done",
+        "done",
+        "done",
+        "current",
+        "pending",
+        "pending",
+        "pending"
+      ]
+    },
+    {
+      "id": "structure.toolbar-single-home",
+      "status": "PASS",
+      "detail": [
+        {
+          "id": "manual_ai.draft",
+          "label": "Prepare manual packet",
+          "disabled": false,
+          "primary": "true"
+        },
+        {
+          "id": "manual_ai.export",
+          "label": "Export packet for external AI",
+          "disabled": false,
+          "primary": "false"
+        },
+        {
+          "id": "manual_ai.import",
+          "label": "Import external result",
+          "disabled": true,
+          "primary": "false"
+        },
+        {
+          "id": "foundation.settings",
+          "label": "Settings / التفضيلات",
+          "disabled": false,
+          "primary": null
+        }
+      ]
+    },
+    {
+      "id": "structure.banner-identity",
+      "status": "PASS",
+      "detail": {
+        "title": "Manual AI Bridge",
+        "badge": "AI"
+      }
+    },
+    {
+      "id": "function.facet-filter",
+      "status": "PASS",
+      "detail": {
+        "records": 2,
+        "pressed": "true"
+      }
+    },
+    {
+      "id": "function.record-selection-drives-center",
+      "status": "PASS",
+      "detail": {
+        "selected": "AIB-REQ-0044",
+        "state": "IMPORTED"
+      }
+    },
+    {
+      "id": "function.human-gate-open-on-imported",
+      "status": "PASS",
+      "detail": [
+        {
+          "d": "ACCEPT",
+          "disabled": true
+        },
+        {
+          "d": "EDIT",
+          "disabled": false
+        },
+        {
+          "d": "REJECT",
+          "disabled": false
+        },
+        {
+          "d": "DEFER",
+          "disabled": false
+        },
+        {
+          "d": "REQUEST_EVIDENCE",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "id": "function.next-action-primary-on-import",
+      "status": "PASS",
+      "detail": [
+        {
+          "id": "manual_ai.draft",
+          "label": "Prepare manual packet",
+          "disabled": false,
+          "primary": "true"
+        },
+        {
+          "id": "manual_ai.export",
+          "label": "Export packet for external AI",
+          "disabled": false,
+          "primary": "false"
+        },
+        {
+          "id": "manual_ai.import",
+          "label": "Import external result",
+          "disabled": true,
+          "primary": "false"
+        },
+        {
+          "id": "foundation.settings",
+          "label": "Settings / التفضيلات",
+          "disabled": false,
+          "primary": null
+        }
+      ]
+    },
+    {
+      "id": "function.search-filter-and-focus",
+      "status": "PASS",
+      "detail": {
+        "records": 1,
+        "focus": true,
+        "value": "threat"
+      }
+    },
+    {
+      "id": "function.disposition-defer-changes-domain-state",
+      "status": "PASS",
+      "detail": {
+        "selected": "AIB-REQ-0044",
+        "state": "DEFERRED",
+        "wasEnabled": true
+      }
+    },
+    {
+      "id": "function.disposition-accept-fails-closed-no-fake-success",
+      "status": "PASS",
+      "detail": {
+        "meta": {
+          "disabled": true,
+          "reason": "DRAFT_SINK_UNAVAILABLE"
+        },
+        "status": "DEFER · DEFERRED",
+        "state": "DEFERRED"
+      }
+    },
+    {
+      "id": "function.no-canonical-publication",
+      "status": "PASS",
+      "detail": 0
+    },
+    {
+      "id": "function.export-reports-helper-unavailable-no-fake-success",
+      "status": "PASS",
+      "detail": {
+        "before": "PREPARED",
+        "after": {
+          "status": "DEFER · DEFERRED",
+          "state": "PREPARED",
+          "artifact": "NOT_EXPORTED",
+          "pill": "EXPORTED DEFERRED DEFERRED ACCEPTED_AS_DRAFT PROVENANCE_INVALID PREPARED REJECTED EXPORTED PREPARED Prepared · awaiting export PENDING PENDING ? SOURCE_ID ? SOURCE_REVISION ? SOURCE_DIGEST ? EXPORTED_PACKAGE_DIGEST"
+        }
+      }
+    },
+    {
+      "id": "function.import-blocked-without-declared-response",
+      "status": "PASS",
+      "detail": {
+        "disabled": true,
+        "reason": "Paste the external response into the intake field first"
+      }
+    },
+    {
+      "id": "function.import-enabled-after-intake",
+      "status": "PASS",
+      "detail": {
+        "disabled": false,
+        "intake": "External response: three findings, all unverified input."
+      }
+    },
+    {
+      "id": "function.import-produces-provenance-equal-state",
+      "status": "PASS",
+      "detail": {
+        "state": "IMPORTED",
+        "selected": "AIB-REQ-0048"
+      }
+    },
+    {
+      "id": "function.prepare-declared-new-request",
+      "status": "PASS",
+      "detail": {
+        "records": 9,
+        "hasDeclared": true,
+        "count": "9"
+      }
+    },
+    {
+      "id": "responsive.1280x860",
+      "status": "PASS",
+      "detail": {
+        "hScroll": false,
+        "steps": 7,
+        "secOverflow": false,
+        "actionsVisible": true
+      }
+    },
+    {
+      "id": "responsive.1024x900",
+      "status": "PASS",
+      "detail": {
+        "hScroll": false,
+        "steps": 4,
+        "secOverflow": false,
+        "actionsVisible": true
+      }
+    },
+    {
+      "id": "responsive.900x900",
+      "status": "PASS",
+      "detail": {
+        "hScroll": false,
+        "steps": 4,
+        "secOverflow": false,
+        "actionsVisible": true
+      }
+    },
+    {
+      "id": "responsive.760x900",
+      "status": "PASS",
+      "detail": {
+        "hScroll": false,
+        "steps": 2,
+        "secOverflow": false,
+        "actionsVisible": true
+      }
+    },
+    {
+      "id": "rtl.document-direction",
+      "status": "PASS",
+      "detail": {
+        "lang": "ar",
+        "dir": "rtl",
+        "h1Dir": "rtl"
+      }
+    },
+    {
+      "id": "rtl.content-localized",
+      "status": "PASS",
+      "detail": {
+        "arabic": 1253,
+        "records": 9,
+        "sections": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ]
+      }
+    },
+    {
+      "id": "rtl.no-horizontal-overflow",
+      "status": "PASS",
+      "detail": false
+    },
+    {
+      "id": "rtl.mirrors-structure",
+      "status": "PASS",
+      "detail": {
+        "leftX": 0,
+        "rightX": 1116
+      }
+    },
+    {
+      "id": "rtl.toolbar-localized",
+      "status": "PASS",
+      "detail": [
+        "تجهيز حزمة يدوية",
+        "تصدير الحزمة للتنفيذ الخارجي",
+        "تسجيل استجابة خارجية",
+        "الإعدادات"
+      ]
+    },
+    {
+      "id": "bidi.round-trip-restores-english",
+      "status": "PASS",
+      "detail": {
+        "lang": "en",
+        "dir": "ltr",
+        "h1": "Manual AI Bridgeجسر الذكاء الاصطناعي",
+        "arabicEn": 94,
+        "arabicAr": 1253
+      }
+    },
+    {
+      "id": "bidi.technical-tokens-isolated",
+      "status": "PASS",
+      "detail": 15
+    }
+  ],
+  "captures": [
+    {
+      "name": "en-1536",
+      "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/en-1536.png",
+      "sha256": "cfab2b323e478f84301518f5a4c1efb892577d7eee01203fadb331d7514b1efa",
+      "bytes": 328483,
+      "dims": "1536x1024"
+    },
+    {
+      "name": "en-stage",
+      "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/en-stage.png",
+      "sha256": "1f4799c3ec666f75fabb4e0510690cdb62b3b464c86d80653a108b342a3e6e29",
+      "bytes": 129682,
+      "dims": "790x803"
+    },
+    {
+      "name": "en-stage-bottom",
+      "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/en-stage-bottom.png",
+      "sha256": "2f7083f5cd11728d4b7012f0d42c15b7731938f02d0290474adefce6a8c24fa0",
+      "bytes": 137884,
+      "dims": "790x803"
+    },
+    {
+      "name": "en-secC-stepper",
+      "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/en-secC-stepper.png",
+      "sha256": "7dd42d70b5b4e6a242aa3b246328273c7771f18ecf432e0170ccbaf33a2bd49e",
+      "bytes": 21662,
+      "dims": "750x154"
+    },
+    {
+      "name": "en-left-region",
+      "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/en-left-region.png",
+      "sha256": "4fa45cdb65612d8767e6940aba1e45a846e3f829462af4a47f519904e278f203",
+      "bytes": 64679,
+      "dims": "304x803"
+    },
+    {
+      "name": "en-right-region",
+      "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/en-right-region.png",
+      "sha256": "9c35d4a7e050286872ac3b5eabe5b5b576169137127848e12b7acefe49171210",
+      "bytes": 79677,
+      "dims": "420x803"
+    },
+    {
+      "name": "en-1280x860",
+      "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/en-1280x860.png",
+      "sha256": "196cf9cc5d75728ece7c3971d15982cff8257e1227ba2acd00d121a7193768d2",
+      "bytes": 241680,
+      "dims": "1280x860"
+    },
+    {
+      "name": "en-1024x900",
+      "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/en-1024x900.png",
+      "sha256": "d67b41fd42cbc3ed8aa25047d45ecffc09697f5b14a3f4fe9f928ac054e1a74c",
+      "bytes": 190303,
+      "dims": "1024x900"
+    },
+    {
+      "name": "en-900x900",
+      "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/en-900x900.png",
+      "sha256": "ecdda4a4a1dfcd012e31a6414e3f92d43a4a6394ba46950c87ff26c9b7e27c78",
+      "bytes": 98779,
+      "dims": "900x900"
+    },
+    {
+      "name": "en-760x900",
+      "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/en-760x900.png",
+      "sha256": "cc9d9698b63e0256179fc58ff298d6d38f1b3e63400b6700a664f7fee2cfb087",
+      "bytes": 86407,
+      "dims": "760x900"
+    },
+    {
+      "name": "ar-1536",
+      "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/ar-1536.png",
+      "sha256": "f078df11252ed81cff8f9018438ff377e4be72d62592004c86b24f1d5884b904",
+      "bytes": 289865,
+      "dims": "1536x1024"
+    },
+    {
+      "name": "ar-stage",
+      "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/ar-stage.png",
+      "sha256": "3dafd38b72ac4fb8c2328a6fbb1e9c4da9b0a18b3ed0fe256002c749ff077bb3",
+      "bytes": 106696,
+      "dims": "790x803"
+    },
+    {
+      "name": "ar-left-region",
+      "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/ar-left-region.png",
+      "sha256": "89180bba3e944b7c60c09ce28c9b9c9a41b380580e525b978dffb841bce5bcaf",
+      "bytes": 57128,
+      "dims": "304x803"
+    },
+    {
+      "name": "ar-right-region",
+      "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/ar-right-region.png",
+      "sha256": "47c73eb2bb389f2f75adc86d486147d9bfbac63675612e077aa1a9990f5a0c57",
+      "bytes": 70315,
+      "dims": "420x803"
+    }
+  ],
+  "initial": {
+    "consumer": "manual_ai",
+    "lang": "en",
+    "dir": "ltr",
+    "owned": "manual_ai",
+    "leftOwned": "manual_ai",
+    "rightOwned": "manual_ai",
+    "selected": "AIB-REQ-0048",
+    "state": "EXPORTED",
+    "sections": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "records": 8,
+    "facets": [
+      {
+        "id": "ALL",
+        "n": 8
+      },
+      {
+        "id": "PREPARED",
+        "n": 1
+      },
+      {
+        "id": "EXPORTED",
+        "n": 2
+      },
+      {
+        "id": "IMPORTED",
+        "n": 1
+      },
+      {
+        "id": "DEFERRED",
+        "n": 1
+      },
+      {
+        "id": "PROVENANCE_INVALID",
+        "n": 1
+      },
+      {
+        "id": "ACCEPTED_AS_DRAFT",
+        "n": 1
+      },
+      {
+        "id": "REJECTED",
+        "n": 1
+      }
+    ],
+    "steps": [
+      "done",
+      "done",
+      "done",
+      "current",
+      "pending",
+      "pending",
+      "pending"
+    ],
+    "dispositions": [
+      {
+        "d": "ACCEPT",
+        "disabled": true
+      },
+      {
+        "d": "EDIT",
+        "disabled": true
+      },
+      {
+        "d": "REJECT",
+        "disabled": true
+      },
+      {
+        "d": "DEFER",
+        "disabled": true
+      },
+      {
+        "d": "REQUEST_EVIDENCE",
+        "disabled": true
+      }
+    ],
+    "toolbar": [
+      {
+        "id": "manual_ai.draft",
+        "label": "Prepare manual packet",
+        "disabled": false,
+        "primary": "true"
+      },
+      {
+        "id": "manual_ai.export",
+        "label": "Export packet for external AI",
+        "disabled": false,
+        "primary": "false"
+      },
+      {
+        "id": "manual_ai.import",
+        "label": "Import external result",
+        "disabled": true,
+        "primary": "false"
+      },
+      {
+        "id": "foundation.settings",
+        "label": "Settings / التفضيلات",
+        "disabled": false,
+        "primary": null
+      }
+    ],
+    "cards": 9,
+    "generic": {
+      "groups": 0,
+      "table": 0
+    },
+    "banner": {
+      "title": "Manual AI Bridge",
+      "badge": "AI"
+    },
+    "bottom": {
+      "title": "Temporary workspace",
+      "summary": "Closed — opens for the full payload, the hidden response, the files and the digests"
+    },
+    "overflow": {
+      "h": false,
+      "stage": true
+    }
+  },
+  "ar": {
+    "lang": "ar",
+    "dir": "rtl",
+    "h1Dir": "rtl",
+    "arabicGlyphs": 1253,
+    "latin": 2546,
+    "leftX": 0,
+    "rightX": 1116,
+    "hScroll": false,
+    "selected": "AIB-REQ-0048",
+    "sections": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "records": 9,
+    "banner": "جسر الذكاء الاصطناعي",
+    "toolbar": [
+      "تجهيز حزمة يدوية",
+      "تصدير الحزمة للتنفيذ الخارجي",
+      "تسجيل استجابة خارجية",
+      "الإعدادات"
+    ]
+  },
+  "roundTrip": {
+    "lang": "en",
+    "dir": "ltr",
+    "isolatedBdi": 15,
+    "arabic": 94,
+    "arabicInAr": 1253,
+    "h1": "Manual AI Bridgeجسر الذكاء الاصطناعي"
+  },
+  "pageErrors": [],
+  "consoleErrors": [],
+  "summary": {
+    "total": 34,
+    "pass": 34,
+    "fail": 0
+  }
+}
+{
+  "addendum": {
+    "lineage": {
+      "commit": "d2b3e47615d2ddca738925a1f1b0df2d4449afab",
+      "short": "d2b3e47",
+      "treeSha": "1bc68bbeaa8362622914ccb86224560e04e7bdbe",
+      "capturedAt": "2026-09-30T19:06:25.216Z",
+      "viewport": "760x900"
+    },
+    "compact": {
+      "hScroll": false,
+      "steps": 2,
+      "actions": true,
+      "overlap": false
+    },
+    "captures": [
+      {
+        "name": "en-secC-stepper-v2",
+        "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/en-secC-stepper-v2.png",
+        "sha256": "306abfbbffda0be17bb47fbde0dc1085d4b0af665ad4b7fd0bdbd7753ce2d43f",
+        "bytes": 22575,
+        "dims": "750x154",
+        "commit": "d2b3e47615d2ddca738925a1f1b0df2d4449afab",
+        "short": "d2b3e47",
+        "treeSha": "1bc68bbeaa8362622914ccb86224560e04e7bdbe",
+        "capturedAt": "2026-09-30T19:06:25.216Z",
+        "viewport": "1536x1024"
+      },
+      {
+        "name": "en-secE-gate",
+        "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/en-secE-gate.png",
+        "sha256": "db6e666f2dcfe32f0b8243d289dde15f5d17c72db9adb2eb6c6938ab086e6b19",
+        "bytes": 44039,
+        "dims": "368x576",
+        "commit": "d2b3e47615d2ddca738925a1f1b0df2d4449afab",
+        "short": "d2b3e47",
+        "treeSha": "1bc68bbeaa8362622914ccb86224560e04e7bdbe",
+        "capturedAt": "2026-09-30T19:06:25.216Z",
+        "viewport": "1536x1024"
+      },
+      {
+        "name": "en-secD-intake",
+        "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/en-secD-intake.png",
+        "sha256": "9ff5cce57bb8ea2688b8866726d24f8b986d40a3fc6db602a5a537d073f7c7a3",
+        "bytes": 46211,
+        "dims": "368x576",
+        "commit": "d2b3e47615d2ddca738925a1f1b0df2d4449afab",
+        "short": "d2b3e47",
+        "treeSha": "1bc68bbeaa8362622914ccb86224560e04e7bdbe",
+        "capturedAt": "2026-09-30T19:06:25.216Z",
+        "viewport": "1536x1024"
+      },
+      {
+        "name": "en-L1-whole",
+        "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/en-L1-whole.png",
+        "sha256": "35e02f996eb4a7d8e967e2d917dc3b0e2a305fc30408101226d3a7bf1cb93fab",
+        "bytes": 328493,
+        "dims": "1536x1024",
+        "commit": "d2b3e47615d2ddca738925a1f1b0df2d4449afab",
+        "short": "d2b3e47",
+        "treeSha": "1bc68bbeaa8362622914ccb86224560e04e7bdbe",
+        "capturedAt": "2026-09-30T19:06:25.216Z",
+        "viewport": "1536x1024"
+      },
+      {
+        "name": "ar-L1-whole",
+        "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/ar-L1-whole.png",
+        "sha256": "ee5d821fdb8c15bf34ba6d28507457070e177c6d87f51747a33984719f42b6a3",
+        "bytes": 281253,
+        "dims": "1536x1024",
+        "commit": "d2b3e47615d2ddca738925a1f1b0df2d4449afab",
+        "short": "d2b3e47",
+        "treeSha": "1bc68bbeaa8362622914ccb86224560e04e7bdbe",
+        "capturedAt": "2026-09-30T19:06:25.216Z",
+        "viewport": "1536x1024"
+      },
+      {
+        "name": "ar-secC-stepper",
+        "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/ar-secC-stepper.png",
+        "sha256": "de7d4301762f550560bf2d2a07d25a03d4939f14d7c1ac9f8126605a5f72b66d",
+        "bytes": 20646,
+        "dims": "750x154",
+        "commit": "d2b3e47615d2ddca738925a1f1b0df2d4449afab",
+        "short": "d2b3e47",
+        "treeSha": "1bc68bbeaa8362622914ccb86224560e04e7bdbe",
+        "capturedAt": "2026-09-30T19:06:25.216Z",
+        "viewport": "1536x1024"
+      },
+      {
+        "name": "ar-secA-identity",
+        "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/ar-secA-identity.png",
+        "sha256": "24f4111e9822122167eb87d20e2b7338b36e67aabec73f9cda920d6088c3ecbc",
+        "bytes": 31354,
+        "dims": "750x280",
+        "commit": "d2b3e47615d2ddca738925a1f1b0df2d4449afab",
+        "short": "d2b3e47",
+        "treeSha": "1bc68bbeaa8362622914ccb86224560e04e7bdbe",
+        "capturedAt": "2026-09-30T19:06:25.216Z",
+        "viewport": "1536x1024"
+      },
+      {
+        "name": "compact-L1",
+        "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/compact-L1.png",
+        "sha256": "c9bba94e6926ccc8990fb8aaf9c7acd9f1cdae967a4434e4d8143b3c71a54d10",
+        "bytes": 86227,
+        "dims": "760x900",
+        "commit": "d2b3e47615d2ddca738925a1f1b0df2d4449afab",
+        "short": "d2b3e47",
+        "treeSha": "1bc68bbeaa8362622914ccb86224560e04e7bdbe",
+        "capturedAt": "2026-09-30T19:06:25.216Z",
+        "viewport": "760x900"
+      },
+      {
+        "name": "compact-secC",
+        "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-MANUAL-AI/evidence/compact-secC.png",
+        "sha256": "f361349f947e998d0f5461587011f261752d012cc123333b9db2c4583471ac62",
+        "bytes": 25874,
+        "dims": "740x337",
+        "commit": "d2b3e47615d2ddca738925a1f1b0df2d4449afab",
+        "short": "d2b3e47",
+        "treeSha": "1bc68bbeaa8362622914ccb86224560e04e7bdbe",
+        "capturedAt": "2026-09-30T19:06:25.216Z",
+        "viewport": "760x900"
+      }
+    ]
+  }
+}
