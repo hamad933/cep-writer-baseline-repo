@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-30T18:40:29Z",
+  "generatedAt": "2026-09-30T18:46:31Z",
   "project": {
     "name": "CEP — Cybersecurity Education Platform",
     "repository": "hamad933/cep-writer-baseline-repo",
@@ -10,10 +10,12 @@
     "local": "writer/mi-serial",
     "durableCheckpointBranch": "writer/mi-serial",
     "localHead": "e5a77b60187e82503c52466665561605a3eea362",
-    "remoteBranchExists": false,
-    "remoteHead": null,
-    "tracking": "NONE (no upstream set at time of writing)",
-    "note": "origin/writer/mi-serial did not exist at bootstrap; created by first push -u. No force-push, no overwrite."
+    "remoteBranchExists": true,
+    "remoteHead": "f98eb465359e4875145ef9d9d79323986f17f440",
+    "tracking": "writer/mi-serial -> origin/writer/mi-serial",
+    "note": "origin/writer/mi-serial did not exist at bootstrap; created by first push -u. No force-push, no overwrite.",
+    "pushStatus": "PUSHED_AND_VERIFIED",
+    "remoteRef": "refs/heads/writer/mi-serial @ f98eb465359e4875145ef9d9d79323986f17f440"
   },
   "controller": {
     "phase": "PHASE_7_CONTINUOUS_VISUAL_OWNERSHIP_LOOP",
@@ -301,5 +303,11 @@
     "WAVE-4: AD-01 pane proportions + AD-02 donor chrome Arabic + D-08 !important collision",
     "Regenerate assurance receipts (G-24) at wave end"
   ],
-  "recoveryInstructions": "controller/state/RESUME.md"
+  "recoveryInstructions": "controller/state/RESUME.md",
+  "lastCheckpoint": {
+    "checkpoint_id": "CP-2026-09-30-001",
+    "commit_sha": "f98eb465359e4875145ef9d9d79323986f17f440",
+    "remote_verified": true,
+    "verified_at": "2026-09-30T18:46:31Z"
+  }
 }

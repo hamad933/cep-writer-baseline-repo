@@ -6,24 +6,57 @@
   "checkpoints": [
     {
       "checkpoint_id": "CP-2026-09-30-001",
-      "timestamp": "2026-09-30T00:00:00Z",
+      "timestamp": "2026-09-30T18:46:31Z",
       "branch": "writer/mi-serial",
-      "commit_sha": "PENDING_AT_PUSH_VERIFICATION",
+      "commit_sha": "f98eb465359e4875145ef9d9d79323986f17f440",
       "parent_sha": "e5a77b60187e82503c52466665561605a3eea362",
       "controller_phase": "PHASE_7_CONTINUOUS_VISUAL_OWNERSHIP_LOOP",
       "execution_wave": "WAVE-1 reviewed; WAVE-3 + W02 cluster + W04 trio in flight; WAVE-4 shared work pending",
       "active_writers": [
-        "W05-AUDIT", "W05-BACKUP", "W03-ENTERPRISE", "W03-LABS", "W03-RUNS",
-        "W05-RELEASES", "W05-MANUAL-AI", "W02-LIBRARY", "W02-LEARN",
-        "W02-VISUALIZE", "W04-REVIEWS", "W04-MASTERY", "W04-PORTFOLIO"
+        "W05-AUDIT",
+        "W05-BACKUP",
+        "W03-ENTERPRISE",
+        "W03-LABS",
+        "W03-RUNS",
+        "W05-RELEASES",
+        "W05-MANUAL-AI",
+        "W02-LIBRARY",
+        "W02-LEARN",
+        "W02-VISUALIZE",
+        "W04-REVIEWS",
+        "W04-MASTERY",
+        "W04-PORTFOLIO"
       ],
-      "completed_surfaces": ["today", "rq", "scenarios", "evidence", "configuration"],
+      "completed_surfaces": [
+        "today",
+        "rq",
+        "scenarios",
+        "evidence",
+        "configuration"
+      ],
       "in_progress_surfaces": [
-        "audit", "backup", "enterprise", "labs", "runs", "releases", "manual_ai",
-        "library", "learn", "visualize", "reviews", "mastery", "portfolio"
+        "audit",
+        "backup",
+        "enterprise",
+        "labs",
+        "runs",
+        "releases",
+        "manual_ai",
+        "library",
+        "learn",
+        "visualize",
+        "reviews",
+        "mastery",
+        "portfolio"
       ],
       "blocked_surfaces": [],
-      "not_dispatched_surfaces": ["health", "processing", "validation", "results", "shell"],
+      "not_dispatched_surfaces": [
+        "health",
+        "processing",
+        "validation",
+        "results",
+        "shell"
+      ],
       "changed_areas": [
         "controller/state/** (NEW — durable execution state, resume protocol, checkpoint protocol, bootstrap)",
         "controller/09_writer_forge/VISUAL_EXECUTION_STANDARD.md (binding Writer standard)",
@@ -42,7 +75,10 @@
       },
       "next_action": "Dispatch W05 trio with w05-rescue.ts write-ownership held solely by W05-VALIDATION; dispatch W03-RESULTS when W03-RUNS lands; review the 13 in-flight Writer results via independent Controller review.",
       "rollback_reference": "e5a77b60187e82503c52466665561605a3eea362 (last commit before durable-state bootstrap)",
-      "acceptance_note": "Surfaces listed in completed_surfaces are CONTROLLER-REVIEWED, all at NOT_OWNER_ACCEPTED. In-progress surfaces carry uncommitted or unreviewed work and must NOT be treated as complete."
+      "acceptance_note": "Surfaces listed in completed_surfaces are CONTROLLER-REVIEWED, all at NOT_OWNER_ACCEPTED. In-progress surfaces carry uncommitted or unreviewed work and must NOT be treated as complete.",
+      "remote_verified": true,
+      "remote_verified_at": "2026-09-30T18:46:31Z",
+      "remote_ref": "refs/heads/writer/mi-serial @ f98eb465359e4875145ef9d9d79323986f17f440"
     }
   ]
 }
