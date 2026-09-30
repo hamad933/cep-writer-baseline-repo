@@ -1,6 +1,31 @@
 # W02_COMPLETE_WORKSPACE_PACKET — Library · Learn · Visualize · Research & Quality + shared interaction/customization policy
 
 **Class:** `WRITER_PACKET__CANDIDATE_ONLY__NO_SELF_PROMOTION__SOLE_CONTROLLER_REVIEW_REQUIRED`
+
+> ## MANDATORY INHERITED STANDARD — READ BEFORE ANY WORK
+>
+> This packet **automatically inherits** [`VISUAL_EXECUTION_STANDARD.md`](./VISUAL_EXECUTION_STANDARD.md) in this directory.
+> That standard is **binding** and overrides any stale wording in this packet.
+>
+> It defines, and you must follow:
+> - **Reference authority** — a visual reference is **CONSTRUCTION AUTHORITY** (composition, hierarchy, spatial relationships, information architecture, density/rhythm, interaction language, visual emphasis, pane organization, responsive intent). It is **never** "presentation only". `REFERENCE != BLIND PIXEL COPY`.
+> - **Reference / Result / Evidence taxonomy** and current authority-status declaration.
+> - **Prohibited conceptual cloning** — `DONOR != DESTINATION TEMPLATE`. Never "Library renamed for Scenarios", never "Learn renamed for Labs".
+> - **Local composition responsibility** — `SHARED MECHANICS + SURFACE-SPECIFIC COMPOSITION + SURFACE-SPECIFIC PRESENTATION`.
+> - **The mandatory visual lifecycle** (REFERENCE → … → CLOSE) and L1–L4 comparison depth.
+> - **Content / density rules** — no fake content, no dead zones, intentional density.
+> - **Language policy (FINAL)** — Arabic and English are both first-class; active language is user-configurable in Settings; **no permanent Arabic-first or English-first product authority**; RTL / LTR / BIDI-safe required.
+> - **Evidence + lineage binding** — candidate, commit/tree, environment, test, viewport, timestamp, image identity (path + sha256 + dims).
+> - **Defect governance** — V0–V4 severity, root-cause taxonomy, no blind repair loops.
+> - **Responsive requirements**, **acceptance conditions**, and **escalation rules**.
+> - **Mandatory machine-readable Writer output** (`VISUAL_EXECUTION_REPORT.json`) — "Looks good" / "Done" / "Passed" are not valid output.
+>
+> **Also load these project skills before working:** `visual-surface-composition` · `visual-fidelity-review` · `shared-component-governance` · `professional-ui-ux-composition`.
+>
+> **Execution unit:** 1 WRITER → 1 SURFACE → 1 VISUAL OWNERSHIP LOOP. Final visual refinement dispatch is per-surface: see [`../10_dispatch/SURFACE_DISPATCH_MATRIX.json`](../10_dispatch/SURFACE_DISPATCH_MATRIX.json) and `surface_units/`. This workspace packet remains the scope/obligation package, not the final visual execution unit.
+>
+> **You cannot accept your own work.** Status stays `NOT_OWNER_ACCEPTED`; sole Controller review is required.
+
 **Generated:** 2026-09-29T02:35Z by NEW CEP Controller · dispatch-gated by `../11_gates/PRE_WRITER_DISPATCH_GATE.md`
 
 ## 1. Workspace identity
@@ -59,7 +84,7 @@ library edit→learn consume real-consumer chain · spatial select/connect/canon
 Canvas remove must not leak to TREE/PATH/GRAPH · spatial canonical state must not change under fit/pan/zoom · local transient/focus keys must not bypass shared owners · BIDI isolation must hold for mixed content · fixture substitution must never be claimed as real-consumer (`PW01` ceiling).
 
 ## 12. Dependencies & inputs
-`W02_REQUIREMENTS.csv`, 4 SurfaceProfiles, applicable Owner decisions + OE backlog (§1 input-direction, §2 UI scale, §3 grouped settings, §5 shortcut focus), oracles W03-007 (visualize-adjacent), visual references (presentation only). Consumes: shell nav (W01), preferences (W05 SC-011), persistence seed (W05).
+`W02_REQUIREMENTS.csv`, 4 SurfaceProfiles, applicable Owner decisions + OE backlog (§1 input-direction, §2 UI scale, §3 grouped settings, §5 shortcut focus), oracles W03-007 (visualize-adjacent), visual references (CONSTRUCTION AUTHORITY — see `VISUAL_EXECUTION_STANDARD.md` §2). Consumes: shell nav (W01), preferences (W05 SC-011), persistence seed (W05).
 
 ## 13. Donor/reference map
 Library Editor v1.2.17 accepted donor (330-function coverage + DOM/CSS/event census in `archaeology/`); `ACCEPTED_LIBRARY_DESIGN_REUSE_REGISTER.txt`; spatial donor per OWNER-20260910-007; `CEP_W02_UNIVERSAL_INTERFACE_…CAPABILITY_MATRIX_v1.0.csv` (historical input).

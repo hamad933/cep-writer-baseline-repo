@@ -1,0 +1,1031 @@
+{
+  "schemaVersion": 1,
+  "generated": "2026-09-30T00:17:49Z",
+  "generatedBy": "tools/build-surface-dispatch.py",
+  "authority": "CURRENT_OWNER_DIRECTIVE (Master Controller Contract)",
+  "executionModel": "1 WRITER -> 1 SURFACE -> 1 VISUAL OWNERSHIP LOOP",
+  "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+  "controllerModel": "xiaomi-token-plan-sgp/mimo-v2.6-pro",
+  "inheritedStandard": "controller/09_writer_forge/VISUAL_EXECUTION_STANDARD.md",
+  "requiredSkills": [
+    "visual-surface-composition",
+    "visual-fidelity-review",
+    "shared-component-governance",
+    "professional-ui-ux-composition"
+  ],
+  "languagePolicy": {
+    "status": "FINAL",
+    "languages": [
+      "ar",
+      "en"
+    ],
+    "activeLanguage": "user-configurable through Settings",
+    "permanentProductLanguageAuthority": "NONE",
+    "direction": [
+      "rtl",
+      "ltr"
+    ],
+    "bidi": "required"
+  },
+  "sharedSeams": [
+    {
+      "path": "dist/index.html",
+      "owner": "W01-SHELL"
+    },
+    {
+      "path": "stack/native-typescript/foundation/extensions.css",
+      "owner": "W01-SHELL"
+    },
+    {
+      "path": "stack/native-typescript/foundation/global/pane-layout.ts",
+      "owner": "W01-SHELL"
+    },
+    {
+      "path": "stack/native-typescript/foundation/global/preferences/schema.ts",
+      "owner": "W05-CONFIGURATION"
+    },
+    {
+      "path": "stack/native-typescript/foundation/global/region-contract.ts",
+      "owner": "W01-SHELL"
+    },
+    {
+      "path": "stack/native-typescript/foundation/global/settings/center.ts",
+      "owner": "W05-CONFIGURATION"
+    },
+    {
+      "path": "stack/native-typescript/foundation/global/shell/cep-destinations.ts",
+      "owner": "W01-SHELL"
+    },
+    {
+      "path": "stack/native-typescript/foundation/global/shell/navigation.ts",
+      "owner": "W01-SHELL"
+    },
+    {
+      "path": "stack/native-typescript/foundation/workspace-host.ts",
+      "owner": "W01-SHELL"
+    },
+    {
+      "path": "stack/native-typescript/foundation/workspace.ts",
+      "owner": "W01-SHELL"
+    },
+    {
+      "path": "stack/native-typescript/main.ts",
+      "owner": "W01-SHELL"
+    },
+    {
+      "path": "stack/native-typescript/surfaces/composition/w01-w02-rescue.ts",
+      "owner": "W01-SHELL"
+    },
+    {
+      "path": "stack/native-typescript/surfaces/composition/w03-rescue.ts",
+      "owner": "W03-SCENARIOS"
+    },
+    {
+      "path": "stack/native-typescript/surfaces/composition/w04-rescue.ts",
+      "owner": "W04-EVIDENCE"
+    },
+    {
+      "path": "stack/native-typescript/surfaces/composition/w05-rescue.ts",
+      "owner": "W05-VALIDATION"
+    },
+    {
+      "path": "stack/native-typescript/surfaces/m0-controller-composition.ts",
+      "owner": "W01-SHELL"
+    }
+  ],
+  "parallelism": {
+    "strategy": "All 23 surface units run in parallel; shared seams have exactly one owner each and are written through tools/writer-serial.sh.",
+    "serializeOnly": [
+      "dist/index.html",
+      "stack/native-typescript/foundation/extensions.css",
+      "stack/native-typescript/foundation/global/pane-layout.ts",
+      "stack/native-typescript/foundation/global/preferences/schema.ts",
+      "stack/native-typescript/foundation/global/region-contract.ts",
+      "stack/native-typescript/foundation/global/settings/center.ts",
+      "stack/native-typescript/foundation/global/shell/cep-destinations.ts",
+      "stack/native-typescript/foundation/global/shell/navigation.ts",
+      "stack/native-typescript/foundation/workspace-host.ts",
+      "stack/native-typescript/foundation/workspace.ts",
+      "stack/native-typescript/main.ts",
+      "stack/native-typescript/surfaces/composition/w01-w02-rescue.ts",
+      "stack/native-typescript/surfaces/composition/w03-rescue.ts",
+      "stack/native-typescript/surfaces/composition/w04-rescue.ts",
+      "stack/native-typescript/surfaces/composition/w05-rescue.ts",
+      "stack/native-typescript/surfaces/m0-controller-composition.ts"
+    ],
+    "waves": {
+      "WAVE-1-PARALLEL": [
+        "W01-SHELL",
+        "W01-TODAY",
+        "W02-LIBRARY",
+        "W02-LEARN",
+        "W02-VISUALIZE",
+        "W02-RESEARCH-QUALITY",
+        "W03-ENTERPRISE",
+        "W03-SCENARIOS",
+        "W03-LABS",
+        "W03-RUNS",
+        "W03-RESULTS",
+        "W04-EVIDENCE",
+        "W04-REVIEWS",
+        "W04-MASTERY",
+        "W04-PORTFOLIO",
+        "W05-HEALTH",
+        "W05-PROCESSING",
+        "W05-VALIDATION",
+        "W05-MANUAL-AI",
+        "W05-BACKUP",
+        "W05-AUDIT",
+        "W05-RELEASES",
+        "W05-CONFIGURATION"
+      ]
+    }
+  },
+  "units": [
+    {
+      "unit": "W01-SHELL",
+      "surface": "shell",
+      "label": "SHELL",
+      "workspace": "W01",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Global application chrome: navigation, workspace slots, panes, and product identity for every surface.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/shell/",
+        "stack/native-typescript/foundation/global/shell/"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [],
+      "dependencies": [],
+      "ownedSharedSeams": [
+        "dist/index.html",
+        "stack/native-typescript/foundation/extensions.css",
+        "stack/native-typescript/foundation/global/pane-layout.ts",
+        "stack/native-typescript/foundation/global/region-contract.ts",
+        "stack/native-typescript/foundation/global/shell/cep-destinations.ts",
+        "stack/native-typescript/foundation/global/shell/navigation.ts",
+        "stack/native-typescript/foundation/workspace-host.ts",
+        "stack/native-typescript/foundation/workspace.ts",
+        "stack/native-typescript/main.ts",
+        "stack/native-typescript/surfaces/composition/w01-w02-rescue.ts",
+        "stack/native-typescript/surfaces/m0-controller-composition.ts"
+      ],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W01-TODAY",
+      "surface": "today",
+      "label": "TODAY",
+      "workspace": "W01",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Daily orchestration surface: what needs attention now, and the fastest path into real work.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/today/",
+        "stack/native-typescript/adapters/today/"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/00_TODAY/CEP_TODAY_MAIN_ORCHESTRATION_REFERENCE.png",
+          "exists": true,
+          "bytes": 1546442,
+          "sha256": "3f75eac759efd920cfb2600766c7719d1754359326bc5a3df5508bee864dd617",
+          "width": 1520,
+          "height": 1034,
+          "classification": "OWNER_CONFIRMED_FINAL_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL"
+      ],
+      "ownedSharedSeams": [],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W02-LIBRARY",
+      "surface": "library",
+      "label": "LIBRARY",
+      "workspace": "W02",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Knowledge library: browse, organize, and author the corpus of notes, outlines, and bound domains.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/library/",
+        "stack/native-typescript/adapters/library-chrome.ts",
+        "stack/native-typescript/adapters/library-fixtures.ts"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/01_LIBRARY/CEP_VIS_001_LIBRARY_FINAL_OWNER_CONFIRMED_REFERENCE.png",
+          "exists": true,
+          "bytes": 1571864,
+          "sha256": "6976f17f84d8eae1d9bb0a98bcb07932f20aa8c6fa92793055a38bab15f4b1da",
+          "width": 1505,
+          "height": 1045,
+          "classification": "OWNER_CONFIRMED_FINAL_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL"
+      ],
+      "ownedSharedSeams": [],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W02-LEARN",
+      "surface": "learn",
+      "label": "LEARN",
+      "workspace": "W02",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Guided learning: progress through structured learning material against the library corpus.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/learn/",
+        "stack/native-typescript/adapters/learn.ts",
+        "stack/native-typescript/adapters/context-learn-structured.ts"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/02_LEARN/CEP_VIS_001_LEARN_FINAL_OWNER_CONFIRMED_REFERENCE.png",
+          "exists": true,
+          "bytes": 1784520,
+          "sha256": "5fa530e7c9506fd7d70339699c5f013908f77dd4df29007d1d021cf7d331d2b8",
+          "width": 1505,
+          "height": 1045,
+          "classification": "OWNER_CONFIRMED_FINAL_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL",
+        "W02-LIBRARY"
+      ],
+      "ownedSharedSeams": [],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W02-VISUALIZE",
+      "surface": "visualize",
+      "label": "VISUALIZE",
+      "workspace": "W02",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "VISUALIZE TREE-VIEW: inspect the knowledge graph across tree, canvas, path, and focused-relationship views.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/visualize/",
+        "stack/native-typescript/adapters/visualize/"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/03_VISUALIZE/CEP_VIS_001_VISUALIZE_TREE_CORRECTED_REFERENCE_v2.png",
+          "exists": true,
+          "bytes": 1320160,
+          "sha256": "c02a6a272f330c3cc169317bff616239e1b2ae08ba99e57ff91adffc07c6831f",
+          "width": 1672,
+          "height": 941,
+          "classification": "OWNER_CONFIRMED_FINAL_REFERENCE"
+        },
+        {
+          "path": "cep-writer/references/visual/90_SUPPORTING_COMPONENT_REFERENCES/CEP_VISUALIZE_CANVAS_VIEW_COMPONENT_REFERENCE.png",
+          "exists": true,
+          "bytes": 1684559,
+          "sha256": "918ab2a8c7c415b5f201712c5b11a3c13590db0231d7be1d0073a8f955ced33c",
+          "width": 1672,
+          "height": 941,
+          "classification": "OWNER_CONFIRMED_SUPPORTING_COMPONENT_REFERENCE"
+        },
+        {
+          "path": "cep-writer/references/visual/90_SUPPORTING_COMPONENT_REFERENCES/CEP_VISUALIZE_FOCUSED_GRAPH_RELATIONSHIP_COMPONENT_REFERENCE.png",
+          "exists": true,
+          "bytes": 386927,
+          "sha256": "7c36b02e30fd82a6664e427cbc450c1b8f1c221295ea53b31a36b745cebd38f2",
+          "width": 613,
+          "height": 647,
+          "classification": "OWNER_CONFIRMED_SUPPORTING_COMPONENT_REFERENCE"
+        },
+        {
+          "path": "cep-writer/references/visual/90_SUPPORTING_COMPONENT_REFERENCES/CEP_VISUALIZE_PATH_VIEW_COMPONENT_REFERENCE.png",
+          "exists": true,
+          "bytes": 388772,
+          "sha256": "0f1d320fe684b992b885cafb47664aa98ce41d8f6c44f6c67df7ef350735166f",
+          "width": 1094,
+          "height": 343,
+          "classification": "OWNER_CONFIRMED_SUPPORTING_COMPONENT_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL",
+        "W02-LIBRARY"
+      ],
+      "ownedSharedSeams": [],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W02-RESEARCH-QUALITY",
+      "surface": "rq",
+      "label": "RESEARCH-QUALITY",
+      "workspace": "W02",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Research and quality: assess research sources, quality signals, and analytical comparison.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/rq/",
+        "stack/native-typescript/adapters/rq/"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/04_RESEARCH_AND_QUALITY/image-gen-1(20260813-194728).png",
+          "exists": true,
+          "bytes": 1440822,
+          "sha256": "312bf193216402f8c16fb8c2bca424fa453d961e31f818ac0183cdf8e7b380c8",
+          "width": 1505,
+          "height": 1045,
+          "classification": "CANDIDATE__AUTHORITY_UNRESOLVED"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL",
+        "W02-LIBRARY"
+      ],
+      "ownedSharedSeams": [],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W03-ENTERPRISE",
+      "surface": "enterprise",
+      "label": "ENTERPRISE",
+      "workspace": "W03",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Enterprise digital twin: model the organization's topology, assets, and defensive posture.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/enterprise/",
+        "stack/native-typescript/adapters/enterprise/"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/01_ENTERPRISE_DIGITAL_TWIN/CEP_ENTERPRISE_DIGITAL_TWIN_REVISION_BASELINE_REFERENCE.png",
+          "exists": true,
+          "bytes": 1526734,
+          "sha256": "54939bae7d1f323aa12205705d67c9fabed4870606722cf04dbf1f4e32a8a8fc",
+          "width": 1607,
+          "height": 979,
+          "classification": "OWNER_CONFIRMED_SUPPORTING_MAJOR_STATE_REFERENCE"
+        },
+        {
+          "path": "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/01_ENTERPRISE_DIGITAL_TWIN/Enterprise Cybersecurity Topology Dashboard.png",
+          "exists": true,
+          "bytes": 1458799,
+          "sha256": "8b3b3e3b47693a54a8289d7d497bae5539e7d166c58e92b245936c919dc25c2e",
+          "width": 1503,
+          "height": 1046,
+          "classification": "CURRENT_FINAL_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL"
+      ],
+      "ownedSharedSeams": [],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W03-SCENARIOS",
+      "surface": "scenarios",
+      "label": "SCENARIOS",
+      "workspace": "W03",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Scenario authoring and timeline: compose attack/defense scenarios as time-ordered events.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/scenarios/",
+        "stack/native-typescript/adapters/scenarios/"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/02_SCENARIOS/Cybersecurity Scenario Timeline Dashboard(1).png",
+          "exists": true,
+          "bytes": 1372425,
+          "sha256": "98a1c75226a20db052a930f33bc4ed36a2ce7e2a5eef2b246a34e391bafea48b",
+          "width": 1505,
+          "height": 1045,
+          "classification": "CURRENT_FINAL_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL",
+        "W03-ENTERPRISE"
+      ],
+      "ownedSharedSeams": [
+        "stack/native-typescript/surfaces/composition/w03-rescue.ts"
+      ],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W03-LABS",
+      "surface": "labs",
+      "label": "LABS",
+      "workspace": "W03",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Labs: hands-on task graphs where a learner executes discrete technical tasks in sequence.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/labs/",
+        "stack/native-typescript/adapters/labs/"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/03_LABS/Cybersecurity Lab Task Graph Dashboard(2).png",
+          "exists": true,
+          "bytes": 1413290,
+          "sha256": "09f9d53b8d845ad374d084b60a5ed51a736b72607cdaa8445d07d74483aab46b",
+          "width": 1505,
+          "height": 1045,
+          "classification": "CURRENT_FINAL_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL",
+        "W03-SCENARIOS"
+      ],
+      "ownedSharedSeams": [],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W03-RUNS",
+      "surface": "runs",
+      "label": "RUNS",
+      "workspace": "W03",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Run operations: prepare, preflight, and operate live simulation runs with a terminal and live state.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/runs/",
+        "stack/native-typescript/adapters/runs/"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/04_RUNS_OPERATIONS/CEP_RUN_PREPARATION_PREFLIGHT_REFERENCE.png",
+          "exists": true,
+          "bytes": 1471400,
+          "sha256": "91126b1efdfca2bbf9b1619dfabc60d83fe4efc5ba6336ba7a535d8dd06b291a",
+          "width": 1505,
+          "height": 1045,
+          "classification": "OWNER_CONFIRMED_SUPPORTING_MAJOR_STATE_REFERENCE"
+        },
+        {
+          "path": "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/04_RUNS_OPERATIONS/image-gen-1(20260813-230627).png",
+          "exists": true,
+          "bytes": 1496925,
+          "sha256": "e875f6c592ce84d6fbddcb01cf5afddead891246168fa6019f3434aeb4f337a3",
+          "width": 1505,
+          "height": 1045,
+          "classification": "CURRENT_FINAL_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL",
+        "W03-SCENARIOS"
+      ],
+      "ownedSharedSeams": [],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W03-RESULTS",
+      "surface": "results",
+      "label": "RESULTS",
+      "workspace": "W03",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Results, replay, and comparison: review what happened, replay it, and compare runs.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/results/",
+        "stack/native-typescript/adapters/results/"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/05_RESULTS_REPLAY/CEP_RESULTS_AAR_SUPPORTING_MAJOR_STATE_REFERENCE.png",
+          "exists": true,
+          "bytes": 1669655,
+          "sha256": "c9b57a30023f83303e779c5d822113d8b8b369f805b567c8b468d3f0d2f0e9d6",
+          "width": 1672,
+          "height": 941,
+          "classification": "OWNER_CONFIRMED_SUPPORTING_MAJOR_STATE_REFERENCE"
+        },
+        {
+          "path": "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/05_RESULTS_REPLAY/CEP_RESULTS_COMPARE_SUPPORTING_MAJOR_STATE_REFERENCE.png",
+          "exists": true,
+          "bytes": 1444484,
+          "sha256": "f5a720f303d16f75abb5622a0cccc1ea912b951915cf689d815e86b5e7d15e45",
+          "width": 1672,
+          "height": 941,
+          "classification": "OWNER_CONFIRMED_SUPPORTING_MAJOR_STATE_REFERENCE"
+        },
+        {
+          "path": "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/05_RESULTS_REPLAY/Cybersecurity Replay Dashboard Timeline.png",
+          "exists": true,
+          "bytes": 1373904,
+          "sha256": "4d5af620a5b9887abba7b82d58244fb20d1fed891a7761e1fe8d56447f62dd4c",
+          "width": 1505,
+          "height": 1045,
+          "classification": "CURRENT_FINAL_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL",
+        "W03-RUNS"
+      ],
+      "ownedSharedSeams": [],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W04-EVIDENCE",
+      "surface": "evidence",
+      "label": "EVIDENCE",
+      "workspace": "W04",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Evidence intake: collect, triage, and bind evidence artifacts to their claims.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/evidence/",
+        "stack/native-typescript/adapters/evidence/"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/01_EVIDENCE_INTAKE/Cybersecurity Evidence Dashboard in Arabic(1).png",
+          "exists": true,
+          "bytes": 1398062,
+          "sha256": "789deee01cd946d97d8e1ff59e583026bef733cf153a70c8765389a23aaacb69",
+          "width": 1505,
+          "height": 1045,
+          "classification": "CURRENT_FINAL_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL"
+      ],
+      "ownedSharedSeams": [
+        "stack/native-typescript/surfaces/composition/w04-rescue.ts"
+      ],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W04-REVIEWS",
+      "surface": "reviews",
+      "label": "REVIEWS",
+      "workspace": "W04",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Evidence review: adjudicate submitted evidence and record review decisions.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/reviews/",
+        "stack/native-typescript/adapters/reviews/"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/02_REVIEWS/Cybersecurity Evidence Review Dashboard.png",
+          "exists": true,
+          "bytes": 1574662,
+          "sha256": "f1b915d50866e5bc69f61c9ac2042fc3cb6e0c3a277a8ad61e98e268e566de70",
+          "width": 1505,
+          "height": 1045,
+          "classification": "CURRENT_FINAL_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL",
+        "W04-EVIDENCE"
+      ],
+      "ownedSharedSeams": [],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W04-MASTERY",
+      "surface": "mastery",
+      "label": "MASTERY",
+      "workspace": "W04",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Mastery: track demonstrated competency growth across the cybersecurity curriculum.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/mastery/",
+        "stack/native-typescript/adapters/mastery/"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/03_MASTERY/Arabic Cybersecurity Mastery Dashboard.png",
+          "exists": true,
+          "bytes": 1429712,
+          "sha256": "7784568ef868bfefdad8dcd731e20c2dbbe95bd9cdd8d81daaca7b0723d82a54",
+          "width": 1505,
+          "height": 1045,
+          "classification": "CURRENT_FINAL_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL",
+        "W02-LEARN"
+      ],
+      "ownedSharedSeams": [],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W04-PORTFOLIO",
+      "surface": "portfolio",
+      "label": "PORTFOLIO",
+      "workspace": "W04",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Portfolio: assemble a defensible record of demonstrated capability and evidence.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/portfolio/",
+        "stack/native-typescript/adapters/portfolio/"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/04_PORTFOLIO/Cybersecurity Portfolio Evidence Dashboard.png",
+          "exists": true,
+          "bytes": 1525435,
+          "sha256": "3651bff6bee8098e8ab7633c3d5a9ebec0a0cb7e8701466932d21f53988ea37b",
+          "width": 1505,
+          "height": 1045,
+          "classification": "CURRENT_FINAL_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL",
+        "W04-EVIDENCE"
+      ],
+      "ownedSharedSeams": [],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W05-HEALTH",
+      "surface": "health",
+      "label": "HEALTH",
+      "workspace": "W05",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Operational health: diagnose system health and act on inspection/diagnose results.",
+      "writableRoots": [
+        "stack/native-typescript/adapters/health-runtime.ts",
+        "stack/native-typescript/surfaces/composition/w05-rescue.ts"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/01_HEALTH/Arabic Operational Health Dashboard.png",
+          "exists": true,
+          "bytes": 1409720,
+          "sha256": "f5f789687f09f115a75e96a315d74ba5d664853b4430cc766fcc70eaf8aa17b6",
+          "width": 1505,
+          "height": 1045,
+          "classification": "CURRENT_FINAL_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL"
+      ],
+      "ownedSharedSeams": [],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W05-PROCESSING",
+      "surface": "processing",
+      "label": "PROCESSING",
+      "workspace": "W05",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Processing: monitor and control long-running processing work, with retry/cancel and validation handoff.",
+      "writableRoots": [
+        "stack/native-typescript/adapters/processing-runtime.ts",
+        "stack/native-typescript/surfaces/composition/w05-rescue.ts"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [],
+      "dependencies": [
+        "W01-SHELL"
+      ],
+      "ownedSharedSeams": [],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W05-VALIDATION",
+      "surface": "validation",
+      "label": "VALIDATION",
+      "workspace": "W05",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "System validation: run validation flows and record validation state truthfully.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/validation/",
+        "stack/native-typescript/adapters/validation.ts"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/03_VALIDATION/CEP_SYSTEM_VALIDATION_REFERENCE.png",
+          "exists": true,
+          "bytes": 1692302,
+          "sha256": "0074ab58c53f1d9e2e24a3b10c87f795701b233794b869280c0c25ba6f64178d",
+          "width": 1536,
+          "height": 1024,
+          "classification": "OWNER_CONFIRMED_FINAL_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL"
+      ],
+      "ownedSharedSeams": [
+        "stack/native-typescript/surfaces/composition/w05-rescue.ts"
+      ],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W05-MANUAL-AI",
+      "surface": "manual_ai",
+      "label": "MANUAL_AI",
+      "workspace": "W05",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Manual AI bridge: controlled human-in-the-loop interaction with AI assistance.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/manual_ai/",
+        "stack/native-typescript/adapters/manual_ai/"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/04_AI_BRIDGE/CEP_SYSTEM_AI_BRIDGE_REFERENCE.png",
+          "exists": true,
+          "bytes": 1500124,
+          "sha256": "ae1d8df7230c9719bb7a8026949c285dc8c9b11f3b050899b1ec2d9b02b9f526",
+          "width": 1525,
+          "height": 1031,
+          "classification": "OWNER_CONFIRMED_FINAL_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL"
+      ],
+      "ownedSharedSeams": [],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W05-BACKUP",
+      "surface": "backup",
+      "label": "BACKUP",
+      "workspace": "W05",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Backup and restore: protect state and prove restore with restore drills.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/backup/",
+        "stack/native-typescript/adapters/backup-runtime.ts"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/05_BACKUP_AND_RESTORE/CEP_SYSTEM_BACKUP_RESTORE_RESTORE_DRILL_REFERENCE.png",
+          "exists": true,
+          "bytes": 1633369,
+          "sha256": "782e813a4ffacd969eeff180b90a0a859271bd8c5a1a4e3b98ac6379e9a88ed0",
+          "width": 1536,
+          "height": 1024,
+          "classification": "OWNER_CONFIRMED_FINAL_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL"
+      ],
+      "ownedSharedSeams": [],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W05-AUDIT",
+      "surface": "audit",
+      "label": "AUDIT",
+      "workspace": "W05",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Audit and traceability: immutable record of what happened, by whom, and with what evidence.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/audit/",
+        "stack/native-typescript/adapters/audit.ts"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/06_AUDIT/CEP_SYSTEM_AUDIT_TRACEABILITY_REFERENCE.png",
+          "exists": true,
+          "bytes": 1741156,
+          "sha256": "7cb34c8357dfad0914e4eeaf732c97efbe376e957fe508137c4f730edaeb1e88",
+          "width": 1536,
+          "height": 1024,
+          "classification": "OWNER_CONFIRMED_FINAL_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL"
+      ],
+      "ownedSharedSeams": [],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W05-RELEASES",
+      "surface": "releases",
+      "label": "RELEASES",
+      "workspace": "W05",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Releases: manage release candidates and their comparison/compare-blocked truth states.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/releases/",
+        "stack/native-typescript/adapters/releases/"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/07_RELEASES/CEP_SYSTEM_RELEASES_REFERENCE.png",
+          "exists": true,
+          "bytes": 1628431,
+          "sha256": "9e7c8747953bef1d8e0f2000ad00bad12667ddfd35bbcbbde4f227a812604f7a",
+          "width": 1536,
+          "height": 1024,
+          "classification": "OWNER_CONFIRMED_FINAL_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL"
+      ],
+      "ownedSharedSeams": [],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    },
+    {
+      "unit": "W05-CONFIGURATION",
+      "surface": "configuration",
+      "label": "CONFIGURATION",
+      "workspace": "W05",
+      "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+      "surfacePurpose": "Configuration and settings: user-configurable preferences, including product language and direction.",
+      "writableRoots": [
+        "stack/native-typescript/surfaces/configuration/",
+        "stack/native-typescript/adapters/configuration/",
+        "stack/native-typescript/foundation/global/preferences/",
+        "stack/native-typescript/foundation/global/settings/"
+      ],
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "references": [
+        {
+          "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/08_CONFIGURATION/CEP_SYSTEM_CONFIGURATION_REVISION_REFERENCE.png",
+          "exists": true,
+          "bytes": 1554161,
+          "sha256": "bb32df27c015b018ee31e88ce82841355f46e770c4ee02ca6775b7536ce18092",
+          "width": 1536,
+          "height": 1024,
+          "classification": "OWNER_CONFIRMED_FINAL_REFERENCE"
+        }
+      ],
+      "dependencies": [
+        "W01-SHELL"
+      ],
+      "ownedSharedSeams": [
+        "stack/native-typescript/foundation/global/preferences/schema.ts",
+        "stack/native-typescript/foundation/global/settings/center.ts"
+      ],
+      "sharedSeamRequests": "tools/writer-serial.sh (serialized slot) for any shared seam not owned here"
+    }
+  ],
+  "counts": {
+    "units": 23,
+    "surfaces": 23
+  }
+}

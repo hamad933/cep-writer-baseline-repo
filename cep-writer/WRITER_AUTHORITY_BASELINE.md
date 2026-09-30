@@ -22,7 +22,7 @@ Core laws:
 - exact parent identity and clean status before mutation;
 - verified incremental continuation is preferred for correction loops when lineage is exact;
 - Content, Presentation, Behavior/Interaction/Functionality, and Domain/Data/Provider truth are separate proof dimensions;
-- visual references govern Presentation only;
+- visual references are CONSTRUCTION AUTHORITY for visual intent, composition, hierarchy, spatial relationships, information architecture, density/rhythm, interaction language, visual emphasis, pane organization, component relationships, and responsive intent. They are NOT "presentation only" and are not merely presentation inputs. A reference does not force preservation of obsolete implementation, obsolete technology, invalid historical decisions, broken accessibility, broken responsiveness, fake content, architecture mistakes, or accidental visual defects (REFERENCE != BLIND PIXEL COPY). See `controller/09_writer_forge/VISUAL_EXECUTION_STANDARD.md` §2;
 - no duplicate shared owner or consumer-local reinvention when a governed shared owner exists;
 - no fake persistence/provider/runtime/native capability/success receipt;
 - stack expansion is locked and final stack remains not frozen.

@@ -1,6 +1,31 @@
 # W01_COMPLETE_WORKSPACE_PACKET — Today + Shared Global Shell
 
 **Class:** `WRITER_PACKET__CANDIDATE_ONLY__NO_SELF_PROMOTION__SOLE_CONTROLLER_REVIEW_REQUIRED`
+
+> ## MANDATORY INHERITED STANDARD — READ BEFORE ANY WORK
+>
+> This packet **automatically inherits** [`VISUAL_EXECUTION_STANDARD.md`](./VISUAL_EXECUTION_STANDARD.md) in this directory.
+> That standard is **binding** and overrides any stale wording in this packet.
+>
+> It defines, and you must follow:
+> - **Reference authority** — a visual reference is **CONSTRUCTION AUTHORITY** (composition, hierarchy, spatial relationships, information architecture, density/rhythm, interaction language, visual emphasis, pane organization, responsive intent). It is **never** "presentation only". `REFERENCE != BLIND PIXEL COPY`.
+> - **Reference / Result / Evidence taxonomy** and current authority-status declaration.
+> - **Prohibited conceptual cloning** — `DONOR != DESTINATION TEMPLATE`. Never "Library renamed for Scenarios", never "Learn renamed for Labs".
+> - **Local composition responsibility** — `SHARED MECHANICS + SURFACE-SPECIFIC COMPOSITION + SURFACE-SPECIFIC PRESENTATION`.
+> - **The mandatory visual lifecycle** (REFERENCE → … → CLOSE) and L1–L4 comparison depth.
+> - **Content / density rules** — no fake content, no dead zones, intentional density.
+> - **Language policy (FINAL)** — Arabic and English are both first-class; active language is user-configurable in Settings; **no permanent Arabic-first or English-first product authority**; RTL / LTR / BIDI-safe required.
+> - **Evidence + lineage binding** — candidate, commit/tree, environment, test, viewport, timestamp, image identity (path + sha256 + dims).
+> - **Defect governance** — V0–V4 severity, root-cause taxonomy, no blind repair loops.
+> - **Responsive requirements**, **acceptance conditions**, and **escalation rules**.
+> - **Mandatory machine-readable Writer output** (`VISUAL_EXECUTION_REPORT.json`) — "Looks good" / "Done" / "Passed" are not valid output.
+>
+> **Also load these project skills before working:** `visual-surface-composition` · `visual-fidelity-review` · `shared-component-governance` · `professional-ui-ux-composition`.
+>
+> **Execution unit:** 1 WRITER → 1 SURFACE → 1 VISUAL OWNERSHIP LOOP. Final visual refinement dispatch is per-surface: see [`../10_dispatch/SURFACE_DISPATCH_MATRIX.json`](../10_dispatch/SURFACE_DISPATCH_MATRIX.json) and `surface_units/`. This workspace packet remains the scope/obligation package, not the final visual execution unit.
+>
+> **You cannot accept your own work.** Status stays `NOT_OWNER_ACCEPTED`; sole Controller review is required.
+
 **Generated:** 2026-09-29T02:35Z by NEW CEP Controller · **Status:** execution-ready, dispatch-gated by `../11_gates/PRE_WRITER_DISPATCH_GATE.md`
 
 ## 1. Workspace identity
@@ -68,7 +93,7 @@ shell destination routing · today render + filter · back/forward semantic cont
 Back/forward must not silently reset semantic context · diagnostics panel must NOT appear without `?diagnostics=foundation` · destination count must not be frozen or invented · shell nav must not create domain state (SC-001 hard boundary) · deep-work bottom must be `hidden+inert` when closed.
 
 ## 12. Dependencies & inputs
-Inputs: `W01_REQUIREMENTS.csv`, SurfaceProfiles shell/today, applicable Owner-decision rows, oracles (none W01-specific), visual references (presentation only), `../05_foundation/ownership_adjudication.md`. Deps: foundation/global shared owners (consume-only), persistence seed (CBF-001 — W05-owned) for today state.
+Inputs: `W01_REQUIREMENTS.csv`, SurfaceProfiles shell/today, applicable Owner-decision rows, oracles (none W01-specific), visual references (CONSTRUCTION AUTHORITY — see `VISUAL_EXECUTION_STANDARD.md` §2), `../05_foundation/ownership_adjudication.md`. Deps: foundation/global shared owners (consume-only), persistence seed (CBF-001 — W05-owned) for today state.
 
 ## 13. Donor/reference map
 Library Editor v1.2.17 = accepted design donor (OWNER-20260910-003) for editor primitives only; Blueprint material = requirement/value/evidence input only (OWNER-20260910-004); donor disposition per `archaeology/DONOR_PRESERVE_IMPROVE_REJECT_REGISTER.csv`.
