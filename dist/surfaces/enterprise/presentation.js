@@ -63,14 +63,15 @@ const TEXT={
     noBaselines:'No Baseline is pinned yet.',stateLabel:'State',baselineLabel:'Baseline',lineageLabel:'Lineage',digestLabel:'Digest',statusLabel:'Status',
     deepValidation:'Validation result',deepHistory:'History',deepProv:'Provenance boundary',
     facetCount:'objects',template:'template',none:'None',
-    hintStatus:'Select an object or use the toolbar commands to author the twin.',
+    hintStatus:'Select a topology object to inspect it.',
     tabsLabel:'Enterprise workbench views',lblTarget:'Target',cancel:'Cancel',done:'completed',
     stalePreview:'Twin marked BASELINE_STALE for an explicit rebase preview.',
     immutableNotice:'Published revision is immutable. Selection and analysis remain interactive; create a successor revision to write.',
     staleNotice:'Twin baseline is stale. Modelling remains interactive; Run preparation is blocked until explicit rebase.',
     facetEmpty:'no Enterprise object in this facet yet.',
     baselinePinned:'Exact Baseline identity pinned.',applyRelation:'Validate and apply relation',
-    relationCommitted:'Typed relation committed; geometry was not used as semantic truth.'
+    relationCommitted:'Typed relation committed; geometry was not used as semantic truth.',
+    cardComposition:'Model composition',cardBinding:'Binding & validation',relationsLabel:'Typed relations',objectsBacked:'Enterprise-backed',objectsLocal:'Simulation-local'
   },
   ar:{
     eyebrow:'مساحة عمل التوأم الرقمي لمؤسسة المؤسسة',structurePane:'بنية المؤسسة',contextPane:'سياق التحديد',
@@ -104,14 +105,15 @@ const TEXT={
     noBaselines:'لم يُثبّت أي Baseline بعد.',stateLabel:'الحالة',baselineLabel:'Baseline',lineageLabel:'السلالة',digestLabel:'البصمة',statusLabel:'الوضع',
     deepValidation:'نتيجة التحقق',deepHistory:'السجل',deepProv:'حدود الإثبات',
     facetCount:'كائنًا',template:'قالب',none:'لا شيء',
-    hintStatus:'حدّد كائنًا أو استخدم أوامر الشريط لتأليف التوأم.',
+    hintStatus:'حدّد كائنًا في الطوبولوجيا لفحصه.',
     tabsLabel:'عروض مساحة عمل المؤسسة',lblTarget:'الهدف',cancel:'إلغاء',done:'اكتمل',
     stalePreview:'وُعلّم التوأم BASELINE_STALE كمعاينة إعادة ارتكاز صريحة.',
     immutableNotice:'الإصدار المنشور غير قابل للتعديل. يبقى التحديد والتحليل تفاعليين؛ أنشئ إصدارًا خليّدًا للكتابة.',
     staleNotice:'خط أساس التوأم قديم. تبقى النمذجة تفاعلية؛ تحضير التشغيل متوقف حتى إعادة الارتكاز.',
     facetEmpty:'لا يوجد كائن مؤسسة في هذا المحور بعد.',
     baselinePinned:'تم تثبيت هوية Baseline الدقيقة.',applyRelation:'تحقق من العلاقة وطبّقها',
-    relationCommitted:'تم الالتزام بالعلاقة المحددة النوع؛ لم تُستخدم الهندسة كحقيقة دلالية.'
+    relationCommitted:'تم الالتزام بالعلاقة المحددة النوع؛ لم تُستخدم الهندسة كحقيقة دلالية.',
+    cardComposition:'تركيب النموذج',cardBinding:'الارتكاز والتحقق',relationsLabel:'العلاقات المحددة النوع',objectsBacked:'كائنات المؤسسة',objectsLocal:'كائنات المحاكاة المحلية'
   }
 };
 const T=()=>TEXT[activeLocale()]||TEXT.en;
@@ -158,9 +160,13 @@ const STYLE=`
 .ent-status{margin-inline-start:auto;font-size:11.5px;color:var(--text2);max-width:48%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:end}
 .ent-status[data-tone=error]{color:var(--bad)}
 .ent-status[data-tone=success]{color:var(--ok)}
+.ent-status[data-tone=hint]{color:var(--text3)}
 .ent-canvas{position:relative;flex:1;min-height:200px;overflow:hidden;background:var(--bg0)}
 .ent-canvas .spatial-host{height:100%;min-height:0;flex:none}
-.ent-canvas .spatial-readout{left:auto;right:auto;inset-inline-end:14px;inset-block-end:12px}
+.ent-canvas .spatial-readout{left:auto;right:14px;inset-block-end:12px}
+/* The shared readout declares direction:ltr for itself, so logical end would not mirror it;
+   pin it explicitly opposite the mirrored legend to keep the two from colliding in RTL. */
+[dir=rtl] .ent-canvas .spatial-readout{left:14px;right:auto}
 .ent-canvas .minimap{left:auto;right:auto;inset-inline-end:12px;inset-block-end:34px}
 .ent-legend{position:absolute;inset-block-end:12px;inset-inline-start:14px;z-index:3;width:206px;max-width:calc(100% - 28px);padding:9px 11px;border:1px solid var(--line2);border-radius:9px;background:color-mix(in srgb,var(--bg1) 95%,transparent);font-size:10.5px}
 .ent-legend h4{margin:0 0 7px;font-size:10.5px;font-weight:650;letter-spacing:.06em;color:var(--text2)}
@@ -235,6 +241,7 @@ const STYLE=`
 .ent-table td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}
 .ent-table tbody tr:last-child td{border-bottom:0}
 .ent-table tr[data-active=true] td{background:var(--as)}
+.ent-table-wrap{overflow-x:auto;min-width:0}
 /* ---- temporary deep work (shell BOTTOM / collapsed fallback) ---- */
 .ent-deep{background:var(--bg1);border-top:1px solid var(--line)}
 .ent-deep>summary{cursor:pointer;padding:9px 16px;font-size:12.5px;font-weight:650;display:flex;align-items:center;gap:8px;list-style:none}
@@ -266,11 +273,12 @@ export function createEnterprisePresentationBinding(composition){
 export function renderEnterpriseSurface(root,composition,{dir='ltr',spatialView=null}={}){
   if(!root||!composition)throw Error('ENTERPRISE_PRESENTATION_INPUT_REQUIRED');
   createEnterprisePresentationBinding(composition);
-  root.dir=dir;root.dataset.surface='enterprise';root.dataset.workspaceInteraction='WORKSPACE_FIRST';delete root.dataset.readonly;
+  if(typeof document!=='undefined')root.removeAttribute('dir');else root.dir=dir;
+  root.dataset.surface='enterprise';root.dataset.workspaceInteraction='WORKSPACE_FIRST';delete root.dataset.readonly;
   let spatial=spatialView,mode='topology',status='',statusTone='neutral';
   const regionState={shell:false,observers:[],reprojects:0,shellPending:false};
 
-  const nodeOptions=()=>composition.domain.relations.nodes||[];
+  const nodeOptions=()=>(composition.domain.relations.nodes||[]).map(node=>({...node,status:'',subtitle:node.type?`Type: ${node.type}`:''}));
   const relationPayloadFromForm=form=>{const source=form.elements.source.value,target=form.elements.target.value,type=form.elements.type.value;const payload={source,target,type,direction:'directed',expectedVersion:composition.domain.relations.version};if(type==='CONNECTS_TO'){payload.sourcePin=`${source}:eth0`;payload.targetPin=`${target}:eth0`;}return payload};
   const setStatus=(message,tone='neutral')=>{status=String(message||'');statusTone=tone;const node=root.querySelector('[data-enterprise-status]');if(node){node.textContent=status||T().hintStatus;node.dataset.tone=tone}};
   const execute=(id,payload={})=>{const result=composition.bus.execute(id,{...payload,route:'enterprise-presentation'});if(result?.ok===false){setStatus(`${result.code}: ${result.reason}`,'error');return result}setStatus(`${id} · ${T().done}`,'success');draw({preserveSpatial:true});return result};
@@ -281,7 +289,7 @@ export function renderEnterpriseSurface(root,composition,{dir='ltr',spatialView=
   const objectList=rows=>rows.length?`<ul class="ent-list">${rows.join('')}</ul>`:`<p>${esc(T().none)}</p>`;
 
   /* ---------------------------------------------------------- center identity head */
-  const identityHead=s=>`<div class="ent-canvas-head"><h2>${esc(s.twinId?T().twinTitle:T().topologyTitle)}</h2><div class="ent-chips">${chip(`${s.authoring==='PUBLISHED'?T().publishedRevision:T().draftRevision} ${revisionToken(s)}`,stateTone(s.authoring))}${stateChip(s.twinBinding)}${chip(`${s.objects.length} ${T().objects}`)}</div><p class="ent-status" tabindex="-1" role="status" aria-live="polite" data-enterprise-status data-tone="${esc(statusTone)}">${esc(status)}</p></div>`;
+  const identityHead=s=>`<div class="ent-canvas-head"><h2>${esc(s.twinId?T().twinTitle:T().topologyTitle)}</h2><div class="ent-chips">${chip(`${s.authoring==='PUBLISHED'?T().publishedRevision:T().draftRevision} ${revisionToken(s)}`,stateTone(s.authoring))}${stateChip(s.twinBinding)}${chip(`${s.objects.length} ${T().objects}`)}</div><p class="ent-status" tabindex="-1" role="status" aria-live="polite" data-enterprise-status data-tone="${esc(status?statusTone:'hint')}" title="${esc(status)}">${esc(status||T().hintStatus)}</p></div>`;
 
   const validationRows=s=>{
     const checks=[[!!s.enterpriseId,T().lblId,s.enterpriseId],[!!s.revisionId,T().lblRevision,s.revisionId],[s.baseline.status==='AVAILABLE'&&!!s.baseline.id&&!!s.baseline.revision&&!!s.baseline.digest,T().baselineLabel,s.baseline.id||T().noBaselines]];
@@ -306,24 +314,32 @@ export function renderEnterpriseSurface(root,composition,{dir='ltr',spatialView=
     const t=T();
     const lineage=s.lineage.at(-1);
     const published=s.publishedRevisions.filter(r=>r.revisionId!==s.revisionId);
+    const backed=s.objects.filter(o=>o.classification==='ENTERPRISE_BACKED').length,local=s.objects.length-backed;
+    const relationTypes=[...new Set(s.relations.map(r=>r.type))];
     return `<div class="ent-panel">
       <section class="ent-card"><h3>${esc(t.cardIdentity)}${stateChip(s.authoring)}</h3><dl class="ent-kv"><dt>${esc(t.cardEnterprise)}</dt><dd>${bdi(s.enterpriseId||t.none)}</dd><dt>${esc(t.lblRevision)}</dt><dd>${bdi(s.revisionId)}</dd><dt>${esc(t.stateLabel)}</dt><dd>${esc(s.authoring)}</dd><dt>${esc(t.baselineLabel)}</dt><dd>${bdi(s.baseline.id||t.none)}</dd><dt>${esc(t.secRelations)}</dt><dd>${bdi(`${s.relations.length} · v${s.relationVersion}`)}</dd></dl></section>
       <p class="ent-note" data-tone="${lineage?'':'warn'}">${esc(lineage?`${t.lineageLabel}: ${lineage.sourceRevisionId} → ${lineage.successorRevisionId} · ${lineage.reason}`:t.workingRoot)}</p>
+      <div class="ent-split">
       <section class="ent-card"><h3>${esc(t.cardRevisions)}${chip(`${s.publishedRevisions.length} ${t.tabRevisions}`)}</h3>
-        <table class="ent-table"><thead><tr><th>${esc(t.lblRevision)}</th><th>${esc(t.stateLabel)}</th><th>${esc(t.lineageLabel)}</th><th>${esc(t.digestLabel)}</th></tr></thead><tbody>
-        <tr data-active="true"><td><bdi dir="ltr">${esc(s.revisionId)}</bdi></td><td>${esc(s.authoring)}</td><td>${esc(lineage?lineage.sourceRevisionId:t.workingRoot)}</td><td><bdi dir="ltr">${esc(s.baseline.digest||t.none)}</bdi></td></tr>
-        ${published.map(r=>`<tr><td><bdi dir="ltr">${esc(r.revisionId)}</bdi></td><td>${esc(r.authoring)}</td><td>${esc(r.reason||'—')}</td><td><bdi dir="ltr">${esc(r.baselineDigest||t.none)}</bdi></td></tr>`).join('')}
-        </tbody></table></section>
-    </div>`;
+        <div class="ent-table-wrap"><table class="ent-table"><thead><tr><th>${esc(t.lblRevision)}</th><th>${esc(t.stateLabel)}</th><th>${esc(t.lineageLabel)}</th><th>${esc(t.relationsLabel)}</th><th>${esc(t.digestLabel)}</th></tr></thead><tbody>
+        <tr data-active="true"><td><bdi dir="ltr">${esc(s.revisionId)}</bdi></td><td>${esc(s.authoring)}</td><td>${esc(lineage?lineage.sourceRevisionId:t.workingRoot)}</td><td>${bdi(String(s.relations.length))}</td><td><bdi dir="ltr">${esc(s.baseline.digest||t.none)}</bdi></td></tr>
+        ${published.map(r=>`<tr><td><bdi dir="ltr">${esc(r.revisionId)}</bdi></td><td>${esc(r.authoring)}</td><td>${esc(r.reason||'—')}</td><td>${bdi(String(r.relationCount??0))}</td><td><bdi dir="ltr">${esc(r.baselineDigest||t.none)}</bdi></td></tr>`).join('')}
+        </tbody></table></div></section>
+      <section class="ent-card"><h3>${esc(t.cardComposition)}${chip(`${s.objects.length} ${t.objects}`)}</h3><dl class="ent-kv"><dt>${esc(t.objectsBacked)}</dt><dd>${bdi(String(backed))}</dd><dt>${esc(t.objectsLocal)}</dt><dd>${bdi(String(local))}</dd><dt>${esc(t.relationsLabel)}</dt><dd>${bdi(String(s.relations.length))}</dd>${relationTypes.map(type=>`<dt><bdi dir="ltr">${esc(type)}</bdi></dt><dd>${bdi(String(s.relations.filter(r=>r.type===type).length))}</dd>`).join('')}</dl></section>
+      </div></div>`;
   };
 
   const baselinesPanel=s=>{
     const t=T();
     const rows=s.baselines.map(b=>`<li><span class="ent-dot" data-tone="${b.status==='AVAILABLE'?'success':'warn'}"></span><span class="lbl"><bdi dir="ltr">${esc(b.id||t.none)}</bdi></span><span class="meta">${esc(`r${b.revision||'—'} · ${b.status||'UNAVAILABLE'}`)}</span></li>`);
+    const valid=composition.domain.validate();
     return `<div class="ent-panel"><div class="ent-split">
       <section class="ent-card"><h3>${esc(t.cardBaselines)}${chip(`${s.baselines.length} ${t.tabBaselines}`)}</h3>${objectList(rows)}</section>
       <section class="ent-card"><h3>${esc(t.cardBaselineDetail)}${stateChip(s.baseline.status)}</h3><dl class="ent-kv"><dt>${esc(t.lblId)}</dt><dd>${bdi(s.baseline.id||t.none)}</dd><dt>${esc(t.lblRevision)}</dt><dd>${bdi(s.baseline.revision||t.none)}</dd><dt>${esc(t.digestLabel)}</dt><dd>${bdi(s.baseline.digest||t.none)}</dd><dt>${esc(t.cardTwin)}</dt><dd>${esc(s.twinBinding)}</dd></dl></section>
-    </div><p class="ent-note" data-tone="warn">${esc(t.noteImmutable)}</p></div>`;
+      </div><div class="ent-split">
+      <section class="ent-card"><h3>${esc(t.cardBinding)}${chip(valid.ok?t.validated:t.validationFailed,valid.ok?'success':'error')}</h3><dl class="ent-kv"><dt>${esc(t.cardTwin)}</dt><dd>${esc(s.twinBinding)}</dd><dt>${esc(t.objectsBacked)}</dt><dd>${bdi(String(s.objects.filter(o=>o.classification==='ENTERPRISE_BACKED').length))}</dd><dt>${esc(t.relationsLabel)}</dt><dd>${bdi(String(s.relations.length))}</dd><dt>${esc(t.cardRevisions)}</dt><dd>${bdi(String(s.publishedRevisions.length))}</dd></dl></section>
+      <section class="ent-card"><h3>${esc(t.secValidationRules)}${chip(valid.ok?t.validated:t.validationFailed,valid.ok?'success':'error')}</h3>${validationRows(s)}</section>
+      </div><p class="ent-note" data-tone="warn">${esc(t.noteImmutable)}</p></div>`;
   };
 
   const statePanel=s=>{
@@ -338,7 +354,7 @@ export function renderEnterpriseSurface(root,composition,{dir='ltr',spatialView=
     </div></div>`;
   };
 
-  const topologyCanvas=()=>`<div class="ent-canvas"><div id="spatialHost" data-enterprise-spatial class="spatial-host" aria-label="${esc(T().topologyTitle)}"></div><aside class="ent-legend" aria-label="${esc(T().legend)}"><h4>${esc(T().legend)}</h4><ul><li><span class="key" aria-hidden="true"></span><span>${esc(T().legendTyped)}</span></li><li><span class="key derived" aria-hidden="true"></span><span>${esc(T().legendDerived)}</span></li></ul><p>${esc(T().legendNote)}</p></aside></div>`;
+  const topologyCanvas=()=>`<div class="ent-canvas"><div id="spatialHost" data-enterprise-spatial class="spatial-host" aria-label="${esc(T().topologyTitle)}"></div><aside class="ent-legend" aria-label="${esc(T().legend)}"><h4>${esc(T().legend)}</h4><ul><li><span class="key" aria-hidden="true"></span><span>${esc(T().legendTyped)}</span></li><li><span class="key derived" aria-hidden="true"></span><span>${esc(T().legendDerived)}</span></li></ul></aside></div>`;
 
   const centerPanel=s=>{
     const body=mode==='twins'?twinsPanel(s):mode==='revisions'?revisionsPanel(s):mode==='baselines'?baselinesPanel(s):mode==='state'?statePanel(s):topologyCanvas();
@@ -366,7 +382,7 @@ export function renderEnterpriseSurface(root,composition,{dir='ltr',spatialView=
   const structureHtml=s=>{
     const t=T();
     const facetCount=kw=>s.objects.filter(o=>`${o.type||''} ${o.name||''}`.toLowerCase().includes(kw)).length;
-    const objectRow=o=>`<button type="button" class="ent-row" data-object="${esc(o.id)}" aria-current="${s.selection.id===o.id}">${icon('ref')}<span class="lbl">${esc(o.name||o.id)}</span><span class="cnt">${esc(o.type||o.id)}</span></button>`;
+    const objectRow=o=>`<button type="button" class="ent-row" data-object="${esc(o.id)}" aria-current="${s.selection.id===o.id}" title="${esc(`${o.name||o.id} · ${o.type||''}`)}">${icon('ref')}<span class="lbl">${esc(o.name||o.id)}</span><span class="ent-dot" data-class="${esc(o.classification||'')}" aria-hidden="true"></span></button>`;
     const facetRow=([key,kw])=>{const count=facetCount(kw);return `<button type="button" class="ent-row" data-facet="${esc(kw)}">${icon('chev')}<span class="lbl">${esc(t[key])}</span><span class="cnt">${count||''}</span></button>`};
     const backed=s.objects.filter(o=>o.classification==='ENTERPRISE_BACKED'),local=s.objects.filter(o=>o.classification==='SIMULATION_LOCAL');
     const sec=(glyph,title,count,rows)=>`<section class="ent-sec"><h3>${icon(glyph)}<span>${esc(title)}</span>${count===null?'':`<span class="ent-count">${esc(String(count))}</span>`}</h3>${rows}</section>`;
@@ -404,7 +420,7 @@ export function renderEnterpriseSurface(root,composition,{dir='ltr',spatialView=
 
     const tabs=[['topology',t.tabTopology],['twins',t.tabTwins],['revisions',t.tabRevisions],['baselines',t.tabBaselines],['state',t.tabState]];
     const tools=mode==='topology'
-      ? `<div class="ent-tools"><button class="btn ent-btn" type="button" data-zoom="out" aria-label="${esc(t.zoomOut)}" title="${esc(t.zoomOut)}">−</button><button class="btn ent-btn" type="button" data-zoom="in" aria-label="${esc(t.zoomIn)}" title="${esc(t.zoomIn)}">+</button><button class="btn ent-btn" type="button" data-zoom="fit">${esc(t.fit)}</button></div>`
+      ? `<div class="ent-tools">${commandButton('enterprise.edit',t.cmdEdit,composition)}<button class="btn ent-btn" type="button" data-zoom="out" aria-label="${esc(t.zoomOut)}" title="${esc(t.zoomOut)}">−</button><button class="btn ent-btn" type="button" data-zoom="in" aria-label="${esc(t.zoomIn)}" title="${esc(t.zoomIn)}">+</button><button class="btn ent-btn" type="button" data-zoom="fit" title="${esc(t.fit)}">${icon('focus')}${esc(t.fit)}</button></div>`
       : `<div class="ent-tools"><span class="ent-hint">${esc(mode==='twins'?s.twinBinding:mode==='revisions'?`${s.authoring} · ${s.publishedRevisions.length} ${t.tabRevisions}`:mode==='baselines'?`${s.baselines.length} ${t.tabBaselines}`:`v${s.relationVersion} · ${s.relations.length}`)}</span></div>`;
 
     const header=`<header class="enterprise-top" data-region="TOP">
@@ -477,7 +493,7 @@ export function renderEnterpriseSurface(root,composition,{dir='ltr',spatialView=
     try{
       ws.region('LEFT',{html:structureHtml(s),label:t.structurePane});
       ws.region('RIGHT',{html:rightContext(s),label:t.contextPane});
-      ws.region('BOTTOM',{html:`<div class="ent-deep-host" data-ent-region="BOTTOM">${deepHtml(s)}</div>`,label:`${t.deepLabel} · ${t.deepSummary}`,summary:t.deepSummary,open:false});
+      ws.region('BOTTOM',{html:`<div class="ent-deep-host" data-ent-region="BOTTOM">${deepHtml(s)}</div>`,label:t.deepLabel,summary:t.deepSummary,open:false});
       regionState.shell=true;
       suppressPaneSiblings();
     }catch(error){if(typeof console!=='undefined')console.warn('[W03-ENTERPRISE] region projection failed',error)}

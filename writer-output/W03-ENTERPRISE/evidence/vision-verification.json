@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "unit": "W03-ENTERPRISE",
+  "subject": "Vision-channel verification for the ENTERPRISE surface visual claims",
+  "status": "OPEN__VISION_UNRELIABLE__FALLBACK_TO_HASH_BOUND_METRICS",
+  "standard": "visual-fidelity-review R3b — vision may serve stale or unrelated frames per read; a passing canary does not clear a later read",
+  "method": "Every image read was cross-checked against ground truth of the same bytes: sha256 + PNG dimensions + tesseract OCR (--psm 11, conf>45) + live DOM geometry probes",
+  "tesseractLanguagesAvailable": ["eng", "osd"],
+  "arabicOcrAvailable": false,
+  "mismatchIncidents": [
+    {
+      "id": "VV-01",
+      "requestedPath": "writer-output/W03-ENTERPRISE/evidence/crops/canary-7391.png",
+      "requestedBytes": {"sha256": "ca26c17ac62e17643cab689269cd004f3ab2eebb50fbfb6bf3ea2d9e0e3867ae", "dims": "400x160", "content": "solid magenta + yellow text 'W03 CANARY 7391'"},
+      "returnedFrame": "an ENTERPRISE stage screenshot (not the canary; not the file at the requested path)",
+      "groundTruth": "tesseract on the requested bytes reads 'wos CANARY7391'",
+      "verdict": "MISMATCH — requested bytes were never delivered to the vision channel"
+    },
+    {
+      "id": "VV-02",
+      "requestedPath": "writer-output/W03-ENTERPRISE/evidence/crops/sbs-ref-vs-cand-4e71.png",
+      "requestedBytes": {"sha256_prefix": "7498b9df9a25434b", "dims": "1100x1586", "content": "side-by-side: reference on top, candidate below"},
+      "returnedFrame": "an unrelated RTL stage-only screenshot with no reference image and no shell chrome",
+      "groundTruth": "tesseract on the requested bytes finds the REFERENCE label at y=12 ('... (1503, 1046)') and the CANDIDATE label at y=805 followed by the CEP shell header (Knowledge & Learning / Simulation & Enterprise)",
+      "verdict": "MISMATCH — returned frame does not correspond to the requested file"
+    },
+    {
+      "id": "VV-03",
+      "requestedPath": "writer-output/W03-ENTERPRISE/evidence/crops/l1503-center.png (first read) and r1503-center.png",
+      "requestedBytes": {"note": "after2 capture (sha256 per receipt-after2.json)"},
+      "returnedFrame": "the PRE-FIX (after1) layout showing the structure rail inside the stage and an empty shell left pane",
+      "groundTruth": "tesseract on ltr-1503-topology.png (sha256 verified = receipt after2 value 69949ae446e9335692eb1e001459fb100df5e3a424037e8464c6ac35efad9d5b) places 'Enterprise structure' at x=147 y=209 and the facet rows at x=59 y=287..514 — i.e. inside the shell LEFT pane, not inside the stage; DOM probe independently reports leftRegionOwned=true",
+      "verdict": "STALE FRAME — returned a previously rendered state of a different capture"
+    }
+  ],
+  "consequence": "No visual verdict in VISUAL_EXECUTION_REPORT.json rests on an image-channel read. All VISUAL_* statements are derived from (a) sha256-verified PNG bytes, (b) tesseract OCR of those same bytes, (c) pixel ink statistics computed from those bytes, (d) live DOM geometry/text probes taken in the same capture run.",
+  "recommendedControllerAction": "Re-verify L1/L2 of the ENTERPRISE candidate with a working image channel before Owner submission; treat vision verification as OPEN until a canary plus the actual candidate bytes are both read correctly in the same session."
+}

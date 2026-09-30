@@ -30,7 +30,7 @@ const argValue = n => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] :
 const label = argValue('--label') || 'baseline';
 
 const CASES = [
-  {id: 'ltr-1503', w: 1503, h: 1046, locale: 'en', dir: 'ltr', states: ['topology', 'selected', 'twins', 'revisions', 'baselines', 'state']},
+  {id: 'ltr-1503', w: 1503, h: 1046, locale: 'en', dir: 'ltr', states: ['topology', 'selected', 'composer', 'twins', 'revisions', 'baselines', 'state']},
   {id: 'rtl-1503', w: 1503, h: 1046, locale: 'ar', dir: 'rtl', states: ['topology', 'revisions']},
   {id: 'ltr-1024', w: 1024, h: 900, locale: 'en', dir: 'ltr', states: ['topology']},
   {id: 'ltr-820', w: 820, h: 900, locale: 'en', dir: 'ltr', states: ['topology', 'revisions']}
@@ -65,6 +65,8 @@ const probe = () => {
     lang: document.documentElement.lang,
     preferenceLocale: (() => { try { return window.CEPFoundation?.preferences?.resolve?.('locale')?.preferredValue; } catch { return null; } })(),
     stagePresent: !!stage,
+    stageDirection: stage ? getComputedStyle(stage).direction : null,
+    headerOrder: stage ? [...stage.querySelectorAll('.ent-id,.ent-actions,.enterprise-modebar')].map(n => `${n.className.split(' ')[0]}@${Math.round(n.getBoundingClientRect().x)}`) : [],
     rect: stage ? {w: Math.round(stage.getBoundingClientRect().width), h: Math.round(stage.getBoundingClientRect().height)} : null,
     panes: {
       leftState: q('#leftPane')?.dataset.state || null,
@@ -94,7 +96,19 @@ const probe = () => {
       chips: qa('.ent-chip').length,
       tables: qa('[data-region=CENTER] table').length,
       tableRows: qa('[data-region=CENTER] table tbody tr').length,
-      listItems: qa('[data-region=CENTER] .ent-list li').length
+      listItems: qa('[data-region=CENTER] .ent-list li').length,
+      nodeTextOverlaps: (() => {
+        const hits = [];
+        qa('[data-region=CENTER] .spatial-node-card').forEach(card => {
+          const texts = [...card.querySelectorAll('text')].filter(t => (t.textContent || '').trim() && t.getBoundingClientRect().width > 0);
+          for (let i = 0; i < texts.length; i++) for (let j = i + 1; j < texts.length; j++) {
+            const a = texts[i].getBoundingClientRect(), b = texts[j].getBoundingClientRect();
+            if (Math.min(a.right, b.right) - Math.max(a.left, b.left) > 2 && Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 2)
+              hits.push(`${(card.dataset.node || '').slice(0, 12)}:${texts[i].textContent.trim().slice(0, 16)}~${texts[j].textContent.trim().slice(0, 16)}`);
+          }
+        });
+        return hits;
+      })()
     },
     clipped, vertClip,
     emptyRegions: ['[data-region=TOP]', '[data-region=CENTER]'].concat(q('#domainLeftRegion') ? ['#domainLeftRegion'] : []).filter(s => words(text(s)) === 0)
@@ -109,6 +123,14 @@ const enact = state => {
     if (!btn) return {ok: false, reason: 'no data-object in structure region'};
     btn.click();
     return {ok: true, picked: btn.dataset.object};
+  }
+  if (state === 'composer') {
+    const btn = document.querySelector('#foundationStage [data-command="enterprise.edit"]');
+    if (!btn) return {ok: false, reason: 'no in-stage relation composer affordance'};
+    if (btn.disabled) return {ok: false, reason: 'relation composer disabled: ' + (btn.title || '')};
+    btn.click();
+    const form = document.querySelector('#foundationStage [data-relation-composer]');
+    return {ok: !!form, picked: btn.dataset.command, form: !!form};
   }
   const b = [...document.querySelectorAll('.enterprise-modebar [data-mode]')].find(n => n.dataset.mode === state);
   if (!b) return {ok: false, reason: `no [data-mode=${state}]`};
