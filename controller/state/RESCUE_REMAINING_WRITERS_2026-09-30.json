@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "rescueId": "RESCUE-REMAINING-WRITERS-2026-09-30-01",
+  "date": "2026-09-30",
+  "branch": "writer/mi-serial",
+  "preRescueHead": "149f7f5df034c3cb5c15428ddc9d113dc0433964",
+  "preRescueRemoteHead": "149f7f5df034c3cb5c15428ddc9d113dc0433964",
+  "preManifestStagedPathCount": 313,
+  "unitWriterOutputPathCounts": {
+    "W02-LIBRARY": 28,
+    "W02-LEARN": 21,
+    "W02-VISUALIZE": 10,
+    "W03-LABS": 27,
+    "W03-RUNS": 62,
+    "W04-REVIEWS": 0,
+    "W04-MASTERY": 2,
+    "W04-PORTFOLIO": 0,
+    "W05-AUDIT": 18,
+    "W05-BACKUP": 52,
+    "W05-RELEASES": 17
+  },
+  "stagedInventorySha256": "787f73c0c2f7dd0b0305f5027f40c4c0631dd235e65d820b9072da034e45db77",
+  "status": {
+    "durableRescue": "READY_FOR_COMMIT",
+    "controllerReview": "PENDING",
+    "ownerAcceptance": "NOT_OWNER_ACCEPTED",
+    "productAcceptance": "NOT_CLAIMED"
+  },
+  "whitespaceValidation": {
+    "rawGitDiffCheck": "FAILED_NONBLOCKING",
+    "crlfAwareGitDiffCheck": "FAILED_NONBLOCKING",
+    "reason": "Writer-generated staged files contain trailing whitespace/CRLF artifacts; content was intentionally not rewritten during rescue."
+  },
+  "includedScope": [
+    "remaining Writer-owned TypeScript source/adapters",
+    "matching Writer-owned dist output",
+    "non-runtime Writer output/evidence/reports"
+  ],
+  "excludedScope": [
+    "assurance/**",
+    "stack/MEASURED_COMPARISON.json",
+    "writer-output/W04/reaudit-evidence/**",
+    "writer-output/W03-ENTERPRISE/**",
+    "stack/native-typescript/surfaces/manual_ai/**",
+    "dist/surfaces/manual_ai/**",
+    "writer-output/W05-MANUAL-AI/**",
+    "all .runtime/**",
+    "all runtime/database artifacts"
+  ],
+  "notes": [
+    "This checkpoint preserves local remaining Writer work without claiming acceptance.",
+    "W03-ENTERPRISE was rescued independently and is intentionally excluded.",
+    "Global RESUME_STATE reconciliation remains deferred until after durable rescue.",
+    "The whitespace findings are recorded rather than silently rewriting Writer artifacts."
+  ],
+  "generatedAtUtc": "2026-09-30T20:07:01.102456+00:00"
+}

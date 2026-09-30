@@ -1,0 +1,125 @@
+{
+  "lineage": {
+    "branch": "writer/mi-serial",
+    "commit": "d2b3e47615d2ddca738925a1f1b0df2d4449afab",
+    "treeSha": "1bc68bbeaa8362622914ccb86224560e04e7bdbe",
+    "worktreeDelta": "UNCOMMITTED_SURFACE_DELTA",
+    "capturedAt": "2026-09-30T18:48:42.663Z",
+    "viewport": "1536x1024",
+    "lang": "en",
+    "harness": "writer-output/W05-BACKUP/evidence/harness/bottom.mjs",
+    "runtime": "playwright-chromium-headless"
+  },
+  "checks": [
+    {
+      "id": "bottom.open",
+      "status": "FAIL",
+      "detail": "{\"state\":\"closed\",\"rows\":0,\"tableRect\":null,\"details\":false,\"summary\":\"Deep work unavailable\"}"
+    },
+    {
+      "id": "bottom.ledger-rows-visible",
+      "status": "FAIL",
+      "detail": "rows=0"
+    }
+  ],
+  "captures": [
+    {
+      "kind": "element",
+      "file": "writer-output/W05-BACKUP/evidence/postfix4-bottom-open.png",
+      "sha256": "a0b65fa74ee37b97d0d5614d573332a8f2fef36d500c944a96ebecd8a871b591",
+      "bytes": 3650,
+      "dims": "1536x39",
+      "branch": "writer/mi-serial",
+      "commit": "d2b3e47615d2ddca738925a1f1b0df2d4449afab",
+      "treeSha": "1bc68bbeaa8362622914ccb86224560e04e7bdbe",
+      "worktreeDelta": "UNCOMMITTED_SURFACE_DELTA",
+      "capturedAt": "2026-09-30T18:48:42.663Z",
+      "viewport": "1536x1024",
+      "lang": "en",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/bottom.mjs",
+      "runtime": "playwright-chromium-headless"
+    },
+    {
+      "kind": "viewport",
+      "file": "writer-output/W05-BACKUP/evidence/postfix4-bottom-open-full.png",
+      "sha256": "8bce50bb03f110d909c8014255a4b1ac0a91e2e9e0af8fe2982aaad64206c81e",
+      "bytes": 298682,
+      "dims": "1536x1024",
+      "branch": "writer/mi-serial",
+      "commit": "d2b3e47615d2ddca738925a1f1b0df2d4449afab",
+      "treeSha": "1bc68bbeaa8362622914ccb86224560e04e7bdbe",
+      "worktreeDelta": "UNCOMMITTED_SURFACE_DELTA",
+      "capturedAt": "2026-09-30T18:48:42.663Z",
+      "viewport": "1536x1024",
+      "lang": "en",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/bottom.mjs",
+      "runtime": "playwright-chromium-headless"
+    }
+  ],
+  "attempts": [
+    {
+      "name": "click-bottomToggle",
+      "fired": true,
+      "state": "closed",
+      "h": 39,
+      "rows": 4,
+      "tableVisible": false
+    },
+    {
+      "name": "click-toggle-action",
+      "fired": true,
+      "state": "closed",
+      "h": 39,
+      "rows": 4,
+      "tableVisible": false
+    },
+    {
+      "name": "command-foundation.bottom",
+      "fired": true,
+      "state": "closed",
+      "h": 39,
+      "rows": 0,
+      "tableVisible": false
+    }
+  ],
+  "notes": [],
+  "candidates": {
+    "toggle": {
+      "tag": "BUTTON",
+      "text": "",
+      "action": "toggle-bottom",
+      "cls": "btn iconbtn"
+    },
+    "actionButtons": [
+      {
+        "text": "السجل",
+        "action": "bottom-tab",
+        "id": ""
+      },
+      {
+        "text": "مقارنة",
+        "action": "bottom-tab",
+        "id": ""
+      },
+      {
+        "text": "استرداد",
+        "action": "bottom-tab",
+        "id": ""
+      },
+      {
+        "text": "",
+        "action": "toggle-bottom",
+        "id": "bottomToggle"
+      }
+    ],
+    "state": "closed"
+  },
+  "final": {
+    "state": "closed",
+    "rows": 0,
+    "tableRect": null,
+    "details": false,
+    "summary": "Deep work unavailable"
+  },
+  "pageErrors": []
+}

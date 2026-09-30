@@ -115,6 +115,93 @@
       "rootCause": "SHARED_COMPONENT",
       "defect": "Donor `#editorDocument` and generic pane siblings were visible alongside the labs composition (donor leak into the labs route).",
       "fix": "Surface-local carrier policy: suppress non-region pane siblings and the donor document on every render, re-asserted by a terminating MutationObserver. No shared file modified."
+    },
+    {
+      "id": "DEF-LAB-R01",
+      "severity": "V4",
+      "rootCause": "IMPLEMENTATION",
+      "defect": "First candidate build hung the renderer: the MutationObserver ownership check read `data-lab-region-owner` off the region HOST (`#domainLeftRegion` / `#domainContext`) while the attribute was written on the inner section, so the check always failed and re-rendered the regions in a loop.",
+      "fix": "Ownership stamped on the region hosts after each `workspace.region()` call, plus a synchronous re-entrancy guard in `assertRegions()`.",
+      "evidence": "After fix: consumer=labs, no page errors, 12/12 boot probes clean.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "DEF-LAB-R02",
+      "severity": "V3",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "Right pane had a 33px strip of foreign context chrome (`#rightPane .pbody .contextscope`) above the Lab Context region, showing Arabic content in an English session; the region started at y=282 while the left region started at y=238.",
+      "fix": "Surface-local suppression now forces `display:none!important` on non-region pane siblings (`[hidden]` alone was overridden by the donor's own display rule).",
+      "evidence": "Probe: all non-region siblings 0×0, left and right regions both top=238, `donorVisible: []`.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "DEF-LAB-R03",
+      "severity": "V3",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "Shared node cards are 132×62 with a single unwrapped `<text>` title: authored titles overflowed the card by up to +117px and ran over the connector labels (measured `titleRight` +42 / +71 / +117 / +76 for TASK-1..5).",
+      "fix": "Labs card geometry set through surface-owned inline presentation (156×104 model units, reference proportion), plus a post-render wrap pass that lays the title out as at most two balanced lines and the description as at most two lines.",
+      "evidence": "Probe: `over: 0` and `subOver: 0` for all 5 cards; titles `['Discover Input','Surface'] ['Test Input','Behavior'] ['Confirm Injection','Condition'] ['Inspect Simulated','Database Effect'] ['Interpret','Generated Signals'] — no ellipsis, full text retained in `aria-label`, structure pane and context pane.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "DEF-LAB-R04",
+      "severity": "V3",
+      "rootCause": "SHARED_COMPONENT",
+      "defect": "Relation endpoints are authored at the node centre (`x+66,y+31`) and nodes paint after edges, so arrowheads were hidden underneath the opaque card and only a stub of line was visible (measured 12 model units between TASK-1 and TASK-2).",
+      "fix": "Post-render correction through the shared SpatialView `change` hook: each `relation-line` endpoint is re-seated onto the card border (box exit/entry parameter), so the arrowhead lands on the card edge as in the reference. Runs after every shared render (pan/zoom/select/keyboard). Column pitch raised to 216 so connectors read as 60-unit segments.",
+      "evidence": "Probe: edges `(176,202)→(236,202)`, `(392,202)→(452,202)`, `(601,150)→(637,124)`, `(599,254)→(639,284)` — all seat on card borders.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "DEF-LAB-R05",
+      "severity": "V3",
+      "rootCause": "IMPLEMENTATION",
+      "defect": "LEFT/RIGHT handlers were bound before `renderRegions()` replaced the pane subtrees, so every structure-pane and context-pane click was dead after the first render.",
+      "fix": "Render order changed to regions → bind; covered by `structure.pane.task-rail-selects`, `structure.pane.facet-drives-context`, `arabic.rtl-structure-works`.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "DEF-LAB-R06",
+      "severity": "V2",
+      "rootCause": "IMPLEMENTATION",
+      "defect": "Shared `fit()` bounds a node at the shared default 132×62 box, so with Labs cards the last card was clipped by the canvas edge (`allInsideCanvas: false`, TASK-5 right = 1075 > canvas right 1061).",
+      "fix": "Local `fitToBox()` uses the same camera maths with the card box read back from the rendered card; `fit()` replaced at every call site owned by this surface.",
+      "evidence": "Probe: `allInsideCanvas: true`, `overlaps: []`.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "DEF-LAB-R07",
+      "severity": "V2",
+      "rootCause": "IMPLEMENTATION",
+      "defect": "Title wrap clipped TASK-5 to `Interpret / Generated…` — the measurement tolerance missed by 0.26px (`Generated Signals` = 119.258 vs available 119.000) and the greedy prefix cut at a poor word boundary.",
+      "fix": "Word-aligned wrap with a 2px tolerance and a balanced two-line split search (prefer the split where both lines fit).",
+      "evidence": "Probe: all five titles render fully with no `…`.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "DEF-LAB-R08",
+      "severity": "V2",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "The right pane showed the lab-level context on load, so the reference's per-task context rows (Objective type / Required capability / Permitted tools / Expected signal / Validation link / Completion contribution) were not visible in the default state.",
+      "fix": "First task is seeded as the domain selection at mount when nothing is selected; `Clear selection` deliberately returns to the lab-level context with an explicit hint.",
+      "evidence": "After: `1 selected · 5 objects` readout; 6 reference rows for TASK-1.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "DEF-LAB-R09",
+      "severity": "V1",
+      "rootCause": "SHARED_COMPONENT",
+      "defect": "The reference distinguishes Conditional Unlock (dashed) from Optional Branch (dashed + circle); the shared relation renderer only has solid/dashed stroke classes.",
+      "fix": "Legend keys preserved as the reference's three relationships; the optional branch is additionally marked by the `Optional` chip on its target node and the `Branches` group in the structure pane. Geometry not forked.",
+      "status": "RESIDUAL_ACCEPTED"
+    },
+    {
+      "id": "DEF-LAB-R10",
+      "severity": "V0",
+      "rootCause": "SHARED_COMPONENT",
+      "defect": "Shared multi-selection boundary (132×62) and minimap tiles (132×62) still assume the default card size.",
+      "fix": "Cosmetic only; not corrected locally to avoid duplicating shared geometry.",
+      "status": "RESIDUAL_ACCEPTED"
     }
   ],
   "DEFECT_SEVERITY": ["V4 x2", "V3 x3", "V2 x5", "V1 x0", "V0 x0"],
@@ -127,9 +214,9 @@
     "Bilingual chrome + localized surface-owned command labels + preference-driven re-render",
     "Surface-local donor suppression with terminating MutationObserver"
   ],
-  "RECAPTURE_STATUS": "PENDING — blocked on shared build (transient red from another unit's in-flight file, retry loop running)",
-  "RECOMPARISON_STATUS": "PENDING",
-  "REGRESSION_STATUS": "PENDING",
+  "RECAPTURE_STATUS": "IN_PROGRESS — after3 captured before DEF-LAB-R01..R07 fixes; final capture pending a green shared build (other units' files intermittently red)",
+  "RECOMPARISON_STATUS": "PENDING final capture (L1/L2 instrument ready: writer-output/W03-LABS/compare.py)",
+  "REGRESSION_STATUS": "PASS 4/4 — `tests/surfaces/labs/domain.test.js`, `tests/rescue/S11_W03_SCENARIOS_LABS/lab-task-graph.test.js`, `tests/rescue/CG4_W03_COVERAGE/controller-corr01-w03-lifecycle-truth.test.js`, `tests/surfaces/runs/group-regression.test.js` (executed against a writer-private full source build; `SITE_BUILD.json` shows all 322 sources stripped cleanly, 0 kept-from-dist)",
   "EVIDENCE": [
     {
       "kind": "REFERENCE",

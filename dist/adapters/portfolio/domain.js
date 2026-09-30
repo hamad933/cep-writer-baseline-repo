@@ -66,10 +66,16 @@ export class W04PortfolioDomain{
   this.receipts.push(receipt);
   return freeze({ok:true,record:rec,receipt,mutated:true});
  }
+ /** Membership → saved-view membership test. One vocabulary for the domain filter, the
+  *  read-only view projection and the LEFT saved-view navigation (no second definition). */
+ matches(row,query){
+  const q=String(query||'').trim().toLowerCase();
+  if(!q)return true;
+  return `${row.title} ${row.refType} ${row.sourceRef} ${row.state} ${row.groupingRef||''} ${row.groupingState}`.toLowerCase().includes(q);
+ }
  filter(query=''){
   this.filterText=String(query);
-  const q=this.filterText.trim().toLowerCase();
-  return freeze({ok:true,query:this.filterText,records:this.records.filter(r=>!q||`${r.title} ${r.sourceRef} ${r.refType} ${r.state}`.toLowerCase().includes(q)),mutated:false,taxonomyCreated:false,sourceWrites:0});
+  return freeze({ok:true,query:this.filterText,records:this.records.filter(row=>this.matches(row,this.filterText)),mutated:false,taxonomyCreated:false,sourceWrites:0});
  }
  /** READ-ONLY view projection: the active saved-view query, the records it admits, the counts
   *  the assembly header reports and the ordering the view is actually in. Ordering is the
@@ -77,9 +83,7 @@ export class W04PortfolioDomain{
   *  stays open, so no Project / Learning Objective registry is consulted or implied). */
  view(){
   const query=String(this.filterText||'');
-  const q=query.trim().toLowerCase();
-  const match=row=>!q||`${row.title} ${row.refType} ${row.sourceRef} ${row.state} ${row.groupingRef||''} ${row.groupingState}`.toLowerCase().includes(q);
-  const records=this.records.filter(match);
+  const records=this.records.filter(row=>this.matches(row,query));
   const byType=type=>records.filter(row=>row.refType===type).length;
   const attention=records.filter(row=>row.state!=='RESOLVABLE').length;
   return freeze({

@@ -99,7 +99,11 @@ export function createReleasesSurfaceRuntime({adapter,commands}:{adapter:any;com
   };
   const owned=(host:Element|null)=>{
     const element=host?.firstElementChild||null;
-    return Boolean(element&&element.getAttribute('data-w05-owned')==='releases'&&(element as any).__w05Runtime===id);
+    if(!element||element.getAttribute('data-w05-owned')!=='releases'||(element as any).__w05Runtime!==id)return false;
+    /* Shared code (reference-return control / context inspector) APPENDS donor nodes inside the
+       region host after the surface rendered, so firstElementChild stays ours while a foreign
+       control sits under it. The surface owns the whole region host: any extra child = stale. */
+    return host!.children.length===1;
   };
   const ensureStyle=()=>{try{injectReleasesStyle()}catch{}};
 
@@ -189,9 +193,19 @@ export function createReleasesSurfaceRuntime({adapter,commands}:{adapter:any;com
   const hideForeignRegionSiblings=()=>{
     const neutralise=(paneId,keepId)=>{
       document.querySelectorAll(`#${paneId} .pbody > *`).forEach(node=>{
-        const keep=node.id===keepId;
-        if(keep){node.hidden=false;return}
-        node.hidden=true;node.inert=true;node.setAttribute('aria-hidden','true');
+        const element=node as HTMLElement;
+        if(element.id===keepId){
+          element.hidden=false;
+          element.style.removeProperty('display');
+          return;
+        }
+        /* Donor CSS wins over the [hidden] attribute on some siblings (observed on
+           #rightPane .contextscope, which renders display:grid while hidden=true), so the
+           surface forces the display off as well as the shared hidden/inert intent. */
+        element.hidden=true;
+        element.style.setProperty('display','none','important');
+        element.inert=true;
+        element.setAttribute('aria-hidden','true');
       });
     };
     try{neutralise('leftPane','domainLeftRegion');neutralise('rightPane','domainContext')}catch{}
@@ -250,7 +264,8 @@ export function createReleasesSurfaceRuntime({adapter,commands}:{adapter:any;com
     let found=false;
     document.querySelectorAll('#leftPane .pbody > *,#rightPane .pbody > *').forEach(node=>{
       const keep=node.id==='domainLeftRegion'||node.id==='domainContext';
-      if(!keep&&!(node as HTMLElement).hidden)found=true;
+      const element=node as HTMLElement;
+      if(!keep&&(!element.hidden||getComputedStyle(element).display!=='none'))found=true;
     });
     return found;
   };

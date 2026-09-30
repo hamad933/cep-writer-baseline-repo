@@ -78,14 +78,14 @@ function detailPanel(w,c){
   return `<div class="runs-panehead"><h2>${esc(t.detail.title)}</h2>${pill(alert.sev,sevTone(alert.sev))}${tag(alert.status,'info')}
       <span class="runs-scope">${ltr(alert.id)}</span></div>
     <dl class="runs-detailgrid">
-      <div><dt>${esc(t.detail.source)}</dt><dd>${esc(alert.source)}</dd></div>
-      <div><dt>${esc(t.detail.id)}</dt><dd>${ltr(alert.id)}</dd></div>
-      <div><dt>${esc(t.detail.ip)}</dt><dd>${ltr(alert.ip)}</dd></div>
-      <div><dt>${esc(t.detail.rule)}</dt><dd>${ltr(alert.rule)}</dd></div>
-      <div><dt>${esc(t.detail.uri)}</dt><dd>${ltr(alert.method+' '+alert.uri)}</dd></div>
-      <div><dt>${esc(t.detail.technique)}</dt><dd>${esc(alert.technique)}</dd></div>
-      <div><dt>${esc(t.detail.first)}</dt><dd>${ltr(alert.time+' UTC')}</dd></div>
-      <div><dt>${esc(t.detail.run)}</dt><dd>${ltr(w.identity.runId)}</dd></div>
+      <dt>${esc(t.detail.source)}</dt><dd>${esc(alert.source)}</dd>
+      <dt>${esc(t.detail.id)}</dt><dd>${ltr(alert.id)}</dd>
+      <dt>${esc(t.detail.ip)}</dt><dd>${ltr(alert.ip)}</dd>
+      <dt>${esc(t.detail.rule)}</dt><dd>${ltr(alert.rule)}</dd>
+      <dt>${esc(t.detail.uri)}</dt><dd>${ltr(alert.method+' '+alert.uri)}</dd>
+      <dt>${esc(t.detail.technique)}</dt><dd>${esc(alert.technique)}</dd>
+      <dt>${esc(t.detail.first)}</dt><dd>${ltr(alert.time+' UTC')}</dd>
+      <dt>${esc(t.detail.run)}</dt><dd>${ltr(w.identity.runId)}</dd>
     </dl>
     <div class="runs-subtabs" role="tablist">${tabs.map(([id,label])=>`<button class="runs-subtab" type="button" role="tab" data-detail-tab="${id}" aria-selected="${state.detailTab===id?'true':'false'}">${esc(label)}${id==='artifacts'?` (${w.counts.artifacts})`:''}</button>`).join('')}</div>
     <div class="runs-pane" style="flex:1">${body}</div>
@@ -106,17 +106,17 @@ function alertList(w,c){
       <span style="flex:1"></span>${chips}</div>
     ${rows.length?`<div class="runs-tablewrap"><table class="runs-table"><thead><tr>
         <th>${esc(t.alerts.time)}</th><th>${esc(t.alerts.alert)}</th><th>${esc(t.alerts.severity)}</th><th>${esc(t.alerts.status)}</th></tr></thead>
-      <tbody>${rows.map(alert=>alertRow(alert,alert.id===state.selectedId,state.highlight,state.query?.trim().toLowerCase())).join('')}</tbody></table>
+      <tbody>${rows.map(alert=>alertRow(alert,alert.id===state.selectedId,state.highlight,state.query?.trim().toLowerCase())).join('')}</tbody></table></div>
       <div class="runs-pager"><button class="runs-pagebtn" type="button" disabled aria-label="previous">‹</button>
         <span>1–${rows.length} of ${rows.length}</span>
-        <button class="runs-pagebtn" type="button" disabled aria-label="next">›</button></div></div>`
+        <button class="runs-pagebtn" type="button" disabled aria-label="next">›</button></div>`
     :`<div class="runs-empty">${icon('filter',16)}<strong>${esc(t.alerts.none)}</strong><span>${esc(t.alerts.filters)}</span></div>`}`;
 }
 export function renderOperations(w,c){
   const sourceTabs=[{id:'ALL',label:c.t.sourceTabs.all,count:w.counts.alerts},...w.sources.map(s=>({id:s.id,label:s.label,count:s.alerts+s.events}))];
   return `<div class="runs-panehead" style="position:static">
       <div class="runs-tabs" role="tablist">${sourceTabs.map(tab=>`<button class="runs-tab" type="button" role="tab" data-source="${esc(tab.id)}" aria-selected="${(c.state.source||'ALL')===tab.id?'true':'false'}" style="min-height:34px">${esc(tab.label)}<span class="runs-navcount">${tab.count}</span></button>`).join('')}</div>
-      <span class="runs-scope">${icon('shield',11)} ${esc(c.t.status.truth)}</span></div>
+      <span class="runs-scope">${esc(c.t.status.truth)}</span></div>
     <div class="runs-split"><div class="runs-pane">${alertList(w,c)}</div><div class="runs-pane">${detailPanel(w,c)}</div></div>`;
 }
 
@@ -127,6 +127,12 @@ export function renderPreflight(w,c){
   const blocked=p.checks.filter(check=>check.status==='BLOCKED').length;
   const advisory=p.checks.filter(check=>check.status==='ADVISORY'||check.status==='WARNING').length;
   const ready=p.status==='READY';
+  const terminal=['STOPPED','COMPLETED','FAILED'].includes(w.run.lifecycle);
+  const active=['RUNNING','PAUSED'].includes(w.run.lifecycle);
+  const verdictState=active?'ACTIVE':terminal?'CLOSED':p.status;
+  const verdictTitle=active?t.banner.active:terminal?t.banner.closed:ready?t.banner.ready:t.banner.blocked;
+  const verdictWhy=active?t.banner.activeWhy:terminal?t.banner.closedWhy:ready?t.banner.readyWhy:t.banner.blockedWhy;
+  const verdictTone=active||ready?'ok':'info';
   const card=(n,head,body,cls='')=>`<section class="runs-card ${cls}"><div class="runs-cardhead"><span class="runs-step">${n}</span><h3>${head}</h3></div>${body}</section>`;
   const kv=(pairs)=>`<dl class="runs-kv">${pairs.filter(Boolean).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${v}</dd>`).join('')}</dl>`;
   return `<div class="runs-preflight">
@@ -168,16 +174,16 @@ export function renderPreflight(w,c){
         ${pill(check.status,check.status==='PASS'?'success':check.status==='BLOCKED'?'danger':'warning')}</div>`).join('')}</div>
       <div class="runs-note" data-tone="${ready?'ok':'info'}">${esc(t.readiness.noWrite)} ${esc(t.panels.preflight.immutability)}</div>`,
       'runs-card--wide')}
-    <div class="runs-verdict" data-state="${p.status}">
-      <span class="runs-verdictico">${icon(ready?'play':'lock',20)}</span>
+    <div class="runs-verdict" data-state="${verdictState}">
+      <span class="runs-verdictico">${icon(active?'activity':terminal?'archive':ready?'play':'lock',20)}</span>
       <div class="runs-verdictcopy">
-        <h3>${esc(ready?t.banner.ready:t.banner.blocked)}${ready?'':` — ${esc(String(blocked||advisory))} ${esc(t.readiness.check.toLowerCase())}`}</h3>
-        <p>${esc(ready?t.banner.readyWhy:t.banner.blockedWhy)}</p>
-        <p class="runs-summary" style="color:${ready?'#9df3d1':'#ffd9a6'}">${esc(t.banner.summary(pass,blocked,advisory))}</p>
+        <h3>${esc(verdictTitle)}${!ready&&!active&&!terminal?` — ${String(blocked)} ${esc(t.readiness.check.toLowerCase())}`:''}</h3>
+        <p>${esc(verdictWhy)}</p>
+        <p class="runs-summary" style="color:${verdictTone==='ok'?'#9df3d1':'#ffd9a6'}">${esc(t.banner.summary(pass,blocked,advisory))}</p>
       </div>
       <div class="runs-verdictact">
-        <button class="runs-btn" type="button" data-command="runs.start" data-kind="primary" ${c.can.start?'':'disabled'}>${icon('play',12)}${esc(t.actions.start)}</button>
-        <small>${esc(c.can.start? t.banner.readyWhy : (p.checks.find(x=>x.status==='BLOCKED')?.detail||t.banner.blockedWhy))}</small>
+        <button class="runs-btn" type="button" data-command="runs.start" data-kind="primary" ${c.can.start?'':`disabled title="${esc(verdictWhy)}"`}>${icon('play',12)}${esc(t.actions.start)}</button>
+        <small>${esc(c.can.start?t.banner.readyWhy:(p.checks.find(x=>x.status==='BLOCKED')?.detail||verdictWhy))}</small>
       </div>
     </div>
   </div>`;

@@ -57,11 +57,15 @@ const STYLE=`
 .w03l-canvas .minimap{opacity:.72;inline-size:118px;block-size:74px;bottom:34px}
 .w03l-canvas .spatial-readout{font:600 10.5px/1 var(--mono);letter-spacing:.02em}
 .w03l-canvas .spatial-node-card .node-surface{fill:color-mix(in srgb,var(--bg2,#1b2228) 92%,var(--bg0,#0e1317));transition:stroke-width .12s ease,filter .12s ease}
-.w03l-canvas .spatial-node-card .node-title{font-size:11px;font-weight:650}
-.w03l-canvas .spatial-node-card .node-secondary-line{font-size:8px;fill:var(--text3,#8b979e)}
+/* Labs node card geometry (surface-owned inline presentation inside the shared Spatial owner):
+   176×104 is the reference's card proportion — a title line (or two), a description line (or
+   two) and a chip row all inside the card. The shared 132×62 default forced authored task titles
+   to overflow onto the neighbour and the connector labels. */
+.w03l-canvas .spatial-node-card .node-surface{width:156px;height:104px;rx:12}
+.w03l-canvas .spatial-node-card .node-tags{transform:translateY(30px)}
+.w03l-canvas .spatial-node-card .node-title{font-size:11.5px;font-weight:650}
+.w03l-canvas .spatial-node-card .node-secondary-line{font-size:8.5px;fill:var(--text3,#8b979e)}
 .w03l-canvas .spatial-node-card .node-id-chip{font-weight:700;letter-spacing:.04em}
-.w03l-canvas .spatial-node-card .node-status-dot{r:3}
-.w03l-canvas .spatial-node-card .node-status-chip text{font-weight:700}
 .w03l-canvas .spatial-node-card:hover .node-surface{filter:drop-shadow(0 6px 14px rgba(0,0,0,.4))}
 .w03l-canvas .spatial-node-card .node-icon-tile rect{rx:6}
 .w03l-canvas .spatial-node-card .node-icon-tile text{font-weight:800;font-size:10px}

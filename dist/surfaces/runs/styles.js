@@ -86,7 +86,7 @@ export const RUNS_STYLE=`<style data-runs-local-style>
 .runs-rail[data-side=end]{border-inline-start:1px solid var(--runs-line);width:290px}
 .runs-railhead{display:flex;align-items:center;justify-content:space-between;gap:var(--s2);
   font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--runs-t3)}
-.runs-split{display:grid;grid-template-columns:minmax(320px,42%) minmax(0,1fr);flex:1;min-height:0}
+.runs-split{display:grid;grid-template-columns:minmax(320px,46%) minmax(0,1fr);flex:1;min-height:0}
 .runs-split>*+*{border-inline-start:1px solid var(--runs-line)}
 .runs-pane{display:flex;flex-direction:column;min-height:0;min-width:0;overflow:auto}
 .runs-panehead{display:flex;align-items:center;gap:var(--s2);padding:9px var(--s3);
@@ -136,7 +136,7 @@ export const RUNS_STYLE=`<style data-runs-local-style>
 .runs-kv dd{color:var(--runs-t1);font-weight:600;min-width:0;overflow-wrap:anywhere}
 
 /* ---------- tables ---------- */
-.runs-tablewrap{overflow:auto;min-height:0}
+.runs-tablewrap{overflow:auto;min-height:0;flex:1}
 .runs-table{width:100%;border-collapse:collapse;font-size:12.2px}
 .runs-table th{position:sticky;top:0;z-index:1;text-align:start;font-size:10px;font-weight:700;letter-spacing:.07em;
   text-transform:uppercase;color:var(--runs-t3);background:color-mix(in srgb,var(--runs-raise) 92%,transparent);
@@ -153,19 +153,18 @@ export const RUNS_STYLE=`<style data-runs-local-style>
 .runs-dot[data-sev=High]{background:var(--runs-bad);box-shadow:0 0 0 3px color-mix(in srgb,var(--runs-bad) 22%,transparent)}
 .runs-dot[data-sev=Medium]{background:var(--runs-warn);box-shadow:0 0 0 3px color-mix(in srgb,var(--runs-warn) 20%,transparent)}
 .runs-dot[data-sev=Low]{background:var(--runs-ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--runs-ok) 20%,transparent)}
-.runs-pager{display:flex;align-items:center;justify-content:center;gap:var(--s2);padding:8px var(--s3);
-  border-block-start:1px solid var(--runs-line);font-size:11px;color:var(--runs-t3);position:sticky;bottom:0;
+.runs-pager{display:flex;align-items:center;justify-content:center;gap:var(--s2);padding:8px var(--s3);flex:none;
+  border-block-start:1px solid var(--runs-line);font-size:11px;color:var(--runs-t3);
   background:color-mix(in srgb,var(--runs-panel) 94%,transparent)}
 .runs-pagebtn{min-width:24px;min-height:24px;border-radius:6px;border:1px solid var(--runs-line2);background:transparent;color:var(--runs-t2);cursor:pointer}
 .runs-pagebtn:disabled{opacity:.4;cursor:not-allowed}
 .runs-pagebtn[aria-current=true]{background:color-mix(in srgb,var(--runs-accent) 20%,transparent);border-color:var(--runs-accent);color:#e7fffd}
 
 /* ---------- detail ---------- */
-.runs-detailgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px var(--s4);
-  padding:var(--s3) var(--s3) var(--s2);border-block-end:1px solid var(--runs-line)}
-.runs-detailgrid>div{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;padding:4px 0;align-items:baseline}
+.runs-detailgrid{display:grid;grid-template-columns:auto minmax(0,1fr) auto minmax(0,1fr);gap:5px var(--s4);
+  padding:var(--s3) var(--s3) var(--s2);border-block-end:1px solid var(--runs-line);align-items:baseline}
 .runs-detailgrid dt{font-size:11px;color:var(--runs-t3);white-space:nowrap}
-.runs-detailgrid dd{font-size:12.3px;font-weight:650;min-width:0;overflow-wrap:anywhere;text-align:end}
+.runs-detailgrid dd{font-size:12.3px;font-weight:650;min-width:0;overflow-wrap:anywhere}
 .runs-subtabs{display:flex;gap:2px;padding-inline:var(--s3);border-block-end:1px solid var(--runs-line);
   overflow-x:auto;scrollbar-width:none;background:color-mix(in srgb,var(--runs-panel) 55%,transparent)}
 .runs-subtab{position:relative;border:0;background:transparent;color:var(--runs-t3);padding:9px 10px;font-size:12px;
@@ -215,6 +214,10 @@ export const RUNS_STYLE=`<style data-runs-local-style>
   border-radius:10px;border:1px solid var(--runs-line2);background:color-mix(in srgb,var(--runs-raise) 55%,transparent);flex-wrap:wrap}
 .runs-verdict[data-state=BLOCKED]{border-color:color-mix(in srgb,var(--runs-bad) 50%,transparent);background:color-mix(in srgb,var(--runs-bad) 9%,var(--runs-panel))}
 .runs-verdict[data-state=READY]{border-color:color-mix(in srgb,var(--runs-ok) 48%,transparent);background:color-mix(in srgb,var(--runs-ok) 9%,var(--runs-panel))}
+.runs-verdict[data-state=ACTIVE]{border-color:color-mix(in srgb,var(--runs-info) 48%,transparent);background:color-mix(in srgb,var(--runs-info) 9%,var(--runs-panel))}
+.runs-verdict[data-state=CLOSED]{border-color:color-mix(in srgb,var(--runs-t3) 45%,transparent);background:color-mix(in srgb,var(--runs-t3) 8%,var(--runs-panel))}
+.runs-verdict[data-state=ACTIVE] .runs-verdictico{color:var(--runs-info)}
+.runs-verdict[data-state=CLOSED] .runs-verdictico{color:var(--runs-t2)}
 .runs-verdictico{width:44px;height:44px;flex:none;border-radius:50%;display:grid;place-items:center;
   border:2px solid currentColor}
 .runs-verdict[data-state=BLOCKED] .runs-verdictico{color:var(--runs-bad)}
@@ -223,6 +226,8 @@ export const RUNS_STYLE=`<style data-runs-local-style>
 .runs-verdictcopy h3{font-size:16px;font-weight:700;letter-spacing:-.01em}
 .runs-verdict[data-state=BLOCKED] .runs-verdictcopy h3{color:#ffb3b3}
 .runs-verdict[data-state=READY] .runs-verdictcopy h3{color:#9df3d1}
+.runs-verdict[data-state=ACTIVE] .runs-verdictcopy h3{color:#cfe6ff}
+.runs-verdict[data-state=CLOSED] .runs-verdictcopy h3{color:var(--runs-t1)}
 .runs-verdictcopy p{font-size:12.4px;color:var(--runs-t2);margin-top:3px}
 .runs-verdictcopy .runs-summary{margin-top:5px;font-size:12.4px;font-weight:650}
 .runs-verdictact{display:grid;gap:6px;justify-items:center;padding:10px 16px;border-radius:9px;
@@ -290,6 +295,9 @@ export const RUNS_STYLE=`<style data-runs-local-style>
   .runs-body{flex-direction:column}
   .runs-rail,.runs-rail[data-side=end]{width:100%;border-inline:0;border-block-end:1px solid var(--runs-line)}
   .runs-rail[data-side=start] .runs-structure{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));display:grid}
+}
+@media (max-width:1240px){
+  .runs-detailgrid{grid-template-columns:auto minmax(0,1fr)}
 }
 @media (max-width:820px){
   .runs-bar{gap:var(--s2);flex-wrap:wrap;padding-inline:var(--s3)}

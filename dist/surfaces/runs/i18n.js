@@ -25,14 +25,17 @@ const AR={
     preflight:{source:'تعريف المصدر',revision:'الإصدار',manifest:'بيان التشغيل المجمّد',checks:'فحوصات الجاهزية',immutability:'التجزئة محجوزة على مستوى الكائن؛ تبقى مساحة العمل تفاعلية.'}
   },
   right:{
-    rationale:'منطق الكشف',scope:'نطاق الارتباط',implication:'الأثر التشغيلي',observation:'ملاحظة',recommendation:'الخطوة التالية',
+    title:'سياق التشغيل',rationale:'منطق الكشف',scope:'نطاق الارتباط',implication:'الأثر التشغيلي',observation:'ملاحظة',recommendation:'الخطوة التالية',
     preflightTruth:'الحقائق الأساسية',preflightSource:'مصدر الإعداد',preflightWhy:'لماذا يهم هذا',preflightAdvice:'توصية الإعداد',
     provider:'المزوّد',runtimeTruth:'حقيقة التشغيل',connection:'الاتصال',epoch:'الحقبة',provenance:'الإثبات',
     noSelection:'لا تنبيه محدد. اختر تنبيهًا من قائمة العمليات لعرض سياقه.',
     platformNote:'بوابات ConPTY ونافذة Windows وقوة العرض بقيمة OS تبقى غير موثّقة هنا؛ هذا المرشّح لا يغيّر ولا يشهد على مزوّذ Windows.'
   },
   status:{connected:'متصل',disconnected:'منقطع',unverified:'بوابة منصة غير موثّقة',truth:'حقيقة المحاكاة الداخلية',terminal:'مساحة عمل مؤقتة',terminalIdle:'لا جلسة طرفية مفتوحة بعد — افتح طرفية من جهاز مهيّأ.',terminalBound:'العرض مملوك لـ OperationalSessionOwner و OperationalTerminalHost'},
-  banner:{blocked:'تعذر بدء التشغيل',ready:'التشغيل جاهز للبدء',blockedWhy:'استمرار التشغيل غير متاح حتى تجتاز الفحوصات الإلزامية.',readyWhy:'اكتملت الفحوصات وتجمّد البيان؛ يمكن بدء التشغيل.',summary:(p,b,a)=>`${p} ناجح، ${b} موقوف، ${a} استشاري.`},
+  banner:{blocked:'تعذر بدء التشغيل',ready:'التشغيل جاهز للبدء',blockedWhy:'استمرار التشغيل غير متاح حتى تجتاز الفحوصات الإلزامية.',readyWhy:'اكتملت الفحوصات وتجمّد البيان؛ يمكن بدء التشغيل.',
+    active:'التشغيل فعّال بالفعل',activeWhy:'فحص ما قبل التشغيل مشروحة بلا كتابة. تبقى إيقاف مؤقت وإنهاء التشغيل والتقاط لقطة متاحة؛ أما البدء فيشترط حياة دورة غير فعّالة.',
+    closed:'بلغ التشغيل حالة نهائية',closedWhy:'حالة دورة الحياة نهائية؛ الختم وعرض الحقيقة المسجّلة هما الخطوة التالية، والبدء غير متاح.',
+    summary:(p,b,a)=>`${p} ناجح، ${b} موقوف، ${a} استشاري.`},
   readiness:{title:'فحص ما قبل التشغيل',noWrite:'المشروع بلا كتابة (projection) · لا يغيّر حالة التشغيل.',status:'الحالة',check:'الفحص',detail:'التفاصيل'},
   nav:{label:'تنقل بنية التشغيل'}
 };
@@ -57,14 +60,17 @@ const EN={
     preflight:{source:'Source Definition',revision:'Revision',manifest:'Frozen Run Manifest',checks:'Readiness Checks',immutability:'Immutability is object-scoped; the workspace remains interactive.'}
   },
   right:{
-    rationale:'Detection rationale',scope:'Correlation scope',implication:'Operational implication',observation:'Observation',recommendation:'Recommended next step',
+    title:'Run context',rationale:'Detection rationale',scope:'Correlation scope',implication:'Operational implication',observation:'Observation',recommendation:'Recommended next step',
     preflightTruth:'Runtime truth',preflightSource:'Preparation source',preflightWhy:'Why this matters',preflightAdvice:'Preparation advice',
     provider:'Provider',runtimeTruth:'Runtime truth',connection:'Connection',epoch:'Provider epoch',provenance:'Provenance',
     noSelection:'No alert selected. Pick an alert in the Operations list to read its context.',
     platformNote:'ConPTY, Windows topmost and native-window claims remain unverified here. This candidate neither alters nor certifies the Windows platform provider.'
   },
   status:{connected:'CONNECTED',disconnected:'DISCONNECTED',unverified:'UNVERIFIED_PLATFORM_GATE',truth:'INTERNAL_SIMULATION',terminal:'Temporary work area',terminalIdle:'No terminal session open yet — open one from a capable device.',terminalBound:'Presentation owned by OperationalSessionOwner + OperationalTerminalHost'},
-  banner:{blocked:'Run start unavailable',ready:'Run is ready to start',blockedWhy:'Run start remains unavailable until the mandatory checks pass.',readyWhy:'Checks passed and the manifest is frozen; start is permitted.',summary:(p,b,a)=>`${p} passed, ${b} blocked, ${a} advisory.`},
+  banner:{blocked:'Run start unavailable',ready:'Run is ready to start',blockedWhy:'Run start remains unavailable until the mandatory checks pass.',readyWhy:'Checks passed and the manifest is frozen; start is permitted.',
+    active:'Run already active',activeWhy:'This preflight is a no-write projection. Pause, End Run and Capture Snapshot stay available; Start requires a non-active lifecycle.',
+    closed:'Run reached a terminal state',closedWhy:'The lifecycle is terminal. Sealing and recorded-truth review are the available next steps; Start is unavailable.',
+    summary:(p,b,a)=>`${p} passed, ${b} blocked, ${a} advisory.`},
   readiness:{title:'Readiness preflight',noWrite:'No-write projection · this view never mutates run state.',status:'Status',check:'Check',detail:'Details'},
   nav:{label:'Run structure navigation'}
 };

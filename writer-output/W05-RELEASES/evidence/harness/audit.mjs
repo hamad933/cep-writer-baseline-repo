@@ -54,7 +54,15 @@ page.on('pageerror',e=>pageErrors.push(String(e)));
 page.on('console',m=>{if(m.type()==='error')consoleErrors.push(m.text())});
 await page.goto(`http://127.0.0.1:${port}/?surface=releases&persistencePort=${runtimePort}`,{waitUntil:'domcontentloaded'});
 try{await page.waitForFunction(()=>window.CEPFoundation?.consumer==='releases',undefined,{timeout:30000})}catch(e){push('function.route-opens-on-releases',false,String(e))}
-await page.waitForTimeout(2600);
+/* Wait for the SURFACE-OWNED composition, not just the route: a sibling unit's build can rewrite
+   dist/ while this server is serving it, so retry the load instead of measuring a half-built tree. */
+let owned=false;
+for(let attempt=0;attempt<3&&!owned;attempt++){
+  try{await page.waitForFunction(()=>!!document.querySelector('#foundationStage .rel-grid'),undefined,{timeout:12000});owned=true}
+  catch{await page.reload({waitUntil:'domcontentloaded'});await page.waitForFunction(()=>window.CEPFoundation?.consumer==='releases',undefined,{timeout:30000}).catch(()=>{});}
+}
+push('structure.surface-owned-stage-wait',owned,{owned});
+await page.waitForTimeout(2200);
 
 const measure=()=>page.evaluate(()=>{
   const rect=sel=>{const e=document.querySelector(sel);if(!e)return null;const r=e.getBoundingClientRect();return {x:Math.round(r.x),y:Math.round(r.y),w:Math.round(r.width),h:Math.round(r.height)}};
@@ -89,7 +97,7 @@ push('structure.blocks',results.geometry.en.center.blockCount>=8&&results.geomet
   const c=results.geometry.en.center;
   const twoCol=Boolean(c.colA&&c.colB&&c.colB.x>c.colA.x+50&&Math.abs(c.colA.h-c.colB.h)<900);
   push('structure.two-column-reference-composition',twoCol,{colA:c.colA,colB:c.colB});
-  push('structure.center-density',c.grid.h<1700,{gridHeight:c.grid.h,note:'reference detail area is one scrollable workbench, not a 3000px single column'});
+  push('structure.center-density',Boolean(c.grid)&&c.grid.h<1700,{gridHeight:c.grid?c.grid.h:null,note:'reference detail area is one scrollable workbench, not a 3000px single column'});
 }
 push('structure.left-pane',results.geometry.en.left.stateRows===6&&results.geometry.en.left.channels===3&&results.geometry.en.left.cards>=5,results.geometry.en.left);
 {
@@ -176,6 +184,10 @@ for(const [name,viewport] of [['1280x860',{width:1280,height:860}],['1024x900',{
   await shot(page,`en-${name}`);
 }
 await page.setViewportSize({width:1536,height:1024});await page.waitForTimeout(700);
+/* Playwright auto-scrolls to whatever it clicked last: reset the workbench to its top so the
+   "top" captures really are the top of the surface. */
+await page.evaluate(()=>{const s=document.querySelector('#foundationStage');if(s)s.scrollTop=0});
+await page.waitForTimeout(500);
 
 /* ── AR / RTL ── */
 await page.evaluate(()=>{CEPFoundation.preferences.set('locale','ar','global');CEPFoundation.workspace.applyPreferences()});
@@ -183,7 +195,11 @@ await page.waitForTimeout(1400);
 const ar=await page.evaluate(()=>{
   const rect=sel=>{const e=document.querySelector(sel);if(!e)return null;const r=e.getBoundingClientRect();return {x:Math.round(r.x),w:Math.round(r.width)}};
   const text=(document.querySelector('#foundationStage')?.textContent||'')+(document.querySelector('#domainLeftRegion')?.textContent||'')+(document.querySelector('#domainContext')?.textContent||'');
+  const header=document.querySelector('#foundationStage .rel-title-row h1');
+  const hr=header?header.getBoundingClientRect():null;
   return {lang:document.documentElement.lang,dir:document.documentElement.dir,
+    headerVisible:!!hr&&hr.width>0&&hr.height>0,headerText:header?(header.textContent||'').trim():null,headerY:hr?Math.round(hr.y):null,
+    englishMeta:/CANDIDATE-BOUND|CANDIDATE v|Release candidate ·/.test(text),
     arabicChars:(text.match(/[؀-ۿ]/g)||[]).length,totalChars:text.length,
     leftX:rect('#leftPane')?.x,rightX:rect('#rightPane')?.x,stageX:rect('#foundationStage')?.x,
     leftIsLeft:(rect('#leftPane')||{x:0}).x<(rect('#rightPane')||{x:1}).x,
@@ -196,6 +212,8 @@ push('rtl.document-direction',ar.lang==='ar'&&ar.dir==='rtl'&&ar.titleDir==='rtl
 push('rtl.mirrors-and-no-overflow',ar.leftIsLeft===true&&ar.overflow===false&&ar.hScroll===false,ar);
 push('rtl.no-allcaps-arabic',ar.eyebrowTransform==='none',ar.eyebrowTransform);
 push('rtl.content-present',ar.arabicChars>400,{arabicChars:ar.arabicChars,totalChars:ar.totalChars});
+push('rtl.header-and-badge-render',ar.headerVisible&&/REL-/.test(ar.headerText||'')&&ar.headerY>180&&ar.headerY<520,{headerText:ar.headerText,headerY:ar.headerY});
+push('rtl.no-english-meta-leakage',ar.englishMeta===false,{englishMetaDetected:ar.englishMeta});
 results.geometry.ar=ar;
 await shot(page,'ar-1536-top');
 await page.evaluate(()=>{const s=document.querySelector('#foundationStage');s.scrollTop=s.scrollHeight});

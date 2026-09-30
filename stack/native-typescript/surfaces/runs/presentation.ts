@@ -107,7 +107,7 @@ export function renderRunsSurface(root,composition,{dir=null,locale=null,initial
           `<button class="runs-btn" type="button" data-command="runs.prepare" data-icon ${prepare.enabled?'':'disabled title="'+esc(prepare.reason||'')+'"'}>${icon('layers',12)}${esc(t.actions.prepare)}</button>`,
           `<button class="runs-btn" type="button" data-command="runs.preflight" data-icon>${icon('shield',12)}${esc(t.actions.preflight)}</button>`
         ];
-    buttons.push(`<button class="runs-btn" type="button" data-overflow data-icon aria-haspopup="menu" aria-expanded="${state.overflow?'true':'false'}" aria-label="${esc(t.actions.more)}">${icon('list',12)}</button>`);
+    buttons.push(`<button class="runs-btn" type="button" data-overflow data-icon aria-haspopup="menu" aria-expanded="${state.overflow?'true':'false'}" aria-label="${esc(t.actions.more)}" title="${esc(t.actions.more)}"><span aria-hidden="true" style="font-size:16px;line-height:.8;letter-spacing:.06em">⋯</span></button>`);
     const overflow=`<div class="runs-menu" role="menu" ${state.overflow?'':'hidden'}>
       <button class="runs-menuitem" role="menuitem" type="button" data-view="preflight">${icon('shield',12)}${esc(t.actions.preflight)}</button>
       <button class="runs-menuitem" role="menuitem" type="button" data-command="runs.captureSnapshot" ${active?'':'disabled'}>${icon('camera',12)}${esc(t.actions.snapshot)}</button>
@@ -145,13 +145,13 @@ export function renderRunsSurface(root,composition,{dir=null,locale=null,initial
     const selected=w.alerts.find(a=>a.id===state.selectedId)||filtered[0]||w.alerts[0]||null;
     state.selectedId=selected?selected.id:null;
     const ctx={t,locale:localeOf(),state,selected,composition,avail,
-      can:{start:avail('runs.start').enabled,terminal:avail('OPEN_TERMINAL').enabled}};
+      can:{start:avail('runs.start').enabled,startReason:avail('runs.start').reason||'',terminal:avail('OPEN_TERMINAL').enabled}};
 
     const shellRegions=boundRegions==='shell'&&boundWorkspace;
     if(shellRegions){
       try{
-        boundWorkspace.region('LEFT',{html:runsLeftRegion(w,ctx),label:t.structure.title});
-        boundWorkspace.region('RIGHT',{html:runsRightRegion(w,ctx),label:t.right.rationale});
+        boundWorkspace.region('LEFT',{html:runsLeftRegion(w,ctx,{heading:false}),label:t.structure.title});
+        boundWorkspace.region('RIGHT',{html:runsRightRegion(w,ctx,{heading:false}),label:t.right.title});
       }catch(error){
         boundRegions='embedded';
         statusMessage=`Region binding unavailable: ${error?.message||error}; rendering embedded regions.`;

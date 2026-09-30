@@ -123,7 +123,9 @@ def main():
     for r in results:
         summary = {k: r.get(k) for k in ("file", "sha256", "dims", "ink")}
         for pane in ("left", "center", "right"):
-            if pane in r:
+            if r.get(pane, {}).get("collapsed"):
+                summary[pane] = "COLLAPSED"
+            elif pane in r:
                 summary[pane] = {"ink": r[pane]["ink"], "blank": r[pane]["blankBandsGE60px"],
                                  "lines": r[pane]["ocrLines"], "words": r[pane]["ocrWords"]}
         summary["keyHits"] = r["keyHits"]

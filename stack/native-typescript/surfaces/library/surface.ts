@@ -1,3 +1,4 @@
+import {mountLibrarySurfacePresentation} from './presentation.js';
 const OWNER='LibraryDomainAdapter';
 const hasCommand=(registry,id)=>registry?.commands instanceof Map&&registry.commands.has(id);
 const register=(registry,id,label,run,available=()=>true,owner=OWNER)=>{if(!hasCommand(registry,id))registry.register(id,owner,label,run,available);return id;};
@@ -31,5 +32,9 @@ export function bindLibrarySurface({commands,structured,libraryRuntime=null,work
   ];
   workspace?.status?.('Library · canonical structured owner bound');
   const source=sourceAvailability();
-  return {surface:'library',owner:structured.owner,transactionOwner:structured.transactionOwner.owner,commands:ids,sourceAvailability:source,persistence:structured.persistence?.descriptor?.()||{available:false,status:'UNCONFIGURED'},consumerTruth:structured.sourceBinding?.truth||structured.metadata?.consumerTruth||'UNBOUND',fixtureClaimed:false};
+  /* Library-local composition: tree state, pane identity, document masthead, corpus summary.
+     Shared mechanics stay with the donor runtime; only grouping/hierarchy/emphasis are local. */
+  let presentation=null;
+  try{presentation=mountLibrarySurfacePresentation({structured,workspace})}catch(error){presentation={mounted:false,reason:String(error?.message||error)}}
+  return {surface:'library',owner:structured.owner,transactionOwner:structured.transactionOwner.owner,commands:ids,sourceAvailability:source,persistence:structured.persistence?.descriptor?.()||{available:false,status:'UNCONFIGURED'},consumerTruth:structured.sourceBinding?.truth||structured.metadata?.consumerTruth||'UNBOUND',fixtureClaimed:false,presentation};
 }

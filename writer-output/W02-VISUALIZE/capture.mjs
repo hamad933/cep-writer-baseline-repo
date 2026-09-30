@@ -77,6 +77,11 @@ const abs = path.join(HERE, rel);
 await page.screenshot({ path: abs, fullPage: false });
 await browser.close();
 
+const sha256 = p => { try { return createHash('sha256').update(readFileSync(p)).digest('hex'); } catch { return null; } };
+const sourceSha256 = sha256(path.join(ROOT, 'stack/native-typescript/surfaces/visualize/surface.ts'));
+const builtSha256 = sha256(path.join(ROOT, 'dist/surfaces/visualize/surface.js'));
+const adapterSha256 = sha256(path.join(ROOT, 'stack/native-typescript/adapters/visualize/domain.ts'));
+
 const bytes = readFileSync(abs);
 const sha = createHash('sha256').update(bytes).digest('hex');
 const dims = execSync(`python3 -c "import struct;d=open('${abs}','rb').read(33);print(list(struct.unpack('>II',d[16:24])))"`, { cwd: ROOT }).toString().trim();

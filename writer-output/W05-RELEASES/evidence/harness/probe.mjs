@@ -29,7 +29,9 @@ const probe=await page.evaluate(()=>{
     centerPaneChildren:[...document.querySelectorAll('#centerPane > *')].map(describe),
     bottom:{title:describe(document.querySelector('#bottomShelf .bottomtitle')),summary:describe(document.querySelector('#bottomSummary')),tabs:[...document.querySelectorAll('.bottomtabs [data-action=bottom-tab]')].map(t=>(t.textContent||'').trim())},
     banner:describe(document.querySelector('#topBanner')),
-    donorVisible:[...document.querySelectorAll('#centerPane [class*=nav],#centerPane [class*=donor],#centerPane .tree,#centerPane #kuList')].map(describe)
+    donorVisible:[...document.querySelectorAll('#centerPane [class*=nav],#centerPane [class*=donor],#centerPane .tree,#centerPane #kuList')].map(describe),
+    arabicNodes:[...document.querySelectorAll('#rightPane *,#leftPane *,#centerPane *')].filter(el=>{const t=(el.textContent||'').trim();return t&&t.length<40&&/[\u0600-\u06FF]/.test(t)&&el.children.length<=2&&!el.closest('#foundationStage')}).slice(0,14).map(el=>({cls:String(el.className||''),id:el.id,text:(el.textContent||'').trim().slice(0,30),display:getComputedStyle(el).display,hidden:el.hidden,offsetParent:el.offsetParent?String(el.offsetParent.id||el.offsetParent.className).slice(0,40):null,parent:String(el.parentElement?.id||el.parentElement?.className||'').slice(0,50)})),
+    pbodyKids:[...document.querySelectorAll('#rightPane .pbody,#leftPane .pbody')].map(p=>({id:p.parentElement?.id,kids:[...p.children].map(c=>({id:c.id,cls:String(c.className).slice(0,40),hidden:c.hidden,display:getComputedStyle(c).display}))}))
   };
 });
 console.log(JSON.stringify(probe,null,1));

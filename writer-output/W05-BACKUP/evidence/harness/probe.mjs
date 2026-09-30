@@ -60,6 +60,7 @@ const probe = await page.evaluate(() => {
     eyebrowText: eyebrow?.textContent,
     eyebrowFont: eyebrow ? getComputedStyle(eyebrow).fontFamily : null,
     rightTabs: [...document.querySelectorAll('#rightPane .contextscope button, #rightPane button')].slice(0, 6).map(b => ({text: b.textContent.trim().slice(0, 40), cls: String(b.className).slice(0, 50)})),
+    commands: [...document.querySelectorAll('[data-foundation-command]')].filter(b => String(b.dataset.foundationCommand).startsWith('backup.')).map(b => ({id: b.dataset.foundationCommand, inToolbar: !!b.closest('#domainToolbar'), disabled: !!b.disabled, label: b.textContent.trim().slice(0, 46), title: (b.getAttribute('title') || '').slice(0, 60)})),
     checksCols: getComputedStyle(document.querySelector('.bk-checks')).gridTemplateColumns,
     metricsCols: getComputedStyle(document.querySelector('.bk-metrics')).gridTemplateColumns,
     containerW: Math.round(document.querySelector('.bk-root').getBoundingClientRect().width),

@@ -93,7 +93,7 @@ export const STYLE = `
 .bk-pill[data-tone=bad]{background:color-mix(in srgb,var(--bk-bad) 14%,transparent)}
 .bk-pill[data-tone=muted]{background:color-mix(in srgb,var(--bk-text3) 12%,transparent)}
 .bk-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:0;border-block:1px solid var(--bk-line)}
-.bk-meta div{padding-block:9px;padding-inline-end:12px;display:grid;gap:3px;min-width:0;border-inline-end:1px solid var(--bk-line)}
+.bk-meta div{display:flex;flex-direction:column;gap:3px;min-width:0;padding-block:9px;padding-inline-end:12px;border-inline-end:1px solid var(--bk-line)}
 .bk-meta div:last-child{border-inline-end:0}
 .bk-meta div:not(:first-child){padding-inline-start:12px}
 .bk-meta dt,.bk-meta .bk-k{font-size:10.5px;color:var(--bk-text3);letter-spacing:.02em}

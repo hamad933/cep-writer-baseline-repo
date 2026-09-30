@@ -3,17 +3,26 @@ import {defineContextDescriptorProvider} from '../../foundation/global/context-d
 import {createFamilyWorkspaceBinding} from '../../foundation/workspace-host.js';
 import {AnalyticalCompareOwner} from '../../foundation/analytical/compare.js';
 import {AuditProvenanceInteractionCore} from '../../foundation/audit/provenance.js';
-import {W04MasteryDomain,MASTERY_AUTHORITY_REF,createMasteryCompareProvider,createMasteryProvenanceProvider} from '../../adapters/mastery/domain.js';
+import {W04MasteryDomain,MASTERY_AUTHORITY_REF,MASTERY_CAUSAL_LAW,createMasteryCompareProvider,createMasteryProvenanceProvider} from '../../adapters/mastery/domain.js';
+import {activeLocale,pickText} from './i18n.js';
 
 export const MASTERY_SURFACE_ID='mastery';
+
+/** Governed judgment vocabulary → a short LEFT-pane status word. The EXACT token stays in the
+ *  CENTER status pill and in the record ladder; the pane column is navigation chrome and must
+ *  fit the shared 86 px status column without clipping. */
+const JUDGMENT_SHORT:any={
+ MASTERED:'Mastered',NOT_MASTERED:'Not mastered',INCONCLUSIVE:'Inconclusive',
+ INSUFFICIENT_EVIDENCE:'Evidence gap',NOT_EVALUATED:'Not evaluated'
+};
+
 export function createMasterySurfaceComposition({domain=new W04MasteryDomain(),analyticalCompareOwner=null}={}){
+ const t=pickText(activeLocale());
  const tableAdapter:CollectionTableMatrixDomainAdapter<any>={
-  adapterId:'mastery.states',rows:()=>domain.records,rowId:r=>r.id,rowLabel:r=>`${r.capability} ${r.subject}`,searchableText:r=>`${r.capability} ${r.subject} ${r.judgment} ${r.freshness} ${r.policyRef}`,
+  adapterId:'mastery.states',rows:()=>domain.records,rowId:r=>r.id,rowLabel:r=>r.capability,searchableText:r=>`${r.capability} ${r.path||''} ${r.subject} ${r.judgment} ${r.freshness} ${r.policyRef}`,
   columns:[
-   {id:'target',label:'Mastery target',cell:r=>({text:r.capability,secondary:r.subject,direction:'ltr'})},
-   {id:'judgment',label:'Judgment',cell:r=>({text:r.judgment,tone:r.judgment==='MASTERED'?'success':r.judgment==='NOT_MASTERED'?'danger':r.judgment==='INCONCLUSIVE'?'warning':'default'})},
-   {id:'freshness',label:'Freshness',cell:r=>({text:r.freshness,tone:r.freshness==='REVALIDATION_REQUIRED'?'warning':'default'})},
-   {id:'policy',label:'Policy',cell:r=>({text:r.policyRef,direction:'ltr'})}
+   {id:'target',get label(){return pickText(activeLocale()).colTarget},cell:r=>({text:r.capability,secondary:r.path||r.subject,direction:'auto'})},
+   {id:'judgment',get label(){return pickText(activeLocale()).colJudgment},cell:r=>({text:JUDGMENT_SHORT[r.judgment]||r.judgment})}
   ],
   actions:()=>[{id:'mastery.inspect',label:'Inspect',enabled:true},{id:'mastery.explain',label:'Explain',enabled:true},{id:'mastery.reevaluate',label:'Request re-evaluation',enabled:true}]
  };
@@ -30,38 +39,69 @@ export function createMasterySurfaceComposition({domain=new W04MasteryDomain(),a
  // CENTER workbench: authority, persistence, recorded evaluations and the shape of a
  // re-evaluation request are CONTEXT, never a second copy of the record (CEP-VIS-001-FINAL
  // 'ONE INFORMATION ITEM -> ONE AUTHORITATIVE DISPLAY LOCATION').
- const contextProvider=defineContextDescriptorProvider({id:'mastery.context',family:'mastery',owner:domain.owner,describe:({id}:any={})=>{
-   const row=domain.records.find(item=>item.id===(id??domain.records[0]?.id));
-   const evaluator=domain.evaluatorDescriptor;
-   const history=row?domain.history.filter(item=>item.recordId===row.id):[];
-   const last=history.length?history[history.length-1]:null;
-   const noHistory=[{id:'empty',label:'Recorded evaluations',value:'EMPTY \u2014 no evaluation has been recorded for this target'}];
-   return {id:`mastery:${row?.id||'empty'}`,providerId:'mastery.context',family:'mastery',subject:row?`${row.capability} \u00b7 ${row.judgment}`:'No Mastery State selected',eyebrow:'Mastery',summary:row?`${row.judgment} \u00b7 ${row.freshness}`:'No governed competency projection is available.',domainOwner:domain.owner,revisionToken:row?.revisionId||null,lenses:[
-     {id:'provenance',label:'Evaluation provenance',tabs:[
-       {id:'authority',label:'Authority and truth ceilings',fields:[
-         {id:'authority-ref',label:'Authority ref',value:MASTERY_AUTHORITY_REF,technical:true},
-         {id:'causal-law',label:'Causal law',value:'EFFECTIVE_DECISIONS+EVIDENCE+VERSIONED_POLICY_ONLY',technical:true},
-         {id:'evaluator',label:'Authorized evaluator',value:evaluator?`${evaluator.providerId} @ ${evaluator.revision} \u00b7 ${evaluator.authority}`:'UNBOUND \u2014 re-evaluation is refused with AUTHORIZED_EVALUATOR_UNBOUND',technical:Boolean(evaluator)},
-         {id:'writer',label:'Canonical Mastery writer',value:'UNBOUND \u2014 no local Mastery write exists'},
-         {id:'persistence',label:'Persistence',value:`${domain.persistence.mode} \u00b7 ${domain.persistence.status} \u00b7 durable ${String(domain.persistence.durable)}`,technical:true}
-       ]},
-       {id:'history',label:'Last state-change cause',fields:last
-         ? [{id:'evaluation',label:'Evaluation id',value:last.evaluationId,technical:true},
-            {id:'judgment',label:'Judgment recorded',value:last.judgment,technical:true},
-            {id:'freshness',label:'Freshness recorded',value:last.freshness,technical:true},
-            {id:'policy',label:'Policy applied',value:last.policyRef,technical:true},
-            {id:'count',label:'Recorded evaluations',value:String(history.length),technical:true}]
-         : noHistory}
-     ]},
-     {id:'request',label:'Re-evaluation request',tabs:[
-       {id:'shape',label:'What a request carries',fields:[
-         {id:'trigger',label:'Trigger',value:'USER_REEVALUATE_REQUEST',technical:true},
-         {id:'requested-judgment',label:'Requested judgment',value:'null \u2014 only the authorized evaluator decides'},
-         {id:'completion',label:'Completion / activity input',value:'false \u2014 never an input to Mastery'},
-         {id:'local-write',label:'Local Mastery write',value:'false \u2014 the request is delegated'},
-         {id:'receipts',label:'Provider receipts',value:String(domain.receipts.length),technical:true}
-       ]}
-     ]}
-   ]};}});
+   const contextProvider=defineContextDescriptorProvider({id:'mastery.context',family:'mastery',owner:domain.owner,describe:({id}:any={})=>{
+    const t=pickText(activeLocale());
+    const row=domain.records.find(item=>item.id===(id??domain.records[0]?.id));
+    const evaluator=domain.evaluatorDescriptor;
+    const history=row?domain.history.filter(item=>item.recordId===row.id):[];
+    const last=history.length?history[history.length-1]:null;
+    let conflict=false,missingRefs:string[]=[];
+    try{const ex=domain.explain(row.id);conflict=ex.conflict;missingRefs=(ex.missingRefs||[]) as string[];}catch{conflict=false;}
+    const noHistory=[{id:'empty',label:t.rowRecorded,value:t.fNoHistory}];
+    const blocked=[
+      ...(evaluator?[]:[{id:'blocked-evaluator',label:t.fEvaluator,value:t.valueUnbound+' (AUTHORIZED_EVALUATOR_UNBOUND)',technical:true}]),
+      ...(missingRefs.length?[{id:'blocked-basis',label:t.rowUnresolved,value:'BASIS_UNAVAILABLE \u00b7 '+missingRefs.join(', '),technical:true}]:[]),
+      {id:'blocked-conflict',label:t.rowConflict,value:conflict?t.conflictBlocked:t.conflictNone,technical:true},
+      {id:'blocked-persistence',label:t.fLocalWrite,value:domain.persistence.mode+' \u00b7 '+domain.persistence.status+' \u00b7 durable '+String(domain.persistence.durable),technical:true}
+    ];
+    return {id:'mastery:'+(row?row.id:'empty'),providerId:'mastery.context',family:'mastery',
+      subject:row?row.capability+' \u00b7 '+row.judgment:t.ctxSubjectNone,
+      eyebrow:t.ctxEyebrow,
+      summary:row?row.judgment+' \u00b7 '+row.freshness:t.ctxSummaryNone,
+      domainOwner:domain.owner,revisionToken:row?row.revisionId:null,lenses:[
+      {id:'provenance',label:t.lensProvenance,tabs:[
+        {id:'authority',label:t.tabAuthority,fields:[
+          {id:'authority-ref',label:t.fAuthorityRef,value:MASTERY_AUTHORITY_REF,technical:true},
+          {id:'causal-law',label:t.fCausalLaw,value:MASTERY_CAUSAL_LAW,technical:true},
+          {id:'evaluator',label:t.fEvaluator,value:evaluator?evaluator.providerId+' @ '+evaluator.revision+' \u00b7 '+evaluator.authority:'UNBOUND \u2014 re-evaluation is refused with AUTHORIZED_EVALUATOR_UNBOUND',technical:Boolean(evaluator)},
+          {id:'writer',label:t.fWriter,value:'UNBOUND \u2014 no local Mastery write exists'},
+          {id:'persistence',label:t.fPersistence,value:domain.persistence.mode+' \u00b7 '+domain.persistence.status+' \u00b7 durable '+String(domain.persistence.durable),technical:true}
+        ]},
+        {id:'identity',label:t.tabIdentity,fields:row?[
+          {id:'record',label:t.fRecordRef,value:row.id+' @ '+row.revisionId,technical:true},
+          {id:'policy-set',label:t.rowPolicySet,value:row.capability,technical:false},
+          {id:'evaluation',label:t.fEvaluationId,value:last?last.evaluationId:'\u2014',technical:true},
+          {id:'evaluated-at',label:t.fEvaluatedAt,value:(last&&last.evaluatedAt)?last.evaluatedAt:t.fNoHistory,technical:false},
+          {id:'truth-class',label:t.rowTruthClass,value:row.truthClass||t.truthClassProvider,technical:true}
+        ]:noHistory}
+      ]},
+      {id:'cause',label:t.lensCause,tabs:[
+        {id:'cause',label:t.tabCause,fields:last
+          ? [{id:'evaluation',label:t.fEvaluationId,value:last.evaluationId,technical:true},
+             {id:'judgment',label:t.fJudgmentRecorded,value:last.judgment,technical:true},
+             {id:'freshness',label:t.fFreshnessRecorded,value:last.freshness,technical:true},
+             {id:'policy',label:t.fPolicyApplied,value:last.policyRef,technical:true},
+             {id:'count',label:t.fRecordedCount,value:String(history.length),technical:true}]
+          : noHistory},
+        {id:'freshness',label:t.tabFreshness,fields:[
+          {id:'state',label:t.fFreshness,value:row?row.freshness:'UNAVAILABLE',technical:true},
+          {id:'trigger',label:t.fTrigger,value:t.freshnessTrigger},
+          {id:'conflict',label:t.rowConflict,value:conflict?t.conflictBlocked:t.conflictNone,technical:true}
+        ]}
+      ]},
+      {id:'request',label:t.lensRequest,tabs:[
+        {id:'shape',label:t.tabRequest,fields:[
+          {id:'trigger',label:t.fTrigger,value:'USER_REEVALUATE_REQUEST',technical:true},
+          {id:'requested-judgment',label:t.fRequestedJudgment,value:t.onlyEvaluatorDecides},
+          {id:'completion',label:t.fCompletion,value:t.neverInput,technical:true},
+          {id:'local-write',label:t.fLocalWrite,value:t.requestDelegated,technical:true},
+          {id:'receipts',label:t.fReceipts,value:String(domain.receipts.length),technical:true}
+        ]},
+        {id:'availability',label:t.tabAvailability,fields:[
+          {id:'basis',label:t.fBasisState,value:missingRefs.length?'BASIS_UNAVAILABLE':'RESOLVED',technical:true},
+          ...blocked
+        ]}
+      ]}
+    ]};}});
  return {surface:MASTERY_SURFACE_ID,workspaceBinding:createFamilyWorkspaceBinding({id:'mastery.workspace',family:'global',domainKind:'mastery',label:'Mastery'}),domain,collection,tableAdapter,compareOwner,compareProvider,provenance,provenanceProvider,contextProvider,toolbarCommandIds:['mastery.inspect','mastery.explain','mastery.reevaluate'],bottomProjection:(id=domain.records[0]?.id)=>id?{history:domain.history.filter(item=>item.recordId===id),provenance:provenanceProvider.read({id}),diagnostics:{canonicalWriterBound:false,reevaluateLocalWrite:false}}:{history:[],provenance:provenanceProvider.read({}),diagnostics:{canonicalWriterBound:false}},slots:{TOP:'shared',TOOLBAR:'shared',LEFT:'collection',CENTER:'ExplainabilityProjectionWorkbench',RIGHT:'shared-context-inspector',BOTTOM:'shared-bottom-shell/domain-projection',TRANSIENT:'shared'},truth:{masteryFromCompletion:false,canonicalMasteryWriter:'UNBOUND',reevaluate:'ZERO_LOCAL_MASTERY_WRITE'}};
 }

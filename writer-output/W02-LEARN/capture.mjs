@@ -50,16 +50,27 @@ const PROBE=()=>{
     consumer:document.body.dataset.consumer||window.CEPFoundation?.consumer||null,
     sourceAvailable:window.CEPFoundation?.learn?.sourceAvailable??null,
     left:text('#leftPane .pbody').slice(0,1600),
+    leftOrder:[...document.querySelectorAll('#leftPane .pbody > *')].map(n=>({tag:n.tagName,id:n.id||'',cls:(n.className||'').toString().slice(0,40),hidden:!!n.hidden,h:Math.round(n.getBoundingClientRect().height)})),
     center:text('#centerPane').slice(0,2600),
     right:text('#rightPane .pbody').slice(0,1600),
+    inspector:(document.querySelector('#wave3ContextInspectorHost')?.innerText||'').replace(/\s+/g,' ').slice(0,900),
+    scopeHidden:!!document.querySelector('#rightPane .contextscope')?.hidden,
     toolbar:text('.toolbar').slice(0,600),
     banner:text('#topBanner').slice(0,600),
+    bannerParts:{
+      secondary:(document.querySelector('#topBanner .secondary')?.innerText||'').replace(/\s+/g,' ').slice(0,240),
+      secondaryDisplay:document.querySelector('#topBanner .secondary')?getComputedStyle(document.querySelector('#topBanner .secondary')).display:'missing',
+      tags:(document.querySelector('#topBanner .tags')?.innerText||'').replace(/\s+/g,' ').slice(0,240),
+      tagsDisplay:document.querySelector('#topBanner .tags')?getComputedStyle(document.querySelector('#topBanner .tags')).display:'missing',
+      state:document.querySelector('#topBanner')?.getAttribute('data-state')
+    },
     bottom:text('#bottomShelf').slice(0,800),
     boxes:{
       left:box('#leftPane'),center:box('#centerPane'),right:box('#rightPane'),toolbar:box('.toolbar'),bottom:box('#bottomShelf'),
       leftRegion:box('#domainLeftRegion'),context:box('#domainContext'),
       practice:box('.learn-practice'),editor:box('#editorDocument'),docScroll:box('#docScroll'),
-      learnRail:box('[data-learn="rail"]'),learnCanvas:box('[data-learn="canvas"]'),learnCtx:box('[data-learn="context"]')
+      learnRail:box('[data-learn="rail"]'),learnCanvas:box('[data-learn="canvas"]'),learnCtx:box('[data-learn="context"]'),
+      work:box('[data-learn="work"]'),wave3Host:box('#wave3ContextInspectorHost'),pathHead:box('.lsr-pathhead'),objective:box('.lsr-objective'),practicePanel:box('.lsr-panel')
     },
     counts:{
       leftRows:document.querySelectorAll('#leftPane .pbody button,#leftPane .pbody [role=button]').length,

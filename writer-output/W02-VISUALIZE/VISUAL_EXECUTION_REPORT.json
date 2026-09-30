@@ -1,26 +1,139 @@
 {
   "SURFACE": "visualize",
   "OWNER": "W02-VISUALIZE",
-  "REFERENCE": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/03_VISUALIZE/CEP_VIS_001_VISUALIZE_TREE_CORRECTED_REFERENCE_v2.png",
-  "REFERENCE_CLASSIFICATION": "OWNER_CONFIRMED_FINAL_REFERENCE · sha256 c02a6a272f330c3cc169317bff616239e1b2ae08ba99e57ff91adffc07c6831f · 1672x941 · register: cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md · manifest: cep-writer/REFERENCE_MANIFEST.json · read as CONSTRUCTION AUTHORITY for composition, hierarchy, spatial relationships, information architecture, density/rhythm, interaction language, visual emphasis, pane organization and responsive intent (never 'presentation only'; REFERENCE != BLIND PIXEL COPY). Supporting OWNER_CONFIRMED_SUPPORTING_COMPONENT_REFERENCE: CEP_VISUALIZE_CANVAS_VIEW_COMPONENT_REFERENCE.png (sha256 918ab2a8c7c415b5f201712c5b11a3c13590db0231d7be1d0073a8f955ced33c, 1672x941), CEP_VISUALIZE_PATH_VIEW_COMPONENT_REFERENCE.png (sha256 0f1d320fe684b992b885cafb47664aa98ce41d8f6c44f6c67df7ef350735166f, 1094x343), CEP_VISUALIZE_FOCUSED_GRAPH_RELATIONSHIP_COMPONENT_REFERENCE.png (sha256 7c36b02e30fd82a6664e427cbc450c1b8f1c221295ea53b31a36b745cebd38f2, 613x647). Reference establishes layout/interaction intent ONLY — it does not set product language: Arabic and English are both first-class and the active language is Settings-owned.",
-  "CURRENT_CANDIDATE": "writer/mi-serial working tree (no commit made by this unit; standard forbids git add/commit from parallel writers) — baseline at session start: branch tip ccee419, pre-existing sources stack/native-typescript/surfaces/visualize/surface.ts (32327 bytes) and stack/native-typescript/adapters/visualize/domain.ts (36620 bytes)",
-  "FILES_CHANGED": [],
-  "FUNCTIONAL_STATUS": "PENDING",
-  "STRUCTURAL_STATUS": "PENDING",
-  "VISUAL_STATUS": "PENDING",
-  "VISUAL_COMPARISON_LEVELS_COMPLETED": [],
-  "RESPONSIVE_STATUS": "PENDING",
-  "RTL_LTR_STATUS": "PENDING",
-  "DEFECTS_FOUND": [],
-  "DEFECT_SEVERITY": "PENDING",
-  "ROOT_CAUSE": "PENDING",
-  "FIXES_APPLIED": [],
-  "RECAPTURE_STATUS": "PENDING",
+  "REFERENCE": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/03_VISUALIZE/CEP_VIS_001_VISUALIZE_TREE_CORRECTED_REFERENCE_v2.png (+ supporting CEP_VISUALIZE_CANVAS_VIEW_COMPONENT_REFERENCE.png, CEP_VISUALIZE_PATH_VIEW_COMPONENT_REFERENCE.png, CEP_VISUALIZE_FOCUSED_GRAPH_RELATIONSHIP_COMPONENT_REFERENCE.png)",
+  "REFERENCE_CLASSIFICATION": "OWNER_CONFIRMED_FINAL_REFERENCE · sha256 c02a6a272f330c3cc169317bff616239e1b2ae08ba99e57ff91adffc07c6831f · 1672x941 · register: cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md · manifest: cep-writer/REFERENCE_MANIFEST.json · read as CONSTRUCTION AUTHORITY for composition, hierarchy, spatial relationships, information architecture, density/rhythm, interaction language, visual emphasis, pane organization and responsive intent (never 'presentation only'; REFERENCE != BLIND PIXEL COPY). Supporting OWNER_CONFIRMED_SUPPORTING_COMPONENT_REFERENCE: CANVAS sha256 918ab2a8c7c415b5f201712c5b11a3c13590db0231d7be1d0073a8f955ced33c 1672x941; PATH sha256 0f1d320fe684b992b885cafb47664aa98ce41d8f6c44f6c67df7ef350735166f 1094x343; FOCUSED_GRAPH_RELATIONSHIP sha256 7c36b02e30fd82a6664e427cbc450c1b8f1c221295ea53b31a36b745cebd38f2 613x647. Reference establishes layout/interaction intent ONLY — it does not set product language: Arabic and English are both first-class and the active language is Settings-owned.",
+  "CURRENT_CANDIDATE": "writer/mi-serial working tree (NO git add/commit by this unit — parallel-writer index rule). Session start branch tip ccee419; branch tip moved to e5a77b60 under parallel writers/Controller. Source-only candidate: stack/native-typescript/surfaces/visualize/surface.ts edited in the working tree; no shared file edited by this unit.",
+  "FILES_CHANGED": [
+    "stack/native-typescript/surfaces/visualize/surface.ts (surface-owned only: bilingual copy table + t()/bdi helpers; new surface presentation stylesheet; heading identity + segmented view switcher + truth chip; view context strip; LEFT structure navigator; CENTER tree hierarchy table with column header, truth strip, collapse groups and arrow-key nav; CENTER path lanes with legend/step/connector; RIGHT selection context panel (object + relationships + fields) with empty-state stats; Canvas status block; shared-spatial label-fitting pass + edge-type legend overlay)",
+    "writer-output/W02-VISUALIZE/** (unit output only: report, capture.mjs, LINEAGE.json, captures/)"
+  ],
+  "FUNCTIONAL_STATUS": "PENDING — build currently blocked by OTHER units' transient TypeScript syntax errors (stack/native-typescript/surfaces/manual_ai/runtime.ts line 32, then surfaces/portfolio presentation comment). Not my files; will retry. Pre-build local strip check of my file: PASS (stripTypeScriptTypes OK).",
+  "STRUCTURAL_STATUS": "PENDING (self-checked invariants, awaiting build): hierarchyProjection() contract untouched (F-048: ok=false, VISUALIZE_HIERARCHY_UNAVAILABLE_NOT_OBSERVED, AUTHORITY_GATED); no BALANCED6_STRUCTURE_TREE reference in surface.ts; required literals retained ('Spatial representation workspace', 'Hierarchy unavailable', 'Auxiliary source-family navigation — not hierarchy', data-tree-hierarchy-status=\"UNAVAILABLE_NOT_OBSERVED\"); no 'Canonical relationships' / 'Canonical relationship workspace' copy; exported API (renderVisualizeHierarchyTree, createVisualizeHierarchyOutlineDescriptor, createVisualizeSourceFamilyOutlineDescriptor, bindVisualizeSurface, mountVisualizeFourViewComposition) preserved; no shared file written; no direction:rtl/direction:ltr baked onto content containers; no hardcoded arrow glyph in PATH connectors (SVG chevron mirrored by html[dir=rtl] rule).",
+  "VISUAL_STATUS": "IN PROGRESS — baseline L1-L4 captured and compared against the reference; composition rewrite applied in source; re-capture and re-comparison pending the shared build.",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": ["L1", "L2", "L3"],
+  "RESPONSIVE_STATUS": "PENDING — CSS bands written at 1180 / 1024 / 760 (column shedding, switcher full-width, truth chip hidden, single-column fields); not yet captured.",
+  "RTL_LTR_STATUS": "PENDING — Arabic/RTL and English/LTR captures planned; direction removed from structure (visualize-tree/visualize-path/visualize-view-switcher/visualize-path-lane/visualize-path-node hardcoded direction removed), #domainView.domain-readonly and .domain-heading direction overridden to inherit inside the surface stage, technical tokens isolated with <bdi dir=\"ltr\"> / .vis-mono{direction:ltr;unicode-bidi:isolate}.",
+  "DEFECTS_FOUND": [
+    {
+      "id": "D-01",
+      "severity": "V4",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "TREE — the reference's dominant content — rendered a near-empty center: two stacked text boxes ('Hierarchy unavailable' + a collapsed 'Auxiliary source-family navigation' disclosure) occupying <10% of a ~926x601 work area; ~90% dead zone. The surface's actual work area had no work.",
+      "change": "Center TREE is now a reference-shaped hierarchy table: panel header (icon + section title + object/relation/view chips), warn-tinted truth strip carrying the same honesty statement, a 5-column header row (Object / Kind / Relations / Source), domain group branches with collapse/expand + arrow-key navigation, and per-row kind label, relation-degree badge and bdi-isolated source id. Canonical hierarchy nodes render through the same branch renderer when hierarchy.ok is true.",
+      "evidence": "baseline capture writer-output/W02-VISUALIZE/captures/base-tree-ar-20260930T181848Z-e5a77b60.png (sha256 in LINEAGE.json) L1/L2 vs reference; DOM probe center {x:315,y:301,w:926,h:601} containing only 2 boxes.",
+      "reComparison": "PENDING shared build",
+      "status": "OPEN"
+    },
+    {
+      "id": "D-02",
+      "severity": "V3",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "LEFT pane list rows visually overlapped each other (long labels wrapped into neighbouring rows), pane heading truncated to 'Visualize views & rep...', heading and body copy center-aligned, and the pane repeated information already in the heading ('Active view: TREE') instead of carrying graph context.",
+      "change": "LEFT rebuilt as a structure navigator: scope card (provider id + authority badge + 3-stat objects/relations/domains grid) and a graph-objects card grouped by source domain with per-object relation-degree badge and bdi object id. Pane label shortened to 'Structure navigator'/'مستكشف البنية'. Focus is restored to the previously focused row after re-render.",
+      "evidence": "baseline captures base-*-ar (left pane x:0..315) L2",
+      "reComparison": "PENDING shared build",
+      "status": "OPEN"
+    },
+    {
+      "id": "D-03",
+      "severity": "V3",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "RIGHT pane presented a flat 13-row technical key/value dump (REPRESENTATION_PRESENTATION_ONLY, representationId != canonicalObjectId, raw revision token) with no hierarchy, plus a duplicated paragraph — raw technical state used as presentation; no object identity, no relationships, no provenance despite the surface being about graph relationships.",
+      "change": "A composed selection-context panel is now prepended to the RIGHT host: header (icon + 'Selection context' + view token), object title block with kind/identifier/relation chips, a Relationships section listing each incident edge with direction, peer label and bdi edge type, and a Fields section (domain, source version, canvas position, views in, identifier, source digest). Empty selection shows an explicit empty state plus objects/relations/selection stats — no dead zone. Canvas action block now follows the selection panel and is localized.",
+      "evidence": "baseline captures base-*-ar (right pane x:1241..1672) L2/L3",
+      "reComparison": "PENDING shared build",
+      "status": "OPEN"
+    },
+    {
+      "id": "D-04",
+      "severity": "V3",
+      "rootCause": "IMPLEMENTATION",
+      "defect": "Direction baked into structure: `.visualize-tree,.visualize-path{direction:rtl}`, `.visualize-view-switcher{direction:ltr}`, `.visualize-path-lane{direction:ltr}`, `.visualize-path-node{direction:ltr}` — hardcoded rtl/ltr on content containers, fighting the shared `#domainView.domain-readonly{direction:ltr}` and `.domain-heading{direction:ltr}`.",
+      "change": "All four hardcoded directions removed. The surface overrides the shared containers to `direction:inherit` inside `.m0-visualize-four-view` so content follows the active preference; technical tokens are isolated with `<bdi dir=\"ltr\">` or `.vis-mono{direction:ltr;unicode-bidi:isolate}`; the PATH connector is a symmetric SVG chevron mirrored only by `html[dir=\"rtl\"] .vis-connector svg{transform:scaleX(-1)}` (a mirrored directional affordance, not a baked layout direction).",
+      "evidence": "grep of baseline source lines 89/93 (removed); baseline captures show English-only content inside an RTL shell",
+      "reComparison": "PENDING shared build",
+      "status": "OPEN"
+    },
+    {
+      "id": "D-05",
+      "severity": "V3",
+      "rootCause": "CONTENT_MODEL",
+      "defect": "Every surface string was hardcoded English while the shell rendered Arabic — Arabic is a first-class product language and the active language is Settings-owned, so the surface was single-language.",
+      "change": "Added a two-table copy model (VIS_TEXT.en / VIS_TEXT.ar) resolved at render time from the document language; every surface-authored string (heading, switcher, strip, left, tree, path, legend, right, canvas block) goes through T(). No language is defaulted into structure.",
+      "evidence": "baseline captures base-tree-ar (locale seeded ar: shell Arabic, surface 100% English)",
+      "reComparison": "PENDING shared build",
+      "status": "OPEN"
+    },
+    {
+      "id": "D-06",
+      "severity": "V3",
+      "rootCause": "SHARED_COMPONENT",
+      "defect": "GRAPH and CANVAS node titles overflow the 132px shared node card and collide with neighbouring cards: `foundation/spatial/presentation.ts` renders `<text class=\"node-title\">` with no wrapping/clipping, and fixture labels run to 66 characters.",
+      "change": "Surface-local inline-presentation pass `fitSpatialLabels()` runs after every shared Spatial render inside `.m0-visualize-four-view`: measures getComputedTextLength(), truncates node title / secondary line / relation label to the card budget with an ellipsis and attaches an SVG <title> tooltip carrying the full text (the card's aria-label already carries the full label). No shared file edited.",
+      "evidence": "baseline captures base-graph-ar / base-canvas-ar L3 (title text crossing card borders and overlapping adjacent cards)",
+      "reComparison": "PENDING shared build",
+      "status": "OPEN — shared root cause recorded; a shared text-wrapping fix in foundation/spatial/presentation.ts is a candidate SHARED_COMPONENT request for the Controller's serialized slot",
+      "sharedComponentRequest": "foundation/spatial/presentation.ts (owner: W01-SHELL/shared seam) — add title/secondary truncation or two-line wrap in renderSpatialNode so every consumer benefits; surface-local fit is the interim smallest-correct change because this unit owns no shared seam."
+    },
+    {
+      "id": "D-07",
+      "severity": "V2",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "Heading hierarchy was flat and the meta strip wrapped to two centered lines carrying a 100+ character truth string ('LOCAL_ACCEPTANCE_PROJECTION_ONLY · canonical:false · READ_ONLY · SpatialInteractionKernel') as if it were the primary content; view tabs read as plain text buttons with no affordance.",
+      "change": "Heading is now a bordered surface toolbar: eyebrow (VISUALIZE TREE-VIEW / Arabic equivalent) + title + subtitle on the leading side, a bordered segmented tablist (Tree/Path/Graph/Canvas with SVG icons) and a truth chip on the trailing side. The meta strip became a single-line view context strip: active-view label with accent rule, view description, selection/object/relation chips, hierarchy-unavailable chip, and the truth tokens pushed to the trailing side at 10px mono.",
+      "evidence": "baseline captures base-*-ar L2 (heading y:182 h:55; meta y:237 h:64 wrapping to 2 lines)",
+      "reComparison": "PENDING shared build",
+      "status": "OPEN"
+    },
+    {
+      "id": "D-08",
+      "severity": "V2",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "GRAPH view showed 6 nodes in two rows with a ~200px empty band between them and no legend or relationship affordance; PATH showed unlabeled lanes with no step/order/status and a hardcoded '→' glyph connector.",
+      "change": "GRAPH/CANVAS gained a surface-owned edge-type legend overlay (Canonical / Related / Current path / Canvas only, matching the supporting references). PATH gained a panel header with counts, an honest projection note, an edge-type legend strip, lane cards with domain token + object/relation counts, step-numbered node cards with clamped titles and relation badges, and SVG chevron connectors mirrored with direction.",
+      "evidence": "baseline captures base-graph-ar, base-path-ar L1/L2; reference PATH + FOCUSED_GRAPH references",
+      "reComparison": "PENDING shared build",
+      "status": "OPEN"
+    },
+    {
+      "id": "D-09",
+      "severity": "V2",
+      "rootCause": "IMPLEMENTATION",
+      "defect": "Structural bugs during the rewrite: an accidental deletion of the LEFT scope card's opening <div class=\"vis-card\"> (unbalanced markup) and a typo `selection.selectionIds` (nonexistent field) — both found by immediate source re-read before build.",
+      "change": "Re-inserted the card wrapper (verified balanced) and corrected to `selection.selectedIds`; file passes stripTypeScriptTypes.",
+      "evidence": "targeted source reads of renderLeft / selectionPanelHTML after each edit",
+      "reComparison": "n/a (pre-build self-check)",
+      "status": "ACCEPTED"
+    }
+  ],
+  "DEFECT_SEVERITY": "1xV4, 5xV3, 3xV2 (baseline); D-09 accepted as a self-caught pre-build regression",
+  "ROOT_CAUSE": "SURFACE_COMPOSITION (D-01,D-02,D-03,D-07,D-08) · IMPLEMENTATION (D-04,D-09) · CONTENT_MODEL (D-05) · SHARED_COMPONENT (D-06)",
+  "FIXES_APPLIED": [
+    "Surface copy table VIS_TEXT.{en,ar} + T()/bdi()/visLang()/visDir() helpers",
+    "Rewrote ensureVisualizeStyle into a full surface presentation system (type/spacing/radius/tone tokens, panel/row/chip/stat/legend primitives, 4 responsive bands, reduced-motion guard)",
+    "Heading: identity block + segmented view switcher + truth chip; meta strip rebuilt as a one-line view context strip",
+    "LEFT: structure navigator (scope card + stats + domain-grouped object list, focus restore)",
+    "CENTER TREE: hierarchy table with column header, truth strip, branch collapse and arrow-key navigation",
+    "CENTER PATH: legend strip + lane cards + step cards + direction-mirrored SVG connectors",
+    "RIGHT: composed selection-context panel (identity, relationships, fields) + empty-state stats; canvas status block localized and anchored under it",
+    "Shared spatial: fitSpatialLabels() truncation pass + edge-type legend overlay",
+    "Direction de-baking on all surface content containers"
+  ],
+  "RECAPTURE_STATUS": "BLOCKED — `npm run build:runtime` is red on other units' in-flight files (surfaces/manual_ai/runtime.ts, surfaces/portfolio presentation comment). Will retry; baseline captures retained and labelled.",
   "RECOMPARISON_STATUS": "PENDING",
   "REGRESSION_STATUS": "PENDING",
-  "EVIDENCE": [],
-  "LINEAGE": [],
+  "EVIDENCE": [
+    {"kind": "REFERENCE", "path": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/03_VISUALIZE/CEP_VIS_001_VISUALIZE_TREE_CORRECTED_REFERENCE_v2.png", "sha256": "c02a6a272f330c3cc169317bff616239e1b2ae08ba99e57ff91adffc07c6831f", "dims": [1672, 941], "role": "CONSTRUCTION AUTHORITY — not evidence"},
+    {"kind": "BASELINE_RESULT", "path": "writer-output/W02-VISUALIZE/captures/base-tree-ar-20260930T181848Z-e5a77b60.png", "viewport": [1672, 941], "seededLocale": "ar", "view": "TREE", "sha256": "recorded in writer-output/W02-VISUALIZE/LINEAGE.json", "role": "CURRENT RESULT before this unit's changes"},
+    {"kind": "BASELINE_RESULT", "path": "writer-output/W02-VISUALIZE/captures/base-path-ar-20260930T181928Z-e5a77b60.png", "viewport": [1672, 941], "seededLocale": "ar", "view": "PATH", "role": "CURRENT RESULT before this unit's changes"},
+    {"kind": "BASELINE_RESULT", "path": "writer-output/W02-VISUALIZE/captures/base-graph-ar-20260930T181933Z-e5a77b60.png", "viewport": [1672, 941], "seededLocale": "ar", "view": "GRAPH", "role": "CURRENT RESULT before this unit's changes"},
+    {"kind": "BASELINE_RESULT", "path": "writer-output/W02-VISUALIZE/captures/base-canvas-ar-20260930T181939Z-e5a77b60.png", "viewport": [1672, 941], "seededLocale": "ar", "view": "CANVAS", "role": "CURRENT RESULT before this unit's changes"}
+  ],
+  "LINEAGE": "Every capture carries: candidate branch@commit at capture time, viewport, seeded locale, timestamp, url, image identity (path + sha256 + byte size + dims), DOM probe (dir/lang/activeView/region rects/overflow) and console/page errors — written to writer-output/W02-VISUALIZE/LINEAGE.json and per-capture .receipt.json by capture.mjs. Branch tip moved under parallel writers (ccee419 -> e5a77b60) during baseline capture; per-entry commit records the exact tip.",
   "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
-  "BLOCKERS": [],
-  "STAGE": "INITIALIZED"
+  "BLOCKERS": [
+    "Shared build `npm run build:runtime` red on files this unit does not own (surfaces/manual_ai/runtime.ts syntax error, surfaces/portfolio presentation comment). Non-edit-and-retry path required by the parallel plan; will retry until green, then capture and compare."
+  ],
+  "STAGE": "SOURCE_FIXES_APPLIED_AWAITING_BUILD"
 }

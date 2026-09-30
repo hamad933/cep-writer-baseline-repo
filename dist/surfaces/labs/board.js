@@ -43,12 +43,13 @@ export const LAB_TOOL_CONTEXT=Object.freeze({
 });
 
 /* Reference-shaped node placement: a three-step spine, then task 3 fanning out to the required
- * successor above and the optional branch below — the fan-out is what makes the graph non-linear. */
+ * successor above and the optional branch below — the fan-out is what makes the graph non-linear.
+ * Column pitch (210) is derived from the Labs node card width so neighbouring cards never touch. */
 const LAB_LAYOUT                               ={
-  'TASK-1':[36,150],'TASK-2':[226,150],'TASK-3':[416,150],'TASK-4':[556,36],'TASK-5':[556,272]
+  'TASK-1':[20,150],'TASK-2':[236,150],'TASK-3':[452,150],'TASK-4':[630,20],'TASK-5':[630,284]
 };
 const layoutOf=(id       ,index       )                =>
-  LAB_LAYOUT[id]||[36+(index%3)*190,150+Math.floor(index/3)*140];
+  LAB_LAYOUT[id]||[20+(index%3)*216,150+Math.floor(index/3)*164];
 
 const edgeKind=(type       )=>/optional/i.test(type)?'optional':/conditional|branch/i.test(type)?'conditional':'linear';
 
@@ -70,6 +71,12 @@ export function mountLabTaskGraphIdentity(composition    ){
 
   const domain=composition.domain,bus=composition.bus;
   const state         ={facet:'taskGraph',tool:'select',branchArmed:false,endpoints:[],menu:null,status:null};
+  /* The reference inspects a task's authoring context by default. Seed the first task when the
+     domain has no selection yet; Clear selection deliberately falls back to the lab-level context. */
+  try{
+    const seed=domain.graphProjection()?.tasks||[];
+    if(!domain.selection&&seed.length)domain.select({kind:'task',id:String(seed[0].id)});
+  }catch{}
   let view                 =null;
   let chromeInstalled=false;
   let commandLocale               =null;
@@ -227,11 +234,16 @@ export function mountLabTaskGraphIdentity(composition    ){
     }catch(error){if(typeof console!=='undefined')console.warn('lab command labels',error)}
   };
 
-  /** Shared code can re-reveal generic donor panes after a region call; suppress them for labs only. */
+  /** Shared code can re-reveal generic donor panes after a region call; suppress them for labs only.
+   *  `[hidden]` is not enough — some donor hosts force their own `display`, which leaves a dead
+   *  strip of foreign chrome above the context region. Inline `display:none!important` is applied
+   *  to this surface's pane siblings only; no shared file is modified. */
   const suppressPaneSiblings=()=>{
     document.querySelectorAll('#leftPane .pbody > :not(#domainLeftRegion),#rightPane .pbody > :not(#domainContext)').forEach(node=>{
-      if(node.hidden&&node.getAttribute('aria-hidden')==='true')return;
-      node.hidden=true;node.inert=true;node.setAttribute('aria-hidden','true');(node               ).dataset.donorSemantic='suppressed';
+      if(node.hidden&&node.getAttribute('aria-hidden')==='true'&&getComputedStyle(node).display==='none')return;
+      node.hidden=true;node.inert=true;node.setAttribute('aria-hidden','true');
+      (node               ).style.setProperty('display','none','important');
+      (node               ).dataset.donorSemantic='suppressed';
     });
     const donor=document.querySelector('#editorDocument');
     if(donor&&!donor.hidden){donor.hidden=true;donor.setAttribute('aria-hidden','true');(donor               ).dataset.donorSemantic='suppressed'}
@@ -287,11 +299,13 @@ export function mountLabTaskGraphIdentity(composition    ){
       const pt=layoutOf(String(task.id),index);
       return {
         id:String(task.id),label:String(task.title||task.id),
-        status:String(task.completion||'Required'),
+        /* completion is carried by the tag row instead of the status chip: a 200px Labs card has
+           room for two chips (kind + completion) and the chip column would sit mid-card. */
+        status:'',
         subtitle:String(task.description||task.expectedSignal||''),
         iconKey:String(index+1),idChip:String(task.id),
         kind:String(task.nodeType||'task'),type:String(task.nodeType||'task'),
-        tags:[String(task.nodeType||'task')],
+        tags:[String(task.nodeType||'task'),String(task.completion||'Required')],
         x:pt[0],y:pt[1]
       };
     });
@@ -303,6 +317,128 @@ export function mountLabTaskGraphIdentity(composition    ){
       return {id:`edge:${edge.id}`,source:String(edge.from),target:String(edge.to),type,direction:'directed',kind:'representation'};
     });
     return {nodes,relations};
+  };
+
+  /**
+   * Post-render correction pass, run through the shared SpatialView `change` hook (called at the
+   * end of every shared render, so it survives pan/zoom/select/keyboard).
+   *
+   * Two reference-fidelity corrections the shared presentation cannot express itself:
+   *  1. relation endpoints are authored at the node *centre* (`x+half`), so arrowheads and line
+   *     ends were painted underneath the opaque card. They are re-seated onto the card border,
+   *     which is where the reference puts them.
+   *  2. SVG `<text>` does not wrap, so long authored titles/descriptions must be ellipsised to the
+   *     card's inner width instead of spilling over the neighbour. The full string stays on the
+   *     node's accessible name, the structure pane and the context pane.
+   */
+  const paintGraph=(instance                 )=>{
+    const svg=instance?.svg;if(!svg)return;
+    const model=(instance       )?.model;
+    const zoom=Number(model?.camera?.zoom)||1;
+    const surface=svg.querySelector('.node-surface')                       ;
+    let halfW=100,halfH=38;
+    if(surface){const r=surface.getBoundingClientRect();if(r.width>0&&r.height>0){halfW=r.width/zoom/2;halfH=r.height/zoom/2}}
+    const nodes=new Map            ((model?.nodes||[]).map((n    )=>[String(n.id),n]));
+    const edges=(model?.edges||[])         ;
+    svg.querySelectorAll('[data-edge]').forEach(group=>{
+      const edge=edges.find(e=>String(e.id)===group.getAttribute('data-edge'));
+      const s=edge?nodes.get(String(edge.source)):null,t=edge?nodes.get(String(edge.target)):null;
+      const line=group.querySelector('line.relation-line')                       ;
+      if(!s||!t||!line)return;
+      const ax=s.x+halfW,ay=s.y+halfH,bx=t.x+halfW,by=t.y+halfH,dx=bx-ax,dy=by-ay;
+      if(!Number.isFinite(dx)||!Number.isFinite(dy)||(!dx&&!dy))return;
+      const k=Math.min(Math.abs(dx)>0.01?halfW/Math.abs(dx):Infinity,Math.abs(dy)>0.01?halfH/Math.abs(dy):Infinity,0.49);
+      line.setAttribute('x1',String(ax+dx*k));line.setAttribute('y1',String(ay+dy*k));
+      line.setAttribute('x2',String(bx-dx*k));line.setAttribute('y2',String(by-dy*k));
+    });
+    const NS='http://www.w3.org/2000/svg';
+    /* 2px tolerance: sub-pixel glyph advance must not trigger a wrap. */
+    const available=Math.max(48,2*halfW-31-6)+2;
+    const widthOf=(el               ,s       )=>{el.textContent=s;return el.getComputedTextLength()};
+    const fits=(el               ,s       )=>widthOf(el,s)<=available;
+    /** Longest word-aligned prefix that fits; hard-cuts only when a single word cannot fit. */
+    const clipToWidth=(el               ,text       )=>{
+      const words=text.trim().split(/\s+/);
+      let line='';
+      for(const w of words){
+        const trial=line?`${line} ${w}`:w;
+        if(fits(el,trial)){line=trial;continue}
+        if(line)break;
+        let single='';
+        for(const ch of w){if(widthOf(el,`${single}${ch}…`)<=available)single+=ch;else break}
+        return single||w.slice(0,1);
+      }
+      return line||text.slice(0,1);
+    };
+    /** Split into at most two lines, preferring the split that leaves both lines balanced. */
+    const wrapToTwo=(el               ,text       )         =>{
+      const full=text.trim();
+      if(fits(el,full))return [full];
+      const words=full.split(/\s+/);
+      for(let i=words.length-1;i>=1;i--){
+        const first=words.slice(0,i).join(' '),rest=words.slice(i).join(' ');
+        if(fits(el,first)&&fits(el,rest))return [first,rest];
+      }
+      const first=clipToWidth(el,full);
+      const rest=full.slice(first.length).trim();
+      if(!rest)return [first];
+      return [first,fits(el,rest)?rest:`${clipToWidth(el,rest)}…`];
+    };
+    const putLines=(el               ,lines         ,ySingle       ,yFirst       ,ySecond       )=>{
+      if(lines.length<2){el.textContent=lines[0];el.setAttribute('y',String(ySingle));return}
+      el.textContent='';
+      for(let i=0;i<lines.length;i++){
+        const ts=document.createElementNS(NS,'tspan');
+        ts.setAttribute('x','31');ts.setAttribute('y',String(i===0?yFirst:ySecond));
+        ts.textContent=lines[i];el.appendChild(ts);
+      }
+    };
+    svg.querySelectorAll                ('.node-title,.node-secondary-line').forEach(el=>{
+      const full=el.getAttribute('data-full')??String(el.textContent||'');
+      if(!el.hasAttribute('data-full'))el.setAttribute('data-full',full);
+      const lines=wrapToTwo(el,full);
+      if(el.classList.contains('node-title'))putLines(el,lines,38,30,42);
+      else putLines(el,lines,58,58,69);
+    });
+    const readable=(id       )=>{
+      const n=nodes.get(id);if(!n)return id;
+      const tags=(n.tags||[]).filter(Boolean).join(' · ');
+      return `${n.label||id}${n.subtitle?` — ${n.subtitle}`:''}${tags?` [${tags}]`:''}`;
+    };
+    svg.querySelectorAll             ('[data-node]').forEach(g=>{
+      const id=g.getAttribute('data-node')||'';
+      g.setAttribute('aria-label',readable(id));
+      if(!g.querySelector(':scope > title')){
+        const tip=document.createElementNS('http://www.w3.org/2000/svg','title');
+        tip.textContent=String(nodes.get(id)?.label||id);
+        g.insertBefore(tip,g.firstChild);
+      }
+    });
+  };
+
+  /**
+   * The shared `fit()` bounds a node at the shared default 132×62 card size with 30px padding.
+   * Labs cards are bigger, so a shared fit would clip the last card against the canvas edge.
+   * This is the same camera maths with the Labs card box read back from the rendered card.
+   */
+  const fitToBox=(instance                 )=>{
+    const svg=instance?.svg;if(!svg)return;
+    const model=(instance       )?.model,nodes=model?.nodes||[];
+    if(!nodes.length)return;
+    const w=svg.clientWidth||svg.getBoundingClientRect().width;
+    const h=svg.clientHeight||svg.getBoundingClientRect().height;
+    if(!w||!h)return;
+    const zoom0=Number(model.camera?.zoom)||1;
+    const surface=svg.querySelector('.node-surface')                       ;
+    let cw=156,ch=104;
+    if(surface){const r=surface.getBoundingClientRect();if(r.width>0&&r.height>0){cw=r.width/zoom0;ch=r.height/zoom0}}
+    const xs=nodes.map((n    )=>Number(n.x)),ys=nodes.map((n    )=>Number(n.y));
+    const minX=Math.min(...xs),minY=Math.min(...ys),maxX=Math.max(...xs)+cw,maxY=Math.max(...ys)+ch;
+    const bw=maxX-minX,bh=maxY-minY,pad=18;
+    if(![bw,bh].every(v=>Number.isFinite(v)&&v>0))return;
+    const z=Math.max(0.15,Math.min(2,Math.min((w-2*pad)/bw,(h-2*pad)/bh)));
+    model.camera={x:(w-bw*z)/2-minX*z,y:(h-bh*z)/2-minY*z,zoom:z};
+    instance?.render();
   };
 
   const render=()=>{
@@ -371,8 +507,10 @@ export function mountLabTaskGraphIdentity(composition    ){
       </article>
     </div>`;
     ensureLabStyle(host );
-    bind(host ,locale);
+    /* Regions first, then bind: renderRegions() replaces the pane subtrees, so binding before it
+       would attach handlers to nodes that are immediately discarded (dead pane clicks). */
     renderRegions();
+    bind(host ,locale);
 
     const graphHost=host .querySelector('[data-lab-graph]')                    ;
     if(graphHost){
@@ -380,16 +518,21 @@ export function mountLabTaskGraphIdentity(composition    ){
       if(!nodes.length){
         graphHost.innerHTML=`<p class="w03l-hint" style="margin:24px">${esc(t.emptyGraph)} — ${esc(t.emptyGraphHint)}</p>`;
       }else{
+        const holder                           ={current:null};
         view=new SpatialView(graphHost,nodes,relations,{
+          change:()=>paintGraph(holder.current),
           select:(ids         )=>{const id=ids.at(-1);if(!id)return;onNodeClick(String(id))},
           edgeSelect:(id    )=>{if(!id)return;selectBranch(String(id).replace(/^edge:/,''))},
           open:(id    )=>{if(!id)return;onNodeClick(String(id))}
         });
+        holder.current=view;
         view.setActiveMode(published?'review':'author');
         const focusId=selection?.kind==='task'?String(selection.id):null;
         if(focusId&&nodes.some((n    )=>n.id===focusId)){try{view.model.select?.(focusId);view.render?.()}catch{}}
-        requestAnimationFrame(()=>{try{view?.fit?.()}catch{}});
-        setTimeout(()=>{try{view?.fit?.()}catch{}},140);
+        fitToBox(view);
+        paintGraph(view);
+        requestAnimationFrame(()=>{fitToBox(view);paintGraph(view)});
+        setTimeout(()=>{fitToBox(view);paintGraph(view)},140);
       }
     }
     if(lastFocus){

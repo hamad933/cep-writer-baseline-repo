@@ -36,7 +36,7 @@ export class W03RunDomain {
   const activeTasks=tasks.filter(task=>task.status==='ACTIVE');
   return freeze({identity:{runId:this.runtime.runId,title:fixture.title,titleAr:fixture.titleAr,runType:fixture.runType,phase:fixture.phase,role:fixture.role,task:fixture.task,health:fixture.health,provenance:fixture.provenance,enterprise:fixture.enterprise,definitionId:fixture.definitionId,definitionRevision:fixture.definitionRevision,baselineId:fixture.baselineId,twinRevision:fixture.twinRevision},
     mode:{raw:fixture.mode,parts:modeParts,guidance:modeParts[0]||'—',participation:modeParts[1]||'—',rolePolicy:modeParts[2]||'—'},
-    run:structuredClone(this.runtime.run),manifest:structuredClone(this.runtime.manifest),preflight:this.runtime.preflight(),provider:this.runtime.descriptor(),
+    run:structuredClone(this.runtime.run),manifest:structuredClone(this.runtime.manifest),preflight:this.runtime.preflight(),provider:{...this.runtime.descriptor(),epoch:this.runtime.epoch},
     alerts,events,gaps:inspection.gaps,tasks,devices,observations:logs,artifacts:snapshots,snapshots,logs,
     sources,counts:{alerts:alerts.length,events:events.length,tasks:tasks.length,devices:devices.length,observations:logs.length,artifacts:snapshots.length,done:tasks.filter(task=>task.status==='DONE').length,active:activeTasks.length},
     activeTask:activeTasks[0]||tasks.find(task=>task.status!=='DONE')||null,

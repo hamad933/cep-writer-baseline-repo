@@ -1,0 +1,120 @@
+{
+  "proof": "W03-LABS-FUNCTIONAL",
+  "siteRoot": "/workspaces/cep-writer-baseline-repo/dist",
+  "ranAt": "2026-09-30T19:14:45.145Z",
+  "total": 12,
+  "passed": 12,
+  "failed": 0,
+  "results": [
+    {
+      "name": "structure.pane.has-11-facets",
+      "pass": true,
+      "detail": {
+        "facets": 11
+      }
+    },
+    {
+      "name": "structure.pane.task-rail-selects",
+      "pass": true,
+      "detail": {
+        "subject": "Confirm Injection Condition · TASK-3 · check",
+        "firstRowLabel": "Objective type"
+      }
+    },
+    {
+      "name": "structure.pane.facet-drives-context",
+      "pass": true,
+      "detail": {
+        "before": "Context",
+        "head": "Tools & Actions",
+        "rows": 2
+      }
+    },
+    {
+      "name": "board.palette-add-task-mutates-graph",
+      "pass": true,
+      "detail": {
+        "before": 5,
+        "after": 6,
+        "rail": 6
+      }
+    },
+    {
+      "name": "board.palette-connect-creates-dependency",
+      "pass": true,
+      "detail": {
+        "before": 4,
+        "after": 5,
+        "status": "Connected Task 6 → Discover Input Surface"
+      }
+    },
+    {
+      "name": "board.lifecycle.publish-then-handoff-availability",
+      "pass": true,
+      "detail": {
+        "publishDisabledBefore": false,
+        "firstFact": "State DIRTY",
+        "handoffDisabledAfterPublish": true,
+        "status": "Connected Task 6 → Discover Input Surface"
+      }
+    },
+    {
+      "name": "board.more-menu-revision",
+      "pass": true,
+      "detail": {
+        "items": 3,
+        "clearedHint": "Select a task node in the graph to inspect its authoring con"
+      }
+    },
+    {
+      "name": "structure.no-donor-leak.no-dead-regions",
+      "pass": true,
+      "detail": {
+        "rightSiblings": 0,
+        "leftSiblings": 0,
+        "ctxTop": 238,
+        "leftTop": 238,
+        "ctxH": 718,
+        "leftH": 711,
+        "canvasH": 475,
+        "rows": 5,
+        "donorVisible": 0,
+        "pageOverflow": 0
+      }
+    },
+    {
+      "name": "page.no-uncaught-errors",
+      "pass": true,
+      "detail": {
+        "errors": 0
+      }
+    },
+    {
+      "name": "arabic.chrome-localized",
+      "pass": true,
+      "detail": {
+        "leftHead": "بنية المختبر",
+        "rightHead": "السياق",
+        "palette": "تحديد إضافة مهمة ربط إضافة فرع تحقق نشر المراجعة تجهيز التشغيل",
+        "toolbar": "⌘ تركيز ملاحظة الملاحظات تأليف المختبر مراجعة المختبر فحص مختبر مسبق تحضير تسليم المختبر",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "arabic.rtl-structure-works",
+      "pass": true,
+      "detail": {
+        "subject": "Inspect Simulated Database Effect · TASK-4 · action",
+        "rows": 6,
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "arabic.no-uncaught-errors",
+      "pass": true,
+      "detail": {
+        "errors": 0
+      }
+    }
+  ]
+}

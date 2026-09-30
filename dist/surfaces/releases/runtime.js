@@ -12,7 +12,7 @@ import {SemanticCommandBus} from '../../foundation/global/commands.js';
 import {RELEASE_RECORDS,releaseRecord} from './records.js';
 import {
   initialViewState,injectReleasesStyle,renderCenter,renderLeft,renderRight,displayState,relativeAge,
-  localizeToolbar,toolbarLabelFor,bannerCopy,TOOLBAR_COMMANDS,matchesState,                     
+  localizeToolbar,localizePaneToggles,PANE_TOGGLE_LABELS,toolbarLabelFor,bannerCopy,TOOLBAR_COMMANDS,matchesState,                     
                                                        
 } from './presentation.js';
 
@@ -99,7 +99,11 @@ export function createReleasesSurfaceRuntime({adapter,commands}                 
   };
   const owned=(host             )=>{
     const element=host?.firstElementChild||null;
-    return Boolean(element&&element.getAttribute('data-w05-owned')==='releases'&&(element       ).__w05Runtime===id);
+    if(!element||element.getAttribute('data-w05-owned')!=='releases'||(element       ).__w05Runtime!==id)return false;
+    /* Shared code (reference-return control / context inspector) APPENDS donor nodes inside the
+       region host after the surface rendered, so firstElementChild stays ours while a foreign
+       control sits under it. The surface owns the whole region host: any extra child = stale. */
+    return host .children.length===1;
   };
   const ensureStyle=()=>{try{injectReleasesStyle()}catch{}};
 
@@ -130,6 +134,7 @@ export function createReleasesSurfaceRuntime({adapter,commands}                 
       toolbarSignature=signature;
     }
     localizeToolbar(host,ctx.locale);
+    try{localizePaneToggles(ctx.locale)}catch{}
   };
   const ensureBanner=(ctx                )=>{
     const copy=bannerCopy(ctx.locale);
@@ -188,9 +193,19 @@ export function createReleasesSurfaceRuntime({adapter,commands}                 
   const hideForeignRegionSiblings=()=>{
     const neutralise=(paneId,keepId)=>{
       document.querySelectorAll(`#${paneId} .pbody > *`).forEach(node=>{
-        const keep=node.id===keepId;
-        if(keep){node.hidden=false;return}
-        node.hidden=true;node.inert=true;node.setAttribute('aria-hidden','true');
+        const element=node               ;
+        if(element.id===keepId){
+          element.hidden=false;
+          element.style.removeProperty('display');
+          return;
+        }
+        /* Donor CSS wins over the [hidden] attribute on some siblings (observed on
+           #rightPane .contextscope, which renders display:grid while hidden=true), so the
+           surface forces the display off as well as the shared hidden/inert intent. */
+        element.hidden=true;
+        element.style.setProperty('display','none','important');
+        element.inert=true;
+        element.setAttribute('aria-hidden','true');
       });
     };
     try{neutralise('leftPane','domainLeftRegion');neutralise('rightPane','domainContext')}catch{}
@@ -249,7 +264,8 @@ export function createReleasesSurfaceRuntime({adapter,commands}                 
     let found=false;
     document.querySelectorAll('#leftPane .pbody > *,#rightPane .pbody > *').forEach(node=>{
       const keep=node.id==='domainLeftRegion'||node.id==='domainContext';
-      if(!keep&&!(node               ).hidden)found=true;
+      const element=node               ;
+      if(!keep&&(!element.hidden||getComputedStyle(element).display!=='none'))found=true;
     });
     return found;
   };
@@ -264,6 +280,22 @@ export function createReleasesSurfaceRuntime({adapter,commands}                 
     const dir=(globalThis       ).document?.documentElement?.dir||'';
     if(renderedDir!==dir)return true;
     if(toolbarNeedsWork())return true;
+    if(paneTogglesNeedWork())return true;
+    return false;
+  };
+  /** Shared pane toggles are rewritten by shared syncPaneCSS() in hardcoded Arabic. */
+  const paneTogglesNeedWork=()=>{
+    try{
+      for(const side of ['left','right']         ){
+        const dock=document.querySelector(`#${side}LocalReveal`);
+        if(!dock)continue;
+        const state=(dock               ).dataset.paneState==='collapsed'?'collapsed':'open';
+        const span=dock.querySelector('[data-pane-toggle-label]');
+        const expected=PANE_TOGGLE_LABELS[side][state][locale()];
+        if(span&&span.textContent!==expected)return true;
+        if(dock.getAttribute('title')!==expected)return true;
+      }
+    }catch{}
     return false;
   };
   const staleBreakdown=()=>{

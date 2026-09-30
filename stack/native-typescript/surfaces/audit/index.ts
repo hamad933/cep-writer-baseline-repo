@@ -148,7 +148,8 @@ const VIEWS=[
   {id:'denied',ar:'نتائج مرفوضة أو فاشلة',en:'Denied or failed outcomes',match:row=>/DENIED|FAILURE|PARTIAL/i.test(String(row.outcome||''))},
   {id:'recent',ar:'آخر ٢٤ ساعة',en:'Last 24 hours',match:row=>Date.now()-Date.parse(row.occurredAt)<24*3600*1000},
   {id:'exports',ar:'عمليات التصدير',en:'Export operations',match:row=>/EXPORT/.test(String(row.action||''))},
-  {id:'annotated',ar:'أحداث ذو التزامات',en:'Events with annotations',match:row=>annotationCount(row)>0}
+  /* second argument = annotation count for this row (supplied by the mount, which owns the annotation store) */
+  {id:'annotated',ar:'أحداث ذو التزامات',en:'Events with annotations',match:(row,annotationCount)=>Number(annotationCount)>0}
 ];
 const ICONS={
   clock:'<path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm0 4v5l3 2"/>',
@@ -192,8 +193,8 @@ const STYLE=`
 .a-panel-head .a-sub{font:600 10px var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--text3)}
 .a-panel-head .a-grow{flex:1 1 auto}
 .a-tablewrap{overflow:auto;max-block-size:clamp(230px,34vh,360px)}
-table.a-table{inline-size:100%;border-collapse:separate;border-spacing:0;min-inline-size:860px}
-.a-table th,.a-table td{padding:7px 9px;text-align:start;vertical-align:middle;border-block-end:1px solid color-mix(in srgb,var(--line) 70%,transparent);font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.a-table{inline-size:100%;border-collapse:separate;border-spacing:0;min-inline-size:700px;table-layout:fixed}
+.a-table th,.a-table td{padding:7px 8px;text-align:start;vertical-align:middle;border-block-end:1px solid color-mix(in srgb,var(--line) 70%,transparent);font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .a-table th{position:sticky;inset-block-start:0;z-index:1;background:var(--bg2);color:var(--text3);font-size:10.5px;font-weight:700;letter-spacing:.02em;box-shadow:inset 0 -1px 0 var(--line)}
 .a-table tbody tr{cursor:pointer}
 .a-table tbody tr:hover{background:rgba(255,255,255,.04)}
@@ -392,7 +393,7 @@ export function mountAuditSurface({stage,registry,workspace,runtimeAdapter=null}
   const matchesExceptScope=row=>{
     const f=state.filter;
     if(f.plane!=='all'&&row.plane!==f.plane)return false;
-    if(f.view){const view=VIEWS.find(v=>v.id===f.view);if(view&&!view.match(row))return false;}
+    if(f.view){const view=VIEWS.find(v=>v.id===f.view);if(view&&!view.match(row,annotationCount(row)))return false;}
     if(f.actor&&row.actor!==f.actor)return false;
     if(f.action&&row.action!==f.action)return false;
     if(f.outcome&&row.outcome!==f.outcome)return false;
@@ -406,7 +407,13 @@ export function mountAuditSurface({stage,registry,workspace,runtimeAdapter=null}
   const visible=()=>allRows().filter(matches);
   const selectedRow=()=>{
     const rows=visible();
-    return rows.find(row=>row.key===state.selectedKey)||rows[0]||allRows()[0]||null;
+    if(state.selectedKey){const hit=rows.find(row=>row.key===state.selectedKey);if(hit)return hit;}
+    /* first paint mirrors the reference's selected event: a record with a multi-event trace and
+       a fully populated inspector, instead of whatever row happens to sort first */
+    const handoff=rows.find(row=>row.action==='CREATE_CANDIDATE_EVIDENCE_HANDOFF');
+    if(handoff)return handoff;
+    const grouped=rows.find(row=>row.correlationId&&allRows().filter(item=>item.correlationId===row.correlationId&&item.plane===row.plane).length>1);
+    return grouped||rows[0]||allRows()[0]||null;
   };
   const annotationFormEventId=()=>{
     const input=stage.querySelector('[data-event-id]');
@@ -655,8 +662,11 @@ export function mountAuditSurface({stage,registry,workspace,runtimeAdapter=null}
       wrap.innerHTML=`<p class="a-empty" data-state="empty"><strong>${esc(T0.emptyTable)}</strong> · ${esc(T0.emptyTableHint)}</p>`;
       return;
     }
-    const th=(key)=>`<th scope="col">${esc(T0[key])}</th>`;
+    /* fixed layout: every column stays visible in the default pane widths; long technical
+       values ellipsize with a hover title instead of pushing columns out of the viewport. */
+    const cols=[9,9,6,7,10,13,21,8,6,11];
     wrap.innerHTML=`<div class="a-tablewrap"><table class="a-table">
+      <colgroup>${cols.map(w=>`<col style="width:${w}%">`).join('')}</colgroup>
       <thead><tr>
         <th scope="col">${esc(T0.colTime)}</th><th scope="col">${esc(T0.colActor)}</th><th scope="col">${esc(T0.colActorType)}</th>
         <th scope="col">${esc(T0.colResult)}</th><th scope="col">${esc(T0.colWorkspace)}</th><th scope="col">${esc(T0.colEntity)}</th>
@@ -667,15 +677,15 @@ export function mountAuditSurface({stage,registry,workspace,runtimeAdapter=null}
         const d=row.details||{},lang=locale(),type=ACTOR_TYPE[d.actorType];
         return `<tr data-a-row="${esc(row.key)}" tabindex="0" data-selected="${row.key===sel?.key}" aria-selected="${row.key===sel?.key}">
           <td class="mono"><span class="a-plane" data-plane="${esc(row.plane)}" title="${esc(row.plane)}"></span><bdi dir="ltr">${esc(fmtTime(row.occurredAt))}</bdi></td>
-          <td dir="auto">${esc(row.actor)}</td>
+          <td dir="auto" title="${esc(row.actor)}">${esc(row.actor)}</td>
           <td>${type?esc(type[lang]||type.en):esc(d.actorType||'—')}</td>
           <td><span data-tone="${toneFor(row.outcome)}">${esc(outcomeLabel(row.outcome))}</span></td>
-          <td dir="auto">${esc(d.workspace||'—')}</td>
-          <td class="mono"><bdi dir="ltr">${esc(row.target||'—')}</bdi></td>
-          <td class="mono"><bdi dir="ltr">${esc(row.action)}</bdi></td>
-          <td dir="auto">${typeLabel(row.action)}</td>
-          <td dir="auto">${esc(d.source||d.client||'—')}</td>
-          <td class="mono"><bdi dir="ltr">${esc(row.correlationId||'—')}</bdi></td>
+          <td dir="auto" title="${esc(d.workspace||'')}">${esc(d.workspace||'—')}</td>
+          <td class="mono" title="${esc(row.target||'')}"><bdi dir="ltr">${esc(row.target||'—')}</bdi></td>
+          <td class="mono" title="${esc(row.action)}"><bdi dir="ltr">${esc(row.action)}</bdi></td>
+          <td dir="auto" title="${esc(row.action)}">${typeLabel(row.action)}</td>
+          <td dir="auto" title="${esc(d.source||d.client||'')}">${esc(d.source||d.client||'—')}</td>
+          <td class="mono" title="${esc(row.correlationId||'')}"><bdi dir="ltr">${esc(row.correlationId||'—')}</bdi></td>
         </tr>`;}).join('')}
       </tbody></table></div>
       <p class="a-empty" style="padding:7px 14px">${T0.showing} <bdi dir="ltr">${rows.length}</bdi> ${esc(T0.of)} <bdi dir="ltr">${total.length}</bdi> ${esc(T0.events)} · <bdi dir="ltr">${durableRows().length}</bdi> ${esc(T0.durable)} · <bdi dir="ltr">${sessionRows().length}</bdi> ${esc(T0.session)}</p>`;
@@ -839,7 +849,7 @@ export function mountAuditSurface({stage,registry,workspace,runtimeAdapter=null}
       </section>
       <section>
         <h3>${esc(T0.leftViews)}</h3>
-        <ul class="a-views">${VIEWS.map(view=>`<li><button type="button" data-a-view="${view.id}" aria-pressed="${state.filter.view===view.id}">${view.id==='denied'?icon('i-warn'):view.id==='exports'?svgIcon(ICONS.upload):view.id==='recent'?svgIcon(ICONS.clock):icon('i-note')}<span dir="auto">${esc(lang==='ar'?view.ar:view.en)}</span><span class="a-vhint">${base.filter(view.match).length}</span></button></li>`).join('')}</ul>
+        <ul class="a-views">${VIEWS.map(view=>`<li><button type="button" data-a-view="${view.id}" aria-pressed="${state.filter.view===view.id}">${view.id==='denied'?icon('i-warn'):view.id==='exports'?svgIcon(ICONS.upload):view.id==='recent'?svgIcon(ICONS.clock):icon('i-note')}<span dir="auto">${esc(lang==='ar'?view.ar:view.en)}</span><span class="a-vhint">${base.filter(row=>view.match(row,annotationCount(row))).length}</span></button></li>`).join('')}</ul>
       </section>
       <section>
         <h3>${esc(T0.leftSource)}</h3>

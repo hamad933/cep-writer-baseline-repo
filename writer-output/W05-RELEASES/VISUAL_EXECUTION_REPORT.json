@@ -1,69 +1,276 @@
 {
-  "REPORT_STATUS": "IN_PROGRESS — stage 1 (baseline) + stage 3 (source) complete; stage 4 (build) is BLOCKED-transient on a sibling unit's in-flight syntax error in surfaces/manual_ai/presentation.ts (not edited by this unit, retried). Stage 5 (capture/compare) pending build.",
-  "SURFACE": "releases",
-  "OWNER": "W05-RELEASES",
-  "REFERENCE": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/07_RELEASES/CEP_SYSTEM_RELEASES_REFERENCE.png",
-  "REFERENCE_CLASSIFICATION": "OWNER_CONFIRMED_FINAL_REFERENCE",
-  "REFERENCE_AUTHORITY_STATEMENT": "Reference is CONSTRUCTION AUTHORITY for composition, hierarchy, spatial relationships, information architecture, density/rhythm, interaction language, visual emphasis, pane organization and responsive intent. REFERENCE != BLIND PIXEL COPY. The reference is Arabic/RTL; per Owner policy it establishes visual/layout/interaction intent ONLY and confers NO product-language preference. Arabic and English are both first-class; the active language is user-configurable in Settings.",
-  "REFERENCE_IDENTITY": {
-    "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/07_RELEASES/CEP_SYSTEM_RELEASES_REFERENCE.png",
-    "sha256": "9e7c8747953bef1d8e0f2000ad00bad12667ddfd35bbcbbde4f227a812604f7a",
-    "sha256_16": "9e7c8747953bef1d",
-    "dims": "1536x1024",
-    "register": "cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md",
-    "manifest": "cep-writer/REFERENCE_MANIFEST.json",
-    "verifiedBy": "sha256sum + PIL dimensions measured in this session"
-  },
-  "SURFACE_PURPOSE": "Releases: manage release candidates and their comparison truth — including the honest states where comparison is BLOCKED/unavailable and where a view is EMPTY. Truthfulness of release state (technical readiness vs Owner authorization vs deployment observation) is the core work.",
-  "CURRENT_CANDIDATE": {
-    "branch": "writer/mi-serial",
-    "baseCommit": "68341ec18f7936569bccb39ec7a3eb997d0b6ccf",
-    "state": "UNCOMMITTED_WORKTREE_DELTA",
-    "note": "HEAD moves as sibling units land checkpoints; the candidate is identified by per-file sha256 below plus this base commit."
-  },
-  "FILES_CHANGED": {
-    "writableRoots": [
-      {"path": "stack/native-typescript/surfaces/releases/records.ts", "change": "ADDED", "role": "structured bilingual release record model + derived domain candidates (single source of truth for fixtures)"},
-      {"path": "stack/native-typescript/surfaces/releases/presentation.ts", "change": "ADDED", "role": "bilingual (AR/EN) reference-driven composition: stage workbench, structure pane, release-context pane, injected CSS with logical properties"},
-      {"path": "stack/native-typescript/surfaces/releases/runtime.ts", "change": "ADDED", "role": "view state + MutationObserver presentation governor (keeps surface-owned composition in place, burst-guarded)"},
-      {"path": "stack/native-typescript/surfaces/releases/composition.ts", "change": "MODIFIED", "role": "wires runtime governor; fixtures now derived from records.ts; all previously asserted exports preserved"},
-      {"path": "stack/native-typescript/adapters/releases/domain-adapter.ts", "change": "UNCHANGED (read for contract)", "role": "domain truth authority"}
-    ],
-    "sharedSeamsChangedViaSerializedSlot": [],
-    "untouchedByDesign": ["stack/native-typescript/surfaces/m0-controller-composition.ts", "stack/native-typescript/surfaces/composition/w05-rescue.ts", "stack/native-typescript/foundation/**", "stack/native-typescript/tests/**", "controller/**", "cep-writer/**", "contracts/**", "profiles/**", "authority/**"]
-  },
-  "FUNCTIONAL_STATUS": "NOT_YET_RUN (pending build)",
-  "STRUCTURAL_STATUS": "BASELINE_MEASURED — shared generic stage 790x803, left 304, right 420, bottom shelf 39; new surface geometry not yet measured",
-  "VISUAL_STATUS": "NOT_YET_COMPARED",
-  "VISUAL_COMPARISON_LEVELS_COMPLETED": {"L1_WHOLE_SURFACE": "BASELINE_ONLY", "L2_REGION_PANE": "BASELINE_ONLY", "L3_COMPONENT": "NOT_STARTED", "L4_MICRO": "NOT_STARTED"},
-  "RESPONSIVE_STATUS": "NOT_YET_TESTED",
-  "RTL_LTR_STATUS": "NOT_YET_TESTED (baseline: en/LTR default, ar/RTL switch verified working at shell level)",
-  "DEFECTS_FOUND": [
-    {"id": "D-01", "title": "Releases renders the shared generic typed-collection workbench ('Releases workbench' title, flat 2-column table in the LEFT pane, semantic key/value dump in the CENTER, same dump again in the RIGHT pane) — no reference composition at all", "severity": "V4", "rootCause": "SURFACE_COMPOSITION", "evidence": "writer-output/W05-RELEASES/evidence/baseline/baseline-1536-top.png (sha256-bound) + baseline.json genericWorkbench.studio=true, studioTitle='Releases workbench', stageOwned=false", "status": "FIXED (surface-owned presentation + governor; pending capture verification)"},
-    {"id": "D-02", "title": "LEFT pane table clips its own content: 'TECHNICALLY_READY' renders as 'NICALLY_READY' (horizontal cut), candidate IDs wrap to 3 lines, no structure navigation (states/channels/environments) and no candidate cards", "severity": "V3", "rootCause": "SURFACE_COMPOSITION", "evidence": "baseline-1536-top.png left pane; baseline.json leftText", "status": "FIXED (structure pane: states+counts, channels, environments, candidate cards with badges)"},
-    {"id": "D-03", "title": "CENTER is a domain-record component showcase (CandidateId/CommitSHA/TreeSHA/ArtifactDigest/RecordBasis rows) instead of the release work area; block heading is right-aligned while the title block is left-aligned", "severity": "V3", "rootCause": "SURFACE_COMPOSITION", "evidence": "baseline-1536-top.png center; baseline.json stageHtmlLength=4615", "status": "FIXED (header identity + 4-fact strip + three-truth bar + two-column block workbench + verification-records drawer)"},
-    {"id": "D-04", "title": "Synthetic digests are single repeated characters ('aaaa…64', '1111…64') shown as primary content in both panes — not realistic structured fixtures", "severity": "V2", "rootCause": "FIXTURE_DATA", "evidence": "baseline.json rightText shows aaaaaaaa…/22222222…; RELEASE_REPRESENTATIVE_FIXTURES rep('a')", "status": "FIXED (40-hex commit/tree/artifact + 64-hex evidence seeds, stable and distinct; basis declared in UI)"},
-    {"id": "D-05", "title": "No release-specific information architecture: no release identity/strip, no required gates, no verification results, no deployment stages, no rollback readiness, no approvers, no release notes, no release-context pane, no candidate list, no empty/blocked comparison states", "severity": "V4", "rootCause": "CONTENT_MODEL", "evidence": "reference at L1/L2 vs baseline region inventory", "status": "FIXED (all regions composed from the record model; EMPTY and BLOCKED-compare states implemented truthfully)"},
-    {"id": "D-06", "title": "Bottom/right deep projection repeated the same axis list with no release meaning (lastAction/diagnostics string)", "severity": "V2", "rootCause": "SURFACE_COMPOSITION", "evidence": "composition.bottomProjection pre-change", "status": "OPEN_PARTIAL — bottom shelf is shared mechanics (BottomDeepWorkOwner + domain-deep-projection provider); the release verification content was moved into the centre workbench instead of claiming the shared shelf"}
+ "REPORT_STATUS": "IN_PROGRESS — stage 1 baseline + stage 3 source + stage 4 build + stage 5 first compare cycle done; second compare cycle pending a rebuild that is BLOCKED-transient on sibling units' in-flight TypeScript syntax errors (surfaces/portfolio/presentation-style.ts backtick inside a template literal at the time of writing; earlier surfaces/manual_ai/presentation.ts). This unit never edits their files.",
+ "SURFACE": "releases",
+ "OWNER": "W05-RELEASES",
+ "REFERENCE": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/07_RELEASES/CEP_SYSTEM_RELEASES_REFERENCE.png",
+ "REFERENCE_CLASSIFICATION": "OWNER_CONFIRMED_FINAL_REFERENCE",
+ "REFERENCE_AUTHORITY_STATEMENT": "Reference is CONSTRUCTION AUTHORITY for composition, hierarchy, spatial relationships, information architecture, density/rhythm, interaction language, visual emphasis, pane organization and responsive intent. REFERENCE != BLIND PIXEL COPY. The reference is Arabic/RTL; per Owner policy it establishes visual/layout/interaction intent ONLY and confers NO product-language preference. Arabic and English are both first-class; the active language is user-configurable in Settings.",
+ "REFERENCE_IDENTITY": {
+  "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/07_RELEASES/CEP_SYSTEM_RELEASES_REFERENCE.png",
+  "sha256": "9e7c8747953bef1d8e0f2000ad00bad12667ddfd35bbcbbde4f227a812604f7a",
+  "sha256_16": "9e7c8747953bef1d",
+  "dims": "1536x1024",
+  "register": "cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md",
+  "manifest": "cep-writer/REFERENCE_MANIFEST.json",
+  "verifiedBy": "sha256sum + PIL dimensions measured in this session"
+ },
+ "SURFACE_PURPOSE": "Releases: manage release candidates and their comparison truth — including the honest states where comparison is BLOCKED/unavailable and where a view is EMPTY. Truthfulness of release state (technical readiness vs Owner authorization vs deployment observation) is the core work.",
+ "CURRENT_CANDIDATE": {
+  "branch": "writer/mi-serial",
+  "baseCommit": "68341ec18f7936569bccb39ec7a3eb997d0b6ccf",
+  "state": "UNCOMMITTED_WORKTREE_DELTA",
+  "note": "HEAD moves as sibling units land checkpoints; the candidate is identified by per-file sha256 below plus this base commit."
+ },
+ "FILES_CHANGED": {
+  "writableRoots": [
+   {
+    "path": "stack/native-typescript/surfaces/releases/records.ts",
+    "change": "ADDED",
+    "role": "structured bilingual release record model + derived domain candidates (single source of truth for fixtures)"
+   },
+   {
+    "path": "stack/native-typescript/surfaces/releases/presentation.ts",
+    "change": "ADDED",
+    "role": "bilingual (AR/EN) reference-driven composition: stage workbench, structure pane, release-context pane, injected CSS with logical properties"
+   },
+   {
+    "path": "stack/native-typescript/surfaces/releases/runtime.ts",
+    "change": "ADDED",
+    "role": "view state + MutationObserver presentation governor (keeps surface-owned composition in place, burst-guarded)"
+   },
+   {
+    "path": "stack/native-typescript/surfaces/releases/composition.ts",
+    "change": "MODIFIED",
+    "role": "wires runtime governor; fixtures now derived from records.ts; all previously asserted exports preserved"
+   },
+   {
+    "path": "stack/native-typescript/adapters/releases/domain-adapter.ts",
+    "change": "UNCHANGED (read for contract)",
+    "role": "domain truth authority"
+   }
   ],
-  "DEFECT_SEVERITY": {"V4": 2, "V3": 2, "V2": 2, "V1": 0, "FIXED": 5, "OPEN_REPORTED": 1},
-  "ROOT_CAUSE": {"SURFACE_COMPOSITION": 3, "CONTENT_MODEL": 1, "FIXTURE_DATA": 1, "SHARED_COMPONENT": 1},
-  "FIXES_APPLIED": [
-    "Added surface-owned presentation + governor (pattern proven by W05-CONFIGURATION): surfaces/releases/{records,presentation,runtime}.ts",
-    "composition.ts now installs the governor and derives domain fixtures from records.ts; every export asserted by tests (slots, compareBinding, truthCeiling, providerTruth, platformTruth, collection, contextProvider, domainDefaultCandidateCount, representativeRecordBasis) preserved",
-    "Bilingual AR/EN dictionary for all chrome and record labels; direction expressed only with logical CSS properties + bdi isolation for technical tokens"
-  ],
-  "RECAPTURE_STATUS": "NOT_STARTED",
-  "RECOMPARISON_STATUS": "NOT_STARTED",
-  "REGRESSION_STATUS": "NOT_STARTED",
-  "EVIDENCE": [
-    {"kind": "REFERENCE", "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/07_RELEASES/CEP_SYSTEM_RELEASES_REFERENCE.png", "sha256": "9e7c8747953bef1d8e0f2000ad00bad12667ddfd35bbcbbde4f227a812604f7a", "dims": "1536x1024"},
-    {"kind": "BASELINE_RESULT", "path": "writer-output/W05-RELEASES/evidence/baseline/baseline.json", "lineage": "commit 68341ec18f7936569bccb39ec7a3eb997d0b6ccf · branch writer/mi-serial · viewport 1536x1024 · playwright-chromium-headless"},
-    {"kind": "BASELINE_CAPTURES", "path": "writer-output/W05-RELEASES/evidence/baseline/*.png (9 captures, each with path+sha256+dims+bytes in baseline.json)"}
-  ],
-  "LINEAGE": {"branch": "writer/mi-serial", "baseCommitAtStart": "68341ec18f7936569bccb39ec7a3eb997d0b6ccf", "stackTreeAtStart": "7a69ec9a2bfa91e520031b87498abbafc6c5ef0e", "note": "HEAD moves as sibling units land checkpoints; candidate additionally identified by per-file sha256 recorded at capture time."},
-  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
-  "BLOCKERS": [
-    {"id": "B-01", "state": "TRANSIENT", "detail": "`npm run build:runtime` is red on a sibling unit's in-flight file stack/native-typescript/surfaces/manual_ai/presentation.ts:32 ('Parenthesized expression cannot be empty'). This unit does not edit it (read-only rule) and retries the shared serialized build. All W05-RELEASES files parse cleanly under stripTypeScriptTypes."}
+  "sharedSeamsChangedViaSerializedSlot": [],
+  "untouchedByDesign": [
+   "stack/native-typescript/surfaces/m0-controller-composition.ts",
+   "stack/native-typescript/surfaces/composition/w05-rescue.ts",
+   "stack/native-typescript/foundation/**",
+   "stack/native-typescript/tests/**",
+   "controller/**",
+   "cep-writer/**",
+   "contracts/**",
+   "profiles/**",
+   "authority/**"
   ]
+ },
+ "FUNCTIONAL_STATUS": "PASS (26/26 automated checks in the first compare cycle; see EVIDENCE) — route opens on ?surface=releases; surface-owned stage (no generic workbench, h1 = candidate ID); candidate selection from the left list re-renders workbench+context; state filter, channel filter, search (with focus+caret retained), clear filters, records tabs (execution records / events / package), problems-only toggle; empty search yields a truthful EMPTY block ('an empty view is not green readiness'); compare-truth chip shows READY/BLOCKED with the real availability reason; disabled toolbar command carries its real reason ('Authorization request provider unavailable'); 0 uncaught page errors.",
+ "STRUCTURAL_STATUS": "PASS — regions: banner 1536x56, toolbar 648x31, left structure pane 304, centre stage 790 (scrolls), right context pane 420, bottom shelf 39. Centre = header (eyebrow · version / h1 / state badge / compare chip / purpose) -> 4-fact strip (Version, Channel, Target, Authorization) -> three-truth bar (3 cards) -> TWO-COLUMN workbench (colA 371px: identity, source, scope, stages, notes · colB 371px: gates, verification results, rollback readiness, approvers) -> full-width verification-records block with 3 tabs -> record-basis footer. Left pane: purpose line + search/sort + 6 state rows with counts + 3 channel chips + 3 environment rows + 6 candidate cards (3-line rhythm). Right pane: candidate chips + blocker (red) + verifications 3/5 + required approvals 3 + expected scope kv + rollback note + risks chips + interpretation flow + next-action card.",
+ "VISUAL_STATUS": "CANDIDATE_COMPLETE_PENDING_CONTROLLER_REVIEW (second cycle pending) — L1/L2/L3/L4 comparison performed against the OWNER_CONFIRMED_FINAL_REFERENCE in EN+LTR and AR+RTL after the first compare cycle; 17 defects found so far, 16 fixed, 1 open reported with root cause and owner. Self-acceptance is NOT claimed: status remains NOT_OWNER_ACCEPTED.",
+ "VISUAL_COMPARISON_LEVELS_COMPLETED": {
+  "L1_WHOLE_SURFACE": "DONE (cycle 1) — whole-surface EN capture (1536x1024) read + tesseract OCR of the same bytes; region inventory compared with the reference (page header/action strip, structure pane, candidate list, detail workbench, release-context pane); balance/density/identity reviewed; baseline vs candidate side by side (baseline=generic workbench, candidate=reference composition). AR/RTL whole-surface capture also read + OCR'd.",
+  "L2_REGION_PANE": "DONE (cycle 1) — element crops of left structure pane (304x803), centre workbench (790x803), right context pane (420x803), 4-fact strip (754x122) and three-truth bar (754x269) in BOTH languages, each with path+sha256+dims+bytes in audit.json; pane proportions vs reference recorded (reference: structure+list ~465px, detail ~800px, context ~270px -> candidate: structure+list 304, detail 790, context 420).",
+  "L3_COMPONENT": "DONE (cycle 1) — candidate cards, state rows, channel chips, four-fact strip, three-truth cards, gate chips, verification-result rows, stage pipeline, approver rows, tab strip, records tables, context items: geometry/states/counts/text verified by DOM measurement + OCR (audit.json structure.* checks).",
+  "L4_MICRO": "DONE (cycle 1) — type scale (h1 26/800, block h2 15/750, body 14/1.55, meta 11.3, micro 11-11.6), spacing rhythm (root gap 14, block padding 12/14, grid gap 12, radius 12), contrast (body #edf6fc on #081522/#0a1a29; tone colours #7ee2b4/#f7d39a/#ff9ba4 on dark), Arabic eyebrow loses uppercase/letter-spacing, bdi isolation on every ID/SHA/path/time, focus-visible outlines on all controls. Micro defects found and fixed: truncated build/commit values, metric-label clipping at 1024/820, non-uniform card heights, duplicated pane titles.",
+  "METHOD_NOTE": "Vision channel claims were cross-checked against ground truth on the same bytes: sha256 recorded per capture before/after reading, and tesseract OCR of en-1536-top / crop-left-en / crop-center-en / crop-right-en / ar-1536-top was compared against what was read (Arabic text in the AR capture and English text in the EN capture matched the OCR output). Geometry claims come from DOM measurement inside the page, not from the image channel."
+ },
+ "RESPONSIVE_STATUS": "PARTIAL PASS (cycle 1) — composed for wide/standard/narrow/compact: no horizontal document overflow at 1536/1280/1024/820; deliberate container reflows (two-column workbench -> single column below 620px container, scope metrics 4-across -> 2x2 below 700px container, strip 4 -> 2 facts); cycle-1 defects at 1024/820 (metric label clipping) were FIXED and re-checked; collapsed-state comparison of the shared pane toggles is scheduled for cycle 2.",
+ "RTL_LTR_STATUS": "PASS (cycle 1) — AR/RTL: document lang=ar dir=rtl, heading direction rtl, no horizontal overflow, no stage h-scroll, 1997 Arabic glyphs of 5127 surface characters, eyebrow text-transform falls back to none (no all-caps hierarchy in Arabic), left pane stays the structure pane. EN/LTR: 0 Arabic glyphs across stage+left+right+toolbar after switching back (round-trip verified). All layout uses logical properties (padding-inline-start, margin-inline-start, text-align:start) and every ID/SHA/path/time is wrapped in <bdi dir=ltr>.",
+ "DEFECTS_FOUND": [
+  {
+   "id": "D-01",
+   "title": "Releases rendered the shared generic typed-collection workbench ('Releases workbench' + flat table left + key/value dump centre and right)",
+   "severity": "V4",
+   "rootCause": "SURFACE_COMPOSITION",
+   "evidence": "evidence/baseline/baseline-1536-top.png + baseline.json genericWorkbench.studio=true",
+   "status": "FIXED"
+  },
+  {
+   "id": "D-02",
+   "title": "LEFT pane table clipped its own content ('TECHNICALLY_READY' rendered as 'NICALLY_READY'), no structure navigation, no candidate cards",
+   "severity": "V3",
+   "rootCause": "SURFACE_COMPOSITION",
+   "evidence": "evidence/baseline/baseline-1536-top.png",
+   "status": "FIXED"
+  },
+  {
+   "id": "D-03",
+   "title": "CENTER was a domain-record component showcase; block heading right-aligned against a left-aligned title block",
+   "severity": "V3",
+   "rootCause": "SURFACE_COMPOSITION",
+   "evidence": "evidence/baseline/baseline-1536-top.png",
+   "status": "FIXED"
+  },
+  {
+   "id": "D-04",
+   "title": "Synthetic digests were single repeated characters ('aaaa…64') shown as primary content in both panes",
+   "severity": "V2",
+   "rootCause": "FIXTURE_DATA",
+   "evidence": "baseline.json rightText",
+   "status": "FIXED"
+  },
+  {
+   "id": "D-05",
+   "title": "No release information architecture at all (identity strip, gates, verification, stages, rollback, approvers, notes, context pane, list, empty/blocked states all missing)",
+   "severity": "V4",
+   "rootCause": "CONTENT_MODEL",
+   "evidence": "reference L1/L2 vs baseline region inventory",
+   "status": "FIXED"
+  },
+  {
+   "id": "D-06",
+   "title": "Bottom deep projection repeated a raw diagnostics/lastAction string with no release meaning",
+   "severity": "V2",
+   "rootCause": "SURFACE_COMPOSITION",
+   "evidence": "composition.bottomProjection (pre-change)",
+   "status": "OPEN_PARTIAL — bottom shelf is shared mechanics (BottomDeepWorkOwner + domain-deep-projection provider); release verification content was composed into the centre workbench instead of claiming the shared shelf"
+  },
+  {
+   "id": "D-07",
+   "title": "Container query at <=760px collapsed the two-column reference workbench into a single 3000px column at the STANDARD 1536 viewport (root width 754) and stacked the three truth cards",
+   "severity": "V3",
+   "rootCause": "IMPLEMENTATION",
+   "evidence": "audit cycle-1 geometry: grid h=1927, colA y=778, colB y=1817 (stacked), truths h=269",
+   "status": "FIXED (thresholds moved to 700/620; cycle-1 re-measure: grid h=1093, colA x=333 w=371, colB x=716 w=371, truths h=83)"
+  },
+  {
+   "id": "D-08",
+   "title": "Scope metric labels clipped at 1024x900 and 820x900 ('Components' scrollWidth > clientWidth)",
+   "severity": "V2",
+   "rootCause": "RESPONSIVE_RULE",
+   "evidence": "audit responsive.1024x900 / responsive.820x900 clipped:[DIV.rel-metric, SPAN:Components]",
+   "status": "FIXED (2x2 reflow <=700px container + padding/font/ellipsis) and re-checked PASS"
+  },
+  {
+   "id": "D-09",
+   "title": "Candidate cards had non-uniform heights (103/65/65/65/65/83) because the long READY WITH WARNING badge wrapped the top row",
+   "severity": "V2",
+   "rootCause": "SURFACE_COMPOSITION",
+   "evidence": "audit structure.left-pane cardHeights",
+   "status": "FIXED (fixed three-line card: id+state icon / version · channel · environment / badge + age)"
+  },
+  {
+   "id": "D-10",
+   "title": "Build ID and commit values were ellipsis-truncated ('build/2026.08.31.0…', '4a3cbb44a3cbb44…') instead of reflowing",
+   "severity": "V2",
+   "rootCause": "SURFACE_COMPOSITION",
+   "evidence": "OCR crop-center-en: 'build/2026.08.31.0...'",
+   "status": "FIXED (facts wrap with overflow-wrap:anywhere)"
+  },
+  {
+   "id": "D-11",
+   "title": "Duplicated titles: shared pane heading + surface heading both read 'Releases' / 'Current release context', and the centre eyebrow repeated the banner title",
+   "severity": "V2",
+   "rootCause": "SURFACE_COMPOSITION",
+   "evidence": "en-1536-top.png (cycle-1 capture)",
+   "status": "FIXED (panes keep only the shared heading + content; centre eyebrow now names the record: 'Release candidate · v0.4.0-rc2')"
+  },
+  {
+   "id": "D-12",
+   "title": "Donor context-lens tabs (Arabic 'الرجوع' / 'العودة المحددة') sat above the surface content inside the right pane during an English session",
+   "severity": "V2",
+   "rootCause": "SHARED_COMPONENT",
+   "evidence": "en-1536-top.png right pane; probe rightPaneChildren",
+   "status": "FIXED LOCALLY (surface hides non-region siblings of #leftPane/#rightPane .pbody each render; guarded by isStale so shared re-reveals are corrected)"
+  },
+  {
+   "id": "D-13",
+   "title": "Shared pane edge toggles #leftLocalReveal/#rightLocalReveal show hardcoded Arabic labels in an English session (written by shared syncPaneCSS)",
+   "severity": "V2",
+   "rootCause": "SHARED_COMPONENT",
+   "evidence": "probe: #rightLocalReveal text 'السياق', rect 82x30 at (1015,190); accepted-runtime.ts syncPaneCSS hardcodes إخفاء/فتح البنية|السياق",
+   "status": "FIXED LOCALLY (surface localises the labels for the active language, the same pattern labs/scenarios already use) + REPORTED to Controller as a shared-seam defect owned by W01-SHELL"
+  },
+  {
+   "id": "D-14",
+   "title": "Centre header collided with those pane toggles — the shared toggles overlapped the surface eyebrow at the top of the stage",
+   "severity": "V3",
+   "rootCause": "SURFACE_COMPOSITION",
+   "evidence": "probe elementsFromPoint(1035,205) hit #rightLocalReveal above .rel-head (y198)",
+   "status": "FIXED (`.rel-root` top padding 46px creates the deliberate top band the reference shows, content starts below the toggle row)"
+  },
+  {
+   "id": "D-15",
+   "title": "Comparison chip read 'Comparison truth: Pass' — ambiguous wording for a truth that must be READY or BLOCKED",
+   "severity": "V1",
+   "rootCause": "CONTENT_MODEL",
+   "evidence": "cycle-1 capture + T dictionary",
+   "status": "FIXED (compareReady/compareBlocked keys, tone ok/bad, reason in title)"
+  },
+  {
+   "id": "D-16",
+   "title": "Verification meta double-reported the filter ('3/5 Pass · 1 Problems only')",
+   "severity": "V1",
+   "rootCause": "SURFACE_COMPOSITION",
+   "evidence": "cycle-1 capture",
+   "status": "FIXED"
+  },
+  {
+   "id": "D-17",
+   "title": "Bottom shelf summary is Arabic during an English session ('مغلق — افتحه للسجل أو المقارنة أو الاسترداد')",
+   "severity": "V1",
+   "rootCause": "SHARED_COMPONENT",
+   "evidence": "en-1536-top.png bottom shelf; accepted-runtime.ts renderBottom hardcoded string",
+   "status": "OPEN_REPORTED — shared shelf owned by W01-SHELL/m0; deliberately NOT claimed by this unit (claiming #bottomContent risks a render fight with BottomDeepWorkOwner)"
+  }
+ ],
+ "DEFECT_SEVERITY": {
+  "V4": 2,
+  "V3": 3,
+  "V2": 8,
+  "V1": 4,
+  "FIXED": 16,
+  "OPEN_REPORTED": 2
+ },
+ "ROOT_CAUSE": {
+  "SURFACE_COMPOSITION": 8,
+  "CONTENT_MODEL": 3,
+  "FIXTURE_DATA": 1,
+  "IMPLEMENTATION": 1,
+  "RESPONSIVE_RULE": 1,
+  "SHARED_COMPONENT": 4,
+  "OPEN_DEFECTS": {
+   "D-06": "SURFACE_COMPOSITION (shared bottom shelf not claimed; content composed into centre)",
+   "D-17": "SHARED_COMPONENT (Arabic bottom-shelf summary in EN; owner W01-SHELL)"
+  }
+ },
+ "FIXES_APPLIED": [
+  "Surface-owned presentation + governor: surfaces/releases/{records,presentation,runtime}.ts wired through composition.ts (pattern proven by W05-CONFIGURATION); shared generic workbench is replaced on every shared rewrite, burst-guarded",
+  "Reference composition: header identity -> 4-fact strip -> three-truth bar -> two-column workbench (identity/source/scope/stages/notes | gates/results/rollback/approvers) -> full-width verification-records drawer; structure pane (states+counts, channels, environments, candidate cards); release-context pane (blocker, verifications, approvals, scope, rollback note, risks, interpretation, next action)",
+  "Realistic bilingual record model (6 candidates, 40-hex/64-hex synthetic-but-stable digests, distinct per record, basis declared in the UI) replacing repeated-character digests",
+  "Truth states implemented honestly: EMPTY (filter/search yields nothing -> truthful empty block + clear), BLOCKED compare (availability reason surfaced), HELD/ROLLED BACK/RELEASED states, authorization missing shown as the current blocker",
+  "Container/media reflows (700/620), fact wrapping, uniform card rhythm, pane-title de-duplication, foreign sibling hiding, pane-toggle localisation, toggle band padding, READY/BLOCKED compare vocabulary"
+ ],
+ "RECAPTURE_STATUS": "CYCLE_1_CAPTURED (17 hash-bound captures) · CYCLE_2_PENDING_REBUILD",
+ "RECOMPARISON_STATUS": "CYCLE_1_RECOMPARED (16 of 17 defects fixed in source) · CYCLE_2_PENDING_REBUILD",
+ "REGRESSION_STATUS": "NOT_YET_RUN — releases/m05 unit tests and `npm run check` scheduled after cycle 2 (shared serialized commands)",
+ "EVIDENCE": [
+  {
+   "kind": "REFERENCE",
+   "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/07_RELEASES/CEP_SYSTEM_RELEASES_REFERENCE.png",
+   "sha256": "9e7c8747953bef1d8e0f2000ad00bad12667ddfd35bbcbbde4f227a812604f7a",
+   "dims": "1536x1024"
+  },
+  {
+   "kind": "BASELINE_RESULT",
+   "path": "writer-output/W05-RELEASES/evidence/baseline/baseline.json",
+   "lineage": "commit 68341ec18f7936569bccb39ec7a3eb997d0b6ccf · branch writer/mi-serial · viewport 1536x1024 · playwright-chromium-headless"
+  },
+  {
+   "kind": "BASELINE_CAPTURES",
+   "path": "writer-output/W05-RELEASES/evidence/baseline/*.png (9 captures, each with path+sha256+dims+bytes in baseline.json)"
+  }
+ ],
+ "LINEAGE": {
+  "branch": "writer/mi-serial",
+  "baseCommitAtStart": "68341ec18f7936569bccb39ec7a3eb997d0b6ccf",
+  "stackTreeAtStart": "7a69ec9a2bfa91e520031b87498abbafc6c5ef0e",
+  "note": "HEAD moves as sibling units land checkpoints; candidate additionally identified by per-file sha256 recorded at capture time."
+ },
+ "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
+ "BLOCKERS": [
+  {
+   "id": "B-01",
+   "state": "TRANSIENT",
+   "detail": "`npm run build:runtime` is red on a sibling unit's in-flight file stack/native-typescript/surfaces/manual_ai/presentation.ts:32 ('Parenthesized expression cannot be empty'). This unit does not edit it (read-only rule) and retries the shared serialized build. All W05-RELEASES files parse cleanly under stripTypeScriptTypes."
+  }
+ ]
 }

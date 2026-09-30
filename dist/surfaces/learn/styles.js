@@ -64,9 +64,10 @@ const CSS=`
   box-shadow:0 0 0 3px color-mix(in srgb,var(--lsr-accent) 18%,transparent)}
 .lsr-stage[data-state=done] .lsr-rail{border-color:color-mix(in srgb,var(--lsr-ok) 70%,transparent);color:var(--lsr-ok)}
 .lsr-stage[data-state=idle] .lsr-rail{border-style:dashed}
-.lsr-stagelist{display:grid;gap:1px;position:relative}
-.lsr-stagelist>.lsr-stage:not(:last-child)::after{content:"";position:absolute;inset-block:calc(100% - 4px);
-  inset-inline-start:20px;width:1.5px;background:color-mix(in srgb,var(--line) 85%,transparent)}
+.lsr-stagelist{display:grid;gap:2px;position:relative}
+.lsr-stagelist>.lsr-stage:not(:last-child)::after{content:"";position:absolute;top:27px;bottom:-9px;
+  inset-inline-start:10px;width:1.5px;background:color-mix(in srgb,var(--line) 85%,transparent)}
+.lsr-stage .lsr-stx{display:grid;gap:2px;min-width:0}
 .lsr-stage .lsr-nm{font-size:11.5px;font-weight:700;color:var(--text);line-height:1.3}
 .lsr-stage .lsr-sb{font-size:10px;color:var(--text3);line-height:1.45;margin-top:2px;overflow-wrap:anywhere}
 .lsr-stage .lsr-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
@@ -87,7 +88,7 @@ const CSS=`
   font-size:10px;line-height:1.5;color:var(--text3)}
 
 /* ── CENTER: activity workbench ───────────────────────────── */
-.lsr-work{display:grid;gap:14px;padding:16px 18px 4px;direction:inherit;min-width:0}
+.lsr-work{display:grid;gap:12px;padding:16px 18px 4px;direction:inherit;min-width:0}
 .lsr-workhd{display:grid;gap:8px;padding-bottom:13px;border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
 .lsr-workhd .lsr-idrow{display:flex;flex-wrap:wrap;align-items:center;gap:7px}
 .lsr-workhd .lsr-idrow .lsr-chip{font-size:10px}
@@ -127,7 +128,7 @@ const CSS=`
 .lsr-steps .lsr-arrow{color:var(--text3);font-size:11px;line-height:1}
 .lsr-field{display:grid;gap:5px;min-width:0}
 .lsr-field label{font-size:10px;font-weight:660;color:var(--text2);letter-spacing:.01em}
-.lsr-field textarea{width:100%;min-height:84px;resize:vertical;padding:9px 10px;font:inherit;font-size:11.5px;
+.lsr-field textarea{width:100%;min-height:70px;resize:vertical;padding:9px 10px;font:inherit;font-size:11.5px;
   line-height:1.55;color:var(--text);background:color-mix(in srgb,var(--bg1,#081826) 92%,transparent);
   border:1px solid color-mix(in srgb,var(--line) 92%,transparent);border-radius:var(--lsr-rs);outline:0}
 .lsr-field textarea:focus-visible{border-color:color-mix(in srgb,var(--lsr-accent) 55%,transparent);
@@ -138,20 +139,11 @@ const CSS=`
   background:color-mix(in srgb,var(--lsr-warn) 7%,transparent);font-size:10.5px;line-height:1.5;color:var(--text2)}
 .lsr-blockreason .icon{color:var(--lsr-warn);flex:none;margin-top:1px}
 
-.lsr-briefs{display:grid;gap:8px}
-.lsr-brief{border:1px solid color-mix(in srgb,var(--line) 88%,transparent);border-radius:var(--lsr-rs);
-  background:color-mix(in srgb,var(--panel,#0a1c2b) 84%,transparent)}
-.lsr-brief>summary{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;list-style:none}
-.lsr-brief>summary::-webkit-details-marker{display:none}
-.lsr-brief>summary:hover{background:color-mix(in srgb,var(--text) 4%,transparent)}
-.lsr-brief .lsr-bicon{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;flex:none;
-  border:1px solid color-mix(in srgb,var(--line) 90%,transparent);background:color-mix(in srgb,var(--bg2,#0a1c2b) 80%,transparent);color:var(--lsr-accent)}
-.lsr-brief .lsr-btx{display:grid;gap:2px;min-width:0;flex:1}
-.lsr-brief .lsr-btx strong{font-size:11.5px;font-weight:700}
-.lsr-brief .lsr-btx span{font-size:10px;color:var(--text3);line-height:1.4}
-.lsr-brief .lsr-bchev{transition:transform .15s ease;color:var(--text3);flex:none}
-.lsr-brief[open] .lsr-bchev{transform:rotate(180deg)}
-.lsr-brief .lsr-bbody{display:grid;gap:9px;padding:2px 12px 12px;border-top:1px solid color-mix(in srgb,var(--line) 62%,transparent);padding-top:11px}
+.lsr-after{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  padding:9px 12px;border:1px solid color-mix(in srgb,var(--line) 82%,transparent);
+  border-radius:var(--lsr-r);background:color-mix(in srgb,var(--text) 3%,transparent)}
+.lsr-after .lsr-actions .btn{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;padding:5px 10px}
+.lsr-after .lsr-actions .icon{width:13px;height:13px;color:var(--lsr-accent);flex:none}
 .lsr-facts{display:grid;gap:4px;margin:0}
 .lsr-facts>div{display:flex;justify-content:space-between;gap:10px;font-size:10.5px;padding:3px 0;
   border-bottom:1px solid color-mix(in srgb,var(--line) 45%,transparent)}

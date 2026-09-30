@@ -18,7 +18,7 @@ import {t,tf,tok,e,learnLocale,learnDir} from './i18n.js';
 import {buildLearnModel,stageCaption,percentLabel,               } from './model.js';
 
 const icon=(id       ,cls='icon sm')=>`<svg class="${cls}" aria-hidden="true"><use href="#${id}"></use></svg>`;
-const STAGE_ICON                      ={journey:'i-book',practice:'i-edit',assessment:'i-list',lab:'i-lab'};
+const attemptCaption=(model           )=>`${t('attemptShort',model.locale)} · ${model.attempt?.state||t('attemptNone',model.locale)}`;
 
                                                                 
 
@@ -34,9 +34,9 @@ function renderBanner(model           ,doc         ){
     if(idNode)idNode.textContent=model.activity.id;
   }
   const title=doc.querySelector('#bannerTitle');
-  if(title)title.textContent=model.activity.title;
+  if(title)title.textContent=model.sourceAvailable?model.activity.title:t('unboundTitle',model.locale);
   const toolbarTitle=doc.querySelector('#toolbarTitle');
-  if(toolbarTitle)toolbarTitle.textContent=model.activity.title;
+  if(toolbarTitle)toolbarTitle.textContent=model.sourceAvailable?model.activity.title:t('unboundTitle',model.locale);
   const toolbarIdentity=doc.querySelector('#toolbarKuId');
   if(toolbarIdentity)toolbarIdentity.textContent=model.activity.id;
 
@@ -98,7 +98,7 @@ function leftPaneHTML(model           ){
     </section>
 
     <section class="lsr-group">
-      <div class="lsr-grouphd"><span>${e(t('pathTitle',model.locale))}</span><span>${e(t('attemptNone',model.locale)===model.attempt?.state?'':t('attemptShort',model.locale))}</span></div>
+      <div class="lsr-grouphd"><span>${e(t('pathTitle',model.locale))}</span><span>${e(attemptCaption(model))}</span></div>
       <div class="lsr-stagelist">${stages}</div>
     </section>
 
@@ -123,36 +123,25 @@ function leftPaneHTML(model           ){
 }
 
 /* ── CENTER: activity workbench ──────────────────────────── */
-function briefRow(model           ,which                   ){
+function briefFacts(model           ,which                   ){
   const isAssessment=which==='assessment';
   const brief=isAssessment?model.briefs.assessment:model.briefs.lab;
-  const title=isAssessment?t('assessmentTitle',model.locale):t('labTitle',model.locale);
-  const sub=isAssessment?t('subAssessment',model.locale):t('subLab',model.locale);
   const rows=isAssessment
     ? [
         [t('briefAvailability',model.locale),brief.availability,true],
         [t('briefGrading',model.locale),brief.gradingProvider,true],
         [t('briefMastery',model.locale),brief.masteryWrite?t('yes',model.locale):t('no',model.locale),false],
+        [t('fObjective',model.locale),model.nextStep,false],
         [t('briefOwner',model.locale),'LearnAdapter',true]
       ]
     : [
         [t('briefAvailability',model.locale),brief.kind,true],
         [t('briefRuntime',model.locale),brief.runtime,true],
         [t('briefOwner',model.locale),brief.operationalAdapter,true],
-        [t('briefMastery',model.locale),brief.w03RuntimeCreated?t('yes',model.locale):t('no',model.locale),false]
+        [t('briefMastery',model.locale),brief.w03RuntimeCreated?t('yes',model.locale):t('no',model.locale),false],
+        [t('fPrerequisites',model.locale),model.activity.prerequisiteState,true]
       ];
-  return `<details class="lsr-brief" data-learn-brief="${which}">
-    <summary>
-      <span class="lsr-bicon">${icon(isAssessment?'i-list':'i-lab')}</span>
-      <span class="lsr-btx"><strong dir="auto">${e(title)}</strong><span dir="auto">${e(sub)}</span></span>
-      <span class="lsr-chip" data-tone="mute">${e(t('stateBrief',model.locale))}</span>
-      ${icon('i-chev','icon lsr-bchev')}
-    </summary>
-    <div class="lsr-bbody">
-      <dl class="lsr-facts">${rows.map(([label,value,technical])=>`<div><dt dir="auto">${e(String(label))}</dt><dd>${technical?tok(value):`<span dir="auto">${e(String(value))}</span>`}</dd></div>`).join('')}</dl>
-      <p class="lsr-meta" dir="auto">${e(isAssessment?t('localNote',model.locale):t('subLab',model.locale))}</p>
-    </div>
-  </details>`;
+  return `<dl class="lsr-facts">${rows.map(([label,value,technical])=>`<div><dt dir="auto">${e(String(label))}</dt><dd>${technical?tok(value):`<span dir="auto">${e(String(value))}</span>`}</dd></div>`).join('')}</dl>`;
 }
 
 function workbenchHTML(model           ,attemptAnswer       ){
@@ -226,7 +215,7 @@ function workbenchHTML(model           ,attemptAnswer       ){
           <h3 dir="auto">${e(t('practiceTitle',model.locale))}</h3>
           <span class="lsr-meta" dir="auto">${e(t('practiceHint',model.locale))}</span>
         </span>
-        <span class="lsr-chip" data-tone="${attempt?'accent':'mute'}">${e(attempt?attempt.state:attemptAnswer?model.progress.attemptTruth:t('attemptNone',model.locale))}</span>
+        <span class="lsr-chip" data-tone="${attempt?'accent':'mute'}">${e(attemptCaption(model))}</span>
       </div>
       <div class="lsr-pbody2">
         <div class="lsr-steps" aria-label="${e(t('stageJourney',model.locale))} → ${e(t('stageLab',model.locale))}">${steps}</div>
@@ -242,14 +231,27 @@ function workbenchHTML(model           ,attemptAnswer       ){
       </div>
     </section>
 
-    <section class="lsr-briefs">
-      ${briefRow(model,'assessment')}
-      ${briefRow(model,'lab')}
+    <section class="lsr-after">
+      <span class="lsr-meta" dir="auto">${e(t('afterPractice',model.locale))}</span>
+      <span class="lsr-actions">
+        <button type="button" class="btn" data-learn-action="brief-assessment">${icon('i-list')}<span dir="auto">${e(t('assessmentTitle',model.locale))}</span></button>
+        <button type="button" class="btn" data-learn-action="brief-lab">${icon('i-lab')}<span dir="auto">${e(t('labTitle',model.locale))}</span></button>
+      </span>
     </section>
   </section>`;
 }
 
 /* ── dialogs ─────────────────────────────────────────────── */
+function briefDialog(model           ,which                   ,workspace    ){
+  const isAssessment=which==='assessment';
+  workspace.dialog(
+    isAssessment?t('assessmentTitle',model.locale):t('labTitle',model.locale),
+    `<p dir="auto" style="margin:0 0 10px">${e(isAssessment?t('subAssessment',model.locale):t('subLab',model.locale))}</p>
+     ${briefFacts(model,which)}
+     <p class="lsr-meta" dir="auto" style="margin-top:10px">${e(t('localNote',model.locale))}</p>`,
+    {safeOutside:true});
+}
+
 function pathMapDialog(model           ,workspace    ){
   const rows=model.stages.map(stage=>`<div class="lsr-facts" style="margin-bottom:8px">
       <div><dt>${e(stage.index)} · <span dir="auto">${e(stage.label)}</span></dt><dd><span class="lsr-chip" data-tone="${stage.badgeTone==='mute'?'':stage.badgeTone}">${e(stage.badge)}</span></dd></div>
@@ -262,6 +264,19 @@ function pathMapDialog(model           ,workspace    ){
 }
 
 /* ── orchestrator ────────────────────────────────────────── */
+
+/** Hide donor projection groups that carry no rows — an empty group is a dead zone. */
+function syncProjectionGroups(editor        ){
+  let changed=false;
+  editor.querySelectorAll('.projection-group').forEach(group=>{
+    const body=group.querySelector('.projection-body');
+    const empty=!body||!body.children.length;
+    const node=group               ;
+    if(node.hidden!==empty){node.hidden=empty;changed=true}
+  });
+  return changed;
+}
+
 export function mountLearnSurfaceComposition({learn,structured,workspace,commands}     ){
   const doc=document;
   ensureLearnStyles(doc);
@@ -275,6 +290,8 @@ export function mountLearnSurfaceComposition({learn,structured,workspace,command
 
     const leftBody=doc.querySelector('#leftPane .pbody');
     if(leftBody){
+      // Learn owns this pane's composition; the donor outline scaffold is retired.
+      [...leftBody.children].forEach(child=>{if(child.id!=='domainLeftRegion')child.remove()});
       const host=workspace.region('LEFT',{html:leftPaneHTML(model),label:t('pathTitle',model.locale),summary:t('overall',model.locale)});
       if(host)host.dataset.learnOwned='W02-LEARN';
       const headingIcon=doc.querySelector('#leftPane .paneheadicon use');
@@ -294,7 +311,12 @@ export function mountLearnSurfaceComposition({learn,structured,workspace,command
 
     const contextLabel=workspace.region('RIGHT',{html:'',label:t('ctxPane',model.locale)});
     const legacyContext=doc.querySelector('#domainContext');
-    if(legacyContext&&legacyContext!==contextLabel){legacyContext.hidden=true;legacyContext.innerHTML=''}
+    if(legacyContext){legacyContext.hidden=true;legacyContext.innerHTML='';legacyContext.setAttribute('aria-hidden','true')}
+    // Donor KU/block scope switch does not apply to the Learn route (no Library KU state).
+    doc.querySelectorAll('#rightPane .contextscope').forEach(node=>{node.hidden=true;node.inert=true;node.setAttribute('aria-hidden','true')});
+    void contextLabel;
+
+    workspace.region('BOTTOM',{label:t('deepWork',model.locale),summary:t('deepWorkHint',model.locale),open:null});
 
     const editor=doc.querySelector('#editorDocument');
     if(editor){
@@ -306,20 +328,16 @@ export function mountLearnSurfaceComposition({learn,structured,workspace,command
       if(current&&node)current.replaceWith(node);
       else if(node&&!editor.querySelector('[data-learn="work"]'))editor.prepend(node);
 
-      const docTitle=editor.querySelector('.doctitle');
-      if(docTitle&&model.document.title)docTitle.textContent=model.document.title;
+      // The document title is domain data (StructuredDocumentDomainAdapter) and is
+      // intentionally left to the shared editor — the surface never clobbers it.
       const docLead=editor.querySelector('.doclead');
       if(docLead)docLead.textContent=t('docLead',model.locale);
       const groupTitle=editor.querySelector('#contentGroupToggle .groupTitle');
-      if(groupTitle)groupTitle.textContent=t('sections',model.locale);
+      if(groupTitle)groupTitle.textContent=t('docGroup',model.locale);
       const groupHint=editor.querySelector('#contentGroupToggle .groupHint');
-      if(groupHint)groupHint.textContent=t('eyebrow',model.locale);
+      if(groupHint)groupHint.textContent=t('docGroupHint',model.locale);
       editor.setAttribute('aria-label',t('crumbKind',model.locale));
-      editor.querySelectorAll('.projection-group').forEach(group=>{
-        const body=group.querySelector('.projection-body');
-        const empty=!body||!body.children.length;
-        (group               ).hidden=empty;
-      });
+      syncProjectionGroups(editor);
     }
 
     workspace.toolbar(['learn.open','learn.practice','learn.review']);
@@ -339,6 +357,8 @@ export function mountLearnSurfaceComposition({learn,structured,workspace,command
     if(action){
       const kind=action.dataset.learnAction;
       if(kind==='path-map'){pathMapDialog(model,workspace);return}
+      if(kind==='brief-assessment'){briefDialog(model,'assessment',workspace);return}
+      if(kind==='brief-lab'){briefDialog(model,'lab',workspace);return}
       const answer=(doc.querySelector('#practiceAnswer')                            )?.value||'';
       try{
         if(kind==='practice-start')commands.execute('learn.practice',{route:'learn-workbench'});
@@ -350,9 +370,17 @@ export function mountLearnSurfaceComposition({learn,structured,workspace,command
     }
     const stage=target?.closest?.('[data-learn-stage]')                    ;
     if(stage){
-      const map                      ={journey:'learn.open',practice:'learn.practice',assessment:'learn.review',lab:'learn.review'};
-      const id=map[stage.dataset.learnStage||''];
-      if(id){try{commands.execute(id,{route:'learn-path-rail'})}catch{model=render()}}
+      const key=stage.dataset.learnStage||'';
+      if(key==='assessment'||key==='lab'){briefDialog(model,key==='assessment'?'assessment':'lab',workspace);return}
+      if(key==='practice'){
+        const field=doc.querySelector('#practiceAnswer')                            ;
+        if(field&&!field.disabled){field.focus();field.scrollIntoView({block:'center'});return}
+        try{commands.execute('learn.practice',{route:'learn-path-rail'})}catch{}
+        model=render();
+        return;
+      }
+      try{commands.execute('learn.open',{route:'learn-path-rail'})}catch{}
+      model=render();
       return;
     }
     const hostCommand=target?.closest?.('[data-foundation-command],[data-command]')                    ;
@@ -361,7 +389,10 @@ export function mountLearnSurfaceComposition({learn,structured,workspace,command
   },true);
 
   const observer=new MutationObserver(()=>{
-    if(!doc.querySelector('[data-learn="work"]')||!doc.querySelector('#domainLeftRegion .lsr'))model=render();
+    const work=doc.querySelector('[data-learn="work"]'),rail=doc.querySelector('#domainLeftRegion .lsr');
+    const editor=doc.querySelector('#editorDocument');
+    const projectionsStale=editor?syncProjectionGroups(editor):false;
+    if(!work||!rail||projectionsStale)model=render();
   });
   if(doc.body)observer.observe(doc.body,{childList:true,subtree:true});
 

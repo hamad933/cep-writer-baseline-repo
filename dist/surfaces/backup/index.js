@@ -17,7 +17,9 @@ import {tx,txList,activeLocale,LOCALIZED_COMMAND_LABELS,COMMAND_REASON_KEYS} fro
 export const BACKUP_COMMANDS=Object.freeze(['backup.plan','backup.preview','backup.stage','backup.drill','backup.activationRequest']);
 
 const safe=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-const B=value=>`<bdi dir="ltr">${safe(value)}</bdi>`;
+/* Technical tokens are isolated LTR; <wbr> after "_" gives UPPER_SNAKE enums a clean wrap
+ * point instead of a mid-letter break (BIDI/typography rule: tokens stay readable). */
+const B=value=>`<bdi dir="ltr">${safe(value).replace(/_/g,'_<wbr>')}</bdi>`;
 export function backupAttemptProjection(adapter){const snapshot=adapter?.snapshot?.()||{};const durable=Array.isArray(snapshot.durableAttempts)?snapshot.durableAttempts:null;return Object.freeze({source:durable?'PROVIDER_DURABLE_ATTEMPT_JOURNAL':'CURRENT_UI_SESSION',durable:!!durable,rows:structuredClone(durable||snapshot.attemptHistory||[])});}
 
 const COMMAND_IDS=['backup.package',...BACKUP_COMMANDS];

@@ -1,20 +1,25 @@
 {
   "lineage": {
-    "commit": "e5a77b60187e82503c52466665561605a3eea362",
-    "short": "e5a77b6",
-    "treeSha": "8b385e4a3c9ccd0d4af47e007242896a2ce783ad",
+    "commit": "4dbdcf79b9574ffc0cba7a441ac6893744883606",
+    "short": "4dbdcf7",
+    "treeSha": "fa5a784110e13c6e26c7db642dc5d65ec50a678b",
     "branch": "writer/mi-serial",
-    "capturedAt": "2026-09-30T18:42:50.155Z",
+    "capturedAt": "2026-09-30T19:15:12.112Z",
     "viewport": "1536x1024",
     "runtime": "playwright-chromium-headless",
     "deltaFiles": [
-      "M stack/native-typescript/surfaces/releases/composition.ts",
-      "?? stack/native-typescript/surfaces/releases/presentation.ts",
-      "?? stack/native-typescript/surfaces/releases/records.ts",
-      "?? stack/native-typescript/surfaces/releases/runtime.ts"
+      "M stack/native-typescript/surfaces/releases/presentation.ts",
+      " M stack/native-typescript/surfaces/releases/runtime.ts"
     ]
   },
   "checks": [
+    {
+      "id": "structure.surface-owned-stage-wait",
+      "status": "PASS",
+      "detail": {
+        "owned": true
+      }
+    },
     {
       "id": "structure.surface-owned-stage",
       "status": "PASS",
@@ -35,55 +40,55 @@
         },
         "head": {
           "x": 333,
-          "y": 198,
+          "y": 228,
           "w": 754,
           "h": 99
         },
         "title": {
           "x": 333,
-          "y": 222,
+          "y": 252,
           "w": 293,
           "h": 30
         },
         "strip": {
           "x": 333,
-          "y": 311,
+          "y": 341,
           "w": 754,
           "h": 65
         },
         "truths": {
           "x": 333,
-          "y": 389,
+          "y": 419,
           "w": 754,
           "h": 83
         },
         "grid": {
           "x": 333,
-          "y": 486,
+          "y": 516,
           "w": 754,
           "h": 1127
         },
         "colA": {
           "x": 333,
-          "y": 486,
+          "y": 516,
           "w": 371,
           "h": 1127
         },
         "colB": {
           "x": 716,
-          "y": 486,
+          "y": 516,
           "w": 371,
           "h": 899
         },
         "records": {
           "x": 333,
-          "y": 1358,
+          "y": 1388,
           "w": 371,
           "h": 255
         },
         "foot": {
           "x": 333,
-          "y": 1950,
+          "y": 1980,
           "w": 754,
           "h": 64
         },
@@ -154,13 +159,13 @@
       "detail": {
         "colA": {
           "x": 333,
-          "y": 486,
+          "y": 516,
           "w": 371,
           "h": 1127
         },
         "colB": {
           "x": 716,
-          "y": 486,
+          "y": 516,
           "w": 371,
           "h": 899
         }
@@ -229,7 +234,7 @@
       "detail": {
         "root": {
           "x": 1145,
-          "y": 298,
+          "y": 254,
           "w": 362,
           "h": 904
         },
@@ -237,7 +242,7 @@
         "kv": 3,
         "next": {
           "x": 1145,
-          "y": 1031,
+          "y": 987,
           "w": 362,
           "h": 172
         }
@@ -411,8 +416,12 @@
       "detail": {
         "lang": "ar",
         "dir": "rtl",
-        "arabicChars": 2014,
-        "totalChars": 5127,
+        "headerVisible": true,
+        "headerText": "REL-2026.08.31-RC2",
+        "headerY": 253,
+        "englishMeta": false,
+        "arabicChars": 2271,
+        "totalChars": 5083,
         "leftX": 0,
         "rightX": 1116,
         "stageX": 315,
@@ -429,8 +438,12 @@
       "detail": {
         "lang": "ar",
         "dir": "rtl",
-        "arabicChars": 2014,
-        "totalChars": 5127,
+        "headerVisible": true,
+        "headerText": "REL-2026.08.31-RC2",
+        "headerY": 253,
+        "englishMeta": false,
+        "arabicChars": 2271,
+        "totalChars": 5083,
         "leftX": 0,
         "rightX": 1116,
         "stageX": 315,
@@ -450,8 +463,23 @@
       "id": "rtl.content-present",
       "status": "PASS",
       "detail": {
-        "arabicChars": 2014,
-        "totalChars": 5127
+        "arabicChars": 2271,
+        "totalChars": 5083
+      }
+    },
+    {
+      "id": "rtl.header-and-badge-render",
+      "status": "PASS",
+      "detail": {
+        "headerText": "REL-2026.08.31-RC2",
+        "headerY": 253
+      }
+    },
+    {
+      "id": "rtl.no-english-meta-leakage",
+      "status": "PASS",
+      "detail": {
+        "englishMetaDetected": false
       }
     },
     {
@@ -472,15 +500,15 @@
     {
       "name": "en-1536-top",
       "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-RELEASES/evidence/audit/en-1536-top.png",
-      "sha256": "682a8c34fb98a6b7ccc7c79285ad208b3964ef54752b72bbecbf57eec022da14",
-      "bytes": 315254,
+      "sha256": "dda28619ca0cc7c7e2da8478c48e96fc2b68dc2ae0a28ceb9d42f988aa2b631a",
+      "bytes": 315474,
       "dims": "1536x1024"
     },
     {
       "name": "en-1536-bottom",
       "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-RELEASES/evidence/audit/en-1536-bottom.png",
-      "sha256": "4be45b7e5edb712ac8bec92dbe54789a0f934a6a86a5175d239f1969eb227ac5",
-      "bytes": 287515,
+      "sha256": "1345356aa7818db761c81a7c80dd8731b87787cb3c600af70fa82c70f415945f",
+      "bytes": 291127,
       "dims": "1536x1024"
     },
     {
@@ -493,15 +521,15 @@
     {
       "name": "crop-center-en",
       "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-RELEASES/evidence/audit/crop-center-en.png",
-      "sha256": "845c62f61924960c1903081d518ac70fcc46ef675c938ea8cc6a8d21a5405920",
-      "bytes": 128401,
+      "sha256": "31208577640a770b23ec452b7d13a79d34e0a3a7ce190157adeb1809995d8bea",
+      "bytes": 126476,
       "dims": "790x803"
     },
     {
       "name": "crop-right-en",
       "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-RELEASES/evidence/audit/crop-right-en.png",
-      "sha256": "44e83e51c6bbc74a1f8513982d7f5d9f9c761e93a3b676de2cd89753f69527e1",
-      "bytes": 68044,
+      "sha256": "d60464c6b70f023477d2bfac7a0ee8771d14e19870ea396a1a637be1d0db2637",
+      "bytes": 69556,
       "dims": "420x803"
     },
     {
@@ -521,50 +549,50 @@
     {
       "name": "en-empty-state",
       "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-RELEASES/evidence/audit/en-empty-state.png",
-      "sha256": "599d5ed20fa5b6844871cbba9491a51b1db4874597e451390755a8536c6ca0e2",
-      "bytes": 190519,
+      "sha256": "e85674cfb6f8d9aca708230465684032028f175885d6b0729861b82be1fd0dff",
+      "bytes": 188996,
       "dims": "1536x1024"
     },
     {
       "name": "en-records-events",
       "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-RELEASES/evidence/audit/en-records-events.png",
-      "sha256": "376da9317879b51c04736a916a765d76e7c196aeca7bc813248658522269147c",
-      "bytes": 290418,
+      "sha256": "483c39f0b52b4934050aa42ec77b29460e8d9bfb59693f1ffc41f3824db9af5e",
+      "bytes": 292960,
       "dims": "1536x1024"
     },
     {
       "name": "en-1280x860",
       "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-RELEASES/evidence/audit/en-1280x860.png",
-      "sha256": "1f0b7094492533bcefc5b7e2f817a5f215f81ce9f47234a77c8c55c8659f5b59",
-      "bytes": 195297,
+      "sha256": "5f328b8a9639f7f01712b35335cd5004261df280f20b09146e7a1a22a9fe0494",
+      "bytes": 199088,
       "dims": "1280x860"
     },
     {
       "name": "en-1024x900",
       "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-RELEASES/evidence/audit/en-1024x900.png",
-      "sha256": "10435779282dc68ddb39e2349933ea840f8a9d5c63dea914996ac62cdeab4d1e",
-      "bytes": 180602,
+      "sha256": "4ea12747ef1ebdb8ba12e637948ee87f6b9440fc8351b2f4cc96f0077fa0f542",
+      "bytes": 181125,
       "dims": "1024x900"
     },
     {
       "name": "en-820x900",
       "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-RELEASES/evidence/audit/en-820x900.png",
-      "sha256": "5e91b43d0884b3e1304b6e37fde6817251f08ea4493cd1b6e679ee870b9db693",
-      "bytes": 117517,
+      "sha256": "27f8082bd83032dbae06ec8e46e8b0c41308ed6b1adff428ece3e0e7bad448c5",
+      "bytes": 121238,
       "dims": "820x900"
     },
     {
       "name": "ar-1536-top",
       "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-RELEASES/evidence/audit/ar-1536-top.png",
-      "sha256": "5f29143e5748642d55505af268fcc3666b27b55e4f8feac57a8b2abf80f653eb",
-      "bytes": 262940,
+      "sha256": "0cb59f161cf0b56ce4472ce6aea183d0603a1d3a304beded1526048503d8b79f",
+      "bytes": 259945,
       "dims": "1536x1024"
     },
     {
       "name": "ar-1536-bottom",
       "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-RELEASES/evidence/audit/ar-1536-bottom.png",
-      "sha256": "4d3279efcea1242924abb7971350ce888b9040311c9f64e0a604d24a9ba19800",
-      "bytes": 243898,
+      "sha256": "da2729ce711e78a8675e221a5b8714ebe077591814f3f25155cb43472882d938",
+      "bytes": 244535,
       "dims": "1536x1024"
     },
     {
@@ -577,15 +605,15 @@
     {
       "name": "crop-center-ar",
       "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-RELEASES/evidence/audit/crop-center-ar.png",
-      "sha256": "f4367babca6e1cabcff3efc13898dbf3594df8db4faad5c10fc603f381afc0a4",
-      "bytes": 111690,
+      "sha256": "75db3f743362077980cc749368af6a73d3b7bcdf6d90df78457cdaa629cfebf4",
+      "bytes": 106736,
       "dims": "790x803"
     },
     {
       "name": "crop-right-ar",
       "file": "/workspaces/cep-writer-baseline-repo/writer-output/W05-RELEASES/evidence/audit/crop-right-ar.png",
-      "sha256": "2d7d5eb9d5fee034b97c089c0ee1ddf59ceebdecce931118c9ba9e8c607d13e2",
-      "bytes": 55708,
+      "sha256": "915e5d5b74fe29debfd741b25c9d21f2f8b1d08f59414134ec446c405ca77ca1",
+      "bytes": 57924,
       "dims": "420x803"
     }
   ],
@@ -645,55 +673,55 @@
         },
         "head": {
           "x": 333,
-          "y": 198,
+          "y": 228,
           "w": 754,
           "h": 99
         },
         "title": {
           "x": 333,
-          "y": 222,
+          "y": 252,
           "w": 293,
           "h": 30
         },
         "strip": {
           "x": 333,
-          "y": 311,
+          "y": 341,
           "w": 754,
           "h": 65
         },
         "truths": {
           "x": 333,
-          "y": 389,
+          "y": 419,
           "w": 754,
           "h": 83
         },
         "grid": {
           "x": 333,
-          "y": 486,
+          "y": 516,
           "w": 754,
           "h": 1127
         },
         "colA": {
           "x": 333,
-          "y": 486,
+          "y": 516,
           "w": 371,
           "h": 1127
         },
         "colB": {
           "x": 716,
-          "y": 486,
+          "y": 516,
           "w": 371,
           "h": 899
         },
         "records": {
           "x": 333,
-          "y": 1358,
+          "y": 1388,
           "w": 371,
           "h": 255
         },
         "foot": {
           "x": 333,
-          "y": 1950,
+          "y": 1980,
           "w": 754,
           "h": 64
         },
@@ -793,7 +821,7 @@
       "right": {
         "root": {
           "x": 1145,
-          "y": 298,
+          "y": 254,
           "w": 362,
           "h": 904
         },
@@ -801,7 +829,7 @@
         "kv": 3,
         "next": {
           "x": 1145,
-          "y": 1031,
+          "y": 987,
           "w": 362,
           "h": 172
         }
@@ -861,7 +889,7 @@
       "spacing": {
         "rootGap": {
           "rowGap": "14px",
-          "paddingTop": "16px",
+          "paddingTop": "46px",
           "paddingInlineStart": "18px"
         },
         "blockPad": {
@@ -875,7 +903,7 @@
         }
       },
       "overflow": {
-        "stageScroll": 1832,
+        "stageScroll": 1862,
         "stageClient": 803,
         "hScroll": false,
         "clipped": []
@@ -884,8 +912,12 @@
     "ar": {
       "lang": "ar",
       "dir": "rtl",
-      "arabicChars": 2014,
-      "totalChars": 5127,
+      "headerVisible": true,
+      "headerText": "REL-2026.08.31-RC2",
+      "headerY": 253,
+      "englishMeta": false,
+      "arabicChars": 2271,
+      "totalChars": 5083,
       "leftX": 0,
       "rightX": 1116,
       "stageX": 315,
@@ -895,7 +927,7 @@
       "eyebrowTransform": "none",
       "hScroll": false
     },
-    "enTextLength": 3393
+    "enTextLength": 3418
   },
   "consoleErrors": [
     "Failed to load resource: net::ERR_CONNECTION_REFUSED",

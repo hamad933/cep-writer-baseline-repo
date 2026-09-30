@@ -1,6 +1,6 @@
 import {defineContextDescriptorProvider} from '../../foundation/global/context-descriptor-contract.js';
 import {createReviewsCompareProvider,REVIEW_DOMAIN_OWNER} from '../../adapters/reviews/domain.js';
-
+import {activeLocale, pickText} from './i18n.js';
 export const REVIEWS_SURFACE_CONTRACT=Object.freeze({
   id:'reviews',workspace:'W04',domainOwner:REVIEW_DOMAIN_OWNER,center:'FormalReviewDecisionWorkbench',
   regionRoles:Object.freeze({LEFT:'Review Queue/Assigned/In Review/Closed collection',CENTER:'Pinned Evidence + Criteria + Findings + Decision work',RIGHT:'Reviewer scope/prior review/criterion authority/provenance conflict context',BOTTOM:'Deep artifact/source/prior Evidence/raw provenance projection',TRANSIENT:'Shared transient/focus host only'}),
@@ -11,60 +11,122 @@ export const REVIEWS_SURFACE_CONTRACT=Object.freeze({
 /* ── queue vocabulary ──────────────────────────────────────────────────────────────────────
  * The LEFT pane is the surface's REVIEW QUEUE navigation (reference: Review Queue · Assigned ·
  * In Review · Closed). Human labels replace raw protocol tokens exactly as the Evidence intake
- * queue does; the raw tokens stay on the record and in the context lens. Exported because the
- * surface-owned queue segments (presentation-surface.ts) derive their labels and live counts
- * from the very same vocabulary — one vocabulary, one location. */
-export const REVIEW_STATE_LABEL=Object.freeze({REQUESTED:'Requested',ASSIGNED:'Assigned',IN_REVIEW:'In review',READY_FOR_DECISION:'Ready for decision',CLOSED:'Closed',CANCELLED:'Cancelled'});
-export const REVIEW_DECISION_LABEL=Object.freeze({ACCEPT:'Accept',ACCEPT_WITH_LIMITATIONS:'Accept w/ limits',MORE_EVIDENCE_REQUIRED:'More evidence',REJECT:'Reject'});
+ * queue does; the raw tokens stay on the record, in the collection filter and in the context
+ * lens. Labels resolve the ACTIVE language on every call, so a Settings language switch re-
+ * projects the queue without a reload. */
+const STATE_KEY=Object.freeze({REQUESTED:'stateRequested',ASSIGNED:'stateAssigned',IN_REVIEW:'stateInReview',READY_FOR_DECISION:'stateReady',CLOSED:'stateClosed',CANCELLED:'stateCancelled'});
+const DECISION_KEY=Object.freeze({ACCEPT:'decAccept',ACCEPT_WITH_LIMITATIONS:'decAcceptLimits',MORE_EVIDENCE_REQUIRED:'decMoreEvidence',REJECT:'decReject'});
 export const REVIEW_STATE_TONE=Object.freeze({REQUESTED:'neutral',ASSIGNED:'info',IN_REVIEW:'info',READY_FOR_DECISION:'warning',CLOSED:'success',CANCELLED:'danger'});
+export const REVIEW_DECISION_TONE=Object.freeze({ACCEPT:'success',ACCEPT_WITH_LIMITATIONS:'warning',MORE_EVIDENCE_REQUIRED:'warning',REJECT:'danger'});
 export const reviewStateOf=row=>String(row?.state||'');
-export const reviewStateLabel=row=>REVIEW_STATE_LABEL[reviewStateOf(row)]||reviewStateOf(row)||'No state';
-export const reviewDecisionLabel=row=>row?.decision?.outcome?(REVIEW_DECISION_LABEL[row.decision.outcome]||row.decision.outcome):'None';
-export const reviewDecisionTone=row=>row?.decision?.outcome?(row.decision.outcome==='ACCEPT'?'success':row.decision.outcome==='REJECT'?'danger':'warning'):'muted';
+export const reviewStateLabel=row=>{const t=pickText(activeLocale());return t[STATE_KEY[reviewStateOf(row)]]||reviewStateOf(row);};
+export const reviewDecisionLabel=row=>{const t=pickText(activeLocale()),outcome=row?.decision?.outcome;return outcome?(t[DECISION_KEY[outcome]]||outcome):t.decNone;};
+export const reviewDecisionTone=row=>row?.decision?.outcome?(REVIEW_DECISION_TONE[row.decision.outcome]||'info'):'muted';
 
 export function createReviewsCollectionAdapter(domain){
   if(!domain||domain.owner!==REVIEW_DOMAIN_OWNER)throw Error('REVIEWS_DOMAIN_REQUIRED');
   return Object.freeze({adapterId:'w04.reviews.collection',rows:()=>domain.snapshot().records,rowId:row=>row.id,rowLabel:row=>`Review ${row.id}`,searchableText:row=>[row.id,row.revisionId,row.state,row.rereview,...(row.evidenceRefs||[]),...(row.criteriaRefs||[]),row.decision?.outcome].filter(Boolean).join(' '),/* Two columns fit the 278 px structure pane; four columns wrapped every header and value
-     * mid-word (`WORKF LOW`, `PINNED EVIDEN CE`, `Revie w rev-0084`). Identity + decision is the
-     * scannable pair the queue actually needs. */
+     * mid-word (`WORKF LOW`, `PINNED EVIDEN CE`, `Revie w rev-0084`). Identity + Decision is the
+     * scannable pair a queue actually needs — the reference's left pane is a queue, not a grid.
+     * `label` is a GETTER so the header follows a Settings language change on the next render. */
     columns:Object.freeze([
-      {id:'review',label:'Review queue',minWidth:150,cell:row=>({text:`Review ${row.id}`,secondary:`${reviewStateLabel(row)} · ${row.evidenceRefs.length} evidence · ${row.findings.length} finding${row.findings.length===1?'':'s'}`,direction:'ltr'}),compareRows:(a,b)=>a.state.localeCompare(b.state,'en')||a.id.localeCompare(b.id,'en')},
-      {id:'decision',label:'Decision',minWidth:84,cell:row=>({text:reviewDecisionLabel(row),secondary:row.effectiveDecisionId||row.revisionId,direction:'ltr'})}
-    ]),actions:row=>Object.freeze([{id:'reviews.review',label:'Start / resume review',enabled:['REQUESTED','ASSIGNED','IN_REVIEW','READY_FOR_DECISION'].includes(row.state)},{id:'reviews.finding',label:'Add finding',enabled:row.state==='IN_REVIEW'},{id:'reviews.compare',label:'Compare exact revisions',enabled:['IN_REVIEW','READY_FOR_DECISION','CLOSED'].includes(row.state)},{id:'reviews.supersede',label:'Issue superseding decision',enabled:row.state==='READY_FOR_DECISION'}])});
+      {id:'review',get label(){return pickText(activeLocale()).colQueue;},minWidth:150,cell:row=>({text:`Review ${row.id}`,secondary:`${reviewStateLabel(row)} · ${row.evidenceRefs.length} evidence · ${row.findings.length} finding${row.findings.length===1?'':'s'}`,direction:'ltr'}),compareRows:(a,b)=>a.state.localeCompare(b.state,'en')||a.id.localeCompare(b.id,'en')},
+      {id:'decision',get label(){return pickText(activeLocale()).colDecision;},minWidth:84,cell:row=>({text:reviewDecisionLabel(row),secondary:row.effectiveDecisionId||row.revisionId,direction:'ltr'})}
+    ]),actions:row=>{const tx=pickText(activeLocale());return Object.freeze([{id:'reviews.review',label:tx.cmdReview,enabled:['REQUESTED','ASSIGNED','IN_REVIEW','READY_FOR_DECISION'].includes(row.state)},{id:'reviews.finding',label:tx.cmdFinding,enabled:row.state==='IN_REVIEW'},{id:'reviews.compare',label:tx.cmdCompare,enabled:['IN_REVIEW','READY_FOR_DECISION','CLOSED'].includes(row.state)},{id:'reviews.supersede',label:tx.cmdSupersede,enabled:row.state==='READY_FOR_DECISION'}]);}});
+}
+
+/* ── RIGHT context lens ────────────────────────────────────────────────────────────────────
+ * Mirrors the reference's right column as SIX sections under the three lens identities the
+ * surface contract pins (Review scope · Reviewer authority · Prior Review context):
+ *   Scope            → Scope              + Criterion authority
+ *   Reviewer authority → Actor vs authority + Decision issuance (the reference's conflict card)
+ *   Prior Review context → Lineage         + Provenance & integrity
+ * Deliberately NOT a copy of the CENTER workbench: counts, authority, gates and lineage live
+ * here; findings, rationale and Decision preparation live in CENTER (ONE LOCATION).
+ * Gate fields are prefixed PASS/HOLD/OPEN so the shared W04 lens presenter derives a truthful
+ * status chip from values this provider actually computed — nothing decorative is emitted. */
+function reviewIssuanceGate(row,t){
+  const authority=row.reviewer?.authorityAvailable===true;
+  if(row.decision)return t.gatePassIssued;
+  if(!authority)return t.gateHoldAuthority;
+  if(row.state==='READY_FOR_DECISION')return t.gatePassReady;
+  if(row.state==='IN_REVIEW')return row.findings.length?fill(t.gateOpenInProgress,{n:row.findings.length}):t.gateHoldFindings;
+  if(row.state==='ASSIGNED')return t.gateOpenAssigned;
+  if(row.state==='REQUESTED')return t.gateOpenRequested;
+  return t.gateOpenRequested;
+}
+function reviewConflict(row,t){
+  if(row.decision)return fill(t.conflictClosed,{id:row.decision.decisionId});
+  if(row.reviewer?.authorityAvailable!==true)return t.conflictAuthority;
+  if(row.state==='CLOSED'||row.state==='CANCELLED')return t.conflictNone;
+  const covered=row.criteriaRefs.filter(ref=>row.findings.some(f=>f.criterionRef===ref)).length;
+  if(covered<row.criteriaRefs.length)return t.conflictOpen;
+  return t.conflictNone;
+}
+function reviewRationaleGap(row,t){
+  const missing=row.criteriaRefs.filter(ref=>!row.findings.some(f=>f.criterionRef===ref)).length;
+  return missing?fill(t.gapOpen,{n:missing,t:row.criteriaRefs.length}):t.gapClosed;
 }
 
 export function createReviewsContextProvider(domain){
   if(!domain||domain.owner!==REVIEW_DOMAIN_OWNER)throw Error('REVIEWS_DOMAIN_REQUIRED');
-  // RIGHT context lens — mirrors the reference's right column (Review Scope · Reviewer Authority ·
-  // Criterion Authority · Prior Review Context · Provenance). Deliberately NOT a copy of the
-  // CENTER workbench: counts, authority and lineage live here; findings, rationale and Decision
-  // preparation live in CENTER (CEP-VIS-001-FINAL).
   return defineContextDescriptorProvider({id:'w04.reviews.context',family:'reviews',owner:REVIEW_DOMAIN_OWNER,isApplicable:context=>typeof context?.selectedId==='string'&&domain.records.some(row=>row.id===context.selectedId),describe:context=>{
     const row=domain.inspect(context.selectedId);
+    const t=pickText(activeLocale());
     const authority=row.reviewer?.authorityAvailable===true;
-    return {id:`reviews-context:${row.id}:${row.revisionId}`,providerId:'w04.reviews.context',family:'reviews',subject:`Review ${row.id}`,eyebrow:'Formal Review context',summary:row.decision?`Decision ${row.decision.decisionId} \u00b7 ${row.decision.outcome}`:'No Decision is issued on this Review; findings and rationale remain the only reviewer-authored content.',domainOwner:REVIEW_DOMAIN_OWNER,revisionToken:row.revisionId,lenses:[
-      {id:'scope',label:'Review scope',tabs:[{id:'scope',label:'Scope',fields:[
-        {id:'scope-summary',label:'Scope summary',value:`Formal competency Evidence review against ${row.criteriaRefs.length} pinned criterion/criteria and ${row.evidenceRefs.length} pinned Evidence revision(s).`},
-        {id:'evidence-count',label:'Pinned Evidence revisions',value:String(row.evidenceRefs.length),technical:true},
-        {id:'criteria-count',label:'Pinned criteria',value:String(row.criteriaRefs.length),technical:true},
-        {id:'requester',label:'Requested by',value:String(row.requester||'owner:local'),technical:true},
-        {id:'purpose',label:'Purpose',value:String(row.purpose||'Formal Evidence Review')},
-        {id:'requested-at',label:'Requested at',value:String(row.requestedAt||'EMPTY \u2014 not recorded'),technical:true}
-      ]}]},
-      {id:'authority',label:'Reviewer authority',tabs:[{id:'authority',label:'Actor vs authority',fields:[
-        {id:'reviewer',label:'Reviewer actor',value:String(row.reviewer?.identity||'EMPTY'),technical:true},
-        {id:'authority-proof',label:'Authority proof',value:authority?String(row.reviewer?.permissionProofRef||'MISSING'):'UNAVAILABLE \u2014 mutations refused',technical:true},
-        {id:'assignment',label:'Assignment permission',value:row.reviewer?.assignmentPermissionAvailable===true?'GRANTED':'NOT GRANTED'},
-        {id:'invariant',label:'Authority law',value:'Actor display label is not institutional reviewer authority; the family never approves its own authority.'}
-      ]}]},
-      {id:'prior',label:'Prior Review context',tabs:[{id:'lineage',label:'Lineage',fields:[
-        {id:'previous',label:'Previous Review ref',value:String(row.previousReviewRef||'None'),technical:true},
-        {id:'prior-decision',label:'Prior effective Decision',value:String(row.priorDecisionRef||'NONE'),technical:true},
-        {id:'effective-id',label:'Effective Decision id',value:String(row.effectiveDecisionId||'NONE'),technical:true},
-        {id:'decisions',label:'Issued Decisions retained',value:String(row.decisionHistory.length),technical:true},
-        {id:'findings',label:'Findings recorded',value:String(row.findings.length),technical:true},
-        {id:'review-revision',label:'Review revision',value:String(row.revisionId),technical:true}
-      ]}]}
+    const covered=row.criteriaRefs.filter(ref=>row.findings.some(f=>f.criterionRef===ref)).length;
+    const persistence=domain.persistence||{mode:'SESSION_LOCAL',status:'UNAVAILABLE',reason:''};
+    return {id:`reviews-context:${row.id}:${row.revisionId}`,providerId:'w04.reviews.context',family:'reviews',subject:`Review ${row.id}`,eyebrow:t.ctxEyebrow,summary:row.decision?`Decision ${row.decision.decisionId} \u00b7 ${row.decision.outcome}`:t.ctxSummaryNone,domainOwner:REVIEW_DOMAIN_OWNER,revisionToken:row.revisionId,lenses:[
+      {id:'scope',label:t.lensScope,tabs:[
+        {id:'scope',label:t.tabScope,fields:[
+          {id:'scope-summary',label:t.fScopeSummary,value:fill(t.fScopeSummaryValue,{c:row.criteriaRefs.length,e:row.evidenceRefs.length})},
+          {id:'evidence-count',label:t.fEvidenceCount,value:String(row.evidenceRefs.length),technical:true},
+          {id:'criteria-count',label:t.fCriteriaCount,value:String(row.criteriaRefs.length),technical:true},
+          {id:'requester',label:t.fRequester,value:String(row.requester||'owner:local'),technical:true},
+          {id:'purpose',label:t.fPurpose,value:String(row.purpose||'Formal Evidence Review')},
+          {id:'requested-at',label:t.fRequestedAt,value:String(row.requestedAt||t.fNotRecorded),technical:true}
+        ]},
+        {id:'criterion',label:t.tabCriterion,fields:[
+          {id:'criterion-refs',label:t.fCriterionRefs,value:row.criteriaRefs.join(', ')||'EMPTY',technical:true},
+          {id:'criterion-coverage',label:t.fCriterionCoverage,value:row.criteriaRefs.length?(row.criteriaRefs.length>covered?fill(t.coverageSome,{n:covered,t:row.criteriaRefs.length}):fill(t.coverageSome,{n:covered,t:row.criteriaRefs.length})):t.coverageNone},
+          {id:'findings-count',label:t.fFindings,value:String(row.findings.length),technical:true},
+          {id:'scope-rule',label:t.fScopeRule,value:t.scopeRuleValue}
+        ]}
+      ]},
+      {id:'authority',label:t.lensAuthority,tabs:[
+        {id:'authority',label:t.tabActor,fields:[
+          {id:'reviewer',label:t.fReviewer,value:String(row.reviewer?.identity||'EMPTY'),technical:true},
+          {id:'authority-proof',label:t.fAuthorityProof,value:authority?String(row.reviewer?.permissionProofRef||'MISSING'):t.authorityUnavailable,technical:true},
+          {id:'assignment',label:t.fAssignment,value:row.reviewer?.assignmentPermissionAvailable===true?t.granted:t.notGranted},
+          {id:'invariant',label:t.fAuthorityLaw,value:t.authorityLawValue}
+        ]},
+        {id:'issuance',label:t.tabIssuance,fields:[
+          {id:'effective-decision',label:t.fEffectiveDecision,value:String(row.decision?.outcome||'NONE'),technical:true},
+          {id:'issuance-gate',label:t.fIssuanceGate,value:reviewIssuanceGate(row,t)},
+          {id:'authority-gate',label:t.fAuthorityLaw,value:authority?t.gatePassAuthority:t.gateHoldAuthority},
+          {id:'conflict',label:t.fConflict,value:reviewConflict(row,t)},
+          {id:'rationale-gap',label:t.fRationaleGap,value:reviewRationaleGap(row,t)}
+        ]}
+      ]},
+      {id:'prior',label:t.lensPrior,tabs:[
+        {id:'lineage',label:t.tabLineage,fields:[
+          {id:'previous',label:t.fPrevious,value:String(row.previousReviewRef||t.fNoPrevious),technical:true},
+          {id:'prior-decision',label:t.fPriorDecision,value:String(row.priorDecisionRef||'NONE'),technical:true},
+          {id:'effective-id',label:t.fEffectiveId,value:String(row.effectiveDecisionId||'NONE'),technical:true},
+          {id:'decisions',label:t.fDecisions,value:String(row.decisionHistory.length),technical:true},
+          {id:'findings',label:t.fFindings,value:String(row.findings.length),technical:true},
+          {id:'review-revision',label:t.fReviewRevision,value:String(row.revisionId),technical:true}
+        ]},
+        {id:'provenance',label:t.tabProvenance,fields:[
+          {id:'evidence-basis',label:t.fEvidenceBasis,value:row.evidenceRefs.join(', ')||'EMPTY',technical:true},
+          {id:'decision-count',label:t.fDecisionCount,value:String(row.decisionHistory.length),technical:true},
+          {id:'decision-lineage',label:t.fDecisionLineage,value:row.decisionHistory.length?`${row.decisionHistory.map(d=>d.decisionId).join(', ')} — immutable`:'EMPTY',technical:true},
+          {id:'lineage-rule',label:t.fLineageRule,value:t.lineageRuleValue},
+          {id:'artifact-integrity',label:t.fArtifactIntegrity,value:row.evidenceRefs.length?t.integrityPinned:t.integrityNone},
+          {id:'persistence',label:t.fPersistence,value:`${String(persistence.mode)} \u00b7 ${String(persistence.status)}${persistence.reason?` \u00b7 ${String(persistence.reason)}`:''}`,technical:true},
+          {id:'receipts',label:t.fReceipts,value:String((domain.receipts||[]).length),technical:true}
+        ]}
+      ]}
     ]};}});
 }
 

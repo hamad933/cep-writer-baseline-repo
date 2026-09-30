@@ -13,7 +13,6 @@
  * honestly; no success, approval, publish or deployment is ever fabricated here.
  */
 import type {ReleaseRecord,GateState,DisplayState,ChannelKey,EnvironmentKey} from './records.js';
-import {RECORD_BASIS} from './records.js';
 
 export const RELEASES_SURFACE_OWNER='W05-RELEASES';
 type Locale='ar'|'en';
@@ -67,6 +66,11 @@ export const T:Record<string,{ar:string;en:string}>={
   compareReady:{ar:'جاهزة',en:'READY'},
   compareBlocked:{ar:'محجوبة',en:'BLOCKED'},
   candidateEyebrow:{ar:'مرشحو الإصدار',en:'Release candidate'},
+  metaCandidateBound:{ar:'مرتبط بالمُرشَّح',en:'CANDIDATE-BOUND'},
+  ownerEvidence:{ar:'أدلة مربوطة بالمُرشَّح',en:'candidate-bound evidence'},
+  ownerAuthority:{ar:'سجل تخويل صريح',en:'explicit authority record'},
+  ownerDeployment:{ar:'مزوّد نشر منفصل',en:'separate deployment provider'},
+  basisFull:{ar:'أساس السجل · سجل تمثيلي من W05 · قيم الالتزام والشجرة والمخرجات والأدلة مولّدة تجريبيًا وثابتة لكل مرشح، ومبنيّة على هذه المرشحات فقط · هذا السطح لا يدّعي أبدًا أرتيفاكتًا مبنيًا، ولا اعتماد مالك، ولا نشرًا أو تخويلًا لا يحمله هذا النطاق.','en':'Record basis · W05 representative record · commit, tree, artifact and evidence digests are synthetic but stable per candidate, bound to these candidates only · this surface never claims a built artifact, an Owner approval, a publication or an authorization the domain does not hold.'},
   recordBasis:{ar:'أساس السجل',en:'Record basis'},
   /* display states */
   s_draft:{ar:'مسودة',en:'DRAFT'},
@@ -485,16 +489,16 @@ function renderEmptySelection(ctx:ReleasesContext){
       <p>${esc(none?t('noMatchesHint',L):t('emptySelectionHint',L))}</p>
       ${none?`<button type="button" class="rel-toggle" data-rel-clear>${esc(t('clearFilters',L))}</button>`:''}
     </section>
-    <p class="rel-foot">${icon('info')}<span>${esc(RECORD_BASIS)}</span></p>
+    <p class="rel-foot">${icon('info')}<span>${esc(t('basisFull',L))}</span></p>
   </div>`;
 }
 
 function renderTruthBar(ctx:ReleasesContext){
   const L=ctx.locale,sel=ctx.selected!,d=sel.domain||{};
   const items=[
-    {key:'ax_state',value:t(`dv_${d.state||'UNKNOWN'}`,L),owner:'candidate-bound evidence',tone:sel.state==='held'?'bad':sel.state==='draft'?'muted':'ok'},
-    {key:'ax_authorization',value:t(`dv_${d.authorization||'NONE'}`,L),owner:'explicit authority record',tone:d.authorization==='GRANTED'?'ok':d.authorization==='REVOKED'?'bad':'warn'},
-    {key:'ax_deployment',value:t(`dv_${d.deployment||'UNKNOWN'}`,L),owner:'separate deployment provider',tone:d.deployment==='DEPLOYED'?'ok':d.deployment==='FAILED'?'bad':'muted'}
+    {key:'ax_state',value:t(`dv_${d.state||'UNKNOWN'}`,L),owner:t('ownerEvidence',L),tone:sel.state==='held'?'bad':sel.state==='draft'?'muted':'ok'},
+    {key:'ax_authorization',value:t(`dv_${d.authorization||'NONE'}`,L),owner:t('ownerAuthority',L),tone:d.authorization==='GRANTED'?'ok':d.authorization==='REVOKED'?'bad':'warn'},
+    {key:'ax_deployment',value:t(`dv_${d.deployment||'UNKNOWN'}`,L),owner:t('ownerDeployment',L),tone:d.deployment==='DEPLOYED'?'ok':d.deployment==='FAILED'?'bad':'muted'}
   ];
   return `<section class="rel-truths" aria-label="${esc(t('ax_state',L))} · ${esc(t('ax_authorization',L))} · ${esc(t('ax_deployment',L))}">
     ${items.map(item=>`<div class="rel-truth" data-tone="${item.tone}">
@@ -513,7 +517,7 @@ function renderIdentity(ctx:ReleasesContext){
     ${fact(L,'f_author',r.createdBy,{bdi:true})}
     ${fact(L,'f_edited',fmtTs(r.editedAt),{bdi:true})}
   </div>`;
-  return block(t('identity',L),r.domainVersion?t('unknownDetail',L):'CANDIDATE-BOUND',body);
+  return block(t('identity',L),r.domainVersion?t('unknownDetail',L):t('metaCandidateBound',L),body);
 }
 
 function renderSource(ctx:ReleasesContext){
@@ -536,7 +540,7 @@ function renderScope(ctx:ReleasesContext){
   const body=`<div class="rel-metrics">
       ${metric(s.components,'f_components')}${metric(s.services,'f_services')}${metric(s.artifacts,'f_artifacts')}${metric(s.checks,'f_checks')}
     </div><p class="rel-note">${icon('list')}<span>${esc(t('scopeNote',L))}</span></p>`;
-  return block(t('scope',L),`CANDIDATE ${ctx.selected!.record.version}`,body);
+  return block(t('scope',L),`${t('f_version',L)} ${ctx.selected!.record.version}`,body);
 }
 
 function renderStages(ctx:ReleasesContext){
@@ -690,7 +694,7 @@ export function renderCenter(ctx:ReleasesContext){
       </div>
     </section>
     ${renderRecords(ctx)}
-    <p class="rel-foot">${icon('info')}<span>${esc(RECORD_BASIS)}</span></p>
+    <p class="rel-foot">${icon('info')}<span>${esc(t('basisFull',L))}</span></p>
   </div>`;
 }
 

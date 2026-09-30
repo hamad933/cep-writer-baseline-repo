@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-09-30T18:33:12.714Z",
+  "capturedAt": "2026-09-30T18:51:20.724Z",
   "viewport": "1536x1024",
   "lang": "en",
   "dir": "ltr",
@@ -72,9 +72,9 @@
       }
     ],
     "leftActionButton": {
-      "border": "1px solid rgba(0, 0, 0, 0)",
+      "border": "1px solid rgb(185, 201, 214)",
       "borderWidth": "1px",
-      "borderColor": "rgba(0, 0, 0, 0)",
+      "borderColor": "rgb(185, 201, 214)",
       "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
       "color": "rgb(185, 201, 214)",
       "borderRadius": "8px",
@@ -107,8 +107,143 @@
         "cls": "btn"
       }
     ],
-    "checksCols": "352px 352px",
-    "metricsCols": "232px 232px 232px",
+    "commands": [
+      {
+        "id": "backup.package",
+        "inToolbar": true,
+        "disabled": false,
+        "label": "Create verified BackupPackage",
+        "title": ""
+      },
+      {
+        "id": "backup.plan",
+        "inToolbar": true,
+        "disabled": true,
+        "label": "Plan restore drill",
+        "title": "Select a verified package to plan its restore."
+      },
+      {
+        "id": "backup.preview",
+        "inToolbar": true,
+        "disabled": true,
+        "label": "Preview exact package/plan",
+        "title": "Create the RestorePlan first."
+      },
+      {
+        "id": "backup.stage",
+        "inToolbar": true,
+        "disabled": true,
+        "label": "Stage isolated drill intent",
+        "title": "Preview the exact package first."
+      },
+      {
+        "id": "backup.drill",
+        "inToolbar": true,
+        "disabled": true,
+        "label": "Run isolated restore drill",
+        "title": "Stage the isolated drill intent first."
+      },
+      {
+        "id": "backup.activationRequest",
+        "inToolbar": true,
+        "disabled": true,
+        "label": "Request activation authority",
+        "title": "Requires a verified isolated drill that was not live-restore"
+      },
+      {
+        "id": "backup.package",
+        "inToolbar": false,
+        "disabled": false,
+        "label": "Create verified BackupPackage",
+        "title": "Create verified BackupPackage"
+      },
+      {
+        "id": "backup.package",
+        "inToolbar": false,
+        "disabled": false,
+        "label": "Create verified BackupPackage",
+        "title": "Create verified BackupPackage"
+      },
+      {
+        "id": "backup.plan",
+        "inToolbar": false,
+        "disabled": true,
+        "label": "Plan restore drill",
+        "title": "Select a verified package to plan its restore."
+      },
+      {
+        "id": "backup.preview",
+        "inToolbar": false,
+        "disabled": true,
+        "label": "Preview exact package/plan",
+        "title": "Create the RestorePlan first."
+      },
+      {
+        "id": "backup.stage",
+        "inToolbar": false,
+        "disabled": true,
+        "label": "Stage isolated drill intent",
+        "title": "Preview the exact package first."
+      },
+      {
+        "id": "backup.drill",
+        "inToolbar": false,
+        "disabled": true,
+        "label": "Run isolated restore drill",
+        "title": "Stage the isolated drill intent first."
+      },
+      {
+        "id": "backup.activationRequest",
+        "inToolbar": false,
+        "disabled": true,
+        "label": "Request activation authority",
+        "title": "Requires a verified isolated drill that was not live-restore"
+      },
+      {
+        "id": "backup.package",
+        "inToolbar": false,
+        "disabled": false,
+        "label": "Create verified BackupPackage · W05BackupProvi",
+        "title": ""
+      },
+      {
+        "id": "backup.plan",
+        "inToolbar": false,
+        "disabled": true,
+        "label": "Plan restore drill · W05BackupProviderAwareInt",
+        "title": ""
+      },
+      {
+        "id": "backup.preview",
+        "inToolbar": false,
+        "disabled": true,
+        "label": "Preview exact package/plan · W05BackupProvider",
+        "title": ""
+      },
+      {
+        "id": "backup.stage",
+        "inToolbar": false,
+        "disabled": true,
+        "label": "Stage isolated drill intent · W05BackupProvide",
+        "title": ""
+      },
+      {
+        "id": "backup.drill",
+        "inToolbar": false,
+        "disabled": true,
+        "label": "Run isolated restore drill · W05BackupProvider",
+        "title": ""
+      },
+      {
+        "id": "backup.activationRequest",
+        "inToolbar": false,
+        "disabled": true,
+        "label": "Request activation authority · W05BackupProvid",
+        "title": ""
+      }
+    ],
+    "checksCols": "232px 232px 232px",
+    "metricsCols": "112px 112px 112px 112px 112px 112px",
     "containerW": 750,
     "bottomOpen": "closed"
   }

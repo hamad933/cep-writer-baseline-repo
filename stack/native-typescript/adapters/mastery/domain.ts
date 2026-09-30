@@ -5,10 +5,25 @@ export const MASTERY_DOMAIN_OWNER='W04MasteryDomain';
 export const MASTERY_JUDGMENTS=Object.freeze(['NOT_EVALUATED','INSUFFICIENT_EVIDENCE','INCONCLUSIVE','NOT_MASTERED','MASTERED']);
 export const MASTERY_FRESHNESS=Object.freeze(['CURRENT','REVALIDATION_REQUIRED']);
 export const MASTERY_AUTHORITY_REF='ORACLE-011/A03';
+/** A03 causal law — one constant, used by `explain()` and projected as CENTER/RIGHT chrome. */
+export const MASTERY_CAUSAL_LAW='EFFECTIVE_DECISIONS+EVIDENCE+VERSIONED_POLICY_ONLY';
 const clone=value=>structuredClone(value), freeze=value=>Object.freeze(clone(value));
+/* ------------------------------------------------------------------ fixtures
+ * CURRICULUM-SHAPED, REALISTIC, AND ALWAYS LABELLED. Every row carries
+ * `truthClass:'SYNTHETIC_DEMO_SEED'` so no fixture result can be read as a real consumer
+ * achievement (M2), and `path` records where the target sits in the cybersecurity curriculum
+ * so LEFT can present the targets as a curriculum rather than bare ids. Nothing here is a
+ * claim about a real learner: the product boots with an EMPTY domain (normal-defaults-empty)
+ * and these rows are bound explicitly by tests, the reviewer harness or a provider.
+ * Contract pinned by tests: records[0].freshness === 'REVALIDATION_REQUIRED',
+ * `mastery-crypto` stays MASTERED @ mr-001, every row validates against the vocabularies.  */
 const demoInitial=()=>[
- {id:'mastery-crypto',revisionId:'mr-001',subject:'user:self',capability:'crypto-basics',judgment:'MASTERED',freshness:'REVALIDATION_REQUIRED',policyRef:'policy:mastery-v3',truthClass:'SYNTHETIC_DEMO_SEED',basis:{evidenceRefs:['ev-beta@evr-002'],decisionRefs:['decision-17'],digest:'basis:aaa'}},
- {id:'mastery-network',revisionId:'mr-002',subject:'user:self',capability:'network-analysis',judgment:'NOT_MASTERED',freshness:'CURRENT',policyRef:'policy:mastery-v3',truthClass:'SYNTHETIC_DEMO_SEED',basis:{evidenceRefs:['ev-alpha@evr-001'],decisionRefs:['decision-18'],digest:'basis:bbb'}}
+ {id:'mastery-crypto',revisionId:'mr-001',subject:'user:self',capability:'Applied Cryptography',path:'Cryptography · Core primitives',judgment:'MASTERED',freshness:'REVALIDATION_REQUIRED',policyRef:'policy:mastery-v3',truthClass:'SYNTHETIC_DEMO_SEED',evaluatedAt:'2025-05-18',basis:{evidenceRefs:['ev-beta@evr-002'],decisionRefs:['decision-17'],digest:'basis:aaa'}},
+ {id:'mastery-appsec',revisionId:'mr-003',subject:'user:self',capability:'Application Security Investigation',path:'Application Security · Web Security',judgment:'MASTERED',freshness:'REVALIDATION_REQUIRED',policyRef:'policy:mastery-v3',truthClass:'SYNTHETIC_DEMO_SEED',evaluatedAt:'2025-05-18',basis:{evidenceRefs:['ev-gamma@evr-003'],decisionRefs:['decision-17','decision-19'],digest:'basis:ccc'}},
+ {id:'mastery-secdev',revisionId:'mr-004',subject:'user:self',capability:'Secure Development Lifecycle',path:'Application Security · Secure Development',judgment:'INCONCLUSIVE',freshness:'REVALIDATION_REQUIRED',policyRef:'policy:mastery-v3',truthClass:'SYNTHETIC_DEMO_SEED',evaluatedAt:'2025-04-02',basis:{evidenceRefs:['ev-delta@evr-004'],decisionRefs:['decision-20'],digest:'basis:ddd'}},
+ {id:'mastery-telemetry',revisionId:'mr-005',subject:'user:self',capability:'Security Telemetry Interpretation',path:'Detection & Response · Telemetry',judgment:'INSUFFICIENT_EVIDENCE',freshness:'CURRENT',policyRef:'policy:mastery-v3',truthClass:'SYNTHETIC_DEMO_SEED',evaluatedAt:'2025-03-11',basis:{evidenceRefs:[],decisionRefs:['decision-21'],digest:'basis:eee'}},
+ {id:'mastery-network',revisionId:'mr-002',subject:'user:self',capability:'Network Traffic Analysis',path:'Network Defense · Analysis',judgment:'NOT_MASTERED',freshness:'CURRENT',policyRef:'policy:mastery-v3',truthClass:'SYNTHETIC_DEMO_SEED',evaluatedAt:'2025-02-26',basis:{evidenceRefs:['ev-alpha@evr-001'],decisionRefs:['decision-18'],digest:'basis:bbb'}},
+ {id:'mastery-forensics',revisionId:'mr-006',subject:'user:self',capability:'Defensible Investigation Rationale',path:'Detection & Response · Investigation',judgment:'INSUFFICIENT_EVIDENCE',freshness:'CURRENT',policyRef:'policy:mastery-v3',truthClass:'SYNTHETIC_DEMO_SEED',evaluatedAt:null,basis:{evidenceRefs:[],decisionRefs:[],digest:'basis:fff'}}
 ];
 const exactText=(value,code)=>{if(typeof value!=='string'||!value.trim())throw Error(code);return value.trim();};
 const validRecord=(record)=>{
@@ -44,7 +59,7 @@ export class W04MasteryDomain{
   this.basisResolver=basisResolver;
   this.evaluator=evaluator;
   this.evaluatorDescriptor=evaluatorDescriptor(evaluator);
-  this.history=this.records.map(r=>({evaluationId:`eval:${r.id}:0`,recordId:r.id,revisionId:r.revisionId,judgment:r.judgment,freshness:r.freshness,policyRef:r.policyRef,evidenceRefs:[...r.basis.evidenceRefs],decisionRefs:[...r.basis.decisionRefs],basisDigest:r.basis.digest,truthClass:r.truthClass||'PROVIDER_BOUND'}));
+  this.history=this.records.map(r=>({evaluationId:`eval:${r.id}:0`,recordId:r.id,revisionId:r.revisionId,judgment:r.judgment,freshness:r.freshness,policyRef:r.policyRef,evaluatedAt:r.evaluatedAt??null,evidenceRefs:[...r.basis.evidenceRefs],decisionRefs:[...r.basis.decisionRefs],basisDigest:r.basis.digest,truthClass:r.truthClass||'PROVIDER_BOUND'}));
   this.receipts=[];
   this.seq=0;
   this.persistence={mode:'SESSION_LOCAL_PROJECTION',durable:false,status:'UNAVAILABLE',reason:'No surface-local persistence or canonical Mastery publisher is authorized.'};
@@ -61,7 +76,7 @@ export class W04MasteryDomain{
   const policy=policyAvailable?refResolution(this.basisResolver,'readPolicy',r.policyRef):{ref:r.policyRef,state:'MISSING',reason:'Policy unavailable'};
   if(basisAvailable===false)for(const item of evidence)if(item.state==='UNVERIFIED_PROVIDER_UNBOUND')item.state='MISSING';
   const missingRefs=[...evidence,...decisions,[policy]].flat().filter(item=>item.state!=='RESOLVED').map(item=>item.ref);
-  return freeze({ok:true,owner:this.owner,authorityRef:MASTERY_AUTHORITY_REF,id,subject:r.subject,masteryTarget:r.capability,judgment:r.judgment,freshness:r.freshness,policyRef:r.policyRef,basisDigest:r.basis.digest,evidence,decisions,policy,missingRefs,conflict:!!conflictingDecisions,causalLaw:'EFFECTIVE_DECISIONS+EVIDENCE+VERSIONED_POLICY_ONLY',completionOrActivityUsed:false,institutionalAuthorityInferred:false});
+  return freeze({ok:true,owner:this.owner,authorityRef:MASTERY_AUTHORITY_REF,id,subject:r.subject,masteryTarget:r.capability,judgment:r.judgment,freshness:r.freshness,policyRef:r.policyRef,basisDigest:r.basis.digest,evidence,decisions,policy,missingRefs,conflict:!!conflictingDecisions,causalLaw:MASTERY_CAUSAL_LAW,completionOrActivityUsed:false,institutionalAuthorityInferred:false});
  }
  reevaluate(id,options={}){
   const r=this.get(id),before=freeze(r),historyCount=this.history.length;
