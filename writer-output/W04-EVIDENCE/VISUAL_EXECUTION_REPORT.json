@@ -3,7 +3,7 @@
   "OWNER": "W04-EVIDENCE",
   "REFERENCE": "cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/01_EVIDENCE_INTAKE/Cybersecurity Evidence Dashboard in Arabic(1).png",
   "REFERENCE_CLASSIFICATION": "CURRENT_FINAL_REFERENCE · sha256 prefix 789deee01cd946d9 · 1505x1045 · register: cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md · manifest: cep-writer/REFERENCE_MANIFEST.json · read as CONSTRUCTION AUTHORITY for composition, hierarchy, spatial relationships, information architecture, density/rhythm, interaction language, visual emphasis, pane organization and responsive intent (never 'presentation only'; REFERENCE != BLIND PIXEL COPY). The reference's Arabic chrome + English record copy establishes layout intent ONLY — it does not set product language: Arabic and English are both first-class and the active language is Settings-owned.",
-  "CURRENT_CANDIDATE": "writer/mi-serial@68341ec1 + W04 working tree (my 3 writable files, git diff sha256 f1914c7b298780af) · dist built by tools/writer-serial.sh `npm run build:runtime` (pass, written 290) after the final source change",
+  "CURRENT_CANDIDATE": "writer/mi-serial@8818227 (checkpoint commit containing exactly the 3 writable-root source files + this unit's evidence) — captures were taken from the dist built from this same working tree; per-capture commit-at-capture is recorded in LINEAGE.json (branch tip moved under parallel writers: 68341ec1 at cand8 capture time); workingTreeDiffSha256 f1914c7b298780af",
   "FILES_CHANGED": [
     "stack/native-typescript/surfaces/evidence/index.ts (+/- collection adapter columns; RIGHT context descriptor gates/state/criteria; duplicate-scan excludeId fix)",
     "stack/native-typescript/surfaces/evidence/presentation.ts (CENTER record descriptor: header, icons, block order, gates moved to RIGHT)",
@@ -283,7 +283,9 @@
         "stack/native-typescript/adapters/evidence/",
         "stack/native-typescript/surfaces/composition/w04-rescue.ts"
       ],
-      "sharedFilesEdited": "none (surface-scoped corrections + Controller-reported shared findings only)"
+      "sharedFilesEdited": "none (surface-scoped corrections + Controller-reported shared findings only)",
+      "checkpointCommit": "88182270677be4e9ce7d06e7aff514efcec3ec4b",
+      "commitAtCaptureTime": "68341ec1"
     },
     "build": {
       "command": "tools/writer-serial.sh npm run build:runtime",
