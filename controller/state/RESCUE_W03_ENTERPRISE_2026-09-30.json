@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "rescueId": "RESCUE-W03-ENTERPRISE-2026-09-30-01",
+  "surface": "enterprise",
+  "writer": "W03-ENTERPRISE",
+  "branch": "writer/mi-serial",
+  "writerFinalCaptureCandidate": "d2b3e47615d2ddca738925a1f1b0df2d4449afab",
+  "rescueCommit": "b54d4714620720f1a4b5c7702af79edcecdaf22c",
+  "remoteVerifiedHeadAtRescue": "b54d4714620720f1a4b5c7702af79edcecdaf22c",
+  "sourceSha256": "a32a37c4429ab1f05405585482eba7cfb9c821dff98b168a1138cb7f84b203c8",
+  "finalEvidenceLabel": "after5",
+  "finalAfter5PngCount": 12,
+  "status": {
+    "writerExecution": "COMPLETE",
+    "durableRescue": "COMPLETE",
+    "controllerReview": "PENDING",
+    "ownerAcceptance": "NOT_OWNER_ACCEPTED"
+  },
+  "included": [
+    "stack/native-typescript/surfaces/enterprise/presentation.ts",
+    "dist/surfaces/enterprise/presentation.js",
+    "writer-output/W03-ENTERPRISE/VISUAL_EXECUTION_REPORT.json",
+    "writer-output/W03-ENTERPRISE/HANDOFF.md",
+    "writer-output/W03-ENTERPRISE/capture.mjs",
+    "writer-output/W03-ENTERPRISE/evidence/analysis-ink.json",
+    "writer-output/W03-ENTERPRISE/evidence/ocr-anchors-after5.txt",
+    "writer-output/W03-ENTERPRISE/evidence/receipt-after5.json",
+    "writer-output/W03-ENTERPRISE/evidence/vision-verification.json",
+    "writer-output/W03-ENTERPRISE/evidence/crops/sbs-ref-vs-cand-4e71.png",
+    "writer-output/W03-ENTERPRISE/evidence/after5/*.png"
+  ],
+  "excludedSupersededEnterpriseEvidence": [
+    "writer-output/W03-ENTERPRISE/evidence/after3/",
+    "writer-output/W03-ENTERPRISE/evidence/after4/",
+    "writer-output/W03-ENTERPRISE/evidence/receipt-after3.json",
+    "writer-output/W03-ENTERPRISE/evidence/receipt-after4.json"
+  ],
+  "excludedOtherWork": [
+    "all other Writer surface changes",
+    "assurance/**",
+    "stack/MEASURED_COMPARISON.json",
+    "unrelated generated dist output",
+    "shared integration changes outside the Enterprise writable surface"
+  ],
+  "stateReconciliation": "DEFERRED_UNTIL_REMAINING_WRITER_RESCUE",
+  "nextControllerAction": "Review W03-ENTERPRISE independently; do not self-accept; preserve NOT_OWNER_ACCEPTED until review."
+}
