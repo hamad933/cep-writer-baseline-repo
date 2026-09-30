@@ -288,7 +288,36 @@ Craft standard: skill `professional-ui-ux-composition`.
 
 ---
 
-## 17. SKILLS TO LOAD
+## 17. BUDGET DISCIPLINE & COMPLETION GUARANTEE
+
+Surface files in this codebase are large (`surfaces/today/presentation.ts` ≈ 39 KB, `surfaces/m0-controller-composition.ts` ≈ 75 KB). A Writer that attempts to **wholesale rewrite** a large file will exhaust its output budget and die mid-build with **no report**. This has already happened. Do not repeat it.
+
+### 17.1 Prefer surgical edits
+
+- Use targeted edits (find-and-replace of a specific region) over full-file rewrites.
+- Never re-emit a large file in full when a bounded change suffices.
+- Compose in **vertical slices**: one region/pane at a time, verified, then the next.
+- If a file genuinely must be restructured, split the work into multiple bounded edits rather than one giant write.
+
+### 17.2 Completion guarantee — the report is NOT optional
+
+Deliverable priority when scope or budget is tight, in this order:
+
+1. **The report files** (`VISUAL_EXECUTION_REPORT.json` + `HANDOFF.md`) — always.
+2. The surface source change.
+3. Render + capture + comparison evidence.
+
+**Write progress incrementally.** Create `writer-output/<UNIT>/VISUAL_EXECUTION_REPORT.json` early and update it as you complete each stage, rather than leaving it to the end. A session that dies with partial work must still leave a truthful report describing what was and was not completed.
+
+Never end a session mid-build without having written the report. A partial-but-reported unit is recoverable; an unreported one is not.
+
+### 17.3 If you cannot finish
+
+Report `BLOCKERS` honestly and set `ACCEPTANCE_STATUS: NOT_OWNER_ACCEPTED`. Preserve valid work already done — do not revert it. The Controller continues the unit rather than restarting it.
+
+---
+
+## 18. SKILLS TO LOAD
 
 Load these before working (they are project skills, discoverable by id):
 
