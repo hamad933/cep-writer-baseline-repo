@@ -158,6 +158,11 @@ export class ManualAiDomainAdapter{
       provenanceMatch,
       provenance:{sourceId:row.provenance.sourceId,sourceRevisionId:row.provenance.sourceRevisionId,sourceDigest:row.provenance.sourceDigest,obtainedBy:row.provenance.obtainedBy,obtainedAt:row.provenance.obtainedAt,exportedArtifactId:row.provenance.exportedArtifactId||'NOT_EXPORTED',exportedPackageDigest:row.provenance.exportedPackageDigest||'NOT_EXPORTED'},
       sequence,
+      /* Per-disposition readiness: ACCEPT additionally needs a bound working-draft sink, which this
+         build does not provide — surfaced truthfully instead of faking a draft-creation receipt. */
+      dispositionReadiness:Object.fromEntries(['ACCEPT','EDIT','REJECT','DEFER','REQUEST_EVIDENCE'].map(d=>[d,
+        d!=='ACCEPT'?(terminalState||row.state==='PROVENANCE_INVALID'?'NOT_OPEN_YET':'AVAILABLE')
+          :(terminalState||row.state==='PROVENANCE_INVALID'?'NOT_OPEN_YET':(this.draftSink?'AVAILABLE':'DRAFT_SINK_UNAVAILABLE'))])),
       ceilings:{providerMode:this.providerMode,hiddenProviderCalls:0,automaticCanonicalPublication:false,importRequiresDeclaredExport:true,sourceRevisionDigestEqualityRequired:true,acceptCreatesDraftOnly:true,invalidProvenanceFailsClosed:true},
       governance:[
         {rule:'الذكاء الاصطناعي الخارجي أداة مساعدة للمراجعة فقط',en:'External AI is a review aid only',enforced:'MANUAL_ONLY_PROVIDER_NEUTRAL'},

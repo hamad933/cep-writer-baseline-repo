@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-30T20:45:00Z",
+  "generatedAt": "2026-10-01T07:50:00Z",
   "project": {
     "name": "CEP — Cybersecurity Education Platform",
     "repository": "hamad933/cep-writer-baseline-repo",
@@ -9,17 +9,17 @@
   "branch": {
     "local": "writer/mi-serial",
     "durableCheckpointBranch": "writer/mi-serial",
-    "localHead": "c36279910b82a0bd2c715f4dd5c00bcf7eb574e2",
+    "localHead": "SEE_COMMIT_LOG",
     "remoteBranchExists": true,
-    "remoteHead": "dac0396a6aeefbec3c1c4d4a8f8d251e3516ec83",
+    "remoteHead": "SEE_COMMIT_LOG",
     "tracking": "writer/mi-serial -> origin/writer/mi-serial",
-    "note": "Recovery baseline was verified at CP-2026-09-30-003. New Controller must fetch refs/heads/writer/mi-serial and verify its actual HEAD before execution.",
+    "note": "STALE fields reconciled by CP-2026-10-01-005. Actual remote HEAD at mission start was eb3bd2c (state file had recorded dac0396/c362799).",
     "pushStatus": "PUSHED_AND_VERIFIED",
-    "remoteRef": "refs/heads/writer/mi-serial @ dac0396a6aeefbec3c1c4d4a8f8d251e3516ec83"
+    "remoteRef": "refs/heads/writer/mi-serial @ CP-2026-10-01-005 commit"
   },
   "controller": {
-    "phase": "PHASE_7_CONTINUOUS_VISUAL_OWNERSHIP_LOOP",
-    "executionWave": "WAVE-1 reviewed; 12 Writer results durably rescued; independent Controller review queue open; WAVE-4 shared work pending",
+    "phase": "PHASE_7_CONTINUOUS_VISUAL_OWNERSHIP_LOOP__MATRIX_GATE",
+    "executionWave": "WAVE-1 reviewed; H-RUN-1 CLOSED; reviews boot defect REPAIRED; Writer Priority Matrix v1 awaiting Owner approval",
     "governanceVersion": "GOV-2026-09-30-v1",
     "controllerModel": "xiaomi-token-plan-sgp/mimo-v2.6-pro",
     "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
@@ -93,7 +93,9 @@
       "W05-BACKUP",
       "W05-RELEASES",
       "W03-ENTERPRISE"
-    ]
+    ],
+    "hrun1": "HRUN1_PASS__LIVE_ROUTE_MOUNT_PROVEN",
+    "routeBootSmoke": "23/23 BOOT_OK"
   },
   "writers": {
     "W01-TODAY": {
@@ -294,14 +296,15 @@
     "b2 RQ m0 mount hunk filed-not-applied (W02-RESEARCH-QUALITY SERIALIZED_HOTSPOT_REQUEST.md)"
   ],
   "validation": {
-    "lastModelTests": "210/0 PASS",
-    "lastBuildAuthority": "pass=true, CANONICAL_SOURCE_TO_GENERATED_ONLY, 290 written, parity true",
+    "lastModelTests": "210/0 PASS @ CP-005",
+    "lastBuildAuthority": "pass=true, CANONICAL_SOURCE_TO_GENERATED_ONLY, 323 written",
     "lastKnownCheckFailures": [
       "browser.lineage_receipt_truthful",
       "browser.current_candidate_claim_truthful",
       "browser.targeted_visual_evidence"
     ],
-    "lastKnownCheckFailureRootCause": "EVIDENCE/ORACLE — stale assurance/BROWSER_CONFORMANCE_RECEIPT.json lineage (gap G-24/G-36), pre-existing"
+    "lastKnownCheckFailureRootCause": "CHANGED @ CP-005: receipt lineage regenerated & honest; the 3 checks stay red because browser-conformance executes 1/6 PASS (5 flow-vs-composition interaction failures listed in CP-2026-10-01-005 §D) and the checks require 6/6 or an admin-blocked environment",
+    "routeBootSmoke": "23/23"
   },
   "ownerDecisionsEstablished": [
     "Language policy FINAL: Arabic + English both first-class; active language user-configurable in Settings; NO permanent Arabic-first/English-first product authority; RTL+LTR+BIDI required",
@@ -335,26 +338,29 @@
       "severity": "V3",
       "statement": "Flash Writers exhaust output budget mid-build on 20-75KB files; §17 mitigation (report-first, targeted edits) working but not sufficient alone",
       "owner": "Controller"
+    },
+    {
+      "id": "BR-CONFORM-5",
+      "severity": "V2",
+      "statement": "browser-conformance flows fail 5/6 against current composition (object-list click, relation composer double-click, runtime evaluate shape, spatial canvas bounds)",
+      "owner": "Controller"
     }
   ],
   "nextActions": [
-    "Treat CP-2026-09-30-003 as prior review context, never as acceptance authority.",
-    "Fetch the actual remote branch HEAD and verify the current tree before any execution claim.",
-    "Rebuild current tree and regenerate assurance/browser receipts before trusting historical captures.",
-    "Apply W03-RUNS H-RUN-1 in the serialized coordinator slot and verify the live route.",
-    "Run fresh bilingual matched-viewport captures where report/evidence state is stale or incomplete.",
-    "Reconstruct W05-AUDIT review record from source + evidence or generate a truthful execution report.",
-    "Re-review W03-ENTERPRISE with trustworthy image verification and refreshed shared receipts.",
-    "Only then make new Controller acceptance decisions from current evidence."
+    "Owner: approve Writer Priority Matrix rows explicitly (APPROVED: WM-xxx / HOLD: WM-xxx) — controller/state/MIMO_CLAW_WRITER_PRIORITY_MATRIX_2026-10-01-005.md",
+    "Controller: apply b2 RQ m0 mount hunk (serialized slot)",
+    "Controller: reconcile the 5 failing browser-conformance flows (tools + product interaction)",
+    "Controller review/recapture pass for NO_WRITER_REQUIRED_NOW set (today, rq, scenarios, evidence, configuration, manual_ai, releases, backup, enterprise, labs, learn, runs)",
+    "On approval: execute ONLY approved rows (§97), controller audit per §98"
   ],
   "recoveryInstructions": "controller/state/RESUME.md",
   "lastCheckpoint": {
-    "checkpoint_id": "CP-2026-09-30-003",
-    "commit_sha": "dac0396a6aeefbec3c1c4d4a8f8d251e3516ec83",
-    "parent_sha": "f54bb060bc8b9e5b1a05fe17895254aa6b8b217e",
-    "kind": "INDEPENDENT_CONTROLLER_REVIEW",
-    "remote_verified": true,
-    "verified_at": "2026-09-30T20:40:00Z"
+    "checkpoint_id": "CP-2026-10-01-005",
+    "commit_sha": "PENDING_PUSH",
+    "parent_sha": "eb3bd2c631a3a38cefebcc942b0f70fae06b1e00",
+    "kind": "CONTROLLER_PHASE_COMPLETE__WRITER_APPROVAL_REQUIRED",
+    "matrix": "controller/state/MIMO_CLAW_WRITER_PRIORITY_MATRIX_2026-10-01-005.json",
+    "remote_verified": false
   },
   "historicalWriterSessions": {
     "W05-AUDIT": "ses_f10311284ffejwOTnI1M5Jfzk6",

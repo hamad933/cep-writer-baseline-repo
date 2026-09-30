@@ -102,3 +102,15 @@ Root cause of those 3: **EVIDENCE/ORACLE** — stale `assurance/BROWSER_CONFORMA
 2. `visual-fidelity-review`
 3. `shared-component-governance`
 4. `professional-ui-ux-composition`
+
+---
+
+## CP-2026-10-01-005 addendum (supersedes stale values above)
+
+- **State:** `CONTROLLER_PHASE_COMPLETE__WRITER_APPROVAL_REQUIRED` — Matrix: `controller/state/MIMO_CLAW_WRITER_PRIORITY_MATRIX_2026-10-01-005.md`. No Writer dispatched.
+- **Stale reconciled:** recorded `c362799/dac0396` heads were stale; actual remote HEAD at mission start = `eb3bd2c`. §69 applied.
+- **App-boot defect REPAIRED:** `reviews/i18n.ts` missing exports (`REVIEW_STATE_TONE`, `reviewStateLabel`, `reviewDecisionLabel`) broke the whole bundle since `f98eb46`; all 23 routes now boot (23/23 smoke).
+- **H-RUN-1 CLOSED:** `HRUN1_PASS__LIVE_ROUTE_MOUNT_PROVEN` — m0 now mounts `composeRunsSurface` + `renderRunsSurface` on the live `?surface=runs` route (evidence `writer-output/W03-RUNS/evidence/hrun1-*`).
+- **Validation now:** build pass (323 written) · tests **210/0** · check: only the 3 `browser.*` red — root cause CHANGED: receipt lineage regenerated & honest; 5/6 browser flows fail on flow-vs-composition interaction drift (see checkpoint §D).
+- **W05-AUDIT report reconstructed** (CP-003 gap closed) with fresh evidence + L1/L2 comparison → HOLD (AUD-V1..V3, WM-005).
+- **Next:** Owner approves matrix rows explicitly (§60) → execute ONLY approved rows (§97).

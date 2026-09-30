@@ -35,7 +35,7 @@ const $=(selector       )             =>typeof document==='undefined'?null:docum
 export function createManualAiRuntime({adapter,commands}                           ){
   const runtimeId=`w05-manual-ai-${Math.random().toString(36).slice(2,9)}`;
   const view={facet:'ALL',query:'',selectedId:null               ,response:''};
-  let renderedLocale                    =null,renderedDir='',toolbarSignature='',governorPending=false,observerInstalled=false,pending=false;
+  let renderedLocale                    =null,renderedDir='',renderedSignature='',toolbarSignature='',governorPending=false,observerInstalled=false,pending=false;
   let suspended=false,burst=0,burstReset    =null;
 
   const ctx=()                 =>{
@@ -170,6 +170,7 @@ export function createManualAiRuntime({adapter,commands}                        
     }
     ensureToolbar(ws,locale);ensureBanner(locale);ensureBottomCopy(locale);
     renderedLocale=locale;renderedDir=(globalThis       ).document?.documentElement?.dir||'';
+    renderedSignature=stateSignature();
     return true;
   };
   const renderBottomRegion=(context                 ,locale               )=>{
@@ -186,12 +187,20 @@ export function createManualAiRuntime({adapter,commands}                        
   const requestRender=()=>{if(pending)return;pending=true;queueMicrotask(()=>{pending=false;try{renderAll()}catch(error){console.warn('[W05-MANUAL-AI] render failed',error)}})};
 
   /* ── staleness + burst guard ───────────────────────────────────────────────────────── */
+  /** Domain-state signature: any command that changes a record must re-render the workbench. */
+  const stateSignature=()=>{
+    try{
+      const rows=adapter&&typeof adapter.rows==='function'?adapter.rows():[];
+      return `${rows.map((r    )=>`${r.proposalId}:${r.state}:${r.draftState}:${r.draftId||''}:${r.provenance?.exportedArtifactId||''}`).join('|')}#${view.selectedId||''}#${view.facet}#${view.query}#${adapter?.lastAction?.at||''}`;
+    }catch{return 'UNAVAILABLE'}
+  };
   const isStale=()=>{
     const stage=$('#foundationStage');
     if(!stage||stage.dataset.m0Composition!=='manual_ai')return false;
     if(!owned('#foundationStage'))return true;
     if(!owned('#domainLeftRegion'))return true;
     if(!owned('#domainContext'))return true;
+    if(renderedSignature!==stateSignature())return true;
     const locale=localeNow();
     if(renderedLocale!==locale)return true;
     const dir=(globalThis       ).document?.documentElement?.dir||'';
@@ -233,6 +242,16 @@ export function createManualAiRuntime({adapter,commands}                        
   const installGovernor=()=>{
     if(typeof document==='undefined'||observerInstalled)return;
     observerInstalled=true;activeRuntime=self;
+    /* A toolbar/command action may change domain state without mutating any host this governor
+       watches, so schedule an explicit re-check after every command invocation. */
+    try{
+      document.addEventListener('click',event=>{
+        const target=(event         ).target                ;
+        if(!target||typeof target.closest!=='function'||!target.closest('[data-foundation-command]'))return;
+        setTimeout(()=>{try{run()}catch{}},90);
+        setTimeout(()=>{try{run()}catch{}},360);
+      },true);
+    }catch{}
     try{
       const observer=new MutationObserver(schedule);
       observer.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['lang','dir','data-m0-composition']});

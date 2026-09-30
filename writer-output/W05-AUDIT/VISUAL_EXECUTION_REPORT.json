@@ -1,0 +1,46 @@
+{
+  "SURFACE": "audit",
+  "OWNER": "W05-AUDIT",
+  "REPORT_KIND": "CONTROLLER_RECONSTRUCTED_TRUTHFUL_EXECUTION_REPORT",
+  "RECONSTRUCTED_BY": "MIMO CLAW CONTROLLER (CP-2026-10-01-005)",
+  "RECONSTRUCTED_AT": "2026-10-01T07:40:00Z",
+  "RECONSTRUCTION_BASIS": "Fresh execution at actual branch HEAD — not synthesized from claims. Functional/structural truth from the 2026-10-01 capture run (capture-lineage.json, candidate commit eb3bd2c631a3a38cefebcc942b0f70fae06b1e00, dirtyAuditFiles=false). Visual truth from an independent L1/L2 comparison of the OWNER reference against the fresh EN capture.",
+  "REFERENCE": [
+    {
+      "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/06_AUDIT/CEP_SYSTEM_AUDIT_TRACEABILITY_REFERENCE.png",
+      "sha256": "7cb34c8357dfad0914e4eeaf732c97efbe376e957fe508137c4f730edaeb1e88",
+      "classification": "OWNER_CONFIRMED_FINAL_REFERENCE"
+    }
+  ],
+  "CURRENT_CANDIDATE": {
+    "commit": "eb3bd2c631a3a38cefebcc942b0f70fae06b1e00",
+    "files": ["stack/native-typescript/surfaces/audit/index.ts", "stack/native-typescript/adapters/audit.ts"],
+    "dirtyAuditFiles": false
+  },
+  "FILES_CHANGED": [],
+  "FUNCTIONAL_STATUS": "PASS_AT_CURRENT_HEAD — live route ?surface=audit boots with zero page errors (23/23 route boot smoke, 2026-10-01). Provider-seeded fixture state verified server-side: 11 seeded events, providerVerify ok=true valid=true firstInvalidSequence=null, watermarkHash e87b311ffd9b25aa013babb8f4ed5a63fe1144bacbe9f916b53aa5d07a5d7b7a. Register renders 36 rows in AR and EN; chain integrity reads VALID_CHAIN (provider/session/chain); annotation failure path captured (ar-rtl-annotate-failed).",
+  "STRUCTURAL_STATUS": "PASS_AT_CURRENT_HEAD — regions resolve and render (register + context + tabs); no horizontal overflow at 1536x1024, 1440x1000, 1024x900, 820x1180 (all captured, both locales where captured).",
+  "VISUAL_STATUS": "FAIL_L1_L2_VS_REFERENCE — MATERIALLY_DIVERGENT (independent comparison 2026-10-01, reference vs en-ltr-full-1536-20260930T233105Z.png).",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": ["L1_WHOLE_SCREEN", "L2_HIERARCHY_DENSITY_IDENTITY (EN/LTR only)"],
+  "VISUAL_COMPARISON_LEVELS_PENDING": ["L3_REGION_PANE", "L4_MICRO_DETAIL", "AR/RTL formal comparison", "matched responsive comparisons"],
+  "DEFECTS_FOUND": [
+    {"id": "AUD-V1", "severity": "V2", "rootCause": "SURFACE_COMPOSITION", "statement": "Center work area is a single register (filters + table). The reference's center is a split: event table above, trace timeline (node chain) + JSON detail below. The traceability mechanic is absent from the visual hierarchy."},
+    {"id": "AUD-V2", "severity": "V3", "rootCause": "SURFACE_COMPOSITION", "statement": "Bottom action/status bar missing (reference: locked/mutable indicator left, create-note action right)."},
+    {"id": "AUD-V3", "severity": "V2", "rootCause": "SHARED_COMPONENT", "statement": "Header hierarchy diverges: candidate uses the double-tier global+area header where the reference uses a compact single-tier top bar; vertical budget is consumed by chrome instead of data."}
+  ],
+  "DEFECT_SEVERITY": "V2-V3",
+  "ROOT_CAUSE": "SURFACE_COMPOSITION + SHARED_COMPONENT (chrome) — not fixture, not data.",
+  "FIXES_APPLIED": ["None in this report. Defect closure is a bounded Writer visual ownership loop (matrix row WM-005, CP-2026-10-01-005)."],
+  "RECAPTURE_STATUS": "COMPLETE — 16 fresh hash-bound captures at 2026-10-01 (AR/RTL + EN/LTR + responsive 1440/1024/820 + collapsed/scrolled states); see evidence/capture-lineage.json (errors=[]).",
+  "RECOMPARISON_STATUS": "L1_L2_COMPLETE__L3_L4_PENDING",
+  "REGRESSION_STATUS": "NOT_APPLICABLE_NO_SOURCE_CHANGE_THIS_REPORT",
+  "EVIDENCE": [
+    "writer-output/W05-AUDIT/evidence/capture-lineage.json (2026-10-01, candidate eb3bd2c, 16 captures, errors=[])",
+    "writer-output/W05-AUDIT/evidence/en-ltr-full-1536-20260930T233105Z.png sha256:7e038911779c…",
+    "writer-output/W05-AUDIT/evidence/ar-rtl-full-1536-20260930T233055Z.png sha256:4b420cb9b88c…",
+    "controller/state/MIMO_CLAW_CHECKPOINT_CP-2026-10-01-005.md (route boot smoke 23/23)"
+  ],
+  "LINEAGE": "Every capture bound to candidate commit + viewport + lang/dir + sha256 in capture-lineage.json. Functional counts observed in the same run, not inherited.",
+  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED — controller verdict: HOLD (functional/structural pass at current head; visual materially divergent vs reference).",
+  "BLOCKERS": ["Visual convergence to the reference's traceability composition requires sustained visual authoring (Writer row WM-005)."]
+}

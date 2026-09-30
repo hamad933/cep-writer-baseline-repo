@@ -56,14 +56,14 @@ export const FACETS                                                             
 ]);
 
 /** The linear exchange the reference draws — derived from domain truth, never invented. */
-export const STEPS                                =Object.freeze([
-  {ar:'مسودة الطلب',en:'DRAFT'},
-  {ar:'تجهيز الحمولة',en:'CLEARED'},
-  {ar:'تصدير خارج CEP',en:'EXPORTED'},
-  {ar:'انتظار الاستجابة',en:'AWAITING_RESPONSE'},
-  {ar:'استيراد الاستجابة',en:'RESPONSE_IMPORTED'},
-  {ar:'تسوية المصدر',en:'PROVENANCE_EQUALITY'},
-  {ar:'قرار بشري',en:'HUMAN_DISPOSITION'}
+export const STEPS                                             =Object.freeze([
+  {ar:'مسودة الطلب',en:'DRAFT',short:'DRAFT'},
+  {ar:'تجهيز الحمولة',en:'CLEARED',short:'CLEARED'},
+  {ar:'تصدير خارج CEP',en:'EXPORTED',short:'EXPORTED'},
+  {ar:'انتظار الاستجابة',en:'AWAITING_RESPONSE',short:'AWAITING_RESPONSE'},
+  {ar:'استيراد الاستجابة',en:'RESPONSE_IMPORTED',short:'RESPONSE_IMPORTED'},
+  {ar:'تسوية المصدر',en:'PROVENANCE_EQUALITY',short:'PROVENANCE_EQ'},
+  {ar:'قرار بشري',en:'HUMAN_DISPOSITION',short:'HUMAN_DISPOSITION'}
 ]);
 
 export function stepStatuses(row               )                               {
@@ -120,7 +120,7 @@ export const pill=(text       ,tone     ,mono=true)       =>`<span class="ma-pil
 /* ── region copy ─────────────────────────────────────────────────────────────────────────── */
 export const LEFT_LABEL={ar:'سجلات الجسر',en:'Bridge records'};
 export const RIGHT_LABEL={ar:'سياق الحوكمة',en:'Governance context'};
-export const BANNER={title:{ar:'جسر الذكاء الاصطناعي',en:'Manual AI Bridge'},badge:'W05',detail:{ar:'تبادل يدوي محوّم — لا استدعاء مزوّد، لا نشر قانوني',en:'Governed manual exchange — no provider call, no canonical publication'}};
+export const BANNER={title:{ar:'جسر الذكاء الاصطناعي',en:'Manual AI Bridge'},badge:'AI',detail:{ar:'تبادل يدوي محوّم — لا استدعاء مزوّد، لا نشر قانوني',en:'Governed manual exchange — no provider call, no canonical publication'}};
 export const TOOLBAR_LABELS                                     ={
   'manual_ai.draft':{ar:'تجهيز حزمة يدوية',en:'Prepare manual packet'},
   'manual_ai.export':{ar:'تصدير الحزمة للتنفيذ الخارجي',en:'Export packet for external AI'},

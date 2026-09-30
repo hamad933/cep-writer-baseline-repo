@@ -1,27 +1,13 @@
 import {defineContextDescriptorProvider} from '../../foundation/global/context-descriptor-contract.js';
 import {createReviewsCompareProvider,REVIEW_DOMAIN_OWNER} from '../../adapters/reviews/domain.js';
-import {activeLocale, pickText} from './i18n.js';
+import {activeLocale, pickText, REVIEW_STATE_TONE, reviewStateLabel, reviewDecisionLabel} from './i18n.js';
+export {REVIEW_STATE_TONE, reviewStateLabel, reviewDecisionLabel} from './i18n.js';
 export const REVIEWS_SURFACE_CONTRACT=Object.freeze({
   id:'reviews',workspace:'W04',domainOwner:REVIEW_DOMAIN_OWNER,center:'FormalReviewDecisionWorkbench',
   regionRoles:Object.freeze({LEFT:'Review Queue/Assigned/In Review/Closed collection',CENTER:'Pinned Evidence + Criteria + Findings + Decision work',RIGHT:'Reviewer scope/prior review/criterion authority/provenance conflict context',BOTTOM:'Deep artifact/source/prior Evidence/raw provenance projection',TRANSIENT:'Shared transient/focus host only'}),
   requiredSharedOwners:Object.freeze(['CollectionTableMatrixPresentationCore','CollectionTableMatrixHost','AnalyticalCompareOwner','ReviewDecisionPresentationOwner','AuditProvenancePresentationOwner','ContextInspectorHost','BottomDeepWorkOwner','TransientHostOwner']),
   localSharedOwnerCreation:false,centralWiring:'CG5_OR_GLOBAL_CONVERGENCE_REQUIRED'
 });
-
-/* ── queue vocabulary ──────────────────────────────────────────────────────────────────────
- * The LEFT pane is the surface's REVIEW QUEUE navigation (reference: Review Queue · Assigned ·
- * In Review · Closed). Human labels replace raw protocol tokens exactly as the Evidence intake
- * queue does; the raw tokens stay on the record, in the collection filter and in the context
- * lens. Labels resolve the ACTIVE language on every call, so a Settings language switch re-
- * projects the queue without a reload. */
-const STATE_KEY=Object.freeze({REQUESTED:'stateRequested',ASSIGNED:'stateAssigned',IN_REVIEW:'stateInReview',READY_FOR_DECISION:'stateReady',CLOSED:'stateClosed',CANCELLED:'stateCancelled'});
-const DECISION_KEY=Object.freeze({ACCEPT:'decAccept',ACCEPT_WITH_LIMITATIONS:'decAcceptLimits',MORE_EVIDENCE_REQUIRED:'decMoreEvidence',REJECT:'decReject'});
-export const REVIEW_STATE_TONE=Object.freeze({REQUESTED:'neutral',ASSIGNED:'info',IN_REVIEW:'info',READY_FOR_DECISION:'warning',CLOSED:'success',CANCELLED:'danger'});
-export const REVIEW_DECISION_TONE=Object.freeze({ACCEPT:'success',ACCEPT_WITH_LIMITATIONS:'warning',MORE_EVIDENCE_REQUIRED:'warning',REJECT:'danger'});
-export const reviewStateOf=row=>String(row?.state||'');
-export const reviewStateLabel=row=>{const t=pickText(activeLocale());return t[STATE_KEY[reviewStateOf(row)]]||reviewStateOf(row);};
-export const reviewDecisionLabel=row=>{const t=pickText(activeLocale()),outcome=row?.decision?.outcome;return outcome?(t[DECISION_KEY[outcome]]||outcome):t.decNone;};
-export const reviewDecisionTone=row=>row?.decision?.outcome?(REVIEW_DECISION_TONE[row.decision.outcome]||'info'):'muted';
 
 export function createReviewsCollectionAdapter(domain){
   if(!domain||domain.owner!==REVIEW_DOMAIN_OWNER)throw Error('REVIEWS_DOMAIN_REQUIRED');

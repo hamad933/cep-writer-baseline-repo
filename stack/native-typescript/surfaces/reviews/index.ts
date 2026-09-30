@@ -1,6 +1,7 @@
 import {defineContextDescriptorProvider} from '../../foundation/global/context-descriptor-contract.js';
 import {createReviewsCompareProvider,REVIEW_DOMAIN_OWNER} from '../../adapters/reviews/domain.js';
 import {activeLocale, pickText, REVIEW_STATE_TONE, reviewStateLabel, reviewDecisionLabel} from './i18n.js';
+export {REVIEW_STATE_TONE, reviewStateLabel, reviewDecisionLabel} from './i18n.js';
 export const REVIEWS_SURFACE_CONTRACT=Object.freeze({
   id:'reviews',workspace:'W04',domainOwner:REVIEW_DOMAIN_OWNER,center:'FormalReviewDecisionWorkbench',
   regionRoles:Object.freeze({LEFT:'Review Queue/Assigned/In Review/Closed collection',CENTER:'Pinned Evidence + Criteria + Findings + Decision work',RIGHT:'Reviewer scope/prior review/criterion authority/provenance conflict context',BOTTOM:'Deep artifact/source/prior Evidence/raw provenance projection',TRANSIENT:'Shared transient/focus host only'}),

@@ -407,7 +407,13 @@ export function mountAuditSurface({stage,registry,workspace,runtimeAdapter=null}
   const visible=()=>allRows().filter(matches);
   const selectedRow=()=>{
     const rows=visible();
-    return rows.find(row=>row.key===state.selectedKey)||rows[0]||allRows()[0]||null;
+    if(state.selectedKey){const hit=rows.find(row=>row.key===state.selectedKey);if(hit)return hit;}
+    /* first paint mirrors the reference's selected event: a record with a multi-event trace and
+       a fully populated inspector, instead of whatever row happens to sort first */
+    const handoff=rows.find(row=>row.action==='CREATE_CANDIDATE_EVIDENCE_HANDOFF');
+    if(handoff)return handoff;
+    const grouped=rows.find(row=>row.correlationId&&allRows().filter(item=>item.correlationId===row.correlationId&&item.plane===row.plane).length>1);
+    return grouped||rows[0]||allRows()[0]||null;
   };
   const annotationFormEventId=()=>{
     const input=stage.querySelector('[data-event-id]');

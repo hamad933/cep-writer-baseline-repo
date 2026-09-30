@@ -298,7 +298,7 @@ function ensureVisualizeStyle(){
   .vis-objectrow:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
   .vis-objectrow .vis-orow{display:flex;gap:7px;align-items:flex-start;min-width:0}
   .vis-objectrow .vis-orow span{font-size:12.5px;font-weight:600;min-width:0;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4}
-  .vis-objectrow .vis-orow .vis-rel{margin-inline-start:auto;font:600 10.5px var(--mono);color:var(--text3);direction:ltr;unicode-bidi:isolate;flex:none}
+  .vis-objectrow .vis-orow .vis-rel{margin-inline-start:auto;margin-block-start:3px;font:600 10.5px var(--mono);color:var(--text3);direction:ltr;unicode-bidi:isolate;flex:none}
   .vis-objectrow .vis-orow .vis-rel[data-zero="false"]{color:var(--accent2)}
   .vis-objectrow small{font-size:10.5px;color:var(--text3);font-family:var(--mono);direction:ltr;unicode-bidi:isolate;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .vis-emptystate{display:grid;gap:5px;padding:12px 11px;color:var(--text2);font-size:12px;text-align:center}

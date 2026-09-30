@@ -76,7 +76,7 @@ function renderExchange(ctx                 )       {
     <ol class="ma-steps">${STEPS.map((step,index)=>{
       const s=status[index];
       const state=s==='done'?'done':s==='blocked'?'blocked':status.slice(0,index).every(v=>v==='done')?'current':'pending';
-      return `<li data-s="${state}"><span class="ma-step-dot" dir="ltr">${state==='done'?'✓':state==='blocked'?'✕':index+1}</span><span class="ma-step-lab" dir="ltr">${esc(step[locale])}</span></li>`;
+      return `<li data-s="${state}" title="${esc(step.en)}"><span class="ma-step-dot" dir="ltr">${state==='done'?'✓':state==='blocked'?'✕':index+1}</span><span class="ma-step-lab">${esc(locale==='ar'?step.ar:step.short)}</span></li>`;
     }).join('')}</ol>
     <div class="ma-statebar">
       <span class="ma-now">${locale==='ar'?'الحالة الحالية':'Current state'}${pill(locale==='ar'?meta.ar:meta.en,stateTone(row.state))}${pill(equality,eqTone)}</span>
@@ -129,6 +129,7 @@ function renderGate(ctx                 )       {
   const governance=Array.isArray(ctx.inspected?.governance)?ctx.inspected.governance:[];
   const reviewable=row.state==='IMPORTED'||row.state==='DEFERRED';
   const reviewReason=ctx.inspected?.commandAvailability?.review||'';
+  const readiness                           =ctx.inspected?.dispositionReadiness||null;
   const glyphs                           =['shield','person','seal'];
   return `<section class="ma-sec" data-sec="E">
     <h2><span class="ma-sec-key" dir="ltr">E.</span>${locale==='ar'?'بوابة القرار البشري':'Human decision gate'}<em>${locale==='ar'?'Human decision gate':'بوابة القرار البشري'}</em></h2>
@@ -142,8 +143,15 @@ function renderGate(ctx                 )       {
         :'Accept creates a working draft only and never publishes canonically.'}</span>
     </div>
     <div class="ma-actions" role="group" aria-label="${esc(locale==='ar'?'تصرفات المراجع':'Reviewer dispositions')}">
-      ${DISPOSITIONS.map(d=>`<button type="button" class="btn" data-ma-disposition="${d}"${reviewable?'':' disabled aria-disabled="true"'}><span dir="auto">${esc(L(DISPOSITION_COPY[d],locale))}</span></button>`).join('')}
+      ${DISPOSITIONS.map(d=>{
+        const ready=(reviewable&&(readiness?readiness[d]==='AVAILABLE':true));
+        const why=reviewable&&readiness&&readiness[d]&&readiness[d]!=='AVAILABLE'?String(readiness[d]):(reviewable?'':(reviewReason||'NOT_OPEN_YET'));
+        return `<button type="button" class="btn" data-ma-disposition="${d}" title="${esc(why)}"${ready?'':' disabled aria-disabled="true"'}><span dir="auto">${esc(L(DISPOSITION_COPY[d],locale))}</span></button>`;
+      }).join('')}
     </div>
+    ${(reviewable&&readiness&&readiness.ACCEPT!=='AVAILABLE')?`<p class="ma-sec-note" style="border-top:0;padding-top:8px">${esc(locale==='ar'
+      ?'لا يوجد مُستقبِل مسودة عمل مربوط في هذه البنية، لذلك تُبلغ محاولة القبول DRAFT_SINK_UNAVAILABLE ولا يُنشأ نجاح وهمي. التصرّفات الأخرى متاحة.'
+      :'No working-draft sink is bound in this build, so ACCEPT reports DRAFT_SINK_UNAVAILABLE instead of fabricating a success. The other dispositions remain available.')}</p>`:''}
   </section>`;
 }
 

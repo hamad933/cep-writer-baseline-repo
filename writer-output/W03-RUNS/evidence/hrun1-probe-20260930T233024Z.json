@@ -1,0 +1,45 @@
+{
+  "gate": "H-RUN-1",
+  "unit": "W03-RUNS",
+  "surface": "runs",
+  "candidate": {
+    "commit": "eb3bd2c631a3a38cefebcc942b0f70fae06b1e00",
+    "dirtyFiles": [
+      "M stack/native-typescript/surfaces/m0-controller-composition.ts"
+    ]
+  },
+  "environment": {
+    "node": "v22.23.1",
+    "web": "http://127.0.0.1:36605/"
+  },
+  "checks": {
+    "route-consumer-runs": true,
+    "stage-m0-composition-runs": true,
+    "render-runs-surface-mounted (data-runs-root)": true,
+    "runs-workspace-rendered": true,
+    "runs-tabs-rendered": true,
+    "runs-terminal-slot-rendered": true,
+    "no-horizontal-overflow": true,
+    "ar-rtl-mount": true
+  },
+  "captures": [
+    {
+      "name": "hrun1-en-ltr",
+      "path": "writer-output/W03-RUNS/evidence/hrun1-en-ltr-20260930T233024Z.png",
+      "sha256": "73d42f6f75d9c62d84e13d5a856669265eb363608c88eebf6912ca7f07bca216",
+      "viewport": "1505x1045",
+      "lang": "en",
+      "dir": "ltr"
+    },
+    {
+      "name": "hrun1-ar-rtl",
+      "path": "writer-output/W03-RUNS/evidence/hrun1-ar-rtl-20260930T233024Z.png",
+      "sha256": "c18f19518d8ad4e807793d3f626df3b2e469acb967ba8000d96d971db3ebb638",
+      "viewport": "1505x1045",
+      "lang": "ar",
+      "dir": "rtl"
+    }
+  ],
+  "errors": [],
+  "verdict": "HRUN1_PASS__LIVE_ROUTE_MOUNT_PROVEN"
+}

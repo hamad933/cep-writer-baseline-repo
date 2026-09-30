@@ -77,7 +77,7 @@ export function injectManualAiStyle(doc              =null)     {
 
 /* C · exchange stepper */
 .ma-steps{list-style:none;margin:0 0 12px;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0}
-.ma-steps li{position:relative;min-width:0;padding:0 6px 0 0;display:grid;justify-items:center;gap:7px;text-align:center}
+.ma-steps li{position:relative;min-width:0;padding:0 3px;display:grid;justify-items:center;gap:7px;text-align:center}
 .ma-step-dot{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--line2);background:var(--bg1);color:var(--text3);font:700 11px var(--mono);position:relative;z-index:1}
 .ma-steps li::before{content:"";position:absolute;top:12px;inset-inline-start:-50%;width:100%;height:2px;background:var(--line2);z-index:0}
 .ma-steps li:first-child::before{display:none}
@@ -88,7 +88,7 @@ export function injectManualAiStyle(doc              =null)     {
 .ma-steps li[data-s=blocked] .ma-step-dot{border-color:var(--ma-bad);background:color-mix(in srgb,var(--ma-bad) 18%,var(--bg1));color:var(--ma-bad)}
 .ma-steps li[data-s=blocked]::before{background:repeating-linear-gradient(90deg,var(--line2) 0 5px,transparent 5px 10px)}
 .ma-steps li[data-s=pending]::before{background:repeating-linear-gradient(90deg,var(--line2) 0 5px,transparent 5px 10px)}
-.ma-steps .ma-step-lab{font:600 9.5px/1.35 var(--mono);color:var(--text3);letter-spacing:.02em;overflow-wrap:anywhere}
+.ma-steps .ma-step-lab{font:600 9px/1.35 var(--mono);letter-spacing:-.01em;color:var(--text3);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ma-steps li[data-s=current] .ma-step-lab{color:var(--ma-warn)}
 .ma-steps li[data-s=blocked] .ma-step-lab{color:var(--ma-bad)}
 .ma-steps li[data-s=done] .ma-step-lab{color:var(--text2)}

@@ -407,4 +407,40 @@ export const activeLocale = ()               => {
 export const fill = (template        , values                                 )         =>
   String(template ?? '').replace(/\{(\w+)\}/g, (match, key) => (key in values ? String(values[key]) : match));
 
+/* ── Review row projections (presentation-surface projectRows / collection columns) ─────────
+ * REVIEW_STATE_TONE lists ONLY states that actually differ from the shared presenter's default
+ * `neutral` tone, so `projectRows` writes `data-w04-tone` only when it differs. */
+export const REVIEW_STATE_TONE                         = Object.freeze({
+  REQUESTED: 'info',
+  ASSIGNED: 'info',
+  IN_REVIEW: 'info',
+  READY_FOR_DECISION: 'info'
+});
+
+export const reviewStateLabel = (row                              = '')         => {
+  const state = typeof row === 'string' ? row : String(row?.state || '');
+  const t = pickText(activeLocale());
+  const labels                         = {
+    REQUESTED: t.stateRequested,
+    ASSIGNED: t.stateAssigned,
+    IN_REVIEW: t.stateInReview,
+    READY_FOR_DECISION: t.stateReady,
+    CLOSED: t.stateClosed,
+    CANCELLED: t.stateCancelled
+  };
+  return labels[state] || t.lifecycleFallback;
+};
+
+export const reviewDecisionLabel = (row                                             = {})         => {
+  const outcome = row?.decision?.outcome;
+  const t = pickText(activeLocale());
+  const labels                         = {
+    ACCEPT: t.decAccept,
+    ACCEPT_WITH_LIMITATIONS: t.decAcceptLimits,
+    MORE_EVIDENCE_REQUIRED: t.decMoreEvidence,
+    REJECT: t.decReject
+  };
+  return outcome ? labels[outcome] || outcome : t.decNone;
+};
+
 export default TEXT;

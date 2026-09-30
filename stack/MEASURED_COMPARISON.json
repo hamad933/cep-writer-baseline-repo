@@ -1,6 +1,6 @@
 {
-  "runtime": "v22.16.0",
-  "measured_at": "2026-09-30T17:33:38.372Z",
+  "runtime": "v22.23.1",
+  "measured_at": "2026-09-30T22:47:52.892Z",
   "scope": "Canonical stack/native-typescript source independently generates dist and dist-ts JavaScript; no generated tree writes back to canonical source.",
   "buildDirection": "stack/native-typescript -> dist + dist-ts",
   "reverseGeneratedToSourceWrites": false,
@@ -15,7 +15,7 @@
       "authority": "CANONICAL_SOURCE_TO_GENERATED_ONLY",
       "source": "stack/native-typescript",
       "destination": "dist",
-      "written": 290,
+      "written": 323,
       "copiedAssets": 2,
       "removedStale": 0
     }
@@ -29,20 +29,20 @@
     "static_types": "Canonical TypeScript source; proof measures erasable-syntax generation parity only.",
     "model_pass": 210,
     "model_fail": 0,
-    "emit_ms": 1022.4443340000039,
+    "emit_ms": 228.37078299996938,
     "build": {
       "pass": true,
       "authority": "CANONICAL_SOURCE_TO_GENERATED_ONLY",
       "source": "stack/native-typescript",
       "destination": "dist-ts",
-      "written": 290,
+      "written": 323,
       "copiedAssets": 2,
       "removedStale": 0
     }
   },
   "identical_model_results": true,
-  "A_model_suite_median_ms": 148.15189999999893,
-  "A_model_suite_p95_ms": 327.4186230000005,
+  "A_model_suite_median_ms": 61.2318520000008,
+  "A_model_suite_p95_ms": 76.54678700000295,
   "performance_limit": "One host, warm model workload only; not cold browser startup or representative full product workload.",
   "inventory": [
     {
@@ -65,9 +65,9 @@
     },
     {
       "file": "adapters/backup-runtime.js",
-      "source_ts_bytes": 15887,
+      "source_ts_bytes": 15973,
       "source_ts_lines": 81,
-      "emitted_bytes": 15887
+      "emitted_bytes": 15973
     },
     {
       "file": "adapters/balanced6-acceptance-data.js",
@@ -83,9 +83,9 @@
     },
     {
       "file": "adapters/context-learn-structured.js",
-      "source_ts_bytes": 4268,
-      "source_ts_lines": 66,
-      "emitted_bytes": 4268
+      "source_ts_bytes": 9872,
+      "source_ts_lines": 139,
+      "emitted_bytes": 9872
     },
     {
       "file": "adapters/context-library-structured.js",
@@ -137,9 +137,9 @@
     },
     {
       "file": "adapters/library-fixtures.js",
-      "source_ts_bytes": 1755,
-      "source_ts_lines": 13,
-      "emitted_bytes": 1755
+      "source_ts_bytes": 4542,
+      "source_ts_lines": 58,
+      "emitted_bytes": 4542
     },
     {
       "file": "adapters/library-note-runtime-composition.js",
@@ -155,15 +155,15 @@
     },
     {
       "file": "adapters/manual_ai/domain-adapter.js",
-      "source_ts_bytes": 16445,
-      "source_ts_lines": 168,
-      "emitted_bytes": 16445
+      "source_ts_bytes": 17994,
+      "source_ts_lines": 181,
+      "emitted_bytes": 17994
     },
     {
       "file": "adapters/mastery/domain.js",
-      "source_ts_bytes": 10882,
-      "source_ts_lines": 106,
-      "emitted_bytes": 10882
+      "source_ts_bytes": 13511,
+      "source_ts_lines": 121,
+      "emitted_bytes": 13511
     },
     {
       "file": "adapters/note-binding-domains.js",
@@ -191,9 +191,9 @@
     },
     {
       "file": "adapters/portfolio/domain.js",
-      "source_ts_bytes": 13180,
-      "source_ts_lines": 111,
-      "emitted_bytes": 13180
+      "source_ts_bytes": 14520,
+      "source_ts_lines": 141,
+      "emitted_bytes": 14520
     },
     {
       "file": "adapters/processing-runtime.js",
@@ -245,9 +245,9 @@
     },
     {
       "file": "adapters/runs/domain.js",
-      "source_ts_bytes": 4812,
-      "source_ts_lines": 24,
-      "emitted_bytes": 4812
+      "source_ts_bytes": 6915,
+      "source_ts_lines": 49,
+      "emitted_bytes": 6915
     },
     {
       "file": "adapters/runtime/local-runtime-transport.js",
@@ -977,15 +977,33 @@
     },
     {
       "file": "surfaces/audit/index.js",
-      "source_ts_bytes": 83033,
-      "source_ts_lines": 1051,
-      "emitted_bytes": 83033
+      "source_ts_bytes": 84211,
+      "source_ts_lines": 1061,
+      "emitted_bytes": 84211
+    },
+    {
+      "file": "surfaces/backup/i18n.js",
+      "source_ts_bytes": 16026,
+      "source_ts_lines": 350,
+      "emitted_bytes": 16026
+    },
+    {
+      "file": "surfaces/backup/icons.js",
+      "source_ts_bytes": 3675,
+      "source_ts_lines": 43,
+      "emitted_bytes": 3675
     },
     {
       "file": "surfaces/backup/index.js",
-      "source_ts_bytes": 21480,
-      "source_ts_lines": 148,
-      "emitted_bytes": 21480
+      "source_ts_bytes": 30088,
+      "source_ts_lines": 395,
+      "emitted_bytes": 30088
+    },
+    {
+      "file": "surfaces/backup/style.js",
+      "source_ts_bytes": 19028,
+      "source_ts_lines": 285,
+      "emitted_bytes": 19028
     },
     {
       "file": "surfaces/composition/w01-w02-rescue.js",
@@ -1043,9 +1061,9 @@
     },
     {
       "file": "surfaces/enterprise/presentation.js",
-      "source_ts_bytes": 26619,
-      "source_ts_lines": 129,
-      "emitted_bytes": 26619
+      "source_ts_bytes": 61247,
+      "source_ts_lines": 624,
+      "emitted_bytes": 61247
     },
     {
       "file": "surfaces/evidence/index.js",
@@ -1060,6 +1078,30 @@
       "emitted_bytes": 9900
     },
     {
+      "file": "surfaces/labs/board.js",
+      "source_ts_bytes": 34460,
+      "source_ts_lines": 620,
+      "emitted_bytes": 34460
+    },
+    {
+      "file": "surfaces/labs/context.js",
+      "source_ts_bytes": 9221,
+      "source_ts_lines": 153,
+      "emitted_bytes": 9221
+    },
+    {
+      "file": "surfaces/labs/i18n.js",
+      "source_ts_bytes": 11672,
+      "source_ts_lines": 165,
+      "emitted_bytes": 11672
+    },
+    {
+      "file": "surfaces/labs/icons.js",
+      "source_ts_bytes": 4044,
+      "source_ts_lines": 48,
+      "emitted_bytes": 4044
+    },
+    {
       "file": "surfaces/labs/index.js",
       "source_ts_bytes": 3460,
       "source_ts_lines": 24,
@@ -1067,15 +1109,57 @@
     },
     {
       "file": "surfaces/labs/presentation.js",
-      "source_ts_bytes": 22915,
-      "source_ts_lines": 98,
-      "emitted_bytes": 22915
+      "source_ts_bytes": 706,
+      "source_ts_lines": 14,
+      "emitted_bytes": 706
+    },
+    {
+      "file": "surfaces/labs/structure.js",
+      "source_ts_bytes": 3971,
+      "source_ts_lines": 66,
+      "emitted_bytes": 3971
+    },
+    {
+      "file": "surfaces/labs/styles.js",
+      "source_ts_bytes": 18274,
+      "source_ts_lines": 179,
+      "emitted_bytes": 18274
+    },
+    {
+      "file": "surfaces/learn/composition.js",
+      "source_ts_bytes": 23143,
+      "source_ts_lines": 402,
+      "emitted_bytes": 23143
+    },
+    {
+      "file": "surfaces/learn/i18n.js",
+      "source_ts_bytes": 14102,
+      "source_ts_lines": 295,
+      "emitted_bytes": 14102
+    },
+    {
+      "file": "surfaces/learn/model.js",
+      "source_ts_bytes": 8541,
+      "source_ts_lines": 170,
+      "emitted_bytes": 8541
+    },
+    {
+      "file": "surfaces/learn/styles.js",
+      "source_ts_bytes": 13153,
+      "source_ts_lines": 178,
+      "emitted_bytes": 13153
     },
     {
       "file": "surfaces/learn/surface.js",
-      "source_ts_bytes": 2152,
-      "source_ts_lines": 18,
-      "emitted_bytes": 2152
+      "source_ts_bytes": 2518,
+      "source_ts_lines": 23,
+      "emitted_bytes": 2518
+    },
+    {
+      "file": "surfaces/library/presentation.js",
+      "source_ts_bytes": 11652,
+      "source_ts_lines": 230,
+      "emitted_bytes": 11652
     },
     {
       "file": "surfaces/library/runtime-composition.js",
@@ -1085,51 +1169,123 @@
     },
     {
       "file": "surfaces/library/surface.js",
-      "source_ts_bytes": 4444,
-      "source_ts_lines": 36,
-      "emitted_bytes": 4444
+      "source_ts_bytes": 4902,
+      "source_ts_lines": 41,
+      "emitted_bytes": 4902
     },
     {
       "file": "surfaces/m0-controller-composition.js",
-      "source_ts_bytes": 75054,
-      "source_ts_lines": 313,
-      "emitted_bytes": 75054
+      "source_ts_bytes": 75848,
+      "source_ts_lines": 316,
+      "emitted_bytes": 75848
     },
     {
       "file": "surfaces/manual_ai/composition.js",
-      "source_ts_bytes": 10021,
-      "source_ts_lines": 53,
-      "emitted_bytes": 10021
+      "source_ts_bytes": 12112,
+      "source_ts_lines": 72,
+      "emitted_bytes": 12112
+    },
+    {
+      "file": "surfaces/manual_ai/panes.js",
+      "source_ts_bytes": 11521,
+      "source_ts_lines": 96,
+      "emitted_bytes": 11521
+    },
+    {
+      "file": "surfaces/manual_ai/presentation.js",
+      "source_ts_bytes": 14296,
+      "source_ts_lines": 140,
+      "emitted_bytes": 14296
+    },
+    {
+      "file": "surfaces/manual_ai/runtime.js",
+      "source_ts_bytes": 16290,
+      "source_ts_lines": 272,
+      "emitted_bytes": 16290
+    },
+    {
+      "file": "surfaces/manual_ai/style.js",
+      "source_ts_bytes": 18873,
+      "source_ts_lines": 208,
+      "emitted_bytes": 18873
+    },
+    {
+      "file": "surfaces/manual_ai/workbench.js",
+      "source_ts_bytes": 16909,
+      "source_ts_lines": 212,
+      "emitted_bytes": 16909
     },
     {
       "file": "surfaces/mastery/composition.js",
-      "source_ts_bytes": 6849,
-      "source_ts_lines": 68,
-      "emitted_bytes": 6849
+      "source_ts_bytes": 8936,
+      "source_ts_lines": 108,
+      "emitted_bytes": 8936
+    },
+    {
+      "file": "surfaces/mastery/i18n.js",
+      "source_ts_bytes": 15549,
+      "source_ts_lines": 269,
+      "emitted_bytes": 15549
     },
     {
       "file": "surfaces/mastery/presentation.js",
-      "source_ts_bytes": 11287,
-      "source_ts_lines": 242,
-      "emitted_bytes": 11287
+      "source_ts_bytes": 10706,
+      "source_ts_lines": 262,
+      "emitted_bytes": 10706
     },
     {
       "file": "surfaces/portfolio/composition.js",
-      "source_ts_bytes": 5755,
-      "source_ts_lines": 50,
-      "emitted_bytes": 5755
+      "source_ts_bytes": 8835,
+      "source_ts_lines": 95,
+      "emitted_bytes": 8835
+    },
+    {
+      "file": "surfaces/portfolio/i18n.js",
+      "source_ts_bytes": 21560,
+      "source_ts_lines": 370,
+      "emitted_bytes": 21560
+    },
+    {
+      "file": "surfaces/portfolio/left-views.js",
+      "source_ts_bytes": 7320,
+      "source_ts_lines": 156,
+      "emitted_bytes": 7320
+    },
+    {
+      "file": "surfaces/portfolio/presentation-style.js",
+      "source_ts_bytes": 9247,
+      "source_ts_lines": 120,
+      "emitted_bytes": 9247
     },
     {
       "file": "surfaces/portfolio/presentation.js",
-      "source_ts_bytes": 10021,
-      "source_ts_lines": 200,
-      "emitted_bytes": 10021
+      "source_ts_bytes": 12531,
+      "source_ts_lines": 295,
+      "emitted_bytes": 12531
     },
     {
       "file": "surfaces/releases/composition.js",
-      "source_ts_bytes": 8927,
-      "source_ts_lines": 51,
-      "emitted_bytes": 8927
+      "source_ts_bytes": 7973,
+      "source_ts_lines": 50,
+      "emitted_bytes": 7973
+    },
+    {
+      "file": "surfaces/releases/presentation.js",
+      "source_ts_bytes": 65568,
+      "source_ts_lines": 861,
+      "emitted_bytes": 65568
+    },
+    {
+      "file": "surfaces/releases/records.js",
+      "source_ts_bytes": 24211,
+      "source_ts_lines": 364,
+      "emitted_bytes": 24211
+    },
+    {
+      "file": "surfaces/releases/runtime.js",
+      "source_ts_bytes": 16856,
+      "source_ts_lines": 354,
+      "emitted_bytes": 16856
     },
     {
       "file": "surfaces/results/index.js",
@@ -1144,16 +1300,28 @@
       "emitted_bytes": 20651
     },
     {
+      "file": "surfaces/reviews/i18n.js",
+      "source_ts_bytes": 24226,
+      "source_ts_lines": 411,
+      "emitted_bytes": 24226
+    },
+    {
       "file": "surfaces/reviews/index.js",
-      "source_ts_bytes": 19370,
-      "source_ts_lines": 172,
-      "emitted_bytes": 19370
+      "source_ts_bytes": 23665,
+      "source_ts_lines": 234,
+      "emitted_bytes": 23665
+    },
+    {
+      "file": "surfaces/reviews/presentation-surface.js",
+      "source_ts_bytes": 26426,
+      "source_ts_lines": 414,
+      "emitted_bytes": 26426
     },
     {
       "file": "surfaces/reviews/presentation.js",
-      "source_ts_bytes": 12866,
-      "source_ts_lines": 273,
-      "emitted_bytes": 12866
+      "source_ts_bytes": 12992,
+      "source_ts_lines": 306,
+      "emitted_bytes": 12992
     },
     {
       "file": "surfaces/rq/composition.js",
@@ -1168,6 +1336,12 @@
       "emitted_bytes": 4314
     },
     {
+      "file": "surfaces/runs/i18n.js",
+      "source_ts_bytes": 11959,
+      "source_ts_lines": 80,
+      "emitted_bytes": 11959
+    },
+    {
       "file": "surfaces/runs/index.js",
       "source_ts_bytes": 5145,
       "source_ts_lines": 24,
@@ -1175,9 +1349,33 @@
     },
     {
       "file": "surfaces/runs/presentation.js",
-      "source_ts_bytes": 16723,
-      "source_ts_lines": 31,
-      "emitted_bytes": 16723
+      "source_ts_bytes": 16681,
+      "source_ts_lines": 266,
+      "emitted_bytes": 16681
+    },
+    {
+      "file": "surfaces/runs/regions.js",
+      "source_ts_bytes": 5135,
+      "source_ts_lines": 74,
+      "emitted_bytes": 5135
+    },
+    {
+      "file": "surfaces/runs/styles.js",
+      "source_ts_bytes": 26947,
+      "source_ts_lines": 313,
+      "emitted_bytes": 26947
+    },
+    {
+      "file": "surfaces/runs/util.js",
+      "source_ts_bytes": 3842,
+      "source_ts_lines": 42,
+      "emitted_bytes": 3842
+    },
+    {
+      "file": "surfaces/runs/views.js",
+      "source_ts_bytes": 23194,
+      "source_ts_lines": 308,
+      "emitted_bytes": 23194
     },
     {
       "file": "surfaces/scenarios/i18n.js",
@@ -1253,9 +1451,9 @@
     },
     {
       "file": "surfaces/visualize/surface.js",
-      "source_ts_bytes": 32327,
-      "source_ts_lines": 127,
-      "emitted_bytes": 32327
+      "source_ts_bytes": 74780,
+      "source_ts_lines": 405,
+      "emitted_bytes": 74780
     },
     {
       "file": "tests/post-c03/D03A/d03a-command-settings-convergence-tests.js",
