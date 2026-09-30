@@ -1,0 +1,84 @@
+{
+  "SURFACE": "backup",
+  "OWNER": "W05-BACKUP",
+  "REFERENCE": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/05_BACKUP_AND_RESTORE/CEP_SYSTEM_BACKUP_RESTORE_RESTORE_DRILL_REFERENCE.png",
+  "REFERENCE_CLASSIFICATION": "OWNER_CONFIRMED_FINAL_REFERENCE",
+  "REFERENCE_AUTHORITY_STATEMENT": "Reference is CONSTRUCTION AUTHORITY for composition, hierarchy, spatial relationships, information architecture, density/rhythm, interaction language, visual emphasis, pane organization and responsive intent. REFERENCE != BLIND PIXEL COPY. The reference is Arabic; per Owner policy it establishes visual/layout/interaction intent ONLY and confers NO product-language preference.",
+  "REFERENCE_IDENTITY": {
+    "sha256_16": "782e813a4ffacd96",
+    "sha256_full": "782e813a4ffacd969eeff180b90a0a859271bd8c5a1a4e3b98ac6379e9a88ed0",
+    "dims": "1536x1024",
+    "verifiedAt": "2026-09-30T17:35:00Z (sha256sum matches packet + register)",
+    "register": "cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md",
+    "manifest": "cep-writer/REFERENCE_MANIFEST.json"
+  },
+  "SURFACE_PURPOSE": "Protect state and PROVE restore works: run isolated restore drills against real provider receipts and present verifiable restore evidence (checks, expected-vs-actual counts, durable attempt journal) — the drill is the work, not a list of backup files.",
+  "CURRENT_CANDIDATE": {
+    "branch": "writer/mi-serial",
+    "baseCommit": "HEAD at session start (checkpoints e2a915e..)",
+    "state": "UNCOMMITTED_WORKTREE_DELTA",
+    "note": "Working tree only; no git add/commit performed by this unit per dispatch rule."
+  },
+  "FILES_CHANGED": [],
+  "FUNCTIONAL_STATUS": "BASELINE_VERIFIED — full real lifecycle executed against the real local runtime BackupRestoreCapability: backup.package -> PACKAGE_VERIFIED, backup.plan -> PLANNED, backup.preview -> PREVIEWED, backup.stage -> STAGED, backup.drill -> STAGED_AND_VERIFIED, backup.activationRequest -> AUTHORITY_PENDING; 4 durable attempts in the provider journal; 0 page errors. Evidence: writer-output/W05-BACKUP/evidence/baseline-drill.json (checks 8/8 PASS).",
+  "STRUCTURAL_STATUS": "BASELINE_MEASURED — regions: banner, toolbar, left 304x803, centre stage 790x803, right 420x803, bottom shelf 1536x39. Centre is a single 790px column of 5 equally-weighted bordered boxes (stepper / drill report / expected-vs-actual table / attempt history) plus a header and banner.",
+  "VISUAL_STATUS": "BASELINE_DEFECTS_IDENTIFIED — L1/L2/L3/L4 comparison of the CURRENT RESULT against the OWNER_CONFIRMED_FINAL_REFERENCE completed; 13 defects classified below. Build of the replacement composition in progress.",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": {
+    "L1_WHOLE_SURFACE": "DONE (baseline) — current result vs reference: reference centres the composition on a Restore Drill report with an 8-stage pipeline, a 3x3 verification grid and a big-number expected-vs-actual metric row; current result shows a 6-card generic stepper ABOVE the report, an emoji-card grid, a prose table instead of metrics, and equal-weight boxes with no focal point.",
+    "L2_REGION_PANE": "DONE (baseline) — centre 790px column vs reference ~65% width; left pane has 1 group + 5 ungrouped rows vs reference 5 collapsible groups with counts/search/filter; right pane has 5 equal blocks vs reference 9 blocks with icon affordances, red risk block and RPO/RTO; bottom shelf carries a raw JSON dump vs reference composed shelf.",
+    "L3_COMPONENT": "DONE (baseline) — stepper cards, drill header pill, 9 verification cards, expected-vs-actual table, attempt history, left restore-point rows, right context blocks measured from the baseline captures.",
+    "L4_MICRO": "DONE (baseline) — hardcoded RTL arrow glyphs in an LTR render, mid-word break `productionDatabaseMutate d = false`, emoji glyph icons, static English command labels on a non-English surface, status toast text 'completed truthfully' overlaying content.",
+    "METHOD_NOTE": "The image `read` channel returned a STALE frame during baseline analysis (a crop request returned the parent screenshot). Ground truth = sha256 of the exact bytes + tesseract OCR (eng+ara) of the same bytes + live DOM getBoundingClientRect/getComputedStyle probes. No claim rests on an unverified frame."
+  },
+  "RESPONSIVE_STATUS": "NOT_STARTED",
+  "RTL_LTR_STATUS": "NOT_STARTED (baseline shows a violation: surface text is Arabic-only while locale=en leaves shared chrome English)",
+  "DEFECTS_FOUND": [
+    {"id": "D-01", "title": "Surface hardcodes Arabic while the active language is English — mixed-language surface, violates §7 (both languages first-class, no permanent product-language authority)", "severity": "V4", "rootCause": "STALE_DECISION", "evidence": "baseline-drill-full.png (sha256 0957b88d…) with locale=en: centre/left/right render Arabic, shared toolbar/chrome render English; 0 bilingual path exists in surfaces/backup/index.ts", "status": "OPEN_FIX_IN_PROGRESS"},
+    {"id": "D-02", "title": "Reference's focal structure absent: no 8-stage drill pipeline with per-stage verdicts, no 3x3 real-check grid, no big-number expected-vs-actual metrics, no drill meta strip (source/started/completed/duration/environment)", "severity": "V4", "rootCause": "SURFACE_COMPOSITION", "evidence": "reference vs baseline-drill-full.png + baseline-drill-scrolled.png", "status": "OPEN_FIX_IN_PROGRESS"},
+    {"id": "D-03", "title": "Information hierarchy inverted — the process diagram (lifecycle stepper) sits above the actual restore-drill evidence; the drill report is not the focal point of the work area", "severity": "V3", "rootCause": "SURFACE_COMPOSITION", "evidence": "DOM order: .b-head > .b-warn > .b-sec(stepper) > .b-sec(drill report)", "status": "OPEN_FIX_IN_PROGRESS"},
+    {"id": "D-04", "title": "Over-boxed equal-weight composition: 5 stacked bordered sections of identical treatment, no focal panel, dead space in the 2-card second stepper row", "severity": "V3", "rootCause": "SURFACE_COMPOSITION", "evidence": "baseline-drill-center.png (790x803); stepper row 2 renders 2 cards stretched across 790px", "status": "OPEN_FIX_IN_PROGRESS"},
+    {"id": "D-05", "title": "Direction baked into structure: stepper connector arrow is a hardcoded '←' (RTL) glyph, wrong in an LTR document", "severity": "V2", "rootCause": "SURFACE_COMPOSITION", "evidence": "surfaces/backup/index.ts line 95 '<span class=\"b-arrow\">←</span>' rendered in dir=ltr", "status": "OPEN_FIX_IN_PROGRESS"},
+    {"id": "D-06", "title": "Emoji glyphs (🧾🧊🗄⚖️✍️🏝🚫♻️✅) used as component icons in a serious operations surface", "severity": "V2", "rootCause": "SURFACE_COMPOSITION", "evidence": "verification cards in baseline-drill-center.png", "status": "OPEN_FIX_IN_PROGRESS"},
+    {"id": "D-07", "title": "Right pane: 5 uniform blocks with identical weight — no icon affordances, no distinct risk treatment, no RPO/RTO, no state-interpretation block (reference has 9)", "severity": "V2", "rootCause": "SURFACE_COMPOSITION", "evidence": "baseline-drill-right.png 420x803", "status": "OPEN_FIX_IN_PROGRESS"},
+    {"id": "D-08", "title": "Left pane: no grouped/collapsible structure, no counts on drill/attempt groups, no search/filter affordance, restore-point rows lack a status-pill + lock affordance hierarchy", "severity": "V2", "rootCause": "SURFACE_COMPOSITION", "evidence": "baseline-drill-left.png 304x803: 1 heading + 5 flat rows + orphan button", "status": "OPEN_FIX_IN_PROGRESS"},
+    {"id": "D-09", "title": "Bottom shelf presents raw JSON <pre> dumps as the primary evidence presentation (dev/component-showcase, not production)", "severity": "V2", "rootCause": "SURFACE_COMPOSITION", "evidence": "surfaces/backup/index.ts lines 139-142", "status": "OPEN_FIX_IN_PROGRESS"},
+    {"id": "D-10", "title": "Status toast text is machine phrasing, untranslated and overlays content: 'backup.activationRequest completed truthfully'", "severity": "V2", "rootCause": "SURFACE_COMPOSITION", "evidence": "baseline-drill-scrolled.png bottom-centre toast", "status": "OPEN_FIX_IN_PROGRESS"},
+    {"id": "D-11", "title": "Expected-vs-actual table breaks technical tokens mid-word: 'productionDatabaseMutate d = false', 'stagedVerifiedIsLiveRest ored = false'", "severity": "V1", "rootCause": "SURFACE_COMPOSITION", "evidence": "baseline-drill-scrolled.png rows 2-3; overflow-wrap:anywhere on <bdi dir=ltr>", "status": "OPEN_FIX_IN_PROGRESS"},
+    {"id": "D-12", "title": "Shared toolbar command labels are static English while the surface renders another language — no localisation path for command labels", "severity": "V1", "rootCause": "IMPLEMENTATION", "evidence": "toolbar 'Create verified BackupPackage …' (English) beside Arabic surface text", "status": "OPEN_FIX_IN_PROGRESS"},
+    {"id": "D-13", "title": "First paint with no prior drill shows an undifferentiated half-empty column instead of a designed not-run state that still carries structure and readiness", "severity": "V2", "rootCause": "CONTENT_MODEL", "evidence": "baseline-empty-center.png 790x803", "status": "OPEN_FIX_IN_PROGRESS"}
+  ],
+  "DEFECT_SEVERITY": {"V4": 2, "V3": 2, "V2": 6, "V1": 2, "UNCLASSIFIED": 1, "FIXED": 0, "OPEN_REPORTED": 13},
+  "ROOT_CAUSE": {"SURFACE_COMPOSITION": 9, "STALE_DECISION": 1, "IMPLEMENTATION": 1, "CONTENT_MODEL": 1, "EVIDENCE/ORACLE": 1},
+  "FIXES_APPLIED": [],
+  "RECAPTURE_STATUS": "NOT_STARTED",
+  "RECOMPARISON_STATUS": "NOT_STARTED",
+  "REGRESSION_STATUS": "NOT_STARTED",
+  "EVIDENCE": {
+    "root": "writer-output/W05-BACKUP/evidence/",
+    "harness": ["writer-output/W05-BACKUP/evidence/harness/capture.mjs"],
+    "baseline": [
+      {"file": "baseline-drill-full.png", "sha256": "0957b88da880d0ff1373c323d4573a41df7efcda741459cde218243841ae0266", "dims": "1536x1024", "state": "full real lifecycle completed"},
+      {"file": "baseline-drill-scrolled.png", "dims": "1536x1024"},
+      {"file": "baseline-drill-left.png", "dims": "304x803"},
+      {"file": "baseline-drill-right.png", "dims": "420x803"},
+      {"file": "baseline-drill-center.png", "dims": "790x803"},
+      {"file": "baseline-empty-*.png", "state": "no prior drill"},
+      {"file": "baseline-drill.json", "content": "8/8 checks + lineage + geometry"}
+    ],
+    "referenceIsNotEvidence": "The Owner reference image was used for comparison only and is NOT part of the evidence set."
+  },
+  "LINEAGE": {
+    "reference": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/05_BACKUP_AND_RESTORE/CEP_SYSTEM_BACKUP_RESTORE_RESTORE_DRILL_REFERENCE.png",
+    "referenceClassification": "OWNER_CONFIRMED_FINAL_REFERENCE",
+    "referenceSha256_16": "782e813a4ffacd96",
+    "referenceDims": "1536x1024",
+    "candidate": "writer/mi-serial, uncommitted worktree delta",
+    "captureMethod": "cep-writer/references/WRITER_LOCAL_VISUAL_CAPTURE_AND_RENDERING_METHOD.md (playwright chromium headless, matched viewport, own runtime root, full lineage)",
+    "evidenceContract": "controller/08_evidence/evidence_contract.md",
+    "buildSeam": "dist/** built only through tools/writer-serial.sh npm run build:runtime"
+  },
+  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
+  "BLOCKERS": [],
+  "STAGE": "BASELINE_ANALYSED__BUILD_IN_PROGRESS",
+  "GENERATED_AT": "2026-09-30T17:45:00Z"
+}
