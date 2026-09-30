@@ -57,7 +57,7 @@ Dimensions required (all relevant): FUNCTION · STRUCTURE · VISUAL FIDELITY · 
 | W03-SCENARIOS | scenarios | pending | pending | NOT_STARTED | Wave-1 · anti-cloning failure site |
 | W04-EVIDENCE | evidence | pending | pending | NOT_STARTED | Wave-1 · Arabic reference must not set product default |
 | W05-AUDIT | audit | pending | pending | NOT_STARTED | Wave-1 |
-| W05-CONFIGURATION | configuration | pending | pending | NOT_STARTED | Wave-1 · owns language policy seam (G-20) |
+| W05-CONFIGURATION | configuration | **DELIVERED** (report + HANDOFF + 23/23 hash-verified captures) | **G-20 VERIFIED FIXED AT ROOT** by Controller: `dist/index.html` now bare `<html>` (0 baked dir/lang); `language-policy.ts` single resolver with `productLanguageAuthority:null` and `privilegedProductLanguage:null`; order = user preference → browsing-context language → schema placeholder (unreachable in a browsing context); direction derived from active locale unless user-pinned. Root cause correctly identified: `dist/index.html` is *generated* by `tools/extract_donor.py` under a ZERO_DELTA hash guard, so direct edits are silently reverted — generator patched through the serialized slot and hash re-frozen. Verified 4/4 G-20 shell cases incl. main.js blocked and JS disabled. 16 defects fixed (2 V4, 3 V3, 6 V2, 5 V1). | **VISUAL_PASS_PENDING_OWNER** | O-01 donor chrome hardcodes Arabic → W01-SHELL. O-02 pane proportions → **adjudicated below**. O-04 manifest entry fixed by Controller. |
 | W02-LIBRARY | library | pending | pending | NOT_STARTED | Wave-2 (donor-coupled) |
 | W02-LEARN | learn | pending | pending | NOT_STARTED | Wave-2 |
 | W02-VISUALIZE | visualize | pending | pending | NOT_STARTED | Wave-2 · **VISUALIZE TREE-VIEW** (not "Visualize Review") |
@@ -109,7 +109,42 @@ Binding required on every artifact: candidate · commit/tree · environment · t
 
 ---
 
-## 6. REMEDIATION STATUS
+## 6. CONTROLLER ARCHITECTURAL DECISIONS
+
+Decisions the Controller is authorised to make under the Owner escalation gate (B: implementation detail; C: UI/UX detail with a clearly superior professional solution). Recorded so they are durable and not re-litigated.
+
+### AD-01 — Pane proportions are a SHARED defect, fix at shared level (adjudicates O-02)
+
+**Finding:** `foundation/global/pane-layout.ts` hardcodes defaults `left: 304`, `right: 420` (lines 62–63, 202); `dist/model-tests.js` freezes `rightWidth` `preferredValue===420`. Measured proportions are **19.8% / 51.4% / 27.3%** against the reference's **~16% / ~65% / ~17%**.
+
+**Root cause class:** `SHARED_COMPONENT` — not a per-surface defect. The center work area is ~13.6 points too narrow on **every** surface.
+
+**Why this matters beyond cosmetics:** the Owner rejected "pane organization", "density/balance", and "the center doesn't feel like actual work". A center capped at ~51% of width is a *systemic* cause of exactly that complaint across all 23 surfaces. Per `shared-component-governance` R4, patching this in 23 consumers would be wrong; the shared default is the defect.
+
+**Decision: AUTHORIZED as a shared-level change.** The visual reference is construction authority for pane organization and spatial relationships (standard §2), so the target is reference-derived rather than a matter of taste. This is escalation-gate B/C — an implementation and layout detail with a clearly superior, reference-driven solution. **Not an Owner escalation.**
+
+**Constraints (§25 protocol):**
+1. Smallest correct change: adjust shared defaults toward the reference proportion; update the frozen `rightWidth` preference fixture accordingly.
+2. **Sequenced as WAVE-4** (shell/shared slot) — after surface waves land, so concurrent writers' captures are not invalidated mid-flight.
+3. Regression-check **every material consumer** (all 23 surfaces) at L1–L3 after the change.
+4. Existing captures are evidence, retained and labelled superseded — not sacred. Re-capture after the change.
+5. Owner: `W01-SHELL`, executed through `tools/writer-serial.sh`.
+
+**State:** AUTHORIZED · NOT_STARTED · sequenced WAVE-4
+
+### AD-02 — Donor/shared chrome Arabic hardcoding (adjudicates O-01)
+
+**Finding:** shared/donor chrome hardcodes Arabic strings (pane-toggle labels, bottom shelf, skip link, donor banner badge, context lens tabs), producing mixed-language chrome around fully localized surfaces.
+
+**Root cause class:** `STALE_DECISION` — same class as G-20/VD-003. Now that no language is privileged, hardcoded Arabic in *shared* chrome is inconsistent with the Owner's policy.
+
+**Decision: fix at shared level**, owned by `W01-SHELL` (donor chrome). Do not localize per surface. Routed, not escalated.
+
+**State:** ROUTED · OPEN
+
+---
+
+## 7. REMEDIATION STATUS
 
 | Item | Owner | State |
 |---|---|---|
