@@ -1,0 +1,161 @@
+{
+  "SURFACE": "runs",
+  "OWNER": "W03-RUNS",
+  "REFERENCE": [
+    {
+      "path": "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/04_RUNS_OPERATIONS/CEP_RUN_PREPARATION_PREFLIGHT_REFERENCE.png",
+      "sha256": "91126b1efdfca2bbf9b1619dfabc60d83fe4efc5ba6336ba7a535d8dd06b291a",
+      "dims": "1505x1045",
+      "bytes": 1471400,
+      "classification": "OWNER_CONFIRMED_SUPPORTING_MAJOR_STATE_REFERENCE",
+      "role": "Run preparation / preflight major state: numbered preparation cards, readiness table, BLOCKED verdict banner, LEFT structure rail, RIGHT context readout, bottom work-area tray."
+    },
+    {
+      "path": "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/04_RUNS_OPERATIONS/image-gen-1(20260813-230627).png",
+      "sha256": "e875f6c592ce84d6fbddcb01cf5afddead891246168fa6019f3434aeb4f337a3",
+      "dims": "1505x1045",
+      "bytes": 1496925,
+      "classification": "CURRENT_FINAL_REFERENCE",
+      "role": "Live run operations: mode tab row + lifecycle actions, run identity strip, SIEM source tabs, split Alerts list / Alert Details with event-timeline sub-tabs, LEFT Run Structure, RIGHT contextual readout, bottom temporary-work-area tray."
+    }
+  ],
+  "REFERENCE_CLASSIFICATION": [
+    "OWNER_CONFIRMED_SUPPORTING_MAJOR_STATE_REFERENCE",
+    "CURRENT_FINAL_REFERENCE"
+  ],
+  "CURRENT_CANDIDATE": {
+    "branch": "writer/mi-serial",
+    "commit": "68341ec18f79 (HEAD at capture time)",
+    "worktreeDiff": "uncommitted (Controller commits at checkpoint)",
+    "buildTool": "tools/writer-serial.sh npm run build:runtime",
+    "renderMethod": "GENUINE_ROUTE_LOCAL_BROWSER (baseline) + NAVIGATION_INDEPENDENT CANDIDATE MOUNT (candidate)",
+    "route": "/?surface=runs"
+  },
+  "FILES_CHANGED": [
+    "stack/native-typescript/surfaces/runs/presentation.ts (REWRITTEN — reference-driven operations orchestrator)",
+    "stack/native-typescript/surfaces/runs/styles.ts (NEW — surface tokens, type/spacing/radius system, full component CSS)",
+    "stack/native-typescript/surfaces/runs/i18n.ts (NEW — full AR/EN string set, locale read from active preference)",
+    "stack/native-typescript/surfaces/runs/util.ts (NEW — esc, bdi isolation, tone mapping, inline icon set)",
+    "stack/native-typescript/surfaces/runs/views.ts (NEW — 9 real projections: telemetry workbench, preflight, timeline, topology, overview, tasks, events, observations, artifacts)",
+    "stack/native-typescript/surfaces/runs/regions.ts (NEW — LEFT Run Structure + RIGHT context region projections)",
+    "stack/native-typescript/adapters/runs/domain.ts (MODIFIED — workspace() gains parsed mode policy, source tabs, honest counts, observations, artifacts, lifecycle receipts, open sessions)",
+    "stack/native-typescript/surfaces/runs/index.ts (UNCHANGED — contract/commands preserved)",
+    "writer-output/W03-RUNS/SERIALIZED_HOTSPOT_REQUEST.md (NEW — mount seam request, writer-forbidden files)"
+  ],
+  "FUNCTIONAL_STATUS": "PENDING_BUILD",
+  "STRUCTURAL_STATUS": "PENDING_BUILD",
+  "VISUAL_STATUS": "PENDING_BUILD",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": [],
+  "RESPONSIVE_STATUS": "PENDING_BUILD",
+  "RTL_LTR_STATUS": "PENDING_BUILD",
+  "DEFECTS_FOUND": [
+    {
+      "id": "DEF-RUN-P01",
+      "severity": "V4",
+      "rootCause": "ARCHITECTURE",
+      "defect": "SURFACE has no runtime composition at all. `renderRunsSurface` (surfaces/runs/presentation.ts) and `W03RunDomain` (adapters/runs/domain.ts) are referenced only by tests and surfaces/composition/w03-rescue.ts — never by main.ts or surfaces/m0-controller-composition.ts. The live route renders main.ts's generic 3-node device topology (`.domain-heading` + `#spatialHost`), a generic LEFT `Workspace views / topology / table / history / recorded / Objects` list and a generic RIGHT `Context` lens.",
+      "evidence": "writer-output/W03-RUNS/evidence/baseline/CAPTURE_MANIFEST.json (DOM probe: LEFT='Workspace views topology table history recorded Objects…', CENTER='RUN-0042 · Internal simulation Topology Objects History Recorded result…') + tesseract OCR of the same bytes + sha256 of both frames",
+      "fix": "Wrote the full reference-driven composition inside the owned roots and filed writer-output/W03-RUNS/SERIALIZED_HOTSPOT_REQUEST.md (H-RUN-1) with the exact 3-import/3-line mount hunk for main.ts / m0-controller-composition.ts, which are writer-forbidden (controller/12_execution/02_parallel_dispatch.md §3)."
+    },
+    {
+      "id": "DEF-RUN-P02",
+      "severity": "V3",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "Centre had no operational identity: no mode tab row, no run identity strip, no source tabs, no split alerts/detail workbench, no readiness/preflight state, no lifecycle action row, no terminal tray, no runtime-truth status line.",
+      "fix": "Composed the reference workbench: action bar + identity strip + SIEM source tabs + split Alerts/Alert Details + preflight numbered cards with verdict banner + timeline/topology/overview/tasks/events/observations/artifacts projections + terminal tray + status line."
+    },
+    {
+      "id": "DEF-RUN-P03",
+      "severity": "V3",
+      "rootCause": "CONTENT_MODEL",
+      "defect": "LEFT and RIGHT carried generic spatial/context content unrelated to running a simulation (topology object list; 2-field State/Revision lens).",
+      "fix": "LEFT = Run Structure with 8 real sections and true counts; RIGHT = contextual readout (detection rationale / correlation scope / operational implication / observation / recommended next step, or preparation context in preflight) plus runtime-truth block and platform-truth note."
+    },
+    {
+      "id": "DEF-RUN-P04",
+      "severity": "V2",
+      "rootCause": "STALE_DECISION",
+      "defect": "Shell toolbar for runs exposed only `Open terminal · pause run · resume run · Disconnect provider · Reconnect session · Recorded result`; the reference action language (Start/Prepare/Preflight before start, Pause/End Run/Capture Snapshot while running) was unreachable, so the surface could not express either reference state.",
+      "fix": "Surface now renders a lifecycle-aware action row bound to the composition bus (runs.start/prepare/preflight/pause/resume/stop/captureSnapshot/seal/view.recorded), plus an overflow menu. Shell toolbar remains shell-owned; see H-RUN-2."
+    },
+    {
+      "id": "DEF-RUN-P05",
+      "severity": "V2",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "No Arabic/English presentation of its own — the surface had no strings at all, so both languages depended entirely on generic shell chrome.",
+      "fix": "Full AR + EN string set in surfaces/runs/i18n.ts, locale read from the active document language (user Settings preference), RTL/LTR via logical properties only, all technical tokens isolated with <bdi dir=\"ltr\">."
+    }
+  ],
+  "DEFECT_SEVERITY": {
+    "V0": 0,
+    "V1": 0,
+    "V2": 2,
+    "V3": 2,
+    "V4": 1,
+    "total": 5,
+    "note": "V4=1 is the architecture-level mount gap; it cannot be closed from a writer-owned root."
+  },
+  "ROOT_CAUSE": [
+    "ARCHITECTURE",
+    "SURFACE_COMPOSITION",
+    "CONTENT_MODEL",
+    "STALE_DECISION"
+  ],
+  "FIXES_APPLIED": [
+    "Reference-driven centre workbench (action bar, identity strip, source tabs, split alerts/detail, sub-tabs, filter/highlight/export footer)",
+    "LEFT Run Structure region with 8 real sections and true counts",
+    "RIGHT contextual readout region with preparation and operations variants",
+    "Preflight numbered preparation cards + readiness table + BLOCKED/READY verdict banner (both reference states reconstructable)",
+    "Lifecycle-aware action row reflecting real command availability",
+    "Terminal deep-work tray that adopts the shared #operationalHost instead of destroying it",
+    "Runtime-truth status line carrying INTERNAL_SIMULATION + UNVERIFIED_PLATFORM_GATE honestly",
+    "Full AR/EN + RTL/LTR presentation with <bdi> isolation",
+    "Non-destructive mount: #spatialHost / #domainView / .domain-heading are preserved and suppressed, so main.ts update paths cannot crash"
+  ],
+  "RECAPTURE_STATUS": "NOT_STARTED",
+  "RECOMPARISON_STATUS": "NOT_STARTED",
+  "REGRESSION_STATUS": "NOT_STARTED",
+  "EVIDENCE": {
+    "directory": "writer-output/W03-RUNS/",
+    "baseline": {
+      "manifest": "writer-output/W03-RUNS/evidence/baseline/CAPTURE_MANIFEST.json",
+      "frames": [
+        {
+          "path": "writer-output/W03-RUNS/evidence/baseline/runs-en-operations-1505x1045-20260930T173556Z.png",
+          "sha256": "09f050a49269081b0061aff3d78bdae0e981a57b0cf3a95aeccdc161d4385a3b",
+          "dims": "1505x1045",
+          "bytes": 174403,
+          "viewport": "1505x1045",
+          "locale": "en",
+          "capturedAt": "20260930T173556Z",
+          "pageErrors": 0
+        },
+        {
+          "path": "writer-output/W03-RUNS/evidence/baseline/runs-ar-operations-1505x1045-20260930T173600Z.png",
+          "sha256": "9737b8aee4c6afdbc12567d095f662286025c628ffddc5023cf7cdaeca44eb3f",
+          "dims": "1505x1045",
+          "bytes": 168840,
+          "viewport": "1505x1045",
+          "locale": "ar",
+          "capturedAt": "20260930T173600Z",
+          "pageErrors": 0
+        }
+      ],
+      "groundTruth": "tesseract OCR + DOM probe of the same bytes both confirm the generic spatial topology render"
+    }
+  },
+  "LINEAGE": {
+    "referenceHashesVerified": true,
+    "referenceHashNote": "sha256 recomputed locally and matched to the packet's 16-char prefixes 91126b1efdfca2bb / e875f6c592ce84d6",
+    "captureChain": [
+      "baseline (genuine route, pre-change)",
+      "candidate (pending shared build)"
+    ],
+    "visionChannel": "OPEN — image reads must be cross-checked with sha256 + tesseract OCR of the same bytes per visual-fidelity-review R3b"
+  },
+  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
+  "BLOCKERS": [
+    "B1 ARCHITECTURE (V4): the runs surface composition is not mounted anywhere on the live route. main.ts + surfaces/m0-controller-composition.ts are writer-forbidden (controller/12_execution/02_parallel_dispatch.md §3); the fix is filed as writer-output/W03-RUNS/SERIALIZED_HOTSPOT_REQUEST.md H-RUN-1 and must be applied by the Coordinator in the PW-C slot. Until then the genuine route cannot show this unit's work.",
+    "B2 IMPLEMENTATION: `tools/writer-serial.sh npm run build:runtime` is transiently RED from another unit's in-flight edit — stack/native-typescript/surfaces/manual_ai/presentation.ts line 32 (`export const dirNow=...||'ltr';`, unit W05-MANUAL-AI) is not parseable by stripTypeScriptTypes (ERR_INVALID_TYPESCRIPT_SYNTAX). Not touched by this unit; all 8 files owned by this unit parse clean."
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "schema": "CEP_BACKUP_PACKAGE_V1",
+  "packageId": "backup-20260930183656-02f02876",
+  "label": "backup-surface",
+  "correlationId": "backup-corr-e6df0edd-c44e-4056-b11c-4b4b5fcd7dd5",
+  "capturedAt": "2026-09-30T18:36:56.162Z",
+  "provider": {
+    "id": "CepSqlitePersistenceProvider",
+    "driverId": "node:sqlite"
+  },
+  "snapshot": {
+    "file": "snapshot.sqlite",
+    "bytes": 323584,
+    "sha256": "cfd68281040dec55ae826b0b370272af633e64a221bf5666a564a1718169418c"
+  },
+  "schemaArtifact": {
+    "file": "schema-v1.sql",
+    "sha256": "7486017cfee6caadb8569794d2fb48d3e0f2637d7208d70bd48092403d65572a"
+  },
+  "migrations": [
+    {
+      "version": 1,
+      "name": "schema-v1",
+      "checksum": "7486017cfee6caadb8569794d2fb48d3e0f2637d7208d70bd48092403d65572a"
+    }
+  ],
+  "schemaSignature": "8881c4eb56ccd57dd2486dcd7f93a6debd4d3a73f8617753f6eb12cd619ad235",
+  "readbackSummary": {
+    "documentCount": 6,
+    "revisionCount": 6,
+    "recoveryCount": 0,
+    "sample": [
+      {
+        "documentId": "KU-D03-0001",
+        "currentRevisionId": "b6-7ece51647550"
+      },
+      {
+        "documentId": "KU-D03-0004",
+        "currentRevisionId": "b6-b3e8fa607bee"
+      },
+      {
+        "documentId": "KU-D03-0011",
+        "currentRevisionId": "b6-ad2ec2ccbde9"
+      },
+      {
+        "documentId": "KU-D05-0021",
+        "currentRevisionId": "b6-8f9b5ebdf4e8"
+      },
+      {
+        "documentId": "KU-D05-0023",
+        "currentRevisionId": "b6-04741ab0b3f7"
+      }
+    ]
+  },
+  "activationState": "NOT_REQUESTED"
+}

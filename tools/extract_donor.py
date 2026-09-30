@@ -19,10 +19,68 @@ OUTPUT_ROOT = ROOT / "dist"
 EXPECTED_DONOR_BYTES = 672_893
 EXPECTED_DONOR_SHA256 = "ea66b58ef122bf2f8ca23fd0aa9e461b07da11ea7390c451902e4b1592d396fd"
 EXPECTED_OUTPUTS = {
-    "index.html": "2e6e1aefefe7074ef2eef97239db82a2291d320d1d7e680515e3e9197643402a",
+    "index.html": "d60ad0f36e61a6cd658e221875b97039d838d8307fd67ad35431bd1b7a46b29d",
     "foundation/donor.css": "bb3b29f51beda272d5118b9329a44250c896c0143d7ea593ec59419b02d93689",
     "reference/CEP_LIBRARY_EDITOR_EXECUTABLE_BLUEPRINT_v1.2.17_ACCEPTED_DESIGN_REFERENCE.html": EXPECTED_DONOR_SHA256,
 }
+
+# G-20 / VD-003 — gap "Arabic hardcoded as product-language authority".
+# The generated document shell must NOT carry a baked language or direction: the active language is
+# user-configurable through Settings and the shell direction follows the ACTIVE PREFERENCE.
+# Resolution order mirrors foundation/global/preferences/language-policy.ts:
+#   stored user preference -> browsing-context language environment -> schema placeholder.
+G20_LANGUAGE_POLICY_BOOTSTRAP = """
+<script>
+/* G-20 LANGUAGE POLICY BOOTSTRAP - no privileged product-language authority.
+   Resolution order: stored user preference -> browsing-context language environment -> schema
+   placeholder (headless only). Direction: explicit chrome pin -> derived from the active locale.
+   Owner: W05-CONFIGURATION - seam: foundation/global/preferences/language-policy.ts */
+(function () {
+  try {
+    var SUP = ['ar', 'en'];
+    var RTL_ENV = ['ar', 'he', 'fa', 'ur', 'ps', 'ku', 'dv', 'syr', 'ug', 'yi', 'sd', 'ckb'];
+    var locale = null, pin = null, authority = 'schema-placeholder-without-browsing-context';
+    try {
+      var raw = localStorage.getItem('cep-foundation.preferences.v1');
+      var data = raw ? JSON.parse(raw) : null;
+      var globalScope = (data && data.overrides && data.overrides.global) || {};
+      if (SUP.indexOf(globalScope.locale) > -1) { locale = globalScope.locale; authority = 'user-preference'; }
+      if (globalScope.chromeDirection === 'rtl' || globalScope.chromeDirection === 'ltr') { pin = globalScope.chromeDirection; }
+    } catch (e) {}
+    if (!locale) {
+      var tags = [];
+      try {
+        var nav = navigator;
+        var declared = (nav.languages && nav.languages.length) ? nav.languages : (nav.language ? [nav.language] : []);
+        for (var i = 0; i < declared.length; i++) {
+          var tag = String(declared[i] || '').toLowerCase().replace(/_/g, '-');
+          if (tag) tags.push(tag);
+        }
+      } catch (e) {}
+      if (tags.length) {
+        authority = 'browsing-context-language-environment';
+        for (var s = 0; s < SUP.length && !locale; s++) {
+          for (var k = 0; k < tags.length && !locale; k++) {
+            if (tags[k] === SUP[s] || tags[k].indexOf(SUP[s] + '-') === 0) locale = SUP[s];
+          }
+        }
+        if (!locale) {
+          var primary = String(tags[0]).split('-')[0];
+          locale = RTL_ENV.indexOf(primary) > -1 ? 'ar' : 'en';
+        }
+      }
+    }
+    if (!locale) locale = 'ar';
+    var direction = pin || (locale === 'ar' ? 'rtl' : 'ltr');
+    var root = document.documentElement;
+    root.lang = locale;
+    root.dir = direction;
+    root.setAttribute('data-language-authority', authority);
+    root.setAttribute('data-direction-authority', pin ? 'user-preference' : 'derived-from-locale:' + authority);
+  } catch (e) {}
+})();
+</script>
+"""
 
 CANONICAL_INITIAL_SHELL = (
     '<header class="foundation-shell" data-owner="GlobalShellNavigationOwner" '
@@ -95,6 +153,9 @@ def main() -> None:
 
     html = raw[: script.start()] + raw[script.end() :]
     html = re.sub(r"<style[^>]*>.*?</style>", "", html, flags=re.S)
+    # G-20: no baked product language or direction on the document shell.
+    html = re.sub(r"<html[^>]*>", "<html>", html, count=1)
+    html = re.sub(r'<meta charset="utf-8"\s*/?>', lambda m: m.group(0) + G20_LANGUAGE_POLICY_BOOTSTRAP, html, count=1)
     html = html.replace(
         "</head>",
         '<link rel="stylesheet" href="foundation/donor.css">'

@@ -1,5 +1,7 @@
 import {projectSettingsSections,SETTINGS_CENTER_GROUPS,SETTINGS_CENTER_SECTION_DESCRIPTOR_CONTRACT} from './sections.js';
 import {searchSettingsSections,normalizeSettingsSearchText,SETTINGS_CENTER_SEARCH_POLICY} from './search.js';
+import {SETTINGS_GROUP_LABELS,SETTINGS_GROUP_NOTES,SETTINGS_SECTION_LABELS,SETTINGS_SECTION_DESCRIPTIONS,PREFERENCE_LABELS,SETTINGS_COPY,preferenceValueLabel,              } from './labels.js';
+import {resolveActiveLocale,resolveActiveDirection,systemLocaleSource,LANGUAGE_POLICY_OWNER} from '../preferences/language-policy.js';
 
 export const SETTINGS_CENTER_OWNER='SettingsCenterOwner';
 export const SETTINGS_CENTER_TRANSIENT_ID='global.settings-center';
@@ -30,16 +32,28 @@ const isDirection=value=>value==='rtl'||value==='ltr';
 const bool=value=>value===true||value==='true';
 const valueToken=value=>typeof value==='string'?value:JSON.stringify(value);
 
-function renderPreferenceControl(item){
+/* Presentation-only localisation. The section/group/preference MODEL stays English + stable
+   (contracts and tests bind to those ids/labels); every user-visible string is resolved here. */
+const localeOf=locale=>locale==='en'?'en':'ar';
+const L=(value                         ,locale          )=>value?value[locale]:'';
+const sectionLabel=(id,fallback,locale)=>L(SETTINGS_SECTION_LABELS[id],locale)||String(fallback||id);
+const sectionNote=(id,fallback,locale)=>L(SETTINGS_SECTION_DESCRIPTIONS[id],locale)||String(fallback||'');
+const preferenceLabel=(key,fallback,locale)=>L(PREFERENCE_LABELS[key],locale)||String(fallback||key);
+/** Keys rendered in the always-visible language/direction block; suppressed inside their sections
+    so each preference still has EXACTLY ONE control instance (one action home, one value owner). */
+const LANGUAGE_BLOCK_KEYS=Object.freeze(['locale','chromeDirection']);
+
+function renderPreferenceControl(item,locale          ){
   const current=item.value,control=item.control||{};
-  if(control.type==='boolean')return `<button type="button" class="btn settings-value-toggle" data-settings-preference="${esc(item.key)}" data-settings-value="${current?'false':'true'}" aria-pressed="${current===true}">${current?'ON':'OFF'}</button>`;
+  const optionLabel=token=>preferenceValueLabel(item.key,locale,token);
+  if(control.type==='boolean')return `<button type="button" class="btn settings-value-toggle" data-settings-preference="${esc(item.key)}" data-settings-value="${current?'false':'true'}" aria-pressed="${current===true}">${preferenceValueLabel(item.key,locale,current)}</button>`;
   if(control.type==='number')return `<label class="settings-range"><input type="range" min="${esc(control.min)}" max="${esc(control.max)}" step="${esc(control.step||.05)}" value="${esc(current)}" data-settings-preference-range="${esc(item.key)}"><output>${esc(current)}</output></label>`;
-  if(Array.isArray(control.values)&&control.values.length)return `<div class="prefbuttons settings-choice-row" role="radiogroup" aria-label="${esc(item.label)}">${control.values.map(value=>`<button type="button" class="btn" role="radio" data-settings-preference="${esc(item.key)}" data-settings-value="${esc(valueToken(value))}" aria-checked="${String(current===value)}" aria-pressed="${String(current===value)}"><bdi dir="auto">${esc(value)}</bdi></button>`).join('')}</div>`;
-  return `<bdi class="settings-read-value" dir="auto">${esc(current)}</bdi>`;
+  if(Array.isArray(control.values)&&control.values.length)return `<div class="prefbuttons settings-choice-row" role="radiogroup" aria-label="${esc(preferenceLabel(item.key,item.label,locale))}">${control.values.map(value=>`<button type="button" class="btn" role="radio" data-settings-preference="${esc(item.key)}" data-settings-value="${esc(valueToken(value))}" aria-checked="${String(current===value)}" aria-pressed="${String(current===value)}"><bdi dir="auto">${esc(optionLabel(value))}</bdi></button>`).join('')}</div>`;
+  return `<bdi class="settings-read-value" dir="auto">${esc(preferenceValueLabel(item.key,locale,current))}</bdi>`;
 }
-function renderItem(item){
-  if(item.kind==='preference')return `<li class="settings-item settings-preference-item" data-settings-item="${esc(item.id)}" data-source-owner="${esc(item.sourceOwner)}"><div class="settings-item-copy"><strong>${esc(item.label)}</strong><small><bdi dir="ltr">${esc(item.key)}</bdi> · ${esc(item.sourceScope||'default')}</small></div>${renderPreferenceControl(item)}</li>`;
-  if(item.kind==='command')return `<li class="settings-item" data-settings-item="${esc(item.id)}" data-source-owner="${esc(item.commandOwner||item.sourceOwner||'SemanticCommandBus')}"><div class="settings-item-copy"><strong>${esc(item.label)}</strong><small><bdi dir="ltr">${esc(item.commandId)}</bdi>${item.reason?` · ${esc(item.reason)}`:''}</small></div><span class="settings-state" data-state="${item.enabled?'available':'unavailable'}">${item.enabled?'Available':'Unavailable'}</span></li>`;
+function renderItem(item,locale          ,scopeLabel=(item)=>esc(item.sourceScope||'default')){
+  if(item.kind==='preference')return `<li class="settings-item settings-preference-item" data-settings-item="${esc(item.id)}" data-source-owner="${esc(item.sourceOwner)}"><div class="settings-item-copy"><strong>${esc(preferenceLabel(item.key,item.label,locale))}</strong><small><bdi dir="ltr">${esc(item.key)}</bdi> · ${scopeLabel(item)}</small></div>${renderPreferenceControl(item,locale)}</li>`;
+  if(item.kind==='command')return `<li class="settings-item" data-settings-item="${esc(item.id)}" data-source-owner="${esc(item.commandOwner||item.sourceOwner||'SemanticCommandBus')}"><div class="settings-item-copy"><strong>${esc(item.label)}</strong><small><bdi dir="ltr">${esc(item.commandId)}</bdi>${item.reason?` · ${esc(item.reason)}`:''}</small></div><span class="settings-state" data-state="${item.enabled?'available':'unavailable'}">${item.enabled?(locale==='ar'?'متاح':'Available'):(locale==='ar'?'غير متاح':'Unavailable')}</span></li>`;
   if(item.kind==='preference-transfer-action')return `<li class="settings-item settings-transfer-action-item" data-settings-item="${esc(item.id)}" data-source-owner="${SETTINGS_CENTER_OWNER}" data-delegates-to="${esc(item.delegatesTo)}"><div class="settings-item-copy"><strong>${esc(item.label)}</strong><small><bdi dir="ltr">${esc(item.actionId)}</bdi> · ${esc(item.delegatesTo)}</small></div><button type="button" class="btn" data-settings-action="${esc(item.actionId)}">${esc(item.actionLabel||item.label)}</button></li>`;
   return `<li class="settings-item" data-settings-item="${esc(item.id)}" data-source-owner="${esc(item.sourceOwner||item.shortcutOwner||'descriptor')}"><div class="settings-item-copy"><strong>${esc(item.label)}</strong>${item.commandId?`<small><bdi dir="ltr">${esc(item.commandId)}</bdi></small>`:''}</div>${item.chord?`<kbd class="kbd"><bdi dir="ltr">${esc(item.chord)}</bdi></kbd>`:''}</li>`;
 }
@@ -93,10 +107,20 @@ export class SettingsCenterOwner{
     for(const group of SETTINGS_CENTER_GROUPS){const children=sections.filter(section=>section.groupId===group.id);if(children.length)groups.push(Object.freeze({id:group.id,label:group.label,order:group.order,sections:Object.freeze(children)}));}
     return Object.freeze(groups);
   }
+  /** Direction of this panel. Never hardcoded: chrome pin → active locale → browsing context. */
   direction(){
-    const configured=this.preferences.resolve('chromeDirection').preferredValue;
-    if(isDirection(configured))return configured;
-    return this.preferences.resolve('locale').preferredValue==='ar'?'rtl':'ltr';
+    return resolveActiveDirection(this.preferences).direction;
+  }
+  /** Single-language/direction authority projection used by the panel header and by W05 evidence. */
+  languagePolicy(){
+    const locale=resolveActiveLocale(this.preferences),direction=resolveActiveDirection(this.preferences),environment=systemLocaleSource();
+    return {
+      owner:LANGUAGE_POLICY_OWNER,locale:locale.locale,direction:direction.direction,
+      localeSource:locale.source,localeSourceScope:locale.sourceScope,directionSource:direction.source,
+      environmentLocale:environment.locale,environmentSource:environment.source,
+      productLanguageAuthority:null,privilegedProductLanguage:null,
+      shellAuthority:'ACTIVE_LANGUAGE_PREFERENCE',supportedLocales:['ar','en']
+    };
   }
   record(detail){const receipt=Object.freeze({sequence:++this.sequence,owner:this.owner,...detail});this.receipts.push(receipt);return receipt;}
   open(invoker=null,{profile=this.lastProfile||{},familySections=this.familySections,element=null,modal=true,outsideDismiss=true}={}){
@@ -167,11 +191,67 @@ export class SettingsCenterOwner{
     const groups=this.groups(profile,familySections);
     return {owner:this.owner,contract:this.contract,presentation:{...this.presentation,direction:this.direction()},groups,search:this.search(this.presentation.query,profile,familySections)};
   }
+  /** Always-visible Language & direction block. One control per preference — no second action home. */
+  languageBlock(profile=this.lastProfile||{},familySections=this.familySections,locale          ='ar'){
+    const found=new Map();
+    for(const section of this.sections(profile,familySections)){
+      for(const item of section.items||[]){
+        if(item.kind==='preference'&&LANGUAGE_BLOCK_KEYS.includes(item.key))found.set(item.key,{section,item});
+      }
+    }
+    const entries=LANGUAGE_BLOCK_KEYS.map(key=>found.get(key)).filter(Boolean);
+    if(!entries.length)return '';
+    const policy=this.languagePolicy();
+    const authority=locale==='ar'
+      ?(policy.localeSource==='user-preference'?'اخترته أنت':'لغة جهازك — لا سلطة لغوية للمنتج')
+      :(policy.localeSource==='user-preference'?'Set by you':'Your device language — no product-language authority');
+    const scope=locale==='ar'?`النطاق ${policy.localeSourceScope}`:`scope ${policy.localeSourceScope}`;
+    return `<section class="settings-language-block" data-settings-language-block data-language-authority="${esc(policy.localeSource)}" data-direction-authority="${esc(policy.directionSource)}" aria-label="${esc(L(SETTINGS_GROUP_LABELS.preferences,locale))} · ${esc(L({ar:'اللغة والاتجاه',en:'Language & direction'},locale))}">
+<header class="settings-language-head"><span class="settings-eyebrow">${esc(L({ar:'سلطة اللغة والاتجاه',en:'Language & direction authority'},locale))}</span><h2>${esc(L({ar:'اللغة والاتجاه',en:'Language & direction'},locale))}</h2><p>${esc(L({ar:'العربية والإنجليزية لغتان أوليتان متكافئتان. لا يوجد افتراض لغوي للمنتج: يلتقط CEP لغة جهازك حتى تختار بنفسك، والاتجاه يتبع اختيارك.',en:'Arabic and English are both first-class and equal. CEP has no product-language default: it follows your device language until you choose for yourself, and direction follows that choice.'},locale))}</p></header>
+<div class="settings-language-fields">${entries.map(({item})=>`<div class="settings-field" data-settings-field="${esc(item.key)}"><span class="settings-field-label" id="settings-field-${esc(item.key)}">${esc(preferenceLabel(item.key,item.label,locale))}</span>${renderPreferenceControl(item,locale)}</div>`).join('')}</div>
+<div class="settings-language-state"><span class="settings-chip" data-chip="locale"><bdi dir="ltr">${esc(policy.locale)}</bdi> ${esc(policy.locale==='ar'?'العربية':'English')}</span><span class="settings-chip" data-chip="direction"><bdi dir="ltr">${esc(policy.direction.toUpperCase())}</bdi></span><span class="settings-chip settings-chip-quiet" data-chip="authority">${esc(authority)} · ${esc(scope)}</span></div>
+</section>`;
+  }
+  valueSummary(section,items,locale          ){
+    if(section.sourceKind==='preferences'){
+      const pairs=items.filter(item=>item.kind==='preference').slice(0,3).map(item=>`${preferenceLabel(item.key,item.label,locale)}: ${preferenceValueLabel(item.key,locale,item.value)}`);
+      if(!pairs.length)return '';
+      const more=items.filter(item=>item.kind==='preference').length-3;
+      return pairs.join(' · ')+(more>0?(locale==='ar'?` · +${more} أخرى`:` · +${more} more`):'');
+    }
+    if(section.sourceKind==='commands'){
+      const total=(section.items||[]).length,available=(section.items||[]).filter(item=>item.enabled).length;
+      return locale==='ar'?`${total} أمر · ${available} متاح`:`${total} commands · ${available} available`;
+    }
+    if(section.sourceKind==='preference-transfer'){
+      const count=(section.items||[]).length;
+      return locale==='ar'?`${count} إجراءات تُنفَّذ عبر SettingsCenterOwner`:`${count} actions executed through SettingsCenterOwner`;
+    }
+    const count=(section.items||[]).length;
+    return locale==='ar'?`${count} ${section.sourceKind==='global-shortcuts'?'اختصار عام':'عنصر'}`:`${count} ${section.sourceKind==='global-shortcuts'?'global shortcuts':'items'}`;
+  }
   render(profile=this.lastProfile||{},familySections=this.familySections,{embedded=false}={}){
     const groups=this.groups(profile,familySections),direction=this.direction(),focused=this.presentation.focusedSectionId,query=this.presentation.query;
-    const body=groups.map(group=>`<section class="settings-center-group" data-settings-group="${esc(group.id)}"><h2 class="settings-center-group-title">${esc(group.label)}</h2>${group.sections.map(section=>{const open=this.presentation.openSectionId===section.id;const panelId=`settings-panel-${section.id.replace(/[^a-z0-9_-]/gi,'-')}`;const items=section.items.map(renderItem).join('');return `<section class="prefsection settings-center-section" data-pref-section="${esc(section.id)}" data-settings-section="${esc(section.id)}" data-open="${open}"><button type="button" class="preftitle prefsection-toggle" data-settings-disclosure="${esc(section.id)}" aria-expanded="${open}" aria-controls="${esc(panelId)}" tabindex="${focused===section.id?'0':'-1'}"><span class="prefsection-icon" aria-hidden="true">•</span><span class="prefsection-copy"><strong>${esc(section.label)}</strong><small>${esc(section.description||section.groupLabel||'Preference group')}</small></span><span class="prefsection-chev" aria-hidden="true">›</span></button><div class="prefsection-body" id="${esc(panelId)}" role="region" aria-label="${esc(section.label)}"${open?'':' hidden'}><ul class="settings-item-list">${items||'<li class="settings-empty">No applicable items</li>'}</ul></div></section>`}).join('')}</section>`).join('');
-    const inner=`<div class="transient-panel-head"><strong id="settings-center-title">Settings / التفضيلات</strong><button type="button" class="btn iconbtn" data-action="close-settings-panel" aria-label="Close settings / إغلاق الإعدادات">×</button></div><div class="settings-search-row"><label><span class="sr">Search settings</span><input type="search" data-settings-search value="${esc(query)}" placeholder="Search settings / بحث الإعدادات" autocomplete="off"></label>${query?`<span class="settings-search-count" aria-live="polite">${this.search(query,profile,familySections).length} matches</span>`:''}</div><div class="preferences-scroll" aria-label="Grouped settings" role="region" tabindex="0">${body||'<p class="settings-empty">No matching settings.</p>'}</div>`;
+    const policy=this.languagePolicy(),locale            = localeOf(policy.locale);
+    const body=groups.map(group=>`<section class="settings-center-group" data-settings-group="${esc(group.id)}"><h2 class="settings-center-group-title">${esc(L(SETTINGS_GROUP_LABELS[group.id],locale)||group.label)}</h2><p class="settings-center-group-note">${esc(L(SETTINGS_GROUP_NOTES[group.id],locale)||'')}</p>${group.sections.map(section=>{
+      const open=this.presentation.openSectionId===section.id;
+      const panelId=`settings-panel-${section.id.replace(/[^a-z0-9_-]/gi,'-')}`;
+      const items=(section.items||[]).filter(item=>!(item.kind==='preference'&&LANGUAGE_BLOCK_KEYS.includes(item.key)));
+      const summary=this.valueSummary(section,items,locale);
+      const label=sectionLabel(section.id,section.label,locale),note=sectionNote(section.id,section.description||section.groupLabel||'',locale);
+      return `<section class="prefsection settings-center-section" data-pref-section="${esc(section.id)}" data-settings-section="${esc(section.id)}" data-open="${open}" data-source-owner="${esc(section.sourceOwner)}"><button type="button" class="preftitle prefsection-toggle" data-settings-disclosure="${esc(section.id)}" aria-expanded="${open}" aria-controls="${esc(panelId)}" tabindex="${focused===section.id?'0':'-1'}"><span class="prefsection-icon" aria-hidden="true">•</span><span class="prefsection-copy"><strong>${esc(label)}</strong><small>${esc(note)}</small>${summary?`<em class="prefsection-values" dir="auto">${esc(summary)}</em>`:''}</span><span class="prefsection-chev" aria-hidden="true">›</span></button><div class="prefsection-body" id="${esc(panelId)}" role="region" aria-label="${esc(label)}"${open?'':' hidden'}><ul class="settings-item-list">${items.map(item=>renderItem(item,locale)).join('')||`<li class="settings-empty">${esc(L(SETTINGS_COPY.noItems,locale))}</li>`}</ul></div></section>`;
+    }).join('')}</section>`).join('');
+    const storage=(()=>{try{return this.preferences.storageStatus?.()||null}catch{return null}})();
+    const transferCount=Array.isArray(this.receipts)?this.receipts.filter(r=>r?.kind==='preference-transfer').length:0;
+    const lastTransfer=this.receipts?.filter(r=>r?.kind==='preference-transfer').at(-1)?.code||'NONE';
+    const foot=`<footer class="settings-foot" data-settings-foot data-settings-foot-owner="SettingsCenterOwner"><div class="settings-foot-row"><span>${esc(L(SETTINGS_COPY.footValueOwner,locale))}</span><bdi dir="ltr">ScopedPreferencesOwner</bdi></div><div class="settings-foot-row"><span>${esc(L(SETTINGS_COPY.footPersistence,locale))}</span><bdi dir="ltr">${storage?(storage.durable?'PERSISTED':storage.available?'MEMORY_ONLY':'UNAVAILABLE'):'UNAVAILABLE'}</bdi></div><div class="settings-foot-row"><span>${esc(L(SETTINGS_COPY.footLanguageAuthority,locale))}</span><bdi dir="ltr">${esc(policy.localeSource)}</bdi></div><div class="settings-foot-row"><span>${esc(L(SETTINGS_COPY.footTransfer,locale))}</span><bdi dir="ltr">${transferCount} · ${esc(lastTransfer)}</bdi></div></footer>`;
+    const languageBlock=this.languageBlock(profile,familySections,locale);
+    const inner=`<header class="transient-panel-head settings-head"><div class="settings-head-copy"><strong id="settings-center-title">${esc(L(SETTINGS_COPY.title,locale))}</strong><small>${esc(L(SETTINGS_COPY.subtitle,locale))}</small></div><button type="button" class="btn iconbtn" data-action="close-settings-panel" aria-label="${esc(L(SETTINGS_COPY.close,locale))}">×</button></header>
+<div class="settings-search-row"><label><span class="sr">${esc(L(SETTINGS_COPY.searchPlaceholder,locale))}</span><input type="search" data-settings-search value="${esc(query)}" placeholder="${esc(L(SETTINGS_COPY.searchPlaceholder,locale))}" autocomplete="off"></label>${query?`<span class="settings-search-count" aria-live="polite">${this.search(query,profile,familySections).length} ${esc(L(SETTINGS_COPY.searchCount,locale))}</span>`:''}</div>
+${languageBlock}
+<div class="preferences-scroll" aria-label="Grouped settings" role="region" tabindex="0">${body||`<p class="settings-empty">${esc(L(SETTINGS_COPY.noResults,locale))}</p>`}</div>
+${foot}`;
     if(embedded)return inner;
-    return `<aside class="settings-center" role="dialog" aria-modal="true" aria-labelledby="settings-center-title" data-settings-center-owner="${SETTINGS_CENTER_OWNER}" dir="${direction}">${inner}</aside>`;
+    return `<aside class="settings-center" role="dialog" aria-modal="true" aria-labelledby="settings-center-title" data-settings-center-owner="${SETTINGS_CENTER_OWNER}" data-language-policy-owner="${LANGUAGE_POLICY_OWNER}" dir="${direction}">${inner}</aside>`;
   }
 }

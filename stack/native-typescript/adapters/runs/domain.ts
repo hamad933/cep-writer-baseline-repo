@@ -18,6 +18,31 @@ export class W03RunDomain {
   inspect(){return this.runtime.inspect()}
   sealPreview(){return this.runtime.sealPreview()}
   recorded(){return freeze(this.runtime.recorded())}
-  workspace(){const fixture=this.runtime.sourceFixture,inspection=this.runtime.inspect();return freeze({identity:{runId:this.runtime.runId,title:fixture.title,titleAr:fixture.titleAr,runType:fixture.runType,phase:fixture.phase,role:fixture.role,task:fixture.task,health:fixture.health,provenance:fixture.provenance},run:structuredClone(this.runtime.run),manifest:structuredClone(this.runtime.manifest),preflight:this.runtime.preflight(),provider:this.runtime.descriptor(),alerts:structuredClone(fixture.alerts||[]),events:inspection.observedOrder,gaps:inspection.gaps,tasks:structuredClone(fixture.tasks||[]),devices:structuredClone(this.runtime.devices),snapshots:structuredClone(fixture.snapshots||[]),logs:structuredClone(fixture.logs||[]),terminalPresentationOwner:'OperationalSessionOwner + OperationalTerminalHost',recordedHistoryOwner:'TimelineReplayOwner binding required; recorded playback is inert'})}
+  /**
+   * Run operations projection for the surface. Everything returned here is derived from the
+   * v3.4 fixture / live adapter state — nothing is invented, no success is fabricated.
+   * Added fields: parsed mode policy, source tabs, honest counts, observation log,
+   * captured artifacts, lifecycle receipts and per-device session presence.
+   */
+  workspace(){const fixture=this.runtime.sourceFixture,inspection=this.runtime.inspect(),
+    alerts=structuredClone(fixture.alerts||[]),events=inspection.observedOrder,logs=structuredClone(fixture.logs||[]),
+    snapshots=structuredClone(fixture.snapshots||[]),tasks=structuredClone(fixture.tasks||[]),
+    devices=structuredClone(this.runtime.devices),
+    modeParts=String(fixture.mode||'').split('/').map(part=>part.trim()).filter(Boolean),
+    sourceMap=new Map();
+  for(const alert of alerts){const key=alert.source||'Unknown';const cell=sourceMap.get(key)||{id:key,label:key,alerts:0,events:0};cell.alerts++;sourceMap.set(key,cell)}
+  for(const event of events){const key=event.source||'Unknown';const cell=sourceMap.get(key)||{id:key,label:key,alerts:0,events:0};cell.events++;sourceMap.set(key,cell)}
+  const sources=[...sourceMap.values()].sort((a,b)=>(b.alerts+b.events)-(a.alerts+a.events)||(a.id<b.id?-1:1));
+  const activeTasks=tasks.filter(task=>task.status==='ACTIVE');
+  return freeze({identity:{runId:this.runtime.runId,title:fixture.title,titleAr:fixture.titleAr,runType:fixture.runType,phase:fixture.phase,role:fixture.role,task:fixture.task,health:fixture.health,provenance:fixture.provenance,enterprise:fixture.enterprise,definitionId:fixture.definitionId,definitionRevision:fixture.definitionRevision,baselineId:fixture.baselineId,twinRevision:fixture.twinRevision},
+    mode:{raw:fixture.mode,parts:modeParts,guidance:modeParts[0]||'—',participation:modeParts[1]||'—',rolePolicy:modeParts[2]||'—'},
+    run:structuredClone(this.runtime.run),manifest:structuredClone(this.runtime.manifest),preflight:this.runtime.preflight(),provider:this.runtime.descriptor(),
+    alerts,events,gaps:inspection.gaps,tasks,devices,observations:logs,artifacts:snapshots,snapshots,logs,
+    sources,counts:{alerts:alerts.length,events:events.length,tasks:tasks.length,devices:devices.length,observations:logs.length,artifacts:snapshots.length,done:tasks.filter(task=>task.status==='DONE').length,active:activeTasks.length},
+    activeTask:activeTasks[0]||tasks.find(task=>task.status!=='DONE')||null,
+    lifecycleReceipts:structuredClone(this.runtime.lifecycleReceipts||[]),
+    terminalPresentationOwner:'OperationalSessionOwner + OperationalTerminalHost',
+    openSessions:deviceIds=>{const open=[];for(const [deviceId,presentationId] of this.presentationByDevice){if(!deviceIds||deviceIds.includes(deviceId))open.push({deviceId,presentationId,attached:this.sessionOwner.tab(presentationId)!=null})}return freeze(open)},
+    recordedHistoryOwner:'TimelineReplayOwner binding required; recorded playback is inert'})}
   truth(){const descriptor=this.runtime.descriptor(),platform=this.sessionOwner.platformWindowBridge?.descriptor?.()||this.sessionOwner.platformWindowBridge?.snapshot?.()||null;return freeze({owner:this.owner,canonicalStateOwner:'W03RunDomain + InternalSimulationAdapter',provider:descriptor.id,runtimeTruth:descriptor.runtimeTruth,providerConnected:descriptor.connected,providerEpoch:this.runtime.epoch,pty:descriptor.pty,powershell:descriptor.powershell,ssh:descriptor.ssh,nativeWindow:platform?.availability==='AVAILABLE'||platform?.available===true,osAlwaysOnTop:platform?.topmostAvailable===true||false,platformWindow:platform,persistence:descriptor.persistence,operationalSessionOwner:this.sessionOwner.owner,realTerminalProof:'UNVERIFIED_PLATFORM_GATE',surfaceInteraction:'WORKSPACE_FIRST',manifestImmutability:'OBJECT_SCOPED_NOT_SURFACE_READ_ONLY'})}
 }

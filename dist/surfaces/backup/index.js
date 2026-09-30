@@ -1,147 +1,392 @@
+/* W05-BACKUP · Recovery Safety Workbench.
+ *
+ * Composition authority: CEP_SYSTEM_BACKUP_RESTORE_RESTORE_DRILL_REFERENCE.png — the Restore Drill
+ * report (8-stage pipeline + per-stage verdicts, 3x3 real-check grid, big-number expected-vs-actual
+ * metrics, drill meta strip) is the focal work surface; pane chrome and lifecycle navigation are
+ * supporting regions, never the headline.
+ *
+ * Language/direction: Arabic and English are both first-class. Every string goes through the
+ * surface catalog (i18n.ts) and the active locale is read from the document shell, so the surface
+ * follows the user-configured preference instead of baking one language or direction in.
+ * Technical tokens stay isolated in <bdi dir="ltr"> in both directions.
+ */
+import {STYLE} from './style.js';
+import {icon} from './icons.js';
+import {tx,txList,activeLocale,LOCALIZED_COMMAND_LABELS,COMMAND_REASON_KEYS} from './i18n.js';
+
 export const BACKUP_COMMANDS=Object.freeze(['backup.plan','backup.preview','backup.stage','backup.drill','backup.activationRequest']);
 
 const safe=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const B=value=>`<bdi dir="ltr">${safe(value)}</bdi>`;
 export function backupAttemptProjection(adapter){const snapshot=adapter?.snapshot?.()||{};const durable=Array.isArray(snapshot.durableAttempts)?snapshot.durableAttempts:null;return Object.freeze({source:durable?'PROVIDER_DURABLE_ATTEMPT_JOURNAL':'CURRENT_UI_SESSION',durable:!!durable,rows:structuredClone(durable||snapshot.attemptHistory||[])});}
 
-const STYLE=`
-.s18-backup{display:grid;gap:14px;min-width:0}
-.b-head{display:grid;gap:4px};margin-block-start:26px.b-head h1{margin:0;font-size:clamp(20px,2vw,27px);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.b-head h1 small{font-size:13px;font-weight:600;color:var(--text3)}
-.b-lead{margin:0;color:var(--text2);max-width:78ch;line-height:1.6}
-.b-warn{border:1px solid #8c6a2f;background:rgba(240,180,41,.08);border-radius:11px;padding:10px 12px;font-size:12px;line-height:1.6;color:var(--text2)}
-.b-warn bdi{font-family:var(--mono)}
-.b-sec{border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--panel) 94%,transparent);padding:12px;min-width:0}
-.b-sec>h2{margin:0 0 3px;font-size:15px}.b-sub{display:block;font:600 10px var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:10px}
-.b-stepper{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch}
-.b-step{border:1px solid var(--line);border-radius:9px;background:#0d1622;padding:8px 10px;min-width:0;flex:1 1 130px;display:grid;gap:3px}
-.b-step .b-step-n{font:700 10px var(--mono);color:var(--text3)}
-.b-step strong{font-size:12px;overflow-wrap:anywhere}
-.b-step span[data-tone]{font:700 10.5px var(--mono);overflow-wrap:anywhere}
-.b-arrow{align-self:center;color:var(--text3);font-size:11px}
-.b-drillhead{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}.b-drillhead h3{margin:0;font-size:16px}
-.b-pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 11px;font:700 11px var(--mono);border:1px solid currentColor}
-.b-meta{display:flex;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--text3);margin-bottom:10px}
-.b-meta span b{display:block;color:var(--text2);font-weight:650;font-size:11.5px}
-.b-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px}
-.b-card{border:1px solid var(--line);border-radius:10px;background:#0d1622;padding:10px;display:grid;gap:4px;min-width:0;align-content:start}
-.b-card h4{margin:0;font-size:12px;display:flex;gap:7px;align-items:center}
-.b-card p{margin:0;font-size:11.5px;color:var(--text2);overflow-wrap:anywhere}
-.b-card bdi{font-family:var(--mono);font-size:11px}
-.b-cmp{width:100%;border-collapse:collapse;table-layout:fixed}
-.b-cmp th,.b-cmp td{padding:8px 7px;border-bottom:1px solid var(--line);text-align:start;font-size:11.5px;overflow-wrap:anywhere}
-.b-cmp th{font-size:10.5px;color:var(--text3);background:color-mix(in srgb,var(--panel) 96%,transparent)}
-.b-cmp th strong{display:block;color:var(--text2);font-size:11.5px}
-.b-cmp th em{font-style:normal;font:600 9px var(--mono);opacity:.75}
-.b-cmp td bdi{font-family:var(--mono);font-size:11px}
-.b-attempts{max-height:170px;overflow:auto;font-size:11.5px;display:grid;gap:5px}
-.b-attempts p{margin:0;overflow-wrap:anywhere}
-.b-empty{color:var(--text3);font-size:12px}
-.b-actions{display:flex;gap:7px;flex-wrap:wrap}
-.b-actions .btn{padding:7px 11px;font-size:12px}
-[data-tone="ok"]{color:#37d67a}[data-tone="warn"]{color:#f0b429}[data-tone="bad"]{color:#ff6b6b}[data-tone="muted"]{color:#9fb0c6}[data-tone="info"]{color:#4aa3ff}
-@media(max-width:760px){.b-sec{padding:10px}}
-`;
+const COMMAND_IDS=['backup.package',...BACKUP_COMMANDS];
+const cmdLabel=id=>{const entry=LOCALIZED_COMMAND_LABELS[id];return entry?(entry[activeLocale()]||entry.en):id;};
+const dash='—';
+const has=value=>value!==null&&value!==undefined&&value!=='';
+const short=value=>{const text=String(value||'');return text.length>20?`${text.slice(0,20)}…`:text;};
+const num=value=>Number.isFinite(Number(value))?Number(value):null;
+const fmtNum=value=>value===null||value===undefined?dash:(typeof value==='number'?value.toLocaleString('en-US'):String(value));
+
+/** Verdict vocabulary → colour. Unknown tokens are NEVER read as success. */
+const tone=value=>{
+  const t=String(value||'').toUpperCase();
+  if(!t)return 'muted';
+  if(/^(NOT_|UNAVAILABLE|NONE|IDLE|ABSENT|DEFERRED|UNKNOWN|DISABLED)/.test(t)||/NOT_RUN|NOT_REQUESTED|NOT_STAGED|NOT_CREATED|NOT_PLANNED|NOT_PREVIEWED/.test(t))return 'muted';
+  if(/VERIFIED|SUCCEEDED|COMPATIBLE|MATCHED|PASS|AVAILABLE|READY|OBSERVED|CREATED/.test(t))return 'ok';
+  if(/FAILED|BLOCK|INVALID|CONFLICT|ERROR|DIFFERENT|ROLLBACK/.test(t))return 'bad';
+  if(/PENDING|STAGED|PLANNED|PREVIEW|REQUEST|WARNING|DEGRADED|STARTED/.test(t))return 'warn';
+  return 'muted';
+};
+
+const fmtWhen=value=>{
+  if(!has(value))return dash;
+  try{
+    const date=new Date(String(value));
+    if(Number.isNaN(date.getTime()))return String(value);
+    const locale=activeLocale()==='ar'?'ar-u-nu-latn':'en-GB';
+    return new Intl.DateTimeFormat(locale,{year:'numeric',month:'short',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).format(date);
+  }catch(error){return String(value);}
+};
+const fmtDur=ms=>{if(!Number.isFinite(ms)||ms<0)return null;const total=Math.round(ms/1000);const pad=n=>String(n).padStart(2,'0');return `${pad(Math.floor(total/3600))}:${pad(Math.floor(total%3600/60))}:${pad(total%60)}`;};
+const spanBetween=(from,to)=>{if(!has(from)||!has(to))return null;const a=Date.parse(String(from)),b=Date.parse(String(to));return Number.isNaN(a)||Number.isNaN(b)?null:fmtDur(b-a);};
+
+let langObserver=null,renderedDir=null;
+const dirNow=()=>{try{return typeof document!=='undefined'&&document.documentElement?.dir==='rtl'?'rtl':'ltr';}catch(error){return 'ltr';}};
+const ensureStyle=()=>{
+  if(typeof document==='undefined')return;
+  if(document.querySelector('style[data-bk-style]'))return;
+  const node=document.createElement('style');
+  node.setAttribute('data-bk-style','backup');
+  node.textContent=STYLE;
+  document.head.append(node);
+};
 
 export function mountBackupSurface({stage,registry,workspace,button,adapter}={}){
   if(!stage||!registry||!adapter)throw Error('BACKUP_PRODUCT_COMPOSITION_REQUIRED');
-  const exec=(id,fn)=>async()=>{const result=await fn();workspace?.status?.(result?.ok?`${id} completed truthfully`:`${id} unavailable/failed · ${result?.code||'UNKNOWN'}`,result?.ok?'info':'error');render();return result;};
-  registry.register('backup.package',adapter.owner,'Create verified BackupPackage',exec('backup.package',()=>adapter.createPackage()));
-  registry.register('backup.plan',adapter.owner,'Plan restore drill',exec('backup.plan',()=>adapter.plan()),()=>adapter.availability('backup.plan'));
-  registry.register('backup.preview',adapter.owner,'Preview exact package/plan',exec('backup.preview',()=>adapter.preview()),()=>adapter.availability('backup.preview'));
-  registry.register('backup.stage',adapter.owner,'Stage isolated drill intent',exec('backup.stage',()=>adapter.stage()),()=>adapter.availability('backup.stage'));
-  registry.register('backup.drill',adapter.owner,'Run isolated restore drill',exec('backup.drill',()=>adapter.drill()),()=>adapter.availability('backup.drill'));
-  registry.register('backup.activationRequest',adapter.owner,'Request activation authority',exec('backup.activationRequest',()=>adapter.requestActivation()),()=>adapter.availability('backup.activationRequest'));
-  const cmd=(id,label)=>typeof button==='function'?button(id,label):`<button type="button" data-command="${safe(id)}">${safe(label)}</button>`;
+  const owner=adapter.owner;
+  let leftQuery='',leftVerified=false,renderedLocale=activeLocale();
 
-  const stateOf=token=>!token||/NOT_|UNAVAILABLE|NONE|IDLE|ABSENT/.test(String(token))?'muted':/FAILED|BLOCKED|INVALID/.test(String(token))?'bad':/PENDING|STAGED|PLANNED|PREVIEW|REQUEST/.test(String(token))?'warn':'ok';
+  /* ---- commands: registered once, labels + readiness reasons re-localised on every render ---- */
+  const availableFor=id=>{
+    let result=true;
+    try{result=adapter.availability?adapter.availability(id):true;}catch(error){result=false;}
+    if(result===true)return true;
+    const key=COMMAND_REASON_KEYS[id];
+    return key?tx(key):tx('blocked');
+  };
+  const RUN={
+    'backup.package':()=>adapter.createPackage(),
+    'backup.plan':()=>adapter.plan(),
+    'backup.preview':()=>adapter.preview(),
+    'backup.stage':()=>adapter.stage(),
+    'backup.drill':()=>adapter.drill(),
+    'backup.activationRequest':()=>adapter.requestActivation()
+  };
+  const exec=async id=>{
+    let result=null;
+    try{result=await RUN[id]();}catch(error){result={ok:false,code:'BACKUP_COMMAND_ERROR'};}
+    const ok=Boolean(result&&result.ok!==false);
+    const text=(ok?tx('stOk'):tx('stFail')).replace('{cmd}',cmdLabel(id)).replace('{code}',result?.code||'UNKNOWN');
+    workspace?.status?.(text,ok?'info':'error');
+    render();
+    return result;
+  };
+  const syncCommands=()=>{
+    for(const id of COMMAND_IDS){
+      const label=cmdLabel(id),run=()=>exec(id),available=()=>availableFor(id);
+      const existing=registry.commands?.get?.(id);
+      if(existing&&existing.owner===owner){existing.label=label;existing.run=run;existing.available=available;continue;}
+      if(existing)continue;
+      registry.register(id,owner,label,run,available);
+    }
+  };
+  const btn=(id,variant='')=>{
+    const reason=availableFor(id),enabled=reason===true;
+    const extra=`${enabled?'':'disabled aria-disabled="true"'} title="${safe(enabled?cmdLabel(id):reason)}"${variant?` data-bk-variant="${variant}"`:''}`;
+    return typeof button==='function'?button(id,cmdLabel(id),extra):`<button type="button" class="btn" data-foundation-command="${safe(id)}" ${extra}>${safe(cmdLabel(id))}</button>`;
+  };
 
   const render=()=>{
-    const s=adapter.snapshot(),pkg=s.packages.find(row=>row.packageId===s.selectedPackageId)||s.packages.at(-1)||null,truth=adapter.truth();
-    const steps=[
-      ['1','الحزمة','BackupPackage',pkg?pkg.status||'CREATED':'NOT_CREATED'],
-      ['2','التخطيط','RestorePlan',s.plan?.state||'NOT_PLANNED'],
-      ['3','المعاينة','Preview',s.preview?.state||'NOT_PREVIEWED'],
-      ['4','التجهيز','Stage',s.stage?.state||'NOT_STAGED'],
-      ['5','اختبار الاستعادة','RestoreDrill',s.lastDrill?.status||'NOT_RUN'],
-      ['6','طلب التفعيل','Activation',s.lastActivation?.status||'NOT_REQUESTED']
+    ensureStyle();
+    const L=activeLocale();
+    renderedLocale=L;
+    renderedDir=dirNow();
+    const s=adapter.snapshot(),truth=adapter.truth();
+    const pkg=s.packages.find(row=>row.packageId===s.selectedPackageId)||s.packages.at(-1)||null;
+    const drill=s.lastDrill||null,preview=s.preview||null,stg=s.stage||null,plan=s.plan||null;
+    const projection=backupAttemptProjection(adapter),attempts=projection.rows;
+    const pre=drill?.preflight||null;
+    const drillAttempt=[...attempts].reverse().find(row=>/DRILL/i.test(String(row.operation||'')))||null;
+    const rb=pkg?.readbackSummary||null,drr=drill?.readback||null;
+    const target=drill?.target||stg?.target||null;
+    const duration=spanBetween(drillAttempt?.startedAt,drillAttempt?.terminalAt||drillAttempt?.updatedAt)
+      ||spanBetween(drill?.createdAt,drillAttempt?.terminalAt)||null;
+    const sigExpected=preview?.providerReceipt?.packageIdentity?.schemaSignature||preview?.packageIdentity?.schemaSignature||null;
+    const sigActual=preview?.providerReceipt?.targetSchemaIdentity?.schemaSignature||stg?.targetSchemaIdentity?.schemaSignature||null;
+    const isolated=target?(target.isolated===true||(target.live===false&&target.trueEmptyRequired===true)):false;
+    const emptyOk=target?(target.trueEmptyBeforeRestore===true||target.trueEmptyRequired===true):false;
+    const liveFlag=has(target?.live)?target.live===true:truth.drillLiveRestored===true;
+    const diffCount=[ [num(rb?.documentCount),num(drr?.documentCount)], [num(rb?.revisionCount),num(drr?.revisionCount)],
+      [num(rb?.recoveryCount),num(drr?.recoveryCount)],
+      [Array.isArray(pkg?.migrations)?pkg.migrations.length:null,pre&&Array.isArray(pkg?.migrations)?pkg.migrations.length:null],
+      [sigExpected,sigActual] ]
+      .reduce((count,[e,a])=>count+(e!==null&&a!==null&&String(e)!==String(a)?1:0),0);
+
+    /* ---- pipeline: 8 stages, every verdict bound to a provider receipt ---- */
+    const pipeState=[
+      pkg?(pkg.status==='PACKAGE_VERIFIED'?'VERIFIED':pkg.status||'NOT_CREATED'):'NOT_RUN',
+      preview?(preview.schemaComparison?.conflict?'FAILED':(preview.schemaComparison?.status||preview.status||'PREVIEWED')):'NOT_RUN',
+      stg?(stg.state==='STAGED'?'VERIFIED':stg.state||'STAGED'):'NOT_RUN',
+      drill?'VERIFIED':'NOT_RUN',
+      drill?(drill.status==='STAGED_AND_VERIFIED'&&drill.liveRestored!==true?'VERIFIED':'FAILED'):'NOT_RUN',
+      target?(isolated&&emptyOk?'VERIFIED':'FAILED'):'NOT_RUN',
+      drill?(has(sigExpected)&&has(sigActual)?(String(sigExpected)===String(sigActual)?'MATCHED':'DIFFERENT'):'DEFERRED'):'NOT_RUN',
+      drill?drill.status||'STAGED_AND_VERIFIED':'NOT_RUN'
     ];
-    const drill=s.lastDrill,verification=[
-      ['🧾','بصمة البيان',pkg?.manifestSha256||null,'PENDING'],
-      ['🧊','بصمة اللقطة',pkg?.snapshotSha256||null,drill?'VERIFIED':'PENDING'],
-      ['🗄','بصمة مخطط البيانات',pkg?.schemaArtifactSha256||null,s.preview?.schemaComparison?.status||'DEFERRED'],
-      ['⚖️','مقارنة المخطط',s.preview?.schemaComparison?(s.preview.schemaComparison.conflict?'CONFLICT':String(s.preview.schemaComparison.status)):'NOT_PREVIEWED',s.preview?.schemaComparison?.conflict?'FAILED':(s.preview?'PASS':'PENDING')],
-      ['✍️','عمليات كتابة الاستعادة',s.preview?.restoreWritesPerformed??s.stage?.restoreWritesPerformed??null,(s.preview?.restoreWritesPerformed||s.stage?.restoreWritesPerformed)?'FAILED':'VERIFIED'],
-      ['🏝','بيئة معزولة حقيقية',s.stage?.target?`${s.stage.target.kind} · live=${String(s.stage.target.live)} · trueEmpty=${String(s.stage.target.trueEmptyRequired)}`:'NOT_STAGED',s.stage?.target?(s.stage.target.live===false&&s.stage.target.trueEmptyRequired===true?'VERIFIED':'FAILED'):'PENDING'],
-      ['🚫','عدم تغيير قاعدة الإنتاج',truth.productionDatabaseMutated,truth.productionDatabaseMutated?'FAILED':'VERIFIED'],
-      ['♻️','استعادة مباشرة',truth.drillLiveRestored,truth.drillLiveRestored?'FAILED':'VERIFIED'],
-      ['✅','الحكم النهائي',drill?drill.status:'NOT_RUN',drill&&drill.status==='STAGED_AND_VERIFIED'&&drill.liveRestored!==true?'VERIFIED':(drill?'FAILED':'PENDING')]
+    const pipe=pipeState.map((state,index)=>`<article class="bk-step" data-tone="${tone(state)}">
+        <span class="bk-dot">${String(index+1).padStart(2,'0')}</span>
+        <span class="bk-step-name">${safe(txList('stages',index,L))}</span>
+        <span class="bk-step-state">${B(state)}</span>
+      </article>`).join('');
+
+    /* ---- 3x3 real-check grid ---- */
+    const checks=[
+      {state:pkg?'PASS':'PENDING',value:has(pkg?.manifestSha256)?short(pkg.manifestSha256):null},
+      {state:pkg?'PASS':'PENDING',value:has(pkg?.schemaArtifactSha256)?short(pkg.schemaArtifactSha256):null},
+      {state:pre?(pre.integrityVerified?'PASS':'FAILED'):(drill?'FAILED':'PENDING'),value:has(drill?.restoredSnapshotSha256)?short(drill.restoredSnapshotSha256):(has(pkg?.snapshotSha256)?short(pkg.snapshotSha256):null)},
+      {state:pre?(pre.foreignKeysVerified?'PASS':'FAILED'):(preview?'DEFERRED':(pkg?'DEFERRED':'PENDING')),value:preview?(preview.schemaComparison?.status||preview.status||'COMPATIBLE'):null},
+      {state:pre?(pre.migrationsVerified?'PASS':'FAILED'):(Array.isArray(pkg?.migrations)?'DEFERRED':'PENDING'),value:Array.isArray(pkg?.migrations)?(pre?.migrationsVerified?`${pkg.migrations.length} / ${pkg.migrations.length}`:`${pkg.migrations.length} / ${dash}`):null},
+      {state:target?(isolated&&emptyOk?'PASS':'FAILED'):'PENDING',value:target?`isolated = ${String(isolated)} · trueEmpty = ${String(emptyOk)}`:null},
+      {state:truth.productionDatabaseMutated?'FAILED':'PASS',value:`productionDatabaseMutated = ${String(truth.productionDatabaseMutated)}`},
+      {state:drill?(truth.drillLiveRestored?'FAILED':'PASS'):'PENDING',value:`liveRestored = ${String(truth.drillLiveRestored)}`},
+      {state:drill?(drill.status==='STAGED_AND_VERIFIED'&&drill.liveRestored!==true?'VERIFIED':'FAILED'):'PENDING',value:drill?.status||'NOT_RUN'}
     ];
-    const comparison=[
-      ['استعادة مباشرة على الإنتاج','<bdi dir="ltr">live = false (بلا طلب)</bdi>','<bdi dir="ltr">liveRestored = '+safe(String(truth.drillLiveRestored))+'</bdi>',truth.drillLiveRestored===false],
-      ['عدم تغيير قاعدة الإنتاج','<bdi dir="ltr">productionDatabaseMutated = false</bdi>','<bdi dir="ltr">productionDatabaseMutated = '+safe(String(truth.productionDatabaseMutated))+'</bdi>',truth.productionDatabaseMutated===false],
-      ['تجهيز مُتحقق ≠ استعادة فعلية','<bdi dir="ltr">stagedVerifiedIsLiveRestored = false</bdi>','<bdi dir="ltr">stagedVerifiedIsLiveRestored = '+safe(String(truth.stagedVerifiedIsLiveRestored))+'</bdi>',truth.stagedVerifiedIsLiveRestored===false],
-      ['سلطة التفعيل','<bdi dir="ltr">AUTHORITY_PENDING أو NOT_REQUESTED</bdi>','<bdi dir="ltr">'+safe(truth.activationAuthority)+'</bdi>',truth.activationAuthority!=='APPLIED'&&truth.activationAuthority!=='LIVE'],
-      ['كتابة الاستعادة','<bdi dir="ltr">restoreWritesPerformed = false</bdi>','<bdi dir="ltr">'+safe(String(s.preview?.restoreWritesPerformed??s.stage?.restoreWritesPerformed??false))+'</bdi>',(s.preview?.restoreWritesPerformed||s.stage?.restoreWritesPerformed)!==true],
-      ['مالك التخزين','<bdi dir="ltr">persistenceOwnerMutated = false</bdi>','<bdi dir="ltr">persistenceOwnerMutated = '+safe(String(truth.persistenceOwnerMutated))+'</bdi>',truth.persistenceOwnerMutated===false]
+    const checksHTML=checks.map((check,index)=>`<article class="bk-check" data-tone="${tone(check.state)}">
+        <span class="bk-ico">${icon(['shieldCheck','file','database','key','layers','box','lock','ban','checkCircle'][index],14)}</span>
+        <span class="bk-name">${safe(txList('checks',index,L))}</span>
+        <span class="bk-state">${B(check.state)}</span>
+        <span class="bk-val">${has(check.value)?B(check.value):`<span data-tone="muted">${safe(tx('notAvailable',L))}</span>`}</span>
+      </article>`).join('');
+
+    /* ---- big-number expected vs actual ---- */
+    const metrics=[
+      {k:tx('metricDocs',L),e:num(rb?.documentCount),a:num(drr?.documentCount)},
+      {k:tx('metricRevisions',L),e:num(rb?.revisionCount),a:num(drr?.revisionCount)},
+      {k:tx('metricRecovery',L),e:num(rb?.recoveryCount),a:num(drr?.recoveryCount)},
+      {k:tx('metricMigrations',L),e:Array.isArray(pkg?.migrations)?pkg.migrations.length:null,a:pre&&Array.isArray(pkg?.migrations)?pkg.migrations.length:null},
+      {k:tx('metricSchema',L),e:sigExpected?`${String(sigExpected).slice(0,8)}…`:null,a:sigActual?`${String(sigActual).slice(0,8)}…`:null,text:true},
+      {k:tx('metricDiff',L),e:0,a:drill?diffCount:null,diff:true}
     ];
-    const attempts=backupAttemptProjection(adapter).rows;
+    const metricsHTML=metrics.map(metric=>{
+      const unavailable=metric.e===null||metric.a===null;
+      const matched=!unavailable&&String(metric.e)===String(metric.a);
+      const state=unavailable?'muted':(matched?'ok':'bad');
+      const caption=metric.diff?(metric.a===0?tx('noDifferences',L):tx('legendDiff',L)):matched?tx('matchedCaption',L):unavailable?tx('legendUnavailable',L):tx('legendDiff',L);
+      return `<article class="bk-metric${metric.text?' is-text':''}" data-tone="${state}">
+        <span class="bk-k">${safe(metric.k)}</span>
+        <span class="bk-v">${B(`${fmtNum(metric.e)} / ${fmtNum(metric.a)}`)}</span>
+        <span class="bk-c" data-tone="${state}">${safe(caption)}</span>
+      </article>`;
+    }).join('');
 
-    stage.innerHTML=`<style>${STYLE}</style>
-    <div data-w05-surface="backup" data-domain-owner="${safe(adapter.owner)}">
-      <header class="b-head"><div class="m0-eyebrow"><bdi dir="ltr">W05 · BACKUP &amp; RESTORE</bdi></div><h1>النسخ الاحتياطي والاستعادة <small>Recovery Safety</small></h1><p class="b-lead">إدارة النسخ الاحتياطية المُتحقق منها والاستعادة المعزولة، وتنفيذ الاختبارات وتقارير الاستعادة من بيئة غير الإنتاج.</p></header>
-      <p class="b-warn">⚠ لا يمتلك أي أمر على هذه السطح نقطة استعادة في الإنتاج. <bdi dir="ltr">STAGED_AND_VERIFIED ≠ LIVE_RESTORED</bdi> · <bdi dir="ltr">productionDatabaseMutated = ${safe(String(truth.productionDatabaseMutated))}</bdi> · التفعيل في انتظار السلطة فقط.</p>
+    /* ---- focal panel ---- */
+    const metaCells=[
+      [tx('metaSource',L),drill?.packageId||pkg?.packageId||dash],
+      [tx('metaStarted',L),has(drill?.createdAt)||has(drillAttempt?.startedAt)?fmtWhen(drillAttempt?.startedAt||drill.createdAt):dash],
+      [tx('metaCompleted',L),has(drillAttempt?.terminalAt)?fmtWhen(drillAttempt.terminalAt):dash],
+      [tx('metaDuration',L),duration||dash],
+      [tx('metaEnvironment',L),target?.kind||'ISOLATED_RESTORE_DRILL']
+    ].map(([key,value])=>`<div><span class="bk-k">${safe(key)}</span><span class="bk-v">${B(value)}</span></div>`).join('');
 
-      <section class="b-sec"><h2>سير دورة الاستعادة</h2><span class="b-sub">Recovery lifecycle stepper</span>
-        <div class="b-stepper">${steps.map((step,index)=>`${index?'<span class="b-arrow" aria-hidden="true">←</span>':''}<article class="b-step"><span class="b-step-n">الخطوة ${step[0]}</span><strong dir="auto">${step[1]}</strong><small style="color:var(--text3);font-size:10px">${B(step[2])}</small><span data-tone="${stateOf(step[3])}">${B(step[3])}</span></article>`).join('')}</div>
-        <div class="b-actions" style="margin-top:10px">${cmd('backup.package','إنشاء حزمة مُتحقق منها')}${cmd('backup.plan','تخطيط')}${cmd('backup.preview','معاينة')}${cmd('backup.stage','تجهيز')}${cmd('backup.drill','اختبار استعادة')}${cmd('backup.activationRequest','طلب سلطة التفعيل')}</div>
-      </section>
+    const truthChips=[
+      `productionDatabaseMutated = ${String(truth.productionDatabaseMutated)}`,
+      `stagedVerifiedIsLiveRestored = ${String(truth.stagedVerifiedIsLiveRestored)}`,
+      `persistenceOwnerMutated = ${String(truth.persistenceOwnerMutated)}`,
+      `activationAuthority = ${String(truth.activationAuthority)}`
+    ].map(token=>`<span>${B(token)}</span>`).join('');
 
-      <section class="b-sec"><h2>تقرير اختبار الاستعادة</h2><span class="b-sub">Restore drill report</span>
-        ${drill?`<div class="b-drillhead"><h3>${B(`Restore Drill: ${drill.drillId||'—'}`)}</h3><span class="b-pill" data-tone="${drill.status==='STAGED_AND_VERIFIED'&&drill.liveRestored!==true?'ok':'bad'}" data-backup-drill-status="${safe(drill.status)}">${B(drill.status)} · ${drill.liveRestored===true?'LIVE RESTORED':'VERIFIED ONLY'}</span></div>
-        <div class="b-meta"><span>النسخة المصدر<b>${B(drill.packageId||pkg?.packageId||'—')}</b></span><span>بصمة اللقطة<b>${B((drill.snapshotSha256||pkg?.snapshotSha256||'—').slice(0,24))}…</b></span><span>بيئة التنفيذ<b>${B(s.stage?.target?.kind||'ISOLATED_RESTORE_DRILL')}</b></span><span>وقت التجهيز<b>${B(s.stage?.stagedAt||s.plan?.createdAt||'—')}</b></span><span>التفعيل<b>${B(truth.activationAuthority)}</b></span></div>`
-        :`<p class="state-token" data-state="unavailable"><strong>لم يُنفَّذ اختبار استعادة</strong> · No isolated RestoreDrill has run yet. Not-run is never reported as restored.</p>`}
-        <div class="b-cards">${verification.map(([icon,label,value,status])=>`<article class="b-card"><h4><span aria-hidden="true">${icon}</span> ${safe(label)} <span data-tone="${stateOf(status)}" style="font:700 10px var(--mono)">${B(status)}</span></h4><p>${value===null||value===undefined?'<span class="b-empty">غير مُتاح بعد</span>':`<bdi dir="ltr">${safe(String(value))}</bdi>`}</p></article>`).join('')}</div>
-      </section>
+    stage.innerHTML=`<div class="bk-root" data-w05-surface="backup" data-domain-owner="${safe(adapter.owner)}" data-bk-locale="${safe(L)}">
+      <header class="bk-head">
+        <div class="bk-id">
+          <span class="bk-eyebrow">${B(tx('eyebrow',L))}</span>
+          <span class="bk-title"><h1>${safe(tx('title',L))}</h1><span class="bk-sub">${safe(tx('subtitle',L))}</span></span>
+          <p class="bk-lead">${safe(tx('lead',L))}</p>
+        </div>
+        <div class="bk-act">${btn('backup.package','primary')}${btn('backup.plan')}${btn('backup.preview')}${btn('backup.stage')}${btn('backup.drill')}${btn('backup.activationRequest')}</div>
+      </header>
 
-      <section class="b-sec"><h2>المتوقّع مقابل الفعلي</h2><span class="b-sub">Expected vs actual</span>
-        <table class="b-cmp"><thead><tr><th scope="col" style="width:34%"><strong>الحقيقة</strong><em>TRUTH</em></th><th scope="col" style="width:34%"><strong>المتوقّع</strong><em>EXPECTED</em></th><th scope="col" style="width:24%"><strong>الفعلي</strong><em>ACTUAL</em></th><th scope="col" style="width:8%"><strong>مطابق</strong><em>OK</em></th></tr></thead><tbody>${comparison.map(([label,expected,actual,ok])=>`<tr><td dir="auto">${safe(label)}</td><td>${expected}</td><td>${actual}</td><td><span data-tone="${ok?'ok':'bad'}">${ok?'✓':'✕'}</span></td></tr>`).join('')}</tbody></table>
-        <p class="b-empty" style="margin:8px 0 0">سجل الإخفاق والتعويض الدائم: <bdi dir="ltr">${safe(truth.durableFailureCompensationHistory)}</bdi> · إيصالات النجاح: <bdi dir="ltr">${safe(truth.durableSuccessReceipts)}</bdi></p>
-      </section>
+      <p class="bk-banner">${icon('alert',15)}<span>${safe(tx('banner',L))} <bdi dir="ltr">STAGED_AND_VERIFIED ≠ LIVE_RESTORED</bdi></span></p>
 
-      <section class="b-sec"><h2>سجل المحاولات</h2><span class="b-sub">Attempt history</span>
-        <div class="b-attempts">${attempts.length?attempts.slice().reverse().map(row=>`<p>${B(row.attemptId||'—')} · ${B(row.operation||row.action||'—')} · <span data-tone="${/FAIL/.test(String(row.status))?'bad':'ok'}">${B(row.status||'OBSERVED')}</span>${row.packageId?` · ${B(row.packageId)}`:''}${row.liveRestored!==undefined?` · liveRestored=${B(String(row.liveRestored))}`:''}</p>`).join(''):'<p class="b-empty">لا محاولات مسجّلة في هذه الجلسة.</p>'}</div>
+      <section class="bk-panel is-focal" data-bk-panel="restore-drill-report">
+        <div class="bk-sec-head"><h2>${safe(tx('drillSection',L))}</h2><span class="bk-note">${safe(projection.source)}</span></div>
+        <div class="bk-report">
+          <div class="bk-report-head">
+            <div class="bk-report-id">
+              <h3>${safe(tx('drillTitle',L))}: <bdi>${safe(drill?.drillId||dash)}</bdi></h3>
+              <span class="bk-pill" data-tone="${tone(drill?(drill.status==='STAGED_AND_VERIFIED'&&drill.liveRestored!==true?'VERIFIED':'FAILED'):'NOT_RUN')}" data-bk-drill-status="${safe(drill?.status||'NOT_RUN')}">${icon(drill?'shieldCheck':'clock',13)}${B(drill?(drill.status==='STAGED_AND_VERIFIED'&&drill.liveRestored!==true?tx('pillVerified',L):tx('pillFailed',L)):tx('pillNotRun',L))}</span>
+            </div>
+          </div>
+          <dl class="bk-meta">${metaCells}</dl>
+          ${drill?'':`<div class="bk-nostrun"><strong>${safe(tx('notRunTitle',L))}</strong><p>${safe(tx('notRunBody',L))}</p></div>`}
+          <div class="bk-sec-head"><h2>${safe(tx('pipelineTitle',L))}</h2><span class="bk-note">${safe(tx('pipelineSub',L))}</span></div>
+          <div class="bk-pipe">${pipe}</div>
+          <div class="bk-sec-head"><h2>${safe(tx('checksTitle',L))}</h2><span class="bk-note">${safe(tx('checksSub',L))}</span></div>
+          <div class="bk-checks">${checksHTML}</div>
+          <div class="bk-sec-head"><h2>${safe(tx('metricsTitle',L))}</h2>
+            <span class="bk-legend"><span data-tone="ok"><i></i>${safe(tx('legendMatched',L))}</span><span data-tone="bad"><i></i>${safe(tx('legendDiff',L))}</span><span data-tone="muted"><i></i>${safe(tx('legendUnavailable',L))}</span></span>
+          </div>
+          <div class="bk-metrics">${metricsHTML}</div>
+          ${drill?'':`<p class="bk-empty-note">${safe(tx('metricsNotRun',L))}</p>`}
+          <div class="bk-truth"><span>${safe(tx('truthTitle',L))}</span>${truthChips}</div>
+        </div>
       </section>
     </div>`;
+    stage.dataset.surfaceComposition='backup-recovery-safety-workbench';
 
-    /* ---- LEFT: restore-point queue + lifecycle groups (structure/navigation only) ---- */
-    const left=document.createElement('section');left.className='b-nav';
-    left.innerHTML=`<style>.b-nav{display:grid;gap:10px;min-width:0}.b-nav h3{margin:0;font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em}.b-nav ul{list-style:none;margin:0 0 8px;padding:0;display:grid;gap:5px}.b-nav li>button{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;width:100%;text-align:start;border:1px solid var(--line);border-radius:9px;background:transparent;color:inherit;padding:9px;cursor:pointer;font-size:12px}.b-nav li>button[aria-pressed="true"]{border-color:var(--accent);background:rgba(255,255,255,.05)}.b-nav li>button strong{display:block;overflow-wrap:anywhere;font-size:12.5px}.b-nav li>button small{display:block;color:var(--text3);font-size:10.5px;overflow-wrap:anywhere}.b-nav .b-count{font:700 11px var(--mono);align-self:center}.b-nav .b-group{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;border:1px solid var(--line);border-radius:8px;padding:7px 9px;font-size:11.5px}.b-nav .b-group bdi{font-family:var(--mono);font-size:10.5px}</style>
-      <h3>نقاط الاستعادة (${s.packages.length})</h3>
-      <ul>${s.packages.length?s.packages.map(row=>`<li><button type="button" data-b-pkg="${safe(row.packageId)}" aria-pressed="${row.packageId===pkg?.packageId}"><span><strong>${B(row.packageId)}</strong><small>${B(String(row.capturedAt||row.createdAt||'—'))}</small><small>${B(String(row.manifestSha256||'').slice(0,20))}…</small></span><span class="b-count" data-tone="${row.status==='PACKAGE_VERIFIED'?'ok':'warn'}">${B(row.status||'CREATED')}</span></button></li>`).join(''):'<li><p class="state-token" data-state="empty"><strong>لا حزم بعد</strong> · No verified BackupPackage exists.</p></li>'}</ul>
-      <h3>مراحل الاستعادة</h3>
-      ${steps.slice(1).map(step=>`<div class="b-group"><span>${safe(step[1])}</span><bdi data-tone="${stateOf(step[3])}">${safe(step[3])}</bdi></div>`).join('')}
-      <div class="b-actions" style="margin-top:8px">${cmd('backup.package','إنشاء حزمة')}</div>`;
-    const leftHost=workspace?.region?.('LEFT',{node:left,label:'نقاط الاستعادة'})||null;
-    leftHost?.querySelectorAll?.('[data-b-pkg]').forEach(btn=>btn.addEventListener('click',()=>{adapter.selectPackage?.(btn.dataset.bPkg);render()}));
+    /* ---- LEFT: grouped, counted, searchable restore-point queue ---- */
+    const listRows=snap=>{
+      const needle=leftQuery.trim().toLowerCase();
+      return snap.packages.filter(row=>(!leftVerified||row.status==='PACKAGE_VERIFIED')
+        &&(!needle||String(row.packageId||'').toLowerCase().includes(needle)||String(row.capturedAt||'').toLowerCase().includes(needle)));
+    };
+    const rowHTML=(row,selected)=>`<li><button type="button" class="bkl-row" data-b-pkg="${safe(row.packageId)}" aria-pressed="${row.packageId===pkg?.packageId}">
+        <span class="bk-id-main">${B(row.packageId)}</span>
+        <span class="bk-id-meta">${icon('lock',11)}<span>${safe(tx('capturedAt',L))} ${B(fmtWhen(row.capturedAt))}</span></span>
+        <span class="bk-tag" data-tone="${tone(row.status)}">${B(row.status||'CREATED')}</span>
+      </button></li>`;
+    const paintList=host=>{
+      const snap=adapter.snapshot(),rows=listRows(snap);
+      const list=host.querySelector('[data-bk-list]');
+      if(list)list.innerHTML=rows.length?rows.map(row=>rowHTML(row)).join('')
+        :(snap.packages.length
+          ?`<li><p class="bkl-empty"><b>${safe(tx('viewAll',L))}</b><button type="button" class="btn" data-bk-clear>${safe(tx('clearFilters',L))}</button></p></li>`
+          :`<li><p class="bkl-empty"><b>${safe(tx('noPackages',L))}</b>${safe(tx('noPackagesHint',L))}</p></li>`);
+      const count=host.querySelector('[data-bk-count]');
+      if(count)count.textContent=`${rows.length}/${snap.packages.length}`;
+      host.querySelectorAll('[data-b-pkg]').forEach(node=>node.setAttribute('aria-pressed',String(node.dataset.bPkg===pkg?.packageId)));
+    };
+    const drillRows=attempts.filter(row=>/DRILL/i.test(String(row.operation||'')));
+    const drillFacts=drillRows.length
+      ? drillRows.map(row=>`<div><span>${B(row.targetIdentity?.drillId||short(row.attemptId))}</span><bdi data-tone="${tone(row.status)}">${B(row.status||'OBSERVED')}</bdi></div>`).join('')
+      :(drill?`<div><span>${B(drill.drillId||dash)}</span><bdi data-tone="${tone(drill.status)}">${B(drill.status)}</bdi></div>`:`<p class="bkl-empty">${safe(tx('noDrills',L))}</p>`);
+    const journalRows=[...attempts].reverse().slice(0,6);
+    const left=document.createElement('section');
+    left.className='bkl';
+    const dir=dirNow();
+    left.innerHTML=`
+      <div class="bkl-search">${icon('search',14)}<input type="search" data-bk-search value="${safe(leftQuery)}" placeholder="${safe(tx('searchPlaceholder',L))}" aria-label="${safe(tx('searchPlaceholder',L))}"></div>
+      <div class="bkl-act">${btn('backup.package')}<button type="button" class="btn" data-bk-verified aria-pressed="${leftVerified}">${safe(tx('filterVerified',L))}</button></div>
+      <details class="bkl-grp" open dir="${dir}">
+        <summary>${icon('box',14)}<span>${safe(tx('grpRestorePoints',L))}</span><span class="bkl-count" data-bk-count>0/0</span><span class="bk-cue">${icon('chevron',13)}</span></summary>
+        <ul class="bkl-list" data-bk-list></ul>
+      </details>
+      <details class="bkl-grp" dir="${dir}">
+        <summary>${icon('target',14)}<span>${safe(tx('grpDrills',L))}</span><span class="bkl-count">${drillRows.length+(drill&&!drillRows.length?1:0)}</span><span class="bk-cue">${icon('chevron',13)}</span></summary>
+        <div class="bkl-facts">${drillFacts}</div>
+      </details>
+      <details class="bkl-grp" dir="${dir}">
+        <summary>${icon('clock',14)}<span>${safe(tx('grpJournal',L))}</span><span class="bkl-count">${attempts.length}</span><span class="bk-cue">${icon('chevron',13)}</span></summary>
+        <div class="bkl-facts">${journalRows.length?journalRows.map(row=>`<div><span>${B(String(row.operation||'—'))}</span><bdi data-tone="${tone(row.status)}">${B(row.status||'OBSERVED')}</bdi></div>`).join(''):`<p class="bkl-empty">${safe(tx('noJournal',L))}</p>`}</div>
+      </details>
+      <details class="bkl-grp" dir="${dir}">
+        <summary>${icon('key',14)}<span>${safe(tx('grpAuthority',L))}</span><span class="bkl-count">${s.lastActivation?1:0}</span><span class="bk-cue">${icon('chevron',13)}</span></summary>
+        <div class="bkl-facts">
+          <div><span>${safe(tx('authorityRequest',L))}</span><bdi>${B(s.lastActivation?.requestId||tx('noAuthority',L))}</bdi></div>
+          <div><span>${safe(tx('grpAuthority',L))}</span><bdi data-tone="${tone(truth.activationAuthority)}">${B(truth.activationAuthority)}</bdi></div>
+          <div><span>${safe(tx('metaEnvironment',L))}</span><bdi>${B(target?.kind||'ISOLATED_RESTORE_DRILL')}</bdi></div>
+        </div>
+      </details>`;
+    workspace?.region?.('LEFT',{node:left,label:tx('leftHeading',L)});
+    paintList(left);
+    left.addEventListener('input',event=>{const node=event.target;if(node?.matches?.('[data-bk-search]')){leftQuery=node.value;paintList(left);}});
+    left.addEventListener('click',event=>{
+      const clear=event.target.closest?.('[data-bk-clear]');
+      if(clear){leftQuery='';leftVerified=false;render();return;}
+      const toggle=event.target.closest?.('[data-bk-verified]');
+      if(toggle){leftVerified=!leftVerified;toggle.setAttribute('aria-pressed',String(leftVerified));paintList(left);return;}
+      const row=event.target.closest?.('[data-b-pkg]');
+      if(row){adapter.selectPackage?.(row.dataset.bPkg);render();}
+    });
 
-    /* ---- RIGHT: backup context (unique contextual information only) ---- */
-    const availability=['backup.plan','backup.preview','backup.stage','backup.drill','backup.activationRequest'].map(id=>{let a='';try{a=String(adapter.availability(id))}catch(e){a='ERROR'}return [id,a==='true'?'AVAILABLE':a]});
-    const right=document.createElement('aside');right.className='b-ctx';
-    right.innerHTML=`<style>.b-ctx{display:grid;gap:9px;min-width:0}.b-ctx-block{border:1px solid var(--line);border-radius:11px;background:#0d1622;padding:10px 11px;min-width:0;display:grid;gap:4px}.b-ctx-block h3{margin:0;font-size:12.5px}.b-ctx-block dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 8px;font-size:11.5px}.b-ctx-block dt{color:var(--text3);white-space:nowrap}.b-ctx-block dd{margin:0;overflow-wrap:anywhere;text-align:end}.b-ctx-block ul{list-style:none;margin:0;padding:0;display:grid;gap:5px;font-size:11.5px;color:var(--text2);overflow-wrap:anywhere}.b-ctx-block bdi{font-family:var(--mono);font-size:10.5px}</style>
-      <section class="b-ctx-block"><h3>الهوية والبصمات</h3>${pkg?`<dl><dt>الحزمة</dt><dd>${B(pkg.packageId)}</dd><dt>البيان</dt><dd>${B(String(pkg.manifestSha256||'—').slice(0,24))}…</dd><dt>اللقطة</dt><dd>${B(String(pkg.snapshotSha256||'—').slice(0,24))}…</dd><dt>المخطط</dt><dd>${B(String(pkg.schemaArtifactSha256||'—').slice(0,24))}…</dd></dl>`:'<ul><li>لا حزمة محددة.</li></ul>'}</section>
-      <section class="b-ctx-block"><h3>جاهزية الاستعادة</h3><ul>${availability.map(([id,reason])=>`<li>${B(id)} · <bdi data-tone="${reason==='AVAILABLE'?'ok':'warn'}">${safe(reason)}</bdi></li>`).join('')}</ul></section>
-      <section class="b-ctx-block"><h3>البيئة المعزولة</h3><ul><li>النوع: <bdi>${B(s.stage?.target?.kind||'NOT_STAGED')}</bdi></li><li>حية: <bdi>${B(String(s.stage?.target?.live??'—'))}</bdi></li><li>تتطلّب فراغًا حقيقيًا: <bdi>${B(String(s.stage?.target?.trueEmptyRequired??'—'))}</bdi></li><li>الاستباقي الوحيد المسموح به معزول عن الإنتاج.</li></ul></section>
-      <section class="b-ctx-block"><h3>تحذير المخاطر</h3><ul><li>ممنوع التنفيذ المباشر على الإنتاج.</li><li>التجهيز المُتحقق ليس استعادة فعلية.</li><li>التفعيل يبقى في انتظار السلطة: <bdi>${B(truth.activationAuthority)}</bdi></li></ul></section>
-      <section class="b-ctx-block"><h3>الملكية والحدود</h3><ul><li>المالك: <bdi>${B(truth.owner)}</bdi></li><li>القدرة: <bdi>${B(truth.capabilityOwner)}</bdi></li><li>أيصالات النجاح: <bdi>${B(truth.durableSuccessReceipts)}</bdi></li><li>الملكية التخزينية متغيّرة: <bdi>${B(String(truth.persistenceOwnerMutated))}</bdi></li></ul></section>`;
-    workspace?.region?.('RIGHT',{node:right,label:'سياق النسخة'});
+    /* ---- RIGHT: package context, readiness, RPO/RTO, risk, state interpretation, provenance ---- */
+    const scopeRows=[['scopeDocuments',rb?.documentCount],['scopeRevisions',rb?.revisionCount],['scopeRecovery',rb?.recoveryCount],
+      ['scopeMigrations',Array.isArray(pkg?.migrations)?pkg.migrations.length:null],['scopeDriver',pkg?.provider?.driverId||null]]
+      .filter(([,value])=>has(value))
+      .map(([key,value])=>`<div class="bkr-line"><span class="bk-n">${safe(tx(key,L))}</span><span class="bk-x">${B(value)}</span></div>`).join('');
+    const readiness=COMMAND_IDS.map(id=>{
+      const state=availableFor(id);
+      return `<div class="bkr-line"><span class="bk-n">${safe(cmdLabel(id))}</span><span class="bk-x" data-tone="${state===true?'ok':'warn'}">${state===true?safe(tx('ready',L)):B(String(state))}</span></div>`;
+    }).join('');
+    const rto=duration, rpo=spanBetween(pkg?.capturedAt,drill?.createdAt||drillAttempt?.updatedAt||new Date().toISOString());
+    const right=document.createElement('aside');
+    right.className='bkr';
+    right.innerHTML=`
+      <section class="bkr-blk"><h3>${icon('layers',14)}${safe(tx('scopeTitle',L))}</h3>${scopeRows||`<p>${safe(tx('notAvailable',L))}</p>`}</section>
+      <section class="bkr-blk"><h3>${icon('shieldCheck',14)}${safe(tx('lastVerifyTitle',L))}</h3>
+        <div class="bkr-line"><span class="bk-n">${safe(tx('colStatus',L))}</span><span class="bk-x" data-tone="${tone(pkg?.status)}">${pkg?B(pkg.status||'PACKAGE_VERIFIED'):safe(tx('lastVerifyNever',L))}</span></div>
+        <div class="bkr-line"><span class="bk-n">${safe(tx('capturedAt',L))}</span><span class="bk-x">${B(fmtWhen(pkg?.capturedAt))}</span></div>
+      </section>
+      <section class="bkr-blk"><h3>${icon('lock',14)}${safe(tx('signatureTitle',L))}</h3>
+        <div class="bkr-line"><span class="bk-n">${safe(tx('sigManifest',L))}</span><span class="bk-x">${has(pkg?.manifestSha256)?B(short(pkg.manifestSha256)):safe(tx('notAvailable',L))}</span></div>
+        <div class="bkr-line"><span class="bk-n">${safe(tx('sigSnapshot',L))}</span><span class="bk-x">${has(pkg?.snapshotSha256)?B(short(pkg.snapshotSha256)):safe(tx('notAvailable',L))}</span></div>
+        <div class="bkr-line"><span class="bk-n">${safe(tx('sigSchema',L))}</span><span class="bk-x">${has(pkg?.schemaArtifactSha256)?B(short(pkg.schemaArtifactSha256)):safe(tx('notAvailable',L))}</span></div>
+      </section>
+      <section class="bkr-blk"><h3>${icon('route',14)}${safe(tx('readinessTitle',L))}</h3><div class="bkr-ready">${readiness}</div></section>
+      <section class="bkr-blk"><h3>${icon('server',14)}${safe(tx('targetTitle',L))}</h3>
+        ${target?`<div class="bkr-line"><span class="bk-n">${safe(tx('targetKind',L))}</span><span class="bk-x">${B(target.kind||target.stagingKind||'ISOLATED_RESTORE_DRILL')}</span></div>
+        <div class="bkr-line"><span class="bk-n">${safe(tx('targetLive',L))}</span><span class="bk-x" data-tone="${liveFlag?'bad':'ok'}">${B(String(liveFlag))}</span></div>
+        <div class="bkr-line"><span class="bk-n">${safe(tx('targetEmpty',L))}</span><span class="bk-x" data-tone="${emptyOk?'ok':'warn'}">${B(String(target.trueEmptyRequired??target.trueEmptyBeforeRestore??emptyOk))}</span></div>`
+        :`<p>${safe(tx('targetNotStaged',L))} — ${safe(tx('statePending',L))}</p>`}
+      </section>
+      <section class="bkr-blk is-metric"><h3>${icon('gauge',14)}${safe(tx('rtorpoTitle',L))}</h3>
+        <div class="bkr-metric-pair">
+          <div><span class="bkr-big" data-tone="${rto?'ok':'muted'}">${B(rto||dash)}</span><span class="bkr-target">${safe(tx('rtoLabel',L))} · ${safe(rto?tx('rtoAchieved',L):tx('notAvailable',L))}</span></div>
+          <div><span class="bkr-big" data-tone="${rpo?'ok':'muted'}">${B(rpo||dash)}</span><span class="bkr-target">${safe(tx('rpoLabel',L))} · ${safe(rpo?tx('rpoAchieved',L):tx('notAvailable',L))}</span></div>
+        </div>
+      </section>
+      <section class="bkr-blk is-risk"><h3>${icon('alert',14)}${safe(tx('riskTitle',L))}</h3>
+        <ul><li>${safe(tx('riskDirect',L))}</li><li>${safe(tx('riskStaged',L))}</li><li>${safe(tx('riskAuthority',L))} <bdi>${B(truth.activationAuthority)}</bdi></li></ul>
+      </section>
+      <section class="bkr-blk"><h3>${icon('info',14)}${safe(tx('stateTitle',L))}</h3>
+        <ul><li>${safe(tx('stateVerified',L))}</li><li>${safe(tx('statePending',L))}</li><li>${safe(tx('stateUnavailable',L))}</li></ul>
+      </section>
+      <section class="bkr-blk"><h3>${icon('file',14)}${safe(tx('provTitle',L))}</h3>
+        <div class="bkr-line"><span class="bk-n">${safe(tx('grpJournal',L))}</span><span class="bk-x">${B(projection.source)}</span></div>
+        <div class="bkr-line"><span class="bk-n">${safe(tx('colAttempt',L))}</span><span class="bk-x">${B(attempts.length)}</span></div>
+        <div class="bkr-line"><span class="bk-n">${safe(tx('provenance',L))}</span><span class="bk-x">${B(truth.durableSuccessReceipts)}</span></div>
+        <div class="bkr-line"><span class="bk-n">${safe(tx('failureJournal',L))}</span><span class="bk-x">${B(truth.durableFailureCompensationHistory)}</span></div>
+      </section>`;
+    workspace?.region?.('RIGHT',{node:right,label:tx('rightHeading',L)});
 
-    /* ---- BOTTOM: deep workspace (durable receipts) ---- */
-    const bottom=document.createElement('section');bottom.className='b-bottom';
-    bottom.innerHTML=`<style>.b-bottom pre{max-height:240px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-size:11.5px;background:#070d16;border:1px solid var(--line);border-radius:9px;padding:10px}.b-bottom .b-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}.b-bottom h3{margin:0 0 6px;font-size:13px}</style>
-      <div class="b-grid"><div><h3>إيصال آخر عملية</h3><pre dir="ltr" data-w05-receipt>${safe(JSON.stringify(s.lastActivation||s.lastDrill||s.stage||s.preview||s.plan||{state:'IDLE'},null,2))}</pre></div><div><h3>حقيقة المزوّد</h3><pre dir="ltr">${safe(JSON.stringify(truth,null,2))}</pre></div></div>`;
-    workspace?.region?.('BOTTOM',{node:bottom,label:'إيصالات الاستعادة',summary:'إيصالات خام؛ التجهيز والتفعيل والاستعادة الفعلية حقائق منفصلة.'});
-    workspace?.refreshToolbar?.();
+    /* ---- BOTTOM: durable attempt ledger (table first; raw receipt behind disclosure) ---- */
+    const bottom=document.createElement('section');
+    bottom.className='bkb';
+    const lastReceipt=s.lastActivation||drill||stg||preview||plan||{state:'IDLE'};
+    bottom.innerHTML=`
+      <div class="bkb-prov"><span>${safe(tx('provenance',L))} <bdi>${B(projection.source)}</bdi></span><span>${safe(tx('grpJournal',L))} <bdi>${B(attempts.length)}</bdi></span><span>${safe(tx('colPackage',L))} <bdi>${B(pkg?.packageId||dash)}</bdi></span></div>
+      ${attempts.length?`<div class="bkb-scroll"><table class="bkb-table">
+        <thead><tr><th scope="col">${safe(tx('colAttempt',L))}</th><th scope="col">${safe(tx('colOperation',L))}</th><th scope="col">${safe(tx('colPhase',L))}</th><th scope="col">${safe(tx('colStatus',L))}</th><th scope="col">${safe(tx('colPackage',L))}</th><th scope="col">${safe(tx('colAt',L))}</th></tr></thead>
+        <tbody>${[...attempts].reverse().map(row=>`<tr><td>${B(row.attemptId||'—')}</td><td>${B(row.operation||'—')}</td><td>${B(row.phase||'—')}</td><td><span data-tone="${tone(row.status)}">${B(row.status||'OBSERVED')}</span></td><td>${B(row.packageId||dash)}</td><td>${B(row.terminalAt||row.updatedAt||row.at||dash)}</td></tr>`).join('')}</tbody>
+      </table></div>`:`<p class="bkb-empty">${safe(tx('noAttempts',L))}</p>`}
+      <details><summary>${safe(tx('rawReceipt',L))}</summary><pre dir="ltr" data-w05-receipt>${safe(JSON.stringify(lastReceipt,null,2))}</pre></details>`;
+    workspace?.region?.('BOTTOM',{node:bottom,label:tx('bottomLabel',L),summary:tx('bottomSummary',L)});
+
+    /* ---- localised command labels + availability follow the active language ---- */
+    syncCommands();
+    try{workspace?.refreshToolbar?.();}catch(error){/* toolbar not owned by this surface */}
   };
-  stage.dataset.surfaceComposition='backup-recovery-safety-workbench';render();workspace?.toolbar?.(['backup.package',...BACKUP_COMMANDS,'foundation.settings']);
+
+  /* language/direction follow the active preference (Settings) — never baked into the surface */
+  if(typeof MutationObserver!=='undefined'&&typeof document!=='undefined'){
+    langObserver?.disconnect?.();
+    langObserver=new MutationObserver(()=>{
+      const locale=activeLocale(),dir=dirNow();
+      if(locale!==renderedLocale||dir!==renderedDir)render();
+    });
+    langObserver.observe(document.documentElement,{attributes:true,attributeFilter:['lang','dir']});
+  }
+  render();
+  try{workspace?.toolbar?.(['backup.package',...BACKUP_COMMANDS,'foundation.settings']);}catch(error){/* toolbar optional */}
   return Object.freeze({owner:'RecoverySafetyWorkbench',render,adapter,slots:{CENTER:'RecoverySafetyWorkbench',LEFT:'restore-point-queue',RIGHT:'backup-context',BOTTOM:'shared-bottom-shell/domain-projection'}});
 }

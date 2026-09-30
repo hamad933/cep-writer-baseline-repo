@@ -1,0 +1,185 @@
+{
+  "SURFACE": "library",
+  "OWNER": "W02-LIBRARY",
+  "REFERENCE": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/01_LIBRARY/CEP_VIS_001_LIBRARY_FINAL_OWNER_CONFIRMED_REFERENCE.png",
+  "REFERENCE_CLASSIFICATION": "OWNER_CONFIRMED_FINAL_REFERENCE",
+  "REFERENCE_LINEAGE": {
+    "sha256_full": "6976f17f84d8eae1d9bb0a98bcb07932f20aa8c6fa92793055a38bab15f4b1da",
+    "dims": "1505x1045",
+    "format": "RGB PNG",
+    "register": "cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md",
+    "manifest": "cep-writer/REFERENCE_MANIFEST.json",
+    "packet_sha256_prefix_match": true
+  },
+  "CURRENT_CANDIDATE": "writer/mi-serial working tree (uncommitted) — surfaces/library/ + adapters/library-chrome.ts + adapters/library-fixtures.ts; rendered from dist/ produced by tools/writer-serial.sh npm run build:runtime",
+  "STAGE": "DIAGNOSIS_COMPLETE__SOURCE_FIXES_PENDING",
+  "FILES_CHANGED": [
+    "writer-output/W02-LIBRARY/VISUAL_EXECUTION_REPORT.json",
+    "writer-output/W02-LIBRARY/capture.mjs",
+    "writer-output/W02-LIBRARY/probe.mjs"
+  ],
+  "FUNCTIONAL_STATUS": "PASS_BASELINE — library route mounts (CEPFoundation.consumer==='library'), no pageerror, tree/editor/inspector/bottom all mount, commands bound (library.create/insert/save/revise/history). See evidence/BASE-*.probe.",
+  "STRUCTURAL_STATUS": "PASS_BASELINE — regions resolve: leftPane 304px, centerPane 759px, rightPane 420px, bottomShelf 39px at 1505x1045; no horizontal overflow (scrollW==clientW==1505).",
+  "VISUAL_STATUS": "FAIL_BASELINE — 6 defects (V2–V3) recorded below against OWNER_CONFIRMED_FINAL_REFERENCE at L1/L2/L3/L4.",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": ["L1", "L2", "L3"],
+  "RESPONSIVE_STATUS": "NOT_YET_RETESTED_AFTER_FIXES (baseline 1505x1045 only)",
+  "RTL_LTR_STATUS": "DEFECT_FOUND — direction resolves correctly (locale ar→dir=rtl, locale en→dir=ltr, verified by probe), but under locale=en 40 Arabic-only chrome strings remain in Library panes/toolbar (see DEF-06). Root cause is in read-only foundation files; shared-component request raised.",
+  "DEFECTS_FOUND": [
+    {
+      "id": "DEF-01",
+      "severity": "V3",
+      "root_cause": "STALE_DECISION",
+      "title": "Knowledge tree renders only 3 collapsed rows; active KU invisible; ~500px dead zone in left pane",
+      "evidence": "probe: state.structure.expanded = ['dom-appsec','clu-api','cap-api-authz','dom-identity','clu-trust','cap-identity-boundary'] — none of these ids exist in BALANCED6_STRUCTURE_TREE ('dom-d03','clu-d03-balanced6','tree-ku-d03-0001',…). treeItems observed = 3, all aria-expanded=false, none aria-selected. structureTree rect 246x108 inside a ~530px scroll area.",
+      "reference_expectation": "Reference left pane: 15 visible rows, 4 nesting levels, active row highlighted with shield icon + KU id subtitle, no dead zone.",
+      "fix_layer": "surface (surfaces/library) — seed expansion state with real node ids + flatten/repair STRUCTURE_TREE in adapters/library-fixtures.ts"
+    },
+    {
+      "id": "DEF-02",
+      "severity": "V2",
+      "root_cause": "FIXTURE_DATA",
+      "title": "Tree count badges are misleading (domain with 3 KUs shows badge '1')",
+      "evidence": "library-outline-descriptor.projectLibraryHierarchyNode sets countText = String(node.children.length); dom-d03 has 1 child (the cluster node) although it holds 3 KUs. Observed badges: Identity and access=1, Application and API security=1, Incident response=1.",
+      "reference_expectation": "Reference badges = KU/document counts (12, 129, 47, 15, 5).",
+      "fix_layer": "fixture (adapters/library-fixtures.ts) — reshape tree so a domain's direct children are its KUs, making child count == KU count"
+    },
+    {
+      "id": "DEF-03",
+      "severity": "V2",
+      "root_cause": "SURFACE_COMPOSITION",
+      "title": "Center information hierarchy inverted: content-group header sits above the document title; no meta row, no tag chips, no source/updated line",
+      "evidence": "#contentGroupToggle (\"المعرفة / المحتوى\" + count 23) renders at page y≈228-260 while the first content block (h2 title) begins at y≈323 inside #blockList (y=282). Document identity metadata exists only in fixture fields (tags, revision, sources, provenance) and is surfaced only in the right pane, not under the title.",
+      "reference_expectation": "Reference center: breadcrumb → title + status badge → KU id/version/status/source/last-updated meta row → tag chips → action toolbar → numbered content sections.",
+      "fix_layer": "surface (surfaces/library) — Library-owned document masthead inserted into #editorDocument above #contentGroups, updated on KU switch"
+    },
+    {
+      "id": "DEF-04",
+      "severity": "V2",
+      "root_cause": "FIXTURE_DATA",
+      "title": "Raw markdown source rendered as plain paragraph text in the document body",
+      "evidence": "Fixture block src-ku-d03-0001-01-p html = \"- **ku_id:** KU-D03-0001<br>- **domain_id:** D03…\" rendered literally; block src-ku-d03-0001-06-p renders a markdown table as one paragraph with '|---|' separator rows visible.",
+      "reference_expectation": "Reference renders structured content: prose paragraphs, code block with line numbers, bullet lists — never raw markup.",
+      "fix_layer": "fixture (adapters/library-fixtures.ts) — normalise list-shaped paragraphs into bullet blocks and markdown-table paragraphs into fenced code blocks at the Library fixture boundary"
+    },
+    {
+      "id": "DEF-05",
+      "severity": "V2",
+      "root_cause": "IMPLEMENTATION",
+      "title": "Bottom deep-work shelf never renders content for Library",
+      "evidence": "accepted-runtime renderBottom(): libraryChrome.bottom.render(...) → library-chrome.ts renderer() returns CEPBlueprint.bottomPresentationRenderer which nobody assigns → ready()===false → return false. #bottomContent stays empty.",
+      "reference_expectation": "Reference bottom shelf carries a dense tab strip with counts plus contextual summary; a shelf that opens to nothing is a dead zone.",
+      "fix_layer": "surface (adapters/library-chrome.ts contract + surfaces/library renderer assignment)"
+    },
+    {
+      "id": "DEF-06",
+      "severity": "V3",
+      "root_cause": "SHARED_COMPONENT",
+      "title": "Library chrome is not localised: 40 Arabic-only strings remain when active locale is English",
+      "evidence": "probe(locale=en): documentElement.lang='en', dir='ltr', yet Arabic-only leaves observed include البنية، كل النطاقات، الكل/متابعة/المفضلة/مكتمل/حديث، بنية المكتبة، السياق، الوحدة/الكتلة/التحديد، نظرة عامة…السجل، السجل والمقارنة، مقارنة، استرداد، قراءة/تحرير/حفظ/عرض مساحة العمل. probe(locale=ar): same set correctly Arabic.",
+      "reference_expectation": "Arabic and English are both first-class; the active language is user-configurable; no surface may show a third of its chrome in the inactive language.",
+      "fix_layer": "SHARED — literals live in foundation/accepted-runtime.ts (initStaticDOM, overviewLens, renderBottom), dist/index.html static markup and adapters/library-outline-descriptor.ts aria labels; all READ-ONLY for this unit. Shared-component request raised in SHARED_PRIMITIVES.md; NOT silently patched at the consumer."
+    },
+    {
+      "id": "DEF-07",
+      "severity": "V2",
+      "root_cause": "FIXTURE_DATA",
+      "title": "Right-pane statistic grid shows three zero cells (dead stat tiles)",
+      "evidence": "renderIdentity grid projected from fixture: sources=1, relations=1, labs=0, projects=0, evidence=0 for KU-D03-0001.",
+      "reference_expectation": "Reference grid: 2 / 23 / 2 / 23 / 1 — every cell carries signal.",
+      "fix_layer": "fixture (adapters/library-fixtures.ts) — only corpus-derived relations may be added; labs/evidence are NOT fabricated (Evidence admission requires a verifier). Reported as residual if not fully closable."
+    },
+    {
+      "id": "DEF-08",
+      "severity": "V1",
+      "root_cause": "SURFACE_COMPOSITION",
+      "title": "Truncated labels in right-pane lens tabs, linked-source card, tree rows and left-pane active path",
+      "evidence": "Observed clipped: \"نظرة عمن..\", \"المختبرات..\", \"الملاحظات…\", \"WORKSTREAMS/WS02/KUS/KU-D03-000…\", \"Application and API se…\", footer active-path \"Id… · Balanc… · Authenti…\".",
+      "reference_expectation": "Reference tabs and rows are fully legible at the same widths.",
+      "fix_layer": "partly surface (active-path + tree labels via fixture/labels); partly shared (lens tab strip) — recorded"
+    },
+    {
+      "id": "DEF-09",
+      "severity": "V1",
+      "root_cause": "SURFACE_COMPOSITION",
+      "title": "Left pane heading is \"البنية\" (Structure) instead of the surface identity \"المكتبة / Library\"",
+      "evidence": "#leftPane .phead h2 text = البنية; reference left pane header = المكتبة; the surface's own secondary tab already reads Library/المكتبة.",
+      "reference_expectation": "Pane heading states which workspace the pane belongs to.",
+      "fix_layer": "surface (surfaces/library) — pane heading projection is Library-owned"
+    }
+  ],
+  "DEFECT_SEVERITY": "1xV3 (DEF-01 tree density, DEF-06 language) · 5xV2 (DEF-02,03,04,05,07) · 2xV1 (DEF-08, DEF-09)",
+  "ROOT_CAUSE": "STALE_DECISION (tree expansion ids) + FIXTURE_DATA (tree shape, raw markdown, zero relations) + SURFACE_COMPOSITION (center hierarchy, pane identity) + IMPLEMENTATION (bottom renderer absent) + SHARED_COMPONENT (localisation literals in read-only foundation)",
+  "FIXES_APPLIED": [],
+  "RECAPTURE_STATUS": "BASELINE_CAPTURED",
+  "RECOMPARISON_STATUS": "BASELINE_COMPARED_L1_L2_L3",
+  "REGRESSION_STATUS": "NOT_STARTED",
+  "EVIDENCE": [
+    {
+      "role": "BASELINE",
+      "label": "L1 whole surface, 1505x1045",
+      "path": "writer-output/W02-LIBRARY/evidence/BASE-ar.png",
+      "sha256": "3b3b225dce1cdce441454518a6760190c915487458766b92ff3cb3bf9dc4b5c7",
+      "dims": "1505x1045",
+      "bytes": 218860,
+      "capturedAt": "2026-09-30T18:21:36.923Z",
+      "viewport": "1505x1045",
+      "note": "Captured BEFORE the preference-seed shape fix; documentElement.lang was 'en'. Labelled BASELINE-EN-DIR-LTR even though the file name says ar. Retained, not reused as proof of any later state."
+    },
+    {
+      "role": "BASELINE_CROP",
+      "label": "L2 left pane",
+      "path": "writer-output/W02-LIBRARY/evidence/crops/BASE-left.png",
+      "derived_from": "BASE-ar.png",
+      "crop_box": "0,183,304,1006"
+    },
+    {
+      "role": "BASELINE_CROP",
+      "label": "L2 center masthead",
+      "path": "writer-output/W02-LIBRARY/evidence/crops/BASE-center-top.png",
+      "derived_from": "BASE-ar.png",
+      "crop_box": "304,183,1085,560"
+    },
+    {
+      "role": "BASELINE_CROP",
+      "label": "L2 right context pane",
+      "path": "writer-output/W02-LIBRARY/evidence/crops/BASE-right.png",
+      "derived_from": "BASE-ar.png",
+      "crop_box": "1085,183,1505,1006"
+    },
+    {
+      "role": "BASELINE_CROP",
+      "label": "L2 bottom shelf",
+      "path": "writer-output/W02-LIBRARY/evidence/crops/BASE-bottom.png",
+      "derived_from": "BASE-ar.png",
+      "crop_box": "0,990,1505,1045"
+    },
+    {
+      "role": "BASELINE_PROBE",
+      "label": "DOM geometry + counts, locale ar (dir=rtl) and locale en (dir=ltr)",
+      "paths": ["writer-output/W02-LIBRARY/probe.mjs output (session log)", "/tmp/opencode/p-ar.json", "/tmp/opencode/p-en.json"],
+      "key_values": "treeItems=3 both locales; expanded ids stale both locales; lang/direction switch correctly with the preference; 40 Arabic-only chrome leaves under locale=en"
+    }
+  ],
+  "LINEAGE": {
+    "candidate": "writer/mi-serial (git working tree, not committed by this unit per §0)",
+    "base_commit": "ccee419 checkpoint(quality): W05-BACKUP baseline diagnosis preserved; VD-011 recorded",
+    "build_command": "tools/writer-serial.sh npm run build:runtime",
+    "build_status": "RED_AT_surfaces/manual_ai/runtime.ts (ERR_INVALID_TYPESCRIPT_SYNTAX line 32, another unit's in-flight edit). build-runtime.mjs writes files in sorted order, so everything alphabetically before surfaces/manual_ai — including surfaces/library/**, surfaces/m0-controller-composition.ts, main.ts, adapters/library-*.ts — IS freshly written. Files after it are stale. NOT edited by this unit; retried twice.",
+    "environment": "headless chromium via playwright 1.62.1, tools/serve.mjs serving dist/, no local runtime (ERR_CONNECTION_REFUSED entries are the optional persistence port and are expected in this capture)",
+    "capture_tool": "writer-output/W02-LIBRARY/capture.mjs (unit-local, not a shared seam)",
+    "reference_category": "A. VISUAL REFERENCE AUTHORITY (not placed in evidence)",
+    "evidence_category": "C. EVIDENCE SCREENSHOT"
+  },
+  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
+  "BLOCKERS": [
+    "BLD-01: shared build is red at stack/native-typescript/surfaces/manual_ai/runtime.ts:32 (owner W05-MANUAL-AI). Retried twice; not edited by this unit. Library slice of the build still emits, so local progress continues.",
+    "SHR-01: DEF-06 (40 unlocalised Arabic chrome strings under locale=en) lives in read-only foundation/accepted-runtime.ts, dist/index.html and adapters/library-outline-descriptor.ts. Cannot be fixed within this unit's writable roots; shared-component request recorded in writer-output/W02-LIBRARY/SHARED_PRIMITIVES.md for Controller serialization.",
+    "Self-acceptance is forbidden: status remains NOT_OWNER_ACCEPTED pending sole Controller review."
+  ],
+  "NOTES": [
+    "Skills loaded before any code change: visual-surface-composition, visual-fidelity-review, shared-component-governance, professional-ui-ux-composition.",
+    "Reference classified OWNER_CONFIRMED_FINAL_REFERENCE, sha256 verified against the packet (6976f17f84d8eae1…), dims 1505x1045.",
+    "Reference is CONSTRUCTION AUTHORITY: composition/hierarchy/pane organization/density are being built to it; REFERENCE != BLIND PIXEL COPY — e.g. the reference's SQL Injection corpus is not copied, the product's own Balanced6 KU corpus is used.",
+    "Sibling units W02-LEARN and W02-VISUALIZE run in parallel on disjoint roots; no file outside this unit's writable roots was modified."
+  ]
+}

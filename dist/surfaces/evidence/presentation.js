@@ -40,13 +40,8 @@ const TRACK_POSITION = Object.freeze({
   RETURNED_FOR_CONTEXT: 1, DECLINED: 2, WITHDRAWN: 3
 });
 
-function gate(value, okLabel, failLabel) {
-  return value === true ? okLabel : value === false ? failLabel : EMPTY_VALUE;
-}
-
-/**
- * "What can happen next" is derived from the same predicates the semantic commands use, so the
- * affordance can never promise an action the domain will refuse.
+/** "What can happen next" is derived from the same predicates the semantic commands use, so the
+ *  affordance can never promise an action the domain will refuse.
  */
 function nextActions(row) {
   const actions = [];
@@ -164,16 +159,14 @@ export function describeEvidenceRecord(domain, selectedId) {
       id: 'record',
       title: 'Candidate record',
       rows: [
-        { label: 'Evidence Claim', value: show(revision?.evidenceClaim || row.evidenceClaim, EMPTY_VALUE), dir: 'auto', wide: true },
-        { label: 'Subject', value: show(row.subject), dir: 'auto' },
-        { label: 'Governed purpose', value: show(row.governedPurpose), dir: 'auto', wide: true },
+        { label: 'Evidence Claim', value: show(revision?.evidenceClaim || row.evidenceClaim, EMPTY_VALUE), dir: 'auto', wide: true, icon: 'claim' },
+        { label: 'Subject', value: show(row.subject), dir: 'auto', icon: 'person' },
+        { label: 'Governed purpose', value: show(row.governedPurpose), dir: 'auto', wide: true, icon: 'rationale' },
         {
           label: 'Proposed Capability / Criterion Scope',
           value: criterionRefs.length ? criterionRefs.join(' · ') : 'None pinned',
-          dir: 'ltr', tone: criterionRefs.length ? 'link' : 'muted'
-        },
-        { label: 'Record identity', value: `${row.evidenceId || row.id} @ ${revision?.revisionId || row.revisionId}`, dir: 'ltr', mono: true },
-        { label: 'Effective Review Decision', value: show(row.effectiveDecision || 'NONE'), dir: 'ltr', tone: row.effectiveDecision ? 'info' : 'warning' }
+          dir: 'ltr', tone: criterionRefs.length ? 'link' : 'muted', icon: 'criterion'
+        }
       ]
     },
     {
@@ -182,13 +175,13 @@ export function describeEvidenceRecord(domain, selectedId) {
       icon: 'handoff',
       title: 'Source Handoff',
       rows: [
-        { label: 'Source Domain', value: show(row.sourceType), dir: 'ltr' },
-        { label: 'Source Type', value: admitted ? 'Admitted Evidence revision' : 'Candidate handoff', dir: 'auto' },
-        { label: 'Source', value: `${show(row.sourceId)} @ ${show(row.sourceRevision)}`, dir: 'ltr', mono: true },
-        { label: 'Handoff', value: show(row.handoffReceiptRef, 'No handoff receipt recorded'), dir: 'ltr' },
-        { label: 'Handoff Received', value: show(row.sourceTimestamp, 'No source timestamp recorded'), dir: 'ltr' },
-        { label: 'Submitted By', value: show(row.producerIdentity, 'No producer identity recorded'), dir: 'ltr' },
-        { label: 'Submission Note', value: show(row.notes || row.governedPurpose), dir: 'auto', wide: true }
+        { label: 'Source Domain', value: show(row.sourceType), dir: 'auto', icon: 'domain' },
+        { label: 'Source Type', value: admitted ? 'Admitted Evidence revision' : 'Candidate handoff', dir: 'auto', icon: 'file' },
+        { label: 'Source', value: `${show(row.sourceId)} @ ${show(row.sourceRevision)}`, dir: 'ltr', mono: true, icon: 'stack' },
+        { label: 'Handoff', value: show(row.handoffReceiptRef, 'No handoff receipt recorded'), dir: 'ltr', icon: 'reference' },
+        { label: 'Handoff Received', value: show(row.sourceTimestamp, 'No source timestamp recorded'), dir: 'ltr', icon: 'clock' },
+        { label: 'Submitted By', value: show(row.producerIdentity, 'No producer identity recorded'), dir: 'ltr', icon: 'person' },
+        { label: 'Submission Note', value: show(row.notes || row.governedPurpose), dir: 'auto', wide: true, icon: 'note' }
       ]
     },
     {
@@ -203,41 +196,9 @@ export function describeEvidenceRecord(domain, selectedId) {
         external: true,
         tone: 'link'
       }))
-    },
-    {
-      kind: 'rows',
-      id: 'admission-gates',
-      title: 'Verification and admission gates',
-      rows: [
-        { label: 'Source bytes', value: gate(row.sourceBytesAvailable, 'AVAILABLE', 'UNAVAILABLE'), dir: 'ltr', tone: row.sourceBytesAvailable === true ? 'success' : 'danger' },
-        { label: 'Schema', value: gate(row.schemaValid, 'VALID', 'REJECTED / NOT CHECKED'), dir: 'ltr', tone: row.schemaValid === true ? 'success' : 'danger' },
-        {
-          label: 'Source verification',
-          value: row.verification?.status === 'VERIFIED'
-            ? `VERIFIED · ${row.verification.providerId} · ${row.verification.proofRef}`
-            : show(row.verification?.status, 'UNVERIFIED'),
-          dir: 'ltr',
-          tone: row.verification?.status === 'VERIFIED' ? 'success' : 'danger',
-          mono: row.verification?.status === 'VERIFIED'
-        },
-        {
-          label: 'Intake validation',
-          value: row.intakeValidation?.status === 'VALIDATED'
-            ? `VALIDATED · ${row.intakeValidation.validator} · ${row.intakeValidation.proofRef}`
-            : show(row.intakeValidation?.status, 'NOT_VALIDATED'),
-          dir: 'ltr',
-          tone: row.intakeValidation?.status === 'VALIDATED' ? 'success' : 'danger'
-        },
-        {
-          label: 'Admission authority',
-          value: row.admissionAuthority?.available === true
-            ? `AUTHORIZED · ${row.admissionAuthority.proofRef}`
-            : 'UNAVAILABLE — Admission refuses without a bound authority',
-          dir: 'ltr',
-          tone: row.admissionAuthority?.available === true ? 'success' : 'danger'
-        }
-      ]
     }
+    // Verification and admission gates are deliberately NOT a CENTER block: the same facts are
+    // projected as gate rows in the RIGHT context lens (ONE INFORMATION ITEM -> ONE LOCATION).
   ];
 
   return {
@@ -245,9 +206,9 @@ export function describeEvidenceRecord(domain, selectedId) {
     empty: false,
     header: {
       icon: 'evidence',
-      title: admitted ? `${row.title} · ${row.evidenceId}` : `${row.title} · ${row.evidenceId}`,
+      title: row.title || row.evidenceId || row.id,
       titleDir: 'auto',
-      sub: `${admitted ? 'Admitted Evidence' : 'Candidate Evidence'} · ${revision?.revisionId || row.revisionId}`,
+      sub: `${admitted ? 'Admitted Evidence' : 'Candidate Evidence'} · ${row.evidenceId || row.id} · ${revision?.revisionId || row.revisionId}`,
       pills
     },
     blocks

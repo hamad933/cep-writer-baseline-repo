@@ -8,14 +8,29 @@ export const REVIEWS_SURFACE_CONTRACT=Object.freeze({
   localSharedOwnerCreation:false,centralWiring:'CG5_OR_GLOBAL_CONVERGENCE_REQUIRED'
 });
 
+/* ── queue vocabulary ──────────────────────────────────────────────────────────────────────
+ * The LEFT pane is the surface's REVIEW QUEUE navigation (reference: Review Queue · Assigned ·
+ * In Review · Closed). Human labels replace raw protocol tokens exactly as the Evidence intake
+ * queue does; the raw tokens stay on the record and in the context lens. Exported because the
+ * surface-owned queue segments (presentation-surface.ts) derive their labels and live counts
+ * from the very same vocabulary — one vocabulary, one location. */
+export const REVIEW_STATE_LABEL=Object.freeze({REQUESTED:'Requested',ASSIGNED:'Assigned',IN_REVIEW:'In review',READY_FOR_DECISION:'Ready for decision',CLOSED:'Closed',CANCELLED:'Cancelled'});
+export const REVIEW_DECISION_LABEL=Object.freeze({ACCEPT:'Accept',ACCEPT_WITH_LIMITATIONS:'Accept w/ limits',MORE_EVIDENCE_REQUIRED:'More evidence',REJECT:'Reject'});
+export const REVIEW_STATE_TONE=Object.freeze({REQUESTED:'neutral',ASSIGNED:'info',IN_REVIEW:'info',READY_FOR_DECISION:'warning',CLOSED:'success',CANCELLED:'danger'});
+export const reviewStateOf=row=>String(row?.state||'');
+export const reviewStateLabel=row=>REVIEW_STATE_LABEL[reviewStateOf(row)]||reviewStateOf(row)||'No state';
+export const reviewDecisionLabel=row=>row?.decision?.outcome?(REVIEW_DECISION_LABEL[row.decision.outcome]||row.decision.outcome):'None';
+export const reviewDecisionTone=row=>row?.decision?.outcome?(row.decision.outcome==='ACCEPT'?'success':row.decision.outcome==='REJECT'?'danger':'warning'):'muted';
+
 export function createReviewsCollectionAdapter(domain){
   if(!domain||domain.owner!==REVIEW_DOMAIN_OWNER)throw Error('REVIEWS_DOMAIN_REQUIRED');
-  return Object.freeze({adapterId:'w04.reviews.collection',rows:()=>domain.snapshot().records,rowId:row=>row.id,rowLabel:row=>`Review ${row.id}`,searchableText:row=>[row.id,row.revisionId,row.state,row.rereview,...(row.evidenceRefs||[]),...(row.criteriaRefs||[]),row.decision?.outcome].filter(Boolean).join(' '),columns:Object.freeze([
-    {id:'review',label:'Review',minWidth:190,cell:row=>({text:`Review ${row.id}`,secondary:row.revisionId,direction:'ltr'}),compareRows:(a,b)=>a.id.localeCompare(b.id,'en')},
-    {id:'state',label:'Workflow',minWidth:130,cell:row=>({text:row.state,secondary:row.rereview==='OPEN'?'Re-review open':'',direction:'ltr',tone:row.rereview==='OPEN'?'warning':'default'})},
-    {id:'evidence',label:'Pinned Evidence',minWidth:180,cell:row=>({text:(row.evidenceRefs||[]).join(', '),secondary:'Exact revision basis',direction:'ltr'})},
-    {id:'decision',label:'Effective Decision',minWidth:180,cell:row=>({text:row.decision?.outcome||'NONE',secondary:row.effectiveDecisionId||'No issued decision',direction:'ltr'})}
-  ]),actions:row=>Object.freeze([{id:'reviews.review',label:'Start / resume review',enabled:['REQUESTED','ASSIGNED','IN_REVIEW','READY_FOR_DECISION'].includes(row.state)},{id:'reviews.finding',label:'Add finding',enabled:row.state==='IN_REVIEW'},{id:'reviews.compare',label:'Compare exact revisions',enabled:['IN_REVIEW','READY_FOR_DECISION','CLOSED'].includes(row.state)},{id:'reviews.supersede',label:'Issue superseding decision',enabled:row.state==='READY_FOR_DECISION'}])});
+  return Object.freeze({adapterId:'w04.reviews.collection',rows:()=>domain.snapshot().records,rowId:row=>row.id,rowLabel:row=>`Review ${row.id}`,searchableText:row=>[row.id,row.revisionId,row.state,row.rereview,...(row.evidenceRefs||[]),...(row.criteriaRefs||[]),row.decision?.outcome].filter(Boolean).join(' '),/* Two columns fit the 278 px structure pane; four columns wrapped every header and value
+     * mid-word (`WORKF LOW`, `PINNED EVIDEN CE`, `Revie w rev-0084`). Identity + decision is the
+     * scannable pair the queue actually needs. */
+    columns:Object.freeze([
+      {id:'review',label:'Review queue',minWidth:150,cell:row=>({text:`Review ${row.id}`,secondary:`${reviewStateLabel(row)} · ${row.evidenceRefs.length} evidence · ${row.findings.length} finding${row.findings.length===1?'':'s'}`,direction:'ltr'}),compareRows:(a,b)=>a.state.localeCompare(b.state,'en')||a.id.localeCompare(b.id,'en')},
+      {id:'decision',label:'Decision',minWidth:84,cell:row=>({text:reviewDecisionLabel(row),secondary:row.effectiveDecisionId||row.revisionId,direction:'ltr'})}
+    ]),actions:row=>Object.freeze([{id:'reviews.review',label:'Start / resume review',enabled:['REQUESTED','ASSIGNED','IN_REVIEW','READY_FOR_DECISION'].includes(row.state)},{id:'reviews.finding',label:'Add finding',enabled:row.state==='IN_REVIEW'},{id:'reviews.compare',label:'Compare exact revisions',enabled:['IN_REVIEW','READY_FOR_DECISION','CLOSED'].includes(row.state)},{id:'reviews.supersede',label:'Issue superseding decision',enabled:row.state==='READY_FOR_DECISION'}])});
 }
 
 export function createReviewsContextProvider(domain){

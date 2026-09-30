@@ -1,14 +1,14 @@
 {
-  "schemaVersion": 2,
-  "classification": "GENUINE_ROUTE_EVIDENCE__OPEN_ENVIRONMENT__NOT_PRODUCT_PASS__NOT_OWNER_ACCEPTANCE",
-  "command": "node tools/update-browser-environment-receipt.mjs",
+  "schemaVersion": 1,
+  "classification": "REPRODUCIBLE_BROWSER_CONFORMANCE_RECEIPT_NOT_OWNER_ACCEPTANCE",
+  "command": "npm run browser:test",
   "sourceFoundationBaseline": "CEP-FR-E18-ANALYTICAL-COMPARE-COMPLETION",
-  "sourceCandidate": "CANONICAL_SOURCE_TREE_SHA256:f8d543f1cab1170da4b397a891d082ab2ddb81df34a77541afcd0345e8cce735",
-  "sourceCanonicalTreeSha256": "f8d543f1cab1170da4b397a891d082ab2ddb81df34a77541afcd0345e8cce735",
-  "canonicalSourceFileCount": 286,
-  "currentUse": "EXACT_CURRENT_CANONICAL_SOURCE_ENVIRONMENT_BLOCK_RECEIPT",
-  "executionStatus": "OPEN_ENVIRONMENT__LOOPBACK_BLOCKED_BEFORE_PRODUCT_RECEIPT",
-  "prerequisite": "BLOCKED: Chromium policy rejects loopback/local Product routes before Product receipt; no in-memory substitute is counted as genuine-route proof.",
+  "sourceCandidate": "CANONICAL_SOURCE_TREE_SHA256:4efc64041033fe2f999ebbd139e647bcee33a47e19661a4d0ecad9d7f77dea88",
+  "sourceCanonicalTreeSha256": "4efc64041033fe2f999ebbd139e647bcee33a47e19661a4d0ecad9d7f77dea88",
+  "canonicalSourceFileCount": 305,
+  "currentUse": "EXACT_CURRENT_CANONICAL_SOURCE_EXECUTION_RECEIPT",
+  "executionStatus": "BLOCKED_OR_FAILED",
+  "prerequisite": "Install the Playwright package and its matching Chromium binary (npx playwright install chromium-headless-shell), or set CEP_BROWSER_EXECUTABLE to a compatible local executable.",
   "declaredFlows": [
     "workspace.transient-and-pane-lifecycle",
     "spatial.selection-connect-canonical-edge",
@@ -18,58 +18,174 @@
     "spatial-input-bidi-preference-and-structured-isolation"
   ],
   "environment": {
-    "engine": "Chromium",
-    "transport": "localhost-http-built-esm",
-    "attemptedHosts": [
-      "127.0.0.1",
-      "localhost",
-      "0.0.0.0",
-      "cep.local"
-    ],
-    "error": "net::ERR_BLOCKED_BY_ADMINISTRATOR",
-    "evidence": "loopback_policy_results.txt"
+    "node": "v22.16.0",
+    "engine": "Playwright Chromium",
+    "playwrightResolution": "package-local",
+    "packageDeclaredVersion": "1.62.1",
+    "browserExecutableOverride": false,
+    "transport": "localhost-http",
+    "viewport": "1440x980",
+    "reducedMotion": true
   },
   "summary": {
     "total": 6,
-    "pass": 0,
-    "fail": 0,
-    "blocked": 6
+    "pass": 1,
+    "fail": 5
   },
   "flows": [
     {
       "id": "workspace.transient-and-pane-lifecycle",
-      "status": "OPEN_ENVIRONMENT",
-      "reason": "LOOPBACK_BLOCKED_BEFORE_PRODUCT_RECEIPT"
+      "before": "Golden consumer with visible Foundation chrome",
+      "action": "toggle pane, open and escape command palette, then restore pane",
+      "owner": "WorkspaceFoundationHost + PaneLayoutController + TransientFocusController",
+      "oracle": "pane truth changes, transient reverses, focus returns",
+      "status": "PASS",
+      "evidence": {
+        "collapsed": "collapsed",
+        "restored": "open",
+        "paletteExit": "Escape",
+        "focusReturned": true,
+        "responsive": {
+          "contract": {
+            "id": "WorkspacePaneStateContract",
+            "version": "1.2.0",
+            "owner": "WorkspacePaneLayoutOwner",
+            "persisted": [
+              "preferredState",
+              "preferredWidth"
+            ],
+            "projectedOnly": [
+              "effectiveState",
+              "effectiveWidth",
+              "mode",
+              "responsiveBand",
+              "resizeAvailability",
+              "focusMode",
+              "responsiveOverride",
+              "resizeLimits"
+            ]
+          },
+          "responsiveBand": "narrow",
+          "viewportWidth": 900,
+          "focusMode": false,
+          "overlayPane": "",
+          "left": {
+            "side": "left",
+            "preferredState": "open",
+            "effectiveState": "collapsed",
+            "preferred": "open",
+            "effective": "collapsed",
+            "mode": "collapsed",
+            "preferredWidth": 304,
+            "effectiveWidth": 304,
+            "responsiveSuppressed": true,
+            "responsiveOverride": null,
+            "resizeLimits": {
+              "min": 1,
+              "max": 420,
+              "step": 12,
+              "collapseThreshold": 24
+            },
+            "resizeAvailability": {
+              "pointer": false,
+              "keyboard": false
+            }
+          },
+          "right": {
+            "side": "right",
+            "preferredState": "open",
+            "effectiveState": "collapsed",
+            "preferred": "open",
+            "effective": "collapsed",
+            "mode": "collapsed",
+            "preferredWidth": 420,
+            "effectiveWidth": 420,
+            "responsiveSuppressed": true,
+            "responsiveOverride": null,
+            "resizeLimits": {
+              "min": 1,
+              "max": 520,
+              "step": 12,
+              "collapseThreshold": 24
+            },
+            "resizeAvailability": {
+              "pointer": false,
+              "keyboard": false
+            }
+          }
+        }
+      }
     },
     {
       "id": "spatial.selection-connect-canonical-edge",
-      "status": "OPEN_ENVIRONMENT",
-      "reason": "LOOPBACK_BLOCKED_BEFORE_PRODUCT_RECEIPT"
+      "before": "Visualize local-acceptance projection with no current selection",
+      "action": "select exactly two representations and inspect provider-truthful Connect availability without mutating provider truth",
+      "owner": "ActionAvailabilityCore + RelationInteractionOwner + RelationDomainAdapter",
+      "oracle": "read-only Visualize preserves the two-item selection, hides author-only Connect UI, and leaves relation count/version unchanged",
+      "status": "FAIL",
+      "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#objectList [data-object=\"b6-rep-ku-d03-0001\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button data-cep-ui-control=\"\" class=\"btn object-entry\" data-object=\"b6-rep-ku-d03-0001\">Authentication Protocol Ceremonies and Trust Boun…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    58 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+      "pageErrors": []
     },
     {
       "id": "relation.route-convergence-and-label-scope",
-      "status": "OPEN_ENVIRONMENT",
-      "reason": "LOOPBACK_BLOCKED_BEFORE_PRODUCT_RECEIPT"
+      "before": "Enterprise relation edge under its admitted editable domain adapter",
+      "action": "double-click whole edge, double-click label, close, then press F2 on edge",
+      "owner": "RelationInteractionOwner",
+      "oracle": "whole-edge double-click is inert; authorized label and F2 edit routes converge on relation.edit",
+      "status": "FAIL",
+      "error": "authorized label double-click did not open the composer",
+      "pageErrors": []
     },
     {
       "id": "central-change-reuse",
-      "status": "OPEN_ENVIRONMENT",
-      "reason": "LOOPBACK_BLOCKED_BEFORE_PRODUCT_RECEIPT"
+      "before": "Visualize read-only and Enterprise editable consumers share the central relation interaction owner",
+      "action": "select two objects on each consumer and inspect central selection policy plus provider-specific availability",
+      "owner": "ActionAvailabilityCore + RelationInteractionOwner",
+      "oracle": "policy revision/action owner are reused while availability remains provider-truthful",
+      "status": "FAIL",
+      "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#objectList [data-object=\"b6-rep-ku-d03-0001\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button data-cep-ui-control=\"\" class=\"btn object-entry\" data-object=\"b6-rep-ku-d03-0001\">Authentication Protocol Ceremonies and Trust Boun…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    58 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+      "pageErrors": []
     },
     {
       "id": "runtime-causal-consequence",
-      "status": "OPEN_ENVIRONMENT",
-      "reason": "LOOPBACK_BLOCKED_BEFORE_PRODUCT_RECEIPT"
+      "before": "RUN-0042 DEV-WEB-01 is selected and UP",
+      "action": "open terminal through visible command and submit shutdown",
+      "owner": "W03V34RunsAdapter via provider-neutral OperationalView",
+      "oracle": "canonical device, spatial projection, terminal output, event and recorded projection agree",
+      "status": "FAIL",
+      "error": "page.evaluate: TypeError: Cannot read properties of undefined (reading 'id')\n    at eval (eval at evaluate (:311:30), <anonymous>:6:203)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+      "pageErrors": []
     },
     {
       "id": "spatial-input-bidi-preference-and-structured-isolation",
-      "status": "OPEN_ENVIRONMENT",
-      "reason": "LOOPBACK_BLOCKED_BEFORE_PRODUCT_RECEIPT"
+      "before": "Visualize canvas and independent Learn structured consumer",
+      "action": "Ctrl+RMB drag, normal RMB, keyboard focus/selection/camera/move, then canonical locale preference change in Learn",
+      "owner": "SpatialInteraction + ContextSuppressionGate + ScopedPreferences + StructuredDocumentDomainAdapter",
+      "oracle": "only own context is suppressed; keyboard intents stay distinct; Learn remains Library-free and Bidi-correct",
+      "status": "FAIL",
+      "error": "spatial canvas has no measurable bounds",
+      "pageErrors": []
+    }
+  ],
+  "screenshots": [
+    {
+      "filename": "browser-workspace-pane-context.png",
+      "flowId": "workspace.transient-and-pane-lifecycle",
+      "property": "preferred/effective pane state and shared workspace chrome",
+      "viewport": {
+        "width": 900,
+        "height": 980
+      },
+      "bytes": 87753,
+      "sha256": "e3fcc1c3a22f40bef70bbc7b16951abffee5a1427204e6250a616cc637dda1ce",
+      "scope": "EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE"
     }
   ],
   "limitations": [
-    "No genuine HTTP route executed in this Writer environment.",
-    "In-memory visual rendering is classified separately as presentation evidence only.",
-    "This receipt must never be interpreted as a browser PASS."
+    "Headless Chromium only",
+    "Six bounded critical flows; not exhaustive permutation certification",
+    "Internal simulation does not execute host commands",
+    "A missing browser executable is reported as failure and never converted to a pass",
+    "Optional in-memory transport exists for environments that administratively block localhost navigation; it rewrites the same built ESM graph without changing application source"
   ]
 }

@@ -1,0 +1,608 @@
+{
+  "lineage": {
+    "commit": "fa0d309bb6f18bdeb0c43e4c6c98ab63f937c596",
+    "short": "fa0d309",
+    "treeSha": "7a69ec9a2bfa91e520031b87498abbafc6c5ef0e",
+    "branch": "writer/mi-serial",
+    "capturedAt": "2026-09-30T03:22:21.644Z",
+    "viewport": "1536x1024",
+    "runtime": "playwright-chromium-headless"
+  },
+  "checks": [
+    {
+      "id": "responsive.1280x860",
+      "status": "PASS",
+      "detail": {
+        "hScroll": false,
+        "overlap": false,
+        "rowCols": "27.625px 118px 84px 132px 20px",
+        "theadVisible": true,
+        "stageScroll": true
+      }
+    },
+    {
+      "id": "responsive.1024x900",
+      "status": "PASS",
+      "detail": {
+        "hScroll": false,
+        "overlap": false,
+        "rowCols": "208.281px 110px 92px 132px 22px",
+        "theadVisible": true,
+        "stageScroll": true
+      }
+    },
+    {
+      "id": "responsive.820x900",
+      "status": "PASS",
+      "detail": {
+        "hScroll": false,
+        "overlap": false,
+        "rowCols": "608.891px 102.516px",
+        "theadVisible": false,
+        "stageScroll": true
+      }
+    },
+    {
+      "id": "rtl.document-direction",
+      "status": "PASS",
+      "detail": {
+        "lang": "ar",
+        "dir": "rtl",
+        "heading": "rtl"
+      }
+    },
+    {
+      "id": "rtl.mirrors-content",
+      "status": "PASS",
+      "detail": {
+        "leftIsLeft": true,
+        "overflow": false
+      }
+    },
+    {
+      "id": "function.route-opens-on-configuration",
+      "status": "PASS",
+      "detail": "configuration"
+    },
+    {
+      "id": "function.surface-owned-not-generic-workbench",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "id": "function.page-errors-none",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "id": "function.domain-selection-table",
+      "status": "PASS",
+      "detail": {
+        "before": "security",
+        "after": "language"
+      }
+    },
+    {
+      "id": "function.domain-selection-left-pane-syncs",
+      "status": "PASS",
+      "detail": "language"
+    },
+    {
+      "id": "function.tabs-diff-log-observations",
+      "status": "PASS",
+      "detail": {
+        "logOk": {
+          "tab": "log",
+          "items": 4
+        },
+        "obsOk": {
+          "rows": 6
+        },
+        "diffOk": {
+          "panes": 2,
+          "lines": 8,
+          "side": true
+        }
+      }
+    },
+    {
+      "id": "function.filter-kind",
+      "status": "PASS",
+      "detail": {
+        "opRows": 3,
+        "prefRows": 5
+      }
+    },
+    {
+      "id": "function.search-filter-and-focus-retained",
+      "status": "PASS",
+      "detail": {
+        "rows": 1,
+        "focus": true,
+        "value": "security"
+      }
+    },
+    {
+      "id": "function.validate-updates-readiness-and-status",
+      "status": "PASS",
+      "detail": {
+        "before": true,
+        "after": {
+          "readiness": 100,
+          "publishDisabled": false,
+          "status": [
+            "No change",
+            "Draft change",
+            "Draft change",
+            "Draft change",
+            "Draft change",
+            "Authority pending",
+            "No change",
+            "No change"
+          ]
+        }
+      }
+    },
+    {
+      "id": "function.publish-applies-preference-scope-durably",
+      "status": "PASS",
+      "detail": {
+        "densityBefore": "comfortable",
+        "after": "compact",
+        "source": "global"
+      }
+    },
+    {
+      "id": "truth.operational-scope-never-applied",
+      "status": "PASS",
+      "detail": "03:22REVISION_PUBLISHEDPublished CFG-REV-0043: 5 preference(s) through ScopedPreferencesOwner · 4 operational change(s) stayed authority-parked"
+    },
+    {
+      "id": "function.discard-requires-confirmation",
+      "status": "PASS",
+      "detail": {
+        "dialog": true,
+        "confirm": true,
+        "cancel": true,
+        "title": "Discard draft changes"
+      }
+    },
+    {
+      "id": "function.discard-clears-draft",
+      "status": "PASS",
+      "detail": {
+        "zero": 8,
+        "changedLines": 0,
+        "summaryTotal": "0",
+        "notice": "No differences in this domain between the two revisions."
+      }
+    },
+    {
+      "id": "function.settings-opens-with-language-direction-block",
+      "status": "PASS",
+      "detail": {
+        "open": true,
+        "title": "Settings & Preferences",
+        "langBlock": true,
+        "localeButtons": 2,
+        "localeOutsideBlock": 0,
+        "directionOutsideBlock": 0,
+        "languageFields": 2,
+        "dir": "ltr",
+        "lang": "en",
+        "footer": true,
+        "authorities": "user-preference"
+      }
+    },
+    {
+      "id": "function.settings-locale-switch-ar",
+      "status": "PASS",
+      "detail": {
+        "lang": "ar",
+        "dir": "rtl",
+        "h1": "تحرير ومراجعة إعدادات المنصة",
+        "title": "الإعدادات والتفضيلات",
+        "panelDir": "rtl"
+      }
+    },
+    {
+      "id": "function.settings-locale-switch-en",
+      "status": "PASS",
+      "detail": {
+        "lang": "en",
+        "dir": "ltr",
+        "h1": "Edit and review platform configuration",
+        "title": "Settings & Preferences"
+      }
+    },
+    {
+      "id": "function.settings-closed-after-escape",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "id": "g20.document-shell-follows-active-preference",
+      "status": "PASS",
+      "detail": {
+        "lang": "en",
+        "dir": "ltr",
+        "langAuthority": "user-preference",
+        "dirAuthority": "derived-from-locale:user-preference"
+      }
+    }
+  ],
+  "captures": [
+    {
+      "name": "en-1536-top",
+      "file": "/tmp/opencode/w05-config/audit/en-1536-top.png",
+      "sha256": "d03348301e62a1efdcbb96b71af867571307396064f87282ecae752389905ff1",
+      "bytes": 320477,
+      "dims": "1536x1024"
+    },
+    {
+      "name": "en-1536-bottom",
+      "file": "/tmp/opencode/w05-config/audit/en-1536-bottom.png",
+      "sha256": "8dccb569a31e63d4523735422389be5023a2a0e0fa8b0c2cd0768611b91172a6",
+      "bytes": 312335,
+      "dims": "1536x1024"
+    },
+    {
+      "name": "crop-left-en",
+      "file": "/tmp/opencode/w05-config/audit/crop-left-en.png",
+      "sha256": "378d7f9220d3559db41e8354f60d31013d11c2d62045858af85580e36e7cb554",
+      "bytes": 74188,
+      "dims": "304x803"
+    },
+    {
+      "name": "crop-diff-en",
+      "file": "/tmp/opencode/w05-config/audit/crop-diff-en.png",
+      "sha256": "6727fa675c4b4a70f49b82335512818f14281e9840181bb76f233c3d16028930",
+      "bytes": 69464,
+      "dims": "710x578"
+    },
+    {
+      "name": "crop-right-en",
+      "file": "/tmp/opencode/w05-config/audit/crop-right-en.png",
+      "sha256": "d55bb0e1186f43412ed97f95b0f3fe0a5ffd2b4c994d1c3a35acc8ee74ca9175",
+      "bytes": 58617,
+      "dims": "420x803"
+    },
+    {
+      "name": "crop-table-en",
+      "file": "/tmp/opencode/w05-config/audit/crop-table-en.png",
+      "sha256": "69b8ede7c6708f50ce5eb990758e2ad35b9556dbbadcc89f5af791bcf89377dd",
+      "bytes": 102592,
+      "dims": "710x714"
+    },
+    {
+      "name": "en-1280x860",
+      "file": "/tmp/opencode/w05-config/audit/en-1280x860.png",
+      "sha256": "20511a3b12c3f4443fd9f424b3b400b3cdfd5457a42f0149b28e0adcf2ec7034",
+      "bytes": 224952,
+      "dims": "1280x860"
+    },
+    {
+      "name": "en-1024x900",
+      "file": "/tmp/opencode/w05-config/audit/en-1024x900.png",
+      "sha256": "bb0fee6200233f342a74ec97305719ee5cfeb34feab706a8d667695ba1ed737c",
+      "bytes": 207123,
+      "dims": "1024x900"
+    },
+    {
+      "name": "en-820x900",
+      "file": "/tmp/opencode/w05-config/audit/en-820x900.png",
+      "sha256": "03bcd347f2eb675392783241395a7181a9ebbf5181f1980c3c2a071ae610124c",
+      "bytes": 123937,
+      "dims": "820x900"
+    },
+    {
+      "name": "ar-1536-top",
+      "file": "/tmp/opencode/w05-config/audit/ar-1536-top.png",
+      "sha256": "f84c75604e18c02e84afe47d5e0b39894c9c4370c3f574e69b2fccb6f0fdf971",
+      "bytes": 271475,
+      "dims": "1536x1024"
+    },
+    {
+      "name": "ar-1536-bottom",
+      "file": "/tmp/opencode/w05-config/audit/ar-1536-bottom.png",
+      "sha256": "28fb0a3fba073d2fcf4b0ff44eb46de18f01e9df3989e95f42f9eda9db8e078a",
+      "bytes": 277981,
+      "dims": "1536x1024"
+    },
+    {
+      "name": "crop-left-ar",
+      "file": "/tmp/opencode/w05-config/audit/crop-left-ar.png",
+      "sha256": "3457084dcfdf04a0214cd480338a33d639569f2457f1eb58b423bb2d3805fd8a",
+      "bytes": 65434,
+      "dims": "304x803"
+    },
+    {
+      "name": "crop-diff-ar",
+      "file": "/tmp/opencode/w05-config/audit/crop-diff-ar.png",
+      "sha256": "7084333e68ae20a5e7fa038fc73ce820085435b7c5baa1edf60ee329bc125718",
+      "bytes": 63425,
+      "dims": "710x579"
+    },
+    {
+      "name": "crop-right-ar",
+      "file": "/tmp/opencode/w05-config/audit/crop-right-ar.png",
+      "sha256": "b4be5e7a106435b0cf9b50a48a364885087461df73de79a046bd22ca3b3cb413",
+      "bytes": 54724,
+      "dims": "420x803"
+    },
+    {
+      "name": "crop-table-ar",
+      "file": "/tmp/opencode/w05-config/audit/crop-table-ar.png",
+      "sha256": "055e626003bf78bcb94a39b4fc5a9e4e93107ea99f561be5a525e8a24692d251",
+      "bytes": 82446,
+      "dims": "710x714"
+    }
+  ],
+  "geometry": {
+    "en": {
+      "viewport": {
+        "w": 1536,
+        "h": 1024
+      },
+      "regions": {
+        "banner": {
+          "x": 0,
+          "y": 78,
+          "w": 1536,
+          "h": 56
+        },
+        "toolbar": {
+          "x": 913,
+          "y": 142,
+          "w": 611,
+          "h": 31
+        },
+        "left": {
+          "x": 0,
+          "y": 182,
+          "w": 304,
+          "h": 803
+        },
+        "stage": {
+          "x": 315,
+          "y": 182,
+          "w": 790,
+          "h": 803
+        },
+        "right": {
+          "x": 1116,
+          "y": 182,
+          "w": 420,
+          "h": 803
+        },
+        "bottom": {
+          "x": 0,
+          "y": 985,
+          "w": 1536,
+          "h": 39
+        }
+      },
+      "center": {
+        "root": {
+          "x": 335,
+          "y": 202,
+          "w": 750,
+          "h": 1750
+        },
+        "strip": {
+          "x": 355,
+          "y": 220,
+          "w": 710,
+          "h": 165
+        },
+        "facts": {
+          "x": 355,
+          "y": 399,
+          "w": 710,
+          "h": 102
+        },
+        "domains": {
+          "x": 355,
+          "y": 515,
+          "w": 710,
+          "h": 713
+        },
+        "revision": {
+          "x": 355,
+          "y": 1242,
+          "w": 710,
+          "h": 577
+        },
+        "footnote": {
+          "x": 355,
+          "y": 1847,
+          "w": 710,
+          "h": 79
+        }
+      },
+      "leftPane": {
+        "root": {
+          "x": 13,
+          "y": 238,
+          "w": 278,
+          "h": 1210
+        },
+        "sections": 3,
+        "navItems": 8
+      },
+      "rightPane": {
+        "root": {
+          "x": 1145,
+          "y": 254,
+          "w": 362,
+          "h": 1601
+        },
+        "cards": 9
+      },
+      "table": {
+        "thead": {
+          "x": 356,
+          "y": 661,
+          "w": 708,
+          "h": 41
+        },
+        "rowHeights": [
+          {
+            "h": 66,
+            "w": 708
+          },
+          {
+            "h": 66,
+            "w": 708
+          },
+          {
+            "h": 66,
+            "w": 708
+          },
+          {
+            "h": 66,
+            "w": 708
+          },
+          {
+            "h": 66,
+            "w": 708
+          },
+          {
+            "h": 66,
+            "w": 708
+          },
+          {
+            "h": 66,
+            "w": 708
+          },
+          {
+            "h": 65,
+            "w": 708
+          }
+        ],
+        "rowCols": "282px 118px 84px 132px 20px"
+      },
+      "diff": {
+        "root": {
+          "x": 374,
+          "y": 1311,
+          "w": 672,
+          "h": 489
+        },
+        "panes": [
+          {
+            "x": 374,
+            "w": 329,
+            "h": 240
+          },
+          {
+            "x": 717,
+            "w": 329,
+            "h": 240
+          }
+        ],
+        "side": {
+          "x": 374,
+          "y": 1565,
+          "w": 672,
+          "h": 235
+        },
+        "lines": 10
+      },
+      "type": {
+        "h1": {
+          "fontSize": "26px",
+          "fontWeight": "800",
+          "lineHeight": "31.2px",
+          "letterSpacing": "-0.26px"
+        },
+        "h2": {
+          "fontSize": "16.5px",
+          "fontWeight": "750"
+        },
+        "body": {
+          "fontSize": "14px",
+          "lineHeight": "21.7px",
+          "color": "rgb(231, 237, 249)"
+        },
+        "navStrong": {
+          "fontSize": "13.4px",
+          "fontWeight": "660"
+        }
+      },
+      "spacing": {
+        "rootGap": {
+          "rowGap": "14px",
+          "paddingTop": "18px",
+          "paddingInlineStart": "20px"
+        },
+        "blockPad": {
+          "paddingTop": "15px",
+          "paddingBottom": "13px",
+          "paddingInlineStart": "18px"
+        },
+        "rowPad": {
+          "paddingTop": "11px",
+          "paddingBottom": "11px",
+          "paddingInlineStart": "16px"
+        },
+        "radius": {
+          "borderRadius": "12px",
+          "borderColor": "rgb(29, 43, 69)",
+          "backgroundColor": "rgb(14, 23, 41)"
+        }
+      },
+      "contrast": {
+        "rootColor": {
+          "color": "rgb(231, 237, 249)",
+          "backgroundColor": "rgba(0, 0, 0, 0)"
+        }
+      },
+      "overflow": {
+        "stageScroll": 1790,
+        "stageClient": 803,
+        "hScroll": false
+      }
+    },
+    "ar": {
+      "lang": "ar",
+      "dir": "rtl",
+      "root": {
+        "x": 335,
+        "y": -117,
+        "w": 750,
+        "h": 1732
+      },
+      "table": {
+        "x": 356,
+        "y": 322,
+        "w": 708,
+        "h": 41
+      },
+      "tableX": 356,
+      "statusOnLeft": true,
+      "domainOnRight": true,
+      "factsX": 355,
+      "leftPane": {
+        "x": 0,
+        "y": 182,
+        "w": 304,
+        "h": 803
+      },
+      "rightPane": {
+        "x": 1116,
+        "y": 182,
+        "w": 420,
+        "h": 803
+      },
+      "leftIsLeft": true,
+      "diffPanes": [
+        717,
+        374
+      ],
+      "rtlHeadingDir": "rtl",
+      "overflow": false,
+      "stageScroll": true
+    }
+  }
+}

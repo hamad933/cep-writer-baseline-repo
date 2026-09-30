@@ -3,22 +3,17 @@ import {CollectionTableMatrixPresentationCore,type CollectionTableMatrixDomainAd
 import {defineContextDescriptorProvider} from '../../foundation/global/context-descriptor-contract.js';
 import {createFamilyWorkspaceBinding} from '../../foundation/workspace-host.js';
 import {ReleasesDomainAdapter,RELEASES_COMMANDS} from '../../adapters/releases/domain-adapter.js';
+import {RECORD_BASIS,domainCandidates} from './records.js';
+import {createReleasesSurfaceRuntime} from './runtime.js';
 export const RELEASES_SURFACE_ID='releases';
 
 /* Representative product state for the W05 Releases surface. The domain adapter default stays
    EMPTY (releases.empty-is-not-green-readiness is unchanged); the composition supplies records so
-   the Owner-confirmed releases reference structure (release info strip, three separated truths,
-   history) has something authoritative to present. Exact SHAs/digests are visibly synthetic
-   fixture values and every record states that basis in the UI. */
-const RECORD_BASIS='W05_SURFACE_REPRESENTATIVE_RECORD · exact commit/tree/artifact digests are synthetic fixture values, not a built artifact';
-const rep=(ch:string)=>ch.repeat(64);
-const RELEASE_REPRESENTATIVE_FIXTURES:any[]=[
-  {candidateId:'REL-2026.08.31-RC2',commitSHA:rep('a'),treeSHA:rep('1'),artifactDigest:rep('b'),state:'TECHNICALLY_READY',evidenceDigest:rep('2'),authorization:'NONE',deployment:'NOT_DEPLOYED',deploymentObservedAt:null},
-  {candidateId:'REL-2026.08.30-RC1',commitSHA:rep('c'),treeSHA:rep('3'),artifactDigest:rep('d'),state:'TECHNICALLY_READY',evidenceDigest:rep('4'),authorization:'GRANTED',deployment:'DEPLOYED',deploymentObservedAt:'2026-08-30T09:20:00Z'},
-  {candidateId:'REL-2026.08.29-RC3',commitSHA:rep('e'),treeSHA:rep('5'),artifactDigest:rep('f'),state:'NOT_READY',evidenceDigest:rep('6'),authorization:'REVOKED',deployment:'NOT_DEPLOYED',deploymentObservedAt:null},
-  {candidateId:'REL-2026.08.27-RC2',commitSHA:rep('0'),treeSHA:rep('7'),artifactDigest:rep('8'),state:'ASSEMBLED',evidenceDigest:rep('9'),authorization:'NONE',deployment:'UNKNOWN',deploymentObservedAt:null},
-  {candidateId:'REL-2026.08.25-RC1',commitSHA:rep('1'),treeSHA:rep('2'),artifactDigest:rep('3'),state:'ASSEMBLED',evidenceDigest:rep('5'),authorization:'NONE',deployment:'UNKNOWN',deploymentObservedAt:null}
-].map(row=>({...row,recordBasis:RECORD_BASIS}));
+   the Owner-confirmed releases reference structure (release identity strip, three separated
+   truths, gates/verification, deployment stages, rollback readiness, approvers) has something
+   authoritative to present. Exact SHAs/digests are visibly synthetic fixture values and every
+   record states that basis in the UI. */
+const RELEASE_REPRESENTATIVE_FIXTURES:any[]=domainCandidates();
 /* Runtime-measured: a default (unseeded) ReleasesDomainAdapter carries no candidates.
    The empty-set-not-green truth law is asserted against THIS value, not against the
    composition's representative records. */
@@ -46,5 +41,9 @@ export function createReleasesSurfaceComposition({adapter=null,commands=null,ana
         {id:'invariants',label:'الحقائق الثابتة · Invariants',tabs:[{id:'rules',label:'Design invariants',fields:[{id:'inv1',label:'التقنية',value:'PUSH/CI PASS is not acceptance',technical:false},{id:'inv2',label:'التخويل',value:'Authorization is not deployment',technical:false},{id:'inv3',label:'ربط الأدلة',value:'Candidate A evidence cannot authorize B',technical:false},{id:'inv4',label:'حدود التنفيذ',value:'No release/deploy execution is authorised by this design packet',technical:false}]}]},
         {id:'record',label:'أساس السجل · Record basis',tabs:[{id:'basis',label:'Provenance of this record',fields:fields([['Record basis',RECORD_BASIS]])}]}
       ]};}});
-  return {surface:RELEASES_SURFACE_ID,domainDefaultCandidateCount:DOMAIN_DEFAULT_CANDIDATE_COUNT,representativeRecordBasis:RECORD_BASIS,workspaceBinding:createFamilyWorkspaceBinding({id:'releases.workspace',family:'global',domainKind:'releases',label:'Releases'}),adapter,commands,collection,tableAdapter,contextProvider,toolbarCommandIds:[...RELEASES_COMMANDS],bottomProjection:(candidateId:any)=>{const d:any=adapter.diagnosticProjection();delete d.history;const la=adapter.lastAction;return {recordBasis:RECORD_BASIS,selectedId:String(candidateId||d.selectedId||'NONE'),lastAction:la?`${la.commandId} · ok=${String(la.ok)} · ${la.code||''} · ${la.pairId||la.candidateId||''} · differences=${String(la.differences??'')}`:'NONE',deploymentExecutionCapability:d.deploymentExecutionCapability,deploymentProviderMayBeUnavailable:String(d.deploymentProviderMayBeUnavailable),technicalReadinessIsOwnerAuthorization:'false',ownerAuthorizationIsDeployment:'false',readinessExecutesDeployment:'false',threeTruths:THREE_TRUTHS.map((t:any)=>`${t.axis} (${t.en}) · owner=${t.owner} · ${t.ceiling}`),timeline:(d.candidates||[]).map((c:any)=>`${c.candidateId} · ${c.state} · auth ${c.authorization} · deployment ${c.deployment}`)}},compareBinding:{owner:'AnalyticalCompareOwner',providerId:'releases.exact-candidate.v1',pairSemantics:'TWO_EXACT_PINNED_RELEASE_CANDIDATES'},truthCeiling:{technicalReadinessIsOwnerAuthorization:false,ownerAuthorizationIsDeployment:false,readinessExecutesDeployment:false,authorizationExecutesDeployment:false},providerTruth:{deploymentExecution:'NOT_OWNED',deploymentObservationMayBe:'UNKNOWN'},platformTruth:{activeKeyboardSource:'UNAVAILABLE_OR_FALLBACK',nativeWindow:'UNAVAILABLE_OR_SEPARATE_PLATFORM_CAPABILITY'},slots:{TOP:'shared',TOOLBAR:'shared',LEFT:'collection',CENTER:'ReleaseGovernanceWorkbench',RIGHT:'shared-context-inspector',BOTTOM:'shared-bottom-shell/domain-projection',TRANSIENT:'shared'}};
+  const runtime=createReleasesSurfaceRuntime({adapter,commands});
+  runtime.installGovernor();
+  const composition:any={surface:RELEASES_SURFACE_ID,domainDefaultCandidateCount:DOMAIN_DEFAULT_CANDIDATE_COUNT,representativeRecordBasis:RECORD_BASIS,workspaceBinding:createFamilyWorkspaceBinding({id:'releases.workspace',family:'global',domainKind:'releases',label:'Releases'}),adapter,commands,collection,tableAdapter,contextProvider,toolbarCommandIds:[...RELEASES_COMMANDS],bottomProjection:(candidateId:any)=>{const d:any=adapter.diagnosticProjection();delete d.history;const la=adapter.lastAction;return {recordBasis:RECORD_BASIS,selectedId:String(candidateId||d.selectedId||'NONE'),lastAction:la?`${la.commandId} · ok=${String(la.ok)} · ${la.code||''} · ${la.pairId||la.candidateId||''} · differences=${String(la.differences??'')}`:'NONE',deploymentExecutionCapability:d.deploymentExecutionCapability,deploymentProviderMayBeUnavailable:String(d.deploymentProviderMayBeUnavailable),technicalReadinessIsOwnerAuthorization:'false',ownerAuthorizationIsDeployment:'false',readinessExecutesDeployment:'false',threeTruths:THREE_TRUTHS.map((t:any)=>`${t.axis} (${t.en}) · owner=${t.owner} · ${t.ceiling}`),timeline:(d.candidates||[]).map((c:any)=>`${c.candidateId} · ${c.state} · auth ${c.authorization} · deployment ${c.deployment}`)}},compareBinding:{owner:'AnalyticalCompareOwner',providerId:'releases.exact-candidate.v1',pairSemantics:'TWO_EXACT_PINNED_RELEASE_CANDIDATES'},truthCeiling:{technicalReadinessIsOwnerAuthorization:false,ownerAuthorizationIsDeployment:false,readinessExecutesDeployment:false,authorizationExecutesDeployment:false},providerTruth:{deploymentExecution:'NOT_OWNED',deploymentObservationMayBe:'UNKNOWN'},platformTruth:{activeKeyboardSource:'UNAVAILABLE_OR_FALLBACK',nativeWindow:'UNAVAILABLE_OR_SEPARATE_PLATFORM_CAPABILITY'},slots:{TOP:'shared',TOOLBAR:'shared',LEFT:'collection',CENTER:'ReleaseGovernanceWorkbench',RIGHT:'shared-context-inspector',BOTTOM:'shared-bottom-shell/domain-projection',TRANSIENT:'shared'}};
+  composition.runtime=runtime;
+  return composition;
 }

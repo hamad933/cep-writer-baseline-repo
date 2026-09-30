@@ -1,0 +1,76 @@
+{
+  "capturedAt": "2026-09-30T03:15:57.907Z",
+  "cases": [
+    {
+      "id": "no-user-preference",
+      "seed": null,
+      "shell": {
+        "lang": "en",
+        "dir": "ltr",
+        "languageAuthority": "browsing-context-language-environment",
+        "directionAuthority": "derived-from-locale:browsing-context-language-environment",
+        "bakedPresent": false
+      },
+      "expectedAuthority": "browsing-context-language-environment",
+      "pass": true,
+      "capture": {
+        "file": "/tmp/opencode/w05-config/g20/shell-no-user-preference.png",
+        "sha256": "045343d2f7d2e34e72086c68d7df677902994bc39e7b72e751bc9b8bc6340dd5",
+        "bytes": 98354,
+        "dims": "1536x1024"
+      }
+    },
+    {
+      "id": "user-preference-ar",
+      "seed": {
+        "locale": "ar"
+      },
+      "shell": {
+        "lang": "ar",
+        "dir": "rtl",
+        "languageAuthority": "user-preference",
+        "directionAuthority": "derived-from-locale:user-preference",
+        "bakedPresent": false
+      },
+      "expectedAuthority": "user-preference",
+      "pass": true,
+      "capture": {
+        "file": "/tmp/opencode/w05-config/g20/shell-user-preference-ar.png",
+        "sha256": "280a4157d959e03276232ab4c1ffea8a12e00fdd658239192e57129b98ab949e",
+        "bytes": 98581,
+        "dims": "1536x1024"
+      }
+    },
+    {
+      "id": "user-preference-en-with-pin-rtl",
+      "seed": {
+        "locale": "en",
+        "chromeDirection": "rtl"
+      },
+      "shell": {
+        "lang": "en",
+        "dir": "rtl",
+        "languageAuthority": "user-preference",
+        "directionAuthority": "user-preference",
+        "bakedPresent": false
+      },
+      "expectedAuthority": "user-preference",
+      "pass": true,
+      "capture": {
+        "file": "/tmp/opencode/w05-config/g20/shell-user-preference-en-with-pin-rtl.png",
+        "sha256": "280a4157d959e03276232ab4c1ffea8a12e00fdd658239192e57129b98ab949e",
+        "bytes": 98581,
+        "dims": "1536x1024"
+      }
+    },
+    {
+      "id": "js-disabled-shell-has-no-baked-language-or-direction",
+      "raw": {
+        "lang": null,
+        "dir": null
+      },
+      "pass": true,
+      "htmlHead": "<!DOCTYPE html><html><head>\n<!-- QUALITY_FIRST_CONVERGENCE_WAVE_03 + USER_FEEDBACK_ULTRA_FUNCTIONAL_CONVERGENCE + FULL_SURFACE_INTENSIVE_CONVERGENCE: 2026-09-06 · SAME-LINEAGE CANDIDATE · zero-default creation · lossless"
+    }
+  ]
+}

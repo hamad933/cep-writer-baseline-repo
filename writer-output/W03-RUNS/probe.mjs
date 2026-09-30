@@ -1,0 +1,14 @@
+import {chromium} from 'playwright';
+import {spawn} from 'node:child_process';
+import net from 'node:net';
+const freePort=()=>new Promise(res=>{const s=net.createServer();s.listen(0,'127.0.0.1',()=>{const p=s.address().port;s.close(()=>res(p))})});
+const port=await freePort();
+const server=spawn(process.execPath,['tools/serve.mjs','--port',String(port)],{stdio:'ignore'});
+await new Promise(r=>setTimeout(r,800));
+const b=await chromium.launch();const p=await b.newPage();
+const errs=[];p.on('pageerror',e=>errs.push(String(e.message||e)));p.on('console',m=>{if(m.type()==='error')errs.push('console:'+m.text().slice(0,300))});
+await p.goto(`http://127.0.0.1:${port}/?surface=runs`,{waitUntil:'networkidle'});
+await p.waitForTimeout(3000);
+const info=await p.evaluate(()=>({cf:!!window.CEPFoundation,consumer:window.CEPFoundation?.consumer||null,body:document.body.dataset.consumer||null}));
+console.log(JSON.stringify({info,errs:errs.slice(0,12)},null,1));
+await b.close();server.kill();

@@ -1,0 +1,67 @@
+{
+  "SURFACE": "manual_ai",
+  "OWNER": "W05-MANUAL-AI",
+  "REFERENCE": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/04_AI_BRIDGE/CEP_SYSTEM_AI_BRIDGE_REFERENCE.png",
+  "REFERENCE_CLASSIFICATION": "OWNER_CONFIRMED_FINAL_REFERENCE",
+  "REFERENCE_LINEAGE": {
+    "sha256": "ae1d8df7230c9719bb7a8026949c285dc8c9b11f3b050899b1ec2d9b02b9f526",
+    "dims": "1525x1031",
+    "bytes": 1500124,
+    "register": "cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md",
+    "integrity": "cep-writer/REFERENCE_MANIFEST.json",
+    "verifiedThisSession": true,
+    "authorityScope": "composition, information architecture, hierarchy, pane organization, density/rhythm, interaction language, visual emphasis, responsive intent. NOT a pixel copy; NOT a product-language authority."
+  },
+  "CURRENT_CANDIDATE": "working-tree delta on branch writer/mi-serial (base e2a915e) — surfaces/manual_ai/{composition,presentation,style,workbench,panes,runtime}.ts + adapters/manual_ai/domain-adapter.ts, built through tools/writer-serial.sh npm run build:runtime",
+  "FILES_CHANGED": [
+    "stack/native-typescript/surfaces/manual_ai/composition.ts",
+    "stack/native-typescript/surfaces/manual_ai/presentation.ts",
+    "stack/native-typescript/surfaces/manual_ai/style.ts",
+    "stack/native-typescript/surfaces/manual_ai/workbench.ts",
+    "stack/native-typescript/surfaces/manual_ai/panes.ts",
+    "stack/native-typescript/surfaces/manual_ai/runtime.ts",
+    "stack/native-typescript/adapters/manual_ai/domain-adapter.ts"
+  ],
+  "FUNCTIONAL_STATUS": "SEE_EVIDENCE_audit_json",
+  "STRUCTURAL_STATUS": "SEE_EVIDENCE_audit_json",
+  "VISUAL_STATUS": "IN_PROGRESS",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": ["L1", "L2"],
+  "RESPONSIVE_STATUS": "PENDING",
+  "RTL_LTR_STATUS": "PENDING",
+  "DEFECTS_FOUND": [
+    {"id": "D-01", "severity": "V4", "root_cause": "SURFACE_COMPOSITION", "before": "Surface rendered as the shared generic typed-collection workbench: header 'Manual Ai workbench', a bare 2-column table in LEFT, a flat key/value semantic projection in CENTER, generic context inspector in RIGHT.", "fix": "Surface-owned presentation governor (runtime.ts) re-asserts an A..E adjudication workbench + facet/record list + governance context; scoped style sheet keyed on [data-ma-owned=manual_ai]."},
+    {"id": "D-02", "severity": "V3", "root_cause": "SURFACE_COMPOSITION", "before": "No exchange-state model anywhere on screen — the core of the AI-Bridge reference (its section C stepper) was absent.", "fix": "7-step exchange stepper derived from domain truth (stepStatuses) with done/current/blocked/pending states + current-state and equality pills."},
+    {"id": "D-03", "severity": "V3", "root_cause": "SURFACE_COMPOSITION", "before": "RIGHT pane showed a generic Identity/Provenance inspector instead of the reference's governance context.", "fix": "9 governance-context cards (assisted analysis only, no hidden provider call, source authority, acceptance conditions, sensitive data, response is not a decision, human decision required, next action, record basis)."},
+    {"id": "D-04", "severity": "V3", "root_cause": "CONTENT_MODEL", "before": "6 placeholder records (MAN-PROP-000x) with one-line Arabic content, no titles, no files, no scope, no verdict — repeated near-identical cards.", "fix": "8 realistic records (AIB-REQ-0044..0051) covering all 7 domain states, each with bilingual title/project/scope/files/clearance verdict and truthful payload/response content."},
+    {"id": "D-05", "severity": "V2", "root_cause": "IMPLEMENTATION", "before": "'Prepare manual packet' was always enabled but always threw MANUAL_PREPARE_IDENTITY_REQUIRED; 'Import external result' had no input path; 'Record human disposition' had no disposition.", "fix": "toolbarContext now carries a declared-source preparation payload (NEXT_REQUEST_DECLARATION, part of the representative fixture set), an operator-declared response intake field gating import via availability(requireResponse), and dispositions moved to section E where the reviewer sees the evidence."},
+    {"id": "D-06", "severity": "V2", "root_cause": "STALE_DECISION", "before": "Banner read 'Manual Ai · Workspace'; toolbar labels were English-only in an Arabic UI ('Settings / الإعدادات' half-translated); pane headers read 'Manual Ai workbench · Collection'.", "fix": "Governor sets bilingual banner title/badge/detail, fully localised action-strip labels, and reference-language pane labels (Bridge records / سجلات الجسر, Governance context / سياق الحوكمة)."},
+    {"id": "D-07", "severity": "V2", "root_cause": "SURFACE_COMPOSITION", "before": "No bottom/temporary-workspace presentation; shelf showed generic 'deep work' copy.", "fix": "bottomProjectionFor() supplies the reference's temporary workspace (cleared payload, imported response, declared digests, equality result) and the shelf title/summary are localised to the reference's strip copy."},
+    {"id": "D-08", "severity": "V1", "root_cause": "EVIDENCE/ORACLE", "before": "Full-frame vision reads returned stale frames for sha256 899fa582... (showed the pre-change render) while tesseract OCR of the same bytes showed the post-change render.", "fix": "Vision conflict recorded; all visual claims cross-checked against OCR of identical bytes + DOM geometry probes; crop reads used where full frames were stale. Vision verification remains OPEN — see BLOCKERS."}
+  ],
+  "DEFECT_SEVERITY": "1xV4, 3xV3, 3xV2, 1xV1",
+  "ROOT_CAUSE": "SURFACE_COMPOSITION (primary) + CONTENT_MODEL + IMPLEMENTATION + STALE_DECISION + EVIDENCE/ORACLE",
+  "FIXES_APPLIED": ["See DEFECTS_FOUND[].fix"],
+  "RECAPTURE_STATUS": "IN_PROGRESS",
+  "RECOMPARISON_STATUS": "IN_PROGRESS",
+  "REGRESSION_STATUS": "PENDING",
+  "EVIDENCE": [
+    {"role": "BASELINE (pre-change, superseded but retained)", "dir": "/tmp/opencode/w05-manual-ai/baseline", "sha256_en_1536": "94f2f4209c3e7a3d237d70b0e62f14f168b99b468e1039b8537195cb8af0c2a6", "dims": "1536x1024"},
+    {"role": "CANDIDATE c2", "dir": "/tmp/opencode/w05-manual-ai/c2", "sha256_en_1536": "899fa582aefd1165987be99de08e328a9902cb8774d8b18ab11223a6e4ce64f3", "dims": "1536x1024"},
+    {"role": "CANDIDATE audit", "path": "writer-output/W05-MANUAL-AI/evidence/audit.json", "status": "PENDING"}
+  ],
+  "LINEAGE": {
+    "unit": "W05-MANUAL-AI",
+    "branch": "writer/mi-serial",
+    "base_commit": "e2a915e",
+    "reference_sha256_prefix": "ae1d8df7230c9719",
+    "reference_dims": "1525x1031",
+    "capture_tool": "playwright-chromium-headless via writer-output/W05-MANUAL-AI/evidence/harness/audit.mjs",
+    "cross_check": "sha256 + tesseract OCR of identical bytes + DOM geometry probes (vision full-frame reads stale, see D-08)",
+    "git_note": "No git add/commit performed by this writer — changes left in the working tree for the Controller."
+  },
+  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
+  "BLOCKERS": [
+    "Vision verification OPEN: full-frame image reads of en-1536.png returned stale frames twice (rendering the pre-change surface) while OCR of the same sha256 returned the post-change surface. Crop reads were fresh. Visual verdicts in this report are grounded on OCR + DOM geometry + crop reads; the Controller should re-verify full-frame reads independently."
+  ],
+  "_STAGE": "BUILD_COMPLETE__AUDIT_PENDING"
+}

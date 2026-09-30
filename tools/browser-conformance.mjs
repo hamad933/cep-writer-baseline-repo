@@ -17,7 +17,7 @@ try { playwright = require('playwright'); } catch (primaryError) {
 const { chromium } = playwright;
 const root = new URL('../', import.meta.url), port = 43173, base = `http://127.0.0.1:${port}`;
 const runtimeRegistry = JSON.parse(await readFile(new URL('contracts/FOUNDATION_RUNTIME_REGISTRY.json', root), 'utf8'));
-const browserTransport = process.env.CEP_BROWSER_TRANSPORT === 'in-memory' ? 'in-memory' : 'localhost-http';
+const browserTransport = process.env.CEP_BROWSER_TRANSPORT === 'in-memory' ? 'in-memory' : process.env.CEP_BROWSER_TRANSPORT === 'file' ? 'file' : 'localhost-http';
 const server = browserTransport === 'localhost-http'
   ? spawn(process.execPath, [new URL('tools/serve.mjs', root).pathname, '--port', String(port)], { cwd: new URL('.', root), stdio: ['ignore', 'pipe', 'pipe'] })
   : null;
@@ -67,7 +67,7 @@ const capture = async (page, filename, flowId, property) => {
   screenshots.push({ filename, flowId, property, viewport: await page.viewportSize(), bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex'), scope: 'EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE' });
 };
 const waitForServer = async () => {
-  if (browserTransport === 'in-memory') return;
+  if (browserTransport === 'in-memory' || browserTransport === 'file') return;
   for (let attempt = 0; attempt < 80; attempt += 1) {
     try { if ((await fetch(base)).ok) return; } catch {}
     await new Promise(resolve => setTimeout(resolve, 100));
@@ -75,8 +75,14 @@ const waitForServer = async () => {
   throw Error('PROOF_SERVER_DID_NOT_START');
 };
 const ready = async (page, surface) => {
-  if (browserTransport === 'in-memory') await loadInMemory(page, surface);
-  else await page.goto(`${base}/?surface=${surface}`, { waitUntil: 'networkidle' });
+  if (browserTransport === 'in-memory') {
+    await loadInMemory(page, surface);
+  } else if (browserTransport === 'file') {
+    const fileUrl = new URL(`dist/index.html?surface=${encodeURIComponent(surface)}`, root).href;
+    await page.goto(fileUrl, { waitUntil: 'domcontentloaded' });
+  } else {
+    await page.goto(`${base}/?surface=${surface}`, { waitUntil: 'networkidle' });
+  }
   await page.waitForFunction(expected => window.CEPFoundation?.consumer === expected, surface);
 };
 const selectPair = async (page,{requireEligible=true}={}) => {
@@ -97,7 +103,11 @@ const flow = async (_browser, definition, run) => {
   let isolatedBrowser,context;
   const errors = [];
   try {
-    isolatedBrowser = await chromium.launch({ headless: true, ...(process.env.CEP_BROWSER_EXECUTABLE ? { executablePath: process.env.CEP_BROWSER_EXECUTABLE } : {}) });
+    isolatedBrowser = await chromium.launch({
+      headless: true,
+      ...(process.env.CEP_BROWSER_EXECUTABLE ? { executablePath: process.env.CEP_BROWSER_EXECUTABLE } : {}),
+      ...(browserTransport === 'file' ? { args: ['--allow-file-access-from-files'] } : {})
+    });
     context = await isolatedBrowser.newContext({ viewport: { width: 1440, height: 980 }, reducedMotion: 'reduce' });
     const page = await context.newPage();
     page.on('pageerror', error => errors.push(String(error)));
@@ -217,6 +227,22 @@ try {
     await ready(page, 'runs');
     const open = page.locator('button[data-foundation-command="OPEN_TERMINAL"]').filter({ visible: true }).first();
     await open.click();
+    await page.waitForSelector('#operationalHost .xterm-helper-textarea', {
+      state: 'visible',
+      timeout: 10000
+    });
+    await page.waitForSelector('#operationalHost .xterm-helper-textarea', {
+      state: 'visible',
+      timeout: 10000
+    });
+    await page.waitForSelector('#operationalHost .xterm-helper-textarea', {
+      state: 'visible',
+      timeout: 10000
+    });
+    await page.waitForSelector('#operationalHost .xterm-helper-textarea', {
+      state: 'visible',
+      timeout: 10000
+    });
     const input = page.locator('#operationalHost .xterm-helper-textarea').first();
     await input.focus();
     await page.keyboard.type('shutdown');

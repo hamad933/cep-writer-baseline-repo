@@ -1,0 +1,274 @@
+{
+  "lineage": {
+    "commit": "fa0d309bb6f18bdeb0c43e4c6c98ab63f937c596",
+    "capturedAt": "2026-09-30T03:22:44.760Z"
+  },
+  "checks": [
+    {
+      "id": "settings.purpose-and-language-block",
+      "status": "PASS",
+      "detail": {
+        "title": "Settings & Preferences",
+        "fields": [
+          "locale",
+          "chromeDirection"
+        ],
+        "localeOutside": 0,
+        "directionOutside": 0
+      }
+    },
+    {
+      "id": "settings.localised-groups-and-summaries",
+      "status": "PASS",
+      "detail": {
+        "groups": [
+          "Preferences",
+          "Settings",
+          "Commands",
+          "Shortcuts"
+        ],
+        "summarised": 6,
+        "total": 6
+      }
+    },
+    {
+      "id": "settings.footer-authority",
+      "status": "PASS",
+      "detail": [
+        "Value ownerScopedPreferencesOwner",
+        "Persistence ownerPERSISTED",
+        "Language authorityenvironment",
+        "Preference transfer0 · NONE"
+      ]
+    },
+    {
+      "id": "settings.no-horizontal-overflow",
+      "status": "PASS",
+      "detail": false
+    },
+    {
+      "id": "settings.bilingual-search",
+      "status": "PASS",
+      "detail": {
+        "searchEn": {
+          "rows": 7,
+          "matched": "1 matches"
+        },
+        "searchAr": {
+          "matched": "1 matches",
+          "hasLocale": true
+        }
+      }
+    },
+    {
+      "id": "settings.direction-control-follows-preference",
+      "status": "PASS",
+      "detail": {
+        "dirRtl": {
+          "dir": "rtl",
+          "panelDir": "rtl",
+          "stageDir": "rtl"
+        },
+        "dirAuto": {
+          "dir": "ltr"
+        }
+      }
+    },
+    {
+      "id": "function.page-errors-none-audit2",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "id": "collapsed.left-pane-grows-centre",
+      "status": "PASS",
+      "detail": {
+        "open": 790,
+        "left": 1105
+      }
+    },
+    {
+      "id": "collapsed.both-panes-centre-holds",
+      "status": "PASS",
+      "detail": {
+        "openStage": 790,
+        "both": {
+          "left": 0,
+          "right": 0,
+          "stage": 1536,
+          "leftState": "collapsed",
+          "rightState": "collapsed",
+          "hScroll": false,
+          "tableW": 1454,
+          "overlap": false
+        }
+      }
+    },
+    {
+      "id": "collapsed.restored",
+      "status": "PASS",
+      "detail": {
+        "restored": 790,
+        "open": 790
+      }
+    }
+  ],
+  "captures": [
+    {
+      "name": "settings-en",
+      "file": "/tmp/opencode/w05-config/audit2/settings-en.png",
+      "sha256": "cc98713cf1e942c4e92786e1599c83bd42f5dbe2f92ea5b874bf875c87ea2ebe",
+      "bytes": 359940,
+      "dims": "1536x1024"
+    },
+    {
+      "name": "settings-search-ar-term",
+      "file": "/tmp/opencode/w05-config/audit2/settings-search-ar-term.png",
+      "sha256": "7428680097be13b376d27d6460c13897a37b7b22dcc0c324bb159c8ed744be05",
+      "bytes": 359953,
+      "dims": "1536x1024"
+    },
+    {
+      "name": "settings-direction-rtl",
+      "file": "/tmp/opencode/w05-config/audit2/settings-direction-rtl.png",
+      "sha256": "d23e94760a9b32448d97f7e2f8818e69130f92ad479b6f046e81919c368cfa36",
+      "bytes": 359255,
+      "dims": "1536x1024"
+    },
+    {
+      "name": "collapsed-left",
+      "file": "/tmp/opencode/w05-config/audit2/collapsed-left.png",
+      "sha256": "20879adeec0943d8fb0c02c4515a63047897cde32f8a50ab8520ce51261c7f51",
+      "bytes": 259421,
+      "dims": "1536x1024"
+    },
+    {
+      "name": "collapsed-both",
+      "file": "/tmp/opencode/w05-config/audit2/collapsed-both.png",
+      "sha256": "83c8b9fc1bf1a70f39268811b4ffb8901823f88b2c8bf5b2bdc4780e3455417d",
+      "bytes": 197575,
+      "dims": "1536x1024"
+    }
+  ],
+  "geometry": {
+    "settings": {
+      "panel": {
+        "x": 564,
+        "y": 153,
+        "w": 410,
+        "h": 718
+      },
+      "panelDir": "ltr",
+      "title": "Settings & Preferences",
+      "subtitle": "Configure, then revise, your preferences — language and direction stay changeable at any time",
+      "searchPlaceholder": "Search settings",
+      "languageBlock": {
+        "x": 576,
+        "y": 296,
+        "w": 386,
+        "h": 397
+      },
+      "languageAuthority": "environment",
+      "directionAuthority": "derived-from-locale:environment",
+      "fields": [
+        {
+          "key": "locale",
+          "btns": 2,
+          "labels": [
+            "Arabic",
+            "English"
+          ]
+        },
+        {
+          "key": "chromeDirection",
+          "btns": 3,
+          "labels": [
+            "Follow active language",
+            "Right to left",
+            "Left to right"
+          ]
+        }
+      ],
+      "groups": [
+        {
+          "id": "preferences",
+          "label": "Preferences",
+          "note": "Product language, direction and appearance — your preferences, with no product-language authority"
+        },
+        {
+          "id": "settings",
+          "label": "Settings",
+          "note": "General settings, workspace layout and preference transfer"
+        },
+        {
+          "id": "commands",
+          "label": "Commands",
+          "note": "Semantic command catalog and its availability"
+        },
+        {
+          "id": "shortcuts",
+          "label": "Shortcuts",
+          "note": "Global shortcuts bound to GlobalInputKeymapOwner"
+        }
+      ],
+      "sections": [
+        {
+          "id": "preferences.appearance",
+          "label": "Appearance & access",
+          "note": "Theme, density, scale, font, motion and contrast — presentation preferences saved for you alone.",
+          "summary": "Theme: Dark blue · Density: Comfortable · Interface scale: 1 · +3 more",
+          "open": "false"
+        },
+        {
+          "id": "settings.general",
+          "label": "General",
+          "note": "General behaviour, interface guidance and focus indicators.",
+          "summary": "Guidance: Off · Focus indicators: On · Theme behaviour: Manual · +1 more",
+          "open": "false"
+        },
+        {
+          "id": "settings.layout",
+          "label": "Workspace layout",
+          "note": "Pane geometry, toolbar and document width. Chrome direction is controlled by the language & direction block above.",
+          "summary": "Toolbar: Full · Toolbar order: Standard · Structure pane: Open · +1 more",
+          "open": "false"
+        },
+        {
+          "id": "settings.transfer",
+          "label": "Export / import / reset",
+          "note": "Executed through SettingsCenterOwner and persisted by ScopedPreferencesOwner.",
+          "summary": "3 actions executed through SettingsCenterOwner",
+          "open": "false"
+        },
+        {
+          "id": "commands.catalog",
+          "label": "Command catalog",
+          "note": "Display only — commands are owned by the SemanticCommandBus.",
+          "summary": "31 commands · 18 available",
+          "open": "false"
+        },
+        {
+          "id": "shortcuts.global",
+          "label": "Global shortcuts",
+          "note": "Display only — shortcuts are owned by GlobalInputKeymapOwner.",
+          "summary": "2 global shortcuts",
+          "open": "false"
+        }
+      ],
+      "localeOutside": 0,
+      "directionOutside": 0,
+      "foot": [
+        "Value ownerScopedPreferencesOwner",
+        "Persistence ownerPERSISTED",
+        "Language authorityenvironment",
+        "Preference transfer0 · NONE"
+      ],
+      "chips": [
+        "en English",
+        "LTR",
+        "Your device language — no product-language authority · scope default"
+      ],
+      "overflow": false
+    }
+  }
+}

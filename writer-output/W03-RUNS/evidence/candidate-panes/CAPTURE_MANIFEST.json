@@ -1,0 +1,381 @@
+{
+  "schemaVersion": 1,
+  "proof": "W03-RUNS-CANDIDATE-MOUNT",
+  "label": "candidate-panes",
+  "classification": "FRESH_CURRENT_CANDIDATE__BROWSER_RENDERED__GENUINE_ROUTE_SHELL__CANDIDATE_SURFACE_MOUNT__NOT_A_COORDINATOR_APPLIED_MOUNT",
+  "route": "/?surface=runs",
+  "renderMethod": "GENUINE_ROUTE_SHELL + IN-PAGE CANDIDATE MOUNT (equivalent of SERIALIZED_HOTSPOT_REQUEST H-RUN-1)",
+  "mountSeamRequest": "writer-output/W03-RUNS/SERIALIZED_HOTSPOT_REQUEST.md#h-run-1",
+  "paneState": "refmatched",
+  "paneOverride": {
+    "leftWidth": 236,
+    "rightWidth": 300
+  },
+  "commit": "e5a77b60187e82503c52466665561605a3eea362",
+  "writableRootDiff": "M stack/native-typescript/adapters/runs/domain.ts\n M stack/native-typescript/surfaces/runs/presentation.ts\n?? stack/native-typescript/surfaces/runs/i18n.ts\n?? stack/native-typescript/surfaces/runs/regions.ts\n?? stack/native-typescript/surfaces/runs/styles.ts\n?? stack/native-typescript/surfaces/runs/util.ts\n?? stack/native-typescript/surfaces/runs/views.ts",
+  "node": "v22.16.0",
+  "viewportMatrix": [
+    "1505x1045"
+  ],
+  "locales": [
+    "en",
+    "ar"
+  ],
+  "states": [
+    "operations",
+    "preflight"
+  ],
+  "capturedAt": "2026-09-30T18:38:26.333Z",
+  "frames": [
+    {
+      "locale": "en",
+      "viewport": "1505x1045",
+      "state": "operations",
+      "path": "writer-output/W03-RUNS/evidence/candidate-panes/runs-en-operations-1505x1045-20260930T183810Z.png",
+      "bytes": 309245,
+      "sha256": "de619f232301b95e52b683f0970e5211651fcb4cff4f027f95e5a274869de7e8",
+      "capturedAt": "20260930T183810Z",
+      "mount": {
+        "ok": true,
+        "mode": "operations",
+        "state": {
+          "mode": "operations",
+          "view": "telemetry",
+          "selectedId": "ALERT-7f3a8c1b",
+          "locale": "en",
+          "dir": "ltr"
+        },
+        "domainOwner": "W03RunDomain"
+      },
+      "mountError": null,
+      "pageErrors": [],
+      "info": {
+        "dir": "ltr",
+        "lang": "en",
+        "consumer": "runs",
+        "left": "RUN STRUCTURE Overview Scenario Timeline Tasks 4 Devices 3 Events & Injects 6 Telemetry 4 Observations 7 Artifacts 2 Current Phase: 03 Detection · Operational Role: SOC Analyst RUNNING",
+        "center": "البنية السياق Operations Preflight Timeline Topology Pause End Run Capture Snapshot Web Application Breach & Response RUN-0042 · Scenario Run RUNNING CURRENT PHASE 03 Detection OPERATIONAL ROLE SOC Analyst CURRENT TASK Investigate suspicious SQL activity HEALTH HEALTHY SIEM / Monitoring4 Web Application7 Database1 Firewall1 Identity Service1 INTERNAL_SIMULATION Alerts 4 Severity: High Window 10:18:09 – 10:24:31 UTC TIME (UTC) ALERT TITLE SEVERITY STATUS 10:24:31 Anomalous SQL query detected Correlated application behavior High New 10:22:11 Suspicious parameter patterns Repeated request anomaly High New 10:20:47 Potential database access anomaly Unusual query volume Medium New 10:18:09 Failed login attempts spike From single source IP Low New ‹ 1–4 of 4 › Alert Details High New ALERT-7f3a8c1b Source Web Application Alert ID ALERT-7f3a8c1b Source IP 203.0.113.45 Detection Rule SIM-RULE-1007 Request URI POST /search Technique T1190 — Exploit Public-Facing Application First observed 10:24:31 UTC Run RUN-0042 Event Timeline Matched Rule Attributes Related Artifacts (2) TIME (UTC) SOURCE EVENT DETAILS 10:24:31.482 Web Application DETECTION_RULE_MATCHED SIM-RULE-1007 matched correlated request state 10:24:31.201 Web Application REQUEST_BLOCKED Policy action recorded in simulation state: BLOCK 10:24:30.904 Web Application HTTP_REQUEST_OBSERVED POST /search · synthetic fixture traffic 10:24:30.661 Web Application PARAMETER_ANOMALY Input feature set diverged from baseline 10:24:29.337 Web Application SESSION_ESTABLISHED Session mapped to synthetic IP 203.0.113.45 10:24:28.901 Firewall NETWORK_FLOW_ALLOWED 203.0.113.45 → web-app:443 Highlight Export Temporary work area No terminal session open yet — open one from a capable device. Devices CONNECTED INTERNAL_SIMULATION UNVERIFIED_PLATFORM_GATE InternalSimulationAdapter · epoch No-write projection · this view never mutates run state.",
+        "right": "DETECTION RATIONALE Detection rationale Parameter pattern matched simulated detection signature. Correlation scope Correlated application behavior · 203.0.113.45 · Web Application Operational implication T1190 — Exploit Public-Facing Application · SIM-RULE-1007 Observation High New Recommended next step Investigate suspicious SQL activity Provider InternalSimulationAdapter Runtime truth INTERNAL_SIMULATION Provider epoch undefined CONNECTED UNVERIFIED_PLATFORM_GATE ConPTY, Windows topmost and native-window claims remain unverified here. This candidate neither alters nor certifies the Windows platform provider.",
+        "toolbar": "⌘ Focus Note Notes Open terminal pause run resume run Disconnect provider Reconnect session Recorded result",
+        "mounts": {
+          "workspace": true,
+          "tabs": 9,
+          "alerts": 4,
+          "navItems": 8,
+          "terminalTray": true,
+          "operationalHostInTray": true
+        },
+        "rects": {
+          "workspace": {
+            "w": 947,
+            "h": 788,
+            "x": 247,
+            "y": 218
+          },
+          "split": {
+            "w": 947,
+            "h": 466,
+            "x": 247,
+            "y": 436
+          },
+          "bar": {
+            "w": 947,
+            "h": 46,
+            "x": 247,
+            "y": 218
+          },
+          "identity": {
+            "w": 947,
+            "h": 119,
+            "x": 247,
+            "y": 264
+          },
+          "leftPane": {
+            "w": 236,
+            "h": 824,
+            "x": 0,
+            "y": 182
+          },
+          "rightPane": {
+            "w": 300,
+            "h": 824,
+            "x": 1205,
+            "y": 182
+          },
+          "terminal": {
+            "w": 947,
+            "h": 41,
+            "x": 247,
+            "y": 901
+          }
+        },
+        "scroll": {
+          "sw": 1505,
+          "cw": 1505,
+          "sh": 1045,
+          "ch": 1045
+        }
+      }
+    },
+    {
+      "locale": "en",
+      "viewport": "1505x1045",
+      "state": "preflight",
+      "path": "writer-output/W03-RUNS/evidence/candidate-panes/runs-en-preflight-1505x1045-20260930T183815Z.png",
+      "bytes": 289060,
+      "sha256": "65d83a06a4a26614c5ef2400a76b107b0c9363cf1148c158cd6f3e10732edef5",
+      "capturedAt": "20260930T183815Z",
+      "mount": {
+        "ok": true,
+        "mode": "operations",
+        "state": {
+          "mode": "operations",
+          "view": "preflight",
+          "selectedId": "ALERT-7f3a8c1b",
+          "locale": "en",
+          "dir": "ltr"
+        },
+        "domainOwner": "W03RunDomain"
+      },
+      "mountError": null,
+      "pageErrors": [],
+      "info": {
+        "dir": "ltr",
+        "lang": "en",
+        "consumer": "runs",
+        "left": "RUN STRUCTURE Overview Scenario Timeline Tasks 4 Devices 3 Events & Injects 6 Telemetry 4 Observations 7 Artifacts 2 Current Phase: 03 Detection · Operational Role: SOC Analyst RUNNING",
+        "center": "البنية السياق Operations Preflight Timeline Topology Pause End Run Capture Snapshot Web Application Breach & Response RUN-0042 · Scenario Run RUNNING CURRENT PHASE 03 Detection OPERATIONAL ROLE SOC Analyst CURRENT TASK Investigate suspicious SQL activity HEALTH HEALTHY 1 Source Definition Run scenario-privileged-login Revision 2.4 Baseline BL-2026-08-secure-web-tier Digital Twin DT-REV-12 Run Scenario Run Enterprise Enterprise Alpha 2 Frozen Run Manifest Frozen manifest RMF-0042-v1 Input digest sha256:cb888a49b53d86d6428… Seed 20260814 Engine InternalSimulationAdapter Isolation scope RUN_LOCAL_OVERLAY Created at 2026-08-14 10:16:02 UTC 3 Run · Scenario Run Operations RUNNING Current Phase 03 Detection Operational Role SOC Analyst Health HEALTHY 4 Mode / Policy Guidance Mode GUIDED Participation Mode TEAM Role Policy ROLE-BASED Provenance SIMULATED 5 Tasks / Operational Role Review correlated application signals DONE Investigate suspicious SQL activity ACTIVE Validate potential database impact LOCKED Record defensible observation LOCKED 6 Readiness Checks READY Source definition revision scenario-privileged-login@2.4 PASS Environment / baseline binding BL-2026-08-secure-web-tier · DT-REV-12 PASS Internal simulation provider CONNECTED · epoch 1 PASS Frozen run manifest RMF-0042-v1 · v1 PASS Real Windows terminal capability Separate platform gate; InternalSimulationAdapter remains valid runtime truth. ADVISORY No-write projection · this view never mutates run state. Immutability is object-scoped; the workspace remains interactive. Run is ready to start Checks passed and the manifest is frozen; start is permitted. 4 passed, 0 blocked, 1 advisory. Start Run Run start remains unavailable until the mandatory checks pass. Temporary work area No terminal session open yet — open one from a capable device. Devices CONNECTED INTERNAL_SIMULATION UNVERIFIED_PLATFORM_GATE InternalSimulationAdapter · epoch No-write projection · this view never mutates run state.",
+        "right": "RUNTIME TRUTH Preparation source Web Application Breach & Response · scenario-privileged-login@2.4 Why this matters sha256:cb888a49b53d86d6428… Observation Separate platform gate; InternalSimulationAdapter remains valid runtime truth. Preparation advice Run start remains unavailable until the mandatory checks pass. Provider InternalSimulationAdapter Runtime truth INTERNAL_SIMULATION Provider epoch undefined CONNECTED UNVERIFIED_PLATFORM_GATE ConPTY, Windows topmost and native-window claims remain unverified here. This candidate neither alters nor certifies the Windows platform provider.",
+        "toolbar": "⌘ Focus Note Notes Open terminal pause run resume run Disconnect provider Reconnect session Recorded result",
+        "mounts": {
+          "workspace": true,
+          "tabs": 4,
+          "alerts": 0,
+          "navItems": 8,
+          "terminalTray": true,
+          "operationalHostInTray": true
+        },
+        "rects": {
+          "workspace": {
+            "w": 947,
+            "h": 788,
+            "x": 247,
+            "y": 218
+          },
+          "split": null,
+          "bar": {
+            "w": 947,
+            "h": 46,
+            "x": 247,
+            "y": 218
+          },
+          "identity": {
+            "w": 947,
+            "h": 119,
+            "x": 247,
+            "y": 264
+          },
+          "leftPane": {
+            "w": 236,
+            "h": 824,
+            "x": 0,
+            "y": 182
+          },
+          "rightPane": {
+            "w": 300,
+            "h": 824,
+            "x": 1205,
+            "y": 182
+          },
+          "terminal": {
+            "w": 947,
+            "h": 41,
+            "x": 247,
+            "y": 901
+          }
+        },
+        "scroll": {
+          "sw": 1505,
+          "cw": 1505,
+          "sh": 1045,
+          "ch": 1045
+        }
+      }
+    },
+    {
+      "locale": "ar",
+      "viewport": "1505x1045",
+      "state": "operations",
+      "path": "writer-output/W03-RUNS/evidence/candidate-panes/runs-ar-operations-1505x1045-20260930T183819Z.png",
+      "bytes": 299067,
+      "sha256": "c0ab576d4456cc8df370ac11ec8d9767c98ee1e8a972f07dce1c2406c22604b6",
+      "capturedAt": "20260930T183819Z",
+      "mount": {
+        "ok": true,
+        "mode": "operations",
+        "state": {
+          "mode": "operations",
+          "view": "telemetry",
+          "selectedId": "ALERT-7f3a8c1b",
+          "locale": "ar",
+          "dir": "rtl"
+        },
+        "domainOwner": "W03RunDomain"
+      },
+      "mountError": null,
+      "pageErrors": [],
+      "info": {
+        "dir": "rtl",
+        "lang": "ar",
+        "consumer": "runs",
+        "left": "هيكل التشغيل نظرة عامة الخط الزمني للسيناريو المهام 4 الأجهزة 3 الأحداث والحقن 6 القياس عن بُعد 4 الملاحظات 7 المواد 2 المرحلة الحالية: 03 Detection · الدور التشغيلي: SOC Analyst RUNNING",
+        "center": "البنية السياق العمليات ما قبل التشغيل الخط الزمني الطوبولوجيا إيقاف مؤقت إنهاء التشغيل التقاط لقطة اختراق تطبيق ويب والاستجابة RUN-0042 · Scenario Run RUNNING المرحلة الحالية 03 Detection الدور التشغيلي SOC Analyst المهمة الحالية Investigate suspicious SQL activity الحالة HEALTHY SIEM / المراقبة4 Web Application7 Database1 Firewall1 Identity Service1 حقيقة المحاكاة الداخلية التنبيهات 4 الشدة: High مدى 10:18:09 – 10:24:31 UTC الوقت (UTC) التنبيه الشدة الحالة 10:24:31 Anomalous SQL query detected Correlated application behavior High New 10:22:11 Suspicious parameter patterns Repeated request anomaly High New 10:20:47 Potential database access anomaly Unusual query volume Medium New 10:18:09 Failed login attempts spike From single source IP Low New ‹ 1–4 of 4 › تفاصيل التنبيه High New ALERT-7f3a8c1b المصدر Web Application معرّف التنبيه ALERT-7f3a8c1b عنوان المصدر 203.0.113.45 قاعدة الكشف SIM-RULE-1007 مسار الطلب POST /search التقنية T1190 — Exploit Public-Facing Application أول رصد 10:24:31 UTC التشغيل RUN-0042 الخط الزمني للأحداث القاعدة المطابقة السمات المواد المرتبطة (2) الوقت (UTC) المصدر الحدث التفاصيل 10:24:31.482 Web Application DETECTION_RULE_MATCHED SIM-RULE-1007 matched correlated request state 10:24:31.201 Web Application REQUEST_BLOCKED Policy action recorded in simulation state: BLOCK 10:24:30.904 Web Application HTTP_REQUEST_OBSERVED POST /search · synthetic fixture traffic 10:24:30.661 Web Application PARAMETER_ANOMALY Input feature set diverged from baseline 10:24:29.337 Web Application SESSION_ESTABLISHED Session mapped to synthetic IP 203.0.113.45 10:24:28.901 Firewall NETWORK_FLOW_ALLOWED 203.0.113.45 → web-app:443 تمييز تصدير مساحة عمل مؤقتة لا جلسة طرفية مفتوحة بعد — افتح طرفية من جهاز مهيّأ. الأجهزة متصل حقيقة المحاكاة الداخلية بوابة منصة غير موثّقة InternalSimulationAdapter · epoch المشروع بلا كتابة (projection) · لا يغيّر حالة التشغيل.",
+        "right": "منطق الكشف منطق الكشف Parameter pattern matched simulated detection signature. نطاق الارتباط Correlated application behavior · 203.0.113.45 · Web Application الأثر التشغيلي T1190 — Exploit Public-Facing Application · SIM-RULE-1007 ملاحظة High New الخطوة التالية Investigate suspicious SQL activity المزوّد InternalSimulationAdapter حقيقة التشغيل INTERNAL_SIMULATION الحقبة undefined متصل بوابة منصة غير موثّقة بوابات ConPTY ونافذة Windows وقوة العرض بقيمة OS تبقى غير موثّقة هنا؛ هذا المرشّح لا يغيّر ولا يشهد على مزوّذ Windows.",
+        "toolbar": "⌘ تركيز ملاحظة الملاحظات Open terminal pause run resume run Disconnect provider Reconnect session Recorded result",
+        "mounts": {
+          "workspace": true,
+          "tabs": 9,
+          "alerts": 4,
+          "navItems": 8,
+          "terminalTray": true,
+          "operationalHostInTray": true
+        },
+        "rects": {
+          "workspace": {
+            "w": 947,
+            "h": 788,
+            "x": 247,
+            "y": 218
+          },
+          "split": {
+            "w": 947,
+            "h": 549,
+            "x": 247,
+            "y": 382
+          },
+          "bar": {
+            "w": 947,
+            "h": 46,
+            "x": 247,
+            "y": 218
+          },
+          "identity": {
+            "w": 947,
+            "h": 65,
+            "x": 247,
+            "y": 264
+          },
+          "leftPane": {
+            "w": 236,
+            "h": 824,
+            "x": 0,
+            "y": 182
+          },
+          "rightPane": {
+            "w": 300,
+            "h": 824,
+            "x": 1205,
+            "y": 182
+          },
+          "terminal": {
+            "w": 947,
+            "h": 41,
+            "x": 247,
+            "y": 930
+          }
+        },
+        "scroll": {
+          "sw": 1505,
+          "cw": 1505,
+          "sh": 1045,
+          "ch": 1045
+        }
+      }
+    },
+    {
+      "locale": "ar",
+      "viewport": "1505x1045",
+      "state": "preflight",
+      "path": "writer-output/W03-RUNS/evidence/candidate-panes/runs-ar-preflight-1505x1045-20260930T183822Z.png",
+      "bytes": 266576,
+      "sha256": "c3257ef6f2e7c19567e4d84d9ba4052ca273caad6c63992dd2bc8cb12df00a18",
+      "capturedAt": "20260930T183822Z",
+      "mount": {
+        "ok": true,
+        "mode": "operations",
+        "state": {
+          "mode": "operations",
+          "view": "preflight",
+          "selectedId": "ALERT-7f3a8c1b",
+          "locale": "ar",
+          "dir": "rtl"
+        },
+        "domainOwner": "W03RunDomain"
+      },
+      "mountError": null,
+      "pageErrors": [],
+      "info": {
+        "dir": "rtl",
+        "lang": "ar",
+        "consumer": "runs",
+        "left": "هيكل التشغيل نظرة عامة الخط الزمني للسيناريو المهام 4 الأجهزة 3 الأحداث والحقن 6 القياس عن بُعد 4 الملاحظات 7 المواد 2 المرحلة الحالية: 03 Detection · الدور التشغيلي: SOC Analyst RUNNING",
+        "center": "البنية السياق العمليات ما قبل التشغيل الخط الزمني الطوبولوجيا إيقاف مؤقت إنهاء التشغيل التقاط لقطة اختراق تطبيق ويب والاستجابة RUN-0042 · Scenario Run RUNNING المرحلة الحالية 03 Detection الدور التشغيلي SOC Analyst المهمة الحالية Investigate suspicious SQL activity الحالة HEALTHY 1 تعريف المصدر التشغيل scenario-privileged-login الإصدار 2.4 Baseline BL-2026-08-secure-web-tier Digital Twin DT-REV-12 التشغيل Scenario Run Enterprise Enterprise Alpha 2 بيان التشغيل المجمّد البيان المجمّد RMF-0042-v1 بصمة المدخلات sha256:cb888a49b53d86d6428… البذرة 20260814 المحرّك InternalSimulationAdapter نطاق العزل RUN_LOCAL_OVERLAY تاريخ الإنشاء 2026-08-14 10:16:02 UTC 3 التشغيل · Scenario Run العمليات RUNNING المرحلة الحالية 03 Detection الدور التشغيلي SOC Analyst الحالة HEALTHY 4 Mode / Policy Guidance Mode GUIDED Participation Mode TEAM Role Policy ROLE-BASED الإثبات SIMULATED 5 المهام / الدور التشغيلي Review correlated application signals DONE Investigate suspicious SQL activity ACTIVE Validate potential database impact LOCKED Record defensible observation LOCKED 6 فحوصات الجاهزية READY Source definition revision scenario-privileged-login@2.4 PASS Environment / baseline binding BL-2026-08-secure-web-tier · DT-REV-12 PASS Internal simulation provider CONNECTED · epoch 1 PASS Frozen run manifest RMF-0042-v1 · v1 PASS Real Windows terminal capability Separate platform gate; InternalSimulationAdapter remains valid runtime truth. ADVISORY المشروع بلا كتابة (projection) · لا يغيّر حالة التشغيل. التجزئة محجوزة على مستوى الكائن؛ تبقى مساحة العمل تفاعلية. التشغيل جاهز للبدء اكتملت الفحوصات وتجمّد البيان؛ يمكن بدء التشغيل. 4 ناجح، 0 موقوف، 1 استشاري. بدء التشغيل استمرار التشغيل غير متاح حتى تجتاز الفحوصات الإلزامية. مساحة عمل مؤقتة لا جلسة طرفية مفتوحة بعد — افتح طرفية من جهاز مهيّأ. الأجهزة متصل حقيقة المحاكاة الداخلية بوابة منصة غير موثّقة InternalSimulationAdapter · epoch المشروع بلا كتابة (projection) · لا يغيّر حالة التشغيل.",
+        "right": "الحقائق الأساسية مصدر الإعداد Web Application Breach & Response · scenario-privileged-login@2.4 لماذا يهم هذا sha256:cb888a49b53d86d6428… ملاحظة Separate platform gate; InternalSimulationAdapter remains valid runtime truth. توصية الإعداد استمرار التشغيل غير متاح حتى تجتاز الفحوصات الإلزامية. المزوّد InternalSimulationAdapter حقيقة التشغيل INTERNAL_SIMULATION الحقبة undefined متصل بوابة منصة غير موثّقة بوابات ConPTY ونافذة Windows وقوة العرض بقيمة OS تبقى غير موثّقة هنا؛ هذا المرشّح لا يغيّر ولا يشهد على مزوّذ Windows.",
+        "toolbar": "⌘ تركيز ملاحظة الملاحظات Open terminal pause run resume run Disconnect provider Reconnect session Recorded result",
+        "mounts": {
+          "workspace": true,
+          "tabs": 4,
+          "alerts": 0,
+          "navItems": 8,
+          "terminalTray": true,
+          "operationalHostInTray": true
+        },
+        "rects": {
+          "workspace": {
+            "w": 947,
+            "h": 788,
+            "x": 247,
+            "y": 218
+          },
+          "split": null,
+          "bar": {
+            "w": 947,
+            "h": 46,
+            "x": 247,
+            "y": 218
+          },
+          "identity": {
+            "w": 947,
+            "h": 65,
+            "x": 247,
+            "y": 264
+          },
+          "leftPane": {
+            "w": 236,
+            "h": 824,
+            "x": 0,
+            "y": 182
+          },
+          "rightPane": {
+            "w": 300,
+            "h": 824,
+            "x": 1205,
+            "y": 182
+          },
+          "terminal": {
+            "w": 947,
+            "h": 41,
+            "x": 247,
+            "y": 930
+          }
+        },
+        "scroll": {
+          "sw": 1505,
+          "cw": 1505,
+          "sh": 1045,
+          "ch": 1045
+        }
+      }
+    }
+  ]
+}

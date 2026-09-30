@@ -1,5 +1,16 @@
+import {resolveSystemLocale,LANGUAGE_POLICY_OWNER,LANGUAGE_POLICY_CONTRACT} from './language-policy.js';
+export {LANGUAGE_POLICY_OWNER,LANGUAGE_POLICY_CONTRACT,resolveSystemLocale};
+
+/* G-20 / VD-003. There is no privileged product-language authority.
+   `locale.safeDefault` is RESOLVED from the browsing-context language environment (the user's own
+   device), never from a reference image and never hardcoded to Arabic or to English. A reference
+   being Arabic/English establishes visual intent only — it is not a product-language default.
+   See ./language-policy.ts for the full resolution order and the headless placeholder rule. */
+export const PRODUCT_LANGUAGE_AUTHORITY=null;
+export const LOCALE_SAFE_DEFAULT=resolveSystemLocale();
+
 export const PREFERENCE_DEFINITIONS={
-  locale:{safeDefault:'ar',values:['ar','en']},chromeDirection:{safeDefault:'auto',values:['auto','rtl','ltr']},contentDirection:{safeDefault:'auto',values:['auto','rtl','ltr']},
+  locale:{safeDefault:LOCALE_SAFE_DEFAULT,values:['ar','en']},chromeDirection:{safeDefault:'auto',values:['auto','rtl','ltr']},contentDirection:{safeDefault:'auto',values:['auto','rtl','ltr']},
   theme:{safeDefault:'dark-blue',values:['dark-blue','notion-dark','light']},density:{safeDefault:'comfortable',values:['compact','comfortable','relaxed']},
   scale:{safeDefault:1,min:.8,max:2},font:{safeDefault:'system-ui',values:['system-ui','Tahoma','Arial']},alignment:{safeDefault:'start',values:['start','end','left','right','center','justify']},
   toolbar:{safeDefault:'full',values:['full','compact']},toolbarOrder:{safeDefault:'standard',values:['standard','domain-first']},guidance:{safeDefault:false},

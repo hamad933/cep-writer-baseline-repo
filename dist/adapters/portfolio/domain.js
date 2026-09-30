@@ -71,6 +71,32 @@ export class W04PortfolioDomain{
   const q=this.filterText.trim().toLowerCase();
   return freeze({ok:true,query:this.filterText,records:this.records.filter(r=>!q||`${r.title} ${r.sourceRef} ${r.refType} ${r.state}`.toLowerCase().includes(q)),mutated:false,taxonomyCreated:false,sourceWrites:0});
  }
+ /** READ-ONLY view projection: the active saved-view query, the records it admits, the counts
+  *  the assembly header reports and the ordering the view is actually in. Ordering is the
+  *  curation sequence the Portfolio owns; it makes no claim about any grouping authority (Q-5
+  *  stays open, so no Project / Learning Objective registry is consulted or implied). */
+ view(){
+  const query=String(this.filterText||'');
+  const q=query.trim().toLowerCase();
+  const match=row=>!q||`${row.title} ${row.refType} ${row.sourceRef} ${row.state} ${row.groupingRef||''} ${row.groupingState}`.toLowerCase().includes(q);
+  const records=this.records.filter(match);
+  const byType=type=>records.filter(row=>row.refType===type).length;
+  const attention=records.filter(row=>row.state!=='RESOLVABLE').length;
+  return freeze({
+   query,
+   ordering:'CURATION_SEQUENCE',
+   records,
+   counts:freeze({
+    references:records.length,
+    evidence:byType('Evidence'),
+    mastery:byType('Mastery'),
+    project:byType('Project'),
+    resolvable:records.filter(row=>row.state==='RESOLVABLE').length,
+    attention,
+    exportMembers:this.records.length
+   })
+  });
+ }
  export(){return freeze({ok:true,canonicalPublication:false,owner:this.owner,authorityRef:PORTFOLIO_AUTHORITY_REF,members:this.records.map(({id,revisionId,refType,sourceRef,state,groupingRef,groupingState,annotation})=>({id,revisionId,refType,sourceRef,state,groupingRef,groupingState,annotation:annotation??null})),limitations:['Projection only','Canonical Evidence/Mastery/project truth remains with source owner','Unavailable/superseded/withdrawn state is retained'],note:'Export carries exact refs, curation metadata and source disposition only; it does not duplicate canonical Evidence/Mastery truth.',mutated:false});}
  group(id,groupingRef,{expectedRevisionId=null}={}){
   const r=this.get(id);

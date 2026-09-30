@@ -13,8 +13,8 @@ export const BALANCED6_TODAY_ITEMS = Object.freeze([
       en: 'Overview and core concept completed; paused at applied example.'
     },
     pathTags: [
-      { ar: 'المسار: حقن SQL', en: 'Track: SQL Injection' },
-      { ar: 'المرحلة: الدرس', en: 'Stage: Lesson' }
+      { ar: 'المرحلة: الدرس', en: 'Stage: Lesson' },
+      { ar: 'المسار: حقن SQL', en: 'Track: SQL Injection' }
     ],
     continuation: {
       destination: 'learn',
@@ -29,9 +29,9 @@ export const BALANCED6_TODAY_ITEMS = Object.freeze([
     kind: 'RECOMMENDATION',
     title: { ar: 'Practice: Identify vulnerable query', en: 'Practice: Identify vulnerable query' },
     metaTags: [
-      { ar: 'Lesson 02', en: 'Lesson 02' },
       { ar: 'SQL Injection', en: 'SQL Injection' },
-      { ar: 'منخفض - متوسط', en: 'Low - Medium' }
+      { ar: '12 دقيقة', en: '12 min' },
+      { ar: 'الاعتماد التالي غير المكتمل', en: 'Next dependency incomplete' }
     ],
     summary: {
       ar: 'تم إكمال الدرس، وهذه الممارسة هي التبعية التالية غير المحسومة قبل Basic Lab',
@@ -50,8 +50,8 @@ export const BALANCED6_TODAY_ITEMS = Object.freeze([
       en: 'Next incomplete dependency: Basic Lab'
     },
     actionLabel: {
-      ar: 'إتمام الممارسة قبل Basic Lab >',
-      en: 'Complete practice before Basic Lab >'
+      ar: 'ابدأ الممارسة',
+      en: 'Start practice'
     },
     recommendation: {
       sourceRef: 'learn:practice-sql-injection-01',
@@ -73,9 +73,12 @@ export const BALANCED6_TODAY_ITEMS = Object.freeze([
     domainArea: { ar: 'التقدم والأدلة', en: 'Progress & Evidence' },
     badge: { ar: 'مراجعة مستحقة', en: 'Review due' },
     badgeTone: 'warning',
+    icon: 'evidence',
+    priority: { ar: 'متوسط', en: 'Medium' },
+    priorityTone: 'warning',
     title: { ar: 'Evidence EVD-0042', en: 'Evidence EVD-0042' },
     summary: { ar: 'بانتظار الاعتماد قبل الإغلاق', en: 'Awaiting approval before closure' },
-    actionLabel: { ar: 'مراجعة', en: 'Review' },
+    actionLabel: { ar: 'فتح المراجعة', en: 'Open review' },
     continuation: {
       destination: 'evidence',
       objectId: 'EVD-0042',
@@ -90,9 +93,12 @@ export const BALANCED6_TODAY_ITEMS = Object.freeze([
     domainArea: { ar: 'المحاكاة والمؤسسات', en: 'Simulation & Enterprise' },
     badge: { ar: 'محظور', en: 'Blocked' },
     badgeTone: 'danger',
+    icon: 'blocked',
+    priority: { ar: 'عالٍ', en: 'High' },
+    priorityTone: 'danger',
     title: { ar: 'RUN-0048', en: 'RUN-0048' },
     summary: { ar: 'تعارض في المنفذ 15432 يمنع التشغيل', en: 'Port 15432 conflict prevents execution' },
-    actionLabel: { ar: 'فحص المشكلة', en: 'Inspect issue' },
+    actionLabel: { ar: 'عرض السبب', en: 'Show reason' },
     continuation: {
       destination: 'runs',
       objectId: 'RUN-0048',
@@ -107,9 +113,12 @@ export const BALANCED6_TODAY_ITEMS = Object.freeze([
     domainArea: { ar: 'النظام والعمليات', en: 'System & Operations' },
     badge: { ar: 'تحذير', en: 'Warning' },
     badgeTone: 'warning',
+    icon: 'drill',
+    priority: { ar: 'متوسط', en: 'Medium' },
+    priorityTone: 'warning',
     title: { ar: 'Restore verification', en: 'Restore verification' },
     summary: { ar: 'موعد التحقق الدوري مستحق اليوم', en: 'Periodic verification drill due today' },
-    actionLabel: { ar: 'فتح', en: 'Open' },
+    actionLabel: { ar: 'فتح الحالة', en: 'Open status' },
     continuation: {
       destination: 'backup',
       objectId: 'restore-drill',
@@ -124,6 +133,9 @@ export const BALANCED6_TODAY_ITEMS = Object.freeze([
     domainArea: { ar: 'المعرفة والتعلم / البحث والجودة', en: 'Knowledge & Learning / Research & Quality' },
     badge: { ar: 'تعارض مصدر', en: 'Source conflict' },
     badgeTone: 'info',
+    icon: 'conflict',
+    priority: { ar: 'متوسط', en: 'Medium' },
+    priorityTone: 'warning',
     title: { ar: 'RQ-SRC-018', en: 'RQ-SRC-018' },
     summary: { ar: 'تعارض في ادعاء النطاق بين مراجعين', en: 'Scope claim conflict between reviewers' },
     actionLabel: { ar: 'مراجعة التعارض', en: 'Review conflict' },
@@ -139,6 +151,8 @@ export const BALANCED6_TODAY_ITEMS = Object.freeze([
     id: 'rec-ctx-1',
     kind: 'RECENT_CONTEXT',
     domainArea: { ar: 'المعرفة والتعلم', en: 'Knowledge & Learning' },
+    domainIcon: 'book',
+    statusIcon: 'done',
     timeLabel: { ar: 'منذ 24 دقيقة', en: '24 min ago' },
     title: { ar: 'Completed Lesson 02', en: 'Completed Lesson 02' }
   },
@@ -146,6 +160,8 @@ export const BALANCED6_TODAY_ITEMS = Object.freeze([
     id: 'rec-ctx-2',
     kind: 'RECENT_CONTEXT',
     domainArea: { ar: 'المعرفة والتعلم', en: 'Knowledge & Learning' },
+    domainIcon: 'book',
+    statusIcon: 'seen',
     timeLabel: { ar: 'منذ 26 دقيقة', en: '26 min ago' },
     title: { ar: 'Viewed SQL Injection map', en: 'Viewed SQL Injection map' }
   },
@@ -153,6 +169,8 @@ export const BALANCED6_TODAY_ITEMS = Object.freeze([
     id: 'rec-ctx-3',
     kind: 'RECENT_CONTEXT',
     domainArea: { ar: 'المحاكاة والمؤسسات', en: 'Simulation & Enterprise' },
+    domainIcon: 'enterprise',
+    statusIcon: 'sealed',
     timeLabel: { ar: 'منذ 1 ساعة', en: '1 hour ago' },
     title: { ar: 'Sealed RUN-0042 result', en: 'Sealed RUN-0042 result' }
   },
@@ -160,49 +178,53 @@ export const BALANCED6_TODAY_ITEMS = Object.freeze([
     id: 'rec-ctx-4',
     kind: 'RECENT_CONTEXT',
     domainArea: { ar: 'التقدم والأدلة', en: 'Progress & Evidence' },
+    domainIcon: 'identity',
+    statusIcon: 'submitted',
     timeLabel: { ar: 'منذ 2 ساعة', en: '2 hours ago' },
-    title: { ar: 'Submitted Candidate Evidence', en: 'Submitted Candidate Evidence' }
+    title: { ar: 'Submitted Candidate Evidence Handoff', en: 'Submitted Candidate Evidence Handoff' }
   },
   {
     id: 'rec-ctx-5',
     kind: 'RECENT_CONTEXT',
     domainArea: { ar: 'النظام والعمليات', en: 'System & Operations' },
+    domainIcon: 'gear',
+    statusIcon: 'warned',
     timeLabel: { ar: 'منذ 3 ساعات', en: '3 hours ago' },
     title: { ar: 'Validation session completed with warnings', en: 'Validation session completed with warnings' }
   },
   {
     id: 'prog-1',
     kind: 'PROGRESS',
-    title: { ar: 'SQL Injection 7/10', en: 'SQL Injection 7/10' },
+    title: { ar: 'SQL Injection', en: 'SQL Injection' },
     value: '7/10',
     progressPercent: 70,
-    icon: 'check'
+    icon: 'track'
   },
   {
     id: 'prog-2',
     kind: 'PROGRESS',
-    title: { ar: '2 مراجعتان معلقتان', en: '2 pending reviews' },
+    title: { ar: 'مراجعتان معلقتان', en: 'Pending reviews' },
     value: '2',
     icon: 'file'
   },
   {
     id: 'prog-3',
     kind: 'PROGRESS',
-    title: { ar: '1 تحضير نشط في المحاكاة', en: '1 active simulation prep' },
+    title: { ar: 'تحضير نشط في المحاكاة', en: 'Active simulation preparation' },
     value: '1',
     icon: 'play'
   },
   {
     id: 'prog-4',
     kind: 'PROGRESS',
-    title: { ar: '3 شواهد مكتملة قيد التدقيق', en: '3 completed evidence under review' },
+    title: { ar: 'شواهد مكتملة قيد التدقيق', en: 'Completed evidence under review' },
     value: '3',
     icon: 'shield'
   },
   {
     id: 'prog-5',
     kind: 'PROGRESS',
-    title: { ar: '1 تحذير تشغيلي واحد', en: '1 operational warning' },
+    title: { ar: 'تحذير تشغيلي واحد', en: 'Operational warning' },
     value: '1',
     icon: 'alert'
   }

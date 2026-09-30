@@ -1,104 +1,510 @@
 import {SpatialView} from '../../foundation/spatial.js';
-const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const labels={
-  en:{structure:'Scenario Structure',overview:'Overview',environment:'Environment',roles:'Roles',phases:'Phases',events:'Events',injects:'Injects',decisions:'Decision Points',modules:'Lab Modules',tasks:'Tasks',rules:'Rules',observability:'Observability',completion:'Completion Criteria',addPhase:'Add Phase',addEvent:'Add Event',addInject:'Add Inject',addDecision:'Add Decision',addLab:'Add Lab Module',validate:'Validate',prepare:'Prepare Run',revise:'New Revision',save:'Save change',selected:'Selected context',spatial:'Orchestration map',structured:'Shared Structured owner',noSelection:'Select a phase or orchestration element.',blocked:'Validation blocked',validated:'Validated',draft:'Draft'},
-  ar:{structure:'بنية السيناريو',overview:'نظرة عامة',environment:'البيئة',roles:'الأدوار',phases:'المراحل',events:'الأحداث',injects:'الحقن',decisions:'نقاط القرار',modules:'وحدات المختبر',tasks:'المهام',rules:'القواعد',observability:'الرصد',completion:'معايير الإكمال',addPhase:'إضافة مرحلة',addEvent:'إضافة حدث',addInject:'إضافة حقن',addDecision:'إضافة قرار',addLab:'إضافة وحدة مختبر',validate:'تحقق',prepare:'تحضير التشغيل',revise:'مراجعة جديدة',save:'حفظ التغيير',selected:'السياق المحدد',spatial:'خريطة التنسيق',structured:'مالك Structured المشترك',noSelection:'اختر مرحلة أو عنصر تنسيق.',blocked:'التحقق محجوب',validated:'تم التحقق',draft:'مسودة'}
-};
-function style(root){if(root.querySelector(':scope > style[data-s11-scenario-style]'))return;root.insertAdjacentHTML('afterbegin',`<style data-s11-scenario-style>
-.s11-studio{display:grid;grid-template-columns:minmax(190px,240px) minmax(420px,1fr) minmax(240px,310px);grid-template-rows:auto minmax(480px,1fr) auto;min-height:680px;background:var(--bg,#101417);color:var(--text,#eef2f3);border:1px solid var(--line,#30383d);border-radius:12px;overflow:hidden;font:13px/1.45 system-ui,sans-serif}.s11-top{grid-column:1/-1;display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 12px;background:var(--panel,#171d21);border-bottom:1px solid var(--line,#30383d)}.s11-top .identity{margin-inline-end:auto}.s11-top button,.s11-tools button,.s11-context button{border:1px solid var(--line2,#44515a);background:var(--button,#242c31);color:inherit;border-radius:7px;padding:6px 9px;cursor:pointer}.s11-top button:disabled,.s11-tools button:disabled{opacity:.42;cursor:not-allowed}.s11-left,.s11-right{padding:10px;background:var(--panel,#171d21);overflow:auto}.s11-left{border-inline-end:1px solid var(--line,#30383d)}.s11-right{border-inline-start:1px solid var(--line,#30383d)}.s11-left h3,.s11-right h3{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--text2,#b8c1c6)}.s11-tree{display:grid;gap:3px}.s11-tree button{width:100%;text-align:start;background:transparent;border:0;color:inherit;padding:6px 7px;border-radius:6px;cursor:pointer}.s11-tree button:hover,.s11-tree button[data-selected=true]{background:var(--hover,#26323a)}.s11-center{min-width:0;display:grid;grid-template-rows:auto minmax(380px,1fr);background:var(--bg,#101417)}.s11-center-head{padding:10px 12px;border-bottom:1px solid var(--line,#30383d);display:flex;gap:10px;align-items:center;flex-wrap:wrap}.s11-tools{display:flex;gap:6px;flex-wrap:wrap}.s11-spatial{min-height:390px;position:relative}.s11-spatial>.spatial-shell{height:100%;min-height:390px}.s11-context{display:grid;gap:8px}.s11-context label{display:grid;gap:4px;color:var(--text2,#b8c1c6)}.s11-context input,.s11-context textarea,.s11-context select{width:100%;box-sizing:border-box;border:1px solid var(--line2,#44515a);background:var(--field,#11171b);color:var(--text,#eef2f3);border-radius:6px;padding:7px}.s11-context textarea{min-height:68px;resize:vertical}.s11-bottom{grid-column:1/-1;display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:8px 12px;background:var(--panel,#171d21);border-top:1px solid var(--line,#30383d);color:var(--text2,#b8c1c6)}.s11-state{display:inline-flex;padding:2px 7px;border:1px solid var(--line2,#44515a);border-radius:999px}.s11-shared{margin-inline-start:auto;font-size:11px}.s11-status[data-state=blocked]{color:#ffbf69}.s11-status[data-state=ok]{color:#9ee6a8}bdi{unicode-bidi:isolate}@media(max-width:1120px){.s11-studio{grid-template-columns:190px minmax(360px,1fr);grid-template-rows:auto minmax(480px,1fr) auto auto}.s11-right{grid-column:1/-1;border-inline-start:0;border-top:1px solid var(--line,#30383d);max-height:260px}.s11-bottom{grid-row:4}}@media(max-width:820px){.s11-studio{grid-template-columns:1fr}.s11-left{display:none}.s11-center,.s11-right,.s11-bottom{grid-column:1}.s11-right{max-height:none}}
-</style>`)}
-function graph(projection){const nodes=[],edges=[];projection.phases.forEach((phase,pi)=>{const phaseId=`phase:${phase.id}`;nodes.push({id:phaseId,label:phase.name||phase.id,type:'phase',x:70+pi*300,y:80});if(pi)edges.push({id:`phase-seq:${projection.phases[pi-1].id}:${phase.id}`,source:`phase:${projection.phases[pi-1].id}`,target:phaseId,type:'depends',direction:'directed',kind:'representation'});(phase.elements||[]).forEach((item,ei)=>{const id=`item:${item.id}`;nodes.push({id,label:item.title||item.id,type:item.kind||'event',x:70+pi*300,y:220+ei*105});edges.push({id:`contains:${phase.id}:${item.id}`,source:phaseId,target:id,type:'connects',direction:'directed',kind:'representation'})})});return {nodes,edges}}
-function firstPhase(domain){return domain.studioProjection().phases[0]?.id||null}
-function nextId(prefix,items){let n=items.length+1,id=`${prefix}-${n}`;const ids=new Set(items.map(x=>x.id));while(ids.has(id))id=`${prefix}-${++n}`;return id}
+import {activeLocale,pickText} from './i18n.js';
+                                              
+import {ensureScenarioStyle} from './styles.js';
+import {renderStructure} from './structure.js';
+import {renderInspector} from './inspector.js';
+import {renderBoardBody,topologyGraph} from './views.js';
+import {countText,esc,icon,kindLabel,nextId,phaseNumber,stateBlock} from './util.js';
 
-/* ------------------------------------------------------------------ DEF-SCN-1 identity
- * The live controller route mounts the Scenario surface through
- * `m0-controller-composition.mountStructuredStudio`, which reserves the centre host
- * `#m0StructuredSpatial` inside `#centerPane .docscroll` and only overwrites it when the host
- * contains a `[data-m0-spatial-slot]` child. Mounting our own identity markup into that reserved
- * host (without that slot) is how the reference timeline composition reaches the live route while
- * `m0-controller-composition.ts` stays writer-forbidden.
+/* ------------------------------------------------------------------ truth objects */
+
+/**
+ * Environment binding used by this workbench.
+ *
+ * The scenario definition declares REQUIRED capabilities (`environment.capabilities`); a
+ * binding is a separate, explicitly-labelled truth (`environmentRequirementsDistinctFromBinding`).
+ * This surface binds the local training environment that ships with the representative draft
+ * scenario, so Validate → Publish Revision → Prepare Run are genuinely reachable. It never
+ * claims provider truth: `provider` and `classification` are rendered verbatim in the
+ * inspector, and `scenarios.prepare` still reports `runStarted:false` — preparing freezes the
+ * run input manifest, it never starts a run.
  */
-const identityStyle=root=>{if(root.querySelector(':scope > style[data-w03-scenario-identity]'))return;root.insertAdjacentHTML('afterbegin',`<style data-w03-scenario-identity>
-.w03-identity{display:grid;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg1);margin-block-end:14px}
-.w03-identity-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:11px 13px;border-bottom:1px solid var(--line);background:var(--bg2)}
-.w03-identity-head strong{font-size:15px}
-.w03-pill{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border:1px solid var(--line2);border-radius:999px;font:11px var(--mono);color:var(--text2)}
-.w03-pill[data-tone=accent]{border-color:var(--accent);color:var(--accent)}
-.w03-identity-sub{margin-inline-start:auto;font-size:11px;color:var(--text3)}
-.w03-timeline{display:grid;gap:0;padding:6px 0}
-.w03-phase{display:grid;grid-template-columns:46px minmax(0,1fr);border-bottom:1px solid var(--line)}
-.w03-phase:last-of-type{border-bottom:0}
-.w03-phase-rail{position:relative;display:flex;flex-direction:column;align-items:center;padding-top:12px;background:linear-gradient(var(--bg1),var(--bg1))}
-.w03-phase-rail::after{content:'';position:absolute;inset-block-start:34px;inset-block-end:0;inset-inline-start:50%;width:2px;transform:translateX(-50%);background:var(--line2)}
-.w03-phase:last-of-type .w03-phase-rail::after{display:none}
-.w03-phase-num{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;border:2px solid var(--accent);background:var(--bg0);font:600 11px var(--mono);color:var(--accent);z-index:1}
-.w03-phase-body{display:grid;gap:8px;padding:11px 13px;min-width:0}
-.w03-phase-title{margin:0;font-size:13px;letter-spacing:.02em}
-.w03-elements{display:grid;gap:7px}
-.w03-element{display:grid;gap:5px;border:1px solid var(--line);border-inline-start:3px solid var(--accent);border-radius:8px;padding:8px 10px;background:var(--bg0);text-align:start;color:inherit;font:inherit;cursor:pointer;min-width:0}
-.w03-element:hover,.w03-element[aria-pressed=true]{border-color:var(--accent);background:var(--bg2)}
-.w03-element h4{margin:0;font-size:12.5px;overflow-wrap:anywhere}
-.w03-element dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 8px;margin:0;font-size:11px}
-.w03-element dt{color:var(--text3)}
-.w03-element dd{margin:0;color:var(--text2);overflow-wrap:anywhere}
-.w03-element[data-kind=decision]{border-inline-start-color:var(--warn)}
-.w03-element[data-kind=lab]{border-inline-start-color:var(--ok,#7bd88f)}
-.w03-add{justify-self:start;border:1px dashed var(--line2);background:transparent;color:var(--text2);border-radius:7px;padding:5px 10px;cursor:pointer;font:inherit;font-size:11px}
-.w03-legend{border-top:1px solid var(--line);padding:10px 13px;background:var(--bg2)}
-.w03-legend h4{margin:0 0 7px;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--text2)}
-.w03-legend ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:11.5px;color:var(--text2)}
-.w03-legend li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:9px;align-items:center}
-.w03-legend .key{height:0;border-top:2px solid var(--text2)}
-.w03-legend .key.conditional{border-top-style:dashed}
-@media(max-width:1100px){.w03-phase{grid-template-columns:38px minmax(0,1fr)}}
-@media(prefers-reduced-motion:reduce){.w03-identity *{transition:none!important;animation:none!important}}
-</style>`)};
+export const SCENARIO_ENVIRONMENT_BINDING=Object.freeze({
+  provider:'LOCAL_TRAINING_ENVIRONMENT_FIXTURE',
+  classification:'FIXTURE_BINDING__NOT_PROVIDER_TRUTH',
+  capabilities:Object.freeze(['SIM_NET','WEB_TIER','SIEM_FEED']),
+  labRevision:'LAB-SQLI-01@2'
+});
 
-const phaseNumber=(phase,index)=>{const m=/^0*(\d+)/.exec(String(phase?.name||'').trim());return m?m[1]:String(index+1).padStart(2,'0')};
-const elementRows=item=>{
-  const rows=[];
-  const push=(k,v)=>{if(v!==undefined&&v!==null&&String(v)!=='')rows.push([k,v])};
-  push('Type',item.type||({inject:'Inject',decision:'Decision point',lab:'Lab module',event:'Event'}[item.kind]||item.kind));
-  if(item.kind==='lab'&&item.labRef)push('Reference',`${item.labRef.id}@${item.labRef.revision}`);
-  push('Participant',item.participant);push('Recipient',item.recipient);push('Trigger',item.trigger);
-  push('Source',item.source);push('Delivery',item.delivery);push('Payload type',item.payloadType);
-  push('Channel',item.channel);push('Condition',item.condition);push('Branch impact',item.branchImpact);
-  push('Detail',item.detail);
-  return rows;
+export const scenarioValidationContext=()=>{
+  const capabilities=[...SCENARIO_ENVIRONMENT_BINDING.capabilities];
+  return {
+    binding:{capabilities,provider:SCENARIO_ENVIRONMENT_BINDING.provider,classification:SCENARIO_ENVIRONMENT_BINDING.classification},
+    availableCapabilities:capabilities,
+    resolveLab:(ref    )=>String(ref?.id||'')==='LAB-SQLI-01'&&String(ref?.revision||'')==='2'
+  };
 };
-export function mountScenarioTimelineIdentity(composition){
+
+/** Scenario-level references (real corpus Knowledge Units linked by this draft scenario). */
+const SCENARIO_KNOWLEDGE_UNITS=[
+  {id:'KU-D03-0001',title:'Authentication Protocol Ceremonies and Trust Boundaries',relation:'Detection · trust-boundary rationale'},
+  {id:'KU-D09-0002',title:'KU-D09-0002 — Incident identification and scoping',relation:'Response · scoping and containment'}
+];
+
+const VIEWS=['timeline','flow','topology','canvas']         ;
+const EXTRA_TOOLS=['task','rule','observability','completion']         ;
+
+                     
+                              
+              
+               
+                        
+                        
+                     
+                                        
+                            
+ 
+
+const foundation=()=>(globalThis       ).CEPFoundation||null;
+
+/* ------------------------------------------------------------------ mount */
+
+export function mountScenarioTimelineIdentity(composition    ){
   if(typeof document==='undefined'||!composition?.domain)return null;
   const doc=document.querySelector('#centerPane .docscroll');if(!doc)return null;
-  let host=document.querySelector('#m0StructuredSpatial');
+  let host=document.querySelector('#m0StructuredSpatial')                    ;
   if(!host){host=document.createElement('section');host.id='m0StructuredSpatial';host.className='m0-structured-spatial';doc.prepend(host)}
   host.dataset.m0StructuredStudio='true';
+
+  const domain=composition.domain,bus=composition.bus;
+  const validationContext=scenarioValidationContext();
+  const state           ={view:'timeline',tool:'select',facet:'overview',facetItem:null,
+    collapsed:new Set(['injects','decisions','modules','tasks','rules','observability','completion','knowledge','labs']),
+    endpoints:[],status:null,scrollToPhase:null};
+  let topology                 =null;
+  let chromeInstalled=false;
+  let commandLocale                    =null;
+  let documentBound=false;
+
+  const relations=()=>{try{return composition?.shared?.spatialRelation?.project?.()||[]}catch{return []}};
+  const availability=(id       )=>{
+    try{
+      const value=bus.availability(id,validationContext);
+      if(value===true)return {enabled:true,reason:''};
+      if(value===false)return {enabled:false,reason:''};
+      return {enabled:value?.enabled!==false,reason:String(value?.reason||value?.code||'')};
+    }catch{return {enabled:false,reason:''}}
+  };
+  const setStatus=(tone       ,text       )=>{state.status={tone,text}};
+
+  const targetPhase=(projection    )=>{
+    const phases=projection.phases||[];
+    const selected=domain.selectionContext();
+    const fromSelection=selected?.kind==='phase'?selected.id:selected?.phaseId;
+    return phases.find((p    )=>p.id===fromSelection)||phases[0]||null;
+  };
+
+  const addElement=(kind       ,phaseId            )=>{
+    const projection=domain.studioProjection();
+    const phase=phaseId||(targetPhase(projection)?.id||null);
+    if(!phase){setStatus('error',pickText(activeLocale()).emptyHint);render();return}
+    const phases=projection.phases||[];
+    const bucket=phases.flatMap((p    )=>p.elements||[]);
+    const id=nextId(String(kind).toUpperCase().slice(0,3),bucket);
+    const title=`${kindLabel(kind,pickText(activeLocale()))} ${bucket.filter((e    )=>e.kind===kind).length+1}`;
+    const element    ={id,kind,title};
+    if(kind==='decision')element.condition=pickText(activeLocale()).condition;
+    if(kind==='lab')element.labRef={id:'LAB-SQLI-01',revision:'2'};
+    if(kind==='observability')element.channel='Simulated SIEM';
+    try{
+      const result=bus.execute('scenarios.author',{op:'addElement',phaseId:phase,element,route:'scenarios-workbench'});
+      if(result?.ok===false)setStatus('error',String(result.reason||result.code||''));
+      else{
+        const phaseName=String(phases.find((p    )=>p.id===phase)?.name||phase).replace(/^\d+\s*/,'');
+        setStatus('ok',pickText(activeLocale()).stElementAdded.replace('{kind}',kindLabel(kind,pickText(activeLocale()))).replace('{phase}',phaseName));
+      }
+    }catch(error    ){setStatus('error',String(error?.message||error))}
+    state.facet='selection';state.facetItem=null;render();
+  };
+
+  const addPhase=()=>{
+    const projection=domain.studioProjection();
+    const id=nextId('PHASE',projection.phases||[]);
+    const number=(projection.phases||[]).length+1;
+    const name=activeLocale()==='ar'?`مرحلة ${number}`:`Phase ${number}`;
+    try{
+      const result=bus.execute('scenarios.author',{op:'addPhase',phase:{id,name,elements:[]},route:'scenarios-workbench'});
+      if(result?.ok===false)setStatus('error',String(result.reason||result.code||''));
+      else setStatus('ok',pickText(activeLocale()).stPhaseAdded);
+    }catch(error    ){setStatus('error',String(error?.message||error))}
+    state.scrollToPhase=id;render();
+  };
+
+  const selectPhase=(id       )=>{domain.select({kind:'phase',id});state.facet='selection';state.facetItem=null;state.scrollToPhase=id;render()};
+  const selectElement=(id       )=>{domain.select({kind:'element',id});state.facet='selection';state.facetItem=null;render()};
+
+  const nodeClick=(id       )=>{
+    if(state.tool==='connect'){
+      if(!state.endpoints.length){state.endpoints=[id];selectElement(id);setStatus('accent',pickText(activeLocale()).stConnectSource);render();return}
+      const [source]=state.endpoints;
+      if(source===id){state.endpoints=[];setStatus('error',pickText(activeLocale()).stConnectBlocked.replace('{reason}',pickText(activeLocale()).select));render();return}
+      commitRelation(source,id);
+      return;
+    }
+    selectElement(id);
+  };
+
+  const commitRelation=(source       ,target       )=>{
+    const adapter=composition?.shared?.spatialRelation;
+    const t=pickText(activeLocale());
+    if(!adapter){state.endpoints=[];setStatus('error',t.stConnectBlocked.replace('{reason}','UNBOUND'));render();return}
+    try{
+      const projection=domain.studioProjection();
+      adapter.nodes=(projection.phases||[]).flatMap((p    )=>(p.elements||[]).map((e    )=>({id:e.id,label:e.title||e.id})));
+      const check=adapter.connectionAvailability([source,target],'author');
+      if(check.enabled===false){state.endpoints=[];setStatus('error',t.stConnectBlocked.replace('{reason}',String(check.reason||check.code||'')));render();return}
+      adapter.commit({source,target,type:'connects',direction:'directed',expectedVersion:adapter.version});
+      const label=(pid       )=>{for(const p of projection.phases||[])for(const e of p.elements||[])if(e.id===pid)return e.title||pid;return pid};
+      state.endpoints=[];
+      setStatus('ok',t.stConnected.replace('{a}',label(source)).replace('{b}',label(target)));
+    }catch(error    ){state.endpoints=[];setStatus('error',t.stConnectBlocked.replace('{reason}',String(error?.message||error)))}
+    render();
+  };
+
+  const runCommand=(id       ,payload    ,okText       )=>{
+    try{
+      const result=bus.execute(id,payload);
+      if(result?.ok===false)setStatus('error',String(result.reason||result.code||''));
+      else if(result?.validation&&result.validation.ok===false)setStatus('error',result.code||'');
+      else setStatus('ok',okText);
+    }catch(error    ){setStatus('error',String(error?.message||error))}
+    render();
+  };
+
+  const exportSummary=()=>{
+    const t=pickText(activeLocale()),p=domain.studioProjection();
+    const lines=[`${p.title} · ${p.identity.id}@${p.identity.revision} · ${p.lifecycle}`];
+    (p.phases||[]).forEach((phase    ,i       )=>{
+      lines.push(`${phaseNumber(phase,i)} ${String(phase.name||phase.id).replace(/^\d+\s*/,'')}`);
+      (phase.elements||[]).forEach((e    )=>lines.push(`   · [${kindLabel(String(e.kind||'event'),t)}] ${e.title||e.id}`));
+    });
+    const text=lines.join('\n');
+    const done=(ok        )=>{setStatus(ok?'ok':'error',ok?t.stExported:t.stExportBlocked);render()};
+    try{
+      const clip=(navigator       )?.clipboard;
+      if(clip?.writeText)clip.writeText(text).then(()=>done(true),()=>done(false));
+      else{setStatus('error',t.stExportBlocked);render()}
+    }catch{setStatus('error',t.stExportBlocked);render()}
+  };
+
+  const action=(name       )=>{
+    const t=pickText(activeLocale());
+    if(name==='validate'){
+      const result=bus.execute('scenarios.validate',validationContext);
+      const passed=(result?.requirements||[]).filter((r    )=>r.status==='PASS').length;
+      setStatus(result?.ok===false?'error':'ok',result?.ok===false?t.stValidationFailed.replace('{n}',String((result?.requirements||[]).length-passed)):t.stValidated.replace('{n}',String(passed)));
+      render();return;
+    }
+    if(name==='publish')return runCommand('scenarios.publish',{validationContext,route:'scenarios-workbench'},t.stPublished);
+    if(name==='prepare')return runCommand('scenarios.prepare',{...validationContext,route:'scenarios-workbench'},t.stPrepared);
+    if(name==='revise')return runCommand('scenarios.revise',{expectedVersion:domain.version,route:'scenarios-workbench'},t.stRevised);
+    if(name==='export')return exportSummary();
+    if(name==='clear'){domain.select(null);state.facet='overview';state.facetItem=null;state.endpoints=[];setStatus('accent',t.stCleared);render();return}
+  };
+
+  /* ---------------------------------------------------------------- panes + shell chrome */
+
+  const localizeChrome=(t    )=>{
+    const set=(selector       ,value       )=>{const node=document.querySelector(selector);if(node&&value)node.textContent=value};
+    set('#bottomShelf .bottomtitle',t.bottomTitle);
+    set('#bottomSummary',t.bottomSummary);
+    set('#leftLocalReveal [data-pane-toggle-label]',t.hideStructure);
+    set('#rightLocalReveal [data-pane-toggle-label]',t.showContext);
+    const banner=document.querySelector('#topBanner');
+    if(banner){
+      set('#topBanner .title',t.banner);
+      set('#topBanner .badge',t.bannerBadge);
+      set('#topBanner .lock span',t.bannerLock);
+    }
+  };
+
+  /**
+   * The shell's LEFT/RIGHT region hosts hide their siblings once (workspace.region). Shared
+   * code can re-reveal the generic donor panes afterwards (context-inspector re-render,
+   * inspector restore), which would leak Library donor semantics and a second, generic
+   * composition into this surface. Re-apply the product's own neutral carrier policy for
+   * SCENARIOS only, and keep it asserted with a terminating MutationObserver. No shared file
+   * is modified; only this surface's pane siblings are suppressed.
+   */
+  const suppressPaneSiblings=()=>{
+    if(typeof document==='undefined')return;
+    document.querySelectorAll('#rightPane .pbody > :not(#domainContext),#leftPane .pbody > :not(#domainLeftRegion)').forEach(node=>{
+      if(node.hidden&&node.getAttribute('aria-hidden')==='true')return;
+      node.hidden=true;node.inert=true;node.setAttribute('aria-hidden','true');(node               ).dataset.donorSemantic='suppressed';
+    });
+  };
+  const paneObservers                   =[];   /* strong refs: observers must not be collected */
+  const observePanes=()=>{
+    if(paneObservers.length||typeof MutationObserver==='undefined')return;
+    ['#rightPane .pbody','#leftPane .pbody'].forEach(selector=>{
+      const pbody=document.querySelector(selector);if(!pbody)return;
+      const observer=new MutationObserver(()=>suppressPaneSiblings());
+      observer.observe(pbody,{subtree:true,attributes:true,attributeFilter:['hidden','aria-hidden','inert','style','class']});
+      paneObservers.push(observer);
+    });
+  };
+
+  const renderPanes=(projection    ,selection    ,validation    ,t    ,locale       )=>{
+    const ws=foundation()?.workspace;
+    if(!ws)return;
+    const knowledge=SCENARIO_KNOWLEDGE_UNITS;
+    const labRefs      =[];
+    (projection.phases||[]).forEach((phase    )=>(phase.elements||[]).forEach((e    )=>{
+      if(e.labRef&&!labRefs.some(l=>l.id===e.labRef.id&&l.revision===e.labRef.revision))
+        labRefs.push({id:e.labRef.id,revision:e.labRef.revision,available:Boolean(validationContext.resolveLab(e.labRef))});
+    }));
+    const structureCtx={t,projection,locale,facet:state.facet,collapsed:state.collapsed,
+      selectedId:selection?.id&&selection?.kind!=='scenario'?selection.id:null,
+      selectedPhaseId:selection?.kind==='phase'?selection.id:selection?.phaseId||null,
+      knowledgeUnits:knowledge,labRefs};
+    const inspectorCtx={t,projection,selection,facet:state.facet,facetItem:state.facetItem,validation,
+      validationStatus:String(domain.validationStatus||'UNVALIDATED'),
+      binding:SCENARIO_ENVIRONMENT_BINDING,locale,knowledgeUnits:knowledge,labRefs,
+      selectedPhaseId:selection?.kind==='phase'?selection.id:selection?.phaseId||null};
+    try{
+      ws.region('LEFT',{html:renderStructure(structureCtx),label:t.structure});
+      ws.region('RIGHT',{html:renderInspector(inspectorCtx),label:t.inspector});
+    }catch(error){if(typeof console!=='undefined')console.warn('scenario region projection',error)}
+    suppressPaneSiblings();
+    const donor=document.querySelector('#editorDocument');
+    if(donor&&!donor.hidden){donor.hidden=true;donor.setAttribute('aria-hidden','true');donor.dataset.donorSemantic='suppressed'}
+    localizeChrome(t);
+    localizeCommandLabels(t,locale,ws);
+  };
+
+  /**
+   * This surface OWNS its semantic command registrations, so their labels are localized too:
+   * no English-only button survives in an Arabic session. Labels are mutated on the commands
+   * this domain owns (never another surface's), and the shell toolbar is refreshed only when
+   * the active locale actually changed.
+   */
+  const localizeCommandLabels=(t    ,locale               ,ws    )=>{
+    if(commandLocale===locale)return;
+    commandLocale=locale;
+    try{
+      const map=(bus       )?.commands;
+      if(map&&typeof map.get==='function'){
+        const labels    ={ 'scenarios.author':t.cmdAuthor,'scenarios.revise':t.cmdRevise,'scenarios.validate':t.cmdValidate,'scenarios.publish':t.cmdPublish,'scenarios.prepare':t.cmdPrepare };
+        for(const [id,label] of Object.entries(labels)){
+          const command=map.get(id);
+          if(command&&command.owner===domain.owner&&typeof label==='string')command.label=label;
+        }
+      }
+      ws?.refreshToolbar?.();
+    }catch(error){if(typeof console!=='undefined')console.warn('scenario command labels',error)}
+  };
+
+  const installShell=()=>{
+    const ws=foundation()?.workspace;
+    if(!ws){return false}
+    if(!chromeInstalled){
+      try{
+        ws.toolbar(['scenarios.author','scenarios.revise']);
+        ws.bindToolbarContext({contextProvider:()=>validationContext});
+      }catch(error){if(typeof console!=='undefined')console.warn('scenario toolbar binding',error)}
+      chromeInstalled=true;
+      try{
+        const inspector=foundation()?.wave3Assembly?.contextInspector;
+        if(inspector?.snapshot?.().open)inspector.close('scenarios-local-inspector',{restore:false});
+        foundation()?.wave3Assembly?.renderContext?.();
+      }catch(error){if(typeof console!=='undefined')console.warn('scenario context handover',error)}
+      observePanes();
+      try{
+        const donor=document.querySelector('#editorDocument');
+        if(donor){donor.hidden=true;donor.setAttribute('aria-hidden','true');donor.dataset.donorSemantic='suppressed'}
+      }catch{}
+    }
+    const original=ws.onPreferences;
+    ws.onPreferences=(preferences    )=>{try{original?.(preferences)}catch{};render()};
+    return true;
+  };
+
+  /* ---------------------------------------------------------------- board render */
+
+  /** Keyboard focus must survive a re-render (R7: focus is always visible and follows order). */
+  const FOCUS_ATTRS=['data-node','data-element','data-facet-item','data-phase','data-view','data-tool','data-action','data-menu','data-add-to','data-group','data-facet'];
+  const focusKey=(element             )=>{
+    if(!element||element===document.body)return null;
+    for(const attr of FOCUS_ATTRS){
+      const value=element.getAttribute?.(attr);
+      if(value!==null&&value!==undefined)return `[${attr}="${value.replace(/"/g,'\\\"')}"]`;
+    }
+    return null;
+  };
+
   const render=()=>{
-    const projection=composition.domain.studioProjection();
-    host.innerHTML=`<section class="w03-identity" data-w03-surface="scenarios" aria-label="Scenario timeline identity">
-      <header class="w03-identity-head"><strong>${esc(projection.title||'Untitled Scenario')}</strong><span class="w03-pill" data-tone="accent">Draft Revision ${esc(projection.revision||'1')}</span><span class="w03-pill">${esc(projection.lifecycle||'DRAFT')}</span><span class="w03-identity-sub">${projection.phases.length} phases · ${projection.phases.reduce((n,p)=>n+(p.elements?.length||0),0)} elements</span></header>
-      <div class="w03-timeline">${projection.phases.length?projection.phases.map((phase,index)=>`<section class="w03-phase" data-phase="${esc(phase.id)}"><div class="w03-phase-rail"><span class="w03-phase-num">${esc(phaseNumber(phase,index))}</span></div><div class="w03-phase-body"><h3 class="w03-phase-title">${esc(String(phase.name||phase.id).replace(/^\d+\s*/,''))}</h3><div class="w03-elements">${(phase.elements||[]).map(item=>`<button type="button" class="w03-element" data-kind="${esc(item.kind||'event')}" data-element="${esc(item.id)}" aria-pressed="${composition.domain.selectionContext()?.id===item.id}"><h4>${esc(item.title||item.id)}</h4><dl>${elementRows(item).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl></button>`).join('')}<button type="button" class="w03-add" data-add-element="${esc(phase.id)}">＋ Add Element</button></div></div></section>`).join(''):'<p class="state-token" data-state="empty"><strong>EMPTY</strong> · No phases are authored yet; add the first phase to start the timeline.</p>'}</div>
-      <aside class="w03-legend" aria-label="Legend (Relationships)"><h4>Legend (Relationships)</h4><ul><li><span class="key" aria-hidden="true"></span><span>Sequence / Flow — phase order and element delivery</span></li><li><span class="key conditional" aria-hidden="true"></span><span>Conditional Flow — decision-gated branch (see the element's Condition row)</span></li></ul></aside>
+    const active=document.activeElement                ;
+    const restoreKey=(active&&active!==document.body&&(active.closest('#m0StructuredSpatial,#domainLeftRegion,#domainContext')))?focusKey(active):null;
+    const locale=activeLocale(),t=pickText(locale);
+    const projection=domain.studioProjection();
+    const selection=domain.selectionContext();
+    const validation=domain.validate(validationContext);
+    const phases=projection.phases||[];
+    const elementCount=phases.reduce((n       ,p    )=>n+(p.elements?.length||0),0);
+    const selectedPhaseId=selection?.kind==='phase'?selection.id:selection?.phaseId||null;
+    const relationList=relations();
+    const published=projection.lifecycle==='PUBLISHED';
+    const passedChecks=(validation.requirements||[]).filter((r    )=>r.status==='PASS').length;
+    const lifecycleStatus=domain.validationStatus;
+    const statusText=state.status?state.status.text:
+      lifecycleStatus==='VALIDATED'?t.stValidated.replace('{n}',String(passedChecks)):
+      lifecycleStatus==='VALIDATION_FAILED'?t.stValidationFailed.replace('{n}',String((validation.requirements||[]).length-passedChecks)):t.notStarted;
+    const statusTone=state.status?state.status.tone:(lifecycleStatus==='VALIDATED'?'ok':lifecycleStatus==='VALIDATION_FAILED'?'error':'');
+
+    const viewCtx={t,projection,selectedId:selection?.kind!=='scenario'&&selection?.kind!=='phase'?selection?.id:null,
+      selectedPhaseId,relations:relationList,locale};
+
+    const tabs=VIEWS.map(view=>`<button type="button" class="w03-tab" role="tab" data-view="${view}" aria-selected="${state.view===view}">${esc(t[view])}</button>`).join('');
+    const lifecycleActions=[['validate','shield',t.validate],['publish','check',t.publish],['prepare','lab',t.prepare]].map(([id,glyph,label])=>{
+      const a=availability(`scenarios.${id}`);
+      /* published revisions are immutable: publish is a completed action, not a live one */
+      const enabled=a.enabled&&!(id==='publish'&&published);
+      const reason=id==='publish'&&published?t.alreadyPublished:a.reason;
+      return `<button type="button" class="w03-btn" data-action="${id}" ${enabled?'':'disabled'} title="${esc(reason)}">${icon(glyph)}${esc(label)}</button>`;
+    }).join('');
+    const palette=[['select','focus',t.select],['phase','plus',t.addPhase],['event','note',t.addEvent],['inject','edit',t.addInject],
+      ['decision','move',t.addDecision],['lab','lab',t.addLab]].map(([id,glyph,label])=>
+      `<button type="button" class="w03-btn" data-tool="${id}" ${id==='select'?`aria-pressed="${state.tool==='select'}"`:''}>${icon(glyph)}${esc(label)}</button>`).join('');
+
+    host.innerHTML=`<section class="w03-scen" data-w03-surface="scenarios" aria-label="${esc(t.ariaBoard)}">
+      <div class="w03-bar">
+        <div class="w03-tabs" role="tablist" aria-label="${esc(t.ariaToolbar)}">${tabs}</div>
+        <div class="w03-bar-actions">
+          ${lifecycleActions}
+          <div class="w03-menuwrap">
+            <button type="button" class="w03-btn" data-shape="icon" data-menu="lifecycle" aria-haspopup="true" aria-expanded="false" aria-label="${esc(t.more)}" title="${esc(t.more)}">${icon('more')}</button>
+            <div class="w03-menu" data-menu-panel="lifecycle" role="menu" hidden>
+              <button type="button" role="menuitem" data-action="revise">${icon('redo')}${esc(t.revise)}</button>
+              <button type="button" role="menuitem" data-action="export">${icon('copy')}${esc(t.exportSummary)}</button>
+              <button type="button" role="menuitem" data-action="clear">${icon('close')}${esc(t.clearSelection)}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w03-palette" role="toolbar" aria-label="${esc(t.ariaPalette)}">
+        ${palette}
+        <span class="w03-sep" aria-hidden="true"></span>
+        <button type="button" class="w03-btn" data-tool="connect" aria-pressed="${state.tool==='connect'}">${icon('link')}${esc(t.connect)}</button>
+        <span class="w03-sep" aria-hidden="true"></span>
+        <div class="w03-menuwrap">
+          <button type="button" class="w03-btn" data-shape="icon" data-menu="authoring" aria-haspopup="true" aria-expanded="false" aria-label="${esc(t.more)}" title="${esc(t.more)}">${icon('more')}</button>
+          <div class="w03-menu" data-menu-panel="authoring" role="menu" hidden>
+            ${EXTRA_TOOLS.map(kind=>`<button type="button" role="menuitem" data-tool="${kind}">${icon(kind==='task'?'list':kind==='rule'?'shield':kind==='observability'?'focus':'check')}${esc(({task:t.addTask,rule:t.addRule,observability:t.addObservability,completion:t.addCompletion}       )[kind])}</button>`).join('')}
+          </div>
+        </div>
+      </div>
+      <article class="w03-board" aria-label="${esc(t.ariaBoard)}">
+        <header class="w03-board-head">
+          <h2><bdi dir="auto">${esc(projection.title||'Untitled Scenario')}</bdi></h2>
+          <span class="w03-pill" data-tone="ok">${esc(published?t.revision:t.draftRevision)} <bdi dir="ltr">${esc(projection.identity?.revision||'1')}</bdi></span>
+          <span class="w03-pill" data-tone="${published?'accent':'warn'}"><bdi dir="ltr">${esc(projection.lifecycle||'DRAFT')}</bdi></span>
+          <div class="w03-board-meta"><span><b>${esc(countText(phases.length,'phase',locale))}</b> · <b>${esc(countText(elementCount,'element',locale))}</b> · ${esc(`${relationList.length} ${t.links}`)}</span></div>
+        </header>
+        ${renderBoardBody(state.view,{t,projection,selectedId:viewCtx.selectedId,selectedPhaseId,relations:relationList,locale})}
+        <footer class="w03-legend">
+          <strong>${esc(t.legend)}</strong>
+          <span class="w03-key"><span class="line" aria-hidden="true"></span>${esc(t.sequence)}</span>
+          <span class="w03-key"><span class="line dash" aria-hidden="true"></span>${esc(t.conditional)}</span>
+          <span class="w03-status" data-tone="${esc(statusTone)}" role="status">${esc(statusText)}</span>
+        </footer>
+      </article>
     </section>`;
-    identityStyle(host);
-    host.querySelectorAll('[data-element]').forEach(button=>button.addEventListener('click',()=>{composition.domain.select({kind:'item',id:button.dataset.element});render()}));
-    host.querySelectorAll('[data-phase]').forEach(node=>node.querySelector('.w03-phase-title')?.addEventListener('click',()=>{composition.domain.select({kind:'phase',id:node.dataset.phase});render()}));
-    host.querySelectorAll('[data-add-element]').forEach(button=>button.addEventListener('click',()=>{const p=composition.domain.studioProjection(),all=Object.values(p.facets).flat(),id=nextId('EVT',all);composition.bus.execute('scenarios.author',{op:'addElement',phaseId:button.dataset.addElement,element:{id,kind:'event',title:`Event ${all.length+1}`}});render()}));
+    ensureScenarioStyle(host);
+    renderPanes(projection,selection,validation,t,locale);
+    bind(host,projection,locale);
+    mountTopology(host,projection,relationList);
+    if(state.scrollToPhase){
+      const row=host.querySelector(`[data-phase-row="${CSS.escape(state.scrollToPhase)}"]`);
+      row?.scrollIntoView({block:'nearest'});
+      state.scrollToPhase=null;
+    }
+    if(restoreKey){
+      const target=document.querySelector(restoreKey)                    ;
+      if(target&&target!==document.activeElement&&typeof target.focus==='function')target.focus({preventScroll:true});
+    }
+  };
+
+  const mountTopology=(root            ,projection    ,relationList      )=>{
+    topology=null;
+    if(state.view!=='topology')return;
+    const target=root.querySelector('[data-topology]')                    ;
+    if(!target)return;
+    const {nodes,edges}=topologyGraph(projection,relationList);
+    if(!nodes.length){target.innerHTML=stateBlock(pickText(activeLocale()).empty,pickText(activeLocale()).emptyHint);return}
+    topology=new SpatialView(target,nodes,edges,{
+      select:(ids         )=>{const raw=ids.at(-1);if(!raw)return;if(raw.startsWith('phase:'))domain.select({kind:'phase',id:raw.slice(6)});else domain.select({kind:'element',id:raw});state.facet='selection';state.facetItem=null;renderPanesOnly()},
+      open:(id       )=>{if(String(id).startsWith('phase:'))domain.select({kind:'phase',id:String(id).slice(6)});else domain.select({kind:'element',id:String(id)});state.facet='selection';state.facetItem=null;renderPanesOnly()}
+    });
+    topology.setActiveMode(projection.lifecycle==='PUBLISHED'?'review':'author');
+    const selection=domain.selectionContext();
+    if(selection?.id&&nodes.some((n    )=>n.id===selection.id)){try{topology.model.select(selection.id);topology.render()}catch{}}
+    requestAnimationFrame(()=>topology?.fit?.());
+  };
+
+  let renderPanesOnly=()=>{
+    const locale=activeLocale(),t=pickText(locale);
+    renderPanes(domain.studioProjection(),domain.selectionContext(),domain.validate(validationContext),t,locale);
+  };
+
+  /* ---------------------------------------------------------------- binding */
+
+  const bind=(root            ,projection    ,locale       )=>{
+    const t=pickText(locale);
+    root.querySelectorAll             ('[data-view]').forEach(node=>node.onclick=()=>{state.view=node.dataset.view       ;render()});
+    root.querySelectorAll             ('[data-menu]').forEach(node=>node.onclick=event=>{
+      event.stopPropagation();
+      const panel=root.querySelector(`[data-menu-panel="${node.dataset.menu}"]`)                    ;
+      const open=panel?.hidden!==false;
+      root.querySelectorAll             ('[data-menu-panel]').forEach(p=>{p.hidden=true});
+      root.querySelectorAll             ('[data-menu]').forEach(b=>b.setAttribute('aria-expanded','false'));
+      if(panel){panel.hidden=!open;node.setAttribute('aria-expanded',String(open))}
+    });
+    root.querySelectorAll             ('[data-tool]').forEach(node=>node.onclick=()=>{
+      const tool=node.dataset.tool ;
+      if(tool==='select'){state.tool='select';state.endpoints=[];setStatus('accent',t.stTool.replace('{tool}',t.select));render();return}
+      if(tool==='phase'){state.tool='select';addPhase();return}
+      if(tool==='connect'){state.tool='connect';state.endpoints=[];setStatus('accent',t.stConnectArmed);render();return}
+      state.tool=tool;
+      addElement(tool,targetPhase(projection)?.id||null);
+    });
+    root.querySelectorAll             ('[data-action]').forEach(node=>node.onclick=()=>{closeMenus(root);action(node.dataset.action )});
+    root.querySelectorAll             ('[data-node]').forEach(node=>node.onclick=()=>nodeClick(node.dataset.node ));
+    root.querySelectorAll             ('[data-phase]').forEach(node=>node.onclick=()=>selectPhase(node.dataset.phase ));
+    root.querySelectorAll             ('[data-add-to]').forEach(node=>node.onclick=()=>{
+      const kind=state.tool==='select'||state.tool==='connect'?'event':state.tool;
+      addElement(kind,node.dataset.addTo );
+    });
+    const structure=root.ownerDocument.querySelector('[data-scenario-structure]');
+    structure?.querySelectorAll             ('button').forEach(node=>node.onclick=()=>{
+      const group=node.dataset.group;
+      if(group){if(state.collapsed.has(group))state.collapsed.delete(group);else state.collapsed.add(group)}
+      if(node.dataset.facetItem){state.facetItem=node.dataset.facetItem;state.facet=node.dataset.facet||state.facet}
+      else if(node.dataset.facet&&!node.dataset.element&&!node.dataset.phase){state.facet=node.dataset.facet;state.facetItem=null}
+      if(node.dataset.phase)return selectPhase(node.dataset.phase);
+      if(node.dataset.element)return selectElement(node.dataset.element);
+      render();
+    });
+  };
+
+  const closeMenus=(root            )=>{
+    root.querySelectorAll             ('[data-menu-panel]').forEach(p=>p.hidden=true);
+    root.querySelectorAll             ('[data-menu]').forEach(b=>b.setAttribute('aria-expanded','false'));
+  };
+
+  if(!documentBound){
+    documentBound=true;
+    document.addEventListener('click',event=>{
+      if(!(event.target           )?.closest?.('.w03-menuwrap'))closeMenus(host               );
+    });
+  }
+
+  let retries=0;
+  const boot=()=>{
+    if(!foundation()?.workspace){if(++retries<50){setTimeout(boot,40)}else{render()}return}
+    if(installShell())render();else if(++retries<50)setTimeout(boot,40);
   };
   render();
+  setTimeout(boot,0);
   return {host,refresh:render,owner:'ScenarioTimelineIdentity'};
-}
-export function renderScenariosSurface(root,composition,{dir='rtl',locale=dir==='rtl'?'ar':'en',validationContext={availableCapabilities:[],resolveLab:()=>false,binding:null}}={}){
-  if(!root||!composition)throw Error('SCENARIOS_PRESENTATION_INPUT_REQUIRED');const t=labels[locale]||labels.en;root.dir=dir;root.dataset.surface='scenarios';root.dataset.workspaceInteraction='authoring';let spatial=null,statusText='';
-  const act=(id,payload={})=>{const result=composition.bus.execute(id,payload);if(result?.ok===false&&result.reason)statusText=result.reason;draw();return result};
-  const addElement=(kind)=>{const p=composition.domain.studioProjection(),phaseId=firstPhase(composition.domain);if(!phaseId){statusText=locale==='ar'?'أضف مرحلة أولاً.':'Add a phase first.';draw();return}const all=Object.values(p.facets).flat(),id=nextId(kind.toUpperCase(),all),base={id,kind,title:kind==='lab'?'Lab module':kind[0].toUpperCase()+kind.slice(1)};if(kind==='decision')base.condition='condition';if(kind==='lab')base.labRef={id:'LAB-PINNED',revision:'1'};act('scenarios.author',{op:'addElement',phaseId,element:base})};
-  const draw=()=>{
-    const projection=composition.domain.studioProjection(),validation=composition.domain.validate(validationContext),selected=composition.domain.selectionContext(),published=projection.lifecycle==='PUBLISHED',prepareAvailability=composition.bus.availability('scenarios.prepare',validationContext),prepareEnabled=prepareAvailability===true||prepareAvailability?.enabled===true,facets=projection.facets;
-    root.innerHTML=`<section class="s11-studio" aria-label="Scenario authoring Studio"><header class="s11-top"><div class="identity"><strong>${esc(projection.title||'Untitled Scenario')}</strong> · <bdi dir="ltr">${esc(projection.identity.id)}@${esc(projection.identity.revision)}</bdi> <span class="s11-state">${esc(projection.lifecycle)}</span></div><button data-action="validate">${t.validate}</button><button data-action="revise">${t.revise}</button><button data-action="prepare" ${prepareEnabled?'':'disabled'}>${t.prepare}</button></header><aside class="s11-left"><h3>${t.structure}</h3><div class="s11-tree"><button data-nav="scenario">${t.overview}</button><button data-nav="environment">${t.environment}</button><button data-nav="roles">${t.roles} (${projection.roles.length})</button><strong>${t.phases}</strong>${projection.phases.map(p=>`<button data-select-kind="phase" data-select-id="${esc(p.id)}" data-selected="${selected.id===p.id}">${esc(p.name||p.id)} <bdi dir="ltr">${esc(p.id)}</bdi></button>`).join('')}<strong>${t.events} (${facets.events.length})</strong>${facets.events.map(x=>`<button data-select-kind="event" data-select-id="${esc(x.id)}">${esc(x.title||x.id)}</button>`).join('')}<strong>${t.injects} (${facets.injects.length})</strong>${facets.injects.map(x=>`<button data-select-kind="inject" data-select-id="${esc(x.id)}">${esc(x.title||x.id)}</button>`).join('')}<strong>${t.decisions} (${facets.decisions.length})</strong>${facets.decisions.map(x=>`<button data-select-kind="decision" data-select-id="${esc(x.id)}">${esc(x.title||x.id)}</button>`).join('')}<strong>${t.modules} (${facets.modules.length})</strong>${facets.modules.map(x=>`<button data-select-kind="lab" data-select-id="${esc(x.id)}">${esc(x.title||x.id)}</button>`).join('')}<div>${t.tasks} (${facets.tasks.length}) · ${t.rules} (${facets.rules.length}) · ${t.observability} (${facets.observability.length}) · ${t.completion} (${facets.completion.length})</div></div></aside><main class="s11-center"><div class="s11-center-head"><strong>${t.spatial}</strong><div class="s11-tools"><button data-create="phase" ${published?'disabled':''}>${t.addPhase}</button><button data-create="event" ${published?'disabled':''}>${t.addEvent}</button><button data-create="inject" ${published?'disabled':''}>${t.addInject}</button><button data-create="decision" ${published?'disabled':''}>${t.addDecision}</button><button data-create="lab" ${published?'disabled':''}>${t.addLab}</button></div></div><div class="s11-spatial" data-spatial-host aria-label="Shared Spatial scenario orchestration"></div></main><aside class="s11-right"><h3>${t.selected}</h3>${selected.kind==='missing'||!selected.id?`<p>${t.noSelection}</p>`:selected.kind==='scenario'?`<p>${esc(selected.title||projection.title)}</p><p><span>${t.environment}</span>: <bdi dir="ltr">${(projection.environment.capabilities||[]).map(esc).join(', ')||'—'}</bdi></p>`:`<form class="s11-context" data-context-form><label>ID <bdi dir="ltr">${esc(selected.id)}</bdi></label><label>Title<input name="title" value="${esc(selected.title||'')}" ${selected.editable?'':'disabled'}></label>${selected.kind==='phase'?'':`<label>Type<input value="${esc(selected.kind)}" disabled></label>`}${selected.kind==='decision'?`<label>Condition<textarea name="condition" ${selected.editable?'':'disabled'}>${esc(selected.object?.condition||'')}</textarea></label>`:''}${selected.kind==='lab'?`<label>Lab ID<input name="labId" value="${esc(selected.object?.labRef?.id||'')}" ${selected.editable?'':'disabled'}></label><label>Lab revision<input name="labRevision" value="${esc(selected.object?.labRef?.revision||'')}" ${selected.editable?'':'disabled'}></label>`:''}<button type="submit" ${selected.editable?'':'disabled'}>${t.save}</button></form>`}<div class="s11-shared"><span>${t.structured}</span><br><bdi dir="ltr">${esc(composition.shared.structuredHost?.owner||composition.shared.structuredHost?.descriptor?.()?.owner||'BOUND_SHARED_OWNER')}</bdi></div></aside><footer class="s11-bottom"><span class="s11-status" data-state="${validation.ok?'ok':'blocked'}" role="status" tabindex="-1">${esc(statusText||(validation.ok?t.validated:`${t.blocked}: ${validation.errors.slice(0,3).join('; ')}`))}</span><span dir="ltr">Binding: <bdi dir="ltr">${esc(validation.bindingStatus)}</bdi></span><span dir="ltr">Runtime provisioned: <bdi dir="ltr">false</bdi></span></footer></section>`;
-    style(root);const host=root.querySelector('[data-spatial-host]'),g=graph(projection);spatial=new SpatialView(host,g.nodes,g.edges,{select:ids=>{const raw=ids.at(-1);if(!raw)return;const [kind,id]=raw.split(':');composition.domain.select({kind:kind==='phase'?'phase':'item',id});draw()},open:id=>{const [kind,raw]=id.split(':');composition.domain.select({kind:kind==='phase'?'phase':'item',id:raw});draw()}});spatial.setActiveMode(published?'review':'author');
-    root.querySelector('[data-action="validate"]').onclick=()=>act('scenarios.validate',validationContext);root.querySelector('[data-action="prepare"]').onclick=()=>{const r=composition.bus.execute('scenarios.prepare',validationContext);statusText=r.ok?(locale==='ar'?'تم تجميد بيان إدخال التشغيل؛ لم يبدأ التشغيل.':'Run input manifest frozen; Run not started.'):(r.code||'Blocked');draw()};root.querySelector('[data-action="revise"]').onclick=()=>{const r=composition.bus.execute('scenarios.revise',{expectedVersion:composition.domain.version});statusText=r?.snapshot?(locale==='ar'?'تم إنشاء مراجعة قابلة للتحرير مع حفظ المصدر.':'Editable successor revision created; source preserved.'):(r.reason||'');draw()};
-    root.querySelector('[data-create="phase"]')?.addEventListener('click',()=>{const p=composition.domain.studioProjection(),id=nextId('PHASE',p.phases);act('scenarios.author',{op:'addPhase',phase:{id,name:`Phase ${p.phases.length+1}`,elements:[]}})});for(const kind of ['event','inject','decision','lab'])root.querySelector(`[data-create="${kind}"]`)?.addEventListener('click',()=>addElement(kind));
-    root.querySelectorAll('[data-select-id]').forEach(button=>button.onclick=()=>{composition.domain.select({kind:button.dataset.selectKind,id:button.dataset.selectId});draw()});const form=root.querySelector('[data-context-form]');if(form)form.onsubmit=e=>{e.preventDefault();const data=new FormData(form),ctx=composition.domain.selectionContext(),patch={title:String(data.get('title')||'')};if(ctx.kind==='phase')act('scenarios.author',{op:'updatePhase',phaseId:ctx.id,patch:{name:patch.title}});else{if(ctx.kind==='decision')patch.condition=String(data.get('condition')||'');if(ctx.kind==='lab')patch.labRef={id:String(data.get('labId')||''),revision:String(data.get('labRevision')||'')};act('scenarios.author',{op:'updateElement',phaseId:ctx.phaseId,elementId:ctx.id,patch})}};
-  };
-  draw();return {refresh:draw,focus:()=>root.querySelector('button')?.focus(),get spatial(){return spatial},descriptor:()=>({surface:'scenarios',owner:'W03ScenarioDomain',spatialOwner:'SpatialView',structuredOwner:composition.shared.structuredHost?.owner||'BOUND_SHARED_OWNER',localSpatialEngine:false,localStructuredEngine:false})};
 }

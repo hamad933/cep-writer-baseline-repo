@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "branch": "writer/mi-serial",
+  "protocol": "controller/state/CHECKPOINT_PROTOCOL.md",
+  "note": "Append-only. The LATEST checkpoint is the last entry in `checkpoints`. A checkpoint is not complete until its commit is verified on GitHub.",
+  "checkpoints": [
+    {
+      "checkpoint_id": "CP-2026-09-30-001",
+      "timestamp": "2026-09-30T00:00:00Z",
+      "branch": "writer/mi-serial",
+      "commit_sha": "PENDING_AT_PUSH_VERIFICATION",
+      "parent_sha": "e5a77b60187e82503c52466665561605a3eea362",
+      "controller_phase": "PHASE_7_CONTINUOUS_VISUAL_OWNERSHIP_LOOP",
+      "execution_wave": "WAVE-1 reviewed; WAVE-3 + W02 cluster + W04 trio in flight; WAVE-4 shared work pending",
+      "active_writers": [
+        "W05-AUDIT", "W05-BACKUP", "W03-ENTERPRISE", "W03-LABS", "W03-RUNS",
+        "W05-RELEASES", "W05-MANUAL-AI", "W02-LIBRARY", "W02-LEARN",
+        "W02-VISUALIZE", "W04-REVIEWS", "W04-MASTERY", "W04-PORTFOLIO"
+      ],
+      "completed_surfaces": ["today", "rq", "scenarios", "evidence", "configuration"],
+      "in_progress_surfaces": [
+        "audit", "backup", "enterprise", "labs", "runs", "releases", "manual_ai",
+        "library", "learn", "visualize", "reviews", "mastery", "portfolio"
+      ],
+      "blocked_surfaces": [],
+      "not_dispatched_surfaces": ["health", "processing", "validation", "results", "shell"],
+      "changed_areas": [
+        "controller/state/** (NEW — durable execution state, resume protocol, checkpoint protocol, bootstrap)",
+        "controller/09_writer_forge/VISUAL_EXECUTION_STANDARD.md (binding Writer standard)",
+        "controller/09_writer_forge/surface_units/** (23 per-surface Writer packets)",
+        "controller/10_dispatch/SURFACE_DISPATCH_MATRIX.json + PARALLEL_EXECUTION_PLAN.md (incl. §4 coverage matrix)",
+        "controller/13_visual_control/** (gap register + Controller registers)",
+        ".opencode/skills/** (4 persistent skills)",
+        "stack/native-typescript/** (in-flight Writer product work — REVIEWED=5, remainder NOT ACCEPTED)",
+        "writer-output/** (Writer reports + evidence lineage)",
+        "dist/** (derived, committed per repo convention)"
+      ],
+      "validation_status": {
+        "modelTests": "210/0 PASS",
+        "buildAuthority": "pass=true, CANONICAL_SOURCE_TO_GENERATED_ONLY, 290 written, parity true",
+        "npmRunCheck": "3 known failures (browser.lineage_receipt_truthful, browser.current_candidate_claim_truthful, browser.targeted_visual_evidence) — root cause EVIDENCE/ORACLE, stale assurance/BROWSER_CONFORMANCE_RECEIPT.json lineage, pre-existing (G-24/G-36)"
+      },
+      "next_action": "Dispatch W05 trio with w05-rescue.ts write-ownership held solely by W05-VALIDATION; dispatch W03-RESULTS when W03-RUNS lands; review the 13 in-flight Writer results via independent Controller review.",
+      "rollback_reference": "e5a77b60187e82503c52466665561605a3eea362 (last commit before durable-state bootstrap)",
+      "acceptance_note": "Surfaces listed in completed_surfaces are CONTROLLER-REVIEWED, all at NOT_OWNER_ACCEPTED. In-progress surfaces carry uncommitted or unreviewed work and must NOT be treated as complete."
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "SURFACE": "labs",
+  "OWNER": "W03-LABS",
+  "REFERENCE": {
+    "path": "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/03_LABS/Cybersecurity Lab Task Graph Dashboard(2).png",
+    "sha256": "09f9d53b8d845ad374d084b60a5ed51a736b72607cdaa8445d07d74483aab46b",
+    "dims": "1505x1045",
+    "bytes": 1147836,
+    "classification": "CURRENT_FINAL_REFERENCE",
+    "register": "cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md",
+    "manifest": "cep-writer/REFERENCE_MANIFEST.json",
+    "readStatus": "READ + OCR GROUND TRUTH (tesseract on the same bytes) — vision read corroborated by OCR, no stale-frame conflict",
+    "lineage": "Owner-selected CURRENT_FINAL_REFERENCE for surface `labs`; purpose = hands-on lab authoring where the dependency task graph IS the work surface."
+  },
+  "REFERENCE_CLASSIFICATION": "CURRENT_FINAL_REFERENCE",
+  "CURRENT_CANDIDATE": {
+    "commit": "68341ec18f79 (HEAD at capture time; worktree dirty — labs roots owned by this unit only)",
+    "buildTool": "tools/writer-serial.sh npm run build:runtime",
+    "renderMethod": "GENUINE_ROUTE_LOCAL_BROWSER",
+    "route": "/?surface=labs",
+    "capture": "writer-output/W03-LABS/capture.mjs"
+  },
+  "FILES_CHANGED": [
+    "stack/native-typescript/surfaces/labs/i18n.ts (NEW — bilingual label set, locale/direction readers)",
+    "stack/native-typescript/surfaces/labs/icons.ts (NEW — local 16px stroke icon set)",
+    "stack/native-typescript/surfaces/labs/styles.ts (NEW — local style system: type/spacing/radius/accent scales)",
+    "stack/native-typescript/surfaces/labs/structure.ts (NEW — LEFT region: Lab Structure)",
+    "stack/native-typescript/surfaces/labs/context.ts (NEW — RIGHT region: Lab Context inspector)",
+    "stack/native-typescript/surfaces/labs/board.ts (NEW — center workbench + region/toolbar/chrome wiring)",
+    "stack/native-typescript/surfaces/labs/presentation.ts (REPLACED by re-export shim — legacy unmounted renderLabsSurface composition retired)",
+    "stack/native-typescript/surfaces/labs/index.ts (unchanged — contract, commands, slots preserved)",
+    "stack/native-typescript/adapters/labs/domain.ts (unchanged — domain truth preserved)",
+    "writer-output/W03-LABS/* (report, handoff, capture harness, evidence)"
+  ],
+  "FUNCTIONAL_STATUS": "PENDING rebuild+run",
+  "STRUCTURAL_STATUS": "PENDING rebuild+run",
+  "VISUAL_STATUS": "IN_PROGRESS — baseline captured and L1–L4 diagnosed; new composition built, awaiting matched-viewport recapture",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": [
+    "L1 whole surface (baseline vs reference)",
+    "L2 region/pane (left / center / right / toolbar / bottom)",
+    "L3 component (task cards, graph nodes, legend, structure rows, context rows)",
+    "L4 micro (node1 pixel variance probe, node geometry, OCR ground truth)"
+  ],
+  "RESPONSIVE_STATUS": "PENDING recapture (matrix 1505x1045 / 1440x1000 / 1280x860 / 1024x800)",
+  "RTL_LTR_STATUS": "PENDING recapture (en+ltr and ar+rtl)",
+  "DEFECTS_FOUND": [
+    {
+      "id": "DEF-LAB-B01",
+      "severity": "V4",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "LEFT pane was the shared generic `m0-domain-nav` ('Labs authoring' + raw semantic dump: Version/Status/Lifecycle/Selection/SourceLineage, then DEFINITION id/revision/title/purpose as a dl, then TASKS as concatenated `NodeType: · ExpectedSignal: · Description:` strings). Not a Lab Structure pane; content hierarchy inverted (chrome text larger than lab content).",
+      "fix": "Own LEFT region via workspace.region('LEFT'): Lab Structure — 11 definition facets with icons + counts, numbered Task Graph rail (5 steps, selected/optional states), Branches group with edge endpoints."
+    },
+    {
+      "id": "DEF-LAB-B02",
+      "severity": "V4",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "CENTER was a graph block followed by a grid of five generic task cards (banned 'generic dashboard cards'), pushing the real work below the fold and burying the graph. No authoring palette, no lifecycle action row, no integrated relationship legend, no board identity hierarchy.",
+      "fix": "Center rebuilt as one workbench: authoring palette (Select/Add Task/Connect/Add Branch) + lifecycle row (Validate/Publish Revision/Prepare Run/More) → bordered board (title + Draft Revision pill + lifecycle pill + graph meta · purpose · dot-grid task-graph canvas · footer with Relationship Legend + live state token)."
+    },
+    {
+      "id": "DEF-LAB-B03",
+      "severity": "V3",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "RIGHT pane showed generic 'Workspace context · Labs workspace' with two state rows and ~460px of dead zone below — a dead visual region and no selection context.",
+      "fix": "Own RIGHT region: Lab Context inspector — icon/label/value rows for the selected subject (Objective type, Required capability, Permitted tools chips, Expected signal, Validation link, Completion contribution) plus an always-present Preflight facts block; facet-driven subject for lab-level facets."
+    },
+    {
+      "id": "DEF-LAB-B04",
+      "severity": "V3",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "Graph task 1 ('Discover Input Surface') was visually destroyed in the capture — pixel stddev 13 vs 45 for its neighbour, OCR reads no text in its 133×50 rect although DOM probe shows the node and its title present at (365,369,133,50).",
+      "fix": "Surface now injects its own style sheet after each render (no shared stylesheet edit) and re-mounts SpatialView per render; re-verified by pixel-variance + OCR on the same bytes in the after-capture. OPEN until recaptured.",
+      "status": "OPEN_PENDING_RECAPTURE"
+    },
+    {
+      "id": "DEF-LAB-B05",
+      "severity": "V3",
+      "rootCause": "CONTENT_MODEL",
+      "defect": "Arabic session rendered English-only surface chrome ('Labs authoring', 'Author Lab', 'Version/Status/Definition') while the shell chrome was Arabic — mixed-language hierarchy, violating first-class Arabic.",
+      "fix": "Full bilingual label set (i18n.ts) applied to structure pane, board, palette, lifecycle row, legend, context rows, status line, banner, bottom shelf, pane headers and the surface-owned command labels; locale re-read on every preference change."
+    },
+    {
+      "id": "DEF-LAB-B06",
+      "severity": "V2",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "No authoring palette and no lifecycle action row in the workbench; the shell toolbar carried four generic commands with no relation to the reference's Select/Add Task/Connect/Add Branch · Validate/Publish/Prepare Run grouping.",
+      "fix": "Two-group action row matching the reference's interaction language, bound to the real lab commands (labs.author / labs.preflight / labs.publish / labs.handoff / labs.revise) with genuine availability disabling and reasons."
+    },
+    {
+      "id": "DEF-LAB-B07",
+      "severity": "V2",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "Center content overflowed the viewport: `#m0StructuredSpatial` measured 1010px inside an 824px pane (186px below the fold) because the identity block stacked graph + 5 cards + legend + stats.",
+      "fix": "Board uses `grid-template-rows: auto auto minmax(260px,1fr) auto` inside a `min-height:100%` workbench so palette + board fit the pane and the canvas absorbs the remaining height."
+    },
+    {
+      "id": "DEF-LAB-B08",
+      "severity": "V2",
+      "rootCause": "SHARED_COMPONENT",
+      "defect": "Shared node cards are fixed 132×62 with a 10.5px title, so long task titles ('Inspect Simulated Database Effect') overflowed the card body; node edge labels also collided with titles.",
+      "fix": "Presentation-only (surface CSS + node projection fields): per-kind accent borders/icon tiles, 11px/650 title, numbered icon tile (index), id chip, completion status chip, localized/described subtitle, node-type tag row. No shared file modified.",
+      "note": "Geometry (132×62) and the dashed/solid edge stroke remain SHARED_COMPONENT limits; the Optional-Branch dash-circle from the reference renders as a dashed stroke. Recorded as residual V1."
+    },
+    {
+      "id": "DEF-LAB-B09",
+      "severity": "V2",
+      "rootCause": "STALE_DECISION",
+      "defect": "Legacy unmounted `renderLabsSurface` (s11-lab three-column composition) still shipped as a second composition for this surface.",
+      "fix": "presentation.ts reduced to a documented re-export of board.ts; the surface now has exactly one composition."
+    },
+    {
+      "id": "DEF-LAB-B10",
+      "severity": "V2",
+      "rootCause": "SHARED_COMPONENT",
+      "defect": "Donor `#editorDocument` and generic pane siblings were visible alongside the labs composition (donor leak into the labs route).",
+      "fix": "Surface-local carrier policy: suppress non-region pane siblings and the donor document on every render, re-asserted by a terminating MutationObserver. No shared file modified."
+    }
+  ],
+  "DEFECT_SEVERITY": ["V4 x2", "V3 x3", "V2 x5", "V1 x0", "V0 x0"],
+  "ROOT_CAUSE": "SURFACE_COMPOSITION (primary: LEFT/CENTER/RIGHT were shared generic projections rather than a lab task-graph workbench) · CONTENT_MODEL (Arabic chrome) · SHARED_COMPONENT (fixed node geometry, donor pane reveal) · STALE_DECISION (legacy second composition)",
+  "FIXES_APPLIED": [
+    "New surface modules: i18n.ts, icons.ts, styles.ts, structure.ts, context.ts, board.ts",
+    "presentation.ts replaced by a re-export shim; single composition retained",
+    "LEFT/RIGHT regions composed through workspace.region() with surface-owned markup",
+    "Center workbench: palette + lifecycle row, reference-shaped board, integrated Relationship Legend + status",
+    "Bilingual chrome + localized surface-owned command labels + preference-driven re-render",
+    "Surface-local donor suppression with terminating MutationObserver"
+  ],
+  "RECAPTURE_STATUS": "PENDING — blocked on shared build (transient red from another unit's in-flight file, retry loop running)",
+  "RECOMPARISON_STATUS": "PENDING",
+  "REGRESSION_STATUS": "PENDING",
+  "EVIDENCE": [
+    {
+      "kind": "REFERENCE",
+      "path": "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/03_LABS/Cybersecurity Lab Task Graph Dashboard(2).png",
+      "sha256": "09f9d53b8d845ad374d084b60a5ed51a736b72607cdaa8445d07d74483aab46b",
+      "dims": "1505x1045",
+      "ocr": "/tmp/opencode/labs_ref_ocr.txt"
+    },
+    {
+      "kind": "BASELINE",
+      "path": "writer-output/W03-LABS/evidence/baseline/labs-en-1505x1045-<ts>.png",
+      "sha256": "cef7ccdbe2ed44af9dfe8d3769424190d64996e445991121c1445d8a1fc3eb0c",
+      "bytes": 276530,
+      "dims": "1505x1045",
+      "manifest": "writer-output/W03-LABS/evidence/baseline/CAPTURE_MANIFEST.json",
+      "ocr": "/tmp/opencode/labs_base_en.txt",
+      "probe": "node1 rect (365,369,133,50) stddev 13 vs node2 stddev 45; DOM probe confirms both nodes present"
+    },
+    {
+      "kind": "BASELINE_AR",
+      "path": "writer-output/W03-LABS/evidence/baseline/labs-ar-1505x1045-<ts>.png",
+      "sha256": "671707dbbe97eb11 (16)",
+      "dims": "1505x1045",
+      "note": "Arabic session, English-only labs chrome — evidence for DEF-LAB-B05"
+    }
+  ],
+  "LINEAGE": [
+    "REFERENCE: 09f9d53b8d845ad3 · CURRENT_FINAL_REFERENCE · read + OCR corroborated before any code change",
+    "BASELINE: commit 68341ec18f79 · route /?surface=labs · viewport 1505x1045 · en and ar · same-byte OCR",
+    "CANDIDATE: worktree of surfaces/labs + adapters/labs only; no shared file edited; no git add/commit performed by this unit"
+  ],
+  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
+  "BLOCKERS": [
+    "Shared `npm run build:runtime` transiently red from another unit's in-flight TypeScript file (surfaces/manual_ai, `dirNow` empty-paren syntax error). Not a labs file; not edited by this unit. Retry loop running; labs modules verified to parse via stripTypeScriptTypes independently."
+  ],
+  "STAGE": "SOURCES_BUILT__AWAITING_RECAPTURE"
+}

@@ -129,7 +129,7 @@ export class ManualAiDomainAdapter{
     const row=this.proposals.get(payload.id??this.selectedId??'');
     if(id==='manual_ai.draft')return true;
     if(id==='manual_ai.export')return row&&row.state!=='PROVENANCE_INVALID'&&!terminal(row.state)?true:'Valid non-final proposal required';
-    if(id==='manual_ai.import')return row?.state==='EXPORTED'?true:'Exported request required for provenance equality';
+    if(id==='manual_ai.import'){if(row?.state!=='EXPORTED')return 'Exported request required for provenance equality';if(payload&&payload.requireResponse===true&&!text(payload?.input?.content))return 'Paste the external response into the intake field first';return true}
     if(id==='manual_ai.review'){if(!row)return 'Select a ManualProposal';if(row.state==='PROVENANCE_INVALID')return 'Imported proposal with valid provenance required for human review';return row.state==='IMPORTED'||row.state==='DEFERRED'?true:'Import and provenance equality must succeed before human review';}
     return 'Unknown Manual AI command';
   }
@@ -140,6 +140,13 @@ export class ManualAiDomainAdapter{
     const row=id?this.proposals.get(id):null;
     if(!row)return {ok:false as const,code:'NO_MANUAL_PROPOSAL',requirements:['proposalId','revision','sourceId','sourceRevisionId','sourceDigest']};
     const terminalState=terminal(row.state);
+    /* Authoritative equality truth: a recorded mismatch carries the exact four-flag result; a
+       provenance-equal import implies all four matched; otherwise no response exists yet. */
+    const mismatchEntry=this.history.filter(entry=>entry.type==='IMPORT_PROVENANCE_MISMATCH'&&entry.proposalId===row.proposalId).slice(-1)[0]||null;
+    const responseReceived=row.provenance.obtainedBy==='MANUAL_IMPORT';
+    const provenanceMatch=mismatchEntry
+      ?{sourceId:Boolean(mismatchEntry.match?.sourceId),sourceRevisionId:Boolean(mismatchEntry.match?.sourceRevisionId),sourceDigest:Boolean(mismatchEntry.match?.sourceDigest),packageDigest:Boolean(mismatchEntry.match?.packageDigest)}
+      :((responseReceived&&row.state!=='PROVENANCE_INVALID')?{sourceId:true,sourceRevisionId:true,sourceDigest:true,packageDigest:true}:null);
     const sequence=(['PREPARED','EXPORTED','IMPORTED','DEFERRED','REJECTED','ACCEPTED_AS_DRAFT'] as const).map((step,index)=>({
       step:index+1,name:step,
       reached:step==='PREPARED'?true:step==='EXPORTED'?['EXPORTED','IMPORTED','DEFERRED','REJECTED','ACCEPTED_AS_DRAFT'].includes(row.state):step==='IMPORTED'?['IMPORTED','DEFERRED','REJECTED','ACCEPTED_AS_DRAFT'].includes(row.state):step==='DEFERRED'?row.state==='DEFERRED':step==='REJECTED'?row.state==='REJECTED':row.state==='ACCEPTED_AS_DRAFT',
@@ -148,6 +155,7 @@ export class ManualAiDomainAdapter{
     return {
       proposalId:row.proposalId,revision:row.revision,state:row.state,draftState:row.draftState,draftId:row.draftId,
       terminal:terminalState,
+      provenanceMatch,
       provenance:{sourceId:row.provenance.sourceId,sourceRevisionId:row.provenance.sourceRevisionId,sourceDigest:row.provenance.sourceDigest,obtainedBy:row.provenance.obtainedBy,obtainedAt:row.provenance.obtainedAt,exportedArtifactId:row.provenance.exportedArtifactId||'NOT_EXPORTED',exportedPackageDigest:row.provenance.exportedPackageDigest||'NOT_EXPORTED'},
       sequence,
       ceilings:{providerMode:this.providerMode,hiddenProviderCalls:0,automaticCanonicalPublication:false,importRequiresDeclaredExport:true,sourceRevisionDigestEqualityRequired:true,acceptCreatesDraftOnly:true,invalidProvenanceFailsClosed:true},

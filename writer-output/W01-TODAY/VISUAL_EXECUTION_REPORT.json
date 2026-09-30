@@ -1,0 +1,316 @@
+{
+  "SURFACE": "today",
+  "OWNER": "W01-TODAY",
+  "REFERENCE": "cep-writer/references/visual/00_TODAY/CEP_TODAY_MAIN_ORCHESTRATION_REFERENCE.png",
+  "REFERENCE_CLASSIFICATION": "OWNER_CONFIRMED_FINAL_REFERENCE",
+  "CURRENT_CANDIDATE": "branch writer/mi-serial · worktree /workspaces/cep-writer-baseline-repo · commit 24eb51260b41be917adf0cb02e7bc2bb6e9f93eb · dirty in W01-TODAY roots only (stack/native-typescript/surfaces/today/presentation.ts, stack/native-typescript/adapters/today/acceptance-data.ts) · dist updated for W01-TODAY files via writer-output/W01-TODAY/build-today.mjs under tools/writer-serial.sh",
+  "FILES_CHANGED": [
+    "stack/native-typescript/surfaces/today/presentation.ts",
+    "stack/native-typescript/adapters/today/acceptance-data.ts",
+    "writer-output/W01-TODAY/capture.mjs (unit evidence harness, prior session, reused)",
+    "writer-output/W01-TODAY/capture-populated.mjs (new: populated-composition capture + lineage)",
+    "writer-output/W01-TODAY/build-today.mjs (new: unit-scoped transpile into dist while the shared build is blocked)",
+    "writer-output/W01-TODAY/harness/today-harness.html (new: TEST_ONLY presentation evidence harness)",
+    "writer-output/W01-TODAY/refcrop.mjs (new: reference crop helper)",
+    "writer-output/W01-TODAY/VISUAL_EXECUTION_REPORT.json",
+    "writer-output/W01-TODAY/HANDOFF.md"
+  ],
+  "FUNCTIONAL_STATUS": "PASS — dist/tests/post-c03/D07/d07-today-presentation-authority-tests.js: 15/15 PASS, 0 FAIL (normal-product UNAVAILABLE truth preserved, no fabricated session/recommendation/progress, fixture provider still rejected from normal product, populated harness admits all 5 projection kinds / 16 items, continuation is handoff-only, greeting derived from observation, no invented date when unobserved, required presentation tokens present, responsive probe contract present, reference identity sha256 match). Render + interaction wiring unchanged: filter/refresh/resume/why all still dispatched through commands.execute; 0 console errors across all 6 populated captures and 6 product-route captures.",
+  "STRUCTURAL_STATUS": "PASS — surface rebuilt to the reference's information architecture: greeting band (glyph · eyebrow · heading · subtitle + date block) → scope toolbar (segmented scope filters + projection-state readout) → provider truth strip → work column | attention rail. Work column: session hero (visual | text-column + anchored action column) → next-action (wide) linked to why-now (narrow) → recent (4-column rows: status glyph | title | domain | time) + progress (chip rows). Attention rail: header with count, items = icon tile + domain + priority + status/id + summary + action. All region ids preserved (#todayHeader #todaySessionCard #todayRecommendationCard #todayWhyCard #todayRecentCard #todayProgressCard #todayAttentionSidebar #todayFilterBar #todayRefreshBtn #todayProviderTruth).",
+  "VISUAL_STATUS": "SUBSTANTIALLY IMPROVED vs the pre-rebuild baseline, NOT YET OWNER_ACCEPTED. L1 side-by-side (evidence/compare_FINAL2_ar_l1.png, reference vs rebuilt candidate AR/RTL) shows the region map, column order, hierarchy, pane organization and component vocabulary following the reference, and measured card widths now match the reference within ~5% (session 969/990, next 639/622, why 304/320, recent 647/642, progress 308/300, rail 497/480). Residual deltas are DEFECTS_FOUND D-11 (vertical rhythm), D-12, D-13, D-14 plus the blocked D-08/D-09.",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": [
+    "L1 whole-surface: reference vs pre-rebuild baseline (baseline-ar-rtl-ref.png, baseline-en-ltr-ref.png)",
+    "L1 whole-surface: reference vs rebuilt candidate, AR/RTL (evidence/compare_final_ar_l1.png, evidence/compare_ar_l1_v2.png)",
+    "L1 whole-surface: reference vs rebuilt candidate, EN/LTR (evidence/compare_final_en_l1.png) — see BLOCKERS note on vision-read reliability",
+    "L2 region/pane: reference decomposition into greeting_band, hero_session, next_action, why_now, attention_rail, recent, progress, breadcrumb_zoom (evidence/ref-regions/) plus programmatic crops z_* and p_* and button crops b_*",
+    "L2 region/pane: candidate region crops for greeting/hero/next/why/recent/progress/attention/provider at 6 viewports (per-capture crops in LINEAGE-final4.json)",
+    "L3 component: card heads, session hero (crumb/title+badge/activity chip/position line/tag chips/action pair), attention item (icon tile/priority/domain/status+id/action), recent row, progress chip, rationale checklist, unlock box, segmented scope toolbar",
+    "L4 micro: icon kit stroke/optical size, badge tone mapping, divider vs border usage, padding rhythm, type scale, arrow direction per language, focus-visible outlines"
+  ],
+  "RESPONSIVE_STATUS": "PASS with evidence — 1520x1034, 1280x900, 1024x860, 768x900, 480x900 captured from the populated harness (LINEAGE-final4.json) plus the same 6 viewports from the product route (LINEAGE-rebuild4.json). overflowX = 0 at every viewport in both directions; no console errors; content reflows (scrollH 1174 → 1327 → 1475 → 2669 → 2826) instead of truncating; breakpoints: 1080 (hero panes tighten), 900 (layout collapses to one column, head/scopebar/provider strip go full width), 860 (paired grids and the hero action column stack, connector hidden), 768 (compact padding, hero stacks visual-first), 520 (attention item drops the icon tile, actions stack). COLLAPSED-STATE comparison completed at 768 and 480.",
+  "RTL_LTR_STATUS": "PASS with evidence — both languages are first-class; no direction is baked into structure. Computed directions measured in-page (LINEAGE-final4.json): AR/RTL => orchestration=ltr, main=ltr, card=ltr, cardHead=ltr (fixed physical workbench geometry, same rule .today-layout already used), sessionContent=ltr, action=rtl, recentList=rtl, filterbar=rtl; EN/LTR => all ltr. Attention rail physically on the right in BOTH directions (attentionPhysicallyRight=true for all 6 captures). Directional arrows flip with language (ar '←', en '→'); technical tokens (provider ids, versions, timestamps, state enums, ids like EVD-0042 / RUN-0048 / RQ-SRC-018 / 7 / 10) are wrapped in <bdi dir=ltr>. Card grid order (next/why, recent/progress, hero visual/content) is identical in both languages, matching the reference; list and toolbar order follows the active language.",
+  "DEFECTS_FOUND": [
+    {
+      "id": "D-01",
+      "defect": "Head band was a flat eyebrow + oversized greeting + long subtitle + 7 loose filter pills + status chip with a heavy divider; no focal hierarchy, no date block, no greeting glyph.",
+      "severity": "V3",
+      "root_cause": "SURFACE_COMPOSITION",
+      "status": "FIXED — recomposed as glyph + eyebrow + heading + subtitle with the date block anchored at the work-column end; scope controls moved to a separate toolbar row.",
+      "evidence": "evidence/compare_final_ar_l1.png"
+    },
+    {
+      "id": "D-02",
+      "defect": "Over-boxed card system: gradient card + drop shadow per card, inconsistent paddings (10/13 vs 6/13), type scale jumped 16 -> 19px with no system.",
+      "severity": "V3",
+      "root_cause": "SURFACE_COMPOSITION",
+      "status": "FIXED — one card tier (13px radius, single low shadow), single 16px body gutter, defined type scale (29/22/17/15.5/13.5/12.5/11), spacing scale 4/8/10/14/16."
+    },
+    {
+      "id": "D-03",
+      "defect": "Attention rail items had no icon tile, no priority badge, no status/id split, and the action button only rendered when a continuation existed.",
+      "severity": "V3",
+      "root_cause": "SURFACE_COMPOSITION",
+      "status": "FIXED — icon tile (tone-mapped), priority badge, domain, status line + id line, always-rendered action."
+    },
+    {
+      "id": "D-04",
+      "defect": "Progress list mixed bar rows with bare text rows and used emoji glyphs.",
+      "severity": "V2",
+      "root_cause": "SURFACE_COMPOSITION",
+      "status": "FIXED — uniform bordered chip rows, line icon at the start edge, value anchored at the end (7 / 10 rendered as ratio)."
+    },
+    {
+      "id": "D-05",
+      "defect": "Recent rows wrapped title/domain/time onto two lines with no icon column.",
+      "severity": "V2",
+      "root_cause": "SURFACE_COMPOSITION",
+      "status": "FIXED — four aligned columns (status glyph | title | domain+glyph | time) with hairline dividers."
+    },
+    {
+      "id": "D-06",
+      "defect": "Session hero had no breadcrumb, no status pill beside the title, no accent position line, no icon chips, and inline actions instead of an anchored action column.",
+      "severity": "V3",
+      "root_cause": "SURFACE_COMPOSITION",
+      "status": "FIXED — breadcrumb (track → destination), title + status badge, activity chip, accent position line, summary, icon chips, right-anchored stacked action column beside the text."
+    },
+    {
+      "id": "D-07",
+      "defect": "Next-action and Why-now were undifferentiated equal cards, no unlock box, no link between them.",
+      "severity": "V2",
+      "root_cause": "SURFACE_COMPOSITION",
+      "status": "FIXED — 2.1:1 split matching the reference, meta row with icons, 'unlocks next' box in Why-now, directional connector at >=901px."
+    },
+    {
+      "id": "D-08",
+      "defect": "PRODUCT ROUTE: main.ts never passes context.todayProviders to mountM0ControllerComposition, so TodayProjectionDomainAdapter is built with zero providers (TODAY_PROVIDER_UNBOUND). Every content region renders an empty state in dist.",
+      "severity": "V3",
+      "root_cause": "ARCHITECTURE",
+      "status": "OPEN — outside W01-TODAY writable roots (main.ts and surfaces/m0-controller-composition.ts are owned by W01-SHELL). Verified truthfully in evidence/LINEAGE-rebuild4.json: state=UNAVAILABLE, emptyZones present, 0 JS errors. Not bypassed: injecting fixture providers here would defeat d07.acceptance-provider-rejected-from-normal-product."
+    },
+    {
+      "id": "D-09",
+      "defect": "Shell-owned LEFT/RIGHT/BOTTOM regions ('Today projection', 'Selected Today context', 'Projection status') plus global chrome (nav, search, toolbar, banner) are not composed for Today and sit outside the writable roots.",
+      "severity": "V2",
+      "root_cause": "SHARED_COMPONENT",
+      "status": "OPEN — routed to the Controller/W01-SHELL; no shared file was edited by this unit."
+    },
+    {
+      "id": "D-10",
+      "defect": "Attention item action sat on its own row; in the reference it shares the summary row, making the rail ~200px taller than the reference (742 vs ~540).",
+      "severity": "V2",
+      "root_cause": "SURFACE_COMPOSITION",
+      "status": "FIXED — summary and action now share one grid row; rail 635px (was 742px); verified in evidence/LINEAGE-final4.json."
+    },
+    {
+      "id": "D-15",
+      "defect": "Recent rows had no status-indicator column and the fixture statusIcon field (done/seen/sealed/submitted/warned) was never rendered; the recent/progress pair also used equal columns instead of the reference wide-first split (reference ~642px / ~300px).",
+      "severity": "V2",
+      "root_cause": "SURFACE_COMPOSITION",
+      "status": "FIXED — tone-mapped status glyph added as the leading column (far edge in both directions) and data-split=wide-first applied. Measured widths now match the reference: recent 647 vs ~642, progress 308 vs ~300, next 639 vs ~622, why 304 vs ~320, session 969 vs ~990, rail 497 vs ~480."
+    },
+    {
+      "id": "D-16",
+      "defect": "Shared tools/build-runtime.mjs was blocked for part of the session by an unrelated in-flight syntax error in another unit (surfaces/audit: workspace.status?.`...`), so dist could not be rebuilt repo-wide.",
+      "severity": "V2",
+      "root_cause": "IMPLEMENTATION",
+      "status": "MITIGATED — W01-TODAY transpiled only its own 4 modules into dist via writer-output/W01-TODAY/build-today.mjs under tools/writer-serial.sh; a full shared build must still be re-run before any repo-wide acceptance sweep."
+    },
+    {
+      "id": "D-11",
+      "defect": "Cards run taller than the reference overall (session 278 vs ~290 OK; next/why 294 vs ~250/~230; recent/progress 347 vs ~270; rail 635 vs ~540): horizontal geometry now matches, vertical rhythm is still looser.",
+      "severity": "V2",
+      "root_cause": "SURFACE_COMPOSITION",
+      "status": "OPEN — partially mitigated (attention item padding/gaps tightened 742->635 and action moved onto the summary row); a final vertical-rhythm pass (card body padding, row padding) was not applied before session end."
+    },
+    {
+      "id": "D-12",
+      "defect": "Session position line wraps to two lines where the reference keeps it on one.",
+      "severity": "V1",
+      "root_cause": "SURFACE_COMPOSITION",
+      "status": "OPEN — cosmetic; caused by the action column reducing the text column width."
+    },
+    {
+      "id": "D-13",
+      "defect": "Surface adds two rows the reference does not have: the scope toolbar (filters/state/status are functional requirements, not in the reference) and the provider truth strip (governance requirement).",
+      "severity": "V1",
+      "root_cause": "OWNER_CONSTRAINT",
+      "status": "ACCEPTED AS INTENTIONAL — kept because filters and provider provenance are product requirements; both constrained to the work-column width so the band stays clean."
+    },
+    {
+      "id": "D-14",
+      "defect": "Greeting copy is generic ('مرحباً، إليك سياق يومك') rather than the reference's personalized greeting; no user identity exists in the projection model.",
+      "severity": "V1",
+      "root_cause": "CONTENT_MODEL",
+      "status": "OPEN — would require a user/identity provider, which is not part of the Today projection contract."
+    }
+  ],
+  "DEFECT_SEVERITY": "max V3. Composition defects D-01..D-07 = V3/V2 and FIXED in source with post-fix recapture; D-10/D-15 = V2 FIXED. Remaining: D-08 V3 (ARCHITECTURE, blocked), D-09 V2 (SHARED_COMPONENT, blocked), D-11 V2 (SURFACE_COMPOSITION, open), D-16 V2 (IMPLEMENTATION, mitigated), D-12/D-13/D-14 V1 (open/accepted).",
+  "ROOT_CAUSE": "SURFACE_COMPOSITION — the pre-existing presentation had no design system (no type/spacing scale, per-card shadows, mixed badge/pill vocabulary), its spatial order was direction-dependent (grid column order flipped with the active language, so Arabic mirrored the reference), and it placed 7 loose filter pills plus status inside the greeting band. Secondary root causes: ARCHITECTURE (D-08 provider composition not wired into main.ts/m0-controller-composition.ts) and SHARED_COMPONENT (D-09 shell regions/chrome).",
+  "FIXES_APPLIED": [
+    "Design system: type scale (29/22/17/15.5/13.5/12.5/11), spacing scale (4/8/10/14/16/20), single card surface tier with one low shadow, consistent 16px body gutter, defined badge tone map (ok/warning/danger/info/count).",
+    "Direction model made explicit and reference-faithful: physical workbench geometry (.today-orchestration direction:ltr, .today-layout, .today-main, .today-grid-2, card heads, hero panes) + language-logical content (.today-list, .today-filterbar, .today-action-sm, .today-link-btn). Removed the stale .today-main/.today-attention-side direction:rtl rules that mirrored heads, grid order and rail items against the reference. Grid column order is now identical in AR and EN.",
+    "Greeting band rebuilt: 48px sun glyph tile, eyebrow, heading, subtitle; date block (calendar icon + label/value stack) anchored to the work-column end; band width tied to the work column with calc((100% - 14px) * 1.85 / 2.8) so it stops where the rail begins.",
+    "Scope toolbar extracted below the band: segmented filter group (language-logical) on the start edge, projection-state chip + status on the end edge.",
+    "Session hero rebuilt: breadcrumb (track -> destination with a direction-flipping separator), title + status badge row, activity chip, accent position line, summary, icon tag chips, and a right-anchored stacked action column beside the text column; visual panel pinned to the start edge in both languages.",
+    "Next-action / Why-now: 2.1:1 split, icon meta row (target/clock/link), 'unlocks next' boxed panel in Why-now, direction-safe connector shown only at >=901px, next-action actions start-aligned and Why-now actions end-aligned as in the reference.",
+    "Attention rail: tone-mapped 42px icon tile in a leading grid column, domain + priority badge in a space-between head row, status line + id line, always-rendered action, count badge as a red chip, rail header band.",
+    "Recent list: four aligned columns (status glyph | title | domain + line glyph | time) with hairline dividers and a footer link at the card's start edge.",
+    "Progress: uniform bordered chip rows (line icon | label | end-anchored value) replacing the bar/emoji mixture.",
+    "Line-icon kit added (26 SVG glyphs, one stroke weight, no directional glyphs) replacing emoji; arrows flip with language.",
+    "adapters/today/acceptance-data.ts: actionLabel aligned to the reference ('ابدأ الممارسة' / 'Start practice'); pathTags reordered to the reference's chip order (stage then track); metaTags aligned to the reference meta row (SQL Injection · 12 min · next dependency incomplete).",
+    "Responsive: added 860px and 520px breakpoints, full-width overrides for head/scopebar/provider strip at 900px, attention item degrades to a single column at 520px.",
+    "Attention density: summary + action now share one grid row (rail 742px -> 635px).",
+    "Recent list: added the missing tone-mapped status-indicator column using the previously unused fixture statusIcon field (done/seen/sealed/submitted/warned -> check/eye/shield/upload/alert with ok/muted/warning tones).",
+    "Applied data-split=wide-first to the recent/progress row so column widths match the reference (647/308 vs 642/300)."
+  ],
+  "RECAPTURE_STATUS": "COMPLETE — populated-composition capture run 6 times across the build slices (rebuild3, rebuild4, final, final2, final3, final4) plus one product-route capture (rebuild4). Final state captured as evidence/LINEAGE-final4.json at 6 viewports (AR/RTL x5 + EN/LTR x1), viewport-matched 1520x1034 view image + full-page image + 8 region crops per viewport, each with path + sha256 + dims + bytes + timestamp + commit + dirty-tree flag. All superseded captures retained and labelled.",
+  "RECOMPARISON_STATUS": "COMPLETE for L1/L2/L3/L4 on AR/RTL: reference vs candidate side-by-side regenerated after EVERY change and finally after the last one (evidence/compare_FINAL2_ar_l1.png from LINEAGE-final4; earlier frames compare_final_ar_l1.png and compare_ar_l1_v2.png retained and labelled superseded); reference region crops regenerated programmatically with PIL (evidence/ref-regions/p_*.png, z_*.png, b_*.png) so the analysed bytes are verified to be the reference bytes. EN/LTR comparison image generated (evidence/compare_final_en_l1.png); the model's image-read path returned stale frames repeatedly during this session, so the EN visual verdict rests on the byte-diff proof (AR vs EN captures have distinct sha256 and a full-frame pixel diff), the in-page computed-direction metrics, and the 15/15 language tests — the Controller should re-view the EN image.",
+  "REGRESSION_STATUS": "PASS (unit scope) — D07 suite 15/15 PASS after the change. No shared file edited: git status shows only stack/native-typescript/surfaces/today/presentation.ts and stack/native-typescript/adapters/today/acceptance-data.ts modified by this unit. All pre-existing public exports preserved (renderTodayOrchestrationProjection, buildTodayOrchestrationViewModel, todayProjectionStateCopy, composeTodayOrchestrationPresentation, bindTodaySurface, currentTodayAdapter, BALANCED6_TODAY_ITEMS, createBalanced6TodayProviders). All D07 source-token contracts satisfied (today-eyebrow, today-day-context, today-session-visual, 'grid-template-areas: \"main attention\"', 'direction: ltr', 'overflow-wrap:anywhere', '@media (max-width: 900px)', 'grid-template-areas:\"main\" \"attention\"', '@media (max-width: 768px)'). 0 console errors on both routes.",
+  "EVIDENCE": [
+    {
+      "kind": "REFERENCE",
+      "path": "cep-writer/references/visual/00_TODAY/CEP_TODAY_MAIN_ORCHESTRATION_REFERENCE.png",
+      "sha256_16": "3f75eac759efd920",
+      "dims": "1520x1034",
+      "classification": "OWNER_CONFIRMED_FINAL_REFERENCE",
+      "role": "construction authority — NOT evidence of the candidate"
+    },
+    {
+      "kind": "REFERENCE_REGION_DECOMPOSITION",
+      "path": "writer-output/W01-TODAY/evidence/ref-regions/",
+      "files": [
+        "greeting_band.png",
+        "greeting.png",
+        "hero_session.png",
+        "next_action.png",
+        "why_now.png",
+        "attention_rail.png",
+        "recent.png",
+        "progress.png",
+        "breadcrumb_zoom.png",
+        "ref_grid.png",
+        "p_*.png (8 programmatic crops)",
+        "z_*.png (7 zoom crops)",
+        "b_*.png (button micro crops)"
+      ]
+    },
+    {
+      "kind": "PRE_REBUILD_BASELINE",
+      "path": "writer-output/W01-TODAY/evidence/LINEAGE-baseline.json",
+      "captures": "AR/RTL + EN/LTR at 1520x1034 and 1280/1024/768/480 with region crops",
+      "role": "superseded — retained, labelled as baseline"
+    },
+    {
+      "kind": "CANDIDATE_EVIDENCE_FINAL",
+      "path": "writer-output/W01-TODAY/evidence/LINEAGE-final4.json",
+      "classification": "TEST_ONLY_PRESENTATION_HARNESS__NOT_PRODUCT_PROVIDER_TRUTH",
+      "captures": 6,
+      "viewports": [
+        "1520x1034 ar/rtl",
+        "1520x1034 en/ltr",
+        "1280x900 ar/rtl",
+        "1024x860 ar/rtl",
+        "768x900 ar/rtl",
+        "480x900 ar/rtl"
+      ],
+      "commit": "24eb51260b41be917adf0cb02e7bc2bb6e9f93eb",
+      "capturedAt": "2026-09-30T02:52:48.755Z",
+      "headline_image": {
+        "path": "writer-output/W01-TODAY/evidence/final4-pop-ar-rtl-ref.png",
+        "sha256": "7d292dfecb82de345fd2aecc42b830f8842502c40a593f3d8c6a0b6cea0d2839",
+        "dims": {
+          "w": 1520,
+          "h": 1034
+        }
+      },
+      "superseded_captures": [
+        "LINEAGE-rebuild3.json",
+        "LINEAGE-rebuild4.json",
+        "LINEAGE-final.json",
+        "LINEAGE-final2.json",
+        "LINEAGE-final3.json"
+      ],
+      "note": "each capture also carries full-page image identity and 8 region-crop identities inside this file; every capture reports overflowX=0, 0 console errors, 0 empty zones, attentionPhysicallyRight=true"
+    },
+    {
+      "kind": "CANDIDATE_EVIDENCE_PRODUCT_ROUTE",
+      "path": "writer-output/W01-TODAY/evidence/LINEAGE-rebuild4.json",
+      "captures": 6,
+      "commit": "24eb51260b41be917adf0cb02e7bc2bb6e9f93eb",
+      "result": "state=UNAVAILABLE (D-08), overflowX=0, 0 JS errors, 7 filters, empty states truthful"
+    },
+    {
+      "kind": "COMPARISON",
+      "path": "writer-output/W01-TODAY/evidence/compare_FINAL2_ar_l1.png",
+      "role": "L1 reference-over-candidate AR/RTL — FINAL, generated from LINEAGE-final4"
+    },
+    {
+      "kind": "COMPARISON",
+      "path": "writer-output/W01-TODAY/evidence/compare_final_ar_l1.png",
+      "role": "L1 reference-over-candidate AR/RTL (superseded by compare_FINAL2_ar_l1.png)"
+    },
+    {
+      "kind": "COMPARISON",
+      "path": "writer-output/W01-TODAY/evidence/compare_ar_l1_v2.png",
+      "role": "L1 reference-over-candidate AR/RTL, intermediate state"
+    },
+    {
+      "kind": "COMPARISON",
+      "path": "writer-output/W01-TODAY/evidence/compare_final_en_l1.png",
+      "role": "L1 reference vs candidate EN/LTR"
+    },
+    {
+      "kind": "IN_PAGE_GEOMETRY_PROBE",
+      "path": "playwright getComputedStyle/getBoundingClientRect against the same dist build",
+      "result": "next-action action row justify-content=flex-start, buttons at x=37 and x=187 inside card x=20 w=639 (start-aligned, matches reference); session action column buttons at x=876 / x=834 (end-aligned, matches reference); recent status glyph at x=626 in a row ending at x=650 (far edge, matches reference); recent row columns = 22px | 275.9px | 205.9px | 68.9px, direction=rtl"
+    },
+    {
+      "kind": "TOOLING",
+      "path": "writer-output/W01-TODAY/capture-populated.mjs, writer-output/W01-TODAY/capture.mjs, writer-output/W01-TODAY/harness/today-harness.html, writer-output/W01-TODAY/refcrop.mjs, writer-output/W01-TODAY/build-today.mjs"
+    }
+  ],
+  "LINEAGE": {
+    "reference": {
+      "path": "cep-writer/references/visual/00_TODAY/CEP_TODAY_MAIN_ORCHESTRATION_REFERENCE.png",
+      "sha256_16": "3f75eac759efd920",
+      "dims": "1520x1034",
+      "classification": "OWNER_CONFIRMED_FINAL_REFERENCE",
+      "register": "cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md",
+      "manifest": "cep-writer/REFERENCE_MANIFEST.json",
+      "verified_by": "d07.reference-identity-matches-owner-confirmed-final (sha256 equality assertion, PASS)"
+    },
+    "candidate": {
+      "branch": "writer/mi-serial",
+      "commit": "24eb51260b41be917adf0cb02e7bc2bb6e9f93eb",
+      "dirty_paths": [
+        "stack/native-typescript/surfaces/today/presentation.ts",
+        "stack/native-typescript/adapters/today/acceptance-data.ts"
+      ],
+      "dist_provenance": "writer-output/W01-TODAY/build-today.mjs (unit-scoped transpile of the 4 W01-TODAY modules) executed under tools/writer-serial.sh; the shared tools/build-runtime.mjs was blocked for part of the session by an unrelated in-flight syntax error in another unit's file (surfaces/audit, `workspace.status?.`...``) and was retried; final dist state produced by build-today.mjs at every slice (see D-16)"
+    },
+    "environment": {
+      "server_product_route": "tools/serve.mjs on :4173 (repo-root dist static)",
+      "server_evidence_harness": "writer-output/W01-TODAY/capture-populated.mjs built-in static server on :4199 serving the repo root",
+      "browser": "playwright chromium, deviceScaleFactor 1",
+      "timezone": "UTC",
+      "node": "22.x"
+    },
+    "test": {
+      "suite": "D07_TODAY_PRESENTATION_AUTHORITY",
+      "command": "node dist/tests/post-c03/D07/d07-today-presentation-authority-tests.js",
+      "result": "15 PASS / 0 FAIL",
+      "classification": "D07_PRESENTATION_CONVERGED__PRODUCT_PROVIDER_TRUTH_PRESERVED"
+    },
+    "evidence_binding": "every image row in LINEAGE-final4.json / LINEAGE-rebuild4.json carries name, viewport, lang, path, sha256, bytes, dims; the JSON itself carries unit, surface, tag, startedAt, capturedAt, commit, dirtyWorkingTree and (for the harness) classification TEST_ONLY_PRESENTATION_HARNESS__NOT_PRODUCT_PROVIDER_TRUTH"
+  },
+  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
+  "BLOCKERS": [
+    "D-08 (V3, ARCHITECTURE): the product route cannot show populated Today content because main.ts / m0-controller-composition.ts (both W01-SHELL owned) never supply context.todayProviders. Populated visual evidence therefore comes from the sanctioned harness, explicitly labelled TEST_ONLY_PRESENTATION_HARNESS__NOT_PRODUCT_PROVIDER_TRUTH and kept strictly separate from product truth (d07.acceptance-provider-rejected-from-normal-product still PASSES). A shared-seam request to wire a real Today provider composition must be routed through tools/writer-serial.sh / the Controller; it was NOT edited directly.",
+    "D-09 (V2, SHARED_COMPONENT): shell LEFT/RIGHT/BOTTOM regions and global chrome are outside W01-TODAY writable roots and still read as generic projection scaffolding.",
+    "Shared build: tools/build-runtime.mjs failed for part of the session on another unit's in-flight source error; W01-TODAY used a unit-scoped transpile (build-today.mjs) under the serialized lock. A full shared build must be re-run before any Controller-wide acceptance sweep.",
+    "Vision-read reliability: the model's local-image read path returned stale/mismatched frames repeatedly in this session. All visual claims here were made from images that were read successfully (reference, baseline, rebuilt candidate, L1 comparisons); the EN/LTR frame could not be re-verified visually and must be re-viewed by the Controller from evidence/compare_final_en_l1.png. No visual analysis was fabricated.",
+    "D-11 (V2, SURFACE_COMPOSITION): horizontal geometry now matches the reference but vertical rhythm is still looser (next/why 294px vs ~250/~230, recent/progress 347px vs ~270, rail 635px vs ~540). D-10 was fixed in this session; a final vertical-rhythm pass remains open.",
+    "D-16 (V2, IMPLEMENTATION): shared tools/build-runtime.mjs was blocked by another unit in-flight syntax error for part of the session; this unit used a serialized unit-scoped transpile (build-today.mjs). A full shared build must be re-run before a repo-wide acceptance sweep.",
+    "Writers cannot accept their own work — sole Controller review required; status stays NOT_OWNER_ACCEPTED."
+  ]
+}

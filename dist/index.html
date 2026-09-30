@@ -1,9 +1,60 @@
 <!DOCTYPE html>
 
-<html dir="rtl" lang="ar">
+<html>
 <head>
 <!-- QUALITY_FIRST_CONVERGENCE_WAVE_03 + USER_FEEDBACK_ULTRA_FUNCTIONAL_CONVERGENCE + FULL_SURFACE_INTENSIVE_CONVERGENCE: 2026-09-06 · SAME-LINEAGE CANDIDATE · zero-default creation · lossless conversion · empty-block slash replacement · unified command palette · contextual stateful toolbars · responsive overlay discipline · keyboard/focus/accessibility hardening · REVIEW CANDIDATE ONLY · NO SELF-ACCEPTANCE -->
 <meta charset="utf-8"/>
+<script>
+/* G-20 LANGUAGE POLICY BOOTSTRAP - no privileged product-language authority.
+   Resolution order: stored user preference -> browsing-context language environment -> schema
+   placeholder (headless only). Direction: explicit chrome pin -> derived from the active locale.
+   Owner: W05-CONFIGURATION - seam: foundation/global/preferences/language-policy.ts */
+(function () {
+  try {
+    var SUP = ['ar', 'en'];
+    var RTL_ENV = ['ar', 'he', 'fa', 'ur', 'ps', 'ku', 'dv', 'syr', 'ug', 'yi', 'sd', 'ckb'];
+    var locale = null, pin = null, authority = 'schema-placeholder-without-browsing-context';
+    try {
+      var raw = localStorage.getItem('cep-foundation.preferences.v1');
+      var data = raw ? JSON.parse(raw) : null;
+      var globalScope = (data && data.overrides && data.overrides.global) || {};
+      if (SUP.indexOf(globalScope.locale) > -1) { locale = globalScope.locale; authority = 'user-preference'; }
+      if (globalScope.chromeDirection === 'rtl' || globalScope.chromeDirection === 'ltr') { pin = globalScope.chromeDirection; }
+    } catch (e) {}
+    if (!locale) {
+      var tags = [];
+      try {
+        var nav = navigator;
+        var declared = (nav.languages && nav.languages.length) ? nav.languages : (nav.language ? [nav.language] : []);
+        for (var i = 0; i < declared.length; i++) {
+          var tag = String(declared[i] || '').toLowerCase().replace(/_/g, '-');
+          if (tag) tags.push(tag);
+        }
+      } catch (e) {}
+      if (tags.length) {
+        authority = 'browsing-context-language-environment';
+        for (var s = 0; s < SUP.length && !locale; s++) {
+          for (var k = 0; k < tags.length && !locale; k++) {
+            if (tags[k] === SUP[s] || tags[k].indexOf(SUP[s] + '-') === 0) locale = SUP[s];
+          }
+        }
+        if (!locale) {
+          var primary = String(tags[0]).split('-')[0];
+          locale = RTL_ENV.indexOf(primary) > -1 ? 'ar' : 'en';
+        }
+      }
+    }
+    if (!locale) locale = 'ar';
+    var direction = pin || (locale === 'ar' ? 'rtl' : 'ltr');
+    var root = document.documentElement;
+    root.lang = locale;
+    root.dir = direction;
+    root.setAttribute('data-language-authority', authority);
+    root.setAttribute('data-direction-authority', pin ? 'user-preference' : 'derived-from-locale:' + authority);
+  } catch (e) {}
+})();
+</script>
+
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="dark" name="color-scheme"/>
 <title>CEP Foundation — Local proof workbench</title>

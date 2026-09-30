@@ -1,0 +1,69 @@
+{
+  "REPORT_STATUS": "IN_PROGRESS — stage 1 (baseline) + stage 3 (source) complete; stage 4 (build) is BLOCKED-transient on a sibling unit's in-flight syntax error in surfaces/manual_ai/presentation.ts (not edited by this unit, retried). Stage 5 (capture/compare) pending build.",
+  "SURFACE": "releases",
+  "OWNER": "W05-RELEASES",
+  "REFERENCE": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/07_RELEASES/CEP_SYSTEM_RELEASES_REFERENCE.png",
+  "REFERENCE_CLASSIFICATION": "OWNER_CONFIRMED_FINAL_REFERENCE",
+  "REFERENCE_AUTHORITY_STATEMENT": "Reference is CONSTRUCTION AUTHORITY for composition, hierarchy, spatial relationships, information architecture, density/rhythm, interaction language, visual emphasis, pane organization and responsive intent. REFERENCE != BLIND PIXEL COPY. The reference is Arabic/RTL; per Owner policy it establishes visual/layout/interaction intent ONLY and confers NO product-language preference. Arabic and English are both first-class; the active language is user-configurable in Settings.",
+  "REFERENCE_IDENTITY": {
+    "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/07_RELEASES/CEP_SYSTEM_RELEASES_REFERENCE.png",
+    "sha256": "9e7c8747953bef1d8e0f2000ad00bad12667ddfd35bbcbbde4f227a812604f7a",
+    "sha256_16": "9e7c8747953bef1d",
+    "dims": "1536x1024",
+    "register": "cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md",
+    "manifest": "cep-writer/REFERENCE_MANIFEST.json",
+    "verifiedBy": "sha256sum + PIL dimensions measured in this session"
+  },
+  "SURFACE_PURPOSE": "Releases: manage release candidates and their comparison truth — including the honest states where comparison is BLOCKED/unavailable and where a view is EMPTY. Truthfulness of release state (technical readiness vs Owner authorization vs deployment observation) is the core work.",
+  "CURRENT_CANDIDATE": {
+    "branch": "writer/mi-serial",
+    "baseCommit": "68341ec18f7936569bccb39ec7a3eb997d0b6ccf",
+    "state": "UNCOMMITTED_WORKTREE_DELTA",
+    "note": "HEAD moves as sibling units land checkpoints; the candidate is identified by per-file sha256 below plus this base commit."
+  },
+  "FILES_CHANGED": {
+    "writableRoots": [
+      {"path": "stack/native-typescript/surfaces/releases/records.ts", "change": "ADDED", "role": "structured bilingual release record model + derived domain candidates (single source of truth for fixtures)"},
+      {"path": "stack/native-typescript/surfaces/releases/presentation.ts", "change": "ADDED", "role": "bilingual (AR/EN) reference-driven composition: stage workbench, structure pane, release-context pane, injected CSS with logical properties"},
+      {"path": "stack/native-typescript/surfaces/releases/runtime.ts", "change": "ADDED", "role": "view state + MutationObserver presentation governor (keeps surface-owned composition in place, burst-guarded)"},
+      {"path": "stack/native-typescript/surfaces/releases/composition.ts", "change": "MODIFIED", "role": "wires runtime governor; fixtures now derived from records.ts; all previously asserted exports preserved"},
+      {"path": "stack/native-typescript/adapters/releases/domain-adapter.ts", "change": "UNCHANGED (read for contract)", "role": "domain truth authority"}
+    ],
+    "sharedSeamsChangedViaSerializedSlot": [],
+    "untouchedByDesign": ["stack/native-typescript/surfaces/m0-controller-composition.ts", "stack/native-typescript/surfaces/composition/w05-rescue.ts", "stack/native-typescript/foundation/**", "stack/native-typescript/tests/**", "controller/**", "cep-writer/**", "contracts/**", "profiles/**", "authority/**"]
+  },
+  "FUNCTIONAL_STATUS": "NOT_YET_RUN (pending build)",
+  "STRUCTURAL_STATUS": "BASELINE_MEASURED — shared generic stage 790x803, left 304, right 420, bottom shelf 39; new surface geometry not yet measured",
+  "VISUAL_STATUS": "NOT_YET_COMPARED",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": {"L1_WHOLE_SURFACE": "BASELINE_ONLY", "L2_REGION_PANE": "BASELINE_ONLY", "L3_COMPONENT": "NOT_STARTED", "L4_MICRO": "NOT_STARTED"},
+  "RESPONSIVE_STATUS": "NOT_YET_TESTED",
+  "RTL_LTR_STATUS": "NOT_YET_TESTED (baseline: en/LTR default, ar/RTL switch verified working at shell level)",
+  "DEFECTS_FOUND": [
+    {"id": "D-01", "title": "Releases renders the shared generic typed-collection workbench ('Releases workbench' title, flat 2-column table in the LEFT pane, semantic key/value dump in the CENTER, same dump again in the RIGHT pane) — no reference composition at all", "severity": "V4", "rootCause": "SURFACE_COMPOSITION", "evidence": "writer-output/W05-RELEASES/evidence/baseline/baseline-1536-top.png (sha256-bound) + baseline.json genericWorkbench.studio=true, studioTitle='Releases workbench', stageOwned=false", "status": "FIXED (surface-owned presentation + governor; pending capture verification)"},
+    {"id": "D-02", "title": "LEFT pane table clips its own content: 'TECHNICALLY_READY' renders as 'NICALLY_READY' (horizontal cut), candidate IDs wrap to 3 lines, no structure navigation (states/channels/environments) and no candidate cards", "severity": "V3", "rootCause": "SURFACE_COMPOSITION", "evidence": "baseline-1536-top.png left pane; baseline.json leftText", "status": "FIXED (structure pane: states+counts, channels, environments, candidate cards with badges)"},
+    {"id": "D-03", "title": "CENTER is a domain-record component showcase (CandidateId/CommitSHA/TreeSHA/ArtifactDigest/RecordBasis rows) instead of the release work area; block heading is right-aligned while the title block is left-aligned", "severity": "V3", "rootCause": "SURFACE_COMPOSITION", "evidence": "baseline-1536-top.png center; baseline.json stageHtmlLength=4615", "status": "FIXED (header identity + 4-fact strip + three-truth bar + two-column block workbench + verification-records drawer)"},
+    {"id": "D-04", "title": "Synthetic digests are single repeated characters ('aaaa…64', '1111…64') shown as primary content in both panes — not realistic structured fixtures", "severity": "V2", "rootCause": "FIXTURE_DATA", "evidence": "baseline.json rightText shows aaaaaaaa…/22222222…; RELEASE_REPRESENTATIVE_FIXTURES rep('a')", "status": "FIXED (40-hex commit/tree/artifact + 64-hex evidence seeds, stable and distinct; basis declared in UI)"},
+    {"id": "D-05", "title": "No release-specific information architecture: no release identity/strip, no required gates, no verification results, no deployment stages, no rollback readiness, no approvers, no release notes, no release-context pane, no candidate list, no empty/blocked comparison states", "severity": "V4", "rootCause": "CONTENT_MODEL", "evidence": "reference at L1/L2 vs baseline region inventory", "status": "FIXED (all regions composed from the record model; EMPTY and BLOCKED-compare states implemented truthfully)"},
+    {"id": "D-06", "title": "Bottom/right deep projection repeated the same axis list with no release meaning (lastAction/diagnostics string)", "severity": "V2", "rootCause": "SURFACE_COMPOSITION", "evidence": "composition.bottomProjection pre-change", "status": "OPEN_PARTIAL — bottom shelf is shared mechanics (BottomDeepWorkOwner + domain-deep-projection provider); the release verification content was moved into the centre workbench instead of claiming the shared shelf"}
+  ],
+  "DEFECT_SEVERITY": {"V4": 2, "V3": 2, "V2": 2, "V1": 0, "FIXED": 5, "OPEN_REPORTED": 1},
+  "ROOT_CAUSE": {"SURFACE_COMPOSITION": 3, "CONTENT_MODEL": 1, "FIXTURE_DATA": 1, "SHARED_COMPONENT": 1},
+  "FIXES_APPLIED": [
+    "Added surface-owned presentation + governor (pattern proven by W05-CONFIGURATION): surfaces/releases/{records,presentation,runtime}.ts",
+    "composition.ts now installs the governor and derives domain fixtures from records.ts; every export asserted by tests (slots, compareBinding, truthCeiling, providerTruth, platformTruth, collection, contextProvider, domainDefaultCandidateCount, representativeRecordBasis) preserved",
+    "Bilingual AR/EN dictionary for all chrome and record labels; direction expressed only with logical CSS properties + bdi isolation for technical tokens"
+  ],
+  "RECAPTURE_STATUS": "NOT_STARTED",
+  "RECOMPARISON_STATUS": "NOT_STARTED",
+  "REGRESSION_STATUS": "NOT_STARTED",
+  "EVIDENCE": [
+    {"kind": "REFERENCE", "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/07_RELEASES/CEP_SYSTEM_RELEASES_REFERENCE.png", "sha256": "9e7c8747953bef1d8e0f2000ad00bad12667ddfd35bbcbbde4f227a812604f7a", "dims": "1536x1024"},
+    {"kind": "BASELINE_RESULT", "path": "writer-output/W05-RELEASES/evidence/baseline/baseline.json", "lineage": "commit 68341ec18f7936569bccb39ec7a3eb997d0b6ccf · branch writer/mi-serial · viewport 1536x1024 · playwright-chromium-headless"},
+    {"kind": "BASELINE_CAPTURES", "path": "writer-output/W05-RELEASES/evidence/baseline/*.png (9 captures, each with path+sha256+dims+bytes in baseline.json)"}
+  ],
+  "LINEAGE": {"branch": "writer/mi-serial", "baseCommitAtStart": "68341ec18f7936569bccb39ec7a3eb997d0b6ccf", "stackTreeAtStart": "7a69ec9a2bfa91e520031b87498abbafc6c5ef0e", "note": "HEAD moves as sibling units land checkpoints; candidate additionally identified by per-file sha256 recorded at capture time."},
+  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
+  "BLOCKERS": [
+    {"id": "B-01", "state": "TRANSIENT", "detail": "`npm run build:runtime` is red on a sibling unit's in-flight file stack/native-typescript/surfaces/manual_ai/presentation.ts:32 ('Parenthesized expression cannot be empty'). This unit does not edit it (read-only rule) and retries the shared serialized build. All W05-RELEASES files parse cleanly under stripTypeScriptTypes."}
+  ]
+}

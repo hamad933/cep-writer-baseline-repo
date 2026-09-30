@@ -1,4 +1,5 @@
 import {PREFERENCE_DEFINITIONS} from '../preferences/schema.js';
+import {PREFERENCE_LABELS,PREFERENCE_VALUE_LABELS,preferenceValueLabel} from './labels.js';
 export const SETTINGS_CENTER_SECTION_DESCRIPTOR_CONTRACT=Object.freeze({
   id:'SettingsCenterSectionDescriptor',
   version:'1.0.0',
@@ -54,7 +55,16 @@ function preferenceItems(descriptor,preferences,profile){
       valueOwner:'ScopedPreferencesOwner',
       persistenceOwner:resolved.persistenceOwner||'ScopedPreferencesOwner',
       control:Object.freeze({type:typeof PREFERENCE_DEFINITIONS[key]?.safeDefault,values:PREFERENCE_DEFINITIONS[key]?.values?Object.freeze([...PREFERENCE_DEFINITIONS[key].values]):null,min:PREFERENCE_DEFINITIONS[key]?.min??null,max:PREFERENCE_DEFINITIONS[key]?.max??null,step:typeof PREFERENCE_DEFINITIONS[key]?.safeDefault==='number'?(key==='scale'?.05:20):null}),
-      searchableText:`${key} ${titleFromKey(key)} ${asText(resolved.preferredValue)}`
+      // Bilingual search surface: both first-class languages must be reachable from one query box.
+      searchableText:(()=>{
+        const tokens=[key,titleFromKey(key),asText(resolved.preferredValue),PREFERENCE_LABELS[key]?.ar||'',PREFERENCE_LABELS[key]?.en||''];
+        for(const locale of ['ar','en'] as const){
+          const valueLabels=PREFERENCE_VALUE_LABELS[key];
+          if(valueLabels)for(const token of PREFERENCE_DEFINITIONS[key]?.values||[])tokens.push(valueLabels[token]?.[locale]||'');
+          tokens.push(preferenceValueLabel(key,locale,resolved.preferredValue));
+        }
+        return tokens.filter(Boolean).join(' ');
+      })()
     }));
   }
   return items;

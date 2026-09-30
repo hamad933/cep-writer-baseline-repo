@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>W01-TODAY presentation evidence harness</title>
+  <style>
+    :root { color-scheme: dark; --ui: "Segoe UI", Tahoma, "Noto Sans Arabic", sans-serif; --fg: #e6f1fc; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: #030a15; color: var(--fg); font-family: var(--ui); }
+    #host { min-height: 100vh; }
+    .harness-label {
+      position: fixed; z-index: 1000; inset-inline-end: 10px; bottom: 10px;
+      border: 1px solid #38bdf8; color: #b9ecff; background: rgba(6, 24, 40, 0.94);
+      border-radius: 999px; padding: 5px 11px; font: 10px/1.4 Consolas, monospace;
+      direction: ltr; max-width: calc(100vw - 24px);
+    }
+  </style>
+</head>
+<body>
+  <main id="host" aria-label="Today presentation evidence harness"></main>
+  <div class="harness-label" id="harnessLabel">TEST_ONLY_PRESENTATION_HARNESS__NOT_PRODUCT_PROVIDER_TRUTH</div>
+  <script type="module">
+    import {TodayProjectionDomainAdapter} from '../../../dist/adapters/today/domain.js';
+    import {createBalanced6TodayProviders} from '../../../dist/adapters/today/acceptance-data.js';
+    import {CommandRegistry} from '../../../dist/foundation/models.js';
+    import {composeTodayOrchestrationPresentation} from '../../../dist/surfaces/today/surface.js';
+
+    const params = new URLSearchParams(location.search);
+    const lang = params.get('lang') === 'en' ? 'en' : 'ar';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+    const observedAt = '2025-05-18T10:40:00Z';
+    const resolver = {
+      descriptor: () => ({providerId: 'd07.test-only.continuation-resolver', authority: 'TEST_ONLY_PRESENTATION_HARNESS'}),
+      resolve: ({destination, objectId}) => ({state: 'RESOLVABLE', destination, objectId, providerId: 'd07.test-only.continuation-resolver', observedAt, resolutionRef: `d07-test:${destination}:${objectId}`})
+    };
+    const adapter = new TodayProjectionDomainAdapter({providers: createBalanced6TodayProviders(), allowFixtureProviders: true, continuationResolver: resolver, allowFixtureResolvers: true});
+    const projection = adapter.project();
+    const commands = new CommandRegistry();
+    const composition = composeTodayOrchestrationPresentation({host: document.querySelector('#host'), commands, adapter, lang});
+    document.documentElement.dataset.harnessTruth = 'TEST_ONLY_PRESENTATION_HARNESS__NOT_PRODUCT_PROVIDER_TRUTH';
+    window.W01_TODAY_EVIDENCE_PROOF = {adapter, commands, composition, projection, receipt: composition.presentation, lang, normalProductProviderTruth: 'TODAY_PROVIDER_UNBOUND'};
+  </script>
+</body>
+</html>

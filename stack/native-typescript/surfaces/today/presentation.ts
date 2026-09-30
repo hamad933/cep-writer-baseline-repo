@@ -21,6 +21,11 @@ const COPY = Object.freeze({
     resume: 'متابعة',
     next: 'الإجراء التالي الموصى به',
     why: 'لماذا الآن؟',
+    whyThis: 'لماذا هذا؟',
+    unlockNext: 'يفتح بعد ذلك:',
+    showWhy: 'عرض السبب',
+    startPractice: 'ابدأ الممارسة',
+    viewAll: 'عرض',
     attention: 'يحتاج انتباهك',
     recent: 'السياق الأخير',
     progress: 'توقع التقدم',
@@ -55,6 +60,11 @@ const COPY = Object.freeze({
     resume: 'Resume',
     next: 'Next recommended action',
     why: 'Why now?',
+    whyThis: 'Why this?',
+    unlockNext: 'Unlocks next:',
+    showWhy: 'Show why',
+    startPractice: 'Start practice',
+    viewAll: 'View',
     attention: 'Needs attention',
     recent: 'Recent context',
     progress: 'Progress projection',
@@ -126,140 +136,234 @@ const style = `<style data-today-orchestration-style>
 .today-orchestration {
   font-family: var(--ui, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Arabic", sans-serif);
   display: grid;
-  gap: 10px;
+  gap: 14px;
   color: var(--fg, #e6f1fc);
   min-height: 100%;
-  padding: 14px 18px 20px;
-  background: radial-gradient(circle at 45% 0%, rgba(14, 165, 233, 0.12) 0%, rgba(3, 16, 32, 0.96) 42%, #020b16 100%);
+  padding: 16px 20px 26px;
+  background:
+    radial-gradient(1100px 460px at 90% -10%, rgba(14, 165, 233, 0.10) 0%, transparent 68%),
+    radial-gradient(760px 380px at 4% 104%, rgba(8, 145, 178, 0.08) 0%, transparent 70%),
+    linear-gradient(180deg, #050e1c 0%, #030a15 100%);
   box-sizing: border-box;
+  /* Physical grid order is fixed (work column left, attention rail right) exactly as
+     .today-layout is; TEXT direction stays logical and is restored per block below. */
+  direction: ltr;
 }
 .today-orchestration * {
   box-sizing: border-box;
 }
+.today-orchestration button { font-family: inherit; }
+/* Direction model
+   ------------------------------------------------------------------
+   Spatial order is PHYSICAL (greeting left, card titles at the start edge,
+   hero visual first, next-action before why-now, recent before progress) — the
+   same fixed workbench geometry the reference shows in Arabic and the same
+   direction:ltr rule .today-layout already uses for the main/rail split.
+   TEXT order inside content blocks stays LOGICAL and follows the active language. */
+.today-orchestration:where([dir="rtl"]) :where(.today-list, .today-filterbar, .today-action-sm, .today-link-btn) { direction: rtl; }
+.today-orchestration:where([dir="ltr"]) :where(.today-list, .today-filterbar, .today-action-sm, .today-link-btn) { direction: ltr; }
+
+/* ---- Greeting band: one dominant focal point, date + scope at the end ---- */
 .today-head {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 20px 28px;
   flex-wrap: wrap;
-  padding: 4px 0 10px;
-  border-bottom: 1px solid rgba(56, 189, 248, 0.12);
+  padding: 4px 2px 2px;
+  /* The band belongs to the work column (matches the reference): it stops where the
+     attention rail begins instead of running under it. */
+  width: calc((100% - 14px) * 1.85 / 2.8);
+  max-width: 100%;
 }
 .today-head-main {
-  display: grid;
-  gap: 3px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-width: 0;
 }
-.today-eyebrow { color:#38bdf8; font-size:11px; font-weight:700; letter-spacing:.05em; }
+.today-glyph {
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(160deg, rgba(14, 165, 233, 0.18), rgba(14, 165, 233, 0.05));
+  border: 1px solid rgba(56, 189, 248, 0.30);
+  box-shadow: 0 6px 18px rgba(2, 12, 24, 0.5);
+  color: #fbbf24;
+  font-size: 22px;
+  line-height: 1;
+}
+.today-head-stack { display: grid; gap: 3px; min-width: 0; }
+.today-eyebrow {
+  color: #4bb8ea;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
 .today-greeting-row {
   display: flex;
-  align-items: baseline;
-  gap: 14px;
+  align-items: center;
+  gap: 10px;
   flex-wrap: wrap;
 }
 .today-heading {
   margin: 0;
-  font-size: clamp(24px, 2.7vw, 34px);
+  font-size: clamp(21px, 2.2vw, 29px);
   font-weight: 700;
   color: #f8fafc;
   letter-spacing: -0.01em;
+  line-height: 1.2;
 }
-.today-clock {
-  font-size: 13px;
-  color: #38bdf8;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: rgba(14, 165, 233, 0.08);
-  padding: 2px 8px;
-  border-radius: 6px;
-  border: 1px solid rgba(56, 189, 248, 0.2);
-}
-.today-day-context { display:flex; align-items:center; gap:7px; color:#cbd5e1; font-size:12px; }
-.today-day-context strong { color:#7dd3fc; font-weight:600; }
 .today-subtitle {
   margin: 0;
-  color: #94a3b8;
-  font-size: 14px;
-  max-width: 80ch;
+  color: #8ba3bd;
+  font-size: 13.5px;
+  line-height: 1.5;
+  max-width: 76ch;
 }
 .today-head-controls {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 8px;
+  justify-content: center;
+  gap: 9px;
 }
+/* Scope toolbar sits BELOW the band so the greeting keeps the only focal point. */
+.today-scopebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  flex-wrap: wrap;
+  width: calc((100% - 14px) * 1.85 / 2.8);
+  max-width: 100%;
+  padding: 0 2px;
+}
+.today-scope-readouts {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+.today-day-context {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #c9d8e8;
+  font-size: 12.5px;
+  line-height: 1.35;
+  background: rgba(7, 26, 46, 0.72);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  border-radius: 10px;
+  padding: 8px 13px;
+  max-width: 44ch;
+}
+.today-day-lines { display: grid; gap: 1px; min-width: 0; }
+.today-day-label { font-size: 10.5px; font-weight: 700; color: #7dd3fc; letter-spacing: .04em; }
+.today-day-value { font-size: 13px; color: #eaf2fb; font-weight: 600; }
+.today-day-context strong { color: #7dd3fc; font-weight: 600; }
+.today-clock {
+  font-size: 11.5px;
+  color: #7dd3fc;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(14, 165, 233, 0.10);
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(56, 189, 248, 0.24);
+  letter-spacing: 0.02em;
+}
+/* Segmented scope toolbar — quiet, secondary to the greeting */
 .today-filterbar {
   display: flex;
-  gap: 6px;
+  gap: 2px;
   flex-wrap: wrap;
   align-items: center;
+  padding: 3px;
+  border: 1px solid rgba(56, 189, 248, 0.16);
+  border-radius: 9px;
+  background: rgba(5, 17, 31, 0.72);
 }
 .today-filter {
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  background: rgba(7, 26, 46, 0.85);
-  color: #94a3b8;
-  border-radius: 9999px;
-  padding: 5px 12px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #8ba3bd;
+  border-radius: 6px;
+  padding: 5px 11px;
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
 }
 .today-filter:hover {
-  color: #f0f6fc;
-  border-color: rgba(56, 189, 248, 0.45);
+  color: #eaf3fb;
+  background: rgba(56, 189, 248, 0.10);
+}
+.today-filter:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 1px;
 }
 .today-filter[aria-pressed="true"] {
-  border-color: #38bdf8;
-  color: #38bdf8;
-  background: rgba(14, 165, 233, 0.18);
+  border-color: rgba(56, 189, 248, 0.45);
+  color: #a9e4ff;
+  background: rgba(14, 165, 233, 0.20);
   font-weight: 600;
 }
 .today-refresh-btn {
   color: #7dd3fc;
-  border-color: rgba(56, 189, 248, 0.35);
+  border-color: rgba(56, 189, 248, 0.30);
+  margin-inline-start: 4px;
 }
 .today-status {
-  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
-  border-radius: 8px;
-  padding: 4px 10px;
-  font-size: 12px;
+  border: 1px solid color-mix(in srgb, currentColor 32%, transparent);
+  background: color-mix(in srgb, currentColor 9%, transparent);
+  border-radius: 9999px;
+  padding: 4px 11px;
+  font-size: 11.5px;
+  font-weight: 600;
 }
-.today-status[data-tone="muted"] { color: #94a3b8; }
+.today-status[data-tone="muted"] { color: #8ba3bd; }
 .today-status[data-tone="warning"] { color: #fbbf24; }
 .today-status[data-tone="danger"] { color: #f87171; }
 .today-status[data-tone="ok"] { color: #34d399; }
 
+/* ---- Orchestration frame: work column + attention rail ---- */
 .today-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.85fr) minmax(285px, .95fr);
+  grid-template-columns: minmax(0, 1.85fr) minmax(290px, .95fr);
   grid-template-areas: "main attention";
   direction: ltr;
-  gap: 12px;
+  gap: 14px;
   align-items: start;
 }
 .today-main {
   display: grid;
   grid-area: main;
   min-width: 0;
-  gap: 10px;
+  gap: 14px;
 }
 .today-attention-side { grid-area:attention; min-width:0; }
-.today-orchestration[dir="rtl"] .today-main,
-.today-orchestration[dir="rtl"] .today-attention-side { direction:rtl; }
-.today-orchestration[dir="ltr"] .today-main,
-.today-orchestration[dir="ltr"] .today-attention-side { direction:ltr; }
 .today-grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 14px;
   min-width: 0;
 }
+.today-grid-2[data-split="wide-first"] { grid-template-columns: minmax(0, 2.1fr) minmax(0, 1fr); }
+
+/* ---- Card system: one calm surface tier, no per-card shadow stack ---- */
 .today-card {
-  border: 1px solid rgba(46, 115, 170, 0.35);
-  border-radius: 11px;
-  background: linear-gradient(180deg, rgba(8, 30, 52, 0.95) 0%, rgba(5, 20, 36, 0.97) 100%);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(56, 189, 248, 0.16);
+  border-radius: 13px;
+  background: linear-gradient(180deg, rgba(9, 26, 45, 0.94) 0%, rgba(6, 18, 33, 0.96) 100%);
+  box-shadow: 0 10px 26px rgba(1, 8, 17, 0.42);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -269,122 +373,211 @@ const style = `<style data-today-orchestration-style>
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 10px 13px 6px;
+  padding: 13px 16px 9px;
 }
 .today-card-title-group {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
   flex-wrap: wrap;
+  min-width: 0;
+}
+.today-card-glyph {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  color: #7dd3fc;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.22);
 }
 .today-card-title {
-  font-size: 16px;
+  font-size: 15.5px;
   font-weight: 700;
-  color: #f1f5f9;
+  color: #eaf2fb;
   margin: 0;
+  letter-spacing: -0.005em;
 }
 .today-card-body {
-  padding: 6px 13px 12px;
+  padding: 2px 16px 14px;
   display: grid;
   gap: 10px;
   flex: 1;
+  align-content: start;
 }
 .today-card-footer {
-  padding: 6px 13px 9px;
-  border-top: 1px solid rgba(56, 189, 248, 0.1);
+  padding: 9px 16px 12px;
+  border-top: 1px solid rgba(56, 189, 248, 0.10);
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 .today-link-btn {
   background: none;
   border: none;
   color: #38bdf8;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 12.5px;
+  font-weight: 600;
   cursor: pointer;
   padding: 2px 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 .today-link-btn:hover {
+  color: #a9e4ff;
   text-decoration: underline;
 }
+.today-link-btn:focus-visible { outline: 2px solid #38bdf8; outline-offset: 2px; }
+.today-card-menu {
+  background: none;
+  border: 1px solid transparent;
+  color: #64748b;
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 7px;
+  padding: 3px 7px;
+}
+.today-card-menu:hover { color: #cbd5e1; background: rgba(56, 189, 248, 0.10); }
+.today-card-menu:focus-visible { outline: 2px solid #38bdf8; outline-offset: 1px; }
+.today-ico { flex: 0 0 auto; display: inline-block; vertical-align: -0.14em; }
+.today-card-title-group .today-ico,
+.today-rec-meta .today-ico { color: #5cc8f0; }
 
 /* Badges & Pills */
 .today-pill {
   border-radius: 9999px;
-  padding: 2px 8px;
-  font-size: 11px;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-}
-.today-pill-track {
-  background: rgba(56, 189, 248, 0.1);
-  color: #7dd3fc;
-  border: 1px solid rgba(56, 189, 248, 0.25);
-}
-.today-pill-tag {
-  background: rgba(148, 163, 184, 0.1);
-  color: #cbd5e1;
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  font-size: 12px;
   padding: 3px 10px;
-}
-.today-badge {
-  border-radius: 9999px;
-  padding: 2px 8px;
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+}
+.today-pill-track {
+  background: rgba(56, 189, 248, 0.08);
+  color: #7dd3fc;
+  border: 1px solid rgba(56, 189, 248, 0.22);
+}
+.today-pill-tag {
+  background: rgba(7, 26, 46, 0.9);
+  color: #b6c8dc;
+  border: 1px solid rgba(96, 141, 178, 0.34);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 13px;
+  border-radius: 9px;
+  gap: 8px;
+}
+.today-pill-tag .today-pill-glyph { color: #7dd3fc; font-size: 12px; }
+.today-badge {
+  border-radius: 8px;
+  padding: 4px 11px;
+  font-size: 11.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
 }
 .today-badge-ok {
-  background: rgba(52, 211, 153, 0.15);
-  color: #34d399;
-  border: 1px solid rgba(52, 211, 153, 0.35);
+  background: rgba(52, 211, 153, 0.14);
+  color: #4ade9d;
+  border: 1px solid rgba(52, 211, 153, 0.34);
 }
 .today-badge-warning {
-  background: rgba(251, 191, 36, 0.15);
-  color: #fbbf24;
-  border: 1px solid rgba(251, 191, 36, 0.35);
+  background: rgba(251, 191, 36, 0.14);
+  color: #fbc64a;
+  border: 1px solid rgba(251, 191, 36, 0.36);
 }
 .today-badge-danger {
-  background: rgba(248, 113, 113, 0.15);
-  color: #f87171;
-  border: 1px solid rgba(248, 113, 113, 0.35);
+  background: rgba(248, 113, 113, 0.16);
+  color: #fb8b8b;
+  border: 1px solid rgba(248, 113, 113, 0.38);
 }
 .today-badge-info {
   background: rgba(192, 132, 252, 0.15);
-  color: #c084fc;
-  border: 1px solid rgba(192, 132, 252, 0.35);
+  color: #cfa6fd;
+  border: 1px solid rgba(192, 132, 252, 0.34);
 }
 .today-badge-count {
-  background: rgba(56, 189, 248, 0.15);
-  color: #38bdf8;
-  border: 1px solid rgba(56, 189, 248, 0.3);
+  background: #ef4444;
+  color: #fff;
+  border: 1px solid #f87171;
+  font-size: 11px;
+  min-width: 22px;
+  justify-content: center;
+  padding: 2px 7px;
 }
 
-/* Session Card */
+/* Session hero */
 .today-session-card {
-  border-color: rgba(56, 189, 248, 0.4);
+  border-color: rgba(56, 189, 248, 0.34);
+  background: linear-gradient(180deg, rgba(11, 32, 56, 0.95) 0%, rgba(6, 19, 34, 0.97) 100%);
 }
-.today-session-grid { display:grid; grid-template-columns:minmax(210px,.72fr) minmax(0,1.35fr); grid-template-areas:"visual content"; gap:14px; min-width:0; }
-.today-session-content { grid-area:content; display:grid; align-content:start; gap:7px; min-width:0; }
-.today-session-visual { grid-area:visual; position:relative; min-height:190px; border:1px solid rgba(56,189,248,.23); border-radius:10px; overflow:hidden; background:radial-gradient(circle at 82% 18%,rgba(34,211,238,.15),transparent 28%),linear-gradient(145deg,#071a2b,#03101d); direction:ltr; }
-.today-session-visual-window { position:absolute; inset:24px 26px 42px 20px; border:1px solid rgba(125,211,252,.33); border-radius:8px; background:#03111f; box-shadow:14px 15px 0 -8px rgba(14,165,233,.11); }
-.today-session-visual-window::before { content:"●  ●  ●"; display:block; height:22px; padding:5px 9px; color:#64748b; border-bottom:1px solid rgba(125,211,252,.16); font-size:8px; letter-spacing:4px; }
-.today-session-visual-code { margin:0; padding:15px 13px; color:#a5f3fc; font:11px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace; white-space:pre-wrap; }
-.today-session-visual-db { position:absolute; left:19px; bottom:18px; width:48px; height:28px; border:1px solid #38bdf8; border-radius:50%; background:#07243a; box-shadow:0 7px 0 #061c2e,0 8px 0 #38bdf8,0 14px 0 #061725,0 15px 0 rgba(56,189,248,.75); }
-.today-session-visual-progress { position:absolute; left:84px; right:20px; bottom:15px; height:5px; border-radius:99px; background:#0d2c42; overflow:hidden; }
+.today-session-grid {
+  display: grid;
+  /* Hero panes keep physical order — the visual panel sits at the start edge exactly
+     as the reference places it, in both languages. */
+  direction: ltr;
+  grid-template-columns: minmax(232px, .76fr) minmax(0, 1.32fr);
+  grid-template-areas: "visual content";
+  gap: 18px;
+  min-width: 0;
+  padding-top: 4px;
+}
+.today-session-content {
+  grid-area: content;
+  display: grid;
+  /* text column + anchored action column, as the reference composes the hero */
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-content: start;
+  align-items: start;
+  gap: 10px 18px;
+  min-width: 0;
+}
+.today-session-text { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.today-session-actions { align-self: center; margin-top: 0; }
+.today-crumbs {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  color: #5cc8f0;
+  font-weight: 600;
+}
+.today-crumbs .today-crumb-sep { color: #3f7fa3; font-weight: 400; }
+.today-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.today-session-visual { grid-area:visual; position:relative; min-height:196px; border:1px solid rgba(56,189,248,.26); border-radius:12px; overflow:hidden; background:radial-gradient(circle at 82% 18%,rgba(34,211,238,.16),transparent 30%),linear-gradient(145deg,#082238,#04121f); direction:ltr; }
+.today-session-visual-window { position:absolute; inset:26px 30px 46px 22px; border:1px solid rgba(125,211,252,.34); border-radius:9px; background:#04131f; box-shadow:16px 16px 0 -9px rgba(14,165,233,.12); }
+.today-session-visual-window::before { content:"●  ●  ●"; display:block; height:24px; padding:6px 10px; color:#5f7691; border-bottom:1px solid rgba(125,211,252,.16); font-size:8px; letter-spacing:4px; }
+.today-session-visual-code { margin:0; padding:16px 14px; color:#a5f3fc; font:11.5px/1.75 ui-monospace,SFMono-Regular,Consolas,monospace; white-space:pre-wrap; }
+.today-session-visual-db { position:absolute; left:20px; bottom:26px; width:52px; height:30px; border:1px solid #38bdf8; border-radius:50%; background:#0a2a42; box-shadow:0 7px 0 #071f33,0 8px 0 #38bdf8,0 14px 0 #071b2c,0 15px 0 rgba(56,189,248,.75); }
+.today-session-visual-progress { position:absolute; left:88px; right:24px; bottom:18px; height:6px; border-radius:99px; background:#0e3049; overflow:hidden; }
 .today-session-visual-progress::after { content:""; display:block; width:58%; height:100%; background:linear-gradient(90deg,#0ea5e9,#22d3ee); }
-.today-orchestration[dir="rtl"] .today-session-content { direction:rtl; }
-.today-orchestration[dir="ltr"] .today-session-content { direction:ltr; }
 .today-session-title {
-  font-size: 19px;
+  font-size: clamp(18px, 1.6vw, 22px);
   font-weight: 700;
   color: #f8fafc;
   margin: 0;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.today-position-line {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #4fc3f0;
+  line-height: 1.45;
 }
 .today-code-box {
   margin: 4px 0;
@@ -400,32 +593,31 @@ const style = `<style data-today-orchestration-style>
   overflow-x: auto;
 }
 .today-session-meta-row {
-  display: flex;
-  gap: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   flex-wrap: wrap;
   font-size: 13px;
-  color: #94a3b8;
+  color: #9db2c9;
+  background: rgba(7, 26, 46, 0.66);
+  border: 1px solid rgba(56, 189, 248, 0.14);
+  border-radius: 8px;
+  padding: 5px 11px;
+  width: fit-content;
+  max-width: 100%;
 }
-.today-meta-item {
-  display: inline-flex;
-  gap: 4px;
-}
-.today-meta-label {
-  color: #64748b;
-}
-.today-meta-val {
-  color: #cbd5e1;
-  font-weight: 500;
-}
+.today-meta-item { display: inline-flex; gap: 5px; align-items: baseline; }
+.today-meta-label { color: #7f96ae; }
+.today-meta-val { color: #dbe7f4; font-weight: 600; }
 .today-session-summary {
   margin: 0;
-  color: #94a3b8;
-  font-size: 13px;
-  line-height: 1.5;
+  color: #93a9c1;
+  font-size: 13.5px;
+  line-height: 1.6;
 }
 .today-tags-row {
   display: flex;
-  gap: 8px;
+  gap: 9px;
   flex-wrap: wrap;
 }
 
@@ -434,72 +626,109 @@ const style = `<style data-today-orchestration-style>
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  margin-top: 4px;
+  margin-top: 6px;
+  align-items: center;
+  justify-content: flex-end;
 }
+.today-actions[data-stack="column"] {
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 2px;
+}
+.today-actions[data-stack="column"] .today-action { white-space: nowrap; }
 .today-action {
-  border-radius: 6px;
-  padding: 7px 16px;
-  font-size: 13px;
-  font-weight: 600;
+  border-radius: 8px;
+  padding: 9px 18px;
+  font-size: 13.5px;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.05s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 9px;
+  line-height: 1.3;
 }
+.today-action:active { transform: translateY(1px); }
+.today-action:focus-visible { outline: 2px solid #7dd3fc; outline-offset: 2px; }
 .today-action-primary {
-  background: linear-gradient(135deg, #0ea5e9, #06b6d4);
-  color: #021a2e;
-  border: none;
-  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);
+  background: linear-gradient(135deg, #16b4ec 0%, #0cc0e4 100%);
+  color: #03243a;
+  border: 1px solid rgba(125, 211, 252, 0.55);
+  box-shadow: 0 6px 16px rgba(14, 165, 233, 0.28);
 }
 .today-action-primary:hover {
-  background: linear-gradient(135deg, #38bdf8, #22d3ee);
+  background: linear-gradient(135deg, #3cc8f5 0%, #2ad4ee 100%);
 }
 .today-action-secondary {
-  background: rgba(14, 165, 233, 0.08);
-  color: #7dd3fc;
-  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: rgba(9, 30, 51, 0.72);
+  color: #a7d8f0;
+  border: 1px solid rgba(56, 189, 248, 0.34);
 }
 .today-action-secondary:hover {
   background: rgba(14, 165, 233, 0.16);
   border-color: #38bdf8;
+  color: #d8f2ff;
 }
 .today-action-sm {
-  padding: 4px 12px;
-  font-size: 12px;
+  padding: 6px 14px;
+  font-size: 12.5px;
   background: rgba(14, 165, 233, 0.12);
-  color: #38bdf8;
-  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #a9e4ff;
+  border: 1px solid rgba(56, 189, 248, 0.38);
 }
+.today-action-sm:hover { background: rgba(14, 165, 233, 0.22); }
 .today-action:disabled {
-  opacity: 0.45;
+  opacity: 0.42;
   cursor: not-allowed;
+  box-shadow: none;
 }
+.today-action:disabled:hover { background: linear-gradient(135deg, #16b4ec 0%, #0cc0e4 100%); }
+.today-action-secondary:disabled:hover { background: rgba(9, 30, 51, 0.72); }
 
-/* Recommendation & Why Cards */
+/* Next action & Why now */
+.today-recommendation-card .today-card-body { gap: 12px; padding-top: 4px; }
+.today-recommendation-card .today-actions { justify-content: flex-start; }
 .today-recommendation-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #f1f5f9;
+  font-size: clamp(17px, 1.5vw, 21px);
+  font-weight: 700;
+  color: #f8fafc;
   margin: 0;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
 }
+.today-rec-meta {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  color: #a8bdd4;
+  padding-bottom: 2px;
+}
+.today-rec-meta-item { display: inline-flex; align-items: center; gap: 6px; }
+.today-rec-meta-item .today-rec-meta-glyph { color: #5cc8f0; font-size: 13px; line-height: 1; }
 .today-recommendation-summary, .today-why-summary {
   margin: 0;
-  color: #94a3b8;
-  font-size: 13px;
-  line-height: 1.5;
+  color: #93a9c1;
+  font-size: 13.5px;
+  line-height: 1.6;
 }
 .today-unlock-note {
-  font-size: 12px;
-  color: #38bdf8;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+  font-size: 12.5px;
+  color: #8fd9f7;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  background: rgba(11, 44, 71, 0.55);
+  border-radius: 10px;
+  padding: 9px 13px;
 }
+.today-unlock-note .today-unlock-label { font-weight: 700; color: #4fc3f0; font-size: 12px; }
+.today-unlock-note .today-unlock-value { display: inline-flex; align-items: center; gap: 8px; color: #dbeaf6; font-size: 13.5px; }
 .today-rationale-list {
   display: grid;
-  gap: 8px;
+  gap: 9px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -507,167 +736,297 @@ const style = `<style data-today-orchestration-style>
 .today-rationale-item {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
+  gap: 9px;
   color: #cbd5e1;
-  font-size: 13px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.today-rationale-icon {
+  flex: 0 0 auto;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 1px;
 }
 .today-rationale-ok .today-rationale-icon {
-  color: #34d399;
-  font-weight: bold;
+  color: #052e22;
+  background: #34d399;
 }
 .today-rationale-clock .today-rationale-icon {
-  color: #38bdf8;
+  color: #05243a;
+  background: #38bdf8;
+}
+.today-rationale-note { color: #93a9c1; font-size: 12.5px; }
+.today-rationale-note .today-rationale-icon {
+  color: #0b1725;
+  background: #7f96ae;
+  font-style: italic;
+  font-size: 11px;
+}
+.today-why-connector {
+  display: none;
 }
 
-/* Recent Context Rows */
-.today-list {
-  display: grid;
-  gap: 6px;
-}
+/* Recent Context Rows — single-line rhythm, three aligned columns */
+.today-list { display: grid; gap: 0; }
 .today-recent-row {
   display: grid;
-  gap: 2px;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+  grid-template-columns: auto minmax(0, 1.34fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 2px;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.09);
 }
-.today-recent-row:last-child {
-  border-bottom: none;
+.today-recent-status {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  color: #5cc8f0;
 }
+.today-recent-status[data-tone="ok"] { color: #4ade9d; }
+.today-recent-status[data-tone="warning"] { color: #fbc64a; }
+.today-recent-status[data-tone="muted"] { color: #b6c8dc; }
+.today-recent-row:first-child { padding-top: 4px; }
+.today-recent-row:last-child { border-bottom: none; padding-bottom: 4px; }
 .today-recent-meta {
-  font-size: 12px;
-  color: #64748b;
-  display: flex;
-  gap: 4px;
+  font-size: 12.5px;
+  color: #7f96ae;
+  display: contents;
 }
 .today-recent-domain {
-  color: #7dd3fc;
+  color: #9fb6cd;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+.today-recent-domain .today-recent-glyph {
+  color: #5cc8f0;
+  font-size: 13px;
+  line-height: 1;
+  flex: 0 0 auto;
 }
 .today-recent-time {
-  color: #64748b;
+  color: #7f96ae;
+  font-size: 12.5px;
+  white-space: nowrap;
+  text-align: end;
 }
 .today-recent-title {
-  font-size: 13px;
-  font-weight: 500;
-  color: #e2e8f0;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #e6eef7;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
-/* Progress List */
-.today-progress-list {
-  display: grid;
-  gap: 10px;
-}
+/* Progress — bordered chip rows, glyph at the start edge, value anchored at the end */
+.today-progress-list { display: grid; gap: 8px; direction: ltr; }
 .today-progress-row {
   display: grid;
-  gap: 4px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid rgba(56, 189, 248, 0.08);
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 12px;
+  border: 1px solid rgba(96, 141, 178, 0.30);
+  border-radius: 10px;
+  background: rgba(6, 20, 36, 0.66);
 }
-.today-progress-row:last-child {
-  border-bottom: none;
-}
-.today-progress-info {
-  display: flex;
-  justify-content: space-between;
+.today-progress-glyph {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
   font-size: 13px;
-}
-.today-progress-title {
-  color: #cbd5e1;
-}
-.today-progress-val {
-  color: #38bdf8;
-  font-weight: 600;
-}
-.today-progress-bar {
-  height: 6px;
+  line-height: 1;
+  border-radius: 6px;
+  color: #7dd3fc;
   background: rgba(56, 189, 248, 0.12);
-  border-radius: 9999px;
-  overflow: hidden;
 }
-.today-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #0ea5e9, #38bdf8);
-  border-radius: 9999px;
-}
-.today-progress-count-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: #cbd5e1;
-}
-.today-progress-icon {
-  color: #38bdf8;
+.today-progress-glyph[data-tone="ok"] { color: #4ade9d; background: rgba(52, 211, 153, 0.14); }
+.today-progress-glyph[data-tone="warning"] { color: #fbc64a; background: rgba(251, 191, 36, 0.14); }
+.today-progress-glyph[data-tone="info"] { color: #cfa6fd; background: rgba(192, 132, 252, 0.14); }
+.today-progress-title { color: #cbd5e1; font-size: 13.5px; min-width: 0; overflow-wrap: anywhere; }
+.today-progress-val {
+  color: #f8fafc;
+  font-weight: 700;
   font-size: 14px;
+  white-space: nowrap;
 }
+.today-progress-info { display: contents; }
+.today-progress-bar, .today-progress-fill { display: none; }
+.today-progress-count-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 12px;
+  border: 1px solid rgba(96, 141, 178, 0.30);
+  border-radius: 10px;
+  background: rgba(6, 20, 36, 0.66);
+}
+.today-progress-icon { color: #7dd3fc; font-size: 13px; }
 
-/* Attention Sidebar */
-.today-attention-body {
-  display: grid;
-  gap: 8px;
+/* Attention rail — the surface's second focal point */
+.today-attention-side .today-card-head {
+  background: rgba(9, 30, 52, 0.72);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.14);
+  padding: 12px 15px;
 }
+.today-attention-body { display: grid; gap: 10px; padding-top: 11px; }
 .today-attention-item {
-  border: 1px solid rgba(46, 115, 170, 0.3);
-  border-radius: 8px;
-  background: rgba(4, 18, 33, 0.7);
-  padding: 8px 10px;
+  border: 1px solid rgba(96, 141, 178, 0.34);
+  border-radius: 12px;
+  background: rgba(7, 22, 39, 0.78);
+  padding: 10px 12px;
   display: grid;
-  gap: 6px;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "icon head"
+    "icon title"
+    "icon foot";
+  gap: 4px 12px;
+  align-items: start;
 }
+.today-attention-item:hover { border-color: rgba(56, 189, 248, 0.38); }
 .today-attention-item-head {
+  grid-area: head;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 10px;
+  min-width: 0;
 }
 .today-attention-domain {
-  font-size: 11px;
-  color: #7dd3fc;
+  font-size: 11.5px;
+  color: #8fd9f7;
   font-weight: 500;
+  text-align: start;
+  min-width: 0;
 }
 .today-attention-item-title {
+  grid-area: title;
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.today-attention-status {
   font-size: 13px;
-  font-weight: 600;
-  color: #f1f5f9;
+  font-weight: 700;
+  color: #dbe7f4;
+  overflow-wrap: anywhere;
+}
+.today-attention-id {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
   margin: 0;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.today-attention-item-foot {
+  grid-area: foot;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
 }
 .today-attention-item-summary {
   margin: 0;
-  font-size: 12px;
-  color: #94a3b8;
-  line-height: 1.4;
+  font-size: 12.5px;
+  color: #93a9c1;
+  line-height: 1.5;
+  min-width: 0;
 }
 .today-attention-item-actions {
   display: flex;
-  justify-content: flex-end;
-  margin-top: 2px;
+  flex: 0 0 auto;
 }
+.today-attention-icon {
+  grid-area: icon;
+  align-self: start;
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  line-height: 1;
+  border: 1px solid rgba(251, 191, 36, 0.34);
+  background: rgba(251, 191, 36, 0.12);
+  color: #fbc64a;
+}
+.today-attention-icon[data-tone="danger"] { border-color: rgba(248, 113, 113, 0.38); background: rgba(248, 113, 113, 0.13); color: #fb8b8b; }
+.today-attention-icon[data-tone="info"] { border-color: rgba(192, 132, 252, 0.36); background: rgba(192, 132, 252, 0.13); color: #cfa6fd; }
+.today-attention-icon[data-tone="ok"] { border-color: rgba(52, 211, 153, 0.36); background: rgba(52, 211, 153, 0.13); color: #4ade9d; }
+.today-attention-icon[data-tone="muted"] { border-color: rgba(148, 163, 184, 0.30); background: rgba(148, 163, 184, 0.10); color: #a9bcd1; }
 
 .today-empty {
-  padding: 24px 16px;
-  color: #64748b;
+  padding: 22px 14px;
+  color: #7f96ae;
   text-align: center;
   font-size: 13px;
+  line-height: 1.6;
+  border: 1px dashed rgba(96, 141, 178, 0.34);
+  border-radius: 10px;
+  background: rgba(6, 20, 36, 0.5);
 }
 .today-source {
   font-size: 11px;
-  color: #64748b;
+  color: #6d84a0;
   margin-top: 2px;
+  padding-top: 7px;
+  border-top: 1px dashed rgba(96, 141, 178, 0.24);
 }
 .today-source, .today-provider-row { min-width:0; overflow-wrap:anywhere; }
 .today-source bdi, .today-rationale-list bdi {
   white-space: normal;
 }
 
-.today-provider-truth { display:flex; flex-wrap:wrap; gap:6px 12px; border:1px solid rgba(148,163,184,.18); border-radius:9px; padding:6px 9px; background:rgba(2,11,22,.45); }
-.today-provider-row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:11px; color:#94a3b8; }
+.today-provider-truth { display:flex; flex-wrap:wrap; gap:6px 14px; border:1px solid rgba(96,141,178,.26); border-radius:10px; padding:8px 12px; background:rgba(3,12,24,.6); width: calc((100% - 14px) * 1.85 / 2.8); max-width:100%; }
+.today-provider-row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:11px; color:#8ba3bd; }
+.today-provider-row strong { color:#c9d8e8; font-weight:600; }
 .today-provider-row[data-state="UNAVAILABLE"], .today-provider-row[data-state="ERROR"] { color:#fca5a5; }
 .today-provider-row[data-state="STALE"] { color:#fcd34d; }
+.today-provider-row[data-state="AVAILABLE_DATA"] { color:#6ee7b7; }
 .today-provider-retained { color:#fbbf24; font-size:11px; }
+
+/* Linked next-action → why-now connector (wide layouts only) */
+.today-grid-2[data-linked] { gap: 26px; }
+.today-why-card { position: relative; overflow: visible; }
+.today-why-connector { display: none; }
+@media (min-width: 901px) {
+  .today-why-connector {
+    display: block;
+    position: absolute;
+    inset-inline-start: -25px;
+    top: 44%;
+    width: 24px;
+    height: 22px;
+    margin-top: -11px;
+    pointer-events: none;
+    color: #4aa8cc;
+    font-size: 15px;
+    line-height: 22px;
+    text-align: center;
+    z-index: 2;
+  }
+  .today-why-connector::after { content: "→"; }
+}
 @media (max-width: 900px) {
   .today-layout {
     grid-template-columns: 1fr;
     grid-template-areas:"main" "attention";
   }
+  .today-head,
+  .today-scopebar,
+  .today-provider-truth { width: 100%; }
   .today-grid-2 {
     grid-template-columns: 1fr 1fr;
   }
@@ -676,12 +1035,21 @@ const style = `<style data-today-orchestration-style>
   }
 }
 @media (max-width: 1080px) {
-  .today-session-grid { grid-template-columns:minmax(180px,.65fr) minmax(0,1.35fr); }
-  .today-session-visual { min-height:178px; }
+  .today-session-grid { grid-template-columns:minmax(190px,.68fr) minmax(0,1.35fr); }
+  .today-session-visual { min-height:182px; }
+}
+@media (max-width: 860px) {
+  .today-grid-2,
+  .today-grid-2[data-split="wide-first"] { grid-template-columns: 1fr; }
+  .today-session-content { grid-template-columns: minmax(0, 1fr); }
+  .today-session-actions { align-self: start; }
+  .today-why-connector { display: none !important; }
+  .today-grid-2[data-linked] { gap: 14px; }
 }
 @media (max-width: 768px) {
   .today-orchestration {
     padding: 12px;
+    gap: 12px;
   }
   .today-grid-2 {
     grid-template-columns: 1fr;
@@ -694,11 +1062,61 @@ const style = `<style data-today-orchestration-style>
   }
   .today-head-controls {
     align-items: flex-start;
+    justify-content: flex-start;
   }
+  .today-recent-row {
+    grid-template-columns: auto minmax(0, 1.34fr) minmax(0, 1fr) auto;
+    gap: 8px;
+    padding: 8px 0;
+  }
+  .today-recent-title,
+  .today-recent-domain { font-size: 12.5px; }
+}
+@media (max-width: 520px) {
+  .today-attention-item {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "head" "title" "foot";
+  }
+  .today-attention-icon { display: none; }
+  .today-actions[data-stack="column"] { flex-direction: column; }
+  .today-day-context { max-width: 100%; }
 }
 </style>`;
 
 const empty = text => `<div class="today-empty">${esc(text)}</div>`;
+/* Line-icon kit — one stroke weight, one optical size. Direction-safe (no directional glyphs). */
+const ICONS = Object.freeze({
+  book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7.2V12l3.2 2"/>',
+  history: '<path d="M3.2 12a8.8 8.8 0 1 0 2.7-6.3L3 8.4"/><path d="M3 3.4v5h5"/><path d="M12 7.6V12l3.6 2.1"/>',
+  link: '<path d="M10.2 13.4a4.6 4.6 0 0 0 6.9.5l2.8-2.8a4.6 4.6 0 0 0-6.5-6.5l-1.6 1.6"/><path d="M13.8 10.6a4.6 4.6 0 0 0-6.9-.5l-2.8 2.8a4.6 4.6 0 0 0 6.5 6.5l1.6-1.6"/>',
+  target: '<circle cx="12" cy="12" r="8.6"/><circle cx="12" cy="12" r="4.6"/><circle cx="12" cy="12" r="1.2"/>',
+  bell: '<path d="M18 8.6a6 6 0 1 0-12 0c0 6.4-2.6 7.6-2.6 7.6h17.2S18 15 18 8.6"/><path d="M13.7 19.6a2 2 0 0 1-3.4 0"/>',
+  star: '<path d="M12 3.4l2.7 5.5 6.1.9-4.4 4.3 1 6.1L12 17.3l-5.4 2.9 1-6.1L3.2 9.8l6.1-.9z"/>',
+  trend: '<path d="M3 17.2l6-6 4 4 7.4-7.4"/><path d="M14.6 7.8H21v6.4"/>',
+  file: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/>',
+  flask: '<path d="M9.2 3h5.6"/><path d="M10.4 3v6L5.2 17.9A2 2 0 0 0 6.9 21h10.2a2 2 0 0 0 1.7-3.1L13.6 9V3"/><path d="M7.8 15h8.4"/>',
+  shield: '<path d="M12 3.2l7.6 2.9v5.6c0 4.7-3.2 8-7.6 8.6-4.4-.6-7.6-3.9-7.6-8.6V6.1z"/><path d="M9.2 12.2l2 2 3.8-4"/>',
+  alert: '<path d="M10.3 4.4 2.7 17.8A2 2 0 0 0 4.4 21h15.2a2 2 0 0 0 1.7-3.2L13.7 4.4a2 2 0 0 0-3.4 0z"/><path d="M12 9.6v4"/><path d="M12 17.2h.01"/>',
+  play: '<circle cx="12" cy="12" r="8.6"/><path d="M10.2 8.6l5.4 3.4-5.4 3.4z"/>',
+  eye: '<path d="M2.4 12S6 5.8 12 5.8 21.6 12 21.6 12 18 18.2 12 18.2 2.4 12 2.4 12z"/><circle cx="12" cy="12" r="2.6"/>',
+  check: '<circle cx="12" cy="12" r="8.6"/><path d="M8.4 12.4l2.5 2.5 4.7-5.2"/>',
+  ban: '<circle cx="12" cy="12" r="8.6"/><path d="M5.9 5.9l12.2 12.2"/>',
+  grid: '<rect x="7.4" y="7.4" width="9.2" height="9.2" rx="2"/><path d="M12 3.2v4.2M12 16.6v4.2M3.2 12h4.2M16.6 12h4.2"/>',
+  branch: '<circle cx="6.6" cy="5.4" r="2.2"/><circle cx="6.6" cy="18.6" r="2.2"/><circle cx="17.4" cy="8.4" r="2.2"/><path d="M6.6 7.6v8.8"/><path d="M17.4 10.6c0 3.4-4.4 2.8-7 5"/>',
+  gear: '<circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.6M12 18.6v2.6M4.5 4.5l1.9 1.9M17.6 17.6l1.9 1.9M2.8 12h2.6M18.6 12h2.6M4.5 19.5l1.9-1.9M17.6 6.4l1.9-1.9"/>',
+  database: '<ellipse cx="12" cy="6.2" rx="7.6" ry="2.9"/><path d="M4.4 6.2v11.6c0 1.6 3.4 2.9 7.6 2.9s7.6-1.3 7.6-2.9V6.2"/><path d="M4.4 12c0 1.6 3.4 2.9 7.6 2.9s7.6-1.3 7.6-2.9"/>',
+  calendar: '<rect x="3.4" y="5.4" width="17.2" height="15.2" rx="2.2"/><path d="M3.4 10.2h17.2M8.4 3.4v4M15.6 3.4v4"/>',
+  search: '<circle cx="11" cy="11" r="7"/><path d="M20.4 20.4l-4.3-4.3"/>',
+  upload: '<path d="M12 16.4V4.2"/><path d="M7.6 8.6 12 4.2l4.4 4.4"/><path d="M4.2 15.8v3.2a2 2 0 0 0 2 2h11.6a2 2 0 0 0 2-2v-3.2"/>',
+  refresh: '<path d="M20.6 12a8.6 8.6 0 1 1-2.5-6.1"/><path d="M20.6 3.4v5.4h-5.4"/>',
+  session: '<path d="M20.4 12a8.4 8.4 0 1 1-2.5-6"/><path d="M17.4 2.6v4h-4"/><circle cx="12" cy="12" r="2.4"/>',
+  practice: '<path d="M6.6 3.6h10.8a2 2 0 0 1 2 2v14.8a2 2 0 0 1-2 2H6.6a2 2 0 0 1-2-2V5.6a2 2 0 0 1 2-2z"/><path d="M8.6 8.4h6.8M8.6 12h6.8M8.6 15.6h4"/>',
+  dot: '<circle cx="12" cy="12" r="3.2"/>',
+  sun: '<circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.4M12 19.2v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.4 12h2.4M19.2 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/>'
+});
+const icon = (name, size = 14, cls = '') => `<svg class="today-ico${cls ? ` ${cls}` : ''}" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICONS[name] || ICONS.dot}</svg>`;
+const domainGlyph = name => ({book:'book',enterprise:'database',simulation:'flask',evidence:'file',identity:'upload',operations:'gear',system:'gear',quality:'search',research:'search',blocked:'ban',drill:'refresh',conflict:'branch',track:'trend',done:'check',seen:'eye',sealed:'shield',submitted:'upload',warned:'alert',file:'file',play:'play',alert:'alert',threat:'eye'}[name] || 'dot');
 const sourceLine = (item, c) => {if(!item?.providerId)return '';const rec=item?.recommendation;const parts=[`${esc(c.source)} · ${bdi(item.providerId)}`];if(rec?.sourceRef)parts.push(bdi(rec.sourceRef));if(rec?.version)parts.push(`${esc(c.version)} ${bdi(rec.version)}`);if(item?.sourceObservedAt)parts.push(bdi(item.sourceObservedAt));if(item?.retainedStale)parts.push(esc(c.retained));return `<div class="today-source">${parts.join(' · ')}</div>`;};
 
 export function renderTodayOrchestrationProjection({ host, projection, adapter = null, lang = null, onAction = null } = {}) {
@@ -724,27 +1142,32 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
     const lastActivity = cont.lastActivity?.[l] || cont.lastActivity || '';
     const lastPosition = cont.lastPosition?.[l] || cont.lastPosition || '';
     const tags = Array.isArray(cont.pathTags) ? cont.pathTags : Array.isArray(cont.tags) ? cont.tags : [];
-    const tagsHtml = tags.map(t => `<span class="today-pill today-pill-tag">${esc(t?.[l] || t?.label?.[l] || t?.label || t)}</span>`).join('');
+    const tagGlyphs = ['book', 'trend'];
+    const tagsHtml = tags.map((t, index) => `<span class="today-pill today-pill-tag">${icon(tagGlyphs[index] || 'dot', 14, 'today-pill-glyph')}${esc(t?.[l] || t?.label?.[l] || t?.label || t)}</span>`).join('');
+    const crumbParts = itemTrack(cont, l).split('•').map(part => part.trim()).filter(Boolean);
+    const crumbHtml = crumbParts.map((part, index) => `${index ? `<span class="today-crumb-sep" aria-hidden="true">${l === 'ar' ? '←' : '→'}</span>` : ''}<span>${esc(part)}</span>`).join('');
 
     sessionHtml = `
       <div class="today-card-body today-session-grid">
         <div class="today-session-content">
-          <h3 class="today-session-title">${esc(itemTitle(cont, l))}</h3>
-          ${(lastActivity || lastPosition) ? `
-            <div class="today-session-meta-row">
-              ${lastActivity ? `<div class="today-meta-item"><span class="today-meta-label">${l === 'ar' ? 'آخر نشاط:' : 'Last activity:'}</span> <span class="today-meta-val">${esc(lastActivity)}</span></div>` : ''}
-              ${lastPosition ? `<div class="today-meta-item"><span class="today-meta-label">${l === 'ar' ? 'آخر موضع:' : 'Last position:'}</span> <span class="today-meta-val">${esc(lastPosition)}</span></div>` : ''}
+          <div class="today-session-text">
+            ${crumbHtml ? `<div class="today-crumbs">${crumbHtml}</div>` : ''}
+            <div class="today-title-row">
+              <h3 class="today-session-title">${esc(itemTitle(cont, l))}</h3>
+              ${statusBadge ? `<span class="today-badge today-badge-${statusTone}">${esc(statusBadge)}</span>` : ''}
             </div>
-          ` : ''}
-          <p class="today-session-summary">${esc(itemSummary(cont, l))}</p>
-          ${tagsHtml ? `<div class="today-tags-row">${tagsHtml}</div>` : ''}
-          ${sourceLine(cont, c)}
-          <div class="today-actions">
+            ${lastActivity ? `<div class="today-session-meta-row"><span class="today-meta-item"><span class="today-meta-label">${l === 'ar' ? 'آخر نشاط:' : 'Last activity:'}</span> <span class="today-meta-val">${esc(lastActivity)}</span></span></div>` : ''}
+            ${lastPosition ? `<div class="today-position-line">${esc(lastPosition)}</div>` : ''}
+            <p class="today-session-summary">${esc(itemSummary(cont, l))}</p>
+            ${tagsHtml ? `<div class="today-tags-row">${tagsHtml}</div>` : ''}
+            ${sourceLine(cont, c)}
+          </div>
+          <div class="today-session-actions today-actions" data-stack="column">
             <button class="today-action today-action-primary" data-primary="true" data-today-action="resume" data-item-id="${esc(cont.id)}" ${vm.resumeAvailability.enabled ? '' : `disabled aria-disabled="true" title="${esc(vm.resumeAvailability.reason||vm.resumeAvailability.code||'Unavailable')}"`}>
-              ${esc(c.resume)} &gt;
+              ${esc(c.resume)} <span aria-hidden="true">${l === 'ar' ? '←' : '→'}</span>
             </button>
             <button class="today-action today-action-secondary" data-today-action="resume" data-item-id="${esc(cont.id)}" ${vm.resumeAvailability.enabled ? '' : `disabled aria-disabled="true" title="${esc(vm.resumeAvailability.reason||vm.resumeAvailability.code||'Unavailable')}"`}>
-              ${l === 'ar' ? 'عرض السياق' : 'View context'}
+              ${l === 'ar' ? 'عرض السياق' : 'View context'} ${icon('eye', 15)}
             </button>
           </div>
         </div>
@@ -763,19 +1186,21 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
   if (vm.recommendation) {
     const rec = vm.recommendation;
     const metaTags = Array.isArray(rec.metaTags) ? rec.metaTags : [];
-    const metaTagsHtml = metaTags.map(tag => `<span class="today-pill today-pill-tag">${esc(tag?.[l] || tag)}</span>`).join('');
-    const nextUnlock = rec.nextUnlock?.[l] || rec.nextUnlock || '';
+    const recGlyphs = ['target', 'clock', 'link'];
+    const metaTagsHtml = metaTags.map((tag, index) => `<span class="today-rec-meta-item">${icon(recGlyphs[index] || 'dot', 14, 'today-rec-meta-glyph')}<bdi dir="ltr">${esc(tag?.[l] || tag)}</bdi></span>`).join('');
     const recResume=resumeFor(rec);
     recommendationHtml = `
       <div class="today-card-body">
+        ${metaTagsHtml ? `<div class="today-rec-meta">${metaTagsHtml}</div>` : ''}
         <h3 class="today-recommendation-title">${esc(itemTitle(rec, l))}</h3>
-        ${metaTagsHtml ? `<div class="today-tags-row">${metaTagsHtml}</div>` : ''}
         <p class="today-recommendation-summary">${esc(itemSummary(rec, l))}</p>
-        ${nextUnlock ? `<div class="today-unlock-note"><span>🔓</span> ${esc(nextUnlock)}</div>` : ''}
         ${sourceLine(rec, c)}
         <div class="today-actions">
           <button class="today-action today-action-primary" data-primary="true" data-today-action="resume" data-item-id="${esc(rec.id)}" ${recResume.enabled ? '' : `disabled aria-disabled="true" title="${esc(recResume.reason||recResume.code||'Unavailable')}"`}>
-            ${esc(itemActionLabel(rec, l) || c.resume)}
+            ${esc(itemActionLabel(rec, l) || c.startPractice)} ${icon('play', 15)}
+          </button>
+          <button class="today-action today-action-secondary" data-today-action="why" data-item-id="${esc(rec.id)}" data-recommendation-version="${esc(rec.recommendation?.version || '')}">
+            ${esc(c.whyThis)} ${icon('target', 15)}
           </button>
         </div>
       </div>
@@ -786,21 +1211,24 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
 
   // Why now? rationale
   let whyHtml = '';
-  if (vm.recommendation && vm.whyAvailability.enabled) {
+  if (vm.recommendation) {
     const rec = vm.recommendation;
     const checkItem = rec.rationaleCheck?.[l] || rec.rationaleCheck || '';
     const nextItem = rec.rationaleNext?.[l] || rec.rationaleNext || '';
+    const unlockValue = rec.nextUnlock?.[l] || rec.nextUnlock || '';
+    const whyEnabled = vm.whyAvailability.enabled;
     whyHtml = `
       <div class="today-card-body">
         <ul class="today-rationale-list">
-          ${checkItem ? `<li class="today-rationale-item today-rationale-ok"><span class="today-rationale-icon">✓</span><span>${esc(checkItem)}</span></li>` : ''}
-          ${nextItem ? `<li class="today-rationale-item today-rationale-clock"><span class="today-rationale-icon">⏱</span><span>${esc(nextItem)}</span></li>` : ''}
+          ${checkItem ? `<li class="today-rationale-item today-rationale-ok"><span class="today-rationale-icon" aria-hidden="true">${icon('check', 13)}</span><span>${esc(checkItem)}</span></li>` : ''}
+          ${nextItem ? `<li class="today-rationale-item today-rationale-clock"><span class="today-rationale-icon" aria-hidden="true">${icon('clock', 13)}</span><span>${esc(nextItem)}</span></li>` : ''}
+          ${!whyEnabled ? `<li class="today-rationale-item today-rationale-note"><span class="today-rationale-icon" aria-hidden="true">i</span><span>${esc(vm.whyAvailability.reason || c.noRationale)}</span></li>` : ''}
         </ul>
-        <p class="today-why-summary">${esc(rec.recommendation?.rationale || rec.recommendation?.reasonCode || c.noRationale)}</p>
-        <div class="today-source">${esc(c.source)}: ${bdi(rec.recommendation?.sourceRef || '')} · ${esc(c.version)} ${bdi(rec.recommendation?.version || '')} · ${bdi(rec.recommendation?.observedAt || rec.sourceObservedAt || '')}</div>
+        ${unlockValue ? `<div class="today-unlock-note"><span class="today-unlock-label">${esc(c.unlockNext)}</span><span class="today-unlock-value">${icon('flask', 16)} ${esc(unlockValue)}</span></div>` : ''}
+        ${whyEnabled ? `<div class="today-source">${esc(c.source)}: ${bdi(rec.recommendation?.sourceRef || '')} · ${esc(c.version)} ${bdi(rec.recommendation?.version || '')} · ${bdi(rec.recommendation?.observedAt || rec.sourceObservedAt || '')}</div>` : ''}
         <div class="today-actions">
-          <button class="today-action today-action-secondary" data-today-action="why" data-item-id="${esc(rec.id)}" data-recommendation-version="${esc(rec.recommendation?.version || '')}">
-            ${l === 'ar' ? 'عرض السبب >' : 'Why now? >'}
+          <button class="today-action today-action-secondary" data-today-action="why" data-item-id="${esc(rec.id)}" data-recommendation-version="${esc(rec.recommendation?.version || '')}" ${whyEnabled ? '' : `disabled aria-disabled="true" title="${esc(vm.whyAvailability.reason || vm.whyAvailability.code || 'Unavailable')}"`}>
+            ${esc(c.showWhy)} ${icon('branch', 15)}
           </button>
         </div>
       </div>
@@ -809,59 +1237,54 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
     whyHtml = empty(c.noRationale);
   }
 
-  // Attention sidebar items
-  const attention = vm.attention.length ? vm.attention.map(item => { const itemResume=resumeFor(item); return `
+  // Attention rail items — icon tile, priority, domain, title, summary, action
+  const attention = vm.attention.length ? vm.attention.map(item => { const itemResume=resumeFor(item); const tone=itemBadgeTone(item); const priority=item?.priority?.[l] || item?.priority || ''; return `
     <article class="today-attention-item" data-attention-id="${esc(item.id)}">
       <div class="today-attention-item-head">
         <span class="today-attention-domain">${esc(itemTrack(item, l))}</span>
-        <span class="today-badge today-badge-${itemBadgeTone(item)}">${esc(itemBadge(item, l))}</span>
+        ${priority ? `<span class="today-badge today-badge-${item?.priorityTone || tone}">${esc(priority)}</span>` : ''}
       </div>
-      <h4 class="today-attention-item-title">${esc(itemTitle(item, l))}</h4>
-      <p class="today-attention-item-summary">${esc(itemSummary(item, l))}</p>
-      ${sourceLine(item, c)}
-      ${item.continuation ? `
+      <div class="today-attention-item-title">
+        ${itemBadge(item, l) ? `<span class="today-attention-status">${esc(itemBadge(item, l))}</span>` : ''}
+        <h4 class="today-attention-id">${esc(itemTitle(item, l))}</h4>
+      </div>
+      <div class="today-attention-item-foot">
+        <p class="today-attention-item-summary">${esc(itemSummary(item, l))}</p>
         <div class="today-attention-item-actions">
           <button class="today-action today-action-sm" data-today-action="resume" data-item-id="${esc(item.id)}" ${itemResume.enabled ? '' : `disabled aria-disabled="true" title="${esc(itemResume.reason||itemResume.code||'Unavailable')}"`}>
-            ${esc(itemActionLabel(item, l) || c.open)}
+            ${esc(itemActionLabel(item, l) || c.open)} <span aria-hidden="true">${l === 'ar' ? '←' : '→'}</span>
           </button>
         </div>
-      ` : ''}
+      </div>
+      <span class="today-attention-icon" data-tone="${esc(tone)}" aria-hidden="true">${icon(domainGlyph(item?.icon), 20)}</span>
     </article>
   `;}).join('') : empty(projection.sourceTotalCount === 0 ? stateAbsence : c.noAttention);
 
-  // Recent context items
+  // Recent context items — title · domain · time on one aligned line
   const recent = vm.recent.length ? vm.recent.map(item => `
     <div class="today-recent-row">
+      <span class="today-recent-status" data-tone="${esc(item.statusIcon === 'done' || item.statusIcon === 'sealed' ? 'ok' : item.statusIcon === 'warned' ? 'warning' : 'muted')}" aria-hidden="true">${icon(domainGlyph(item.statusIcon), 15)}</span>
+      <div class="today-recent-title">${esc(itemTitle(item, l))}</div>
       <div class="today-recent-meta">
-        ${item.domainArea ? `<span class="today-recent-domain">${esc(item.domainArea?.[l] || item.domainArea)}</span> • ` : ''}
+        ${item.domainArea ? `<span class="today-recent-domain">${icon(domainGlyph(item.domainIcon), 14, 'today-recent-glyph')}<span>${esc(item.domainArea?.[l] || item.domainArea)}</span></span>` : '<span class="today-recent-domain"></span>'}
         <small class="today-recent-time">${esc(item.timeLabel?.[l] || item.timeLabel || item.sourceObservedAt || '')}</small>
       </div>
-      <div class="today-recent-title">${esc(itemTitle(item, l))}</div>
     </div>
   `).join('') : empty(projection.sourceTotalCount === 0 ? stateAbsence : c.noRecent);
 
-  // Progress items
+  // Progress items — bordered chip rows with the value anchored at the end
   const progress = vm.progress.length ? vm.progress.map(item => {
-    if (item.value && String(item.value).includes('/')) {
-      const parts = String(item.value).split('/');
-      const percent = Math.min(100, Math.round((Number(parts[0]) / Number(parts[1])) * 100));
-      return `
-        <div class="today-progress-row">
-          <div class="today-progress-info">
-            <span class="today-progress-title">${esc(itemTitle(item, l))}</span>
-            <span class="today-progress-val">${bdi(item.value)}</span>
-          </div>
-          <div class="today-progress-bar">
-            <div class="today-progress-fill" style="width: ${percent}%;"></div>
-          </div>
-        </div>
-      `;
-    }
-    const icon = item.icon === 'file' ? '📄' : item.icon === 'play' ? '▶' : item.icon === 'shield' ? '🛡️' : item.icon === 'alert' ? '⚠️' : '✓';
+    const value = item.value === undefined || item.value === null ? '' : String(item.value);
+    const ratio = value.includes('/') ? value.split('/').map(part => part.trim()) : null;
+    const glyphTone = item.icon === 'alert' ? 'warning' : item.icon === 'shield' ? 'ok' : item.icon === 'file' ? 'info' : '';
+    const valueHtml = ratio
+      ? `<span class="today-progress-val">${bdi(ratio[0])} <span style="opacity:.55;font-weight:600">/ ${bdi(ratio[1])}</span></span>`
+      : (value ? `<span class="today-progress-val">${bdi(value)}</span>` : '');
     return `
-      <div class="today-progress-count-row">
-        <span class="today-progress-icon">${icon}</span>
+      <div class="today-progress-row">
+        <span class="today-progress-glyph" data-tone="${esc(glyphTone)}" aria-hidden="true">${icon(domainGlyph(item.icon), 14)}</span>
         <span class="today-progress-title">${esc(itemTitle(item, l))}</span>
+        ${valueHtml}
       </div>
     `;
   }).join('') : empty(projection.sourceTotalCount === 0 ? stateAbsence : c.noProgress);
@@ -891,10 +1314,19 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
   const sessionCardHead = `
     <header class="today-card-head">
       <div class="today-card-title-group">
+        <span class="today-card-glyph" aria-hidden="true">${icon('session', 14)}</span>
         <h2 class="today-card-title">${esc(c.continue)}</h2>
-        ${vm.continuation && itemTrack(vm.continuation, l) ? `<span class="today-pill today-pill-track">${esc(itemTrack(vm.continuation, l))}</span>` : ''}
       </div>
-      ${vm.continuation && itemBadge(vm.continuation, l) ? `<span class="today-badge today-badge-${itemBadgeTone(vm.continuation)}">${esc(itemBadge(vm.continuation, l))}</span>` : ''}
+      <button class="today-card-menu" type="button" data-today-action="refresh" title="${esc(c.refresh)}" aria-label="${esc(c.refresh)}">${icon('refresh', 15)}</button>
+    </header>
+  `;
+
+  const cardHead = (glyphId, label) => `
+    <header class="today-card-head">
+      <div class="today-card-title-group">
+        <span class="today-card-glyph" aria-hidden="true">${icon(glyphId, 14)}</span>
+        <h2 class="today-card-title">${esc(label)}</h2>
+      </div>
     </header>
   `;
 
@@ -903,28 +1335,35 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
     <section class="today-orchestration m0-workbench" data-r6-workbench="" id="todayWorkbench" dir="${vm.dir}" data-owner="${vm.owner}" data-projection-state="${esc(projection.state)}" data-provider-truth="read-side" tabindex="0">
       <header class="today-head" id="todayHeader">
         <div class="today-head-main">
-          <div class="today-eyebrow">${esc(c.eyebrow)} · ${esc(c.title)}</div>
-          <div class="today-greeting-row">
-            <h1 class="today-heading" id="todayHeading" tabindex="-1">
-              ${esc(c.greeting)}
-            </h1>
+          <span class="today-glyph" aria-hidden="true">${icon('sun', 24)}</span>
+          <div class="today-head-stack">
+            <div class="today-eyebrow">${esc(c.title)} · ${esc(c.eyebrow)}</div>
+            <div class="today-greeting-row">
+              <h1 class="today-heading" id="todayHeading" tabindex="-1">
+                ${esc(c.greeting)}
+              </h1>
+            </div>
+            <p class="today-subtitle" id="todaySubtitle">
+              ${esc(c.subtitle)}
+            </p>
           </div>
-          <p class="today-subtitle" id="todaySubtitle">
-            ${esc(c.subtitle)}
-          </p>
         </div>
         <div class="today-head-controls">
-          <div class="today-day-context" id="todayClock"><strong>${esc(c.observed)}:</strong> <span>${esc(vm.dayContext)}</span></div>
-          <div class="today-clock" aria-label="Projection state"><span>◉</span> ${bdi(projection.state)}</div>
-          <div class="today-filterbar" id="todayFilterBar" role="toolbar" aria-label="Today filters">
-            ${filters}
-            <button class="today-filter today-refresh-btn" id="todayRefreshBtn" data-today-action="refresh" title="${esc(c.refresh)}">
-              ↻ ${esc(c.refresh)}
-            </button>
-          </div>
-          ${vm.statusMessage ? `<div class="today-status" id="todayStatus" data-tone="${vm.statusTone}" role="status">${esc(vm.statusMessage)}</div>` : ''}
+          <div class="today-day-context" id="todayClock">${icon('calendar', 16)}<span class="today-day-lines"><span class="today-day-label">${esc(c.observed)}</span><span class="today-day-value">${esc(vm.dayContext)}</span></span></div>
         </div>
       </header>
+      <div class="today-scopebar">
+        <div class="today-filterbar" id="todayFilterBar" role="toolbar" aria-label="Today filters">
+          ${filters}
+          <button class="today-filter today-refresh-btn" id="todayRefreshBtn" data-today-action="refresh" title="${esc(c.refresh)}">
+            ${icon('refresh', 12)} ${esc(c.refresh)}
+          </button>
+        </div>
+        <div class="today-scope-readouts">
+          <div class="today-clock" aria-label="Projection state">${icon('refresh', 12)} ${bdi(projection.state)}</div>
+          ${vm.statusMessage ? `<div class="today-status" id="todayStatus" data-tone="${vm.statusTone}" role="status">${esc(vm.statusMessage)}</div>` : ''}
+        </div>
+      </div>
       <section class="today-provider-truth" id="todayProviderTruth" aria-label="Today provider truth">${providerTruthHtml || empty(c.unavailable)}${projection.retainedFromLastSuccess?`<div class="today-provider-retained">${l==='ar'?'تم الاحتفاظ بآخر إسقاط ناجح كسياق قديم بعد فشل التحديث.':'Last successful projection retained as stale context after refresh failure.'}</div>`:''}</section>
 
       <div class="today-layout">
@@ -934,47 +1373,40 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
             ${sessionHtml}
           </article>
 
-          <div class="today-grid-2">
+          <div class="today-grid-2" data-split="wide-first" data-linked>
             <article class="today-card today-recommendation-card" id="todayRecommendationCard">
-              <header class="today-card-head">
-                <h2 class="today-card-title">${esc(c.next)}</h2>
-              </header>
+              ${cardHead('star', c.next)}
               ${recommendationHtml}
             </article>
 
             <article class="today-card today-why-card" id="todayWhyCard">
-              <header class="today-card-head">
-                <h2 class="today-card-title">${esc(c.why)}</h2>
-              </header>
+              <span class="today-why-connector" aria-hidden="true"></span>
+              ${cardHead('target', c.why)}
               ${whyHtml}
             </article>
           </div>
 
-          <div class="today-grid-2">
+          <div class="today-grid-2" data-split="wide-first">
             <article class="today-card today-recent-card" id="todayRecentCard">
-              <header class="today-card-head">
-                <h2 class="today-card-title">${esc(c.recent)}</h2>
-              </header>
+              ${cardHead('history', c.recent)}
               <div class="today-card-body today-list">
                 ${recent}
               </div>
               <footer class="today-card-footer">
                 <button class="today-link-btn" data-today-action="filter" data-filter="RECENT_CONTEXT">
-                  ${l === 'ar' ? 'عرض كل السياق الأخير >' : 'View all recent context >'}
+                  ${esc(c.viewAll)} ${l === 'ar' ? 'كل السياق الأخير' : 'all recent context'} <span aria-hidden="true">${l === 'ar' ? '←' : '→'}</span>
                 </button>
               </footer>
             </article>
 
             <article class="today-card today-progress-card" id="todayProgressCard">
-              <header class="today-card-head">
-                <h2 class="today-card-title">${esc(c.progress)}</h2>
-              </header>
+              ${cardHead('trend', c.progress)}
               <div class="today-card-body today-progress-list">
                 ${progress}
               </div>
               <footer class="today-card-footer">
                 <button class="today-link-btn" data-today-action="filter" data-filter="PROGRESS">
-                  ${l === 'ar' ? 'عرض توقع التقدم التفصيلي >' : 'View detailed progress projection >'}
+                  ${esc(c.viewAll)} ${l === 'ar' ? 'توقع التقدم التفصيلي' : 'detailed progress projection'} <span aria-hidden="true">${l === 'ar' ? '←' : '→'}</span>
                 </button>
               </footer>
             </article>
@@ -984,8 +1416,9 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
         <aside class="today-card today-attention-side" id="todayAttentionSidebar">
           <header class="today-card-head">
             <div class="today-card-title-group">
+              <span class="today-card-glyph" aria-hidden="true">${icon('bell', 14)}</span>
               <h2 class="today-card-title">${esc(c.attention)}</h2>
-              <span class="today-badge today-badge-count">(${vm.attention.length})</span>
+              <span class="today-badge today-badge-count">${bdi(vm.attention.length)}</span>
             </div>
           </header>
           <div class="today-card-body today-attention-body">
@@ -993,7 +1426,7 @@ export function renderTodayOrchestrationProjection({ host, projection, adapter =
           </div>
           <footer class="today-card-footer">
             <button class="today-link-btn" data-today-action="filter" data-filter="ATTENTION">
-              ${l === 'ar' ? 'عرض جميع عناصر الانتباه >' : 'View all attention items >'}
+              ${esc(c.viewAll)} ${l === 'ar' ? 'عناصر الانتباه' : 'attention items'} <span aria-hidden="true">${l === 'ar' ? '←' : '→'}</span>
             </button>
           </footer>
         </aside>

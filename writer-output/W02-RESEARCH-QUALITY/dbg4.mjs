@@ -1,0 +1,21 @@
+import { createRequire } from 'node:module';
+import { createHash } from 'node:crypto';
+const require = createRequire(import.meta.url);
+const { chromium } = require('playwright');
+const sha = b => createHash('sha256').update(b).digest('hex');
+const browser = await chromium.launch();
+const ctx = await browser.newContext({ viewport: { width: 1505, height: 1045 } });
+const page = await ctx.newPage();
+await page.goto('http://localhost:4173/?surface=rq&capture=dbg4', { waitUntil: 'load' });
+await page.waitForTimeout(1600);
+const a = await page.screenshot();
+console.log('A', a.length, sha(a).slice(0,16));
+await page.evaluate(() => { document.body.style.setProperty('background','rgb(255,0,0)','important'); });
+await page.waitForTimeout(300);
+const b = await page.screenshot();
+console.log('B', b.length, sha(b).slice(0,16));
+// element screenshot of the stage
+const el = await page.$('#foundationStage');
+const c = await el.screenshot();
+console.log('C(stage)', c.length, sha(c).slice(0,16));
+await browser.close();

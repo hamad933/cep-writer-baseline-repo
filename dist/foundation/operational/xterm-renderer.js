@@ -3,8 +3,8 @@ import {TERMINAL_RENDERER_PORT_CONTRACT} from './terminal-renderer-port.js';
 
 const html=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let modulePromise=null;
-function ensureCss(){if(globalThis.document&&!document.querySelector('link[data-cep-xterm]')){const link=document.createElement('link');link.rel='stylesheet';link.href='/vendor/xterm/xterm.css';link.dataset.cepXterm='true';document.head.append(link)}}
-async function module(){ensureCss();if(modulePromise)return modulePromise;if(typeof globalThis.window==='undefined'){try{return modulePromise=import(new URL('../../vendor/xterm/xterm.mjs',import.meta.url).href);}catch{}}return modulePromise=import('/vendor/xterm/xterm.mjs');}
+function ensureCss(){if(globalThis.document&&!document.querySelector('link[data-cep-xterm]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('../../vendor/xterm/xterm.css',import.meta.url).href;link.dataset.cepXterm='true';document.head.append(link)}}
+async function module(){ensureCss();if(modulePromise)return modulePromise;return modulePromise=import(new URL('../../vendor/xterm/xterm.mjs',import.meta.url).href);}
 const rawBytes=session=>session?.rawOutputBase64?Uint8Array.from(atob(session.rawOutputBase64),character=>character.charCodeAt(0)):null;
 const generationOf=session=>Number(session?.outputGeneration??session?.restartCount??0);
 

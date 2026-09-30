@@ -1,0 +1,516 @@
+{
+  "SURFACE": "rq",
+  "OWNER": "W02-RESEARCH-QUALITY",
+  "REFERENCE": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/04_RESEARCH_AND_QUALITY/image-gen-1(20260813-194728).png",
+  "REFERENCE_CLASSIFICATION": "CANDIDATE__AUTHORITY_UNRESOLVED",
+  "REFERENCE_AUTHORITY_GAP": {
+    "statement": "This surface's ONLY visual reference is still CANDIDATE__AUTHORITY_UNRESOLVED in cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md. It was used as CONSTRUCTION AUTHORITY (composition, hierarchy, pane organisation, density/rhythm, interaction language, information architecture) and was NOT promoted to canonical. Every evidence record below carries referenceAuthorityInRecord=CANDIDATE__AUTHORITY_UNRESOLVED.",
+    "referenceIdentity": {
+      "sha256": "312bf193216402f8c16fb8c2bca424fa453d961e31f818ac0183cdf8e7b380c8",
+      "dims": "1505x1045"
+    },
+    "builderCeilingStillRecordedInAdapter": "REVIEWED_FINAL_CANDIDATE (adapters/rq/domain.ts descriptor.visualReferenceCeiling; asserted by tests/surfaces/rq/surface.test.mjs — not modified)"
+  },
+  "CURRENT_CANDIDATE": {
+    "branch": "writer/mi-serial",
+    "commit": "f5222cab89095e1608c702fe8c29bc715fb9a383",
+    "tree": "f310dd6e7db6cfeed37a5665dde8e44a1ac06cec",
+    "ownedPartition": "OWNED_PARTITION_SHA256:64b7bacf6b41bb0f98a57c715393aaa396bda7cf689cef857e6c892094e596f1",
+    "canonicalSourceTree": "CANONICAL_SOURCE_TREE_SHA256:480dbe9d76cb2883b3a97b3cd618caaa2b0718572a78d86ad8941729a0cc9641",
+    "build": "tools/writer-serial.sh npm run build:runtime (pass, CANONICAL_SOURCE_TO_GENERATED_ONLY)",
+    "environment": "http://localhost:4173 (tools/serve.mjs) · Playwright Chromium · dist/ rebuilt from stack/native-typescript"
+  },
+  "FILES_CHANGED": [
+    "stack/native-typescript/surfaces/rq/surface.ts",
+    "stack/native-typescript/surfaces/rq/composition.ts",
+    "stack/native-typescript/adapters/rq/fixtures.ts"
+  ],
+  "FILES_NOT_CHANGED_BUT_REQUESTED": [
+    "stack/native-typescript/surfaces/m0-controller-composition.ts — writer-forbidden hotspot; hunk filed, not applied (writer-output/W02-RESEARCH-QUALITY/SERIALIZED_HOTSPOT_REQUEST.md)"
+  ],
+  "FUNCTIONAL_STATUS": "PASS — ?surface=rq mounts the RQ workspace; 5 view tabs switch centre bodies; 5 context tabs switch the RIGHT pane; claim selection, 5 reconciliation actions, queue/project selection, anchor and relation affordances execute through the shared CommandRegistry; every action returns persisted:false / formalReview:false / canonicalMutation:false. 0 pageErrors and 0 non-network console errors across 40 measured page loads.",
+  "STRUCTURAL_STATUS": "PASS — LEFT=#domainLeftRegion (scope card, active investigations, review queue, working-scope footnote) · CENTER=#foundationStage (control row, review identity, 5 view bodies) · RIGHT=#domainContext (5 tabs + overview/attributes/marks/order/history) · BOTTOM=#domainBottomRegion (reconciliation trace) · TOOLBAR=#domainToolbar (5 view tabs only). 44 controls, 0 non-buttons, 0 unlabelled, 0 pane overlap, 0 horizontal document scroll at 1505/1440/1024/800.",
+  "VISUAL_STATUS": "SUBSTANTIALLY_IMPROVED_PENDING_CONTROLLER_REVIEW — all measured density, contrast, truncation, rhythm and focus defects are closed; independent vision confirmation is BLOCKED (BLOCKERS.b1) and a Writer cannot accept its own work.",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": {
+    "L1_WHOLE_SURFACE": "DONE (measured) — per-region largest empty rectangle now 0.0023–0.061 of each region (dead zones closed; only the intentionally collapsed 34px bottom shelf bar exceeds it), ink density 0.0676–0.3745 with chroma up to 0.962. Reference vs candidate structural vocabulary cross-checked by tesseract OCR of BOTH images.",
+    "L2_REGION_PANE": "DONE (measured) — topchrome/left/center/right/bottom ink, chroma, empty-rectangle and content-bbox metrics at 4 viewports x 2 directions; per-pane heading, node count, trailing empty px and scroll overflow recorded.",
+    "L3_COMPONENT": "DONE (measured) — source pair cards, claim matching table, review-result pair, queue list, context tab strip, action chips and view tabs measured for geometry, disabled/pressed state, contrast and overflow across all 5 views and all 5 context tabs, both directions.",
+    "L4_MICRO": "DONE (measured) — type scale enumerated (9/10/10.5/11/12.5/13/14/23px), spacing scale 4/8/12/16/24, 17 sampled text roles all pass WCAG AA (min 5.85, max 17.5), truncation offenders = 0, focus retention verified for view tabs, claim radios, action chips and context tabs in both directions.",
+    "METHOD_CAVEAT": "The session image-return channel is stale (BLOCKERS.b1), so L1-L4 were executed with hash-bound pixel metrics (PIL), DOM geometry/contrast probes and tesseract OCR of both reference and candidate — never with an unverified image read."
+  },
+  "RESPONSIVE_STATUS": "PASS (measured) — wide 1505x1045 / standard 1440x1000 / narrow 1024x900 / compact 800x900: shared toolbar stays ONE row (rowHeight 48px) at every viewport; source grid collapses to one column; result grid stacks with a down chevron; no overlap, no horizontal document scroll, 0 truncation offenders. The shell's own responsive rule collapses RIGHT at <=1100 and LEFT at <=820 (leftState/rightState recorded per capture); deliberate collapsed state captured at analysis/collapsed-{rtl,ltr}.png with CENTER intact.",
+  "RTL_LTR_STATUS": "PASS (measured) — both directions at all 4 viewports through the real Settings preference seam (cep-foundation.preferences.v1: locale ar/en + chromeDirection rtl/ltr), never by DOM forcing. Labels are {ar,en} pairs with no permanent language authority; layout uses logical properties only; technical tokens (REV-SQLI-014, A-021, C-014, v3.2, CWE-89, digests, timestamps) are wrapped in <bdi dir=ltr>; the result chevron mirrors under [dir=rtl]; localized headings, counts, status pills, toolbar labels and status announcements verified in both directions. Contrast + truncation offenders: 0 in both directions.",
+  "DEFECTS_FOUND": [
+    {
+      "id": "D-01",
+      "defect": "rq route rendered the generic typed-collection stage: empty CENTER card, one-paragraph LEFT, EMPTY RIGHT, EMPTY BOTTOM, ~90% dead space, English-only copy regardless of preference.",
+      "severity": "V3",
+      "rootCause": "SURFACE_COMPOSITION",
+      "state": "CLOSED",
+      "evidence": "evidence/baseline/1505x1045-rtl.png (sha256-bound in CAPTURE_RECEIPT.json)"
+    },
+    {
+      "id": "D-02",
+      "defect": "Shared toolbar wrapped to 2 rows at 1440/1505 and 3 rows at 1024/800 once view tabs and 5 action chips were added.",
+      "severity": "V2",
+      "rootCause": "SURFACE_COMPOSITION",
+      "state": "CLOSED",
+      "evidence": "analysis/AUDIT_default.json toolbar.wrapRows 2-3 pre-fix -> 1 post-fix"
+    },
+    {
+      "id": "D-03",
+      "defect": ".rq, .rq-block and .rq-result-grid self-overflowed by 180-225px at <=1180.",
+      "severity": "V2",
+      "rootCause": "IMPLEMENTATION",
+      "state": "CLOSED",
+      "evidence": "analysis/AUDIT_default.json offenders pre-fix -> 0 post-fix"
+    },
+    {
+      "id": "D-04",
+      "defect": "RIGHT context tabs truncated labels (Overview +3px, Attributes +7px) at 1440/1505 LTR.",
+      "severity": "V1",
+      "rootCause": "SURFACE_COMPOSITION",
+      "state": "CLOSED",
+      "evidence": "analysis/AUDIT_default.json offenders pre-fix -> 0 post-fix"
+    },
+    {
+      "id": "D-05",
+      "defect": "Source-card anchor row wrapped and the compare table carried a redundant scope line; first screen ~400px taller than the reference block sequence.",
+      "severity": "V2",
+      "rootCause": "SURFACE_COMPOSITION",
+      "state": "CLOSED",
+      "evidence": "geometry probe .rq-source-meta 59px / stageScroll 327 -> 238 (RTL) and 393 -> 306 (LTR) at 1505x1045"
+    },
+    {
+      "id": "D-06",
+      "defect": "Keyboard activation of an action chip dropped focus to <body> when the chip disabled itself.",
+      "severity": "V1",
+      "rootCause": "SURFACE_COMPOSITION",
+      "state": "CLOSED",
+      "evidence": "analysis/KEYBOARD.json chip-enter pre-fix active=<body> -> post-focus active='Raise conflict'/'رفع تعارض'"
+    },
+    {
+      "id": "D-07",
+      "defect": "First contrast probe reported AA failures 1.27-2.99 for quote/tableHead/claim.",
+      "severity": "V2",
+      "rootCause": "EVIDENCE/ORACLE",
+      "state": "CLOSED",
+      "evidence": "probe ignored alpha in rgba/color(srgb); alpha-aware re-measure gives quote 13.86, tableHead 5.85, claim 14.08. Measurement defect, not a surface defect."
+    },
+    {
+      "id": "D-08",
+      "defect": "Session image-return channel serves stale bytes: a freshly generated 600x240 solid-colour canary PNG rendered back as an unrelated older screenshot.",
+      "severity": "V3",
+      "rootCause": "EVIDENCE/ORACLE",
+      "state": "OPEN (BLOCKER)",
+      "evidence": "evidence/look/canary_7391.png sha256 6d663a1f3c50d745..."
+    }
+  ],
+  "DEFECT_SEVERITY": {
+    "V0": 0,
+    "V1": 2,
+    "V2": 4,
+    "V3": 2,
+    "V4": 0,
+    "closed": 7,
+    "open": 1
+  },
+  "ROOT_CAUSE": {
+    "SURFACE_COMPOSITION": 4,
+    "EVIDENCE/ORACLE": 2,
+    "IMPLEMENTATION": 1,
+    "SHARED_COMPONENT": 1,
+    "SHARED_COMPONENT_NOTE": "D-01's mount entry point lives in writer-forbidden m0-controller-composition.ts; the surface side is fixed and the m0 hunk is FILED, NOT APPLIED — no shared file was edited outside my writable roots."
+  },
+  "FIXES_APPLIED": [
+    "New surface-owned composition (surfaces/rq/composition.ts): SHARED MECHANICS (CommandRegistry, region(), toolbar(), menu(), status(), pane hosts) + SURFACE-SPECIFIC COMPOSITION and PRESENTATION for all five regions.",
+    "New bilingual content model (adapters/rq/fixtures.ts): {ar,en} for every string, explicitly labelled PRESENTATION_FIXTURE_NOT_PRODUCT_SOURCE_REVISION_CORPUS so fixture density never masquerades as Product truth; provider truth from adapters/rq/domain.ts is untouched and still shown in the UI.",
+    "5 view commands (rq.view.*) rendered in the shared toolbar slot; 5 reconciliation actions (rq.action.*) rendered as work-area chips with state-based availability and reason tooltips.",
+    "D-02: action chips moved out of the shared toolbar into the work-area control row -> toolbar is 1 row (48px) at all four viewports.",
+    "D-03: stage child set to flex:0 0 auto; the stacked result arrow rotates the icon instead of the full-width container -> self-overflow 0.",
+    "D-04: .rq-tab flex:1 1 auto + 6px padding -> 0 truncated labels in both languages.",
+    "D-05: source date moved into the card header, digest kept in the anchor row, scope line removed from the compare table (retained in Claim register), table padding 11->9px.",
+    "D-06: restoreFocus() advances to the next enabled control in the same group when the just-activated control disables itself.",
+    "D-07: contrast probe rewritten with alpha-aware background compositing (rgba + color(srgb)).",
+    "Localized breadcrumb written into #topBanner .crumbs (Area > Surface > REV-SQLI-014); command labels re-synced on every locale change.",
+    "Settings-following refresh: workspace.onPreferences chained so language/direction changes re-render without clobbering any prior hook."
+  ],
+  "RECAPTURE_STATUS": "DONE — 3 capture rounds (baseline -> c1/c2 -> final); the final round is bound to the post-fix candidate. CAPTURE_RECEIPT.json retains superseded rounds, never deletes and never reuses them.",
+  "RECOMPARISON_STATUS": "DONE — L1/L2/L3/L4 re-executed after each targeted fix; final round reports 0 truncation offenders, 0 contrast failures, 1-row toolbar and no dead zone >6.1% of any region at all 4 viewports x 2 directions.",
+  "REGRESSION_STATUS": "PASS_WITH_PRE_EXISTING_AND_SIBLING_REDS. (a) npm test: 210/0, exit 0 (serialized lock). (b) npm run check: only browser.lineage_receipt_truthful, browser.current_candidate_claim_truthful and browser.targeted_visual_evidence fail; controller/12_execution/04_hotspot_register.md already records browser.current_candidate_claim_truthful as red while sibling writers move source, and those checks compare a stored receipt against the whole canonical tree, not against rq. (c) npm run browser:test re-run under the serialized lock: workspace.transient-and-pane-lifecycle PASS; the 5 failing flows are visualize/runs/relation flows outside this unit's writable roots (locators #objectList b6-rep-ku-d03-0001, spatial canvas bounds) and touch neither surfaces/rq nor adapters/rq. (d) ENVIRONMENT OBSERVATION at handoff: tools/check-build-authority.mjs currently fails with ERR_INVALID_TYPESCRIPT_SYNTAX at stack/native-typescript/surfaces/today/presentation.ts:161 (an unterminated CSS comment inside a template literal) — an in-flight edit by the today surface owner, outside my writable roots. It is NOT caused by this unit and is NOT fixed by it (read-only for me). Every dist/surfaces/rq/*.js and dist/adapters/rq/*.js artifact used for this unit's evidence was verified present, importable and matching the post-fix source (rq-chip, rq-headline and the focus-advance logic all present). (e) The rq route itself produced 0 pageErrors and 0 non-network console errors across 40 measured page loads.",
+  "EVIDENCE": [
+    {
+      "id": "final:1505x1045:rtl",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/evidence/final/1505x1045-rtl.png",
+      "sha256": "fec380c74ad9d18b36362f3c59106b274db9ee1547047381190e0f9024a42d1d",
+      "dims": "1505x1045",
+      "bytes": 341955,
+      "viewport": "1505x1045",
+      "direction": "rtl",
+      "domFacts": {
+        "dir": "rtl",
+        "lang": "ar",
+        "stageComposition": "rq",
+        "stageChild": "rq",
+        "rqNodes": 1,
+        "horizontalScroll": 0
+      },
+      "capturedAt": "2026-09-30T01:59:34.826Z",
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "final:1505x1045:ltr",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/evidence/final/1505x1045-ltr.png",
+      "sha256": "ea8d707fc0926f3781d1de03925ae1efcceac3bca51debdc97ae33840eb7994f",
+      "dims": "1505x1045",
+      "bytes": 392566,
+      "viewport": "1505x1045",
+      "direction": "ltr",
+      "domFacts": {
+        "dir": "ltr",
+        "lang": "en",
+        "stageComposition": "rq",
+        "stageChild": "rq",
+        "rqNodes": 1,
+        "horizontalScroll": 0
+      },
+      "capturedAt": "2026-09-30T01:59:38.491Z",
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "final:1440x1000:rtl",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/evidence/final/1440x1000-rtl.png",
+      "sha256": "1eb5134b10eab3682556ab5ae7a3d4942efd7cd8c24af00b10c151eea87b8df5",
+      "dims": "1440x1000",
+      "bytes": 315805,
+      "viewport": "1440x1000",
+      "direction": "rtl",
+      "domFacts": {
+        "dir": "rtl",
+        "lang": "ar",
+        "stageComposition": "rq",
+        "stageChild": "rq",
+        "rqNodes": 1,
+        "horizontalScroll": 0
+      },
+      "capturedAt": "2026-09-30T01:59:41.087Z",
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "final:1440x1000:ltr",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/evidence/final/1440x1000-ltr.png",
+      "sha256": "773f3109893d2d1004d1f7173fec57f61a8430b568811939528b22d55fd53dd0",
+      "dims": "1440x1000",
+      "bytes": 364908,
+      "viewport": "1440x1000",
+      "direction": "ltr",
+      "domFacts": {
+        "dir": "ltr",
+        "lang": "en",
+        "stageComposition": "rq",
+        "stageChild": "rq",
+        "rqNodes": 1,
+        "horizontalScroll": 0
+      },
+      "capturedAt": "2026-09-30T01:59:43.709Z",
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "final:1024x900:rtl",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/evidence/final/1024x900-rtl.png",
+      "sha256": "ac263237ff7fd909d97ad09bcca81d389f76725ed9375c2da1d12028b29ad602",
+      "dims": "1024x900",
+      "bytes": 224010,
+      "viewport": "1024x900",
+      "direction": "rtl",
+      "domFacts": {
+        "dir": "rtl",
+        "lang": "ar",
+        "stageComposition": "rq",
+        "stageChild": "rq",
+        "rqNodes": 1,
+        "horizontalScroll": 0
+      },
+      "capturedAt": "2026-09-30T01:59:46.207Z",
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "final:1024x900:ltr",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/evidence/final/1024x900-ltr.png",
+      "sha256": "c6a3032f38e65c36597b5cb7bbfbf12471be2619f39a693bc315e0cda8fd2be3",
+      "dims": "1024x900",
+      "bytes": 252913,
+      "viewport": "1024x900",
+      "direction": "ltr",
+      "domFacts": {
+        "dir": "ltr",
+        "lang": "en",
+        "stageComposition": "rq",
+        "stageChild": "rq",
+        "rqNodes": 1,
+        "horizontalScroll": 0
+      },
+      "capturedAt": "2026-09-30T01:59:48.737Z",
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "final:800x900:rtl",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/evidence/final/800x900-rtl.png",
+      "sha256": "68cae46d21aeb07185a5f087688075400da545221ad7c3f6c90e898765197015",
+      "dims": "800x900",
+      "bytes": 159652,
+      "viewport": "800x900",
+      "direction": "rtl",
+      "domFacts": {
+        "dir": "rtl",
+        "lang": "ar",
+        "stageComposition": "rq",
+        "stageChild": "rq",
+        "rqNodes": 1,
+        "horizontalScroll": 0
+      },
+      "capturedAt": "2026-09-30T01:59:51.280Z",
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "final:800x900:ltr",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/evidence/final/800x900-ltr.png",
+      "sha256": "9baa179102e53300cc27dbde31da5d508a3619d96fa2b6dbd11a816596772da9",
+      "dims": "800x900",
+      "bytes": 184064,
+      "viewport": "800x900",
+      "direction": "ltr",
+      "domFacts": {
+        "dir": "ltr",
+        "lang": "en",
+        "stageComposition": "rq",
+        "stageChild": "rq",
+        "rqNodes": 1,
+        "horizontalScroll": 0
+      },
+      "capturedAt": "2026-09-30T01:59:54.523Z",
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "sweep:view-claims-ltr",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/analysis/view-claims-ltr.png",
+      "sha256": "ba70c5c586b86290f76cfaba3b6ea24f151c88ed06e12c4adf5ad312182d5336",
+      "dims": "1505x1045",
+      "bytes": 387663,
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "sweep:view-claims-rtl",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/analysis/view-claims-rtl.png",
+      "sha256": "ce6fb90cd18c825056d4b2105419b79e0015d35337389227d39077bb1f56511d",
+      "dims": "1505x1045",
+      "bytes": 310018,
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "sweep:view-compare-ltr",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/analysis/view-compare-ltr.png",
+      "sha256": "7abef20f06c66ddc2d3a9db7378de46305f1aaa8df6a215b600be0e6d3fdcee8",
+      "dims": "1505x1045",
+      "bytes": 392728,
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "sweep:view-compare-rtl",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/analysis/view-compare-rtl.png",
+      "sha256": "597b5662411ea53a989fe4386762432c9217fcb1269e5ba86749df997c75a6bc",
+      "dims": "1505x1045",
+      "bytes": 341930,
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "sweep:view-history-ltr",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/analysis/view-history-ltr.png",
+      "sha256": "83ac8227487aafcbacbf7cd559ebe2b58a6799cd3c616425506df7227643366f",
+      "dims": "1505x1045",
+      "bytes": 315464,
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "sweep:view-history-rtl",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/analysis/view-history-rtl.png",
+      "sha256": "3c0ac9a1c7f8e8db170d631f985a7d0d4e9219a9eb4a73712c18c5fbf935a84a",
+      "dims": "1505x1045",
+      "bytes": 257058,
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "sweep:view-provenance-ltr",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/analysis/view-provenance-ltr.png",
+      "sha256": "71e96e7fdb22a1b7b2bb07ecbab63a76856f8009b5a10e40b9c255150a5497d7",
+      "dims": "1505x1045",
+      "bytes": 342025,
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "sweep:view-provenance-rtl",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/analysis/view-provenance-rtl.png",
+      "sha256": "9d9eb1f27db123a34e6945349590c7eaeb5e69492331e69c13e177ca452a72aa",
+      "dims": "1505x1045",
+      "bytes": 287043,
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "sweep:view-revision-ltr",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/analysis/view-revision-ltr.png",
+      "sha256": "aa9e14edef40914eac4c447252c779767ed63b4dfbcd2e7bb1a7482395ff3adf",
+      "dims": "1505x1045",
+      "bytes": 314032,
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "sweep:view-revision-rtl",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/analysis/view-revision-rtl.png",
+      "sha256": "5c0cc7d5a89339559660e86b8414df8680da98bd97d35d458572103b808e7935",
+      "dims": "1505x1045",
+      "bytes": 256228,
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "sweep:collapsed-ltr",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/analysis/collapsed-ltr.png",
+      "sha256": "7eb4e191872a8d1591b5e44155d46cbf74ce5a2ddce9afb67add1dcef9961f3d",
+      "dims": "1505x1045",
+      "bytes": 171865,
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "sweep:collapsed-rtl",
+      "kind": "EVIDENCE_SCREENSHOT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/analysis/collapsed-rtl.png",
+      "sha256": "069fa8bba66774535532ad0ddc1931001128ed35129e0ce0436b152824a5a56f",
+      "dims": "1505x1045",
+      "bytes": 155564,
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "artifact:analysis/AUDIT_default.json",
+      "kind": "MEASUREMENT_ARTIFACT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/analysis/AUDIT_default.json",
+      "sha256": "8783f8c79f46f54d5679bd074d5d6ac163c30770ed429f0e8af51ebb75daf00b",
+      "bytes": 120778,
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "artifact:analysis/AUDIT_VIEWS.json",
+      "kind": "MEASUREMENT_ARTIFACT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/analysis/AUDIT_VIEWS.json",
+      "sha256": "01b2ade055ba47240efb7bb3a2c8c71f0ddeca4741c5c632bb59d5db7309ee4e",
+      "bytes": 14184,
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "artifact:analysis/KEYBOARD.json",
+      "kind": "MEASUREMENT_ARTIFACT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/analysis/KEYBOARD.json",
+      "sha256": "b07972e9f95ba3361fdbe0f2a09bfcbad99ab17e23b7b5042f4173b451d4fe7e",
+      "bytes": 1018,
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "artifact:evidence/final/DENSITY.json",
+      "kind": "MEASUREMENT_ARTIFACT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/evidence/final/DENSITY.json",
+      "sha256": "0956c3c5e2680bed5efd83b08e3bca35e8567caced602b6419930ccda88dbef3",
+      "bytes": 18444,
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "artifact:CAPTURE_RECEIPT.json",
+      "kind": "MEASUREMENT_ARTIFACT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/CAPTURE_RECEIPT.json",
+      "sha256": "69ba1d6b2117d44ef6dd0c49a8cea032f1075223358e4e043ed0fd08b96a5529",
+      "bytes": 22399,
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "artifact:SERIALIZED_HOTSPOT_REQUEST.md",
+      "kind": "MEASUREMENT_ARTIFACT",
+      "path": "writer-output/W02-RESEARCH-QUALITY/SERIALIZED_HOTSPOT_REQUEST.md",
+      "sha256": "ad38c3ddf618af446f369952921a3c0cfe70989265abe2cd1283f2aa63d47c21",
+      "bytes": 5667,
+      "referenceAuthorityInRecord": "CANDIDATE__AUTHORITY_UNRESOLVED"
+    }
+  ],
+  "LINEAGE": {
+    "reference": {
+      "path": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/04_RESEARCH_AND_QUALITY/image-gen-1(20260813-194728).png",
+      "sha256": "312bf193216402f8c16fb8c2bca424fa453d961e31f818ac0183cdf8e7b380c8",
+      "dims": "1505x1045",
+      "classification": "CANDIDATE__AUTHORITY_UNRESOLVED",
+      "role": "CONSTRUCTION AUTHORITY — never placed into evidence"
+    },
+    "candidate": {
+      "ownedPartition": "OWNED_PARTITION_SHA256:64b7bacf6b41bb0f98a57c715393aaa396bda7cf689cef857e6c892094e596f1",
+      "commit": "f5222cab89095e1608c702fe8c29bc715fb9a383",
+      "tree": "f310dd6e7db6cfeed37a5665dde8e44a1ac06cec",
+      "branch": "writer/mi-serial"
+    },
+    "environment": "dist/ built by tools/writer-serial.sh npm run build:runtime; served by tools/serve.mjs on http://localhost:4173; viewports 1505x1045 (reference-matched), 1440x1000, 1024x900, 800x900; deviceScaleFactor 1; language/direction set through the real preference seam",
+    "captureTool": "writer-output/W02-RESEARCH-QUALITY/capture.mjs (Playwright) -> writer-output/W02-RESEARCH-QUALITY/CAPTURE_RECEIPT.json",
+    "measurementTools": [
+      "writer-output/W02-RESEARCH-QUALITY/analyze.mjs",
+      "writer-output/W02-RESEARCH-QUALITY/analyze-views.mjs",
+      "writer-output/W02-RESEARCH-QUALITY/density.py",
+      "writer-output/W02-RESEARCH-QUALITY/keyboard.mjs",
+      "tesseract OCR"
+    ],
+    "supersededEvidenceRetained": [
+      "evidence/baseline/**",
+      "evidence/c1/**",
+      "evidence/c2/**"
+    ],
+    "note": "Every capture is bound to candidate + commit/tree + viewport + direction + timestamp + image identity (path + sha256 + dims + bytes); receipt hashes were re-verified against the files on disk."
+  },
+  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED — Writers cannot accept their own work. Sole Controller review required; independent vision confirmation of D-08 and repair of the sibling today build break (b4) should be part of it.",
+  "BLOCKERS": [
+    {
+      "id": "b1",
+      "severity": "V3",
+      "kind": "EVIDENCE/ORACLE",
+      "statement": "The session image-return channel is stale: reading a freshly written PNG returns an unrelated older screenshot (verified with evidence/look/canary_7391.png, sha256 6d663a1f3c50d745..., 600x240, which rendered back as a full-app screenshot). visual-fidelity-review R3 therefore cannot be satisfied by this Writer, and no unverified image read supports any claim here. Mitigation: every visual claim is backed by hash-bound pixel metrics, DOM geometry/contrast probes and tesseract OCR of both reference and candidate. Required: Controller-side vision confirmation of the final captures before acceptance."
+    },
+    {
+      "id": "b2",
+      "severity": "V1",
+      "kind": "ARCHITECTURE",
+      "statement": "The rq route's mount entry point is inside writer-forbidden surfaces/m0-controller-composition.ts, so the surface reaches the stage through a guarded deferred mount (double rAF, guarded on #foundationStage[data-m0-composition=rq]). The canonical hunk is filed, not applied: writer-output/W02-RESEARCH-QUALITY/SERIALIZED_HOTSPOT_REQUEST.md (slot 3, W02 kernels). No shared file was edited outside my writable roots."
+    },
+    {
+      "id": "b3",
+      "severity": "V1",
+      "kind": "STALE_DECISION",
+      "statement": "The candidate's centre scrolls ~238px (RTL) / 306px (LTR) past the fold at the reference viewport because it carries the reference's full information model plus explicit truth chips, while the reference mock fits on one screen. The first screen shows identity + control row + the full source pair + the claim-table header and first rows; the review-result block is one scroll away. Recorded as a deliberate density trade-off for the Controller to adjudicate, not hidden."
+    },
+    {
+      "id": "b4",
+      "severity": "V2",
+      "kind": "ARCHITECTURE",
+      "statement": "At handoff the shared build seam is red for a non-rq reason: surfaces/today/presentation.ts:161 fails ERR_INVALID_TYPESCRIPT_SYNTAX, so tools/build-runtime.mjs aborts part-way. dist/ therefore still carries the last successful rq output (verified importable and post-fix) but a fresh full build cannot complete until the today owner repairs their file. Serialized build lock was used for every build this unit ran; no file outside surfaces/rq/ and adapters/rq/ was written by this unit."
+    }
+  ]
+}

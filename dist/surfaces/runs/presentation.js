@@ -1,30 +1,265 @@
-const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-const ltr=value=>`<bdi dir="ltr">${esc(value)}</bdi>`;
-const stateTone=value=>['RUNNING','READY','PASS','HEALTHY','CONNECTED'].includes(String(value))?'success':['BLOCKED','FAILED','DISCONNECTED'].includes(String(value))?'danger':['PAUSED','WARNING','ADVISORY'].includes(String(value))?'warning':'neutral';
-const actionButton=(id,label,enabled=true,extra='')=>`<button class="btn runs-action" type="button" data-command="${esc(id)}" ${enabled?'':'disabled'} ${extra}>${esc(label)}</button>`;
-const style=`<style data-runs-local-style>
-.runs-workspace{display:grid;grid-template-rows:auto auto auto minmax(0,1fr) auto;min-height:620px;height:100%;background:var(--surface,#121820);color:var(--text,#e8edf3);border:1px solid var(--border,#2c3541);border-radius:12px;overflow:hidden;font:inherit}.runs-workspace *{box-sizing:border-box}.runs-top{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--border,#2c3541);background:rgba(255,255,255,.018)}.runs-title{display:flex;gap:10px;align-items:center;min-width:0}.runs-title strong{font-size:15px}.runs-title small{opacity:.72}.runs-actions,.runs-modes{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.runs-mode{border:0;background:transparent;color:inherit;padding:9px 12px;border-bottom:2px solid transparent;cursor:pointer}.runs-mode[aria-selected="true"]{border-bottom-color:currentColor;background:rgba(255,255,255,.055)}.runs-summary{display:grid;margin:0;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;padding:10px 14px;border-bottom:1px solid var(--border,#2c3541)}.runs-summary div{min-width:0}.runs-summary dt{font-size:11px;opacity:.62}.runs-summary dd{margin:2px 0 0;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.runs-grid{display:grid;grid-template-columns:minmax(190px,230px) minmax(440px,1fr) minmax(240px,300px);min-height:0}.runs-left,.runs-right{padding:12px;overflow:auto;background:rgba(255,255,255,.012)}.runs-left{border-inline-end:1px solid var(--border,#2c3541)}.runs-right{border-inline-start:1px solid var(--border,#2c3541)}.runs-center{padding:14px;overflow:auto;min-width:0}.runs-nav{display:grid;gap:5px}.runs-nav button{width:100%;text-align:start;border:0;background:transparent;color:inherit;padding:8px 9px;border-radius:7px;cursor:pointer}.runs-nav button[aria-current="page"]{background:rgba(255,255,255,.075);font-weight:650}.runs-kicker{font-size:11px;text-transform:uppercase;letter-spacing:.08em;opacity:.6;margin-bottom:8px}.runs-card{border:1px solid var(--border,#2c3541);border-radius:10px;padding:11px;background:rgba(255,255,255,.025);margin-bottom:10px}.runs-card h3,.runs-card h4{margin:0 0 8px;font-size:13px}.runs-card p{margin:6px 0;line-height:1.45}.runs-card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.runs-facts{display:grid;grid-template-columns:minmax(120px,.8fr) minmax(0,1.2fr);gap:7px 10px;margin:0}.runs-facts dt{font-size:11px;opacity:.64}.runs-facts dd{margin:0;overflow-wrap:anywhere}.runs-table{width:100%;border-collapse:collapse;font-size:12px}.runs-table th,.runs-table td{text-align:start;padding:8px;border-bottom:1px solid var(--border,#2c3541);vertical-align:top}.runs-table tbody tr[data-select]{cursor:pointer}.runs-table tbody tr[aria-selected="true"]{background:rgba(255,255,255,.06)}.runs-pill{display:inline-flex;align-items:center;gap:5px;border:1px solid currentColor;border-radius:999px;padding:2px 7px;font-size:10px;white-space:nowrap}.runs-pill[data-tone="success"]{opacity:1}.runs-pill[data-tone="warning"]{opacity:.85}.runs-pill[data-tone="danger"]{font-weight:700}.runs-pill[data-tone="neutral"]{opacity:.68}.runs-readiness{display:grid;gap:7px}.runs-check{display:grid;grid-template-columns:auto minmax(0,1fr);gap:9px;align-items:start;padding:8px;border:1px solid var(--border,#2c3541);border-radius:8px}.runs-events{display:grid;gap:7px}.runs-event{display:grid;grid-template-columns:70px minmax(120px,.7fr) minmax(0,1.8fr);gap:8px;padding:8px 0;border-bottom:1px solid var(--border,#2c3541);font-size:12px}.runs-device-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}.runs-device{border:1px solid var(--border,#2c3541);border-radius:10px;padding:11px}.runs-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 14px;border-top:1px solid var(--border,#2c3541);background:rgba(255,255,255,.018);font-size:12px}.runs-status{min-height:1.4em}.runs-truth-warning{padding:8px;border-inline-start:3px solid currentColor;background:rgba(255,255,255,.035);font-size:12px;line-height:1.45}.runs-muted{opacity:.68}.runs-workspace[dir="rtl"] .runs-table th,.runs-workspace[dir="rtl"] .runs-table td{text-align:right}@media(max-width:1100px){.runs-summary{grid-template-columns:repeat(3,minmax(0,1fr))}.runs-grid{grid-template-columns:180px minmax(380px,1fr) 240px}.runs-card-grid{grid-template-columns:1fr}}@media(max-width:840px){.runs-grid{grid-template-columns:1fr}.runs-left,.runs-right{border:0;border-bottom:1px solid var(--border,#2c3541);max-height:190px}.runs-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.runs-actions{justify-content:flex-start}.runs-top{align-items:flex-start;flex-direction:column}}
-</style>`;
+/**
+ * W03-RUNS presentation orchestrator.
+ *
+ * Composes the Run operations workspace: lifecycle action bar, run identity strip, the
+ * operational telemetry workbench (or preparation / timeline / topology projections), the
+ * terminal deep-work tray and the runtime-truth status line — plus the shell LEFT "Run
+ * Structure" and RIGHT context regions when a workspace handle is supplied.
+ *
+ * Composition, hierarchy, density and emphasis are surface-specific; only mechanics (command
+ * bus, panes, terminal host) are shared. Nothing here fabricates run, terminal or persistence
+ * success — unavailable platform capability is reported as UNVERIFIED_PLATFORM_GATE.
+ */
+import {RUNS_STYLE} from './styles.js';
+import {runsT,runsLocale} from './i18n.js';
+import {esc,ltr,pill,icon,stateTone} from './util.js';
+import {renderView} from './views.js';
+import {runsLeftRegion,runsRightRegion} from './regions.js';
 
-export function renderRunsSurface(root,composition,{dir='ltr',initialMode='operations'}={}){
- if(!root||!composition)throw Error('RUNS_PRESENTATION_INPUT_REQUIRED');
- root.dir=dir;root.dataset.surface='runs';
- let mode=['preflight','operations','timeline','topology'].includes(initialMode)?initialMode:'operations';
- let nav='telemetry';
- let selectedAlertId=null;
- let statusMessage='InternalSimulationAdapter is the active runtime truth. Real Windows terminal proof remains a separate platform gate.';
- const execute=(id,payload={})=>{try{const result=composition.bus.execute(id,payload);if(result?.ok===false){statusMessage=`${result.code}: ${result.reason||'Command unavailable.'}`;return result}statusMessage=`${id} completed through ${composition.domain.owner}.`;return result}catch(error){statusMessage=`${error?.code||'ERROR'}: ${error?.message||String(error)}`;return {ok:false,error}}};
- const renderPreflight=workspace=>{const p=workspace.preflight,source=p.source;return `<div class="runs-card-grid"><section class="runs-card"><h3>Source Definition</h3><dl class="runs-facts"><dt>Definition</dt><dd>${ltr(source.definitionId)}</dd><dt>Revision</dt><dd>${ltr(source.definitionRevision)}</dd><dt>Baseline</dt><dd>${ltr(source.baselineId)}</dd><dt>Twin revision</dt><dd>${ltr(source.twinRevision)}</dd><dt>Run type</dt><dd>${esc(source.runType)}</dd><dt>Mode / policy</dt><dd>${esc(source.mode)}</dd></dl></section><section class="runs-card"><h3>Frozen Run Manifest</h3><dl class="runs-facts"><dt>Manifest</dt><dd>${ltr(workspace.manifest.id)}</dd><dt>Input digest</dt><dd>${ltr(workspace.manifest.inputDigest)}</dd><dt>Seed</dt><dd>${ltr(workspace.manifest.seed)}</dd><dt>Runtime</dt><dd>${ltr(workspace.manifest.engine)}</dd><dt>Isolation</dt><dd>${ltr(workspace.manifest.isolationScope)}</dd><dt>Immutability</dt><dd>Object-scoped; the Runs workspace remains interactive.</dd></dl></section></div><section class="runs-card"><h3>Readiness Checks <span class="runs-pill" data-tone="${stateTone(p.status)}">${esc(p.status)}</span></h3><div class="runs-readiness">${p.checks.map(check=>`<div class="runs-check"><span class="runs-pill" data-tone="${stateTone(check.status)}">${esc(check.status)}</span><div><strong>${esc(check.label)}</strong><div class="runs-muted">${esc(check.detail)}</div></div></div>`).join('')}</div></section><section class="runs-truth-warning">Preflight is a no-write projection. Start remains bound to the frozen manifest input digest and current provider epoch. A mutable source revision cannot rewrite this Run's manifest.</section>`};
- const renderOperations=workspace=>{const alerts=workspace.alerts,selected=alerts.find(item=>item.id===selectedAlertId)||alerts[0];selectedAlertId=selected?.id||null;return `<section class="runs-card"><div class="runs-kicker">Active operations</div><h3>Detection & Operational Facts</h3><table class="runs-table"><thead><tr><th>Time</th><th>Alert</th><th>Source</th><th>Severity</th><th>Status</th></tr></thead><tbody>${alerts.map(item=>`<tr data-select="${esc(item.id)}" aria-selected="${item.id===selectedAlertId?'true':'false'}"><td>${ltr(item.time)}</td><td><strong>${esc(item.title)}</strong><div class="runs-muted">${esc(item.sub)}</div></td><td>${esc(item.source)}</td><td><span class="runs-pill" data-tone="${item.sev==='High'?'danger':item.sev==='Medium'?'warning':'neutral'}">${esc(item.sev)}</span></td><td>${esc(item.status)}</td></tr>`).join('')}</tbody></table></section><section class="runs-card"><h3>Observed runtime events</h3><div class="runs-events">${workspace.events.slice(0,6).map(event=>`<div class="runs-event"><span>${ltr(event.time)}</span><strong>${esc(event.source)}</strong><span>${esc(event.type)} · ${esc(event.detail)}</span></div>`).join('')}</div>${workspace.gaps.length?`<div class="runs-truth-warning">${workspace.gaps.length} recorded sequence gap(s) are explicit; no causal order was invented.</div>`:''}</section>${selected?`<section class="runs-card"><h3>Selected alert</h3><dl class="runs-facts"><dt>ID</dt><dd>${ltr(selected.id)}</dd><dt>Rule</dt><dd>${ltr(selected.rule)}</dd><dt>Technique</dt><dd>${esc(selected.technique)}</dd><dt>Request</dt><dd>${ltr(`${selected.method} ${selected.uri}`)}</dd><dt>Source IP</dt><dd>${ltr(selected.ip)}</dd><dt>Fact</dt><dd>${esc(selected.detail)}</dd></dl></section>`:''}`};
- const renderTimeline=workspace=>`<section class="runs-card"><h3>Run Timeline · observed order</h3><p class="runs-muted">This surface presents recorded facts only. Generic replay mechanics belong to the shared TimelineReplay owner and are not forked here.</p><div class="runs-events">${workspace.events.map(event=>`<div class="runs-event"><span>${ltr(`#${event.seq}`)}</span><strong>${esc(event.type)}</strong><span>${esc(event.detail)} · ${ltr(event.actor)}</span></div>`).join('')}</div>${workspace.gaps.length?`<div class="runs-truth-warning">Gap markers: ${workspace.gaps.map(gap=>ltr(`${gap.missingFrom}..${gap.missingTo}`)).join(', ')}</div>`:'<div class="runs-truth-warning">No sequence gap is present in this bounded fixture. Observed order is still preserved rather than reconstructed.</div>'}</section>`;
- const renderTopology=workspace=>`<section class="runs-card"><h3>Runtime Objects & Tools</h3><p class="runs-muted">InternalSimulationAdapter owns simulated runtime semantics. OperationalSessionOwner and OperationalTerminalHost own terminal presentation.</p><div class="runs-device-grid">${workspace.devices.map(device=>`<article class="runs-device"><div class="runs-kicker">${esc(device.type||'SIMULATED_DEVICE')}</div><h4>${esc(device.name)}</h4><p>${ltr(device.id)} · <span class="runs-pill" data-tone="${device.up===false?'danger':'success'}">${device.up===false?'DOWN':'UP'}</span></p>${actionButton('OPEN_TERMINAL','Open terminal',workspace.run.lifecycle==='RUNNING'&&composition.domain.runtime.capable(device.id),`data-device="${esc(device.id)}"`)}</article>`).join('')}</div></section>`;
- const renderRight=workspace=>{const truth=composition.domain.truth(),selected=workspace.alerts.find(item=>item.id===selectedAlertId)||workspace.alerts[0];return `<div class="runs-kicker">Context Inspector</div><section class="runs-card"><h3>Runtime truth</h3><dl class="runs-facts"><dt>Provider</dt><dd>${ltr(truth.provider)}</dd><dt>Runtime truth</dt><dd>${ltr(truth.runtimeTruth)}</dd><dt>Connection</dt><dd><span class="runs-pill" data-tone="${stateTone(truth.providerConnected?'CONNECTED':'DISCONNECTED')}">${truth.providerConnected?'CONNECTED':'DISCONNECTED'}</span></dd><dt>Provider epoch</dt><dd>${ltr(truth.providerEpoch)}</dd><dt>PTY</dt><dd>${esc(truth.pty)}</dd><dt>PowerShell</dt><dd>${esc(truth.powershell)}</dd><dt>SSH</dt><dd>${esc(truth.ssh)}</dd><dt>Native window</dt><dd>${esc(truth.nativeWindow)}</dd></dl></section>${selected?`<section class="runs-card"><h3>Selected fact</h3><p><strong>${esc(selected.title)}</strong></p><p>${esc(selected.detail)}</p><p class="runs-muted">Source: ${esc(selected.source)} · provenance: ${esc(workspace.identity.provenance)}</p></section>`:''}<section class="runs-truth-warning">Real ConPTY, Windows input-layout, HWND and OS topmost claims remain unverified here. This candidate does not alter or certify the Windows platform provider.</section>`};
- const draw=()=>{const workspace=composition.domain.workspace(),run=workspace.run,canPause=run.lifecycle==='RUNNING',canResume=run.lifecycle==='PAUSED',canStop=['RUNNING','PAUSED'].includes(run.lifecycle);const center=mode==='preflight'?renderPreflight(workspace):mode==='timeline'?renderTimeline(workspace):mode==='topology'?renderTopology(workspace):renderOperations(workspace);root.innerHTML=`${style}<section class="runs-workspace" dir="${esc(dir)}" aria-label="Runs operational workspace"><header class="runs-top"><div class="runs-title"><div><strong>${esc(workspace.identity.title)}</strong><small> · ${ltr(workspace.identity.runId)}</small></div><span class="runs-pill" data-tone="${stateTone(run.lifecycle)}">${esc(run.lifecycle)}</span><span class="runs-pill" data-tone="success">${ltr(workspace.provider.runtimeTruth)}</span></div><div class="runs-actions">${actionButton('runs.pause','Pause',canPause)}${actionButton('runs.resume','Resume',canResume)}${actionButton('runs.stop','End Run',canStop)}</div></header><nav class="runs-modes" aria-label="Runs workspace modes">${[['preflight','Preflight'],['operations','Operations'],['timeline','Timeline'],['topology','Topology']].map(([id,label])=>`<button class="runs-mode" type="button" role="tab" data-mode="${id}" aria-selected="${mode===id?'true':'false'}">${label}</button>`).join('')}</nav><dl class="runs-summary"><div><dt>Phase</dt><dd>${esc(workspace.identity.phase)}</dd></div><div><dt>Role</dt><dd>${esc(workspace.identity.role)}</dd></div><div><dt>Current task</dt><dd>${esc(workspace.identity.task)}</dd></div><div><dt>Manifest</dt><dd>${ltr(workspace.manifest.id)}</dd></div><div><dt>Provider</dt><dd>${ltr(workspace.provider.id)}</dd></div><div><dt>Health</dt><dd>${esc(workspace.identity.health)}</dd></div></dl><div class="runs-grid"><aside class="runs-left"><div class="runs-kicker">Run Structure</div><div class="runs-nav">${[['overview','Overview'],['scenario','Scenario Timeline'],['tasks','Tasks'],['devices','Devices'],['events','Events & Injects'],['telemetry','Telemetry'],['observations','Observations'],['artifacts','Artifacts']].map(([id,label])=>`<button type="button" data-nav="${id}" aria-current="${nav===id?'page':'false'}">${label}</button>`).join('')}</div><section class="runs-card" style="margin-top:12px"><h4>Tasks</h4>${workspace.tasks.map(task=>`<p><span class="runs-pill" data-tone="${task.status==='ACTIVE'?'success':'neutral'}">${esc(task.status)}</span> ${esc(task.label)}</p>`).join('')}</section></aside><main class="runs-center" tabindex="-1" data-runs-center>${center}</main><aside class="runs-right">${renderRight(workspace)}</aside></div><footer class="runs-bottom"><div><strong>Deep operational work:</strong> ${esc(workspace.terminalPresentationOwner)} <span class="runs-muted">· terminal sessions are temporary workspace context, not Run completion.</span></div><div class="runs-status" role="status" aria-live="polite" tabindex="-1" data-status>${esc(statusMessage)}</div></footer></section>`;
-  root.querySelectorAll('[data-mode]').forEach(button=>button.addEventListener('click',()=>{mode=button.dataset.mode;draw();root.querySelector('[data-runs-center]')?.focus()}));
-  root.querySelectorAll('[data-nav]').forEach(button=>button.addEventListener('click',()=>{nav=button.dataset.nav;statusMessage=`Runs structure context: ${button.textContent?.trim()||nav}.`;draw()}));
-  root.querySelectorAll('[data-select]').forEach(row=>row.addEventListener('click',()=>{selectedAlertId=row.dataset.select;draw()}));
-  root.querySelectorAll('[data-command]').forEach(button=>button.addEventListener('click',()=>{const id=button.dataset.command,payload={};if(button.dataset.device)payload.deviceId=button.dataset.device;if(id==='runs.pause'||id==='runs.resume'||id==='runs.stop')payload.invocationId=`ui-${id}-${Date.now()}`;execute(id,payload);draw()}));
- };
- draw();
- return {refresh:draw,focus:()=>root.querySelector('[data-runs-center]')?.focus(),setMode:value=>{if(['preflight','operations','timeline','topology'].includes(value)){mode=value;draw()}},mode:()=>mode};
+const MODES=[['operations','operations'],['preflight','preflight'],['timeline','timeline'],['topology','topology']];
+const MODE_DEFAULT_VIEW={operations:'telemetry',preflight:'preflight',timeline:'timeline',topology:'devices'};
+const VIEW_MODE={telemetry:'operations',tasks:'operations',events:'operations',observations:'operations',artifacts:'operations',overview:'operations',preflight:'preflight',timeline:'timeline',devices:'topology'};
+const mounts=new WeakMap();
+let activeController=null;
+let delegated=false;
+
+const ensureStyle=doc=>{
+  if(doc.getElementById('runs-local-style'))return;
+  const holder=doc.createElement('div');holder.innerHTML=RUNS_STYLE;
+  const node=holder.firstElementChild;if(node){node.id='runs-local-style';doc.head.appendChild(node)}
+};
+
+function collectPreserved(root){
+  const box=root.__runsPreserved||(root.__runsPreserved={});
+  if(!box.spatial){box.heading=root.querySelector('.domain-heading');box.spatial=root.querySelector('#spatialHost');box.domainView=root.querySelector('#domainView');box.terminal=root.querySelector('#operationalHost')}
+  return box;
+}
+function detachPreserved(root){
+  const box=collectPreserved(root);
+  for(const node of [box.heading,box.spatial,box.domainView,box.terminal])if(node&&node.parentNode===root)root.removeChild(node);
+  return box;
+}
+function restorePreserved(root,box,terminalTray){
+  for(const node of [box.heading,box.spatial,box.domainView]){
+    if(!node)continue;
+    node.style.display='none';node.setAttribute('aria-hidden','true');node.inert=true;node.hidden=true;
+    if(node.parentNode!==root)root.appendChild(node);
+  }
+  if(box.terminal){
+    if(terminalTray&&box.terminal.parentNode!==terminalTray)terminalTray.appendChild(box.terminal);
+    else if(box.terminal.parentNode!==root)root.appendChild(box.terminal);
+  }
+}
+
+export function renderRunsSurface(root,composition,{dir=null,locale=null,initialMode='operations',initialView=null,regions='shell',workspace=null}={}){
+  if(!root||!composition)throw Error('RUNS_PRESENTATION_INPUT_REQUIRED');
+  const domain=composition.domain;
+  const prior=mounts.get(root);
+  if(prior&&prior.composition===composition){prior.api.rebind({dir,locale,regions,workspace});prior.draw();return prior.api}
+  ensureStyle(root.ownerDocument||document);
+
+  let boundDir=dir,boundLocale=locale,boundRegions=regions,boundWorkspace=workspace;
+  const state={
+    mode:MODES.some(([id])=>id===initialMode)?initialMode:'operations',
+    view:initialView||MODE_DEFAULT_VIEW[initialMode==='operations'?'operations':initialMode]||'telemetry',
+    source:'ALL',highOnly:false,selectedId:null,detailTab:'timeline',query:'',highlight:false,overflow:false
+  };
+  let statusMessage='';
+  let statusTone='';
+
+  const dirOf=()=>{
+    const doc=root.ownerDocument||document;
+    if(boundDir)return boundDir;
+    return doc.documentElement.dir||doc.body.dir||'ltr';
+  };
+  const localeOf=()=>boundLocale||runsLocale(root.ownerDocument||document);
+  const avail=(id,payload={})=>{try{return composition.bus.availability(id,payload)}catch{return {enabled:false,reason:'Command unavailable',code:'ERROR'}}};
+  const execute=(id,payload={})=>{
+    try{
+      const result=composition.bus.execute(id,payload);
+      if(result&&result.ok===false){statusMessage=`${result.code||id}: ${result.reason||'Command refused.'}`;statusTone='error';return result}
+      statusMessage=`${id} · ${result?.after||result?.status||result?.runtimeTruth||'receipt recorded'} · ${domain.owner}`;
+      statusTone='ok';return result;
+    }catch(error){statusMessage=`${error?.code||'ERROR'}: ${error?.message||String(error)}`;statusTone='error';return {ok:false,error}}
+  };
+
+  const facts=w=>{
+    const t=runsT(localeOf());
+    return `<dl class="runs-facts">
+      <div class="runs-fact"><dt>${esc(t.identity.phase)}</dt><dd>${esc(w.identity.phase)}</dd></div>
+      <div class="runs-fact"><dt>${esc(t.identity.role)}</dt><dd>${esc(w.identity.role)}</dd></div>
+      <div class="runs-fact" data-emphasis="on"><dt>${esc(t.identity.task)}</dt><dd title="${esc(w.identity.task)}">${esc(w.identity.task)}</dd></div>
+      <div class="runs-fact"><dt>${esc(t.identity.health)}</dt><dd>${pill(w.identity.health,stateTone(w.identity.health))}</dd></div>
+    </dl>`;
+  };
+  const actions=(w,t)=>{
+    const lifecycle=w.run.lifecycle;
+    const running=lifecycle==='RUNNING',paused=lifecycle==='PAUSED',active=running||paused;
+    const start=avail('runs.start'),prepare=avail('runs.prepare');
+    const buttons=active
+      ? [
+          `<button class="runs-btn" type="button" data-command="${running?'runs.pause':'runs.resume'}" data-icon>${icon(running?'pause':'play',12)}${esc(running?t.actions.pause:t.actions.resume)}</button>`,
+          `<button class="runs-btn" type="button" data-kind="danger" data-command="runs.stop" data-icon>${icon('stop',12)}${esc(t.actions.stop)}</button>`,
+          `<button class="runs-btn" type="button" data-command="runs.captureSnapshot" data-icon>${icon('camera',12)}${esc(t.actions.snapshot)}</button>`
+        ]
+      : [
+          `<button class="runs-btn" type="button" data-kind="primary" data-command="runs.start" data-icon ${start.enabled?'':'disabled title="'+esc(start.reason||'')+'"'}>${icon('play',12)}${esc(t.actions.start)}</button>`,
+          `<button class="runs-btn" type="button" data-command="runs.prepare" data-icon ${prepare.enabled?'':'disabled title="'+esc(prepare.reason||'')+'"'}>${icon('layers',12)}${esc(t.actions.prepare)}</button>`,
+          `<button class="runs-btn" type="button" data-command="runs.preflight" data-icon>${icon('shield',12)}${esc(t.actions.preflight)}</button>`
+        ];
+    buttons.push(`<button class="runs-btn" type="button" data-overflow data-icon aria-haspopup="menu" aria-expanded="${state.overflow?'true':'false'}" aria-label="${esc(t.actions.more)}">${icon('list',12)}</button>`);
+    const overflow=`<div class="runs-menu" role="menu" ${state.overflow?'':'hidden'}>
+      <button class="runs-menuitem" role="menuitem" type="button" data-view="preflight">${icon('shield',12)}${esc(t.actions.preflight)}</button>
+      <button class="runs-menuitem" role="menuitem" type="button" data-command="runs.captureSnapshot" ${active?'':'disabled'}>${icon('camera',12)}${esc(t.actions.snapshot)}</button>
+      <button class="runs-menuitem" role="menuitem" type="button" data-command="runs.seal">${icon('archive',12)}${esc(localeOf()==='ar'?'معاينة الختم':'Seal handoff preview')}</button>
+      <button class="runs-menuitem" role="menuitem" type="button" data-command="view.recorded">${icon('eye',12)}${esc(localeOf()==='ar'?'عرض الحقيقة المسجّلة':'View recorded truth')}</button>
+      <div class="runs-menuhint">${esc(t.right.platformNote)}</div></div>`;
+    return `<div class="runs-actions">${buttons.join('')}${overflow}</div>`;
+  };
+  const identity=w=>{
+    const t=runsT(localeOf());
+    const title=localeOf()==='ar'&&w.identity.titleAr?w.identity.titleAr:w.identity.title;
+    return `<header class="runs-identity">
+      <span class="runs-idmark">${icon('activity',17)}</span>
+      <div class="runs-idmain"><h1>${esc(title)}</h1>
+        <div class="runs-idsub">${ltr(w.identity.runId)} · ${esc(w.identity.runType)} ${pill(w.run.lifecycle,stateTone(w.run.lifecycle))}</div></div>
+      ${facts(w)}
+    </header>`;
+  };
+  const tabBar=t=>`<div class="runs-tabs" role="tablist" aria-label="${esc(t.workspace)}">
+    ${MODES.map(([id,key])=>`<button class="runs-tab" type="button" role="tab" data-runs-tab="${id}" aria-selected="${state.mode===id?'true':'false'}">${esc(t.tabs[key])}</button>`).join('')}</div>`;
+  const statusLine=(w,t)=>`<div class="runs-status">
+      ${pill(w.provider.connected?t.status.connected:t.status.disconnected,w.provider.connected?'success':'danger')}
+      ${pill(t.status.truth,'info',true)}${pill(t.status.unverified,'warning',true)}
+      <bdi dir="ltr" class="runs-mono">${esc(w.provider.id)} · epoch ${esc(w.provider.epoch)}</bdi>
+      <span class="runs-spacer"></span>
+      <span class="runs-statusmsg" data-tone="${statusTone}">${esc(statusMessage||t.readiness.noWrite)}</span>
+    </div>`;
+
+  const draw=()=>{
+    const w=domain.workspace();
+    const t=runsT(localeOf());
+    const preserved=detachPreserved(root);
+    const rows=state.source==='ALL'?w.alerts:w.alerts.filter(a=>a.source===state.source);
+    const filtered=state.highOnly?rows.filter(a=>a.sev==='High'):rows;
+    const selected=w.alerts.find(a=>a.id===state.selectedId)||filtered[0]||w.alerts[0]||null;
+    state.selectedId=selected?selected.id:null;
+    const ctx={t,locale:localeOf(),state,selected,composition,avail,
+      can:{start:avail('runs.start').enabled,terminal:avail('OPEN_TERMINAL').enabled}};
+
+    const shellRegions=boundRegions==='shell'&&boundWorkspace;
+    if(shellRegions){
+      try{
+        boundWorkspace.region('LEFT',{html:runsLeftRegion(w,ctx),label:t.structure.title});
+        boundWorkspace.region('RIGHT',{html:runsRightRegion(w,ctx),label:t.right.rationale});
+      }catch(error){
+        boundRegions='embedded';
+        statusMessage=`Region binding unavailable: ${error?.message||error}; rendering embedded regions.`;
+        statusTone='error';
+      }
+    }
+    const embedded=boundRegions!=='shell'||!boundWorkspace;
+    const rails=embedded?`<aside class="runs-rail" data-side="start" aria-label="${esc(t.nav.label)}">${runsLeftRegion(w,ctx)}</aside>`:'';
+    const endRail=embedded?`<aside class="runs-rail" data-side="end" aria-label="${esc(t.workspace)}">${runsRightRegion(w,ctx)}</aside>`:'';
+
+    root.setAttribute('data-runs-root','1');
+    root.setAttribute('dir',dirOf());
+    root.setAttribute('aria-label',t.workspace);
+    root.innerHTML=`<section class="runs-workspace" dir="${dirOf()}">
+      <div class="runs-bar">${tabBar(t)}${actions(w,t)}</div>
+      ${identity(w)}
+      <div class="runs-body">${rails}<div class="runs-pane" data-runs-center tabindex="-1" style="min-width:0">${renderView(state.view,w,ctx)}</div>${endRail}</div>
+      <div class="runs-terminal" data-runs-terminal>
+        <div class="runs-terminalbar"><span class="runs-terminallabel">${icon('terminal',13)}${esc(t.status.terminal)}</span>
+          <span class="runs-terminalhint">${esc(t.status.terminalIdle)}</span>
+          <button class="runs-chipbtn" type="button" data-view="devices">${icon('box',11)}${esc(t.structure.devices)}</button></div>
+      </div>
+      ${statusLine(w,t)}
+    </section>`;
+    restorePreserved(root,preserved,root.querySelector('[data-runs-terminal]'));
+    wire();
+  };
+
+  const rerender=()=>{
+    const doc=root.ownerDocument||document;
+    const active=doc.activeElement;
+    const hadFilter=active&&active.matches&&active.matches('[data-event-filter]');
+    const caret=hadFilter?active.selectionStart:null;
+    draw();
+    if(hadFilter){const next=doc.querySelector('[data-event-filter]');if(next){next.focus();try{next.setSelectionRange(caret,caret)}catch{}}}
+  };
+
+  const setSelection=id=>{state.selectedId=id;state.detailTab='timeline'};
+  const exportEvents=w=>{
+    const doc=root.ownerDocument||document;
+    const t=runsT(localeOf());
+    const rows=(state.source==='ALL'?w.events:w.events.filter(e=>e.source===state.source));
+    try{
+      const header=['sequence','time_utc','source','event_type','details','actor'];
+      const csv=[header.join(',')].concat(rows.map(e=>[e.seq,e.time,e.source,e.type,e.detail,e.actor].map(v=>`"${String(v).replace(/"/g,'""')}"`).join(','))).join('\n');
+      const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+      const url=URL.createObjectURL(blob);const a=doc.createElement('a');
+      a.href=url;a.download=`${w.identity.runId}-observed-events.csv`;doc.body.appendChild(a);a.click();a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),2000);
+      statusMessage=t.detail.exported(rows.length);statusTone='ok';
+    }catch(error){statusMessage=t.detail.exportFail;statusTone='error'}
+  };
+
+  const controller={
+    composition,state,draw,
+    api:{
+      refresh:draw,
+      focus:()=>root.querySelector('[data-runs-center]')?.focus(),
+      state:()=>({mode:state.mode,view:state.view,selectedId:state.selectedId,locale:localeOf(),dir:dirOf()}),
+      setMode:value=>{if(MODES.some(([id])=>id===value)){state.mode=value;state.view=MODE_DEFAULT_VIEW[value];draw()}},
+      setView:value=>{state.view=value;state.mode=VIEW_MODE[value]||state.mode;draw()},
+      mode:()=>state.mode,
+      rebind:patch=>{if(!patch)return;if('dir' in patch)boundDir=patch.dir;if('locale' in patch)boundLocale=patch.locale;if('regions' in patch)boundRegions=patch.regions||'shell';if('workspace' in patch)boundWorkspace=patch.workspace||null},
+      execute
+    }
+  };
+  mounts.set(root,controller);activeController=controller;
+
+  function wire(){
+    if(delegated)return;
+    delegated=true;
+    const resolve=event=>{
+      const el=event.target?.closest?.('[data-view],[data-source],[data-select],[data-detail-tab],[data-command],[data-highlight],[data-export],[data-refresh],[data-filter-high],[data-runs-tab],[data-overflow]');
+      if(!el||el.disabled)return null;
+      if(el.closest('[data-runs-root]')||el.closest('[data-runs-region]'))return el;
+      return null;
+    };
+    document.addEventListener('click',event=>{
+      const el=resolve(event);if(!el)return;
+      const ctl=activeController;if(!ctl)return;
+      const {state:s,composition:comp}=ctl;const w=comp.domain.workspace();const t=runsT(runsLocale(document));
+      if(el.dataset.runsTab){state.mode=el.dataset.runsTab;state.view=MODE_DEFAULT_VIEW[state.mode];state.overflow=false;ctl.draw();return}
+      if(el.dataset.view){state.view=el.dataset.view;state.mode=VIEW_MODE[state.view]||state.mode;state.overflow=false;ctl.draw();return}
+      if(el.hasAttribute('data-overflow')){state.overflow=!state.overflow;ctl.draw();return}
+      if(el.dataset.source){state.source=el.dataset.source;state.selectedId=null;ctl.draw();return}
+      if(el.dataset.select){setSelection(el.dataset.select);ctl.draw();return}
+      if(el.dataset.detailTab){state.detailTab=el.dataset.detailTab;ctl.draw();return}
+      if(el.hasAttribute('data-highlight')){state.highlight=!state.highlight;ctl.draw();return}
+      if(el.hasAttribute('data-filter-high')){state.highOnly=!state.highOnly;state.selectedId=null;ctl.draw();return}
+      if(el.hasAttribute('data-refresh')){statusMessage=`${t.alerts.refresh} · ${w.counts.alerts}/${w.counts.events} observed · ${w.provider.id}`;statusTone='ok';ctl.draw();return}
+      if(el.hasAttribute('data-export')){exportEvents(w);ctl.draw();return}
+      if(el.dataset.command){
+        const payload={};if(el.dataset.device)payload.deviceId=el.dataset.device;
+        if(['runs.pause','runs.resume','runs.stop'].includes(el.dataset.command))payload.invocationId=`ui-${el.dataset.command}-${Date.now()}`;
+        execute(el.dataset.command,payload);
+        if(['runs.preflight'].includes(el.dataset.command)){state.mode='preflight';state.view='preflight'}
+        ctl.draw();return;
+      }
+    },false);
+    document.addEventListener('input',event=>{
+      if(!event.target?.matches?.('[data-event-filter]'))return;
+      state.query=event.target.value;rerender();
+    },false);
+    document.addEventListener('keydown',event=>{
+      if(event.key==='Escape'&&state.overflow){state.overflow=false;activeController?.draw();return}
+      if((event.key==='Enter'||event.key===' ')&&event.target?.matches?.('tr[data-select]')){event.preventDefault();setSelection(event.target.dataset.select);activeController?.draw()}
+    },false);
+  }
+  draw();
+  return controller.api;
 }

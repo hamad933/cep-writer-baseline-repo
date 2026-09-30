@@ -1,0 +1,286 @@
+/**
+ * W02-LEARN · bilingual label set + locale/direction readers.
+ *
+ * Arabic and English are BOTH first-class. The active language is read from the
+ * document root (written by WorkspaceFoundation.applyPreferences from the user's
+ * Settings preference). Nothing in this surface bakes a direction into structure.
+ */
+import {esc} from '../../foundation/workspace.js';
+
+                                  
+                                               
+
+const EN             ={
+  /* chrome / banner */
+  crumbArea:'Learn',
+  crumbKind:'Learning activity',
+  statusUnbound:'Source not bound',
+  statusActive:'Active now',
+  secondaryRead:'Structured learning material, local practice and short briefs.',
+  secondaryTruth:'Progress is a local projection — Mastery is never inferred here.',
+  tagSource:'Source · unbound',
+  tagSourceBound:'Source · bound',
+  tagLocal:'Local working state',
+  tagMastery:'Mastery not inferred',
+  lock:'Activity identity and local source are read-only',
+  docLead:'Read, write and organise the learning document with the shared structural editor; working state stays local until an explicit durable save.',
+  docGroup:'Learning document / content',
+  docGroupHint:'Current learning activity content',
+  /* left pane */
+  pathTitle:'Learning path',
+  overall:'Overall progress',
+  progressState:'Progress state',
+  masteryShort:'Mastery · not inferred',
+  sections:'Sections',
+  searchSections:'Search activity outline…',
+  noSections:'The current document has no section headings yet.',
+  sourceCard:'Canonical source',
+  unbound:'Not bound',
+  bound:'Bound',
+  unboundWhy:'A canonical learning provider must bind this route (dependency R6). No fixture or synthetic content is promoted into product truth.',
+  openPathMap:'Open path map',
+  pathMapTitle:'Learning path map',
+  pathMapIntro:'Learn moves a learner through four stages. Prerequisites never block navigation; each stage reports its own truth.',
+  stageJourney:'Journey',
+  stagePractice:'Practice',
+  stageAssessment:'Assessment',
+  stageLab:'Lab',
+  subJourneyCurrent:'Current learning activity',
+  subJourneyUnbound:'No canonical learning object bound to this route',
+  subJourneyOpen:'Activity open · editability follows the object capability',
+  subPracticeReady:'Write an answer and submit it for a local attempt',
+  subPracticeUnlocked:'Attempt in progress · submit when ready',
+  subPracticeSubmitted:'Submitted in this session · review the local feedback',
+  subPracticeLocked:'Unlocks when a canonical source is bound',
+  subAssessment:'Local brief · grading provider unavailable',
+  subLab:'Brief only · no W03 runtime created',
+  stateCurrent:'Current',
+  stateNext:'Next',
+  stateUnavailable:'Unavailable',
+  stateBrief:'Brief',
+  stateComplete:'Complete',
+  stateNotStarted:'Not started',
+  /* center */
+  eyebrow:'Learning activity',
+  pathProgress:'Path progress',
+  stageCount:'{done}/4 stages',
+  attemptShort:'Attempt',
+  attemptNone:'No attempt',
+  nextStep:'Next step',
+  nextStepUnbound:'Bind a canonical learning source to continue.',
+  nextStepNoAttempt:'Start a practice attempt when ready.',
+  nextStepDraft:'Continue editing, then submit when ready.',
+  nextStepReview:'Review the local feedback or start a new attempt.',
+  practiceTitle:'Practice',
+  practiceHint:'Explain your reasoning in the document, then record the answer here. Any activity can be opened without completing the previous one.',
+  answerLabel:'Your answer',
+  answerPlaceholder:'Write your answer, then submit…',
+  startAttempt:'Start attempt',
+  submitAnswer:'Submit answer',
+  reviewAttempt:'Review attempt',
+  newAttempt:'New attempt',
+  localNote:'Recorded in this local session only — no external assessment, no durable persistence, no Mastery inference.',
+  answerEmpty:'An answer is required before it can be submitted.',
+  assessmentTitle:'Assessment brief',
+  labTitle:'Lab brief',
+  viewBrief:'View brief',
+  briefAvailability:'Availability',
+  briefGrading:'Grading provider',
+  briefMastery:'Mastery write',
+  briefRuntime:'Runtime',
+  briefOwner:'Owner',
+  closeDialog:'Close',
+  fieldAnswer:'Answer',
+  fieldFeedback:'Local feedback',
+  /* context pane */
+  ctxPane:'Context',
+  lensObjective:'Objective',
+  lensActivity:'Activity',
+  lensProgress:'Progress',
+  lensSource:'Source',
+  lensBriefs:'Briefs',
+  ctxEyebrow:'Learn context',
+  ctxObjectiveSummary:'The learner’s current next step, projected from local learning state only.',
+  ctxActivitySummary:'Identity of the learning activity and its structured document.',
+  ctxProgressSummary:'Local learning projection. Completion is scoped to this surface and never writes Mastery.',
+  ctxSourceSummary:'Canonical source admission truth for the Learn route.',
+  ctxBriefsSummary:'Assessment and lab briefs are descriptions only; neither creates a runtime or a decision.',
+  fObjective:'Next step',
+  fActivityId:'Activity',
+  fKind:'Kind',
+  fRevision:'Activity revision',
+  fDocId:'Structured document',
+  fDocRevision:'Document revision',
+  fEditable:'Editable',
+  fProgress:'Progress state',
+  fAttempt:'Attempt state',
+  fAttemptId:'Attempt',
+  fAttemptRevision:'Attempt revision',
+  fAligned:'Revision aligned',
+  fMastery:'Mastery',
+  fPersisted:'Durable persistence',
+  fProvider:'Provider truth',
+  fClassification:'Classification',
+  fProviderRef:'Provider reference',
+  fRejection:'Rejection reason',
+  fAssessment:'Assessment',
+  fLab:'Lab',
+  fPrerequisites:'Prerequisites',
+  yes:'Yes',
+  no:'No',
+  unknown:'Unknown',
+  /* misc */
+  tokensNote:'Technical identifiers stay isolated for mixed-direction text.',
+};
+
+const AR             ={
+  crumbArea:'التعلّم',
+  crumbKind:'نشاط تعلّم',
+  statusUnbound:'المصدر غير مرتبط',
+  statusActive:'نشط الآن',
+  secondaryRead:'مواد تعلّم مهيكلة وممارسة محلية وملخصات قصيرة.',
+  secondaryTruth:'التقدم إسقاط محلي — ولا يُستنتج الإتقان هنا أبدًا.',
+  tagSource:'المصدر · غير مرتبط',
+  tagSourceBound:'المصدر · مرتبط',
+  tagLocal:'حالة عمل محلية',
+  tagMastery:'الإتقان غير مستنتج',
+  lock:'هوية النشاط ومصدره المحلي للقراءة فقط',
+  docLead:'اقرأ واكتب ونظّم دفتر التعلّم باستخدام المحرر البنيوي المشترك؛ وتبقى الحالة محلية حتى الحفظ الدائم الصريح.',
+  docGroup:'دفتر التعلّم / المحتوى',
+  docGroupHint:'محتوى نشاط التعلّم الحالي',
+  pathTitle:'مسار التعلّم',
+  overall:'التقدم الكلي',
+  progressState:'حالة التقدم',
+  masteryShort:'الإتقام · غير مستنتج',
+  sections:'الأقسام',
+  searchSections:'ابحث في مخطط النشاط…',
+  noSections:'لا توجد عناوين أقسام في المستند الحالي بعد.',
+  sourceCard:'المصدر القانوني',
+  unbound:'غير مرتبط',
+  bound:'مرتبط',
+  unboundWhy:'يجب أن يربط مزوّد تعلّم قانوني هذا المسار (تبعية R6). ولا يُرقّى أي محتوى تجريبي أو اصطناعي إلى حقيقة المنتج.',
+  openPathMap:'عرض خريطة المسار',
+  pathMapTitle:'خريطة مسار التعلّم',
+  pathMapIntro:'يمرّ المتعلّم في التعلّم بأربع مراحل. لا تمنع المتطلبات السابقة التنقل، وتعرض كل مرحلة حقيقتها الخاصة.',
+  stageJourney:'الرحلة',
+  stagePractice:'الممارسة',
+  stageAssessment:'التقويم',
+  stageLab:'المختبر',
+  subJourneyCurrent:'نشاط التعلّم الحالي',
+  subJourneyUnbound:'لا يوجد كائن تعلّم قانوني مرتبط بهذا المسار',
+  subJourneyOpen:'النشاط مفتوح · والتحرير يتبع إمكانية الكائن',
+  subPracticeReady:'اكتب إجابتك وسجّلها كمحاولة محلية',
+  subPracticeUnlocked:'محاولة جارية · سجّل الإجابة عند الجاهزية',
+  subPracticeSubmitted:'مُسجَّلة في هذه الجلسة · راجع ردّ المحلي',
+  subPracticeLocked:'يُفتح عند ربط مصدر قانوني',
+  subAssessment:'ملخص محلي · مزوّد التقييم غير متاح',
+  subLab:'ملخص فقط · لا يوجد تشغيل W03',
+  stateCurrent:'الحالي',
+  stateNext:'التالي',
+  stateUnavailable:'غير متاح',
+  stateBrief:'ملخص',
+  stateComplete:'مكتمل',
+  stateNotStarted:'لم تبدأ',
+  eyebrow:'نشاط تعلّم',
+  pathProgress:'التقدم في المسار',
+  stageCount:'{done}/4 مراحل',
+  attemptShort:'المحاولة',
+  attemptNone:'لا توجد محاولة',
+  nextStep:'الخطوة التالية',
+  nextStepUnbound:'اربط مصدر تعلّم قانونيًا للمتابعة.',
+  nextStepNoAttempt:'ابدأ محاولة ممارسة عند الجاهزية.',
+  nextStepDraft:'تابع التحرير ثم سجّل الإجابة عند الجاهزية.',
+  nextStepReview:'راجع الردّ المحلي أو ابدأ محاولة جديدة.',
+  practiceTitle:'الممارسة',
+  practiceHint:'اكتب تفسيرك داخل الدفتر ثم سجّل إجابتك. يمكنك فتح أي نشاط دون إكمال السابق.',
+  answerLabel:'إجابتك',
+  answerPlaceholder:'اكتب إجابتك ثم سجّلها…',
+  startAttempt:'بدء المحاولة',
+  submitAnswer:'تسجيل الإجابة',
+  reviewAttempt:'مراجعة المحاولة',
+  newAttempt:'محاولة جديدة',
+  localNote:'يُسجَّل في هذه الجلسة المحلية فقط — بلا تقييم خارجي ولا حفظ دائم ولا استنتاج للإتقان.',
+  answerEmpty:'إجابتك مطلوبة قبل تسجيلها.',
+  assessmentTitle:'ملخص التقويم',
+  labTitle:'ملخص المختبر',
+  viewBrief:'عرض الملخص',
+  briefAvailability:'الإتاحة',
+  briefGrading:'مزوّد التقييم',
+  briefMastery:'كتابة الإتقان',
+  briefRuntime:'التشغيل',
+  briefOwner:'الملكية',
+  closeDialog:'إغلاق',
+  fieldAnswer:'الإجابة',
+  fieldFeedback:'الردّ المحلي',
+  ctxPane:'السياق',
+  lensObjective:'الهدف',
+  lensActivity:'النشاط',
+  lensProgress:'التقدم',
+  lensSource:'المصدر',
+  lensBriefs:'الملخصات',
+  ctxEyebrow:'سياق التعلّم',
+  ctxObjectiveSummary:'الخطوة التالية للمتعلّم، مُسقطة من حالة التعلّم المحلية فقط.',
+  ctxActivitySummary:'هوية نشاط التعلّم ومستنده المهيكل.',
+  ctxProgressSummary:'إسقاط تعلّم محلي. الإكمال محصور بهذه السطحية ولا يكتب الإتقان أبدًا.',
+  ctxSourceSummary:'حقيقة قبول المصدر القانوني لمسار التعلّم.',
+  ctxBriefsSummary:'ملخصا التقويم والمختبر وصفان فقط؛ لا ينشئ أيٌّ منهما تشغيلًا ولا قرارًا.',
+  fObjective:'الخطوة التالية',
+  fActivityId:'النشاط',
+  fKind:'النوع',
+  fRevision:'مراجعة النشاط',
+  fDocId:'المستند المهيكل',
+  fDocRevision:'مراجعة المستند',
+  fEditable:'قابل للتحرير',
+  fProgress:'حالة التقدم',
+  fAttempt:'حالة المحاولة',
+  fAttemptId:'المحاولة',
+  fAttemptRevision:'مراجعة المحاولة',
+  fAligned:'المراجعة متوافقة',
+  fMastery:'الإتقان',
+  fPersisted:'الحفظ الدائم',
+  fProvider:'حقيقة المزوّد',
+  fClassification:'التصنيف',
+  fProviderRef:'مرجع المزوّد',
+  fRejection:'سبب الرفض',
+  fAssessment:'التقويم',
+  fLab:'المختبر',
+  fPrerequisites:'المتطلبات السابقة',
+  yes:'نعم',
+  no:'لا',
+  unknown:'غير معروف',
+  tokensNote:'تبقى المعرّفات التقنية معزولة لضمان نص ثنائي الاتجاه.',
+};
+
+export const LEARN_STRINGS                                  =Object.freeze({ar:AR,en:EN});
+
+/** Active product language, read from the document root (Settings-driven). */
+export function learnLocale()            {
+  const lang=typeof document!=='undefined'?String(document.documentElement.lang||''):'';
+  return lang==='ar'?'ar':'en';
+}
+
+/** Active chrome direction, read from the document root — never baked into structure. */
+export function learnDir()            {
+  const dir=typeof document!=='undefined'?String(document.documentElement.dir||''):'';
+  return dir==='rtl'?'rtl':'ltr';
+}
+
+/** Localized string lookup; falls back to English, then to the key itself. */
+export function t(key       ,locale            =learnLocale())       {
+  const table=LEARN_STRINGS[locale]||EN;
+  return table[key]??EN[key]??key;
+}
+
+/** Interpolated localized template. */
+export function tf(key       ,vars                             ,locale            =learnLocale())       {
+  return t(key,locale).replace(/\{(\w+)\}/g,(_m,name)=>String(vars[name]??`{${name}}`));
+}
+
+/** Escape for text interpolation. */
+export const e=esc;
+
+/** Bidi-isolated technical token (identifiers, codes, revisions, provider refs). */
+export const tok=(value        )=>`<bdi dir="ltr">${esc(String(value??'—'))}</bdi>`;
+
+/** dir="auto" wrapper for user/domain text whose direction must follow its content. */
+export const auto=(value        )=>`<span dir="auto">${esc(String(value??''))}</span>`;
