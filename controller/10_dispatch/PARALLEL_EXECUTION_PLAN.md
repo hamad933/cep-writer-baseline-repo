@@ -43,12 +43,23 @@ Six independent surfaces, one writer each:
 
 `W05-CONFIGURATION` additionally owns the language/direction preference seam (gap **G-20**).
 
-### WAVE-2 — donor-coupled knowledge cluster (serialized with each other)
-LIBRARY is a permitted **mechanics** donor for LEARN and VISUALIZE TREE-VIEW. Because donor mechanics may change, these three are serialized against one another:
+### WAVE-2 — knowledge cluster (parallel — **serialization was WRONG and has been revoked**)
 
-`W02-LIBRARY` → `W02-LEARN` → `W02-VISUALIZE`
+Original plan serialized `W02-LIBRARY` → `W02-LEARN` → `W02-VISUALIZE` on the theory that Library is a mechanics donor and concurrent edits could thrash donor mechanics. **That reasoning was over-conservative and does not satisfy this document's own serialization criteria.**
 
-Composition is still surface-specific. This serialization exists only to prevent donor-mechanic thrash, **not** to share composition. **Conceptual cloning remains forbidden.**
+§24 permits serialization only for: exact shared-file collisions · shared-component changes · common integration seams · dependent work · final merge/acceptance seams. These three units have **completely disjoint writable roots**:
+
+| Unit | Writable roots |
+|---|---|
+| `W02-LIBRARY` | `surfaces/library/`, `adapters/library-chrome.ts`, `adapters/library-fixtures.ts` |
+| `W02-LEARN` | `surfaces/learn/`, `adapters/learn.ts`, `adapters/context-learn-structured.ts` |
+| `W02-VISUALIZE` | `surfaces/visualize/`, `adapters/visualize/` |
+
+There is **no shared-file collision**. The donor relationship is *conceptual* (mechanics, not composition) and is already governed by the anti-cloning rule (packets state mechanics-only donor). Therefore all three run **in parallel**.
+
+**Lesson recorded:** donor *coupling* is not the same as *file collision*. Do not serialize on conceptual grounds; serialize on file/contract grounds. This was a Controller scheduling error that left `W02-LEARN` and `W02-VISUALIZE` with no worker.
+
+Anti-cloning still applies per unit: Library Tree-View != VisualIZE Tree-View, and the correct term is **VISUALIZE TREE-VIEW** (never "Visualize Review").
 
 ### WAVE-3 — remaining operational surfaces (parallel, shared seams via owner)
 `W03-ENTERPRISE` · `W03-LABS` · `W03-RUNS` · `W03-RESULTS`
@@ -74,7 +85,41 @@ Direction must follow the active preference; do not bake direction into structur
 
 ---
 
-## 4. LAUNCH RULES
+## 4. DISPATCH COVERAGE MATRIX (all 23 surfaces)
+
+The authoritative answer to "why does surface X have no worker?". Update on every dispatch.
+
+| Unit | Surface | Writable roots | State | Worker |
+|---|---|---|---|---|
+| `W01-TODAY` | today | `surfaces/today/`, `adapters/today/` | **REVIEWED** — VISUAL_PASS_PENDING_OWNER | 2 sessions (1 continuation) |
+| `W02-RESEARCH-QUALITY` | rq | `surfaces/rq/`, `adapters/rq/` | **REVIEWED** — VISUAL_PASS_PENDING_OWNER | 1 |
+| `W03-SCENARIOS` | scenarios | `surfaces/scenarios/`, `adapters/scenarios/`, `w03-rescue.ts` | **REVIEWED** — PASS_WITH_LIMITATION | 1 |
+| `W04-EVIDENCE` | evidence | `surfaces/evidence/`, `adapters/evidence/`, `w04-rescue.ts` | **REVIEWED** — VISUAL_PASS_PENDING_OWNER | 1 |
+| `W05-CONFIGURATION` | configuration | `surfaces/configuration/`, `adapters/configuration/`, `preferences/`, `settings/` | **REVIEWED** — VISUAL_PASS_PENDING_OWNER (G-20 fixed) | 1 |
+| `W05-AUDIT` | audit | `surfaces/audit/`, `adapters/audit.ts` | IN FLIGHT (continuation) | 2 (1 continuation) |
+| `W05-BACKUP` | backup | `surfaces/backup/`, `adapters/backup-runtime.ts` | IN FLIGHT (continuation, 13 defects inherited) | 2 (1 continuation) |
+| `W03-ENTERPRISE` | enterprise | `surfaces/enterprise/`, `adapters/enterprise/` | IN FLIGHT | 1 |
+| `W03-LABS` | labs | `surfaces/labs/`, `adapters/labs/` | IN FLIGHT | 1 |
+| `W03-RUNS` | runs | `surfaces/runs/`, `adapters/runs/` | IN FLIGHT | 1 |
+| `W05-RELEASES` | releases | `surfaces/releases/`, `adapters/releases/` | IN FLIGHT | 1 |
+| `W05-MANUAL-AI` | manual_ai | `surfaces/manual_ai/`, `adapters/manual_ai/` | IN FLIGHT | 1 |
+| `W02-LIBRARY` | library | `surfaces/library/`, `adapters/library-{chrome,fixtures}.ts` | **DISPATCHED** (late — see WAVE-2 note) | 1 |
+| `W02-LEARN` | learn | `surfaces/learn/`, `adapters/learn.ts`, `adapters/context-learn-structured.ts` | **DISPATCHED** (late — was wrongly deferred) | 1 |
+| `W02-VISUALIZE` | visualize | `surfaces/visualize/`, `adapters/visualize/` | **DISPATCHED** (late — was wrongly deferred) | 1 |
+| `W04-REVIEWS` | reviews | `surfaces/reviews/`, `adapters/reviews/` | **NOT DISPATCHED** — dependency `W04-EVIDENCE` is now complete, so it is eligible | none |
+| `W04-MASTERY` | mastery | `surfaces/mastery/`, `adapters/mastery/` | **NOT DISPATCHED** — independent, eligible | none |
+| `W04-PORTFOLIO` | portfolio | `surfaces/portfolio/`, `adapters/portfolio/` | **NOT DISPATCHED** — dependent on `W04-EVIDENCE` (complete), eligible | none |
+| `W05-HEALTH` | health | `adapters/health-runtime.ts` | **NOT DISPATCHED** — shares `w05-rescue.ts` with PROCESSING/VALIDATION | none |
+| `W05-PROCESSING` | processing | `adapters/processing-runtime.ts` | **NOT DISPATCHED** — shares `w05-rescue.ts` | none |
+| `W05-VALIDATION` | validation | `surfaces/validation/`, `adapters/validation.ts` | **NOT DISPATCHED** — **owns** `w05-rescue.ts` seam | none |
+| `W03-RESULTS` | results | `surfaces/results/`, `adapters/results/` | **NOT DISPATCHED** — dependent on `W03-RUNS` (in flight) | none |
+| `W01-SHELL` | shell | `surfaces/shell/`, `foundation/global/shell/`, shared chrome seams | **NOT DISPATCHED** — WAVE-4, sequenced after surface waves (AD-01 geometry + donor chrome) | none |
+
+### Genuine shared-file collision to respect before dispatching the W05 trio
+
+`surfaces/composition/w05-rescue.ts` is listed in the writable roots of HEALTH and PROCESSING but is **owned by `W05-VALIDATION`**. Dispatch those three with `w05-rescue.ts` write-ownership held solely by `W05-VALIDATION`; HEALTH and PROCESSING must request changes through `tools/writer-serial.sh`. This is a real file collision and must not be parallelized naively.
+
+## 5. LAUNCH RULES
 
 1. Every Writer loads the 4 project skills and `VISUAL_EXECUTION_STANDARD.md`.
 2. Every Writer works only its writable roots; shared seams go through the owner or `tools/writer-serial.sh`.
