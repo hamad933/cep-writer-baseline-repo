@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "generated": "2026-09-30T00:17:49Z",
   "generatedBy": "tools/build-surface-dispatch.py",
-  "authority": "CURRENT_OWNER_DIRECTIVE (Master Controller Contract)",
-  "executionModel": "1 WRITER -> 1 SURFACE -> 1 VISUAL OWNERSHIP LOOP",
-  "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
-  "controllerModel": "xiaomi-token-plan-sgp/mimo-v2.6-pro",
+  "authority": "HISTORICAL_DEPENDENCY_SCOPE_MATRIX__NOT_CURRENT_ROUTE_MIMO_LAUNCH_AUTHORITY",
+  "executionModel": "STRUCTURAL_SURFACE_SCOPE_INPUTS__CURRENT_ROUTE_MIMO_LAUNCH_UNIT_IS_W01_TO_W05_MILESTONE",
+  "writerModel": "EXECUTION_CONFIGURATION__BIND_AT_MISSION",
+  "controllerModel": "EXECUTION_CONFIGURATION__BIND_AT_MISSION",
   "inheritedStandard": "controller/09_writer_forge/VISUAL_EXECUTION_STANDARD.md",
   "requiredSkills": [
     "visual-surface-composition",
@@ -94,7 +94,7 @@
     }
   ],
   "parallelism": {
-    "strategy": "All 23 surface units run in parallel; shared seams have exactly one owner each and are written through tools/writer-serial.sh.",
+    "strategy": "HISTORICAL_FOR_ROUTE_MIMO__DEPENDENCY_COLLISION_EVIDENCE_ONLY__NO_PARALLEL_LAUNCH_AUTHORITY",
     "serializeOnly": [
       "dist/index.html",
       "stack/native-typescript/foundation/extensions.css",
@@ -139,7 +139,9 @@
         "W05-RELEASES",
         "W05-CONFIGURATION"
       ]
-    }
+    },
+    "historicalStrategy": "All 23 surface units run in parallel; shared seams have exactly one owner each and are written through tools/writer-serial.sh.",
+    "currentRouteMimo": "SERIAL_W01_W02_W03_W04_W05"
   },
   "units": [
     {
@@ -1027,5 +1029,20 @@
   "counts": {
     "units": 23,
     "surfaces": 23
+  },
+  "currentApplicability": {
+    "route": "ROUTE-MIMO-AGENT",
+    "controllingDecision": "OD-20260928-085",
+    "topology": "ONE_PERSISTENT_SEQUENTIAL_WRITER",
+    "branch": "writer/mi-serial",
+    "milestoneOrder": [
+      "W01",
+      "W02",
+      "W03",
+      "W04",
+      "W05"
+    ],
+    "surfaceUnitsLaunchableIndependently": false,
+    "rule": "Use unit rows for purpose/scope/reference/dependency/owner evidence only. Exact milestone mission rebinds writable union, shared seams, current parent and applicable decisions."
   }
 }

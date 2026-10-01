@@ -1,0 +1,914 @@
+{
+  "schemaVersion": 1,
+  "classification": "CURRENT_SURFACE_PACKET_STRUCTURAL_REVALIDATION__23_OF_23__NOT_LAUNCH_AUTHORITY",
+  "repository": "hamad933/cep-writer-baseline-repo",
+  "basis": {
+    "branch": "writer/mi-serial",
+    "controllerProjectionHead": "47aa5e5df108a8bf43f62156aacf29e4cd2c225e",
+    "rootTree": "2fd7220e127e181c6540aa5cc6bda24dad4c4cb5",
+    "productNativeTypeScriptTree": "892bfaf3515c46c87026f07b208b806cd19d6e5e"
+  },
+  "topology": {
+    "carrier": "ROUTE-MIMO-AGENT",
+    "decision": "OD-20260928-085",
+    "writerCount": 1,
+    "branch": "writer/mi-serial",
+    "milestones": [
+      "W01",
+      "W02",
+      "W03",
+      "W04",
+      "W05"
+    ],
+    "surfacePacketsIndependentLaunch": false
+  },
+  "profileProjection": {
+    "binding": "cep-writer/references/SURFACE_PROFILE_BINDING.json",
+    "payloadCommit": "4c9f41b5df3c7536f38e258f0b7085b3fb731028",
+    "verificationCommit": "47aa5e5df108a8bf43f62156aacf29e4cd2c225e",
+    "parity": "23/23"
+  },
+  "writerDecisionProjection": {
+    "path": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv",
+    "blob": "7c7a1364c39ed85777cf89171da53305701fd8e2",
+    "rowCount": 91,
+    "applicabilityMap": "controller/authority/WRITER_OWNER_DECISION_APPLICABILITY.md"
+  },
+  "rows": [
+    {
+      "unit": "W01-SHELL",
+      "surface": "shell",
+      "milestone": "W01",
+      "packetPath": "controller/09_writer_forge/surface_units/W01-SHELL_SURFACE_PACKET.md",
+      "packetBlob": "d856dfe5044fc5eb8ea163e1734c2e57e31eefbb",
+      "profilePath": "profiles/shell.json",
+      "profileBlob": "7f29486698b92e080493609759fa32e19efec1f0",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/shell/",
+        "stack/native-typescript/foundation/global/shell/"
+      ],
+      "sharedSeams": [
+        "dist/index.html",
+        "stack/native-typescript/foundation/extensions.css",
+        "stack/native-typescript/foundation/global/pane-layout.ts",
+        "stack/native-typescript/foundation/global/region-contract.ts",
+        "stack/native-typescript/foundation/global/shell/cep-destinations.ts",
+        "stack/native-typescript/foundation/global/shell/navigation.ts",
+        "stack/native-typescript/foundation/workspace-host.ts",
+        "stack/native-typescript/foundation/workspace.ts",
+        "stack/native-typescript/main.ts",
+        "stack/native-typescript/surfaces/composition/w01-w02-rescue.ts",
+        "stack/native-typescript/surfaces/m0-controller-composition.ts"
+      ],
+      "status": "VALID_STRUCTURAL_SCOPE__SHARED_SEAMS_REQUIRE_W01_MILESTONE_BIND",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W01-TODAY",
+      "surface": "today",
+      "milestone": "W01",
+      "packetPath": "controller/09_writer_forge/surface_units/W01-TODAY_SURFACE_PACKET.md",
+      "packetBlob": "2a6433d8a955cd07c0cfbcfb86a122913c60e24f",
+      "profilePath": "profiles/today.json",
+      "profileBlob": "3b83590daaa6bb220ae3bd2499618043cdcc4d6c",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/today/",
+        "stack/native-typescript/adapters/today/"
+      ],
+      "sharedSeams": [],
+      "status": "VALID_STRUCTURAL_SCOPE",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W02-LIBRARY",
+      "surface": "library",
+      "milestone": "W02",
+      "packetPath": "controller/09_writer_forge/surface_units/W02-LIBRARY_SURFACE_PACKET.md",
+      "packetBlob": "d5b3c5984c11133b0f409275c614fc9e00857e08",
+      "profilePath": "profiles/library.json",
+      "profileBlob": "7aaea88691f9d693a2f1584dc1f7244b7b41b775",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/library/",
+        "stack/native-typescript/adapters/library-chrome.ts",
+        "stack/native-typescript/adapters/library-fixtures.ts"
+      ],
+      "sharedSeams": [],
+      "status": "VALID_STRUCTURAL_SCOPE",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W02-LEARN",
+      "surface": "learn",
+      "milestone": "W02",
+      "packetPath": "controller/09_writer_forge/surface_units/W02-LEARN_SURFACE_PACKET.md",
+      "packetBlob": "fa8d0d2983490ff71a78268b0658be51d094c5dc",
+      "profilePath": "profiles/learn.json",
+      "profileBlob": "5df035eabcc15a58b4bb525fe097fef912c928a3",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/learn/",
+        "stack/native-typescript/adapters/learn.ts",
+        "stack/native-typescript/adapters/context-learn-structured.ts"
+      ],
+      "sharedSeams": [],
+      "status": "VALID_STRUCTURAL_SCOPE",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W02-RESEARCH-QUALITY",
+      "surface": "rq",
+      "milestone": "W02",
+      "packetPath": "controller/09_writer_forge/surface_units/W02-RESEARCH-QUALITY_SURFACE_PACKET.md",
+      "packetBlob": "6d2dc40ddb8a1929facc6055b1aa604dc2ffba98",
+      "profilePath": "profiles/rq.json",
+      "profileBlob": "1c42a1d9579e062349a83dbea89308ecc29e0ede",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/rq/",
+        "stack/native-typescript/adapters/rq/"
+      ],
+      "sharedSeams": [],
+      "status": "VALID_STRUCTURAL_SCOPE__REFERENCE_AUTHORITY_GAP_PRESERVED",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W02-VISUALIZE",
+      "surface": "visualize",
+      "milestone": "W02",
+      "packetPath": "controller/09_writer_forge/surface_units/W02-VISUALIZE_SURFACE_PACKET.md",
+      "packetBlob": "7253cd31807b5e189cffc9fb64455ad66474c0ba",
+      "profilePath": "profiles/visualize.json",
+      "profileBlob": "1395cc4445b56d947aaddad9c4f76194894db4a2",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/visualize/",
+        "stack/native-typescript/adapters/visualize/"
+      ],
+      "sharedSeams": [],
+      "status": "VALID_STRUCTURAL_SCOPE__TREE_VIEW_IDENTITY_PRESERVED",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W03-ENTERPRISE",
+      "surface": "enterprise",
+      "milestone": "W03",
+      "packetPath": "controller/09_writer_forge/surface_units/W03-ENTERPRISE_SURFACE_PACKET.md",
+      "packetBlob": "398bdca87c65df76f205e3afb327ff9cf3784444",
+      "profilePath": "profiles/enterprise.json",
+      "profileBlob": "f942eb9c0e1f4e043efac39ec7cef43bf4c88131",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/enterprise/",
+        "stack/native-typescript/adapters/enterprise/"
+      ],
+      "sharedSeams": [],
+      "status": "VALID_STRUCTURAL_SCOPE",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W03-SCENARIOS",
+      "surface": "scenarios",
+      "milestone": "W03",
+      "packetPath": "controller/09_writer_forge/surface_units/W03-SCENARIOS_SURFACE_PACKET.md",
+      "packetBlob": "aef17495b5adb1166bbb6036ee985bb2cc24b260",
+      "profilePath": "profiles/scenarios.json",
+      "profileBlob": "c44ad299eecac073c7427b3b42694bdd374446ee",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/scenarios/",
+        "stack/native-typescript/adapters/scenarios/"
+      ],
+      "sharedSeams": [
+        "stack/native-typescript/surfaces/composition/w03-rescue.ts"
+      ],
+      "status": "VALID_STRUCTURAL_SCOPE__W03_GROUP_SEAM",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W03-LABS",
+      "surface": "labs",
+      "milestone": "W03",
+      "packetPath": "controller/09_writer_forge/surface_units/W03-LABS_SURFACE_PACKET.md",
+      "packetBlob": "04de837d8f323a5b182b3148a7fc216a4580694f",
+      "profilePath": "profiles/labs.json",
+      "profileBlob": "69f6db501fc26334639355a67e644edc38a5a8ce",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/labs/",
+        "stack/native-typescript/adapters/labs/"
+      ],
+      "sharedSeams": [],
+      "status": "VALID_STRUCTURAL_SCOPE",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W03-RUNS",
+      "surface": "runs",
+      "milestone": "W03",
+      "packetPath": "controller/09_writer_forge/surface_units/W03-RUNS_SURFACE_PACKET.md",
+      "packetBlob": "35d2af018496cab631fb957a14a68ef4047a38cd",
+      "profilePath": "profiles/runs.json",
+      "profileBlob": "bff69e8f174c0913f1eaeec7c253d37f50304366",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/runs/",
+        "stack/native-typescript/adapters/runs/"
+      ],
+      "sharedSeams": [],
+      "status": "VALID_STRUCTURAL_SCOPE",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W03-RESULTS",
+      "surface": "results",
+      "milestone": "W03",
+      "packetPath": "controller/09_writer_forge/surface_units/W03-RESULTS_SURFACE_PACKET.md",
+      "packetBlob": "337039c378e793c015bd7169399515d66b3161af",
+      "profilePath": "profiles/results.json",
+      "profileBlob": "06ed30feb01cf3b9c2c0180adb8679b945c0166e",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/results/",
+        "stack/native-typescript/adapters/results/"
+      ],
+      "sharedSeams": [],
+      "status": "VALID_STRUCTURAL_SCOPE__RUNS_DEPENDENCY_RECHECK_AT_W03",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W04-EVIDENCE",
+      "surface": "evidence",
+      "milestone": "W04",
+      "packetPath": "controller/09_writer_forge/surface_units/W04-EVIDENCE_SURFACE_PACKET.md",
+      "packetBlob": "8e02658db001560cae6db18e8042ae94a05d103b",
+      "profilePath": "profiles/evidence.json",
+      "profileBlob": "c96b2aea408016116887a34b376cc5d1d093de70",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/evidence/",
+        "stack/native-typescript/adapters/evidence/"
+      ],
+      "sharedSeams": [
+        "stack/native-typescript/surfaces/composition/w04-rescue.ts"
+      ],
+      "status": "VALID_STRUCTURAL_SCOPE__W04_GROUP_SEAM__PROFILE_REBOUND_CURRENT",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W04-REVIEWS",
+      "surface": "reviews",
+      "milestone": "W04",
+      "packetPath": "controller/09_writer_forge/surface_units/W04-REVIEWS_SURFACE_PACKET.md",
+      "packetBlob": "4d7f8fc3c7195b59f9fed3212a739dfb5964ec94",
+      "profilePath": "profiles/reviews.json",
+      "profileBlob": "aea63f4a8885476336ae74da649553b6c8d55002",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/reviews/",
+        "stack/native-typescript/adapters/reviews/"
+      ],
+      "sharedSeams": [],
+      "status": "VALID_STRUCTURAL_SCOPE__PROFILE_REBOUND_CURRENT",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W04-MASTERY",
+      "surface": "mastery",
+      "milestone": "W04",
+      "packetPath": "controller/09_writer_forge/surface_units/W04-MASTERY_SURFACE_PACKET.md",
+      "packetBlob": "ce343b061e4dec437722d273df65bcc24951e624",
+      "profilePath": "profiles/mastery.json",
+      "profileBlob": "d076f338be39248c578e48a63c22d545044d0067",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/mastery/",
+        "stack/native-typescript/adapters/mastery/"
+      ],
+      "sharedSeams": [],
+      "status": "VALID_STRUCTURAL_SCOPE",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W04-PORTFOLIO",
+      "surface": "portfolio",
+      "milestone": "W04",
+      "packetPath": "controller/09_writer_forge/surface_units/W04-PORTFOLIO_SURFACE_PACKET.md",
+      "packetBlob": "9bc74f30ba40f72ecbd2fe295eadcec9ad047ea4",
+      "profilePath": "profiles/portfolio.json",
+      "profileBlob": "827c1522551bb29a46fe803bd61b0575640aed36",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/portfolio/",
+        "stack/native-typescript/adapters/portfolio/"
+      ],
+      "sharedSeams": [],
+      "status": "VALID_STRUCTURAL_SCOPE",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W05-HEALTH",
+      "surface": "health",
+      "milestone": "W05",
+      "packetPath": "controller/09_writer_forge/surface_units/W05-HEALTH_SURFACE_PACKET.md",
+      "packetBlob": "54a7e51c3ffd71e3a03cbe244bef0a04f1cca13d",
+      "profilePath": "profiles/health.json",
+      "profileBlob": "16e163e40c47b46af7989721939efbd1d9e2b311",
+      "localWritableRoots": [
+        "stack/native-typescript/adapters/health-runtime.ts"
+      ],
+      "sharedSeams": [],
+      "status": "CORRECTED__REMOVED_UNOWNED_W05_RESCUE_WRITE",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W05-PROCESSING",
+      "surface": "processing",
+      "milestone": "W05",
+      "packetPath": "controller/09_writer_forge/surface_units/W05-PROCESSING_SURFACE_PACKET.md",
+      "packetBlob": "09f73283604938dbcf6762e27995f252e2b1cf09",
+      "profilePath": "profiles/processing.json",
+      "profileBlob": "8c91e051f3b6a8f0e38f70f07efbe310c44e3291",
+      "localWritableRoots": [
+        "stack/native-typescript/adapters/processing-runtime.ts"
+      ],
+      "sharedSeams": [],
+      "status": "CORRECTED__REMOVED_UNOWNED_W05_RESCUE_WRITE",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W05-VALIDATION",
+      "surface": "validation",
+      "milestone": "W05",
+      "packetPath": "controller/09_writer_forge/surface_units/W05-VALIDATION_SURFACE_PACKET.md",
+      "packetBlob": "800f1e0dad91ef67ff94759966eb51c6b6aad178",
+      "profilePath": "profiles/validation.json",
+      "profileBlob": "f831e7bc9f475cddc1b693d43fccb896f8a1aeaa",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/validation/",
+        "stack/native-typescript/adapters/validation.ts"
+      ],
+      "sharedSeams": [
+        "stack/native-typescript/surfaces/composition/w05-rescue.ts"
+      ],
+      "status": "VALID_STRUCTURAL_SCOPE__SOLE_W05_RESCUE_SEAM_OWNER",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W05-MANUAL-AI",
+      "surface": "manual_ai",
+      "milestone": "W05",
+      "packetPath": "controller/09_writer_forge/surface_units/W05-MANUAL-AI_SURFACE_PACKET.md",
+      "packetBlob": "fd7d73289d2c6c1979adcdc03c81bee6b341d71a",
+      "profilePath": "profiles/manual_ai.json",
+      "profileBlob": "5e759cef962d75534b3052ac995f71931ad23230",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/manual_ai/",
+        "stack/native-typescript/adapters/manual_ai/"
+      ],
+      "sharedSeams": [],
+      "status": "VALID_STRUCTURAL_SCOPE",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W05-BACKUP",
+      "surface": "backup",
+      "milestone": "W05",
+      "packetPath": "controller/09_writer_forge/surface_units/W05-BACKUP_SURFACE_PACKET.md",
+      "packetBlob": "1154cefc1ca25bfd7ed2c00f9f114cb5766c32f5",
+      "profilePath": "profiles/backup.json",
+      "profileBlob": "dde69eba37cbada12bbcfa4ad10af2b599acedec",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/backup/",
+        "stack/native-typescript/adapters/backup-runtime.ts"
+      ],
+      "sharedSeams": [],
+      "status": "VALID_STRUCTURAL_SCOPE",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W05-AUDIT",
+      "surface": "audit",
+      "milestone": "W05",
+      "packetPath": "controller/09_writer_forge/surface_units/W05-AUDIT_SURFACE_PACKET.md",
+      "packetBlob": "e53854ca30bd3a1ff596e4d372597d371125c013",
+      "profilePath": "profiles/audit.json",
+      "profileBlob": "945a7a8b82f650751184cc5d0ab21de2168a5bdf",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/audit/",
+        "stack/native-typescript/adapters/audit.ts"
+      ],
+      "sharedSeams": [],
+      "status": "VALID_STRUCTURAL_SCOPE",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W05-RELEASES",
+      "surface": "releases",
+      "milestone": "W05",
+      "packetPath": "controller/09_writer_forge/surface_units/W05-RELEASES_SURFACE_PACKET.md",
+      "packetBlob": "4c75a140a849ee1c6e85dd6bb4df93292d1b1e64",
+      "profilePath": "profiles/releases.json",
+      "profileBlob": "38a3fffa0dc9881087fbd8e3c088d81c9ed2b7d3",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/releases/",
+        "stack/native-typescript/adapters/releases/"
+      ],
+      "sharedSeams": [],
+      "status": "VALID_STRUCTURAL_SCOPE",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    },
+    {
+      "unit": "W05-CONFIGURATION",
+      "surface": "configuration",
+      "milestone": "W05",
+      "packetPath": "controller/09_writer_forge/surface_units/W05-CONFIGURATION_SURFACE_PACKET.md",
+      "packetBlob": "88b862826aa1717bf8264d6e72cb83aecbccb302",
+      "profilePath": "profiles/configuration.json",
+      "profileBlob": "9b0c616a15b210ed8bc1010fcd3333c07a2b61b8",
+      "localWritableRoots": [
+        "stack/native-typescript/surfaces/configuration/",
+        "stack/native-typescript/adapters/configuration/",
+        "stack/native-typescript/foundation/global/preferences/",
+        "stack/native-typescript/foundation/global/settings/"
+      ],
+      "sharedSeams": [
+        "stack/native-typescript/foundation/global/preferences/schema.ts",
+        "stack/native-typescript/foundation/global/settings/center.ts"
+      ],
+      "status": "VALID_STRUCTURAL_SCOPE__SETTINGS_PREFERENCES_SEAMS",
+      "classification": "STRUCTURAL_PACKET_REVALIDATED__NOT_INDEPENDENT_LAUNCH_AUTHORITY",
+      "route": "ROUTE-MIMO-AGENT",
+      "controllingDecision": "OD-20260928-085",
+      "exactLaunchParent": "BIND_AT_MILESTONE_LAUNCH_AFTER_REMOTE_RECHECK",
+      "decisionBinding": "cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv@7c7a1364c39ed85777cf89171da53305701fd8e2 + exact milestone applicability filter",
+      "readOnlyRoots": [
+        "controller/",
+        "cep-writer/",
+        "contracts/",
+        "profiles/",
+        "authority/"
+      ],
+      "prohibited": [
+        "direct main mutation",
+        "self-acceptance",
+        "scope widening",
+        "unowned shared-seam writes",
+        "fixture-as-real-consumer claims",
+        "stale evidence reuse"
+      ],
+      "verification": "surface packet lifecycle + milestone-specific tests/falsifiers + source-bound browser/visual evidence as applicable",
+      "stopGate": "Controller milestone overlay required; packet alone cannot launch."
+    }
+  ],
+  "conclusion": "23/23 packets revalidated as structural scope/reference inputs. None is independently launchable. Health/Processing unowned w05-rescue write was removed in the packet correction payload. Exact milestone launch must re-fetch remote and issue a current milestone overlay; no current Writer dispatch is authorized."
+}

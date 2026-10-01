@@ -9,14 +9,22 @@
 
 ---
 
-## 0. MODELS AND UNITS
+## 0. EXECUTION CONFIGURATION AND OWNERSHIP UNITS
 
-- **Writer model:** `xiaomi-token-plan-sgp/mimo-v2.6-flash` (MiMo-V2.6-Flash). Pro is not for ordinary surface Writers.
-- **Controller model:** `xiaomi-token-plan-sgp/mimo-v2.6-pro` (MiMo-V2.6-Pro).
-- **Execution unit:** 1 WRITER → 1 SURFACE → 1 VISUAL OWNERSHIP LOOP. A Writer does not own multiple unrelated surfaces.
-- A Writer may touch shared files **only** when its packet explicitly permits it and the change is justified.
-- Surface ownership is isolated where practical.
-- **Writers must NOT run `git add` or `git commit`.** The git index is a shared resource and concurrent commits from parallel Writers corrupt or race it. Leave changes in the working tree; the Controller commits at checkpoint. (A Writer may commit only if its packet explicitly authorises it *and* no other Writer is live — this is rare.)
+Provider/model/session/concurrency bindings are **execution configuration, not permanent CEP governance**. The exact current Owner decision + execution-carrier profile + mission binding determines the runtime/model and commit/push mechanics.
+
+Durable laws:
+- one coherent mutation owner for every bounded write scope;
+- no competing writers on the same shared seam;
+- surface/domain identity stays explicit even when one Writer owns a whole milestone;
+- shared files may be changed only through the exact mission-bound owner/seam;
+- Writer never self-accepts or mutates live Controller authority.
+
+**Current ROUTE-MIMO-AGENT overlay — OD-20260928-085:** exactly ONE persistent sequential Writer on `writer/mi-serial`, executing milestone families W01 → W02 → W03 → W04 → W05. The 23 Surface packets are structural scope/reference inputs consumed by those milestones; they are **not 23 independent launch units** for this carrier.
+
+Commit/push law is carrier-specific. For current ROUTE-MIMO-AGENT, the Writer may create/push bounded checkpoint commits only on `writer/mi-serial`; direct `main` mutation, merge, acceptance, release, deployment and stack freeze remain prohibited. Other carriers follow their own current profile.
+
+Historical MiMo model names and `1 Writer → 1 Surface` wording are execution lineage only unless an exact current carrier/mission rebinds them.
 
 ---
 

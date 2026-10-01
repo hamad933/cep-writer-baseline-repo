@@ -1,3 +1,11 @@
+> ## CURRENT ROUTE-MIMO-AGENT OVERRIDE — OD-20260928-085
+> **Current role:** `W02_MILESTONE_SCOPE_AND_OBLIGATION_PACKET__NOT_CURRENTLY_DISPATCHED`  
+> **Milestone surfaces:** LIBRARY + LEARN + RQ + VISUALIZE.  
+> The current carrier uses exactly ONE persistent sequential Writer on `writer/mi-serial`, milestones W01 → W02 → W03 → W04 → W05. Any body text below that says `1 Writer → 1 Surface`, per-Surface parallel dispatch, historical `writer/cep-serial` lineage, historical baseline SHAs, fixed model names, or old PRE_WRITER gate is **lineage only**.  
+> Before this milestone may mutate Product, the Controller must rebind the actual remote parent/HEAD/tree, exact current Product subtree, 91-row Writer authority projection + milestone-applicable subset, current SurfaceProfiles/oracles/references, current open findings, exact writable union/shared-seam locks, tests/falsifiers/evidence, and STOP gate.  
+> The Surface packets under `surface_units/` are structural scope/reference inputs, not independent launch authority.  
+> **Current Controller phase:** `CONTROLLER_ZERO_LOSS_CONVERGENCE`; no Writer launch is authorized from this packet now.
+
 # W02_COMPLETE_WORKSPACE_PACKET — Library · Learn · Visualize · Research & Quality + shared interaction/customization policy
 
 **Class:** `WRITER_PACKET__CANDIDATE_ONLY__NO_SELF_PROMOTION__SOLE_CONTROLLER_REVIEW_REQUIRED`

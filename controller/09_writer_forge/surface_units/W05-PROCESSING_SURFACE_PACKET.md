@@ -1,3 +1,5 @@
+> **CURRENT ROUTE-MIMO-AGENT CEILING — 2026-10-02:** This is a structural Surface scope/reference packet, not independent launch authority. Under `OD-20260928-085`, the launch unit is milestone W05 on the one persistent `writer/mi-serial` Writer. Exact parent, decision subset, shared-seam write authority and tests are rebound by the W05 milestone mission. `w05-rescue.ts` is owned by W05-VALIDATION and is not writable from this packet.
+
 # SURFACE WRITER PACKET — PROCESSING
 
 **Unit:** `W05-PROCESSING` · **Surface:** `processing` · **Workspace:** W05
@@ -25,7 +27,6 @@
 
 **Writable roots (you may write ONLY these):**
 - `stack/native-typescript/adapters/processing-runtime.ts`
-- `stack/native-typescript/surfaces/composition/w05-rescue.ts`
 
 **Read-only (never write):** `controller/`, `cep-writer/`, `contracts/`, `profiles/`, `authority/`
 

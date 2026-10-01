@@ -1,3 +1,11 @@
+> ## CURRENT ROUTE-MIMO-AGENT OVERRIDE — OD-20260928-085
+> **Current role:** `W05_MILESTONE_SCOPE_AND_OBLIGATION_PACKET__NOT_CURRENTLY_DISPATCHED`  
+> **Milestone surfaces:** HEALTH + PROCESSING + VALIDATION + MANUAL_AI + BACKUP + AUDIT + RELEASES + CONFIGURATION.  
+> The current carrier uses exactly ONE persistent sequential Writer on `writer/mi-serial`, milestones W01 → W02 → W03 → W04 → W05. Any body text below that says per-Surface parallel dispatch, historical `writer/cep-serial` lineage, historical baseline SHAs, fixed model names, or old PRE_WRITER gate is lineage only.  
+> Before W05 may mutate Product, the Controller must rebind actual remote parent/HEAD/tree, exact current Product subtree, 91-row Writer authority projection + W05-applicable subset, current SurfaceProfiles/oracles/references, open findings, exact writable union/shared-seam locks, tests/falsifiers/evidence, and STOP gate.  
+> W05 owns the group-level `surfaces/composition/w05-rescue.ts` seam; the HEALTH and PROCESSING structural packets do not independently own/write it.  
+> **Current Controller phase:** `CONTROLLER_ZERO_LOSS_CONVERGENCE`; no Writer launch is authorized from this packet now.
+
 # W05_COMPLETE_WORKSPACE_PACKET — Health · Processing · Validation · Manual AI (AI Bridge) · Backup · Audit · Releases · Configuration
 
 **Class:** `WRITER_PACKET__CANDIDATE_ONLY__NO_SELF_PROMOTION__SOLE_CONTROLLER_REVIEW_REQUIRED`
