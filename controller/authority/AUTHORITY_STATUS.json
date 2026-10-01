@@ -1,21 +1,9 @@
 {
-  "schemaVersion": 1,
-  "classification": "PRE_CUTOVER_MIRROR__NON_AUTHORITATIVE_GITHUB_CONTROLLER_PLANE",
+  "schemaVersion": 2,
+  "classification": "GITHUB_CANONICAL",
   "repository": "hamad933/cep-writer-baseline-repo",
   "branch": "writer/mi-serial",
-  "sourceBasis": {
-    "head": "d5d7588fbd6445a66cdb7d57e0cc48e619591361",
-    "tree": "faa2c73c42e4acb015449fae4cc9987c6ee9402a"
-  },
-  "liveAuthorityNow": "GOOGLE_DRIVE",
-  "liveDrive": {
-    "readFirstId": "1r6XU0zhlAjdrK3OrzkXzHLA2WknWip6h",
-    "currentStateId": "164CDevKZ48ZAXke44oL3jXIVpYQJBmRu",
-    "controllerGovernanceId": "1xZSIBmNWcc6DtWuQ30R_5uHLg7AT9hB_",
-    "ownerDecisionRegisterId": "1GF70xX-eGWNmp8VaK_gjTRrAAVq0bihh",
-    "executionCarrierRouteAuthorityId": "1lyFTo1kzW1STWYNfhYRHSg8hOBINnJCDE5mVTzR0j-8"
-  },
-  "futureCanonicalControllerPlane": {
+  "canonicalControllerPlane": {
     "readFirst": "controller/READ_FIRST.md",
     "currentState": "controller/state/CURRENT_STATE.md",
     "governance": "controller/CONTROLLER_GOVERNANCE.md",
@@ -27,19 +15,24 @@
     "role": "DERIVED_EXECUTION_INPUTS_ONLY__NEVER_SECOND_MUTABLE_CONTROLLER_AUTHORITY"
   },
   "cutover": {
-    "status": "NOT_COMPLETE",
+    "eventId": "CEP-GITHUB-CUTOVER-2026-10-02-001",
+    "status": "GITHUB_CANONICAL",
     "controllingOwnerDecision": "OD-20261002-086",
-    "currentBlockers": [
-      "GitHub-direct successor recovery proof not yet recorded",
-      "Runs/Learn corrected browser rerun is tool-environment blocked in current Controller session",
-      "Enterprise shared RelationInteraction integration remains open Product defect",
-      "explicit authority cutover event not yet recorded"
-    ],
-    "postCutoverDriveRole": "COMPATIBILITY_BOOTSTRAP_POINTER__HISTORY__EVIDENCE__NOT_MUTABLE_AUTHORITY"
+    "cutoverParent": "bc376275d5a64a47792190255aef3f94d395395e",
+    "githubDirectProof": "controller/authority/GITHUB_DIRECT_SUCCESSOR_RECOVERY_PROOF.md",
+    "githubDirectProofCommit": "bc376275d5a64a47792190255aef3f94d395395e",
+    "githubDirectProofValidationRun": 36942921345,
+    "postCutoverDriveRole": "COMPATIBILITY_BOOTSTRAP_POINTER__HISTORY__EVIDENCE__HEAVY_OUTPUT__NOT_MUTABLE_AUTHORITY"
   },
-  "recoveryRule": "FETCH_REMOTE_FIRST__AUTHORITY_STATUS_FIRST__CURRENT_STATE_THEN_OWNER_REGISTER__NO_FILENAME_RECENCY_SELF_PROMOTION",
-  "lastReconciledParent": {
-    "head": "308219306ae39b2c98af72f0afc03f9d3e8a228c",
-    "tree": "42f5411c502000f1c273665d0f435b4214940cf6"
-  }
+  "openTruthCeilings": [
+    "H03-R2-PROP-001=NOT_PROVEN",
+    "H03-R2-FALSIFY-001=NOT_PROVEN",
+    "Enterprise relation route/shared-owner integration=OPEN_PRODUCT_DEFECT",
+    "Runs causal flow=UNRESOLVED_RUNTIME_OR_HARNESS_INTEGRATION",
+    "Product acceptance=NOT_AUTHORIZED",
+    "main merge=NOT_AUTHORIZED",
+    "release/deployment=NOT_AUTHORIZED",
+    "stack=STACK_EXPANSION_LOCKED__STACK_NOT_FROZEN"
+  ],
+  "recoveryRule": "FETCH_REMOTE_FIRST__READ_AUTHORITY_STATUS__READ_FIRST__CURRENT_STATE__OWNER_REGISTER__EXACT_TASK_EVIDENCE__NO_FILENAME_RECENCY_SELF_PROMOTION"
 }

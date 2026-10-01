@@ -1,54 +1,52 @@
 # CEP — READ FIRST
 
-**Role:** transition-aware Controller bootstrap index  
-**Current classification:** `PRE_CUTOVER_MIRROR__NON_AUTHORITATIVE_GITHUB_CONTROLLER_PLANE`
+**Role:** canonical GitHub Controller bootstrap index  
+**Authority mode:** `GITHUB_CANONICAL`  
+**Cutover event:** `CEP-GITHUB-CUTOVER-2026-10-02-001`
 
-## 0. First read
-Read `controller/authority/AUTHORITY_STATUS.json` before treating any repository control file as authority.
+## Mandatory boot
 
-### While status is `PRE_CUTOVER_MIRROR`
-Google Drive remains the live Controller authority. GitHub `controller/**` is a candidate mirror/control-plane convergence target only.
+Before every substantive CEP Controller action:
 
-Mandatory live reads:
-1. Drive READ_FIRST `1r6XU0zhlAjdrK3OrzkXzHLA2WknWip6h`
-2. Drive CURRENT_STATE `164CDevKZ48ZAXke44oL3jXIVpYQJBmRu`
-3. Drive CONTROLLER_GOVERNANCE `1xZSIBmNWcc6DtWuQ30R_5uHLg7AT9hB_`
-4. Drive OWNER_DECISION_LIVE_REGISTER `1GF70xX-eGWNmp8VaK_gjTRrAAVq0bihh`
-5. exact mission/profile/intake/owner-lock/oracle/evidence required by the task.
+1. fetch the actual remote `writer/mi-serial` HEAD/tree;
+2. read `controller/authority/AUTHORITY_STATUS.json`;
+3. read `controller/state/CURRENT_STATE.md`;
+4. read `controller/CONTROLLER_GOVERNANCE.md`;
+5. resolve every applicable ACTIVE / ACTIVE_PLATFORM_GATED row in `controller/authority/OWNER_DECISION_LIVE_REGISTER.csv`;
+6. read `controller/authority/EXECUTION_CARRIER_ROUTE_AUTHORITY.md` for Writer/carrier work;
+7. read the exact current mission/profile/intake/owner-lock/oracle/evidence required by the task.
 
-### Only after an explicit recorded cutover changes status to `GITHUB_CANONICAL`
-The canonical mutable Controller plane becomes:
-- `controller/READ_FIRST.md`
-- `controller/state/CURRENT_STATE.md`
-- `controller/CONTROLLER_GOVERNANCE.md`
-- `controller/authority/OWNER_DECISION_LIVE_REGISTER.csv`
-- `controller/authority/EXECUTION_CARRIER_ROUTE_AUTHORITY.md`
+Re-refresh when source/hash, Writer/Auditor output, blockers, Owner decisions, shared owners, donor parity, readiness or continuity changes.
 
-After that event Google Drive is a compatibility/bootstrap pointer plus history/evidence custody, not a second mutable authority, per `OD-20261002-086`.
+## Authority
 
-## Recovery invariant
-Always fetch the real remote branch first. Never infer current truth from a checkpoint filename, stored SHA, timestamp, Writer PASS, screenshot, handoff, or chat memory.
+`latest explicit Owner decision → controller/state/CURRENT_STATE.md → exact Controller-accepted source/evidence → live Owner decisions/locks → current mission/profile/intake → governed oracle/donor → classified historical evidence → chat memory`.
 
-Current convergence basis before this control-plane commit:
-- repository: `hamad933/cep-writer-baseline-repo`
-- branch: `writer/mi-serial`
-- observed HEAD: `d5d7588fbd6445a66cdb7d57e0cc48e619591361`
-- observed tree: `faa2c73c42e4acb015449fae4cc9987c6ee9402a`
+No filename, timestamp, checkpoint label, Writer PASS, screenshot or green test creates authority.
 
-## Current execution topology
-`OD-20260928-085` is ACTIVE for `ROUTE-MIMO-AGENT`: exactly one persistent sequential Writer on `writer/mi-serial`, milestones W01→W05, Controller inline audit. Historical per-Surface parallel-wave and Writer Priority Matrix material is dependency/seam/history evidence only.
+## Plane boundary
 
-## Authority and truth ceilings
-`latest explicit Owner decision → CURRENT_STATE → exact Controller-accepted source/evidence → live Owner decisions/locks → mission/profile/intake → governed oracle/donor → classified history → chat memory`.
+- `controller/**` = sole mutable Controller governance/state/recovery plane.
+- `cep-writer/**` = derived Writer execution inputs only.
+- Product source remains distinct from governance/control state.
+- Google Drive = compatibility/bootstrap/navigation + immutable/history/evidence/heavy-output custody; never a second mutable Controller authority.
 
-Keep CONTENT, PRESENTATION, BEHAVIOR/INTERACTION/FUNCTIONALITY, and DOMAIN/DATA/PROVIDER truth separate. Writer PASS, green tests and screenshots never create acceptance.
+## Current execution carrier
 
-## Control-plane boundary
-- `controller/**`: future canonical Controller plane under convergence.
-- `cep-writer/**`: derived Writer execution-input plane only.
-- Product source remains separate from governance/control convergence.
-- H03 route-level propagation remains `NOT_PROVEN` unless separately proven.
-- Stack remains `STACK_NOT_FROZEN`.
+`OD-20260928-085`:
+- `ROUTE-MIMO-AGENT`
+- exactly one persistent sequential Writer
+- branch `writer/mi-serial`
+- W01 → W02 → W03 → W04 → W05
+- Controller performs independent audit
+- historical parallel/per-Surface/WM plans are lineage/dependency evidence only.
 
-## Current phase
-`CONTROLLER_ZERO_LOSS_CONVERGENCE`
+## Current truth ceilings
+
+- H03 propagation/falsification: `NOT_PROVEN`.
+- Enterprise shared relation integration: OPEN Product defect.
+- Runs causal flow: `UNRESOLVED_RUNTIME_OR_HARNESS_INTEGRATION`.
+- Product acceptance/main merge/release/deploy: NOT_AUTHORIZED.
+- stack: `STACK_EXPANSION_LOCKED__STACK_NOT_FROZEN`.
+
+Google Drive entrypoints are compatibility pointers under `OD-20261002-086`; when arriving through Drive, follow them back to this GitHub plane.

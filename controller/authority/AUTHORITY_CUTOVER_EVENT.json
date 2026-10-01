@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "eventId": "CEP-GITHUB-CUTOVER-2026-10-02-001",
+  "classification": "AUTHORITY_CUTOVER_PAYLOAD",
+  "parentCommit": "bc376275d5a64a47792190255aef3f94d395395e",
+  "githubDirectSuccessorProof": {
+    "commit": "bc376275d5a64a47792190255aef3f94d395395e",
+    "validationRun": 36942921345,
+    "result": "PASS"
+  },
+  "targetAuthority": "GITHUB_CONTROLLER_PLANE",
+  "targetPaths": {
+    "readFirst": "controller/READ_FIRST.md",
+    "currentState": "controller/state/CURRENT_STATE.md",
+    "governance": "controller/CONTROLLER_GOVERNANCE.md",
+    "ownerDecisionRegister": "controller/authority/OWNER_DECISION_LIVE_REGISTER.csv",
+    "executionCarrierRouteAuthority": "controller/authority/EXECUTION_CARRIER_ROUTE_AUTHORITY.md"
+  },
+  "writerPlaneRole": "DERIVED_ONLY",
+  "postCutoverDriveRole": "COMPATIBILITY_POINTER_HISTORY_EVIDENCE_HEAVY_OUTPUT",
+  "openTruthCeilings": [
+    "H03-R2-PROP-001=NOT_PROVEN",
+    "H03-R2-FALSIFY-001=NOT_PROVEN",
+    "Enterprise relation route/shared-owner integration=OPEN_PRODUCT_DEFECT",
+    "Runs causal flow=UNRESOLVED_RUNTIME_OR_HARNESS_INTEGRATION",
+    "Product acceptance=NOT_AUTHORIZED",
+    "main merge=NOT_AUTHORIZED",
+    "release/deployment=NOT_AUTHORIZED",
+    "stack=STACK_EXPANSION_LOCKED__STACK_NOT_FROZEN"
+  ]
+}
