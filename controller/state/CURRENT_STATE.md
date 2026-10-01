@@ -66,7 +66,8 @@ The 23 structurally revalidated packets remain candidate execution bindings only
 
 ## Current gates
 
-- GitHub Controller authority cutover: `EXECUTED__VERIFICATION_RECORD_REQUIRED`
+- GitHub Controller authority cutover payload: `58b8058932a8a34dfb424025466b1359db2cf3fd` / tree `6a3904c2110fa2e238943198537f8862f8fe6b66`
+- GitHub Controller authority cutover: `PAYLOAD_CONSTRUCTED__REMOTE_VERIFICATION_REQUIRED`
 - Drive compatibility reconciliation: `REQUIRED_NEXT`
 - Drive-entry successor recovery proof: `REQUIRED_AFTER_DRIVE_RECONCILIATION`
 - Product acceptance: `NOT_AUTHORIZED`

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "branch": "writer/mi-serial",
   "protocol": "controller/state/CHECKPOINT_PROTOCOL.md",
-  "note": "Append-only. The LATEST checkpoint is the last entry in `checkpoints`. A checkpoint is not complete until its commit is verified on GitHub.",
+  "note": "Append-only. Cutover checkpoints use separate payload, verification observation, and actual fetched remote HEAD identities.",
   "checkpoints": [
     {
       "checkpoint_id": "CP-2026-09-30-001",
@@ -241,6 +241,25 @@
       "matrix": "controller/state/MIMO_CLAW_WRITER_PRIORITY_MATRIX_2026-10-01-005.json",
       "status": "CONTROLLER_PHASE_COMPLETE__WRITER_APPROVAL_REQUIRED",
       "note": "No Writer dispatched. H-RUN-1 gate PASSED. App-boot defect (reviews i18n exports) repaired. Awaiting explicit Owner row approval."
+    },
+    {
+      "checkpoint_id": "CP-2026-10-02-CUTOVER-001",
+      "event_id": "CEP-GITHUB-CUTOVER-2026-10-02-001",
+      "branch": "writer/mi-serial",
+      "checkpoint_payload_commit": "58b8058932a8a34dfb424025466b1359db2cf3fd",
+      "checkpoint_payload_tree": "6a3904c2110fa2e238943198537f8862f8fe6b66",
+      "parent_sha": "bc376275d5a64a47792190255aef3f94d395395e",
+      "controller_phase": "POST_CUTOVER_DRIVE_COMPATIBILITY_RECONCILIATION",
+      "authority_mode": "GITHUB_CANONICAL",
+      "github_direct_successor_proof": "PASS_28_OF_28",
+      "proof_commit": "bc376275d5a64a47792190255aef3f94d395395e",
+      "proof_validation_run": 36942921345,
+      "browser_truth": "6_TOTAL__3_PASS__3_FAIL__ENTERPRISE_2_PRODUCT__RUNS_UNRESOLVED",
+      "h03_truth": "PROP_NOT_PROVEN__FALSIFY_NOT_PROVEN",
+      "product_acceptance": "NOT_AUTHORIZED",
+      "next_action": "Verify this payload through remote branch, record the verified observation, then reconcile Drive pointers under OD-20261002-086.",
+      "remote_verified": false,
+      "remote_verification_note": "Verification must be recorded only after branch ref is updated and fetched."
     }
   ]
 }
