@@ -1,3 +1,8 @@
+> **CURRENT APPLICABILITY CEILING — 2026-10-02**
+> For `ROUTE-MIMO-AGENT`, this plan is **HISTORICAL_DEPENDENCY_AND_COLLISION_EVIDENCE_ONLY**.
+> Its durable lessons about real writable overlap, donor coupling ≠ file collision, shared hotspots, and final convergence remain useful.
+> It does **not** authorize current per-Surface parallel dispatch. `OD-20260928-085` requires one persistent sequential Writer and W01→W05 unless explicitly superseded.
+
 # PARALLEL EXECUTION PLAN — SURFACE WRITER WAVES
 
 **Controller:** MiMo-V2.6-Pro · **Writer model:** `xiaomi-token-plan-sgp/mimo-v2.6-flash`

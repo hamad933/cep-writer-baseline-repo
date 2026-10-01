@@ -1,105 +1,45 @@
-# RESUME — how to recover this execution from GitHub alone
+# RESUME — deterministic CEP Controller recovery
 
-**Read this first if you are a NEW Controller in a NEW Codespace.**
+> Fetch the remote first. Chat/session memory is never the recovery source.
 
-> **THE CODESPACE IS A WORKER. GITHUB IS THE DURABLE MEMORY.**
-
-## The three things you must NOT assume
-
-- **DO NOT assume Codespace state.** The filesystem may be gone, stale, or a different machine.
-- **DO NOT assume OpenCode session state.** Prior session memory is not authority.
-- **DO NOT assume previous chat state.** Nothing in a transcript is durable.
-
-Only the GitHub remote branch is durable truth.
-
----
-
-## 1. Recovery procedure (brand-new Codespace)
-
+## 1. Verify repository identity
 ```sh
-# 1. clone / open
-git clone https://github.com/hamad933/cep-writer-baseline-repo
-cd cep-writer-baseline-repo
-
-# 2. fetch and verify the durable branch
 git fetch origin --prune
-git branch -vv
-git ls-remote --heads origin writer/mi-serial
-
-# 3. checkout the durable checkpoint branch
 git checkout writer/mi-serial
-git rev-parse HEAD          # this is your recovery point
-
-# 4. install runtime deps
-npm ci
+git rev-parse HEAD
+git rev-parse HEAD^{tree}
+git status --short
 ```
+The actual remote HEAD is current execution identity. Stored checkpoint SHAs are historical observations, not a substitute for the remote ref.
 
-## 2. Reconstruct the execution
+## 2. Resolve authority mode
+Read `controller/authority/AUTHORITY_STATUS.json` then `controller/READ_FIRST.md`.
+If `PRE_CUTOVER_MIRROR`, Drive is still live authority. If `GITHUB_CANONICAL`, the GitHub Controller files named by AUTHORITY_STATUS are the sole mutable control authority and Drive is pointer/history/evidence only. Never infer cutover from file presence.
 
-```sh
-# 5. read durable state (human + machine)
-cat controller/state/RESUME_STATE.md
-cat controller/state/RESUME_STATE.json
+## 3. Current route
+`OD-20260928-085`: `ROUTE-MIMO-AGENT`, one persistent sequential Writer, `writer/mi-serial`, W01→W05, Controller independent audit. Historical parallel/per-Surface plans are not launch authority for this route.
 
-# 6. identify the latest checkpoint
-cat controller/state/CHECKPOINTS.json
+## 4. Current phase
+`CONTROLLER_ZERO_LOSS_CONVERGENCE`
 
-# 7. read current governance
-cat controller/09_writer_forge/VISUAL_EXECUTION_STANDARD.md   # binding standard
-cat controller/10_dispatch/PARALLEL_EXECUTION_PLAN.md          # waves + coverage matrix
-cat controller/10_dispatch/SURFACE_DISPATCH_MATRIX.json        # 23 units, ownership, references
+Read `controller/state/CURRENT_STATE.md`, `controller/CONTROLLER_GOVERNANCE.md`, `controller/authority/OWNER_DECISION_LIVE_REGISTER.csv`, `controller/authority/EXECUTION_CARRIER_ROUTE_AUTHORITY.md`, and `controller/state/RESUME_STATE.json` only under its derived-snapshot ceiling.
 
-# 8. read registers
-cat controller/13_visual_control/PREPARATION_GAP_REGISTER.md
-cat controller/13_visual_control/CONTROLLER_REGISTERS.md
+## 5. Convergence order
+1. deterministic Controller-plane boundary/bootstrap;
+2. reconcile OD-085 pointers and historical topology;
+3. H08 54-path disposition;
+4. decision/profile projection repair;
+5. 23 Surface packet revalidation;
+6. browser harness/oracle correction + exact-source evidence;
+7. clean-checkpoint prerequisites + GitHub-direct successor recovery proof;
+8. explicit cutover;
+9. post-cutover Drive pointer/history reconciliation;
+10. Drive-entry successor proof reaches the same GitHub truth.
 
-# 9. verify the tree still builds and tests green
-npm run build:runtime
-npm test          # expect 210/0
-node tools/check-build-authority.mjs   # expect pass=true, parity true
-```
-
-## 3. Reconstruct active work
-
-1. Identify active Writers: `RESUME_STATE.json` → `activeWriterSessions` and `writers`.
-2. Identify each surface's status: `surfaces.reviewed` / `surfaces.inProgress` / `surfaces.notDispatched`.
-3. Inspect blockers: `RESUME_STATE.json` → `knownBlockers`.
-4. Inspect pending integration seams: `RESUME_STATE.json` → `pendingIntegrationSeams`.
-5. Inspect governance version and skills: `RESUME_STATE.json` → `controller`.
-6. Inspect last validation: `RESUME_STATE.json` → `validation`.
-7. **Resume from the recorded `nextActions` list.** Do not invent a new plan.
-
-## 4. Restarting Writers
-
-Each Writer unit is defined by its packet:
-
-```
-controller/09_writer_forge/surface_units/<UNIT>_SURFACE_PACKET.md
-```
-
-A restarted Writer must be told:
-- its writable roots (from the packet),
-- what already exists on disk (see `writer-output/<UNIT>/` and `RESUME_STATE.json` → `writers[unit].uncommittedPathEntries`),
-- **preserve existing work — do not restart, do not revert** (contract §17: no reset),
-- the binding standard `controller/09_writer_forge/VISUAL_EXECUTION_STANDARD.md`,
-- the four skills: `visual-surface-composition`, `visual-fidelity-review`, `shared-component-governance`, `professional-ui-ux-composition`.
-
-Writer model: `xiaomi-token-plan-sgp/mimo-v2.6-flash`. Controller model: `xiaomi-token-plan-sgp/mimo-v2.6-pro`.
-
-## 5. Never do these
-
-- Do **not** `git push --force`. History is append-only (§17).
-- Do **not** squash or delete checkpoint commits.
-- Do **not** mark a surface complete because a Writer said "PASS". Sole Controller review is required.
-- Do **not** commit secrets, credentials, tokens, `.env`, or `node_modules`.
-- Do **not** re-derive work already recorded in a Writer's `VISUAL_EXECUTION_REPORT.json` — inherit it.
-
-## 6. Bootstrap script
-
-A deterministic bootstrap is provided:
-
-```sh
-./controller/state/bootstrap.sh
-```
-
-It performs FETCH → VERIFY BRANCH → READ RESUME STATE → VERIFY LAST CHECKPOINT → VERIFY WORKTREE → REPORT, and prints the exact recovery point without needing any prior transcript.
+## 6. Never do
+- do not use Writer Priority Matrix/per-Surface parallel waves as current MIMO launch authority;
+- do not create a second mutable Controller authority under `cep-writer/**`;
+- do not delete unresolved H08 residue merely to make git clean;
+- do not mutate Product to satisfy a stale harness;
+- do not upgrade H03 propagation beyond `NOT_PROVEN` without genuine-consumer proof;
+- do not force-push or rewrite recovery history.

@@ -9,20 +9,20 @@
   "branch": {
     "local": "writer/mi-serial",
     "durableCheckpointBranch": "writer/mi-serial",
-    "localHead": "4e1110fff7c6fcef9dfc2acec76fad1bcaf3180c",
+    "localHead": "d5d7588fbd6445a66cdb7d57e0cc48e619591361",
     "remoteBranchExists": true,
-    "remoteHead": "4e1110fff7c6fcef9dfc2acec76fad1bcaf3180c",
+    "remoteHead": "d5d7588fbd6445a66cdb7d57e0cc48e619591361",
     "tracking": "writer/mi-serial -> origin/writer/mi-serial",
-    "note": "STALE fields reconciled by CP-2026-10-01-005. Actual remote HEAD at mission start was eb3bd2c (state file had recorded dac0396/c362799).",
+    "note": "Snapshot observation before the Controller convergence commit. Fetch the actual remote ref first; checkpoint payload SHA, verification/state-record commit, and observed remote HEAD are separate identities.",
     "pushStatus": "PUSHED_AND_VERIFIED",
     "remoteRef": "refs/heads/writer/mi-serial @ CP-2026-10-01-005 commit"
   },
   "controller": {
-    "phase": "PHASE_7_CONTINUOUS_VISUAL_OWNERSHIP_LOOP__MATRIX_GATE",
-    "executionWave": "WAVE-1 reviewed; H-RUN-1 CLOSED; reviews boot defect REPAIRED; Writer Priority Matrix v1 awaiting Owner approval",
+    "phase": "CONTROLLER_ZERO_LOSS_CONVERGENCE",
+    "executionWave": "NO_WRITER_DISPATCH_FROM_H01_H09_OUTPUTS__CONTROL_PLANE_CONVERGENCE",
     "governanceVersion": "GOV-2026-09-30-v1",
-    "controllerModel": "xiaomi-token-plan-sgp/mimo-v2.6-pro",
-    "writerModel": "xiaomi-token-plan-sgp/mimo-v2.6-flash",
+    "controllerModel": "EXECUTION_CONFIGURATION__NON_GOVERNANCE",
+    "writerModel": "EXECUTION_CONFIGURATION__NON_GOVERNANCE",
     "skills": [
       "visual-surface-composition",
       "visual-fidelity-review",
@@ -30,7 +30,7 @@
       "professional-ui-ux-composition"
     ],
     "skillPath": ".opencode/skills/<skill-id>/SKILL.md",
-    "dispatchVersion": "DISPATCH-2026-09-30-v2 (wave-2 over-serialization revoked)",
+    "dispatchVersion": "OD-20260928-085__ONE_PERSISTENT_SEQUENTIAL_WRITER__W01_TO_W05",
     "inheritedStandard": "controller/09_writer_forge/VISUAL_EXECUTION_STANDARD.md"
   },
   "surfaces": {
@@ -95,7 +95,8 @@
       "W03-ENTERPRISE"
     ],
     "hrun1": "HRUN1_PASS__LIVE_ROUTE_MOUNT_PROVEN",
-    "routeBootSmoke": "23/23 BOOT_OK"
+    "routeBootSmoke": "23/23 BOOT_OK",
+    "statusAuthorityCeiling": "HISTORICAL_EXECUTION_SNAPSHOT__REVALIDATE_CURRENT_PACKET_BEFORE_DISPATCH"
   },
   "writers": {
     "W01-TODAY": {
@@ -316,42 +317,43 @@
   ],
   "knownBlockers": [
     {
-      "id": "G-24/G-36",
-      "severity": "V2",
-      "statement": "stale browser conformance receipt lineage keeps npm run check red on 3 browser.* checks",
+      "id": "H09-AUTH-BOOT",
+      "severity": "P0",
+      "statement": "GitHub control plane is not yet canonical; bootstrap/topology must be deterministic before cutover.",
       "owner": "Controller"
     },
     {
-      "id": "G-35",
-      "severity": "V1",
-      "statement": "pre-existing WRITER_INPUT_MANIFEST.json drift entries, deliberately not absorbed",
+      "id": "H09-H08-54",
+      "severity": "P0",
+      "statement": "H08 custody contains 54 material local control/evidence paths requiring explicit disposition; no wholesale import/clean.",
       "owner": "Controller"
     },
     {
-      "id": "VD-008",
-      "severity": "V3",
-      "statement": "image-read channel returns intermittently stale frames; mitigation = ground-truth cross-check (sha256 + OCR) on every visual verdict",
-      "owner": "Controller/tooling"
-    },
-    {
-      "id": "VD-005/VD-011",
-      "severity": "V3",
-      "statement": "Flash Writers exhaust output budget mid-build on 20-75KB files; §17 mitigation (report-first, targeted edits) working but not sufficient alone",
+      "id": "H09-PROFILE-PARITY",
+      "severity": "P0",
+      "statement": "Evidence/Reviews Writer profile projections are stale and SURFACE_PROFILE_BINDING 23/23 claim is false at the audited basis.",
       "owner": "Controller"
     },
     {
-      "id": "BR-CONFORM-5",
-      "severity": "V2",
-      "statement": "browser-conformance flows fail 5/6 against current composition (object-list click, relation composer double-click, runtime evaluate shape, spatial canvas bounds)",
+      "id": "H09-HARNESS",
+      "severity": "P1",
+      "statement": "Browser harness contains stale selectors/preconditions; Enterprise relation and Runs causal remain unresolved until source-bound rerun.",
+      "owner": "Controller"
+    },
+    {
+      "id": "H03-PROP",
+      "severity": "P1",
+      "statement": "H03-R2-PROP-001 and H03-R2-FALSIFY-001 remain NOT_PROVEN.",
       "owner": "Controller"
     }
   ],
   "nextActions": [
-    "Owner: approve Writer Priority Matrix rows explicitly (APPROVED: WM-xxx / HOLD: WM-xxx) — controller/state/MIMO_CLAW_WRITER_PRIORITY_MATRIX_2026-10-01-005.md",
-    "Controller: apply b2 RQ m0 mount hunk (serialized slot)",
-    "Controller: reconcile the 5 failing browser-conformance flows (tools + product interaction)",
-    "Controller review/recapture pass for NO_WRITER_REQUIRED_NOW set (today, rq, scenarios, evidence, configuration, manual_ai, releases, backup, enterprise, labs, learn, runs)",
-    "On approval: execute ONLY approved rows (§97), controller audit per §98"
+    "Complete Controller-plane convergence and H08 disposition.",
+    "Repair Owner-decision/profile projections without creating a second live register.",
+    "Revalidate all 23 Surface packets against current durable truth.",
+    "Repair harness/oracles and regenerate exact-source evidence.",
+    "Run clean-checkpoint and GitHub-direct successor recovery proof.",
+    "Only then record explicit cutover and reconcile Drive into pointer/history role."
   ],
   "recoveryInstructions": "controller/state/RESUME.md",
   "lastCheckpoint": {
@@ -590,5 +592,14 @@
     "baseline_commit": "dac0396a6aeefbec3c1c4d4a8f8d251e3516ec83",
     "handoff_file": "controller/state/MIMO_CLAW_HANDOFF_CP-2026-09-30-004.md",
     "json_file": "controller/state/MIMO_CLAW_HANDOFF_CP-2026-09-30-004.json"
+  },
+  "authorityClassification": "DERIVED_EXECUTION_SNAPSHOT__NON_AUTHORITY__FETCH_REMOTE_FIRST",
+  "currentControllerPhase": "CONTROLLER_ZERO_LOSS_CONVERGENCE",
+  "cutover": {
+    "status": "PRE_CUTOVER_MIRROR",
+    "currentLiveAuthority": "GOOGLE_DRIVE",
+    "futureCanonicalPlane": "controller/**",
+    "postCutoverDriveRole": "POINTER_HISTORY_EVIDENCE",
+    "ownerDecision": "OD-20261002-086"
   }
 }

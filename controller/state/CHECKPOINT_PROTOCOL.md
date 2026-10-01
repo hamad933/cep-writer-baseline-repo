@@ -137,3 +137,13 @@ Secrets: API keys, tokens, OAuth refresh tokens, private secrets, `.env` with se
 Junk: `node_modules`, runtime caches, temporary files, OS junk, transient terminal buffers, ephemeral session dumps (unless explicitly designated durable evidence), duplicated generated junk, arbitrary heartbeat output.
 
 Use `.gitignore` appropriately. Do not turn Git into a dumping ground.
+
+
+## 9. Checkpoint identity semantics
+
+Never overload one SHA with three meanings. Record separately:
+1. **checkpoint payload commit** — commit containing the durable payload;
+2. **verification/state-record commit** — later commit recording verification;
+3. **actual observed remote HEAD** — fetched from the remote at recovery/check time.
+
+A state-record commit cannot contain its own future SHA. A stored verified payload SHA may therefore be one ancestor behind a later append-only recording commit without being false. Recovery must fetch the actual remote first and reconcile ancestry.

@@ -1,3 +1,9 @@
+> **CURRENT CONTROLLER CEILING — 2026-10-02**
+> This document is historical execution evidence and is **not current ROUTE-MIMO-AGENT launch authority**.
+> `OD-20260928-085` controls the current carrier: one persistent sequential Writer on `writer/mi-serial`, W01→W05.
+> Controller Zero-Loss Convergence is open and no Writer dispatch is authorized from this historical gate alone.
+> Preserve the body below as lineage; use `controller/READ_FIRST.md` + `controller/authority/AUTHORITY_STATUS.json` for current recovery.
+
 # 11_gates / PRE_WRITER_DISPATCH_GATE — RE-RUN COMPLETE (2026-09-29T03:00Z)
 
 # VERDICT: **PASS_WITH_LIMITATION → WRITER DISPATCH AUTHORIZED**
