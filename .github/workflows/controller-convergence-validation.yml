@@ -51,7 +51,8 @@ jobs:
             echo "node=$(node --version)"
             echo "npm=$(npm --version)"
             echo "python=$(python3 --version)"
-            echo "playwright=$(node -e \"console.log(require('playwright/package.json').version)\")"
+            printf 'playwright='
+            node -p "require('playwright/package.json').version"
           } | tee convergence-evidence/IDENTITY.txt
 
       - name: Build runtime
