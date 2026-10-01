@@ -29,7 +29,17 @@
   "cutover": {
     "status": "NOT_COMPLETE",
     "controllingOwnerDecision": "OD-20261002-086",
+    "currentBlockers": [
+      "GitHub-direct successor recovery proof not yet recorded",
+      "Runs/Learn corrected browser rerun is tool-environment blocked in current Controller session",
+      "Enterprise shared RelationInteraction integration remains open Product defect",
+      "explicit authority cutover event not yet recorded"
+    ],
     "postCutoverDriveRole": "COMPATIBILITY_BOOTSTRAP_POINTER__HISTORY__EVIDENCE__NOT_MUTABLE_AUTHORITY"
   },
-  "recoveryRule": "FETCH_REMOTE_FIRST__AUTHORITY_STATUS_FIRST__NO_FILENAME_RECENCY_SELF_PROMOTION"
+  "recoveryRule": "FETCH_REMOTE_FIRST__AUTHORITY_STATUS_FIRST__CURRENT_STATE_THEN_OWNER_REGISTER__NO_FILENAME_RECENCY_SELF_PROMOTION",
+  "lastReconciledParent": {
+    "head": "308219306ae39b2c98af72f0afc03f9d3e8a228c",
+    "tree": "42f5411c502000f1c273665d0f435b4214940cf6"
+  }
 }
