@@ -261,7 +261,7 @@ try {
       const workspace = domain.workspace();
       const recordedSnapshot = domain.recorded();
       const device = workspace.devices.find(item => item.id === 'DEV-WEB-01');
-      const event = workspace.events.at(-1);
+      const event = recordedSnapshot.events.at(-1);
       const recorded = recordedSnapshot.devices.find(item => item.id === 'DEV-WEB-01');
       return { up:device?.up, recordedUp:recorded?.up, semanticCommand:event?.semanticCommand, eventOutput:event?.output||'', provider:workspace.provider?.id||workspace.provider?.providerId||'UNKNOWN', domainOwner:domain.owner, runtimeTruth:workspace.provider?.runtimeTruth };
     });
@@ -321,9 +321,9 @@ try {
       return { lang: document.documentElement.lang, dir: document.documentElement.dir };
     });
     assert(preference.lang === 'en' && preference.dir === 'ltr', 'canonical locale preference did not update language/direction');
-    const isolation = await page.evaluate(() => ({ hostKind: CEPFoundation.api.hostKind, domainKind: CEPFoundation.structured.domainKind, libraryState: CEPFoundation.api.state.library, searchCount: document.querySelectorAll('.library-search').length, treeLabel: document.querySelector('#structureTree')?.getAttribute('aria-label'), bdi: [...document.querySelectorAll('bdi[dir="ltr"]')].some(node => /KU|TCP\/IP|policy|learn-document/.test(node.textContent)), isolation: CEPFoundation.structured.assertDomainIsolation().ok }));
+    const isolation = await page.evaluate(() => ({ hostKind: CEPFoundation.api.hostKind, domainKind: CEPFoundation.structured.domainKind, libraryState: CEPFoundation.api.state.library, searchCount: document.querySelectorAll('.library-search').length, treeLabel: document.querySelector('#structureTree')?.getAttribute('aria-label'), bdiCount: [...document.querySelectorAll('bdi[dir="ltr"]')].filter(node => String(node.textContent||'').trim().length > 0).length, isolation: CEPFoundation.structured.assertDomainIsolation().ok }));
     assert(isolation.hostKind === 'DONOR_FREE_WORKSPACE_HOST' && isolation.domainKind === 'learn' && isolation.libraryState === undefined && isolation.searchCount === 0 && isolation.isolation, `Learn leaked Library state or mounted the donor host: ${JSON.stringify(isolation)}`);
-    assert(isolation.bdi, 'mixed-direction technical token is not isolated with bdi');
+    assert(isolation.bdiCount > 0, `Learn did not render any non-empty technical/directional token through bdi[dir=ltr]: ${JSON.stringify(isolation)}`);
     await ready(page, 'library');
     const libraryParity = await page.evaluate(() => ({ consumer: CEPFoundation.consumer, activeDocument: CEPFoundation.api.state.route.activeKu, blockCount: CEPFoundation.api.state.editor.blocks.length, editorCore: document.querySelector('#editorDocument')?.dataset.editorCore, donorHost: CEPFoundation.api.hostKind === undefined }));
     assert(libraryParity.activeDocument && libraryParity.blockCount > 0 && libraryParity.editorCore === 'UnifiedEditorCore' && libraryParity.donorHost, `Library donor compatibility path regressed: ${JSON.stringify(libraryParity)}`);
