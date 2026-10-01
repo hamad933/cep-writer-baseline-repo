@@ -9,7 +9,9 @@
   "branch": {
     "durableCheckpointBranch": "writer/mi-serial",
     "cutoverParent": "bc376275d5a64a47792190255aef3f94d395395e",
-    "recoveryRule": "FETCH_REMOTE_FIRST"
+    "recoveryRule": "FETCH_REMOTE_FIRST",
+    "lastVerifiedCutoverPayload": "58b8058932a8a34dfb424025466b1359db2cf3fd",
+    "lastVerifiedRemoteObservation": "0c721d379947c700148ea1758a54073ac6513a2f"
   },
   "controller": {
     "phase": "POST_CUTOVER_DRIVE_COMPATIBILITY_RECONCILIATION",
@@ -23,7 +25,13 @@
     "proofCommit": "bc376275d5a64a47792190255aef3f94d395395e",
     "proofValidationRun": 36942921345,
     "driveCompatibilityDecision": "OD-20261002-086",
-    "driveReconciliation": "REQUIRED_NEXT"
+    "driveReconciliation": "REQUIRED_NEXT",
+    "payloadCommit": "58b8058932a8a34dfb424025466b1359db2cf3fd",
+    "verifiedRemoteObservation": {
+      "head": "0c721d379947c700148ea1758a54073ac6513a2f",
+      "tree": "a381bd1c67169b9a84f88ff3614b0050824cb54d",
+      "result": "PASS"
+    }
   },
   "profiles": {
     "surfaceCount": 23,

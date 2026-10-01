@@ -258,8 +258,11 @@
       "h03_truth": "PROP_NOT_PROVEN__FALSIFY_NOT_PROVEN",
       "product_acceptance": "NOT_AUTHORIZED",
       "next_action": "Verify this payload through remote branch, record the verified observation, then reconcile Drive pointers under OD-20261002-086.",
-      "remote_verified": false,
-      "remote_verification_note": "Verification must be recorded only after branch ref is updated and fetched."
+      "remote_verified": true,
+      "remote_verification_note": "Observed writer/mi-serial remote ref at verification candidate before this later state-record commit. Recovery fetches the actual current remote HEAD and reconciles ancestry.",
+      "verification_observation_commit": "0c721d379947c700148ea1758a54073ac6513a2f",
+      "verification_observation_tree": "a381bd1c67169b9a84f88ff3614b0050824cb54d",
+      "rollback_reference": "bc376275d5a64a47792190255aef3f94d395395e"
     }
   ]
 }
