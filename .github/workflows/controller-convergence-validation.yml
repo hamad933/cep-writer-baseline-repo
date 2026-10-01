@@ -1,0 +1,86 @@
+name: CEP Controller Convergence Validation
+
+on:
+  push:
+    branches:
+      - 'writer/mi-serial'
+    paths:
+      - 'controller/**'
+      - 'cep-writer/**'
+      - 'tools/**'
+      - 'profiles/**'
+      - 'stack/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/controller-convergence-validation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.16.0'
+          cache: npm
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install exact dependencies
+        run: npm ci
+
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Record source identity
+        run: |
+          mkdir -p convergence-evidence
+          {
+            echo "head=$(git rev-parse HEAD)"
+            echo "tree=$(git rev-parse HEAD^{tree})"
+            echo "node=$(node --version)"
+            echo "npm=$(npm --version)"
+            echo "python=$(python3 --version)"
+            echo "playwright=$(node -e \"console.log(require('playwright/package.json').version)\")"
+          } | tee convergence-evidence/IDENTITY.txt
+
+      - name: Build runtime
+        run: npm run build:runtime | tee convergence-evidence/build-runtime.log
+
+      - name: Model tests
+        run: npm test | tee convergence-evidence/model-tests.log
+
+      - name: Browser conformance
+        run: npm run browser:test | tee convergence-evidence/browser-conformance.log
+
+      - name: Contract and authority checks
+        run: npm run check | tee convergence-evidence/check.log
+
+      - name: Runtime falsification
+        run: npm run runtime:check | tee convergence-evidence/runtime-check.log
+
+      - name: Capture generated receipts
+        if: always()
+        run: |
+          cp -f assurance/BROWSER_CONFORMANCE_RECEIPT.json convergence-evidence/ 2>/dev/null || true
+          cp -f assurance/browser-*.png convergence-evidence/ 2>/dev/null || true
+          git status --short > convergence-evidence/WORKTREE_AFTER.txt
+          git diff --stat > convergence-evidence/DIFF_STAT.txt
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: CEP_CONTROLLER_CONVERGENCE_VALIDATION-${{ github.run_id }}
+          path: convergence-evidence/
+          if-no-files-found: error
+          retention-days: 14
