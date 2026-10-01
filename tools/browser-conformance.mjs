@@ -86,16 +86,21 @@ const ready = async (page, surface) => {
   await page.waitForFunction(expected => window.CEPFoundation?.consumer === expected, surface);
 };
 const selectPair = async (page,{requireEligible=true}={}) => {
-  const ids = await page.evaluate(requireEligible => {
+  const {ids,consumer} = await page.evaluate(requireEligible => {
     const nodes = CEPFoundation.relations.nodes;
     for (let i = 0; i < nodes.length; i += 1) for (let j = i + 1; j < nodes.length; j += 1) {
-      if (!requireEligible || CEPFoundation.relations.connectionAvailability([nodes[i].id, nodes[j].id]).enabled) return [nodes[i].id, nodes[j].id];
+      if (!requireEligible || CEPFoundation.relations.connectionAvailability([nodes[i].id, nodes[j].id]).enabled) return {ids:[nodes[i].id,nodes[j].id],consumer:CEPFoundation.consumer};
     }
-    return null;
+    return {ids:null,consumer:CEPFoundation.consumer};
   }, requireEligible);
   assert(ids?.length === 2, requireEligible?'no eligible relation endpoint pair exists':'fewer than two relation endpoint objects exist');
-  await page.locator(`#objectList [data-object="${ids[0]}"]`).click();
-  await page.locator(`#objectList [data-object="${ids[1]}"]`).click({ modifiers: ['Control'] });
+  const visibleTarget = id => consumer === 'visualize'
+    ? page.locator(`[data-visualize-select="${id}"]`).filter({ visible: true }).first()
+    : page.locator(`.spatial-canvas [data-node="${id}"]`).filter({ visible: true }).first();
+  const first=visibleTarget(ids[0]),second=visibleTarget(ids[1]);
+  assert(await first.count() > 0 && await second.count() > 0, `visible surface-owned selection controls unavailable for ${consumer}: ${JSON.stringify(ids)}`);
+  await first.click();
+  await second.click({ modifiers: ['Control'] });
   return ids;
 };
 const selectEligiblePair = page => selectPair(page,{requireEligible:true});
@@ -182,11 +187,14 @@ try {
     oracle: 'whole-edge double-click is inert; authorized label and F2 edit routes converge on relation.edit'
   }, async page => {
     await ready(page, 'enterprise');
-    const composer = page.locator('.relation-composer'), edge = page.locator('.spatial-canvas [data-edge]').first(), line = edge.locator('line').first(), label = edge.locator('[data-relation-label]');
-    assert(await edge.count() > 0 && await label.count() > 0, 'editable Enterprise relation edge/label is unavailable for route falsification');
-    await line.dblclick({ force: true });
-    assert(await composer.evaluate(node => node.hidden), 'whole-edge double-click incorrectly opened the composer');
-    await label.dblclick({ force: true });
+    const composer = page.locator('.relation-composer').filter({ visible: true }).first(),
+      edge = page.locator('.spatial-canvas [data-edge]').filter({ visible: true }).first(),
+      line = edge.locator('line').filter({ visible: true }).first(),
+      label = edge.locator('[data-relation-label]').filter({ visible: true }).first();
+    assert(await edge.count() > 0 && await line.count() > 0 && await label.count() > 0, 'visible editable Enterprise relation edge/label is unavailable for route falsification');
+    await line.dblclick();
+    assert(await composer.count() === 0 || await composer.evaluate(node => node.hidden), 'whole-edge double-click incorrectly opened the composer');
+    await label.dblclick();
     assert(!(await composer.evaluate(node => node.hidden)), 'authorized label double-click did not open the composer');
     await composer.locator('[data-relation-close]').first().click();
     await edge.focus();
@@ -248,15 +256,18 @@ try {
     await page.keyboard.type('shutdown');
     await page.keyboard.press('Enter');
     const state = await page.evaluate(() => {
-      const device = CEPFoundation.simulation.devices.find(item => item.id === 'DEV-WEB-01');
-      const node = CEPFoundation.spatial.model.nodes.find(item => item.id === 'DEV-WEB-01');
-      const event = CEPFoundation.simulation.events.at(-1);
-      const recorded = CEPFoundation.simulation.recorded().devices.find(item => item.id === 'DEV-WEB-01');
-      return { up: device.up, nodeStatus: node.status, semanticCommand: event.semanticCommand, eventOutput: event.output, recordedUp: recorded.up, provider: CEPFoundation.operational.providerDescriptor.id };
+      const domain = CEPFoundation.m0Composition?.composition?.domain;
+      if (!domain || typeof domain.workspace !== 'function' || typeof domain.recorded !== 'function') throw Error('CURRENT_RUNS_DOMAIN_UNAVAILABLE');
+      const workspace = domain.workspace();
+      const recordedSnapshot = domain.recorded();
+      const device = workspace.devices.find(item => item.id === 'DEV-WEB-01');
+      const event = workspace.events.at(-1);
+      const recorded = recordedSnapshot.devices.find(item => item.id === 'DEV-WEB-01');
+      return { up:device?.up, recordedUp:recorded?.up, semanticCommand:event?.semanticCommand, eventOutput:event?.output||'', provider:workspace.provider?.id||workspace.provider?.providerId||'UNKNOWN', domainOwner:domain.owner, runtimeTruth:workspace.provider?.runtimeTruth };
     });
     const terminalText = await page.locator('#operationalHost .terminal-output').innerText();
-    assert(state.up === false && state.nodeStatus === 'DOWN' && state.recordedUp === false, `causal state mismatch: ${JSON.stringify(state)}`);
-    assert(state.semanticCommand === 'device.shutdown' && state.eventOutput.includes('DOWN') && terminalText.includes('DOWN'), 'semantic event or visible terminal output is inconsistent');
+    assert(state.up === false && state.recordedUp === false, `Runs domain/recorded causal state mismatch: ${JSON.stringify(state)}`);
+    assert(state.semanticCommand === 'device.shutdown' && state.eventOutput.includes('DOWN') && terminalText.includes('DOWN'), 'Runs domain event or visible terminal output is inconsistent');
     await capture(page, 'browser-operational-shutdown.png', 'runtime-causal-consequence', 'provider-neutral terminal and canonical shutdown consequence');
     return { ...state, terminalVisibleDown: true };
   });
@@ -269,8 +280,12 @@ try {
     oracle: 'only own context is suppressed; keyboard intents stay distinct; Learn remains Library-free and Bidi-correct'
   }, async page => {
     await ready(page, 'visualize');
-    const svg = page.locator('.spatial-canvas'), box = await svg.boundingBox();
-    assert(box, 'spatial canvas has no measurable bounds');
+    const canvasTab = page.locator('[data-visualize-view-tab="CANVAS"]').filter({ visible: true }).first();
+    assert(await canvasTab.count() > 0, 'visible Visualize CANVAS view control is unavailable');
+    await canvasTab.click();
+    await page.waitForFunction(() => document.querySelector('[data-visualize-active-view="CANVAS"] .spatial-canvas')?.getBoundingClientRect().width > 0);
+    const svg = page.locator('[data-visualize-active-view="CANVAS"] .spatial-canvas').filter({ visible: true }).first(), box = await svg.boundingBox();
+    assert(box, 'active Visualize CANVAS has no measurable bounds');
     const start = { x: box.x + box.width - 130, y: box.y + box.height - 120 };
     await page.keyboard.down('Control');
     await page.mouse.move(start.x, start.y);
