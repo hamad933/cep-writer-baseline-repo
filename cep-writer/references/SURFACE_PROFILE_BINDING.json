@@ -1,13 +1,12 @@
 {
-  "schemaVersion": 1,
-  "classification": "CURRENT_GITHUB_WORKING_BASELINE_SURFACE_PROFILE_PARITY__NOT_INDEPENDENT_DRIVE_FILE_PARITY_AUTHORITY",
+  "schemaVersion": 2,
+  "classification": "CURRENT_GITHUB_WRITER_PROFILE_PROJECTION_PARITY__DERIVED_INPUT_ONLY",
   "repository": "hamad933/cep-writer-baseline-repo",
-  "verifiedAtBranch": "controller/zero-loss-repo-cleanup",
-  "verifiedAtCommit": "43b2de5d564d47c7c73f6386a742f59388e5f9ab",
-  "workingBaselineAncestor": "293dd1e0e2e6cb61bea5b42abd2cba39847e3c6a",
+  "projectionPayloadCommit": "4c9f41b5df3c7536f38e258f0b7085b3fb731028",
+  "projectionPayloadTree": "011660a0fa218f55acf15f53217f85d6977e8ec3",
   "surfaceCount": 23,
   "allWriterCopiesByteIdenticalToCurrentBaselineProfiles": true,
-  "authorityCeiling": "Proves Writer copies equal current Git working-baseline profiles byte-for-byte. It does not claim 23 independent Drive-file identities exist or replace CURRENT_STATE/Controller authority.",
+  "authorityCeiling": "Proves only that derived Writer profile copies equal current root Git profiles byte-for-byte at the projection payload commit. It does not make cep-writer a Controller authority plane.",
   "currentSurfaceIdentityReference": "cep-writer/references/23_SURFACE_ZERO_LOSS_IDENTITY_REFERENCE_MATRIX.md",
   "rows": [
     {
@@ -15,7 +14,7 @@
       "baselinePath": "profiles/audit.json",
       "writerPath": "cep-writer/references/surface-profiles/audit.json",
       "gitBlob": "945a7a8b82f650751184cc5d0ab21de2168a5bdf",
-      "bytes": 15037,
+      "writerBlob": "945a7a8b82f650751184cc5d0ab21de2168a5bdf",
       "byteIdentical": true
     },
     {
@@ -23,7 +22,7 @@
       "baselinePath": "profiles/backup.json",
       "writerPath": "cep-writer/references/surface-profiles/backup.json",
       "gitBlob": "dde69eba37cbada12bbcfa4ad10af2b599acedec",
-      "bytes": 15430,
+      "writerBlob": "dde69eba37cbada12bbcfa4ad10af2b599acedec",
       "byteIdentical": true
     },
     {
@@ -31,7 +30,7 @@
       "baselinePath": "profiles/configuration.json",
       "writerPath": "cep-writer/references/surface-profiles/configuration.json",
       "gitBlob": "9b0c616a15b210ed8bc1010fcd3333c07a2b61b8",
-      "bytes": 15373,
+      "writerBlob": "9b0c616a15b210ed8bc1010fcd3333c07a2b61b8",
       "byteIdentical": true
     },
     {
@@ -39,15 +38,15 @@
       "baselinePath": "profiles/enterprise.json",
       "writerPath": "cep-writer/references/surface-profiles/enterprise.json",
       "gitBlob": "f942eb9c0e1f4e043efac39ec7cef43bf4c88131",
-      "bytes": 15348,
+      "writerBlob": "f942eb9c0e1f4e043efac39ec7cef43bf4c88131",
       "byteIdentical": true
     },
     {
       "surface": "evidence",
       "baselinePath": "profiles/evidence.json",
       "writerPath": "cep-writer/references/surface-profiles/evidence.json",
-      "gitBlob": "51534e3f91fb9d76eb7146e7b55e689de38f1a6a",
-      "bytes": 15520,
+      "gitBlob": "c96b2aea408016116887a34b376cc5d1d093de70",
+      "writerBlob": "c96b2aea408016116887a34b376cc5d1d093de70",
       "byteIdentical": true
     },
     {
@@ -55,7 +54,7 @@
       "baselinePath": "profiles/health.json",
       "writerPath": "cep-writer/references/surface-profiles/health.json",
       "gitBlob": "16e163e40c47b46af7989721939efbd1d9e2b311",
-      "bytes": 15014,
+      "writerBlob": "16e163e40c47b46af7989721939efbd1d9e2b311",
       "byteIdentical": true
     },
     {
@@ -63,7 +62,7 @@
       "baselinePath": "profiles/labs.json",
       "writerPath": "cep-writer/references/surface-profiles/labs.json",
       "gitBlob": "69f6db501fc26334639355a67e644edc38a5a8ce",
-      "bytes": 15222,
+      "writerBlob": "69f6db501fc26334639355a67e644edc38a5a8ce",
       "byteIdentical": true
     },
     {
@@ -71,7 +70,7 @@
       "baselinePath": "profiles/learn.json",
       "writerPath": "cep-writer/references/surface-profiles/learn.json",
       "gitBlob": "5df035eabcc15a58b4bb525fe097fef912c928a3",
-      "bytes": 15267,
+      "writerBlob": "5df035eabcc15a58b4bb525fe097fef912c928a3",
       "byteIdentical": true
     },
     {
@@ -79,7 +78,7 @@
       "baselinePath": "profiles/library.json",
       "writerPath": "cep-writer/references/surface-profiles/library.json",
       "gitBlob": "7aaea88691f9d693a2f1584dc1f7244b7b41b775",
-      "bytes": 15292,
+      "writerBlob": "7aaea88691f9d693a2f1584dc1f7244b7b41b775",
       "byteIdentical": true
     },
     {
@@ -87,7 +86,7 @@
       "baselinePath": "profiles/manual_ai.json",
       "writerPath": "cep-writer/references/surface-profiles/manual_ai.json",
       "gitBlob": "5e759cef962d75534b3052ac995f71931ad23230",
-      "bytes": 15104,
+      "writerBlob": "5e759cef962d75534b3052ac995f71931ad23230",
       "byteIdentical": true
     },
     {
@@ -95,7 +94,7 @@
       "baselinePath": "profiles/mastery.json",
       "writerPath": "cep-writer/references/surface-profiles/mastery.json",
       "gitBlob": "d076f338be39248c578e48a63c22d545044d0067",
-      "bytes": 15347,
+      "writerBlob": "d076f338be39248c578e48a63c22d545044d0067",
       "byteIdentical": true
     },
     {
@@ -103,7 +102,7 @@
       "baselinePath": "profiles/portfolio.json",
       "writerPath": "cep-writer/references/surface-profiles/portfolio.json",
       "gitBlob": "827c1522551bb29a46fe803bd61b0575640aed36",
-      "bytes": 15160,
+      "writerBlob": "827c1522551bb29a46fe803bd61b0575640aed36",
       "byteIdentical": true
     },
     {
@@ -111,7 +110,7 @@
       "baselinePath": "profiles/processing.json",
       "writerPath": "cep-writer/references/surface-profiles/processing.json",
       "gitBlob": "8c91e051f3b6a8f0e38f70f07efbe310c44e3291",
-      "bytes": 15320,
+      "writerBlob": "8c91e051f3b6a8f0e38f70f07efbe310c44e3291",
       "byteIdentical": true
     },
     {
@@ -119,7 +118,7 @@
       "baselinePath": "profiles/releases.json",
       "writerPath": "cep-writer/references/surface-profiles/releases.json",
       "gitBlob": "38a3fffa0dc9881087fbd8e3c088d81c9ed2b7d3",
-      "bytes": 15214,
+      "writerBlob": "38a3fffa0dc9881087fbd8e3c088d81c9ed2b7d3",
       "byteIdentical": true
     },
     {
@@ -127,15 +126,15 @@
       "baselinePath": "profiles/results.json",
       "writerPath": "cep-writer/references/surface-profiles/results.json",
       "gitBlob": "06ed30feb01cf3b9c2c0180adb8679b945c0166e",
-      "bytes": 15545,
+      "writerBlob": "06ed30feb01cf3b9c2c0180adb8679b945c0166e",
       "byteIdentical": true
     },
     {
       "surface": "reviews",
       "baselinePath": "profiles/reviews.json",
       "writerPath": "cep-writer/references/surface-profiles/reviews.json",
-      "gitBlob": "93c5c8ee4f984dd2983f92747f8e90fe4aac9678",
-      "bytes": 15350,
+      "gitBlob": "aea63f4a8885476336ae74da649553b6c8d55002",
+      "writerBlob": "aea63f4a8885476336ae74da649553b6c8d55002",
       "byteIdentical": true
     },
     {
@@ -143,7 +142,7 @@
       "baselinePath": "profiles/rq.json",
       "writerPath": "cep-writer/references/surface-profiles/rq.json",
       "gitBlob": "1c42a1d9579e062349a83dbea89308ecc29e0ede",
-      "bytes": 15351,
+      "writerBlob": "1c42a1d9579e062349a83dbea89308ecc29e0ede",
       "byteIdentical": true
     },
     {
@@ -151,7 +150,7 @@
       "baselinePath": "profiles/runs.json",
       "writerPath": "cep-writer/references/surface-profiles/runs.json",
       "gitBlob": "bff69e8f174c0913f1eaeec7c253d37f50304366",
-      "bytes": 15715,
+      "writerBlob": "bff69e8f174c0913f1eaeec7c253d37f50304366",
       "byteIdentical": true
     },
     {
@@ -159,7 +158,7 @@
       "baselinePath": "profiles/scenarios.json",
       "writerPath": "cep-writer/references/surface-profiles/scenarios.json",
       "gitBlob": "c44ad299eecac073c7427b3b42694bdd374446ee",
-      "bytes": 15255,
+      "writerBlob": "c44ad299eecac073c7427b3b42694bdd374446ee",
       "byteIdentical": true
     },
     {
@@ -167,7 +166,7 @@
       "baselinePath": "profiles/shell.json",
       "writerPath": "cep-writer/references/surface-profiles/shell.json",
       "gitBlob": "7f29486698b92e080493609759fa32e19efec1f0",
-      "bytes": 15066,
+      "writerBlob": "7f29486698b92e080493609759fa32e19efec1f0",
       "byteIdentical": true
     },
     {
@@ -175,7 +174,7 @@
       "baselinePath": "profiles/today.json",
       "writerPath": "cep-writer/references/surface-profiles/today.json",
       "gitBlob": "3b83590daaa6bb220ae3bd2499618043cdcc4d6c",
-      "bytes": 15131,
+      "writerBlob": "3b83590daaa6bb220ae3bd2499618043cdcc4d6c",
       "byteIdentical": true
     },
     {
@@ -183,7 +182,7 @@
       "baselinePath": "profiles/validation.json",
       "writerPath": "cep-writer/references/surface-profiles/validation.json",
       "gitBlob": "f831e7bc9f475cddc1b693d43fccb896f8a1aeaa",
-      "bytes": 14926,
+      "writerBlob": "f831e7bc9f475cddc1b693d43fccb896f8a1aeaa",
       "byteIdentical": true
     },
     {
@@ -191,7 +190,7 @@
       "baselinePath": "profiles/visualize.json",
       "writerPath": "cep-writer/references/surface-profiles/visualize.json",
       "gitBlob": "1395cc4445b56d947aaddad9c4f76194894db4a2",
-      "bytes": 15415,
+      "writerBlob": "1395cc4445b56d947aaddad9c4f76194894db4a2",
       "byteIdentical": true
     }
   ]
