@@ -2,7 +2,7 @@
 
 
 **Role:** canonical execution-carrier separation/profile authority
-**Custody:** /Google Drive/cep_building_mgm/00_CONTROLLER/CONTROLLER_OPERATING_SYSTEM
+**Custody:** mode-resolved: Drive canonical before cutover; `controller/authority/EXECUTION_CARRIER_ROUTE_AUTHORITY.md` canonical after explicit `GITHUB_CANONICAL` cutover
 **Update mode:** STABLE_NAME__IN_PLACE
 **Authority:** latest Owner decision + CURRENT_STATE + CONTROLLER_GOVERNANCE
 **Current governing decisions: OD-20260921-066, OD-20260921-067, OD-20260922-072, OD-20260922-073, OD-20260922-074, OD-20260922-075, OD-20260922-076, OD-20260924-081, OD-20260924-082, OD-20260925-083 (ROUTE-LOCAL only), OD-20260928-085 (ROUTE-MIMO-AGENT). `OD-20260925-084` is superseded lineage merged into OD-20260921-067.
