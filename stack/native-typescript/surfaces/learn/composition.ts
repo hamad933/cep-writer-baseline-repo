@@ -313,7 +313,16 @@ export function mountLearnSurfaceComposition({learn,structured,workspace,command
     const legacyContext=doc.querySelector('#domainContext');
     if(legacyContext){legacyContext.hidden=true;legacyContext.innerHTML='';legacyContext.setAttribute('aria-hidden','true')}
     // Donor KU/block scope switch does not apply to the Learn route (no Library KU state).
-    doc.querySelectorAll('#rightPane .contextscope').forEach(node=>{node.hidden=true;node.inert=true;node.setAttribute('aria-hidden','true')});
+    // It is the donor `DIV.contextscope` that sits directly in #rightPane .pbody; the Learn-owned
+    // `nav.contextscope` inside the shared ContextInspector host carries this surface's own lens
+    // detail tabs and must stay live. `hidden`/`inert` alone are defeated by the shared
+    // `.contextscope{display:grid!important}` rules, so the suppression forces `display:none`.
+    doc.querySelectorAll('#rightPane .contextscope').forEach(node=>{
+      if(node.closest('.context-inspector'))return;
+      node.hidden=true;node.inert=true;node.setAttribute('aria-hidden','true');
+      node.style.setProperty('display','none','important');
+      node.dataset.learnDonorScopeSuppressed='true';
+    });
     void contextLabel;
 
     workspace.region('BOTTOM',{label:t('deepWork',model.locale),summary:t('deepWorkHint',model.locale),open:null});

@@ -1,0 +1,225 @@
+{
+  "schemaVersion": 1,
+  "kind": "LRN_1_FALSIFICATION",
+  "lane": "LRN-1",
+  "unit": "W02-LEARN",
+  "generatedAt": "2026-10-02T05:25:05.613Z",
+  "node": "v22.16.0",
+  "total": 11,
+  "pass": 11,
+  "fail": 0,
+  "results": [
+    {
+      "id": "N1.learn-registers-only-learn-owned-routes",
+      "status": "PASS",
+      "detail": {
+        "routes": [
+          "learn.open",
+          "learn.edit",
+          "learn.practice",
+          "learn.review"
+        ],
+        "owner": "LearnDomainAdapter",
+        "transactionOwner": "StructuredTransactionHistoryRecoveryOwner"
+      }
+    },
+    {
+      "id": "N1.foreign-route-execution-refused",
+      "status": "PASS",
+      "detail": {
+        "attempts": {
+          "library.insert": "REFUSED",
+          "library.save": "REFUSED",
+          "mastery.states": "REFUSED",
+          "visualize.viewport": "REFUSED",
+          "rq.compare": "REFUSED"
+        },
+        "learnDocumentUnchanged": true
+      }
+    },
+    {
+      "id": "N1.cross-surface-block-edit-refused-or-inert",
+      "status": "PASS",
+      "detail": {
+        "availabilityEnabled": false,
+        "availabilityCode": "LEARN_CANONICAL_SOURCE_UNAVAILABLE",
+        "executed": {
+          "ok": false,
+          "id": "learn.edit",
+          "owner": "LearnDomainAdapter",
+          "commandOwner": "LearnDomainAdapter",
+          "code": "LEARN_CANONICAL_SOURCE_UNAVAILABLE",
+          "reason": "LEARN_PROVIDER_UNBOUND",
+          "availabilityOwner": "LearnAdapter",
+          "enabled": false,
+          "rejectedSource": {
+            "truth": "UNAVAILABLE",
+            "classification": "UNAVAILABLE",
+            "reason": "LEARN_PROVIDER_UNBOUND"
+          }
+        },
+        "documentIntact": true,
+        "patchLanded": false
+      }
+    },
+    {
+      "id": "N2.boundary-source-inputs-fail-closed",
+      "status": "PASS",
+      "detail": {
+        "empty-object": {
+          "reason": "LEARN_EXACT_CANONICAL_SOURCE_REQUIRED",
+          "truth": "UNAVAILABLE",
+          "documentId": "learn-unavailable"
+        },
+        "no-activity": {
+          "reason": "LEARN_EXACT_CANONICAL_SOURCE_REQUIRED",
+          "truth": "UNAVAILABLE",
+          "documentId": "learn-unavailable"
+        },
+        "no-document-revision": {
+          "reason": "LEARN_EXACT_CANONICAL_SOURCE_REQUIRED",
+          "truth": "UNAVAILABLE",
+          "documentId": "learn-unavailable"
+        },
+        "blocks-not-array": {
+          "reason": "LEARN_EXACT_CANONICAL_SOURCE_REQUIRED",
+          "truth": "UNAVAILABLE",
+          "documentId": "learn-unavailable"
+        },
+        "null-source": {
+          "reason": "LEARN_PROVIDER_UNBOUND",
+          "truth": "UNAVAILABLE_PROVIDER_UNBOUND",
+          "documentId": "learn-unavailable"
+        }
+      }
+    },
+    {
+      "id": "N2.boundary-learn-commands-do-not-corrupt-document",
+      "status": "PASS",
+      "detail": {
+        "documentUnchanged": true,
+        "probes": {
+          "edit-missing-block": {
+            "threw": "UNKNOWN_STRUCTURED_BLOCK"
+          },
+          "edit-unknown-patch-key": {
+            "threw": "STRUCTURAL_UPDATE_REQUIRES_MUTATION_KERNEL:nosuchkey"
+          },
+          "practice-blank-answer": {
+            "threw": "ANSWER_REQUIRED"
+          },
+          "review-without-attempt": {
+            "ok": true,
+            "status": "LOCAL_LEARNING_REVIEW",
+            "attempt": {
+              "id": "attempt-1",
+              "activityId": "act-1",
+              "activityRevision": 1,
+              "revision": 1,
+              "actor": "LOCAL_SESSION",
+              "state": "IN_PROGRESS",
+              "answer": "",
+              "sourceSnapshot": {
+                "activityId": "act-1",
+                "activityRevision": 1,
+                "title": "Boundary",
+                "kind": "practice"
+              }
+            },
+            "progress": {
+              "activityId": "act-1",
+              "activityRevision": 1,
+              "state": "INCOMPLETE",
+              "scope": "LEARNING_PROJECTION",
+              "sourceTruth": "BOUND_CANONICAL_LEARNING_SOURCE",
+              "mastery": "NOT_INFERRED",
+              "persisted": false,
+              "attemptTruth": "CURRENT_REVISION_IN_PROGRESS",
+              "attempt": {
+                "id": "attempt-1",
+                "activityId": "act-1",
+                "activityRevision": 1,
+                "state": "IN_PROGRESS",
+                "historicalProgress": "INCOMPLETE",
+                "countsForCurrentCompletion": false
+              }
+            },
+            "assessment": {
+              "kind": "ASSESSMENT_BRIEF",
+              "availability": "LOCAL_BRIEF_ONLY",
+              "gradingProvider": "UNAVAILABLE",
+              "masteryWrite": false,
+              "w04DecisionCreated": false
+            },
+            "mastery": "NOT_INFERRED",
+            "masteryWrite": false,
+            "formalReviewCreated": false,
+            "w04DecisionCreated": false
+          },
+          "outline-query-injection": {
+            "nodes": 0,
+            "ariaLabel": "Learn Journey navigation"
+          }
+        }
+      }
+    },
+    {
+      "id": "N3.unbound-provider-is-truthfully-unavailable",
+      "status": "PASS",
+      "detail": {
+        "sourceTruth": "UNAVAILABLE_PROVIDER_UNBOUND",
+        "edit": "LEARN_CANONICAL_SOURCE_UNAVAILABLE",
+        "practice": "LEARN_CANONICAL_SOURCE_UNAVAILABLE",
+        "refusalCode": "LEARN_CANONICAL_SOURCE_UNAVAILABLE",
+        "documentId": "learn-unavailable",
+        "syntheticHits": []
+      }
+    },
+    {
+      "id": "N3.synthetic-classification-is-hard-rejected",
+      "status": "PASS",
+      "detail": {
+        "code": "LEARN_FIXTURE_OR_SYNTHETIC_SOURCE_FORBIDDEN: SYNTHETIC_DEMO"
+      }
+    },
+    {
+      "id": "N3.non-production-truth-fails-closed-not-throws",
+      "status": "PASS",
+      "detail": {
+        "rejectionReason": "LEARN_FIXTURE_OR_SYNTHETIC_SOURCE_FORBIDDEN",
+        "sourceAvailability": "UNAVAILABLE"
+      }
+    },
+    {
+      "id": "LANE.library-kU-scope-seed-does-not-reach-learn",
+      "status": "PASS",
+      "detail": {
+        "librarySourceTruth": "REAL_LIBRARY_PRODUCT_SOURCE",
+        "libraryWorkingRevision": "LIB-SEED-1",
+        "learnDocumentUnchanged": true,
+        "learnMetadataUnchanged": true,
+        "leakedTokens": [],
+        "contextLeakTokens": [],
+        "learnLibraryIndependent": true
+      }
+    },
+    {
+      "id": "LANE.learn-context-descriptor-owns-no-library-scope",
+      "status": "PASS",
+      "detail": {
+        "providerId": "learn-structured-context",
+        "owner": "LearnContextDescriptorProvider",
+        "domainOwner": "LearnAdapter",
+        "family": "structured"
+      }
+    },
+    {
+      "id": "LANE.h03-ceiling-held-no-relation-propagation-claim",
+      "status": "PASS",
+      "detail": {
+        "hits": [],
+        "ceiling": "H03 PROP/FALSIFY remain NOT_PROVEN"
+      }
+    }
+  ]
+}
