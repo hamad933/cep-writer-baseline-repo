@@ -1,0 +1,31 @@
+{
+  "schema": "CEP_BACKUP_ATTEMPT_V1",
+  "attemptId": "backup-attempt-f6b8d19a-e1a9-4844-91a9-e1e8443409f2",
+  "operation": "RESTORE_DRILL",
+  "phase": "DRILL",
+  "correlationId": "backup-corr-29088657-263f-4e2d-975f-4bc84b5237db",
+  "packageId": "no-such-package",
+  "targetIdentity": {
+    "kind": "ISOLATED_RESTORE_DRILL",
+    "drillId": "drill-20261002053406-9fd06e23",
+    "isolated": true,
+    "trueEmptyRequired": true
+  },
+  "startedAt": "2026-10-02T05:34:06.503Z",
+  "updatedAt": "2026-10-02T05:34:06.509Z",
+  "status": "FAILED_BEFORE_MUTATION",
+  "mutationStarted": false,
+  "originalError": {
+    "code": "PACKAGE_NOT_FOUND",
+    "message": "PACKAGE_NOT_FOUND",
+    "name": "Error",
+    "phase": "DRILL",
+    "classFingerprint": "c85e556802af4f29f357f233"
+  },
+  "compensation": {
+    "attempted": false,
+    "status": "NOT_REQUIRED",
+    "error": null
+  },
+  "terminalAt": "2026-10-02T05:34:06.509Z"
+}

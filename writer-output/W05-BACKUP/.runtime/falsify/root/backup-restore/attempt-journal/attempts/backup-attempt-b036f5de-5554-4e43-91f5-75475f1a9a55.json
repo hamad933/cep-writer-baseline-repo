@@ -1,0 +1,31 @@
+{
+  "schema": "CEP_BACKUP_ATTEMPT_V1",
+  "attemptId": "backup-attempt-b036f5de-5554-4e43-91f5-75475f1a9a55",
+  "operation": "ACTIVATION_REQUEST",
+  "phase": "ACTIVATION_REQUEST",
+  "correlationId": "backup-corr-2cfc9ca0-9aec-4f2b-8ba0-592dcf36dd4e",
+  "packageId": null,
+  "targetIdentity": {
+    "kind": "AUTHORITY_REQUEST",
+    "requestId": "activation-60ac42ba-9f04-4729-a2c3-8356446dfc8f",
+    "drillId": "no-such-drill",
+    "productionMutationAuthorized": false
+  },
+  "startedAt": "2026-10-02T05:24:56.817Z",
+  "updatedAt": "2026-10-02T05:24:56.819Z",
+  "status": "FAILED_BEFORE_MUTATION",
+  "mutationStarted": false,
+  "originalError": {
+    "code": "VERIFIED_DRILL_REQUIRED",
+    "message": "VERIFIED_DRILL_REQUIRED",
+    "name": "Error",
+    "phase": "ACTIVATION_REQUEST",
+    "classFingerprint": "94ff4d4f1fd018edb4c4bada"
+  },
+  "compensation": {
+    "attempted": false,
+    "status": "NOT_REQUIRED",
+    "error": null
+  },
+  "terminalAt": "2026-10-02T05:24:56.819Z"
+}

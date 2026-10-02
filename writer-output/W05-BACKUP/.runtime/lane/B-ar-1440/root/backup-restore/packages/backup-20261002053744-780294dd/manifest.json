@@ -1,0 +1,40 @@
+{
+  "schema": "CEP_BACKUP_PACKAGE_V1",
+  "packageId": "backup-20261002053744-780294dd",
+  "label": "backup-surface",
+  "correlationId": "backup-corr-8e134a22-cc0c-412a-a390-40fbd8c1a797",
+  "capturedAt": "2026-10-02T05:37:44.239Z",
+  "provider": {
+    "id": "CepSqlitePersistenceProvider",
+    "driverId": "node:sqlite"
+  },
+  "snapshot": {
+    "file": "snapshot.sqlite",
+    "bytes": 86016,
+    "sha256": "63816cd213ee47d92d8df03b5903de3f6e018d4fae1f229ac2638a704c337bcd"
+  },
+  "schemaArtifact": {
+    "file": "schema-v1.sql",
+    "sha256": "7486017cfee6caadb8569794d2fb48d3e0f2637d7208d70bd48092403d65572a"
+  },
+  "migrations": [
+    {
+      "version": 1,
+      "name": "schema-v1",
+      "checksum": "7486017cfee6caadb8569794d2fb48d3e0f2637d7208d70bd48092403d65572a"
+    }
+  ],
+  "schemaSignature": "8881c4eb56ccd57dd2486dcd7f93a6debd4d3a73f8617753f6eb12cd619ad235",
+  "readbackSummary": {
+    "documentCount": 1,
+    "revisionCount": 1,
+    "recoveryCount": 0,
+    "sample": [
+      {
+        "documentId": "bk-lane-B-ar-1440",
+        "currentRevisionId": "r1"
+      }
+    ]
+  },
+  "activationState": "NOT_REQUESTED"
+}

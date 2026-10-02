@@ -1,0 +1,1707 @@
+{
+  "lineage": {
+    "lane": "BKP-1",
+    "branch": "writer/mi-serial-lane/BKP-1",
+    "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "headTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+    "stackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+    "canonicalSourceSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+    "canonicalSourceFiles": 338,
+    "surfaceSourceSha256": "b50f5592a885688f793b166efed49eba04df529508bda453313eaaccb900a10b",
+    "surfaceSourceMatchesSalvageBaseline": true,
+    "writableSourceCleanVsHead": true,
+    "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+    "distBundle": [
+      {
+        "file": "dist/surfaces/backup/index.js",
+        "sha256": "af28bf7ccc44725f76b60d5bf6861e59cbe26c726b802fd4120c805596dfa625"
+      },
+      {
+        "file": "dist/surfaces/backup/style.js",
+        "sha256": "87896d7c30f8af6660bf6c6ce7c3ecf61860076a18a562e3f60b2a9ecfbe77f9"
+      },
+      {
+        "file": "dist/surfaces/backup/i18n.js",
+        "sha256": "0cfe2b90253a1ebce7c802628dd01b2e3df5bed887dfcc21623e35206b04768b"
+      },
+      {
+        "file": "dist/surfaces/backup/icons.js",
+        "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+      },
+      {
+        "file": "dist/adapters/backup-runtime.js",
+        "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+      }
+    ],
+    "candidate": "W05-BACKUP:fe1bb98ded51adc71a5f5fd14142a2c0880c11bc:0c43d7f11631dc85",
+    "capturedAt": "2026-10-02T05:17:43.192Z",
+    "viewport": "1440x1000",
+    "lang": "en",
+    "label": "F-en-1440",
+    "runtime": "playwright-chromium-headless",
+    "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+    "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+  },
+  "checks": [
+    {
+      "id": "fixture.seed",
+      "status": "PASS",
+      "detail": "POST /v1/persistence/bootstrap -> 200"
+    },
+    {
+      "id": "command.backup.package",
+      "status": "PASS",
+      "detail": "{\"packages\":1,\"packageStatus\":\"PACKAGE_VERIFIED\",\"plan\":false,\"preview\":false,\"stage\":false,\"drill\":null,\"liveRestored\":null,\"activation\":null,\"productionDatabaseMutated\":null,\"attempts\":1,\"lang\":\"en\",\"dir\":\"ltr\"}"
+    },
+    {
+      "id": "command.backup.plan",
+      "status": "PASS",
+      "detail": "{\"packages\":1,\"packageStatus\":\"PACKAGE_VERIFIED\",\"plan\":true,\"preview\":false,\"stage\":false,\"drill\":null,\"liveRestored\":null,\"activation\":null,\"productionDatabaseMutated\":null,\"attempts\":1,\"lang\":\"en\",\"dir\":\"ltr\"}"
+    },
+    {
+      "id": "command.backup.preview",
+      "status": "PASS",
+      "detail": "{\"packages\":1,\"packageStatus\":\"PACKAGE_VERIFIED\",\"plan\":true,\"preview\":true,\"stage\":false,\"drill\":null,\"liveRestored\":null,\"activation\":null,\"productionDatabaseMutated\":null,\"attempts\":1,\"lang\":\"en\",\"dir\":\"ltr\"}"
+    },
+    {
+      "id": "command.backup.stage",
+      "status": "PASS",
+      "detail": "{\"packages\":1,\"packageStatus\":\"PACKAGE_VERIFIED\",\"plan\":true,\"preview\":true,\"stage\":true,\"drill\":null,\"liveRestored\":null,\"activation\":null,\"productionDatabaseMutated\":null,\"attempts\":2,\"lang\":\"en\",\"dir\":\"ltr\"}"
+    },
+    {
+      "id": "command.backup.drill",
+      "status": "PASS",
+      "detail": "{\"packages\":1,\"packageStatus\":\"PACKAGE_VERIFIED\",\"plan\":true,\"preview\":true,\"stage\":true,\"drill\":\"STAGED_AND_VERIFIED\",\"liveRestored\":false,\"activation\":null,\"productionDatabaseMutated\":null,\"attempts\":3,\"lang\":\"en\",\"dir\":\"ltr\"}"
+    },
+    {
+      "id": "command.backup.activationRequest",
+      "status": "PASS",
+      "detail": "{\"packages\":1,\"packageStatus\":\"PACKAGE_VERIFIED\",\"plan\":true,\"preview\":true,\"stage\":true,\"drill\":\"STAGED_AND_VERIFIED\",\"liveRestored\":false,\"activation\":\"AUTHORITY_PENDING\",\"productionDatabaseMutated\":false,\"attempts\":4,\"lang\":\"en\",\"dir\":\"ltr\"}"
+    },
+    {
+      "id": "ltr.document-dir",
+      "status": "PASS",
+      "detail": "document.dir=ltr"
+    },
+    {
+      "id": "ltr.no-arabic-in-surface",
+      "status": "PASS",
+      "detail": "arabic glyph count=0"
+    },
+    {
+      "id": "ltr.search-padding-logical",
+      "status": "PASS",
+      "detail": "paddingLeft=28px paddingRight=9px"
+    },
+    {
+      "id": "ltr.title-rule-logical",
+      "status": "PASS",
+      "detail": "borderLeft=1px borderRight=0px"
+    },
+    {
+      "id": "structure.counts",
+      "status": "PASS",
+      "detail": "{\"steps\":8,\"checks\":9,\"metrics\":6,\"rightBlocks\":9}"
+    },
+    {
+      "id": "overflow.no-document-h-scroll",
+      "status": "PASS",
+      "detail": "docH=false clippedBlocks=0"
+    },
+    {
+      "id": "lifecycle.truth-ceilings-held",
+      "status": "PASS",
+      "detail": "{\"owner\":\"W05BackupProviderAwareIntegrationAdapter\",\"capabilityOwner\":\"BackupRestoreCapability\",\"selectedPackageId\":\"backup-20261002051751-8adeb353\",\"stagedVerifiedIsLiveRestored\":false,\"persistenceOwnerMutated\":false,\"drillLiveRestored\":false,\"activationAuthority\":\"AUTHORITY_PENDING\",\"productionDatabaseMutated\":false,\"durableSuccessReceipts\":\"PROVIDER_OWNED_PACKAGE_DRILL_ACTIVATION\",\"durableFailureCompensationHistory\":\"PROVIDER_DURABLE_ATTEMPT_JOURNAL\",\"semanticOwner\":\"BackupRuntimeAdapter\",\"providerPreviewStatus\":\"COMPATIBLE\",\"providerStageStatus\":\"STAGED\",\"liveRestored\":false,\"providerOwnsSurfaceSemantics\":false}"
+    },
+    {
+      "id": "lifecycle.activation-stays-pending",
+      "status": "PASS",
+      "detail": "{\"activation\":\"AUTHORITY_PENDING\",\"productionDatabaseMutated\":false}"
+    },
+    {
+      "id": "responsive.1440x1000.container-band",
+      "status": "PASS",
+      "detail": "container=654px observed metrics=3 checks=3 pipe=4 connector=none · expected metrics=3 checks=3 pipe=4 connector=none"
+    },
+    {
+      "id": "responsive.1440x1000.no-document-h-scroll",
+      "status": "PASS",
+      "detail": "docHScroll=false clippedBlocks=0 regions={\"#topBanner\":\"VISIBLE\",\"#domainToolbar\":\"VISIBLE\",\"#leftPane\":\"VISIBLE\",\"#foundationStage\":\"VISIBLE\",\"#rightPane\":\"VISIBLE\",\"#bottomShelf\":\"VISIBLE\"}"
+    },
+    {
+      "id": "responsive.1280x860.container-band",
+      "status": "PASS",
+      "detail": "container=496px observed metrics=2 checks=2 pipe=4 connector=none · expected metrics=2 checks=2 pipe=4 connector=none"
+    },
+    {
+      "id": "responsive.1280x860.no-document-h-scroll",
+      "status": "PASS",
+      "detail": "docHScroll=false clippedBlocks=0 regions={\"#topBanner\":\"VISIBLE\",\"#domainToolbar\":\"VISIBLE\",\"#leftPane\":\"VISIBLE\",\"#foundationStage\":\"VISIBLE\",\"#rightPane\":\"VISIBLE\",\"#bottomShelf\":\"VISIBLE\"}"
+    },
+    {
+      "id": "responsive.1024x900.container-band",
+      "status": "PASS",
+      "detail": "container=678px observed metrics=3 checks=3 pipe=8 connector=block · expected metrics=3 checks=3 pipe=8 connector=block"
+    },
+    {
+      "id": "responsive.1024x900.no-document-h-scroll",
+      "status": "PASS",
+      "detail": "docHScroll=false clippedBlocks=0 regions={\"#topBanner\":\"VISIBLE\",\"#domainToolbar\":\"VISIBLE\",\"#leftPane\":\"VISIBLE\",\"#foundationStage\":\"VISIBLE\",\"#rightPane\":\"COLLAPSED_OR_HIDDEN\",\"#bottomShelf\":\"VISIBLE\"}"
+    },
+    {
+      "id": "responsive.960x900.container-band",
+      "status": "PASS",
+      "detail": "container=616px observed metrics=3 checks=3 pipe=4 connector=none · expected metrics=3 checks=3 pipe=4 connector=none"
+    },
+    {
+      "id": "responsive.960x900.no-document-h-scroll",
+      "status": "PASS",
+      "detail": "docHScroll=false clippedBlocks=0 regions={\"#topBanner\":\"VISIBLE\",\"#domainToolbar\":\"VISIBLE\",\"#leftPane\":\"VISIBLE\",\"#foundationStage\":\"VISIBLE\",\"#rightPane\":\"COLLAPSED_OR_HIDDEN\",\"#bottomShelf\":\"VISIBLE\"}"
+    },
+    {
+      "id": "responsive.820x900.container-band",
+      "status": "PASS",
+      "detail": "container=795px observed metrics=6 checks=3 pipe=8 connector=block · expected metrics=6 checks=3 pipe=8 connector=block"
+    },
+    {
+      "id": "responsive.820x900.no-document-h-scroll",
+      "status": "PASS",
+      "detail": "docHScroll=false clippedBlocks=0 regions={\"#topBanner\":\"VISIBLE\",\"#domainToolbar\":\"VISIBLE\",\"#leftPane\":\"COLLAPSED_OR_HIDDEN\",\"#foundationStage\":\"VISIBLE\",\"#rightPane\":\"COLLAPSED_OR_HIDDEN\",\"#bottomShelf\":\"VISIBLE\"}"
+    },
+    {
+      "id": "runtime.reachable",
+      "status": "PASS",
+      "detail": "GET 127.0.0.1:35129/v1/capabilities ok"
+    },
+    {
+      "id": "page.errors",
+      "status": "PASS",
+      "detail": "no page errors"
+    }
+  ],
+  "captures": [
+    {
+      "kind": "viewport",
+      "file": "writer-output/W05-BACKUP/evidence/F-en-1440-full.png",
+      "sha256": "3525720614e3674b93fd0b9f11141ca91419db7667edc1e05bca385126e3cb18",
+      "bytes": 270479,
+      "dims": "1440x1000",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+      "headTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+      "stackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+      "canonicalSourceSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "b50f5592a885688f793b166efed49eba04df529508bda453313eaaccb900a10b",
+      "surfaceSourceMatchesSalvageBaseline": true,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "af28bf7ccc44725f76b60d5bf6861e59cbe26c726b802fd4120c805596dfa625"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "87896d7c30f8af6660bf6c6ce7c3ecf61860076a18a562e3f60b2a9ecfbe77f9"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "0cfe2b90253a1ebce7c802628dd01b2e3df5bed887dfcc21623e35206b04768b"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:fe1bb98ded51adc71a5f5fd14142a2c0880c11bc:0c43d7f11631dc85",
+      "capturedAt": "2026-10-02T05:17:43.192Z",
+      "viewport": "1440x1000",
+      "lang": "en",
+      "label": "F-en-1440",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    },
+    {
+      "kind": "element",
+      "file": "writer-output/W05-BACKUP/evidence/F-en-1440-eyebrow.png",
+      "sha256": "13412ac74256aafeeed617eeac18534cc3cc1fc225dfa212a2db3248747d4d5c",
+      "bytes": 2525,
+      "dims": "613x11",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+      "headTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+      "stackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+      "canonicalSourceSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "b50f5592a885688f793b166efed49eba04df529508bda453313eaaccb900a10b",
+      "surfaceSourceMatchesSalvageBaseline": true,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "af28bf7ccc44725f76b60d5bf6861e59cbe26c726b802fd4120c805596dfa625"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "87896d7c30f8af6660bf6c6ce7c3ecf61860076a18a562e3f60b2a9ecfbe77f9"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "0cfe2b90253a1ebce7c802628dd01b2e3df5bed887dfcc21623e35206b04768b"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:fe1bb98ded51adc71a5f5fd14142a2c0880c11bc:0c43d7f11631dc85",
+      "capturedAt": "2026-10-02T05:17:43.192Z",
+      "viewport": "1440x1000",
+      "lang": "en",
+      "label": "F-en-1440",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    },
+    {
+      "kind": "element",
+      "file": "writer-output/W05-BACKUP/evidence/F-en-1440-left.png",
+      "sha256": "ccaff637418d12616fb2b2a0b62f8b9cf166ff2cec3c4517c2322c4d35217df7",
+      "bytes": 35539,
+      "dims": "304x779",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+      "headTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+      "stackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+      "canonicalSourceSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "b50f5592a885688f793b166efed49eba04df529508bda453313eaaccb900a10b",
+      "surfaceSourceMatchesSalvageBaseline": true,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "af28bf7ccc44725f76b60d5bf6861e59cbe26c726b802fd4120c805596dfa625"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "87896d7c30f8af6660bf6c6ce7c3ecf61860076a18a562e3f60b2a9ecfbe77f9"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "0cfe2b90253a1ebce7c802628dd01b2e3df5bed887dfcc21623e35206b04768b"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:fe1bb98ded51adc71a5f5fd14142a2c0880c11bc:0c43d7f11631dc85",
+      "capturedAt": "2026-10-02T05:17:43.192Z",
+      "viewport": "1440x1000",
+      "lang": "en",
+      "label": "F-en-1440",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    },
+    {
+      "kind": "element",
+      "file": "writer-output/W05-BACKUP/evidence/F-en-1440-center.png",
+      "sha256": "fc7f1c71aaeae06c046a214000dba844e3d6b9276f537d079382548e715fedbe",
+      "bytes": 101092,
+      "dims": "694x779",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+      "headTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+      "stackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+      "canonicalSourceSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "b50f5592a885688f793b166efed49eba04df529508bda453313eaaccb900a10b",
+      "surfaceSourceMatchesSalvageBaseline": true,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "af28bf7ccc44725f76b60d5bf6861e59cbe26c726b802fd4120c805596dfa625"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "87896d7c30f8af6660bf6c6ce7c3ecf61860076a18a562e3f60b2a9ecfbe77f9"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "0cfe2b90253a1ebce7c802628dd01b2e3df5bed887dfcc21623e35206b04768b"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:fe1bb98ded51adc71a5f5fd14142a2c0880c11bc:0c43d7f11631dc85",
+      "capturedAt": "2026-10-02T05:17:43.192Z",
+      "viewport": "1440x1000",
+      "lang": "en",
+      "label": "F-en-1440",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    },
+    {
+      "kind": "element",
+      "file": "writer-output/W05-BACKUP/evidence/F-en-1440-right.png",
+      "sha256": "5382ebd88dcfd17876180c44b846ec659599a2e5d5d43c6d15de66ad2b2e7ae8",
+      "bytes": 66439,
+      "dims": "420x779",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+      "headTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+      "stackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+      "canonicalSourceSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "b50f5592a885688f793b166efed49eba04df529508bda453313eaaccb900a10b",
+      "surfaceSourceMatchesSalvageBaseline": true,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "af28bf7ccc44725f76b60d5bf6861e59cbe26c726b802fd4120c805596dfa625"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "87896d7c30f8af6660bf6c6ce7c3ecf61860076a18a562e3f60b2a9ecfbe77f9"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "0cfe2b90253a1ebce7c802628dd01b2e3df5bed887dfcc21623e35206b04768b"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:fe1bb98ded51adc71a5f5fd14142a2c0880c11bc:0c43d7f11631dc85",
+      "capturedAt": "2026-10-02T05:17:43.192Z",
+      "viewport": "1440x1000",
+      "lang": "en",
+      "label": "F-en-1440",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    },
+    {
+      "kind": "element",
+      "file": "writer-output/W05-BACKUP/evidence/F-en-1440-bottom.png",
+      "sha256": "5fb10959390804bf8238f3b062ae31906f853873ddb3ef9ffee20e607d4c9fd3",
+      "bytes": 10000,
+      "dims": "1440x39",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+      "headTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+      "stackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+      "canonicalSourceSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "b50f5592a885688f793b166efed49eba04df529508bda453313eaaccb900a10b",
+      "surfaceSourceMatchesSalvageBaseline": true,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "af28bf7ccc44725f76b60d5bf6861e59cbe26c726b802fd4120c805596dfa625"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "87896d7c30f8af6660bf6c6ce7c3ecf61860076a18a562e3f60b2a9ecfbe77f9"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "0cfe2b90253a1ebce7c802628dd01b2e3df5bed887dfcc21623e35206b04768b"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:fe1bb98ded51adc71a5f5fd14142a2c0880c11bc:0c43d7f11631dc85",
+      "capturedAt": "2026-10-02T05:17:43.192Z",
+      "viewport": "1440x1000",
+      "lang": "en",
+      "label": "F-en-1440",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    },
+    {
+      "kind": "viewport",
+      "file": "writer-output/W05-BACKUP/evidence/F-en-1440-scrolled.png",
+      "sha256": "617d558a6782eda756a5a6e0b674aef2710bec7d2029052dc2e9a65ac94fdc28",
+      "bytes": 271035,
+      "dims": "1440x1000",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+      "headTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+      "stackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+      "canonicalSourceSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "b50f5592a885688f793b166efed49eba04df529508bda453313eaaccb900a10b",
+      "surfaceSourceMatchesSalvageBaseline": true,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "af28bf7ccc44725f76b60d5bf6861e59cbe26c726b802fd4120c805596dfa625"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "87896d7c30f8af6660bf6c6ce7c3ecf61860076a18a562e3f60b2a9ecfbe77f9"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "0cfe2b90253a1ebce7c802628dd01b2e3df5bed887dfcc21623e35206b04768b"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:fe1bb98ded51adc71a5f5fd14142a2c0880c11bc:0c43d7f11631dc85",
+      "capturedAt": "2026-10-02T05:17:43.192Z",
+      "viewport": "1440x1000",
+      "lang": "en",
+      "label": "F-en-1440",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    },
+    {
+      "kind": "viewport",
+      "file": "writer-output/W05-BACKUP/evidence/F-en-1440-vp-1440x1000.png",
+      "sha256": "bf830f7477619c7ec3f1060a1211c2cf1e4d63b7e172420db8b03190969ce80a",
+      "bytes": 266523,
+      "dims": "1440x1000",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+      "headTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+      "stackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+      "canonicalSourceSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "b50f5592a885688f793b166efed49eba04df529508bda453313eaaccb900a10b",
+      "surfaceSourceMatchesSalvageBaseline": true,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "af28bf7ccc44725f76b60d5bf6861e59cbe26c726b802fd4120c805596dfa625"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "87896d7c30f8af6660bf6c6ce7c3ecf61860076a18a562e3f60b2a9ecfbe77f9"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "0cfe2b90253a1ebce7c802628dd01b2e3df5bed887dfcc21623e35206b04768b"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:fe1bb98ded51adc71a5f5fd14142a2c0880c11bc:0c43d7f11631dc85",
+      "capturedAt": "2026-10-02T05:17:43.192Z",
+      "viewport": "1440x1000",
+      "lang": "en",
+      "label": "F-en-1440",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    },
+    {
+      "kind": "viewport",
+      "file": "writer-output/W05-BACKUP/evidence/F-en-1440-vp-1280x860.png",
+      "sha256": "e32c7b6e2567f8c7551a2c3b64c8ae0f982313683b3791445b73d1fc02445fb0",
+      "bytes": 228351,
+      "dims": "1280x860",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+      "headTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+      "stackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+      "canonicalSourceSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "b50f5592a885688f793b166efed49eba04df529508bda453313eaaccb900a10b",
+      "surfaceSourceMatchesSalvageBaseline": true,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "af28bf7ccc44725f76b60d5bf6861e59cbe26c726b802fd4120c805596dfa625"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "87896d7c30f8af6660bf6c6ce7c3ecf61860076a18a562e3f60b2a9ecfbe77f9"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "0cfe2b90253a1ebce7c802628dd01b2e3df5bed887dfcc21623e35206b04768b"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:fe1bb98ded51adc71a5f5fd14142a2c0880c11bc:0c43d7f11631dc85",
+      "capturedAt": "2026-10-02T05:17:43.192Z",
+      "viewport": "1440x1000",
+      "lang": "en",
+      "label": "F-en-1440",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    },
+    {
+      "kind": "viewport",
+      "file": "writer-output/W05-BACKUP/evidence/F-en-1440-vp-1024x900.png",
+      "sha256": "93692b8736526b54e2256d69081f8512545a1621d4bcad10fbc492e2040e7bae",
+      "bytes": 173224,
+      "dims": "1024x900",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+      "headTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+      "stackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+      "canonicalSourceSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "b50f5592a885688f793b166efed49eba04df529508bda453313eaaccb900a10b",
+      "surfaceSourceMatchesSalvageBaseline": true,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "af28bf7ccc44725f76b60d5bf6861e59cbe26c726b802fd4120c805596dfa625"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "87896d7c30f8af6660bf6c6ce7c3ecf61860076a18a562e3f60b2a9ecfbe77f9"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "0cfe2b90253a1ebce7c802628dd01b2e3df5bed887dfcc21623e35206b04768b"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:fe1bb98ded51adc71a5f5fd14142a2c0880c11bc:0c43d7f11631dc85",
+      "capturedAt": "2026-10-02T05:17:43.192Z",
+      "viewport": "1440x1000",
+      "lang": "en",
+      "label": "F-en-1440",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    },
+    {
+      "kind": "viewport",
+      "file": "writer-output/W05-BACKUP/evidence/F-en-1440-vp-960x900.png",
+      "sha256": "748e0fc989f9063c5c3a71bd3a9cecd302d1877f44c6a64e8953e0fffaf1f4d8",
+      "bytes": 173901,
+      "dims": "960x900",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+      "headTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+      "stackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+      "canonicalSourceSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "b50f5592a885688f793b166efed49eba04df529508bda453313eaaccb900a10b",
+      "surfaceSourceMatchesSalvageBaseline": true,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "af28bf7ccc44725f76b60d5bf6861e59cbe26c726b802fd4120c805596dfa625"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "87896d7c30f8af6660bf6c6ce7c3ecf61860076a18a562e3f60b2a9ecfbe77f9"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "0cfe2b90253a1ebce7c802628dd01b2e3df5bed887dfcc21623e35206b04768b"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:fe1bb98ded51adc71a5f5fd14142a2c0880c11bc:0c43d7f11631dc85",
+      "capturedAt": "2026-10-02T05:17:43.192Z",
+      "viewport": "1440x1000",
+      "lang": "en",
+      "label": "F-en-1440",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    },
+    {
+      "kind": "viewport",
+      "file": "writer-output/W05-BACKUP/evidence/F-en-1440-vp-820x900.png",
+      "sha256": "091d6996d13b4b9d62d1e43936eff835c65aa005e26937bcfd9e25d2f3c351d7",
+      "bytes": 151281,
+      "dims": "820x900",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+      "headTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+      "stackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+      "canonicalSourceSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "b50f5592a885688f793b166efed49eba04df529508bda453313eaaccb900a10b",
+      "surfaceSourceMatchesSalvageBaseline": true,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "af28bf7ccc44725f76b60d5bf6861e59cbe26c726b802fd4120c805596dfa625"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "87896d7c30f8af6660bf6c6ce7c3ecf61860076a18a562e3f60b2a9ecfbe77f9"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "0cfe2b90253a1ebce7c802628dd01b2e3df5bed887dfcc21623e35206b04768b"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:fe1bb98ded51adc71a5f5fd14142a2c0880c11bc:0c43d7f11631dc85",
+      "capturedAt": "2026-10-02T05:17:43.192Z",
+      "viewport": "1440x1000",
+      "lang": "en",
+      "label": "F-en-1440",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    }
+  ],
+  "geometry": {
+    "initialState": {
+      "packages": 0,
+      "packageStatus": null,
+      "plan": false,
+      "preview": false,
+      "stage": false,
+      "drill": null,
+      "liveRestored": null,
+      "activation": null,
+      "productionDatabaseMutated": null,
+      "attempts": 0,
+      "lang": "en",
+      "dir": "ltr"
+    },
+    "finalState": {
+      "packages": 1,
+      "packageStatus": "PACKAGE_VERIFIED",
+      "plan": true,
+      "preview": true,
+      "stage": true,
+      "drill": "STAGED_AND_VERIFIED",
+      "liveRestored": false,
+      "activation": "AUTHORITY_PENDING",
+      "productionDatabaseMutated": false,
+      "attempts": 4,
+      "lang": "en",
+      "dir": "ltr"
+    },
+    "probe": {
+      "viewport": {
+        "w": 1440,
+        "h": 1000
+      },
+      "regions": {
+        "banner": {
+          "x": 0,
+          "y": 78,
+          "w": 1440,
+          "h": 56
+        },
+        "toolbar": {
+          "x": 360,
+          "y": 142,
+          "w": 1068,
+          "h": 31
+        },
+        "left": {
+          "x": 0,
+          "y": 182,
+          "w": 304,
+          "h": 779
+        },
+        "stage": {
+          "x": 315,
+          "y": 182,
+          "w": 694,
+          "h": 779
+        },
+        "right": {
+          "x": 1020,
+          "y": 182,
+          "w": 420,
+          "h": 779
+        },
+        "bottom": {
+          "x": 0,
+          "y": 961,
+          "w": 1440,
+          "h": 39
+        }
+      },
+      "regionVisibility": {
+        "#topBanner": "VISIBLE",
+        "#domainToolbar": "VISIBLE",
+        "#leftPane": "VISIBLE",
+        "#foundationStage": "VISIBLE",
+        "#rightPane": "VISIBLE",
+        "#bottomShelf": "VISIBLE"
+      },
+      "centerChildren": [
+        {
+          "cls": "bk-head",
+          "x": 337,
+          "y": 204,
+          "w": 650,
+          "h": 182
+        },
+        {
+          "cls": "bk-banner",
+          "x": 337,
+          "y": 414,
+          "w": 650,
+          "h": 80
+        },
+        {
+          "cls": "bk-panel is-focal",
+          "x": 337,
+          "y": 522,
+          "w": 650,
+          "h": 1105
+        }
+      ],
+      "counts": {
+        "steps": 8,
+        "checks": 9,
+        "metrics": 6,
+        "leftItems": 1,
+        "rightBlocks": 9,
+        "ledgerRows": 4
+      },
+      "responsive": {
+        "containerInlineSize": 654,
+        "containerType": "inline-size",
+        "metricColumns": 3,
+        "pipelineColumns": 4,
+        "checkColumns": 3,
+        "pipelineConnector": "none",
+        "expectedBand": "<=660: pipe4 no-connector"
+      },
+      "direction": {
+        "lang": "en",
+        "dir": "ltr",
+        "searchInput": {
+          "paddingLeft": "28px",
+          "paddingRight": "9px",
+          "paddingInlineStart": "28px",
+          "paddingInlineEnd": "9px"
+        },
+        "titleSub": {
+          "borderLeftWidth": "1px",
+          "borderRightWidth": "0px",
+          "borderInlineStartWidth": "1px",
+          "borderInlineEndWidth": "0px"
+        },
+        "firstMetaCell": {
+          "paddingLeft": "0px",
+          "paddingRight": "12px"
+        },
+        "actionsRect": {
+          "x": 337,
+          "y": 311,
+          "w": 650,
+          "h": 75
+        },
+        "identityRect": {
+          "x": 337,
+          "y": 204,
+          "w": 612,
+          "h": 93
+        },
+        "paneGeometry": {
+          "left": {
+            "x": 0,
+            "y": 182,
+            "w": 304,
+            "h": 779
+          },
+          "right": {
+            "x": 1020,
+            "y": 182,
+            "w": 420,
+            "h": 779
+          }
+        },
+        "arabicGlyphCount": 0,
+        "hasArabic": false
+      },
+      "overflow": {
+        "docH": false,
+        "stageScroll": 1475,
+        "stageClient": 779,
+        "stageScrollable": true,
+        "clippedBlocks": 0
+      },
+      "h1": {
+        "fontSize": "27px",
+        "fontWeight": "800",
+        "lineHeight": "31.05px"
+      },
+      "truthChips": [
+        "productionDatabaseMutated = false",
+        "stagedVerifiedIsLiveRestored = false",
+        "persistenceOwnerMutated = false",
+        "activationAuthority = AUTHORITY_PENDING"
+      ],
+      "eyebrow": {
+        "text": "W05 · BACKUP & RESTORE",
+        "codes": "57 30 35 20 b7 20 42 41 43 4b 55 50 20 26 20 52 45 53 54 4f 52 45"
+      },
+      "languageAudit": [
+        {
+          "owner": ".skiplink",
+          "tag": "A",
+          "text": "تجاوز التنقل إلى المستند",
+          "inSurface": false
+        },
+        {
+          "owner": "A",
+          "tag": "A",
+          "text": "التعلّم",
+          "inSurface": false
+        },
+        {
+          "owner": "A",
+          "tag": "A",
+          "text": "التصوّر",
+          "inSurface": false
+        },
+        {
+          "owner": ".optional",
+          "tag": "SPAN",
+          "text": "البحث والجودة",
+          "inSurface": false
+        },
+        {
+          "owner": ".optional",
+          "tag": "SPAN",
+          "text": "الجودة",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "المحتوى قابل للتحرير في وضع التحرير.",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "بيانات المصدر والهوية للقراءة فقط.",
+          "inSurface": false
+        },
+        {
+          "owner": ".badge",
+          "tag": "SPAN",
+          "text": "سياق مكتمل",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "قراءة",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "تحرير",
+          "inSurface": false
+        },
+        {
+          "owner": ".lbl",
+          "tag": "SPAN",
+          "text": "حفظ",
+          "inSurface": false
+        },
+        {
+          "owner": ".lbl",
+          "tag": "SPAN",
+          "text": "عرض مساحة العمل",
+          "inSurface": false
+        },
+        {
+          "owner": ".lbl",
+          "tag": "SPAN",
+          "text": "تركيز",
+          "inSurface": false
+        },
+        {
+          "owner": "#toggleAllWorkspaceLabel",
+          "tag": "SPAN",
+          "text": "طي الكل",
+          "inSurface": false
+        },
+        {
+          "owner": ".label",
+          "tag": "SPAN",
+          "text": "لا تغييرات محلية",
+          "inSurface": false
+        },
+        {
+          "owner": "STRONG",
+          "tag": "STRONG",
+          "text": "مجموعة قبول ممثّلة",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "البنية",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "السياق",
+          "inSurface": false
+        },
+        {
+          "owner": "#modeHint",
+          "tag": "SPAN",
+          "text": "وضع القراءة",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "اتجاه النص تلقائي",
+          "inSurface": false
+        },
+        {
+          "owner": ".doclead",
+          "tag": "P",
+          "text": "اقرأ، حرّر، ونظّم المحتوى في المساحة نفسها. تظهر الأدوات عند",
+          "inSurface": false
+        },
+        {
+          "owner": ".groupTitle",
+          "tag": "SPAN",
+          "text": "المعرفة / المحتوى",
+          "inSurface": false
+        },
+        {
+          "owner": ".groupHint",
+          "tag": "SPAN",
+          "text": "المحتوى المعرفي المملوك هنا",
+          "inSurface": false
+        },
+        {
+          "owner": ".groupTitle",
+          "tag": "SPAN",
+          "text": "التعلّم المرتبط",
+          "inSurface": false
+        },
+        {
+          "owner": ".groupHint",
+          "tag": "SPAN",
+          "text": "مسارات وروابط التعلم",
+          "inSurface": false
+        },
+        {
+          "owner": ".groupTitle",
+          "tag": "SPAN",
+          "text": "السياق المرتبط",
+          "inSurface": false
+        },
+        {
+          "owner": ".groupHint",
+          "tag": "SPAN",
+          "text": "مؤشرات السياق والروابط",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "الوحدة",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "الكتلة المحددة",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "السجل",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "مقارنة",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "استرداد",
+          "inSurface": false
+        },
+        {
+          "owner": "#insertContext",
+          "tag": "SPAN",
+          "text": "حد بنيوي",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "ضمن القائمة",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "خارج القائمة",
+          "inSurface": false
+        },
+        {
+          "owner": ".scopehint",
+          "tag": "SPAN",
+          "text": "تغيير النطاق صريح قبل التنفيذ",
+          "inSurface": false
+        },
+        {
+          "owner": ".menutitle",
+          "tag": "DIV",
+          "text": "المناطق الداعمة",
+          "inSurface": false
+        },
+        {
+          "owner": "STRONG",
+          "tag": "STRONG",
+          "text": "البنية",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "التنقل والهيكل فقط",
+          "inSurface": false
+        },
+        {
+          "owner": "STRONG",
+          "tag": "STRONG",
+          "text": "السياق",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "معلومات فريدة للاختيار",
+          "inSurface": false
+        },
+        {
+          "owner": "STRONG",
+          "tag": "STRONG",
+          "text": "السجل والمقارنة",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "سجل / مقارنة / استرداد",
+          "inSurface": false
+        },
+        {
+          "owner": ".menutitle",
+          "tag": "DIV",
+          "text": "شريط السياق العلوي",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "موسّع",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "مضغوط",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "مخفي",
+          "inSurface": false
+        },
+        {
+          "owner": "STRONG",
+          "tag": "STRONG",
+          "text": "وضع التركيز",
+          "inSurface": false
+        },
+        {
+          "owner": ".muted",
+          "tag": "SMALL",
+          "text": "اخفِ الدعم مع حفظ الحالة السابقة",
+          "inSurface": false
+        },
+        {
+          "owner": "#commandTitle",
+          "tag": "LABEL",
+          "text": "لوحة الأوامر",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "Commands / الأوامر",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "Settings / التفضيلات",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "Focus / التركيز",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "Structure pane / البنية",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "Context pane / السياق",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "History shelf / السجل",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "New linked note / ملاحظة مرتبطة",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "Guidance / الإرشادات",
+          "inSurface": false
+        },
+        {
+          "owner": "#impactTitle",
+          "tag": "H2",
+          "text": "تأكيد حذف بنيوي",
+          "inSurface": false
+        },
+        {
+          "owner": ".subtle",
+          "tag": "P",
+          "text": "هذا إجراء داخل نموذج التصميم فقط. يتم تسجيل النية كمعاملة تا",
+          "inSurface": false
+        }
+      ]
+    },
+    "responsive": {
+      "1440x1000": {
+        "containerInlineSize": 654,
+        "metricColumns": 3,
+        "pipelineColumns": 4,
+        "checkColumns": 3,
+        "pipelineConnector": "none",
+        "expectedBand": "<=660: pipe4 no-connector",
+        "regionVisibility": {
+          "#topBanner": "VISIBLE",
+          "#domainToolbar": "VISIBLE",
+          "#leftPane": "VISIBLE",
+          "#foundationStage": "VISIBLE",
+          "#rightPane": "VISIBLE",
+          "#bottomShelf": "VISIBLE"
+        },
+        "regions": {
+          "banner": {
+            "x": 0,
+            "y": 78,
+            "w": 1440,
+            "h": 56
+          },
+          "toolbar": {
+            "x": 360,
+            "y": 142,
+            "w": 1068,
+            "h": 31
+          },
+          "left": {
+            "x": 0,
+            "y": 182,
+            "w": 304,
+            "h": 779
+          },
+          "stage": {
+            "x": 315,
+            "y": 182,
+            "w": 694,
+            "h": 779
+          },
+          "right": {
+            "x": 1020,
+            "y": 182,
+            "w": 420,
+            "h": 779
+          },
+          "bottom": {
+            "x": 0,
+            "y": 961,
+            "w": 1440,
+            "h": 39
+          }
+        },
+        "docHScroll": false,
+        "clippedBlocks": 0,
+        "stage": {
+          "x": 315,
+          "y": 182,
+          "w": 694,
+          "h": 779
+        }
+      },
+      "1280x860": {
+        "containerInlineSize": 496,
+        "metricColumns": 2,
+        "pipelineColumns": 4,
+        "checkColumns": 2,
+        "pipelineConnector": "none",
+        "expectedBand": "<=560: metrics2/checks2/pipe4",
+        "regionVisibility": {
+          "#topBanner": "VISIBLE",
+          "#domainToolbar": "VISIBLE",
+          "#leftPane": "VISIBLE",
+          "#foundationStage": "VISIBLE",
+          "#rightPane": "VISIBLE",
+          "#bottomShelf": "VISIBLE"
+        },
+        "regions": {
+          "banner": {
+            "x": 0,
+            "y": 78,
+            "w": 1280,
+            "h": 56
+          },
+          "toolbar": {
+            "x": 200,
+            "y": 174,
+            "w": 1068,
+            "h": 31
+          },
+          "left": {
+            "x": 0,
+            "y": 206,
+            "w": 304,
+            "h": 615
+          },
+          "stage": {
+            "x": 315,
+            "y": 206,
+            "w": 534,
+            "h": 615
+          },
+          "right": {
+            "x": 860,
+            "y": 206,
+            "w": 420,
+            "h": 615
+          },
+          "bottom": {
+            "x": 0,
+            "y": 821,
+            "w": 1280,
+            "h": 39
+          }
+        },
+        "docHScroll": false,
+        "clippedBlocks": 0,
+        "stage": {
+          "x": 315,
+          "y": 206,
+          "w": 534,
+          "h": 615
+        }
+      },
+      "1024x900": {
+        "containerInlineSize": 678,
+        "metricColumns": 3,
+        "pipelineColumns": 8,
+        "checkColumns": 3,
+        "pipelineConnector": "block",
+        "expectedBand": "<=700: metrics3",
+        "regionVisibility": {
+          "#topBanner": "VISIBLE",
+          "#domainToolbar": "VISIBLE",
+          "#leftPane": "VISIBLE",
+          "#foundationStage": "VISIBLE",
+          "#rightPane": "COLLAPSED_OR_HIDDEN",
+          "#bottomShelf": "VISIBLE"
+        },
+        "regions": {
+          "banner": {
+            "x": 0,
+            "y": 78,
+            "w": 1024,
+            "h": 56
+          },
+          "toolbar": {
+            "x": 261,
+            "y": 134,
+            "w": 751,
+            "h": 65
+          },
+          "left": {
+            "x": 0,
+            "y": 200,
+            "w": 304,
+            "h": 661
+          },
+          "stage": {
+            "x": 315,
+            "y": 200,
+            "w": 709,
+            "h": 661
+          },
+          "right": {
+            "x": 0,
+            "y": 0,
+            "w": 0,
+            "h": 0
+          },
+          "bottom": {
+            "x": 0,
+            "y": 861,
+            "w": 1024,
+            "h": 39
+          }
+        },
+        "docHScroll": false,
+        "clippedBlocks": 0,
+        "stage": {
+          "x": 315,
+          "y": 200,
+          "w": 709,
+          "h": 661
+        }
+      },
+      "960x900": {
+        "containerInlineSize": 616,
+        "metricColumns": 3,
+        "pipelineColumns": 4,
+        "checkColumns": 3,
+        "pipelineConnector": "none",
+        "expectedBand": "<=660: pipe4 no-connector",
+        "regionVisibility": {
+          "#topBanner": "VISIBLE",
+          "#domainToolbar": "VISIBLE",
+          "#leftPane": "VISIBLE",
+          "#foundationStage": "VISIBLE",
+          "#rightPane": "COLLAPSED_OR_HIDDEN",
+          "#bottomShelf": "VISIBLE"
+        },
+        "regions": {
+          "banner": {
+            "x": 0,
+            "y": 78,
+            "w": 960,
+            "h": 56
+          },
+          "toolbar": {
+            "x": 261,
+            "y": 134,
+            "w": 687,
+            "h": 65
+          },
+          "left": {
+            "x": 0,
+            "y": 200,
+            "w": 304,
+            "h": 661
+          },
+          "stage": {
+            "x": 315,
+            "y": 200,
+            "w": 645,
+            "h": 661
+          },
+          "right": {
+            "x": 0,
+            "y": 0,
+            "w": 0,
+            "h": 0
+          },
+          "bottom": {
+            "x": 0,
+            "y": 861,
+            "w": 960,
+            "h": 39
+          }
+        },
+        "docHScroll": false,
+        "clippedBlocks": 0,
+        "stage": {
+          "x": 315,
+          "y": 200,
+          "w": 645,
+          "h": 661
+        }
+      },
+      "820x900": {
+        "containerInlineSize": 795,
+        "metricColumns": 6,
+        "pipelineColumns": 8,
+        "checkColumns": 3,
+        "pipelineConnector": "block",
+        "expectedBand": ">700: metrics6/checks3/pipe8",
+        "regionVisibility": {
+          "#topBanner": "VISIBLE",
+          "#domainToolbar": "VISIBLE",
+          "#leftPane": "COLLAPSED_OR_HIDDEN",
+          "#foundationStage": "VISIBLE",
+          "#rightPane": "COLLAPSED_OR_HIDDEN",
+          "#bottomShelf": "VISIBLE"
+        },
+        "regions": {
+          "banner": {
+            "x": 0,
+            "y": 72,
+            "w": 820,
+            "h": 56
+          },
+          "toolbar": {
+            "x": 254,
+            "y": 128,
+            "w": 561,
+            "h": 65
+          },
+          "left": {
+            "x": 0,
+            "y": 0,
+            "w": 0,
+            "h": 0
+          },
+          "stage": {
+            "x": 0,
+            "y": 194,
+            "w": 820,
+            "h": 667
+          },
+          "right": {
+            "x": 0,
+            "y": 0,
+            "w": 0,
+            "h": 0
+          },
+          "bottom": {
+            "x": 0,
+            "y": 861,
+            "w": 820,
+            "h": 39
+          }
+        },
+        "docHScroll": false,
+        "clippedBlocks": 0,
+        "stage": {
+          "x": 0,
+          "y": 194,
+          "w": 820,
+          "h": 667
+        }
+      }
+    }
+  },
+  "probes": {
+    "seed": {
+      "status": 200,
+      "documentId": "bk-lane-F-en-1440"
+    },
+    "prerequisiteTruth": {
+      "availability": {
+        "backup.plan": "Create/select a verified BackupPackage",
+        "backup.preview": "Create a RestorePlan first",
+        "backup.stage": "A successful provider preview for the exact selected BackupPackage is required",
+        "backup.drill": "A successful provider stage for the exact selected BackupPackage is required",
+        "backup.activationRequest": "A verified isolated RestoreDrill is required"
+      },
+      "truth": {
+        "owner": "W05BackupProviderAwareIntegrationAdapter",
+        "capabilityOwner": "BackupRestoreCapability",
+        "selectedPackageId": null,
+        "stagedVerifiedIsLiveRestored": false,
+        "persistenceOwnerMutated": false,
+        "drillLiveRestored": false,
+        "activationAuthority": "NOT_REQUESTED",
+        "productionDatabaseMutated": false,
+        "durableSuccessReceipts": "PROVIDER_OWNED_PACKAGE_DRILL_ACTIVATION",
+        "durableFailureCompensationHistory": "UNAVAILABLE_LOCKED_PROVIDER_SEAM",
+        "semanticOwner": "BackupRuntimeAdapter",
+        "providerPreviewStatus": "NOT_OBSERVED",
+        "providerStageStatus": "NOT_OBSERVED",
+        "liveRestored": false,
+        "providerOwnsSurfaceSemantics": false
+      },
+      "renderedDrillStatus": "NOT_RUN",
+      "notRunBlockPresent": true,
+      "unavailableCellCount": 10
+    },
+    "truthAfterLifecycle": {
+      "owner": "W05BackupProviderAwareIntegrationAdapter",
+      "capabilityOwner": "BackupRestoreCapability",
+      "selectedPackageId": "backup-20261002051751-8adeb353",
+      "stagedVerifiedIsLiveRestored": false,
+      "persistenceOwnerMutated": false,
+      "drillLiveRestored": false,
+      "activationAuthority": "AUTHORITY_PENDING",
+      "productionDatabaseMutated": false,
+      "durableSuccessReceipts": "PROVIDER_OWNED_PACKAGE_DRILL_ACTIVATION",
+      "durableFailureCompensationHistory": "PROVIDER_DURABLE_ATTEMPT_JOURNAL",
+      "semanticOwner": "BackupRuntimeAdapter",
+      "providerPreviewStatus": "COMPATIBLE",
+      "providerStageStatus": "STAGED",
+      "liveRestored": false,
+      "providerOwnsSurfaceSemantics": false
+    },
+    "descriptor": {
+      "owner": "W05BackupProviderAwareIntegrationAdapter",
+      "capabilityOwner": "BackupRestoreCapability",
+      "transport": {
+        "id": "BoundedLocalRuntimeTransport",
+        "host": "127.0.0.1",
+        "port": 35129,
+        "loopbackOnly": true,
+        "semanticOwnership": false
+      },
+      "activationAuthority": false,
+      "persistenceOwnerMutation": false,
+      "liveRestoreOwned": false,
+      "semanticOwner": "BackupRuntimeAdapter",
+      "providerBinding": "BackupRestoreCapability",
+      "providerAwarePreview": true,
+      "providerAwareStage": true,
+      "durableAttemptJournal": true,
+      "surfaceSemanticsMovedIntoProvider": false
+    }
+  },
+  "notes": [],
+  "pageErrors": [],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+  ],
+  "failedRequests": [],
+  "serveOk": true,
+  "runtimeOk": true,
+  "runtimeListener": "127.0.0.1:35129"
+}
