@@ -1,0 +1,17 @@
+{
+ "task": "R-01",
+ "parent": "f5ba0cc",
+ "records": 99,
+ "booted": 82,
+ "pageErrorRecords": 0,
+ "cssVarsLive": "left:230px right:245px (shell sample + uniform pct)",
+ "pct1440": "left 15.97 / center 65.49 / right 17.01 (n=56, uniform)",
+ "pct1024": "left 22.46 / center 76.46 / right 0-23.93 (medium band, right suppressed by design)",
+ "pct768": "narrow band, panes suppressed by design, 0 overlap",
+ "overlaps": "all records {leftVsCenter:0, centerVsRight:0}",
+ "smoke1024_supplement": "23/23 booted, 0 pageErrors, cssVars 230/245 (lean probe; main probe's smoke-1024 set truncated by 600s timeout kill \u2014 page-closed navErrors, not product)",
+ "npmTest": "210/0 twice",
+ "conformance": "6/6",
+ "donorCssStatic": "dist/foundation/donor.css still --left:304px/--right:420px (extractor literal) \u2192 ROUTED TO TASK 6 generator pass (R-03/R-09 same tools file); live runtime preference-sync overrides root vars (probed), so first-paint static fallback is the only exposure",
+ "acceptedRuntimeSeed": "SH-2 file#3 (accepted-runtime:38 initial 304/420) NOT authoritative for live geometry (probed 230/245 everywhere) \u2192 stays in Task 3 language scope"
+}

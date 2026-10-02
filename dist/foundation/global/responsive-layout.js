@@ -20,7 +20,7 @@ function finite(value, fallback) {
 export function resolveWorkspaceResponsiveBand(viewportWidth, options = {}) {
   const width = finite(viewportWidth, 1440);
   const leftPreferredState = options.leftPreferredState === 'collapsed' ? 'collapsed' : 'open';
-  const leftPreferredWidth = finite(options.leftPreferredWidth, 304);
+  const leftPreferredWidth = finite(options.leftPreferredWidth, 230);
   const leftDocked = leftPreferredState === 'open' ? Math.max(0, leftPreferredWidth) : 0;
   const projectedCenter = width - leftDocked - WORKSPACE_RESPONSIVE_GUTTER;
   if (width <= NARROW_WORKSPACE_BREAKPOINT || projectedCenter < WORKSPACE_CENTER_FLOOR) return 'narrow';

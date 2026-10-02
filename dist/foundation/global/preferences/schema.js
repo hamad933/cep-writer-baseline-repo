@@ -15,7 +15,7 @@ export const PREFERENCE_DEFINITIONS={
   scale:{safeDefault:1,min:.8,max:2},font:{safeDefault:'system-ui',values:['system-ui','Tahoma','Arial']},alignment:{safeDefault:'start',values:['start','end','left','right','center','justify']},
   toolbar:{safeDefault:'full',values:['full','compact']},toolbarOrder:{safeDefault:'standard',values:['standard','domain-first']},guidance:{safeDefault:false},
   grid:{safeDefault:true},snap:{safeDefault:true},minimap:{safeDefault:true},highContrast:{safeDefault:false},motion:{safeDefault:'system',values:['system','reduced','full']},
-  left:{safeDefault:'open',values:['open','collapsed']},right:{safeDefault:'open',values:['open','collapsed']},leftWidth:{safeDefault:304,min:1,max:720},rightWidth:{safeDefault:420,min:1,max:720},
+  left:{safeDefault:'open',values:['open','collapsed']},right:{safeDefault:'open',values:['open','collapsed']},leftWidth:{safeDefault:230,min:1,max:720},rightWidth:{safeDefault:245,min:1,max:720},
   documentWidth:{safeDefault:'comfortable',values:['compact','comfortable','wide','full','custom']},customWidth:{safeDefault:860,min:280,max:2400},
   emptyBlockDirection:{safeDefault:'system',values:['system','rtl','ltr']},clipboardMode:{safeDefault:'formatted',values:['plain','formatted']},richPaste:{safeDefault:true},
   codeSyntax:{safeDefault:'auto',values:['auto','off']},codeLineNumbers:{safeDefault:true},codeWrap:{safeDefault:'wrap',values:['wrap','scroll']},codeFocusLines:{safeDefault:true},codeShowCopyControls:{safeDefault:true},
