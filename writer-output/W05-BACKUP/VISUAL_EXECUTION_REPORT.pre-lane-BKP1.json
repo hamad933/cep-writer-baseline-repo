@@ -1,0 +1,122 @@
+{
+  "SURFACE": "backup",
+  "OWNER": "W05-BACKUP",
+  "REFERENCE": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/05_BACKUP_AND_RESTORE/CEP_SYSTEM_BACKUP_RESTORE_RESTORE_DRILL_REFERENCE.png",
+  "REFERENCE_CLASSIFICATION": "OWNER_CONFIRMED_FINAL_REFERENCE",
+  "REFERENCE_AUTHORITY_STATEMENT": "Reference is CONSTRUCTION AUTHORITY for composition, hierarchy, spatial relationships, information architecture, density/rhythm, interaction language, visual emphasis, pane organization and responsive intent. REFERENCE != BLIND PIXEL COPY. The reference is Arabic; per Owner policy it establishes visual/layout/interaction intent ONLY and confers NO product-language preference.",
+  "REFERENCE_IDENTITY": {
+    "sha256_16": "782e813a4ffacd96",
+    "sha256_full": "782e813a4ffacd969eeff180b90a0a859271bd8c5a1a4e3b98ac6379e9a88ed0",
+    "dims": "1536x1024",
+    "verifiedAt": "2026-09-30T17:35:00Z (sha256sum matches packet + register); re-verified 2026-09-30 (sha256sum + tesseract eng+ara OCR of the same bytes: 'Restore Drill: RDRILL-0041', 'BKP-2026-08-30-001', 'COMPLETED / VERIFIED', 'isolate-drill-01', 'RTO/RPO', 'PASS')",
+    "register": "cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md",
+    "manifest": "cep-writer/REFERENCE_MANIFEST.json"
+  },
+  "SURFACE_PURPOSE": "Protect state and PROVE restore works: run isolated restore drills against real provider receipts and present verifiable restore evidence (8-stage pipeline with per-stage verdicts, real-check grid, expected-vs-actual counts, durable attempt journal) — the drill is the work, not a list of backup files.",
+  "CURRENT_CANDIDATE": {
+    "branch": "writer/mi-serial",
+    "baseCommit": "HEAD at session start (checkpoints e2a915e..)",
+    "state": "UNCOMMITTED_WORKTREE_DELTA",
+    "note": "Working tree only; no git add/commit performed by this unit per dispatch rule."
+  },
+  "FILES_CHANGED": [
+    "stack/native-typescript/surfaces/backup/index.ts",
+    "stack/native-typescript/surfaces/backup/style.ts",
+    "stack/native-typescript/surfaces/backup/i18n.ts",
+    "stack/native-typescript/surfaces/backup/icons.ts"
+  ],
+  "FUNCTIONAL_STATUS": "SOURCE_APPLIED__OFFLINE_SMOKE_PASS__BROWSER_RE-LIFECYCLE_PENDING — mountBackupSurface, all 6 commands, BACKUP_COMMANDS identity, command registration/re-localisation, region binding (LEFT/RIGHT/BOTTOM) and the not-run/drill content paths execute without error in an offline mount harness against provider-shaped fixtures (see OFFLINE_EVIDENCE). Real local-runtime lifecycle re-run (backup.package → … → backup.activationRequest) is PENDING because the shared build is transiently red from another unit's in-flight edit of stack/native-typescript/surfaces/manual_ai (ERR_INVALID_TYPESCRIPT_SYNTAX at `():'rtl'|'ltr'=>(`); retried, not edited by this unit.",
+  "STRUCTURAL_STATUS": "RECOMPOSED_PENDING_MEASUREMENT — intended regions: header (identity + 6-command action strip, primary = new package) → safety banner → ONE focal Restore Drill report panel (head+pill, 5-cell meta strip, optional not-run block, 8-stage pipeline, 3x3 check grid, 6 big-number metrics, provider-truth chip row) → LEFT grouped/collapsed restore-point queue with search+filter+counts (4 groups) → RIGHT 9 icon-headed context blocks incl. risk block and RTO/RPO → BOTTOM attempt ledger table with raw receipt behind disclosure. Baseline (5 equal-weight bordered boxes, stepper above report) is removed.",
+  "VISUAL_STATUS": "ALL_13_DEFECTS_FIXED_IN_SOURCE__AWAITING_BROWSER_RECAPTURE — composition rebuilt from the reference; offline structural + language assertions pass. No visual PASS is claimed until matched-viewport captures are re-taken and compared L1-L4.",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": {
+    "L1_WHOLE_SURFACE": "DONE (baseline) — current result vs reference: reference centres the composition on a Restore Drill report with an 8-stage pipeline, a 3x3 verification grid and a big-number expected-vs-actual metric row; baseline showed a 6-card generic stepper ABOVE the report, an emoji-card grid, a prose table instead of metrics, and equal-weight boxes with no focal point. RECOMPARISON PENDING post-capture.",
+    "L2_REGION_PANE": "DONE (baseline) — centre 790px column vs reference ~65% width; left pane 1 group + 5 flat rows vs reference 5 collapsible groups with counts/search/filter; right pane 5 equal blocks vs reference 9 blocks with icon affordances, red risk block and RPO/RTO; bottom shelf raw JSON dump vs composed shelf. RECOMPARISON PENDING post-capture.",
+    "L3_COMPONENT": "DONE (baseline) — stepper cards, drill header pill, 9 verification cards, expected-vs-actual table, attempt history, left restore-point rows, right context blocks measured from baseline captures. RECOMPARISON PENDING post-capture.",
+    "L4_MICRO": "DONE (baseline) — hardcoded RTL arrow glyphs in an LTR render, mid-word break `productionDatabaseMutate d = false`, emoji glyph icons, static English command labels on a non-English surface, status toast 'completed truthfully' overlaying content. Each is now addressed in source (see FIXES_APPLIED); REVERIFICATION PENDING post-capture.",
+    "METHOD_NOTE": "Reference identity re-verified by sha256 + tesseract OCR of the same bytes. The image `read` channel is treated as possibly stale: every visual claim must cite sha256 + dims of the exact bytes and be cross-checked with OCR of those same bytes. No claim rests on an unverified frame."
+  },
+  "RESPONSIVE_STATUS": "SOURCE_ONLY — style.ts composes with container queries at 860/660/470px (metrics 6→3→2→1, checks 3→2→1, pipeline 8→4→2 with connector removed when it cannot be honest). COLLAPSED-STATE AND RESPONSIVE CAPTURES PENDING.",
+  "RTL_LTR_STATUS": "SOURCE_ONLY__OFFLINE_PASS__BROWSER_PENDING — every layout property in style.ts is logical (inline-start/end, block, inset-inline); pipeline connector is a CSS rule, not a direction glyph; disclosure cue is a direction-neutral down/up chevron; summary rows carry dir from the active preference at render time; technical tokens isolated in `<bdi dir=\"ltr\">`. Offline mount in ar/rtl produced Arabic-only copy with no English command labels and en/ltr produced English-only copy with no Arabic. Browser RTL/LTR capture PENDING.",
+  "DEFECTS_FOUND": [
+    {"id": "D-01", "title": "Surface hardcodes Arabic while the active language is English — mixed-language surface, violates §7 (both languages first-class, no permanent product-language authority)", "severity": "V4", "rootCause": "STALE_DECISION", "evidence": "baseline-drill-full.png (sha256 0957b88d…) with locale=en: centre/left/right render Arabic, shared toolbar/chrome render English; 0 bilingual path exists in surfaces/backup/index.ts", "status": "FIXED_IN_SOURCE__AWAITING_RECAPTURE"},
+    {"id": "D-02", "title": "Reference's focal structure absent: no 8-stage drill pipeline with per-stage verdicts, no 3x3 real-check grid, no big-number expected-vs-actual metrics, no drill meta strip (source/started/completed/duration/environment)", "severity": "V4", "rootCause": "SURFACE_COMPOSITION", "evidence": "reference vs baseline-drill-full.png + baseline-drill-scrolled.png", "status": "FIXED_IN_SOURCE__AWAITING_RECAPTURE"},
+    {"id": "D-03", "title": "Information hierarchy inverted — the process diagram (lifecycle stepper) sits above the actual restore-drill evidence; the drill report is not the focal point of the work area", "severity": "V3", "rootCause": "SURFACE_COMPOSITION", "evidence": "DOM order: .b-head > .b-warn > .b-sec(stepper) > .b-sec(drill report)", "status": "FIXED_IN_SOURCE__AWAITING_RECAPTURE"},
+    {"id": "D-04", "title": "Over-boxed equal-weight composition: 5 stacked bordered sections of identical treatment, no focal panel, dead space in the 2-card second stepper row", "severity": "V3", "rootCause": "SURFACE_COMPOSITION", "evidence": "baseline-drill-center.png (790x803); stepper row 2 renders 2 cards stretched across 790px", "status": "FIXED_IN_SOURCE__AWAITING_RECAPTURE"},
+    {"id": "D-05", "title": "Direction baked into structure: stepper connector arrow is a hardcoded '←' (RTL) glyph, wrong in an LTR document", "severity": "V2", "rootCause": "SURFACE_COMPOSITION", "evidence": "surfaces/backup/index.ts line 95 '<span class=\"b-arrow\">←</span>' rendered in dir=ltr", "status": "FIXED_IN_SOURCE__AWAITING_RECAPTURE"},
+    {"id": "D-06", "title": "Emoji glyphs (🧾🧊🗄⚖️✍️🏝🚫♻️✅) used as component icons in a serious operations surface", "severity": "V2", "rootCause": "SURFACE_COMPOSITION", "evidence": "verification cards in baseline-drill-center.png", "status": "FIXED_IN_SOURCE__AWAITING_RECAPTURE"},
+    {"id": "D-07", "title": "Right pane: 5 uniform blocks with identical weight — no icon affordances, no distinct risk treatment, no RPO/RTO, no state-interpretation block (reference has 9)", "severity": "V2", "rootCause": "SURFACE_COMPOSITION", "evidence": "baseline-drill-right.png 420x803", "status": "FIXED_IN_SOURCE__AWAITING_RECAPTURE"},
+    {"id": "D-08", "title": "Left pane: no grouped/collapsible structure, no counts on drill/attempt groups, no search/filter affordance, restore-point rows lack a status-pill + lock affordance hierarchy", "severity": "V2", "rootCause": "SURFACE_COMPOSITION", "evidence": "baseline-drill-left.png 304x803: 1 heading + 5 flat rows + orphan button", "status": "FIXED_IN_SOURCE__AWAITING_RECAPTURE"},
+    {"id": "D-09", "title": "Bottom shelf presents raw JSON <pre> dumps as the primary evidence presentation (dev/component-showcase, not production)", "severity": "V2", "rootCause": "SURFACE_COMPOSITION", "evidence": "surfaces/backup/index.ts lines 139-142", "status": "FIXED_IN_SOURCE__AWAITING_RECAPTURE"},
+    {"id": "D-10", "title": "Status toast text is machine phrasing, untranslated and overlays content: 'backup.activationRequest completed truthfully'", "severity": "V2", "rootCause": "SURFACE_COMPOSITION", "evidence": "baseline-drill-scrolled.png bottom-centre toast", "status": "FIXED_IN_SOURCE__AWAITING_RECAPTURE"},
+    {"id": "D-11", "title": "Expected-vs-actual table breaks technical tokens mid-word: 'productionDatabaseMutate d = false', 'stagedVerifiedIsLiveRest ored = false'", "severity": "V1", "rootCause": "SURFACE_COMPOSITION", "evidence": "baseline-drill-scrolled.png rows 2-3; overflow-wrap:anywhere on <bdi dir=ltr>", "status": "FIXED_IN_SOURCE__AWAITING_RECAPTURE"},
+    {"id": "D-12", "title": "Shared toolbar command labels are static English while the surface renders another language — no localisation path for command labels", "severity": "V1", "rootCause": "IMPLEMENTATION", "evidence": "toolbar 'Create verified BackupPackage …' (English) beside Arabic surface text", "status": "FIXED_IN_SOURCE__AWAITING_RECAPTURE"},
+    {"id": "D-13", "title": "First paint with no prior drill shows an undifferentiated half-empty column instead of a designed not-run state that still carries structure and readiness", "severity": "V2", "rootCause": "CONTENT_MODEL", "evidence": "baseline-empty-center.png 790x803", "status": "FIXED_IN_SOURCE__AWAITING_RECAPTURE"}
+  ],
+  "DEFECT_SEVERITY": {"V4": 2, "V3": 2, "V2": 6, "V1": 2, "UNCLASSIFIED": 0, "FIXED": 13, "OPEN_REPORTED": 0, "OPEN_PENDING_RECAPTURE": 13},
+  "ROOT_CAUSE": {"SURFACE_COMPOSITION": 9, "STALE_DECISION": 1, "IMPLEMENTATION": 1, "CONTENT_MODEL": 1, "EVIDENCE/ORACLE": 1},
+  "FIX_VERIFICATION_STATUS": "SOURCE_APPLIED__OFFLINE_SMOKE_PASS__BROWSER_RECAPTURE_PENDING (no visual PASS claimed)",
+  "FIXES_APPLIED": [
+    {"id": "D-01", "change": "Every string now resolves through surfaces/backup/i18n.ts `tx()/txList()` against the locale read from the document shell; a MutationObserver on <html lang/dir> re-renders the surface when the user changes language in Settings. Offline mount in en/ltr yields English-only copy, ar/rtl yields Arabic-only copy.", "files": ["surfaces/backup/index.ts", "surfaces/backup/i18n.ts"], "offlineEvidence": "smoke.mjs: 'english surface has no arabic' + 'arabic surface has no english command label' + locale marker"},
+    {"id": "D-02", "change": "Focal panel now carries: drill head + status pill, 5-cell meta strip (source/started/completed/duration/environment), 8-stage pipeline with per-stage verdict tokens, 3x3 real-check grid (9 receipt-derived checks), and 6 big-number expected-vs-actual metrics with legend + match captions. All values derive from provider receipts (manifest readbackSummary, drill receipt preflight/readback, schema signatures, durable attempt journal) — no invented counts.", "files": ["surfaces/backup/index.ts", "surfaces/backup/style.ts", "surfaces/backup/icons.ts"]},
+    {"id": "D-03", "change": "DOM order is now header → safety banner → single focal Restore Drill panel; the standalone lifecycle stepper section was deleted (its information is carried by the in-panel pipeline, the left-pane grouped lifecycle and the right-pane readiness block).", "files": ["surfaces/backup/index.ts"]},
+    {"id": "D-04", "change": "5 equal-weight bordered sections replaced by one `.bk-panel.is-focal` (stronger border + inset highlight + shadow) plus header/banner; section spacing follows the 4/8/12/16/24 scale; the stretched 2-card stepper row is gone.", "files": ["surfaces/backup/index.ts", "surfaces/backup/style.ts"]},
+    {"id": "D-05", "change": "The '←' glyph is gone. The pipeline connector is a CSS rule positioned with `inset-inline` (mirrors automatically); stage order follows document/grid flow in both directions; the disclosure cue is a direction-neutral down/up chevron; remaining physical paddings in .bkl-search input and .bk-meta cells converted to logical properties.", "files": ["surfaces/backup/index.ts", "surfaces/backup/style.ts", "surfaces/backup/icons.ts"]},
+    {"id": "D-06", "change": "Emoji replaced by surface-owned inline SVG (icons.ts, 16x16 stroke set): check-grid icons, block-heading icons, banner/risk/search/lock/group icons. Icons are aria-hidden and always accompanied by a text label.", "files": ["surfaces/backup/icons.ts", "surfaces/backup/index.ts"]},
+    {"id": "D-07", "change": "Right pane rebuilt to 9 icon-headed blocks: package scope, last verification, signatures, command readiness (per-command ready/blocked with localised reason), isolated target, RTO/RPO metric block (RTO = drill attempt duration, RPO = window since capture), red risk block, state interpretation, journal provenance.", "files": ["surfaces/backup/index.ts", "surfaces/backup/style.ts"]},
+    {"id": "D-08", "change": "Left pane rebuilt: search input, verified-only filter toggle with aria-pressed, and 4 collapsible <details> groups each with an icon, a count and a chevron cue — restore points (rows: id, lock affordance, captured time, status pill), restore drills, attempt journal, activation authority. Filtering repaints only the list; an over-filtered result offers 'View all restore points' + 'Clear search & filter'.", "files": ["surfaces/backup/index.ts", "surfaces/backup/style.ts"]},
+    {"id": "D-09", "change": "Bottom shelf is now a durable-attempt ledger table (attempt/operation/phase/status/package/when) with a provenance strip; the raw receipt JSON is progressive disclosure inside <details>, never the primary surface.", "files": ["surfaces/backup/index.ts"]},
+    {"id": "D-10", "change": "Status text now uses localised human phrasing (stOk/stFail with the localised command name), e.g. 'Run drill · receipt recorded.' instead of 'backup.drill completed truthfully'. The overlay element itself is shared foundation chrome (#foundationStatus, auto-clears in 6s) — surface-side contribution fixed; shared placement not modified.", "files": ["surfaces/backup/index.ts", "surfaces/backup/i18n.ts"]},
+    {"id": "D-11", "change": "Technical tokens are isolated in <bdi> whose own rule is now `overflow-wrap:break-word; word-break:normal` (scoped to .bk-root/.bkl/.bkr/.bkb), so 'productionDatabaseMutated = false' wraps at spaces instead of mid-word; the prose table was replaced by big-number metric cells that keep tokens whole.", "files": ["surfaces/backup/style.ts"]},
+    {"id": "D-12", "change": "Commands are registered through LOCALIZED_COMMAND_LABELS and re-synced (label + availability + run) on every render, then workspace.refreshToolbar() re-renders the shared toolbar; readiness reasons come from COMMAND_REASON_KEYS so blocked titles are localised too.", "files": ["surfaces/backup/index.ts", "surfaces/backup/i18n.ts"]},
+    {"id": "D-13", "change": "First paint with no drill renders the full composition: 'NOT RUN' pill, designed .bk-nostrun statement (not-run is never reported as restored), meta strip with em-dashes, pipeline with 8 NOT_RUN stages, 3x3 checks in pending/deferred tone, metrics as 'expected / —' with 'Compare runs after a drill produces a receipt.', provider-truth chips, left/right/bottom regions fully populated.", "files": ["surfaces/backup/index.ts", "surfaces/backup/style.ts"]}
+  ],
+  "RECAPTURE_STATUS": "PENDING — blocked on shared build (see BLOCKERS)",
+  "RECOMPARISON_STATUS": "PENDING — blocked on shared build",
+  "REGRESSION_STATUS": "NOT_STARTED — S18 domain tests + contract checks to be run once the shared build is green",
+  "OFFLINE_EVIDENCE": {
+    "what": "Structural + language smoke of the real mountBackupSurface against provider-shaped fixtures (no pixels, no claims about rendering).",
+    "harness": "/tmp/opencode/bk/smoke.mjs (transpiled copy of the surface modules via node:module stripTypeScriptTypes)",
+    "result": "pass: true, 0 failures across en/ltr empty, ar/rtl drill and en/ltr drill mounts",
+    "assertions": [
+      "8 pipeline stages, 9 checks, 6 metric cells in every locale/state",
+      "no emoji glyphs in centre/left/right/bottom markup",
+      "no 'undefined' / 'NaN' / '[object Object]' leakage",
+      "no legacy b-stepper / b-arrow (D-03, D-05)",
+      "focal panel present; left has 4 collapsible groups + search + verified filter; right has 9 blocks incl. risk + RTO/RPO; bottom receipt sits behind <details>",
+      "command labels + readiness reasons localised per active locale; BACKUP_COMMANDS identity unchanged",
+      "en/ltr markup contains no Arabic; ar/rtl markup contains no English command label"
+    ],
+    "note": "This is FUNCTION/STRUCTURE/LANGUAGE evidence only. It is NOT visual evidence and does not satisfy VISUAL FIDELITY acceptance."
+  },
+  "EVIDENCE": {
+    "root": "writer-output/W05-BACKUP/evidence/",
+    "harness": ["writer-output/W05-BACKUP/evidence/harness/capture.mjs"],
+    "baseline": [
+      {"file": "baseline-drill-full.png", "sha256": "0957b88da880d0ff1373c323d4573a41df7efcda741459cde218243841ae0266", "dims": "1536x1024", "state": "full real lifecycle completed (SUPERSEDED for comparison once recaptured, retained for lineage)"},
+      {"file": "baseline-drill-scrolled.png", "dims": "1536x1024"},
+      {"file": "baseline-drill-left.png", "dims": "304x803"},
+      {"file": "baseline-drill-right.png", "dims": "420x803"},
+      {"file": "baseline-drill-center.png", "dims": "790x803"},
+      {"file": "baseline-empty-*.png", "state": "no prior drill"},
+      {"file": "baseline-drill.json", "content": "8/8 checks + lineage + geometry"}
+    ],
+    "postFix": [],
+    "referenceIsNotEvidence": "The Owner reference image was used for comparison only and is NOT part of the evidence set."
+  },
+  "LINEAGE": {
+    "reference": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/05_BACKUP_AND_RESTORE/CEP_SYSTEM_BACKUP_RESTORE_RESTORE_DRILL_REFERENCE.png",
+    "referenceClassification": "OWNER_CONFIRMED_FINAL_REFERENCE",
+    "referenceSha256_16": "782e813a4ffacd96",
+    "referenceDims": "1536x1024",
+    "candidate": "writer/mi-serial, uncommitted worktree delta",
+    "captureMethod": "cep-writer/references/WRITER_LOCAL_VISUAL_CAPTURE_AND_RENDERING_METHOD.md (playwright chromium headless, matched viewport, own runtime root, full lineage)",
+    "evidenceContract": "controller/08_evidence/evidence_contract.md",
+    "buildSeam": "dist/** built only through tools/writer-serial.sh npm run build:runtime"
+  },
+  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
+  "BLOCKERS": [
+    {"id": "B-01", "severity": "HIGH", "detail": "Shared build is red from a concurrent unit's in-flight edit: `node tools/build-runtime.mjs` fails with ERR_INVALID_TYPESCRIPT_SYNTAX in stack/native-typescript/surfaces/manual_ai (line 32 `export const dirNow=():'rtl'|'ltr'=>((...) ? 'rtl':'ltr')` → 'Parenthesized expression cannot be empty'). Not this unit's file; retried, not edited per dispatch rule. Blocks dist rebuild, browser capture, L1-L4 re-comparison and regression runs.", "workaround": "This unit verified its own sources by stripping them with node:module stripTypeScriptTypes (all 5 files OK) and ran an offline mount smoke test."}
+  ],
+  "STAGE": "SOURCE_FIXES_APPLIED__OFFLINE_VERIFIED__BUILD_AND_CAPTURE_PENDING",
+  "GENERATED_AT": "2026-09-30T19:05:00Z"
+}
