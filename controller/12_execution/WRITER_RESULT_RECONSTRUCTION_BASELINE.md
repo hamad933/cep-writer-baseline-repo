@@ -20,6 +20,19 @@ Library, Learn, Visualize, Labs, Runs, Reviews, Mastery, Portfolio, Audit, Backu
 
 A rescue/report/evidence directory does not equal completion or acceptance.
 
+### Exact terminal-result count from checkpoint + rescue manifests
+
+- `CP-2026-09-30-001`: five completed surfaces — Today, RQ, Scenarios, Evidence, Configuration.
+- `RESCUE_W03_ENTERPRISE_2026-09-30.md`: Enterprise explicitly records `Writer execution: COMPLETE`.
+- Exact proven terminal Writer-result set = **6 Surfaces**.
+- `CP-2026-09-30-002`: twelve units were durably rescued but their surfaces remained `in_progress`; excluding Enterprise leaves **11 rescued partial/unverified** surfaces.
+- Manual AI remains **1 lineage-unresolved** in-flight result.
+- Shell, Health, Processing, Validation, Results remain **5 with no original Surface-Writer completion proven**.
+
+Accounting: `6 + 11 + 1 + 5 = 23`.
+
+This classification concerns whether the historical Writer reached a terminal result. It does **not** create Controller/Product/Owner acceptance.
+
 ## Current 23-Surface reconstruction
 
 | Surface | Reconstruction class | Required next operation |
