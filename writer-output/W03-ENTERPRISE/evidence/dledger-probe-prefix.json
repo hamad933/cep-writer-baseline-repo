@@ -1,0 +1,4511 @@
+{
+  "schemaVersion": 1,
+  "unit": "W03-ENTERPRISE",
+  "purpose": "D-ledger (D-01..D-08) measured at exact current source — visual/DOM evidence, not static markers",
+  "commit": "766ab95367dde5ce433a148cdecb602274fe6c0d",
+  "tree": "5926fac34eaf680abbaf95bc18023cb6fd2ee868",
+  "capturedAt": "2026-10-02T07:10:35.352Z",
+  "note": "D-04 and D-08 residuals live at SHARED roots (foundation/spatial presentation); recorded as hotspot findings, never fixed inside ENT-1 roots.",
+  "results": [
+    {
+      "viewport": {
+        "id": "en-ltr-1440",
+        "w": 1440,
+        "h": 1000,
+        "locale": "en",
+        "dir": "ltr"
+      },
+      "picked": "APP-WEB-01",
+      "canvasPicked": "APP-WEB-01",
+      "pageErrors": [],
+      "topology": {
+        "dir": "ltr",
+        "lang": "en",
+        "consumer": "enterprise",
+        "words": {
+          "left": 56,
+          "center": 136,
+          "right": 30,
+          "top": 21
+        },
+        "clipped": [
+          "P.spatial-accessible-help:Arrow keys move spatial focus. Shift ext",
+          "DIV.spatial-accessible-nav:Web Application\nWeb Application Firewall",
+          "DIV.:Web Application",
+          "DIV.:Web Application Firewall",
+          "DIV.:Attacker Workstation",
+          "DIV.:Database",
+          "DIV.:Identity Service",
+          "DIV.:SIEM / Monitoring"
+        ],
+        "FACTS": {
+          "spatialCanvasCount": 1,
+          "spatialInstanceIds": [
+            "spatial-1"
+          ],
+          "foundationSpatialRegistered": 12,
+          "readoutText": "104% · 0 selected · 6 objects",
+          "selectionCountFromReadout": "0",
+          "pressedNodes": 0
+        },
+        "D01": {
+          "leftRegionOwned": true,
+          "rightRegionOwned": true,
+          "bottomRegionOwned": true,
+          "inStageFallbackLeft": true,
+          "inStageFallbackRight": true,
+          "hiddenLeftSiblings": 6,
+          "hiddenRightSiblings": 3,
+          "visibleRightSiblings": [
+            "domainContext"
+          ],
+          "panes": {
+            "left": "open",
+            "right": "open",
+            "bottom": "closed"
+          },
+          "nestedRailsInsideStage": 0,
+          "regionBoxes": {
+            "left": {
+              "x": 13,
+              "y": 238,
+              "w": 278,
+              "h": 918.5
+            },
+            "center": {
+              "x": 315,
+              "y": 416.6,
+              "w": 694,
+              "h": 544.4
+            },
+            "right": {
+              "x": 1033,
+              "y": 238,
+              "w": 394,
+              "h": 267.6
+            }
+          }
+        },
+        "D02": {
+          "headerCommands": [
+            "Create workspace",
+            "Pin exact Baseline",
+            "Validate",
+            "Publish revision"
+          ],
+          "headerCommandCount": 4,
+          "shellToolbarCommands": [
+            "⌘",
+            "Focus",
+            "Note",
+            "Notes",
+            "Inspect Enterprise selection",
+            "Edit typed Enterprise relation",
+            "Create successor Enterprise revision",
+            "Create or rebase Digital Twin",
+            "Prepare Run handoff"
+          ],
+          "inStageComposerAffordance": {
+            "present": true,
+            "label": "Connect / edit relation",
+            "disabled": false
+          },
+          "duplicated": []
+        },
+        "D03": {
+          "documentDir": "ltr",
+          "stageDirection": "ltr",
+          "stageHasBakedDirAttr": null,
+          "identityX": 331,
+          "actionsX": 484,
+          "inherited": true
+        },
+        "D04": {
+          "nodeTextOverlaps": [],
+          "nodeCards": 6,
+          "nodeSample": [
+            {
+              "node": "APP-WEB-01",
+              "texts": [
+                {
+                  "t": "A",
+                  "y": 614.2
+                },
+                {
+                  "t": "APP-WEB-01",
+                  "y": 616.2
+                },
+                {
+                  "t": "Web Application",
+                  "y": 625.6
+                },
+                {
+                  "t": "Type: Application",
+                  "y": 642.1
+                }
+              ]
+            },
+            {
+              "node": "CTL-WAF-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 614.2
+                },
+                {
+                  "t": "CTL-WAF-01",
+                  "y": 616.2
+                },
+                {
+                  "t": "Web Application Firewall",
+                  "y": 625.6
+                },
+                {
+                  "t": "Type: Security Control",
+                  "y": 642.1
+                }
+              ]
+            },
+            {
+              "node": "SIM-ATK-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 614.2
+                },
+                {
+                  "t": "SIM-ATK-01",
+                  "y": 616.2
+                },
+                {
+                  "t": "Attacker Workstation",
+                  "y": 625.6
+                },
+                {
+                  "t": "Type: Simulation-local Device",
+                  "y": 642.1
+                }
+              ]
+            },
+            {
+              "node": "DATA-SQL-01",
+              "texts": [
+                {
+                  "t": "D",
+                  "y": 821.4
+                },
+                {
+                  "t": "DATA-SQL-01",
+                  "y": 823.4
+                },
+                {
+                  "t": "Database",
+                  "y": 832.8
+                },
+                {
+                  "t": "Type: Data Service",
+                  "y": 849.3
+                }
+              ]
+            },
+            {
+              "node": "ID-SVC-01",
+              "texts": [
+                {
+                  "t": "I",
+                  "y": 821.4
+                },
+                {
+                  "t": "ID-SVC-01",
+                  "y": 823.4
+                },
+                {
+                  "t": "Identity Service",
+                  "y": 832.8
+                },
+                {
+                  "t": "Type: Identity Service",
+                  "y": 849.3
+                }
+              ]
+            },
+            {
+              "node": "SVC-SIEM-01",
+              "texts": [
+                {
+                  "t": "M",
+                  "y": 821.4
+                },
+                {
+                  "t": "SVC-SIEM-01",
+                  "y": 823.4
+                },
+                {
+                  "t": "SIEM / Monitoring",
+                  "y": 832.8
+                },
+                {
+                  "t": "Type: Monitoring Service",
+                  "y": 849.3
+                }
+              ]
+            }
+          ]
+        },
+        "D05": {
+          "clippedRows": [],
+          "rowSamples": [
+            {
+              "text": "Systems",
+              "clipped": false
+            },
+            {
+              "text": "Applications",
+              "clipped": false
+            },
+            {
+              "text": "Services",
+              "clipped": false
+            },
+            {
+              "text": "Networks",
+              "clipped": false
+            },
+            {
+              "text": "Devices",
+              "clipped": false
+            },
+            {
+              "text": "Identities",
+              "clipped": false
+            },
+            {
+              "text": "Data",
+              "clipped": false
+            },
+            {
+              "text": "Security Controls",
+              "clipped": false
+            }
+          ]
+        },
+        "D06": {
+          "hintPresent": true,
+          "hintText": "Select a topology object to inspect it.",
+          "hintClipped": false,
+          "hintTitle": null,
+          "clippedInClippedList": []
+        },
+        "D07": {
+          "wrapPresent": false,
+          "wrapOverflowX": null,
+          "wrapMinWidth": null,
+          "tableWiderThanCard": null,
+          "clippedCards": []
+        },
+        "d08lower": false,
+        "D08": {
+          "documentDir": "ltr",
+          "legend": {
+            "x": 329,
+            "y": 850.9,
+            "w": 206,
+            "h": 98.1
+          },
+          "readout": {
+            "x": 803.6,
+            "y": 937,
+            "w": 191.4,
+            "h": 12
+          },
+          "minimap": {
+            "x": 857,
+            "y": 837,
+            "w": 140,
+            "h": 90
+          },
+          "legendReadoutOverlap": false,
+          "legendMinimapOverlap": false,
+          "readoutDirection": "ltr",
+          "readoutInlineEnd": "14px",
+          "surfaceOverrideRules": [
+            ".spatial-readout { position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3); }",
+            ".ent-canvas .spatial-readout { left: auto; right: 14px; inset-block-end: 12px; }",
+            "[dir=\"rtl\"] .ent-canvas .spatial-readout { left: 14px; right: auto; }"
+          ]
+        }
+      },
+      "selected": {
+        "dir": "ltr",
+        "lang": "en",
+        "consumer": "enterprise",
+        "words": {
+          "left": 56,
+          "center": 132,
+          "right": 54,
+          "top": 21
+        },
+        "clipped": [
+          "P.spatial-accessible-help:Arrow keys move spatial focus. Shift ext",
+          "DIV.spatial-accessible-nav:Web Application\nWeb Application Firewall",
+          "DIV.:Web Application",
+          "DIV.:Web Application Firewall",
+          "DIV.:Attacker Workstation",
+          "DIV.:Database",
+          "DIV.:Identity Service",
+          "DIV.:SIEM / Monitoring"
+        ],
+        "FACTS": {
+          "spatialCanvasCount": 1,
+          "spatialInstanceIds": [
+            "spatial-1"
+          ],
+          "foundationSpatialRegistered": 12,
+          "readoutText": "104% · 0 selected · 6 objects",
+          "selectionCountFromReadout": "0",
+          "pressedNodes": 0
+        },
+        "D01": {
+          "leftRegionOwned": true,
+          "rightRegionOwned": true,
+          "bottomRegionOwned": true,
+          "inStageFallbackLeft": true,
+          "inStageFallbackRight": true,
+          "hiddenLeftSiblings": 6,
+          "hiddenRightSiblings": 3,
+          "visibleRightSiblings": [
+            "domainContext"
+          ],
+          "panes": {
+            "left": "open",
+            "right": "open",
+            "bottom": "closed"
+          },
+          "nestedRailsInsideStage": 0,
+          "regionBoxes": {
+            "left": {
+              "x": 13,
+              "y": 238,
+              "w": 278,
+              "h": 918.5
+            },
+            "center": {
+              "x": 315,
+              "y": 416.6,
+              "w": 694,
+              "h": 544.4
+            },
+            "right": {
+              "x": 1033,
+              "y": 238,
+              "w": 394,
+              "h": 763.3
+            }
+          }
+        },
+        "D02": {
+          "headerCommands": [
+            "Create workspace",
+            "Pin exact Baseline",
+            "Validate",
+            "Publish revision"
+          ],
+          "headerCommandCount": 4,
+          "shellToolbarCommands": [
+            "⌘",
+            "Focus",
+            "Note",
+            "Notes",
+            "Inspect Enterprise selection",
+            "Edit typed Enterprise relation",
+            "Create successor Enterprise revision",
+            "Create or rebase Digital Twin",
+            "Prepare Run handoff"
+          ],
+          "inStageComposerAffordance": {
+            "present": true,
+            "label": "Connect / edit relation",
+            "disabled": false
+          },
+          "duplicated": []
+        },
+        "D03": {
+          "documentDir": "ltr",
+          "stageDirection": "ltr",
+          "stageHasBakedDirAttr": null,
+          "identityX": 331,
+          "actionsX": 484,
+          "inherited": true
+        },
+        "D04": {
+          "nodeTextOverlaps": [],
+          "nodeCards": 6,
+          "nodeSample": [
+            {
+              "node": "APP-WEB-01",
+              "texts": [
+                {
+                  "t": "A",
+                  "y": 614.2
+                },
+                {
+                  "t": "APP-WEB-01",
+                  "y": 616.2
+                },
+                {
+                  "t": "Web Application",
+                  "y": 625.6
+                },
+                {
+                  "t": "Type: Application",
+                  "y": 642.1
+                }
+              ]
+            },
+            {
+              "node": "CTL-WAF-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 614.2
+                },
+                {
+                  "t": "CTL-WAF-01",
+                  "y": 616.2
+                },
+                {
+                  "t": "Web Application Firewall",
+                  "y": 625.6
+                },
+                {
+                  "t": "Type: Security Control",
+                  "y": 642.1
+                }
+              ]
+            },
+            {
+              "node": "SIM-ATK-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 614.2
+                },
+                {
+                  "t": "SIM-ATK-01",
+                  "y": 616.2
+                },
+                {
+                  "t": "Attacker Workstation",
+                  "y": 625.6
+                },
+                {
+                  "t": "Type: Simulation-local Device",
+                  "y": 642.1
+                }
+              ]
+            },
+            {
+              "node": "DATA-SQL-01",
+              "texts": [
+                {
+                  "t": "D",
+                  "y": 821.4
+                },
+                {
+                  "t": "DATA-SQL-01",
+                  "y": 823.4
+                },
+                {
+                  "t": "Database",
+                  "y": 832.8
+                },
+                {
+                  "t": "Type: Data Service",
+                  "y": 849.3
+                }
+              ]
+            },
+            {
+              "node": "ID-SVC-01",
+              "texts": [
+                {
+                  "t": "I",
+                  "y": 821.4
+                },
+                {
+                  "t": "ID-SVC-01",
+                  "y": 823.4
+                },
+                {
+                  "t": "Identity Service",
+                  "y": 832.8
+                },
+                {
+                  "t": "Type: Identity Service",
+                  "y": 849.3
+                }
+              ]
+            },
+            {
+              "node": "SVC-SIEM-01",
+              "texts": [
+                {
+                  "t": "M",
+                  "y": 821.4
+                },
+                {
+                  "t": "SVC-SIEM-01",
+                  "y": 823.4
+                },
+                {
+                  "t": "SIEM / Monitoring",
+                  "y": 832.8
+                },
+                {
+                  "t": "Type: Monitoring Service",
+                  "y": 849.3
+                }
+              ]
+            }
+          ]
+        },
+        "D05": {
+          "clippedRows": [],
+          "rowSamples": [
+            {
+              "text": "Systems",
+              "clipped": false
+            },
+            {
+              "text": "Applications",
+              "clipped": false
+            },
+            {
+              "text": "Services",
+              "clipped": false
+            },
+            {
+              "text": "Networks",
+              "clipped": false
+            },
+            {
+              "text": "Devices",
+              "clipped": false
+            },
+            {
+              "text": "Identities",
+              "clipped": false
+            },
+            {
+              "text": "Data",
+              "clipped": false
+            },
+            {
+              "text": "Security Controls",
+              "clipped": false
+            }
+          ]
+        },
+        "D06": {
+          "hintPresent": true,
+          "hintText": "Inspect selection: APP-WEB-01",
+          "hintClipped": false,
+          "hintTitle": "Inspect selection: APP-WEB-01",
+          "clippedInClippedList": []
+        },
+        "D07": {
+          "wrapPresent": false,
+          "wrapOverflowX": null,
+          "wrapMinWidth": null,
+          "tableWiderThanCard": null,
+          "clippedCards": []
+        },
+        "d08lower": false,
+        "D08": {
+          "documentDir": "ltr",
+          "legend": {
+            "x": 329,
+            "y": 850.9,
+            "w": 206,
+            "h": 98.1
+          },
+          "readout": {
+            "x": 803.6,
+            "y": 937,
+            "w": 191.4,
+            "h": 12
+          },
+          "minimap": {
+            "x": 857,
+            "y": 837,
+            "w": 140,
+            "h": 90
+          },
+          "legendReadoutOverlap": false,
+          "legendMinimapOverlap": false,
+          "readoutDirection": "ltr",
+          "readoutInlineEnd": "14px",
+          "surfaceOverrideRules": [
+            ".spatial-readout { position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3); }",
+            ".ent-canvas .spatial-readout { left: auto; right: 14px; inset-block-end: 12px; }",
+            "[dir=\"rtl\"] .ent-canvas .spatial-readout { left: 14px; right: auto; }"
+          ]
+        }
+      },
+      "canvasSelected": {
+        "dir": "ltr",
+        "lang": "en",
+        "consumer": "enterprise",
+        "words": {
+          "left": 56,
+          "center": 132,
+          "right": 54,
+          "top": 21
+        },
+        "clipped": [
+          "P.spatial-accessible-help:Arrow keys move spatial focus. Shift ext",
+          "DIV.spatial-accessible-nav:Web Application\nWeb Application Firewall",
+          "DIV.:Web Application",
+          "DIV.:Web Application Firewall",
+          "DIV.:Attacker Workstation",
+          "DIV.:Database",
+          "DIV.:Identity Service",
+          "DIV.:SIEM / Monitoring"
+        ],
+        "FACTS": {
+          "spatialCanvasCount": 1,
+          "spatialInstanceIds": [
+            "spatial-1"
+          ],
+          "foundationSpatialRegistered": 13,
+          "readoutText": "104% · 1 selected · 6 objects",
+          "selectionCountFromReadout": "1",
+          "pressedNodes": 1
+        },
+        "D01": {
+          "leftRegionOwned": true,
+          "rightRegionOwned": true,
+          "bottomRegionOwned": true,
+          "inStageFallbackLeft": true,
+          "inStageFallbackRight": true,
+          "hiddenLeftSiblings": 6,
+          "hiddenRightSiblings": 3,
+          "visibleRightSiblings": [
+            "domainContext"
+          ],
+          "panes": {
+            "left": "open",
+            "right": "open",
+            "bottom": "closed"
+          },
+          "nestedRailsInsideStage": 0,
+          "regionBoxes": {
+            "left": {
+              "x": 13,
+              "y": 238,
+              "w": 278,
+              "h": 918.5
+            },
+            "center": {
+              "x": 315,
+              "y": 416.6,
+              "w": 694,
+              "h": 544.4
+            },
+            "right": {
+              "x": 1033,
+              "y": 238,
+              "w": 394,
+              "h": 763.3
+            }
+          }
+        },
+        "D02": {
+          "headerCommands": [
+            "Create workspace",
+            "Pin exact Baseline",
+            "Validate",
+            "Publish revision"
+          ],
+          "headerCommandCount": 4,
+          "shellToolbarCommands": [
+            "⌘",
+            "Focus",
+            "Note",
+            "Notes",
+            "Inspect Enterprise selection",
+            "Edit typed Enterprise relation",
+            "Create successor Enterprise revision",
+            "Create or rebase Digital Twin",
+            "Prepare Run handoff"
+          ],
+          "inStageComposerAffordance": {
+            "present": true,
+            "label": "Connect / edit relation",
+            "disabled": false
+          },
+          "duplicated": []
+        },
+        "D03": {
+          "documentDir": "ltr",
+          "stageDirection": "ltr",
+          "stageHasBakedDirAttr": null,
+          "identityX": 331,
+          "actionsX": 484,
+          "inherited": true
+        },
+        "D04": {
+          "nodeTextOverlaps": [],
+          "nodeCards": 6,
+          "nodeSample": [
+            {
+              "node": "APP-WEB-01",
+              "texts": [
+                {
+                  "t": "A",
+                  "y": 614.2
+                },
+                {
+                  "t": "APP-WEB-01",
+                  "y": 616.2
+                },
+                {
+                  "t": "Web Application",
+                  "y": 625.6
+                },
+                {
+                  "t": "Type: Application",
+                  "y": 642.1
+                }
+              ]
+            },
+            {
+              "node": "CTL-WAF-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 614.2
+                },
+                {
+                  "t": "CTL-WAF-01",
+                  "y": 616.2
+                },
+                {
+                  "t": "Web Application Firewall",
+                  "y": 625.6
+                },
+                {
+                  "t": "Type: Security Control",
+                  "y": 642.1
+                }
+              ]
+            },
+            {
+              "node": "SIM-ATK-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 614.2
+                },
+                {
+                  "t": "SIM-ATK-01",
+                  "y": 616.2
+                },
+                {
+                  "t": "Attacker Workstation",
+                  "y": 625.6
+                },
+                {
+                  "t": "Type: Simulation-local Device",
+                  "y": 642.1
+                }
+              ]
+            },
+            {
+              "node": "DATA-SQL-01",
+              "texts": [
+                {
+                  "t": "D",
+                  "y": 821.4
+                },
+                {
+                  "t": "DATA-SQL-01",
+                  "y": 823.4
+                },
+                {
+                  "t": "Database",
+                  "y": 832.8
+                },
+                {
+                  "t": "Type: Data Service",
+                  "y": 849.3
+                }
+              ]
+            },
+            {
+              "node": "ID-SVC-01",
+              "texts": [
+                {
+                  "t": "I",
+                  "y": 821.4
+                },
+                {
+                  "t": "ID-SVC-01",
+                  "y": 823.4
+                },
+                {
+                  "t": "Identity Service",
+                  "y": 832.8
+                },
+                {
+                  "t": "Type: Identity Service",
+                  "y": 849.3
+                }
+              ]
+            },
+            {
+              "node": "SVC-SIEM-01",
+              "texts": [
+                {
+                  "t": "M",
+                  "y": 821.4
+                },
+                {
+                  "t": "SVC-SIEM-01",
+                  "y": 823.4
+                },
+                {
+                  "t": "SIEM / Monitoring",
+                  "y": 832.8
+                },
+                {
+                  "t": "Type: Monitoring Service",
+                  "y": 849.3
+                }
+              ]
+            }
+          ]
+        },
+        "D05": {
+          "clippedRows": [],
+          "rowSamples": [
+            {
+              "text": "Systems",
+              "clipped": false
+            },
+            {
+              "text": "Applications",
+              "clipped": false
+            },
+            {
+              "text": "Services",
+              "clipped": false
+            },
+            {
+              "text": "Networks",
+              "clipped": false
+            },
+            {
+              "text": "Devices",
+              "clipped": false
+            },
+            {
+              "text": "Identities",
+              "clipped": false
+            },
+            {
+              "text": "Data",
+              "clipped": false
+            },
+            {
+              "text": "Security Controls",
+              "clipped": false
+            }
+          ]
+        },
+        "D06": {
+          "hintPresent": true,
+          "hintText": "Inspect selection: APP-WEB-01",
+          "hintClipped": false,
+          "hintTitle": "Inspect selection: APP-WEB-01",
+          "clippedInClippedList": []
+        },
+        "D07": {
+          "wrapPresent": false,
+          "wrapOverflowX": null,
+          "wrapMinWidth": null,
+          "tableWiderThanCard": null,
+          "clippedCards": []
+        },
+        "d08lower": false,
+        "D08": {
+          "documentDir": "ltr",
+          "legend": {
+            "x": 329,
+            "y": 850.9,
+            "w": 206,
+            "h": 98.1
+          },
+          "readout": {
+            "x": 803.6,
+            "y": 937,
+            "w": 191.4,
+            "h": 12
+          },
+          "minimap": {
+            "x": 857,
+            "y": 837,
+            "w": 140,
+            "h": 90
+          },
+          "legendReadoutOverlap": false,
+          "legendMinimapOverlap": false,
+          "readoutDirection": "ltr",
+          "readoutInlineEnd": "14px",
+          "surfaceOverrideRules": [
+            ".spatial-readout { position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3); }",
+            ".ent-canvas .spatial-readout { left: auto; right: 14px; inset-block-end: 12px; }",
+            "[dir=\"rtl\"] .ent-canvas .spatial-readout { left: 14px; right: auto; }"
+          ]
+        }
+      },
+      "revisions": {
+        "dir": "ltr",
+        "lang": "en",
+        "consumer": "enterprise",
+        "words": {
+          "left": 56,
+          "center": 86,
+          "right": 54,
+          "top": 21
+        },
+        "clipped": [],
+        "FACTS": {
+          "spatialCanvasCount": 0,
+          "spatialInstanceIds": [],
+          "foundationSpatialRegistered": 13,
+          "readoutText": null,
+          "selectionCountFromReadout": null,
+          "pressedNodes": 0
+        },
+        "D01": {
+          "leftRegionOwned": true,
+          "rightRegionOwned": true,
+          "bottomRegionOwned": true,
+          "inStageFallbackLeft": true,
+          "inStageFallbackRight": true,
+          "hiddenLeftSiblings": 6,
+          "hiddenRightSiblings": 3,
+          "visibleRightSiblings": [
+            "domainContext"
+          ],
+          "panes": {
+            "left": "open",
+            "right": "open",
+            "bottom": "closed"
+          },
+          "nestedRailsInsideStage": 0,
+          "regionBoxes": {
+            "left": {
+              "x": 13,
+              "y": 238,
+              "w": 278,
+              "h": 918.5
+            },
+            "center": {
+              "x": 315,
+              "y": 416.6,
+              "w": 694,
+              "h": 544.4
+            },
+            "right": {
+              "x": 1033,
+              "y": 238,
+              "w": 394,
+              "h": 763.3
+            }
+          }
+        },
+        "D02": {
+          "headerCommands": [
+            "Create workspace",
+            "Pin exact Baseline",
+            "Validate",
+            "Publish revision"
+          ],
+          "headerCommandCount": 4,
+          "shellToolbarCommands": [
+            "⌘",
+            "Focus",
+            "Note",
+            "Notes",
+            "Inspect Enterprise selection",
+            "Edit typed Enterprise relation",
+            "Create successor Enterprise revision",
+            "Create or rebase Digital Twin",
+            "Prepare Run handoff"
+          ],
+          "inStageComposerAffordance": {
+            "present": false
+          },
+          "duplicated": []
+        },
+        "D03": {
+          "documentDir": "ltr",
+          "stageDirection": "ltr",
+          "stageHasBakedDirAttr": null,
+          "identityX": 331,
+          "actionsX": 484,
+          "inherited": true
+        },
+        "D04": {
+          "nodeTextOverlaps": [],
+          "nodeCards": 0,
+          "nodeSample": []
+        },
+        "D05": {
+          "clippedRows": [],
+          "rowSamples": [
+            {
+              "text": "Systems",
+              "clipped": false
+            },
+            {
+              "text": "Applications",
+              "clipped": false
+            },
+            {
+              "text": "Services",
+              "clipped": false
+            },
+            {
+              "text": "Networks",
+              "clipped": false
+            },
+            {
+              "text": "Devices",
+              "clipped": false
+            },
+            {
+              "text": "Identities",
+              "clipped": false
+            },
+            {
+              "text": "Data",
+              "clipped": false
+            },
+            {
+              "text": "Security Controls",
+              "clipped": false
+            }
+          ]
+        },
+        "D06": {
+          "hintPresent": true,
+          "hintText": "Inspect selection: APP-WEB-01",
+          "hintClipped": false,
+          "hintTitle": "Inspect selection: APP-WEB-01",
+          "clippedInClippedList": []
+        },
+        "D07": {
+          "wrapPresent": true,
+          "wrapOverflowX": "auto",
+          "wrapMinWidth": "0px",
+          "tableWiderThanCard": true,
+          "clippedCards": []
+        },
+        "d08lower": false,
+        "D08": {
+          "documentDir": "ltr",
+          "legend": null,
+          "readout": null,
+          "minimap": null,
+          "legendReadoutOverlap": null,
+          "legendMinimapOverlap": null,
+          "readoutDirection": null,
+          "readoutInlineEnd": null,
+          "surfaceOverrideRules": [
+            ".spatial-readout { position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3); }",
+            ".ent-canvas .spatial-readout { left: auto; right: 14px; inset-block-end: 12px; }",
+            "[dir=\"rtl\"] .ent-canvas .spatial-readout { left: 14px; right: auto; }"
+          ]
+        }
+      }
+    },
+    {
+      "viewport": {
+        "id": "ar-rtl-1440",
+        "w": 1440,
+        "h": 1000,
+        "locale": "ar",
+        "dir": "rtl"
+      },
+      "picked": "APP-WEB-01",
+      "canvasPicked": "APP-WEB-01",
+      "pageErrors": [],
+      "topology": {
+        "dir": "rtl",
+        "lang": "ar",
+        "consumer": "enterprise",
+        "words": {
+          "left": 57,
+          "center": 135,
+          "right": 27,
+          "top": 24
+        },
+        "clipped": [
+          "P.spatial-accessible-help:Arrow keys move spatial focus. Shift ext",
+          "DIV.spatial-accessible-nav:Web Application\nWeb Application Firewall",
+          "DIV.:Web Application",
+          "DIV.:Web Application Firewall",
+          "DIV.:Attacker Workstation",
+          "DIV.:Database",
+          "DIV.:Identity Service",
+          "DIV.:SIEM / Monitoring"
+        ],
+        "FACTS": {
+          "spatialCanvasCount": 1,
+          "spatialInstanceIds": [
+            "spatial-1"
+          ],
+          "foundationSpatialRegistered": 12,
+          "readoutText": "104% · 0 selected · 6 objects",
+          "selectionCountFromReadout": "0",
+          "pressedNodes": 0
+        },
+        "D01": {
+          "leftRegionOwned": true,
+          "rightRegionOwned": true,
+          "bottomRegionOwned": true,
+          "inStageFallbackLeft": true,
+          "inStageFallbackRight": true,
+          "hiddenLeftSiblings": 6,
+          "hiddenRightSiblings": 3,
+          "visibleRightSiblings": [
+            "domainContext"
+          ],
+          "panes": {
+            "left": "open",
+            "right": "open",
+            "bottom": "closed"
+          },
+          "nestedRailsInsideStage": 0,
+          "regionBoxes": {
+            "left": {
+              "x": 13,
+              "y": 238,
+              "w": 278,
+              "h": 918.5
+            },
+            "center": {
+              "x": 315,
+              "y": 416.6,
+              "w": 694,
+              "h": 544.4
+            },
+            "right": {
+              "x": 1033,
+              "y": 238,
+              "w": 394,
+              "h": 247.6
+            }
+          }
+        },
+        "D02": {
+          "headerCommands": [
+            "إنشاء مساحة عمل",
+            "تثبيت Baseline دقيق",
+            "تحقق",
+            "نشر الإصدار"
+          ],
+          "headerCommandCount": 4,
+          "shellToolbarCommands": [
+            "⌘",
+            "تركيز",
+            "ملاحظة",
+            "الملاحظات",
+            "Inspect Enterprise selection",
+            "Edit typed Enterprise relation",
+            "Create successor Enterprise revision",
+            "Create or rebase Digital Twin",
+            "Prepare Run handoff"
+          ],
+          "inStageComposerAffordance": {
+            "present": true,
+            "label": "ربط / تحرير علاقة",
+            "disabled": false
+          },
+          "duplicated": []
+        },
+        "D03": {
+          "documentDir": "rtl",
+          "stageDirection": "rtl",
+          "stageHasBakedDirAttr": null,
+          "identityX": 331,
+          "actionsX": 331,
+          "inherited": true
+        },
+        "D04": {
+          "nodeTextOverlaps": [],
+          "nodeCards": 6,
+          "nodeSample": [
+            {
+              "node": "APP-WEB-01",
+              "texts": [
+                {
+                  "t": "A",
+                  "y": 597.9
+                },
+                {
+                  "t": "APP-WEB-01",
+                  "y": 599.9
+                },
+                {
+                  "t": "Web Application",
+                  "y": 609.4
+                },
+                {
+                  "t": "Type: Application",
+                  "y": 625.8
+                }
+              ]
+            },
+            {
+              "node": "CTL-WAF-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 597.9
+                },
+                {
+                  "t": "CTL-WAF-01",
+                  "y": 599.9
+                },
+                {
+                  "t": "Web Application Firewall",
+                  "y": 609.4
+                },
+                {
+                  "t": "Type: Security Control",
+                  "y": 625.8
+                }
+              ]
+            },
+            {
+              "node": "SIM-ATK-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 597.9
+                },
+                {
+                  "t": "SIM-ATK-01",
+                  "y": 599.9
+                },
+                {
+                  "t": "Attacker Workstation",
+                  "y": 609.4
+                },
+                {
+                  "t": "Type: Simulation-local Device",
+                  "y": 625.8
+                }
+              ]
+            },
+            {
+              "node": "DATA-SQL-01",
+              "texts": [
+                {
+                  "t": "D",
+                  "y": 805.1
+                },
+                {
+                  "t": "DATA-SQL-01",
+                  "y": 807.1
+                },
+                {
+                  "t": "Database",
+                  "y": 816.6
+                },
+                {
+                  "t": "Type: Data Service",
+                  "y": 833
+                }
+              ]
+            },
+            {
+              "node": "ID-SVC-01",
+              "texts": [
+                {
+                  "t": "I",
+                  "y": 805.1
+                },
+                {
+                  "t": "ID-SVC-01",
+                  "y": 807.1
+                },
+                {
+                  "t": "Identity Service",
+                  "y": 816.6
+                },
+                {
+                  "t": "Type: Identity Service",
+                  "y": 833
+                }
+              ]
+            },
+            {
+              "node": "SVC-SIEM-01",
+              "texts": [
+                {
+                  "t": "M",
+                  "y": 805.1
+                },
+                {
+                  "t": "SVC-SIEM-01",
+                  "y": 807.1
+                },
+                {
+                  "t": "SIEM / Monitoring",
+                  "y": 816.6
+                },
+                {
+                  "t": "Type: Monitoring Service",
+                  "y": 833
+                }
+              ]
+            }
+          ]
+        },
+        "D05": {
+          "clippedRows": [],
+          "rowSamples": [
+            {
+              "text": "الأنظمة",
+              "clipped": false
+            },
+            {
+              "text": "التطبيقات",
+              "clipped": false
+            },
+            {
+              "text": "الخدمات",
+              "clipped": false
+            },
+            {
+              "text": "الشبكات",
+              "clipped": false
+            },
+            {
+              "text": "الأجهزة",
+              "clipped": false
+            },
+            {
+              "text": "الهويات",
+              "clipped": false
+            },
+            {
+              "text": "البيانات",
+              "clipped": false
+            },
+            {
+              "text": "ضوابط الأمان",
+              "clipped": false
+            }
+          ]
+        },
+        "D06": {
+          "hintPresent": true,
+          "hintText": "حدّد كائنًا في الطوبولوجيا لفحصه.",
+          "hintClipped": false,
+          "hintTitle": null,
+          "clippedInClippedList": []
+        },
+        "D07": {
+          "wrapPresent": false,
+          "wrapOverflowX": null,
+          "wrapMinWidth": null,
+          "tableWiderThanCard": null,
+          "clippedCards": []
+        },
+        "d08lower": false,
+        "D08": {
+          "documentDir": "rtl",
+          "legend": {
+            "x": 789,
+            "y": 867.2,
+            "w": 206,
+            "h": 81.8
+          },
+          "readout": {
+            "x": 329,
+            "y": 937,
+            "w": 191.4,
+            "h": 12
+          },
+          "minimap": {
+            "x": 327,
+            "y": 837,
+            "w": 140,
+            "h": 90
+          },
+          "legendReadoutOverlap": false,
+          "legendMinimapOverlap": false,
+          "readoutDirection": "ltr",
+          "readoutInlineEnd": "488.562px",
+          "surfaceOverrideRules": [
+            ".spatial-readout { position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3); }",
+            ".ent-canvas .spatial-readout { left: auto; right: 14px; inset-block-end: 12px; }",
+            "[dir=\"rtl\"] .ent-canvas .spatial-readout { left: 14px; right: auto; }"
+          ]
+        }
+      },
+      "selected": {
+        "dir": "rtl",
+        "lang": "ar",
+        "consumer": "enterprise",
+        "words": {
+          "left": 57,
+          "center": 133,
+          "right": 56,
+          "top": 24
+        },
+        "clipped": [
+          "P.spatial-accessible-help:Arrow keys move spatial focus. Shift ext",
+          "DIV.spatial-accessible-nav:Web Application\nWeb Application Firewall",
+          "DIV.:Web Application",
+          "DIV.:Web Application Firewall",
+          "DIV.:Attacker Workstation",
+          "DIV.:Database",
+          "DIV.:Identity Service",
+          "DIV.:SIEM / Monitoring"
+        ],
+        "FACTS": {
+          "spatialCanvasCount": 1,
+          "spatialInstanceIds": [
+            "spatial-1"
+          ],
+          "foundationSpatialRegistered": 12,
+          "readoutText": "104% · 0 selected · 6 objects",
+          "selectionCountFromReadout": "0",
+          "pressedNodes": 0
+        },
+        "D01": {
+          "leftRegionOwned": true,
+          "rightRegionOwned": true,
+          "bottomRegionOwned": true,
+          "inStageFallbackLeft": true,
+          "inStageFallbackRight": true,
+          "hiddenLeftSiblings": 6,
+          "hiddenRightSiblings": 3,
+          "visibleRightSiblings": [
+            "domainContext"
+          ],
+          "panes": {
+            "left": "open",
+            "right": "open",
+            "bottom": "closed"
+          },
+          "nestedRailsInsideStage": 0,
+          "regionBoxes": {
+            "left": {
+              "x": 13,
+              "y": 238,
+              "w": 278,
+              "h": 918.5
+            },
+            "center": {
+              "x": 315,
+              "y": 416.6,
+              "w": 694,
+              "h": 544.4
+            },
+            "right": {
+              "x": 1033,
+              "y": 238,
+              "w": 394,
+              "h": 763.3
+            }
+          }
+        },
+        "D02": {
+          "headerCommands": [
+            "إنشاء مساحة عمل",
+            "تثبيت Baseline دقيق",
+            "تحقق",
+            "نشر الإصدار"
+          ],
+          "headerCommandCount": 4,
+          "shellToolbarCommands": [
+            "⌘",
+            "تركيز",
+            "ملاحظة",
+            "الملاحظات",
+            "Inspect Enterprise selection",
+            "Edit typed Enterprise relation",
+            "Create successor Enterprise revision",
+            "Create or rebase Digital Twin",
+            "Prepare Run handoff"
+          ],
+          "inStageComposerAffordance": {
+            "present": true,
+            "label": "ربط / تحرير علاقة",
+            "disabled": false
+          },
+          "duplicated": []
+        },
+        "D03": {
+          "documentDir": "rtl",
+          "stageDirection": "rtl",
+          "stageHasBakedDirAttr": null,
+          "identityX": 331,
+          "actionsX": 331,
+          "inherited": true
+        },
+        "D04": {
+          "nodeTextOverlaps": [],
+          "nodeCards": 6,
+          "nodeSample": [
+            {
+              "node": "APP-WEB-01",
+              "texts": [
+                {
+                  "t": "A",
+                  "y": 597.9
+                },
+                {
+                  "t": "APP-WEB-01",
+                  "y": 599.9
+                },
+                {
+                  "t": "Web Application",
+                  "y": 609.4
+                },
+                {
+                  "t": "Type: Application",
+                  "y": 625.8
+                }
+              ]
+            },
+            {
+              "node": "CTL-WAF-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 597.9
+                },
+                {
+                  "t": "CTL-WAF-01",
+                  "y": 599.9
+                },
+                {
+                  "t": "Web Application Firewall",
+                  "y": 609.4
+                },
+                {
+                  "t": "Type: Security Control",
+                  "y": 625.8
+                }
+              ]
+            },
+            {
+              "node": "SIM-ATK-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 597.9
+                },
+                {
+                  "t": "SIM-ATK-01",
+                  "y": 599.9
+                },
+                {
+                  "t": "Attacker Workstation",
+                  "y": 609.4
+                },
+                {
+                  "t": "Type: Simulation-local Device",
+                  "y": 625.8
+                }
+              ]
+            },
+            {
+              "node": "DATA-SQL-01",
+              "texts": [
+                {
+                  "t": "D",
+                  "y": 805.1
+                },
+                {
+                  "t": "DATA-SQL-01",
+                  "y": 807.1
+                },
+                {
+                  "t": "Database",
+                  "y": 816.6
+                },
+                {
+                  "t": "Type: Data Service",
+                  "y": 833
+                }
+              ]
+            },
+            {
+              "node": "ID-SVC-01",
+              "texts": [
+                {
+                  "t": "I",
+                  "y": 805.1
+                },
+                {
+                  "t": "ID-SVC-01",
+                  "y": 807.1
+                },
+                {
+                  "t": "Identity Service",
+                  "y": 816.6
+                },
+                {
+                  "t": "Type: Identity Service",
+                  "y": 833
+                }
+              ]
+            },
+            {
+              "node": "SVC-SIEM-01",
+              "texts": [
+                {
+                  "t": "M",
+                  "y": 805.1
+                },
+                {
+                  "t": "SVC-SIEM-01",
+                  "y": 807.1
+                },
+                {
+                  "t": "SIEM / Monitoring",
+                  "y": 816.6
+                },
+                {
+                  "t": "Type: Monitoring Service",
+                  "y": 833
+                }
+              ]
+            }
+          ]
+        },
+        "D05": {
+          "clippedRows": [],
+          "rowSamples": [
+            {
+              "text": "الأنظمة",
+              "clipped": false
+            },
+            {
+              "text": "التطبيقات",
+              "clipped": false
+            },
+            {
+              "text": "الخدمات",
+              "clipped": false
+            },
+            {
+              "text": "الشبكات",
+              "clipped": false
+            },
+            {
+              "text": "الأجهزة",
+              "clipped": false
+            },
+            {
+              "text": "الهويات",
+              "clipped": false
+            },
+            {
+              "text": "البيانات",
+              "clipped": false
+            },
+            {
+              "text": "ضوابط الأمان",
+              "clipped": false
+            }
+          ]
+        },
+        "D06": {
+          "hintPresent": true,
+          "hintText": "فحص التحديد: APP-WEB-01",
+          "hintClipped": false,
+          "hintTitle": "فحص التحديد: APP-WEB-01",
+          "clippedInClippedList": []
+        },
+        "D07": {
+          "wrapPresent": false,
+          "wrapOverflowX": null,
+          "wrapMinWidth": null,
+          "tableWiderThanCard": null,
+          "clippedCards": []
+        },
+        "d08lower": false,
+        "D08": {
+          "documentDir": "rtl",
+          "legend": {
+            "x": 789,
+            "y": 867.2,
+            "w": 206,
+            "h": 81.8
+          },
+          "readout": {
+            "x": 329,
+            "y": 937,
+            "w": 191.4,
+            "h": 12
+          },
+          "minimap": {
+            "x": 327,
+            "y": 837,
+            "w": 140,
+            "h": 90
+          },
+          "legendReadoutOverlap": false,
+          "legendMinimapOverlap": false,
+          "readoutDirection": "ltr",
+          "readoutInlineEnd": "488.562px",
+          "surfaceOverrideRules": [
+            ".spatial-readout { position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3); }",
+            ".ent-canvas .spatial-readout { left: auto; right: 14px; inset-block-end: 12px; }",
+            "[dir=\"rtl\"] .ent-canvas .spatial-readout { left: 14px; right: auto; }"
+          ]
+        }
+      },
+      "canvasSelected": {
+        "dir": "rtl",
+        "lang": "ar",
+        "consumer": "enterprise",
+        "words": {
+          "left": 57,
+          "center": 133,
+          "right": 56,
+          "top": 24
+        },
+        "clipped": [
+          "P.spatial-accessible-help:Arrow keys move spatial focus. Shift ext",
+          "DIV.spatial-accessible-nav:Web Application\nWeb Application Firewall",
+          "DIV.:Web Application",
+          "DIV.:Web Application Firewall",
+          "DIV.:Attacker Workstation",
+          "DIV.:Database",
+          "DIV.:Identity Service",
+          "DIV.:SIEM / Monitoring"
+        ],
+        "FACTS": {
+          "spatialCanvasCount": 1,
+          "spatialInstanceIds": [
+            "spatial-1"
+          ],
+          "foundationSpatialRegistered": 13,
+          "readoutText": "104% · 1 selected · 6 objects",
+          "selectionCountFromReadout": "1",
+          "pressedNodes": 1
+        },
+        "D01": {
+          "leftRegionOwned": true,
+          "rightRegionOwned": true,
+          "bottomRegionOwned": true,
+          "inStageFallbackLeft": true,
+          "inStageFallbackRight": true,
+          "hiddenLeftSiblings": 6,
+          "hiddenRightSiblings": 3,
+          "visibleRightSiblings": [
+            "domainContext"
+          ],
+          "panes": {
+            "left": "open",
+            "right": "open",
+            "bottom": "closed"
+          },
+          "nestedRailsInsideStage": 0,
+          "regionBoxes": {
+            "left": {
+              "x": 13,
+              "y": 238,
+              "w": 278,
+              "h": 918.5
+            },
+            "center": {
+              "x": 315,
+              "y": 416.6,
+              "w": 694,
+              "h": 544.4
+            },
+            "right": {
+              "x": 1033,
+              "y": 238,
+              "w": 394,
+              "h": 763.3
+            }
+          }
+        },
+        "D02": {
+          "headerCommands": [
+            "إنشاء مساحة عمل",
+            "تثبيت Baseline دقيق",
+            "تحقق",
+            "نشر الإصدار"
+          ],
+          "headerCommandCount": 4,
+          "shellToolbarCommands": [
+            "⌘",
+            "تركيز",
+            "ملاحظة",
+            "الملاحظات",
+            "Inspect Enterprise selection",
+            "Edit typed Enterprise relation",
+            "Create successor Enterprise revision",
+            "Create or rebase Digital Twin",
+            "Prepare Run handoff"
+          ],
+          "inStageComposerAffordance": {
+            "present": true,
+            "label": "ربط / تحرير علاقة",
+            "disabled": false
+          },
+          "duplicated": []
+        },
+        "D03": {
+          "documentDir": "rtl",
+          "stageDirection": "rtl",
+          "stageHasBakedDirAttr": null,
+          "identityX": 331,
+          "actionsX": 331,
+          "inherited": true
+        },
+        "D04": {
+          "nodeTextOverlaps": [],
+          "nodeCards": 6,
+          "nodeSample": [
+            {
+              "node": "APP-WEB-01",
+              "texts": [
+                {
+                  "t": "A",
+                  "y": 597.9
+                },
+                {
+                  "t": "APP-WEB-01",
+                  "y": 599.9
+                },
+                {
+                  "t": "Web Application",
+                  "y": 609.4
+                },
+                {
+                  "t": "Type: Application",
+                  "y": 625.8
+                }
+              ]
+            },
+            {
+              "node": "CTL-WAF-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 597.9
+                },
+                {
+                  "t": "CTL-WAF-01",
+                  "y": 599.9
+                },
+                {
+                  "t": "Web Application Firewall",
+                  "y": 609.4
+                },
+                {
+                  "t": "Type: Security Control",
+                  "y": 625.8
+                }
+              ]
+            },
+            {
+              "node": "SIM-ATK-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 597.9
+                },
+                {
+                  "t": "SIM-ATK-01",
+                  "y": 599.9
+                },
+                {
+                  "t": "Attacker Workstation",
+                  "y": 609.4
+                },
+                {
+                  "t": "Type: Simulation-local Device",
+                  "y": 625.8
+                }
+              ]
+            },
+            {
+              "node": "DATA-SQL-01",
+              "texts": [
+                {
+                  "t": "D",
+                  "y": 805.1
+                },
+                {
+                  "t": "DATA-SQL-01",
+                  "y": 807.1
+                },
+                {
+                  "t": "Database",
+                  "y": 816.6
+                },
+                {
+                  "t": "Type: Data Service",
+                  "y": 833
+                }
+              ]
+            },
+            {
+              "node": "ID-SVC-01",
+              "texts": [
+                {
+                  "t": "I",
+                  "y": 805.1
+                },
+                {
+                  "t": "ID-SVC-01",
+                  "y": 807.1
+                },
+                {
+                  "t": "Identity Service",
+                  "y": 816.6
+                },
+                {
+                  "t": "Type: Identity Service",
+                  "y": 833
+                }
+              ]
+            },
+            {
+              "node": "SVC-SIEM-01",
+              "texts": [
+                {
+                  "t": "M",
+                  "y": 805.1
+                },
+                {
+                  "t": "SVC-SIEM-01",
+                  "y": 807.1
+                },
+                {
+                  "t": "SIEM / Monitoring",
+                  "y": 816.6
+                },
+                {
+                  "t": "Type: Monitoring Service",
+                  "y": 833
+                }
+              ]
+            }
+          ]
+        },
+        "D05": {
+          "clippedRows": [],
+          "rowSamples": [
+            {
+              "text": "الأنظمة",
+              "clipped": false
+            },
+            {
+              "text": "التطبيقات",
+              "clipped": false
+            },
+            {
+              "text": "الخدمات",
+              "clipped": false
+            },
+            {
+              "text": "الشبكات",
+              "clipped": false
+            },
+            {
+              "text": "الأجهزة",
+              "clipped": false
+            },
+            {
+              "text": "الهويات",
+              "clipped": false
+            },
+            {
+              "text": "البيانات",
+              "clipped": false
+            },
+            {
+              "text": "ضوابط الأمان",
+              "clipped": false
+            }
+          ]
+        },
+        "D06": {
+          "hintPresent": true,
+          "hintText": "فحص التحديد: APP-WEB-01",
+          "hintClipped": false,
+          "hintTitle": "فحص التحديد: APP-WEB-01",
+          "clippedInClippedList": []
+        },
+        "D07": {
+          "wrapPresent": false,
+          "wrapOverflowX": null,
+          "wrapMinWidth": null,
+          "tableWiderThanCard": null,
+          "clippedCards": []
+        },
+        "d08lower": false,
+        "D08": {
+          "documentDir": "rtl",
+          "legend": {
+            "x": 789,
+            "y": 867.2,
+            "w": 206,
+            "h": 81.8
+          },
+          "readout": {
+            "x": 329,
+            "y": 937,
+            "w": 191.4,
+            "h": 12
+          },
+          "minimap": {
+            "x": 327,
+            "y": 837,
+            "w": 140,
+            "h": 90
+          },
+          "legendReadoutOverlap": false,
+          "legendMinimapOverlap": false,
+          "readoutDirection": "ltr",
+          "readoutInlineEnd": "488.562px",
+          "surfaceOverrideRules": [
+            ".spatial-readout { position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3); }",
+            ".ent-canvas .spatial-readout { left: auto; right: 14px; inset-block-end: 12px; }",
+            "[dir=\"rtl\"] .ent-canvas .spatial-readout { left: 14px; right: auto; }"
+          ]
+        }
+      },
+      "revisions": {
+        "dir": "rtl",
+        "lang": "ar",
+        "consumer": "enterprise",
+        "words": {
+          "left": 57,
+          "center": 90,
+          "right": 56,
+          "top": 24
+        },
+        "clipped": [],
+        "FACTS": {
+          "spatialCanvasCount": 0,
+          "spatialInstanceIds": [],
+          "foundationSpatialRegistered": 13,
+          "readoutText": null,
+          "selectionCountFromReadout": null,
+          "pressedNodes": 0
+        },
+        "D01": {
+          "leftRegionOwned": true,
+          "rightRegionOwned": true,
+          "bottomRegionOwned": true,
+          "inStageFallbackLeft": true,
+          "inStageFallbackRight": true,
+          "hiddenLeftSiblings": 6,
+          "hiddenRightSiblings": 3,
+          "visibleRightSiblings": [
+            "domainContext"
+          ],
+          "panes": {
+            "left": "open",
+            "right": "open",
+            "bottom": "closed"
+          },
+          "nestedRailsInsideStage": 0,
+          "regionBoxes": {
+            "left": {
+              "x": 13,
+              "y": 238,
+              "w": 278,
+              "h": 918.5
+            },
+            "center": {
+              "x": 315,
+              "y": 416.6,
+              "w": 694,
+              "h": 544.4
+            },
+            "right": {
+              "x": 1033,
+              "y": 238,
+              "w": 394,
+              "h": 763.3
+            }
+          }
+        },
+        "D02": {
+          "headerCommands": [
+            "إنشاء مساحة عمل",
+            "تثبيت Baseline دقيق",
+            "تحقق",
+            "نشر الإصدار"
+          ],
+          "headerCommandCount": 4,
+          "shellToolbarCommands": [
+            "⌘",
+            "تركيز",
+            "ملاحظة",
+            "الملاحظات",
+            "Inspect Enterprise selection",
+            "Edit typed Enterprise relation",
+            "Create successor Enterprise revision",
+            "Create or rebase Digital Twin",
+            "Prepare Run handoff"
+          ],
+          "inStageComposerAffordance": {
+            "present": false
+          },
+          "duplicated": []
+        },
+        "D03": {
+          "documentDir": "rtl",
+          "stageDirection": "rtl",
+          "stageHasBakedDirAttr": null,
+          "identityX": 331,
+          "actionsX": 331,
+          "inherited": true
+        },
+        "D04": {
+          "nodeTextOverlaps": [],
+          "nodeCards": 0,
+          "nodeSample": []
+        },
+        "D05": {
+          "clippedRows": [],
+          "rowSamples": [
+            {
+              "text": "الأنظمة",
+              "clipped": false
+            },
+            {
+              "text": "التطبيقات",
+              "clipped": false
+            },
+            {
+              "text": "الخدمات",
+              "clipped": false
+            },
+            {
+              "text": "الشبكات",
+              "clipped": false
+            },
+            {
+              "text": "الأجهزة",
+              "clipped": false
+            },
+            {
+              "text": "الهويات",
+              "clipped": false
+            },
+            {
+              "text": "البيانات",
+              "clipped": false
+            },
+            {
+              "text": "ضوابط الأمان",
+              "clipped": false
+            }
+          ]
+        },
+        "D06": {
+          "hintPresent": true,
+          "hintText": "فحص التحديد: APP-WEB-01",
+          "hintClipped": false,
+          "hintTitle": "فحص التحديد: APP-WEB-01",
+          "clippedInClippedList": []
+        },
+        "D07": {
+          "wrapPresent": true,
+          "wrapOverflowX": "auto",
+          "wrapMinWidth": "0px",
+          "tableWiderThanCard": true,
+          "clippedCards": []
+        },
+        "d08lower": false,
+        "D08": {
+          "documentDir": "rtl",
+          "legend": null,
+          "readout": null,
+          "minimap": null,
+          "legendReadoutOverlap": null,
+          "legendMinimapOverlap": null,
+          "readoutDirection": null,
+          "readoutInlineEnd": null,
+          "surfaceOverrideRules": [
+            ".spatial-readout { position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3); }",
+            ".ent-canvas .spatial-readout { left: auto; right: 14px; inset-block-end: 12px; }",
+            "[dir=\"rtl\"] .ent-canvas .spatial-readout { left: 14px; right: auto; }"
+          ]
+        }
+      }
+    },
+    {
+      "viewport": {
+        "id": "en-ltr-1024",
+        "w": 1024,
+        "h": 900,
+        "locale": "en",
+        "dir": "ltr"
+      },
+      "picked": "APP-WEB-01",
+      "canvasPicked": "APP-WEB-01",
+      "pageErrors": [],
+      "topology": {
+        "dir": "ltr",
+        "lang": "en",
+        "consumer": "enterprise",
+        "words": {
+          "left": 56,
+          "center": 166,
+          "right": 22,
+          "top": 21
+        },
+        "clipped": [
+          "P.spatial-accessible-help:Arrow keys move spatial focus. Shift ext",
+          "DIV.spatial-accessible-nav:Web Application\nWeb Application Firewall",
+          "DIV.:Web Application",
+          "DIV.:Web Application Firewall",
+          "DIV.:Attacker Workstation",
+          "DIV.:Database",
+          "DIV.:Identity Service",
+          "DIV.:SIEM / Monitoring"
+        ],
+        "FACTS": {
+          "spatialCanvasCount": 1,
+          "spatialInstanceIds": [
+            "spatial-1"
+          ],
+          "foundationSpatialRegistered": 12,
+          "readoutText": "53% · 0 selected · 6 objects",
+          "selectionCountFromReadout": "0",
+          "pressedNodes": 0
+        },
+        "D01": {
+          "leftRegionOwned": true,
+          "rightRegionOwned": true,
+          "bottomRegionOwned": true,
+          "inStageFallbackLeft": true,
+          "inStageFallbackRight": true,
+          "hiddenLeftSiblings": 6,
+          "hiddenRightSiblings": 3,
+          "visibleRightSiblings": [
+            "domainContext"
+          ],
+          "panes": {
+            "left": "open",
+            "right": "collapsed",
+            "bottom": "closed"
+          },
+          "nestedRailsInsideStage": 0,
+          "regionBoxes": {
+            "left": {
+              "x": 13,
+              "y": 258,
+              "w": 278,
+              "h": 918.5
+            },
+            "center": {
+              "x": 315,
+              "y": 428.6,
+              "w": 709,
+              "h": 432.4
+            },
+            "right": {
+              "x": 0,
+              "y": 0,
+              "w": 0,
+              "h": 0
+            }
+          }
+        },
+        "D02": {
+          "headerCommands": [
+            "Create workspace",
+            "Pin exact Baseline",
+            "Validate",
+            "Publish revision"
+          ],
+          "headerCommandCount": 4,
+          "shellToolbarCommands": [
+            "⌘",
+            "Focus",
+            "Note",
+            "Notes",
+            "Inspect Enterprise selection",
+            "Edit typed Enterprise relation",
+            "Create successor Enterprise revision",
+            "Create or rebase Digital Twin",
+            "Prepare Run handoff"
+          ],
+          "inStageComposerAffordance": {
+            "present": true,
+            "label": "Connect / edit relation",
+            "disabled": false
+          },
+          "duplicated": []
+        },
+        "D03": {
+          "documentDir": "ltr",
+          "stageDirection": "ltr",
+          "stageHasBakedDirAttr": null,
+          "identityX": 329,
+          "actionsX": 501,
+          "inherited": true
+        },
+        "D04": {
+          "nodeTextOverlaps": [],
+          "nodeCards": 6,
+          "nodeSample": [
+            {
+              "node": "APP-WEB-01",
+              "texts": [
+                {
+                  "t": "A",
+                  "y": 562.9
+                },
+                {
+                  "t": "APP-WEB-01",
+                  "y": 562.9
+                },
+                {
+                  "t": "Web Application",
+                  "y": 568.3
+                },
+                {
+                  "t": "Type: Application",
+                  "y": 576.2
+                }
+              ]
+            },
+            {
+              "node": "CTL-WAF-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 562.9
+                },
+                {
+                  "t": "CTL-WAF-01",
+                  "y": 562.9
+                },
+                {
+                  "t": "Web Application Firewall",
+                  "y": 568.3
+                },
+                {
+                  "t": "Type: Security Control",
+                  "y": 576.2
+                }
+              ]
+            },
+            {
+              "node": "SIM-ATK-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 562.9
+                },
+                {
+                  "t": "SIM-ATK-01",
+                  "y": 562.9
+                },
+                {
+                  "t": "Attacker Workstation",
+                  "y": 568.3
+                },
+                {
+                  "t": "Type: Simulation-local Device",
+                  "y": 576.2
+                }
+              ]
+            },
+            {
+              "node": "DATA-SQL-01",
+              "texts": [
+                {
+                  "t": "D",
+                  "y": 669.7
+                },
+                {
+                  "t": "DATA-SQL-01",
+                  "y": 669.7
+                },
+                {
+                  "t": "Database",
+                  "y": 675.1
+                },
+                {
+                  "t": "Type: Data Service",
+                  "y": 683.1
+                }
+              ]
+            },
+            {
+              "node": "ID-SVC-01",
+              "texts": [
+                {
+                  "t": "I",
+                  "y": 669.7
+                },
+                {
+                  "t": "ID-SVC-01",
+                  "y": 669.7
+                },
+                {
+                  "t": "Identity Service",
+                  "y": 675.1
+                },
+                {
+                  "t": "Type: Identity Service",
+                  "y": 683.1
+                }
+              ]
+            },
+            {
+              "node": "SVC-SIEM-01",
+              "texts": [
+                {
+                  "t": "M",
+                  "y": 669.7
+                },
+                {
+                  "t": "SVC-SIEM-01",
+                  "y": 669.7
+                },
+                {
+                  "t": "SIEM / Monitoring",
+                  "y": 675.1
+                },
+                {
+                  "t": "Type: Monitoring Service",
+                  "y": 683.1
+                }
+              ]
+            }
+          ]
+        },
+        "D05": {
+          "clippedRows": [],
+          "rowSamples": [
+            {
+              "text": "Systems",
+              "clipped": false
+            },
+            {
+              "text": "Applications",
+              "clipped": false
+            },
+            {
+              "text": "Services",
+              "clipped": false
+            },
+            {
+              "text": "Networks",
+              "clipped": false
+            },
+            {
+              "text": "Devices",
+              "clipped": false
+            },
+            {
+              "text": "Identities",
+              "clipped": false
+            },
+            {
+              "text": "Data",
+              "clipped": false
+            },
+            {
+              "text": "Security Controls",
+              "clipped": false
+            }
+          ]
+        },
+        "D06": {
+          "hintPresent": true,
+          "hintText": "Select a topology object to inspect it.",
+          "hintClipped": false,
+          "hintTitle": null,
+          "clippedInClippedList": []
+        },
+        "D07": {
+          "wrapPresent": false,
+          "wrapOverflowX": null,
+          "wrapMinWidth": null,
+          "tableWiderThanCard": null,
+          "clippedCards": []
+        },
+        "d08lower": false,
+        "D08": {
+          "documentDir": "ltr",
+          "legend": {
+            "x": 329,
+            "y": 615.6,
+            "w": 206,
+            "h": 98.1
+          },
+          "readout": {
+            "x": 825.2,
+            "y": 701.6,
+            "w": 184.8,
+            "h": 12
+          },
+          "minimap": {
+            "x": 872,
+            "y": 601.6,
+            "w": 140,
+            "h": 90
+          },
+          "legendReadoutOverlap": false,
+          "legendMinimapOverlap": false,
+          "readoutDirection": "ltr",
+          "readoutInlineEnd": "14px",
+          "surfaceOverrideRules": [
+            ".spatial-readout { position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3); }",
+            ".ent-canvas .spatial-readout { left: auto; right: 14px; inset-block-end: 12px; }",
+            "[dir=\"rtl\"] .ent-canvas .spatial-readout { left: 14px; right: auto; }"
+          ]
+        }
+      },
+      "selected": {
+        "dir": "ltr",
+        "lang": "en",
+        "consumer": "enterprise",
+        "words": {
+          "left": 56,
+          "center": 186,
+          "right": 29,
+          "top": 21
+        },
+        "clipped": [
+          "P.spatial-accessible-help:Arrow keys move spatial focus. Shift ext",
+          "DIV.spatial-accessible-nav:Web Application\nWeb Application Firewall",
+          "DIV.:Web Application",
+          "DIV.:Web Application Firewall",
+          "DIV.:Attacker Workstation",
+          "DIV.:Database",
+          "DIV.:Identity Service",
+          "DIV.:SIEM / Monitoring"
+        ],
+        "FACTS": {
+          "spatialCanvasCount": 1,
+          "spatialInstanceIds": [
+            "spatial-1"
+          ],
+          "foundationSpatialRegistered": 12,
+          "readoutText": "53% · 0 selected · 6 objects",
+          "selectionCountFromReadout": "0",
+          "pressedNodes": 0
+        },
+        "D01": {
+          "leftRegionOwned": true,
+          "rightRegionOwned": true,
+          "bottomRegionOwned": true,
+          "inStageFallbackLeft": true,
+          "inStageFallbackRight": true,
+          "hiddenLeftSiblings": 6,
+          "hiddenRightSiblings": 3,
+          "visibleRightSiblings": [
+            "domainContext"
+          ],
+          "panes": {
+            "left": "open",
+            "right": "collapsed",
+            "bottom": "closed"
+          },
+          "nestedRailsInsideStage": 0,
+          "regionBoxes": {
+            "left": {
+              "x": 13,
+              "y": 258,
+              "w": 278,
+              "h": 918.5
+            },
+            "center": {
+              "x": 315,
+              "y": 428.6,
+              "w": 709,
+              "h": 432.4
+            },
+            "right": {
+              "x": 0,
+              "y": 0,
+              "w": 0,
+              "h": 0
+            }
+          }
+        },
+        "D02": {
+          "headerCommands": [
+            "Create workspace",
+            "Pin exact Baseline",
+            "Validate",
+            "Publish revision"
+          ],
+          "headerCommandCount": 4,
+          "shellToolbarCommands": [
+            "⌘",
+            "Focus",
+            "Note",
+            "Notes",
+            "Inspect Enterprise selection",
+            "Edit typed Enterprise relation",
+            "Create successor Enterprise revision",
+            "Create or rebase Digital Twin",
+            "Prepare Run handoff"
+          ],
+          "inStageComposerAffordance": {
+            "present": true,
+            "label": "Connect / edit relation",
+            "disabled": false
+          },
+          "duplicated": []
+        },
+        "D03": {
+          "documentDir": "ltr",
+          "stageDirection": "ltr",
+          "stageHasBakedDirAttr": null,
+          "identityX": 329,
+          "actionsX": 501,
+          "inherited": true
+        },
+        "D04": {
+          "nodeTextOverlaps": [],
+          "nodeCards": 6,
+          "nodeSample": [
+            {
+              "node": "APP-WEB-01",
+              "texts": [
+                {
+                  "t": "A",
+                  "y": 562.9
+                },
+                {
+                  "t": "APP-WEB-01",
+                  "y": 562.9
+                },
+                {
+                  "t": "Web Application",
+                  "y": 568.3
+                },
+                {
+                  "t": "Type: Application",
+                  "y": 576.2
+                }
+              ]
+            },
+            {
+              "node": "CTL-WAF-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 562.9
+                },
+                {
+                  "t": "CTL-WAF-01",
+                  "y": 562.9
+                },
+                {
+                  "t": "Web Application Firewall",
+                  "y": 568.3
+                },
+                {
+                  "t": "Type: Security Control",
+                  "y": 576.2
+                }
+              ]
+            },
+            {
+              "node": "SIM-ATK-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 562.9
+                },
+                {
+                  "t": "SIM-ATK-01",
+                  "y": 562.9
+                },
+                {
+                  "t": "Attacker Workstation",
+                  "y": 568.3
+                },
+                {
+                  "t": "Type: Simulation-local Device",
+                  "y": 576.2
+                }
+              ]
+            },
+            {
+              "node": "DATA-SQL-01",
+              "texts": [
+                {
+                  "t": "D",
+                  "y": 669.7
+                },
+                {
+                  "t": "DATA-SQL-01",
+                  "y": 669.7
+                },
+                {
+                  "t": "Database",
+                  "y": 675.1
+                },
+                {
+                  "t": "Type: Data Service",
+                  "y": 683.1
+                }
+              ]
+            },
+            {
+              "node": "ID-SVC-01",
+              "texts": [
+                {
+                  "t": "I",
+                  "y": 669.7
+                },
+                {
+                  "t": "ID-SVC-01",
+                  "y": 669.7
+                },
+                {
+                  "t": "Identity Service",
+                  "y": 675.1
+                },
+                {
+                  "t": "Type: Identity Service",
+                  "y": 683.1
+                }
+              ]
+            },
+            {
+              "node": "SVC-SIEM-01",
+              "texts": [
+                {
+                  "t": "M",
+                  "y": 669.7
+                },
+                {
+                  "t": "SVC-SIEM-01",
+                  "y": 669.7
+                },
+                {
+                  "t": "SIEM / Monitoring",
+                  "y": 675.1
+                },
+                {
+                  "t": "Type: Monitoring Service",
+                  "y": 683.1
+                }
+              ]
+            }
+          ]
+        },
+        "D05": {
+          "clippedRows": [],
+          "rowSamples": [
+            {
+              "text": "Systems",
+              "clipped": false
+            },
+            {
+              "text": "Applications",
+              "clipped": false
+            },
+            {
+              "text": "Services",
+              "clipped": false
+            },
+            {
+              "text": "Networks",
+              "clipped": false
+            },
+            {
+              "text": "Devices",
+              "clipped": false
+            },
+            {
+              "text": "Identities",
+              "clipped": false
+            },
+            {
+              "text": "Data",
+              "clipped": false
+            },
+            {
+              "text": "Security Controls",
+              "clipped": false
+            }
+          ]
+        },
+        "D06": {
+          "hintPresent": true,
+          "hintText": "Inspect selection: APP-WEB-01",
+          "hintClipped": false,
+          "hintTitle": "Inspect selection: APP-WEB-01",
+          "clippedInClippedList": []
+        },
+        "D07": {
+          "wrapPresent": false,
+          "wrapOverflowX": null,
+          "wrapMinWidth": null,
+          "tableWiderThanCard": null,
+          "clippedCards": []
+        },
+        "d08lower": false,
+        "D08": {
+          "documentDir": "ltr",
+          "legend": {
+            "x": 329,
+            "y": 615.6,
+            "w": 206,
+            "h": 98.1
+          },
+          "readout": {
+            "x": 825.2,
+            "y": 701.6,
+            "w": 184.8,
+            "h": 12
+          },
+          "minimap": {
+            "x": 872,
+            "y": 601.6,
+            "w": 140,
+            "h": 90
+          },
+          "legendReadoutOverlap": false,
+          "legendMinimapOverlap": false,
+          "readoutDirection": "ltr",
+          "readoutInlineEnd": "14px",
+          "surfaceOverrideRules": [
+            ".spatial-readout { position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3); }",
+            ".ent-canvas .spatial-readout { left: auto; right: 14px; inset-block-end: 12px; }",
+            "[dir=\"rtl\"] .ent-canvas .spatial-readout { left: 14px; right: auto; }"
+          ]
+        }
+      },
+      "canvasSelected": {
+        "dir": "ltr",
+        "lang": "en",
+        "consumer": "enterprise",
+        "words": {
+          "left": 56,
+          "center": 186,
+          "right": 29,
+          "top": 21
+        },
+        "clipped": [
+          "P.spatial-accessible-help:Arrow keys move spatial focus. Shift ext",
+          "DIV.spatial-accessible-nav:Web Application\nWeb Application Firewall",
+          "DIV.:Web Application",
+          "DIV.:Web Application Firewall",
+          "DIV.:Attacker Workstation",
+          "DIV.:Database",
+          "DIV.:Identity Service",
+          "DIV.:SIEM / Monitoring"
+        ],
+        "FACTS": {
+          "spatialCanvasCount": 1,
+          "spatialInstanceIds": [
+            "spatial-1"
+          ],
+          "foundationSpatialRegistered": 13,
+          "readoutText": "53% · 1 selected · 6 objects",
+          "selectionCountFromReadout": "1",
+          "pressedNodes": 1
+        },
+        "D01": {
+          "leftRegionOwned": true,
+          "rightRegionOwned": true,
+          "bottomRegionOwned": true,
+          "inStageFallbackLeft": true,
+          "inStageFallbackRight": true,
+          "hiddenLeftSiblings": 6,
+          "hiddenRightSiblings": 3,
+          "visibleRightSiblings": [
+            "domainContext"
+          ],
+          "panes": {
+            "left": "open",
+            "right": "collapsed",
+            "bottom": "closed"
+          },
+          "nestedRailsInsideStage": 0,
+          "regionBoxes": {
+            "left": {
+              "x": 13,
+              "y": 258,
+              "w": 278,
+              "h": 918.5
+            },
+            "center": {
+              "x": 315,
+              "y": 428.6,
+              "w": 709,
+              "h": 432.4
+            },
+            "right": {
+              "x": 0,
+              "y": 0,
+              "w": 0,
+              "h": 0
+            }
+          }
+        },
+        "D02": {
+          "headerCommands": [
+            "Create workspace",
+            "Pin exact Baseline",
+            "Validate",
+            "Publish revision"
+          ],
+          "headerCommandCount": 4,
+          "shellToolbarCommands": [
+            "⌘",
+            "Focus",
+            "Note",
+            "Notes",
+            "Inspect Enterprise selection",
+            "Edit typed Enterprise relation",
+            "Create successor Enterprise revision",
+            "Create or rebase Digital Twin",
+            "Prepare Run handoff"
+          ],
+          "inStageComposerAffordance": {
+            "present": true,
+            "label": "Connect / edit relation",
+            "disabled": false
+          },
+          "duplicated": []
+        },
+        "D03": {
+          "documentDir": "ltr",
+          "stageDirection": "ltr",
+          "stageHasBakedDirAttr": null,
+          "identityX": 329,
+          "actionsX": 501,
+          "inherited": true
+        },
+        "D04": {
+          "nodeTextOverlaps": [],
+          "nodeCards": 6,
+          "nodeSample": [
+            {
+              "node": "APP-WEB-01",
+              "texts": [
+                {
+                  "t": "A",
+                  "y": 562.9
+                },
+                {
+                  "t": "APP-WEB-01",
+                  "y": 562.9
+                },
+                {
+                  "t": "Web Application",
+                  "y": 568.3
+                },
+                {
+                  "t": "Type: Application",
+                  "y": 576.2
+                }
+              ]
+            },
+            {
+              "node": "CTL-WAF-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 562.9
+                },
+                {
+                  "t": "CTL-WAF-01",
+                  "y": 562.9
+                },
+                {
+                  "t": "Web Application Firewall",
+                  "y": 568.3
+                },
+                {
+                  "t": "Type: Security Control",
+                  "y": 576.2
+                }
+              ]
+            },
+            {
+              "node": "SIM-ATK-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 562.9
+                },
+                {
+                  "t": "SIM-ATK-01",
+                  "y": 562.9
+                },
+                {
+                  "t": "Attacker Workstation",
+                  "y": 568.3
+                },
+                {
+                  "t": "Type: Simulation-local Device",
+                  "y": 576.2
+                }
+              ]
+            },
+            {
+              "node": "DATA-SQL-01",
+              "texts": [
+                {
+                  "t": "D",
+                  "y": 669.7
+                },
+                {
+                  "t": "DATA-SQL-01",
+                  "y": 669.7
+                },
+                {
+                  "t": "Database",
+                  "y": 675.1
+                },
+                {
+                  "t": "Type: Data Service",
+                  "y": 683.1
+                }
+              ]
+            },
+            {
+              "node": "ID-SVC-01",
+              "texts": [
+                {
+                  "t": "I",
+                  "y": 669.7
+                },
+                {
+                  "t": "ID-SVC-01",
+                  "y": 669.7
+                },
+                {
+                  "t": "Identity Service",
+                  "y": 675.1
+                },
+                {
+                  "t": "Type: Identity Service",
+                  "y": 683.1
+                }
+              ]
+            },
+            {
+              "node": "SVC-SIEM-01",
+              "texts": [
+                {
+                  "t": "M",
+                  "y": 669.7
+                },
+                {
+                  "t": "SVC-SIEM-01",
+                  "y": 669.7
+                },
+                {
+                  "t": "SIEM / Monitoring",
+                  "y": 675.1
+                },
+                {
+                  "t": "Type: Monitoring Service",
+                  "y": 683.1
+                }
+              ]
+            }
+          ]
+        },
+        "D05": {
+          "clippedRows": [],
+          "rowSamples": [
+            {
+              "text": "Systems",
+              "clipped": false
+            },
+            {
+              "text": "Applications",
+              "clipped": false
+            },
+            {
+              "text": "Services",
+              "clipped": false
+            },
+            {
+              "text": "Networks",
+              "clipped": false
+            },
+            {
+              "text": "Devices",
+              "clipped": false
+            },
+            {
+              "text": "Identities",
+              "clipped": false
+            },
+            {
+              "text": "Data",
+              "clipped": false
+            },
+            {
+              "text": "Security Controls",
+              "clipped": false
+            }
+          ]
+        },
+        "D06": {
+          "hintPresent": true,
+          "hintText": "Inspect selection: APP-WEB-01",
+          "hintClipped": false,
+          "hintTitle": "Inspect selection: APP-WEB-01",
+          "clippedInClippedList": []
+        },
+        "D07": {
+          "wrapPresent": false,
+          "wrapOverflowX": null,
+          "wrapMinWidth": null,
+          "tableWiderThanCard": null,
+          "clippedCards": []
+        },
+        "d08lower": false,
+        "D08": {
+          "documentDir": "ltr",
+          "legend": {
+            "x": 329,
+            "y": 615.6,
+            "w": 206,
+            "h": 98.1
+          },
+          "readout": {
+            "x": 825.2,
+            "y": 701.6,
+            "w": 184.8,
+            "h": 12
+          },
+          "minimap": {
+            "x": 872,
+            "y": 601.6,
+            "w": 140,
+            "h": 90
+          },
+          "legendReadoutOverlap": false,
+          "legendMinimapOverlap": false,
+          "readoutDirection": "ltr",
+          "readoutInlineEnd": "14px",
+          "surfaceOverrideRules": [
+            ".spatial-readout { position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3); }",
+            ".ent-canvas .spatial-readout { left: auto; right: 14px; inset-block-end: 12px; }",
+            "[dir=\"rtl\"] .ent-canvas .spatial-readout { left: 14px; right: auto; }"
+          ]
+        }
+      },
+      "revisions": {
+        "dir": "ltr",
+        "lang": "en",
+        "consumer": "enterprise",
+        "words": {
+          "left": 56,
+          "center": 140,
+          "right": 29,
+          "top": 21
+        },
+        "clipped": [],
+        "FACTS": {
+          "spatialCanvasCount": 0,
+          "spatialInstanceIds": [],
+          "foundationSpatialRegistered": 13,
+          "readoutText": null,
+          "selectionCountFromReadout": null,
+          "pressedNodes": 0
+        },
+        "D01": {
+          "leftRegionOwned": true,
+          "rightRegionOwned": true,
+          "bottomRegionOwned": true,
+          "inStageFallbackLeft": true,
+          "inStageFallbackRight": true,
+          "hiddenLeftSiblings": 6,
+          "hiddenRightSiblings": 3,
+          "visibleRightSiblings": [
+            "domainContext"
+          ],
+          "panes": {
+            "left": "open",
+            "right": "collapsed",
+            "bottom": "closed"
+          },
+          "nestedRailsInsideStage": 0,
+          "regionBoxes": {
+            "left": {
+              "x": 13,
+              "y": 258,
+              "w": 278,
+              "h": 918.5
+            },
+            "center": {
+              "x": 315,
+              "y": 428.6,
+              "w": 709,
+              "h": 432.4
+            },
+            "right": {
+              "x": 0,
+              "y": 0,
+              "w": 0,
+              "h": 0
+            }
+          }
+        },
+        "D02": {
+          "headerCommands": [
+            "Create workspace",
+            "Pin exact Baseline",
+            "Validate",
+            "Publish revision"
+          ],
+          "headerCommandCount": 4,
+          "shellToolbarCommands": [
+            "⌘",
+            "Focus",
+            "Note",
+            "Notes",
+            "Inspect Enterprise selection",
+            "Edit typed Enterprise relation",
+            "Create successor Enterprise revision",
+            "Create or rebase Digital Twin",
+            "Prepare Run handoff"
+          ],
+          "inStageComposerAffordance": {
+            "present": false
+          },
+          "duplicated": []
+        },
+        "D03": {
+          "documentDir": "ltr",
+          "stageDirection": "ltr",
+          "stageHasBakedDirAttr": null,
+          "identityX": 329,
+          "actionsX": 501,
+          "inherited": true
+        },
+        "D04": {
+          "nodeTextOverlaps": [],
+          "nodeCards": 0,
+          "nodeSample": []
+        },
+        "D05": {
+          "clippedRows": [],
+          "rowSamples": [
+            {
+              "text": "Systems",
+              "clipped": false
+            },
+            {
+              "text": "Applications",
+              "clipped": false
+            },
+            {
+              "text": "Services",
+              "clipped": false
+            },
+            {
+              "text": "Networks",
+              "clipped": false
+            },
+            {
+              "text": "Devices",
+              "clipped": false
+            },
+            {
+              "text": "Identities",
+              "clipped": false
+            },
+            {
+              "text": "Data",
+              "clipped": false
+            },
+            {
+              "text": "Security Controls",
+              "clipped": false
+            }
+          ]
+        },
+        "D06": {
+          "hintPresent": true,
+          "hintText": "Inspect selection: APP-WEB-01",
+          "hintClipped": false,
+          "hintTitle": "Inspect selection: APP-WEB-01",
+          "clippedInClippedList": []
+        },
+        "D07": {
+          "wrapPresent": true,
+          "wrapOverflowX": "auto",
+          "wrapMinWidth": "0px",
+          "tableWiderThanCard": true,
+          "clippedCards": []
+        },
+        "d08lower": false,
+        "D08": {
+          "documentDir": "ltr",
+          "legend": null,
+          "readout": null,
+          "minimap": null,
+          "legendReadoutOverlap": null,
+          "legendMinimapOverlap": null,
+          "readoutDirection": null,
+          "readoutInlineEnd": null,
+          "surfaceOverrideRules": [
+            ".spatial-readout { position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3); }",
+            ".ent-canvas .spatial-readout { left: auto; right: 14px; inset-block-end: 12px; }",
+            "[dir=\"rtl\"] .ent-canvas .spatial-readout { left: 14px; right: auto; }"
+          ]
+        }
+      }
+    },
+    {
+      "viewport": {
+        "id": "ar-rtl-1024",
+        "w": 1024,
+        "h": 900,
+        "locale": "ar",
+        "dir": "rtl"
+      },
+      "picked": "APP-WEB-01",
+      "canvasPicked": "APP-WEB-01",
+      "pageErrors": [],
+      "topology": {
+        "dir": "rtl",
+        "lang": "ar",
+        "consumer": "enterprise",
+        "words": {
+          "left": 57,
+          "center": 162,
+          "right": 19,
+          "top": 24
+        },
+        "clipped": [
+          "P.spatial-accessible-help:Arrow keys move spatial focus. Shift ext",
+          "DIV.spatial-accessible-nav:Web Application\nWeb Application Firewall",
+          "DIV.:Web Application",
+          "DIV.:Web Application Firewall",
+          "DIV.:Attacker Workstation",
+          "DIV.:Database",
+          "DIV.:Identity Service",
+          "DIV.:SIEM / Monitoring"
+        ],
+        "FACTS": {
+          "spatialCanvasCount": 1,
+          "spatialInstanceIds": [
+            "spatial-1"
+          ],
+          "foundationSpatialRegistered": 12,
+          "readoutText": "53% · 0 selected · 6 objects",
+          "selectionCountFromReadout": "0",
+          "pressedNodes": 0
+        },
+        "D01": {
+          "leftRegionOwned": true,
+          "rightRegionOwned": true,
+          "bottomRegionOwned": true,
+          "inStageFallbackLeft": true,
+          "inStageFallbackRight": true,
+          "hiddenLeftSiblings": 6,
+          "hiddenRightSiblings": 3,
+          "visibleRightSiblings": [
+            "domainContext"
+          ],
+          "panes": {
+            "left": "open",
+            "right": "collapsed",
+            "bottom": "closed"
+          },
+          "nestedRailsInsideStage": 0,
+          "regionBoxes": {
+            "left": {
+              "x": 13,
+              "y": 258,
+              "w": 278,
+              "h": 918.5
+            },
+            "center": {
+              "x": 315,
+              "y": 428.6,
+              "w": 709,
+              "h": 432.4
+            },
+            "right": {
+              "x": 0,
+              "y": 0,
+              "w": 0,
+              "h": 0
+            }
+          }
+        },
+        "D02": {
+          "headerCommands": [
+            "إنشاء مساحة عمل",
+            "تثبيت Baseline دقيق",
+            "تحقق",
+            "نشر الإصدار"
+          ],
+          "headerCommandCount": 4,
+          "shellToolbarCommands": [
+            "⌘",
+            "تركيز",
+            "ملاحظة",
+            "الملاحظات",
+            "Inspect Enterprise selection",
+            "Edit typed Enterprise relation",
+            "Create successor Enterprise revision",
+            "Create or rebase Digital Twin",
+            "Prepare Run handoff"
+          ],
+          "inStageComposerAffordance": {
+            "present": true,
+            "label": "ربط / تحرير علاقة",
+            "disabled": false
+          },
+          "duplicated": []
+        },
+        "D03": {
+          "documentDir": "rtl",
+          "stageDirection": "rtl",
+          "stageHasBakedDirAttr": null,
+          "identityX": 329,
+          "actionsX": 329,
+          "inherited": true
+        },
+        "D04": {
+          "nodeTextOverlaps": [],
+          "nodeCards": 6,
+          "nodeSample": [
+            {
+              "node": "APP-WEB-01",
+              "texts": [
+                {
+                  "t": "A",
+                  "y": 529.6
+                },
+                {
+                  "t": "APP-WEB-01",
+                  "y": 529.6
+                },
+                {
+                  "t": "Web Application",
+                  "y": 535
+                },
+                {
+                  "t": "Type: Application",
+                  "y": 543
+                }
+              ]
+            },
+            {
+              "node": "CTL-WAF-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 529.6
+                },
+                {
+                  "t": "CTL-WAF-01",
+                  "y": 529.6
+                },
+                {
+                  "t": "Web Application Firewall",
+                  "y": 535
+                },
+                {
+                  "t": "Type: Security Control",
+                  "y": 543
+                }
+              ]
+            },
+            {
+              "node": "SIM-ATK-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 529.6
+                },
+                {
+                  "t": "SIM-ATK-01",
+                  "y": 529.6
+                },
+                {
+                  "t": "Attacker Workstation",
+                  "y": 535
+                },
+                {
+                  "t": "Type: Simulation-local Device",
+                  "y": 543
+                }
+              ]
+            },
+            {
+              "node": "DATA-SQL-01",
+              "texts": [
+                {
+                  "t": "D",
+                  "y": 636.5
+                },
+                {
+                  "t": "DATA-SQL-01",
+                  "y": 636.5
+                },
+                {
+                  "t": "Database",
+                  "y": 641.9
+                },
+                {
+                  "t": "Type: Data Service",
+                  "y": 649.8
+                }
+              ]
+            },
+            {
+              "node": "ID-SVC-01",
+              "texts": [
+                {
+                  "t": "I",
+                  "y": 636.5
+                },
+                {
+                  "t": "ID-SVC-01",
+                  "y": 636.5
+                },
+                {
+                  "t": "Identity Service",
+                  "y": 641.9
+                },
+                {
+                  "t": "Type: Identity Service",
+                  "y": 649.8
+                }
+              ]
+            },
+            {
+              "node": "SVC-SIEM-01",
+              "texts": [
+                {
+                  "t": "M",
+                  "y": 636.5
+                },
+                {
+                  "t": "SVC-SIEM-01",
+                  "y": 636.5
+                },
+                {
+                  "t": "SIEM / Monitoring",
+                  "y": 641.9
+                },
+                {
+                  "t": "Type: Monitoring Service",
+                  "y": 649.8
+                }
+              ]
+            }
+          ]
+        },
+        "D05": {
+          "clippedRows": [],
+          "rowSamples": [
+            {
+              "text": "الأنظمة",
+              "clipped": false
+            },
+            {
+              "text": "التطبيقات",
+              "clipped": false
+            },
+            {
+              "text": "الخدمات",
+              "clipped": false
+            },
+            {
+              "text": "الشبكات",
+              "clipped": false
+            },
+            {
+              "text": "الأجهزة",
+              "clipped": false
+            },
+            {
+              "text": "الهويات",
+              "clipped": false
+            },
+            {
+              "text": "البيانات",
+              "clipped": false
+            },
+            {
+              "text": "ضوابط الأمان",
+              "clipped": false
+            }
+          ]
+        },
+        "D06": {
+          "hintPresent": true,
+          "hintText": "حدّد كائنًا في الطوبولوجيا لفحصه.",
+          "hintClipped": false,
+          "hintTitle": null,
+          "clippedInClippedList": []
+        },
+        "D07": {
+          "wrapPresent": false,
+          "wrapOverflowX": null,
+          "wrapMinWidth": null,
+          "tableWiderThanCard": null,
+          "clippedCards": []
+        },
+        "d08lower": false,
+        "D08": {
+          "documentDir": "rtl",
+          "legend": {
+            "x": 804,
+            "y": 598.6,
+            "w": 206,
+            "h": 81.8
+          },
+          "readout": {
+            "x": 329,
+            "y": 668.4,
+            "w": 184.8,
+            "h": 12
+          },
+          "minimap": {
+            "x": 327,
+            "y": 568.4,
+            "w": 140,
+            "h": 90
+          },
+          "legendReadoutOverlap": false,
+          "legendMinimapOverlap": false,
+          "readoutDirection": "ltr",
+          "readoutInlineEnd": "510.156px",
+          "surfaceOverrideRules": [
+            ".spatial-readout { position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3); }",
+            ".ent-canvas .spatial-readout { left: auto; right: 14px; inset-block-end: 12px; }",
+            "[dir=\"rtl\"] .ent-canvas .spatial-readout { left: 14px; right: auto; }"
+          ]
+        }
+      },
+      "selected": {
+        "dir": "rtl",
+        "lang": "ar",
+        "consumer": "enterprise",
+        "words": {
+          "left": 57,
+          "center": 189,
+          "right": 31,
+          "top": 24
+        },
+        "clipped": [
+          "P.spatial-accessible-help:Arrow keys move spatial focus. Shift ext",
+          "DIV.spatial-accessible-nav:Web Application\nWeb Application Firewall",
+          "DIV.:Web Application",
+          "DIV.:Web Application Firewall",
+          "DIV.:Attacker Workstation",
+          "DIV.:Database",
+          "DIV.:Identity Service",
+          "DIV.:SIEM / Monitoring"
+        ],
+        "FACTS": {
+          "spatialCanvasCount": 1,
+          "spatialInstanceIds": [
+            "spatial-1"
+          ],
+          "foundationSpatialRegistered": 12,
+          "readoutText": "53% · 0 selected · 6 objects",
+          "selectionCountFromReadout": "0",
+          "pressedNodes": 0
+        },
+        "D01": {
+          "leftRegionOwned": true,
+          "rightRegionOwned": true,
+          "bottomRegionOwned": true,
+          "inStageFallbackLeft": true,
+          "inStageFallbackRight": true,
+          "hiddenLeftSiblings": 6,
+          "hiddenRightSiblings": 3,
+          "visibleRightSiblings": [
+            "domainContext"
+          ],
+          "panes": {
+            "left": "open",
+            "right": "collapsed",
+            "bottom": "closed"
+          },
+          "nestedRailsInsideStage": 0,
+          "regionBoxes": {
+            "left": {
+              "x": 13,
+              "y": 258,
+              "w": 278,
+              "h": 918.5
+            },
+            "center": {
+              "x": 315,
+              "y": 428.6,
+              "w": 709,
+              "h": 432.4
+            },
+            "right": {
+              "x": 0,
+              "y": 0,
+              "w": 0,
+              "h": 0
+            }
+          }
+        },
+        "D02": {
+          "headerCommands": [
+            "إنشاء مساحة عمل",
+            "تثبيت Baseline دقيق",
+            "تحقق",
+            "نشر الإصدار"
+          ],
+          "headerCommandCount": 4,
+          "shellToolbarCommands": [
+            "⌘",
+            "تركيز",
+            "ملاحظة",
+            "الملاحظات",
+            "Inspect Enterprise selection",
+            "Edit typed Enterprise relation",
+            "Create successor Enterprise revision",
+            "Create or rebase Digital Twin",
+            "Prepare Run handoff"
+          ],
+          "inStageComposerAffordance": {
+            "present": true,
+            "label": "ربط / تحرير علاقة",
+            "disabled": false
+          },
+          "duplicated": []
+        },
+        "D03": {
+          "documentDir": "rtl",
+          "stageDirection": "rtl",
+          "stageHasBakedDirAttr": null,
+          "identityX": 329,
+          "actionsX": 329,
+          "inherited": true
+        },
+        "D04": {
+          "nodeTextOverlaps": [],
+          "nodeCards": 6,
+          "nodeSample": [
+            {
+              "node": "APP-WEB-01",
+              "texts": [
+                {
+                  "t": "A",
+                  "y": 529.6
+                },
+                {
+                  "t": "APP-WEB-01",
+                  "y": 529.6
+                },
+                {
+                  "t": "Web Application",
+                  "y": 535
+                },
+                {
+                  "t": "Type: Application",
+                  "y": 543
+                }
+              ]
+            },
+            {
+              "node": "CTL-WAF-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 529.6
+                },
+                {
+                  "t": "CTL-WAF-01",
+                  "y": 529.6
+                },
+                {
+                  "t": "Web Application Firewall",
+                  "y": 535
+                },
+                {
+                  "t": "Type: Security Control",
+                  "y": 543
+                }
+              ]
+            },
+            {
+              "node": "SIM-ATK-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 529.6
+                },
+                {
+                  "t": "SIM-ATK-01",
+                  "y": 529.6
+                },
+                {
+                  "t": "Attacker Workstation",
+                  "y": 535
+                },
+                {
+                  "t": "Type: Simulation-local Device",
+                  "y": 543
+                }
+              ]
+            },
+            {
+              "node": "DATA-SQL-01",
+              "texts": [
+                {
+                  "t": "D",
+                  "y": 636.5
+                },
+                {
+                  "t": "DATA-SQL-01",
+                  "y": 636.5
+                },
+                {
+                  "t": "Database",
+                  "y": 641.9
+                },
+                {
+                  "t": "Type: Data Service",
+                  "y": 649.8
+                }
+              ]
+            },
+            {
+              "node": "ID-SVC-01",
+              "texts": [
+                {
+                  "t": "I",
+                  "y": 636.5
+                },
+                {
+                  "t": "ID-SVC-01",
+                  "y": 636.5
+                },
+                {
+                  "t": "Identity Service",
+                  "y": 641.9
+                },
+                {
+                  "t": "Type: Identity Service",
+                  "y": 649.8
+                }
+              ]
+            },
+            {
+              "node": "SVC-SIEM-01",
+              "texts": [
+                {
+                  "t": "M",
+                  "y": 636.5
+                },
+                {
+                  "t": "SVC-SIEM-01",
+                  "y": 636.5
+                },
+                {
+                  "t": "SIEM / Monitoring",
+                  "y": 641.9
+                },
+                {
+                  "t": "Type: Monitoring Service",
+                  "y": 649.8
+                }
+              ]
+            }
+          ]
+        },
+        "D05": {
+          "clippedRows": [],
+          "rowSamples": [
+            {
+              "text": "الأنظمة",
+              "clipped": false
+            },
+            {
+              "text": "التطبيقات",
+              "clipped": false
+            },
+            {
+              "text": "الخدمات",
+              "clipped": false
+            },
+            {
+              "text": "الشبكات",
+              "clipped": false
+            },
+            {
+              "text": "الأجهزة",
+              "clipped": false
+            },
+            {
+              "text": "الهويات",
+              "clipped": false
+            },
+            {
+              "text": "البيانات",
+              "clipped": false
+            },
+            {
+              "text": "ضوابط الأمان",
+              "clipped": false
+            }
+          ]
+        },
+        "D06": {
+          "hintPresent": true,
+          "hintText": "فحص التحديد: APP-WEB-01",
+          "hintClipped": false,
+          "hintTitle": "فحص التحديد: APP-WEB-01",
+          "clippedInClippedList": []
+        },
+        "D07": {
+          "wrapPresent": false,
+          "wrapOverflowX": null,
+          "wrapMinWidth": null,
+          "tableWiderThanCard": null,
+          "clippedCards": []
+        },
+        "d08lower": false,
+        "D08": {
+          "documentDir": "rtl",
+          "legend": {
+            "x": 804,
+            "y": 598.6,
+            "w": 206,
+            "h": 81.8
+          },
+          "readout": {
+            "x": 329,
+            "y": 668.4,
+            "w": 184.8,
+            "h": 12
+          },
+          "minimap": {
+            "x": 327,
+            "y": 568.4,
+            "w": 140,
+            "h": 90
+          },
+          "legendReadoutOverlap": false,
+          "legendMinimapOverlap": false,
+          "readoutDirection": "ltr",
+          "readoutInlineEnd": "510.156px",
+          "surfaceOverrideRules": [
+            ".spatial-readout { position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3); }",
+            ".ent-canvas .spatial-readout { left: auto; right: 14px; inset-block-end: 12px; }",
+            "[dir=\"rtl\"] .ent-canvas .spatial-readout { left: 14px; right: auto; }"
+          ]
+        }
+      },
+      "canvasSelected": {
+        "dir": "rtl",
+        "lang": "ar",
+        "consumer": "enterprise",
+        "words": {
+          "left": 57,
+          "center": 189,
+          "right": 31,
+          "top": 24
+        },
+        "clipped": [
+          "P.spatial-accessible-help:Arrow keys move spatial focus. Shift ext",
+          "DIV.spatial-accessible-nav:Web Application\nWeb Application Firewall",
+          "DIV.:Web Application",
+          "DIV.:Web Application Firewall",
+          "DIV.:Attacker Workstation",
+          "DIV.:Database",
+          "DIV.:Identity Service",
+          "DIV.:SIEM / Monitoring"
+        ],
+        "FACTS": {
+          "spatialCanvasCount": 1,
+          "spatialInstanceIds": [
+            "spatial-1"
+          ],
+          "foundationSpatialRegistered": 13,
+          "readoutText": "53% · 1 selected · 6 objects",
+          "selectionCountFromReadout": "1",
+          "pressedNodes": 1
+        },
+        "D01": {
+          "leftRegionOwned": true,
+          "rightRegionOwned": true,
+          "bottomRegionOwned": true,
+          "inStageFallbackLeft": true,
+          "inStageFallbackRight": true,
+          "hiddenLeftSiblings": 6,
+          "hiddenRightSiblings": 3,
+          "visibleRightSiblings": [
+            "domainContext"
+          ],
+          "panes": {
+            "left": "open",
+            "right": "collapsed",
+            "bottom": "closed"
+          },
+          "nestedRailsInsideStage": 0,
+          "regionBoxes": {
+            "left": {
+              "x": 13,
+              "y": 258,
+              "w": 278,
+              "h": 918.5
+            },
+            "center": {
+              "x": 315,
+              "y": 428.6,
+              "w": 709,
+              "h": 432.4
+            },
+            "right": {
+              "x": 0,
+              "y": 0,
+              "w": 0,
+              "h": 0
+            }
+          }
+        },
+        "D02": {
+          "headerCommands": [
+            "إنشاء مساحة عمل",
+            "تثبيت Baseline دقيق",
+            "تحقق",
+            "نشر الإصدار"
+          ],
+          "headerCommandCount": 4,
+          "shellToolbarCommands": [
+            "⌘",
+            "تركيز",
+            "ملاحظة",
+            "الملاحظات",
+            "Inspect Enterprise selection",
+            "Edit typed Enterprise relation",
+            "Create successor Enterprise revision",
+            "Create or rebase Digital Twin",
+            "Prepare Run handoff"
+          ],
+          "inStageComposerAffordance": {
+            "present": true,
+            "label": "ربط / تحرير علاقة",
+            "disabled": false
+          },
+          "duplicated": []
+        },
+        "D03": {
+          "documentDir": "rtl",
+          "stageDirection": "rtl",
+          "stageHasBakedDirAttr": null,
+          "identityX": 329,
+          "actionsX": 329,
+          "inherited": true
+        },
+        "D04": {
+          "nodeTextOverlaps": [],
+          "nodeCards": 6,
+          "nodeSample": [
+            {
+              "node": "APP-WEB-01",
+              "texts": [
+                {
+                  "t": "A",
+                  "y": 529.6
+                },
+                {
+                  "t": "APP-WEB-01",
+                  "y": 529.6
+                },
+                {
+                  "t": "Web Application",
+                  "y": 535
+                },
+                {
+                  "t": "Type: Application",
+                  "y": 543
+                }
+              ]
+            },
+            {
+              "node": "CTL-WAF-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 529.6
+                },
+                {
+                  "t": "CTL-WAF-01",
+                  "y": 529.6
+                },
+                {
+                  "t": "Web Application Firewall",
+                  "y": 535
+                },
+                {
+                  "t": "Type: Security Control",
+                  "y": 543
+                }
+              ]
+            },
+            {
+              "node": "SIM-ATK-01",
+              "texts": [
+                {
+                  "t": "S",
+                  "y": 529.6
+                },
+                {
+                  "t": "SIM-ATK-01",
+                  "y": 529.6
+                },
+                {
+                  "t": "Attacker Workstation",
+                  "y": 535
+                },
+                {
+                  "t": "Type: Simulation-local Device",
+                  "y": 543
+                }
+              ]
+            },
+            {
+              "node": "DATA-SQL-01",
+              "texts": [
+                {
+                  "t": "D",
+                  "y": 636.5
+                },
+                {
+                  "t": "DATA-SQL-01",
+                  "y": 636.5
+                },
+                {
+                  "t": "Database",
+                  "y": 641.9
+                },
+                {
+                  "t": "Type: Data Service",
+                  "y": 649.8
+                }
+              ]
+            },
+            {
+              "node": "ID-SVC-01",
+              "texts": [
+                {
+                  "t": "I",
+                  "y": 636.5
+                },
+                {
+                  "t": "ID-SVC-01",
+                  "y": 636.5
+                },
+                {
+                  "t": "Identity Service",
+                  "y": 641.9
+                },
+                {
+                  "t": "Type: Identity Service",
+                  "y": 649.8
+                }
+              ]
+            },
+            {
+              "node": "SVC-SIEM-01",
+              "texts": [
+                {
+                  "t": "M",
+                  "y": 636.5
+                },
+                {
+                  "t": "SVC-SIEM-01",
+                  "y": 636.5
+                },
+                {
+                  "t": "SIEM / Monitoring",
+                  "y": 641.9
+                },
+                {
+                  "t": "Type: Monitoring Service",
+                  "y": 649.8
+                }
+              ]
+            }
+          ]
+        },
+        "D05": {
+          "clippedRows": [],
+          "rowSamples": [
+            {
+              "text": "الأنظمة",
+              "clipped": false
+            },
+            {
+              "text": "التطبيقات",
+              "clipped": false
+            },
+            {
+              "text": "الخدمات",
+              "clipped": false
+            },
+            {
+              "text": "الشبكات",
+              "clipped": false
+            },
+            {
+              "text": "الأجهزة",
+              "clipped": false
+            },
+            {
+              "text": "الهويات",
+              "clipped": false
+            },
+            {
+              "text": "البيانات",
+              "clipped": false
+            },
+            {
+              "text": "ضوابط الأمان",
+              "clipped": false
+            }
+          ]
+        },
+        "D06": {
+          "hintPresent": true,
+          "hintText": "فحص التحديد: APP-WEB-01",
+          "hintClipped": false,
+          "hintTitle": "فحص التحديد: APP-WEB-01",
+          "clippedInClippedList": []
+        },
+        "D07": {
+          "wrapPresent": false,
+          "wrapOverflowX": null,
+          "wrapMinWidth": null,
+          "tableWiderThanCard": null,
+          "clippedCards": []
+        },
+        "d08lower": false,
+        "D08": {
+          "documentDir": "rtl",
+          "legend": {
+            "x": 804,
+            "y": 598.6,
+            "w": 206,
+            "h": 81.8
+          },
+          "readout": {
+            "x": 329,
+            "y": 668.4,
+            "w": 184.8,
+            "h": 12
+          },
+          "minimap": {
+            "x": 327,
+            "y": 568.4,
+            "w": 140,
+            "h": 90
+          },
+          "legendReadoutOverlap": false,
+          "legendMinimapOverlap": false,
+          "readoutDirection": "ltr",
+          "readoutInlineEnd": "510.156px",
+          "surfaceOverrideRules": [
+            ".spatial-readout { position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3); }",
+            ".ent-canvas .spatial-readout { left: auto; right: 14px; inset-block-end: 12px; }",
+            "[dir=\"rtl\"] .ent-canvas .spatial-readout { left: 14px; right: auto; }"
+          ]
+        }
+      },
+      "revisions": {
+        "dir": "rtl",
+        "lang": "ar",
+        "consumer": "enterprise",
+        "words": {
+          "left": 57,
+          "center": 146,
+          "right": 31,
+          "top": 24
+        },
+        "clipped": [],
+        "FACTS": {
+          "spatialCanvasCount": 0,
+          "spatialInstanceIds": [],
+          "foundationSpatialRegistered": 13,
+          "readoutText": null,
+          "selectionCountFromReadout": null,
+          "pressedNodes": 0
+        },
+        "D01": {
+          "leftRegionOwned": true,
+          "rightRegionOwned": true,
+          "bottomRegionOwned": true,
+          "inStageFallbackLeft": true,
+          "inStageFallbackRight": true,
+          "hiddenLeftSiblings": 6,
+          "hiddenRightSiblings": 3,
+          "visibleRightSiblings": [
+            "domainContext"
+          ],
+          "panes": {
+            "left": "open",
+            "right": "collapsed",
+            "bottom": "closed"
+          },
+          "nestedRailsInsideStage": 0,
+          "regionBoxes": {
+            "left": {
+              "x": 13,
+              "y": 258,
+              "w": 278,
+              "h": 918.5
+            },
+            "center": {
+              "x": 315,
+              "y": 428.6,
+              "w": 709,
+              "h": 432.4
+            },
+            "right": {
+              "x": 0,
+              "y": 0,
+              "w": 0,
+              "h": 0
+            }
+          }
+        },
+        "D02": {
+          "headerCommands": [
+            "إنشاء مساحة عمل",
+            "تثبيت Baseline دقيق",
+            "تحقق",
+            "نشر الإصدار"
+          ],
+          "headerCommandCount": 4,
+          "shellToolbarCommands": [
+            "⌘",
+            "تركيز",
+            "ملاحظة",
+            "الملاحظات",
+            "Inspect Enterprise selection",
+            "Edit typed Enterprise relation",
+            "Create successor Enterprise revision",
+            "Create or rebase Digital Twin",
+            "Prepare Run handoff"
+          ],
+          "inStageComposerAffordance": {
+            "present": false
+          },
+          "duplicated": []
+        },
+        "D03": {
+          "documentDir": "rtl",
+          "stageDirection": "rtl",
+          "stageHasBakedDirAttr": null,
+          "identityX": 329,
+          "actionsX": 329,
+          "inherited": true
+        },
+        "D04": {
+          "nodeTextOverlaps": [],
+          "nodeCards": 0,
+          "nodeSample": []
+        },
+        "D05": {
+          "clippedRows": [],
+          "rowSamples": [
+            {
+              "text": "الأنظمة",
+              "clipped": false
+            },
+            {
+              "text": "التطبيقات",
+              "clipped": false
+            },
+            {
+              "text": "الخدمات",
+              "clipped": false
+            },
+            {
+              "text": "الشبكات",
+              "clipped": false
+            },
+            {
+              "text": "الأجهزة",
+              "clipped": false
+            },
+            {
+              "text": "الهويات",
+              "clipped": false
+            },
+            {
+              "text": "البيانات",
+              "clipped": false
+            },
+            {
+              "text": "ضوابط الأمان",
+              "clipped": false
+            }
+          ]
+        },
+        "D06": {
+          "hintPresent": true,
+          "hintText": "فحص التحديد: APP-WEB-01",
+          "hintClipped": false,
+          "hintTitle": "فحص التحديد: APP-WEB-01",
+          "clippedInClippedList": []
+        },
+        "D07": {
+          "wrapPresent": true,
+          "wrapOverflowX": "auto",
+          "wrapMinWidth": "0px",
+          "tableWiderThanCard": true,
+          "clippedCards": []
+        },
+        "d08lower": false,
+        "D08": {
+          "documentDir": "rtl",
+          "legend": null,
+          "readout": null,
+          "minimap": null,
+          "legendReadoutOverlap": null,
+          "legendMinimapOverlap": null,
+          "readoutDirection": null,
+          "readoutInlineEnd": null,
+          "surfaceOverrideRules": [
+            ".spatial-readout { position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3); }",
+            ".ent-canvas .spatial-readout { left: auto; right: 14px; inset-block-end: 12px; }",
+            "[dir=\"rtl\"] .ent-canvas .spatial-readout { left: 14px; right: auto; }"
+          ]
+        }
+      }
+    }
+  ]
+}

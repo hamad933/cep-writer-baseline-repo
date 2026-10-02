@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 2,
+  "unit": "W03-ENTERPRISE",
+  "lane": "ENT-1",
+  "dispatch": "RE-DISPATCH #2",
+  "subject": "Vision-channel verification of ENTERPRISE visual claims at exact current source",
+  "status": "PARTIALLY_RESOLVED__CP-003_ITEMS_CLOSED_BY_FRESH_ARTIFACTS__NEW_STALE-CACHE_MISMATCH_OPEN",
+  "supersedes": "evidence/vision-verification.json (rescue epoch; VV-01..VV-03) — retained, not deleted",
+  "standard": "visual-fidelity-review R3b / VD-008 — a passing canary does not clear a later read; every read is checked against byte ground truth",
+  "groundTruthSources": [
+    "evidence/vision-probes/manifest.json (path + sha256 + dims + bytes for every probe)",
+    "evidence/comparisons/manifest.json + evidence/comparisons/ocr-anchors.txt (tesseract eng --psm 11 on the exact bytes)",
+    "evidence/receipt-ent1-rev1.json, evidence/receipt-ent1-rev2.json (per-frame sha256 + DOM probe)",
+    "evidence/dledger-probe.json, evidence/falsification.json (live DOM geometry/text)"
+  ],
+  "tesseractLanguagesAvailable": ["eng", "osd"],
+  "arabicOcrAvailable": false,
+  "reads": [
+    {
+      "id": "VV-01",
+      "session": "ENT-1 re-dispatch #2",
+      "requestedPath": "writer-output/W03-ENTERPRISE/evidence/vision-probes/vv01-canary-8417.png",
+      "requestedBytes": {"sha256": "d046d5df7ffee773bd8214c4cc49bcf807938a5b3ac416e3745ff6f82da9d4d5", "dims": "640x220", "bytes": 18795},
+      "groundTruth": "tesseract on the requested bytes: 'ENT1 VVO1 CANARY 8417' / 'NONCE 8417 FRESH 766AB95' / 'MAGENTA 200 0 160' on a magenta field",
+      "returnedFrame": "the same magenta canary with all three lines and the nonce 8417",
+      "verdict": "MATCH — CP-003 VV-01 RESOLVED by a fresh canary minted in this session"
+    },
+    {
+      "id": "VV-02",
+      "session": "ENT-1 re-dispatch #2",
+      "requestedPath": "writer-output/W03-ENTERPRISE/evidence/vision-probes/vv02-sbs-reference-vs-ent1-rev1.png",
+      "requestedBytes": {"sha256": "8117306c571921361a45e55858830406db5c72dc172c75facee1cde0a5281cf2", "dims": "1232x1870", "bytes": 1365654},
+      "groundTruth": "tesseract: yellow 'REFERENCE (construction authority) 8b3b3e3b47693a54 1503x1046' above the reference image; cyan 'CANDIDATE ent1-rev1 @ 766ab95367dd sha=7a901262dcb92dc2' above the candidate",
+      "returnedFrame": "side-by-side with the REFERENCE label band on top (reference image below it) and the CANDIDATE label band below (candidate image below it)",
+      "verdict": "MATCH — CP-003 VV-02 RESOLVED by a fresh side-by-side built from the current-source capture"
+    },
+    {
+      "id": "VV-03",
+      "session": "ENT-1 re-dispatch #2",
+      "requestedPath": "writer-output/W03-ENTERPRISE/evidence/vision-probes/vv03-crop-ltr-1503-topology-ent1-rev1.png",
+      "requestedBytes": {"sha256": "5d64838a291252c831d94bb4990d163276adb9ceb37370146d4b8c67f2de6290", "dims": "1080x570", "bytes": 117791},
+      "groundTruth": "tesseract: 'Enterprise structure' + 'Enterprise digital twin workspace' + 'ENT-ATLAS-FINANCE' + 'Create workspace | Pin exact Baseline | Publish revision' + 'Topology' + 'Connect / edit relation | Fit topology' + 'Select a topology object to inspect it.'",
+      "returnedFrame": "the CURRENT-SOURCE layout — structure list in the shell LEFT pane, identity header + tabs + canvas in the stage, NO duplicated structure rail inside the stage (the after1 pre-fix signature is absent)",
+      "verdict": "MATCH — CP-003 VV-03 RESOLVED: no stale after1 frame; fresh crop of commit 766ab95 bytes"
+    },
+    {
+      "id": "VV-04",
+      "session": "ENT-1 re-dispatch #2",
+      "requestedPath": "writer-output/W03-ENTERPRISE/evidence/comparisons/l2a-top-and-left.png",
+      "requestedBytes": {"sha256": "503802319f0f3437...", "dims": "1264x2159"},
+      "groundTruth": "tesseract on the requested bytes: 'L2 REGION: top REF (left) | CANDIDATE ent1-rev1 AR/RTL (right)' then 'L2 REGION: left ...'",
+      "returnedFrame": "the L1 composite (headers 'L1 REFERENCE (AR/RTL)' / 'L1 CANDIDATE ent1-rev1 (ent1-rev1)') — a file that was never requested. Two consecutive reads of the same path returned the same wrong content.",
+      "verdict": "MISMATCH — VD-008 RECURRED"
+    },
+    {
+      "id": "VV-05",
+      "session": "ENT-1 re-dispatch #2",
+      "requestedPath": [
+        "writer-output/W03-ENTERPRISE/evidence/comparisons/l3-components-ref-vs-candidate.png (sha a198031ccae6f134f3ede5994912bc8c5308104b693cb5503a34fcb0702b8261)",
+        "writer-output/W03-ENTERPRISE/evidence/vision-probes/l3-components-ent1-rev2.png (same bytes, different directory)"
+      ],
+      "groundTruth": "tesseract on the requested bytes: 'L3 COMPONENT: identity header — REF (left) | CANDIDATE ent1-rev2 EN/LTR (right)' ... five L3 rows",
+      "returnedFrame": "the SAME stale l1-ref-vs-candidate-rtl.png content as VV-04, including the superseded candidate label 'L1 CANDIDATE ent1-rev1 (ent1-rev1)' and candidate source sha 2aca5e12b12412db — bytes that no longer exist at that path (the file was regenerated at ent1-rev2). Cross-directory, identical wrong frame.",
+      "verdict": "MISMATCH — STALE CACHE SERVED REGARDLESS OF PATH OR DIRECTORY"
+    }
+  ],
+  "consequence": "CP-003's three recorded mismatches (VV-01/02/03) are CLOSED: each was re-run with a freshly generated artifact at exact current source and read back correctly. Two NEW mismatches (VV-04/05) were produced while reading evidence/comparisons/**; they are recorded OPEN. No L2/L3/L4 visual claim in VISUAL_EXECUTION_REPORT.json rests on an image-channel read — those levels are carried by sha256-verified bytes, tesseract OCR of those bytes, pixel statistics and live DOM geometry probes.",
+  "recommendedControllerAction": "Re-verify L2/L3/L4 of the ENTERPRISE candidate with an image channel that does not serve cached frames; treat vision verification as OPEN until two different files in evidence/comparisons/ are both read correctly in one session."
+}
