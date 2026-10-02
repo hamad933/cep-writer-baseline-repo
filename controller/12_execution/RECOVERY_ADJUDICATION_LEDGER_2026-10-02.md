@@ -13,7 +13,9 @@
 | Boot-time remote (externally observed, independently confirmed) | `f5b78e3c7df5993e8208c914f5b328967e958ec4` | `47e97e04434316ec98796bfcf41436ae1e96fc20` |
 | After queue push (`10d5c00`) | `10d5c00cdac87ac5b1a6275577c61690b3907eab` | `ad4b4886c5c365f081b2ea8f3ec3d61db003fdb4` |
 | After wisdom + repair batches (`cb76794`) | `cb76794d8cf34ba19877da470dbe568d423918d5` | `c6df80ee15ea252016a08fedf12efb37daa64cbc` |
-| After basis-model correction (`939fabf`, current at ledger write) | `939fabfc3ab6f06ccc57dce6ca3d5063c9241d85` | see `git rev-parse` at consumption |
+| After basis-model correction (`939fabf`) | `939fabfc3ab6f06ccc57dce6ca3d5063c9241d85` | (queue-only) |
+| After ledger + exact-HEAD evidence repair (`a4b10d9`) | `a4b10d92790881662bcda9ae8f64200839946de4` | `007e86a40b1eb73e9840497d3ae0e32458cd7b14` |
+| After matrix draft (`702896b`) — current at ledger update | `702896b1ba73d994f2355d7b1c15653ef2411975` | `2b3c3cac1a5928ee722fe4e209214f51726dc283` |
 
 History integrity: `d5d7588` is a strict ancestor of all recovery commits; 33 commits existed between `d5d7588` and `f5b78e3`; no force-push, reset, revert, or history rewrite was performed by this recovery. Local preservation branch `preserve/local-uncommitted-delta-20261002` @ `9d39d69` holds the previously-uncommitted 54-path delta (H08's audited residue) as additional custody.
 
@@ -102,13 +104,13 @@ Zero-loss property of repairs: no historical body/checkpoint/receipt line delete
 
 | Gate | Status | Evidence |
 |---|---|---|
-| 1 successor reaches one authority/topology | PASS (provisional, final re-check after offloads) | boot sequence + §3 interpretation; contradictions repaired |
+| 1 successor reaches one authority/topology | **PASS (fresh-clone proof)** | Independent falsification: fresh `git clone` of `origin/writer/mi-serial` → boot-script reading of AUTHORITY_STATUS/READ_FIRST/CURRENT_STATE/RESUME trio/handoff/register/standard/5 cluster packets → **29/29 substantive checks PASS** at HEAD `702896b1ba73d994f2355d7b1c15653ef2411975` / tree `2b3c3cac1a5928ee722fe4e209214f51726dc283` (single scanner flag = false positive on a line self-labeling OD-085 historical; Product-delta check = extensions.css 2 lines only) |
 | 2 no current-looking file routes contradictory topology | PASS after `cb76794` (3 sweeps; residuals all ceiling/section-labeled) | §2.2 receipts |
 | 3 zero-loss pre-overreach claims | PARTIAL — §5 pending OFFLOAD-02 | §5 |
 | 4 no wholesale Drive snapshot current merely by copying | OPEN — governance interior `REVERIFY_REQUIRED` (OFFLOAD-01 §2/§3) | §2.2 |
 | 5 H08/H01–H09 value preserved w/o tactics-as-law | PARTIAL — §6 pending OFFLOAD-03 | §6 |
 | 6 temporally consistent source/evidence truth | **PASS with exact-HEAD proof** | Fresh browser conformance executed at recovered HEAD: **4 PASS / 2 FAIL** = byte-for-byte the recorded `490b6a40` truth (Runs `runtime-causal-consequence` PASS → closed-harness classification confirmed; both FAILs = Enterprise `relation.route-convergence` + `central-change-reuse`). Receipt regenerated bound to `CANONICAL_SOURCE_TREE_SHA256:0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc` (338 files) with hash-bound `EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE`. `npm run check` reds reduced 3 → 1; the remaining red (`browser.lineage_receipt_truthful`) is a **by-design truth guard** — it requires `EXECUTED_PASS` (6/6) and correctly stays red while the Enterprise defect is open; forcing it green would falsify truth, so it is a truth ceiling, not a recovery target. |
-| 7 23-surface matrix complete enough | DRAFT ready (SA-3/SA-4) — companion file | matrix file |
+| 7 23-surface matrix complete enough | **DRAFT COMPLETE** → `controller/12_execution/EXISTING_EVIDENCE_REUSE_MATRIX_23_SURFACES.md` (23/23 rows, dispositions+sizes+seams drafted; `[SEAL:OFFLOAD-03]` cells pending spot-check) | matrix file |
 | 8 DAG no unhandled writable/shared-owner collisions | DRAFT skeleton — companion file; final after dispositions | DAG file |
 | 9 every Writer lane has exact packet | PENDING — after dispositions/DAG | DAG file |
 | 10 Product untouched by recovery | PASS — `git diff d5d7588..HEAD -- stack/native-typescript tests contracts profiles authority cep-writer` shows only the pre-existing 2-line extensions.css delta from the 32 historical commits; recovery commits touch `controller/**` only (+local receipt reverts) | §2.2 |
