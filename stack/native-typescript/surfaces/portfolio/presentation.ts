@@ -108,7 +108,10 @@ function sourceIntegrityTable(T: any, row: any, integrity: any) {
       ] },
       { cells: [
         { text: T.cEnvelope, dir: 'auto' },
-        { text: integrity.envelope, dir: 'ltr', mono: true, tone: integrity.state === 'RESOLVED' ? 'success' : 'muted' },
+        // The envelope carries a 71-character sha256 token with no break opportunity: it must
+        // keep wrap-anywhere (dir=auto) so the column can wrap it instead of forcing the table
+        // wider than its host. All short technical tokens stay dir=ltr + unbroken (style rule).
+        { text: integrity.envelope, dir: 'auto', mono: true, tone: integrity.state === 'RESOLVED' ? 'success' : 'muted' },
         { text: integrity.detail, dir: 'auto', tone: 'muted' }
       ] },
       { cells: [

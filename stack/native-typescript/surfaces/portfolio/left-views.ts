@@ -126,6 +126,27 @@ function syncRowTone(host: Element, domain: LeftDomain) {
   });
 }
 
+/**
+ * Re-assert the two index column headers in the ACTIVE language.
+ *
+ * The shared m0 stage evaluates `adapter.columns` exactly ONCE when it builds the region
+ * (`cols=columns||adapter?.columns` in m0-controller-composition.ts), so a locale flip after
+ * mount leaves the headers in the boot language even though this surface's `columns` getter is
+ * locale-aware. Portfolio owns these two labels (i18n.colIndexReference / colIndexState), so the
+ * surface re-projects them here — presentation only; no shared file is written, and the write is
+ * idempotent (identical text ⇒ no mutation ⇒ no observer ping-pong).
+ */
+function syncHeaders(host: Element): void {
+  const T = portfolioCopy();
+  const headers = host.querySelectorAll<HTMLTableCellElement>('.m0-table thead th');
+  if (headers.length !== 2) return;
+  const wanted = [T.colIndexReference, T.colIndexState];
+  headers.forEach((cell, index) => {
+    const label = wanted[index];
+    if (label && cell.textContent !== label) cell.textContent = label;
+  });
+}
+
 function render(): void {
   try {
     (globalThis as any).CEPFoundation?.m0Composition?.mounted?.render?.();
@@ -144,6 +165,7 @@ export function installPortfolioLeftComposition(domain: LeftDomain, collection: 
     const host = document.querySelector('#domainLeftRegion');
     if (!host) return;
     try { syncRowTone(host, domain); } catch { /* tone is presentation-only */ }
+    try { syncHeaders(host); } catch { /* header language is presentation-only */ }
     try { syncViews(host, domain, collection, render); } catch { /* views are presentation-only */ }
   };
 

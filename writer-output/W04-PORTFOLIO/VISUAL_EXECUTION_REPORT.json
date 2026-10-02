@@ -1,53 +1,107 @@
 {
   "SURFACE": "portfolio",
-  "OWNER": "W04-PORTFOLIO",
+  "OWNER": "W04-PORTFOLIO (lane POR-1)",
   "REFERENCE": "cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/04_PORTFOLIO/Cybersecurity Portfolio Evidence Dashboard.png",
-  "REFERENCE_CLASSIFICATION": "CURRENT_FINAL_REFERENCE · sha256 prefix 3651bff6bee8098e · 1505x1045 · register: cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md · manifest: cep-writer/REFERENCE_MANIFEST.json · read as CONSTRUCTION AUTHORITY for composition, hierarchy, spatial relationships, information architecture, density/rhythm, interaction language, visual emphasis, pane organization and responsive intent. REFERENCE != BLIND PIXEL COPY. Reference language does NOT set the product language.",
-  "CURRENT_CANDIDATE": "writer/mi-serial @ e5a77b60187e82503c52466665561605a3eea362 (branch tip at session start; parallel writers move the tip) — source roots surfaces/portfolio/ + adapters/portfolio/ unmodified at session start (git status clean for those roots)",
-  "FILES_CHANGED": [],
-  "FUNCTIONAL_STATUS": "IN_PROGRESS — session start",
-  "STRUCTURAL_STATUS": "IN_PROGRESS — session start",
-  "VISUAL_STATUS": "IN_PROGRESS — session start",
-  "VISUAL_COMPARISON_LEVELS_COMPLETED": [],
-  "RESPONSIVE_STATUS": "NOT_YET_TESTED",
-  "RTL_LTR_STATUS": "NOT_YET_TESTED",
-  "DEFECTS_FOUND": [],
-  "DEFECT_SEVERITY": {"counts": {}, "highest": "NONE", "note": "No defects logged yet; report created first per VISUAL_EXECUTION_STANDARD §17.2."},
-  "ROOT_CAUSE": {"counts": {}, "note": "No root-cause analysis yet."},
-  "FIXES_APPLIED": [],
-  "RECAPTURE_STATUS": "NOT_STARTED",
-  "RECOMPARISON_STATUS": "NOT_STARTED",
-  "REGRESSION_STATUS": "NOT_STARTED",
-  "EVIDENCE": {"index": "PENDING", "lineageFile": "PENDING", "note": "No captures yet."},
-  "LINEAGE": {
-    "reference": {
-      "path": "cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/04_PORTFOLIO/Cybersecurity Portfolio Evidence Dashboard.png",
-      "classification": "CURRENT_FINAL_REFERENCE",
-      "sha256": "3651bff6bee8098e8ab7633c3d5a9ebec0a0cb7e8701466932d21f53988ea37b",
-      "dims": [1505, 1045],
-      "bytes": 1525435,
-      "verifiedThisSession": true
-    },
-    "candidate": {"branch": "writer/mi-serial", "commitAtSessionStart": "e5a77b60187e82503c52466665561605a3eea362", "env": "local dist built via tools/writer-serial.sh npm run build:runtime"}
+  "REFERENCE_CLASSIFICATION": "CURRENT_FINAL_REFERENCE · sha256 3651bff6bee8098e8ab7633c3d5a9ebec0a0cb7e8701466932d21f53988ea37b · 1505x1045 · 1525435 bytes · register: cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md · manifest: cep-writer/REFERENCE_MANIFEST.json · read as CONSTRUCTION AUTHORITY for composition, hierarchy, spatial relationships, information architecture, density/rhythm, interaction language, pane organization and responsive intent. REFERENCE != BLIND PIXEL COPY. Reference language does NOT set the product language. Verified this session (hash+dims recomputed from the bytes).",
+  "CURRENT_CANDIDATE": {
+    "branch": "writer/mi-serial-lane/POR-1",
+    "parent": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc (RECOVERY_GATE_PASS — verified before any mutation; git status clean)",
+    "canonicalSourceTreeParent": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc (338 files, recomputed from a git-archive of HEAD — equals the recorded claim in assurance/BROWSER_CONFORMANCE_RECEIPT.json)",
+    "canonicalSourceTreeWithDelta": "b61cf2bb3e9d55941ef969f6b7e11f859a89d52cd09d3277bcc0030a2f14b8fa (338 files — identical to HEAD except this lane's 5 portfolio source files)",
+    "note": "final commit sha recorded in HANDOFF.md §identity (written after the commit exists)"
   },
-  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED — Writer self-acceptance is forbidden; sole Controller review required.",
-  "BLOCKERS": [],
-  "STAGE": "PLAN_COMPLETE_SOURCE_BUILD_STARTED",
-  "PLAN": {
-    "surfaceIdentity": "Portfolio assembles the defensible record of demonstrated capability and its supporting evidence: it curates references to canonical Evidence/Mastery/Project records into one view, states each reference's source disposition truthfully, states what the Portfolio is and is not allowed to claim (Q-5 pending grouping authority, zero canonical copies, zero delete authority), and exports the assembly reproducibly. It never copies, deletes, invents or publishes canonical truth.",
-    "regions": {
-      "LEFT": "Reference index (surface-owned 3-column table: Reference / Reference type / Source state with live state tone) under a surface-owned Saved Views + Curated Views navigation head whose entries are REAL filters over the collection; shared footer keeps the session-record note and Settings entry.",
-      "CENTER": "Selected-reference assembly dossier: slim Q-5 authority bar -> assembly metrics -> curated reference catalogue table -> identity/disposition split -> canonical source integrity table -> membership source-state track with derived next actions.",
-      "RIGHT": "Five context cards mirroring the reference's right pane: View scope, View organization, Active filters, Customization & export, Curation receipts.",
-      "BOTTOM": "Shared bottom shell with the domain deep projection (unchanged seam).",
-      "TOOLBAR": "Unchanged: Curate Portfolio reference / Filter / Export exact references / Update governed grouping (grouping stays refused)."
+  "FILES_CHANGED": [
+    "stack/native-typescript/surfaces/portfolio/presentation-style.ts",
+    "stack/native-typescript/surfaces/portfolio/presentation.ts",
+    "stack/native-typescript/surfaces/portfolio/left-views.ts",
+    "stack/native-typescript/surfaces/portfolio/i18n.ts",
+    "stack/native-typescript/surfaces/portfolio/composition.ts",
+    "writer-output/W04-PORTFOLIO/HANDOFF.md",
+    "writer-output/W04-PORTFOLIO/VISUAL_EXECUTION_REPORT.json",
+    "writer-output/W04-PORTFOLIO/SERIALIZED_HOTSPOT_REQUEST.md",
+    "writer-output/W04-PORTFOLIO/harness/por1-capture.mjs",
+    "writer-output/W04-PORTFOLIO/harness/por1-direction-diag.mjs",
+    "writer-output/W04-PORTFOLIO/harness/por1-falsify.mjs",
+    "writer-output/W04-PORTFOLIO/harness/por1-write-guard.mjs",
+    "writer-output/W04-PORTFOLIO/harness/por1-locale-refresh-probe.mjs",
+    "writer-output/W04-PORTFOLIO/evidence/** (baseline, pre-fix, after-fix1, after-fix2, final, flow runs, falsification)"
+  ],
+  "FUNCTIONAL_STATUS": "PASS — npm run build:runtime OK; npm test 210/0 (twice, identical, no leakage); packet tests PASS (stack/native-typescript/tests/surfaces/portfolio/domain.test.ts, rescue/S15_W04_MASTERY_PORTFOLIO, rescue/CG5_W04_COVERAGE, rescue/CG5_CONTROLLER_CORR01_A03_DOMAIN_INTEGRITY); mandated flow portfolio.assembly-and-export PASS at baseline and PASS again after the source delta (all assertions green, 3 hash-bound screenshots) — see EVIDENCE.flows for the environment-blocked attempts recorded truthfully.",
+  "STRUCTURAL_STATUS": "PASS — shared mechanics untouched (CollectionTableMatrixPresentationCore, w04 renderer, m0 stage, shell); surface-local presentation only; no shared file written; git status shows changes only under surfaces/portfolio/, adapters/portfolio/ (unmodified), writer-output/W04-PORTFOLIO/, plus dist/ + assurance/ build outputs that are restored before commit.",
+  "VISUAL_STATUS": "PASS for surface-owned work (L1–L4 compared baseline → after-fix → final in both directions and both required viewports); NOT_OWNER_ACCEPTED — four shared defects remain visible in the surface and are routed to their seam owners (see BLOCKERS + SERIALIZED_HOTSPOT_REQUEST.md).",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": ["L1 whole surface", "L2 region/pane (left index · centre dossier · right context · toolbar/bottom)", "L3 component (Q-5 notice, assembly grid, catalogue table, integrity table, state track, saved-views nav, context cards)", "L4 micro detail (state-token column width/wrapping, header letter-spacing under AR, technical-token isolation, mirrored padding)"],
+  "RESPONSIVE_STATUS": "PASS (tested, evidence-bound) — 1440x1000 and 1024x900 in both locales: zero horizontal overflow (document and body), zero elements drawn outside the viewport, zero pane overlaps in normal states, assembly grid steps 3 columns (1440) → 2 columns (1024, matches the 1080px surface breakpoint), context pane collapses to an off-canvas drawer at the shared 1100px band and is proven OPENABLE in both locales (drawer probe: visible, 394x641; the single recorded overlap is the intentional drawer-over-stage overlay). fullPage == viewport (viewport-fixed shell), so the below-fold half of the centre pane is bound by a scrolled-bottom capture instead.",
+  "RTL_LTR_STATUS": "TESTED_BOTH_DIRECTIONS — locale is switched through the product's own Settings control (settings-ui path, panel closed afterwards) in every capture cell: EN/LTR lang=en dir=ltr and AR/RTL lang=ar dir=ar verified from documentElement in all 14 final probes. Intra-pane mirroring, logical spacing and Arabic typography are correct inside this surface's three regions (0 letter-spacing/uppercase findings under AR, was 13). Arabic is never shown under EN inside surface-owned regions (0 findings). LEFT index column headers now follow the active language (المرجع/حالة المصدر). Remaining: pane ORDER does not mirror in RTL (shared .cols{direction:ltr}), shared pane head/footer/toolbar labels are English-only under AR, shared bottom shelf is Arabic-only under EN, and switching language does not re-render the mounted surface copy without an explicit render — all shared, recorded and routed (not fixable inside POR-1 roots).",
+  "DEFECTS_FOUND": [
+    {"id": "POR-1/D1", "severity": "V2", "root_cause": "SURFACE_COMPOSITION", "state": "FIXED", "what": "LEFT index state token (RESOLVABLE / UNAVAILABLE, canonical technical tokens) clipped at the pane edge in BOTH directions: surface style forced table-layout:fixed with width:104px while the shared W04 rule pins th:last-child{width:86px} + white-space:nowrap (equal specificity → head order wins); content needs 92-133px.", "evidence_before": "evidence/pre-fix/PROBES.json (left hostScrollW 291 > clientW 278; cells clientW 86 vs scrollW 92/99; clippedRect hits) + evidence/baseline/por1-baseline-en-ltr-1440x1000-populated.png sha256 9a0e98ecedd52b848c5e61bc48aa9601d359b8b79cca175d0cba8e6668ea8c4f", "evidence_after": "evidence/final/PROBES.json (state column auto-sized 105px, cell scrollW == clientW, clippedRect 0 in all 14 probes)"},
+    {"id": "POR-1/D2", "severity": "V1", "root_cause": "SURFACE_COMPOSITION", "state": "FIXED", "what": "CENTRE catalogue broke technical tokens mid-word (RESOLVA/BLE, Eviden/ce) because overflow-wrap:anywhere was applied to every td strong, collapsing the column min-content.", "evidence_before": "evidence/baseline/…-en-ltr-1440x1000-populated.png (visual) + pre-fix catalogue cell widths", "evidence_after": "evidence/final/PROBES.json (state cells 124px, census contains RESOLVABLE with no line break inside the token in both locales)"},
+    {"id": "POR-1/D3", "severity": "V2", "root_cause": "SURFACE_COMPOSITION", "state": "FIXED", "what": "Arabic copy inside the surface rendered with Latin letter-spacing and/or text-transform:uppercase (13 elements: .pf-view-title .1em+uppercase, .w04-grid-cell dt .08em, .w04-notice strong, .w04-record-table th, and shared .w04-pill-label/.w04-rec-title/.w04-rec-sub presented inside this surface) — forbidden by VISUAL_EXECUTION_STANDARD §7 and bad for Arabic joining.", "evidence_before": "evidence/pre-fix/PROBES.json arabicType = 13 entries (AR 1440/1024, empty+populated)", "evidence_after": "evidence/final/PROBES.json arabicType = 0 in all probes (html[dir=rtl]-scoped normalization inside this surface's three regions only)"},
+    {"id": "POR-1/D4", "severity": "V1", "root_cause": "IMPLEMENTATION", "state": "FIXED", "what": "LEFT index column headers stayed English after a locale flip: the shared m0 stage evaluates adapter.columns once at mount (cols=columns||adapter?.columns), so a locale-aware getter cannot refresh them.", "evidence_before": "evidence/pre-fix/PROBES.json leftCols labels REFERENCE/SOURCE STATE under AR", "evidence_after": "evidence/after-fix2 + evidence/final PROBES.json leftHdr = [المرجع, حالة المصدر] under AR (surface-local syncHeaders in left-views.ts, idempotent, no shared file touched)"},
+    {"id": "POR-1/D5", "severity": "V1", "root_cause": "CONTENT_MODEL", "state": "FIXED", "what": "Domain-supplied export projection text (limitations + export note) displayed in English under AR in the RIGHT lens.", "evidence_before": "evidence/after-fix1 AR census.right (English limitations/note)", "evidence_after": "evidence/final AR census.right (Arabic) — presentation-layer i18n.domainCopy mapping; the domain stays English-only truth, unmapped strings pass through verbatim"},
+    {"id": "SHARED-1", "severity": "V2", "root_cause": "ARCHITECTURE", "state": "ROUTED_NOT_FIXED (outside POR-1 roots)", "what": "Pane ORDER never mirrors in RTL: donor blueprint .cols{direction:ltr} is baked into dist/foundation/donor.css and no body[data-foundation-direction=rtl] .cols{direction:inherit} override exists in shared extensions.css — structure pane stays left, inspector stays right under AR. Reproduced on the evidence surface too → app-wide.", "evidence": "evidence/direction-diag.json (portfolio AND evidence: .cols computed direction ltr under html[dir=rtl]) + final AR/EN captures"},
+    {"id": "SHARED-2", "severity": "V2", "root_cause": "SHARED_COMPONENT", "state": "ROUTED_NOT_FIXED", "what": "Shared W04 pane chrome is English-only under AR: left pane head 'Portfolio references', footer note 'N references in this session · references are never copied', 'Settings · language & direction' (w04-rescue.ts:849, :925).", "evidence": "evidence/final PROBES.json AR census.left"},
+    {"id": "SHARED-3", "severity": "V2", "root_cause": "SHARED_COMPONENT", "state": "ROUTED_NOT_FIXED", "what": "Toolbar command labels are English-only under AR: 'Curate Portfolio reference' (w04-rescue.ts:86), 'Filter Portfolio' / 'Export exact references' / 'Update governed grouping' (m0-controller-composition.ts:223-226).", "evidence": "evidence/final AR 1440 capture (toolbar row) + census"},
+    {"id": "SHARED-4", "severity": "V2", "root_cause": "SHARED_COMPONENT", "state": "ROUTED_NOT_FIXED", "what": "Shared bottom shelf hardcodes Arabic regardless of locale ('مغلق — افتحه للسجل أو المقارنة أو الاسترداد', 'عمل عميق') → Arabic shown under EN.", "evidence": "foundation/global/bottom-shelf.ts:178 + foundation/accepted-runtime.ts:537 (source) and the bottom strip visible in every EN capture"},
+    {"id": "SHARED-5", "severity": "V2", "root_cause": "ARCHITECTURE", "state": "ROUTED_NOT_FIXED", "what": "Choosing a language in Settings flips html lang/dir but does NOT re-render the mounted surface copy: centre copy stays in the previous language after the panel closes (measured for 1.5s), until an explicit m0 render.", "evidence": "harness/por1-locale-refresh-probe.mjs (before/afterClick/afterClose/afterWait) and harness/settings-lang probe output quoted in HANDOFF.md"},
+    {"id": "GUARD-1", "severity": "n/a (guard)", "root_cause": "EVIDENCE/ORACLE", "state": "RECORDED_NOT_MINE", "what": "npm run check reds: (a) browser.lineage_receipt_truthful — the documented known red while the Enterprise defect is open (6-flow receipt 4/6; the two FAILs are the global Enterprise flows, explicitly not this lane's); (b) browser.current_candidate_claim_truthful — assurance/BROWSER_CONFORMANCE_RECEIPT.json binds canonical tree 0c43d7f1; HEAD-without-delta equals that value exactly (proven via git-archive identity recomputation), so the red is caused by any lane's source delta and is re-bound by the Controller's exact-HEAD browser receipt at convergence. Nothing in POR-1 roots is allowed to rewrite that receipt.", "evidence": "evidence/falsification/npm-run-check.log + identity recomputation quoted in HANDOFF.md"}
+  ],
+  "DEFECT_SEVERITY": {"counts": {"V1": 3, "V2": 6, "V3": 0, "V4": 0}, "highest": "V2", "note": "5 surface-owned defects fixed and re-proven; 4 shared defects + 1 guard recorded and routed (SERIALIZED_HOTSPOT_REQUEST.md); none are V3/V4."},
+  "ROOT_CAUSE": {"SURFACE_COMPOSITION": 2, "CONTENT_MODEL": 1, "IMPLEMENTATION": 1, "ARCHITECTURE": 2, "SHARED_COMPONENT": 2, "EVIDENCE/ORACLE": 1},
+  "FIXES_APPLIED": [
+    "presentation-style.ts — LEFT index: auto table layout + width:auto on both columns with html+body[...] specificity so the state column always grows to its canonical token (shared 86px pin overridden inside this surface's scope only).",
+    "presentation-style.ts — CENTRE tables: technical tokens (dir=ltr) get overflow-wrap:normal so auto layout widens the column instead of splitting the token; long sha256 strings keep wrap-anywhere.",
+    "presentation-style.ts — html[dir=rtl] scoped letter-spacing:normal + text-transform:none inside the surface's three regions (Arabic typography).",
+    "presentation.ts — integrity envelope cell dir ltr → auto so the 71-char sha256 token still wraps inside its host.",
+    "left-views.ts — syncHeaders(): idempotent re-projection of the two index column headers in the active language (surface-owned copy; no shared file written).",
+    "i18n.ts + composition.ts — domainCopy presentation-layer localization of the exact domain export-projection strings (unmapped strings pass through verbatim)."
+  ],
+  "RECAPTURE_STATUS": "COMPLETE — rounds: SUPERSEDED-baseline-attempt1 (invalid: locale flip did not apply → AR byte-identical to EN, retained and labelled), baseline (pre-fix, 8), pre-fix (pre-fix + geometry probes, 8), after-fix1 (12), after-fix2 (12), final (14, primary evidence). Every capture carries path + sha256 + dims + viewport + locale + direction + state + commit/tree + timestamp in its round PROBES.json.",
+  "RECOMPARISON_STATUS": "COMPLETE — baseline → after-fix1 → after-fix2 → final at L1-L4 in both directions and both viewports; defect→fix→recapture→recompare loops closed with probe evidence for each of POR-1/D1..D5 (no blind repair loops; 3 bounded iterations).",
+  "REGRESSION_STATUS": "PASS — npm test 210/0 after every build (and twice for N5 identity); the 4 packet tests green after every build; mandated flow portfolio.assembly-and-export green after the delta; check-duplicate-mechanics PASS (322 files); git status identical before/after repeated suite runs.",
+  "EVIDENCE": {
+    "root": "writer-output/W04-PORTFOLIO/evidence/",
+    "primaryRound": "final/ (14 captures + PROBES.json)",
+    "primaryCaptureHashes": {
+      "por1-final-en-ltr-1440x1000-populated.png": "07e76a7dfe16c4e037f6b9c91e2bf12b0f6d8cf06ebed80b20a2e828890f84bb",
+      "por1-final-ar-rtl-1440x1000-populated.png": "984afdfce16c2e5c044f437d87abade2fbd6381e9799db758f958240fab5c23e",
+      "por1-final-en-ltr-1440x1000-populated-bottom.png": "4249d7c1ac5c837364184372f65a941d5dd111bbd7e15195bcec71a8e1360149",
+      "por1-final-ar-rtl-1440x1000-populated-bottom.png": "d00efcd4947df4c3c1845335a3c43514b3f77111bd2dc974f2334934b49fa0e2",
+      "por1-final-en-ltr-1024x900-populated.png": "812e56c04ae203e99698eb50c9faa6e619b4600c3c0fce24bc493a35e84d7448",
+      "por1-final-ar-rtl-1024x900-populated.png": "de3eb92944f1bc07a1cd1106f85387374c58353e4a15f14ddc3fae8982f00dd0",
+      "por1-final-en-ltr-1024x900-drawer-open.png": "97c95240d148d48ab2939019a4e32c14836d1684d8ef600444d03b2a04b25bde",
+      "por1-final-ar-rtl-1024x900-drawer-open.png": "9f75897c3d5c24639181cb0c8012c5fbe63fc8b22dd8f13f26ae0d24b6a8a7f9",
+      "por1-final-en-ltr-1440x1000-empty.png": "91022551b2ad2fcd64d4e5004c07db57dbb55eba6ed54a6753e5566e5057caf6",
+      "por1-final-ar-rtl-1440x1000-empty.png": "e4aa6973b6009915d5b0044ee09aed08b6d164e3619f0ea70f82cdca660200ee"
     },
-    "mustNotBeCloned": ["library", "learn", "evidence-intake", "mastery-progress"],
+    "flows": {
+      "baseline_pre_delta": {"dir": "flow-portfolio-20261002T044839Z/", "status": "PASS", "hashes": {"empty": "ae9b18bf7c528751ab9847d10740c2a29ee086f5dbcf4b967eb28ee1c359017c", "assembly": "ea4ecae8da3ccebf98013369c814157cba3dbab0977a047bb3d487e25a5458af", "export": "090c79e7f5c97415b5bade9454784564e89d5bfad71335d8378dbeb44b1c21aa"}},
+      "post_delta": {"dir": "flow-portfolio-postfix/", "status": "PASS after 5 environment-blocked attempts + 1 bootstrap-failed isolation attempt (all receipts retained)", "attempts": "attempt1..5 = page.goto networkidle timeout caused by a pending GET to http://127.0.0.1:4174/v1/platform/input-direction — a LOCAL RUNTIME SERVER OWNED BY LANE BKP-1 (pid started 05:17, npm run runtime:local in /workspaces/cep-lanes/BKP-1) whose keep-alive response stalls Playwright's networkidle; not touched, not killed (other lane's process). The 6th attempt used an isolated network namespace WITHOUT loopback up and failed as PROOF_SERVER_DID_NOT_START (recorded). The 7th ran in a network namespace with loopback up — the external runtime is unreachable there (connection refused, which is exactly the 'static proof server only, no local runtime API' limitation the receipt already documents) — and the flow PASSED with all assertions green.", "hashes": {"empty": "ae9b18bf7c528751ab9847d10740c2a29ee086f5dbcf4b967eb28ee1c359017c", "assembly": "57379d140df13a0dc253b48b7005fffd4c04fa70f7baabfa36f8838880c4a169", "export": "b5d77ba04fe20f1d1835d7ff0165e43add749cc91ef44244f08e04a95d83867b"}},
+      "sharedDirRestored": "writer-output/W04/BROWSER_RECEIPT.json restored byte-identical (sha256 3917a9cc77123735ee4994db9dd79ee48a6b3cbdaad0d7b640a439258dd1e931, git status clean) and the167 pre-existing evidence PNGs untouched; this lane's flow artifacts live only under writer-output/W04-PORTFOLIO/evidence/."
+    },
+    "falsification": "falsification/FALSIFICATION.json (32/32), N1_WRITE_GUARD.json (23/23, 19 refusals), N4_DUPLICATE_MECHANICS.json (status PASS, 322 files), N5_TWICE_IDENTICAL.json (PASS), npm-run-check.log",
+    "visionVerification": "R3b followed: every image read is cross-checked against (a) the file's sha256+dims taken immediately before/after the read, (b) the in-page DOM census captured in the same frame (PROBES.json), (c) pixel MAE against a known capture. ONE CONFLICT RECORDED: two reads of final/por1-final-en-ltr-1440x1000-populated-bottom.png (sha 4249d7c1…) returned a stale AR-looking frame; ground truth (DOM census lang=en dir=ltr, arabicVisible=false taken in the same frame, plus pixel MAE = 0.0 against the EN populated capture in shell/right/left regions and 8.89-11.42 vs the AR capture) proves the file is EN — the stale reads were discarded, and no verdict in this report rests on them. tesseract is not installed in this environment, so OCR cross-check was replaced by hash+dims+DOM census+pixel MAE."
+  },
+  "LINEAGE": {
+    "reference": {"path": "cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/04_PORTFOLIO/Cybersecurity Portfolio Evidence Dashboard.png", "classification": "CURRENT_FINAL_REFERENCE", "sha256": "3651bff6bee8098e8ab7633c3d5a9ebec0a0cb7e8701466932d21f53988ea37b", "dims": [1505, 1045], "bytes": 1525435},
+    "salvage_preserved": ["existing source build (5-file portfolio surface + adapter) — audited, continued, never restarted", "W04 workspace flow shots in writer-output/W04/evidence (167 pre-existing PNGs — untouched, hashes unchanged)", "PLAN_COMPLETE lineage: the pre-existing VISUAL_EXECUTION_REPORT.json PLAN block (surface identity, region plan, Q-5 binding constraints) is retained and carried forward in this report", "the pre-existing report itself is superseded by this file, not deleted"],
+    "supersededRetained": ["evidence/SUPERSEDED-baseline-attempt1-locale-not-applied/ (invalid AR capture: locale flip did not apply → AR byte-identical to EN)", "evidence/baseline/, evidence/pre-fix/, evidence/after-fix1/, evidence/after-fix2/ (earlier states, all retained and labelled)"],
+    "h02LawHonoured": "no reset/revert to 48fec276, no from-zero relaunch, no donor archaeology redone, no closed harness fix redone, evidence never deleted"
+  },
+  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED — CANDIDATE_ONLY, NO_SELF_PROMOTION; sole Controller review required. Surface-owned responsive/RTL work is evidenced and closed; four shared defects remain open and are routed to their seam owners via SERIALIZED_HOTSPOT_REQUEST.md.",
+  "BLOCKERS": [
+    "SHARED-1..SHARED-5 cannot be fixed inside POR-1 roots (they live in the donor blueprint / dist/foundation/donor.css, surfaces/composition/w04-rescue.ts, surfaces/m0-controller-composition.ts, foundation/global/bottom-shelf.ts + foundation/accepted-runtime.ts, and the shared preference→render wiring). Recorded and routed; no out-of-root write was attempted (N1 guard proves the refusal).",
+    "GUARD-1: assurance/BROWSER_CONFORMANCE_RECEIPT.json is Controller-owned evidence; re-binding it to this lane's tree is convergence work, not lane work.",
+    "Q-5 (Portfolio grouping authority) is an open Owner question — encountered, never decided: portfolio.group still refuses with AUTHORITY_DECISION_REQUIRED, groupingRef stays null, no grouping structure is rendered. Any sub-scope that would require deciding it was not started (recorded in HANDOFF.md §Owner/STOP)."
+  ],
+  "STAGE": "COMPLETE_WITH_ROUTED_SHARED_FINDINGS",
+  "PLAN": {
+    "carriedFrom": "pre-existing report (PLAN_COMPLETE lineage, retained)",
+    "surfaceIdentity": "Portfolio assembles the defensible record of demonstrated capability and its supporting evidence: it curates references to canonical Evidence/Mastery/Project records into one view, states each reference's source disposition truthfully, states what the Portfolio is and is not allowed to claim (Q-5 pending grouping authority, zero canonical copies, zero delete authority), and exports the assembly reproducibly. It never copies, deletes, invents or publishes canonical truth.",
     "bindingConstraintsHonoured": [
-      "Q-5 STOP/REPORT: no grouping structure, no capability-group sections, portfolio.group stays AUTHORITY_DECISION_REQUIRED, groupingRef stays null",
-      "presentation.test.ts: no `steps` block, no literal 'capability group', blocks[0] notice for empty, ids contain 'source-integrity', pill Grouping=AUTHORITY DECISION REQUIRED",
-      "tools/w04-reaudit-proofs.mjs P1.portfolio.Q5-refusal-preserved"
+      "Q-5 STOP/REPORT: no grouping structure, no capability-group sections, portfolio.group stays AUTHORITY_DECISION_REQUIRED, groupingRef stays null — proven by falsification Q5.* and by the mandated flow's negative case",
+      "presentation.test contract: no `steps` block, no literal 'capability group', blocks[0] notice for empty, ids contain 'source-integrity', pill Grouping=AUTHORITY DECISION REQUIRED — unchanged (no presentation-contract test was weakened)",
+      "no shared file written; shared mechanics untouched (anti-cloning + shared-component governance held)"
     ]
   },
-  "UPDATED_AT": "2026-09-30T00:00:00Z"
+  "UPDATED_AT": "2026-10-02T06:40:00Z"
 }

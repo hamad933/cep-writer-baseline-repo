@@ -1,0 +1,320 @@
+{
+  "schemaVersion": 1,
+  "lane": "POR-1",
+  "unit": "W04-PORTFOLIO",
+  "ranAt": "2026-10-02T06:11:22.470Z",
+  "candidate": {
+    "branch": "writer/mi-serial-lane/POR-1",
+    "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "tree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684"
+  },
+  "environment": {
+    "node": "v22.16.0",
+    "browser": "Chromium (Playwright package-local)"
+  },
+  "summary": {
+    "total": 32,
+    "pass": 32,
+    "fail": 0
+  },
+  "results": [
+    {
+      "id": "N2.add-invalid-reftype",
+      "ok": true,
+      "detail": {
+        "code": "EXACT_SOURCE_REF_REQUIRED",
+        "expected": "EXACT_SOURCE_REF_REQUIRED",
+        "mutated": false,
+        "ok": false,
+        "threw": null
+      }
+    },
+    {
+      "id": "N2.add-invalid-source-ref",
+      "ok": true,
+      "detail": {
+        "code": "EXACT_SOURCE_REF_REQUIRED",
+        "expected": "EXACT_SOURCE_REF_REQUIRED",
+        "mutated": false,
+        "ok": false,
+        "threw": null
+      }
+    },
+    {
+      "id": "N2.add-missing-member",
+      "ok": true,
+      "detail": {
+        "code": "EXACT_SOURCE_REF_REQUIRED",
+        "expected": "EXACT_SOURCE_REF_REQUIRED",
+        "mutated": false,
+        "ok": false,
+        "threw": null
+      }
+    },
+    {
+      "id": "N2.add-duplicate-id",
+      "ok": true,
+      "detail": {
+        "code": "MEMBERSHIP_ID_CONFLICT",
+        "expected": "MEMBERSHIP_ID_CONFLICT",
+        "mutated": false,
+        "ok": false,
+        "threw": null
+      }
+    },
+    {
+      "id": "N2.add-unsupported-action",
+      "ok": true,
+      "detail": {
+        "code": "CURATION_ACTION_UNSUPPORTED",
+        "expected": "CURATION_ACTION_UNSUPPORTED",
+        "mutated": false,
+        "ok": false,
+        "threw": null
+      }
+    },
+    {
+      "id": "N2.remove-unknown-member",
+      "ok": true,
+      "detail": {
+        "code": "MEMBER_UNKNOWN",
+        "expected": "MEMBER_UNKNOWN",
+        "mutated": false,
+        "ok": false,
+        "threw": null
+      }
+    },
+    {
+      "id": "N2.remove-without-revision-envelope",
+      "ok": true,
+      "detail": {
+        "code": "REVISION_ENVELOPE_REQUIRED",
+        "expected": "REVISION_ENVELOPE_REQUIRED",
+        "mutated": false,
+        "ok": false,
+        "threw": null
+      }
+    },
+    {
+      "id": "N2.remove-stale-revision-envelope",
+      "ok": true,
+      "detail": {
+        "code": "REVISION_CONFLICT",
+        "expected": "REVISION_CONFLICT",
+        "mutated": false,
+        "ok": false,
+        "threw": null
+      }
+    },
+    {
+      "id": "N2.source-state-invalid",
+      "ok": true,
+      "detail": {
+        "code": "PORTFOLIO_SOURCE_STATE_INVALID",
+        "expected": "PORTFOLIO_SOURCE_STATE_INVALID",
+        "mutated": false,
+        "ok": false,
+        "threw": null
+      }
+    },
+    {
+      "id": "N2.source-state-without-envelope",
+      "ok": true,
+      "detail": {
+        "code": "REVISION_ENVELOPE_REQUIRED",
+        "expected": "REVISION_ENVELOPE_REQUIRED",
+        "mutated": false,
+        "ok": false,
+        "threw": null
+      }
+    },
+    {
+      "id": "N2.filter-unknown-taxonomy-creates-nothing",
+      "ok": true,
+      "detail": {
+        "admitted": 0,
+        "taxonomyCreated": false
+      }
+    },
+    {
+      "id": "N2.state-unchanged-after-invalid-inputs",
+      "ok": true,
+      "detail": {
+        "before": "f1d86701eed9364c",
+        "after": "f1d86701eed9364c"
+      }
+    },
+    {
+      "id": "N2.no-false-receipts",
+      "ok": true,
+      "detail": {
+        "before": 1,
+        "after": 1
+      }
+    },
+    {
+      "id": "N3.no-provider-never-resolvable",
+      "ok": true,
+      "detail": {
+        "state": "UNVERIFIED_PROVIDER_UNBOUND"
+      }
+    },
+    {
+      "id": "N3.missing-source-not-resolvable",
+      "ok": true,
+      "detail": {
+        "state": "UNAVAILABLE"
+      }
+    },
+    {
+      "id": "N3.empty-export-is-empty-and-not-canonical",
+      "ok": true,
+      "detail": {
+        "members": 0,
+        "canonicalPublication": false
+      }
+    },
+    {
+      "id": "N3.presentation-no-fabricated-digest",
+      "ok": true,
+      "detail": {
+        "hasDigest": false,
+        "hasUnavailable": true
+      }
+    },
+    {
+      "id": "N3.empty-projection-empty-tokens",
+      "ok": true,
+      "detail": {
+        "firstBlock": "q5"
+      }
+    },
+    {
+      "id": "L1.export-members-hash-equal-domain-projection",
+      "ok": true,
+      "detail": {
+        "exportHash": "6da3b2d9281f5855",
+        "projectionHash": "6da3b2d9281f5855"
+      }
+    },
+    {
+      "id": "L1.export-twice-identical",
+      "ok": true,
+      "detail": {
+        "a": "7c8e09905b4eb0be",
+        "b": "7c8e09905b4eb0be"
+      }
+    },
+    {
+      "id": "L1.export-never-canonical",
+      "ok": true,
+      "detail": {
+        "canonicalPublication": false
+      }
+    },
+    {
+      "id": "L1.resolvable-envelope-hash-matches-canonical-source",
+      "ok": true,
+      "detail": {
+        "resolvable": 2,
+        "mismatches": []
+      }
+    },
+    {
+      "id": "L1.no-synthetic-resolvable",
+      "ok": true,
+      "detail": {
+        "synthetic": []
+      }
+    },
+    {
+      "id": "Q5.grouping-refused-authORITY-decision-required",
+      "ok": true,
+      "detail": {
+        "code": "AUTHORITY_DECISION_REQUIRED",
+        "mutated": false,
+        "groupingRef": null,
+        "groupingState": "UNGROUPED",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "L1.live-export-members-hash-equal-live-domain-projection",
+      "ok": true,
+      "detail": {
+        "exportHash": "976fb12a1514592e",
+        "projectionHash": "976fb12a1514592e"
+      }
+    },
+    {
+      "id": "L1.live-export-twice-identical",
+      "ok": true,
+      "detail": {
+        "a": "d70f87f1e82adb77",
+        "b": "d70f87f1e82adb77"
+      }
+    },
+    {
+      "id": "L1.live-canonical-envelope-hash-matches-source",
+      "ok": true,
+      "detail": {
+        "canonicalDigest": "sha256:c3c3c3c3c3c3c3c3c3c3c3c",
+        "observed": {
+          "digest": "sha256:c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3",
+          "rowCount": 1
+        }
+      }
+    },
+    {
+      "id": "L1.live-unbound-member-not-resolvable",
+      "ok": true,
+      "detail": {
+        "unbound": {
+          "state": "UNAVAILABLE",
+          "ref": "null"
+        }
+      }
+    },
+    {
+      "id": "L1.live-no-synthetic-resolvable",
+      "ok": true,
+      "detail": {
+        "resolvableMembers": [
+          "member-falsify-canonical:RESOLVABLE:null"
+        ],
+        "records": [
+          "member-falsify-canonical:RESOLVABLE:null",
+          "member-falsify-unbound:UNAVAILABLE:null"
+        ]
+      }
+    },
+    {
+      "id": "Q5.live-grouping-refused",
+      "ok": true,
+      "detail": {
+        "refused": {
+          "ok": false,
+          "code": "AUTHORITY_DECISION_REQUIRED",
+          "mutated": false
+        },
+        "groupingStillNull": true
+      }
+    },
+    {
+      "id": "L1.live-truth-ceiling-unchanged",
+      "ok": true,
+      "detail": {
+        "canonicalSourceCopies": 0,
+        "canonicalSourceDeleteAuthority": false,
+        "groupingAuthority": "AUTHORITY_DECISION_REQUIRED"
+      }
+    },
+    {
+      "id": "L1.live-no-page-errors",
+      "ok": true,
+      "detail": {
+        "pageErrors": []
+      }
+    }
+  ]
+}

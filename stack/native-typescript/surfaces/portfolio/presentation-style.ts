@@ -46,6 +46,12 @@ export const PORTFOLIO_PRESENTATION_CSS = `
 #foundationStage[data-m0-composition=portfolio] table.w04-record-table td small{display:block;margin-top:3px;font-size:11px;line-height:1.4;color:var(--text3);overflow-wrap:anywhere}
 #foundationStage[data-m0-composition=portfolio] table.w04-record-table td:first-child small{font-family:var(--mono,ui-monospace,monospace);letter-spacing:.01em}
 #foundationStage[data-m0-composition=portfolio] table.w04-record-table td[dir=ltr] strong{unicode-bidi:isolate}
+/* Technical tokens (RESOLVABLE, Evidence, UNGROUPED, false …) must never break mid-word:
+ * "overflow-wrap:normal" makes the auto table layout grow the column to the token instead of
+ * splitting it ("RESOLVA / BLE"). Long technical strings (the sha256 integrity envelope) are
+ * declared "dir:auto" in presentation.ts and keep the wrap-anywhere behaviour above. */
+#foundationStage[data-m0-composition=portfolio] table.w04-record-table td strong[dir=ltr],
+#foundationStage[data-m0-composition=portfolio] table.w04-record-table td small[dir=ltr]{overflow-wrap:normal}
 
 /* ── CENTER · dossier split: label/value rows must breathe in a half-width column ── */
 #foundationStage[data-m0-composition=portfolio] .w04-split{grid-template-columns:repeat(auto-fit,minmax(292px,1fr));gap:11px;align-items:stretch}
@@ -71,17 +77,36 @@ body[data-consumer=portfolio] #domainLeftRegion .pf-view-group{display:grid;gap:
 body[data-consumer=portfolio] #domainLeftRegion .pf-view-title{margin:0 0 3px;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3)}
 body[data-consumer=portfolio] #domainLeftRegion .pf-view-hint{margin:2px 0 0;font-size:10.5px;line-height:1.4;color:var(--text3)}
 
-/* ── LEFT · reference index: two columns, no clipped state token, RTL-correct column order ── */
-body[data-consumer=portfolio] #domainLeftRegion .m0-table{direction:inherit;table-layout:fixed}
-body[data-consumer=portfolio] #domainLeftRegion .m0-table th:last-child{width:104px;text-align:start}
-body[data-consumer=portfolio] #domainLeftRegion .m0-table td:last-child{text-align:start}
-body[data-consumer=portfolio] #domainLeftRegion .m0-table td:last-child strong{white-space:normal;overflow-wrap:anywhere;font-size:11px;font-weight:700;letter-spacing:.02em}
-body[data-consumer=portfolio] #domainLeftRegion .m0-table td{padding:9px 8px}
-body[data-consumer=portfolio] #domainLeftRegion .m0-table th{padding:4px 8px 6px}
+/* ── LEFT · reference index: two columns, RTL-correct column order ──
+ * Column sizing is left to AUTO layout so the state column always grows to its technical
+ * token (RESOLVABLE / UNAVAILABLE / SOURCE_SUPERSEDED …). The shared W04 rule pins this column
+ * to 86px with "white-space:nowrap", which CLIPS a Portfolio state token (11px bold needs
+ * 92–133px) — the tokens are canonical, so the column follows the token, never the reverse.
+ * "html" + "body[...]" prefixes raise specificity above the shared W04 consumer rule, which
+ * otherwise ties and wins on <head> order. ── */
+html body[data-consumer=portfolio] #domainLeftRegion .m0-table{direction:inherit;table-layout:auto}
+html body[data-consumer=portfolio] #domainLeftRegion .m0-table th:first-child{width:auto}
+html body[data-consumer=portfolio] #domainLeftRegion .m0-table th:last-child{width:auto}
+html body[data-consumer=portfolio] #domainLeftRegion .m0-table td:last-child{text-align:start;font-size:11px}
+html body[data-consumer=portfolio] #domainLeftRegion .m0-table td:last-child strong{font-size:11px;font-weight:700;letter-spacing:.02em;overflow-wrap:normal}
+html body[data-consumer=portfolio] #domainLeftRegion .m0-table td{padding:9px 8px}
+html body[data-consumer=portfolio] #domainLeftRegion .m0-table th{padding:4px 8px 6px}
 
 /* ── RIGHT · five context cards, matched to the reference's right pane ── */
 body[data-consumer=portfolio] #domainContext .m0-context-panel>.m0-semantic-group{padding:11px 12px}
 body[data-consumer=portfolio] #domainContext .m0-semantic-list>div{grid-template-columns:minmax(104px,.46fr) minmax(0,1fr)}
+
+/* ── RTL/AR typography: Arabic never inherits Latin tracking or a case transform ──
+ * VISUAL_EXECUTION_STANDARD §7 forbids all-caps as a hierarchy device in Arabic, and
+ * letter-spacing inserts visible gaps between joined Arabic glyphs. Applied only when
+ * html[dir=rtl] AND only inside this surface's three regions, so no other W04 surface's
+ * presentation changes (shared mechanics keep governing; this is surface-local presentation). */
+html[dir=rtl] body[data-consumer=portfolio] #domainLeftRegion :is(p,span,strong,dt,dd,th,h2,h3,h4,small,li),
+html[dir=rtl] body[data-consumer=portfolio] #domainContext :is(p,span,strong,dt,dd,th,h2,h3,h4,small,li),
+html[dir=rtl] #foundationStage[data-m0-composition=portfolio] :is(p,span,strong,dt,dd,th,h2,h3,h4,small,li){
+  letter-spacing:normal;
+  text-transform:none;
+}
 
 /* ── responsive: wide / standard / narrow / compact ── */
 @media (max-width:1320px){
