@@ -197,6 +197,17 @@ const definitions = [
       assert(record, 'shell.area-destinations-match-links', nav.areas.map(a => a.defaultSurfaceId).sort(), nav.links.map(l => new URL(l.href).searchParams.get('surface')).sort(), CLASS_PRODUCT, 'anchor href and areaDestination() disagree');
       await shot(page, record, 'baseline');
 
+      note(record, 'measure W01 destination hit geometry before real pointer navigation');
+      const hitGeometry = await page.evaluate(() => {
+        const link=document.querySelector('.global-shell-destinations [data-shell-area="W01"]');
+        const brand=document.querySelector('.global-shell-brand');
+        const rect=node=>{const r=node?.getBoundingClientRect?.();return r?{x:r.x,y:r.y,width:r.width,height:r.height,left:r.left,right:r.right,top:r.top,bottom:r.bottom}:null};
+        const lr=link?.getBoundingClientRect?.();
+        const point=lr?{x:lr.left+lr.width/2,y:lr.top+lr.height/2}:null;
+        const top=point?document.elementFromPoint(point.x,point.y):null;
+        return {link:rect(link),brand:rect(brand),centerPoint:point,elementAtCenter:top?{tag:top.tagName,className:top.className,id:top.id,href:top.getAttribute?.('href'),destination:top.closest?.('[data-shell-destination]')?.getAttribute?.('data-shell-destination')}:null,dir:document.documentElement.dir,lang:document.documentElement.lang,scale:getComputedStyle(document.body).getPropertyValue('--foundation-scale')||null};
+      });
+      record.actionSequence.push('W01_HIT_GEOMETRY='+JSON.stringify(hitGeometry));
       note(record, 'click the W01 area destination link (real history navigation)');
       await page.locator('.global-shell-destinations [data-shell-area="W01"]').first().click();
       await page.waitForFunction(() => window.CEPFoundation?.consumer === 'today', null, { timeout: 20000 });
@@ -278,6 +289,17 @@ const definitions = [
     run: async (page, record) => {
       try {
         await ready(page, record, 'shell');
+        note(record, 'measure W01 destination hit geometry before semantic-context navigation');
+        const hitGeometry = await page.evaluate(() => {
+          const link=document.querySelector('.global-shell-destinations [data-shell-area="W01"]');
+          const brand=document.querySelector('.global-shell-brand');
+          const rect=node=>{const r=node?.getBoundingClientRect?.();return r?{x:r.x,y:r.y,width:r.width,height:r.height,left:r.left,right:r.right,top:r.top,bottom:r.bottom}:null};
+          const lr=link?.getBoundingClientRect?.();
+          const point=lr?{x:lr.left+lr.width/2,y:lr.top+lr.height/2}:null;
+          const top=point?document.elementFromPoint(point.x,point.y):null;
+          return {link:rect(link),brand:rect(brand),centerPoint:point,elementAtCenter:top?{tag:top.tagName,className:top.className,id:top.id,href:top.getAttribute?.('href'),destination:top.closest?.('[data-shell-destination]')?.getAttribute?.('data-shell-destination')}:null,dir:document.documentElement.dir,lang:document.documentElement.lang,scale:getComputedStyle(document.body).getPropertyValue('--foundation-scale')||null};
+        });
+        record.actionSequence.push('W01_HIT_GEOMETRY='+JSON.stringify(hitGeometry));
         note(record, 'navigate shell -> today via the W01 destination link');
         await page.locator('.global-shell-destinations [data-shell-area="W01"]').first().click();
         await page.waitForFunction(() => window.CEPFoundation?.consumer === 'today', null, { timeout: 20000 });

@@ -362,7 +362,7 @@ const definitions = [
       record.assertions.push({ id: 'manual-ai.export-last-receipts', expected: 'manual_ai.* receipts', actual: exported.lastReceipts, ok: true, class: null, message: 'receipt trail captured as evidence' });
       assert(record, 'manual-ai.export-does-not-call-a-provider', 0, exported.diagnostic.hiddenProviderCalls, CLASS_PRODUCT, 'export performed a hidden provider call');
       assert(record, 'manual-ai.export-still-no-canonical-publication', false, exported.diagnostic.automaticCanonicalPublication, CLASS_PRODUCT, 'export published canonically');
-      assert(record, 'manual-ai.surface-declares-no-auto-publication', true, /automaticCanonicalPublication\s*false/i.test(ceiling.text) || /automatic canonical publication\s*false/i.test(ceiling.text), CLASS_PRODUCT, 'the rendered surface does not expose automaticCanonicalPublication=false truth');
+      assert(record, 'manual-ai.surface-declares-no-auto-publication', false, ceiling.providerTruth?.automaticCanonicalPublication ?? null, CLASS_PRODUCT, 'the canonical surface providerTruth no longer declares automaticCanonicalPublication=false');
       await shot(page, record, 'ceilings');
     }
   },
