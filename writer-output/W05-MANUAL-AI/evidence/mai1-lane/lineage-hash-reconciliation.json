@@ -1,0 +1,329 @@
+{
+  "schemaVersion": 1,
+  "classification": "LANE_MAI-1__LINEAGE_RECONSTRUCTION_EVIDENCE__CANDIDATE_ONLY__NO_SELF_PROMOTION",
+  "generatedBy": "lane MAI-1 STEP 1 (read-only verification of committed bytes)",
+  "candidate": {
+    "branch": "writer/mi-serial-lane/MAI-1",
+    "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "tree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+    "requiredParent": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc"
+  },
+  "method": "sha256 + byte size computed over the committed bytes in this worktree and compared with (a) every image citation in VISUAL_EXECUTION_REPORT.json and (b) every capture binding inside evidence/audit.json",
+  "reportCitationReconciliation": {
+    "reportFile": "writer-output/W05-MANUAL-AI/VISUAL_EXECUTION_REPORT.json",
+    "reportPreClarificationSha256": "a6be9f343d5cf2f912626030527b4f9b95347d3371fd798073da2f6f8cd23321",
+    "citations": [
+      {
+        "source": "BASELINE (superseded, retained)",
+        "file": "(baseline path)",
+        "claimed": "94f2f4209c3e7a3d237d70b0e62f14f168b99b468e1039b8537195cb8af0c2a6",
+        "tmpPath": "/tmp/opencode/w05-manual-ai/baseline/en-1536.png",
+        "verdict": "BASELINE_PATH_ABSENT",
+        "note": "referenced /tmp path no longer exists in this environment; bytes not recoverable; citation retained as historical provenance"
+      },
+      {
+        "source": "CANDIDATE L1 EN",
+        "file": "en-L1-whole.png",
+        "claimed": "35e02f996eb4a7d8e967e2d917dc3b0e2a305fc30408101226d3a7bf1cb93fab",
+        "claimedLen": 64,
+        "actual": "35e02f996eb4a7d8e967e2d917dc3b0e2a305fc30408101226d3a7bf1cb93fab",
+        "verdict": "MATCH_FULL",
+        "note": ""
+      },
+      {
+        "source": "CANDIDATE L1 AR",
+        "file": "ar-L1-whole.png",
+        "claimed": "ee5d821fdb8c15bf34ba6d28507457070e177c6d87f51747a33984719f42b6a3",
+        "claimedLen": 64,
+        "actual": "ee5d821fdb8c15bf34ba6d28507457070e177c6d87f51747a33984719f42b6a3",
+        "verdict": "MATCH_FULL",
+        "note": ""
+      },
+      {
+        "source": "CANDIDATE L2 center (stage)",
+        "file": "en-stage.png",
+        "claimed": "ba35d80e75558494f03eb06612c73920b3bcccd1c258e93dd90d2cb58781ccc4",
+        "claimedLen": 64,
+        "actual": "1f4799c3ec666f75fabb4e0510690cdb62b3b464c86d80653a108b342a3e6e29",
+        "verdict": "MISMATCH",
+        "note": "cited bytes were never committed (overwritten in the writer working tree before the Controller checkpoint); not retrievable from git history",
+        "recoverableAt": null
+      },
+      {
+        "source": "CANDIDATE L2 left",
+        "file": "en-left-region.png",
+        "claimed": "70d1b0205b65e7edc1029d2b3526ef874651ff5ad70760729cf377dbc638a949",
+        "claimedLen": 64,
+        "actual": "4fa45cdb65612d8767e6940aba1e45a846e3f829462af4a47f519904e278f203",
+        "verdict": "MISMATCH",
+        "note": "cited bytes were never committed (overwritten in the writer working tree before the Controller checkpoint); not retrievable from git history",
+        "recoverableAt": null
+      },
+      {
+        "source": "CANDIDATE L2 right",
+        "file": "en-right-region.png",
+        "claimed": "9c35d4a7e050286872ac3b5eabe5b5b576169137127848e12b7acefe49171210",
+        "claimedLen": 64,
+        "actual": "9c35d4a7e050286872ac3b5eabe5b5b576169137127848e12b7acefe49171210",
+        "verdict": "MATCH_FULL",
+        "note": ""
+      },
+      {
+        "source": "CANDIDATE L3 section C stepper",
+        "file": "en-secC-stepper-v2.png",
+        "claimed": "306abfbbffda0be17bb47fbde0dc1085d4b0af665ad4b7fd0bdbd7753ce2d43f",
+        "claimedLen": 64,
+        "actual": "306abfbbffda0be17bb47fbde0dc1085d4b0af665ad4b7fd0bdbd7753ce2d43f",
+        "verdict": "MATCH_FULL",
+        "note": ""
+      },
+      {
+        "source": "CANDIDATE L2 left/right AR",
+        "file": "ar-left-region.png",
+        "claimed": "12a0d74c11f4d0ff732913c87f24876e9ebd59db83e74aaaa23ce960074bf36c",
+        "claimedLen": 64,
+        "actual": "89180bba3e944b7c60c09ce28c9b9c9a41b380580e525b978dffb841bce5bcaf",
+        "verdict": "MISMATCH",
+        "note": "cited bytes were never committed (overwritten in the writer working tree before the Controller checkpoint); not retrievable from git history",
+        "recoverableAt": null
+      },
+      {
+        "source": "CANDIDATE L2 left/right AR",
+        "file": "ar-right-region.png",
+        "claimed": "47c73eb2bb389f2f75adc86d486147d9bfbac63675612e077aa1a9990f5a0c57",
+        "claimedLen": 64,
+        "actual": "47c73eb2bb389f2f75adc86d486147d9bfbac63675612e077aa1a9990f5a0c57",
+        "verdict": "MATCH_FULL",
+        "note": ""
+      },
+      {
+        "source": "RESPONSIVE",
+        "file": "en-1280x860.png",
+        "claimed": "731f4eda67e05f10b570460ec5abdca1370cc9c773482a45ec36ed5a3e2df869",
+        "claimedLen": 64,
+        "actual": "196cf9cc5d75728ece7c3971d15982cff8257e1227ba2acd00d121a7193768d2",
+        "verdict": "MISMATCH",
+        "note": "cited bytes were never committed (overwritten in the writer working tree before the Controller checkpoint); not retrievable from git history",
+        "recoverableAt": null
+      },
+      {
+        "source": "RESPONSIVE",
+        "file": "en-1024x900.png",
+        "claimed": "9dcbd2c8023d616bca1a3f9d493608bf88e6c3cc0d0f2a58f20c27983cd9ef7d",
+        "claimedLen": 64,
+        "actual": "d67b41fd42cbc3ed8aa25047d45ecffc09697f5b14a3f4fe9f928ac054e1a74c",
+        "verdict": "MISMATCH",
+        "note": "cited bytes were never committed (overwritten in the writer working tree before the Controller checkpoint); not retrievable from git history",
+        "recoverableAt": null
+      },
+      {
+        "source": "RESPONSIVE",
+        "file": "en-900x900.png",
+        "claimed": "6f5c83e5ffe19bbfe7e0ae8c3337d03914be0d4e6e5b36940e8f8ecbd7ad4543",
+        "claimedLen": 64,
+        "actual": "ecdda4a4a1dfcd012e31a6414e3f92d43a4a6394ba46950c87ff26c9b7e27c78",
+        "verdict": "MISMATCH",
+        "note": "cited bytes were never committed (overwritten in the writer working tree before the Controller checkpoint); not retrievable from git history",
+        "recoverableAt": null
+      },
+      {
+        "source": "RESPONSIVE",
+        "file": "en-760x900.png",
+        "claimed": "cc9d9698b63e0256179fc58ff298d6d38f1b3e63400b6700a664f7fee2cfb087",
+        "claimedLen": 64,
+        "actual": "cc9d9698b63e0256179fc58ff298d6d38f1b3e63400b6700a664f7fee2cfb087",
+        "verdict": "MATCH_FULL",
+        "note": ""
+      },
+      {
+        "source": "RESPONSIVE",
+        "file": "compact-L1.png",
+        "claimed": "c9bba94e6926ccc8990fb8aaf9c7acd9f1cdae967a4434e4d8143b3c71a54d10",
+        "claimedLen": 64,
+        "actual": "c9bba94e6926ccc8990fb8aaf9c7acd9f1cdae967a4434e4d8143b3c71a54d10",
+        "verdict": "MATCH_FULL",
+        "note": ""
+      },
+      {
+        "source": "RESPONSIVE",
+        "file": "compact-secC.png",
+        "claimed": "914c9b2d2d0f4548d0ed721616acbbd3815f99a3575e26dbe31b5d0b0c1f20e4",
+        "claimedLen": 64,
+        "actual": "f361349f947e998d0f5461587011f261752d012cc123333b9db2c4583471ac62",
+        "verdict": "MISMATCH",
+        "note": "cited bytes were never committed (overwritten in the writer working tree before the Controller checkpoint); not retrievable from git history",
+        "recoverableAt": null
+      },
+      {
+        "source": "D-02 V3",
+        "file": "en-secC-stepper-v2.png",
+        "claimed": "306abfbbffda0be17bb47fbde0dc1085d4b0af665ad4b7fd0bdbd7753ce2d43f",
+        "claimedLen": 64,
+        "actual": "306abfbbffda0be17bb47fbde0dc1085d4b0af665ad4b7fd0bdbd7753ce2d43f",
+        "verdict": "MATCH_FULL",
+        "note": ""
+      },
+      {
+        "source": "D-03 V3",
+        "file": "en-right-region.png",
+        "claimed": "9c35d4a7",
+        "claimedLen": 8,
+        "actual": "9c35d4a7e050286872ac3b5eabe5b5b576169137127848e12b7acefe49171210",
+        "verdict": "MATCH_ABBREVIATED",
+        "note": "report cites an abbreviated hash; committed bytes begin with the same prefix"
+      },
+      {
+        "source": "D-04 V3",
+        "file": "en-left-region.png",
+        "claimed": "70d1b020",
+        "claimedLen": 8,
+        "actual": "4fa45cdb65612d8767e6940aba1e45a846e3f829462af4a47f519904e278f203",
+        "verdict": "MISMATCH",
+        "note": "cited bytes were never committed (overwritten in the writer working tree before the Controller checkpoint); not retrievable from git history",
+        "recoverableAt": null
+      },
+      {
+        "source": "D-07 V2",
+        "file": "en-stage-bottom.png",
+        "claimed": "80be2303",
+        "claimedLen": 8,
+        "actual": "2f7083f5cd11728d4b7012f0d42c15b7731938f02d0290474adefce6a8c24fa0",
+        "verdict": "MISMATCH",
+        "note": "cited bytes were never committed (overwritten in the writer working tree before the Controller checkpoint); not retrievable from git history",
+        "recoverableAt": null
+      },
+      {
+        "source": "D-08 V1",
+        "file": "en-1536.png",
+        "claimed": "899fa582",
+        "claimedLen": 8,
+        "actual": "cfab2b323e478f84301518f5a4c1efb892577d7eee01203fadb331d7514b1efa",
+        "verdict": "MISMATCH",
+        "note": "cited bytes are the superseded predecessor still retrievable at git show f98eb46:writer-output/W05-MANUAL-AI/evidence/en-1536.png",
+        "recoverableAt": "f98eb46"
+      },
+      {
+        "source": "D-09 V1",
+        "file": "en-secC-stepper-v2.png",
+        "claimed": "306abfbbffda0be17bb47fbde0dc1085d4b0af665ad4b7fd0bdbd7753ce2d43f",
+        "claimedLen": 64,
+        "actual": "306abfbbffda0be17bb47fbde0dc1085d4b0af665ad4b7fd0bdbd7753ce2d43f",
+        "verdict": "MATCH_FULL",
+        "note": ""
+      },
+      {
+        "source": "D-09 V1",
+        "file": "verify-stepper-2x.png",
+        "claimed": "1710945a70bc3a57c0cd9fe558f27c1340c8e7d35c8d9853207a7cf18f97abb6",
+        "claimedLen": 64,
+        "actual": "1710945a70bc3a57c0cd9fe558f27c1340c8e7d35c8d9853207a7cf18f97abb6",
+        "verdict": "MATCH_FULL",
+        "note": ""
+      }
+    ],
+    "summary": {
+      "totalCitations": 22,
+      "matchFull": 10,
+      "matchAbbreviated": 1,
+      "mismatch": 10,
+      "baselinePathAbsent": 1
+    }
+  },
+  "auditJsonBinding": {
+    "file": "writer-output/W05-MANUAL-AI/evidence/audit.json",
+    "sha256": "c5d697ab073748c071ea39b9b9dddc78bb2ff44ec972f9bf872c7d1e13ca56da",
+    "structure": "two concatenated JSON documents (run audit + capture addendum); not a single valid JSON document — parsed sequentially, evidence left byte-identical",
+    "capturesBound": 23,
+    "verifiedAgainstCommittedBytes": 23,
+    "mismatches": [],
+    "summary": {
+      "total": 34,
+      "pass": 34,
+      "fail": 0
+    }
+  },
+  "captureInventory": {
+    "committedPngCount": 24,
+    "committedPngs": [
+      "ar-1536.png",
+      "ar-L1-whole.png",
+      "ar-left-region.png",
+      "ar-right-region.png",
+      "ar-secA-identity.png",
+      "ar-secC-stepper.png",
+      "ar-stage.png",
+      "compact-L1.png",
+      "compact-secC.png",
+      "en-1024x900.png",
+      "en-1280x860.png",
+      "en-1536.png",
+      "en-760x900.png",
+      "en-900x900.png",
+      "en-L1-whole.png",
+      "en-left-region.png",
+      "en-right-region.png",
+      "en-secC-stepper-v2.png",
+      "en-secC-stepper.png",
+      "en-secD-intake.png",
+      "en-secE-gate.png",
+      "en-stage-bottom.png",
+      "en-stage.png",
+      "verify-stepper-2x.png"
+    ],
+    "auditJsonBound": 14,
+    "addendumBound": 9,
+    "reportBoundExtra": "verify-stepper-2x.png (bound in DEFECTS_FOUND D-09 / EVIDENCE)",
+    "matrixClaim": "26 pngs (matrix row 14)",
+    "explanation": "24 committed pngs + the retained baseline capture 94f2f420 (referenced at /tmp/opencode/w05-manual-ai/baseline, path absent) + the superseded pre-recapture en-1536 899fa582 (retrievable at f98eb46:writer-output/W05-MANUAL-AI/evidence/en-1536.png) = 26 distinct images referenced by this unit",
+    "explanationStatus": "EXPLANATION_CONSISTENT_NOT_PROVEN"
+  },
+  "lineageTimeline": [
+    {
+      "commit": "44f922e",
+      "date": "2026-09-21",
+      "role": "baseline init: surfaces/manual_ai + adapters/manual_ai present"
+    },
+    {
+      "commit": "a2b1d29",
+      "date": "2026-09-24",
+      "role": "D03A command/settings convergence touched surfaces/manual_ai"
+    },
+    {
+      "commit": "b87313c",
+      "date": "2026-09-29",
+      "role": "W05 surface remediation checkpoint touched surfaces/manual_ai/composition.ts + adapters/manual_ai/domain-adapter.ts; first committed W05 browser receipt"
+    },
+    {
+      "commit": "f98eb46",
+      "date": "2026-09-30T18:44Z",
+      "role": "checkpoint(state): first VISUAL_EXECUTION_REPORT.json version (_STAGE=BUILD_COMPLETE__AUDIT_PENDING, VISUAL/RESPONSIVE/RTL/RECAPTURE=PENDING) + evidence/harness/audit.mjs + en-1536.png (899fa582)"
+    },
+    {
+      "commit": "d2b3e47",
+      "date": "2026-09-30T18:46Z",
+      "role": "checkpoint(state): remote SHA record; HEAD referenced by audit.json lineage"
+    },
+    {
+      "event": "2026-09-30T19:05:46Z",
+      "role": "evidence/harness/audit.mjs executed at HEAD d2b3e47 with 5 surface files dirty (per audit.json lineage) — 34/34 PASS"
+    },
+    {
+      "event": "2026-09-30T19:06:25Z",
+      "role": "capture-addendum.mjs executed — 9 region captures hash-bound"
+    },
+    {
+      "commit": "4dbdcf7",
+      "date": "2026-09-30T19:13:15Z",
+      "role": "checkpoint(quality): W05-MANUAL-AI reviewed — final terminal report (all §12 fields terminal), HANDOFF.md, audit.json, 23 pngs + harness; en-1536.png replaced by the 19:05 recapture (cfab2b32); surface source changes committed here"
+    }
+  ],
+  "finding": "TERMINAL_COMPLETE_PROVEN",
+  "findingReasoning": "The unit deliverables exist as terminal artifacts written by the original writer session: an interim report at f98eb46 (_STAGE=BUILD_COMPLETE__AUDIT_PENDING) evolving into the final report at 4dbdcf7 with every §12 field at a terminal value, a complete HANDOFF.md, a live 34/34 audit run timestamped 19:05:46Z against a real dirty worktree (5 surface files), 23 hash-bound captures plus verify-stepper-2x, and a truthful NOT_OWNER_ACCEPTED status with two disclosed open items. What was reconstructed later is only the git custody (the Controller checkpoint commits f98eb46 + 4dbdcf7), not the result content; post-hoc fabrication is contradicted by the interim→final report evolution, the in-commit dirty-file list matching CURRENT_CANDIDATE.working_tree_files, and the writer-authored \"no git add / no git commit\" disclosure.",
+  "caveats": [
+    "Report image citations: 10 of 22 do not resolve to bytes committed at HEAD (superseded pre-recapture frames overwritten by the 19:05 re-capture, or the absent /tmp baseline). See reportCitationReconciliation.",
+    "audit.json is two concatenated JSON documents, not one valid JSON document (evidence left byte-identical).",
+    "Matrix row 14 says 26 pngs; 24 are committed (see captureInventory explanation, not proven).",
+    "Historical HANDOFF.md states \"1 157 Arabic glyphs\" while audit.json records arabicGlyphs=1253; scopes (workbench vs whole document) are plausibly different but were not re-measured by this lane.",
+    "VISION_VERIFICATION_OPEN (D-08/VD-008) remains a Controller-side re-verification item; this lane did not re-run the historical harness, so evidence/audit.json stays byte-identical."
+  ]
+}

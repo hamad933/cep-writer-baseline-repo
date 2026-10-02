@@ -100,5 +100,26 @@
     "VISION_VERIFICATION_OPEN — full-frame image reads returned stale/mismatched frames twice for identical sha256 (D-08): once rendering the pre-change surface while tesseract OCR of those exact bytes returned the post-change surface, and once serving section-C pixels for the en-secE-gate file. Every reported visual finding is grounded on tesseract OCR + DOM geometry + hash-bound region crops, but the Controller must independently re-verify full-frame reads before acceptance.",
     "NO_SHARED_SEAM_REQUEST_FILED — no change to writer-forbidden surfaces/m0-controller-composition.ts or main.ts was needed; the surface achieves its composition entirely through surface-owned code (governor pattern proven by W05-CONFIGURATION).",
     "NOTE — two transient shared failures observed during this unit (a nested-backtick syntax error in a W04-PORTFOLIO template literal, and a missing MASTERY_CAUSAL_LAW export in W04-MASTERY's domain adapter). Both are outside my writable roots; both self-resolved. Retried rather than edited."
-  ]
+  ],
+  "MAI_1_LINEAGE_CLARIFICATION": {
+    "lane": "MAI-1",
+    "class": "CANDIDATE_ONLY__NO_SELF_PROMOTION__EVIDENCE_CLARIFICATION_ADDITIVE",
+    "recordedAt": "2026-10-02T05:01:27.414Z",
+    "preClarificationReportSha256": "a6be9f343d5cf2f912626030527b4f9b95347d3371fd798073da2f6f8cd23321",
+    "candidate": {
+      "branch": "writer/mi-serial-lane/MAI-1",
+      "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+      "tree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684"
+    },
+    "lineageFinding": "TERMINAL_COMPLETE_PROVEN — the terminal report, HANDOFF, 34/34 audit run (2026-09-30T19:05:46Z, HEAD d2b3e47, 5 surface files dirty) and 23 hash-bound captures are original writer-session output; Controller checkpoints f98eb46 (interim report, _STAGE=BUILD_COMPLETE__AUDIT_PENDING) and 4dbdcf7 (final report + HANDOFF + audit.json + captures) supplied git custody only — the result content was reconstructed nowhere.",
+    "changesToThisFile": "ADDITIVE ONLY — no pre-existing field, value, hash or verdict was edited, reordered or removed; original citation values are retained verbatim as historical writer output.",
+    "citationTruth": {
+      "auditJsonBoundCaptures": "23/23 capture bindings verify against the bytes committed at HEAD (sha256 + byte size); evidence/audit.json left byte-identical (sha256 c5d697ab073748c071ea39b9b9dddc78bb2ff44ec972f9bf872c7d1e13ca56da)",
+      "reportImageCitations": "22 total = 10 MATCH_FULL + 1 MATCH_ABBREVIATED + 10 MISMATCH + 1 BASELINE_PATH_ABSENT",
+      "mismatchMeaning": "the 9 mismatching frames (en-stage, en-left-region x2, ar-left-region, en-1280x860, en-1024x900, en-900x900, compact-secC, en-stage-bottom, en-1536) are superseded pre-recapture frames overwritten by the 19:05:46Z re-capture before the Controller checkpoint commit; only en-1536's cited predecessor (899fa582) is retrievable at f98eb46:writer-output/W05-MANUAL-AI/evidence/en-1536.png, the other 8 cited frames and the /tmp baseline (94f2f420, path absent) are not retrievable from this repository",
+      "fullReconciliation": "writer-output/W05-MANUAL-AI/evidence/mai1-lane/lineage-hash-reconciliation.json"
+    },
+    "captureInventory": "24 pngs committed at HEAD (23 bound in audit.json + verify-stepper-2x bound in DEFECTS_FOUND D-09/EVIDENCE). Matrix row 14 records 26 pngs; 24 + the absent /tmp baseline (94f2f420) + the superseded pre-recapture en-1536 (899fa582, retrievable at f98eb46) = 26 distinct referenced images — explanation consistent, not proven.",
+    "verdictImpact": "NONE — no PASS/FAIL, status, severity, evidence or acceptance field of this report was changed. ACCEPTANCE_STATUS remains NOT_OWNER_ACCEPTED; D-08 VISION_VERIFICATION_OPEN stays OPEN (Controller re-verification); D-10 stays OPEN (shared-component, outside lane roots)."
+  }
 }
