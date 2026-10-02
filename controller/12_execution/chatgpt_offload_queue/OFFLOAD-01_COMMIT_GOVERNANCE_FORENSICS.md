@@ -5,13 +5,15 @@
 | `TASK_ID` | `CEP-REC-OFFLOAD-01` |
 | `STATUS` | `READY_FOR_CHATGPT` |
 | `PURPOSE` | Produce the commit-by-commit forensic map of the 33 post-pre-overreach commits and the structural outline of the two wholesale-imported governance documents, so the Primary Controller can classify every material delta (KEEP / ZERO_LOSS_MERGE / REJECT / DISTILL / EVIDENCE_ONLY / REVERIFY / OWNER_DECISION_REQUIRED) without repeating this archaeology. |
-| `BASIS_HEAD` | `f5b78e3c7df5993e8208c914f5b328967e958ec4` |
-| `BASIS_TREE` | `47e97e04434316ec98796bfcf41436ae1e96fc20` |
+| `FORENSIC_TARGET_HEAD` | `f5b78e3c7df5993e8208c914f5b328967e958ec4` (immutable historical identity being analyzed) |
+| `FORENSIC_TARGET_TREE` | `47e97e04434316ec98796bfcf41436ae1e96fc20` |
+| `TASK_EXECUTION_SNAPSHOT_HEAD` | `cb76794d8cf34ba19877da470dbe568d423918d5` (snapshot this task is launched against; rebind on rebase) |
+| `TASK_EXECUTION_SNAPSHOT_TREE` | `c6df80ee15ea252016a08fedf12efb37daa64cbc` |
 | `WHY_CHATGPT_OFFLOAD` | Pure read-only git/governance archaeology over public GitHub history. No execution environment needed; Primary spot-check only. |
 
 ## EXACT_READ_SET
 
-1. `https://github.com/hamad933/cep-writer-baseline-repo` — fetch/inspect remote `writer/mi-serial` first; record actual HEAD/tree yourself and confirm they equal BASIS_HEAD/BASIS_TREE (if not, stop and report the delta).
+1. `https://github.com/hamad933/cep-writer-baseline-repo` — fetch/inspect remote `writer/mi-serial` first; record actual HEAD/tree yourself as the task execution snapshot. Do NOT require it to equal the FORENSIC_TARGET (later recovery bookkeeping commits are expected and irrelevant to this analysis); see INVALIDATION_CONDITIONS for the materiality rule.
 2. Commit list: `d5d7588fbd6445a66cdb7d57e0cc48e619591361..f5b78e3c7df5993e8208c914f5b328967e958ec4` (33 commits, all 2026-10-02, author hamad933). Use the GitHub compare/diff UI or raw file URLs pinned to exact SHAs.
 3. Per-commit diffs of the state-file families: `controller/CONTROLLER_GOVERNANCE.md`, `controller/state/CURRENT_STATE.md`, `controller/state/RESUME.md`, `controller/state/RESUME_STATE.md`, `controller/state/RESUME_STATE.json`, `controller/authority/OWNER_DECISION_LIVE_REGISTER.csv`, `controller/READ_FIRST.md`, `controller/authority/AUTHORITY_STATUS.json`, `controller/authority/EXECUTION_CARRIER_ROUTE_AUTHORITY.md`, `controller/10_dispatch/PARALLEL_EXECUTION_PLAN.md`, `controller/10_dispatch/SURFACE_DISPATCH_MATRIX.json`, `controller/state/CHECKPOINTS.json`, `controller/11_gates/*`.
 4. Structure (NOT full read): `controller/CONTROLLER_GOVERNANCE.md` at `f024a3730e1e87bf1aa0b7d903733d4035359070` (97,557 lines) vs at `f5b78e3` (96,027 lines); `controller/state/CURRENT_STATE.md` at `f024a37` (27,152 lines) vs at `f5b78e3` (315 lines).
@@ -40,7 +42,9 @@ READ_ONLY. Do not mutate Product/GitHub/Drive. Do not make final dispositions (K
 
 ## INVALIDATION_CONDITIONS
 
-If remote HEAD/tree differs from BASIS, STOP and report. If a claim depends on a file revision not reachable in git history, mark `UNRESOLVED_FROM_AVAILABLE_EVIDENCE`.
+Durable rule: **later remote movement invalidates this task only when the delta materially changes this task's evidence/read set or authority assumptions.** Unrelated control/queue/recovery bookkeeping commits after `cb76794` do NOT force a restart — record the observed snapshot and proceed. If a material change is found (e.g. a forensic-range file or its interpretation was modified), STOP on that sub-scope and report the delta for rebasing. If a claim depends on a file revision not reachable in git history, mark `UNRESOLVED_FROM_AVAILABLE_EVIDENCE`.
+
+Forensic comparison targets to preserve exactly: `d5d7588fbd6445a66cdb7d57e0cc48e619591361`, `f024a3730e1e87bf1aa0b7d903733d4035359070`, `58b8058932a8a34dfb424025466b1359db2cf3fd`, `f5b78e3c7df5993e8208c914f5b328967e958ec4`.
 
 ## RETURN/CONSUMPTION_INSTRUCTIONS
 

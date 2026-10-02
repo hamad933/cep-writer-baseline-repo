@@ -5,8 +5,10 @@
 | `TASK_ID` | `CEP-REC-OFFLOAD-02` |
 | `STATUS` | `READY_FOR_CHATGPT` |
 | `PURPOSE` | Extract EVERY unique durable claim from the pre-overreach resume/checkpoint/dispatch artifacts and map each claim to its current owner in the tree at `f5b78e3` (or mark `NO_CURRENT_OWNER_FOUND`), producing the key-by-key zero-loss map of the `58b8058` RESUME_STATE.json compaction. This is the evidentiary backbone of the recovery's zero-loss proof (gate 3). |
-| `BASIS_HEAD` | `f5b78e3c7df5993e8208c914f5b328967e958ec4` |
-| `BASIS_TREE` | `47e97e04434316ec98796bfcf41436ae1e96fc20` |
+| `FORENSIC_TARGET_HEAD` | `f5b78e3c7df5993e8208c914f5b328967e958ec4` (immutable historical identity whose tree is the current-owner search target) |
+| `FORENSIC_TARGET_TREE` | `47e97e04434316ec98796bfcf41436ae1e96fc20` |
+| `TASK_EXECUTION_SNAPSHOT_HEAD` | `cb76794d8cf34ba19877da470dbe568d423918d5` (snapshot this task is launched against; rebind on rebase) |
+| `TASK_EXECUTION_SNAPSHOT_TREE` | `c6df80ee15ea252016a08fedf12efb37daa64cbc` |
 | `WHY_CHATGPT_OFFLOAD` | Read-only git-history extraction and cross-tree claim mapping; pure archaeology. Primary spot-check only. |
 
 ## EXACT_READ_SET
@@ -49,7 +51,9 @@ READ_ONLY; no mutation; no final dispositions (whether a LOST claim needs restor
 
 ## INVALIDATION_CONDITIONS
 
-If remote HEAD/tree differs from BASIS, STOP and report. If a historical path is unreachable, mark it, do not guess.
+Durable rule: **later remote movement invalidates this task only when the delta materially changes this task's evidence/read set or authority assumptions.** Unrelated control/queue/recovery bookkeeping commits after `cb76794` do NOT force a restart — record the observed snapshot and proceed (search current-owner locations against `f5b78e3` as the forensic target, noting any post-`f5b78e3` owner additions you observe). If a material change is found, STOP on that sub-scope and report the delta. If a historical path is unreachable, mark it, do not guess.
+
+Forensic comparison targets to preserve exactly: `d5d7588fbd6445a66cdb7d57e0cc48e619591361`, `f024a3730e1e87bf1aa0b7d903733d4035359070`, `58b8058932a8a34dfb424025466b1359db2cf3fd`, `f5b78e3c7df5993e8208c914f5b328967e958ec4`.
 
 ## RETURN/CONSUMPTION_INSTRUCTIONS
 

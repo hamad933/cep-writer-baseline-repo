@@ -5,13 +5,15 @@
 | `TASK_ID` | `CEP-REC-OFFLOAD-03` |
 | `STATUS` | `READY_FOR_CHATGPT` |
 | `PURPOSE` | Distill the nine helper-audit lanes (H01–H09) plus H03-R2 into: (a) durable-vs-temporary claim classification; (b) a per-Surface salvage/truth crosswalk feeding the 23-Surface evidence-reuse matrix; (c) shared-owner/seam inventory for the collision DAG; (d) status of H09's required controller corrections; (e) the Drive→GitHub durable-delta zero-loss check. Consumes existing audits first — no re-audit from zero. |
-| `BASIS_HEAD` | `f5b78e3c7df5993e8208c914f5b328967e958ec4` |
-| `BASIS_TREE` | `47e97e04434316ec98796bfcf41436ae1e96fc20` |
+| `FORENSIC_TARGET_HEAD` | `f5b78e3c7df5993e8208c914f5b328967e958ec4` (immutable historical identity of the audited tree) |
+| `FORENSIC_TARGET_TREE` | `47e97e04434316ec98796bfcf41436ae1e96fc20` |
+| `TASK_EXECUTION_SNAPSHOT_HEAD` | `cb76794d8cf34ba19877da470dbe568d423918d5` (snapshot this task is launched against; rebind on rebase) |
+| `TASK_EXECUTION_SNAPSHOT_TREE` | `c6df80ee15ea252016a08fedf12efb37daa64cbc` |
 | `WHY_CHATGPT_OFFLOAD` | ~450 KB of Drive-hosted audit prose + GitHub crosswalks; purely read-only analysis. Primary spot-check only. |
 
 ## EXACT_READ_SET
 
-Fetch actual remote HEAD/tree first; confirm equals BASIS.
+Fetch actual remote HEAD/tree first; record it as the task execution snapshot (do NOT require equality with the forensic target — see INVALIDATION_CONDITIONS).
 
 GitHub side:
 1. `controller/12_execution/H08_LOCAL_RESIDUE_DISPOSITION.md` (54-path dispositions) and `H08_DELETED_TEMP_UNIQUE_KNOWLEDGE_CLOSURE.md`.
@@ -50,7 +52,9 @@ READ_ONLY for both GitHub and Drive. No mutation. No final gap/readiness/Writer/
 
 ## INVALIDATION_CONDITIONS
 
-If remote HEAD/tree differs from BASIS, STOP. If Drive access fails for a named file, report it unresolved — never substitute a lookalike.
+Durable rule: **later remote movement invalidates this task only when the delta materially changes this task's evidence/read set or authority assumptions.** Unrelated control/queue/recovery bookkeeping commits after `cb76794` do NOT force a restart — record the observed snapshot and proceed against the forensic target. If a material change is found, STOP on that sub-scope and report the delta. If Drive access fails for a named file, report it unresolved — never substitute a lookalike.
+
+Forensic comparison targets to preserve exactly: `d5d7588fbd6445a66cdb7d57e0cc48e619591361`, `f024a3730e1e87bf1aa0b7d903733d4035359070`, `58b8058932a8a34dfb424025466b1359db2cf3fd`, `f5b78e3c7df5993e8208c914f5b328967e958ec4`.
 
 ## RETURN/CONSUMPTION_INSTRUCTIONS
 
