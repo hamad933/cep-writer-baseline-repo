@@ -1,5 +1,5 @@
 {
- "REPORT_STATUS": "IN_PROGRESS — stage 1 baseline + stage 3 source + stage 4 build + stage 5 first compare cycle done; second compare cycle pending a rebuild that is BLOCKED-transient on sibling units' in-flight TypeScript syntax errors (surfaces/portfolio/presentation-style.ts backtick inside a template literal at the time of writing; earlier surfaces/manual_ai/presentation.ts). This unit never edits their files.",
+ "REPORT_STATUS": "CYCLE_2_COMPLETE — REL-1 lane salvage continuation. Cycle 1 left 1 open defect of 17 found/16 fixed (D-06) plus the 2 bottom-shelf review issues (1 surface-owned → fixed in-lane, 1 shared-owned → STOP + writer-output/W05-RELEASES/SERIALIZED_HOTSPOT_REQUEST.md). Cycle 2: build 210/0 twice identical, packet tests releases 12/0 + S19 17/0 + CG6 6/0, w05-browser-flows 8/8 (releases.view included), audit 29/29 with 17 hash-bound captures at exact HEAD+delta, falsification 39/39 (N1-N5 + lane-specific). The earlier CYCLE_2_PENDING_REBUILD blocker (sibling in-flight TS errors) cleared. Status stays NOT_OWNER_ACCEPTED.",
  "SURFACE": "releases",
  "OWNER": "W05-RELEASES",
  "REFERENCE": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/07_RELEASES/CEP_SYSTEM_RELEASES_REFERENCE.png",
@@ -16,10 +16,23 @@
  },
  "SURFACE_PURPOSE": "Releases: manage release candidates and their comparison truth — including the honest states where comparison is BLOCKED/unavailable and where a view is EMPTY. Truthfulness of release state (technical readiness vs Owner authorization vs deployment observation) is the core work.",
  "CURRENT_CANDIDATE": {
-  "branch": "writer/mi-serial",
-  "baseCommit": "68341ec18f7936569bccb39ec7a3eb997d0b6ccf",
-  "state": "UNCOMMITTED_WORKTREE_DELTA",
-  "note": "HEAD moves as sibling units land checkpoints; the candidate is identified by per-file sha256 below plus this base commit."
+  "branch": "writer/mi-serial-lane/REL-1",
+  "baseCommit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+  "state": "CANDIDATE_DELTA_2_FILES (committed on the lane branch; see CANDIDATE_IDENTITY)",
+  "note": "Cycle-1 material was already committed in this lane's ancestry (baseline commit 68341ec18f7936569bccb39ec7a3eb997d0b6ccf, audit commit 4dbdcf79b9574ffc0cba7a441ac6893744883606 on writer/mi-serial). REL-1 adds only the cycle-2 delta listed under CANDIDATE_IDENTITY.changedPaths."
+ },
+ "CANDIDATE_IDENTITY": {
+  "parentCommit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+  "parentStackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+  "canonicalSourceSha256Before": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+  "canonicalSourceSha256After": "8dc756f337cb95eab528b8458b56ec14e0453211f482fba1c70bd19cc085420c",
+  "changedPaths": [
+    "stack/native-typescript/surfaces/releases/composition.ts (sha256 90439aec32a5a1d5219b592b07aaea200b76278866ff8522d98a4d639ec64bbd)",
+    "stack/native-typescript/surfaces/releases/runtime.ts (sha256 94912cbd68b5757ea9bf0bd2fb0a10c5719e6a24747f08914e69908b58cf81c0)"
+  ],
+  "candidateCommit": "893d03e9d9a5238c277e0053c39b3d820ff49481",
+  "candidateStackTree": "62b2e075b9cd003183f5c1fedce5e6739a94b5e1",
+  "note": "canonicalSourceSha256 = tools/source-tree-identity.mjs over stack/native-typescript (338 files). The 'After' value differs from assurance/BROWSER_CONFORMANCE_RECEIPT.json's recorded 'Before' value purely because this lane's 2-file delta changed the source tree; that receipt is Controller-owned and is force-restored by the mission cleanup step (git checkout -- assurance), so this lane reports the delta truthfully instead of faking the receipt."
  },
  "FILES_CHANGED": {
   "writableRoots": [
@@ -62,18 +75,19 @@
    "authority/**"
   ]
  },
- "FUNCTIONAL_STATUS": "PASS (26/26 automated checks in the first compare cycle; see EVIDENCE) — route opens on ?surface=releases; surface-owned stage (no generic workbench, h1 = candidate ID); candidate selection from the left list re-renders workbench+context; state filter, channel filter, search (with focus+caret retained), clear filters, records tabs (execution records / events / package), problems-only toggle; empty search yields a truthful EMPTY block ('an empty view is not green readiness'); compare-truth chip shows READY/BLOCKED with the real availability reason; disabled toolbar command carries its real reason ('Authorization request provider unavailable'); 0 uncaught page errors.",
+ "FUNCTIONAL_STATUS": "PASS (26/26 automated checks in the first compare cycle; RE-VERIFIED IN CYCLE 2 — audit 29/29 at exact HEAD+delta, packet tests releases 12/0 + S19 17/0 + CG6 6/0, w05-browser-flows 8/8 incl. releases.view, npm test 210/0 twice identical; see EVIDENCE) — route opens on ?surface=releases; surface-owned stage (no generic workbench, h1 = candidate ID); candidate selection from the left list re-renders workbench+context; state filter, channel filter, search (with focus+caret retained), clear filters, records tabs (execution records / events / package), problems-only toggle; empty search yields a truthful EMPTY block ('an empty view is not green readiness'); compare-truth chip shows READY/BLOCKED with the real availability reason; disabled toolbar command carries its real reason ('Authorization request provider unavailable'); bottom shelf now carries release-meaningful deep content (D-06 closed); 0 uncaught page errors.",
  "STRUCTURAL_STATUS": "PASS — regions: banner 1536x56, toolbar 648x31, left structure pane 304, centre stage 790 (scrolls), right context pane 420, bottom shelf 39. Centre = header (eyebrow · version / h1 / state badge / compare chip / purpose) -> 4-fact strip (Version, Channel, Target, Authorization) -> three-truth bar (3 cards) -> TWO-COLUMN workbench (colA 371px: identity, source, scope, stages, notes · colB 371px: gates, verification results, rollback readiness, approvers) -> full-width verification-records block with 3 tabs -> record-basis footer. Left pane: purpose line + search/sort + 6 state rows with counts + 3 channel chips + 3 environment rows + 6 candidate cards (3-line rhythm). Right pane: candidate chips + blocker (red) + verifications 3/5 + required approvals 3 + expected scope kv + rollback note + risks chips + interpretation flow + next-action card.",
- "VISUAL_STATUS": "CANDIDATE_COMPLETE_PENDING_CONTROLLER_REVIEW (second cycle pending) — L1/L2/L3/L4 comparison performed against the OWNER_CONFIRMED_FINAL_REFERENCE in EN+LTR and AR+RTL after the first compare cycle; 17 defects found so far, 16 fixed, 1 open reported with root cause and owner. Self-acceptance is NOT claimed: status remains NOT_OWNER_ACCEPTED.",
+ "VISUAL_STATUS": "CANDIDATE_COMPLETE_PENDING_CONTROLLER_REVIEW (cycle 2 re-verified) — L1/L2/L3/L4 comparison performed against the OWNER_CONFIRMED_FINAL_REFERENCE in EN+LTR and AR+RTL in cycle 1, and the cycle-2 delta was re-captured and re-compared at exact HEAD+delta (audit 29/29, 17 hash-bound captures, whole/region/pane/component crops read and inspected). 17 defects found, 16 fixed (D-06 closed in cycle 2), 1 open (D-17, shared-owned → SERIALIZED_HOTSPOT_REQUEST.md filed). Self-acceptance is NOT claimed: status remains NOT_OWNER_ACCEPTED.",
  "VISUAL_COMPARISON_LEVELS_COMPLETED": {
   "L1_WHOLE_SURFACE": "DONE (cycle 1) — whole-surface EN capture (1536x1024) read + tesseract OCR of the same bytes; region inventory compared with the reference (page header/action strip, structure pane, candidate list, detail workbench, release-context pane); balance/density/identity reviewed; baseline vs candidate side by side (baseline=generic workbench, candidate=reference composition). AR/RTL whole-surface capture also read + OCR'd.",
   "L2_REGION_PANE": "DONE (cycle 1) — element crops of left structure pane (304x803), centre workbench (790x803), right context pane (420x803), 4-fact strip (754x122) and three-truth bar (754x269) in BOTH languages, each with path+sha256+dims+bytes in audit.json; pane proportions vs reference recorded (reference: structure+list ~465px, detail ~800px, context ~270px -> candidate: structure+list 304, detail 790, context 420).",
   "L3_COMPONENT": "DONE (cycle 1) — candidate cards, state rows, channel chips, four-fact strip, three-truth cards, gate chips, verification-result rows, stage pipeline, approver rows, tab strip, records tables, context items: geometry/states/counts/text verified by DOM measurement + OCR (audit.json structure.* checks).",
   "L4_MICRO": "DONE (cycle 1) — type scale (h1 26/800, block h2 15/750, body 14/1.55, meta 11.3, micro 11-11.6), spacing rhythm (root gap 14, block padding 12/14, grid gap 12, radius 12), contrast (body #edf6fc on #081522/#0a1a29; tone colours #7ee2b4/#f7d39a/#ff9ba4 on dark), Arabic eyebrow loses uppercase/letter-spacing, bdi isolation on every ID/SHA/path/time, focus-visible outlines on all controls. Micro defects found and fixed: truncated build/commit values, metric-label clipping at 1024/820, non-uniform card heights, duplicated pane titles.",
-  "METHOD_NOTE": "Vision channel claims were cross-checked against ground truth on the same bytes: sha256 recorded per capture before/after reading, and tesseract OCR of en-1536-top / crop-left-en / crop-center-en / crop-right-en / ar-1536-top was compared against what was read (Arabic text in the AR capture and English text in the EN capture matched the OCR output). Geometry claims come from DOM measurement inside the page, not from the image channel."
+  "METHOD_NOTE": "Vision channel claims were cross-checked against ground truth on the same bytes: sha256 recorded per capture before/after reading, and tesseract OCR of en-1536-top / crop-left-en / crop-center-en / crop-right-en / ar-1536-top was compared against what was read (Arabic text in the AR capture and English text in the EN capture matched the OCR output). Geometry claims come from DOM measurement inside the page, not from the image channel.",
+  "CYCLE_2": "L1 (whole surface, EN 1536x1024 + AR/RTL) + L2 (left/centre/right pane crops + full shelf crop) + L3 (the four bottom-shelf sections, three-truth cards, gates/results rows, candidate cards) + L4 (shelf section typography/spacing, bdi-isolated SHAs, ceiling tokens) completed against the same OWNER_CONFIRMED_FINAL_REFERENCE intent at exact HEAD fe1bb98 + the 2-file delta; before/after shelf captures compared directly (289b522f… -> 7167684e…); residual shared-chrome Arabic recorded as D-17 instead of being claimed as a pass."
  },
- "RESPONSIVE_STATUS": "PARTIAL PASS (cycle 1) — composed for wide/standard/narrow/compact: no horizontal document overflow at 1536/1280/1024/820; deliberate container reflows (two-column workbench -> single column below 620px container, scope metrics 4-across -> 2x2 below 700px container, strip 4 -> 2 facts); cycle-1 defects at 1024/820 (metric label clipping) were FIXED and re-checked; collapsed-state comparison of the shared pane toggles is scheduled for cycle 2.",
- "RTL_LTR_STATUS": "PASS (cycle 1) — AR/RTL: document lang=ar dir=rtl, heading direction rtl, no horizontal overflow, no stage h-scroll, 1997 Arabic glyphs of 5127 surface characters, eyebrow text-transform falls back to none (no all-caps hierarchy in Arabic), left pane stays the structure pane. EN/LTR: 0 Arabic glyphs across stage+left+right+toolbar after switching back (round-trip verified). All layout uses logical properties (padding-inline-start, margin-inline-start, text-align:start) and every ID/SHA/path/time is wrapped in <bdi dir=ltr>.",
+ "RESPONSIVE_STATUS": "PASS (cycle 1 + CYCLE 2 RE-RUN) — composed for wide/standard/narrow/compact: no horizontal document overflow at 1536/1280/1024/820; deliberate container reflows (two-column workbench -> single column below 620px container, scope metrics 4-across -> 2x2 below 700px container, strip 4 -> 2 facts); cycle-1 defects at 1024/820 (metric label clipping) FIXED; cycle-2 audit responsive.{1280x860,1024x900,820x900} all PASS with zero clipped elements; collapsed-state comparison of the shared pane toggles re-checked in cycle 2 (toggles localised, surface content never truncated).",
+ "RTL_LTR_STATUS": "PASS (cycle 1 + CYCLE 2 RE-RUN) — AR/RTL: document lang=ar dir=rtl, heading direction rtl, no horizontal overflow, no stage h-scroll, 1997 Arabic glyphs of 5127 surface characters, eyebrow text-transform falls back to none (no all-caps hierarchy in Arabic), left pane stays the structure pane, bottom-shelf projection localises to Arabic (cycle-2 check LANE.shelf-ar-localised). EN/LTR: 0 Arabic glyphs across stage+left+right+toolbar after switching back (round-trip verified), bottom-shelf projection 0 Arabic characters (cycle-2 check LANE.shelf-en-no-arabic-in-surface-owned-projection) — the only Arabic left in an EN session is the shared foundation shelf chrome, which is D-17 and filed as SERIALIZED_HOTSPOT_REQUEST.md. All layout uses logical properties (padding-inline-start, margin-inline-start, text-align:start) and every ID/SHA/path/time is wrapped in <bdi dir=ltr>.",
  "DEFECTS_FOUND": [
   {
    "id": "D-01",
@@ -121,7 +135,7 @@
    "severity": "V2",
    "rootCause": "SURFACE_COMPOSITION",
    "evidence": "composition.bottomProjection (pre-change)",
-   "status": "OPEN_PARTIAL — bottom shelf is shared mechanics (BottomDeepWorkOwner + domain-deep-projection provider); release verification content was composed into the centre workbench instead of claiming the shared shelf"
+   "status": "FIXED (cycle 2) — the shelf is claimed through the sanctioned read-only provider path (w05.releases.deep-projection) that m0 registers from this unit's composition.bottomProjection(); the raw diagnostics/lastAction string is gone and the shelf now carries four release-meaningful sections (selected candidate identity · three separated truths with ceilings · gates/verification/rollback/approvers · recorded verification events), localised live per active language. Evidence: evidence/cycle2/before-en-bottom-shelf.png (sha256 289b522f…) vs evidence/cycle2/after2-en-bottom-shelf.png (sha256 7167684e…) + falsification.json D06.* 5/5"
   },
   {
    "id": "D-07",
@@ -209,7 +223,7 @@
    "severity": "V1",
    "rootCause": "SHARED_COMPONENT",
    "evidence": "en-1536-top.png bottom shelf; accepted-runtime.ts renderBottom hardcoded string",
-   "status": "OPEN_REPORTED — shared shelf owned by W01-SHELL/m0; deliberately NOT claimed by this unit (claiming #bottomContent risks a render fight with BottomDeepWorkOwner)"
+   "status": "OPEN__SHARED_OWNED__REQUEST_FILED — the Arabic bottom-shelf strings are written by foundation/global/bottom-shelf.ts:178 (+ accepted-runtime.ts:537/728 donor-native path) which is outside this lane's roots; deliberately NOT claimed by this unit (claiming #bottomContent/#bottomSummary risks a render fight with BottomDeepWorkOwner). Filed as writer-output/W05-RELEASES/SERIALIZED_HOTSPOT_REQUEST.md items HS-REL-1-01/02 (+ optional HS-REL-1-03). Surface-owned projection now measures 0 Arabic characters under EN."
   }
  ],
  "DEFECT_SEVERITY": {
@@ -218,7 +232,7 @@
   "V2": 8,
   "V1": 4,
   "FIXED": 16,
-  "OPEN_REPORTED": 2
+  "OPEN_SHARED_REQUESTED": 1
  },
  "ROOT_CAUSE": {
   "SURFACE_COMPOSITION": 8,
@@ -228,8 +242,10 @@
   "RESPONSIVE_RULE": 1,
   "SHARED_COMPONENT": 4,
   "OPEN_DEFECTS": {
-   "D-06": "SURFACE_COMPOSITION (shared bottom shelf not claimed; content composed into centre)",
-   "D-17": "SHARED_COMPONENT (Arabic bottom-shelf summary in EN; owner W01-SHELL)"
+   "D-17": "SHARED_COMPONENT — Arabic bottom-shelf closed/open summary + donor chrome written by foundation/global/bottom-shelf.ts:178 and foundation/accepted-runtime.ts:537/728; owner W01-SHELL/foundation; sub-scope STOPped and recorded in writer-output/W05-RELEASES/SERIALIZED_HOTSPOT_REQUEST.md"
+  },
+  "CLOSED_IN_CYCLE_2": {
+   "D-06": "SURFACE_COMPOSITION — closed inside surfaces/releases/composition.ts (releasesDeepProjection): raw diagnostics/lastAction replaced by four release-meaningful, locale-live sections"
   }
  },
  "FIXES_APPLIED": [
@@ -237,11 +253,14 @@
   "Reference composition: header identity -> 4-fact strip -> three-truth bar -> two-column workbench (identity/source/scope/stages/notes | gates/results/rollback/approvers) -> full-width verification-records drawer; structure pane (states+counts, channels, environments, candidate cards); release-context pane (blocker, verifications, approvals, scope, rollback note, risks, interpretation, next action)",
   "Realistic bilingual record model (6 candidates, 40-hex/64-hex synthetic-but-stable digests, distinct per record, basis declared in the UI) replacing repeated-character digests",
   "Truth states implemented honestly: EMPTY (filter/search yields nothing -> truthful empty block + clear), BLOCKED compare (availability reason surfaced), HELD/ROLLED BACK/RELEASED states, authorization missing shown as the current blocker",
-  "Container/media reflows (700/620), fact wrapping, uniform card rhythm, pane-title de-duplication, foreign sibling hiding, pane-toggle localisation, toggle band padding, READY/BLOCKED compare vocabulary"
+  "Container/media reflows (700/620), fact wrapping, uniform card rhythm, pane-title de-duplication, foreign sibling hiding, pane-toggle localisation, toggle band padding, READY/BLOCKED compare vocabulary",
+  "CYCLE 2 / D-06: surfaces/releases/composition.ts — releasesDeepProjection(adapter,candidateId) replaces the raw diagnostics bottomProjection; exactly four sections (events · gates/verification/rollback/approvers · three separated truths · selected candidate identity), sections + currentRevisionId are live getters so the shared shelf re-reads them per render (candidate-bound revision shown instead of '—'), recordBasis retained, unknown candidates still degrade to UNAVAILABLE with no invented gates",
+  "CYCLE 2 / bottom-shelf localisation: surfaces/releases/runtime.ts — after a lang/dir change while the shared shelf is open, the governor invokes the shared owner's own CEPFoundation.wave3Assembly.renderBottom() so the surface-owned projection re-localises; no shared file and no #bottomContent/#bottomSummary write is performed",
+  "CYCLE 2 / shared-owned sub-scope STOPped: foundation strings recorded in writer-output/W05-RELEASES/SERIALIZED_HOTSPOT_REQUEST.md (HS-REL-1-01/02, optional HS-REL-1-03) instead of a non-owned edit"
  ],
- "RECAPTURE_STATUS": "CYCLE_1_CAPTURED (17 hash-bound captures) · CYCLE_2_PENDING_REBUILD",
- "RECOMPARISON_STATUS": "CYCLE_1_RECOMPARED (16 of 17 defects fixed in source) · CYCLE_2_PENDING_REBUILD",
- "REGRESSION_STATUS": "NOT_YET_RUN — releases/m05 unit tests and `npm run check` scheduled after cycle 2 (shared serialized commands)",
+ "RECAPTURE_STATUS": "CYCLE_2_CAPTURED — 17 audit captures + 12 bottom-shelf probe captures (before/after/after2 × EN/AR × open/closed/shelf) + 4 falsification captures + 2 flow copies, all hash-bound to HEAD fe1bb98 + the 2-file delta (see LINEAGE)",
+ "RECOMPARISON_STATUS": "CYCLE_2_RECOMPARED — D-06 verified closed by whole-shelf before/after comparison at L2/L3/L4 (raw diagnostics dump → four release-meaningful sections); residual Arabic in EN is attributable only to shared foundation chrome (request filed), surface-owned projection measures 0 Arabic characters under EN",
+ "REGRESSION_STATUS": "PASS — build:runtime green; npm test 210/0 twice with identical id/status lists (N5); packet tests releases 12/0, S19 17/0, CG6 6/0; w05-browser-flows 8/8 including releases.view (empty-truth + compare-blocked); check-duplicate-mechanics PASS (N4); npm run check shows the pre-known browser.lineage_receipt_truthful red (two global Enterprise flow failures, NOT this lane) plus browser.current_candidate_claim_truthful, which turns red for ANY source delta because the Controller-owned assurance/BROWSER_CONFORMANCE_RECEIPT.json still binds the pre-delta tree — reported, not faked (see BLOCKERS B-02)",
  "EVIDENCE": [
   {
    "kind": "REFERENCE",
@@ -257,20 +276,70 @@
   {
    "kind": "BASELINE_CAPTURES",
    "path": "writer-output/W05-RELEASES/evidence/baseline/*.png (9 captures, each with path+sha256+dims+bytes in baseline.json)"
+  },
+  {
+   "kind": "CYCLE_2_AUDIT_RESULT",
+   "path": "writer-output/W05-RELEASES/evidence/cycle2/audit/audit.json",
+   "lineage": "commit fe1bb98ded51adc71a5f5fd14142a2c0880c11bc · stack tree bd0ea53e6658e001fd46377eca8854a009d03073 · branch writer/mi-serial-lane/REL-1 · delta [M surfaces/releases/composition.ts, M surfaces/releases/runtime.ts] · viewport 1536x1024 + 1280x860 + 1024x900 + 820x900 · locales en/LTR + ar/RTL · playwright-chromium-headless",
+   "result": "29/29 checks PASS · 17 hash-bound captures (path+sha256+bytes+dims per capture)"
+  },
+  {
+   "kind": "CYCLE_2_FALSIFICATION",
+   "path": "writer-output/W05-RELEASES/evidence/cycle2/falsification.json",
+   "sha256": "4879329dfb9ca133835ca4c3f049a933624f04401730ade8458c4eb6a63940fe",
+   "result": "39/39 PASS (N1 x4, N2 x5, N3 x7, lane ceilings x7, D-06 x5, shelf/empty/compare x10, page errors 0)",
+   "captures": "evidence/cycle2/falsify-{empty-truth,compare-blocked,shelf-en,shelf-ar}.png (hash-bound inside the JSON)"
+  },
+  {
+   "kind": "CYCLE_2_BOTTOM_SHELF_BEFORE_AFTER",
+   "path": "writer-output/W05-RELEASES/evidence/cycle2/{before,after,after2}-*.png + {before,after,after2}-bottom-probe.json",
+   "sha256": {
+    "before-en-bottom-shelf.png": "289b522f8a22e29a0f1ca947787647dcfcb1db2f409be3f8c7e4f38ac4cf4f56",
+    "after2-en-bottom-shelf.png": "7167684e1a4e552903163b84584f76147a06668e987a8283d460804ae00790c9",
+    "after2-ar-bottom-shelf.png": "fe4db562d5942a98739217070a5442940e413c5c932f2263ab7bc00652be8de0"
+   },
+   "result": "before = raw Timeline/ThreeTruths diagnostics dump + history 9/9 · after = four release-meaningful sections + history 4/4 + candidate-bound revision e202be202be2; EN projection 0 Arabic chars, AR localised, ceilings false in both"
+  },
+  {
+   "kind": "CYCLE_2_FLOW",
+   "path": "writer-output/W05-RELEASES/evidence/cycle2/flow/{empty-truth,compare-blocked}-*.png (copies of the mandated tools/w05-browser-flows.mjs releases.view run)",
+   "lineage": "node tools/w05-browser-flows.mjs releases.view → aggregate 8/8 PASS (releases.view PASS), run 2026-10-02T05:12Z",
+   "note": "flow screenshots are written by the shared tool under writer-output/W05/evidence/ (outside this lane's roots); byte-identical copies retained here for lane evidence — both sha256 84a3053040471678ee4da39709c725f170c1b60ea00d10a19ade3ecff4ea5dc7 because the compared state did not change the DOM (the flow's oracle for these two states is assertion-based, not pixel-based)"
+  },
+  {
+   "kind": "CYCLE_2_HARNESS",
+   "path": "writer-output/W05-RELEASES/evidence/harness/{cycle2-audit.mjs,cycle2-bottom-probe.mjs,cycle2-falsification.mjs}"
   }
  ],
  "LINEAGE": {
-  "branch": "writer/mi-serial",
-  "baseCommitAtStart": "68341ec18f7936569bccb39ec7a3eb997d0b6ccf",
-  "stackTreeAtStart": "7a69ec9a2bfa91e520031b87498abbafc6c5ef0e",
-  "note": "HEAD moves as sibling units land checkpoints; candidate additionally identified by per-file sha256 recorded at capture time."
+  "branch": "writer/mi-serial-lane/REL-1",
+  "cycle1Branch": "writer/mi-serial (baseline 68341ec18f7936569bccb39ec7a3eb997d0b6ccf · audit 4dbdcf79b9574ffc0cba7a441ac6893744883606) — preserved as provenance, never rewritten",
+  "rel1Parent": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc (verified before any mutation)",
+  "parentStackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+  "canonicalSourceSha256Before": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+  "canonicalSourceSha256After": "8dc756f337cb95eab528b8458b56ec14e0453211f482fba1c70bd19cc085420c",
+  "changedPaths": [
+   "stack/native-typescript/surfaces/releases/composition.ts",
+   "stack/native-typescript/surfaces/releases/runtime.ts"
+  ],
+  "evidenceBinding": "every cycle-2 capture was taken from this worktree's built dist at HEAD fe1bb98 with exactly the 2 delta files above; harness lineage blocks restate commit + stack tree + delta, captures carry path+sha256+bytes+dims"
  },
  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
  "BLOCKERS": [
   {
    "id": "B-01",
-   "state": "TRANSIENT",
-   "detail": "`npm run build:runtime` is red on a sibling unit's in-flight file stack/native-typescript/surfaces/manual_ai/presentation.ts:32 ('Parenthesized expression cannot be empty'). This unit does not edit it (read-only rule) and retries the shared serialized build. All W05-RELEASES files parse cleanly under stripTypeScriptTypes."
+   "state": "CLEARED_IN_CYCLE_2",
+   "detail": "The transient sibling build failure (surfaces/manual_ai/presentation.ts / surfaces/portfolio/presentation-style.ts in-flight TS errors) no longer reproduces: npm run build:runtime passes at HEAD fe1bb98 + this lane's 2-file delta."
+  },
+  {
+   "id": "B-02",
+   "state": "OPEN__CONTROLLER_OWNED__RECORDED_NOT_FIXED",
+   "detail": "`npm run check` = 2 red browser checks. (a) browser.lineage_receipt_truthful: the PRE-EXISTING known red (DAG §0 expects exactly this one while the Enterprise defect is open) — assurance/BROWSER_CONFORMANCE_RECEIPT.json carries executionStatus BLOCKED_OR_FAILED with summary total 6 / pass 4 / fail 2, i.e. the two global Enterprise flow failures that are explicitly NOT this lane's. (b) browser.current_candidate_claim_truthful: turns red for ANY canonical source delta because the same receipt records sourceCanonicalTreeSha256 0c43d7f… while this lane's delta yields 8dc756f… (measured both ways with tools/source-tree-identity.mjs: HEAD blobs reproduce 0c43d7f… exactly). The receipt lives in assurance/** which is read-only for this lane and force-restored by the mission cleanup step, so the truthful handling is this record — NOT a faked green. Regeneration belongs to the Controller at convergence."
+  },
+  {
+   "id": "B-03",
+   "state": "OPEN__SHARED_SEAM__REQUEST_FILED",
+   "detail": "Defect D-17 (Arabic bottom-shelf summary/chrome in EN sessions) cannot be fixed inside this lane's roots: writer-output/W05-RELEASES/SERIALIZED_HOTSPOT_REQUEST.md (HS-REL-1-01/02, optional HS-REL-1-03). Surface-owned projection measures 0 Arabic characters under EN."
   }
  ]
 }
