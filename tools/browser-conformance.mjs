@@ -191,7 +191,23 @@ try {
       edge = page.locator('.spatial-canvas [data-edge]').filter({ visible: true }).first(),
       line = edge.locator('line').filter({ visible: true }).first(),
       label = edge.locator('[data-relation-label]').filter({ visible: true }).first();
-    assert(await edge.count() > 0 && await line.count() > 0 && await label.count() > 0, 'visible editable Enterprise relation edge/label is unavailable for route falsification');
+    const routeProbe = await page.evaluate(() => ({
+      relationUiSharesPublishedSpatial: CEPFoundation.relationUI?.spatial === CEPFoundation.spatial,
+      relationUiSpatialConnected: Boolean(CEPFoundation.relationUI?.spatial?.host?.isConnected),
+      publishedSpatialConnected: Boolean(CEPFoundation.spatial?.host?.isConnected),
+      relationUiSelection: CEPFoundation.relationUI?.selectionDescriptor?.() || null,
+      publishedSpatialSelection: CEPFoundation.spatial?.selectionDescriptor?.() || null,
+      adapterRelationCount: CEPFoundation.relations?.records?.length ?? null,
+      publishedSpatialEdgeCount: CEPFoundation.spatial?.model?.edges?.length ?? null,
+      canvases: [...document.querySelectorAll('.spatial-canvas')].map(node => ({
+        connected: node.isConnected,
+        hidden: Boolean(node.closest('[hidden]')),
+        edges: node.querySelectorAll('[data-edge]').length,
+        labels: node.querySelectorAll('[data-relation-label]').length,
+        visibleRect: (() => { const r=node.getBoundingClientRect(); return {width:r.width,height:r.height}; })()
+      }))
+    }));
+    assert(await edge.count() > 0 && await line.count() > 0 && await label.count() > 0, `visible editable Enterprise relation edge/label is unavailable for route falsification :: ${JSON.stringify(routeProbe)}`);
     await line.dblclick();
     assert(await composer.count() === 0 || await composer.evaluate(node => node.hidden), 'whole-edge double-click incorrectly opened the composer');
     await label.dblclick();
@@ -216,7 +232,7 @@ try {
     for (const surface of ['visualize', 'enterprise']) {
       await ready(page, surface);
       const selectedIds = surface === 'visualize' ? await selectPair(page,{requireEligible:false}) : await selectEligiblePair(page);
-      evidence.push(await page.evaluate(selectedIds => ({ consumer: CEPFoundation.consumer, selectedIds, readOnly:CEPFoundation.relations.readOnly, policyRevision: CEPFoundation.relationUI.policyRevision, availabilityOwner: CEPFoundation.relationUI.actionAvailability.constructor.name, availability: CEPFoundation.relationUI.connectAvailability(), actionOwner: CEPFoundation.registry.commands.get('spatial.connect').owner }), selectedIds));
+      evidence.push(await page.evaluate(selectedIds => ({ consumer: CEPFoundation.consumer, selectedIds, readOnly:CEPFoundation.relations.readOnly, policyRevision: CEPFoundation.relationUI.policyRevision, availabilityOwner: CEPFoundation.relationUI.actionAvailability.constructor.name, availability: CEPFoundation.relationUI.connectAvailability(), actionOwner: CEPFoundation.registry.commands.get('spatial.connect').owner, relationUiSharesPublishedSpatial: CEPFoundation.relationUI?.spatial === CEPFoundation.spatial, relationUiSelection: CEPFoundation.relationUI?.selectionDescriptor?.() || null, publishedSpatialSelection: CEPFoundation.spatial?.selectionDescriptor?.() || null, relationUiSpatialConnected: Boolean(CEPFoundation.relationUI?.spatial?.host?.isConnected), publishedSpatialConnected: Boolean(CEPFoundation.spatial?.host?.isConnected) }), selectedIds));
     }
     assert(evidence.every(item => item.policyRevision === 'RELATION-CENTRAL-04' && item.availabilityOwner === 'ActionAvailabilityCore' && item.actionOwner === 'RelationInteractionOwner'), `central reuse owner mismatch: ${JSON.stringify(evidence)}`);
     const visualize=evidence.find(item=>item.consumer==='visualize'),enterprise=evidence.find(item=>item.consumer==='enterprise');
@@ -266,8 +282,8 @@ try {
       return { up:device?.up, recordedUp:recorded?.up, semanticCommand:event?.semanticCommand, eventOutput:event?.output||'', provider:workspace.provider?.id||workspace.provider?.providerId||'UNKNOWN', domainOwner:domain.owner, runtimeTruth:workspace.provider?.runtimeTruth };
     });
     const terminalText = await page.locator('#operationalHost .terminal-output').innerText();
-    assert(state.up === false && state.recordedUp === false, `Runs domain/recorded causal state mismatch: ${JSON.stringify(state)}`);
-    assert(state.semanticCommand === 'device.shutdown' && state.eventOutput.includes('DOWN') && terminalText.includes('DOWN'), 'Runs domain event or visible terminal output is inconsistent');
+    assert(state.up === false && state.recordedUp === false, `Runs domain/recorded causal state mismatch: ${JSON.stringify({...state,terminalText})}`);
+    assert(state.semanticCommand === 'device.shutdown' && state.eventOutput.includes('DOWN') && terminalText.includes('DOWN'), `Runs domain event or visible terminal output is inconsistent: ${JSON.stringify({...state,terminalText})}`);
     await capture(page, 'browser-operational-shutdown.png', 'runtime-causal-consequence', 'provider-neutral terminal and canonical shutdown consequence');
     return { ...state, terminalVisibleDown: true };
   });
