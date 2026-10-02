@@ -1,10 +1,10 @@
-> ## CURRENT ROUTE-MIMO-AGENT OVERRIDE — OD-20260928-085
+> ## CURRENT ROUTE-MIMO-AGENT OVERLAY — OD-20261002-087
 > **Current role:** `W05_MILESTONE_SCOPE_AND_OBLIGATION_PACKET__NOT_CURRENTLY_DISPATCHED`  
 > **Milestone surfaces:** HEALTH + PROCESSING + VALIDATION + MANUAL_AI + BACKUP + AUDIT + RELEASES + CONFIGURATION.  
-> The current carrier uses exactly ONE persistent sequential Writer on `writer/mi-serial`, milestones W01 → W02 → W03 → W04 → W05. Any body text below that says per-Surface parallel dispatch, historical `writer/cep-serial` lineage, historical baseline SHAs, fixed model names, or old PRE_WRITER gate is lineage only.  
-> Before W05 may mutate Product, the Controller must rebind actual remote parent/HEAD/tree, exact current Product subtree, 91-row Writer authority projection + W05-applicable subset, current SurfaceProfiles/oracles/references, open findings, exact writable union/shared-seam locks, tests/falsifiers/evidence, and STOP gate.  
-> W05 owns the group-level `surfaces/composition/w05-rescue.ts` seam; the HEALTH and PROCESSING structural packets do not independently own/write it.  
-> **Current Controller phase:** `CONTROLLER_ZERO_LOSS_CONVERGENCE`; no Writer launch is authorized from this packet now.
+> The current carrier runs parallel disjoint lanes under `OD-20261002-087`: one mutating Writer per exact bounded Surface/lane, value-weighted (`OD-20260916-043`), shared hotspots/same-owner/dependencies/final wiring serialized, each lane in an isolated candidate branch/worktree from the exact Controller-bound parent. `OD-20260928-085` (ONE persistent sequential Writer, W01→W05 milestones) is historical task-specific lineage; the W05 grouping above remains scope grouping, not a sequential mandate. Any body text with per-Surface-parallel prohibitions from the serial era, historical `writer/cep-serial` lineage, historical baseline SHAs, fixed model names, or old PRE_WRITER gate wording is lineage only.  
+> Before W05 lanes may mutate Product, the Controller must rebind actual remote parent/HEAD/tree, exact current Product subtree, Writer authority projection + W05-applicable subset, current SurfaceProfiles/oracles/references, open findings, exact writable roots/shared-seam locks, tests/falsifiers/evidence, and STOP gate — via the final evidence-reuse DAG after `RECOVERY_GATE_PASS`.  
+> W05 owns the group-level `surfaces/composition/w05-rescue.ts` seam (sole owner: W05-VALIDATION); the HEALTH and PROCESSING structural packets do not independently own/write it.  
+> **Current Controller phase:** `EXISTING_AUDIT_CORPUS_RECONCILIATION__BOUNDED_GAP_FILL__PARALLEL_DAG_REBIND`; no Writer launch is authorized from this packet now (until `RECOVERY_GATE_PASS`).
 
 # W05_COMPLETE_WORKSPACE_PACKET — Health · Processing · Validation · Manual AI (AI Bridge) · Backup · Audit · Releases · Configuration
 

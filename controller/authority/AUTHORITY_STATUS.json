@@ -45,12 +45,19 @@
     "H03-R2-PROP-001=NOT_PROVEN",
     "H03-R2-FALSIFY-001=NOT_PROVEN",
     "Enterprise relation route/shared-owner integration=OPEN_PRODUCT_DEFECT",
-    "Runs causal flow=UNRESOLVED_RUNTIME_OR_HARNESS_INTEGRATION",
     "Product acceptance=NOT_AUTHORIZED",
     "main merge=NOT_AUTHORIZED",
     "release/deployment=NOT_AUTHORIZED",
     "stack=STACK_EXPANSION_LOCKED__STACK_NOT_FROZEN"
   ],
+  "currentValidationTruth": {
+    "source": "writer/mi-serial@490b6a40e395c3265eaff74fef0b2bf0ce74bca6",
+    "validationRun": 36947731860,
+    "browser": "6_TOTAL__4_PASS__2_FAIL (2 FAIL = Enterprise relation.route-convergence-and-label-scope + central-change-reuse, one integration root)",
+    "runsCausalFlow": "CLOSED__HARNESS_ORACLE_DEFECT__CLOSED_WITHOUT_PRODUCT_MUTATION",
+    "supersededEpochs": "1/6 @eb3bd2c; 3/3 @db41d0f run 36942166750 (incl. Runs=UNRESOLVED_RUNTIME_OR_HARNESS_INTEGRATION); 2/4 @f6633731; 1/5 retained assurance receipt — historical, not current",
+    "sourceUnchangedSince": "No stack/tools/tests changes after 490b6a40; rebind required at exact lane launch"
+  },
   "recoveryRule": "FETCH_REMOTE_FIRST__READ_AUTHORITY_STATUS__READ_FIRST__CURRENT_STATE__OWNER_REGISTER__EXACT_TASK_EVIDENCE__NO_FILENAME_RECENCY_SELF_PROMOTION",
   "lastCanonicalPayload": {
     "commit": "58b8058932a8a34dfb424025466b1359db2cf3fd",

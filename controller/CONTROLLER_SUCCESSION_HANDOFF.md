@@ -16,11 +16,11 @@ A successor must not inherit conclusions from this file blindly.
 
 ## Current durable routing
 - active carrier: `ROUTE-MIMO-AGENT`;
-- controlling topology: `OD-20260928-085`;
-- one persistent sequential Writer on `writer/mi-serial`;
-- W01 → W02 → W03 → W04 → W05;
+- controlling topology: `OD-20261002-087` — parallel disjoint lanes, one mutating Writer per exact bounded Surface/lane, shared hotspots/dependencies/final wiring serialize, value-weighted under `OD-20260916-043`;
+- `OD-20260928-085` (one persistent sequential Writer on `writer/mi-serial`; W01 → W02 → W03 → W04 → W05) is historical task-specific lineage only;
+- offload/operating model: `CHATGPT PRECOMPUTE → PRIMARY SPOT-CHECK/ADJUDICATE → MIMO EXECUTE → CHATGPT INDEPENDENT REVIEW → PRIMARY INTEGRATE` (`controller/12_execution/chatgpt_offload_queue/`);
 - Controller independently audits results;
-- historical parallel/WM plans are lineage/dependency evidence only.
+- historical parallel/WM plans are lineage/dependency evidence only; the current DAG is rebuilt from the 23-Surface evidence-reuse matrix.
 
 ## Current cutover truth
 - until `AUTHORITY_STATUS.classification=GITHUB_CANONICAL`, Drive remains live Controller authority;
@@ -37,4 +37,4 @@ This handoff intentionally contains no independent next-action authority. The cu
 
 ## Cutover completion
 
-GitHub-direct successor proof: PASS. Drive-entry successor proof: PASS 16/16. Drive is compatibility/history/evidence only. The next Controller must determine the exact next OD-085 milestone from current Product/evidence truth; this handoff does not independently choose it.
+GitHub-direct successor proof: PASS. Drive-entry successor proof: PASS 16/16. Drive is compatibility/history/evidence only. The next Controller binds exact lane scope/order from the current 23-Surface evidence-reuse matrix and the final OD-087 DAG; this handoff does not independently choose milestones.

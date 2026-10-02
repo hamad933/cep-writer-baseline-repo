@@ -1,6 +1,6 @@
 # CEP CONTROLLER CONTROL PLANE
 
-**Current phase:** `CONTROLLER_ZERO_LOSS_CONVERGENCE`  
+**Current phase:** `EXISTING_AUDIT_CORPUS_RECONCILIATION__BOUNDED_GAP_FILL__PARALLEL_DAG_REBIND`  
 **Current authority status:** read `controller/authority/AUTHORITY_STATUS.json` first.
 
 This directory is the dedicated Controller plane being converged into the future canonical GitHub control plane required by `OD-20261002-086`.
@@ -23,6 +23,6 @@ No file becomes authority because of its name, path, timestamp, `CURRENT`, `FINA
 7. Never launch from historical dispatch artifacts.
 
 ## Current ROUTE-MIMO-AGENT topology
-`OD-20260928-085`: ONE persistent sequential Writer → W01 → W02 → W03 → W04 → W05. Historical parallel/per-Surface material retains dependency/collision wisdom but is not current launch authority.
+`OD-20261002-087`: parallel disjoint lanes — one mutating Writer per exact bounded Surface/lane; shared hotspots/same-owner/dependencies/final wiring serialize; value-weighted under `OD-20260916-043`; isolated per-lane candidate branches/worktrees. `OD-20260928-085` (ONE persistent sequential Writer → W01→W05) is historical task-specific lineage. Historical parallel/per-Surface material retains dependency/collision wisdom but is not self-launch authority: launch requires the current evidence-reuse matrix → final DAG → exact packet under `RECOVERY_GATE_PASS`.
 
 Nothing in this README creates Product acceptance, cutover, release, deployment or stack freeze.

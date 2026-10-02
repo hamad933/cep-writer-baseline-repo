@@ -1,7 +1,6 @@
-> **CURRENT APPLICABILITY CEILING — 2026-10-02**
-> For `ROUTE-MIMO-AGENT`, this plan is **HISTORICAL_DEPENDENCY_AND_COLLISION_EVIDENCE_ONLY**.
-> Its durable lessons about real writable overlap, donor coupling ≠ file collision, shared hotspots, and final convergence remain useful.
-> It does **not** authorize current per-Surface parallel dispatch. `OD-20260928-085` requires one persistent sequential Writer and W01→W05 unless explicitly superseded.
+> **CURRENT APPLICABILITY CEILING — 2026-10-02 (reconciled)**
+> This plan's collision seams, writable-root analysis, wave structure, donor-coupling lesson and dependency edges are durable `DEPENDENCY_AND_COLLISION_EVIDENCE` reusable by the current DAG.
+> Under `OD-20261002-087` the plan does **not** self-authorize per-Surface dispatch: launch requires the current evidence-reuse matrix → final DAG → exact packet binding. The old ceiling sentence citing `OD-20260928-085` serial topology as controlling is superseded; `OD-085` is historical task-specific lineage.
 
 # PARALLEL EXECUTION PLAN — SURFACE WRITER WAVES
 

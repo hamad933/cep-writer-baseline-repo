@@ -34,24 +34,34 @@ Recovery always fetches actual remote HEAD/tree first. Stored SHAs are lineage o
 - GitHub-direct successor recovery proof: PASS 28/28 at `bc376275d5a64a47792190255aef3f94d395395e`; validation run `36942921345` SUCCESS.
 - governance: transition/cutover-aware before authority switch.
 
-## Current validation truth
+## HISTORICAL VALIDATION TRUTH — epoch @db41d0f (superseded)
 
 Harness-correction source commit `db41d0f7e527e0770509d79bb65a053cb389edb0`, GitHub Actions run `36942166750`, artifact `11199759879`, digest `sha256:bcc9fbdc1e4b77d49f6f414f34fcd3165d09f7a56a7a637120c9223d53a99830`.
 
-Browser: 6 total / 3 PASS / 3 FAIL.
-PASS:
+Browser at that epoch: 6 total / 3 PASS / 3 FAIL.
+PASS (epoch):
 - workspace pane/transient lifecycle;
 - Visualize selection/connect provider truth;
 - Learn Bidi/Structured isolation.
 
-OPEN:
+OPEN (epoch):
 - Enterprise relation route convergence = `PRODUCT_INTEGRATION_DEFECT`;
 - Enterprise central relation reuse = `PRODUCT_INTEGRATION_DEFECT`;
-- Runs causal consequence = `UNRESOLVED_RUNTIME_OR_HARNESS_INTEGRATION`.
+- Runs causal consequence = `UNRESOLVED_RUNTIME_OR_HARNESS_INTEGRATION` — **since reclassified CLOSED as `HARNESS_ORACLE_DEFECT__CLOSED_WITHOUT_PRODUCT_MUTATION`** (see current block below).
 
 H03:
 - `H03-R2-PROP-001=NOT_PROVEN`
 - `H03-R2-FALSIFY-001=NOT_PROVEN`
+
+## CURRENT VALIDATION TRUTH (exact-current, source-bound)
+
+- Source: `writer/mi-serial@490b6a40e395c3265eaff74fef0b2bf0ce74bca6` / tree `7297b5fbb678db92f7b7b932f19bb09f9e8d5d00`; GitHub Actions run `36947731860` = SUCCESS; artifact `11203036446`; digest `sha256:6af102c5e66ba9a29e91076856c0962d110fd10c66167ecbfa93b308273aa553`.
+- No `stack/` `tools/` `tests/` changes after `490b6a40`; this truth carries forward to the current HEAD and must be rebound at exact lane launch.
+- Browser: 6 total / 4 PASS / 2 FAIL. PASS: `workspace.transient-and-pane-lifecycle`, `spatial.selection-connect-canonical-edge`, `runtime-causal-consequence`, `spatial-input-bidi-preference-and-structured-isolation`.
+- Remaining 2 FAIL = `relation.route-convergence-and-label-scope` + `central-change-reuse` — one Enterprise shared-relation integration root (`PRODUCT_INTEGRATION_DEFECT`), open.
+- Runs causal: `HARNESS_ORACLE_DEFECT__CLOSED_WITHOUT_PRODUCT_MUTATION`.
+- H03: `H03-R2-PROP-001=NOT_PROVEN`, `H03-R2-FALSIFY-001=NOT_PROVEN`.
+- Older totals (1/6 @eb3bd2c, 3/3 @db41d0f, 2/4 @f6633731, 1/5 retained receipt) are historical by epoch.
 
 ## Current execution topology
 
@@ -72,8 +82,7 @@ The 23 structurally revalidated packets remain candidate execution bindings only
 - GitHub Controller authority cutover verification observation: remote HEAD `0c721d379947c700148ea1758a54073ac6513a2f` / tree `a381bd1c67169b9a84f88ff3614b0050824cb54d`
 - GitHub Controller authority cutover: `GITHUB_CANONICAL__REMOTE_VERIFIED`
 - Drive compatibility reconciliation: `COMPLETE__OD_20261002_086`
-- Drive-entry successor recovery proof: `PASS_16_OF_16`
-- Drive-entry successor recovery proof: `REQUIRED_AFTER_DRIVE_RECONCILIATION`
+- Drive-entry successor recovery proof: `PASS_16_OF_16` (completed; the earlier `REQUIRED_AFTER_DRIVE_RECONCILIATION` gate row is superseded by this result)
 - Product acceptance: `NOT_AUTHORIZED`
 - main merge: `NOT_AUTHORIZED`
 - release/deployment: `NOT_AUTHORIZED`
@@ -109,7 +118,7 @@ Milestone retention:
 
 General Browser Conformance at the exact source remains `3 PASS / 3 FAIL`; all three FAIL rows are W03-scoped. Therefore a successful milestone workflow does **not** create Product acceptance or erase the general-browser blockers.
 
-**Next legal action:** perform bounded W03 source-bound probes first to expose both sides of the Enterprise selection/relation seam and the exact Runs domain/event/terminal values. Only after root cause is exact may Controller use OD-20260916-044 for a genuinely small existing-owner correction; otherwise issue the single persistent W03 Writer milestone under OD-20260928-085. W04/W05 remain retained and are not relaunched unless W03 integration/regression proves them affected.
+**Next legal action (HISTORICAL EPOCH TEXT — superseded; do not execute):** perform bounded W03 source-bound probes first to expose both sides of the Enterprise selection/relation seam and the exact Runs domain/event/terminal values. Only after root cause is exact may Controller use OD-20260916-044 for a genuinely small existing-owner correction; otherwise issue the single persistent W03 Writer milestone under OD-20260928-085. W04/W05 remain retained and are not relaunched unless W03 integration/regression proves them affected.
 
 No Product acceptance, main merge, release, deployment or stack freeze is authorized.
 
@@ -174,7 +183,7 @@ Direct source inspection identifies the integration split:
 - W03: narrow correction remains required, now limited to Enterprise relation/spatial instance convergence plus W03 regression.
 - W04: RETAIN — no relaunch unless affected regression proves otherwise.
 - W05: RETAIN — no relaunch unless affected regression proves otherwise.
-- ROUTE-MIMO-AGENT remains governed by `OD-20260928-085`: exactly one persistent sequential Writer; no parallel mutating MIMO Writers.
+- ROUTE-MIMO-AGENT remains governed by `OD-20260928-085`: exactly one persistent sequential Writer; no parallel mutating MIMO Writers. **[SUPERSEDED EPOCH TEXT — retained verbatim as historical record; current topology = `OD-20261002-087`, see "Current execution topology" above.]**
 - Do not use ChatGPT connector-heavy Product editing for this correction. Preferred next action is a Controller-prepared bounded W03 Enterprise correction mission executed in Codespaces/OpenCode/MiMo from the exact current parent, followed by independent ChatGPT Controller audit.
 - ChatGPT helper conversations may run genuinely disjoint READ-ONLY source/evidence/visual/decision audits in parallel because they do not mutate the Product lineage.
 - No Product acceptance, merge to main, release, deployment or stack freeze is authorized by this narrowing.

@@ -1032,9 +1032,9 @@
   },
   "currentApplicability": {
     "route": "ROUTE-MIMO-AGENT",
-    "controllingDecision": "OD-20260928-085",
-    "topology": "ONE_PERSISTENT_SEQUENTIAL_WRITER",
-    "branch": "writer/mi-serial",
+    "controllingDecision": "OD-20261002-087",
+    "topology": "PARALLEL_DISJOINT_LANES__ONE_MUTATING_WRITER_PER_BOUNDED_SURFACE_OR_LANE__OD-20260928-085_SERIAL_TOPOLOGY_HISTORICAL_LINEAGE",
+    "branch": "per-lane isolated candidate branch/worktree from the exact Controller-bound parent",
     "milestoneOrder": [
       "W01",
       "W02",
@@ -1042,7 +1042,8 @@
       "W04",
       "W05"
     ],
+    "milestoneOrderMeaning": "HISTORICAL W0X family grouping (scope grouping), not a sequential launch mandate",
     "surfaceUnitsLaunchableIndependently": false,
-    "rule": "Use unit rows for purpose/scope/reference/dependency/owner evidence only. Exact milestone mission rebinds writable union, shared seams, current parent and applicable decisions."
+    "rule": "Use unit rows for purpose/scope/reference/dependency/owner evidence only. The exact lane mission — bound through the final evidence-reuse DAG after RECOVERY_GATE_PASS — rebinds writable roots, shared seams, current parent and applicable decisions."
   }
 }

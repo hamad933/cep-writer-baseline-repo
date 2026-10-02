@@ -1,4 +1,4 @@
-> **CURRENT ROUTE-MIMO-AGENT CEILING — 2026-10-02:** This is a structural Surface scope/reference packet, not independent launch authority. Under `OD-20260928-085`, the launch unit is milestone W05 on the one persistent `writer/mi-serial` Writer. Exact parent, decision subset, shared-seam write authority and tests are rebound by the W05 milestone mission. `w05-rescue.ts` is owned by W05-VALIDATION and is not writable from this packet.
+> **CURRENT ROUTE-MIMO-AGENT CEILING — 2026-10-02 (reconciled):** This is a structural Surface scope/reference packet, not independent launch authority. Under `OD-20261002-087`, the launch unit is a bounded Surface lane (one mutating Writer per lane, isolated candidate branch/worktree) launched only through the final evidence-reuse DAG + exact packet binding after `RECOVERY_GATE_PASS`; `OD-20260928-085` milestone seriality is historical lineage. Exact parent, decision subset, shared-seam write authority and tests are rebound by the exact lane mission. `w05-rescue.ts` is owned by W05-VALIDATION and is not writable from this packet.
 
 # SURFACE WRITER PACKET — HEALTH
 

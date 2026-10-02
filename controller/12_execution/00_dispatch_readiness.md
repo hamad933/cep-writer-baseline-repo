@@ -1,5 +1,9 @@
 # 12_execution / DISPATCH_READINESS — Coordinator validation before Writer dispatch
 
+> **CURRENT CONTROLLER CEILING — 2026-10-02 (reconciled)**
+> Historical Writer-phase record (2026-09-29). Its "execution is SERIAL" adjudication is **superseded**: the seriality reading was superseded within the dispatch era by `02_parallel_dispatch.md` (Owner-directed parallel execution) and now by `OD-20261002-087` (parallel disjoint lanes, one Writer per bounded Surface/lane).
+> Durable value = readiness checklist structure, input inventory, slot/coordination mechanics as lineage. Preserve the body; it grants no current launch authority.
+
 Timestamp: 2026-09-29T03:20Z · Phase: WRITER EXECUTION (post-Controller) · Author: Writer Coordinator (parent session)
 
 This directory is a **Writer-phase execution append**. It does not modify, supersede, or rewrite any

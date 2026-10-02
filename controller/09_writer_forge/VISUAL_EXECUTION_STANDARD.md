@@ -20,11 +20,11 @@ Durable laws:
 - shared files may be changed only through the exact mission-bound owner/seam;
 - Writer never self-accepts or mutates live Controller authority.
 
-**Current ROUTE-MIMO-AGENT overlay — OD-20260928-085:** exactly ONE persistent sequential Writer on `writer/mi-serial`, executing milestone families W01 → W02 → W03 → W04 → W05. The 23 Surface packets are structural scope/reference inputs consumed by those milestones; they are **not 23 independent launch units** for this carrier.
+**Current ROUTE-MIMO-AGENT overlay — OD-20261002-087:** multiple mutating Writers may run in parallel on genuinely disjoint lanes; one mutating Writer per exact bounded Surface/lane; shared hotspots, same-owner work, dependency edges and final wiring serialize; value-weighted under OD-20260916-043. Each lane works in an isolated candidate branch/worktree from the exact Controller-bound parent (OD-20260914-037 / OD-20260921-066) and returns CANDIDATE_ONLY for Controller admission; integration/convergence is Controller-owned and serialized. The 23 Surface packets are candidate lane units that become launchable only through the current evidence-reuse matrix → final DAG → exact packet binding (RECOVERY_GATE_PASS first). `OD-20260928-085` (exactly ONE persistent sequential Writer, W01→W05 milestones) is historical task-specific lineage and is not current topology.
 
-Commit/push law is carrier-specific. For current ROUTE-MIMO-AGENT, the Writer may create/push bounded checkpoint commits only on `writer/mi-serial`; direct `main` mutation, merge, acceptance, release, deployment and stack freeze remain prohibited. Other carriers follow their own current profile.
+Commit/push law is carrier-specific. For current ROUTE-MIMO-AGENT, the Writer creates/pushes bounded checkpoint commits only on its exact Controller-bound candidate branch/worktree; direct `main` mutation, merge, acceptance, release, deployment and stack freeze remain prohibited. Other carriers follow their own current profile.
 
-Historical MiMo model names and `1 Writer → 1 Surface` wording are execution lineage only unless an exact current carrier/mission rebinds them.
+Historical MiMo model names and `1 Writer → 1 Surface` wording are execution lineage; the durable core is one coherent mutation owner per bounded scope with one mutating Writer per lane.
 
 ---
 

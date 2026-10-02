@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "classification": "DERIVED_EXECUTION_SNAPSHOT__NON_AUTHORITY__FETCH_REMOTE_FIRST",
   "authorityMode": "GITHUB_CANONICAL",
   "project": {
@@ -14,10 +14,14 @@
     "lastVerifiedRemoteObservation": "0f3562bdf5b051b6c55cfad4fe83a2deb9d3337b"
   },
   "controller": {
-    "phase": "GITHUB_CUTOVER_COMPLETE__DRIVE_COMPATIBILITY_PROVEN__PRODUCT_EXECUTION_BINDING_NEXT",
+    "phase": "EXISTING_AUDIT_CORPUS_RECONCILIATION__BOUNDED_GAP_FILL__PARALLEL_DAG_REBIND",
     "activeCarrier": "ROUTE-MIMO-AGENT",
-    "governingTopologyDecision": "OD-20260928-085",
-    "topology": "ONE_PERSISTENT_SEQUENTIAL_WRITER__W01_W02_W03_W04_W05"
+    "governingTopologyDecision": "OD-20261002-087",
+    "topology": "PARALLEL_DISJOINT_LANES__ONE_MUTATING_WRITER_PER_BOUNDED_SURFACE_OR_LANE__SHARED_HOTSPOTS_SAME_OWNER_DEPENDENCIES_FINAL_WIRING_SERIALIZE",
+    "historicalTopologyDecision": "OD-20260928-085 (COMPLETED_TASK_SPECIFIC_NON_DURABLE — one persistent sequential Writer / W01→W05; lineage only)",
+    "branchPolicy": "ISOLATED_PER_LANE_CANDIDATE_BRANCHES_OR_WORKTREES_FROM_EXACT_CONTROLLER_BOUND_PARENT (OD-20260914-037 / OD-20260921-066)",
+    "operatingModel": "CHATGPT PRECOMPUTE → PRIMARY SPOT-CHECK/ADJUDICATE → MIMO EXECUTE → CHATGPT INDEPENDENT REVIEW → PRIMARY INTEGRATE",
+    "offloadQueue": "controller/12_execution/chatgpt_offload_queue/"
   },
   "cutover": {
     "eventId": "CEP-GITHUB-CUTOVER-2026-10-02-001",
@@ -54,12 +58,15 @@
     "status": "STRUCTURAL_REVALIDATION_COMPLETE__NOT_LAUNCH_AUTHORITY"
   },
   "browser": {
+    "source": "writer/mi-serial@490b6a40e395c3265eaff74fef0b2bf0ce74bca6",
+    "validationRun": 36947731860,
     "total": 6,
-    "pass": 3,
-    "fail": 3,
-    "enterprise": "OPEN_PRODUCT_INTEGRATION_DEFECT",
-    "runs": "UNRESOLVED_RUNTIME_OR_HARNESS_INTEGRATION",
-    "learn": "PASS_AFTER_HARNESS_CORRECTION"
+    "pass": 4,
+    "fail": 2,
+    "enterprise": "OPEN_PRODUCT_INTEGRATION_DEFECT (relation.route-convergence-and-label-scope + central-change-reuse; one Enterprise shared-relation integration root)",
+    "runs": "HARNESS_ORACLE_DEFECT__CLOSED_WITHOUT_PRODUCT_MUTATION",
+    "learn": "PASS_AFTER_HARNESS_CORRECTION",
+    "historicalEpochs": "1/6 @eb3bd2c; 3/3 @db41d0f (run 36942166750); 2/4 @f6633731; 1/5 retained assurance receipt — historical, do not quote as current"
   },
   "h03": {
     "propagation": "NOT_PROVEN",
@@ -71,9 +78,14 @@
     "releaseDeployment": "NOT_AUTHORIZED",
     "stack": "STACK_EXPANSION_LOCKED__STACK_NOT_FROZEN"
   },
+  "reconstruction": {
+    "baseline": "controller/12_execution/WRITER_RESULT_RECONSTRUCTION_BASELINE.md",
+    "accounting": "6 terminal + 11 rescued-partial + 1 lineage-unresolved + 5 no-original-completion = 23"
+  },
   "nextActions": [
-    "Re-evaluate W01→W05 current completion/retention from exact branch/evidence truth.",
-    "Bind the exact next legal OD-085 milestone parent/scope/evidence.",
-    "Continue one persistent sequential Writer only after that binding."
+    "Consume OFFLOAD-01/02/03 ChatGPT results via CONSUME → CHECK SOURCE BINDING → SPOT-CHECK → CHECK INVALIDATION → GAP-FILL → ADJUDICATE.",
+    "Close zero-loss mapping for pre-overreach RESUME/checkpoint claims (gate 3) and repair any LOST-CANDIDATE owners.",
+    "Build EXISTING_EVIDENCE_REUSE_MATRIX for 23 Surfaces; Primary adjudicates final dispositions and sizes.",
+    "Construct final OD-087 collision/dependency DAG and launch packets; pass RECOVERY_GATE_PASS before any Product Writer launch."
   ]
 }

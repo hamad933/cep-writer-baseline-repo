@@ -1,10 +1,10 @@
-> ## CURRENT ROUTE-MIMO-AGENT OVERRIDE — OD-20260928-085
+> ## CURRENT ROUTE-MIMO-AGENT OVERLAY — OD-20261002-087
 > **Current role:** `W04_MILESTONE_SCOPE_AND_OBLIGATION_PACKET__NOT_CURRENTLY_DISPATCHED`  
 > **Milestone surfaces:** EVIDENCE + REVIEWS + MASTERY + PORTFOLIO.  
-> The current carrier uses exactly ONE persistent sequential Writer on `writer/mi-serial`, milestones W01 → W02 → W03 → W04 → W05. Any body text below that says `1 Writer → 1 Surface`, per-Surface parallel dispatch, historical `writer/cep-serial` lineage, historical baseline SHAs, fixed model names, or old PRE_WRITER gate is **lineage only**.  
-> Before this milestone may mutate Product, the Controller must rebind the actual remote parent/HEAD/tree, exact current Product subtree, 91-row Writer authority projection + milestone-applicable subset, current SurfaceProfiles/oracles/references, current open findings, exact writable union/shared-seam locks, tests/falsifiers/evidence, and STOP gate.  
-> The Surface packets under `surface_units/` are structural scope/reference inputs, not independent launch authority.  
-> **Current Controller phase:** `CONTROLLER_ZERO_LOSS_CONVERGENCE`; no Writer launch is authorized from this packet now.
+> The current carrier runs parallel disjoint lanes under `OD-20261002-087`: one mutating Writer per exact bounded Surface/lane, value-weighted (`OD-20260916-043`), shared hotspots/same-owner/dependencies/final wiring serialized, each lane in an isolated candidate branch/worktree from the exact Controller-bound parent. `OD-20260928-085` (ONE persistent sequential Writer, W01→W05 milestones) is historical task-specific lineage; the W0X grouping above remains scope grouping, not a sequential mandate. Any body text that treats `1 Writer → 1 Surface` as fixed topology, plus historical `writer/cep-serial` lineage, historical baseline SHAs, fixed model names, or old PRE_WRITER gate wording, is **lineage only**.  
+> Before this family's lanes may mutate Product, the Controller must rebind the actual remote parent/HEAD/tree, exact current Product subtree, Writer authority projection + lane-applicable subset, current SurfaceProfiles/oracles/references, current open findings, exact writable roots/shared-seam locks, tests/falsifiers/evidence, and STOP gate — via the final evidence-reuse DAG after `RECOVERY_GATE_PASS`.  
+> The Surface packets under `surface_units/` are candidate lane units — structural scope/reference inputs launchable only through exact packet binding from the final DAG, never independent launch authority.  
+> **Current Controller phase:** `EXISTING_AUDIT_CORPUS_RECONCILIATION__BOUNDED_GAP_FILL__PARALLEL_DAG_REBIND`; no Writer launch is authorized from this packet now (until `RECOVERY_GATE_PASS`).
 
 # W04_COMPLETE_WORKSPACE_PACKET — Evidence · Reviews · Mastery · Portfolio
 

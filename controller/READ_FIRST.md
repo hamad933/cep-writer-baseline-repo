@@ -50,8 +50,8 @@ Role boundary: `controller/roles/CHATGPT_CONTROLLER_HELPER_OPERATING_PROFILE.md`
 ## Current truth ceilings
 
 - H03 propagation/falsification: `NOT_PROVEN`.
-- Enterprise shared relation integration: OPEN Product defect.
-- Runs causal flow: `UNRESOLVED_RUNTIME_OR_HARNESS_INTEGRATION`.
+- Enterprise shared relation integration: OPEN Product defect (2 browser FAILs, one integration root).
+- Runs causal flow: CLOSED — `HARNESS_ORACLE_DEFECT__CLOSED_WITHOUT_PRODUCT_MUTATION` (source-bound `@490b6a40` / run `36947731860`); older "UNRESOLVED_RUNTIME_OR_HARNESS_INTEGRATION" claims are historical (@db41d0f-era).
 - Product acceptance/main merge/release/deploy: NOT_AUTHORIZED.
 - stack: `STACK_EXPANSION_LOCKED__STACK_NOT_FROZEN`.
 

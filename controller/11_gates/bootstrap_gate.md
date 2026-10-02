@@ -1,6 +1,6 @@
-> **CURRENT CONTROLLER CEILING — 2026-10-02**
+> **CURRENT CONTROLLER CEILING — 2026-10-02 (reconciled)**
 > This document is historical execution evidence and is **not current ROUTE-MIMO-AGENT launch authority**.
-> `OD-20260928-085` controls the current carrier: one persistent sequential Writer on `writer/mi-serial`, W01→W05.
+> Current topology is `OD-20261002-087`: parallel disjoint lanes, one mutating Writer per exact bounded Surface/lane; shared hotspots/dependencies/final wiring serialize. `OD-20260928-085` (one persistent sequential Writer, W01→W05) is historical task-specific lineage — this gate's old ceiling text citing it as controlling is superseded.
 > Controller Zero-Loss Convergence is open and no Writer dispatch is authorized from this historical gate alone.
 > Preserve the body below as lineage; use `controller/READ_FIRST.md` + `controller/authority/AUTHORITY_STATUS.json` for current recovery.
 

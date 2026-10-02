@@ -1,5 +1,10 @@
 # 10_dispatch / dispatch_manifest (READY)
 
+> **CURRENT CONTROLLER CEILING — 2026-10-02 (reconciled)**
+> This manifest is **HISTORICAL DISPATCH-ERA EVIDENCE (2026-09-29)** — not current launch authority and not current topology.
+> Its serial-order body (`OD-20260928-085` … "exactly one persistent sequential Writer") is superseded: the seriality reading was already superseded within the dispatch era by `controller/12_execution/02_parallel_dispatch.md` (Owner-directed parallel execution, 2026-09-29T03:45Z) and now by `OD-20261002-087` (parallel disjoint lanes, one Writer per bounded Surface/lane).
+> Its durable value = dispatch-package composition, packet/CSV bindings, baseline identities and PW-A…PW-D integration order as historical lineage. Preserve the body as lineage; no dispatch may launch from this file alone.
+
 Timestamp: 2026-09-29T03:00Z · Gate: `../11_gates/PRE_WRITER_DISPATCH_GATE.md` = PASS_WITH_LIMITATION (dispatch authorized)
 
 ## Dispatch package per Writer (exactly five; whole-workspace ownership)
