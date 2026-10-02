@@ -42,7 +42,19 @@ async function refreshPlatformDirectionAsync() {
     const url = (globalThis.CEP_LOCAL_RUNTIME_URL || 'http://127.0.0.1:4174') + '/v1/platform/input-direction';
     fetchPromise = fetch(url, { method: 'GET' })
       .then(res => {
-        if (!res.ok) return null;
+        if (!res.ok) {
+          /* closure R-07: deterministically release the unread non-OK response body.
+             Previously the body relied on implicit browser release (GC/abort-timed and
+             load-dependent — under multi-lane runtime load the request stayed in-flight
+             and networkidle never settled: RUN-1 B1, REV-1 §2 evidence). The success path
+             is unchanged: non-OK -> null -> cached hint untouched (truthful degradation,
+             no fabricated direction). Cancellation is best-effort; settlement never throws. */
+          try {
+            const pending = typeof res.body?.cancel === 'function' ? res.body.cancel() : null;
+            if (pending && typeof pending.catch === 'function') pending.catch(() => {});
+          } catch { /* best-effort */ }
+          return null;
+        }
         return res.json();
       })
       .then(data => {
