@@ -1,0 +1,67 @@
+# CEP — WRITER RESULT RECONSTRUCTION BASELINE
+
+**Classification:** `CONTROLLER_RECONSTRUCTION_INPUT__NOT_LAUNCH_AUTHORITY`
+**Current authority:** `OD-20261002-087`
+**Historical execution snapshot:** `writer/mi-serial@d5d7588fbd6445a66cdb7d57e0cc48e619591361`
+
+## Historical execution truth at interruption
+
+REVIEWED:
+Today, RQ, Scenarios, Evidence, Configuration.
+
+IN_PROGRESS:
+Audit, Backup, Enterprise, Labs, Runs, Releases, Manual AI, Library, Learn, Visualize, Reviews, Mastery, Portfolio.
+
+NOT_DISPATCHED:
+Health, Processing, Validation, Results, Shell.
+
+DURABLY_RESCUED / CONTROLLER_REVIEW_QUEUE:
+Library, Learn, Visualize, Labs, Runs, Reviews, Mastery, Portfolio, Audit, Backup, Releases, Enterprise.
+
+A rescue/report/evidence directory does not equal completion or acceptance.
+
+## Current 23-Surface reconstruction
+
+| Surface | Reconstruction class | Required next operation |
+|---|---|---|
+| Today | COMPLETE_RESULT_REAUDIT_REQUIRED | Audit exact retained result/current source; Writer only if findings remain |
+| RQ | COMPLETE_RESULT_REAUDIT_REQUIRED | Audit current mount/source/reference ceiling |
+| Scenarios | COMPLETE_RESULT_REAUDIT_REQUIRED | Audit exact result + W03 shared seams |
+| Evidence | COMPLETE_RESULT_REAUDIT_REQUIRED | Audit exact result/profile/shared owners |
+| Configuration | COMPLETE_RESULT_REAUDIT_REQUIRED | Audit exact result/settings-preference seams |
+| Enterprise | COMPLETE_RESULT_REAUDIT_REQUIRED | Audit later durable result; relation defect is not sole project scope |
+| Library | PARTIAL_SALVAGE_CONTINUE_OR_REAUDIT | Inspect exact delta/open findings |
+| Learn | PARTIAL_SALVAGE_CONTINUE_OR_REAUDIT | Inspect exact delta/open findings + H03 ceiling |
+| Visualize | PARTIAL_SALVAGE_CONTINUE_OR_REAUDIT | Inspect views/provider/lifecycle findings |
+| Labs | PARTIAL_SALVAGE_CONTINUE_OR_REAUDIT | Inspect exact candidate/open findings |
+| Runs | PARTIAL_SALVAGE_CONTINUE_OR_REAUDIT | Inspect exact candidate; do not infer completion from later harness closure |
+| Reviews | PARTIAL_SALVAGE_CONTINUE_OR_REAUDIT | Inspect candidate/shared Review owners |
+| Mastery | PARTIAL_SALVAGE_CONTINUE_OR_REAUDIT | Inspect candidate/open findings |
+| Portfolio | PARTIAL_SALVAGE_CONTINUE_OR_REAUDIT | Deep result audit; report existence alone is weak evidence |
+| Audit | PARTIAL_SALVAGE_CONTINUE_OR_REAUDIT | Deep audit; reconstructed report is not original completion proof |
+| Backup | PARTIAL_SALVAGE_CONTINUE_OR_REAUDIT | Deep source/runtime audit |
+| Releases | PARTIAL_SALVAGE_CONTINUE_OR_REAUDIT | Deep source/provider/lifecycle audit |
+| Manual AI | PARTIAL_RESULT_LINEAGE_RECONSTRUCTION_REQUIRED | Determine whether result completed after snapshot or was reconstructed |
+| Shell | NO_ORIGINAL_SURFACE_WRITER_COMPLETION_PROVEN | Inspect later family/coordinator evidence before new Writer |
+| Health | NO_ORIGINAL_SURFACE_WRITER_COMPLETION_PROVEN | Inspect later W05 family delta/evidence |
+| Processing | NO_ORIGINAL_SURFACE_WRITER_COMPLETION_PROVEN | Inspect later W05 family delta/evidence |
+| Validation | NO_ORIGINAL_SURFACE_WRITER_COMPLETION_PROVEN | Inspect later W05 family delta/evidence |
+| Results | NO_ORIGINAL_SURFACE_WRITER_COMPLETION_PROVEN | Inspect later W03 family delta/evidence |
+
+## Parallelism admission
+
+No Surface is automatically relaunched.
+
+Each row must become one of:
+- `AUDIT_ONLY__NO_WRITER`
+- `CONTINUE_EXISTING_SALVAGE`
+- `NEW_BOUNDED_WRITER_REQUIRED`
+- `WAIT_FOR_SHARED_SEAM`
+
+Then:
+- one mutating Writer per exact bounded Surface/lane;
+- genuinely disjoint lanes may run concurrently;
+- shared Foundation/family owners and final wiring serialize;
+- final convergence is Controller-owned and independently reverified.
+
+This file reconstructs execution history/custody only. It does not create Product acceptance.
