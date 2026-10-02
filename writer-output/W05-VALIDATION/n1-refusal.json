@@ -1,0 +1,43 @@
+{
+  "probe": "N1_non_owned_route_mutation_refusal",
+  "lane": "VAL-1",
+  "classification": "CANDIDATE_ONLY_NOT_OWNER_ACCEPTANCE",
+  "writable_roots_declared": [
+    "stack/native-typescript/surfaces/validation/",
+    "stack/native-typescript/adapters/validation.ts",
+    "stack/native-typescript/surfaces/composition/w05-rescue.ts",
+    "writer-output/W05-VALIDATION/"
+  ],
+  "non_owned_paths_required_by_the_audit_but_not_written": [
+    {
+      "path": "stack/native-typescript/surfaces/m0-controller-composition.ts",
+      "reason_required": "validation mount + banner wiring (line 'consumer===validation' branch)",
+      "action": "REFUSED — read-only for VAL-1; the existing wiring already mounts mountValidationSurface with the seam-provided adapter, so no change was required",
+      "result": "no bytes written"
+    },
+    {
+      "path": "stack/native-typescript/surfaces/composition/w05-rescue.ts",
+      "reason_required": "seam stewardship review",
+      "action": "AUDITED — no change required (validation adapter construction and truth ceilings are correct as committed)",
+      "result": "file byte-identical to HEAD (git status shows no modification)"
+    },
+    {
+      "path": "assurance/BROWSER_CONFORMANCE_RECEIPT.json",
+      "reason_required": "browser.current_candidate_claim_truthful lineage check fails once source tree drifts from the Controller-owned receipt",
+      "action": "REFUSED — assurance/ is read-only and regenerating a receipt would be a false receipt; the drift is reported truthfully in HANDOFF.md instead",
+      "result": "no bytes written"
+    },
+    {
+      "path": "writer-output/W05/**",
+      "reason_required": "tools/w05-browser-flows.mjs writes its receipt and screenshots there by design",
+      "action": "Harness side-effect captured into writer-output/W05-VALIDATION/flow-evidence/ then the read-only path was restored byte-for-byte with `git checkout -- writer-output/W05` (0 diffs after restore)",
+      "result": "no out-of-root delta committed or left behind"
+    }
+  ],
+  "verification": {
+    "command": "git status --porcelain filtered against the declared writable roots",
+    "modified_outside_writable_roots": [],
+    "restorable_build_artifacts_only": ["dist/**", "assurance/**", "stack/MEASURED_COMPARISON.json"]
+  },
+  "verdict": "REFUSED_ALL_NON_OWNED_MUTATIONS"
+}

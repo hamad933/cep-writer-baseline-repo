@@ -1,0 +1,19 @@
+{
+  "lane": "VAL-1",
+  "surface": "validation",
+  "branch": "writer/mi-serial-lane/VAL-1",
+  "parent": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+  "product_commit": "4e5c272489812801be53b370fe18de44b56a6948",
+  "product_commit_tree": "daeca4fb3ac03a3a1f87904fb20ff8b7f4562253",
+  "product_commit_subject": "candidate(w05-validation): audit-then-complete validation surface truth + presentation",
+  "canonical_source_tree_sha256": "ad431b655aed13ac6741bbf007f3e214782d4bd5e4309e0df1d9e872b5e8addb",
+  "canonical_source_file_count": 338,
+  "changed_product_paths": [
+    "stack/native-typescript/adapters/validation.ts",
+    "stack/native-typescript/surfaces/validation/index.ts"
+  ],
+  "seam_w05_rescue_touched": false,
+  "seam_w05_rescue_committed_sha256": "04408baa8539c30cc8aeb3ff5546689ee5060d5ca1dd7ab41a1ec31c70e54300",
+  "note": "product_commit/product_commit_tree bind every source delta and every piece of lane evidence in this handoff. This identity file is committed immediately afterwards, so the final branch tip is one commit later; the exact pushed tip is reported by the lane in its final message and is reproducible with `git rev-parse origin/writer/mi-serial-lane/VAL-1`.",
+  "classification": "CANDIDATE_ONLY_NOT_OWNER_ACCEPTANCE"
+}

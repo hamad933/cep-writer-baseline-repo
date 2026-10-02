@@ -1,0 +1,386 @@
+{
+  "schemaVersion": 1,
+  "lane": "VAL-1",
+  "classification": "CANDIDATE_ONLY_NOT_OWNER_ACCEPTANCE",
+  "purpose": "Validation surface truth falsification (N2/N3 + stale binding) and AR-RTL/EN-LTR presentation capture",
+  "generatedAt": "2026-10-02T05:14:05.548Z",
+  "node": "v22.16.0",
+  "assertions": [
+    {
+      "id": "1440x1000.default-direction-follows-locale",
+      "expected": "ltr",
+      "actual": "ltr",
+      "ok": true,
+      "detail": "resolved default locale en"
+    },
+    {
+      "id": "1440x1000.A-status-technically-valid",
+      "expected": "TECHNICALLY_VALID",
+      "actual": "TECHNICALLY_VALID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.A-no-unevaluated-rule-fabricated-as-pass",
+      "expected": [],
+      "actual": [],
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.B-status-invalid",
+      "expected": "TECHNICALLY_INVALID",
+      "actual": "TECHNICALLY_INVALID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.B-json-parse-fails",
+      "expected": "✕ FAIL",
+      "actual": "✕ FAIL",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.B-unchecked-rules-not-claimed-pass",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": "[\"ARTIFACT_REF_REQUIRED\",\"ARTIFACT_DIGEST_REQUIRED\",\"RULESET_IDENTITY_REQUIRED\",\"VALIDATOR_IDENTITY_REQUIRED\",\"VALIDATOR_UNAVAILABLE\",\"RULESET_UNAVAILABLE\",\"PAYLOAD_OBJECT_REQUIRED\",\"ROOT_OBJECT_REQUIRED\"]"
+    },
+    {
+      "id": "1440x1000.C-null-root-invalid",
+      "expected": "TECHNICALLY_INVALID",
+      "actual": "TECHNICALLY_INVALID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.C-null-root-has-root-not-object-finding",
+      "expected": "✕ FAIL",
+      "actual": "✕ FAIL",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.D-no-provider-unavailable",
+      "expected": "UNAVAILABLE",
+      "actual": "UNAVAILABLE",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.D-validator-unavailable-finding",
+      "expected": "✕ FAIL",
+      "actual": "✕ FAIL",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.D-never-technically-valid-without-provider",
+      "expected": "UNAVAILABLE",
+      "actual": "UNAVAILABLE",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.E-stale-banner-shown",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.E-stale-feedback-declared",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.E-stale-banner-survives-render",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.F-unresolved-identity-not-labelled-stale",
+      "expected": false,
+      "actual": false,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.F-unresolved-identity-declared",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.G-ar-switch-applies",
+      "expected": {
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "actual": {
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.G-ar-still-technically-valid",
+      "expected": "TECHNICALLY_VALID",
+      "actual": "TECHNICALLY_VALID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.G-en-switch-applies",
+      "expected": {
+        "lang": "en",
+        "dir": "ltr"
+      },
+      "actual": {
+        "lang": "en",
+        "dir": "ltr"
+      },
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.G-en-still-technically-valid",
+      "expected": "TECHNICALLY_VALID",
+      "actual": "TECHNICALLY_VALID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.default-direction-follows-locale",
+      "expected": "ltr",
+      "actual": "ltr",
+      "ok": true,
+      "detail": "resolved default locale en"
+    },
+    {
+      "id": "1024x900.A-status-technically-valid",
+      "expected": "TECHNICALLY_VALID",
+      "actual": "TECHNICALLY_VALID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.A-no-unevaluated-rule-fabricated-as-pass",
+      "expected": [],
+      "actual": [],
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.B-status-invalid",
+      "expected": "TECHNICALLY_INVALID",
+      "actual": "TECHNICALLY_INVALID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.B-json-parse-fails",
+      "expected": "✕ FAIL",
+      "actual": "✕ FAIL",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.B-unchecked-rules-not-claimed-pass",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": "[\"ARTIFACT_REF_REQUIRED\",\"ARTIFACT_DIGEST_REQUIRED\",\"RULESET_IDENTITY_REQUIRED\",\"VALIDATOR_IDENTITY_REQUIRED\",\"VALIDATOR_UNAVAILABLE\",\"RULESET_UNAVAILABLE\",\"PAYLOAD_OBJECT_REQUIRED\",\"ROOT_OBJECT_REQUIRED\"]"
+    },
+    {
+      "id": "1024x900.C-null-root-invalid",
+      "expected": "TECHNICALLY_INVALID",
+      "actual": "TECHNICALLY_INVALID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.C-null-root-has-root-not-object-finding",
+      "expected": "✕ FAIL",
+      "actual": "✕ FAIL",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.D-no-provider-unavailable",
+      "expected": "UNAVAILABLE",
+      "actual": "UNAVAILABLE",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.D-validator-unavailable-finding",
+      "expected": "✕ FAIL",
+      "actual": "✕ FAIL",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.D-never-technically-valid-without-provider",
+      "expected": "UNAVAILABLE",
+      "actual": "UNAVAILABLE",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.E-stale-banner-shown",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.E-stale-feedback-declared",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.E-stale-banner-survives-render",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.F-unresolved-identity-not-labelled-stale",
+      "expected": false,
+      "actual": false,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.F-unresolved-identity-declared",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.G-ar-switch-applies",
+      "expected": {
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "actual": {
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.G-ar-still-technically-valid",
+      "expected": "TECHNICALLY_VALID",
+      "actual": "TECHNICALLY_VALID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.G-en-switch-applies",
+      "expected": {
+        "lang": "en",
+        "dir": "ltr"
+      },
+      "actual": {
+        "lang": "en",
+        "dir": "ltr"
+      },
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.G-en-still-technically-valid",
+      "expected": "TECHNICALLY_VALID",
+      "actual": "TECHNICALLY_VALID",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "summary": {
+    "total": 40,
+    "pass": 40,
+    "fail": 0
+  },
+  "pageErrors": [],
+  "captures": [
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/validation-stale-1440x1000-en.png",
+      "viewport": "1440x1000",
+      "locale": "en",
+      "dir": "ltr",
+      "sha256": "b28a8590255956c2044cdc7f13336ab5308057bc6c84f705f91fde1c505a40ee",
+      "bytes": 236430
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/validation-session-default-1440x1000-en.png",
+      "viewport": "1440x1000",
+      "locale": "en",
+      "dir": "ltr",
+      "sha256": "fdac804a13512c8c91d9c464c201370e6f9aaf63ab24229fc443281b19076b3b",
+      "bytes": 244755
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/validation-session-1440x1000-ar.png",
+      "viewport": "1440x1000",
+      "locale": "ar",
+      "dir": "rtl",
+      "sha256": "b7de59159a07cdce59b13c9fca405ac94f284b98064f05486a80bf96fc317cca",
+      "bytes": 241985
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/validation-session-1440x1000-en.png",
+      "viewport": "1440x1000",
+      "locale": "en",
+      "dir": "ltr",
+      "sha256": "04f59d477d25a21adb95fbe673244475efa92ce9caa0b71c422f2debe3c5a390",
+      "bytes": 244922
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/validation-stale-1024x900-en.png",
+      "viewport": "1024x900",
+      "locale": "en",
+      "dir": "ltr",
+      "sha256": "12a12321b9b372bf4d0087111a8adb750b761e9d29de21f3e943842d1064da0b",
+      "bytes": 163098
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/validation-session-default-1024x900-en.png",
+      "viewport": "1024x900",
+      "locale": "en",
+      "dir": "ltr",
+      "sha256": "42590b88eca9d98dd4b8a3b3d9a9cc32fea383f4b048759fce748664079ca25a",
+      "bytes": 163522
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/validation-session-1024x900-ar.png",
+      "viewport": "1024x900",
+      "locale": "ar",
+      "dir": "rtl",
+      "sha256": "5494e988fc88a8c65c188c99053102da569d86abac27c7059b29b6549863ef4d",
+      "bytes": 160801
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/validation-session-1024x900-en.png",
+      "viewport": "1024x900",
+      "locale": "en",
+      "dir": "ltr",
+      "sha256": "aa0bcbb6829da2c629d355db7209f1af9756d6436f561983d8a18f4b874e86ca",
+      "bytes": 164085
+    }
+  ]
+}
