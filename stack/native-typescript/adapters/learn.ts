@@ -6,11 +6,23 @@ import {learnNoteBindingInput} from './note-binding-domains.js';
 
 const clone=value=>structuredClone(value);
 const unsafeTruth=value=>/(FIXTURE|DEMO|SYNTHETIC|HARNESS|PROOF|NON_PRODUCTION|ACCEPTANCE_SEED|NOT_CANONICAL_RUNTIME_IMPORT)/i.test(String(value||''));
+/* Two-tier Learn source admission (W02-LEARN LRN-1):
+   tier 1 — the source's own `classification` declares the ARTIFACT to be a fixture/demo/synthetic/harness/proof
+            artifact → hard admission error, no composition object is ever created from it (throws, mirroring
+            Library's assertGenuineLibrarySource → LIBRARY_FIXTURE_SOURCE_FORBIDDEN);
+   tier 2 — a product/runtime classification whose provenance `truth` (or a non-production marker such as
+            ACCEPTANCE_SEED / NON_PRODUCTION / NOT_CANONICAL_RUNTIME_IMPORT) is non-canonical → composition
+            succeeds in a truthful UNAVAILABLE state with rejectionReason LEARN_FIXTURE_OR_SYNTHETIC_SOURCE_FORBIDDEN,
+            never synthetic learning content (C5-002 / A12-PF-002 / d08 A03-PF-014, N3).
+   Both tiers carry the identical rejection code. */
+const fabricatedArtifact=value=>/(FIXTURE|DEMO|SYNTHETIC|HARNESS|PROOF)/i.test(String(value||''));
 const unavailableDocument=()=>({id:'learn-unavailable',revision:'UNAVAILABLE',title:'Learning source unavailable',tags:['Learning','Unavailable'],blocks:[{id:'learn-unavailable-p1',type:'paragraph',html:'Learning source is not bound. This placeholder is not canonical learning content and is not editable.'}]});
 const unavailableSource=(source,reason)=>({available:false,truth:reason==='LEARN_PROVIDER_UNBOUND'?'UNAVAILABLE_PROVIDER_UNBOUND':'UNAVAILABLE',classification:'UNAVAILABLE',providerRef:source?.providerRef||null,rejectionReason:reason,rejectedSource:{truth:String(source?.truth||source?.sourceTruth||'UNAVAILABLE'),classification:String(source?.classification||source?.kind||'UNAVAILABLE'),reason},activity:{id:'learn-unavailable',revision:1,title:'Learning source unavailable',kind:'unavailable',editable:false,prerequisiteState:'UNKNOWN'},document:unavailableDocument()});
 const normalizeSource=(source,{allowTestSource=false}={})=>{
   if(!source)return unavailableSource(source,'LEARN_PROVIDER_UNBOUND');
-  if((unsafeTruth(source.classification)||unsafeTruth(source.truth))&&!(allowTestSource&&source.testOnly===true))return unavailableSource(source,'LEARN_FIXTURE_OR_SYNTHETIC_SOURCE_FORBIDDEN');
+  const admitted=allowTestSource===true&&source.testOnly===true;
+  if(!admitted&&fabricatedArtifact(source.classification))throw Error('LEARN_FIXTURE_OR_SYNTHETIC_SOURCE_FORBIDDEN: '+String(source.classification));
+  if((unsafeTruth(source.classification)||unsafeTruth(source.truth))&&!admitted)return unavailableSource(source,'LEARN_FIXTURE_OR_SYNTHETIC_SOURCE_FORBIDDEN');
   if(!source.activity?.id||source.activity.revision===undefined||!source.document?.id||!source.document?.revision||!Array.isArray(source.document?.blocks))return unavailableSource(source,'LEARN_EXACT_CANONICAL_SOURCE_REQUIRED');
   return {available:true,truth:String(source.truth||'BOUND_CANONICAL_LEARNING_SOURCE'),classification:String(source.classification||'PRODUCT_RUNTIME_BOUND_SOURCE'),providerRef:source.providerRef||null,activity:clone(source.activity),document:clone(source.document)};
 };
@@ -26,7 +38,7 @@ export class LearnAdapter {
     const document=clone(this.source.document);
     this.structured=new StructuredDocumentDomainAdapter({
       owner:'LearnAdapter',domainKind:'learn',document,
-      metadata:{surface:'learn',domainOwner:'LearnAdapter',activityId:this.activity.id,activityRevision:this.activity.revision,libraryIndependent:false,persistence:'UNCONFIGURED_LOCAL_WORKING_STATE',consumerTruth:this.source.truth,sourceAvailability:this.sourceAvailable?'AVAILABLE':'UNAVAILABLE'},
+      metadata:{surface:'learn',domainOwner:'LearnAdapter',activityId:this.activity.id,activityRevision:this.activity.revision,libraryIndependent:true,persistence:'UNCONFIGURED_LOCAL_WORKING_STATE',consumerTruth:this.source.truth,sourceAvailability:this.sourceAvailable?'AVAILABLE':'UNAVAILABLE'},
       sourceBinding:{sources:this.sourceAvailable?[{id:this.activity.id,title:this.activity.title,kind:'LearningActivity',revision:this.activity.revision,status:'BOUND'}]:[],truth:this.source.truth,classification:this.source.classification,providerRef:this.source.providerRef},
       noteBinding:{route:'PERSONAL:CEP/W02/learn'}
     });

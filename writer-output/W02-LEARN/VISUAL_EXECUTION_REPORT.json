@@ -1,176 +1,260 @@
 {
-  "STAGE": "SOURCE_COMPOSED__RECAPTURE_BLOCKED_BY_TRANSIENT_SHARED_BUILD_RED",
-  "UPDATED": "2026-09-30T19:05:00Z",
+  "STAGE": "CANDIDATE_CONTINUED__STALENESS_CONFLICT_RESOLVED__VISION_CONFLICT_RESOLVED__NOT_OWNER_ACCEPTED",
+  "UPDATED": "2026-10-02T06:05:00Z",
   "SURFACE": "learn",
   "OWNER": "W02-LEARN",
+  "LANE": "LRN-1",
   "REFERENCE": {
     "path": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/02_LEARN/CEP_VIS_001_LEARN_FINAL_OWNER_CONFIRMED_REFERENCE.png",
     "sha256": "5fa530e7c9506fd7d70339699c5f013908f77dd4df29007d1d021cf7d331d2b8",
-    "dims": "1505x1045",
     "bytes": 1784520,
+    "dims": "1505x1045",
     "classification": "OWNER_CONFIRMED_FINAL_REFERENCE",
     "register": "cep-writer/references/FINAL_VISUAL_REFERENCE_REGISTER.md",
     "manifest": "cep-writer/REFERENCE_MANIFEST.json",
-    "readStatus": "READ via vision channel; sha256 recomputed locally and matches packet register value (5fa530e7c9506fd7). OCR cross-check of reference bytes PENDING.",
-    "lineage": "Owner-confirmed final reference for surface `learn`. Construction authority for: three-pane organization (path rail / activity work / context), progress-first left rail with staged journey + milestone rows, single dominant activity header with status chip + meta chips, objective callout, document-with-steps center, stacked labelled context sections, bottom shelf tab bar. Purpose = a learner progressing through structured material against the library corpus."
+    "readStatus": "sha256 recomputed locally and equal to the packet register value 5fa530e7c9506fd7; reference opened on the vision channel this lane. Construction authority: three-pane organization (path rail / activity work / context), progress-first left rail with staged journey + milestone rows, single dominant activity header with status chip and meta chips, objective callout, document-with-steps centre, stacked labelled context sections, bottom shelf tab bar."
   },
   "REFERENCE_CLASSIFICATION": "OWNER_CONFIRMED_FINAL_REFERENCE",
   "CURRENT_CANDIDATE": {
-    "commit": "d2b3e47615d2 (HEAD at v1 capture; worktree dirty — learn roots owned by this unit only)",
-    "buildTool": "tools/writer-serial.sh npm run build:runtime",
+    "branch": "writer/mi-serial-lane/LRN-1",
+    "parentCommit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "parentGitTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+    "parentCanonicalSourceTreeSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+    "candidateCanonicalSourceTreeSha256": "9b8572156d1831eab3f273432aa8d978d862f92d613f915f4b49e791457e6746",
+    "candidateCanonicalSourceFileCount": 338,
+    "state": "UNCOMMITTED working delta over parent: 2 product source files + writer-output/W02-LEARN (committed together by this lane)",
+    "build": "npm run build:runtime — PASS",
     "renderMethod": "GENUINE_ROUTE_LOCAL_BROWSER",
     "route": "/?surface=learn",
-    "capture": "writer-output/W02-LEARN/capture.mjs"
+    "capture": "writer-output/W02-LEARN/capture.mjs",
+    "waitUntil": "domcontentloaded + CEPFoundation.consumer===learn assertion + 1200ms settle. `networkidle` is unusable in this shared container because a concurrent lane's stack/local-runtime/server.mjs holds the shared fixed port 127.0.0.1:4174 and answers /v1/platform/input-direction with a 503 whose browser response never completes (ENVIRONMENT, not product — see BLOCKERS)."
   },
   "FILES_CHANGED": [
-    "stack/native-typescript/surfaces/learn/i18n.ts (NEW — bilingual AR/EN label set, locale/direction readers, bidi-safe token helpers)",
-    "stack/native-typescript/surfaces/learn/styles.ts (NEW — Learn local presentation system: type/spacing/radius/state scales, logical-property layout only)",
-    "stack/native-typescript/surfaces/learn/model.ts (NEW — pure projection of LearnAdapter + structured document truth into pane shapes)",
-    "stack/native-typescript/surfaces/learn/composition.ts (NEW — banner/LEFT/RIGHT/BOTTOM/TOOLBAR/CENTER composition orchestrator)",
-    "stack/native-typescript/surfaces/learn/surface.ts (EDIT — mounts composition after command binding; bilingual command labels)",
-    "stack/native-typescript/adapters/context-learn-structured.ts (REWRITTEN — 5 lenses x 2 tabs of bilingual Learn context content, revisionToken nulled to drop non-bilingual shared chrome)",
-    "writer-output/W02-LEARN/capture.mjs (NEW — writer-local capture harness with hash-bound lineage)",
-    "writer-output/W02-LEARN/VISUAL_EXECUTION_REPORT.json (this report)"
+    "stack/native-typescript/adapters/learn.ts (EDIT — H03 residual F04: metadata.libraryIndependent false→true; two-tier Learn source admission: fabricated classification → hard rejection, non-production provenance marker → fail-closed truthful UNAVAILABLE)",
+    "stack/native-typescript/surfaces/learn/composition.ts (EDIT — DEF-L04 reopened then CLOSED: donor KU/block scope-switch suppression made effective with display:none!important and correctly scoped away from Learn's own ContextInspector detail tabs)",
+    "writer-output/W02-LEARN/capture.mjs (EDIT — writer-local instrument only: waitUntil networkidle→domcontentloaded+consumer-identity, reason recorded in its manifest)",
+    "writer-output/W02-LEARN/** (VISUAL_EXECUTION_REPORT.json, HANDOFF.md, FALSIFICATION.json, LANE_BROWSER_PROBE.json, instruments, v4-before/v4/v4-crops evidence)"
   ],
-  "FUNCTIONAL_STATUS": "PASS at v1 capture: route boots, no page errors, all4 frames (en/ar x 1505x1045,1280x860) rendered with consumer=learn, dir/lang correct per locale, no horizontal overflow. Command binding preserved (owner/transactionOwner/commands list unchanged). v2 re-capture blocked by an unrelated in-flight shared-build red (mastery export missing).",
-  "STRUCTURAL_STATUS": "PASS at v1: LEFT=Learn path rail inside #domainLeftRegion, CENTER=[activity workbench] + shared Structured editor, RIGHT=shared ContextInspectorHost with Learn-authored provider, TOOLBAR=learn.open/learn.practice/learn.review, TOP=Learn-owned TopBanner content, BOTTOM=localised shelf label/summary.",
-  "VISUAL_STATUS": "IN_PROGRESS — recomposition v1 captured and OCR-ground-truthed; v2 fixes (stale donor scaffold removal, AR typo, bilingual toolbar labels, donor scope switch suppression, bottom localisation) applied to source and awaiting rebuild+recapture.",
+  "FUNCTIONAL_STATUS": "PASS — build:runtime green; npm test 210/0 run twice with byte-identical test arrays; tests/surfaces/learn 22 cases PASS; S08 17/17 PASS; LCORR01 29/29, D08 10/10, D05 23/23, CG3_W01_W02_COVERAGE PASS; route /?surface=learn boots with consumer=learn and zero page errors in every captured frame; command binding unchanged (owner LearnDomainAdapter, transactionOwner StructuredTransactionHistoryRecoveryOwner, commands learn.open, learn.edit, learn.practice, learn.review).",
+  "STRUCTURAL_STATUS": "PASS — LEFT = Learn Journey path rail as the only child of #domainLeftRegion (donor scaffold absent); CENTER = Learn learning workbench + shared Structured editor; RIGHT = shared ContextInspectorHost fed by the Learn-authored provider (revisionToken null); TOOLBAR = learn.* commands with bilingual concise labels; TOP = Learn TopBanner; BOTTOM = localised shelf label/summary.",
+  "VISUAL_STATUS": "PASS_WITH_DEFECTS — v4 opens as designed product UI in the reference's region organization; vision-verified at 1440x1000 in EN and AR. The presentation-visible delta versus the exact pre-change state is exactly one region: the donor Library scope pills are gone from the RIGHT pane (pixel diff 13,232 px, bbox [1033,653,1427,688]; every other pixel identical; at 1024x900 the frames are byte-identical because the RIGHT pane is collapsed there). Residual defects DEF-L06 and DEF-L08 are shared-component owned and were not edited.",
   "VISUAL_COMPARISON_LEVELS_COMPLETED": [
-    "L1 whole surface: reference vs candidate (v1) — composition now matches reference IA (progress rail left, activity work center, context right); identity/density deltas recorded as DEF-L01..L04",
-    "L2 region/pane: LEFT rail geometry + content verified by probe+OCR; RIGHT inspector lens/tab structure verified by probe; CENTER workbench verified by probe",
-    "L3 component: path-progress card, 4-stage rail, objective callout, practice panel with lifecycle steps, brief disclosures, context lens tabs",
-    "L4 micro: pending — needs verified vision read of v2 bytes (see VISION verification status)"
+    "L1 whole surface: reference vs v4-before and v4 at 1440x1000 EN and AR, from the actual bytes",
+    "L2 region/pane: LEFT rail, CENTER workbench, RIGHT inspector, TOP banner, toolbar, BOTTOM shelf — before/after",
+    "L3 component: path-progress card, 4-stage rail, canonical-source card, objective callout, practice panel, context lens tabs and detail tabs",
+    "L4 micro: toolbar status chip vs shared 'Fold all' label (overlap defect found → DEF-L08); context-scope pill region (fixed); crops + objective pixel diff under evidence/v4-crops/"
   ],
   "VISION_VERIFICATION": {
-    "status": "OPEN_CONFLICT",
-    "detail": "First vision read of evidence/v1/learn-en-1505x1045-*.png returned a frame that did NOT match the bytes: sha256 db562d781058e074… matches the capture manifest, dims 1505x1045 confirmed, and tesseract OCR of the same bytes reads 'Learning path / 0% Overall progress / 0/4 stages / Journey / Practice / Assessment / Lab / Canonical source' — the delivered vision frame showed an RTL chrome with the pre-change left pane and none of the new rail. Per visual-fidelity-review R3b the vision claim is discarded; all visual statements below are grounded on hash-bound geometry probes + OCR of the same bytes.",
+    "status": "RESOLVED",
+    "priorState": "OPEN_CONFLICT — an earlier vision read returned a frame that did not match the manifest bytes, so every visual statement was demoted to geometry probe + OCR ground truth.",
+    "resolutionThisLane": "Every material frame analysed this lane was opened on the vision channel AFTER its sha256 was recomputed locally: v4-before/learn-en-1440x1000 (9c3c43e2df05ed50…), v4/learn-en-1440x1000 (05112c59db98cf89…) and the L4 toolbar crop (7a070e8d9b23a15b…). The v4-before read shows the two Arabic Library scope pills (الوحدة / الكتلة المحددة) under 'Prerequisites UNKNOWN'; the v4 read shows the same region without them. That observation is independently confirmed by an objective pixel diff and by byte identity of the toolbar crop before/after.",
     "crossChecks": [
-      "sha256 manifest match (db562d781058e0740cd1b08aac1eed256c6d0925b449e09a1cbd61716274c69d)",
-      "dims 1505x1045",
-      "tesseract OCR of identical bytes corroborates DOM probe text"
+      "sha256 recomputed locally for every analysed frame and equal to its manifest value",
+      "v4-before/learn-ar-1440x1000 = b22c7fc85bf450eb… is byte-identical to the salvaged v3 ar-1440x1000 frame captured 2026-09-30",
+      "v4-before/learn-en-1440x1000 = 9c3c43e2df05ed50… is byte-identical to the 2026-10-02T04:55:53Z baseline W02 flow 'Learn second consumer' shot taken at the parent source tree",
+      "v4/learn-en-1440x1000 = 05112c59db98cf89… is byte-identical to the lane browser probe EN/LTR shot"
     ]
   },
-  "RESPONSIVE_STATUS": "PASS at v1 for 1505x1045 and 1280x860: three panes retained, no horizontal overflow, center reflows (759px -> 534px), touch/control targets unchanged. 1024x800 compact pass pending v2.",
-  "RTL_LTR_STATUS": "PASS at v1: en -> dir=ltr/lang=en, ar -> dir=rtl/lang=ar, both with identical structure and localized labels; no hardcoded direction in Learn source (logical properties + dir=auto content runs + bdi-isolated technical tokens).",
+  "STALENESS_CONFLICT_RESOLVED": {
+    "conflict": "The previous report claimed VISUAL_STATUS 'v2 fixes applied, awaiting rebuild+recapture', RECAPTURE_STATUS 'BLOCKED (transient shared build red: dist module missing MASTERY_CAUSAL_LAW export)' and listed only the v1 evidence — while writer-output/W02-LEARN/evidence/v3/CAPTURE_MANIFEST.json already existed with 8 hash-bound frames (4 viewports x 2 locales) captured 2026-09-30T19:14Z.",
+    "adjudication": "The manifest is the later artifact; the report text was stale. Verified rather than assumed: every v3 frame's sha256 was recomputed locally and equals its manifest value, and the v3 probes show the DEF-L01..L05 fixes present (single #domainLeftRegion child, bilingual toolbar commands, donor scope switch carrying hidden, localised BOTTOM). The transient shared-build red no longer exists — npm run build:runtime is green at this HEAD.",
+    "outcome": "Report superseded. v1, v2 and v3 are retained in place and labelled SUPERSEDED_BY_V4; current evidence is v4-before (exact parent content, writable-root diff empty) and v4 (candidate delta)."
+  },
+  "RESPONSIVE_STATUS": "PASS at the mandated matrix — 1440x1000 (wide) and 1024x900 (narrow/compact) captured in both locales. Three panes retained at 1440; LEFT retained and RIGHT deliberately collapsed at 1024x900; centre reflows 759px→709px; toolbar wraps to 79px; zero horizontal overflow in every frame; control targets unchanged. Collapsed-state comparison performed (RIGHT pane 0x0 and hidden at 1024x900 in both before and after).",
+  "RTL_LTR_STATUS": "PASS — en → dir=ltr/lang=en and ar → dir=rtl/lang=ar at both viewports; structure identical across directions; bdi-isolated technical tokens carry unicode-bidi:isolate (computed style verified); no direction baked into Learn structure (logical properties + dir=auto runs). Verified by writer-output/W02-LEARN/LANE_BROWSER_PROBE.json checks BIDI.*.",
   "DEFECTS_FOUND": [
     {
       "id": "DEF-L01",
       "severity": "V3",
       "rootCause": "SURFACE_COMPOSITION",
-      "defect": "LEFT pane retained the pre-existing donor scaffold above the new rail: 'Learn activity outline' search + 'Local source learn-unavailable · r1' card from main.ts, leaving the rail starting at y=403 in a pane that starts at y=183 (~220px of duplicated/legacy content).",
-      "fix": "composition.ts now removes every #leftPane .pbody child except #domainLeftRegion before region('LEFT'). Applied in source; awaiting recapture."
+      "status": "CLOSED_PRIOR_LANE",
+      "defect": "LEFT pane retained the pre-existing donor scaffold above the new rail (~220px of duplicated legacy content).",
+      "fix": "composition removes every #leftPane .pbody child except #domainLeftRegion — verified in v3 and v4 captures."
     },
     {
       "id": "DEF-L02",
       "severity": "V1",
       "rootCause": "IMPLEMENTATION",
-      "defect": "Arabic label typo 'الإتقام' in masteryShort (rendered in both the path-progress card and the workbench legend).",
-      "fix": "Corrected to 'الإتقان' in i18n.ts."
+      "status": "CLOSED_PRIOR_LANE",
+      "defect": "Arabic mastery label typo.",
+      "fix": "corrected in i18n.ts"
     },
     {
       "id": "DEF-L03",
       "severity": "V2",
       "rootCause": "SURFACE_COMPOSITION",
-      "defect": "Toolbar command labels were long English-only sentences ('Start, continue, or submit practice', 'Open learning activity', 'Review local learning projection') rendered inside a bilingual toolbar.",
-      "fix": "Commands are Learn-owned (owner LearnDomainAdapter) so labels are now bilingual and concise: 'Practice / الممارسة', 'Open activity / فتح النشاط', 'Review / المراجعة', 'Edit document / تحرير المستند'."
+      "status": "CLOSED_PRIOR_LANE",
+      "defect": "English-only long toolbar command labels in a bilingual toolbar.",
+      "fix": "bilingual concise Learn command labels — visible in every v4 frame."
     },
     {
       "id": "DEF-L04",
       "severity": "V2",
-      "rootCause": "SURFACE_COMPOSITION",
-      "defect": "Donor KU/block scope switch (الوحدة / الكتلة المحددة) rendered as two orphan pills below the Learn context inspector; Learn has no Library KU scope, so the control is inapplicable dead UI.",
-      "fix": "Hidden + inert for the Learn route in composition.ts (local, learn-scoped selector)."
+      "rootCause": "SHARED_COMPONENT",
+      "status": "CLOSED_THIS_LANE__WAS_EFFECTIVELY_STILL_OPEN",
+      "defect": "The donor KU/block scope switch (الوحدة / الكتلة المحددة) was still VISIBLE on the Learn route at 1440x1000 in both locales. The prior fix set hidden/inert/aria-hidden, but the shared .contextscope rules (display:grid and one display:grid!important) defeat the [hidden] attribute, so the pills still rendered. The same selector also suppressed Learn's own nav.contextscope detail tabs, which were hidden+inert while still visible — an accessibility mismatch.",
+      "fix": "surfaces/learn/composition.ts forces display:none!important on the donor DIV.contextscope only (the selector now skips anything inside .context-inspector), leaving Learn's own Context detail tabs live and interactive. Re-verified at 1440x1000 and 1024x900 in EN and AR.",
+      "evidence": "pixel diff 13,232 px, bbox [1033,653,1427,688]; lane probe checks LANE.learn-donor-scope-switch-suppressed-not-visible, LANE.learn-own-context-detail-tabs-remain-live and LANE.donor-scope-stays-suppressed-after-EN/AR-flip all PASS"
     },
     {
       "id": "DEF-L05",
       "severity": "V1",
       "rootCause": "SURFACE_COMPOSITION",
-      "defect": "Bottom shelf label/summary stayed as donor Arabic static text ('عمل عميق' + Arabic hint) regardless of active language.",
-      "fix": "workspace.region('BOTTOM', {label, summary, open:null}) now localises both from the Settings-driven label set."
+      "status": "CLOSED_PRIOR_LANE",
+      "defect": "Bottom shelf label/summary stayed donor Arabic regardless of language.",
+      "fix": "workspace.region('BOTTOM') localises both."
     },
     {
       "id": "DEF-L06",
       "severity": "V2",
       "rootCause": "SHARED_COMPONENT",
-      "defect": "Shared ContextInspectorPresentation renders English-only chrome ('Revision:', 'Pin context', 'Close context inspector') plus a donor-forced `direction:rtl!important` on pane headings; and #topBanner secondary/tags are not rendered in the compact banner state, so the reference's meta/tag row is absent.",
-      "fix": "Mitigated locally where possible: descriptor.revisionToken set to null to drop the English-only Revision line; pane headings set through workspace.region() which writes an inline !important direction from firstStrongDirection(label). Full fix belongs to the shared shell/top-region owner — routed to Controller as a shared-component request.",
-      "status": "PARTIAL_LOCAL_MITIGATION__SHARED_REQUEST_OPEN"
+      "status": "OPEN__SHARED_HOTSPOT_NOTE",
+      "defect": "Shared chrome on the Learn route is not locale-clean: the shared Structured editor toolbar renders Arabic-only labels under the EN locale (تحرير, قراءة, عرض مساحة العمل, طي الكل), the shared ContextInspector carries donor-forced direction:!important on pane headings, and #topBanner .secondary/.tags are suppressed in the compact banner state so the reference's meta/tag row is absent.",
+      "fixThisLane": "local mitigation only — descriptor.revisionToken = null drops the English-only Revision line; pane direction comes from firstStrongDirection(label).",
+      "owner": "W01-SHELL / shared foundation — NOT writable from LRN-1",
+      "note": "Recorded as a shared-component hotspot. No foundation file was edited."
     },
     {
       "id": "DEF-L07",
       "severity": "V2",
       "rootCause": "CONTENT_MODEL / OWNER_CONSTRAINT",
-      "defect": "Learn has NO bound canonical learning source on the product route (contract C5 + S08 OD-054: main.ts must call createLearnRuntimeComposition() unbound; fixture/synthetic sources are rejected). The center therefore has no lesson body — the reference's rich lesson document cannot be produced truthfully, and the old surface showed a bare textarea + raw paragraphs instead of a designed state.",
-      "fix": "Composed the honest state as designed product UI: path rail with 4 real journey stages and real per-stage availability, progress card with real projection values, objective callout carrying learn.recommendation(), practice panel with real attempt lifecycle + disabled-with-reason affordance, assessment/lab brief disclosures carrying real descriptor truth, source-truth card with provider/classification/rejection tokens. No fixture content was promoted into product truth.",
-      "status": "MITIGATED_NOT_RESOLVED — needs R6 source binding (out of this unit's writable roots)"
+      "status": "CLOSED_WITHIN_LANE_SCOPE__R6_DEPENDENCY_RECORDED_NOT_CLAIMED",
+      "defect": "Learn has no bound canonical learning source on the product route (contract C5 keeps main.ts calling createLearnRuntimeComposition() unbound; fixture/synthetic sources are rejected), so the reference's rich lesson document cannot be produced truthfully.",
+      "resolutionThisLane": "The unavailable state is proven rather than asserted. N3 in writer-output/W02-LEARN/FALSIFICATION.json proves unbound → truth UNAVAILABLE_PROVIDER_UNBOUND, learn.edit and learn.practice disabled and refusing with LEARN_CANONICAL_SOURCE_UNAVAILABLE, no masteryWrite claim, and zero banned synthetic tokens in the rendered document AND in the Learn context descriptor. Lane browser probe N3.* confirm the same on the real route with real frames. No fixture or synthetic content is promoted anywhere.",
+      "outOfRoots": "The remaining R6 canonical-source binding (main.ts + a canonical Learn provider) is OUTSIDE LRN-1's writable roots. It is recorded as an out-of-root dependency — not claimed, not performed, no false receipt.",
+      "ceiling": "no synthetic learning content is ever rendered or claimed; the honest state is designed product UI"
+    },
+    {
+      "id": "DEF-L08",
+      "severity": "V2",
+      "rootCause": "SHARED_COMPONENT",
+      "status": "OPEN__SHARED_HOTSPOT_NOTE",
+      "defect": "In the shared toolbar the donor KU-id chip bdi#toolbarKuId ('learn-unavailable', x649..751) overlaps the shared 'Fold all' label span#toggleAllWorkspaceLabel ('طي الكل', x678..732) at 1440x1000 — two texts are painted on top of each other inside one chip.",
+      "owner": "shared toolbar/shell (foundation) — NOT writable from LRN-1",
+      "note": "Pre-existing and unchanged by this lane: the toolbar crop is byte-identical before and after (sha256 7a070e8d9b23a15b…). Recorded as a hotspot, not edited. Identified by overlap-probe (writer-output/W02-LEARN/overlap-probe.mjs)."
+    },
+    {
+      "id": "F04",
+      "severity": "V2",
+      "rootCause": "STALE_DECISION",
+      "status": "CLOSED_THIS_LANE",
+      "defect": "H03 residual F04: adapters/learn.ts recorded metadata.libraryIndependent:false for the Learn Structured adapter while the actual architecture is library-independent — profiles/learn.json domain_implementation = LEARN_DOMAIN_ADAPTER_LIBRARY_INDEPENDENT, the learn path imports no library-fixtures, and adapters/structured-documents.ts already writes libraryIndependent:true for learn.",
+      "fix": "metadata.libraryIndependent set to true in stack/native-typescript/adapters/learn.ts. The metadata lives inside the lane's writable root, so no hotspot request was required."
     }
   ],
-  "DEFECT_SEVERITY": "V3 x1, V2 x4, V1 x2",
-  "ROOT_CAUSE": "SURFACE_COMPOSITION (L01,L03,L04,L05) · IMPLEMENTATION (L02) · SHARED_COMPONENT (L06) · CONTENT_MODEL/OWNER_CONSTRAINT (L07)",
+  "DEFECT_SEVERITY": "V3 x1 (closed) · V2 x6 (DEF-L01..L05 closed, DEF-L04 reopened+closed this lane, DEF-L06 and DEF-L08 open shared, F04 closed this lane) · V1 x2 (closed)",
+  "ROOT_CAUSE": "SURFACE_COMPOSITION (L01, L03, L04, L05) · IMPLEMENTATION (L02) · SHARED_COMPONENT (L06, L08) · CONTENT_MODEL/OWNER_CONSTRAINT (L07) · STALE_DECISION (F04)",
   "FIXES_APPLIED": [
-    "LEFT pane donor scaffold retired; Learn path rail becomes the pane's only content (DEF-L01)",
-    "Arabic mastery label corrected (DEF-L02)",
-    "Bilingual concise Learn command labels (DEF-L03)",
-    "Inapplicable donor scope switch hidden for learn only (DEF-L04)",
-    "Bottom shelf label/summary localised (DEF-L05)",
-    "Shared inspector English-only Revision line dropped via revisionToken=null (DEF-L06 local part)",
-    "Unbound-source centre rebuilt as a designed learning workbench instead of a raw textarea (DEF-L07)"
+    "H03 residual F04: libraryIndependent false→true in adapters/learn.ts",
+    "DEF-L04 made effective and correctly scoped in surfaces/learn/composition.ts: donor scope pills forced to display:none!important; Learn's own Context detail tabs left live and interactive",
+    "Two-tier Learn source admission in adapters/learn.ts: a classification declaring a fixture/demo/synthetic/harness/proof artifact throws LEARN_FIXTURE_OR_SYNTHETIC_SOURCE_FORBIDDEN; a non-production provenance marker fails closed to a truthful UNAVAILABLE state carrying the same rejection code",
+    "Stale report reconciled against the salvage (STALENESS_CONFLICT_RESOLVED)",
+    "Vision conflict reopened and resolved by actual byte inspection (VISION_VERIFICATION)",
+    "Responsive/RTL pending closed with fresh 1440x1000 + 1024x900 captures in both locales"
   ],
-  "RECAPTURE_STATUS": "BLOCKED (transient): shared build red from an unrelated in-flight unit (dist module missing MASTERY_CAUSAL_LAW export). v1 evidence retained and labelled; v2 pending rebuild.",
-  "RECOMPARISON_STATUS": "PENDING v2",
-  "REGRESSION_STATUS": "PENDING — npm test / npm check not yet run for this unit",
+  "RECAPTURE_STATUS": "DONE — v4-before (4 frames, writable-root diff empty = exact parent content) and v4 (4 frames, candidate delta) at 1440x1000 and 1024x900 × {en, ar}, every sha256 verified against its manifest; build green.",
+  "RECOMPARISON_STATUS": "DONE — L1 through L4 before/after. Objective pixel diff: 13,232 changed pixels at bbox [1033,653,1427,688] at 1440x1000 for both EN and AR (exactly the donor scope-pill region); 0 changed pixels and byte-identical sha256 at 1024x900 for both locales; toolbar crop byte-identical before/after.",
+  "REGRESSION_STATUS": "npm test 210/0 twice with byte-identical test arrays (N5); tests/surfaces/learn PASS; S08 17/17 PASS; LCORR01 29/29; D08 10/10; D05 23/23; CG3_W01_W02_COVERAGE PASS; node tools/check-duplicate-mechanics.mjs status PASS with 0 findings (N4). npm run check exits 1 with exactly 2 reds: browser.lineage_receipt_truthful (the documented expected known red while the Enterprise defect is open) and browser.current_candidate_claim_truthful (assurance/BROWSER_CONFORMANCE_RECEIPT.json is bound to parent source tree 0c43d7f1… and is invalidated by this lane's source delta; assurance/ is reverted per mission step 6 and the exact-HEAD browser receipt is a Controller-owned CONVERGENCE step).",
   "EVIDENCE": [
     {
-      "label": "v1",
-      "manifest": "writer-output/W02-LEARN/evidence/v1/CAPTURE_MANIFEST.json",
-      "commit": "d2b3e47615d2",
-      "viewportMatrix": [
-        "1505x1045",
-        "1280x860"
-      ],
-      "locales": [
-        "en",
-        "ar"
-      ],
+      "label": "v4-before — BEFORE, exact parent content",
+      "manifest": "writer-output/W02-LEARN/evidence/v4-before/CAPTURE_MANIFEST.json",
+      "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+      "writableRootDiff": "",
+      "viewports": ["1440x1000", "1024x900"],
+      "locales": ["en", "ar"],
       "frames": [
-        {
-          "path": "writer-output/W02-LEARN/evidence/v1/learn-en-1505x1045-20260930T185425Z.png",
-          "sha256": "db562d781058e0740cd1b08aac1eed256c6d0925b449e09a1cbd61716274c69d",
-          "dims": "1505x1045",
-          "capturedAt": "2026-09-30T18:54:25Z"
-        },
-        {
-          "path": "writer-output/W02-LEARN/evidence/v1/learn-ar-1505x1045-20260930T185428Z.png",
-          "sha256": "0a50cdcdb8c0250e4a4b3be89afc6b66297d303967a0f929540e96f7048359d1",
-          "dims": "1505x1045",
-          "capturedAt": "2026-09-30T18:54:28Z"
-        },
-        {
-          "path": "writer-output/W02-LEARN/evidence/v1/learn-en-1280x860-20260930T185431Z.png",
-          "sha256": "34b8bd4c6eb64cc0350e0399a33d6eca740081e8c25896ebaf4c804443fb0125",
-          "dims": "1280x860",
-          "capturedAt": "2026-09-30T18:54:31Z"
-        },
-        {
-          "path": "writer-output/W02-LEARN/evidence/v1/learn-ar-1280x860-20260930T185434Z.png",
-          "sha256": "dccdd5729b7a679d4a75e860a81462edd126863c4292707207c1597d4b63e97b",
-          "dims": "1280x860",
-          "capturedAt": "2026-09-30T18:54:34Z"
-        }
+        {"path": "writer-output/W02-LEARN/evidence/v4-before/learn-en-1440x1000-20261002T054733Z.png", "sha256": "9c3c43e2df05ed50ed089e0396d5724a71a49291632fb312921c44dfec05e8c7"},
+        {"path": "writer-output/W02-LEARN/evidence/v4-before/learn-ar-1440x1000-20261002T054736Z.png", "sha256": "b22c7fc85bf450eba3e956588a5d6724a6800e9be068a3e236633a41be6b6601"},
+        {"path": "writer-output/W02-LEARN/evidence/v4-before/learn-en-1024x900-20261002T054739Z.png", "sha256": "e725e476564a7f0ca9dc5bdb5910e09b9fb3e7d8ca72e44438947473be48410a"},
+        {"path": "writer-output/W02-LEARN/evidence/v4-before/learn-ar-1024x900-20261002T054742Z.png", "sha256": "a2fa24423300bf7411bf087893f24f47420c5e756fff0f136b577d63c80a969f"}
       ],
-      "groundTruth": "DOM probe + tesseract OCR of the same bytes; vision-channel read conflicted and was discarded (see VISION_VERIFICATION)"
+      "provenanceChecks": [
+        "learn-ar-1440x1000 (b22c7fc8…) is byte-identical to the salvaged v3 ar-1440x1000 frame",
+        "learn-en-1440x1000 (9c3c43e2…) is byte-identical to the 2026-10-02T04:55:53Z baseline W02 flow 'Learn second consumer' shot at the parent source tree"
+      ]
+    },
+    {
+      "label": "v4 — AFTER, candidate delta",
+      "manifest": "writer-output/W02-LEARN/evidence/v4/CAPTURE_MANIFEST.json",
+      "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+      "writableRootDiff": "M stack/native-typescript/adapters/learn.ts\n M stack/native-typescript/surfaces/learn/composition.ts",
+      "viewports": ["1440x1000", "1024x900"],
+      "locales": ["en", "ar"],
+      "frames": [
+        {"path": "writer-output/W02-LEARN/evidence/v4/learn-en-1440x1000-20261002T054520Z.png", "sha256": "05112c59db98cf896d1e41d42897749c7a8c822c551a3d1733430a7cfaaa9044"},
+        {"path": "writer-output/W02-LEARN/evidence/v4/learn-ar-1440x1000-20261002T054524Z.png", "sha256": "44971b2a1e8b1344a2d02eef507c9f76fb2ddd7b9bbfae38791aeb151b390d34"},
+        {"path": "writer-output/W02-LEARN/evidence/v4/learn-en-1024x900-20261002T054528Z.png", "sha256": "e725e476564a7f0ca9dc5bdb5910e09b9fb3e7d8ca72e44438947473be48410a"},
+        {"path": "writer-output/W02-LEARN/evidence/v4/learn-ar-1024x900-20261002T054531Z.png", "sha256": "a2fa24423300bf7411bf087893f24f47420c5e756fff0f136b577d63c80a969f"}
+      ],
+      "provenanceChecks": [
+        "learn-en-1440x1000 (05112c59…) is byte-identical to the lane browser probe EN/LTR shot",
+        "1024x900 frames are byte-identical to v4-before — the change is presentation-neutral there because the RIGHT pane is collapsed"
+      ]
+    },
+    {
+      "label": "visual diff and L4 crops",
+      "dir": "writer-output/W02-LEARN/evidence/v4-crops/",
+      "items": ["diff-1440x1000-en.png", "diff-1440x1000-ar.png", "before-ctxscope.png", "after-ctxscope.png", "before-toolbar.png", "after-toolbar.png"]
+    },
+    {
+      "label": "falsification battery N1/N2/N3/N4/N5 + lane",
+      "path": "writer-output/W02-LEARN/FALSIFICATION.json",
+      "total": 11,
+      "pass": 11,
+      "fail": 0
+    },
+    {
+      "label": "lane browser probe — Learn/BIDI/structured isolation + Library seed",
+      "path": "writer-output/W02-LEARN/LANE_BROWSER_PROBE.json",
+      "total": 20,
+      "pass": 20,
+      "fail": 0,
+      "screenshots": "writer-output/W02-LEARN/evidence/lane-probe/ (5 frames, sha256 recorded inside the JSON)"
+    },
+    {
+      "label": "baseline W02 flow run artifacts at the parent tree",
+      "path": "writer-output/W02-LEARN/evidence/BASELINE_W02_FLOW_RUN_20261002T045553Z.json"
+    },
+    {
+      "label": "W02 flow receipt copy (candidate tree, 2026-10-02T05:25:34Z)",
+      "path": "writer-output/W02-LEARN/evidence/BROWSER_RECEIPT.final.copy.json"
+    },
+    {
+      "label": "superseded v1/v2/v3 manifests and frames — retained in place, never deleted",
+      "dirs": ["writer-output/W02-LEARN/evidence/v1", "writer-output/W02-LEARN/evidence/v2", "writer-output/W02-LEARN/evidence/v3"]
     }
   ],
   "LINEAGE": {
     "reference": "cep-writer/references/visual/01_KNOWLEDGE_AND_LEARNING/02_LEARN/CEP_VIS_001_LEARN_FINAL_OWNER_CONFIRMED_REFERENCE.png @ sha256:5fa530e7c9506fd7 (OWNER_CONFIRMED_FINAL_REFERENCE)",
-    "candidate": "branch writer/mi-serial, HEAD d2b3e47615d2, dirty only in W02-LEARN writable roots + writer-output/W02-LEARN",
-    "environment": "local runtime (tools/serve.mjs), Playwright chromium, node 22.16.0",
-    "bindingRule": "every frame bound to candidate+commit+viewport+locale+timestamp+path+sha256+dims in CAPTURE_MANIFEST.json"
+    "parent": "branch writer/mi-serial-lane/LRN-1 @ fe1bb98ded51adc71a5f5fd14142a2c0880c11bc (git tree f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684), canonical source tree 0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+    "candidate": "same branch + 2 source files; canonical source tree 9b8572156d1831eab3f273432aa8d978d862f92d613f915f4b49e791457e6746 (338 files)",
+    "environment": "local static server tools/serve.mjs, Playwright chromium package-local 1.62.1, node 22.16.0",
+    "bindingRule": "every frame bound to commit + writable-root diff + viewport + locale + timestamp + path + sha256 + bytes in its CAPTURE_MANIFEST.json; every probe JSON bound to the same commit",
+    "supersededEvidence": "v1/v2/v3 retained with their own manifests; never reused as current proof"
   },
   "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
   "BLOCKERS": [
-    "Transient shared build red from another unit's in-flight edit (dist module missing MASTERY_CAUSAL_LAW export) prevents rebuild/recapture; will retry.",
-    "DEF-L07 cannot be fully resolved inside this unit's writable roots: binding a canonical Learn source is contract C5/R6-owned (main.ts + Learn provider), not W02-LEARN-owned.",
-    "DEF-L06 shared-context chrome (English-only labels, donor direction:!important on pane headings, compact banner suppressing the meta/tag row) requires a shared-seam request to W01-SHELL."
+    "R6 canonical Learn source binding is outside LRN-1's writable roots (main.ts + a canonical Learn provider). Recorded, not performed, not claimed.",
+    "DEF-L06 and DEF-L08 are shared-component defects. foundation/**, foundation/extensions.css and tools/** are read-only for this lane → recorded as hotspot notes; no edit attempted.",
+    "npm run check carries one extra red beyond the documented known red: browser.current_candidate_claim_truthful, because assurance/BROWSER_CONFORMANCE_RECEIPT.json is bound to the parent source tree. assurance/ is reverted per mission step 6; regeneration is the Controller-owned CONVERGENCE step from the exact candidate HEAD.",
+    "tools/w02-browser-flows.mjs cannot complete from 2026-10-02T05:17:14Z onward: a concurrent lane's stack/local-runtime/server.mjs holds the shared fixed port 127.0.0.1:4174 and answers /v1/platform/input-direction with a 503 whose browser response never completes, so waitUntil:'networkidle' never settles (evidence: writer-output/W02-LEARN/net-probe.mjs and nav-probe.mjs). ENVIRONMENT, not product. This lane's own instruments were switched to domcontentloaded + consumer-identity and all produce genuine-route evidence.",
+    "tools/w02-browser-flows.mjs selector .visualize-object-list [data-visualize-select] is stale after a Visualize LEFT-region recomposition (the container class is now .vis-objectlist), and its spatial.canvas-has-bounds assertion measures a canvas that is not rendered in Visualize's default TREE view. Both live outside LRN-1 roots."
+  ],
+  "UNRESOLVED": [
+    "DEF-L06 shared-chrome localisation and compact-banner meta/tag row — shared shell/top-region owner",
+    "DEF-L08 shared toolbar KU-id chip overlapping the 'Fold all' label — shared toolbar owner",
+    "R6 canonical Learn source binding — main.ts + canonical Learn provider",
+    "spatial-input-bidi-preference-and-structured-isolation is RED at exact HEAD. Its first assertion spatial.canvas-has-bounds fails because the flow only unhides #spatialHost while Visualize stays in its default TREE view, where spatialView.render() is never called and the svg stays 0px (probe: canvas h=0, host h=2). tools/ and surfaces/visualize/ are read-only for LRN-1 → HARNESS/ORACLE classification, out of roots. The flow's Learn/BIDI/structured-isolation substance is re-executed and PASS in writer-output/W02-LEARN/LANE_BROWSER_PROBE.json (20/20).",
+    "spatial-select-connect-canonical-edge and spatial-closure-1024x900 are RED for the same stale .visualize-object-list selector — out of roots.",
+    "CG3_CONTROLLER_CORR01_LEARN_RQ_TRUTH: the LEARN half now passes (it was red at baseline on assert.throws and is closed by the two-tier admission policy); the RQ half fails at line 9 because RQDomainAdapter now requires analyticalCompareOwner and the test supplies none. adapters/rq/** and tests/** are read-only for LRN-1 → recorded, not edited.",
+    "Committed dist/foundation/extensions.css at the parent differs from a fresh build of the parent source (justify-content:center vs justify-content:safe center), so a freshly built dist renders the shell destination strip differently from the salvaged v3 frames (pixel diff bbox [232,0,1098,45]). Build-authority observation, out of LRN-1 roots.",
+    "LCORR03 C3-002 (main avoids duplicate SpatialView on Enterprise) still fails — Enterprise/SH-1 territory, unchanged from baseline."
+  ],
+  "CEILINGS_HELD": [
+    "H03-R2-PROP-001 and H03-R2-FALSIFY-001 remain NOT_PROVEN. No relation propagation or proof is claimed anywhere in this lane's code, report or evidence.",
+    "Admission is not acceptance; this lane never self-accepts.",
+    "No synthetic or fixture learning content is rendered or claimed.",
+    "No Owner question was decided: shell redesign (OWNER-20260910-010), RQ reference promotion, Visualize F-048 and destination-count freeze (C03-GATE-023) were not touched."
   ]
 }

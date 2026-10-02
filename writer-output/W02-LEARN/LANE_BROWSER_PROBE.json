@@ -1,0 +1,590 @@
+{
+  "schemaVersion": 1,
+  "kind": "LRN_1_LANE_BROWSER_PROBE",
+  "lane": "LRN-1",
+  "unit": "W02-LEARN",
+  "note": "Re-execution of the Learn/BIDI/structured-isolation assertions of flow spatial-input-bidi-preference-and-structured-isolation (that flow is red at its first, spatial assertion — outside LRN-1 roots) plus the lane Library-seed no-leak falsification.",
+  "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+  "generatedAt": "2026-10-02T05:24:51.244Z",
+  "node": "v22.16.0",
+  "viewportMatrix": [
+    "1440x1000",
+    "1024x900"
+  ],
+  "locales": [
+    "en",
+    "ar"
+  ],
+  "total": 20,
+  "pass": 20,
+  "fail": 0,
+  "screenshots": [
+    {
+      "label": "seed-library-KU-scope",
+      "file": "writer-output/W02-LEARN/evidence/lane-probe/seed-library-KU-scope-fe1bb98d.png",
+      "bytes": 248746,
+      "sha256": "b397e8f521937642c03ab68e0b68ce6fc6eb0d09518602c303d0015ce0f73aec",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "label": "learn-en-1440x1000-ltr",
+      "file": "writer-output/W02-LEARN/evidence/lane-probe/learn-en-1440x1000-ltr-fe1bb98d.png",
+      "bytes": 268170,
+      "sha256": "05112c59db98cf896d1e41d42897749c7a8c822c551a3d1733430a7cfaaa9044",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "label": "learn-ar-1440x1000-rtl",
+      "file": "writer-output/W02-LEARN/evidence/lane-probe/learn-ar-1440x1000-rtl-fe1bb98d.png",
+      "bytes": 231543,
+      "sha256": "a450abfa9312b076b8566a3655d3a88c735135308a39fcd07735b865151d0aa7",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "label": "learn-ar-1024x900-rtl",
+      "file": "writer-output/W02-LEARN/evidence/lane-probe/learn-ar-1024x900-rtl-fe1bb98d.png",
+      "bytes": 165761,
+      "sha256": "bca119c968d47645e554372a5a2ff2ef076989fa84e42a9108ea313b8ee10ced",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      }
+    },
+    {
+      "label": "learn-en-1024x900-ltr",
+      "file": "writer-output/W02-LEARN/evidence/lane-probe/learn-en-1024x900-ltr-fe1bb98d.png",
+      "bytes": 189602,
+      "sha256": "9b18ac06774a3acfd7332b9de547b4f2a2afbc92caef37bde6d34aa1ff2610fd",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      }
+    }
+  ],
+  "results": [
+    {
+      "id": "SEED.library-route-exposes-library-only-KU-and-scope",
+      "status": "PASS",
+      "detail": {
+        "kuListSelectorHits": 0,
+        "kuList": 0,
+        "scope": true,
+        "scopeHidden": false,
+        "scopeVisible": "VISIBLE",
+        "librarySearch": 1,
+        "consumer": "library",
+        "structuredDomainKind": "library",
+        "kuTokens": "Library\nكل النطاقات\nIdentity and access\nApplication and API security\nIncident response\nالكل\nمتابعة\nالمفضلة\nمكتمل\nحديث\nArabic normalization + weighted ranking\n9 نتيجة\nIdentity and access\n3\nAuthentication Protocol Ceremonies and Trust Boundaries\nKU-D03-0001v0.1 · source verified\nBrowser Session Secrets and Cookie Lifecycle\nKU-D03-0004v0.1 · source verified\nDirectory Identity, Access Tokens, Group Resolution, and SIDHistory\nKU-D03-0011v0.1 · source verified\nApplication and API security\n2\nAPI Object-Level Authorization\nKU-D05-0021v0.1 · source verified\nAPI Schema Validation and Contract Enforcemen"
+      }
+    },
+    {
+      "id": "LANE.learn-no-library-KU-list-after-library-seed",
+      "status": "PASS",
+      "detail": {
+        "consumer": "learn",
+        "hostKind": "DONOR_FREE_WORKSPACE_HOST",
+        "domainKind": "learn",
+        "librarySearch": 0,
+        "kuList": 0,
+        "scopeHidden": false,
+        "domainIsolation": true,
+        "sourceAvailable": false,
+        "kuTokenHits": 0,
+        "kuTextHits": [],
+        "donorScope": [
+          "NOT_VISIBLE"
+        ],
+        "learnDetailTabs": [
+          {
+            "display": "grid",
+            "hidden": false,
+            "inert": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "LANE.learn-no-library-search-state",
+      "status": "PASS",
+      "detail": {
+        "consumer": "learn",
+        "hostKind": "DONOR_FREE_WORKSPACE_HOST",
+        "domainKind": "learn",
+        "librarySearch": 0,
+        "kuList": 0,
+        "scopeHidden": false,
+        "domainIsolation": true,
+        "sourceAvailable": false,
+        "kuTokenHits": 0,
+        "kuTextHits": [],
+        "donorScope": [
+          "NOT_VISIBLE"
+        ],
+        "learnDetailTabs": [
+          {
+            "display": "grid",
+            "hidden": false,
+            "inert": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "LANE.learn-structured-domain-isolation",
+      "status": "PASS",
+      "detail": {
+        "consumer": "learn",
+        "hostKind": "DONOR_FREE_WORKSPACE_HOST",
+        "domainKind": "learn",
+        "librarySearch": 0,
+        "kuList": 0,
+        "scopeHidden": false,
+        "domainIsolation": true,
+        "sourceAvailable": false,
+        "kuTokenHits": 0,
+        "kuTextHits": [],
+        "donorScope": [
+          "NOT_VISIBLE"
+        ],
+        "learnDetailTabs": [
+          {
+            "display": "grid",
+            "hidden": false,
+            "inert": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "LANE.learn-host-kind-donor-free",
+      "status": "PASS",
+      "detail": {
+        "consumer": "learn",
+        "hostKind": "DONOR_FREE_WORKSPACE_HOST",
+        "domainKind": "learn",
+        "librarySearch": 0,
+        "kuList": 0,
+        "scopeHidden": false,
+        "domainIsolation": true,
+        "sourceAvailable": false,
+        "kuTokenHits": 0,
+        "kuTextHits": [],
+        "donorScope": [
+          "NOT_VISIBLE"
+        ],
+        "learnDetailTabs": [
+          {
+            "display": "grid",
+            "hidden": false,
+            "inert": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "LANE.learn-no-KU-identifiers-in-rendered-text",
+      "status": "PASS",
+      "detail": {
+        "consumer": "learn",
+        "hostKind": "DONOR_FREE_WORKSPACE_HOST",
+        "domainKind": "learn",
+        "librarySearch": 0,
+        "kuList": 0,
+        "scopeHidden": false,
+        "domainIsolation": true,
+        "sourceAvailable": false,
+        "kuTokenHits": 0,
+        "kuTextHits": [],
+        "donorScope": [
+          "NOT_VISIBLE"
+        ],
+        "learnDetailTabs": [
+          {
+            "display": "grid",
+            "hidden": false,
+            "inert": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "LANE.learn-donor-scope-switch-suppressed-not-visible",
+      "status": "PASS",
+      "detail": {
+        "consumer": "learn",
+        "hostKind": "DONOR_FREE_WORKSPACE_HOST",
+        "domainKind": "learn",
+        "librarySearch": 0,
+        "kuList": 0,
+        "scopeHidden": false,
+        "domainIsolation": true,
+        "sourceAvailable": false,
+        "kuTokenHits": 0,
+        "kuTextHits": [],
+        "donorScope": [
+          "NOT_VISIBLE"
+        ],
+        "learnDetailTabs": [
+          {
+            "display": "grid",
+            "hidden": false,
+            "inert": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "LANE.learn-own-context-detail-tabs-remain-live",
+      "status": "PASS",
+      "detail": {
+        "consumer": "learn",
+        "hostKind": "DONOR_FREE_WORKSPACE_HOST",
+        "domainKind": "learn",
+        "librarySearch": 0,
+        "kuList": 0,
+        "scopeHidden": false,
+        "domainIsolation": true,
+        "sourceAvailable": false,
+        "kuTokenHits": 0,
+        "kuTextHits": [],
+        "donorScope": [
+          "NOT_VISIBLE"
+        ],
+        "learnDetailTabs": [
+          {
+            "display": "grid",
+            "hidden": false,
+            "inert": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "N3.learn-route-renders-truthful-unavailable-not-synthetic",
+      "status": "PASS",
+      "detail": {
+        "consumer": "learn",
+        "hostKind": "DONOR_FREE_WORKSPACE_HOST",
+        "domainKind": "learn",
+        "librarySearch": 0,
+        "kuList": 0,
+        "scopeHidden": false,
+        "domainIsolation": true,
+        "sourceAvailable": false,
+        "kuTokenHits": 0,
+        "kuTextHits": [],
+        "donorScope": [
+          "NOT_VISIBLE"
+        ],
+        "learnDetailTabs": [
+          {
+            "display": "grid",
+            "hidden": false,
+            "inert": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "N3.learn-route-has-no-synthetic-learning-content",
+      "status": "PASS",
+      "detail": "banned tokens"
+    },
+    {
+      "id": "BIDI.en-locale-drives-lang-and-dir",
+      "status": "PASS",
+      "detail": {
+        "lang": "en",
+        "dir": "ltr",
+        "isolatedCount": 68,
+        "isolateCount": 68,
+        "isolateRulePresent": true,
+        "donorScope": [
+          "NOT_VISIBLE"
+        ],
+        "sample": [
+          {
+            "dir": "ltr",
+            "style": "isolate",
+            "text": "W01"
+          },
+          {
+            "dir": "ltr",
+            "style": "isolate",
+            "text": "W02"
+          },
+          {
+            "dir": "ltr",
+            "style": "isolate",
+            "text": "W03"
+          },
+          {
+            "dir": "ltr",
+            "style": "isolate",
+            "text": "W04"
+          }
+        ]
+      }
+    },
+    {
+      "id": "LANE.donor-scope-stays-suppressed-after-EN-flip",
+      "status": "PASS",
+      "detail": {
+        "lang": "en",
+        "dir": "ltr",
+        "isolatedCount": 68,
+        "isolateCount": 68,
+        "isolateRulePresent": true,
+        "donorScope": [
+          "NOT_VISIBLE"
+        ],
+        "sample": [
+          {
+            "dir": "ltr",
+            "style": "isolate",
+            "text": "W01"
+          },
+          {
+            "dir": "ltr",
+            "style": "isolate",
+            "text": "W02"
+          },
+          {
+            "dir": "ltr",
+            "style": "isolate",
+            "text": "W03"
+          },
+          {
+            "dir": "ltr",
+            "style": "isolate",
+            "text": "W04"
+          }
+        ]
+      }
+    },
+    {
+      "id": "BIDI.dom-isolate-evidence",
+      "status": "PASS",
+      "detail": {
+        "lang": "en",
+        "dir": "ltr",
+        "isolatedCount": 68,
+        "isolateCount": 68,
+        "isolateRulePresent": true,
+        "donorScope": [
+          "NOT_VISIBLE"
+        ],
+        "sample": [
+          {
+            "dir": "ltr",
+            "style": "isolate",
+            "text": "W01"
+          },
+          {
+            "dir": "ltr",
+            "style": "isolate",
+            "text": "W02"
+          },
+          {
+            "dir": "ltr",
+            "style": "isolate",
+            "text": "W03"
+          },
+          {
+            "dir": "ltr",
+            "style": "isolate",
+            "text": "W04"
+          }
+        ]
+      }
+    },
+    {
+      "id": "BIDI.isolate-rule-present",
+      "status": "PASS",
+      "detail": {
+        "lang": "en",
+        "dir": "ltr",
+        "isolatedCount": 68,
+        "isolateCount": 68,
+        "isolateRulePresent": true,
+        "donorScope": [
+          "NOT_VISIBLE"
+        ],
+        "sample": [
+          {
+            "dir": "ltr",
+            "style": "isolate",
+            "text": "W01"
+          },
+          {
+            "dir": "ltr",
+            "style": "isolate",
+            "text": "W02"
+          },
+          {
+            "dir": "ltr",
+            "style": "isolate",
+            "text": "W03"
+          },
+          {
+            "dir": "ltr",
+            "style": "isolate",
+            "text": "W04"
+          }
+        ]
+      }
+    },
+    {
+      "id": "BIDI.ar-locale-drives-lang-and-dir",
+      "status": "PASS",
+      "detail": {
+        "lang": "ar",
+        "dir": "rtl",
+        "domainKind": "learn",
+        "domainIsolation": true,
+        "hasArabic": true,
+        "hasLatin": true,
+        "donorScope": [
+          "NOT_VISIBLE"
+        ],
+        "kuHits": []
+      }
+    },
+    {
+      "id": "LANE.donor-scope-stays-suppressed-after-AR-flip",
+      "status": "PASS",
+      "detail": {
+        "lang": "ar",
+        "dir": "rtl",
+        "domainKind": "learn",
+        "domainIsolation": true,
+        "hasArabic": true,
+        "hasLatin": true,
+        "donorScope": [
+          "NOT_VISIBLE"
+        ],
+        "kuHits": []
+      }
+    },
+    {
+      "id": "BIDI.ar-structure-and-isolation-held",
+      "status": "PASS",
+      "detail": {
+        "lang": "ar",
+        "dir": "rtl",
+        "domainKind": "learn",
+        "domainIsolation": true,
+        "hasArabic": true,
+        "hasLatin": true,
+        "donorScope": [
+          "NOT_VISIBLE"
+        ],
+        "kuHits": []
+      }
+    },
+    {
+      "id": "RESPONSIVE.1024x900-no-horizontal-overflow",
+      "status": "PASS",
+      "detail": {
+        "overflowX": false,
+        "left": {
+          "x": 0,
+          "y": 214,
+          "w": 304,
+          "h": 647,
+          "hidden": false
+        },
+        "center": {
+          "x": 315,
+          "y": 214,
+          "w": 709,
+          "h": 647,
+          "hidden": false
+        },
+        "right": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "hidden": true
+        },
+        "toolbar": {
+          "x": 0,
+          "y": 135,
+          "w": 1024,
+          "h": 79,
+          "hidden": false
+        },
+        "bottom": {
+          "x": 0,
+          "y": 861,
+          "w": 1024,
+          "h": 39,
+          "hidden": false
+        },
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "id": "RESPONSIVE.1024x900.panes-present",
+      "status": "PASS",
+      "detail": {
+        "overflowX": false,
+        "left": {
+          "x": 0,
+          "y": 214,
+          "w": 304,
+          "h": 647,
+          "hidden": false
+        },
+        "center": {
+          "x": 315,
+          "y": 214,
+          "w": 709,
+          "h": 647,
+          "hidden": false
+        },
+        "right": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "hidden": true
+        },
+        "toolbar": {
+          "x": 0,
+          "y": 135,
+          "w": 1024,
+          "h": 79,
+          "hidden": false
+        },
+        "bottom": {
+          "x": 0,
+          "y": 861,
+          "w": 1024,
+          "h": 39,
+          "hidden": false
+        },
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "id": "ENV.no-page-errors",
+      "status": "PASS",
+      "detail": {
+        "pageErrors": []
+      }
+    }
+  ]
+}

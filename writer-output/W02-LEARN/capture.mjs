@@ -106,9 +106,15 @@ const capture=async()=>{
           const pageErrors=[];
           page.on('pageerror',e=>pageErrors.push(String(e?.message||e)));
           const started=ts();
-          await page.goto(`http://127.0.0.1:${port}/?surface=${surface}`,{waitUntil:'networkidle'});
-          await page.waitForFunction(s=>window.CEPFoundation?.consumer===s,surface,{timeout:30000});
-          await page.waitForTimeout(900);
+          /* Wait strategy note (LRN-1): `networkidle` no longer settles in this shared container because a
+             concurrent lane's local-runtime listener on the fixed port 127.0.0.1:4174 answers the app's
+             `/v1/platform/input-direction` probe in a way that keeps the network busy (ENVIRONMENT, not
+             product). Navigation therefore waits for `domcontentloaded` + the genuine-route identity
+             assertion `CEPFoundation.consumer === <surface>` + a settle delay — the route/render proof is
+             unchanged. */
+          await page.goto(`http://127.0.0.1:${port}/?surface=${surface}`,{waitUntil:'domcontentloaded',timeout:60000});
+          await page.waitForFunction(s=>window.CEPFoundation?.consumer===s,surface,{timeout:60000});
+          await page.waitForTimeout(1200);
           const info=await page.evaluate(PROBE);
           const file=`${surface}-${locale}-${width}x${height}-${started}.png`;
           const filePath=path.join(dir,file);
@@ -132,6 +138,7 @@ const capture=async()=>{
     schemaVersion:1,proof:'W02-LEARN-CAPTURE',label,
     route:'/?surface=<surface>',
     renderMethod:'GENUINE_ROUTE_LOCAL_BROWSER',
+    waitUntil:'domcontentloaded+consumer-identity+1200ms-settle (networkidle blocked by cross-lane 4174 runtime listener — ENVIRONMENT)',
     commit:commit(),writableRootDiff:dirty(),
     node:process.version,viewportMatrix:viewports.map(v=>`${v[0]}x${v[1]}`),locales,
     capturedAt:new Date().toISOString(),
