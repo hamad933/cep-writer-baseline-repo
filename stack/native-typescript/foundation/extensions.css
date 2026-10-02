@@ -116,3 +116,16 @@ body .stickyhost{z-index:215}
 [dir="rtl"] :is(#overflowMenu[data-settings-center-owner="SettingsCenterOwner"],[data-settings-center-owner="SettingsCenterOwner"]) .prefsection[data-open="true"]>.prefsection-toggle{box-shadow:inset -3px 0 0 var(--accent)}
 :is(#overflowMenu[data-settings-center-owner="SettingsCenterOwner"],[data-settings-center-owner="SettingsCenterOwner"]) .prefsection[data-open="true"]>.prefsection-body{border-block-start:1px solid color-mix(in srgb,var(--accent) 14%,var(--line));background:color-mix(in srgb,var(--bg1) 62%,transparent)}
 :is(#overflowMenu[data-settings-center-owner="SettingsCenterOwner"],[data-settings-center-owner="SettingsCenterOwner"]) .settings-item{background:color-mix(in srgb,var(--bg1) 92%,var(--elev));border-color:color-mix(in srgb,var(--line) 82%,var(--accent))}
+
+/* SH-2 / HLTH-F6 — shared centerrail clearance (W01-SHELL, foundation extensions).
+   The shared donor `.centerrail` edge-reveal bar is absolutely positioned at top:8px and is 30px
+   tall, so it overlays the top 38px of #centerPane on every surface. Surfaces whose first line is
+   the stage eyebrow/heading were covered by it (measured overlap 4-16px on shell, audit, backup,
+   evidence, manual_ai, mastery, portfolio and reviews at 1440x1000, 1024x900 and 768x900 in both
+   AR/RTL and EN/LTR). The selector is deliberately id-qualified: the m0 composition injects its own
+   `<style>` at runtime (`.m0-controller-stage{padding:clamp(10px,1.5vw,20px)}` plus per-surface
+   rules), which out-specifies a bare `.foundation-stage` rule; the four consumers that already
+   carried an inset keep their own value. The bar's own geometry lives in generated donor chrome, so
+   it is recorded as a hotspot rather than edited here (OWNER-20260910-011: one shared clearance
+   for every surface's stage). */
+#centerPane>.foundation-stage,#centerPane>div#foundationStage.foundation-stage{padding-top:44px}

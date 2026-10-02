@@ -1,0 +1,381 @@
+{
+  "method": "sha256 identity + PIL pixel diff + tesseract OCR cross-check of the SAME bytes (VD-008 mitigation: never issue a visual verdict from the image channel alone)",
+  "crops": [
+    {
+      "file": "crop-evidence-1440-en-after-railband.png",
+      "sha256": "bbc803856f43ad556e92a0f5a9162d594ddd5bcf0f30a919094a3291b98cca75",
+      "bytes": 12857,
+      "region": [
+        331,
+        185,
+        995,
+        265
+      ]
+    },
+    {
+      "file": "crop-evidence-1440-en-before-railband.png",
+      "sha256": "c7bace9023b25e5aeb1aedf17ed4c434cf6ab28175f01d988cd3cd172436a79c",
+      "bytes": 14521,
+      "region": [
+        331,
+        185,
+        995,
+        265
+      ]
+    }
+  ],
+  "pairs": [
+    {
+      "key": "evidence-1024x900-ar",
+      "before": {
+        "file": "evidence-1024x900-ar-before.png",
+        "sha256": "95d4f02045675184d6de04135886e5e4b8b08c3ba88b7cd1cc33f2dc81720117",
+        "bytes": 167678,
+        "dims": [
+          1024,
+          900
+        ],
+        "dir": "rtl",
+        "lang": "ar",
+        "pageErrors": []
+      },
+      "after": {
+        "file": "evidence-1024x900-ar-after.png",
+        "sha256": "8950b5b4330b3eeb957cf1f735088e8b9ca711db009776d87c49b9b9e530607a",
+        "bytes": 164739,
+        "dims": [
+          1024,
+          900
+        ],
+        "dir": "rtl",
+        "lang": "ar",
+        "pageErrors": []
+      },
+      "sha256Differs": true,
+      "pixelDiff": {
+        "bbox": [
+          331,
+          219,
+          1008,
+          861
+        ],
+        "pixelsChangedGt10": 153583,
+        "percentOfFrame": 16.6648
+      },
+      "ocrCrossCheck": {
+        "beforeChars": 1488,
+        "afterChars": 1495,
+        "beforeHasEyebrow": true,
+        "afterHasEyebrow": true
+      }
+    },
+    {
+      "key": "evidence-1024x900-en",
+      "before": {
+        "file": "evidence-1024x900-en-before.png",
+        "sha256": "e32ef81f0eeb14699ce8e720f1a1a4251d0989bfa6d027b0981353f77361d9b8",
+        "bytes": 169096,
+        "dims": [
+          1024,
+          900
+        ],
+        "dir": "ltr",
+        "lang": "en",
+        "pageErrors": []
+      },
+      "after": {
+        "file": "evidence-1024x900-en-after.png",
+        "sha256": "64388d2086e9bc0070dc03383b4339dadbb9122eaea898b1a795af8fb129fd79",
+        "bytes": 166527,
+        "dims": [
+          1024,
+          900
+        ],
+        "dir": "ltr",
+        "lang": "en",
+        "pageErrors": []
+      },
+      "sha256Differs": true,
+      "pixelDiff": {
+        "bbox": [
+          331,
+          219,
+          1008,
+          861
+        ],
+        "pixelsChangedGt10": 153585,
+        "percentOfFrame": 16.665
+      },
+      "ocrCrossCheck": {
+        "beforeChars": 1549,
+        "afterChars": 1584,
+        "beforeHasEyebrow": true,
+        "afterHasEyebrow": true
+      }
+    },
+    {
+      "key": "evidence-1440x1000-ar",
+      "before": {
+        "file": "evidence-1440x1000-ar-before.png",
+        "sha256": "e7834f6eaae3a734d5d5ad8acf14ab379f6c626486cc66ce70e86f17145f0793",
+        "bytes": 245737,
+        "dims": [
+          1440,
+          1000
+        ],
+        "dir": "rtl",
+        "lang": "ar",
+        "pageErrors": []
+      },
+      "after": {
+        "file": "evidence-1440x1000-ar-after.png",
+        "sha256": "09e99f7d5e4d74a51331f9e3635680286c0d8cd073819d54524dd8baf8026341",
+        "bytes": 242905,
+        "dims": [
+          1440,
+          1000
+        ],
+        "dir": "rtl",
+        "lang": "ar",
+        "pageErrors": []
+      },
+      "sha256Differs": true,
+      "pixelDiff": {
+        "bbox": [
+          331,
+          196,
+          993,
+          961
+        ],
+        "pixelsChangedGt10": 217262,
+        "percentOfFrame": 15.0876
+      },
+      "ocrCrossCheck": {
+        "beforeChars": 2146,
+        "afterChars": 2051,
+        "beforeHasEyebrow": true,
+        "afterHasEyebrow": true
+      }
+    },
+    {
+      "key": "evidence-1440x1000-en",
+      "before": {
+        "file": "evidence-1440x1000-en-before.png",
+        "sha256": "e3a3f5c1c0254a8c0fbf56d74737f90c84e714b4d0789a7488fdf783d702f34f",
+        "bytes": 253415,
+        "dims": [
+          1440,
+          1000
+        ],
+        "dir": "ltr",
+        "lang": "en",
+        "pageErrors": []
+      },
+      "after": {
+        "file": "evidence-1440x1000-en-after.png",
+        "sha256": "d9c65f2b142e29d602c62cafee60d9b71f3d6540cbdaf327b697558140cbc08c",
+        "bytes": 250525,
+        "dims": [
+          1440,
+          1000
+        ],
+        "dir": "ltr",
+        "lang": "en",
+        "pageErrors": []
+      },
+      "sha256Differs": true,
+      "pixelDiff": {
+        "bbox": [
+          331,
+          196,
+          993,
+          961
+        ],
+        "pixelsChangedGt10": 217190,
+        "percentOfFrame": 15.0826
+      },
+      "ocrCrossCheck": {
+        "beforeChars": 2242,
+        "afterChars": 2335,
+        "beforeHasEyebrow": true,
+        "afterHasEyebrow": true
+      }
+    },
+    {
+      "key": "shell-1024x900-ar",
+      "before": {
+        "file": "shell-1024x900-ar-before.png",
+        "sha256": "ee2c5f68a6b1dd8ca2cbcc317f41075b6ed6a82f858874ee6850e261556dfe3c",
+        "bytes": 101662,
+        "dims": [
+          1024,
+          900
+        ],
+        "dir": "rtl",
+        "lang": "ar",
+        "pageErrors": []
+      },
+      "after": {
+        "file": "shell-1024x900-ar-after.png",
+        "sha256": "1e80147a9258f307d8dff208e0dfb65ee42ff459b3705676ecd5539bd0c26060",
+        "bytes": 101784,
+        "dims": [
+          1024,
+          900
+        ],
+        "dir": "rtl",
+        "lang": "ar",
+        "pageErrors": []
+      },
+      "sha256Differs": true,
+      "pixelDiff": {
+        "bbox": [
+          356,
+          245,
+          1009,
+          367
+        ],
+        "pixelsChangedGt10": 15754,
+        "percentOfFrame": 1.7094
+      },
+      "ocrCrossCheck": {
+        "beforeChars": 622,
+        "afterChars": 612,
+        "beforeHasEyebrow": false,
+        "afterHasEyebrow": false
+      }
+    },
+    {
+      "key": "shell-1024x900-en",
+      "before": {
+        "file": "shell-1024x900-en-before.png",
+        "sha256": "b7703f0bcfdc2a20e3736158194f9fb496312f446544cb38e7d97c47a4235a89",
+        "bytes": 103078,
+        "dims": [
+          1024,
+          900
+        ],
+        "dir": "ltr",
+        "lang": "en",
+        "pageErrors": []
+      },
+      "after": {
+        "file": "shell-1024x900-en-after.png",
+        "sha256": "34953e862d9334b64699843126212551e632cb1a2c8f684a532281cd6a12bec3",
+        "bytes": 102994,
+        "dims": [
+          1024,
+          900
+        ],
+        "dir": "ltr",
+        "lang": "en",
+        "pageErrors": []
+      },
+      "sha256Differs": true,
+      "pixelDiff": {
+        "bbox": [
+          330,
+          245,
+          984,
+          367
+        ],
+        "pixelsChangedGt10": 15666,
+        "percentOfFrame": 1.6999
+      },
+      "ocrCrossCheck": {
+        "beforeChars": 619,
+        "afterChars": 619,
+        "beforeHasEyebrow": false,
+        "afterHasEyebrow": false
+      }
+    },
+    {
+      "key": "shell-1440x1000-ar",
+      "before": {
+        "file": "shell-1440x1000-ar-before.png",
+        "sha256": "fb059616292d2c4c2694a400c21eee295a4c9baa229d13807ba933bcc7c39908",
+        "bytes": 127433,
+        "dims": [
+          1440,
+          1000
+        ],
+        "dir": "rtl",
+        "lang": "ar",
+        "pageErrors": []
+      },
+      "after": {
+        "file": "shell-1440x1000-ar-after.png",
+        "sha256": "c423873a04392262d020900586e9974b2fe32bb827ae073d64a6de12f0f1a1a4",
+        "bytes": 127437,
+        "dims": [
+          1440,
+          1000
+        ],
+        "dir": "rtl",
+        "lang": "ar",
+        "pageErrors": []
+      },
+      "sha256Differs": true,
+      "pixelDiff": {
+        "bbox": [
+          336,
+          230,
+          990,
+          347
+        ],
+        "pixelsChangedGt10": 15219,
+        "percentOfFrame": 1.0569
+      },
+      "ocrCrossCheck": {
+        "beforeChars": 737,
+        "afterChars": 668,
+        "beforeHasEyebrow": false,
+        "afterHasEyebrow": false
+      }
+    },
+    {
+      "key": "shell-1440x1000-en",
+      "before": {
+        "file": "shell-1440x1000-en-before.png",
+        "sha256": "1c7ee3f0da9260cef8fe6c9e94066477751c6415d461e1873328afb6a5c96dd7",
+        "bytes": 131922,
+        "dims": [
+          1440,
+          1000
+        ],
+        "dir": "ltr",
+        "lang": "en",
+        "pageErrors": []
+      },
+      "after": {
+        "file": "shell-1440x1000-en-after.png",
+        "sha256": "0f4e6ea3014b515e766ee0c7e638bcecd07cbb3ba3df637bc4a5a5df2054e6e2",
+        "bytes": 131887,
+        "dims": [
+          1440,
+          1000
+        ],
+        "dir": "ltr",
+        "lang": "en",
+        "pageErrors": []
+      },
+      "sha256Differs": true,
+      "pixelDiff": {
+        "bbox": [
+          335,
+          230,
+          988,
+          347
+        ],
+        "pixelsChangedGt10": 15216,
+        "percentOfFrame": 1.0567
+      },
+      "ocrCrossCheck": {
+        "beforeChars": 843,
+        "afterChars": 853,
+        "beforeHasEyebrow": false,
+        "afterHasEyebrow": false
+      }
+    }
+  ]
+}

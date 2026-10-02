@@ -6,6 +6,7 @@ import {VisualizeDomainAdapter} from '../adapters/visualize/domain.js';
 import {BALANCED6_VISUALIZE_REPRESENTATIONS,createBalanced6VisualizeProvider} from '../adapters/balanced6-acceptance-data.js';
 import {bindTodaySurface,composeTodayOrchestrationPresentation} from './today/surface.js';
 import {bindRqSurface} from './rq/surface.js';
+import {mountRqWorkspace,refreshRqWorkspace,RQ_COMPOSITION_OWNER} from './rq/composition.js';
 import {bindShellSurfaceCommands} from './shell/surface.js';
 import {bindLibrarySurface} from './library/surface.js';
 import {bindLearnSurface} from './learn/surface.js';
@@ -25,7 +26,7 @@ import {renderRunsSurface} from './runs/presentation.js';
 import {W04EvidenceDomain} from '../adapters/evidence/domain.js';
 import {W04MasteryDomain} from '../adapters/mastery/domain.js';
 import {W04PortfolioDomain} from '../adapters/portfolio/domain.js';
-import {W04ReviewDomain,ReviewAuthorityRegistry,REVIEW_DECISION_OUTCOMES,REVIEW_FINDING_OUTCOMES} from '../adapters/reviews/domain.js';
+import {W04ReviewDomain,REVIEW_DECISION_OUTCOMES,REVIEW_FINDING_OUTCOMES} from '../adapters/reviews/domain.js';
 import {createConfigurationSurfaceComposition} from './configuration/composition.js';
 import {createManualAiSurfaceComposition} from './manual_ai/composition.js';
 import {createReleasesSurfaceComposition} from './releases/composition.js';
@@ -227,7 +228,11 @@ function registerW04SurfaceCommands({registry,consumer,surface,analyticalCompare
   }
 }
 function mountW04Group({consumer,registry,workspace,analyticalCompareOwner,reviewAuthorityRegistry=null,commandBus=null,wave3Assembly=null}){
-  const authorityRegistry=reviewAuthorityRegistry||new ReviewAuthorityRegistry();
+  /* F01 fail-closed (H03 residual): the composition root injects the ONE shared
+     ReviewAuthorityRegistry. A locally constructed fallback would silently split review
+     authority away from the shared instance, so an absent injection fails the mount. */
+  if(!reviewAuthorityRegistry)throw Error('R6_REVIEW_AUTHORITY_REGISTRY_REQUIRED: the shared ReviewAuthorityRegistry must be injected by the composition root; no local fallback registry is constructed.');
+  const authorityRegistry=reviewAuthorityRegistry;
   const evidenceDomain=new W04EvidenceDomain();
   const reviewsDomain=new W04ReviewDomain(undefined,{evidenceResolver:ref=>evidenceDomain.resolveReviewableEvidenceRef(ref),reviewAuthorityRegistry:authorityRegistry,allowTestAuthority:false});
   const group=createW04RescueComposition({analyticalCompareOwner,evidenceDomain,reviewsDomain,commands:commandBus}),surface=group[consumer],domain=surface.domain,stage=ensureStage({consumer});
@@ -277,8 +282,13 @@ export async function mountM0ControllerComposition(context={}){
     if(!analyticalCompareOwner)throw Error('R6_CENTRAL_ANALYTICAL_COMPARE_REQUIRED');
     const adapter=new RQDomainAdapter([],{analyticalCompareOwner,providerId:'rq.current-unavailable',providerAdmitted:false,providerClassification:'UNAVAILABLE_NO_ADMITTED_CURRENT_PROVIDER'}),binding=bindRqSurface({commands:registry,adapter,workspace}),stage=ensureStage({consumer});
     setBanner(consumer,'RQ · Research Analysis','Current provider unavailable · exact SourceRevision analysis only');
-    const mounted=renderTypedCollectionStage(stage,{workspace,surface:'rq',title:'RQ research workbench',summary:'Search and compare are available only against an admitted current provider with exact SourceRevision identities. No non-production acceptance corpus is promoted into Product truth.',rows:()=>adapter.records,commands:binding.commands,registry,rowId:(row,index)=>row.sourceId||`rq-${index+1}`,rowLabel:(row,index)=>row.title||row.sourceId||`Source ${index+1}`,rowMeta:row=>row.revision||row.status||'',detailFor:row=>row,truth:diagnosticsEnabled()?[`Analytical compare owner: ${analyticalCompareOwner.owner}`,'Current RQ provider: UNAVAILABLE_NO_ADMITTED_CURRENT_PROVIDER','Analysis-session persistence: unavailable','Formal review authority: false']:['No current Product SourceRevision provider is admitted.','Comparisons require exact provider-bound source revisions.','This workspace does not issue formal Evidence Review decisions or Mastery.'],emptyMessage:'No admitted current RQ SourceRevision provider is bound. Non-production acceptance data is excluded from normal Product truth; Compare remains unavailable until exact provider-bound revisions exist.'});
-    workspace.toolbar([...binding.commands]);return {adapter,binding,mounted,centralAnalyticalCompareOwner:analyticalCompareOwner.owner};
+    /* b2 (OFFLOAD-03 C-X2, filed-not-applied): mount the purpose-built RQ workspace from the
+       composition root. bindRqSurface() owns the command binding plus its guarded deferred
+       mount, and mountRqWorkspace() composes the surface itself — rq no longer routes through
+       the generic renderTypedCollectionStage branch. */
+    mountRqWorkspace({stage,workspace,registry,adapter});
+    const mounted={surface:'rq',owner:RQ_COMPOSITION_OWNER,mountedBy:'mountRqWorkspace',render:()=>refreshRqWorkspace()};
+    return {adapter,binding,mounted,centralAnalyticalCompareOwner:analyticalCompareOwner.owner};
   }
   if(consumer==='visualize'){
     const sharedSpatial=wave3Assembly?.spatial;

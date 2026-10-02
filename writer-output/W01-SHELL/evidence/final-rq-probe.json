@@ -1,0 +1,42 @@
+{
+  "stageComposition": "rq",
+  "stageRqSurface": "rq.source-claim-reconciliation",
+  "stageClasses": "foundation-stage m0-controller-stage rq-stage",
+  "firstChild": "DIV.rq",
+  "genericTypedStage": false,
+  "rqControls": 20,
+  "rqSections": [
+    "rq-block",
+    "rq-block",
+    "rq-block"
+  ],
+  "toolbar": [
+    "rq.view.compare",
+    "rq.view.claims",
+    "rq.view.provenance",
+    "rq.view.revision",
+    "rq.view.history"
+  ],
+  "commandRegistryHas": [
+    [
+      "rq.search",
+      true
+    ],
+    [
+      "rq.compare",
+      true
+    ],
+    [
+      "rq.review",
+      true
+    ],
+    [
+      "rq.provenance",
+      true
+    ]
+  ],
+  "bindingOwner": "RQDomainAdapter",
+  "m0MountedBy": "mountRqWorkspace",
+  "m0MountedOwner": "W02RqWorkspaceComposer",
+  "pageErrors": []
+}

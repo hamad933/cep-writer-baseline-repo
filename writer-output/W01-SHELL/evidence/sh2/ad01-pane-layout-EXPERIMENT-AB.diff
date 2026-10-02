@@ -1,0 +1,44 @@
+diff --git a/stack/native-typescript/foundation/global/pane-layout.ts b/stack/native-typescript/foundation/global/pane-layout.ts
+index 8ca2970..5f68e91 100644
+--- a/stack/native-typescript/foundation/global/pane-layout.ts
++++ b/stack/native-typescript/foundation/global/pane-layout.ts
+@@ -24,6 +24,10 @@ const RUNTIME_LIMITS = Object.freeze({
+   right: Object.freeze({ min: 0, max: 520, collapseThreshold: 24 })
+ });
+ 
++/* EXPERIMENT B (SH-2 AD-01 falsification): reference proportion ≈16/65/17 at the 1440
++   canonical viewport -> left 230px, right 245px. TEMPORARY - reverted after measurement. */
++const REFERENCE_PANE_WIDTH = Object.freeze({ left: 230, right: 245 });
++
+ function assertPaneSide(side, errorCode = 'INVALID_PANE_SIDE') {
+   if (side !== 'left' && side !== 'right') throw new Error(errorCode);
+   return side;
+@@ -59,8 +63,8 @@ function normalizedSnapshot(input = {}) {
+       right: preferred.right === 'collapsed' ? 'collapsed' : 'open'
+     },
+     widths: {
+-      left: Math.max(1, finite(widths.left, 304)),
+-      right: Math.max(1, finite(widths.right, 420))
++      left: Math.max(1, finite(widths.left, 230)),
++      right: Math.max(1, finite(widths.right, 245))
+     },
+     overrides: {
+       medium: {
+@@ -112,7 +116,7 @@ function effectiveWidths(snapshot) {
+   const s = normalizedSnapshot(snapshot);
+   return Object.fromEntries(['left', 'right'].map((side) => {
+     const limits = paneLimits(s, side);
+-    return [side, clamp(s.widths[side], 1, limits.max)];
++    return [side, clamp(s.widths[side], 1, Math.min(limits.max, REFERENCE_PANE_WIDTH[side]))];
+   }));
+ }
+ 
+@@ -199,7 +203,7 @@ export class WorkspacePaneLayoutOwner {
+   preferredWidth(side) {
+     const key = assertPaneSide(side);
+     const limits = WORKSPACE_PANE_WIDTH_LIMITS[key];
+-    return clamp(finite(this.preferences.resolve(widthKey(key)).preferredValue, key === 'left' ? 304 : 420), limits.min, limits.max);
++    return clamp(finite(this.preferences.resolve(widthKey(key)).preferredValue, key === 'left' ? 230 : 245), limits.min, limits.max);
+   }
+ 
+   runtimeSnapshot(viewportWidth = this.viewportWidth) {
