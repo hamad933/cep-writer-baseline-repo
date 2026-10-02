@@ -14,7 +14,7 @@
 | Canonical source tree at parent (recomputed from `git archive HEAD`, 338 files) | `0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc` — **equals** the recorded claim in `assurance/BROWSER_CONFORMANCE_RECEIPT.json` |
 | Canonical source tree with this lane's delta | `b61cf2bb3e9d55941ef969f6b7e11f859a89d52cd09d3277bcc0030a2f14b8fa` (338 files; identical to parent except the 5 portfolio source files below) |
 | Environment | node `v22.16.0`, deps installed, Playwright `1.62.1` package-local, Chromium `151.0.7922.34` |
-| Candidate commit sha | written back into §9 after the commit exists (see git log on this branch) |
+| Candidate commit sha | **content commit:** `27b68b961a9adc616747151c02c7682d618bebaa` (parent `fe1bb98…`); this identity row was written back in the follow-up bookkeeping commit that only updates `HANDOFF.md` |
 
 ## 2. Changed paths (own scope only)
 
