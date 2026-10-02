@@ -110,3 +110,80 @@ General Browser Conformance at the exact source remains `3 PASS / 3 FAIL`; all t
 **Next legal action:** perform bounded W03 source-bound probes first to expose both sides of the Enterprise selection/relation seam and the exact Runs domain/event/terminal values. Only after root cause is exact may Controller use OD-20260916-044 for a genuinely small existing-owner correction; otherwise issue the single persistent W03 Writer milestone under OD-20260928-085. W04/W05 remain retained and are not relaunched unless W03 integration/regression proves them affected.
 
 No Product acceptance, main merge, release, deployment or stack freeze is authorized.
+
+## W03 ENTERPRISE RELATION DIAGNOSTIC NARROWING — 2026-10-02
+
+**Classification:** `CURRENT_W03_CORRECTION_TRUTH__RUNS_HARNESS_ORACLE_CLOSED__ENTERPRISE_RELATION_INTEGRATION_ONLY__NO_PRODUCT_MUTATION_IN_THIS_CONTROLLER_STEP`
+
+### Exact source / proof basis
+- Repository: `hamad933/cep-writer-baseline-repo`
+- Branch: `writer/mi-serial`
+- Observed HEAD before this state-record commit: `490b6a40e395c3265eaff74fef0b2bf0ce74bca6`
+- Observed tree: `7297b5fbb678db92f7b7b932f19bb09f9e8d5d00`
+- Latest convergence workflow: run `36947731860` — SUCCESS.
+- Evidence artifact: `11203036446`; uploaded ZIP digest `sha256:6af102c5e66ba9a29e91076856c0962d110fd10c66167ecbfa93b308273aa553`.
+- The two diagnostic/oracle commits after the prior W03 state binding changed only `tools/browser-conformance.mjs`; Product source remained unchanged.
+
+### Browser truth narrowed
+Exact-current general Browser Conformance is now `4 PASS / 2 FAIL`, improved from the prior `3 PASS / 3 FAIL`.
+
+Current PASS:
+1. `workspace.transient-and-pane-lifecycle`
+2. `spatial.selection-connect-canonical-edge`
+3. `runtime-causal-consequence`
+4. `spatial-input-bidi-preference-and-structured-isolation`
+
+The prior Runs causal failure is reclassified `HARNESS_ORACLE_DEFECT__CLOSED_WITHOUT_PRODUCT_MUTATION`. Exact-current proof now records:
+- canonical device `up=false`;
+- recorded projection `recordedUp=false`;
+- command `device.shutdown`;
+- event output `Web Application: interface DOWN (simulation)`;
+- provider `InternalSimulationAdapter`;
+- domain owner `W03RunDomain`;
+- runtime truth `INTERNAL_SIMULATION`;
+- terminal-visible DOWN state = true.
+
+### Remaining two failures — one Enterprise integration root
+Only these remain:
+1. `relation.route-convergence-and-label-scope`
+2. `central-change-reuse`
+
+Exact diagnostics show:
+- visible Enterprise canvas has 8 edges / 8 labels;
+- adapter has 8 relations;
+- Enterprise relation domain is editable;
+- `RelationInteractionOwner` policy is `RELATION-CENTRAL-04`;
+- but relation UI selection remains `selectionCount=0`;
+- `relationUiSharesPublishedSpatial=false`;
+- `relationUiSpatialConnected=false`;
+- `publishedSpatialConnected=false`.
+
+Direct source inspection identifies the integration split:
+- `main.ts` creates the original `SpatialView` and binds `RelationInteractionOwner(workspace, spatial, relations,...)`.
+- later `mountM0ControllerComposition` calls `renderEnterpriseSurface(...,{spatialView:wave3Assembly?.spatial||null})`;
+- `renderEnterpriseSurface` re-renders its topology host and, when the passed SpatialView host is not the newly rendered host, constructs a NEW `SpatialView`;
+- the existing `RelationInteractionOwner` remains bound to the earlier SpatialView instance, so visible Enterprise selection does not drive central relation availability/edit routes.
+
+**Current root-cause classification:** `PRODUCT_INTEGRATION_WIRING_DEFECT__EXACT_EXISTING_OWNER_SEAM__NO_NEW_ARCHITECTURE_REQUIRED`.
+
+### Execution disposition
+- W01: RETAIN — no relaunch.
+- W02: RETAIN with H03 propagation/falsification ceilings — no relaunch.
+- W03: narrow correction remains required, now limited to Enterprise relation/spatial instance convergence plus W03 regression.
+- W04: RETAIN — no relaunch unless affected regression proves otherwise.
+- W05: RETAIN — no relaunch unless affected regression proves otherwise.
+- ROUTE-MIMO-AGENT remains governed by `OD-20260928-085`: exactly one persistent sequential Writer; no parallel mutating MIMO Writers.
+- Do not use ChatGPT connector-heavy Product editing for this correction. Preferred next action is a Controller-prepared bounded W03 Enterprise correction mission executed in Codespaces/OpenCode/MiMo from the exact current parent, followed by independent ChatGPT Controller audit.
+- ChatGPT helper conversations may run genuinely disjoint READ-ONLY source/evidence/visual/decision audits in parallel because they do not mutate the Product lineage.
+- No Product acceptance, merge to main, release, deployment or stack freeze is authorized by this narrowing.
+
+### Next legal action
+Prepare one bounded W03 Enterprise correction packet with:
+- exact current parent HEAD/tree;
+- exact Enterprise spatial/relation wiring seam;
+- narrow writable paths only after final packet binding;
+- shared-owner files read-only unless falsification proves a shared-owner defect;
+- positive relation-route + selection/availability + central-reuse proofs;
+- negative provider/read-only/geometry/semantic-owner regression proofs;
+- W03 family regression including Runs causal proof and current W01/W02/W04/W05 retained gates.
+
