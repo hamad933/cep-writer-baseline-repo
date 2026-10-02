@@ -1,0 +1,456 @@
+{
+  "schemaVersion": 1,
+  "lane": "VAL-1",
+  "classification": "CANDIDATE_ONLY_NOT_OWNER_ACCEPTANCE",
+  "purpose": "Validation surface truth falsification (N2/N3 + stale binding) and AR-RTL/EN-LTR presentation capture",
+  "generatedAt": "2026-10-02T05:18:22.515Z",
+  "node": "v22.16.0",
+  "assertions": [
+    {
+      "id": "1440x1000.default-direction-follows-locale",
+      "expected": "ltr",
+      "actual": "ltr",
+      "ok": true,
+      "detail": "resolved default locale en"
+    },
+    {
+      "id": "1440x1000.A-status-technically-valid",
+      "expected": "TECHNICALLY_VALID",
+      "actual": "TECHNICALLY_VALID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.A-no-unevaluated-rule-fabricated-as-pass",
+      "expected": [],
+      "actual": [],
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.B-status-invalid",
+      "expected": "TECHNICALLY_INVALID",
+      "actual": "TECHNICALLY_INVALID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.B-json-parse-fails",
+      "expected": "✕ FAIL",
+      "actual": "✕ FAIL",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.B-unchecked-rules-not-claimed-pass",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": "[\"ARTIFACT_REF_REQUIRED\",\"ARTIFACT_DIGEST_REQUIRED\",\"RULESET_IDENTITY_REQUIRED\",\"VALIDATOR_IDENTITY_REQUIRED\",\"VALIDATOR_UNAVAILABLE\",\"RULESET_UNAVAILABLE\",\"PAYLOAD_OBJECT_REQUIRED\",\"ROOT_OBJECT_REQUIRED\"]"
+    },
+    {
+      "id": "1440x1000.C-null-root-invalid",
+      "expected": "TECHNICALLY_INVALID",
+      "actual": "TECHNICALLY_INVALID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.C-null-root-has-root-not-object-finding",
+      "expected": "✕ FAIL",
+      "actual": "✕ FAIL",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.D-no-provider-unavailable",
+      "expected": "UNAVAILABLE",
+      "actual": "UNAVAILABLE",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.D-validator-unavailable-finding",
+      "expected": "✕ FAIL",
+      "actual": "✕ FAIL",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.D-never-technically-valid-without-provider",
+      "expected": "UNAVAILABLE",
+      "actual": "UNAVAILABLE",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.E-stale-banner-shown",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.E-stale-feedback-declared",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.E-stale-banner-survives-render",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.F-unresolved-identity-not-labelled-stale",
+      "expected": false,
+      "actual": false,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.F-unresolved-identity-declared",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.G-ar-switch-applies",
+      "expected": {
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "actual": {
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.G-ar-still-technically-valid",
+      "expected": "TECHNICALLY_VALID",
+      "actual": "TECHNICALLY_VALID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.G-en-switch-applies",
+      "expected": {
+        "lang": "en",
+        "dir": "ltr"
+      },
+      "actual": {
+        "lang": "en",
+        "dir": "ltr"
+      },
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1440x1000.G-en-still-technically-valid",
+      "expected": "TECHNICALLY_VALID",
+      "actual": "TECHNICALLY_VALID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.default-direction-follows-locale",
+      "expected": "ltr",
+      "actual": "ltr",
+      "ok": true,
+      "detail": "resolved default locale en"
+    },
+    {
+      "id": "1024x900.A-status-technically-valid",
+      "expected": "TECHNICALLY_VALID",
+      "actual": "TECHNICALLY_VALID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.A-no-unevaluated-rule-fabricated-as-pass",
+      "expected": [],
+      "actual": [],
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.B-status-invalid",
+      "expected": "TECHNICALLY_INVALID",
+      "actual": "TECHNICALLY_INVALID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.B-json-parse-fails",
+      "expected": "✕ FAIL",
+      "actual": "✕ FAIL",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.B-unchecked-rules-not-claimed-pass",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": "[\"ARTIFACT_REF_REQUIRED\",\"ARTIFACT_DIGEST_REQUIRED\",\"RULESET_IDENTITY_REQUIRED\",\"VALIDATOR_IDENTITY_REQUIRED\",\"VALIDATOR_UNAVAILABLE\",\"RULESET_UNAVAILABLE\",\"PAYLOAD_OBJECT_REQUIRED\",\"ROOT_OBJECT_REQUIRED\"]"
+    },
+    {
+      "id": "1024x900.C-null-root-invalid",
+      "expected": "TECHNICALLY_INVALID",
+      "actual": "TECHNICALLY_INVALID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.C-null-root-has-root-not-object-finding",
+      "expected": "✕ FAIL",
+      "actual": "✕ FAIL",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.D-no-provider-unavailable",
+      "expected": "UNAVAILABLE",
+      "actual": "UNAVAILABLE",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.D-validator-unavailable-finding",
+      "expected": "✕ FAIL",
+      "actual": "✕ FAIL",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.D-never-technically-valid-without-provider",
+      "expected": "UNAVAILABLE",
+      "actual": "UNAVAILABLE",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.E-stale-banner-shown",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.E-stale-feedback-declared",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.E-stale-banner-survives-render",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.F-unresolved-identity-not-labelled-stale",
+      "expected": false,
+      "actual": false,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.F-unresolved-identity-declared",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "crop.right-context.1024x900",
+      "expected": "captured",
+      "actual": "failed:elementHandle.screenshot: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - taking elem",
+      "ok": false,
+      "detail": ".v-ctx"
+    },
+    {
+      "id": "1024x900.G-ar-switch-applies",
+      "expected": {
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "actual": {
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.G-ar-still-technically-valid",
+      "expected": "TECHNICALLY_VALID",
+      "actual": "TECHNICALLY_VALID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.G-en-switch-applies",
+      "expected": {
+        "lang": "en",
+        "dir": "ltr"
+      },
+      "actual": {
+        "lang": "en",
+        "dir": "ltr"
+      },
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "1024x900.G-en-still-technically-valid",
+      "expected": "TECHNICALLY_VALID",
+      "actual": "TECHNICALLY_VALID",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "summary": {
+    "total": 41,
+    "pass": 40,
+    "fail": 1
+  },
+  "pageErrors": [],
+  "captures": [
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/validation-stale-1440x1000-en.png",
+      "viewport": "1440x1000",
+      "locale": "en",
+      "dir": "ltr",
+      "sha256": "12c690f881247ef195bbc56897befd17ebdae2c1b79f84b15fa42f97c8c0c4d1",
+      "bytes": 236416
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/validation-session-default-1440x1000-en.png",
+      "viewport": "1440x1000",
+      "locale": "en",
+      "dir": "ltr",
+      "sha256": "0381a57bfb774d318f74f26692b4590eb443deafd406abd0a9007c847a235e7f",
+      "bytes": 244841
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/crop-rule-outcomes-1440x1000-en.png",
+      "viewport": "1440x1000",
+      "locale": "en",
+      "dir": "ltr",
+      "sha256": "4d24cdac839bc5ffd9a00cce9836c7642ab54650ead892daf028682320f1c05e",
+      "bytes": 96869,
+      "elementCrop": ".v-table-wrap"
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/crop-session-tiles-1440x1000-en.png",
+      "viewport": "1440x1000",
+      "locale": "en",
+      "dir": "ltr",
+      "sha256": "fb3b1655fe04d06ffca343f4600b658c17b2cfc22c062d0e57ecce01bd226f5c",
+      "bytes": 13132,
+      "elementCrop": ".v-tiles"
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/crop-left-structure-1440x1000-en.png",
+      "viewport": "1440x1000",
+      "locale": "en",
+      "dir": "ltr",
+      "sha256": "2d8fcac16a9557b1be0d88e420d233e4c66c2043ae364ec9bb688222768857ff",
+      "bytes": 39233,
+      "elementCrop": ".v-nav"
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/crop-right-context-1440x1000-en.png",
+      "viewport": "1440x1000",
+      "locale": "en",
+      "dir": "ltr",
+      "sha256": "a68247b8599633f750b0c286b5611e710edfb66a54c17c90322cea3dd9d78af3",
+      "bytes": 42827,
+      "elementCrop": ".v-ctx"
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/validation-session-1440x1000-ar.png",
+      "viewport": "1440x1000",
+      "locale": "ar",
+      "dir": "rtl",
+      "sha256": "3dfbbc0620191dd8f0ebfce55abd8b465b1e05a1fe4ba714782c823237f03228",
+      "bytes": 268734
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/validation-session-1440x1000-en.png",
+      "viewport": "1440x1000",
+      "locale": "en",
+      "dir": "ltr",
+      "sha256": "bfd5300da8a70a5977cccf12ac529ab5bde47086db978f50b2ebba3bd59b1bed",
+      "bytes": 274536
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/validation-stale-1024x900-en.png",
+      "viewport": "1024x900",
+      "locale": "en",
+      "dir": "ltr",
+      "sha256": "2e56707ca1bb95eecf9205bbeb5d257e135cba3a0b7e93b5944d571dcea78c3c",
+      "bytes": 162678
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/validation-session-default-1024x900-en.png",
+      "viewport": "1024x900",
+      "locale": "en",
+      "dir": "ltr",
+      "sha256": "413131d8f586134cc8088fbfb8fe2264cddd02aa59c900f913130e07002b9f3e",
+      "bytes": 163382
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/crop-rule-outcomes-1024x900-en.png",
+      "viewport": "1024x900",
+      "locale": "en",
+      "dir": "ltr",
+      "sha256": "4a3087f502a9185e8c5821eb0a21bdd09041382e225ddb343e2aea1bba4e8fe7",
+      "bytes": 91367,
+      "elementCrop": ".v-table-wrap"
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/crop-session-tiles-1024x900-en.png",
+      "viewport": "1024x900",
+      "locale": "en",
+      "dir": "ltr",
+      "sha256": "cc6ca520239fdfac6b922b7b5fa7e55c8ae20d7bdd9c4a6af4371de7b0b88898",
+      "bytes": 12828,
+      "elementCrop": ".v-tiles"
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/crop-left-structure-1024x900-en.png",
+      "viewport": "1024x900",
+      "locale": "en",
+      "dir": "ltr",
+      "sha256": "acf69ca155fa3e7c2e46ad9aa007365dcd592e94b5bad158a0ba96ade1b08706",
+      "bytes": 39189,
+      "elementCrop": ".v-nav"
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/validation-session-1024x900-ar.png",
+      "viewport": "1024x900",
+      "locale": "ar",
+      "dir": "rtl",
+      "sha256": "7435cba8b8f9dff40319ec5c6f6221e8432107e99b0dfd0b6670f447df330e2c",
+      "bytes": 183997
+    },
+    {
+      "filename": "writer-output/W05-VALIDATION/probe/captures/validation-session-1024x900-en.png",
+      "viewport": "1024x900",
+      "locale": "en",
+      "dir": "ltr",
+      "sha256": "f008af1549a5557671e19b5abb9dea899a8485449188a72d4e0ced0ace02ea30",
+      "bytes": 187238
+    }
+  ]
+}

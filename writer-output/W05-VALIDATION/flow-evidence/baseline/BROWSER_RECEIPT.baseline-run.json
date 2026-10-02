@@ -1,0 +1,3076 @@
+{
+  "schemaVersion": 1,
+  "classification": "W05_BROWSER_RECEIPT_NOT_OWNER_ACCEPTANCE",
+  "command": "node tools/w05-browser-flows.mjs --flow validation.flow",
+  "browser": "Chromium (Playwright package-local)",
+  "browserVersion": "151.0.7922.34",
+  "transport": "localhost-http",
+  "runtime": "Node v22.16.0",
+  "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+  "measuredCandidate": "WORKTREE_VARIANT:0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+  "canonicalSourceFileCount": 287,
+  "measuredCandidateFileCount": 338,
+  "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+  "tree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+  "environment": {
+    "node": "v22.16.0",
+    "engine": "Playwright Chromium",
+    "playwrightResolution": "package-local",
+    "packageDeclaredVersion": "1.62.1",
+    "transport": "localhost-http",
+    "proofServer": "tools/serve.mjs on 127.0.0.1:33797",
+    "runtimeServer": "stack/local-runtime/server.mjs on 127.0.0.1:33277 (throwaway sqlite at writer-output/W05/.runtime-proof)",
+    "viewport": "1440x980",
+    "reducedMotion": true,
+    "browserExecutableOverride": false,
+    "browserVersion": "151.0.7922.34"
+  },
+  "capturedAt": "2026-10-02T04:50:41.968Z",
+  "evidenceLineage": {
+    "bindingAlgorithm": "path\\0size\\0sha256\\n (tools/source-tree-identity.mjs)",
+    "recomputedCandidateTreeSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+    "recomputedCandidateFileCount": 338,
+    "expectedCandidateTreeSha256": "c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+    "expectedCandidateFileCount": 287,
+    "lineageStatus": "DRIFT_RECORDED__CONCURRENT_SIBLING_WORKSPACE_EDITS",
+    "drift": true,
+    "driftAttribution": "Sibling workspaces edit the shared serial worktree concurrently; W05 records the drift instead of suppressing it.",
+    "note": "Worktree variant candidate (3 protected pre-existing canonical deltas) — never presented as the canonical 480dbe…/273 identity."
+  },
+  "summary": {
+    "total": 8,
+    "pass": 8,
+    "fail": 0
+  },
+  "limitations": [
+    "Headless Chromium only; no Owner acceptance and no exhaustive permutation certification",
+    "Local runtime API process runs against a throwaway sqlite database owned by this proof run",
+    "Owner-device Windows native-target proof (C03-GATE-021) is NOT part of this receipt — those rows stay BLOCKED with runner type Owner-device",
+    "W05 flows drive only W05-owned surfaces; shared shell/settings owners are exercised through their public commands"
+  ],
+  "flows": [
+    {
+      "flow": "audit.trail-recording",
+      "route": "/?surface=audit",
+      "preconditions": [
+        "local runtime API reachable",
+        "durable AuditEventProvider JSONL carries the events recorded by this run's earlier processing/backup operations",
+        "app booted with CEPFoundation.consumer === \"audit\""
+      ],
+      "expectedState": "search lists durable AuditEvents, verify returns a hash-chain verdict, annotations are stored separately and never mutate AuditEvent bytes",
+      "fixtureState": "durable JSONL audit log owned by the throwaway runtime database of this run",
+      "negativeCases": [
+        "command receipts must not be counted as audit events",
+        "hash must not be presented as encryption",
+        "database immutability must not be claimed",
+        "annotate must not fabricate an event when the target does not exist"
+      ],
+      "actionSequence": [
+        "GET /?surface=audit&persistencePort=32879",
+        "click product command audit.search",
+        "click product command audit.verify"
+      ],
+      "assertions": [
+        {
+          "id": "audit.fixture-event-recorded",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reach.audit.search",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "audit.search-returns-durable-events",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "audit.persistence-is-provider-durable-jsonl",
+          "expected": "PROVIDER_DURABLE_JSONL",
+          "actual": "PROVIDER_DURABLE_JSONL",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "audit-hash-is-not-encryption",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "audit-database-immutability-not-claimed",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "audit-command-receipts-are-not-audit-events",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "audit-annotations-are-separate",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reach.audit.verify",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "audit.verify-returns-a-chain-verdict",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "audit.first-invalid-sequence-is-explicit",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "audit.annotate-without-a-real-event-fails-closed",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "audit.annotate-does-not-create-events",
+          "expected": 12,
+          "actual": 12,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "audit.annotate-result",
+          "expected": "annotate returns ok for a real event",
+          "actual": {
+            "ok": true,
+            "code": null,
+            "thrown": null,
+            "eventId": "audit-1e2665cb-b754-4b42-b687-bd49570c58c6",
+            "raw": {
+              "ok": true,
+              "annotation": {
+                "schema": "CEP_AUDIT_ANNOTATION_V1",
+                "annotationId": "annotation-3beb58e8-fa4b-4733-aaba-2c249b661923",
+                "eventId": "audit-1e2665cb-b754-4b42-b687-bd49570c58c6",
+                "revision": 1,
+                "actor": "Local product user",
+                "note": "W05 browser proof annotation",
+                "createdAt": "2026-09-29T21:19:46.721Z"
+              },
+              "eventHashBefore": "dc79302d898aa1967638fdac0ca1bc604365f32a10a6a002cbe2ea4e8243d236",
+              "eventHashAfter": "dc79302d898aa1967638fdac0ca1bc604365f32a10a6a002cbe2ea4e8243d236",
+              "eventCountBefore": 12,
+              "eventCountAfter": 12,
+              "eventMutated": false,
+              "httpStatus": 201,
+              "transportOk": true
+            }
+          },
+          "ok": true,
+          "class": null,
+          "message": "annotate result captured as evidence"
+        },
+        {
+          "id": "audit.annotation-does-not-mutate-audit-event-bytes",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "audit.annotation-count-grows",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        }
+      ],
+      "screenshots": [
+        {
+          "filename": "writer-output/W05/evidence/audit-trail-recording-after-search-20260929T211944Z-c82cec63.png",
+          "sha256": "677681448c50a53bec4e46ed571b6b21d0484e436807d5e28b49b5cbab57152b",
+          "bytes": 244648,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T21:19:45.208Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "audit.trail-recording",
+            "suffix": "after-search"
+          }
+        },
+        {
+          "filename": "writer-output/W05/evidence/audit-trail-recording-after-verify-20260929T211946Z-c82cec63.png",
+          "sha256": "d561e2e67837d658340b47f7ef3bb47baf085094993e32bb50c51c4710579c41",
+          "bytes": 244783,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T21:19:46.712Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "audit.trail-recording",
+            "suffix": "after-verify"
+          }
+        },
+        {
+          "filename": "writer-output/W05/evidence/audit-trail-recording-after-annotate-20260929T211946Z-c82cec63.png",
+          "sha256": "d561e2e67837d658340b47f7ef3bb47baf085094993e32bb50c51c4710579c41",
+          "bytes": 244783,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T21:19:46.841Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "audit.trail-recording",
+            "suffix": "after-annotate"
+          }
+        }
+      ],
+      "pageErrors": [],
+      "transportFailures": [
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "evidenceLineage": null,
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": null,
+      "status": "PASS",
+      "failureClassification": null
+    },
+    {
+      "flow": "backup.restore-round-trip",
+      "route": "/?surface=backup",
+      "preconditions": [
+        "local runtime API reachable",
+        "one structured document bootstrapped so the package has real content",
+        "app booted with CEPFoundation.consumer === \"backup\""
+      ],
+      "expectedState": "package → plan → preview → stage → isolated drill → activation request; STAGED_AND_VERIFIED is never LIVE_RESTORED; activation stays AUTHORITY_PENDING and the production database is never mutated",
+      "fixtureState": "runtime-seeded document + throwaway sqlite database owned by this proof run",
+      "negativeCases": [
+        "drill must not claim a live restore",
+        "activation request must not mutate the production database",
+        "activation must stay pending without explicit authority"
+      ],
+      "actionSequence": [
+        "GET /?surface=backup&persistencePort=32879",
+        "click product command backup.package",
+        "click product command backup.plan",
+        "click product command backup.preview",
+        "click product command backup.stage",
+        "click product command backup.drill",
+        "click product command backup.activationRequest"
+      ],
+      "assertions": [
+        {
+          "id": "backup.fixture-document-bootstrapped",
+          "expected": 200,
+          "actual": 200,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reach.backup.package",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "backup.package-is-verified",
+          "expected": "PACKAGE_VERIFIED",
+          "actual": "PACKAGE_VERIFIED",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reach.backup.plan",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reach.backup.preview",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reach.backup.stage",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "backup.plan-is-non-executing",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "backup.preview-writes-nothing",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "backup.stage-does-not-mutate-production",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reach.backup.drill",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "backup.drill-is-staged-and-verified",
+          "expected": "STAGED_AND_VERIFIED",
+          "actual": "STAGED_AND_VERIFIED",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "backup.drill-is-not-a-live-restore",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "backup.drill-restores-the-exact-package",
+          "expected": "backup-20260929211934-0c4fffff",
+          "actual": "backup-20260929211934-0c4fffff",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "backup.drill-restores-the-exact-snapshot",
+          "expected": "0a7dbff62d03ed3b92bb5d5bb2f52ac117fed4e352d6969fc2ebc39b7f04f5bb",
+          "actual": "0a7dbff62d03ed3b92bb5d5bb2f52ac117fed4e352d6969fc2ebc39b7f04f5bb",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reach.backup.activationRequest",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "backup.activation-stays-authority-pending",
+          "expected": "AUTHORITY_PENDING",
+          "actual": "AUTHORITY_PENDING",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "backup.activation-does-not-mutate-production",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "backup.truth-keeps-drill-and-restore-apart",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        }
+      ],
+      "screenshots": [
+        {
+          "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-package-20260929T211936Z-c82cec63.png",
+          "sha256": "12028eca597ef91bfa623f841e6245e1a40e34d80f09bde4e367503842269e62",
+          "bytes": 250433,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T21:19:36.303Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "backup.restore-round-trip",
+            "suffix": "after-package"
+          }
+        },
+        {
+          "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-stage-20260929T211938Z-c82cec63.png",
+          "sha256": "a837fdb9b469319744b1f6eb2256511790201f6f6d8cbdaf55e41c384c9f8e95",
+          "bytes": 244434,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T21:19:38.599Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "backup.restore-round-trip",
+            "suffix": "after-stage"
+          }
+        },
+        {
+          "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-drill-20260929T211940Z-c82cec63.png",
+          "sha256": "7cf9be8d451d163f3c2922c191874b9e27a2d31fcb54a909377934ce04764bd9",
+          "bytes": 245814,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T21:19:40.301Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "backup.restore-round-trip",
+            "suffix": "after-drill"
+          }
+        },
+        {
+          "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-activation-20260929T211941Z-c82cec63.png",
+          "sha256": "b559a50adb3bb233ef95df860530c5beb2eddb9e340202faa6067761ae7953dd",
+          "bytes": 247525,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T21:19:41.832Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "backup.restore-round-trip",
+            "suffix": "after-activation"
+          }
+        }
+      ],
+      "pageErrors": [],
+      "transportFailures": [
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "evidenceLineage": null,
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": null,
+      "status": "PASS",
+      "failureClassification": null
+    },
+    {
+      "flow": "configuration.sc011-transfer",
+      "route": "/?surface=configuration",
+      "preconditions": [
+        "app booted with CEPFoundation.consumer === \"configuration\"",
+        "canonical Settings opens through the shared foundation.settings command"
+      ],
+      "expectedState": "operational configuration is observe/propose/validate only, apply requires explicit authority, Global Settings stays a separate owner, SC-011 export/import/reset is exposed once through settings.transfer",
+      "fixtureState": "default operational observations from the local runtime capability advertisement",
+      "negativeCases": [
+        "edit must not mutate operational configuration",
+        "validate must not imply apply",
+        "reset must not factory-reset operational configuration",
+        "Settings must not dispatch an operational configuration apply",
+        "preference import must not clobber unscoped (session) state"
+      ],
+      "actionSequence": [
+        "GET /?surface=configuration&persistencePort=32879",
+        "open canonical Settings through the shared foundation.settings command",
+        "click product command foundation.settings"
+      ],
+      "assertions": [
+        {
+          "id": "configuration.no-duplicate-settings-engine",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "configuration.settings-cannot-dispatch-operational-apply",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "configuration.global-settings-owner-unchanged",
+          "expected": "SettingsCenterOwner",
+          "actual": "SettingsCenterOwner",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "configuration.operational-owner-unchanged",
+          "expected": "ConfigurationDomainAdapter",
+          "actual": "ConfigurationDomainAdapter",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "configuration.edit-does-not-mutate",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "configuration.validate-does-not-apply",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "configuration.reset-is-not-factory-reset",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "configuration.requestapply-requires-explicit-authority",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reach.foundation.settings",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "configuration.settings-center-opened",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "sc011.settings.preferences.export-exposed",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "sc011.settings.preferences.import-exposed",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "sc011.settings.preferences.reset-exposed",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "sc011.single-transfer-action-home",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "sc011.session-scope-never-exported",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "sc011.import-does-not-clobber-unscoped-state",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        }
+      ],
+      "screenshots": [
+        {
+          "filename": "writer-output/W05/evidence/configuration-sc011-transfer-configuration-boundary-20260929T211950Z-c82cec63.png",
+          "sha256": "1594905b0af99629d43ed0d97bf066560f177f12df47f15f91a295c9ae5b429b",
+          "bytes": 241552,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T21:19:50.607Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "configuration.sc011-transfer",
+            "suffix": "configuration-boundary"
+          }
+        },
+        {
+          "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-20260929T211952Z-c82cec63.png",
+          "sha256": "3c903ae80b03535f76ebdfc340bf71b041fb6c49884423b60d68450d8bd1680a",
+          "bytes": 273296,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T21:19:52.582Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "configuration.sc011-transfer",
+            "suffix": "settings-transfer"
+          }
+        },
+        {
+          "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-done-20260929T211952Z-c82cec63.png",
+          "sha256": "3c903ae80b03535f76ebdfc340bf71b041fb6c49884423b60d68450d8bd1680a",
+          "bytes": 273296,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T21:19:52.912Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "configuration.sc011-transfer",
+            "suffix": "settings-transfer-done"
+          }
+        }
+      ],
+      "pageErrors": [],
+      "transportFailures": [
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "evidenceLineage": null,
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": null,
+      "status": "PASS",
+      "failureClassification": null
+    },
+    {
+      "flow": "health.refresh-inspect-diagnose",
+      "route": "/?surface=health",
+      "preconditions": [
+        "local runtime API process reachable on the bound persistence port",
+        "app booted with CEPFoundation.consumer === \"health\"",
+        "no diagnostic exists before the explicit diagnose action"
+      ],
+      "expectedState": "refresh re-observes provider state without creating a diagnostic; inspect returns one exact observation; diagnose produces a durable receipt; UNAVAILABLE/STALE/ERROR never render green by fallback",
+      "fixtureState": "fresh local-runtime sqlite database for this run; no fixture mutation of observations",
+      "negativeCases": [
+        "queue depth is a QueueMetric and must not be presented as worker liveness",
+        "persistence health must not alias product health",
+        "refresh must not create a diagnostic"
+      ],
+      "actionSequence": [
+        "GET /?surface=health&persistencePort=32879",
+        "click product command health.refresh",
+        "click product command health.inspect",
+        "click product command health.diagnose"
+      ],
+      "assertions": [
+        {
+          "id": "health.group-truth-ceilings",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "health.queue-and-liveness-are-distinct-metrics",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "health.no-diagnostic-exists-before-the-explicit-action",
+          "expected": null,
+          "actual": null,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reach.health.refresh",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "health.refresh-re-observes",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "health.refresh-does-not-create-a-diagnostic",
+          "expected": null,
+          "actual": null,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "health.refresh-records-an-observation",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "health.persistence-health-is-not-product-health",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "health.observation-state-set-is-declared",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reach.health.inspect",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "health.inspect-selects-one-exact-observation",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reach.health.diagnose",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "health.diagnose-produces-a-real-diagnostic",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "health.diagnostic-is-durable",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "health.diagnostic-is-distinct-from-refresh",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        }
+      ],
+      "screenshots": [
+        {
+          "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-refresh-20260929T211920Z-c82cec63.png",
+          "sha256": "21b4b3c4d035391fba8d751f959a7beec644c048cdcf56047101a08d81add73d",
+          "bytes": 279248,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T21:19:20.207Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "health.refresh-inspect-diagnose",
+            "suffix": "after-refresh"
+          }
+        },
+        {
+          "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-inspect-20260929T211920Z-c82cec63.png",
+          "sha256": "0d9fcc242d69389b2e9a8d271d95a152cfcc623654c0c4154c84d5843f8fd288",
+          "bytes": 279353,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T21:19:21.012Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "health.refresh-inspect-diagnose",
+            "suffix": "after-inspect"
+          }
+        },
+        {
+          "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-diagnose-20260929T211922Z-c82cec63.png",
+          "sha256": "10a248d42fc80e1573fa0f5fcc18b3546516ff02e53ea1bda4a5c26cb1499e4b",
+          "bytes": 278772,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T21:19:22.795Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "health.refresh-inspect-diagnose",
+            "suffix": "after-diagnose"
+          }
+        }
+      ],
+      "pageErrors": [],
+      "transportFailures": [
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "evidenceLineage": null,
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": null,
+      "status": "PASS",
+      "failureClassification": null
+    },
+    {
+      "flow": "manual-ai.bridge-truthful-ceilings",
+      "route": "/?surface=manual_ai",
+      "preconditions": [
+        "app booted with CEPFoundation.consumer === \"manual_ai\"",
+        "no export helper and no DraftSink injected into the default product composition"
+      ],
+      "expectedState": "providerMode is MANUAL_ONLY_PROVIDER_NEUTRAL, hiddenProviderCalls stays 0, automaticCanonicalPublication stays false, export without a helper returns a packet instead of calling a provider",
+      "fixtureState": "one prepared proposal created through the product command bus by this run",
+      "negativeCases": [
+        "export with no helper must not call a provider",
+        "accept must never publish canonically",
+        "the default product composition must not carry an export helper or draft sink"
+      ],
+      "actionSequence": [
+        "GET /?surface=manual_ai&persistencePort=32879",
+        "execute manual_ai.draft through the canonical semantic command bus",
+        "click product command manual_ai.export"
+      ],
+      "assertions": [
+        {
+          "id": "manual-ai.provider-mode-is-manual-only",
+          "expected": "MANUAL_ONLY_PROVIDER_NEUTRAL",
+          "actual": "MANUAL_ONLY_PROVIDER_NEUTRAL",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "manual-ai.hidden-provider-calls-zero",
+          "expected": 0,
+          "actual": 0,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "manual-ai.no-automatic-canonical-publication",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "manual-ai.default-composition-has-no-export-helper",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "manual-ai.default-composition-has-no-draft-sink",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "manual-ai.draft-prepares-a-declared-proposal",
+          "expected": "PREPARED",
+          "actual": "PREPARED",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reach.manual_ai.export",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "manual-ai.export-emits-a-command-receipt",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "manual-ai.export-last-receipts",
+          "expected": "manual_ai.* receipts",
+          "actual": [
+            {
+              "id": "manual_ai.draft"
+            },
+            {
+              "id": "manual_ai.export"
+            }
+          ],
+          "ok": true,
+          "class": null,
+          "message": "receipt trail captured as evidence"
+        },
+        {
+          "id": "manual-ai.export-does-not-call-a-provider",
+          "expected": 0,
+          "actual": 0,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "manual-ai.export-still-no-canonical-publication",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "manual-ai.surface-declares-no-auto-publication",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        }
+      ],
+      "screenshots": [
+        {
+          "filename": "writer-output/W05/evidence/manual-ai-bridge-truthful-ceilings-ceilings-20260929T211932Z-c82cec63.png",
+          "sha256": "f0548ab168413f394786e77112df7e4499a58b6a85302dba6d28e9423a0ba2a3",
+          "bytes": 210563,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T21:19:32.872Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "manual-ai.bridge-truthful-ceilings",
+            "suffix": "ceilings"
+          }
+        }
+      ],
+      "pageErrors": [],
+      "transportFailures": [
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "evidenceLineage": null,
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": null,
+      "status": "PASS",
+      "failureClassification": null
+    },
+    {
+      "flow": "processing.inspect-retry-requestCancel-validationHandoff",
+      "route": "/?surface=processing",
+      "preconditions": [
+        "local runtime API reachable",
+        "two Jobs exist for this run (one completed through a real provider run, one cancelled through the ack path)",
+        "app booted with CEPFoundation.consumer === \"processing\""
+      ],
+      "expectedState": "job/attempt identity stays distinct, retry is only offered for FAILED/TIMED_OUT, cancel request ≠ cancel success until provider ack, validation handoff stays PENDING until the real consumer acks",
+      "fixtureState": "runtime-seeded Jobs created over HTTP by this proof run against a throwaway sqlite database",
+      "negativeCases": [
+        "retry must not be offered for a COMPLETED job",
+        "CANCEL_REQUESTED must not be reported as CANCELLED before ack",
+        "validation handoff PENDING must not be reported as acknowledged"
+      ],
+      "actionSequence": [
+        "GET /?surface=processing&persistencePort=32879",
+        "click product command processing.inspect",
+        "click product command processing.requestCancel"
+      ],
+      "assertions": [
+        {
+          "id": "processing.fixture-job-created",
+          "expected": 200,
+          "actual": 200,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "processing.cancel-request-is-not-cancel-success",
+          "expected": "CANCEL_REQUESTED",
+          "actual": "CANCEL_REQUESTED",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "processing.cancel-ack-not-claimed",
+          "expected": "REQUESTED",
+          "actual": "REQUESTED",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "processing.job-and-attempt-identities-distinct",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "processing.surface-shows-the-open-cancel-request",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reach.processing.inspect",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "processing.inspect-resolves-a-selection",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "processing.retry-not-offered-for-non-failed-job",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reach.processing.requestCancel",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "processing.cancel-becomes-cancelled-only-after-provider-ack",
+          "expected": "CANCELLED",
+          "actual": "CANCELLED",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "processing.cancel-ack-is-provider-sourced",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "processing.completed-job-exists-for-handoff",
+          "expected": "COMPLETED",
+          "actual": "COMPLETED",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "processing.validation-handoff-starts-pending",
+          "expected": "PENDING",
+          "actual": "PENDING",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "processing.validation-handoff-visible-as-pending",
+          "expected": "PENDING",
+          "actual": "PENDING",
+          "ok": true,
+          "class": null,
+          "message": ""
+        }
+      ],
+      "screenshots": [
+        {
+          "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-inspect-20260929T211925Z-c82cec63.png",
+          "sha256": "44e151649c6ab2cf731d5b586e4672459d1b5c26718fd8e330a9063f01f0a8df",
+          "bytes": 237893,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T21:19:25.523Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "processing.inspect-retry-requestCancel-validationHandoff",
+            "suffix": "after-inspect"
+          }
+        },
+        {
+          "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-cancel-and-handoff-20260929T211926Z-c82cec63.png",
+          "sha256": "ccaf8133fe60b34a50f96ebc63fed64ab6afb777457748831988fcb87059bc63",
+          "bytes": 238000,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T21:19:26.370Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "processing.inspect-retry-requestCancel-validationHandoff",
+            "suffix": "after-cancel-and-handoff"
+          }
+        }
+      ],
+      "pageErrors": [],
+      "transportFailures": [
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "evidenceLineage": null,
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": null,
+      "status": "PASS",
+      "failureClassification": null
+    },
+    {
+      "flow": "releases.view",
+      "route": "/?surface=releases",
+      "preconditions": [
+        "app booted with CEPFoundation.consumer === \"releases\"",
+        "the controller-injected shared AnalyticalCompareOwner is bound by the W05 composition seam"
+      ],
+      "expectedState": "technical readiness, Owner authorization and deployment observation stay three separate truths; compare requires two exact candidates; an empty candidate set never renders green readiness",
+      "fixtureState": "no ReleaseCandidate seeded — the truthful empty state is the product state under test",
+      "negativeCases": [
+        "readiness must not be presented as authorization",
+        "authorization must not be presented as deployment",
+        "compare without an exact pair must fail closed",
+        "the adapter must never synthesise a local compare owner"
+      ],
+      "actionSequence": [
+        "GET /?surface=releases&persistencePort=32879"
+      ],
+      "assertions": [
+        {
+          "id": "releases.compare-owner-is-the-injected-analytical-owner",
+          "expected": "AnalyticalCompare",
+          "actual": "AnalyticalCompare",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "releases.compare-binding-names-the-shared-owner",
+          "expected": "AnalyticalCompareOwner",
+          "actual": "AnalyticalCompareOwner",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "releases.readiness-is-not-authorization",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "releases-authorization-is-not-deployment",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "releases.deployment-execution-not-owned",
+          "expected": "NOT_OWNED",
+          "actual": "NOT_OWNED",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "releases.domain-default-has-no-fabricated-candidates",
+          "expected": 0,
+          "actual": 0,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "releases.representative-records-are-explicitly-labelled",
+          "expected": 5,
+          "actual": 5,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "releases.empty-set-is-not-green",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "releases.compare-without-pair-fails-closed",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "releases.inspect-without-candidate-fails-closed",
+          "expected": "NO_CANDIDATE",
+          "actual": "NO_CANDIDATE",
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "releases.compare-command-blocked-without-pair",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        }
+      ],
+      "screenshots": [
+        {
+          "filename": "writer-output/W05/evidence/releases-view-empty-truth-20260929T211948Z-c82cec63.png",
+          "sha256": "efb349af8dcc014a06e7ac6d5ee940aa7a1615061ab9e840593a1fdd50cedda0",
+          "bytes": 241693,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T21:19:48.586Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "releases.view",
+            "suffix": "empty-truth"
+          }
+        },
+        {
+          "filename": "writer-output/W05/evidence/releases-view-compare-blocked-20260929T211948Z-c82cec63.png",
+          "sha256": "efb349af8dcc014a06e7ac6d5ee940aa7a1615061ab9e840593a1fdd50cedda0",
+          "bytes": 241693,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-09-29T21:19:48.712Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "releases.view",
+            "suffix": "compare-blocked"
+          }
+        }
+      ],
+      "pageErrors": [],
+      "transportFailures": [
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "evidenceLineage": null,
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": null,
+      "status": "PASS",
+      "failureClassification": null
+    },
+    {
+      "flow": "validation.flow",
+      "route": "/?surface=validation",
+      "preconditions": [
+        "app booted with CEPFoundation.consumer === \"validation\"",
+        "sample artifact payload is pre-filled by the product"
+      ],
+      "expectedState": "validate produces a TECHNICALLY_VALID result bound to exact artifact/ruleset/validator identity; findings stay technical and never become W04 review findings",
+      "fixtureState": "product-provided sample payload; no fixture mutation",
+      "negativeCases": [
+        "technical findings must not appear in the formal review snapshot",
+        "missing validator identity must yield UNAVAILABLE, never PASS"
+      ],
+      "actionSequence": [
+        "GET /?surface=validation&persistencePort=33277",
+        "click product command validation.validate",
+        "click product command validation.findings"
+      ],
+      "assertions": [
+        {
+          "id": "reach.validation.validate",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "validation.run-produced-a-result",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "validation.no-formal-review-findings-created",
+          "expected": 0,
+          "actual": 0,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "validation.surface-declares-separation",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "validation.truth-has-no-formal-review-authority",
+          "expected": false,
+          "actual": false,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "reach.validation.findings",
+          "expected": true,
+          "actual": true,
+          "ok": true,
+          "class": null,
+          "message": ""
+        },
+        {
+          "id": "validation.findings-collection-has-no-formal-review-rows",
+          "expected": 0,
+          "actual": 0,
+          "ok": true,
+          "class": null,
+          "message": ""
+        }
+      ],
+      "screenshots": [
+        {
+          "filename": "writer-output/W05/evidence/validation-flow-after-validate-20261002T045037Z-c82cec63.png",
+          "sha256": "4e3c6a4dda8dd8d6c0fa8e3f02e1dc2d2e45a499b80b28d1e623aa25c968992a",
+          "bytes": 215398,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-10-02T04:50:38.268Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "validation.flow",
+            "suffix": "after-validate"
+          }
+        },
+        {
+          "filename": "writer-output/W05/evidence/validation-flow-after-findings-20261002T045039Z-c82cec63.png",
+          "sha256": "ee7a51f736187fe45dc5b173becd0f249846cbfb54b1cd1fcece754abb2d7527",
+          "bytes": 215828,
+          "viewport": {
+            "width": 1440,
+            "height": 980
+          },
+          "capturedAt": "2026-10-02T04:50:39.594Z",
+          "boundTo": {
+            "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+            "flow": "validation.flow",
+            "suffix": "after-findings"
+          }
+        }
+      ],
+      "pageErrors": [],
+      "transportFailures": [
+        {
+          "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        },
+        {
+          "url": "http://127.0.0.1:4174/v1/capabilities",
+          "error": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "evidenceLineage": null,
+      "browser": "Chromium (Playwright package-local)",
+      "browserVersion": null,
+      "status": "PASS",
+      "failureClassification": null
+    }
+  ],
+  "evidenceArtifacts": [
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-annotate-20260929T045412Z-c82cec63.png",
+      "sha256": "7658241660f1e07135cb5ba4e9b510bbd446a1b59886d355d96078e05b87ac7b",
+      "bytes": 175752,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-annotate-20260929T050353Z-c82cec63.png",
+      "sha256": "08bc3e15123147ad034464759707db53e54f2e51d5eaef6a07aa822c6c54e69c",
+      "bytes": 181036,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-annotate-20260929T205341Z-c82cec63.png",
+      "sha256": "b349c4197b910faeaa05f7949cce98782454c71b307b8627effae4d6784dfc31",
+      "bytes": 246049,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-annotate-20260929T205616Z-c82cec63.png",
+      "sha256": "d3081751b37c81ee30e8e668af90e850f548d2735a36fb1a75855cb7a7557ad5",
+      "bytes": 246234,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-annotate-20260929T211946Z-c82cec63.png",
+      "sha256": "d561e2e67837d658340b47f7ef3bb47baf085094993e32bb50c51c4710579c41",
+      "bytes": 244783,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "audit.trail-recording"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow audit.trail-recording"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-search-20260929T044751Z-c82cec63.png",
+      "sha256": "f2b20962469c386e50db6d874a24def8e9aedbf5e32908875895bd30e1a105a5",
+      "bytes": 181014,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-search-20260929T044941Z-c82cec63.png",
+      "sha256": "f2b20962469c386e50db6d874a24def8e9aedbf5e32908875895bd30e1a105a5",
+      "bytes": 181014,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-search-20260929T045314Z-c82cec63.png",
+      "sha256": "bf3ca9b68cd64e78e6d983005dbe4fb04b5fdc2f7fb66a3935036d520712d1ea",
+      "bytes": 180578,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-search-20260929T045410Z-c82cec63.png",
+      "sha256": "3e1ca518749b19e6eca616517a2477255fe4b4a87ac513b914502ba967225614",
+      "bytes": 175648,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-search-20260929T050351Z-c82cec63.png",
+      "sha256": "e6d7d03cab94fa7df81bb8e8fd34c9c04fd7e19dce41f89496b5bcd6f142edb1",
+      "bytes": 180931,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-search-20260929T205339Z-c82cec63.png",
+      "sha256": "664216f5cbe450050d4b5743bfd287f1904b47a8c179c001e8d3fe8980fce3fa",
+      "bytes": 245914,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-search-20260929T205614Z-c82cec63.png",
+      "sha256": "44333b6ab7d71676634caa41fb529bf6cc16ce6e5c2c6e87465ae239125e68f9",
+      "bytes": 246101,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-search-20260929T211944Z-c82cec63.png",
+      "sha256": "677681448c50a53bec4e46ed571b6b21d0484e436807d5e28b49b5cbab57152b",
+      "bytes": 244648,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "audit.trail-recording"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow audit.trail-recording"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-verify-20260929T044753Z-c82cec63.png",
+      "sha256": "6c607eaa3860af76b71c648bf3efc2e83a1aff4ebb663003d749f94a67116f86",
+      "bytes": 181112,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-verify-20260929T044943Z-c82cec63.png",
+      "sha256": "6c607eaa3860af76b71c648bf3efc2e83a1aff4ebb663003d749f94a67116f86",
+      "bytes": 181112,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-verify-20260929T045315Z-c82cec63.png",
+      "sha256": "ed36b0522161b8efa777d970d031e9e4faabbc620368843a0c48c56e9372a706",
+      "bytes": 180681,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-verify-20260929T045412Z-c82cec63.png",
+      "sha256": "7658241660f1e07135cb5ba4e9b510bbd446a1b59886d355d96078e05b87ac7b",
+      "bytes": 175752,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-verify-20260929T050353Z-c82cec63.png",
+      "sha256": "08bc3e15123147ad034464759707db53e54f2e51d5eaef6a07aa822c6c54e69c",
+      "bytes": 181036,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-verify-20260929T205341Z-c82cec63.png",
+      "sha256": "b349c4197b910faeaa05f7949cce98782454c71b307b8627effae4d6784dfc31",
+      "bytes": 246049,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-verify-20260929T205615Z-c82cec63.png",
+      "sha256": "d3081751b37c81ee30e8e668af90e850f548d2735a36fb1a75855cb7a7557ad5",
+      "bytes": 246234,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/audit-trail-recording-after-verify-20260929T211946Z-c82cec63.png",
+      "sha256": "d561e2e67837d658340b47f7ef3bb47baf085094993e32bb50c51c4710579c41",
+      "bytes": 244783,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "audit.trail-recording"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow audit.trail-recording"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-activation-20260929T044748Z-c82cec63.png",
+      "sha256": "58f16df710f1867e08caf418fbc231cb737bdbd7f0b7b8799b1c6b690f294602",
+      "bytes": 188358,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-activation-20260929T045310Z-c82cec63.png",
+      "sha256": "94874f338acd2416820a4cc807f8e0a007f8be594ea825ce4ab350a82b9ea804",
+      "bytes": 188430,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-activation-20260929T050347Z-c82cec63.png",
+      "sha256": "39e13848445f53e33b5bc294ddf419056693e3f1cc9aa1f499ac95f33ca33c06",
+      "bytes": 189795,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-activation-20260929T205336Z-c82cec63.png",
+      "sha256": "0098ef2b673590356418099a42805796c0cd612c837c4487ffd04e0e0fb44bab",
+      "bytes": 249391,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-activation-20260929T205610Z-c82cec63.png",
+      "sha256": "631656580438d9f35fada2e59dda8d30d4e72bbd9a95b30b79144541a532af9e",
+      "bytes": 248891,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-activation-20260929T211941Z-c82cec63.png",
+      "sha256": "b559a50adb3bb233ef95df860530c5beb2eddb9e340202faa6067761ae7953dd",
+      "bytes": 247525,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "backup.restore-round-trip"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow backup.restore-round-trip"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-drill-20260929T044746Z-c82cec63.png",
+      "sha256": "29c1b7392c2defd067a255ae86b587c36dabfa538a99bbc9b856ed9067658525",
+      "bytes": 186700,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-drill-20260929T045308Z-c82cec63.png",
+      "sha256": "8815b1ffc0a4664ac1a460a348e1c9997c31c8f5eb6c8a222e0bcf62936a9bbb",
+      "bytes": 186494,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-drill-20260929T050346Z-c82cec63.png",
+      "sha256": "aa6a6f3e8ca3624fb38df4912f8edaca48dc7ea2c66a98b9c6dbc5cc893bbc71",
+      "bytes": 187778,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-drill-20260929T205334Z-c82cec63.png",
+      "sha256": "ed9617b9056b88d939902601f41b063b1242124c93aaf2acf37277b7c7755a13",
+      "bytes": 247731,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-drill-20260929T205609Z-c82cec63.png",
+      "sha256": "2dd7c6c4cbd2b7d569542dd24d0361fb343f5114e9d30c52ac9cc756cc843ca8",
+      "bytes": 247189,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-drill-20260929T211940Z-c82cec63.png",
+      "sha256": "7cf9be8d451d163f3c2922c191874b9e27a2d31fcb54a909377934ce04764bd9",
+      "bytes": 245814,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "backup.restore-round-trip"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow backup.restore-round-trip"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-package-20260929T044741Z-c82cec63.png",
+      "sha256": "606b58bcac772aac41c6dc01d6cb13f61fe959a02e84a567dca4d5b610c17a2c",
+      "bytes": 162880,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-package-20260929T045304Z-c82cec63.png",
+      "sha256": "6a00e9cb47f3483f516dac86fa6545ba9ee313def2bc7d5c76d8ad59e1064484",
+      "bytes": 163262,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-package-20260929T050341Z-c82cec63.png",
+      "sha256": "56e6fdcffe6451293e9b446a63263c522e78d738e2fdab40fccab408e7988616",
+      "bytes": 164011,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-package-20260929T205330Z-c82cec63.png",
+      "sha256": "70d2165633994dd403bc898923027442e81304695df55a04cf74274e0f288e06",
+      "bytes": 252332,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-package-20260929T205605Z-c82cec63.png",
+      "sha256": "39ec4de97a9530fd2a805620a1437d64d7fa86f2ee34cf3b31796544f04e19c4",
+      "bytes": 252531,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-package-20260929T211936Z-c82cec63.png",
+      "sha256": "12028eca597ef91bfa623f841e6245e1a40e34d80f09bde4e367503842269e62",
+      "bytes": 250433,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "backup.restore-round-trip"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow backup.restore-round-trip"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-stage-20260929T044744Z-c82cec63.png",
+      "sha256": "8d6b78562d68374cee6e41bee541b94bfe6cf2702823911edec243238488a208",
+      "bytes": 180764,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-stage-20260929T045306Z-c82cec63.png",
+      "sha256": "2eebe015dead1a9b981289627428e9de7bf66c9dcd2c007c4e9425b3bb489546",
+      "bytes": 180872,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-stage-20260929T050344Z-c82cec63.png",
+      "sha256": "695029849f34a9545a92dc06e60ab6bc4cf8a0059eb3961a66eced5b34399ac0",
+      "bytes": 181691,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-stage-20260929T205332Z-c82cec63.png",
+      "sha256": "f4b3e0615ba572dc11521edb33f63d1c0019b521c3c12158d6f883fcc1ac6517",
+      "bytes": 246314,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-stage-20260929T205607Z-c82cec63.png",
+      "sha256": "7b94ed7b906321897aecc0391fdc2ccf782944c44af1fcc118eb2b195206f1a9",
+      "bytes": 246499,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/backup-restore-round-trip-after-stage-20260929T211938Z-c82cec63.png",
+      "sha256": "a837fdb9b469319744b1f6eb2256511790201f6f6d8cbdaf55e41c384c9f8e95",
+      "bytes": 244434,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "backup.restore-round-trip"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow backup.restore-round-trip"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-configuration-boundary-20260929T044757Z-c82cec63.png",
+      "sha256": "63f1d06341025eec41c84f172672d9d567cc4a9c931af21f8d1a56d96c756d45",
+      "bytes": 127864,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-configuration-boundary-20260929T044945Z-c82cec63.png",
+      "sha256": "63f1d06341025eec41c84f172672d9d567cc4a9c931af21f8d1a56d96c756d45",
+      "bytes": 127864,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-configuration-boundary-20260929T045320Z-c82cec63.png",
+      "sha256": "63f1d06341025eec41c84f172672d9d567cc4a9c931af21f8d1a56d96c756d45",
+      "bytes": 127864,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-configuration-boundary-20260929T050357Z-c82cec63.png",
+      "sha256": "63f1d06341025eec41c84f172672d9d567cc4a9c931af21f8d1a56d96c756d45",
+      "bytes": 127864,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-configuration-boundary-20260929T205344Z-c82cec63.png",
+      "sha256": "1594905b0af99629d43ed0d97bf066560f177f12df47f15f91a295c9ae5b429b",
+      "bytes": 241552,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-configuration-boundary-20260929T205619Z-c82cec63.png",
+      "sha256": "1594905b0af99629d43ed0d97bf066560f177f12df47f15f91a295c9ae5b429b",
+      "bytes": 241552,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-configuration-boundary-20260929T211950Z-c82cec63.png",
+      "sha256": "1594905b0af99629d43ed0d97bf066560f177f12df47f15f91a295c9ae5b429b",
+      "bytes": 241552,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "configuration.sc011-transfer"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow configuration.sc011-transfer"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-20260929T044758Z-c82cec63.png",
+      "sha256": "1276331fb29966a80ae21421f2974d52b3dd71d890328e58dc19f7731f477f6a",
+      "bytes": 153063,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-20260929T044947Z-c82cec63.png",
+      "sha256": "1276331fb29966a80ae21421f2974d52b3dd71d890328e58dc19f7731f477f6a",
+      "bytes": 153063,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-20260929T045322Z-c82cec63.png",
+      "sha256": "1276331fb29966a80ae21421f2974d52b3dd71d890328e58dc19f7731f477f6a",
+      "bytes": 153063,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-20260929T050359Z-c82cec63.png",
+      "sha256": "1276331fb29966a80ae21421f2974d52b3dd71d890328e58dc19f7731f477f6a",
+      "bytes": 153063,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-20260929T205346Z-c82cec63.png",
+      "sha256": "3c903ae80b03535f76ebdfc340bf71b041fb6c49884423b60d68450d8bd1680a",
+      "bytes": 273296,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-20260929T205621Z-c82cec63.png",
+      "sha256": "3c903ae80b03535f76ebdfc340bf71b041fb6c49884423b60d68450d8bd1680a",
+      "bytes": 273296,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-20260929T211952Z-c82cec63.png",
+      "sha256": "3c903ae80b03535f76ebdfc340bf71b041fb6c49884423b60d68450d8bd1680a",
+      "bytes": 273296,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "configuration.sc011-transfer"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow configuration.sc011-transfer"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-done-20260929T044948Z-c82cec63.png",
+      "sha256": "1276331fb29966a80ae21421f2974d52b3dd71d890328e58dc19f7731f477f6a",
+      "bytes": 153063,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-done-20260929T045322Z-c82cec63.png",
+      "sha256": "1276331fb29966a80ae21421f2974d52b3dd71d890328e58dc19f7731f477f6a",
+      "bytes": 153063,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-done-20260929T050359Z-c82cec63.png",
+      "sha256": "1276331fb29966a80ae21421f2974d52b3dd71d890328e58dc19f7731f477f6a",
+      "bytes": 153063,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-done-20260929T205346Z-c82cec63.png",
+      "sha256": "3c903ae80b03535f76ebdfc340bf71b041fb6c49884423b60d68450d8bd1680a",
+      "bytes": 273296,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-done-20260929T205621Z-c82cec63.png",
+      "sha256": "3c903ae80b03535f76ebdfc340bf71b041fb6c49884423b60d68450d8bd1680a",
+      "bytes": 273296,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/configuration-sc011-transfer-settings-transfer-done-20260929T211952Z-c82cec63.png",
+      "sha256": "3c903ae80b03535f76ebdfc340bf71b041fb6c49884423b60d68450d8bd1680a",
+      "bytes": 273296,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "configuration.sc011-transfer"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow configuration.sc011-transfer"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-diagnose-20260929T044725Z-c82cec63.png",
+      "sha256": "2a704e5b96dc6828e90d5f4cac8fa544b2b41561cf5c738e9b6cf0d3ed8b0da5",
+      "bytes": 199899,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-diagnose-20260929T045248Z-c82cec63.png",
+      "sha256": "572334ef847b2520b981303824b07f466746bbf8475de5c0dd3655aa837b31ea",
+      "bytes": 200104,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-diagnose-20260929T050325Z-c82cec63.png",
+      "sha256": "d7b2f24098597f341449279146de1feb99c860e89856d9179167b379eae00022",
+      "bytes": 200062,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-diagnose-20260929T205316Z-c82cec63.png",
+      "sha256": "6c88afbf37b91594da9d9f230478783a82f2ce4690392756cec188cccc8861c1",
+      "bytes": 281386,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-diagnose-20260929T205551Z-c82cec63.png",
+      "sha256": "29c966052417fdcd823b6b2138eb3547c991388ba96d241198fe2b04b32dab1d",
+      "bytes": 280957,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-diagnose-20260929T211922Z-c82cec63.png",
+      "sha256": "10a248d42fc80e1573fa0f5fcc18b3546516ff02e53ea1bda4a5c26cb1499e4b",
+      "bytes": 278772,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "health.refresh-inspect-diagnose"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow health.refresh-inspect-diagnose"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-inspect-20260929T044722Z-c82cec63.png",
+      "sha256": "7225e4dc63eecfa10d055eaf85cf20ea0df8f621ecdb654850ffc33e5959ce67",
+      "bytes": 199801,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-inspect-20260929T045246Z-c82cec63.png",
+      "sha256": "41055ab9193c9cebb592ceb517194d0000765ff914628011a24325905bd4abae",
+      "bytes": 198859,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-inspect-20260929T050323Z-c82cec63.png",
+      "sha256": "34fad1e1c4859746339fb5542eb21d6872fdfe67a45d2b2d0fe34af94c3aa56b",
+      "bytes": 200869,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-inspect-20260929T205314Z-c82cec63.png",
+      "sha256": "f6bf8803d6f418d5f826890f68ddfb2fff77d9f60adb0c9379eed037ae716d26",
+      "bytes": 281754,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-inspect-20260929T205549Z-c82cec63.png",
+      "sha256": "41f9e8f28ca6262dc6a77c6ed90399be7ed57056d40ac50c1b63ee84f65ab8df",
+      "bytes": 280913,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-inspect-20260929T211920Z-c82cec63.png",
+      "sha256": "0d9fcc242d69389b2e9a8d271d95a152cfcc623654c0c4154c84d5843f8fd288",
+      "bytes": 279353,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "health.refresh-inspect-diagnose"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow health.refresh-inspect-diagnose"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-refresh-20260929T044721Z-c82cec63.png",
+      "sha256": "acde014a20a9661cc78e671620348128c832c75e72c308d5bda06f7a03bbf11a",
+      "bytes": 199671,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-refresh-20260929T045245Z-c82cec63.png",
+      "sha256": "f29343cb95b22a71650832cbc799aadee9abc30c1b0b5f0888c4bbdd693e170a",
+      "bytes": 198730,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-refresh-20260929T050322Z-c82cec63.png",
+      "sha256": "b15dd41524f0ba045a10bea755ed8b452e6fe6838ee372a540f14b3505afdaa1",
+      "bytes": 200739,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-refresh-20260929T205313Z-c82cec63.png",
+      "sha256": "4e72144d2349797000d45d2394d79bd40756cd82f157eedf9d5b019f52835bf1",
+      "bytes": 281644,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-refresh-20260929T205548Z-c82cec63.png",
+      "sha256": "342fbcb518b93fd083d9b1418534e5af4f513489bc5d8c015734a7564f64b0d3",
+      "bytes": 280798,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-refresh-20260929T211920Z-c82cec63.png",
+      "sha256": "21b4b3c4d035391fba8d751f959a7beec644c048cdcf56047101a08d81add73d",
+      "bytes": 279248,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "health.refresh-inspect-diagnose"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow health.refresh-inspect-diagnose"
+    },
+    {
+      "filename": "writer-output/W05/evidence/manual-ai-bridge-truthful-ceilings-ceilings-20260929T044937Z-c82cec63.png",
+      "sha256": "63215d07670a664c2e727f5e1ee33fa91a811b5c6945c76379935121d567cff6",
+      "bytes": 124967,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/manual-ai-bridge-truthful-ceilings-ceilings-20260929T045300Z-c82cec63.png",
+      "sha256": "63215d07670a664c2e727f5e1ee33fa91a811b5c6945c76379935121d567cff6",
+      "bytes": 124967,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/manual-ai-bridge-truthful-ceilings-ceilings-20260929T050338Z-c82cec63.png",
+      "sha256": "63215d07670a664c2e727f5e1ee33fa91a811b5c6945c76379935121d567cff6",
+      "bytes": 124967,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/manual-ai-bridge-truthful-ceilings-ceilings-20260929T205327Z-c82cec63.png",
+      "sha256": "f0548ab168413f394786e77112df7e4499a58b6a85302dba6d28e9423a0ba2a3",
+      "bytes": 210563,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/manual-ai-bridge-truthful-ceilings-ceilings-20260929T205601Z-c82cec63.png",
+      "sha256": "f0548ab168413f394786e77112df7e4499a58b6a85302dba6d28e9423a0ba2a3",
+      "bytes": 210563,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/manual-ai-bridge-truthful-ceilings-ceilings-20260929T211932Z-c82cec63.png",
+      "sha256": "f0548ab168413f394786e77112df7e4499a58b6a85302dba6d28e9423a0ba2a3",
+      "bytes": 210563,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "manual-ai.bridge-truthful-ceilings"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow manual-ai.bridge-truthful-ceilings"
+    },
+    {
+      "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-cancel-and-handoff-20260929T045252Z-c82cec63.png",
+      "sha256": "f43c80a7dd79954123d3e156688803c86020e3291bf68aa8d5cb15bef3cd2e2b",
+      "bytes": 176824,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-cancel-and-handoff-20260929T050329Z-c82cec63.png",
+      "sha256": "8fe48e3c46f61fe738d0a81402731436d28d83cc8f57f776842c6c2e39266396",
+      "bytes": 175863,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-cancel-and-handoff-20260929T205320Z-c82cec63.png",
+      "sha256": "cd8d6839dbd408195ae03f1e887d9bbf1b74333db03070adec7c467f3466f15b",
+      "bytes": 238477,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-cancel-and-handoff-20260929T205554Z-c82cec63.png",
+      "sha256": "c24b55e0aae06865cbd91f692ab67803e72fa5580519a1443fc247c968d05361",
+      "bytes": 237189,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-cancel-and-handoff-20260929T211926Z-c82cec63.png",
+      "sha256": "ccaf8133fe60b34a50f96ebc63fed64ab6afb777457748831988fcb87059bc63",
+      "bytes": 238000,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "processing.inspect-retry-requestCancel-validationHandoff"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow processing.inspect-retry-requestCancel-validationHandoff"
+    },
+    {
+      "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-inspect-20260929T044728Z-c82cec63.png",
+      "sha256": "6c4f4b743840f5abf78a5d59a442c81f111a7c20864c3f5a22f45cf4176d80ec",
+      "bytes": 172730,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-inspect-20260929T045251Z-c82cec63.png",
+      "sha256": "f7d628d86d8f4b36919609664a0730b5b1a279c592d837434f5106b3ea3bf2cf",
+      "bytes": 176744,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-inspect-20260929T050328Z-c82cec63.png",
+      "sha256": "0db3ab5bf6f2a2fd1cf5157a1248f36cd6e869091b3f78d8259cf8b89da103d2",
+      "bytes": 175781,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-inspect-20260929T205319Z-c82cec63.png",
+      "sha256": "ef49292b6e3f22c4c814c3676cb49b95a876a02c9ff6430f935b87f13e7bcfc0",
+      "bytes": 238372,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-inspect-20260929T205553Z-c82cec63.png",
+      "sha256": "9723474ba77f88cc4da2017f41f5e904869cb17c07be8c138f551d58355bed82",
+      "bytes": 237083,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-inspect-20260929T211925Z-c82cec63.png",
+      "sha256": "44e151649c6ab2cf731d5b586e4672459d1b5c26718fd8e330a9063f01f0a8df",
+      "bytes": 237893,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "processing.inspect-retry-requestCancel-validationHandoff"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow processing.inspect-retry-requestCancel-validationHandoff"
+    },
+    {
+      "filename": "writer-output/W05/evidence/releases-view-compare-blocked-20260929T044755Z-c82cec63.png",
+      "sha256": "816e570357fffba710b6cc4055f5356dbfb8f1ba6a48faa35ba96a9052b90228",
+      "bytes": 126085,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/releases-view-compare-blocked-20260929T045318Z-c82cec63.png",
+      "sha256": "816e570357fffba710b6cc4055f5356dbfb8f1ba6a48faa35ba96a9052b90228",
+      "bytes": 126085,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/releases-view-compare-blocked-20260929T050355Z-c82cec63.png",
+      "sha256": "816e570357fffba710b6cc4055f5356dbfb8f1ba6a48faa35ba96a9052b90228",
+      "bytes": 126085,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/releases-view-compare-blocked-20260929T205617Z-c82cec63.png",
+      "sha256": "efb349af8dcc014a06e7ac6d5ee940aa7a1615061ab9e840593a1fdd50cedda0",
+      "bytes": 241693,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/releases-view-compare-blocked-20260929T211948Z-c82cec63.png",
+      "sha256": "efb349af8dcc014a06e7ac6d5ee940aa7a1615061ab9e840593a1fdd50cedda0",
+      "bytes": 241693,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "releases.view"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow releases.view"
+    },
+    {
+      "filename": "writer-output/W05/evidence/releases-view-empty-truth-20260929T044755Z-c82cec63.png",
+      "sha256": "816e570357fffba710b6cc4055f5356dbfb8f1ba6a48faa35ba96a9052b90228",
+      "bytes": 126085,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/releases-view-empty-truth-20260929T045318Z-c82cec63.png",
+      "sha256": "816e570357fffba710b6cc4055f5356dbfb8f1ba6a48faa35ba96a9052b90228",
+      "bytes": 126085,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/releases-view-empty-truth-20260929T050355Z-c82cec63.png",
+      "sha256": "816e570357fffba710b6cc4055f5356dbfb8f1ba6a48faa35ba96a9052b90228",
+      "bytes": 126085,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/releases-view-empty-truth-20260929T205617Z-c82cec63.png",
+      "sha256": "efb349af8dcc014a06e7ac6d5ee940aa7a1615061ab9e840593a1fdd50cedda0",
+      "bytes": 241693,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/releases-view-empty-truth-20260929T211948Z-c82cec63.png",
+      "sha256": "efb349af8dcc014a06e7ac6d5ee940aa7a1615061ab9e840593a1fdd50cedda0",
+      "bytes": 241693,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "releases.view"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow releases.view"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-findings-20260929T044735Z-c82cec63.png",
+      "sha256": "10f09b1372d9ba6fcb882d1ff52a475df1339692dceaeed7b0ce6b0693f4acca",
+      "bytes": 210152,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-findings-20260929T045256Z-c82cec63.png",
+      "sha256": "10f09b1372d9ba6fcb882d1ff52a475df1339692dceaeed7b0ce6b0693f4acca",
+      "bytes": 210152,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-findings-20260929T050334Z-c82cec63.png",
+      "sha256": "10f09b1372d9ba6fcb882d1ff52a475df1339692dceaeed7b0ce6b0693f4acca",
+      "bytes": 210152,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-findings-20260929T205324Z-c82cec63.png",
+      "sha256": "69c9077cca814fb581cfde5c70e74547e473c90ef9cbcf6688e7af8eddf91009",
+      "bytes": 212441,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-findings-20260929T205558Z-c82cec63.png",
+      "sha256": "11bb76860a41b46e8757f8cf57d510ed8311bee0b2e36d2a810c24fa9ab6c178",
+      "bytes": 212422,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-findings-20260929T211930Z-c82cec63.png",
+      "sha256": "69b4b4436f2ae7196d0607058301ffebcc8a55060c0a5d4ee63f6480cee54941",
+      "bytes": 212458,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-findings-20261002T045039Z-c82cec63.png",
+      "sha256": "ee7a51f736187fe45dc5b173becd0f249846cbfb54b1cd1fcece754abb2d7527",
+      "bytes": 215828,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "validation.flow"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow validation.flow"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-validate-20260929T044734Z-c82cec63.png",
+      "sha256": "5ca93f68fcd6d5d4e160e2c95c937f0421aa436fc43e06c93f967434e752f2b0",
+      "bytes": 209809,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-validate-20260929T045255Z-c82cec63.png",
+      "sha256": "5ca93f68fcd6d5d4e160e2c95c937f0421aa436fc43e06c93f967434e752f2b0",
+      "bytes": 209809,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-validate-20260929T050333Z-c82cec63.png",
+      "sha256": "5ca93f68fcd6d5d4e160e2c95c937f0421aa436fc43e06c93f967434e752f2b0",
+      "bytes": 209809,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-validate-20260929T205323Z-c82cec63.png",
+      "sha256": "404b687b44ac94ccef67e9103027f3bc1561a49abfcd88054e28c7be1c0573ad",
+      "bytes": 212525,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-validate-20260929T205558Z-c82cec63.png",
+      "sha256": "2ae9c45feaa84587b2aa1bfa42547fb405d1dd23cdea879985b92ec9af343e4c",
+      "bytes": 212521,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-validate-20260929T211929Z-c82cec63.png",
+      "sha256": "98624d19b380821b2b77e7bf214c9d61ebdc98881ca7cb7f9c0fb7c6168fe502",
+      "bytes": 212523,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": null
+      },
+      "binding": "SUPERSEDED_INTERMEDIATE_ATTEMPT__RETAINED_NOT_DELETED",
+      "reason": "intermediate run of the same flow superseded by a later run; retained and indexed so no screenshot is an orphan"
+    },
+    {
+      "filename": "writer-output/W05/evidence/validation-flow-after-validate-20261002T045037Z-c82cec63.png",
+      "sha256": "4e3c6a4dda8dd8d6c0fa8e3f02e1dc2d2e45a499b80b28d1e623aa25c968992a",
+      "bytes": 215398,
+      "boundTo": {
+        "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+        "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+        "flow": "validation.flow"
+      },
+      "binding": "FLOW_EVIDENCE",
+      "reason": "screenshot captured by flow validation.flow"
+    }
+  ]
+}

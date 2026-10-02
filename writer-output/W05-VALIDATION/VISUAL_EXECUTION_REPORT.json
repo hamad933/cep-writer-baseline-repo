@@ -1,0 +1,61 @@
+{
+  "SURFACE": "validation",
+  "OWNER": "VAL-1",
+  "REFERENCE": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/03_VALIDATION/CEP_SYSTEM_VALIDATION_REFERENCE.png",
+  "REFERENCE_CLASSIFICATION": "OWNER_CONFIRMED_FINAL_REFERENCE",
+  "REFERENCE_SHA256_16": "0074ab58c53f1d9e",
+  "CURRENT_CANDIDATE": "branch writer/mi-serial-lane/VAL-1 from parent fe1bb98ded51adc71a5f5fd14142a2c0880c11bc (exact candidate commit identity recorded in CANDIDATE_IDENTITY.json)",
+  "FILES_CHANGED": [
+    "stack/native-typescript/adapters/validation.ts",
+    "stack/native-typescript/surfaces/validation/index.ts",
+    "writer-output/W05-VALIDATION/** (lane reports + evidence)"
+  ],
+  "FILES_NOT_CHANGED": [
+    "stack/native-typescript/surfaces/composition/w05-rescue.ts (seam audited, byte-identical to HEAD, sha256 04408baa8539c30cc8aeb3ff5546689ee5060d5ca1dd7ab41a1ec31c70e54300)"
+  ],
+  "FUNCTIONAL_STATUS": "PASS — npm test 210/0 (run twice, byte-identical results); S17 12/12; CG6 7/7 + controller-corr01-w05-truth 4/4; D11 100%; browser flows validation.flow + health.refresh-inspect-diagnose + processing.inspect-retry-requestCancel-validationHandoff all PASS; lane probe 45/45 assertions",
+  "STRUCTURAL_STATUS": "PASS — no new owner, no duplicate mechanic (tools/check-duplicate-mechanics.mjs exit 0), presentation/state boundary respected (evaluatedRules computed in the adapter, projected by the surface), seam w05-rescue.ts untouched, no writes outside declared roots",
+  "VISUAL_STATUS": "CANDIDATE_COMPLETE_NOT_ACCEPTED — reference intent reconciled with profiles/validation.json (command inventory limited to validation.validate/inspect/findings per OD-20260920-059); L1/L2/L3/L4 comparison performed against the governed reference; two V2 and three V1 defects found and fixed in this lane",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": ["L1 whole surface", "L2 region/pane (LEFT sessions+structure, CENTER session+rule table, RIGHT context, BOTTOM findings)", "L3 component (session card, metric tiles, rule-outcome table, context blocks)", "L4 micro (column header wrap, label/gloss spacing, selection outline, identity-value clipping)"],
+  "RESPONSIVE_STATUS": "TESTED at 1440x1000 and 1024x900; RIGHT context pane collapses at 1024x900 under the shared responsive rule (recorded as collapsed-state observation); no clipped identity values at either viewport (programmatic scrollWidth/clientWidth probe)",
+  "RTL_LTR_STATUS": "TESTED both directions: AR/RTL and EN/LTR captured at both viewports through the product's own preference path (CEPFoundation.preferences.set('locale') + workspace.applyPreferences()); direction is never baked into structure",
+  "DEFECTS_FOUND": [
+    "D-VAL-1 V2 IMPLEMENTATION: JSON `null` root produced TECHNICALLY_INVALID with ZERO technical findings (self-contradictory receipt)",
+    "D-VAL-2 V2 IMPLEMENTATION: inspect() reported STALE_FOR_CURRENT_ARTIFACT for runs whose identity never resolved — a fabricated comparison",
+    "D-VAL-3 V2 SURFACE_COMPOSITION: Product inspect flow never bound the current input artifact identity, so profiles/validation.json epistemic.stale was unreachable from the real consumer",
+    "D-VAL-4 V2 SURFACE_COMPOSITION: rule-outcome projection reported rules that were never evaluated as PASS (fabricated PASS)",
+    "D-VAL-5 V2 IMPLEMENTATION: an exception during validation would leave processing=true forever and the run stuck RUNNING (false receipt + permanent denial of re-validation); profile ERROR state unreachable",
+    "D-VAL-6 V2 SURFACE_COMPOSITION: malformed CSS `.v-head{...};margin-block-start:26px.v-head h1{...}` invalidated the whole `.v-head h1` rule",
+    "D-VAL-7 V2 SURFACE_COMPOSITION: every rule row rendered as selected (undefined===undefined) producing an all-rows accent outline",
+    "D-VAL-8 V1 SURFACE_COMPOSITION: STATUS column header wrapped as STATU/S",
+    "D-VAL-9 V1 SURFACE_COMPOSITION: CHECK column Arabic label and English gloss ran together with no separation",
+    "D-VAL-10 V1 SURFACE_COMPOSITION: v-meta label and value collided (تاريخ البدء2026-10-02T...)"
+  ],
+  "DEFECT_SEVERITY": "V2 x7, V1 x3, V0 x0",
+  "ROOT_CAUSE": "IMPLEMENTATION x5 (D-VAL-1,2,5,8,9/10 presentation wiring), SURFACE_COMPOSITION x5 (D-VAL-3,4,6,7,10); no SHARED_COMPONENT root cause; no OWNER_CONSTRAINT root cause",
+  "FIXES_APPLIED": [
+    "adapter: ROOT_NOT_OBJECT recorded for every valid-JSON non-object root including `null` (parse failure stays INVALID_JSON)",
+    "adapter: identityComparison = NOT_REQUESTED | UNRESOLVED_RUN_IDENTITY | MATCH | MISMATCH; STALE only emitted for an actually resolved identity",
+    "adapter: run.evaluatedRules records exactly which rules ran; presentation renders NOT_EVALUATED instead of PASS",
+    "adapter: validate() wrapped in try/catch/finally — ERROR state + VALIDATOR_ERROR finding, processing always released, run never wedged RUNNING",
+    "surface: validation.inspect binds the current textarea artifact identity; persistent STALE_FOR_CURRENT_ARTIFACT / UNRESOLVED_RUN_IDENTITY banner survives re-render",
+    "surface: CSS `.v-head` repaired; row selection gated on a real finding; STATUS column 9% + nowrap; `td small` block; v-meta label/value spacing"
+  ],
+  "RECAPTURE_STATUS": "DONE — 15 captures (2 viewports x default/AR-RTL/EN-LTR sessions + stale state + 4 element crops), hash-bound in probe/PROBE_RECEIPT.json",
+  "RECOMPARISON_STATUS": "DONE — L1-L4 re-compared after each fix; superseded intermediate captures retained under probe/captures/superseded-run*/",
+  "REGRESSION_STATUS": "PASS — npm test 210/0 twice identical; S17/CG6/D11 green; validation.flow PASS; health + processing flows PASS with the seam unchanged",
+  "EVIDENCE": [
+    "writer-output/W05-VALIDATION/probe/PROBE_RECEIPT.json (45/45 assertions, 15 sha256-bound captures)",
+    "writer-output/W05-VALIDATION/flow-evidence/baseline/ (pre-change validation.flow capture + receipt copy, SHA256SUMS.txt)",
+    "writer-output/W05-VALIDATION/flow-evidence/after/ (post-change validation + health + processing captures + receipt, SHA256SUMS.txt)",
+    "writer-output/W05-VALIDATION/s17-baseline.json / s17-final.json, cg6-*.json, d11-baseline.txt / d11-final.txt",
+    "writer-output/W05-VALIDATION/check-contracts.json (baseline) / check-contracts-final.json",
+    "writer-output/W05-VALIDATION/n4-duplicate-mechanics.txt, n1-refusal.json"
+  ],
+  "LINEAGE": "parent fe1bb98ded51adc71a5f5fd14142a2c0880c11bc; canonical source tree (338 files) sha256 ad431b655aed13ac6741bbf007f3e214782d4bd5e4309e0df1d9e872b5e8addb; exact candidate commit identity in CANDIDATE_IDENTITY.json; all lane captures carry sha256 + viewport + locale + selector",
+  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
+  "BLOCKERS": [
+    "browser.current_candidate_claim_truthful fails because assurance/BROWSER_CONFORMANCE_RECEIPT.json (Controller-owned, read-only) still binds the pre-change source tree — regenerating it would be a false receipt, so it is reported instead",
+    "browser.lineage_receipt_truthful remains red at parent (pre-existing global guard; its 6-flow summary is 4 pass / 2 fail — the two global Enterprise browser flows, not this lane)"
+  ]
+}
