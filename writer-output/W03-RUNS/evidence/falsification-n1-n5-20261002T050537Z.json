@@ -1,0 +1,286 @@
+{
+  "battery": "RUN1_N1_N5_FALSIFICATION",
+  "unit": "W03-RUNS",
+  "lane": "RUN-1",
+  "candidate": {
+    "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "tree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684"
+  },
+  "environment": {
+    "node": "v22.16.0"
+  },
+  "summary": {
+    "total": 12,
+    "pass": 12,
+    "fail": 0
+  },
+  "checks": [
+    {
+      "id": "N1.no-out-of-scope-mutation",
+      "status": "PASS",
+      "detail": {
+        "policy": "Writable = surfaces/runs/ · adapters/runs/ · adapters/w03-runs.ts · adapters/w03-v34/runs-fixture.ts · writer-output/W03-RUNS/; dist//assurance//writer-output/W03 are tool-generated transients restored to HEAD before commit.",
+        "refusedInstance": "F02 originates partly in surfaces/m0-controller-composition.ts (Product ternary passes `{}` when shared-owner injection is absent). That file is owned by another lane (never edit m0-controller-composition.ts / main.ts), so the fallback was neutralized inside adapters/runs/domain.ts instead — the out-of-root edit was refused, not taken.",
+        "census": [
+          {
+            "entry": " M assurance/BROWSER_CONFORMANCE_RECEIPT.json",
+            "path": "assurance/BROWSER_CONFORMANCE_RECEIPT.json",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": " M assurance/MODEL_TEST_RESULTS.json",
+            "path": "assurance/MODEL_TEST_RESULTS.json",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": " M assurance/SCREENSHOT_MANIFEST.json",
+            "path": "assurance/SCREENSHOT_MANIFEST.json",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": " M assurance/browser-operational-shutdown.png",
+            "path": "assurance/browser-operational-shutdown.png",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": " M assurance/browser-selection-connect.png",
+            "path": "assurance/browser-selection-connect.png",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": " M assurance/browser-workspace-pane-context.png",
+            "path": "assurance/browser-workspace-pane-context.png",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": " M dist/adapters/runs/domain.js",
+            "path": "dist/adapters/runs/domain.js",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": " M dist/foundation/extensions.css",
+            "path": "dist/foundation/extensions.css",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": " M dist/surfaces/runs/index.js",
+            "path": "dist/surfaces/runs/index.js",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": " M stack/native-typescript/adapters/runs/domain.ts",
+            "path": "stack/native-typescript/adapters/runs/domain.ts",
+            "scope": "OWNED_ROOT"
+          },
+          {
+            "entry": " M stack/native-typescript/surfaces/runs/index.ts",
+            "path": "stack/native-typescript/surfaces/runs/index.ts",
+            "scope": "OWNED_ROOT"
+          },
+          {
+            "entry": " M writer-output/W03/BROWSER_RECEIPT.json",
+            "path": "writer-output/W03/BROWSER_RECEIPT.json",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": " D writer-output/W03/evidence/enterprise-twin-baseline-20260929T184118Z-3da01fa0.png",
+            "path": "writer-output/W03/evidence/enterprise-twin-baseline-20260929T184118Z-3da01fa0.png",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": " D writer-output/W03/evidence/replay-causality-timeline-scrub-20260929T184126Z-3da01fa0.png",
+            "path": "writer-output/W03/evidence/replay-causality-timeline-scrub-20260929T184126Z-3da01fa0.png",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": " D writer-output/W03/evidence/results-aar-compare-20260929T184124Z-3da01fa0.png",
+            "path": "writer-output/W03/evidence/results-aar-compare-20260929T184124Z-3da01fa0.png",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": " D writer-output/W03/evidence/run-terminal-detach-20260929T184134Z-3da01fa0.png",
+            "path": "writer-output/W03/evidence/run-terminal-detach-20260929T184134Z-3da01fa0.png",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": " D writer-output/W03/evidence/runs-preflight-run-recorded-20260929T184122Z-3da01fa0.png",
+            "path": "writer-output/W03/evidence/runs-preflight-run-recorded-20260929T184122Z-3da01fa0.png",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": " D writer-output/W03/evidence/spatial-select-connect-canonical-edge-20260929T184129Z-3da01fa0.png",
+            "path": "writer-output/W03/evidence/spatial-select-connect-canonical-edge-20260929T184129Z-3da01fa0.png",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": " D writer-output/W03/evidence/spatial-select-connect-canonical-edge-20260929T184132Z-3da01fa0.png",
+            "path": "writer-output/W03/evidence/spatial-select-connect-canonical-edge-20260929T184132Z-3da01fa0.png",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": "?? writer-output/W03-RUNS/evidence/f02-fail-closed-probe-20261002T050202Z.json",
+            "path": "writer-output/W03-RUNS/evidence/f02-fail-closed-probe-20261002T050202Z.json",
+            "scope": "OWNED_ROOT"
+          },
+          {
+            "entry": "?? writer-output/W03-RUNS/evidence/f02-fail-closed-probe-20261002T050223Z.json",
+            "path": "writer-output/W03-RUNS/evidence/f02-fail-closed-probe-20261002T050223Z.json",
+            "scope": "OWNED_ROOT"
+          },
+          {
+            "entry": "?? writer-output/W03-RUNS/evidence/falsification-n1-n5-20261002T050512Z.json",
+            "path": "writer-output/W03-RUNS/evidence/falsification-n1-n5-20261002T050512Z.json",
+            "scope": "OWNED_ROOT"
+          },
+          {
+            "entry": "?? writer-output/W03-RUNS/f02-fail-closed-probe.mjs",
+            "path": "writer-output/W03-RUNS/f02-fail-closed-probe.mjs",
+            "scope": "OWNED_ROOT"
+          },
+          {
+            "entry": "?? writer-output/W03-RUNS/falsification-n1-n5.mjs",
+            "path": "writer-output/W03-RUNS/falsification-n1-n5.mjs",
+            "scope": "OWNED_ROOT"
+          },
+          {
+            "entry": "?? writer-output/W03/evidence/enterprise-twin-baseline-20261002T045131Z-0c43d7f1.png",
+            "path": "writer-output/W03/evidence/enterprise-twin-baseline-20261002T045131Z-0c43d7f1.png",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": "?? writer-output/W03/evidence/replay-causality-timeline-scrub-20261002T045148Z-0c43d7f1.png",
+            "path": "writer-output/W03/evidence/replay-causality-timeline-scrub-20261002T045148Z-0c43d7f1.png",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": "?? writer-output/W03/evidence/results-aar-compare-20261002T045142Z-0c43d7f1.png",
+            "path": "writer-output/W03/evidence/results-aar-compare-20261002T045142Z-0c43d7f1.png",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": "?? writer-output/W03/evidence/run-terminal-detach-20261002T045211Z-0c43d7f1.png",
+            "path": "writer-output/W03/evidence/run-terminal-detach-20261002T045211Z-0c43d7f1.png",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": "?? writer-output/W03/evidence/runs-preflight-run-recorded-20261002T045138Z-0c43d7f1.png",
+            "path": "writer-output/W03/evidence/runs-preflight-run-recorded-20261002T045138Z-0c43d7f1.png",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": "?? writer-output/W03/evidence/spatial-select-connect-canonical-edge-20261002T045159Z-0c43d7f1.png",
+            "path": "writer-output/W03/evidence/spatial-select-connect-canonical-edge-20261002T045159Z-0c43d7f1.png",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          },
+          {
+            "entry": "?? writer-output/W03/evidence/spatial-select-connect-canonical-edge-20261002T045207Z-0c43d7f1.png",
+            "path": "writer-output/W03/evidence/spatial-select-connect-canonical-edge-20261002T045207Z-0c43d7f1.png",
+            "scope": "TRANSIENT_RESTORE_PENDING"
+          }
+        ],
+        "outOfScopeCount": 0
+      }
+    },
+    {
+      "id": "N2a.invalid-injected-owner-rejected",
+      "status": "PASS",
+      "detail": {
+        "code": "RUNS_SESSION_OWNER_INVALID",
+        "message": "RUNS_SESSION_OWNER_INVALID: injected session owner cannot register a provider"
+      }
+    },
+    {
+      "id": "N2b.missing-required-shared-binding-refused",
+      "status": "PASS",
+      "detail": {
+        "message": "RUNS_SHARED_SPATIAL_REQUIRED"
+      }
+    },
+    {
+      "id": "N2c.unknown-device-boundary-refused",
+      "status": "PASS",
+      "detail": {
+        "message": "CAPABILITY_UNAVAILABLE",
+        "presentationByDeviceSize": 0
+      }
+    },
+    {
+      "id": "N2d.terminal-input-without-open-presentation-refused",
+      "status": "PASS",
+      "detail": {
+        "message": "RUN_TERMINAL_NOT_OPEN"
+      }
+    },
+    {
+      "id": "N2e.version-boundary-on-start-refused",
+      "status": "PASS",
+      "detail": {
+        "code": "409"
+      }
+    },
+    {
+      "id": "N3a.terminal-unavailable-before-run-is-running",
+      "status": "PASS",
+      "detail": {
+        "code": "RUN_NOT_RUNNING"
+      }
+    },
+    {
+      "id": "N3b.start-unavailable-before-ready",
+      "status": "PASS",
+      "detail": {
+        "code": "RUN_NOT_READY"
+      }
+    },
+    {
+      "id": "N3c.provider-loss-unavailable-and-not-run-completion",
+      "status": "PASS",
+      "detail": {
+        "code": "PROVIDER_DISCONNECTED",
+        "lifecycleAfterProviderLoss": "RUNNING",
+        "providerConnected": false
+      }
+    },
+    {
+      "id": "N4.no-duplicate-mechanics-owner",
+      "status": "PASS",
+      "detail": {
+        "exitCode": 0,
+        "stdout": ": \"forbiddenProductFallbacks:NON_EMPTY\",\n      \"observed\": [\n        \"renderer=new DomTerminalRendererAdapter(\"\n      ]\n    },\n    {\n      \"id\": \"consumer-propagation-failure\",\n      \"status\": \"PASS\",\n      \"expected\": \"consumerPropagationFailures:NON_EMPTY\",\n      \"observed\": [\n        \"AnalyticalCompareHost\"\n      ]\n    }\n  ],\n  \"deferredExceptions\": [],\n  \"limits\": \"Deterministic symbol/registration heuristic plus executable Structured mutation, transaction/history/recovery, and reusable-host construction gates with deliberate negative probes; novel naming still requires semantic review.\"\n}",
+        "stderr": ""
+      }
+    },
+    {
+      "id": "N5.suite-run-twice-identical",
+      "status": "PASS",
+      "detail": {
+        "first": {
+          "exitCode": 0,
+          "pass": 210,
+          "fail": 0,
+          "digest": "bf0ccfb65a699f1555aeec5ec5a63154e931f113fbbaecba3bb65ad5f04e22bf"
+        },
+        "second": {
+          "exitCode": 0,
+          "pass": 210,
+          "fail": 0,
+          "digest": "bf0ccfb65a699f1555aeec5ec5a63154e931f113fbbaecba3bb65ad5f04e22bf"
+        }
+      }
+    },
+    {
+      "id": "T1.terminal-provider-truth-truthful",
+      "status": "PASS",
+      "detail": {
+        "runtimeTruth": "INTERNAL_SIMULATION",
+        "pty": false,
+        "powershell": false,
+        "ssh": false,
+        "nativeWindow": false,
+        "realTerminalProof": "UNVERIFIED_PLATFORM_GATE"
+      }
+    }
+  ],
+  "verdict": "N1_N5_PLUS_LANE_AND_TRUTH__ALL_PASS",
+  "evidenceFile": "writer-output/W03-RUNS/evidence/falsification-n1-n5-20261002T050537Z.json"
+}

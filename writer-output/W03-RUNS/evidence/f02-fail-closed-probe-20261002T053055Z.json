@@ -1,0 +1,159 @@
+{
+  "probe": "H03_RESIDUAL_F02_FAIL_CLOSED",
+  "unit": "W03-RUNS",
+  "lane": "RUN-1",
+  "question": "With shared-owner injection absent in the harness, the Product path must fail closed (no silent new OperationalSessionOwner()).",
+  "candidate": {
+    "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "tree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+    "writableRootDiff": [
+      "M stack/native-typescript/adapters/runs/domain.ts",
+      " M stack/native-typescript/surfaces/runs/i18n.ts",
+      " M stack/native-typescript/surfaces/runs/index.ts",
+      " M stack/native-typescript/surfaces/runs/styles.ts",
+      " M stack/native-typescript/surfaces/runs/views.ts",
+      " M writer-output/W03-RUNS/capture.mjs",
+      "?? writer-output/W03-RUNS/evidence/f02-fail-closed-probe-20261002T050202Z.json",
+      "?? writer-output/W03-RUNS/evidence/f02-fail-closed-probe-20261002T050223Z.json",
+      "?? writer-output/W03-RUNS/evidence/falsification-n1-n5-20261002T050512Z.json",
+      "?? writer-output/W03-RUNS/evidence/falsification-n1-n5-20261002T050537Z.json",
+      "?? writer-output/W03-RUNS/evidence/flows-post-edit/",
+      "?? writer-output/W03-RUNS/evidence/hrun1-ar-rtl-20261002T052402Z.png",
+      "?? writer-output/W03-RUNS/evidence/hrun1-en-ltr-20261002T052402Z.png",
+      "?? writer-output/W03-RUNS/evidence/hrun1-probe-20261002T052402Z.json",
+      "?? writer-output/W03-RUNS/evidence/run1-final-matrix-states/",
+      "?? writer-output/W03-RUNS/evidence/run1-final-matrix/",
+      "?? writer-output/W03-RUNS/evidence/run1-final-responsive/",
+      "?? writer-output/W03-RUNS/evidence/runtime-4174-listener/",
+      "?? writer-output/W03-RUNS/f02-fail-closed-probe.mjs",
+      "?? writer-output/W03-RUNS/falsification-n1-n5.mjs"
+    ]
+  },
+  "environment": {
+    "node": "v22.16.0"
+  },
+  "sourceBindings": {
+    "stack/native-typescript/adapters/runs/domain.ts": "7da764c2f329cafc0bc129d9c01a527c7385f368cd107ae6a9db9c128318a6f3",
+    "stack/native-typescript/surfaces/runs/index.ts": "b9938995d023a96b19f1c811d0eaa4c7de4dc1d1a2899a054aae86a7c73655dc",
+    "stack/native-typescript/surfaces/m0-controller-composition.ts": "bf961ed47688521c9b6854d7747da692aca54c3dc047ee255dd592ec81adef42",
+    "stack/native-typescript/surfaces/composition/w03-rescue.ts": "38a560223781d84c970282008e649e8750a60f55ae68ca1424a83e24cab24195"
+  },
+  "summary": {
+    "total": 13,
+    "pass": 13,
+    "fail": 0
+  },
+  "checks": [
+    {
+      "id": "S1a.m0-product-path-passes-empty-options-when-injection-absent",
+      "status": "PASS",
+      "detail": {
+        "source": "stack/native-typescript/surfaces/m0-controller-composition.ts",
+        "sha256": "bf961ed47688521c9b6854d7747da692aca54c3dc047ee255dd592ec81adef42",
+        "needle": "sharedSession&&simulation&&typeof sharedSession.registerProvider==='function'?{runtime:simulation,sessionOwner:sharedSession}:{}"
+      }
+    },
+    {
+      "id": "S1b.w03-rescue-requires-shared-operational-owner",
+      "status": "PASS",
+      "detail": {
+        "source": "stack/native-typescript/surfaces/composition/w03-rescue.ts",
+        "sha256": "38a560223781d84c970282008e649e8750a60f55ae68ca1424a83e24cab24195"
+      }
+    },
+    {
+      "id": "S1c.domain-never-instantiates-operational-session-owner",
+      "status": "PASS",
+      "detail": {
+        "source": "stack/native-typescript/adapters/runs/domain.ts",
+        "sha256": "7da764c2f329cafc0bc129d9c01a527c7385f368cd107ae6a9db9c128318a6f3",
+        "containsFallbackInstantiation": false
+      }
+    },
+    {
+      "id": "S1d.harness-default-is-explicit-and-outside-the-domain",
+      "status": "PASS",
+      "detail": {
+        "source": "stack/native-typescript/surfaces/runs/index.ts",
+        "sha256": "b9938995d023a96b19f1c811d0eaa4c7de4dc1d1a2899a054aae86a7c73655dc",
+        "note": "composition-level explicit harness injection; W03RunDomain itself creates no owner"
+      }
+    },
+    {
+      "id": "P1a.product-domain-session-owner-null",
+      "status": "PASS",
+      "detail": {
+        "sessionOwner": null
+      }
+    },
+    {
+      "id": "P1b.product-truth-reports-absent-fail-closed",
+      "status": "PASS",
+      "detail": {
+        "sessionOwnerBinding": "ABSENT_FAIL_CLOSED",
+        "operationalSessionOwner": null,
+        "sessionOwnerFallbackCreated": false
+      }
+    },
+    {
+      "id": "P1c.product-terminal-ops-fail-closed",
+      "status": "PASS",
+      "detail": {
+        "codes": [
+          "RUNS_SESSION_OWNER_REQUIRED"
+        ],
+        "presentationByDeviceSize": 0
+      }
+    },
+    {
+      "id": "P1d.product-availability-refuses-without-throwing",
+      "status": "PASS",
+      "detail": {
+        "availability": "RUNS_SESSION_OWNER_REQUIRED on OPEN_TERMINAL/runtime.input/runtime.reconnect; execute returns disabled receipt, no throw"
+      }
+    },
+    {
+      "id": "P1e.owner-independent-projections-stay-truthful",
+      "status": "PASS",
+      "detail": {
+        "lifecycle": "RUNNING",
+        "recordedPlayback": "INERT",
+        "preflightStatus": "READY"
+      }
+    },
+    {
+      "id": "P2a.w03-rescue-fails-closed-without-shared-operational-owner",
+      "status": "PASS",
+      "detail": {
+        "threw": true,
+        "code": null,
+        "message": "W03_CONTROLLER_SHARED_OWNER_BINDINGS_REQUIRED"
+      }
+    },
+    {
+      "id": "P3a.injected-owner-opens-terminal",
+      "status": "PASS",
+      "detail": {
+        "sessionOwnerIsShared": true,
+        "binding": "INJECTED_SHARED_OWNER"
+      }
+    },
+    {
+      "id": "P3b.harness-composition-default-still-composes",
+      "status": "PASS",
+      "detail": {
+        "note": "standalone composition injects an explicit isolated harness owner; never the Product shared owner"
+      }
+    },
+    {
+      "id": "P4a.internal-simulation-truth-unchanged",
+      "status": "PASS",
+      "detail": {
+        "productRuntimeTruth": "INTERNAL_SIMULATION",
+        "injectedRuntimeTruth": "INTERNAL_SIMULATION"
+      }
+    }
+  ],
+  "verdict": "F02_FAIL_CLOSED_PROVEN__NO_SILENT_FALLBACK__PRODUCT_PATH_REFUSES",
+  "evidenceFile": "writer-output/W03-RUNS/evidence/f02-fail-closed-probe-20261002T053055Z.json"
+}

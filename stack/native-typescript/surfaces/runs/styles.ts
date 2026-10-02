@@ -23,10 +23,10 @@ export const RUNS_STYLE=`<style data-runs-local-style>
 .runs-mono{font-family:var(--mono,ui-monospace,Consolas,monospace);font-size:11px;letter-spacing:.01em}
 
 /* ---------- top bar : mode tabs + lifecycle actions ---------- */
-.runs-bar{display:flex;align-items:stretch;gap:var(--s4);min-height:46px;padding-inline:var(--s4);
+.runs-bar{display:flex;flex-wrap:wrap;align-items:stretch;gap:var(--s4);min-height:46px;padding-inline:var(--s4);
   border-block-end:1px solid var(--runs-line);background:linear-gradient(180deg,color-mix(in srgb,var(--runs-raise) 70%,transparent),transparent)}
 .runs-tabs{display:flex;gap:2px;align-items:stretch;min-width:0;overflow-x:auto;scrollbar-width:none}
-.runs-tab{position:relative;border:0;background:transparent;color:var(--runs-t2);padding:0 var(--s3);
+.runs-tab{position:relative;border:0;background:transparent;color:var(--runs-t2);padding:0 10px;
   min-height:44px;cursor:pointer;font-size:13px;font-weight:600;white-space:nowrap;letter-spacing:.005em}
 .runs-tab:hover{color:var(--runs-t1);background:color-mix(in srgb,var(--runs-accent) 6%,transparent)}
 .runs-tab[aria-selected=true]{color:var(--runs-t1)}
@@ -133,7 +133,7 @@ export const RUNS_STYLE=`<style data-runs-local-style>
 .runs-note[data-tone=ok]{border-inline-start-color:var(--runs-ok);background:color-mix(in srgb,var(--runs-ok) 8%,transparent)}
 .runs-kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;font-size:12px;align-items:baseline}
 .runs-kv dt{color:var(--runs-t3);white-space:nowrap}
-.runs-kv dd{color:var(--runs-t1);font-weight:600;min-width:0;overflow-wrap:anywhere}
+.runs-kv dd{color:var(--runs-t1);font-weight:600;min-width:0;overflow-wrap:break-word}
 
 /* ---------- tables ---------- */
 .runs-tablewrap{overflow:auto;min-height:0;flex:1}
@@ -164,7 +164,7 @@ export const RUNS_STYLE=`<style data-runs-local-style>
 .runs-detailgrid{display:grid;grid-template-columns:auto minmax(0,1fr) auto minmax(0,1fr);gap:5px var(--s4);
   padding:var(--s3) var(--s3) var(--s2);border-block-end:1px solid var(--runs-line);align-items:baseline}
 .runs-detailgrid dt{font-size:11px;color:var(--runs-t3);white-space:nowrap}
-.runs-detailgrid dd{font-size:12.3px;font-weight:650;min-width:0;overflow-wrap:anywhere}
+.runs-detailgrid dd{font-size:12.3px;font-weight:650;min-width:0;overflow-wrap:break-word}
 .runs-subtabs{display:flex;gap:2px;padding-inline:var(--s3);border-block-end:1px solid var(--runs-line);
   overflow-x:auto;scrollbar-width:none;background:color-mix(in srgb,var(--runs-panel) 55%,transparent)}
 .runs-subtab{position:relative;border:0;background:transparent;color:var(--runs-t3);padding:9px 10px;font-size:12px;

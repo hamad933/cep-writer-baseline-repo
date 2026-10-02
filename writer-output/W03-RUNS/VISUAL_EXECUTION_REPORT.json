@@ -1,22 +1,22 @@
 {
   "SURFACE": "runs",
   "OWNER": "W03-RUNS",
+  "LANE": "RUN-1",
+  "CLASS": "SURFACE_UNIT__CANDIDATE_ONLY__NO_SELF_PROMOTION__SOLE_CONTROLLER_REVIEW_REQUIRED",
   "REFERENCE": [
     {
       "path": "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/04_RUNS_OPERATIONS/CEP_RUN_PREPARATION_PREFLIGHT_REFERENCE.png",
       "sha256": "91126b1efdfca2bbf9b1619dfabc60d83fe4efc5ba6336ba7a535d8dd06b291a",
       "dims": "1505x1045",
-      "bytes": 1471400,
       "classification": "OWNER_CONFIRMED_SUPPORTING_MAJOR_STATE_REFERENCE",
-      "role": "Run preparation / preflight major state: numbered preparation cards, readiness table, BLOCKED verdict banner, LEFT structure rail, RIGHT context readout, bottom work-area tray."
+      "role": "Run preparation / preflight major state"
     },
     {
       "path": "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/04_RUNS_OPERATIONS/image-gen-1(20260813-230627).png",
       "sha256": "e875f6c592ce84d6fbddcb01cf5afddead891246168fa6019f3434aeb4f337a3",
       "dims": "1505x1045",
-      "bytes": 1496925,
       "classification": "CURRENT_FINAL_REFERENCE",
-      "role": "Live run operations: mode tab row + lifecycle actions, run identity strip, SIEM source tabs, split Alerts list / Alert Details with event-timeline sub-tabs, LEFT Run Structure, RIGHT contextual readout, bottom temporary-work-area tray."
+      "role": "Live run operations: mode tab row + lifecycle actions, identity strip, SIEM source tabs, split Alerts/Alert Details, LEFT Run Structure, RIGHT context readout, bottom tray"
     }
   ],
   "REFERENCE_CLASSIFICATION": [
@@ -24,138 +24,133 @@
     "CURRENT_FINAL_REFERENCE"
   ],
   "CURRENT_CANDIDATE": {
-    "branch": "writer/mi-serial",
-    "commit": "68341ec18f79 (HEAD at capture time)",
-    "worktreeDiff": "uncommitted (Controller commits at checkpoint)",
-    "buildTool": "tools/writer-serial.sh npm run build:runtime",
-    "renderMethod": "GENUINE_ROUTE_LOCAL_BROWSER (baseline) + NAVIGATION_INDEPENDENT CANDIDATE MOUNT (candidate)",
-    "route": "/?surface=runs"
+    "branch": "writer/mi-serial-lane/RUN-1",
+    "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "headTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+    "canonicalSourceTree": "31fdb9a5375c2ef663d793f2eefd7585675481b2fc1d77f016c77f9e48b4fd5b (stack/native-typescript, 338 files)",
+    "worktreeDiffAtCapture": "uncommitted candidate delta — exactly the 5 owned source files below (recorded per capture manifest as writableRootDiff)",
+    "build": "npm run build:runtime exit 0 (tools/build-runtime.mjs, canonical source → dist only)",
+    "renderMethod": "GENUINE_ROUTE_LOCAL_BROWSER (tools/serve.mjs static server + Playwright Chromium)",
+    "route": "/?surface=runs",
+    "priorReport": "This file supersedes the prior VISUAL_EXECUTION_REPORT.json (W03-RUNS, PENDING_BUILD statuses, branch writer/mi-serial). Prior defects DEF-RUN-P01..P05 and blockers B1/B2 are addressed below; salvage evidence retained unchanged."
   },
   "FILES_CHANGED": [
-    "stack/native-typescript/surfaces/runs/presentation.ts (REWRITTEN — reference-driven operations orchestrator)",
-    "stack/native-typescript/surfaces/runs/styles.ts (NEW — surface tokens, type/spacing/radius system, full component CSS)",
-    "stack/native-typescript/surfaces/runs/i18n.ts (NEW — full AR/EN string set, locale read from active preference)",
-    "stack/native-typescript/surfaces/runs/util.ts (NEW — esc, bdi isolation, tone mapping, inline icon set)",
-    "stack/native-typescript/surfaces/runs/views.ts (NEW — 9 real projections: telemetry workbench, preflight, timeline, topology, overview, tasks, events, observations, artifacts)",
-    "stack/native-typescript/surfaces/runs/regions.ts (NEW — LEFT Run Structure + RIGHT context region projections)",
-    "stack/native-typescript/adapters/runs/domain.ts (MODIFIED — workspace() gains parsed mode policy, source tabs, honest counts, observations, artifacts, lifecycle receipts, open sessions)",
-    "stack/native-typescript/surfaces/runs/index.ts (UNCHANGED — contract/commands preserved)",
-    "writer-output/W03-RUNS/SERIALIZED_HOTSPOT_REQUEST.md (NEW — mount seam request, writer-forbidden files)"
+    "stack/native-typescript/adapters/runs/domain.ts (F02 fail-closed: removed the silent default `new OperationalSessionOwner()`; sessionOwner defaults to null; requireSessionOwner() guard on openTerminal/input/reconnect; null-safe truth()/openSessions(); sessionOwnerBinding truth fields)",
+    "stack/native-typescript/surfaces/runs/index.ts (explicit harness-only default domain via harnessRunsDomain(); availability-level fail-closed RUNS_SESSION_OWNER_REQUIRED for OPEN_TERMINAL/runtime.input/runtime.reconnect when no owner injected)",
+    "stack/native-typescript/surfaces/runs/styles.ts (responsive: .runs-bar flex-wrap so the action row reflows instead of clipping mode tabs; .runs-tab padding 12→10px; .runs-kv dd + .runs-detailgrid dd overflow-wrap anywhere→break-word)",
+    "stack/native-typescript/surfaces/runs/i18n.ts (ar+en: alerts.of/prev/next — pager + pager aria localized)",
+    "stack/native-typescript/surfaces/runs/views.ts (pager uses localized of/prev/next with <bdi dir=ltr> isolation of the range/count tokens)",
+    "writer-output/W03-RUNS/** (probes, evidence, reports — see EVIDENCE)"
   ],
-  "FUNCTIONAL_STATUS": "PENDING_BUILD",
-  "STRUCTURAL_STATUS": "PENDING_BUILD",
-  "VISUAL_STATUS": "PENDING_BUILD",
-  "VISUAL_COMPARISON_LEVELS_COMPLETED": [],
-  "RESPONSIVE_STATUS": "PENDING_BUILD",
-  "RTL_LTR_STATUS": "PENDING_BUILD",
+  "FUNCTIONAL_STATUS": "PASS — npm test 210/0; packet tests runs-domain / runs-group-regression / S12 / CG4-composition / CG4-falsification / D09(10/0) all PASS at exact HEAD+tree; w03-browser-flows **7/7 PASS at final tree 31fdb9a5 / commit fe1bb98ded51** including runs-preflight-run-recorded (live route: preflight no-write → prepare → RUNNING → OPEN_TERMINAL → shutdown → recorded agreement); browser:test 4/6 with runtime-causal-consequence PASS (kept PASS) and only the 2 global Enterprise FAILs (not this lane)",
+  "STRUCTURAL_STATUS": "PASS — live route mounts data-runs-root + .runs-workspace (hrun1 probe HRUN1_PASS at 20261002T052402Z, H-RUN-1 preserved not reopened); 4 mode tabs, 8 LEFT sections with true counts, RIGHT 5-section context readout, Alert Details + Event Timeline sub-tabs, temporary-work-area tray all present in DOM asserts",
+  "VISUAL_STATUS": "PASS at candidate level (NOT_OWNER_ACCEPTED — Controller review required): reference-driven composition re-captured from exact candidate bytes; no new V3/V4; two V2 defects found by recapture and fixed in-owned (tab clipping, mid-word value breaks); one V1 residual (IP token wraps inside a narrow detail track) recorded, cosmetic only",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": ["L1 whole surface", "L2 region/pane (LEFT rail, centre workbench, RIGHT context, bottom tray)", "L3 component (mode tab row, identity strip, source tabs, alerts table, alert details grid, status line)", "L4 micro (tab padding/clipping, overflow-wrap policy on detail values, pager bidi isolation)"],
+  "RESPONSIVE_STATUS": "PASS — fresh captures at 1440x1000 + 1024x900 (EN/AR) and 1505x1045 (EN/AR × operations/preflight/timeline/topology): zero horizontal document overflow, zero page errors, all 4 mode tabs fully inside their strip (modeBarClipped=false, scrollWidth==clientWidth at every viewport/locale), action row deliberately reflows to a second row instead of clipping (responsive-assert-*.json). COLLAPSED-STATE: RIGHT context pane collapses deliberately below 1180px (observed at 1024x900, edge rail reveal retained)",
+  "RTL_LTR_STATUS": "PASS_OWNED_SCOPE — en→htmlLang=en/dir=ltr with English tabs/title/terminal hint; ar→htmlLang=ar/dir=rtl with Arabic tabs (العمليات/ما قبل التشغيل/الخط الزمني/الطوبولوجيا)/Arabic identity title/Arabic terminal hint; pager renders 1–4 of 4 (en) and 1–4 من 4 (ar) with <bdi dir=ltr> isolation; static census: Arabic literals in owned files exist ONLY behind localeOf()==='ar' guards (presentation.ts L114-115) + the i18n AR table → no Arabic-only string under EN in RUN-1-owned files. RESIDUAL (out of roots): 78 Arabic text nodes under EN in foundation/shell chrome (visible: pane edge-toggle labels data-pane-toggle-label = إخفاء/فتح البنية/السياق written by foundation/accepted-runtime.ts:508; shell bilingual hidden-span markup) — recorded, foundation → request, not edited",
   "DEFECTS_FOUND": [
     {
-      "id": "DEF-RUN-P01",
-      "severity": "V4",
-      "rootCause": "ARCHITECTURE",
-      "defect": "SURFACE has no runtime composition at all. `renderRunsSurface` (surfaces/runs/presentation.ts) and `W03RunDomain` (adapters/runs/domain.ts) are referenced only by tests and surfaces/composition/w03-rescue.ts — never by main.ts or surfaces/m0-controller-composition.ts. The live route renders main.ts's generic 3-node device topology (`.domain-heading` + `#spatialHost`), a generic LEFT `Workspace views / topology / table / history / recorded / Objects` list and a generic RIGHT `Context` lens.",
-      "evidence": "writer-output/W03-RUNS/evidence/baseline/CAPTURE_MANIFEST.json (DOM probe: LEFT='Workspace views topology table history recorded Objects…', CENTER='RUN-0042 · Internal simulation Topology Objects History Recorded result…') + tesseract OCR of the same bytes + sha256 of both frames",
-      "fix": "Wrote the full reference-driven composition inside the owned roots and filed writer-output/W03-RUNS/SERIALIZED_HOTSPOT_REQUEST.md (H-RUN-1) with the exact 3-import/3-line mount hunk for main.ts / m0-controller-composition.ts, which are writer-forbidden (controller/12_execution/02_parallel_dispatch.md §3)."
+      "id": "DEF-RUN-R01",
+      "severity": "V2",
+      "rootCause": "RESPONSIVE_RULE",
+      "defect": "Mode tab row (.runs-bar/.runs-tabs, overflow-x:auto + scrollbar-width:none) clipped the 4th mode tab ('Topology' shown as 'Topol'; AR 'الطوبولوجيا' clipped) at 1440x1000 and 1024x900 in both locales — unreadable truncation with no affordance.",
+      "evidence": "pre-fix captures run1-final-responsive/runs-en-operations-1440x1000-20261002T051445Z.png (sha d467.../c72da71fc472) vs post-fix run1-close-responsive/*; DOM assert responsive-assert-*.json (modeBarClipped=false, scroll=client=327 en / 345 ar at both viewports)",
+      "fix": ".runs-bar flex-wrap:wrap (action row reflows instead of squeezing tabs) + .runs-tab padding 0 10px"
     },
     {
-      "id": "DEF-RUN-P02",
-      "severity": "V3",
+      "id": "DEF-RUN-R02",
+      "severity": "V2",
       "rootCause": "SURFACE_COMPOSITION",
-      "defect": "Centre had no operational identity: no mode tab row, no run identity strip, no source tabs, no split alerts/detail workbench, no readiness/preflight state, no lifecycle action row, no terminal tray, no runtime-truth status line.",
-      "fix": "Composed the reference workbench: action bar + identity strip + SIEM source tabs + split Alerts/Alert Details + preflight numbered cards with verdict banner + timeline/topology/overview/tasks/events/observations/artifacts projections + terminal tray + status line."
+      "defect": "Alert Details / context value cells used overflow-wrap:anywhere → mid-word breaks under EN at 1440 ('Web Applicatio n', 'Public-Facing Applicatio n').",
+      "evidence": "pre-fix 051445Z frame vs post-fix 054529Z frame (values now wrap at spaces/hyphens); computed style assert overflow-wrap=break-word on .runs-kv dd and .runs-detailgrid dd",
+      "fix": "overflow-wrap:anywhere → break-word on .runs-kv dd + .runs-detailgrid dd (styles.ts)"
     },
     {
-      "id": "DEF-RUN-P03",
-      "severity": "V3",
+      "id": "DEF-RUN-R03",
+      "severity": "V2",
       "rootCause": "CONTENT_MODEL",
-      "defect": "LEFT and RIGHT carried generic spatial/context content unrelated to running a simulation (topology object list; 2-field State/Revision lens).",
-      "fix": "LEFT = Run Structure with 8 real sections and true counts; RIGHT = contextual readout (detection rationale / correlation scope / operational implication / observation / recommended next step, or preparation context in preflight) plus runtime-truth block and platform-truth note."
+      "defect": "Alert pager hardcoded English 'of' + aria 'previous/next' → Arabic locale rendered '1–4 of 4' with bidi mangling.",
+      "evidence": "responsive-assert-*.json: ar pager = '<bdi dir=\"ltr\">1–4</bdi> من <bdi dir=\"ltr\">4</bdi>'",
+      "fix": "i18n alerts.of/prev/next (ar+en) + views.ts pager uses them with <bdi> isolation"
     },
     {
-      "id": "DEF-RUN-P04",
-      "severity": "V2",
-      "rootCause": "STALE_DECISION",
-      "defect": "Shell toolbar for runs exposed only `Open terminal · pause run · resume run · Disconnect provider · Reconnect session · Recorded result`; the reference action language (Start/Prepare/Preflight before start, Pause/End Run/Capture Snapshot while running) was unreachable, so the surface could not express either reference state.",
-      "fix": "Surface now renders a lifecycle-aware action row bound to the composition bus (runs.start/prepare/preflight/pause/resume/stop/captureSnapshot/seal/view.recorded), plus an overflow menu. Shell toolbar remains shell-owned; see H-RUN-2."
-    },
-    {
-      "id": "DEF-RUN-P05",
-      "severity": "V2",
+      "id": "DEF-RUN-R04",
+      "severity": "V1",
       "rootCause": "SURFACE_COMPOSITION",
-      "defect": "No Arabic/English presentation of its own — the surface had no strings at all, so both languages depended entirely on generic shell chrome.",
-      "fix": "Full AR + EN string set in surfaces/runs/i18n.ts, locale read from the active document language (user Settings preference), RTL/LTR via logical properties only, all technical tokens isolated with <bdi dir=\"ltr\">."
+      "defect": "Narrow Alert Details value track still wraps long tokens ('203.0.113.4/5') at 1505/1440.",
+      "evidence": "run1-close-matrix/runs-en-operations-1505x1045-20261002T054529Z.png",
+      "fix": "not fixed (cosmetic; would widen the grid beyond reference proportions) — recorded as residual"
+    },
+    {
+      "id": "DEF-RUN-R05",
+      "severity": "V2",
+      "rootCause": "SHARED_COMPONENT",
+      "defect": "Foundation/shell chrome renders Arabic-only strings under EN (visible pane edge toggles + shell bilingual markup): 78 Arabic text nodes, all outside the runs surface.",
+      "evidence": "writer-output/W03-RUNS/evidence/foundation-en-arabic-chrome-probe.json (inRunsSurface=false on all samples); source: foundation/accepted-runtime.ts:508 syncPaneCSS + foundation/presentation-carrier blueprint → dist/index.html",
+      "fix": "NOT FIXED — foundation/** and dist are outside RUN-1 roots (foundation → request, not edit). Recorded for Controller/SH-2."
+    },
+    {
+      "id": "DEF-RUN-F02",
+      "severity": "V3",
+      "rootCause": "ARCHITECTURE",
+      "defect": "H03 residual F02: W03RunDomain defaulted `sessionOwner=new OperationalSessionOwner()` — any consumer that forgot injection silently got a private owner, weakening the shared wave4 singleton (Product ternary passes `{}` when shared-owner injection is absent).",
+      "evidence": "f02-fail-closed-probe-20261002T053055Z.json — 13/13 PASS (source-bound static checks + exact Product construction + w03-rescue refusal + injected-owner positive control + INTERNAL_SIMULATION truth)",
+      "fix": "adapter never instantiates an owner; sessionOwner=null → requireSessionOwner() throws RUNS_SESSION_OWNER_REQUIRED on openTerminal/input/reconnect; availability layer returns disabled RUNS_SESSION_OWNER_REQUIRED; composition-level harness default documented and explicit (harnessRunsDomain); w03-rescue already refuses missing shared owner (W03_CONTROLLER_SHARED_OWNER_BINDINGS_REQUIRED)"
     }
   ],
-  "DEFECT_SEVERITY": {
-    "V0": 0,
-    "V1": 0,
-    "V2": 2,
-    "V3": 2,
-    "V4": 1,
-    "total": 5,
-    "note": "V4=1 is the architecture-level mount gap; it cannot be closed from a writer-owned root."
-  },
-  "ROOT_CAUSE": [
-    "ARCHITECTURE",
-    "SURFACE_COMPOSITION",
-    "CONTENT_MODEL",
-    "STALE_DECISION"
-  ],
+  "DEFECT_SEVERITY": {"V0": 0, "V1": 1, "V2": 4, "V3": 1, "V4": 0, "total": 6, "note": "V4 (prior DEF-RUN-P01 mount gap) is CLOSED by H-RUN-1 (Controller-applied, preserved by re-probe). Prior P02/P03/P04/P05 remain fixed; P04 shell-toolbar ownership stays H-RUN-2 (shell-owned, out of roots)."},
+  "ROOT_CAUSE": ["ARCHITECTURE", "RESPONSIVE_RULE", "SURFACE_COMPOSITION", "CONTENT_MODEL", "SHARED_COMPONENT"],
   "FIXES_APPLIED": [
-    "Reference-driven centre workbench (action bar, identity strip, source tabs, split alerts/detail, sub-tabs, filter/highlight/export footer)",
-    "LEFT Run Structure region with 8 real sections and true counts",
-    "RIGHT contextual readout region with preparation and operations variants",
-    "Preflight numbered preparation cards + readiness table + BLOCKED/READY verdict banner (both reference states reconstructable)",
-    "Lifecycle-aware action row reflecting real command availability",
-    "Terminal deep-work tray that adopts the shared #operationalHost instead of destroying it",
-    "Runtime-truth status line carrying INTERNAL_SIMULATION + UNVERIFIED_PLATFORM_GATE honestly",
-    "Full AR/EN + RTL/LTR presentation with <bdi> isolation",
-    "Non-destructive mount: #spatialHost / #domainView / .domain-heading are preserved and suppressed, so main.ts update paths cannot crash"
+    "F02 fail-closed singleton in adapters/runs/domain.ts + availability-layer refusal in surfaces/runs/index.ts (lane-specific falsification satisfied)",
+    "Mode-tab clipping eliminated by deliberate flex reflow of .runs-bar + tighter tab padding",
+    "Mid-word value breaks eliminated (break-word) in .runs-kv dd / .runs-detailgrid dd",
+    "Pager localized + bidi-isolated (ar 'من', <bdi dir=ltr>)",
+    "Capture harness hardened: state selection via [data-runs-tab] (AR mode states previously un-switchable) + navigation without networkidle (shared-machine 4174 listener interference) — harness-only, writer-output"
   ],
-  "RECAPTURE_STATUS": "NOT_STARTED",
-  "RECOMPARISON_STATUS": "NOT_STARTED",
-  "REGRESSION_STATUS": "NOT_STARTED",
+  "RECAPTURE_STATUS": "DONE — run1-close-responsive (4 frames: 1440x1000/1024x900 × en/ar) + run1-close-matrix (8 frames: 1505x1045 × en/ar × operations/preflight/timeline/topology); all sha256-bound in CAPTURE_MANIFEST.json with commit fe1bb98ded51 + writableRootDiff; 0 page errors; dirs/lang verified per frame",
+  "RECOMPARISON_STATUS": "DONE — L1–L4 reference-vs-candidate at 1505x1045 (structure: 8-section LEFT rail, mode tab row + lifecycle actions, identity strip, source tabs, alerts/details split with Event Timeline sub-tabs, 5-section RIGHT context, temporary-work-area tray — all present and proportioned like CURRENT_FINAL_REFERENCE; candidate adds a truthful runtime-truth status line); pixel-diff of pre/post fix frames = 6.1% (targeted), OCR cross-check (tesseract eng) confirms EN frames are English",
+  "REGRESSION_STATUS": "PASS — npm test 210/0 twice identical (N5); packet tests 6/6; N4 check-duplicate-mechanics clean; npm run check shows exactly the documented single known red (browser.lineage_receipt_truthful 6/6 guard, 2 Enterprise flows open) with vs05-read-mode + vs05-command-ownership PASS run individually; H-RUN-1 re-probe PASS (not reopened)",
+  "FALSIFICATION": {
+    "N1_write_scope": "PASS — git status census classified against sealed roots; 0 out-of-scope mutations; the m0-controller-composition.ts edit implied by F02 was REFUSED (another lane owns it) and the fallback was neutralized inside owned roots instead (evidence: falsification-n1-n5-20261002T053102Z.json)",
+    "N2_boundary": "PASS — invalid injected owner → RUNS_SESSION_OWNER_INVALID; missing shared spatial → RUNS_SHARED_SPATIAL_REQUIRED; unknown device → CAPABILITY_UNAVAILABLE (no presentation created); input without open presentation → RUN_TERMINAL_NOT_OPEN; start version boundary → 409",
+    "N3_prerequisite": "PASS — OPEN_TERMINAL unavailable before RUNNING (RUN_NOT_RUNNING); start unavailable before READY (RUN_NOT_READY); provider loss → PROVIDER_DISCONNECTED availability while run lifecycle stays RUNNING (provider loss is not Run completion)",
+    "N4_duplicate_mechanics": "PASS — tools/check-duplicate-mechanics.mjs exit 0",
+    "N5_twice_identical": "PASS — two suite runs: 210/0 both, identical id:status digest",
+    "LANE_F02": "PASS — with shared-owner injection absent in the harness, the exact Product construction `new W03RunDomain({})` keeps sessionOwner===null (no silent OperationalSessionOwner instance), terminal ops throw RUNS_SESSION_OWNER_REQUIRED, availability refuses, truth() reports ABSENT_FAIL_CLOSED + sessionOwnerFallbackCreated=false; w03-rescue refuses missing shared owner (13/13 checks)",
+    "TERMINAL_PROVIDER_TRUTH": "PASS — runtimeTruth INTERNAL_SIMULATION; pty/powershell/ssh/nativeWindow all false; realTerminalProof UNVERIFIED_PLATFORM_GATE in both injected and fail-closed states; no real-process claim anywhere"
+  },
   "EVIDENCE": {
     "directory": "writer-output/W03-RUNS/",
-    "baseline": {
-      "manifest": "writer-output/W03-RUNS/evidence/baseline/CAPTURE_MANIFEST.json",
-      "frames": [
-        {
-          "path": "writer-output/W03-RUNS/evidence/baseline/runs-en-operations-1505x1045-20260930T173556Z.png",
-          "sha256": "09f050a49269081b0061aff3d78bdae0e981a57b0cf3a95aeccdc161d4385a3b",
-          "dims": "1505x1045",
-          "bytes": 174403,
-          "viewport": "1505x1045",
-          "locale": "en",
-          "capturedAt": "20260930T173556Z",
-          "pageErrors": 0
-        },
-        {
-          "path": "writer-output/W03-RUNS/evidence/baseline/runs-ar-operations-1505x1045-20260930T173600Z.png",
-          "sha256": "9737b8aee4c6afdbc12567d095f662286025c628ffddc5023cf7cdaeca44eb3f",
-          "dims": "1505x1045",
-          "bytes": 168840,
-          "viewport": "1505x1045",
-          "locale": "ar",
-          "capturedAt": "20260930T173600Z",
-          "pageErrors": 0
-        }
-      ],
-      "groundTruth": "tesseract OCR + DOM probe of the same bytes both confirm the generic spatial topology render"
-    }
+    "current": [
+      "evidence/run1-close-responsive/CAPTURE_MANIFEST.json (4 frames, required viewports × locales, sha256-bound)",
+      "evidence/run1-close-matrix/CAPTURE_MANIFEST.json (8 frames, 4 states × 2 locales)",
+      "evidence/responsive-assert-1790920182430.json (DOM assertions: tab visibility, wrap policy, pager bidi, overflow, localization at 1440+1024 × en+ar)",
+      "evidence/f02-fail-closed-probe-20261002T053055Z.json (13/13)",
+      "evidence/falsification-n1-n5-20261002T053102Z.json (12/12)",
+      "evidence/hrun1-probe-20261002T052402Z.json (HRUN1_PASS, H-RUN-1 preserved)",
+      "evidence/runtime-4174-listener/LISTENER_PROOF.json (+ ss/http/after-stop files)",
+      "evidence/flows-final-tree/ (w03-browser-flows 7/7 receipt + browser-conformance receipt at FINAL tree 31fdb9a5 / commit fe1bb98ded51 + runs-preflight + runtime-causal-consequence captures)",
+      "evidence/flows-post-edit/ (intermediate receipts at post-edit tree 7c64a2e2)",
+      "evidence/foundation-en-arabic-chrome-probe.json (out-of-root finding)"
+    ],
+    "superseded_retained": [
+      "evidence/run1-final-responsive (pre-style-fix, retained)",
+      "evidence/run1-final-matrix (AR state selector flaw — states not switched in AR; retained + labelled)",
+      "evidence/run1-final-matrix-states/superseded-20261002T0522Z-INTERRUPTED-CAPTURE (2 orphan frames, byte-identical to manifest frames; retained + README)",
+      "evidence/baseline, candidate, candidate-responsive, candidate-panes, candidate-views, final, final-*, route-current, superseded-20260930T1834Z-*, superseded-20260930T1908Z-* (prior-lane salvage, untouched)",
+      "evidence/f02-fail-closed-probe-20261002T050202Z.json + falsification-n1-n5-20261002T050512Z.json (first-attempt FAILs, retained as truthful failures)"
+    ]
   },
   "LINEAGE": {
     "referenceHashesVerified": true,
-    "referenceHashNote": "sha256 recomputed locally and matched to the packet's 16-char prefixes 91126b1efdfca2bb / e875f6c592ce84d6",
-    "captureChain": [
-      "baseline (genuine route, pre-change)",
-      "candidate (pending shared build)"
-    ],
-    "visionChannel": "OPEN — image reads must be cross-checked with sha256 + tesseract OCR of the same bytes per visual-fidelity-review R3b"
+    "captureChain": ["baseline (prior lane, genuine route, pre-mount)", "candidate/final (prior lane, in-page mount, pre H-RUN-1)", "hrun1-* (H-RUN-1 live-route mount proof, preserved)", "run1-final-* (RUN-1 intermediate, superseded)", "run1-close-* (RUN-1 current, exact HEAD fe1bb98 + canonical tree 31fdb9a5)"],
+    "visionChannel": "OPEN_WITH_CROSS_CHECK — image reads cross-verified against sha256 + tesseract-eng OCR + PIL pixel-diff of the same bytes (visual-fidelity-review R3b); DOM assertions used where screenshots were ambiguous"
   },
   "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
   "BLOCKERS": [
-    "B1 ARCHITECTURE (V4): the runs surface composition is not mounted anywhere on the live route. main.ts + surfaces/m0-controller-composition.ts are writer-forbidden (controller/12_execution/02_parallel_dispatch.md §3); the fix is filed as writer-output/W03-RUNS/SERIALIZED_HOTSPOT_REQUEST.md H-RUN-1 and must be applied by the Coordinator in the PW-C slot. Until then the genuine route cannot show this unit's work.",
-    "B2 IMPLEMENTATION: `tools/writer-serial.sh npm run build:runtime` is transiently RED from another unit's in-flight edit — stack/native-typescript/surfaces/manual_ai/presentation.ts line 32 (`export const dirNow=...||'ltr';`, unit W05-MANUAL-AI) is not parseable by stripTypeScriptTypes (ERR_INVALID_TYPESCRIPT_SYNTAX). Not touched by this unit; all 8 files owned by this unit parse clean."
-  ]
+    "B1 (environmental, RESOLVED): sibling lane BKP-1's local runtime on 127.0.0.1:4174 blocked networkidle navigation (foundation platform-input-direction bridge does `if (!res.ok) return null` without reading the 503 body → Chromium never fires requestfinished for that request; curl completes in <5ms, response content-length 68 captured from Chromium; minimal repro: unread non-OK body never finishes, read body finishes). After the listener cleared, flows were re-run at final tree 31fdb9a5 → w03-browser-flows 7/7 PASS + browser:test 4/6 with runtime-causal-consequence PASS. No other lane's process was touched.",
+    "B2 (record-only, Owner/Controller): foundation/shell Arabic-under-EN chrome (DEF-RUN-R05) — foundation/** + dist outside roots.",
+    "B3 (record-only): shell runs toolbar labels remain English under AR (shell-owned; prior report H-RUN-2, unchanged)."
+  ],
+  "H03_CEILING": "H03 PROP/FALSIFY remain NOT_PROVEN — no relation/Enterprise claim made in this lane. H-RUN-1 preserved (not reopened)."
 }
