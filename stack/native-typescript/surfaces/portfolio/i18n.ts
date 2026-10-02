@@ -182,7 +182,11 @@ const COPY = {
     vAuthorityPending: 'Grouping authority pending',
     navLabel: 'Portfolio saved views',
     colIndexReference: 'Reference',
-    colIndexState: 'Source state'
+    colIndexState: 'Source state',
+    /* Projection text that the DOMAIN supplies (export limitations + export note). The domain
+     * stays English-only truth; this map is the presentation-layer localization of those exact
+     * strings (identity map in EN — a string not listed here is shown verbatim, never invented). */
+    domainCopy: {}
   },
   ar: {
     /* ── centre header ── */
@@ -350,7 +354,14 @@ const COPY = {
     vAuthorityPending: 'سلطة التجميع معلّقة',
     navLabel: 'عروض المحفظة المحفوظة',
     colIndexReference: 'المرجع',
-    colIndexState: 'حالة المصدر'
+    colIndexState: 'حالة المصدر',
+    /* presentation localization of the exact domain projection strings (see EN domainCopy) */
+    domainCopy: {
+      'Projection only': 'عرض فقط',
+      'Canonical Evidence/Mastery/project truth remains with source owner': 'حقيقة الدليل والإتقان والمشروع المرجعية تبقى لدى مالك المصدر',
+      'Unavailable/superseded/withdrawn state is retained': 'يُحتفظ بحالة غير المتاح أو المتجاوز أو المسحوب',
+      'Export carries exact refs, curation metadata and source disposition only; it does not duplicate canonical Evidence/Mastery truth.': 'التصدير يحمل المراجع الدقيقة وبيانات التنقيح ووضع المصدر فقط؛ ولا يكرّر حقيقة الدليل أو الإتقان المرجعية.'
+    }
   }
 } as const;
 
