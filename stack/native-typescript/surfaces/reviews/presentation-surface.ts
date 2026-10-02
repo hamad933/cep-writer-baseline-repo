@@ -28,8 +28,7 @@
  * when its composition key changes and rebuilds the queue head only when its head key changes;
  * this module preserves both keys and re-applies only what those rebuilds removed.
  */
-import {activeLocale, pickText, fill} from './i18n.js';
-import {REVIEW_STATE_TONE, reviewStateLabel, reviewDecisionLabel} from './index.js';
+import {activeLocale, pickText, fill, REVIEW_STATE_TONE, reviewStateLabel, reviewDecisionLabel} from './i18n.js';
 
 const S = 'html body[data-consumer=reviews]';
 
@@ -271,9 +270,11 @@ const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;
 let installed = false;
 let commandBus = null;
 let lastLocale = null;
+let styleEnabled = true;
 
 function ensureStyle() {
   if (typeof document === 'undefined') return;
+  if (!styleEnabled) return;
   let style = document.getElementById('reviewsSurfacePresentationStyle');
   if (!style) {
     style = document.createElement('style');
@@ -346,16 +347,26 @@ function projectRows(surface) {
   });
 }
 
-/** Pane identity + the surface-owned command labels follow the active language. */
+/** Surface-owned command labels follow the active language.
+ *
+ * NOTE — `#leftPane/.rightPane .phead h2` are deliberately NOT written here. The shared W04 seam
+ * (`w04-rescue.w04SetPaneLabel` → `W04_QUEUE[surface].pane/ctxPane`) rewrites those nodes on every
+ * one of its own observer passes with its hardcoded English label, and both modules observe
+ * `childList`. Writing them from this module makes the two observers overwrite each other for
+ * ever: measured under an Arabic session the main thread starved inside ~4s and the page `load`
+ * event never fired (navigation timeout). The shared seam owns pane identity, so those two labels
+ * stay on the shared English value and are recorded as a hotspot for that seam's owner — they are
+ * not silently localised here at the cost of a wedged page. */
 function projectChrome(surface) {
   const t = pickText(activeLocale());
-  const paneTitle = document.querySelector('#leftPane .phead h2');
-  if (paneTitle && paneTitle.textContent !== t.queuePane) paneTitle.textContent = t.queuePane;
-  const ctxTitle = document.querySelector('#rightPane .phead h2');
-  if (ctxTitle && ctxTitle.textContent !== t.queueContextPane) ctxTitle.textContent = t.queueContextPane;
 
   const locale = activeLocale();
-  if (commandBus && lastLocale !== locale) {
+  /* The command owner only exists once the controller composition has mounted, and the surface
+   * registers most `reviews.*` commands AFTER this module is installed. Do not consume the locale
+   * until the labels can actually be claimed — otherwise the first pass silently marks the locale
+   * as projected and the chrome stays on its English registered label for the whole session. */
+  const ownerReady = Boolean(globalThis?.CEPFoundation?.m0Composition?.group?.[surface]?.domain?.owner);
+  if (commandBus && ownerReady && lastLocale !== locale) {
     lastLocale = locale;
     const write = map => {
       if (!map || typeof map.get !== 'function') return;
@@ -397,9 +408,17 @@ function schedule(surface) {
 /**
  * Called once from `composeReviewsSurface`. Safe from Node: without a document it is a no-op,
  * so unit tests and descriptor projections keep running unchanged.
+ *
+ * `applyStyle:false` installs the DOM projection WITHOUT `REVIEWS_PRESENTATION_CSS`. The label and
+ * queue projection is measured-correct (English Evidence vocabulary -> native Reviews vocabulary
+ * in the active language); the craft CSS is not, so it is withheld rather than shipped:
+ * disabling only the stylesheet takes the worst Criterion Findings cell from 10 wrapped lines back
+ * to 5 (1440x1000, `.w04-record-table`). The stylesheet needs its own reference-compared craft
+ * pass before it may be applied.
  */
-export function installReviewsPresentation({ commandBus: bus = null } = {}) {
+export function installReviewsPresentation({ commandBus: bus = null, applyStyle = true } = {}) {
   if (typeof document === 'undefined' || typeof MutationObserver === 'undefined') return null;
+  styleEnabled = applyStyle !== false;
   if (bus) commandBus = bus;
   if (installed) { schedule('reviews'); return true; }
   installed = true;

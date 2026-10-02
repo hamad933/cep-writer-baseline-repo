@@ -1,0 +1,122 @@
+{
+  "name": "accept-verdict-1440-en",
+  "timestamp": "2026-10-02T06:21:32.243Z",
+  "url": "file-or-local-served/?surface=reviews",
+  "viewport": {
+    "width": 1440,
+    "height": 1000,
+    "deviceScaleFactor": 1
+  },
+  "candidate": "writer/mi-serial-lane/REV-1@fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+  "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+  "branch": "writer/mi-serial-lane/REV-1",
+  "workingTreeDirty": "reviews-roots-modified",
+  "environment": "local dist served by tools/serve.mjs (free port), playwright chromium headless",
+  "seededLocale": "en",
+  "state": "closed",
+  "fixtureLabel": "FIXTURE_REVIEW_ADJUDICATION_BATCH__W04_REVIEWS_CAPTURE",
+  "seedResult": {
+    "steps": [
+      {
+        "admit": true
+      },
+      {
+        "state": "IN_REVIEW"
+      },
+      {
+        "f1": true
+      },
+      {
+        "f2": true
+      },
+      {
+        "f3": true
+      },
+      {
+        "decide": true
+      }
+    ]
+  },
+  "metrics": {
+    "direction": "ltr",
+    "lang": "en",
+    "composition": "reviews",
+    "leftText": "All reviews\n1\nRequested\n0\nAssigned\n0\nIn review\n0\nReady for decision\n0\nClosed\n1\nREVIEW DECISION\n\nReview rev-0084\nClosed · 1 evidence · 3 findings\n \nAccept w/ limits\ndecision-0084\n\n1 Review in this session · Decisions stay immutable\n\nSettings · language & direction",
+    "centerText": "Evidence Review rev-0084\nREVIEW WORKFLOW\nCLOSED\n\nrev-0084:r1-d8 · Formal competency Evidence Review\n\nEFFECTIVE REVIEW DECISION\nACCEPT_WITH_LIMITATIONS\nReview facts\nEVIDENCE LIFECYCLE\nUNRESOLVED_IN_THIS_WORKSPACE\nEVIDENCE UNDER REVIEW\nev-rev-0142 / ev-rev-0142-r1\nEFFECTIVE REVIEW DECISION\nACCEPT_WITH_LIMITATIONS\nEVIDENCE REVIEW STATUS\nCLOSED\nSUBJECT\nAhmed Al-Mansouri\nRE-REVIEW\nNONE\nEvidence Claim\n\nDemonstrated ability to investigate suspicious SQL activity and interpret correlated detection signals across multiple data sources.\n\nCriterion References\nC1\nCRIT:V4#WEB-INPUT\n\n1 recorded finding(s)\n\nC2\nCRIT:V4#TELEMETRY\n\n1 recorded finding(s)\n\nC3\nCRIT:V4#RATIONALE\n\n1 recorded finding(s)\n\nCriterion Findings\nCriterion Finding Supporting Evidence\nC1\ncrit:v4#web-input\n SATISFIED\nf-0084-1\n ev-rev-0142 / ev-rev-0142-r1\nrecorded at rev-0084:r1\n\nC2\ncrit:v4#telemetry\n SATISFIED\nf-0084-2\n ev-rev-0142 / ev-rev-0142-r1\nrecorded at rev-0084:r1\n\nC3\ncrit:v4#rationale\n PARTIALLY_SATISFIED\nf-0084-3\n ev-rev-0142 / ev-rev-0142-r1\nrecorded at rev-0084:r1\nReviewer Rationale\n\nDecision basis: Two of three pinned criteria are satisfied; the rationale criterion needs one further pass on alternative-hypothesis justification.\n\nDecision Preparation\nDecision issued · ACCEPT_WITH_LIMITATIONS\n\ndecision-0084 · 2026-10-02T06:21:30.731Z. Two of three pinned criteria are satisfied; the rationale criterion needs one further pass on alternative-hypothesis justification.\n\nFormal Review workflow\n1\nRequested\n2\nAssigned\n3\nIn review\n4\nReady for decision\n5\nClosed\nClosed on Decision decision-0084; a re-review (reviews.rereview) opens a new Review without erasing it.\nThe Review family never approves its own authority: ReviewAuthorityRegistry gates every mutation.\nGoverned Review input\n\nFormal findings and Decisions require explicit reviewer-authored content. The toolbar never manufactures finding text, outcome, or supersession basis.\n\nFinding ID\nFinding outcome\nSelect finding outcome\nSATISFIED\nPARTIALLY_SATISFIED\nNOT_SATISFIED\nNOT_ASSESSABLE\nCriterion ref\nFinding text\nDecision ID\nDecision outcome\nSelect Decision outcome\nACCEPT\nACCEPT_WITH_LIMITATIONS\nMORE_EVIDENCE_REQUIRED\nREJECT\nDecision / supersession basis\nAdd finding\nIssue Decision",
+    "rightText": "FORMAL REVIEW CONTEXT\n\nReview rev-0084\nReview scope\nSCOPE\nScope summary\nFormal competency Evidence review against 3 pinned criterion/criteria and 1 pinned Evidence revision(s).\nPinned Evidence revisions\n1\nPinned criteria\n3\nRequested by\nowner:local\nPurpose\nFormal competency Evidence Review\nRequested at\n2026-10-02T06:21:30.728Z\nCRITERION AUTHORITY\nPinned criterion refs\ncrit:v4#web-input, crit:v4#telemetry, crit:v4#rationale\nCriterion coverage\n3 of 3 pinned criteria carry a recorded finding.\nFindings recorded\n3\nScope rule\nA finding may only be recorded against a pinned criterion; OUT_OF_SCOPE requires a recorded reason.\nReviewer authority\nHOLDS\nACTOR VS AUTHORITY\nReviewer actor\nreviewer:mariam\nAuthority proof\nperm:mariam:v1\nAssignment permission\nGRANTED\nAuthority law\nActor display label is not institutional reviewer authority; the family never approves its own authority.\nDECISION ISSUANCE\nEffective Decision\nACCEPT_WITH_LIMITATIONS\nIssuance gate\nPASSDecision issued and retained immutably\nAuthority law\nPASSreviewer authority is bound with an explicit permission proof\nConflict context\nDecision decision-0084 is issued; a re-review opens a new Review without erasing it.\nRationale gap\nEvery pinned criterion carries a recorded finding.\nPrior Review context\nHOLDS\nLINEAGE\nPrevious Review ref\nNone\nPrior effective Decision\nNONE\nEffective Decision id\ndecision-0084\nIssued Decisions retained\n1\nFindings recorded\n3\nReview revision\nrev-0084:r1-d8\nPROVENANCE & INTEGRITY\nPinned Evidence basis\nev-rev-0142@ev-rev-0142-r1\nDecisions retained\n1\nImmutable Decision lineage\ndecision-0084 — immutable\nLineage rule\nIssued Decisions are read-only here; correction uses superseding Decision lineage.\nArtifact integrity\nPASSevery pinned basis is an exact id@revision reference\nPersistence truth\nSESSION_LOCAL · UNAVAILABLE · No surface-local persistence owner; no false Save.\nSession receipts recorded\n8\n\nDecision decision-0084 · ACCEPT_WITH_LIMITATIONS",
+    "centerHeads": [
+      "Review facts",
+      "Evidence Claim",
+      "Criterion References",
+      "Criterion Findings",
+      "Reviewer Rationale",
+      "Decision Preparation",
+      "Formal Review workflow"
+    ],
+    "pills": [
+      "Review workflowCLOSED",
+      "Effective Review DecisionACCEPT_WITH_LIMITATIONS"
+    ],
+    "toolbar": [
+      "Review (disabled)",
+      "Add finding (disabled)",
+      "Compare exact revisions",
+      "Issue Decision (disabled)"
+    ],
+    "overflow": 1,
+    "clipped": [],
+    "horizontalOverflow": false,
+    "rects": {
+      "#leftPane": {
+        "x": 0,
+        "y": 182,
+        "w": 304,
+        "h": 779
+      },
+      "#centerPane": {
+        "x": 315,
+        "y": 182,
+        "w": 694,
+        "h": 779
+      },
+      "#rightPane": {
+        "x": 1020,
+        "y": 182,
+        "w": 420,
+        "h": 779
+      },
+      "#bottomShelf": {
+        "x": 0,
+        "y": 961,
+        "w": 1440,
+        "h": 39
+      },
+      "#domainToolbar": {
+        "x": 872,
+        "y": 142,
+        "w": 556,
+        "h": 31
+      },
+      "#foundationStage": {
+        "x": 315,
+        "y": 182,
+        "w": 694,
+        "h": 779
+      }
+    },
+    "bodyConsumer": "reviews"
+  },
+  "image": {
+    "path": "writer-output/W04-REVIEWS/captures/accept-verdict-1440-en-20261002T062128Z-fe1bb98d.png",
+    "sha256": "a71d77f4ab78dbee4dcc5ec68a00d5ccf50b3b90a0ce802d2e5ec2a19dbfc87d",
+    "bytes": 267159,
+    "dims": [
+      1440,
+      1000
+    ]
+  },
+  "consoleErrors": [
+    "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+    "Failed to load resource: net::ERR_CONNECTION_REFUSED"
+  ]
+}
