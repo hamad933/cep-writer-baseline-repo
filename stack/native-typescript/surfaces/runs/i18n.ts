@@ -11,7 +11,7 @@ const AR={
   identity:{phase:'المرحلة الحالية',role:'الدور التشغيلي',task:'المهمة الحالية',run:'التشغيل',health:'الحالة'},
   structure:{title:'هيكل التشغيل',overview:'نظرة عامة',timeline:'الخط الزمني للسيناريو',tasks:'المهام',devices:'الأجهزة',events:'الأحداث والحقن',telemetry:'القياس عن بُعد',observations:'الملاحظات',artifacts:'المواد'},
   sourceTabs:{all:'SIEM / المراقبة'},
-  alerts:{title:'التنبيهات',time:'الوقت (UTC)',alert:'التنبيه',severity:'الشدة',status:'الحالة',filters:'عوامل التصفية',refresh:'تحديث',window:'نطاق ملاحظة',none:'لا توجد تنبيهات تطابق التصفية الحالية.',range:s=>`مدى ${s}`},
+  alerts:{title:'التنبيهات',time:'الوقت (UTC)',alert:'التنبيه',severity:'الشدة',status:'الحالة',filters:'عوامل التصفية',refresh:'تحديث',window:'نطاق ملاحظة',none:'لا توجد تنبيهات تطابق التصفية الحالية.',range:s=>`مدى ${s}`,of:'من',prev:'السابق',next:'التالي'},
   detail:{title:'تفاصيل التنبيه',source:'المصدر',ip:'عنوان المصدر',uri:'مسار الطلب',method:'طريقة HTTP',id:'معرّف التنبيه',rule:'قاعدة الكشف',technique:'التقنية',first:'أول رصد',severity:'الشدة',run:'التشغيل',tabs:{timeline:'الخط الزمني للأحداث',rule:'القاعدة المطابقة',attributes:'السمات',artifacts:'المواد المرتبطة'},cols:{t:'الوقت (UTC)',s:'المصدر',e:'الحدث',d:'التفاصيل'},filter:'تصفية الأحداث…',highlight:'تمييز',export:'تصدير',exported:n=>`تم تصدير ${n} حدثًا مرصودًا محليًا.`,exportFail:'تعذر التصدير في هذا السياق؛ تبقى الأحداث معروضة كما هي.',matches:n=>`${n} مطابقة`},
   panels:{
     overview:{title:'ملخص التشغيل',manifest:'البيان المجمّد',digest:'بصمة المدخلات',seed:'البذرة',engine:'المحرّك',isolation:'نطاق العزل',createdAt:'تاريخ الإنشاء',provenance:'الإثبات',receipts:'إيصالات دورة الحياة',lifecycle:'دورة الحياة'},
@@ -46,7 +46,7 @@ const EN={
   identity:{phase:'Current Phase',role:'Operational Role',task:'Current Task',run:'Run',health:'Health'},
   structure:{title:'Run Structure',overview:'Overview',timeline:'Scenario Timeline',tasks:'Tasks',devices:'Devices',events:'Events & Injects',telemetry:'Telemetry',observations:'Observations',artifacts:'Artifacts'},
   sourceTabs:{all:'SIEM / Monitoring'},
-  alerts:{title:'Alerts',time:'Time (UTC)',alert:'Alert Title',severity:'Severity',status:'Status',filters:'Filters',refresh:'Refresh',window:'Observation window',none:'No alert matches the current filters.',range:s=>`Window ${s}`},
+  alerts:{title:'Alerts',time:'Time (UTC)',alert:'Alert Title',severity:'Severity',status:'Status',filters:'Filters',refresh:'Refresh',window:'Observation window',none:'No alert matches the current filters.',range:s=>`Window ${s}`,of:'of',prev:'Previous',next:'Next'},
   detail:{title:'Alert Details',source:'Source',ip:'Source IP',uri:'Request URI',method:'HTTP Method',id:'Alert ID',rule:'Detection Rule',technique:'Technique',first:'First observed',severity:'Severity',run:'Run',tabs:{timeline:'Event Timeline',rule:'Matched Rule',attributes:'Attributes',artifacts:'Related Artifacts'},cols:{t:'Time (UTC)',s:'Source',e:'Event',d:'Details'},filter:'Filter events…',highlight:'Highlight',export:'Export',exported:n=>`Exported ${n} observed event(s) as a local download.`,exportFail:'Export is unavailable in this context; the observed events remain displayed as recorded.',matches:n=>`${n} match(es)`},
   panels:{
     overview:{title:'Run summary',manifest:'Frozen manifest',digest:'Input digest',seed:'Seed',engine:'Engine',isolation:'Isolation scope',createdAt:'Created at',provenance:'Provenance',receipts:'Lifecycle receipts',lifecycle:'Lifecycle'},

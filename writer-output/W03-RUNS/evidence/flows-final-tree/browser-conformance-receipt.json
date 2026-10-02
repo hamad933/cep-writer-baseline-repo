@@ -1,0 +1,268 @@
+{
+  "schemaVersion": 1,
+  "classification": "REPRODUCIBLE_BROWSER_CONFORMANCE_RECEIPT_NOT_OWNER_ACCEPTANCE",
+  "command": "npm run browser:test",
+  "sourceFoundationBaseline": "CEP-FR-E18-ANALYTICAL-COMPARE-COMPLETION",
+  "sourceCandidate": "CANONICAL_SOURCE_TREE_SHA256:31fdb9a5375c2ef663d793f2eefd7585675481b2fc1d77f016c77f9e48b4fd5b",
+  "sourceCanonicalTreeSha256": "31fdb9a5375c2ef663d793f2eefd7585675481b2fc1d77f016c77f9e48b4fd5b",
+  "canonicalSourceFileCount": 338,
+  "currentUse": "EXACT_CURRENT_CANONICAL_SOURCE_EXECUTION_RECEIPT",
+  "executionStatus": "BLOCKED_OR_FAILED",
+  "prerequisite": "Install the Playwright package and its matching Chromium binary (npx playwright install chromium-headless-shell), or set CEP_BROWSER_EXECUTABLE to a compatible local executable.",
+  "declaredFlows": [
+    "workspace.transient-and-pane-lifecycle",
+    "spatial.selection-connect-canonical-edge",
+    "relation.route-convergence-and-label-scope",
+    "central-change-reuse",
+    "runtime-causal-consequence",
+    "spatial-input-bidi-preference-and-structured-isolation"
+  ],
+  "environment": {
+    "node": "v22.16.0",
+    "engine": "Playwright Chromium",
+    "playwrightResolution": "package-local",
+    "packageDeclaredVersion": "1.62.1",
+    "browserExecutableOverride": false,
+    "transport": "localhost-http",
+    "viewport": "1440x980",
+    "reducedMotion": true
+  },
+  "summary": {
+    "total": 6,
+    "pass": 4,
+    "fail": 2
+  },
+  "flows": [
+    {
+      "id": "workspace.transient-and-pane-lifecycle",
+      "before": "Golden consumer with visible Foundation chrome",
+      "action": "toggle pane, open and escape command palette, then restore pane",
+      "owner": "WorkspaceFoundationHost + PaneLayoutController + TransientFocusController",
+      "oracle": "pane truth changes, transient reverses, focus returns",
+      "status": "PASS",
+      "evidence": {
+        "collapsed": "collapsed",
+        "restored": "open",
+        "paletteExit": "Escape",
+        "focusReturned": true,
+        "responsive": {
+          "contract": {
+            "id": "WorkspacePaneStateContract",
+            "version": "1.2.0",
+            "owner": "WorkspacePaneLayoutOwner",
+            "persisted": [
+              "preferredState",
+              "preferredWidth"
+            ],
+            "projectedOnly": [
+              "effectiveState",
+              "effectiveWidth",
+              "mode",
+              "responsiveBand",
+              "resizeAvailability",
+              "focusMode",
+              "responsiveOverride",
+              "resizeLimits"
+            ]
+          },
+          "responsiveBand": "narrow",
+          "viewportWidth": 900,
+          "focusMode": false,
+          "overlayPane": "",
+          "left": {
+            "side": "left",
+            "preferredState": "open",
+            "effectiveState": "collapsed",
+            "preferred": "open",
+            "effective": "collapsed",
+            "mode": "collapsed",
+            "preferredWidth": 304,
+            "effectiveWidth": 304,
+            "responsiveSuppressed": true,
+            "responsiveOverride": null,
+            "resizeLimits": {
+              "min": 1,
+              "max": 420,
+              "step": 12,
+              "collapseThreshold": 24
+            },
+            "resizeAvailability": {
+              "pointer": false,
+              "keyboard": false
+            }
+          },
+          "right": {
+            "side": "right",
+            "preferredState": "open",
+            "effectiveState": "collapsed",
+            "preferred": "open",
+            "effective": "collapsed",
+            "mode": "collapsed",
+            "preferredWidth": 420,
+            "effectiveWidth": 420,
+            "responsiveSuppressed": true,
+            "responsiveOverride": null,
+            "resizeLimits": {
+              "min": 1,
+              "max": 520,
+              "step": 12,
+              "collapseThreshold": 24
+            },
+            "resizeAvailability": {
+              "pointer": false,
+              "keyboard": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "spatial.selection-connect-canonical-edge",
+      "before": "Visualize local-acceptance projection with no current selection",
+      "action": "select exactly two representations and inspect provider-truthful Connect availability without mutating provider truth",
+      "owner": "ActionAvailabilityCore + RelationInteractionOwner + RelationDomainAdapter",
+      "oracle": "read-only Visualize preserves the two-item selection, hides author-only Connect UI, and leaves relation count/version unchanged",
+      "status": "PASS",
+      "evidence": {
+        "selectedIds": [
+          "b6-rep-ku-d03-0001",
+          "b6-rep-ku-d03-0004"
+        ],
+        "readOnly": true,
+        "availability": {
+          "action": "connect",
+          "policyId": "connect",
+          "visible": false,
+          "enabled": false,
+          "reason": "Active mode does not permit this action",
+          "code": "MODE_FORBIDS_ACTION",
+          "selectionCount": 2,
+          "selectedTypes": [
+            "unspecified"
+          ]
+        },
+        "actionSurfaceVisible": false,
+        "canonicalRelationCount": 2,
+        "canonicalVersion": 1
+      }
+    },
+    {
+      "id": "relation.route-convergence-and-label-scope",
+      "before": "Enterprise relation edge under its admitted editable domain adapter",
+      "action": "double-click whole edge, double-click label, close, then press F2 on edge",
+      "owner": "RelationInteractionOwner",
+      "oracle": "whole-edge double-click is inert; authorized label and F2 edit routes converge on relation.edit",
+      "status": "FAIL",
+      "error": "visible editable Enterprise relation edge/label is unavailable for route falsification :: {\"relationUiSharesPublishedSpatial\":false,\"relationUiSpatialConnected\":false,\"publishedSpatialConnected\":false,\"relationUiSelection\":{\"schema\":\"SpatialSelectionReceipt@1\",\"ownerId\":\"SpatialSelectionNavigationKernel\",\"contractVersion\":\"1.0.0\",\"projectionId\":\"SpatialModelProjection\",\"projectionOwner\":\"SpatialModelCompatibilityProjection\",\"activeMode\":\"author\",\"policyRevision\":\"FW-C-NEIGHBOR-01\",\"revision\":0,\"action\":\"descriptor\",\"selectedIds\":[],\"selectionCount\":0,\"focusId\":\"APP-WEB-01\",\"anchorId\":\"APP-WEB-01\"},\"publishedSpatialSelection\":{\"schema\":\"SpatialSelectionReceipt@1\",\"ownerId\":\"SpatialSelectionNavigationKernel\",\"contractVersion\":\"1.0.0\",\"projectionId\":\"SpatialModelProjection\",\"projectionOwner\":\"SpatialModelCompatibilityProjection\",\"activeMode\":\"author\",\"policyRevision\":\"FW-C-NEIGHBOR-01\",\"revision\":0,\"action\":\"descriptor\",\"selectedIds\":[],\"selectionCount\":0,\"focusId\":\"APP-WEB-01\",\"anchorId\":\"APP-WEB-01\"},\"adapterRelationCount\":8,\"publishedSpatialEdgeCount\":8,\"canvases\":[{\"connected\":true,\"hidden\":false,\"edges\":8,\"labels\":8,\"visibleRect\":{\"width\":694,\"height\":427.359375}}]}",
+      "pageErrors": []
+    },
+    {
+      "id": "central-change-reuse",
+      "before": "Visualize read-only and Enterprise editable consumers share the central relation interaction owner",
+      "action": "select two objects on each consumer and inspect central selection policy plus provider-specific availability",
+      "owner": "ActionAvailabilityCore + RelationInteractionOwner",
+      "oracle": "policy revision/action owner are reused while availability remains provider-truthful",
+      "status": "FAIL",
+      "error": "Enterprise editable boundary did not remain available: {\"consumer\":\"enterprise\",\"selectedIds\":[\"CTL-WAF-01\",\"SIM-ATK-01\"],\"readOnly\":false,\"policyRevision\":\"RELATION-CENTRAL-04\",\"availabilityOwner\":\"ActionAvailabilityCore\",\"availability\":{\"action\":\"connect\",\"policyId\":\"connect\",\"visible\":false,\"enabled\":false,\"reason\":\"Selection cardinality must be between 2 and 2\",\"code\":\"SELECTION_COUNT\",\"selectionCount\":0,\"selectedTypes\":[]},\"actionOwner\":\"RelationInteractionOwner\",\"relationUiSharesPublishedSpatial\":false,\"relationUiSelection\":{\"schema\":\"SpatialSelectionReceipt@1\",\"ownerId\":\"SpatialSelectionNavigationKernel\",\"contractVersion\":\"1.0.0\",\"projectionId\":\"SpatialModelProjection\",\"projectionOwner\":\"SpatialModelCompatibilityProjection\",\"activeMode\":\"author\",\"policyRevision\":\"FW-C-NEIGHBOR-01\",\"revision\":0,\"action\":\"descriptor\",\"selectedIds\":[],\"selectionCount\":0,\"focusId\":\"APP-WEB-01\",\"anchorId\":\"APP-WEB-01\"},\"publishedSpatialSelection\":{\"schema\":\"SpatialSelectionReceipt@1\",\"ownerId\":\"SpatialSelectionNavigationKernel\",\"contractVersion\":\"1.0.0\",\"projectionId\":\"SpatialModelProjection\",\"projectionOwner\":\"SpatialModelCompatibilityProjection\",\"activeMode\":\"author\",\"policyRevision\":\"FW-C-NEIGHBOR-01\",\"revision\":0,\"action\":\"descriptor\",\"selectedIds\":[],\"selectionCount\":0,\"focusId\":\"APP-WEB-01\",\"anchorId\":\"APP-WEB-01\"},\"relationUiSpatialConnected\":false,\"publishedSpatialConnected\":false}",
+      "pageErrors": []
+    },
+    {
+      "id": "runtime-causal-consequence",
+      "before": "RUN-0042 DEV-WEB-01 is selected and UP",
+      "action": "open terminal through visible command and submit shutdown",
+      "owner": "W03V34RunsAdapter via provider-neutral OperationalView",
+      "oracle": "canonical device, spatial projection, terminal output, event and recorded projection agree",
+      "status": "PASS",
+      "evidence": {
+        "up": false,
+        "recordedUp": false,
+        "semanticCommand": "device.shutdown",
+        "eventOutput": "Web Application: interface DOWN (simulation)",
+        "provider": "InternalSimulationAdapter",
+        "domainOwner": "W03RunDomain",
+        "runtimeTruth": "INTERNAL_SIMULATION",
+        "terminalVisibleDown": true
+      }
+    },
+    {
+      "id": "spatial-input-bidi-preference-and-structured-isolation",
+      "before": "Visualize canvas and independent Learn structured consumer",
+      "action": "Ctrl+RMB drag, normal RMB, keyboard focus/selection/camera/move, then canonical locale preference change in Learn",
+      "owner": "SpatialInteraction + ContextSuppressionGate + ScopedPreferences + StructuredDocumentDomainAdapter",
+      "oracle": "only own context is suppressed; keyboard intents stay distinct; Learn remains Library-free and Bidi-correct",
+      "status": "PASS",
+      "evidence": {
+        "contextSuppression": "own-event-only",
+        "keyboard": {
+          "focusOnly": true,
+          "spaceSelect": true,
+          "altCameraOnly": true,
+          "controlMoveOnly": true
+        },
+        "preference": {
+          "lang": "en",
+          "dir": "ltr"
+        },
+        "structured": {
+          "hostKind": "DONOR_FREE_WORKSPACE_HOST",
+          "domainKind": "learn",
+          "searchCount": 0,
+          "bdiCount": 68,
+          "isolation": true
+        },
+        "libraryParity": {
+          "consumer": "library",
+          "activeDocument": "KU-D03-0001",
+          "blockCount": 13,
+          "editorCore": "UnifiedEditorCore",
+          "donorHost": true
+        }
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "filename": "browser-workspace-pane-context.png",
+      "flowId": "workspace.transient-and-pane-lifecycle",
+      "property": "preferred/effective pane state and shared workspace chrome",
+      "viewport": {
+        "width": 900,
+        "height": 980
+      },
+      "bytes": 88716,
+      "sha256": "ac2df094a1d92bd92f168659224ba54ed7f2862fefbdc02bc731194a9102e344",
+      "scope": "EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE"
+    },
+    {
+      "filename": "browser-selection-connect.png",
+      "flowId": "spatial.selection-connect-canonical-edge",
+      "property": "exactly-two selection with author-only Connect hidden by provider-truthful ActionAvailability",
+      "viewport": {
+        "width": 1440,
+        "height": 980
+      },
+      "bytes": 318718,
+      "sha256": "079371dbc93fe1b15448ed7efbdcaef8e026a8b237748b51ac9597f6f4ee708d",
+      "scope": "EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE"
+    },
+    {
+      "filename": "browser-operational-shutdown.png",
+      "flowId": "runtime-causal-consequence",
+      "property": "provider-neutral terminal and canonical shutdown consequence",
+      "viewport": {
+        "width": 1440,
+        "height": 980
+      },
+      "bytes": 213792,
+      "sha256": "572e701ee3ec459bebe78713d3cae65ebc93e6f7b52b9836d9b5279a85d0d832",
+      "scope": "EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE"
+    }
+  ],
+  "limitations": [
+    "Headless Chromium only",
+    "Six bounded critical flows; not exhaustive permutation certification",
+    "Internal simulation does not execute host commands",
+    "A missing browser executable is reported as failure and never converted to a pass",
+    "Optional in-memory transport exists for environments that administratively block localhost navigation; it rewrites the same built ESM graph without changing application source"
+  ]
+}

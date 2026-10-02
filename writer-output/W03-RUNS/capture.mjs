@@ -41,14 +41,14 @@ const PREFS={
   ar:{locale:'ar',chromeDirection:'rtl',contentDirection:'rtl'},
 };
 
-/** Switch the runs workspace into a named state before capture. */
+/** Switch the runs workspace into a named mode (data-runs-tab id) before capture. */
 const applyState=async(page,state)=>{
   if(state==='operations')return;
-  const tab=state.replace(/^mode:/,'');
+  const id=state.replace(/^mode:/,'');
   const clicked=await page.evaluate(name=>{
-    const b=[...document.querySelectorAll('button')].find(el=>(el.dataset.mode||'')===name||(el.textContent||'').trim().toLowerCase()===name.toLowerCase());
-    if(!b)return false;b.click();return true;
-  },tab);
+    const tab=document.querySelector(`[data-runs-tab="${name}"]`);
+    if(!tab)return false;tab.click();return true;
+  },id);
   if(!clicked)console.warn(`state tab not found: ${state}`);
   await page.waitForTimeout(450);
 };
@@ -71,8 +71,12 @@ const capture=async()=>{
           const pageErrors=[];
           page.on('pageerror',e=>pageErrors.push(String(e?.message||e)));
           const started=ts();
-          await page.goto(`http://127.0.0.1:${port}/?surface=runs`,{waitUntil:'networkidle'});
-          await page.waitForFunction(()=>window.CEPFoundation?.consumer==='runs',null,{timeout:30000});
+          // GENUINE_ROUTE navigation: domcontentloaded + explicit consumer gate. `networkidle` is
+          // not used because the foundation platform probe (GET /v1/platform/input-direction →
+          // 127.0.0.1:4174) keeps a request in flight whenever a local runtime (this lane's or a
+          // sibling lane's) answers slowly or not at all on the shared machine.
+          await page.goto(`http://127.0.0.1:${port}/?surface=runs`,{waitUntil:'domcontentloaded',timeout:45000});
+          await page.waitForFunction(()=>window.CEPFoundation?.consumer==='runs',null,{timeout:45000});
           await page.waitForTimeout(700);
           await applyState(page,state);
           const info=await page.evaluate(()=>({

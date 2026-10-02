@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "proof": "W03-RUNS-CAPTURE",
+  "label": "run1-close-responsive",
+  "route": "/?surface=runs",
+  "renderMethod": "GENUINE_ROUTE_LOCAL_BROWSER",
+  "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+  "writableRootDiff": "M stack/native-typescript/adapters/runs/domain.ts\n M stack/native-typescript/surfaces/runs/i18n.ts\n M stack/native-typescript/surfaces/runs/index.ts\n M stack/native-typescript/surfaces/runs/styles.ts\n M stack/native-typescript/surfaces/runs/views.ts",
+  "node": "v22.16.0",
+  "viewportMatrix": [
+    "1440x1000",
+    "1024x900"
+  ],
+  "locales": [
+    "en",
+    "ar"
+  ],
+  "states": [
+    "operations"
+  ],
+  "capturedAt": "2026-10-02T05:45:27.863Z",
+  "frames": [
+    {
+      "locale": "en",
+      "viewport": "1440x1000",
+      "state": "operations",
+      "path": "writer-output/W03-RUNS/evidence/run1-close-responsive/runs-en-operations-1440x1000-20261002T054517Z.png",
+      "bytes": 272983,
+      "sha256": "b2195144478e465ed9771bc24c1adc73b6e522b18e705aa9a964cce232d0b06c",
+      "capturedAt": "20261002T054517Z",
+      "pageErrors": [],
+      "info": {
+        "dir": "ltr",
+        "lang": "en",
+        "consumer": "runs",
+        "left": "Overview Scenario Timeline Tasks 4 Devices 3 Events & Injects 6 Telemetry 4 Observations 7 Artifacts 2 Current Phase: 03 Detection · Operational Role: SOC Analyst RUNNING",
+        "center": "البنية السياق Operations Preflight Timeline Topology Pause End Run Capture Snapshot ⋯ Web Application Breach & Response RUN-0042 · Scenario Run RUNNING CURRENT PHASE 03 Detection OPERATIONAL ROLE SOC Analyst CURRENT TASK Investigate suspicious SQL activity HEALTH HEALTHY SIEM / Monitoring4 Web Application7 Database1 Firewall1 Identity Service1 INTERNAL_SIMULATION Alerts 4 Severity: High Window 10:18:09 – 10:24:31 UTC TIME (UTC) ALERT TITLE SEVERITY STATUS 10:24:31 Anomalous SQL query detected Correlated application behavior High New 10:22:11 Suspicious parameter patterns Repeated request anomaly High New 10:20:47 Potential database access anomaly Unusual query volume Medium New 10:18:09 Failed login attempts spike From single source IP Low New ‹ 1–4 of 4 › Alert Details High New ALERT-7f3a8c1b Source Web Application Alert ID ALERT-7f3a8c1b Source IP 203.0.113.45 Detection Rule SIM-RULE-1007 Request URI POST /search Technique T1190 — Exploit Public-Facing Application First observed 10:24:31 UTC Run RUN-0042 Event Timeline Matched Rule Attributes Related Artifacts (2) TIME (UTC) SOURCE EVENT DETAILS 10:24:31.482 Web Application DETECTION_RULE_MATCHED SIM-RULE-1007 matched correlated request state 10:24:31.201 Web Application REQUEST_BLOCKED Policy action recorded in simulation state: BLOCK 10:24:30.904 Web Application HTTP_REQUEST_OBSERVED POST /search · synthetic fixture traffic",
+        "right": "Detection rationale Parameter pattern matched simulated detection signature. Correlation scope Correlated application behavior · 203.0.113.45 · Web Application Operational implication T1190 — Exploit Public-Facing Application · SIM-RULE-1007 Observation High New Anomalous SQL query detected Recommended next step Investigate suspicious SQL activity Provider Internal simulation Runtime truth INTERNAL_SIMULATION Provider epoch 1 CONNECTED UNVERIFIED_PLATFORM_GATE ConPTY, Windows topmost and native-window claims remain unverified here. This candidate neither alters nor certifies the Windows platform provider.",
+        "toolbar": "⌘ Focus Note Notes Open terminal pause run resume run Disconnect provider Reconnect session Recorded result",
+        "scroll": {
+          "sw": 1440,
+          "cw": 1440,
+          "sh": 1000,
+          "ch": 1000
+        }
+      }
+    },
+    {
+      "locale": "ar",
+      "viewport": "1440x1000",
+      "state": "operations",
+      "path": "writer-output/W03-RUNS/evidence/run1-close-responsive/runs-ar-operations-1440x1000-20261002T054519Z.png",
+      "bytes": 248259,
+      "sha256": "619356c55ffbf3c17b88e5474e55909013ede7ffd75db639eddfe6201b2f8fd4",
+      "capturedAt": "20261002T054519Z",
+      "pageErrors": [],
+      "info": {
+        "dir": "rtl",
+        "lang": "ar",
+        "consumer": "runs",
+        "left": "نظرة عامة الخط الزمني للسيناريو المهام 4 الأجهزة 3 الأحداث والحقن 6 القياس عن بُعد 4 الملاحظات 7 المواد 2 المرحلة الحالية: 03 Detection · الدور التشغيلي: SOC Analyst RUNNING",
+        "center": "البنية السياق العمليات ما قبل التشغيل الخط الزمني الطوبولوجيا إيقاف مؤقت إنهاء التشغيل التقاط لقطة ⋯ اختراق تطبيق ويب والاستجابة RUN-0042 · Scenario Run RUNNING المرحلة الحالية 03 Detection الدور التشغيلي SOC Analyst المهمة الحالية Investigate suspicious SQL activity الحالة HEALTHY SIEM / المراقبة4 Web Application7 Database1 Firewall1 Identity Service1 حقيقة المحاكاة الداخلية التنبيهات 4 الشدة: High مدى 10:18:09 – 10:24:31 UTC الوقت (UTC) التنبيه الشدة الحالة 10:24:31 Anomalous SQL query detected Correlated application behavior High New 10:22:11 Suspicious parameter patterns Repeated request anomaly High New 10:20:47 Potential database access anomaly Unusual query volume Medium New 10:18:09 Failed login attempts spike From single source IP Low New ‹ 1–4 من 4 › تفاصيل التنبيه High New ALERT-7f3a8c1b المصدر Web Application معرّف التنبيه ALERT-7f3a8c1b عنوان المصدر 203.0.113.45 قاعدة الكشف SIM-RULE-1007 مسار الطلب POST /search التقنية T1190 — Exploit Public-Facing Application أول رصد 10:24:31 UTC التشغيل RUN-0042 الخط الزمني للأحداث القاعدة المطابقة السمات المواد المرتبطة (2) الوقت (UTC) المصدر الحدث التفاصيل 10:24:31.482 Web Application DETECTION_RULE_MATCHED SIM-RULE-1007 matched correlated request state 10:24:31.201 Web Application REQUEST_BLOCKED Policy action recorded in simulation state: BLOCK 10:24:30.904 Web Application HTTP_REQUEST_OBSERVED POST /search · synthetic fixtur",
+        "right": "منطق الكشف Parameter pattern matched simulated detection signature. نطاق الارتباط Correlated application behavior · 203.0.113.45 · Web Application الأثر التشغيلي T1190 — Exploit Public-Facing Application · SIM-RULE-1007 ملاحظة High New Anomalous SQL query detected الخطوة التالية Investigate suspicious SQL activity المزوّد Internal simulation حقيقة التشغيل INTERNAL_SIMULATION الحقبة 1 متصل بوابة منصة غير موثّقة بوابات ConPTY ونافذة Windows وقوة العرض بقيمة OS تبقى غير موثّقة هنا؛ هذا المرشّح لا يغيّر ولا يشهد على مزوّذ Windows.",
+        "toolbar": "⌘ تركيز ملاحظة الملاحظات Open terminal pause run resume run Disconnect provider Reconnect session Recorded result",
+        "scroll": {
+          "sw": 1440,
+          "cw": 1440,
+          "sh": 1000,
+          "ch": 1000
+        }
+      }
+    },
+    {
+      "locale": "en",
+      "viewport": "1024x900",
+      "state": "operations",
+      "path": "writer-output/W03-RUNS/evidence/run1-close-responsive/runs-en-operations-1024x900-20261002T054522Z.png",
+      "bytes": 161013,
+      "sha256": "74075669a3097b61da39e2e04b8b5a874c6d62dbba9d642143aea19b388225ba",
+      "capturedAt": "20261002T054522Z",
+      "pageErrors": [],
+      "info": {
+        "dir": "ltr",
+        "lang": "en",
+        "consumer": "runs",
+        "left": "Overview Scenario Timeline Tasks 4 Devices 3 Events & Injects 6 Telemetry 4 Observations 7 Artifacts 2 Current Phase: 03 Detection · Operational Role: SOC Analyst RUNNING",
+        "center": "البنية السياق Operations Preflight Timeline Topology Pause End Run Capture Snapshot ⋯ Web Application Breach & Response RUN-0042 · Scenario Run RUNNING CURRENT PHASE 03 Detection OPERATIONAL ROLE SOC Analyst CURRENT TASK Investigate suspicious SQL activity HEALTH HEALTHY SIEM / Monitoring4 Web Application7 Database1 Firewall1 Identity Service1 INTERNAL_SIMULATION Alerts 4 Severity: High Window 10:18:09 – 10:24:31 UTC TIME (UTC) ALERT TITLE SEVERITY STATUS 10:24:31 Anomalous SQL query detected Correlated application behavior High New 10:22:11 Suspicious parameter patterns Repeated request anomaly High New 10:20:47 Potential database access anomaly Unusual query volume Medium New 10:18:09 Failed login attempts spike From single source IP Low New ‹ 1–4 of 4 › Alert Details High New ALERT-7f3a8c1b Source Web Application Alert ID ALERT-7f3a8c1b Source IP 203.0.113.45 Detection Rule SIM-RULE-1007 Request URI POST /search Technique T1190 — Exploit Public-Facing Application First observed 10:24:31 UTC Run RUN-0042 Event Timeline Matched Rule Attributes Related Artifacts (2) TIME (UTC) SOURCE EVENT DETAILS 10:24:31.482 Web Application DETECTION_RULE_MATCHED SIM-RULE-1007 matched correlated request state 10:24:31.201 Web Application REQUEST_BLOCKED Policy action recorded in simulation state: BLOCK 10:24:30.904 Web Application HTTP_REQUEST_OBSERVED POST /search · synthetic fixture traffic",
+        "right": "RuntimeRelationsRuntimeRuns context / سياق التشغيل×Web ApplicationRun RUN-0042 · RUNNING · No live command eventsCurrentRunRUN-0042LifecycleRUNNINGLatest event sequence0Latest eventNo live command eventsWeb ApplicationDEV-WEB-01StateUPRevision: selection:DEV-WEB-01|event:0|relations:1الوحدةالكتلة المحددة Detection rationaleParameter pattern matched simulated detection signature. Correlation scopeCorrelated application behavior · 203.0.113.45 · Web Application Operational implicationT1190 — Exploit Public-Facing Application · SIM-RULE-1007 ObservationHigh NewAnomalous SQL query detected Recommended next stepInvestigate suspicious SQL activity ProviderInternal simulation Runtime truthINTERNAL_",
+        "toolbar": "⌘ Focus Note Notes Open terminal pause run resume run Disconnect provider Reconnect session Recorded result",
+        "scroll": {
+          "sw": 1024,
+          "cw": 1024,
+          "sh": 900,
+          "ch": 900
+        }
+      }
+    },
+    {
+      "locale": "ar",
+      "viewport": "1024x900",
+      "state": "operations",
+      "path": "writer-output/W03-RUNS/evidence/run1-close-responsive/runs-ar-operations-1024x900-20261002T054525Z.png",
+      "bytes": 147029,
+      "sha256": "6ac53ada53a410c472ae17f15303ca2d83d70376bb9d008b287db7599d695dba",
+      "capturedAt": "20261002T054525Z",
+      "pageErrors": [],
+      "info": {
+        "dir": "rtl",
+        "lang": "ar",
+        "consumer": "runs",
+        "left": "نظرة عامة الخط الزمني للسيناريو المهام 4 الأجهزة 3 الأحداث والحقن 6 القياس عن بُعد 4 الملاحظات 7 المواد 2 المرحلة الحالية: 03 Detection · الدور التشغيلي: SOC Analyst RUNNING",
+        "center": "البنية السياق العمليات ما قبل التشغيل الخط الزمني الطوبولوجيا إيقاف مؤقت إنهاء التشغيل التقاط لقطة ⋯ اختراق تطبيق ويب والاستجابة RUN-0042 · Scenario Run RUNNING المرحلة الحالية 03 Detection الدور التشغيلي SOC Analyst المهمة الحالية Investigate suspicious SQL activity الحالة HEALTHY SIEM / المراقبة4 Web Application7 Database1 Firewall1 Identity Service1 حقيقة المحاكاة الداخلية التنبيهات 4 الشدة: High مدى 10:18:09 – 10:24:31 UTC الوقت (UTC) التنبيه الشدة الحالة 10:24:31 Anomalous SQL query detected Correlated application behavior High New 10:22:11 Suspicious parameter patterns Repeated request anomaly High New 10:20:47 Potential database access anomaly Unusual query volume Medium New 10:18:09 Failed login attempts spike From single source IP Low New ‹ 1–4 من 4 › تفاصيل التنبيه High New ALERT-7f3a8c1b المصدر Web Application معرّف التنبيه ALERT-7f3a8c1b عنوان المصدر 203.0.113.45 قاعدة الكشف SIM-RULE-1007 مسار الطلب POST /search التقنية T1190 — Exploit Public-Facing Application أول رصد 10:24:31 UTC التشغيل RUN-0042 الخط الزمني للأحداث القاعدة المطابقة السمات المواد المرتبطة (2) الوقت (UTC) المصدر الحدث التفاصيل 10:24:31.482 Web Application DETECTION_RULE_MATCHED SIM-RULE-1007 matched correlated request state 10:24:31.201 Web Application REQUEST_BLOCKED Policy action recorded in simulation state: BLOCK 10:24:30.904 Web Application HTTP_REQUEST_OBSERVED POST /search · synthetic fixtur",
+        "right": "RuntimeRelationsRuntimeRuns context / سياق التشغيل×Web ApplicationRun RUN-0042 · RUNNING · No live command eventsCurrentRunRUN-0042LifecycleRUNNINGLatest event sequence0Latest eventNo live command eventsWeb ApplicationDEV-WEB-01StateUPRevision: selection:DEV-WEB-01|event:0|relations:1الوحدةالكتلة المحددة منطق الكشفParameter pattern matched simulated detection signature. نطاق الارتباطCorrelated application behavior · 203.0.113.45 · Web Application الأثر التشغيليT1190 — Exploit Public-Facing Application · SIM-RULE-1007 ملاحظةHigh NewAnomalous SQL query detected الخطوة التاليةInvestigate suspicious SQL activity المزوّدInternal simulation حقيقة التشغيلINTERNAL_SIMULATION الحقبة1 متصلبوابة منصة غ",
+        "toolbar": "⌘ تركيز ملاحظة الملاحظات Open terminal pause run resume run Disconnect provider Reconnect session Recorded result",
+        "scroll": {
+          "sw": 1024,
+          "cw": 1024,
+          "sh": 900,
+          "ch": 900
+        }
+      }
+    }
+  ]
+}
