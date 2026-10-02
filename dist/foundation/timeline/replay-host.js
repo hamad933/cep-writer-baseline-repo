@@ -3,6 +3,9 @@ import {TIMELINE_REPLAY_OWNER} from './replay.js';
 const html=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const attr=value=>html(value).replace(/`/g,'&#96;');
 const percent=value=>`${Math.round(Math.max(0,Math.min(1,Number(value)||0))*100)}%`;
+/* closure R-04/SH-R1: host chrome follows the document locale at render time (G-20 law); no observers. */
+const REPLAY_LOCALE=()=>(typeof document!=='undefined'&&String(document.documentElement.lang||'').toLowerCase().startsWith('en'))?'en':'ar';
+const T=(ar,en)=>REPLAY_LOCALE()==='en'?en:ar;
 
 export const TIMELINE_REPLAY_HOST_CONTRACT=Object.freeze({
   id:'TimelineReplayPresentationHost',version:'1.0.0',compatibility:'SEMVER',
@@ -11,15 +14,15 @@ export const TIMELINE_REPLAY_HOST_CONTRACT=Object.freeze({
 });
 
 const stateCopy=Object.freeze({
-  EMPTY:{title:'No timeline events',fallback:'The domain provider returned an empty timeline.'},
-  LOADING:{title:'Timeline loading',fallback:'The domain provider is preparing timeline data.'},
-  ERROR:{title:'Timeline unavailable',fallback:'The domain provider reported an error.'},
-  UNAVAILABLE:{title:'Timeline unavailable',fallback:'No compatible timeline provider is available.'}
+  EMPTY:Object.freeze({title:Object.freeze({ar:'لا أحداث في الخط الزمني',en:'No timeline events'}),fallback:Object.freeze({ar:'أعاد مزود المجال خطًا زمنيًا فارغًا.',en:'The domain provider returned an empty timeline.'})}),
+  LOADING:Object.freeze({title:Object.freeze({ar:'جارٍ تحميل الخط الزمني',en:'Timeline loading'}),fallback:Object.freeze({ar:'يزيد مزود المجال بيانات الخط الزمني جاهزية.',en:'The domain provider is preparing timeline data.'})}),
+  ERROR:Object.freeze({title:Object.freeze({ar:'الخط الزمني غير متاح',en:'Timeline unavailable'}),fallback:Object.freeze({ar:'أبلغ مزود المجال عن خطأ.',en:'The domain provider reported an error.'})}),
+  UNAVAILABLE:Object.freeze({title:Object.freeze({ar:'الخط الزمني غير متاح',en:'Timeline unavailable'}),fallback:Object.freeze({ar:'لا يوجد مزود خط زمني متوافق متاح.',en:'No compatible timeline provider is available.'})})
 });
 
 function detailRows(event){
   const rows=Array.isArray(event?.detailRows)?event.detailRows:[];
-  if(!rows.length)return '<p class="timeline-detail-empty">No provider-supplied detail rows.</p>';
+  if(!rows.length)return `<p class="timeline-detail-empty">${T('لا صفوف تفاصيل يوفرها المزوّد.','No provider-supplied detail rows.')}</p>`;
   return `<dl class="timeline-detail-list">${rows.map(row=>`<div><dt dir="auto">${html(row.label)}</dt><dd dir="auto">${html(row.value)}</dd></div>`).join('')}</dl>`;
 }
 
@@ -54,14 +57,14 @@ export class TimelineReplayHost{
     @media(prefers-reduced-motion:reduce){[data-timeline-replay-host] *,[data-timeline-replay-host] *::before,[data-timeline-replay-host] *::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
   </style>`}
   _status(projected){
-    const status=projected.timeline.status,copy=stateCopy[status]||stateCopy.UNAVAILABLE,message=projected.timeline.stateMessage||copy.fallback;
-    return `<div class="timeline-placeholder" role="status" data-timeline-state="${attr(status)}"><div><h3 dir="auto">${html(copy.title)}</h3><p dir="auto">${html(message)}</p></div></div>`;
+    const status=projected.timeline.status,locale=REPLAY_LOCALE(),copy=stateCopy[status]||stateCopy.UNAVAILABLE,message=projected.timeline.stateMessage||copy.fallback[locale];
+    return `<div class="timeline-placeholder" role="status" data-timeline-state="${attr(status)}"><div><h3 dir="auto">${html(copy.title[locale])}</h3><p dir="auto">${html(message)}</p></div></div>`;
   }
   _ready(projected){
     const selected=projected.selection.selectedEvent;
-    const events=projected.events.map((event,index)=>`<li><button type="button" class="timeline-event" data-event-id="${attr(event.eventId)}" aria-current="${event.eventId===projected.selection.selectedEventId}" tabindex="${event.eventId===projected.selection.focusedEventId?'0':'-1'}"><span class="timeline-dot" aria-hidden="true"></span><span class="timeline-event-copy"><span class="timeline-event-label" dir="auto">${html(event.label)}</span><span class="timeline-event-meta"><span dir="auto">${html(event.timestampLabel||`Step ${index+1}`)}</span>${event.kindLabel?`<span dir="auto">${html(event.kindLabel)}</span>`:''}<span dir="ltr">${html(event.eventId)}</span></span></span></button></li>`).join('');
-    const detail=selected?`<article class="timeline-detail" data-detail-event="${attr(selected.eventId)}"><div class="timeline-detail-head"><div><h3 dir="auto">${html(selected.label)}</h3><div class="timeline-event-meta"><span dir="auto">${html(selected.timestampLabel)}</span>${selected.kindLabel?`<span dir="auto">${html(selected.kindLabel)}</span>`:''}<span dir="ltr">${html(selected.eventId)}</span></div></div>${projected.selection.detailOpen?'<button type="button" data-close-detail aria-label="Close event details">Close</button>':''}</div><p class="timeline-summary" dir="auto">${html(selected.summary||'No provider-supplied summary.')}</p>${projected.selection.detailOpen?detailRows(selected):'<button type="button" data-open-detail>Open event details</button>'}</article>`:'<div class="timeline-placeholder"><div><h3 dir="auto">No event selected</h3><p dir="auto">Select an event supplied by the domain provider.</p></div></div>';
-    return `<div class="timeline-controls"><button type="button" data-step="-1" ${projected.timeline.index<=0?'disabled':''} aria-label="Previous event">Previous</button><input type="range" min="0" max="1000" step="1" value="${Math.round(projected.timeline.progress*1000)}" data-scrub aria-label="Timeline position"><button type="button" data-step="1" ${projected.timeline.index>=projected.timeline.total-1?'disabled':''} aria-label="Next event">Next</button><span class="timeline-progress" aria-live="polite">${projected.timeline.index+1} / ${projected.timeline.total}</span></div><div class="timeline-main"><ol class="timeline-list" aria-label="Ordered timeline events">${events}</ol>${detail}</div>`;
+    const events=projected.events.map((event,index)=>`<li><button type="button" class="timeline-event" data-event-id="${attr(event.eventId)}" aria-current="${event.eventId===projected.selection.selectedEventId}" tabindex="${event.eventId===projected.selection.focusedEventId?'0':'-1'}"><span class="timeline-dot" aria-hidden="true"></span><span class="timeline-event-copy"><span class="timeline-event-label" dir="auto">${html(event.label)}</span><span class="timeline-event-meta"><span dir="auto">${html(event.timestampLabel||`${T('خطوة','Step')} ${index+1}`)}</span>${event.kindLabel?`<span dir="auto">${html(event.kindLabel)}</span>`:''}<span dir="ltr">${html(event.eventId)}</span></span></span></button></li>`).join('');
+    const detail=selected?`<article class="timeline-detail" data-detail-event="${attr(selected.eventId)}"><div class="timeline-detail-head"><div><h3 dir="auto">${html(selected.label)}</h3><div class="timeline-event-meta"><span dir="auto">${html(selected.timestampLabel)}</span>${selected.kindLabel?`<span dir="auto">${html(selected.kindLabel)}</span>`:''}<span dir="ltr">${html(selected.eventId)}</span></div></div>${projected.selection.detailOpen?`<button type="button" data-close-detail aria-label="${T('إغلاق تفاصيل الحدث','Close event details')}">${T('إغلاق','Close')}</button>`:''}</div><p class="timeline-summary" dir="auto">${html(selected.summary||T('لا ملخص يوفره المزوّد.','No provider-supplied summary.'))}</p>${projected.selection.detailOpen?detailRows(selected):`<button type="button" data-open-detail>${T('فتح تفاصيل الحدث','Open event details')}</button>`}</article>`:`<div class="timeline-placeholder"><div><h3 dir="auto">${T('لم يُحدَّد حدث','No event selected')}</h3><p dir="auto">${T('حدّد حدثًا يوفره مزود المجال.','Select an event supplied by the domain provider.')}</p></div></div>`;
+    return `<div class="timeline-controls"><button type="button" data-step="-1" ${projected.timeline.index<=0?'disabled':''} aria-label="${T('الحدث السابق','Previous event')}">${T('السابق','Previous')}</button><input type="range" min="0" max="1000" step="1" value="${Math.round(projected.timeline.progress*1000)}" data-scrub aria-label="${T('موضع الخط الزمني','Timeline position')}"><button type="button" data-step="1" ${projected.timeline.index>=projected.timeline.total-1?'disabled':''} aria-label="${T('الحدث التالي','Next event')}">${T('التالي','Next')}</button><span class="timeline-progress" aria-live="polite">${projected.timeline.index+1} / ${projected.timeline.total}</span></div><div class="timeline-main"><ol class="timeline-list" aria-label="${T('أحداث الخط الزمني المرتّبة','Ordered timeline events')}">${events}</ol>${detail}</div>`;
   }
   _focusSelected(){
     const id=this.owner.project().selection.focusedEventId;if(!id)return;

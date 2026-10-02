@@ -1,0 +1,201 @@
+{
+  "schema": "W02-VISUALIZE_FALSIFICATION@1",
+  "classification": "CANDIDATE_ONLY_FALSIFICATION__NOT_OWNER_ACCEPTANCE",
+  "command": "node writer-output/W02-VISUALIZE/falsify.mjs",
+  "generatedAt": "2026-10-02T17:53:50.657Z",
+  "adapterFound": true,
+  "pageErrors": [],
+  "canonicalStoreHashProof": {
+    "algorithm": "sha256 over the exact JSON payload of {relations.records, relations.version, relations.readOnly, canonicalProjection, canonicalInvariantSnapshot}",
+    "before": {
+      "sha256": "db2be05e491c0093b1ccf37e8182b46fd36f18f8031e3a07bbf23582a19d7903",
+      "payloadBytes": 5429
+    },
+    "after": {
+      "sha256": "db2be05e491c0093b1ccf37e8182b46fd36f18f8031e3a07bbf23582a19d7903",
+      "payloadBytes": 5429
+    },
+    "identical": true,
+    "representationProjectionChanged": true
+  },
+  "canvasOperations": [
+    {
+      "ok": true,
+      "status": "GEOMETRY_MOVED",
+      "canonicalMutation": false,
+      "canonicalTruthUnchanged": true
+    },
+    {
+      "ok": true,
+      "status": "CANVAS_REPRESENTATION_DUPLICATED",
+      "canonicalMutation": false,
+      "canonicalTruthUnchanged": true
+    },
+    {
+      "ok": true,
+      "status": "CANVAS_ONLY_LINK_CREATED",
+      "canonicalMutation": false,
+      "canonicalTruthUnchanged": true
+    },
+    {
+      "ok": true,
+      "status": "REPRESENTATION_CAMERA_ONLY",
+      "canonicalMutation": false,
+      "canonicalTruthUnchanged": null
+    },
+    {
+      "ok": true,
+      "status": "REPRESENTATION_CAMERA_ONLY",
+      "canonicalMutation": false,
+      "canonicalTruthUnchanged": null
+    },
+    {
+      "ok": true,
+      "status": "REPRESENTATION_CAMERA_ONLY",
+      "canonicalMutation": false,
+      "canonicalTruthUnchanged": null
+    },
+    {
+      "ok": true,
+      "status": "CANVAS_PRESENTATION_UNDONE",
+      "canonicalMutation": false,
+      "canonicalTruthUnchanged": true
+    },
+    {
+      "ok": true,
+      "status": "CANVAS_PRESENTATION_REDONE",
+      "canonicalMutation": false,
+      "canonicalTruthUnchanged": true
+    }
+  ],
+  "checks": [
+    {
+      "id": "N3.app-context-never-claims-canonical",
+      "status": "PASS",
+      "detail": {
+        "status": "LOCAL_ACCEPTANCE_SOURCE_PROJECTION",
+        "authority": "LOCAL_ACCEPTANCE_PROJECTION_ONLY",
+        "canonical": false
+      }
+    },
+    {
+      "id": "N3.link-refused-without-canonical-provider",
+      "status": "PASS",
+      "detail": "VISUALIZE_LOCAL_ACCEPTANCE_PROVIDER_READ_ONLY"
+    },
+    {
+      "id": "N3.edit-refused-without-canonical-provider",
+      "status": "PASS",
+      "detail": "VISUALIZE_LOCAL_ACCEPTANCE_PROVIDER_READ_ONLY"
+    },
+    {
+      "id": "N3.no-provider-truthfully-unavailable",
+      "status": "PASS",
+      "detail": "VISUALIZE_CANONICAL_DATA_PROVIDER_UNAVAILABLE"
+    },
+    {
+      "id": "N3.no-provider-link-refused",
+      "status": "PASS",
+      "detail": "VISUALIZE_CANONICAL_DATA_PROVIDER_UNAVAILABLE"
+    },
+    {
+      "id": "N3.no-provider-edit-refused",
+      "status": "PASS",
+      "detail": "VISUALIZE_CANONICAL_DATA_PROVIDER_UNAVAILABLE"
+    },
+    {
+      "id": "N1.author-only-connect-refused",
+      "status": "PASS",
+      "detail": {
+        "ok": false,
+        "id": "spatial.connect",
+        "owner": "RelationInteractionOwner",
+        "commandOwner": "RelationInteractionOwner",
+        "enabled": false,
+        "reason": "Selection cardinality must be between 2 and 2",
+        "code": "UNAVAILABLE",
+        "availabilityOwner": "RelationInteractionOwner"
+      }
+    },
+    {
+      "id": "N1.unknown-route-refused",
+      "status": "PASS",
+      "detail": {
+        "ok": false,
+        "id": "visualize.notARealRoute",
+        "owner": null,
+        "commandOwner": null,
+        "availabilityOwner": "SemanticCommandBus",
+        "enabled": false,
+        "reason": "Unknown command",
+        "code": "UNKNOWN_COMMAND"
+      }
+    },
+    {
+      "id": "N2.invalid-move-refused",
+      "status": "PASS",
+      "detail": "VISUALIZE_SELECTION_OUTSIDE_VIEW"
+    },
+    {
+      "id": "N2.invalid-viewport-refused",
+      "status": "PASS",
+      "detail": "VISUALIZE_VIEWPORT_BOUNDS_REQUIRED"
+    },
+    {
+      "id": "N2.invalid-view-refused",
+      "status": "PASS",
+      "detail": "VISUALIZE_VIEW_MODE_REQUIRED"
+    },
+    {
+      "id": "N2.projection-unchanged-by-invalid-input",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "id": "LANE.canonical-store-unchanged-by-canvas-ops",
+      "status": "PASS",
+      "detail": {
+        "before": "{\"relationsRecords\":[{\"id\":\"b6-rel-d03-0001-0004\",\"source\":\"b6-rep-ku-d03-0001\",\"target\":\"b6-rep-ku-d03-0004\",\"type\":\"SOURCE_DECLARED_RELATED\",\"kind\":\"representation\",\"canonical\":false},{\"id\":\"b6-rel-d03-0004-0001\",\"source\":\"b6-rep-ku-d03-0004\",\"target\":\"b6-rep-ku-d03-0001\",\"type\":\"SOURCE_DECLARED_RELATED\",\"kind\":\"representation\",\"canonical\":false}],\"relationsVersion\":1,\"relationsReadOnly\":true,\"c",
+        "after": "{\"relationsRecords\":[{\"id\":\"b6-rel-d03-0001-0004\",\"source\":\"b6-rep-ku-d03-0001\",\"target\":\"b6-rep-ku-d03-0004\",\"type\":\"SOURCE_DECLARED_RELATED\",\"kind\":\"representation\",\"canonical\":false},{\"id\":\"b6-rel-d03-0004-0001\",\"source\":\"b6-rep-ku-d03-0004\",\"target\":\"b6-rep-ku-d03-0001\",\"type\":\"SOURCE_DECLARED_RELATED\",\"kind\":\"representation\",\"canonical\":false}],\"relationsVersion\":1,\"relationsReadOnly\":true,\"c"
+      }
+    },
+    {
+      "id": "LANE.representation-store-did-change",
+      "status": "PASS",
+      "detail": "canvas ops must be visible locally"
+    },
+    {
+      "id": "LANE.all-canvas-ops-non-canonical",
+      "status": "PASS",
+      "detail": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "LANE.adapter-reports-canonical-truth-unchanged",
+      "status": "PASS",
+      "detail": [
+        true,
+        true,
+        true,
+        null,
+        null,
+        null,
+        true,
+        true
+      ]
+    }
+  ],
+  "summary": {
+    "total": 16,
+    "pass": 16,
+    "fail": 0
+  }
+}

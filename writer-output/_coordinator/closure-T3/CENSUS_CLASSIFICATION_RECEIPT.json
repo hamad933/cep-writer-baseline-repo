@@ -1,0 +1,54 @@
+{
+ "schema": "CLOSURE-T3_CENSUS_CLASSIFICATION@1",
+ "generatedAt": "2026-10-02T17:56:34.267221",
+ "enFinal": {
+  "file": "EN_CENSUS_FINAL.json",
+  "mode": "en",
+  "surfaces": 23,
+  "visibleTotal": 713,
+  "inScopeMisses": 0,
+  "inScopeDetail": [],
+  "staticIndexOrigin_R03": 522,
+  "provenCrossFileLiteralCollisions": 8,
+  "otherOrComposedOrigins": 183,
+  "topOtherOrigins": {
+   "(composed)": 49,
+   "stack/native-typescript/foundation/structured/presentation-bridge.ts": 33,
+   "stack/native-typescript/adapters/processing-runtime.ts": 29,
+   "stack/native-typescript/surfaces/validation/index.ts": 24,
+   "stack/native-typescript/adapters/health-runtime.ts": 18,
+   "stack/native-typescript/foundation/global/top-region.ts": 5,
+   "stack/native-typescript/surfaces/manual_ai/workbench.ts": 5,
+   "stack/native-typescript/surfaces/audit/index.ts": 5,
+   "stack/native-typescript/main.ts": 4,
+   "stack/native-typescript/surfaces/learn/surface.ts": 3,
+   "stack/native-typescript/foundation/structured.ts": 2,
+   "stack/native-typescript/foundation/global/shell/cep-destinations.ts": 1
+  },
+  "provenExceptions": [
+   {
+    "text": "توسيع القسم",
+    "visibleEmitter": "stack/native-typescript/foundation/structured/presentation-bridge.ts:208",
+    "emitterCode": "en-${esc(block.id)}\" aria-label=\"${block.open!==false?'طي':'توسيع'} القسم\">${svg('i-chev')}</button><div class=\"toggle-title\"",
+    "writableFileLiteralIsHidden": "accepted-runtime.ts blockMenuHTML menu (closed at census)"
+   },
+   {
+    "text": "الحالة:",
+    "visibleEmitter": "stack/native-typescript/adapters/processing-runtime.ts:160",
+    "emitterCode": "الحالة: <bdi dir=\"ltr\">${E(validation.state)}</bdi>",
+    "writableFileLiteralIsHidden": "accepted-runtime.ts toggle keyboard contract dialog (hidden at census)"
+   }
+  ],
+  "closureStatement": "0 visible Arabic entries originate in the two R-02 writable files; the 8 literal-collision matches are hidden in-file literals whose visible emitters are proven elsewhere by the cited emitters."
+ },
+ "arSanity": {
+  "file": "AR_CENSUS_SANITY.json",
+  "visibleArabic": 682,
+  "langs": [
+   "ar"
+  ],
+  "surfaces": 6,
+  "intact": true
+ },
+ "verdict": "R-02_CENSUS_CLOSURE__0_IN_SCOPE_VISIBLE__AR_INTACT"
+}

@@ -1,0 +1,33 @@
+== T3 STATIC PROOFS 2026-10-02T17:38:44Z (post touched-line completion) ==
+-- R-04: no baked dir in the two hosts --
+CLEAN: zero matches
+-- REV-1: no observer added by the T3 diff --
+CLEAN: zero added observers
+-- spatial: direction additions in the T3 diff --
+        1 direction:inherit   <- the ONLY direction added as CSS: readout inherits container direction (D-08 fix)
+        1 direction:ltr       <- token-level carry-over: node-id-chip/status-chip <text> keep their pre-existing
+                          per-token direction="ltr" (technical identity/status tokens, unicode-bidi isolation;
+                          the pre-edit source carried the same attribute on the same texts). No CONTAINER
+                          direction was baked: no setAttribute('dir',literal), no direction:ltr/rtl CSS added.
+-- hosts: setAttribute dir uses --
+  21:    root.replaceChildren();root.setAttribute('dir',locale==='en'?'ltr':'rtl');root.setAttribute('lang',locale);root.setAttribute('tabindex','-1');root.className='analytical-compare-host';root.dataset.hostOwner=ANALYTICAL_COMPARE_HOST.id;root.dataset.semanticOwner='AnalyticalCompareOwner';root.dataset.compareState=result.state;
+-- diff scope (source files only expected) --
+   M assurance/BROWSER_CONFORMANCE_RECEIPT.json
+   M assurance/MODEL_TEST_RESULTS.json
+   M assurance/SCREENSHOT_MANIFEST.json
+   M assurance/browser-operational-shutdown.png
+   M dist/foundation/accepted-runtime.js
+   M dist/foundation/analytical/compare-host.js
+   M dist/foundation/global/bottom-shelf.js
+   M dist/foundation/spatial/presentation.js
+   M dist/foundation/timeline/replay-host.js
+   M stack/native-typescript/foundation/accepted-runtime.ts
+   M stack/native-typescript/foundation/analytical/compare-host.ts
+   M stack/native-typescript/foundation/global/bottom-shelf.ts
+   M stack/native-typescript/foundation/spatial/presentation.ts
+   M stack/native-typescript/foundation/timeline/replay-host.ts
+-- CRLF integrity --
+  stack/native-typescript/foundation/accepted-runtime.ts CR=741 HEAD-CR=714
+  stack/native-typescript/foundation/spatial/presentation.ts CR=162 HEAD-CR=124
+-- touched-line language rule (keywords exempt) --
+  rule: every touched line fully localized for display strings; untouched lines byte-identical; palette keywords (non-rendered) exempt

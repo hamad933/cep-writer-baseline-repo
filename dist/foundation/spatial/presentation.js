@@ -43,12 +43,44 @@ const STYLE=`
 [data-spatial-presentation-owner="SpatialPresentationOwner"] .node-tag rect{fill:color-mix(in srgb,var(--accent) 10%,var(--bg));stroke:color-mix(in srgb,var(--accent) 35%,var(--line2));stroke-width:.7}
 [data-spatial-presentation-owner="SpatialPresentationOwner"] .node-tag text{fill:var(--text3)}
 [data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-readout{backdrop-filter:blur(8px)}
+/* closure R-05/D-08: logical placement + container direction (removes baked left:14px/direction:ltr from foundation/extensions.css; 0-4-0 specificity outranks .foundation-stage/.ent-canvas/[dir] overrides). */
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-canvas ~ .spatial-readout[data-spatial-readout]{left:auto;right:auto;inset-inline-start:14px;inset-inline-end:auto;direction:inherit}
+/* closure R-05/F-SH1-02: labels capture their full bbox (glyph gaps included); cross-edge interception is rescued by the host dblclick/pointerdown capture in mountSpatialPresentation. */
+[data-spatial-presentation-owner="SpatialPresentationOwner"] .relation-label{pointer-events:bounding-box}
 @media (prefers-reduced-motion:reduce){[data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-node-card .node-surface,[data-spatial-presentation-owner="SpatialPresentationOwner"] .spatial-relation .relation-line{transition:none}}
 `;
 
 export function mountSpatialPresentation(host){
   host.dataset.spatialPresentationOwner=SPATIAL_PRESENTATION_OWNER_ID;
   host.dataset.spatialPresentationContract=SPATIAL_PRESENTATION_CONTRACT.version;
+  /* closure R-05/F-SH1-02: a later edge's 18px hit-target can paint over an earlier label (paint order cannot be fixed from inside one edge group). Capture-phase pointerdown/dblclick rescue: when the topmost target is an edge's hit area but the pointer sits inside a different relation label's bbox, the event is re-dispatched on that label so the label route wins (dblclick -> relation.edit composer). Guarded by a dataset flag; event listener only, no observer. */
+  if(host.dataset.spatialLabelRescue!=='bound'){
+    host.dataset.spatialLabelRescue='bound';
+    const labelAt=(x,y,exceptGroup)=>{
+      for(const label of host.querySelectorAll('[data-relation-label]')){
+        if(label.closest('[data-edge]')===exceptGroup)continue;
+        const view=label.ownerDocument.defaultView;
+        const style=view?.getComputedStyle?.(label);
+        if(style&&(style.visibility==='hidden'||style.display==='none'))continue;
+        const rect=label.getBoundingClientRect();
+        if(rect.width>0&&rect.height>0&&x>=rect.left&&x<=rect.right&&y>=rect.top&&y<=rect.bottom)return label;
+      }
+      return null;
+    };
+    const rescue=(event,kind)=>{
+      const target=event.target;
+      if(!target||typeof target.closest!=='function')return;
+      if(target.closest('[data-relation-label]'))return;
+      const group=target.closest('[data-edge]');
+      if(!group)return;
+      const label=labelAt(event.clientX,event.clientY,group);
+      if(!label)return;
+      event.stopPropagation();event.preventDefault();
+      label.dispatchEvent(new MouseEvent(kind,{bubbles:true,composed:true,cancelable:true,clientX:event.clientX,clientY:event.clientY,button:event.button||0,buttons:event.buttons||0,detail:event.detail||1}));
+    };
+    host.addEventListener('pointerdown',event=>{if(event.button===0)rescue(event,'pointerdown')},true);
+    host.addEventListener('dblclick',event=>rescue(event,'dblclick'),true);
+  }
   if(!host.querySelector('style[data-spatial-presentation-style]')){
     const style=document.createElement('style');
     style.dataset.spatialPresentationStyle=SPATIAL_PRESENTATION_OWNER_ID;
@@ -60,7 +92,7 @@ export function mountSpatialPresentation(host){
 
 export function spatialShellMarkup(instanceId){
   const id=token(instanceId);
-  return `<svg class="spatial-canvas" data-spatial-instance="${id}" tabindex="0" role="group" aria-label="Spatial workspace" aria-describedby="${id}-spatial-help" aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown Shift+ArrowLeft Shift+ArrowRight Shift+ArrowUp Shift+ArrowDown Alt+ArrowLeft Alt+ArrowRight Alt+ArrowUp Alt+ArrowDown Control+ArrowLeft Control+ArrowRight Control+ArrowUp Control+ArrowDown Shift+F10 F2 Shift+R Escape" xmlns="http://www.w3.org/2000/svg"></svg><p id="${id}-spatial-help" class="spatial-accessible-help" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0">Arrow keys move spatial focus. Shift extends selection. Alt pans. Control or Command moves selected objects. F2 edits the focused relation. Shift R reverses an editable relation. Shift F10 opens context actions. Escape cancels the active spatial gesture or clears selection.</p><div class="spatial-readout" aria-live="polite" aria-atomic="true"></div><div class="spatial-accessible-nav" role="listbox" aria-label="Spatial object navigator" aria-multiselectable="true" tabindex="0" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0"></div><svg class="minimap" aria-label="Map overview" role="img"></svg>`;
+  return `<svg class="spatial-canvas" data-spatial-instance="${id}" tabindex="0" role="group" aria-label="Spatial workspace" aria-describedby="${id}-spatial-help" aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown Shift+ArrowLeft Shift+ArrowRight Shift+ArrowUp Shift+ArrowDown Alt+ArrowLeft Alt+ArrowRight Alt+ArrowUp Alt+ArrowDown Control+ArrowLeft Control+ArrowRight Control+ArrowUp Control+ArrowDown Shift+F10 F2 Shift+R Escape" xmlns="http://www.w3.org/2000/svg"></svg><p id="${id}-spatial-help" class="spatial-accessible-help" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0">Arrow keys move spatial focus. Shift extends selection. Alt pans. Control or Command moves selected objects. F2 edits the focused relation. Shift R reverses an editable relation. Shift F10 opens context actions. Escape cancels the active spatial gesture or clears selection.</p><div class="spatial-readout" data-spatial-readout aria-live="polite" aria-atomic="true"></div><div class="spatial-accessible-nav" role="listbox" aria-label="Spatial object navigator" aria-multiselectable="true" tabindex="0" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0"></div><svg class="minimap" aria-label="Map overview" role="img"></svg>`;
 }
 
 export function renderSpatialRelation({edge,source,target,selected=false,tabbable=false,markerId}){
@@ -88,22 +120,28 @@ export function renderSpatialNode({node,selected=false,tabbable=false}){
   const strokeColor=selected?'var(--accent)':isDuplicate?'color-mix(in srgb,var(--accent) 75%,var(--line2))':'var(--line2)';
   const strokeDash=isDuplicate?'stroke-dasharray="5 3"':'';
   const kind=String(node.kind||node.type||(/^KU[-_]/i.test(String(node.canonicalRef?.objectId||node.id||''))?'ku':'work-item')),kindToken=kind.toLowerCase().replace(/[^a-z0-9]+/g,'-');
-  const idChip=String(node.idChip||node.canonicalRef?.objectId||node.id||'');
+  const idChipFull=String(node.idChip||node.canonicalRef?.objectId||node.id||'');
+  /* closure R-05/D-06: static single-line ellipsis in the 96px id/title region (same budget as the visualize fitSpatialLabels interim consumer fix) + full-value <title> tooltip. */
+  const idChip=idChipFull.length>19?`${idChipFull.slice(0,18)}…`:idChipFull;
+  const titleFull=String(node.label||'');
+  const titleShort=titleFull.length>14?`${titleFull.slice(0,13)}…`:titleFull;
   const subtitle=String(node.subtitle||node.meta||'');
   const shortStatus=String(node.status||''),showStatusChip=shortStatus&&shortStatus.length<=22;
   const secondary=subtitle||(!showStatusChip?shortStatus:'');
+  /* closure R-05/D-04: the status chip never shares the id baseline (y=21) any more. It owns the second baseline row (y=46) when that row is free; when a subtitle already occupies it, the chip is dropped from the card (status remains carried in the card aria-label) so id/status/subtitle can never collide. */
+  const statusOwnsSecondRow=showStatusChip&&!secondary;
   const progress=node.progress&&typeof node.progress==='object'&&Number.isFinite(node.progress.value)?node.progress:null;
   const tags=Array.isArray(node.tags)?node.tags.filter(tag=>String(tag||'').trim()).slice(0,2):[];
   const glyph=(String(node.iconKey||'').replace(/^i-/,'')[0]||kindToken[0]||'n').toUpperCase();
   const iconTile=`<g class="node-icon-tile" data-kind="${esc(kindToken)}"><rect x="9" y="8" width="18" height="18" rx="5"/><text x="18" y="21" text-anchor="middle" font-size="9" font-weight="750">${esc(glyph)}</text></g>`;
-  const idChipText=`<text class="node-id-chip" x="31" y="21" font-size="8" font-family="var(--mono)" direction="ltr">${esc(idChip)}</text>`;
-  const statusChip=showStatusChip?`<g class="node-status-chip" data-status="${esc(shortStatus)}"><circle class="node-status-dot" cx="125" cy="17.5" r="2.5" fill="${statusFill}"/><text x="119" y="21" text-anchor="end" font-size="7.5" fill="${statusFill}" direction="ltr">${esc(shortStatus)}</text></g>`:'';
+  const idChipText=`<text class="node-id-chip" x="31" y="21" font-size="8" font-family="var(--mono)" direction="ltr"${idChip!==idChipFull?`><title>${esc(idChipFull)}</title>`:'>'}${esc(idChip)}</text>`;
+  const statusChip=statusOwnsSecondRow?`<g class="node-status-chip" data-status="${esc(shortStatus)}"><circle class="node-status-dot" cx="34.5" cy="42.5" r="2.5" fill="${statusFill}"/><text x="40" y="46" text-anchor="start" font-size="7.5" fill="${statusFill}" direction="ltr">${esc(shortStatus)}</text></g>`:'';
   const secondaryLine=secondary?`<text class="node-secondary-line" x="${isDuplicate?86:31}" y="46" font-size="7.5" fill="${statusFill}" direction="ltr">${esc(secondary)}</text>`:'';
   const progressMeter=progress&&!isDuplicate?`<g class="node-progress"><rect class="node-progress-track" x="31" y="50" width="70" height="4" rx="2"/><rect class="node-progress-fill" x="31" y="50" width="${Math.max(0,Math.min(70,70*(progress.value/(progress.max||1))))}" height="4" rx="2"/><text class="node-progress-text" x="119" y="55" text-anchor="end" font-size="7" fill="var(--text3)" direction="ltr">${esc(node.progressText||`${progress.value}/${progress.max||100}`)}</text></g>`:'';
   const tagRow=!progress&&!isDuplicate&&tags.length?`<g class="node-tags">${tags.map((tag,index)=>`<g class="node-tag"><rect x="${31+index*46}" y="50" width="42" height="10" rx="3"/><text x="${52+index*46}" y="57.5" text-anchor="middle" font-size="6.5" fill="var(--text3)" direction="ltr">${esc(String(tag).slice(0,9))}</text></g>`).join('')}</g>`:'';
   const duplicateBadge=isDuplicate?`<rect x="12" y="44" width="70" height="13" rx="3" fill="color-mix(in srgb,var(--accent) 15%,var(--bg2))" stroke="var(--accent)" stroke-width="0.8"/><text class="duplicate-badge" x="16" y="53" fill="var(--accent)" font-size="8.5" font-weight="700" font-family="var(--mono)" direction="ltr">[DUPLICATE]</text>`:'';
   const ariaLabel=isDuplicate?`${node.label} ${status} [Duplicate of ${node.presentationState?.duplicateOf||'source'}]`:`${node.label} ${status}`;
-  return `<g class="spatial-node-card ${isDuplicate?'spatial-node-duplicate':''}" data-node="${esc(node.id)}" data-node-kind="${esc(kindToken)}" data-duplicate="${isDuplicate}" transform="translate(${node.x},${node.y})" tabindex="${tabbable?'0':'-1'}" role="button" aria-pressed="${selected}" aria-label="${esc(ariaLabel)}"><rect class="node-surface" width="132" height="62" rx="10" fill="var(--bg2)" stroke="${strokeColor}" stroke-width="${selected?3:(isDuplicate?1.8:1)}" ${strokeDash}/>${iconTile}${idChipText}${statusChip}<text class="node-title" x="31" y="33" fill="var(--text)" font-size="10.5" font-weight="600" direction="ltr">${esc(node.label)}</text>${secondaryLine}${progressMeter}${tagRow}${duplicateBadge}</g>`;
+  return `<g class="spatial-node-card ${isDuplicate?'spatial-node-duplicate':''}" data-node="${esc(node.id)}" data-node-kind="${esc(kindToken)}" data-duplicate="${isDuplicate}" transform="translate(${node.x},${node.y})" tabindex="${tabbable?'0':'-1'}" role="button" aria-pressed="${selected}" aria-label="${esc(ariaLabel)}">${titleShort!==titleFull?`<title>${esc(titleFull)}</title>`:''}<rect class="node-surface" width="132" height="62" rx="10" fill="var(--bg2)" stroke="${strokeColor}" stroke-width="${selected?3:(isDuplicate?1.8:1)}" ${strokeDash}/>${iconTile}${idChipText}${statusChip}<text class="node-title" x="31" y="33" fill="var(--text)" font-size="10.5" font-weight="600" direction="ltr">${esc(titleShort)}</text>${secondaryLine}${progressMeter}${tagRow}${duplicateBadge}</g>`;
 }
 
 export function renderMultiSelectionGroupBoundary({nodes,selectedIds}){

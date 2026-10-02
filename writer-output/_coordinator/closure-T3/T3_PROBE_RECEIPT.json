@@ -1,0 +1,171 @@
+{
+  "schema": "CLOSURE-T3_PROBES@1",
+  "classification": "CANDIDATE_ONLY__NOT_OWNER_ACCEPTANCE",
+  "command": "node writer-output/_coordinator/closure-T3/t3-probes.mjs",
+  "generatedAt": "2026-10-02T17:55:03.785Z",
+  "rows": [
+    {
+      "id": "D-04.unit.status-chip-owns-second-baseline",
+      "status": "PASS",
+      "detail": {
+        "idChipY": 21,
+        "statusChipY": 46,
+        "y21Anchors": 2
+      }
+    },
+    {
+      "id": "D-04.unit.id-chip-ellipsized-with-full-tooltip",
+      "status": "PASS",
+      "detail": {
+        "glyphs": 19,
+        "tooltip": true
+      }
+    },
+    {
+      "id": "D-06.unit.node-title-ellipsis-plus-full-value-tooltip",
+      "status": "PASS",
+      "detail": {
+        "truncatedGlyphs": 14,
+        "tooltip": true,
+        "shortIntact": true
+      }
+    },
+    {
+      "id": "D-04.unit.subtitle-case.chip-suppressed-status-carried-in-aria",
+      "status": "PASS",
+      "detail": {
+        "chip": false,
+        "ariaCarriesStatus": true,
+        "subtitleRendered": true
+      }
+    },
+    {
+      "id": "D-08.unit.readout-anchor-and-no-baked-direction-in-spatial-diff",
+      "status": "PASS",
+      "detail": {
+        "bakedDirectionAdds": 0,
+        "inheritAdded": true,
+        "readoutAnchor": true
+      }
+    },
+    {
+      "id": "R-02.HS-REL-1-03.live-locale-flip-updates-mounted-shelf-without-reload",
+      "status": "PASS",
+      "detail": {
+        "initial": {
+          "lang": "en",
+          "dir": "ltr",
+          "summary": "Closed — open it for history, comparison, or restore",
+          "title": "History & compare",
+          "paneLabel": "Hide structure",
+          "paneToggle": "Close structure pane"
+        },
+        "afterA": {
+          "lang": "ar",
+          "dir": "rtl",
+          "summary": "مغلق — افتحه للسجل أو المقارنة أو الاسترداد",
+          "title": "السجل والمقارنة",
+          "paneLabel": "إخفاء البنية",
+          "paneToggle": "إغلاق لوحة البنية"
+        },
+        "afterB": {
+          "lang": "en",
+          "dir": "ltr",
+          "summary": "Closed — open it for history, comparison, or restore",
+          "title": "History & compare",
+          "paneLabel": "Hide structure",
+          "paneToggle": "Close structure pane"
+        },
+        "reload": false,
+        "panelSelfClosedAfterLocaleChange": true
+      }
+    },
+    {
+      "id": "R-05.D-08.readout-follows-direction.no-baked-ltr",
+      "status": "PASS",
+      "detail": {
+        "en": {
+          "docDir": "ltr",
+          "direction": "ltr",
+          "inlineStart": "14px",
+          "gapLeft": 14,
+          "gapRight": 738
+        },
+        "ar": {
+          "docDir": "rtl",
+          "direction": "rtl",
+          "inlineStart": "14px",
+          "gapLeft": 738,
+          "gapRight": 14
+        }
+      }
+    },
+    {
+      "id": "R-05.D-06.DOM.node-title-measured-within-card-budget",
+      "status": "PASS",
+      "detail": {
+        "count": 6,
+        "budgetPx": 97,
+        "truncated": 5,
+        "maxPx": 95
+      }
+    },
+    {
+      "id": "R-05.D-04.DOM.status-chips-do-not-overlap-id",
+      "status": "PASS",
+      "detail": {
+        "enterprise": {
+          "chips": 0,
+          "overlaps": []
+        },
+        "visualize": {
+          "chips": 0,
+          "overlaps": []
+        },
+        "labs": {
+          "chips": 0,
+          "overlaps": []
+        },
+        "scenarios": {
+          "chips": 0,
+          "overlaps": []
+        }
+      }
+    },
+    {
+      "id": "R-05.F-SH1-02.real-dblclick-on-covered-label-opens-composer@1024",
+      "status": "PASS",
+      "detail": {
+        "surface": "enterprise",
+        "labelCount": 8,
+        "attempts": [
+          {
+            "text": "PROTECTED_BY",
+            "covered": {
+              "topClass": "relation-hit-target",
+              "isLabel": false
+            },
+            "composerOpen": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "R-05.B-4.trace-structure-row-does-not-feed-spatial-kernel-out-of-root",
+      "status": "PASS",
+      "detail": {
+        "structureRow": "APP-WEB-01",
+        "readoutBefore": "144% · 0 selected · 6 objects",
+        "readoutAfter": "144% · 1 selected · 6 objects",
+        "contextAfter": "Select a topology object to inspect it.",
+        "readoutChanged": true,
+        "verdict": "SYNC_ALREADY_PRESENT"
+      }
+    }
+  ],
+  "summary": {
+    "total": 11,
+    "pass": 11,
+    "fail": 0
+  }
+}
