@@ -1,32 +1,215 @@
 {
   "SURFACE": "reviews",
   "OWNER": "W04-REVIEWS",
+  "LANE": "REV-1",
   "REFERENCE": "cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/02_REVIEWS/Cybersecurity Evidence Review Dashboard.png",
   "REFERENCE_CLASSIFICATION": "CURRENT_FINAL_REFERENCE",
-  "CURRENT_CANDIDATE": "working-tree (branch writer/mi-serial, uncommitted)",
-  "FILES_CHANGED": [],
-  "FUNCTIONAL_STATUS": "NOT_STARTED",
-  "STRUCTURAL_STATUS": "NOT_STARTED",
-  "VISUAL_STATUS": "NOT_STARTED",
-  "VISUAL_COMPARISON_LEVELS_COMPLETED": [],
-  "RESPONSIVE_STATUS": "NOT_STARTED",
-  "RTL_LTR_STATUS": "NOT_STARTED",
-  "DEFECTS_FOUND": [],
-  "DEFECT_SEVERITY": "N/A",
-  "ROOT_CAUSE": "UNKNOWN",
-  "FIXES_APPLIED": [],
-  "RECAPTURE_STATUS": "NOT_STARTED",
-  "RECOMPARISON_STATUS": "NOT_STARTED",
-  "REGRESSION_STATUS": "NOT_STARTED",
-  "EVIDENCE": [],
+  "REFERENCE_IDENTITY": {
+    "sha256": "f1b915d50866e5bc69f61c9ac2042fc3cb6e0c3a277a8ad61e98e268e566de70",
+    "dims": "1505x1045"
+  },
+  "CURRENT_CANDIDATE": {
+    "branch": "writer/mi-serial-lane/REV-1",
+    "parentCommit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "parentTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+    "identity": "parent + REV-1 delta (2 files under stack/native-typescript/surfaces/reviews/)",
+    "workingTree": "clean except the two owned source files + writer-output/W04-REVIEWS evidence",
+    "environment": "node v22.16.0 · npm run build:runtime (source->dist) · playwright package-local chromium 151.0.7922.34 · tools/serve.mjs on an ephemeral free port"
+  },
+  "FILES_CHANGED": [
+    "stack/native-typescript/surfaces/reviews/index.ts",
+    "stack/native-typescript/surfaces/reviews/presentation-surface.ts"
+  ],
+  "FUNCTIONAL_STATUS": "CLOSED_WITH_EVIDENCE",
+  "STRUCTURAL_STATUS": "CLOSED_WITH_EVIDENCE",
+  "VISUAL_STATUS": "CANDIDATE_LEVEL_NOT_OWNER_ACCEPTED",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": ["L1", "L2", "L3"],
+  "VISUAL_COMPARISON_LEVELS_NOT_COMPLETED": [
+    "L4 (micro-detail pass against the reference not completed in this lane; no claim of reference fidelity is made)"
+  ],
+  "RESPONSIVE_STATUS": "PASS_1440x1000_AND_1024x900",
+  "RTL_LTR_STATUS": "PASS_WITH_RECORDED_SHARED_CHROME_RESIDUALS",
+  "DEFECTS_FOUND": [
+    {
+      "id": "REV1-D1",
+      "severity": "V3",
+      "title": "RIGHT context lens dead: `fill` used but never imported in reviews/index.ts",
+      "rootCause": "IMPLEMENTATION",
+      "introducedBy": "c362799 (rescue) added fill() call sites + i18n.ts but no import",
+      "evidence": "describeContextProvider(surfaces/reviews/context) -> {ok:false, code:'INVALID_DESCRIPTOR', error:'fill is not defined'}; S14 surface-contract exited 1; browser rendered the generic 'No domain context lens is bound' fallback instead of the Review lens",
+      "fix": "added `fill` to the existing i18n import in index.ts (the app-boot re-export line for REVIEW_STATE_TONE/reviewStateLabel/reviewDecisionLabel is untouched)",
+      "status": "FIXED_AND_VERIFIED"
+    },
+    {
+      "id": "REV1-D2",
+      "severity": "V3",
+      "title": "Issue Decision button could never record a verdict (payload-shape mismatch)",
+      "rootCause": "ARCHITECTURE",
+      "detail": "The governed-input form posts {id, decision:{…}} but the reviews surface registers `reviews.supersede` BEFORE the controller composition, so the surface handler (which forwarded the payload verbatim and expects top-level newDecision) is the one that binds. With no top-level expectedDecisionId the domain compared current(null) !== undefined and reported STALE_EXPECTED_DECISION for every verdict in every state. m0's stricter/mapping handler never bound.",
+      "evidence": "real button click returned 'Decision blocked: STALE_EXPECTED_DECISION' with record unchanged; m0's own availability predicate (which requires a basis reason) never bound",
+      "fix": "supersedeOpts() payload-shape bridge in index.ts; availability and execution now read the SAME normalized payload",
+      "status": "FIXED_AND_VERIFIED"
+    },
+    {
+      "id": "REV1-D3",
+      "severity": "V3",
+      "title": "Reviews surface presentation layer was never mounted (dead code)",
+      "rootCause": "ARCHITECTURE",
+      "detail": "presentation-surface.ts exports installReviewsPresentation and documents 'Called once from composeReviewsSurface', but nothing imported it. Consequence: the shared W04 head rendered EVIDENCE intake vocabulary (All records/Submitted/Returned/Prepared/Admitted) on the Review surface, and the pane/queue chrome plus toolbar command labels stayed English in an Arabic session.",
+      "evidence": "LINEAGE before/after: responsive-1440-ar (04:59) leftText 'All records/Submitted/...' + toolbar 'Continue Review/...'; accept-1440-ar (06:21) leftText 'كل المراجعات/مطلوبة/...' + toolbar 'بدء المراجعة/...'",
+      "fix": "wired installReviewsPresentation({commandBus, applyStyle:false}) from composeReviewsSurface",
+      "status": "FIXED_AND_VERIFIED"
+    },
+    {
+      "id": "REV1-D4",
+      "severity": "V4",
+      "title": "Mounting the presentation layer naively wedges the page under any non-English locale",
+      "rootCause": "SHARED_COMPONENT",
+      "detail": "w04-rescue.w04SetPaneLabel rewrites #leftPane/#rightPane .phead h2 with hardcoded English on every one of its own observer passes; presentation-surface wrote the localized value. Both observers watch childList, so the two overwrote each other forever. Under AR the main thread starved inside ~4s and page `load` never fired (navigation timeout). Under EN both wrote the same string so no loop appeared.",
+      "evidence": "diag under ar: ready='interactive' at 1.5s then evaluate() unresponsive at 3.5s; same page with the two pane-title writes removed: ready='complete' at 1.5s and 3.5s",
+      "fix": "removed the two pane-title writes from projectChrome; those two nodes stay on the shared seam's value and are recorded as a hotspot rather than fought over",
+      "status": "FIXED_AND_RECORDED_AS_HOTSPOT"
+    },
+    {
+      "id": "REV1-D5",
+      "severity": "V4",
+      "title": "REVIEWS_PRESENTATION_CSS measurably degrades the Criterion Findings table",
+      "rootCause": "SURFACE_COMPOSITION",
+      "detail": "A/B on the same live page: with the stylesheet applied the worst `.w04-record-table` cell wrapped to 10 lines and 9/9 cells exceeded 5 lines; with it disabled 5 lines and 0/9. Root: `table.w04-record-table{min-width:0}` plus 34px inline paddings inside a ~342px split.",
+      "evidence": "probe_ab: WITH maxLines=10 cellsOver5=9/9; WITHOUT maxLines=5 cellsOver5=0/9 (1440x1000)",
+      "fix": "withheld the stylesheet (applyStyle:false). The projection ships, the craft CSS does not.",
+      "status": "NOT_SHIPPED__RECORD_ONLY"
+    }
+  ],
+  "DEFECT_SEVERITY": "V3 max (2 x V3 functional/structural closed, 1 x V3 shared-component closed, 1 x V4 shared-recorded, 1 x V4 withheld)",
+  "ROOT_CAUSE": "Two independent ownership gaps inside the Reviews root: (a) missing `fill` import and a payload-shape contract mismatch in index.ts; (b) presentation-surface.ts — the surface's own locale/queue projection — was never wired, and one of its two responsibilities (pane-title writes) collides with the shared W04 seam's ownership.",
+  "FIXES_APPLIED": [
+    "index.ts: import `fill` from ./i18n.js (restores the RIGHT context lens)",
+    "index.ts: supersedeOpts() payload-shape bridge so the governed-input form's {id, decision:{…}} reaches domain.supersede() with a correct CAS; availability and execution share one normalization",
+    "index.ts: call installReviewsPresentation({commandBus, applyStyle:false}) from composeReviewsSurface",
+    "presentation-surface.ts: import from ./i18n.js instead of ./index.js (removes a latent module cycle)",
+    "presentation-surface.ts: gate ensureStyle() behind styleEnabled so the measured-harmful stylesheet can be withheld without forking the module",
+    "presentation-surface.ts: stop writing #leftPane/#rightPane .phead h2 (shared seam owns those nodes; writing them wedges the page)",
+    "presentation-surface.ts: do not consume the locale until the command owner exists (otherwise labels are marked projected before they can be claimed)"
+  ],
+  "RECAPTURE_STATUS": "COMPLETE_6_ACCEPTANCE_CAPTURES",
+  "RECOMPARISON_STATUS": "COMPLETE_L1_L2_L3__L4_DEFERRED",
+  "REGRESSION_STATUS": "PASS",
+  "REGRESSION_DETAIL": "npm run build:runtime PASS · npm test 210/0 · npm test twice byte-identical apart from the date line (N5) · S14 domain-lifecycle + surface-contract, S06 review-decision-family 3/3, CG5 w04-convergence, tests/surfaces/reviews/domain all exit 0 · tools/check-duplicate-mechanics.mjs exit 0 (N4) · tools/w04-browser-flows.mjs reviews.flow-and-verdict-recording PASS 5/5 · falsification.mjs 104/104",
+  "EVIDENCE": [
+    {
+      "name": "accept-1440-ar",
+      "viewport": "1440x1000",
+      "direction": "rtl",
+      "lang": "ar",
+      "path": "writer-output/W04-REVIEWS/captures/accept-1440-ar-20261002T062110Z-fe1bb98d.png",
+      "sha256": "a29c0673f52c78e0a13e52f35a9708248cb9acc545772c78a63d919029278cdd",
+      "bytes": 230154,
+      "dims": [1440, 1000],
+      "timestamp": "2026-10-02T06:21:13.929Z"
+    },
+    {
+      "name": "accept-1440-en",
+      "viewport": "1440x1000",
+      "direction": "ltr",
+      "lang": "en",
+      "path": "writer-output/W04-REVIEWS/captures/accept-1440-en-20261002T062114Z-fe1bb98d.png",
+      "sha256": "31666d2ae7d66962636baa35256a859c21e2686d5d76def3e04badf823575e24",
+      "bytes": 263177,
+      "dims": [1440, 1000],
+      "timestamp": "2026-10-02T06:21:17.453Z"
+    },
+    {
+      "name": "accept-1024-ar",
+      "viewport": "1024x900",
+      "direction": "rtl",
+      "lang": "ar",
+      "path": "writer-output/W04-REVIEWS/captures/accept-1024-ar-20261002T062118Z-fe1bb98d.png",
+      "sha256": "1bcf2c190d86b38c81b0e48a8c64ef7c4ef9e6325e9bef00d8615f46f7ab63e0",
+      "bytes": 147850,
+      "dims": [1024, 900],
+      "timestamp": "2026-10-02T06:21:21.903Z"
+    },
+    {
+      "name": "accept-1024-en",
+      "viewport": "1024x900",
+      "direction": "ltr",
+      "lang": "en",
+      "path": "writer-output/W04-REVIEWS/captures/accept-1024-en-20261002T062123Z-fe1bb98d.png",
+      "sha256": "0f68b556ebe28bbbea830ad84d82a43c8a0428f338d6d706d03bbae76ec4bcfe",
+      "bytes": 165499,
+      "dims": [1024, 900],
+      "timestamp": "2026-10-02T06:21:27.123Z"
+    },
+    {
+      "name": "accept-verdict-1440-en",
+      "viewport": "1440x1000",
+      "direction": "ltr",
+      "lang": "en",
+      "state": "closed (real supersession)",
+      "path": "writer-output/W04-REVIEWS/captures/accept-verdict-1440-en-20261002T062128Z-fe1bb98d.png",
+      "sha256": "a71d77f4ab78dbee4dcc5ec68a00d5ccf50b3b90a0ce802d2e5ec2a19dbfc87d",
+      "bytes": 267159,
+      "dims": [1440, 1000],
+      "timestamp": "2026-10-02T06:21:32.243Z"
+    },
+    {
+      "name": "accept-empty-1024-ar",
+      "viewport": "1024x900",
+      "direction": "rtl",
+      "lang": "ar",
+      "state": "empty",
+      "path": "writer-output/W04-REVIEWS/captures/accept-empty-1024-ar-20261002T062133Z-fe1bb98d.png",
+      "sha256": "aac779185b7e5a00e54a9023060c0db4a5f1493c9f8b4e8f34c0d854eb022c93",
+      "bytes": 147482,
+      "dims": [1024, 900],
+      "timestamp": "2026-10-02T06:21:36.750Z"
+    },
+    {
+      "name": "pre-fix-right-lens (BEFORE, defect evidence)",
+      "path": "writer-output/W04-REVIEWS/captures/pre-fix-right-lens-20261002T045801Z-fe1bb98d.png",
+      "sha256": "91f00b9fa93c7225…",
+      "note": "RIGHT pane shows the generic 'No domain context lens is bound' fallback — the D1 defect"
+    },
+    {
+      "name": "postfix-right-lens (AFTER, fix evidence)",
+      "path": "writer-output/W04-REVIEWS/captures/postfix-right-lens-20261002T045909Z-fe1bb98d.png",
+      "sha256": "dfc06fc72f1c1111…",
+      "note": "RIGHT pane renders the full Review scope / authority / prior Decision lens in Arabic"
+    },
+    {
+      "name": "reviews.flow-and-verdict-recording browser receipt",
+      "path": "writer-output/W04/BROWSER_RECEIPT.json",
+      "screenshots": [
+        "writer-output/W04/evidence/reviews-flow-and-verdict-recording-empty-state-20261002T061641Z-c82cec63.png",
+        "writer-output/W04/evidence/reviews-flow-and-verdict-recording-ready-for-decision-20261002T061641Z-c82cec63.png",
+        "writer-output/W04/evidence/reviews-flow-and-verdict-recording-verdict-recorded-20261002T061642Z-c82cec63.png"
+      ],
+      "status": "PASS 5/5, 0 failed assertions"
+    }
+  ],
   "LINEAGE": {
     "reference_sha256": "f1b915d50866e5bc69f61c9ac2042fc3cb6e0c3a277a8ad61e98e268e566de70",
     "reference_dims": "1505x1045",
-    "candidate_commit": "e5a77b6 (branch writer/mi-serial, working tree dirty)",
-    "environment": "local build via tools/writer-serial.sh npm run build:runtime"
+    "candidate_parent_commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "candidate_parent_tree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+    "changed_file_sha256": {
+      "stack/native-typescript/surfaces/reviews/index.ts": "fe8d1391a4c11e96cafcde00abc145766597fc9bd414f22377745df7c06af673",
+      "stack/native-typescript/surfaces/reviews/presentation-surface.ts": "536b9be99e259c15903ec7e5db8536c46c3ce3c06c095bc0163b0835e44b583b"
+    },
+    "salvage_preserved": [
+      "writer-output/W04-REVIEWS/LINEAGE.json — all prior entries retained and appended (23 entries; baseline-rtl entry untouched)",
+      "writer-output/W04-REVIEWS/baseline-rtl.receipt.json",
+      "writer-output/W04-REVIEWS/captures/baseline-rtl-20260930T182651Z-e5a77b60.png",
+      "app-boot i18n export repair lineage: index.ts still re-exports REVIEW_STATE_TONE/reviewStateLabel/reviewDecisionLabel from ./i18n.js (line 4 unchanged)"
+    ],
+    "environment": "local dist via tools/serve.mjs on an ephemeral free port; playwright package-local chromium 151.0.7922.34; node v22.16.0"
   },
   "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
-  "BLOCKERS": [],
-  "STAGE": "READING_REFERENCE",
-  "UPDATED_AT": "2026-09-30T00:00:00Z"
+  "BLOCKERS": [
+    "L4 micro-detail reference comparison not completed in this lane — VISUAL_STATUS stays candidate-level, sole Controller review required",
+    "Shared-chrome English residuals under AR (pane titles, queue note, settings foot, pane edge toggles, bottom-shelf summary) live in read-only foundation/w04-rescue — out of REV-1 roots, recorded as hotspots",
+    "REVIEWS_PRESENTATION_CSS withheld (measured to worsen the Criterion Findings table) — needs its own reference-compared craft pass"
+  ],
+  "UPDATED_AT": "2026-10-02T06:25:00Z"
 }

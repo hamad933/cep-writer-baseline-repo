@@ -1,7 +1,8 @@
 import {defineContextDescriptorProvider} from '../../foundation/global/context-descriptor-contract.js';
 import {createReviewsCompareProvider,REVIEW_DOMAIN_OWNER} from '../../adapters/reviews/domain.js';
-import {activeLocale, pickText, REVIEW_STATE_TONE, reviewStateLabel, reviewDecisionLabel} from './i18n.js';
+import {activeLocale, pickText, fill, REVIEW_STATE_TONE, reviewStateLabel, reviewDecisionLabel} from './i18n.js';
 export {REVIEW_STATE_TONE, reviewStateLabel, reviewDecisionLabel} from './i18n.js';
+import {installReviewsPresentation} from './presentation-surface.js';
 export const REVIEWS_SURFACE_CONTRACT=Object.freeze({
   id:'reviews',workspace:'W04',domainOwner:REVIEW_DOMAIN_OWNER,center:'FormalReviewDecisionWorkbench',
   regionRoles:Object.freeze({LEFT:'Review Queue/Assigned/In Review/Closed collection',CENTER:'Pinned Evidence + Criteria + Findings + Decision work',RIGHT:'Reviewer scope/prior review/criterion authority/provenance conflict context',BOTTOM:'Deep artifact/source/prior Evidence/raw provenance projection',TRANSIENT:'Shared transient/focus host only'}),
@@ -204,13 +205,31 @@ export function composeReviewsSurface({domain,analyticalCompareOwner=null,comman
       const failure=domain.authorityFailure(r);if(failure)return {enabled:false,code:failure.code,reason:failure.reason||failure.code,availabilityOwner:domain.owner};
       return true;
     });
-    register('reviews.supersede','Issue superseding Decision',p=>domain.supersede(p.id,p),p=>{
+    /* Payload-shape bridge for `reviews.supersede`.
+     * The command-bus contract is `{id, expectedDecisionId, newDecision:{…}}`, but the controller's
+     * governed-input form posts `{id, decision:{…}}`. The surface registers this command BEFORE the
+     * controller composition gets a chance to, so this registration is the one that binds — and it
+     * was forwarding the form payload verbatim. The form never sets a top-level `expectedDecisionId`,
+     * so the domain compared `current !== undefined`, reported a stale CAS and refused EVERY verdict
+     * (including the first one): the Issue Decision button could not record a decision in any state.
+     * Normalize both shapes here; availability and execution read the SAME normalized payload so a
+     * verdict can never be enabled under one contract and executed under another. */
+    const supersedeOpts=p=>{
+      if(!p||p.newDecision||!p.decision?.decisionId)return p;
+      const d=p.decision,r=getRecord(p);
+      const expected=d.expectedDecisionId!==undefined?d.expectedDecisionId:(p.expectedDecisionId!==undefined?p.expectedDecisionId:(r?.effectiveDecisionId??r?.priorDecisionRef??null));
+      return {...p,expectedDecisionId:expected,
+        newDecision:{decisionId:d.decisionId,outcome:d.outcome,correctionReason:d.correctionReason,affectedScope:d.affectedScope,issuedAt:d.issuedAt,provenance:d.provenance},
+        correctionReason:d.correctionReason??p.correctionReason};
+    };
+    register('reviews.supersede','Issue superseding Decision',p=>domain.supersede(p.id,supersedeOpts(p)),p=>{
       const r=getRecord(p);if(!r)return {enabled:false,code:'REVIEW_RECORD_REQUIRED',reason:'Review record required.',availabilityOwner:domain.owner};
       if(r.state!=='READY_FOR_DECISION')return {enabled:false,code:'REVIEW_NOT_READY_FOR_DECISION',reason:'Review must be in READY_FOR_DECISION state to issue decision.',availabilityOwner:domain.owner};
       if(!r.findings.length)return {enabled:false,code:'REVIEW_FINDINGS_REQUIRED',reason:'Review findings required before issuing decision.',availabilityOwner:domain.owner};
       const failure=domain.authorityFailure(r);if(failure)return {enabled:false,code:failure.code,reason:failure.reason||failure.code,availabilityOwner:domain.owner};
       const current=r.effectiveDecisionId||r.priorDecisionRef||null;
-      if(p?.expectedDecisionId!==undefined&&p.expectedDecisionId!==current)return {enabled:false,code:'STALE_EXPECTED_DECISION',reason:'Expected decision CAS mismatch.',availabilityOwner:domain.owner};
+      const expected=supersedeOpts(p)?.expectedDecisionId;
+      if(expected!==undefined&&expected!==current)return {enabled:false,code:'STALE_EXPECTED_DECISION',reason:'Expected decision CAS mismatch.',availabilityOwner:domain.owner};
       return true;
     });
     register('reviews.rereview','Request re-review',p=>domain.review(p.id,{...p,action:'rereview'}),p=>{
@@ -225,6 +244,16 @@ export function composeReviewsSurface({domain,analyticalCompareOwner=null,comman
       return true;
     });
   }
+  /* Mount the surface-specific PRESENTATION layer (documented as installed from here).
+   * `presentation-surface.ts` owns what the shared W04 renderer cannot know: the REVIEW QUEUE
+   * sections (the shared head carries EVIDENCE intake vocabulary — Submitted/Returned/Prepared/
+   * Admitted — which is wrong on a Review surface), the per-row state/decision attributes its CSS
+   * colours, and the surface-owned command labels for the active language. Without this
+   * call the whole layer is dead code: the LEFT/RIGHT pane identity and the toolbar stay English
+   * under an Arabic session and the queue shows another family's vocabulary.
+   * It is idempotent, scoped to `body[data-consumer=reviews]` and a no-op without a document.
+   * `applyStyle:false` — only the projection is installed; see installReviewsPresentation. */
+  installReviewsPresentation({commandBus:commands,applyStyle:false});
   return Object.freeze({contract:REVIEWS_SURFACE_CONTRACT,domain,collection:createReviewsCollectionAdapter(domain),center:selectedId=>reviewsCenterProjection(domain,selectedId),context:createReviewsContextProvider(domain),bottom:selectedId=>reviewsBottomProjection(domain,selectedId),compareProvider,slots:Object.freeze({LEFT:'w04.reviews.collection',CENTER:'FormalReviewDecisionWorkbench',RIGHT:'w04.reviews.context',BOTTOM:'reviewsBottomProjection',TRANSIENT:'SHARED_TRANSIENT_HOST_ONLY'}),commandIds:Object.freeze(['reviews.request','reviews.assign','reviews.start','reviews.finding','reviews.ready','reviews.continue','reviews.cancel','reviews.compare','reviews.supersede','reviews.rereview']),
   /** Toolbar id list for the controller composition. The `commands` slot below carries the
    *  semantic command BUS (an object, not an id list); the toolbar must never receive it. */
