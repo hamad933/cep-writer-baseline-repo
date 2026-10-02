@@ -1,0 +1,158 @@
+{
+  "baseline": true,
+  "capturedAt": "2026-10-02T05:57:35.417Z",
+  "enterprise": {
+    "consumer": "enterprise",
+    "census": [
+      {
+        "instanceId": "spatial-1",
+        "hostId": "spatialHost",
+        "hostConnected": true,
+        "hasCallbacks": true
+      }
+    ],
+    "spatialInstance": "spatial-1",
+    "relationUiSpatialInstance": "spatial-1",
+    "relationUiSharesPublishedSpatial": true,
+    "relationUiSpatialConnected": true,
+    "publishedSpatialConnected": true,
+    "liveSpatialCanvasCount": 1,
+    "liveSpatialHostCount": 1,
+    "edgeCount": 8,
+    "lineCount": 16,
+    "visibleLineCount": 6,
+    "labelCount": 8,
+    "visibleLabelCount": 8,
+    "enterpriseHost": {
+      "sameAsPublished": true,
+      "connected": true,
+      "edges": 8
+    },
+    "selection": {
+      "schema": "SpatialSelectionReceipt@1",
+      "ownerId": "SpatialSelectionNavigationKernel",
+      "contractVersion": "1.0.0",
+      "projectionId": "SpatialModelProjection",
+      "projectionOwner": "SpatialModelCompatibilityProjection",
+      "activeMode": "author",
+      "policyRevision": "FW-C-NEIGHBOR-01",
+      "revision": 0,
+      "action": "descriptor",
+      "selectedIds": [],
+      "selectionCount": 0,
+      "focusId": "APP-WEB-01",
+      "anchorId": "APP-WEB-01"
+    }
+  },
+  "locatorCounts": {
+    "edge": 8,
+    "lineVisible": 6,
+    "lineFirstVisible": 1,
+    "labelFirstVisible": 1
+  },
+  "selectionProbe": {
+    "pair": [
+      "CTL-WAF-01",
+      "SIM-ATK-01"
+    ],
+    "visibleTargets": [
+      {
+        "id": "CTL-WAF-01",
+        "count": 1
+      },
+      {
+        "id": "SIM-ATK-01",
+        "count": 1
+      }
+    ],
+    "afterClick": {
+      "publishedSelection": {
+        "schema": "SpatialSelectionReceipt@1",
+        "ownerId": "SpatialSelectionNavigationKernel",
+        "contractVersion": "1.0.0",
+        "projectionId": "SpatialModelProjection",
+        "projectionOwner": "SpatialModelCompatibilityProjection",
+        "activeMode": "author",
+        "policyRevision": "FW-C-NEIGHBOR-01",
+        "revision": 2,
+        "action": "descriptor",
+        "selectedIds": [
+          "CTL-WAF-01",
+          "SIM-ATK-01"
+        ],
+        "selectionCount": 2,
+        "focusId": "SIM-ATK-01",
+        "anchorId": "CTL-WAF-01"
+      },
+      "relationUiSelection": {
+        "schema": "SpatialSelectionReceipt@1",
+        "ownerId": "SpatialSelectionNavigationKernel",
+        "contractVersion": "1.0.0",
+        "projectionId": "SpatialModelProjection",
+        "projectionOwner": "SpatialModelCompatibilityProjection",
+        "activeMode": "author",
+        "policyRevision": "FW-C-NEIGHBOR-01",
+        "revision": 2,
+        "action": "descriptor",
+        "selectedIds": [
+          "CTL-WAF-01",
+          "SIM-ATK-01"
+        ],
+        "selectionCount": 2,
+        "focusId": "SIM-ATK-01",
+        "anchorId": "CTL-WAF-01"
+      },
+      "connectAvailability": {
+        "action": "connect",
+        "policyId": "connect",
+        "visible": true,
+        "enabled": true,
+        "reason": "",
+        "code": "AVAILABLE",
+        "selectionCount": 2,
+        "selectedTypes": [
+          "Security Control",
+          "Simulation-local Device"
+        ]
+      },
+      "registryConnectAvailability": {
+        "id": "spatial.connect",
+        "owner": "RelationInteractionOwner",
+        "commandOwner": "RelationInteractionOwner",
+        "enabled": true,
+        "reason": "",
+        "code": "AVAILABLE",
+        "availabilityOwner": "RelationInteractionOwner"
+      }
+    }
+  },
+  "relationRouteProbe": {
+    "relationUiSharesPublishedSpatial": true,
+    "relationUiSpatialConnected": true,
+    "publishedSpatialConnected": true,
+    "receipts": []
+  },
+  "rq": {
+    "stageComposition": "rq",
+    "stageRqSurface": "rq.source-claim-reconciliation",
+    "genericTypedStage": false,
+    "rqOwnWorkspace": false,
+    "stageFirstClass": "rq",
+    "stageDatasetKeys": [
+      "m0Composition",
+      "rqSurface"
+    ],
+    "toolbar": [
+      "rq.view.compare",
+      "rq.view.claims",
+      "rq.view.provenance",
+      "rq.view.revision",
+      "rq.view.history"
+    ]
+  },
+  "fallbackProbe": {
+    "threw": true,
+    "message": "R6_REVIEW_AUTHORITY_REGISTRY_REQUIRED: the shared ReviewAuthorityRegistry must be injected by the composition root; no local fallback registry is constructed."
+  },
+  "pageErrors": []
+}

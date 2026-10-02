@@ -1,0 +1,172 @@
+{
+  "baseline": true,
+  "capturedAt": "2026-10-02T05:06:37.821Z",
+  "enterprise": {
+    "consumer": "enterprise",
+    "census": [
+      {
+        "instanceId": "spatial-1",
+        "hostId": "spatialHost",
+        "hostConnected": true,
+        "hasCallbacks": true
+      },
+      {
+        "instanceId": "spatial-2",
+        "hostId": "spatialHost",
+        "hostConnected": true,
+        "hasCallbacks": true
+      },
+      {
+        "instanceId": "spatial-3",
+        "hostId": "spatialHost",
+        "hostConnected": true,
+        "hasCallbacks": true
+      }
+    ],
+    "spatialInstance": "spatial-2",
+    "relationUiSpatialInstance": "spatial-1",
+    "relationUiSharesPublishedSpatial": false,
+    "relationUiSpatialConnected": false,
+    "publishedSpatialConnected": false,
+    "liveSpatialCanvasCount": 1,
+    "liveSpatialHostCount": 1,
+    "edgeCount": 8,
+    "lineCount": 16,
+    "visibleLineCount": 6,
+    "labelCount": 8,
+    "visibleLabelCount": 8,
+    "enterpriseHost": {
+      "sameAsPublished": false,
+      "connected": true,
+      "edges": 8
+    },
+    "selection": {
+      "schema": "SpatialSelectionReceipt@1",
+      "ownerId": "SpatialSelectionNavigationKernel",
+      "contractVersion": "1.0.0",
+      "projectionId": "SpatialModelProjection",
+      "projectionOwner": "SpatialModelCompatibilityProjection",
+      "activeMode": "author",
+      "policyRevision": "FW-C-NEIGHBOR-01",
+      "revision": 0,
+      "action": "descriptor",
+      "selectedIds": [],
+      "selectionCount": 0,
+      "focusId": "APP-WEB-01",
+      "anchorId": "APP-WEB-01"
+    }
+  },
+  "locatorCounts": {
+    "edge": 8,
+    "lineVisible": 6,
+    "lineFirstVisible": 1,
+    "labelFirstVisible": 1
+  },
+  "selectionProbe": {
+    "pair": [
+      "CTL-WAF-01",
+      "SIM-ATK-01"
+    ],
+    "visibleTargets": [
+      {
+        "id": "CTL-WAF-01",
+        "count": 1
+      },
+      {
+        "id": "SIM-ATK-01",
+        "count": 1
+      }
+    ],
+    "afterClick": {
+      "publishedSelection": {
+        "schema": "SpatialSelectionReceipt@1",
+        "ownerId": "SpatialSelectionNavigationKernel",
+        "contractVersion": "1.0.0",
+        "projectionId": "SpatialModelProjection",
+        "projectionOwner": "SpatialModelCompatibilityProjection",
+        "activeMode": "author",
+        "policyRevision": "FW-C-NEIGHBOR-01",
+        "revision": 0,
+        "action": "descriptor",
+        "selectedIds": [],
+        "selectionCount": 0,
+        "focusId": "APP-WEB-01",
+        "anchorId": "APP-WEB-01"
+      },
+      "relationUiSelection": {
+        "schema": "SpatialSelectionReceipt@1",
+        "ownerId": "SpatialSelectionNavigationKernel",
+        "contractVersion": "1.0.0",
+        "projectionId": "SpatialModelProjection",
+        "projectionOwner": "SpatialModelCompatibilityProjection",
+        "activeMode": "author",
+        "policyRevision": "FW-C-NEIGHBOR-01",
+        "revision": 0,
+        "action": "descriptor",
+        "selectedIds": [],
+        "selectionCount": 0,
+        "focusId": "APP-WEB-01",
+        "anchorId": "APP-WEB-01"
+      },
+      "connectAvailability": {
+        "action": "connect",
+        "policyId": "connect",
+        "visible": false,
+        "enabled": false,
+        "reason": "Selection cardinality must be between 2 and 2",
+        "code": "SELECTION_COUNT",
+        "selectionCount": 0,
+        "selectedTypes": []
+      },
+      "registryConnectAvailability": {
+        "id": "spatial.connect",
+        "owner": "RelationInteractionOwner",
+        "commandOwner": "RelationInteractionOwner",
+        "enabled": false,
+        "reason": "Selection cardinality must be between 2 and 2",
+        "code": "UNAVAILABLE",
+        "availabilityOwner": "RelationInteractionOwner"
+      }
+    }
+  },
+  "relationRouteProbe": {
+    "relationUiSharesPublishedSpatial": false,
+    "relationUiSpatialConnected": false,
+    "publishedSpatialConnected": false,
+    "receipts": []
+  },
+  "rq": {
+    "stageComposition": "rq",
+    "stageRqSurface": "rq.source-claim-reconciliation",
+    "genericTypedStage": false,
+    "rqOwnWorkspace": false,
+    "stageFirstClass": "rq",
+    "stageDatasetKeys": [
+      "m0Composition",
+      "rqSurface"
+    ],
+    "toolbar": [
+      "rq.view.compare",
+      "rq.view.claims",
+      "rq.view.provenance",
+      "rq.view.revision",
+      "rq.view.history"
+    ]
+  },
+  "fallbackProbe": {
+    "threw": false,
+    "centralReviewAuthorityRegistry": {
+      "testOnly": false,
+      "authorities": {}
+    },
+    "keys": [
+      "group",
+      "surface",
+      "domain",
+      "mounted",
+      "centralAnalyticalCompareOwner",
+      "centralReviewAuthorityRegistry"
+    ]
+  },
+  "pageErrors": []
+}

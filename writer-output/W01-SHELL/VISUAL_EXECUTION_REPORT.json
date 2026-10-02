@@ -1,0 +1,105 @@
+{
+  "SURFACE": "shell (W01-SHELL composition-root lane; Enterprise relation wiring half + RQ b2 mount + W04 F01 fail-closed, per packet §3 SH-1 row)",
+  "OWNER": "W01-SHELL (lane SH-1)",
+  "REFERENCE": {
+    "shell": "none — reference intentionally not generated (W01 packet §3, classification INTENTIONALLY_NOT_GENERATED)",
+    "enterprise": [
+      "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/01_ENTERPRISE_DIGITAL_TWIN/CEP_ENTERPRISE_DIGITAL_TWIN_REVISION_BASELINE_REFERENCE.png (sha256 54939bae7d1f323a)",
+      "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/01_ENTERPRISE_DIGITAL_TWIN/Enterprise Cybersecurity Topology Dashboard.png (sha256 8b3b3e3b47693a54)"
+    ],
+    "rq": "REVIEWED_FINAL_CANDIDATE (reference promotion is Owner-facing; not used, not promoted here)"
+  },
+  "REFERENCE_CLASSIFICATION": "INTENTIONALLY_NOT_GENERATED (shell) + CURRENT_FINAL_REFERENCE / OWNER_CONFIRMED_SUPPORTING (enterprise) — listed for context only; this lane performs wiring, not reference re-audit (ENT-1 owns Enterprise reference re-verification)",
+  "CURRENT_CANDIDATE": {
+    "branch": "writer/mi-serial-lane/SH-1",
+    "parent_commit": "4c6fffe3b6f3cc766e537655a362a3e423585e07",
+    "canonical_source_tree_before": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+    "canonical_source_tree_after": "28ef1ce6ca527593ead695ed2c56de6d0137fd3e83a272a5a0d2e772ba429aea",
+    "node": "22.16.0",
+    "note": "candidate commit sha + tree are stated in the lane final message (self-referential file); evidence manifests bind commit + canonical source sha + image sha256"
+  },
+  "FILES_CHANGED": [
+    "stack/native-typescript/surfaces/enterprise/presentation.ts",
+    "stack/native-typescript/surfaces/m0-controller-composition.ts"
+  ],
+  "FUNCTIONAL_STATUS": "PARTIAL_PASS: central-change-reuse FAIL->PASS; relation.route-convergence-and-label-scope FAIL->FAIL at its first harness precondition only (all identity diagnostics true, all downstream assertions proven PASS — see BLOCKERS); RQ purpose-built mount active; W04 composition fails closed; other 4 global flows + all 7 W03 flows unchanged PASS",
+  "STRUCTURAL_STATUS": "PASS: one SpatialView instance at runtime (census spatial-1 only) shared by RelationInteractionOwner / CEPFoundation.spatial / visible Enterprise host; single #foundationStage replacement render preserved; no new owner, no new architecture, no shared-seam write outside packet; check-duplicate-mechanics PASS; S10 duplicate-owner scan PASS; check-build-authority PASS",
+  "VISUAL_STATUS": "NO_VISUAL_REGRESSION_FOUND_BY_THIS_LANE: before/after captures at both viewports and both locales show the same Enterprise studio composition and node/edge rendering; the only visible deltas are the defect closure (selection action surface visible, shared relation composer opening). Reference re-comparison and L3/L4 acceptance belong to ENT-1 — this lane claims no visual acceptance",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": "L1 whole-surface (8 before + 8 after full-viewport captures) + L2 region (relation canvas, selection surface, composer states asserted per capture); L3 component and L4 micro-detail NOT performed (out of sealed scope)",
+  "RESPONSIVE_STATUS": "BOTH_VIEWPORTS_CAPTURED (1440x1000 and 1024x900) with per-viewport assertions; pointer hit-target obstruction at 1024x900 recorded as F-SH1-02; no overlap/truncation introduced by this lane (markup composition unchanged)",
+  "RTL_LTR_STATUS": "BOTH: AR/RTL and EN/LTR captured and asserted (documentElement lang=ar|en, dir=rtl|ltr verified in every capture; composer + selection surface present in both directions)",
+  "DEFECTS_FOUND": [
+    {
+      "id": "SH1-A",
+      "title": "SpatialView instance split: RelationInteractionOwner bound to a detached instance while a 2nd/3rd instance rendered the visible Enterprise canvas",
+      "severity": "V3 (flow-blocking product integration defect)",
+      "root_cause_class": "ARCHITECTURE / IMPLEMENTATION (existing owner seam, no new owner needed)",
+      "status": "FIXED in candidate (census = 1 instance; identity diagnostics all true)"
+    },
+    {
+      "id": "SH1-B",
+      "title": "RQ routed through the generic renderTypedCollectionStage branch while the purpose-built mount waited on the deferred guard (b2 / OFFLOAD-03 C-X2)",
+      "severity": "V2",
+      "root_cause_class": "IMPLEMENTATION",
+      "status": "FIXED in candidate (composition root calls mountRqWorkspace directly)"
+    },
+    {
+      "id": "SH1-C",
+      "title": "Latent silent ReviewAuthorityRegistry fallback in the W04 composition path (F01)",
+      "severity": "V2 (latent authority split)",
+      "root_cause_class": "IMPLEMENTATION",
+      "status": "FIXED in candidate (fail-closed, injection required)"
+    },
+    {
+      "id": "F-SH1-01",
+      "title": "relation.route-convergence-and-label-scope first assertion: first fixture relation is axis-aligned, Playwright visible-filter excludes its zero-height <line>",
+      "severity": "BLOCKER for that flow receipt",
+      "root_cause_class": "EVIDENCE/ORACLE x FIXTURE_DATA (outside this lane's roots)",
+      "status": "OPEN — reported with reproduction; not decided by this lane"
+    },
+    {
+      "id": "F-SH1-02",
+      "title": "Label pointer interception at 1024x900 by a later edge's hit-target",
+      "severity": "V2 (observation)",
+      "root_cause_class": "FIXTURE_DATA x SHARED_COMPONENT (read-only)",
+      "status": "OPEN — reported"
+    },
+    {
+      "id": "F-SH1-03",
+      "title": "LCORR03 C3-002 textual 600-char guard for root.innerHTML inside draw()",
+      "severity": "V0 (test guard, pre-existing at parent HEAD)",
+      "root_cause_class": "EVIDENCE/ORACLE",
+      "status": "OPEN — pre-existing, unchanged by this lane (14/15 before and after)"
+    }
+  ],
+  "DEFECT_SEVERITY": "V3 x1 (fixed), V2 x3 (2 fixed, 1 open observation), V0 x1 (pre-existing test guard), BLOCKER x1 (harness/fixture precondition, open)",
+  "ROOT_CAUSE": "Product integration wiring defect in an existing owner seam: renderEnterpriseSurface replaces the shared stage content on every draw, detaching the SpatialView that RelationInteractionOwner was bound to, and constructed new instances instead of re-hosting the shared one; secondary: composition root used the generic typed-stage branch for RQ and carried a silent ReviewAuthorityRegistry fallback",
+  "FIXES_APPLIED": [
+    "(a) enterprise/presentation.ts: ensureSpatial() re-hosts the shared SpatialView node into the fresh canvas slot (single instance), re-syncs model nodes/edges from the surface projection, re-fits; wireSharedSpatial() keeps central callbacks and adds the Enterprise inspect route",
+    "(b) m0-controller-composition.ts: rq branch calls mountRqWorkspace({stage,workspace,registry,adapter}) from the composition root; bindRqSurface retained for command binding + guarded deferred mount; generic renderTypedCollectionStage no longer handles rq",
+    "(c) m0-controller-composition.ts: mountW04Group throws R6_REVIEW_AUTHORITY_REGISTRY_REQUIRED when the shared registry is not injected; local fallback construction and import removed"
+  ],
+  "RECAPTURE_STATUS": "DONE: BEFORE captured against parent source (0c43d7f1) via temporary parent checkout + rebuild; AFTER captured against candidate source (28ef1ce6); 8 images per state at 1440x1000 and 1024x900 in AR and EN, hash-bound in evidence/{before,after}/manifest.json; parent state restored byte-identically afterwards (SH1_SOURCE.patch verified)",
+  "RECOMPARISON_STATUS": "DONE for L1/L2 state comparison (selection/composer/lang/dir/canvas-instance assertions recorded inside every capture); reference-driven L3/L4 recomparison deferred to ENT-1 by packet",
+  "REGRESSION_STATUS": "PASS (no regression found): npm test 210/0 (twice); browser conformance other 4 flows PASS; w03-browser-flows 7/7 PASS (before and after); S10 x2, CG4 x3, D09, enterprise surface, profile-coverage 107/107, semantic-ownership 60/60 all PASS; N4 PASS; npm run check = documented single known red only (browser.lineage_receipt_truthful, 167 pass/1 fail); LCORR03 unchanged at pre-existing 14/15",
+  "EVIDENCE": [
+    "writer-output/W01-SHELL/evidence/before/ (8 PNG + manifest.json, parent source 0c43d7f1)",
+    "writer-output/W01-SHELL/evidence/after/ (8 PNG + manifest.json, candidate source 28ef1ce6)",
+    "writer-output/W01-SHELL/evidence/final-diag.json (instance census, selection probe, RQ probe, inject-fallback probe)",
+    "writer-output/W01-SHELL/evidence/final-rq-probe.json",
+    "writer-output/W01-SHELL/evidence/final-flow3-residual.json",
+    "writer-output/W01-SHELL/evidence/conformance-BEFORE-parent-4of6.json",
+    "writer-output/W01-SHELL/evidence/conformance-AFTER-candidate-5of6.json",
+    "writer-output/W01-SHELL/evidence/w03-flows-AFTER-7of7.json + evidence/w03-flows/ (7 PNG)",
+    "writer-output/W01-SHELL/evidence/check-contracts-AFTER-167pass-1known-red.json",
+    "writer-output/W01-SHELL/evidence/n4-duplicate-mechanics-AFTER-pass.json",
+    "writer-output/W01-SHELL/probes/ (10 probe scripts, incl. instance-census response rewrite + Playwright line-visibility micro-test)",
+    "writer-output/W01-SHELL/SH1_SOURCE.patch"
+  ],
+  "LINEAGE": "parent 4c6fffe3b6f3cc766e537655a362a3e423585e07 (verified clean at lane start) -> candidate branch writer/mi-serial-lane/SH-1; canonical source identity BEFORE 0c43d7f1... AFTER 28ef1ce6...; captures bound by commit + source sha256 + per-image sha256/bytes/viewport/timestamp; browser chromium via Playwright 1.62.1, transport localhost-http; superseded harness captures restored, never deleted by this lane; H03 PROP/FALSIFY ceilings remain NOT_PROVEN",
+  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED — CANDIDATE_ONLY, sole Controller review required; no merge/acceptance/release/deployment claimed",
+  "BLOCKERS": [
+    "F-SH1-01: relation.route-convergence-and-label-scope cannot reach PASS through wiring alone — its first assertion requires the FIRST rendered fixture relation (APP-WEB-01 -> CTL-WAF-01, same fixture row) to have a Playwright-visible line; adapters/** are read-only for this lane and reordering/relaying data to satisfy .first() would be manipulation. Exact reproduction + recommended Controller disposition (harness-oracle correction precedent 490b6a4, or fixture-layout decision via W03 owner) recorded in HANDOFF.md §8.",
+    "browser.lineage_receipt_truthful remains the documented known red until a 6/6 conformance receipt exists"
+  ]
+}
