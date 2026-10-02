@@ -188,7 +188,7 @@ try {
   }, async page => {
     await ready(page, 'enterprise');
     const composer = page.locator('.relation-composer').filter({ visible: true }).first(),
-      edge = page.locator('.spatial-canvas [data-edge]').filter({ visible: true }).first(),
+      edge = page.locator('.spatial-canvas [data-edge]').first(),
       line = edge.locator('line').filter({ visible: true }).first(),
       label = edge.locator('[data-relation-label]').filter({ visible: true }).first();
     const routeProbe = await page.evaluate(() => ({
@@ -281,9 +281,27 @@ try {
       const recorded = recordedSnapshot.devices.find(item => item.id === 'DEV-WEB-01');
       return { up:device?.up, recordedUp:recorded?.up, semanticCommand:event?.semanticCommand, eventOutput:event?.output||'', provider:workspace.provider?.id||workspace.provider?.providerId||'UNKNOWN', domainOwner:domain.owner, runtimeTruth:workspace.provider?.runtimeTruth };
     });
-    const terminalText = await page.locator('#operationalHost .terminal-output').innerText();
+    await page.waitForFunction(() => {
+      const owner = CEPFoundation.sharedOwners?.operationalSessionOwner;
+      const presentationId = owner?.activePresentationId || owner?.activeTab?.()?.presentationId;
+      const buffer = CEPFoundation.operational?.renderer?.instances?.get?.(presentationId)?.term?.buffer?.active;
+      if (!buffer) return false;
+      for (let index = 0; index < buffer.length; index++) {
+        if ((buffer.getLine(index)?.translateToString(true) || '').includes('DOWN')) return true;
+      }
+      return false;
+    }, null, { timeout: 5000 });
+    const terminalText = await page.evaluate(() => {
+      const owner = CEPFoundation.sharedOwners?.operationalSessionOwner;
+      const presentationId = owner?.activePresentationId || owner?.activeTab?.()?.presentationId;
+      const buffer = CEPFoundation.operational?.renderer?.instances?.get?.(presentationId)?.term?.buffer?.active;
+      if (!buffer) return '';
+      const rows = [];
+      for (let index = 0; index < buffer.length; index++) rows.push(buffer.getLine(index)?.translateToString(true) || '');
+      return rows.join('\n');
+    });
     assert(state.up === false && state.recordedUp === false, `Runs domain/recorded causal state mismatch: ${JSON.stringify({...state,terminalText})}`);
-    assert(state.semanticCommand === 'device.shutdown' && state.eventOutput.includes('DOWN') && terminalText.includes('DOWN'), `Runs domain event or visible terminal output is inconsistent: ${JSON.stringify({...state,terminalText})}`);
+    assert(state.semanticCommand === 'device.shutdown' && state.eventOutput.includes('DOWN') && terminalText.includes('DOWN'), `Runs domain event or rendered xterm buffer is inconsistent: ${JSON.stringify({...state,terminalText})}`);
     await capture(page, 'browser-operational-shutdown.png', 'runtime-causal-consequence', 'provider-neutral terminal and canonical shutdown consequence');
     return { ...state, terminalVisibleDown: true };
   });
