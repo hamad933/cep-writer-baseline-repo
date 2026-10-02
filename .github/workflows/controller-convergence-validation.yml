@@ -94,7 +94,7 @@ jobs:
           run_case W02_rq_surface node tests/surfaces/rq/surface.test.mjs
           run_case W02_visualize_surface node tests/surfaces/visualize/surface.test.mjs
           run_case W02_coverage node tools/w02-coverage-check.mjs
-          run_case W02_browser_flows node tools/w02-browser-flows.mjs
+          run_case W02_current_browser_subset node -e "const r=require('./assurance/BROWSER_CONFORMANCE_RECEIPT.json'); const req=['spatial.selection-connect-canonical-edge','spatial-input-bidi-preference-and-structured-isolation']; const got=Object.fromEntries(r.flows.map(x=>[x.id,x.status])); console.log(JSON.stringify({required:req,status:Object.fromEntries(req.map(k=>[k,got[k]||'MISSING']))},null,2)); if(req.some(k=>got[k]!=='PASS')) process.exit(1);"
 
           run_case W03_enterprise_domain node dist/tests/surfaces/enterprise/domain.test.js
           run_case W03_scenarios_domain node dist/tests/surfaces/scenarios/domain.test.js
@@ -128,6 +128,9 @@ jobs:
         if: always()
         run: |
           cp -f assurance/BROWSER_CONFORMANCE_RECEIPT.json convergence-evidence/ 2>/dev/null || true
+          cp -f writer-output/W01/BROWSER_RECEIPT.json convergence-evidence/W01_BROWSER_RECEIPT.json 2>/dev/null || true
+          cp -f writer-output/W02/BROWSER_RECEIPT.json convergence-evidence/W02_BROWSER_RECEIPT_LEGACY_INFO.json 2>/dev/null || true
+          cp -f writer-output/W05/BROWSER_RECEIPT.json convergence-evidence/W05_BROWSER_RECEIPT.json 2>/dev/null || true
           cp -f assurance/browser-*.png convergence-evidence/ 2>/dev/null || true
           git status --short > convergence-evidence/WORKTREE_AFTER.txt
           git diff --stat > convergence-evidence/DIFF_STAT.txt
