@@ -1,0 +1,203 @@
+{
+  "receiptCommit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+  "receiptTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+  "measuredCandidate": "WORKTREE_VARIANT:0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+  "lineage": "DRIFT_RECORDED__CONCURRENT_SIBLING_WORKSPACE_EDITS",
+  "capturedAt": "2026-10-02T05:04:46.888Z",
+  "environment": {
+    "node": "v22.16.0",
+    "engine": "Playwright Chromium",
+    "playwrightResolution": "package-local",
+    "packageDeclaredVersion": "1.62.1",
+    "transport": "localhost-http",
+    "proofServer": "tools/serve.mjs on 127.0.0.1:43039",
+    "runtimeServer": "stack/local-runtime/server.mjs on 127.0.0.1:35005 (throwaway sqlite at writer-output/W05/.runtime-proof)",
+    "viewport": "1440x980",
+    "reducedMotion": true,
+    "browserExecutableOverride": false,
+    "browserVersion": "151.0.7922.34"
+  },
+  "flow": {
+    "flow": "processing.inspect-retry-requestCancel-validationHandoff",
+    "route": "/?surface=processing",
+    "preconditions": [
+      "local runtime API reachable",
+      "two Jobs exist for this run (one completed through a real provider run, one cancelled through the ack path)",
+      "app booted with CEPFoundation.consumer === \"processing\""
+    ],
+    "expectedState": "job/attempt identity stays distinct, retry is only offered for FAILED/TIMED_OUT, cancel request ≠ cancel success until provider ack, validation handoff stays PENDING until the real consumer acks",
+    "fixtureState": "runtime-seeded Jobs created over HTTP by this proof run against a throwaway sqlite database",
+    "negativeCases": [
+      "retry must not be offered for a COMPLETED job",
+      "CANCEL_REQUESTED must not be reported as CANCELLED before ack",
+      "validation handoff PENDING must not be reported as acknowledged"
+    ],
+    "actionSequence": [
+      "GET /?surface=processing&persistencePort=35005",
+      "click product command processing.inspect",
+      "click product command processing.requestCancel"
+    ],
+    "assertions": [
+      {
+        "id": "processing.fixture-job-created",
+        "expected": 200,
+        "actual": 200,
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "processing.cancel-request-is-not-cancel-success",
+        "expected": "CANCEL_REQUESTED",
+        "actual": "CANCEL_REQUESTED",
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "processing.cancel-ack-not-claimed",
+        "expected": "REQUESTED",
+        "actual": "REQUESTED",
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "processing.job-and-attempt-identities-distinct",
+        "expected": true,
+        "actual": true,
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "processing.surface-shows-the-open-cancel-request",
+        "expected": true,
+        "actual": true,
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "reach.processing.inspect",
+        "expected": true,
+        "actual": true,
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "processing.inspect-resolves-a-selection",
+        "expected": true,
+        "actual": true,
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "processing.retry-not-offered-for-non-failed-job",
+        "expected": true,
+        "actual": true,
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "reach.processing.requestCancel",
+        "expected": true,
+        "actual": true,
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "processing.cancel-becomes-cancelled-only-after-provider-ack",
+        "expected": "CANCELLED",
+        "actual": "CANCELLED",
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "processing.cancel-ack-is-provider-sourced",
+        "expected": true,
+        "actual": true,
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "processing.completed-job-exists-for-handoff",
+        "expected": "COMPLETED",
+        "actual": "COMPLETED",
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "processing.validation-handoff-starts-pending",
+        "expected": "PENDING",
+        "actual": "PENDING",
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "processing.validation-handoff-visible-as-pending",
+        "expected": "PENDING",
+        "actual": "PENDING",
+        "ok": true,
+        "class": null,
+        "message": ""
+      }
+    ],
+    "screenshots": [
+      {
+        "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-inspect-20261002T050442Z-c82cec63.png",
+        "sha256": "4b8aded9dd62972e97ca920940ed05c08923da3eb6ac5bb48804da01d5b0e07e",
+        "bytes": 243458,
+        "viewport": {
+          "width": 1440,
+          "height": 980
+        },
+        "capturedAt": "2026-10-02T05:04:43.142Z",
+        "boundTo": {
+          "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+          "flow": "processing.inspect-retry-requestCancel-validationHandoff",
+          "suffix": "after-inspect"
+        }
+      },
+      {
+        "filename": "writer-output/W05/evidence/processing-inspect-retry-requestCancel-validationHandoff-after-cancel-and-handoff-20261002T050444Z-c82cec63.png",
+        "sha256": "da78ff1f0465201a1204da0a1ec08ec681a6ab68700a7a0824918c56454605ab",
+        "bytes": 243540,
+        "viewport": {
+          "width": 1440,
+          "height": 980
+        },
+        "capturedAt": "2026-10-02T05:04:45.193Z",
+        "boundTo": {
+          "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+          "flow": "processing.inspect-retry-requestCancel-validationHandoff",
+          "suffix": "after-cancel-and-handoff"
+        }
+      }
+    ],
+    "pageErrors": [],
+    "transportFailures": [
+      {
+        "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+        "error": "net::ERR_CONNECTION_REFUSED"
+      },
+      {
+        "url": "http://127.0.0.1:4174/v1/capabilities",
+        "error": "net::ERR_CONNECTION_REFUSED"
+      }
+    ],
+    "evidenceLineage": null,
+    "browser": "Chromium (Playwright package-local)",
+    "browserVersion": null,
+    "status": "PASS",
+    "failureClassification": null
+  }
+}

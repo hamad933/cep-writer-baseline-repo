@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "SURFACE": "processing",
+  "OWNER": "PRC-1",
+  "REFERENCE": "none — dispatch references=[] for processing; no visual reference exists for this surface and none was invented",
+  "REFERENCE_CLASSIFICATION": "INTENTIONALLY_NOT_GENERATED",
+  "CURRENT_CANDIDATE": {
+    "branch": "writer/mi-serial-lane/PRC-1",
+    "sealedParent": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "parentTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+    "candidateSourceCommit": "b2e113ec8871905f542afb9ea020d2293db186f7",
+    "candidateSourceTree": "8977b680405f444110b329c3af47816962e1178c",
+    "adapterSha256Baseline": "f6340c37ce8ec2f4142d50a4833a183c4ac941dca77fd2bc09f952078a9472b6",
+    "adapterSha256Candidate": "4ae01c6843c8eb8f039aa4173e5db0ccf42728262540f77a29cf1ad46d49e1bf"
+  },
+  "FILES_CHANGED": [
+    "stack/native-typescript/adapters/processing-runtime.ts"
+  ],
+  "FUNCTIONAL_STATUS": "PASS — processing.inspect-retry-requestCancel-validationHandoff: 14/14 assertions PASS before and after the change (baseline run 2026-10-02T05:04:46Z, candidate run 2026-10-02T05:19:12Z). npm test 210/0 twice. Packet tests S16 / CG6 (2 files) / D11 all exit 0 with 0 FAIL after the change.",
+  "STRUCTURAL_STATUS": "PASS — one coherent surface owner retained (W05ProcessingDomainAdapter); no new file, no new owner, no shared seam written; CollectionTableMatrixPresentationCore / ContextInspectorHost / registry / workspace regions consumed unchanged; forbidden_duplicates untouched (N4 check-duplicate-mechanics exit 0).",
+  "VISUAL_STATUS": "IMPROVED_NOT_OWNER_ACCEPTED — two presentation defects closed in owned code (V2 dropped-header-rule causing an eyebrow/region-header collision and default h1 metrics; V2 document-global tone rules). Whole-surface (L1) before/after compared on byte-hashed captures; no new mismatch introduced.",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": "L1 whole surface (baseline vs candidate after-inspect + after-cancel-and-handoff); L2 regions (CENTER header band, LEFT job nav, RIGHT context, BOTTOM receipts) via render probe DOM boxes; L3 components (h1/eyebrow band, state pill, truth tokens, lifecycle strip, attempt table); L4 micro (h1 computed display=flex/font-size=27px/.p-head margin-block-start=26px, bdi isolation, tone colors). Not performed: pixel-diff automation and micro-crop overlays.",
+  "RESPONSIVE_STATUS": "PASSED_AT_1440x1000_AND_1024x900 — two viewports captured; no horizontal overflow at either (0 overflowing elements measured at 1024 in the direction test), regions reflow (RIGHT context pane wraps below the fold at 1024 per the shared grid breakpoint, by design of read-only m0 grid). Not exercised: 768/compact breakpoint (bounded lane; change is header spacing + scoped colors, breakpoint-independent).",
+  "RTL_LTR_STATUS": "STRUCTURE_MIRRORS_BOTH_WAYS__COPY_LANGUAGE_OWNER_PENDING — active shell in this headless environment resolved lang=en/dir=ltr; flipping to RTL with the exact shared policy pair (html[dir=rtl] + body[data-foundation-direction=rtl]) mirrored the surface (computed direction rtl), kept all 20 technical tokens <bdi dir=ltr>, 0 horizontal overlaps, 0 eyebrow/header overlaps. Direction is not baked into structure by the mount (only technical rows/tokens pin dir=ltr). Surface copy is Arabic-primary with English secondary lines — this is the recorded W05 G-3 state pending the Owner product-language decision; NOT changed by this lane and NOT claimed as satisfied.",
+  "DEFECTS_FOUND": [
+    {
+      "id": "F1",
+      "title": "Malformed CSS rule dropped the .p-head h1 block and the header top margin",
+      "severity": "V2",
+      "root_cause": "IMPLEMENTATION",
+      "evidence": "evidence/CSS_RULE_PROBE.json (Chromium CSSStyleSheet: baseline 59 rules with no `.p-head h1` rule; candidate 60 rules with it); baseline capture shows the W05 eyebrow colliding with the region header; live render probe reports h1 display=flex, font-size=27px, margin-block-start=26px, overlap=false.",
+      "status": "FIXED_IN_LANE"
+    },
+    {
+      "id": "F2",
+      "title": "Mount injected document-global [data-tone=…] colour rules affecting other surfaces' markup",
+      "severity": "V2",
+      "root_cause": "SURFACE_COMPOSITION",
+      "evidence": "evidence/CSS_RULE_PROBE.json (baseline global tone selectors present, candidate 0); evidence/render/RENDER_PROBE.json globalToneRuleCount=0 in the live document.",
+      "status": "FIXED_IN_LANE"
+    },
+    {
+      "id": "F3",
+      "title": "Rejected command receipts did not carry the provider's explicit reason/state (profile epistemic.error)",
+      "severity": "V2",
+      "root_cause": "IMPLEMENTATION",
+      "evidence": "action log now records jobState (e.g. RETRY_NOT_ALLOWED + state=COMPLETED) and any transport reason; rendered in the Action receipts list; no receipt changed from failure to success.",
+      "status": "FIXED_IN_LANE"
+    },
+    {
+      "id": "F4",
+      "title": "Attempt lease expiry / attempt error was not displayed (profile epistemic.stale: timed_out/reconciling observation without assuming process exit)",
+      "severity": "V2",
+      "root_cause": "CONTENT_MODEL",
+      "evidence": "attempt table now shows lease end time + attempt.error (LEASE_EXPIRED), and a LEASE_EXPIRED observation line states that process exit is not assumed.",
+      "status": "FIXED_IN_LANE"
+    },
+    {
+      "id": "F5",
+      "title": "A malformed provider jobs payload (non-array / non-Job entries) threw instead of returning an explicit receipt",
+      "severity": "V2",
+      "root_cause": "IMPLEMENTATION",
+      "evidence": "evidence/LANE_FALSIFICATION.json N2.* — PROCESSING_PAYLOAD_SHAPE_INVALID, retained Jobs kept, providerState=ERROR, no success claimed.",
+      "status": "FIXED_IN_LANE"
+    },
+    {
+      "id": "F6",
+      "title": "availability() reported PROCESSING_PROVIDER_UNAVAILABLE for an unknown command id (wrong reason)",
+      "severity": "V3",
+      "root_cause": "IMPLEMENTATION",
+      "evidence": "evidence/LANE_FALSIFICATION.json N2.unknown-command-availability-is-explicit now PASS.",
+      "status": "FIXED_IN_LANE"
+    },
+    {
+      "id": "F7",
+      "title": "Surface copy is Arabic-primary while the active shell locale resolved en/ltr",
+      "severity": "V3 (recorded, not decided)",
+      "root_cause": "OWNER_CONSTRAINT",
+      "evidence": "render probe lang=en/dir=ltr with Arabic-primary mount copy; matches W05 VISUAL_REAUDIT finding G-3 'product-language decision pending Owner — recorded, not guessed' and packet §8 / standard §7 tension.",
+      "status": "OPEN_OWNER_RECORD_ONLY — deliberately NOT changed by this lane"
+    }
+  ],
+  "DEFECT_SEVERITY": "V2 ×5 (F1–F5), V3 ×2 (F6, F7)",
+  "ROOT_CAUSE": "IMPLEMENTATION ×4 · SURFACE_COMPOSITION ×1 · CONTENT_MODEL ×1 · OWNER_CONSTRAINT ×1",
+  "FIXES_APPLIED": [
+    "F1 repaired `.p-head{display:grid;gap:4px;margin-block-start:26px}.p-head h1{…}` (stray `}`/selector concatenation removed)",
+    "F2 scoped every `[data-tone=…]` colour rule under processing-owned roots ([data-w05-surface=processing] / .p-nav / .p-ctx / .p-bottom)",
+    "F3 retry/cancel/handoff action-log receipts now carry jobState from result.job.state ?? result.state plus any transport reason",
+    "F4 attempt rows now render leaseExpiresAt + attempt.error, plus a LEASE_EXPIRED reconciling-observation line (process exit not assumed)",
+    "F5 refresh() validates the provider jobs payload shape and returns PROCESSING_PAYLOAD_SHAPE_INVALID with retained state",
+    "F6 unknown command ids short-circuit to 'Unknown Processing command' before the provider-availability gate"
+  ],
+  "RECAPTURE_STATUS": "DONE — baseline (parent bytes) and candidate (commit b2e113e) flow captures at 1440×980 plus lane render captures at 1440×1000 and 1024×900; iteration-1 candidate captures retained under evidence/superseded-iteration1/ (superseded by the final two edits); initial render captures mis-named '-rtl' while the shell was en/ltr were discarded before promotion (intermediate scratch, OD-073) and re-captured with accurate labels.",
+  "RECOMPARISON_STATUS": "DONE — L1/L2/L3/L4 baseline-vs-candidate inspected on the hashed PNGs; all four render-probe expectations hold in the live DOM; no new visual mismatch introduced.",
+  "REGRESSION_STATUS": "PASS — npm test 210/0 (twice, byte-identical after date normalisation = N5); S16 / CG6 ×2 / D11 exit 0; check-duplicate-mechanics exit 0 (N4); browser flow 14/14 both runs; build:runtime exit 0.",
+  "EVIDENCE": [
+    "evidence/baseline/BASELINE_FLOW_RECORD.json (sha256 3652db54f0241b75a9286df66c3ce8685ee1a7e778c347f38060f3acc6c71204) — flow PASS 14/14 at sealed parent bytes",
+    "evidence/baseline/…after-inspect-…050442Z.png (sha256 4b8aded9dd62972e97ca920940ed05c08923da3eb6ac5bb48804da01d5b0e07e, 243458 B)",
+    "evidence/baseline/…after-cancel-and-handoff-…050444Z.png (sha256 da78ff1f0465201a1204da0a1ec08ec681a6ab68700a7a0824918c56454605ab, 243540 B)",
+    "evidence/candidate/CANDIDATE_FLOW_RECORD.json (sha256 84dde70d447e18d120ebfbf489c00df1d16e52435ca202f1980bc710477596c7) — flow PASS 14/14 at adapter sha 4ae01c68",
+    "evidence/candidate/…after-inspect-…051908Z.png (sha256 642399b1aae62dd96f01061e7c652fd20263e2ee614982dc2e73742a05ecb434, 245516 B)",
+    "evidence/candidate/…after-cancel-and-handoff-…051909Z.png (sha256 88f6f135ec0f8448116de32c754b7a7b578819e204f9d5193e3eafe2e7ebeccf, 245588 B)",
+    "evidence/CSS_RULE_PROBE.json (sha256 3e9329f802cd9a8ebdc4948ba559ef4a8285d8ff9ab7ac324eb9fedd8298562f) — baseline vs candidate parsed by Chromium CSSStyleSheet",
+    "evidence/LANE_FALSIFICATION.json (sha256 4f7169040c3e265ab25f39863daf6889bcffe05249720eb3efd4bf56b17f96c2) — 30/30 PASS",
+    "evidence/render/RENDER_PROBE.json (sha256 039e7c12b5aa835413bc2dc1e128d48c2e9cb8c8be619b0ea5e869183bb66862) — live DOM + direction test",
+    "evidence/render/processing-1440x1000-active-shell.png (sha256 ef432bd372f6c39ce7efa68dbfddd340e47080c26299df5c02bdd7c5a1bc72ed)",
+    "evidence/render/processing-1024x900-active-shell.png (sha256 1e358c278b2d57b15982a0f1d5a35c3525d05055542cd9f449b1b09f3059e7aa)",
+    "evidence/render/processing-1440x1000-dir-rtl.png (sha256 c8fa76f7967d5048bfb4704a545a5f22b67952337ae8e119890459a5b88fb44d)",
+    "evidence/superseded-iteration1/*.png — retained, labelled superseded (sha256 cb139936…, 00b7e58e…)",
+    "probes: css-rule-probe.mjs (ce283f07…), lane-falsification.mjs (7f28a589…), render-probe.mjs (f27b9a32…)"
+  ],
+  "LINEAGE": "Sealed parent fe1bb98ded51adc71a5f5fd14142a2c0880c11bc (tree f22c70ce…) → candidate source commit b2e113ec8871905f542afb9ea020d2293db186f7 (tree 8977b680…). Browser receipt records lineageStatus DRIFT_RECORDED__CONCURRENT_SIBLING_WORKSPACE_EDITS because the flow tool's hard-coded candidate constant (c82cec63…) belongs to the dispatch-declared worktree variant, not this lane's measured tree — recorded, never suppressed. Flow runs executed from an isolated byte-identical mirror of this worktree (/tmp/opencode/prc1-mirror) so the read-only salvage under writer-output/W05/ was never mutated; mirror adapter sha was verified equal to the worktree adapter sha (4ae01c68…) at candidate capture time.",
+  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
+  "BLOCKERS": [
+    "None for this bounded lane. G-3 (product language) stays Owner-pending and is record-only; no reference exists for processing and none was invented; acceptance requires Sole Controller review."
+  ],
+  "FOUR_TRUTHS": {
+    "P_presentation": "IMPROVED / OPEN_FOR_OWNER — F1 and F2 closed with hashed before/after captures; two V2 presentation defects no longer present; visual acceptance still NOT_OWNER_ACCEPTED (no Owner-facing acceptance claimed).",
+    "B_behavior": "PASS — flow 14/14 (both runs), npm test 210/0 twice byte-identical (N5), S16/CG6/D11 green, all four domain commands reachable in the toolbar probe.",
+    "C_contract": "PASS_WITH_ONE_RECORDED_GAP — profile slots/commands/objects/invariants/epistemic/state dimensions honoured; packet reference classification honoured (INTENTIONALLY_NOT_GENERATED, no reference invented); context_lenses/bottom_tabs are identical generic fields across all 23 profiles (tools/compile-contracts.py) and are not consumed as code identifiers — recorded, not treated as a per-surface defect; gap = F7/G-3 language (Owner record-only).",
+    "DP_data_provider": "PASS — cancel-request≠cancel-success, validationHandoff requires the real consumer receipt, processingCompletedNeedsProviderEvidence honoured (COMPLETED without provider evidence = NOT_PROVEN), provider UNAVAILABLE never renders success (30/30 falsification incl. rescue-composition truthCeilings intact)."
+  },
+  "identityCompositionAnswer": "NO new surface composition required — see HANDOFF.md §1 (answer first). The adapter's mount() supplies CENTER/LEFT/RIGHT/BOTTOM; shared m0 supplies TOP banner and TOOLBAR; TRANSIENT stays shared with no local duplicate. No surfaces/processing/ directory and no new file/owner is needed; therefore NO OWNERSHIP_ESCALATION is raised."
+}

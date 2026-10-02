@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "probe": "PRC1_LANE_FALSIFICATION",
+  "node": "v22.16.0",
+  "parent": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+  "adapterSha256": "4ae01c6843c8eb8f039aa4173e5db0ccf42728262540f77a29cf1ad46d49e1bf",
+  "summary": {
+    "total": 30,
+    "pass": 30,
+    "fail": 0
+  },
+  "results": [
+    {
+      "id": "N1.w05-rescue-write-refused",
+      "status": "PASS",
+      "detail": "decision=REFUSE for stack/native-typescript/surfaces/composition/w05-rescue.ts"
+    },
+    {
+      "id": "N1.all-protected-routes-refused",
+      "status": "PASS",
+      "detail": "controller/12_execution/WRITER_DAG_AND_LAUNCH_PACKETS_2026-10-02.md=REFUSE cep-writer/authority/APPLICABLE_OWNER_DECISIONS.csv=REFUSE profiles/processing.json=REFUSE contracts/COMMAND_REGISTRY.seed.json=REFUSE stack/native-typescript/adapters/health-runtime.ts=REFUSE dist/main.js=REFUSE"
+    },
+    {
+      "id": "N1.seam-byte-identical-to-parent",
+      "status": "PASS",
+      "detail": "worktree=04408baa8539c30cc8aeb3ff5546689ee5060d5ca1dd7ab41a1ec31c70e54300 parent=04408baa8539c30cc8aeb3ff5546689ee5060d5ca1dd7ab41a1ec31c70e54300"
+    },
+    {
+      "id": "N1.only-owned-plus-restorable-paths-dirty",
+      "status": "PASS",
+      "detail": "dirty=[\"assurance/MODEL_TEST_RESULTS.json\",\"dist/adapters/processing-runtime.js\",\"dist/foundation/extensions.css\",\"stack/native-typescript/adapters/processing-runtime.ts\"] outside=[] ownerSha=4ae01c6843c8eb8f039aa4173e5db0ccf42728262540f77a29cf1ad46d49e1bf"
+    },
+    {
+      "id": "N2.inspect-without-job-is-explicit",
+      "status": "PASS",
+      "detail": "{\"ok\":false,\"code\":\"PROCESSING_JOB_REQUIRED\"}"
+    },
+    {
+      "id": "N2.inspect-unknown-job-is-explicit",
+      "status": "PASS",
+      "detail": "{\"ok\":false,\"code\":\"PROCESSING_JOB_UNKNOWN\"}"
+    },
+    {
+      "id": "N2.select-unknown-job-throws-explicit-code",
+      "status": "PASS",
+      "detail": "threw=PROCESSING_JOB_UNKNOWN"
+    },
+    {
+      "id": "N2.unknown-command-availability-is-explicit",
+      "status": "PASS",
+      "detail": "Unknown Processing command"
+    },
+    {
+      "id": "N2.non-array-jobs-payload-is-explicit-error",
+      "status": "PASS",
+      "detail": "{\"code\":\"PROCESSING_PAYLOAD_SHAPE_INVALID\"}"
+    },
+    {
+      "id": "N2.null-entry-jobs-payload-is-explicit-error",
+      "status": "PASS",
+      "detail": "{\"code\":\"PROCESSING_PAYLOAD_SHAPE_INVALID\"}"
+    },
+    {
+      "id": "N2.malformed-payload-retains-retained-jobs",
+      "status": "PASS",
+      "detail": "jobs=1 first=1"
+    },
+    {
+      "id": "N2.malformed-payload-is-not-reported-available",
+      "status": "PASS",
+      "detail": "providerState=ERROR"
+    },
+    {
+      "id": "N2.absent-jobs-key-is-empty-not-success-claim",
+      "status": "PASS",
+      "detail": "jobs=0"
+    },
+    {
+      "id": "N2.empty-list-stays-empty-state",
+      "status": "PASS",
+      "detail": "rows=0"
+    },
+    {
+      "id": "N3.refresh-without-runtime-is-unavailable",
+      "status": "PASS",
+      "detail": "providerState=UNAVAILABLE"
+    },
+    {
+      "id": "N3.no-fabricated-jobs-without-runtime",
+      "status": "PASS",
+      "detail": "jobs=0"
+    },
+    {
+      "id": "N3.all-actions-blocked-without-runtime",
+      "status": "PASS",
+      "detail": "[\"PROCESSING_PROVIDER_UNAVAILABLE\",\"PROCESSING_PROVIDER_UNAVAILABLE\",\"PROCESSING_PROVIDER_UNAVAILABLE\"]"
+    },
+    {
+      "id": "N3.availability-reports-unavailable-object",
+      "status": "PASS",
+      "detail": "{\"enabled\":false,\"code\":\"PROCESSING_PROVIDER_UNAVAILABLE\",\"reason\":\"Processing provider is unavailable; retained historical jobs are inspection-only.\",\"availabilityOwner\":\"W05ProcessingDomainAdapter\"}"
+    },
+    {
+      "id": "N3.inspect-still-possible-but-empty",
+      "status": "PASS",
+      "detail": "{\"ok\":false,\"code\":\"PROCESSING_JOB_REQUIRED\"}"
+    },
+    {
+      "id": "N3.action-log-recorded-blocked-receipts",
+      "status": "PASS",
+      "detail": "RETRY_BLOCKED,CANCEL_BLOCKED,HANDOFF_BLOCKED"
+    },
+    {
+      "id": "CEIL.cancel-request-is-not-cancel-success",
+      "status": "PASS",
+      "detail": "{\"requested\":true,\"acknowledged\":false,\"cancelled\":false}"
+    },
+    {
+      "id": "CEIL.ack-wording-without-provider-evidence-stays-unproven",
+      "status": "PASS",
+      "detail": "{\"requested\":true,\"acknowledged\":false,\"cancelled\":false}"
+    },
+    {
+      "id": "CEIL.cancelled-requires-state-ack-and-provider-evidence",
+      "status": "PASS",
+      "detail": "{\"requested\":true,\"acknowledged\":true,\"cancelled\":true}"
+    },
+    {
+      "id": "CEIL.handoff-pending-is-not-consumer-success",
+      "status": "PASS",
+      "detail": "{\"state\":\"PENDING\",\"acknowledged\":false,\"receiptId\":null}"
+    },
+    {
+      "id": "CEIL.handoff-ack-without-actual-consumer-ack-is-unproven",
+      "status": "PASS",
+      "detail": "{\"state\":\"ACKNOWLEDGED\",\"acknowledged\":false,\"receiptId\":\"r-x\"}"
+    },
+    {
+      "id": "CEIL.handoff-acknowledged-only-with-real-consumer-receipt",
+      "status": "PASS",
+      "detail": "{\"state\":\"ACKNOWLEDGED\",\"acknowledged\":true,\"receiptId\":\"r-1\"}"
+    },
+    {
+      "id": "CEIL.processingCompletedNeedsProviderEvidence",
+      "status": "PASS",
+      "detail": "{\"proven\":false,\"providerRunId\":null,\"attemptId\":null}"
+    },
+    {
+      "id": "CEIL.provider-proof-requires-actual-execution-evidence",
+      "status": "PASS",
+      "detail": "{\"proven\":true,\"providerRunId\":\"run-1\",\"attemptId\":\"attempt-1\"}"
+    },
+    {
+      "id": "CEIL.rescue-composition-ceilings-intact",
+      "status": "PASS",
+      "detail": "{\"p\":true,\"c\":false,\"r\":false}"
+    },
+    {
+      "id": "REF.no-invented-reference",
+      "status": "PASS",
+      "detail": "commands=[\"processing.inspect\",\"processing.retry\",\"processing.requestCancel\",\"processing.validationHandoff\"]"
+    }
+  ]
+}
