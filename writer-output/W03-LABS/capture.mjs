@@ -28,6 +28,12 @@ const outRoot=path.join(root,'writer-output/W03-LABS/evidence');
 const args=process.argv.slice(2);
 const argValue=n=>{const i=args.indexOf(n);return i>=0?args[i+1]:null};
 const label=argValue('--label')||'probe';
+/* N2 boundary guard: a capture label is one path segment under evidence/. Refuse traversal or
+   separators before anything is created, so an invalid label can never write outside the root. */
+if(!/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(label)||label.includes('..')){
+  console.error(`LABEL_REFUSED: ${JSON.stringify(label)} — capture labels must be a single path segment under evidence/`);
+  process.exit(2);
+}
 const viewports=(argValue('--viewports')||'1505x1045,1440x1000,1280x860,1024x800').split(',').map(v=>{const [w,h]=v.split('x').map(Number);return [w,h]});
 const locales=(argValue('--locales')||'en,ar').split(',');
 const surfaces=(argValue('--surfaces')||'labs').split(',');
@@ -95,9 +101,12 @@ const capture=async()=>{
           const pageErrors=[];
           page.on('pageerror',e=>pageErrors.push(String(e?.message||e)));
           const started=ts();
-          await page.goto(`http://127.0.0.1:${port}/?surface=${surface}`,{waitUntil:'networkidle'});
+          /* Readiness = route booted for THIS surface (consumer gate) + a settle window.
+             `networkidle` was observed never to settle in this environment, so it is not used
+             as the gate; the consumer check is the source-bound readiness truth. */
+          await page.goto(`http://127.0.0.1:${port}/?surface=${surface}`,{waitUntil:'domcontentloaded'});
           await page.waitForFunction(s=>window.CEPFoundation?.consumer===s,surface,{timeout:30000});
-          await page.waitForTimeout(900);
+          await page.waitForTimeout(1400);
           const info=await page.evaluate(PROBE);
           const file=`${surface}-${locale}-${width}x${height}-${started}.png`;
           const filePath=path.join(dir,file);
@@ -121,6 +130,7 @@ const capture=async()=>{
     schemaVersion:1,proof:'W03-LABS-CAPTURE',label,
     route:'/?surface=<surface>',
     renderMethod:'GENUINE_ROUTE_LOCAL_BROWSER',
+    readiness:'domcontentloaded + CEPFoundation.consumer gate + 1400ms settle (networkidle never settled in this environment; consumer gate is the readiness truth)',
     serveRoot:siteRoot,
     sharedDistWritten:false,
     commit:commit(),writableRootDiff:dirty(),
