@@ -41,6 +41,12 @@ No filename, timestamp, checkpoint label, Writer PASS, screenshot or green test 
 - Controller/Coordinator owns exact source binding, collision control, result intake, independent audit and convergence;
 - `OD-20260928-085` is historical task-specific lineage and is not current general serial-topology authority.
 
+## Operating model (quota-efficient routing, 2026-10-02)
+
+`CHATGPT PRECOMPUTE (broad read-only offload) → PRIMARY SPOT-CHECK/ADJUDICATE → MIMO WRITERS EXECUTE → CHATGPT INDEPENDENT REVIEW → PRIMARY INTEGRATE`.
+Offload packets: `controller/12_execution/chatgpt_offload_queue/` (dispatch inputs only, never authority).
+Role boundary: `controller/roles/CHATGPT_CONTROLLER_HELPER_OPERATING_PROFILE.md`. Consume returned analysis via `CONSUME → CHECK SOURCE BINDING → SPOT-CHECK → CHECK INVALIDATION → GAP-FILL → ADJUDICATE`; never restart completed archaeology.
+
 ## Current truth ceilings
 
 - H03 propagation/falsification: `NOT_PROVEN`.

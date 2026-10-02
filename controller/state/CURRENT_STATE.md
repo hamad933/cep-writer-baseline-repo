@@ -313,3 +313,12 @@ No Product acceptance, main merge, release, deployment or stack freeze is create
 - No Product acceptance, main merge, release, deployment or stack freeze is created by this correction.
 
 **Next action:** build an `EXISTING_EVIDENCE_REUSE_MATRIX` for all 23 Surfaces from the already completed H01-H09/Writer/Controller evidence; mark exact invalidation/gap per Surface; launch only the minimum bounded gap-fill audits needed; then construct the OD-087 parallel mutation DAG from the reconciled result.
+
+## RECOVERY OPERATING MODEL / OFFLOAD QUEUE — 2026-10-02
+
+**Classification:** `CURRENT_OPERATING_WISDOM__QUOTA_EFFICIENT_ROUTING__NOT_A_NEW_OWNER_DECISION`
+
+- Recovery archaeology is routed through `controller/12_execution/chatgpt_offload_queue/` (`READY_FOR_CHATGPT` packets OFFLOAD-01/02/03): ChatGPT Project conversations perform broad READ_ONLY analysis from GitHub + exact named Drive evidence; the Primary Controller spot-checks source binding, then performs final adjudication; MiMo/execution capacity is reserved for Product execution and integration.
+- `CHATGPT PRECOMPUTE → PRIMARY SPOT-CHECK/ADJUDICATE → MIMO EXECUTE → CHATGPT INDEPENDENT REVIEW → PRIMARY INTEGRATE`; principles `BROAD_CAPABILITY`, `NARROW_FINAL_AUTHORITY`, `MINIMAL_FRAGMENTATION`, `REUSE_BEFORE_REAUDIT`, `NO_DUPLICATED_ARCHAEOLOGY`.
+- ChatGPT does not finally decide canonical truth, gaps, readiness, Writer need/size, final DAG, launch order, admission or canonical state; it returns `OBSERVED_*` / `CANDIDATE_*` / `UNRESOLVED_FROM_AVAILABLE_EVIDENCE`.
+- Reconciliation receipts: `controller/roles/CHATGPT_CONTROLLER_HELPER_OPERATING_PROFILE.md` (role boundary corrected), `controller/authority/EXECUTION_CARRIER_ROUTE_AUTHORITY.md` §2/§3, `controller/CONTROLLER_GOVERNANCE.md` §0.1.

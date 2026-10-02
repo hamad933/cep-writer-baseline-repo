@@ -4111,6 +4111,18 @@ Controller direct correction is **not** authority for general feature constructi
 
 
 
+## 0.1 Operating model — quota-efficient execution routing (2026-10-02)
+
+**Class:** `CONTROLLER_OPERATING_GOVERNANCE__INTEGRATION_OF_EXISTING_WISDOM__NOT_A_NEW_OWNER_DECISION` (recorded under OD-20260922-079 durability/routing/existing-authority gates; no register row created).
+
+Permanent routing:
+- `CHATGPT PRECOMPUTE (broad read-only analytical offload) → PRIMARY SPOT-CHECK/ADJUDICATE → MIMO WRITERS EXECUTE → CHATGPT INDEPENDENT REVIEW → PRIMARY INTEGRATE`.
+- Principles: `BROAD_CAPABILITY` (whole analytical tasks, deeply and coherently — never tiny fragments) · `NARROW_FINAL_AUTHORITY` (final truth/gap/readiness/Writer-needed/size/scope/locks/DAG/launch/canonical-mutation decisions remain Primary) · `MINIMAL_FRAGMENTATION` (one coherent analytical task → one strong ChatGPT conversation) · `REUSE_BEFORE_REAUDIT` (consume existing audits/results/evidence; check invalidation; gap-fill only) · `NO_DUPLICATED_ARCHAEOLOGY` (Primary does not reread history a valid ChatGPT packet already resolved; no duplicate internal sub-agent archaeology either).
+- Task classes: `CHATGPT_OFFLOAD_FIRST` (read-only git/governance archaeology, RESUME/checkpoint and Writer-result lineage reconstruction, H01–H09/H03-R2/H08 crosswalks, lost/compacted-claim extraction, Owner-decision and route/bootstrap contradiction analysis, source/evidence/invalidation maps, 23-Surface inventories, architecture/reuse/shared-owner analysis, candidate scope/size/DAG analysis, packet/prompt drafting, test/falsification planning, result/diff review, long synthesis) · `PRIMARY_CONTROLLER_ONLY` (final adjudication, real-gap and readiness decisions, final Writer decisions/sizing, writable scope, collision locks, final DAG/launch parent, canonical governance/state mutation, branch/worktree creation, launch, admission/integration, convergence) · `MIMO_EXECUTION_REQUIRED` (Product mutation, debugging, build/test/runtime/browser loops, visual iteration, worktree/branch execution, integration testing).
+- Offload dispatch inputs: `controller/12_execution/chatgpt_offload_queue/` — `DISPATCH_INPUTS_ONLY`; never CURRENT_STATE, authority, Owner decisions, acceptance records, or a second governance system.
+- ChatGPT analytical offload is READ_ONLY and distinct from `ROUTE-CHATGPT` (a mutating Writer carrier under §18/§20.x laws); carrier law for ChatGPT Writers is unchanged.
+- Full role boundary: `controller/roles/CHATGPT_CONTROLLER_HELPER_OPERATING_PROFILE.md` (canonical).
+
 ## 1. Mandatory boot and refresh
 
 

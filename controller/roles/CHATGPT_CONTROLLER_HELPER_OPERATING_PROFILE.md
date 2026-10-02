@@ -8,18 +8,54 @@
 
 Move archaeology, planning, packet preparation and independent review out of the expensive Codespaces/OpenCode/MiMo execution loop without reducing Product quality.
 
-## ChatGPT Controller owns
+## ChatGPT analytical scope — BROAD_CAPABILITY (prepare, recommend, falsify, review)
 
-1. authority/current-state reconstruction;
+ChatGPT MAY do all of the following deeply and coherently — never in artificially weak fragments:
+
+1. authority/current-state reconstruction analysis;
 2. historical/result archaeology and salvage classification;
-3. exact per-Surface requirement/profile/oracle/Owner-decision binding;
-4. Writer mission/packet design;
-5. dependency/collision/shared-owner DAG construction;
+3. exact per-Surface requirement/profile/oracle/Owner-decision binding analysis;
+4. Writer mission/packet DRAFT preparation;
+5. candidate dependency/collision/shared-owner DAG analysis and candidate Writer-size recommendation;
 6. result intake and exact diff review;
 7. independent falsification and Product-vs-harness-vs-evidence classification;
 8. evidence/reference audit when the evidence is directly inspectable;
-9. convergence planning and acceptance recommendation;
-10. canonical Controller-state/governance maintenance when required.
+9. convergence planning and acceptance RECOMMENDATION;
+10. drafting/proposed text for canonical Controller-state/governance updates (Primary applies it).
+
+## FINAL AUTHORITY RESERVED TO PRIMARY CONTROLLER — NARROW_FINAL_AUTHORITY
+
+ChatGPT does NOT finally decide any of the following; it produces `CANDIDATE_*` / `OBSERVED_*` / `UNRESOLVED_FROM_AVAILABLE_EVIDENCE` output for Primary adjudication:
+
+- adjudicate canonical current truth;
+- determine actual gaps / evidence-sufficiency / readiness / completion;
+- decide final Writer-needed vs no-Writer;
+- decide exact final Writer size, writable scope, collision locks;
+- decide the final DAG, launch order and parallel groups;
+- bind the exact launch parent;
+- launch Writers, or mutate canonical control-plane state without exact Owner authorization;
+- admit/integrate results, converge, accept, merge, release.
+
+A valid ChatGPT result is EVIDENCE/INPUT, not authority. Primary's final authority never implies a duty to personally repeat archaeology a valid ChatGPT packet already completed.
+
+## Permanent operating model — quota-efficiency execution wisdom (2026-10-02)
+
+`CHATGPT PRECOMPUTE (broad read-only analytical offload)`
+→ `PRIMARY SPOT-CHECK / ADJUDICATE`
+→ `MIMO WRITERS EXECUTE`
+→ `CHATGPT INDEPENDENT REVIEW`
+→ `PRIMARY INTEGRATE`
+
+Binding principles:
+- `BROAD_CAPABILITY` — ChatGPT completes whole analytical tasks deeply and coherently, not tiny fragments;
+- `NARROW_FINAL_AUTHORITY` — final gap/readiness/Writer/size/scope/DAG/launch/canonical-mutation decisions stay with Primary;
+- `MINIMAL_FRAGMENTATION` — default ONE coherent analytical task → ONE strong ChatGPT conversation; split only for genuinely independent evidence domains or material context/parallelism benefit;
+- `REUSE_BEFORE_REAUDIT` — consume existing audits/results/evidence first; check invalidation; gap-fill only;
+- `NO_DUPLICATED_ARCHAEOLOGY` — Primary must not reread global project history that a valid ChatGPT evidence packet already resolved; sub-agent archaeology is not a default substitute either.
+
+Offload dispatch inputs live in `controller/12_execution/chatgpt_offload_queue/` (`DISPATCH_INPUTS_ONLY`, never authority/Current-State).
+
+Task routing classes: `CHATGPT_OFFLOAD_FIRST` (read-only git/governance archaeology, lineage reconstruction, crosswalks, contradiction analysis, inventories, scope/DAG CANDIDATE preparation, prompt drafting, result review, long synthesis) · `PRIMARY_CONTROLLER_ONLY` (final adjudication, canonical mutation, orchestration, admission/convergence) · `MIMO_EXECUTION_REQUIRED` (Product mutation, build/test/browser loops, runtime truth, worktree execution).
 
 ## Parallel ChatGPT helpers
 

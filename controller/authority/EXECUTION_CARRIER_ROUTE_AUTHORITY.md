@@ -57,6 +57,12 @@ Current topology:
 
 This carrier inherits global value-weighted parallelism from `OD-20260916-043` and carrier isolation from `OD-20260924-081`. It does not inherit ROUTE-LOCAL paths/no-push rules or ROUTE-CHATGPT Capsule ceremony unless an exact mission explicitly rebinds them.
 
+Current operating model (quota-efficiency execution wisdom, 2026-10-02):
+- `CHATGPT PRECOMPUTE (broad read-only analytical offload) → PRIMARY SPOT-CHECK/ADJUDICATE → MIMO WRITERS EXECUTE → CHATGPT INDEPENDENT REVIEW → PRIMARY INTEGRATE`;
+- principles: `BROAD_CAPABILITY`, `NARROW_FINAL_AUTHORITY`, `MINIMAL_FRAGMENTATION`, `REUSE_BEFORE_REAUDIT`, `NO_DUPLICATED_ARCHAEOLOGY`;
+- offload packets: `controller/12_execution/chatgpt_offload_queue/` (dispatch inputs only, never authority);
+- scope classes: `CHATGPT_OFFLOAD_FIRST` / `PRIMARY_CONTROLLER_ONLY` / `MIMO_EXECUTION_REQUIRED` — see `controller/roles/CHATGPT_CONTROLLER_HELPER_OPERATING_PROFILE.md`.
+
 ### ROUTE-LOCAL — LOCAL_EXECUTION
 
 
@@ -189,7 +195,8 @@ The following are carrier-independent unless explicitly superseded:
 - no direct Writer mutation of live Controller governance;
 - Controller independently audits exact results before acceptance/promotion;
 - no sibling ZIP overlay;
-- no Product release/deployment/stack freeze without separate authority.
+- no Product release/deployment/stack freeze without separate authority;
+- quota-efficient execution routing: broad read-only analytical offload to ChatGPT, final adjudication + canonical mutation with the Primary Controller, MiMo/execution capacity reserved for Product execution (see `controller/roles/CHATGPT_CONTROLLER_HELPER_OPERATING_PROFILE.md`).
 
 
 ## 4. Carrier-binding requirement for every mutating Mission
