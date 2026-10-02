@@ -33,13 +33,13 @@ No filename, timestamp, checkpoint label, Writer PASS, screenshot or green test 
 
 ## Current execution carrier
 
-`OD-20260928-085`:
-- `ROUTE-MIMO-AGENT`
-- exactly one persistent sequential Writer
-- branch `writer/mi-serial`
-- W01 → W02 → W03 → W04 → W05
-- Controller performs independent audit
-- historical parallel/per-Surface/WM plans are lineage/dependency evidence only.
+`OD-20261002-087` ACTIVE:
+- multiple Writers are allowed on the current agentic/Codespaces route;
+- one mutating Writer per exact bounded Surface/lane at a time;
+- run genuinely disjoint lanes in parallel under the current DAG/collision matrix;
+- serialize shared hotspots, final wiring, same-owner work and true dependency edges;
+- Controller/Coordinator owns exact source binding, collision control, result intake, independent audit and convergence;
+- `OD-20260928-085` is historical task-specific lineage and is not current general serial-topology authority.
 
 ## Current truth ceilings
 

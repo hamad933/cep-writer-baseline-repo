@@ -5,7 +5,7 @@
 **Custody:** mode-resolved: Drive canonical before cutover; `controller/authority/EXECUTION_CARRIER_ROUTE_AUTHORITY.md` canonical after explicit `GITHUB_CANONICAL` cutover
 **Update mode:** STABLE_NAME__IN_PLACE
 **Authority:** latest Owner decision + CURRENT_STATE + CONTROLLER_GOVERNANCE
-**Current governing decisions: OD-20260921-066, OD-20260921-067, OD-20260922-072, OD-20260922-073, OD-20260922-074, OD-20260922-075, OD-20260922-076, OD-20260924-081, OD-20260924-082, OD-20260925-083 (ROUTE-LOCAL only), OD-20260928-085 (ROUTE-MIMO-AGENT). `OD-20260925-084` is superseded lineage merged into OD-20260921-067.
+**Current governing decisions: OD-20260916-043, OD-20260921-066, OD-20260921-067, OD-20260922-072, OD-20260922-073, OD-20260922-074, OD-20260922-075, OD-20260922-076, OD-20260924-081, OD-20260924-082, OD-20260925-083 (ROUTE-LOCAL only), OD-20261002-087 (current agentic multi-Writer topology). OD-20260928-085 is historical task-specific lineage; OD-20260925-084 is superseded duplicate merged into OD-20260921-067.
 
 
 ## 1. Core separation law
@@ -43,18 +43,19 @@ No carrier-specific rule may be copied, inferred or propagated to another carrie
 
 ### ROUTE-MIMO-AGENT — CURRENT ACTIVE AGENTIC CARRIER
 
-Authority: `OD-20260928-085` ACTIVE.
+Authority: `OD-20261002-087` ACTIVE. `OD-20260928-085` is historical task-specific lineage.
 
-- exactly ONE persistent sequential Writer;
-- candidate branch `writer/mi-serial`;
-- milestones W01 → W02 → W03 → W04 → W05;
-- Controller chat is Controller + independent Auditor;
-- no complex parallel multi-Writer / multi-branch topology for this carrier;
-- historical per-Surface wave plans remain dependency/collision evidence only;
-- Writer checkpoint push is limited to the governed candidate lineage;
-- main merge, Product acceptance, release, deployment and stack freeze remain separately gated.
+Current topology:
+- multiple mutating Writers MAY run concurrently;
+- one Writer per exact bounded Surface/lane at a time;
+- parallel launch requires disjoint writable paths, compatible canonical-owner boundaries, and no unresolved dependency edge;
+- shared hotspots, same-owner mutations, final wiring, integration/convergence and true dependencies serialize;
+- Controller/Coordinator constructs and revalidates the DAG, binds exact parents/scopes, receives results, independently audits each candidate, and admits only verified deltas/checkpoints;
+- interrupted/partial Writer work is salvage input and must not be discarded or promoted merely because files/results exist;
+- branch/worktree layout may use isolated candidate branches/worktrees as needed to prevent collisions; no direct main mutation/self-promotion;
+- Product acceptance, main merge, release, deployment and stack freeze remain separately gated.
 
-This carrier does not inherit ROUTE-CHATGPT Capsule transport ceremony or ROUTE-LOCAL paths/no-push rules. Product/Owner/reuse/falsification laws remain global.
+This carrier inherits global value-weighted parallelism from `OD-20260916-043` and carrier isolation from `OD-20260924-081`. It does not inherit ROUTE-LOCAL paths/no-push rules or ROUTE-CHATGPT Capsule ceremony unless an exact mission explicitly rebinds them.
 
 ### ROUTE-LOCAL — LOCAL_EXECUTION
 

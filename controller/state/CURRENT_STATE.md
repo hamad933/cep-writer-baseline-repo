@@ -3,7 +3,7 @@
 **Role:** sole mutable live CEP project/control state  
 **Authority mode:** `GITHUB_CANONICAL`  
 **Cutover event:** `CEP-GITHUB-CUTOVER-2026-10-02-001`  
-**Current phase:** `OD085_W01_W02_RETAINED__W03_EXACT_CORRECTION_BINDING__W04_W05_RETAINED`  
+**Current phase:** `OWNER_TOPOLOGY_CORRECTION__MULTI_WRITER_RESULT_RECONSTRUCTION__PARALLEL_DAG_REBIND`  
 **Update mode:** `IN_PLACE_ONLY`
 
 ## Canonical control plane
@@ -187,3 +187,18 @@ Prepare one bounded W03 Enterprise correction packet with:
 - negative provider/read-only/geometry/semantic-owner regression proofs;
 - W03 family regression including Runs causal proof and current W01/W02/W04/W05 retained gates.
 
+
+
+## OWNER TOPOLOGY CORRECTION / WRITER RESULT RECONSTRUCTION — 2026-10-02
+
+**Classification:** `CURRENT_OWNER_CORRECTION__OD087_ACTIVE__OD085_HISTORICAL_TASK_SPECIFIC__PRIOR_ENTERPRISE_ONLY_NARROWING_SUPERSEDED__NO_PRODUCT_MUTATION`
+
+- Latest explicit Owner correction supersedes the prior Controller interpretation that ROUTE-MIMO required exactly one persistent sequential Writer.
+- `OD-20261002-087` is ACTIVE: multiple Writers may run concurrently; one mutating Writer per exact bounded Surface/lane; parallelize only genuinely disjoint lanes; serialize shared hotspots/same-owner/final-wiring/dependency edges.
+- `OD-20260928-085` is reclassified `COMPLETED_TASK_SPECIFIC_NON_DURABLE` and preserved as historical lineage only.
+- Prior current-state conclusions that W01/W02/W04/W05 were globally retained/complete and that only Enterprise remained are **SUPERSEDED FOR DISPATCH/COMPLETION TRUTH**. Their underlying source/evidence remains useful, but completion must be reconstructed result-by-result.
+- Known historical execution reality to verify from GitHub/source evidence: several Writers completed; Enterprise subsequently produced a result; many other Surface Writers were interrupted or left partial work. No count or Surface completion list is accepted until reconstructed from exact branch history, writer-output custody, source deltas and independent evidence.
+- Do not restart all work. Classify each Surface/lane as `COMPLETE_AND_INDEPENDENTLY_VERIFIED`, `COMPLETE_RESULT_REAUDIT_REQUIRED`, `PARTIAL_SALVAGE_CONTINUE`, `NOT_STARTED_OR_NO_DURABLE_RESULT`, or `BLOCKED_BY_SHARED_DEPENDENCY`.
+- Next Controller action is a parallel-safe Writer-result reconstruction matrix and fresh DAG. No Product Writer launch is authorized from the superseded Enterprise-only narrowing until that matrix is complete enough to bind disjoint lanes safely.
+- ChatGPT Controllers/helpers should perform authority reconstruction, result archaeology, packet preparation, audits, falsification and convergence planning; heavy Product mutation/build/browser iteration belongs in the stronger Codespaces/OpenCode/MiMo environment unless a bounded Controller correction is clearly cheaper and safe.
+- No Product acceptance, main merge, release, deployment or stack freeze is implied.
