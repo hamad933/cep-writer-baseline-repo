@@ -1,0 +1,670 @@
+{
+  "schemaVersion": 2,
+  "unit": "W05-AUDIT",
+  "surface": "audit",
+  "phase": "after",
+  "candidate": {
+    "commit": "e201dbaba5cb6cf9e6ee2eb1dfd35742d3876904",
+    "tree": "fd187d4137ae0ba12207705d052fa8aa4bb475ee",
+    "dirtyAuditFiles": false,
+    "files": [
+      "stack/native-typescript/surfaces/audit/index.ts",
+      "stack/native-typescript/adapters/audit.ts"
+    ]
+  },
+  "environment": {
+    "node": "v22.16.0",
+    "web": "http://127.0.0.1:44021/",
+    "runtime": "http://127.0.0.1:41647",
+    "runtimeRoot": "writer-output/W05-AUDIT/.runtime/v2-after",
+    "freshRuntimeRoot": true
+  },
+  "reference": {
+    "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/06_AUDIT/CEP_SYSTEM_AUDIT_TRACEABILITY_REFERENCE.png",
+    "sha256": "7cb34c8357dfad0914e4eeaf732c97efbe376e957fe508137c4f730edaeb1e88",
+    "classification": "OWNER_CONFIRMED_FINAL_REFERENCE"
+  },
+  "fixtureState": {
+    "providerSeededEvents": 11,
+    "providerVerify": {
+      "ok": true,
+      "valid": true,
+      "firstInvalidSequence": null,
+      "observedScope": {
+        "fromSequence": 1,
+        "toSequence": 11,
+        "count": 11,
+        "watermarkHash": "a8a64c206526aa21ddda731d06111c67d1c8cd147eccbac4a65cd602900bf7a9"
+      }
+    }
+  },
+  "probes": [
+    {
+      "phase": "after",
+      "locale": "ar",
+      "dirExpected": "rtl",
+      "viewport": {
+        "w": 1440,
+        "h": 1000
+      },
+      "lang": "ar",
+      "dir": "rtl",
+      "title": "السجل التدقيقيAudit & Traceability",
+      "headText": "السجل التدقيقيAudit & Traceability\n            الأحداث ونشاط المستخدمين عبر النظام والعمليات — سلسلة تجزئة قابلة للفحص، لا للتشفير.\n          \n          \n      ",
+      "rows": 36,
+      "chainNodes": 3,
+      "tabs": 5,
+      "scopes": 9,
+      "ctxBlocks": 7,
+      "integrity": "حالة السلسلة: VALID_CHAIN\n      PROVIDER: VALID_CHAIN\n      SESSION: VALID_CHAIN",
+      "actionBarPresent": true,
+      "actionBarText": "السجل مقفل — للإضافة فقطالملاحظات تُخزَّن منفصلة\n        الملاحظات قابلة للتعديل · 3\n        \n        ملاحظة جديدة",
+      "shell": {
+        "globalPrimary": {
+          "x": 0,
+          "y": 0,
+          "w": 1440,
+          "h": 46,
+          "visible": true
+        },
+        "contextBar": {
+          "x": 0,
+          "y": 44,
+          "w": 1440,
+          "h": 36,
+          "visible": true
+        },
+        "topBanner": {
+          "x": 0,
+          "y": 78,
+          "w": 1440,
+          "h": 56,
+          "visible": true
+        },
+        "domainToolbar": {
+          "x": 128,
+          "y": 174,
+          "w": 1300,
+          "h": 32,
+          "visible": true
+        },
+        "bottomShelf": {
+          "x": 0,
+          "y": 961,
+          "w": 1440,
+          "h": 39,
+          "visible": true
+        }
+      },
+      "surface": {
+        "root": {
+          "x": 335,
+          "y": 227,
+          "w": 654,
+          "h": 1149,
+          "visible": true
+        },
+        "head": {
+          "x": 335,
+          "y": 227,
+          "w": 654,
+          "h": 153,
+          "visible": true
+        },
+        "cmdbar": {
+          "x": 335,
+          "y": 297,
+          "w": 654,
+          "h": 72,
+          "visible": true
+        },
+        "actionBar": {
+          "x": 335,
+          "y": 870,
+          "w": 654,
+          "h": 71,
+          "visible": true
+        },
+        "tablePanel": {
+          "x": 335,
+          "y": 388,
+          "w": 654,
+          "h": 203,
+          "visible": true
+        },
+        "tableWrap": {
+          "x": 336,
+          "y": 420,
+          "w": 652,
+          "h": 170,
+          "visible": true
+        },
+        "chainPanel": {
+          "x": 661,
+          "y": 599,
+          "w": 328,
+          "h": 218,
+          "visible": true
+        },
+        "deck": {
+          "x": 335,
+          "y": 599,
+          "w": 316,
+          "h": 698,
+          "visible": true
+        },
+        "json": {
+          "x": 346,
+          "y": 676,
+          "w": 294,
+          "h": 140,
+          "visible": true
+        }
+      },
+      "stageScroll": {
+        "clientH": 754,
+        "scrollH": 1189,
+        "scrollTop": 0
+      },
+      "chromeTotal": 170,
+      "visibleAtFirstScreen": {
+        "table": true,
+        "chain": true,
+        "json": true,
+        "actionBar": true,
+        "bottomShelf": true
+      }
+    },
+    {
+      "phase": "after",
+      "locale": "en",
+      "dirExpected": "ltr",
+      "viewport": {
+        "w": 1440,
+        "h": 1000
+      },
+      "lang": "en",
+      "dir": "ltr",
+      "title": "Audit Registerالسجل التدقيقي",
+      "headText": "Audit Registerالسجل التدقيقي\n            Events and user activity across System & Operations — an inspectable hash chain, never encryption.\n          \n         ",
+      "rows": 36,
+      "chainNodes": 3,
+      "tabs": 5,
+      "scopes": 9,
+      "ctxBlocks": 7,
+      "integrity": "Chain status: VALID_CHAIN\n      PROVIDER: VALID_CHAIN\n      SESSION: VALID_CHAIN",
+      "actionBarPresent": true,
+      "actionBarText": "Record locked — append-onlyNotes are stored separately\n        Annotations mutable · 3\n        \n        New note",
+      "shell": {
+        "globalPrimary": {
+          "x": 0,
+          "y": 0,
+          "w": 1440,
+          "h": 46,
+          "visible": true
+        },
+        "contextBar": {
+          "x": 0,
+          "y": 44,
+          "w": 1440,
+          "h": 36,
+          "visible": true
+        },
+        "topBanner": {
+          "x": 0,
+          "y": 78,
+          "w": 1440,
+          "h": 56,
+          "visible": true
+        },
+        "domainToolbar": {
+          "x": 128,
+          "y": 174,
+          "w": 1300,
+          "h": 32,
+          "visible": true
+        },
+        "bottomShelf": {
+          "x": 0,
+          "y": 961,
+          "w": 1440,
+          "h": 39,
+          "visible": true
+        }
+      },
+      "surface": {
+        "root": {
+          "x": 335,
+          "y": 227,
+          "w": 654,
+          "h": 1165,
+          "visible": true
+        },
+        "head": {
+          "x": 335,
+          "y": 227,
+          "w": 654,
+          "h": 152,
+          "visible": true
+        },
+        "cmdbar": {
+          "x": 335,
+          "y": 296,
+          "w": 654,
+          "h": 72,
+          "visible": true
+        },
+        "actionBar": {
+          "x": 335,
+          "y": 871,
+          "w": 654,
+          "h": 70,
+          "visible": true
+        },
+        "tablePanel": {
+          "x": 335,
+          "y": 387,
+          "w": 654,
+          "h": 203,
+          "visible": true
+        },
+        "tableWrap": {
+          "x": 336,
+          "y": 419,
+          "w": 652,
+          "h": 170,
+          "visible": true
+        },
+        "chainPanel": {
+          "x": 335,
+          "y": 598,
+          "w": 328,
+          "h": 218,
+          "visible": true
+        },
+        "deck": {
+          "x": 673,
+          "y": 598,
+          "w": 316,
+          "h": 716,
+          "visible": true
+        },
+        "json": {
+          "x": 684,
+          "y": 675,
+          "w": 294,
+          "h": 140,
+          "visible": true
+        }
+      },
+      "stageScroll": {
+        "clientH": 754,
+        "scrollH": 1205,
+        "scrollTop": 0
+      },
+      "chromeTotal": 170,
+      "visibleAtFirstScreen": {
+        "table": true,
+        "chain": true,
+        "json": true,
+        "actionBar": true,
+        "bottomShelf": true
+      }
+    },
+    {
+      "phase": "after",
+      "locale": "ar",
+      "dirExpected": "rtl",
+      "viewport": {
+        "w": 1024,
+        "h": 900
+      },
+      "lang": "ar",
+      "dir": "rtl",
+      "title": "السجل التدقيقيAudit & Traceability",
+      "headText": "السجل التدقيقيAudit & Traceability\n            الأحداث ونشاط المستخدمين عبر النظام والعمليات — سلسلة تجزئة قابلة للفحص، لا للتشفير.\n          \n          \n      ",
+      "rows": 36,
+      "chainNodes": 3,
+      "tabs": 5,
+      "scopes": 9,
+      "ctxBlocks": 7,
+      "integrity": "حالة السلسلة: VALID_CHAIN\n      PROVIDER: VALID_CHAIN\n      SESSION: VALID_CHAIN",
+      "actionBarPresent": true,
+      "actionBarText": "السجل مقفل — للإضافة فقطالملاحظات تُخزَّن منفصلة\n        الملاحظات قابلة للتعديل · 3\n        \n        ملاحظة جديدة",
+      "shell": {
+        "globalPrimary": {
+          "x": 0,
+          "y": 1,
+          "w": 1024,
+          "h": 44,
+          "visible": true
+        },
+        "contextBar": {
+          "x": 0,
+          "y": 45,
+          "w": 1024,
+          "h": 34,
+          "visible": true
+        },
+        "topBanner": {
+          "x": 0,
+          "y": 78,
+          "w": 1024,
+          "h": 56,
+          "visible": true
+        },
+        "domainToolbar": {
+          "x": 283,
+          "y": 134,
+          "w": 729,
+          "h": 67,
+          "visible": true
+        },
+        "bottomShelf": {
+          "x": 0,
+          "y": 861,
+          "w": 1024,
+          "h": 39,
+          "visible": true
+        }
+      },
+      "surface": {
+        "root": {
+          "x": 330,
+          "y": 217,
+          "w": 678,
+          "h": 1172,
+          "visible": true
+        },
+        "head": {
+          "x": 330,
+          "y": 217,
+          "w": 678,
+          "h": 149,
+          "visible": true
+        },
+        "cmdbar": {
+          "x": 330,
+          "y": 283,
+          "w": 678,
+          "h": 72,
+          "visible": true
+        },
+        "actionBar": {
+          "x": 330,
+          "y": 775,
+          "w": 678,
+          "h": 71,
+          "visible": true
+        },
+        "tablePanel": {
+          "x": 330,
+          "y": 374,
+          "w": 678,
+          "h": 186,
+          "visible": true
+        },
+        "tableWrap": {
+          "x": 331,
+          "y": 406,
+          "w": 676,
+          "h": 153,
+          "visible": true
+        },
+        "chainPanel": {
+          "x": 668,
+          "y": 568,
+          "w": 341,
+          "h": 218,
+          "visible": true
+        },
+        "deck": {
+          "x": 330,
+          "y": 568,
+          "w": 328,
+          "h": 742,
+          "visible": true
+        },
+        "json": {
+          "x": 341,
+          "y": 646,
+          "w": 306,
+          "h": 126,
+          "visible": true
+        }
+      },
+      "stageScroll": {
+        "clientH": 659,
+        "scrollH": 1203,
+        "scrollTop": 0
+      },
+      "chromeTotal": 201,
+      "visibleAtFirstScreen": {
+        "table": true,
+        "chain": true,
+        "json": true,
+        "actionBar": true,
+        "bottomShelf": true
+      }
+    },
+    {
+      "phase": "after",
+      "locale": "en",
+      "dirExpected": "ltr",
+      "viewport": {
+        "w": 1024,
+        "h": 900
+      },
+      "lang": "en",
+      "dir": "ltr",
+      "title": "Audit Registerالسجل التدقيقي",
+      "headText": "Audit Registerالسجل التدقيقي\n            Events and user activity across System & Operations — an inspectable hash chain, never encryption.\n          \n         ",
+      "rows": 36,
+      "chainNodes": 3,
+      "tabs": 5,
+      "scopes": 9,
+      "ctxBlocks": 7,
+      "integrity": "Chain status: VALID_CHAIN\n      PROVIDER: VALID_CHAIN\n      SESSION: VALID_CHAIN",
+      "actionBarPresent": true,
+      "actionBarText": "Record locked — append-onlyNotes are stored separately\n        Annotations mutable · 3\n        \n        New note",
+      "shell": {
+        "globalPrimary": {
+          "x": 0,
+          "y": 1,
+          "w": 1024,
+          "h": 44,
+          "visible": true
+        },
+        "contextBar": {
+          "x": 0,
+          "y": 45,
+          "w": 1024,
+          "h": 34,
+          "visible": true
+        },
+        "topBanner": {
+          "x": 0,
+          "y": 78,
+          "w": 1024,
+          "h": 56,
+          "visible": true
+        },
+        "domainToolbar": {
+          "x": 261,
+          "y": 134,
+          "w": 751,
+          "h": 67,
+          "visible": true
+        },
+        "bottomShelf": {
+          "x": 0,
+          "y": 861,
+          "w": 1024,
+          "h": 39,
+          "visible": true
+        }
+      },
+      "surface": {
+        "root": {
+          "x": 330,
+          "y": 217,
+          "w": 678,
+          "h": 1188,
+          "visible": true
+        },
+        "head": {
+          "x": 330,
+          "y": 217,
+          "w": 678,
+          "h": 148,
+          "visible": true
+        },
+        "cmdbar": {
+          "x": 330,
+          "y": 282,
+          "w": 678,
+          "h": 72,
+          "visible": true
+        },
+        "actionBar": {
+          "x": 330,
+          "y": 776,
+          "w": 678,
+          "h": 70,
+          "visible": true
+        },
+        "tablePanel": {
+          "x": 330,
+          "y": 373,
+          "w": 678,
+          "h": 186,
+          "visible": true
+        },
+        "tableWrap": {
+          "x": 331,
+          "y": 405,
+          "w": 676,
+          "h": 153,
+          "visible": true
+        },
+        "chainPanel": {
+          "x": 330,
+          "y": 567,
+          "w": 341,
+          "h": 218,
+          "visible": true
+        },
+        "deck": {
+          "x": 681,
+          "y": 567,
+          "w": 328,
+          "h": 760,
+          "visible": true
+        },
+        "json": {
+          "x": 692,
+          "y": 645,
+          "w": 306,
+          "h": 126,
+          "visible": true
+        }
+      },
+      "stageScroll": {
+        "clientH": 659,
+        "scrollH": 1219,
+        "scrollTop": 0
+      },
+      "chromeTotal": 201,
+      "visibleAtFirstScreen": {
+        "table": true,
+        "chain": true,
+        "json": true,
+        "actionBar": true,
+        "bottomShelf": true
+      }
+    }
+  ],
+  "captures": [
+    {
+      "name": "ar-rtl-full",
+      "path": "writer-output/W05-AUDIT/evidence/v2-after-ar-rtl-full-1440x1000-20261002T061723Z.png",
+      "sha256": "919efad82cce37bcbd71714956de1c040461eb531d8bff8a428502caae916c2f",
+      "bytes": 279283,
+      "viewport": "1440x1000",
+      "lang": "ar",
+      "dir": "rtl",
+      "capturedAt": "2026-10-02T06:17:23.885Z"
+    },
+    {
+      "name": "ar-rtl-scrolled",
+      "path": "writer-output/W05-AUDIT/evidence/v2-after-ar-rtl-scrolled-1440x1000-20261002T061724Z.png",
+      "sha256": "511e0f763057bfdf5f89be0662bf5060a0543292a71e69217c2a8fe6c8df9265",
+      "bytes": 246792,
+      "viewport": "1440x1000",
+      "lang": "ar",
+      "dir": "rtl",
+      "capturedAt": "2026-10-02T06:17:24.492Z"
+    },
+    {
+      "name": "en-ltr-full",
+      "path": "writer-output/W05-AUDIT/evidence/v2-after-en-ltr-full-1440x1000-20261002T061729Z.png",
+      "sha256": "3f07745510c82c1849377f382f1567d5f2e12e6d24780b16219f802a281dd5c9",
+      "bytes": 311163,
+      "viewport": "1440x1000",
+      "lang": "en",
+      "dir": "ltr",
+      "capturedAt": "2026-10-02T06:17:29.661Z"
+    },
+    {
+      "name": "en-ltr-scrolled",
+      "path": "writer-output/W05-AUDIT/evidence/v2-after-en-ltr-scrolled-1440x1000-20261002T061730Z.png",
+      "sha256": "b5ef3da529c04064e7eaa1944fc1c14433c93a47cd33ec7cf243fa5f66d268ce",
+      "bytes": 273417,
+      "viewport": "1440x1000",
+      "lang": "en",
+      "dir": "ltr",
+      "capturedAt": "2026-10-02T06:17:30.449Z"
+    },
+    {
+      "name": "ar-rtl-full",
+      "path": "writer-output/W05-AUDIT/evidence/v2-after-ar-rtl-full-1024x900-20261002T061736Z.png",
+      "sha256": "4dd9d6f10e49f1613a556b52f17c84c02e3e2f3d9839303387f504c720236949",
+      "bytes": 200393,
+      "viewport": "1024x900",
+      "lang": "ar",
+      "dir": "rtl",
+      "capturedAt": "2026-10-02T06:17:36.256Z"
+    },
+    {
+      "name": "ar-rtl-scrolled",
+      "path": "writer-output/W05-AUDIT/evidence/v2-after-ar-rtl-scrolled-1024x900-20261002T061736Z.png",
+      "sha256": "1925724152c69582d780687796f6ee258341056a8910226735aec317a867c877",
+      "bytes": 148336,
+      "viewport": "1024x900",
+      "lang": "ar",
+      "dir": "rtl",
+      "capturedAt": "2026-10-02T06:17:36.955Z"
+    },
+    {
+      "name": "en-ltr-full",
+      "path": "writer-output/W05-AUDIT/evidence/v2-after-en-ltr-full-1024x900-20261002T061742Z.png",
+      "sha256": "5891cbd0cd797b0ba3e9d4747782296d01942061490af08d3be568c74b7ffe0d",
+      "bytes": 220494,
+      "viewport": "1024x900",
+      "lang": "en",
+      "dir": "ltr",
+      "capturedAt": "2026-10-02T06:17:42.744Z"
+    },
+    {
+      "name": "en-ltr-scrolled",
+      "path": "writer-output/W05-AUDIT/evidence/v2-after-en-ltr-scrolled-1024x900-20261002T061743Z.png",
+      "sha256": "6f2019d608d832dfd2d35646741b10eca5a82d961b6f28531596c6099a128a43",
+      "bytes": 162505,
+      "viewport": "1024x900",
+      "lang": "en",
+      "dir": "ltr",
+      "capturedAt": "2026-10-02T06:17:43.339Z"
+    }
+  ],
+  "errors": []
+}
