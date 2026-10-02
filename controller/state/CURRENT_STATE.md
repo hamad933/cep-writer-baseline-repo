@@ -77,6 +77,13 @@ The 23 structurally revalidated packets remain candidate execution bindings only
 - release/deployment: `NOT_AUTHORIZED`
 - stack: `STACK_EXPANSION_LOCKED__STACK_NOT_FROZEN`
 
+## Final cutover/checkpoint evidence
+
+- Drive-entry proof payload: `0f3562bdf5b051b6c55cfad4fe83a2deb9d3337b` / tree `92cc8fe8de0813f179d6678e165df091c5c7ee5f`
+- exact validation run: `36944032547` = SUCCESS
+- checkpoint classification: `GITHUB_CANONICAL__DRIVE_COMPATIBILITY_PROVEN`
+- recovery rule: fetch actual remote HEAD/tree first; this later state-record commit is expected to advance the branch.
+
 ## Next action
 
 Drive reconciliation and Drive-entry successor recovery are complete. Next, bind the exact currently legal OD-085 milestone starting point from current Product/evidence truth. Do not infer the milestone from historical WM/parallel state; re-evaluate W01→W05 completion/retention against the current branch, packet/profile truth and open Enterprise/Runs/H03 findings before Writer mutation.
