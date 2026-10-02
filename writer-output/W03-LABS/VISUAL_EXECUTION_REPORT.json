@@ -14,11 +14,15 @@
   },
   "REFERENCE_CLASSIFICATION": "CURRENT_FINAL_REFERENCE",
   "CURRENT_CANDIDATE": {
-    "commit": "68341ec18f79 (HEAD at capture time; worktree dirty — labs roots owned by this unit only)",
-    "buildTool": "tools/writer-serial.sh npm run build:runtime",
+    "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc (exact lane HEAD; writable-root diff = stack/native-typescript/surfaces/labs/board.ts only)",
+    "sourceTreeSha256": "b9b6c8cad4573b4ca73992c60579c1d544423832ea3c1b636eb38b2a7a53598d (canonical source identity AFTER the DEF-LAB-R11 fix; 338 files)",
+    "sourceTreeSha256BeforeFix": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc (sealed parent, labs roots unedited)",
+    "buildTool": "npm run build:runtime (written=323, pass=true) + writer-private writer-output/W03-LABS/build-site.mjs (written=323, keptFromDist=[], missingInDist=[])",
     "renderMethod": "GENUINE_ROUTE_LOCAL_BROWSER",
     "route": "/?surface=labs",
-    "capture": "writer-output/W03-LABS/capture.mjs"
+    "readinessGate": "domcontentloaded + CEPFoundation.consumer gate + 1400ms settle (networkidle was observed never to settle while a sibling lane's local-runtime service on 127.0.0.1:4174 held the platform input-direction request pending)",
+    "capture": "writer-output/W03-LABS/capture.mjs",
+    "proof": "writer-output/W03-LABS/postfix-proof.mjs → writer-output/W03-LABS/POSTFIX_PROOF.json (16/16)"
   },
   "FILES_CHANGED": [
     "stack/native-typescript/surfaces/labs/i18n.ts (NEW — bilingual label set, locale/direction readers)",
@@ -32,17 +36,17 @@
     "stack/native-typescript/adapters/labs/domain.ts (unchanged — domain truth preserved)",
     "writer-output/W03-LABS/* (report, handoff, capture harness, evidence)"
   ],
-  "FUNCTIONAL_STATUS": "PENDING rebuild+run",
-  "STRUCTURAL_STATUS": "PENDING rebuild+run",
-  "VISUAL_STATUS": "IN_PROGRESS — baseline captured and L1–L4 diagnosed; new composition built, awaiting matched-viewport recapture",
+  "FUNCTIONAL_STATUS": "PASS 12/12 at exact candidate HEAD — writer-output/W03-LABS/FUNCTIONAL.json (fresh run against dist from npm run build:runtime; includes structure/rail/context/selection/palette/lifecycle/menu/RTL/donor/no-page-error checks)",
+  "STRUCTURAL_STATUS": "PASS — no-donor-leak/no-dead-regions holds (visible donor nodes = 0, left/right non-region siblings = 0, region tops equal, page overflow 0) on both locales; recorded in FUNCTIONAL.json + POSTFIX_PROOF.json (DONOR.no-visible-donor-leak)",
+  "VISUAL_STATUS": "PASS (candidate, NOT_OWNER_ACCEPTED) — post-fix recapture complete: evidence/after5 (10 frames, both locales × 1505x1045/1440x1000/1280x860/1024x900/1024x800) at exact HEAD; L1/L2 re-compare executed on the after5 bytes (COMPARE-after5-en.json / COMPARE-after5-ar.json); B04 node paint re-proven from same bytes",
   "VISUAL_COMPARISON_LEVELS_COMPLETED": [
     "L1 whole surface (baseline vs reference)",
     "L2 region/pane (left / center / right / toolbar / bottom)",
     "L3 component (task cards, graph nodes, legend, structure rows, context rows)",
     "L4 micro (node1 pixel variance probe, node geometry, OCR ground truth)"
   ],
-  "RESPONSIVE_STATUS": "PENDING recapture (matrix 1505x1045 / 1440x1000 / 1280x860 / 1024x800)",
-  "RTL_LTR_STATUS": "PENDING recapture (en+ltr and ar+rtl)",
+  "RESPONSIVE_STATUS": "PASS — matrix recaptured (1505x1045 / 1440x1000 / 1280x860 / 1024x900 / 1024x800 × en+ar, evidence/after5). Probe assertions at 1440x1000, 1280x860, 1024x900, 1024x800: overflowX=overflowY=0, visible panes never overlap, rightmost pane fits the viewport, graph height ≥ 260, zero page errors. At 1024 the RIGHT pane is deliberately collapsed (PaneResponsiveCore) and the collapse is reversible: [data-pane-toggle=right] reveals #domainContext at 278×678 with 6 context rows.",
+  "RTL_LTR_STATUS": "PASS — AR/RTL and EN/LTR both first-class at 1440x1000 (I18N.ar-rtl-first-class, I18N.en-ltr-first-class): document dir/lang correct, Arabic surface chrome in AR (no English action labels), zero Arabic characters in EN surface-owned chrome, bdi technical-token isolation present, region tops equal, overflowX=0. Recapture also exposed DEF-LAB-R11 (direction-dependent relation stroke) which was fixed surface-side and re-verified (AR linear edges now canonical/solid like EN).",
   "DEFECTS_FOUND": [
     {
       "id": "DEF-LAB-B01",
@@ -70,8 +74,18 @@
       "severity": "V3",
       "rootCause": "SURFACE_COMPOSITION",
       "defect": "Graph task 1 ('Discover Input Surface') was visually destroyed in the capture — pixel stddev 13 vs 45 for its neighbour, OCR reads no text in its 133×50 rect although DOM probe shows the node and its title present at (365,369,133,50).",
-      "fix": "Surface now injects its own style sheet after each render (no shared stylesheet edit) and re-mounts SpatialView per render; re-verified by pixel-variance + OCR on the same bytes in the after-capture. OPEN until recaptured.",
-      "status": "OPEN_PENDING_RECAPTURE"
+      "fix": "Surface now injects its own style sheet after each render (no shared stylesheet edit) and re-mounts SpatialView per render; re-verified by pixel-variance + OCR on the same bytes in the after-capture.",
+      "status": "RESOLVED",
+      "reProof": {
+        "boundTo": "commit fe1bb98ded51adc71a5f5fd14142a2c0880c11bc · source tree b9b6c8cad4573b4ca73992c60579c1d544423832ea3c1b636eb38b2a7a53598d",
+        "capture": "writer-output/W03-LABS/evidence/postfix/b04-node-paint-en-1505x1045.png · sha256 6f673349151da7d3e3b09b94acaca0ac7dab9542195b89b870f7e165304e46a6 · 276804 bytes (identical bytes to the after5 en/1505x1045 frame)",
+        "rect": "TASK-1 .node-surface measured on the same page at (346,627) 142×95 CSS px (card CSS 156×104)",
+        "pixel": "stddev 46.78 vs baseline 13; ink 0.2096; neighbour TASK-2 stddev 38.29 → ratio 1.22 (baseline ratio 0.29)",
+        "ocr": "'1 | tasx-2 Discover Input Surface identify reachable input' — tesseract 5.3.4, prep invert+x3+autocontrast, psm 6 (baseline OCR returned no text for this rect)",
+        "dom": "title tspans ['Discover Input','Surface']; aria-label 'Discover Input Surface — Identify reachable input points. [objective · Required]'; style[data-w03-labs-style] present; 0 page errors",
+        "crop": "writer-output/W03-LABS/evidence/postfix/b04-task1-rect.png · sha256 9140a906d9a2c050b1240fb4227d05e718aa9435f7b2b48880457f95169e12f2",
+        "check": "POSTFIX_PROOF.json → B04.node-paint-reproof PASS (thresholds: stddev ≥ 25, ratio ≥ 0.5, OCR must read discover + (input|surface))"
+      }
     },
     {
       "id": "DEF-LAB-B05",
@@ -193,7 +207,16 @@
       "rootCause": "SHARED_COMPONENT",
       "defect": "The reference distinguishes Conditional Unlock (dashed) from Optional Branch (dashed + circle); the shared relation renderer only has solid/dashed stroke classes.",
       "fix": "Legend keys preserved as the reference's three relationships; the optional branch is additionally marked by the `Optional` chip on its target node and the `Branches` group in the structure pane. Geometry not forked.",
-      "status": "RESIDUAL_ACCEPTED"
+      "status": "RESIDUAL_ACCEPTED",
+      "reProvedNotAssumed": {
+        "boundTo": "commit fe1bb98ded51 · source tree b9b6c8cad4573b4c · POSTFIX_PROOF.json → R09.optional-vs-conditional-residual-reproved PASS",
+        "method": "the shipped fixture has no conditional edge, so one was authored through the real labs bus on the real renderer (labs.author op=connect, type=conditional, EDGE-COND-PROOF) and the rendered strokes were measured — not inferred from source",
+        "measured": "Conditional Unlock dash = '7px, 4px' (styleClass related) · Optional Branch dash = '7px, 4px' (styleClass related) · Linear Dependency dash = 'none' (styleClass canonical) → conditional ≡ optional, i.e. exactly two stroke classes for the reference's three relationships",
+        "legend": "3 keys rendered: Linear Dependency (solid swatch) / Conditional Unlock (dash swatch) / Optional Branch (dash dot swatch); Branches group present in the structure pane",
+        "rtl": "AR legend likewise renders 3 keys (تبعية خطية / فتح مشروط / فرع اختياري) with the same two rendered stroke classes",
+        "evidence": "writer-output/W03-LABS/evidence/postfix/r09-legend-en.png sha256 a62c9be9ee40a9b1bcfaf17e3d3a96f9bb4e00585a6a5a32bae4ccd5898cf441 · r09-legend-ar.png sha256 fc9f893e0e4132cff906a75679679713b5370fe69b22f19073577bdce0dfe132 (hashes as recorded in POSTFIX_PROOF.json for the final run)",
+        "verdict": "RESIDUAL_REPROVED_NOT_FIXED — still accepted for the same stated reason (shared stroke geometry not forked); acceptance is re-evidenced rather than inherited"
+      }
     },
     {
       "id": "DEF-LAB-R10",
@@ -201,10 +224,36 @@
       "rootCause": "SHARED_COMPONENT",
       "defect": "Shared multi-selection boundary (132×62) and minimap tiles (132×62) still assume the default card size.",
       "fix": "Cosmetic only; not corrected locally to avoid duplicating shared geometry.",
-      "status": "RESIDUAL_ACCEPTED"
+      "status": "RESIDUAL_ACCEPTED",
+      "reProvedNotAssumed": {
+        "boundTo": "commit fe1bb98ded51 · source tree b9b6c8cad4573b4c · POSTFIX_PROOF.json → R10.selection-boundary-and-minimap-residual-reproved PASS",
+        "method": "measured in the live surface during a real Shift + pointer-down selection gesture (the reachable moment the shared group boundary is drawn), plus a direct read of the minimap tiles",
+        "measured": "selectionCount 2 · group boundary (331,613)–(677,698) px · TASK-1 card right 488 px, TASK-2 card right 684 px → the boundary stops 7 px short of the rightmost card edge (shared render uses node.x+132+pad16 while the Labs card is 156 model units) · minimap tiles all 132×62 while the card box measures 156×104 CSS px",
+        "note": "the Labs surface collapses multi-selection back to a single domain selection on release (board.ts select callback takes ids.at(-1)), so the boundary is observable only during the gesture; the minimap tile mismatch is permanently observable",
+        "evidence": "writer-output/W03-LABS/evidence/postfix/r10-multi-selection-boundary-en.png sha256 161e5e90b601cbeb151fe7cf4e2fa761013e2f406966623f2abfeac2c23bfe56 (281493 bytes) · r10-minimap-en.png sha256 03d44ad3e44b78147a745a729b88f01f4b25e523dd5df470a4f1377a53927c67 (2789 bytes)",
+        "verdict": "RESIDUAL_REPROVED_NOT_FIXED — still accepted for the same stated reason (cosmetic; shared geometry not duplicated in the surface); acceptance is re-evidenced rather than inherited"
+      }
+    },
+    {
+      "id": "DEF-LAB-R11",
+      "severity": "V2",
+      "rootCause": "SURFACE_COMPOSITION",
+      "defect": "Found during the RTL/LTR recapture: the Labs graph model passed the LOCALIZED relationship label as `edge.type`, and the shared relation classifier resolves stroke class from English tokens only (/(optional|conditional|branch)/ → related, /depend|linear|canonical|…/ → canonical). In AR every edge therefore fell through to `related` and rendered dashed/blue — including the three Linear Dependency edges — while the AR legend's first swatch is solid and the EN session renders those edges solid/green. Stroke presentation thus depended on the active language (direction-visible inconsistency).",
+      "fix": "surface-local, no shared file edited: board.ts graphModel now states the shared `styleClass` token explicitly (`canonical` for linear kinds, `related` for conditional/optional kinds) while `type` keeps carrying the localized visible label and accessible name. The shared presentation honours an explicit styleClass first, so rendering becomes direction-independent and the legend swatch matches the stroke in both locales.",
+      "status": "RESOLVED",
+      "evidence": {
+        "before": "POSTFIX_PROOF R09.edge-styles-observed-in-ar (pre-fix run): AR dashSet ['7px, 4px'] for all 4 edges — even تبعية خطية (Linear Dependency) rendered styleClass=related/dashed",
+        "after": "POSTFIX_PROOF R09.edge-styles-observed-in-ar (final run): AR dashSet ['none','7px, 4px'] — the three تبعية خطية edges render styleClass=canonical/dash=none (solid), فرع اختياري stays related/7px,4px; EN run unchanged (Linear=canonical none, Conditional/Optional=related 7px,4px)",
+        "captured": "evidence/after5/labs-ar-1505x1045-*.png and labs-en-1505x1045-*.png (both locales, exact HEAD, hash-bound in CAPTURE_MANIFEST.json)",
+        "changedPath": "stack/native-typescript/surfaces/labs/board.ts (only writable-root source change in this lane)"
+      }
     }
   ],
-  "DEFECT_SEVERITY": ["V4 x2", "V3 x3", "V2 x5", "V1 x0", "V0 x0"],
+  "DEFECT_SEVERITY": {
+    "allDefects": ["V4 x3 (B01,B02,R01)", "V3 x7 (B03,B04,B05,R02,R03,R04,R05)", "V2 x9 (B06,B07,B08,B09,B10,R06,R07,R08,R11)", "V1 x1 (R09)", "V0 x1 (R10)"],
+    "status": "RESOLVED x19 (B01–B10, R01–R08, R11) · RESIDUAL_ACCEPTED x2 (R09, R10 — both RE-PROVED with fresh evidence, not assumed)",
+    "note": "the previous line [\"V4 x2\",\"V3 x3\",\"V2 x5\",\"V1 x0\",\"V0 x0\"] counted only the B-series; this counts every defect recorded for this surface"
+  },
   "ROOT_CAUSE": "SURFACE_COMPOSITION (primary: LEFT/CENTER/RIGHT were shared generic projections rather than a lab task-graph workbench) · CONTENT_MODEL (Arabic chrome) · SHARED_COMPONENT (fixed node geometry, donor pane reveal) · STALE_DECISION (legacy second composition)",
   "FIXES_APPLIED": [
     "New surface modules: i18n.ts, icons.ts, styles.ts, structure.ts, context.ts, board.ts",
@@ -214,9 +263,9 @@
     "Bilingual chrome + localized surface-owned command labels + preference-driven re-render",
     "Surface-local donor suppression with terminating MutationObserver"
   ],
-  "RECAPTURE_STATUS": "IN_PROGRESS — after3 captured before DEF-LAB-R01..R07 fixes; final capture pending a green shared build (other units' files intermittently red)",
-  "RECOMPARISON_STATUS": "PENDING final capture (L1/L2 instrument ready: writer-output/W03-LABS/compare.py)",
-  "REGRESSION_STATUS": "PASS 4/4 — `tests/surfaces/labs/domain.test.js`, `tests/rescue/S11_W03_SCENARIOS_LABS/lab-task-graph.test.js`, `tests/rescue/CG4_W03_COVERAGE/controller-corr01-w03-lifecycle-truth.test.js`, `tests/surfaces/runs/group-regression.test.js` (executed against a writer-private full source build; `SITE_BUILD.json` shows all 322 sources stripped cleanly, 0 kept-from-dist)",
+  "RECAPTURE_STATUS": "COMPLETE — evidence/after5 (10 frames: 1505x1045, 1440x1000, 1280x860, 1024x900, 1024x800 × en+ar) captured from dist produced by `npm run build:runtime` at exact HEAD fe1bb98ded51 with the only writable-root diff being surfaces/labs/board.ts (manifest records commit + writableRootDiff + node + serveRoot + per-frame sha256/bytes/pageErrors/info). evidence/after4 is retained as the pre-fix round (never deleted); evidence/after, after2, after3 remain the superseded salvage rounds.",
+  "RECOMPARISON_STATUS": "COMPLETE (L1/L2) — compare.py re-run on the after5 bytes vs the CURRENT_FINAL_REFERENCE in both locales: COMPARE-after5-en.json (candidate 6f673349151da7d3) and COMPARE-after5-ar.json (candidate 8482481f6bca41ca). Region ink/OCR: right 0.0476 ref vs 0.0485 cand (en) / 0.0432 (ar) ≈ reference; left and centre denser than the reference (cand ink 0.0975/0.086 en) with more OCR text — intentional content density per packet §7, not a dead-region regression; toolbar band lighter (0.0577 vs 0.1031, OCR 58 vs 116) — recorded as a pre-existing observation (the reference's toolbar band carries surface-specific controls; this surface groups them in the workbench action row), not raised as a new defect. L3/L4 evidence lives in POSTFIX_PROOF (B04 node rect + crop, R09 legend crops, R10 gesture + minimap crops).",
+  "REGRESSION_STATUS": "PASS 4/4 re-run at exact HEAD after the final change — `dist/tests/surfaces/labs/domain.test.js` (labs surface: PASS), `dist/tests/rescue/S11_W03_SCENARIOS_LABS/lab-task-graph.test.js` (PASS), `dist/tests/rescue/S11_W03_SCENARIOS_LABS/scenario-studio.test.js` (PASS), `dist/tests/rescue/CG4_W03_COVERAGE/controller-corr01-w03-lifecycle-truth.test.js` (PASS) + `dist/tests/surfaces/runs/group-regression.test.js` (W03 group regression: PASS) — against a build whose `SITE_BUILD.json` shows written=323 with keptFromDist=[] (0 kept-from-dist); `npm test` 210/0 twice, id/status sequence identical apart from the run timestamp",
   "EVIDENCE": [
     {
       "kind": "REFERENCE",
@@ -241,16 +290,65 @@
       "sha256": "671707dbbe97eb11 (16)",
       "dims": "1505x1045",
       "note": "Arabic session, English-only labs chrome — evidence for DEF-LAB-B05"
+    },
+    {
+      "kind": "RECAPTURE_POSTFIX",
+      "path": "writer-output/W03-LABS/evidence/after5/CAPTURE_MANIFEST.json",
+      "sha256": "9372c46e80fbef42cb45ee567a0494baf052cab5405b0571e150c497a71dbe29",
+      "frames": 10,
+      "matrix": "1505x1045, 1440x1000, 1280x860, 1024x900, 1024x800 × en+ar",
+      "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+      "writableRootDiff": "M stack/native-typescript/surfaces/labs/board.ts",
+      "note": "responsive + RTL/LTR recapture closure; every frame carries sha256, bytes, capturedAt, pageErrors and the DOM probe (dir/lang/panes/donors/scroll)"
+    },
+    {
+      "kind": "POSTFIX_PROOF",
+      "path": "writer-output/W03-LABS/POSTFIX_PROOF.json",
+      "sha256": "see file — 16/16 PASS at commit fe1bb98ded51, source tree b9b6c8cad4573b4c",
+      "ranAt": "2026-10-02T05:23:56.757Z",
+      "covers": "B04 re-proof · R09 re-proof · R10 re-proof · RESPONSIVE ×4 · I18N AR+EN · N1 · N1b · N2 (domain) · N2 (instrument) · N3 · DONOR",
+      "artifacts": "evidence/postfix/b04-node-paint-en-1505x1045.png (6f673349151da7d3), b04-task1-rect.png (9140a906d9a2c050), r09-legend-en.png (a62c9be9ee40a9b1), r09-legend-ar.png (fc9f893e0e4132cf), r10-multi-selection-boundary-en.png (161e5e90b601cbeb1), r10-minimap-en.png (03d44ad3e44b7814)"
+    },
+    {
+      "kind": "SITE_BUILD",
+      "path": "writer-output/W03-LABS/SITE_BUILD.json",
+      "result": "pass=true, written=323, keptFromDist=[] (0 kept-from-dist), missingInDist=[], all 9 labs modules written from source",
+      "note": "lane-specific falsification: site build re-run at final state → zero kept-from-dist"
+    },
+    {
+      "kind": "FUNCTIONAL",
+      "path": "writer-output/W03-LABS/FUNCTIONAL.json",
+      "result": "12/12 PASS at exact HEAD against dist from npm run build:runtime",
+      "note": "includes structure.pane.*, board.*, arabic.*, structure.no-donor-leak.no-dead-regions, page.no-uncaught-errors"
+    },
+    {
+      "kind": "L1_L2_COMPARE",
+      "paths": ["writer-output/W03-LABS/COMPARE-after5-en.json", "writer-output/W03-LABS/COMPARE-after5-ar.json"],
+      "candidates": ["6f673349151da7d3 (en 1505x1045)", "8482481f6bca41ca (ar 1505x1045)"],
+      "reference": "09f9d53b8d845ad3",
+      "note": "region ink/OCR on identical bytes (PIL + tesseract 5.3.4); deltas interpreted in RECOMPARISON_STATUS"
+    },
+    {
+      "kind": "W03_FLOWS",
+      "command": "node tools/w03-browser-flows.mjs",
+      "firstRun": "7/7 PASS at exact HEAD fe1bb98ded51 (source tree 0c43d7f11631dc85, 338 files, labs roots unedited) — log preserved in evidence/flows/w03-flows-1st-7of7-pass.log",
+      "laterRuns": "blocked by environment: page.goto networkidle never settles because the platform input-direction request to http://127.0.0.1:4174/v1/platform/input-direction (stack/local-runtime/server.mjs started by a sibling lane at 05:17:14) stays pending in Chromium while curl answers 503 in 49 ms — logs evidence/flows/w03-flows-*.log; classified ENVIRONMENT, not a labs product defect (page boots, consumer gate satisfied, 0 page errors)",
+      "note": "tools/w03-browser-flows.mjs is read-only for this lane and hard-codes networkidle; it also uses fixed port 43174, which collides when another lane runs the same harness concurrently"
     }
   ],
   "LINEAGE": [
     "REFERENCE: 09f9d53b8d845ad3 · CURRENT_FINAL_REFERENCE · read + OCR corroborated before any code change",
     "BASELINE: commit 68341ec18f79 · route /?surface=labs · viewport 1505x1045 · en and ar · same-byte OCR",
-    "CANDIDATE: worktree of surfaces/labs + adapters/labs only; no shared file edited; no git add/commit performed by this unit"
+    "CANDIDATE: worktree of surfaces/labs + adapters/labs only; no shared file edited; no git add/commit performed by this unit",
+    "POSTFIX-ROUND-1 (after4): commit fe1bb98ded51 · labs roots unedited (source tree 0c43d7f11631dc85) · 10 frames · superseded by after5 once DEF-LAB-R11 was fixed — retained, never deleted",
+    "POSTFIX-ROUND-2 (after5): commit fe1bb98ded51 · source tree b9b6c8cad4573b4c after the single-writable-root change surfaces/labs/board.ts (DEF-LAB-R11) · 10 frames · manifest sha256 9372c46e80fbef42",
+    "PROOF: POSTFIX_PROOF.json 16/16 at the same commit+tree; B04/R09/R10 re-proven from those bytes; SITE_BUILD keptFromDist=[]; FUNCTIONAL 12/12; npm test 210/0 twice (identical id/status sequence); packet tests 5/5; npm run check → only check-contracts red (browser.lineage_receipt_truthful known red + browser.current_candidate_claim_truthful lineage freshness, see BLOCKERS)",
+    "INSTRUMENT CHANGES (writer-local, all inside writer-output/W03-LABS/): capture.mjs readiness gate networkidle → domcontentloaded + consumer gate + 1400 ms, plus a LABEL_REFUSED path guard (N2); pixelcheck.py added (same-page rect pixel/OCR truth); postfix-proof.mjs added (16 named checks)"
   ],
   "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
   "BLOCKERS": [
-    "Shared `npm run build:runtime` transiently red from another unit's in-flight TypeScript file (surfaces/manual_ai, `dirNow` empty-paren syntax error). Not a labs file; not edited by this unit. Retry loop running; labs modules verified to parse via stripTypeScriptTypes independently."
+    "NONE blocking this lane's proof. Two open items are recorded, not decided: (1) `npm run check` → `check-contracts.mjs` exit 1 with `browser.lineage_receipt_truthful` FAIL — assurance/BROWSER_CONFORMANCE_RECEIPT.json reports 4/6 (the 2 global Enterprise FAILs, `relation.route-convergence-and-label-scope` + `central-change-reuse`), which the DAG marks as the known red and this lane does not own; (2) the same check's `browser.current_candidate_claim_truthful` FAIL is lineage freshness: that receipt binds source tree 0c43d7f11631dc85 (338 files, the sealed parent) while this candidate's tree is b9b6c8cad4573b4c after the DEF-LAB-R11 fix — rebinding it runs `npm run browser:test`, which writes assurance/** (outside this lane's sealed roots), so it is handed to the Controller rather than touched here.",
+    "Environment note (not a defect): `tools/w03-browser-flows.mjs` could not be re-run to a green final receipt because its `networkidle` gate never settles while a sibling lane's local-runtime service on 127.0.0.1:4174 holds the platform input-direction request pending in Chromium (curl → 503 in 49 ms), and its fixed port 43174 collides with other lanes running the same harness. First run this lane: 7/7 PASS at exact HEAD."
   ],
-  "STAGE": "SOURCES_BUILT__AWAITING_RECAPTURE"
+  "STAGE": "POSTFIX_PROOF_COMPLETE__AWAITING_CONTROLLER_REVIEW"
 }

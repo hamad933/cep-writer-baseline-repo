@@ -1,0 +1,862 @@
+{
+  "proof": "W03-LABS-POSTFIX-PROOF",
+  "lane": "LAB-1",
+  "classification": "CANDIDATE_ONLY_NOT_OWNER_ACCEPTED",
+  "siteRoot": "/workspaces/cep-lanes/LAB-1/dist",
+  "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+  "writableRootDiff": "M stack/native-typescript/surfaces/labs/board.ts",
+  "node": "v22.16.0",
+  "startedAt": "2026-10-02T05:22:22.518Z",
+  "ranAt": "2026-10-02T05:23:56.757Z",
+  "total": 16,
+  "passed": 16,
+  "failed": 0,
+  "failures": [],
+  "checks": [
+    {
+      "id": "B04.node-paint-reproof",
+      "pass": true,
+      "evidence": {
+        "note": "baseline destroyed node: stddev 13 vs neighbour 45, OCR read no text in the node rect",
+        "rect": {
+          "x": 346,
+          "y": 627,
+          "w": 142,
+          "h": 95,
+          "css": [
+            "156px",
+            "104px"
+          ]
+        },
+        "task1": {
+          "stddev": 46.78,
+          "ink": 0.2096,
+          "mean": 40.65,
+          "ocr": {
+            "available": true,
+            "text": "1 | tasx-2 Discover Input Surface identify reachable input",
+            "prep": "invert+x3+autocontrast",
+            "psm": "6"
+          }
+        },
+        "task2": {
+          "stddev": 38.29,
+          "ink": 0.1735
+        },
+        "stddevRatioTask1OverTask2": 1.22,
+        "domTitle": "Discover Input Surface",
+        "domTitleRaw": "Discover InputSurface",
+        "domAria": "Discover Input Surface — Identify reachable input points. [objective · Required]",
+        "tspans": [
+          "Discover Input",
+          "Surface"
+        ],
+        "styleInjected": true,
+        "thresholds": {
+          "stddevMin": 25,
+          "ratioMin": 0.5,
+          "ocrRequires": "discover + (input|surface)"
+        },
+        "capture": {
+          "path": "writer-output/W03-LABS/evidence/postfix/b04-node-paint-en-1505x1045.png",
+          "sha256": "6f673349151da7d3e3b09b94acaca0ac7dab9542195b89b870f7e165304e46a6",
+          "bytes": 276804
+        },
+        "crop": {
+          "path": "writer-output/W03-LABS/evidence/postfix/b04-task1-rect.png",
+          "sha256": "9140a906d9a2c050b1240fb4227d05e718aa9435f7b2b48880457f95169e12f2"
+        },
+        "pageErrors": []
+      }
+    },
+    {
+      "id": "R09.optional-vs-conditional-residual-reproved",
+      "pass": true,
+      "evidence": {
+        "note": "reference distinguishes Conditional Unlock (dashed) from Optional Branch (dashed + circle); shared relation stroke classes are solid vs dashed only",
+        "authoredConditionalEdge": {
+          "pair": [
+            "TASK-1",
+            "TASK-3"
+          ],
+          "accepted": true,
+          "lifecycle": "DIRTY"
+        },
+        "rejections": [],
+        "legend": [
+          {
+            "text": "Linear Dependency",
+            "swatch": "(solid)"
+          },
+          {
+            "text": "Conditional Unlock",
+            "swatch": "dash"
+          },
+          {
+            "text": "Optional Branch",
+            "swatch": "dash dot"
+          }
+        ],
+        "legendKeys": 3,
+        "edges": [
+          {
+            "edge": "edge:EDGE-1",
+            "label": "Linear Dependency",
+            "styleClass": "canonical",
+            "dash": "none"
+          },
+          {
+            "edge": "edge:EDGE-2",
+            "label": "Linear Dependency",
+            "styleClass": "canonical",
+            "dash": "none"
+          },
+          {
+            "edge": "edge:EDGE-3",
+            "label": "Linear Dependency",
+            "styleClass": "canonical",
+            "dash": "none"
+          },
+          {
+            "edge": "edge:EDGE-4",
+            "label": "Optional Branch",
+            "styleClass": "related",
+            "dash": "7px, 4px"
+          },
+          {
+            "edge": "edge:EDGE-COND-PROOF",
+            "label": "Conditional Unlock",
+            "styleClass": "related",
+            "dash": "7px, 4px"
+          }
+        ],
+        "linearDash": [
+          "none"
+        ],
+        "conditionalDashes": [
+          "7px, 4px"
+        ],
+        "optionalDashes": [
+          "7px, 4px"
+        ],
+        "conditionalEqualsOptionalDash": true,
+        "legendOptionalSwatch": "dash dot",
+        "compensation": {
+          "legendKeys": [
+            "Linear Dependency",
+            "Conditional Unlock",
+            "Optional Branch"
+          ],
+          "branchesGroup": true
+        },
+        "residualVerdict": "RESIDUAL_REPROVED_NOT_FIXED — Conditional Unlock and Optional Branch render the same 7/4 dashed stroke; the legend key and the Optional node chip/Branches group carry the distinction. Shared stroke geometry not forked.",
+        "evidence": {
+          "legend": {
+            "path": "writer-output/W03-LABS/evidence/postfix/r09-legend-en.png",
+            "sha256": "a62c9be9ee40a9b1bcfaf17e3d3a96f9bb4e00585a6a5a32bae4ccd5898cf441",
+            "bytes": 11442
+          }
+        }
+      }
+    },
+    {
+      "id": "R09.edge-styles-observed-in-ar",
+      "pass": true,
+      "evidence": {
+        "note": "observation, not a pass/fail claim: which shared stroke classes the Arabic labels resolve to",
+        "legend": [
+          {
+            "text": "تبعية خطية",
+            "swatch": "(solid)"
+          },
+          {
+            "text": "فتح مشروط",
+            "swatch": "dash"
+          },
+          {
+            "text": "فرع اختياري",
+            "swatch": "dash dot"
+          }
+        ],
+        "dashSet": [
+          "none",
+          "7px, 4px"
+        ],
+        "edges": [
+          {
+            "label": "تبعية خطية",
+            "styleClass": "canonical",
+            "dash": "none"
+          },
+          {
+            "label": "تبعية خطية",
+            "styleClass": "canonical",
+            "dash": "none"
+          },
+          {
+            "label": "تبعية خطية",
+            "styleClass": "canonical",
+            "dash": "none"
+          },
+          {
+            "label": "فرع اختياري",
+            "styleClass": "related",
+            "dash": "7px, 4px"
+          }
+        ],
+        "evidence": {
+          "legend": {
+            "path": "writer-output/W03-LABS/evidence/postfix/r09-legend-ar.png",
+            "sha256": "fc9f893e0e4132cff906a75679679713b5370fe69b22f19073577bdce0dfe132"
+          }
+        }
+      }
+    },
+    {
+      "id": "R10.selection-boundary-and-minimap-residual-reproved",
+      "pass": true,
+      "evidence": {
+        "note": "shared multi-selection boundary and minimap tiles derive from the shared 132x62 card box while Labs cards are 156x104 model units",
+        "selection": {
+          "selectionCount": 2,
+          "boundaryLabel": "GROUP BOUNDARY (2 selected)",
+          "boundary": {
+            "left": 331,
+            "right": 677,
+            "top": 613,
+            "bottom": 698
+          },
+          "cards": [
+            {
+              "id": "TASK-1",
+              "left": 346,
+              "right": 488,
+              "top": 627,
+              "bottom": 722
+            },
+            {
+              "id": "TASK-2",
+              "left": 543,
+              "right": 684,
+              "top": 627,
+              "bottom": 722
+            }
+          ],
+          "cardAttr": {
+            "w": "132",
+            "h": "62"
+          },
+          "cardCss": {
+            "w": "156px",
+            "h": "104px"
+          },
+          "minimapHidden": false,
+          "minimapBox": {
+            "w": 118,
+            "h": 74
+          },
+          "tiles": [
+            {
+              "w": 132,
+              "h": 62
+            },
+            {
+              "w": 132,
+              "h": 62
+            },
+            {
+              "w": 132,
+              "h": 62
+            },
+            {
+              "w": 132,
+              "h": 62
+            },
+            {
+              "w": 132,
+              "h": 62
+            }
+          ]
+        },
+        "boundaryShortOfRightmostCardPx": 7,
+        "minimapTilesAre132x62": true,
+        "cardIs156x104Css": true,
+        "selectionCollapsesToOneAfterRelease": {
+          "pressed": 1,
+          "boundaryGone": true
+        },
+        "residualVerdict": "RESIDUAL_REPROVED_NOT_FIXED — the group boundary stops short of the right card edge and the minimap tiles keep the shared 132x62 box; geometry not duplicated in the surface",
+        "evidence": {
+          "gesture": {
+            "path": "writer-output/W03-LABS/evidence/postfix/r10-multi-selection-boundary-en.png",
+            "sha256": "161e5e90b601cbeb151fe7cf4e2fa761013e2f406966623f2abfeac2c23bfe56",
+            "bytes": 281493
+          },
+          "minimap": {
+            "path": "writer-output/W03-LABS/evidence/postfix/r10-minimap-en.png",
+            "sha256": "03d44ad3e44b78147a745a729b88f01f4b25e523dd5df470a4f1377a53927c67",
+            "bytes": 2789
+          }
+        }
+      }
+    },
+    {
+      "id": "RESPONSIVE.1440x1000-no-overflow-no-overlap",
+      "pass": true,
+      "evidence": {
+        "dir": "ltr",
+        "overflowX": 0,
+        "overflowY": 0,
+        "left": {
+          "l": 0,
+          "t": 182,
+          "r": 304,
+          "b": 961,
+          "w": 304,
+          "h": 779,
+          "display": "block"
+        },
+        "center": {
+          "l": 315,
+          "t": 182,
+          "r": 1009,
+          "b": 961,
+          "w": 694,
+          "h": 779,
+          "display": "flex"
+        },
+        "right": {
+          "l": 1020,
+          "t": 182,
+          "r": 1440,
+          "b": 961,
+          "w": 420,
+          "h": 779,
+          "display": "block"
+        },
+        "graph": {
+          "l": 328,
+          "t": 438,
+          "r": 996,
+          "b": 869,
+          "w": 668,
+          "h": 430,
+          "display": "block"
+        },
+        "regionTops": [
+          238,
+          238
+        ],
+        "rightToggle": 2,
+        "leftToggle": 3,
+        "visiblePanes": [
+          {
+            "pane": "left",
+            "l": 0,
+            "r": 304,
+            "w": 304
+          },
+          {
+            "pane": "center",
+            "l": 315,
+            "r": 1009,
+            "w": 694
+          },
+          {
+            "pane": "right",
+            "l": 1020,
+            "r": 1440,
+            "w": 420
+          }
+        ],
+        "collapsedPanes": [],
+        "overlaps": [],
+        "rightmostFits": true,
+        "graphMinHeight": 260,
+        "reversible": null,
+        "pageErrors": []
+      }
+    },
+    {
+      "id": "RESPONSIVE.1280x860-no-overflow-no-overlap",
+      "pass": true,
+      "evidence": {
+        "dir": "ltr",
+        "overflowX": 0,
+        "overflowY": 0,
+        "left": {
+          "l": 0,
+          "t": 182,
+          "r": 304,
+          "b": 821,
+          "w": 304,
+          "h": 639,
+          "display": "block"
+        },
+        "center": {
+          "l": 315,
+          "t": 182,
+          "r": 849,
+          "b": 821,
+          "w": 534,
+          "h": 639,
+          "display": "flex"
+        },
+        "right": {
+          "l": 860,
+          "t": 182,
+          "r": 1280,
+          "b": 821,
+          "w": 420,
+          "h": 639,
+          "display": "block"
+        },
+        "graph": {
+          "l": 328,
+          "t": 435,
+          "r": 836,
+          "b": 701,
+          "w": 508,
+          "h": 266,
+          "display": "block"
+        },
+        "regionTops": [
+          238,
+          238
+        ],
+        "rightToggle": 2,
+        "leftToggle": 3,
+        "visiblePanes": [
+          {
+            "pane": "left",
+            "l": 0,
+            "r": 304,
+            "w": 304
+          },
+          {
+            "pane": "center",
+            "l": 315,
+            "r": 849,
+            "w": 534
+          },
+          {
+            "pane": "right",
+            "l": 860,
+            "r": 1280,
+            "w": 420
+          }
+        ],
+        "collapsedPanes": [],
+        "overlaps": [],
+        "rightmostFits": true,
+        "graphMinHeight": 260,
+        "reversible": null,
+        "pageErrors": []
+      }
+    },
+    {
+      "id": "RESPONSIVE.1024x900-no-overflow-no-overlap",
+      "pass": true,
+      "evidence": {
+        "dir": "ltr",
+        "overflowX": 0,
+        "overflowY": 0,
+        "left": {
+          "l": 0,
+          "t": 182,
+          "r": 304,
+          "b": 861,
+          "w": 304,
+          "h": 679,
+          "display": "block"
+        },
+        "center": {
+          "l": 315,
+          "t": 182,
+          "r": 1024,
+          "b": 861,
+          "w": 709,
+          "h": 679,
+          "display": "flex"
+        },
+        "right": {
+          "l": 0,
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "w": 0,
+          "h": 0,
+          "display": "none"
+        },
+        "graph": {
+          "l": 326,
+          "t": 425,
+          "r": 1013,
+          "b": 771,
+          "w": 687,
+          "h": 346,
+          "display": "block"
+        },
+        "regionTops": [
+          238,
+          0
+        ],
+        "rightToggle": 2,
+        "leftToggle": 3,
+        "visiblePanes": [
+          {
+            "pane": "left",
+            "l": 0,
+            "r": 304,
+            "w": 304
+          },
+          {
+            "pane": "center",
+            "l": 315,
+            "r": 1024,
+            "w": 709
+          }
+        ],
+        "collapsedPanes": [
+          "right"
+        ],
+        "overlaps": [],
+        "rightmostFits": true,
+        "graphMinHeight": 260,
+        "reversible": {
+          "collapsedPanes": [
+            "right"
+          ],
+          "toggles": 2,
+          "revealed": {
+            "present": true,
+            "w": 278,
+            "h": 678,
+            "rows": 6,
+            "display": "block"
+          }
+        },
+        "pageErrors": []
+      }
+    },
+    {
+      "id": "RESPONSIVE.1024x800-no-overflow-no-overlap",
+      "pass": true,
+      "evidence": {
+        "dir": "ltr",
+        "overflowX": 0,
+        "overflowY": 0,
+        "left": {
+          "l": 0,
+          "t": 182,
+          "r": 304,
+          "b": 761,
+          "w": 304,
+          "h": 579,
+          "display": "block"
+        },
+        "center": {
+          "l": 315,
+          "t": 182,
+          "r": 1024,
+          "b": 761,
+          "w": 709,
+          "h": 579,
+          "display": "flex"
+        },
+        "right": {
+          "l": 0,
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "w": 0,
+          "h": 0,
+          "display": "none"
+        },
+        "graph": {
+          "l": 326,
+          "t": 425,
+          "r": 1013,
+          "b": 685,
+          "w": 687,
+          "h": 260,
+          "display": "block"
+        },
+        "regionTops": [
+          238,
+          0
+        ],
+        "rightToggle": 2,
+        "leftToggle": 3,
+        "visiblePanes": [
+          {
+            "pane": "left",
+            "l": 0,
+            "r": 304,
+            "w": 304
+          },
+          {
+            "pane": "center",
+            "l": 315,
+            "r": 1024,
+            "w": 709
+          }
+        ],
+        "collapsedPanes": [
+          "right"
+        ],
+        "overlaps": [],
+        "rightmostFits": true,
+        "graphMinHeight": 260,
+        "reversible": {
+          "collapsedPanes": [
+            "right"
+          ],
+          "toggles": 2,
+          "revealed": {
+            "present": true,
+            "w": 278,
+            "h": 678,
+            "rows": 6,
+            "display": "block"
+          }
+        },
+        "pageErrors": []
+      }
+    },
+    {
+      "id": "I18N.ar-rtl-first-class",
+      "pass": true,
+      "evidence": {
+        "dir": "rtl",
+        "lang": "ar",
+        "leftHead": "بنية المختبر",
+        "rightHead": "السياق",
+        "toolbar": "⌘ تركيز ملاحظة الملاحظات تأليف المختبر مراجعة المختبر فحص مختبر مسبق تحضير تسليم المختبر",
+        "actions": "تحديد إضافة مهمة ربط إضافة فرع تحقق نشر المراجعة تجهيز التشغيل",
+        "overflowX": 0,
+        "englishCommands": false,
+        "bdiTokens": 3,
+        "regionTops": [
+          238,
+          238
+        ]
+      }
+    },
+    {
+      "id": "I18N.en-ltr-first-class",
+      "pass": true,
+      "evidence": {
+        "dir": "ltr",
+        "lang": "en",
+        "arabicInSurfaceChrome": [],
+        "leftHead": "Lab Structure",
+        "actions": "Select Add Task Connect Add Branch Validate Publish Revision Prepare Run",
+        "overflowX": 0,
+        "regionTops": [
+          238,
+          238
+        ]
+      }
+    },
+    {
+      "id": "N1.non-owned-route-labs-mutation-refused",
+      "pass": true,
+      "evidence": {
+        "route": "/?surface=library",
+        "attempt": {
+          "returned": true,
+          "ok": false,
+          "code": "UNKNOWN_COMMAND",
+          "reason": "Unknown command",
+          "owner": null
+        },
+        "before": {
+          "consumer": "library",
+          "labGraph": 0,
+          "labShell": 0
+        },
+        "after": {
+          "consumer": "library",
+          "labGraph": 0,
+          "labShell": 0
+        },
+        "oracle": "labs command is not registered off its own route → execute() must refuse; no labs composition may mount as a side effect"
+      }
+    },
+    {
+      "id": "N1b.non-owned-command-on-labs-route-refused",
+      "pass": true,
+      "evidence": {
+        "route": "/?surface=labs",
+        "attempt": {
+          "returned": true,
+          "ok": false,
+          "code": "UNKNOWN_COMMAND",
+          "reason": "Unknown command"
+        },
+        "nodesBefore": 5,
+        "nodesAfter": 5,
+        "oracle": "a command owned by another surface must not execute on the labs route and must not mutate labs state"
+      }
+    },
+    {
+      "id": "N3.no-prerequisite-no-fabricated-run",
+      "pass": true,
+      "evidence": {
+        "oracle": "without provider/prerequisite the command is unavailable with an explicit reason; no run, manifest or receipt is invented",
+        "statusClaimsNoRunStarted": false,
+        "handoffAvailability": {
+          "id": "labs.handoff",
+          "owner": "W03LabDomain",
+          "commandOwner": "W03LabDomain",
+          "code": "LAB_REVISION_NOT_PUBLISHED",
+          "reason": "Run/Lab-module handoff requires an exact published Lab revision.",
+          "availabilityOwner": "W03LabDomain",
+          "enabled": false
+        },
+        "handoffExecute": {
+          "ok": false,
+          "id": "labs.handoff",
+          "owner": "W03LabDomain",
+          "commandOwner": "W03LabDomain",
+          "code": "LAB_REVISION_NOT_PUBLISHED",
+          "reason": "Run/Lab-module handoff requires an exact published Lab revision.",
+          "availabilityOwner": "W03LabDomain",
+          "enabled": false
+        },
+        "preflightStatus": "BLOCKED",
+        "preflightRunStartAllowed": false,
+        "preflightChecks": [
+          {
+            "id": "publication",
+            "status": "BLOCKED"
+          },
+          {
+            "id": "tool-browser",
+            "status": "UNAVAILABLE"
+          },
+          {
+            "id": "tool-request-inspector",
+            "status": "UNAVAILABLE"
+          },
+          {
+            "id": "SIM_NET",
+            "status": "UNAVAILABLE"
+          },
+          {
+            "id": "WEB_TIER",
+            "status": "UNAVAILABLE"
+          }
+        ],
+        "runCreated": null,
+        "receiptsAfterNoOpExec": 1,
+        "statusText": "Draft revision · validate, then publish to enable run preparation",
+        "bottom": "Lab task graph workbench Definition authoring state · published revisions are immutable until a successor revision is created"
+      }
+    },
+    {
+      "id": "N2.invalid-input-explicit-error-no-false-receipt",
+      "pass": true,
+      "evidence": {
+        "oracle": "out-of-scope field and invalid dependency fail loudly without mutating; invalid task reports the exact task id; publish refuses instead of faking a receipt",
+        "outOfScope": {
+          "returned": false,
+          "message": "LAB_FIELD_OUT_OF_SCOPE:fieldOutOfScope"
+        },
+        "selfEdge": {
+          "returned": false,
+          "message": "LAB_EDGE_ENDPOINTS_INVALID"
+        },
+        "invalidAuthor": {
+          "ok": null,
+          "snapshotLifecycle": "DIRTY"
+        },
+        "publishAvailability": {
+          "id": "labs.publish",
+          "owner": "W03LabDomain",
+          "commandOwner": "W03LabDomain",
+          "code": "LAB_VALIDATION_REQUIRED_BEFORE_PUBLISH",
+          "reason": "Lab validation must pass before publish.",
+          "availabilityOwner": "W03LabDomain",
+          "enabled": false,
+          "errors": [
+            "TASK-1:validation-required",
+            "TASK-1:expected-signal-required",
+            "TASK-1->TASK-2:invalid-dependency",
+            "TASK-2->TASK-3:invalid-dependency",
+            "TASK-3->TASK-4:invalid-dependency",
+            "TASK-3->TASK-5:invalid-dependency"
+          ]
+        },
+        "publishExecute": {
+          "ok": false,
+          "code": "LAB_VALIDATION_REQUIRED_BEFORE_PUBLISH",
+          "errors": [
+            "TASK-1:validation-required",
+            "TASK-1:expected-signal-required",
+            "TASK-1->TASK-2:invalid-dependency",
+            "TASK-2->TASK-3:invalid-dependency",
+            "TASK-3->TASK-4:invalid-dependency",
+            "TASK-3->TASK-5:invalid-dependency"
+          ]
+        },
+        "receiptsDelta": 1,
+        "nodesDelta": [
+          5,
+          5,
+          5
+        ],
+        "receiptsAfterThrows": [
+          0,
+          0,
+          0
+        ],
+        "exactTaskIdReported": true
+      }
+    },
+    {
+      "id": "N2.capture-label-traversal-refused",
+      "pass": true,
+      "evidence": {
+        "oracle": "an out-of-boundary capture label must be refused before anything is created — no write outside evidence/, no false receipt",
+        "preGuardResolution": {
+          "label": "../n2-escape-probe",
+          "resolvesTo": "/workspaces/cep-lanes/LAB-1/writer-output/W03-LABS/n2-escape-probe",
+          "escapesEvidenceRoot": true
+        },
+        "attempt": {
+          "exitCode": 2,
+          "refused": true,
+          "message": "LABEL_REFUSED: \"../n2-escape-probe\" — capture labels must be a single path segment under evidence/"
+        },
+        "artifactsOutsideEvidenceRoot": []
+      }
+    },
+    {
+      "id": "DONOR.no-visible-donor-leak",
+      "pass": true,
+      "evidence": {
+        "structurewrap": {
+          "present": false,
+          "visible": false
+        },
+        "kuList": {
+          "present": false,
+          "visible": false
+        },
+        "editorDocument": {
+          "present": true,
+          "visible": false
+        },
+        "m0DomainNav": {
+          "present": true,
+          "visible": false
+        },
+        "rightSiblings": 0,
+        "leftSiblings": 0,
+        "visibleDonors": []
+      }
+    }
+  ]
+}

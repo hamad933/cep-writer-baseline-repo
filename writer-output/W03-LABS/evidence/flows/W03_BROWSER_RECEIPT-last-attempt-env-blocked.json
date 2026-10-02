@@ -1,0 +1,329 @@
+{
+  "schemaVersion": 1,
+  "workspace": "W03",
+  "classification": "W03_REPRODUCIBLE_BROWSER_RECEIPT_NOT_OWNER_ACCEPTANCE",
+  "command": "node tools/w03-browser-flows.mjs",
+  "sourceFoundationBaseline": "CEP-FR-E18-ANALYTICAL-COMPARE-COMPLETION",
+  "sourceCandidate": "CANONICAL_SOURCE_TREE_SHA256:b9b6c8cad4573b4ca73992c60579c1d544423832ea3c1b636eb38b2a7a53598d",
+  "sourceCanonicalTreeSha256": "b9b6c8cad4573b4ca73992c60579c1d544423832ea3c1b636eb38b2a7a53598d",
+  "canonicalSourceFileCount": 338,
+  "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+  "tree": "b9b6c8cad4573b4ca73992c60579c1d544423832ea3c1b636eb38b2a7a53598d",
+  "currentUse": "EXACT_CURRENT_CANONICAL_SOURCE_EXECUTION_RECEIPT",
+  "executionStatus": "PARTIAL_EXECUTION",
+  "browser": "Chromium (Playwright)",
+  "browserVersion": "1.62.1",
+  "transportRuntime": "localhost-http over tools/serve.mjs (Node 22 static server) + Playwright Chromium",
+  "environment": {
+    "node": "v22.16.0",
+    "engine": "Playwright Chromium",
+    "playwrightResolution": "package-local",
+    "packageDeclaredVersion": "1.62.1",
+    "browserExecutableOverride": false,
+    "transport": "localhost-http",
+    "reducedMotion": true
+  },
+  "declaredFlows": [
+    "enterprise-twin-baseline",
+    "runs-preflight-run-recorded",
+    "results-aar-compare",
+    "replay-causality-timeline-scrub",
+    "spatial-select-connect-canonical-edge@1440x1000",
+    "spatial-select-connect-canonical-edge@1024x900",
+    "run-terminal-detach"
+  ],
+  "summary": {
+    "total": 7,
+    "pass": 1,
+    "fail": 6
+  },
+  "flows": [
+    {
+      "id": "enterprise-twin-baseline",
+      "pvf": "PVF-001",
+      "route": "http://127.0.0.1:43174/?surface=enterprise",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "flow": "Enterprise studio boots, then Twin/Baseline lifecycle runs end to end with immutable published baselines",
+      "preconditions": "Live enterprise route; no surface-local persistence bound; relations provider state truthful",
+      "actionSequence": [
+        "open ?surface=enterprise and wait for CEPFoundation.consumer",
+        "read m0Composition presentation + registered enterprise.* commands",
+        "enterprise.create (identity), enterprise.baseline (pin), enterprise.validate, enterprise.publish",
+        "enterprise.handoff (run-preparation preview only)",
+        "enterprise.twin rebase attempt against a PUBLISHED revision (must be refused)",
+        "enterprise.revise (successor revision), then enterprise.twin rebase on the DRAFT successor"
+      ],
+      "expectedState": "Published revision + pinned baseline stay immutable, Twin and Enterprise identities stay distinct, handoff never starts a run",
+      "fixtureState": "LIVE_ROUTE_REPRESENTATIVE_SEED__the W03 6-object fixture is bound and labelled FIXTURE_ONLY__NOT_PRODUCT_TRUTH; snapshot.sourceTruth.canonicalProductTruth stays false",
+      "owner": "W03EnterpriseDomain + SpatialInteractionKernel + RelationInteractionOwner",
+      "assertions": [],
+      "screenshots": [],
+      "negativeCases": [],
+      "status": "FAIL",
+      "error": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:43174/?surface=enterprise\", waiting until \"networkidle\"\u001b[22m\n",
+      "pageErrors": [],
+      "failureClassification": "UNKNOWN"
+    },
+    {
+      "id": "runs-preflight-run-recorded",
+      "pvf": "PVF-002",
+      "route": "http://127.0.0.1:43174/?surface=runs",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "flow": "Runs no-write preflight, RUN lifecycle, terminal command consequence and recorded projection agreement",
+      "preconditions": "Live runs route; InternalSimulationAdapter runtime truth (pty/powershell/ssh/nativeWindow all false)",
+      "actionSequence": [
+        "read run lifecycle + availability of runs.* commands",
+        "execute runs.preflight and re-read run state (must be a no-write preflight)",
+        "execute runs.prepare/runs.start when the lifecycle admits it, otherwise record the truthful availability code",
+        "open OPEN_TERMINAL on the selected device and type \"shutdown\"",
+        "execute view.recorded and attempt a mutation of the recorded projection"
+      ],
+      "expectedState": "Preflight writes nothing, the terminal command produces a canonical event + spatial delta + recorded agreement, recorded projection stays read-only",
+      "fixtureState": "LIVE_ROUTE_INTERNAL_SIMULATION__recordedConsumer projection, never a real host process",
+      "owner": "W03RunDomain + InternalSimulationAdapter + OperationalSessionOwner + OperationalTerminalHost",
+      "assertions": [],
+      "screenshots": [],
+      "negativeCases": [],
+      "status": "FAIL",
+      "error": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:43174/?surface=runs\", waiting until \"networkidle\"\u001b[22m\n",
+      "pageErrors": [],
+      "failureClassification": "UNKNOWN"
+    },
+    {
+      "id": "results-aar-compare",
+      "pvf": "PVF-003",
+      "route": "http://127.0.0.1:43174/?surface=results",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "flow": "Results studio provider truth + AAR analysis revision + analytical compare over exact sealed revisions",
+      "preconditions": "Live results route with an unbound Results provider, then an explicitly labelled recordedConsumer fixture composition for the mechanics",
+      "actionSequence": [
+        "open ?surface=results and read provider availability for replay/compare/annotate/verifyDeterminism",
+        "mount a recordedConsumer fixture composition (W03ResultsDomain + shared TimelineReplayOwner/AnalyticalCompareOwner)",
+        "results.replay on an exact sealed ref, results.step to advance the timeline",
+        "results.annotate to create a new AAR analysis revision",
+        "results.compare over two exact sealed revisions; re-read the sealed records afterwards"
+      ],
+      "expectedState": "Unavailable provider stays visibly unavailable on the live route; AAR and Compare create analysis/session state only and never rewrite sealed facts or canonical relation truth",
+      "fixtureState": "RECORDED_CONSUMER_FIXTURE__explicitly labelled fixture records for mechanics only; live route reports RESULTS_PROVIDER_UNAVAILABLE",
+      "owner": "W03ResultsDomain + TimelineReplayOwner + AnalyticalCompareOwner",
+      "assertions": [],
+      "screenshots": [],
+      "negativeCases": [],
+      "status": "FAIL",
+      "error": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:43174/?surface=results\", waiting until \"networkidle\"\u001b[22m\n",
+      "pageErrors": [],
+      "failureClassification": "UNKNOWN"
+    },
+    {
+      "id": "replay-causality-timeline-scrub",
+      "pvf": "REPLAY",
+      "route": "http://127.0.0.1:43174/?surface=results",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "flow": "Replay causal chain (action -> timeline event -> state delta) plus timeline scrub and gap truth",
+      "preconditions": "Live results route for owner identity, recordedConsumer fixture composition for the timeline mechanics",
+      "actionSequence": [
+        "verify the singular TimelineReplayOwner is bound on the live route",
+        "attach a recordedConsumer provider through results.replay",
+        "scrub forward with results.step and backwards with results.step delta -1",
+        "attempt replay on an absent exact ref (must fail closed, never fabricate a timeline)",
+        "read the timeline projection owner token and presentation truth"
+      ],
+      "expectedState": "Every scrub step moves the timeline index and selected event together; an absent ref fails closed; replay never executes runtime",
+      "fixtureState": "RECORDED_CONSUMER_FIXTURE__labelled fixture records; live route supplies the owner binding only",
+      "owner": "TimelineReplayOwner + TimelineReplayPresentationHost + W03ResultsDomain",
+      "assertions": [],
+      "screenshots": [],
+      "negativeCases": [],
+      "status": "FAIL",
+      "error": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:43174/?surface=results\", waiting until \"networkidle\"\u001b[22m\n",
+      "pageErrors": [],
+      "failureClassification": "UNKNOWN"
+    },
+    {
+      "id": "spatial-select-connect-canonical-edge@1440x1000",
+      "pvf": "SPATIAL_BOUNDARY",
+      "route": "http://127.0.0.1:43174/?surface=enterprise",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "flow": "Spatial select/connect/canonical-edge plus F-049 domain-boundary falsification at 1440x1000",
+      "preconditions": "Live enterprise route (single shared spatial host) and read-only Visualize consumer for the boundary case",
+      "actionSequence": [
+        "verify the shared stage carries exactly one measurable spatial host",
+        "compose a labelled fixture Enterprise draft and commit a typed canonical edge through enterprise.edit",
+        "attempt an unauthorised/malformed edge (must fail closed)",
+        "switch to Visualize, select two representations, and verify author-only Connect stays hidden",
+        "re-read canonical relation truth on both consumers"
+      ],
+      "expectedState": "A typed edge commits only through the W03EnterpriseDomain/RelationDomainAdapter owner; read-only Visualize keeps selection and canonical relation truth untouched; spatial operations never leak across consumers",
+      "fixtureState": "RECORDED_CONSUMER_FIXTURE__labelled W03 fixture adapter for the authoring case; Visualize case runs on the live route",
+      "owner": "SpatialInteractionKernel + RelationInteractionOwner + W03EnterpriseDomain",
+      "assertions": [],
+      "screenshots": [],
+      "negativeCases": [],
+      "status": "FAIL",
+      "error": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:43174/?surface=enterprise\", waiting until \"networkidle\"\u001b[22m\n",
+      "pageErrors": [],
+      "failureClassification": "UNKNOWN"
+    },
+    {
+      "id": "spatial-select-connect-canonical-edge@1024x900",
+      "pvf": "SPATIAL_BOUNDARY",
+      "route": "http://127.0.0.1:43174/?surface=enterprise",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "flow": "Spatial select/connect/canonical-edge plus F-049 domain-boundary falsification at 1024x900",
+      "preconditions": "Live enterprise route (single shared spatial host) and read-only Visualize consumer for the boundary case",
+      "actionSequence": [
+        "verify the shared stage carries exactly one measurable spatial host",
+        "compose a labelled fixture Enterprise draft and commit a typed canonical edge through enterprise.edit",
+        "attempt an unauthorised/malformed edge (must fail closed)",
+        "switch to Visualize, select two representations, and verify author-only Connect stays hidden",
+        "re-read canonical relation truth on both consumers"
+      ],
+      "expectedState": "A typed edge commits only through the W03EnterpriseDomain/RelationDomainAdapter owner; read-only Visualize keeps selection and canonical relation truth untouched; spatial operations never leak across consumers",
+      "fixtureState": "RECORDED_CONSUMER_FIXTURE__labelled W03 fixture adapter for the authoring case; Visualize case runs on the live route",
+      "owner": "SpatialInteractionKernel + RelationInteractionOwner + W03EnterpriseDomain",
+      "assertions": [],
+      "screenshots": [],
+      "negativeCases": [],
+      "status": "FAIL",
+      "error": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:43174/?surface=enterprise\", waiting until \"networkidle\"\u001b[22m\n",
+      "pageErrors": [],
+      "failureClassification": "UNKNOWN"
+    },
+    {
+      "id": "run-terminal-detach",
+      "pvf": "RUN_TERMINAL_DETACH",
+      "route": "http://127.0.0.1:43174/?surface=runs",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "flow": "OPEN_TERMINAL operational host session and truthful detach disposition",
+      "preconditions": "Live runs route with OperationalSessionOwner + OperationalTerminalHost bound",
+      "actionSequence": [
+        "open OPEN_TERMINAL on the selected device",
+        "read the attached runtime session tab identity",
+        "request detachWindow on the operational session owner",
+        "read the resulting disposition and provider-session preservation truth"
+      ],
+      "expectedState": "Detach either fails closed with an explicit code and preserved provider session, or confirms the platform window handoff; it never fabricates a detached window",
+      "fixtureState": "LIVE_ROUTE_INTERNAL_SIMULATION__no real host process is executed",
+      "owner": "OperationalSessionOwner + OperationalTerminalHost + InternalSimulationAdapter",
+      "assertions": [
+        "OPEN_TERMINAL attached a runtime session to the operational host",
+        "detach fails closed with PROVIDER_REATTACH_UNAVAILABLE and preserves the provider session"
+      ],
+      "screenshots": [
+        "run-terminal-detach-20261002T054610Z-b9b6c8ca.png"
+      ],
+      "negativeCases": [],
+      "evidence": {
+        "opened": {
+          "skipped": false,
+          "availability": {
+            "id": "OPEN_TERMINAL",
+            "owner": "InternalSimulationAdapter",
+            "commandOwner": "InternalSimulationAdapter",
+            "enabled": true,
+            "reason": "",
+            "code": "AVAILABLE",
+            "availabilityOwner": "InternalSimulationAdapter"
+          },
+          "result": {
+            "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+            "providerId": "InternalSimulationAdapter",
+            "runtimeSessionId": "sim-session-1",
+            "providerSessionOwner": "InternalSimulationAdapter",
+            "attachedAtSequence": 1,
+            "deviceId": "DEV-WEB-01",
+            "runId": "RUN-0042",
+            "epoch": 1,
+            "runtimeIdentity": {
+              "source": "RuntimeAdapterReference",
+              "providerId": "InternalSimulationAdapter",
+              "runtimeSessionId": "sim-session-1",
+              "sessionId": "sim-session-1",
+              "runId": "RUN-0042",
+              "deviceId": "DEV-WEB-01",
+              "toolId": null,
+              "deviceOrToolId": "DEV-WEB-01",
+              "epoch": 1
+            }
+          },
+          "deviceId": "DEV-WEB-01",
+          "owner": "InternalSimulationAdapter"
+        },
+        "detach": {
+          "unavailable": false,
+          "owner": "OperationalSessionOwner",
+          "tabsBefore": [
+            "ops-tab::InternalSimulationAdapter::sim-session-1"
+          ],
+          "tabsAfter": [
+            "ops-tab::InternalSimulationAdapter::sim-session-1"
+          ],
+          "result": {
+            "ok": false,
+            "code": "PROVIDER_REATTACH_UNAVAILABLE",
+            "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+            "runtimeSessionId": "sim-session-1",
+            "providerId": "InternalSimulationAdapter",
+            "detachScope": "OWNING_SURFACE",
+            "focusContext": {
+              "kind": "OPERATIONAL_TERMINAL",
+              "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+              "runtimeSessionId": "sim-session-1",
+              "providerId": "InternalSimulationAdapter"
+            },
+            "surfaceIntent": {
+              "scope": "OWNING_SURFACE",
+              "preserveRoute": true,
+              "preserveObject": true,
+              "preserveContext": true,
+              "focusedContext": {
+                "kind": "OPERATIONAL_TERMINAL",
+                "presentationId": "ops-tab::InternalSimulationAdapter::sim-session-1",
+                "runtimeSessionId": "sim-session-1",
+                "providerId": "InternalSimulationAdapter"
+              }
+            },
+            "providerSessionPreserved": true
+          },
+          "terminalVisible": true
+        }
+      },
+      "status": "PASS",
+      "failureClassification": null,
+      "error": null
+    }
+  ],
+  "screenshots": [
+    {
+      "filename": "run-terminal-detach-20261002T054610Z-b9b6c8ca.png",
+      "flowId": "run-terminal-detach",
+      "viewport": "1440x1000",
+      "bytes": 253108,
+      "sha256": "9422421f01e04340303ff98a29afcd124124acd923727900ac0f7b99742fb01a",
+      "path": "writer-output/W03/evidence/run-terminal-detach-20261002T054610Z-b9b6c8ca.png",
+      "scope": "W03_PACKET_SECTION_9_TARGETED_VISUAL_EVIDENCE"
+    }
+  ],
+  "limits": "Six bounded W03 packet §9 flows at 1440x1000 and 1024x900; replay/AAR/compare mechanics execute against explicitly labelled recordedConsumer fixtures; not Owner acceptance."
+}
