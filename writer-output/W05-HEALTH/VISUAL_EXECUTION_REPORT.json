@@ -1,0 +1,58 @@
+{
+  "SURFACE": "health",
+  "OWNER": "W05-HEALTH (lane HLTH-1)",
+  "REFERENCE": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/01_HEALTH/Arabic Operational Health Dashboard.png",
+  "REFERENCE_CLASSIFICATION": "CURRENT_FINAL_REFERENCE (sha256 f5f789687f09f115…, 1505x1045, per W05-HEALTH_SURFACE_PACKET §3); reference used as intent authority for an adapter-composed surface — no surfaces/health/ directory exists by documented design (profile domain_implementation=CONTRACT_ONLY + w05-rescue composition mount)",
+  "CURRENT_CANDIDATE": {
+    "branch": "writer/mi-serial-lane/HLTH-1",
+    "parentCommit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "parentTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+    "codeCommit": "3bf5934720f24900402535d78ca406be1c9c9194",
+    "codeCommitTree": "09759008e45f15c87eaf5cba38c5e168475f5418",
+    "sourceTreeSha256": "b9cc148128db6e8b33a3801d81f409d6e74047fb0c703b4abe9ff02bc70feca3",
+    "sourceTreeFiles": 338,
+    "changedFileSha256": "8497e6c6b4551d343d42ad2c499711935a814c770754025499c06c8f6a78a1a6"
+  },
+  "FILES_CHANGED": [
+    "stack/native-typescript/adapters/health-runtime.ts (+42/-15) — sole writable root; writer-output/W05-HEALTH/** created as bounded evidence/handoff output"
+  ],
+  "FUNCTIONAL_STATUS": "PASS_WITH_ESCALATED_SUBSCOPE — health.refresh-inspect-diagnose flow PASS 15/15 assertions (twice, identical); S16 14/0, CG6 6/0 + 3/0, D11 all-group pass, npm test 210/0. Row 'next action' buttons now dispatch refresh/diagnose (previously inert: probe-before effect=NO_EFFECT, probe-after effect=CHANGED with durable diag id). BOTTOM shelf deep-work remains unreachable for health (no BottomDeepWorkProvider) — escalated, not claimed.",
+  "STRUCTURAL_STATUS": "PASS (in-root) — adapter + w05-rescue mount satisfies profile TOP/LEFT/CENTER/RIGHT/TOOLBAR/TRANSIENT slots, domain_commands [health.refresh, health.inspect, health.diagnose], context_lenses [identity, domain-context, notes], objects/invariants/epistemic/state_dimensions. BOTTOM slot + bottom_tabs [history, domain-diagnostics] NOT satisfied (composition/contract-level) — see HANDOFF escalation.",
+  "VISUAL_STATUS": "PASS_WRITER_VISUAL_INSPECTION_NOT_OWNER_ACCEPTED — lens strip and descriptor-driven right panel verified by actual image inspection at 1440x1000 and 1024x900; shell-owned eyebrow occlusion defect recorded (not mine); BOTTOM content not visually reachable (recorded, escalated).",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": "L1 whole-surface before/after (1440x1000); L2 right pane + center/left regions; L3 context lens tabs and field rows; L4 micro-detail PARTIAL (no exhaustive micro audit; no collapsed-state comparison performed)",
+  "RESPONSIVE_STATUS": "PARTIAL — 1024x900 captured after change: documentElement.scrollWidth 1024 == clientWidth 1024 (no horizontal overflow), no overlap inside the health surface; 1440x1000 captured. Collapsed-pane comparison NOT performed (shell-owned pane collapse; bounded lane). No 1024x900 BEFORE capture exists — recorded as an evidence gap, not backfilled.",
+  "RTL_LTR_STATUS": "AR/RTL product copy verified at 1440x1000 and 1024x900 (technical tokens isolated in <bdi dir=ltr>). documentElement declares dir=ltr lang=en (shell direction resolution, W01-owned). EN/LTR product-language switch NOT exercised in-lane: preferences key 'language' returns UNKNOWN_PREFERENCE (shared locale policy key differs) — recorded, not claimed.",
+  "DEFECTS_FOUND": [
+    {"id": "HLTH-F1", "severity": "V3", "rootCause": "IMPLEMENTATION", "defect": "Row 'next action' buttons for health.refresh / health.diagnose were inert (click handler only dispatched health.inspect and stopPropagation swallowed the row-select fallback) — visible affordance with no function.", "status": "CLOSED_IN_ROOT"},
+    {"id": "HLTH-F2", "severity": "V2", "rootCause": "IMPLEMENTATION", "defect": "Single generic status string 'Health observation receipt recorded' served refresh, inspect and diagnose — inspect records nothing and diagnose is durable; receipts were not command-specific.", "status": "CLOSED_IN_ROOT"},
+    {"id": "HLTH-F3", "severity": "V2", "rootCause": "IMPLEMENTATION", "defect": "availability('health.inspect', {sourceId:'unknown'}) reported available for a source outside the observation set.", "status": "CLOSED_IN_ROOT"},
+    {"id": "HLTH-F4", "severity": "V2", "rootCause": "SURFACE_COMPOSITION", "defect": "Profile context_lenses [identity, domain-context, notes] were not surfaced: descriptor declared only 'identity' and was never consumed; right pane showed static blocks.", "status": "CLOSED_IN_ROOT (descriptor now declares the three profile lenses; lens tabs rendered through shared CONTEXT_INSPECTOR_PRESENTATION.renderLensTabs, panel content projected from the descriptor)"},
+    {"id": "HLTH-F5", "severity": "V3", "rootCause": "ARCHITECTURE", "defect": "Profile slots BOTTOM ('Deep Health diagnostics/history') and bottom_tabs [history, domain-diagnostics] are unreachable: no BottomDeepWorkProvider is registered for health, BottomDeepWorkOwner reports providerCount=0 / availability=UNAVAILABLE, #bottomToggle is a no-op, and #bottomContent stays display:none — the adapter's BOTTOM region content exists but can never be shown.", "status": "ESCALATED_NOT_CLOSED", "escalation": "OWNERSHIP_ESCALATION: redesign candidate — Owner-facing"},
+    {"id": "HLTH-F6", "severity": "V2", "rootCause": "SHARED_COMPONENT", "defect": "Shell pane-edge reveal control #leftLocalReveal overlays the health stage eyebrow (elementsFromPoint at 1440x1000 returns the BUTTON above the bdi) — product text partially occluded; pre-existing, identical before and after.", "status": "RECORD_ONLY_W01_SHELL_OWNED"},
+    {"id": "HLTH-F7", "severity": "V1", "rootCause": "SHARED_COMPONENT", "defect": "Shell right-pane chrome for this route: #contextLenses host absent (0 lens tabs), .contextscope carries the hidden attribute yet remains displayed, and a ~27px empty band sits above the domain context region.", "status": "RECORD_ONLY_SHELL_OWNED"},
+    {"id": "HLTH-F8", "severity": "V2", "rootCause": "OWNER_CONSTRAINT", "defect": "Authority conflict: controller/10_dispatch/SURFACE_DISPATCH_MATRIX.json row W05-HEALTH lists surfaces/composition/w05-rescue.ts under writableRoots, while the binding DAG §3 HLTH-1 row and the sealed mission restrict the writable root to adapters/health-runtime.ts and name VAL-1 as sole seam steward.", "status": "RECORDED_VERBATIM_NOT_ADJUDICATED", "resolution": "binding DAG §0 + sealed mission followed; seam write refused and verified (N1)"},
+    {"id": "HLTH-F9", "severity": "V2", "rootCause": "STALE_DECISION", "defect": "Language policy tension: health mount copy is Arabic-primary with English secondary (in-file comment cites 'CEP-VIS-001-FINAL §2.2/§12 … Owner product-language decision is still pending') while VISUAL_EXECUTION_STANDARD §7 states there is no permanent Arabic-first authority; the cited document is outside this lane's closed read set.", "status": "RECORDED_NOT_ADJUDICATED", "escalation": "potential authority conflict — Controller/Owner-facing"},
+    {"id": "HLTH-F10", "severity": "V1", "rootCause": "EVIDENCE/ORACLE", "defect": "tools/w05-browser-flows.mjs receipts: flow screenshots are named/labelled with the harness constant WORKTREE_VARIANT:c82cec63… while the receipt records measuredCandidate WORKTREE_VARIANT:b9cc1481… and lineageStatus DRIFT_RECORDED__CONCURRENT_SIBLING_WORKSPACE_EDITS.", "status": "RECORDED_HARNESS_OWNED"},
+    {"id": "HLTH-F11", "severity": "V1", "rootCause": "EVIDENCE/ORACLE", "defect": "One probe run reused a previously-running runtime sqlite directory and returned RUNTIME_UNAVAILABLE for health.refresh (environment condition); a fresh proof directory passed every assertion.", "status": "ENVIRONMENT_RECORDED_NOT_PRODUCT"}
+  ],
+  "DEFECT_SEVERITY": "1x V3, 6x V2, 4x V1 (V3 and one V2 closed in-root; one V3 escalated; the remainder recorded as shell/harness/authority items outside this lane's roots)",
+  "ROOT_CAUSE": "In-root defects were local IMPLEMENTATION / SURFACE_COMPOSITION issues inside adapters/health-runtime.ts. The blocking identity gap (HLTH-F5) is ARCHITECTURE: Health's BOTTOM slot needs a registered read-only bottom provider or a shared bottom-tab contract delta — composition and shared-contract owned, not adapter-owned.",
+  "FIXES_APPLIED": [
+    "execute(command,payload) dispatcher bound to all three registered commands and to every [data-health-next] row affordance (refresh/diagnose previously dead)",
+    "per-command truthful receipts: refresh = session-local observation receipt (never a diagnostic), inspect = selection bound + explicit 'records no receipt', diagnose = durable diagnostic receipt with diagnostic id",
+    "inspect availability refuses a sourceId outside the current observation set",
+    "context descriptor extended to the three profile lenses (identity, domain-context, notes) and the right pane rendered from it through the shared ContextInspector presentation (shared mechanics + domain content; no second inspector owner)",
+    "lens-strip presentation scoped with surface-local styles that survive the donor .lensbtn !important rules (no shared CSS file was touched)"
+  ],
+  "RECAPTURE_STATUS": "DONE for in-scope presentation states: before 1440x1000 (shelf closed), after 1440x1000 + 1024x900, N3 no-runtime 1440x1000, flow shots refresh/inspect/diagnose at 1440x980 — all sha256-indexed in EVIDENCE_INDEX.json. No BEFORE capture at 1024x900 (recorded gap).",
+  "RECOMPARISON_STATUS": "DONE — L1/L2/L3 before-vs-after comparison performed on the actual images; the right pane change (lens strip + descriptor panel) is the only structural visual delta; center/left/bottom regions unchanged in structure.",
+  "REGRESSION_STATUS": "PASS — npm test 210/0; S16 14/0; CG6 6/0 + 3/0; D11 pass; health flow PASS 15/15 twice with identical assertions (N5); no page errors in any probe; git status contains only the two in-scope roots.",
+  "EVIDENCE": "writer-output/W05-HEALTH/EVIDENCE_INDEX.json (17 files, 7 captures, per-file sha256+bytes); evidence/ probe-before-report.json, probe-after-report.json, probe-n3-report.json, flow-finalA/B-record.json, n1-refusal-verification.txt, n2-boundary-results.json, n4-duplicate-mechanics.json",
+  "LINEAGE": "parent fe1bb98… → code commit 3bf5934… (tree 0975900…) → source-tree identity b9cc1481…/338 files (identical to the flow receipt measuredCandidate); captures hash-bound to their own bytes; runtime proof dirs kept outside the repository; writer-output/W05 restored byte-identical to HEAD after the flow runs (flow harness output is scratch for this lane)",
+  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED — CANDIDATE_ONLY, sole Controller review required; no self-acceptance, no merge, no promotion",
+  "BLOCKERS": [
+    "HLTH-F5 BOTTOM slot / bottom_tabs: requires composition registration of a health bottom provider or a shared bottom contract delta — OWNERSHIP_ESCALATION: redesign candidate — Owner-facing",
+    "HLTH-F8 dispatch-matrix vs DAG writable-root conflict — recorded verbatim for Controller",
+    "HLTH-F9 language-primary tension against VISUAL_EXECUTION_STANDARD §7 — recorded, not adjudicated (cited authority outside closed read set)"
+  ]
+}
