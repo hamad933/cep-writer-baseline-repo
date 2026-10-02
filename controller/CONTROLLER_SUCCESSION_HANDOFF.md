@@ -1,40 +1,34 @@
-# CEP — CONTROLLER SUCCESSION HANDOFF
+# CEP — CONTROLLER SUCCESSION HANDOFF (updated 2026-10-02)
 
-**Role:** supporting continuity only — never authority  
-**Current phase:** `GITHUB_CUTOVER_COMPLETE__DRIVE_COMPATIBILITY_PROVEN__PRODUCT_EXECUTION_BINDING_NEXT`
+**Role:** supporting continuity only — never authority
+**Current phase:** `EXECUTION_PAUSED_BY_OWNER` — zero-gap implementation paused by Owner; completed convergence work valid; remaining work fully specified in the blueprint below.
 
-A successor must not inherit conclusions from this file blindly.
+## Mandatory boot (GitHub-only; chat history NOT required)
 
-## Mandatory recovery
-1. fetch actual remote `writer/mi-serial` HEAD/tree;
-2. read `controller/authority/AUTHORITY_STATUS.json`;
-3. read `controller/READ_FIRST.md`;
-4. read `controller/state/CURRENT_STATE.md`;
-5. read `controller/CONTROLLER_GOVERNANCE.md`;
-6. resolve all applicable rows in `controller/authority/OWNER_DECISION_LIVE_REGISTER.csv`;
-7. read exact mission/profile/oracle/evidence required by the task.
+1. `controller/READ_FIRST.md` — boot order + authority chain.
+2. `controller/authority/AUTHORITY_STATUS.json` — authority mode, converged candidate, truth ceilings.
+3. `controller/state/CURRENT_STATE.md` — current phase (`EXECUTION_PAUSED_BY_OWNER`) and next legal action.
+4. **`controller/12_execution/FINAL_REMAINING_WORK_EXECUTION_BLUEPRINT_2026-10-02.md`** — implementation-grade specs for EVERY remaining residual + `CANDIDATE_DAG__NOT_LAUNCH_AUTHORITY` + five stopped-lane safe-stop records.
+5. `controller/12_execution/FINAL_RESIDUAL_REGISTER_2026-10-02.md` — deduplicated 31-row residual register + Owner-item resolution.
+6. `controller/12_execution/EXECUTION_LIFECYCLE_STATE.md` — per-lane candidate identities, adjudications, safe-stop truth.
+7. `controller/12_execution/chatgpt_offload_queue/INDEX.md` — pending `OFFLOAD-04`/`OFFLOAD-05` (both `READY_FOR_CHATGPT`), consumed `OFFLOAD-01/02/03`.
+
+## Exact current source / candidate identities
+
+- Remote (at record time): `writer/mi-serial@563afc13e0857e396e9fb138905566f8f4b7e9cf` / tree `6a37f09032a747622474b37c904ad82ffe49c404` — always `git fetch` and rebind first.
+- Integrated Product candidate (evidence-accepted, NOT Owner-accepted): `0102a35d4850ab1a3b14436bcc6abe0868ee6a7f` / tree `396010acdf3e0f049fee4962bd18245d20a94fa4`.
+- 19 lane candidates pushed at `writer/mi-serial-lane/<LANE>` (identities in the lifecycle registry).
 
 ## Current durable routing
-- active carrier: `ROUTE-MIMO-AGENT`;
-- controlling topology: `OD-20261002-087` — parallel disjoint lanes, one mutating Writer per exact bounded Surface/lane, shared hotspots/dependencies/final wiring serialize, value-weighted under `OD-20260916-043`;
-- `OD-20260928-085` (one persistent sequential Writer on `writer/mi-serial`; W01 → W02 → W03 → W04 → W05) is historical task-specific lineage only;
-- offload/operating model: `CHATGPT PRECOMPUTE → PRIMARY SPOT-CHECK/ADJUDICATE → MIMO EXECUTE → CHATGPT INDEPENDENT REVIEW → PRIMARY INTEGRATE` (`controller/12_execution/chatgpt_offload_queue/`);
-- Controller independently audits results;
-- historical parallel/WM plans are lineage/dependency evidence only; the current DAG is rebuilt from the 23-Surface evidence-reuse matrix.
 
-## Current cutover truth
-- until `AUTHORITY_STATUS.classification=GITHUB_CANONICAL`, Drive remains live Controller authority;
-- future sole mutable GitHub Controller plane is `controller/**`;
-- `cep-writer/**` is derived Writer input only;
-- post-cutover Drive role is compatibility pointer + history/evidence under `OD-20261002-086`.
+- Carrier `ROUTE-MIMO-AGENT`; topology `OD-20261002-087` (parallel disjoint lanes; one Writer per bounded lane); `OD-20260928-085` = historical task-specific lineage.
+- Operating model: `CHATGPT PRECOMPUTE → PRIMARY SPOT-CHECK/ADJUDICATE → MIMO EXECUTE → CHATGPT INDEPENDENT REVIEW → PRIMARY INTEGRATE`.
+- Open truth ceilings: H03 PROP/FALSIFY `NOT_PROVEN` (governed cycle spec in blueprint R-31); Owner acceptance/main/release/deploy/freeze NOT_AUTHORIZED; 2 non-blocking Owner choices + deferred shell redesign (blueprint §8).
 
-## Open truth ceilings
-- H03 propagation/falsification remain `NOT_PROVEN`;
-- Enterprise relation shared-owner integration remains an open Product defect until separately corrected and proven;
-- Product acceptance, main merge, release, deployment and stack freeze are not implied by control-plane cutover.
+## Open ceilings / successor cautions
 
-This handoff intentionally contains no independent next-action authority. The current state file controls.
+- Do not treat the blueprint's `CANDIDATE_DAG` as launch authority — a fresh Primary rebind/adjudication (or Owner brief) is required first.
+- `browser.lineage_receipt_truthful` design: receipt must be `EXECUTED_PASS` (6/6) — never force green.
+- VD-008: verify visual claims by sha+DOM/OCR/pixel cross-check, never by image display alone.
 
-## Cutover completion
-
-GitHub-direct successor proof: PASS. Drive-entry successor proof: PASS 16/16. Drive is compatibility/history/evidence only. The next Controller binds exact lane scope/order from the current 23-Surface evidence-reuse matrix and the final OD-087 DAG; this handoff does not independently choose milestones.
+This handoff contains no independent next-action authority; `CURRENT_STATE.md` + the blueprint control.
