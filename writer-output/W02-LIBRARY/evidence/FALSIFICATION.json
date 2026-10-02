@@ -1,0 +1,164 @@
+{
+  "tool": "writer-output/W02-LIBRARY/falsify.mjs",
+  "generatedAt": "2026-10-02T05:50:12.580Z",
+  "candidate": {
+    "branch": "writer/mi-serial-lane/LIB-1",
+    "head": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "tree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684"
+  },
+  "environment": {
+    "node": "v22.16.0",
+    "engine": "Playwright Chromium",
+    "viewports": [
+      "1440x1000"
+    ]
+  },
+  "persistence": "LocalPersistenceClient pointed at closed port 41999 for N1/N2/N3 and L1 so the canonical fixture content is under test (disclosed condition, not the default product state)",
+  "results": [
+    {
+      "id": "N1.non-owned-route-write-refused",
+      "status": "PASS",
+      "observed": {
+        "consumer": "library",
+        "availLearnEdit": null,
+        "availRqRoute": null,
+        "learnExecute": null,
+        "rqExecute": null,
+        "boundForeignIds": []
+      },
+      "oracle": "on the library route a non-owned (learn/rq) write command must be unavailable or refuse; the canonical document must be untouched"
+    },
+    {
+      "id": "N2a.invalid-input-refused-no-corruption",
+      "status": "PASS",
+      "observed": {
+        "identical": true,
+        "beforeLen": 39752,
+        "afterLen": 39752,
+        "attempts": [
+          {
+            "label": "insertBlock.missingId",
+            "threw": "INVALID_STRUCTURED_BLOCK"
+          },
+          {
+            "label": "insertBlock.invalidType",
+            "threw": "INVALID_STRUCTURED_BLOCK"
+          },
+          {
+            "label": "insertBlock.null",
+            "threw": "INVALID_STRUCTURED_BLOCK"
+          },
+          {
+            "label": "updateBlock.unknownId",
+            "threw": "UNKNOWN_STRUCTURED_BLOCK"
+          },
+          {
+            "label": "removeBlock.unknownId",
+            "threw": "UNKNOWN_STRUCTURED_BLOCK"
+          },
+          {
+            "label": "updateBlock.emptyId",
+            "threw": "UNKNOWN_STRUCTURED_BLOCK"
+          }
+        ]
+      },
+      "oracle": "structurally invalid input (empty id, unknown type, null, unknown block) must throw and leave the document byte-identical"
+    },
+    {
+      "id": "N2b.boundary-input-no-corruption",
+      "status": "PASS",
+      "observed": {
+        "attempts": [
+          {
+            "label": "insertBlock.index=99999",
+            "result": {
+              "ok": null,
+              "code": null,
+              "changed": null,
+              "receipt": null
+            }
+          },
+          {
+            "label": "insertBlock.index=-99",
+            "result": {
+              "ok": null,
+              "code": null,
+              "changed": null,
+              "receipt": null
+            }
+          }
+        ],
+        "beforeCount": 36,
+        "afterCount": 38,
+        "missing": [],
+        "duplicated": [],
+        "serializable": true
+      },
+      "oracle": "out-of-range index is a boundary, not an error: the mutation kernel may clamp it, but every original block must survive, ids must stay unique and the document must stay valid"
+    },
+    {
+      "id": "N3.provider-unavailable-truthful",
+      "status": "PASS",
+      "observed": {
+        "persistencePort": 41999,
+        "health": {
+          "ok": false,
+          "code": "RUNTIME_UNAVAILABLE"
+        },
+        "saveState": "clean",
+        "announcedSaved": false
+      },
+      "oracle": "with no persistence provider the product must report unavailable and must never claim Saved/persisted"
+    },
+    {
+      "id": "L1.locale-flip-EN-AR-EN-identical-function",
+      "status": "PASS",
+      "observed": {
+        "en1": {
+          "lang": "en",
+          "dir": "ltr",
+          "blocks": 22,
+          "tree": 9,
+          "cmds": [
+            "library.create:n/a",
+            "library.insert:n/a",
+            "library.save:n/a",
+            "library.revise:n/a",
+            "library.history:n/a"
+          ],
+          "history": 1
+        },
+        "ar": {
+          "lang": "ar",
+          "dir": "rtl",
+          "blocks": 22,
+          "tree": 9,
+          "cmds": [
+            "library.create:n/a",
+            "library.insert:n/a",
+            "library.save:n/a",
+            "library.revise:n/a",
+            "library.history:n/a"
+          ],
+          "history": 1
+        },
+        "en2": {
+          "lang": "en",
+          "dir": "ltr",
+          "blocks": 22,
+          "tree": 9,
+          "cmds": [
+            "library.create:n/a",
+            "library.insert:n/a",
+            "library.save:n/a",
+            "library.revise:n/a",
+            "library.history:n/a"
+          ],
+          "history": 1
+        },
+        "identical": true
+      },
+      "oracle": "structure, ids, availability and history must be identical across EN -> AR -> EN; only language/direction may change"
+    }
+  ]
+}

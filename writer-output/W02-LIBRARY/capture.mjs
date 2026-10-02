@@ -23,6 +23,7 @@ catch (e) { playwright = require(path.resolve(process.env.CEP_PLAYWRIGHT_MODULE_
 const { chromium } = playwright;
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
+const git = args => { try { return require('node:child_process').execFileSync('git', args, { cwd: root, encoding: 'utf8' }).trim(); } catch { return ''; } };
 const args = process.argv.slice(2);
 const opt = (name, fallback) => {
   const hit = args.find(a => a.startsWith(`--${name}=`));
@@ -33,6 +34,14 @@ const name = opt('name', 'probe');
 const locale = opt('locale', 'ar');
 const width = Number(opt('w', 1505));
 const height = Number(opt('h', 1045));
+/* --persist=on  : default local persistence port (4174). A persisted baseline written BEFORE a
+   fixture fix hydrates the document and masks the canonical content — that is provider truth.
+   --persist=off : point the LocalPersistenceClient at a deliberately closed port (>=1024) so the
+   client reports RUNTIME_UNAVAILABLE and the canonical fixture content is what renders.
+   The condition is recorded in the evidence JSON; it is never presented as the default product
+   state and never used to claim the provider wrote something it did not. */
+const persist = opt('persist', 'on');
+const persistPort = persist === 'off' ? opt('port', '41999') : null;
 const outDir = path.join(root, 'writer-output/W02-LIBRARY/evidence');
 await mkdir(outDir, { recursive: true });
 
@@ -59,7 +68,7 @@ try {
   const page = await context.newPage();
   page.on('pageerror', e => errors.push(String(e)));
   page.on('console', m => { if (m.type() === 'error') errors.push(`console:${m.text()}`); });
-  await page.goto(`http://127.0.0.1:${port}/?surface=library`, { waitUntil: 'domcontentloaded' });
+  await page.goto(`http://127.0.0.1:${port}/?surface=library${persistPort ? `&persistencePort=${persistPort}` : ''}`, { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => window.CEPFoundation?.consumer === 'library', null, { timeout: 45000 });
   await page.waitForTimeout(3000);
 
@@ -131,7 +140,13 @@ try {
 const record = {
   name, locale, viewport: `${width}x${height}`, startedAt, capturedAt: new Date().toISOString(),
   file: path.relative(root, file), sha256, dims, bytes: (await readFile(file)).length,
-  candidate: 'writer/mi-serial working tree', errors, probe
+  candidate: 'writer/mi-serial-lane/LIB-1',
+  candidateCommit: git(['rev-parse', 'HEAD']),
+  candidateTree: git(['rev-parse', 'HEAD^{tree}']),
+  branch: git(['rev-parse', '--abbrev-ref', 'HEAD']),
+  build: 'npm run build:runtime',
+  persistence: persistPort ? `UNAVAILABLE_BY_CAPTURE_FLAG__port=${persistPort}__canonical_fixture_content` : 'DEFAULT_LOCAL_RUNTIME__port=4174__persisted_baseline_may_hydrate',
+  errors, probe
 };
 await writeFile(path.join(outDir, `${name}.json`), JSON.stringify(record, null, 2));
 console.log(JSON.stringify(record, null, 2));
