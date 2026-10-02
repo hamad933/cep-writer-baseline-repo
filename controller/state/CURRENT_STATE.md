@@ -55,14 +55,16 @@ H03:
 
 ## Current execution topology
 
-`OD-20260928-085` ACTIVE:
-- one persistent sequential Writer;
-- `writer/mi-serial`;
-- W01→W02→W03→W04→W05;
-- Controller inline independent audit;
-- no parallel/per-Surface launch topology for this carrier.
+`OD-20261002-087` ACTIVE:
+- multiple mutating Writers may run concurrently;
+- one Writer per exact bounded Surface/lane at a time;
+- parallelize only genuinely disjoint writable paths / canonical-owner scopes / dependency edges;
+- shared hotspots, same-owner mutations, final wiring and true dependency edges serialize;
+- Controller/Coordinator owns exact parent binding, collision locks, result intake, independent audit and convergence.
 
-The 23 structurally revalidated packets remain candidate execution bindings only; exact parent/source/profile/oracle/evidence must be rebound at actual milestone launch.
+`OD-20260928-085` is `COMPLETED_TASK_SPECIFIC_NON_DURABLE` historical lineage and is not current general serial-topology authority.
+
+The 23 structurally revalidated packets remain candidate execution bindings only; exact parent/source/profile/oracle/evidence must be rebound at actual lane launch.
 
 ## Current gates
 
@@ -86,10 +88,10 @@ The 23 structurally revalidated packets remain candidate execution bindings only
 
 ## Next action
 
-Drive reconciliation and Drive-entry successor recovery are complete. Next, bind the exact currently legal OD-085 milestone starting point from current Product/evidence truth. Do not infer the milestone from historical WM/parallel state; re-evaluate W01→W05 completion/retention against the current branch, packet/profile truth and open Enterprise/Runs/H03 findings before Writer mutation.
+Drive reconciliation and Drive-entry successor recovery are complete. Current work is result-by-result reconstruction under `OD-20261002-087`: verify which historical Surface Writers actually reached terminal result, which were only rescued/partial, then construct a fresh collision/dependency DAG. Do not launch Product Writers from historical WM/OD-085 sequencing or from report presence alone.
 
 
-## OD-085 MILESTONE REVALIDATION / W03 BINDING — 2026-10-02
+## HISTORICAL / SUPERSEDED — OD-085 MILESTONE REVALIDATION / W03 BINDING — 2026-10-02
 
 **Exact current revalidation source:** `writer/mi-serial@2eafa132351b33d9f666784d4b432c2b9f0fe3a2` / tree `0c6f096585c5324b95c09dc039ab4a2a42fd01da`.
 
@@ -111,7 +113,7 @@ General Browser Conformance at the exact source remains `3 PASS / 3 FAIL`; all t
 
 No Product acceptance, main merge, release, deployment or stack freeze is authorized.
 
-## W03 ENTERPRISE RELATION DIAGNOSTIC NARROWING — 2026-10-02
+## HISTORICAL / SUPERSEDED FOR DISPATCH SCOPE — W03 ENTERPRISE RELATION DIAGNOSTIC NARROWING — 2026-10-02
 
 **Classification:** `CURRENT_W03_CORRECTION_TRUTH__RUNS_HARNESS_ORACLE_CLOSED__ENTERPRISE_RELATION_INTEGRATION_ONLY__NO_PRODUCT_MUTATION_IN_THIS_CONTROLLER_STEP`
 
@@ -219,3 +221,74 @@ Prepare one bounded W03 Enterprise correction packet with:
 - Next action: parallel READ_ONLY result audits across W01/W02, W03, W04, W05 plus shared-owner/collision and evidence/harness lanes. Convert every Surface to `AUDIT_ONLY__NO_WRITER`, `CONTINUE_EXISTING_SALVAGE`, `NEW_BOUNDED_WRITER_REQUIRED`, or `WAIT_FOR_SHARED_SEAM`; then build the fresh mutation DAG and launch only proven independent Writer lanes in Codespaces/OpenCode/MiMo.
 - ChatGPT Controller/helper chats must absorb archaeology, packet preparation, result review and falsification so MiMo/OpenCode budget is concentrated on implementation, build/test/browser iteration and local integration.
 - No Product acceptance, main merge, release, deployment or stack freeze is created by this reconstruction step.
+
+
+## EXACT INTERRUPTION RESULT RECONSTRUCTION — 2026-10-02
+
+**Classification:** `CURRENT_RECONSTRUCTION_TRUTH__6_TERMINAL_WRITER_RESULTS__11_RESCUED_PARTIAL__1_LINEAGE_UNRESOLVED__5_NO_ORIGINAL_COMPLETION__NO_AUTO_ACCEPTANCE`
+
+The interrupted parallel Surface-Writer episode is now reconstructed from checkpoint chronology and rescue manifests rather than report/file presence.
+
+### Terminal Writer-result evidence — 6 Surfaces
+
+Checkpoint `CP-2026-09-30-001` records exactly five `completed_surfaces`:
+- Today
+- RQ
+- Scenarios
+- Evidence
+- Configuration
+
+`controller/state/RESCUE_W03_ENTERPRISE_2026-09-30.md` separately records:
+- Enterprise — `Writer execution: COMPLETE`
+- durable final-capture candidate/evidence rescued
+- Controller review still required
+- no Product/Owner acceptance implied
+
+Therefore the exact historical terminal-result set proven at the interruption lineage is **6 Surfaces**, not all rescued/report-bearing Surfaces.
+
+### Rescued but not proven terminal — 11 Surfaces
+
+`CP-2026-09-30-002` preserved twelve rescued units while still classifying the corresponding surfaces as `in_progress`. Removing Enterprise, whose independent rescue manifest explicitly proves Writer execution COMPLETE, leaves these 11 as rescued/partial/unverified:
+- Library
+- Learn
+- Visualize
+- Labs
+- Runs
+- Reviews
+- Mastery
+- Portfolio
+- Audit
+- Backup
+- Releases
+
+`CP-2026-09-30-003` independently reviewed the rescued set and recorded `REVIEWED_HOLD__NO_OWNER_ACCEPTANCE`; it does not promote these 11 to terminal Writer completion.
+
+### Lineage unresolved — 1 Surface
+
+- Manual AI — present in the historical in-flight Writer-session set but absent from the twelve-unit durable-rescue completion list; retain as `PARTIAL_RESULT_LINEAGE_RECONSTRUCTION_REQUIRED` until exact later candidate/commit evidence proves otherwise.
+
+### No original Surface-Writer completion proven — 5 Surfaces
+
+Checkpoint chronology records these as not dispatched at the interruption point:
+- Shell
+- Health
+- Processing
+- Validation
+- Results
+
+Later family/coordinator source may contain useful implementation value for them, but that does not retroactively prove an original per-Surface Writer terminal result.
+
+### Dispatch consequence
+
+The 23-Surface accounting is therefore:
+- **6** terminal Writer results requiring independent re-audit;
+- **11** rescued partial/unverified results requiring salvage audit before continuation;
+- **1** unresolved Writer-result lineage (Manual AI);
+- **5** with no original Surface-Writer completion proven.
+
+No Surface is relaunched automatically. Current Controller/helper work must first convert each row into:
+`AUDIT_ONLY__NO_WRITER`, `CONTINUE_EXISTING_SALVAGE`, `NEW_BOUNDED_WRITER_REQUIRED`, or `WAIT_FOR_SHARED_SEAM`.
+
+Under `OD-20261002-087`, resulting genuinely disjoint mutating lanes may run in parallel; only actual shared owners/hotspots/dependencies/final convergence serialize.
+
+No Product acceptance, main merge, release, deployment or stack freeze is created by this reconstruction.
