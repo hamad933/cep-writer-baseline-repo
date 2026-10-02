@@ -29,7 +29,7 @@ A rescue/report/evidence directory does not equal completion or acceptance.
 - Manual AI remains **1 lineage-unresolved** in-flight result.
 - Shell, Health, Processing, Validation, Results remain **5 with no original Surface-Writer completion proven**.
 
-Accounting: `6 + 11 + 1 + 5 = 23`.
+Accounting at interruption epoch: `6 + 11 + 1 + 5 = 23`. **Post-reconstruction (2026-10-02): the 1 lineage-unresolved surface (Manual AI) resolved TERMINAL_COMPLETE → effective `7 terminal + 11 rescued-partial + 0 unresolved + 5 none = 23`.**
 
 This classification concerns whether the historical Writer reached a terminal result. It does **not** create Controller/Product/Owner acceptance.
 
@@ -54,7 +54,7 @@ This classification concerns whether the historical Writer reached a terminal re
 | Audit | PARTIAL_SALVAGE_CONTINUE_OR_REAUDIT | Deep audit; reconstructed report is not original completion proof |
 | Backup | PARTIAL_SALVAGE_CONTINUE_OR_REAUDIT | Deep source/runtime audit |
 | Releases | PARTIAL_SALVAGE_CONTINUE_OR_REAUDIT | Deep source/provider/lifecycle audit |
-| Manual AI | PARTIAL_RESULT_LINEAGE_RECONSTRUCTION_REQUIRED | Determine whether result completed after snapshot or was reconstructed |
+| Manual AI | **LINEAGE_RESOLVED__TERMINAL_COMPLETE_PROVEN (2026-10-02, lane MAI-1)** | Evidence: `writer-output/W05-MANUAL-AI/evidence/mai1-lane/lineage-hash-reconciliation.json` + HANDOFF §0–§6, branch `writer/mi-serial-lane/MAI-1@e92f8cda`. Remaining: D-08 vision re-verification (Controller), D-10 shared item (request path) |
 | Shell | NO_ORIGINAL_SURFACE_WRITER_COMPLETION_PROVEN | Inspect later family/coordinator evidence before new Writer |
 | Health | NO_ORIGINAL_SURFACE_WRITER_COMPLETION_PROVEN | Inspect later W05 family delta/evidence |
 | Processing | NO_ORIGINAL_SURFACE_WRITER_COMPLETION_PROVEN | Inspect later W05 family delta/evidence |

@@ -18,7 +18,7 @@
 |---|---|
 | Final recovery closeout / RECOVERY_GATE_PASS | DONE (`fe1bb98`) |
 | WAVE-1 initial burst (exactly 15) | **LAUNCHED — all 15 running** (model xiaomi-token-plan-sgp/mimo-v2.6-flash; parent fe1bb98; sessions: LIB ses_f0513de2bffe…, LRN ses_f0513de13ffe…, VIS ses_f0513de0dffe…, LAB ses_f0513de09ffe…, RUN ses_f0513de03ffe…, REV ses_f0513ddfeffe…, MAS ses_f0513ddf6ffe…, POR ses_f0513ddf3ffe…, BKP ses_f05123141ffe…, AUD ses_f0512313bffe…, REL ses_f05123133ffe…, MAI ses_f0512312cffe…, VAL ses_f05123126ffe…, HLTH ses_f05123122ffe…, PRC ses_f0512311cffe…) |
-| Result intake / review / corrections | pending first returns (16 writers active) |
+| Result intake / review / corrections | 16 active · **MAI-1 RETURNED → ADJUDICATED `RETAIN`** (evidence-only; `TERMINAL_COMPLETE_PROVEN`; candidate `writer/mi-serial-lane/MAI-1@e92f8cdaf7152a8bbca2d6a1049cce63275dc049` / tree `5b7766188d50e23d5f489ec26ff583eb45925fae`; 4 evidence files; zero product; open: U-2 D-08 vision re-verify @convergence, U-3 D-10 → SH-2 request path). Matrix row 14 → NOWR; accounting → 7/11/0/5. |
 | OFFLOAD-04 (5 NOWR audit-only re-verification) | packet READY_FOR_CHATGPT |
 | SH-1 launch | **LAUNCHED** — worktree /workspaces/cep-lanes/SH-1, branch writer/mi-serial-lane/SH-1, parent `4c6fffe3b6f3cc766e537655a362a3e423585e07` (rebound, bookkeeping-only delta), session `ses_f050fb42effevfBe4klD5yYV6I`, model xiaomi-token-plan-sgp/mimo-v2.6-flash |
 | Dependency lanes (ENT-1 after SH-1; SH-2 after SH-1; RES-1 after RUN-1) | pending |
