@@ -1,0 +1,74 @@
+{
+  "SURFACE": "results",
+  "OWNER": "RES-1 (lane writer/mi-serial-lane/RES-1)",
+  "CLASS": "CANDIDATE_ONLY__NO_SELF_PROMOTION__SOLE_CONTROLLER_REVIEW_REQUIRED",
+  "REFERENCE": "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/05_RESULTS_REPLAY/Cybersecurity Replay Dashboard Timeline.png",
+  "REFERENCE_CLASSIFICATION": "CURRENT_FINAL_REFERENCE (4d5af620a5b9887a, 1505x1045) + 2x OWNER_CONFIRMED_SUPPORTING_MAJOR_STATE_REFERENCE (AAR c9b57a30023f8330, Compare f5a720f303d16f75) — hashes re-verified against the packet table",
+  "CURRENT_CANDIDATE": {
+    "parentCommit": "ed6e19a3f49e12e7c8faa71c608b9d227b3d3b5d",
+    "branch": "writer/mi-serial-lane/RES-1",
+    "canonicalSourceTree": "8e2a3d51c6e92304130af11be1f554e01783ecbd15736b3a94012bd134c368e6",
+    "canonicalSourceFileCount": 339,
+    "parentBaselineTree": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc"
+  },
+  "FILES_CHANGED": [
+    "stack/native-typescript/surfaces/results/i18n.ts (NEW)",
+    "stack/native-typescript/surfaces/results/presentation.ts",
+    "stack/native-typescript/surfaces/results/index.ts",
+    "stack/native-typescript/adapters/results/domain.ts",
+    "writer-output/W03-RESULTS/** (reports, falsification, capture tooling, harness, evidence)"
+  ],
+  "FUNCTIONAL_STATUS": "PASS — build:runtime exit 0; npm test 210/0 twice identical; 9 packet tests PASS (results domain, S13, D09, CG4 x3, analytical-compare, analytical-compare-correction, D03C); w03-browser-flows 7/7 PASS baseline and final; lane falsification 7/7 PASS",
+  "STRUCTURAL_STATUS": "PASS — shared owners bound by identity (split instance refused), no second replay engine, TimelineReplayOwner production instantiations = 1, no Review/Audit/Mastery authority on Results, duplicate-mechanics scan clean",
+  "VISUAL_STATUS": "PASS_WITH_RECORDED_CEILINGS — Result/Replay/AAR/Compare views render complete, localized and direction-correct; ceilings: shared TimelineReplayHost chrome is EN-only (SH-R1), shared AnalyticalCompareHost bakes dir=rtl (SH-R2, hence surface-local compare chrome), live-route centre still m0-owned (H4/DEF-RES-1)",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": "L1 whole surface (all 4 modes x 2 locales x 2 viewports) · L2 regions/panes (TOP identity, LEFT structure, CENTER workbench per mode, RIGHT context/ownership loop, BOTTOM footer) · L3 components (mode tabs, result cards, timeline host, AAR cards, compare diff rows, ownership dl) · L4 micro (RTL/LTR token coordinates, bdi isolation, wrapping of owner tokens) — method: byte-level OCR (tesseract 5.3.4 eng) + DOM probes + pixel geometry, because the image-display channel returned mismatched bytes (disclosed in HANDOFF §6)",
+  "RESPONSIVE_STATUS": "PASS — 1440x1000 and 1024x900 captured for every mode/locale; at 1024 the right pane drops below the centre and the left column narrows without overlap or truncation; tablet/phone breakpoints (1100/760) unchanged from the accepted studio stylesheet",
+  "RTL_LTR_STATUS": "PASS (own files) — direction follows explicit option → document dir → locale, never baked; AR/RTL and EN/LTR captured for all 4 modes; OCR boxes prove mirroring (EN identity x=32 / structure x=30 / ownership x=1151 vs AR x=1041 / x=1208); technical tokens stay dir=ltr in both. RESIDUAL: shared TimelineReplayHost strings remain EN in AR (SH-R1); m0 live-route banner strings remain EN in AR (H4/shared)",
+  "DEFECTS_FOUND": [
+    "A1 no AR/EN strings in Results presentation (V2)",
+    "A2 shared-owner identity not enforced at surface composition (V2)",
+    "A3 replay cursor reset on every centre re-render (V1)",
+    "A4 domain.step(0)/NaN coerced into a real forward step (V2, found by N2)",
+    "A5 AAR view empty of real domain content (V2)",
+    "A6 compare view missing owner/pin receipt (V1)",
+    "A7 refused capability request left no visible status (V2, H4 Results half)",
+    "A8 shared TimelineReplayHost EN-only (V2, shared)",
+    "A9 shared AnalyticalCompareHost bakes dir=rtl (V2, shared)",
+    "A10 live centre Replay/AAR/Compare blocked by absent provider (V3, pre-existing DEF-RES-1)",
+    "A11 duplicate domain mount would throw ANALYTICAL_PROVIDER_DUPLICATE_ID fail-closed (V1, recorded)",
+    "A12 supporting reference file names swapped vs content (V0, recorded)",
+    "A13 npm run check gained 1 red from a parent-tree-bound browser receipt (V2, evidence/oracle)"
+  ],
+  "DEFECT_SEVERITY": "max V3 (A10, pre-existing and externally blocked); all lane-ownable findings ≤ V2 and closed; shared/seam findings filed as requests",
+  "ROOT_CAUSE": "SURFACE_COMPOSITION + IMPLEMENTATION + CONTENT_MODEL for A1-A7 (closed in own roots); SHARED_COMPONENT for A8-A9 (requested); FIXTURE_DATA/dependency for A10; EVIDENCE/ORACLE for A12-A13",
+  "FIXES_APPLIED": [
+    "new surfaces/results/i18n.ts + localized presentation and capability read-out (A1)",
+    "composeResultsSurface refuses split shared owners (A2)",
+    "attachReplay guard preserves the replay cursor (A3)",
+    "boundary-safe domain.step returning the shared owner's truthful refusal receipt (A4)",
+    "domain.recordedTimeline() + AAR recorded-sequence/provenance/anchor panels (A5)",
+    "pinned-pair + receipt-owner + ownership-loop presentation (A6)",
+    "availability refusals recorded in the visible Capability state block (A7)"
+  ],
+  "RECAPTURE_STATUS": "DONE — 20 fresh captures on tree 8e2a3d51 (16 studio + 4 live), all hash-bound; 7 fresh W03 flow frames + final browser receipt; prior rounds retained (baseline tree 0c43d7f1, superseded tree 13b60f57)",
+  "RECOMPARISON_STATUS": "DONE — L1-L4 against CURRENT_FINAL_REFERENCE and both supporting major-state references; ownership-loop and direction regions compared per locale/viewport; mismatches recorded as A8-A10 rather than silently accepted",
+  "REGRESSION_STATUS": "PASS — full suite 210/0 twice identical; 9 packet tests PASS; w03 flows 7/7 PASS; check-duplicate-mechanics clean; npm run check identical to baseline except A13 (stale parent-tree browser receipt, Controller-owned regeneration)",
+  "EVIDENCE": [
+    "writer-output/W03-RESULTS/CAPTURE_RECEIPT.json (20 shots, sha256+bytes+dims+viewport+locale+tree+commit, probes incl. scrub hash-invariance and STUDIO_PROOF)",
+    "writer-output/W03-RESULTS/evidence/*.png (16 studio + 4 live)",
+    "writer-output/W03-RESULTS/final-flow-capture/ (7 flow frames + BROWSER_RECEIPT.final.json, 7/7 PASS)",
+    "writer-output/W03-RESULTS/baseline-flow-capture/ (parent baseline, 7/7 PASS)",
+    "writer-output/W03-RESULTS/superseded-13b60f57/ (retained, labelled)",
+    "writer-output/W03-RESULTS/falsification.mjs + run output (7/7)",
+    "writer-output/W03-RESULTS/SERIALIZED_HOTSPOT_REQUEST.md",
+    "writer-output/W03-RESULTS/HANDOFF.md"
+  ],
+  "LINEAGE": "parent ed6e19a3f49e12e7c8faa71c608b9d227b3d3b5d (verified HEAD at launch, clean worktree) -> candidate branch writer/mi-serial-lane/RES-1; canonical source tree 8e2a3d51c6e92304130af11be1f554e01783ecbd15736b3a94012bd134c368e6 (339 files); captures generated from dist/ built by npm run build:runtime from that source; dist/assurance/stack-MEASURED_COMPARISON restored to HEAD before staging per mission step 6",
+  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
+  "BLOCKERS": [
+    "DEF-RES-1: live-route sealed-Results provider absent (W05 dependency) — recorded, not worked around; no Result fabricated",
+    "A13: browser conformance receipt binds parent tree; assurance/** is Controller-owned — regenerated at convergence",
+    "A8/A9: shared foundation hosts need locale/direction parameters — SERIALIZED_HOTSPOT_REQUEST filed, not applied"
+  ],
+  "UPDATED": "final"
+}

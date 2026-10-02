@@ -53,6 +53,16 @@ export class W03ResultsDomain {
   }
   listResults(){return freeze(this.records.map(record=>({ref:exactRef(record),sealed:true,schemaVersion:record.schemaVersion||'',comparatorVersion:record.comparatorVersion||'',label:record.label||record.title||record.resultId,runId:record.runId||record.sourceRunInputRef?.runId||'',status:record.status||record.outcome||'SEALED',eventCount:record.recordedEvents.length,provenanceRefs:clone(record.provenanceRefs||[])})))}
   resultProjection(ref){const record=this._record(ref);return freeze({ref:exactRef(record),sealed:true,label:record.label||record.title||record.resultId,status:record.status||record.outcome||'SEALED',runId:record.runId||record.sourceRunInputRef?.runId||'',schemaVersion:record.schemaVersion||'',comparatorVersion:record.comparatorVersion||'',sourceRunInputRef:clone(record.sourceRunInputRef||null),provenanceRefs:clone(record.provenanceRefs||[]),limitations:clone(record.limitations||[]),historicalTerminalBytesInert:true})}
+  /**
+   * Read-only projection of the sealed Result's own recorded event stream for AAR/Replay
+   * presentation. It reuses the same thin timeline provider the shared TimelineReplayOwner
+   * consumes, so presentation can never derive an event the owner would not expose; no event,
+   * timestamp, phase or gap is reconstructed and nothing is mutated.
+   */
+  recordedTimeline(ref){
+    const record=this._record(ref),snapshot=createResultsTimelineProvider(record).readTimeline();
+    return freeze({resultRef:exactRef(record),status:snapshot.status,truthClass:snapshot.truthClass,streamId:snapshot.streamId,revision:snapshot.revision,label:snapshot.label,stateMessage:snapshot.stateMessage,events:clone(snapshot.events||[]),eventCount:(snapshot.events||[]).length,recordedOnly:true,eventsReconstructed:false,replayExecutesRuntime:false});
+  }
   hasReplaySelection(){return !!this.replayRef}
   replayResult(ref){
     const record=this._record(ref);
@@ -60,7 +70,18 @@ export class W03ResultsDomain {
     this.replayOwner.attachProvider(createResultsTimelineProvider(record));
     return this.replayState();
   }
-  step(delta=1){if(!this.replayRef)throw Error('RESULT_REPLAY_NOT_SELECTED');this.replayOwner.step(Number(delta||1));return this.replayState()}
+  /**
+   * Advance the shared TimelineReplayOwner cursor. Boundary/invalid deltas are passed through
+   * unchanged so the shared owner can refuse them truthfully (`TIMELINE_STEP_INVALID`); they are
+   * never coerced into a real step. The returned receipt carries the unchanged replay state plus
+   * the owner's acceptance truth.
+   */
+  step(delta){
+    if(!this.replayRef)throw Error('RESULT_REPLAY_NOT_SELECTED');
+    const requested=delta===undefined||delta===null||delta===''?1:Number(delta);
+    const receipt=this.replayOwner.step(requested);
+    return freeze({...this.replayState(),accepted:receipt?.accepted!==false,code:receipt?.code||null,action:receipt?.action||null,stepRequested:String(requested)});
+  }
   replayState(){
     const projected=this.replayOwner.project(),hasSelection=!!this.replayRef;
     const state=!hasSelection?'IDLE':projected.timeline.status==='EMPTY'?'GAP':gapSelected(projected)?'GAP':'PAUSED';

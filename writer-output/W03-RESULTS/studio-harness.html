@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title>W03-RESULTS studio harness · RES-1</title>
+<style>
+  html,body{margin:0;font-family:system-ui,Arial,sans-serif;background:#0f1420;color:#e8edf7}
+  .harness-banner{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:12px 18px;border-bottom:1px solid #2a3550;background:#141b2d}
+  .harness-banner strong{font-size:.95rem}
+  .fixture-tag{border:1px solid #f59e0b;color:#fbbf24;border-radius:999px;padding:4px 10px;font-size:.72rem;letter-spacing:.04em}
+  #studioMount{padding:16px;min-height:760px}
+</style>
+</head>
+<body>
+<header class="harness-banner">
+  <div><strong>CEP · Results historical analysis studio</strong>
+    <span style="opacity:.75;margin-left:10px">RES-1 candidate evidence harness</span></div>
+  <span class="fixture-tag">RECORDED_CONSUMER_FIXTURE · NOT PRODUCT TRUTH</span>
+</header>
+<main id="studioMount"></main>
+<script type="module">
+  import {W03ResultsDomain} from '../../dist/adapters/results/domain.js';
+  import {composeResultsSurface} from '../../dist/surfaces/results/index.js';
+  import {renderResultsSurface} from '../../dist/surfaces/results/presentation.js';
+  import {TimelineReplayOwner} from '../../dist/foundation/timeline/replay.js';
+  import {AnalyticalCompareOwner} from '../../dist/foundation/analytical/compare.js';
+
+  const params=new URLSearchParams(location.search);
+  const lang=params.get('lang')==='ar'?'ar':'en';
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+
+  // Labelled recordedConsumer fixture: sealed Result records used ONLY to exercise the
+  // AAR / Replay / Compare ownership loop. No record is promoted to Product truth.
+  const fixtureRecords=[
+    {resultId:'RES-FIX-402',revisionId:'r1',manifestDigest:'sha256:d82f716c90e',sealed:true,
+     label:'Enterprise Breach Isolation Test · Run #402',schemaVersion:'results/v1.2',comparatorVersion:'results-compare/1.0.0',
+     comparable:{quarantine:{label:'Quarantine',type:'string',value:'CONTAINED'},hosts:{label:'Hosts',type:'number',value:1},duration:{label:'Duration (s)',type:'number',value:1452}},
+     recordedEvents:[
+      {seq:1,id:'ev-402-1',type:'DETECTION',timestamp:'2026-09-25T03:00:00Z',summary:'Credential dump tripped the endpoint agent.'},
+      {seq:2,id:'ev-402-2',type:'ISOLATION_REQUEST',timestamp:'2026-09-25T03:00:12Z',summary:'Isolation requested for HOST-CORP-09.'},
+      {seq:3,id:'ev-402-3',type:'GAP',gap:true,summary:'Recorder unavailable for 8 seconds; no event is reconstructed.'},
+      {seq:4,id:'ev-402-4',type:'POLICY_ENFORCED',timestamp:'2026-09-25T03:00:31Z',summary:'Outbound deny-all policy enforced.'},
+      {seq:5,id:'ev-402-5',type:'CONTAINMENT',timestamp:'2026-09-25T03:05:11Z',summary:'Host severed from the corporate vLAN.'},
+      {seq:6,id:'ev-402-6',type:'SEALED',timestamp:'2026-09-25T03:24:12Z',summary:'Run sealed and preserved.'}
+     ],
+     provenanceRefs:['prov:run-402','prov:endpoint-agent-7.4'],sourceRunInputRef:{runId:'RUN-0042',revisionId:'ri-3'},
+     historicalTerminalBytes:'[ALERT] Endpoint agent tripped\n[OK] Host HOST-CORP-09 severed\n[INFO] Run sealed and preserved.'},
+    {resultId:'RES-FIX-401',revisionId:'r2',manifestDigest:'sha256:a14c330b62f',sealed:true,
+     label:'Baseline Breach Simulation · Prior Run #401',schemaVersion:'results/v1.2',comparatorVersion:'results-compare/1.0.0',
+     comparable:{quarantine:{label:'Quarantine',type:'string',value:'PARTIAL'},hosts:{label:'Hosts',type:'number',value:3},duration:{label:'Duration (s)',type:'number',value:817}},
+     recordedEvents:[
+      {seq:1,id:'ev-401-1',type:'DETECTION',timestamp:'2026-09-24T18:00:00Z',summary:'Credential dump observed.'},
+      {seq:2,id:'ev-401-2',type:'ESCALATION',timestamp:'2026-09-24T18:00:05Z',summary:'Lateral movement to HOST-CORP-02.'}
+     ],
+     provenanceRefs:['prov:run-401'],sourceRunInputRef:{runId:'RUN-0041',revisionId:'ri-1'},
+     historicalTerminalBytes:'[WARN] Lateral movement detected\n[INFO] Sealed.'}
+  ];
+
+  const timelineReplayOwner=new TimelineReplayOwner();
+  const analyticalCompareOwner=new AnalyticalCompareOwner();
+  const domain=new W03ResultsDomain({records:fixtureRecords,timelineReplayOwner,analyticalCompareOwner});
+  const composition=composeResultsSurface({
+    domain,
+    shared:{spatialRelation:{owner:'RelationInteractionOwner'},timelineReplayOwner,analyticalCompareOwner}
+  });
+  const studio=renderResultsSurface(document.getElementById('studioMount'),composition);
+
+  const sealedHash=()=>JSON.stringify({list:domain.listResults(),records:domain.records});
+  const aarHash=()=>JSON.stringify([...domain.aar.entries()]);
+  const sealedBefore=sealedHash(),aarBefore=aarHash();
+
+  // Exercise the ownership loop so the capture shows real receipts, not an idle frame.
+  const refA=domain.listResults()[0].ref,refB=domain.listResults()[1].ref;
+  const replay=composition.bus.execute('results.replay',{ref:refA});
+  composition.bus.execute('results.step',{delta:1});
+  composition.bus.execute('results.step',{delta:1});
+  const aar=composition.bus.execute('results.annotate',{ref:refA,text:'Fixture AAR narrative: containment held; recorder gap recorded as-is.',state:'SAVED',expectedRevision:0,anchoredEventRefs:['ev-402-2']});
+  const compare=composition.bus.execute('results.compare',{left:refA,right:refB});
+  const reviewAttempt=composition.bus.execute('reviews.decide',{decision:{outcome:'ACCEPTED'}});
+  const sealedAfter=sealedHash(),aarAfter=aarHash();
+
+  window.__studio={
+    setMode:mode=>studio.setMode(mode),
+    refresh:()=>studio.refresh(),
+    state:()=>studio.state(),
+    locale:document.documentElement.lang,
+    dir:document.documentElement.dir,
+    hash:sealedHash,
+    /** in-page scrub pressure: domain step + shared-owner scrub/select, never a runtime call */
+    scrub:()=>{composition.bus.execute('results.step',{delta:1});domain.replayOwner.scrubToFraction(0.75);domain.replayOwner.selectEvent('ev-402-5');return composition.domain.replayState()}
+  };
+  window.STUDIO_PROOF={
+    fixtureLabel:'RECORDED_CONSUMER_FIXTURE__NOT_PRODUCT_TRUTH',
+    locale:document.documentElement.lang,
+    dir:document.documentElement.dir,
+    replayOwner:domain.replayOwner.owner,
+    compareOwner:domain.compareOwner.owner,
+    replayOwnerInstances:1,
+    replayExecutesRuntime:replay.replayExecutesRuntime,
+    historicalTerminalBytesInert:replay.historicalTerminalBytesInert,
+    timelineStatus:replay.timelineStatus,
+    replayIndex:composition.domain.replayState().index,
+    aarRevision:aar.revision,
+    aarFactMutation:aar.factMutation,
+    compareState:compare.state,
+    compareOwnerReceipt:compare.receipt?.owner,
+    compareDifferences:compare.differences?.length??0,
+    reviewAttempt:{ok:reviewAttempt.ok,code:reviewAttempt.code},
+    truthCeiling:composition.truthCeiling,
+    sealedFactsUnchanged:sealedBefore===sealedAfter,
+    sealedFactsHash:sealedAfter,
+    aarAnalysisStateAdded:aarBefore!==aarAfter,
+    providerState:domain.providerAvailability().state
+  };
+  window.__ready=true;
+</script>
+</body>
+</html>
