@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "lane": "S03_SHARED_SETTINGS_TRANSIENT",
+  "status": "PASS",
+  "pass": 10,
+  "fail": 0,
+  "windowsInputLayoutProof": "NOT_EXECUTED",
+  "oe001": "ACTIVE_PLATFORM_GATED_PRESERVED",
+  "tests": [
+    {
+      "id": "s03.settings.role-boundary",
+      "kind": "positive",
+      "status": "PASS",
+      "evidence": {
+        "productRole": "GLOBAL_DURABLE_FAMILY_PREFERENCES_AND_DISCOVERABILITY",
+        "commandInteraction": "DISCOVERABILITY_ONLY",
+        "domainConfigEffects": 0
+      }
+    },
+    {
+      "id": "s03.settings.one-open-reclick-keyboard-search",
+      "kind": "positive",
+      "status": "PASS",
+      "evidence": {
+        "reclickClosed": true,
+        "keyboard": "FOCUS_NEXT",
+        "query": "direction",
+        "openSectionId": "settings.layout"
+      }
+    },
+    {
+      "id": "s03.focus.modal-isolation-restores-prior-state",
+      "kind": "negative-falsification",
+      "status": "PASS",
+      "evidence": {
+        "preExistingStatePreserved": true,
+        "normalStateRestored": true,
+        "isolationSnapshots": 0
+      }
+    },
+    {
+      "id": "s03.focus.reused-modal-root-rebinds-listeners",
+      "kind": "negative-falsification",
+      "status": "PASS",
+      "evidence": {
+        "releasedAfterClose": true,
+        "reboundForNewTransient": true
+      }
+    },
+    {
+      "id": "s03.focus.detached-invoker-rebind-safe",
+      "kind": "positive",
+      "status": "PASS",
+      "evidence": {
+        "focusTargetKind": "invoker-rebound",
+        "reboundFocusCount": 1
+      }
+    },
+    {
+      "id": "s03.input.ime-no-global-leak",
+      "kind": "positive",
+      "status": "PASS",
+      "evidence": {
+        "code": "IME_COMPOSITION_PASSTHROUGH",
+        "prevented": false,
+        "stopped": false,
+        "effects": 0
+      }
+    },
+    {
+      "id": "s03.direction.persisted-bridge-fallback-truth",
+      "kind": "positive",
+      "status": "PASS",
+      "evidence": {
+        "persisted": "PERSISTED_EXPLICIT_DIRECTION",
+        "hinted": "PLATFORM_OS_KEYBOARD_HINT",
+        "fallback": "POLICY_FALLBACK",
+        "semanticInference": false
+      }
+    },
+    {
+      "id": "s03.direction.note-provenance-not-fixture",
+      "kind": "positive",
+      "status": "PASS",
+      "evidence": {
+        "surface": "note-content",
+        "direction": "rtl",
+        "platformProof": "NOT_EXECUTED",
+        "oe001": "ACTIVE_PLATFORM_GATED_PRESERVED"
+      }
+    },
+    {
+      "id": "s03.feedback.truth-refusal-and-dedupe",
+      "kind": "negative-falsification",
+      "status": "PASS",
+      "evidence": {
+        "truthConflictRefused": true,
+        "dedupe": "DUPLICATE_SUPPRESSED",
+        "canonicalTruthOwned": false
+      }
+    },
+    {
+      "id": "s03.confirmation.no-risk-guess-or-action-execution",
+      "kind": "negative-falsification",
+      "status": "PASS",
+      "evidence": {
+        "missingRisk": "CONFIRMATION_RISK_DESCRIPTOR_REQUIRED",
+        "guessesDestructiveRisk": false,
+        "executesAction": false
+      }
+    }
+  ]
+}
