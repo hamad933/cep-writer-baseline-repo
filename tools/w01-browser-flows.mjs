@@ -208,6 +208,7 @@ const definitions = [
         return {link:rect(link),brand:rect(brand),centerPoint:point,elementAtCenter:top?{tag:top.tagName,className:top.className,id:top.id,href:top.getAttribute?.('href'),destination:top.closest?.('[data-shell-destination]')?.getAttribute?.('data-shell-destination')}:null,dir:document.documentElement.dir,lang:document.documentElement.lang,scale:getComputedStyle(document.body).getPropertyValue('--foundation-scale')||null};
       });
       record.actionSequence.push('W01_HIT_GEOMETRY='+JSON.stringify(hitGeometry));
+      assert(record, 'shell.w01-pointer-hit-owned-by-destination', true, Boolean(hitGeometry.elementAtCenter?.className?.includes?.('global-shell-destination')), CLASS_PRODUCT, 'W01 area destination center is occluded by another Shell control');
       note(record, 'click the W01 area destination link (real history navigation)');
       await page.locator('.global-shell-destinations [data-shell-area="W01"]').first().click();
       await page.waitForFunction(() => window.CEPFoundation?.consumer === 'today', null, { timeout: 20000 });
@@ -300,6 +301,7 @@ const definitions = [
           return {link:rect(link),brand:rect(brand),centerPoint:point,elementAtCenter:top?{tag:top.tagName,className:top.className,id:top.id,href:top.getAttribute?.('href'),destination:top.closest?.('[data-shell-destination]')?.getAttribute?.('data-shell-destination')}:null,dir:document.documentElement.dir,lang:document.documentElement.lang,scale:getComputedStyle(document.body).getPropertyValue('--foundation-scale')||null};
         });
         record.actionSequence.push('W01_HIT_GEOMETRY='+JSON.stringify(hitGeometry));
+      assert(record, 'shell.w01-pointer-hit-owned-by-destination', true, Boolean(hitGeometry.elementAtCenter?.className?.includes?.('global-shell-destination')), CLASS_PRODUCT, 'W01 area destination center is occluded by another Shell control');
         note(record, 'navigate shell -> today via the W01 destination link');
         await page.locator('.global-shell-destinations [data-shell-area="W01"]').first().click();
         await page.waitForFunction(() => window.CEPFoundation?.consumer === 'today', null, { timeout: 20000 });
