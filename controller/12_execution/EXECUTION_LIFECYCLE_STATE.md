@@ -18,8 +18,9 @@
 |---|---|
 | Final recovery closeout / RECOVERY_GATE_PASS | DONE (`fe1bb98`) |
 | WAVE-1 initial burst (exactly 15) | **LAUNCHED — all 15 running** (model xiaomi-token-plan-sgp/mimo-v2.6-flash; parent fe1bb98; sessions: LIB ses_f0513de2bffe…, LRN ses_f0513de13ffe…, VIS ses_f0513de0dffe…, LAB ses_f0513de09ffe…, RUN ses_f0513de03ffe…, REV ses_f0513ddfeffe…, MAS ses_f0513ddf6ffe…, POR ses_f0513ddf3ffe…, BKP ses_f05123141ffe…, AUD ses_f0512313bffe…, REL ses_f05123133ffe…, MAI ses_f0512312cffe…, VAL ses_f05123126ffe…, HLTH ses_f05123122ffe…, PRC ses_f0512311cffe…) |
-| Result intake / review / corrections | pending first returns |
-| SH-1 launch (permitted once burst established; rebind current parent) | AUTHORIZED_NEXT — burst established |
+| Result intake / review / corrections | pending first returns (16 writers active) |
+| OFFLOAD-04 (5 NOWR audit-only re-verification) | packet READY_FOR_CHATGPT |
+| SH-1 launch | **LAUNCHED** — worktree /workspaces/cep-lanes/SH-1, branch writer/mi-serial-lane/SH-1, parent `4c6fffe3b6f3cc766e537655a362a3e423585e07` (rebound, bookkeeping-only delta), session `ses_f050fb42effevfBe4klD5yYV6I`, model xiaomi-token-plan-sgp/mimo-v2.6-flash |
 | Dependency lanes (ENT-1 after SH-1; SH-2 after SH-1; RES-1 after RUN-1) | pending |
 | Convergence / integrated regression / final reconciliation | pending |
 | Terminal targets: `CORE_WRITER_LIFECYCLE_CONVERGED__READY_FOR_OWNER_FINAL_ACCEPTANCE` or `OWNER_DECISION_REQUIRED` | pending |

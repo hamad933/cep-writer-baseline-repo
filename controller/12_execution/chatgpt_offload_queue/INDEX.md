@@ -14,6 +14,7 @@
 | CEP-REC-OFFLOAD-01 | `OFFLOAD-01_COMMIT_GOVERNANCE_FORENSICS.md` | `CONSUMED` (result received, source-bound, spot-checked, gap-filled §12; ledger §2/§3.3/§13) |
 | CEP-REC-OFFLOAD-02 | `OFFLOAD-02_ZERO_LOSS_RESUME_EXTRACTION.md` | `CONSUMED` (LC table sealed; false-lost LC-04/07/08/09 reclaimed; ledger §10) |
 | CEP-REC-OFFLOAD-03 | `OFFLOAD-03_H_CORPUS_CROSSWALK.md` | `CONSUMED` (H-corpus sealed; C-X1/DEF-06/F-findings gap-filled; ledger §11/§12) |
+| CEP-REC-OFFLOAD-04 | `OFFLOAD-04_AUDIT_ONLY_REVERIFICATION_5_SURFACES.md` | `READY_FOR_CHATGPT` (audit-only re-verification of today/rq/scenarios/evidence/configuration) |
 
 Status lifecycle: `READY_FOR_CHATGPT` → `RESULT_RETURNED` → `PRIMARY_SPOT_CHECKED` → `CONSUMED` → `CLOSED/ARCHIVED`.
 
