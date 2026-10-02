@@ -202,3 +202,20 @@ Prepare one bounded W03 Enterprise correction packet with:
 - Next Controller action is a parallel-safe Writer-result reconstruction matrix and fresh DAG. No Product Writer launch is authorized from the superseded Enterprise-only narrowing until that matrix is complete enough to bind disjoint lanes safely.
 - ChatGPT Controllers/helpers should perform authority reconstruction, result archaeology, packet preparation, audits, falsification and convergence planning; heavy Product mutation/build/browser iteration belongs in the stronger Codespaces/OpenCode/MiMo environment unless a bounded Controller correction is clearly cheaper and safe.
 - No Product acceptance, main merge, release, deployment or stack freeze is implied.
+
+
+## WRITER RESULT RECONSTRUCTION / HELPER EXECUTION SPLIT — 2026-10-02
+
+**Classification:** `CURRENT__OD087_CORRECTION_PERSISTED__23_SURFACE_RECONSTRUCTION_BASELINE_RECORDED__CHATGPT_HELPER_PROFILE_RECORDED__PARALLEL_READ_ONLY_AUDIT_WAVE_NEXT__NO_PRODUCT_MUTATION`
+
+- Actual remote after the Owner-topology correction and reconstruction/profile records: `writer/mi-serial@7bfce44d9240612f45ea3e0fed68e948a8d8dd64`, tree `ce1b3db3c38df5fa36d8b98e9f3ddccc0a45f223`.
+- Canonical topology is `OD-20261002-087`: multiple Writers allowed; one mutating Writer per exact bounded Surface/lane; parallel only when writable paths/owners/dependencies are disjoint; shared hotspots/final wiring serialize.
+- `OD-20260928-085` is historical task-specific lineage and is not current general serial-topology authority.
+- The prior Enterprise-only narrowing is superseded for dispatch/completion truth.
+- Controller reconstruction baseline: `controller/12_execution/WRITER_RESULT_RECONSTRUCTION_BASELINE.md`.
+- ChatGPT/Codespaces role split: `controller/roles/CHATGPT_CONTROLLER_HELPER_OPERATING_PROFILE.md`.
+- Historical interruption evidence confirms five reviewed surfaces (Today, RQ, Scenarios, Evidence, Configuration); thirteen in-progress; five not-dispatched; twelve later durably rescued but still queued for Controller review.
+- Enterprise later has a durable result/handoff, but neither it nor the five historically reviewed surfaces are auto-accepted by report existence.
+- Next action: parallel READ_ONLY result audits across W01/W02, W03, W04, W05 plus shared-owner/collision and evidence/harness lanes. Convert every Surface to `AUDIT_ONLY__NO_WRITER`, `CONTINUE_EXISTING_SALVAGE`, `NEW_BOUNDED_WRITER_REQUIRED`, or `WAIT_FOR_SHARED_SEAM`; then build the fresh mutation DAG and launch only proven independent Writer lanes in Codespaces/OpenCode/MiMo.
+- ChatGPT Controller/helper chats must absorb archaeology, packet preparation, result review and falsification so MiMo/OpenCode budget is concentrated on implementation, build/test/browser iteration and local integration.
+- No Product acceptance, main merge, release, deployment or stack freeze is created by this reconstruction step.
