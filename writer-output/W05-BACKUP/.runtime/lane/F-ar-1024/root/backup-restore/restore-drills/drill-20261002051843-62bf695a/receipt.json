@@ -1,0 +1,36 @@
+{
+  "schema": "CEP_RESTORE_DRILL_RECEIPT_V1",
+  "owner": "BackupRestoreCapability",
+  "drillId": "drill-20261002051843-62bf695a",
+  "packageId": "backup-20261002051841-f4c1a76d",
+  "correlationId": "backup-corr-b80231b2-727f-4529-a739-bdb263af5dd7",
+  "createdAt": "2026-10-02T05:18:43.472Z",
+  "status": "STAGED_AND_VERIFIED",
+  "target": {
+    "isolated": true,
+    "trueEmptyBeforeRestore": true,
+    "databaseFile": "restored.sqlite"
+  },
+  "preflight": {
+    "packageHashVerified": true,
+    "schemaArtifactVerified": true,
+    "integrityVerified": true,
+    "foreignKeysVerified": true,
+    "migrationsVerified": true
+  },
+  "readback": {
+    "documentCount": 1,
+    "revisionCount": 1,
+    "recoveryCount": 0,
+    "sample": [
+      {
+        "documentId": "bk-lane-F-ar-1024",
+        "currentRevisionId": "r1"
+      }
+    ]
+  },
+  "restoredSnapshotSha256": "4b506cea3a7b4bb7de1fcfba11d02a4a9a394046213f99a81e4abb477d575b1c",
+  "liveRestored": false,
+  "productionDatabaseMutated": false,
+  "activationState": "NOT_REQUESTED"
+}

@@ -1,0 +1,1059 @@
+{
+  "lineage": {
+    "lane": "BKP-1",
+    "branch": "writer/mi-serial-lane/BKP-1",
+    "commit": "6601741bfc3398cfeb7086a16a9ff67d5ede17b7",
+    "headTree": "ecea7cc4d4fb36ca043d41c7e6c81e8284f9eba4",
+    "stackTree": "b0ce63f40585888075335584a24b546069513e19",
+    "canonicalSourceSha256": "8b19a3dcefc764ad3fdd4e4bd94b25c9c8a9b0cb9071bd26c7eca1a79810a782",
+    "canonicalSourceFiles": 338,
+    "surfaceSourceSha256": "9113f11cd54ceaba46d430cf55eb8d65ac15e176c9d60c630158b648774357e9",
+    "surfaceSourceMatchesSalvageBaseline": false,
+    "writableSourceCleanVsHead": true,
+    "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+    "distBundle": [
+      {
+        "file": "dist/surfaces/backup/index.js",
+        "sha256": "947da7da477a70d16c9d14408b9d60b9a08099ed33524c4406fa83913df317bb"
+      },
+      {
+        "file": "dist/surfaces/backup/style.js",
+        "sha256": "8ccc8fc23a9d71f24b8d8ae3bfa5d4293ecc2aa1cf0741601e94cc2fa10aa670"
+      },
+      {
+        "file": "dist/surfaces/backup/i18n.js",
+        "sha256": "5407e6785665d619a5c1ff69f25d9ff4a6b1fcb3b91a42a34404b8f703b00b2c"
+      },
+      {
+        "file": "dist/surfaces/backup/icons.js",
+        "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+      },
+      {
+        "file": "dist/adapters/backup-runtime.js",
+        "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+      }
+    ],
+    "candidate": "W05-BACKUP:6601741bfc3398cfeb7086a16a9ff67d5ede17b7:8b19a3dcefc764ad",
+    "capturedAt": "2026-10-02T05:38:07.845Z",
+    "viewport": "1024x900",
+    "lang": "en",
+    "label": "B-en-1024",
+    "runtime": "playwright-chromium-headless",
+    "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+    "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+  },
+  "checks": [
+    {
+      "id": "fixture.seed",
+      "status": "PASS",
+      "detail": "POST /v1/persistence/bootstrap -> 200"
+    },
+    {
+      "id": "command.backup.package",
+      "status": "PASS",
+      "detail": "{\"packages\":1,\"packageStatus\":\"PACKAGE_VERIFIED\",\"plan\":false,\"preview\":false,\"stage\":false,\"drill\":null,\"liveRestored\":null,\"activation\":null,\"productionDatabaseMutated\":null,\"attempts\":1,\"lang\":\"en\",\"dir\":\"ltr\"}"
+    },
+    {
+      "id": "command.backup.plan",
+      "status": "PASS",
+      "detail": "{\"packages\":1,\"packageStatus\":\"PACKAGE_VERIFIED\",\"plan\":true,\"preview\":false,\"stage\":false,\"drill\":null,\"liveRestored\":null,\"activation\":null,\"productionDatabaseMutated\":null,\"attempts\":1,\"lang\":\"en\",\"dir\":\"ltr\"}"
+    },
+    {
+      "id": "command.backup.preview",
+      "status": "PASS",
+      "detail": "{\"packages\":1,\"packageStatus\":\"PACKAGE_VERIFIED\",\"plan\":true,\"preview\":true,\"stage\":false,\"drill\":null,\"liveRestored\":null,\"activation\":null,\"productionDatabaseMutated\":null,\"attempts\":1,\"lang\":\"en\",\"dir\":\"ltr\"}"
+    },
+    {
+      "id": "command.backup.stage",
+      "status": "PASS",
+      "detail": "{\"packages\":1,\"packageStatus\":\"PACKAGE_VERIFIED\",\"plan\":true,\"preview\":true,\"stage\":true,\"drill\":null,\"liveRestored\":null,\"activation\":null,\"productionDatabaseMutated\":null,\"attempts\":2,\"lang\":\"en\",\"dir\":\"ltr\"}"
+    },
+    {
+      "id": "command.backup.drill",
+      "status": "PASS",
+      "detail": "{\"packages\":1,\"packageStatus\":\"PACKAGE_VERIFIED\",\"plan\":true,\"preview\":true,\"stage\":true,\"drill\":\"STAGED_AND_VERIFIED\",\"liveRestored\":false,\"activation\":null,\"productionDatabaseMutated\":null,\"attempts\":3,\"lang\":\"en\",\"dir\":\"ltr\"}"
+    },
+    {
+      "id": "command.backup.activationRequest",
+      "status": "PASS",
+      "detail": "{\"packages\":1,\"packageStatus\":\"PACKAGE_VERIFIED\",\"plan\":true,\"preview\":true,\"stage\":true,\"drill\":\"STAGED_AND_VERIFIED\",\"liveRestored\":false,\"activation\":\"AUTHORITY_PENDING\",\"productionDatabaseMutated\":false,\"attempts\":4,\"lang\":\"en\",\"dir\":\"ltr\"}"
+    },
+    {
+      "id": "ltr.document-dir",
+      "status": "PASS",
+      "detail": "document.dir=ltr"
+    },
+    {
+      "id": "ltr.no-arabic-in-surface",
+      "status": "PASS",
+      "detail": "arabic glyph count=0"
+    },
+    {
+      "id": "ltr.search-padding-logical",
+      "status": "PASS",
+      "detail": "paddingLeft=28px paddingRight=9px"
+    },
+    {
+      "id": "ltr.title-rule-logical",
+      "status": "PASS",
+      "detail": "borderLeft=1px borderRight=0px"
+    },
+    {
+      "id": "structure.counts",
+      "status": "PASS",
+      "detail": "{\"steps\":8,\"checks\":9,\"metrics\":6,\"rightBlocks\":9}"
+    },
+    {
+      "id": "overflow.no-document-h-scroll",
+      "status": "PASS",
+      "detail": "docH=false clippedBlocks=0"
+    },
+    {
+      "id": "lifecycle.truth-ceilings-held",
+      "status": "PASS",
+      "detail": "{\"owner\":\"W05BackupProviderAwareIntegrationAdapter\",\"capabilityOwner\":\"BackupRestoreCapability\",\"selectedPackageId\":\"backup-20261002053812-598d8f66\",\"stagedVerifiedIsLiveRestored\":false,\"persistenceOwnerMutated\":false,\"drillLiveRestored\":false,\"activationAuthority\":\"AUTHORITY_PENDING\",\"productionDatabaseMutated\":false,\"durableSuccessReceipts\":\"PROVIDER_OWNED_PACKAGE_DRILL_ACTIVATION\",\"durableFailureCompensationHistory\":\"PROVIDER_DURABLE_ATTEMPT_JOURNAL\",\"semanticOwner\":\"BackupRuntimeAdapter\",\"providerPreviewStatus\":\"COMPATIBLE\",\"providerStageStatus\":\"STAGED\",\"liveRestored\":false,\"providerOwnsSurfaceSemantics\":false}"
+    },
+    {
+      "id": "lifecycle.activation-stays-pending",
+      "status": "PASS",
+      "detail": "{\"activation\":\"AUTHORITY_PENDING\",\"productionDatabaseMutated\":false}"
+    },
+    {
+      "id": "runtime.reachable",
+      "status": "PASS",
+      "detail": "GET 127.0.0.1:38343/v1/capabilities ok"
+    },
+    {
+      "id": "page.errors",
+      "status": "PASS",
+      "detail": "no page errors"
+    }
+  ],
+  "captures": [
+    {
+      "kind": "viewport",
+      "file": "writer-output/W05-BACKUP/evidence/B-en-1024-full.png",
+      "sha256": "5c5dc69192e9354cf1be0ea5dcbdd1e03e03ac977c4709e4eded17a2a6f6f3c8",
+      "bytes": 176689,
+      "dims": "1024x900",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "6601741bfc3398cfeb7086a16a9ff67d5ede17b7",
+      "headTree": "ecea7cc4d4fb36ca043d41c7e6c81e8284f9eba4",
+      "stackTree": "b0ce63f40585888075335584a24b546069513e19",
+      "canonicalSourceSha256": "8b19a3dcefc764ad3fdd4e4bd94b25c9c8a9b0cb9071bd26c7eca1a79810a782",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "9113f11cd54ceaba46d430cf55eb8d65ac15e176c9d60c630158b648774357e9",
+      "surfaceSourceMatchesSalvageBaseline": false,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "947da7da477a70d16c9d14408b9d60b9a08099ed33524c4406fa83913df317bb"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "8ccc8fc23a9d71f24b8d8ae3bfa5d4293ecc2aa1cf0741601e94cc2fa10aa670"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "5407e6785665d619a5c1ff69f25d9ff4a6b1fcb3b91a42a34404b8f703b00b2c"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:6601741bfc3398cfeb7086a16a9ff67d5ede17b7:8b19a3dcefc764ad",
+      "capturedAt": "2026-10-02T05:38:07.845Z",
+      "viewport": "1024x900",
+      "lang": "en",
+      "label": "B-en-1024",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    },
+    {
+      "kind": "element",
+      "file": "writer-output/W05-BACKUP/evidence/B-en-1024-eyebrow.png",
+      "sha256": "e7f2d9bc17a960025a1cc1f51b418fbaf1bbd126ebff602e3ad39d4a87fd428a",
+      "bytes": 2682,
+      "dims": "613x11",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "6601741bfc3398cfeb7086a16a9ff67d5ede17b7",
+      "headTree": "ecea7cc4d4fb36ca043d41c7e6c81e8284f9eba4",
+      "stackTree": "b0ce63f40585888075335584a24b546069513e19",
+      "canonicalSourceSha256": "8b19a3dcefc764ad3fdd4e4bd94b25c9c8a9b0cb9071bd26c7eca1a79810a782",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "9113f11cd54ceaba46d430cf55eb8d65ac15e176c9d60c630158b648774357e9",
+      "surfaceSourceMatchesSalvageBaseline": false,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "947da7da477a70d16c9d14408b9d60b9a08099ed33524c4406fa83913df317bb"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "8ccc8fc23a9d71f24b8d8ae3bfa5d4293ecc2aa1cf0741601e94cc2fa10aa670"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "5407e6785665d619a5c1ff69f25d9ff4a6b1fcb3b91a42a34404b8f703b00b2c"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:6601741bfc3398cfeb7086a16a9ff67d5ede17b7:8b19a3dcefc764ad",
+      "capturedAt": "2026-10-02T05:38:07.845Z",
+      "viewport": "1024x900",
+      "lang": "en",
+      "label": "B-en-1024",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    },
+    {
+      "kind": "element",
+      "file": "writer-output/W05-BACKUP/evidence/B-en-1024-left.png",
+      "sha256": "7559a33d596c7e53cbc9a7065e0d7030231350d8be85027d2b149a84c2878c16",
+      "bytes": 35022,
+      "dims": "304x661",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "6601741bfc3398cfeb7086a16a9ff67d5ede17b7",
+      "headTree": "ecea7cc4d4fb36ca043d41c7e6c81e8284f9eba4",
+      "stackTree": "b0ce63f40585888075335584a24b546069513e19",
+      "canonicalSourceSha256": "8b19a3dcefc764ad3fdd4e4bd94b25c9c8a9b0cb9071bd26c7eca1a79810a782",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "9113f11cd54ceaba46d430cf55eb8d65ac15e176c9d60c630158b648774357e9",
+      "surfaceSourceMatchesSalvageBaseline": false,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "947da7da477a70d16c9d14408b9d60b9a08099ed33524c4406fa83913df317bb"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "8ccc8fc23a9d71f24b8d8ae3bfa5d4293ecc2aa1cf0741601e94cc2fa10aa670"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "5407e6785665d619a5c1ff69f25d9ff4a6b1fcb3b91a42a34404b8f703b00b2c"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:6601741bfc3398cfeb7086a16a9ff67d5ede17b7:8b19a3dcefc764ad",
+      "capturedAt": "2026-10-02T05:38:07.845Z",
+      "viewport": "1024x900",
+      "lang": "en",
+      "label": "B-en-1024",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    },
+    {
+      "kind": "element",
+      "file": "writer-output/W05-BACKUP/evidence/B-en-1024-center.png",
+      "sha256": "76077a0d1d58c67322ef68535d3a4e8f5cb9045ad4ab053da0b60928cbc08e5a",
+      "bytes": 90629,
+      "dims": "709x661",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "6601741bfc3398cfeb7086a16a9ff67d5ede17b7",
+      "headTree": "ecea7cc4d4fb36ca043d41c7e6c81e8284f9eba4",
+      "stackTree": "b0ce63f40585888075335584a24b546069513e19",
+      "canonicalSourceSha256": "8b19a3dcefc764ad3fdd4e4bd94b25c9c8a9b0cb9071bd26c7eca1a79810a782",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "9113f11cd54ceaba46d430cf55eb8d65ac15e176c9d60c630158b648774357e9",
+      "surfaceSourceMatchesSalvageBaseline": false,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "947da7da477a70d16c9d14408b9d60b9a08099ed33524c4406fa83913df317bb"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "8ccc8fc23a9d71f24b8d8ae3bfa5d4293ecc2aa1cf0741601e94cc2fa10aa670"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "5407e6785665d619a5c1ff69f25d9ff4a6b1fcb3b91a42a34404b8f703b00b2c"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:6601741bfc3398cfeb7086a16a9ff67d5ede17b7:8b19a3dcefc764ad",
+      "capturedAt": "2026-10-02T05:38:07.845Z",
+      "viewport": "1024x900",
+      "lang": "en",
+      "label": "B-en-1024",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    },
+    {
+      "kind": "element",
+      "file": "writer-output/W05-BACKUP/evidence/B-en-1024-bottom.png",
+      "sha256": "b380f13e69dc3782c7a8376c8e4e65c754d4952b3cdd7c0e0732d0ceec37d92f",
+      "bytes": 8263,
+      "dims": "1024x39",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "6601741bfc3398cfeb7086a16a9ff67d5ede17b7",
+      "headTree": "ecea7cc4d4fb36ca043d41c7e6c81e8284f9eba4",
+      "stackTree": "b0ce63f40585888075335584a24b546069513e19",
+      "canonicalSourceSha256": "8b19a3dcefc764ad3fdd4e4bd94b25c9c8a9b0cb9071bd26c7eca1a79810a782",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "9113f11cd54ceaba46d430cf55eb8d65ac15e176c9d60c630158b648774357e9",
+      "surfaceSourceMatchesSalvageBaseline": false,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "947da7da477a70d16c9d14408b9d60b9a08099ed33524c4406fa83913df317bb"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "8ccc8fc23a9d71f24b8d8ae3bfa5d4293ecc2aa1cf0741601e94cc2fa10aa670"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "5407e6785665d619a5c1ff69f25d9ff4a6b1fcb3b91a42a34404b8f703b00b2c"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:6601741bfc3398cfeb7086a16a9ff67d5ede17b7:8b19a3dcefc764ad",
+      "capturedAt": "2026-10-02T05:38:07.845Z",
+      "viewport": "1024x900",
+      "lang": "en",
+      "label": "B-en-1024",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    },
+    {
+      "kind": "viewport",
+      "file": "writer-output/W05-BACKUP/evidence/B-en-1024-scrolled.png",
+      "sha256": "1671ac197ee3abb5afa6a4cc2bec6ddad8368c2b2faebe38e76938e7da2ba820",
+      "bytes": 174577,
+      "dims": "1024x900",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "6601741bfc3398cfeb7086a16a9ff67d5ede17b7",
+      "headTree": "ecea7cc4d4fb36ca043d41c7e6c81e8284f9eba4",
+      "stackTree": "b0ce63f40585888075335584a24b546069513e19",
+      "canonicalSourceSha256": "8b19a3dcefc764ad3fdd4e4bd94b25c9c8a9b0cb9071bd26c7eca1a79810a782",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "9113f11cd54ceaba46d430cf55eb8d65ac15e176c9d60c630158b648774357e9",
+      "surfaceSourceMatchesSalvageBaseline": false,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "947da7da477a70d16c9d14408b9d60b9a08099ed33524c4406fa83913df317bb"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "8ccc8fc23a9d71f24b8d8ae3bfa5d4293ecc2aa1cf0741601e94cc2fa10aa670"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "5407e6785665d619a5c1ff69f25d9ff4a6b1fcb3b91a42a34404b8f703b00b2c"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:6601741bfc3398cfeb7086a16a9ff67d5ede17b7:8b19a3dcefc764ad",
+      "capturedAt": "2026-10-02T05:38:07.845Z",
+      "viewport": "1024x900",
+      "lang": "en",
+      "label": "B-en-1024",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    }
+  ],
+  "geometry": {
+    "initialState": {
+      "packages": 0,
+      "packageStatus": null,
+      "plan": false,
+      "preview": false,
+      "stage": false,
+      "drill": null,
+      "liveRestored": null,
+      "activation": null,
+      "productionDatabaseMutated": null,
+      "attempts": 0,
+      "lang": "en",
+      "dir": "ltr"
+    },
+    "finalState": {
+      "packages": 1,
+      "packageStatus": "PACKAGE_VERIFIED",
+      "plan": true,
+      "preview": true,
+      "stage": true,
+      "drill": "STAGED_AND_VERIFIED",
+      "liveRestored": false,
+      "activation": "AUTHORITY_PENDING",
+      "productionDatabaseMutated": false,
+      "attempts": 4,
+      "lang": "en",
+      "dir": "ltr"
+    },
+    "probe": {
+      "viewport": {
+        "w": 1024,
+        "h": 900
+      },
+      "regions": {
+        "banner": {
+          "x": 0,
+          "y": 78,
+          "w": 1024,
+          "h": 56
+        },
+        "toolbar": {
+          "x": 261,
+          "y": 134,
+          "w": 751,
+          "h": 65
+        },
+        "left": {
+          "x": 0,
+          "y": 200,
+          "w": 304,
+          "h": 661
+        },
+        "stage": {
+          "x": 315,
+          "y": 200,
+          "w": 709,
+          "h": 661
+        },
+        "right": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "bottom": {
+          "x": 0,
+          "y": 861,
+          "w": 1024,
+          "h": 39
+        }
+      },
+      "regionVisibility": {
+        "#topBanner": "VISIBLE",
+        "#domainToolbar": "VISIBLE",
+        "#leftPane": "VISIBLE",
+        "#foundationStage": "VISIBLE",
+        "#rightPane": "COLLAPSED_OR_HIDDEN",
+        "#bottomShelf": "VISIBLE"
+      },
+      "centerChildren": [
+        {
+          "cls": "bk-head",
+          "x": 332,
+          "y": 217,
+          "w": 674,
+          "h": 176
+        },
+        {
+          "cls": "bk-banner",
+          "x": 332,
+          "y": 421,
+          "w": 674,
+          "h": 59
+        },
+        {
+          "cls": "bk-panel is-focal",
+          "x": 332,
+          "y": 509,
+          "w": 674,
+          "h": 1057
+        }
+      ],
+      "counts": {
+        "steps": 8,
+        "checks": 9,
+        "metrics": 6,
+        "leftItems": 1,
+        "rightBlocks": 9,
+        "ledgerRows": 4
+      },
+      "responsive": {
+        "containerInlineSize": 678,
+        "containerType": "inline-size",
+        "metricColumns": 3,
+        "pipelineColumns": 8,
+        "checkColumns": 3,
+        "pipelineConnector": "block",
+        "expectedBand": "<=700: metrics3"
+      },
+      "direction": {
+        "lang": "en",
+        "dir": "ltr",
+        "searchInput": {
+          "paddingLeft": "28px",
+          "paddingRight": "9px",
+          "paddingInlineStart": "28px",
+          "paddingInlineEnd": "9px"
+        },
+        "titleSub": {
+          "borderLeftWidth": "1px",
+          "borderRightWidth": "0px",
+          "borderInlineStartWidth": "1px",
+          "borderInlineEndWidth": "0px"
+        },
+        "firstMetaCell": {
+          "paddingLeft": "0px",
+          "paddingRight": "12px"
+        },
+        "actionsRect": {
+          "x": 332,
+          "y": 318,
+          "w": 674,
+          "h": 75
+        },
+        "identityRect": {
+          "x": 332,
+          "y": 217,
+          "w": 612,
+          "h": 87
+        },
+        "paneGeometry": {
+          "left": {
+            "x": 0,
+            "y": 200,
+            "w": 304,
+            "h": 661
+          },
+          "right": {
+            "x": 0,
+            "y": 0,
+            "w": 0,
+            "h": 0
+          }
+        },
+        "arabicGlyphCount": 0,
+        "hasArabic": false
+      },
+      "overflow": {
+        "docH": false,
+        "stageScroll": 1391,
+        "stageClient": 661,
+        "stageScrollable": true,
+        "clippedBlocks": 0
+      },
+      "h1": {
+        "fontSize": "21.504px",
+        "fontWeight": "800",
+        "lineHeight": "24.7296px"
+      },
+      "truthChips": [
+        "productionDatabaseMutated = false",
+        "stagedVerifiedIsLiveRestored = false",
+        "persistenceOwnerMutated = false",
+        "activationAuthority = AUTHORITY_PENDING"
+      ],
+      "eyebrow": {
+        "text": "W05 · BACKUP & RESTORE",
+        "codes": "57 30 35 20 b7 20 42 41 43 4b 55 50 20 26 20 52 45 53 54 4f 52 45"
+      },
+      "languageAudit": [
+        {
+          "owner": ".skiplink",
+          "tag": "A",
+          "text": "تجاوز التنقل إلى المستند",
+          "inSurface": false
+        },
+        {
+          "owner": "A",
+          "tag": "A",
+          "text": "التعلّم",
+          "inSurface": false
+        },
+        {
+          "owner": "A",
+          "tag": "A",
+          "text": "التصوّر",
+          "inSurface": false
+        },
+        {
+          "owner": ".optional",
+          "tag": "SPAN",
+          "text": "البحث والجودة",
+          "inSurface": false
+        },
+        {
+          "owner": ".optional",
+          "tag": "SPAN",
+          "text": "الجودة",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "المحتوى قابل للتحرير في وضع التحرير.",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "بيانات المصدر والهوية للقراءة فقط.",
+          "inSurface": false
+        },
+        {
+          "owner": ".badge",
+          "tag": "SPAN",
+          "text": "سياق مكتمل",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "قراءة",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "تحرير",
+          "inSurface": false
+        },
+        {
+          "owner": ".lbl",
+          "tag": "SPAN",
+          "text": "حفظ",
+          "inSurface": false
+        },
+        {
+          "owner": ".lbl",
+          "tag": "SPAN",
+          "text": "عرض مساحة العمل",
+          "inSurface": false
+        },
+        {
+          "owner": ".lbl",
+          "tag": "SPAN",
+          "text": "تركيز",
+          "inSurface": false
+        },
+        {
+          "owner": "#toggleAllWorkspaceLabel",
+          "tag": "SPAN",
+          "text": "طي الكل",
+          "inSurface": false
+        },
+        {
+          "owner": ".label",
+          "tag": "SPAN",
+          "text": "لا تغييرات محلية",
+          "inSurface": false
+        },
+        {
+          "owner": "STRONG",
+          "tag": "STRONG",
+          "text": "مجموعة قبول ممثّلة",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "البنية",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "السياق",
+          "inSurface": false
+        },
+        {
+          "owner": "#modeHint",
+          "tag": "SPAN",
+          "text": "وضع القراءة",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "اتجاه النص تلقائي",
+          "inSurface": false
+        },
+        {
+          "owner": ".doclead",
+          "tag": "P",
+          "text": "اقرأ، حرّر، ونظّم المحتوى في المساحة نفسها. تظهر الأدوات عند",
+          "inSurface": false
+        },
+        {
+          "owner": ".groupTitle",
+          "tag": "SPAN",
+          "text": "المعرفة / المحتوى",
+          "inSurface": false
+        },
+        {
+          "owner": ".groupHint",
+          "tag": "SPAN",
+          "text": "المحتوى المعرفي المملوك هنا",
+          "inSurface": false
+        },
+        {
+          "owner": ".groupTitle",
+          "tag": "SPAN",
+          "text": "التعلّم المرتبط",
+          "inSurface": false
+        },
+        {
+          "owner": ".groupHint",
+          "tag": "SPAN",
+          "text": "مسارات وروابط التعلم",
+          "inSurface": false
+        },
+        {
+          "owner": ".groupTitle",
+          "tag": "SPAN",
+          "text": "السياق المرتبط",
+          "inSurface": false
+        },
+        {
+          "owner": ".groupHint",
+          "tag": "SPAN",
+          "text": "مؤشرات السياق والروابط",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "الوحدة",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "الكتلة المحددة",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "السجل",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "مقارنة",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "استرداد",
+          "inSurface": false
+        },
+        {
+          "owner": "#insertContext",
+          "tag": "SPAN",
+          "text": "حد بنيوي",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "ضمن القائمة",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "خارج القائمة",
+          "inSurface": false
+        },
+        {
+          "owner": ".scopehint",
+          "tag": "SPAN",
+          "text": "تغيير النطاق صريح قبل التنفيذ",
+          "inSurface": false
+        },
+        {
+          "owner": ".menutitle",
+          "tag": "DIV",
+          "text": "المناطق الداعمة",
+          "inSurface": false
+        },
+        {
+          "owner": "STRONG",
+          "tag": "STRONG",
+          "text": "البنية",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "التنقل والهيكل فقط",
+          "inSurface": false
+        },
+        {
+          "owner": "STRONG",
+          "tag": "STRONG",
+          "text": "السياق",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "معلومات فريدة للاختيار",
+          "inSurface": false
+        },
+        {
+          "owner": "STRONG",
+          "tag": "STRONG",
+          "text": "السجل والمقارنة",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "سجل / مقارنة / استرداد",
+          "inSurface": false
+        },
+        {
+          "owner": ".menutitle",
+          "tag": "DIV",
+          "text": "شريط السياق العلوي",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "موسّع",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "مضغوط",
+          "inSurface": false
+        },
+        {
+          "owner": ".btn",
+          "tag": "BUTTON",
+          "text": "مخفي",
+          "inSurface": false
+        },
+        {
+          "owner": "STRONG",
+          "tag": "STRONG",
+          "text": "وضع التركيز",
+          "inSurface": false
+        },
+        {
+          "owner": ".muted",
+          "tag": "SMALL",
+          "text": "اخفِ الدعم مع حفظ الحالة السابقة",
+          "inSurface": false
+        },
+        {
+          "owner": "#commandTitle",
+          "tag": "LABEL",
+          "text": "لوحة الأوامر",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "Commands / الأوامر",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "Settings / التفضيلات",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "Focus / التركيز",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "Structure pane / البنية",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "Context pane / السياق",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "History shelf / السجل",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "New linked note / ملاحظة مرتبطة",
+          "inSurface": false
+        },
+        {
+          "owner": "SPAN",
+          "tag": "SPAN",
+          "text": "Guidance / الإرشادات",
+          "inSurface": false
+        },
+        {
+          "owner": "#impactTitle",
+          "tag": "H2",
+          "text": "تأكيد حذف بنيوي",
+          "inSurface": false
+        },
+        {
+          "owner": ".subtle",
+          "tag": "P",
+          "text": "هذا إجراء داخل نموذج التصميم فقط. يتم تسجيل النية كمعاملة تا",
+          "inSurface": false
+        }
+      ]
+    }
+  },
+  "probes": {
+    "seed": {
+      "status": 200,
+      "documentId": "bk-lane-B-en-1024"
+    },
+    "prerequisiteTruth": {
+      "availability": {
+        "backup.plan": "Create/select a verified BackupPackage",
+        "backup.preview": "Create a RestorePlan first",
+        "backup.stage": "A successful provider preview for the exact selected BackupPackage is required",
+        "backup.drill": "A successful provider stage for the exact selected BackupPackage is required",
+        "backup.activationRequest": "A verified isolated RestoreDrill is required"
+      },
+      "truth": {
+        "owner": "W05BackupProviderAwareIntegrationAdapter",
+        "capabilityOwner": "BackupRestoreCapability",
+        "selectedPackageId": null,
+        "stagedVerifiedIsLiveRestored": false,
+        "persistenceOwnerMutated": false,
+        "drillLiveRestored": false,
+        "activationAuthority": "NOT_REQUESTED",
+        "productionDatabaseMutated": false,
+        "durableSuccessReceipts": "PROVIDER_OWNED_PACKAGE_DRILL_ACTIVATION",
+        "durableFailureCompensationHistory": "UNAVAILABLE_LOCKED_PROVIDER_SEAM",
+        "semanticOwner": "BackupRuntimeAdapter",
+        "providerPreviewStatus": "NOT_OBSERVED",
+        "providerStageStatus": "NOT_OBSERVED",
+        "liveRestored": false,
+        "providerOwnsSurfaceSemantics": false
+      },
+      "renderedDrillStatus": "NOT_RUN",
+      "notRunBlockPresent": true,
+      "unavailableCellCount": 10
+    },
+    "truthAfterLifecycle": {
+      "owner": "W05BackupProviderAwareIntegrationAdapter",
+      "capabilityOwner": "BackupRestoreCapability",
+      "selectedPackageId": "backup-20261002053812-598d8f66",
+      "stagedVerifiedIsLiveRestored": false,
+      "persistenceOwnerMutated": false,
+      "drillLiveRestored": false,
+      "activationAuthority": "AUTHORITY_PENDING",
+      "productionDatabaseMutated": false,
+      "durableSuccessReceipts": "PROVIDER_OWNED_PACKAGE_DRILL_ACTIVATION",
+      "durableFailureCompensationHistory": "PROVIDER_DURABLE_ATTEMPT_JOURNAL",
+      "semanticOwner": "BackupRuntimeAdapter",
+      "providerPreviewStatus": "COMPATIBLE",
+      "providerStageStatus": "STAGED",
+      "liveRestored": false,
+      "providerOwnsSurfaceSemantics": false
+    },
+    "descriptor": {
+      "owner": "W05BackupProviderAwareIntegrationAdapter",
+      "capabilityOwner": "BackupRestoreCapability",
+      "transport": {
+        "id": "BoundedLocalRuntimeTransport",
+        "host": "127.0.0.1",
+        "port": 38343,
+        "loopbackOnly": true,
+        "semanticOwnership": false
+      },
+      "activationAuthority": false,
+      "persistenceOwnerMutation": false,
+      "liveRestoreOwned": false,
+      "semanticOwner": "BackupRuntimeAdapter",
+      "providerBinding": "BackupRestoreCapability",
+      "providerAwarePreview": true,
+      "providerAwareStage": true,
+      "durableAttemptJournal": true,
+      "surfaceSemanticsMovedIntoProvider": false
+    }
+  },
+  "notes": [
+    "element #rightPane not visible at 1024x900 — collapsed/hidden by the shared shell; recorded, no capture"
+  ],
+  "pageErrors": [],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+  ],
+  "failedRequests": [],
+  "serveOk": true,
+  "runtimeOk": true,
+  "runtimeListener": "127.0.0.1:38343"
+}

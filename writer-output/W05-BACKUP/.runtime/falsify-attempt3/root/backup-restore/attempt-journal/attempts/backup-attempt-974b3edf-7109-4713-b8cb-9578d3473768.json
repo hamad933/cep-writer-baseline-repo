@@ -1,0 +1,30 @@
+{
+  "schema": "CEP_BACKUP_ATTEMPT_V1",
+  "attemptId": "backup-attempt-974b3edf-7109-4713-b8cb-9578d3473768",
+  "operation": "PACKAGE_STAGE",
+  "phase": "STAGE",
+  "correlationId": "backup-corr-f048786f-be01-4483-94af-df582a39ae04",
+  "packageId": "no-such-package",
+  "targetIdentity": {
+    "kind": "RESTORE_STAGE",
+    "stageId": "stage-20261002053406-d4d05232",
+    "isolated": true
+  },
+  "startedAt": "2026-10-02T05:34:06.564Z",
+  "updatedAt": "2026-10-02T05:34:06.564Z",
+  "status": "FAILED_BEFORE_MUTATION",
+  "mutationStarted": false,
+  "originalError": {
+    "code": "PACKAGE_NOT_FOUND",
+    "message": "PACKAGE_NOT_FOUND",
+    "name": "Error",
+    "phase": "STAGE",
+    "classFingerprint": "c85e556802af4f29f357f233"
+  },
+  "compensation": {
+    "attempted": false,
+    "status": "NOT_REQUIRED",
+    "error": null
+  },
+  "terminalAt": "2026-10-02T05:34:06.564Z"
+}

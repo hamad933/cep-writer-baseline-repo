@@ -1,0 +1,639 @@
+{
+  "suite": "W05-BACKUP_LANE_FALSIFICATION",
+  "lane": "BKP-1",
+  "branch": "writer/mi-serial-lane/BKP-1",
+  "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+  "headTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+  "surfaceSourceSha256": "b50f5592a885688f793b166efed49eba04df529508bda453313eaaccb900a10b",
+  "writableSourceCleanVsHead": true,
+  "startedAt": "2026-10-02T05:27:47.373Z",
+  "environment": {
+    "node": "v22.16.0",
+    "proofServer": "tools/serve.mjs on 127.0.0.1:33583",
+    "runtimeServer": "stack/local-runtime/server.mjs on 127.0.0.1:35113 (lane-owned throwaway root writer-output/W05-BACKUP/.runtime/falsify)",
+    "serveOk": true,
+    "runtimeOk": true
+  },
+  "cases": [
+    {
+      "id": "N3.prerequisite-absent-is-unavailable",
+      "truthCategory": "Domain-Data-Provider",
+      "status": "PASS",
+      "evidence": {
+        "codes": {
+          "plan": {
+            "ok": false,
+            "code": "VERIFIED_PACKAGE_REQUIRED"
+          },
+          "preview": {
+            "ok": false,
+            "code": "RESTORE_PLAN_REQUIRED"
+          },
+          "stage": {
+            "ok": false,
+            "code": "PROVIDER_PREVIEW_REQUIRED"
+          },
+          "drill": {
+            "ok": false,
+            "code": "PROVIDER_STAGE_REQUIRED"
+          },
+          "activation": {
+            "ok": false,
+            "code": "VERIFIED_ISOLATED_DRILL_REQUIRED"
+          },
+          "selectUnknown": {
+            "ok": false,
+            "code": "PACKAGE_UNKNOWN"
+          }
+        },
+        "rendered": {
+          "drillStatus": "NOT_RUN",
+          "notRunBlock": true,
+          "readiness": [
+            "Create verified BackupPackageReady",
+            "Plan restore drillSelect a verified package to plan its restore.",
+            "Preview exact package/planCreate the RestorePlan first.",
+            "Stage isolated drill intentPreview the exact package first.",
+            "Run isolated restore drillStage the isolated drill intent first.",
+            "Request activation authorityRequires a verified isolated drill that was not live-restored."
+          ],
+          "truth": {
+            "owner": "W05BackupProviderAwareIntegrationAdapter",
+            "capabilityOwner": "BackupRestoreCapability",
+            "selectedPackageId": null,
+            "stagedVerifiedIsLiveRestored": false,
+            "persistenceOwnerMutated": false,
+            "drillLiveRestored": false,
+            "activationAuthority": "NOT_REQUESTED",
+            "productionDatabaseMutated": false,
+            "durableSuccessReceipts": "PROVIDER_OWNED_PACKAGE_DRILL_ACTIVATION",
+            "durableFailureCompensationHistory": "PROVIDER_DURABLE_ATTEMPT_JOURNAL",
+            "semanticOwner": "BackupRuntimeAdapter",
+            "providerPreviewStatus": "NOT_OBSERVED",
+            "providerStageStatus": "NOT_OBSERVED",
+            "liveRestored": false,
+            "providerOwnsSurfaceSemantics": false
+          }
+        }
+      }
+    },
+    {
+      "id": "N2.boundary-and-invalid-input-no-corruption",
+      "truthCategory": "Behavior",
+      "status": "PASS",
+      "evidence": {
+        "before": "87fa956f6467b023ce52977e4270846838ab11e4c4f534966b72583a23fd8607",
+        "after": "87fa956f6467b023ce52977e4270846838ab11e4c4f534966b72583a23fd8607",
+        "rehydrateBoundary": {
+          "nullPayload": "BACKUP_SNAPSHOT_REQUIRED",
+          "arrayPayload": "BACKUP_SNAPSHOT_REQUIRED",
+          "objectWithoutPackages": "BACKUP_PACKAGES_ARRAY_REQUIRED",
+          "missingIdentity": "BACKUP_PACKAGE_IDENTITY_REQUIRED"
+        },
+        "responses": {
+          "drillUnknown": {
+            "status": 422,
+            "json": {
+              "ok": false,
+              "code": "PACKAGE_NOT_FOUND",
+              "status": "FAILED_BEFORE_MUTATION",
+              "attemptId": "backup-attempt-5beffae7-ff64-4f7c-a361-7312ddca0ce4",
+              "drillId": "drill-20261002052754-fc936014",
+              "packageId": "no-such-package",
+              "correlationId": "backup-corr-c3204908-9f0c-4e72-bac9-3033e66b6eff",
+              "originalError": {
+                "code": "PACKAGE_NOT_FOUND",
+                "message": "PACKAGE_NOT_FOUND",
+                "name": "Error",
+                "phase": "DRILL",
+                "classFingerprint": "c85e556802af4f29f357f233"
+              },
+              "compensation": {
+                "attempted": false,
+                "status": "NOT_REQUIRED",
+                "error": null
+              },
+              "productionDatabaseMutated": false,
+              "liveRestored": false,
+              "auditEvent": {
+                "schema": "CEP_AUDIT_EVENT_V1",
+                "sequence": 1,
+                "eventId": "audit-ac49f32c-4b8c-4b5e-bfa0-457ed97f7b1d",
+                "occurredAt": "2026-10-02T05:27:54.680Z",
+                "actor": "BackupRestoreCapability",
+                "action": "backup.drill.failed",
+                "target": "no-such-package",
+                "outcome": "FAILURE",
+                "correlationId": "backup-corr-c3204908-9f0c-4e72-bac9-3033e66b6eff",
+                "details": {
+                  "attemptId": "backup-attempt-5beffae7-ff64-4f7c-a361-7312ddca0ce4",
+                  "originalError": {
+                    "code": "PACKAGE_NOT_FOUND",
+                    "message": "PACKAGE_NOT_FOUND",
+                    "name": "Error",
+                    "phase": "DRILL",
+                    "classFingerprint": "c85e556802af4f29f357f233"
+                  },
+                  "compensation": {
+                    "attempted": false,
+                    "status": "NOT_REQUIRED",
+                    "error": null
+                  },
+                  "status": "FAILED_BEFORE_MUTATION"
+                },
+                "previousHash": "GENESIS",
+                "hash": "19007ec84e26dde5908ea9673285299ce854a15979017aa6335000b37c1b9d7c"
+              }
+            }
+          },
+          "previewUnknown": {
+            "status": 422,
+            "json": {
+              "ok": false,
+              "code": "INVALID_PACKAGE_ID",
+              "status": "INVALID_OR_UNAVAILABLE",
+              "packageIdentity": null,
+              "targetSchemaIdentity": null,
+              "readOnly": true,
+              "writeEffects": {
+                "stageWrites": 0,
+                "drillWrites": 0,
+                "activationWrites": 0,
+                "productionDatabaseWrites": 0,
+                "liveRestoreWrites": 0
+              },
+              "liveRestored": false,
+              "activationState": "NOT_REQUESTED"
+            }
+          },
+          "stageUnknown": {
+            "status": 422,
+            "json": {
+              "ok": false,
+              "code": "PACKAGE_NOT_FOUND",
+              "status": "PREFLIGHT_BLOCKED",
+              "attemptStatus": "FAILED_BEFORE_MUTATION",
+              "attemptId": "backup-attempt-5765e047-a84a-4685-ae32-b779958bf7f5",
+              "packageId": "no-such-package",
+              "correlationId": "backup-corr-771e3563-0481-441d-8d0c-8c4ef9bf7621",
+              "originalError": {
+                "code": "PACKAGE_NOT_FOUND",
+                "message": "PACKAGE_NOT_FOUND",
+                "name": "Error",
+                "phase": "STAGE",
+                "classFingerprint": "c85e556802af4f29f357f233"
+              },
+              "compensation": {
+                "attempted": false,
+                "status": "NOT_REQUIRED",
+                "error": null
+              },
+              "productionDatabaseMutated": false,
+              "liveRestored": false,
+              "auditEvent": {
+                "schema": "CEP_AUDIT_EVENT_V1",
+                "sequence": 2,
+                "eventId": "audit-3cb6fd73-db11-4687-8b14-e326e79f1175",
+                "occurredAt": "2026-10-02T05:27:54.847Z",
+                "actor": "BackupRestoreCapability",
+                "action": "backup.stage.failed",
+                "target": "no-such-package",
+                "outcome": "FAILURE",
+                "correlationId": "backup-corr-771e3563-0481-441d-8d0c-8c4ef9bf7621",
+                "details": {
+                  "attemptId": "backup-attempt-5765e047-a84a-4685-ae32-b779958bf7f5",
+                  "originalError": {
+                    "code": "PACKAGE_NOT_FOUND",
+                    "message": "PACKAGE_NOT_FOUND",
+                    "name": "Error",
+                    "phase": "STAGE",
+                    "classFingerprint": "c85e556802af4f29f357f233"
+                  },
+                  "compensation": {
+                    "attempted": false,
+                    "status": "NOT_REQUIRED",
+                    "error": null
+                  },
+                  "status": "FAILED_BEFORE_MUTATION"
+                },
+                "previousHash": "19007ec84e26dde5908ea9673285299ce854a15979017aa6335000b37c1b9d7c",
+                "hash": "280b745d16981038a44a028ccef522f780957c6c98c1777a7d8cad0a0576695b"
+              }
+            }
+          },
+          "activationUnknown": {
+            "status": 422,
+            "json": {
+              "ok": false,
+              "code": "VERIFIED_DRILL_REQUIRED",
+              "status": "FAILED_BEFORE_MUTATION",
+              "attemptId": "backup-attempt-7978b267-787c-4d01-91aa-94bb0b87ed23",
+              "correlationId": "backup-corr-60399862-3ec1-4a8f-a00e-939358099b6f",
+              "originalError": {
+                "code": "VERIFIED_DRILL_REQUIRED",
+                "message": "VERIFIED_DRILL_REQUIRED",
+                "name": "Error",
+                "phase": "ACTIVATION_REQUEST",
+                "classFingerprint": "94ff4d4f1fd018edb4c4bada"
+              },
+              "compensation": {
+                "attempted": false,
+                "status": "NOT_REQUIRED",
+                "error": null
+              },
+              "liveRestored": false,
+              "productionDatabaseMutated": false,
+              "auditEvent": {
+                "schema": "CEP_AUDIT_EVENT_V1",
+                "sequence": 3,
+                "eventId": "audit-b4e830f1-8f15-48a0-afa3-7a79937a3e9a",
+                "occurredAt": "2026-10-02T05:27:54.928Z",
+                "actor": "BackupRestoreCapability",
+                "action": "backup.activation.failed",
+                "target": "no-such-drill",
+                "outcome": "FAILURE",
+                "correlationId": "backup-corr-60399862-3ec1-4a8f-a00e-939358099b6f",
+                "details": {
+                  "attemptId": "backup-attempt-7978b267-787c-4d01-91aa-94bb0b87ed23",
+                  "originalError": {
+                    "code": "VERIFIED_DRILL_REQUIRED",
+                    "message": "VERIFIED_DRILL_REQUIRED",
+                    "name": "Error",
+                    "phase": "ACTIVATION_REQUEST",
+                    "classFingerprint": "94ff4d4f1fd018edb4c4bada"
+                  },
+                  "compensation": {
+                    "attempted": false,
+                    "status": "NOT_REQUIRED",
+                    "error": null
+                  },
+                  "status": "FAILED_BEFORE_MUTATION"
+                },
+                "previousHash": "280b745d16981038a44a028ccef522f780957c6c98c1777a7d8cad0a0576695b",
+                "hash": "118c0abbdc9d986f65e1a944de79be7d0c3a554b41efba8bc00f4ba6a10a3d52"
+              }
+            }
+          },
+          "packageHostileLabel": {
+            "status": 200,
+            "json": {
+              "ok": true,
+              "owner": "BackupRestoreCapability",
+              "status": "PACKAGE_VERIFIED",
+              "packageId": "backup-20261002052754-2cbaaf1b",
+              "correlationId": "backup-corr-1ce3e117-d519-49a7-a6ac-f53fccc50fd2",
+              "attemptId": "backup-attempt-d363c78f-f694-483a-b3ff-32e55257d7e2",
+              "capturedAt": "2026-10-02T05:27:55.038Z",
+              "manifestSha256": "1331e9090b20c30768b8cce169cc04aa88dd0516410762ced161f8c40ffef46d",
+              "snapshotSha256": "77fd6303e5cc4203cf685804e3a14bacfdf7900a8513f318b2d238f13cbf63cb",
+              "schemaArtifactSha256": "7486017cfee6caadb8569794d2fb48d3e0f2637d7208d70bd48092403d65572a",
+              "migrations": [
+                {
+                  "version": 1,
+                  "name": "schema-v1",
+                  "checksum": "7486017cfee6caadb8569794d2fb48d3e0f2637d7208d70bd48092403d65572a"
+                }
+              ],
+              "readbackSummary": {
+                "documentCount": 0,
+                "revisionCount": 0,
+                "recoveryCount": 0,
+                "sample": []
+              },
+              "liveRestored": false,
+              "activationState": "NOT_REQUESTED",
+              "auditEvent": {
+                "schema": "CEP_AUDIT_EVENT_V1",
+                "sequence": 4,
+                "eventId": "audit-8accdd74-4bbd-49b7-9c4f-6c4edfd5aceb",
+                "occurredAt": "2026-10-02T05:27:55.041Z",
+                "actor": "BackupRestoreCapability",
+                "action": "backup.package.created",
+                "target": "backup-20261002052754-2cbaaf1b",
+                "outcome": "SUCCESS",
+                "correlationId": "backup-corr-1ce3e117-d519-49a7-a6ac-f53fccc50fd2",
+                "details": {
+                  "attemptId": "backup-attempt-d363c78f-f694-483a-b3ff-32e55257d7e2",
+                  "manifestSha256": "1331e9090b20c30768b8cce169cc04aa88dd0516410762ced161f8c40ffef46d"
+                },
+                "previousHash": "118c0abbdc9d986f65e1a944de79be7d0c3a554b41efba8bc00f4ba6a10a3d52",
+                "hash": "c23decdbf2a2af52181cedd7335137a998fb21ee82cd389cdaba757f5b90cb21"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "L2.backup-verify-is-not-live-restore",
+      "truthCategory": "Domain-Data-Provider",
+      "status": "PASS",
+      "evidence": {
+        "executed": [
+          "backup.package",
+          "backup.plan",
+          "backup.preview",
+          "backup.stage",
+          "backup.drill",
+          "backup.activationRequest"
+        ],
+        "truth": {
+          "owner": "W05BackupProviderAwareIntegrationAdapter",
+          "capabilityOwner": "BackupRestoreCapability",
+          "selectedPackageId": "backup-20261002052755-ceda1193",
+          "stagedVerifiedIsLiveRestored": false,
+          "persistenceOwnerMutated": false,
+          "drillLiveRestored": false,
+          "activationAuthority": "AUTHORITY_PENDING",
+          "productionDatabaseMutated": false,
+          "durableSuccessReceipts": "PROVIDER_OWNED_PACKAGE_DRILL_ACTIVATION",
+          "durableFailureCompensationHistory": "PROVIDER_DURABLE_ATTEMPT_JOURNAL",
+          "semanticOwner": "BackupRuntimeAdapter",
+          "providerPreviewStatus": "COMPATIBLE",
+          "providerStageStatus": "STAGED",
+          "liveRestored": false,
+          "providerOwnsSurfaceSemantics": false
+        },
+        "descriptor": {
+          "owner": "W05BackupProviderAwareIntegrationAdapter",
+          "capabilityOwner": "BackupRestoreCapability",
+          "transport": {
+            "id": "BoundedLocalRuntimeTransport",
+            "host": "127.0.0.1",
+            "port": 35113,
+            "loopbackOnly": true,
+            "semanticOwnership": false
+          },
+          "activationAuthority": false,
+          "persistenceOwnerMutation": false,
+          "liveRestoreOwned": false,
+          "semanticOwner": "BackupRuntimeAdapter",
+          "providerBinding": "BackupRestoreCapability",
+          "providerAwarePreview": true,
+          "providerAwareStage": true,
+          "durableAttemptJournal": true,
+          "surfaceSemanticsMovedIntoProvider": false
+        },
+        "drillStatus": "STAGED_AND_VERIFIED",
+        "activation": {
+          "ok": true,
+          "attemptId": "backup-attempt-26303e51-e3ca-4c50-81f8-1eac1a3a5917",
+          "schema": "CEP_BACKUP_ACTIVATION_REQUEST_V1",
+          "owner": "BackupRestoreCapability",
+          "requestId": "activation-95ba3fd8-6b2d-4b5a-8c4d-0237e15e168f",
+          "drillId": "drill-20261002052800-48064325",
+          "packageId": "backup-20261002052755-ceda1193",
+          "correlationId": "backup-corr-c4ecc99b-26fa-451b-9c38-6f0b16ba9811",
+          "requestedAt": "2026-10-02T05:28:01.267Z",
+          "reason": "backup-surface-explicit-request",
+          "status": "AUTHORITY_PENDING",
+          "liveRestored": false,
+          "productionDatabaseMutated": false,
+          "auditEvent": {
+            "schema": "CEP_AUDIT_EVENT_V1",
+            "sequence": 8,
+            "eventId": "audit-ceec93c4-e63c-4639-9cb2-7d03ad97ddd3",
+            "occurredAt": "2026-10-02T05:28:01.272Z",
+            "actor": "BackupRestoreCapability",
+            "action": "backup.activation.requested",
+            "target": "backup-20261002052755-ceda1193",
+            "outcome": "AUTHORITY_PENDING",
+            "correlationId": "backup-corr-c4ecc99b-26fa-451b-9c38-6f0b16ba9811",
+            "details": {
+              "attemptId": "backup-attempt-26303e51-e3ca-4c50-81f8-1eac1a3a5917",
+              "requestId": "activation-95ba3fd8-6b2d-4b5a-8c4d-0237e15e168f",
+              "drillId": "drill-20261002052800-48064325",
+              "productionDatabaseMutated": false
+            },
+            "previousHash": "15b7b8429d8d0915ac2ea280fe359b450e0a4dd17fc2fb5f6eed60b67a1bd6e1",
+            "hash": "774586d88cc714c68472ae64a70f5a4b8ad7da907634ca1c5fbf6975d0f0268e"
+          },
+          "httpStatus": 200,
+          "transportOk": true
+        },
+        "routeProbes": {
+          "/v1/backup/restore": 404,
+          "/v1/backup/activate-live": 404,
+          "/v1/backup/apply": 404,
+          "/v1/backup/live-restore": 404
+        },
+        "bannerText": "No command on this surface owns a production restore point. Staged and verified is not a live restore — activation stays pending until authority is granted. STAGED_AND_VERIFIED ≠ LIVE_RESTORED"
+      }
+    },
+    {
+      "id": "N1.non-owned-route-write-attempt-refuses",
+      "truthCategory": "Behavior",
+      "status": "PASS",
+      "evidence": {
+        "surfaceOwnedCommands": [
+          "backup.package",
+          "backup.package",
+          "backup.plan",
+          "backup.preview",
+          "backup.stage",
+          "backup.drill",
+          "backup.activationRequest"
+        ],
+        "adapterTransportPaths": [
+          "/v1/backup/package",
+          "/v1/backup/drill",
+          "/v1/backup/activation-request",
+          "/v1/backup/attempts${suffix}",
+          "/v1/backup/preview",
+          "/v1/backup/stage"
+        ],
+        "runtimeRequestsObserved": [
+          {
+            "method": "GET",
+            "path": "/v1/backup/attempts"
+          },
+          {
+            "method": "POST",
+            "path": "/v1/backup/package"
+          },
+          {
+            "method": "GET",
+            "path": "/v1/backup/attempts"
+          },
+          {
+            "method": "POST",
+            "path": "/v1/backup/preview"
+          },
+          {
+            "method": "POST",
+            "path": "/v1/backup/stage"
+          },
+          {
+            "method": "GET",
+            "path": "/v1/backup/attempts"
+          },
+          {
+            "method": "POST",
+            "path": "/v1/backup/drill"
+          },
+          {
+            "method": "GET",
+            "path": "/v1/backup/attempts"
+          },
+          {
+            "method": "POST",
+            "path": "/v1/backup/activation-request"
+          },
+          {
+            "method": "GET",
+            "path": "/v1/backup/attempts"
+          }
+        ],
+        "unknownRouteStatus": 404,
+        "traversalAttempt": {
+          "status": 500,
+          "json": {
+            "ok": false,
+            "code": "LOCAL_RUNTIME_ERROR",
+            "message": "Cannot read properties of undefined (reading 'id')"
+          }
+        }
+      }
+    },
+    {
+      "id": "L1.corrupted-seed-restore-truthful-failure",
+      "truthCategory": "Domain-Data-Provider",
+      "status": "PASS",
+      "evidence": {
+        "packageId": "backup-20261002052755-ceda1193",
+        "snapshot": {
+          "sizeBefore": 86016,
+          "originalSha": "77fd6303e5cc4203cf685804e3a14bacfdf7900a8513f318b2d238f13cbf63cb",
+          "corruptedSha": "f302957da5220938a7e3e51a8718c79b9e00dc13ab2119e8cfc978f041720382"
+        },
+        "drillOutcome": "clicked",
+        "newDrillDirs": [],
+        "newReceipts": [],
+        "failedDrillAttemptCount": 2,
+        "lastDrillRow": {
+          "schema": "CEP_BACKUP_ATTEMPT_V1",
+          "attemptId": "backup-attempt-329c1b93-5fcf-4864-83fd-e25b55dc106f",
+          "operation": "RESTORE_DRILL",
+          "phase": "DRILL",
+          "correlationId": "backup-corr-fe7c3dc0-0d0b-4a56-88c7-97f3984ec712",
+          "packageId": "backup-20261002052755-ceda1193",
+          "targetIdentity": {
+            "kind": "ISOLATED_RESTORE_DRILL",
+            "drillId": "drill-20261002052803-511d42df",
+            "isolated": true,
+            "trueEmptyRequired": true
+          },
+          "startedAt": "2026-10-02T05:28:03.352Z",
+          "updatedAt": "2026-10-02T05:28:03.352Z",
+          "status": "FAILED_BEFORE_MUTATION",
+          "mutationStarted": false,
+          "originalError": {
+            "code": "PACKAGE_HASH_MISMATCH",
+            "message": "PACKAGE_HASH_MISMATCH",
+            "name": "Error",
+            "phase": "DRILL",
+            "classFingerprint": "be8541d82d3aa96ce10a0076"
+          },
+          "compensation": {
+            "attempted": false,
+            "status": "NOT_REQUIRED",
+            "error": null
+          },
+          "terminalAt": "2026-10-02T05:28:03.352Z"
+        },
+        "surface": {
+          "renderedStatus": "STAGED_AND_VERIFIED",
+          "renderedPillText": "COMPLETED / VERIFIED",
+          "failureSignals": [
+            "FAILED_BEFORE_MUTATION",
+            "FAILED_BEFORE_MUTATION",
+            "FAILED_BEFORE_MUTATION"
+          ],
+          "statusToast": "Run isolated restore drill unavailable or failed — PACKAGE_HASH_MISMATCH",
+          "lastDrillBeforeCorruption": "drill-20261002052800-48064325",
+          "lastDrillAfter": "drill-20261002052800-48064325",
+          "lastError": {
+            "ok": false,
+            "code": "PACKAGE_HASH_MISMATCH",
+            "status": "FAILED_BEFORE_MUTATION",
+            "attemptId": "backup-attempt-329c1b93-5fcf-4864-83fd-e25b55dc106f",
+            "drillId": "drill-20261002052803-511d42df",
+            "packageId": "backup-20261002052755-ceda1193",
+            "correlationId": "backup-corr-fe7c3dc0-0d0b-4a56-88c7-97f3984ec712",
+            "originalError": {
+              "code": "PACKAGE_HASH_MISMATCH",
+              "message": "PACKAGE_HASH_MISMATCH",
+              "name": "Error",
+              "phase": "DRILL",
+              "classFingerprint": "be8541d82d3aa96ce10a0076"
+            },
+            "compensation": {
+              "attempted": false,
+              "status": "NOT_REQUIRED",
+              "error": null
+            },
+            "productionDatabaseMutated": false,
+            "liveRestored": false,
+            "auditEvent": {
+              "schema": "CEP_AUDIT_EVENT_V1",
+              "sequence": 9,
+              "eventId": "audit-f998df4b-8ad6-4c92-a378-9fddc5a6a6c3",
+              "occurredAt": "2026-10-02T05:28:03.354Z",
+              "actor": "BackupRestoreCapability",
+              "action": "backup.drill.failed",
+              "target": "backup-20261002052755-ceda1193",
+              "outcome": "FAILURE",
+              "correlationId": "backup-corr-fe7c3dc0-0d0b-4a56-88c7-97f3984ec712",
+              "details": {
+                "attemptId": "backup-attempt-329c1b93-5fcf-4864-83fd-e25b55dc106f",
+                "originalError": {
+                  "code": "PACKAGE_HASH_MISMATCH",
+                  "message": "PACKAGE_HASH_MISMATCH",
+                  "name": "Error",
+                  "phase": "DRILL",
+                  "classFingerprint": "be8541d82d3aa96ce10a0076"
+                },
+                "compensation": {
+                  "attempted": false,
+                  "status": "NOT_REQUIRED",
+                  "error": null
+                },
+                "status": "FAILED_BEFORE_MUTATION"
+              },
+              "previousHash": "774586d88cc714c68472ae64a70f5a4b8ad7da907634ca1c5fbf6975d0f0268e",
+              "hash": "885208e82c3a180a13b6d933e340caf8d6611d5c238a7ff7430e811e8134d23e"
+            },
+            "httpStatus": 422,
+            "transportOk": false
+          }
+        },
+        "truth": {
+          "owner": "W05BackupProviderAwareIntegrationAdapter",
+          "capabilityOwner": "BackupRestoreCapability",
+          "selectedPackageId": "backup-20261002052755-ceda1193",
+          "stagedVerifiedIsLiveRestored": false,
+          "persistenceOwnerMutated": false,
+          "drillLiveRestored": false,
+          "activationAuthority": "AUTHORITY_PENDING",
+          "productionDatabaseMutated": false,
+          "durableSuccessReceipts": "PROVIDER_OWNED_PACKAGE_DRILL_ACTIVATION",
+          "durableFailureCompensationHistory": "PROVIDER_DURABLE_ATTEMPT_JOURNAL",
+          "semanticOwner": "BackupRuntimeAdapter",
+          "providerPreviewStatus": "COMPATIBLE",
+          "providerStageStatus": "STAGED",
+          "liveRestored": false,
+          "providerOwnsSurfaceSemantics": false
+        },
+        "screenshot": "writer-output/W05-BACKUP/evidence/falsification/L1-corrupted-seed-ui.png",
+        "screenshotSha256": "6433ab04ab6b83d8437af18570f7c58565aaba651faffc9fe11890a6b5ada411"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "summary": {
+    "total": 5,
+    "pass": 5,
+    "fail": 0
+  },
+  "finishedAt": "2026-10-02T05:28:04.461Z"
+}

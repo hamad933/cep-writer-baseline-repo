@@ -1,0 +1,330 @@
+{
+  "lineage": {
+    "lane": "BKP-1",
+    "branch": "writer/mi-serial-lane/BKP-1",
+    "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "headTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+    "stackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+    "canonicalSourceSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+    "canonicalSourceFiles": 338,
+    "surfaceSourceSha256": "b50f5592a885688f793b166efed49eba04df529508bda453313eaaccb900a10b",
+    "surfaceSourceMatchesSalvageBaseline": true,
+    "writableSourceCleanVsHead": true,
+    "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+    "distBundle": [
+      {
+        "file": "dist/surfaces/backup/index.js",
+        "sha256": "af28bf7ccc44725f76b60d5bf6861e59cbe26c726b802fd4120c805596dfa625"
+      },
+      {
+        "file": "dist/surfaces/backup/style.js",
+        "sha256": "87896d7c30f8af6660bf6c6ce7c3ecf61860076a18a562e3f60b2a9ecfbe77f9"
+      },
+      {
+        "file": "dist/surfaces/backup/i18n.js",
+        "sha256": "0cfe2b90253a1ebce7c802628dd01b2e3df5bed887dfcc21623e35206b04768b"
+      },
+      {
+        "file": "dist/surfaces/backup/icons.js",
+        "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+      },
+      {
+        "file": "dist/adapters/backup-runtime.js",
+        "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+      }
+    ],
+    "candidate": "W05-BACKUP:fe1bb98ded51adc71a5f5fd14142a2c0880c11bc:0c43d7f11631dc85",
+    "capturedAt": "2026-10-02T05:01:40.015Z",
+    "viewport": "1024x900",
+    "lang": "en",
+    "label": "A-en-1024",
+    "runtime": "playwright-chromium-headless",
+    "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+    "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+  },
+  "checks": [
+    {
+      "id": "fixture.seed",
+      "status": "PASS",
+      "detail": "POST /v1/persistence/bootstrap -> 200"
+    },
+    {
+      "id": "command.backup.package",
+      "status": "PASS",
+      "detail": "{\"packages\":1,\"plan\":false,\"preview\":false,\"stage\":false,\"drill\":null,\"liveRestored\":null,\"activation\":null,\"productionDatabaseMutated\":null,\"attempts\":1,\"lang\":\"en\",\"dir\":\"ltr\"}"
+    },
+    {
+      "id": "command.backup.plan",
+      "status": "PASS",
+      "detail": "{\"packages\":1,\"plan\":true,\"preview\":false,\"stage\":false,\"drill\":null,\"liveRestored\":null,\"activation\":null,\"productionDatabaseMutated\":null,\"attempts\":1,\"lang\":\"en\",\"dir\":\"ltr\"}"
+    },
+    {
+      "id": "command.backup.preview",
+      "status": "PASS",
+      "detail": "{\"packages\":1,\"plan\":true,\"preview\":true,\"stage\":false,\"drill\":null,\"liveRestored\":null,\"activation\":null,\"productionDatabaseMutated\":null,\"attempts\":1,\"lang\":\"en\",\"dir\":\"ltr\"}"
+    },
+    {
+      "id": "command.backup.stage",
+      "status": "PASS",
+      "detail": "{\"packages\":1,\"plan\":true,\"preview\":true,\"stage\":true,\"drill\":null,\"liveRestored\":null,\"activation\":null,\"productionDatabaseMutated\":null,\"attempts\":2,\"lang\":\"en\",\"dir\":\"ltr\"}"
+    },
+    {
+      "id": "command.backup.drill",
+      "status": "PASS",
+      "detail": "{\"packages\":1,\"plan\":true,\"preview\":true,\"stage\":true,\"drill\":\"STAGED_AND_VERIFIED\",\"liveRestored\":false,\"activation\":null,\"productionDatabaseMutated\":null,\"attempts\":3,\"lang\":\"en\",\"dir\":\"ltr\"}"
+    },
+    {
+      "id": "command.backup.activationRequest",
+      "status": "PASS",
+      "detail": "{\"packages\":1,\"plan\":true,\"preview\":true,\"stage\":true,\"drill\":\"STAGED_AND_VERIFIED\",\"liveRestored\":false,\"activation\":\"AUTHORITY_PENDING\",\"productionDatabaseMutated\":false,\"attempts\":4,\"lang\":\"en\",\"dir\":\"ltr\"}"
+    }
+  ],
+  "captures": [
+    {
+      "kind": "viewport",
+      "file": "writer-output/W05-BACKUP/evidence/A-en-1024-full.png",
+      "sha256": "ca48c7f55c760bc41cb0be848d38c33d4ee74307c7ae41ecc88d9cc4454cc966",
+      "bytes": 175288,
+      "dims": "1024x900",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+      "headTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+      "stackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+      "canonicalSourceSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "b50f5592a885688f793b166efed49eba04df529508bda453313eaaccb900a10b",
+      "surfaceSourceMatchesSalvageBaseline": true,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "af28bf7ccc44725f76b60d5bf6861e59cbe26c726b802fd4120c805596dfa625"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "87896d7c30f8af6660bf6c6ce7c3ecf61860076a18a562e3f60b2a9ecfbe77f9"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "0cfe2b90253a1ebce7c802628dd01b2e3df5bed887dfcc21623e35206b04768b"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:fe1bb98ded51adc71a5f5fd14142a2c0880c11bc:0c43d7f11631dc85",
+      "capturedAt": "2026-10-02T05:01:40.015Z",
+      "viewport": "1024x900",
+      "lang": "en",
+      "label": "A-en-1024",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    },
+    {
+      "kind": "element",
+      "file": "writer-output/W05-BACKUP/evidence/A-en-1024-left.png",
+      "sha256": "ce164a3ee7bdea8c86390f4f6f4c2f0d5eb153c2fe1a6418fb573411aafcc130",
+      "bytes": 34685,
+      "dims": "304x661",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+      "headTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+      "stackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+      "canonicalSourceSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "b50f5592a885688f793b166efed49eba04df529508bda453313eaaccb900a10b",
+      "surfaceSourceMatchesSalvageBaseline": true,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "af28bf7ccc44725f76b60d5bf6861e59cbe26c726b802fd4120c805596dfa625"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "87896d7c30f8af6660bf6c6ce7c3ecf61860076a18a562e3f60b2a9ecfbe77f9"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "0cfe2b90253a1ebce7c802628dd01b2e3df5bed887dfcc21623e35206b04768b"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:fe1bb98ded51adc71a5f5fd14142a2c0880c11bc:0c43d7f11631dc85",
+      "capturedAt": "2026-10-02T05:01:40.015Z",
+      "viewport": "1024x900",
+      "lang": "en",
+      "label": "A-en-1024",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    },
+    {
+      "kind": "element",
+      "file": "writer-output/W05-BACKUP/evidence/A-en-1024-center.png",
+      "sha256": "ee81688949055d753bcd8f4212b7829061a77acb52ff79c20fe35223d6d68c8c",
+      "bytes": 89473,
+      "dims": "709x661",
+      "lane": "BKP-1",
+      "branch": "writer/mi-serial-lane/BKP-1",
+      "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+      "headTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+      "stackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+      "canonicalSourceSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+      "canonicalSourceFiles": 338,
+      "surfaceSourceSha256": "b50f5592a885688f793b166efed49eba04df529508bda453313eaaccb900a10b",
+      "surfaceSourceMatchesSalvageBaseline": true,
+      "writableSourceCleanVsHead": true,
+      "writableSourceStatus": "CLEAN_MATCHES_HEAD",
+      "distBundle": [
+        {
+          "file": "dist/surfaces/backup/index.js",
+          "sha256": "af28bf7ccc44725f76b60d5bf6861e59cbe26c726b802fd4120c805596dfa625"
+        },
+        {
+          "file": "dist/surfaces/backup/style.js",
+          "sha256": "87896d7c30f8af6660bf6c6ce7c3ecf61860076a18a562e3f60b2a9ecfbe77f9"
+        },
+        {
+          "file": "dist/surfaces/backup/i18n.js",
+          "sha256": "0cfe2b90253a1ebce7c802628dd01b2e3df5bed887dfcc21623e35206b04768b"
+        },
+        {
+          "file": "dist/surfaces/backup/icons.js",
+          "sha256": "1bfbff63ce3aa51b1de3d856ea1e2266c4fd16cfa8db6cc494aad85a63bb7f88"
+        },
+        {
+          "file": "dist/adapters/backup-runtime.js",
+          "sha256": "9af0b6707139fe326e08bccb4330afa3e3605d852ddd06afafe45b648c8f05b2"
+        }
+      ],
+      "candidate": "W05-BACKUP:fe1bb98ded51adc71a5f5fd14142a2c0880c11bc:0c43d7f11631dc85",
+      "capturedAt": "2026-10-02T05:01:40.015Z",
+      "viewport": "1024x900",
+      "lang": "en",
+      "label": "A-en-1024",
+      "runtime": "playwright-chromium-headless",
+      "harness": "writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs",
+      "harnessNote": "lane root derived from module location; writes only writer-output/W05-BACKUP/"
+    }
+  ],
+  "geometry": {
+    "initialState": {
+      "packages": 0,
+      "plan": false,
+      "preview": false,
+      "stage": false,
+      "drill": null,
+      "liveRestored": null,
+      "activation": null,
+      "productionDatabaseMutated": null,
+      "attempts": 0,
+      "lang": "en",
+      "dir": "ltr"
+    },
+    "finalState": {
+      "packages": 1,
+      "plan": true,
+      "preview": true,
+      "stage": true,
+      "drill": "STAGED_AND_VERIFIED",
+      "liveRestored": false,
+      "activation": "AUTHORITY_PENDING",
+      "productionDatabaseMutated": false,
+      "attempts": 4,
+      "lang": "en",
+      "dir": "ltr"
+    }
+  },
+  "probes": {
+    "seed": {
+      "status": 200,
+      "documentId": "bk-lane-A-en-1024"
+    },
+    "prerequisiteTruth": {
+      "availability": {
+        "backup.plan": "Create/select a verified BackupPackage",
+        "backup.preview": "Create a RestorePlan first",
+        "backup.stage": "A successful provider preview for the exact selected BackupPackage is required",
+        "backup.drill": "A successful provider stage for the exact selected BackupPackage is required",
+        "backup.activationRequest": "A verified isolated RestoreDrill is required"
+      },
+      "truth": {
+        "owner": "W05BackupProviderAwareIntegrationAdapter",
+        "capabilityOwner": "BackupRestoreCapability",
+        "selectedPackageId": null,
+        "stagedVerifiedIsLiveRestored": false,
+        "persistenceOwnerMutated": false,
+        "drillLiveRestored": false,
+        "activationAuthority": "NOT_REQUESTED",
+        "productionDatabaseMutated": false,
+        "durableSuccessReceipts": "PROVIDER_OWNED_PACKAGE_DRILL_ACTIVATION",
+        "durableFailureCompensationHistory": "UNAVAILABLE_LOCKED_PROVIDER_SEAM",
+        "semanticOwner": "BackupRuntimeAdapter",
+        "providerPreviewStatus": "NOT_OBSERVED",
+        "providerStageStatus": "NOT_OBSERVED",
+        "liveRestored": false,
+        "providerOwnsSurfaceSemantics": false
+      },
+      "renderedDrillStatus": "NOT_RUN",
+      "notRunBlockPresent": true,
+      "unavailableCellCount": 10
+    },
+    "truthAfterLifecycle": {
+      "owner": "W05BackupProviderAwareIntegrationAdapter",
+      "capabilityOwner": "BackupRestoreCapability",
+      "selectedPackageId": "backup-20261002050143-afb4fc17",
+      "stagedVerifiedIsLiveRestored": false,
+      "persistenceOwnerMutated": false,
+      "drillLiveRestored": false,
+      "activationAuthority": "AUTHORITY_PENDING",
+      "productionDatabaseMutated": false,
+      "durableSuccessReceipts": "PROVIDER_OWNED_PACKAGE_DRILL_ACTIVATION",
+      "durableFailureCompensationHistory": "PROVIDER_DURABLE_ATTEMPT_JOURNAL",
+      "semanticOwner": "BackupRuntimeAdapter",
+      "providerPreviewStatus": "COMPATIBLE",
+      "providerStageStatus": "STAGED",
+      "liveRestored": false,
+      "providerOwnsSurfaceSemantics": false
+    },
+    "descriptor": {
+      "owner": "W05BackupProviderAwareIntegrationAdapter",
+      "capabilityOwner": "BackupRestoreCapability",
+      "transport": {
+        "id": "BoundedLocalRuntimeTransport",
+        "host": "127.0.0.1",
+        "port": 45929,
+        "loopbackOnly": true,
+        "semanticOwnership": false
+      },
+      "activationAuthority": false,
+      "persistenceOwnerMutation": false,
+      "liveRestoreOwned": false,
+      "semanticOwner": "BackupRuntimeAdapter",
+      "providerBinding": "BackupRestoreCapability",
+      "providerAwarePreview": true,
+      "providerAwareStage": true,
+      "durableAttemptJournal": true,
+      "surfaceSemanticsMovedIntoProvider": false
+    }
+  },
+  "notes": [],
+  "fatal": "elementHandle.screenshot: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - taking element screenshot\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\u001b[2m  - attempting scroll into view action\u001b[22m\n\u001b[2m    2 × waiting for element to be stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying scroll into view action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying scroll into view action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    57 × waiting for element to be stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying scroll into view action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at elShot (/workspaces/cep-lanes/BKP-1/writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs:232:14)\n    at async file:///workspaces/cep-lanes/BKP-1/writer-output/W05-BACKUP/evidence/harness/lane-capture.mjs:240:5"
+}
