@@ -19,9 +19,11 @@ const RULES=[
   {ruleId:'VALIDATOR_UNAVAILABLE',code:'VALIDATOR_UNAVAILABLE',label:'المُتحقّق المُصرَّح متاح محليًا',en:'Declared validator available locally'},
   {ruleId:'RULESET_UNAVAILABLE',code:'RULESET_UNAVAILABLE',label:'مجموعة القواعد المُصرَّحة متاحة',en:'Declared ruleset available locally'},
   {ruleId:'PAYLOAD_OBJECT_REQUIRED',code:'PAYLOAD_INVALID',label:'الحمولة كائن JSON',en:'payload is a JSON object'},
-  {ruleId:'ROOT_OBJECT_REQUIRED',code:'ROOT_NOT_OBJECT',label:'الجذر كائن وليس مصفوفة',en:'root is an object, not an array'}
+  {ruleId:'ROOT_OBJECT_REQUIRED',code:'ROOT_NOT_OBJECT',label:'الجذر كائن وليس مصفوفة',en:'root is an object, not an array'},
+  {ruleId:'VALIDATOR_EXCEPTION',code:'VALIDATOR_ERROR',label:'المُتحقّق يكتمل دون استثناء',en:'Validator completes without exception'}
 ];
-const outcomesOf=(found=[])=>RULES.map(rule=>{const hit=found.find(f=>f.code===rule.code||f.ruleId===rule.ruleId)||null;return {...rule,status:hit?'FAIL':'PASS',finding:hit}});
+/* Project ONLY what this run really evaluated: an unchecked rule is never reported as PASS. */
+const outcomesOf=run=>{const found=run?.technicalFindings||[];const evaluated=Array.isArray(run?.evaluatedRules)?run.evaluatedRules:RULES.map(r=>r.ruleId);return RULES.map(rule=>{const hit=found.find(f=>f.code===rule.code||f.ruleId===rule.ruleId)||null;const status=hit?'FAIL':evaluated.includes(rule.ruleId)?'PASS':'NOT_EVALUATED';return {...rule,status,finding:hit}})};
 const durationOf=run=>{const a=Date.parse(run?.requestedAt||''),b=Date.parse(run?.completedAt||'');if(!Number.isFinite(a)||!Number.isFinite(b)||b<a)return '—';const ms=b-a,m=Math.floor(ms/1000);return `${String(Math.floor(m/60)).padStart(2,'0')}:${String(m%60).padStart(2,'0')}.${String(ms%1000).padStart(3,'0')}`};
 
 export function mountValidationSurface({stage,registry,workspace,adapter=createValidationConsumerAdapter()}={}){
@@ -31,11 +33,13 @@ export function mountValidationSurface({stage,registry,workspace,adapter=createV
   let feedback=null;
   let selectedFinding=null;
   let selectedRequest=null;
+  /* Stale projection must survive render(): a stale result stays marked until the input changes. */
+  let staleNotice=null;
 
   const shell=document.createElement('section');shell.className='validation-product';
   shell.innerHTML=`<style>
   .validation-product{display:grid;gap:14px;min-width:0}
-  .v-head{display:grid;gap:4px};margin-block-start:26px.v-head h1{margin:0;font-size:clamp(20px,2vw,27px);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.v-head h1 small{font-size:13px;font-weight:600;color:var(--text3)}
+  .v-head{display:grid;gap:4px;margin-block-start:26px}.v-head h1{margin:0;font-size:clamp(20px,2vw,27px);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.v-head h1 small{font-size:13px;font-weight:600;color:var(--text3)}
   .v-lead{margin:0;color:var(--text2);max-width:78ch;line-height:1.6}
   .v-sec{border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--panel) 94%,transparent);padding:12px;min-width:0}
   .v-sec>h2{margin:0 0 3px;font-size:15px}.v-sub{display:block;font:600 10px var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:10px}
@@ -50,6 +54,8 @@ export function mountValidationSurface({stage,registry,workspace,adapter=createV
   table.v-table{width:100%;border-collapse:collapse;table-layout:fixed;min-width:560px}
   .v-table th,.v-table td{padding:8px 7px;border-bottom:1px solid var(--line);text-align:start;vertical-align:top;overflow-wrap:anywhere;font-size:11.5px}
   .v-table th{font-size:10.5px;color:var(--text3);background:color-mix(in srgb,var(--panel) 96%,transparent)}
+  .v-table th em{white-space:nowrap}
+  .v-table td small{display:block;margin-top:2px;font-size:10.5px;color:var(--text3)}
   .v-table th strong{display:block;color:var(--text2);font-size:11.5px}
   .v-table th em{font-style:normal;font:600 9px var(--mono);opacity:.75}
   .v-table tbody tr[data-sev="ERROR"]{background:rgba(255,90,90,.07)}
@@ -87,24 +93,37 @@ export function mountValidationSurface({stage,registry,workspace,adapter=createV
   const selRun=()=>runOf(selectedRequest)||currentRun();
   const selFinding=()=>{const list=findingsOf(selRun());return list.find(f=>f.id===selectedFinding)||list[0]||null;};
 
+  const readCurrentIdentity=()=>{try{const parsed=JSON.parse(String(input.value??''));return parsed&&typeof parsed==='object'&&!Array.isArray(parsed)?parsed:null}catch{return null}};
+  const staleNoticeHtml=()=>{
+    if(!staleNotice||staleNotice.requestId!==selRun()?.requestId)return '';
+    if(staleNotice.comparison==='MISMATCH')return `<p class="v-lead" style="margin:6px 0 0;font-size:12px;border:1px solid #8c6a2f;border-radius:9px;padding:7px 9px;background:rgba(240,180,41,.07)"><bdi dir="ltr">STALE_FOR_CURRENT_ARTIFACT</bdi> · هذه النتيجة تخص بصمة مُنتَج سابقة ولا تُعتبر سارية للمُدخل المحرَّر حاليًا.</p>`;
+    if(staleNotice.comparison==='UNRESOLVED_RUN_IDENTITY')return `<p class="v-lead" style="margin:6px 0 0;font-size:12px;border:1px solid var(--line);border-radius:9px;padding:7px 9px;background:#0b131e"><bdi dir="ltr">UNRESOLVED_RUN_IDENTITY</bdi> · لا يمكن مقارنة هذه الجلسة بأي مُنتَج حالي: هوية الجلسة لم تُحلّ، فلا تُبلَّغ النتيجة بأنها قديمة ولا بأنها مطابقة.</p>`;
+    return '';
+  };
   const renderSession=()=>{
-    const run=selRun(),list=findingsOf(run),node=shell.querySelector('[data-v-session]');
-    const totalFindings=runs().reduce((sum,r)=>sum+findingsOf(r).length,0);
+    const run=selRun(),node=shell.querySelector('[data-v-session]');
     const valid=runs().filter(r=>r.status==='TECHNICALLY_VALID').length;
     const invalid=runs().filter(r=>r.status==='TECHNICALLY_INVALID').length;
     const unavailable=runs().filter(r=>r.status==='UNAVAILABLE').length;
-    const outcomes=outcomesOf(findingsOf(run)),passed=outcomes.filter(o=>o.status==='PASS').length,failed=outcomes.length-passed;
+    const outcomes=outcomesOf(run);
+    const passed=outcomes.filter(o=>o.status==='PASS').length;
+    const failed=outcomes.filter(o=>o.status==='FAIL').length;
+    const notEvaluated=outcomes.filter(o=>o.status==='NOT_EVALUATED').length;
+    const warnings=outcomes.filter(o=>o.finding?.severity==='WARNING').length;
+    const cell=o=>o.status==='FAIL'?`<span data-tone="bad">✕ FAIL</span>`:o.status==='NOT_EVALUATED'?`<span data-tone="muted">— NOT EVALUATED</span>`:`<span data-tone="ok">✓ PASS</span>`;
+    const detail=o=>o.finding?`${B(o.finding.locator||'—')}<small dir="auto">${escape(o.finding.message)}</small>`:o.status==='NOT_EVALUATED'?'<small>لم تُقيَّم هذه القاعدة في هذه الجلسة · not evaluated in this run.</small>':'<small>مخالفة غير مسجّلة في هذه الجلسة.</small>';
     node.innerHTML=`<h2>جلسة التحقق</h2><span class="v-sub">Validation session</span>
       ${run?`<div class="v-session"><h3>${B(run.requestId)}</h3><span class="v-pill" data-tone="${statusTone(run.status)}" data-validation-status="${escape(run.status)}">${escape(STATUS_AR[run.status]||run.status)} · ${B(run.status)}</span></div>
-      <div class="v-meta"><span>تاريخ البدء<bdi dir="ltr">${escape(String(run.requestedAt||'—'))}</bdi></span><span>تاريخ الانتهاء<bdi dir="ltr">${escape(String(run.completedAt||'—'))}</bdi></span><span>المدة<bdi dir="ltr">${escape(durationOf(run))}</bdi></span><span>النتيجة<bdi dir="ltr">${escape(run.resultId||'—')}</bdi></span></div>
+      ${staleNoticeHtml()}
+      <div class="v-meta"><span>تاريخ البدء <bdi dir="ltr">${escape(String(run.requestedAt||'—'))}</bdi></span><span>تاريخ الانتهاء <bdi dir="ltr">${escape(String(run.completedAt||'—'))}</bdi></span><span>المدة <bdi dir="ltr">${escape(durationOf(run))}</bdi></span><span>النتيجة <bdi dir="ltr">${escape(run.resultId||'—')}</bdi></span></div>
       <div class="v-tiles">
-        <div class="v-tile"><b>إجمالي الفحوص</b><strong>${outcomes.length}</strong><small>CHECKS EXECUTED · ${runs().length} RUNS</small></div>
+        <div class="v-tile"><b>إجمالي الفحوص</b><strong>${outcomes.length}</strong><small>EVALUATED ${passed+failed} · NOT EVALUATED ${notEvaluated} · ${runs().length} RUNS</small></div>
         <div class="v-tile"><b>نجاح</b><strong data-tone="ok">${passed}</strong><small>PASS · VALID ${valid}</small></div>
-        <div class="v-tile"><b>تحذير</b><strong data-tone="muted">0</strong><small>WARNING · 0</small></div>
+        <div class="v-tile"><b>تحذير</b><strong data-tone="muted">${warnings}</strong><small>WARNING · ${warnings}</small></div>
         <div class="v-tile"><b>فشل</b><strong data-tone="${failed?'bad':'muted'}">${failed}</strong><small>FAIL · INVALID ${invalid} · UNAVAILABLE ${unavailable}</small></div>
       </div>
       <h3 style="margin:0 0 6px;font-size:12px">نتائج الفحص <span class="v-sub" style="display:inline;margin-inline-start:6px">Rule outcomes</span></h3>
-      <div class="v-table-wrap"><table class="v-table"><thead><tr><th scope="col" style="width:7%"><strong>الحالة</strong><em>STATUS</em></th><th scope="col" style="width:20%"><strong>القاعدة</strong><em>RULE</em></th><th scope="col" style="width:18%"><strong>الرمز</strong><em>CODE</em></th><th scope="col" style="width:30%"><strong>الفحص</strong><em>CHECK</em></th><th scope="col" style="width:25%"><strong>النتيجة التفصيلية</strong><em>OUTCOME</em></th></tr></thead><tbody>${outcomes.map(o=>`<tr data-v-finding="${escape(o.finding?.id||o.code)}" data-sev="${o.status==='FAIL'?'ERROR':'PASS'}" data-selected="${o.finding?.id===selFinding()?.id}"><td><span data-tone="${o.status==='FAIL'?'bad':'ok'}">${o.status==='FAIL'?'✕ FAIL':'✓ PASS'}</span></td><td>${B(o.ruleId)}</td><td>${B(o.code)}</td><td dir="auto">${escape(o.label)}<small>${escape(o.en)}</small></td><td>${o.finding?`${B(o.finding.locator||'—')}<small dir="auto">${escape(o.finding.message)}</small>`:'<small>مخالفة غير مسجّلة في هذه الجلسة.</small>'}</td></tr>`).join('')}</tbody></table></div>
+      <div class="v-table-wrap"><table class="v-table"><thead><tr><th scope="col" style="width:9%"><strong>الحالة</strong><em>STATUS</em></th><th scope="col" style="width:19%"><strong>القاعدة</strong><em>RULE</em></th><th scope="col" style="width:17%"><strong>الرمز</strong><em>CODE</em></th><th scope="col" style="width:29%"><strong>الفحص</strong><em>CHECK</em></th><th scope="col" style="width:26%"><strong>النتيجة التفصيلية</strong><em>OUTCOME</em></th></tr></thead><tbody>${outcomes.map(o=>`<tr data-v-finding="${escape(o.finding?.id||o.code)}" data-sev="${o.status==='FAIL'?'ERROR':o.status==='NOT_EVALUATED'?'SKIPPED':'PASS'}" data-selected="${Boolean(o.finding)&&o.finding.id===selFinding()?.id}"><td>${cell(o)}</td><td>${B(o.ruleId)}</td><td>${B(o.code)}</td><td dir="auto">${escape(o.label)}<small>${escape(o.en)}</small></td><td>${detail(o)}</td></tr>`).join('')}</tbody></table></div>
       <p class="v-lead" style="margin-top:9px;font-size:12px"><bdi dir="ltr">TechnicalFinding ≠ W04 Review Finding</bdi> · <bdi dir="ltr">formalReviewAuthority = false</bdi></p>`
       :`<p class="state-token" data-state="empty"><strong>لا جلسة تحقق بعد</strong> · No validation session has been run. Not-run is not technically valid.</p>`}`;
     shell.querySelectorAll('tr[data-v-finding]').forEach(row=>row.addEventListener('click',()=>{selectedFinding=row.dataset.vFinding;render()}));
@@ -159,9 +178,17 @@ export function mountValidationSurface({stage,registry,workspace,adapter=createV
     return run;
   };
 
-  const run=async payload=>{runButton.disabled=true;stateNode.textContent='Running technical validation…';try{const result=await adapter.validate(payload?.raw??input.value);feedback={ok:result.status==='TECHNICALLY_VALID',title:`${STATUS_AR[result.status]||result.status} · ${B(result.resultId||result.requestId)}`,lines:[`النتيجة: <bdi dir="ltr">${escape(result.status)}</bdi> · ${result.technicalFindings.length} TechnicalFinding · 0 formalReviewFinding`,result.identity?`الهوية: <bdi dir="ltr">${escape(result.identity.artifact.ref)}</bdi> · <bdi dir="ltr">${escape(result.identity.ruleset.id)}@${escape(result.identity.ruleset.revision)}</bdi>`:'الهوية الدقيقة غير مكتملة.']};selectedRequest=result.requestId;selectedFinding=null;return result}finally{runButton.disabled=false;render()}};
+  const run=async payload=>{runButton.disabled=true;stateNode.textContent='Running technical validation…';try{const result=await adapter.validate(payload?.raw??input.value);feedback={ok:result.status==='TECHNICALLY_VALID',title:`${STATUS_AR[result.status]||result.status} · ${B(result.resultId||result.requestId)}`,lines:[`النتيجة: <bdi dir="ltr">${escape(result.status)}</bdi> · ${result.technicalFindings.length} TechnicalFinding · 0 formalReviewFinding`,result.identity?`الهوية: <bdi dir="ltr">${escape(result.identity.artifact.ref)}</bdi> · <bdi dir="ltr">${escape(result.identity.ruleset.id)}@${escape(result.identity.ruleset.revision)}</bdi>`:'الهوية الدقيقة غير مكتملة.']};selectedRequest=result.requestId;selectedFinding=null;staleNotice=null;return result}finally{runButton.disabled=false;render()}};
   registry.register('validation.validate','ValidationConsumerAdapter','Validate exact artifact',run,()=>!adapter.state.processing||'Validation already processing');
-  registry.register('validation.inspect','ValidationConsumerAdapter','Inspect validation result',payload=>{const result=adapter.inspect(payload||{});feedback=result.ok?{ok:true,title:`${escape(result.code)} · لا سلطة قبول أو مراجعة`,lines:[`الجلسة: <bdi dir="ltr">${escape(result.result?.requestId||'—')}</bdi> · <bdi dir="ltr">${escape(result.result?.status||'—')}</bdi>`,`تطابق الهوية الحالية: <bdi dir="ltr">${String(result.currentIdentityMatches)}</bdi>`,...(result.limitations||[]).map(x=>escape(x))]}:{ok:false,title:`${escape(result.code)}`,lines:['لا نتيجة تحقق لاستعراضها.']};render();return result},()=>adapter.state.last?true:'No validation result');
+  registry.register('validation.inspect','ValidationConsumerAdapter','Inspect validation result',payload=>{
+    const current=readCurrentIdentity();
+    const result=adapter.inspect({...(payload||{}),...(current?{currentIdentity:current}:{})});
+    staleNotice=result.ok?{requestId:result.result?.requestId||null,comparison:result.identityComparison||'NOT_REQUESTED'}:null;
+    const comparison=String(result.ok?(result.identityComparison||'NOT_REQUESTED'):'NOT_REQUESTED');
+    const stale=result.ok&&result.code==='STALE_FOR_CURRENT_ARTIFACT';
+    feedback=result.ok?{ok:true,title:stale?`<bdi dir="ltr">STALE_FOR_CURRENT_ARTIFACT</bdi> · نتيجة غير سارية للمُدخل الحالي`:`${escape(result.code)} · لا سلطة قبول أو مراجعة`,lines:[`الجلسة: <bdi dir="ltr">${escape(result.result?.requestId||'—')}</bdi> · <bdi dir="ltr">${escape(result.result?.status||'—')}</bdi>`,`تطابق الهوية الحالية: <bdi dir="ltr">${escape(comparison)}</bdi>`,...(result.limitations||[]).map(x=>escape(x))]}:{ok:false,title:`${escape(result.code)}`,lines:['لا نتيجة تحقق لاستعراضها.']};
+    render();return result;
+  },()=>adapter.state.last?true:'No validation result');
   registry.register('validation.findings','ValidationConsumerAdapter','Inspect TechnicalFindings',payload=>{const result=adapter.findings(payload||{});feedback=result.ok?{ok:true,title:`${result.technicalFindings.length} TechnicalFinding · 0 W04 Finding`,lines:result.technicalFindings.length?result.technicalFindings.map(f=>`${B(f.code)} · <span dir="auto">${escape(f.message)}</span>`):['لا TechnicalFindings — وهذا ليس دليلًا على نجاح المراجعة.'] }:{ok:false,title:`${escape(result.code)}`,lines:['لا نتيجة تحقق.']};selectedFinding=null;render();return result},()=>adapter.state.last?true:'No validation result');
   registry.register('validation.run','ValidationConsumerAdapter','Legacy alias · validate exact artifact',run,()=>!adapter.state.processing||'Validation already processing');
   runButton.addEventListener('click',()=>Promise.resolve(registry.execute('validation.validate',{raw:input.value,route:'validation-validate-button'})).catch(error=>{feedback={ok:false,title:'ERROR',lines:[escape(String(error?.message||error))]},render()}));

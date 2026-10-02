@@ -314,7 +314,14 @@ export function mountLabTaskGraphIdentity(composition    ){
       const type=kindLabel==='linear'?String(pickText(activeLocale()).linear)
         :kindLabel==='conditional'?String(pickText(activeLocale()).conditional)
         :String(pickText(activeLocale()).optional);
-      return {id:`edge:${edge.id}`,source:String(edge.from),target:String(edge.to),type,direction:'directed',kind:'representation'};
+      /* `type` carries the LOCALIZED label (visible relation label + accessible name). The shared
+         relation classifier resolves its stroke class from English tokens only, so an Arabic
+         label fell through to `related` and painted every edge dashed/blue in RTL while EN drew
+         linear edges solid — i.e. the stroke depended on the active language. The shared
+         presentation honours an explicit `styleClass` first, so the class is stated here and
+         stays direction-independent. Display stays local; no shared file is edited. */
+      const styleClass=kindLabel==='linear'?'canonical':'related';
+      return {id:`edge:${edge.id}`,source:String(edge.from),target:String(edge.to),type,direction:'directed',kind:'representation',styleClass};
     });
     return {nodes,relations};
   };

@@ -120,6 +120,16 @@ export function mountBackupSurface({stage,registry,workspace,button,adapter}={})
     const projection=backupAttemptProjection(adapter),attempts=projection.rows;
     const pre=drill?.preflight||null;
     const drillAttempt=[...attempts].reverse().find(row=>/DRILL/i.test(String(row.operation||'')))||null;
+    /* The latest drill ATTEMPT is the freshest truth: a failed attempt (corrupted seed, blocked
+       preflight, …) must never be masked by an older completed drill's success receipt. */
+    const latestAttemptFailed=drillAttempt?/FAIL/i.test(String(drillAttempt.status||'')):false;
+    const latestAttemptStatus=latestAttemptFailed?String(drillAttempt.status||'FAILED'):null;
+    const latestFailureCode=latestAttemptFailed?String(s.lastError?.code||drillAttempt?.originalError?.code||drillAttempt?.status||'UNKNOWN'):null;
+    const drillCompleted=Boolean(drill&&drill.status==='STAGED_AND_VERIFIED'&&drill.liveRestored!==true);
+    const pillTone=latestAttemptFailed?'FAILED':tone(drill?(drillCompleted?'VERIFIED':'FAILED'):'NOT_RUN');
+    const pillStatus=latestAttemptFailed?latestAttemptStatus:(drill?.status||'NOT_RUN');
+    const pillIcon=latestAttemptFailed?'ban':(drill?'shieldCheck':'clock');
+    const pillText=latestAttemptFailed?tx('pillFailed',L):(drill?(drillCompleted?tx('pillVerified',L):tx('pillFailed',L)):tx('pillNotRun',L));
     const rb=pkg?.readbackSummary||null,drr=drill?.readback||null;
     const target=drill?.target||stg?.target||null;
     const duration=spanBetween(drillAttempt?.startedAt,drillAttempt?.terminalAt||drillAttempt?.updatedAt)
@@ -226,9 +236,11 @@ export function mountBackupSurface({stage,registry,workspace,button,adapter}={})
           <div class="bk-report-head">
             <div class="bk-report-id">
               <h3>${safe(tx('drillTitle',L))}: <bdi>${safe(drill?.drillId||dash)}</bdi></h3>
-              <span class="bk-pill" data-tone="${tone(drill?(drill.status==='STAGED_AND_VERIFIED'&&drill.liveRestored!==true?'VERIFIED':'FAILED'):'NOT_RUN')}" data-bk-drill-status="${safe(drill?.status||'NOT_RUN')}">${icon(drill?'shieldCheck':'clock',13)}${B(drill?(drill.status==='STAGED_AND_VERIFIED'&&drill.liveRestored!==true?tx('pillVerified',L):tx('pillFailed',L)):tx('pillNotRun',L))}</span>
+              <span class="bk-pill" data-tone="${pillTone}" data-bk-drill-status="${safe(pillStatus)}">${icon(pillIcon,13)}${B(pillText)}</span>
+              ${latestAttemptFailed?`<span class="bk-pill" data-tone="bad" data-bk-latest-attempt="${safe(latestAttemptStatus)}">${icon('ban',13)}${B(latestAttemptStatus)}</span>`:''}
             </div>
           </div>
+          ${latestAttemptFailed?`<p class="bk-attempt-fail" data-tone="bad" data-bk-attempt-failure="${safe(latestAttemptStatus)}"><strong>${safe(tx('attemptFailTitle',L))}</strong><bdi>${B(latestAttemptStatus)}</bdi>${latestFailureCode?`<bdi>${B(latestFailureCode)}</bdi>`:''}<span>${safe(tx('attemptFailBody',L))}</span></p>`:''}
           <dl class="bk-meta">${metaCells}</dl>
           ${drill?'':`<div class="bk-nostrun"><strong>${safe(tx('notRunTitle',L))}</strong><p>${safe(tx('notRunBody',L))}</p></div>`}
           <div class="bk-sec-head"><h2>${safe(tx('pipelineTitle',L))}</h2><span class="bk-note">${safe(tx('pipelineSub',L))}</span></div>

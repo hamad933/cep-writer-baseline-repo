@@ -51,7 +51,12 @@ const COPY={
     persistence:'الحفظ',coverage:'التغطية',hashNote:'SHA-256 للتحقق لا للتخزين',
     ok:'تم',fail:'فشل مُغلق',pending:'قيد الانتظار',
     notice:'ملاحظة السجل',related:'مرتبط',annotations:'التزامات',noChange:'لا تغيير مسجّل',
-    eventSingular:'حدث'
+    eventSingular:'حدث',
+    subLead:'الأحداث ونشاط المستخدمين عبر النظام والعمليات — سلسلة تجزئة قابلة للفحص، لا للتشفير.',
+    lockTitle:'السجل مقفل — للإضافة فقط',lockSub:'الملاحظات تُخزَّن منفصلة',
+    lockFull:'لا يمكن تعديل حدث مسجّل؛ الملاحظات تُخزَّن منفصلة عن السجل · databaseImmutabilityClaim=false',
+    mutableTitle:'الملاحظات قابلة للتعديل',newNote:'ملاحظة جديدة',
+    actionBarLabel:'شريط حالة السجل والإجراءات'
   },
   en:{
     title:'Audit Register',otherTitle:'السجل التدقيقي',
@@ -88,7 +93,12 @@ const COPY={
     persistence:'Persistence',coverage:'Coverage',hashNote:'SHA-256 for verification, not encryption',
     ok:'Done',fail:'Failed closed',pending:'Pending',
     notice:'Record notice',related:'Related',annotations:'Annotations',noChange:'No change recorded',
-    eventSingular:'event'
+    eventSingular:'event',
+    subLead:'Events and user activity across System & Operations — an inspectable hash chain, never encryption.',
+    lockTitle:'Record locked — append-only',lockSub:'Notes are stored separately',
+    lockFull:'A recorded event cannot be edited; notes are stored separately from the record · databaseImmutabilityClaim=false',
+    mutableTitle:'Annotations mutable',newNote:'New note',
+    actionBarLabel:'Record status & actions'
   }
 };
 const locale=()=>{const lang=document.documentElement.lang;return lang==='ar'||lang==='en'?lang:resolveSystemLocale();};
@@ -160,41 +170,66 @@ const icon=(id)=>`<svg class="icon sm" aria-hidden="true"><use href="#${id}"></u
 
 /* ---------------------------------------------------------------- presentation tokens */
 const STYLE=`
-.s18-audit{display:grid;gap:14px;min-width:0}
+.s18-audit{display:grid;gap:8px;min-width:0}
 .s18-audit *{box-sizing:border-box}
-.a-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 18px;align-items:start;padding-block-end:4px;border-block-end:1px solid var(--line);padding-block-end:14px}
-.a-head h1{margin:2px 0 4px;font-size:clamp(21px,2vw,27px);line-height:1.25;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.a-head h1 small{font-size:13px;font-weight:600;color:var(--text3)}
-.a-lead{margin:0;color:var(--text2);max-width:82ch;line-height:1.6;font-size:13px}
-.a-head-side{display:grid;gap:7px;justify-items:end;text-align:end}
-.a-live{display:inline-flex;align-items:center;gap:7px;font:600 11px var(--mono);color:var(--text2);border:1px solid var(--line);border-radius:999px;padding:5px 11px;background:color-mix(in srgb,var(--elev) 70%,transparent)}
-.a-live .dot{inline-size:7px;block-size:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 22%,transparent)}
-.a-chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:end}
-.a-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;font:600 10.5px var(--mono);color:var(--text2);background:color-mix(in srgb,var(--bg2) 80%,transparent);white-space:nowrap}
+/* compact single-tier surface header: identity + status row and command controls inside ONE tier
+   (AUD-V3 — replaces the former heavy identity tier + separate command tier) */
+.a-head{display:grid;gap:8px;padding:8px 0 10px;border-block-end:1px solid var(--line);min-width:0}
+.a-head-top{display:flex;gap:8px 16px;align-items:center;flex-wrap:wrap;min-width:0}
+.a-head-id{display:flex;align-items:baseline;gap:9px;flex-wrap:nowrap;min-width:0}
+.a-head h1{margin:0;font-size:clamp(16px,1.5vw,19px);line-height:1.3;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;min-width:0}
+.a-head h1 small{font-size:11.5px;font-weight:600;color:var(--text3);white-space:nowrap}
+.a-lead{margin:0;color:var(--text3);flex:1 1 120px;line-height:1.4;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.a-head-side{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-inline-start:auto}
+.a-live{display:inline-flex;align-items:center;gap:6px;font:600 10.5px var(--mono);color:var(--text2);border:1px solid var(--line);border-radius:999px;padding:3px 9px;background:color-mix(in srgb,var(--elev) 70%,transparent);white-space:nowrap}
+.a-live .dot{inline-size:6px;block-size:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 22%,transparent)}
+.a-chips{display:flex;gap:5px;flex-wrap:wrap;justify-content:end}
+.a-chip{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:999px;padding:3px 9px;font:600 10px var(--mono);color:var(--text2);background:color-mix(in srgb,var(--bg2) 80%,transparent);white-space:nowrap}
 .a-chip[data-tone="ok"]{border-color:color-mix(in srgb,var(--ok) 55%,var(--line));color:var(--ok)}
 .a-chip[data-tone="bad"]{border-color:color-mix(in srgb,var(--bad) 55%,var(--line));color:var(--bad)}
 .a-chip[data-tone="warn"]{border-color:color-mix(in srgb,var(--warn) 55%,var(--line));color:var(--warn)}
 .a-cmdbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .a-search{position:relative;flex:1 1 240px;min-width:180px;display:flex;align-items:center}
 .a-search .icon{position:absolute;inset-inline-start:10px;color:var(--text3);pointer-events:none}
-.a-search input{inline-size:100%;min-inline-size:0;height:34px;padding:0 12px 0 32px;border:1px solid var(--line);border-radius:9px;background:var(--bg2);color:var(--text);font-size:12.5px}
-[dir="rtl"] .a-search input{padding:0 32px 0 12px}
+.a-search input{inline-size:100%;min-inline-size:0;height:30px;padding:0 10px 0 30px;border:1px solid var(--line);border-radius:9px;background:var(--bg2);color:var(--text);font-size:12.5px}
+[dir="rtl"] .a-search input{padding:0 30px 0 10px}
 .a-search input:focus-visible{outline:2px solid var(--focus);outline-offset:1px;border-color:var(--focus)}
-.a-sel{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 6px 0 10px;border:1px solid var(--line);border-radius:9px;background:var(--bg2);font-size:12px;color:var(--text2)}
+.a-sel{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 6px 0 10px;border:1px solid var(--line);border-radius:9px;background:var(--bg2);font-size:12px;color:var(--text2)}
 [dir="rtl"] .a-sel{padding:0 10px 0 6px}
-.a-sel select{border:0;background:transparent;color:var(--text);font-size:12px;max-inline-size:170px;padding:4px 2px}
+.a-sel select{border:0;background:transparent;color:var(--text);font-size:12px;max-inline-size:132px;padding:4px 2px}
 .a-sel select:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:5px}
 .a-cmdbar .a-gap{flex:1 1 auto}
 .a-btn-verify{background:color-mix(in srgb,var(--accent) 18%,var(--bg2));border:1px solid color-mix(in srgb,var(--accent) 55%,var(--line));color:var(--accent2);font-weight:700}
 .a-btn-verify:hover{background:color-mix(in srgb,var(--accent) 28%,var(--bg2));color:var(--text)}
 .a-panel{border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--bg1) 88%,transparent);min-width:0;overflow:hidden}
-.a-panel-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 14px;border-block-end:1px solid var(--line);background:color-mix(in srgb,var(--bg2) 70%,transparent)}
-.a-panel-head h2{margin:0;font-size:13.5px}
+/* lower band: trace timeline + evidence/JSON deck side by side below the ledger (AUD-V1 split)
+   — the center pane is ~650px wide beside the context panes, so the reference's two lower bands
+   are composed as one band of two panes instead of being clipped by the vertical budget. */
+.a-lower{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,1fr);gap:10px;min-width:0;align-items:start}
+.a-lower .a-chain{padding:8px}
+.a-lower .a-chain-head{padding:5px 10px;gap:6px}
+.a-lower .a-chain-head .btn{padding:4px 9px;font-size:11px;min-height:24px}
+.a-lower .a-node{flex:1 1 108px;padding:8px 9px 7px}
+.a-lower .a-node-row{flex-direction:column;align-items:flex-start;gap:1px}
+.a-lower .a-arrow{padding-inline:4px}
+/* the deck cannot keep the reference's 3-band width in a half-width pane: panels stack and
+   each scrolls under its own cap, so the raw payload still leads the band. */
+.a-lower .a-deep{grid-template-columns:1fr}
+.a-lower .a-deep>section{border-inline-end:0;border-block-end:1px solid var(--line);padding:7px 10px}
+.a-lower .a-tabs{flex-wrap:nowrap;overflow-x:auto}
+.a-lower .a-tab{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-inline-size:100%}
+.a-lower .a-node{gap:2px}
+.a-lower .a-node-actor{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12.5px}
+.a-lower .a-node-foot{font-size:10px}
+.a-lower .a-node-time{font-size:10px}
+.a-lower .a-deep>section:last-child{border-block-end:0}
+.a-panel-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:7px 12px;border-block-end:1px solid var(--line);background:color-mix(in srgb,var(--bg2) 70%,transparent)}
+.a-panel-head h2{margin:0;font-size:13px}
 .a-panel-head .a-sub{font:600 10px var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--text3)}
 .a-panel-head .a-grow{flex:1 1 auto}
-.a-tablewrap{overflow:auto;max-block-size:clamp(230px,34vh,360px)}
+.a-tablewrap{overflow:auto;max-block-size:clamp(140px,17vh,240px)}
 .a-table{inline-size:100%;border-collapse:separate;border-spacing:0;min-inline-size:700px;table-layout:fixed}
-.a-table th,.a-table td{padding:7px 8px;text-align:start;vertical-align:middle;border-block-end:1px solid color-mix(in srgb,var(--line) 70%,transparent);font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.a-table th,.a-table td{padding:5px 7px;text-align:start;vertical-align:middle;border-block-end:1px solid color-mix(in srgb,var(--line) 70%,transparent);font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .a-table th{position:sticky;inset-block-start:0;z-index:1;background:var(--bg2);color:var(--text3);font-size:10.5px;font-weight:700;letter-spacing:.02em;box-shadow:inset 0 -1px 0 var(--line)}
 .a-table tbody tr{cursor:pointer}
 .a-table tbody tr:hover{background:rgba(255,255,255,.04)}
@@ -207,42 +242,42 @@ const STYLE=`
 .a-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:10.5px;color:var(--text3);align-items:center}
 .a-legend .a-plane{margin-inline-end:4px}
 .a-empty{margin:0;padding:18px 14px;color:var(--text3);font-size:12.5px;text-align:center}
-.a-chain-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 14px;border-block-end:1px solid var(--line)}
+.a-chain-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:7px 12px;border-block-end:1px solid var(--line)}
 .a-trace{font:700 13px var(--mono);letter-spacing:.02em}
 .a-chain-count{font-size:11.5px;color:var(--text3)}
-.a-chain{display:flex;gap:0;align-items:stretch;padding:14px;overflow-x:auto;direction:ltr}
-.a-node{position:relative;border:1px solid var(--line);border-radius:11px;background:color-mix(in srgb,var(--bg2) 85%,transparent);padding:11px 12px 10px;min-inline-size:0;flex:1 1 200px;display:grid;gap:4px;align-content:start;direction:inherit}
+.a-chain{display:flex;gap:0;align-items:stretch;padding:10px;overflow-x:auto;direction:ltr}
+.a-node{position:relative;border:1px solid var(--line);border-radius:11px;background:color-mix(in srgb,var(--bg2) 85%,transparent);padding:9px 10px 8px;min-inline-size:0;flex:1 1 200px;display:grid;gap:3px;align-content:start;direction:inherit}
 .a-node[data-anchor="true"]{border-color:color-mix(in srgb,var(--accent) 65%,var(--line));box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 30%,transparent)}
 .a-node .a-badge{position:absolute;inset-block-start:-9px;inset-inline-end:10px;inline-size:20px;block-size:20px;border-radius:50%;border:1px solid var(--accent);background:var(--bg1);display:grid;place-items:center;font:700 10px var(--mono);color:var(--accent)}
 .a-node .a-node-time{font:600 11px var(--mono);color:var(--text3)}
 .a-node .a-node-actor{font-size:13px;font-weight:700}
-.a-node .a-node-row{display:flex;gap:8px;justify-content:space-between;align-items:baseline;padding-block:5px;border-block:1px solid color-mix(in srgb,var(--line) 65%,transparent);min-width:0}
-.a-node .a-node-action{font:600 10.5px var(--mono);overflow-wrap:anywhere;min-width:0}
-.a-node .a-node-target{font:600 10.5px var(--mono);color:var(--text3);white-space:nowrap}
+.a-node .a-node-row{display:flex;gap:8px;justify-content:space-between;align-items:baseline;padding-block:4px;border-block:1px solid color-mix(in srgb,var(--line) 65%,transparent);min-width:0}
+.a-node .a-node-action{font:600 10.5px var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.a-node .a-node-target{font:600 10.5px var(--mono);color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .a-node .a-node-foot{display:flex;gap:8px;justify-content:space-between;align-items:baseline}
 .a-node .a-node-src{font-size:11px;color:var(--text3)}
 .a-arrow{align-self:center;display:grid;place-items:center;padding-inline:8px;color:var(--text3);flex:0 0 auto}
 .a-arrow .icon{inline-size:16px;block-size:16px}
-.a-tabs{display:flex;gap:6px;flex-wrap:wrap;padding:9px 12px;border-block-end:1px solid var(--line);background:color-mix(in srgb,var(--bg2) 55%,transparent)}
-.a-tab{border:1px solid transparent;border-radius:8px;background:transparent;color:var(--text2);font-size:12px;padding:6px 11px;cursor:pointer;display:inline-flex;gap:6px;align-items:center;min-height:30px}
+.a-tabs{display:flex;gap:6px;flex-wrap:wrap;padding:6px 10px;border-block-end:1px solid var(--line);background:color-mix(in srgb,var(--bg2) 55%,transparent)}
+.a-tab{border:1px solid transparent;border-radius:8px;background:transparent;color:var(--text2);font-size:12px;padding:5px 10px;cursor:pointer;display:inline-flex;gap:6px;align-items:center;min-height:27px}
 .a-tab:hover{background:rgba(255,255,255,.05);color:var(--text)}
 .a-tab[aria-selected="true"]{background:var(--as);border-color:color-mix(in srgb,var(--accent) 45%,var(--line));color:var(--accent2);font-weight:700}
 .a-tab .a-tab-n{font:600 10px var(--mono);opacity:.85}
 .a-deep{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr);gap:0}
-.a-deep>section{padding:12px 14px;min-width:0;border-inline-end:1px solid var(--line)}
+.a-deep>section{padding:9px 11px;min-width:0;border-inline-end:1px solid var(--line)}
 .a-deep>section:last-child{border-inline-end:0}
-.a-deep h3{margin:0 0 8px;font-size:12px;display:flex;gap:8px;align-items:center;color:var(--text2)}
+.a-deep h3{margin:0 0 7px;font-size:12px;display:flex;gap:8px;align-items:center;color:var(--text2)}
 .a-deep h3 .a-sub{font:600 9.5px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--text3)}
-.a-json{margin:0;max-block-size:250px;overflow:auto;background:var(--bg0);border:1px solid var(--line);border-radius:9px;padding:9px 10px;direction:ltr;text-align:left;unicode-bidi:isolate;font:11px/1.55 var(--mono);counter-reset:ln}
+.a-json{margin:0;max-block-size:clamp(105px,14vh,170px);overflow:auto;background:var(--bg0);border:1px solid var(--line);border-radius:9px;padding:9px 10px;direction:ltr;text-align:left;unicode-bidi:isolate;font:11px/1.55 var(--mono);counter-reset:ln}
 .a-json .ln{display:block;white-space:pre-wrap;overflow-wrap:anywhere;padding-inline-start:34px;position:relative}
 .a-json .ln::before{content:counter(ln);counter-increment:ln;position:absolute;inset-inline-start:0;inline-size:26px;text-align:end;color:var(--text3);opacity:.6}
 .j-k{color:var(--accent2)}.j-s{color:var(--ok)}.j-n{color:var(--warn)}.j-b{color:var(--violet)}
-.a-kv{margin:0;display:grid;gap:0}
-.a-kv .a-kv-row{display:grid;grid-template-columns:minmax(90px,.5fr) minmax(0,1fr);gap:10px;padding:6px 0;border-block-end:1px solid color-mix(in srgb,var(--line) 55%,transparent);font-size:11.5px}
+.a-kv{margin:0;display:grid;gap:0;max-block-size:clamp(105px,14vh,170px);overflow:auto}
+.a-kv .a-kv-row{display:grid;grid-template-columns:minmax(84px,.5fr) minmax(0,1fr);gap:10px;padding:6px 0;border-block-end:1px solid color-mix(in srgb,var(--line) 55%,transparent);font-size:11.5px}
 .a-kv .a-kv-row:last-child{border-block-end:0}
 .a-kv dt{color:var(--text3)}
 .a-kv dd{margin:0;overflow-wrap:anywhere;text-align:end}
-.a-log{margin:0;padding:0;list-style:none;display:grid;gap:5px;max-block-size:250px;overflow:auto}
+.a-log{margin:0;padding:0;list-style:none;display:grid;gap:5px;max-block-size:clamp(105px,14vh,170px);overflow:auto}
 .a-log li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center;font-size:11px;padding:5px 7px;border:1px solid color-mix(in srgb,var(--line) 65%,transparent);border-radius:7px;background:color-mix(in srgb,var(--bg2) 60%,transparent)}
 .a-log .a-log-t{font:600 10px var(--mono);color:var(--text3)}
 .a-log .a-log-m{font:600 10px var(--mono);overflow-wrap:anywhere}
@@ -255,12 +290,12 @@ const STYLE=`
 .a-diff pre{margin:0;background:var(--bg0);border:1px solid var(--line);border-radius:8px;padding:8px;max-block-size:220px;overflow:auto;font:11px/1.5 var(--mono);direction:ltr;text-align:left;unicode-bidi:isolate;overflow-wrap:anywhere;white-space:pre-wrap}
 .a-diff .a-before{border-color:color-mix(in srgb,var(--bad) 40%,var(--line))}
 .a-diff .a-after{border-color:color-mix(in srgb,var(--ok) 40%,var(--line))}
-.a-annot{display:grid;gap:8px;padding:12px 14px;border-block-start:1px solid var(--line);background:color-mix(in srgb,var(--bg2) 45%,transparent)}
+.a-annot{display:grid;gap:6px;padding:8px 11px;border-block-start:1px solid var(--line);background:color-mix(in srgb,var(--bg2) 45%,transparent)}
 .a-annot-head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
 .a-annot-head h3{margin:0;font-size:12.5px}
 .a-annot-head p{margin:0;font-size:11.5px;color:var(--text3)}
 .a-form{display:grid;grid-template-columns:minmax(150px,.45fr) minmax(0,1fr) auto;gap:8px}
-.a-form input{min-width:0;border:1px solid var(--line);border-radius:9px;background:var(--bg1);color:inherit;padding:9px 11px;font-size:12.5px}
+.a-form input{min-width:0;border:1px solid var(--line);border-radius:9px;background:var(--bg1);color:inherit;padding:7px 10px;font-size:12.5px}
 .a-form input:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
 .a-form .btn{padding:9px 14px}
 .a-settle{display:grid;gap:3px;border:1px dashed var(--line);border-radius:10px;padding:9px 12px;font-size:12px;background:color-mix(in srgb,var(--bg1) 70%,transparent)}
@@ -268,6 +303,18 @@ const STYLE=`
 .a-settle[data-state="FAILURE"]{border-color:color-mix(in srgb,var(--bad) 65%,var(--line));border-style:solid}
 .a-settle bdi{font-family:var(--mono)}
 .a-settle .a-settle-idle{color:var(--text3)}
+/* BOTTOM ACTION / STATUS BAR (AUD-V2) — sticky surface action bar: locked/mutable record
+   indicator at the start, create-note action at the end (reference bottom bar composition). */
+.a-actionbar{position:sticky;inset-block-end:0;z-index:5;display:flex;gap:4px 12px;align-items:center;flex-wrap:wrap;padding:5px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg2);box-shadow:0 -8px 20px rgba(0,0,0,.35);font-size:12px}
+.a-lock{display:inline-flex;gap:7px;align-items:center;font-size:12px;min-width:0}
+.a-lock strong{font-weight:700;white-space:nowrap}
+.a-lock .a-sub{color:var(--text3);font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.a-lock .icon{inline-size:15px;block-size:15px;color:var(--warn)}
+.a-mutable{display:inline-flex;gap:6px;align-items:center;font:600 10.5px var(--mono);color:var(--text2);border:1px solid var(--line);border-radius:999px;padding:3px 9px;white-space:nowrap}
+.a-mutable .dot{inline-size:6px;block-size:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 22%,transparent)}
+.a-actionbar .a-grow{flex:1 1 auto}
+.a-btn-note{display:inline-flex;gap:6px;align-items:center;font-weight:700;white-space:nowrap;padding:6px 11px}
+.a-btn-note .icon{inline-size:15px;block-size:15px}
 /* LEFT — audit record desk */
 .a-desk{display:grid;gap:14px;min-width:0}
 .a-desk h3{margin:0 0 6px;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3)}
@@ -320,8 +367,8 @@ const STYLE=`
 .s18-audit [data-tone="info"]{color:var(--accent2)}
 @media(max-width:1240px){.a-deep{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}.a-deep>section:nth-child(3){border-inline-end:0;border-block-start:1px solid var(--line);grid-column:1/-1}}
 @media(max-width:1060px){
-  .a-head{grid-template-columns:1fr}
-  .a-head-side{justify-items:start;text-align:start}
+  .a-lead{display:none}
+  .a-head-side{margin-inline-start:0}
   .a-chips{justify-content:start}
   .a-deep{grid-template-columns:1fr}
   .a-deep>section{border-inline-end:0;border-block-end:1px solid var(--line)}
@@ -332,6 +379,7 @@ const STYLE=`
 @media(max-width:760px){
   .a-cmdbar .a-sel{inline-size:100%}
   .a-cmdbar .a-sel select{flex:1 1 auto;max-inline-size:none}
+  .a-lower{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){.s18-audit *{transition:none!important;animation:none!important}}
 `;
@@ -540,54 +588,63 @@ export function mountAuditSurface({stage,registry,workspace,runtimeAdapter=null}
   stage.innerHTML=`<style>${STYLE}</style>
     <section class="s18-audit" data-w05-surface="audit" data-domain-owner="W05AuditDomain">
       <header class="a-head">
-        <div>
-          <div class="m0-eyebrow"><bdi dir="ltr">W05 · DURABLE EVENT TRACE</bdi></div>
-          <h1 data-a-title></h1>
-          <p class="a-lead" data-a-lead></p>
+        <div class="a-head-top">
+          <div class="a-head-id">
+            <h1 data-a-title></h1>
+            <p class="a-lead" data-a-lead></p>
+          </div>
+          <div class="a-head-side">
+            <span class="a-live"><span class="dot"></span><span data-a-live></span></span>
+            <div class="a-chips" data-integrity role="status" aria-live="polite"></div>
+          </div>
         </div>
-        <div class="a-head-side">
-          <span class="a-live"><span class="dot"></span><span data-a-live></span></span>
-          <div class="a-chips" data-integrity role="status" aria-live="polite"></div>
-          <div class="a-chips" data-a-counts></div>
+
+        <div class="a-cmdbar">
+          <label class="a-search">${icon('i-search')}<input data-a-search type="search" dir="auto" autocomplete="off" aria-label="Search AuditEvents"></label>
+          <span class="a-sel"><span data-l="actor"></span><select data-a-actor aria-label="Actor filter"></select></span>
+          <span class="a-sel"><span data-l="action"></span><select data-a-action aria-label="Action filter"></select></span>
+          <span class="a-sel"><span data-l="outcome"></span><select data-a-outcome aria-label="Result filter"></select></span>
+          <button type="button" class="btn" data-a-reset></button>
+          <span class="a-gap"></span>
+          <button type="button" class="btn a-btn-verify" data-foundation-command="audit.verify" data-a-verify></button>
+          <button type="button" class="btn" data-foundation-command="audit.export" data-a-export></button>
+          <button type="button" class="btn iconbtn" data-a-more aria-haspopup="menu"></button>
         </div>
       </header>
 
-      <div class="a-cmdbar">
-        <label class="a-search">${icon('i-search')}<input data-a-search type="search" dir="auto" autocomplete="off" aria-label="Search AuditEvents"></label>
-        <span class="a-sel"><span data-l="actor"></span><select data-a-actor aria-label="Actor filter"></select></span>
-        <span class="a-sel"><span data-l="action"></span><select data-a-action aria-label="Action filter"></select></span>
-        <span class="a-sel"><span data-l="outcome"></span><select data-a-outcome aria-label="Result filter"></select></span>
-        <button type="button" class="btn" data-a-reset></button>
-        <span class="a-gap"></span>
-        <button type="button" class="btn a-btn-verify" data-foundation-command="audit.verify" data-a-verify></button>
-        <button type="button" class="btn" data-foundation-command="audit.export" data-a-export></button>
-        <button type="button" class="btn iconbtn" data-a-more aria-haspopup="menu"></button>
-      </div>
-
       <section class="a-panel" aria-label="Audit event ledger">
         <div class="a-panel-head">
-          <h2 data-a-tabletitle></h2><span class="a-sub" data-a-tablesub></span>
+          <span class="a-sub" data-a-tablesub></span>
           <span class="a-grow"></span>
           <span class="a-legend" data-a-legend></span>
         </div>
         <div data-a-table></div>
       </section>
 
-      <section class="a-panel" data-a-chainpanel aria-label="Trace chain"></section>
+      <div class="a-lower">
+        <section class="a-panel" data-a-chainpanel aria-label="Trace chain"></section>
 
-      <section class="a-panel" aria-label="Evidence deck">
-        <div class="a-tabs" role="tablist" data-a-tabs></div>
-        <div class="a-deep" data-a-deep></div>
-        <div class="a-annot">
-          <div class="a-annot-head"><h3 data-a-annottitle></h3><p data-a-annotlead></p></div>
-          <form class="a-form" data-annotation-form>
-            <input data-event-id inputmode="text" dir="ltr" autocomplete="off" aria-label="AuditEvent id">
-            <input data-note dir="auto" autocomplete="off" aria-label="Audit annotation">
-            <button type="submit" class="btn"></button>
-          </form>
-          <div data-a-settle-host></div>
-        </div>
-      </section>
+        <section class="a-panel" aria-label="Evidence deck">
+          <div class="a-tabs" role="tablist" data-a-tabs></div>
+          <div class="a-deep" data-a-deep></div>
+          <div class="a-annot">
+            <div class="a-annot-head"><h3 data-a-annottitle></h3><p data-a-annotlead></p></div>
+            <form class="a-form" data-annotation-form>
+              <input data-event-id inputmode="text" dir="ltr" autocomplete="off" aria-label="AuditEvent id">
+              <input data-note dir="auto" autocomplete="off" aria-label="Audit annotation">
+              <button type="submit" class="btn"></button>
+            </form>
+            <div data-a-settle-host></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="a-actionbar" data-a-actionbar role="status">
+        <span class="a-lock">${icon('i-lock')}<strong data-a-locktitle></strong><span class="a-sub" data-a-locksub></span></span>
+        <span class="a-mutable"><span class="dot"></span><span data-a-mutable></span></span>
+        <span class="a-grow"></span>
+        <button type="button" class="btn a-btn-note" data-foundation-command="foundation.note" data-a-newnote-host>${icon('i-plus')}<span data-a-newnote></span></button>
+      </div>
     </section>`;
 
   const q=selector=>stage.querySelector(selector);
@@ -609,7 +666,9 @@ export function mountAuditSurface({stage,registry,workspace,runtimeAdapter=null}
     const lang=locale(),T0=T(),row=selectedRow(),integ=integrity();
     const title=q('[data-a-title]');
     title.innerHTML=`${esc(T0.title)}<small dir="${lang==='ar'?'ltr':'rtl'}">${esc(T0.otherTitle)}</small>`;
-    q('[data-a-lead]').textContent=T0.lead;
+    const lead=q('[data-a-lead]');
+    lead.textContent=T0.subLead;
+    lead.title=T0.lead; /* full lead stays reachable on hover — one-line subtitle keeps the tier compact */
     const live=q('[data-a-live]');
     const stamp=String(state.lastVerifyAt||state.lastObservedAt||'').slice(11,19);
     live.textContent=`${T0.live} ${stamp||'—'}`;
@@ -620,11 +679,6 @@ export function mountAuditSurface({stage,registry,workspace,runtimeAdapter=null}
       <span class="a-chip" data-tone="${integ.status==='VALID_CHAIN'?'ok':integ.status==='INVALID_CHAIN'?'bad':'warn'}">${esc(T0.statusChain)}: <bdi dir="ltr">${esc(integ.status)}</bdi></span>
       <span class="a-chip" data-tone="${dTone}">PROVIDER: <bdi dir="ltr">${esc(dStatus)}</bdi></span>
       <span class="a-chip" data-tone="${integ.session.status==='VALID_CHAIN'?'ok':'bad'}">SESSION: <bdi dir="ltr">${esc(integ.session.status)}</bdi></span>`;
-    const counts=q('[data-a-counts]');
-    counts.innerHTML=`
-      <span class="a-chip" data-tone="info"><bdi dir="ltr">${allRows().length}</bdi> ${esc(T0.events)}</span>
-      <span class="a-chip"><span class="a-plane" data-plane="PROVIDER_DURABLE_JSONL"></span><bdi dir="ltr">${durableRows().length}</bdi></span>
-      <span class="a-chip"><span class="a-plane" data-plane="SESSION_LOCAL"></span><bdi dir="ltr">${sessionRows().length}</bdi></span>`;
     void row;
   };
 
@@ -652,11 +706,10 @@ export function mountAuditSurface({stage,registry,workspace,runtimeAdapter=null}
 
   const renderTable=()=>{
     const T0=T(),rows=visible(),total=allRows(),sel=selectedRow();
-    q('[data-a-tabletitle]').textContent=T0.title;
     q('[data-a-tablesub]').textContent=`${T0.showing} ${rows.length} ${T0.of} ${total.length}`;
     q('[data-a-legend]').innerHTML=`
-      <span><span class="a-plane" data-plane="PROVIDER_DURABLE_JSONL"></span>${esc(T0.planeDurable)}</span>
-      <span><span class="a-plane" data-plane="SESSION_LOCAL"></span>${esc(T0.planeSession)}</span>`;
+      <span><span class="a-plane" data-plane="PROVIDER_DURABLE_JSONL"></span>${esc(T0.planeDurable)} · <bdi dir="ltr">${durableRows().length}</bdi></span>
+      <span><span class="a-plane" data-plane="SESSION_LOCAL"></span>${esc(T0.planeSession)} · <bdi dir="ltr">${sessionRows().length}</bdi></span>`;
     const wrap=q('[data-a-table]');
     if(!rows.length){
       wrap.innerHTML=`<p class="a-empty" data-state="empty"><strong>${esc(T0.emptyTable)}</strong> · ${esc(T0.emptyTableHint)}</p>`;
@@ -687,8 +740,7 @@ export function mountAuditSurface({stage,registry,workspace,runtimeAdapter=null}
           <td dir="auto" title="${esc(d.source||d.client||'')}">${esc(d.source||d.client||'—')}</td>
           <td class="mono" title="${esc(row.correlationId||'')}"><bdi dir="ltr">${esc(row.correlationId||'—')}</bdi></td>
         </tr>`;}).join('')}
-      </tbody></table></div>
-      <p class="a-empty" style="padding:7px 14px">${T0.showing} <bdi dir="ltr">${rows.length}</bdi> ${esc(T0.of)} <bdi dir="ltr">${total.length}</bdi> ${esc(T0.events)} · <bdi dir="ltr">${durableRows().length}</bdi> ${esc(T0.durable)} · <bdi dir="ltr">${sessionRows().length}</bdi> ${esc(T0.session)}</p>`;
+      </tbody></table></div>`;
     wrap.querySelectorAll('tr[data-a-row]').forEach(node=>{
       const pick=()=>{state.selectedKey=node.dataset.aRow;render();};
       node.addEventListener('click',pick);
@@ -715,7 +767,7 @@ export function mountAuditSurface({stage,registry,workspace,runtimeAdapter=null}
           <span class="a-badge">${index+1}</span>
           <span class="a-node-time"><bdi dir="ltr">${esc(fmtTime(item.occurredAt))}</bdi></span>
           <strong class="a-node-actor" dir="auto">${esc(item.actor)}</strong>
-          <span class="a-node-row"><span class="a-node-action"><bdi dir="ltr">${esc(item.action)}</bdi></span><span class="a-node-target"><bdi dir="ltr">${esc(item.target||'—')}</bdi></span></span>
+          <span class="a-node-row"><span class="a-node-action" title="${esc(item.action)}"><bdi dir="ltr">${esc(item.action)}</bdi></span><span class="a-node-target" title="${esc(item.target||'')}"><bdi dir="ltr">${esc(item.target||'—')}</bdi></span></span>
           <span class="a-node-foot"><span data-tone="${toneFor(item.outcome)}" dir="auto">${esc(outcomeLabel(item.outcome))}</span><span class="a-node-src" dir="auto">${esc((item.details||{}).source||(item.details||{}).client||item.plane)}</span></span>
         </article>`).join('')}</div>`;
     }
@@ -833,6 +885,21 @@ export function mountAuditSurface({stage,registry,workspace,runtimeAdapter=null}
     const row=selectedRow();
     if(row&&!state.annotateTouched&&document.activeElement!==eventInput)eventInput.value=row.eventId;
     if(document.activeElement!==noteInput&&state.settlement?.state==='SUCCESS'&&state.clearNote){noteInput.value='';state.clearNote=false;}
+  };
+
+  /* ---------------------------------------------------------- BOTTOM ACTION / STATUS BAR (AUD-V2) */
+  const renderActionBar=()=>{
+    const T0=T(),notes=allAnnotations().length;
+    const bar=q('[data-a-actionbar]');
+    if(!bar)return;
+    bar.setAttribute('aria-label',T0.actionBarLabel);
+    bar.title=T0.lockFull;
+    q('[data-a-locktitle]').textContent=T0.lockTitle;
+    q('[data-a-locksub]').textContent=T0.lockSub;
+    q('[data-a-locksub]').title=T0.lockFull;
+    q('[data-a-mutable]').textContent=`${T0.mutableTitle} · ${notes}`;
+    q('[data-a-newnote]').textContent=T0.newNote;
+    q('[data-a-newnote-host]').setAttribute('aria-label',T0.newNote);
   };
 
   /* ---------------------------------------------------------- LEFT — audit record desk */
@@ -977,7 +1044,7 @@ export function mountAuditSurface({stage,registry,workspace,runtimeAdapter=null}
   /* ---------------------------------------------------------- full render */
   function render(){
     try{adapter.refresh();}catch{/* provenance refresh is best-effort */}
-    renderHead();renderCommandBar();renderTable();renderChain();renderDeep();renderSettle();renderAnnotHead();
+    renderHead();renderCommandBar();renderTable();renderChain();renderDeep();renderSettle();renderAnnotHead();renderActionBar();
     renderLeft();renderRight();renderBottom();
     return adapter.truth();
   }

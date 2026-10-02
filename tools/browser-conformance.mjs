@@ -187,10 +187,36 @@ try {
     oracle: 'whole-edge double-click is inert; authorized label and F2 edit routes converge on relation.edit'
   }, async page => {
     await ready(page, 'enterprise');
+    /* Controller bounded correction (OD-20260916-044; F-SH1-01; precedent db41d0f/490b6a4 oracle repairs).
+       Ground truth (probed): edge 0 (`APP-WEB-01:relation:0`) is HORIZONTAL — its `<line>` geometric
+       bounding box is {w:249,h:0} — Playwright visibility requires a non-empty box, so a genuinely
+       painted horizontal SVG line (1.5px stroke / 18px transparent hit-target) is always "invisible"
+       to the actionability model even though elementFromPoint hittably returns it for a human cursor.
+       The oracle's INTENT is: a rendered, editable relation edge + label exists to falsify the
+       whole-edge/label/F2 routes on. Correction: select the FIRST edge carrying a PAINTED
+       (non-transparent stroke), non-degenerate (width>0 AND height>0, i.e. diagonal) `relation-line`
+       with computed visibility plus a rendered label — such edges exist (probe: edges 2/3/4) and are
+       fully actionability-valid. No fixture data, geometry, adapter or DOM order is touched; if no
+       such rendered edge exists the guard fails truthfully. */
+    const renderedEdge = await page.evaluate(() => {
+      const edges = [...document.querySelectorAll('.spatial-canvas [data-edge]')];
+      for (let i = 0; i < edges.length; i++) {
+        const lines = [...edges[i].querySelectorAll('line')];
+        const li = lines.findIndex(l => {
+          const r = l.getBoundingClientRect(), cs = getComputedStyle(l);
+          const painted = cs.stroke && cs.stroke !== 'none' && cs.stroke !== 'transparent' && !/rgba?\(\s*0\s*,\s*0\s*,\s*0\s*,\s*0\s*\)/.test(cs.stroke) && Number(cs.strokeOpacity || 1) > 0;
+          const visible = cs.display !== 'none' && cs.visibility !== 'hidden' && Number(cs.opacity) > 0;
+          return painted && visible && r.width > 0 && r.height > 0;
+        });
+        if (li >= 0 && edges[i].querySelector('[data-relation-label]')) return { edge: i, line: li };
+      }
+      return { edge: -1, line: -1 };
+    });
     const composer = page.locator('.relation-composer').filter({ visible: true }).first(),
-      edge = page.locator('.spatial-canvas [data-edge]').first(),
-      line = edge.locator('line').filter({ visible: true }).first(),
+      edge = page.locator('.spatial-canvas [data-edge]').nth(renderedEdge.edge),
+      line = edge.locator('line').nth(renderedEdge.line),
       label = edge.locator('[data-relation-label]').filter({ visible: true }).first();
+    if (renderedEdge.edge < 0) assert(false, `no painted non-degenerate relation edge exists on the enterprise canvas :: ${JSON.stringify(renderedEdge)}`);
     const routeProbe = await page.evaluate(() => ({
       relationUiSharesPublishedSpatial: CEPFoundation.relationUI?.spatial === CEPFoundation.spatial,
       relationUiSpatialConnected: Boolean(CEPFoundation.relationUI?.spatial?.host?.isConnected),

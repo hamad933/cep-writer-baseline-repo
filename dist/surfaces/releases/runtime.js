@@ -253,6 +253,17 @@ export function createReleasesSurfaceRuntime({adapter,commands}                 
     hideForeignRegionSiblings();
     ensureToolbar(ws,ctx);
     ensureBanner(ctx);
+    /* The shared BottomDeepWork shelf only re-reads its provider when the shared owner renders
+       it, so a language flip with the shelf open would keep the previous session's projection.
+       Ask the shared owner to re-render (consumer-side invocation of shared mechanics — this
+       unit writes no shared file) so the surface-owned deep projection re-localises. */
+    try{
+      const shelf=document.querySelector('#bottomShelf');
+      if(shelf?.dataset?.state==='open'){
+        const wave3=(globalThis       ).CEPFoundation?.wave3Assembly;
+        if(typeof wave3?.renderBottom==='function')wave3.renderBottom();
+      }
+    }catch(error){console.warn('[W05-RELEASES] bottom shelf refresh failed',error)}
     renderedLocale=ctx.locale;
     renderedDir=(globalThis       ).document?.documentElement?.dir||'';
     bindCenter();

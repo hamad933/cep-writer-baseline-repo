@@ -144,12 +144,12 @@ const STYLE=`
 .ent-meta .state-token[data-state=error]{border-color:var(--bad);color:var(--bad);background:var(--bads)}
 .ent-meta .state-token[data-state=neutral]{color:var(--text2)}
 /* ---- view tabs + contextual tools ---- */
-.enterprise-modebar{display:flex;align-items:center;gap:2px;padding:0 10px;border-bottom:1px solid var(--line);background:var(--bg1);overflow-x:auto;overflow-y:hidden;flex:none}
+.enterprise-modebar{display:flex;align-items:center;gap:2px 2px;padding:0 10px 6px;border-bottom:1px solid var(--line);background:var(--bg1);overflow-x:auto;overflow-y:hidden;flex:none;flex-wrap:wrap}
 .enterprise-modebar .ent-tab{appearance:none;border:0;background:transparent;color:var(--text2);font:inherit;font-size:13px;font-weight:500;padding:12px 12px 10px;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px;display:inline-flex;align-items:center;gap:7px}
 .enterprise-modebar .ent-tab:hover{color:var(--text);background:var(--as)}
 .enterprise-modebar .ent-tab:focus-visible{outline:2px solid var(--focus);outline-offset:-3px}
 .enterprise-modebar .ent-tab[aria-pressed=true]{color:var(--text);border-bottom-color:var(--accent);font-weight:650}
-.ent-tools{margin-inline-start:auto;display:flex;align-items:center;gap:4px;padding-inline-start:12px;padding-inline-end:6px;flex:none;position:sticky;inset-inline-end:0;z-index:2;background:var(--bg1)}
+.ent-tools{margin-inline-start:auto;display:flex;align-items:center;gap:4px;padding-inline-start:12px;padding-inline-end:6px;flex:none;position:relative;z-index:2;background:var(--bg1)}
 .ent-tools .ent-btn{height:28px;padding:0 9px}
 .ent-tools .ent-hint{font-size:11px;color:var(--text3);padding-inline-end:4px;white-space:nowrap}
 /* ---- status + canvas ---- */
@@ -410,9 +410,55 @@ export function renderEnterpriseSurface(root,composition,{dir='ltr',spatialView=
     </div>`;
   };
 
+  /* SINGLE SHARED SPATIAL INSTANCE (SH-1 wiring correction).
+     `spatialView` is the instance main.ts constructed and bound to RelationInteractionOwner.
+     Every draw replaces root.innerHTML (single-container replacement render), which detaches
+     that instance's host node. Instead of constructing a second/third SpatialView for the
+     visible Enterprise canvas, the SAME host node is re-hosted into the freshly rendered
+     canvas slot, so the central relation owner stays bound to the canvas the user can see
+     and select in. */
+  const inspectFromCanvas=(ids,route,redraw)=>{
+    const id=Array.isArray(ids)?ids.at(-1)||null:(ids||null);
+    composition.bus.execute('enterprise.inspect',{id,route});
+    setStatus(id?`${T().cmdInspect}: ${id}`:T().noSelection,id?'success':'neutral');
+    if(redraw)draw();else refreshRegions();
+  };
+  const wireSharedSpatial=view=>{
+    const callbacks=view&&view.callbacks;if(!callbacks)return;
+    if(!callbacks.__enterpriseBase)callbacks.__enterpriseBase={select:callbacks.select,open:callbacks.open};
+    const base=callbacks.__enterpriseBase;
+    callbacks.select=ids=>{base.select?.(ids);inspectFromCanvas(ids,'shared-spatial-selection',false)};
+    callbacks.open=id=>{base.open?.(id);inspectFromCanvas([id],'shared-spatial-open',true)};
+  };
+  const ensureSpatial=host=>{
+    const shared=spatialView||spatial;
+    if(!shared){
+      spatial=new SpatialView(host,nodeOptions(),composition.domain.relations.project(),{
+        select:ids=>inspectFromCanvas(ids,'shared-spatial-selection',false),
+        open:id=>inspectFromCanvas([id],'shared-spatial-open',true),
+        change:()=>{}
+      });
+      spatial.setActiveMode('author');
+      requestAnimationFrame?.(()=>spatial.fit?.());
+      return spatial;
+    }
+    if(shared.host!==host){
+      try{
+        for(const attribute of Array.from(host.attributes||[]))shared.host.setAttribute(attribute.name??attribute[0],attribute.value??attribute[1]);
+        if(typeof host.replaceWith==='function')host.replaceWith(shared.host);
+      }catch(error){if(typeof console!=='undefined')console.warn('[W03-ENTERPRISE] shared spatial re-host skipped',error)}
+    }
+    spatial=shared;
+    wireSharedSpatial(shared);
+    spatial.model.nodes=nodeOptions();
+    spatial.model.edges=composition.domain.relations.project();
+    spatial.setActiveMode('author');
+    spatial.render();
+    requestAnimationFrame?.(()=>spatial.fit?.());
+    return spatial;
+  };
   const draw=({preserveSpatial=false}={})=>{
     const s=composition.domain.snapshot(),editAvailability=composition.bus.availability('enterprise.edit'),handoffAvailability=composition.bus.availability('enterprise.handoff');
-    const existingSpatial=preserveSpatial?spatial:null;
     const t=T(),ws=foundation()?.workspace,useShell=typeof ws?.region==='function';
     if(!useShell)scheduleShellProjection();
     const pendingFocus=captureFocus();
@@ -469,16 +515,7 @@ export function renderEnterpriseSurface(root,composition,{dir='ltr',spatialView=
 
     if(mode==='topology'){
       const host=root.querySelector('[data-enterprise-spatial]');
-      if(existingSpatial&&existingSpatial.host===host)spatial=existingSpatial;
-      else{
-        spatial=new SpatialView(host,nodeOptions(),composition.domain.relations.project(),{
-          select:ids=>{const id=ids.at(-1)||null;composition.bus.execute('enterprise.inspect',{id,route:'shared-spatial-selection'});setStatus(id?`${T().cmdInspect}: ${id}`:T().noSelection,id?'success':'neutral');refreshRegions()},
-          open:id=>{composition.bus.execute('enterprise.inspect',{id,route:'shared-spatial-open'});setStatus(`${T().cmdInspect}: ${id}`,'success');draw()},
-          change:()=>{}
-        });
-        spatial.setActiveMode('author');
-        requestAnimationFrame?.(()=>spatial.fit?.());
-      }
+      if(host)ensureSpatial(host);
     }
     if(!editAvailability.enabled&&s.authoring==='PUBLISHED')setStatus(T().immutableNotice,'neutral');
     else if(!handoffAvailability.enabled&&handoffAvailability.code==='BASELINE_STALE')setStatus(T().staleNotice,'neutral');

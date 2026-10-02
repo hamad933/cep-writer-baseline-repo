@@ -3,12 +3,12 @@
   "classification": "REPRODUCIBLE_BROWSER_CONFORMANCE_RECEIPT_NOT_OWNER_ACCEPTANCE",
   "command": "npm run browser:test",
   "sourceFoundationBaseline": "CEP-FR-E18-ANALYTICAL-COMPARE-COMPLETION",
-  "sourceCandidate": "CANONICAL_SOURCE_TREE_SHA256:0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
-  "sourceCanonicalTreeSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
-  "canonicalSourceFileCount": 338,
+  "sourceCandidate": "CANONICAL_SOURCE_TREE_SHA256:107c6a23cce9642d524d903800efa7e7932af56aa98249461d86c85f9e36c664",
+  "sourceCanonicalTreeSha256": "107c6a23cce9642d524d903800efa7e7932af56aa98249461d86c85f9e36c664",
+  "canonicalSourceFileCount": 339,
   "currentUse": "EXACT_CURRENT_CANONICAL_SOURCE_EXECUTION_RECEIPT",
-  "executionStatus": "BLOCKED_OR_FAILED",
-  "prerequisite": "Install the Playwright package and its matching Chromium binary (npx playwright install chromium-headless-shell), or set CEP_BROWSER_EXECUTABLE to a compatible local executable.",
+  "executionStatus": "EXECUTED_PASS",
+  "prerequisite": "SATISFIED: Playwright launched a compatible local Chromium executable and completed every declared flow.",
   "declaredFlows": [
     "workspace.transient-and-pane-lifecycle",
     "spatial.selection-connect-canonical-edge",
@@ -29,8 +29,8 @@
   },
   "summary": {
     "total": 6,
-    "pass": 4,
-    "fail": 2
+    "pass": 6,
+    "fail": 0
   },
   "flows": [
     {
@@ -152,9 +152,15 @@
       "action": "double-click whole edge, double-click label, close, then press F2 on edge",
       "owner": "RelationInteractionOwner",
       "oracle": "whole-edge double-click is inert; authorized label and F2 edit routes converge on relation.edit",
-      "status": "FAIL",
-      "error": "visible editable Enterprise relation edge/label is unavailable for route falsification :: {\"relationUiSharesPublishedSpatial\":false,\"relationUiSpatialConnected\":false,\"publishedSpatialConnected\":false,\"relationUiSelection\":{\"schema\":\"SpatialSelectionReceipt@1\",\"ownerId\":\"SpatialSelectionNavigationKernel\",\"contractVersion\":\"1.0.0\",\"projectionId\":\"SpatialModelProjection\",\"projectionOwner\":\"SpatialModelCompatibilityProjection\",\"activeMode\":\"author\",\"policyRevision\":\"FW-C-NEIGHBOR-01\",\"revision\":0,\"action\":\"descriptor\",\"selectedIds\":[],\"selectionCount\":0,\"focusId\":\"APP-WEB-01\",\"anchorId\":\"APP-WEB-01\"},\"publishedSpatialSelection\":{\"schema\":\"SpatialSelectionReceipt@1\",\"ownerId\":\"SpatialSelectionNavigationKernel\",\"contractVersion\":\"1.0.0\",\"projectionId\":\"SpatialModelProjection\",\"projectionOwner\":\"SpatialModelCompatibilityProjection\",\"activeMode\":\"author\",\"policyRevision\":\"FW-C-NEIGHBOR-01\",\"revision\":0,\"action\":\"descriptor\",\"selectedIds\":[],\"selectionCount\":0,\"focusId\":\"APP-WEB-01\",\"anchorId\":\"APP-WEB-01\"},\"adapterRelationCount\":8,\"publishedSpatialEdgeCount\":8,\"canvases\":[{\"connected\":true,\"hidden\":false,\"edges\":8,\"labels\":8,\"visibleRect\":{\"width\":694,\"height\":427.359375}}]}",
-      "pageErrors": []
+      "status": "PASS",
+      "evidence": {
+        "harnessDomain": "enterprise.editable-provider-boundary",
+        "wholeEdgeOpened": false,
+        "convergedReceipts": 2,
+        "owners": [
+          "RelationInteractionOwner"
+        ]
+      }
     },
     {
       "id": "central-change-reuse",
@@ -162,9 +168,134 @@
       "action": "select two objects on each consumer and inspect central selection policy plus provider-specific availability",
       "owner": "ActionAvailabilityCore + RelationInteractionOwner",
       "oracle": "policy revision/action owner are reused while availability remains provider-truthful",
-      "status": "FAIL",
-      "error": "Enterprise editable boundary did not remain available: {\"consumer\":\"enterprise\",\"selectedIds\":[\"CTL-WAF-01\",\"SIM-ATK-01\"],\"readOnly\":false,\"policyRevision\":\"RELATION-CENTRAL-04\",\"availabilityOwner\":\"ActionAvailabilityCore\",\"availability\":{\"action\":\"connect\",\"policyId\":\"connect\",\"visible\":false,\"enabled\":false,\"reason\":\"Selection cardinality must be between 2 and 2\",\"code\":\"SELECTION_COUNT\",\"selectionCount\":0,\"selectedTypes\":[]},\"actionOwner\":\"RelationInteractionOwner\",\"relationUiSharesPublishedSpatial\":false,\"relationUiSelection\":{\"schema\":\"SpatialSelectionReceipt@1\",\"ownerId\":\"SpatialSelectionNavigationKernel\",\"contractVersion\":\"1.0.0\",\"projectionId\":\"SpatialModelProjection\",\"projectionOwner\":\"SpatialModelCompatibilityProjection\",\"activeMode\":\"author\",\"policyRevision\":\"FW-C-NEIGHBOR-01\",\"revision\":0,\"action\":\"descriptor\",\"selectedIds\":[],\"selectionCount\":0,\"focusId\":\"APP-WEB-01\",\"anchorId\":\"APP-WEB-01\"},\"publishedSpatialSelection\":{\"schema\":\"SpatialSelectionReceipt@1\",\"ownerId\":\"SpatialSelectionNavigationKernel\",\"contractVersion\":\"1.0.0\",\"projectionId\":\"SpatialModelProjection\",\"projectionOwner\":\"SpatialModelCompatibilityProjection\",\"activeMode\":\"author\",\"policyRevision\":\"FW-C-NEIGHBOR-01\",\"revision\":0,\"action\":\"descriptor\",\"selectedIds\":[],\"selectionCount\":0,\"focusId\":\"APP-WEB-01\",\"anchorId\":\"APP-WEB-01\"},\"relationUiSpatialConnected\":false,\"publishedSpatialConnected\":false}",
-      "pageErrors": []
+      "status": "PASS",
+      "evidence": [
+        {
+          "consumer": "visualize",
+          "selectedIds": [
+            "b6-rep-ku-d03-0001",
+            "b6-rep-ku-d03-0004"
+          ],
+          "readOnly": true,
+          "policyRevision": "RELATION-CENTRAL-04",
+          "availabilityOwner": "ActionAvailabilityCore",
+          "availability": {
+            "action": "connect",
+            "policyId": "connect",
+            "visible": false,
+            "enabled": false,
+            "reason": "Active mode does not permit this action",
+            "code": "MODE_FORBIDS_ACTION",
+            "selectionCount": 2,
+            "selectedTypes": [
+              "unspecified"
+            ]
+          },
+          "actionOwner": "RelationInteractionOwner",
+          "relationUiSharesPublishedSpatial": true,
+          "relationUiSelection": {
+            "schema": "SpatialSelectionReceipt@1",
+            "ownerId": "SpatialSelectionNavigationKernel",
+            "contractVersion": "1.0.0",
+            "projectionId": "SpatialModelProjection",
+            "projectionOwner": "SpatialModelCompatibilityProjection",
+            "activeMode": "recorded",
+            "policyRevision": "FW-C-NEIGHBOR-01",
+            "revision": 2,
+            "action": "descriptor",
+            "selectedIds": [
+              "b6-rep-ku-d03-0001",
+              "b6-rep-ku-d03-0004"
+            ],
+            "selectionCount": 2,
+            "focusId": "b6-rep-ku-d03-0004",
+            "anchorId": "b6-rep-ku-d03-0001"
+          },
+          "publishedSpatialSelection": {
+            "schema": "SpatialSelectionReceipt@1",
+            "ownerId": "SpatialSelectionNavigationKernel",
+            "contractVersion": "1.0.0",
+            "projectionId": "SpatialModelProjection",
+            "projectionOwner": "SpatialModelCompatibilityProjection",
+            "activeMode": "recorded",
+            "policyRevision": "FW-C-NEIGHBOR-01",
+            "revision": 2,
+            "action": "descriptor",
+            "selectedIds": [
+              "b6-rep-ku-d03-0001",
+              "b6-rep-ku-d03-0004"
+            ],
+            "selectionCount": 2,
+            "focusId": "b6-rep-ku-d03-0004",
+            "anchorId": "b6-rep-ku-d03-0001"
+          },
+          "relationUiSpatialConnected": true,
+          "publishedSpatialConnected": true
+        },
+        {
+          "consumer": "enterprise",
+          "selectedIds": [
+            "CTL-WAF-01",
+            "SIM-ATK-01"
+          ],
+          "readOnly": false,
+          "policyRevision": "RELATION-CENTRAL-04",
+          "availabilityOwner": "ActionAvailabilityCore",
+          "availability": {
+            "action": "connect",
+            "policyId": "connect",
+            "visible": true,
+            "enabled": true,
+            "reason": "",
+            "code": "AVAILABLE",
+            "selectionCount": 2,
+            "selectedTypes": [
+              "Security Control",
+              "Simulation-local Device"
+            ]
+          },
+          "actionOwner": "RelationInteractionOwner",
+          "relationUiSharesPublishedSpatial": true,
+          "relationUiSelection": {
+            "schema": "SpatialSelectionReceipt@1",
+            "ownerId": "SpatialSelectionNavigationKernel",
+            "contractVersion": "1.0.0",
+            "projectionId": "SpatialModelProjection",
+            "projectionOwner": "SpatialModelCompatibilityProjection",
+            "activeMode": "author",
+            "policyRevision": "FW-C-NEIGHBOR-01",
+            "revision": 2,
+            "action": "descriptor",
+            "selectedIds": [
+              "CTL-WAF-01",
+              "SIM-ATK-01"
+            ],
+            "selectionCount": 2,
+            "focusId": "SIM-ATK-01",
+            "anchorId": "CTL-WAF-01"
+          },
+          "publishedSpatialSelection": {
+            "schema": "SpatialSelectionReceipt@1",
+            "ownerId": "SpatialSelectionNavigationKernel",
+            "contractVersion": "1.0.0",
+            "projectionId": "SpatialModelProjection",
+            "projectionOwner": "SpatialModelCompatibilityProjection",
+            "activeMode": "author",
+            "policyRevision": "FW-C-NEIGHBOR-01",
+            "revision": 2,
+            "action": "descriptor",
+            "selectedIds": [
+              "CTL-WAF-01",
+              "SIM-ATK-01"
+            ],
+            "selectionCount": 2,
+            "focusId": "SIM-ATK-01",
+            "anchorId": "CTL-WAF-01"
+          },
+          "relationUiSpatialConnected": true,
+          "publishedSpatialConnected": true
+        }
+      ]
     },
     {
       "id": "runtime-causal-consequence",
@@ -229,8 +360,8 @@
         "width": 900,
         "height": 980
       },
-      "bytes": 87753,
-      "sha256": "e3fcc1c3a22f40bef70bbc7b16951abffee5a1427204e6250a616cc637dda1ce",
+      "bytes": 88741,
+      "sha256": "ae1209a3acc2c476e971bff3fffe66c54af3b45dae2fee87436e8723fb0b7970",
       "scope": "EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE"
     },
     {
@@ -241,8 +372,8 @@
         "width": 1440,
         "height": 980
       },
-      "bytes": 319022,
-      "sha256": "c57c532a7bc7e98355296eda35d8f36631c320b827e23218b3e2d1a15744a58b",
+      "bytes": 318718,
+      "sha256": "079371dbc93fe1b15448ed7efbdcaef8e026a8b237748b51ac9597f6f4ee708d",
       "scope": "EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE"
     },
     {
@@ -253,8 +384,8 @@
         "width": 1440,
         "height": 980
       },
-      "bytes": 214910,
-      "sha256": "97c57110f448d03f473a2667f91c9f6fdf9fba8e14000b4452332a27d57d0e1e",
+      "bytes": 208867,
+      "sha256": "1b70b019164f8d8a0e851dd37c16467b938701f88cae55cca3d00be4566817b2",
       "scope": "EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE"
     }
   ],

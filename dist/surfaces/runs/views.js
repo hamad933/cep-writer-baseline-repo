@@ -107,9 +107,9 @@ function alertList(w,c){
     ${rows.length?`<div class="runs-tablewrap"><table class="runs-table"><thead><tr>
         <th>${esc(t.alerts.time)}</th><th>${esc(t.alerts.alert)}</th><th>${esc(t.alerts.severity)}</th><th>${esc(t.alerts.status)}</th></tr></thead>
       <tbody>${rows.map(alert=>alertRow(alert,alert.id===state.selectedId,state.highlight,state.query?.trim().toLowerCase())).join('')}</tbody></table></div>
-      <div class="runs-pager"><button class="runs-pagebtn" type="button" disabled aria-label="previous">‹</button>
-        <span>1–${rows.length} of ${rows.length}</span>
-        <button class="runs-pagebtn" type="button" disabled aria-label="next">›</button></div>`
+      <div class="runs-pager"><button class="runs-pagebtn" type="button" disabled aria-label="${esc(t.alerts.prev)}">‹</button>
+        <span>${ltr(`1–${rows.length}`)} ${esc(t.alerts.of)} ${ltr(String(rows.length))}</span>
+        <button class="runs-pagebtn" type="button" disabled aria-label="${esc(t.alerts.next)}">›</button></div>`
     :`<div class="runs-empty">${icon('filter',16)}<strong>${esc(t.alerts.none)}</strong><span>${esc(t.alerts.filters)}</span></div>`}`;
 }
 export function renderOperations(w,c){

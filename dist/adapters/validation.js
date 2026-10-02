@@ -27,28 +27,51 @@ export function createValidationConsumerAdapter(){
   const addFinding=(run,ruleId,code,message,locator='')=>run.technicalFindings.push({id:`TF-${run.requestId}-${String(run.technicalFindings.length+1).padStart(2,'0')}`,ruleId,code,severity:'ERROR',message,locator,formalReviewFinding:false,formalReviewAuthority:false});
   const validate=async raw=>{
     const input=String(raw??''),requestId=`VR-${String(++state.sequence).padStart(4,'0')}`,requestedAt=now();state.processing=true;
-    const run={requestId,resultId:null,requestedAt,completedAt:null,inputDigest:digest(input),inputDigestAlgorithm:'FNV1A32_LOCAL_REQUEST_IDENTITY_ONLY',identity:null,status:'RUNNING',technicalFindings:[],limitations:['Technical validation only','No admission/review/mastery authority']};
+    const run    ={requestId,resultId:null,requestedAt,completedAt:null,inputDigest:digest(input),inputDigestAlgorithm:'FNV1A32_LOCAL_REQUEST_IDENTITY_ONLY',identity:null,status:'RUNNING',technicalFindings:[],evaluatedRules:['JSON_PARSE','VALIDATOR_EXCEPTION'],limitations:['Technical validation only','No admission/review/mastery authority']};
     state.runs.push(run);state.last=run;provenance.refresh();await Promise.resolve();
-    let parsed=null;try{parsed=JSON.parse(input)}catch{addFinding(run,'JSON_PARSE','INVALID_JSON','Input must be valid JSON.','$')}
-    if(parsed&&typeof parsed==='object'&&!Array.isArray(parsed)){
+    try{
+    let parsed=null,parseFailed=false;
+    try{parsed=JSON.parse(input)}catch{parseFailed=true;addFinding(run,'JSON_PARSE','INVALID_JSON','Input must be valid JSON.','$')}
+    if(!parseFailed&&parsed&&typeof parsed==='object'&&!Array.isArray(parsed)){
+      /* Every rule this run actually evaluated is recorded so the projection never reports an
+         unchecked rule as PASS (truthful findings only — never a fabricated result). */
+      run.evaluatedRules.push('ROOT_OBJECT_REQUIRED','ARTIFACT_REF_REQUIRED','ARTIFACT_DIGEST_REQUIRED','RULESET_IDENTITY_REQUIRED','VALIDATOR_IDENTITY_REQUIRED');
       run.identity=normalizedIdentity(parsed);
       if(!run.identity.artifact.ref)addFinding(run,'ARTIFACT_REF_REQUIRED','ARTIFACT_REF_MISSING','artifactRef is required.','$.artifactRef');
       if(!sha256Like(run.identity.artifact.digest))addFinding(run,'ARTIFACT_DIGEST_REQUIRED','ARTIFACT_DIGEST_MISSING','artifactDigest must be an exact SHA-256 identity.','$.artifactDigest');
       if(!run.identity.ruleset.id||!run.identity.ruleset.revision||!sha256Like(run.identity.ruleset.digest))addFinding(run,'RULESET_IDENTITY_REQUIRED','RULESET_IDENTITY_MISSING','Exact ruleset id/revision/digest are required.','$.ruleset');
       if(!run.identity.validator.id||!run.identity.validator.version||!sha256Like(run.identity.validator.digest))addFinding(run,'VALIDATOR_IDENTITY_REQUIRED','VALIDATOR_IDENTITY_MISSING','Exact validator id/version/digest are required.','$.validator');
+      const validatorWellFormed=!!(run.identity.validator.id&&run.identity.validator.version&&sha256Like(run.identity.validator.digest));
+      const rulesetWellFormed=!!(run.identity.ruleset.id&&run.identity.ruleset.revision&&sha256Like(run.identity.ruleset.digest));
       const validatorAvailable=run.identity.validator.id===VALIDATION_VALIDATOR_IDENTITY.id&&run.identity.validator.version===VALIDATION_VALIDATOR_IDENTITY.version&&run.identity.validator.digest===VALIDATION_VALIDATOR_IDENTITY.digest;
       const rulesetAvailable=run.identity.ruleset.id===VALIDATION_RULESET_IDENTITY.id&&run.identity.ruleset.revision===VALIDATION_RULESET_IDENTITY.revision&&run.identity.ruleset.digest===VALIDATION_RULESET_IDENTITY.digest;
-      if(run.identity.validator.id&&run.identity.validator.version&&sha256Like(run.identity.validator.digest)&&!validatorAvailable)addFinding(run,'VALIDATOR_UNAVAILABLE','VALIDATOR_UNAVAILABLE','Declared validator identity is unavailable in this bounded local consumer.','$.validator');
-      if(run.identity.ruleset.id&&run.identity.ruleset.revision&&sha256Like(run.identity.ruleset.digest)&&!rulesetAvailable)addFinding(run,'RULESET_UNAVAILABLE','RULESET_UNAVAILABLE','Declared ruleset identity is unavailable in this bounded local consumer.','$.ruleset');
-      if(validatorAvailable&&rulesetAvailable&&(!('payload' in parsed)||typeof parsed.payload!=='object'||parsed.payload===null||Array.isArray(parsed.payload)))addFinding(run,'PAYLOAD_OBJECT_REQUIRED','PAYLOAD_INVALID','payload must be a JSON object for this exact ruleset.','$.payload');
+      if(validatorWellFormed){run.evaluatedRules.push('VALIDATOR_UNAVAILABLE');if(!validatorAvailable)addFinding(run,'VALIDATOR_UNAVAILABLE','VALIDATOR_UNAVAILABLE','Declared validator identity is unavailable in this bounded local consumer.','$.validator');}
+      if(rulesetWellFormed){run.evaluatedRules.push('RULESET_UNAVAILABLE');if(!rulesetAvailable)addFinding(run,'RULESET_UNAVAILABLE','RULESET_UNAVAILABLE','Declared ruleset identity is unavailable in this bounded local consumer.','$.ruleset');}
+      if(validatorAvailable&&rulesetAvailable){run.evaluatedRules.push('PAYLOAD_OBJECT_REQUIRED');if(!('payload' in parsed)||typeof parsed.payload!=='object'||parsed.payload===null||Array.isArray(parsed.payload))addFinding(run,'PAYLOAD_OBJECT_REQUIRED','PAYLOAD_INVALID','payload must be a JSON object for this exact ruleset.','$.payload');}
       const unavailable=run.technicalFindings.some(f=>f.code==='VALIDATOR_UNAVAILABLE'||f.code==='VALIDATOR_IDENTITY_MISSING'||f.code==='RULESET_UNAVAILABLE'||f.code==='RULESET_IDENTITY_MISSING');
       run.status=unavailable?'UNAVAILABLE':run.technicalFindings.length?'TECHNICALLY_INVALID':'TECHNICALLY_VALID';
-    }else if(parsed!==null){addFinding(run,'ROOT_OBJECT_REQUIRED','ROOT_NOT_OBJECT','Validation input must be a JSON object.','$');run.status='TECHNICALLY_INVALID';}
+    }else if(!parseFailed){run.evaluatedRules.push('ROOT_OBJECT_REQUIRED');addFinding(run,'ROOT_OBJECT_REQUIRED','ROOT_NOT_OBJECT','Validation input must be a JSON object.','$');run.status='TECHNICALLY_INVALID';}
     else run.status='TECHNICALLY_INVALID';
-    run.resultId=`RES-${String(state.sequence).padStart(4,'0')}`;run.completedAt=now();state.processing=false;state.last=run;provenance.refresh();return structuredClone(run);
+    }catch(error){
+      /* A validator exception is ERROR — distinct from schema nonconformance, and never a run
+         left RUNNING forever with processing wedged true (which would silently deny re-validation). */
+      const detail=error&&typeof error==='object'&&(error       ).message?String((error       ).message):String(error);
+      addFinding(run,'VALIDATOR_EXCEPTION','VALIDATOR_ERROR',`Validator exception: ${detail}`,'$');run.status='ERROR';
+    }finally{
+      run.resultId=`RES-${String(state.sequence).padStart(4,'0')}`;run.completedAt=now();state.processing=false;state.last=run;provenance.refresh();
+    }
+    return structuredClone(run);
   };
   const resolveRun=(resultId)=>resultId?state.runs.find(run=>run.resultId===resultId||run.requestId===resultId):state.last;
-  const inspect=({resultId,currentIdentity}    ={})=>{const run=resolveRun(resultId);if(!run)return {ok:false,code:'VALIDATION_RESULT_NOT_FOUND'};const current=currentIdentity?normalizedIdentity(currentIdentity):null;const currentMatches=current?sameIdentity(run.identity,current):null;return {ok:true,code:currentMatches===false?'STALE_FOR_CURRENT_ARTIFACT':'VALIDATION_RESULT',result:structuredClone(run),currentIdentityMatches:currentMatches,acceptance:null,formalReviewFinding:false,formalReviewAuthority:false,limitations:[...run.limitations]};};
+  const inspect=({resultId,currentIdentity}    ={})=>{
+    const run=resolveRun(resultId);if(!run)return {ok:false,code:'VALIDATION_RESULT_NOT_FOUND'};
+    const current=currentIdentity?normalizedIdentity(currentIdentity):null;
+    /* A run whose identity never resolved cannot be compared with any current artifact: reporting it
+       as STALE would be a fabricated comparison. Only an actually-resolved identity can mismatch. */
+    const currentMatches=current&&run.identity?sameIdentity(run.identity,current):null;
+    const identityComparison=!current?'NOT_REQUESTED':!run.identity?'UNRESOLVED_RUN_IDENTITY':currentMatches===false?'MISMATCH':'MATCH';
+    return {ok:true,code:currentMatches===false?'STALE_FOR_CURRENT_ARTIFACT':'VALIDATION_RESULT',identityComparison,result:structuredClone(run),currentIdentityMatches:currentMatches,acceptance:null,formalReviewFinding:false,formalReviewAuthority:false,limitations:[...run.limitations]};
+  };
   const findings=({resultId}    ={})=>{const run=resolveRun(resultId);if(!run)return {ok:false,code:'VALIDATION_RESULT_NOT_FOUND',technicalFindings:[]};return {ok:true,code:'TECHNICAL_FINDINGS',resultId:run.resultId,technicalFindings:structuredClone(run.technicalFindings),formalReviewFindings:[],formalReviewAuthority:false};};
   const reviewSnapshot=()=>{const run=state.last;const presentation=createReviewDecisionPresentationSnapshot({id:'validation-review-boundary',title:'Validation review boundary',summary:'Technical validation results remain TechnicalFindings and are never promoted into W04 formal Review Findings by this surface.',state:'READ_ONLY',stateLabel:'Read only',stateMessage:run?`${run.status} · ${run.technicalFindings.length} TechnicalFinding(s)`:'No validation run yet.',direction:'auto',locale:'en',labels:{family:'Validation inspection',criteria:'Criteria',findings:'Formal review findings',decision:'Decision',supersession:'Supersession',unavailable:'Unavailable'},criteria:[{id:'technical-result',label:'Technical validation result',detail:run?`${run.status}; request digest ${run.inputDigest}`:'No run yet.',badge:run?.status||'Empty',tone:run?.status==='TECHNICALLY_INVALID'?'critical':run?.status==='UNAVAILABLE'?'attention':'info'},{id:'boundary',label:'TechnicalFinding ≠ W04 Review Finding',detail:'The shared review projection receives zero formal findings. Any future transformation requires separate governed W04 authority.',badge:'Enforced',tone:'attention'}],findings:[],decision:null,supersession:null,sourceNote:'ReviewDecisionPresentationOwner is presentation-only here and exposes no approve/reject/supersede mutation.'});return Object.freeze({...presentation,findings:[]})};
   return {consumerInput,consumer,state,provider,provenance,collection,validate,inspect,findings,reviewSnapshot,refresh:()=>provenance.refresh(),truth:()=>Object.freeze({surface:'validation',realProductConsumer:true,runCount:state.runs.length,processing:state.processing,technicalFindingCount:state.last?.technicalFindings.length||0,technicalFindingConvertedToFormalReviewFinding:false,formalReviewAuthority:false,acceptanceAuthority:false,profileUsedAsProof:false,exactArtifactRulesetValidatorIdentity:true})};

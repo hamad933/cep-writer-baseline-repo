@@ -165,6 +165,17 @@ export const STYLE = `
 .bk-nostrun strong{font-size:13px}
 .bk-nostrun p{margin:0;font-size:12px;line-height:1.6;color:var(--bk-text2)}
 
+/* ── latest attempt failed (a stale success must never mask a fresh failure) ── */
+.bk-attempt-fail{
+  display:flex;gap:6px 12px;flex-wrap:wrap;align-items:baseline;
+  border:1px solid color-mix(in srgb,var(--bk-bad) 50%,transparent);
+  background:color-mix(in srgb,var(--bk-bad) 9%,transparent);
+  border-radius:var(--bk-r-md);padding:9px 12px;font-size:12px;line-height:1.6;color:var(--bk-text2);
+}
+.bk-attempt-fail strong{font-size:12.5px;color:var(--bk-bad)}
+.bk-attempt-fail bdi{font:700 11px/1.35 var(--mono);color:var(--bk-text)}
+.bk-attempt-fail span{flex:1 1 100%;font-size:11.5px;color:var(--bk-text3)}
+
 /* ── LEFT pane ────────────────────────────────────────────── */
 .bkl{display:grid;gap:12px;min-width:0}
 .bkl-search{position:relative;display:flex;gap:6px}

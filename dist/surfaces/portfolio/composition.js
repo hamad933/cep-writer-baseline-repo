@@ -59,6 +59,9 @@ export function createPortfolioSurfaceComposition({domain=new W04PortfolioDomain
    const last=receipts[receipts.length-1]||null;
    const descriptor=domain.groupingAuthorityDescriptor;
    const outsideView=Math.max(0,domain.records.length-view.counts.references);
+   // Domain-supplied projection text is localized at the presentation boundary (i18n.domainCopy);
+   // an unmapped string is shown verbatim so the projection never diverges from domain truth.
+   const fromDomain=text=>(T.domainCopy&&T.domainCopy[text])||text;
    return {id:`portfolio:${row?.id||'empty'}`,providerId:'portfolio.context',family:'portfolio',subject:row?`${row.title} \u00b7 ${row.state}`:T.subjectNone,eyebrow:T.eyebrow,summary:row?`${row.refType} \u00b7 ${row.state} \u00b7 ${row.groupingState}`:T.summaryEmpty,domainOwner:domain.owner,revisionToken:row?.revisionId||null,lenses:[
      {id:'scope',label:T.lensScope,tabs:[{id:'scope',label:T.lensScopeTab,fields:[
        {id:'view',label:T.fView,value:T.emptyTitle},
@@ -84,9 +87,9 @@ export function createPortfolioSurfaceComposition({domain=new W04PortfolioDomain
      {id:'customization',label:T.lensExport,tabs:[{id:'export',label:T.lensExportTab,fields:[
        {id:'members',label:T.fExportMembers,value:String(exportProjection.members?.length??0)},
        {id:'canonical',label:T.fCanonicalPublication,value:String(exportProjection.canonicalPublication===true)},
-       {id:'limitations',label:T.fLimitations,value:(exportProjection.limitations||[]).join(' \u00b7 ')||T.fLastReceiptNone},
+       {id:'limitations',label:T.fLimitations,value:(exportProjection.limitations||[]).map(fromDomain).join(' \u00b7 ')||T.fLastReceiptNone},
        {id:'persistence',label:T.fPersistence,value:`${domain.persistence?.mode||'EMPTY'} \u00b7 durable ${String(domain.persistence?.durable===true)}`,technical:true},
-       {id:'note',label:T.fExportNote,value:exportProjection.note||T.fExportNoteNone}
+       {id:'note',label:T.fExportNote,value:fromDomain(exportProjection.note)||T.fExportNoteNone}
      ]}]},
      {id:'receipts',label:T.lensReceipts,tabs:[{id:'ledger',label:T.lensReceiptsTab,fields:receiptFields}]}
    ]};}});
