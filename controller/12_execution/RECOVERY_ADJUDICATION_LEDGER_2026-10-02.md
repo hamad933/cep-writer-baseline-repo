@@ -179,3 +179,21 @@ OFFLOAD-02 reported 16 LOST-CANDIDATE groups (`NO_CURRENT_OWNER_FOUND` inside it
 ## §13 OD-087 PROVENANCE — FINAL PRIMARY FINDING
 
 OFFLOAD-01's all-ref (94 refs) + Drive search confirms: `OD-20261002-087` first appears in git at `317f0bb3a0abf3d806692d9b5e75a70716db880b` as same-commit self-referential projections; **no independent first-party Owner artifact for `CURRENT_DIRECT_OWNER_2026_10_02_MULTI_WRITER_PARALLEL_CORRECTION` exists in git or Drive** (older OD-039/043/081 independently support the parallelism *principle*). PRIMARY RULING (unchanged, now precisely grounded): OD-087's substance is Owner-mandated for this mission by the Owner's own current recovery brief (which states the identical rule); OD-079 gates pass; OD-085 remains historical. The provenance-phrase gap is recorded as an honest caveat, not a blocker — and if the Owner withdraws/corrects the brief, OD-087 provenance must be re-proven. This matches OFFLOAD-01's `UNRESOLVED_FROM_AVAILABLE_EVIDENCE` without adopting it as a rejection.
+
+## §14 FINAL GATE BATTERY & IDENTITY CHAIN CLOSEOUT
+
+Fresh-clone verification executed against `origin/writer/mi-serial@48530188a833c06b52be609aa952af9a75af7c21` / tree `69714217bed67ec974b11fa5102ad3b68a5383e7` (fresh `git clone`, independent checkout): **52 PASS / 2 FAIL → both failures adjudicated as checker artifacts** → effective **54/54**:
+- `G3.b` "LC-16 literal missing" — the LC table covers all 16 candidates (`LC-01…LC-10` + `LC-10/11/12` row + `LC-13..16` row); checker required a literal token the range notation doesn't produce. Table verified complete by `grep -o "LC-[0-9]*"`.
+- `G11.b` "42 < 43" — arithmetic error in the checker's threshold; 42 = 33 historical post-`d5d7588` commits + exactly 9 recovery commits (`10d5c00`, `5de6dcd`, `cb76794`, `939fabf`, `a4b10d9`, `702896b`, `a5c40af`, `a5124c1`, `4853018`). History intact: `d5d7588` ancestor of HEAD; no force/reset/rewrite.
+
+Battery covered: G1 (fresh-successor single authority/topology, 9 sub-checks) · G2 (no unlabeled serial routing; no present-tense Drive supremacy; root README post-cutover) · G3 (zero-loss sealed with LC index) · G4 (governance interior classified + §0.1) · G5 (H-corpus custody + do-not-promote enforced) · G6 (temporal consistency 4/2 exact-current; stale epochs labeled) · G7 (matrix 23/23 sealed) · G8/G9 (collision check 0 unhandled; all 19 lane IDs + parent/candidate/STOP contract + non-lanes) · G10 (Product delta = pre-existing 2-line CSS only; recovery touched only `controller/**` + `assurance/**` evidence + root `README.md`) · G11 (history + identity) · G12 (Owner-only items isolated) · queue all `CONSUMED`.
+
+Final identity chain additions:
+
+| Moment | HEAD | tree |
+|---|---|---|
+| After consumption/seal batch | `a5124c1ae9d29c8be56d46ccc0395d116d47fc1b` | `f830fee19a16a0285a77d248ac89b08c6f32ebe0` |
+| Battery-tested identity (23-row seal commit) | `48530188a833c06b52be609aa952af9a75af7c21` | `69714217bed67ec974b11fa5102ad3b68a5383e7` |
+| This bookkeeping commit | see `git log` at consumption | — |
+
+Any commit after the battery-tested identity is ledger bookkeeping only (materiality rule: unrelated bookkeeping does not invalidate the battery).
