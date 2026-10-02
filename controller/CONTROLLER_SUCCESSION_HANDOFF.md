@@ -1,7 +1,7 @@
 # CEP — CONTROLLER SUCCESSION HANDOFF
 
 **Role:** supporting continuity only — never authority  
-**Current phase:** `CONTROLLER_ZERO_LOSS_CONVERGENCE`
+**Current phase:** `GITHUB_CUTOVER_COMPLETE__DRIVE_COMPATIBILITY_PROVEN__PRODUCT_EXECUTION_BINDING_NEXT`
 
 A successor must not inherit conclusions from this file blindly.
 
@@ -34,3 +34,7 @@ A successor must not inherit conclusions from this file blindly.
 - Product acceptance, main merge, release, deployment and stack freeze are not implied by control-plane cutover.
 
 This handoff intentionally contains no independent next-action authority. The current state file controls.
+
+## Cutover completion
+
+GitHub-direct successor proof: PASS. Drive-entry successor proof: PASS 16/16. Drive is compatibility/history/evidence only. The next Controller must determine the exact next OD-085 milestone from current Product/evidence truth; this handoff does not independently choose it.

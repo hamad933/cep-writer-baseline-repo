@@ -3,7 +3,7 @@
 **Role:** sole mutable live CEP project/control state  
 **Authority mode:** `GITHUB_CANONICAL`  
 **Cutover event:** `CEP-GITHUB-CUTOVER-2026-10-02-001`  
-**Current phase:** `POST_CUTOVER_DRIVE_COMPATIBILITY_RECONCILIATION`  
+**Current phase:** `GITHUB_CUTOVER_COMPLETE__DRIVE_COMPATIBILITY_PROVEN__PRODUCT_EXECUTION_BINDING_NEXT`  
 **Update mode:** `IN_PLACE_ONLY`
 
 ## Canonical control plane
@@ -69,7 +69,8 @@ The 23 structurally revalidated packets remain candidate execution bindings only
 - GitHub Controller authority cutover payload: `58b8058932a8a34dfb424025466b1359db2cf3fd` / tree `6a3904c2110fa2e238943198537f8862f8fe6b66`
 - GitHub Controller authority cutover verification observation: remote HEAD `0c721d379947c700148ea1758a54073ac6513a2f` / tree `a381bd1c67169b9a84f88ff3614b0050824cb54d`
 - GitHub Controller authority cutover: `GITHUB_CANONICAL__REMOTE_VERIFIED`
-- Drive compatibility reconciliation: `REQUIRED_NEXT__OD_20261002_086`
+- Drive compatibility reconciliation: `COMPLETE__OD_20261002_086`
+- Drive-entry successor recovery proof: `PASS_16_OF_16`
 - Drive-entry successor recovery proof: `REQUIRED_AFTER_DRIVE_RECONCILIATION`
 - Product acceptance: `NOT_AUTHORIZED`
 - main merge: `NOT_AUTHORIZED`
@@ -78,4 +79,4 @@ The 23 structurally revalidated packets remain candidate execution bindings only
 
 ## Next action
 
-Complete OD-086 post-cutover Drive reconciliation in place, then prove a Controller entering from Drive reaches this same GitHub canonical truth. After that, continue Product execution from the exact currently legal OD-085 milestone starting point; do not infer it from historical WM/parallel state.
+Drive reconciliation and Drive-entry successor recovery are complete. Next, bind the exact currently legal OD-085 milestone starting point from current Product/evidence truth. Do not infer the milestone from historical WM/parallel state; re-evaluate W01→W05 completion/retention against the current branch, packet/profile truth and open Enterprise/Runs/H03 findings before Writer mutation.
