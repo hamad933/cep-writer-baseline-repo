@@ -1,0 +1,756 @@
+{
+  "schemaVersion": 1,
+  "kind": "W02_BROWSER_RECEIPT",
+  "classification": "CANDIDATE_ONLY_BROWSER_EVIDENCE__NOT_OWNER_ACCEPTANCE",
+  "command": "node tools/w02-browser-flows.mjs",
+  "browser": "Chromium (Playwright package-local headless shell)",
+  "browserVersion": "Playwright 1.62.1",
+  "transportRuntime": "localhost-http via tools/serve.mjs on 127.0.0.1:43191",
+  "candidate": "WORKTREE_VARIANT:a466afd3bde8",
+  "candidateTreeSha256": "a466afd3bde8ed2c7b039ad4b1e0ee5adbdcb5f7fda0ce5235d550b8d45f7dd7",
+  "canonicalSourceFileCount": 338,
+  "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+  "tree": "a466afd3bde8ed2c7b039ad4b1e0ee5adbdcb5f7fda0ce5235d550b8d45f7dd7",
+  "environment": {
+    "node": "v22.16.0",
+    "engine": "Playwright Chromium",
+    "playwrightResolution": "package-local",
+    "packageDeclaredVersion": "1.62.1",
+    "transport": "localhost-http",
+    "viewports": [
+      "1440x1000",
+      "1024x900"
+    ],
+    "reducedMotion": "reduce",
+    "browserExecutableOverride": false
+  },
+  "capturedAt": "2026-10-02T05:44:11Z",
+  "evidenceLineage": {
+    "identityAlgorithm": "path\\0size\\0sha256\\n (tools/source-tree-identity.mjs)",
+    "candidateIdentity": "WORKTREE_VARIANT:a466afd3bde8",
+    "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "tree": "a466afd3bde8ed2c7b039ad4b1e0ee5adbdcb5f7fda0ce5235d550b8d45f7dd7",
+    "screenshotDirectory": "writer-output/W02/evidence/",
+    "screenshotCount": 2,
+    "note": "Evidence is bound to the exact tree executed by this run; any later source change invalidates it."
+  },
+  "contractFields": [
+    "browser",
+    "browserVersion",
+    "transportRuntime",
+    "candidate",
+    "commit",
+    "tree",
+    "environment",
+    "route",
+    "flow",
+    "preconditions",
+    "actionSequence",
+    "expectedState",
+    "assertions",
+    "screenshots",
+    "evidenceLineage",
+    "fixtureState",
+    "negativeCases",
+    "failureClassification"
+  ],
+  "failureClasses": {
+    "PRODUCT": "Product defect: product code produced the observed wrong state.",
+    "HARNESS": "Harness defect: the probe/eval itself threw or asserted on missing state.",
+    "ENVIRONMENT": "Environment difference that does not implicate product or oracle.",
+    "ORACLE": "Oracle defect: the assertion asks for state the contract does not require.",
+    "EVIDENCE": "Evidence defect: capture/lineage of the produced artifact is unusable.",
+    "LINEAGE": "Lineage defect: the receipt candidate does not match the executed source.",
+    "UNKNOWN": "Evidence cannot yet separate PRODUCT from ORACLE/HARNESS."
+  },
+  "summary": {
+    "total": 10,
+    "pass": 2,
+    "fail": 8
+  },
+  "flows": [
+    {
+      "id": "library-edit-learn-consume-real-consumer-chain",
+      "route": "/?surface=library -> /?surface=learn",
+      "flow": "Edit a Library structured block through the canonical shared Structured command, then prove Learn (second consumer) binds the identical owners and was not mutated by the Library edit",
+      "owner": "StructuredDocumentDomainAdapter + StructuredTransactionHistoryRecoveryOwner (implementation) / W02 (policy)",
+      "oracle": "one mutation + transaction owner across both consumers; Library edit creates exactly one history frame; Learn document untouched; no Library fixture leaks into Learn",
+      "preconditions": "Library donor-compatible working document mounted, Learn canonical source unbound",
+      "actionSequence": [
+        "open library",
+        "execute document.insertBlock",
+        "inspect history frame + owners",
+        "open learn",
+        "inspect owners + snapshot equality"
+      ],
+      "expectedState": {
+        "libraryHistoryDelta": 1,
+        "learnUnchanged": true,
+        "sharedOwners": [
+          "StructuredDocumentDomainAdapter",
+          "StructuredTransactionHistoryRecoveryOwner"
+        ]
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+      "negativeCases": [
+        "Learn must not observe the Library mutation",
+        "no second Structured owner may appear"
+      ],
+      "assertions": [],
+      "screenshots": [],
+      "pageErrors": [],
+      "status": "FAIL",
+      "error": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:43191/?surface=library\", waiting until \"networkidle\"\u001b[22m\n",
+      "failureClassification": "UNKNOWN",
+      "classificationRationale": "Signature not pre-adjudicated; classified UNKNOWN pending evidence.",
+      "repairOwner": "W02",
+      "repairableInW02": false
+    },
+    {
+      "id": "spatial-select-connect-canonical-edge",
+      "route": "/?surface=visualize",
+      "flow": "Select exactly two representations through the composed LEFT region, inspect provider-truthful Connect availability and prove canonical relation truth is unchanged",
+      "owner": "SpatialInteractionKernel + RelationInteractionOwner (implementation) / W02 (policy)",
+      "oracle": "two-item selection preserved; author-only Connect hidden for the read-only Visualize provider; canonical relation count and version unchanged",
+      "preconditions": "Visualize four-view composition mounted, LEFT region composed by mountVisualizeFourViewComposition",
+      "actionSequence": [
+        "open visualize",
+        "click two representation buttons in the composed LEFT region",
+        "read selection + availability",
+        "re-read after refresh"
+      ],
+      "expectedState": {
+        "selection": 2,
+        "connectEnabled": false,
+        "relationsUnchanged": true
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+      "negativeCases": [
+        "read-only Visualize must not expose author Connect",
+        "selection must not mutate canonical relations"
+      ],
+      "assertions": [],
+      "screenshots": [],
+      "pageErrors": [],
+      "status": "FAIL",
+      "error": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:43191/?surface=visualize\", waiting until \"networkidle\"\u001b[22m\n",
+      "failureClassification": "UNKNOWN",
+      "classificationRationale": "Signature not pre-adjudicated; classified UNKNOWN pending evidence.",
+      "repairOwner": "W02",
+      "repairableInW02": false
+    },
+    {
+      "id": "relation-route-convergence-and-label-scope",
+      "route": "/?surface=enterprise",
+      "flow": "Double-click whole edge, double-click label, close, then press F2 on the edge",
+      "owner": "RelationInteractionOwner (implementation) / W02 (policy)",
+      "oracle": "whole-edge double-click is inert; authorized label and F2 routes converge on relation.edit with one owner; no page error is raised",
+      "preconditions": "Enterprise relation edge and label rendered on the spatial canvas",
+      "actionSequence": [
+        "open enterprise",
+        "dblclick edge line",
+        "dblclick label",
+        "close composer",
+        "focus edge + F2",
+        "read relation.edit receipts"
+      ],
+      "expectedState": {
+        "wholeEdgeOpened": false,
+        "labelOpened": true,
+        "f2Opened": true,
+        "convergedReceipts": 2,
+        "owner": "RelationInteractionOwner"
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+      "negativeCases": [
+        "whole-edge double-click must not open the composer",
+        "no page-level null dereference"
+      ],
+      "assertions": [],
+      "screenshots": [],
+      "pageErrors": [],
+      "status": "FAIL",
+      "error": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:43191/?surface=enterprise\", waiting until \"networkidle\"\u001b[22m\n",
+      "failureClassification": "UNKNOWN",
+      "classificationRationale": "Signature not pre-adjudicated; classified UNKNOWN pending evidence.",
+      "repairOwner": "W02",
+      "repairableInW02": false
+    },
+    {
+      "id": "central-change-reuse",
+      "route": "/?surface=visualize -> /?surface=enterprise",
+      "flow": "Select two objects on each consumer and inspect central selection/action policy reuse plus provider-specific availability",
+      "owner": "ActionAvailabilityCore + RelationInteractionOwner (implementation) / W02 (policy)",
+      "oracle": "policy revision and action/availability owners are reused on both consumers while availability stays provider-truthful",
+      "preconditions": "both consumers mounted with the shared relation interaction owner",
+      "actionSequence": [
+        "open visualize",
+        "select two",
+        "read policy/owners",
+        "open enterprise",
+        "select two eligible",
+        "read policy/owners"
+      ],
+      "expectedState": {
+        "policyRevision": "RELATION-CENTRAL-04",
+        "availabilityOwner": "ActionAvailabilityCore",
+        "actionOwner": "RelationInteractionOwner",
+        "visualizeReadOnly": true,
+        "enterpriseEditable": true
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+      "negativeCases": [
+        "Visualize must not become writable",
+        "Enterprise must not lose its editable boundary"
+      ],
+      "assertions": [],
+      "screenshots": [],
+      "pageErrors": [],
+      "status": "FAIL",
+      "error": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:43191/?surface=enterprise\", waiting until \"networkidle\"\u001b[22m\n",
+      "failureClassification": "UNKNOWN",
+      "classificationRationale": "Signature not pre-adjudicated; classified UNKNOWN pending evidence.",
+      "repairOwner": "W02",
+      "repairableInW02": false
+    },
+    {
+      "id": "spatial-input-bidi-preference-and-structured-isolation",
+      "route": "/?surface=visualize -> /?surface=learn",
+      "flow": "Canonical locale preference change, then BIDI isolation DOM evidence and Learn structured isolation from Library",
+      "owner": "InputDirectionResolver + StructuredRichContentOwner + ScopedPreferencesOwner (implementation) / W02 (policy)",
+      "oracle": "locale preference drives html lang/dir; mixed-direction tokens carry unicode-bidi:isolate through bdi; Learn never mounts Library state",
+      "preconditions": "Visualize spatial host mounted, Learn structured consumer mounted",
+      "actionSequence": [
+        "open visualize",
+        "measure spatial canvas bounds",
+        "open learn",
+        "set locale=en global",
+        "read lang/dir + bdi isolation + domain isolation"
+      ],
+      "expectedState": {
+        "lang": "en",
+        "dir": "ltr",
+        "bdiIsolate": true,
+        "domainIsolation": true
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+      "negativeCases": [
+        "Learn must not expose Library search state",
+        "mixed-direction tokens must be isolated"
+      ],
+      "assertions": [],
+      "screenshots": [],
+      "pageErrors": [],
+      "status": "FAIL",
+      "error": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:43191/?surface=visualize\", waiting until \"networkidle\"\u001b[22m\n",
+      "failureClassification": "UNKNOWN",
+      "classificationRationale": "Signature not pre-adjudicated; classified UNKNOWN pending evidence.",
+      "repairOwner": "W02",
+      "repairableInW02": false
+    },
+    {
+      "id": "fit-pan-zoom-canonical-state-invariance",
+      "route": "/?surface=visualize",
+      "flow": "Fit, pan and zoom the Graph/Canvas representation camera and prove canonical state and relations never change",
+      "owner": "SpatialModel camera + VisualizeDomainAdapter.viewport (implementation) / W02 (policy)",
+      "oracle": "camera changes; canonical projection digest, object/relation counts and canonical mutation flags stay identical",
+      "preconditions": "Visualize spatial host visible (GRAPH/CANVAS capability view)",
+      "actionSequence": [
+        "open visualize",
+        "activate Canvas view",
+        "execute visualize.viewport fit",
+        "pan",
+        "zoom",
+        "re-read canonical projection"
+      ],
+      "expectedState": {
+        "cameraChanged": true,
+        "canonicalUnchanged": true,
+        "keyboardReachable": true,
+        "minimapReachable": true
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+      "negativeCases": [
+        "fit/pan/zoom must never write canonical truth",
+        "Tree/Path views must refuse viewport commands"
+      ],
+      "assertions": [],
+      "screenshots": [],
+      "pageErrors": [],
+      "status": "FAIL",
+      "error": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:43191/?surface=visualize\", waiting until \"networkidle\"\u001b[22m\n",
+      "failureClassification": "UNKNOWN",
+      "classificationRationale": "Signature not pre-adjudicated; classified UNKNOWN pending evidence.",
+      "repairOwner": "W02",
+      "repairableInW02": false
+    },
+    {
+      "id": "focus-document-activeElement-proofs",
+      "route": "/?surface=golden",
+      "flow": "Command palette open/close focus return, pane lifecycle, and spatial node keyboard focus/selection via document.activeElement",
+      "owner": "TransientFocusOwner + GlobalInputKeymapOwner + SpatialInteractionKernel (implementation) / W02 (policy)",
+      "oracle": "Escape returns focus to the invoker; Arrow moves focus without changing selection; Space selects the focused node",
+      "preconditions": "Foundation chrome visible with palette invoker and a spatial host",
+      "actionSequence": [
+        "open golden",
+        "toggle pane",
+        "open palette",
+        "Escape",
+        "check activeElement",
+        "focus spatial node",
+        "ArrowRight",
+        "Space"
+      ],
+      "expectedState": {
+        "focusReturned": true,
+        "focusMoved": true,
+        "spaceSelected": true
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+      "negativeCases": [
+        "Arrow must not change selection",
+        "Escape must not leave focus on document.body"
+      ],
+      "assertions": [],
+      "screenshots": [],
+      "pageErrors": [],
+      "status": "FAIL",
+      "error": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:43191/?surface=golden\", waiting until \"networkidle\"\u001b[22m\n",
+      "failureClassification": "UNKNOWN",
+      "classificationRationale": "Signature not pre-adjudicated; classified UNKNOWN pending evidence.",
+      "repairOwner": "W02",
+      "repairableInW02": false
+    },
+    {
+      "id": "s01-structured-insertion-pointer-keyboard-1440x1000",
+      "route": "/?surface=library + /tests/rescue/S01_SHARED_STRUCTURED_EDITOR/s01-browser-proof.js",
+      "flow": "Run the compiled S01 shared structured editor browser proof (primary click, keyboard Enter, secondary right-click exact gap) in a real document",
+      "owner": "StructuredSurfaceHost + StructuredDragDropOwner (implementation) / W02 (policy)",
+      "oracle": "chooser routes create no mutation; right-click inserts an exact-gap paragraph atomically; interaction metadata is centralized",
+      "preconditions": "S01 harness host with #surface and #status at the application origin",
+      "actionSequence": [
+        "open library route",
+        "mount S01 host",
+        "primary click",
+        "keyboard Enter",
+        "secondary right-click",
+        "read S01BrowserProof"
+      ],
+      "expectedState": {
+        "status": "PASS",
+        "chooserRoutesWithoutMutation": true,
+        "exactGapInsertion": true
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+      "negativeCases": [
+        "left click and Enter must not mutate the document",
+        "forged gap metadata must be refused"
+      ],
+      "assertions": [
+        {
+          "name": "s01.status",
+          "status": "PASS",
+          "detail": {
+            "status": "PASS",
+            "kind": "OD057_S01_BROWSER_POINTER_KEYBOARD_PROOF",
+            "chooserCount": 2,
+            "steps": [
+              {
+                "id": "browser.primary-left-click-opens-chooser-no-mutation",
+                "status": "PASS",
+                "evidence": {
+                  "chooserCount": 1,
+                  "documentUnchanged": true,
+                  "historyDelta": 0
+                }
+              },
+              {
+                "id": "browser.keyboard-enter-opens-chooser-no-mutation",
+                "status": "PASS",
+                "evidence": {
+                  "chooserCount": 2,
+                  "activeElementIsGap": true,
+                  "documentUnchanged": true,
+                  "historyDelta": 0
+                }
+              },
+              {
+                "id": "browser.secondary-right-click-direct-paragraph-exact-gap",
+                "status": "PASS",
+                "evidence": {
+                  "defaultPrevented": true,
+                  "chooserCount": 2,
+                  "insertedId": "paragraph-gap-copy-1",
+                  "insertedType": "paragraph",
+                  "exactGap": true,
+                  "historyDelta": 1,
+                  "workingRevisionDelta": 1,
+                  "rerendered": true
+                }
+              },
+              {
+                "id": "browser.route-metadata-present",
+                "status": "PASS",
+                "evidence": {
+                  "primary": "chooser",
+                  "keyboard": "chooser",
+                  "secondary": "insert-paragraph"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "s01.steps",
+          "status": "PASS",
+          "detail": [
+            {
+              "id": "browser.primary-left-click-opens-chooser-no-mutation",
+              "status": "PASS"
+            },
+            {
+              "id": "browser.keyboard-enter-opens-chooser-no-mutation",
+              "status": "PASS"
+            },
+            {
+              "id": "browser.secondary-right-click-direct-paragraph-exact-gap",
+              "status": "PASS"
+            },
+            {
+              "id": "browser.route-metadata-present",
+              "status": "PASS"
+            }
+          ]
+        }
+      ],
+      "screenshots": [
+        {
+          "file": "writer-output/W02/evidence/s01-structured-insertion-pointer-keyboard-1440x1000-20261002T054411Z-a466afd3-01.png",
+          "flowId": "s01-structured-insertion-pointer-keyboard-1440x1000",
+          "label": "S01 structured editor proof 1440x1000",
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          },
+          "bytes": 221935,
+          "sha256": "c92a353efc056d24a57ce2da46a7d03902a1c771e1868ea87ca22f49abce2e43"
+        }
+      ],
+      "pageErrors": [],
+      "status": "PASS",
+      "evidence": {
+        "status": "PASS",
+        "kind": "OD057_S01_BROWSER_POINTER_KEYBOARD_PROOF",
+        "chooserCount": 2,
+        "steps": [
+          {
+            "id": "browser.primary-left-click-opens-chooser-no-mutation",
+            "status": "PASS",
+            "evidence": {
+              "chooserCount": 1,
+              "documentUnchanged": true,
+              "historyDelta": 0
+            }
+          },
+          {
+            "id": "browser.keyboard-enter-opens-chooser-no-mutation",
+            "status": "PASS",
+            "evidence": {
+              "chooserCount": 2,
+              "activeElementIsGap": true,
+              "documentUnchanged": true,
+              "historyDelta": 0
+            }
+          },
+          {
+            "id": "browser.secondary-right-click-direct-paragraph-exact-gap",
+            "status": "PASS",
+            "evidence": {
+              "defaultPrevented": true,
+              "chooserCount": 2,
+              "insertedId": "paragraph-gap-copy-1",
+              "insertedType": "paragraph",
+              "exactGap": true,
+              "historyDelta": 1,
+              "workingRevisionDelta": 1,
+              "rerendered": true
+            }
+          },
+          {
+            "id": "browser.route-metadata-present",
+            "status": "PASS",
+            "evidence": {
+              "primary": "chooser",
+              "keyboard": "chooser",
+              "secondary": "insert-paragraph"
+            }
+          }
+        ]
+      },
+      "failureClassification": null
+    },
+    {
+      "id": "s01-structured-insertion-pointer-keyboard-1024x900",
+      "route": "/?surface=library + /tests/rescue/S01_SHARED_STRUCTURED_EDITOR/s01-browser-proof.js",
+      "flow": "Run the compiled S01 shared structured editor browser proof (primary click, keyboard Enter, secondary right-click exact gap) in a real document",
+      "owner": "StructuredSurfaceHost + StructuredDragDropOwner (implementation) / W02 (policy)",
+      "oracle": "chooser routes create no mutation; right-click inserts an exact-gap paragraph atomically; interaction metadata is centralized",
+      "preconditions": "S01 harness host with #surface and #status at the application origin",
+      "actionSequence": [
+        "open library route",
+        "mount S01 host",
+        "primary click",
+        "keyboard Enter",
+        "secondary right-click",
+        "read S01BrowserProof"
+      ],
+      "expectedState": {
+        "status": "PASS",
+        "chooserRoutesWithoutMutation": true,
+        "exactGapInsertion": true
+      },
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+      "negativeCases": [
+        "left click and Enter must not mutate the document",
+        "forged gap metadata must be refused"
+      ],
+      "assertions": [
+        {
+          "name": "s01.status",
+          "status": "PASS",
+          "detail": {
+            "status": "PASS",
+            "kind": "OD057_S01_BROWSER_POINTER_KEYBOARD_PROOF",
+            "chooserCount": 2,
+            "steps": [
+              {
+                "id": "browser.primary-left-click-opens-chooser-no-mutation",
+                "status": "PASS",
+                "evidence": {
+                  "chooserCount": 1,
+                  "documentUnchanged": true,
+                  "historyDelta": 0
+                }
+              },
+              {
+                "id": "browser.keyboard-enter-opens-chooser-no-mutation",
+                "status": "PASS",
+                "evidence": {
+                  "chooserCount": 2,
+                  "activeElementIsGap": true,
+                  "documentUnchanged": true,
+                  "historyDelta": 0
+                }
+              },
+              {
+                "id": "browser.secondary-right-click-direct-paragraph-exact-gap",
+                "status": "PASS",
+                "evidence": {
+                  "defaultPrevented": true,
+                  "chooserCount": 2,
+                  "insertedId": "paragraph-gap-copy-1",
+                  "insertedType": "paragraph",
+                  "exactGap": true,
+                  "historyDelta": 1,
+                  "workingRevisionDelta": 1,
+                  "rerendered": true
+                }
+              },
+              {
+                "id": "browser.route-metadata-present",
+                "status": "PASS",
+                "evidence": {
+                  "primary": "chooser",
+                  "keyboard": "chooser",
+                  "secondary": "insert-paragraph"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "s01.steps",
+          "status": "PASS",
+          "detail": [
+            {
+              "id": "browser.primary-left-click-opens-chooser-no-mutation",
+              "status": "PASS"
+            },
+            {
+              "id": "browser.keyboard-enter-opens-chooser-no-mutation",
+              "status": "PASS"
+            },
+            {
+              "id": "browser.secondary-right-click-direct-paragraph-exact-gap",
+              "status": "PASS"
+            },
+            {
+              "id": "browser.route-metadata-present",
+              "status": "PASS"
+            }
+          ]
+        }
+      ],
+      "screenshots": [
+        {
+          "file": "writer-output/W02/evidence/s01-structured-insertion-pointer-keyboard-1024x900-20261002T054411Z-a466afd3-02.png",
+          "flowId": "s01-structured-insertion-pointer-keyboard-1024x900",
+          "label": "S01 structured editor proof 1024x900",
+          "viewport": {
+            "width": 1024,
+            "height": 900
+          },
+          "bytes": 203919,
+          "sha256": "988301285d80900c349f794d9738dac9b699b8a77422fc59554b8489103d318e"
+        }
+      ],
+      "pageErrors": [],
+      "status": "PASS",
+      "evidence": {
+        "status": "PASS",
+        "kind": "OD057_S01_BROWSER_POINTER_KEYBOARD_PROOF",
+        "chooserCount": 2,
+        "steps": [
+          {
+            "id": "browser.primary-left-click-opens-chooser-no-mutation",
+            "status": "PASS",
+            "evidence": {
+              "chooserCount": 1,
+              "documentUnchanged": true,
+              "historyDelta": 0
+            }
+          },
+          {
+            "id": "browser.keyboard-enter-opens-chooser-no-mutation",
+            "status": "PASS",
+            "evidence": {
+              "chooserCount": 2,
+              "activeElementIsGap": true,
+              "documentUnchanged": true,
+              "historyDelta": 0
+            }
+          },
+          {
+            "id": "browser.secondary-right-click-direct-paragraph-exact-gap",
+            "status": "PASS",
+            "evidence": {
+              "defaultPrevented": true,
+              "chooserCount": 2,
+              "insertedId": "paragraph-gap-copy-1",
+              "insertedType": "paragraph",
+              "exactGap": true,
+              "historyDelta": 1,
+              "workingRevisionDelta": 1,
+              "rerendered": true
+            }
+          },
+          {
+            "id": "browser.route-metadata-present",
+            "status": "PASS",
+            "evidence": {
+              "primary": "chooser",
+              "keyboard": "chooser",
+              "secondary": "insert-paragraph"
+            }
+          }
+        ]
+      },
+      "failureClassification": null
+    },
+    {
+      "id": "spatial-closure-1024x900",
+      "route": "/?surface=visualize",
+      "flow": "Canvas closure obligation: spatial host, selection and representation actions reachable at 1024x900",
+      "owner": "SpatialPresentationOwner + SpatialInteractionKernel (implementation) / W02 (policy)",
+      "oracle": "spatial host has non-zero bounds and representation selection works at the 1024x900 closure viewport",
+      "preconditions": "Visualize four-view composition mounted at 1024x900",
+      "actionSequence": [
+        "open visualize at 1024x900",
+        "measure spatial canvas bounds",
+        "select a representation",
+        "screenshot"
+      ],
+      "expectedState": {
+        "bounds": "non-zero",
+        "selection": 1
+      },
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "fixtureState": "NO_FIXTURE_SUBSTITUTION_CLAIMED__PRODUCT_ROUTE_ONLY",
+      "negativeCases": [
+        "no zero-size spatial canvas"
+      ],
+      "assertions": [],
+      "screenshots": [],
+      "pageErrors": [],
+      "status": "FAIL",
+      "error": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:43191/?surface=visualize\", waiting until \"networkidle\"\u001b[22m\n",
+      "failureClassification": "UNKNOWN",
+      "classificationRationale": "Signature not pre-adjudicated; classified UNKNOWN pending evidence.",
+      "repairOwner": "W02",
+      "repairableInW02": false
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "writer-output/W02/evidence/s01-structured-insertion-pointer-keyboard-1440x1000-20261002T054411Z-a466afd3-01.png",
+      "flowId": "s01-structured-insertion-pointer-keyboard-1440x1000",
+      "label": "S01 structured editor proof 1440x1000",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "bytes": 221935,
+      "sha256": "c92a353efc056d24a57ce2da46a7d03902a1c771e1868ea87ca22f49abce2e43"
+    },
+    {
+      "file": "writer-output/W02/evidence/s01-structured-insertion-pointer-keyboard-1024x900-20261002T054411Z-a466afd3-02.png",
+      "flowId": "s01-structured-insertion-pointer-keyboard-1024x900",
+      "label": "S01 structured editor proof 1024x900",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "bytes": 203919,
+      "sha256": "988301285d80900c349f794d9738dac9b699b8a77422fc59554b8489103d318e"
+    }
+  ]
+}

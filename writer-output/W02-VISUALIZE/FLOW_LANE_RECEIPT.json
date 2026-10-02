@@ -1,0 +1,308 @@
+{
+  "schema": "W02-VISUALIZE_LANE_FLOW_RECEIPT@1",
+  "classification": "LANE_SCOPE_HARNESS_WORKAROUND__ORACLES_COPIED_FROM_MANDATED_HARNESS__NOT_A_REPLACEMENT_FOR_TOOLS_W02_BROWSER_FLOWS",
+  "reason": "tools/w02-browser-flows.mjs uses waitUntil:networkidle; a cross-lane local-runtime server on 127.0.0.1:4174 leaves the boot platform input-direction request unsettled in Chromium so every networkidle navigation times out (environmental, other lane owns the process).",
+  "mandatedHarness": "node tools/w02-browser-flows.mjs",
+  "oracleSource": "tools/w02-browser-flows.mjs (assertion text copied verbatim per flow)",
+  "navigationMode": "waitUntil:'load' + CEPFoundation.consumer ready wait",
+  "startedAt": "2026-10-02T06:02:48.378Z",
+  "finishedAt": "2026-10-02T06:03:05.923Z",
+  "base": "http://127.0.0.1:4173",
+  "summary": {
+    "total": 20,
+    "pass": 20,
+    "fail": 0
+  },
+  "results": [
+    {
+      "flow": "spatial-select-connect-canonical-edge",
+      "name": "visualize.composed-left-region-present",
+      "status": "PASS",
+      "detail": {
+        "buttons": 6,
+        "ids": [
+          "b6-rep-ku-d03-0001",
+          "b6-rep-ku-d03-0004"
+        ]
+      }
+    },
+    {
+      "flow": "spatial-select-connect-canonical-edge",
+      "name": "spatial.selection-two",
+      "status": "PASS",
+      "detail": [
+        "b6-rep-ku-d03-0001",
+        "b6-rep-ku-d03-0004"
+      ]
+    },
+    {
+      "flow": "spatial-select-connect-canonical-edge",
+      "name": "spatial.read-only-connect-hidden",
+      "status": "PASS",
+      "detail": {
+        "selected": [
+          "b6-rep-ku-d03-0001",
+          "b6-rep-ku-d03-0004"
+        ],
+        "records": 2,
+        "version": 1,
+        "readOnly": true,
+        "availability": {
+          "action": "connect",
+          "policyId": "connect",
+          "visible": false,
+          "enabled": false,
+          "reason": "Active mode does not permit this action",
+          "code": "MODE_FORBIDS_ACTION",
+          "selectionCount": 2,
+          "selectedTypes": [
+            "unspecified"
+          ]
+        },
+        "hidden": true
+      }
+    },
+    {
+      "flow": "spatial-select-connect-canonical-edge",
+      "name": "spatial.canonical-relations-unchanged",
+      "status": "PASS",
+      "detail": {
+        "before": {
+          "selected": [
+            "b6-rep-ku-d03-0001",
+            "b6-rep-ku-d03-0004"
+          ],
+          "records": 2,
+          "version": 1,
+          "readOnly": true,
+          "availability": {
+            "action": "connect",
+            "policyId": "connect",
+            "visible": false,
+            "enabled": false,
+            "reason": "Active mode does not permit this action",
+            "code": "MODE_FORBIDS_ACTION",
+            "selectionCount": 2,
+            "selectedTypes": [
+              "unspecified"
+            ]
+          },
+          "hidden": true
+        },
+        "after": {
+          "selected": [
+            "b6-rep-ku-d03-0001",
+            "b6-rep-ku-d03-0004"
+          ],
+          "records": 2,
+          "version": 1
+        }
+      }
+    },
+    {
+      "flow": "spatial-select-connect-canonical-edge",
+      "name": "spatial.selection-preserved",
+      "status": "PASS",
+      "detail": [
+        "b6-rep-ku-d03-0001",
+        "b6-rep-ku-d03-0004"
+      ]
+    },
+    {
+      "flow": "spatial-select-connect-canonical-edge",
+      "name": "lane.no-page-errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "flow": "fit-pan-zoom-canonical-state-invariance",
+      "name": "viewport.tree-refuses",
+      "status": "PASS",
+      "detail": {
+        "id": "visualize.viewport",
+        "owner": "VisualizeDomainAdapter",
+        "commandOwner": "VisualizeDomainAdapter",
+        "code": "VISUALIZE_VIEWPORT_REQUIRES_GRAPH_OR_CANVAS",
+        "reason": "Spatial viewport commands are available only in Graph or Canvas view.",
+        "availabilityOwner": "VisualizeDomainAdapter",
+        "enabled": false,
+        "mode": "TREE"
+      }
+    },
+    {
+      "flow": "fit-pan-zoom-canonical-state-invariance",
+      "name": "viewport.fit-pan-zoom-enabled",
+      "status": "PASS",
+      "detail": {
+        "fit": {
+          "id": "visualize.viewport",
+          "owner": "VisualizeDomainAdapter",
+          "commandOwner": "VisualizeDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "VisualizeDomainAdapter",
+          "enabled": true,
+          "mode": "CANVAS"
+        },
+        "pan": {
+          "id": "visualize.viewport",
+          "owner": "VisualizeDomainAdapter",
+          "commandOwner": "VisualizeDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "VisualizeDomainAdapter",
+          "enabled": true,
+          "mode": "CANVAS"
+        },
+        "zoom": {
+          "id": "visualize.viewport",
+          "owner": "VisualizeDomainAdapter",
+          "commandOwner": "VisualizeDomainAdapter",
+          "code": "AVAILABLE",
+          "reason": "",
+          "availabilityOwner": "VisualizeDomainAdapter",
+          "enabled": true,
+          "mode": "CANVAS"
+        }
+      }
+    },
+    {
+      "flow": "fit-pan-zoom-canonical-state-invariance",
+      "name": "viewport.camera-changed",
+      "status": "PASS",
+      "detail": {
+        "before": {
+          "x": -66.9,
+          "y": -35.4,
+          "zoom": 0.15
+        },
+        "after": {
+          "x": -181.52147239263797,
+          "y": 23.941104294478578,
+          "zoom": 1.54601226993865
+        }
+      }
+    },
+    {
+      "flow": "fit-pan-zoom-canonical-state-invariance",
+      "name": "viewport.canonical-invariant",
+      "status": "PASS",
+      "detail": {
+        "canonicalSame": true,
+        "relationsSame": true
+      }
+    },
+    {
+      "flow": "fit-pan-zoom-canonical-state-invariance",
+      "name": "lane.no-page-errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "flow": "spatial-closure-1024x900",
+      "name": "closure.canvas-bounds",
+      "status": "PASS",
+      "detail": {
+        "x": 330,
+        "y": 506.8125,
+        "width": 679,
+        "height": 339.1875
+      }
+    },
+    {
+      "flow": "spatial-closure-1024x900",
+      "name": "closure.selection-reachable",
+      "status": "PASS",
+      "detail": [
+        "b6-rep-ku-d03-0001"
+      ]
+    },
+    {
+      "flow": "spatial-closure-1024x900",
+      "name": "lane.no-page-errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "flow": "focus-document-activeElement-proofs",
+      "name": "pane.lifecycle",
+      "status": "PASS",
+      "detail": {
+        "collapsed": "collapsed",
+        "restored": "open"
+      }
+    },
+    {
+      "flow": "focus-document-activeElement-proofs",
+      "name": "palette.opens",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "flow": "focus-document-activeElement-proofs",
+      "name": "palette.escape-closes",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "flow": "focus-document-activeElement-proofs",
+      "name": "focus.returns-to-invoker",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "flow": "focus-document-activeElement-proofs",
+      "name": "lane.no-page-errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "flow": "spatial-input-bidi-visualize-step",
+      "name": "spatial.canvas-has-bounds",
+      "status": "PASS",
+      "detail": {
+        "x": 330,
+        "y": 402.984375,
+        "width": 664,
+        "height": 543.015625
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "flowId": "spatial-select-connect-canonical-edge",
+      "label": "two-item selection, author Connect hidden",
+      "file": "writer-output/W02-VISUALIZE/captures/spatial-select-connect-canonical-edge-20261002T060248.378Z-01.png",
+      "sha256": "d6016f292406fe95c37bb80b793c51ef3c333c3e0fe7c900ac5579966d4be6ff",
+      "bytes": 325094
+    },
+    {
+      "flowId": "fit-pan-zoom-canonical-state-invariance",
+      "label": "camera changed, canonical state invariant",
+      "file": "writer-output/W02-VISUALIZE/captures/fit-pan-zoom-canonical-state-invariance-20261002T060248.378Z-02.png",
+      "sha256": "7d564fc905a1c6702aace5ebbb42eec8295685e2fa9d6ab2ca676f00cf964786",
+      "bytes": 302324
+    },
+    {
+      "flowId": "spatial-closure-1024x900",
+      "label": "spatial closure at 1024x900",
+      "file": "writer-output/W02-VISUALIZE/captures/spatial-closure-1024x900-20261002T060248.378Z-03.png",
+      "sha256": "fe8b6c1640b172ab6df82560510474a8e773436b1dcec89a7df574ea1561eb6a",
+      "bytes": 203526
+    },
+    {
+      "flowId": "focus-document-activeElement-proofs",
+      "label": "focus returned to palette invoker",
+      "file": "writer-output/W02-VISUALIZE/captures/focus-document-activeElement-proofs-20261002T060248.378Z-04.png",
+      "sha256": "9bed219221c52f5c5fecaeb7e666dc6b8e333052b21569b8eac043eac998db80",
+      "bytes": 115758
+    },
+    {
+      "flowId": "spatial-input-bidi-visualize-step",
+      "label": "revealed spatial host keeps bounds",
+      "file": "writer-output/W02-VISUALIZE/captures/spatial-input-bidi-visualize-step-20261002T060248.378Z-05.png",
+      "sha256": "b82d870c29083ce0b62d9ab2509ac2fdb81ddca9ae22d804bb0f0b2b1faa5865",
+      "bytes": 412148
+    }
+  ]
+}
