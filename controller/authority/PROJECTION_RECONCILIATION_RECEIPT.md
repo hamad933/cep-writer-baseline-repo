@@ -11,7 +11,7 @@
 ## Writer Owner-decision projection
 - projected rows: **91**.
 - `OD-20260924-081`: PRESENT.
-- `OD-20260928-085`: PRESENT.
+- `OD-20260928-085`: PRESENT. **[REVALIDATION-EPOCH RECORD — current topology is `OD-20261002-087` since 2026-10-02; this receipt's content is historical evidence and remains unmodified.]**
 - Controller-only / ROUTE-LOCAL-only missing live rows remain deliberately excluded per `controller/authority/WRITER_OWNER_DECISION_APPLICABILITY.md`.
 - Full canonical register remains Controller-plane material; Writer projection is derived input only.
 

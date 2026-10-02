@@ -46,6 +46,10 @@ Checkpoints A–E map to the packet's minimum set:
 
 A "no" sends the child back with a **focused correction task** — never a workspace restart.
 
+# 12_execution / 01_writer_checkpoint_contract
+
+> **CURRENT CONTROLLER CEILING — 2026-10-02 (reconciled):** Historical Writer-phase record (2026-09-29). The `W01 → W02 → W04 → W05 → W03` integration order below is **epoch evidence from the serial dispatch era**; current topology is `OD-20261002-087` (parallel disjoint lanes; integration/convergence serialized Controller-owned). Preserve the body as lineage; it grants no current launch authority.
+
 ## 3. Integration order applied by the Coordinator
 
 Execution/commit order = `W01 → W02 → W04 → W05 → W03` (dispatch manifest carrier law), which

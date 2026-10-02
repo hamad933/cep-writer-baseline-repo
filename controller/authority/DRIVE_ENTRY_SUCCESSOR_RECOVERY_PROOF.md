@@ -1,6 +1,7 @@
 # DRIVE-ENTRY SUCCESSOR RECOVERY PROOF
 
 **Classification:** `POST_CUTOVER_DRIVE_COMPATIBILITY_RECOVERY__PASS`  
+> **EPOCH NOTE (2026-10-02):** The OD-085/topology and browser-total rows below are epoch facts of the observed HEAD `8e3357d0…`; current topology is `OD-20261002-087`, current browser truth is 4 PASS / 2 FAIL. PASS rows remain valid historical proof; content unmodified.
 **Entry method:** Drive `READ_FIRST.md` only, then follow its GitHub pointer.  
 **Drive READ_FIRST ID:** `1r6XU0zhlAjdrK3OrzkXzHLA2WknWip6h`  
 **Observed GitHub HEAD:** `8e3357d05ffe6ffd1e1d1e2f345fd0eddf74a6f5`  

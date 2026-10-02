@@ -106,13 +106,13 @@ Zero-loss property of repairs: no historical body/checkpoint/receipt line delete
 |---|---|---|
 | 1 successor reaches one authority/topology | **PASS (fresh-clone proof)** | Independent falsification: fresh `git clone` of `origin/writer/mi-serial` → boot-script reading of AUTHORITY_STATUS/READ_FIRST/CURRENT_STATE/RESUME trio/handoff/register/standard/5 cluster packets → **29/29 substantive checks PASS** at HEAD `702896b1ba73d994f2355d7b1c15653ef2411975` / tree `2b3c3cac1a5928ee722fe4e209214f51726dc283` (single scanner flag = false positive on a line self-labeling OD-085 historical; Product-delta check = extensions.css 2 lines only) |
 | 2 no current-looking file routes contradictory topology | PASS after `cb76794` (3 sweeps; residuals all ceiling/section-labeled) | §2.2 receipts |
-| 3 zero-loss pre-overreach claims | PARTIAL — §5 pending OFFLOAD-02 | §5 |
-| 4 no wholesale Drive snapshot current merely by copying | OPEN — governance interior `REVERIFY_REQUIRED` (OFFLOAD-01 §2/§3) | §2.2 |
-| 5 H08/H01–H09 value preserved w/o tactics-as-law | PARTIAL — §6 pending OFFLOAD-03 | §6 |
+| 3 zero-loss pre-overreach claims | **PASS (SEALED, §10)** | LC-disposition table: false-lost reclaimed (LC-04/07/08/09 owned in `writer-output` reports); remainder = correctly-excluded temporary session artifacts + epoch snapshots indexed to exact git-history blobs; six major claim classes independently confirmed present (OFFLOAD-01 §4 + SA-3/SA-4) |
+| 4 no wholesale Drive snapshot current merely by copying | **PASS (SEALED, §2.2+§9)** | OFFLOAD-01 section outline (37 sections, exact line ranges) classifies the import: container kept as canonical governance because its sections carry `OBSERVED_UNIQUE_DURABLE_CLAIM` law adopted through the cutover chain — not current "merely because copied"; `1cbf922` deleted only 9 substantive Drive-custody lines (replaced by mode-resolved law) + 1,534 blanks; register-overlap appendices = duplicate-of-register restatements (acceptable indexes); residual present-tense Drive supremacy swept and gap-filled (root README, route authority §12) — conditional/epoch instances annotated |
+| 5 H08/H01–H09 value preserved w/o tactics-as-law | **PASS (SEALED, §11)** | Full corpus consumed (OFFLOAD-03 + local 208-file custody, hash-verified); DWP-01…15 + H01/H04/H05/H07 durable candidates classified and located (no new OD; OD-079 routing); do-not-promote list enforced and verified absent from governance/register/profiles; H09 `STILL_OPEN` items folded into open ceilings + §12 gap-fills |
 | 6 temporally consistent source/evidence truth | **PASS with exact-HEAD proof** | Fresh browser conformance executed at recovered HEAD: **4 PASS / 2 FAIL** = byte-for-byte the recorded `490b6a40` truth (Runs `runtime-causal-consequence` PASS → closed-harness classification confirmed; both FAILs = Enterprise `relation.route-convergence` + `central-change-reuse`). Receipt regenerated bound to `CANONICAL_SOURCE_TREE_SHA256:0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc` (338 files) with hash-bound `EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE`. `npm run check` reds reduced 3 → 1; the remaining red (`browser.lineage_receipt_truthful`) is a **by-design truth guard** — it requires `EXECUTED_PASS` (6/6) and correctly stays red while the Enterprise defect is open; forcing it green would falsify truth, so it is a truth ceiling, not a recovery target. |
 | 7 23-surface matrix complete enough | **DRAFT COMPLETE** → `controller/12_execution/EXISTING_EVIDENCE_REUSE_MATRIX_23_SURFACES.md` (23/23 rows, dispositions+sizes+seams drafted; `[SEAL:OFFLOAD-03]` cells pending spot-check) | matrix file |
-| 8 DAG no unhandled writable/shared-owner collisions | DRAFT skeleton — companion file; final after dispositions | DAG file |
-| 9 every Writer lane has exact packet | PENDING — after dispositions/DAG | DAG file |
+| 8 DAG has no unhandled writable/shared-owner collisions | **PASS (SEALED)** — mechanical pairwise intersection of all 19 lane root-sets vs Table-A 16 seams = 0 unhandled; same-owner chains (W01, W03-ENT) + VAL seam stewardship explicit | `WRITER_DAG_AND_LAUNCH_PACKETS_2026-10-02.md` §1–2 |
+| 9 every Writer-required lane has an exact launch packet | **PASS (SEALED)** — 18 mutating lanes packeted (15 WAVE-1 + SH-1/SH-2/ENT-1 + RES-1 counted within waves; per-lane: objective, roots, locks, salvage, tests, falsification, evidence, STOP, branch destination, parent rule); 5 audit-only declared; optional H03R2-1 + Owner-only items isolated | same file §0/§3/§4 |
 | 10 Product untouched by recovery | PASS — `git diff d5d7588..HEAD -- stack/native-typescript tests contracts profiles authority cep-writer` shows only the pre-existing 2-line extensions.css delta from the 32 historical commits; recovery commits touch `controller/**` only (+local receipt reverts) | §2.2 |
 | 11 history intact + remote identity recorded | PASS | §1 |
 | 12 unresolved Owner decisions isolated | NONE OPEN (§3.5 cleanup = non-blocking notification; caveat §3.3 recorded) | §3 |
@@ -122,3 +122,60 @@ Zero-loss property of repairs: no historical body/checkpoint/receipt line delete
 - `CHATGPT_OFFLOAD_PENDING`: OFFLOAD-01, OFFLOAD-02, OFFLOAD-03 (READY_FOR_CHATGPT, basis-corrected).
 - `BLOCKED_ON_OFFLOAD_RESULT`: gate 3 seal; gate 4 interior verdict; gate 5 seal; final dispositions for H02/H09-dependent rows; final DAG + packets; gate 9.
 - In-progress (independent): exact-HEAD browser truth run; matrix/DAG drafts.
+
+## §9 OFFLOAD CONSUMPTION RECEIPTS (result-consumption law applied)
+
+All three ChatGPT results received in-session. Full report text retained in the ChatGPT Project conversations; dispositive content is extracted into §2/§3/§5/§6/§10/§11 of this ledger and the sealed matrix. Law applied: `CONSUME → VERIFY SOURCE BINDING → SPOT-CHECK MATERIAL CLAIMS → CHECK INVALIDATION → GAP-FILL ONLY → PRIMARY ADJUDICATE`. A ChatGPT report = EVIDENCE/ANALYTICAL INPUT, never authority.
+
+| Packet | STATUS | Source binding verified | Materiality | Spot-checks performed (results) | Outcome |
+|---|---|---|---|---|---|
+| `CEP-REC-OFFLOAD-01` | `CONSUMED` | forensic target `f5b78e3`/`47e97e0` + snapshot `cb76794` + final `a5c40afb`/`c7062c00` all recorded correctly; `NO_FORENSIC_RANGE_INVALIDATION` | valid | (a) 33-commit count matches my independent `rev-list` (33); (b) `1cbf922` whitespace claim — accepted with its exact split (1,534/1,543 blank; 9 substantive Drive-custody lines replaced by mode-resolved law — matches my own route-authority/governance reads); (c) OD-087 intro commit `317f0bb` matches my register diff observation; (d) its stale-topology register = my repair batch + 3 extra files → gap-filled below (§12) | Ledger §2, §3.3 sealed; §12 gap-fill executed |
+| `CEP-REC-OFFLOAD-02` | `CONSUMED` | same identities; per-artifact claims bound to `d5d7588`/`f024a37`/`58b8058`/`f5b78e3` blobs | valid | (a) 6/11/1/5 accounting matches my SA-3/reconstruction cross-check; (b) LOST candidates LC-04/07/08/09 re-checked against `writer-output` report bodies → **FALSE-LOST, owners exist** (see §10); (c) 13 session IDs confirmed absent from tree by my own grep of register/packets — accepted as temporary provider artifacts (H06 do-not-promote) | Gate 3 sealed via §10 LC disposition table |
+| `CEP-REC-OFFLOAD-03` | `CONSUMED` | same identities; Drive H-corpus roots match my own downloaded corpus (same folder IDs) | valid | (a) H09 correction statuses vs my repair batch: consistent; (b) C-X1 stale Drive wording — confirmed by my grep, gap-filled (§12); (c) DEF-06 root-cause claim (read-only foundation) confirmed by report quote → matrix corrected; (d) LC cross-claims consistent with §10 | Gate 5 sealed via §11; matrix sealed |
+
+**No re-audit was repeated. No result was treated as authority.** Where results contradicted my drafts, the contradicted part was reopened only (DEF-06 routing; LC-04/07/08/09).
+
+## §10 ZERO-LOSS LC-CANDIDATE DISPOSITION TABLE (gate 3 seal)
+
+OFFLOAD-02 reported 16 LOST-CANDIDATE groups (`NO_CURRENT_OWNER_FOUND` inside its allowed search corpus). Primary adjudication after spot-checks:
+
+| LC | Claim | Primary disposition | Retained canonical owner/location |
+|---|---|---|---|
+| LC-04 | Library `40 Arabic-only` chrome strings (DEF-06) | **NOT LOST** (false-lost) | `writer-output/W02-LIBRARY/VISUAL_EXECUTION_REPORT.json` (exact claim + root-cause + shared-request noted) |
+| LC-07 | Runs `PENDING_BUILD` states | **NOT LOST** (substance owned; five-field granularity = historical) | `writer-output/W03-RUNS/VISUAL_EXECUTION_REPORT.json` |
+| LC-08 | Portfolio `PLAN_COMPLETE…` + `NOT_YET_TESTED` | **NOT LOST** (false-lost) | `writer-output/W04-PORTFOLIO/VISUAL_EXECUTION_REPORT.json` |
+| LC-09 | Releases 26/26 + 17/16/1 | **NOT LOST** (false-lost) | `writer-output/W05-RELEASES/VISUAL_EXECUTION_REPORT.json` + `CONTROLLER_REVIEW_CP-2026-09-30-003.json` |
+| LC-01 | 13 exact `ses_*` session IDs | **EVIDENCE_ONLY, correctly not promoted** — temporary provider/session artifacts (H06 do-not-promote; OD-20260922-079 routing: not governance) | git history: `d5d7588:controller/state/RESUME_STATE.json` (`historicalWriterSessions`) + `f024a37` version |
+| LC-02 | `writers.*.uncommittedPathEntries` counters | **EVIDENCE_ONLY historical snapshot** — functional custody succeeded by rescue manifests (313 staged paths, sha `787f73c0…`) + `writer-output/**` | git history: `d5d7588`/`f024a37:RESUME_STATE.json` |
+| LC-03 | Library pane geometry `304/759/420/39` | **PARTIAL**: `304/420` core owned by AD-01 in `CONTROLLER_REGISTERS.md`; fine-grained review snapshot = EVIDENCE_ONLY historical | registers (core) + git history `f024a37:RESUME_STATE.json` (detail) |
+| LC-05 | Learn v1 frame matrix + `759→534` | **EVIDENCE_ONLY historical snapshot** (v3 manifest evidence supersedes for current proof; v1 detail = lineage) | git history `f024a37:RESUME_STATE.json` + `writer-output/W02-LEARN/evidence/v1/` |
+| LC-06 | Visualize transient blockers + 1180/1024/760 bands | **EVIDENCE_ONLY historical snapshot** | git history `f024a37:RESUME_STATE.json` |
+| LC-10/11/12 | branch tracking/pushStatus/generatedAt/skillPath fields | **EVIDENCE_ONLY snapshot metadata** — repository identity retained (`AUTHORITY_STATUS`, `.opencode/skills/` exists) | git history `f024a37:RESUME_STATE.json` |
+| LC-13..16 | f024-era H09 blocker statements (AUTH-BOOT, H08-54, PROFILE-PARITY, HARNESS) | **SUPERSEDED_BY_SUCCESSORS** (all four closed/state-changed per OFFLOAD-03 §2.3 crosswalk) + full text retained | git history `f024a37:RESUME_STATE.json` + H09 Drive corpus `1l5oSCl-…` + local custody |
+
+**Gate-3 ruling:** every unique durable claim from the pre-overreach resume/checkpoint/parallel artifacts has a retained canonical owner or a retained historical location indexed here. The only genuinely compacted-out claims are (a) temporary provider/session artifacts (correctly excluded from governance by OD-079/H06) and (b) epoch snapshot details retained in git history at their exact blobs with pointers above. `ZERO_LOSS = PROVEN_WITH_LEDGER_INDEX`. The six major claim classes (per-Surface status, Writer history, seams, validation truth, blockers, continuation pointers) were independently confirmed present by OFFLOAD-01 §4 and my SA-3/SA-4 evidence.
+
+## §11 H-CORPUS CUSTODY & DURABLE/TEMPORARY CLASSIFICATION (gate 5 seal)
+
+- Corpus consumed: OFFLOAD-03 full distillation of H01–H09/H03-R2 (all nine Drive roots, matching IDs) + primary custody at `/workspaces/cep-recovery-evidence/drive_h_series/` (208 files, H08 tarball sha256 `76bdda10…` verified) + H08's in-tree 54-row dispositions + SA-3 inventory.
+- **Durable wisdom preserved (classified `DURABLE_CANDIDATE`, not auto-promoted):** H06 `DWP-01…DWP-15` (independent truth reconstruction; checkpoint identity; handoff harvesting; deletion test; provider-neutralization; exhaust-Controller-work; exact starting point; resume vs reconstruction; harvest≠completion; decision tracing; adversarial self-falsification; invalidation-based reverification; execution-config≠governance; logical-vs-capacity parallelism; bounded execution/partial preservation) — location: Drive `H06_PROMPTS_HANDOFF_TEMPORARY_VS_DURABLE_WISDOM` (`1Xa0BEKU8…`) + local custody; overlap with existing governing law noted (governance §0–22, checkpoint protocol, four truths, OD-039/043/057); remainder candidates adoptable through ordinary governance maintenance — **no new OD created** (OD-079 gates: routing = reference/lessons store; not register).
+- H01 principles, H04/H05 truth/taxonomy rules, H07 "zero-loss ≠ byte-copy" lesson: preserved as `DURABLE_CANDIDATE` at their corpus locations, cross-referenced here.
+- **Do-not-promote list enforced (`TACTICS_STAY_HISTORICAL`):** MiMo/Claw/Xiaomi model names, quotas/token/RPM, session IDs, WM row IDs/priorities, `/tmp` succession paths, localhost ports, one-off probe scripts, W01→W05 sequencing as universal law, `MIMO_CLAW_*` naming as architecture, old serial worker counts, image-channel incident specifics, transient sibling build failures — none entered governance/register/profiles by this recovery (verified: my `5de6dcd`/repair commits introduce none of these tokens).
+- H09 required-corrections: all consumed; `STILL_OPEN` items folded into open ceilings (§7 list) — no recovery-blocking correction left unaddressed except C-X1 + registration gaps, which §12 gap-filled.
+
+## §12 GAP-FILL RECEIPTS (post-consumption, bounded)
+
+| Finding (source) | Gap-fill applied | File |
+|---|---|---|
+| OFFLOAD-03 C-X1: stale "Drive is live Controller governance" in ROUTE-CHATGPT profile | mode-resolved post-cutover wording | `EXECUTION_CARRIER_ROUTE_AUTHORITY.md` L137/L140 bullets |
+| My gate-4 sweep: root `README.md:29` Drive-live supremacy (the never-committed F-2 defect) | post-cutover classification (OD-086) | `README.md` |
+| OFFLOAD-01 register: `01_writer_checkpoint_contract.md` serial order as current | historical ceiling added | `controller/12_execution/01_writer_checkpoint_contract.md` |
+| OFFLOAD-01 register: `H08_DELETED_TEMP…` present-tense OD-085 topology | epoch notes added (content preserved) | `controller/12_execution/H08_DELETED_TEMP_UNIQUE_KNOWLEDGE_CLOSURE.md` (2 lines) |
+| OFFLOAD-01 register: proofs/receipt with epoch "current" wording | epoch-note banners added; PASS content unmodified | `GITHUB_DIRECT_SUCCESSOR_RECOVERY_PROOF.md`, `DRIVE_ENTRY_SUCCESSOR_RECOVERY_PROOF.md`, `PROJECTION_RECONCILIATION_RECEIPT.md` |
+| OFFLOAD-02 LC-04/07/08/09 false-lost | owners verified; matrix/ledger corrected | this ledger §10 + matrix |
+| OFFLOAD-03 DEF-06 root cause = read-only foundation | library lane narrowed; fix routed to shared lane | matrix row 21 |
+| OFFLOAD-03 C-X2/F01/F02/F04 | shell/learn/runs lane items added | matrix rows 1/22/9 |
+
+## §13 OD-087 PROVENANCE — FINAL PRIMARY FINDING
+
+OFFLOAD-01's all-ref (94 refs) + Drive search confirms: `OD-20261002-087` first appears in git at `317f0bb3a0abf3d806692d9b5e75a70716db880b` as same-commit self-referential projections; **no independent first-party Owner artifact for `CURRENT_DIRECT_OWNER_2026_10_02_MULTI_WRITER_PARALLEL_CORRECTION` exists in git or Drive** (older OD-039/043/081 independently support the parallelism *principle*). PRIMARY RULING (unchanged, now precisely grounded): OD-087's substance is Owner-mandated for this mission by the Owner's own current recovery brief (which states the identical rule); OD-079 gates pass; OD-085 remains historical. The provenance-phrase gap is recorded as an honest caveat, not a blocker — and if the Owner withdraws/corrects the brief, OD-087 provenance must be re-proven. This matches OFFLOAD-01's `UNRESOLVED_FROM_AVAILABLE_EVIDENCE` without adopting it as a rejection.

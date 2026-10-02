@@ -26,7 +26,7 @@ For Writer execution, use the curated chain under `cep-writer/`, the exact missi
 
 Visual references are Presentation authority inputs. They are not evidence screenshots and never override domain/data/provider truth.
 
-Google Drive remains the live Controller/governance/custody plane. Required Writer inputs must be local to GitHub before mission launch.
+Google Drive is an `EXTERNAL_HISTORICAL_OR_SUPPORTING_SOURCE` post-cutover (OD-20261002-086): history/evidence/heavy-output custody and compatibility pointers only — never current mutable governance authority. The canonical Controller plane is GitHub `controller/**`. Required Writer inputs must be local to GitHub before mission launch.
 
 ## Git lifecycle
 

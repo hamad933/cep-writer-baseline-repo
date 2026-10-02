@@ -27,7 +27,7 @@ The exact deleted bytes are not all present as standalone files in the H08 archi
 | temporary claim group | session evidence / former role | current durable disposition | current authority ceiling |
 |---|---|---|---|
 | per-Surface starting-point/readiness map | `CURRENT_SURFACE_READINESS.json`, `SURFACE_READINESS_DETAIL.md` | salvage value preserved by H02 plus current `controller/09_writer_forge/SURFACE_PACKET_REVALIDATION_MATRIX.json`; exact launch starting points must be rebound at milestone launch | HISTORICAL/SALVAGE ONLY; no old READY state survives as authority |
-| per-Surface Writer topology / wave order | `CURRENT_WRITER_EXECUTION_MATRIX.json` | dependency/collision wisdom retained in historical dispatch artifacts; current route is `OD-20260928-085` and W01→W05 | old WAVE-0..WAVE-4/per-Surface dispatch is NONCURRENT for ROUTE-MIMO-AGENT |
+| per-Surface Writer topology / wave order | `CURRENT_WRITER_EXECUTION_MATRIX.json` | dependency/collision wisdom retained in historical dispatch artifacts; route at H08 epoch was `OD-20260928-085` + W01→W05 **[EPOCH NOTE 2026-10-02: superseded by `OD-20261002-087` parallel disjoint lanes]** | old WAVE-0..WAVE-4/per-Surface dispatch is NONCURRENT for ROUTE-MIMO-AGENT |
 | prior Writer-result salvage | `LEGACY_WRITER_AUDIT.*` | useful result-preservation rule and historical per-Surface salvage evidence retained by H02/H06 and immutable Git history | old dispositions are not Product acceptance and do not define current readiness |
 | gate ownership / Owner-only escalation snapshot | `GATES_AND_OWNER_AUDIT.*`, `OWNER_ONLY_DECISIONS.md` | current live Owner register + CURRENT_STATE + H09 correction matrix supersede snapshot counts/classes | historical snapshot only; recompute current gates/decisions |
 | succession / continuation mechanics | `START_NEW_CONTROLLER.md`, `CONTROLLER_SUCCESSION_HANDOFF.md` | durable principles distilled into current `controller/READ_FIRST.md`, `controller/state/RESUME.md`, `controller/state/CHECKPOINT_PROTOCOL.md`, OD-077 and H06 DWP-03/04/08/09 | handoff is supporting history, never authority |
@@ -50,7 +50,7 @@ Likewise, old temporary gate counts and wave assignments remain provenance only.
 For every material claim class visible in the H08 session:
 
 1. **Current authority/state** — available from current Drive live authority during PRE_CUTOVER and mirrored into the converging GitHub Controller plane.
-2. **Current execution topology** — explicitly bound by `OD-20260928-085`, current route authority, READ_FIRST/RESUME, and milestone packet overlays.
+2. **Current execution topology** — bound at H08 epoch by `OD-20260928-085`, route authority, READ_FIRST/RESUME, and milestone packet overlays. **[EPOCH NOTE 2026-10-02: current topology is `OD-20261002-087`; OD-085 is historical task-specific lineage.]**
 3. **Surface scope / salvage starting value** — preserved in H02 plus current 23/23 structural packet revalidation; exact starting point remains a launch-time rebind.
 4. **Modern durable execution wisdom** — retained by H06 promotion candidates and current Controller-plane rules; provider/session wrappers remain historical.
 5. **H08 residue content/provenance** — preserved by immutable H08 archive + `H08_LOCAL_RESIDUE_DISPOSITION.md`.

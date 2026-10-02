@@ -1,6 +1,7 @@
 # GITHUB-DIRECT SUCCESSOR RECOVERY PROOF
 
 **Classification:** `PRE_CUTOVER_DELETION_RECOVERY_PROOF__GITHUB_ONLY__PASS`  
+> **EPOCH NOTE (2026-10-02):** This proof records the topology/authority of its audited epoch (pre-`OD-20261002-087`). Its PASS rows remain valid historical proof; current topology is `OD-20261002-087` and `OD-20260928-085` is historical task-specific lineage. Read the OD-085 rows below as epoch facts, not current routing.
 **Repository:** `hamad933/cep-writer-baseline-repo`  
 **Branch:** `writer/mi-serial`  
 **Audited HEAD:** `7711d1651e7d3b832aee20b2e4daf1f2a309bebe`  
