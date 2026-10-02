@@ -1,46 +1,106 @@
 {
   "SURFACE": "audit",
   "OWNER": "W05-AUDIT",
-  "REPORT_KIND": "CONTROLLER_RECONSTRUCTED_TRUTHFUL_EXECUTION_REPORT",
-  "RECONSTRUCTED_BY": "MIMO CLAW CONTROLLER (CP-2026-10-01-005)",
-  "RECONSTRUCTED_AT": "2026-10-01T07:40:00Z",
-  "RECONSTRUCTION_BASIS": "Fresh execution at actual branch HEAD — not synthesized from claims. Functional/structural truth from the 2026-10-01 capture run (capture-lineage.json, candidate commit eb3bd2c631a3a38cefebcc942b0f70fae06b1e00, dirtyAuditFiles=false). Visual truth from an independent L1/L2 comparison of the OWNER reference against the fresh EN capture.",
+  "REPORT_KIND": "WRITER_CANDIDATE_EXECUTION_REPORT__CANDIDATE_ONLY__NO_SELF_PROMOTION",
+  "LANE": "AUD-1",
+  "GENERATED_BY": "MiMo Writer lane AUD-1 (ROUTE-MIMO-AGENT, isolated worktree)",
+  "GENERATED_AT": "2026-10-02T06:25:00Z",
+  "SUPERSEDES": {
+    "report": "CONTROLLER_RECONSTRUCTED_TRUTHFUL_EXECUTION_REPORT (CP-2026-10-01-005), verdict HOLD, defects AUD-V1/AUD-V2/AUD-V3",
+    "preservedAt": "git fe1bb98ded51adc71a5f5fd14142a2c0880c11bc:writer-output/W05-AUDIT/VISUAL_EXECUTION_REPORT.json",
+    "carryForward": {
+      "FUNCTIONAL_STATUS": "PASS at parent head (route boot smoke 23/23, provider fixture 11 events, VALID_CHAIN) — re-verified in this lane, unchanged.",
+      "STRUCTURAL_STATUS": "PASS at parent head — re-verified in this lane, unchanged.",
+      "DEFECTS_CARRIED": ["AUD-V1", "AUD-V2", "AUD-V3"],
+      "ACCEPTANCE_STATUS_LINEAGE": "parent verdict HOLD stands until sole Controller review; this report does not accept its own work."
+    }
+  },
   "REFERENCE": [
     {
       "path": "cep-writer/references/visual/04_SYSTEM_AND_OPERATIONS/06_AUDIT/CEP_SYSTEM_AUDIT_TRACEABILITY_REFERENCE.png",
       "sha256": "7cb34c8357dfad0914e4eeaf732c97efbe376e957fe508137c4f730edaeb1e88",
-      "classification": "OWNER_CONFIRMED_FINAL_REFERENCE"
+      "classification": "OWNER_CONFIRMED_FINAL_REFERENCE",
+      "usedFor": "L1/L2/L3/L4 composition authority for the center split, the compact header intent and the bottom action/status bar."
     }
   ],
+  "REFERENCE_CLASSIFICATION": "OWNER_CONFIRMED_FINAL_REFERENCE",
   "CURRENT_CANDIDATE": {
-    "commit": "eb3bd2c631a3a38cefebcc942b0f70fae06b1e00",
+    "sourceCommit": "e201dbaba5cb6cf9e6ee2eb1dfd35742d3876904",
+    "sourceTree": "fd187d4137ae0ba12207705d052fa8aa4bb475ee",
+    "parentCommit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "dirtyAuditFilesAtCapture": false,
     "files": ["stack/native-typescript/surfaces/audit/index.ts", "stack/native-typescript/adapters/audit.ts"],
-    "dirtyAuditFiles": false
+    "note": "adapters/audit.ts unchanged in this lane; all edits are presentation-only inside surfaces/audit/index.ts."
   },
-  "FILES_CHANGED": [],
-  "FUNCTIONAL_STATUS": "PASS_AT_CURRENT_HEAD — live route ?surface=audit boots with zero page errors (23/23 route boot smoke, 2026-10-01). Provider-seeded fixture state verified server-side: 11 seeded events, providerVerify ok=true valid=true firstInvalidSequence=null, watermarkHash e87b311ffd9b25aa013babb8f4ed5a63fe1144bacbe9f916b53aa5d07a5d7b7a. Register renders 36 rows in AR and EN; chain integrity reads VALID_CHAIN (provider/session/chain); annotation failure path captured (ar-rtl-annotate-failed).",
-  "STRUCTURAL_STATUS": "PASS_AT_CURRENT_HEAD — regions resolve and render (register + context + tabs); no horizontal overflow at 1536x1024, 1440x1000, 1024x900, 820x1180 (all captured, both locales where captured).",
-  "VISUAL_STATUS": "FAIL_L1_L2_VS_REFERENCE — MATERIALLY_DIVERGENT (independent comparison 2026-10-01, reference vs en-ltr-full-1536-20260930T233105Z.png).",
-  "VISUAL_COMPARISON_LEVELS_COMPLETED": ["L1_WHOLE_SCREEN", "L2_HIERARCHY_DENSITY_IDENTITY (EN/LTR only)"],
-  "VISUAL_COMPARISON_LEVELS_PENDING": ["L3_REGION_PANE", "L4_MICRO_DETAIL", "AR/RTL formal comparison", "matched responsive comparisons"],
+  "FILES_CHANGED": ["stack/native-typescript/surfaces/audit/index.ts"],
+  "FUNCTIONAL_STATUS": "PASS_AT_CANDIDATE — npm test 210/0 (three runs, two of them back-to-back identical); flow audit.trail-recording PASS with 0 failed assertions (receipt aggregate 8/8); packet tests S18 (domain + source-boundary), S06 audit-provenance-core, CG6 (coverage + controller-corr01 truth) = 6/6 PASS. No domain logic, command contract, adapter contract or settlement contract changed.",
+  "STRUCTURAL_STATUS": "PASS_AT_CANDIDATE — regions resolve unchanged (LEFT desk / CENTER ledger+lower band / RIGHT inspector / BOTTOM deep ledger / TOOLBAR); DOM hooks required by tools and flows preserved (tr[data-a-row], [data-a-scope], [data-a-tab], [data-integrity], [data-a-title], .a-node, .a-ctx-block, .a-live, .a-settle, [data-annotation-form], [data-event-id], [data-note]); no horizontal overflow at 1440x1000 or 1024x900 in either locale (8 captures, pageErrors=[]).",
+  "VISUAL_STATUS": "FAIL_IN_PARENT__CLOSED_IN_CANDIDATE_AT_SURFACE_SCOPE — AUD-V1 CLOSED, AUD-V2 CLOSED, AUD-V3 CLOSED_FOR_THE_SURFACE_OWNED_HEADER_AND_VERTICAL_BUDGET_WITH_SHARED_SHELL_REMAINDER_OPEN (see DEFECTS_FOUND and BLOCKERS). Verified by before/after matched-viewport captures at 1440x1000 and 1024x900 in AR/RTL and EN/LTR with a DOM geometry probe as ground truth.",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": ["L1_WHOLE_SCREEN (reference vs before vs after, 4 matched cells)", "L2_REGION_PANE (surface header, ledger, lower band = trace+JSON, action bar, left desk, right inspector, shell chrome)", "L3_COMPONENT (chain node cards, raw-payload JSON panel with line gutter, ledger table, filter toolbar, integrity chips, action/status bar)", "L4_MICRO (type scale, spacing rhythm, ellipsis/truncation behaviour, chip borders, sticky bar solidity, RTL mirroring of the lower band)"],
+  "VISUAL_COMPARISON_LEVELS_PENDING": ["820x1180 compact breakpoint re-capture in this lane (rules implemented: subtitle hidden <=1060, lower band stacks <=760)", "human/Owner visual acceptance (sole Controller review first)"],
+  "RESPONSIVE_STATUS": "PASS_AT_SEALED_VIEWPORTS — 1440x1000 and 1024x900 both show ledger + trace timeline + JSON detail + action bar above the fold in both locales (probe visibleAtFirstScreen all true, 4/4 cells). Deliberate reflow: the reference's two stacked lower bands are composed as one two-pane band (trace | evidence deck) because the center pane measures ~654-678px beside the shared context panes; deep panels stack and scroll under per-panel caps inside that band. Narrower breakpoints are implemented but were not part of this lane's sealed capture matrix.",
+  "RTL_LTR_STATUS": "PASS — captured AR/RTL and EN/LTR at both viewports; direction is not baked (no `dir` in structure; technical tokens remain in <bdi dir=\"ltr\">); in RTL the lower band mirrors (trace right, JSON left) and the action bar mirrors (lock status at start, create-note at end); no overlap or clipped labels observed in either direction.",
   "DEFECTS_FOUND": [
-    {"id": "AUD-V1", "severity": "V2", "rootCause": "SURFACE_COMPOSITION", "statement": "Center work area is a single register (filters + table). The reference's center is a split: event table above, trace timeline (node chain) + JSON detail below. The traceability mechanic is absent from the visual hierarchy."},
-    {"id": "AUD-V2", "severity": "V3", "rootCause": "SURFACE_COMPOSITION", "statement": "Bottom action/status bar missing (reference: locked/mutable indicator left, create-note action right)."},
-    {"id": "AUD-V3", "severity": "V2", "rootCause": "SHARED_COMPONENT", "statement": "Header hierarchy diverges: candidate uses the double-tier global+area header where the reference uses a compact single-tier top bar; vertical budget is consumed by chrome instead of data."}
+    {
+      "id": "AUD-V1",
+      "severity": "V2",
+      "rootCause": "SURFACE_COMPOSITION",
+      "statement": "Parent: center was a single register (filters + table); the reference split (event table above, trace timeline + JSON detail below) sat below the fold (chain y=1124, JSON y=1463 at 1440x1000).",
+      "change": "Compact header returned vertical budget to data (surface header+toolbar 437px -> 153px at AR 1440), ledger height capped by vh clamp, lower band composed as trace | evidence deck side by side below the ledger.",
+      "evidence": "before chain y=1124/JSON y=1463 (not visible) -> after chain y=599/JSON y=676, both above the action bar (y=870); probe visibleAtFirstScreen {table:true, chain:true, json:true} in 4/4 cells; captures v2-before/v2-after (hash-bound, both locales, both viewports).",
+      "status": "CLOSED"
+    },
+    {
+      "id": "AUD-V2",
+      "severity": "V3",
+      "rootCause": "SURFACE_COMPOSITION",
+      "statement": "Parent: bottom action/status bar missing (reference: locked/mutable indicator at start, create-note action at end).",
+      "change": "Added a sticky surface action/status bar (.a-actionbar, data-a-actionbar): lock state 'Record locked — append-only' + 'Notes are stored separately' (full truth text incl. databaseImmutabilityClaim=false on title/aria) at the start; mutable indicator 'Annotations mutable · N' (live count); create-note action (+ New note) bound to the shared foundation.note command at the end. Localized AR/EN, direction-mirrored.",
+      "evidence": "probe actionBar present y=870 h=71 (1440) and y=775 h=71 (1024), visibleAtFirstScreen.actionBar=true in 4/4 cells; OCR of final captures reads 'Record locked — append-only | Notes are stored separately | Annotations mutable · 3 | + New note' and the Arabic equivalent; falsify LANE1.action_bar_present_and_truthful PASS.",
+      "status": "CLOSED"
+    },
+    {
+      "id": "AUD-V3",
+      "severity": "V2",
+      "rootCause": "SURFACE_COMPOSITION (surface-owned half) + SHARED_COMPONENT (shell remainder)",
+      "statement": "Parent: double-tier header vs reference compact single-tier; vertical budget consumed by chrome instead of data. Surface-owned half: heavy identity tier (eyebrow + 27px title + multi-line lead + stacked chip column = 319px) stacked over a separate command tier (118px), duplicating the identity the shell banner already states.",
+      "change": "Surface header collapsed to ONE compact tier: single bordered header containing title + one-line subtitle (full lead retained on title attribute), status (last-verified + per-plane chain chips), and the command controls; duplicated eyebrow removed; counts folded into the ledger legend; panel-head duplicate title removed; spacing/typography tightened on a consistent scale. Measured: surface header+toolbar 437px -> 153px (AR 1440), 273px -> 149px (AR 1024); table starts y=692 -> y=388; stage scrollHeight 2449 -> 1189.",
+      "shellRemainder": "The shell's global nav tier, area nav tier, area banner (#topBanner 'Audit · Durable Event Trace') and shared domain toolbar row are owned by W01-SHELL / m0-controller-composition (read-only for this lane) and still stack above the surface; they cannot be compacted from surfaces/audit. Routed as writer-output/W05-AUDIT/SERIALIZED_HOTSPOT_REQUEST.md; Owner shell redesign OWNER-20260910-010 remains an isolated Owner item (record-only).",
+      "evidence": "before/after probes + captures at 4 cells; header region heights measured in the DOM probe; shell chromeTotal measured unchanged (170px @1440, 201px @1024) proving no shared chrome was mutated.",
+      "status": "CLOSED_AT_SURFACE_SCOPE__SHARED_SHELL_REMAINDER_OPEN"
+    }
   ],
-  "DEFECT_SEVERITY": "V2-V3",
-  "ROOT_CAUSE": "SURFACE_COMPOSITION + SHARED_COMPONENT (chrome) — not fixture, not data.",
-  "FIXES_APPLIED": ["None in this report. Defect closure is a bounded Writer visual ownership loop (matrix row WM-005, CP-2026-10-01-005)."],
-  "RECAPTURE_STATUS": "COMPLETE — 16 fresh hash-bound captures at 2026-10-01 (AR/RTL + EN/LTR + responsive 1440/1024/820 + collapsed/scrolled states); see evidence/capture-lineage.json (errors=[]).",
-  "RECOMPARISON_STATUS": "L1_L2_COMPLETE__L3_L4_PENDING",
-  "REGRESSION_STATUS": "NOT_APPLICABLE_NO_SOURCE_CHANGE_THIS_REPORT",
+  "NEW_OR_OPEN_OBSERVATIONS": [
+    {"id": "AUD-O1", "severity": "V2", "rootCause": "SHARED_COMPONENT", "statement": "Four shared chrome rows (global nav, area nav, area banner, domain toolbar) stack above the surface vs the reference's single compact top bar; chromeTotal 170px @1440 / 201px @1024.", "routing": "SERIALIZED_HOTSPOT_REQUEST.md (W01-SHELL/m0, SH-1 chain); Owner item OWNER-20260910-010 record-only."},
+    {"id": "AUD-O2", "severity": "V2", "rootCause": "OWNER_CONSTRAINT", "statement": "Shared side-pane geometry at 1440 measures left ~335px / right ~451px vs the reference's ~210/~300 at 1536, leaving the center ~654px; this drove the two-pane lower band instead of the reference's full-width stacking. Pane geometry is shared pane-system state (OWNER-20260910-012), not surface-local.", "routing": "record-only, no lane write possible."},
+    {"id": "AUD-O3", "severity": "V3", "rootCause": "EVIDENCE/ORACLE", "statement": "assurance/BROWSER_CONFORMANCE_RECEIPT.json at parent head is bound to canonical tree 0c43d7f1…; after this lane's source change `npm run check` shows 2 failing checks: the known red browser.lineage_receipt_truthful (6/6-truth-guard, 2 Enterprise flow failures inside — NOT this lane) plus browser.current_candidate_claim_truthful (stale receipt vs new tree d13f120a…). Transiently verified truthful regeneration: running `npm run browser:test` at the candidate produced a fresh receipt (executionStatus EXECUTED with the same 2 Enterprise failures) and restored check to pass 167 / fail 1 == the baseline single known red; the receipt was then reverted per mission step 6 (assurance/** is read-only for this lane and must not be hand-edited).", "routing": "Controller regenerates the conformance receipt after admission; never hand-edited."},
+    {"id": "AUD-O4", "severity": "V1", "rootCause": "RESPONSIVE_RULE", "statement": "Inside the half-width lower band, chain-node action/target values ellipsize (full value reachable via title attribute and the raw-payload JSON panel).", "routing": "accepted trade-off to keep the reference's timeline+JSON pair above the fold; reopen only if Controller prefers vertical stacking with a taller fold."}
+  ],
+  "DEFECT_SEVERITY": "V2-V3 (as inherited; AUD-V1 CLOSED, AUD-V2 CLOSED, AUD-V3 surface scope CLOSED with shared remainder recorded)",
+  "ROOT_CAUSE": "SURFACE_COMPOSITION for all three defects at surface scope; SHARED_COMPONENT remainder for the shell header rows (recorded, not mutated); no fixture/data/contract root cause found.",
+  "FIXES_APPLIED": [
+    "AUD-V1: compact surface header + vh-capped ledger + two-pane lower band (trace timeline | evidence/JSON deck) below the ledger — split now renders in the first screen at both sealed viewports in both locales.",
+    "AUD-V2: sticky bottom action/status bar with locked/mutable indicator (start) and create-note action (end), bilingual and direction-mirrored.",
+    "AUD-V3: single-tier compact surface header (identity eyebrow removed, long lead reduced to a one-line subtitle with full text on title attribute, status + controls inside one bordered tier, duplicate counts/title folded into the ledger head).",
+    "Chain-node micro-fix: action/target ellipsize instead of character-wrapping (prevented a 400px text tower in narrow nodes); deep panels capped and stacked inside the band; solid sticky-bar background."
+  ],
+  "RECAPTURE_STATUS": "COMPLETE — 16 hash-bound captures (8 before at parent fe1bb98 clean, 8 after at candidate e201dbab clean) at 1440x1000 + 1024x900, AR/RTL + EN/LTR, full + scrolled; every image re-hashed and dimension-checked against its lineage entry (hash/dims/bytes all match); pageErrors=[] in both rounds; see evidence/capture-lineage-v2-before.json and evidence/capture-lineage-v2-after.json.",
+  "RECOMPARISON_STATUS": "L1_L2_L3_L4_COMPLETE_FOR_THE_THREE_DEFECTS (before vs after vs reference); compact-breakpoint (820) comparison not in this lane's sealed matrix.",
+  "REGRESSION_STATUS": "PASS — build:runtime pass; npm test 210/0 three runs (two back-to-back identical, N5); audit.trail-recording PASS; S18/S06/CG6 6/6; check-duplicate-mechanics PASS (filesScanned 322, no duplicate owner introduced, N4); no shared file mutated (git status shows only surfaces/audit/index.ts in tracked scope).",
   "EVIDENCE": [
-    "writer-output/W05-AUDIT/evidence/capture-lineage.json (2026-10-01, candidate eb3bd2c, 16 captures, errors=[])",
-    "writer-output/W05-AUDIT/evidence/en-ltr-full-1536-20260930T233105Z.png sha256:7e038911779c…",
-    "writer-output/W05-AUDIT/evidence/ar-rtl-full-1536-20260930T233055Z.png sha256:4b420cb9b88c…",
-    "controller/state/MIMO_CLAW_CHECKPOINT_CP-2026-10-01-005.md (route boot smoke 23/23)"
+    "writer-output/W05-AUDIT/evidence/capture-lineage-v2-before.json (parent fe1bb98 clean, 8 captures, errors=[], fixture 11 durable events, verify valid=true firstInvalid=null)",
+    "writer-output/W05-AUDIT/evidence/capture-lineage-v2-after.json (candidate e201dbab tree fd187d41 clean, 8 captures, errors=[], fixture 11 durable events, verify valid=true firstInvalid=null)",
+    "before/full: v2-before-ar-rtl-full-1440x1000-20261002T050816Z.png sha256:c3a12f5e56a6cbdc… ; v2-before-en-ltr-full-1440x1000-20261002T050827Z.png sha256:ff76b0fd5f53b995… ; v2-before-ar-rtl-full-1024x900-20261002T050838Z.png sha256:2bb6a22743256265… ; v2-before-en-ltr-full-1024x900-20261002T050850Z.png sha256:a00293d863077543…",
+    "after/full: v2-after-ar-rtl-full-1440x1000-20261002T061723Z.png sha256:919efad82cce37bc… ; v2-after-en-ltr-full-1440x1000-20261002T061729Z.png sha256:3f07745510c82c18… ; v2-after-ar-rtl-full-1024x900-20261002T061736Z.png sha256:4dd9d6f10e49f161… ; v2-after-en-ltr-full-1024x900-20261002T061742Z.png sha256:5891cbd0cd797b0b… (plus scrolled counterparts in the same lineages)",
+    "writer-output/W05-AUDIT/evidence/falsification-v2.json (21/21: N1 route refusals, N2 boundary, N3 provider-absent, N4 duplicate-mechanics, LANE-1 hash ceiling, LANE-2 tamper probe)",
+    "writer-output/W05-AUDIT/evidence/capture-v2.mjs and falsify-v2.mjs (re-executable harnesses for both rounds)",
+    "superseded intermediate rounds retained locally and labelled: capture-lineage-v2-after-iter1/2/3/3b/4.json + timestamped pngs (never reused as current proof)"
   ],
-  "LINEAGE": "Every capture bound to candidate commit + viewport + lang/dir + sha256 in capture-lineage.json. Functional counts observed in the same run, not inherited.",
-  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED — controller verdict: HOLD (functional/structural pass at current head; visual materially divergent vs reference).",
-  "BLOCKERS": ["Visual convergence to the reference's traceability composition requires sustained visual authoring (Writer row WM-005)."]
+  "LINEAGE": "Before round: commit fe1bb98ded51adc71a5f5fd14142a2c0880c11bc, tree f22c70ce…, dirtyAuditFiles=false, fresh runtime root per phase, 11 provider-seeded hash-chained events (verify valid=true, firstInvalid=null), reference sha256 7cb34c8357dfad09…, node 22.16.0, Chromium via package-local Playwright. After round: source commit e201dbaba5cb6cf9e6ee2eb1dfd35742d3876904, tree fd187d4137ae0ba12207705d052fa8aa4bb475ee, dirtyAuditFiles=false, same fresh-runtime protocol (separate root), same fixture counts and verify result, same reference binding. Every capture carries path + sha256 + byte size + viewport + lang/dir + timestamp in its lineage JSON; the bytes were re-hashed and dimension-checked before analysis, cross-checked against a DOM geometry probe and OCR (vision ground-truth per visual-fidelity-review R3b).",
+  "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED — CANDIDATE_ONLY for sole Controller review. The Writer cannot accept its own work; parent HOLD verdict stands until Controller adjudication.",
+  "BLOCKERS": [
+    "AUD-V3 full closure (global+area shell header rows) requires a W01-SHELL/m0 shared change outside this lane's writable roots — routed via writer-output/W05-AUDIT/SERIALIZED_HOTSPOT_REQUEST.md; Owner shell redesign OWNER-20260910-010 is Owner-isolated and record-only.",
+    "assurance/BROWSER_CONFORMANCE_RECEIPT.json must be regenerated by the Controller after admission (stale receipt vs candidate tree; never hand-edited here).",
+    "Two global Enterprise flow failures inside browser.lineage_receipt_truthful (6/4 pass) are pre-existing and explicitly not this lane's."
+  ]
 }

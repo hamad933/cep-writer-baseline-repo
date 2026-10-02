@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 2,
+  "unit": "W05-AUDIT",
+  "surface": "audit",
+  "lane": "AUD-1",
+  "candidate": {
+    "commit": "e201dbaba5cb6cf9e6ee2eb1dfd35742d3876904",
+    "tree": "fd187d4137ae0ba12207705d052fa8aa4bb475ee"
+  },
+  "runAt": "2026-10-02T06:17:53.723Z",
+  "totals": {
+    "total": 21,
+    "pass": 21,
+    "fail": 0
+  },
+  "results": [
+    {
+      "id": "env.web_up",
+      "claim": "web server reachable",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": "",
+      "at": "2026-10-02T06:17:43.822Z"
+    },
+    {
+      "id": "env.runtime_up",
+      "claim": "runtime reachable",
+      "expected": true,
+      "actual": true,
+      "ok": true,
+      "detail": "",
+      "at": "2026-10-02T06:17:43.823Z"
+    },
+    {
+      "id": "seed.record_written",
+      "claim": "fixture AuditEvent written",
+      "expected": "201",
+      "actual": "201",
+      "ok": true,
+      "detail": "",
+      "at": "2026-10-02T06:17:43.839Z"
+    },
+    {
+      "id": "seed.record_hash_present",
+      "claim": "written trail entry carries a record hash",
+      "expected": "hash present",
+      "actual": "40c0fa34f07ebf51",
+      "ok": true,
+      "detail": "",
+      "at": "2026-10-02T06:17:43.841Z"
+    },
+    {
+      "id": "N1.http_patch_refused",
+      "claim": "PATCH (non-owned route) on a written trail entry must not mutate",
+      "expected": "status >= 400",
+      "actual": "404",
+      "ok": true,
+      "detail": "{\"ok\":false,\"code\":\"NOT_FOUND\"}",
+      "at": "2026-10-02T06:17:43.844Z"
+    },
+    {
+      "id": "N1.http_delete_refused",
+      "claim": "DELETE (non-owned route) must not remove a written trail entry",
+      "expected": "status >= 400",
+      "actual": "404",
+      "ok": true,
+      "detail": "{\"ok\":false,\"code\":\"NOT_FOUND\"}",
+      "at": "2026-10-02T06:17:43.847Z"
+    },
+    {
+      "id": "N1.http_put_refused",
+      "claim": "PUT (non-owned route) must not overwrite a written trail entry",
+      "expected": "status >= 400",
+      "actual": "404",
+      "ok": true,
+      "detail": "{\"ok\":false,\"code\":\"NOT_FOUND\"}",
+      "at": "2026-10-02T06:17:43.851Z"
+    },
+    {
+      "id": "LANE2.rewrite_same_eventid_rejected",
+      "claim": "re-append with same eventId but different content must be rejected",
+      "expected": "422 AUDIT_EVENT_ID_CONFLICT",
+      "actual": "422 AUDIT_EVENT_ID_CONFLICT",
+      "ok": true,
+      "detail": "",
+      "at": "2026-10-02T06:17:43.854Z"
+    },
+    {
+      "id": "LANE2.record_hash_unchanged",
+      "claim": "record hash identical after every tamper attempt",
+      "expected": "40c0fa34f07ebf51c8020d476b917a920e5cc5b774f935cd2eca3d971bde16ad",
+      "actual": "40c0fa34f07ebf51",
+      "ok": true,
+      "detail": "",
+      "at": "2026-10-02T06:17:43.857Z"
+    },
+    {
+      "id": "LANE2.chain_still_valid",
+      "claim": "provider verification still valid after tamper attempts",
+      "expected": "valid=true",
+      "actual": "valid=true firstInvalid=null",
+      "ok": true,
+      "detail": "",
+      "at": "2026-10-02T06:17:43.859Z"
+    },
+    {
+      "id": "LANE2.annotation_does_not_mutate_event",
+      "claim": "annotation is stored separately; event bytes unchanged",
+      "expected": "201 + hash unchanged",
+      "actual": "201 + true",
+      "ok": true,
+      "detail": "",
+      "at": "2026-10-02T06:17:43.865Z"
+    },
+    {
+      "id": "N2.missing_fields_rejected",
+      "claim": "POST without required fields must be rejected, not partially written",
+      "expected": "422 AUDIT_EVENT_FIELDS_REQUIRED",
+      "actual": "422 AUDIT_EVENT_FIELDS_REQUIRED",
+      "ok": true,
+      "detail": "",
+      "at": "2026-10-02T06:17:43.867Z"
+    },
+    {
+      "id": "N2.annotate_invalid_rejected",
+      "claim": "annotation with empty actor/note must fail closed",
+      "expected": "422",
+      "actual": "422",
+      "ok": true,
+      "detail": "",
+      "at": "2026-10-02T06:17:43.869Z"
+    },
+    {
+      "id": "N3.exclusive_port_is_closed",
+      "claim": "N3 control port has no provider listening",
+      "expected": "unreachable",
+      "actual": "false",
+      "ok": true,
+      "detail": "",
+      "at": "2026-10-02T06:17:43.873Z"
+    },
+    {
+      "id": "N3.provider_absent_never_fabricated",
+      "claim": "provider unreachable → provider plane claims NO chain verdict (UNVERIFIED), combined verdict downgraded to session-only, unverified state visible, no page errors",
+      "expected": "PROVIDER=UNVERIFIED + chain=VALID_CHAIN_SESSION_ONLY + UNVERIFIED visible + 0 page errors",
+      "actual": "{\"adapterTruthPersistence\":\"PROVIDER_DURABLE_JSONL\",\"adapterHashIsEncryption\":false,\"providerChip\":\"UNVERIFIED\",\"chainChip\":\"VALID_CHAIN_SESSION_ONLY\",\"surfacesProviderError\":false,\"surfacesUnverifiedVisible\":true,\"rows\":25}",
+      "ok": true,
+      "detail": "pageErrors=0",
+      "at": "2026-10-02T06:17:49.900Z"
+    },
+    {
+      "id": "N3.no_provider_hash_ceiling_holds",
+      "claim": "without a provider the hash ceiling still reads false (no invented encryption claim)",
+      "expected": "hashIsEncryption=false",
+      "actual": "false",
+      "ok": true,
+      "detail": "",
+      "at": "2026-10-02T06:17:49.900Z"
+    },
+    {
+      "id": "LANE1.hash_is_not_encryption_false",
+      "claim": "audit-hash-is-encryption ceiling stays false",
+      "expected": "false + UI states verification-not-encryption",
+      "actual": "{\"h\":false,\"ui\":true}",
+      "ok": true,
+      "detail": "",
+      "at": "2026-10-02T06:17:53.506Z"
+    },
+    {
+      "id": "LANE1.no_db_immutability_claim",
+      "claim": "databaseImmutabilityClaim stays false",
+      "expected": "false",
+      "actual": "false",
+      "ok": true,
+      "detail": "",
+      "at": "2026-10-02T06:17:53.506Z"
+    },
+    {
+      "id": "LANE1.receipts_not_audit_events",
+      "claim": "commandReceiptsAreAuditTruth stays false",
+      "expected": "false",
+      "actual": "false",
+      "ok": true,
+      "detail": "",
+      "at": "2026-10-02T06:17:53.506Z"
+    },
+    {
+      "id": "LANE1.action_bar_present_and_truthful",
+      "claim": "AUD-V2 action/status bar rendered with lock + note action",
+      "expected": "present + lock + note",
+      "actual": "Record locked — append-onlyNotes are stored separately Annotations mutable · 3 New note",
+      "ok": true,
+      "detail": "",
+      "at": "2026-10-02T06:17:53.507Z"
+    },
+    {
+      "id": "N4.no_duplicate_mechanics",
+      "claim": "check-duplicate-mechanics finds no duplicate owner introduced",
+      "expected": "status PASS",
+      "actual": "PASS filesScanned=322",
+      "ok": true,
+      "detail": "",
+      "at": "2026-10-02T06:17:53.713Z"
+    }
+  ]
+}
