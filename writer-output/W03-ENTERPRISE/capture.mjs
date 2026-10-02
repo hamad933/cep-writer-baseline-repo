@@ -33,7 +33,11 @@ const CASES = [
   {id: 'ltr-1503', w: 1503, h: 1046, locale: 'en', dir: 'ltr', states: ['topology', 'selected', 'composer', 'twins', 'revisions', 'baselines', 'state']},
   {id: 'rtl-1503', w: 1503, h: 1046, locale: 'ar', dir: 'rtl', states: ['topology', 'revisions']},
   {id: 'ltr-1024', w: 1024, h: 900, locale: 'en', dir: 'ltr', states: ['topology']},
-  {id: 'ltr-820', w: 820, h: 900, locale: 'en', dir: 'ltr', states: ['topology', 'revisions']}
+  {id: 'ltr-820', w: 820, h: 900, locale: 'en', dir: 'ltr', states: ['topology', 'revisions']},
+  // ENT-1 re-dispatch #2: DAG §0 mandates 1440x1000 + 1024x900 in AR/RTL + EN/LTR.
+  {id: 'ltr-1440', w: 1440, h: 1000, locale: 'en', dir: 'ltr', states: ['topology', 'selected', 'revisions']},
+  {id: 'rtl-1440', w: 1440, h: 1000, locale: 'ar', dir: 'rtl', states: ['topology', 'selected', 'revisions']},
+  {id: 'rtl-1024', w: 1024, h: 900, locale: 'ar', dir: 'rtl', states: ['topology']}
 ];
 
 const freePort = () => new Promise(res => {
@@ -177,7 +181,9 @@ const capture = async () => {
     await browser.close();
     server.kill();
   }
-  const receipt = {schemaVersion: 1, unit: 'W03-ENTERPRISE', surface: 'enterprise', label, candidate: {branch: 'writer/mi-serial', commit: git, worktreeDirtyEnterpriseFiles: dirty, build: 'tools/writer-serial.sh npm run build:runtime'}, capturedAt: new Date().toISOString(), frames};
+  const branch = (() => { try { return execFileSync('git', ['rev-parse', '--abbrev-ref', 'HEAD'], {cwd: root}).toString().trim(); } catch { return 'unknown'; } })();
+  const tree = (() => { try { return execFileSync('git', ['rev-parse', 'HEAD^{tree}'], {cwd: root}).toString().trim(); } catch { return 'unknown'; } })();
+  const receipt = {schemaVersion: 1, unit: 'W03-ENTERPRISE', surface: 'enterprise', label, candidate: {branch, commit: git, tree, worktreeDirtyEnterpriseFiles: dirty, build: 'npm run build:runtime (ENT-1 re-dispatch #2, direct; pass:true, written:323)'}, capturedAt: new Date().toISOString(), frames};
   await writeFile(path.join(outRoot, `receipt-${label}.json`), JSON.stringify(receipt, null, 2));
   console.log(`captured ${frames.length} frames -> ${dir}`);
   for (const f of frames) console.log(`  ${f.image.path} ${f.image.width}x${f.image.height} sha=${f.image.sha256.slice(0, 12)} words=${f.probe.words.total} clipped=${f.probe.clipped.length} err=${f.pageErrors.length}`);

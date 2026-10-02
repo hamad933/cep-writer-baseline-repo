@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "unit": "W03-ENTERPRISE",
+  "purpose": "CP-003 VV-01/02/03 fresh vision probes generated at exact current source",
+  "commit": "766ab95367dde5ce433a148cdecb602274fe6c0d",
+  "tree": "5926fac34eaf680abbaf95bc18023cb6fd2ee868",
+  "generatedAt": "2026-10-02T07:00:55.127997+00:00",
+  "manifest": [
+    {
+      "file": "writer-output/W03-ENTERPRISE/evidence/vision-probes/vv01-canary-8417.png",
+      "sha256": "d046d5df7ffee773bd8214c4cc49bcf807938a5b3ac416e3745ff6f82da9d4d5",
+      "width": 640,
+      "height": 220,
+      "bytes": 18795,
+      "kind": "VV-01_CANARY",
+      "note": "Fresh magenta canary minted in THIS session. A correct image-channel read returns this text on a magenta field; returning an application screenshot = the VD-008 mismatch again.",
+      "embeddedText": [
+        "ENT1 VV01 CANARY 8417",
+        "NONCE 8417 FRESH 766AB95",
+        "MAGENTA 200 0 160"
+      ]
+    },
+    {
+      "file": "writer-output/W03-ENTERPRISE/evidence/vision-probes/vv02-sbs-reference-vs-ent1-rev1.png",
+      "sha256": "8117306c571921361a45e55858830406db5c72dc172c75facee1cde0a5281cf2",
+      "width": 1232,
+      "height": 1870,
+      "bytes": 1365654,
+      "kind": "VV-02_SIDE_BY_SIDE",
+      "note": "Fresh side-by-side built from the CURRENT-SOURCE candidate capture (ent1-rev1) and the registered CURRENT_FINAL_REFERENCE. A correct read shows a yellow REFERENCE label band on top and a cyan CANDIDATE label band below it, each followed by a 1503x1046 dashboard image.",
+      "embeddedText": [
+        "REFERENCE 8b3b3e3b47693a54",
+        "CANDIDATE ent1-rev1 7a901262dcb92dc2"
+      ]
+    },
+    {
+      "file": "writer-output/W03-ENTERPRISE/evidence/vision-probes/vv03-crop-ltr-1503-topology-ent1-rev1.png",
+      "sha256": "5d64838a291252c831d94bb4990d163276adb9ceb37370146d4b8c67f2de6290",
+      "width": 1080,
+      "height": 570,
+      "bytes": 117791,
+      "kind": "VV-03_CURRENT_SOURCE_CROP",
+      "note": "Crop of the FRESH ent1-rev1 frame (commit 766ab95). Correct read: a dark app shell with a left 'Enterprise structure' list, a centre topology canvas with node cards, a right context column and an 'Enterprise digital twin' header \u2014 with NO duplicated structure rail inside the stage."
+    },
+    {
+      "file": "writer-output/W03-ENTERPRISE/evidence/vision-probes/shell-header-delta-after5-vs-ent1-rev1.png",
+      "sha256": "fbda66143041298df848f05d0aeb969ba24619dc863f5d5027dcb98dbdeea8d0",
+      "width": 1000,
+      "height": 156,
+      "bytes": 33299,
+      "kind": "SHELL_HEADER_DELTA",
+      "note": "The ONLY pixel delta between after5 and ent1-rev1 on every overlapping LTR frame: shell destination row, y=0..45. Enterprise surface starts at y=218 \u2014 outside the delta. Shell chrome is SH-1-owned (read-only for ENT-1)."
+    },
+    {
+      "file": "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/01_ENTERPRISE_DIGITAL_TWIN/Enterprise Cybersecurity Topology Dashboard.png",
+      "sha256": "8b3b3e3b47693a54a8289d7d497bae5539e7d166c58e92b245936c919dc25c2e",
+      "width": 1503,
+      "height": 1046,
+      "bytes": 1458799,
+      "kind": "REFERENCE_CURRENT_FINAL",
+      "note": "construction authority; never evidence of a result"
+    },
+    {
+      "file": "cep-writer/references/visual/02_SIMULATION_AND_ENTERPRISE/01_ENTERPRISE_DIGITAL_TWIN/CEP_ENTERPRISE_DIGITAL_TWIN_REVISION_BASELINE_REFERENCE.png",
+      "sha256": "54939bae7d1f323aa12205705d67c9fabed4870606722cf04dbf1f4e32a8a8fc",
+      "width": 1607,
+      "height": 979,
+      "bytes": 1526734,
+      "kind": "REFERENCE_OWNER_CONFIRMED_SUPPORTING",
+      "note": "construction authority; never evidence of a result"
+    },
+    {
+      "file": "writer-output/W03-ENTERPRISE/evidence/ent1-rev1/ltr-1503-topology.png",
+      "sha256": "7a901262dcb92dc2669ebb626dba0153098efc0069d0e44a31257ceb33f77ec3",
+      "width": 1503,
+      "height": 1046,
+      "bytes": 262088,
+      "kind": "CURRENT_SOURCE_CANDIDATE_FRAME",
+      "note": "ent1-rev1 fresh capture at 766ab95367dde5ce433a148cdecb602274fe6c0d / 5926fac34eaf680abbaf95bc18023cb6fd2ee868"
+    }
+  ]
+}

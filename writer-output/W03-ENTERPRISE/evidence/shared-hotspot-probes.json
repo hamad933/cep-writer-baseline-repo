@@ -1,0 +1,243 @@
+{
+  "schemaVersion": 1,
+  "unit": "W03-ENTERPRISE",
+  "purpose": "D-04 / D-08 shared-root hotspot evidence (read-only measurement)",
+  "commit": "766ab95367dde5ce433a148cdecb602274fe6c0d",
+  "tree": "5926fac34eaf680abbaf95bc18023cb6fd2ee868",
+  "capturedAt": "2026-10-02T07:11:19.163Z",
+  "D04": {
+    "available": true,
+    "sharedFile": "stack/native-typescript/foundation/spatial/presentation.ts",
+    "sharedFileSha256": "06afda5a3c7e388a7e2c139767ab6f5c5ae9efec816e1bd1ee809ecf5cddd992",
+    "distFileSha256": "06afda5a3c7e388a7e2c139767ab6f5c5ae9efec816e1bd1ee809ecf5cddd992",
+    "cases": [
+      {
+        "case": "enterprise-consumer-mitigated",
+        "statusLen": 0,
+        "showStatusChipExpected": false,
+        "statusChipRendered": false,
+        "idChip": {
+          "x": 31,
+          "y": 21
+        },
+        "statusChipText": null,
+        "secondaryLine": {
+          "x": 31,
+          "y": 46
+        },
+        "sameBaseline": null,
+        "note": "both chips on one baseline at y=21; no offset/truncate/collision handling exists in this function"
+      },
+      {
+        "case": "shared-root-repro-long-status",
+        "statusLen": 21,
+        "showStatusChipExpected": true,
+        "statusChipRendered": true,
+        "idChip": {
+          "x": 31,
+          "y": 21
+        },
+        "statusChipText": {
+          "x": 119,
+          "y": 21,
+          "text": "Type: Web Application"
+        },
+        "secondaryLine": null,
+        "sameBaseline": true,
+        "note": "both chips on one baseline at y=21; no offset/truncate/collision handling exists in this function"
+      },
+      {
+        "case": "shared-root-repro-22-chars",
+        "statusLen": 23,
+        "showStatusChipExpected": false,
+        "statusChipRendered": false,
+        "idChip": {
+          "x": 31,
+          "y": 21
+        },
+        "statusChipText": null,
+        "secondaryLine": {
+          "x": 31,
+          "y": 46
+        },
+        "sameBaseline": null,
+        "note": "both chips on one baseline at y=21; no offset/truncate/collision handling exists in this function"
+      },
+      {
+        "case": "shared-root-over-22-chars",
+        "statusLen": 29,
+        "showStatusChipExpected": false,
+        "statusChipRendered": false,
+        "idChip": {
+          "x": 31,
+          "y": 21
+        },
+        "statusChipText": null,
+        "secondaryLine": {
+          "x": 31,
+          "y": 46
+        },
+        "sameBaseline": null,
+        "note": "both chips on one baseline at y=21; no offset/truncate/collision handling exists in this function"
+      }
+    ],
+    "verdict": "RESIDUAL_AT_SHARED_ROOT — any spatial consumer passing a status of length 1..22 still gets a status chip on the id-chip baseline; ENTERPRISE mitigates by passing status:\"\" + subtitle"
+  },
+  "D08": {
+    "sharedFiles": [
+      {
+        "file": "stack/native-typescript/foundation/extensions.css",
+        "sha256": "333ebe4d29b6c6dac4b13cff486980294367068556895f94c05369b79f17bf66",
+        "markers": [
+          ".spatial-readout{position:absolute;bottom:10px;left:14px;pointer-events:none",
+          ".foundation-stage .spatial-readout{direction:ltr;unicode-bidi:isolate}",
+          ".spatial-legend{position:absolute;top:55px;left:20px",
+          ".minimap{position:absolute;bottom:32px;right:12px"
+        ]
+      },
+      {
+        "file": "stack/native-typescript/foundation/spatial/presentation.ts",
+        "sha256": "06afda5a3c7e388a7e2c139767ab6f5c5ae9efec816e1bd1ee809ecf5cddd992",
+        "markers": [
+          "<div class=\"spatial-readout\" aria-live=\"polite\"",
+          "<svg class=\"minimap\" aria-label=\"Map overview\""
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "surface": "enterprise",
+        "ok": true,
+        "pageErrors": [],
+        "probe": {
+          "docDir": "rtl",
+          "canvases": 1,
+          "readout": {
+            "x": 329,
+            "y": 937,
+            "w": 191.4,
+            "h": 12
+          },
+          "readoutDirection": "ltr",
+          "readoutLeft": "14px",
+          "readoutRight": "488.562px",
+          "readoutInlineStart": "14px",
+          "readoutInlineEnd": "488.562px",
+          "legend": {
+            "x": 789,
+            "y": 867.2,
+            "w": 206,
+            "h": 81.8
+          },
+          "minimap": {
+            "x": 327,
+            "y": 837,
+            "w": 140,
+            "h": 90
+          },
+          "legendReadoutOverlap": false,
+          "legendMinimapOverlap": false,
+          "readoutMinimapOverlap": false,
+          "winningRules": " | .spatial-readout{position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3);} | .foundation-stage .spatial-readout{direction: ltr; unicode-bidi: isolate;} | .ent-canvas .spatial-readout{left: auto; right: 14px; inset-block-end: 12px;} | [dir=\"rtl\"] .ent-canvas .spatial-readout{left: 14px; right: auto;}",
+          "surfaceOwnsCanvas": true
+        }
+      },
+      {
+        "surface": "visualize",
+        "ok": true,
+        "pageErrors": [],
+        "probe": {
+          "docDir": "rtl",
+          "canvases": 1,
+          "readout": {
+            "x": 0,
+            "y": 0,
+            "w": 0,
+            "h": 0
+          },
+          "readoutDirection": "ltr",
+          "readoutLeft": "14px",
+          "readoutRight": "auto",
+          "readoutInlineStart": "14px",
+          "readoutInlineEnd": "auto",
+          "legend": null,
+          "minimap": {
+            "x": 0,
+            "y": 0,
+            "w": 0,
+            "h": 0
+          },
+          "legendReadoutOverlap": false,
+          "legendMinimapOverlap": false,
+          "readoutMinimapOverlap": false,
+          "winningRules": " | .spatial-readout{position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3);} | .foundation-stage .spatial-readout{direction: ltr; unicode-bidi: isolate;}",
+          "surfaceOwnsCanvas": true
+        }
+      },
+      {
+        "surface": "labs",
+        "ok": true,
+        "pageErrors": [],
+        "probe": {
+          "docDir": "rtl",
+          "canvases": 1,
+          "readout": {
+            "x": 342,
+            "y": 848.1,
+            "w": 182.4,
+            "h": 10.5
+          },
+          "readoutDirection": "rtl",
+          "readoutLeft": "14px",
+          "readoutRight": "471.641px",
+          "readoutInlineStart": "471.641px",
+          "readoutInlineEnd": "14px",
+          "legend": null,
+          "minimap": {
+            "x": 866,
+            "y": 760.6,
+            "w": 118,
+            "h": 74
+          },
+          "legendReadoutOverlap": false,
+          "legendMinimapOverlap": false,
+          "readoutMinimapOverlap": false,
+          "winningRules": " | .spatial-readout{position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3);}",
+          "surfaceOwnsCanvas": true
+        }
+      },
+      {
+        "surface": "runs",
+        "ok": true,
+        "pageErrors": [],
+        "probe": {
+          "docDir": "rtl",
+          "canvases": 1,
+          "readout": {
+            "x": 0,
+            "y": 0,
+            "w": 0,
+            "h": 0
+          },
+          "readoutDirection": "ltr",
+          "readoutLeft": "14px",
+          "readoutRight": "auto",
+          "readoutInlineStart": "14px",
+          "readoutInlineEnd": "auto",
+          "legend": null,
+          "minimap": {
+            "x": 0,
+            "y": 0,
+            "w": 0,
+            "h": 0
+          },
+          "legendReadoutOverlap": false,
+          "legendMinimapOverlap": false,
+          "readoutMinimapOverlap": false,
+          "winningRules": " | .spatial-readout{position: absolute; bottom: 10px; left: 14px; pointer-events: none; font: 11px var(--mono); color: var(--text3);} | .foundation-stage .spatial-readout{direction: ltr; unicode-bidi: isolate;}",
+          "surfaceOwnsCanvas": true
+        }
+      }
+    ]
+  }
+}

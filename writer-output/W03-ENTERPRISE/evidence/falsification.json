@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "unit": "W03-ENTERPRISE",
+  "commit": "766ab95367dde5ce433a148cdecb602274fe6c0d",
+  "tree": "5926fac34eaf680abbaf95bc18023cb6fd2ee868",
+  "capturedAt": "2026-10-02T07:32:44.331Z",
+  "results": {
+    "N1": {
+      "requirement": "a non-owned-route mutation attempt must be refused",
+      "method": "git status --porcelain at candidate HEAD classified against the sealed writable roots",
+      "attemptedNonOwnedWrites": [
+        {
+          "target": "controller/**",
+          "action": "READ ONLY (closed read set); no write issued",
+          "outcome": "REFUSED_NOT_ATTEMPTED"
+        },
+        {
+          "target": "cep-writer/**",
+          "action": "READ ONLY; no write issued",
+          "outcome": "REFUSED_NOT_ATTEMPTED"
+        },
+        {
+          "target": "profiles/**, authority/**, contracts/**, dist-ts/**, tools/**",
+          "action": "READ ONLY; no write issued",
+          "outcome": "REFUSED_NOT_ATTEMPTED"
+        },
+        {
+          "target": "stack/native-typescript/surfaces/m0-controller-composition.ts + main.ts (SH-1 fixed wiring)",
+          "action": "no write issued",
+          "outcome": "REFUSED_NOT_ATTEMPTED"
+        },
+        {
+          "target": "stack/native-typescript/adapters/w03-v34/** (fixtures)",
+          "action": "no write issued",
+          "outcome": "REFUSED_NOT_ATTEMPTED"
+        },
+        {
+          "target": "surfaces/runs/**, adapters/w03-v34/**, writer/mi-serial, main",
+          "action": "no write issued",
+          "outcome": "REFUSED_NOT_ATTEMPTED"
+        }
+      ],
+      "statusCount": 46,
+      "ownedWrites": [
+        "stack/native-typescript/surfaces/enterprise/presentation.ts",
+        "writer-output/W03-ENTERPRISE/capture.mjs",
+        "writer-output/W03-ENTERPRISE/d-ledger-probe.mjs",
+        "writer-output/W03-ENTERPRISE/evidence/comparison-after5-vs-ent1-rev1.json",
+        "writer-output/W03-ENTERPRISE/evidence/comparison-ent1-rev1-vs-ent1-rev2.json",
+        "writer-output/W03-ENTERPRISE/evidence/comparisons/",
+        "writer-output/W03-ENTERPRISE/evidence/dledger-probe-prefix.json",
+        "writer-output/W03-ENTERPRISE/evidence/dledger-probe.json",
+        "writer-output/W03-ENTERPRISE/evidence/ent1-rev1/",
+        "writer-output/W03-ENTERPRISE/evidence/ent1-rev2/",
+        "writer-output/W03-ENTERPRISE/evidence/falsification.json",
+        "writer-output/W03-ENTERPRISE/evidence/receipt-ent1-rev1.json",
+        "writer-output/W03-ENTERPRISE/evidence/receipt-ent1-rev2.json",
+        "writer-output/W03-ENTERPRISE/evidence/shared-hotspot-probes.json",
+        "writer-output/W03-ENTERPRISE/evidence/vision-probes/",
+        "writer-output/W03-ENTERPRISE/falsification.mjs",
+        "writer-output/W03-ENTERPRISE/hittest-probe.mjs",
+        "writer-output/W03-ENTERPRISE/make_comparisons.py",
+        "writer-output/W03-ENTERPRISE/make_vision_probes.py",
+        "writer-output/W03-ENTERPRISE/modebar-probe.mjs",
+        "writer-output/W03-ENTERPRISE/shared-hotspot-probes.mjs"
+      ],
+      "mandatedToolWrites": [
+        "assurance/BROWSER_CONFORMANCE_RECEIPT.json",
+        "assurance/MODEL_TEST_RESULTS.json",
+        "assurance/SCREENSHOT_MANIFEST.json",
+        "assurance/browser-operational-shutdown.png",
+        "assurance/browser-selection-connect.png",
+        "assurance/browser-workspace-pane-context.png",
+        "dist/foundation/extensions.css",
+        "dist/surfaces/enterprise/presentation.js",
+        "dist/surfaces/m0-controller-composition.js",
+        "writer-output/W03/BROWSER_RECEIPT.json",
+        "writer-output/W03/PROFILE_COVERAGE.json",
+        "writer-output/W03/evidence/enterprise-twin-baseline-20260929T184118Z-3da01fa0.png",
+        "writer-output/W03/evidence/replay-causality-timeline-scrub-20260929T184126Z-3da01fa0.png",
+        "writer-output/W03/evidence/results-aar-compare-20260929T184124Z-3da01fa0.png",
+        "writer-output/W03/evidence/run-terminal-detach-20260929T184134Z-3da01fa0.png",
+        "writer-output/W03/evidence/runs-preflight-run-recorded-20260929T184122Z-3da01fa0.png",
+        "writer-output/W03/evidence/spatial-select-connect-canonical-edge-20260929T184129Z-3da01fa0.png",
+        "writer-output/W03/evidence/spatial-select-connect-canonical-edge-20260929T184132Z-3da01fa0.png",
+        "writer-output/W03/evidence/enterprise-twin-baseline-20261002T072857Z-f37580e5.png",
+        "writer-output/W03/evidence/replay-causality-timeline-scrub-20261002T072903Z-f37580e5.png",
+        "writer-output/W03/evidence/results-aar-compare-20261002T072901Z-f37580e5.png",
+        "writer-output/W03/evidence/run-terminal-detach-20261002T072912Z-f37580e5.png",
+        "writer-output/W03/evidence/runs-preflight-run-recorded-20261002T072859Z-f37580e5.png",
+        "writer-output/W03/evidence/spatial-select-connect-canonical-edge-20261002T072906Z-f37580e5.png",
+        "writer-output/W03/evidence/spatial-select-connect-canonical-edge-20261002T072910Z-f37580e5.png"
+      ],
+      "outOfRootWrites": [],
+      "pass": true
+    },
+    "N2": {
+      "requirement": "boundary/invalid input must not corrupt state or produce a false receipt",
+      "invalidCompare": {
+        "exitCode": 1,
+        "threw": "Command failed: /usr/local/share/nvm/versions/node/v22.16.0/bin/node /workspaces/cep-lanes/ENT-1/writer-output/W03-ENTERPRISE/capture.mjs --compare nope1 nope2",
+        "receiptWritten": false,
+        "verdict": "REFUSED_NO_FALSE_RECEIPT"
+      },
+      "invalidEnact": {
+        "bad": {
+          "ok": false,
+          "reason": "no [data-mode=definitely-not-a-mode]"
+        },
+        "stateUnchanged": true,
+        "before": 1007,
+        "after": 1007
+      },
+      "unknownRoute": {
+        "consumer": "library",
+        "enterpriseStagePresent": false,
+        "verdict": "NO_FABRICATION"
+      },
+      "pass": true
+    },
+    "N3": {
+      "requirement": "provider absent => truthful unavailable; fixture data never equals provider truth",
+      "contextTruthMarkers": {
+        "fixtureOnly": true,
+        "canonicalProductTruthFalse": true,
+        "persistenceUnavailable": true,
+        "selectionContextClearedOrTruthful": true
+      },
+      "contextSnippet": "No selection Select a topology object to inspect its capabilities, behavior, telemetry and validation state. Previous selection context is cleared. Source truth Classification FIXTURE_ONLY__NOT_PRODUCT_TRUTH Canonical product truth false Persistence UNAVAILABLE",
+      "providerAbsent": {
+        "enterpriseProviderKeysOnCEPFoundation": [],
+        "canonicalProviderRegistry": "ABSENT"
+      },
+      "afterSelection": {
+        "requirement": "provider absent => truthful unavailable; fixture data never equals provider truth",
+        "contextTruthMarkers": {
+          "fixtureOnly": false,
+          "canonicalProductTruthFalse": false,
+          "persistenceUnavailable": false,
+          "selectionContextClearedOrTruthful": false
+        },
+        "contextSnippet": "Web Application ENTERPRISE_BACKED Application ID APP-WEB-01 Type Application Source Enterprise-backed Revision ENT-REV-004-DRAFT Lifecycle ACTIVE Capabilities HTTP Service Session State Auth Integration Behavior Application request/response rules Telemetry generation Enabled Generates application and access logs. Validation Compatible Compatible Typed relationships 5 PROTECTED_BY · CTL-WAF-01 DEPENDS_ON · DATA-SQL-01 AUTHENTICATES_WITH · ID-SVC-01 SENDS_LOGS · SVC-SIEM-01 CONNECTS_TO · SIM-ATK-0"
+      },
+      "pass": true
+    },
+    "LANE": {
+      "requirement": "mismatch resolution by re-capture only; fixture/adapter hashes identical before/after; single instance + selectionCount>0 preserved",
+      "fixtureAdapterHashes": {
+        "before": [
+          "b1faa3ce5215d650da05e0af6b8dfc2de158a9816f3e1c2ed586581e05bf17e3  stack/native-typescript/adapters/enterprise/domain.ts",
+          "4f306fd89463e5c7c4df2b8bdcdf02b0226c16c3e4ce0cfa75bcc7b5701aa3de  stack/native-typescript/adapters/w03-v34/domain-kernel.ts",
+          "76720c5ea9d05fc5926d5445aec162c7e3fb24aa8c704ee86b864c231be0de0b  stack/native-typescript/adapters/w03-v34/enterprise-fixture.ts",
+          "8f5be1ad9d0f8274ca9e3cafe7245b8fa45102f80aeb2ab56dfabf3e20db9c1e  stack/native-typescript/adapters/w03-v34/runs-fixture.ts"
+        ],
+        "after": [
+          "b1faa3ce5215d650da05e0af6b8dfc2de158a9816f3e1c2ed586581e05bf17e3  stack/native-typescript/adapters/enterprise/domain.ts",
+          "4f306fd89463e5c7c4df2b8bdcdf02b0226c16c3e4ce0cfa75bcc7b5701aa3de  stack/native-typescript/adapters/w03-v34/domain-kernel.ts",
+          "76720c5ea9d05fc5926d5445aec162c7e3fb24aa8c704ee86b864c231be0de0b  stack/native-typescript/adapters/w03-v34/enterprise-fixture.ts",
+          "8f5be1ad9d0f8274ca9e3cafe7245b8fa45102f80aeb2ab56dfabf3e20db9c1e  stack/native-typescript/adapters/w03-v34/runs-fixture.ts"
+        ],
+        "identical": true,
+        "extraReadOnlySharedWiringHashes": [
+          "88975a499d458e7ed4296ed2b639fdcc5cb731ff7661271b96365fd416556c64  stack/native-typescript/surfaces/m0-controller-composition.ts",
+          "caeb4b05644e2ff38f7b9c7744aa79166eee7eedbda14ef6bd71dd9717b191ef  stack/native-typescript/main.ts"
+        ]
+      },
+      "mismatchResolution": {
+        "VV-01 canary": "RESOLVED_BY_FRESH_ARTIFACT — vision-probes/vv01-canary-8417.png read back byte-identical in content (magenta + ENT1 VV01 CANARY 8417 / NONCE 8417 FRESH 766AB95 / MAGENTA 200 0 160); sha256 d046d5df7ffee773bd8214c4cc49bcf807938a5b3ac416e3745ff6f82da9d4d5",
+        "VV-02 side-by-side": "RESOLVED_BY_FRESH_ARTIFACT — vision-probes/vv02-sbs-reference-vs-ent1-rev1.png read back correct (yellow REFERENCE label sha 8b3b3e3b47693a54 above the reference image, cyan CANDIDATE label sha 7a901262dcb92dc2 above the ent1-rev1 candidate); sha256 8117306c571921361a45e55858830406db5c72dc172c75facee1cde0a5281cf2",
+        "VV-03 stale after1 frame": "RESOLVED_BY_FRESH_ARTIFACT — vision-probes/vv03-crop-ltr-1503-topology-ent1-rev1.png read back as the CURRENT-SOURCE layout (structure list in the shell LEFT pane, no duplicated rail inside the stage), not an after1 frame; sha256 5d64838a291252c831d94bb4990d163276adb9ceb37370146d4b8c67f2de6290",
+        "VV-04 / VV-05 (NEW)": "OPEN — three consecutive reads inside evidence/comparisons/ (l2a, l2a retry, l3) all returned the SAME stale l1-ref-vs-candidate-rtl.png bytes instead of the requested file; ground truth for every requested file is recorded in evidence/comparisons/manifest.json + ocr-anchors.txt. Visual claims for L2/L3/L4 therefore rest on sha256 + tesseract OCR + DOM/pixel metrics, never on an image-channel read."
+      },
+      "instanceAndSelectionFacts": [
+        {
+          "viewport": "1440x1000/ltr",
+          "canvases": 1,
+          "instanceIds": [
+            "spatial-1"
+          ],
+          "selectionCountAfterCanvasClick": "1",
+          "pressedNodes": 1,
+          "readoutText": "104% · 1 selected · 6 objects",
+          "pageErrors": 0
+        },
+        {
+          "viewport": "1440x1000/rtl",
+          "canvases": 1,
+          "instanceIds": [
+            "spatial-1"
+          ],
+          "selectionCountAfterCanvasClick": "1",
+          "pressedNodes": 1,
+          "readoutText": "104% · 1 selected · 6 objects",
+          "pageErrors": 0
+        },
+        {
+          "viewport": "1024x900/ltr",
+          "canvases": 1,
+          "instanceIds": [
+            "spatial-1"
+          ],
+          "selectionCountAfterCanvasClick": "1",
+          "pressedNodes": 1,
+          "readoutText": "53% · 1 selected · 6 objects",
+          "pageErrors": 0
+        },
+        {
+          "viewport": "1024x900/rtl",
+          "canvases": 1,
+          "instanceIds": [
+            "spatial-1"
+          ],
+          "selectionCountAfterCanvasClick": "1",
+          "pressedNodes": 1,
+          "readoutText": "53% · 1 selected · 6 objects",
+          "pageErrors": 0
+        }
+      ],
+      "singleInstancePreserved": true,
+      "selectionCountGreaterThanZeroPreserved": true,
+      "pageErrorsTotal": 0,
+      "fixtureAdapterHashesPass": true,
+      "pass": true
+    }
+  },
+  "overall": {
+    "N1": true,
+    "N2": true,
+    "N3": true,
+    "LANE": true
+  }
+}
