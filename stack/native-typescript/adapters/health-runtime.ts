@@ -1,6 +1,7 @@
 import {createBoundedLocalRuntimeTransport} from './runtime/local-runtime-transport.js';
 import {CollectionTableMatrixPresentationCore} from '../foundation/collection/table-matrix.js';
-import {defineContextDescriptorProvider} from '../foundation/global/context-descriptor-contract.js';
+import {defineContextDescriptorProvider,describeContextProvider} from '../foundation/global/context-descriptor-contract.js';
+import {CONTEXT_INSPECTOR_PRESENTATION} from '../foundation/global/context-inspector.js';
 
 export const HEALTH_COMMANDS=Object.freeze(['health.refresh','health.inspect','health.diagnose']);
 const clone=value=>structuredClone(value);
@@ -40,7 +41,7 @@ export class HealthRuntimeAdapter{
     this.owner='W05HealthDomainAdapter';
     this.transport=transport;
     this.clock=clock;
-    this.state={observations:[],selectedSourceId:null,currentProviderState:'UNAVAILABLE',refreshPhase:'IDLE',lastRefresh:null,lastDiagnostic:null,lastError:null};
+    this.state={observations:[],selectedSourceId:null,currentProviderState:'UNAVAILABLE',refreshPhase:'IDLE',lastRefresh:null,lastDiagnostic:null,lastError:null,activeLens:'identity'};
     this.tableAdapter={
       adapterId:'health.observations',
       rows:()=>this.rows(),
@@ -57,7 +58,14 @@ export class HealthRuntimeAdapter{
     this.collection=new CollectionTableMatrixPresentationCore(this.tableAdapter);
     this.contextProvider=defineContextDescriptorProvider({
       id:'health.context',family:'health',owner:this.owner,
-      describe:()=>{const row=this.selected();return {id:`health:${row?.sourceId||'empty'}`,providerId:'health.context',family:'health',subject:row?.sourceId||'No observation selected',eyebrow:'Health observation',summary:row?`${row.state} · ${row.kind}`:'Refresh observed state to inspect an exact source.',domainOwner:this.owner,revisionToken:row?.observationId||null,lenses:[{id:'identity',label:'Observation truth',tabs:[{id:'current',label:'Current',fields:row?[{id:'state',label:'Epistemic state',value:row.state},{id:'kind',label:'Kind',value:row.kind},{id:'observedAt',label:'Observed at',value:displayTime(row.observedAt),technical:true},{id:'freshUntil',label:'Fresh until',value:row.freshUntil||'NOT_ESTABLISHED',technical:true},{id:'sourceIdentity',label:'Source identity',value:row.sourceIdentity,technical:true},{id:'worker',label:'Worker liveness',value:row.workerState||'NOT_APPLICABLE'}]:[]}]}]};}
+      describe:()=>{const row=this.selected(),rows=this.rows(),counts={AVAILABLE_DATA:0,AVAILABLE_EMPTY:0,UNAVAILABLE:0,ERROR:0,STALE:0};for(const item of rows)counts[item.state]=(counts[item.state]||0)+1;const transport=this.transport?.descriptor?.()||{};const latest=rows.map(item=>item.observedAt).filter(Boolean).sort().at(-1)||null;return {id:`health:${row?.sourceId||'empty'}`,providerId:'health.context',family:'health',subject:row?.sourceId||'No observation selected',eyebrow:'Health observation',summary:row?`${row.state} · ${row.kind}`:'Refresh observed state to inspect an exact source.',domainOwner:this.owner,revisionToken:row?.observationId||null,lenses:[
+        {id:'identity',label:'Observation truth',tabs:[{id:'current',label:'Current',fields:row?[{id:'state',label:'Epistemic state',value:row.state},{id:'kind',label:'Kind',value:row.kind},{id:'observedAt',label:'Observed at',value:displayTime(row.observedAt),technical:true},{id:'freshUntil',label:'Fresh until',value:row.freshUntil||'NOT_ESTABLISHED',technical:true},{id:'sourceIdentity',label:'Source identity',value:row.sourceIdentity,technical:true},{id:'worker',label:'Worker liveness',value:row.workerState||'NOT_APPLICABLE',technical:true},{id:'error',label:'Provider error',value:row.error||'NONE',technical:true}]:[]}]},
+        {id:'domain-context',label:'Domain context',tabs:[
+          {id:'sources',label:'المصادر والاعتماديات · Sources',fields:[{id:'transport',label:'Observation transport',value:`${transport.id||'BoundedLocalRuntimeTransport'} @ ${transport.host||'127.0.0.1'}:${transport.port??'DEFAULT'}`,technical:true},{id:'loopback',label:'Loopback only',value:String(transport.loopbackOnly===true),technical:true},{id:'providerState',label:'Provider state',value:String(this.state.currentProviderState),technical:true},{id:'observationCount',label:'Observed sources',value:String(rows.length),technical:true},{id:'stateCounts',label:'State counts',value:`AVAILABLE_DATA=${counts.AVAILABLE_DATA} · AVAILABLE_EMPTY=${counts.AVAILABLE_EMPTY} · UNAVAILABLE=${counts.UNAVAILABLE} · ERROR=${counts.ERROR} · STALE=${counts.STALE}`,technical:true},{id:'latestObservedAt',label:'Latest observed at',value:latest||'NOT_OBSERVED',technical:true},{id:'lastDiagnosticAt',label:'Last durable diagnostic',value:this.state.lastDiagnostic?.observedAt||this.state.lastDiagnostic?.diagnostic?.observedAt||'NOT_RUN',technical:true},{id:'selectedFreshUntil',label:'Selected freshness budget',value:row?.freshUntil||'NOT_ESTABLISHED',technical:true},{id:'dependencies',label:'Dependencies',value:rows.length?rows.map(item=>`${item.kind} ← ${item.sourceIdentity||item.sourceId}`).join(' · '):'NO_OBSERVED_SOURCE'},{id:'owner',label:'Domain owner',value:this.owner,technical:true}]},
+          {id:'policy',label:'State policy',fields:[{id:'epistemicStates',label:'Declared states',value:'AVAILABLE_DATA · AVAILABLE_EMPTY · UNAVAILABLE · ERROR · STALE',technical:true},{id:'emptyMeaning',label:'AVAILABLE_EMPTY',value:'رصد فارغ صالح ولا يعني انقطاع المصدر — Valid empty observation; the source is not disconnected.'},{id:'neverGreen',label:'UNAVAILABLE / STALE / ERROR',value:'لا تتحول إلى أخضر أبدًا — never rendered green.'},{id:'persistenceAlias',label:'persistenceHealthAlias',value:'false',technical:true},{id:'queueNotLiveness',label:'queueDepthIsWorkerLiveness',value:'false',technical:true},{id:'refreshNotDiagnostic',label:'refreshCreatesDiagnostic',value:'false',technical:true},{id:'unknownNotGreen',label:'Unknown source renders green',value:'false',technical:true}]}
+        ]},
+        {id:'notes',label:'Notes',tabs:[{id:'notes',label:'Notes',fields:[{id:'notesOwner',label:'Notes owner',value:'NotesAnnotationCore (shared foundation owner; SC-038)'},{id:'notesRoute',label:'Note commands',value:'Shared Note/Notes commands in the toolbar action set; capability is resolved by the shared owner'},{id:'notesEngine',label:'Health local notes engine',value:'NONE — Health never owns a second notes engine'},{id:'notesScope',label:'Notes scope',value:'Notes attach through the shared owner against the current Health context; no canonical Health observation is mutated'}]}]}
+      ]};}
     });
   }
   descriptor(){return {owner:this.owner,semanticOwner:'W05HealthDomain',capabilityOwner:'HealthCapability',collectionOwner:'CollectionTableMatrixPresentationCore',contextOwner:'ContextInspectorHost',transport:this.transport.descriptor(),persistenceHealthAlias:false,observationStates:['AVAILABLE_DATA','AVAILABLE_EMPTY','UNAVAILABLE','ERROR','STALE']};}
@@ -98,7 +106,11 @@ export class HealthRuntimeAdapter{
   }
   availability(id,payload={}){
     if(id==='health.refresh')return true;
-    if(id==='health.inspect')return Boolean(payload.sourceId||this.selected())||'Select an observed source';
+    if(id==='health.inspect'){
+      const requested=payload?.sourceId;
+      if(requested&&!this.rows().some(row=>row.sourceId===requested))return 'Observation source is not in the current observation set';
+      return Boolean(requested||this.selected())||'Select an observed source';
+    }
     if(id==='health.diagnose')return true;
     return 'Unknown Health command';
   }
@@ -201,13 +213,17 @@ export class HealthRuntimeAdapter{
       <ul class="h-nav-list">${rows.length?rows.map(row=>{const m=meta(row.state);return `<li><button type="button" class="h-nav-item" data-health-source="${E(row.sourceId)}" aria-pressed="${row.sourceId===sel?.sourceId}"><span class="h-badge" data-tone="${m.tone}" aria-hidden="true">${m.icon}</span><span><strong dir="auto">${E(row.sourceId)}</strong><small>${E(row.kind)} · ${E(m.ar)}</small><small>${B(displayTime(row.observedAt))}</small></span></button></li>`}).join(''):`<li><p class="state-token" data-state="empty"><strong>لا توجد مصادر مرصودة</strong> · No observed source yet; this is not a healthy-state claim.</p></li>`}</ul>`;
       const leftHost=workspace.region('LEFT',{node:left,label:'المكوّنات المراقبة'});
 
-      /* ---- RIGHT: unique contextual information only (contract §3.3) ---- */
+      /* ---- RIGHT: profile lenses (identity · domain-context · notes) through the shared ContextInspector presentation ---- */
       const right=document.createElement('aside');right.className='h-ctx';
-      right.innerHTML=`<style>.h-ctx{display:grid;gap:10px;min-width:0}.h-ctx-block{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;border:1px solid var(--line);border-radius:11px;background:#0d1622;padding:11px;min-width:0}.h-ctx-block h3{margin:0 0 6px;font-size:13px}.h-ctx-block ul{list-style:none;margin:0;padding:0;display:grid;gap:5px;font-size:11.5px;color:var(--text2)}.h-ctx-block li{overflow-wrap:anywhere}.h-ctx-block .h-ico{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;border:1px solid var(--line);font-size:14px}</style>
-      <section class="h-ctx-block"><div><h3>التواريخ</h3><ul><li>آخر رصد: ${B(latest||'NOT_OBSERVED')}</li><li>آخر تشخيص: ${B(state.lastDiagnostic?.observedAt||state.lastDiagnostic?.diagnostic?.observedAt||'NOT_RUN')}</li><li>حد صلاحية المكوّن المحدد: ${B(sel?.freshUntil||'NOT_ESTABLISHED')}</li></ul></div><span class="h-ico" aria-hidden="true">🗓</span></section>
-      <section class="h-ctx-block"><div><h3>المصادر والاعتماديات</h3><ul>${rows.length?rows.map(row=>`<li><bdi dir="ltr">${E(row.kind)} &larr; ${E(row.sourceIdentity||row.sourceId)}</bdi></li>`).join(''):'<li>لا توجد مصادر مرصودة بعد.</li>'}</ul></div><span class="h-ico" aria-hidden="true">⛓</span></section>
-      <section class="h-ctx-block"><div><h3>سياسة الحالات</h3><ul><li>الحالة الخالية <bdi dir="ltr">AVAILABLE_EMPTY</bdi> رصد فارغ صالح وليست فشلًا.</li><li><bdi dir="ltr">UNAVAILABLE</bdi> و <bdi dir="ltr">STALE</bdi> و <bdi dir="ltr">ERROR</bdi> لا تتحول إلى أخضر أبدًا.</li><li>المرجع: <bdi dir="ltr">Observation.state ∈ {AVAILABLE_DATA, AVAILABLE_EMPTY, UNAVAILABLE, ERROR, STALE}</bdi></li></ul></div><span class="h-ico" aria-hidden="true">✓</span></section>
-      <section class="h-ctx-block"><div><h3>نطاق القدرة</h3><ul><li><bdi dir="ltr">persistenceHealthAlias = false</bdi> — صحة التخزين ليست صحة المنتج.</li><li><bdi dir="ltr">queueDepthIsWorkerLiveness = false</bdi> — عمق الطابور ليس حياة العامل.</li><li><bdi dir="ltr">refresh ≠ diagnostic</bdi> — التحديث لا ينشئ سجل تشخيص.</li><li>المالك: <bdi dir="ltr">${E(this.owner)}</bdi></li></ul></div><span class="h-ico" aria-hidden="true">⎔</span></section>`;
+      const described=describeContextProvider(this.contextProvider,{});
+      const descriptor=described.ok?described.descriptor:null;
+      const lenses=descriptor?.lenses||[];
+      const activeLens=lenses.find(item=>item.id===this.state.activeLens)||lenses[0]||null;
+      const fieldRows=lens=>lens?lens.tabs.map(tab=>`<section class="h-ctx-block"><div><h3 dir="auto">${E(tab.label)}</h3>${tab.fields.length?`<dl class="h-ctx-fields">${tab.fields.map(field=>`<div class="h-ctx-field"><dt>${E(field.label)}</dt><dd dir="${E(field.direction||'auto')}"${field.technical?' class="h-technical"':''}>${field.value==null||field.value===''?'—':E(field.value)}</dd></div>`).join('')}</dl>`:`<p class="state-token" data-state="empty">${E(tab.emptyMessage||'لا توجد حقول متاحة بعد · No field is available for this lens yet.')}</p>`}</div></section>`).join(''):'';
+      right.innerHTML=`<style>.h-ctx{display:grid;gap:10px;min-width:0}.h-ctx-lenses{font-size:10.5px;padding-bottom:7px;border-bottom:1px solid var(--line);flex-wrap:wrap!important;row-gap:4px!important;align-items:center!important}.h-ctx-lenses .lensbtn{height:26px!important;min-width:0!important;padding:4px 9px!important;font-size:10.5px!important;font-weight:600;flex-direction:row!important;align-items:center!important;gap:5px!important;border-radius:7px!important}.h-ctx-lenses .lensbtn .lenslabel{font-size:10.5px!important;font-weight:600;letter-spacing:0}.h-ctx-block{display:grid;gap:7px;border:1px solid var(--line);border-radius:11px;background:#0d1622;padding:11px;min-width:0}.h-ctx-block h3{margin:0;font-size:13px}.h-ctx-fields{margin:0;display:grid;gap:6px}.h-ctx-field{display:grid;grid-template-columns:minmax(84px,38%) minmax(0,1fr);gap:8px;align-items:baseline;font-size:11.5px}.h-ctx-field dt{color:var(--text3)}.h-ctx-field dd{margin:0;overflow-wrap:anywhere;text-align:end}.h-ctx-field dd.h-technical{font:600 10.5px var(--mono);direction:ltr;unicode-bidi:isolate}</style>
+      ${descriptor?`<nav class="context-lenses h-ctx-lenses" role="tablist" aria-label="عدسات سياق الصحة · Health context lenses">${CONTEXT_INSPECTOR_PRESENTATION.renderLensTabs(descriptor.lenses,activeLens?.id,{controlsId:'health-context-panel'})}</nav>`:''}
+      <section id="health-context-panel" role="tabpanel" aria-label="${E(activeLens?.label||'Context')}">${fieldRows(activeLens)}</section>`;
+      right.querySelectorAll('[data-context-lens]').forEach(button=>button.addEventListener('click',()=>{this.state.activeLens=button.dataset.contextLens||'identity';render();}));
       workspace.region('RIGHT',{node:right,label:'السياق'});
 
       /* ---- BOTTOM: temporary deep workspace (full durable receipt) ---- */
@@ -218,14 +234,25 @@ export class HealthRuntimeAdapter{
       workspace.region('BOTTOM',{node:bottom,label:'التشخيص الدائم',summary:'الإيصال الكامل لآخر تشخيص دائم؛ التحديث لا ينشئ سجل تشخيص.'});
       (leftHost||stage).querySelectorAll?.('[data-health-source]').forEach(element=>element.addEventListener('click',()=>{this.inspect({sourceId:element.dataset.healthSource});render();}));
       stage.querySelectorAll('tr[data-health-row]').forEach(element=>element.addEventListener('click',()=>{this.inspect({sourceId:element.dataset.healthRow});render();}));
-      stage.querySelectorAll('[data-health-next]').forEach(element=>element.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();if(element.dataset.healthNextCommand==='health.inspect'){this.inspect({sourceId:element.dataset.healthNext});render();}}));
+      stage.querySelectorAll('[data-health-next]').forEach(element=>element.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();const command=element.dataset.healthNextCommand;const sourceId=element.dataset.healthNext;if(command==='health.inspect'){this.inspect({sourceId});render();return;}if(command==='health.refresh'||command==='health.diagnose'){execute(command,{});return;}}));
       workspace.refreshToolbar?.();
       return state;
     };
-    const run=fn=>async payload=>{const r=await fn(payload||{});workspace.status(r.ok?'Health observation receipt recorded':`Health action failed · ${r.code||r.reason}`,r.ok?'info':'error');render();return r;};
-    registry.register('health.refresh',this.owner,'Refresh observed state',run(()=>this.refresh()),()=>this.availability('health.refresh'));
-    registry.register('health.inspect',this.owner,'Inspect observation',run(payload=>Promise.resolve(this.inspect(payload))),payload=>this.availability('health.inspect',payload));
-    registry.register('health.diagnose',this.owner,'Run durable diagnostic',run(()=>this.diagnose()),()=>this.availability('health.diagnose'));
+    const receiptFor=(command,result)=>{
+      if(!result?.ok)return `Health action failed · ${result?.code||result?.reason||'UNKNOWN'}`;
+      if(command==='health.diagnose')return `Durable diagnostic receipt recorded · ${result.diagnostic?.diagnosticId||'RECORDED'} · refresh never creates one`;
+      if(command==='health.inspect')return `Observation inspected · selection bound to ${result.observation?.sourceId||'unknown'} · inspect records no receipt`;
+      return 'Observation refresh receipt recorded · session-local observation, not a durable diagnostic';
+    };
+    const execute=async(command,payload={})=>{
+      const r=command==='health.refresh'?await this.refresh():command==='health.diagnose'?await this.diagnose():this.inspect(payload);
+      workspace.status(receiptFor(command,r),r.ok?'info':'error');
+      render();
+      return r;
+    };
+    registry.register('health.refresh',this.owner,'Refresh observed state',payload=>execute('health.refresh',payload),()=>this.availability('health.refresh'));
+    registry.register('health.inspect',this.owner,'Inspect observation',payload=>execute('health.inspect',payload),payload=>this.availability('health.inspect',payload));
+    registry.register('health.diagnose',this.owner,'Run durable diagnostic',payload=>execute('health.diagnose',payload),()=>this.availability('health.diagnose'));
     render();
     queueMicrotask(async()=>{await this.refresh();render();});
     return {owner:this.owner,collectionOwner:'CollectionTableMatrixPresentationCore',contextOwner:'ContextInspectorHost',render};
