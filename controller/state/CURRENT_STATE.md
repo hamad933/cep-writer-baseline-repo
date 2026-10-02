@@ -3,7 +3,7 @@
 **Role:** sole mutable live CEP project/control state  
 **Authority mode:** `GITHUB_CANONICAL`  
 **Cutover event:** `CEP-GITHUB-CUTOVER-2026-10-02-001`  
-**Current phase:** `GITHUB_CUTOVER_COMPLETE__DRIVE_COMPATIBILITY_PROVEN__PRODUCT_EXECUTION_BINDING_NEXT`  
+**Current phase:** `OD085_W01_W02_RETAINED__W03_EXACT_CORRECTION_BINDING__W04_W05_RETAINED`  
 **Update mode:** `IN_PLACE_ONLY`
 
 ## Canonical control plane
@@ -87,3 +87,26 @@ The 23 structurally revalidated packets remain candidate execution bindings only
 ## Next action
 
 Drive reconciliation and Drive-entry successor recovery are complete. Next, bind the exact currently legal OD-085 milestone starting point from current Product/evidence truth. Do not infer the milestone from historical WM/parallel state; re-evaluate W01→W05 completion/retention against the current branch, packet/profile truth and open Enterprise/Runs/H03 findings before Writer mutation.
+
+
+## OD-085 MILESTONE REVALIDATION / W03 BINDING — 2026-10-02
+
+**Exact current revalidation source:** `writer/mi-serial@2eafa132351b33d9f666784d4b432c2b9f0fe3a2` / tree `0c6f096585c5324b95c09dc039ab4a2a42fd01da`.
+
+**Validation:** GitHub Actions run `36946681570` = SUCCESS; artifact `11202142587`; digest `sha256:9a59e3b67e00e38ec09e97b88e4250af95352326ca57949b2de26a4d18d1795a`.
+
+Milestone retention:
+- W01 (SHELL/TODAY): `RETAIN_CURRENT__5_OF_5_BROWSER_PASS`. The prior pointer occlusion was independently geometry-proven and corrected centrally with `justify-content:safe center`; W01 destination routing plus Shell-button and browser-native Back/Forward semantic-context restoration now PASS.
+- W02 (LIBRARY/LEARN/RQ/VISUALIZE): `RETAIN_CURRENT_WITH_TRUTH_CEILING`. Current family/unit gates and the applicable current general browser subset PASS. `H03-R2-PROP-001` and `H03-R2-FALSIFY-001` remain `NOT_PROVEN`; no relation/Enterprise result is borrowed into W02.
+- W03 (ENTERPRISE/SCENARIOS/LABS/RUNS/RESULTS): `NEXT_EXECUTION_BINDING__CORRECTION_REQUIRED`. W03 family/unit milestone tests remain green, but exact-current general browser falsification still has three unresolved W03 integration flows:
+  1. Enterprise relation route convergence: visible editable edge/label unavailable to the shared relation interaction path;
+  2. Enterprise shared relation availability: selected Enterprise endpoint IDs are present in the visible path while `RelationInteractionOwner/ActionAvailabilityCore` observes `selectionCount=0`;
+  3. Runs causal consequence: canonical domain/recorded/event/visible-terminal shutdown truth does not yet converge.
+- W04 (EVIDENCE/REVIEWS/MASTERY/PORTFOLIO): `RETAIN_CURRENT__CURRENT_MILESTONE_GATES_PASS`; no rebuild is justified merely by sequence.
+- W05 (HEALTH/PROCESSING/VALIDATION/MANUAL_AI/BACKUP/AUDIT/RELEASES/CONFIGURATION): `RETAIN_CURRENT__8_OF_8_BROWSER_PASS`; Manual-AI proof now reads canonical `providerTruth` instead of a stale center-text assumption.
+
+General Browser Conformance at the exact source remains `3 PASS / 3 FAIL`; all three FAIL rows are W03-scoped. Therefore a successful milestone workflow does **not** create Product acceptance or erase the general-browser blockers.
+
+**Next legal action:** perform bounded W03 source-bound probes first to expose both sides of the Enterprise selection/relation seam and the exact Runs domain/event/terminal values. Only after root cause is exact may Controller use OD-20260916-044 for a genuinely small existing-owner correction; otherwise issue the single persistent W03 Writer milestone under OD-20260928-085. W04/W05 remain retained and are not relaunched unless W03 integration/regression proves them affected.
+
+No Product acceptance, main merge, release, deployment or stack freeze is authorized.
