@@ -70,6 +70,60 @@ jobs:
       - name: Runtime falsification
         run: npm run runtime:check | tee convergence-evidence/runtime-check.log
 
+      - name: Milestone current revalidation
+        run: |
+          set +e
+          mkdir -p convergence-evidence/milestones
+          failures=0
+          run_case() {
+            label="$1"
+            shift
+            echo "===== $label =====" | tee -a convergence-evidence/milestones/RESULTS.log
+            "$@" > >(tee -a convergence-evidence/milestones/RESULTS.log) 2>&1
+            rc=$?
+            echo "RC=$rc" | tee -a convergence-evidence/milestones/RESULTS.log
+            if [ "$rc" -ne 0 ]; then failures=$((failures+1)); fi
+          }
+
+          run_case W01_today_surface node tests/surfaces/today/surface.test.mjs
+          run_case W01_obligation_manifest node tools/w01-obligation-manifest-proof.mjs
+          run_case W01_browser_flows node tools/w01-browser-flows.mjs
+
+          run_case W02_library_surface node tests/surfaces/library/surface.test.mjs
+          run_case W02_learn_surface node tests/surfaces/learn/surface.test.mjs
+          run_case W02_rq_surface node tests/surfaces/rq/surface.test.mjs
+          run_case W02_visualize_surface node tests/surfaces/visualize/surface.test.mjs
+          run_case W02_coverage node tools/w02-coverage-check.mjs
+          run_case W02_browser_flows node tools/w02-browser-flows.mjs
+
+          run_case W03_enterprise_domain node dist/tests/surfaces/enterprise/domain.test.js
+          run_case W03_scenarios_domain node dist/tests/surfaces/scenarios/domain.test.js
+          run_case W03_labs_domain node dist/tests/surfaces/labs/domain.test.js
+          run_case W03_runs_domain node dist/tests/surfaces/runs/domain.test.js
+          run_case W03_runs_group node dist/tests/surfaces/runs/group-regression.test.js
+          run_case W03_results_domain node dist/tests/surfaces/results/domain.test.js
+          run_case W03_browser_flows node tools/w03-browser-flows.mjs
+
+          run_case W04_evidence_domain node dist/tests/surfaces/evidence/domain.test.js
+          run_case W04_reviews_domain node dist/tests/surfaces/reviews/domain.test.js
+          run_case W04_mastery_domain node dist/tests/surfaces/mastery/domain.test.js
+          run_case W04_portfolio_domain node dist/tests/surfaces/portfolio/domain.test.js
+          run_case W04_f051 node tools/w04-f051-counting-proof.mjs
+          run_case W04_seam node tools/w04-seam-ownership-proof.mjs
+          run_case W04_browser_flows node tools/w04-browser-flows.mjs
+
+          run_case W05_configuration_surface node dist/tests/surfaces/configuration/configuration-tests.js
+          run_case W05_manual_ai_surface node dist/tests/surfaces/manual_ai/manual-ai-tests.js
+          run_case W05_releases_surface node dist/tests/surfaces/releases/releases-tests.js
+          run_case W05_health_capability node tools/w05-health-capability-proof.mjs
+          run_case W05_processing_capability node tools/w05-processing-capability-proof.mjs
+          run_case W05_backup_capability node tools/w05-backup-capability-proof.mjs
+          run_case W05_stack_admission node tools/w05-stack-admission-proof.mjs
+          run_case W05_browser_flows node tools/w05-browser-flows.mjs
+
+          echo "MILESTONE_REVALIDATION_FAILURES=$failures" | tee -a convergence-evidence/milestones/RESULTS.log
+          test "$failures" -eq 0
+
       - name: Capture generated receipts
         if: always()
         run: |
