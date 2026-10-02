@@ -1,0 +1,549 @@
+{
+  "lane": "REL-1",
+  "harness": "writer-output/W05-RELEASES/evidence/harness/cycle2-falsification.mjs",
+  "lineage": {
+    "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "stackTree": "bd0ea53e6658e001fd46377eca8854a009d03073",
+    "branch": "writer/mi-serial-lane/REL-1",
+    "delta": [
+      "M stack/native-typescript/surfaces/releases/composition.ts",
+      " M stack/native-typescript/surfaces/releases/runtime.ts"
+    ],
+    "capturedAt": "2026-10-02T05:18:59.166Z"
+  },
+  "checks": [
+    {
+      "id": "N1.no-mutation-outside-writable-roots",
+      "status": "PASS",
+      "expected": [],
+      "observed": []
+    },
+    {
+      "id": "N3.empty-adapter-inspect-NO_CANDIDATE",
+      "status": "PASS",
+      "expected": "NO_CANDIDATE",
+      "observed": {
+        "ok": false,
+        "code": "NO_CANDIDATE",
+        "requirements": [
+          "candidateId",
+          "commitSHA",
+          "treeSHA",
+          "artifactDigest"
+        ]
+      }
+    },
+    {
+      "id": "N3.empty-adapter-has-zero-fabricated-candidates",
+      "status": "PASS",
+      "expected": 0,
+      "observed": 0
+    },
+    {
+      "id": "N3.auth-provider-missing-UNAVAILABLE",
+      "status": "PASS",
+      "expected": "AUTHORIZATION_REQUEST_PROVIDER_UNAVAILABLE",
+      "observed": {
+        "ok": false,
+        "code": "AUTHORIZATION_REQUEST_PROVIDER_UNAVAILABLE",
+        "authorization": "NONE",
+        "deployment": "UNKNOWN"
+      }
+    },
+    {
+      "id": "N3.auth-provider-missing-no-state-change",
+      "status": "PASS",
+      "expected": "NONE/UNKNOWN",
+      "observed": "NONE/UNKNOWN"
+    },
+    {
+      "id": "N3.compare-owner-missing-blocked",
+      "status": "PASS",
+      "expected": "ANALYTICAL_COMPARE_INTEGRATION_REQUIRED",
+      "observed": {
+        "ok": false,
+        "id": "releases.compare",
+        "owner": "ReleasesDomainAdapter",
+        "commandOwner": "ReleasesDomainAdapter",
+        "code": "ANALYTICAL_COMPARE_INTEGRATION_REQUIRED",
+        "reason": "Releases requires the controller-injected AnalyticalCompareOwner.",
+        "availabilityOwner": "ReleasesDomainAdapter",
+        "enabled": false
+      }
+    },
+    {
+      "id": "N3.bottom-projection-no-candidate-is-unavailable",
+      "status": "PASS",
+      "expected": "no candidate bound + no readiness value",
+      "observed": "no candidate bound · readiness / authorization / deployment truths unavailable"
+    },
+    {
+      "id": "N2.compare-same-identity-rejected",
+      "status": "PASS",
+      "expected": "RELEASE_COMPARE_DISTINCT_CANDIDATES_REQUIRED",
+      "observed": "RELEASE_COMPARE_DISTINCT_CANDIDATES_REQUIRED"
+    },
+    {
+      "id": "N2.invalid-identity-rejected",
+      "status": "PASS",
+      "expected": "RELEASE_CANDIDATE_IDENTITY_INVALID",
+      "observed": "RELEASE_CANDIDATE_IDENTITY_INVALID"
+    },
+    {
+      "id": "N2.compare-without-pair-no-receipt",
+      "status": "PASS",
+      "expected": "ok:false + receipts unchanged",
+      "observed": {
+        "ok": false,
+        "before": 0,
+        "after": 0
+      }
+    },
+    {
+      "id": "N2.inspect-unknown-candidate-NO_CANDIDATE",
+      "status": "PASS",
+      "expected": "NO_CANDIDATE",
+      "observed": {
+        "ok": false,
+        "code": "NO_CANDIDATE",
+        "requirements": [
+          "candidateId",
+          "commitSHA",
+          "treeSHA",
+          "artifactDigest"
+        ]
+      }
+    },
+    {
+      "id": "N2.nonexistent-domain-command-refused",
+      "status": "PASS",
+      "expected": "ok:false",
+      "observed": {
+        "ok": false,
+        "id": "releases.deploy",
+        "owner": null,
+        "commandOwner": null,
+        "availabilityOwner": "SemanticCommandBus",
+        "enabled": false,
+        "reason": "Unknown command",
+        "code": "UNKNOWN_COMMAND"
+      }
+    },
+    {
+      "id": "N1.non-owned-commands-refused",
+      "status": "PASS",
+      "expected": "every attempt ok:false",
+      "observed": {
+        "reviews.verdict": {
+          "ok": false,
+          "id": "reviews.verdict",
+          "owner": null,
+          "commandOwner": null,
+          "availabilityOwner": "SemanticCommandBus",
+          "enabled": false,
+          "reason": "Unknown command",
+          "code": "UNKNOWN_COMMAND"
+        },
+        "runs.start": {
+          "ok": false,
+          "id": "runs.start",
+          "owner": null,
+          "commandOwner": null,
+          "availabilityOwner": "SemanticCommandBus",
+          "enabled": false,
+          "reason": "Unknown command",
+          "code": "UNKNOWN_COMMAND"
+        },
+        "release.publish": {
+          "ok": false,
+          "id": "release.publish",
+          "owner": null,
+          "commandOwner": null,
+          "availabilityOwner": "SemanticCommandBus",
+          "enabled": false,
+          "reason": "Unknown command",
+          "code": "UNKNOWN_COMMAND"
+        },
+        "releases.deploy": {
+          "ok": false,
+          "id": "releases.deploy",
+          "owner": null,
+          "commandOwner": null,
+          "availabilityOwner": "SemanticCommandBus",
+          "enabled": false,
+          "reason": "Unknown command",
+          "code": "UNKNOWN_COMMAND"
+        },
+        "shell.navigate": {
+          "ok": false,
+          "id": "shell.navigate",
+          "owner": null,
+          "commandOwner": null,
+          "availabilityOwner": "SemanticCommandBus",
+          "enabled": false,
+          "reason": "Unknown command",
+          "code": "UNKNOWN_COMMAND"
+        }
+      }
+    },
+    {
+      "id": "N1.no-state-change-from-refused-attempts",
+      "status": "PASS",
+      "expected": "identical state snapshot",
+      "observed": {
+        "before": "{\"authorization\":\"NONE\",\"deployment\":\"UNKNOWN\",\"history\":[],\"receipts\":0}",
+        "after": "{\"authorization\":\"NONE\",\"deployment\":\"UNKNOWN\",\"history\":[],\"receipts\":0}"
+      }
+    },
+    {
+      "id": "N1.no-deploy-or-authorize-execution-command-registered",
+      "status": "PASS",
+      "expected": [],
+      "observed": [
+        "releases.inspect",
+        "releases.compare",
+        "releases.plan",
+        "releases.requestAuthorization"
+      ]
+    },
+    {
+      "id": "LANE.release-readiness-is-authorization-stays-false",
+      "status": "PASS",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "id": "LANE.release-authorization-is-deployment-stays-false",
+      "status": "PASS",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "id": "LANE.deployment-execution-stays-NOT_OWNED",
+      "status": "PASS",
+      "expected": "NOT_OWNED",
+      "observed": "NOT_OWNED"
+    },
+    {
+      "id": "LANE.readiness-executes-deployment-stays-false",
+      "status": "PASS",
+      "expected": false,
+      "observed": [
+        false,
+        false
+      ]
+    },
+    {
+      "id": "D06.four-release-sections",
+      "status": "PASS",
+      "expected": "events,gates,truths,candidate",
+      "observed": [
+        "events",
+        "gates",
+        "truths",
+        "candidate"
+      ]
+    },
+    {
+      "id": "D06.no-raw-lastaction-diagnostics",
+      "status": "PASS",
+      "expected": "no raw diagnostics string",
+      "observed": "{\"selectedId\":\"cand-1\",\"currentRevisionId\":\"cccccccccccc\",\"recordBasis\":\"W05_SURFACE_REPRESENTATIVE_RECORD · commit/tree/artifact/evidence digests are synthetic fixture values bound to these candidates for presentation; this surface never c"
+    },
+    {
+      "id": "D06.projection-states-ceilings-false",
+      "status": "PASS",
+      "expected": "ceilings present and false",
+      "observed": "Technical readiness=TECHNICALLY_READY (candidate-bound evidence · ciPassIsAcceptance = false) · Owner authorization=NONE (explicit authority record · technicalReadinessIsAuthorization = false) · Deployment observation=UNKNOWN (separate deployment provider · ownerAuthorizationIsDeployment = false)"
+    },
+    {
+      "id": "D06.projection-carries-release-meaning",
+      "status": "PASS",
+      "expected": "state + gates + recorded events + build identity",
+      "observed": {
+        "gates": "gates 4 pass · 1 warn · 0 fail · 1 pending · results 3 pass · 1 warn · 0 fail · 1 pending · rollback ready (v0.3.9) · pa",
+        "events": "09:42:11 event.signatureCheck ok · 09:41:55 event.broadcastSync ok · 09:41:22 event.approvalReceipt failed · 09:40:18 ev",
+        "identity": "REL-2026.08.31-RC2 · v0.4.0-rc2 · internal/preProd · build build/2026.08.31.0912 · commit 4a3cbb44a3cb · artifact e202be"
+      }
+    },
+    {
+      "id": "D06.unknown-candidate-degrades-truthfully",
+      "status": "PASS",
+      "expected": "UNAVAILABLE presentation detail, never invented gates/events",
+      "observed": {
+        "gates": "no gates defined for this candidate — presentation detail UNAVAILABLE",
+        "events": "no verification events recorded for this candidate"
+      }
+    },
+    {
+      "id": "D06.currentRevisionId-is-candidate-bound",
+      "status": "PASS",
+      "expected": "e202be202be2",
+      "observed": "e202be202be2"
+    },
+    {
+      "id": "LANE.live-ceiling-readiness-not-authorization",
+      "status": "PASS",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "id": "LANE.live-ceiling-authorization-not-deployment",
+      "status": "PASS",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "id": "LANE.live-domain-default-has-no-fabricated-candidates",
+      "status": "PASS",
+      "expected": 0,
+      "observed": 0
+    },
+    {
+      "id": "LANE.empty-truth-renders-truthfully",
+      "status": "PASS",
+      "expected": "0 cards + truthful empty block + no readiness claim",
+      "observed": {
+        "cards": 0,
+        "text": "No candidate matches\n      The active filter returns an empty set — an empty view is not green readiness.\n      Clear filters",
+        "hasEmptyLabel": true,
+        "claimsGreen": false
+      }
+    },
+    {
+      "id": "LANE.compare-blocked-fails-closed",
+      "status": "PASS",
+      "expected": "ok:false + no receipt",
+      "observed": {
+        "result": {
+          "ok": false,
+          "id": "releases.compare",
+          "owner": "ReleasesDomainAdapter",
+          "commandOwner": "ReleasesDomainAdapter",
+          "enabled": false,
+          "reason": "Select two exact ReleaseCandidates",
+          "code": "UNAVAILABLE",
+          "availabilityOwner": "ReleasesDomainAdapter"
+        },
+        "receiptsBefore": 0,
+        "receiptsAfter": 0,
+        "chip": {
+          "tone": "ok",
+          "title": "two exact ReleaseCandidate identities pinned · REL-2026.08.31-RC2 ↔ REL-2026.08.30-RC1 · AnalyticalCompareOwner"
+        },
+        "disabled": [
+          {
+            "id": "releases.requestAuthorization",
+            "title": "Authorization request provider unavailable"
+          }
+        ]
+      }
+    },
+    {
+      "id": "LANE.compare-blocked-state-is-labelled",
+      "status": "PASS",
+      "expected": "BLOCKED/unavailable reason visible",
+      "observed": {
+        "tone": "ok",
+        "title": "two exact ReleaseCandidate identities pinned · REL-2026.08.31-RC2 ↔ REL-2026.08.30-RC1 · AnalyticalCompareOwner"
+      }
+    },
+    {
+      "id": "LANE.disabled-commands-carry-real-reasons",
+      "status": "PASS",
+      "expected": "every disabled command has a reason",
+      "observed": [
+        {
+          "id": "releases.requestAuthorization",
+          "title": "Authorization request provider unavailable"
+        }
+      ]
+    },
+    {
+      "id": "LANE.shelf-en-four-sections",
+      "status": "PASS",
+      "expected": ">=4 release sections",
+      "observed": [
+        "Selected release candidate: REL-2026.08.31-RC2 · v0.4.0-rc2 · internal/preProd · build build/2026.08.31.0912 · commit 4a3cbb44a3cb · artifact e202be202be2 · record basis: representative fixture values pinned to this candidate · Three separated truths: Technical readiness=TECHNICALLY_READY (candidate-bound evidence · ciPassIsAcceptance = false) · Owner authorization=NONE (explicit authority record · technicalReadinessIsAuthorization = false) · Deployment observation=NOT_DEPLOYED (separate deployment provider · ownerAuthorizationIsDeployment = false) · Gates, verification & rollback: gates 4 pass · 1 warn · 0 fail · 1 pending · results 3 pass · 1 warn · 0 fail · 1 pending · rollback ready (v0.3.9) · package package.needsApproval · approvers 1 granted · 2 pending · 1 missing · Verification events: 09:42:11 event.signatureCheck ok · 09:41:55 event.broadcastSync ok · 09:41:22 event.approvalReceipt failed · 09:40:18 event.artifactScan ok"
+      ]
+    },
+    {
+      "id": "LANE.shelf-en-no-arabic-in-surface-owned-projection",
+      "status": "PASS",
+      "expected": 0,
+      "observed": 0
+    },
+    {
+      "id": "LANE.shelf-no-raw-diagnostics-D06",
+      "status": "PASS",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "id": "LANE.shelf-ceilings-visible-and-false",
+      "status": "PASS",
+      "expected": "ceilings present and false",
+      "observed": {
+        "ceilingsInShelf": true,
+        "falseCeilingClaim": false
+      }
+    },
+    {
+      "id": "LANE.shelf-ar-localised",
+      "status": "PASS",
+      "expected": "4 Arabic section labels under AR",
+      "observed": {
+        "found": [
+          "المرشّح المحدد:",
+          "ثلاث حقائق منفصلة:",
+          "البوابات والتحقق والتراجع:",
+          "سجل أحداث التحقق:"
+        ],
+        "arabic": 192
+      }
+    },
+    {
+      "id": "LANE.shelf-ar-ceilings-still-false",
+      "status": "PASS",
+      "expected": "ceilings present and false",
+      "observed": {
+        "ceilingsInShelf": true,
+        "falseCeilingClaim": false
+      }
+    },
+    {
+      "id": "LANE.no-page-errors",
+      "status": "PASS",
+      "expected": [],
+      "observed": []
+    }
+  ],
+  "captures": [
+    {
+      "name": "falsify-empty-truth",
+      "file": "writer-output/W05-RELEASES/evidence/cycle2/falsify-empty-truth.png",
+      "sha256": "aa2f28a1d95a4894316513969c3ff4e392ad93d4d94bb3dd1207890825a299a8",
+      "bytes": 188471,
+      "dims": "1536x1024"
+    },
+    {
+      "name": "falsify-compare-blocked",
+      "file": "writer-output/W05-RELEASES/evidence/cycle2/falsify-compare-blocked.png",
+      "sha256": "652d7123e155d96d9ea55921ce91df31bbce0a39d07212cf41f97baf79974aa7",
+      "bytes": 314713,
+      "dims": "1536x1024"
+    },
+    {
+      "name": "falsify-shelf-en",
+      "file": "writer-output/W05-RELEASES/evidence/cycle2/falsify-shelf-en.png",
+      "sha256": "9afc83bee602026ea3142130c50201f9da32cb5aba512e9d0bb52cae19eeceed",
+      "bytes": 311232,
+      "dims": "1536x1024"
+    },
+    {
+      "name": "falsify-shelf-ar",
+      "file": "writer-output/W05-RELEASES/evidence/cycle2/falsify-shelf-ar.png",
+      "sha256": "9cf2ecb59f4199ea9bfad26d9700b4c0a710e44665cd386fab45c33fdb3a78dc",
+      "bytes": 267427,
+      "dims": "1536x1024"
+    }
+  ],
+  "pageErrors": [],
+  "shelfEN": {
+    "lang": "en",
+    "paragraphs": [
+      "Selected release candidate: REL-2026.08.31-RC2 · v0.4.0-rc2 · internal/preProd · build build/2026.08.31.0912 · commit 4a3cbb44a3cb · artifact e202be202be2 · record basis: representative fixture values pinned to this candidate · Three separated truths: Technical readiness=TECHNICALLY_READY (candidate-bound evidence · ciPassIsAcceptance = false) · Owner authorization=NONE (explicit authority record · technicalReadinessIsAuthorization = false) · Deployment observation=NOT_DEPLOYED (separate deployment provider · ownerAuthorizationIsDeployment = false) · Gates, verification & rollback: gates 4 pass · 1 warn · 0 fail · 1 pending · results 3 pass · 1 warn · 0 fail · 1 pending · rollback ready (v0.3.9) · package package.needsApproval · approvers 1 granted · 2 pending · 1 missing · Verification events: 09:42:11 event.signatureCheck ok · 09:41:55 event.broadcastSync ok · 09:41:22 event.approvalReceipt failed · 09:40:18 event.artifactScan ok",
+      "السجل مملوك لـ ReleasesDomainAdapter. العرض هنا read-only؛ والاستعادة، عند توفر مسارها، تُنشئ مسودة جديدة ولا تعيد كتابة التاريخ."
+    ],
+    "mine": [
+      "Selected release candidate: REL-2026.08.31-RC2 · v0.4.0-rc2 · internal/preProd · build build/2026.08.31.0912 · commit 4a3cbb44a3cb · artifact e202be202be2 · record basis: representative fixture values pinned to this candidate · Three separated truths: Technical readiness=TECHNICALLY_READY (candidate-bound evidence · ciPassIsAcceptance = false) · Owner authorization=NONE (explicit authority record · technicalReadinessIsAuthorization = false) · Deployment observation=NOT_DEPLOYED (separate deployment provider · ownerAuthorizationIsDeployment = false) · Gates, verification & rollback: gates 4 pass · 1 warn · 0 fail · 1 pending · results 3 pass · 1 warn · 0 fail · 1 pending · rollback ready (v0.3.9) · package package.needsApproval · approvers 1 granted · 2 pending · 1 missing · Verification events: 09:42:11 event.signatureCheck ok · 09:41:55 event.broadcastSync ok · 09:41:22 event.approvalReceipt failed · 09:40:18 event.artifactScan ok"
+    ],
+    "found": [
+      "Selected release candidate:",
+      "Three separated truths:",
+      "Gates, verification & rollback:",
+      "Verification events:"
+    ],
+    "foundCount": 4,
+    "mineArabic": 0,
+    "rawDiagnostics": false,
+    "ceilingsInShelf": true,
+    "falseCeilingClaim": false,
+    "sectionCount": 4,
+    "closedSummary": "السجل · REL-2026.08.31-RC2"
+  },
+  "shelfAR": {
+    "lang": "ar",
+    "paragraphs": [
+      "المرشّح المحدد: REL-2026.08.31-RC2 · v0.4.0-rc2 · internal/preProd · build build/2026.08.31.0912 · commit 4a3cbb44a3cb · artifact e202be202be2 · أساس السجل: قيم تمثيلية مُثبّتة على هذا المرشح · ثلاث حقائق منفصلة: الجاهزية التقنية=TECHNICALLY_READY (candidate-bound evidence · ciPassIsAcceptance = false) · تخويل المالك=NONE (explicit authority record · technicalReadinessIsAuthorization = false) · مراقبة النشر=NOT_DEPLOYED (separate deployment provider · ownerAuthorizationIsDeployment = false) · البوابات والتحقق والتراجع: البوابات 4 pass · 1 warn · 0 fail · 1 pending · النتائج 3 pass · 1 warn · 0 fail · 1 pending · التراجع ready (v0.3.9) · الحزمة package.needsApproval · الموقّعون 1 granted · 2 pending · 1 missing · سجل أحداث التحقق: 09:42:11 event.signatureCheck ناجح · 09:41:55 event.broadcastSync ناجح · 09:41:22 event.approvalReceipt فشل · 09:40:18 event.artifactScan ناجح",
+      "السجل مملوك لـ ReleasesDomainAdapter. العرض هنا read-only؛ والاستعادة، عند توفر مسارها، تُنشئ مسودة جديدة ولا تعيد كتابة التاريخ."
+    ],
+    "mine": [
+      "المرشّح المحدد: REL-2026.08.31-RC2 · v0.4.0-rc2 · internal/preProd · build build/2026.08.31.0912 · commit 4a3cbb44a3cb · artifact e202be202be2 · أساس السجل: قيم تمثيلية مُثبّتة على هذا المرشح · ثلاث حقائق منفصلة: الجاهزية التقنية=TECHNICALLY_READY (candidate-bound evidence · ciPassIsAcceptance = false) · تخويل المالك=NONE (explicit authority record · technicalReadinessIsAuthorization = false) · مراقبة النشر=NOT_DEPLOYED (separate deployment provider · ownerAuthorizationIsDeployment = false) · البوابات والتحقق والتراجع: البوابات 4 pass · 1 warn · 0 fail · 1 pending · النتائج 3 pass · 1 warn · 0 fail · 1 pending · التراجع ready (v0.3.9) · الحزمة package.needsApproval · الموقّعون 1 granted · 2 pending · 1 missing · سجل أحداث التحقق: 09:42:11 event.signatureCheck ناجح · 09:41:55 event.broadcastSync ناجح · 09:41:22 event.approvalReceipt فشل · 09:40:18 event.artifactScan ناجح"
+    ],
+    "found": [
+      "المرشّح المحدد:",
+      "ثلاث حقائق منفصلة:",
+      "البوابات والتحقق والتراجع:",
+      "سجل أحداث التحقق:"
+    ],
+    "foundCount": 4,
+    "mineArabic": 192,
+    "rawDiagnostics": false,
+    "ceilingsInShelf": true,
+    "falseCeilingClaim": false,
+    "sectionCount": 4,
+    "closedSummary": "السجل · REL-2026.08.31-RC2"
+  },
+  "emptyState": {
+    "cards": 0,
+    "text": "No candidate matches\n      The active filter returns an empty set — an empty view is not green readiness.\n      Clear filters",
+    "hasEmptyLabel": true,
+    "claimsGreen": false
+  },
+  "compareBlocked": {
+    "result": {
+      "ok": false,
+      "id": "releases.compare",
+      "owner": "ReleasesDomainAdapter",
+      "commandOwner": "ReleasesDomainAdapter",
+      "enabled": false,
+      "reason": "Select two exact ReleaseCandidates",
+      "code": "UNAVAILABLE",
+      "availabilityOwner": "ReleasesDomainAdapter"
+    },
+    "receiptsBefore": 0,
+    "receiptsAfter": 0,
+    "chip": {
+      "tone": "ok",
+      "title": "two exact ReleaseCandidate identities pinned · REL-2026.08.31-RC2 ↔ REL-2026.08.30-RC1 · AnalyticalCompareOwner"
+    },
+    "disabled": [
+      {
+        "id": "releases.requestAuthorization",
+        "title": "Authorization request provider unavailable"
+      }
+    ]
+  },
+  "liveComposition": {
+    "ceiling": {
+      "technicalReadinessIsOwnerAuthorization": false,
+      "ownerAuthorizationIsDeployment": false,
+      "readinessExecutesDeployment": false,
+      "authorizationExecutesDeployment": false
+    },
+    "providerTruth": {
+      "deploymentExecution": "NOT_OWNED",
+      "deploymentObservationMayBe": "UNKNOWN"
+    },
+    "defaultCount": 0
+  },
+  "N4": {
+    "id": "N4.check-duplicate-mechanics",
+    "how": "node tools/check-duplicate-mechanics.mjs (run separately, merged into HANDOFF)"
+  },
+  "N5": {
+    "id": "N5.suite-twice-identical",
+    "how": "npm test twice + id/status list comparison (run separately, merged into HANDOFF)"
+  }
+}
