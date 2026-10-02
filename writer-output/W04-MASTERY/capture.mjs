@@ -4,11 +4,16 @@
  * Ground truth is FILE BYTES: sha256 + PNG dimensions are computed from the bytes written.
  * Every frame is bound to candidate label + git HEAD + viewport + timestamp in the receipt.
  *
- * Usage: node writer-output/W04-MASTERY/capture.mjs --label baseline [--surface mastery]
+ * LINEAGE (added by lane MAS-1): every receipt additionally carries the exact
+ * `commit` / `HEAD^{tree}` / branch / dirty-path count at capture time, an OWNED_SOURCE_DIGEST
+ * (sha256 over the lane's writable source roots) and the DIGEST OF THE DIST BYTES ACTUALLY
+ * SERVED for those roots, so a reviewer can prove the rendered bytes came from this tree.
+ *
+ * Usage: node writer-output/W04-MASTERY/capture.mjs --label baseline [--seed] [--locale ar|en]
  */
 import { createRequire } from 'node:module';
-import { spawn } from 'node:child_process';
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { spawn, execSync } from 'node:child_process';
+import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import net from 'node:net';
 import path from 'node:path';
@@ -47,7 +52,11 @@ const localeScript = value => `(() => {
   return document.documentElement.lang + '/' + document.documentElement.dir;
 })()`;
 
-const VIEWPORTS = [[1505, 1045], [1440, 1000], [1024, 900]];
+const VIEWPORTS = (() => {
+  const raw = argValue('--viewports');
+  if (!raw) return [[1505, 1045], [1440, 1000], [1024, 900]];
+  return raw.split(',').map(pair => { const [w, h] = pair.split('x').map(Number); return [w, h]; });
+})();
 
 const freePort = () => new Promise(resolve => {
   const server = net.createServer();
@@ -56,20 +65,100 @@ const freePort = () => new Promise(resolve => {
 
 const pngDims = buffer => ({ width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) });
 
+/* ------------------------------------------------------------------ lineage binding
+ * Receipts must be bound to the EXACT tree that produced the bytes (evidence contract).
+ * OWNED_SOURCE_DIGEST covers only this lane's writable roots; DIST_SERVED_DIGEST covers the
+ * compiled bytes the browser actually loaded for those roots.
+ */
+const OWNED_SOURCE_ROOTS = [
+  'stack/native-typescript/surfaces/mastery',
+  'stack/native-typescript/adapters/mastery'
+];
+const DIST_SERVED_ROOTS = ['dist/surfaces/mastery', 'dist/adapters/mastery'];
+
+const git = command => { try { return String(execSync(command, { cwd: root, encoding: 'utf8' })).trim(); } catch { return null; } };
+
+const walkFiles = async dir => {
+  const out = [];
+  const visit = async current => {
+    let entries;
+    try { entries = await readdir(current, { withFileTypes: true }); } catch { return; }
+    for (const entry of entries) {
+      const full = path.join(current, entry.name);
+      if (entry.isDirectory()) await visit(full);
+      else out.push(full);
+    }
+  };
+  await visit(dir);
+  return out.sort();
+};
+
+const digestRoots = async roots => {
+  const hash = createHash('sha256');
+  const files = [];
+  for (const relative of roots) files.push(...await walkFiles(path.join(root, relative)));
+  const perFile = [];
+  for (const file of files) {
+    const bytes = await readFile(file);
+    const sha = createHash('sha256').update(bytes).digest('hex');
+    const relative = path.relative(root, file);
+    perFile.push({ path: relative, sha256: sha, bytes: bytes.length });
+    hash.update(`${relative}\0${sha}\n`);
+  }
+  return { digest: hash.digest('hex'), fileCount: perFile.length, files: perFile };
+};
+
+const lineage = async () => {
+  const source = await digestRoots(OWNED_SOURCE_ROOTS);
+  const distServed = await digestRoots(DIST_SERVED_ROOTS);
+  const dirty = git('git status --porcelain') || '';
+  return {
+    branch: git('git branch --show-current'),
+    commit: git('git rev-parse HEAD'),
+    commitTree: git('git rev-parse HEAD^{tree}'),
+    headLabel: git('git log -1 --format=%h %s'),
+    dirtyPathCount: dirty ? dirty.split('\n').length : 0,
+    dirtyPaths: dirty ? dirty.split('\n') : [],
+    ownedRoots: OWNED_SOURCE_ROOTS,
+    ownedSourceDigest: source.digest,
+    ownedSourceFileCount: source.fileCount,
+    distServedRoots: DIST_SERVED_ROOTS,
+    distServedDigest: distServed.digest,
+    distServedFileCount: distServed.fileCount,
+    ownedSourceFiles: source.files,
+    distServedFiles: distServed.files,
+    node: process.version,
+    capturedBy: 'writer-output/W04-MASTERY/capture.mjs'
+  };
+};
+
 const METRICS = `(() => {
   const textOf = sel => (document.querySelector(sel)?.innerText || '').replace(/[\\t ]+/g, ' ').trim();
   const lines = t => t.split('\\n').map(s => s.trim()).filter(Boolean);
   const rectOf = sel => { const r = document.querySelector(sel)?.getBoundingClientRect(); return r ? {x:Math.round(r.x),y:Math.round(r.y),w:Math.round(r.width),h:Math.round(r.height)} : null; };
+  const arabicChars = t => (String(t).match(/[\\u0600-\\u06FF]/g) || []).length;
+  const rect = { left: rectOf('#leftPane'), center: rectOf('#centerPane'), right: rectOf('#rightPane'), stage: rectOf('#foundationStage'), workbench: rectOf('#foundationStage .m0-workbench') };
+  const intersection = (a, b) => {
+    if (!a || !b || !a.w || !b.w) return 0;
+    const w = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x);
+    const h = Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y);
+    return w > 0 && h > 0 ? Math.round(w * h) : 0;
+  };
+  const leftText = textOf('#leftPane .pbody');
+  const centerText = textOf('#foundationStage .m0-workbench');
+  const rightText = textOf('#rightPane .pbody');
+  const dir = document.body.dataset.foundationDirection || document.documentElement.dir || null;
+  const stage = document.querySelector('#foundationStage');
   return {
-    direction: document.body.dataset.foundationDirection || document.documentElement.dir || null,
+    direction: dir,
     lang: document.documentElement.lang,
-    left: textOf('#leftPane .pbody'),
-    center: textOf('#foundationStage .m0-workbench'),
-    right: textOf('#rightPane .pbody'),
+    left: leftText,
+    center: centerText,
+    right: rightText,
     bottom: textOf('#bottomShelf'),
-    centerLines: lines(textOf('#foundationStage .m0-workbench')).length,
-    leftLines: lines(textOf('#leftPane .pbody')).length,
-    rightLines: lines(textOf('#rightPane .pbody')).length,
+    centerLines: lines(centerText).length,
+    leftLines: lines(leftText).length,
+    rightLines: lines(rightText).length,
     steps: [...document.querySelectorAll('#foundationStage [data-w04-step-number]')].map(n => n.getAttribute('data-w04-step-number')),
     pills: [...document.querySelectorAll('#foundationStage [data-w04-pill]')].map(n => n.textContent.replace(/\\s+/g,' ').trim()),
     recordTables: document.querySelectorAll('#foundationStage table').length,
@@ -78,16 +167,33 @@ const METRICS = `(() => {
     leftRows: document.querySelectorAll('#leftPane [data-r6-row]').length,
     toolbar: [...document.querySelectorAll('#domainToolbar [data-foundation-command]')].map(n => n.textContent.trim()),
     stateTokens: document.querySelectorAll('#foundationStage .state-token').length,
-    rect: { left: rectOf('#leftPane'), center: rectOf('#centerPane'), right: rectOf('#rightPane'), stage: rectOf('#foundationStage'), workbench: rectOf('#foundationStage .m0-workbench') },
+    rect,
     horizontalOverflow: document.documentElement.scrollWidth > (window.innerWidth + 1),
     clipped: [...document.querySelectorAll('#foundationStage .w04-rec-title,#foundationStage .w04-pill,#foundationStage h3,#foundationStage .w04-step-num,#foundationStage .w04-track-step')]
       .filter(n => n.scrollWidth > n.clientWidth + 2 && getComputedStyle(n).overflow !== 'visible')
-      .map(n => n.className + ':' + n.scrollWidth + '>' + n.clientWidth)
+      .map(n => n.className + ':' + n.scrollWidth + '>' + n.clientWidth),
+    paneOverlapPx2: {
+      leftCenter: intersection(rect.left, rect.center),
+      centerRight: intersection(rect.center, rect.right),
+      leftRight: intersection(rect.left, rect.right)
+    },
+    paneOrder: { dir, leftX: rect.left?.x ?? null, rightX: rect.right?.x ?? null,
+      mirrored: Boolean(dir === 'rtl' && rect.left && rect.right && rect.left.x > rect.right.x) },
+    centerScroll: stage ? { clientHeight: stage.clientHeight, scrollHeight: stage.scrollHeight,
+      scrollable: stage.scrollHeight > stage.clientHeight + 1,
+      overflowY: getComputedStyle(stage).overflowY } : null,
+    localeTruth: {
+      centerArabicChars: arabicChars(centerText),
+      leftArabicChars: arabicChars(leftText),
+      rightArabicChars: arabicChars(rightText),
+      lang: document.documentElement.lang
+    }
   };
 })()`;
 
 const capture = async () => {
   await mkdir(outDir, { recursive: true });
+  const lineageInfo = await lineage();
   let seedRows = [];
   if (seed) {
     const mod = await import(pathToFileURL(path.join(root, 'dist/adapters/mastery/domain.js')).href);
@@ -131,6 +237,7 @@ const capture = async () => {
   const receipt = {
     schemaVersion: 1, proof: 'w04-mastery-visual-capture', label,
     method: 'file-bytes ground truth (sha256 + PNG IHDR dims); playwright chromium headless, reducedMotion reduce',
+    lineage: lineageInfo,
     viewports: VIEWPORTS.map(v => `${v[0]}x${v[1]}`),
     seed: seed ? 'dist/adapters/mastery/domain.js#createW04MasteryDemoRecords (all rows truthClass=SYNTHETIC_DEMO_SEED)' : 'none (product boot default: domain empty)',
     locale: locale || 'product default',

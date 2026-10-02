@@ -80,7 +80,16 @@ def ocr(img, box=None):
 
 KEY_STRINGS = ["Mastery workbench", "FIXTURE", "SYNTHETIC_DEMO_SEED", "Explainability structure",
                "Mastery judgment dimension", "Evaluation basis", "MASTERED", "REVALIDATION_REQUIRED",
-               "How this workspace works", "Context that appears on selection"]
+               "How this workspace works", "Context that appears on selection",
+               # Arabic chrome keys (both languages are first-class; OCR is eng-only here, so these
+               # are matched against the DOM text probe captured in the same page load)
+               "بنية قابلية التفسير", "أساس التقييم", "القانون السببي", "كيف تُنتَج حالة الإتقان",
+               "بُعد حكم الإتقان", "حقيقة الارتباط", "الإتقان"]
+
+OCR_NOTE = ("tesseract 5.3.4 with eng/osd only in this environment: Arabic OCR is unavailable, so "
+            "ocrLines/ocrWords are meaningful for EN frames only. Arabic content truth comes from "
+            "keyHitsDOM — the DOM text probe recorded in the SAME page load that produced the frame "
+            "and hash-bound in the sibling CAPTURE_RECEIPT.json.")
 
 
 def main():
@@ -88,14 +97,19 @@ def main():
     receipt_path = directory / "CAPTURE_RECEIPT.json"
     receipt = json.loads(receipt_path.read_text()) if receipt_path.exists() else {"frames": []}
     rects_by_viewport = {f.get("viewport"): f.get("metrics", {}).get("rect", {}) for f in receipt.get("frames", [])}
+    frames_by_file = {f.get("file"): f for f in receipt.get("frames", [])}
     results = []
     for png in sorted(directory.glob("*.png")):
         sha = hashlib.sha256(png.read_bytes()).hexdigest()
         img = Image.open(png).convert("RGB")
         w, h = img.size
         rects = rects_by_viewport.get(f"{w}x{h}", {})
+        frame = frames_by_file.get(png.name, {})
+        metrics = frame.get("metrics", {}) or {}
         entry = {"file": png.name, "sha256": sha, "dims": f"{w}x{h}",
-                 "bytes": png.stat().st_size, "ink": ink_ratio(img)}
+                 "bytes": png.stat().st_size, "ink": ink_ratio(img),
+                 "lang": metrics.get("lang"), "direction": metrics.get("direction"),
+                 "receiptBound": bool(frame)}
         for name in ("left", "center", "right"):
             r = rects.get(name)
             if not r or r.get("w", 0) <= 0 or r.get("h", 0) <= 0:
@@ -113,11 +127,15 @@ def main():
         centre_box = entry.get("center", {}).get("box")
         centre_text = ocr(img, centre_box)["text"] if centre_box else ""
         entry["keyHits"] = [k for k in KEY_STRINGS if k.lower() in centre_text.lower()]
+        dom_center = metrics.get("center", "") or ""
+        entry["keyHitsDOM"] = [k for k in KEY_STRINGS if k.lower() in dom_center.lower()]
+        entry["ocrNote"] = OCR_NOTE
         results.append(entry)
     (directory / "MEASURES.json").write_text(json.dumps({
         "proof": "w04-mastery-hash-bound-measure",
         "method": "sha256 + PIL + pixel ink + blank bands + tesseract OCR of the SAME bytes",
         "visionChannel": "NOT USED — stale-frame conflict observed 2026-09-30; see report",
+        "ocrNote": OCR_NOTE,
         "frames": results,
     }, indent=2))
     for r in results:
@@ -129,6 +147,7 @@ def main():
                 summary[pane] = {"ink": r[pane]["ink"], "blank": r[pane]["blankBandsGE60px"],
                                  "lines": r[pane]["ocrLines"], "words": r[pane]["ocrWords"]}
         summary["keyHits"] = r["keyHits"]
+        summary["keyHitsDOM"] = r.get("keyHitsDOM", [])
         print(json.dumps(summary, ensure_ascii=False))
 
 

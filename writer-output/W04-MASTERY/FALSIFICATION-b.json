@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "proof": "w04-mastery-lane-falsification",
+  "run": "b",
+  "executedAt": "2026-10-02T05:04:29.648Z",
+  "node": "v22.16.0",
+  "probes": [
+    {
+      "id": "N2-boundary-invalid-input",
+      "status": "PASS",
+      "expected": "every boundary/invalid input refused with a typed code; domain snapshot byte-identical before/after; no receipt fabricated",
+      "observed": {
+        "allRefused": true,
+        "snapshotUnchanged": true,
+        "probes": [
+          {
+            "input": "get(unknown)",
+            "result": "MASTERY_UNKNOWN:does-not-exist"
+          },
+          {
+            "input": "setFreshness(id,\"BOGUS\")",
+            "result": "{\"ok\":false,\"code\":\"MASTERY_FRESHNESS_INVALID\",\"mutated\":false}"
+          },
+          {
+            "input": "setFreshness(id,\"CURRENT\") [canonical write]",
+            "result": "{\"ok\":false,\"code\":\"CANONICAL_MASTERY_WRITE_FORBIDDEN\",\"mutated\":false,\"reason\":\"Freshness is a Mastery State dimension and may change only through a new governed Mastery State.\"}"
+          },
+          {
+            "input": "reevaluate(null)",
+            "result": "MASTERY_UNKNOWN:null"
+          },
+          {
+            "input": "constructor(invalid judgment)",
+            "result": "MASTERY_JUDGMENT_INVALID:MASTERED_BY_COMPLETION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "N3-no-provider-no-fabrication",
+      "status": "PASS",
+      "expected": "without evaluator/basis the domain reports unavailable refusal codes, never a fabricated judgment; no state change, no history entry",
+      "observed": {
+        "unbound": {
+          "code": "AUTHORIZED_EVALUATOR_UNBOUND",
+          "mutated": false
+        },
+        "basis": {
+          "code": "BASIS_UNAVAILABLE",
+          "mutated": false
+        },
+        "completionOrActivityUsed": false,
+        "institutionalAuthorityInferred": false,
+        "judgmentAfterAttempt": "INSUFFICIENT_EVIDENCE",
+        "snapshotUnchanged": true,
+        "unresolvedDomainSnapshotUnchanged": true,
+        "historyLength": 1
+      }
+    },
+    {
+      "id": "N1-node-learn-completion-cannot-write-mastery",
+      "status": "PASS",
+      "expected": "a completed Learn attempt never mutates the Mastery domain and never yields a mastery claim",
+      "observed": {
+        "learnProgress": "COMPLETE",
+        "learnMastery": "NOT_INFERRED",
+        "attemptScore": "NOT_INFERRED",
+        "masterySnapshotUnchanged": true
+      }
+    },
+    {
+      "id": "N3-ui-entry-state-not-evaluated",
+      "status": "PASS",
+      "expected": "with no bound evaluator the UI projects NOT_EVALUATED / UNAVAILABLE and states completion never creates Mastery — never a fabricated judgment",
+      "observed": {
+        "pills": [
+          "Mastery JudgmentNOT_EVALUATED",
+          "Freshness StatusUNAVAILABLEno evaluation exists"
+        ],
+        "hasNotEvaluated": true,
+        "hasUnavailable": true,
+        "claimsMastered": false,
+        "completionNeverMastery": true,
+        "arabicChars": 0,
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "id": "LANE-learn-completion-not-inferred-as-mastery",
+      "status": "PASS",
+      "expected": "a locally COMPLETED Learn attempt leaves Mastery records, history, receipts and the rendered Mastery UI byte-identical (no new/advanced MASTERED judgment); Learn reports NOT_INFERRED and creates no W04 decision",
+      "observed": {
+        "learnProgress": "COMPLETE",
+        "learnMastery": "NOT_INFERRED",
+        "attemptScore": "NOT_INFERRED",
+        "reviewMastery": "NOT_INFERRED",
+        "reviewMasteryWrite": false,
+        "w04DecisionCreated": false,
+        "masterySnapshotUnchanged": true,
+        "masteredSetUnchanged": true,
+        "masteredBefore": [
+          "mastery-crypto",
+          "mastery-appsec"
+        ],
+        "masteredAfter": [
+          "mastery-crypto",
+          "mastery-appsec"
+        ],
+        "historyUnchanged": true,
+        "receiptsUnchanged": true,
+        "uiUnchanged": true,
+        "pillsBefore": [
+          "Mastery JudgmentMASTEREDFIXTURE",
+          "Freshness StatusREVALIDATION_REQUIRED"
+        ],
+        "pillsAfter": [
+          "Mastery JudgmentMASTEREDFIXTURE",
+          "Freshness StatusREVALIDATION_REQUIRED"
+        ],
+        "historyLengthAfter": 0,
+        "receiptsLengthAfter": 0,
+        "seededRecords": 6
+      }
+    },
+    {
+      "id": "N1-browser-canonical-mastery-write-refused",
+      "status": "PASS",
+      "expected": "surface-initiated canonical Mastery writes are refused with typed codes and leave the domain untouched",
+      "observed": {
+        "attempts": [
+          {
+            "op": "setFreshness",
+            "result": "{\"ok\":false,\"code\":\"CANONICAL_MASTERY_WRITE_FORBIDDEN\",\"mutated\":false,\"reason\":\"Freshness is a Mastery State dimension and may change only through a new governed Mastery State.\"}"
+          },
+          {
+            "op": "reevaluate-with-completion",
+            "result": "{\"ok\":false,\"code\":\"BASIS_UNAVAILABLE\",\"action\":\"INSPECT_REQUIREMENTS\",\"mutated\":false,\"record\":{\"id\":\"mastery-crypto\",\"revisionId\":\"mr-001\",\"subject\":\"user:self\",\"capability\":\"Applied Cryptography\",\"path\":\"Cryptography · Core primitives\",\"judgment\":\"MASTERED\",\"freshness\":\"REVALIDATION_REQUIRED\",\"policyRef\":\"policy:mastery-v3\",\"truthClass\":\"SYNTHETIC_DEMO_SEED\",\"evaluatedAt\":\"2025-05-18\",\"basis\":{\"evidenceRefs\":[\"ev-beta@evr-002\"],\"decisionRefs\":[\"decision-17\"],\"digest\":\"basis:aaa\"}},\"requirements\":{\"ok\":true,\"owner\":\"W04MasteryDomain\",\"authorityRef\":\"ORACLE-011/A03\",\"id\":\"mastery-crypto\",\"subject\":\"user:self\",\"masteryTarget\":\"Applied Cryptography\",\"judgment\":\"MASTERED\",\"freshness\":\"REVALIDATION_REQUIRED\",\"policyRef\":\"policy:mastery-v3\",\"basisDigest\":\"basis:aaa\",\"evidence\":[{\"ref\":\"ev-beta@evr-002\",\"state\":\"UNVERIFIED_PROVIDER_UNBOUND\"}],\"decisions\":[{\"ref\":\"decision-17\",\"state\":\"UNVERIFIED_PROVIDER_UNBOUND\"}],\"policy\":{\"ref\":\"policy:mastery-v3\",\"state\":\"UNVERIFIED_PROVIDER_UNBOUND\"},\"missingRefs\":[\"ev-beta@evr-002\",\"decision-17\",\"policy:mastery-v3\"],\"conflict\":false,\"causalLaw\":\"EFFECTIVE_DECISIONS+EVIDENCE+VERSIONED_POLICY_ONLY\",\"completionOrActivityUsed\":false,\"institutionalAuthorityInferred\":false},\"historyCount\":0}"
+          }
+        ],
+        "snapshotUnchanged": true,
+        "recordCount": 6
+      }
+    },
+    {
+      "id": "N2-browser-boundary-input",
+      "status": "PASS",
+      "expected": "unknown-record boundary input from the live page refuses with MASTERY_UNKNOWN and never corrupts the projection",
+      "observed": {
+        "probes": [
+          "MASTERY_UNKNOWN:no-such-record",
+          "MASTERY_UNKNOWN:no-such-record"
+        ],
+        "snapshotUnchanged": true
+      }
+    },
+    {
+      "id": "BROWSER-NO-PAGE-ERRORS",
+      "status": "PASS",
+      "expected": "no uncaught page errors during the falsification pass",
+      "observed": {
+        "pageErrors": []
+      }
+    }
+  ],
+  "pass": 8,
+  "fail": 0
+}

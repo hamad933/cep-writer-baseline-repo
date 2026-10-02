@@ -1,0 +1,53 @@
+{
+  "proof": "w04-mastery-hash-bound-measure",
+  "method": "sha256 + PIL + pixel ink + blank bands + tesseract OCR of the SAME bytes",
+  "visionChannel": "NOT USED \u2014 stale-frame conflict observed 2026-09-30; see report",
+  "ocrNote": "tesseract 5.3.4 with eng/osd only in this environment: Arabic OCR is unavailable, so ocrLines/ocrWords are meaningful for EN frames only. Arabic content truth comes from keyHitsDOM \u2014 the DOM text probe recorded in the SAME page load that produced the frame and hash-bound in the sibling CAPTURE_RECEIPT.json.",
+  "frames": [
+    {
+      "file": "mastery-768x900-seeded-en.png",
+      "sha256": "514d62ea11a20da3c993672988b34d181842779985e93f7f040cc6d6e6229889",
+      "dims": "768x900",
+      "bytes": 120859,
+      "ink": 0.4704,
+      "lang": "en",
+      "direction": "ltr",
+      "receiptBound": true,
+      "left": {
+        "box": null,
+        "collapsed": true
+      },
+      "center": {
+        "box": [
+          0,
+          176,
+          768,
+          861
+        ],
+        "ink": 0.3398,
+        "blankBandsGE60px": [],
+        "ocrLines": 20,
+        "ocrWords": 111
+      },
+      "right": {
+        "box": null,
+        "collapsed": true
+      },
+      "keyHits": [
+        "Mastery workbench",
+        "FIXTURE",
+        "SYNTHETIC_DEMO_SEED",
+        "Explainability structure"
+      ],
+      "keyHitsDOM": [
+        "FIXTURE",
+        "SYNTHETIC_DEMO_SEED",
+        "Explainability structure",
+        "Evaluation basis",
+        "MASTERED",
+        "REVALIDATION_REQUIRED"
+      ],
+      "ocrNote": "tesseract 5.3.4 with eng/osd only in this environment: Arabic OCR is unavailable, so ocrLines/ocrWords are meaningful for EN frames only. Arabic content truth comes from keyHitsDOM \u2014 the DOM text probe recorded in the SAME page load that produced the frame and hash-bound in the sibling CAPTURE_RECEIPT.json."
+    }
+  ]
+}

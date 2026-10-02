@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "label": "rtl-probe",
+  "status": "SUPERSEDED",
+  "capturedAt": "2026-10-02T04:46Z (approx, pre-lineage tool revision)",
+  "reason": "Preliminary AR/RTL probe run by lane MAS-1 to prove the locale switch works before the capture tool was extended with HEAD/tree/owned-digest lineage. It carries NO lineage block and is therefore NOT used as acceptance evidence.",
+  "supersededBy": "writer-output/W04-MASTERY/evidence/candidate-rtl-ar/ (same 3 viewports, --locale ar, with full lineage binding)",
+  "byteIdentity": {
+    "verified": true,
+    "method": "sha256 of each PNG compared frame-by-frame against candidate-rtl-ar/CAPTURE_RECEIPT.json",
+    "frames": [
+      { "file": "mastery-1505x1045-ar.png", "sha256": "a22cea2c14831cea9b759167fc8d28632dceaa7f96f677d95843cf72c8bd82ad", "identicalTo": "candidate-rtl-ar/mastery-1505x1045-ar.png" },
+      { "file": "mastery-1440x1000-ar.png", "sha256": "3a31c5c6819cf92e0152c2f5bdbf4db57ce3d379ccbc21b4e1db034d7f75e1ea", "identicalTo": "candidate-rtl-ar/mastery-1440x1000-ar.png" },
+      { "file": "mastery-1024x900-ar.png", "sha256": "8e3d8f1a6ee0fbf5f92ce1dafa3d6db18af3a447da70a951b57f7364eb6b5fbf", "identicalTo": "candidate-rtl-ar/mastery-1024x900-ar.png" }
+    ],
+    "note": "Byte-identical across two independent browser launches; retained as a determinism data point (feeds N5) and labelled, never deleted."
+  }
+}

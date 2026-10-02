@@ -1,0 +1,388 @@
+{
+  "schemaVersion": 1,
+  "proof": "w04-mastery-browser-flow-evidence-lane-copy",
+  "purpose": "Lane-local hash-bound copy of the mandated `node tools/w04-browser-flows.mjs --flow mastery.progression-state-machine` PASS, because tools/w04-browser-flows.mjs writes into the SHARED writer-output/W04/ directory which is outside this lane's sealed writable roots.",
+  "lane": "MAS-1 (W04-MASTERY)",
+  "command": "node tools/w04-browser-flows.mjs --flow mastery.progression-state-machine",
+  "sharedReceipt": {
+    "path": "writer-output/W04/BROWSER_RECEIPT.json (shared, restored to HEAD after this copy — not committed by this lane)"
+  },
+  "laneCopy": {
+    "path": "writer-output/W04-MASTERY/evidence/flow-mastery-progressionsm",
+    "files": [
+      {
+        "path": "writer-output/W04-MASTERY/evidence/flow-mastery-progressionsm/BROWSER_RECEIPT.w04-shared.json",
+        "sha256": "0375079fce4b9d1d3d38d1382eaff7f97b081edd0280f7055707e0b69acfcd80",
+        "bytes": 172001
+      },
+      {
+        "path": "writer-output/W04-MASTERY/evidence/flow-mastery-progressionsm/mastery-progression-state-machine-empty-state-20261002T044436Z-c82cec63.png",
+        "sha256": "f793ee31d4ab9552aa9545956d3918c7b9ef725e2f9e326e6606be0459b6067e",
+        "bytes": 238972
+      },
+      {
+        "path": "writer-output/W04-MASTERY/evidence/flow-mastery-progressionsm/mastery-progression-state-machine-fixture-row-20261002T044436Z-c82cec63.png",
+        "sha256": "7c564e89d0547256dc3de752cb3ad893f19b1903f7249ff6631b2de23b2762ff",
+        "bytes": 262472
+      },
+      {
+        "path": "writer-output/W04-MASTERY/evidence/flow-mastery-progressionsm/mastery-progression-state-machine-state-machine-blocked-20261002T044437Z-c82cec63.png",
+        "sha256": "552a0d3b561ae5a068713fe55469920c2f20ecbe54027a69019007d69a03e369",
+        "bytes": 258886
+      }
+    ]
+  },
+  "flow": {
+    "flow": "mastery.progression-state-machine",
+    "route": "/?surface=mastery",
+    "preconditions": [
+      "app booted with CEPFoundation.consumer === \"mastery\"",
+      "no canonical Mastery writer / authorized evaluator is bound on this route",
+      "CEP-DEC-026 (A03) judgment + freshness vocabulary is the state machine under test"
+    ],
+    "expectedState": "NOT_EVALUATED -> INSUFFICIENT_EVIDENCE/INCONCLUSIVE -> NOT_MASTERED/MASTERED with freshness CURRENT|REVALIDATION_REQUIRED; no progression may occur without a bound basis and an authorized evaluator; there is no local Mastery write",
+    "fixtureState": "reviewer harness injects ONE synthetic Mastery State row (truthClass SYNTHETIC_DEMO_SEED) so the state machine has a subject; the row is labelled fixture and is never presented as a real achievement",
+    "negativeCases": [
+      "reevaluation without an authorized evaluator must be refused (AUTHORIZED_EVALUATOR_UNBOUND)",
+      "reevaluation with an unavailable basis must be refused (BASIS_UNAVAILABLE)",
+      "conflicting Decisions must route to governed evaluation, never to a grant (CONFLICT_REQUIRES_GOVERNED_EVALUATION)",
+      "local freshness/Mastery writes must be refused (CANONICAL_MASTERY_WRITE_FORBIDDEN)",
+      "completion/activity must never be an input to Mastery"
+    ],
+    "consumerTaxonomy": {
+      "primaryLiveOperationalConsumer": "W04 Mastery domain executed inside the mounted Chromium page",
+      "recordedConsumer": "m0 Mastery workbench DOM projection (rows, explainability projection)",
+      "fixture": "single SYNTHETIC_DEMO_SEED Mastery State injected by this harness"
+    },
+    "actionSequence": [
+      "GET /?surface=mastery",
+      "inspect the mounted Mastery workbench before any mutation",
+      "inject ONE synthetic Mastery State (truthClass SYNTHETIC_DEMO_SEED) as the state-machine subject",
+      "NEGATIVE: re-evaluation with an unavailable/unbound basis",
+      "NEGATIVE: basis bound but no authorized evaluator -> no grant",
+      "NEGATIVE: conflicting Decisions route to governed evaluation, never to a grant",
+      "NEGATIVE: local freshness write is forbidden (canonical Mastery writer only)",
+      "explain the causal basis and confirm completion/activity is never an input"
+    ],
+    "assertions": [
+      {
+        "id": "mastery.route-mounted",
+        "expected": {
+          "consumer": "mastery",
+          "stage": "mastery"
+        },
+        "actual": {
+          "consumer": "mastery",
+          "stage": "mastery"
+        },
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "mastery.domain-empty-at-start",
+        "expected": 0,
+        "actual": 0,
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "mastery.truth-no-local-write",
+        "expected": {
+          "masteryFromCompletion": false,
+          "canonicalMasteryWriter": "UNBOUND",
+          "reevaluate": "ZERO_LOCAL_MASTERY_WRITE"
+        },
+        "actual": {
+          "masteryFromCompletion": false,
+          "canonicalMasteryWriter": "UNBOUND",
+          "reevaluate": "ZERO_LOCAL_MASTERY_WRITE"
+        },
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "mastery.toolbar-command-set",
+        "expected": [
+          "mastery.inspect",
+          "mastery.explain",
+          "mastery.reevaluate"
+        ],
+        "actual": [
+          "mastery.inspect",
+          "mastery.explain",
+          "mastery.reevaluate"
+        ],
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "mastery.empty-state-is-visible",
+        "expected": true,
+        "actual": true,
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "mastery.judgment-in-vocabulary",
+        "expected": true,
+        "actual": true,
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "mastery.freshness-in-vocabulary",
+        "expected": true,
+        "actual": true,
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "mastery.fixture-row-is-labelled",
+        "expected": "SYNTHETIC_DEMO_SEED",
+        "actual": "SYNTHETIC_DEMO_SEED",
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "mastery.negative-basis-unavailable",
+        "expected": {
+          "code": "BASIS_UNAVAILABLE",
+          "mutated": false,
+          "snapshotUnchanged": true,
+          "history": 1
+        },
+        "actual": {
+          "code": "BASIS_UNAVAILABLE",
+          "mutated": false,
+          "snapshotUnchanged": true,
+          "history": 1
+        },
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "mastery.negative-no-evaluator-no-grant",
+        "expected": {
+          "ok": false,
+          "code": "AUTHORIZED_EVALUATOR_UNBOUND",
+          "mutated": false,
+          "snapshotUnchanged": true,
+          "history": 1,
+          "judgment": "MASTERED"
+        },
+        "actual": {
+          "ok": false,
+          "code": "AUTHORIZED_EVALUATOR_UNBOUND",
+          "mutated": false,
+          "snapshotUnchanged": true,
+          "history": 1,
+          "judgment": "MASTERED"
+        },
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "mastery.negative-conflict-needs-governed-evaluation",
+        "expected": {
+          "code": "CONFLICT_REQUIRES_GOVERNED_EVALUATION",
+          "action": "REQUEST_REVIEW_OR_EVALUATION",
+          "mutated": false,
+          "snapshotUnchanged": true,
+          "judgment": "MASTERED",
+          "history": 1
+        },
+        "actual": {
+          "code": "CONFLICT_REQUIRES_GOVERNED_EVALUATION",
+          "action": "REQUEST_REVIEW_OR_EVALUATION",
+          "mutated": false,
+          "snapshotUnchanged": true,
+          "judgment": "MASTERED",
+          "history": 1
+        },
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "mastery.negative-no-local-write",
+        "expected": {
+          "ok": false,
+          "code": "CANONICAL_MASTERY_WRITE_FORBIDDEN",
+          "mutated": false,
+          "freshness": "REVALIDATION_REQUIRED",
+          "judgment": "MASTERED"
+        },
+        "actual": {
+          "ok": false,
+          "code": "CANONICAL_MASTERY_WRITE_FORBIDDEN",
+          "mutated": false,
+          "freshness": "REVALIDATION_REQUIRED",
+          "judgment": "MASTERED"
+        },
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "mastery.explain-causal-law",
+        "expected": {
+          "completionOrActivityUsed": false,
+          "institutionalAuthorityInferred": false,
+          "causalLaw": "EFFECTIVE_DECISIONS+EVIDENCE+VERSIONED_POLICY_ONLY"
+        },
+        "actual": {
+          "completionOrActivityUsed": false,
+          "institutionalAuthorityInferred": false,
+          "causalLaw": "EFFECTIVE_DECISIONS+EVIDENCE+VERSIONED_POLICY_ONLY"
+        },
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "mastery.no-progression-without-proof",
+        "expected": {
+          "judgment": "MASTERED",
+          "freshness": "REVALIDATION_REQUIRED",
+          "history": 1,
+          "receipts": 0
+        },
+        "actual": {
+          "judgment": "MASTERED",
+          "freshness": "REVALIDATION_REQUIRED",
+          "history": 1,
+          "receipts": 0
+        },
+        "ok": true,
+        "class": null,
+        "message": ""
+      },
+      {
+        "id": "mastery.collection-renders-fixture-row",
+        "expected": [
+          "mastery-w04-flow"
+        ],
+        "actual": [
+          "mastery-w04-flow"
+        ],
+        "ok": true,
+        "class": null,
+        "message": ""
+      }
+    ],
+    "screenshots": [
+      {
+        "filename": "writer-output/W04/evidence/mastery-progression-state-machine-empty-state-20261002T044436Z-c82cec63.png",
+        "sha256": "f793ee31d4ab9552aa9545956d3918c7b9ef725e2f9e326e6606be0459b6067e",
+        "bytes": 238972,
+        "viewport": {
+          "width": 1440,
+          "height": 980
+        },
+        "capturedAt": "2026-10-02T04:44:36.721Z",
+        "boundTo": {
+          "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+          "flow": "mastery.progression-state-machine",
+          "id": "empty-state"
+        }
+      },
+      {
+        "filename": "writer-output/W04/evidence/mastery-progression-state-machine-fixture-row-20261002T044436Z-c82cec63.png",
+        "sha256": "7c564e89d0547256dc3de752cb3ad893f19b1903f7249ff6631b2de23b2762ff",
+        "bytes": 262472,
+        "viewport": {
+          "width": 1440,
+          "height": 980
+        },
+        "capturedAt": "2026-10-02T04:44:37.027Z",
+        "boundTo": {
+          "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+          "flow": "mastery.progression-state-machine",
+          "id": "fixture-row"
+        }
+      },
+      {
+        "filename": "writer-output/W04/evidence/mastery-progression-state-machine-state-machine-blocked-20261002T044437Z-c82cec63.png",
+        "sha256": "552a0d3b561ae5a068713fe55469920c2f20ecbe54027a69019007d69a03e369",
+        "bytes": 258886,
+        "viewport": {
+          "width": 1440,
+          "height": 980
+        },
+        "capturedAt": "2026-10-02T04:44:37.612Z",
+        "boundTo": {
+          "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+          "flow": "mastery.progression-state-machine",
+          "id": "state-machine-blocked"
+        }
+      }
+    ],
+    "pageErrors": [],
+    "transportFailures": [
+      {
+        "url": "http://127.0.0.1:4174/v1/platform/input-direction",
+        "error": "net::ERR_CONNECTION_REFUSED"
+      },
+      {
+        "url": "http://127.0.0.1:4174/v1/capabilities",
+        "error": "net::ERR_CONNECTION_REFUSED"
+      }
+    ],
+    "browser": "Chromium (Playwright package-local)",
+    "browserVersion": "151.0.7922.34",
+    "status": "PASS",
+    "failureClassification": null
+  },
+  "receiptIdentity": {
+    "schemaVersion": 1,
+    "classification": "W04_BROWSER_RECEIPT_NOT_OWNER_ACCEPTANCE",
+    "contract": "controller/07_browser/browser_contract.md §1",
+    "command": "node tools/w04-browser-flows.mjs --flow mastery.progression-state-machine",
+    "browser": "Chromium (Playwright package-local)",
+    "browserVersion": "151.0.7922.34",
+    "transport": "localhost-http",
+    "runtime": "Node v22.16.0",
+    "candidate": "WORKTREE_VARIANT:c82cec6382f17c0052782f8450053b4e28060873161440d2993fc97143d2cb5f",
+    "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "tree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+    "environment": {
+      "node": "v22.16.0",
+      "engine": "Playwright Chromium",
+      "playwrightResolution": "package-local",
+      "packageDeclaredVersion": "1.62.1",
+      "transport": "localhost-http",
+      "proofServer": "tools/serve.mjs on 127.0.0.1:44819",
+      "viewport": "1440x980",
+      "reducedMotion": true,
+      "browserExecutableOverride": false,
+      "browserVersion": "151.0.7922.34"
+    },
+    "capturedAt": "2026-10-02T04:44:37.895Z",
+    "summary": {
+      "total": 5,
+      "pass": 5,
+      "fail": 0
+    }
+  },
+  "laneWorktreeAtCopy": {
+    "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "commitTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+    "branch": "writer/mi-serial-lane/MAS-1"
+  },
+  "verdict": {
+    "status": "PASS",
+    "failedAssertions": null,
+    "classification": null
+  },
+  "note": "flow.status is the harness verdict recorded by the mandated tool at that run; screenshots above are the exact frames that verdict is bound to."
+}

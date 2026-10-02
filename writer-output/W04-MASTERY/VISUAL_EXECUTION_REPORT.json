@@ -1,39 +1,612 @@
 {
   "SURFACE": "mastery",
   "OWNER": "W04-MASTERY",
+  "LANE": "MAS-1 (writer/mi-serial-lane/MAS-1, WAVE-1)",
   "REFERENCE": "cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/03_MASTERY/Arabic Cybersecurity Mastery Dashboard.png",
   "REFERENCE_CLASSIFICATION": "CURRENT_FINAL_REFERENCE",
-  "CURRENT_CANDIDATE": "tree:uncommitted(writer/mi-serial) @ baseline e5a77b6 — mastery surface pre-improvement working tree",
-  "FILES_CHANGED": [],
-  "FUNCTIONAL_STATUS": "NOT_STARTED",
-  "STRUCTURAL_STATUS": "NOT_STARTED",
-  "VISUAL_STATUS": "NOT_STARTED",
-  "VISUAL_COMPARISON_LEVELS_COMPLETED": [],
-  "RESPONSIVE_STATUS": "NOT_STARTED",
-  "RTL_LTR_STATUS": "NOT_STARTED",
-  "DEFECTS_FOUND": [],
-  "DEFECT_SEVERITY": "N/A",
-  "ROOT_CAUSE": "UNKNOWN",
-  "FIXES_APPLIED": [],
-  "RECAPTURE_STATUS": "NOT_STARTED",
-  "RECOMPARISON_STATUS": "NOT_STARTED",
-  "REGRESSION_STATUS": "NOT_STARTED",
-  "EVIDENCE": [],
-  "LINEAGE": {
-    "reference_integrity": {
+  "CURRENT_CANDIDATE": {
+    "branch": "writer/mi-serial-lane/MAS-1",
+    "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "commitTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+    "laneSourceRoots": [
+      "stack/native-typescript/surfaces/mastery",
+      "stack/native-typescript/adapters/mastery"
+    ],
+    "laneSourceDigest": "156076fae504510cc67efba3e7a327805ba07662cf2d02a011a424c2a063663f",
+    "distServedDigest": "bc3b9c7e48a6a1c9798d129ec87b5db1f4b0ef0fd3aee7fc92ea85199fee0b42",
+    "digestVerifiedAfterRestore": true,
+    "productSourceFilesChangedByLane": []
+  },
+  "FILES_CHANGED": [
+    "writer-output/W04-MASTERY/capture.mjs",
+    "writer-output/W04-MASTERY/measure.py",
+    "writer-output/W04-MASTERY/falsification.mjs",
+    "writer-output/W04-MASTERY/FALSIFICATION-a.json",
+    "writer-output/W04-MASTERY/FALSIFICATION-b.json",
+    "writer-output/W04-MASTERY/VISUAL_EXECUTION_REPORT.json",
+    "writer-output/W04-MASTERY/HANDOFF.md",
+    "writer-output/W04-MASTERY/evidence/candidate-ltr-en/ (3 frames + CAPTURE_RECEIPT + MEASURES)",
+    "writer-output/W04-MASTERY/evidence/candidate-ltr-en-seeded/ (3 frames + receipt + measures)",
+    "writer-output/W04-MASTERY/evidence/candidate-rtl-ar/ (3 frames + receipt + measures)",
+    "writer-output/W04-MASTERY/evidence/candidate-rtl-ar-seeded/ (3 frames + receipt + measures)",
+    "writer-output/W04-MASTERY/evidence/candidate-narrow-*/ (768x900 x4, 1 frame + receipt + measures each)",
+    "writer-output/W04-MASTERY/evidence/flow-mastery-progressionsm/ (lane copy of the mandated flow PASS)",
+    "writer-output/W04-MASTERY/evidence/rtl-probe/SUPERSEDED.json"
+  ],
+  "FUNCTIONAL_STATUS": "PASS - npm test 210/0 (run twice, identical id/status list); packet tests S15_W04_MASTERY_PORTFOLIO/domain-authority.test.js PASS, CG5_W04_COVERAGE/w04-convergence.test.js PASS, post-c03 D10 harness PASS (ALL D10 W04 AUTHORITY + LIFECYCLE TESTS PASSED 100%); mandated flow node tools/w04-browser-flows.mjs --flow mastery.progression-state-machine PASS (aggregate 5/5, 0 failed assertions, 0 page errors); lane falsification battery 8/8 PASS on run a and run b.",
+  "STRUCTURAL_STATUS": "PASS - 0 pane overlap (left-center, center-right, left-right) at every captured viewport in both directions; horizontalOverflow=false everywhere; clipped=[] everywhere; right pane collapses to 0x0 at 1024x900 and 768x900, both panes collapse at 768x900; center stage scrollable (overflowY=auto, scrollHeight>clientHeight) so content reflows instead of truncating; 0 uncaught page errors across all 16 candidate frames; node tools/check-duplicate-mechanics.mjs PASS (322 files, findings=[]).",
+  "VISUAL_STATUS": "OWNED REGIONS PASS / SHARED CHROME PARTIAL - the Mastery-owned CENTER, the RIGHT context lenses and the LEFT table column headers match the CURRENT_FINAL_REFERENCE at L1/L2 and render correctly in both directions; shared chrome (m0 studio header, domain toolbar labels, LEFT collection group chrome, pane order) neither localizes nor mirrors and sits outside the lane's sealed roots (MAS1-001..003).",
+  "VISUAL_COMPARISON_LEVELS_COMPLETED": [
+    "L1 whole surface: reference 1505x1045 vs candidate 1505/1440 in EN+AR (viewed side by side)",
+    "L2 region/pane: left/center/right rect + full pane text, both directions, 4 viewports",
+    "L3 component: status pills, judgment grid, 5-step track, explainability ladder, basis/binding split, context lenses, toolbar groups",
+    "L4 micro: clip/overflow/scroll/blank-band measurements, bidi token isolation, word-wrap, direction mirroring probes. No pixel-diff overlay; every measure is hash-bound to the same PNG bytes."
+  ],
+  "RESPONSIVE_STATUS": "PASS_EVIDENCED - bands tested: wide/standard 1505x1045 + 1440x1000, narrow 1024x900, compact-narrow 768x900; each in EN/LTR and AR/RTL and each in default (empty) and populated (seeded) state = 16 frames, 0 page errors, 0 horizontal overflow, 0 pane overlap, 0 clipped nodes, deliberate right-pane collapse at 1024/768 and both-pane collapse at 768, vertical reflow in CENTER. A sub-768 band was NOT captured (not required by matrix row 12) - stated, not assumed.",
+  "RTL_LTR_STATUS": "PARTIAL - OWNED REGIONS MIRRORED AND LOCALIZED, SHARED CHROME NOT. AR/RTL measured at every viewport: dir=rtl/lang=ar; CENTER Arabic chars 765 (default) / 651 (seeded) vs 0 under EN/LTR (no Arabic leaks into EN owned content); RIGHT lenses and LEFT column headers localized; ladder arrows and step order mirror; technical tokens (ORACLE-011/A03, AUTHORIZED_EVALUATOR_UNBOUND, digests, ids, policy refs) stay LTR-isolated. NOT mirrored/localized and outside lane roots: pane order (dir=rtl yet #leftPane x=0, #rightPane x=1020), domain toolbar labels, LEFT collection group labels/footer, m0 studio header plus the English 'How this workspace works' block at the tail of CENTER. See MAS1-001..003.",
+  "DEFECTS_FOUND": [
+    {
+      "id": "MAS1-001",
+      "severity": "V2",
+      "rootCause": "SHARED_COMPONENT",
+      "where": "AR/RTL CENTER tail block: 'How this workspace works' + 2 English guidance lines",
+      "source": "stack/native-typescript/surfaces/m0-controller-composition.ts (renderTypedCollectionStage hardcoded h3 + English-only mastery title/summary/emptyLabel/emptyMessage/emptyGuidance)",
+      "inLaneRoots": false,
+      "status": "OPEN_RECORD_ONLY"
+    },
+    {
+      "id": "MAS1-002",
+      "severity": "V2",
+      "rootCause": "SHARED_COMPONENT",
+      "where": "AR/RTL domain toolbar labels (Inspect Mastery / Explain causal basis / Request governed re-evaluation), LEFT collection groups (All records/Submitted/Returned/Prepared/Admitted), left footer and 'Mastery evaluations' heading stay English",
+      "source": "surfaces/m0-controller-composition.ts command registration + surfaces/composition/w04-rescue.ts collection chrome",
+      "inLaneRoots": false,
+      "status": "OPEN_RECORD_ONLY"
+    },
+    {
+      "id": "MAS1-003",
+      "severity": "V2",
+      "rootCause": "SHARED_COMPONENT",
+      "where": "Pane geometry does not mirror under RTL: dir=rtl yet #leftPane x=0 / #rightPane x=1020 at 1505 and 1440 (paneOrder.mirrored=false in every AR frame) while shell nav and CENTER do mirror",
+      "source": "foundation pane layout + foundation/extensions.css (SH-2 chrome/geometry lane per DAG)",
+      "inLaneRoots": false,
+      "status": "OPEN_RECORD_ONLY"
+    },
+    {
+      "id": "MAS1-004",
+      "severity": "V1",
+      "rootCause": "BUILD_AUTHORITY",
+      "where": "Committed dist/foundation/extensions.css at fe1bb98 lacks 'justify-content:safe center' that IS present in HEAD source; npm run build:runtime regenerates it, so captures ran on a source-faithful rebuild; dist restored to HEAD per mission step 6",
+      "source": "dist/foundation/extensions.css",
+      "inLaneRoots": false,
+      "status": "OPEN_RECORD_ONLY_PRE_EXISTING"
+    },
+    {
+      "id": "MAS1-005",
+      "severity": "V1",
+      "rootCause": "SHARED_COMPONENT",
+      "where": "Collapsed RIGHT pane exposes hardcoded Arabic structured-inspector strings in hidden DOM (innerText only; nodes are display:none - visible EN frames measured 0 Arabic chars in CENTER and LEFT)",
+      "source": "foundation/accepted-runtime.ts renderInspector()",
+      "inLaneRoots": false,
+      "status": "OPEN_RECORD_ONLY_NON_VISIBLE"
+    },
+    {
+      "id": "MAS1-006",
+      "severity": "V1",
+      "rootCause": "SURFACE_COMPOSITION",
+      "where": "REFERENCE CONSISTENCY deviation: the reference renders 'Mastery judgment dimension' as one numbered 5-step ladder that breaks tokens mid-word at 1505px ('NOT_EVALUATE D', 'INSUFFICIENT_EV IDENCE'); the candidate renders a 5-cell grid plus a separate 'How a Mastery State is produced' track",
+      "source": "stack/native-typescript/surfaces/mastery/presentation.ts (pre-existing W04 remediation; retained per the sealed instruction to keep existing mechanics and not rebuild)",
+      "inLaneRoots": true,
+      "status": "RECORDED_FOR_CONTROLLER_ADJUDICATION_NOT_REVERTED"
+    }
+  ],
+  "DEFECT_SEVERITY": "MAX V2 (MAS1-001..003, all shared and outside lane roots); two V1 evidence/build observations; one V1 reference-consistency deviation retained and flagged.",
+  "ROOT_CAUSE": "Lane-owned product code needed no responsive/RTL repair; every remaining AR/RTL gap traces to shared composition/foundation code the sealed roots exclude (SHARED_COMPONENT), plus one pre-existing dist/source divergence outside the lane.",
+  "FIXES_APPLIED": [
+    "No product source change (0 edits under stack/native-typescript/surfaces/mastery/ or stack/native-typescript/adapters/mastery/) - progression state machine and domain mechanics retained unchanged as sealed.",
+    "Evidence tooling extended inside the lane output root: capture.mjs binds every receipt to HEAD commit/tree/branch + OWNED_SOURCE_DIGEST + DIST_SERVED_DIGEST and measures pane overlap, pane mirroring, center scroll and per-region Arabic-character truth; measure.py adds hash-bound DOM key hits (AR+EN) and states the eng-only OCR limitation; falsification.mjs adds the N1/N2/N3 + lane-specific battery."
+  ],
+  "RECAPTURE_STATUS": "COMPLETE - 8 lineage-bound capture runs / 16 frames: EN and AR at 1505x1045, 1440x1000, 1024x900 in default and seeded state, plus EN and AR at 768x900 in default and seeded state; every frame hash-bound in its CAPTURE_RECEIPT with 0 page errors; MEASURES.json written for all 8 label directories.",
+  "RECOMPARISON_STATUS": "COMPLETE at L1-L4 against CURRENT_FINAL_REFERENCE (7784568ef868bfef...); owned regions match, the layout deviation is recorded as MAS1-006 and the shared-chrome gaps as MAS1-001..003.",
+  "REGRESSION_STATUS": "NO NEW FAILURES - npm test 210/0 twice with identical id/status lists (N5); npm run check reproduces exactly the ONE known red declared expected by DAG section 0 (browser.lineage_receipt_truthful 4/6 with the two Enterprise failures that are explicitly NOT this lane's); every other check step exits 0.",
+  "EVIDENCE": {
+    "captures": [
+      {
+        "label": "candidate-ltr-en-seeded",
+        "receipt": "writer-output/W04-MASTERY/evidence/candidate-ltr-en-seeded/CAPTURE_RECEIPT.json",
+        "receiptSha256": "5b6eebc67af1f027e83ae2406b13a34fe920af6126bfa5d822f22fa5cd4777f0",
+        "measures": "writer-output/W04-MASTERY/evidence/candidate-ltr-en-seeded/MEASURES.json",
+        "measuresSha256": "97b85205a58b812587a84c8496c0fe857c71bb392264ebc10f7fe2aacf9d15d4",
+        "locale": "en",
+        "seed": "dist/adapters/mastery/domain.js#createW04MasteryDemoRecords (all rows truthClass=SYNTHETIC_DEMO_SEED)",
+        "viewports": [
+          "1505x1045",
+          "1440x1000",
+          "1024x900"
+        ],
+        "lineage": {
+          "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+          "commitTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+          "branch": "writer/mi-serial-lane/MAS-1",
+          "dirtyPathCount": 10,
+          "ownedSourceDigest": "156076fae504510cc67efba3e7a327805ba07662cf2d02a011a424c2a063663f",
+          "distServedDigest": "bc3b9c7e48a6a1c9798d129ec87b5db1f4b0ef0fd3aee7fc92ea85199fee0b42",
+          "ownedSourceFileCount": 4,
+          "distServedFileCount": 4,
+          "node": "v22.16.0"
+        },
+        "frames": [
+          {
+            "file": "mastery-1505x1045-seeded-en.png",
+            "path": "writer-output/W04-MASTERY/evidence/candidate-ltr-en-seeded/mastery-1505x1045-seeded-en.png",
+            "sha256": "57103ea5f72f4e8c9897c7566bfa99a96da25e8ca40b241593b94f7303ebb612",
+            "bytes": 326259,
+            "viewport": "1505x1045",
+            "pageErrors": 0,
+            "direction": "ltr",
+            "lang": "en"
+          },
+          {
+            "file": "mastery-1440x1000-seeded-en.png",
+            "path": "writer-output/W04-MASTERY/evidence/candidate-ltr-en-seeded/mastery-1440x1000-seeded-en.png",
+            "sha256": "6259a6e8745568d7da85778b4bf2722463b66dc8213c67952c336f0298fb5597",
+            "bytes": 308859,
+            "viewport": "1440x1000",
+            "pageErrors": 0,
+            "direction": "ltr",
+            "lang": "en"
+          },
+          {
+            "file": "mastery-1024x900-seeded-en.png",
+            "path": "writer-output/W04-MASTERY/evidence/candidate-ltr-en-seeded/mastery-1024x900-seeded-en.png",
+            "sha256": "7b9d21e695179d16a80b1399c8d5fabc950d94f20401d4535c5170a0dc68c964",
+            "bytes": 193062,
+            "viewport": "1024x900",
+            "pageErrors": 0,
+            "direction": "ltr",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "label": "candidate-ltr-en",
+        "receipt": "writer-output/W04-MASTERY/evidence/candidate-ltr-en/CAPTURE_RECEIPT.json",
+        "receiptSha256": "1e0071a335a25ffaad1535ffc3028444a33238dba1e1e978556bd05effc00519",
+        "measures": "writer-output/W04-MASTERY/evidence/candidate-ltr-en/MEASURES.json",
+        "measuresSha256": "972be2ba68bd953c0ba10c7554a485d283c07977e91a83d02156b71bbc87eddc",
+        "locale": "en",
+        "seed": "none (product boot default: domain empty)",
+        "viewports": [
+          "1505x1045",
+          "1440x1000",
+          "1024x900"
+        ],
+        "lineage": {
+          "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+          "commitTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+          "branch": "writer/mi-serial-lane/MAS-1",
+          "dirtyPathCount": 8,
+          "ownedSourceDigest": "156076fae504510cc67efba3e7a327805ba07662cf2d02a011a424c2a063663f",
+          "distServedDigest": "bc3b9c7e48a6a1c9798d129ec87b5db1f4b0ef0fd3aee7fc92ea85199fee0b42",
+          "ownedSourceFileCount": 4,
+          "distServedFileCount": 4,
+          "node": "v22.16.0"
+        },
+        "frames": [
+          {
+            "file": "mastery-1505x1045-en.png",
+            "path": "writer-output/W04-MASTERY/evidence/candidate-ltr-en/mastery-1505x1045-en.png",
+            "sha256": "dca780366a7293806a49ce6e30e4bc678f94d95e650d2494dbca843e8d10d1da",
+            "bytes": 251338,
+            "viewport": "1505x1045",
+            "pageErrors": 0,
+            "direction": "ltr",
+            "lang": "en"
+          },
+          {
+            "file": "mastery-1440x1000-en.png",
+            "path": "writer-output/W04-MASTERY/evidence/candidate-ltr-en/mastery-1440x1000-en.png",
+            "sha256": "a2f0eff5032cc74736430abc548a9f8d87045a7e9e738e1ae90bd56461e2aa58",
+            "bytes": 240670,
+            "viewport": "1440x1000",
+            "pageErrors": 0,
+            "direction": "ltr",
+            "lang": "en"
+          },
+          {
+            "file": "mastery-1024x900-en.png",
+            "path": "writer-output/W04-MASTERY/evidence/candidate-ltr-en/mastery-1024x900-en.png",
+            "sha256": "7bb81e243f5e93f20aaceaab14edb4c21583b1a676de4d8030a9f943765408c5",
+            "bytes": 172835,
+            "viewport": "1024x900",
+            "pageErrors": 0,
+            "direction": "ltr",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "label": "candidate-narrow-ltr-en-seeded",
+        "receipt": "writer-output/W04-MASTERY/evidence/candidate-narrow-ltr-en-seeded/CAPTURE_RECEIPT.json",
+        "receiptSha256": "0f7890fd19cc99d4b70fcf0137dc40709c2da8198b61faa6cd614e50e4ed73b7",
+        "measures": "writer-output/W04-MASTERY/evidence/candidate-narrow-ltr-en-seeded/MEASURES.json",
+        "measuresSha256": "2e7da06f0790010db127847afcd17639f0ff8fc98a8cd4186dc47f98324f9774",
+        "locale": "en",
+        "seed": "dist/adapters/mastery/domain.js#createW04MasteryDemoRecords (all rows truthClass=SYNTHETIC_DEMO_SEED)",
+        "viewports": [
+          "768x900"
+        ],
+        "lineage": {
+          "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+          "commitTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+          "branch": "writer/mi-serial-lane/MAS-1",
+          "dirtyPathCount": 20,
+          "ownedSourceDigest": "156076fae504510cc67efba3e7a327805ba07662cf2d02a011a424c2a063663f",
+          "distServedDigest": "bc3b9c7e48a6a1c9798d129ec87b5db1f4b0ef0fd3aee7fc92ea85199fee0b42",
+          "ownedSourceFileCount": 4,
+          "distServedFileCount": 4,
+          "node": "v22.16.0"
+        },
+        "frames": [
+          {
+            "file": "mastery-768x900-seeded-en.png",
+            "path": "writer-output/W04-MASTERY/evidence/candidate-narrow-ltr-en-seeded/mastery-768x900-seeded-en.png",
+            "sha256": "514d62ea11a20da3c993672988b34d181842779985e93f7f040cc6d6e6229889",
+            "bytes": 120859,
+            "viewport": "768x900",
+            "pageErrors": 0,
+            "direction": "ltr",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "label": "candidate-narrow-ltr-en",
+        "receipt": "writer-output/W04-MASTERY/evidence/candidate-narrow-ltr-en/CAPTURE_RECEIPT.json",
+        "receiptSha256": "c79530c7d287c4ba850dcbe925486bbe2e1f31470aa1d9475d780fedc32371b4",
+        "measures": "writer-output/W04-MASTERY/evidence/candidate-narrow-ltr-en/MEASURES.json",
+        "measuresSha256": "c48a78733c0592b786da9dfcd7d293bf23bc0700870b77f63f227a7f3773f714",
+        "locale": "en",
+        "seed": "none (product boot default: domain empty)",
+        "viewports": [
+          "768x900"
+        ],
+        "lineage": {
+          "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+          "commitTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+          "branch": "writer/mi-serial-lane/MAS-1",
+          "dirtyPathCount": 18,
+          "ownedSourceDigest": "156076fae504510cc67efba3e7a327805ba07662cf2d02a011a424c2a063663f",
+          "distServedDigest": "bc3b9c7e48a6a1c9798d129ec87b5db1f4b0ef0fd3aee7fc92ea85199fee0b42",
+          "ownedSourceFileCount": 4,
+          "distServedFileCount": 4,
+          "node": "v22.16.0"
+        },
+        "frames": [
+          {
+            "file": "mastery-768x900-en.png",
+            "path": "writer-output/W04-MASTERY/evidence/candidate-narrow-ltr-en/mastery-768x900-en.png",
+            "sha256": "8f3a5bc9a09bb6e5da1647c397935e740f43484f16e0156cbe8c8c9c8c46fc89",
+            "bytes": 125875,
+            "viewport": "768x900",
+            "pageErrors": 0,
+            "direction": "ltr",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "label": "candidate-narrow-rtl-ar-seeded",
+        "receipt": "writer-output/W04-MASTERY/evidence/candidate-narrow-rtl-ar-seeded/CAPTURE_RECEIPT.json",
+        "receiptSha256": "0fa5a0c1e0bd177bd12edce9b1973d645b8c4ae0c03bb869fc3912bfe43a6d4a",
+        "measures": "writer-output/W04-MASTERY/evidence/candidate-narrow-rtl-ar-seeded/MEASURES.json",
+        "measuresSha256": "8b509b5e90cf15644ce9c4f1cae892c00e177b281895f06bfacd69d1a8d92f78",
+        "locale": "ar",
+        "seed": "dist/adapters/mastery/domain.js#createW04MasteryDemoRecords (all rows truthClass=SYNTHETIC_DEMO_SEED)",
+        "viewports": [
+          "768x900"
+        ],
+        "lineage": {
+          "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+          "commitTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+          "branch": "writer/mi-serial-lane/MAS-1",
+          "dirtyPathCount": 21,
+          "ownedSourceDigest": "156076fae504510cc67efba3e7a327805ba07662cf2d02a011a424c2a063663f",
+          "distServedDigest": "bc3b9c7e48a6a1c9798d129ec87b5db1f4b0ef0fd3aee7fc92ea85199fee0b42",
+          "ownedSourceFileCount": 4,
+          "distServedFileCount": 4,
+          "node": "v22.16.0"
+        },
+        "frames": [
+          {
+            "file": "mastery-768x900-seeded-ar.png",
+            "path": "writer-output/W04-MASTERY/evidence/candidate-narrow-rtl-ar-seeded/mastery-768x900-seeded-ar.png",
+            "sha256": "d7015c45d2c25a8e3ab26102e56c0db32f354de2636ad5bf912b08e52dc304aa",
+            "bytes": 108163,
+            "viewport": "768x900",
+            "pageErrors": 0,
+            "direction": "rtl",
+            "lang": "ar"
+          }
+        ]
+      },
+      {
+        "label": "candidate-narrow-rtl-ar",
+        "receipt": "writer-output/W04-MASTERY/evidence/candidate-narrow-rtl-ar/CAPTURE_RECEIPT.json",
+        "receiptSha256": "635fef1374b975dfab89e6ebc3463da1adf9f8dd0542c7aa5adc263a1ce8fd9a",
+        "measures": "writer-output/W04-MASTERY/evidence/candidate-narrow-rtl-ar/MEASURES.json",
+        "measuresSha256": "805b3bb3ea79b71ef7261399dbc709b2b84f233f4d90378d8a27f49402ede215",
+        "locale": "ar",
+        "seed": "none (product boot default: domain empty)",
+        "viewports": [
+          "768x900"
+        ],
+        "lineage": {
+          "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+          "commitTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+          "branch": "writer/mi-serial-lane/MAS-1",
+          "dirtyPathCount": 19,
+          "ownedSourceDigest": "156076fae504510cc67efba3e7a327805ba07662cf2d02a011a424c2a063663f",
+          "distServedDigest": "bc3b9c7e48a6a1c9798d129ec87b5db1f4b0ef0fd3aee7fc92ea85199fee0b42",
+          "ownedSourceFileCount": 4,
+          "distServedFileCount": 4,
+          "node": "v22.16.0"
+        },
+        "frames": [
+          {
+            "file": "mastery-768x900-ar.png",
+            "path": "writer-output/W04-MASTERY/evidence/candidate-narrow-rtl-ar/mastery-768x900-ar.png",
+            "sha256": "ff0e3b4884692d3814cad5056f103b6eea49ea2eab4bb247dd8b75f41b68cb76",
+            "bytes": 106252,
+            "viewport": "768x900",
+            "pageErrors": 0,
+            "direction": "rtl",
+            "lang": "ar"
+          }
+        ]
+      },
+      {
+        "label": "candidate-rtl-ar-seeded",
+        "receipt": "writer-output/W04-MASTERY/evidence/candidate-rtl-ar-seeded/CAPTURE_RECEIPT.json",
+        "receiptSha256": "7e64792283bbdac3dab4ddfe88db64c189e069a6b0dae9a8e0dc3ef8bbc8964b",
+        "measures": "writer-output/W04-MASTERY/evidence/candidate-rtl-ar-seeded/MEASURES.json",
+        "measuresSha256": "4bb33b6837cc4d102e7f0ac896b768dffa5934e1689da3c7249c5bdf28b772e3",
+        "locale": "ar",
+        "seed": "dist/adapters/mastery/domain.js#createW04MasteryDemoRecords (all rows truthClass=SYNTHETIC_DEMO_SEED)",
+        "viewports": [
+          "1505x1045",
+          "1440x1000",
+          "1024x900"
+        ],
+        "lineage": {
+          "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+          "commitTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+          "branch": "writer/mi-serial-lane/MAS-1",
+          "dirtyPathCount": 11,
+          "ownedSourceDigest": "156076fae504510cc67efba3e7a327805ba07662cf2d02a011a424c2a063663f",
+          "distServedDigest": "bc3b9c7e48a6a1c9798d129ec87b5db1f4b0ef0fd3aee7fc92ea85199fee0b42",
+          "ownedSourceFileCount": 4,
+          "distServedFileCount": 4,
+          "node": "v22.16.0"
+        },
+        "frames": [
+          {
+            "file": "mastery-1505x1045-seeded-ar.png",
+            "path": "writer-output/W04-MASTERY/evidence/candidate-rtl-ar-seeded/mastery-1505x1045-seeded-ar.png",
+            "sha256": "545bdb47224d4350515ff19d8244fc28dc7f8297e7cbce62037223418af92159",
+            "bytes": 290710,
+            "viewport": "1505x1045",
+            "pageErrors": 0,
+            "direction": "rtl",
+            "lang": "ar"
+          },
+          {
+            "file": "mastery-1440x1000-seeded-ar.png",
+            "path": "writer-output/W04-MASTERY/evidence/candidate-rtl-ar-seeded/mastery-1440x1000-seeded-ar.png",
+            "sha256": "cba9be4fa92f5d4ccff0ab0900a374bb8397e99693436eee4e1f66594d50c9fc",
+            "bytes": 274395,
+            "viewport": "1440x1000",
+            "pageErrors": 0,
+            "direction": "rtl",
+            "lang": "ar"
+          },
+          {
+            "file": "mastery-1024x900-seeded-ar.png",
+            "path": "writer-output/W04-MASTERY/evidence/candidate-rtl-ar-seeded/mastery-1024x900-seeded-ar.png",
+            "sha256": "15dff25511ebfcf4d378aadb8bd6ffd418a4775b66199ec666418fd823915e83",
+            "bytes": 179873,
+            "viewport": "1024x900",
+            "pageErrors": 0,
+            "direction": "rtl",
+            "lang": "ar"
+          }
+        ]
+      },
+      {
+        "label": "candidate-rtl-ar",
+        "receipt": "writer-output/W04-MASTERY/evidence/candidate-rtl-ar/CAPTURE_RECEIPT.json",
+        "receiptSha256": "0add83aa674ecc884e78ba65cde85857a0f685f5baa40e2fdda550360664153d",
+        "measures": "writer-output/W04-MASTERY/evidence/candidate-rtl-ar/MEASURES.json",
+        "measuresSha256": "fc653bafb3ac2ca281da9afe4c4673b5eb61eb0cc807d706e7ef7dae4b9c4f60",
+        "locale": "ar",
+        "seed": "none (product boot default: domain empty)",
+        "viewports": [
+          "1505x1045",
+          "1440x1000",
+          "1024x900"
+        ],
+        "lineage": {
+          "commit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+          "commitTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+          "branch": "writer/mi-serial-lane/MAS-1",
+          "dirtyPathCount": 9,
+          "ownedSourceDigest": "156076fae504510cc67efba3e7a327805ba07662cf2d02a011a424c2a063663f",
+          "distServedDigest": "bc3b9c7e48a6a1c9798d129ec87b5db1f4b0ef0fd3aee7fc92ea85199fee0b42",
+          "ownedSourceFileCount": 4,
+          "distServedFileCount": 4,
+          "node": "v22.16.0"
+        },
+        "frames": [
+          {
+            "file": "mastery-1505x1045-ar.png",
+            "path": "writer-output/W04-MASTERY/evidence/candidate-rtl-ar/mastery-1505x1045-ar.png",
+            "sha256": "a22cea2c14831cea9b759167fc8d28632dceaa7f96f677d95843cf72c8bd82ad",
+            "bytes": 221376,
+            "viewport": "1505x1045",
+            "pageErrors": 0,
+            "direction": "rtl",
+            "lang": "ar"
+          },
+          {
+            "file": "mastery-1440x1000-ar.png",
+            "path": "writer-output/W04-MASTERY/evidence/candidate-rtl-ar/mastery-1440x1000-ar.png",
+            "sha256": "3a31c5c6819cf92e0152c2f5bdbf4db57ce3d379ccbc21b4e1db034d7f75e1ea",
+            "bytes": 212576,
+            "viewport": "1440x1000",
+            "pageErrors": 0,
+            "direction": "rtl",
+            "lang": "ar"
+          },
+          {
+            "file": "mastery-1024x900-ar.png",
+            "path": "writer-output/W04-MASTERY/evidence/candidate-rtl-ar/mastery-1024x900-ar.png",
+            "sha256": "8e3d8f1a6ee0fbf5f92ce1dafa3d6db18af3a447da70a951b57f7364eb6b5fbf",
+            "bytes": 154466,
+            "viewport": "1024x900",
+            "pageErrors": 0,
+            "direction": "rtl",
+            "lang": "ar"
+          }
+        ]
+      }
+    ],
+    "flow": {
+      "file": "writer-output/W04-MASTERY/evidence/flow-mastery-progressionsm/FLOW_EVIDENCE.json",
+      "sha256": "e98c8bca039adf58ad67fff5b451ee49bd74a07c530303b592b0b86f4e39f1d0",
+      "verdict": {
+        "status": "PASS",
+        "failedAssertions": null,
+        "classification": null
+      },
+      "command": "node tools/w04-browser-flows.mjs --flow mastery.progression-state-machine",
+      "receiptCommit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc"
+    },
+    "falsification": [
+      {
+        "file": "writer-output/W04-MASTERY/FALSIFICATION-a.json",
+        "sha256": "def6276ba0e66d02edec3ba758180a2e56155324a32cd99198aa626f9de60613",
+        "run": "a",
+        "pass": 8,
+        "fail": 0,
+        "probes": [
+          {
+            "id": "N2-boundary-invalid-input",
+            "status": "PASS"
+          },
+          {
+            "id": "N3-no-provider-no-fabrication",
+            "status": "PASS"
+          },
+          {
+            "id": "N1-node-learn-completion-cannot-write-mastery",
+            "status": "PASS"
+          },
+          {
+            "id": "N3-ui-entry-state-not-evaluated",
+            "status": "PASS"
+          },
+          {
+            "id": "LANE-learn-completion-not-inferred-as-mastery",
+            "status": "PASS"
+          },
+          {
+            "id": "N1-browser-canonical-mastery-write-refused",
+            "status": "PASS"
+          },
+          {
+            "id": "N2-browser-boundary-input",
+            "status": "PASS"
+          },
+          {
+            "id": "BROWSER-NO-PAGE-ERRORS",
+            "status": "PASS"
+          }
+        ]
+      },
+      {
+        "file": "writer-output/W04-MASTERY/FALSIFICATION-b.json",
+        "sha256": "4ae25de297803db0d679fb2810f55cdf634494c25e558a1fc7ddb74817f730df",
+        "run": "b",
+        "pass": 8,
+        "fail": 0,
+        "probes": [
+          {
+            "id": "N2-boundary-invalid-input",
+            "status": "PASS"
+          },
+          {
+            "id": "N3-no-provider-no-fabrication",
+            "status": "PASS"
+          },
+          {
+            "id": "N1-node-learn-completion-cannot-write-mastery",
+            "status": "PASS"
+          },
+          {
+            "id": "N3-ui-entry-state-not-evaluated",
+            "status": "PASS"
+          },
+          {
+            "id": "LANE-learn-completion-not-inferred-as-mastery",
+            "status": "PASS"
+          },
+          {
+            "id": "N1-browser-canonical-mastery-write-refused",
+            "status": "PASS"
+          },
+          {
+            "id": "N2-browser-boundary-input",
+            "status": "PASS"
+          },
+          {
+            "id": "BROWSER-NO-PAGE-ERRORS",
+            "status": "PASS"
+          }
+        ]
+      }
+    ],
+    "falsificationRunsIdentical": true,
+    "reference": {
       "path": "cep-writer/references/visual/03_PROGRESS_AND_EVIDENCE/03_MASTERY/Arabic Cybersecurity Mastery Dashboard.png",
       "sha256": "7784568ef868bfefdad8dcd731e20c2dbbe95bd9cdd8d81daaca7b0723d82a54",
       "dims": "1505x1045",
       "bytes": 1429712,
-      "verified": true,
-      "verification_method": "sha256sum + PIL size read of reference bytes; matches packet §3 expected prefix 7784568ef868bfef"
-    },
-    "baseline_commit": "e5a77b6",
-    "branch": "writer/mi-serial",
-    "captures": []
+      "verified": true
+    }
+  },
+  "LINEAGE": {
+    "sealedParent": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "candidateBranch": "writer/mi-serial-lane/MAS-1",
+    "capturedAtCommit": "fe1bb98ded51adc71a5f5fd14142a2c0880c11bc",
+    "captureCommitTree": "f22c70ce9597f07a9cf9ecb9bbc2ecd361fc3684",
+    "laneSourceDigestAtCapture": "156076fae504510cc67efba3e7a327805ba07662cf2d02a011a424c2a063663f",
+    "laneSourceDigestAfterRestore": "156076fae504510cc67efba3e7a327805ba07662cf2d02a011a424c2a063663f",
+    "distServedDigestAtCapture": "bc3b9c7e48a6a1c9798d129ec87b5db1f4b0ef0fd3aee7fc92ea85199fee0b42",
+    "method": "file-bytes ground truth (sha256 + PNG IHDR dims) from playwright chromium headless with reducedMotion=reduce; each receipt carries commit, HEAD^{tree}, branch, the dirty-path list at capture time, and per-file sha256 for the lane source roots and for the dist bytes actually served",
+    "environment": "node v22.16.0; playwright package-local chromium 151.0.7922.34 (~/.cache/ms-playwright); local truth server tools/serve.mjs",
+    "salvageRetained": [
+      "evidence/baseline/ untouched",
+      "evidence/baseline-populated/ untouched",
+      "baseline + populated CAPTURE_RECEIPT/MEASURES untouched"
+    ],
+    "supersededLabelled": [
+      "evidence/rtl-probe/SUPERSEDED.json"
+    ]
   },
   "ACCEPTANCE_STATUS": "NOT_OWNER_ACCEPTED",
-  "BLOCKERS": [],
-  "STAGE": "INITIALIZED",
-  "STAGE_DETAIL": "Skills loaded (visual-surface-composition, visual-fidelity-review, shared-component-governance, professional-ui-ux-composition); packet + standard + parallel plan read; reference integrity verified. Report created before any code change per standard §17.2."
+  "BLOCKERS": [
+    "MAS1-001..003 cannot be closed inside this lane: fixing them requires writing surfaces/m0-controller-composition.ts, surfaces/composition/w04-rescue.ts and foundation pane layout - all outside the sealed writable roots. Recorded, never edited, per packet STOP (shared-seam write = request, not direct edit).",
+    "None of the above blocks the sealed objective: responsive is fully evidenced, RTL is evidenced as PARTIAL with the exact shared gaps enumerated and hash-bound.",
+    "Owner-facing items raised by this lane: NONE. WM-009 (P2) is carried in matrix row 12's gap column but lies outside this lane's closed read set; it was NOT investigated and is NOT claimed closed."
+  ]
 }
