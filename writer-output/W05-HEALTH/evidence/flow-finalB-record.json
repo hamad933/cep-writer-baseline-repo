@@ -1,0 +1,124 @@
+{
+ "status": "PASS",
+ "assertions": [
+  {
+   "id": "health.group-truth-ceilings",
+   "ok": true,
+   "expected": false,
+   "actual": false
+  },
+  {
+   "id": "health.queue-and-liveness-are-distinct-metrics",
+   "ok": true,
+   "expected": false,
+   "actual": false
+  },
+  {
+   "id": "health.no-diagnostic-exists-before-the-explicit-action",
+   "ok": true,
+   "expected": null,
+   "actual": null
+  },
+  {
+   "id": "reach.health.refresh",
+   "ok": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "id": "health.refresh-re-observes",
+   "ok": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "id": "health.refresh-does-not-create-a-diagnostic",
+   "ok": true,
+   "expected": null,
+   "actual": null
+  },
+  {
+   "id": "health.refresh-records-an-observation",
+   "ok": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "id": "health.persistence-health-is-not-product-health",
+   "ok": true,
+   "expected": false,
+   "actual": false
+  },
+  {
+   "id": "health.observation-state-set-is-declared",
+   "ok": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "id": "reach.health.inspect",
+   "ok": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "id": "health.inspect-selects-one-exact-observation",
+   "ok": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "id": "reach.health.diagnose",
+   "ok": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "id": "health.diagnose-produces-a-real-diagnostic",
+   "ok": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "id": "health.diagnostic-is-durable",
+   "ok": true,
+   "expected": true,
+   "actual": true
+  },
+  {
+   "id": "health.diagnostic-is-distinct-from-refresh",
+   "ok": true,
+   "expected": true,
+   "actual": true
+  }
+ ],
+ "shots": [
+  {
+   "file": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-refresh-20261002T053545Z-c82cec63.png",
+   "sha256": "664f6a9a763ec7fc0ac8733c3a80ab1b09156c40dc3d859dbd8b98ef21f9a8f6",
+   "bytes": 248420,
+   "viewport": {
+    "width": 1440,
+    "height": 980
+   }
+  },
+  {
+   "file": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-inspect-20261002T053546Z-c82cec63.png",
+   "sha256": "27a8b2c57fc256533623ca48a4874c1d7b7c79b22cfc02008d7a6a3560b978b3",
+   "bytes": 248181,
+   "viewport": {
+    "width": 1440,
+    "height": 980
+   }
+  },
+  {
+   "file": "writer-output/W05/evidence/health-refresh-inspect-diagnose-after-diagnose-20261002T053547Z-c82cec63.png",
+   "sha256": "6d797a7c08f029c23489c96a6a05a7da1eb3df99b86902d417e6f62a35bc3652",
+   "bytes": 248629,
+   "viewport": {
+    "width": 1440,
+    "height": 980
+   }
+  }
+ ]
+}

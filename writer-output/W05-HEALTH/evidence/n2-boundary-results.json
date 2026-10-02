@@ -1,0 +1,73 @@
+{
+ "summary": {
+  "total": 7,
+  "pass": 7,
+  "fail": 0
+ },
+ "results": [
+  {
+   "id": "n2.inspect-unknown-source-is-refused",
+   "status": "PASS",
+   "detail": {
+    "code": "HEALTH_OBSERVATION_UNKNOWN",
+    "selectionIntact": true
+   }
+  },
+  {
+   "id": "n2.inspect-availability-rejects-unknown-id",
+   "status": "PASS",
+   "detail": {
+    "known": "true",
+    "unknown": "Observation source is not in the current observation set"
+   }
+  },
+  {
+   "id": "n2.select-unknown-throws-without-corrupting-state",
+   "status": "PASS",
+   "detail": {
+    "threw": "HEALTH_OBSERVATION_UNKNOWN",
+    "selectionIntact": true
+   }
+  },
+  {
+   "id": "n2.normalize-garbage-never-goes-green",
+   "status": "PASS",
+   "detail": {
+    "unknownStatus": "UNAVAILABLE",
+    "freshUntil": null,
+    "nonNumericDepth": "AVAILABLE_DATA"
+   }
+  },
+  {
+   "id": "n2.transport-failure-preserves-cached-truth",
+   "status": "PASS",
+   "detail": {
+    "code": "RUNTIME_UNAVAILABLE",
+    "rowStates": [
+     "UNAVAILABLE",
+     "UNAVAILABLE"
+    ],
+    "observationsRetained": 2
+   }
+  },
+  {
+   "id": "n2.diagnose-failure-keeps-last-good-diagnostic",
+   "status": "PASS",
+   "detail": {
+    "kept": "diag-keep",
+    "failureCode": "RUNTIME_UNAVAILABLE"
+   }
+  },
+  {
+   "id": "n2.command-vocabulary-unchanged",
+   "status": "PASS",
+   "detail": {
+    "commands": [
+     "health.refresh",
+     "health.inspect",
+     "health.diagnose"
+    ]
+   }
+  }
+ ]
+}
