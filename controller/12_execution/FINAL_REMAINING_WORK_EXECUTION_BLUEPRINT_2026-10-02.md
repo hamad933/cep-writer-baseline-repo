@@ -77,8 +77,8 @@ Common to all lane specs unless overridden: parent rule = **rebind to the exact 
 - `CANONICAL_OWNER`: W01/shared foundation chrome (language policy FINAL: OWNER-20260910-001/002, AR+EN first-class).
 - `DEPENDENCIES`: none. `COLLISIONS`: `bottom-shelf.ts` shared with future SH-CP-2 (health bottom) → serialize SH-CP-2 after this lane; `w04-rescue.ts` is NOT in this lane (it is R-06/SC-1's, with REV-1 starvation constraint).
 - `SALVAGE_TO_PRESERVE`: lane requests (HS-REL-1/SHARED-4 exact line refs), SH-2 census method, releases' own consumer-side refresh precedent (`surfaces/releases/runtime.ts` lang/dir refresh — pattern to replicate at shared level).
-- `CLOSED_READ_SET`: this spec; the four hotspot requests named above; `foundation/global/accepted-runtime.ts`; `foundation/global/bottom-shelf.ts`; VISUAL_EXECUTION_STANDARD §0; profile identity blocks (`profiles/*.json` slots); applicable language-policy rows.
-- `WRITABLE_PATHS`: `stack/native-typescript/foundation/global/accepted-runtime.ts`, `stack/native-typescript/foundation/global/bottom-shelf.ts`, `writer-output/SHFP-1/`. `READ_ONLY/PROHIBITED`: common + `dist/**` via build only.
+- `CLOSED_READ_SET`: this spec; the four hotspot requests named above; `foundation/accepted-runtime.ts`; `foundation/global/bottom-shelf.ts`; VISUAL_EXECUTION_STANDARD §0; profile identity blocks (`profiles/*.json` slots); applicable language-policy rows.
+- `WRITABLE_PATHS`: `stack/native-typescript/foundation/accepted-runtime.ts`, `stack/native-typescript/foundation/global/bottom-shelf.ts`, `writer-output/SHFP-1/`. `READ_ONLY/PROHIBITED`: common + `dist/**` via build only.
 - `PRACTICAL_IMPLEMENTATION_STEPS`: (1) build; run a precise live EN census (Playwright; routes: shell, one W03, one W05, health, releases; 1440×1000): classify EVERY Arabic string VISIBLE-in-EN vs HIDDEN/attribute, with file:line origin — write `EN_CENSUS.json` (this census is also R-03's input); (2) replace each VISIBLE Arabic in the two writable files with the existing `{ar,en}`/`locale` pattern already used in those files (no new i18n mechanism; no observers — single-pass render); (3) HS-REL-1-03: in `bottom-shelf.ts`, re-read the provider descriptor on `lang/dir` change (replicate the releases runtime's refresh pattern at shared level); (4) `git diff` review: only strings/refresh logic changed, no layout/ceiling edits; (5) run proof battery.
 - `EXPECTED_RESULT`: EN routes show 0 visible Arabic in shared chrome/shelf scopes; shelf content language follows locale switch live; AR output unchanged in meaning.
 - `POSITIVE_TESTS`: EN census 0 visible (post); AR census sanity; locale flip AR→EN→AR live-updates shelf; suite ×2; conformance 6/6; smoke clean.
@@ -282,7 +282,7 @@ Parent rule for every lane: `git fetch` → rebind to the exact then-current rem
 ```
 WAVE-F (parallel — file-disjoint, no prerequisites):
   F1 = AD01-1 replay      [R-01]   writable: preferences/schema.ts, responsive-layout.ts, model-tests.ts, dist(build)
-  F2 = SHFP-1 replay      [R-02,R-04,R-05] writable: foundation/global/{accepted-runtime,bottom-shelf}.ts,
+  F2 = SHFP-1 replay      [R-02,R-04,R-05] writable: foundation/accepted-runtime.ts + foundation/global/bottom-shelf.ts,
                                     foundation/timeline/replay-host.ts, foundation/analytical/compare-host.ts, foundation/spatial/**
   F3 = SC-1 replay        [R-06]   writable: m0-controller-composition.ts, main.ts, surfaces/shell/**, surfaces/composition/w04-rescue.ts
   F4 = BRIDGE-1 replay    [R-07]   writable: foundation/contracts/platform-input-direction-bridge.ts
@@ -290,7 +290,7 @@ WAVE-F (parallel — file-disjoint, no prerequisites):
   C2 = Controller batch R-25 (tools/** harness batch)                [any time; serial with C1]
   R-24 restore            [Controller, trivial]
 SERIAL EDGES:
-  F6 = SH-CP-2   [R-08]  AFTER F2 (bottom-shelf/accepted-runtime) AND F3 (m0) — locks: bottom-shelf.ts, m0
+  F6 = SH-CP-2   [R-08]  AFTER F2 (`foundation/accepted-runtime.ts` + `foundation/global/bottom-shelf.ts`) AND F3 (m0) — locks: bottom-shelf.ts, m0
   C1 = Controller R-03 + R-09 in ONE pass (extractor: index statics + donor.css scoping) AFTER F2's EN_CENSUS.json
                                      [+ serial vs C2 on tools/**]
   C3 = Controller R-26 runtime re-seed + first-paint recapture BEFORE final battery

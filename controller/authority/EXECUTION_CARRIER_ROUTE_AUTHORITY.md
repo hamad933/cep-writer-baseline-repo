@@ -304,7 +304,7 @@ For `ROUTE-LOCAL`, Writer-side remote mutation is **default-deny**.
 - Push becomes authorized only when the Owner explicitly authorizes push for the exact task/run, or explicitly groups a sequence with a defined final push boundary.
 - Without that explicit current instruction, required state is `LOCAL_ONLY__NO_PUSH`.
 - This does not authorize direct `main` mutation, force-push, history rewrite, merge, PR creation, release, deployment, self-acceptance or stack freeze.
-- This rule is local-carrier-specific. Do not leak it into `ROUTE-CHATGPT`, `ROUTE-GOOGLE-AI-S
+- This rule is local-carrier-specific. Do not leak it into `ROUTE-CHATGPT`, `ROUTE-GOOGLE-AI-STUDIO`, or future carriers unless separately bound.
 
 
 ## 8.3 Historical ROUTE-LOCAL exact-read-set lineage — merged into OD-20260921-067
@@ -344,7 +344,6 @@ This rule means `read exactly enough to complete and falsify the mission without
 
 
 This decision complements `OD-20260921-067` (Writer self-contained inputs) by defining the ROUTE-LOCAL prompt/read-set construction law. It applies to all future local Writers, Auditors, Reviewers, and future Controllers preparing their prompts.
-TUDIO`, or future carriers unless separately bound
 
 
 ## 8.4 ROUTE-LOCAL captured toolchain inventory — 2026-09-25
