@@ -3,8 +3,8 @@
   "classification": "REPRODUCIBLE_BROWSER_CONFORMANCE_RECEIPT_NOT_OWNER_ACCEPTANCE",
   "command": "npm run browser:test",
   "sourceFoundationBaseline": "CEP-FR-E18-ANALYTICAL-COMPARE-COMPLETION",
-  "sourceCandidate": "CANONICAL_SOURCE_TREE_SHA256:288d03234358b38ec232b5baeaf89be3413165283320ab55e09e1fdc2860bef7",
-  "sourceCanonicalTreeSha256": "288d03234358b38ec232b5baeaf89be3413165283320ab55e09e1fdc2860bef7",
+  "sourceCandidate": "CANONICAL_SOURCE_TREE_SHA256:0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
+  "sourceCanonicalTreeSha256": "0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc",
   "canonicalSourceFileCount": 338,
   "currentUse": "EXACT_CURRENT_CANONICAL_SOURCE_EXECUTION_RECEIPT",
   "executionStatus": "BLOCKED_OR_FAILED",
@@ -18,7 +18,7 @@
     "spatial-input-bidi-preference-and-structured-isolation"
   ],
   "environment": {
-    "node": "v22.23.1",
+    "node": "v22.16.0",
     "engine": "Playwright Chromium",
     "playwrightResolution": "package-local",
     "packageDeclaredVersion": "1.62.1",
@@ -29,8 +29,8 @@
   },
   "summary": {
     "total": 6,
-    "pass": 1,
-    "fail": 5
+    "pass": 4,
+    "fail": 2
   },
   "flows": [
     {
@@ -122,9 +122,29 @@
       "action": "select exactly two representations and inspect provider-truthful Connect availability without mutating provider truth",
       "owner": "ActionAvailabilityCore + RelationInteractionOwner + RelationDomainAdapter",
       "oracle": "read-only Visualize preserves the two-item selection, hides author-only Connect UI, and leaves relation count/version unchanged",
-      "status": "FAIL",
-      "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#objectList [data-object=\"b6-rep-ku-d03-0001\"]')\n    - locator resolved to <button data-cep-ui-control=\"\" class=\"btn object-entry\" data-object=\"b6-rep-ku-d03-0001\">Authentication Protocol Ceremonies and Trust Boun…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    58 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n",
-      "pageErrors": []
+      "status": "PASS",
+      "evidence": {
+        "selectedIds": [
+          "b6-rep-ku-d03-0001",
+          "b6-rep-ku-d03-0004"
+        ],
+        "readOnly": true,
+        "availability": {
+          "action": "connect",
+          "policyId": "connect",
+          "visible": false,
+          "enabled": false,
+          "reason": "Active mode does not permit this action",
+          "code": "MODE_FORBIDS_ACTION",
+          "selectionCount": 2,
+          "selectedTypes": [
+            "unspecified"
+          ]
+        },
+        "actionSurfaceVisible": false,
+        "canonicalRelationCount": 2,
+        "canonicalVersion": 1
+      }
     },
     {
       "id": "relation.route-convergence-and-label-scope",
@@ -133,7 +153,7 @@
       "owner": "RelationInteractionOwner",
       "oracle": "whole-edge double-click is inert; authorized label and F2 edit routes converge on relation.edit",
       "status": "FAIL",
-      "error": "authorized label double-click did not open the composer",
+      "error": "visible editable Enterprise relation edge/label is unavailable for route falsification :: {\"relationUiSharesPublishedSpatial\":false,\"relationUiSpatialConnected\":false,\"publishedSpatialConnected\":false,\"relationUiSelection\":{\"schema\":\"SpatialSelectionReceipt@1\",\"ownerId\":\"SpatialSelectionNavigationKernel\",\"contractVersion\":\"1.0.0\",\"projectionId\":\"SpatialModelProjection\",\"projectionOwner\":\"SpatialModelCompatibilityProjection\",\"activeMode\":\"author\",\"policyRevision\":\"FW-C-NEIGHBOR-01\",\"revision\":0,\"action\":\"descriptor\",\"selectedIds\":[],\"selectionCount\":0,\"focusId\":\"APP-WEB-01\",\"anchorId\":\"APP-WEB-01\"},\"publishedSpatialSelection\":{\"schema\":\"SpatialSelectionReceipt@1\",\"ownerId\":\"SpatialSelectionNavigationKernel\",\"contractVersion\":\"1.0.0\",\"projectionId\":\"SpatialModelProjection\",\"projectionOwner\":\"SpatialModelCompatibilityProjection\",\"activeMode\":\"author\",\"policyRevision\":\"FW-C-NEIGHBOR-01\",\"revision\":0,\"action\":\"descriptor\",\"selectedIds\":[],\"selectionCount\":0,\"focusId\":\"APP-WEB-01\",\"anchorId\":\"APP-WEB-01\"},\"adapterRelationCount\":8,\"publishedSpatialEdgeCount\":8,\"canvases\":[{\"connected\":true,\"hidden\":false,\"edges\":8,\"labels\":8,\"visibleRect\":{\"width\":694,\"height\":427.359375}}]}",
       "pageErrors": []
     },
     {
@@ -143,7 +163,7 @@
       "owner": "ActionAvailabilityCore + RelationInteractionOwner",
       "oracle": "policy revision/action owner are reused while availability remains provider-truthful",
       "status": "FAIL",
-      "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#objectList [data-object=\"b6-rep-ku-d03-0001\"]')\n    - locator resolved to <button data-cep-ui-control=\"\" class=\"btn object-entry\" data-object=\"b6-rep-ku-d03-0001\">Authentication Protocol Ceremonies and Trust Boun…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    58 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n",
+      "error": "Enterprise editable boundary did not remain available: {\"consumer\":\"enterprise\",\"selectedIds\":[\"CTL-WAF-01\",\"SIM-ATK-01\"],\"readOnly\":false,\"policyRevision\":\"RELATION-CENTRAL-04\",\"availabilityOwner\":\"ActionAvailabilityCore\",\"availability\":{\"action\":\"connect\",\"policyId\":\"connect\",\"visible\":false,\"enabled\":false,\"reason\":\"Selection cardinality must be between 2 and 2\",\"code\":\"SELECTION_COUNT\",\"selectionCount\":0,\"selectedTypes\":[]},\"actionOwner\":\"RelationInteractionOwner\",\"relationUiSharesPublishedSpatial\":false,\"relationUiSelection\":{\"schema\":\"SpatialSelectionReceipt@1\",\"ownerId\":\"SpatialSelectionNavigationKernel\",\"contractVersion\":\"1.0.0\",\"projectionId\":\"SpatialModelProjection\",\"projectionOwner\":\"SpatialModelCompatibilityProjection\",\"activeMode\":\"author\",\"policyRevision\":\"FW-C-NEIGHBOR-01\",\"revision\":0,\"action\":\"descriptor\",\"selectedIds\":[],\"selectionCount\":0,\"focusId\":\"APP-WEB-01\",\"anchorId\":\"APP-WEB-01\"},\"publishedSpatialSelection\":{\"schema\":\"SpatialSelectionReceipt@1\",\"ownerId\":\"SpatialSelectionNavigationKernel\",\"contractVersion\":\"1.0.0\",\"projectionId\":\"SpatialModelProjection\",\"projectionOwner\":\"SpatialModelCompatibilityProjection\",\"activeMode\":\"author\",\"policyRevision\":\"FW-C-NEIGHBOR-01\",\"revision\":0,\"action\":\"descriptor\",\"selectedIds\":[],\"selectionCount\":0,\"focusId\":\"APP-WEB-01\",\"anchorId\":\"APP-WEB-01\"},\"relationUiSpatialConnected\":false,\"publishedSpatialConnected\":false}",
       "pageErrors": []
     },
     {
@@ -152,9 +172,17 @@
       "action": "open terminal through visible command and submit shutdown",
       "owner": "W03V34RunsAdapter via provider-neutral OperationalView",
       "oracle": "canonical device, spatial projection, terminal output, event and recorded projection agree",
-      "status": "FAIL",
-      "error": "page.evaluate: TypeError: Cannot read properties of undefined (reading 'id')\n    at eval (eval at evaluate (:311:30), <anonymous>:6:203)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
-      "pageErrors": []
+      "status": "PASS",
+      "evidence": {
+        "up": false,
+        "recordedUp": false,
+        "semanticCommand": "device.shutdown",
+        "eventOutput": "Web Application: interface DOWN (simulation)",
+        "provider": "InternalSimulationAdapter",
+        "domainOwner": "W03RunDomain",
+        "runtimeTruth": "INTERNAL_SIMULATION",
+        "terminalVisibleDown": true
+      }
     },
     {
       "id": "spatial-input-bidi-preference-and-structured-isolation",
@@ -162,9 +190,34 @@
       "action": "Ctrl+RMB drag, normal RMB, keyboard focus/selection/camera/move, then canonical locale preference change in Learn",
       "owner": "SpatialInteraction + ContextSuppressionGate + ScopedPreferences + StructuredDocumentDomainAdapter",
       "oracle": "only own context is suppressed; keyboard intents stay distinct; Learn remains Library-free and Bidi-correct",
-      "status": "FAIL",
-      "error": "spatial canvas has no measurable bounds",
-      "pageErrors": []
+      "status": "PASS",
+      "evidence": {
+        "contextSuppression": "own-event-only",
+        "keyboard": {
+          "focusOnly": true,
+          "spaceSelect": true,
+          "altCameraOnly": true,
+          "controlMoveOnly": true
+        },
+        "preference": {
+          "lang": "en",
+          "dir": "ltr"
+        },
+        "structured": {
+          "hostKind": "DONOR_FREE_WORKSPACE_HOST",
+          "domainKind": "learn",
+          "searchCount": 0,
+          "bdiCount": 68,
+          "isolation": true
+        },
+        "libraryParity": {
+          "consumer": "library",
+          "activeDocument": "KU-D03-0001",
+          "blockCount": 13,
+          "editorCore": "UnifiedEditorCore",
+          "donorHost": true
+        }
+      }
     }
   ],
   "screenshots": [
@@ -176,8 +229,32 @@
         "width": 900,
         "height": 980
       },
-      "bytes": 84194,
-      "sha256": "3b9bb96902b15041c238292dbe4aca953329f7a9482eeec6de979274cb227b47",
+      "bytes": 87753,
+      "sha256": "e3fcc1c3a22f40bef70bbc7b16951abffee5a1427204e6250a616cc637dda1ce",
+      "scope": "EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE"
+    },
+    {
+      "filename": "browser-selection-connect.png",
+      "flowId": "spatial.selection-connect-canonical-edge",
+      "property": "exactly-two selection with author-only Connect hidden by provider-truthful ActionAvailability",
+      "viewport": {
+        "width": 1440,
+        "height": 980
+      },
+      "bytes": 319022,
+      "sha256": "c57c532a7bc7e98355296eda35d8f36631c320b827e23218b3e2d1a15744a58b",
+      "scope": "EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE"
+    },
+    {
+      "filename": "browser-operational-shutdown.png",
+      "flowId": "runtime-causal-consequence",
+      "property": "provider-neutral terminal and canonical shutdown consequence",
+      "viewport": {
+        "width": 1440,
+        "height": 980
+      },
+      "bytes": 214910,
+      "sha256": "97c57110f448d03f473a2667f91c9f6fdf9fba8e14000b4452332a27d57d0e1e",
       "scope": "EXACT_CURRENT_CANDIDATE_TARGETED_VISUAL_EVIDENCE"
     }
   ],
