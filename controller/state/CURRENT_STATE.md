@@ -3,7 +3,7 @@
 **Role:** sole mutable live CEP project/control state  
 **Authority mode:** `GITHUB_CANONICAL`  
 **Cutover event:** `CEP-GITHUB-CUTOVER-2026-10-02-001`  
-**Current phase:** `OWNER_TOPOLOGY_CORRECTION__MULTI_WRITER_RESULT_RECONSTRUCTION__PARALLEL_DAG_REBIND`  
+**Current phase:** `EXISTING_AUDIT_CORPUS_RECONCILIATION__BOUNDED_GAP_FILL__PARALLEL_DAG_REBIND`  
 **Update mode:** `IN_PLACE_ONLY`
 
 ## Canonical control plane
@@ -88,7 +88,7 @@ The 23 structurally revalidated packets remain candidate execution bindings only
 
 ## Next action
 
-Drive reconciliation and Drive-entry successor recovery are complete. Current work is result-by-result reconstruction under `OD-20261002-087`: verify which historical Surface Writers actually reached terminal result, which were only rescued/partial, then construct a fresh collision/dependency DAG. Do not launch Product Writers from historical WM/OD-085 sequencing or from report presence alone.
+Drive reconciliation and Drive-entry successor recovery are complete. Current work is evidence-reuse-first reconstruction under `OD-20261002-087`: consume the already completed H01-H09 audits, prior Controller reviews, exact Writer-result evidence, source deltas, checkpoints and accepted/salvageable findings first; invalidate/re-audit only where current source/authority/dependency/evidence changed or prior proof is insufficient/contradicted; then classify each Surface/lane and construct the fresh collision/dependency DAG. Do not relaunch Product Writers or broad audits from historical WM/OD-085 sequencing, report presence, or uncertainty that existing durable evidence can already resolve.
 
 
 ## HISTORICAL / SUPERSEDED — OD-085 MILESTONE REVALIDATION / W03 BINDING — 2026-10-02
@@ -292,3 +292,24 @@ No Surface is relaunched automatically. Current Controller/helper work must firs
 Under `OD-20261002-087`, resulting genuinely disjoint mutating lanes may run in parallel; only actual shared owners/hotspots/dependencies/final convergence serialize.
 
 No Product acceptance, main merge, release, deployment or stack freeze is created by this reconstruction.
+
+
+## EXISTING AUDIT CORPUS REUSE / ANTI-REDUNDANT REAUDIT CORRECTION — 2026-10-02
+
+**Classification:** `CURRENT_CONTROLLER_CORRECTION__PRIOR_BROAD_REAUDIT_WORDING_SUPERSEDED__H01_H09_AND_PRIOR_WRITER_AUDITS_RETAIN_VALUE__GAP_FILL_ONLY_WHEN_INVALIDATED_OR_INSUFFICIENT__NO_PRODUCT_MUTATION`
+
+- The previous wording “parallel READ_ONLY result audits across W01/W02, W03, W04, W05...” was over-broad and is superseded. It must not be interpreted as authorization to repeat H01-H09, repeat already valid Writer-result audits, or rediscover the 23 Surfaces from zero.
+- H01-H09, H03-R2, prior Controller reviews, Writer rescue/checkpoint evidence, current source/evidence corrections, and the GitHub cutover work remain material reusable evidence. Their value is not voided by `OD-20261002-087`.
+- `OD-20261002-087` changes the current Writer execution topology and invalidates earlier dispatch/completion conclusions that depended on the mistaken general-serial interpretation of OD-085; it does **not** automatically invalidate source-bound findings, accepted/salvageable partial work, architecture findings, harness classifications, profile parity proof, custody proof, H08/H09 conclusions, or independently verified Surface evidence whose source/authority/dependencies remain unchanged.
+- Current Controller law is therefore: `REUSE_EXISTING_AUDIT_FIRST -> CHECK_INVALIDATION_TRIGGERS -> GAP_FILL_ONLY -> CLASSIFY_SURFACE/LANE -> BUILD_DAG`.
+- An existing audit/result is reusable without repetition when its exact source/evidence remains bound and no material invalidation trigger occurred. Re-audit or fresh helper work is required only for the smallest affected scope when at least one applies: source changed materially; Owner/route authority changed in a way that affects the claim; shared owner/dependency changed; evidence/harness was falsified or stale; the historical result never reached a trustworthy terminal proof; the result was rescued but not independently adjudicated; lineage is unresolved; or current acceptance/dispatch needs a dimension the previous audit never proved.
+- The exact interruption accounting `6 terminal + 11 rescued partial + 1 lineage-unresolved + 5 no-original-completion = 23` is execution-history reconstruction, **not** a command to perform 23 fresh audits. For each Surface, first map already-existing durable audit/result evidence and preserved closures. Only unresolved dimensions become bounded gap-fill work.
+- The six historically terminal Writer results (Today, RQ, Scenarios, Evidence, Configuration, Enterprise) are not presumed accepted, but any existing independent Controller audit/evidence for them must be reused before new audit work is opened.
+- The eleven rescued partial/unverified Surfaces are continuation/salvage candidates; existing H02/H04/H05/H09 and Surface-specific evidence must be consumed first to identify the exact unresolved remainder. Do not restart or re-audit completed dimensions merely because the original Writer session was interrupted.
+- Manual AI requires lineage reconstruction only for the unresolved result boundary; do not repeat unrelated Product/visual work already proven elsewhere.
+- Shell, Health, Processing, Validation and Results lack proven original per-Surface Writer completion at the interruption point, but later family/coordinator source and already-generated evidence must still be inspected before deciding `NEW_BOUNDED_WRITER_REQUIRED`; “no original Writer completion” is not equivalent to “no useful implementation exists.”
+- Fresh ChatGPT helper lanes are therefore optional bounded gap-fill tools, not a mandatory new audit wave. Prefer direct Controller reconciliation of existing durable outputs when sufficient.
+- Final per-Surface disposition remains one of: `AUDIT_ONLY__NO_WRITER`, `CONTINUE_EXISTING_SALVAGE`, `NEW_BOUNDED_WRITER_REQUIRED`, or `WAIT_FOR_SHARED_SEAM`; every disposition must cite the reused evidence plus any exact gap-fill performed.
+- No Product acceptance, main merge, release, deployment or stack freeze is created by this correction.
+
+**Next action:** build an `EXISTING_EVIDENCE_REUSE_MATRIX` for all 23 Surfaces from the already completed H01-H09/Writer/Controller evidence; mark exact invalidation/gap per Surface; launch only the minimum bounded gap-fill audits needed; then construct the OD-087 parallel mutation DAG from the reconciled result.
