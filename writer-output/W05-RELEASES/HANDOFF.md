@@ -15,8 +15,10 @@
 | Parent (verified before any mutation, `git status` clean) | `fe1bb98ded51adc71a5f5fd14142a2c0880c11bc` — "controller(gate): RECOVERY_GATE_PASS — execution transition authorized" |
 | Parent stack tree | `bd0ea53e6658e001fd46377eca8854a009d03073` |
 | Canonical source identity before → after (`tools/source-tree-identity.mjs`, 338 files) | `0c43d7f11631dc85c4cec60b20d8612ccdfebd0c72da1475dc78360245984abc` → `8dc756f337cb95eab528b8458b56ec14e0453211f482fba1c70bd19cc085420c` |
-| **Candidate commit** | `CANDIDATE_COMMIT_PENDING_FILL_BEFORE_PUSH` |
-| **Candidate tree** | `CANDIDATE_TREE_PENDING_FILL_BEFORE_PUSH` |
+| **Candidate commit** | `893d03e9d9a5238c277e0053c39b3d820ff49481` |
+| **Candidate tree (`HEAD:stack/native-typescript`)** | `62b2e075b9cd003183f5c1fedce5e6739a94b5e1` |
+| Full-tree note | per mission step 6, `dist/`, `assurance/` and `stack/MEASURED_COMPARISON.json` were restored to the parent state before the commit (no generated/derived artefact is committed by this lane), so `dist/` in the candidate tree still carries the pre-delta build; the Controller rebuilds at convergence. All cycle-2 captures were taken from the **post-delta build** of exactly these source bytes (lineage blocks inside every capture JSON restate commit `fe1bb98…` + stack tree `bd0ea53e…` + the 2-file delta). |
+| Candidate HEAD note | `893d03e…` is the candidate **source-delta commit** (it carries both product files). The identity fill for this HANDOFF/report is committed as a follow-up checkpoint that touches only `writer-output/**`; the branch tip after push is reported verbatim in this lane's final message and is verifiable with `git rev-parse writer/mi-serial-lane/REL-1`. The product identity that must not drift is the source stack tree `62b2e075b9cd003183f5c1fedce5e6739a94b5e1`. |
 
 ### 1.1 Changed paths (this lane's whole delta)
 
@@ -151,7 +153,7 @@ All under `writer-output/W05-RELEASES/evidence/cycle2/` (47 files, 8.2 MB); ever
 
 ## 9. Exact resume instructions for the Controller
 
-1. Verify identity: `git -C <worktree> rev-parse HEAD` == candidate commit in §1; `git status --porcelain` must show only §1.1 paths.
+1. Verify identity: `git rev-parse writer/mi-serial-lane/REL-1` (branch tip, reported in the lane's final message); `git rev-parse <tip>:stack/native-typescript` must equal `62b2e075b9cd003183f5c1fedce5e6739a94b5e1`; `git merge-base --is-ancestor 893d03e9d9a5238c277e0053c39b3d820ff49481 <tip>` must succeed; `git status --porcelain` must show only §1.1 paths (plus the flow's untracked shared-W05 outputs, which this lane never staged).
 2. Evidence entry points: `writer-output/W05-RELEASES/VISUAL_EXECUTION_REPORT.json` (machine-readable, all §12 fields) → `evidence/cycle2/falsification.json` (39/39) → `evidence/cycle2/audit/audit.json` (29/29).
 3. Shared follow-up: schedule `writer-output/W05-RELEASES/SERIALIZED_HOTSPOT_REQUEST.md` through the serialized shared-hotspot slot (W01-SHELL/foundation steward).
 4. At convergence: regenerate `assurance/BROWSER_CONFORMANCE_RECEIPT.json` against the integrated tree (Controller-owned) — that clears B-02's second red; the first red stays until the Enterprise defect closes.
