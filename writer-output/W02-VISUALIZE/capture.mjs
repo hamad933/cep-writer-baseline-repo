@@ -88,7 +88,13 @@ const dims = execSync(`python3 -c "import struct;d=open('${abs}','rb').read(33);
 
 const entry = {
   name, timestamp: new Date().toISOString(), url, viewport: { width, height, deviceScaleFactor: 1 },
-  candidate: `${branch}@${commit}`, commit, branch, environment: 'local dist served by tools/serve.mjs on :4173', seededLocale: seedLang,
+  candidate: `${branch}@${commit}`, commit, tree: execSync('git rev-parse HEAD^{tree}', { cwd: ROOT }).toString().trim(), branch, environment: 'local dist served by tools/serve.mjs on :4173', seededLocale: seedLang,
+  sourceBinding: {
+    surfaceSource: { path: 'stack/native-typescript/surfaces/visualize/surface.ts', sha256: sourceSha256 },
+    builtSurface: { path: 'dist/surfaces/visualize/surface.js', sha256: builtSha256 },
+    adapterSource: { path: 'stack/native-typescript/adapters/visualize/domain.ts', sha256: adapterSha256 },
+    worktreeStatusAtCapture: execSync('git status --porcelain -- stack/native-typescript/surfaces/visualize stack/native-typescript/adapters/visualize', { cwd: ROOT }).toString().trim().split('\n').filter(Boolean)
+  },
   image: { path: `writer-output/W02-VISUALIZE/${rel}`, sha256: sha, bytes: bytes.length, dims: JSON.parse(dims) },
   dom, clicked, consoleErrors
 };
