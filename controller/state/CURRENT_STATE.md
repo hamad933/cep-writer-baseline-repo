@@ -3,7 +3,7 @@
 **Role:** sole mutable live CEP project/control state  
 **Authority mode:** `GITHUB_CANONICAL`  
 **Cutover event:** `CEP-GITHUB-CUTOVER-2026-10-02-001`  
-**Current phase:** `EXISTING_AUDIT_CORPUS_RECONCILIATION__BOUNDED_GAP_FILL__PARALLEL_DAG_REBIND`  
+**Current phase:** `FINAL_ZERO_GAP_CLOSURE__POST_CONVERGENCE` (lifecycle terminal reached: `CORE_WRITER_LIFECYCLE_CONVERGED__READY_FOR_OWNER_FINAL_ACCEPTANCE`; Owner authorization `SAME_PRIMARY_SESSION__FINAL_ZERO_GAP_CLOSURE`)  
 **Update mode:** `IN_PLACE_ONLY`
 
 ## Canonical control plane
@@ -53,15 +53,19 @@ H03:
 - `H03-R2-PROP-001=NOT_PROVEN`
 - `H03-R2-FALSIFY-001=NOT_PROVEN`
 
-## CURRENT VALIDATION TRUTH (exact-current, source-bound)
+## CURRENT VALIDATION TRUTH (exact-current, source-bound — integrated epoch)
 
-- Source: `writer/mi-serial@490b6a40e395c3265eaff74fef0b2bf0ce74bca6` / tree `7297b5fbb678db92f7b7b932f19bb09f9e8d5d00`; GitHub Actions run `36947731860` = SUCCESS; artifact `11203036446`; digest `sha256:6af102c5e66ba9a29e91076856c0962d110fd10c66167ecbfa93b308273aa553`.
-- No `stack/` `tools/` `tests/` changes after `490b6a40`; this truth carries forward to the current HEAD and must be rebound at exact lane launch.
-- Browser: 6 total / 4 PASS / 2 FAIL. PASS: `workspace.transient-and-pane-lifecycle`, `spatial.selection-connect-canonical-edge`, `runtime-causal-consequence`, `spatial-input-bidi-preference-and-structured-isolation`.
-- Remaining 2 FAIL = `relation.route-convergence-and-label-scope` + `central-change-reuse` — one Enterprise shared-relation integration root (`PRODUCT_INTEGRATION_DEFECT`), open.
-- Runs causal: `HARNESS_ORACLE_DEFECT__CLOSED_WITHOUT_PRODUCT_MUTATION`.
-- H03: `H03-R2-PROP-001=NOT_PROVEN`, `H03-R2-FALSIFY-001=NOT_PROVEN`.
-- Older totals (1/6 @eb3bd2c, 3/3 @db41d0f, 2/4 @f6633731, 1/5 retained receipt) are historical by epoch.
+- Integrated candidate: `writer/mi-serial@0102a35d4850ab1a3b14436bcc6abe0868ee6a7f` / tree `396010acdf3e0f049fee4962bd18245d20a94fa4` (19 lane deltas; receipt record `7b2722ad…` / tree `6f465ed0…`).
+- Browser: **6 total / 6 PASS / 0 FAIL — `EXECUTED_PASS`** (`assurance/BROWSER_CONFORMANCE_RECEIPT.json`, sourceCanonicalTree `107c6a23cce9642d…`). PASS: all six flows incl. `central-change-reuse` and `relation.route-convergence-and-label-scope`.
+- Enterprise shared-relation integration root: **CLOSED by integrated proof** — SH-1 instance census 3→1 (single SpatialView shared by `RelationInteractionOwner`/foundation/visible host), selection 0→2, connect enabled; relation flow closed after OD-044 bounded harness-oracle correction (`tools/browser-conformance.mjs`, F-SH1-01: SVG zero-area horizontal lines are painted-yet-actionability-invisible; oracle selects first painted non-degenerate edge; fixture/data untouched; real assertions now execute and pass).
+- Runs causal: `HARNESS_ORACLE_DEFECT__CLOSED_WITHOUT_PRODUCT_MUTATION` (unchanged).
+- H03: `H03-R2-PROP-001=NOT_PROVEN`, `H03-R2-FALSIFY-001=NOT_PROVEN` — dedicated proof cycle `H03R2-1` authorized and in progress under final zero-gap closure.
+- Battery at integrated candidate: build PASS · `npm test` 210/0 ×2 · duplicate-mechanics PASS · `npm run check` EXIT 0 · route smoke 46/46 (23 routes × 1440+1024, 0 pageErrors).
+
+## HISTORICAL VALIDATION EPOCHS (superseded; preserved)
+
+- `4/2` @ `490b6a40` / run `36947731860` (Enterprise 2 FAIL open) — see epoch section below.
+- `3/3` @ `db41d0f` / run `36942166750`; `2/4` @ `f6633731`; `1/6` @ `eb3bd2c`; `1/5` retained assurance receipt — all historical by epoch.
 
 ## Current execution topology
 
@@ -83,6 +87,7 @@ The 23 structurally revalidated packets remain candidate execution bindings only
 - GitHub Controller authority cutover: `GITHUB_CANONICAL__REMOTE_VERIFIED`
 - Drive compatibility reconciliation: `COMPLETE__OD_20261002_086`
 - Drive-entry successor recovery proof: `PASS_16_OF_16` (completed; the earlier `REQUIRED_AFTER_DRIVE_RECONCILIATION` gate row is superseded by this result)
+- Converged integrated candidate: `writer/mi-serial@0102a35d4850ab1a3b14436bcc6abe0868ee6a7f` / tree `396010acdf3e0f049fee4962bd18245d20a94fa4` — 19/19 lanes RETAIN, 18 clean merges, battery green (check EXIT 0, conformance 6/6, smoke 46/46)
 - Product acceptance: `NOT_AUTHORIZED`
 - main merge: `NOT_AUTHORIZED`
 - release/deployment: `NOT_AUTHORIZED`
@@ -321,7 +326,7 @@ No Product acceptance, main merge, release, deployment or stack freeze is create
 - Final per-Surface disposition remains one of: `AUDIT_ONLY__NO_WRITER`, `CONTINUE_EXISTING_SALVAGE`, `NEW_BOUNDED_WRITER_REQUIRED`, or `WAIT_FOR_SHARED_SEAM`; every disposition must cite the reused evidence plus any exact gap-fill performed.
 - No Product acceptance, main merge, release, deployment or stack freeze is created by this correction.
 
-**Next action:** build an `EXISTING_EVIDENCE_REUSE_MATRIX` for all 23 Surfaces from the already completed H01-H09/Writer/Controller evidence; mark exact invalidation/gap per Surface; launch only the minimum bounded gap-fill audits needed; then construct the OD-087 parallel mutation DAG from the reconciled result.
+**Next action:** execute final zero-gap closure (Owner `SAME_PRIMARY_SESSION__FINAL_ZERO_GAP_CLOSURE`): residual register → bounded shared-owner/evidence closures → `H03R2-1` proof cycle → Owner-item resolution from existing authority → final integrated battery → canonical final state → Owner acceptance package. No Product Writer launch beyond closure lanes; no main merge/release/deploy/stack freeze.
 
 ## RECOVERY OPERATING MODEL / OFFLOAD QUEUE — 2026-10-02
 

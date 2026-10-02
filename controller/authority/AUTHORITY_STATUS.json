@@ -44,7 +44,6 @@
   "openTruthCeilings": [
     "H03-R2-PROP-001=NOT_PROVEN",
     "H03-R2-FALSIFY-001=NOT_PROVEN",
-    "Enterprise relation route/shared-owner integration=OPEN_PRODUCT_DEFECT",
     "Product acceptance=NOT_AUTHORIZED",
     "main merge=NOT_AUTHORIZED",
     "release/deployment=NOT_AUTHORIZED",
@@ -53,10 +52,11 @@
   "currentValidationTruth": {
     "source": "writer/mi-serial@490b6a40e395c3265eaff74fef0b2bf0ce74bca6",
     "validationRun": 36947731860,
-    "browser": "6_TOTAL__4_PASS__2_FAIL (2 FAIL = Enterprise relation.route-convergence-and-label-scope + central-change-reuse, one integration root)",
-    "runsCausalFlow": "CLOSED__HARNESS_ORACLE_DEFECT__CLOSED_WITHOUT_PRODUCT_MUTATION",
-    "supersededEpochs": "1/6 @eb3bd2c; 3/3 @db41d0f run 36942166750 (incl. Runs=UNRESOLVED_RUNTIME_OR_HARNESS_INTEGRATION); 2/4 @f6633731; 1/5 retained assurance receipt — historical, not current",
-    "sourceUnchangedSince": "No stack/tools/tests changes after 490b6a40; rebind required at exact lane launch"
+    "browser": "6_TOTAL__6_PASS__0_FAIL__EXECUTED_PASS (receipt assurance/BROWSER_CONFORMANCE_RECEIPT.json, sourceCanonicalTree 107c6a23cce9642d…, integrated candidate 0102a35/396010ac; includes OD-044 bounded oracle correction F-SH1-01 with fixture untouched)",
+    "runsCausalFlow": "CLOSED__HARNESS_ORACLE_DEFECT__CLOSED_WITHOUT_PRODUCT_MUTATION (unchanged)",
+    "supersededEpochs": "4/2 @490b6a40 run 36947731860 (Enterprise central-change-reuse FAIL); 3/3 @db41d0f run 36942166750; 2/4 @f6633731; 1/6 @eb3bd2c; 1/5 retained assurance receipt — all historical, not current",
+    "sourceUnchangedSince": "Integrated candidate 0102a35 (19 lane deltas); rebind required at any further mutation",
+    "enterpriseRelationIntegration": "CLOSED_BY_INTEGRATED_PROOF (SH-1 instance census 3→1, selection 0→2, central-change-reuse PASS; relation flow PASS via OD-044 SVG-oracle correction; H03 PROP/FALSIFY ceilings remain separately NOT_PROVEN)"
   },
   "recoveryRule": "FETCH_REMOTE_FIRST__READ_AUTHORITY_STATUS__READ_FIRST__CURRENT_STATE__OWNER_REGISTER__EXACT_TASK_EVIDENCE__NO_FILENAME_RECENCY_SELF_PROMOTION",
   "lastCanonicalPayload": {
@@ -71,5 +71,25 @@
     "mode": "MULTI_WRITER_VALUE_WEIGHTED_PARALLEL",
     "rule": "ONE_MUTATING_WRITER_PER_BOUNDED_SURFACE_OR_LANE__PARALLEL_WHEN_DISJOINT__SHARED_HOTSPOTS_AND_DEPENDENCIES_SERIALIZE",
     "historicalSingleSerialDecision": "OD-20260928-085"
-  }
+  },
+  "convergedCandidate": {
+    "branch": "writer/mi-serial",
+    "commit": "0102a35d4850ab1a3b14436bcc6abe0868ee6a7f",
+    "tree": "396010acdf3e0f049fee4962bd18245d20a94fa4",
+    "receiptHead": "7b2722ad1339502424ad25a9e954cf29a9493569",
+    "receiptTree": "6f465ed024768af6e4b9e4a3a5c66a0a90d31fce",
+    "lifecycleTerminal": "CORE_WRITER_LIFECYCLE_CONVERGED__READY_FOR_OWNER_FINAL_ACCEPTANCE",
+    "battery": {
+      "build": "PASS",
+      "npmTest": "210/0 x2",
+      "duplicateMechanics": "PASS",
+      "browserConformance": "6/6 EXECUTED_PASS",
+      "npmRunCheck": "EXIT 0",
+      "routeSmoke": "46/46 0 pageErrors (23 routes x 1440+1024)",
+      "laneAdjudication": "19/19 RETAIN, 0 correction cycles",
+      "merges": "18 clean, 0 conflicts"
+    },
+    "acceptance": "NOT_OWNER_ACCEPTED — CANDIDATE_ONLY"
+  },
+  "phase": "FINAL_ZERO_GAP_CLOSURE__POST_CONVERGENCE (Owner: SAME_PRIMARY_SESSION__FINAL_ZERO_GAP_CLOSURE)"
 }
