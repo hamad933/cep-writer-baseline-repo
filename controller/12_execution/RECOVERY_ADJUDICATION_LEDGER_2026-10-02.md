@@ -197,3 +197,16 @@ Final identity chain additions:
 | This bookkeeping commit | see `git log` at consumption | — |
 
 Any commit after the battery-tested identity is ledger bookkeeping only (materiality rule: unrelated bookkeeping does not invalidate the battery).
+
+
+## §15 WAVE-1 EXECUTION & CONVERGENCE RECEIPT (2026-10-02)
+
+- 19/19 core lanes launched and adjudicated: **19 RETAIN / 0 correction cycles** (1 env-blocked dispatch relaunched; STOP record preserved). Per-lane candidates + findings: `EXECUTION_LIFECYCLE_STATE.md` registry.
+- Model: `xiaomi-token-plan-sgp/mimo-v2.6-flash` (execution config). Carrier: `ROUTE-MIMO-AGENT`. LAUNCH_PARENT `fe1bb98ded51adc71a5f5fd14142a2c0880c11bc`; SH-1-dependent lanes chained from `9f1dc78...`; RES-1 rebound to `ed6e19a...`.
+- Convergence: 18 merges onto `recovery/convergence-w1`, **0 conflicts** (sealed collision design validated empirically).
+- Integrated verification on converged tree: build PASS, `npm test` 210/0 (x2), `check-duplicate-mechanics` PASS, `browser-conformance` **6/6 EXECUTED_PASS** (receipt source-bound), **`npm run check` EXIT 0**, route smoke **46/46, 0 pageErrors** (23 routes x 1440+1024).
+- OD-044 bounded Controller correction (harness only): `tools/browser-conformance.mjs` F-SH1-01 — SVG zero-area horizontal lines are painted-yet-actionability-invisible; oracle now selects first PAINTED non-degenerate (diagonal) `relation-line` + label (probe-proven edges exist; fixture/data/order untouched; truthful fail-guard retained). Precedent `db41d0f`/`490b6a4`. The flow's real assertions (whole-edge inert, label/F2 convergence, receipts owned by RelationInteractionOwner) now EXECUTE and PASS.
+- Enterprise Product integration root (the only open Product integration defect at recovery start): **CLOSED** by SH-1 (instance census 3->1, selection 0->2, `central-change-reuse` PASS), verified through convergence (6/6).
+- Integrated candidate identity: **`writer/mi-serial@0102a35d4850ab1a3b14436bcc6abe0868ee6a7f` / tree `396010acdf3e0f049fee4962bd18245d20a94fa4`** — Controller integration checkpoint; **all deltas remain CANDIDATE_ONLY / NOT_OWNER_ACCEPTED**.
+- Terminal status: `CORE_WRITER_LIFECYCLE_CONVERGED__READY_FOR_OWNER_FINAL_ACCEPTANCE`.
+- Disclosed opens (non-blocking): hotspot queue (H-SH2-01 AD-01 atomic set, H-SH2-02..06, HS-REL-1 family, SH-R1/R2, D-04/D-08 shared roots, donor.css mirror + reference-authority observation); 6 Owner-only items (shell redesign, RQ reference promotion, F-048, C03-GATE-023, Health BOTTOM composition, Q-4 TimelineReplayOwner retain-vs-retire); VD-008 image channel partial (pixel human sign-off needs working channel); S02 python-playwright env gap; mandated-tool writes in shared workspace dirs left unstaged by lanes (Controller restore-or-commit at acceptance review).
