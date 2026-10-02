@@ -1,0 +1,54 @@
+{
+  "proof": "w04-mastery-hash-bound-measure",
+  "method": "sha256 + PIL + pixel ink + blank bands + tesseract OCR of the SAME bytes",
+  "visionChannel": "NOT USED \u2014 stale-frame conflict observed 2026-09-30; see report",
+  "ocrNote": "tesseract 5.3.4 with eng/osd only in this environment: Arabic OCR is unavailable, so ocrLines/ocrWords are meaningful for EN frames only. Arabic content truth comes from keyHitsDOM \u2014 the DOM text probe recorded in the SAME page load that produced the frame and hash-bound in the sibling CAPTURE_RECEIPT.json.",
+  "frames": [
+    {
+      "file": "mastery-768x900-seeded-ar.png",
+      "sha256": "d7015c45d2c25a8e3ab26102e56c0db32f354de2636ad5bf912b08e52dc304aa",
+      "dims": "768x900",
+      "bytes": 108163,
+      "ink": 0.488,
+      "lang": "ar",
+      "direction": "rtl",
+      "receiptBound": true,
+      "left": {
+        "box": null,
+        "collapsed": true
+      },
+      "center": {
+        "box": [
+          0,
+          197,
+          768,
+          861
+        ],
+        "ink": 0.3376,
+        "blankBandsGE60px": [],
+        "ocrLines": 20,
+        "ocrWords": 102
+      },
+      "right": {
+        "box": null,
+        "collapsed": true
+      },
+      "keyHits": [
+        "Mastery workbench",
+        "FIXTURE",
+        "SYNTHETIC_DEMO_SEED"
+      ],
+      "keyHitsDOM": [
+        "FIXTURE",
+        "SYNTHETIC_DEMO_SEED",
+        "MASTERED",
+        "REVALIDATION_REQUIRED",
+        "\u0628\u0646\u064a\u0629 \u0642\u0627\u0628\u0644\u064a\u0629 \u0627\u0644\u062a\u0641\u0633\u064a\u0631",
+        "\u0623\u0633\u0627\u0633 \u0627\u0644\u062a\u0642\u064a\u064a\u0645",
+        "\u0627\u0644\u0642\u0627\u0646\u0648\u0646 \u0627\u0644\u0633\u0628\u0628\u064a",
+        "\u0627\u0644\u0625\u062a\u0642\u0627\u0646"
+      ],
+      "ocrNote": "tesseract 5.3.4 with eng/osd only in this environment: Arabic OCR is unavailable, so ocrLines/ocrWords are meaningful for EN frames only. Arabic content truth comes from keyHitsDOM \u2014 the DOM text probe recorded in the SAME page load that produced the frame and hash-bound in the sibling CAPTURE_RECEIPT.json."
+    }
+  ]
+}

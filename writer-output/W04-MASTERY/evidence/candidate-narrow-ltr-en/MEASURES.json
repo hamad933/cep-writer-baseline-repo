@@ -1,0 +1,49 @@
+{
+  "proof": "w04-mastery-hash-bound-measure",
+  "method": "sha256 + PIL + pixel ink + blank bands + tesseract OCR of the SAME bytes",
+  "visionChannel": "NOT USED \u2014 stale-frame conflict observed 2026-09-30; see report",
+  "ocrNote": "tesseract 5.3.4 with eng/osd only in this environment: Arabic OCR is unavailable, so ocrLines/ocrWords are meaningful for EN frames only. Arabic content truth comes from keyHitsDOM \u2014 the DOM text probe recorded in the SAME page load that produced the frame and hash-bound in the sibling CAPTURE_RECEIPT.json.",
+  "frames": [
+    {
+      "file": "mastery-768x900-en.png",
+      "sha256": "8f3a5bc9a09bb6e5da1647c397935e740f43484f16e0156cbe8c8c9c8c46fc89",
+      "dims": "768x900",
+      "bytes": 125875,
+      "ink": 0.2178,
+      "lang": "en",
+      "direction": "ltr",
+      "receiptBound": true,
+      "left": {
+        "box": null,
+        "collapsed": true
+      },
+      "center": {
+        "box": [
+          0,
+          176,
+          768,
+          861
+        ],
+        "ink": 0.2579,
+        "blankBandsGE60px": [],
+        "ocrLines": 22,
+        "ocrWords": 134
+      },
+      "right": {
+        "box": null,
+        "collapsed": true
+      },
+      "keyHits": [
+        "Mastery workbench",
+        "MASTERED"
+      ],
+      "keyHitsDOM": [
+        "Mastery judgment dimension",
+        "Evaluation basis",
+        "MASTERED",
+        "How this workspace works"
+      ],
+      "ocrNote": "tesseract 5.3.4 with eng/osd only in this environment: Arabic OCR is unavailable, so ocrLines/ocrWords are meaningful for EN frames only. Arabic content truth comes from keyHitsDOM \u2014 the DOM text probe recorded in the SAME page load that produced the frame and hash-bound in the sibling CAPTURE_RECEIPT.json."
+    }
+  ]
+}
